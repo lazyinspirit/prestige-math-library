@@ -2,7 +2,7 @@
 id: cex-a-cycle-graph-fails-finite-type-positive-definiteness
 kind: counterexample
 title: A cycle graph is not finite type
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-finite-type-cartan-matrix-properties, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Section 23.8, the loop argument, printed p. 127"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

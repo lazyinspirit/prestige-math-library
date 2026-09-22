@@ -2,7 +2,7 @@
 id: cex-brownian-hitting-time-is-almost-surely-finite-but-not-integrable
 kind: counterexample
 title: "Almost-sure finiteness does not imply integrability"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, ex-density-and-infinite-mean-of-a-one-sided-hitting-time, def-brownian-motion, def-random-element-and-real-random-variable, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.7"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

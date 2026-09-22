@@ -2,7 +2,7 @@
 id: prop-weyl-jacobian-is-well-defined-and-weyl-invariant
 kind: proposition
 title: The Weyl Jacobian is independent and invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-jacobian-on-a-maximal-torus, def-weyl-group-of-a-compact-connected-lie-group, def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots, def-conjugation-and-the-adjoint-representation-of-a-lie-group]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §6 and VIII §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

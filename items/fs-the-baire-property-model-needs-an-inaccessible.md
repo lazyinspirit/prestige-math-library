@@ -2,7 +2,7 @@
 id: fs-the-baire-property-model-needs-an-inaccessible
 kind: false-statement
 title: "False: the all-Baire-property model needs an inaccessible"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-baire-property-model-equiconsistent-with-zfc, thm-measurability-of-all-real-sets-equiconsistent-with-an-inaccessible, thm-shelah-baire-model-separates-baire-property-from-measurability]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Conclusion 7.17 and its proof remark, p. 44"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

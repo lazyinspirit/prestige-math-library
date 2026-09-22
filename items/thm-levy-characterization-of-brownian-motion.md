@@ -2,7 +2,7 @@
 id: thm-levy-characterization-of-brownian-motion
 kind: theorem
 title: "Levy characterization of Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t, lem-normal-density-has-total-mass-one, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-quadratic-covariation-of-brownian-ito-processes, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, thm-uniqueness-of-a-law-from-its-characteristic-function, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 6.1"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

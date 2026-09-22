@@ -2,7 +2,7 @@
 id: prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish
 kind: proposition
 title: A nowhere-zero section forces the Euler class to vanish
-status: draft
+status: published
 origin: pipeline
 deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-numerable-vector-bundles-admit-bundle-metrics", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 35 Euler class and sections, printed pp.129–132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

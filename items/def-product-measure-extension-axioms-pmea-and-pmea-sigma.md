@@ -2,7 +2,7 @@
 id: def-product-measure-extension-axioms-pmea-and-pmea-sigma
 kind: definition
 title: "PMEA and PMEA-sigma"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-arbitrary-product-measure-for-standard-borel-probability-spaces, def-coordinate-maps-and-cylinder-sigma-algebra, def-standard-borel-space, def-measure, def-complete-measure-space, def-axiom-of-choice, def-cardinal]
 justified_by: []
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

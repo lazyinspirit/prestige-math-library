@@ -2,7 +2,7 @@
 id: lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group
 kind: lemma
 title: "A self-adjoint operator generates a strongly continuous unitary group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-unbounded-borel-functional-calculus, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, def-infinitesimal-generator-of-a-unitary-group, thm-dominated-convergence, thm-fatou-lemma, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-axiom-of-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations (lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: "Proposition 1.10 and its proof, pp.6-7"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

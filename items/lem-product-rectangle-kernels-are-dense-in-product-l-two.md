@@ -2,7 +2,7 @@
 id: lem-product-rectangle-kernels-are-dense-in-product-l-two
 kind: lemma
 title: Product rectangle kernels are dense in product L two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-finite-sigma-finite-and-semifinite-measures, def-measurable-rectangle, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-algebra-of-subsets, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-completed-product-measure, thm-completion-of-a-measure-space, thm-continuity-from-below-for-measures, thm-finite-and-countable-subadditivity-of-measures, lem-finite-rectangle-unions-form-a-generating-algebra, lem-finite-measure-sets-are-approximable-by-a-generating-algebra, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, thm-completion-measurable-functions-have-base-measurable-representatives, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://measure.axler.net/MIRA.pdf"
     - title: "John K. Hunter, Measure Theory — product measure and generating-algebra approximation"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

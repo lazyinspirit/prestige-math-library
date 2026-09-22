@@ -2,7 +2,7 @@
 id: def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice
 kind: definition
 title: Root, coroot, weight, and coweight lattices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coroot-and-dual-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

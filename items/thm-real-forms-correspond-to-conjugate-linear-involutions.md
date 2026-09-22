@@ -2,7 +2,7 @@
 id: thm-real-forms-correspond-to-conjugate-linear-involutions
 kind: theorem
 title: Real forms correspond to conjugate-linear involutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-form-of-a-complex-lie-algebra, prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.2, Theorem 39.6 and its proof, printed pp. 199-201"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

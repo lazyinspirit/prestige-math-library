@@ -2,7 +2,7 @@
 id: thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus
 kind: theorem
 title: Every element lies in a maximal torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-hopf-rinow, thm-maximal-tori-exist-in-compact-lie-groups, def-axiom-of-choice, thm-cartans-closed-subgroup-theorem, thm-closure-of-a-connected-set, thm-continuous-image-of-a-connected-space, lem-closed-subset-of-a-compact-space-is-compact, thm-structure-of-a-compact-connected-abelian-lie-group, def-torus-and-maximal-torus-in-a-compact-lie-group]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§9–§11"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

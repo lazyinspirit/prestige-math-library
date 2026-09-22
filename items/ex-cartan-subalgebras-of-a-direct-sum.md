@@ -2,7 +2,7 @@
 id: ex-cartan-subalgebras-of-a-direct-sum
 kind: example
 title: Cartan subalgebras of a direct sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-semisimple-lie-algebra-by-vanishing-radical, def-radical-of-a-finite-dimensional-lie-algebra, def-derived-series-and-solvable-lie-algebra, def-lie-subalgebra-ideal-and-center, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Proposition 19.13"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

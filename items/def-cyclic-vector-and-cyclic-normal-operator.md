@@ -2,7 +2,7 @@
 id: def-cyclic-vector-and-cyclic-normal-operator
 kind: definition
 title: Cyclic vector and cyclic normal operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, thm-continuous-functional-calculus-properties, def-c-star-algebra-generated-by-a-normal-operator, def-hilbert-space, def-orthogonality-and-orthogonal-complement, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §10, printed pp.293–301"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

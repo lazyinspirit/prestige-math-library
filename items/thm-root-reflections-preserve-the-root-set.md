@@ -2,7 +2,7 @@
 id: thm-root-reflections-preserve-the-root-set
 kind: theorem
 title: Root reflections preserve the root set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-reflection-from-a-coroot, thm-root-string-property, cor-cartan-integers-are-integral, def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Proposition 2.41"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

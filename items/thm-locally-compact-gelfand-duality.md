@@ -2,7 +2,7 @@
 id: thm-locally-compact-gelfand-duality
 kind: theorem
 title: Locally compact Gelfand duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-c-star-algebra", "def-approximate-unit-and-proper-c-star-morphism", "thm-nonunital-commutative-gelfand-naimark", "thm-every-commutative-c-star-algebra-has-an-approximate-unit", "thm-commutative-gelfand-duality", "thm-minimal-c-star-unitization", "thm-character-space-of-the-unitization-is-one-point-compactification", "thm-characters-on-a-unital-banach-algebra-are-continuous", "def-compact-support-c-c-and-c-zero-on-an-lch-space", "thm-one-point-compactification-properties", "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set", "def-axiom-of-choice", "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration", "def-character-and-maximal-ideal-space", "thm-compactness-under-continuous-maps", "thm-compact-subset-of-a-hausdorff-space-is-closed", "thm-closed-subspace-of-a-compact-space-is-compact", "def-one-point-compactification"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

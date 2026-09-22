@@ -2,7 +2,7 @@
 id: def-coroot-and-dual-root-system
 kind: definition
 title: Coroot and dual root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

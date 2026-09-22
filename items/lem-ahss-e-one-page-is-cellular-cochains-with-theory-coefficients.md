@@ -2,7 +2,7 @@
 id: lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients
 kind: lemma
 title: The AHSS E-one page is cellular cochains with theory coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-reduced-generalized-cohomology-theory", "def-coefficient-groups-of-a-generalized-cohomology-theory", "def-reduced-cone-suspension-and-cofiber-sequence", "prop-relative-cw-inclusions-are-cofibrations", "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient", "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex", "def-wedge-of-pointed-spaces", "def-oriented-cellular-chain-group", "thm-relative-homology-of-consecutive-cw-skeleta", "thm-based-sphere-maps-are-classified-by-geometric-degree"]
@@ -15,6 +15,8 @@ sources:
     - title: "Yiannis Loizides, The Atiyah–Hirzebruch Spectral Sequence, §3, printed pp. 4–6"
       url: https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf
       locator: "§3, E-one page, printed pp. 4–6"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-riesz-spectral-projection-properties
 kind: theorem
 title: Riesz spectral projection properties
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-riesz-spectral-projection, thm-holomorphic-spectral-mapping, thm-complemented-subspace-iff-range-of-a-bounded-projection, def-axiom-of-choice, thm-holomorphic-functional-calculus-homomorphism, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-bounded-linear-operator, def-holomorphic-functional-calculus, def-unital-banach-algebra]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 48–50"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

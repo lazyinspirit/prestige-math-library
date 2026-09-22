@@ -2,7 +2,7 @@
 id: ex-a-nonreduced-bc-root-system-from-a-real-form
 kind: example
 title: A nonreduced bc root system from a real form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-restricted-root-and-restricted-root-space, def-maximal-split-abelian-subspace-and-real-rank, def-axiom-of-choice, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-reduced-crystallographic-euclidean-root-system, ex-classical-simple-lie-algebras-and-their-killing-forms, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §§43.5-43.6, printed pp. 220-222"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

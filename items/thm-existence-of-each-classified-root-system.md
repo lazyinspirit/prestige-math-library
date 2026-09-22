@@ -2,7 +2,7 @@
 id: thm-existence-of-each-classified-root-system
 kind: theorem
 title: Existence of each classified root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-classification-of-irreducible-reduced-crystallographic-root-systems, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-reduced-crystallographic-euclidean-root-system, def-reducible-and-irreducible-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Definitions 23.8, 23.11, 23.14, 23.15 and Exercises 23.9-23.10, 23.12-23.13"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

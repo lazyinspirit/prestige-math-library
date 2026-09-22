@@ -2,7 +2,7 @@
 id: lem-kks-form-is-independent-of-lie-algebra-representatives
 kind: lemma
 title: The KKS formula is independent of the Lie-algebra representatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, def-coadjoint-representation-of-a-lie-group, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

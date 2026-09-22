@@ -2,7 +2,7 @@
 id: prop-real-cartan-subalgebras-need-not-be-conjugate
 kind: proposition
 title: Real Cartan subalgebras need not be conjugate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-cartan-subalgebra-of-a-lie-algebra, def-special-linear-lie-algebra-sl-two, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra, def-trace-form-of-a-finite-dimensional-representation, thm-trace-of-ab-equals-trace-of-ba, cor-trace-is-invariant-under-similarity, thm-cartans-semisimplicity-criterion, def-lie-algebra-over-a-field]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, §40.1, discussion of sl(2,R) = su(1,1), printed pp. 185-186"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

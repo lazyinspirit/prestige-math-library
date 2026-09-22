@@ -2,7 +2,7 @@
 id: def-resolvent-and-spectrum-of-a-closed-unbounded-operator
 kind: definition
 title: "Resolvent and spectrum of an unbounded operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-densely-defined-closed-and-closable-operator, def-hilbert-space, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph, def-linear-map, def-spectrum-and-resolvent-of-a-bounded-operator]
@@ -21,6 +21,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Definition 6.9 and Lemmas 6.10-6.12, Sec. 6.1.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

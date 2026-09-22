@@ -2,7 +2,7 @@
 id: ex-positive-roots-and-highest-root-of-g-two
 kind: example
 title: Positive roots and highest root of G_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system, ex-root-systems-a-two-b-two-and-g-two, thm-existence-of-each-classified-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 21, the G_2 model in the proof of Theorem 21.10, printed p. 113"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

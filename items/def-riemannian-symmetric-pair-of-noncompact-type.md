@@ -2,7 +2,7 @@
 id: def-riemannian-symmetric-pair-of-noncompact-type
 kind: definition
 title: Riemannian symmetric pair of noncompact type
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-homogeneous-space-of-a-lie-group]
@@ -18,6 +18,8 @@ sources:
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 43, §§43.1-43.6, printed pp. 217-222"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

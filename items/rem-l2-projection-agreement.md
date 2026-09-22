@@ -2,7 +2,7 @@
 id: rem-l2-projection-agreement
 kind: remark
 title: Agreement with the concrete L-two projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-orthogonal-projection, lem-closed-l-two-subspaces-have-orthogonal-projections, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-stopping-an-ito-integral
 kind: theorem
 title: "Stopping an Ito integral"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-localized-ito-integral, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-progressively-measurable-and-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics, Lemma 5.28 and Theorem 5.36"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

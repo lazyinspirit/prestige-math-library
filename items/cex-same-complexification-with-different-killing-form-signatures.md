@@ -2,7 +2,7 @@
 id: cex-same-complexification-with-different-killing-form-signatures
 kind: counterexample
 title: Same complexification with different killing form signatures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-compact-and-split-real-forms-of-sl-two-c, ex-killing-form-of-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, thm-sylvesters-law-of-inertia, cor-real-symmetric-bilinear-forms-are-classified-by-inertia, def-definiteness-inertia-and-signature-data-over-the-reals]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.3-39.4, printed pp. 202-204"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

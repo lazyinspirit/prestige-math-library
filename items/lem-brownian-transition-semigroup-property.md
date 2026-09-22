@@ -2,7 +2,7 @@
 id: lem-brownian-transition-semigroup-property
 kind: lemma
 title: "The Brownian kernels form a semigroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-transition-semigroup, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-substitution, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-monotone-convergence-for-the-integral, thm-probability-law-and-distribution-function-correspondence, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-integration-against-a-density, thm-gaussian-integral, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-countable-choice, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

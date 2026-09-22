@@ -2,7 +2,7 @@
 id: ex-gelfand-transform-of-ell-one-of-z
 kind: example
 title: Gelfand transform of ell one of Z
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-absolute-convergence-of-complex-series, thm-tonelli-for-nonnegative-double-series, thm-double-series-fubini, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice, def-character-and-maximal-ideal-space]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

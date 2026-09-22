@@ -2,7 +2,7 @@
 id: prop-complexification-is-conjugation-invariant
 kind: proposition
 title: Complexification is conjugation invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-axiom-of-choice", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-real-and-complex-topological-vector-bundle", "thm-vector-bundles-glued-from-transition-cocycles", "prop-first-chern-class-of-tensor-dual-and-conjugate-lines", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "thm-complex-splitting-principle-with-integral-injective-pullback", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"]
@@ -16,6 +16,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 36"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Conjugation of complex bundles, printed pp.134-137"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-chern-classes-from-the-projective-bundle-relation
 kind: definition
 title: Chern classes from the projective-bundle relation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-integral-complex-projective-bundle-theorem, def-complex-projective-bundle-and-tautological-complex-line, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Definition of Chern classes by the projective-bundle relation, printed pp.78-80"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

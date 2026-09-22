@@ -2,7 +2,7 @@
 id: thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system
 kind: theorem
 title: Roots of a complex semisimple Lie algebra form a reduced crystallographic root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, cor-cartan-integers-are-integral, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-root-reflections-preserve-the-root-set, def-root-reflection-from-a-coroot, cor-opposite-root-spaces-pair-nondegenerately, def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, prop-killing-form-orthogonality-of-root-spaces, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Theorem 2.42"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

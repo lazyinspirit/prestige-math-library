@@ -2,7 +2,7 @@
 id: thm-brownian-last-zero-before-a-fixed-time-has-the-arcsine-law
 kind: theorem
 title: "The last Brownian zero has the arcsine law"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-zero-set, thm-brownian-future-path-markov-property, cor-law-of-the-brownian-maximum, def-brownian-motion, def-standard-normal-and-normal-laws, thm-tonelli-theorem-for-sigma-finite-product-spaces, cor-c-one-change-of-variables-for-l-one-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-monotone-convergence-for-the-integral, lem-probability-measure-basic-identities, thm-probability-law-and-distribution-function-correspondence, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Example 7.4.3 and equation (7.4.7)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

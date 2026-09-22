@@ -2,7 +2,7 @@
 id: ex-dmc-urysohn-finite-menu-intersection
 kind: example
 title: "Finite-menu intersection in the DMC Urysohn construction"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dmc-implies-urysohn-lemma, def-dependent-multiple-choice-finite-level-tree, def-interior-closure-boundary-top, lem-interior-closure-boundary-identities, def-topological-space, def-normal-and-t4-spaces, def-natural-numbers]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

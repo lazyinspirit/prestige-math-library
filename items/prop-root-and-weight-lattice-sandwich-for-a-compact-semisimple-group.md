@@ -2,7 +2,7 @@
 id: prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group
 kind: proposition
 title: Root and weight lattice sandwich
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-datum-of-a-compact-connected-lie-group, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice, thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, thm-lie-second-fundamental-theorem, def-axiom-of-choice, def-roots-of-a-compact-connected-lie-group, thm-compactness-is-invariant-under-finite-sheeted-coverings, cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori, thm-structure-of-a-compact-connected-abelian-lie-group, thm-analytic-and-root-system-weyl-groups-agree, thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part, thm-compact-group-weyl-group-is-finite, def-fundamental-weights, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, prop-exponential-map-is-natural-for-lie-group-homomorphisms, thm-the-differential-of-adjoint-is-ad, thm-cartans-closed-subgroup-theorem, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant, cor-semisimple-lie-algebras-are-centerless-and-perfect]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix V, Theorem V.1.1 (simply connected endpoint)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

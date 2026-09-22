@@ -2,7 +2,7 @@
 id: thm-self-adjoint-resolvent-estimate
 kind: theorem
 title: "Resolvent of a self-adjoint operator: nonreal resolvents and the estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-double-orthogonal-complement-is-closure, def-orthogonality-and-orthogonal-complement, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.4, p.83 and Theorem 2.16 area"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

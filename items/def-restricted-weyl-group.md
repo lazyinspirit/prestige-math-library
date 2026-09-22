@@ -2,7 +2,7 @@
 id: def-restricted-weyl-group
 kind: definition
 title: Restricted weyl group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-maximal-split-abelian-subspace-and-real-rank, def-restricted-root-and-restricted-root-space, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §5, definition of W(G,A) = N_K(a)/Z_K(a), printed p. 381"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

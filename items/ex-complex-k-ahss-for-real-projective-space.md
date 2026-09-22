@@ -2,7 +2,7 @@
 id: ex-complex-k-ahss-for-real-projective-space
 kind: example
 title: Complex K-AHSS for real projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-complex-k-theory-ahss, thm-multiplicative-ahss-for-a-multiplicative-generalized-theory, lem-complexified-tautological-line-resolves-real-projective-k-theory-extensions, prop-ahss-collapse-determines-only-the-associated-graded-object, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §3.2.3, printed pp. 10–11"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§3.2.3, RP^n computation, printed pp. 10–11"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

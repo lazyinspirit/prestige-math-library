@@ -2,7 +2,7 @@
 id: prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system
 kind: proposition
 title: The Weyl group is finite and faithful
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-group-of-a-root-system, def-coroot-and-dual-root-system, def-reduced-crystallographic-euclidean-root-system]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

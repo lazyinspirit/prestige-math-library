@@ -2,7 +2,7 @@
 id: thm-fleissner-hyp-normal-nonmetrizable-moore-space
 kind: theorem
 title: "HYP produces a normal nonmetrizable Moore space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fleissner-hyp-covering-interface, lem-ladder-separation-from-hyp, thm-fleissner-normal-moore-space-construction, def-moore-spaces-and-developments, def-normalized-families-and-collectionwise-normality, lem-metrizable-spaces-are-collectionwise-normal, def-cardinal, def-axiom-of-choice]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "William G. Fleissner, If all normal Moore spaces are metrizable, then there is an inner model with a measurable cardinal"
       url: "https://kuscholarworks.ku.edu/server/api/core/bitstreams/88062b98-5ab8-4fdc-9548-9e00a9c7507d/content"
       locator: "HYP clauses (1a)-(3b) and Lemma 1, printed pp. 366-367; Sections 5-7, printed pp. 368-371"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

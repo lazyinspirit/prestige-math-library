@@ -2,7 +2,7 @@
 id: thm-trace-class-is-a-two-sided-banach-operator-ideal
 kind: theorem
 title: Trace class is a two sided Banach operator ideal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-nuclear-series-characterizes-trace-norm, def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-hilbert-adjoint-properties, def-operator-norm, def-bounded-linear-operator, lem-composition-operator-norm-inequality, def-metric-convergence, def-banach-space, def-norm-and-normed-space, def-hilbert-space, def-metric-space, def-infimum, def-dimension, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

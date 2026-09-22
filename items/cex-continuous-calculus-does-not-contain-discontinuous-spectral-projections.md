@@ -2,7 +2,7 @@
 id: cex-continuous-calculus-does-not-contain-discontinuous-spectral-projections
 kind: counterexample
 title: Continuous calculus does not contain discontinuous spectral projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-axiom-of-choice, ex-functional-calculus-for-a-multiplication-operator, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-orthogonal-projection]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

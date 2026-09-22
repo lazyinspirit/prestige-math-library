@@ -2,7 +2,7 @@
 id: def-continuous-brownian-ito-process
 kind: definition
 title: "Continuous Brownian Ito processes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, def-d-dimensional-brownian-motion, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, thm-tonelli-theorem-for-sigma-finite-product-spaces]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Section 5.9"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

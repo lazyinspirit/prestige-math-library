@@ -2,7 +2,7 @@
 id: prop-the-index-of-a-fredholm-map-is-locally-constant
 kind: proposition
 title: The index of a Fredholm map is locally constant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-map-between-banach-manifolds, thm-fredholm-index-is-locally-constant, def-c-k-map-between-banach-spaces, def-axiom-of-choice, def-connected-space, def-topological-space, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, thm-fredholm-index-is-additive]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

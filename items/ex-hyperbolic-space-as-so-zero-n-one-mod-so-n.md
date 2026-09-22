@@ -2,7 +2,7 @@
 id: ex-hyperbolic-space-as-so-zero-n-one-mod-so-n
 kind: example
 title: Hyperbolic space as so zero n one mod so n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-maximal-compact-subgroups-exist-and-are-conjugate-in-a-connected-finite-center-semisimple-lie-group, def-riemannian-symmetric-pair-of-noncompact-type, prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k, thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space, def-axiom-of-choice, def-sectional-curvature, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion, ex-orthogonal-and-special-orthogonal-lie-groups, ex-general-and-special-linear-lie-groups, thm-cartans-closed-subgroup-theorem, thm-heine-borel-rn, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, def-homogeneous-space-of-a-lie-group, thm-quotient-manifold-by-a-closed-lie-subgroup, ex-matrix-exponential-as-the-lie-group-exponential, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §§43.1-43.6, printed pp. 217-222"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

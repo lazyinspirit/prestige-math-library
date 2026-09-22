@@ -2,7 +2,7 @@
 id: cor-heat-semigroup-martingale
 kind: corollary
 title: "Heat-semigroup martingales"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, thm-brownian-markov-property, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-differentiation-under-the-integral-sign, thm-dominated-convergence, thm-tower-property-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, def-continuous-time-adapted-process-and-martingale, def-natural-and-usual-augmented-brownian-filtrations, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 3.3 and 3.6"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

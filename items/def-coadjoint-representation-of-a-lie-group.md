@@ -2,7 +2,7 @@
 id: def-coadjoint-representation-of-a-lie-group
 kind: definition
 title: The coadjoint representation, action and orbits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-countable-choice, def-conjugation-and-the-adjoint-representation-of-a-lie-group, prop-adjoint-is-a-smooth-lie-group-representation, def-algebraic-dual-and-linear-functional, def-smooth-left-action-of-a-lie-group, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, def-lie-group, def-fundamental-vector-field-of-a-left-action, prop-adjoint-exponential-identity]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

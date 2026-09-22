@@ -2,7 +2,7 @@
 id: thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra
 kind: theorem
 title: Centralizer of a regular semisimple element is Cartan
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-regular-element-and-rank-of-a-complex-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-derivation-of-a-lie-algebra, def-semisimple-and-nilpotent-endomorphisms, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, thm-engels-theorem]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

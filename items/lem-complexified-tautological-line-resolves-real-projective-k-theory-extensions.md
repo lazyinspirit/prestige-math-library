@@ -2,7 +2,7 @@
 id: lem-complexified-tautological-line-resolves-real-projective-k-theory-extensions
 kind: lemma
 title: The complexified tautological line resolves real-projective K-theory extensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-complex-k-theory-ahss, thm-multiplicative-ahss-for-a-multiplicative-generalized-theory, def-grothendieck-ring-structure-and-rank-map, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "M. F. Atiyah, K-Theory, Chapter II, §2.7, printed pp. 105–106"
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/atiyahk.pdf
       locator: "Chapter II, §2.7, real projective-space calculation, printed pp. 105–106"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

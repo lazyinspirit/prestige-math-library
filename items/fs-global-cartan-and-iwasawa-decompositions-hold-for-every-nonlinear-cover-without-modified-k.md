@@ -2,7 +2,7 @@
 id: fs-global-cartan-and-iwasawa-decompositions-hold-for-every-nonlinear-cover-without-modified-k
 kind: false-statement
 title: Global cartan and iwasawa decompositions hold for every nonlinear cover without modified k
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group", "thm-global-iwasawa-decomposition", "prop-real-cartan-subalgebras-need-not-be-conjugate", "thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations", "prop-exponential-map-is-natural-for-lie-group-homomorphisms", "cor-real-line-is-universal-cover-of-circle", "thm-universal-cover-uniqueness-and-dominating-property", "thm-cartans-closed-subgroup-theorem", "thm-lie-subgroup-lie-subalgebra-correspondence", "thm-one-parameter-subgroups-are-exactly-exponentials", "def-special-linear-lie-algebra-sl-two", "thm-finite-dimensional-representations-of-sl-two", "def-axiom-of-choice"]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.3, the universal cover of SL(2,R) is not linear, printed pp. 197-198"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-complex-line-bundles-over-the-two-sphere-by-clutching-degree
 kind: example
 title: Complex line bundles over the two-sphere by clutching degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-first-chern-class-classifies-complex-line-bundles, thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range, def-clutching-construction-for-bundles-over-a-suspension, cor-geometric-unit-circle-has-fundamental-group-z, prop-first-chern-class-of-tensor-dual-and-conjugate-lines, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, Example 1.10 and section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Clutching functions for line bundles over S^2, printed pp.22-24, 86-88"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

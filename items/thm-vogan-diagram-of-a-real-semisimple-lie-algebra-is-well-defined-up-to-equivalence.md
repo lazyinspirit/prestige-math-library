@@ -2,7 +2,7 @@
 id: thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence
 kind: theorem
 title: Vogan diagram for a fixed Cartan involution is well defined up to equivalence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification, def-vogan-diagram, def-axiom-of-choice, def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-cayley-transform-of-a-theta-stable-cartan-subalgebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-cartans-closed-subgroup-theorem, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, thm-conjugacy-of-maximal-tori, thm-analytic-and-root-system-weyl-groups-agree, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-complexification-preserves-semisimplicity, thm-root-sl-two-triple, thm-root-string-property, thm-finite-dimensional-representations-of-sl-two, prop-brackets-of-root-spaces, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-torus-and-maximal-torus-in-a-compact-lie-group]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, §40.2 and Lecture 41, §41.1, printed pp. 187-191"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

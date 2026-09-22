@@ -2,7 +2,7 @@
 id: ex-the-eight-dimensional-adjoint-representation-of-sl-three
 kind: example
 title: The eight-dimensional adjoint representation of sl3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-the-adjoint-representation-and-the-highest-root, ex-standard-and-dual-representations-of-sl-n-by-highest-weights, prop-root-systems-of-the-classical-complex-lie-algebras, def-positive-system-and-base-of-simple-roots, def-fundamental-weights, def-adjoint-representation-of-a-lie-algebra, def-weight-and-weight-space-of-a-lie-algebra-representation, def-highest-weight-vector-and-highest-weight-module, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.4, Example 8.26"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

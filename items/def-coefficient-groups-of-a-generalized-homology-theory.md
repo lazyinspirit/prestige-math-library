@@ -2,7 +2,7 @@
 id: def-coefficient-groups-of-a-generalized-homology-theory
 kind: definition
 title: Coefficient groups of a generalized homology theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-generalized-homology-theory]
@@ -14,6 +14,8 @@ sources:
     - title: "James Davis and Paul Kirk, Lecture Notes in Algebraic Topology, Definition 8.28, printed pp. 229–230"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "Definition 8.28, printed pp. 229–230"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

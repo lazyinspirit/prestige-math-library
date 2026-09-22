@@ -2,7 +2,7 @@
 id: thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k
 kind: theorem
 title: Maximal abelian subspaces of p are conjugate by K
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-riemannian-symmetric-pair-of-noncompact-type, def-maximal-split-abelian-subspace-and-real-rank, thm-conjugacy-of-maximal-tori, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, prop-trace-forms-are-symmetric-and-invariant, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §4, Lemma 6.50 and Theorem 6.51 with their proofs, printed pp. 378-379"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

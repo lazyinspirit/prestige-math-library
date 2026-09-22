@@ -2,7 +2,7 @@
 id: thm-parseval-identity-for-fourier-series
 kind: theorem
 title: The Parseval identity for Fourier series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-trigonometric-system-is-complete-in-l-two-of-the-torus, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-countable-choice, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, def-fourier-coefficients-and-trigonometric-polynomials, def-square-summable-family-on-an-arbitrary-index-set, lem-trigonometric-characters-are-orthonormal, lem-finite-set-has-max, lem-l-two-with-the-integral-pairing-is-a-hilbert-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-square-integrable-kernel-without-continuous-representative
 kind: example
 title: A square-integrable kernel without a continuous representative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-square-integrable-separable-product-kernel, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-completed-product-measure, thm-completion-of-a-measure-space, def-measure, thm-lebesgue-measure-of-a-box-of-every-kind, def-multidimensional-rectangle-and-volume, thm-metric-continuity-characterisations, def-metric-continuity, def-metric-convergence, def-metric-ball, def-measurable-rectangle, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Sheldon Axler, Measure, Integration & Real Analysis — null sets and continuous representatives, Chapter 7"
       url: "https://measure.axler.net/MIRA.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

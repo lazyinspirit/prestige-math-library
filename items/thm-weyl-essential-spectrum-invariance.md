@@ -2,7 +2,7 @@
 id: thm-weyl-essential-spectrum-invariance
 kind: theorem
 title: "Weyl's theorem: invariance of the essential spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-weyl-criterion-for-essential-spectrum, def-relative-compactness-with-respect-to-an-operator, lem-second-resolvent-identity-for-closed-operator-perturbations, lem-resolvent-star-algebra-is-dense-in-c-zero, thm-kato-rellich, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-compositions-with-a-compact-operator-are-compact, def-compact-linear-operator]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Theorem 6.19 with proof, Lemma 6.21 and Lemmas 6.22-6.23, pp.171-174"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

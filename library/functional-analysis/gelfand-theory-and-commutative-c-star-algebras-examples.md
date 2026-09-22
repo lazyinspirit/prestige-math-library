@@ -1,7 +1,7 @@
 ---
 page: gelfand-theory-and-commutative-c-star-algebras-examples
 title: Gelfand Theory and Commutative C Star Algebras — Examples
-status: draft
+status: published
 items: []
 examples: [ex-maximal-ideal-space-of-c-of-k, ex-maximal-ideal-space-of-the-disc-algebra, ex-gelfand-transform-of-ell-one-of-z, cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric, ex-banach-stone-weighted-composition-isometries, ex-gelfand-kolmogorov-recovers-beta-x-not-x, ex-stone-duality-for-a-power-set-algebra, ex-stone-duality-for-a-finite-boolean-algebra, rem-nagata-cp-theorem-remains-topological, rem-gerlits-nagy-remains-selection-principle-theory, rem-linear-dugundji-extension-remains-topological, ex-c-zero-of-a-locally-compact-space, ex-unitization-corresponds-to-one-point-compactification, rem-wiener-lemma-is-developed-on-the-fourier-analysis-track]
 ---

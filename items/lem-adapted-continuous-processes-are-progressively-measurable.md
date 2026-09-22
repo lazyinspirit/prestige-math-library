@@ -2,7 +2,7 @@
 id: lem-adapted-continuous-processes-are-progressively-measurable
 kind: lemma
 title: "Adapted continuous processes are progressively measurable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-progressively-measurable-and-predictable-process, def-continuous-time-adapted-process-and-martingale, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Section 5.1"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

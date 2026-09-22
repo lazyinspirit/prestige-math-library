@@ -2,7 +2,7 @@
 id: cex-a-quasinilpotent-operator-need-not-be-zero
 kind: counterexample
 title: A quasinilpotent operator need not be zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-normal-operator-with-zero-spectrum-is-zero, def-axiom-of-choice, def-spectrum-and-resolvent-of-a-bounded-operator, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–13"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

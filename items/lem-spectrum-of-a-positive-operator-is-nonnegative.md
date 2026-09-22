@@ -2,7 +2,7 @@
 id: lem-spectrum-of-a-positive-operator-is-nonnegative
 kind: lemma
 title: Spectrum of a positive operator is nonnegative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice, def-spectrum-and-resolvent-of-a-bounded-operator, thm-cauchy-schwarz-in-an-inner-product-space, lem-kernel-range-orthogonality-for-hilbert-adjoints, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, thm-hilbert-adjoint-properties, def-operator-norm, def-hilbert-space, def-orthogonality-and-orthogonal-complement, def-complex-conjugate-real-imaginary-part-and-modulus]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

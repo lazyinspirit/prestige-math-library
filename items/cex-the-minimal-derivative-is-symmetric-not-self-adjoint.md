@@ -2,7 +2,7 @@
 id: cex-the-minimal-derivative-is-symmetric-not-self-adjoint
 kind: counterexample
 title: "The minimal derivative has deficiency indices (1,1) and many self-adjoint extensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cex-symmetric-need-not-be-self-adjoint, def-deficiency-subspaces-and-deficiency-indices, thm-von-neumann-self-adjoint-extension-parameterization, cor-self-adjoint-extension-exists-iff-deficiency-indices-agree, def-axiom-of-choice, def-countable-choice, def-dependent-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-absolutely-continuous-function, ex-periodic-derivative-and-its-unitary-translation-group]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.6, (2.104)-(2.107) with proof, pp.91-95"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

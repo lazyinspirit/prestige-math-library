@@ -2,7 +2,7 @@
 id: prop-compact-group-moment-map-can-be-averaged-to-an-equivariant-one-when-the-affine-obstruction-vanishes
 kind: proposition
 title: A compact-group moment map can be averaged to an equivariant one when the affine obstruction vanishes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function, lem-nonequivariance-defect-of-an-infinitesimal-moment-map-is-a-constant-lie-algebra-two-cocycle, cor-normalized-haar-measure-on-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, prop-adjoint-intertwines-the-exponential-map, def-fundamental-vector-field-of-a-left-action, def-axiom-of-choice, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.1 and Lecture 26, §26.3, printed pages 147, 166
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-dc-iff-products-compact-hausdorff-are-baire
 kind: theorem
 title: "DC is equivalent to Baireness of compact-Hausdorff products"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-a-compact-hausdorff-space-is-regular-and-normal, def-dependent-choice, def-product-topology, def-compact-space, def-baire-space, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, def-countable-choice, thm-choice-implies-dependent-implies-countable-choice, def-standard-topologies, def-one-point-compactification, thm-one-point-compactification-properties, def-locally-compact-space, lem-products-preserve-t0-t1-and-hausdorff, def-hausdorff-space, lem-discrete-sequence-spaces-are-complete-in-zf, lem-serial-relation-successor-sets-are-open-dense, thm-well-ordering-principle, thm-recursion, lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf, def-countable, thm-countable-union-of-countable, lem-finite-choice, thm-subset-of-a-finite-set, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-natural-numbers, thm-compact-iff-fip, def-finite-intersection-property]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

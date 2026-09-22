@@ -2,7 +2,7 @@
 id: ex-density-and-infinite-mean-of-a-one-sided-hitting-time
 kind: example
 title: "A Brownian hitting time has infinite mean"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-distribution-of-a-one-sided-brownian-hitting-time, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, def-brownian-motion, def-expectation-of-a-nonnegative-or-integrable-random-variable, thm-integration-against-a-density, thm-monotone-convergence-for-the-integral, def-standard-normal-and-normal-laws, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, equation (7.4.6)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

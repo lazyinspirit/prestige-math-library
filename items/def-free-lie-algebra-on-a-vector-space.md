@@ -2,7 +2,7 @@
 id: def-free-lie-algebra-on-a-vector-space
 kind: definition
 title: Free Lie algebra on a vector space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-tensor-algebra-of-a-vector-space, def-lie-subalgebra-ideal-and-center]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

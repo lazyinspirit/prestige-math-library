@@ -2,7 +2,7 @@
 id: cor-hilbert-spaces-are-reflexive
 kind: corollary
 title: Hilbert spaces are reflexive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-riesz-representation-for-hilbert-space, def-canonical-map-into-the-bidual, def-reflexive-banach-space, def-dual-space-of-a-normed-space, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

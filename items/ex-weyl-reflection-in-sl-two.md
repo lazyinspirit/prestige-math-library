@@ -2,7 +2,7 @@
 id: ex-weyl-reflection-in-sl-two
 kind: example
 title: The Weyl reflection in sl_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, prop-root-reflections-are-induced-by-inner-automorphisms, ex-cartan-subalgebra-and-roots-of-sl-two, def-root-reflection-from-a-coroot, def-special-linear-lie-algebra-sl-two, def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the coroot, reflection and inner-automorphism suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

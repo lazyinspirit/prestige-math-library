@@ -2,7 +2,7 @@
 id: thm-naturality-orientation-sign-and-whitney-product-for-euler-classes
 kind: theorem
 title: Naturality, orientation sign, and Whitney product for Euler classes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-thom-euler-class-of-an-oriented-vector-bundle", "thm-naturality-and-uniqueness-of-thom-classes", "thm-external-product-and-whitney-sum-formulas-for-thom-classes", "thm-naturality-of-the-singular-cohomology-pair-sequence", "prop-cup-product-is-natural-unital-and-associative", "thm-singular-cohomology-is-graded-commutative", "def-pullback-vector-bundle-and-pullback-section", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-axiom-of-choice", "prop-relative-cup-products-are-natural-and-compatible-with-connectors"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 Euler class properties, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

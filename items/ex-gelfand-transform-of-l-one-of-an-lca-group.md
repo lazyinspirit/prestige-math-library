@@ -2,7 +2,7 @@
 id: ex-gelfand-transform-of-l-one-of-an-lca-group
 kind: example
 title: Fourier transform as the Gelfand transform of an LCA group algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [rem-lca-group-algebra-and-character-space-external, def-gelfand-transform, def-axiom-of-choice, thm-complex-plane-is-complete]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: lem-shelah-homogeneous-truth-has-baire-representatives
 kind: lemma
 title: Strongly homogeneous truth has Baire representatives
-status: draft
+status: published
 origin: pipeline
 deps: [thm-shelah-ch-omega-one-sweet-construction, lem-shelah-real-name-capture-and-coded-meagre-unions, thm-forcing-theorem, def-property-of-baire-for-subsets, lem-solovay-borel-code-and-regularity-absoluteness, thm-shelah-sweet-partial-isomorphism-extension]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Main Lemma 7.14(c)-(d), Claim 7.15, and Theorem 7.16, pp. 42-43"}
     - {title: "Robert M. Solovay, A Model of Set-Theory in Which Every Set of Reals Is Lebesgue Measurable", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf", locator: "Part III, Sections 1.3-1.6, pp. 41-42"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

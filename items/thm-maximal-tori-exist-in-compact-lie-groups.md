@@ -2,7 +2,7 @@
 id: thm-maximal-tori-exist-in-compact-lie-groups
 kind: theorem
 title: Existence of maximal tori
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, def-immersed-embedded-and-closed-lie-subgroup, thm-smooth-inverse-function-theorem-on-manifolds, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§7–§8"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

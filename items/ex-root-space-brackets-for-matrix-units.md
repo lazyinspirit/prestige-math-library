@@ -2,7 +2,7 @@
 id: ex-root-space-brackets-for-matrix-units
 kind: example
 title: Root-space brackets for matrix units
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

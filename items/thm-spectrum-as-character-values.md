@@ -2,7 +2,7 @@
 id: thm-spectrum-as-character-values
 kind: theorem
 title: Spectrum as character values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, thm-characters-on-a-unital-banach-algebra-are-continuous, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-spectral-radius, def-axiom-of-choice, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

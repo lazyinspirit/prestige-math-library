@@ -2,7 +2,7 @@
 id: thm-bessel-inequality-for-an-arbitrary-orthonormal-family
 kind: theorem
 title: The Bessel inequality for an arbitrary orthonormal family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-finite-bessel-inequality, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Theorem 2.65 area, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory
 kind: proposition
 title: Degree-d sphere maps act by multiplication by d in any generalized theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-reduced-generalized-cohomology-theory", "def-reduced-generalized-homology-theory", "thm-based-sphere-maps-are-classified-by-geometric-degree", "def-degree-of-a-self-map-of-an-oriented-sphere", "def-wedge-of-pointed-spaces", "cor-homotopic-maps-induce-the-same-map-on-singular-homology", "thm-cellular-homology-computes-singular-homology", "cor-homology-of-spheres"]
@@ -15,6 +15,8 @@ sources:
     - title: "Yiannis Loizides, The Atiyah–Hirzebruch Spectral Sequence, Lemma 2.3 and Remark 2.2, printed pp. 4–5"
       url: https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf
       locator: "Lemma 2.3 and Remark 2.2, printed pp. 4–5"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

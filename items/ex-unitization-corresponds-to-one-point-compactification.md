@@ -2,7 +2,7 @@
 id: ex-unitization-corresponds-to-one-point-compactification
 kind: example
 title: Unitization corresponds to one point compactification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-c-zero-and-ell-infinity", "thm-minimal-c-star-unitization", "thm-one-point-compactification-properties", "def-compact-support-c-c-and-c-zero-on-an-lch-space", "def-one-point-compactification", "def-axiom-of-choice", "thm-urysohn-lemma", "thm-a-compact-hausdorff-space-is-regular-and-normal", "thm-uniform-cauchy-criterion-complex-functions", "thm-compactness-under-continuous-maps", "thm-closed-subspace-of-a-compact-space-is-compact"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

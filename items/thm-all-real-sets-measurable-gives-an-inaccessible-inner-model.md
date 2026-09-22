@@ -2,7 +2,7 @@
 id: thm-all-real-sets-measurable-gives-an-inaccessible-inner-model
 kind: theorem
 title: All-real-set measurability yields an inaccessible inner model
-status: draft
+status: published
 origin: pipeline
 deps: [thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l, thm-choice-implies-dependent-implies-countable-choice, thm-constructible-inner-model-semantic-and-formal-schema, thm-constructible-universe-satisfies-choice, def-lc-inaccessible-and-mahlo-cardinals, def-boldface-sigma-one-three-measurability]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Theorem 3.3 and its corollary, pp. 43 and 51"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

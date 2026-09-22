@@ -2,7 +2,7 @@
 id: def-characteristic-class-as-a-universal-natural-bundle-class
 kind: definition
 title: Characteristic class as a universal natural bundle class
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "thm-oriented-real-vector-bundles-are-classified-by-bso", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice", "def-dependent-choice", "thm-recursion", "def-oriented-grassmannian-and-tautological-oriented-bundle", "def-stiefel-space-grassmannian-and-tautological-bundle", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "thm-subordinate-partitions-of-unity-exist", "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§4 and §§7–8, printed pp.37–54 and 83–96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

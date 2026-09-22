@@ -2,7 +2,7 @@
 id: lem-raisonnier-family-is-a-sigma-one-three-filter
 kind: lemma
 title: The Raisonnier family is a Sigma-one-three filter
-status: draft
+status: published
 origin: pipeline
 deps: [def-rapid-and-raisonnier-filters, def-filter, def-boldface-sigma-one-three-measurability, thm-canonical-definable-global-well-order-of-l, def-countable-choice, lem-closed-subsets-of-baire-space-are-tree-bodies, lem-cantor-and-baire-sequence-coding, cor-countable-choice-and-omega-one-cofinality]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.8 and the complexity discussion before Theorem 3.12, pp. 46-48"}
     - {title: "Thomas Jech, Set Theory, Chapter 25", url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/25-descriptive_set_theory.pdf", locator: "Theorem 25.26 and Lemma 25.27, pp. 494-495"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

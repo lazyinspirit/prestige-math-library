@@ -2,7 +2,7 @@
 id: ex-volterra-operator-is-hilbert-schmidt-and-quasinilpotent
 kind: example
 title: Volterra operator is Hilbert Schmidt and quasinilpotent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-l-two-kernels-give-hilbert-schmidt-operators, thm-hilbert-schmidt-operators-are-compact, thm-riesz-schauder-spectrum-of-a-compact-operator, def-axiom-of-choice, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, def-completed-product-measure, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-newton-leibniz-with-finitely-many-exceptional-points, lem-derivative-of-a-power, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-spectrum-and-resolvent-of-a-bounded-operator, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, thm-bounded-linear-operator-equivalences, def-metric-convergence, def-banach-space, def-hilbert-space, def-real-and-complex-inner-product-space, thm-cauchy-schwarz-in-an-inner-product-space, def-hilbert-schmidt-operator, def-hilbert-space-adjoint, def-self-adjoint-positive-unitary-and-normal-operator, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, cor-archimedean-reciprocal]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

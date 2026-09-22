@@ -2,7 +2,7 @@
 id: thm-normal-screenable-moore-spaces-are-metrizable
 kind: theorem
 title: "Normal screenable Moore spaces are metrizable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-normal-and-t4-spaces, def-discrete-family-and-sigma-bases, def-axiom-of-choice, lem-sigma-cellular-base-yields-a-compatible-metric, def-metrizable-space, def-topology-basis-subbasis, def-cover-refinement-and-local-finiteness]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "R. H. Bing, Metrization of topological spaces"
       url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf"
       locator: "Theorems 3, 6, 7 and 8 with proofs, printed pp. 178-182"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-dimensions-of-the-exceptional-simple-lie-algebras
 kind: proposition
 title: Dimensions of exceptional simple Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-dimension-formula-from-roots, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-rank-and-isomorphism-of-root-systems, thm-cartan-killing-classification-of-complex-simple-lie-algebras, thm-existence-theorem-for-complex-semisimple-lie-algebras, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, Problem 16, printed p. 205"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-exit-side-probability-from-an-interval
 kind: example
 title: "Exit side from an interval"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-two-sided-exit-probability-for-brownian-motion, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, def-brownian-motion-started-at-x, def-brownian-motion, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 7.5.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

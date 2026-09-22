@@ -2,7 +2,7 @@
 id: fs-every-dominant-weight-of-the-abstract-weight-lattice-integrates-to-every-compact-group-form
 kind: false-statement
 title: Not every abstract dominant weight integrates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-for-a-compact-connected-lie-group, prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, def-axiom-of-choice, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §8, Theorem 5.110 (analytic integrality)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

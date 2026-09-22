@@ -2,7 +2,7 @@
 id: lem-universal-oriented-sphere-bundle-has-bso-n-minus-one-total-space
 kind: lemma
 title: The universal oriented sphere-bundle total space has the homotopy type of BSO(n-1)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-oriented-grassmannian-and-tautological-oriented-bundle", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-stable-stiefel-space-is-contractible", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-real-and-complex-topological-vector-bundle", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-axiom-of-choice"]
@@ -19,6 +19,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, Theorem 3.16 proof"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "The oriented sphere/complement projection, printed p.95; graph charts, Lemma 1.15 pp.28-29; parity embeddings p.30; compact-exhaustion paracompactness, Proposition 1.19 p.36"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

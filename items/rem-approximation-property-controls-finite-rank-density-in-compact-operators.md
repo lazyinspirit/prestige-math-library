@@ -2,7 +2,7 @@
 id: rem-approximation-property-controls-finite-rank-density-in-compact-operators
 kind: remark
 title: Approximation property controls finite rank density in compact operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-approximation-property-and-bounded-approximation-property, def-approximable-operator, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-metric-convergence, def-banach-space]
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.188, Exercise 4.29 forward direction"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

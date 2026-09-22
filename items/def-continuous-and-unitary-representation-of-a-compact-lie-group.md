@@ -2,7 +2,7 @@
 id: def-continuous-and-unitary-representation-of-a-compact-lie-group
 kind: definition
 title: Continuous and unitary representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-lie-group-homomorphism-isomorphism-and-automorphism, def-real-and-complex-inner-product-space]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: rem-lca-group-algebra-and-character-space-external
 kind: remark
 title: LCA group algebra and character-space results recorded externally
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 proved_here: false
@@ -12,6 +12,10 @@ provenance:
   statement: literature-derived
   proof: not-supplied
 verification:
+  sources_checked:
+    date: 2026-09-22
+    scope: citations
+    by: owner-audit
   precheck: n/a
 sources:
   references:

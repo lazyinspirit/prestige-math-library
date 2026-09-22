@@ -2,7 +2,7 @@
 id: thm-invertible-group-is-open-and-inversion-is-continuous
 kind: theorem
 title: Invertible group is open and inversion is continuous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-neumann-series, def-unital-banach-algebra, def-invertible-element-and-general-linear-group-of-a-banach-algebra]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Chapter 2 §2.1, printed pp. 19–24"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

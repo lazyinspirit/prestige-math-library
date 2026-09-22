@@ -2,7 +2,7 @@
 id: thm-hilbert-schmidt-norm-is-basis-independent
 kind: theorem
 title: The Hilbert–Schmidt norm is basis independent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-schmidt-operator, def-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-square-summable-family-on-an-arbitrary-index-set, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, def-bounded-linear-operator, def-operator-norm, lem-finite-choice, def-countable-choice, def-finite-cardinality]
@@ -16,6 +16,8 @@ sources:
       url: "https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/1/4020/files/2017/12/analysis-slides-278829v.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, Lemma 3.23, printed pp. 93–94"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

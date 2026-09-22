@@ -2,7 +2,7 @@
 id: lem-corson-stone-obstruction-is-ordinal-boundable
 kind: lemma
 title: "Corson's Stone obstruction is ordinal boundable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-corson-ordered-rational-permutation-model, lem-corson-rational-metric-not-metacompact, def-boundable-sentence-over-an-atom-set, def-metric-space, def-metacompact-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Samuel Corson, The Independence of Stone's Theorem from the Boolean Prime Ideal Theorem"
       url: "https://arxiv.org/pdf/2001.06513"
       locator: "§§2-3, pp. 2-4"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

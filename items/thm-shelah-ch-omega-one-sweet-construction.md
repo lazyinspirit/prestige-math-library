@@ -2,7 +2,7 @@
 id: thm-shelah-ch-omega-one-sweet-construction
 kind: theorem
 title: Shelah's CH-length homogeneous sweet construction
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-aleph-and-beth-hierarchies, thm-cardinal-power-set-and-cantor, thm-shelah-sweet-partial-isomorphism-extension, thm-shelah-sweet-amalgamation-preserves-sweetness, thm-shelah-universal-meagre-composition-preserves-sweetness, lem-shelah-continuous-unions-of-sweetness-models, lem-shelah-sweet-forcings-are-sigma-directed-ccc]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Claim 7.13 and Main Lemma 7.14, pp. 42-43"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

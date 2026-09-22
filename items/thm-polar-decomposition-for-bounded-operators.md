@@ -2,7 +2,7 @@
 id: thm-polar-decomposition-for-bounded-operators
 kind: theorem
 title: Polar decomposition for bounded operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-absolute-value-of-a-bounded-operator, thm-partial-isometry-characterizations, thm-orthogonal-decomposition-by-a-closed-subspace, def-axiom-of-choice, lem-kernel-range-orthogonality-for-hilbert-adjoints, def-isometry-coisometry-and-partial-isometry, def-hilbert-orthogonal-projection, def-operator-norm, def-hilbert-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.3, printed pp.235–245"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

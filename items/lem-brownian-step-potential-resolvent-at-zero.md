@@ -2,7 +2,7 @@
 id: lem-brownian-step-potential-resolvent-at-zero
 kind: lemma
 title: "Brownian step-potential resolvent at zero"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brownian-motion-has-a-jointly-measurable-continuous-version, def-brownian-motion, thm-brownian-future-path-markov-property, def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-gaussian-integral, thm-dominated-convergence, thm-taking-out-what-is-known, def-countable-choice, def-dependent-choice, def-axiom-of-choice, thm-first-fundamental-theorem-of-calculus-for-l-one, cor-c-one-change-of-variables-for-l-one-functions, thm-monotone-convergence-for-the-integral, cor-zero-derivative-implies-constant]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Nobuo Yoshida, Probability Theory, Lemmas 6.8.1-6.8.3, printed pp. 214-216"
       url: "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

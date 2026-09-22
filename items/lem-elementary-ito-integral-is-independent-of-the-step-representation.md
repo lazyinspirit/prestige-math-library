@@ -2,7 +2,7 @@
 id: lem-elementary-ito-integral-is-independent-of-the-step-representation
 kind: lemma
 title: "Elementary Ito integrals do not depend on step representation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-taking-out-what-is-known, thm-tower-property-of-conditional-expectation, thm-factorization-of-expectations-for-independent-variables, def-independent-sigma-algebras-and-events, lem-gaussian-even-moment-bound-for-brownian-increments, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Definition 5.20 and Lemma 5.22"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

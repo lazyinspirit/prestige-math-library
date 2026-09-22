@@ -2,7 +2,7 @@
 id: lem-the-ahss-first-differential-is-the-cellular-coboundary
 kind: lemma
 title: The AHSS first differential is the cellular coboundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-reduced-and-unreduced-generalized-cohomology-theories-correspond, lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients, prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory, thm-cellular-boundary-is-the-incidence-degree-matrix, def-incidence-number-of-two-cw-cells, def-oriented-cellular-chain-group, def-exact-couple, thm-an-exact-couple-generates-a-spectral-sequence, cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms, prop-relative-cw-inclusions-are-cofibrations, thm-cellular-approximation-for-maps-of-cw-pairs]
@@ -15,6 +15,8 @@ sources:
     - title: "Yiannis Loizides, The Atiyah–Hirzebruch Spectral Sequence, Theorem 3.2 and its diagram, printed pp. 5–6"
       url: https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf
       locator: "Theorem 3.2 and its component diagram, printed pp. 5–6"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

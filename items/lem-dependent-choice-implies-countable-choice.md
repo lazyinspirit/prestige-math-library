@@ -2,7 +2,7 @@
 id: lem-dependent-choice-implies-countable-choice
 kind: lemma
 title: Dependent choice implies countable choice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-dependent-choice, def-countable-choice, def-choice-function, def-function, def-natural-numbers, def-indexed-union-and-intersection, def-power-set, def-axiom-schema-of-separation, def-ordered-pair, lem-the-set-of-functions-between-two-sets-is-a-set, thm-induction-principle, thm-well-ordering-principle]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

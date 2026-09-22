@@ -2,7 +2,7 @@
 id: fs-all-integer-multiples-of-a-root-are-roots
 kind: false-statement
 title: All integer multiples of a root are roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-string-property, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the reducedness and root-string suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

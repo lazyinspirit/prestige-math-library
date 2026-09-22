@@ -2,7 +2,7 @@
 id: cor-representation-ring-has-the-dominant-character-basis
 kind: corollary
 title: Dominant characters form the representation-ring basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-for-a-compact-connected-lie-group, cor-irreducible-characters-are-orthonormal-class-functions, def-axiom-of-choice, def-matrix-coefficient-and-character-of-a-compact-group-representation, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits, cor-complete-reducibility-for-compact-lie-groups]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3 and Chapter V §8"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

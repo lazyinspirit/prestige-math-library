@@ -2,7 +2,7 @@
 id: def-holomorphic-functional-calculus
 kind: definition
 title: Holomorphic functional calculus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, def-banach-algebra-valued-contour-integral, def-complex-chain-and-cycle, def-null-homologous-and-homologous-complex-cycles, lem-admissible-cycle-around-a-compact-plane-set, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Definition 2.5.1, printed pp. 46–47"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

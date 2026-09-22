@@ -2,7 +2,7 @@
 id: lem-range-of-identity-minus-compact-is-closed
 kind: lemma
 title: Range of identity minus compact is closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, def-banach-space, lem-closed-range-iff-quotient-estimate, def-quotient-seminorm, def-dependent-choice, lem-dependent-choice-implies-countable-choice, thm-sequential-characterization-of-compact-operators, def-metric-convergence, lem-metric-limits-unique, def-sequence, lem-index-map-grows]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

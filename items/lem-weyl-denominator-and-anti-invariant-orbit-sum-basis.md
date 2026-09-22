@@ -2,7 +2,7 @@
 id: lem-weyl-denominator-and-anti-invariant-orbit-sum-basis
 kind: lemma
 title: Weyl denominator and anti-invariant orbit sums
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-vector-rho, prop-weyl-vector-is-the-sum-of-fundamental-weights, def-character-and-cocharacter-lattices-of-a-torus, thm-analytic-and-root-system-weyl-groups-agree, prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, thm-compact-connected-lie-groups-are-classified-by-root-data, def-axiom-of-choice, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice, def-fundamental-weights, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, prop-weyl-length-equals-positive-root-inversion-number, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix Z"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

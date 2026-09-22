@@ -2,7 +2,7 @@
 id: thm-naturality-and-edge-maps-of-the-ahss
 kind: theorem
 title: Naturality and edge maps of the AHSS
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-homological-atiyah-hirzebruch-spectral-sequence, prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences, lem-edge-maps-of-a-bounded-skeletal-ahss, def-exact-couple]
@@ -15,6 +15,8 @@ sources:
     - title: "Davis–Kirk, Lecture Notes in Algebraic Topology, §9.1, printed pp. 237–246"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "§9.1, naturality of the skeletal exact couple, printed pp. 237–246"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

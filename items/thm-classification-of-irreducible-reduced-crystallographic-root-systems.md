@@ -2,7 +2,7 @@
 id: thm-classification-of-irreducible-reduced-crystallographic-root-systems
 kind: theorem
 title: Classification of irreducible root systems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching, thm-rank-two-root-system-classification, thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram, def-reducible-and-irreducible-root-system, def-rank-and-isomorphism-of-root-systems, prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers, def-reduced-crystallographic-euclidean-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Theorem 23.7, printed pp. 121-127"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

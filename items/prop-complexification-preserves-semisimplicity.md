@@ -2,7 +2,7 @@
 id: prop-complexification-preserves-semisimplicity
 kind: proposition
 title: Complexification preserves semisimplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complexification-of-a-real-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter I, §5, criteria for semisimplicity, printed pp. 23-30"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

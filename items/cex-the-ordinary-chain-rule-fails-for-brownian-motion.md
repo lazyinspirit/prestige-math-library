@@ -2,7 +2,7 @@
 id: cex-the-ordinary-chain-rule-fails-for-brownian-motion
 kind: counterexample
 title: "The ordinary chain rule fails for Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-brownian-square-martingale, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-gaussian-even-moment-bound-for-brownian-increments, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-continuous-time-adapted-process-and-martingale, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 3.2-3.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: rem-dmc-mc-ac-zfa-qualification
 kind: remark
 title: "DMC, Multiple Choice, and AC qualifications"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dependent-multiple-choice-finite-level-tree, thm-dependent-choice-and-finite-multiple-selections, thm-multiple-choice-equivalent-to-choice-in-zf, cor-dmc-is-not-provable-in-zf, def-dependent-choice, def-axiom-of-choice, def-multiple-and-dependent-multiple-choice]
 justified_by: []
@@ -15,6 +15,8 @@ sources:
     - title: "Marianne Morillon, Axiom of Choice"
       url: "https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf"
       locator: "Section 2, pp. 5-8"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

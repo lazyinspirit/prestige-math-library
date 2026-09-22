@@ -2,7 +2,7 @@
 id: fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic
 kind: false-statement
 title: The same Dynkin diagram forces isomorphic connected Lie groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups, def-countable-choice, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

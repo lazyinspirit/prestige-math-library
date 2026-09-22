@@ -2,7 +2,7 @@
 id: thm-commutative-gelfand-naimark
 kind: theorem
 title: Commutative Gelfand Naimark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-gelfand-transform-is-a-contractive-unital-homomorphism, lem-c-star-spectral-radius-equals-norm-for-normal-elements, lem-characters-on-a-commutative-c-star-algebra-preserve-star, thm-complex-stone-weierstrass-self-adjoint, def-c-star-algebra, thm-maximal-ideal-space-is-compact-hausdorff, def-axiom-of-choice, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

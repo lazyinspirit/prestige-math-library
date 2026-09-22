@@ -2,7 +2,7 @@
 id: thm-isomorphism-theorem-for-complex-semisimple-lie-algebras
 kind: theorem
 title: Isomorphism theorem for complex semisimple Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-root-sl-two-triple, thm-serre-presentation-theorem, thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-axiom-of-choice, def-cartan-matrix-of-a-based-root-system]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §10, Theorem 2.108, printed pp. 196-198"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

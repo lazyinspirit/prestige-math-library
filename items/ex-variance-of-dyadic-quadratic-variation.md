@@ -2,7 +2,7 @@
 id: ex-variance-of-dyadic-quadratic-variation
 kind: example
 title: "Variance of dyadic quadratic variation"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-expected-dyadic-quadratic-variation, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

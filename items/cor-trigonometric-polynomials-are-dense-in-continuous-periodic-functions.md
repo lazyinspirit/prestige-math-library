@@ -2,7 +2,7 @@
 id: cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions
 kind: corollary
 title: Trigonometric polynomials are uniformly dense in continuous functions on the torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, thm-complex-stone-weierstrass-self-adjoint, lem-finite-tori-are-compact-hausdorff-character-spaces, def-countable-choice, def-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

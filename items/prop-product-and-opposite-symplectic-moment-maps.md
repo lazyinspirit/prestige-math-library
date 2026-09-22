@@ -2,7 +2,7 @@
 id: prop-product-and-opposite-symplectic-moment-maps
 kind: proposition
 title: Products and opposites of symplectic moment maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, prop-products-and-opposites-of-symplectic-manifolds, def-symplectic-and-hamiltonian-lie-group-action, def-fundamental-vector-field-of-a-left-action, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

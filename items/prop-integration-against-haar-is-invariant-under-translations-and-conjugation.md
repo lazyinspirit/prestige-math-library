@@ -2,7 +2,7 @@
 id: prop-integration-against-haar-is-invariant-under-translations-and-conjugation
 kind: proposition
 title: Haar integration is translation and conjugation invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-normalized-haar-measure-on-a-compact-lie-group, def-axiom-of-choice, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §1, (4.1)–(4.2)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

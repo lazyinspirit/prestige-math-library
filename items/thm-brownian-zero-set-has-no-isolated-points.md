@@ -2,7 +2,7 @@
 id: thm-brownian-zero-set-has-no-isolated-points
 kind: theorem
 title: "The Brownian zero set has no isolated points"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-zero-set, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, def-continuous-time-stopping-time, thm-strong-markov-property-of-brownian-motion, def-wiener-measure-on-continuous-path-space, cor-law-of-the-brownian-maximum, lem-rat-embeds-dense, lem-probability-measure-basic-identities, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.4.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

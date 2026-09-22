@@ -2,7 +2,7 @@
 id: def-metacompact-space
 kind: definition
 title: "Metacompactness: every open cover has a point-finite open refinement"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cover-refinement-and-local-finiteness, def-topological-space]
 justified_by: []
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

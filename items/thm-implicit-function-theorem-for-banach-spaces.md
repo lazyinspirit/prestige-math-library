@@ -2,7 +2,7 @@
 id: thm-implicit-function-theorem-for-banach-spaces
 kind: theorem
 title: Implicit function theorem for Banach spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-inverse-function-theorem-for-banach-spaces, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-product-norms-on-finitely-many-normed-spaces, def-axiom-of-choice, def-c-k-map-between-banach-spaces, def-frechet-derivative-between-banach-spaces, def-banach-space, def-metric-ball, thm-complete-subspace-iff-closed, def-space-of-bounded-linear-operators, def-operator-norm, lem-neumann-series-and-small-perturbations-of-bounded-inverses]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

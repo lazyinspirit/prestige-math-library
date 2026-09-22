@@ -1,7 +1,7 @@
 ---
 page: real-forms-and-real-semisimple-lie-algebras
 title: Real Forms and Real Semisimple Lie Algebras
-status: draft
+status: published
 items:
   - def-complexification-of-a-real-lie-algebra
   - prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero

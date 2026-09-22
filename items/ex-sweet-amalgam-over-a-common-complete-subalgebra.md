@@ -2,7 +2,7 @@
 id: ex-sweet-amalgam-over-a-common-complete-subalgebra
 kind: example
 title: Amalgamating two sweet models over a common complete subalgebra
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-sweetness-model, thm-shelah-sweet-amalgamation-preserves-sweetness, lem-shelah-sweet-density-transfer-along-complete-suborders, lem-shelah-sweet-forcings-are-sigma-directed-ccc]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Claim 7.4, Lemma 7.5, Claims 7.12-7.13 and Main Lemma 7.14(a), pp. 35-36 and 41-43"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

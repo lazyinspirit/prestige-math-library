@@ -2,7 +2,7 @@
 id: lem-ma-produces-an-uncountable-q-set
 kind: lemma
 title: "Martin's axiom produces an uncountable Q-set"
-status: draft
+status: published
 origin: pipeline
 deps: [def-q-sets-and-heath-moore-space-interface, def-martins-axiom, def-axiom-of-choice, lem-solovay-almost-disjoint-extension-under-ma, rem-continuum-hypothesis, def-aleph-and-beth-hierarchies, def-cardinal, def-natural-numbers, def-function, lem-integer-part, cor-archimedean-reciprocal, thm-n-cross-n-countable, thm-cantor-set-ternary-description]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Theorem 4.4 and its proof, printed pp. 8-9, after Lemma 4.3"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

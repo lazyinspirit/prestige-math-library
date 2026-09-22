@@ -2,7 +2,7 @@
 id: def-serre-lie-algebra-of-a-finite-type-cartan-matrix
 kind: definition
 title: Serre Lie algebra of a finite-type Cartan matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-lie-algebra-presented-by-generators-and-relations, prop-finite-type-cartan-matrix-properties]
@@ -18,6 +18,8 @@ sources:
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 24, Section 24.1 and Theorem 24.2"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

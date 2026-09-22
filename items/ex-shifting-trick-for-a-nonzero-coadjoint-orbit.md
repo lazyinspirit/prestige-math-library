@@ -2,7 +2,7 @@
 id: ex-shifting-trick-for-a-nonzero-coadjoint-orbit
 kind: example
 title: The shifting trick for a nonzero coadjoint orbit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction, ex-two-sphere-as-a-coadjoint-orbit-of-so-three, ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle, prop-dimension-of-a-regular-nonzero-reduced-space, cor-zero-level-symplectic-reduction-and-dimension-formula, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.4, printed page 150
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

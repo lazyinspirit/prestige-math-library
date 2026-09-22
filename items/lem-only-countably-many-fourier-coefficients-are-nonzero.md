@@ -2,7 +2,7 @@
 id: lem-only-countably-many-fourier-coefficients-are-nonzero
 kind: lemma
 title: Only countably many coefficients of a square-summable family are nonzero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-square-summable-family-on-an-arbitrary-index-set, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, thm-countable-union-of-countable, def-countable-choice, cor-archimedean-reciprocal, lem-subset-of-countable, def-countable, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, printed pp.72–80"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

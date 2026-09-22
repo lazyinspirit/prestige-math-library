@@ -2,7 +2,7 @@
 id: lem-integral-cohomology-ring-of-complex-projective-space-by-splitting
 kind: lemma
 title: Integral cohomology ring of complex projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complex-projective-bundle-and-tautological-complex-line, def-stiefel-space-grassmannian-and-tautological-bundle, thm-schubert-cells-give-the-stable-grassmannian-cw-structure, def-schubert-cells-in-real-and-complex-grassmannians, cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary, thm-cellular-homology-computes-singular-homology, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, cor-homology-of-spheres, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "The Gysin computation of the ring of CP^n, printed pp.77-82"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-su-two-and-so-three-share-a-root-system-but-are-not-isomorphic
 kind: counterexample
 title: SU(2) and SO(3) share roots but are not isomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems, ex-character-lattices-of-su-two-and-so-three, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §7 and Chapter V §8 (isogeny versus isomorphism)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

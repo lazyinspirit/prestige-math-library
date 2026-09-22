@@ -2,7 +2,7 @@
 id: fs-every-weight-vector-is-a-highest-weight-vector
 kind: false-statement
 title: Not every weight vector is highest
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, def-highest-weight-vector-and-highest-weight-module, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, def-special-linear-lie-algebra-sl-two, prop-root-vectors-shift-weight-spaces, thm-finite-dimensional-representations-of-sl-two, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §§1–3, worked examples"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

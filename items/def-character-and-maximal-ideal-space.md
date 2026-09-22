@@ -2,7 +2,7 @@
 id: def-character-and-maximal-ideal-space
 kind: definition
 title: Character and maximal ideal space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-complex-numbers-form-a-field, def-vector-space, def-linear-map]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-fredholm-alternative-for-an-integral-equation
 kind: example
 title: Fredholm alternative for an integral equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval, thm-fredholm-alternative-for-identity-minus-compact, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-dependent-choice, thm-c-k-complete-in-the-sup-metric, thm-uniform-limit-continuous-real-functions, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, cor-finite-dimensional-normed-spaces-are-banach, def-metric-space, def-complete-metric-space, def-banach-space, def-bounded-linear-operator, def-transpose-of-a-bounded-operator, lem-transpose-reverses-composition, def-continuity-real, def-continuous-map-top, thm-heine-borel-rn, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus, def-linear-subspace, def-linear-map]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 p.198, Remark 4.42"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

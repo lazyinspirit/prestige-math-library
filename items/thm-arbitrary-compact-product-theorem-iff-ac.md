@@ -2,7 +2,7 @@
 id: thm-arbitrary-compact-product-theorem-iff-ac
 kind: theorem
 title: "The arbitrary compact product theorem is equivalent to AC"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-compact-t1-product-theorem-iff-ac, thm-bpi-equivalent-to-compact-hausdorff-tychonoff, def-axiom-of-choice, def-product-topology, def-compact-space, thm-tychonoff, def-t0-and-t1-spaces]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Kyriakos Keremedis and Eleftherios Tachtsis, Wallman Compactifications and Tychonoff's Compactness Theorem in ZF"
       url: "https://topology.nipissingu.ca/tp/reprints/v42/tp42021.pdf"
       locator: "Definitions, Proposition 2.11 and Proposition 2.13, journal pp. 279-283"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

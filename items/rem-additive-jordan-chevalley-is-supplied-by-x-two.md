@@ -2,7 +2,7 @@
 id: rem-additive-jordan-chevalley-is-supplied-by-x-two
 kind: remark
 title: The additive Jordan–Chevalley supplier
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-additive-jordan-chevalley-decomposition, def-axiom-of-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

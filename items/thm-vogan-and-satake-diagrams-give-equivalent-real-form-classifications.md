@@ -2,7 +2,7 @@
 id: thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications
 kind: theorem
 title: Vogan and Satake diagrams give equivalent real form classifications
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-satake-diagram", "def-vogan-diagram", "def-axiom-of-choice", "thm-classification-of-real-forms-by-vogan-diagrams", "thm-conjugacy-of-cartan-involutions", "thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification", "thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k", "def-cartan-subalgebra-of-a-lie-algebra", "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra", "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional", "prop-brackets-of-root-spaces", "prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra", "prop-killing-form-orthogonality-of-root-spaces", "prop-trace-forms-are-symmetric-and-invariant", "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates", "prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system", "thm-serre-presentation-theorem", "def-serre-lie-algebra-of-a-finite-type-cartan-matrix", "thm-smith-normal-form-existence-over-a-pid", "prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition", "thm-restricted-root-space-decomposition", "cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra", "cor-semisimple-lie-algebras-are-centerless-and-perfect", "thm-cartans-closed-subgroup-theorem", "thm-conjugacy-of-maximal-tori", "thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers"]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §7, Propositions 6.69-6.72, printed pp. 389-394; §8, Theorems 6.74 and 6.88 with their proofs, printed pp. 399-406; §10, Theorems 6.96 and 6.105 with Figures 6.1-6.3, printed pp. 408-422; §11, restricted roots in the classification, printed pp. 422-426; §12, Problem 7, printed p. 427"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

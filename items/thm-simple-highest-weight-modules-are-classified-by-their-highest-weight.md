@@ -2,7 +2,7 @@
 id: thm-simple-highest-weight-modules-are-classified-by-their-highest-weight
 kind: theorem
 title: Simple highest-weight modules are classified by highest weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral, lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector, lem-integrability-relations-for-a-dominant-highest-weight, lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient, thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda, lem-highest-weight-modules-have-weights-below-the-top-weight, prop-a-finite-dimensional-irreducible-module-is-generated-by-any-highest-weight-vector, prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional, def-dominant-integrable-highest-weight-cyclic-module, def-highest-weight-vector-and-highest-weight-module, def-partial-order-on-weights, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-integral-dominant-and-strictly-dominant-weights, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Theorem 5.5"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

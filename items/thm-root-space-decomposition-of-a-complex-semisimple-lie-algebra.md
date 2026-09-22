@@ -2,7 +2,7 @@
 id: thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra
 kind: theorem
 title: Root-space decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, def-axiom-of-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

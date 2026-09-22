@@ -2,7 +2,7 @@
 id: lem-characteristic-kernel-on-a-regular-moment-level
 kind: lemma
 title: The characteristic kernel on a regular moment level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, prop-moment-map-components-generate-the-negative-infinitesimal-action, prop-tangent-space-of-a-regular-level-set-is-the-kernel, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, prop-symplectic-double-orthogonal-and-dimension-identities, prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity, def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 23, §23.2, printed page 142
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

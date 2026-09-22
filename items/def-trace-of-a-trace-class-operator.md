@@ -2,7 +2,7 @@
 id: def-trace-of-a-trace-class-operator
 kind: definition
 title: Trace of a trace class operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, lem-nuclear-series-characterizes-trace-norm, def-square-summable-family-on-an-arbitrary-index-set, lem-finite-bessel-inequality, thm-cauchy-schwarz-in-an-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-metric-convergence, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

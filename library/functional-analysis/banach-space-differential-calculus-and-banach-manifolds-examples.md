@@ -1,7 +1,7 @@
 ---
 page: banach-space-differential-calculus-and-banach-manifolds-examples
 title: "Banach-Space Differential Calculus and Banach Manifolds: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-derivative-of-a-bounded-bilinear-map, ex-the-banach-inverse-theorem-for-a-small-lipschitz-perturbation-of-the-identity, ex-a-regular-level-set-in-a-banach-space, ex-a-projection-with-finite-dimensional-kernel-is-fredholm, cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold]
 ---

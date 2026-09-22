@@ -2,7 +2,7 @@
 id: cor-distribution-of-a-one-sided-brownian-hitting-time
 kind: corollary
 title: "Distribution of a one-sided Brownian hitting time"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-law-of-the-brownian-maximum, lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times, def-standard-normal-and-normal-laws, def-cumulative-distribution-function-of-a-random-variable, lem-normal-density-has-total-mass-one, def-brownian-motion, thm-substitution, thm-monotone-convergence-for-the-integral, thm-probability-law-and-distribution-function-correspondence, def-countable-choice, def-axiom-of-choice, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-extreme-value-r, thm-intermediate-value, thm-heine-borel-r, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Example 2.7.1"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

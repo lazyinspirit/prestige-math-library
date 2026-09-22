@@ -2,7 +2,7 @@
 id: thm-gelfand-transform-is-a-contractive-unital-homomorphism
 kind: theorem
 title: Gelfand transform is a contractive unital homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-gelfand-transform, thm-spectrum-as-character-values, thm-characters-on-a-unital-banach-algebra-are-continuous, def-spectral-radius, def-axiom-of-choice, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

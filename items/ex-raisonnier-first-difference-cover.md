@@ -2,7 +2,7 @@
 id: ex-raisonnier-first-difference-cover
 kind: example
 title: Cylinder covers generate the Frechet tails in the Raisonnier filter
-status: draft
+status: published
 origin: pipeline
 deps: [def-rapid-and-raisonnier-filters, lem-raisonnier-family-is-a-sigma-one-three-filter]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.8 proof, pp. 46-47"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

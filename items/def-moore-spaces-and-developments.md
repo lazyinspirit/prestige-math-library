@@ -2,7 +2,7 @@
 id: def-moore-spaces-and-developments
 kind: definition
 title: "Moore spaces and developments"
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-and-t3-spaces, def-cover-refinement-and-local-finiteness, def-first-countable-top, def-topological-space, def-neighbourhood-top]
 justified_by: []
@@ -15,6 +15,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Definitions 1.1-1.2 and Example 1.1, printed pp. 1-2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

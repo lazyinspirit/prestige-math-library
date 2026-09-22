@@ -1,7 +1,7 @@
 ---
 page: banach-space-differential-calculus-and-banach-manifolds
 title: Banach-Space Differential Calculus and Banach Manifolds
-status: draft
+status: published
 items: [def-frechet-derivative-between-banach-spaces, lem-the-frechet-derivative-is-unique, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-c-k-map-between-banach-spaces, lem-banach-mean-value-estimate-on-a-convex-set, thm-inverse-function-theorem-for-banach-spaces, thm-implicit-function-theorem-for-banach-spaces, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, def-split-banach-submanifold, thm-regular-value-theorem-for-banach-manifolds, def-smooth-banach-vector-bundle-and-section, thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, rem-fredholm-maps-have-countable-proper-local-restrictions, rem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense, prop-the-index-of-a-fredholm-map-is-locally-constant, rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel]
 examples: []
 ---

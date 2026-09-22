@@ -2,7 +2,7 @@
 id: cor-irreducible-characters-are-orthonormal-class-functions
 kind: corollary
 title: Irreducible characters are orthonormal class functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-schur-orthogonality-for-compact-lie-groups, def-matrix-coefficient-and-character-of-a-compact-group-representation, def-axiom-of-choice, thm-linearity-of-the-lebesgue-integral-on-l-one]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§4.7, Corollary after Theorem 4.38"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

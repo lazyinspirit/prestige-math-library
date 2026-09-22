@@ -2,7 +2,7 @@
 id: rem-self-adjoint-extensions-and-deficiency-indices
 kind: remark
 title: "Self-adjoint extensions and deficiency indices: agreement pointer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-von-neumann-self-adjoint-extension-parameterization, cor-self-adjoint-extension-exists-iff-deficiency-indices-agree, def-deficiency-subspaces-and-deficiency-indices, cex-the-minimal-derivative-is-symmetric-not-self-adjoint, def-axiom-of-choice]
@@ -14,6 +14,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.6, pp.91-95"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

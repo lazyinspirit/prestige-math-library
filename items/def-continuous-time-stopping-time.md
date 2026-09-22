@@ -2,13 +2,14 @@
 id: def-continuous-time-stopping-time
 kind: definition
 title: "Continuous-time stopping times and stopped sigma-algebras"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-time-filtration-and-all-pairs-martingale]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

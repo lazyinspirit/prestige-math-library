@@ -2,7 +2,7 @@
 id: lem-shelah-continuous-unions-of-sweetness-models
 kind: lemma
 title: Continuous countable unions of sweetness models remain sweet
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-sweetness-model, def-countable-choice, thm-countable-union-of-countable]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

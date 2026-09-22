@@ -2,7 +2,7 @@
 id: lem-corson-rational-metric-not-metacompact
 kind: lemma
 title: "Corson's rational metric space is not metacompact"
-status: draft
+status: published
 origin: pipeline
 deps: [def-corson-ordered-rational-permutation-model, def-paracompact-space, def-metacompact-space, def-cover-refinement-and-local-finiteness, def-metric-space, def-metric-ball, def-metric-topology, def-permutation-support-system-and-normal-filter]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Samuel Corson, The Independence of Stone's Theorem from the Boolean Prime Ideal Theorem"
       url: "https://arxiv.org/pdf/2001.06513"
       locator: "§§2-3, pp. 2-4"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

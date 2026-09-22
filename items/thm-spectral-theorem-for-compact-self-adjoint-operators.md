@@ -2,7 +2,7 @@
 id: thm-spectral-theorem-for-compact-self-adjoint-operators
 kind: theorem
 title: Spectral theorem for compact self adjoint operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, lem-orthogonal-complement-of-an-eigenspace-is-invariant, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-compact-linear-operator, def-spectrum-and-resolvent-of-a-bounded-operator, def-eigenvalue-eigenvector-eigenspace-and-spectrum, thm-compact-implies-the-other-compactness-forms, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-closed-subspace-of-a-compact-space-is-compact, thm-compactness-under-continuous-maps, lem-compositions-with-a-compact-operator-are-compact, thm-orthogonal-decomposition-by-a-closed-subspace, thm-double-orthogonal-complement-is-closure, thm-hilbert-space-fourier-expansion, thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-finite-bessel-inequality, lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, def-orthogonality-and-orthogonal-complement, lem-orthogonal-complement-is-closed, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, def-metric-convergence, lem-metric-limits-unique, def-metric-ball, thm-complete-subspace-iff-closed, thm-countable-union-of-countable, lem-subset-of-countable, cor-archimedean-reciprocal, def-countable, def-linear-subspace, def-kernel-and-image-of-a-linear-map, def-complex-metric-convergence-and-continuity, def-banach-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

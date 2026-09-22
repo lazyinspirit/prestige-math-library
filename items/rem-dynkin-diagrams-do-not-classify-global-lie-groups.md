@@ -2,7 +2,7 @@
 id: rem-dynkin-diagrams-do-not-classify-global-lie-groups
 kind: remark
 title: Dynkin diagrams do not classify global Lie groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cartan-killing-classification-of-complex-simple-lie-algebras, cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §11, remarks on the scope of the classification, printed pp. 202-203"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

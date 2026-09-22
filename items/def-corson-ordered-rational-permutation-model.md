@@ -2,7 +2,7 @@
 id: def-corson-ordered-rational-permutation-model
 kind: definition
 title: "Corson's ordered-rational permutation model"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fraenkel-mostowski-permutation-model, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-zfa-universe-atoms-and-kernel, def-metric-space, def-axiom-of-choice]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
     - title: "Philipp Kleppmann, Free Groups and the Axiom of Choice"
       url: "https://www.repository.cam.ac.uk/bitstream/1810/253759/1/thesis.pdf"
       locator: "Chapter 2, §2.1, pp. 16-20"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

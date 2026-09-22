@@ -2,7 +2,7 @@
 id: rem-raw-versus-usual-filtration-in-the-strong-markov-theorem
 kind: remark
 title: "Raw versus usual filtrations in the strong Markov theorem"
-status: draft
+status: published
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, thm-strong-markov-property-of-brownian-motion, thm-brownian-future-path-markov-property, def-brownian-motion, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

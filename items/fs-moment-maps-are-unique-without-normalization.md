@@ -2,7 +2,7 @@
 id: fs-moment-maps-are-unique-without-normalization
 kind: false-statement
 title: Moment maps are unique without normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, lem-tautological-cotangent-moment-map-is-equivariant, prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed-covectors, def-coadjoint-representation-of-a-lie-group, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

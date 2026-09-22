@@ -2,7 +2,7 @@
 id: cex-kelley-cofinite-set-is-not-closed
 kind: counterexample
 title: "Kelley's cofinite set is not closed"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-isolated-point-kelley-repair, def-standard-topologies, thm-t1-iff-singletons-are-closed, def-t0-and-t1-spaces, def-topological-space, def-natural-numbers, def-countable]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Kyriakos Keremedis and Eleftherios Tachtsis, Wallman Compactifications and Tychonoff's Compactness Theorem in ZF"
       url: "https://topology.nipissingu.ca/tp/reprints/v42/tp42021.pdf"
       locator: "Discussion before Proposition 2.13, journal p. 282"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

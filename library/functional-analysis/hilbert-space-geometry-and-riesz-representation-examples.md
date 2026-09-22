@@ -1,7 +1,7 @@
 ---
 page: hilbert-space-geometry-and-riesz-representation-examples
 title: Hilbert Space Geometry and Riesz Representation — Examples
-status: draft
+status: published
 items: []
 examples: [ex-standard-inner-products-on-kn-ell-two-and-l-two, ex-projection-onto-a-finite-dimensional-subspace-by-a-gram-matrix, ex-projection-onto-constants-is-the-mean, ex-distance-to-a-closed-subspace, cex-an-inner-product-space-need-not-be-complete, cex-a-norm-need-not-satisfy-the-parallelogram-law, cex-nearest-point-map-to-a-convex-set-need-not-be-linear, ex-adjoints-of-shifts-multiplication-and-integral-operators]
 ---

@@ -2,7 +2,7 @@
 id: def-unital-banach-algebra
 kind: definition
 title: Unital Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-banach-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Chapter 2 §2.1, printed pp. 19–24"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

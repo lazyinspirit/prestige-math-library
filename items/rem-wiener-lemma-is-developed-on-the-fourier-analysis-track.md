@@ -2,7 +2,7 @@
 id: rem-wiener-lemma-is-developed-on-the-fourier-analysis-track
 kind: remark
 title: Wiener lemma is developed on the Fourier analysis track
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: []
@@ -14,6 +14,8 @@ sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.6 and §3.1, printed pp. 44–67"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

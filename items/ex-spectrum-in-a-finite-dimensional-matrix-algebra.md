@@ -2,7 +2,7 @@
 id: ex-spectrum-in-a-finite-dimensional-matrix-algebra
 kind: example
 title: Spectrum in a finite-dimensional matrix algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, def-determinant-of-a-square-matrix, thm-adjugate-identity-over-a-commutative-ring, thm-determinant-multiplicative, cor-finite-dimensional-normed-spaces-are-banach, def-unital-banach-algebra, def-bounded-linear-operator, def-operator-norm]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1.1 and §5.2.1 examples, printed pp. 209–214 and 219–222"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

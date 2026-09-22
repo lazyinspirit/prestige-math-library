@@ -2,7 +2,7 @@
 id: def-riesz-spectral-projection
 kind: definition
 title: Riesz spectral projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-holomorphic-functional-calculus-homomorphism, def-holomorphic-functional-calculus, lem-admissible-cycle-around-a-compact-plane-set, lem-banach-valued-cauchy-integral-vanishes, def-null-homologous-and-homologous-complex-cycles, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Exercise 2.5.3 and §2.5, printed pp. 48–50"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: def-spectrum-and-resolvent-of-a-bounded-operator
 kind: definition
 title: Spectrum and resolvent of a bounded operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-bounded-linear-operator, def-banach-space, def-space-of-bounded-linear-operators, def-linear-map, def-linear-subspace, def-dimension, def-complex-metric-convergence-and-continuity]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

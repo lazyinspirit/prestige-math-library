@@ -1,7 +1,7 @@
 ---
 page: banach-algebras-spectrum-and-holomorphic-functional-calculus-examples
 title: "Banach Algebras Spectrum and Holomorphic Functional Calculus: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-continuous-functions-form-a-commutative-banach-algebra, ex-bounded-operators-form-a-noncommutative-banach-algebra, ex-spectrum-in-a-finite-dimensional-matrix-algebra, ex-spectrum-of-a-multiplication-operator, ex-spectrum-of-the-unilateral-shift, cex-norm-need-not-equal-spectral-radius, cex-spectrum-can-shrink-in-a-larger-banach-algebra, ex-unitization-of-a-nonunital-banach-algebra, ex-riesz-projection-for-a-matrix-with-separated-spectrum]
 ---

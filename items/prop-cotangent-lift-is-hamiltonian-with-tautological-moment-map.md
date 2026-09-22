@@ -2,7 +2,7 @@
 id: prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map
 kind: proposition
 title: The cotangent lift of an action is Hamiltonian with the tautological moment map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, def-tautological-one-form-on-a-cotangent-bundle, prop-cotangent-lifts-are-symplectomorphisms, prop-cotangent-lift-of-a-vector-field-is-hamiltonian, prop-adjoint-intertwines-the-exponential-map, def-fundamental-vector-field-of-a-left-action, def-smooth-left-action-of-a-lie-group, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

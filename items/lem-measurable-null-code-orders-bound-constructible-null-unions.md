@@ -2,7 +2,7 @@
 id: lem-measurable-null-code-orders-bound-constructible-null-unions
 kind: lemma
 title: A measurable null-code order bounds the constructible null union
-status: draft
+status: published
 origin: pipeline
 deps: [def-boldface-sigma-one-three-measurability, thm-canonical-definable-global-well-order-of-l, thm-tonelli-and-fubini-for-completed-product-measures, def-countable-choice, def-rapid-and-raisonnier-filters]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Definition 3.4 and Lemma 3.10, pp. 47-48"}
     - {title: "Thomas Jech, Set Theory, Chapter 25", url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/25-descriptive_set_theory.pdf", locator: "Theorem 25.26 and Lemma 25.27, pp. 494-495"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

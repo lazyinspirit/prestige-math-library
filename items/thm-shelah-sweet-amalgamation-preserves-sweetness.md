@@ -2,7 +2,7 @@
 id: thm-shelah-sweet-amalgamation-preserves-sweetness
 kind: theorem
 title: Shelah amalgamation preserves sweetness
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-sweetness-model, lem-shelah-sweet-forcings-are-sigma-directed-ccc, lem-shelah-sweet-density-transfer-along-complete-suborders, thm-forcing-equivalence-and-boolean-completion, def-two-step-forcing-iteration, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

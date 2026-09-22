@@ -2,7 +2,7 @@
 id: lem-resolvent-star-algebra-is-dense-in-c-zero
 kind: lemma
 title: "The resolvent star algebra is dense in C_0(R)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-self-adjoint-resolvent-estimate, thm-complex-stone-weierstrass-self-adjoint, def-one-point-compactification, thm-one-point-compactification-properties, def-norm-and-strong-resolvent-convergence, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-continuous-map-top, def-locally-compact-space, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations (lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: "Section 1.1, Remark after Remark 1.2, pp.5-6"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

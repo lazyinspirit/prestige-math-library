@@ -2,7 +2,7 @@
 id: ex-banach-stone-weighted-composition-isometries
 kind: example
 title: Banach-Stone weighted composition isometries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-banach-stone", "def-axiom-of-choice", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-complex-exponential-is-entire-with-derivative-itself", "lem-sine-positive-and-cosine-decreasing-on-zero-two"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

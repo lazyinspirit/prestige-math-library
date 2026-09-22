@@ -2,7 +2,7 @@
 id: ex-functional-calculus-for-a-multiplication-operator
 kind: example
 title: Functional calculus for a multiplication operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, thm-complex-stone-weierstrass-self-adjoint, def-axiom-of-choice, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-primitives-of-a-continuous-function, thm-substitution, lem-derivative-of-a-power, def-operator-norm, def-spectrum-and-resolvent-of-a-bounded-operator, thm-spectral-mapping-for-continuous-normal-functional-calculus, def-self-adjoint-positive-unitary-and-normal-operator, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-hilbert-space-adjoint, thm-continuous-implies-integrable, thm-lebesgue-measure-of-a-box-of-every-kind, thm-heine-borel-r, thm-metric-hausdorff-separation]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–15"
       url: "https://www.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

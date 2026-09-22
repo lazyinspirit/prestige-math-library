@@ -2,7 +2,7 @@
 id: thm-maximal-ideal-space-is-compact-hausdorff
 kind: theorem
 title: Maximal ideal space is compact Hausdorff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, thm-banach-alaoglu, thm-ultrafilter-lemma, def-axiom-of-choice, def-character-and-maximal-ideal-space, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

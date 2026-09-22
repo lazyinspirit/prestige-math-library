@@ -2,7 +2,7 @@
 id: thm-sequential-characterization-of-compact-operators
 kind: theorem
 title: Sequential characterization of compact operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-dependent-choice, lem-dependent-choice-implies-countable-choice, thm-metric-compactness-equivalences, def-metric-compactness-variants, def-metric-bounded-diameter, def-metric-convergence, def-metric-ball, thm-metric-closure-characterisation, thm-compactness-under-continuous-maps, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, def-bounded-linear-operator, def-sequence, lem-index-map-grows]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

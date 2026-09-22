@@ -2,7 +2,7 @@
 id: lem-integrability-relations-for-a-dominant-highest-weight
 kind: lemma
 title: Simple-root integrability relations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-integral-dominant-and-strictly-dominant-weights, def-highest-weight-vector-and-highest-weight-module, thm-root-sl-two-triple, thm-finite-dimensional-representations-of-sl-two, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.3, Step 1 of the proof of Theorem 8.23"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

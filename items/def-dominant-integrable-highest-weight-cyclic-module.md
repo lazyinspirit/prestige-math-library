@@ -2,7 +2,7 @@
 id: def-dominant-integrable-highest-weight-cyclic-module
 kind: definition
 title: Dominant cyclic highest-weight presentation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-universal-enveloping-algebra, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, def-integral-dominant-and-strictly-dominant-weights, thm-root-sl-two-triple, def-axiom-of-choice, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]
@@ -17,6 +17,8 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §3, proof of Theorem 5.16"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

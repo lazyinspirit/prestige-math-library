@@ -2,7 +2,7 @@
 id: def-skeletal-filtration-for-generalized-cohomology
 kind: definition
 title: Skeletal filtration for generalized cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-generalized-cohomology-theory, prop-reduced-and-unreduced-generalized-cohomology-theories-correspond]
@@ -14,6 +14,8 @@ sources:
     - title: "Yiannis Loizides, The Atiyah–Hirzebruch Spectral Sequence, §3, printed pp. 4–7"
       url: https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf
       locator: "§3, skeletal filtration, printed pp. 4–7"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

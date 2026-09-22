@@ -1,7 +1,7 @@
 ---
 page: itos-formula-and-brownian-martingales-examples
 title: Itos Formula and Brownian Martingales — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-ito-formula-for-brownian-powers

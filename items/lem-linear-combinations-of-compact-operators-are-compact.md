@@ -2,7 +2,7 @@
 id: lem-linear-combinations-of-compact-operators-are-compact
 kind: lemma
 title: Linear combinations of compact operators are compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, lem-finite-rank-operators-are-compact, lem-compositions-with-a-compact-operator-are-compact, thm-finite-products-of-compact-spaces, lem-vector-operations-are-continuous-in-a-normed-space, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, lem-closed-subset-of-a-compact-space-is-compact, def-bounded-linear-operator, def-operator-norm, def-metric-bounded-diameter, def-linear-basis]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.185, Theorem 4.28(i)"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

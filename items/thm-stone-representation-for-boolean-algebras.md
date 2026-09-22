@@ -2,7 +2,7 @@
 id: thm-stone-representation-for-boolean-algebras
 kind: theorem
 title: Stone representation for Boolean algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-stone-space-and-clopen-algebra", "def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality", "lem-boolean-ultrafilter-extension-from-compact-products", "def-axiom-of-choice", "thm-closed-subspace-of-a-compact-space-is-compact"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

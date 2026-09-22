@@ -2,7 +2,7 @@
 id: prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra
 kind: proposition
 title: The bracket of opposite root spaces is the root line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-killing-dual-vector-of-a-root, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-toral-and-maximal-toral-subalgebra, prop-killing-form-orthogonality-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Lemma 19.15"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

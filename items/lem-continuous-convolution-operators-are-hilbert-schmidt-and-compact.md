@@ -2,7 +2,7 @@
 id: lem-continuous-convolution-operators-are-hilbert-schmidt-and-compact
 kind: lemma
 title: Continuous convolution operators are Hilbert–Schmidt
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, thm-l-two-kernels-give-hilbert-schmidt-operators, thm-hilbert-schmidt-operators-are-compact, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-axiom-of-choice, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, thm-linearity-of-the-lebesgue-integral-on-l-one]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VII §1 (cross-check)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

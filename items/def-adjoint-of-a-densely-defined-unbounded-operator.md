@@ -2,7 +2,7 @@
 id: def-adjoint-of-a-densely-defined-unbounded-operator
 kind: definition
 title: "Adjoint of a densely defined operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unbounded-linear-operator-domain-and-graph, def-densely-defined-closed-and-closable-operator, thm-riesz-representation-for-hilbert-space, def-countable-choice, def-dense-top, def-bounded-linear-operator, def-hilbert-space]
@@ -21,6 +21,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.2, pp.66-69"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

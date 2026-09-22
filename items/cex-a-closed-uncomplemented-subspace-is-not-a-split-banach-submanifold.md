@@ -2,7 +2,7 @@
 id: cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold
 kind: counterexample
 title: A closed subspace of ell-infinity that is not complemented
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-split-banach-submanifold, def-countable-base-banach-manifold-and-smooth-map, def-second-countable-space, lem-real-and-complex-c-zero-are-banach, lem-c-zero-is-a-closed-subspace-of-ell-infinity, thm-reals-cauchy-complete, thm-complex-plane-is-complete, def-axiom-schema-of-replacement, def-banach-space, def-countable-choice, def-c-zero-and-ell-infinity, def-complemented-subspace, thm-complemented-subspace-iff-range-of-a-bounded-projection, thm-countable-union-of-countable, cor-irrationals-uncountable, lem-q-and-irrationals-dense-r, thm-well-ordering-principle, def-quotient-vector-space-coset-notation, def-quotient-seminorm, thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed, def-dual-space-of-a-normed-space, def-operator-norm, def-bounded-linear-operator, lem-closed-subspace-of-a-banach-space-is-banach]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

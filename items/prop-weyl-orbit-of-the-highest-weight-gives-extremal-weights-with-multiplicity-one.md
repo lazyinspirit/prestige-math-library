@@ -2,7 +2,7 @@
 id: prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one
 kind: proposition
 title: Extremal Weyl-orbit weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional, lem-highest-weight-modules-have-weights-below-the-top-weight, lem-simple-reflections-preserve-weight-multiplicities, def-open-and-closed-weyl-chambers, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, def-weyl-group-of-a-root-system, def-partial-order-on-weights, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-weight-and-weight-space-of-a-lie-algebra-representation, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.2"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

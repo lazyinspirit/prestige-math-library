@@ -2,7 +2,7 @@
 id: cex-zero-angular-momentum-level-with-nonfree-points-is-singular
 kind: counterexample
 title: The zero angular-momentum level has nonfree points and no regular reduction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle, thm-marsden-weinstein-meyer-symplectic-reduction, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, lem-characteristic-kernel-on-a-regular-moment-level, ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §8.1, Remarks around Theorem 8.3, printed page 101
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: lem-ladder-separation-from-hyp
 kind: lemma
 title: "Ladder separation from HYP"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fleissner-hyp-covering-interface, def-cardinal, def-natural-numbers, def-function]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "William G. Fleissner, If all normal Moore spaces are metrizable, then there is an inner model with a measurable cardinal"
       url: "https://kuscholarworks.ku.edu/server/api/core/bitstreams/88062b98-5ab8-4fdc-9548-9e00a9c7507d/content"
       locator: "Lemma 1 and its proof, printed pp. 366-367"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

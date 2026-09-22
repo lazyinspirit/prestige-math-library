@@ -2,13 +2,14 @@
 id: rem-quadratic-variation-depends-on-the-approximating-partitions-without-regularity
 kind: remark
 title: "Quadratic variation needs a partition convention"
-status: draft
+status: published
 origin: pipeline
 deps: [def-quadratic-variation-along-a-partition-sequence, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

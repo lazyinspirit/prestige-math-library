@@ -2,7 +2,7 @@
 id: rem-dmc-versus-dc-over-zf-is-open
 kind: remark
 title: "DMC versus DC over ZF remains open"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dependent-multiple-choice-finite-level-tree, thm-dependent-choice-and-finite-multiple-selections, def-dependent-choice]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
     - title: "J. Dodu and M. Morillon, The Hahn-Banach Property and the Axiom of Choice"
       url: "https://lim.univ-reunion.fr/staff/mar/dodu.pdf"
       locator: "§7, printed p. 10"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

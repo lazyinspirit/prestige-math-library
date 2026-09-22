@@ -2,7 +2,7 @@
 id: thm-brownian-paths-are-not-holder-of-order-one-half-on-any-interval
 kind: theorem
 title: "Brownian paths are nowhere locally one-half Hölder"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, lem-rat-embeds-dense, def-axiom-of-choice, lem-probability-measure-basic-identities]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.1, Theorem 7.1.6 and the remark following it"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

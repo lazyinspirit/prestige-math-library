@@ -2,7 +2,7 @@
 id: thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold
 kind: theorem
 title: A transverse Banach bundle section has a split zero submanifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-smooth-banach-vector-bundle-and-section, thm-regular-value-theorem-for-banach-manifolds, def-split-banach-submanifold, def-axiom-of-choice, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-complemented-subspace, lem-banach-manifold-differentials-are-chart-independent]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-pontryagin-classes-by-complexification
 kind: definition
 title: Pontryagin classes by complexification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-chern-classes-from-the-projective-bundle-relation, prop-complexification-is-conjugation-invariant, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.2"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Definition of Pontryagin classes, printed pp.94-96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

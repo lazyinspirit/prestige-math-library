@@ -2,7 +2,7 @@
 id: cex-compactness-is-not-preserved-by-strong-operator-limits
 kind: counterexample
 title: Compactness is not preserved by strong operator limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-square-summable-family-on-an-arbitrary-index-set, def-bounded-linear-operator, def-operator-norm, def-compact-linear-operator, def-strong-and-weak-operator-topologies, lem-finite-rank-operators-are-compact, cex-identity-is-compact-iff-the-space-is-finite-dimensional, def-metric-convergence, def-metric-ball, def-linear-subspace, thm-metric-closure-characterisation, def-sequence, def-countable]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1, compactness is not preserved by strong limits"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type
 kind: lemma
 title: Compact-fibre bundle totals preserve paracompactness, and CW type under CW-type hypotheses
-status: draft
+status: published
 origin: pipeline
 deps: ["def-locally-trivial-fiber-bundle", "def-paracompact-space", "lem-tube-lemma-for-a-compact-factor", "lem-products-preserve-t0-t1-and-hausdorff", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -23,6 +23,8 @@ sources:
     - title: J. P. May, A Concise Course in Algebraic Topology
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Chapter 5, compactly generated spaces and Problem 1(c), printed pp.39–40"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

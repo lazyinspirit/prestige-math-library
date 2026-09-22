@@ -2,7 +2,7 @@
 id: thm-cartan-killing-classification-of-complex-simple-lie-algebras
 kind: theorem
 title: Cartan-Killing classification of complex simple Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-classification-of-irreducible-reduced-crystallographic-root-systems, thm-existence-of-each-classified-root-system, thm-isomorphism-theorem-for-complex-semisimple-lie-algebras, thm-existence-theorem-for-complex-semisimple-lie-algebras, def-axiom-of-choice, prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, thm-serre-presentation-theorem, def-serre-lie-algebra-of-a-finite-type-cartan-matrix, def-simple-semisimple-and-reductive-lie-algebras]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Proposition 2.44, printed pp. 151-152, and §§10-11, printed pp. 196-202"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

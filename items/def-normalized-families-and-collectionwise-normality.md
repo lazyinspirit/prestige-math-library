@@ -2,7 +2,7 @@
 id: def-normalized-families-and-collectionwise-normality
 kind: definition
 title: "Normalized families and collectionwise normality"
-status: draft
+status: published
 origin: pipeline
 deps: [def-normal-and-t4-spaces, def-discrete-family-and-sigma-bases, def-cover-refinement-and-local-finiteness, def-topological-space, lem-discrete-families-are-locally-finite, lem-locally-finite-unions-and-closures]
 justified_by: []
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

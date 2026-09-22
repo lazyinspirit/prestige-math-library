@@ -2,7 +2,7 @@
 id: lem-zero-set-ultrafilters-and-stone-cech-points
 kind: lemma
 title: Zero set ultrafilters and Stone-Cech points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-zero-set-filter-and-zero-set-ultrafilter, thm-stone-cech-evaluation-closure-universal-property, def-completely-regular-and-tychonoff-spaces, thm-urysohn-lemma, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

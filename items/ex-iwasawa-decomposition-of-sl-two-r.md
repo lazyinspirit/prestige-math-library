@@ -2,7 +2,7 @@
 id: ex-iwasawa-decomposition-of-sl-two-r
 kind: example
 title: Iwasawa decomposition of sl two r
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-global-iwasawa-decomposition, def-axiom-of-choice, ex-general-and-special-linear-lie-groups, ex-orthogonal-and-special-orthogonal-lie-groups, ex-cartan-involution-and-k-plus-p-for-sl-n-r, ex-compact-and-split-cartan-subalgebras-of-sl-two-r, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-theta-stable-cartan-subalgebra-and-compact-split-parts, ex-matrix-exponential-as-the-lie-group-exponential, def-exponential-map-of-a-lie-group]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.6, printed pp. 221-222"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

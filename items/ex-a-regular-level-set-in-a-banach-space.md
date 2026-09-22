@@ -2,7 +2,7 @@
 id: ex-a-regular-level-set-in-a-banach-space
 kind: example
 title: A regular level set in a Banach space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-second-countable-space, thm-countable-products-of-second-countable-spaces, def-countable-base-banach-manifold-and-smooth-map, thm-regular-value-theorem-for-banach-manifolds, def-complemented-subspace, def-axiom-of-choice, def-banach-space, def-frechet-derivative-between-banach-spaces, def-bounded-linear-operator, def-linear-subspace]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

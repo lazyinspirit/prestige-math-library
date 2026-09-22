@@ -2,7 +2,7 @@
 id: thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional
 kind: theorem
 title: Root spaces of a complex semisimple Lie algebra are one-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, prop-brackets-of-root-spaces, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-finite-dimensional-representations-of-sl-two, thm-root-string-property, thm-trace-of-ab-equals-trace-of-ba, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Proposition 2.21"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

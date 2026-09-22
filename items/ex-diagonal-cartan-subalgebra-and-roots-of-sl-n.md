@@ -2,7 +2,7 @@
 id: ex-diagonal-cartan-subalgebra-and-roots-of-sl-n
 kind: example
 title: Diagonal Cartan subalgebra and roots of sl_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, def-special-linear-lie-algebra-sl-two, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

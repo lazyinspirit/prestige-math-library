@@ -2,7 +2,7 @@
 id: lem-cohomology-ring-of-infinite-complex-projective-space
 kind: lemma
 title: Cohomology ring of infinite complex projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, thm-cellular-cochains-compute-cohomology-with-local-coefficients, thm-cellular-homology-computes-singular-homology, thm-schubert-cells-give-the-stable-grassmannian-cw-structure, def-schubert-cells-in-real-and-complex-grassmannians, def-stiefel-space-grassmannian-and-tautological-bundle, lem-complex-orientation-of-underlying-real-bundles, def-euler-class-by-zero-section-pullback-of-the-thom-class, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, def-cellular-homology, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Algebraic Topology, section 3.2 and Example 4.42"
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: "Cohomology of CP^n and CP^infinity, printed pp.221-222"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

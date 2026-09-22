@@ -2,7 +2,7 @@
 id: thm-unitary-equivalence-classified-by-measure-class-and-multiplicity
 kind: theorem
 title: Unitary equivalence classified by measure class and multiplicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectral-multiplicity-function-in-the-separable-case, lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension, thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, thm-cyclic-spectral-representation, thm-integration-against-a-radon-nikodym-derivative, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, def-spectrum-and-resolvent-of-a-bounded-operator, def-separable-space, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Andreas Kriegl, Funktionalanalysis, Theorem 8.64 and Proposition 8.66, printed pp.198–200"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-positive-restricted-roots-and-nilpotent-n-algebra
 kind: definition
 title: Positive restricted roots and nilpotent n algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §4, positivity and definition of n = sum of the positive restricted-root spaces, printed p. 373"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

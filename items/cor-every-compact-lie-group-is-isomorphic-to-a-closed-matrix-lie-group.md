@@ -2,7 +2,7 @@
 id: cor-every-compact-lie-group-is-isomorphic-to-a-closed-matrix-lie-group
 kind: corollary
 title: Every compact Lie group is a closed matrix group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group, lem-no-small-subgroups-in-a-lie-group, def-axiom-of-choice, def-lie-group-homomorphism-isomorphism-and-automorphism, thm-cartans-closed-subgroup-theorem, thm-continuous-homomorphisms-between-lie-groups-are-smooth, thm-local-homology-detects-interior-points-boundary-points-and-dimension, thm-smooth-inverse-function-theorem-on-manifolds, prop-exponential-map-is-natural-for-lie-group-homomorphisms]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3, Corollary 4.22 and its proof"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

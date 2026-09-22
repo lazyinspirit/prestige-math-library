@@ -2,7 +2,7 @@
 id: thm-naturality-normalization-and-whitney-sum-for-chern-classes
 kind: theorem
 title: Naturality, normalization, and Whitney sum for Chern classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-chern-classes-from-the-projective-bundle-relation, def-complex-projective-bundle-and-tautological-complex-line, thm-integral-complex-projective-bundle-theorem, def-relative-cup-product, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Proof of the Whitney sum formula, printed pp.79-81"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

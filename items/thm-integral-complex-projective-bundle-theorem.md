@@ -2,7 +2,7 @@
 id: thm-integral-complex-projective-bundle-theorem
 kind: theorem
 title: Integral complex projective bundle theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-complex-projective-bundle-and-tautological-complex-line", "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator", "thm-leray-hirsch-module-isomorphism", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "def-partition-of-unity-subordinate-to-a-cover", "def-axiom-of-choice", "thm-subordinate-partitions-of-unity-exist", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "prop-pullbacks-of-fibrations-are-fibrations", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-fibration-sequence-is-natural", "lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice", "thm-universal-coefficient-theorem-for-cohomology-over-a-pid", "thm-five-lemma-for-modules", "thm-singular-cohomology-is-graded-commutative"]
@@ -19,6 +19,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 35"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Splitting by the projective bundle theorem, printed pp.130-132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

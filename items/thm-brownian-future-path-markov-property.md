@@ -2,7 +2,7 @@
 id: thm-brownian-future-path-markov-property
 kind: theorem
 title: "Future-path Markov property"
-status: draft
+status: published
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-wiener-measure-on-continuous-path-space, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, lem-conditioning-a-known-state-and-independent-noise, thm-grouping-independent-sigma-algebras, thm-pi-system-criterion-for-independent-sigma-algebras, def-independent-sigma-algebras-and-events, def-independent-random-elements, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-tower-property-of-conditional-expectation, thm-dynkin-pi-lambda, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, thm-measurability-of-integration-against-a-kernel, def-measure-kernel-and-probability-kernel, def-axiom-of-choice, thm-dominated-convergence, thm-generated-sigma-algebra-exists-and-is-minimal]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Definition 6.10 and the argument preceding Theorem 6.13"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-vector-levy-characterization
 kind: corollary
 title: "Vector Levy characterization"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t, def-quadratic-covariation-of-brownian-ito-processes, def-d-dimensional-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-standard-normal-and-normal-laws, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, thm-monotone-convergence-for-the-integral, cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms, thm-tower-property-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Exercise 6.5 (componentwise reduction to Theorem 6.1)"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

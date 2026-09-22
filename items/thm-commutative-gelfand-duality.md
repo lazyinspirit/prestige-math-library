@@ -2,7 +2,7 @@
 id: thm-commutative-gelfand-duality
 kind: theorem
 title: Commutative Gelfand duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-commutative-gelfand-naimark, lem-characters-of-continuous-functions-are-evaluations, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-c-star-algebra, thm-maximal-ideal-space-is-compact-hausdorff]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

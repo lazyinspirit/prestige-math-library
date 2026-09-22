@@ -2,7 +2,7 @@
 id: fs-every-finite-reflection-invariant-set-of-vectors-is-a-crystallographic-root-system
 kind: false-statement
 title: Every finite reflection-invariant set of vectors is crystallographic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

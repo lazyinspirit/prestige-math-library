@@ -2,7 +2,7 @@
 id: lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign
 kind: lemma
 title: Norm point of a compact self adjoint operator is an eigenvalue up to sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-compact-linear-operator, thm-compact-implies-the-other-compactness-forms, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, def-metric-convergence, lem-metric-limits-unique, thm-recursion, thm-well-ordering-principle, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

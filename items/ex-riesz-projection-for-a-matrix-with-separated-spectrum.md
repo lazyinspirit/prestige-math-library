@@ -2,7 +2,7 @@
 id: ex-riesz-projection-for-a-matrix-with-separated-spectrum
 kind: example
 title: Riesz projection for a matrix with separated spectrum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-riesz-spectral-projection-properties, def-riesz-spectral-projection, ex-spectrum-in-a-finite-dimensional-matrix-algebra, thm-circle-integrals-of-integer-monomials, thm-uniform-limit-interchanges-complex-line-integrals, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 48–50"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

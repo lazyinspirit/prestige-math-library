@@ -2,7 +2,7 @@
 id: thm-schauder-compact-adjoint-theorem
 kind: theorem
 title: Schauder compact adjoint theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-transpose-of-a-bounded-operator, lem-transpose-is-bounded-and-has-the-same-norm, def-operator-norm, def-bounded-linear-operator, def-dual-space-of-a-normed-space, thm-bounded-operator-space-is-banach, cor-finite-dimensional-normed-spaces-are-banach, thm-canonical-bidual-map-is-an-isometry, lem-canonical-map-is-natural, thm-metric-compactness-equivalences, thm-complete-subspace-iff-closed, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-countable-choice, def-dependent-choice, thm-countable-union-of-countable, thm-bolzano-weierstrass, cor-bolzano-weierstrass-in-rn, def-complex-metric-convergence-and-continuity, def-metric-compactness, def-metric-ball, def-metric-convergence, thm-metric-closure-characterisation, lem-finite-choice, def-sequence, lem-index-map-grows, def-banach-space, lem-compositions-with-a-compact-operator-are-compact]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

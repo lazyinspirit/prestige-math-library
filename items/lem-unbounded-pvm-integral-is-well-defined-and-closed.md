@@ -2,7 +2,7 @@
 id: lem-unbounded-pvm-integral-is-well-defined-and-closed
 kind: lemma
 title: "The unbounded PVM integral is densely defined, closed and normal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unbounded-integral-against-a-pvm, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-densely-defined-closed-and-closable-operator, def-countable-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Theorem 3.2 and (3.29)-(3.33), pp.104-105"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

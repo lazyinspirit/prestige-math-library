@@ -2,7 +2,7 @@
 id: def-borel-functional-calculus-for-a-bounded-normal-operator
 kind: definition
 title: Borel functional calculus for a bounded normal operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-continuous-functional-calculus-produces-a-regular-pvm, thm-continuous-functional-calculus-properties, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, def-hilbert-space-adjoint, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, def-measurable-function-between-measurable-spaces, def-projection-valued-measure, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Theorem 5.6, pp.17–20"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

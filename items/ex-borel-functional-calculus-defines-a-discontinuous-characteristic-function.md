@@ -2,7 +2,7 @@
 id: ex-borel-functional-calculus-defines-a-discontinuous-characteristic-function
 kind: example
 title: Borel functional calculus defines a discontinuous characteristic function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, ex-pvm-of-a-multiplication-operator, def-borel-functional-calculus-for-a-bounded-normal-operator, def-l-p-space-as-a-quotient-by-null-functions, cor-spectral-projections-and-resolution-of-the-identity, def-orthogonality-and-orthogonal-complement, def-hilbert-space, def-axiom-of-choice]
@@ -14,6 +14,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.6.2–5.7, printed pp.277–296"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

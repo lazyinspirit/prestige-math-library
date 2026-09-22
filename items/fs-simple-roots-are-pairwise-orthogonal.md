@@ -2,7 +2,7 @@
 id: fs-simple-roots-are-pairwise-orthogonal
 kind: false-statement
 title: Simple roots are pairwise orthogonal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-distinct-simple-roots-have-nonpositive-inner-product, thm-existence-of-each-classified-root-system, def-positive-system-and-base-of-simple-roots]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Lemma 2.51 and (2.50), printed pp. 155-156"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

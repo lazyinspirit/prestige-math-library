@@ -2,7 +2,7 @@
 id: thm-first-chern-class-classifies-complex-line-bundles
 kind: theorem
 title: The first Chern class classifies complex line bundles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-axiom-of-choice", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "def-stiefel-space-grassmannian-and-tautological-bundle", "def-chern-classes-from-the-projective-bundle-relation", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "thm-eilenberg-maclane-spaces-represent-singular-cohomology", "lem-circle-and-path-loop-models-for-eilenberg-maclane-induction", "thm-milnor-join-model-is-a-contractible-free-g-space", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "lem-cohomology-ring-of-infinite-complex-projective-space", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "prop-relative-cw-inclusions-are-cofibrations", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "First Chern class as a complete invariant, printed pp.86-88"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

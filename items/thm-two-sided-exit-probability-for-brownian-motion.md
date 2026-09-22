@@ -2,7 +2,7 @@
 id: thm-two-sided-exit-probability-for-brownian-motion
 kind: theorem
 title: "Two-sided Brownian exit probability"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion-started-at-x, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times, thm-strong-markov-property-of-brownian-motion, def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, cor-law-of-the-brownian-maximum, def-standard-normal-and-normal-laws, lem-brownian-transition-semigroup-property, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-basic-algebra-and-order-properties-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-wiener-measure-on-continuous-path-space, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Section 6.7"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three
 kind: lemma
 title: The first connective complex K-theory Postnikov invariant is integral Sq-three
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-postnikov-k-invariant", "def-postnikov-section-and-postnikov-tower", "thm-postnikov-towers-exist-for-connected-cw-complexes", "thm-simple-postnikov-stages-are-classified-by-k-invariants", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces", "def-stable-natural-cohomology-operation", "def-bockstein-connecting-operation", "def-steenrod-squares-from-cup-i-products", "def-sequential-prespectrum-spectrum-and-adjoint-structure-maps", "def-stable-homotopy-groups-of-a-sequential-prespectrum", "def-axiom-of-choice"]
@@ -16,6 +16,8 @@ sources:
     - title: "J. F. Adams, Stable Homotopy and Generalised Homology, Proposition 16.6 and its proof, printed pp. 391–393"
       url: https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Adams-SHGH-latex2.pdf
       locator: "Proposition 16.6 and its proof, printed pp. 391–393"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

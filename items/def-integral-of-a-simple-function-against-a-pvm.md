@@ -2,7 +2,7 @@
 id: def-integral-of-a-simple-function-against-a-pvm
 kind: definition
 title: Integral of a simple function against a pvm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-projection-valued-measure, def-complex-simple-function, def-measurable-space, def-countable-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Proposition 5.3 and Definition 5.1, pp.16–18"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

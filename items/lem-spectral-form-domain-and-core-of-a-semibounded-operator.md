@@ -2,7 +2,7 @@
 id: lem-spectral-form-domain-and-core-of-a-semibounded-operator
 kind: lemma
 title: "Spectral form domain and core of a semibounded operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-unbounded-integral-against-a-pvm, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-dominated-convergence, def-axiom-of-choice, def-projection-valued-measure, def-hilbert-space]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 3.1, (3.52)-(3.53), and Section 4.4 form-domain discussion, pp.110 and 139-141"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

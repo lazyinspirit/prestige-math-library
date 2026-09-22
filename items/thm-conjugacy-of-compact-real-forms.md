@@ -2,7 +2,7 @@
 id: thm-conjugacy-of-compact-real-forms
 kind: theorem
 title: Conjugacy of compact real forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-existence-of-a-compact-real-form, thm-real-forms-correspond-to-conjugate-linear-involutions, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, thm-cartans-semisimplicity-criterion, cor-semisimple-lie-algebras-are-centerless-and-perfect, prop-trace-forms-are-symmetric-and-invariant, def-killing-form-of-a-finite-dimensional-lie-algebra, def-real-form-of-a-complex-lie-algebra, def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-self-adjoint-and-normal-endomorphism, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.4, printed pp. 203-205"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-compact-does-not-imply-hilbert-schmidt
 kind: counterexample
 title: Compact does not imply Hilbert Schmidt
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-diagonal-schatten-class-criteria-on-ell-two, thm-p-series-rational, def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, def-compact-linear-operator, def-trace-class-operator, def-square-summable-family-on-an-arbitrary-index-set, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

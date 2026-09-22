@@ -1,7 +1,7 @@
 ---
 page: brownian-path-properties
 title: Brownian Path Properties
-status: draft
+status: published
 items:
   - thm-brownian-paths-are-not-holder-of-order-one-half-on-any-interval
   - thm-brownian-paths-are-nowhere-differentiable

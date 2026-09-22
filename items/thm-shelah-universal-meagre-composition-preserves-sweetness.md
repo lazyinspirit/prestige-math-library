@@ -2,7 +2,7 @@
 id: thm-shelah-universal-meagre-composition-preserves-sweetness
 kind: theorem
 title: Composition with universal-meagre forcing preserves sweetness
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-sweetness-model, def-shelah-universal-meagre-forcing, def-two-step-forcing-iteration, thm-forcing-theorem, def-axiom-of-choice]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Composition Lemma 7.6, Subclaim 7.8 and Claim 7.11, pp. 36-41"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

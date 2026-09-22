@@ -2,7 +2,7 @@
 id: lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy
 kind: lemma
 title: A minimizing sequence in a convex set is Cauchy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-parallelogram-law, def-infimum, def-relative-normed-convexity-and-separation, def-real-and-complex-inner-product-space]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

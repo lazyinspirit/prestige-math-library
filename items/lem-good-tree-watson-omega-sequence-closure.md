@@ -2,7 +2,7 @@
 id: lem-good-tree-watson-omega-sequence-closure
 kind: lemma
 title: "The Good-Tree-Watson symmetric model is closed under omega-sequences from the full extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-good-tree-watson-symmetric-stone-model, thm-forcing-theorem, lem-symmetry-lemma-for-forcing-automorphisms, def-forcing-name-automorphism-action, def-symmetric-forcing-system-and-hereditarily-symmetric-names, thm-hereditarily-symmetric-interpretations-form-a-zf-model, def-natural-numbers, def-forcing-preorder-compatibility-and-filter, def-axiom-of-choice, thm-well-ordering-theorem, thm-transfinite-recursion, def-dense-open-sets-and-model-generic-filters, lem-forcing-monotonicity-density-and-decision, lem-names-for-pairs-functions-and-ordinals]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Thomas J. Jech, The Axiom of Choice"
       url: "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
       locator: "Chapter 8, §2, Lemma 8.5, printed pp. 123-124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

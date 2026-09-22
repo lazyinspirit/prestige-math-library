@@ -2,7 +2,7 @@
 id: def-complex-flag-bundle-and-chern-roots
 kind: definition
 title: Complex flag bundle and Chern roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complex-projective-bundle-and-tautological-complex-line, def-chern-classes-from-the-projective-bundle-relation, thm-numerable-vector-bundles-admit-bundle-metrics, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, def-axiom-of-choice, thm-integral-complex-projective-bundle-theorem, thm-subordinate-partitions-of-unity-exist]
@@ -18,6 +18,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Flag bundle and orthogonal splitting, printed pp.80-82"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

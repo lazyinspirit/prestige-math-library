@@ -2,7 +2,7 @@
 id: def-quadratic-variation-along-a-partition-sequence
 kind: definition
 title: "Quadratic variation along a partition sequence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partition-and-refinement, def-continuity-real, thm-heine-borel-r]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.8"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

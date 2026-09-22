@@ -2,7 +2,7 @@
 id: lem-complex-orientation-of-underlying-real-bundles
 kind: lemma
 title: The complex orientation of the underlying real bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-topological-vector-bundle, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-oriented-real-vector-bundle-and-oriented-frame-bundle, thm-vector-bundles-glued-from-transition-cocycles, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, cor-endomorphisms-over-an-algebraically-closed-field-are-triangularisable, lem-characteristic-polynomial-of-block-triangular-matrix, def-euler-class-by-zero-section-pullback-of-the-thom-class, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.2"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Complexification and the (-1)^n orientation comparison, printed pp.94-96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-cross-ito-isometry
 kind: lemma
 title: "Cross Ito isometry"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ito-isometry-for-elementary-integrands, lem-elementary-ito-integral-is-independent-of-the-step-representation, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Lemma 5.22"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-generator-of-a-unitary-group-is-skew-adjoint
 kind: lemma
 title: "The generator of a unitary group is closed and skew-adjoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-laplace-resolvents-of-a-unitary-group, thm-self-adjointness-range-criterion, thm-self-adjoint-resolvent-estimate, def-infinitesimal-generator-of-a-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-strongly-continuous-one-parameter-unitary-group, def-hilbert-space, def-countable-choice, def-dependent-choice, def-densely-defined-closed-and-closable-operator, def-adjoint-of-a-densely-defined-unbounded-operator, thm-cauchy-schwarz-in-an-inner-product-space, lem-bochner-integral-norm-inequality, def-bochner-integrable-function, thm-newton-leibniz-with-interior-derivative, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-monotone-convergence-for-the-integral]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Theorem 5.3 with proof, pp.147-148"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

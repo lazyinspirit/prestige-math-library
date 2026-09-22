@@ -2,7 +2,7 @@
 id: ex-unitization-of-a-nonunital-banach-algebra
 kind: example
 title: Unitization of a nonunital Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unital-banach-algebra, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-banach-space]
@@ -17,6 +17,8 @@ sources:
       url: "https://arxiv.org/pdf/1211.3404"
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1.1, printed pp. 209–214"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

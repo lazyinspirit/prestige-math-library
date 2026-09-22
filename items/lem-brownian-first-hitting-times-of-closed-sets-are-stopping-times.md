@@ -2,7 +2,7 @@
 id: lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times
 kind: lemma
 title: "Brownian closed-set hitting times are stopping times"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-wiener-measure-on-continuous-path-space, thm-existence-of-continuous-brownian-motion, def-continuous-time-filtration-and-all-pairs-martingale, def-axiom-of-choice, def-open-and-closed-in-r, thm-bolzano-weierstrass, lem-rat-embeds-dense]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Theorem 6.15"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

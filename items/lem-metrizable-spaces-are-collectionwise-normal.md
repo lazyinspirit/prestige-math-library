@@ -2,7 +2,7 @@
 id: lem-metrizable-spaces-are-collectionwise-normal
 kind: lemma
 title: "Metrizable spaces are collectionwise normal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-metrizable-space, def-metric-topology, def-normalized-families-and-collectionwise-normality, lem-distance-to-set-is-lipschitz, lem-discrete-families-are-locally-finite, lem-locally-finite-unions-and-closures, def-metric-bounded-diameter, def-infimum, def-metric-ball, def-discrete-family-and-sigma-bases]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

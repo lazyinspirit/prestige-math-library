@@ -2,7 +2,7 @@
 id: ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras
 kind: example
 title: Root systems B_2 and C_2 from matrix Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion]
@@ -21,6 +21,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the general reduced crystallographic root-system theorem."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

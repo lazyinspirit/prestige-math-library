@@ -2,7 +2,7 @@
 id: lem-chevalley-basis-and-real-structure-constants
 kind: lemma
 title: Chevalley basis and real structure constants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra,
@@ -47,6 +47,8 @@ sources:
       locator: "Lecture 39, §39.1 (automorphisms of semisimple Lie algebras, Prop. 39.3) and §39.4 (the Cartan involution omega with omega(h_j) = -h_j, omega(e_j) = -f_j, omega(f_j) = -e_j, and the resulting real forms), printed pp. 180-184"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

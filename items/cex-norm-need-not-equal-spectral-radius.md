@@ -2,7 +2,7 @@
 id: cex-norm-need-not-equal-spectral-radius
 kind: counterexample
 title: Norm need not equal spectral radius
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectral-radius, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-axiom-of-choice, ex-spectrum-in-a-finite-dimensional-matrix-algebra]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.2.2, printed p. 222"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

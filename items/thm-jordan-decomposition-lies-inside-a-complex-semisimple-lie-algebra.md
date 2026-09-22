@@ -2,7 +2,7 @@
 id: thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra
 kind: theorem
 title: Jordan decomposition lies inside a complex semisimple Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-abstract-jordan-decomposition-in-a-lie-algebra, thm-additive-jordan-chevalley-decomposition, lem-jordan-chevalley-parts-agree-under-adjoint-representation, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Proposition 19.3"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

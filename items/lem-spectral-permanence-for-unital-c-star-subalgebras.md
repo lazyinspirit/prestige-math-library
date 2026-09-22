@@ -2,7 +2,7 @@
 id: lem-spectral-permanence-for-unital-c-star-subalgebras
 kind: lemma
 title: Spectral permanence for unital c star subalgebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-commutative-gelfand-naimark, thm-complex-stone-weierstrass-self-adjoint, def-axiom-of-choice, def-c-star-algebra, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-maximal-ideal-space-is-compact-hausdorff, def-character-and-maximal-ideal-space, def-unital-banach-algebra]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.3, printed pp.235–245"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

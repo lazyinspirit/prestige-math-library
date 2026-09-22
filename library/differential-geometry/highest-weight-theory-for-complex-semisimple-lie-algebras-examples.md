@@ -1,7 +1,7 @@
 ---
 page: highest-weight-theory-for-complex-semisimple-lie-algebras-examples
 title: Highest Weight Theory for Complex Semisimple Lie Algebras — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-all-finite-dimensional-irreducible-sl-two-modules

@@ -2,7 +2,7 @@
 id: thm-dmc-tree-and-successor-menu-formulations
 kind: theorem
 title: "The tree and successor-menu formulations of DMC are equivalent"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dependent-multiple-choice-finite-level-tree, def-multiple-and-dependent-multiple-choice, def-function, def-finite-cardinality, def-natural-numbers, thm-subset-of-a-finite-set, thm-sum-rule]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-pathwise-riemann-stieltjes-integration-does-not-construct-the-brownian-ito-integral
 kind: counterexample
 title: "Bounded-variation Riemann-Stieltjes theory does not construct the Brownian Ito integral"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-brownian-paths-have-infinite-total-variation-on-every-interval, def-bounded-variation-and-total-variation, def-partition-and-refinement, thm-riemann-stieltjes-existence-continuous-bv, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, def-brownian-motion, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Section 5.1"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

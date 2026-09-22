@@ -2,7 +2,7 @@
 id: thm-spectral-theorem-for-bounded-normal-operators-pvm-form
 kind: theorem
 title: Spectral theorem for bounded normal operators pvm form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-continuous-functional-calculus-produces-a-regular-pvm, thm-continuous-functional-calculus-for-bounded-normal-operators, thm-continuous-functional-calculus-properties, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, thm-complex-stone-weierstrass-self-adjoint, def-spectrum-and-resolvent-of-a-bounded-operator, lem-spectral-permanence-for-unital-c-star-subalgebras, thm-bounded-inverse-theorem, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-c-star-algebra-generated-by-a-normal-operator, def-projection-valued-measure, thm-continuous-image-of-a-compact-space-is-compact, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Corollary 5.7, pp.19–20"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

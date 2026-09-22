@@ -2,7 +2,7 @@
 id: prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed-covectors
 kind: proposition
 title: Moment maps for one action form an affine space over coadjoint-fixed covectors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, def-coadjoint-representation-of-a-lie-group, prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function, thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

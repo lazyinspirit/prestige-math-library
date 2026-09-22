@@ -2,7 +2,7 @@
 id: lem-closed-ideal-quotient-is-a-banach-algebra
 kind: lemma
 title: Closed ideal quotient is a Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unital-banach-algebra, thm-quotient-of-banach-by-closed-subspace-is-banach, lem-neumann-series, def-countable-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

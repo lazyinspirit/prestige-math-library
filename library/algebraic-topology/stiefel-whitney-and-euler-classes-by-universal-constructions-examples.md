@@ -1,7 +1,7 @@
 ---
 page: stiefel-whitney-and-euler-classes-by-universal-constructions-examples
 title: "Stiefel Whitney and Euler Classes by Universal Constructions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-stiefel-whitney-class-of-the-universal-real-line

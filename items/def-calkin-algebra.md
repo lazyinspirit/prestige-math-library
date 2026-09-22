@@ -2,7 +2,7 @@
 id: def-calkin-algebra
 kind: definition
 title: Calkin algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-unital-banach-algebra", "thm-quotient-of-banach-by-closed-subspace-is-banach", "thm-norm-limit-of-compact-operators-is-compact", "lem-compositions-with-a-compact-operator-are-compact", "lem-linear-combinations-of-compact-operators-are-compact", "thm-bounded-operator-space-is-banach", "cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact", "def-countable-choice", "def-compact-linear-operator", "def-operator-norm", "lem-finite-rank-operators-are-compact"]
@@ -14,6 +14,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1 (Banach algebras) used only for the quotient algebra conventions of this definition"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

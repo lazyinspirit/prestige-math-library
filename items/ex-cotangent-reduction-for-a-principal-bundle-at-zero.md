@@ -2,7 +2,7 @@
 id: ex-cotangent-reduction-for-a-principal-bundle-at-zero
 kind: example
 title: Cotangent reduction for a principal bundle at zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, thm-marsden-weinstein-meyer-symplectic-reduction, thm-free-proper-action-quotient-manifold, def-tautological-one-form-on-a-cotangent-bundle, prop-cotangent-lifts-are-symplectomorphisms, def-countable-choice, lem-tautological-cotangent-moment-map-is-equivariant, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, cor-local-normal-form-for-submersions]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.4, printed page 150
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

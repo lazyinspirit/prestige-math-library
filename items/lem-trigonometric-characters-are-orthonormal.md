@@ -2,7 +2,7 @@
 id: lem-trigonometric-characters-are-orthonormal
 kind: lemma
 title: The trigonometric characters are orthonormal in $L^2$ of the torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-sine-and-cosine-derivatives, def-countable-choice, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-chain-rule, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

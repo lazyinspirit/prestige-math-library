@@ -2,7 +2,7 @@
 id: thm-existence-of-a-compact-real-form
 kind: theorem
 title: Existence of a compact real form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, lem-chevalley-basis-and-real-structure-constants, thm-serre-presentation-theorem, thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, cor-opposite-root-spaces-pair-nondegenerately, def-axiom-of-choice, thm-root-sl-two-triple, thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.4 and Proposition 39.8, printed pp. 203-204"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-multiplicative-ahss-for-a-multiplicative-generalized-theory
 kind: theorem
 title: Multiplicative AHSS for a multiplicative generalized theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, lem-pairings-of-skeletal-exact-couples-induce-multiplicative-ahss]
@@ -18,6 +18,8 @@ sources:
     - title: "Daniel Dugger, Multiplicative structures on homotopy spectral sequences II, §3.1 and Theorem 3.4, printed pp. 4–5"
       url: https://pages.uoregon.edu/ddugger/multb.pdf
       locator: "§3.1 pairing of filtering towers and Theorem 3.4 diagonal case, printed pp. 4–5"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

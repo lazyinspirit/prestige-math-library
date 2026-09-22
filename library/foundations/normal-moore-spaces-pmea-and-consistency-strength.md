@@ -1,7 +1,7 @@
 ---
 page: normal-moore-spaces-pmea-and-consistency-strength
 title: "Normal Moore Spaces, PMEA, and Consistency Strength"
-status: draft
+status: published
 items: [def-moore-spaces-and-developments, def-normalized-families-and-collectionwise-normality, lem-metrizable-spaces-are-collectionwise-normal, thm-moore-spaces-are-subparacompact, lem-collectionwise-normal-moore-spaces-are-screenable, lem-sigma-cellular-base-yields-a-compatible-metric, thm-normal-screenable-moore-spaces-are-metrizable, thm-collectionwise-normal-moore-spaces-are-metrizable, def-q-sets-and-heath-moore-space-interface, lem-solovay-almost-disjoint-extension-under-ma, lem-ma-produces-an-uncountable-q-set, thm-bing-q-set-moore-space-is-normal-and-nonmetrizable, thm-ma-not-ch-normal-nonmetrizable-moore-space, def-product-measure-extension-axioms-pmea-and-pmea-sigma, lem-pmea-three-quarter-separation-estimate, thm-pmea-normal-low-character-spaces-are-collectionwise-normal, thm-pmea-implies-normal-moore-space-conjecture, thm-strongly-compact-relative-consistency-normal-moore, def-fleissner-hyp-covering-interface, lem-ladder-separation-from-hyp, def-dodd-jensen-covering-and-square-package, thm-dodd-jensen-covering-supplies-fleissner-hyp-data, thm-no-inner-model-measurable-implies-fleissner-hyp, thm-fleissner-normal-moore-space-construction, thm-ch-normal-nonmetrizable-moore-space, cor-v-equals-l-refutes-normal-moore-space-conjecture, thm-fleissner-hyp-normal-nonmetrizable-moore-space, thm-normal-moore-implies-inner-model-measurable, thm-formal-nmsc-consistency-lower-bound, thm-normal-moore-consistency-strength-sandwich, rem-omega-one-strongly-compact-normal-moore-refinement]
 examples: []
 ---

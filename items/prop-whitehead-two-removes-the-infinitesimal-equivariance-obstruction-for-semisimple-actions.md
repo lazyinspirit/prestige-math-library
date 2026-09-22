@@ -2,7 +2,7 @@
 id: prop-whitehead-two-removes-the-infinitesimal-equivariance-obstruction-for-semisimple-actions
 kind: proposition
 title: Whitehead's second lemma removes the infinitesimal equivariance obstruction for semisimple actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-nonequivariance-defect-of-an-infinitesimal-moment-map-is-a-constant-lie-algebra-two-cocycle, prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity, thm-second-whitehead-lemma, def-lie-algebra-cohomology, def-chevalley-eilenberg-differential, def-simple-semisimple-and-reductive-lie-algebras, def-moment-map-and-component-hamiltonian, def-poisson-bracket-on-a-symplectic-manifold, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §7.3, Remark 7.16, printed pages 85--86
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-approximate-unit-and-proper-c-star-morphism
 kind: definition
 title: Approximate unit and proper C star morphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-c-star-algebra, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

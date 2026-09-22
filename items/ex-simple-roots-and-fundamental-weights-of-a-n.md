@@ -2,7 +2,7 @@
 id: ex-simple-roots-and-fundamental-weights-of-a-n
 kind: example
 title: Simple roots and fundamental weights of A_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fundamental-weights, ex-classical-root-systems-in-euclidean-coordinates, thm-existence-of-each-classified-root-system, def-coroot-and-dual-root-system]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 21, Example 21.18 and Section 21.6"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

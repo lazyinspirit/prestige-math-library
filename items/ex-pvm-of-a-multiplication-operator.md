@@ -2,7 +2,7 @@
 id: ex-pvm-of-a-multiplication-operator
 kind: example
 title: Pvm of a multiplication operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, def-l-p-space-as-a-quotient-by-null-functions, def-essential-supremum-with-respect-to-a-measure, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-finite-sigma-finite-and-semifinite-measures, cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-spectrum-and-resolvent-of-a-bounded-operator, def-operator-norm, def-measurable-function-between-measurable-spaces, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-hilbert-space-adjoint, def-projection-valued-measure, thm-bounded-borel-pvm-integral]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §4.1, printed pp.113–115"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

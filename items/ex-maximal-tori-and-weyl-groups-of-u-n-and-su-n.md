@@ -2,7 +2,7 @@
 id: ex-maximal-tori-and-weyl-groups-of-u-n-and-su-n
 kind: example
 title: Maximal tori and Weyl groups of U(n) and SU(n)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-group-of-a-compact-connected-lie-group, thm-analytic-and-root-system-weyl-groups-agree, def-axiom-of-choice, def-torus-and-maximal-torus-in-a-compact-lie-group]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§8 (SU(n) and U(n) examples)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

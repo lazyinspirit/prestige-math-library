@@ -2,7 +2,7 @@
 id: prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition
 kind: proposition
 title: Bracket relations and Killing signs in a Cartan decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §2, Proposition 6.12 and its proof, printed pp. 359-360"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

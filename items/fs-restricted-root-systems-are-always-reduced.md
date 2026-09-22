@@ -2,7 +2,7 @@
 id: fs-restricted-root-systems-are-always-reduced
 kind: false-statement
 title: Restricted root systems are always reduced
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-restricted-root-systems-may-be-nonreduced, def-reduced-crystallographic-euclidean-root-system, def-restricted-root-and-restricted-root-space, def-axiom-of-choice, thm-restricted-root-space-decomposition]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §4, the examples after Proposition 6.40 for su(p,q) with p > q, printed pp. 370-371; §11, the restricted-root computation for su(p,q), printed pp. 422-423"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

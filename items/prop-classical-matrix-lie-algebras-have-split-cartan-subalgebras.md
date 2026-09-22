@@ -2,7 +2,7 @@
 id: prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras
 kind: proposition
 title: Split Cartan subalgebras of classical matrix Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-classical-complex-matrix-lie-algebras, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 20.3, Examples 20.12-20.14, printed pp. 110-111"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

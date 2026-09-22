@@ -2,7 +2,7 @@
 id: thm-cauchy-schwarz-in-an-inner-product-space
 kind: theorem
 title: "Cauchy–Schwarz: $|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|$, with equality exactly for dependent pairs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-inner-product-space, def-inner-product-norm, thm-nth-roots-exist, lem-complex-conjugation-and-modulus-laws, lem-of-abs-value, lem-of-square-monotone, def-linear-independence]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

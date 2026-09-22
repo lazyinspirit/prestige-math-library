@@ -2,7 +2,7 @@
 id: ex-gelfand-kolmogorov-recovers-beta-x-not-x
 kind: example
 title: Free maximal ideals of C(N) and beta N
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-gelfand-kolmogorov-for-rings-of-continuous-functions, lem-maximal-ideals-of-c-of-x-and-zero-set-ultrafilters, thm-ultrafilter-lemma, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

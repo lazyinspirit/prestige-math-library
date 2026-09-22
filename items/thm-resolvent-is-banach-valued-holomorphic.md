@@ -2,7 +2,7 @@
 id: thm-resolvent-is-banach-valued-holomorphic
 kind: theorem
 title: Resolvent is Banach-valued holomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-neumann-series, thm-invertible-group-is-open-and-inversion-is-continuous, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-unital-banach-algebra]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Chapter 2 §2.3, printed pp. 30–33"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-zero-free-entire-function-of-exponential-type-is-an-exponential
 kind: lemma
 title: Zero free entire function of exponential type is an exponential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-path-independence-and-complex-primitive-criterion", "cor-cauchy-theorem-convex-domain", "thm-algebra-of-complex-derivatives", "thm-chain-rule-for-complex-derivatives", "cor-complex-power-series-sums-have-derivatives-of-all-orders", "thm-zero-complex-derivative-on-a-domain-implies-constant", "thm-liouville-bounded-entire-function", "thm-boundary-maximum-modulus-principle", "cor-complex-power-series-sums-are-analytic", "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition", "thm-holomorphic-if-and-only-if-analytic", "thm-complex-exponential-is-entire-with-derivative-itself", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-complex-exponential-addition-and-real-extension", "cor-exponential-is-a-bijection-onto-positive-reals", "thm-exponential-is-strictly-increasing"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

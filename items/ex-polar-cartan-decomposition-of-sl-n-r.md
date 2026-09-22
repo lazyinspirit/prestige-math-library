@@ -2,7 +2,7 @@
 id: ex-polar-cartan-decomposition-of-sl-n-r
 kind: example
 title: Polar cartan decomposition of sl n r
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-axiom-of-choice, ex-general-and-special-linear-lie-groups, ex-orthogonal-and-special-orthogonal-lie-groups, ex-cartan-involution-and-k-plus-p-for-sl-n-r, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, thm-polar-decomposition, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, ex-matrix-exponential-as-the-lie-group-exponential, def-determinant-of-a-square-matrix, cor-determinant-of-an-inverse, cor-determinant-multiplicativity-from-the-top-exterior-power]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1 and the polar-decomposition example, printed pp. 217-218"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

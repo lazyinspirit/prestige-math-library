@@ -2,7 +2,7 @@
 id: ex-canonical-least-ball-selection-in-separable-baire-proof
 kind: example
 title: "Canonical least-ball selection removes choice"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-separable-complete-metric-baire-in-zf, def-metric-ball, def-metric-topology, def-separable-space, def-countable, def-natural-numbers, thm-n-cross-n-countable, thm-metric-open-set-algebra, thm-well-ordering-principle, thm-recursion, def-metric-space, cor-archimedean-reciprocal]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

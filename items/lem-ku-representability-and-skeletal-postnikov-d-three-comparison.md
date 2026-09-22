@@ -2,7 +2,7 @@
 id: lem-ku-representability-and-skeletal-postnikov-d-three-comparison
 kind: lemma
 title: KU representability and the skeletal–Postnikov d-three comparison
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, thm-finite-rank-complement-theorem-over-compact-hausdorff-bases, def-complex-topological-k-zero-by-grothendieck-completion, thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, thm-complex-bott-periodicity, def-sequential-prespectrum-spectrum-and-adjoint-structure-maps, def-stable-homotopy-groups-of-a-sequential-prespectrum, thm-cohomological-atiyah-hirzebruch-spectral-sequence, lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients, thm-naturality-and-edge-maps-of-the-ahss, thm-an-exact-couple-generates-a-spectral-sequence, def-postnikov-k-invariant, thm-obstruction-theory-for-lifting-through-a-fibration, thm-eilenberg-maclane-spaces-represent-singular-cohomology, lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three, def-axiom-of-choice]
@@ -22,6 +22,8 @@ sources:
     - title: "C. R. F. Maunder, The spectral sequence of an extraordinary cohomology theory, Theorem 3.3"
       url: https://doi.org/10.1017/S0305004100037245
       locator: "Theorem 3.3, pp. 567–574"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

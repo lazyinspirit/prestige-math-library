@@ -2,7 +2,7 @@
 id: cor-v-equals-l-refutes-normal-moore-space-conjecture
 kind: corollary
 title: "V=L refutes the normal Moore space conjecture"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-generalized-continuum-hypothesis-in-l, thm-ch-normal-nonmetrizable-moore-space, def-fleissner-hyp-covering-interface, def-moore-spaces-and-developments, thm-cantor-powerset]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Fleissner, Normal nonmetrizable Moore space from continuum hypothesis or nonexistence of inner models with measurable cardinals"
       url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC345971/"
       locator: "Theorem 1 (CH case), printed p. 1371"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement
@@ -49,6 +51,9 @@ exists ([[thm-ch-normal-nonmetrizable-moore-space]]).
 **Proof technique:** direct.
 
 1.1 Assume $V = L$. By [F1] both AC and GCH hold. [given, F1]
+
 2.1 By [F2], GCH gives $2^{\aleph_0} = \aleph_1$, i.e. CH. [step 1.1, F2]
+
 3.1 By [F3], applied under CH, there is a normal nonmetrizable Moore space. [step 2.1, F3]
+
 4.1 A normal Moore space that is not metrizable is a counterexample to the normal Moore space conjecture, so $V = L$ refutes it. [step 3.1, given] ∎

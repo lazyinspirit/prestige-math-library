@@ -2,7 +2,7 @@
 id: ex-chern-class-of-tautological-and-hyperplane-lines-on-complex-projective-space
 kind: example
 title: Chern class of tautological and hyperplane lines on complex projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["prop-first-chern-class-of-tensor-dual-and-conjugate-lines", "lem-integral-cohomology-ring-of-complex-projective-space-by-splitting", "def-chern-classes-from-the-projective-bundle-relation", "thm-thom-isomorphism-for-oriented-vector-bundles", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-thom-class-by-fiberwise-normalization", "def-fundamental-class-of-a-compact-oriented-manifold", "thm-excision-for-singular-cohomology", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-kronecker-evaluation-pairing", "def-axiom-of-choice"]
@@ -15,6 +15,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.2"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Fiber-normalized Thom class and zero-section Euler class, printed p.88"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

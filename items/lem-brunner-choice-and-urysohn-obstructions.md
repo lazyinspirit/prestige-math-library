@@ -2,7 +2,7 @@
 id: lem-brunner-choice-and-urysohn-obstructions
 kind: lemma
 title: "Brunner's models satisfy the required choice and Urysohn obstructions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brunner-ordered-lauchli-permutation-models, def-normal-and-t4-spaces, def-hausdorff-space, def-continuous-map-top, thm-a-compact-hausdorff-space-is-regular-and-normal, def-countable-choice, def-compact-space, def-subspace-topology-top, def-order-topology-on-a-linearly-ordered-set, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-interval, def-axiom-of-choice, thm-countable-union-of-countable, thm-heine-borel-characterisation-r, cor-interval-uncountable, lem-q-and-irrationals-dense-r, thm-intermediate-value, thm-rationals-countable]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

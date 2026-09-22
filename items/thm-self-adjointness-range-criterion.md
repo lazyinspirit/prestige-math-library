@@ -2,7 +2,7 @@
 id: thm-self-adjointness-range-criterion
 kind: theorem
 title: "Range criterion for self-adjointness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-self-adjoint-resolvent-estimate, def-adjoint-of-a-densely-defined-unbounded-operator, thm-double-orthogonal-complement-is-closure, def-orthogonality-and-orthogonal-complement, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Exercise 6.48 and Theorem 6.35 area, Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

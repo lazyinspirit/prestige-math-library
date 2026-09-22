@@ -2,7 +2,7 @@
 id: def-euler-class-by-zero-section-pullback-of-the-thom-class
 kind: definition
 title: Euler class by zero-section pullback of the Thom class
-status: draft
+status: published
 origin: pipeline
 deps: ["def-thom-euler-class-of-an-oriented-vector-bundle", "def-thom-class-by-fiberwise-normalization", "def-r-oriented-vector-bundle-and-orientation-local-system", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 Euler class, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

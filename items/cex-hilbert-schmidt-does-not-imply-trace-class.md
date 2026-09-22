@@ -2,7 +2,7 @@
 id: cex-hilbert-schmidt-does-not-imply-trace-class
 kind: counterexample
 title: Hilbert Schmidt does not imply trace class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-diagonal-schatten-class-criteria-on-ell-two, thm-p-series-rational, def-hilbert-schmidt-operator, def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, def-square-summable-family-on-an-arbitrary-index-set, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

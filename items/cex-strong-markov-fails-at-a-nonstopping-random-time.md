@@ -2,7 +2,7 @@
 id: cex-strong-markov-fails-at-a-nonstopping-random-time
 kind: counterexample
 title: "Strong Markov fails at a nonstopping random time"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-brownian-motion-started-at-x, thm-brownian-future-path-markov-property, thm-brownian-scaling, cor-law-of-the-brownian-maximum, cor-distribution-of-a-one-sided-brownian-hitting-time, lem-brownian-transition-semigroup-property, def-standard-normal-and-normal-laws, def-natural-and-usual-augmented-brownian-filtrations, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-taking-out-what-is-known, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Sections 6.4-6.5"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -1,7 +1,7 @@
 ---
 page: cartan-subalgebras-and-root-space-decompositions-examples
 title: Cartan Subalgebras and Root Space Decompositions — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cartan-subalgebra-and-roots-of-sl-two

@@ -2,7 +2,7 @@
 id: thm-restricted-root-space-decomposition
 kind: theorem
 title: Restricted root space decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-restricted-root-and-restricted-root-space, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, def-cartan-involution-of-a-real-semisimple-lie-algebra, cor-trace-is-invariant-under-similarity, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §4, Proposition 6.40 and its proof, printed pp. 370-371"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

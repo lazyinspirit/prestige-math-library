@@ -2,7 +2,7 @@
 id: ex-stiefel-whitney-class-of-the-universal-real-line
 kind: example
 title: Stiefel–Whitney class of the universal real line
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-real-projective-bundle-and-tautological-line", "def-tautological-degree-one-class-on-a-real-projective-bundle", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 34 universal line normalization, printed pp.123–126"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

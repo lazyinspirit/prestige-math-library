@@ -2,7 +2,7 @@
 id: ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two
 kind: example
 title: A Hilbert–Schmidt kernel operator is compact on L two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-l-two-kernels-give-hilbert-schmidt-operators, thm-hilbert-schmidt-operators-are-compact, ex-square-integrable-kernel-without-continuous-representative, def-hilbert-schmidt-operator, def-compact-linear-operator, def-finite-sigma-finite-and-semifinite-measures, def-completed-product-measure, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/1/4020/files/2017/12/analysis-slides-278829v.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, Lemma 3.23, printed pp. 93–94"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

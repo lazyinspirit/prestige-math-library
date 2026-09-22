@@ -2,7 +2,7 @@
 id: cex-trace-of-products-is-not-cyclic-without-summability
 kind: counterexample
 title: The unilateral shift obstructs a cyclic linear trace extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cyclicity-of-the-trace, ex-rank-one-operator-adjoint-norm-and-trace, thm-trace-is-absolutely-convergent-and-basis-independent, def-trace-of-a-trace-class-operator, def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-hilbert-space-fourier-expansion, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-square-summable-family-on-an-arbitrary-index-set, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-hilbert-schmidt-operator, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-real-and-complex-inner-product-space, def-operator-norm, def-bounded-linear-operator, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

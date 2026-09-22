@@ -2,7 +2,7 @@
 id: lem-collectionwise-normal-moore-spaces-are-screenable
 kind: lemma
 title: "Collectionwise normal Moore spaces are screenable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-normalized-families-and-collectionwise-normality, def-axiom-of-choice, def-discrete-family-and-sigma-bases, def-cover-refinement-and-local-finiteness, thm-closure-characterisation-top, def-topological-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "R. H. Bing, Metrization of topological spaces"
       url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf"
       locator: "Theorems 9 and 10 with proofs, printed p. 182"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-trace-is-absolutely-convergent-and-basis-independent
 kind: theorem
 title: Trace is absolutely convergent and basis independent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-trace-of-a-trace-class-operator, def-trace-class-operator, lem-nuclear-series-characterizes-trace-norm, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-hilbert-space-fourier-expansion, lem-finite-bessel-inequality, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-cauchy-schwarz-in-an-inner-product-space, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-metric-convergence, def-dense-top, def-countable, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

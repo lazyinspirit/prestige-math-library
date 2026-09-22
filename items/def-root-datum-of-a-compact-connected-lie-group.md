@@ -2,7 +2,7 @@
 id: def-root-datum-of-a-compact-connected-lie-group
 kind: definition
 title: Root datum of a compact connected Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-character-and-cocharacter-lattices-of-a-torus, def-roots-of-a-compact-connected-lie-group, thm-analytic-and-root-system-weyl-groups-agree, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §§7–8"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

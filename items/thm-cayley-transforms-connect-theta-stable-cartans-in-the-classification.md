@@ -2,7 +2,7 @@
 id: thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification
 kind: theorem
 title: Cayley transforms connect theta-stable Cartans in the classification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-cayley-transform-of-a-theta-stable-cartan-subalgebra, def-axiom-of-choice, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, prop-trace-forms-are-symmetric-and-invariant, def-cartan-involution-of-a-real-semisimple-lie-algebra, prop-complexification-preserves-semisimplicity, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-killing-form-orthogonality-of-root-spaces, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-lower-central-series-and-nilpotent-lie-algebra, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, thm-conjugacy-of-maximal-tori, def-torus-and-maximal-torus-in-a-compact-lie-group, thm-cartans-closed-subgroup-theorem, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, cor-semisimple-lie-algebras-are-centerless-and-perfect]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, Propositions 40.3 and 40.4 with their proofs, printed pp. 186-188"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

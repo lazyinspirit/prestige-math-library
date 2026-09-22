@@ -2,7 +2,7 @@
 id: ex-time-changed-quadratic-variation-of-an-ito-integral
 kind: example
 title: "A deterministic time-changed quadratic variation"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-quadratic-variation-of-an-ito-integral, def-locally-square-integrable-predictable-brownian-integrand, def-quadratic-variation-along-a-partition-sequence, def-progressively-measurable-and-predictable-process, lem-ac-supplies-sequential-choices-for-probability-constructions, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Theorem 3.2.6"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: fs-haar-measure-on-a-compact-group-is-only-left-invariant-not-right-invariant
 kind: false-statement
 title: Compact Haar measure is bi-invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["cor-normalized-haar-measure-on-a-compact-lie-group", "def-axiom-of-choice", "def-left-right-and-bi-invariant-borel-measure-on-a-lie-group", "cor-normalized-haar-probability-on-a-compact-group", "def-left-haar-integral-and-left-haar-measure"]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §1, uniqueness of normalized Haar measure on a compact Lie group"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

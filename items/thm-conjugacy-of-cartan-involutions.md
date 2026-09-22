@@ -2,7 +2,7 @@
 id: thm-conjugacy-of-cartan-involutions
 kind: theorem
 title: Conjugacy of Cartan involutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-existence-of-a-cartan-involution, def-cartan-involution-of-a-real-semisimple-lie-algebra, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, prop-trace-forms-are-symmetric-and-invariant, def-killing-form-of-a-finite-dimensional-lie-algebra, def-self-adjoint-and-normal-endomorphism, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1, printed pp. 217-218"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

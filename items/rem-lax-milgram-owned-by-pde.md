@@ -2,7 +2,7 @@
 id: rem-lax-milgram-owned-by-pde
 kind: remark
 title: Lax–Milgram is owned by the PDE track
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-riesz-representation-for-hilbert-space, def-bounded-linear-operator, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

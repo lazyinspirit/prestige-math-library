@@ -2,7 +2,7 @@
 id: thm-parallelogram-law
 kind: theorem
 title: The parallelogram law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space, def-inner-product-norm]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

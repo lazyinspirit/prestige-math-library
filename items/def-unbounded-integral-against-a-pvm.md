@@ -2,7 +2,7 @@
 id: def-unbounded-integral-against-a-pvm
 kind: definition
 title: "Integral of a measurable function against a projection-valued measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-projection-valued-measure, thm-pvm-integral-is-a-star-homomorphism, def-unbounded-linear-operator-domain-and-graph, def-countable-choice, lem-scalar-and-complex-measures-from-a-pvm, thm-bounded-borel-pvm-integral, thm-dominated-convergence, def-hilbert-space]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Theorem 6.38 (functional calculus), Sec. 6.4"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: ex-weighted-circle-actions-and-weighted-projective-singular-quotients
 kind: example
 title: Weighted circle actions and weighted projective singular quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map, thm-marsden-weinstein-meyer-symplectic-reduction, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, rem-nonregular-or-nonfree-symplectic-quotients-need-not-be-manifolds, def-fundamental-vector-field-of-a-left-action, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §8.1, Example 8.7, printed page 102
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

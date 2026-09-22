@@ -1,7 +1,7 @@
 ---
 page: chern-and-pontryagin-classes-by-splitting-and-complexification
 title: Chern and Pontryagin Classes by Splitting and Complexification
-status: draft
+status: published
 items:
   - lem-complex-orientation-of-underlying-real-bundles
   - def-complex-projective-bundle-and-tautological-complex-line

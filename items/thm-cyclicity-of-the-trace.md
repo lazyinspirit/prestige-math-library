@@ -2,7 +2,7 @@
 id: thm-cyclicity-of-the-trace
 kind: theorem
 title: Cyclicity of the trace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, lem-nuclear-series-characterizes-trace-norm, def-trace-of-a-trace-class-operator, def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, thm-hilbert-schmidt-operators-form-a-two-sided-ideal, thm-hilbert-schmidt-operators-are-compact, def-hilbert-schmidt-operator, lem-compositions-with-a-compact-operator-are-compact, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-finite-bessel-inequality, thm-cauchy-schwarz-in-an-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-square-summable-family-on-an-arbitrary-index-set, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-metric-convergence, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

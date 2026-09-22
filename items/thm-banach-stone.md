@@ -2,7 +2,7 @@
 id: thm-banach-stone
 kind: theorem
 title: Banach-Stone
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-extreme-points-of-the-dual-ball-of-c-of-k, lem-characters-of-continuous-functions-are-evaluations, def-transpose-of-a-bounded-operator, lem-transpose-is-bounded-and-has-the-same-norm, lem-transpose-reverses-composition, lem-evaluation-map-of-separating-family-is-an-embedding, thm-urysohn-lemma, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

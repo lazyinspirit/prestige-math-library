@@ -2,7 +2,7 @@
 id: prop-reduction-commutes-with-products
 kind: proposition
 title: Reduction commutes with products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-marsden-weinstein-meyer-symplectic-reduction", "prop-products-and-opposites-of-symplectic-manifolds", "def-moment-map-and-component-hamiltonian", "def-coadjoint-representation-of-a-lie-group", "def-symplectic-and-hamiltonian-lie-group-action", "def-countable-choice", "def-fundamental-vector-field-of-a-left-action", "thm-free-proper-action-quotient-manifold", "cor-local-normal-form-for-submersions"]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.3, printed page 149
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

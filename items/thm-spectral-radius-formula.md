@@ -2,7 +2,7 @@
 id: thm-spectral-radius-formula
 kind: theorem
 title: Spectral radius formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-spectral-radius", "def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-unital-banach-algebra", "lem-neumann-series", "lem-resolvent-identity", "thm-resolvent-is-banach-valued-holomorphic", "thm-cauchy-integral-formula-higher-derivatives", "thm-circle-integrals-of-integer-monomials", "cor-norm-recovered-from-the-dual-unit-ball", "lem-submultiplicative-root-limit", "lem-nth-root-of-constant-tends-to-one", "thm-polynomial-spectral-mapping", "def-axiom-of-choice", "cor-ml-estimate-for-complex-line-integrals"]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.3, printed pp. 30–33"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

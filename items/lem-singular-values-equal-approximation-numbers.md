@@ -2,7 +2,7 @@
 id: lem-singular-values-equal-approximation-numbers
 kind: lemma
 title: Singular values equal approximation numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-singular-value-decomposition-for-compact-operators, def-absolute-value-and-singular-values-of-a-compact-operator, thm-rank-nullity, thm-infimum-property, def-dimension, def-kernel-and-image-of-a-linear-map, def-operator-norm, def-bounded-linear-operator, def-infimum, def-compact-linear-operator, def-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-finite-bessel-inequality, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

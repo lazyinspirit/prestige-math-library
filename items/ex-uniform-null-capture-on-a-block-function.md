@@ -2,7 +2,7 @@
 id: ex-uniform-null-capture-on-a-block-function
 kind: example
 title: Uniform null capture for a constant block function
-status: draft
+status: published
 origin: pipeline
 deps: [lem-uniform-null-g-delta-capture-functions]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.11, pp. 47-50"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

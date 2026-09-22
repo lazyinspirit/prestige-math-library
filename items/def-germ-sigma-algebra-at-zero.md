@@ -2,7 +2,7 @@
 id: def-germ-sigma-algebra-at-zero
 kind: definition
 title: "The Brownian germ sigma-algebra at zero"
-status: draft
+status: published
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 7.2.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

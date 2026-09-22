@@ -2,7 +2,7 @@
 id: thm-partial-isometry-characterizations
 kind: theorem
 title: Partial isometry characterizations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-isometry-coisometry-and-partial-isometry, lem-kernel-range-orthogonality-for-hilbert-adjoints, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, thm-hilbert-adjoint-properties, def-operator-norm, def-hilbert-space-adjoint, def-inner-product-space, lem-orthogonal-complement-is-closed]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.3, printed pp.235–245"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

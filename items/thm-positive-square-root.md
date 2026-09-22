@@ -2,7 +2,7 @@
 id: thm-positive-square-root
 kind: theorem
 title: Positive square root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-properties, thm-complex-stone-weierstrass-self-adjoint, thm-commutative-gelfand-naimark, lem-spectral-permanence-for-unital-c-star-subalgebras, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, lem-spectrum-of-a-positive-operator-is-nonnegative, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-c-star-algebra-generated-by-a-normal-operator, def-order-on-bounded-self-adjoint-operators, thm-hilbert-adjoint-properties]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §3, printed pp.239–243"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

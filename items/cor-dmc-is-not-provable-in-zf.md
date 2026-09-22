@@ -2,7 +2,7 @@
 id: cor-dmc-is-not-provable-in-zf
 kind: corollary
 title: "If ZF is consistent, DMC is not provable in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-consistency-countable-choice-without-urysohn, thm-dmc-implies-urysohn-lemma, def-countable-choice, def-dependent-multiple-choice-finite-level-tree]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
       url: "https://doi.org/10.1090/proc/14848"
       locator: "Published erratum to the cited theorem"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

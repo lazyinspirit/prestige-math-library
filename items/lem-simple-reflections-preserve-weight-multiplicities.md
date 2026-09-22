@@ -2,7 +2,7 @@
 id: lem-simple-reflections-preserve-weight-multiplicities
 kind: lemma
 title: Simple reflections preserve weight multiplicities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-positive-system-and-base-of-simple-roots, def-weyl-group-of-a-root-system, def-root-reflection-from-a-coroot, prop-weyl-length-equals-positive-root-inversion-number, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

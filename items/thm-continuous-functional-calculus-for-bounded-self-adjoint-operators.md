@@ -2,7 +2,7 @@
 id: thm-continuous-functional-calculus-for-bounded-self-adjoint-operators
 kind: theorem
 title: Continuous functional calculus for bounded self adjoint operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-polynomial-calculus-is-isometric-for-self-adjoint-operators, thm-complex-stone-weierstrass-self-adjoint, thm-bounded-operator-space-is-banach, def-axiom-of-choice, lem-spectrum-of-a-self-adjoint-operator-is-real, def-self-adjoint-complex-function-algebra, thm-uniform-limit-continuous-complex-functions, thm-complex-plane-is-complete, lem-bounded-hilbert-operators-form-a-c-star-algebra, def-c-star-algebra-generated-by-a-normal-operator, def-c-star-algebra, thm-bounded-inverse-theorem, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-spectrum-and-resolvent-of-a-bounded-operator]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Example 4.9, pp.13–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

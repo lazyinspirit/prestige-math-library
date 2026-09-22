@@ -2,7 +2,7 @@
 id: cex-fixed-time-nondifferentiability-does-not-prove-nowhere-differentiability
 kind: counterexample
 title: "Fixed-time assertions do not yield a pathwise nowhere statement"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-takagi-function-is-continuous-and-nowhere-differentiable]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

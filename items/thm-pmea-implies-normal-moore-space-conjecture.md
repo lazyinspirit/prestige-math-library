@@ -2,7 +2,7 @@
 id: thm-pmea-implies-normal-moore-space-conjecture
 kind: theorem
 title: "PMEA implies the normal Moore space conjecture"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, thm-pmea-normal-low-character-spaces-are-collectionwise-normal, thm-collectionwise-normal-moore-spaces-are-metrizable, def-product-measure-extension-axioms-pmea-and-pmea-sigma, def-metrizable-space]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Theorems 5.1-5.3, printed pp. 9-11"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

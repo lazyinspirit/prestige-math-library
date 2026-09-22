@@ -2,7 +2,7 @@
 id: thm-first-possible-complex-k-ahss-differential-is-integral-sq-three
 kind: theorem
 title: The first possible complex K-theory AHSS differential is integral Sq-three
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-complex-k-theory-ahss, thm-naturality-and-edge-maps-of-the-ahss, thm-complex-bott-periodicity, lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three, lem-ku-representability-and-skeletal-postnikov-d-three-comparison, prop-steenrod-square-normalization-instability-and-top-square, def-steenrod-squares-from-cup-i-products, def-bockstein-connecting-operation, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "J. F. Adams, Stable Homotopy and Generalised Homology, Proposition 16.6, printed pp. 391–393"
       url: https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Adams-SHGH-latex2.pdf
       locator: "Proposition 16.6, printed pp. 391–393"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

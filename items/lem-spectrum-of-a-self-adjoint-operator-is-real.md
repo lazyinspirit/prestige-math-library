@@ -2,7 +2,7 @@
 id: lem-spectrum-of-a-self-adjoint-operator-is-real
 kind: lemma
 title: Spectrum of a self adjoint operator is real
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hilbert-adjoint-properties, lem-kernel-range-orthogonality-for-hilbert-adjoints, def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice, def-spectrum-and-resolvent-of-a-bounded-operator, def-hilbert-space, def-operator-norm, def-orthogonality-and-orthogonal-complement, def-complex-conjugate-real-imaginary-part-and-modulus]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–13"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

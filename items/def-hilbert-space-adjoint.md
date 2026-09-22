@@ -2,7 +2,7 @@
 id: def-hilbert-space-adjoint
 kind: definition
 title: The Hilbert-space adjoint of a bounded operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-riesz-representation-for-hilbert-space, def-transpose-of-a-bounded-operator, def-space-of-bounded-linear-operators, def-bounded-linear-operator, thm-cauchy-schwarz-in-an-inner-product-space, def-operator-norm, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

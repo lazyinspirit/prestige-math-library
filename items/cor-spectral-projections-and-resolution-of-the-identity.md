@@ -2,7 +2,7 @@
 id: cor-spectral-projections-and-resolution-of-the-identity
 kind: corollary
 title: Spectral projections and resolution of the identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-continuous-functional-calculus-properties, lem-spectrum-of-a-self-adjoint-operator-is-real, thm-self-adjoint-norm-and-spectrum-extrema, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-spectrum-and-resolvent-of-a-bounded-operator, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §4.1 and §6.3, printed pp.113–115 and 173–177"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

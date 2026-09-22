@@ -2,7 +2,7 @@
 id: prop-highest-weight-of-the-dual-representation
 kind: proposition
 title: Highest weight of the dual representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, thm-simple-highest-weight-modules-are-classified-by-their-highest-weight, prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional, prop-a-finite-dimensional-irreducible-module-is-generated-by-any-highest-weight-vector, lem-highest-weight-modules-have-weights-below-the-top-weight, lem-simple-reflections-preserve-weight-multiplicities, prop-weyl-length-equals-positive-root-inversion-number, def-length-and-longest-element-of-a-finite-weyl-group, def-weyl-group-of-a-root-system, def-partial-order-on-weights, prop-direct-sum-dual-hom-and-tensor-representations, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.2, (8.6) and §8.4"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

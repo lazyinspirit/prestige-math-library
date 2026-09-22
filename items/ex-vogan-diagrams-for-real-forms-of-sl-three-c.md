@@ -2,7 +2,7 @@
 id: ex-vogan-diagrams-for-real-forms-of-sl-three-c
 kind: example
 title: Vogan diagrams for real forms of sl three c
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-vogan-diagram", "def-axiom-of-choice", "ex-classical-simple-lie-algebras-and-their-killing-forms", "ex-diagonal-cartan-subalgebra-and-roots-of-sl-n", "prop-classical-types-correspond-to-sl-so-and-sp", "thm-real-forms-correspond-to-conjugate-linear-involutions", "prop-complexification-preserves-semisimplicity", "def-cartan-involution-of-a-real-semisimple-lie-algebra", "def-theta-stable-cartan-subalgebra-and-compact-split-parts", "thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification", "thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence", "thm-classification-of-real-forms-by-vogan-diagrams"]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40 and Lecture 43, Vogan diagrams and the classification of real forms, printed pp. 206-210 and 217-222"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

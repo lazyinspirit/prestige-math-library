@@ -2,7 +2,7 @@
 id: fs-every-connected-finite-graph-is-a-dynkin-diagram
 kind: false-statement
 title: Every connected finite graph is Dynkin
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching, prop-finite-type-cartan-matrix-properties, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §7, Proposition 2.78(a) and the affine diagrams, printed pp. 172-173"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

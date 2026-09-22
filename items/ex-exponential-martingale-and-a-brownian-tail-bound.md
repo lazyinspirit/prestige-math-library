@@ -2,7 +2,7 @@
 id: ex-exponential-martingale-and-a-brownian-tail-bound
 kind: example
 title: "Exponential martingale Brownian tail bound"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, thm-optional-sampling-for-bounded-stopping-times, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-continuity-from-below-for-measures, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 3.3 and 3.5"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

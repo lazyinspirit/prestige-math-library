@@ -2,7 +2,7 @@
 id: ex-brownian-hitting-probability-from-an-exponential-martingale
 kind: example
 title: "Hitting probabilities from an exponential martingale"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-exponential-brownian-martingale, def-brownian-motion-started-at-x, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, thm-two-sided-exit-probability-for-brownian-motion, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, thm-uniform-integrability-of-conditional-expectations-of-one-variable, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Sections 7.3 and 7.5"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

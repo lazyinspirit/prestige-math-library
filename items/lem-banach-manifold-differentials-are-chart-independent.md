@@ -2,7 +2,7 @@
 id: lem-banach-manifold-differentials-are-chart-independent
 kind: lemma
 title: Banach manifold differentials are chart independent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-tangent-space-and-differential-on-a-banach-manifold, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-countable-base-banach-manifold-and-smooth-map, def-frechet-derivative-between-banach-spaces]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

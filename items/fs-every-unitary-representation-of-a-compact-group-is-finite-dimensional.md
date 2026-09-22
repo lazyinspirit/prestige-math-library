@@ -2,7 +2,7 @@
 id: fs-every-unitary-representation-of-a-compact-group-is-finite-dimensional
 kind: false-statement
 title: A compact group can have infinite-dimensional unitary representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group, thm-peter-weyl-for-compact-lie-groups, def-axiom-of-choice, cor-irreducible-characters-are-orthonormal-class-functions]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3 (the regular representation on L2(G))"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

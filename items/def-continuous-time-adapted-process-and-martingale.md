@@ -2,7 +2,7 @@
 id: def-continuous-time-adapted-process-and-martingale
 kind: definition
 title: "Continuous-time adapted processes and martingales"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-time-filtration-and-all-pairs-martingale, def-continuous-time-stopping-time, def-conditional-expectation-as-an-ae-class, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Sections 4.1 and 5.4"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

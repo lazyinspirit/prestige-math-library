@@ -2,7 +2,7 @@
 id: thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle
 kind: theorem
 title: Top Chern class equals Euler class of the underlying real bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-chern-classes-from-the-projective-bundle-relation, thm-complex-splitting-principle-with-integral-injective-pullback, thm-naturality-normalization-and-whitney-sum-for-chern-classes, lem-complex-orientation-of-underlying-real-bundles, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 36"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "c_n(tau)=chi(tau), printed pp.134-137"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-continuous-functional-calculus-under-resolvent-convergence
 kind: theorem
 title: "Continuous functional calculus under resolvent convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-norm-and-strong-resolvent-convergence, lem-resolvent-star-algebra-is-dense-in-c-zero, thm-unbounded-borel-functional-calculus, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-dominated-convergence, def-bounded-linear-operator, def-operator-norm, def-axiom-of-choice, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, lem-scalar-and-complex-measures-from-a-pvm, thm-self-adjoint-resolvent-estimate, def-resolvent-and-spectrum-of-a-closed-unbounded-operator]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Theorem 6.31 and its complete proof, Corollary 6.32, pp.179-180"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

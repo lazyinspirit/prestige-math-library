@@ -2,7 +2,7 @@
 id: ex-spectrum-of-the-unilateral-shift
 kind: example
 title: Spectrum of the unilateral shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-point-continuous-and-residual-spectrum, def-approximate-point-and-compression-spectrum, ex-bounded-operators-form-a-noncommutative-banach-algebra, rem-ell-p-is-l-p-of-counting-measure, def-counting-measure, prop-counting-measure-is-a-measure, lem-complex-lp-completeness-density-and-inner-product, def-countable-choice, def-axiom-of-choice, def-bounded-below-operator, def-spectrum-and-resolvent-set-in-a-banach-algebra]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — Example 5.16, printed p. 220"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

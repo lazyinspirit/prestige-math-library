@@ -2,7 +2,7 @@
 id: ex-weyl-character-and-dimension-formulas-for-sl-two
 kind: example
 title: Weyl character and dimension formulas for sl2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-all-finite-dimensional-irreducible-sl-two-modules, def-special-linear-lie-algebra-sl-two, def-weight-and-weight-space-of-a-lie-algebra-representation, thm-finite-dimensional-representations-of-sl-two]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §7 and Chapter V §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

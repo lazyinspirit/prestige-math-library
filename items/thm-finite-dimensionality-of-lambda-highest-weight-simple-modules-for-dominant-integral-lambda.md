@@ -2,7 +2,7 @@
 id: thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda
 kind: theorem
 title: Dominant simple highest-weight modules are finite-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-simple-root-integrability-bounds-the-dominant-cyclic-module, lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient, def-dominant-integrable-highest-weight-cyclic-module, def-highest-weight-vector-and-highest-weight-module, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-subrepresentation-quotient-representation-and-intertwiner, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Theorem 5.16"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

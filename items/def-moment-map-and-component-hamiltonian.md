@@ -2,7 +2,7 @@
 id: def-moment-map-and-component-hamiltonian
 kind: definition
 title: Moment map, component Hamiltonians and infinitesimal moment maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symplectic-and-hamiltonian-lie-group-action, def-algebraic-dual-and-linear-functional, def-coadjoint-representation-of-a-lie-group, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

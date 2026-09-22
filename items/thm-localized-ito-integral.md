@@ -2,7 +2,7 @@
 id: thm-localized-ito-integral
 kind: theorem
 title: "Localized Ito integral"
-status: draft
+status: published
 origin: pipeline
 deps: [def-locally-square-integrable-predictable-brownian-integrand, thm-ito-integral-process-has-a-continuous-martingale-version, thm-doob-maximal-bound-for-the-ito-integral, thm-ito-isometry-and-linearity-in-predictable-l2, def-ito-integral-for-square-integrable-predictable-processes, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, def-law-modification-and-indistinguishability-of-processes, def-progressively-measurable-and-predictable-process, thm-monotone-convergence-for-the-integral, lem-rat-embeds-dense, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, thm-dominated-convergence-in-lp]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics, Lemma 5.28, Lemma 5.33 and Theorem 5.36"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-c-star-spectral-radius-equals-norm-for-normal-elements
 kind: lemma
 title: C star spectral radius equals norm for normal elements
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, def-c-star-algebra, thm-spectral-radius-formula, def-spectral-radius, def-axiom-of-choice, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

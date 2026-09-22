@@ -2,7 +2,7 @@
 id: thm-double-orthogonal-complement-is-closure
 kind: theorem
 title: The double orthogonal complement of a subspace is its closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-orthogonal-decomposition-by-a-closed-subspace, lem-orthogonal-complement-is-closed, def-orthogonality-and-orthogonal-complement, def-linear-subspace, thm-metric-closure-characterisation, cor-inner-product-induces-a-norm, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

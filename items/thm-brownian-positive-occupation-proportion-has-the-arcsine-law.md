@@ -2,7 +2,7 @@
 id: thm-brownian-positive-occupation-proportion-has-the-arcsine-law
 kind: theorem
 title: "Brownian positive occupation time has the arcsine law"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brownian-step-potential-resolvent-at-zero, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-brownian-scaling, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-substitution, thm-principal-inverse-tangent-calculus, def-principal-inverse-tangent, thm-real-stone-weierstrass-general, thm-dominated-convergence, def-axiom-of-choice, def-brownian-motion, thm-brownian-last-zero-before-a-fixed-time-has-the-arcsine-law]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Nobuo Yoshida, Probability Theory, Proposition 6.8.4, printed pp. 216-217"
       url: "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-separable-hilbert-space-has-a-countable-orthonormal-basis
 kind: theorem
 title: A Hilbert space with a dense sequence has a finite or countable orthonormal basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-finite-bessel-inequality, def-hilbert-space, def-dense-top, def-linear-subspace, thm-recursion, def-countable, def-real-and-complex-inner-product-space, def-linear-combination-and-span, def-finite-sum-in-a-commutative-monoid, lem-subset-of-countable, cor-inner-product-induces-a-norm]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.63, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: fs-every-symplectic-action-is-hamiltonian
 kind: false-statement
 title: Every symplectic action is Hamiltonian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symplectic-and-hamiltonian-lie-group-action, def-fundamental-vector-field-of-a-left-action, def-smooth-left-action-of-a-lie-group, def-countable-choice, def-two-dimensional-torus, cor-a-nonzero-period-obstructs-exactness-and-bounding]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

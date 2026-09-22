@@ -2,7 +2,7 @@
 id: thm-holomorphic-spectral-mapping
 kind: theorem
 title: Holomorphic spectral mapping and composition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-holomorphic-functional-calculus-homomorphism, lem-holomorphic-difference-quotient-is-holomorphic-in-each-variable, def-holomorphic-functional-calculus, lem-admissible-cycle-around-a-compact-plane-set, thm-global-cauchy-integral-formula-homology, lem-resolvent-identity, def-spectrum-and-resolvent-set-in-a-banach-algebra, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, def-axiom-of-choice, def-banach-algebra-valued-contour-integral]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Theorem 2.5.5, printed pp. 49–50"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

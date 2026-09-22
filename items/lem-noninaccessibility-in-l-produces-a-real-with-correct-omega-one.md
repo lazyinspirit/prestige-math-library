@@ -2,7 +2,7 @@
 id: lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one
 kind: lemma
 title: Failure of inaccessibility in L produces a real with correct omega-one
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, cor-countable-choice-and-omega-one-cofinality, thm-generalized-continuum-hypothesis-in-l, thm-constructibility-is-absolute-and-l-is-minimal, def-lc-inaccessible-and-mahlo-cardinals]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.5 and Theorem 3.3, pp. 43-44"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-norm-limit-of-compact-operators-is-compact
 kind: theorem
 title: Norm limit of compact operators is compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-metric-compactness, def-metric-ball, def-totally-bounded, def-metric-convergence, def-banach-space, def-countable-choice, thm-complete-and-totally-bounded-implies-compact, thm-complete-subspace-iff-closed, thm-metric-closure-characterisation, lem-finite-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-a-compact-operator-can-have-nondense-range
 kind: counterexample
 title: A compact operator can have nondense range
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-square-summable-family-on-an-arbitrary-index-set, def-bounded-linear-operator, def-operator-norm, def-compact-linear-operator, lem-finite-rank-operators-are-compact, cor-finite-dimensional-subspaces-are-closed, def-linear-subspace, def-linear-basis, thm-metric-closure-characterisation, def-metric-ball, def-metric-convergence]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.184, Example 4.23"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

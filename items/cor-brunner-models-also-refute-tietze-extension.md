@@ -2,7 +2,7 @@
 id: cor-brunner-models-also-refute-tietze-extension
 kind: corollary
 title: "Brunner's endpoint obstruction also refutes bounded Tietze extension"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brunner-choice-and-urysohn-obstructions, lem-brunner-urysohn-obstruction-is-injectively-boundable, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, def-continuous-map-top, def-subspace-topology-top, def-interval, def-normal-and-t4-spaces]
 justified_by: []
@@ -22,6 +22,8 @@ sources:
     - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
       url: "https://doi.org/10.1090/proc/14848"
       locator: "Published erratum to the cited theorem"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

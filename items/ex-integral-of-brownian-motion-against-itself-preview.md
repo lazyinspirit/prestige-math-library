@@ -2,7 +2,7 @@
 id: ex-integral-of-brownian-motion-against-itself-preview
 kind: example
 title: "Integral of Brownian motion against itself"
-status: draft
+status: published
 origin: pipeline
 deps: [def-progressively-measurable-and-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, thm-ito-isometry-and-linearity-in-predictable-l2, thm-ito-integral-process-has-a-continuous-martingale-version, def-brownian-motion, thm-dominated-convergence, thm-fatou-lemma, thm-tonelli-theorem-for-sigma-finite-product-spaces, lem-gaussian-even-moment-bound-for-brownian-increments, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, equation (3.8)"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

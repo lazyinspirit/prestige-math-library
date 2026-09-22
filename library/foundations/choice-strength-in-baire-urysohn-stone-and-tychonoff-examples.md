@@ -1,7 +1,7 @@
 ---
 page: choice-strength-in-baire-urysohn-stone-and-tychonoff-examples
 title: "Choice Strength in Baire, Urysohn, Stone, and Tychonoff: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-canonical-least-ball-selection-in-separable-baire-proof, ex-dmc-urysohn-finite-menu-intersection, cex-kelley-cofinite-set-is-not-closed, ex-isolated-point-repair-recovers-choice-function, fs-bpi-proves-stone-for-metric-spaces]
 ---

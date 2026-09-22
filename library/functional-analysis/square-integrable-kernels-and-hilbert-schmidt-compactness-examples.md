@@ -1,7 +1,7 @@
 ---
 page: square-integrable-kernels-and-hilbert-schmidt-compactness-examples
 title: Square-Integrable Kernels and Hilbert–Schmidt Compactness — Examples
-status: draft
+status: published
 items: []
 examples: [ex-square-integrable-separable-product-kernel, ex-square-integrable-kernel-without-continuous-representative, ex-square-integrable-kernel-finite-rank-truncations, ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two]
 ---

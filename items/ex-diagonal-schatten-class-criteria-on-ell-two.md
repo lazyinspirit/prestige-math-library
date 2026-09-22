@@ -2,7 +2,7 @@
 id: ex-diagonal-schatten-class-criteria-on-ell-two
 kind: example
 title: Diagonal Schatten class criteria on ell two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-absolute-value-and-singular-values-of-a-compact-operator, lem-positive-square-root-of-a-compact-positive-operator, def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, def-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, def-trace-of-a-trace-class-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-norm-limit-of-compact-operators-is-compact, lem-finite-rank-operators-are-compact, def-compact-linear-operator, def-operator-norm, def-bounded-linear-operator, def-square-summable-family-on-an-arbitrary-index-set, def-real-and-complex-inner-product-space, def-hilbert-space, def-banach-space, def-metric-convergence, def-countable-choice, thm-reals-cauchy-complete, thm-complex-plane-is-complete, def-hilbert-space-adjoint]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

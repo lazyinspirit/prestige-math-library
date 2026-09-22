@@ -2,7 +2,7 @@
 id: thm-compact-group-weyl-group-is-finite
 kind: theorem
 title: The compact Weyl group is finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-group-of-a-compact-connected-lie-group, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-maximal-tori-exist-in-compact-lie-groups, thm-structure-of-a-compact-connected-abelian-lie-group, def-axiom-of-choice, thm-cartans-closed-subgroup-theorem, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, thm-closure-of-a-connected-set, lem-closed-subset-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group, thm-rationals-countable, thm-r-uncountable, prop-exponential-map-is-natural-for-lie-group-homomorphisms, thm-the-differential-of-adjoint-is-ad]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§12, connectedness of centralizers of tori"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

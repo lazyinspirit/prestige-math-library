@@ -2,7 +2,7 @@
 id: ex-brownian-path-p-variation-threshold
 kind: example
 title: "The Brownian p-variation threshold"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partition-and-refinement, thm-heine-cantor-r, def-quadratic-variation-along-a-partition-sequence, lem-brownian-motion-has-a-jointly-measurable-continuous-version, def-brownian-motion, cor-brownian-paths-are-locally-holder-of-every-order-below-one-half, thm-brownian-quadratic-variation-along-dyadic-partitions, cor-brownian-paths-have-infinite-total-variation-on-every-interval, cor-brownian-law-of-the-iterated-logarithm-at-zero, thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, lem-rat-embeds-dense, def-countable-choice, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 8.5.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

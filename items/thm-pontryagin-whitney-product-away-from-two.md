@@ -2,7 +2,7 @@
 id: thm-pontryagin-whitney-product-away-from-two
 kind: theorem
 title: Pontryagin Whitney product away from two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-pontryagin-classes-by-complexification, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, thm-naturality-normalization-and-whitney-sum-for-chern-classes, def-real-and-complex-topological-vector-bundle, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, thm-vector-bundles-glued-from-transition-cocycles, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, Theorem 3.16"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "p_i over Z[1/2], printed pp.96-98"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

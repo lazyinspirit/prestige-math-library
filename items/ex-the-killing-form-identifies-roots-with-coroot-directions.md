@@ -2,7 +2,7 @@
 id: ex-the-killing-form-identifies-roots-with-coroot-directions
 kind: example
 title: The Killing form identifies roots with coroot directions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-the-root-sl-two-triple-inside-sl-n, prop-killing-form-orthogonality-of-root-spaces, lem-killing-length-of-a-root-is-nonzero, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the Killing-dual and coroot construction chain."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

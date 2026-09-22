@@ -2,7 +2,7 @@
 id: prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram
 kind: proposition
 title: Irreducibility and connected Dynkin diagrams
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-root-systems-decompose-uniquely-into-irreducible-components, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-reducible-and-irreducible-root-system, def-cartan-matrix-of-a-based-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-positive-system-and-base-of-simple-roots, def-reduced-crystallographic-euclidean-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Lemma 23.2 and the connectedness remark after Proposition 23.4"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

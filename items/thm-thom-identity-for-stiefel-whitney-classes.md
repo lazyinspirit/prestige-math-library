@@ -2,7 +2,7 @@
 id: thm-thom-identity-for-stiefel-whitney-classes
 kind: theorem
 title: Thom identity for Stiefel–Whitney classes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-axiom-of-choice", "thm-steenrod-squares-are-well-defined-and-natural", "prop-steenrod-square-normalization-instability-and-top-square", "thm-cartan-formula-for-steenrod-squares", "def-total-steenrod-square", "thm-thom-isomorphism-for-oriented-vector-bundles", "thm-naturality-and-uniqueness-of-thom-classes", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-thom-class-by-fiberwise-normalization", "thm-naturality-of-stiefel-whitney-classes", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "thm-real-splitting-principle-with-mod-two-injective-pullback", "thm-mod-two-cohomology-of-bo-n", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "def-relative-cup-product", "prop-relative-cup-products-are-natural-and-compatible-with-connectors", "thm-singular-cohomology-is-graded-commutative"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Allen Hatcher, Vector Bundles & K-Theory
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "§§3.1–3.2 Thom and Euler constructions, printed pp.77–94 (the Steenrod square itself is taken from the published prerequisite page)"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

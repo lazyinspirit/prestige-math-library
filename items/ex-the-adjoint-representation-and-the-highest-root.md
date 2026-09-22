@@ -2,7 +2,7 @@
 id: ex-the-adjoint-representation-and-the-highest-root
 kind: example
 title: The adjoint representation and highest root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-positive-system-and-base-of-simple-roots, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion, prop-root-systems-of-the-classical-complex-lie-algebras, def-classical-complex-matrix-lie-algebras, def-adjoint-representation-of-a-lie-algebra, def-height-of-a-root-and-highest-root, def-highest-weight-vector-and-highest-weight-module, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.4, Example 8.26"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

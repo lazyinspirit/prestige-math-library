@@ -1,7 +1,7 @@
 ---
 page: highest-weight-theory-for-complex-semisimple-lie-algebras
 title: Highest Weight Theory for Complex Semisimple Lie Algebras
-status: draft
+status: published
 items:
   - prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system
   - def-weight-and-weight-space-of-a-lie-algebra-representation

@@ -2,7 +2,7 @@
 id: lem-solovay-almost-disjoint-extension-under-ma
 kind: lemma
 title: "Martin's axiom extends families almost disjoint from a subfamily"
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, def-axiom-of-choice, def-natural-numbers, def-function, def-cardinal, def-finite-cardinality]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Kenneth Kunen, Set Theory: An Introduction to Independence Proofs"
       url: "https://doi.org/10.1016/S0049-237X(08)70001-0"
       locator: "Chapter VIII, almost-disjoint forcing for the Q-set lemma"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

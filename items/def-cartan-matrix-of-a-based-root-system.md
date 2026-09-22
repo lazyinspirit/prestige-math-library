@@ -2,7 +2,7 @@
 id: def-cartan-matrix-of-a-based-root-system
 kind: definition
 title: Cartan matrix of a based root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coroot-and-dual-root-system, def-positive-system-and-base-of-simple-roots]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §5, the Cartan matrix of a based root system, printed p. 157"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -1,7 +1,7 @@
 ---
 page: compact-lie-groups-maximal-tori-and-peter-weyl-theory
 title: Compact Lie Groups, Maximal Tori, and Peter–Weyl Theory
-status: draft
+status: published
 items:
   - def-left-right-and-bi-invariant-borel-measure-on-a-lie-group
   - cor-normalized-haar-measure-on-a-compact-lie-group

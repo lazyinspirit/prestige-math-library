@@ -2,7 +2,7 @@
 id: lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form
 kind: lemma
 title: Norm of a self adjoint operator from its quadratic form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, thm-cauchy-schwarz-in-an-inner-product-space, prop-pythagorean-parallelogram-and-polarisation-identities, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

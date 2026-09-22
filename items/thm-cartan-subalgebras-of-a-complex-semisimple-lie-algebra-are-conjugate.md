@@ -2,7 +2,7 @@
 id: thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate
 kind: theorem
 title: Conjugacy of Cartan subalgebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra, thm-additive-jordan-chevalley-decomposition, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-lie-third-fundamental-theorem, thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup, def-conjugation-and-the-adjoint-representation-of-a-lie-group, prop-adjoint-is-a-smooth-lie-group-representation, def-smooth-left-action-of-a-lie-group, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, def-immersion-submersion-and-constant-rank-map, cor-local-normal-form-for-submersions, cor-every-submersion-is-an-open-map, def-countable-choice, def-axiom-of-choice, thm-the-differential-of-adjoint-is-ad, thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism, prop-adjoint-exponential-identity, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 20, Theorem 20.10"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

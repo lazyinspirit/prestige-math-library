@@ -2,7 +2,7 @@
 id: def-smooth-banach-vector-bundle-and-section
 kind: definition
 title: Smooth Banach vector bundle and section
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-countable-base-banach-manifold-and-smooth-map, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-tangent-space-and-differential-on-a-banach-manifold, def-bounded-bilinear-map, thm-bounded-bilinear-map-equivalences, def-space-of-bounded-linear-operators, def-banach-space, def-complemented-subspace, cor-finite-codimensional-subspaces-are-complemented]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-b-n-and-c-n-are-isomorphic-root-systems-for-all-n
 kind: false-statement
 title: B and C are always isomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types, thm-classification-of-irreducible-reduced-crystallographic-root-systems, thm-existence-of-each-classified-root-system, def-rank-and-isomorphism-of-root-systems, prop-root-systems-of-the-classical-complex-lie-algebras, thm-rank-two-root-system-classification]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, (2.43), (2.50) and Proposition 2.84, printed pp. 150, 155 and 180"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

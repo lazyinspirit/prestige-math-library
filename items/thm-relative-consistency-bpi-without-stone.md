@@ -2,7 +2,7 @@
 id: thm-relative-consistency-bpi-without-stone
 kind: theorem
 title: "Relative consistency of BPI with failure of Stone's theorem"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-completeness, def-corson-ordered-rational-permutation-model, lem-corson-rational-metric-not-metacompact, lem-corson-ordered-urysohn-automorphism-group-is-extremely-amenable, thm-extreme-amenability-yields-bpi-in-finite-support-models, lem-corson-stone-obstruction-is-ordinal-boundable, thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions, def-boolean-prime-ideal-principle, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-paracompact-space, def-metacompact-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Samuel Corson, The Independence of Stone's Theorem from the Boolean Prime Ideal Theorem"
       url: "https://arxiv.org/pdf/2001.06513"
       locator: "Theorem 1 and Lemma 5"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

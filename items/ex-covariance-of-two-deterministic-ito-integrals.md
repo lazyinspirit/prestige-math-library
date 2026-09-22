@@ -2,7 +2,7 @@
 id: ex-covariance-of-two-deterministic-ito-integrals
 kind: example
 title: "Covariance of deterministic Ito integrals"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ito-isometry-and-linearity-in-predictable-l2, lem-cross-ito-isometry, cor-deterministic-ito-integrals-are-gaussian, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, def-ito-integral-for-square-integrable-predictable-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Lemma 5.22"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

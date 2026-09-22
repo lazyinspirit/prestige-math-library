@@ -2,7 +2,7 @@
 id: ex-compact-and-split-cartan-subalgebras-of-sl-two-r
 kind: example
 title: Compact and split cartan subalgebras of sl two r
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-cartan-subalgebra-of-a-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, ex-cartan-involution-and-k-plus-p-for-sl-n-r, ex-general-and-special-linear-lie-groups, ex-orthogonal-and-special-orthogonal-lie-groups, def-special-linear-lie-algebra-sl-two]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1, printed pp. 217-218"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

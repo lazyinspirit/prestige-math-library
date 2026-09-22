@@ -2,7 +2,7 @@
 id: thm-completion-of-an-inner-product-space-is-hilbert
 kind: theorem
 title: The norm completion of an inner-product space is a Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-completion-of-a-normed-space, thm-metric-completion-carries-a-unique-banach-space-structure, lem-inner-product-is-jointly-continuous, thm-parallelogram-law, thm-jordan-von-neumann-polarization, thm-cauchy-schwarz-in-an-inner-product-space, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, cor-archimedean-reciprocal, def-countable-choice, def-hilbert-space, cor-inner-product-induces-a-norm]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lecture 16"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

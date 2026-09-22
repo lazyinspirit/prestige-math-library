@@ -2,7 +2,7 @@
 id: def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention
 kind: definition
 title: Dynkin diagram with edge multiplicity and arrow convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-finite-type-cartan-matrix-properties, thm-rank-two-root-system-classification]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §5, the Dynkin diagram, printed pp. 159-161"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

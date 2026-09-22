@@ -2,7 +2,7 @@
 id: def-shelah-hereditarily-ordinal-sequence-definable-model
 kind: definition
 title: The Shelah HOD(S) model and its real-ordinal presentation
-status: draft
+status: published
 origin: pipeline
 deps: [def-ordinal-definability-and-hod, def-solovay-hereditarily-ordinal-sequence-definable-model, thm-shelah-ch-omega-one-sweet-construction]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Theorems 7.16-7.17 and concluding remark (3), pp. 43-44"}
     - {title: "Robert M. Solovay, A Model of Set-Theory in Which Every Set of Reals Is Lebesgue Measurable", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf", locator: "Part III, Sections 2.2-2.7, pp. 51-52"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

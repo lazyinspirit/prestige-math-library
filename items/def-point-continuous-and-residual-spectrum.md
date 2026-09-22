@@ -2,7 +2,7 @@
 id: def-point-continuous-and-residual-spectrum
 kind: definition
 title: Point continuous and residual spectrum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-bounded-linear-operator", "def-dependent-choice", "thm-bounded-inverse-theorem"]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.2.1 (point, residual and continuous spectra), printed pp. 219–221"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

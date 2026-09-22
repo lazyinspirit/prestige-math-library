@@ -2,7 +2,7 @@
 id: prop-root-reflections-are-induced-by-inner-automorphisms
 kind: proposition
 title: Root reflections are induced by inner automorphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-reflection-from-a-coroot, thm-root-sl-two-triple, thm-root-reflections-preserve-the-root-set, prop-brackets-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-coroot-of-a-lie-algebra-root, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-toral-and-maximal-toral-subalgebra, thm-lie-third-fundamental-theorem, prop-adjoint-exponential-identity, thm-the-differential-of-adjoint-is-ad, prop-adjoint-is-a-smooth-lie-group-representation, def-conjugation-and-the-adjoint-representation-of-a-lie-group, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval, def-countable-choice, def-axiom-of-choice, thm-additive-jordan-chevalley-decomposition]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §4 (Weyl-group automorphisms)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-root-system-a-one
 kind: example
 title: The root system A_1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system, def-weyl-group-of-a-root-system, def-cartan-matrix-of-a-based-root-system, ex-root-systems-a-two-b-two-and-g-two]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §5, the rank-one root system, printed pp. 149-150"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

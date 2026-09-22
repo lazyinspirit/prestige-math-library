@@ -2,7 +2,7 @@
 id: lem-closed-subspace-with-trivial-orthogonal-complement-fills-l-two
 kind: lemma
 title: "A closed L2 subspace with trivial orthogonal complement fills L2"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-infimum-property, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 6.6 closed-range argument"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

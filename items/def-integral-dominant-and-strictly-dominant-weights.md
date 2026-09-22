@@ -2,7 +2,7 @@
 id: def-integral-dominant-and-strictly-dominant-weights
 kind: definition
 title: Integral, dominant, and strictly dominant weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coroot-of-a-lie-algebra-root, def-positive-system-and-base-of-simple-roots, def-fundamental-weights, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

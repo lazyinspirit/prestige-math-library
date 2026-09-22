@@ -2,7 +2,7 @@
 id: lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives
 kind: lemma
 title: The dominant cyclic generator survives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-dominant-integrable-highest-weight-cyclic-module, def-universal-enveloping-algebra, lem-highest-weight-modules-have-weights-below-the-top-weight, def-partial-order-on-weights, thm-triangular-decomposition-of-a-complex-semisimple-lie-algebra, thm-poincare-birkhoff-witt, thm-serre-presentation-theorem, thm-root-sl-two-triple, def-integral-dominant-and-strictly-dominant-weights, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.3, Step 1–2 of the proof of Theorem 8.23"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

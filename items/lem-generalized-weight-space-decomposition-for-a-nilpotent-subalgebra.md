@@ -2,7 +2,7 @@
 id: lem-generalized-weight-space-decomposition-for-a-nilpotent-subalgebra
 kind: lemma
 title: Generalized weight spaces of a nilpotent subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-lower-central-series-and-nilpotent-lie-algebra, def-lie-subalgebra-ideal-and-center, def-derivation-of-a-lie-algebra, thm-engels-theorem, prop-nilpotent-lie-algebras-are-solvable, thm-primary-decomposition-for-an-endomorphism, thm-lies-theorem]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

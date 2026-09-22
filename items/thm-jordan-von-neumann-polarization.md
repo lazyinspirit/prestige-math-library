@@ -2,7 +2,7 @@
 id: thm-jordan-von-neumann-polarization
 kind: theorem
 title: "Jordan–von Neumann: a norm is induced by an inner product exactly when it satisfies the parallelogram law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-parallelogram-law, def-real-and-complex-inner-product-space, def-inner-product-norm, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-complex-conjugation-and-modulus-laws, lem-of-square-monotone, thm-of-square-roots]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

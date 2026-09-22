@@ -2,7 +2,7 @@
 id: prop-centralizer-dimension-from-vanishing-roots
 kind: proposition
 title: Centralizer dimension from vanishing roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-regular-root-hyperplanes, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 20, Proposition 20.6(ii)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

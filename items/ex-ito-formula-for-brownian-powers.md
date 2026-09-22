@@ -2,7 +2,7 @@
 id: ex-ito-formula-for-brownian-powers
 kind: example
 title: "Ito formula for Brownian powers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, def-ito-integral-of-an-elementary-predictable-process, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-gaussian-even-moment-bound-for-brownian-increments, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-fatou-lemma, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-cauchy-schwarz-for-random-variables, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, def-continuous-time-adapted-process-and-martingale, lem-brownian-motion-has-a-jointly-measurable-continuous-version, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

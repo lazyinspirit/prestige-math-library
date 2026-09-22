@@ -1,7 +1,7 @@
 ---
 page: square-integrable-kernels-and-hilbert-schmidt-compactness
 title: Square-Integrable Kernels and Hilbert–Schmidt Compactness
-status: draft
+status: published
 items: [def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, thm-hilbert-schmidt-operators-are-compact, lem-product-rectangle-kernels-are-dense-in-product-l-two, thm-l-two-kernels-give-hilbert-schmidt-operators]
 examples: []
 ---

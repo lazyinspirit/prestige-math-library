@@ -2,7 +2,7 @@
 id: lem-nuclear-series-characterizes-trace-norm
 kind: lemma
 title: Nuclear series characterizes trace norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, thm-cauchy-schwarz-in-an-inner-product-space, lem-finite-bessel-inequality, def-operator-norm, def-bounded-linear-operator, def-metric-convergence, def-infimum, def-hilbert-space, def-countable-choice, def-real-and-complex-inner-product-space, def-compact-linear-operator, thm-monotone-convergence]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

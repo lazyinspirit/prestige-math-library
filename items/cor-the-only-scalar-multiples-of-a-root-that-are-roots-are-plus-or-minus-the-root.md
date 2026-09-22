@@ -2,7 +2,7 @@
 id: cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root
 kind: corollary
 title: The only scalar multiples of a root that are roots are plus or minus the root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-cartan-integers-are-integral, def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-root-sl-two-triple, prop-brackets-of-root-spaces, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, thm-trace-of-ab-equals-trace-of-ba, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Corollary 19.18"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

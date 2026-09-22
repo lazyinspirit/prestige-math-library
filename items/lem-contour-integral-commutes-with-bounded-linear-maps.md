@@ -2,7 +2,7 @@
 id: lem-contour-integral-commutes-with-bounded-linear-maps
 kind: lemma
 title: Contour integral commutes with bounded linear maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-banach-algebra-valued-contour-integral, def-bounded-linear-operator, def-operator-norm, cor-piecewise-c1-paths-have-additive-speed-integral-length]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 43–47"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

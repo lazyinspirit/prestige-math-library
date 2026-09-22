@@ -2,7 +2,7 @@
 id: thm-dmc-implies-urysohn-lemma
 kind: theorem
 title: "DMC implies Urysohn's lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dependent-multiple-choice-finite-level-tree, def-normal-and-t4-spaces, lem-normality-via-shrinking, def-the-dyadic-rationals-of-the-unit-interval, lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function, lem-finite-choice, def-continuous-map-top, def-interior-closure-boundary-top, def-topological-space, def-interval, lem-interior-closure-boundary-identities, def-natural-numbers, def-function, thm-urysohn-lemma, thm-well-ordering-principle, thm-recursion]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

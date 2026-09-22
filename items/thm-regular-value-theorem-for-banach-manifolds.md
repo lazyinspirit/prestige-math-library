@@ -2,7 +2,7 @@
 id: thm-regular-value-theorem-for-banach-manifolds
 kind: theorem
 title: Regular value theorem for Banach manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-implicit-function-theorem-for-banach-spaces, def-split-banach-submanifold, lem-banach-manifold-differentials-are-chart-independent, thm-bounded-inverse-theorem, def-axiom-of-choice, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, def-complemented-subspace, def-frechet-derivative-between-banach-spaces, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

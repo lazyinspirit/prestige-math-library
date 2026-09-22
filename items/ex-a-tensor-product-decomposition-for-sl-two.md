@@ -2,7 +2,7 @@
 id: ex-a-tensor-product-decomposition-for-sl-two
 kind: example
 title: Clebsch–Gordan decomposition for sl2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-all-finite-dimensional-irreducible-sl-two-modules, thm-finite-dimensional-representations-of-sl-two, def-special-linear-lie-algebra-sl-two, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, prop-direct-sum-dual-hom-and-tensor-representations]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

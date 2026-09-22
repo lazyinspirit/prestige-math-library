@@ -2,7 +2,7 @@
 id: ex-euler-class-of-zero-and-trivial-positive-rank-bundles
 kind: example
 title: Euler class of zero and trivial positive-rank bundles
-status: draft
+status: published
 origin: pipeline
 deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish", "def-r-oriented-vector-bundle-and-orientation-local-system", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 35 rank-zero and trivial cases, printed pp.129–132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

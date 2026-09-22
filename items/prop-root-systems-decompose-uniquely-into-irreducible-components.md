@@ -2,7 +2,7 @@
 id: prop-root-systems-decompose-uniquely-into-irreducible-components
 kind: proposition
 title: Unique irreducible decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reducible-and-irreducible-root-system, def-reduced-crystallographic-euclidean-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Proposition 23.3 area"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: root-systems-dynkin-diagrams-and-cartan-killing-classification-examples
 title: Root Systems, Dynkin Diagrams, and the Cartan-Killing Classification — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-root-system-a-one

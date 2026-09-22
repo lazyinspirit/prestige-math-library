@@ -2,7 +2,7 @@
 id: lem-invariant-horizontal-form-on-a-free-proper-quotient-descends-uniquely
 kind: lemma
 title: An invariant horizontal form on a free proper quotient descends uniquely
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-free-proper-action-quotient-manifold, prop-tangent-space-of-a-free-proper-quotient, lem-local-slice-for-a-free-proper-action, thm-constant-rank-theorem-for-manifolds, thm-quotient-universal-property, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

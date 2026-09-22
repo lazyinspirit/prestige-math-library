@@ -2,7 +2,7 @@
 id: thm-dynkin-formula-for-bounded-brownian-stopping
 kind: theorem
 title: "Dynkin formula for bounded Brownian stopping"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-second-order-taylor-expansion-with-the-hessian, def-brownian-generator, def-d-dimensional-brownian-motion, def-c-c-and-c-c-infinity-on-rn, def-ck-and-multi-index-notation-in-several-variables, def-continuous-time-stopping-time, def-continuous-time-filtration-and-all-pairs-martingale, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-multivariable-taylor-formula-with-lagrange-remainder, thm-heine-cantor-metric, thm-heine-borel-rn, lem-gaussian-even-moment-bound-for-brownian-increments, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-dominated-convergence, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 2.10 and 3.5"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

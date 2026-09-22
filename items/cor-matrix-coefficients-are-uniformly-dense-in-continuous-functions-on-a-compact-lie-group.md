@@ -2,7 +2,7 @@
 id: cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group
 kind: corollary
 title: Matrix coefficients are uniformly dense in C(G)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-peter-weyl-for-compact-lie-groups, lem-compact-lie-groups-admit-central-continuous-approximate-identities, def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3, uniform density of matrix coefficients (after Theorem 4.20)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

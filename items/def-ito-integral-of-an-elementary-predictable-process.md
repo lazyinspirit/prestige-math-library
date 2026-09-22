@@ -2,7 +2,7 @@
 id: def-ito-integral-of-an-elementary-predictable-process
 kind: definition
 title: "Ito integral of an elementary predictable process"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-predictable-brownian-integrand, def-brownian-motion, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 justified_by: [lem-elementary-ito-integral-is-independent-of-the-step-representation]
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

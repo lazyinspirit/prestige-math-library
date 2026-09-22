@@ -1,7 +1,7 @@
 ---
 page: normal-moore-spaces-pmea-and-consistency-strength-examples
 title: "Normal Moore Spaces, PMEA, and Consistency Strength: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-development-stars-form-a-countable-local-base, ex-pmea-three-quarter-event-calculation, fs-zfc-proves-normal-moore-space-conjecture]
 ---

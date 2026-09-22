@@ -2,7 +2,7 @@
 id: thm-compact-connected-lie-groups-are-classified-by-root-data
 kind: theorem
 title: Compact connected Lie groups are classified by root data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-datum-of-a-compact-connected-lie-group, def-roots-of-a-compact-connected-lie-group, thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems, prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-equivalent-characterizations-of-reductive-lie-algebras, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-structure-of-a-compact-connected-abelian-lie-group, thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, thm-lie-second-fundamental-theorem, def-axiom-of-choice, thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, thm-compact-group-weyl-group-is-finite, thm-analytic-and-root-system-weyl-groups-agree, thm-conjugacy-of-maximal-tori, thm-serre-presentation-theorem, thm-smith-normal-form-existence-over-a-pid, thm-cartans-closed-subgroup-theorem, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, prop-exponential-map-is-natural-for-lie-group-homomorphisms, thm-the-differential-of-adjoint-is-ad, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group, thm-continuous-homomorphisms-between-lie-groups-are-smooth]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 42 §42.1, Theorem 42.4 and Corollary 42.6 (finite central cover)"
 proof_strategy: direct
 landmark: true
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

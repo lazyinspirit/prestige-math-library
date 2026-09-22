@@ -2,7 +2,7 @@
 id: def-boldface-sigma-one-three-measurability
 kind: definition
 title: Boldface Sigma-one-three measurability
-status: draft
+status: published
 origin: pipeline
 deps: [def-analytic-and-coanalytic-by-closed-projection, lem-cantor-and-baire-sequence-coding, lem-dyadic-coding-coin-measure-and-lebesgue-transfer, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-completion-of-a-measure-space, thm-completion-of-a-measure-space, def-countable-choice]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Definition 1.17 and Facts 1.17-1.18, pp. 10-11; Chapter 3, Section 3.1, pp. 43-44"}
     - {title: "Terence Tao, An Introduction to Measure Theory, Exercise 1.4.26, p. 94", url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

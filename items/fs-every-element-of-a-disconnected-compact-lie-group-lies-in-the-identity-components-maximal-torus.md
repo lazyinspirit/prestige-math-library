@@ -2,7 +2,7 @@
 id: fs-every-element-of-a-disconnected-compact-lie-group-lies-in-the-identity-components-maximal-torus
 kind: false-statement
 title: Disconnected elements need not lie in identity-component tori
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, def-lie-group]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

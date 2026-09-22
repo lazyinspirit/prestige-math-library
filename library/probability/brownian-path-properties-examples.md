@@ -1,7 +1,7 @@
 ---
 page: brownian-path-properties-examples
 title: Brownian Path Properties — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-expected-dyadic-quadratic-variation

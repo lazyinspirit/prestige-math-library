@@ -2,7 +2,7 @@
 id: lem-kernel-of-identity-minus-compact-is-finite-dimensional
 kind: lemma
 title: Kernel of identity minus compact is finite dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, thm-closed-unit-ball-compact-iff-finite-dimensional, lem-closed-subset-of-a-compact-space-is-compact, thm-metric-open-set-algebra, def-metric-convergence, lem-metric-limits-unique, def-metric-ball, def-linear-basis, def-norm-and-normed-space, lem-compactness-is-intrinsic, rem-real-and-complex-normed-space-convention]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-complex-k-theory-ahss
 kind: corollary
 title: Complex K-theory AHSS
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, thm-complex-bott-periodicity, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §3.1, printed pp. 10–11"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§3.1, K-AHSS, printed pp. 10–11"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

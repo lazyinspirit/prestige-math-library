@@ -2,7 +2,7 @@
 id: cex-identity-is-compact-iff-the-space-is-finite-dimensional
 kind: counterexample
 title: Identity is compact iff the space is finite dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, thm-closed-unit-ball-compact-iff-finite-dimensional, def-linear-basis, def-linear-independence, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-square-summable-family-on-an-arbitrary-index-set, def-metric-ball, thm-metric-open-set-algebra, thm-metric-closure-characterisation]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1, examples and counterexamples for compactness"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

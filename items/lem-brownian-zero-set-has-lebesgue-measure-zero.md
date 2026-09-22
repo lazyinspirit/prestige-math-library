@@ -2,7 +2,7 @@
 id: lem-brownian-zero-set-has-lebesgue-measure-zero
 kind: lemma
 title: "The Brownian zero set has Lebesgue measure zero"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-zero-set, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-standard-normal-and-normal-laws, def-axiom-of-choice, def-brownian-motion, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, lem-probability-measure-basic-identities]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Theorem 6.39"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

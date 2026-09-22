@@ -2,7 +2,7 @@
 id: ex-total-stiefel-whitney-class-of-a-sum-of-universal-lines
 kind: example
 title: Total Stiefel–Whitney class of a sum of universal lines
-status: draft
+status: published
 origin: pipeline
 deps: ["ex-stiefel-whitney-class-of-the-universal-real-line", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 34 symmetric polynomials, printed pp.125–127"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

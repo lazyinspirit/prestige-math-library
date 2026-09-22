@@ -2,7 +2,7 @@
 id: lem-conditioning-a-known-state-and-independent-noise
 kind: lemma
 title: "Conditioning a known state and independent noise"
-status: draft
+status: published
 origin: pipeline
 deps: [def-measure-kernel-and-probability-kernel, thm-measurability-of-integration-against-a-kernel, def-conditional-expectation-given-a-sigma-algebra, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-independent-sigma-algebras-and-events, def-independent-random-elements, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, thm-dynkin-pi-lambda, thm-sections-of-product-measurable-functions-are-measurable, def-product-sigma-algebra-and-finite-product-sigma-algebras, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-law-or-distribution-of-a-random-element, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics, Section 1.4"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

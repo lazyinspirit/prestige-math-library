@@ -2,7 +2,7 @@
 id: thm-integral-cohomology-of-bu-n
 kind: theorem
 title: Integral cohomology of BU(n)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["lem-universal-complex-flag-bundle-is-bt-n", "def-axiom-of-choice", "thm-complex-splitting-principle-with-integral-injective-pullback", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "thm-fundamental-theorem-of-symmetric-polynomials", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "def-complex-flag-bundle-and-chern-roots", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "def-chern-classes-from-the-projective-bundle-relation", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-stiefel-space-grassmannian-and-tautological-bundle"]
@@ -19,6 +19,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Grassmannian cohomology ring, printed pp.82-84"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

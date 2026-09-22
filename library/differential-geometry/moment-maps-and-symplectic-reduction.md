@@ -1,7 +1,7 @@
 ---
 page: moment-maps-and-symplectic-reduction
 title: Moment Maps and Symplectic Reduction
-status: draft
+status: published
 items:
   - def-coadjoint-representation-of-a-lie-group
   - def-symplectic-and-hamiltonian-lie-group-action

@@ -2,7 +2,7 @@
 id: ex-nonzero-d-three-in-the-k-ahss-for-rp-two-times-rp-four
 kind: example
 title: A nonzero d-three in the K-AHSS for RP-two times RP-four
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-first-possible-complex-k-ahss-differential-is-integral-sq-three, lem-a-bockstein-class-on-rp-two-times-rp-four-has-nonzero-integral-sq-three, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §3.2.4, Figure 2 and Proposition 3.12, printed pp. 11–12"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§3.2.4 and Proposition 3.12, printed pp. 11–12"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

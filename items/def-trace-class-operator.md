@@ -2,7 +2,7 @@
 id: def-trace-class-operator
 kind: definition
 title: Trace class operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, lem-finite-rank-operators-are-compact, lem-nth-term-test, def-series-and-absolute-convergence-in-a-normed-space, def-compact-linear-operator, def-operator-norm, def-metric-convergence, def-infimum, def-dimension, def-hilbert-space, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

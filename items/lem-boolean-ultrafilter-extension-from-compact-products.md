@@ -2,7 +2,7 @@
 id: lem-boolean-ultrafilter-extension-from-compact-products
 kind: lemma
 title: Boolean ultrafilter extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality, thm-zorn, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

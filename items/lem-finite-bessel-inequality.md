@@ -2,7 +2,7 @@
 id: lem-finite-bessel-inequality
 kind: lemma
 title: The finite Bessel inequality and best approximation by a finite orthonormal family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-pythagorean-theorem-and-finite-orthogonal-sums, def-real-and-complex-inner-product-space, def-orthogonality-and-orthogonal-complement, def-linear-subspace]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Theorem 2.65 area, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

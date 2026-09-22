@@ -2,7 +2,7 @@
 id: prop-ahss-collapse-determines-only-the-associated-graded-object
 kind: proposition
 title: AHSS collapse generally determines only the associated graded object
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-abutment-to-a-filtered-object", "def-extension-problem-of-a-convergent-spectral-sequence", "def-associated-graded-object-of-a-filtered-object"]
@@ -18,6 +18,8 @@ sources:
     - title: "Romyar Sharifi, Homological Algebra, §4.1, printed pp. 87–90"
       url: https://math.ucla.edu/~sharifi/homalg.pdf
       locator: "§4.1, extension problem, printed pp. 87–90"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

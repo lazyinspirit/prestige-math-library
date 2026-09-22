@@ -2,7 +2,7 @@
 id: def-real-flag-bundle-and-stiefel-whitney-roots
 kind: definition
 title: Real flag bundle and Stiefel–Whitney roots
-status: draft
+status: published
 origin: pipeline
 deps: ["def-real-projective-bundle-and-tautological-line", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "def-real-and-complex-topological-vector-bundle", "thm-numerable-vector-bundles-admit-bundle-metrics", "thm-subordinate-partitions-of-unity-exist", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§7 flag bundles, printed pp.83–96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

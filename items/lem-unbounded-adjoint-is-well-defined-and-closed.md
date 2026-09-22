@@ -2,7 +2,7 @@
 id: lem-unbounded-adjoint-is-well-defined-and-closed
 kind: lemma
 title: "The adjoint is well defined, closed, and reverses inclusions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-dense-top, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Lemma 6.27, Sec. 6.3.1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

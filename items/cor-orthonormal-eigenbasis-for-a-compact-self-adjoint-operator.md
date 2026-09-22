@@ -2,7 +2,7 @@
 id: cor-orthonormal-eigenbasis-for-a-compact-self-adjoint-operator
 kind: corollary
 title: Orthonormal eigenbasis for a compact self adjoint operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-compact-self-adjoint-operators, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-compact-linear-operator, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, lem-orthogonal-complement-is-closed, thm-orthogonal-decomposition-by-a-closed-subspace, thm-complete-subspace-iff-closed, thm-zorn, def-axiom-of-choice, def-maximal-element, def-partial-order, def-chain, def-upper-bound, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-hilbert-space, def-linear-subspace, def-real-and-complex-inner-product-space, def-countable-choice, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Anthony W. Knapp, Advanced Real Analysis — Chapter II, §2, Theorem 2.3"
       url: "https://www.math.stonybrook.edu/~aknapp/download/a2-realanal-inside.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

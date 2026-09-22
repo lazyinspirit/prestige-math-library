@@ -2,7 +2,7 @@
 id: def-deficiency-subspaces-and-deficiency-indices
 kind: definition
 title: "Deficiency subspaces and deficiency indices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-inner-product-space, lem-orthogonal-complement-is-closed, thm-orthogonal-decomposition-by-a-closed-subspace, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, cor-cardinal-absorption, lem-cardinal-arithmetic-basic-laws, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, def-axiom-of-choice, thm-existence-of-a-maximal-orthonormal-family]
@@ -18,6 +18,8 @@ sources:
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
       locator: "Remark 7.24 and Example 7.23, pp.32-34"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

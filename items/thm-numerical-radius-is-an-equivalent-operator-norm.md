@@ -2,7 +2,7 @@
 id: thm-numerical-radius-is-an-equivalent-operator-norm
 kind: theorem
 title: Numerical radius is an equivalent operator norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-numerical-range-and-numerical-radius, cor-normal-operator-norm-equals-spectral-radius, def-axiom-of-choice, thm-cauchy-schwarz-in-an-inner-product-space, def-operator-norm, thm-hilbert-adjoint-properties, def-spectrum-and-resolvent-of-a-bounded-operator, lem-kernel-range-orthogonality-for-hilbert-adjoints, thm-orthogonal-decomposition-by-a-closed-subspace, def-complex-conjugate-real-imaginary-part-and-modulus, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-inner-product-space, thm-parallelogram-law, def-hilbert-space-adjoint, cor-archimedean-reciprocal, lem-complex-conjugation-and-modulus-laws]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.joelshapiro.org/Pubvit/Downloads/NumRangeNotes/numrange_notes.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Corollary 4.11, pp.13–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

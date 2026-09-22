@@ -2,7 +2,7 @@
 id: ex-brownian-transition-density-and-semigroup-convolution
 kind: example
 title: "Brownian density and Gaussian convolution"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, thm-gaussian-integral, thm-substitution, thm-monotone-convergence-for-the-integral, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.6"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

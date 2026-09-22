@@ -2,7 +2,7 @@
 id: thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras
 kind: theorem
 title: Existence of Cartan subalgebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, def-simple-semisimple-and-reductive-lie-algebras, thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra, thm-additive-jordan-chevalley-decomposition, thm-engels-theorem, prop-nilpotent-lie-algebras-are-solvable, thm-lies-theorem, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §2; Theorem 2.9 and Proposition 2.13"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

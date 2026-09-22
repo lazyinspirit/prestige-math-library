@@ -2,7 +2,7 @@
 id: fs-every-verma-module-is-finite-dimensional
 kind: false-statement
 title: Verma modules need not be finite-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-poincare-birkhoff-witt, thm-root-sl-two-triple, def-special-linear-lie-algebra-sl-two, def-universal-enveloping-algebra, def-highest-weight-vector-and-highest-weight-module, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.2, Verma modules"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

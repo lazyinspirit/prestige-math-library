@@ -2,7 +2,7 @@
 id: def-lie-algebra-presented-by-generators-and-relations
 kind: definition
 title: Lie algebra presented by generators and relations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-universal-property-of-the-free-lie-algebra, def-quotient-lie-algebra, lem-lie-algebra-quotient-bracket-is-well-defined]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

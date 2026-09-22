@@ -2,7 +2,7 @@
 id: cex-a-normal-operator-need-not-have-any-eigenvectors
 kind: counterexample
 title: A normal operator need not have any eigenvectors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-spectral-projections-and-resolution-of-the-identity, ex-pvm-of-a-multiplication-operator, thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, def-l-p-space-as-a-quotient-by-null-functions, def-spectrum-and-resolvent-of-a-bounded-operator, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §4.1, printed pp.113–115"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

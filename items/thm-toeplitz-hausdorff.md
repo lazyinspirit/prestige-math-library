@@ -2,7 +2,7 @@
 id: thm-toeplitz-hausdorff
 kind: theorem
 title: Toeplitz hausdorff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-two-dimensional-numerical-range-is-convex, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-numerical-range-and-numerical-radius, def-hilbert-orthogonal-projection]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

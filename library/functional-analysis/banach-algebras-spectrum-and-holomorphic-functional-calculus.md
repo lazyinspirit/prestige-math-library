@@ -1,7 +1,7 @@
 ---
 page: banach-algebras-spectrum-and-holomorphic-functional-calculus
 title: Banach Algebras Spectrum and Holomorphic Functional Calculus
-status: draft
+status: published
 items: [def-unital-banach-algebra, def-invertible-element-and-general-linear-group-of-a-banach-algebra, lem-neumann-series, thm-invertible-group-is-open-and-inversion-is-continuous, def-spectrum-and-resolvent-set-in-a-banach-algebra, lem-resolvent-identity, thm-resolvent-is-banach-valued-holomorphic, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-spectral-radius, thm-polynomial-spectral-mapping, lem-submultiplicative-root-limit, thm-spectral-radius-formula, lem-canonical-banach-complexification-of-a-real-banach-space, def-complexification-and-spectrum-of-a-real-operator, thm-gelfand-mazur, def-banach-algebra-valued-contour-integral, lem-contour-integral-commutes-with-bounded-linear-maps, lem-banach-valued-cauchy-integral-vanishes, lem-admissible-cycle-around-a-compact-plane-set, def-holomorphic-functional-calculus, lem-holomorphic-functional-calculus-is-contour-independent, thm-holomorphic-functional-calculus-homomorphism, thm-holomorphic-spectral-mapping, def-riesz-spectral-projection, thm-riesz-spectral-projection-properties, def-calkin-algebra, cor-atkinson-in-calkin-algebra-language, def-point-continuous-and-residual-spectrum, def-approximate-point-and-compression-spectrum, lem-relations-among-the-five-spectral-parts, thm-boundary-of-spectrum-lies-in-approximate-point-spectrum]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: thm-classification-of-real-semisimple-lie-algebras
 kind: theorem
 title: Classification of real semisimple lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals, thm-complexification-dichotomy-for-a-real-simple-lie-algebra, thm-classification-of-real-forms-by-vogan-diagrams, thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications, def-axiom-of-choice, def-real-form-of-a-complex-lie-algebra, def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-simple-semisimple-and-reductive-lie-algebras, def-satake-diagram, def-vogan-diagram]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, §§40.1-40.3, printed pp. 185-189; Lecture 41, §41.1, printed pp. 190-193"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

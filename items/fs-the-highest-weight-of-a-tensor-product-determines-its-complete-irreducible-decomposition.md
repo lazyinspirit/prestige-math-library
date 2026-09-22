@@ -2,7 +2,7 @@
 id: fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition
 kind: false-statement
 title: A tensor-product top weight does not determine all constituents
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-finite-dimensional-representations-of-sl-two, def-special-linear-lie-algebra-sl-two, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

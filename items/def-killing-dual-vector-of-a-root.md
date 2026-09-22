@@ -2,7 +2,7 @@
 id: def-killing-dual-vector-of-a-root
 kind: definition
 title: Killing-dual vector of a root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-killing-form-orthogonality-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §4, after Proposition 2.17"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

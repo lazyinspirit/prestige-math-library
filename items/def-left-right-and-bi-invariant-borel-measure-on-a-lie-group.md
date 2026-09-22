@@ -2,7 +2,7 @@
 id: def-left-right-and-bi-invariant-borel-measure-on-a-lie-group
 kind: definition
 title: Left, right, and bi-invariant Borel measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-lie-group, def-left-haar-integral-and-left-haar-measure, def-radon-measure-on-an-lch-space, thm-rmk-uniqueness-among-radon-measures]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

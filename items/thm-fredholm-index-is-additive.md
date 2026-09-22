@@ -2,7 +2,7 @@
 id: thm-fredholm-index-is-additive
 kind: theorem
 title: Fredholm index is additive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-operator-cokernel-and-index, def-bounded-linear-operator, def-banach-space, thm-atkinson, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-rank-nullity, def-dimension, def-linear-map, def-linear-subspace, def-quotient-vector-space-coset-notation, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 pp.195–196, Theorem 4.40"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

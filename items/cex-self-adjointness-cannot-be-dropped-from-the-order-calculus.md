@@ -2,7 +2,7 @@
 id: cex-self-adjointness-cannot-be-dropped-from-the-order-calculus
 kind: counterexample
 title: Self adjointness cannot be dropped from the order calculus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-order-on-bounded-self-adjoint-operators, def-countable-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-spectrum-and-resolvent-of-a-bounded-operator, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–13"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

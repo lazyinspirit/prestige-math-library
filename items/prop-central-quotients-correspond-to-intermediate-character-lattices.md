@@ -2,7 +2,7 @@
 id: prop-central-quotients-correspond-to-intermediate-character-lattices
 kind: proposition
 title: Central quotients and intermediate character lattices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, thm-compact-connected-lie-groups-are-classified-by-root-data, thm-smith-normal-form-existence-over-a-pid, def-axiom-of-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, prop-weyl-length-equals-positive-root-inversion-number, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice, def-roots-of-a-compact-connected-lie-group, thm-compact-group-weyl-group-is-finite, prop-exponential-map-is-natural-for-lie-group-homomorphisms, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §7"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

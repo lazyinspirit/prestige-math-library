@@ -2,7 +2,7 @@
 id: thm-fourier-basis-and-parseval-on-the-n-torus
 kind: theorem
 title: The Fourier basis and Parseval's identity on the finite torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-complex-stone-weierstrass-self-adjoint, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, lem-finite-tori-are-compact-hausdorff-character-spaces, def-countable-choice, thm-complex-holder-minkowski-and-the-quotient-norm, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-hilbert-space-fourier-expansion]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5, pp.63–68"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

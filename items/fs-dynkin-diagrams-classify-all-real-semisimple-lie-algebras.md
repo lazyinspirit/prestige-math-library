@@ -2,7 +2,7 @@
 id: fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras
 kind: false-statement
 title: Dynkin diagrams classify real semisimple Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-classical-simple-lie-algebras-and-their-killing-forms]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

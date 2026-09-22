@@ -2,7 +2,7 @@
 id: prop-the-center-is-the-common-kernel-of-all-roots-inside-the-cartan-subalgebra
 kind: proposition
 title: The center is the common kernel of the roots inside the Cartan subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Theorem 19.19(i)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

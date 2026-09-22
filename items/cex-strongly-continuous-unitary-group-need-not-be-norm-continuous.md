@@ -2,7 +2,7 @@
 id: cex-strongly-continuous-unitary-group-need-not-be-norm-continuous
 kind: counterexample
 title: "A strongly continuous unitary group need not be norm continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, ex-position-operator-on-l-two-of-r, def-strongly-continuous-one-parameter-unitary-group, def-operator-norm, def-bounded-linear-operator, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-axiom-of-choice, thm-bounded-operator-space-is-banach]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 5.1, pp.145-148"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

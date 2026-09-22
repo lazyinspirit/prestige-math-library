@@ -1,7 +1,7 @@
 ---
 page: the-ito-integral-with-respect-to-brownian-motion
 title: The Ito Integral with Respect to Brownian Motion
-status: draft
+status: published
 items:
   - def-continuous-time-adapted-process-and-martingale
   - def-progressively-measurable-and-predictable-process

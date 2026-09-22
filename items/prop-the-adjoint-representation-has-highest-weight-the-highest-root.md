@@ -2,7 +2,7 @@
 id: prop-the-adjoint-representation-has-highest-weight-the-highest-root
 kind: proposition
 title: The adjoint highest weight is the highest root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-height-of-a-root-and-highest-root", "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra", "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional", "prop-brackets-of-root-spaces", "def-adjoint-representation-of-a-lie-algebra", "def-simple-semisimple-and-reductive-lie-algebras", "def-lie-subalgebra-ideal-and-center", "def-highest-weight-vector-and-highest-weight-module", "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates", "def-axiom-of-choice", "def-derived-series-and-solvable-lie-algebra", "def-semisimple-lie-algebra-by-vanishing-radical"]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.4, Example 8.26"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

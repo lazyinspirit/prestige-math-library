@@ -2,7 +2,7 @@
 id: lem-bounded-hilbert-operators-form-a-c-star-algebra
 kind: lemma
 title: Bounded Hilbert operators form a C star algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hilbert-adjoint-properties, thm-bounded-operator-space-is-banach, def-countable-choice, def-hilbert-space, def-banach-space, def-c-star-algebra, def-unital-banach-algebra, def-space-of-bounded-linear-operators, def-operator-norm]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §3, pp.6–10"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

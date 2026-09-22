@@ -2,7 +2,7 @@
 id: ex-stability-and-rank-cutoff-under-adding-a-trivial-summand
 kind: example
 title: Stability and rank cutoff under adding a trivial summand
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes, def-pontryagin-classes-by-complexification, def-chern-classes-from-the-projective-bundle-relation, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1-3.2"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Stability of Chern and Pontryagin classes, printed pp.80-96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

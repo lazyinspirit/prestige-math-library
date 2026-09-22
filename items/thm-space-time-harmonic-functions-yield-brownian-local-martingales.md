@@ -2,7 +2,7 @@
 id: thm-space-time-harmonic-functions-yield-brownian-local-martingales
 kind: theorem
 title: "Space-time harmonic functions yield Brownian local martingales up to exit lifetime"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-heine-borel-rn, lem-distance-to-set-is-lipschitz, thm-continuous-image-of-a-compact-space-is-compact, thm-heine-cantor-metric, thm-dominated-convergence, thm-multidimensional-ito-formula-for-brownian-driven-processes, def-continuous-brownian-ito-process, def-d-dimensional-brownian-motion, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-continuity-real, thm-heine-cantor-r, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.7"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

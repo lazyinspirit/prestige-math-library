@@ -2,7 +2,7 @@
 id: prop-classical-types-correspond-to-sl-so-and-sp
 kind: proposition
 title: Classical types correspond to sl, so and sp
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cartan-killing-classification-of-complex-simple-lie-algebras, prop-root-systems-of-the-classical-complex-lie-algebras, thm-isomorphism-theorem-for-complex-semisimple-lie-algebras, def-axiom-of-choice, ex-classical-simple-lie-algebras-and-their-killing-forms]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, (2.43) and (2.50), printed pp. 150 and 155"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

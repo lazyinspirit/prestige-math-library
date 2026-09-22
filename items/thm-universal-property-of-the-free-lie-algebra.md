@@ -2,7 +2,7 @@
 id: thm-universal-property-of-the-free-lie-algebra
 kind: theorem
 title: Universal property of the free Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-free-lie-algebra-on-a-vector-space, thm-universal-property-of-the-tensor-algebra, def-lie-algebra-over-a-field, cor-every-vector-space-has-a-basis, cor-the-enveloping-algebra-has-no-hidden-linear-relations-in-degree-one, lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-up-to-isomorphism-of-the-split-real-form
 kind: theorem
 title: Existence and uniqueness up to isomorphism of the split real form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-split-real-form, def-real-form-of-a-complex-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra, def-axiom-of-choice, thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, def-positive-system-and-base-of-simple-roots, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-killing-form-of-a-finite-dimensional-lie-algebra, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, def-cartan-matrix-of-a-based-root-system, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-serre-lie-algebra-of-a-finite-type-cartan-matrix, def-lie-algebra-presented-by-generators-and-relations, prop-trace-forms-are-symmetric-and-invariant, prop-brackets-of-root-spaces, cor-opposite-root-spaces-pair-nondegenerately, cor-cartan-integers-are-integral, thm-serre-presentation-theorem, thm-root-sl-two-triple, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, lem-chevalley-basis-and-real-structure-constants]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.1-§39.2 and Theorem 39.6, printed pp. 180-183"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

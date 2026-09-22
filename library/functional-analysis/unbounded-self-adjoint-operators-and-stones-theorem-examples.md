@@ -1,7 +1,7 @@
 ---
 page: unbounded-self-adjoint-operators-and-stones-theorem-examples
 title: Unbounded Self Adjoint Operators and Stones Theorem — Examples
-status: draft
+status: published
 items: []
 examples: [ex-unbounded-multiplication-operator-and-its-domain, ex-position-operator-on-l-two-of-r, ex-periodic-derivative-and-its-unitary-translation-group, cex-the-minimal-derivative-is-symmetric-not-self-adjoint, cex-an-everywhere-defined-closed-operator-on-a-banach-space-cannot-be-unbounded, cex-strongly-continuous-unitary-group-need-not-be-norm-continuous, rem-self-adjoint-extensions-and-deficiency-indices]
 ---

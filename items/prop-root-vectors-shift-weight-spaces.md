@@ -2,7 +2,7 @@
 id: prop-root-vectors-shift-weight-spaces
 kind: proposition
 title: Root vectors shift weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-representation-of-a-lie-algebra]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

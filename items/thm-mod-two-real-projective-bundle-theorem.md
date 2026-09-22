@@ -2,7 +2,7 @@
 id: thm-mod-two-real-projective-bundle-theorem
 kind: theorem
 title: Mod-two real projective bundle theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "def-real-projective-bundle-and-tautological-line", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "thm-leray-hirsch-module-isomorphism", "prop-cup-product-is-natural-unital-and-associative", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-fibration-sequence-is-natural", "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology", "lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice", "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "def-axiom-of-choice", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "thm-five-lemma-for-modules", "thm-singular-cohomology-is-graded-commutative"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§7 projective-bundle theorem, printed pp.83–96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

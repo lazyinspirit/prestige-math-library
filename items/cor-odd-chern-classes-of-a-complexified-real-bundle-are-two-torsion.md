@@ -2,7 +2,7 @@
 id: cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion
 kind: corollary
 title: Odd Chern classes of a complexified real bundle are two-torsion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-complexification-is-conjugation-invariant, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 36"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Odd Chern classes are two-torsion, printed pp.134-137"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

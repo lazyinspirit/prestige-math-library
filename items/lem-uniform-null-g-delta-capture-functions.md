@@ -2,7 +2,7 @@
 id: lem-uniform-null-g-delta-capture-functions
 kind: lemma
 title: Uniform null G-delta sets capture block functions
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-borel-hierarchy, thm-separable-complete-metric-baire-in-zf, thm-complete-subspace-iff-closed, lem-cantor-and-baire-sequence-coding]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.11, pp. 47-50"}
     - {title: "Terence Tao, An Introduction to Measure Theory", url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf", locator: "Outer measure and the Caratheodory construction, Chapter 1"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

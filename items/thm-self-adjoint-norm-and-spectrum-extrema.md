@@ -2,7 +2,7 @@
 id: thm-self-adjoint-norm-and-spectrum-extrema
 kind: theorem
 title: Self adjoint norm and spectrum extrema
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-spectrum-of-a-self-adjoint-operator-is-real, lem-bounded-hilbert-operators-form-a-c-star-algebra, thm-spectrum-is-nonempty-compact-and-norm-bounded, thm-compactness-under-continuous-maps, thm-continuous-functional-calculus-properties, lem-spectrum-of-a-positive-operator-is-nonnegative, def-axiom-of-choice, def-order-on-bounded-self-adjoint-operators, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-spectrum-and-resolvent-of-a-bounded-operator]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

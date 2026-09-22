@@ -2,7 +2,7 @@
 id: lem-nonempty-countable-set-has-a-padded-enumeration
 kind: lemma
 title: "A nonempty countable set has a padded enumeration in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable, lem-countable-iff-surjection-from-n, def-natural-numbers, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: cases
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-rapid-and-raisonnier-filters
 kind: definition
 title: Rapid filters and the Raisonnier family
-status: draft
+status: published
 origin: pipeline
 deps: [def-filter, def-cantor-sequence-space-for-descriptive-set-theory, def-constructible-hierarchy-and-constructible-rank, def-definable-subsets-of-a-membership-structure, thm-set-structure-satisfaction-recursion, thm-transfinite-recursion]
 provenance:
@@ -11,6 +11,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.6 and Definition 3.3, pp. 44-47"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

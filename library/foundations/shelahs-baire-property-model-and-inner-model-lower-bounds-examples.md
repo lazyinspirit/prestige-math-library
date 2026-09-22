@@ -1,7 +1,7 @@
 ---
 page: shelahs-baire-property-model-and-inner-model-lower-bounds-examples
 title: "Shelah's Baire-Property Model and Inner-Model Lower Bounds — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-universal-meagre-stage-absorbs-old-nowhere-dense-sets, ex-raisonnier-first-difference-cover, ex-uniform-null-capture-on-a-block-function, fs-the-baire-property-model-needs-an-inaccessible, ex-sweet-amalgam-over-a-common-complete-subalgebra]
 ---

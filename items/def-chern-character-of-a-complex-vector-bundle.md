@@ -2,7 +2,7 @@
 id: def-chern-character-of-a-complex-vector-bundle
 kind: definition
 title: Chern character of a complex vector bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-complex-splitting-principle-with-integral-injective-pullback", "thm-fundamental-theorem-of-symmetric-polynomials", "lem-cohomology-of-a-finite-cw-complex-vanishes-above-its-dimension", "def-chern-classes-from-the-projective-bundle-relation", "def-complex-flag-bundle-and-chern-roots", "def-axiom-of-choice", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "thm-leray-hirsch-module-isomorphism", "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator", "def-schubert-cells-in-real-and-complex-grassmannians", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-singular-cup-product-on-cochains"]
@@ -18,6 +18,8 @@ sources:
     - title: "Milnor and Stasheff, Characteristic Classes, Problem 16-B"
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "Chern character formulas, printed pp.197-199"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

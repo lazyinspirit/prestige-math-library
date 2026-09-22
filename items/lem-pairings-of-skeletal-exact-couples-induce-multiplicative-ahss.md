@@ -2,7 +2,7 @@
 id: lem-pairings-of-skeletal-exact-couples-induce-multiplicative-ahss
 kind: lemma
 title: Pairings of skeletal exact couples induce multiplicative AHSS
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-cellular-approximation-for-maps-of-cw-pairs, def-exact-couple, def-skeletal-filtration-for-generalized-cohomology]
@@ -21,6 +21,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §1.3, printed p. 4"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§1.3, printed p. 4: the AHSS as stated carries no information about multiplicative structure"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

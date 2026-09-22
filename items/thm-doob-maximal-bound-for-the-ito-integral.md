@@ -2,7 +2,7 @@
 id: thm-doob-maximal-bound-for-the-ito-integral
 kind: theorem
 title: "Doob maximal bound for the Ito integral"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ito-integral-process-has-a-continuous-martingale-version, thm-doob-lp-maximal-inequality, thm-ito-isometry-and-linearity-in-predictable-l2, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, thm-monotone-convergence-for-the-integral, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, lem-rat-embeds-dense, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Proposition 3.2.4"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

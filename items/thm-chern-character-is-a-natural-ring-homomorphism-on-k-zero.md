@@ -2,7 +2,7 @@
 id: thm-chern-character-is-a-natural-ring-homomorphism-on-k-zero
 kind: theorem
 title: Chern character is a natural ring homomorphism on K-zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-chern-character-of-a-complex-vector-bundle, thm-complex-splitting-principle-with-integral-injective-pullback, thm-naturality-normalization-and-whitney-sum-for-chern-classes, prop-first-chern-class-of-tensor-dual-and-conjugate-lines, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-whitney-sum-monoid-of-complex-vector-bundles, def-complex-topological-k-zero-by-grothendieck-completion, def-grothendieck-ring-structure-and-rank-map, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 4.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Propositions 4.2-4.5 on the Chern character, printed pp.109-111"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

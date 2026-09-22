@@ -2,7 +2,7 @@
 id: fs-the-root-space-decomposition-classifies-real-semisimple-lie-algebras-with-no-extra-data
 kind: false-statement
 title: The root-space decomposition classifies real semisimple Lie algebras with no extra data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-special-linear-lie-algebra-sl-two, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-semisimple-and-nilpotent-endomorphisms, def-simple-semisimple-and-reductive-lie-algebras, def-derivation-of-a-lie-algebra, ex-killing-form-of-sl-two, thm-cartans-semisimplicity-criterion]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

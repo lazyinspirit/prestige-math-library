@@ -2,7 +2,7 @@
 id: thm-real-splitting-principle-with-mod-two-injective-pullback
 kind: theorem
 title: Real splitting principle with mod-two injective pullback
-status: draft
+status: published
 origin: pipeline
 deps: ["def-real-flag-bundle-and-stiefel-whitney-roots", "thm-mod-two-real-projective-bundle-theorem", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§7 splitting principle, printed pp.83–96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

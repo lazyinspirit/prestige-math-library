@@ -2,7 +2,7 @@
 id: rem-nonregular-or-nonfree-symplectic-quotients-need-not-be-manifolds
 kind: remark
 title: Nonregular or nonfree symplectic quotients need not be manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-marsden-weinstein-meyer-symplectic-reduction, lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-countable-choice]
@@ -17,6 +17,8 @@ sources:
     - title: Eckhard Meinrenken, Symplectic Geometry
       url: https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §8.1, Remarks before and after Theorem 8.3, printed page 101
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

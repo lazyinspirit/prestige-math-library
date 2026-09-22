@@ -2,7 +2,7 @@
 id: thm-integration-by-parts-for-brownian-ito-processes
 kind: theorem
 title: "Integration by parts for Brownian Ito processes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, thm-quadratic-covariation-of-brownian-ito-processes, thm-ito-formula-one-dimensional, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, thm-heine-cantor-r, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
     - title: "Andreas Eberle, Introduction to Stochastic Analysis, Corollary 6.17"
       url: "https://wt.iam.uni-bonn.de/fileadmin/WT/Inhalt/people/Andreas_Eberle/IntroStoAn1516/IntroStochAnalysis2015.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

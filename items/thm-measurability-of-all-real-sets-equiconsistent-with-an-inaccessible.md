@@ -2,7 +2,7 @@
 id: thm-measurability-of-all-real-sets-equiconsistent-with-an-inaccessible
 kind: theorem
 title: Exact equiconsistency of universal measurability and an inaccessible
-status: draft
+status: published
 origin: pipeline
 deps: [thm-all-real-sets-measurable-gives-an-inaccessible-inner-model, thm-solovay-model-regularity-relative-to-an-inaccessible, thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l, thm-constructible-inner-model-semantic-and-formal-schema, lem-interpretation-translates-finite-derivations, def-countable-choice, def-boldface-sigma-one-three-measurability]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Theorem 3.3 and the concluding corollary, pp. 43 and 51"}
     - {title: "Robert M. Solovay, A Model of Set-Theory in Which Every Set of Reals Is Lebesgue Measurable", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf", locator: "Part I, Sections 4.1-4.4"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

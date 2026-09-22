@@ -2,7 +2,7 @@
 id: lem-edge-maps-of-a-bounded-skeletal-ahss
 kind: lemma
 title: Edge maps of a bounded skeletal AHSS
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-exact-couple", "thm-an-exact-couple-generates-a-spectral-sequence"]
@@ -15,6 +15,8 @@ sources:
     - title: "Davis–Kirk, Lecture Notes in Algebraic Topology, §9.1, printed pp. 237–246"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "§9.1, exact filtration and edge maps, printed pp. 237–246"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

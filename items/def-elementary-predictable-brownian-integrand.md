@@ -2,7 +2,7 @@
 id: def-elementary-predictable-brownian-integrand
 kind: definition
 title: "Elementary predictable Brownian integrands"
-status: draft
+status: published
 origin: pipeline
 deps: [def-progressively-measurable-and-predictable-process, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, thm-brownian-future-path-markov-property, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

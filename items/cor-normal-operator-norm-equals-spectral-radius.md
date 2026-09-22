@@ -2,7 +2,7 @@
 id: cor-normal-operator-norm-equals-spectral-radius
 kind: corollary
 title: Normal operator norm equals spectral radius
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-c-star-spectral-radius-equals-norm-for-normal-elements, def-c-star-algebra-generated-by-a-normal-operator, def-axiom-of-choice, lem-bounded-hilbert-operators-form-a-c-star-algebra, def-spectral-radius, def-spectrum-and-resolvent-of-a-bounded-operator, thm-spectrum-is-nonempty-compact-and-norm-bounded, thm-bounded-inverse-theorem, def-self-adjoint-positive-unitary-and-normal-operator]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–13"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

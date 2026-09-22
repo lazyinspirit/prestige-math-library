@@ -2,7 +2,7 @@
 id: cex-spectrum-can-shrink-in-a-larger-banach-algebra
 kind: counterexample
 title: Spectrum can shrink in a larger Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-goursat-triangle-theorem, thm-uniform-limit-continuous-complex-functions, thm-uniform-limit-interchanges-complex-line-integrals, thm-morera-triangle-theorem, thm-boundary-maximum-modulus-principle, ex-continuous-functions-form-a-commutative-banach-algebra, def-unital-banach-algebra]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1.1 and §5.2.1 (the disc algebra), printed pp. 209–214 and 219–222"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

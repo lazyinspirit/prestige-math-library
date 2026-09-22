@@ -2,7 +2,7 @@
 id: thm-every-commutative-c-star-algebra-has-an-approximate-unit
 kind: theorem
 title: Every commutative C star algebra has an approximate unit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-nonunital-commutative-gelfand-naimark", "def-approximate-unit-and-proper-c-star-morphism", "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set", "def-axiom-of-choice", "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration", "def-c-star-algebra", "def-compact-support-c-c-and-c-zero-on-an-lch-space", "thm-closed-subspace-of-a-compact-space-is-compact"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

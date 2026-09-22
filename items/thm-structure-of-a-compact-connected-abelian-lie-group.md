@@ -2,7 +2,7 @@
 id: thm-structure-of-a-compact-connected-abelian-lie-group
 kind: theorem
 title: Structure of compact connected abelian Lie groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, def-exponential-map-of-a-lie-group, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-compactness-under-continuous-maps]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§6.1, Lemma 6.11, Fact 6.12, and Theorem 6.13, printed pages 30–31"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

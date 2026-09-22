@@ -2,7 +2,7 @@
 id: lem-l-two-with-the-integral-pairing-is-a-hilbert-space
 kind: lemma
 title: $L^2$ with the integral pairing is a Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, cor-cauchy-schwarz-inequality-for-l-two, thm-riesz-fischer-completeness-of-l-p, def-complex-lp-and-euclidean-test-function-conventions, lem-complex-lp-completeness-density-and-inner-product, def-countable-choice, def-real-and-complex-inner-product-space, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-characters-on-a-commutative-c-star-algebra-preserve-star
 kind: lemma
 title: Characters on a unital commutative C star algebra preserve star
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, def-c-star-algebra, def-character-and-maximal-ideal-space, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

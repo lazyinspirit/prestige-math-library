@@ -2,7 +2,7 @@
 id: lem-cohomology-of-a-finite-cw-complex-vanishes-above-its-dimension
 kind: lemma
 title: Cohomology of a finite CW complex vanishes above its dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cellular-cochains-compute-cohomology-with-local-coefficients, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map
 kind: example
 title: Circle rotation on complex n-space and its quadratic moment map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, def-fundamental-vector-field-of-a-left-action, thm-the-canonical-cotangent-two-form-is-symplectic, def-poisson-bracket-on-a-symplectic-manifold, def-coadjoint-representation-of-a-lie-group, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

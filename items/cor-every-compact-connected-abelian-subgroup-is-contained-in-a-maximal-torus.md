@@ -2,7 +2,7 @@
 id: cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus
 kind: corollary
 title: Compact connected abelian subgroups lie in maximal tori
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, thm-maximal-tori-exist-in-compact-lie-groups, def-axiom-of-choice, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-cartans-closed-subgroup-theorem]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §4, Corollary 4.46 and the preceding maximality discussion"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

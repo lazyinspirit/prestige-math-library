@@ -2,7 +2,7 @@
 id: thm-shelah-sweet-partial-isomorphism-extension
 kind: theorem
 title: Sweet amalgamation extends partial Boolean isomorphisms
-status: draft
+status: published
 origin: pipeline
 deps: [thm-shelah-sweet-amalgamation-preserves-sweetness, lem-shelah-continuous-unions-of-sweetness-models, def-complete-boolean-algebra-and-regular-open-sets, def-axiom-of-choice]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Claims 7.12-7.13, pp. 41-42"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

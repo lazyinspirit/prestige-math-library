@@ -2,7 +2,7 @@
 id: lem-isolated-point-kelley-repair
 kind: lemma
 title: "The isolated-point repair of Kelley's choice space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-compact-space, def-t0-and-t1-spaces, def-standard-topologies, def-topological-space, lem-finite-choice, def-countable, def-subspace-topology-top, def-disjoint-union-topology, thm-coproduct-universal-property]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

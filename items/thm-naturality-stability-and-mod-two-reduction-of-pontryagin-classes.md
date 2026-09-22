@@ -2,7 +2,7 @@
 id: thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes
 kind: theorem
 title: Naturality, stability, and mod-two reduction of Pontryagin classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-pontryagin-classes-by-complexification", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "thm-mod-two-reduction-of-chern-classes", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-axiom-of-choice", "thm-singular-cohomology-is-graded-commutative", "def-stiefel-whitney-classes-from-the-projective-bundle-relation"]
@@ -16,6 +16,8 @@ sources:
     - title: "Milnor and Stasheff, Characteristic Classes, section 15"
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "Naturality, stability and mod 2 reduction of Pontryagin classes, printed pp.175-181"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

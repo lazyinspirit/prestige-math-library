@@ -2,7 +2,7 @@
 id: thm-blumenthal-zero-one-law
 kind: theorem
 title: "Blumenthal's zero-one law"
-status: draft
+status: published
 origin: pipeline
 deps: [def-germ-sigma-algebra-at-zero, def-natural-and-usual-augmented-brownian-filtrations, thm-brownian-future-path-markov-property, def-brownian-motion, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Theorem 6.13"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

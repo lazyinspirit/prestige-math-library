@@ -2,7 +2,7 @@
 id: lem-orthogonal-complement-is-closed
 kind: lemma
 title: Orthogonal complements are closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, cor-inner-product-induces-a-norm, def-metric-topology, def-metric-ball]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

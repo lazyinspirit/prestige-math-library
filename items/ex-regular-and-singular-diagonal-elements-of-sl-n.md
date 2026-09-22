@@ -2,7 +2,7 @@
 id: ex-regular-and-singular-diagonal-elements-of-sl-n
 kind: example
 title: Regular and singular diagonal elements of sl_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, prop-centralizer-dimension-from-vanishing-roots, def-regular-root-hyperplanes, cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra, def-regular-element-and-rank-of-a-complex-lie-algebra]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the regular-root and centralizer suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

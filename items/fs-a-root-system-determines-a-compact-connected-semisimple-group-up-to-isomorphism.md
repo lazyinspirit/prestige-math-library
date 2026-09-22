@@ -2,7 +2,7 @@
 id: fs-a-root-system-determines-a-compact-connected-semisimple-group-up-to-isomorphism
 kind: false-statement
 title: Root systems determine only isogeny class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems, prop-central-quotients-correspond-to-intermediate-character-lattices, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §7 and Chapter V §8 (isogeny versus isomorphism)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

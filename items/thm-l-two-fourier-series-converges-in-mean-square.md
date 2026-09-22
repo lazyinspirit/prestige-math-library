@@ -2,7 +2,7 @@
 id: thm-l-two-fourier-series-converges-in-mean-square
 kind: theorem
 title: Fourier series converge in mean square
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-directed-set-and-net, thm-trigonometric-system-is-complete-in-l-two-of-the-torus, thm-hilbert-space-fourier-expansion, def-countable-choice, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal, lem-finite-set-has-max, def-square-summable-family-on-an-arbitrary-index-set]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

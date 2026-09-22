@@ -2,7 +2,7 @@
 id: thm-riesz-schauder-spectrum-of-a-compact-operator
 kind: theorem
 title: Riesz schauder spectrum of a compact operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-of-a-bounded-operator, def-compact-linear-operator, def-bounded-linear-operator, lem-neumann-series-and-small-perturbations-of-bounded-inverses, thm-fredholm-alternative-for-identity-minus-compact, lem-riesz-schauder-ascent-and-descent-stabilize, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-heine-borel-rn, def-complex-metric-convergence-and-continuity, thm-metric-open-set-algebra, def-metric-compactness, def-metric-ball, def-banach-space, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, thm-complete-subspace-iff-closed]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.6, spectrum of a compact operator"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

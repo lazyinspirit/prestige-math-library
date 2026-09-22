@@ -2,7 +2,7 @@
 id: prop-compact-group-symplectic-actions-admit-an-invariant-compatible-almost-complex-structure
 kind: proposition
 title: Compact-group symplectic actions admit an invariant compatible almost-complex structure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symplectic-and-hamiltonian-lie-group-action, cor-normalized-haar-measure-on-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, cor-every-smooth-manifold-admits-a-riemannian-metric, lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots, def-riemannian-metric-and-riemannian-manifold, def-axiom-of-choice, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 22, §22.3 and Lecture 23, proof of Theorem 23.1, printed pages 136, 141--145
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

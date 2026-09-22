@@ -2,7 +2,7 @@
 id: cor-semisimple-hamiltonian-actions-have-unique-equivariant-moment-map-when-one-exists
 kind: corollary
 title: Semisimple Hamiltonian actions have a unique equivariant moment map when one exists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed-covectors, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-coadjoint-representation-of-a-lie-group, def-simple-semisimple-and-reductive-lie-algebras, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional
 kind: proposition
 title: The highest-weight space is one-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-a-finite-dimensional-irreducible-module-is-generated-by-any-highest-weight-vector, lem-highest-weight-modules-have-weights-below-the-top-weight, thm-triangular-decomposition-of-a-complex-semisimple-lie-algebra, thm-poincare-birkhoff-witt, prop-root-vectors-shift-weight-spaces, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.2, Theorem 8.14 and its proof"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

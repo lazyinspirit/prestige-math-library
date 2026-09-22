@@ -2,7 +2,7 @@
 id: thm-trigonometric-system-is-complete-in-l-two-of-the-torus
 kind: theorem
 title: The trigonometric system is complete in $L^2$ of the torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-trigonometric-characters-are-orthonormal, cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, def-countable-choice, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-fourier-coefficients-and-trigonometric-polynomials]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

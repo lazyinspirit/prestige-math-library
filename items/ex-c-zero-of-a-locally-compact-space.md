@@ -2,7 +2,7 @@
 id: ex-c-zero-of-a-locally-compact-space
 kind: example
 title: C zero of a locally compact space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-c-zero-and-ell-infinity, def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-minimal-c-star-unitization, thm-character-space-of-the-unitization-is-one-point-compactification, thm-characters-on-a-unital-banach-algebra-are-continuous, thm-nonunital-commutative-gelfand-naimark, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-inner-product-induces-a-norm
 kind: corollary
 title: The induced length is a norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cauchy-schwarz-in-an-inner-product-space, def-inner-product-norm, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, lem-complex-conjugation-and-modulus-laws, lem-of-abs-value, lem-of-square-monotone, thm-nth-roots-exist, def-complex-conjugate-real-imaginary-part-and-modulus]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

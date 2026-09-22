@@ -2,7 +2,7 @@
 id: thm-cyclic-spectral-representation
 kind: theorem
 title: Cyclic spectral representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cyclic-vector-and-cyclic-normal-operator, thm-bounded-borel-pvm-integral, thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, thm-c-c-is-dense-in-l-p-for-radon-measures, thm-riesz-fischer-completeness-of-l-p, def-l-p-space-as-a-quotient-by-null-functions, thm-continuous-functional-calculus-for-bounded-normal-operators, lem-scalar-and-complex-measures-from-a-pvm, def-regular-borel-measure-on-an-lch-space, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §10, printed pp.293–299"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

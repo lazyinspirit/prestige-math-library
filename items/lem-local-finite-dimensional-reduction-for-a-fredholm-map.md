@@ -2,7 +2,7 @@
 id: lem-local-finite-dimensional-reduction-for-a-fredholm-map
 kind: lemma
 title: Local finite-dimensional reduction for a Fredholm map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-map-between-banach-manifolds, lem-fredholm-splitting-and-parametrix, thm-implicit-function-theorem-for-banach-spaces, def-axiom-of-choice, thm-bounded-inverse-theorem, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-c-k-map-between-banach-spaces, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, def-complemented-subspace, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-root-and-root-space-relative-to-a-cartan-subalgebra
 kind: definition
 title: Root and root space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-subalgebra-of-a-lie-algebra, def-derivation-of-a-lie-algebra]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

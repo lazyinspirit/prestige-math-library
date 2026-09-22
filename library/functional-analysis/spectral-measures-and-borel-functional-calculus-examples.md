@@ -1,7 +1,7 @@
 ---
 page: spectral-measures-and-borel-functional-calculus-examples
 title: Spectral Measures and Borel Functional Calculus — Examples
-status: draft
+status: published
 items: []
 examples: [ex-pvm-of-a-diagonal-normal-operator, ex-pvm-of-a-multiplication-operator, ex-spectral-projection-of-an-isolated-eigenvalue-agrees-with-the-riesz-projection, ex-sign-and-positive-negative-parts-of-a-self-adjoint-operator, ex-borel-functional-calculus-defines-a-discontinuous-characteristic-function, cex-continuous-functional-calculus-cannot-produce-every-spectral-projection, cex-a-normal-operator-need-not-have-any-eigenvectors, rem-direct-integrals-and-general-multiplicity-theory]
 ---

@@ -2,7 +2,7 @@
 id: thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l
 kind: theorem
 title: Sigma-one-three measurability makes omega-one inaccessible in L
-status: draft
+status: published
 origin: pipeline
 deps: [def-boldface-sigma-one-three-measurability, lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one, lem-raisonnier-family-is-a-sigma-one-three-filter, thm-raisonnier-filter-is-rapid-from-null-code-measurability, thm-rapid-filters-are-not-lebesgue-measurable, def-countable-choice, lem-measurable-null-code-orders-bound-constructible-null-unions]
 proof_strategy: contradiction
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Theorem 3.4 and Theorem 3.3, pp. 50-51"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

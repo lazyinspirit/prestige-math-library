@@ -2,7 +2,7 @@
 id: cor-compact-operator-iff-approximation-numbers-tend-to-zero
 kind: corollary
 title: Compact operator iff approximation numbers tend to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-singular-values-equal-approximation-numbers, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-infimum, thm-infimum-property, def-dimension, def-metric-convergence, def-hilbert-space, def-banach-space, def-countable-choice, thm-singular-value-decomposition-for-compact-operators]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

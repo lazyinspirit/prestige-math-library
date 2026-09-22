@@ -1,7 +1,7 @@
 ---
 page: compact-operators-and-riesz-schauder-theory-examples
 title: Compact Operators and Riesz Schauder Theory — Examples
-status: draft
+status: published
 items: []
 examples: [ex-diagonal-operator-on-ell-p-is-compact-iff-diagonal-tends-to-zero, ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval, cex-identity-is-compact-iff-the-space-is-finite-dimensional, cex-a-compact-operator-can-have-nondense-range, ex-fredholm-alternative-for-an-integral-equation, cex-compactness-is-not-preserved-by-strong-operator-limits, rem-approximation-property-controls-finite-rank-density-in-compact-operators]
 ---

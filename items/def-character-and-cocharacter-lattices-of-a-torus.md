@@ -2,7 +2,7 @@
 id: def-character-and-cocharacter-lattices-of-a-torus
 kind: definition
 title: Character and cocharacter lattices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: []
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

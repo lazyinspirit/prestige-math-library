@@ -2,7 +2,7 @@
 id: cex-two-nonconjugate-real-cartan-subalgebras
 kind: counterexample
 title: Two nonconjugate real cartan subalgebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-real-cartan-subalgebras-need-not-be-conjugate, ex-compact-and-split-cartan-subalgebras-of-sl-two-r, def-cartan-subalgebra-of-a-lie-algebra, def-special-linear-lie-algebra-sl-two, ex-general-and-special-linear-lie-groups, ex-cartan-involution-and-k-plus-p-for-sl-n-r]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1, printed pp. 217-218"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

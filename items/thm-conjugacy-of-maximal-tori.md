@@ -2,7 +2,7 @@
 id: thm-conjugacy-of-maximal-tori
 kind: theorem
 title: Conjugacy of maximal tori
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, prop-adjoint-is-a-smooth-lie-group-representation, def-conjugation-and-the-adjoint-representation-of-a-lie-group, thm-the-differential-of-adjoint-is-ad, def-torus-and-maximal-torus-in-a-compact-lie-group, thm-cartans-closed-subgroup-theorem, thm-closure-of-a-connected-set, thm-closed-subspace-of-a-compact-space-is-compact, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, prop-exponential-map-is-natural-for-lie-group-homomorphisms, prop-exponential-scales-one-parameter-subgroups, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, thm-lie-subgroup-lie-subalgebra-correspondence]
@@ -19,6 +19,8 @@ sources:
       locator: "§11"
 proof_strategy: direct
 landmark: true
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

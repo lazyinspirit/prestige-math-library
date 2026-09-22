@@ -2,7 +2,7 @@
 id: ex-planar-brownian-coordinate-hitting-versus-point-hitting-boundary
 kind: example
 title: "Planar coordinate hitting does not imply point hitting"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-planar-brownian-annular-exit-probability, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, cor-one-dimensional-brownian-motion-is-recurrent, def-d-dimensional-brownian-motion, def-brownian-motion-started-at-x, lem-rat-embeds-dense, lem-probability-measure-basic-identities, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.4"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

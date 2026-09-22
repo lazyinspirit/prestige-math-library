@@ -2,7 +2,7 @@
 id: thm-mod-two-reduction-of-chern-classes
 kind: theorem
 title: Mod-two reduction of Chern classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-complex-splitting-principle-with-integral-injective-pullback", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "prop-first-stiefel-whitney-class-classifies-orientability", "lem-complex-orientation-of-underlying-real-bundles", "def-chern-classes-from-the-projective-bundle-relation", "def-axiom-of-choice", "thm-naturality-of-stiefel-whitney-classes", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-complex-flag-bundle-and-chern-roots", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "prop-singular-cohomology-is-contravariantly-functorial", "def-singular-cup-product-on-cochains", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles"]
@@ -16,6 +16,8 @@ sources:
     - title: "Milnor and Stasheff, Characteristic Classes, section 14"
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "Complex bundles and Stiefel-Whitney classes, printed pp.171-175"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

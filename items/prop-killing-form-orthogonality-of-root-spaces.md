@@ -2,7 +2,7 @@
 id: prop-killing-form-orthogonality-of-root-spaces
 kind: proposition
 title: Orthogonality of root spaces and nondegeneracy on the Cartan subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-brackets-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-toral-and-maximal-toral-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Proposition 2.17"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

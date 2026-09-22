@@ -2,7 +2,7 @@
 id: ex-logarithm-of-geometric-brownian-motion
 kind: example
 title: "Logarithm of geometric Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-adapted-continuous-processes-are-progressively-measurable, def-ito-integral-of-an-elementary-predictable-process, thm-ito-formula-one-dimensional, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, def-continuous-brownian-ito-process, def-continuity-real, thm-heine-cantor-r, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Andreas Eberle, Introduction to Stochastic Analysis, Ito formula and geometric Brownian motion"
       url: "https://wt.iam.uni-bonn.de/fileadmin/WT/Inhalt/people/Andreas_Eberle/IntroStoAn1516/IntroStochAnalysis2015.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-ito-formula-one-dimensional
 kind: theorem
 title: "One-dimensional Ito formula"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, thm-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-partition-and-refinement, def-continuity-real, thm-heine-cantor-r, def-convergence-in-probability, def-law-modification-and-indistinguishability-of-processes, cor-second-order-taylor-expansion-with-the-hessian, cor-multivariable-taylor-formula-with-peano-remainder, def-multivariable-taylor-polynomial, def-taylor-polynomial-and-remainder, cor-taylor-remainder-bound, def-c-c-and-c-c-infinity-on-rn, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, cor-cauchy-schwarz-for-random-variables, thm-dominated-convergence, thm-fatou-lemma, def-continuous-time-filtration-and-all-pairs-martingale, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

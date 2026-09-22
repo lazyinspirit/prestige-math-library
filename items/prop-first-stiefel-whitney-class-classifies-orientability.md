@@ -2,7 +2,7 @@
 id: prop-first-stiefel-whitney-class-classifies-orientability
 kind: proposition
 title: The first Stiefel–Whitney class classifies orientability
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-naturality-of-stiefel-whitney-classes", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-real-splitting-principle-with-mod-two-injective-pullback", "def-real-flag-bundle-and-stiefel-whitney-roots", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "prop-orientation-is-equivalent-to-an-so-n-reduction", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-stable-stiefel-space-is-contractible", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-eilenberg-maclane-spaces-represent-singular-cohomology", "def-eilenberg-maclane-space", "thm-numerable-vector-bundles-admit-bundle-metrics", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "thm-homotopy-invariance-of-vector-bundle-pullback", "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "prop-singular-cohomology-is-contravariantly-functorial", "def-homotopy-equivalence", "def-axiom-of-choice", "prop-relative-cw-inclusions-are-cofibrations", "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field", "thm-numerable-fiber-bundles-are-hurewicz-fibrations"]
 proof_strategy: direct
@@ -23,6 +23,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 orientability and w_1, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

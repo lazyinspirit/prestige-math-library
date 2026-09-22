@@ -2,7 +2,7 @@
 id: ex-stone-duality-for-a-power-set-algebra
 kind: example
 title: Stone duality for a power set algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-stone-duality, thm-stone-representation-for-boolean-algebras, def-stone-cech-compactification, thm-compactness-via-nets-filters-and-ultrafilters, thm-ultrafilter-lemma, def-axiom-of-choice, def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality, thm-a-compact-hausdorff-space-is-regular-and-normal]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

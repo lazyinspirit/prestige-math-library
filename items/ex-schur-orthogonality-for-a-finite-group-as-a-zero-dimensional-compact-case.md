@@ -2,7 +2,7 @@
 id: ex-schur-orthogonality-for-a-finite-group-as-a-zero-dimensional-compact-case
 kind: example
 title: Finite-group Schur orthogonality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-normalized-haar-measure-on-a-compact-lie-group, thm-schur-orthogonality-for-compact-lie-groups, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §2 (finite groups as zero-dimensional compact groups)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

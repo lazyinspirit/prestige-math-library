@@ -2,7 +2,7 @@
 id: thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras
 kind: theorem
 title: Cartan subalgebras are exactly maximal toral subalgebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, lem-generalized-weight-space-decomposition-for-a-nilpotent-subalgebra, thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra, thm-additive-jordan-chevalley-decomposition, thm-engels-theorem, prop-nilpotent-lie-algebras-are-solvable, thm-lies-theorem, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Propositions 2.7, 2.10, 2.13"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

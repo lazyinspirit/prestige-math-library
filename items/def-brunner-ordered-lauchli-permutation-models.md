@@ -2,7 +2,7 @@
 id: def-brunner-ordered-lauchli-permutation-models
 kind: definition
 title: "Brunner's ordered Läuchli permutation models"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fraenkel-mostowski-permutation-model, def-countable-choice, def-order-topology-on-a-linearly-ordered-set, def-subspace-topology-top, def-compact-space, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-zfa-universe-atoms-and-kernel, def-axiom-of-choice, def-continuous-map-top, def-connected-space, def-hausdorff-space]
 justified_by: []
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

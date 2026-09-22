@@ -2,7 +2,7 @@
 id: def-ito-integral-for-square-integrable-predictable-processes
 kind: definition
 title: "Ito integral for square-integrable predictable processes"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-density-of-elementary-predictable-processes-in-predictable-l2, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-ito-isometry-for-elementary-integrands, thm-riesz-fischer-completeness-of-l-p, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Definition 5.25"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

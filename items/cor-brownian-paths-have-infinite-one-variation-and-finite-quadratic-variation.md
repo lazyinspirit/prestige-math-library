@@ -2,7 +2,7 @@
 id: cor-brownian-paths-have-infinite-one-variation-and-finite-quadratic-variation
 kind: corollary
 title: "Brownian one- and quadratic variation"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-brownian-paths-have-infinite-total-variation-on-every-interval, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, def-axiom-of-choice, def-brownian-motion]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.8"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

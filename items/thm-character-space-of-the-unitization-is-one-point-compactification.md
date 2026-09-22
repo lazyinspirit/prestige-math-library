@@ -2,7 +2,7 @@
 id: thm-character-space-of-the-unitization-is-one-point-compactification
 kind: theorem
 title: Character space of the unitization is one-point compactification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-minimal-c-star-unitization", "def-algebraic-unitization-of-a-star-algebra", "thm-maximal-ideal-space-is-compact-hausdorff", "thm-characters-on-a-unital-banach-algebra-are-continuous", "def-character-and-maximal-ideal-space", "thm-one-point-compactification-properties", "def-one-point-compactification", "thm-locally-compact-hausdorff-basics", "thm-commutative-gelfand-naimark", "thm-compactness-under-continuous-maps", "def-axiom-of-choice", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-subset-of-a-hausdorff-space-is-closed"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

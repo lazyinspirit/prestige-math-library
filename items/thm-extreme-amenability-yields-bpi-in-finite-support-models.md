@@ -2,7 +2,7 @@
 id: thm-extreme-amenability-yields-bpi-in-finite-support-models
 kind: theorem
 title: "Extreme amenability yields BPI in finite-support permutation models"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-prime-ideal-principle, def-symmetric-and-hereditarily-symmetric-sets, def-permutation-support-system-and-normal-filter, thm-bpi-equivalent-to-set-ultrafilter-lemma, def-boolean-ideals-filters-and-primality, def-stone-ultrafilter-space-and-clopens, def-hausdorff-space, def-compact-space, def-subspace-topology-top, def-product-topology, def-continuous-map-top, def-zfa-universe-atoms-and-kernel, def-topological-space, def-axiom-of-choice, thm-choice-implies-boolean-prime-ideal-principle, thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma, thm-closed-subspace-of-a-compact-space-is-compact]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

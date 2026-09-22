@@ -2,7 +2,7 @@
 id: lem-maximal-ideals-of-c-of-x-and-zero-set-ultrafilters
 kind: lemma
 title: Maximal ideals of C(X) and zero set ultrafilters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-zero-set-filter-and-zero-set-ultrafilter, def-prime-and-maximal-ideals, def-completely-regular-and-tychonoff-spaces]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

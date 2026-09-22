@@ -2,7 +2,7 @@
 id: def-weight-and-weight-space-of-a-lie-algebra-representation
 kind: definition
 title: Weight and weight space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-representation-of-a-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra, def-linear-subspace, thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

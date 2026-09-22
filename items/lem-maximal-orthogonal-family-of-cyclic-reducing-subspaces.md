@@ -2,7 +2,7 @@
 id: lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces
 kind: lemma
 title: Maximal orthogonal family of cyclic reducing subspaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cyclic-vector-and-cyclic-normal-operator, thm-orthogonal-decomposition-by-a-closed-subspace, thm-zorn, def-orthogonality-and-orthogonal-complement, def-hilbert-orthogonal-projection, def-self-adjoint-positive-unitary-and-normal-operator, def-separable-space, def-dense-top, def-hilbert-space, def-complete-metric-space, def-axiom-of-choice, def-hilbert-space-adjoint, lem-orthogonal-complement-is-closed, lem-orthogonal-projection-is-linear-self-adjoint-contractive, thm-double-orthogonal-complement-is-closure, thm-bounded-linear-operator-equivalences, thm-hilbert-adjoint-properties]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §10, printed pp.293–297"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: continuous-functional-calculus-for-self-adjoint-and-normal-operators
 title: Continuous Functional Calculus for Self Adjoint and Normal Operators
-status: draft
+status: published
 items: [lem-bounded-hilbert-operators-form-a-c-star-algebra, lem-spectrum-of-a-self-adjoint-operator-is-real, lem-spectrum-of-a-positive-operator-is-nonnegative, def-order-on-bounded-self-adjoint-operators, def-c-star-algebra-generated-by-a-normal-operator, cor-normal-operator-norm-equals-spectral-radius, cor-normal-operator-with-zero-spectrum-is-zero, def-isometry-coisometry-and-partial-isometry, thm-partial-isometry-characterizations, def-numerical-range-and-numerical-radius, thm-numerical-radius-is-an-equivalent-operator-norm, lem-polynomial-calculus-is-isometric-for-self-adjoint-operators, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, lem-spectral-permanence-for-unital-c-star-subalgebras, lem-character-space-of-generated-normal-algebra-is-operator-spectrum, thm-continuous-functional-calculus-for-bounded-normal-operators, thm-spectral-mapping-for-continuous-normal-functional-calculus, thm-continuous-functional-calculus-properties, thm-self-adjoint-norm-and-spectrum-extrema, thm-positive-square-root, def-absolute-value-of-a-bounded-operator, thm-polar-decomposition-for-bounded-operators, thm-bounded-normal-operator-abstract-spectral-theorem, rem-positive-square-root-and-covariance-matrices, lem-two-dimensional-numerical-range-is-convex, thm-toeplitz-hausdorff]
 examples: []
 ---

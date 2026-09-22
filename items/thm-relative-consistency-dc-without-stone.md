@@ -2,7 +2,7 @@
 id: thm-relative-consistency-dc-without-stone
 kind: theorem
 title: "Relative consistency of DC with failure of Stone's theorem"
-status: draft
+status: published
 origin: pipeline
 deps: [def-good-tree-watson-symmetric-stone-model, lem-good-tree-watson-omega-sequence-closure, lem-good-tree-watson-selector-obstruction, def-dependent-choice, def-paracompact-space, def-cover-refinement-and-local-finiteness, def-metric-space, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-topological-space, thm-forcing-theorem, thm-hereditarily-symmetric-interpretations-form-a-zf-model]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Thomas J. Jech, The Axiom of Choice"
       url: "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
       locator: "Chapter 8, §2, Lemma 8.5, printed pp. 123-124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

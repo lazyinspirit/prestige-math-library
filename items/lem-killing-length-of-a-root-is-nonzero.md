@@ -2,7 +2,7 @@
 id: lem-killing-length-of-a-root-is-nonzero
 kind: lemma
 title: The Killing length of a root is nonzero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, cor-opposite-root-spaces-pair-nondegenerately, prop-killing-form-orthogonality-of-root-spaces, def-killing-dual-vector-of-a-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-toral-and-maximal-toral-subalgebra, def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, thm-lies-theorem, prop-nilpotent-lie-algebras-are-solvable, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 19, Lemma 19.16(i)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

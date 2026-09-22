@@ -2,7 +2,7 @@
 id: lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient
 kind: lemma
 title: Unique simple quotient of the dominant cyclic module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives, lem-highest-weight-modules-have-weights-below-the-top-weight, prop-root-vectors-shift-weight-spaces, def-dominant-integrable-highest-weight-cyclic-module, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-subrepresentation-quotient-representation-and-intertwiner, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-universal-enveloping-algebra, thm-poincare-birkhoff-witt, thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

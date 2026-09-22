@@ -2,7 +2,7 @@
 id: thm-complex-splitting-principle-with-integral-injective-pullback
 kind: theorem
 title: Complex splitting principle with integral injective pullback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complex-flag-bundle-and-chern-roots, thm-integral-complex-projective-bundle-theorem, def-complex-projective-bundle-and-tautological-complex-line, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, Chapter 24 section 3"
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Splitting principle and splitting lemma, printed pp.208-210"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

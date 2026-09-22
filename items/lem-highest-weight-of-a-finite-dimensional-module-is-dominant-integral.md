@@ -2,7 +2,7 @@
 id: lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral
 kind: lemma
 title: Finite-dimensional highest weights are dominant integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector, def-integral-dominant-and-strictly-dominant-weights, def-highest-weight-vector-and-highest-weight-module, thm-root-sl-two-triple, thm-finite-dimensional-representations-of-sl-two, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "Proof of Theorem 8.23 (necessity)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

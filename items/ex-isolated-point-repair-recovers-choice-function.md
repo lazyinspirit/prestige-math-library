@@ -2,7 +2,7 @@
 id: ex-isolated-point-repair-recovers-choice-function
 kind: example
 title: "The isolated-point repair recovers a choice function"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-compact-t1-product-theorem-iff-ac, lem-isolated-point-kelley-repair, def-product-topology, def-compact-space, thm-compact-iff-fip, def-finite-intersection-property, def-choice-function, lem-finite-choice, def-t0-and-t1-spaces]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Kyriakos Keremedis and Eleftherios Tachtsis, Wallman Compactifications and Tychonoff's Compactness Theorem in ZF"
       url: "https://topology.nipissingu.ca/tp/reprints/v42/tp42021.pdf"
       locator: "Discussion before Proposition 2.13, journal p. 282"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

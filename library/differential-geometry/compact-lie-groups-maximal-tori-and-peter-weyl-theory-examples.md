@@ -1,7 +1,7 @@
 ---
 page: compact-lie-groups-maximal-tori-and-peter-weyl-theory-examples
 title: Compact Lie Groups, Maximal Tori, and Peter–Weyl Theory — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-normalized-haar-measure-on-a-torus

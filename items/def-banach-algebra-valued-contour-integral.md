@@ -2,7 +2,7 @@
 id: def-banach-algebra-valued-contour-integral
 kind: definition
 title: Banach algebra valued contour integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-banach-space", "def-unital-banach-algebra", "def-complex-contours-reversal-concatenation-and-closedness", "def-bochner-integrable-function", "thm-bochner-integrability-criterion", "cor-piecewise-c1-paths-have-additive-speed-integral-length", "cor-mean-value-theorem", "def-complex-line-integral-over-a-rectifiable-path", "def-integration-and-index-of-complex-chain"]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 43–47"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

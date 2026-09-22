@@ -2,7 +2,7 @@
 id: lem-integral-powers-of-the-complexified-universal-real-line
 kind: lemma
 title: Integral powers of the complexified universal real line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-mod-two-reduction-of-chern-classes", "cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-tautological-degree-one-class-on-a-real-projective-bundle", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-axiom-of-choice", "prop-complexification-is-conjugation-invariant", "thm-naturality-of-stiefel-whitney-classes", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "prop-singular-cohomology-is-contravariantly-functorial", "def-singular-cup-product-on-cochains"]
@@ -16,6 +16,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 36"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Complexification and two-torsion, printed pp.134-137"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

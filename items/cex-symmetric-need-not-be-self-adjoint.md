@@ -2,7 +2,7 @@
 id: cex-symmetric-need-not-be-self-adjoint
 kind: counterexample
 title: "A symmetric closed operator that is not self-adjoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-dependent-choice, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, lem-l-two-with-the-integral-pairing-is-a-hilbert-space]
@@ -22,6 +22,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Exercise 6.28 and Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -1,7 +1,7 @@
 ---
 page: moment-maps-and-symplectic-reduction-examples
 title: Moment Maps and Symplectic Reduction — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map

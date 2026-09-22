@@ -2,7 +2,7 @@
 id: thm-gleason-kahane-zelazko
 kind: theorem
 title: Gleason Kahane Zelazko
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["lem-zero-free-entire-function-of-exponential-type-is-an-exponential", "def-unital-banach-algebra", "lem-neumann-series", "thm-banach-series-criterion", "lem-complex-exponential-series-converges-everywhere", "lem-cauchy-product-of-absolutely-convergent-complex-series", "thm-liouville-bounded-entire-function", "cor-complex-power-series-sums-are-analytic", "thm-complex-power-series-converge-locally-uniformly", "def-complex-exponential", "cor-complex-power-series-sums-have-derivatives-of-all-orders", "def-complex-series-power-series-and-absolute-convergence", "thm-direct-comparison-test", "thm-absolute-convergence-of-complex-series", "thm-complex-analytic-functions-are-holomorphic", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-complex-exponential-addition-and-real-extension"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

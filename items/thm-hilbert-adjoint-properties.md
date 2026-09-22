@@ -2,7 +2,7 @@
 id: thm-hilbert-adjoint-properties
 kind: theorem
 title: Hilbert-adjoint identities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space-adjoint, thm-cauchy-schwarz-in-an-inner-product-space, def-operator-norm, lem-composition-operator-norm-inequality, def-bounded-linear-operator, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Theorem 185"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

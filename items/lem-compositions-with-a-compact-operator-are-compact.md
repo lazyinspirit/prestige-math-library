@@ -2,7 +2,7 @@
 id: lem-compositions-with-a-compact-operator-are-compact
 kind: lemma
 title: Compositions with a compact operator are compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, lem-composition-operator-norm-inequality, thm-compactness-under-continuous-maps, thm-bounded-linear-operator-equivalences, lem-vector-operations-are-continuous-in-a-normed-space, thm-compact-subset-is-closed-and-bounded, lem-closed-subset-of-a-compact-space-is-compact, def-metric-bounded-diameter]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

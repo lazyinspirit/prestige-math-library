@@ -2,7 +2,7 @@
 id: cex-irrational-flow-on-a-symplectic-torus-is-symplectic-but-not-hamiltonian
 kind: counterexample
 title: An irrational flow on a symplectic torus is symplectic but not Hamiltonian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hamiltonian-vector-field-and-hamiltonian-function, def-symplectic-and-hamiltonian-lie-group-action, def-two-dimensional-torus, cor-a-nonzero-period-obstructs-exactness-and-bounding, def-fundamental-vector-field-of-a-left-action, def-countable-choice, thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §7.3, generating vector fields and Hamiltonian actions, printed pages 82--83
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

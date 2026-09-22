@@ -2,7 +2,7 @@
 id: thm-schur-orthogonality-for-compact-lie-groups
 kind: theorem
 title: Schur orthogonality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-integration-against-haar-is-invariant-under-translations-and-conjugation, def-matrix-coefficient-and-character-of-a-compact-group-representation, def-axiom-of-choice, cor-schurs-lemma-for-irreducible-representations, cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, prop-order-and-scalar-rules-for-the-nonnegative-integral, cor-trace-is-invariant-under-similarity, def-self-adjoint-positive-unitary-and-normal-operator, thm-matrix-of-the-adjoint-is-the-conjugate-transpose]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§4.7, Theorem 4.38"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

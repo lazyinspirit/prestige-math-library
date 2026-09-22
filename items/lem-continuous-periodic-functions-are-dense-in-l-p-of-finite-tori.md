@@ -2,7 +2,7 @@
 id: lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori
 kind: lemma
 title: Continuous functions are dense in $L^p$ of finite tori and of bounded intervals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-lebesgue-measure-of-a-box-of-every-kind, def-countable-choice, thm-absolute-continuity-of-the-integral, cor-archimedean-reciprocal, thm-quotient-universal-property, def-metric-continuity, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §2.3.6, pp.87–88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-differential-of-the-moment-map-and-orbit-orthogonal-identity
 kind: lemma
 title: The differential of the moment map and the orbit-orthogonal identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, prop-moment-map-components-generate-the-negative-infinitesimal-action, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, prop-symplectic-double-orthogonal-and-dimension-identities, def-symplectic-orthogonal-complement, thm-every-orbit-is-an-injectively-immersed-homogeneous-space, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

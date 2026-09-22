@@ -2,7 +2,7 @@
 id: ex-character-lattices-of-su-two-and-so-three
 kind: example
 title: Character lattices of SU(2) and SO(3)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, prop-central-quotients-correspond-to-intermediate-character-lattices, def-axiom-of-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]
@@ -15,6 +15,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix V (SU(2)/SO(3) lattice computation)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: prop-finite-type-cartan-matrix-properties
 kind: proposition
 title: Properties of finite-type Cartan matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-matrix-of-a-based-root-system, prop-distinct-simple-roots-have-nonpositive-inner-product, thm-rank-two-root-system-classification, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-reduced-crystallographic-euclidean-root-system]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §5, Proposition 2.52, printed pp. 157-158"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: generalized-cohomology-and-the-atiyah-hirzebruch-spectral-sequence
 title: Generalized Cohomology and the Atiyah Hirzebruch Spectral Sequence
-status: draft
+status: published
 items:
   - def-reduced-generalized-cohomology-theory
   - def-reduced-generalized-homology-theory

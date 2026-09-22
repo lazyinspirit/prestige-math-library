@@ -2,7 +2,7 @@
 id: prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t
 kind: proposition
 title: Characters are the integral weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-structure-of-a-compact-connected-abelian-lie-group, def-character-and-cocharacter-lattices-of-a-torus, def-axiom-of-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

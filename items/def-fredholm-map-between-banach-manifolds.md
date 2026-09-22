@@ -2,7 +2,7 @@
 id: def-fredholm-map-between-banach-manifolds
 kind: definition
 title: Fredholm map between Banach manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-banach-manifold-differentials-are-chart-independent, def-fredholm-operator-cokernel-and-index, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, def-c-k-map-between-banach-spaces, thm-fredholm-index-is-additive, def-axiom-of-choice, def-bounded-linear-operator]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

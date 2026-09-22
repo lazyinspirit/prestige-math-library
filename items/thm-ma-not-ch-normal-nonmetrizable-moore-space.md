@@ -2,7 +2,7 @@
 id: thm-ma-not-ch-normal-nonmetrizable-moore-space
 kind: theorem
 title: "MA plus not-CH yields a normal nonmetrizable Moore space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-q-sets-and-heath-moore-space-interface, def-martins-axiom, lem-ma-produces-an-uncountable-q-set, thm-bing-q-set-moore-space-is-normal-and-nonmetrizable, def-moore-spaces-and-developments]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Example 4.1, Lemma 4.3 and Theorem 4.4, printed pp. 5-9"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

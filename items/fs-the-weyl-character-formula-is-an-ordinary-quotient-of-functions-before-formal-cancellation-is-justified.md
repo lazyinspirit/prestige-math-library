@@ -2,7 +2,7 @@
 id: fs-the-weyl-character-formula-is-an-ordinary-quotient-of-functions-before-formal-cancellation-is-justified
 kind: false-statement
 title: The Weyl quotient requires cancellation or extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-vector-rho, def-positive-system-and-base-of-simple-roots, def-special-linear-lie-algebra-sl-two]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

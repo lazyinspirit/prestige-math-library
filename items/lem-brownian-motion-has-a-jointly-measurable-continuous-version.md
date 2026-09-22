@@ -2,7 +2,7 @@
 id: lem-brownian-motion-has-a-jointly-measurable-continuous-version
 kind: lemma
 title: "Brownian motion has a jointly measurable continuous version"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-uniform-on-compacts-metric-on-continuous-path-space, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, def-evaluation-map, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

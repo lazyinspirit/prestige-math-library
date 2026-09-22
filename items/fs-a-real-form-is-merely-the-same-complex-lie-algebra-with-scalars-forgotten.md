@@ -2,7 +2,7 @@
 id: fs-a-real-form-is-merely-the-same-complex-lie-algebra-with-scalars-forgotten
 kind: false-statement
 title: A real form is merely the same complex lie algebra with scalars forgotten
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-form-of-a-complex-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, def-complexification-of-a-real-lie-algebra, prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §1, real forms and the compact real form of sl(2,C), printed pp. 348-353"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

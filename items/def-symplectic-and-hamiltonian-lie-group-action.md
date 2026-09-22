@@ -2,7 +2,7 @@
 id: def-symplectic-and-hamiltonian-lie-group-action
 kind: definition
 title: Symplectic and Hamiltonian Lie-group actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-smooth-left-action-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-symplectic-form-and-symplectic-manifold, def-coadjoint-representation-of-a-lie-group, def-algebraic-dual-and-linear-functional, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

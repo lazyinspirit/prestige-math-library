@@ -2,7 +2,7 @@
 id: cor-critical-holder-boundary-at-zero-from-the-brownian-lil
 kind: corollary
 title: "The critical Hölder boundary at zero"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-brownian-law-of-the-iterated-logarithm-at-zero, cor-brownian-paths-are-locally-holder-of-every-order-below-one-half, lem-rat-embeds-dense, def-axiom-of-choice, def-brownian-motion]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 8.5.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

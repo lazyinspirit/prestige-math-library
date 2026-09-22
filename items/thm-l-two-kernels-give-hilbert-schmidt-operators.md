@@ -2,7 +2,7 @@
 id: thm-l-two-kernels-give-hilbert-schmidt-operators
 kind: theorem
 title: L two kernels give Hilbert–Schmidt operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, def-hilbert-space, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-finite-sigma-finite-and-semifinite-measures, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-completed-product-measure, thm-completion-of-a-measure-space, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-sections-of-product-measurable-sets-are-measurable, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-nonnegative-lebesgue-integral, def-integral-of-a-nonnegative-simple-function, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, lem-product-rectangle-kernels-are-dense-in-product-l-two, thm-completion-measurable-functions-have-base-measurable-representatives, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-hilbert-space-fourier-expansion, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, lem-finite-bessel-inequality, thm-zorn, thm-orthogonal-decomposition-by-a-closed-subspace, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-countable-choice, def-bounded-linear-operator, def-operator-norm]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Sheldon Axler, Measure, Integration & Real Analysis — product-measure Fubini/Tonelli and Lp approximation, §§7A, 10C"
       url: "https://measure.axler.net/MIRA.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

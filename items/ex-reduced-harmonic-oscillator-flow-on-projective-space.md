@@ -2,7 +2,7 @@
 id: ex-reduced-harmonic-oscillator-flow-on-projective-space
 kind: example
 title: The reduced harmonic oscillator flow on projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions, prop-invariant-hamiltonians-descend-to-reduced-hamiltonians, ex-complex-projective-space-as-a-circle-symplectic-reduction, ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map, thm-noether-conservation-law-for-hamiltonian-actions, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.2, printed pages 147--148
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

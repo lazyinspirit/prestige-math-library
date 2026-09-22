@@ -2,7 +2,7 @@
 id: cex-integral-total-pontryagin-multiplicativity-cannot-ignore-two-torsion
 kind: counterexample
 title: Integral total Pontryagin multiplicativity cannot ignore two-torsion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-pontryagin-classes-by-complexification", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "lem-integral-powers-of-the-complexified-universal-real-line", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-axiom-of-choice", "prop-complexification-is-conjugation-invariant"]
@@ -19,6 +19,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.2"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "The integral two-torsion obstruction, printed pp.94-98"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

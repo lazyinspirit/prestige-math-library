@@ -2,7 +2,7 @@
 id: def-self-adjoint-positive-unitary-and-normal-operator
 kind: definition
 title: Self-adjoint, positive, unitary and normal operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-space-of-bounded-linear-operators, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

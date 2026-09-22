@@ -2,7 +2,7 @@
 id: thm-noether-conservation-law-for-hamiltonian-actions
 kind: theorem
 title: Noether's conservation law for Hamiltonian actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, prop-moment-map-components-generate-the-negative-infinitesimal-action, prop-f-is-a-first-integral-of-h-iff-f-and-h-poisson-commute, def-poisson-bracket-on-a-symplectic-manifold, def-fundamental-vector-field-of-a-left-action, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-the-banach-inverse-theorem-for-a-small-lipschitz-perturbation-of-the-identity
 kind: example
 title: The Banach inverse theorem for a small Lipschitz perturbation of the identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-banach-fixed-point, thm-inverse-function-theorem-for-banach-spaces, lem-neumann-series-and-small-perturbations-of-bounded-inverses, def-axiom-of-choice, def-lipschitz-holder-contraction, def-c-k-map-between-banach-spaces, def-banach-space, def-frechet-derivative-between-banach-spaces, def-operator-norm, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

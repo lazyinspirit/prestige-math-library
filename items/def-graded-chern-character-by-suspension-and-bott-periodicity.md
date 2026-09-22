@@ -2,7 +2,7 @@
 id: def-graded-chern-character-by-suspension-and-bott-periodicity
 kind: definition
 title: Graded Chern character by suspension and Bott periodicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-chern-character-is-a-natural-ring-homomorphism-on-k-zero", "thm-complex-bott-periodicity", "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory", "def-chern-character-of-a-complex-vector-bundle", "def-reduced-complex-k-theory", "def-negative-degree-complex-k-groups", "def-external-product-in-complex-k-theory", "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere", "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-reduced-cone-suspension-and-cofiber-sequence", "def-axiom-of-choice"]
@@ -15,6 +15,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 4.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "The Chern character in all degrees, printed pp.109-114"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

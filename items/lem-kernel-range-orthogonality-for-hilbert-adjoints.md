@@ -2,7 +2,7 @@
 id: lem-kernel-range-orthogonality-for-hilbert-adjoints
 kind: lemma
 title: Kernel–range orthogonality for Hilbert adjoints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, thm-double-orthogonal-complement-is-closure, def-orthogonality-and-orthogonal-complement, def-linear-subspace, def-bounded-linear-operator, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

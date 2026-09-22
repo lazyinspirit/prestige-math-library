@@ -2,7 +2,7 @@
 id: thm-no-inner-model-measurable-implies-fleissner-hyp
 kind: theorem
 title: "No inner measurable implies Fleissner's HYP"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fleissner-hyp-covering-interface, thm-dodd-jensen-covering-supplies-fleissner-hyp-data, def-dodd-jensen-covering-and-square-package]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "William G. Fleissner, If all normal Moore spaces are metrizable, then there is an inner model with a measurable cardinal"
       url: "https://kuscholarworks.ku.edu/server/api/core/bitstreams/88062b98-5ab8-4fdc-9548-9e00a9c7507d/content"
       locator: "HYP and Jensen-Dodd implication, printed pp. 366-368"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

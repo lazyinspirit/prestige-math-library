@@ -2,7 +2,7 @@
 id: thm-gelfand-kolmogorov-for-rings-of-continuous-functions
 kind: theorem
 title: Gelfand-Kolmogorov for rings of continuous functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-maximal-ideals-of-c-of-x-and-zero-set-ultrafilters, lem-zero-set-ultrafilters-and-stone-cech-points, def-zero-set-filter-and-zero-set-ultrafilter, thm-stone-cech-evaluation-closure-universal-property, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

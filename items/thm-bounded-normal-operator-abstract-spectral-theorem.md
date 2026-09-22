@@ -2,7 +2,7 @@
 id: thm-bounded-normal-operator-abstract-spectral-theorem
 kind: theorem
 title: Bounded normal operator abstract spectral theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, def-axiom-of-choice, def-c-star-algebra, def-self-adjoint-positive-unitary-and-normal-operator, def-spectrum-and-resolvent-of-a-bounded-operator, lem-bounded-hilbert-operators-form-a-c-star-algebra, thm-bounded-inverse-theorem, thm-spectrum-is-nonempty-compact-and-norm-bounded]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Example 4.9, pp.13–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

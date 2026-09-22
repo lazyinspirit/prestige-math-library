@@ -2,7 +2,7 @@
 id: lem-pmea-three-quarter-separation-estimate
 kind: lemma
 title: "The PMEA three-quarter separation estimate"
-status: draft
+status: published
 origin: pipeline
 deps: [def-product-measure-extension-axioms-pmea-and-pmea-sigma, def-normalized-families-and-collectionwise-normality, def-first-countable-top, def-discrete-family-and-sigma-bases, def-topological-space, def-neighbourhood-top, def-normal-and-t4-spaces]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "D. H. Fremlin, Real-valued-measurable cardinals"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf"
       locator: "Lemma 8E and its proof, printed p. 70"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

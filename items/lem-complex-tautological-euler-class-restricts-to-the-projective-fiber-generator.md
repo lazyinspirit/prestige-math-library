@@ -2,7 +2,7 @@
 id: lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator
 kind: lemma
 title: The complex tautological Euler class restricts to the projective-fiber generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-complex-projective-bundle-and-tautological-complex-line", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-schubert-cells-in-real-and-complex-grassmannians", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "cor-homology-of-spheres", "thm-universal-coefficient-theorem-for-cohomology-over-a-pid", "def-axiom-of-choice"]
@@ -19,6 +19,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lectures 34-35"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Universal oriented two-plane and projective fiber generator, printed pp.123-132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

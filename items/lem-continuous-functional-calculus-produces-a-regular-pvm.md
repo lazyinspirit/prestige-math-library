@@ -2,7 +2,7 @@
 id: lem-continuous-functional-calculus-produces-a-regular-pvm
 kind: lemma
 title: Continuous functional calculus produces a regular PVM
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, thm-continuous-functional-calculus-properties, lem-positive-c-zero-functionals-have-finite-regular-representing-measures, thm-riesz-representation-for-hilbert-space, thm-jordan-von-neumann-polarization, lem-weak-and-strong-additivity-of-orthogonal-projections, thm-pvm-integral-is-a-star-homomorphism, thm-bounded-borel-pvm-integral, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-rmk-uniqueness-among-radon-measures, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, def-regular-complex-borel-measure-on-an-lch-space, def-regular-borel-measure-on-an-lch-space, def-c-star-algebra, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, thm-hilbert-adjoint-properties, def-real-and-complex-inner-product-space, def-hilbert-space, def-axiom-of-choice, def-total-variation-of-a-signed-or-complex-measure, def-projection-valued-measure, def-integration-against-a-signed-or-complex-measure, def-complex-measure]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Theorem 5.6, pp.17–20"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

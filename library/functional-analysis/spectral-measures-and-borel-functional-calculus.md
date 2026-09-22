@@ -1,7 +1,7 @@
 ---
 page: spectral-measures-and-borel-functional-calculus
 title: Spectral Measures and Borel Functional Calculus
-status: draft
+status: published
 items: [def-projection-valued-measure, lem-weak-and-strong-additivity-of-orthogonal-projections, lem-scalar-and-complex-measures-from-a-pvm, def-integral-of-a-simple-function-against-a-pvm, lem-simple-pvm-integral-is-representation-independent, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, lem-continuous-functional-calculus-produces-a-regular-pvm, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, def-borel-functional-calculus-for-a-bounded-normal-operator, thm-borel-functional-calculus-for-bounded-normal-operators, cor-spectral-projections-and-resolution-of-the-identity, thm-support-and-uniqueness-of-the-spectral-measure, def-cyclic-vector-and-cyclic-normal-operator, thm-cyclic-spectral-representation, lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, def-spectral-multiplicity-function-in-the-separable-case, lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension, thm-unitary-equivalence-classified-by-measure-class-and-multiplicity, thm-stone-resolvent-formula-for-spectral-projections]
 examples: []
 ---

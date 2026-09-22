@@ -2,7 +2,7 @@
 id: lem-banach-valued-cauchy-integral-vanishes
 kind: lemma
 title: Banach-valued Cauchy integral vanishes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-contour-integral-commutes-with-bounded-linear-maps, cor-global-cauchy-theorem-homology, cor-dual-separates-points, def-axiom-of-choice, def-banach-algebra-valued-contour-integral, def-complex-chain-and-cycle, def-null-homologous-and-homologous-complex-cycles, def-dual-space-of-a-normed-space, def-integration-and-index-of-complex-chain]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 43–47"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

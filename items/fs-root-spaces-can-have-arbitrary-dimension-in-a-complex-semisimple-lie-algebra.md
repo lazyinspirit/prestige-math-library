@@ -2,7 +2,7 @@
 id: fs-root-spaces-can-have-arbitrary-dimension-in-a-complex-semisimple-lie-algebra
 kind: false-statement
 title: Root spaces can have arbitrary dimension in a complex semisimple Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two, def-coroot-of-a-lie-algebra-root, thm-root-sl-two-triple]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the one-dimensionality and root-triple suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-coroot-of-a-lie-algebra-root
 kind: definition
 title: Coroot of a Lie-algebra root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-killing-length-of-a-root-is-nonzero, def-killing-dual-vector-of-a-root, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 19, Lemma 19.16(ii)"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

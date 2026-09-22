@@ -2,7 +2,7 @@
 id: cex-zero-euler-class-does-not-in-general-imply-a-nowhere-zero-section
 kind: counterexample
 title: Zero Euler class does not in general imply a nowhere-zero section
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-oriented-clutching-classifies-oriented-bundles-over-spheres", "lem-pi-three-so-three-generated-by-the-quaternion-double-cover", "thm-covering-space-lifting-criterion", "cor-real-line-is-universal-cover-of-circle", "cor-homology-of-spheres", "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology", "cor-short-exact-sequences-of-vector-bundles-split-over-the-base", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
 proof_strategy: contradiction
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 20 clutching and Lecture 35 Euler obstruction, printed pp.66–68 and 129–132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

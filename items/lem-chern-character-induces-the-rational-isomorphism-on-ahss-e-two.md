@@ -2,7 +2,7 @@
 id: lem-chern-character-induces-the-rational-isomorphism-on-ahss-e-two
 kind: lemma
 title: Chern character induces the rational isomorphism on AHSS E-two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations", "def-graded-chern-character-by-suspension-and-bott-periodicity", "lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients", "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-exact-couple", "thm-an-exact-couple-generates-a-spectral-sequence", "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences", "def-tensor-product-of-modules-by-generators-and-relations", "lem-edge-maps-of-a-bounded-skeletal-ahss", "def-axiom-of-choice"]
@@ -19,6 +19,8 @@ sources:
     - title: "Caleb Ji, The Atiyah-Hirzebruch Spectral Sequence"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "The Chern character and the E2 page, printed pp.10-13"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

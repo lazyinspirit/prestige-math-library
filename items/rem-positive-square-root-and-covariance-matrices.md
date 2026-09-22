@@ -2,7 +2,7 @@
 id: rem-positive-square-root-and-covariance-matrices
 kind: remark
 title: Positive square root and covariance matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-positive-square-root, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-order-on-bounded-self-adjoint-operators]
@@ -15,6 +15,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §3, printed pp.239–243"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

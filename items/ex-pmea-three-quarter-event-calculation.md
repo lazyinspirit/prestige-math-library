@@ -2,7 +2,7 @@
 id: ex-pmea-three-quarter-event-calculation
 kind: example
 title: "The three-quarter event calculation in the PMEA proof"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-pmea-three-quarter-separation-estimate, def-product-measure-extension-axioms-pmea-and-pmea-sigma]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
     - title: "D. H. Fremlin, Real-valued-measurable cardinals"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf"
       locator: "Lemma 8E and its proof, printed p. 70"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

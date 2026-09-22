@@ -2,7 +2,7 @@
 id: cex-a-nonadapted-step-integrand-breaks-the-ito-isometry
 kind: counterexample
 title: "A nonadapted step integrand breaks the Ito isometry"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-natural-and-usual-augmented-brownian-filtrations, thm-blumenthal-zero-one-law, def-brownian-motion, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

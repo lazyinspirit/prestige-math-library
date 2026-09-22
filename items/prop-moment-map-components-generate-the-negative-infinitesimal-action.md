@@ -2,7 +2,7 @@
 id: prop-moment-map-components-generate-the-negative-infinitesimal-action
 kind: proposition
 title: Moment map components generate the negative infinitesimal action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions, def-hamiltonian-vector-field-and-hamiltonian-function, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

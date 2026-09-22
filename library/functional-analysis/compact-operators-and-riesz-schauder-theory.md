@@ -1,7 +1,7 @@
 ---
 page: compact-operators-and-riesz-schauder-theory
 title: Compact Operators and Riesz Schauder Theory
-status: draft
+status: published
 items: [def-compact-linear-operator, lem-dependent-choice-implies-countable-choice, thm-sequential-characterization-of-compact-operators, lem-finite-rank-operators-are-compact, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, def-approximable-operator, thm-schauder-compact-adjoint-theorem, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, lem-kernel-of-identity-minus-compact-is-finite-dimensional, lem-range-of-identity-minus-compact-is-closed, lem-riesz-schauder-ascent-and-descent-stabilize, thm-fredholm-alternative-for-identity-minus-compact, lem-neumann-series-and-small-perturbations-of-bounded-inverses, def-spectrum-and-resolvent-of-a-bounded-operator, thm-riesz-schauder-spectrum-of-a-compact-operator, cor-spectrum-of-a-compact-operator-is-countable-with-only-zero-as-possible-accumulation, def-fredholm-operator-cokernel-and-index, lem-fredholm-splitting-and-parametrix, lem-a-compact-remainder-estimate-forces-closed-range, thm-atkinson, thm-fredholm-index-is-additive, thm-fredholm-index-is-locally-constant, thm-fredholm-index-is-stable-under-compact-perturbations, cor-lambda-identity-minus-compact-has-index-zero]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: ex-exterior-powers-and-fundamental-weights-of-sl-n
 kind: example
 title: Exterior powers and fundamental weights of sl_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-standard-and-dual-representations-of-sl-n-by-highest-weights, prop-root-systems-of-the-classical-complex-lie-algebras, def-fundamental-weights, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, thm-poincare-birkhoff-witt, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.7 and Exercise 8.5"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: ex-successive-brownian-hits-restart-independent-copies
 kind: example
 title: "Successive Brownian exit segments are independent copies"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-strong-markov-property-of-brownian-motion, lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times, def-brownian-motion, def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, thm-dynkin-pi-lambda, def-standard-normal-and-normal-laws, lem-probability-measure-basic-identities, def-axiom-of-choice, thm-extreme-value-r, thm-intermediate-value, thm-heine-borel-r, cor-c-one-change-of-variables-for-l-one-functions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

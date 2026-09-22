@@ -2,7 +2,7 @@
 id: lem-riesz-schauder-ascent-and-descent-stabilize
 kind: lemma
 title: Riesz Schauder ascent and descent stabilize
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, lem-kernel-of-identity-minus-compact-is-finite-dimensional, lem-range-of-identity-minus-compact-is-closed, lem-riesz-lemma, thm-sequential-characterization-of-compact-operators, thm-bounded-inverse-theorem, lem-closed-subspace-of-a-banach-space-is-banach, cor-finite-dimensional-subspaces-are-closed, lem-dependent-choice-implies-countable-choice, def-dependent-choice, def-banach-space, def-linear-basis, def-metric-convergence, def-quotient-seminorm, def-norm-and-normed-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §5.2.3 p.226, Remark 5.23, algebraic part"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

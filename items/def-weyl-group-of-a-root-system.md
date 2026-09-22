@@ -2,7 +2,7 @@
 id: def-weyl-group-of-a-root-system
 kind: definition
 title: Weyl group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system, def-coroot-and-dual-root-system]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

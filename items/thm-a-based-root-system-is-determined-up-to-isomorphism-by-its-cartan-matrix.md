@@ -2,7 +2,7 @@
 id: thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix
 kind: theorem
 title: The Cartan matrix determines a based root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-matrix-of-a-based-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, prop-finite-type-cartan-matrix-properties, def-positive-system-and-base-of-simple-roots]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Proposition 23.6, printed p. 122"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

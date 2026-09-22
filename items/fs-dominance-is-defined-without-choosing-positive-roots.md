@@ -2,7 +2,7 @@
 id: fs-dominance-is-defined-without-choosing-positive-roots
 kind: false-statement
 title: Dominance depends on a positive system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-integral-dominant-and-strictly-dominant-weights, def-positive-system-and-base-of-simple-roots, def-coroot-of-a-lie-algebra-root, def-reduced-crystallographic-euclidean-root-system, def-special-linear-lie-algebra-sl-two, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §§1–3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

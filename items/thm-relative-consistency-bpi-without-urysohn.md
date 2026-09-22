@@ -2,7 +2,7 @@
 id: thm-relative-consistency-bpi-without-urysohn
 kind: theorem
 title: "Relative consistency of BPI without Urysohn's lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-completeness, def-brunner-ordered-lauchli-permutation-models, lem-brunner-choice-and-urysohn-obstructions, thm-extreme-amenability-yields-bpi-in-finite-support-models, lem-ordered-rational-automorphism-stabilizers-are-extremely-amenable, lem-brunner-urysohn-obstruction-is-injectively-boundable, thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-boolean-prime-ideal-principle, def-normal-and-t4-spaces]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Andreas Blass, Partitions and Permutation Groups"
       url: "https://janos.cs.technion.ac.il/RESEARCH/AMS-Book-files/pdfs/11_Blass.pdf"
       locator: "Definition 2.1, Theorems 5.1-5.2, pp. 2 and 12-14"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

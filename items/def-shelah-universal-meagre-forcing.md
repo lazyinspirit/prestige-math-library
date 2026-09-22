@@ -2,7 +2,7 @@
 id: def-shelah-universal-meagre-forcing
 kind: definition
 title: Shelah's universal-meagre forcing
-status: draft
+status: published
 origin: pipeline
 deps: [def-trees-and-bodies-on-discrete-alphabets, def-nowhere-dense-meagre-and-residual-subsets, def-forcing-preorder-compatibility-and-filter, def-dense-open-sets-and-model-generic-filters]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Definition 7.7 and Claims 7.11, 7.15, pp. 36, 41 and 43"}
     - {title: "Andrzej Roslanowski and Saharon Shelah, Sweet & sour and other flavours of ccc forcing notions", url: "https://shelah.logic.at/files/95909/672.pdf", locator: "§0.2(9), printed p. 586 (PDF p. 4)"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics
 kind: proposition
 title: Compact Lie groups admit bi-invariant metrics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-integration-against-haar-is-invariant-under-translations-and-conjugation, def-riemannian-metric-and-riemannian-manifold, def-conjugation-and-the-adjoint-representation-of-a-lie-group, def-levi-civita-connection, thm-fundamental-theorem-of-riemannian-geometry, def-axiom-of-choice, def-geodesic-of-an-affine-connection, thm-existence-uniqueness-and-smooth-dependence-of-geodesics, cor-every-vector-space-has-a-basis, prop-standard-coordinate-inner-products, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-adjoint-is-a-smooth-lie-group-representation, thm-the-differential-of-adjoint-is-ad, prop-exponential-scales-one-parameter-subgroups, cor-normalized-haar-measure-on-a-compact-lie-group]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§10"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-cayley-transform-of-a-self-adjoint-operator
 kind: definition
 title: "Cayley transform of a self-adjoint operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-self-adjoint-resolvent-estimate, thm-self-adjointness-range-criterion, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Theorem 6.39 (Cayley transform), Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

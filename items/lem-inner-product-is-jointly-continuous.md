@@ -2,7 +2,7 @@
 id: lem-inner-product-is-jointly-continuous
 kind: lemma
 title: The inner product is jointly continuous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cauchy-schwarz-in-an-inner-product-space, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space, def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-product-topology, def-metric-convergence]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

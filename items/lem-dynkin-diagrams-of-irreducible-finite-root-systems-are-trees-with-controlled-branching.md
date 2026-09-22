@@ -2,7 +2,7 @@
 id: lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching
 kind: lemma
 title: Shape restrictions on Dynkin diagrams
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-finite-type-cartan-matrix-properties, prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, thm-tree-characterisations, thm-rank-two-root-system-classification]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 23, Section 23.8, printed pp. 127-128"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-haar-orthonormal-basis-of-l-two-zero-one
 kind: example
 title: The Haar orthonormal basis of $L^2((0,1))$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-heine-cantor-metric, thm-heine-borel-r, def-countable-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-pythagorean-theorem-and-finite-orthogonal-sums, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-continuous-implies-integrable, def-real-and-complex-inner-product-space, def-integral-of-a-nonnegative-simple-function, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-lebesgue-measure-of-a-box-of-every-kind]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.cfm.brown.edu/people/dobrush/am36/Mathematica/ch2/expand.html"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1, p.50"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

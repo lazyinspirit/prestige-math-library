@@ -2,7 +2,7 @@
 id: cex-odd-rank-euler-class-need-not-vanish-with-two-torsion-coefficients
 kind: counterexample
 title: An odd-rank Euler class need not vanish in the presence of two-torsion
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-first-stiefel-whitney-class-classifies-orientability", "ex-total-stiefel-whitney-class-of-a-sum-of-universal-lines", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
 proof_strategy: construction
@@ -17,6 +17,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 Euler class of odd-rank oriented bundles, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

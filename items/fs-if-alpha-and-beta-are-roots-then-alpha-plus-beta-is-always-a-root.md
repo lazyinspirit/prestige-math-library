@@ -2,7 +2,7 @@
 id: fs-if-alpha-and-beta-are-roots-then-alpha-plus-beta-is-always-a-root
 kind: false-statement
 title: If alpha and beta are roots then alpha plus beta is always a root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, thm-root-string-property, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the opposite-root, reducedness and root-string suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

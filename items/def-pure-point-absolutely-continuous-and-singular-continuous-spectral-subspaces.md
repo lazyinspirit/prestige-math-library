@@ -2,7 +2,7 @@
 id: def-pure-point-absolutely-continuous-and-singular-continuous-spectral-subspaces
 kind: definition
 title: "Pure point, absolutely continuous and singular continuous spectral subspaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, def-atom-of-a-measure-on-r, def-mutually-singular-measures, def-absolutely-continuous-with-respect-to-a-positive-measure, thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 3.3, (3.86)-(3.88), pp.117-119"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

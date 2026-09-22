@@ -2,7 +2,7 @@
 id: cor-one-dimensional-brownian-motion-hits-every-point-almost-surely
 kind: corollary
 title: "One-dimensional Brownian motion hits every point almost surely"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-distribution-of-a-one-sided-brownian-hitting-time, def-brownian-motion, def-standard-normal-and-normal-laws, def-cumulative-distribution-function-of-a-random-variable, lem-probability-measure-basic-identities, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Section 6.7"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

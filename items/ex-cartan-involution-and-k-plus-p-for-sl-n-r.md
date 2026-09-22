@@ -2,7 +2,7 @@
 id: ex-cartan-involution-and-k-plus-p-for-sl-n-r
 kind: example
 title: Cartan involution and k plus p for sl n r
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-involution-of-a-real-semisimple-lie-algebra, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, ex-general-and-special-linear-lie-groups, ex-orthogonal-and-special-orthogonal-lie-groups, ex-classical-simple-lie-algebras-and-their-killing-forms, def-transpose-of-a-matrix, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1, printed pp. 217-218"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

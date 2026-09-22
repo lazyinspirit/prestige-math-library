@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-representations-of-sl-two
 kind: theorem
 title: Finite-dimensional representations of sl_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-special-linear-lie-algebra-sl-two, def-representation-of-a-lie-algebra, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, thm-weyls-complete-reducibility-theorem, thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra, cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue, lem-commuting-endomorphisms-preserve-eigenspaces]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

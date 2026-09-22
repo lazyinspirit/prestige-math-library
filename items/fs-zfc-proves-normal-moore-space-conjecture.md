@@ -2,7 +2,7 @@
 id: fs-zfc-proves-normal-moore-space-conjecture
 kind: false-statement
 title: "False: ZFC proves the normal Moore space conjecture"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ch-normal-nonmetrizable-moore-space, cor-positive-relative-consistency-of-ch-and-gch, lem-derivation-finite-support-and-concatenation, def-moore-spaces-and-developments, def-arithmetic-provability-and-consistency]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "William G. Fleissner, If all normal Moore spaces are metrizable, then there is an inner model with a measurable cardinal"
       url: "https://kuscholarworks.ku.edu/server/api/core/bitstreams/88062b98-5ab8-4fdc-9548-9e00a9c7507d/content"
       locator: "CH instance and complete construction, printed pp. 366-371"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement
@@ -43,7 +45,9 @@ not prove that every normal Moore space is metrizable.
 **Proof technique:** direct.
 
 1.1 Assume $\operatorname{Con}(\mathrm{ZFC})$. Then $\operatorname{Con}(\mathrm{ZFC}+\mathrm{CH})$ directly by [F1]. [given, F1]
+
 2.1 If $\mathrm{ZFC}$ proved NMSC, weakening would give the same theorem in $\mathrm{ZFC}+\mathrm{CH}$. But [F3] gives in that theory a normal nonmetrizable Moore space, contradicting NMSC; by the proof-composition operations of [F2], these two finite derivations concatenate to a $\mathrm{ZFC}+\mathrm{CH}$ refutation, contrary to [step 1.1]. [step 1.1, F2, F3, F4]
+
 3.1 Therefore, assuming $\operatorname{Con}(\mathrm{ZFC})$, no such refutation exists and $\mathrm{ZFC}$ does not prove NMSC. [step 2.1, discharge-contradiction] ∎
 
 ## Remarks

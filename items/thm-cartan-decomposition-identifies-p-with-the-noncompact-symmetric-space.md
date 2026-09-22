@@ -2,7 +2,7 @@
 id: thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space
 kind: theorem
 title: Cartan decomposition identifies p with the noncompact symmetric space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-riemannian-symmetric-pair-of-noncompact-type, thm-quotient-manifold-by-a-closed-lie-subgroup, def-axiom-of-choice, cor-local-normal-form-for-submersions, prop-exponential-scales-one-parameter-subgroups]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §3, Theorem 6.31(b),(c) and the quotient description of G/K, printed pp. 361-368"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

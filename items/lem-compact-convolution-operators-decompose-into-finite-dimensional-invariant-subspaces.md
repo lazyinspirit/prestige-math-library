@@ -2,7 +2,7 @@
 id: lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces
 kind: lemma
 title: Spectral convolution eigenspaces are finite-dimensional and invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, lem-continuous-convolution-operators-are-hilbert-schmidt-and-compact, thm-hilbert-adjoint-properties, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-axiom-of-choice, def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VII §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

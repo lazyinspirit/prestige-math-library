@@ -2,7 +2,7 @@
 id: thm-collectionwise-normal-moore-spaces-are-metrizable
 kind: theorem
 title: "Collectionwise normal Moore spaces are metrizable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-normalized-families-and-collectionwise-normality, lem-collectionwise-normal-moore-spaces-are-screenable, thm-normal-screenable-moore-spaces-are-metrizable, def-axiom-of-choice, def-normal-and-t4-spaces, def-discrete-family-and-sigma-bases, def-metrizable-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "R. H. Bing, Metrization of topological spaces"
       url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf"
       locator: "Theorems 8-10, printed pp. 181-182"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

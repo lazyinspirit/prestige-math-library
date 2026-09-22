@@ -2,7 +2,7 @@
 id: lem-polynomial-calculus-is-isometric-for-self-adjoint-operators
 kind: lemma
 title: Polynomial calculus is isometric for self adjoint operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-spectrum-of-a-self-adjoint-operator-is-real, thm-polynomial-spectral-mapping, lem-c-star-spectral-radius-equals-norm-for-normal-elements, thm-hilbert-adjoint-properties, lem-bounded-hilbert-operators-form-a-c-star-algebra, def-axiom-of-choice, cor-normal-operator-norm-equals-spectral-radius, def-self-adjoint-positive-unitary-and-normal-operator]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–13"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

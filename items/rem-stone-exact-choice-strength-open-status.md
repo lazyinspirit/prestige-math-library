@@ -2,7 +2,7 @@
 id: rem-stone-exact-choice-strength-open-status
 kind: remark
 title: "The exact choice strength of Stone's theorem remains open"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-consistency-dc-without-stone, thm-relative-consistency-bpi-without-stone, thm-effective-metacompact-discrete-metrics-implies-ac, thm-stone-metric-spaces-are-paracompact, def-metacompact-space, def-axiom-of-choice]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
     - title: "Samuel Corson, The Independence of Stone's Theorem from the Boolean Prime Ideal Theorem"
       url: "https://arxiv.org/pdf/2001.06513"
       locator: "Introduction and Theorem 1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra
 kind: theorem
 title: Maximal ideals and characters of a commutative Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-closed-ideal-quotient-is-a-banach-algebra, lem-neumann-series, thm-gelfand-mazur, thm-zorn, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-prime-and-maximal-ideals, def-character-and-maximal-ideal-space, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

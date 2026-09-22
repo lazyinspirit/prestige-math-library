@@ -2,7 +2,7 @@
 id: thm-borel-functional-calculus-for-bounded-normal-operators
 kind: theorem
 title: Borel functional calculus for bounded normal operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-borel-functional-calculus-for-a-bounded-normal-operator, thm-pvm-integral-is-a-star-homomorphism, thm-bounded-borel-pvm-integral, thm-continuous-functional-calculus-for-bounded-normal-operators, thm-continuous-functional-calculus-properties, lem-continuous-functional-calculus-produces-a-regular-pvm, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-hilbert-adjoint-properties, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Theorem 5.6(c), p.18"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

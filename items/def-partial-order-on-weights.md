@@ -2,7 +2,7 @@
 id: def-partial-order-on-weights
 kind: definition
 title: Root order on weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-positive-system-and-base-of-simple-roots, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

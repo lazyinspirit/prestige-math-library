@@ -2,7 +2,7 @@
 id: thm-riesz-fischer-for-fourier-coefficients
 kind: theorem
 title: "Riesz–Fischer: the Fourier coefficient map is onto the space of square-summable families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-trigonometric-system-is-complete-in-l-two-of-the-torus, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, thm-hilbert-space-fourier-expansion, def-countable-choice, def-fourier-coefficients-and-trigonometric-polynomials, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-square-summable-family-on-an-arbitrary-index-set]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.64, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

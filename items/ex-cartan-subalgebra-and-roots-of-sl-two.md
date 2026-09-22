@@ -2,7 +2,7 @@
 id: ex-cartan-subalgebra-and-roots-of-sl-two
 kind: example
 title: Cartan subalgebra and roots of sl_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-special-linear-lie-algebra-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Example 19.9 and Example 19.14"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

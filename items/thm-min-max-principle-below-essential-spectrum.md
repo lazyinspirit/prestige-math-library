@@ -2,7 +2,7 @@
 id: thm-min-max-principle-below-essential-spectrum
 kind: theorem
 title: "Min-max principle below the essential spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, lem-spectral-form-domain-and-core-of-a-semibounded-operator, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthogonality-and-orthogonal-complement, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-axiom-of-choice, def-projection-valued-measure, thm-unbounded-borel-functional-calculus, thm-heine-borel-r, thm-cauchy-schwarz-in-an-inner-product-space]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Theorem 4.12 (max-min), Theorem 4.14 (min-max) and the preceding proof, pp.139-141; source trial-dimension typo corrected"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

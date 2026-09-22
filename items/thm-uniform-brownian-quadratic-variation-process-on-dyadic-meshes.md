@@ -2,7 +2,7 @@
 id: thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes
 kind: theorem
 title: "Uniform dyadic Brownian quadratic variation process"
-status: draft
+status: published
 origin: pipeline
 deps: [def-quadratic-variation-along-a-partition-sequence, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, thm-kolmogorov-maximal-inequality, cor-first-borel-cantelli-lemma-for-events, thm-heine-borel-characterisation-r, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.8"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

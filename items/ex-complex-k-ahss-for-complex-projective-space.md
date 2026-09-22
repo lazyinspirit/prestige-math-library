@@ -2,7 +2,7 @@
 id: ex-complex-k-ahss-for-complex-projective-space
 kind: example
 title: Complex K-AHSS for complex projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-axiom-of-choice", "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory", "thm-reduced-k-theory-exact-sequence-of-a-cofibration", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "def-schubert-cells-in-real-and-complex-grassmannians", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "thm-an-exact-couple-generates-a-spectral-sequence", "def-exact-couple", "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere", "thm-complex-bott-periodicity", "def-external-product-in-complex-k-theory", "prop-ahss-collapse-determines-only-the-associated-graded-object", "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex", "prop-relative-cw-inclusions-are-cofibrations", "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient"]
@@ -16,6 +16,8 @@ sources:
     - title: "Allen Hatcher, Vector Bundles & K-Theory, Propositions 2.23–2.24, printed pp. 66–68"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Propositions 2.23–2.24, printed pp. 66–68"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

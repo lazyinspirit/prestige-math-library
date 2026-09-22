@@ -2,7 +2,7 @@
 id: thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity
 kind: theorem
 title: "Brownian law of the iterated logarithm at infinity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, cor-law-of-the-brownian-maximum, lem-two-sided-mills-bounds-for-standard-normal-tail, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-first-borel-cantelli-lemma-for-events, cor-second-borel-cantelli-lemma-under-pairwise-independence, lem-rat-embeds-dense, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 8.5.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-stiefel-whitney-classes-from-the-projective-bundle-relation
 kind: definition
 title: Stiefel–Whitney classes from the projective-bundle relation
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-mod-two-real-projective-bundle-theorem", "def-real-projective-bundle-and-tautological-line", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§8 existence of Stiefel–Whitney classes, printed pp.97–114"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: def-restricted-root-and-restricted-root-space
 kind: definition
 title: Restricted root and restricted root space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-maximal-split-abelian-subspace-and-real-rank]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §4, construction of the restricted-root spaces and definition of a restricted root, printed p. 370"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

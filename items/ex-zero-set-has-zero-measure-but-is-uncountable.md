@@ -2,7 +2,7 @@
 id: ex-zero-set-has-zero-measure-but-is-uncountable
 kind: example
 title: "A null uncountable random closed set"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brownian-zero-set-has-lebesgue-measure-zero, cor-brownian-zero-set-is-uncountable, def-brownian-zero-set, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Perla Sousi, Advanced Probability, Theorem 6.39, printed p. 71"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

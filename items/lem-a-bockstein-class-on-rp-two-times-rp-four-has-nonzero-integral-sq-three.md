@@ -2,7 +2,7 @@
 id: lem-a-bockstein-class-on-rp-two-times-rp-four-has-nonzero-integral-sq-three
 kind: lemma
 title: A Bockstein class on RP-two times RP-four has nonzero integral Sq-three
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "thm-cartan-formula-for-steenrod-squares", "def-axiom-of-choice", "lem-real-projective-space-cellular-homology-and-pinch-map", "thm-cellular-homology-computes-singular-homology", "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field", "prop-steenrod-square-normalization-instability-and-top-square", "thm-steenrod-squares-are-well-defined-and-natural"]
@@ -16,6 +16,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §3.2.4 and Proposition 3.12, printed pp. 11–12"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§3.2.4 and Proposition 3.12, printed pp. 11–12"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

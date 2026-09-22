@@ -2,7 +2,7 @@
 id: thm-inverse-function-theorem-for-banach-spaces
 kind: theorem
 title: Inverse function theorem for Banach spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-c-k-map-between-banach-spaces, lem-banach-mean-value-estimate-on-a-convex-set, thm-banach-fixed-point, lem-neumann-series-and-small-perturbations-of-bounded-inverses, def-axiom-of-choice, def-frechet-derivative-between-banach-spaces, def-metric-ball, thm-complete-subspace-iff-closed, def-banach-space, lem-composition-operator-norm-inequality, def-operator-norm, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-maximal-torus-and-weyl-group-of-so-three
 kind: example
 title: A maximal torus and Weyl group of SO(3)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-group-of-a-compact-connected-lie-group, thm-analytic-and-root-system-weyl-groups-agree, def-axiom-of-choice, def-torus-and-maximal-torus-in-a-compact-lie-group]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §4 (the SO(3) example)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

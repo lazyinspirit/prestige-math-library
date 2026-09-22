@@ -2,7 +2,7 @@
 id: cor-brownian-paths-have-infinite-total-variation-on-every-interval
 kind: corollary
 title: "Brownian paths have infinite total variation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-substitution, thm-monotone-convergence-for-the-integral, def-bounded-variation-and-total-variation, cor-chebyshev-inequality-for-random-variables, cor-first-borel-cantelli-lemma-for-events, lem-rat-embeds-dense, def-axiom-of-choice, lem-gaussian-even-moment-bound-for-brownian-increments, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-change-of-variables-for-expectation, thm-integration-against-a-density, thm-factorization-of-expectations-for-independent-variables, lem-variance-and-covariance-identities-for-random-variables, thm-rationals-countable]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.1 (the path is not of bounded variation)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

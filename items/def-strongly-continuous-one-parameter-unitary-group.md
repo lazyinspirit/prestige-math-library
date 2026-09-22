@@ -2,7 +2,7 @@
 id: def-strongly-continuous-one-parameter-unitary-group
 kind: definition
 title: "Strongly continuous one-parameter unitary group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-orthogonality-and-orthogonal-complement, def-metric-continuity]
@@ -18,6 +18,8 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations (lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: "Section 1.1, Definitions and Remark 1.2, pp.4-6"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

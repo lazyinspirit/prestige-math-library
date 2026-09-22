@@ -2,7 +2,7 @@
 id: def-natural-and-usual-augmented-brownian-filtrations
 kind: definition
 title: "Natural and usual augmented Brownian filtrations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-continuous-time-filtration-and-all-pairs-martingale, thm-generated-sigma-algebra-exists-and-is-minimal, def-axiom-of-choice, thm-completion-of-a-measure-space, prop-null-sets-form-a-sigma-ideal-in-a-complete-space, thm-the-lebesgue-integral-respects-almost-everywhere-equality, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.2"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

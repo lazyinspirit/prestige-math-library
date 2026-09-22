@@ -2,7 +2,7 @@
 id: lem-two-dimensional-numerical-range-is-convex
 kind: lemma
 title: Two dimensional numerical range is convex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-numerical-range-and-numerical-radius, def-countable-choice, def-inner-product-space, def-hilbert-space, thm-gram-schmidt-orthonormalisation, thm-rank-nullity, thm-of-square-roots, cor-inner-product-induces-a-norm]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

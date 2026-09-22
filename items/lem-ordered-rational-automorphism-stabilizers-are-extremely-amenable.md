@@ -2,7 +2,7 @@
 id: lem-ordered-rational-automorphism-stabilizers-are-extremely-amenable
 kind: lemma
 title: "Finite stabilizers in Aut(Q,<) are extremely amenable"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-extreme-amenability-yields-bpi-in-finite-support-models, thm-finite-ramsey-for-uniform-subsets, def-ramsey-colouring-and-arrow-notation, def-natural-numbers]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

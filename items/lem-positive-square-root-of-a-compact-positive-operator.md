@@ -2,7 +2,7 @@
 id: lem-positive-square-root-of-a-compact-positive-operator
 kind: lemma
 title: Positive square root of a compact positive operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-compact-self-adjoint-operators, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-compact-linear-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-orthogonal-decomposition-by-a-closed-subspace, lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums, lem-finite-bessel-inequality, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-square-summable-family-on-an-arbitrary-index-set, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, thm-complex-spectral-theorem-for-normal-endomorphisms, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, def-metric-convergence, def-banach-space, def-linear-subspace, def-kernel-and-image-of-a-linear-map, def-countable, thm-countable-union-of-countable, cor-archimedean-reciprocal, def-countable-choice, thm-hilbert-space-fourier-expansion]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

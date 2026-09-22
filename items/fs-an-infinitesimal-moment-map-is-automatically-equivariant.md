@@ -2,7 +2,7 @@
 id: fs-an-infinitesimal-moment-map-is-automatically-equivariant
 kind: false-statement
 title: An infinitesimal moment map is automatically equivariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, def-poisson-bracket-on-a-symplectic-manifold, def-coadjoint-representation-of-a-lie-group, def-regular-and-critical-points-and-values, def-countable-choice, def-fundamental-vector-field-of-a-left-action, def-symplectic-form-and-symplectic-manifold, lem-nonequivariance-defect-of-an-infinitesimal-moment-map-is-a-constant-lie-algebra-two-cocycle]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 26, §26.3, printed pages 165--166
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

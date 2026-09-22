@@ -2,7 +2,7 @@
 id: prop-weyl-length-equals-positive-root-inversion-number
 kind: proposition
 title: Weyl length equals inversion number
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-length-and-longest-element-of-a-finite-weyl-group, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-open-and-closed-weyl-chambers]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

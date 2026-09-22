@@ -2,7 +2,7 @@
 id: cex-an-everywhere-defined-closed-operator-on-a-banach-space-cannot-be-unbounded
 kind: counterexample
 title: "An everywhere-defined closed operator on a Banach space is bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-densely-defined-closed-and-closable-operator, thm-closed-graph-theorem, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-unbounded-linear-operator-domain-and-graph, def-dependent-choice, def-hilbert-space, lem-unbounded-adjoint-is-well-defined-and-closed]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Exercise 6.47 and Exercise 6.50, Sec. 6.1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

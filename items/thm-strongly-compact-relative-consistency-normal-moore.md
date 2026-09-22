@@ -2,7 +2,7 @@
 id: thm-strongly-compact-relative-consistency-normal-moore
 kind: theorem
 title: "A strongly compact cardinal gives the NMSC consistency upper bound"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-lc-strong-compactness-product-measure-extension-interface, thm-pmea-implies-normal-moore-space-conjecture, def-axiom-of-choice, thm-formal-relative-consistency-from-verified-proof-reduction, def-product-measure-extension-axioms-pmea-and-pmea-sigma]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "D. H. Fremlin, Real-valued-measurable cardinals"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf"
       locator: "Theorem 8C and Corollary 8G, printed p. 70"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

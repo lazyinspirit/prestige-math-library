@@ -2,7 +2,7 @@
 id: def-real-projective-bundle-and-tautological-line
 kind: definition
 title: Real projective bundle and tautological line
-status: draft
+status: published
 origin: pipeline
 deps: ["def-locally-trivial-fiber-bundle", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "def-real-and-complex-topological-vector-bundle", "thm-vector-bundles-glued-from-transition-cocycles", "thm-quotient-universal-property", "def-axiom-of-choice"]
 axiom_strength: "ZF for the quotient construction and numerations; AC for the compact-fiber total-space consequence."
@@ -21,6 +21,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§7 projective and flag constructions, printed pp.83–96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

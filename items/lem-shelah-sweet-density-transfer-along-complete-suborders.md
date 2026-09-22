@@ -2,7 +2,7 @@
 id: lem-shelah-sweet-density-transfer-along-complete-suborders
 kind: lemma
 title: Sweet density transfers along complete suborders
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-sweetness-model, thm-forcing-equivalence-and-boolean-completion, def-complete-boolean-algebra-and-regular-open-sets, def-axiom-of-choice, thm-forcing-preorders-have-regular-open-completions, thm-n-cross-n-countable, thm-zorn]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Claim 7.4, pp. 34-35"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

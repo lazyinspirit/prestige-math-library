@@ -2,7 +2,7 @@
 id: thm-peter-weyl-for-compact-lie-groups
 kind: theorem
 title: Peter–Weyl theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-schur-orthogonality-for-compact-lie-groups, cor-complete-reducibility-for-compact-lie-groups, def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group, lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces, lem-compact-lie-groups-admit-central-continuous-approximate-identities, thm-hilbert-space-fourier-expansion, def-axiom-of-choice, def-matrix-coefficient-and-character-of-a-compact-group-representation, def-dual-complex-representation]
@@ -19,6 +19,8 @@ sources:
       locator: "Appendix Z"
 proof_strategy: direct
 landmark: true
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

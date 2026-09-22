@@ -2,7 +2,7 @@
 id: def-hilbert-orthogonal-projection
 kind: definition
 title: The Hilbert orthogonal projection onto a closed subspace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-orthogonal-decomposition-by-a-closed-subspace, thm-finite-dimensional-orthogonal-decomposition, def-orthogonal-projection, def-linear-subspace, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

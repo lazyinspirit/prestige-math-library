@@ -2,7 +2,7 @@
 id: thm-existence-theorem-for-complex-semisimple-lie-algebras
 kind: theorem
 title: Existence theorem for complex semisimple Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-serre-presentation-theorem, prop-root-systems-decompose-uniquely-into-irreducible-components, def-positive-system-and-base-of-simple-roots, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix, def-simple-semisimple-and-reductive-lie-algebras, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §11, the Existence Theorem and its proof, printed pp. 199-202"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,13 +2,14 @@
 id: def-brownian-zero-set
 kind: definition
 title: "The Brownian zero set"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brownian-motion-has-a-jointly-measurable-continuous-version, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

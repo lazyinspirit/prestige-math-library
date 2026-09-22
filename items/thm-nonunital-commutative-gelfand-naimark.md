@@ -2,7 +2,7 @@
 id: thm-nonunital-commutative-gelfand-naimark
 kind: theorem
 title: Nonunital commutative Gelfand Naimark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-character-space-of-the-unitization-is-one-point-compactification, thm-minimal-c-star-unitization, thm-commutative-gelfand-naimark, def-compact-support-c-c-and-c-zero-on-an-lch-space, def-one-point-compactification, thm-one-point-compactification-properties, def-axiom-of-choice, def-c-star-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

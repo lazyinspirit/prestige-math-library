@@ -2,7 +2,7 @@
 id: def-good-tree-watson-symmetric-stone-model
 kind: definition
 title: "The Good-Tree-Watson symmetric Stone model"
-status: draft
+status: published
 origin: pipeline
 deps: [def-symmetric-forcing-system-and-hereditarily-symmetric-names, thm-hereditarily-symmetric-interpretations-form-a-zf-model, def-forcing-name-automorphism-action, def-forcing-preorder-compatibility-and-filter, def-complete-boolean-algebra-and-regular-open-sets, thm-forcing-preorders-have-regular-open-completions, def-product-topology, def-metric-space, def-axiom-of-choice]
 justified_by: []
@@ -15,6 +15,8 @@ sources:
     - title: "C. Good, I. J. Tree, and W. S. Watson, On Stone's theorem and the axiom of choice"
       url: "https://web.mat.bham.ac.uk/C.Good/research/pdfs/stone.pdf"
       locator: "Sections 2-4, printed pp. 2-9"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

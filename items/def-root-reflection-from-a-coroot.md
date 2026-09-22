@@ -2,7 +2,7 @@
 id: def-root-reflection-from-a-coroot
 kind: definition
 title: Root reflection defined by a coroot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 19, Theorem 19.19(iii)"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

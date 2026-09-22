@@ -2,7 +2,7 @@
 id: cor-square-integrable-brownian-terminal-variables-have-ito-representations
 kind: corollary
 title: "Square-integrable Brownian terminal variables have Ito representations"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-brownian-filtration-martingale-representation, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, thm-ito-isometry-and-linearity-in-predictable-l2, def-locally-square-integrable-predictable-brownian-integrand, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 6.6"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

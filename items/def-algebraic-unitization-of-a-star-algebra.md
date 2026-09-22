@@ -2,7 +2,7 @@
 id: def-algebraic-unitization-of-a-star-algebra
 kind: definition
 title: Algebraic unitization of a star algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-c-star-algebra]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

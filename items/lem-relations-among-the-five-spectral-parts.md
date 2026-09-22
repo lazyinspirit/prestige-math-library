@@ -2,7 +2,7 @@
 id: lem-relations-among-the-five-spectral-parts
 kind: lemma
 title: Relations among the five spectral parts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-point-continuous-and-residual-spectrum, def-approximate-point-and-compression-spectrum, thm-bounded-below-iff-injective-with-closed-range, def-dependent-choice, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-bounded-below-operator]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.3, printed pp. 30–33"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

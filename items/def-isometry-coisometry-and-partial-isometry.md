@@ -2,7 +2,7 @@
 id: def-isometry-coisometry-and-partial-isometry
 kind: definition
 title: Isometry coisometry and partial isometry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hilbert-adjoint-properties, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-orthogonal-projection, def-orthogonality-and-orthogonal-complement, def-operator-norm, def-hilbert-space]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

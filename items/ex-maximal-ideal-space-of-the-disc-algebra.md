@@ -2,7 +2,7 @@
 id: ex-maximal-ideal-space-of-the-disc-algebra
 kind: example
 title: Character space of the disc algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-taylor-expansion-holomorphic-function, thm-uniform-cauchy-criterion-complex-functions, thm-uniform-limit-continuous-complex-functions, thm-uniform-limit-interchanges-complex-line-integrals, thm-goursat-triangle-theorem, thm-morera-triangle-theorem, thm-boundary-maximum-modulus-principle, thm-complex-power-series-converge-locally-uniformly, def-character-and-maximal-ideal-space, thm-compactness-under-continuous-maps]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

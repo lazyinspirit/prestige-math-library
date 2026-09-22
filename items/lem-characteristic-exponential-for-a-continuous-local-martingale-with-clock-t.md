@@ -2,7 +2,7 @@
 id: lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t
 kind: lemma
 title: "Characteristic exponential for a continuous local martingale with deterministic clock"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, def-convergence-in-probability, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-continuous-time-stopping-time, def-continuity-real, thm-heine-cantor-r, cor-cauchy-schwarz-for-random-variables, thm-dominated-convergence, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, cor-taylor-remainder-bound, def-taylor-polynomial-and-remainder, thm-optional-sampling-for-bounded-stopping-times, thm-uniform-integrability-of-conditional-expectations-of-one-variable, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, thm-extreme-value-r, thm-heine-borel-r]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 6.1"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

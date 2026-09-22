@@ -2,7 +2,7 @@
 id: ex-standard-and-dual-representations-of-sl-n-by-highest-weights
 kind: example
 title: Standard and dual representations of sl_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion, prop-root-systems-of-the-classical-complex-lie-algebras, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-classical-complex-matrix-lie-algebras, def-fundamental-weights, def-coroot-of-a-lie-algebra-root, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, def-killing-form-of-a-finite-dimensional-lie-algebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.7"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

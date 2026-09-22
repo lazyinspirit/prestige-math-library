@@ -2,7 +2,7 @@
 id: def-c-k-map-between-banach-spaces
 kind: definition
 title: C k map between Banach spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-frechet-derivative-between-banach-spaces, def-operator-norm, def-space-of-bounded-linear-operators, thm-bounded-operator-space-is-banach, def-banach-space, def-metric-continuity, lem-composition-operator-norm-inequality, thm-bounded-bilinear-map-equivalences]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

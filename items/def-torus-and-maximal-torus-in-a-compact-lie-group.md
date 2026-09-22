@@ -2,7 +2,7 @@
 id: def-torus-and-maximal-torus-in-a-compact-lie-group
 kind: definition
 title: Tori and maximal tori
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-lie-group, def-immersed-embedded-and-closed-lie-subgroup]
@@ -17,6 +17,8 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§8"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

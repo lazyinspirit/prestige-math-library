@@ -2,7 +2,7 @@
 id: def-approximable-operator
 kind: definition
 title: Approximable operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-bounded-linear-operator, def-operator-norm, def-space-of-bounded-linear-operators, def-linear-basis, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, def-countable-choice, def-banach-space, def-compact-linear-operator, def-metric-convergence, thm-metric-closure-characterisation]
@@ -15,6 +15,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1, approximation by finite rank operators"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

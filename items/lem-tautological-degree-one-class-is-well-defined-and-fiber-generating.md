@@ -2,7 +2,7 @@
 id: lem-tautological-degree-one-class-is-well-defined-and-fiber-generating
 kind: lemma
 title: The tautological degree-one class is well defined and fiber generating
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tautological-degree-one-class-on-a-real-projective-bundle", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "lem-real-projective-space-cellular-homology-and-pinch-map", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "def-stiefel-space-grassmannian-and-tautological-bundle", "prop-cup-product-is-natural-unital-and-associative", "def-real-projective-bundle-and-tautological-line", "prop-compact-spaces-are-paracompact", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 34 projective-bundle relation, printed pp.123–126"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

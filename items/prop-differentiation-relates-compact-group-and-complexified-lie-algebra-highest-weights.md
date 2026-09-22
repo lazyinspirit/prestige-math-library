@@ -2,7 +2,7 @@
 id: prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights
 kind: proposition
 title: Differentiation and integration of highest weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-for-a-compact-connected-lie-group, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, def-axiom-of-choice, thm-lie-second-fundamental-theorem, thm-continuous-homomorphisms-between-lie-groups-are-smooth, prop-exponential-map-is-natural-for-lie-group-homomorphisms, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, thm-compact-connected-lie-groups-are-classified-by-root-data, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, thm-cartans-closed-subgroup-theorem, thm-compact-group-weyl-group-is-finite]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §8, the analytic-integrality passage between group and algebra weights"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

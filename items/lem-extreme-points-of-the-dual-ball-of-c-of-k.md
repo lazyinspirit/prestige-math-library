@@ -2,7 +2,7 @@
 id: lem-extreme-points-of-the-dual-ball-of-c-of-k
 kind: lemma
 title: Extreme points of the dual ball of C(K)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, def-extreme-point-and-face, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-rational-cohomology-of-bo-and-bso-by-pontryagin-and-euler-classes
 kind: theorem
 title: Rational cohomology of BO and BSO by Pontryagin and Euler classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-top-pontryagin-class-is-the-square-of-the-euler-class", "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "lem-universal-oriented-sphere-bundle-has-bso-n-minus-one-total-space", "lem-rational-transfer-identifies-a-finite-regular-cover-with-deck-invariants", "prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion", "def-oriented-grassmannian-and-tautological-oriented-bundle", "thm-oriented-real-vector-bundles-are-classified-by-bso", "def-axiom-of-choice", "thm-stable-stiefel-space-is-contractible", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-singular-cochain-complex-with-coefficients", "def-singular-cohomology-with-coefficients", "def-singular-cup-product-on-cochains", "def-thom-class-by-fiberwise-normalization", "thm-naturality-and-uniqueness-of-thom-classes", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-singular-cohomology-is-graded-commutative"]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, Theorem 3.16"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Rational cohomology of BSO(n) and BO(n) by induction, printed pp.94-96"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

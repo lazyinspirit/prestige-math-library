@@ -2,7 +2,7 @@
 id: ex-root-systems-a-two-b-two-and-g-two
 kind: example
 title: Rank-two systems A_2, B_2 and G_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system, def-cartan-matrix-of-a-based-root-system, thm-rank-two-root-system-classification]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 21, Theorem 21.10 and its picture, printed p. 113"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-hilbert-projection-variational-characterization
 kind: theorem
 title: Variational characterisation of the nearest point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-projection-onto-a-nonempty-closed-convex-set, def-relative-normed-convexity-and-separation, def-real-and-complex-inner-product-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

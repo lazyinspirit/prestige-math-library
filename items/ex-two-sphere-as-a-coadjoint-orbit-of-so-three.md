@@ -2,7 +2,7 @@
 id: ex-two-sphere-as-a-coadjoint-orbit-of-so-three
 kind: example
 title: The two-sphere as a coadjoint orbit of SO(3)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-coadjoint-orbits-are-symplectic-manifolds, prop-coadjoint-orbit-inclusion-is-an-equivariant-moment-map, ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups, ex-orthogonal-and-special-orthogonal-lie-groups, def-cross-product-in-r3, def-coadjoint-representation-of-a-lie-group, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Homework 17 and §22.4, printed pages 139--140
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

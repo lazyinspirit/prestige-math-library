@@ -2,7 +2,7 @@
 id: ex-square-integrable-kernel-finite-rank-truncations
 kind: example
 title: Finite-rank truncations of a square-integrable kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-l-two-kernels-give-hilbert-schmidt-operators, def-hilbert-schmidt-operator, thm-hilbert-schmidt-operators-are-compact, lem-finite-rank-operators-are-compact, def-square-summable-family-on-an-arbitrary-index-set, def-counting-measure, prop-counting-measure-is-a-measure, rem-ell-p-is-l-p-of-counting-measure, def-l-p-space-as-a-quotient-by-null-functions, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-finite-sigma-finite-and-semifinite-measures, def-linear-basis, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-operator-norm, def-bounded-linear-operator, def-linear-combination-and-span, def-natural-numbers, def-complete-ordered-field, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "John Roe, Lectures on Analysis — Lecture 13, diagonal examples after Definition 13.1, printed p. 67"
       url: "https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/1/4020/files/2017/12/analysis-slides-278829v.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

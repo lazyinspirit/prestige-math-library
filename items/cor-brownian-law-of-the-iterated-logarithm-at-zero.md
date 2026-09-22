@@ -2,7 +2,7 @@
 id: cor-brownian-law-of-the-iterated-logarithm-at-zero
 kind: corollary
 title: "Brownian law of the iterated logarithm at zero"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, thm-brownian-time-inversion, def-axiom-of-choice, def-brownian-motion]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 8.5.1 with Brownian time inversion"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

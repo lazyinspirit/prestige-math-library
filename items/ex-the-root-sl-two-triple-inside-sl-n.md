@@ -2,7 +2,7 @@
 id: ex-the-root-sl-two-triple-inside-sl-n
 kind: example
 title: The root sl_2 triple inside sl_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-killing-form-of-a-finite-dimensional-lie-algebra, def-special-linear-lie-algebra-sl-two]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the root-triple, Killing-dual and coroot suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

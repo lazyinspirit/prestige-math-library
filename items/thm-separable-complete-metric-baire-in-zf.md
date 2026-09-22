@@ -2,7 +2,7 @@
 id: thm-separable-complete-metric-baire-in-zf
 kind: theorem
 title: "Separable complete metric spaces are Baire in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-metric-space, def-baire-space, def-separable-space, def-complete-metric-space, lem-nonempty-countable-set-has-a-padded-enumeration, def-countable, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-metric-interior-closure-boundary, def-natural-numbers, def-function, def-cauchy-in-metric, def-metric-convergence, cor-archimedean-reciprocal, thm-recursion, lem-metric-nonnegativity]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Marianne Morillon, Synthese"
       url: "https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf"
       locator: "§2.1, p. 5 (choice-strength context; the separable proof is given locally)"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

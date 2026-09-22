@@ -2,7 +2,7 @@
 id: thm-kernel-of-the-gelfand-transform-is-the-radical
 kind: theorem
 title: Kernel of the Gelfand transform is the radical
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-jacobson-radical-and-semisimple-commutative-banach-algebra, def-gelfand-transform, thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, def-axiom-of-choice, def-unital-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

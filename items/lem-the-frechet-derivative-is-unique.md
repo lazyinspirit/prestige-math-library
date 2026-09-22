@@ -2,7 +2,7 @@
 id: lem-the-frechet-derivative-is-unique
 kind: lemma
 title: The Fréchet derivative is unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-frechet-derivative-between-banach-spaces, def-norm-and-normed-space, def-metric-topology]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

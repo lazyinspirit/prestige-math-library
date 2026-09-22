@@ -2,7 +2,7 @@
 id: cex-continuity-alone-does-not-imply-finite-quadratic-variation
 kind: counterexample
 title: "Continuity does not imply finite quadratic variation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-quadratic-variation-along-a-partition-sequence, def-partition-and-refinement, def-continuity-real]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

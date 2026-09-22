@@ -2,7 +2,7 @@
 id: thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable
 kind: theorem
 title: Finite-dimensional compact-group representations are unitarizable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-continuous-and-unitary-representation-of-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, def-axiom-of-choice, def-real-and-complex-inner-product-space, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, cor-every-vector-space-has-a-basis, prop-standard-coordinate-inner-products, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§4.2, complete reducibility via averaging"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

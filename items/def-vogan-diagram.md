@@ -2,7 +2,7 @@
 id: def-vogan-diagram
 kind: definition
 title: Vogan diagram
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-cayley-transform-of-a-theta-stable-cartan-subalgebra, def-theta-stable-cartan-subalgebra-and-compact-split-parts, thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification, def-positive-system-and-base-of-simple-roots, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.nthu.edu.tw/~chuah/Notes4.pdf"
       locator: "Definition 1.2.1, p.2; Section 5.1, reflection algorithm (5.1) and its m=2 specialization, p.15"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

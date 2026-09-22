@@ -2,7 +2,7 @@
 id: rem-schatten-p-classes
 kind: remark
 title: Schatten p classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-absolute-value-and-singular-values-of-a-compact-operator, def-hilbert-schmidt-operator, thm-hilbert-schmidt-operators-are-compact, def-trace-class-operator, thm-singular-value-decomposition-for-compact-operators, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-compact-linear-operator, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-holomorphic-functional-calculus-homomorphism
 kind: theorem
 title: Holomorphic functional calculus homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-holomorphic-functional-calculus-is-contour-independent, lem-resolvent-identity, lem-contour-integral-commutes-with-bounded-linear-maps, thm-global-cauchy-integral-formula-homology, lem-admissible-cycle-around-a-compact-plane-set, def-axiom-of-choice, def-holomorphic-functional-calculus, def-banach-algebra-valued-contour-integral, lem-neumann-series, cor-global-cauchy-theorem-homology, cor-cycle-integral-of-a-derivative-vanishes, cor-contour-integral-of-a-constant-is-an-endpoint-increment, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-complex-chain-and-cycle, def-integration-and-index-of-complex-chain]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Theorem 2.5.2 and Exercise 2.5.3, printed pp. 47–48"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

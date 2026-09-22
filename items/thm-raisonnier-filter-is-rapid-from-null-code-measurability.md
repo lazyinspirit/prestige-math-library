@@ -2,7 +2,7 @@
 id: thm-raisonnier-filter-is-rapid-from-null-code-measurability
 kind: theorem
 title: Uniform null-code measurability makes the Raisonnier filter rapid
-status: draft
+status: published
 origin: pipeline
 deps: [lem-raisonnier-family-is-a-sigma-one-three-filter, lem-measurable-null-code-orders-bound-constructible-null-unions, lem-uniform-null-g-delta-capture-functions, def-countable-choice, def-rapid-and-raisonnier-filters, thm-borel-probability-measures-on-polish-spaces-are-inner-regular, def-boldface-sigma-one-three-measurability]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Theorem 3.12, pp. 49-50"}
     - {title: "Spyridon Dialiatsis and Yurii Khomskii, Combinatorial Properties of the Raisonnier Filter", url: "https://arxiv.org/abs/2602.23340", locator: "Theorems 2.5 and 2.8"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-formal-nmsc-consistency-lower-bound
 kind: theorem
 title: "Metatheoretic consistency lower bound for NMSC"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-normal-moore-implies-inner-model-measurable, def-relativization-to-a-definable-class, lem-interpretation-translates-finite-derivations, thm-formal-relative-consistency-from-verified-proof-reduction, thm-finite-fragment-relative-consistency-transfer, def-arithmetic-provability-and-consistency, def-axiom-of-choice]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
       locator: "Main theorem and consistency-strength discussion, printed pp. 365-368"
     - title: "Freiburg, Course Notes for Set Theory and Independence Proofs (2024), Lemma 3.5.12 p54"
       url: "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement
@@ -47,7 +49,9 @@ unspecified arithmetic base proves the displayed implication.
 **Proof technique:** direct.
 
 1.1 Let $T:=\mathrm{ZFC}+\mathrm{NMSC}$ and $U:=\mathrm{ZFC}+\text{there is a measurable cardinal}$. Suppose, contrapositively, that an actual finite $U$-refutation $p$ exists, and let $\Delta$ be the finite set of nonlogical $U$-axioms occurring in $p$. [given, F2]
+
 2.1 Apply the finite-fragment reading of the inner-model theorem [F1] to this particular $\Delta$. It supplies one definable nonempty class $M$ and $T$-proofs of $\sigma^M$ for every $\sigma\in\Delta$. With membership and equality unchanged, these finitely many obligations make relativization to $M$ an interpretation of the finite theory $\Delta$ in $T$. [step 1.1, F1, F2]
+
 3.1 Translate the fixed refutation $p$ through that finite interpretation. By [F2], its translated logical steps and the finitely many proofs from step 2.1 assemble into an actual $T$-refutation. Thus every actual $U$-refutation entails an actual $T$-refutation, so absence of a $T$-refutation entails absence of a $U$-refutation. Under the standard-natural-number convention in the Statement, this is $\operatorname{Con}(T)\to\operatorname{Con}(U)$. [step 1.1, step 2.1, F2, F3] ∎
 
 ## Remarks

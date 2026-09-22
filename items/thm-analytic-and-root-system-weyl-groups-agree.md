@@ -2,7 +2,7 @@
 id: thm-analytic-and-root-system-weyl-groups-agree
 kind: theorem
 title: Analytic and root-system Weyl groups agree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-compact-group-weyl-group-is-finite, thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-equivalent-characterizations-of-reductive-lie-algebras, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, thm-root-sl-two-triple, thm-lie-second-fundamental-theorem, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, prop-weyl-vector-is-the-sum-of-fundamental-weights, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori, cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus, def-axiom-of-choice, def-weyl-group-of-a-root-system, def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots, def-weyl-vector-rho, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, ex-unitary-and-special-unitary-lie-groups, thm-higher-dimensional-spheres-are-simply-connected, prop-exponential-map-is-natural-for-lie-group-homomorphisms, prop-adjoint-exponential-identity, thm-the-differential-of-adjoint-is-ad, thm-cartans-closed-subgroup-theorem, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§§12–14, the analytic Weyl group and its reflections"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

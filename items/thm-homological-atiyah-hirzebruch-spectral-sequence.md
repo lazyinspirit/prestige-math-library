@@ -2,7 +2,7 @@
 id: thm-homological-atiyah-hirzebruch-spectral-sequence
 kind: theorem
 title: Homological Atiyah–Hirzebruch spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-reduced-generalized-homology-theory", "def-coefficient-groups-of-a-generalized-homology-theory", "thm-an-exact-couple-generates-a-spectral-sequence", "def-exact-couple", "def-homological-spectral-sequence", "def-associated-graded-object-of-a-filtered-object", "prop-relative-cw-inclusions-are-cofibrations", "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient", "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex", "prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory", "def-incidence-number-of-two-cw-cells", "thm-cellular-boundary-is-the-incidence-degree-matrix", "thm-cellular-homology-computes-singular-homology"]
@@ -18,6 +18,8 @@ sources:
     - title: "Haynes Miller, MIT 18.906 Algebraic Topology II, Lecture 26, printed pp. 89–92"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 26, exact-couple filtration conventions, printed pp. 89–92"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

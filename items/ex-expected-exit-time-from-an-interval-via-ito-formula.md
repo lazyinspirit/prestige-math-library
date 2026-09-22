@@ -2,7 +2,7 @@
 id: ex-expected-exit-time-from-an-interval-via-ito-formula
 kind: example
 title: "Expected exit time from an interval"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dynkin-formula-for-bounded-brownian-stopping, def-brownian-motion-started-at-x, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, def-c-c-and-c-c-infinity-on-rn, lem-schwartz-cutoffs-from-the-standard-smooth-step, thm-two-sided-exit-probability-for-brownian-motion, def-continuous-time-stopping-time, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-continuity-real, thm-heine-cantor-r, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.5"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

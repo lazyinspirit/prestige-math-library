@@ -2,7 +2,7 @@
 id: thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part
 kind: theorem
 title: Compact roots form a reduced crystallographic root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-roots-of-a-compact-connected-lie-group, def-axiom-of-choice, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, prop-adjoint-is-a-smooth-lie-group-representation, thm-the-differential-of-adjoint-is-ad, thm-equivalent-characterizations-of-reductive-lie-algebras, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, prop-exponential-map-is-natural-for-lie-group-homomorphisms, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, prop-exponential-scales-one-parameter-subgroups, thm-cartans-closed-subgroup-theorem, thm-closure-of-a-connected-set, thm-closed-subspace-of-a-compact-space-is-compact, def-torus-and-maximal-torus-in-a-compact-lie-group, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, def-cartan-subalgebra-of-a-lie-algebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-coroot-of-a-lie-algebra-root]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§§20–21 and Appendix R §R.2"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

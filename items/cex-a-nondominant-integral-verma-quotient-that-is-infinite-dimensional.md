@@ -2,7 +2,7 @@
 id: cex-a-nondominant-integral-verma-quotient-that-is-infinite-dimensional
 kind: counterexample
 title: A nondominant integral highest-weight module can be infinite-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-verma-modules-for-sl-two, def-integral-dominant-and-strictly-dominant-weights, def-special-linear-lie-algebra-sl-two, def-highest-weight-vector-and-highest-weight-module, def-coroot-of-a-lie-algebra-root, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

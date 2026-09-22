@@ -1,7 +1,7 @@
 ---
 page: orthonormal-bases-parseval-and-fourier-series-examples
 title: Orthonormal Bases, Parseval and Fourier Series — Examples
-status: draft
+status: published
 items: []
 examples: [ex-standard-basis-of-ell-two, ex-legendre-polynomials-from-gram-schmidt, ex-haar-orthonormal-basis-of-l-two-zero-one, ex-fourier-series-of-a-sawtooth, ex-fourier-series-of-a-square-wave]
 ---

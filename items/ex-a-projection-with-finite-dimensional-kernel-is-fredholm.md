@@ -2,7 +2,7 @@
 id: ex-a-projection-with-finite-dimensional-kernel-is-fredholm
 kind: example
 title: A projection with finite-dimensional kernel is Fredholm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-second-countable-space, thm-countable-products-of-second-countable-spaces, def-countable-base-banach-manifold-and-smooth-map, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, def-fredholm-operator-cokernel-and-index, def-axiom-of-choice, def-complemented-subspace, def-c-k-map-between-banach-spaces, def-banach-space, def-bounded-linear-operator, def-frechet-derivative-between-banach-spaces]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-regular-root-hyperplanes
 kind: definition
 title: Regular root hyperplanes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §3 (regular elements of a Cartan subalgebra)"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

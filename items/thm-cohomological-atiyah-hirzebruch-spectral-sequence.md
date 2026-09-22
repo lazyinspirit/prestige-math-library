@@ -2,7 +2,7 @@
 id: thm-cohomological-atiyah-hirzebruch-spectral-sequence
 kind: theorem
 title: Cohomological Atiyah–Hirzebruch spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 landmark: true
@@ -19,6 +19,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §§3.1–3.2, printed pp. 10–12"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§§3.1–3.2, printed pp. 10–12"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

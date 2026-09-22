@@ -2,7 +2,7 @@
 id: rem-external-separable-trace-class-fredholm-determinant-theorem
 kind: remark
 title: Separable trace-class determinant theorem recorded externally
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 proved_here: false
@@ -12,6 +12,10 @@ provenance:
   statement: literature-derived
   proof: not-supplied
 verification:
+  sources_checked:
+    date: 2026-09-22
+    scope: citations
+    by: owner-audit
   precheck: n/a
 sources:
   references:

@@ -2,7 +2,7 @@
 id: def-the-one-dimensional-torus-and-normalized-haar-integral
 kind: definition
 title: The one-dimensional torus and its normalized Haar integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-finite-products-of-compact-spaces, thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-quotient-topology, lem-integer-part, def-borel-sigma-algebra, def-restriction-of-a-measure, prop-restriction-is-a-measure, thm-borel-sets-are-lebesgue-measurable, thm-lebesgue-measure-of-a-box-of-every-kind, cor-continuous-functions-are-borel-measurable, thm-composition-with-borel-functions-preserves-measurability, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, def-measure-preserving-transformation-and-system, thm-integrals-are-invariant-under-measure-preserving-maps, def-countable-choice, def-integers, def-measure, def-topological-space, def-continuous-map-top, thm-continuous-preimages-of-borel-sets-are-borel, thm-quotient-universal-property, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-product-measure-on-sigma-finite-spaces, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-product-topology, thm-compactness-under-continuous-maps, def-real-numbers, thm-lebesgue-measure-is-a-complete-measure, def-measure-space, thm-heine-borel-r, thm-sine-and-cosine-parametrize-the-unit-circle, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, thm-metric-hausdorff-separation, lem-products-preserve-t0-t1-and-hausdorff, thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-spectral-mapping-for-continuous-normal-functional-calculus
 kind: theorem
 title: Spectral mapping for continuous normal functional calculus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, lem-spectral-permanence-for-unital-c-star-subalgebras, lem-characters-of-continuous-functions-are-evaluations, def-axiom-of-choice, def-c-star-algebra-generated-by-a-normal-operator, thm-spectrum-as-character-values, lem-character-space-of-generated-normal-algebra-is-operator-spectrum, def-spectrum-and-resolvent-of-a-bounded-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Example 4.9, pp.13–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

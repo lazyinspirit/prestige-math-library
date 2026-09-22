@@ -2,7 +2,7 @@
 id: rem-direct-integrals-and-general-multiplicity-theory
 kind: remark
 title: Direct integrals and general multiplicity theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-unitary-equivalence-classified-by-measure-class-and-multiplicity, def-spectral-multiplicity-function-in-the-separable-case, lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension, cex-a-normal-operator-need-not-have-any-eigenvectors, def-axiom-of-choice]
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §10 and the closing remarks, printed pp.293–301"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

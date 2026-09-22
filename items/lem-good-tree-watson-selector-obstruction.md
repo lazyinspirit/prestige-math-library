@@ -2,7 +2,7 @@
 id: lem-good-tree-watson-selector-obstruction
 kind: lemma
 title: "The symmetric Stone model has no componentwise proper selector"
-status: draft
+status: published
 origin: pipeline
 deps: [def-good-tree-watson-symmetric-stone-model, def-symmetric-forcing-system-and-hereditarily-symmetric-names, def-forcing-name-automorphism-action, lem-symmetry-lemma-for-forcing-automorphisms, def-forcing-preorder-compatibility-and-filter]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "C. Good, I. J. Tree, and W. S. Watson, On Stone's theorem and the axiom of choice"
       url: "https://web.mat.bham.ac.uk/C.Good/research/pdfs/stone.pdf"
       locator: "Sections 2-4, printed pp. 2-9"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

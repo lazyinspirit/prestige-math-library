@@ -1,7 +1,7 @@
 ---
 page: continuous-functional-calculus-for-self-adjoint-and-normal-operators-examples
 title: Continuous Functional Calculus for Self Adjoint and Normal Operators — Examples
-status: draft
+status: published
 items: []
 examples: [ex-functional-calculus-for-a-diagonal-operator, ex-functional-calculus-for-a-multiplication-operator, ex-square-root-and-absolute-value-of-a-matrix, ex-polar-decomposition-of-the-unilateral-shift, cex-a-quasinilpotent-operator-need-not-be-zero, cex-continuous-calculus-does-not-contain-discontinuous-spectral-projections, cex-self-adjointness-cannot-be-dropped-from-the-order-calculus]
 ---

@@ -2,7 +2,7 @@
 id: thm-polynomial-spectral-mapping
 kind: theorem
 title: Polynomial spectral mapping
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-spectrum-is-nonempty-compact-and-norm-bounded, thm-fundamental-theorem-of-algebra-liouville-proof, def-unital-banach-algebra, def-invertible-element-and-general-linear-group-of-a-banach-algebra, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.3, printed pp. 30–33"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

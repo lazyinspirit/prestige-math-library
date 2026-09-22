@@ -2,7 +2,7 @@
 id: def-highest-weight-vector-and-highest-weight-module
 kind: definition
 title: Highest-weight vectors and modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, def-partial-order-on-weights, thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

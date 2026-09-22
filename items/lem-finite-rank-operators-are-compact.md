@@ -2,7 +2,7 @@
 id: lem-finite-rank-operators-are-compact
 kind: lemma
 title: Bounded finite rank operators are compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-linear-basis, cor-finite-dimensional-subspaces-are-closed, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-compactness-under-continuous-maps, lem-vector-operations-are-continuous-in-a-normed-space, thm-compact-subset-is-closed-and-bounded, thm-closed-subspace-of-a-compact-space-is-compact]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 p.69, Theorem 3.1"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

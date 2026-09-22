@@ -2,7 +2,7 @@
 id: prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces
 kind: proposition
 title: Finite-dimensional modules decompose into weight spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, thm-root-sl-two-triple, thm-finite-dimensional-representations-of-sl-two, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-representation-of-a-lie-algebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

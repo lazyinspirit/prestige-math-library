@@ -2,7 +2,7 @@
 id: thm-baire-property-model-equiconsistent-with-zfc
 kind: theorem
 title: The exact equiconsistency of ZFC and the all-Baire-property model
-status: draft
+status: published
 origin: pipeline
 deps: [thm-shelah-inner-model-all-sets-of-reals-have-baire-property, thm-formal-consistency-of-zfc-plus-gch-from-zf, thm-constructible-inner-model-semantic-and-formal-schema, thm-constructible-universe-satisfies-choice, thm-shelah-ch-omega-one-sweet-construction, thm-shelah-inner-model-satisfies-zf-and-dependent-choice]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Conclusion 7.17 and its proof remark, p. 44"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

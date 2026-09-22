@@ -2,7 +2,7 @@
 id: def-real-form-of-a-complex-lie-algebra
 kind: definition
 title: Real form of a complex Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complexification-of-a-real-lie-algebra]
@@ -18,6 +18,8 @@ sources:
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 39, §39.2, printed pp. 199-201"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

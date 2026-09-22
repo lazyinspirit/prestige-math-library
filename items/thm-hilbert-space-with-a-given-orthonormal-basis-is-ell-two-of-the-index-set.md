@@ -2,7 +2,7 @@
 id: thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set
 kind: theorem
 title: A Hilbert space with a given orthonormal basis is $\ell^2$ of the index set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-inner-product-space, thm-hilbert-space-fourier-expansion, lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums, def-square-summable-family-on-an-arbitrary-index-set, def-countable-choice, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, lem-finite-bessel-inequality, lem-pythagorean-theorem-and-finite-orthogonal-sums]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.64, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

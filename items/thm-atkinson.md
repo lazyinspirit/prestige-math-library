@@ -2,7 +2,7 @@
 id: thm-atkinson
 kind: theorem
 title: Atkinson
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-operator-cokernel-and-index, def-compact-linear-operator, def-bounded-linear-operator, def-banach-space, lem-fredholm-splitting-and-parametrix, lem-finite-rank-operators-are-compact, lem-a-compact-remainder-estimate-forces-closed-range, thm-schauder-compact-adjoint-theorem, lem-kernel-of-identity-minus-compact-is-finite-dimensional, lem-elementary-kernel-range-annihilator-identities, thm-dual-of-a-quotient-is-the-annihilator, lem-transpose-reverses-composition, def-transpose-of-a-bounded-operator, thm-dual-norms-every-vector, cor-dual-separates-points, thm-dimension-of-a-linear-subspace, def-dimension, def-linear-basis, def-quotient-vector-space-coset-notation, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.3 pp.192–195, Theorem 4.38"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-support-and-uniqueness-of-the-spectral-measure
 kind: theorem
 title: Support and uniqueness of the spectral measure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-pvm-integral-is-a-star-homomorphism, lem-continuous-functional-calculus-produces-a-regular-pvm, thm-continuous-functional-calculus-for-bounded-normal-operators, thm-complex-stone-weierstrass-self-adjoint, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-regular-borel-measure-on-an-lch-space, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Andreas Kriegl, Funktionalanalysis, §8.61, printed pp.196–198"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

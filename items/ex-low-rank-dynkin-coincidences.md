@@ -2,7 +2,7 @@
 id: ex-low-rank-dynkin-coincidences
 kind: example
 title: Low-rank Dynkin coincidences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-classical-root-systems-in-euclidean-coordinates, ex-root-system-a-one, prop-root-systems-of-the-classical-complex-lie-algebras]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, Problems 2 and 19, printed pp. 203 and 206"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

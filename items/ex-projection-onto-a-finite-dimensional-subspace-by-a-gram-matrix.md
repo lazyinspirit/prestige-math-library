@@ -2,7 +2,7 @@
 id: ex-projection-onto-a-finite-dimensional-subspace-by-a-gram-matrix
 kind: example
 title: Projection onto a finite-dimensional subspace by a Gram matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-orthogonal-projection, def-gram-matrix-and-gram-determinant, thm-gram-determinant-detects-linear-independence, cor-finite-dimensional-subspaces-are-closed, thm-operator-invertible-iff-determinant-nonzero, def-orthogonality-and-orthogonal-complement, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

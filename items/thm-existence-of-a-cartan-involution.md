@@ -2,7 +2,7 @@
 id: thm-existence-of-a-cartan-involution
 kind: theorem
 title: Existence of a Cartan involution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-complexification-preserves-semisimplicity, thm-real-forms-correspond-to-conjugate-linear-involutions, thm-existence-of-a-compact-real-form, thm-conjugacy-of-compact-real-forms, thm-cartans-semisimplicity-criterion, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, prop-trace-forms-are-symmetric-and-invariant, def-killing-form-of-a-finite-dimensional-lie-algebra, def-complexification-of-a-real-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-self-adjoint-and-normal-endomorphism, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice, def-compact-real-form-of-a-complex-semisimple-lie-algebra]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1, printed pp. 217-218"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

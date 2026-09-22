@@ -2,7 +2,7 @@
 id: lem-two-sided-mills-bounds-for-standard-normal-tail
 kind: lemma
 title: "Two-sided Mills bounds for the standard normal tail"
-status: draft
+status: published
 origin: pipeline
 deps: [def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-c1-lipschitz-ac-bv-hierarchy, thm-integration-by-parts-for-absolutely-continuous-functions, thm-substitution, thm-monotone-convergence-for-the-integral, def-countable-choice, def-dependent-choice, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

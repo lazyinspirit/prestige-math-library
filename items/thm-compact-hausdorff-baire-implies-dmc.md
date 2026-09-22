@@ -2,7 +2,7 @@
 id: thm-compact-hausdorff-baire-implies-dmc
 kind: theorem
 title: "Compact Hausdorff Baire implies DMC"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dependent-multiple-choice-finite-level-tree, def-compact-space, def-baire-space, def-hausdorff-space, def-standard-topologies, def-locally-compact-space, def-one-point-compactification, thm-one-point-compactification-properties, def-product-topology, lem-products-preserve-t0-t1-and-hausdorff, lem-t0-t1-and-hausdorff-are-hereditary, def-subspace-topology-top, thm-compact-iff-fip, def-finite-intersection-property, thm-dmc-tree-and-successor-menu-formulations, def-natural-numbers, def-interior-closure-boundary-top, def-topological-space, def-hereditary-property, thm-subset-of-a-finite-set, lem-finite-choice]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

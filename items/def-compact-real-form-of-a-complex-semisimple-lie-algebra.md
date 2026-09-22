@@ -2,7 +2,7 @@
 id: def-compact-real-form-of-a-complex-semisimple-lie-algebra
 kind: definition
 title: Compact real form of a complex semisimple Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-form-of-a-complex-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -18,6 +18,8 @@ sources:
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 39, §39.4, printed pp. 203-204"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

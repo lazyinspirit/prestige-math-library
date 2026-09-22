@@ -2,7 +2,7 @@
 id: ex-unbounded-multiplication-operator-and-its-domain
 kind: example
 title: "Multiplication operators: domain, spectral measure and spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-l-p-space-as-a-quotient-by-null-functions, def-projection-valued-measure, def-axiom-of-choice, thm-dominated-convergence, def-spectrum-and-resolvent-of-a-bounded-operator, thm-pvm-integral-is-a-star-homomorphism, thm-bounded-borel-pvm-integral, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, cor-second-countable-lch-locally-finite-borel-measures-are-regular, thm-heine-borel-r, thm-rationals-countable, lem-q-and-irrationals-dense-r, thm-monotone-convergence-for-the-integral, def-integral-of-a-simple-function-against-a-pvm, def-unbounded-integral-against-a-pvm, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.2, multiplication-operator examples, pp.66-69"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

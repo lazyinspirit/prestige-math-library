@@ -2,7 +2,7 @@
 id: lem-nonequivariance-defect-of-an-infinitesimal-moment-map-is-a-constant-lie-algebra-two-cocycle
 kind: lemma
 title: The nonequivariance defect of an infinitesimal moment map is a constant Lie-algebra two-cocycle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, prop-moment-map-components-generate-the-negative-infinitesimal-action, prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity, thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism, thm-fundamental-vector-fields-form-a-lie-algebra-homomorphism, thm-poisson-bracket-satisfies-the-jacobi-identity, prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry, prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function, thm-connectedness-characterisations, def-chevalley-eilenberg-differential, def-lie-algebra-over-a-field, def-countable-choice, def-poisson-bracket-on-a-symplectic-manifold]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 26, §26.2 and the proof of Theorem 26.2, printed pages 165--166
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

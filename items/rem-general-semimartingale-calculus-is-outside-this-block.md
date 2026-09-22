@@ -2,7 +2,7 @@
 id: rem-general-semimartingale-calculus-is-outside-this-block
 kind: remark
 title: "General semimartingale calculus is outside this block"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-ito-formula-one-dimensional, thm-multidimensional-ito-formula-for-brownian-driven-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Sections 5.8-5.9"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

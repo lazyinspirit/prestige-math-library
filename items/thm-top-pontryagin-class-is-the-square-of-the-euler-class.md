@@ -2,7 +2,7 @@
 id: thm-top-pontryagin-class-is-the-square-of-the-euler-class
 kind: theorem
 title: Top Pontryagin class is the square of the Euler class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-pontryagin-classes-by-complexification, thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle, lem-complex-orientation-of-underlying-real-bundles, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 36"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Top Pontryagin class, printed pp.134-137"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

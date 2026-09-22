@@ -2,7 +2,7 @@
 id: def-tangent-space-and-differential-on-a-banach-manifold
 kind: definition
 title: Tangent space and differential on a Banach manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-countable-base-banach-manifold-and-smooth-map, def-frechet-derivative-between-banach-spaces, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-countable-base-banach-manifold-and-smooth-map
 kind: definition
 title: Countable base Banach manifold and smooth map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-c-k-map-between-banach-spaces, def-topological-space, def-hausdorff-space, def-second-countable-space, def-homeomorphism-and-open-maps, def-banach-space, def-metric-topology, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

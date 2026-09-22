@@ -2,7 +2,7 @@
 id: cor-law-of-the-brownian-maximum
 kind: corollary
 title: "Law of the Brownian maximum"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-brownian-reflection-principle, def-standard-normal-and-normal-laws, def-cumulative-distribution-function-of-a-random-variable, lem-brownian-transition-semigroup-property, thm-substitution, thm-monotone-convergence-for-the-integral, thm-probability-law-and-distribution-function-correspondence, def-countable-choice, def-brownian-motion, def-axiom-of-choice, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.4"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel
 kind: remark
 title: Surjectivity alone does not imply a complemented kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-regular-value-theorem-for-banach-manifolds, thm-bounded-right-inverse-iff-kernel-is-complemented, cor-finite-dimensional-subspaces-are-complemented, def-dependent-choice, def-axiom-of-choice, def-complemented-subspace, cor-finite-codimensional-subspaces-are-complemented, def-fredholm-operator-cokernel-and-index]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

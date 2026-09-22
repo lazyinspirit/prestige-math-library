@@ -2,7 +2,7 @@
 id: cor-zero-level-symplectic-reduction-and-dimension-formula
 kind: corollary
 title: Zero-level symplectic reduction and the dimension formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-marsden-weinstein-meyer-symplectic-reduction, def-coadjoint-representation-of-a-lie-group, def-regular-and-critical-points-and-values, def-countable-choice, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, thm-free-proper-action-quotient-manifold]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §8.1, Definition 8.5 and the zero-level case, printed pages 101--102
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

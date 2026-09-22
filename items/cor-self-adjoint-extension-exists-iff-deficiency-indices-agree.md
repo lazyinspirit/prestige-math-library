@@ -2,7 +2,7 @@
 id: cor-self-adjoint-extension-exists-iff-deficiency-indices-agree
 kind: corollary
 title: "Existence of self-adjoint extensions is equality of deficiency indices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-von-neumann-self-adjoint-extension-parameterization, def-deficiency-subspaces-and-deficiency-indices, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, thm-existence-of-a-maximal-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-self-adjointness-range-criterion, thm-closable-iff-adjoint-domain-is-dense, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-axiom-of-choice, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

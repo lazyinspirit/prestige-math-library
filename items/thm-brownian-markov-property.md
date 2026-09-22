@@ -2,7 +2,7 @@
 id: thm-brownian-markov-property
 kind: theorem
 title: "Markov property of Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, lem-conditioning-a-known-state-and-independent-noise, def-brownian-motion, thm-grouping-independent-sigma-algebras, thm-pi-system-criterion-for-independent-sigma-algebras, def-independent-sigma-algebras-and-events, def-independent-random-elements, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-dominated-convergence, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Definition 6.10 and the argument preceding Theorem 6.13"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

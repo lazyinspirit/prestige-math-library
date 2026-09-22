@@ -1,7 +1,7 @@
 ---
 page: brownian-motion-markov-properties-and-hitting-times-examples
 title: Brownian Motion, Markov Properties and Hitting Times — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-brownian-transition-density-and-semigroup-convolution

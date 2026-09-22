@@ -2,7 +2,7 @@
 id: def-spectral-multiplicity-function-in-the-separable-case
 kind: definition
 title: Spectral multiplicity function in the separable case
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, def-cyclic-vector-and-cyclic-normal-operator, lem-scalar-and-complex-measures-from-a-pvm, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integration-against-a-radon-nikodym-derivative, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-riesz-fischer-completeness-of-l-p, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-separable-space, def-measurable-function-between-measurable-spaces, def-hilbert-space, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Andreas Kriegl, Funktionalanalysis, §8.61 and §8.64, printed pp.196–199"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-restricted-weyl-group-is-the-reflection-group-of-the-restricted-root-system
 kind: theorem
 title: Restricted weyl group is the reflection group of the restricted root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-restricted-weyl-group, def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, prop-restricted-root-systems-may-be-nonreduced, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, prop-weyl-vector-is-the-sum-of-fundamental-weights, prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system, thm-compact-group-weyl-group-is-finite, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, prop-complexification-preserves-semisimplicity, thm-cartans-closed-subgroup-theorem, thm-lie-subgroup-lie-subalgebra-correspondence, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §5, Lemma 6.56 and Theorem 6.57 with their proofs, printed pp. 382-384, together with Proposition 6.52(c), printed pp. 379-380"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion
 kind: proposition
 title: The Euler class of an oriented odd-rank bundle is two-torsion
-status: draft
+status: published
 origin: pipeline
 deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 orientation reversal of Euler classes, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

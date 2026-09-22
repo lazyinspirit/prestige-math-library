@@ -2,7 +2,7 @@
 id: lem-universal-complex-flag-bundle-is-bt-n
 kind: lemma
 title: The universal complex flag bundle is BT-n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-complex-flag-bundle-and-chern-roots", "def-axiom-of-choice", "thm-stable-stiefel-space-is-contractible", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "thm-milnor-join-model-is-a-contractible-free-g-space", "thm-principal-bundles-are-classified-by-maps-to-bg", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-fibration-sequence-is-natural", "thm-whitehead-theorem", "lem-cohomology-ring-of-infinite-complex-projective-space", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-subordinate-partitions-of-unity-exist", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-chern-classes-from-the-projective-bundle-relation", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes"]
@@ -19,6 +19,8 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, Chapter 24 section 3"
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "BT and the flag bundle, printed pp.208-210"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

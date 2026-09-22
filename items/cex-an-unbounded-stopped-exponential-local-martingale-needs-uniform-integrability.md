@@ -2,7 +2,7 @@
 id: cex-an-unbounded-stopped-exponential-local-martingale-needs-uniform-integrability
 kind: counterexample
 title: "An unbounded stopped exponential martingale needs uniform integrability"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-continuous-time-stopping-time, def-uniformly-integrable-family, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, thm-doob-lp-maximal-inequality, thm-doob-l1-maximal-inequality, cor-absolute-value-and-powers-of-a-martingale-are-submartingales, thm-optional-sampling-for-bounded-stopping-times, thm-dominated-convergence, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, def-convergence-in-probability, def-elementary-predictable-brownian-integrand, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-wiener-measure-on-continuous-path-space, def-natural-and-usual-augmented-brownian-filtrations, thm-monotone-convergence-for-the-integral, cor-cauchy-schwarz-for-random-variables, thm-bolzano-weierstrass, lem-rat-embeds-dense, thm-intermediate-value]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 3.3 and 4.1"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

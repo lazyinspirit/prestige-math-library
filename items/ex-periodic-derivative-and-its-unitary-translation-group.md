@@ -2,7 +2,7 @@
 id: ex-periodic-derivative-and-its-unitary-translation-group
 kind: example
 title: "Periodic derivative and its unitary translation group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cex-symmetric-need-not-be-self-adjoint, thm-self-adjointness-range-criterion, thm-stone-one-parameter-unitary-groups, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-strongly-continuous-one-parameter-unitary-group, def-infinitesimal-generator-of-a-unitary-group, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, cor-c-one-change-of-variables-for-l-one-functions, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-heine-cantor-r, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.6, pp.91-95 and Section 5.1, pp.145-148"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

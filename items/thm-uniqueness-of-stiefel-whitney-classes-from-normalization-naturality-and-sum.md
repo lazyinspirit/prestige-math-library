@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-stiefel-whitney-classes-from-normalization-naturality-and-sum
 kind: theorem
 title: Uniqueness of Stiefel–Whitney classes from normalization, naturality, and sum
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-real-flag-bundle-and-stiefel-whitney-roots", "def-tautological-degree-one-class-on-a-real-projective-bundle", "thm-real-splitting-principle-with-mod-two-injective-pullback", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Theorem 33.6 and Lectures 34–36, printed pp.119–134"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

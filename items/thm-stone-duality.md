@@ -2,7 +2,7 @@
 id: thm-stone-duality
 kind: theorem
 title: Stone duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-stone-representation-for-boolean-algebras, def-stone-space-and-clopen-algebra, def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality, def-axiom-of-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

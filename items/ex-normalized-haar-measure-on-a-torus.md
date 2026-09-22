@@ -2,7 +2,7 @@
 id: ex-normalized-haar-measure-on-a-torus
 kind: example
 title: Normalized Haar measure on a torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-normalized-haar-probability-on-a-compact-group, def-left-haar-integral-and-left-haar-measure, thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume, cor-normalized-haar-measure-on-a-compact-lie-group, def-axiom-of-choice, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-lebesgue-measure-is-a-radon-measure-on-rn]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §1 and Chapter VIII §1 (Haar measure on the torus)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 page: brownian-motion-markov-properties-and-hitting-times
 title: Brownian Motion, Markov Properties and Hitting Times
-status: draft
+status: published
 items:
   - def-natural-and-usual-augmented-brownian-filtrations
   - def-brownian-transition-semigroup

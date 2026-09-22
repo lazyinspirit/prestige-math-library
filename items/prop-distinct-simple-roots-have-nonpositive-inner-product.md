@@ -2,7 +2,7 @@
 id: prop-distinct-simple-roots-have-nonpositive-inner-product
 kind: proposition
 title: Distinct simple roots have nonpositive inner product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-positive-system-and-base-of-simple-roots, thm-rank-two-root-system-classification]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-stone-space-and-clopen-algebra
 kind: definition
 title: Stone space and clopen algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

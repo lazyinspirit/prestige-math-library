@@ -2,7 +2,7 @@
 id: thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems
 kind: theorem
 title: Semisimple compact groups up to isogeny
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part, thm-equivalence-between-simply-connected-real-lie-groups-and-finite-dimensional-real-lie-algebras, prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, def-axiom-of-choice, thm-lie-second-fundamental-theorem, thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, thm-isomorphism-theorem-for-complex-semisimple-lie-algebras, thm-existence-theorem-for-complex-semisimple-lie-algebras, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, thm-serre-presentation-theorem, thm-analytic-and-root-system-weyl-groups-agree, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-finite-dimensional-representations-of-sl-two, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-closed-subgroup-theorem, thm-heine-borel-rn, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, prop-exponential-map-is-natural-for-lie-group-homomorphisms, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group, thm-continuous-homomorphisms-between-lie-groups-are-smooth]
@@ -21,6 +21,8 @@ sources:
       url: "https://math.mit.edu/~etingof/lnlg.pdf"
       locator: "Lectures 39 and 42, especially Proposition 39.8 and Theorem 42.4"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

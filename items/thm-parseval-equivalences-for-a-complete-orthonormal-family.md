@@ -2,7 +2,7 @@
 id: thm-parseval-equivalences-for-a-complete-orthonormal-family
 kind: theorem
 title: Parseval equivalences for an orthonormal family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, thm-double-orthogonal-complement-is-closure, def-countable-choice, lem-finite-bessel-inequality, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, def-linear-subspace, def-square-summable-family-on-an-arbitrary-index-set, thm-cauchy-schwarz-in-an-inner-product-space, thm-metric-closure-characterisation, lem-sup-epsilon, lem-reverse-triangle-inequality-in-a-normed-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.64, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

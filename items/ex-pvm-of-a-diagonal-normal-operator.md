@@ -2,7 +2,7 @@
 id: ex-pvm-of-a-diagonal-normal-operator
 kind: example
 title: Pvm of a diagonal normal operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, def-borel-functional-calculus-for-a-bounded-normal-operator, thm-bounded-borel-pvm-integral, lem-scalar-and-complex-measures-from-a-pvm, def-square-summable-family-on-an-arbitrary-index-set, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-spectrum-and-resolvent-of-a-bounded-operator, def-operator-norm, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice, def-hilbert-space-adjoint, thm-complex-plane-is-complete, def-projection-valued-measure]
@@ -14,6 +14,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.6–5.7, printed pp.273–296"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

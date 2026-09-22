@@ -2,7 +2,7 @@
 id: cex-continuous-functional-calculus-cannot-produce-every-spectral-projection
 kind: counterexample
 title: Continuous functional calculus cannot produce every spectral projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, ex-pvm-of-a-multiplication-operator, ex-borel-functional-calculus-defines-a-discontinuous-characteristic-function, thm-continuous-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, def-l-p-space-as-a-quotient-by-null-functions, def-spectrum-and-resolvent-of-a-bounded-operator, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4 and §5, pp.13–20"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: def-symmetric-self-adjoint-and-essentially-self-adjoint
 kind: definition
 title: "Symmetric, self-adjoint and essentially self-adjoint operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, thm-closable-iff-adjoint-domain-is-dense, lem-unbounded-adjoint-is-well-defined-and-closed, thm-closure-of-a-closable-operator, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-countable-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

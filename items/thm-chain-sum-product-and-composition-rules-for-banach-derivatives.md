@@ -2,7 +2,7 @@
 id: thm-chain-sum-product-and-composition-rules-for-banach-derivatives
 kind: theorem
 title: Chain sum product and composition rules for Banach derivatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-frechet-derivative-between-banach-spaces, lem-the-frechet-derivative-is-unique, def-bounded-bilinear-map, thm-bounded-bilinear-map-equivalences, lem-composition-operator-norm-inequality, def-norm-and-normed-space, def-operator-norm, def-space-of-bounded-linear-operators]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

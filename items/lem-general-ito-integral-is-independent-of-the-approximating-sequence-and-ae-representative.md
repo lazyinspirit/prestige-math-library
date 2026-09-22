@@ -2,7 +2,7 @@
 id: lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative
 kind: lemma
 title: "The general Ito integral is well defined"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Definition 5.25 and Theorem 5.26"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-diagonal-operator-on-ell-p-is-compact-iff-diagonal-tends-to-zero
 kind: example
 title: Diagonal operator on ell p is compact iff diagonal tends to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-sequential-characterization-of-compact-operators, def-dependent-choice, def-countable-choice, lem-dependent-choice-implies-countable-choice, def-counting-measure, prop-counting-measure-is-a-measure, rem-ell-p-is-l-p-of-counting-measure, def-complex-lp-and-euclidean-test-function-conventions, lem-complex-lp-completeness-density-and-inner-product, thm-riesz-fischer-completeness-of-l-p, def-banach-space, def-norm-and-normed-space, def-linear-map, lem-index-map-grows, def-metric-convergence, def-metric-ball, def-continuous-map-top]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.186, Example 4.26"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

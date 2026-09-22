@@ -1,7 +1,7 @@
 ---
 page: chern-and-pontryagin-classes-by-splitting-and-complexification-examples
 title: Chern and Pontryagin Classes by Splitting and Complexification — Examples
-status: draft
+status: published
 items:
   - lem-integral-powers-of-the-complexified-universal-real-line
 examples:

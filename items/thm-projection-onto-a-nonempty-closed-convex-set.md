@@ -2,7 +2,7 @@
 id: thm-projection-onto-a-nonempty-closed-convex-set
 kind: theorem
 title: Projection onto a nonempty closed convex set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy, def-hilbert-space, thm-infimum-property, lem-inf-epsilon, def-infimum, cor-archimedean-reciprocal, def-real-limit, def-countable-choice, def-relative-normed-convexity-and-separation, thm-metric-closure-characterisation, lem-metric-limits-unique, lem-reverse-triangle-inequality-in-a-normed-space, thm-parallelogram-law]
@@ -18,6 +18,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
     - title: "Bruce Blackadar, Ilijas Farah and Asaf Karagila, Hilbert spaces without the Countable Axiom of Choice, Theorem 2.0.4"
       url: "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-harmonic-functions-of-planar-brownian-motion
 kind: example
 title: "Harmonic functions of planar Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-d-dimensional-brownian-motion, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, def-c-c-and-c-c-infinity-on-rn, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.7"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: cex-the-full-weight-lattice-does-not-integrate-to-every-central-quotient-group
 kind: counterexample
 title: The full weight lattice need not integrate through a central quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-su-two-to-so-three-as-a-covering-homomorphism, ex-symmetric-powers-as-highest-weight-modules, def-special-linear-lie-algebra-sl-two, def-fundamental-weights, def-weight-and-weight-space-of-a-lie-algebra-representation, def-representation-of-a-lie-algebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.1 and Exercises 2.8–2.10"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

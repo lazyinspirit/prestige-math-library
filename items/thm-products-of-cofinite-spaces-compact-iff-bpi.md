@@ -2,7 +2,7 @@
 id: thm-products-of-cofinite-spaces-compact-iff-bpi
 kind: theorem
 title: "Products of cofinite spaces are compact exactly under BPI"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-prime-ideal-principle, def-product-topology, def-compact-space, thm-bpi-equivalent-to-compact-hausdorff-tychonoff, def-standard-topologies, thm-compact-iff-fip, def-finite-intersection-property, def-ultrafilter, thm-ultrafilter-characterisation, thm-bpi-equivalent-to-set-ultrafilter-lemma, def-t0-and-t1-spaces, def-subspace-topology-top, def-topological-space, def-natural-numbers]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

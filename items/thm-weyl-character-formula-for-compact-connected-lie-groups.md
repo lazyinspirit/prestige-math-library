@@ -2,7 +2,7 @@
 id: thm-weyl-character-formula-for-compact-connected-lie-groups
 kind: theorem
 title: Weyl character formula for compact connected groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-weyl-denominator-and-anti-invariant-orbit-sum-basis, lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator, prop-central-quotients-correspond-to-intermediate-character-lattices, thm-compact-connected-lie-groups-are-classified-by-root-data, def-axiom-of-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, thm-weyl-integration-formula, thm-highest-weight-classification-for-a-compact-connected-lie-group, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix Z"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

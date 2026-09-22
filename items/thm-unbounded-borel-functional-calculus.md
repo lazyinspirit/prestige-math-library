@@ -2,7 +2,7 @@
 id: thm-unbounded-borel-functional-calculus
 kind: theorem
 title: "Unbounded Borel functional calculus: domains, products, spectral mapping"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-unbounded-integral-against-a-pvm, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-projection-valued-measure, thm-dominated-convergence, def-axiom-of-choice, def-orthogonality-and-orthogonal-complement, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, lem-scalar-and-complex-measures-from-a-pvm, thm-monotone-convergence-for-the-integral, thm-rationals-countable, lem-q-and-irrationals-dense-r]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Theorem 6.38 and Remark 6.42, Sec. 6.4"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-triangular-decomposition-of-a-complex-semisimple-lie-algebra
 kind: theorem
 title: Triangular decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, prop-brackets-of-root-spaces, def-derived-series-and-solvable-lie-algebra, def-lower-central-series-and-nilpotent-lie-algebra, def-lie-subalgebra-ideal-and-center, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1, (5.8) and Proposition 5.11"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

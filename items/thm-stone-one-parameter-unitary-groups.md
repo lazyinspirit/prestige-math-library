@@ -2,7 +2,7 @@
 id: thm-stone-one-parameter-unitary-groups
 kind: theorem
 title: "Stone's theorem: unitary groups and self-adjoint generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-generator-of-a-unitary-group-is-skew-adjoint, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-infinitesimal-generator-of-a-unitary-group, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-axiom-of-choice, def-countable-choice, def-hilbert-space, lem-laplace-resolvents-of-a-unitary-group, thm-unbounded-borel-functional-calculus]
@@ -21,6 +21,8 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations (lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: "Section 1.1, generator theory, pp.5-13"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

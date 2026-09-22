@@ -2,7 +2,7 @@
 id: def-satake-diagram
 kind: definition
 title: Satake diagram
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-maximal-split-abelian-subspace-and-real-rank, def-cayley-transform-of-a-theta-stable-cartan-subalgebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification, def-positive-system-and-base-of-simple-roots, def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-vogan-diagram]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI §12, Problem 7(a)-(e), printed p.427: compatible positivity and the white-root involution modulo imaginary simple roots; pairing proof supplied below"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

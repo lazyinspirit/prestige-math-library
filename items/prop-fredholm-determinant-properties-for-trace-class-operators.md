@@ -2,7 +2,7 @@
 id: prop-fredholm-determinant-properties-for-trace-class-operators
 kind: proposition
 title: Fredholm determinant properties for trace-class operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-fredholm-determinant, rem-external-separable-trace-class-fredholm-determinant-theorem, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, def-absolute-value-and-singular-values-of-a-compact-operator]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   precheck: pass
 sources:
   references:

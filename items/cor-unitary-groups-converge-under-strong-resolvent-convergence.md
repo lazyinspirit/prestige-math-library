@@ -2,7 +2,7 @@
 id: cor-unitary-groups-converge-under-strong-resolvent-convergence
 kind: corollary
 title: "Unitary groups converge under strong resolvent convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-under-resolvent-convergence, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-infinitesimal-generator-of-a-unitary-group, def-strongly-continuous-one-parameter-unitary-group, thm-self-adjoint-resolvent-estimate, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-unbounded-borel-functional-calculus, thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-unbounded-integral-against-a-pvm, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-monotone-convergence-for-the-integral]
@@ -18,6 +18,8 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations (lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: "Section 1.1 and Chapter 4, resolvent convergence orientation"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

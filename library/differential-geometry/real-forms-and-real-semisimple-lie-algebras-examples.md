@@ -1,7 +1,7 @@
 ---
 page: real-forms-and-real-semisimple-lie-algebras-examples
 title: Real Forms and Real Semisimple Lie Algebras — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-compact-and-split-real-forms-of-sl-two-c

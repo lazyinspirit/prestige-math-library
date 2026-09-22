@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-chern-classes-from-the-splitting-principle
 kind: theorem
 title: Uniqueness of Chern classes from the splitting principle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-axiom-of-choice", "thm-naturality-normalization-and-whitney-sum-for-chern-classes", "def-chern-classes-from-the-projective-bundle-relation", "thm-complex-splitting-principle-with-integral-injective-pullback", "def-complex-flag-bundle-and-chern-roots", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-hurewicz-and-serre-fibrations", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"]
@@ -16,6 +16,8 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, Chapter 23 section 7"
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Chern-class axioms and uniqueness, printed pp.197-200"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types
 kind: proposition
 title: Duality exchanges B and C
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coroot-and-dual-root-system, def-positive-system-and-base-of-simple-roots, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, thm-classification-of-irreducible-reduced-crystallographic-root-systems, thm-existence-of-each-classified-root-system, def-cartan-matrix-of-a-based-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 21, Section 21.5 on dual root systems, printed p. 116"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-fredholm-index-is-stable-under-compact-perturbations
 kind: theorem
 title: Fredholm index is stable under compact perturbations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-operator-cokernel-and-index, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, thm-atkinson, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-fredholm-index-is-locally-constant, thm-connected-subsets-of-r-are-intervals, thm-closure-characterisations-r, def-connected-r, def-interval, def-metric-convergence, def-metric-ball, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.188, Corollary 6.29"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-closure-of-a-closable-operator
 kind: theorem
 title: "Closure of a closable operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unbounded-linear-operator-domain-and-graph, def-densely-defined-closed-and-closable-operator, def-countable-choice, def-metric-interior-closure-boundary]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Sec. 6.1, closure of the graph"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

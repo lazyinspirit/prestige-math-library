@@ -2,7 +2,7 @@
 id: cex-a-maximal-abelian-subalgebra-that-is-not-a-cartan-subalgebra-in-a-nonsemisimple-algebra
 kind: counterexample
 title: A maximal abelian subalgebra that is not a Cartan subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-lower-central-series-and-nilpotent-lie-algebra, def-lie-algebra-over-a-field, def-derived-series-and-solvable-lie-algebra, def-radical-of-a-finite-dimensional-lie-algebra, def-semisimple-lie-algebra-by-vanishing-radical]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Problem 3"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

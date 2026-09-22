@@ -2,7 +2,7 @@
 id: ex-chern-classes-of-a-sum-of-universal-complex-lines
 kind: example
 title: Chern classes of a sum of universal complex lines
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-naturality-normalization-and-whitney-sum-for-chern-classes", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "lem-cohomology-ring-of-infinite-complex-projective-space", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "def-axiom-of-choice", "lem-universal-complex-flag-bundle-is-bt-n", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "def-schubert-cells-in-real-and-complex-grassmannians"]
@@ -15,6 +15,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lecture 35"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Elementary symmetric functions and Chern classes, printed pp.130-132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

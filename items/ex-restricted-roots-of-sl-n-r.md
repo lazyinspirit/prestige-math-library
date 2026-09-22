@@ -2,7 +2,7 @@
 id: ex-restricted-roots-of-sl-n-r
 kind: example
 title: Restricted roots of sl n r
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-restricted-root-and-restricted-root-space, def-maximal-split-abelian-subspace-and-real-rank, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, ex-cartan-involution-and-k-plus-p-for-sl-n-r, ex-general-and-special-linear-lie-groups, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, def-lie-algebra-over-a-field]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.6, printed pp. 221-222"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

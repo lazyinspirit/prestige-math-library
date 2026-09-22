@@ -2,7 +2,7 @@
 id: thm-normal-moore-consistency-strength-sandwich
 kind: theorem
 title: "The consistency-strength sandwich for NMSC"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-strongly-compact-relative-consistency-normal-moore, thm-normal-moore-implies-inner-model-measurable, thm-formal-nmsc-consistency-lower-bound, def-moore-spaces-and-developments]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Bagaria and da Silva, omega-one-strongly compact cardinals and normality"
       url: "https://diposit.ub.edu/server/api/core/bitstreams/d5caf92a-962e-496a-a31e-5630dafa67ec/content"
       locator: "Introduction and Theorem 2.5"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement
@@ -47,7 +49,9 @@ cardinal})$ implies $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$
 **Proof technique:** direct.
 
 1.1 Assume $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$: by [F1], $\operatorname{Con}(\mathrm{ZFC} + \text{a measurable cardinal})$ follows. [given, F1]
+
 1.2 Assume $\operatorname{Con}(\mathrm{ZFC} + \text{a strongly compact cardinal})$: by [F2], $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$ follows. [given, F2]
+
 2.1 Steps 1.1 and 1.2 are the two implications of the Statement, and [F3] keeps the internal measurable-inner-model consequence separate from them. [step 1.1, step 1.2, F3] ∎
 
 ## Remarks

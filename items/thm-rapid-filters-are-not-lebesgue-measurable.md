@@ -2,7 +2,7 @@
 id: thm-rapid-filters-are-not-lebesgue-measurable
 kind: theorem
 title: Rapid filters are not Lebesgue measurable
-status: draft
+status: published
 origin: pipeline
 deps: [def-rapid-and-raisonnier-filters, def-countable-choice, thm-lebesgue-density-theorem, lem-dyadic-coding-coin-measure-and-lebesgue-transfer, def-filter, def-lambda-system, thm-dynkin-pi-lambda]
 proof_strategy: contradiction
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Lemma 3.7 (Mokobodzki), pp. 44-45"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

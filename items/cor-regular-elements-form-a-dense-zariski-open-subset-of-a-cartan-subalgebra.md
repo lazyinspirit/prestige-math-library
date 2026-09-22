@@ -2,7 +2,7 @@
 id: cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra
 kind: corollary
 title: Regular elements form a dense Zariski-open subset of a Cartan subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-centralizer-dimension-from-vanishing-roots, def-regular-root-hyperplanes, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §3 (density of regular elements)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

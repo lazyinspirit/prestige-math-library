@@ -2,7 +2,7 @@
 id: ex-maximum-crossing-probability-before-a-fixed-time
 kind: example
 title: "Maximum crossing before a fixed time"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-law-of-the-brownian-maximum, def-standard-normal-and-normal-laws, def-cumulative-distribution-function-of-a-random-variable, def-brownian-motion, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.4"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

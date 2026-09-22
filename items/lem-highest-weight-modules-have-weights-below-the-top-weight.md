@@ -2,7 +2,7 @@
 id: lem-highest-weight-modules-have-weights-below-the-top-weight
 kind: lemma
 title: Highest weight modules lie below the top weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-partial-order-on-weights, thm-triangular-decomposition-of-a-complex-semisimple-lie-algebra, thm-poincare-birkhoff-witt, prop-root-vectors-shift-weight-spaces, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.2, Theorem 8.14 and its proof"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-height-of-a-root-and-highest-root
 kind: definition
 title: Height and highest root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

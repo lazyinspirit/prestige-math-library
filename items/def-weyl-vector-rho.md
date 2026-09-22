@@ -2,7 +2,7 @@
 id: def-weyl-vector-rho
 kind: definition
 title: The Weyl vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-positive-system-and-base-of-simple-roots, def-reduced-crystallographic-euclidean-root-system, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

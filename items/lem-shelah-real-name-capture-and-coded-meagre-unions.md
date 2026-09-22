@@ -2,7 +2,7 @@
 id: lem-shelah-real-name-capture-and-coded-meagre-unions
 kind: lemma
 title: Real names are captured and coded meagre unions are absorbed
-status: draft
+status: published
 origin: pipeline
 deps: [thm-shelah-ch-omega-one-sweet-construction, thm-countable-subsets-of-omega-one-are-bounded, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets, thm-canonical-definable-global-well-order-of-l, def-axiom-of-choice]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Main Lemma 7.14 and Claim 7.15, pp. 42-43"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

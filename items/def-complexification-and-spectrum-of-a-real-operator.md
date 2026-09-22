@@ -2,7 +2,7 @@
 id: def-complexification-and-spectrum-of-a-real-operator
 kind: definition
 title: Complexification and spectrum of a real operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-bounded-linear-operator", "lem-canonical-banach-complexification-of-a-real-banach-space", "def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-spectral-radius", "def-axiom-of-choice", "thm-bounded-operator-space-is-banach", "def-operator-norm", "def-unital-banach-algebra"]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.1 and §2.3, printed pp. 19–24 and 30–33"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-minimal-c-star-unitization
 kind: theorem
 title: Minimal C star unitization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-algebraic-unitization-of-a-star-algebra", "def-c-star-algebra", "thm-bounded-operator-space-is-banach", "lem-c-star-spectral-radius-equals-norm-for-normal-elements", "def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-spectral-radius", "def-unital-banach-algebra", "def-axiom-of-choice", "thm-complex-plane-is-complete", "lem-complex-conjugation-and-modulus-laws"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

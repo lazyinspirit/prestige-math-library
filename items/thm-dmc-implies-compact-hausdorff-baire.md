@@ -2,7 +2,7 @@
 id: thm-dmc-implies-compact-hausdorff-baire
 kind: theorem
 title: "DMC makes every compact Hausdorff space Baire"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dependent-multiple-choice-finite-level-tree, def-compact-space, def-baire-space, def-normal-and-t4-spaces, def-hausdorff-space, thm-a-compact-hausdorff-space-is-regular-and-normal, def-regular-and-t3-spaces, lem-regularity-via-closed-neighbourhoods, def-compactness-variants, thm-compactness-variants-hierarchy, def-interior-closure-boundary-top, def-dense-top, def-natural-numbers, def-finite-intersection-property, thm-subset-of-a-finite-set, def-topological-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "David H. Fremlin, Dependent multiple choice and Baire's theorem (following Fossy and Morillon)"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/n04j06.ps"
       locator: "Proposition 2 and Theorem 4, printed pp. 1-3"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-development-stars-form-a-countable-local-base
 kind: example
 title: "Development stars form a countable local base"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-metric-space, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-metrizable-space, thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-neighbourhood-top, def-cover-refinement-and-local-finiteness, cor-archimedean-reciprocal]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Definitions 1.1-1.2 and Example 1.1, printed pp. 1-2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

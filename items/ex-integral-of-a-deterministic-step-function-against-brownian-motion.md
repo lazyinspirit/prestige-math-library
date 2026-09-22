@@ -2,7 +2,7 @@
 id: ex-integral-of-a-deterministic-step-function-against-brownian-motion
 kind: example
 title: "A deterministic step integrand"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

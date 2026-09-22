@@ -2,7 +2,7 @@
 id: prop-top-highest-weight-summand-in-a-tensor-product
 kind: proposition
 title: Top summand in a tensor product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules, thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional, lem-highest-weight-modules-have-weights-below-the-top-weight, prop-root-vectors-shift-weight-spaces, def-partial-order-on-weights, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-highest-weight-vector-and-highest-weight-module, prop-direct-sum-dual-hom-and-tensor-representations, def-weight-and-weight-space-of-a-lie-algebra-representation, def-integral-dominant-and-strictly-dominant-weights, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§8.2, (8.6)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

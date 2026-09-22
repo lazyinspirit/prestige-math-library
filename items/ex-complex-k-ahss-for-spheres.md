@@ -2,7 +2,7 @@
 id: ex-complex-k-ahss-for-spheres
 kind: example
 title: Complex K-AHSS for spheres
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-complex-k-theory-ahss, prop-ahss-collapse-determines-only-the-associated-graded-object, cor-complex-k-theory-of-spheres, thm-complex-bott-periodicity, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §3.2.1 and Theorem 3.1, printed pp. 9–11"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "Theorem 3.1 and §3.2.1, printed pp. 9–11"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

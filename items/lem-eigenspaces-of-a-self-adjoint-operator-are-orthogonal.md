@@ -2,7 +2,7 @@
 id: lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal
 kind: lemma
 title: Eigenspaces of a self adjoint operator are orthogonal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-orthogonality-and-orthogonal-complement, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-real-and-complex-inner-product-space, def-hilbert-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-complexification-dichotomy-for-a-real-simple-lie-algebra
 kind: theorem
 title: Complexification dichotomy for a real simple lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complexification-of-a-real-lie-algebra, prop-complexification-preserves-semisimplicity, thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals, def-simple-semisimple-and-reductive-lie-algebras, prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, lem-chevalley-basis-and-real-structure-constants, def-cartan-subalgebra-of-a-lie-algebra, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.2 and the paragraph after Theorem 39.6, printed pp. 182-184"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: generalized-cohomology-and-the-atiyah-hirzebruch-spectral-sequence-examples
 title: Generalized Cohomology and the Atiyah Hirzebruch Spectral Sequence — Examples
-status: draft
+status: published
 items:
   - lem-complexified-tautological-line-resolves-real-projective-k-theory-extensions
   - lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square

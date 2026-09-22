@@ -2,7 +2,7 @@
 id: def-maximal-split-abelian-subspace-and-real-rank
 kind: definition
 title: Maximal split abelian subspace and real rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-split-real-form, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-riemannian-symmetric-pair-of-noncompact-type, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §4, definition of a and discussion before Proposition 6.40, printed p. 370"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

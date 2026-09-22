@@ -2,7 +2,7 @@
 id: def-absolute-value-and-singular-values-of-a-compact-operator
 kind: definition
 title: Absolute value and singular values of a compact operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-compact-self-adjoint-operators, lem-positive-square-root-of-a-compact-positive-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-self-adjoint-positive-unitary-and-normal-operator, lem-compositions-with-a-compact-operator-are-compact, def-compact-linear-operator, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-dimension, def-orthogonality-and-orthogonal-complement, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-real-and-complex-inner-product-space, def-countable, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

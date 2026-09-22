@@ -2,7 +2,7 @@
 id: rem-omega-one-strongly-compact-normal-moore-refinement
 kind: remark
 title: "The omega-one-strongly compact refinement and open gap"
-status: draft
+status: published
 origin: pipeline
 deps: [def-product-measure-extension-axioms-pmea-and-pmea-sigma, thm-pmea-implies-normal-moore-space-conjecture]
 justified_by: []
@@ -15,6 +15,8 @@ sources:
     - title: "Joan Bagaria and Samuel Gomes da Silva, omega-one-strongly compact cardinals and normality"
       url: "https://diposit.ub.edu/server/api/core/bitstreams/d5caf92a-962e-496a-a31e-5630dafa67ec/content"
       locator: "Theorems 2.5 and 2.7-2.10, printed pp. 5-10"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

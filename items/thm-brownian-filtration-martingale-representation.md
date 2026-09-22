@@ -2,7 +2,7 @@
 id: thm-brownian-filtration-martingale-representation
 kind: theorem
 title: "Brownian-filtration martingale representation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-continuous-time-stopping-time, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t, thm-ito-formula-one-dimensional, cor-exponential-brownian-martingale, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, thm-doob-l1-maximal-inequality, thm-doob-lp-maximal-inequality, lem-closed-subspace-with-trivial-orthogonal-complement-fills-l-two, thm-riesz-fischer-completeness-of-l-p, thm-almost-sure-subsequence-from-convergence-in-probability, cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms, def-standard-normal-and-normal-laws, thm-dynkin-pi-lambda, def-convergence-in-probability, def-law-modification-and-indistinguishability-of-processes, def-partition-and-refinement, def-locally-square-integrable-predictable-brownian-integrand, lem-adapted-continuous-processes-are-progressively-measurable, def-progressively-measurable-and-predictable-process, thm-heine-cantor-r, thm-dominated-convergence, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, cor-absolute-value-and-powers-of-a-martingale-are-submartingales, thm-levy-downward-convergence-of-conditional-expectations, thm-blumenthal-zero-one-law, def-germ-sigma-algebra-at-zero, def-wiener-measure-on-continuous-path-space, cor-conditional-lp-contraction, thm-optional-sampling-for-bounded-stopping-times, thm-uniform-integrability-of-conditional-expectations-of-one-variable, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, thm-tonelli-theorem-for-sigma-finite-product-spaces]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 5.7"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

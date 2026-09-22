@@ -2,7 +2,7 @@
 id: lem-compact-lie-groups-admit-central-continuous-approximate-identities
 kind: lemma
 title: Central continuous approximate identities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, cor-normalized-haar-measure-on-a-compact-lie-group, def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, thm-c-c-is-dense-in-l-p-for-radon-measures, def-axiom-of-choice, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-integration-against-haar-is-invariant-under-translations-and-conjugation]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix Z §Z.2"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

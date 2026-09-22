@@ -2,7 +2,7 @@
 id: def-compact-linear-operator
 kind: definition
 title: Compact linear operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-bounded-linear-operator, def-metric-compactness, def-metric-bounded-diameter, def-metric-ball, def-norm-and-normed-space, rem-real-and-complex-normed-space-convention, def-linear-map, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, lem-vector-operations-are-continuous-in-a-normed-space]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

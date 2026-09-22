@@ -2,7 +2,7 @@
 id: def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group
 kind: definition
 title: Convolution operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, def-axiom-of-choice]
@@ -17,6 +17,8 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix Z §Z.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

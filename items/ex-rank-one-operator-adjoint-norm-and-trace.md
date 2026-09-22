@@ -2,7 +2,7 @@
 id: ex-rank-one-operator-adjoint-norm-and-trace
 kind: example
 title: Adjoint, norm and trace of an operator of rank at most one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, thm-cauchy-schwarz-in-an-inner-product-space, lem-finite-rank-operators-are-compact, thm-singular-value-decomposition-for-compact-operators, def-absolute-value-and-singular-values-of-a-compact-operator, lem-positive-square-root-of-a-compact-positive-operator, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-is-absolutely-convergent-and-basis-independent, lem-nuclear-series-characterizes-trace-norm, def-trace-class-operator, def-trace-of-a-trace-class-operator, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, lem-composition-operator-norm-inequality, def-real-and-complex-inner-product-space, def-orthogonality-and-orthogonal-complement, def-countable-choice, lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

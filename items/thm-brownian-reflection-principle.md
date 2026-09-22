@@ -2,7 +2,7 @@
 id: thm-brownian-reflection-principle
 kind: theorem
 title: "Brownian reflection principle"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times, thm-strong-markov-property-of-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, def-continuous-time-stopping-time, def-brownian-motion, def-wiener-measure-on-continuous-path-space, lem-brownian-transition-semigroup-property, thm-uniqueness-of-wiener-measure, thm-dynkin-pi-lambda, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, lem-conditioning-a-known-state-and-independent-noise, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Example 7.4.2 and equation (7.4.4)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

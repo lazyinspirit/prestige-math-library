@@ -2,7 +2,7 @@
 id: ex-fourier-series-of-a-square-wave
 kind: example
 title: The Fourier series of a square wave and the odd reciprocal-square sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fourier-coefficients-and-trigonometric-polynomials, thm-l-two-fourier-series-converges-in-mean-square, thm-parseval-identity-for-fourier-series, def-countable-choice, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-sine-and-cosine-derivatives, thm-chain-rule, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas, def-square-summable-family-on-an-arbitrary-index-set]
@@ -16,6 +16,8 @@ sources:
       url: "https://people.duke.edu/~hpgavin/SystemID/CourseNotes/Fourier.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5, pp.64–66"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

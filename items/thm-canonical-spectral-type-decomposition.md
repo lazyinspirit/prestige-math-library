@@ -2,7 +2,7 @@
 id: thm-canonical-spectral-type-decomposition
 kind: theorem
 title: "Canonical decomposition into pure point, absolutely continuous and singular continuous parts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-pure-point-absolutely-continuous-and-singular-continuous-spectral-subspaces, thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition, thm-finite-borel-measure-on-r-is-atomic-plus-atomless, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-projection-valued-measure, def-unbounded-integral-against-a-pvm, thm-bounded-borel-pvm-integral, def-mutually-singular-measures, def-absolutely-continuous-with-respect-to-a-positive-measure, def-atom-of-a-measure-on-r, def-orthogonality-and-orthogonal-complement, thm-lebesgue-measure-of-a-box-of-every-kind, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 3.3, Lemmas 3.15-3.18 with proof, pp.117-119"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

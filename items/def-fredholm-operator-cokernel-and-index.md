@@ -2,7 +2,7 @@
 id: def-fredholm-operator-cokernel-and-index
 kind: definition
 title: Fredholm operator cokernel and index
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-bounded-linear-operator, def-banach-space, def-quotient-vector-space-coset-notation, def-quotient-seminorm, def-linear-subspace, def-linear-basis, def-dimension, def-integers, def-int-operations, thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.3 p.190, Definition 4.31"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

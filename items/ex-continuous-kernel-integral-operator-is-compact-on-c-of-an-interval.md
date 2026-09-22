@@ -2,7 +2,7 @@
 id: ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval
 kind: example
 title: Continuous kernel integral operator is compact on c of an interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-metric-space, def-metric-convergence, def-metric-compactness, thm-metric-compactness-equivalences, def-countable-choice, def-dependent-choice, lem-dependent-choice-implies-countable-choice, thm-arzela-ascoli-for-real-ck, cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence, def-equicontinuity-and-boundedness-in-ck, thm-heine-cantor-metric, thm-continuous-implies-integrable, thm-linearity-of-the-integral, lem-uniform-integral-error-bound, thm-heine-borel-rn, lem-metrics-on-rn, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus, def-continuous-map-top, thm-extreme-value-metric, def-bounded-set, def-complete-ordered-field, def-continuity-real, def-metric-ball, def-metric-bounded-diameter, def-sequence, lem-index-map-grows]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

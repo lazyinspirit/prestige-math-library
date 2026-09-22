@@ -2,7 +2,7 @@
 id: thm-lidskii-for-trace-class-operators
 kind: theorem
 title: Lidskii trace formula for trace-class operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-fredholm-determinant, prop-fredholm-determinant-properties-for-trace-class-operators, def-trace-class-operator]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   precheck: pass
 sources:
   references:

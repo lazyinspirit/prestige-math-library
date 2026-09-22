@@ -2,7 +2,7 @@
 id: rem-choice-strength-ledger-baire-urysohn-stone-tychonoff
 kind: remark
 title: "Choice ledger for Baire, Urysohn, Stone, and Tychonoff"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-separable-complete-metric-baire-in-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, thm-dmc-implies-compact-hausdorff-baire, thm-compact-hausdorff-baire-iff-dmc, thm-dc-iff-products-compact-hausdorff-are-baire, thm-dmc-implies-urysohn-lemma, rem-dmc-versus-dc-over-zf-is-open, thm-stone-metric-spaces-are-paracompact, thm-products-of-cofinite-spaces-compact-iff-bpi, thm-compact-t1-product-theorem-iff-ac, thm-arbitrary-compact-product-theorem-iff-ac, rem-urysohn-implies-dmc-open-status, rem-stone-exact-choice-strength-open-status, cor-brunner-models-also-refute-tietze-extension, cor-bpi-does-not-imply-dmc, cor-dmc-is-not-provable-in-zf, rem-dmc-mc-ac-zfa-qualification, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, thm-relative-consistency-dc-without-stone, thm-relative-consistency-bpi-without-stone]
 justified_by: []
@@ -27,6 +27,8 @@ sources:
     - title: "Kyriakos Keremedis and Eleftherios Tachtsis, Wallman Compactifications and Tychonoff's Compactness Theorem in ZF"
       url: "https://topology.nipissingu.ca/tp/reprints/v42/tp42021.pdf"
       locator: "Discussion before Proposition 2.13, journal p. 282"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

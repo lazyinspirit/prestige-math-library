@@ -2,7 +2,7 @@
 id: cex-product-measure-ae-equality-is-not-pointwise-equality-of-integrands
 kind: counterexample
 title: "Product-measure equality is not pointwise equality"
-status: draft
+status: published
 origin: pipeline
 deps: [def-progressively-measurable-and-predictable-process, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, def-ito-integral-for-square-integrable-predictable-processes, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Definition 5.25"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

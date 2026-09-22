@@ -2,7 +2,7 @@
 id: thm-classification-of-real-forms-by-vogan-diagrams
 kind: theorem
 title: Classification of real forms by Vogan diagrams
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-vogan-diagram", "def-axiom-of-choice", "thm-existence-of-a-cartan-involution", "thm-conjugacy-of-cartan-involutions", "thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence", "def-cartan-involution-of-a-real-semisimple-lie-algebra", "prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition", "thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification", "def-theta-stable-cartan-subalgebra-and-compact-split-parts", "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra", "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional", "prop-killing-form-orthogonality-of-root-spaces", "prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra", "def-coroot-of-a-lie-algebra-root", "prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system", "prop-trace-forms-are-symmetric-and-invariant", "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras", "thm-serre-presentation-theorem", "def-serre-lie-algebra-of-a-finite-type-cartan-matrix", "def-lie-algebra-presented-by-generators-and-relations", "lem-chevalley-basis-and-real-structure-constants", "thm-existence-of-a-compact-real-form", "thm-root-string-property", "thm-finite-dimensional-representations-of-sl-two", "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates", "prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers", "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms", "thm-complex-spectral-theorem-for-normal-endomorphisms", "lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces", "def-cartan-subalgebra-of-a-lie-algebra", "prop-complexification-preserves-semisimplicity"]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, Theorem 39.6, printed pp. 183-184; Lecture 40, Theorem 40.1 and Proposition 40.3, printed pp. 186-188"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

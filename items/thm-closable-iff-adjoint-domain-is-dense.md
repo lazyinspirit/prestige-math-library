@@ -2,7 +2,7 @@
 id: thm-closable-iff-adjoint-domain-is-dense
 kind: theorem
 title: "Closability is equivalent to density of the adjoint domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-closure-of-a-closable-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-double-orthogonal-complement-is-closure, def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-orthogonality-and-orthogonal-complement, def-countable-choice, def-hilbert-space, def-unbounded-linear-operator-domain-and-graph]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 2.2, pp.66-69"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-complete-reducibility-for-compact-lie-groups
 kind: corollary
 title: Complete reducibility for compact Lie groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, def-axiom-of-choice, def-continuous-and-unitary-representation-of-a-compact-lie-group, thm-finite-dimensional-orthogonal-decomposition, cor-double-orthogonal-complement-and-dimension]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§4.2, Theorem 4.5"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

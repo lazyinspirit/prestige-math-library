@@ -2,7 +2,7 @@
 id: lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator
 kind: lemma
 title: Orthogonality identifies the Weyl numerator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-weyl-integration-formula, cor-irreducible-characters-are-orthonormal-class-functions, thm-highest-weight-classification-for-a-compact-connected-lie-group, lem-weyl-denominator-and-anti-invariant-orbit-sum-basis, prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one, def-axiom-of-choice, prop-weyl-jacobian-is-well-defined-and-weyl-invariant, cor-normalized-haar-measure-on-a-compact-lie-group, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, lem-highest-weight-modules-have-weights-below-the-top-weight, thm-compact-connected-lie-groups-are-classified-by-root-data]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§15 and Appendix Z"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

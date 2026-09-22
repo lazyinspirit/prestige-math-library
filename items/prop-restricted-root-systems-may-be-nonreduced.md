@@ -2,7 +2,7 @@
 id: prop-restricted-root-systems-may-be-nonreduced
 kind: proposition
 title: Restricted root systems may be nonreduced
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, def-reduced-crystallographic-euclidean-root-system, def-reducible-and-irreducible-root-system, thm-rank-two-root-system-classification, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching, thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix, thm-classification-of-irreducible-reduced-crystallographic-root-systems, ex-classical-root-systems-in-euclidean-coordinates, ex-weyl-groups-of-b-n-and-d-n-as-signed-permutation-groups, thm-finite-dimensional-representations-of-sl-two, prop-complexification-preserves-semisimplicity, ex-classical-simple-lie-algebras-and-their-killing-forms, def-classical-complex-matrix-lie-algebras, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, §§5 and 8, Proposition 2.48, Lemma 2.91 and Proposition 2.92, printed pp. 152-156 and 184-186"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

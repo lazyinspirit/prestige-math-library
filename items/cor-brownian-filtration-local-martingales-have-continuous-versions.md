@@ -2,7 +2,7 @@
 id: cor-brownian-filtration-local-martingales-have-continuous-versions
 kind: corollary
 title: "Cadlag Brownian-filtration local martingales have continuous versions"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-brownian-filtration-martingale-representation, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, def-locally-square-integrable-predictable-brownian-integrand, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 6.6"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

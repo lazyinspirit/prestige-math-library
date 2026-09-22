@@ -2,7 +2,7 @@
 id: thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem
 kind: theorem
 title: Multiplication operator form of the bounded normal spectral theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, thm-cyclic-spectral-representation, def-cyclic-vector-and-cyclic-normal-operator, thm-continuous-functional-calculus-for-bounded-normal-operators, def-c-star-algebra-generated-by-a-normal-operator, lem-scalar-and-complex-measures-from-a-pvm, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-separable-space, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Andreas Kriegl, Funktionalanalysis, §8.61, printed pp.196–198"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

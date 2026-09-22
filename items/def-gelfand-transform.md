@@ -2,7 +2,7 @@
 id: def-gelfand-transform
 kind: definition
 title: Gelfand transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-character-and-maximal-ideal-space", "def-unital-banach-algebra", "thm-maximal-ideal-space-is-compact-hausdorff", "def-axiom-of-choice", "thm-spectrum-as-character-values"]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

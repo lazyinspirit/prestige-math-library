@@ -2,7 +2,7 @@
 id: cor-deterministic-ito-integrals-are-gaussian
 kind: corollary
 title: "Deterministic Ito integrals are Gaussian"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ito-isometry-and-linearity-in-predictable-l2, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, def-brownian-motion, def-multivariate-normal-law, lem-characteristic-function-of-a-normal-law, lem-characteristic-functions-under-affine-maps-and-independent-sums, thm-uniqueness-of-a-law-from-its-characteristic-function, thm-convergence-in-probability-implies-convergence-in-distribution, def-weak-convergence-of-borel-probability-measures, def-convergence-in-probability, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-box-step-functions-are-dense-in-l-p-of-rn, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2 and Exercise 3.8"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: fs-a-plain-dynkin-diagram-classifies-real-forms
 kind: false-statement
 title: A plain dynkin diagram classifies real forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-classification-of-real-forms-by-vogan-diagrams, def-axiom-of-choice, prop-classical-types-correspond-to-sl-so-and-sp, def-classical-complex-matrix-lie-algebras, def-special-linear-lie-algebra-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-real-cartan-subalgebras-need-not-be-conjugate, def-vogan-diagram, def-satake-diagram, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, §40.2, the Vogan diagram of a real form, printed pp. 187-188"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

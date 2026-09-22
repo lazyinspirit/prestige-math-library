@@ -2,7 +2,7 @@
 id: def-brownian-generator
 kind: definition
 title: "The Brownian differential generator"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-predictable-brownian-integrand, thm-multidimensional-ito-formula-for-brownian-driven-processes, thm-ito-formula-one-dimensional, thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 2.10.2 and 3.7"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

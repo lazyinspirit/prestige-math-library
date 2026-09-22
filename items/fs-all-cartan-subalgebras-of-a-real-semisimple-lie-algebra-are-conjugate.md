@@ -2,7 +2,7 @@
 id: fs-all-cartan-subalgebras-of-a-real-semisimple-lie-algebra-are-conjugate
 kind: false-statement
 title: All cartan subalgebras of a real semisimple lie algebra are conjugate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-real-cartan-subalgebras-need-not-be-conjugate, def-cartan-subalgebra-of-a-lie-algebra, def-special-linear-lie-algebra-sl-two, thm-cartans-semisimplicity-criterion]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §6, the discussion of sl(2,R) after Proposition 6.59, printed p. 386"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

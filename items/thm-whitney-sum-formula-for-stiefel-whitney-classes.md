@@ -2,7 +2,7 @@
 id: thm-whitney-sum-formula-for-stiefel-whitney-classes
 kind: theorem
 title: Whitney sum formula for Stiefel–Whitney classes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-mod-two-real-projective-bundle-theorem", "def-real-projective-bundle-and-tautological-line", "thm-naturality-of-stiefel-whitney-classes", "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "thm-naturality-of-the-singular-cohomology-pair-sequence", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "def-relative-cup-product", "prop-relative-cup-products-are-natural-and-compatible-with-connectors", "prop-cup-product-is-natural-unital-and-associative", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§8 Whitney product theorem, printed pp.97–114"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-highest-weight-classification-of-finite-dimensional-irreducible-representations
 kind: theorem
 title: Highest-weight classification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 landmark: true
@@ -19,6 +19,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "Theorems 8.10 and 8.23"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

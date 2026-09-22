@@ -2,7 +2,7 @@
 id: def-dependent-multiple-choice-finite-level-tree
 kind: definition
 title: "Dependent multiple choice in finite-level tree form"
-status: draft
+status: published
 origin: pipeline
 deps: [def-multiple-and-dependent-multiple-choice, def-natural-numbers, def-function, def-finite-cardinality]
 justified_by: []
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

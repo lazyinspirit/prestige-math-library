@@ -2,7 +2,7 @@
 id: lem-weak-and-strong-additivity-of-orthogonal-projections
 kind: lemma
 title: Weak and strong additivity of orthogonal projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-projection-valued-measure, lem-orthogonal-projection-is-linear-self-adjoint-contractive, thm-cauchy-schwarz-in-an-inner-product-space, def-real-and-complex-inner-product-space, def-hilbert-space-adjoint, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Definition 5.1 and Lemma 5.3, pp.15–16"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

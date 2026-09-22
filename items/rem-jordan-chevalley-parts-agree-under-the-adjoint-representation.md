@@ -2,7 +2,7 @@
 id: rem-jordan-chevalley-parts-agree-under-the-adjoint-representation
 kind: remark
 title: Jordan–Chevalley parts under the adjoint representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [rem-additive-jordan-chevalley-is-supplied-by-x-two]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

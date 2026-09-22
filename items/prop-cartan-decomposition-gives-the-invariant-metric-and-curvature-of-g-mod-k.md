@@ -2,7 +2,7 @@
 id: prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k
 kind: proposition
 title: Cartan decomposition gives the invariant metric and curvature of G mod K
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-riemannian-symmetric-pair-of-noncompact-type, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h, def-sectional-curvature, def-riemann-curvature-four-tensor, def-levi-civita-connection, thm-fundamental-theorem-of-riemannian-geometry, def-curvature-of-an-affine-connection, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, thm-quotient-manifold-by-a-closed-lie-subgroup, cor-local-normal-form-for-submersions, def-left-maurer-cartan-form, thm-maurer-cartan-structure-equation, thm-the-exterior-derivative-commutes-with-pullback, def-axiom-of-choice, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §§43.1-43.6, printed pp. 217-222"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

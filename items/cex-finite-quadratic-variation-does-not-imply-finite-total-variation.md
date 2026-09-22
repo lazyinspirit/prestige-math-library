@@ -2,7 +2,7 @@
 id: cex-finite-quadratic-variation-does-not-imply-finite-total-variation
 kind: counterexample
 title: "Finite quadratic variation does not imply finite total variation"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-brownian-paths-have-infinite-one-variation-and-finite-quadratic-variation, def-brownian-motion, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.8"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

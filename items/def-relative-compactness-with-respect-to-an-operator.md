@@ -2,7 +2,7 @@
 id: def-relative-compactness-with-respect-to-an-operator
 kind: definition
 title: "Relative compactness with respect to an operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, thm-dominated-convergence, thm-riesz-representation-for-hilbert-space, def-relative-boundedness-with-respect-to-an-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-compact-linear-operator, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, thm-self-adjoint-resolvent-estimate, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Definition 6.13 (compact resolvent), Sec. 6.1.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

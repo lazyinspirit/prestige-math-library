@@ -2,7 +2,7 @@
 id: def-cartan-subalgebra-of-a-lie-algebra
 kind: definition
 title: Cartan subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-normalizer-of-a-lie-subalgebra, def-lower-central-series-and-nilpotent-lie-algebra]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

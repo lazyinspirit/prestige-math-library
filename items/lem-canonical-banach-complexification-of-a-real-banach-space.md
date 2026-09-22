@@ -2,7 +2,7 @@
 id: lem-canonical-banach-complexification-of-a-real-banach-space
 kind: lemma
 title: Canonical Banach complexification of a real Banach space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-banach-space", "def-norm-and-normed-space", "def-bounded-linear-operator", "def-operator-norm", "def-complex-numbers-and-arithmetic", "def-complex-conjugate-real-imaginary-part-and-modulus", "def-complete-ordered-field", "thm-sine-and-cosine-addition-formulas", "thm-polar-form-with-unique-principal-argument", "thm-complex-numbers-form-a-field", "lem-complex-conjugation-and-modulus-laws", "rem-real-and-complex-normed-space-convention", "cor-cauchy-reals-lub-complete", "cor-trigonometric-parity-and-pythagorean-identity", "thm-quarter-turn-values-and-shift-formulas"]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.1, printed pp. 19–24"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

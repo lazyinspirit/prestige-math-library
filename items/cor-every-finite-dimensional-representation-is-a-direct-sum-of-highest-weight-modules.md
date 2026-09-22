@@ -2,7 +2,7 @@
 id: cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules
 kind: corollary
 title: Every finite-dimensional module is a direct sum of highest-weight modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, thm-weyls-complete-reducibility-theorem, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-integral-dominant-and-strictly-dominant-weights, def-direct-sum-of-a-family-of-modules, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "Corollary 8.24"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

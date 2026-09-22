@@ -2,7 +2,7 @@
 id: lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations
 kind: lemma
 title: The graded Chern character respects relative maps and skeletal filtrations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-graded-chern-character-by-suspension-and-bott-periodicity", "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory", "def-negative-degree-complex-k-groups", "thm-reduced-k-theory-exact-sequence-of-a-cofibration", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-reduced-cone-suspension-and-cofiber-sequence", "prop-relative-cw-inclusions-are-cofibrations", "def-axiom-of-choice"]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Vector Bundles & K-Theory, section 5.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Suspension, Bott compatibility and cofiber comparison, printed pp.110-111"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-jordan-chevalley-parts-agree-under-adjoint-representation
 kind: lemma
 title: Jordan–Chevalley parts agree under the adjoint representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-abstract-jordan-decomposition-in-a-lie-algebra, thm-additive-jordan-chevalley-decomposition, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

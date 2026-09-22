@@ -2,7 +2,7 @@
 id: ex-standard-basis-of-ell-two
 kind: example
 title: The standard basis of $\ell^2(\mathbb N)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-square-summable-family-on-an-arbitrary-index-set, thm-monotone-convergence, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-hilbert-space-fourier-expansion, def-countable-choice, lem-finite-bessel-inequality, def-real-and-complex-inner-product-space, cor-finite-dimensional-normed-spaces-are-banach, lem-pythagorean-theorem-and-finite-orthogonal-sums]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1, p.52"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

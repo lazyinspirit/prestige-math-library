@@ -2,7 +2,7 @@
 id: ex-dynkin-diagram-duality-of-b-n-and-c-n
 kind: example
 title: Dynkin duality of B_n and C_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, ex-classical-root-systems-in-euclidean-coordinates, def-cartan-matrix-of-a-based-root-system]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 21, Example 21.18; Lecture 23, Example 23.5"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: lem-shelah-inner-model-is-closed-under-ambient-omega-sequences
 kind: lemma
 title: The Shelah inner model is closed under ambient omega-sequences
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-hereditarily-ordinal-sequence-definable-model, def-axiom-of-choice, def-ordinal-definability-and-hod, thm-n-cross-n-countable, thm-montague-levy-finite-reflection]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Robert M. Solovay, A Model of Set-Theory in Which Every Set of Reals Is Lebesgue Measurable", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf", locator: "Part III, Sections 2.2-2.7, pp. 51-52"}
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Theorem 7.17 and its remark, p. 43"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

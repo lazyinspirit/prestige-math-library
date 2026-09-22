@@ -2,7 +2,7 @@
 id: prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system
 kind: proposition
 title: Existence and uniqueness of the highest root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-height-of-a-root-and-highest-root, def-positive-system-and-base-of-simple-roots, def-reducible-and-irreducible-root-system, prop-distinct-simple-roots-have-nonpositive-inner-product, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, thm-rank-two-root-system-classification, prop-root-systems-decompose-uniquely-into-irreducible-components, def-reduced-crystallographic-euclidean-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 21, Corollary 21.19 and the positive-root order"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

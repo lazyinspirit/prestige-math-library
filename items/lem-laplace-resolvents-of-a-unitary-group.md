@@ -2,7 +2,7 @@
 id: lem-laplace-resolvents-of-a-unitary-group
 kind: lemma
 title: "Laplace resolvents of a unitary group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-infinitesimal-generator-of-a-unitary-group, def-strongly-continuous-one-parameter-unitary-group, def-bochner-integrable-function, lem-bochner-integral-norm-inequality, thm-bochner-dominated-convergence, thm-bochner-integrability-criterion, thm-bounded-linear-maps-commute-with-bochner-integration, def-strongly-measurable-banach-valued-function, def-banach-valued-simple-function-and-integral, def-countable-choice, def-dependent-choice, def-metric-convergence, thm-cauchy-schwarz-in-an-inner-product-space, thm-newton-leibniz-with-interior-derivative, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-monotone-convergence-for-the-integral, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]
@@ -18,6 +18,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 5.1, pp.146-148"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

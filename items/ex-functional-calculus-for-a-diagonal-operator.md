@@ -2,7 +2,7 @@
 id: ex-functional-calculus-for-a-diagonal-operator
 kind: example
 title: Functional calculus for a diagonal operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, def-axiom-of-choice, def-square-summable-family-on-an-arbitrary-index-set, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-spectrum-and-resolvent-of-a-bounded-operator, def-operator-norm, def-hilbert-space, thm-continuous-functional-calculus-properties, def-self-adjoint-positive-unitary-and-normal-operator]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

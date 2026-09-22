@@ -2,7 +2,7 @@
 id: def-infinitesimal-generator-of-a-unitary-group
 kind: definition
 title: "Infinitesimal generator of a unitary group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-strongly-continuous-one-parameter-unitary-group, def-hilbert-space, def-linear-subspace, def-metric-continuity, def-linear-map]
@@ -18,6 +18,8 @@ sources:
     - title: "Roland Schnaubelt, Evolution Equations (lecture notes)"
       url: "https://iana.math.kit.edu/downloads/iana3/schnaubelt/Skripten/evgl-skript.pdf"
       locator: "Section 1.1, generator definition before Proposition 1.10, pp.5-6"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

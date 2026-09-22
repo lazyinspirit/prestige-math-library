@@ -2,7 +2,7 @@
 id: lem-admissible-cycle-around-a-compact-plane-set
 kind: lemma
 title: Admissible cycle around a compact plane set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complex-chain-and-cycle, thm-winding-number-chain-laws, cor-goursat-rectangle-theorem, def-integration-and-index-of-complex-chain, cor-winding-number-is-the-normalized-argument-increment, thm-continuous-logarithms-exist-along-a-contour, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set, def-oriented-complex-triangle-and-boundary]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.5, printed pp. 43–47"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

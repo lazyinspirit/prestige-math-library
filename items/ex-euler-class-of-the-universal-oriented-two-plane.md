@@ -2,7 +2,7 @@
 id: ex-euler-class-of-the-universal-oriented-two-plane
 kind: example
 title: Euler class of the universal oriented two-plane
-status: draft
+status: published
 origin: pipeline
 deps: ["def-oriented-grassmannian-and-tautological-oriented-bundle", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "thm-oriented-real-vector-bundles-are-classified-by-bso", "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type", "thm-subordinate-partitions-of-unity-exist", "def-dependent-choice", "thm-recursion", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-thom-class-by-fiberwise-normalization", "def-fundamental-class-of-a-compact-oriented-manifold", "thm-excision-for-singular-cohomology", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-kronecker-evaluation-pairing", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "lem-mod-two-cohomology-rings-of-complex-projective-spaces", "prop-singular-cohomology-is-contravariantly-functorial", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "def-axiom-of-choice"]
 forward_refs: [lem-cohomology-ring-of-infinite-complex-projective-space, def-chern-classes-from-the-projective-bundle-relation, prop-first-chern-class-of-tensor-dual-and-conjugate-lines]
@@ -21,6 +21,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 the oriented two-plane, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

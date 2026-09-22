@@ -2,7 +2,7 @@
 id: cex-a-norm-need-not-satisfy-the-parallelogram-law
 kind: counterexample
 title: A norm need not satisfy the parallelogram law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-jordan-von-neumann-polarization, def-l-p-space-as-a-quotient-by-null-functions, def-counting-measure, rem-ell-p-is-l-p-of-counting-measure, lem-rational-power-laws, lem-rational-power-monotone, def-rational-power, def-real-and-complex-inner-product-space]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-holomorphic-functional-calculus-is-contour-independent
 kind: lemma
 title: Holomorphic functional calculus is contour independent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-holomorphic-functional-calculus, lem-banach-valued-cauchy-integral-vanishes, def-axiom-of-choice, def-null-homologous-and-homologous-complex-cycles, def-complex-chain-and-cycle, lem-admissible-cycle-around-a-compact-plane-set, thm-resolvent-is-banach-valued-holomorphic, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-banach-algebra-valued-contour-integral]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — the contour-independence discussion after Definition 2.5.1, printed p. 47"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

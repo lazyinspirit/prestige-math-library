@@ -2,7 +2,7 @@
 id: thm-marsden-weinstein-meyer-symplectic-reduction
 kind: theorem
 title: Marsden--Weinstein--Meyer symplectic reduction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, thm-free-proper-action-quotient-manifold, prop-tangent-space-of-a-free-proper-quotient, lem-characteristic-kernel-on-a-regular-moment-level, prop-moment-level-is-invariant-under-the-coadjoint-stabilizer, lem-invariant-horizontal-form-on-a-free-proper-quotient-descends-uniquely, def-regular-and-critical-points-and-values, def-symplectic-form-and-symplectic-manifold, def-countable-choice, def-symplectic-and-hamiltonian-lie-group-action]
@@ -19,6 +19,8 @@ sources:
       locator: Lecture 23, Theorem 23.1, printed pages 141--145
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-uniqueness-and-change-of-positive-system-in-iwasawa-decomposition
 kind: proposition
 title: Uniqueness and change of positive system in iwasawa decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-restricted-weyl-group-is-the-reflection-group-of-the-restricted-root-system, thm-global-iwasawa-decomposition, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-restricted-root-and-restricted-root-space, def-positive-restricted-roots-and-nilpotent-n-algebra, thm-restricted-root-space-decomposition, prop-restricted-root-systems-may-be-nonreduced, def-restricted-weyl-group, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, def-open-and-closed-weyl-chambers, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §5, Corollary 6.55 and the discussion preceding it, together with Theorem 6.51 and Theorem 6.57, printed pp. 377-384"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

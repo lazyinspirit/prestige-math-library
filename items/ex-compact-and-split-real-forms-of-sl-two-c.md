@@ -2,7 +2,7 @@
 id: ex-compact-and-split-real-forms-of-sl-two-c
 kind: example
 title: Compact and split real forms of sl two c
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-special-linear-lie-algebra-sl-two, def-real-form-of-a-complex-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, ex-killing-form-of-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion, ex-unitary-and-special-unitary-lie-groups, ex-general-and-special-linear-lie-groups, def-cartan-subalgebra-of-a-lie-algebra, def-transpose-of-a-matrix, def-countable-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.3 and §39.4, printed pp. 202-204"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

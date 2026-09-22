@@ -2,7 +2,7 @@
 id: def-matrix-coefficient-and-character-of-a-compact-group-representation
 kind: definition
 title: Matrix coefficients and characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-continuous-and-unitary-representation-of-a-compact-lie-group, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, cor-trace-is-invariant-under-similarity]
@@ -17,6 +17,8 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix Z §Z.1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

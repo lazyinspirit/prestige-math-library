@@ -2,7 +2,7 @@
 id: ex-standard-inner-products-on-kn-ell-two-and-l-two
 kind: example
 title: The standard inner products make K n, ell two and quotient L two Hilbert spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space, def-real-and-complex-inner-product-space, lem-complex-conjugation-and-modulus-laws, cor-finite-dimensional-normed-spaces-are-banach, rem-ell-p-is-l-p-of-counting-measure, def-l-p-space-as-a-quotient-by-null-functions, def-counting-measure, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, lem-complex-lp-completeness-density-and-inner-product, thm-riesz-fischer-completeness-of-l-p, def-countable-choice, thm-complex-numbers-form-a-field, def-complex-conjugate-real-imaginary-part-and-modulus, cor-inner-product-induces-a-norm, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

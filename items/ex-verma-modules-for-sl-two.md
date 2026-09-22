@@ -2,7 +2,7 @@
 id: ex-verma-modules-for-sl-two
 kind: example
 title: Verma modules for sl2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-all-finite-dimensional-irreducible-sl-two-modules, def-special-linear-lie-algebra-sl-two, def-highest-weight-vector-and-highest-weight-module, def-universal-enveloping-algebra, thm-poincare-birkhoff-witt, def-integral-dominant-and-strictly-dominant-weights, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

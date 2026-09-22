@@ -2,7 +2,7 @@
 id: def-frechet-derivative-between-banach-spaces
 kind: definition
 title: Fréchet derivative between Banach spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-banach-space, def-bounded-linear-operator, def-operator-norm, def-space-of-bounded-linear-operators, def-metric-topology, def-metric-continuity]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

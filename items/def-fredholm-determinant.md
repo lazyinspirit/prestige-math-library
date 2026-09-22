@@ -2,7 +2,7 @@
 id: def-fredholm-determinant
 kind: definition
 title: Fredholm determinant of a trace-class operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-trace-class-operator, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, thm-orthogonal-decomposition-by-a-closed-subspace, lem-positive-square-root-of-a-compact-positive-operator, def-absolute-value-and-singular-values-of-a-compact-operator, rem-external-separable-trace-class-fredholm-determinant-theorem, thm-sequential-characterization-of-compact-operators]
@@ -14,6 +14,8 @@ sources:
   references:
     - title: "Aleksey Kostenko, Trace Ideals with Applications — Section 3.4, printed pp. 34–41"
       url: "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

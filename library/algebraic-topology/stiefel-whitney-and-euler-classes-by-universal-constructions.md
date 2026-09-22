@@ -1,7 +1,7 @@
 ---
 page: stiefel-whitney-and-euler-classes-by-universal-constructions
 title: "Stiefel Whitney and Euler Classes by Universal Constructions"
-status: draft
+status: published
 items:
   - def-characteristic-class-as-a-universal-natural-bundle-class
   - lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type

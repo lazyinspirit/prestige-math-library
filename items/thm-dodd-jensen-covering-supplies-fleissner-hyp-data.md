@@ -2,7 +2,7 @@
 id: thm-dodd-jensen-covering-supplies-fleissner-hyp-data
 kind: theorem
 title: "Dodd-Jensen covering supplies Fleissner HYP data"
-status: draft
+status: published
 origin: pipeline
 deps: [def-fleissner-hyp-covering-interface, def-dodd-jensen-covering-and-square-package, def-axiom-of-choice, def-cardinal, def-aleph-and-beth-hierarchies]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "William G. Fleissner, If all normal Moore spaces are metrizable, then there is an inner model with a measurable cardinal"
       url: "https://kuscholarworks.ku.edu/server/api/core/bitstreams/88062b98-5ab8-4fdc-9548-9e00a9c7507d/content"
       locator: "Application of Jensen-Dodd covering to HYP, printed pp. 366-368"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-second-resolvent-identity-for-closed-operator-perturbations
 kind: lemma
 title: "Second resolvent identity for a closed perturbation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-relative-boundedness-with-respect-to-an-operator, def-densely-defined-closed-and-closable-operator, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph, thm-closed-graph-theorem, def-dependent-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 6.1, Lemma 6.5 with proof, p.159"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

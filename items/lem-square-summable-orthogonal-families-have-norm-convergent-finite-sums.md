@@ -2,7 +2,7 @@
 id: lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums
 kind: lemma
 title: Square-summable orthogonal families have norm-convergent finite sums
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-square-summable-family-on-an-arbitrary-index-set, lem-pythagorean-theorem-and-finite-orthogonal-sums, thm-cauchy-schwarz-in-an-inner-product-space, def-hilbert-space, def-countable-choice, cor-archimedean-reciprocal, lem-of-square-monotone, lem-reverse-triangle-inequality-in-a-normed-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Bruce Blackadar, Ilijas Farah and Asaf Karagila, Hilbert spaces without the Countable Axiom of Choice, §§3–4.1"
       url: "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

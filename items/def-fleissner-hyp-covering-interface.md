@@ -2,7 +2,7 @@
 id: def-fleissner-hyp-covering-interface
 kind: definition
 title: "Fleissner's HYP covering interface"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-axiom-of-choice, def-cardinal, def-aleph-and-beth-hierarchies, def-cofinality, lem-cofinality-is-well-defined, def-club-subsets-of-ordinals, def-club-filter-and-nonstationary-ideal, def-cofinality-strata-and-stationary-trace]
 justified_by: []
@@ -15,6 +15,8 @@ sources:
     - title: "William G. Fleissner, If all normal Moore spaces are metrizable, then there is an inner model with a measurable cardinal"
       url: "https://kuscholarworks.ku.edu/server/api/core/bitstreams/88062b98-5ab8-4fdc-9548-9e00a9c7507d/content"
       locator: "Definition of HYP, clauses (1a)-(3b), and Lemma 1, printed pp. 366-367"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers
 kind: theorem
 title: Simple transitivity on Weyl chambers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-open-and-closed-weyl-chambers, prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-positive-system-and-base-of-simple-roots, def-weyl-group-of-a-root-system, def-reduced-crystallographic-euclidean-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, §6, Theorems 2.63 and 2.68 and the length discussion, printed pp. 164-170"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

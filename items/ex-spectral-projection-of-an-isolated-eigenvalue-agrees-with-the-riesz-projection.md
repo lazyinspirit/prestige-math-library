@@ -2,7 +2,7 @@
 id: ex-spectral-projection-of-an-isolated-eigenvalue-agrees-with-the-riesz-projection
 kind: example
 title: Spectral projection of an isolated eigenvalue agrees with the riesz projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-spectral-projections-and-resolution-of-the-identity, def-riesz-spectral-projection, thm-riesz-spectral-projection-properties, thm-bounded-linear-maps-commute-with-bochner-integration, def-bochner-integrable-function, thm-cauchy-integral-formula-circle, cor-cauchy-theorem-convex-domain, thm-borel-functional-calculus-for-bounded-normal-operators, thm-bounded-borel-pvm-integral, def-borel-functional-calculus-for-a-bounded-normal-operator, thm-continuous-functional-calculus-for-bounded-normal-operators, def-spectrum-and-resolvent-of-a-bounded-operator, def-hilbert-space, def-axiom-of-choice, def-banach-space, thm-uniform-limit-theorem, thm-bounded-operator-space-is-banach, thm-spectral-theorem-for-bounded-normal-operators-pvm-form]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.7, printed pp.293–296"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

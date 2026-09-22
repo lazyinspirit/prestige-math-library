@@ -2,7 +2,7 @@
 id: ex-continuous-functions-form-a-commutative-banach-algebra
 kind: example
 title: Continuous functions form a commutative Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unital-banach-algebra, def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-uniform-cauchy-criterion-complex-functions, thm-compactness-under-continuous-maps]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1.1 examples, printed pp. 209–214"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

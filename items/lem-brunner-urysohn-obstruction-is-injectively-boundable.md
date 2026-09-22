@@ -2,7 +2,7 @@
 id: lem-brunner-urysohn-obstruction-is-injectively-boundable
 kind: lemma
 title: "The Läuchli Urysohn obstruction is injectively boundable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boundable-sentence-over-an-atom-set, lem-brunner-choice-and-urysohn-obstructions, def-brunner-ordered-lauchli-permutation-models, def-normal-and-t4-spaces, def-continuous-map-top, def-topological-space]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Eleftherios Tachtsis, The Boolean prime ideal theorem does not imply the extension of almost disjoint families to MAD families"
       url: "https://www.impan.pl/shop/en/publication/transaction/download/product/114057"
       locator: "Definitions 5.2-5.3 and Fact 5.4, printed pp. 110-111"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

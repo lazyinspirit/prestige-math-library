@@ -2,7 +2,7 @@
 id: fs-every-highest-weight-lambda-gives-a-finite-dimensional-simple-module
 kind: false-statement
 title: Finite-dimensionality requires dominance integrality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral, def-integral-dominant-and-strictly-dominant-weights, def-highest-weight-vector-and-highest-weight-module, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-special-linear-lie-algebra-sl-two, def-coroot-of-a-lie-algebra-root, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §§1–3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

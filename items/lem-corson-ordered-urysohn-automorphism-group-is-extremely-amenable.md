@@ -2,7 +2,7 @@
 id: lem-corson-ordered-urysohn-automorphism-group-is-extremely-amenable
 kind: lemma
 title: "Aut(U_Q^<) is extremely amenable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-corson-ordered-rational-permutation-model, thm-extreme-amenability-yields-bpi-in-finite-support-models, def-metric-space, def-ramsey-colouring-and-arrow-notation, def-axiom-of-choice, thm-tychonoff, def-product-topology, thm-closed-subspace-of-a-compact-space-is-compact, def-hausdorff-space, cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

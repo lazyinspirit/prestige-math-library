@@ -2,7 +2,7 @@
 id: thm-effective-metacompact-discrete-metrics-implies-ac
 kind: theorem
 title: "Effective metacompactness for discrete metric spaces implies AC"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-multiple-choice-equivalent-to-choice-in-zf, def-multiple-and-dependent-multiple-choice, def-metric-space, def-cover-refinement-and-local-finiteness, def-metacompact-space, thm-metric-open-set-algebra, def-metric-topology, def-choice-function]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

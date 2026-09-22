@@ -2,7 +2,7 @@
 id: cor-normalized-haar-measure-on-a-compact-lie-group
 kind: corollary
 title: Normalized Haar measure on a compact Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-left-right-and-bi-invariant-borel-measure-on-a-lie-group, cor-normalized-haar-probability-on-a-compact-group, def-axiom-of-choice, def-left-haar-integral-and-left-haar-measure]
@@ -19,6 +19,8 @@ sources:
       locator: "§3–§4, uniqueness of Haar measure on a compact group"
 proof_strategy: direct
 landmark: true
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

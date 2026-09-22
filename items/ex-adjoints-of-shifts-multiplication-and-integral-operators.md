@@ -2,7 +2,7 @@
 id: ex-adjoints-of-shifts-multiplication-and-integral-operators
 kind: example
 title: Adjoints of shifts, multiplication and integral operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space-adjoint, ex-standard-inner-products-on-kn-ell-two-and-l-two, def-complex-lp-and-euclidean-test-function-conventions, lem-complex-lp-completeness-density-and-inner-product, thm-complex-holder-minkowski-and-the-quotient-norm, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-finite-sigma-finite-and-semifinite-measures, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

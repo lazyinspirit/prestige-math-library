@@ -2,7 +2,7 @@
 id: ex-bounded-operators-form-a-noncommutative-banach-algebra
 kind: example
 title: Bounded operators form a Banach algebra, noncommutative in dimension at least two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unital-banach-algebra, thm-bounded-operator-space-is-banach, cor-finite-dimensional-normed-spaces-are-banach, def-bounded-linear-operator, def-operator-norm, cor-finite-dimensional-subspaces-are-complemented, thm-complemented-subspace-iff-range-of-a-bounded-projection, cor-linear-maps-with-finite-dimensional-domain-are-bounded, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1.1 examples, printed pp. 209–214"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

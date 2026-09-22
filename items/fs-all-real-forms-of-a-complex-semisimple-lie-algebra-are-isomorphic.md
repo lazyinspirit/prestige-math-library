@@ -2,7 +2,7 @@
 id: fs-all-real-forms-of-a-complex-semisimple-lie-algebra-are-isomorphic
 kind: false-statement
 title: All real forms of a complex semisimple lie algebra are isomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-classical-complex-matrix-lie-algebras, ex-killing-form-of-sl-two, def-special-linear-lie-algebra-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §1, the compact real form su(2) of sl(2,C), printed pp. 348-353; §6, the discussion of sl(2,R) after Proposition 6.59, printed p. 386"
 landmark: false
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

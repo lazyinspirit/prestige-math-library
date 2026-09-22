@@ -2,7 +2,7 @@
 id: def-special-linear-lie-algebra-sl-two
 kind: definition
 title: The special linear Lie algebra sl_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-lie-algebra-over-a-field, def-lie-subalgebra-ideal-and-center, def-representation-of-a-lie-algebra]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

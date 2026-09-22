@@ -2,7 +2,7 @@
 id: ex-diagonal-action-and-addition-of-angular-momenta
 kind: example
 title: Diagonal action and addition of angular momenta
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-product-and-opposite-symplectic-moment-maps, ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle, def-countable-choice, lem-tautological-cotangent-moment-map-is-equivariant]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.3, printed page 149
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

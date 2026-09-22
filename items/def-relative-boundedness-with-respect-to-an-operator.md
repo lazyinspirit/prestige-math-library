@@ -2,7 +2,7 @@
 id: def-relative-boundedness-with-respect-to-an-operator
 kind: definition
 title: "Relative boundedness with respect to an operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unbounded-linear-operator-domain-and-graph, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-bounded-linear-operator]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 6.1, Lemmas 6.1-6.3, pp.157-159"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

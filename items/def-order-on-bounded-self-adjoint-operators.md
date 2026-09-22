@@ -2,7 +2,7 @@
 id: def-order-on-bounded-self-adjoint-operators
 kind: definition
 title: Order on bounded self adjoint operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice, thm-hilbert-adjoint-properties, def-hilbert-space, def-operator-norm]
@@ -15,6 +15,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, §4, pp.10–13"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

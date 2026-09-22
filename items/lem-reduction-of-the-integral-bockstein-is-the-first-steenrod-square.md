@@ -2,7 +2,7 @@
 id: lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square
 kind: lemma
 title: Reduction of the integral Bockstein is the first Steenrod square
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-bockstein-connecting-operation, prop-first-steenrod-square-is-the-mod-two-bockstein]
@@ -15,6 +15,8 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, §3.E, printed pp. 303–305"
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: "§3.E, Bockstein homomorphisms, printed pp. 303–305"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

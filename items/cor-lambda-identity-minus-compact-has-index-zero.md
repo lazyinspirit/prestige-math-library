@@ -2,7 +2,7 @@
 id: cor-lambda-identity-minus-compact-has-index-zero
 kind: corollary
 title: Lambda identity minus compact has index zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-fredholm-index-is-stable-under-compact-perturbations, def-fredholm-operator-cokernel-and-index, def-compact-linear-operator, def-bounded-linear-operator, def-banach-space, def-linear-map, def-quotient-vector-space-coset-notation, lem-linear-combinations-of-compact-operators-are-compact, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4, index of lambda I minus compact"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

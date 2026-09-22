@@ -2,7 +2,7 @@
 id: thm-mod-two-euler-class-is-the-top-stiefel-whitney-class
 kind: theorem
 title: The mod-two Euler class is the top Stiefel–Whitney class
-status: draft
+status: published
 origin: pipeline
 deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-thom-euler-class-of-an-oriented-vector-bundle", "def-r-oriented-vector-bundle-and-orientation-local-system", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-naturality-of-stiefel-whitney-classes", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-real-splitting-principle-with-mod-two-injective-pullback", "def-real-flag-bundle-and-stiefel-whitney-roots", "thm-naturality-and-uniqueness-of-thom-classes", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "thm-stable-stiefel-space-is-contractible", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "def-tautological-degree-one-class-on-a-real-projective-bundle", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "def-relative-singular-cochain-complex", "thm-cellular-cochains-compute-cohomology-with-local-coefficients"]
 proof_strategy: direct
@@ -20,6 +20,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 the top class is w_n, printed pp.115–124"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

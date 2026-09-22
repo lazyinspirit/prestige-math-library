@@ -2,7 +2,7 @@
 id: def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra
 kind: definition
 title: Positive and negative nilpotent subalgebras and the Borel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-positive-system-and-base-of-simple-roots, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, prop-brackets-of-root-spaces, def-lower-central-series-and-nilpotent-lie-algebra, def-lie-subalgebra-ideal-and-center, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §3, (5.8), printed p. 284; §7, definition of Borel subalgebra, printed p. 325"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

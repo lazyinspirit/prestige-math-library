@@ -2,7 +2,7 @@
 id: cor-opposite-root-spaces-pair-nondegenerately
 kind: corollary
 title: Opposite root spaces pair nondegenerately
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-killing-form-orthogonality-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-cartans-semisimplicity-criterion, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, Proposition 2.17(b),(c)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

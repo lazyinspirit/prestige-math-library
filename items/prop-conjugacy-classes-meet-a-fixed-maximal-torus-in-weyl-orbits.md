@@ -2,7 +2,7 @@
 id: prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits
 kind: proposition
 title: Conjugacy classes meet T in Weyl orbits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori, def-weyl-group-of-a-compact-connected-lie-group, thm-cartans-closed-subgroup-theorem, def-countable-choice, def-axiom-of-choice, def-torus-and-maximal-torus-in-a-compact-lie-group]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.stonybrook.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§12"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

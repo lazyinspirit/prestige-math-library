@@ -2,7 +2,7 @@
 id: thm-bing-q-set-moore-space-is-normal-and-nonmetrizable
 kind: theorem
 title: "Bing's Q-set space is a normal nonmetrizable Moore space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-q-sets-and-heath-moore-space-interface, def-moore-spaces-and-developments, def-normal-and-t4-spaces, def-metrizable-space, def-separable-space, def-subspace-topology-top, def-metric-space, def-metric-ball, def-metric-topology, def-neighbourhood-top, def-open-and-closed-in-r, def-topology-basis-subbasis, def-axiom-of-choice]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "R. H. Bing, Metrization of topological spaces"
       url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf"
       locator: "Example E, printed p. 183"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

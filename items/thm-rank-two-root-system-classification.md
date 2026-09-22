@@ -2,7 +2,7 @@
 id: thm-rank-two-root-system-classification
 kind: theorem
 title: Rank-two root-system classification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system, prop-root-systems-decompose-uniquely-into-irreducible-components, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-coroot-and-dual-root-system, def-weyl-group-of-a-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 21, Theorems 21.9-21.10, printed pp. 113-114"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

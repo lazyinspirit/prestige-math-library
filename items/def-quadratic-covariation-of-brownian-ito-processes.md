@@ -2,7 +2,7 @@
 id: def-quadratic-covariation-of-brownian-ito-processes
 kind: definition
 title: "Quadratic covariation of Brownian Ito processes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-quadratic-variation-along-a-partition-sequence, def-convergence-in-probability, def-continuity-real, def-partition-and-refinement, def-bounded-variation-and-total-variation]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Definition 5.62 and Theorem 5.64"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

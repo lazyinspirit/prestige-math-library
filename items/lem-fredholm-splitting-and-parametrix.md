@@ -2,7 +2,7 @@
 id: lem-fredholm-splitting-and-parametrix
 kind: lemma
 title: Fredholm splitting and parametrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-operator-cokernel-and-index, def-bounded-linear-operator, def-banach-space, def-linear-subspace, def-complemented-subspace, cor-finite-dimensional-subspaces-are-complemented, cor-finite-codimensional-subspaces-are-complemented, thm-bounded-inverse-theorem, lem-closed-subspace-of-a-banach-space-is-banach, def-quotient-vector-space-coset-notation, def-linear-basis, def-dimension, lem-finite-choice, def-linear-map, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

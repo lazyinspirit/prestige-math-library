@@ -2,7 +2,7 @@
 id: prop-first-chern-class-of-tensor-dual-and-conjugate-lines
 kind: proposition
 title: First Chern class of tensor, dual, and conjugate lines
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-first-chern-class-classifies-complex-line-bundles, def-chern-classes-from-the-projective-bundle-relation, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, thm-numerable-vector-bundles-admit-bundle-metrics, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, Chapter 24 section 4"
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Tensor and dual formulas for c_1, printed pp.211-212"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

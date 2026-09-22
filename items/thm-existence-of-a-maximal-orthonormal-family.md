@@ -2,7 +2,7 @@
 id: thm-existence-of-a-maximal-orthonormal-family
 kind: theorem
 title: Existence of a maximal orthonormal family, and maximality as completeness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-zorn, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, def-real-and-complex-inner-product-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, printed pp.72–80"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

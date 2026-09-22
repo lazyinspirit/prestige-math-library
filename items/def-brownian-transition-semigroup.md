@@ -2,7 +2,7 @@
 id: def-brownian-transition-semigroup
 kind: definition
 title: "The Brownian transition semigroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-standard-normal-and-normal-laws, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.3"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

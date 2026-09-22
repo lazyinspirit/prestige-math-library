@@ -2,7 +2,7 @@
 id: def-brownian-motion-started-at-x
 kind: definition
 title: "Brownian motion started at x"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-d-dimensional-brownian-motion, cor-existence-and-scaling-of-d-dimensional-brownian-motion, def-wiener-measure-on-continuous-path-space, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, lem-law-of-a-random-element-is-a-probability-measure, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Section 6.1"
       url: "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

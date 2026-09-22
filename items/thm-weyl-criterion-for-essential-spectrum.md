@@ -2,7 +2,7 @@
 id: thm-weyl-criterion-for-essential-spectrum
 kind: theorem
 title: "Weyl criterion for the essential spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-unbounded-borel-functional-calculus, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-weak-convergence-of-nets-and-sequences, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-axiom-of-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-dependent-choice, def-projection-valued-measure, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Lemma 6.17 with complete proof, pp.170-171"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

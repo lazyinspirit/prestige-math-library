@@ -2,7 +2,7 @@
 id: def-progressively-measurable-and-predictable-process
 kind: definition
 title: "Progressively measurable and predictable processes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-time-filtration-and-all-pairs-martingale, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-continuous-time-stopping-time, thm-generated-sigma-algebra-exists-and-is-minimal, def-axiom-of-choice]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Section 5.1"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

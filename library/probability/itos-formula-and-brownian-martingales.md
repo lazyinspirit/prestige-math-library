@@ -1,7 +1,7 @@
 ---
 page: itos-formula-and-brownian-martingales
 title: Itos Formula and Brownian Martingales
-status: draft
+status: published
 items:
   - def-continuous-brownian-ito-process
   - def-quadratic-covariation-of-brownian-ito-processes

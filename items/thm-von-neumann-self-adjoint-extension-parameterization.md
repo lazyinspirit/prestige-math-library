@@ -2,7 +2,7 @@
 id: thm-von-neumann-self-adjoint-extension-parameterization
 kind: theorem
 title: "Von Neumann parameterization of self-adjoint extensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-deficiency-subspaces-and-deficiency-indices, thm-cayley-correspondence, def-cayley-transform-of-a-self-adjoint-operator, def-densely-defined-closed-and-closable-operator, def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, def-axiom-of-choice, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Theorem 6.39 and Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-weyl-integration-formula
 kind: theorem
 title: Weyl integration formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits, prop-weyl-jacobian-is-well-defined-and-weyl-invariant, cor-normalized-haar-measure-on-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-quotient-manifold-by-a-closed-lie-subgroup, prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density, def-axiom-of-choice, def-weyl-group-of-a-compact-connected-lie-group, thm-compact-group-weyl-group-is-finite, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-morse-sard-for-smooth-manifolds, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-density-measure-integration-agrees-with-smooth-density-integration, prop-density-pullback-under-local-diffeomorphisms, lem-continuous-functions-determine-borel-probabilities-on-compact-metric-spaces, thm-cartans-closed-subgroup-theorem, prop-exponential-map-is-natural-for-lie-group-homomorphisms, thm-smooth-inverse-function-theorem-on-manifolds, def-roots-of-a-compact-connected-lie-group, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter VIII §1 (Weyl integration), cross-check"
 proof_strategy: direct
 landmark: true
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

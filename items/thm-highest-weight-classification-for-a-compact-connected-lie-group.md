@@ -2,7 +2,7 @@
 id: thm-highest-weight-classification-for-a-compact-connected-lie-group
 kind: theorem
 title: Highest weights for compact connected groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, thm-compact-connected-lie-groups-are-classified-by-root-data, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori, thm-structure-of-a-compact-connected-abelian-lie-group, thm-cartans-closed-subgroup-theorem, def-axiom-of-choice, thm-lie-second-fundamental-theorem, thm-continuous-homomorphisms-between-lie-groups-are-smooth, prop-exponential-map-is-natural-for-lie-group-homomorphisms, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, lem-highest-weight-modules-have-weights-below-the-top-weight]
@@ -19,6 +19,8 @@ sources:
       locator: "Appendix V, analytic integrality"
 proof_strategy: direct
 landmark: true
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

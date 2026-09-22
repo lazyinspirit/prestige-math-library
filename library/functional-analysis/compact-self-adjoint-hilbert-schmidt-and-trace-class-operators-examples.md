@@ -1,7 +1,7 @@
 ---
 page: compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples
 title: Compact Self Adjoint Hilbert Schmidt and Trace Class Operators — Examples
-status: draft
+status: published
 items: []
 examples: [ex-diagonal-schatten-class-criteria-on-ell-two, ex-volterra-operator-is-hilbert-schmidt-and-quasinilpotent, ex-rank-one-operator-adjoint-norm-and-trace, ex-integral-operator-trace-under-a-valid-diagonal-hypothesis, cex-compact-does-not-imply-hilbert-schmidt, cex-hilbert-schmidt-does-not-imply-trace-class, cex-trace-of-products-is-not-cyclic-without-summability, rem-schatten-p-classes]
 ---

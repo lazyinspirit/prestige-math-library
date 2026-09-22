@@ -2,7 +2,7 @@
 id: lem-orthogonal-complement-of-an-eigenspace-is-invariant
 kind: lemma
 title: Orthogonal complement of an eigenspace is invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-orthogonality-and-orthogonal-complement, lem-orthogonal-complement-is-closed, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-kernel-and-image-of-a-linear-map, def-linear-subspace, def-real-and-complex-inner-product-space, def-hilbert-space, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, def-metric-convergence, lem-metric-limits-unique, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

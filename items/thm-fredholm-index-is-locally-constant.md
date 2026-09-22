@@ -2,7 +2,7 @@
 id: thm-fredholm-index-is-locally-constant
 kind: theorem
 title: Fredholm index is locally constant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-fredholm-operator-cokernel-and-index, def-compact-linear-operator, def-bounded-linear-operator, def-banach-space, def-operator-norm, lem-fredholm-splitting-and-parametrix, lem-neumann-series-and-small-perturbations-of-bounded-inverses, thm-fredholm-index-is-additive, thm-rank-nullity, def-dimension, def-linear-basis, def-linear-subspace, def-quotient-vector-space-coset-notation, cor-linear-maps-with-finite-dimensional-domain-are-bounded, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, def-metric-ball]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 pp.196–198, Theorem 4.41(ii)"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

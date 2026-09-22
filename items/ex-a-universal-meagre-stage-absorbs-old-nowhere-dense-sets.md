@@ -2,7 +2,7 @@
 id: ex-a-universal-meagre-stage-absorbs-old-nowhere-dense-sets
 kind: example
 title: A universal-meagre stage absorbs an old nowhere-dense tree
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-universal-meagre-forcing, lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets, def-trees-and-bodies-on-discrete-alphabets, def-nowhere-dense-meagre-and-residual-subsets]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Definition 4.2 and Claim 7.15, printed pp. 15 and 43"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

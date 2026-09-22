@@ -2,7 +2,7 @@
 id: thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences
 kind: theorem
 title: Compact operator sends weakly convergent sequences to norm convergent sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, def-transpose-of-a-bounded-operator, thm-sequential-characterization-of-compact-operators, thm-uniform-boundedness-principle, thm-canonical-bidual-map-is-an-isometry, rem-continuous-dual-completeness-and-pairing, cor-dual-separates-points, def-weak-convergence-of-nets-and-sequences, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, def-metric-convergence, def-sequence, lem-index-map-grows]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

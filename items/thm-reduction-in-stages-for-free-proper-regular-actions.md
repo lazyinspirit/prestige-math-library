@@ -2,7 +2,7 @@
 id: thm-reduction-in-stages-for-free-proper-regular-actions
 kind: theorem
 title: Reduction in stages for free proper regular actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-countable-choice", "def-moment-map-and-component-hamiltonian", "def-coadjoint-representation-of-a-lie-group", "def-fundamental-vector-field-of-a-left-action", "thm-marsden-weinstein-meyer-symplectic-reduction", "thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group", "thm-quotient-manifold-by-a-closed-lie-subgroup", "prop-tangent-space-of-a-homogeneous-quotient", "prop-exponential-map-is-natural-for-lie-group-homomorphisms", "thm-free-proper-action-quotient-manifold", "cor-local-normal-form-for-submersions", "thm-a-regular-level-set-is-an-embedded-submanifold", "prop-tangent-space-of-a-regular-level-set-is-the-kernel", "def-regular-and-critical-points-and-values"]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.3, printed page 149 (product groups and normal-subgroup extension remark)
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

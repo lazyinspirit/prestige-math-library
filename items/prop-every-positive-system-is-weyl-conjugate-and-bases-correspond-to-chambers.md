@@ -2,7 +2,7 @@
 id: prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers
 kind: proposition
 title: Positive systems, bases, and chambers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, def-positive-system-and-base-of-simple-roots, def-open-and-closed-weyl-chambers, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

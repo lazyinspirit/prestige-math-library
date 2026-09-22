@@ -2,7 +2,7 @@
 id: def-dodd-jensen-covering-and-square-package
 kind: definition
 title: "The Dodd-Jensen covering and square package"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cardinal, def-axiom-of-choice, def-aleph-and-beth-hierarchies]
 justified_by: []
@@ -21,6 +21,8 @@ sources:
     - title: "A. J. Dodd and R. B. Jensen, The covering lemma for K"
       url: "https://doi.org/10.1016/0003-4843(82)90013-4"
       locator: "Covering theorem for the Dodd-Jensen core model, Annals of Mathematical Logic 22 (1982), pp. 1-30"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

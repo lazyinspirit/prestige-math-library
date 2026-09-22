@@ -2,7 +2,7 @@
 id: prop-classical-real-forms-of-the-classical-complex-lie-algebras
 kind: proposition
 title: Classical real forms of the classical complex lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-classification-of-real-semisimple-lie-algebras, prop-classical-types-correspond-to-sl-so-and-sp, thm-real-forms-correspond-to-conjugate-linear-involutions, def-classical-complex-matrix-lie-algebras, def-real-form-of-a-complex-lie-algebra, def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, §§40.2-40.3, printed pp. 186-189"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-fourier-series-on-a-torus-as-peter-weyl
 kind: example
 title: Fourier series on a torus as Peter–Weyl
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-peter-weyl-for-compact-lie-groups, thm-fourier-basis-and-parseval-on-the-n-torus, def-axiom-of-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3 (abelian case: Fourier series)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-cayley-correspondence
 kind: theorem
 title: "Cayley correspondence between self-adjoint operators and unitaries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cayley-transform-of-a-self-adjoint-operator, thm-self-adjointness-range-criterion, thm-hilbert-adjoint-properties, lem-kernel-range-orthogonality-for-hilbert-adjoints, lem-unbounded-adjoint-is-well-defined-and-closed, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-orthogonality-and-orthogonal-complement, def-dense-top, def-countable-choice, def-adjoint-of-a-densely-defined-unbounded-operator, thm-self-adjoint-resolvent-estimate]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Theorem 6.39, Sec. 6.3.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

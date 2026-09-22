@@ -2,7 +2,7 @@
 id: thm-strong-markov-property-of-brownian-motion
 kind: theorem
 title: "Strong Markov property of Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-wiener-measure-on-continuous-path-space, thm-brownian-future-path-markov-property, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-dynkin-pi-lambda, def-measure-kernel-and-probability-kernel, thm-measurability-of-integration-against-a-kernel, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Theorem 6.17"
       url: "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

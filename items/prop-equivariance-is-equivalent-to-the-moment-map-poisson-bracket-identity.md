@@ -2,7 +2,7 @@
 id: prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity
 kind: proposition
 title: For connected groups, equivariance is equivalent to the moment-map Poisson bracket identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, prop-moment-map-components-generate-the-negative-infinitesimal-action, def-poisson-bracket-on-a-symplectic-manifold, prop-adjoint-intertwines-the-exponential-map, prop-adjoint-is-a-smooth-lie-group-representation, thm-the-differential-of-adjoint-is-ad, def-coadjoint-representation-of-a-lie-group, def-symplectic-and-hamiltonian-lie-group-action, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, cor-lipschitz-ode-uniqueness-and-stability-estimate, thm-connectedness-characterisations, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

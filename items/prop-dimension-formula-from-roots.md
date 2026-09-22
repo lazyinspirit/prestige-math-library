@@ -2,7 +2,7 @@
 id: prop-dimension-formula-from-roots
 kind: proposition
 title: Dimension formula from roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-regular-element-and-rank-of-a-complex-lie-algebra, thm-lie-third-fundamental-theorem, prop-adjoint-is-a-smooth-lie-group-representation, thm-the-differential-of-adjoint-is-ad, cor-every-submersion-is-an-open-map, def-countable-choice, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §4 (dimension count)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-all-finite-dimensional-irreducible-sl-two-modules
 kind: example
 title: All irreducible finite-dimensional sl2 modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-special-linear-lie-algebra-sl-two, thm-finite-dimensional-representations-of-sl-two, def-representation-of-a-lie-algebra, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-weight-and-weight-space-of-a-lie-algebra-representation]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

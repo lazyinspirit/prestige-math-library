@@ -2,7 +2,7 @@
 id: ex-the-derivative-of-a-bounded-bilinear-map
 kind: example
 title: The derivative of a bounded bilinear map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-frechet-derivative-between-banach-spaces, def-bounded-bilinear-map, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-product-norms-on-finitely-many-normed-spaces, def-norm-and-normed-space, def-operator-norm]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

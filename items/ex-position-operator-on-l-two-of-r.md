@@ -2,7 +2,7 @@
 id: ex-position-operator-on-l-two-of-r
 kind: example
 title: "Position operator on L^2(R)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-unbounded-multiplication-operator-and-its-domain, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-strongly-continuous-one-parameter-unitary-group, def-axiom-of-choice, def-l-p-space-as-a-quotient-by-null-functions]
@@ -18,6 +18,8 @@ sources:
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
       locator: "Example 7.5 and Example 7.25, pp.29 and 34"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: ex-sign-and-positive-negative-parts-of-a-self-adjoint-operator
 kind: example
 title: Sign and positive negative parts of a self adjoint operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, cor-spectral-projections-and-resolution-of-the-identity, def-absolute-value-of-a-bounded-operator, thm-positive-square-root, lem-spectrum-of-a-self-adjoint-operator-is-real, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, thm-continuous-functional-calculus-properties, def-order-on-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-projection-valued-measure, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §4.1, printed pp.113–115"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

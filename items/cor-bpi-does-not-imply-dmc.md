@@ -2,7 +2,7 @@
 id: cor-bpi-does-not-imply-dmc
 kind: corollary
 title: "BPI does not imply DMC"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-consistency-bpi-without-urysohn, thm-dmc-implies-urysohn-lemma, def-boolean-prime-ideal-principle, def-dependent-multiple-choice-finite-level-tree, def-normal-and-t4-spaces]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Norbert Brunner, Geordnete Läuchli Kontinuen"
       url: "https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf"
       locator: "§3.4(a)-(b), printed pp. 72-73"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

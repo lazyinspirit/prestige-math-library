@@ -2,7 +2,7 @@
 id: ex-matrix-coefficients-of-the-standard-su-two-representation
 kind: example
 title: Matrix coefficients of the standard SU(2) representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-schur-orthogonality-for-compact-lie-groups, def-axiom-of-choice, def-matrix-coefficient-and-character-of-a-compact-group-representation]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §1–§2 (the standard SU(2) example)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

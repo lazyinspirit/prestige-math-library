@@ -2,7 +2,7 @@
 id: thm-coadjoint-orbits-are-symplectic-manifolds
 kind: theorem
 title: Coadjoint orbits are symplectic manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit, lem-kks-form-is-independent-of-lie-algebra-representatives, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-every-orbit-is-an-injectively-immersed-homogeneous-space, def-coadjoint-representation-of-a-lie-group, prop-adjoint-intertwines-the-exponential-map, prop-adjoint-is-a-smooth-lie-group-representation, thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism, prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes, thm-cartans-magic-formula, def-lie-algebra-over-a-field, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

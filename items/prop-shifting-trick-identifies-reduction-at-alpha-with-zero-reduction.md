@@ -2,7 +2,7 @@
 id: prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction
 kind: proposition
 title: The shifting trick identifies reduction at a value with a zero reduction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-coadjoint-orbit-inclusion-is-an-equivariant-moment-map, thm-coadjoint-orbits-are-symplectic-manifolds, prop-product-and-opposite-symplectic-moment-maps, thm-marsden-weinstein-meyer-symplectic-reduction, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-moment-map-and-component-hamiltonian, def-coadjoint-representation-of-a-lie-group, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.4, printed page 150
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

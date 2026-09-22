@@ -2,7 +2,7 @@
 id: thm-continuous-functional-calculus-for-bounded-normal-operators
 kind: theorem
 title: Continuous functional calculus for bounded normal operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-character-space-of-generated-normal-algebra-is-operator-spectrum, thm-maximal-ideal-space-is-compact-hausdorff, thm-commutative-gelfand-naimark, def-axiom-of-choice, def-c-star-algebra-generated-by-a-normal-operator, thm-complex-stone-weierstrass-self-adjoint, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Example 4.9, pp.13–15"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

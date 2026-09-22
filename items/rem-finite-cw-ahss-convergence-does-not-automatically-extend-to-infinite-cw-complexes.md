@@ -2,7 +2,7 @@
 id: rem-finite-cw-ahss-convergence-does-not-automatically-extend-to-infinite-cw-complexes
 kind: remark
 title: Finite-CW AHSS convergence does not automatically extend to infinite CW complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-homological-atiyah-hirzebruch-spectral-sequence]
@@ -14,6 +14,8 @@ sources:
     - title: "James Davis and Paul Kirk, Lecture Notes in Algebraic Topology, §9.1, printed pp. 237–246"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "§9.1, convergence hypotheses, printed pp. 237–246"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

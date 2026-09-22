@@ -2,7 +2,7 @@
 id: thm-moore-spaces-are-subparacompact
 kind: theorem
 title: "Moore spaces are subparacompact"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-discrete-family-and-sigma-bases, def-axiom-of-choice, def-cover-refinement-and-local-finiteness, thm-closure-characterisation-top, def-topological-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Theorem 2.4 and its proof, printed pp. 2-3"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

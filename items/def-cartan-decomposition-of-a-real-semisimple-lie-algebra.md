@@ -2,7 +2,7 @@
 id: def-cartan-decomposition-of-a-real-semisimple-lie-algebra
 kind: definition
 title: Cartan decomposition of a real semisimple Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-involution-of-a-real-semisimple-lie-algebra]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §2, printed pp. 357-364"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

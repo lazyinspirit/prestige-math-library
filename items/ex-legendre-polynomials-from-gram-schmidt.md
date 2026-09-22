@@ -2,7 +2,7 @@
 id: ex-legendre-polynomials-from-gram-schmidt
 kind: example
 title: Legendre polynomials from Gram–Schmidt
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-gram-schmidt-orthonormalisation, thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots, thm-lebesgue-measure-of-a-box-of-every-kind, cor-weierstrass-approximation-on-a-closed-interval, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-countable-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-ftc-second-part, lem-derivative-of-a-power, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, def-real-and-complex-inner-product-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.63, p.87"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

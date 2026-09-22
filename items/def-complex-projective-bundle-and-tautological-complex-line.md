@@ -2,7 +2,7 @@
 id: def-complex-projective-bundle-and-tautological-complex-line
 kind: definition
 title: Complex projective bundle and tautological complex line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-topological-vector-bundle, def-euler-class-by-zero-section-pullback-of-the-thom-class, def-stiefel-space-grassmannian-and-tautological-bundle, def-axiom-of-choice, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, thm-subordinate-partitions-of-unity-exist, def-oriented-real-vector-bundle-and-oriented-frame-bundle]
@@ -21,6 +21,8 @@ sources:
     - title: "Miller, MIT 18.906 Algebraic Topology II, Lectures 34-35"
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Projective-bundle construction and fiber generator, printed pp.123-132"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

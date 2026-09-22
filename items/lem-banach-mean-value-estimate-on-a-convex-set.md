@@ -2,7 +2,7 @@
 id: lem-banach-mean-value-estimate-on-a-convex-set
 kind: lemma
 title: Banach mean value estimate on a convex set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-frechet-derivative-between-banach-spaces, thm-dual-norms-every-vector, cor-mean-value-theorem, def-axiom-of-choice, def-relative-normed-convexity-and-separation, def-norm-and-normed-space, def-dual-space-of-a-normed-space, def-operator-norm, def-metric-topology, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

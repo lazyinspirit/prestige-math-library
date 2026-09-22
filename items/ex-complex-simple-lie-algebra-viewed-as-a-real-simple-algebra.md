@@ -2,7 +2,7 @@
 id: ex-complex-simple-lie-algebra-viewed-as-a-real-simple-algebra
 kind: example
 title: Complex simple lie algebra viewed as a real simple algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-complexification-dichotomy-for-a-real-simple-lie-algebra, def-complexification-of-a-real-lie-algebra, prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero, prop-complexification-preserves-semisimplicity, prop-ideals-and-quotients-of-semisimple-lie-algebras, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, §40.1, printed pp. 206-207"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

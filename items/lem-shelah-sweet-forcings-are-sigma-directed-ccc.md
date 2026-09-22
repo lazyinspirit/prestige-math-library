@@ -2,7 +2,7 @@
 id: lem-shelah-sweet-forcings-are-sigma-directed-ccc
 kind: lemma
 title: Sweet forcings are countable unions of directed sets and ccc
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-sweetness-model, def-kappa-closure-distributivity-and-chain-condition]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Claim 7.3, pp. 34-35"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

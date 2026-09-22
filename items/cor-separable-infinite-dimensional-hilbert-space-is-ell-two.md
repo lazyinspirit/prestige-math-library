@@ -2,7 +2,7 @@
 id: cor-separable-infinite-dimensional-hilbert-space-is-ell-two
 kind: corollary
 title: A separable infinite-dimensional Hilbert space is $\ell^2$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-inner-product-space, def-separable-space, lem-countable-iff-surjection-from-n, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, def-square-summable-family-on-an-arbitrary-index-set, lem-finite-bessel-inequality, lem-pythagorean-theorem-and-finite-orthogonal-sums, def-hilbert-space, thm-monotone-convergence, thm-metric-closure-characterisation, lem-subset-of-countable, def-countable, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-linear-subspace, thm-cauchy-schwarz-in-an-inner-product-space, def-dense-top]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, printed pp.72–80"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-locally-square-integrable-predictable-brownian-integrand
 kind: definition
 title: "Locally square-integrable predictable Brownian integrands"
-status: draft
+status: published
 origin: pipeline
 deps: [def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-stopping-time, def-ito-integral-for-square-integrable-predictable-processes, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
     - title: "Andreas Eberle, Stochastic Analysis, Sections 3.1 and 5.3"
       url: "https://wt.iam.uni-bonn.de/fileadmin/WT/Inhalt/people/Andreas_Eberle/IntroStoAn1516/IntroStochAnalysis2015.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

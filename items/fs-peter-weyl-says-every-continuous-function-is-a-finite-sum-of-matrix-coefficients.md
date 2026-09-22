@@ -2,7 +2,7 @@
 id: fs-peter-weyl-says-every-continuous-function-is-a-finite-sum-of-matrix-coefficients
 kind: false-statement
 title: Peter–Weyl gives density, not finite equality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group, def-axiom-of-choice, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, cor-complete-reducibility-for-compact-lie-groups]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3 (density, not equality, of the matrix-coefficient algebra)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-length-and-longest-element-of-a-finite-weyl-group
 kind: definition
 title: Length and longest Weyl-group element
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-group-of-a-root-system, def-positive-system-and-base-of-simple-roots]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-spectrum-of-a-compact-operator-is-countable-with-only-zero-as-possible-accumulation
 kind: corollary
 title: Spectrum of a compact operator is countable with only zero as possible accumulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-riesz-schauder-spectrum-of-a-compact-operator, def-spectrum-and-resolvent-of-a-bounded-operator, def-compact-linear-operator, thm-countable-union-of-countable, lem-subset-of-countable, cor-archimedean-reciprocal, def-countable, def-countable-choice, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-metric-ball, def-metric-interior-closure-boundary, def-complex-metric-convergence-and-continuity, def-banach-space]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.6, spectrum of a compact operator"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

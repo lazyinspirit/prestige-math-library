@@ -2,7 +2,7 @@
 id: lem-simple-root-integrability-bounds-the-dominant-cyclic-module
 kind: lemma
 title: Simple-root integrability bounds the dominant cyclic module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives, def-dominant-integrable-highest-weight-cyclic-module, lem-highest-weight-modules-have-weights-below-the-top-weight, def-partial-order-on-weights, def-integral-dominant-and-strictly-dominant-weights, prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights, def-fundamental-weights, thm-triangular-decomposition-of-a-complex-semisimple-lie-algebra, thm-poincare-birkhoff-witt, thm-root-sl-two-triple, prop-root-vectors-shift-weight-spaces, thm-finite-dimensional-representations-of-sl-two, prop-weyl-length-equals-positive-root-inversion-number, prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system, thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers, def-open-and-closed-weyl-chambers, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Proof of Theorem 5.16, steps 1–3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

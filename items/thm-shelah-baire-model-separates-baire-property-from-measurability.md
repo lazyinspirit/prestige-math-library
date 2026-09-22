@@ -2,7 +2,7 @@
 id: thm-shelah-baire-model-separates-baire-property-from-measurability
 kind: theorem
 title: Shelah's model separates universal Baire property from universal measurability
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-completeness, thm-forcing-theorem, thm-baire-property-model-equiconsistent-with-zfc, thm-shelah-ch-omega-one-sweet-construction, thm-shelah-inner-model-all-sets-of-reals-have-baire-property, thm-constructibility-is-absolute-and-l-is-minimal, thm-shelah-inner-model-satisfies-zf-and-dependent-choice, def-lc-inaccessible-and-mahlo-cardinals, thm-lc-inaccessible-rank-segments-model-zfc, lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one, thm-raisonnier-filter-is-rapid-from-null-code-measurability, lem-raisonnier-family-is-a-sigma-one-three-filter, thm-rapid-filters-are-not-lebesgue-measurable, def-countable-choice, def-dependent-choice]
 proof_strategy: direct
@@ -12,6 +12,8 @@ provenance:
 sources:
   references:
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Theorem 7.16, Conclusion 7.17 and remarks (3)-(4), pp. 43-44"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

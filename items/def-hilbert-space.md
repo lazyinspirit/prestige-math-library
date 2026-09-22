@@ -2,7 +2,7 @@
 id: def-hilbert-space
 kind: definition
 title: Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-inner-product-space, cor-inner-product-induces-a-norm, def-banach-space, def-complete-metric-space]
@@ -17,6 +17,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
     - title: "Bruce Blackadar, Ilijas Farah and Asaf Karagila, Hilbert spaces without the Countable Axiom of Choice, Definitions 1.0.1 and 2.0.1"
       url: "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

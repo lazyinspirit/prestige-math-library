@@ -2,7 +2,7 @@
 id: thm-spectral-theorem-for-unbounded-self-adjoint-operators
 kind: theorem
 title: "Spectral theorem for unbounded self-adjoint operators (PVM form)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unbounded-integral-against-a-pvm, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-cayley-correspondence, def-cayley-transform-of-a-self-adjoint-operator, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-support-and-uniqueness-of-the-spectral-measure, def-projection-valued-measure, def-regular-borel-measure-on-an-lch-space, def-spectrum-and-resolvent-of-a-bounded-operator, lem-neumann-series, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-bounded-borel-pvm-integral]
@@ -21,6 +21,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Definition 6.40, Theorem 6.41 and Corollary 6.44, Sec. 6.4"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

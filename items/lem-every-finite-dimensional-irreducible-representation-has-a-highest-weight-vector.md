@@ -2,7 +2,7 @@
 id: lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector
 kind: lemma
 title: Every finite-dimensional irreducible module has a highest-weight vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces, prop-root-vectors-shift-weight-spaces, def-partial-order-on-weights, def-highest-weight-vector-and-highest-weight-module, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-hilbert-schmidt-operators-are-compact
 kind: theorem
 title: Hilbert–Schmidt operators are compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-schmidt-operator, def-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-square-summable-family-on-an-arbitrary-index-set, thm-hilbert-space-fourier-expansion, lem-finite-bessel-inequality, def-countable-choice, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, thm-bounded-linear-operator-equivalences, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-compactness-under-continuous-maps, thm-closed-subspace-of-a-compact-space-is-compact, thm-norm-limit-of-compact-operators-is-compact, def-linear-basis, def-linear-combination-and-span, def-countable]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "John Roe, Lectures on Analysis — Lecture 13, Exercise 13.4 after Proposition 13.3, printed p. 68"
       url: "https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/1/4020/files/2017/12/analysis-slides-278829v.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-reduced-and-unreduced-generalized-cohomology-theories-correspond
 kind: proposition
 title: Reduced and unreduced generalized cohomology theories correspond
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-generalized-cohomology-theory, prop-relative-cw-inclusions-are-cofibrations, def-reduced-cone-suspension-and-cofiber-sequence, lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces, thm-five-lemma-for-modules]
@@ -18,6 +18,8 @@ sources:
     - title: "Yiannis Loizides, The Atiyah–Hirzebruch Spectral Sequence, §2, printed pp. 3–4"
       url: https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf
       locator: "§2, reduction of an unreduced theory and the pair sequence, printed pp. 3–4"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

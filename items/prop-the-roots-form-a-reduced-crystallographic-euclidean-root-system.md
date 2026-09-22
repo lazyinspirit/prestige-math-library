@@ -2,7 +2,7 @@
 id: prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system
 kind: proposition
 title: The roots form a reduced crystallographic Euclidean root system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-the-center-is-the-common-kernel-of-all-roots-inside-the-cartan-subalgebra, prop-killing-form-orthogonality-of-root-spaces, def-killing-form-of-a-finite-dimensional-lie-algebra, def-killing-dual-vector-of-a-root, lem-killing-length-of-a-root-is-nonzero, def-coroot-of-a-lie-algebra-root, cor-cartan-integers-are-integral, thm-root-reflections-preserve-the-root-set, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, def-root-reflection-from-a-coroot, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-trace-is-sum-of-eigenvalues, def-toral-and-maximal-toral-subalgebra, def-reduced-crystallographic-euclidean-root-system, def-positive-system-and-base-of-simple-roots, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
       locator: "§§6.6–7.4, especially Theorems 6.45, 7.3, and 7.16"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

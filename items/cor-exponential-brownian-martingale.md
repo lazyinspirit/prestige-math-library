@@ -2,7 +2,7 @@
 id: cor-exponential-brownian-martingale
 kind: corollary
 title: "The exponential Brownian martingale"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ito-formula-one-dimensional, def-continuous-brownian-ito-process, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-c-one-change-of-variables-for-l-one-functions, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

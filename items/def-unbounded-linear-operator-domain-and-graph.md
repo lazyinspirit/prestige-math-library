@@ -2,7 +2,7 @@
 id: def-unbounded-linear-operator-domain-and-graph
 kind: definition
 title: "Unbounded linear operators: domain, graph and extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space, def-linear-map, def-linear-subspace, def-real-and-complex-inner-product-space, def-complete-metric-space]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Definition 6.1, Sec. 6.1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

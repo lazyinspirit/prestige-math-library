@@ -2,7 +2,7 @@
 id: fs-the-general-reduced-dimension-is-dim-m-minus-two-dim-g
 kind: false-statement
 title: The general reduced dimension is dim M minus two dim G
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-dimension-of-a-regular-nonzero-reduced-space, prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, prop-compact-lie-group-actions-are-proper, def-cross-product-in-r3, def-coadjoint-representation-of-a-lie-group, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.4, printed pages 149--150
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-atkinson-in-calkin-algebra-language
 kind: corollary
 title: Atkinson in Calkin algebra language
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-calkin-algebra, thm-atkinson, def-countable-choice, def-axiom-of-choice, def-compact-linear-operator]
@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.1 (quotient algebra language; the Fredholm statement is the library's thm-atkinson, restated algebraically here)"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

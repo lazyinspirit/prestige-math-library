@@ -2,7 +2,7 @@
 id: def-jacobson-radical-and-semisimple-commutative-banach-algebra
 kind: definition
 title: Jacobson radical and semisimple commutative Banach algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-prime-and-maximal-ideals, def-character-and-maximal-ideal-space, thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, def-axiom-of-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

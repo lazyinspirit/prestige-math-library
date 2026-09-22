@@ -2,7 +2,7 @@
 id: lem-planar-brownian-annular-exit-probability
 kind: lemma
 title: "Planar Brownian annular exit probability"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-mean-value-theorem, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-extreme-value-r, thm-heine-borel-r, thm-intermediate-value, lem-gaussian-even-moment-bound-for-brownian-increments, def-d-dimensional-brownian-motion, def-brownian-motion-started-at-x, def-brownian-motion, lem-conditioning-a-known-state-and-independent-noise, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, def-continuous-time-stopping-time, def-continuous-time-filtration-and-all-pairs-martingale, def-martingale-submartingale-and-supermartingale, thm-optional-sampling-for-bounded-stopping-times, thm-integration-by-parts, thm-chain-rule, thm-continuous-partial-derivatives-imply-total-differentiability, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-ftc-second-part, thm-measurability-of-integration-against-a-kernel, def-measure-kernel-and-probability-kernel, def-multivariate-normal-law, def-standard-normal-and-normal-laws, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 9.1.1, Lemma 9.1.3 and formula (9.1.2)"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators
 kind: corollary
 title: Finite rank operators are norm dense in compact Hilbert space operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-singular-value-decomposition-for-compact-operators, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-dimension, def-metric-convergence, def-hilbert-space, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

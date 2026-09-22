@@ -2,7 +2,7 @@
 id: ex-grassmannians-from-unitary-symplectic-reduction
 kind: example
 title: Grassmannians from unitary symplectic reduction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-dimension-of-a-regular-nonzero-reduced-space, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-coadjoint-representation-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-countable-choice, ex-unitary-and-special-unitary-lie-groups, thm-heine-borel-rn]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Homework 20, Grassmannian example, printed page 168
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

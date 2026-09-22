@@ -2,7 +2,7 @@
 id: prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness
 kind: proposition
 title: Regularity of a moment map is equivalent to local freeness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-stabilizers-are-closed-embedded-lie-subgroups, cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups, def-regular-and-critical-points-and-values, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

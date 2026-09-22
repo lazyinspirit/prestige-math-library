@@ -2,7 +2,7 @@
 id: prop-root-systems-of-the-classical-complex-lie-algebras
 kind: proposition
 title: Root systems of the classical complex Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-classical-complex-matrix-lie-algebras, prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras, def-reduced-crystallographic-euclidean-root-system, def-positive-system-and-base-of-simple-roots, def-cartan-matrix-of-a-based-root-system, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-cartan-subalgebra-of-a-lie-algebra, thm-existence-of-each-classified-root-system]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, (2.43) and (2.50) with §1, printed pp. 150 and 155"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

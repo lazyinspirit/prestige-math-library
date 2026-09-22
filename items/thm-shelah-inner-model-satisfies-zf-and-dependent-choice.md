@@ -2,7 +2,7 @@
 id: thm-shelah-inner-model-satisfies-zf-and-dependent-choice
 kind: theorem
 title: The Shelah inner model satisfies ZF and Dependent Choice
-status: draft
+status: published
 origin: pipeline
 deps: [def-shelah-hereditarily-ordinal-sequence-definable-model, lem-shelah-inner-model-is-closed-under-ambient-omega-sequences, def-serial-relation-dependent-choice-principle-over-zf, thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, thm-solovay-inner-model-satisfies-dependent-choice, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Robert M. Solovay, A Model of Set-Theory in Which Every Set of Reals Is Lebesgue Measurable", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf", locator: "Part III, Sections 2.2-2.7, pp. 51-52"}
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Theorem 7.17, p. 44"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

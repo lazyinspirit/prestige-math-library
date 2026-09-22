@@ -2,7 +2,7 @@
 id: def-densely-defined-closed-and-closable-operator
 kind: definition
 title: "Densely defined, closed and closable operators, and cores"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unbounded-linear-operator-domain-and-graph, def-dense-top, def-complete-metric-space, def-hilbert-space, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Sec. 6.1, graph and closability discussion"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

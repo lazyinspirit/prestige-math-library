@@ -2,7 +2,7 @@
 id: cex-the-natural-filtration-need-not-be-right-continuous-before-augmentation
 kind: counterexample
 title: "The raw natural Brownian filtration need not be right-continuous"
-status: draft
+status: published
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, def-germ-sigma-algebra-at-zero, def-wiener-measure-on-continuous-path-space, def-brownian-motion, lem-brownian-transition-semigroup-property, def-standard-normal-and-normal-laws, lem-probability-measure-basic-identities, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.2"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

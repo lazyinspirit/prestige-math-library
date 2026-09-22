@@ -2,7 +2,7 @@
 id: lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension
 kind: lemma
 title: Unitary intertwiners preserve direct-integral fiber dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectral-multiplicity-function-in-the-separable-case, thm-borel-functional-calculus-for-bounded-normal-operators, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integration-against-a-radon-nikodym-derivative, def-axiom-of-choice, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-c-c-is-dense-in-l-p-for-radon-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-riesz-fischer-completeness-of-l-p, def-regular-complex-borel-measure-on-an-lch-space, def-total-variation-of-a-signed-or-complex-measure, thm-hilbert-adjoint-properties, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Andreas Kriegl, Funktionalanalysis, §8.62–8.66, printed pp.197–200"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

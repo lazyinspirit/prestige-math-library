@@ -1,7 +1,7 @@
 ---
 page: orthonormal-bases-parseval-and-fourier-series
 title: Orthonormal Bases, Parseval and Fourier Series
-status: draft
+status: published
 items: [def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-finite-bessel-inequality, def-square-summable-family-on-an-arbitrary-index-set, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, lem-only-countably-many-fourier-coefficients-are-nonzero, lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-hilbert-space-fourier-expansion, thm-existence-of-a-maximal-orthonormal-family, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, cor-separable-infinite-dimensional-hilbert-space-is-ell-two, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-finite-tori-are-compact-hausdorff-character-spaces, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal, cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, thm-trigonometric-system-is-complete-in-l-two-of-the-torus, thm-l-two-fourier-series-converges-in-mean-square, thm-parseval-identity-for-fourier-series, thm-riesz-fischer-for-fourier-coefficients, thm-fourier-basis-and-parseval-on-the-n-torus]
 examples: []
 ---

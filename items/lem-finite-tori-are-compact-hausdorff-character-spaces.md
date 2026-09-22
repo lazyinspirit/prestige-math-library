@@ -2,7 +2,7 @@
 id: lem-finite-tori-are-compact-hausdorff-character-spaces
 kind: lemma
 title: Finite tori are compact Hausdorff spaces separated by characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, thm-quotient-universal-property, thm-sine-and-cosine-parametrize-the-unit-circle, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, thm-compactness-under-continuous-maps, thm-heine-borel-r, thm-finite-products-of-compact-spaces, lem-products-preserve-t0-t1-and-hausdorff, lem-integer-part, def-countable-choice, def-quotient-topology, def-hausdorff-space, def-compact-space, def-integers, def-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-real-numbers]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5, pp.63–64"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

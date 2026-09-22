@@ -2,7 +2,7 @@
 id: thm-brownian-quadratic-variation-along-dyadic-partitions
 kind: theorem
 title: "Brownian quadratic variation on dyadic partitions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-quadratic-variation-along-a-partition-sequence, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, cor-chebyshev-inequality-for-random-variables, cor-first-borel-cantelli-lemma-for-events, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Theorems 2.8.1-2.8.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

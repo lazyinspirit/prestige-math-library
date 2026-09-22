@@ -2,7 +2,7 @@
 id: def-theta-stable-cartan-subalgebra-and-compact-split-parts
 kind: definition
 title: Theta-stable Cartan subalgebras and their compact and split parts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-sylvesters-law-of-inertia]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §6, discussion following Proposition 6.59 and the remarks after Proposition 6.60, printed pp. 386-387"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

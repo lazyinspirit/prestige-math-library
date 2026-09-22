@@ -2,7 +2,7 @@
 id: ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle
 kind: example
 title: Angular momentum as the moment map for rotations of a cotangent bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, ex-orthogonal-and-special-orthogonal-lie-groups, def-cross-product-in-r3, def-coadjoint-representation-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 22, §22.4, printed pages 137--139
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

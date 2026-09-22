@@ -2,7 +2,7 @@
 id: thm-global-iwasawa-decomposition
 kind: theorem
 title: Global iwasawa decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, thm-iwasawa-decomposition-on-the-lie-algebra-level, def-positive-restricted-roots-and-nilpotent-n-algebra, thm-restricted-root-space-decomposition, thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism, thm-lie-subgroup-lie-subalgebra-correspondence, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §4, Lemmas 6.44 and 6.45 and Theorem 6.46 with its proof, printed pp. 373-376"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

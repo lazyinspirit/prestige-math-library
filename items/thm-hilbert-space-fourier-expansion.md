@@ -2,7 +2,7 @@
 id: thm-hilbert-space-fourier-expansion
 kind: theorem
 title: Fourier expansion in a Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-only-countably-many-fourier-coefficients-are-nonzero, def-countable-choice, lem-finite-bessel-inequality, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-cauchy-schwarz-in-an-inner-product-space, def-square-summable-family-on-an-arbitrary-index-set, lem-countable-iff-surjection-from-n, lem-reverse-triangle-inequality-in-a-normed-space, lem-pythagorean-theorem-and-finite-orthogonal-sums]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, printed pp.72–80"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

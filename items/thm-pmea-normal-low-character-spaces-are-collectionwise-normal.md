@@ -2,7 +2,7 @@
 id: thm-pmea-normal-low-character-spaces-are-collectionwise-normal
 kind: theorem
 title: "PMEA makes normal low-character spaces collectionwise normal"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-pmea-three-quarter-separation-estimate, def-normalized-families-and-collectionwise-normality, def-first-countable-top, def-normal-and-t4-spaces, def-discrete-family-and-sigma-bases, def-neighbourhood-top, def-product-measure-extension-axioms-pmea-and-pmea-sigma, def-axiom-of-choice]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Dennis K. Burke, The Normal Moore Space Problem"
       url: "https://dmitripavlov.org/scans/ttu15.pdf"
       locator: "Theorem 5.3 and proof, printed pp. 10-11"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

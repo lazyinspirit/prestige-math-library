@@ -2,7 +2,7 @@
 id: prop-invariant-hamiltonians-descend-to-reduced-hamiltonians
 kind: proposition
 title: Invariant Hamiltonians descend to reduced Hamiltonians
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-free-proper-action-quotient-manifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, thm-noether-conservation-law-for-hamiltonian-actions, thm-marsden-weinstein-meyer-symplectic-reduction, thm-quotient-universal-property, cor-local-normal-form-for-submersions, thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions, thm-unique-maximal-integral-curve-through-each-point, def-poisson-bracket-on-a-symplectic-manifold, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.2, printed pages 147--148
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

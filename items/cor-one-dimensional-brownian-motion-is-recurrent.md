@@ -2,7 +2,7 @@
 id: cor-one-dimensional-brownian-motion-is-recurrent
 kind: corollary
 title: "One-dimensional Brownian motion is recurrent"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-brownian-future-path-markov-property, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, lem-rat-embeds-dense, lem-probability-measure-basic-identities, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.4"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

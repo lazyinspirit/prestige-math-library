@@ -2,7 +2,7 @@
 id: cor-brownian-zero-set-is-uncountable
 kind: corollary
 title: "The Brownian zero set is uncountable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-zero-set, def-perfect-set-r, thm-brownian-zero-set-has-no-isolated-points, lem-brownian-zero-set-has-lebesgue-measure-zero, thm-perfect-set-uncountable-r, lem-rat-embeds-dense, def-axiom-of-choice]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Section 7.4.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-zf-does-not-prove-urysohn-lemma
 kind: corollary
 title: "If ZF is consistent, ZF does not prove Urysohn's lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-consistency-countable-choice-without-urysohn, def-countable-choice, def-normal-and-t4-spaces]
 justified_by: []
@@ -19,6 +19,8 @@ sources:
     - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
       url: "https://doi.org/10.1090/proc/14848"
       locator: "Published erratum to the cited theorem"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

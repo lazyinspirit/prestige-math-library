@@ -2,7 +2,7 @@
 id: def-orthogonality-and-orthogonal-complement
 kind: definition
 title: Orthogonality and the orthogonal complement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-real-and-complex-inner-product-space, def-linear-subspace, cor-inner-product-induces-a-norm]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

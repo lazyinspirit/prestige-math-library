@@ -2,7 +2,7 @@
 id: thm-ito-integral-process-has-a-continuous-martingale-version
 kind: theorem
 title: "The Ito integral process has a continuous martingale version"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-and-linearity-in-predictable-l2, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, thm-doob-lp-maximal-inequality, thm-monotone-convergence-for-the-integral, thm-tower-property-of-conditional-expectation, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, cor-cauchy-schwarz-for-random-variables, lem-rat-embeds-dense, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Proposition 3.2.4"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

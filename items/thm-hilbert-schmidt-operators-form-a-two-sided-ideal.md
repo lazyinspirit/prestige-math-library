@@ -2,7 +2,7 @@
 id: thm-hilbert-schmidt-operators-form-a-two-sided-ideal
 kind: theorem
 title: Hilbert Schmidt operators form a two sided ideal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, thm-cauchy-schwarz-in-an-inner-product-space, thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-finite-bessel-inequality, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-real-and-complex-inner-product-space, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, lem-composition-operator-norm-inequality, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

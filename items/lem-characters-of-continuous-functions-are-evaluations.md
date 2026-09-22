@@ -2,7 +2,7 @@
 id: lem-characters-of-continuous-functions-are-evaluations
 kind: lemma
 title: Characters of continuous functions are evaluations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["thm-characters-on-a-unital-banach-algebra-are-continuous", "thm-urysohn-lemma", "thm-uniform-cauchy-criterion-complex-functions", "thm-complex-plane-is-complete", "thm-compactness-under-continuous-maps", "def-dependent-choice", "def-character-and-maximal-ideal-space", "def-compact-support-c-c-and-c-zero-on-an-lch-space", "thm-a-compact-hausdorff-space-is-regular-and-normal"]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-brownian-paths-are-nowhere-differentiable
 kind: theorem
 title: "Brownian paths are nowhere differentiable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-derivative, def-one-sided-derivatives-of-real-functions, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-first-borel-cantelli-lemma-for-events, lem-rat-embeds-dense, def-axiom-of-choice, lem-probability-measure-basic-identities]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
     - title: "Perla Sousi, Advanced Probability, Theorem 6.41"
       url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

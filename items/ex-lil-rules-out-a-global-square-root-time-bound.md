@@ -2,7 +2,7 @@
 id: ex-lil-rules-out-a-global-square-root-time-bound
 kind: example
 title: "LIL rules out a square-root-time bound"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-brownian-law-of-the-iterated-logarithm-at-zero, def-axiom-of-choice]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 8.5.1"
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

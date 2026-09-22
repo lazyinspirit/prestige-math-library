@@ -2,7 +2,7 @@
 id: thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions
 kind: theorem
 title: "Pincus transfer for BPI and injectively boundable conjunctions"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-jech-sochor-transfer-for-boundable-sentences, def-boolean-prime-ideal-principle, def-boundable-sentence-over-an-atom-set, def-countable-choice, rem-pincus-transfer-interface-and-preservation-limits]
 justified_by: []
@@ -22,6 +22,8 @@ sources:
     - title: "Eleftherios Tachtsis, The Boolean prime ideal theorem does not imply the extension of almost disjoint families to MAD families"
       url: "https://www.impan.pl/shop/en/publication/transaction/download/product/114057"
       locator: "Definitions 5.2–5.3, Fact 5.4, and Theorem 5.5, printed pp. 110–111"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

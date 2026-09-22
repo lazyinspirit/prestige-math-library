@@ -2,7 +2,7 @@
 id: ex-the-peter-weyl-decomposition-of-l-two-su-two
 kind: example
 title: Peter–Weyl decomposition of L2(SU(2))
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-peter-weyl-for-compact-lie-groups, thm-highest-weight-classification-for-a-compact-connected-lie-group, prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights, def-axiom-of-choice, thm-finite-dimensional-representations-of-sl-two, ex-unitary-and-special-unitary-lie-groups, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, prop-exponential-map-is-natural-for-lie-group-homomorphisms, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3 (the SU(2) Peter–Weyl decomposition)"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

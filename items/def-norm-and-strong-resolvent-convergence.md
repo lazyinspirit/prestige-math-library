@@ -2,7 +2,7 @@
 id: def-norm-and-strong-resolvent-convergence
 kind: definition
 title: "Norm and strong resolvent convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-countable-choice, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, thm-self-adjoint-resolvent-estimate, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-operator-norm, def-bounded-linear-operator, def-weak-convergence-of-nets-and-sequences]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Section 6.6, (6.49) and Corollary 6.32, pp.179-180"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

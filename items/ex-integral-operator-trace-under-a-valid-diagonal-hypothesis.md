@@ -2,7 +2,7 @@
 id: ex-integral-operator-trace-under-a-valid-diagonal-hypothesis
 kind: example
 title: Integral operator trace under a valid diagonal hypothesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-hilbert-schmidt-operators-are-compact, thm-l-two-kernels-give-hilbert-schmidt-operators, thm-completion-of-an-inner-product-space-is-hilbert, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, def-trace-class-operator, def-trace-of-a-trace-class-operator, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-tonelli-and-fubini-for-completed-product-measures, thm-compact-implies-complete-and-totally-bounded, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, def-finite-sigma-finite-and-semifinite-measures, def-completed-product-measure, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-counting-measure, def-axiom-of-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-dense-top, def-countable, lem-subset-of-countable, thm-countable-union-of-countable, def-metric-convergence, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-banach-space, def-real-and-complex-inner-product-space, def-compact-linear-operator, def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, def-hilbert-schmidt-operator]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

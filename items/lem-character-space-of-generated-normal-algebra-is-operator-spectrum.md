@@ -2,7 +2,7 @@
 id: lem-character-space-of-generated-normal-algebra-is-operator-spectrum
 kind: lemma
 title: Character space of generated normal algebra is operator spectrum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complex-metric-convergence-and-continuity, def-c-star-algebra-generated-by-a-normal-operator, lem-spectral-permanence-for-unital-c-star-subalgebras, thm-spectrum-as-character-values, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-axiom-of-choice, def-character-and-maximal-ideal-space, thm-maximal-ideal-space-is-compact-hausdorff, thm-bounded-inverse-theorem, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed, def-spectrum-and-resolvent-of-a-bounded-operator, lem-bounded-hilbert-operators-form-a-c-star-algebra]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, Definition 5.69 and Theorem 5.70, printed pp.268–273"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

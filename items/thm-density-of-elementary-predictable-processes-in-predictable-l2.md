@@ -2,7 +2,7 @@
 id: thm-density-of-elementary-predictable-processes-in-predictable-l2
 kind: theorem
 title: "Density of elementary predictable processes in predictable L2"
-status: draft
+status: published
 origin: pipeline
 deps: [def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-dynkin-pi-lambda, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Lemmas 5.21-5.23"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

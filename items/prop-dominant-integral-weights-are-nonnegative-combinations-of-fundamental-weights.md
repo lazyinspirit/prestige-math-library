@@ -2,7 +2,7 @@
 id: prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights
 kind: proposition
 title: Dominant weights in fundamental coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-integral-dominant-and-strictly-dominant-weights, def-fundamental-weights, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-infinitesimal-generator-of-a-symplectic-action-is-symplectic
 kind: proposition
 title: The infinitesimal generator of a symplectic action is symplectic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-symplectic-and-hamiltonian-lie-group-action, def-fundamental-vector-field-of-a-left-action, def-smooth-left-action-of-a-lie-group, def-lie-derivative-of-a-tensor-field, prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes, thm-unique-maximal-integral-curve-through-each-point, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

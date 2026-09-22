@@ -2,7 +2,7 @@
 id: thm-quadratic-covariation-of-brownian-ito-processes
 kind: theorem
 title: "Quadratic covariation of Brownian Ito processes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-quadratic-variation-of-an-ito-integral, def-d-dimensional-brownian-motion, def-brownian-motion, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, thm-martingales-and-martingale-differences-correspond, lem-martingale-differences-are-orthogonal-in-l2, cor-absolute-value-and-powers-of-a-martingale-are-submartingales, thm-doob-lp-maximal-inequality, cor-chebyshev-inequality-for-random-variables, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, cor-cauchy-schwarz-inequality-for-l-two, thm-heine-cantor-r, def-continuity-real, def-convergence-in-probability, def-law-modification-and-indistinguishability-of-processes, def-continuous-time-stopping-time, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-natural-and-usual-augmented-brownian-filtrations]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Section 5.8 and Theorem 5.64"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

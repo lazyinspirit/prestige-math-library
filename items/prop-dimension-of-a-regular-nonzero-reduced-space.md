@@ -2,7 +2,7 @@
 id: prop-dimension-of-a-regular-nonzero-reduced-space
 kind: proposition
 title: The dimension of a regular reduced space at a nonzero value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, def-coadjoint-representation-of-a-lie-group, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.4, printed pages 149--150
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

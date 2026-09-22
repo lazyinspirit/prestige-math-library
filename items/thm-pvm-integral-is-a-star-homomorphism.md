@@ -2,7 +2,7 @@
 id: thm-pvm-integral-is-a-star-homomorphism
 kind: theorem
 title: Pvm integral is a star homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-integral-of-a-simple-function-against-a-pvm, thm-bounded-borel-pvm-integral, thm-dominated-convergence, def-countable-choice, lem-simple-pvm-integral-is-representation-independent, lem-scalar-and-complex-measures-from-a-pvm, def-integration-against-a-signed-or-complex-measure, def-measurable-function-between-measurable-spaces, def-complex-simple-function, thm-hilbert-adjoint-properties, lem-composition-operator-norm-inequality, def-projection-valued-measure]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Proposition 5.3, pp.17–18"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

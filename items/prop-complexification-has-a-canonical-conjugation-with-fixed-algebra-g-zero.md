@@ -2,7 +2,7 @@
 id: prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero
 kind: proposition
 title: Complexification has a canonical conjugation with fixed algebra g zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-complexification-of-a-real-lie-algebra, def-lie-algebra-over-a-field, def-tensor-product-of-modules-by-generators-and-relations, thm-universal-property-of-module-tensor-products]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 39, §39.2, printed pp. 199-201"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-rational-transfer-identifies-a-finite-regular-cover-with-deck-invariants
 kind: lemma
 title: Rational transfer identifies a finite regular cover with deck invariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: ["def-covering-map-and-evenly-covered-neighbourhoods", "def-deck-transformation-and-deck-group", "def-regular-covering", "thm-uniqueness-of-lifts-from-a-connected-space", "thm-covering-space-lifting-criterion", "thm-path-connected-implies-connected", "thm-convex-subsets-have-trivial-fundamental-group", "def-standard-topological-simplex-and-its-affine-face-maps", "def-singular-simplex-and-singular-chain-group-with-coefficients", "def-singular-cochain-complex-with-coefficients", "def-singular-cohomology-with-coefficients", "prop-singular-cohomology-is-contravariantly-functorial", "prop-cup-product-is-natural-unital-and-associative", "def-axiom-of-choice"]
@@ -16,6 +16,8 @@ sources:
     - title: "Hatcher, Algebraic Topology, section 3.G"
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: "Transfer homomorphisms, printed pp.321-326"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-characters-on-a-unital-banach-algebra-are-continuous
 kind: theorem
 title: Characters on a unital Banach algebra are continuous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-unital-banach-algebra, def-character-and-maximal-ideal-space, def-spectrum-and-resolvent-set-in-a-banach-algebra, lem-neumann-series, def-invertible-element-and-general-linear-group-of-a-banach-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

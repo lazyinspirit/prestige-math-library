@@ -2,7 +2,7 @@
 id: thm-every-real-cartan-subalgebra-is-conjugate-to-a-theta-stable-one
 kind: theorem
 title: Every real Cartan subalgebra is conjugate to a theta-stable one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-theta-stable-cartan-subalgebra-and-compact-split-parts, thm-conjugacy-of-cartan-involutions, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, def-axiom-of-choice, thm-existence-of-a-cartan-involution, thm-existence-of-a-compact-real-form, prop-complexification-preserves-semisimplicity, def-complexification-of-a-real-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-self-adjoint-and-normal-endomorphism, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-normalizer-of-a-lie-subalgebra, def-lower-central-series-and-nilpotent-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 40, Proposition 40.3 and its proof, printed pp. 186-187"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

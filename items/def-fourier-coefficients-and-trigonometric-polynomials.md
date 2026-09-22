@@ -2,7 +2,7 @@
 id: def-fourier-coefficients-and-trigonometric-polynomials
 kind: definition
 title: Fourier coefficients and trigonometric polynomials on the torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-countable-choice, def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-linearity-of-the-lebesgue-integral-on-l-one, lem-complex-conjugation-and-modulus-laws, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

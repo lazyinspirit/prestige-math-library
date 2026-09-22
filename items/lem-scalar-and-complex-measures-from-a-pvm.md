@@ -2,7 +2,7 @@
 id: lem-scalar-and-complex-measures-from-a-pvm
 kind: lemma
 title: Scalar and complex measures from a pvm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-projection-valued-measure, thm-cauchy-schwarz-in-an-inner-product-space, def-complex-measure, def-measure, def-total-variation-of-a-signed-or-complex-measure, def-real-and-complex-inner-product-space, def-hilbert-space-adjoint, lem-orthogonal-projection-is-linear-self-adjoint-contractive, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Definition 5.1 and Proposition 5.3, pp.15–18"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

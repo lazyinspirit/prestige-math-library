@@ -2,7 +2,7 @@
 id: lem-homological-ahss-exact-couple-from-the-skeletal-filtration
 kind: lemma
 title: Homological AHSS exact couple from the skeletal filtration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-generalized-homology-theory, def-coefficient-groups-of-a-generalized-homology-theory, def-exact-couple, prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, def-incidence-number-of-two-cw-cells, def-oriented-cellular-chain-group, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces, prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs, prop-relative-cw-inclusions-are-cofibrations, lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient]
@@ -15,6 +15,8 @@ sources:
     - title: "Davis–Kirk, Lecture Notes in Algebraic Topology, §8.8 and Theorem 9.6, printed pp. 227–246"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "§8.8 and Theorem 9.6, printed pp. 227–246"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

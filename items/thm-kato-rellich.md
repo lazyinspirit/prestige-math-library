@@ -2,7 +2,7 @@
 id: thm-kato-rellich
 kind: theorem
 title: "Kato-Rellich theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-relative-boundedness-with-respect-to-an-operator, thm-self-adjoint-resolvent-estimate, thm-self-adjointness-range-criterion, lem-neumann-series, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-unbounded-linear-operator-domain-and-graph, thm-unbounded-borel-functional-calculus, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-projection-valued-measure, thm-bounded-borel-pvm-integral, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
       locator: "Theorem 6.4 with complete proof, pp.158-160"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

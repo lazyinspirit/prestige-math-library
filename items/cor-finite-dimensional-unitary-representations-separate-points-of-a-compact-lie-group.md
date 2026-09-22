@@ -2,7 +2,7 @@
 id: cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group
 kind: corollary
 title: Finite-dimensional representations separate points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group, def-axiom-of-choice, def-lie-group, cor-a-compact-hausdorff-space-is-tychonoff, lem-ac-supplies-sequential-choices-for-probability-constructions]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §3, Corollary 4.22"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

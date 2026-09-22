@@ -2,7 +2,7 @@
 id: rem-gerlits-nagy-remains-selection-principle-theory
 kind: remark
 title: Gerlits Nagy remains selection principle theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 proved_here: false
@@ -13,6 +13,10 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  sources_checked:
+    date: 2026-09-22
+    scope: citations
+    by: owner-audit
   precheck: n/a
 sources:
   references:

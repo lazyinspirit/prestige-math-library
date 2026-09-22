@@ -2,7 +2,7 @@
 id: cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams
 kind: corollary
 title: Semisimple algebras and disjoint unions of diagrams
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-cartan-killing-classification-of-complex-simple-lie-algebras, thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals, prop-ideals-and-quotients-of-semisimple-lie-algebras, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, §11, consequences of the classification, printed pp. 202-203"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-weyl-jacobian-on-a-maximal-torus
 kind: definition
 title: Weyl Jacobian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots]
@@ -17,6 +17,8 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §6 and Chapter VIII §1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

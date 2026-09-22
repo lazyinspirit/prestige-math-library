@@ -1,7 +1,7 @@
 ---
 page: hilbert-space-geometry-and-riesz-representation
 title: Hilbert Space Geometry and Riesz Representation
-status: draft
+status: published
 items: [def-real-and-complex-inner-product-space, thm-cauchy-schwarz-in-an-inner-product-space, cor-inner-product-induces-a-norm, thm-parallelogram-law, thm-jordan-von-neumann-polarization, def-hilbert-space, lem-inner-product-is-jointly-continuous, thm-completion-of-an-inner-product-space-is-hilbert, def-orthogonality-and-orthogonal-complement, lem-pythagorean-theorem-and-finite-orthogonal-sums, lem-orthogonal-complement-is-closed, lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy, thm-projection-onto-a-nonempty-closed-convex-set, thm-hilbert-projection-variational-characterization, thm-orthogonal-decomposition-by-a-closed-subspace, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, thm-double-orthogonal-complement-is-closure, thm-riesz-representation-for-hilbert-space, cor-hilbert-spaces-are-reflexive, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, def-self-adjoint-positive-unitary-and-normal-operator, lem-kernel-range-orthogonality-for-hilbert-adjoints, rem-l2-projection-agreement, rem-lax-milgram-owned-by-pde]
 examples: []
 ---

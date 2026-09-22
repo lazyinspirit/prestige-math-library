@@ -2,7 +2,7 @@
 id: def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group
 kind: definition
 title: Left and right regular representations on L2(G)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-normalized-haar-measure-on-a-compact-lie-group, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-continuous-and-unitary-representation-of-a-compact-lie-group, def-axiom-of-choice, thm-c-c-is-dense-in-l-p-for-radon-measures]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

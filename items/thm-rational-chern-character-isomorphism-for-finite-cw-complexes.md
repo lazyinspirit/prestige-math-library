@@ -2,7 +2,7 @@
 id: thm-rational-chern-character-isomorphism-for-finite-cw-complexes
 kind: theorem
 title: Rational Chern character isomorphism for finite CW complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-chern-character-induces-the-rational-isomorphism-on-ahss-e-two, lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations, thm-spectral-sequence-comparison-theorem, prop-ahss-collapse-determines-only-the-associated-graded-object, cor-complex-k-theory-ahss, thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, thm-chern-character-is-a-natural-ring-homomorphism-on-k-zero, def-graded-chern-character-by-suspension-and-bott-periodicity, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
     - title: "May, A Concise Course in Algebraic Topology, Chapter 24 section 4"
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Chern character isomorphism theorem, printed pp.211-212"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-simple-pvm-integral-is-representation-independent
 kind: lemma
 title: Simple pvm integral is representation independent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-integral-of-a-simple-function-against-a-pvm, lem-scalar-and-complex-measures-from-a-pvm, def-simple-integral-against-a-signed-or-complex-measure, def-complex-simple-function, def-projection-valued-measure, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, def-countable-choice, def-operator-norm, def-total-variation-of-a-signed-or-complex-measure]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Proposition 5.3, pp.17–18"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

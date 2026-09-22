@@ -1,7 +1,7 @@
 ---
 page: root-systems-dynkin-diagrams-and-cartan-killing-classification
 title: Root Systems, Dynkin Diagrams, and the Cartan-Killing Classification
-status: draft
+status: published
 items:
   - def-reduced-crystallographic-euclidean-root-system
   - def-rank-and-isomorphism-of-root-systems

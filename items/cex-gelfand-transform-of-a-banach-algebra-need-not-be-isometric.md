@@ -2,7 +2,7 @@
 id: cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric
 kind: counterexample
 title: Gelfand transform of a Banach algebra need not be isometric
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-gelfand-transform, thm-characters-on-a-unital-banach-algebra-are-continuous]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

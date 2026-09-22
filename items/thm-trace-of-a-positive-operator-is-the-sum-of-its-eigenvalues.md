@@ -2,7 +2,7 @@
 id: thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues
 kind: theorem
 title: Trace of a positive operator is the sum of its eigenvalues
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-trace-is-absolutely-convergent-and-basis-independent, lem-nuclear-series-characterizes-trace-norm, thm-singular-value-decomposition-for-compact-operators, def-absolute-value-and-singular-values-of-a-compact-operator, lem-positive-square-root-of-a-compact-positive-operator, thm-spectral-theorem-for-compact-self-adjoint-operators, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, def-self-adjoint-positive-unitary-and-normal-operator, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-trace-class-operator, thm-hilbert-adjoint-properties, def-hilbert-space-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, def-real-and-complex-inner-product-space, def-hilbert-space, def-metric-convergence, def-countable-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
     - title: "Anthony W. Knapp, Advanced Real Analysis — Chapter II, §5"
       url: "https://www.math.stonybrook.edu/~aknapp/download/a2-realanal-inside.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

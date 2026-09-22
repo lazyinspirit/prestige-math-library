@@ -2,7 +2,7 @@
 id: thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group
 kind: theorem
 title: Global Cartan decomposition for a connected finite center semisimple Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-existence-of-a-cartan-involution, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero, prop-exponential-map-is-natural-for-lie-group-homomorphisms, thm-one-parameter-subgroups-are-exactly-exponentials, thm-cartans-closed-subgroup-theorem, thm-lie-subgroup-lie-subalgebra-correspondence, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, def-conjugation-and-the-adjoint-representation-of-a-lie-group, prop-adjoint-is-a-smooth-lie-group-representation, thm-the-differential-of-adjoint-is-ad, prop-adjoint-exponential-identity, prop-adjoint-intertwines-the-exponential-map, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, prop-trace-forms-are-symmetric-and-invariant, def-self-adjoint-and-normal-endomorphism, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 43, §43.1, printed pp. 217-218"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

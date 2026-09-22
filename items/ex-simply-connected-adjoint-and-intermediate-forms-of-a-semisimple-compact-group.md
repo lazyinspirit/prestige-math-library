@@ -2,7 +2,7 @@
 id: ex-simply-connected-adjoint-and-intermediate-forms-of-a-semisimple-compact-group
 kind: example
 title: Simply connected, adjoint, and intermediate compact forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-central-quotients-correspond-to-intermediate-character-lattices, def-axiom-of-choice, prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group]
@@ -15,6 +15,8 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix V §V.2"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

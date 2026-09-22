@@ -2,7 +2,7 @@
 id: ex-weyl-integration-formula-for-su-two
 kind: example
 title: Weyl integration for SU(2)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-weyl-integration-formula, ex-maximal-tori-and-weyl-groups-of-u-n-and-su-n, def-axiom-of-choice, def-weyl-jacobian-on-a-maximal-torus]
@@ -18,6 +18,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VIII §1"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

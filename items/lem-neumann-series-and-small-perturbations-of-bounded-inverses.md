@@ -2,7 +2,7 @@
 id: lem-neumann-series-and-small-perturbations-of-bounded-inverses
 kind: lemma
 title: Neumann series and small perturbations of bounded inverses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-banach-space, def-bounded-linear-operator, def-operator-norm, def-space-of-bounded-linear-operators, thm-bounded-operator-space-is-banach, thm-banach-series-criterion, lem-composition-operator-norm-inequality, thm-geometric-series, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, def-metric-convergence]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: rem-ito-versus-stratonovich-boundary
 kind: remark
 title: "Ito versus Stratonovich boundary"
-status: draft
+status: published
 origin: pipeline
 deps: [def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, thm-localized-ito-integral, def-quadratic-covariation-of-brownian-ito-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Remark

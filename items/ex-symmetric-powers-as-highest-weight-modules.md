@@ -2,7 +2,7 @@
 id: ex-symmetric-powers-as-highest-weight-modules
 kind: example
 title: Symmetric powers as highest-weight modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [ex-standard-and-dual-representations-of-sl-n-by-highest-weights, prop-root-systems-of-the-classical-complex-lie-algebras, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, thm-poincare-birkhoff-witt, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter V §1 examples and Chapter I §3"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

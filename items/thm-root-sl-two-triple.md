@@ -2,7 +2,7 @@
 id: thm-root-sl-two-triple
 kind: theorem
 title: The root sl_2 triple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-special-linear-lie-algebra-sl-two, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, prop-killing-form-orthogonality-of-root-spaces, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Lecture 19, Lemma 19.16(ii)"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

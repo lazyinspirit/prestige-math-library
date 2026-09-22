@@ -2,7 +2,7 @@
 id: ex-realification-of-a-complex-line-compares-c-one-w-two-and-euler
 kind: example
 title: Realification of a complex line compares c-one, w-two, and Euler
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-top-chern-class-equals-euler-class-of-the-underlying-real-bundle, thm-mod-two-reduction-of-chern-classes, prop-first-stiefel-whitney-class-classifies-orientability, lem-complex-orientation-of-underlying-real-bundles, def-chern-classes-from-the-projective-bundle-relation, def-axiom-of-choice]
@@ -15,6 +15,8 @@ sources:
     - title: "Milnor and Stasheff, Characteristic Classes, sections 14-15"
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "Complex line bundles and their underlying real bundles, printed pp.167-175"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

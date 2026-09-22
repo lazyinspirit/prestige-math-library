@@ -2,7 +2,7 @@
 id: thm-quadratic-variation-of-an-ito-integral
 kind: theorem
 title: "Quadratic variation of an Ito integral"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-doob-maximal-bound-for-the-ito-integral, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-lp-maximal-inequality, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-quadratic-variation-along-a-partition-sequence, def-partition-and-refinement, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, cor-chebyshev-inequality-for-random-variables, thm-heine-cantor-r, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
@@ -15,6 +15,8 @@ sources:
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Theorem 3.2.6"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

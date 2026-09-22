@@ -2,7 +2,7 @@
 id: def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit
 kind: definition
 title: The Kirillov--Kostant--Souriau form on a coadjoint orbit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-coadjoint-representation-of-a-lie-group, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-every-orbit-is-an-injectively-immersed-homogeneous-space, def-fundamental-vector-field-of-a-left-action, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

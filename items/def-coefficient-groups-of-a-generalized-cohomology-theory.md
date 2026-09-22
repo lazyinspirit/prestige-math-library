@@ -2,7 +2,7 @@
 id: def-coefficient-groups-of-a-generalized-cohomology-theory
 kind: definition
 title: Coefficient groups of a generalized cohomology theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-generalized-cohomology-theory]
@@ -14,6 +14,8 @@ sources:
     - title: "Yiannis Loizides, The Atiyah–Hirzebruch Spectral Sequence, §2, printed p. 3"
       url: https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf
       locator: "§2, coefficient convention, printed p. 3"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-serre-presentation-theorem
 kind: theorem
 title: Serre presentation theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-serre-lie-algebra-of-a-finite-type-cartan-matrix, thm-poincare-birkhoff-witt, thm-finite-dimensional-representations-of-sl-two, thm-root-sl-two-triple, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-axiom-of-choice, prop-dimension-formula-from-roots, def-cartan-matrix-of-a-based-root-system, prop-finite-type-cartan-matrix-properties, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-reduced-crystallographic-euclidean-root-system, def-cartan-subalgebra-of-a-lie-algebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-universal-property-of-the-free-lie-algebra, thm-universal-property-of-the-universal-enveloping-algebra]
@@ -19,6 +19,8 @@ sources:
       locator: "Chapter II, §9, Theorem 2.98 and Lemma 2.99, printed pp. 191-196"
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

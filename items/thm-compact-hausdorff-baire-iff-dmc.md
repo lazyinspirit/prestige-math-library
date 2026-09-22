@@ -2,7 +2,7 @@
 id: thm-compact-hausdorff-baire-iff-dmc
 kind: theorem
 title: "Compact Hausdorff Baire is equivalent to DMC"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dmc-implies-compact-hausdorff-baire, thm-compact-hausdorff-baire-implies-dmc, def-dependent-multiple-choice-finite-level-tree, def-baire-space, def-compact-space, def-hausdorff-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "David H. Fremlin, Dependent multiple choice and Baire's theorem (following Fossy and Morillon)"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/n04j06.ps"
       locator: "Proposition 2 and Theorem 4, printed pp. 1-3"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

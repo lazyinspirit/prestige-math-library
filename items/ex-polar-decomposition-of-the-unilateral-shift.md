@@ -2,7 +2,7 @@
 id: ex-polar-decomposition-of-the-unilateral-shift
 kind: example
 title: Polar decomposition of the unilateral shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-polar-decomposition-for-bounded-operators, def-axiom-of-choice, def-square-summable-family-on-an-arbitrary-index-set, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, def-isometry-coisometry-and-partial-isometry, thm-hilbert-space-fourier-expansion, def-orthogonality-and-orthogonal-complement, def-hilbert-orthogonal-projection, def-absolute-value-of-a-bounded-operator, thm-hilbert-adjoint-properties]
@@ -16,6 +16,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.3, printed pp.235–245"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

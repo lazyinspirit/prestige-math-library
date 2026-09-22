@@ -2,7 +2,7 @@
 id: def-q-sets-and-heath-moore-space-interface
 kind: definition
 title: "Q-sets and Bing's tangent-disk Moore-space interface"
-status: draft
+status: published
 origin: pipeline
 deps: [def-moore-spaces-and-developments, def-normal-and-t4-spaces, def-subspace-topology-top, def-topological-space, def-open-and-closed-in-r, def-metric-ball, def-metric-space, def-neighbourhood-top, def-topology-basis-subbasis]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
     - title: "R. H. Bing, Metrization of topological spaces"
       url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf"
       locator: "Example E, printed p. 183"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

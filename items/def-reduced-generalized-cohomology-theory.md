@@ -2,7 +2,7 @@
 id: def-reduced-generalized-cohomology-theory
 kind: definition
 title: Reduced generalized cohomology theory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-cone-suspension-and-cofiber-sequence]
@@ -17,6 +17,8 @@ sources:
     - title: "James Davis and Paul Kirk, Lecture Notes in Algebraic Topology, §8.8, printed pp. 227–233"
       url: https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf
       locator: "§8.8, reduced and unreduced generalized (co)homology theories, printed pp. 227–233"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

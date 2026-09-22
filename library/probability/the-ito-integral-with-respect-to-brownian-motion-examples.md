@@ -1,7 +1,7 @@
 ---
 page: the-ito-integral-with-respect-to-brownian-motion-examples
 title: The Ito Integral with Respect to Brownian Motion — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-integral-of-a-deterministic-step-function-against-brownian-motion

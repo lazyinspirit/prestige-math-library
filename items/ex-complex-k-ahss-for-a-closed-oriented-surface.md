@@ -2,7 +2,7 @@
 id: ex-complex-k-ahss-for-a-closed-oriented-surface
 kind: example
 title: Complex K-AHSS for a closed oriented surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [cor-complex-k-theory-ahss, prop-ahss-collapse-determines-only-the-associated-graded-object, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
     - title: "Caleb Ji, The Atiyah–Hirzebruch Spectral Sequence, §3.2.1, printed pp. 10–11"
       url: https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf
       locator: "§3.2.1, surface computation, printed pp. 10–11"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

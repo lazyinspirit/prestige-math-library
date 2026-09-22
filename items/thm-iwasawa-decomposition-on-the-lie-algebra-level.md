@@ -2,7 +2,7 @@
 id: thm-iwasawa-decomposition-on-the-lie-algebra-level
 kind: theorem
 title: Iwasawa decomposition on the lie algebra level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-restricted-root-space-decomposition, def-positive-restricted-roots-and-nilpotent-n-algebra, def-restricted-root-and-restricted-root-space, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter VI, §4, Proposition 6.43 and its proof, printed pp. 373-374"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

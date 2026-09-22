@@ -2,7 +2,7 @@
 id: cor-maximal-compact-subgroups-exist-and-are-conjugate-in-a-connected-finite-center-semisimple-lie-group
 kind: corollary
 title: Maximal compact subgroups exist and are conjugate in a connected finite center semisimple Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-axiom-of-choice, thm-quotient-manifold-by-a-closed-lie-subgroup, cor-local-normal-form-for-submersions, def-cartan-involution-of-a-real-semisimple-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h, def-left-maurer-cartan-form, thm-maurer-cartan-structure-equation, thm-the-exterior-derivative-commutes-with-pullback, thm-fundamental-theorem-of-riemannian-geometry, def-levi-civita-connection, def-curvature-of-an-affine-connection, thm-pullback-connection-is-well-defined-and-functorial, prop-exponential-scales-one-parameter-subgroups, thm-existence-uniqueness-and-smooth-dependence-of-geodesics, lem-local-isometries-send-geodesics-to-geodesics, thm-hopf-rinow, def-riemannian-distance-on-a-connected-manifold, thm-riemannian-distance-is-a-metric, thm-first-variation-formula-for-energy, thm-parallel-transport-is-a-linear-isomorphism, prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume]
@@ -22,6 +22,8 @@ sources:
       locator: "Theorem 2.4.1, p. 29, fixed-point principle; the radius minimum and convexity are proved locally here"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

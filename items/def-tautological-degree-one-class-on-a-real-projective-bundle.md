@@ -2,7 +2,7 @@
 id: def-tautological-degree-one-class-on-a-real-projective-bundle
 kind: definition
 title: Tautological degree-one class on a real projective bundle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-real-projective-bundle-and-tautological-line", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes
       url: https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Lecture 34 projective-bundle relation, printed pp.123–126"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

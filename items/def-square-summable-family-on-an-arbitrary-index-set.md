@@ -2,7 +2,7 @@
 id: def-square-summable-family-on-an-arbitrary-index-set
 kind: definition
 title: Square-summable families on an arbitrary index set and the space $\ell^2(I)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-directed-set-and-net, def-net-convergence-and-cluster-point, thm-hausdorff-iff-net-limits-are-unique, def-extended-reals, lem-extended-reals-complete, def-finite-sum, def-complete-ordered-field, lem-sup-epsilon, def-complex-conjugate-real-imaginary-part-and-modulus, def-real-numbers, def-finite-sum-in-a-commutative-monoid, lem-finite-sum-reindexing-and-fubini, lem-complex-conjugation-and-modulus-laws, thm-metric-hausdorff-separation, def-complex-metric-convergence-and-continuity, thm-of-square-roots]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

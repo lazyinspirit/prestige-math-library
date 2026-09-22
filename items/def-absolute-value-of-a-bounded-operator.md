@@ -2,7 +2,7 @@
 id: def-absolute-value-of-a-bounded-operator
 kind: definition
 title: Absolute value of a bounded operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-positive-square-root, thm-hilbert-adjoint-properties, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-operator-norm]
@@ -15,6 +15,8 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2017_09_30%2112_00_39_PM.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, §5.3, printed pp.235–245"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

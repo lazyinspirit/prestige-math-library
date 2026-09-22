@@ -2,7 +2,7 @@
 id: cor-rank-of-a-compact-connected-lie-group-is-well-defined
 kind: corollary
 title: Rank is well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-maximal-tori-exist-in-compact-lie-groups, thm-conjugacy-of-maximal-tori, def-axiom-of-choice, def-conjugation-and-the-adjoint-representation-of-a-lie-group, def-torus-and-maximal-torus-in-a-compact-lie-group]
@@ -15,6 +15,8 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §5, consequence of Theorem 4.34"
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

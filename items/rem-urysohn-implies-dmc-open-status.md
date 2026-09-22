@@ -2,7 +2,7 @@
 id: rem-urysohn-implies-dmc-open-status
 kind: remark
 title: "The converse from Urysohn's lemma to DMC is open"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-dmc-implies-urysohn-lemma, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, cor-brunner-models-also-refute-tietze-extension, cor-zf-does-not-prove-urysohn-lemma]
 justified_by: []
@@ -18,6 +18,8 @@ sources:
     - title: "Norbert Brunner, Geordnete Läuchli Kontinuen"
       url: "https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf"
       locator: "§3.4(a)-(b), printed pp. 72-73"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-weyl-groups-of-b-n-and-d-n-as-signed-permutation-groups
 kind: example
 title: Weyl groups of B_n and D_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-weyl-group-of-a-root-system, prop-root-systems-of-the-classical-complex-lie-algebras]
@@ -16,6 +16,8 @@ sources:
       locator: "Chapter II, §6 and Problem 15, printed pp. 162-170 and 205"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

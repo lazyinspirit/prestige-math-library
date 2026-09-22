@@ -2,7 +2,7 @@
 id: thm-stone-resolvent-formula-for-spectral-projections
 kind: theorem
 title: Stone resolvent formula for spectral projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, thm-pvm-integral-is-a-star-homomorphism, thm-bounded-borel-pvm-integral, thm-bounded-linear-maps-commute-with-bochner-integration, def-bochner-integrable-function, thm-bochner-integrability-criterion, lem-spectrum-of-a-self-adjoint-operator-is-real, def-spectrum-and-resolvent-of-a-bounded-operator, def-projection-valued-measure, def-axiom-of-choice]
@@ -16,6 +16,8 @@ sources:
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, Lemma 5.79, printed pp.285–288"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

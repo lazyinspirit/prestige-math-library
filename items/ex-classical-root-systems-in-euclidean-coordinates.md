@@ -2,7 +2,7 @@
 id: ex-classical-root-systems-in-euclidean-coordinates
 kind: example
 title: Classical root systems in coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-reduced-crystallographic-euclidean-root-system, prop-root-systems-of-the-classical-complex-lie-algebras]
@@ -19,6 +19,8 @@ sources:
       locator: "Lecture 21, Example 21.18"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

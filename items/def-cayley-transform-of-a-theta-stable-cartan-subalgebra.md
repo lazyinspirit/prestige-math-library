@@ -2,7 +2,7 @@
 id: def-cayley-transform-of-a-theta-stable-cartan-subalgebra
 kind: definition
 title: Cayley transform of a theta-stable Cartan subalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-complexification-of-a-real-lie-algebra, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
       url: "https://math.mit.edu/~etingof/lnlg.pdf"
       locator: "Lecture 40, §40.1, and Lecture 41, §41.1, printed pp. 185-191"
 landmark: false
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

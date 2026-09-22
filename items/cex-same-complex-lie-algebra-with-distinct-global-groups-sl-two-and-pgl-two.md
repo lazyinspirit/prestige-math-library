@@ -2,7 +2,7 @@
 id: cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two
 kind: counterexample
 title: SL_2 and PGL_2 have the same Lie algebra but differ globally
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-countable-choice, def-lie-bracket-on-the-tangent-space-of-a-lie-group, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group, thm-mobius-group-and-projective-linear-identification, def-invertible-matrix-and-general-linear-group, def-special-linear-lie-algebra-sl-two]
@@ -19,6 +19,8 @@ sources:
       locator: "§3.8 on connected groups with the same Lie algebra, printed pp. 39-45"
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: def-discrete-and-essential-spectrum-of-a-self-adjoint-operator
 kind: definition
 title: "Discrete and essential spectrum of a self-adjoint operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-projection-valued-measure, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-axiom-of-choice]
@@ -18,6 +18,8 @@ sources:
     - title: "Theo Buehler and Dietmar A. Salamon, Functional Analysis"
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
       locator: "Chapter 6, Definition 6.13 (compact resolvent), Sec. 6.1.2"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

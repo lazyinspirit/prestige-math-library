@@ -2,7 +2,7 @@
 id: def-numerical-range-and-numerical-radius
 kind: definition
 title: Numerical range and numerical radius
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, def-operator-norm, def-real-and-complex-inner-product-space]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

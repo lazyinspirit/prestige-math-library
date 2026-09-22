@@ -1,7 +1,7 @@
 ---
 page: cartan-subalgebras-and-root-space-decompositions
 title: Cartan Subalgebras and Root Space Decompositions
-status: draft
+status: published
 items:
   - rem-additive-jordan-chevalley-is-supplied-by-x-two
   - rem-jordan-chevalley-parts-agree-under-the-adjoint-representation

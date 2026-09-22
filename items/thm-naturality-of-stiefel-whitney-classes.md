@@ -2,7 +2,7 @@
 id: thm-naturality-of-stiefel-whitney-classes
 kind: theorem
 title: Naturality of Stiefel–Whitney classes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-mod-two-real-projective-bundle-theorem", "def-real-projective-bundle-and-tautological-line", "def-tautological-degree-one-class-on-a-real-projective-bundle", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism", "prop-cup-product-is-natural-unital-and-associative", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -17,6 +17,8 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§8 axioms (1)–(3), printed pp.97–110"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

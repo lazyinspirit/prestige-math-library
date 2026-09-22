@@ -2,7 +2,7 @@
 id: thm-shelah-inner-model-all-sets-of-reals-have-baire-property
 kind: theorem
 title: Every real set in the Shelah inner model has the Baire property
-status: draft
+status: published
 origin: pipeline
 deps: [thm-shelah-inner-model-satisfies-zf-and-dependent-choice, lem-shelah-homogeneous-truth-has-baire-representatives, lem-solovay-borel-code-and-regularity-absoluteness, def-well-founded-borel-evaluation-codes, lem-cantor-and-baire-sequence-coding, cor-baire-sequence-space-is-homeomorphic-to-the-irrationals, thm-rationals-countable, def-property-of-baire-for-subsets, def-shelah-hereditarily-ordinal-sequence-definable-model]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - {title: "Robert M. Solovay, A Model of Set-Theory in Which Every Set of Reals Is Lebesgue Measurable", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf", locator: "Part III, Sections 2.8-2.10, p. 52"}
     - {title: "Saharon Shelah, Can You Take Solovay's Inaccessible Away?", url: "https://shelah.logic.at/files/95333/176.pdf", locator: "Theorem 7.16 and 7.17(3), pp. 43-44"}
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

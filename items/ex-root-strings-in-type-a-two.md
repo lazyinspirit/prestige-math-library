@@ -2,7 +2,7 @@
 id: ex-root-strings-in-type-a-two
 kind: example
 title: Root strings in type A_2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, thm-root-string-property, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-the-root-sl-two-triple-inside-sl-n, def-coroot-of-a-lie-algebra-root, cor-cartan-integers-are-integral, def-root-and-root-space-relative-to-a-cartan-subalgebra]
@@ -17,6 +17,8 @@ sources:
 landmark: false
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the root-string, coroot and Cartan-integrality suppliers."
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example

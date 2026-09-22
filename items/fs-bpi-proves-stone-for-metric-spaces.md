@@ -2,7 +2,7 @@
 id: fs-bpi-proves-stone-for-metric-spaces
 kind: false-statement
 title: "False: BPI proves Stone's theorem for metric spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-consistency-bpi-without-stone, def-boolean-prime-ideal-principle, def-paracompact-space, def-metacompact-space, def-cover-refinement-and-local-finiteness, def-metric-space]
 justified_by: []
@@ -16,6 +16,8 @@ sources:
     - title: "Samuel Corson, The Independence of Stone's Theorem from the Boolean Prime Ideal Theorem"
       url: "https://arxiv.org/pdf/2001.06513"
       locator: "Introduction and Theorem 1"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

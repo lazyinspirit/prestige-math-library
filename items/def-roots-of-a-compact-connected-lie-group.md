@@ -2,7 +2,7 @@
 id: def-roots-of-a-compact-connected-lie-group
 kind: definition
 title: Roots of a compact connected Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-axiom-of-choice, def-character-and-cocharacter-lattices-of-a-torus, thm-complex-exponential-addition-and-real-extension, thm-kernel-and-fibres-of-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-complex-exponential-surjects-onto-the-punctured-plane, prop-adjoint-is-a-smooth-lie-group-representation, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, thm-continuous-homomorphisms-between-lie-groups-are-smooth, thm-the-differential-of-adjoint-is-ad, prop-exponential-map-is-natural-for-lie-group-homomorphisms, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, prop-adjoint-exponential-identity, thm-conjugacy-of-maximal-tori]
@@ -17,6 +17,8 @@ sources:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§§20–21 and Appendix R"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Definition

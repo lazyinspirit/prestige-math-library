@@ -2,7 +2,7 @@
 id: thm-bounded-borel-pvm-integral
 kind: theorem
 title: Bounded borel pvm integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [lem-simple-pvm-integral-is-representation-independent, lem-scalar-and-complex-measures-from-a-pvm, def-projection-valued-measure, def-hilbert-space, def-countable-choice, thm-bounded-operator-space-is-banach, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-dominated-convergence, def-essential-supremum-with-respect-to-a-measure, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-measurable-function-between-measurable-spaces, def-integration-against-a-signed-or-complex-measure, def-complex-simple-function]
@@ -16,6 +16,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Lemma 5.3 and Proposition 5.3, pp.16–18"
       url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

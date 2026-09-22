@@ -2,7 +2,7 @@
 id: thm-ito-isometry-and-linearity-in-predictable-l2
 kind: theorem
 title: "Ito isometry and linearity in predictable L2"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, lem-cross-ito-isometry, def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-riesz-fischer-completeness-of-l-p, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 3.2.2-3.2.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

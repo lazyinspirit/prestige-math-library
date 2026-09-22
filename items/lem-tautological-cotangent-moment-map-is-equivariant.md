@@ -2,7 +2,7 @@
 id: lem-tautological-cotangent-moment-map-is-equivariant
 kind: lemma
 title: The tautological cotangent moment map is equivariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, prop-cotangent-lifts-are-symplectomorphisms, def-moment-map-and-component-hamiltonian, prop-adjoint-intertwines-the-exponential-map, def-fundamental-vector-field-of-a-left-action, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

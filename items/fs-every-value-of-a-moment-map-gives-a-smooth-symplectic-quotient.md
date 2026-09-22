@@ -2,7 +2,7 @@
 id: fs-every-value-of-a-moment-map-gives-a-smooth-symplectic-quotient
 kind: false-statement
 title: Every value of a moment map gives a smooth symplectic quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-moment-map-and-component-hamiltonian, thm-marsden-weinstein-meyer-symplectic-reduction, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-fundamental-vector-field-of-a-left-action, def-symplectic-form-and-symplectic-manifold, def-countable-choice]
@@ -18,6 +18,8 @@ sources:
       url: https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf
       locator: Lecture 24, §24.5 Orbifolds, printed pages 150--151
 proof_strategy: direct
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

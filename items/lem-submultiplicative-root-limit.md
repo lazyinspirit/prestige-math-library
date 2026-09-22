@@ -2,7 +2,7 @@
 id: lem-submultiplicative-root-limit
 kind: lemma
 title: Submultiplicative root limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-nth-roots-exist, lem-power-monotone, def-limsup-liminf, thm-convergence-iff-limsup-equals-liminf, lem-limsup-monotone-comparison, lem-nth-root-of-constant-tends-to-one]
@@ -17,6 +17,8 @@ sources:
       url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — §2.3, printed pp. 30–33"
       url: "https://arxiv.org/pdf/1211.3404"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Statement

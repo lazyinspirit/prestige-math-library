@@ -2,7 +2,7 @@
 id: ex-square-integrable-separable-product-kernel
 kind: example
 title: A square-integrable separable product kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-l-two-kernels-give-hilbert-schmidt-operators, def-hilbert-schmidt-operator, def-finite-sigma-finite-and-semifinite-measures, def-completed-product-measure, thm-completion-of-a-measure-space, thm-tonelli-and-fubini-for-completed-product-measures, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, def-nonnegative-lebesgue-integral, def-l-p-space-as-a-quotient-by-null-functions, def-linear-basis, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-operator-norm, def-bounded-linear-operator, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-completion-of-a-measure-space, def-integral-of-a-nonnegative-simple-function]
@@ -16,6 +16,8 @@ sources:
       url: "https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/1/4020/files/2017/12/analysis-slides-278829v.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, examples of finite-rank Hilbert–Schmidt operators, printed pp. 93–95"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  audited: 2026-09-22
 ---
 
 ## Example
