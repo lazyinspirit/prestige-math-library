@@ -695,7 +695,8 @@ else {
   }
   for (const entry of errors) console.error(`ERROR ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
 }
-process.exit(errors.length ? 1 : 0);
+// Let piped report output drain before Node exits.
+process.exitCode = errors.length ? 1 : 0;
 
 function usage() {
   console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--terminal-resolutions <step7.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');

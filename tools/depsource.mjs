@@ -197,4 +197,5 @@ if (asJson) {
   );
 }
 
-process.exit(counts.unresolved === 0 ? 0 : 1);
+// Let piped report output drain before Node exits.
+process.exitCode = counts.unresolved === 0 ? 0 : 1;

@@ -344,5 +344,6 @@ async function finish(summary) {
     new Promise(resolve => process.stdout.write('', resolve)),
     new Promise(resolve => process.stderr.write('', resolve)),
   ]);
-  process.exit(errors.length ? 1 : 0);
+  // Let piped report output drain before Node exits.
+  process.exitCode = errors.length ? 1 : 0;
 }
