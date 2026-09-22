@@ -204,6 +204,41 @@ test('worker-reported consumers without graph edges require owner coverage befor
   }
 });
 
+test('owner handoffs distinguish item repairs from metadata edits and require exact identity and honest sources',()=>{
+  const f=fixture();try{
+    const pack=initial(f.root,f.ids);reports(f.root,pack);
+    const rows=pack.units.map((unit:string)=>JSON.parse(readFileSync(workerReport(f.root,run,pack.phase,1,unit),'utf8')));
+    const owner=rows.find((report:any)=>report.reviews.length),review=owner.reviews[0];
+    const now=Object.fromEntries(Object.keys(pack.before).map(id=>[id,guard(f.root,id)]));
+    review.metadata_repair_only=true;
+    review.reason='The unchanged mathematical item remains sound; only its stale contract quotation required correction.';
+    assert.deepEqual(validateReports(pack,rows,now,{root:f.root}).errors,[]);
+    review.disposition='repaired';
+    assert.match(validateReports(pack,rows,now,{root:f.root}).errors.join('\n'),/claimed repair or authorship without change/);
+    review.disposition='unaffected';owner.phase='repeat';
+    assert.match(validateReports(pack,rows,now,{root:f.root}).errors.join('\n'),/missing or mismatched report/);
+    owner.phase=pack.phase;review.familiar=false;review.source_urls=[];
+    assert.match(validateReports(pack,rows,now,{root:f.root}).errors.join('\n'),/invalid review/);
+    const task=readFileSync(workerReport(f.root,run,pack.phase,1,pack.units[0]).replace(/\.json$/,'.task.md'),'utf8');
+    assert.ok(task.includes(`phase:"${pack.phase}"`));
+    assert.match(task,/metadata_repair_only:true/);
+    assert.match(task,/never switch it to true merely to pass validation/);
+  }finally{f.cleanup();}
+});
+
+test('handoff supporting evidence is hash-bound and later tampering blocks collection reuse',()=>{
+  const f=fixture();try{
+    const pack=initial(f.root,f.ids);reports(f.root,pack);
+    const supplement=join(f.root,'research','owner-review-supplement.json');json(supplement,{by:'owner-authorized reviewer',reason});
+    const path=workerReport(f.root,run,pack.phase,1,pack.units[0]),report=JSON.parse(readFileSync(path,'utf8'));
+    report.supporting_evidence={[supplement]:digest(readFileSync(supplement,'utf8'))};json(path,report);
+    const receipt=collect(f.root,run,pack.phase,1,{deferImpactClosure:true});
+    assert.equal(receipt.evidence[supplement],report.supporting_evidence[supplement]);
+    json(supplement,{by:'changed'});
+    assert.throws(()=>collect(f.root,run,pack.phase,1,{deferImpactClosure:true}),/evidence changed/);
+  }finally{f.cleanup();}
+});
+
 test('stale downstream review and newly introduced downstream edge prevent any certification',()=>{
   for(const mode of ['stale','new-edge']){
     const f=fixture();try{

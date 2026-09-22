@@ -401,6 +401,16 @@ tool stage certifies after all writers finish; there is no per-item resealing
 while another worker can change context. Round identity and exact current hashes
 bind verdicts, decisions and certificates. Historical terminal receipts remain
 audit evidence and do not close a new round.
+Owner reports must copy the exact frozen assignment identity. `repaired` means
+the item's guarded content changed in that wave. A contract/page-only correction
+uses an `unaffected` item review with its actual metadata repair recorded in the
+reason and `metadata_repair_only:true`. Unfamiliar mathematics requires sources
+actually consulted, not an empty citation list or invented familiarity.
+An owner-authorized correction to an uncollected handoff preserves the original
+report and attributes any new review separately. Report `supporting_evidence`
+maps repository research paths to SHA-256 hashes; collection verifies and binds
+those originals and supplements into the resulting evidence. This never waives
+normal assignment, review, source, current-carrier or dispatch checks.
 
 Batch adjudicators and all three owner repair agents may author new items only
 to satisfy genuine unmet prerequisites of assigned repairs. Document the precise

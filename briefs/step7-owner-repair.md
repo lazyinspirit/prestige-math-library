@@ -90,6 +90,14 @@ status. Keep workflow history in run evidence. Report changed items, examined
 consumers, evidence, checks and blockers in the prescribed schema.
 Return `{run, phase, round, unit, input_sha256, decisions:[], reviews:[], downstream:[]}`.
 Copy `input_sha256` from the generated task to bind the exact assignment.
+Copy the exact `run`, `phase`, `round` and `unit` too: `impact-repeat` is not
+`repeat`. Disposition describes changes to the item carrier, not its ancillary
+files. If itemHashGuard is unchanged from the assignment's `before` hash, use
+`unaffected` even when repairing a contract or page. Record those metadata edits
+explicitly in the reason with `metadata_repair_only:true`; do not claim an item
+repair that did not occur. When `familiar:false`, supply authoritative source
+URLs you actually consulted. An empty source list is not sufficient, and
+changing familiarity merely to satisfy a check is forbidden.
 Each assigned item requires a review with `id`, `disposition` (`repaired` or
 `unaffected`), current itemHashGuard as `post_sha256`, `review_context_sha256`, an item-specific `reason`
 of at least 40 characters, `uncertain:false`, `source_urls` and `familiar`.
