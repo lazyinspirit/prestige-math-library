@@ -62,8 +62,11 @@ The report is `{run, phase, round, unit, input_sha256, decisions:[], reviews:[],
 Copy `input_sha256` from the generated task; it binds the exact assignment.
 Each exact rejected tuple needs a decision with `id`, `model`, `context_sha256`,
 `outcome` (`confirmed_fatal`, `confirmed_nonfatal` or `false_positive`), `reason`,
-`uncertain:false`, `source_urls` and `familiar`. Every assigned item also needs
-a review with `id`, `disposition` (`repaired` or `unaffected`), `post_sha256`
+`uncertain:false`, `source_urls` and `familiar`.
+For `confirmed_fatal`, also provide `defect_type`: `logic`,
+`dependency_citation`, or `other`, justified by the actual finding rather than
+the judge's label. Never guess a category for historical evidence.
+Every assigned item also needs a review with `id`, `disposition` (`repaired` or `unaffected`), `post_sha256`
 (the current itemHashGuard), `review_context_sha256`, and the same evidence fields.
 Immediately after completing each review, before editing another supplier, run
 `node tools/step7-workflow.mjs review-contexts --run RUN --items ID` and copy both

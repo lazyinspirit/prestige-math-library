@@ -13,6 +13,19 @@ const run='fixture', reason='The proof and its supplier hypotheses were checked 
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
 
+test('new adjudication packs require an explicit fatal category before collection',()=>{
+  const f=fixture();try{
+    const pack=prepareAdjudication(f.root,run,'initial',1);
+    assert.equal(pack.adjudicationSchemaVersion,1);
+    item(f.root,'thm-item-0','Corrected proof.');reports(f.root,pack,{},['thm-published-consumer']);
+    const path=workerReport(f.root,run,'initial',1,'1'),report=JSON.parse(readFileSync(path,'utf8'));
+    delete report.decisions[0].defect_type;json(path,report);
+    assert.throws(()=>collect(f.root,run,'initial',1),/missing or invalid fatal defect_type/);
+    report.decisions[0].defect_type='logic';json(path,report);
+    assert.equal(collect(f.root,run,'initial',1).errors.length,0);
+  }finally{f.cleanup();}
+});
+
 test('recovered gate base excludes obsolete assignments through closure and certification',()=>{
   const f=fixture();try{
     initialize(f.root,run);
@@ -110,7 +123,7 @@ function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
   for(const unit of pack.units) {
     const assigned=pack.assignments[unit], ids=[...new Set(assigned.map((r:any)=>typeof r==='string'?r:r.id))] as string[];
     json(workerReport(root,run,pack.phase,pack.round,unit),{run,phase:pack.phase,round:pack.round,unit,input_sha256:digest(pack),
-      decisions:pack.rejected?assigned.map((r:any)=>({...r,outcome:outcomes[r.id]??'confirmed_fatal',...evidence})):[],
+      decisions:pack.rejected?assigned.map((r:any)=>({...r,outcome:outcomes[r.id]??'confirmed_fatal',defect_type:'logic',...evidence})):[],
       reviews:ids.map(id=>({id,disposition:guard(root,id)===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...evidence})),created_items:[],downstream,
       gate_resolutions:(pack.gateAssignments?.[unit]??[]).map((r:any)=>({index:r.index,...evidence}))});
     const role=pack.rejected?'alpha-adjudicate':'alpha-repair';

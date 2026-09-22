@@ -26,6 +26,7 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { loadStep7ClosureCertification, currentStep7Certification } from './step7-certification-consumer.mjs';
+import { adjudicationTypeResolver } from './step7-adjudication-compat.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -379,6 +380,7 @@ if (judgePath && existsSync(resolvePath(judgePath))) {
 // nonfatal citation/gap finding.  It is keyed to the exact prompt context, so
 // a decision about pre-repair text can never clear a changed item.
 const judgeOutcomes = new Map();
+const adjudicationType = adjudicationTypeResolver(REPO);
 const judgeOutcomeKey = (id, model, context) => `${id}\u0000${model}\u0000${context}`;
 if (judgeAdjudicationsPath) {
   if (!existsSync(resolvePath(judgeAdjudicationsPath))) {
@@ -399,7 +401,8 @@ if (judgeAdjudicationsPath) {
         continue;
       }
       const validOutcome = ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'].includes(record.outcome);
-      const validFatalType = ['logic', 'dependency_citation', 'other'].includes(record.defect_type);
+      const fatalType = adjudicationType(record);
+      const validFatalType = fatalType !== null;
       // KNOWN_JUDGES, not JUDGES. Shape asks "is this a judge model at all";
       // coverage asks "is this one of today's lanes" and is enforced below,
       // where a retired lane's rows are skipped rather than rejected. Validating
@@ -435,7 +438,8 @@ if (judgeAdjudicationsPath) {
           '(`itemHashJudge`), and the two never agree on the same file', record.id);
         continue;
       }
-      judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256), record);
+      judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256),
+        fatalType==='unclassified'?{...record,defect_type:fatalType}:record);
     }
   }
 }

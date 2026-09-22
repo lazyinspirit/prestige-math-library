@@ -5,6 +5,8 @@
 // later true/false verdict always remains decisive.
 import { existsSync, readFileSync } from "node:fs";
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
+import { adjudicationTypeResolver } from './step7-adjudication-compat.mjs';
+const adjudicationType = adjudicationTypeResolver(process.cwd());
 
 const argv = process.argv.slice(2);
 const ledger = argv[0];
@@ -132,6 +134,7 @@ const emptyEffectiveness = () => Object.fromEntries(models.map((model) => [model
   fatal_logic: 0,
   fatal_dependency_citation: 0,
   fatal_other: 0,
+  fatal_unclassified: 0,
   confirmed_nonfatal: 0,
   false_positives: 0,
   fatal_confirmation_rate: null,
@@ -157,7 +160,8 @@ if (adjudicationsPath) {
       process.exit(2);
     }
     const validOutcome = ["confirmed_fatal", "confirmed_nonfatal", "false_positive"].includes(row.outcome);
-    const validFatalType = ["logic", "dependency_citation", "other"].includes(row.defect_type);
+    const fatalType = adjudicationType(row);
+    const validFatalType = fatalType !== null;
     if (
       typeof row.id !== "string" || !models.includes(row.model) ||
       typeof row.context_sha256 !== "string" || !row.context_sha256 || !validOutcome ||
@@ -172,7 +176,7 @@ if (adjudicationsPath) {
       process.exit(2);
     }
     // The final owner decision for a candidate is its last ledger entry.
-    outcomes.set(key, row);
+    outcomes.set(key, fatalType==='unclassified'?{...row,defect_type:fatalType}:row);
   }
   const modelsEffectiveness = emptyEffectiveness();
   for (const [key, candidate] of rejectionCandidates) {
@@ -185,6 +189,7 @@ if (adjudicationsPath) {
       stats.confirmed_fatal += 1;
       if (outcome.defect_type === "logic") stats.fatal_logic += 1;
       else if (outcome.defect_type === "dependency_citation") stats.fatal_dependency_citation += 1;
+      else if (outcome.defect_type === 'unclassified') stats.fatal_unclassified += 1;
       else stats.fatal_other += 1;
     } else if (outcome.outcome === "confirmed_nonfatal") {
       stats.confirmed_nonfatal += 1;

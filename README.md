@@ -67,6 +67,9 @@ The complete gate then repeats with owner repairs and recertification until gree
 Gate repair assigns actual failing subjects, not passing inventories or cited
 suppliers. Full diagnostics remain in frozen files; only actual repairs and
 reported consumer effects propagate into further downstream review.
+Historical V2 fatal decisions lacking a category require exact original evidence
+to remain usable; reports label their category unclassified, without changing
+their fatal outcome. New adjudications must provide the category explicitly.
 Across Steps 1–9 outside this authorized Step-7 loop, every failed gate is
 immediately escalated to the owner. A
 gate failure never launches another automatic repair, review, author or judge

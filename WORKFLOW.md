@@ -359,6 +359,14 @@ gate, never acceptance of an unresolved defect. Missing verdicts or decisions,
 uncertainty, stale certification and incomplete impact coverage block closure.
 Fatal classification controls only the threshold. Confirmed nonfatal defects
 also require repair; false positives require evidence without unnecessary edits.
+New adjudicator packs require `defect_type` (`logic`, `dependency_citation`,
+or `other`) for confirmed fatal decisions. Original V2 packs omitted that
+category. Coverage accepts a missing historical category only when the exact
+row matches the frozen pack, collected decision, hash-bound worker report and
+successful Sol xhigh dispatch. It remains fatal, explicitly `unclassified` in
+statistics; no historical decision is rewritten or mathematical category guessed.
+Changed evidence and unbound legacy omissions still fail. This compatibility
+does not replace current-carrier, repair, judgment or certification checks.
 
 Downstream discovery includes transitive declared dependencies and actual uses
 in proofs, citations and page interfaces throughout the library. Record exact
