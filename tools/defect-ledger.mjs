@@ -19,6 +19,7 @@
 //   node tools/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--reader-decisions <decisions.jsonl>]
 //                                         [--closure <closure.json>]
 //                                         [--view research/DEFECT-LEDGER.md] [--no-open]
+//                                         [--frontier research/R-step7-v2/frontier.json]
 //
 // THE VIEW IS GENERATED, AND ITS HEADER SAYS SO. `research/DEFECT-LEDGER.md`
 // carries "GENERATED from … @ <hash> — do not edit", and until 2026-08-16
@@ -48,6 +49,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validateFrontier } from './step7-rounds.mjs';
 
 const STEP5_SCOPE_TOOL = fileURLToPath(new URL('./step5-scope.mjs', import.meta.url));
 const STEP5_CLOSE_TOOL = fileURLToPath(new URL('./step5-close.mjs', import.meta.url));
@@ -514,9 +516,28 @@ if (cmd === 'check') {
   const closurePath = opt('closure');
   if (!run || !adjPath) { console.error('check needs --run and --adjudications'); process.exit(2); }
   const rows = loadLedger();
-  const mine = rows.filter((r) => r.run === run);
+  const runRows = rows.filter((r) => r.run === run);
+  const excluded = [];
+  let included = () => true;
+  if (given('frontier')) {
+    const path = opt('frontier');
+    if (!path) throw Error('--frontier requires the frozen frontier path');
+    const frontier = validateFrontier(JSON.parse(readFileSync(path, 'utf8')));
+    if (frontier.run !== run) throw Error('wrong run frontier');
+    const ids = new Set(frontier.ids);
+    const known = new Set(readdirSync('items').filter(name => name.endsWith('.md')).map(name => name.slice(0, -3)));
+    // Unknown/page/global subjects remain obligations. Only known outside
+    // item subjects are excluded; references to a supplier never own a row.
+    included = id => ids.has(id) || !known.has(id);
+  }
+  const mine = runRows.filter(row => {
+    if (included(row.subject)) return true;
+    excluded.push({ kind: 'ledger-row', evidence: row }); return false;
+  });
   const errs = validate(rows, run);
-  const ownershipMine = activeOwnershipRows(mine, errs);
+  if (given('frontier')) for (const row of rows) if (row.__parse_error) errs.push(`unparseable jsonl at ${row.__parse_error}`);
+  // Structural corruption and invalid ownership history remain global.
+  const ownershipMine = activeOwnershipRows(runRows, errs).filter(row => included(row.subject));
   const references = (r) => (r.adjudication_ref ?? []).filter((ref) => ref && typeof ref === 'object');
 
   // (a) exact-hash bijection: every confirmed_fatal adjudication row appears in
@@ -524,9 +545,10 @@ if (cmd === 'check') {
   if (!existsSync(adjPath)) { errs.push(`no adjudication ledger at ${adjPath}`); }
   else {
     const fatals = readFileSync(adjPath, 'utf8').split('\n').filter(Boolean)
-      .map((l) => { try { return JSON.parse(l); } catch { return null; } })
+      .map((l) => { try { return JSON.parse(l); } catch { if (given('frontier')) errs.push(`unparseable adjudication JSON in ${adjPath}`); return null; } })
       .filter((a) => a?.outcome === 'confirmed_fatal');
     for (const a of fatals) {
+      if (!included(a.id)) { excluded.push({ kind: 'adjudication', evidence: a }); continue; }
       // Current rows identify the exact model verdict and context. Two judges
       // can find DIFFERENT defects on the same bytes, so item_sha256 alone is
       // not an ownership key. Prefer exact structured references; fall back to
@@ -551,9 +573,10 @@ if (cmd === 'check') {
   // obligation and exact pre-edit item guard.
   if (readerDecisionsPath && existsSync(readerDecisionsPath)) {
     const fatals = readFileSync(readerDecisionsPath, 'utf8').split('\n').filter(Boolean)
-      .map((l) => { try { return JSON.parse(l); } catch { return null; } })
+      .map((l) => { try { return JSON.parse(l); } catch { if (given('frontier')) errs.push(`unparseable reader-decision JSON in ${readerDecisionsPath}`); return null; } })
       .filter((a) => a?.outcome === 'confirmed_fatal');
     for (const a of fatals) {
+      if (!included(a.item)) { excluded.push({ kind: 'reader-decision', evidence: a }); continue; }
       const owners = ownershipMine.filter((r) => references(r).some((ref) =>
         ref.alert_id === a.alert_id && ref.item === a.item && ref.item_sha256 === a.item_sha256));
       if (owners.length === 0) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} has no ledger row — the defect the adjudicator confirmed was never recorded`);
@@ -596,7 +619,10 @@ if (cmd === 'check') {
   // keeps a nonfatal open row from surviving to publication.
   if (closurePath && existsSync(closurePath)) {
     const closure = JSON.parse(readFileSync(closurePath, 'utf8'));
-    const openFatal = new Set((closure.open_fatal ?? []).map(String));
+    const openFatal = new Set((closure.open_fatal ?? []).map(String).filter(id => {
+      if (included(id)) return true;
+      excluded.push({ kind: 'closure-open-fatal', evidence: id }); return false;
+    }));
     for (const r of mine.filter((x) => x.disposition === 'open' && x.severity === 'fatal')) {
       if (!openFatal.has(String(r.subject))) errs.push(`${r.defect_id} is open in the ledger but ${r.subject} is not open in the closure receipt — one of them is stale`);
     }
@@ -647,6 +673,7 @@ if (cmd === 'check') {
   }
 
   if (errs.length) for (const e of errs) console.error(`ERROR ${e}`);
+  if (given('frontier')) console.log(`Step 7 outside findings excluded, not passed: ${JSON.stringify(excluded)}`);
   console.log(`defect-ledger: ${mine.length} defect row(s) checked for ${run}, ${errs.length} error(s)`);
   process.exit(errs.length ? 1 : 0);
 }

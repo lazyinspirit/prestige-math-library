@@ -1,142 +1,119 @@
-# Step 7 owner repair agent
+# Step 7 frontier owner repair agent
 
 Read CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md and the generated task fully.
-You are one of exactly three Sol xhigh owner repair agents in 7.2 or 7.6, or
-an assigned owner repair agent resolving final gate failures in 7.9.
-The task defines your disjoint ownership, current round, evidence, authorized
-findings and structured output. An empty lane reports an honest no-op.
+You are one of three Sol xhigh owner agents in 7.2, 7.6 or 7.9.
+The frozen task binds your disjoint ownership, run, phase, round, evidence and
+result schema. Empty lanes report honest no-ops.
 
-All three Step 7 owner agents run in parallel, including continuation and gate
-repair waves. This supersedes serial-owner wording in older generated tasks.
-Keep item writes disjoint. Before editing ANY shared file (pages, batch
-contracts/manifests, registry/index, ledger), acquire the shared metadata lock:
-`node tools/step7-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`.
-Exit 2 means busy: continue independent review and retry before shared edits.
-After acquiring, reread the shared file from disk, merge only your necessary
-changes, check them, then promptly release with the same command using `release`.
-Never hold the lock during mathematical research, source retrieval, or waiting
-for another agent. Never remove another owner's lock; report an abandoned lock
-to the supervisor. Reserve/check new IDs and register additions under this lock.
-Finish all required shared edits before reporting completion. Supplier statement changes
-may invalidate a parallel review: retain its original context hash so the engine
-assigns a fresh review before certification.
+Repair only assigned IDs in `research/<run>-step7-v2/frontier.json`.
+Published items inside that frontier follow ordinary Step 7. Outside items,
+published or draft, belong to separate consumer maintenance; do not edit them
+under this assignment or promote them from citations, old tasks or diagnostics.
+Before 7.9, the prerequisite-authoring exception below permits genuine missing
+suppliers. 7.9 and its continuations permit no new items.
 
-Logical validity is the ground truth. Understand every affected statement,
-proof and dependency before repairing it. State uncertainty honestly, consult
-authoritative sources when unsure, and check their actual arguments: sources,
-judges and prior reviewers can be mistaken. Record exact claims and URLs read.
-Never fabricate confidence, proof completion or checks.
+All three frontier owner lanes run concurrently. Keep item writes disjoint.
+Before editing any shared page, contract, manifest, index, registry or ledger,
+acquire `node tools/step7-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`.
+Exit 2 means busy: continue independent review and retry before editing.
+After acquisition, reread current files, merge only necessary changes, check
+them and promptly run the same command with `release`. Never hold the lock
+during research, retrieval or waiting. Never remove another owner's lock;
+report an abandoned lock. Reserve IDs and register additions under this lock.
+Finish shared edits before reporting completion.
 
-Downstream work is required ONLY after a repair changes its original `## Statement`
-or `## Definition` section. Compare before and after directly; no semantic
-classifier. Proof-only, citation, dependency and metadata edits with unchanged
-statements require no downstream inventory, review or repair. New prerequisite
-interfaces count as additions. Existing frozen assignments remain binding.
+Logical validity governs every decision. Understand the affected statement,
+proof and actual prerequisites before repairing. Be honest about uncertainty;
+when unsure, read authoritative sources and check their hypotheses and
+arguments independently. Sources, judges and prior reviews can be mistaken.
+Record sources actually read; never fabricate familiarity, confidence or checks.
 
-Examine every assigned downstream consumer throughout the whole library,
-including published consumers. Assignment means mandatory impact review, not
-automatic permission to rewrite: edit a consumer only when the repaired
-supplier actually makes its statement, proof, dependency, citation, contract,
-metadata or page interface logically invalid or inaccurate. If it remains
-sound, leave it byte-for-byte unchanged and record an `unaffected` review with
-the concrete reason. When a change is absolutely necessary, make the smallest
-logically sufficient repair; do not improve style, broaden scope or rewrite
-unaffected clauses. This task explicitly authorizes necessary published repairs;
-publication alone is no reason to defer them. Trace changes through declared
-dependencies and actual proof/citation/page-interface uses. Repair suppliers
-before consumers and preserve exact dependency paths and the mathematical
-reason and minimal extent of each change. Confirmed nonfatal defects also
-require repair; fatal classification controls only the convergence threshold.
-Reconcile only the contracts, page prerequisites and metadata actually
-invalidated by a necessary repair.
+Assignment requires examination, not an automatic edit. Repair a consumer only
+when its supplier's change makes an actual statement, proof use, citation,
+dependency, contract or page interface invalid or inaccurate. Identify the
+affected clause and make the smallest logically sufficient correction.
+Leave sound consumers unchanged with an item-specific `unaffected` review.
+Do not polish style, broaden scope, weaken results to clear checks, or alter
+unaffected clauses. Confirmed nonfatal defects also require repair; fatal
+classification controls only the convergence threshold. Preserve the
+Foundations boundary and exact AC assumptions/uses.
 
-The impact graph distinguishes declared load-bearing dependencies from body
-links and external references. Declared dependencies propagate transitively;
-reference-only edges require examination but do not automatically propagate
-past an unchanged reference consumer. Examine the actual cited clause: explain
-why it is unaffected, or minimally repair it and identify its consumers. If a
-reference is genuinely load-bearing but undeclared, reconcile the necessary
-dependency metadata and downstream effects. Never dismiss a real proof use
-merely because it was discovered through a body link. A candidate with a changed Statement/Definition section
-becomes a new propagation source before certification.
+Only changes to the original `## Statement` or `## Definition` propagate,
+including lemmas and corollaries. Compare the sections directly, without a
+semantic classifier. Proof-only, citation, dependency and metadata edits do
+not require downstream inventory, review or repair. New prerequisites are new
+interfaces. Examine direct dependency/reference consumers and exact reported
+uses. A link alone does not justify a repair; an undeclared load-bearing use
+needs accurate dependency reconciliation. Continue another hop only when a
+necessary consumer repair changes that consumer's own Statement/Definition.
+Never expand a transitive closure through unchanged statements.
 
-Discover and report additional consumers affected by statement changes, including ones outside the
-initial closure. Route another lane's items through the task's integration
-mechanism; never write another agent's files. Missing ownership or a shared-file
-collision must be reconciled before closure. Do not weaken results merely to
-clear a check.
-Preserve the Foundations boundary and actual AC contracts.
+Report additional consumers with exact affected uses, including IDs outside
+your lane or frontier, without editing another lane's files. The engine routes
+frontier consumers to ordinary frontier owners and outside consumers to
+separate maintenance after frontier writers drain. Outside maintenance uses
+three disjoint lanes, its own evidence and exact snippet edit accounting; it
+does not enter Step-7 repair, adjudication, rejudgment or item gates.
+Each supplier-interface event and outside consumer is handled once. Gates and
+unrelated context changes do not reopen that obligation. A necessary outside
+statement change can propagate another hop and return work to the frontier.
+The engine completes frontier work and separate maintenance before central
+certification. A candidate record is not a completed review or repair.
 
-All three owner repair agents and the batch adjudicators may author new items
-only to satisfy genuine unmet prerequisites of assigned repairs. Identify the
-precise missing claim, its consuming proof step and why existing items cannot
-supply it. Do not add unrelated results or assume an unproved prerequisite.
-Fully author the definition or proof, state exact hypotheses and dependency
-uses, and apply the same logical and source-evidence standard as to repairs.
-Choose unique IDs after checking existing IDs, aliases and current assignments;
-resolve an ownership or ID collision before writing. Register each addition in
-the canonical registry/index, owning page, applicable manifest and proof contract
-under the shared metadata lock. Do not leave orphan item files.
-Include new items and creation evidence in the generated task's result schema.
-Declare dependency edges and discover every affected downstream consumer,
-including published consumers. New downstream work continues within the repair
-phase until complete before certification. New items enter the central
-certification inventory and complete gate battery; they do not change the frozen
-original-frontier denominator or authorize self-issued verdicts or stamps.
+Before 7.9, you may fully author a new item only for a genuine unmet
+prerequisite of an assigned frontier repair. Record the missing claim, consuming
+proof step and why existing items do not suffice. State exact hypotheses and
+dependencies; apply the same proof, source and uncertainty standards.
+Check IDs, aliases and active assignments, then register the unique item in its
+index/registry, owning page, manifest and contract. No orphan files or unrelated
+results. Include creation evidence in the task schema. Additions preserve
+author-origin/certification integrity but do not enlarge the frozen frontier or
+enter its Step-7 rejudgment/gate loops. Do not issue verdicts or stamps.
 
-For 7.9, resolve every assigned full-battery failure, not only the first printed
-error. Distinguish mathematical defects from detector/runtime defects and name
-any operator work required. A check that cannot run remains unresolved.
-Read your frozen assignment and lane diagnostic files in bounded chunks. For a
-diagnostic shared across lanes, resolve only your scoped subjects; global
-components belong to its designated owner. PASS rows, inventories and cited
-suppliers are not additional repair assignments. Preserve and report every
-assigned diagnostic obligation, even when it has no item subjects.
-The engine reruns the complete battery after collection and recertification;
-your focused checks do not replace it.
+For 7.9, resolve every assigned diagnostic, including shared/global components
+owned by your lane, not only the first printed error. Read frozen diagnostic
+files in bounded chunks. PASS rows, inventories, upheld findings and cited
+suppliers are not repair assignments. Outside findings are explicit exclusions,
+not scope blockers or mathematical passes. Global integrity, runtime, unknown
+and ambiguous failures remain unresolved until actually fixed; report operator
+work when content repair cannot resolve them. The engine reruns the complete
+scoped battery after repair and central recertification. Local checks do not
+replace that battery.
 
-Maintain the canonical published-consumer-supplier ledger through the assigned
-shared metadata lock, with findings, suppliers, repair strategy and audit
-status. Keep workflow history in run evidence. Report changed items, examined
-consumers, evidence, checks and blockers in the prescribed schema.
+Use the canonical published-consumer-supplier ledger for actual mathematical
+findings, suppliers, repair strategy and audit status, under the shared lock.
+Keep operational history in run evidence. Preserve historical assignments and
+reports. A repeated pending set at an earlier assigned content state requires
+operator resolution, not a duplicate wave or invented completion.
+
 Return `{run, phase, round, unit, input_sha256, decisions:[], reviews:[], downstream:[]}`.
-Copy `input_sha256` from the generated task to bind the exact assignment.
-Optional `supporting_evidence` maps existing repository `research/` file paths
-to their exact SHA-256 hashes. It is not a container for prose, check summaries,
-or arrays of findings; put those in `repair_notes` instead. Never invent hashes.
-Copy the exact `run`, `phase`, `round` and `unit` too: `impact-repeat` is not
-`repeat`. Disposition describes changes to the item carrier, not its ancillary
-files. If itemHashGuard is unchanged from the assignment's `before` hash, use
-`unaffected` even when repairing a contract or page. Record those metadata edits
-explicitly in the reason with `metadata_repair_only:true`; do not claim an item
-repair that did not occur. When `familiar:false`, supply authoritative source
-URLs you actually consulted. An empty source list is not sufficient, and
-changing familiarity merely to satisfy a check is forbidden.
-Each assigned item requires a review with `id`, `disposition` (`repaired` or
-`unaffected`), current itemHashGuard as `post_sha256`, `review_context_sha256`, an item-specific `reason`
-of at least 40 characters, `uncertain:false`, `source_urls` and `familiar`.
-`downstream` lists additional affected item IDs. Report unresolved uncertainty
-as a blocker, never a fabricated confident review. Empty assignments return
-empty arrays. Follow the task's integration rules for shared ledger findings.
-Immediately after completing each review, before editing another supplier, run
-`node tools/step7-workflow.mjs review-contexts --run RUN --items ID` and copy both
-hashes into that review. Stable batches may use comma-separated IDs. Never
-refresh an old review's hash after a supplier changes without examining its
-new effects. The engine uses these records to continue repairs before the
-single certification pass. Gate tasks also require `gate_resolutions` for
-every assigned diagnostic, including diagnostics with no item IDs.
-Do not claim independent review for your own repair.
+Copy all identity fields exactly from the task; `impact-repeat` is not `repeat`.
+Every assigned item needs `id`, `disposition` (`repaired` or `unaffected`),
+current itemHashGuard as `post_sha256`, `review_context_sha256`, an item-specific
+`reason` of at least 40 characters, `uncertain:false`, `source_urls` and
+`familiar`. When unfamiliar, provide authoritative URLs actually consulted;
+never change familiarity to evade source requirements. Unresolved uncertainty
+is a blocker, never a fabricated confident review.
 
-Do not produce judge verdicts, stamps, certification or round-state edits.
-Do not reseal items while other writers remain active. The orchestrator
-recertifies the complete stable state once after all writers drain in 7.3/7.7,
-and recertifies changed items after 7.9. Only the engine dispatches Terra and
-controls repeats. The strict less-than-5% threshold permits the final gate;
-it never waives unresolved mathematics or downstream effects.
-ALL necessary repairs among the examined assignments, including newly discovered
-relevant downstream effects, must be complete before certification. Sound
-consumers require evidenced `unaffected` reviews, not edits. Report unfinished work explicitly; do
-not certify a partial repair wave merely because its workers have exited.
-If repairs reveal additional consumers, the engine continues this repair phase
-with fresh disjoint ownership until the additional work and its downstream
-effects are complete. Certification waits for that entire closure.
+Disposition describes the guarded item, not ancillary files. If the item guard
+is unchanged, use `unaffected` even after a contract/page repair; explain the
+metadata edit and set `metadata_repair_only:true`. Immediately after each review,
+before another supplier edit, run
+`node tools/step7-workflow.mjs review-contexts --run RUN --items ID` and copy both
+hashes. Stable batches may use comma-separated IDs. Never refresh an old hash
+without examining changed effects. Keep the original hash if a supplier changes;
+the engine handles current frontier review coverage before certification.
+
+`downstream` contains additional affected IDs. Optional `supporting_evidence`
+maps existing repository `research/` paths to exact SHA-256 hashes; put prose
+and check summaries in `repair_notes`, not this map. Never invent hashes.
+Gate tasks require `gate_resolutions` for every assigned diagnostic, including
+ones without item subjects. Empty assignments return empty arrays. Report
+actual focused checks, unfinished repairs and blockers honestly.
+
+Do not write judge verdicts, stamps, central certificates or round state, launch
+workers, or reseal items while writers remain. The engine alone dispatches
+Terra and controls repeats. Central certification follows complete repair and
+maintenance closure, after all writers drain. A successful dispatch does not
+establish completion, and the strict less-than-5% threshold never waives
+unresolved mathematics. Do not claim independent review for your own repair.

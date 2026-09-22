@@ -50,6 +50,7 @@ function replaceBaseGate(repo, run, round, progressPath, progress, entry) {
   assertUnchangedItems(repo, original);
   const pack = prepareGateRepairPack(repo, run, entry.replacementPhase, round, original.failures);
   progress.passes = [entry.replacementPhase];
+  progress.work_order = [{kind:'frontier',phase:entry.replacementPhase}];
   progress.activePhase = entry.replacementPhase;
   progress.repairBasePhase = entry.replacementPhase;
   atomic(progressPath, progress);
@@ -79,6 +80,7 @@ export function recoverStep7Impact({ repo, run, stateDir, reason }) {
   const progress = progressExists ? read(progressPath)
     : { version: 2, run, phase, round, passes: [phase], activePhase: phase, complete: false };
   requireValue(progress.run === run && progress.phase === phase && progress.round === round, 'wrong progress identity');
+  requireValue(!progress.activeMaintenance, 'separate maintenance is active; reconcile it before frontier recovery');
 
   // A crash after recording the supersession must never cause the replacement
   // to be abandoned on the same command's retry.
@@ -160,6 +162,7 @@ export function recoverStep7Impact({ repo, run, stateDir, reason }) {
   progress.superseded = [...(progress.superseded ?? []), entry];
   if (!baseGate) {
     progress.passes = progress.passes.slice(0, -1);
+    if(progress.work_order)progress.work_order=progress.work_order.filter(row=>row.kind!=='frontier'||row.phase!==activePhase);
     progress.activePhase = entry.previousPhase;
   }
   atomic(progressPath, progress);

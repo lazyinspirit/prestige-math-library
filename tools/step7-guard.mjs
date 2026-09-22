@@ -14,8 +14,8 @@
 // tools/level-coverage.mjs already lets them clear closure as warnings, so no
 // gate ever demanded the edit.
 //
-// The replacement round protocol uses centralized certification of the complete
-// repaired state, with published downstream repairs included. When its frozen
+// The replacement round protocol uses centralized certification of repaired
+// frontier items, including published items inside that frontier. When its frozen
 // frontier exists, exact certification and baseline coverage are mandatory;
 // legacy adjudication/terminal licences cannot substitute for missing evidence.
 // Runs without that frontier retain the historical fatal-edit licence checks.
@@ -140,8 +140,8 @@ const currentHashes = () => {
 };
 const now = currentHashes();
 
-// The replacement protocol certifies an entire drained repair wave, including
-// published downstream items. Its exact baseline and evidence replace the old
+// The replacement protocol certifies the drained frontier repair wave. Outside
+// changes stay visible as exclusions; exact baseline and evidence replace old
 // per-item terminal licences; it never needs a synthetic judge rejection.
 const workflowScope = JSON.parse(readFileSync(resolvePath(scopePath), 'utf8'));
 const workflowDirectory = workflowDir(workflowRoot, workflowScope.run);
@@ -149,44 +149,55 @@ if (existsSync(workflowDirectory)) {
   const changed = Object.keys(now).filter(id => baseline.hashes?.[id] && baseline.hashes[id] !== now[id]);
   const created = Object.keys(now).filter(id => !Object.hasOwn(baseline.hashes ?? {}, id));
   const deleted = Object.keys(baseline.hashes ?? {}).filter(id => !Object.hasOwn(now, id));
+  const excluded = { changed: [], created: [], reason: 'Outside frozen frontier: observed, excluded from Step-7 certification, not passed' };
+  let scopedChanged = [], scopedCreated = [];
   let licensed = 0;
+  // Deletion is a global integrity violation, regardless of frontier membership.
+  for (const id of deleted) error('step7-deletion', `${id}: deleting results is not licensed at Step 7`, id);
   try {
-    const certificate = checkWorkflow(workflowRoot, workflowScope.run);
-    if (!['impact-repeat', 'gate'].includes(certificate.phase)) throw Error('Step 7 requires a completed repeat-round certification');
     const frontier = validateFrontier(JSON.parse(readFileSync(join(workflowDirectory, 'frontier.json'), 'utf8')));
     if (frontier.run !== workflowScope.run
       || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
       throw Error('frozen original frontier does not match Step-7 scope');
+    const ids = new Set(frontier.ids);
+    scopedChanged = changed.filter(id => ids.has(id));
+    scopedCreated = created.filter(id => ids.has(id));
+    excluded.changed = changed.filter(id => !ids.has(id));
+    excluded.created = created.filter(id => !ids.has(id));
+    const certificate = checkWorkflow(workflowRoot, workflowScope.run);
+    if (!['impact-repeat', 'gate'].includes(certificate.phase)) throw Error('Step 7 requires a completed repeat-round certification');
     const original = JSON.parse(readFileSync(join(workflowDirectory, 'baseline.json'), 'utf8'));
     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
       throw Error('workflow baseline does not exactly match the original touchlog baseline');
     const certified = new Map(certificate.items.map(row => [row.id, row]));
-    for (const id of changed) {
+    for (const id of scopedChanged) {
       if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id])
         error('step7-certification-unlicensed', `${id}: changed item lacks an exact current centralized certification`, id);
       else licensed++;
     }
     const creationRecords = new Map((certificate.creations ?? []).map(row => [row.id, row]));
-    for (const id of created) {
+    for (const id of scopedCreated) {
       const record = creationRecords.get(id);
       if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id] || !record)
         error('step7-creation', `${id}: created item lacks exact current centralized certification and creation provenance`, id);
       else licensed++;
     }
-    for (const id of deleted) error('step7-deletion', `${id}: deleting results is not licensed at Step 7`, id);
   } catch (cause) { error('step7-certification-invalid', cause.message); }
   const summary = { baseline: baselineLabel, baseline_at: baseline.at ?? null,
     compared_against: againstLabel ?? 'working tree', items_at_baseline: Object.keys(baseline.hashes ?? {}).length,
     changed: changed.length, licensed_by_centralized_certification: licensed,
+    frontier_changed: scopedChanged.length, frontier_created: scopedCreated.length,
+    excluded_outside: excluded.changed.length + excluded.created.length,
     created: created.length, deleted: deleted.length, errors: errors.length, warnings: warnings.length };
-  if (asJson) console.log(JSON.stringify({ summary, changed, created, deleted, errors, warnings }, null, 2));
+  if (asJson) console.log(JSON.stringify({ summary, changed, created, deleted, excluded, errors, warnings }, null, 2));
   else {
     console.log(`step7-guard: baseline "${baselineLabel}" vs ${summary.compared_against}`);
     console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-    console.log(`  ${licensed}/${changed.length + created.length} changed/created item(s) licensed by centralized Step-7 certification`);
+    console.log(`  ${licensed}/${scopedChanged.length + scopedCreated.length} frontier changed/created item(s) licensed by centralized Step-7 certification`);
+    console.log(`  Outside observations excluded, not passed: ${JSON.stringify(excluded)}`);
     for (const entry of errors) console.log(`  ERROR ${entry.code}: ${entry.message}`);
-    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — every Step-7 edit has exact centralized certification');
+    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — every frontier Step-7 edit has exact centralized certification');
   }
   process.exit(errors.length ? 1 : 0);
 }

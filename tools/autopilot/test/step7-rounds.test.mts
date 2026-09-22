@@ -41,7 +41,7 @@ test('missing, wrong-round, uncertain, unresolved, and unbound decisions never p
   assert.equal(assessFatalThreshold({ ...args, decisions: [row, { ...row, id: 'unexpected' }] }).belowThreshold, false);
 });
 
-test('downstream discovery includes off-frontier published transitive consumers, aliases, and cycles', () => {
+test('downstream discovery includes direct published consumers and stops until their own statements change', () => {
   const items = [
     { id: 'root', deps: [], aliases: ['old-root'] },
     { id: 'middle', deps: ['old-root'], published: true },
@@ -50,14 +50,14 @@ test('downstream discovery includes off-frontier published transitive consumers,
     { id: 'unrelated', deps: [] },
   ];
   const impacts = discoverDownstream({ items, repairedIds: ['root'] });
-  assert.deepEqual(impacts.map((r: any) => r.id), ['cycle', 'leaf', 'middle']);
-  assert.deepEqual(impacts.find((r: any) => r.id === 'leaf').paths, [['root', 'middle', 'leaf']]);
+  assert.deepEqual(impacts.map((r: any) => r.id), ['middle']);
+  assert.deepEqual(discoverDownstream({items,repairedIds:['middle']}).map((r:any)=>r.id),['leaf']);
   assert.equal(impacts.find((r: any) => r.id === 'middle').published, true);
   assert.throws(() => discoverDownstream({ items, repairedIds: ['missing'] }), /missing/);
   const lanes = partitionImpacts(impacts.map((r: any) => r.id), 3, items);
   assert.equal(lanes.length, 3);
-  assert.ok(lanes.some((lane: string[]) => lane.length === 3));
-  assert.equal(new Set(lanes.flat()).size, 3);
+  assert.ok(lanes.some((lane: string[]) => lane.length === 1));
+  assert.equal(new Set(lanes.flat()).size, 1);
 });
 
 test('canonical ids beat aliases and every repaired supplier retains its impact path', () => {
@@ -68,10 +68,10 @@ test('canonical ids beat aliases and every repaired supplier retains its impact 
     { id: 'leaf', deps: ['consumer'], published: true },
   ];
   const impacts = discoverDownstream({ items, repairedIds: ['first', 'second'] });
-  assert.deepEqual(impacts.find((r: any) => r.id === 'leaf').suppliers, ['first', 'second']);
-  assert.deepEqual(impacts.find((r: any) => r.id === 'leaf').paths, [['first', 'consumer', 'leaf'], ['second', 'consumer', 'leaf']]);
+  assert.deepEqual(impacts.find((r: any) => r.id === 'consumer').suppliers, ['first', 'second']);
+  assert.deepEqual(impacts.find((r: any) => r.id === 'consumer').paths, [['first', 'consumer'], ['second', 'consumer']]);
   const onlySecond = discoverDownstream({ items, repairedIds: ['second'] });
-  assert.deepEqual(onlySecond.map((r: any) => r.id), ['consumer', 'leaf']);
+  assert.deepEqual(onlySecond.map((r: any) => r.id), ['consumer']);
 });
 
 test('certification waits for all writers, exact current-round coverage, and stable whole-library hashes', () => {
@@ -125,11 +125,11 @@ test('reference edges require examination but do not transitively flood explanat
     {id:'reference-user',deps:['remark']},
   ];
   assert.deepEqual(discoverDownstream({items,repairedIds:['root']}).map((r:any)=>r.id),
-    ['actual','leaf','leaf-reference','remark']);
+    ['actual','remark']);
   // A repaired reference consumer becomes a genuine new propagation seed.
   assert.deepEqual(discoverDownstream({items,repairedIds:['remark']}).map((r:any)=>r.id),
     ['definition','reference-user']);
-  // Promoting an actual proof use to a declared edge also propagates it.
+  // A declared edge still cannot propagate through an unchanged consumer.
   items[3].deps=['old-root'];
-  assert.ok(discoverDownstream({items,repairedIds:['root']}).some((r:any)=>r.id==='reference-user'));
+  assert.equal(discoverDownstream({items,repairedIds:['root']}).some((r:any)=>r.id==='reference-user'),false);
 });

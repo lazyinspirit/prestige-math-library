@@ -38,9 +38,8 @@ export function validateFrontier(frontier) {
   return rebuilt;
 }
 
-/** Declared dependencies propagate transitively. Other links are examination
- * candidates, not proof-dependency declarations. Keep them separate so an
- * explanatory link cannot turn a reference cycle into library-wide impact. */
+/** Dependencies and other links are direct examination candidates, not edit
+ * mandates. Only a new consumer statement change propagates another hop. */
 export function readLibraryItems(repo) {
   return readdirSync(join(repo, 'items')).filter((name) => name.endsWith('.md')).sort().map((name) => {
     const text = readFileSync(join(repo, 'items', name), 'utf8');
@@ -83,27 +82,14 @@ export function discoverDownstream({ items, repairedIds }) {
   for (const id of roots) requireValue(byId.has(id), `repaired item missing: ${id}`);
   const impacts = new Map();
   for (const root of roots) {
-    const queue = [[root]], visited = new Set([root]), paths = new Map();
-    for (let i = 0; i < queue.length; i++) {
-      const path = queue[i];
-      for (const id of [...(consumers.get(path.at(-1)) ?? [])].sort()) {
-        if (visited.has(id)) continue;
-        visited.add(id);
-        const next = [...path, id];
-        queue.push(next);
-        paths.set(id, next);
-      }
-    }
-    // Examine references to the root or a declared transitive consumer, but
-    // never traverse through a reference-only candidate. A repair to that
-    // candidate makes it a new root on the next closure pass.
-    for (const path of queue) for (const id of [...(references.get(path.at(-1)) ?? [])].sort()) {
-      if (id !== root && !paths.has(id)) paths.set(id, [...path, id]);
-    }
-    for (const [id, path] of paths) {
+    // Review one interface boundary at a time. An unchanged consumer (or a
+    // proof-only repair) cannot propagate the original change further.
+    const direct=new Set([...(consumers.get(root)??[]),...(references.get(root)??[])]);
+    for (const id of direct) {
+      if(id===root)continue;
       if (!impacts.has(id)) impacts.set(id, { id, published: Boolean(byId.get(id).published), suppliers: [], paths: [] });
       impacts.get(id).suppliers.push(root);
-      impacts.get(id).paths.push(path);
+      impacts.get(id).paths.push([root,id]);
     }
   }
   return [...impacts.values()].sort((a, b) => a.id.localeCompare(b.id));

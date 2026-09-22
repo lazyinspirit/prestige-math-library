@@ -50,13 +50,16 @@ function fixture() {
   return { root, dir, write, cert, guard };
 }
 
-test('centralized certification licenses published downstream repair without synthetic judge or terminal rows', () => {
+test('centralized guard licenses the published frontier item and excludes the outside consumer', () => {
   const fx = fixture(), result = fx.guard();
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.equal(JSON.parse(result.stdout).summary.licensed_by_centralized_certification, 2);
+  const output = JSON.parse(result.stdout);
+  assert.equal(output.summary.licensed_by_centralized_certification, 1);
+  assert.deepEqual(output.excluded.changed, ['published-consumer']);
+  assert.equal(output.summary.frontier_changed, 1);
 });
 
-test('centralized certification licenses a registered prerequisite addition but rejects missing creation provenance', () => {
+test('outside additions remain observed exclusions without a frontier creation-provenance gate', () => {
   const fx=fixture(),id='lem-new-prerequisite';
   const body=`---\nid: ${id}\nkind: lemma\nstatus: draft\ndeps: []\n---\n\nA complete proof of the genuinely missing prerequisite.\n`;
   writeFileSync(join(fx.root,'items',`${id}.md`),body);
@@ -68,7 +71,11 @@ test('centralized certification licenses a registered prerequisite addition but 
   fx.write(join(fx.dir,'certification.json'),cert);
   let result=fx.guard();assert.equal(result.status,0,result.stdout+result.stderr);
   fx.write(join(fx.dir,'certification.json'),{...cert,creations:[]});
-  result=fx.guard();assert.equal(result.status,1);assert.match(result.stdout,/creation provenance/);
+  result=fx.guard();assert.equal(result.status,0,result.stdout+result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).excluded.created,[id]);
+  fx.write(join(fx.dir,'certification.json'),fx.cert);
+  result=fx.guard();assert.equal(result.status,0,result.stdout+result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).excluded.created,[id]);
 });
 
 test('centralized guard preserves the exact original touchlog baseline and frontier', () => {
@@ -96,13 +103,44 @@ test('initial-wave certification cannot terminal-close Step7', () => {
   assert.match(result.stdout, /completed repeat-round certification|not completed its Terra\/adjudication cycle/);
 });
 
-test('edits to certified carriers or their underlying evidence invalidate closure', () => {
+test('stale outside carriers are excluded but immutable source evidence remains mandatory', () => {
   const fx = fixture();
   writeFileSync(join(fx.root, 'items', 'published-consumer.md'), text('published-consumer', 'Changed after certification.'));
-  let result = fx.guard(); assert.equal(result.status, 1); assert.match(result.stdout, /stale Step 7 certification/);
+  let result = fx.guard(); assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).excluded.changed, ['published-consumer']);
   writeFileSync(join(fx.root, 'items', 'published-consumer.md'), text('published-consumer', 'A repaired argument with its supplier correctly used.'));
   fx.write(join(fx.dir, 'report.json'), { reviewed: [] });
   result = fx.guard(); assert.equal(result.status, 1); assert.match(result.stdout, /evidence changed/);
+});
+
+test('mixed stale frontier and outside edits retain the frontier failure and outside evidence', () => {
+  const fx = fixture();
+  for (const id of ['a', 'published-consumer']) writeFileSync(join(fx.root, 'items', `${id}.md`), text(id, 'Changed after certification.'));
+  const result = fx.guard(), output = JSON.parse(result.stdout);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /stale Step 7 certification a/);
+  assert.deepEqual(output.excluded.changed, ['published-consumer']);
+  assert.equal(output.summary.frontier_changed, 1);
+});
+
+test('outside changed items require no certificate row while frontier coverage remains mandatory', () => {
+  const fx = fixture();
+  fx.write(join(fx.dir, 'certification.json'), { ...fx.cert, items: fx.cert.items.filter(row => row.id === 'a') });
+  let result = fx.guard();
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).excluded.changed, ['published-consumer']);
+  fx.write(join(fx.dir, 'certification.json'), { ...fx.cert, items: fx.cert.items.filter(row => row.id !== 'a') });
+  result = fx.guard();
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /uncovered Step 7 repair a/);
+});
+
+test('deletion integrity remains global for an outside consumer', () => {
+  const fx = fixture();
+  unlinkSync(join(fx.root, 'items', 'published-consumer.md'));
+  const result = fx.guard(), output = JSON.parse(result.stdout);
+  assert.equal(result.status, 1);
+  assert.ok(output.errors.some((row:any) => row.code === 'step7-deletion' && row.id === 'published-consumer'));
 });
 
 test('v2 evidence loss fails closed and cannot invoke the legacy licence fallback', () => {

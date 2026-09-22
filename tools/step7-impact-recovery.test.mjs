@@ -7,6 +7,7 @@ import { recoverStep7Impact } from './step7-impact-recovery.mjs';
 import { advanceImpact, digest, packPath, workerLabel, workerReport, workflowDir, impactProgressPath } from './step7-workflow.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { MODELS } from './models.mjs';
+import { freezeFrontier } from './step7-rounds.mjs';
 
 const reason = 'Corrected reference edges previously propagated as proof dependencies.';
 function fixture(t, baseGate = false) {
@@ -18,6 +19,7 @@ function fixture(t, baseGate = false) {
   for (const path of [stateDir, dir, dispatchDir, join(repo, 'items')]) mkdirSync(path, { recursive: true });
   const save = (path, value) => writeFileSync(path, JSON.stringify(value, null, 2) + '\n');
   const current = {};
+  save(join(dir,'frontier.json'),freezeFrontier({run,batches:[{id:'1',items:['thm-source','thm-unrelated']}]}));
   for (const id of ['thm-source', 'thm-unrelated']) {
     const text = `---\nid: ${id}\nkind: theorem\ndeps: []\n---\nA mathematical argument.\n`;
     writeFileSync(join(repo, 'items', `${id}.md`), text); current[id] = itemHashGuard(text);
@@ -27,7 +29,7 @@ function fixture(t, baseGate = false) {
   const statePath = join(stateDir, 'state.json'); save(statePath, state);
   const passes = baseGate ? [phase] : [phase, `${phase}-pass-2`, active];
   const progressPath = impactProgressPath(repo, run, phase, 1);
-  save(progressPath, { version: 2, run, phase, round: 1, passes, activePhase: active, complete: false });
+  save(progressPath, { version: 2, run, phase, round: 1, passes,work_order:passes.map(phase=>({kind:'frontier',phase})), activePhase: active, complete: false });
   for (const pass of passes) {
     save(packPath(repo, run, pass, 1), { version: 2, run, phase: pass, round: 1, units: ['1', '2', '3'],
       before: current, seeds: ['thm-source'], ...(baseGate ? { failures: [{ id: 'precheck', stderr: 'FAIL thm-source: missing contract' }] } : {}),

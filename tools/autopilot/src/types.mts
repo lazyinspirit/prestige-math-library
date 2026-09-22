@@ -82,6 +82,8 @@ export interface Gate {
   /** A gate reporting success over an empty scope is not a gate that passed. */
   liveness?: Liveness;
   required?: boolean;
+  /** Optional strict scope projection. Complete raw evidence remains on the result. */
+  projectResult?: (result: { code: number | null; stdout: string; stderr: string }) => any;
 }
 
 export interface GateResult {
@@ -92,6 +94,9 @@ export interface GateResult {
   checked?: number;
   code?: number | null;
   output?: string;
+  rawOutput?: string;
+  rawCode?: number | null;
+  frontierScope?: { frontierSha256: string; mode: string; excluded: any[]; retained: any[]; global: any[] };
   advisory?: Array<GateResult & { stage?: string }>;
   /** Per-(gate,item) repair routing. Present only while a stage hook runs. */
   liveItems?: string[];

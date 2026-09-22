@@ -66,17 +66,24 @@ export async function runGate(gate: Gate, { cwd, env = {}, signal, logger = () =
     child.on('close', (code: any) => { signal?.removeEventListener('abort', onAbort); resolve({ code, stdout, stderr }); });
   });
 
-  const out = `${res.stdout}${res.stderr}`;
+  let projected: any;
+  try { projected = gate.projectResult?.(res); }
+  catch (error: any) {
+    return { id: gate.id, ok: false, code: res.code, output: `${res.stdout}${res.stderr}`,
+      why: `gate scope projection failed: ${error.message}` };
+  }
+  const out = projected?.output ?? `${res.stdout}${res.stderr}`;
   // The complete output is repair input, not display text. Step 5 derives the
   // per-item repair scope from every canonical `ERROR ... [<id>]` line. Keeping
   // only a tail silently turns one level-wide failure into serial waves: the
   // first id survives through `why`, a handful survive in the tail, and every
   // omitted id appears as a supposedly new failure after the next battery.
   // Reporter/status formatting already shortens the human-facing summary.
-  const base = { id: gate.id, code: res.code, output: out };
+  const base = { id: gate.id, code: projected?.code ?? res.code, output: out,
+    ...(projected ? { rawOutput: projected.rawOutput, rawCode: projected.rawCode, frontierScope: projected.frontierScope } : {}) };
 
-  if (res.code !== 0) {
-    return { ...base, ok: false, why: firstProblem(out) ?? `exit ${res.code}` };
+  if (base.code !== 0) {
+    return { ...base, ok: false, why: projected?.scopeError ?? firstProblem(out) ?? `exit ${base.code}` };
   }
 
   if (gate.liveness) {
@@ -89,10 +96,10 @@ export async function runGate(gate: Gate, { cwd, env = {}, signal, logger = () =
     if (!Number.isFinite(n) || n < min) {
       return { ...base, ok: false, why: `vacuous — reported success over ${n} ${unit} (need >= ${min}); fix the scope, not the gate` };
     }
-    return { ...base, ok: true, checked: n, why: `${n} ${unit}` };
+    return { ...base, ok: true, checked: n, why: `${n} ${unit}${projected?.scopeWhy ? `; ${projected.scopeWhy}` : ''}` };
   }
 
-  return { ...base, ok: true, why: 'exit 0' };
+  return { ...base, ok: true, why: projected?.scopeWhy ?? 'exit 0' };
 }
 
 /** The most useful line of a failing gate's output, for a one-line report.

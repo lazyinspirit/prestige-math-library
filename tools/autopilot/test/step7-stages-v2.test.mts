@@ -6,13 +6,16 @@ import { tmpdir } from 'node:os';
 import { step7Stages } from '../stages/mathlib.step7.mts';
 import { validateStages } from '../src/spec.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { freezeFrontier } from '../../step7-rounds.mjs';
 
 const gate=(id:string,argv:string[])=>({id,argv});
 function fixture() {
   const repo=mkdtempSync(join(tmpdir(),'step7-stages-'));
   const ctx:any={repo,run:'demo',dispatchDir:join(repo,'research/demo-dispatch'),coversMap:{},stageRounds:{},stageFailures:{},config:{}};
   mkdirSync(join(repo,'research/demo-step7-v2'),{recursive:true});
-  writeFileSync(join(repo,'research/demo-step7-v2/frontier.json'),JSON.stringify({batches:[{id:'1',items:['thm-a']},{id:'2',items:['thm-b']}]}));
+  mkdirSync(join(repo,'items'));
+  for(const id of ['thm-a','thm-b'])writeFileSync(join(repo,'items',`${id}.md`),'fixture');
+  writeFileSync(join(repo,'research/demo-step7-v2/frontier.json'),JSON.stringify(freezeFrontier({run:'demo',batches:[{id:'1',items:['thm-a']},{id:'2',items:['thm-b']}]})));
   const stages=step7Stages({gate,repoWide:()=>[gate('precheck',['node','precheck'])],contractGates:()=>[gate('proof-contract',['node','contracts'])],
     ledgerGate:()=>gate('defect-ledger',['node','ledger']),closureGate:()=>gate('judge-closure',['node','closure']),auditorCreatedGate:()=>gate('auditors',['node','auditors'])});
   return {repo,ctx,stages,stage:(id:string)=>stages.find(s=>s.id===id),close:()=>rmSync(repo,{recursive:true,force:true})};
@@ -66,6 +69,28 @@ test('doctor can inspect every future Step 7 command before prerequisite evidenc
     rmSync(join(f.repo,'research/demo-step7-v2'),{recursive:true,force:true});
     const ctx={...f.ctx,doctor:true};
     for(const stage of f.stages)assert.doesNotThrow(()=>stage.plan?.(ctx,stage.units(ctx))??[],stage.id);
+  }finally{f.close();}
+});
+
+test('outside maintenance has separate tasks and waits between parallel frontier waves',()=>{
+  const f=fixture();try{
+    const phase='impact-initial',pack='pack-0001';
+    mkdirSync(join(f.repo,'research/demo-consumer-maintenance'));
+    writeFileSync(join(f.repo,`research/demo-consumer-maintenance/${pack}.json`),JSON.stringify({lanes:['1','2','3'].map(lane=>({lane,task:`research/demo-consumer-maintenance/${pack}-lane-${lane}.md`,report:`research/demo-consumer-maintenance/${pack}-lane-${lane}-report.json`}))}));
+    writeFileSync(join(f.repo,'research/demo-step7-v2/impact-initial-1.json'),'{}');
+    writeFileSync(join(f.repo,'research/demo-step7-v2/impact-initial-1-progress.json'),JSON.stringify({passes:[phase,`${phase}-pass-2`],work_order:[{kind:'frontier',phase},{kind:'maintenance',id:pack},{kind:'frontier',phase:`${phase}-pass-2`}]}));
+    const stage=f.stage('7.2-impact'),units=stage.units(f.ctx);
+    assert.deepEqual(units.slice(3,6),['1','2','3'].map(lane=>`maintenance:${pack}:${lane}`));
+    for(const unit of units.slice(3,6))assert.deepEqual(stage.unitPrerequisites(f.ctx,unit),units.slice(0,3));
+    for(const unit of units.slice(6))assert.deepEqual(stage.unitPrerequisites(f.ctx,unit),units.slice(3,6));
+    const jobs=stage.plan(f.ctx,units.slice(3,6));
+    assert.equal(jobs.length,3);
+    for(const job of jobs){
+      assert.equal(job.brief,'briefs/consumer-maintenance.md');
+      assert.match(job.task,/consumer-maintenance\/pack-/);
+      assert.ok(stage.pattern(f.ctx).test(`alpha-repair-${job.label}.result.json`));
+      assert.equal(job.profile,MODEL_PROFILE_NAMES.solXHigh);
+    }
   }finally{f.close();}
 });
 test('7.7 repeats only on a complete above-threshold report; gate failures preserve the repair loop',()=>{

@@ -105,7 +105,9 @@ export function gateDiagnostics(failures, allIds) {
     const { advisory, ...failure } = record;
     if (record.ok !== true && !(record.ok == null && record.code === 0)) {
       const check = String(record.id ?? record.check ?? 'unknown');
-      diagnostics.push({ index: diagnostics.length, id: check, check, ...subjectsFor(check, failure, valid), failure });
+      const ownership=subjectsFor(check, failure, valid);
+      if(failure.frontierScope?.global?.length)ownership.ownerHeld=true;
+      diagnostics.push({ index: diagnostics.length, id: check, check, ...ownership, failure });
     }
     visit(advisory);
   }

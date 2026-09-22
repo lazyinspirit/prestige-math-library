@@ -16,7 +16,7 @@ orchestrator.
 | 5a — review | 5a-prepare, 5a-read, 5a-split, 5a-refute, 5a-collect, 5a-adjudicate, 5a-baseline | Independent reader/refuter pass, routed group adjudication and frozen post-review evidence |
 | 5b — reconcile and close | 5b-edges, 5b-cross, 5b-close | Cross-group dependency audit, impact accounting and closure receipt |
 | 6 — judge | 6-scope, 6-judge | Frozen item judgments and group reader digests |
-| 7 — repair | 7-baseline, 7-scope, 7.1-adjudicate through 7.10-gate, 7-freeze | Repeat adjudication, downstream repair and stable certification to the threshold, then repair/gate until green |
+| 7 — repair | 7-baseline, 7-scope, 7.1-adjudicate through 7.10-gate, 7-freeze | Repeat frontier adjudication, frontier impact repair and stable certification to the threshold, then frontier repair/gate until green |
 | 8 — certify changes | 8-scope, 8-scope-render, 8-scope-freeze, 8-changes-judge, 8-close, 8-changes-stamp, 8-receipt | Scope review, change judgments, impact closure and stamps |
 | 9 — close run | 9-contract-close through 9-close-v2 | Contracts, pathways, readiness, evidence, owner report and commit |
 
@@ -333,148 +333,150 @@ adjudication, not automatic authority to rewrite a sound result.
 
 ## Step 7 repair protocol
 
-`tools/step7-workflow.mjs` owns round preparation, result collection, central
-certification, judgment and closure checks. `7-baseline` and `7-scope` freeze
-the original frontier before the numbered protocol starts.
+`tools/step7-workflow.mjs` owns preparation, collection, central certification,
+judgment and closure. `7-baseline` and `7-scope` freeze the immutable frontier
+in `research/<run>-step7-v2/frontier.json`. Step-7 repair, adjudication,
+rejudgment and item gates use only those IDs, including published items in that
+frontier. Outside consumers, published or draft, never enter these mechanisms.
 
 | Part / stage | Required work |
 |---|---|
-| 7.1 / `7.1-adjudicate` | One Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs all confirmed defects and identifies all downstream consumers. |
-| 7.2 / `7.2-impact` | Exactly three Sol xhigh owner agents repair relevant downstream effects throughout the library, including published items. Empty ownership lanes record a no-op. |
-| 7.3 / `7.3-certify` | After every writer drains, the orchestrator recertifies the complete repaired state in one stable pass. |
-| 7.4 / `7.4-rejudge` | Terra rejudges repaired items against that stable state. |
-| 7.5 / `7.5-adjudicate` | Sol xhigh batch adjudicators resolve renewed rejections, repair all confirmed defects and identify downstream consumers. |
-| 7.6 / `7.6-impact` | Three Sol xhigh owner agents repair all relevant downstream effects, including published consumers. |
-| 7.7 / `7.7-certify` | The orchestrator recertifies the complete state in one pass after all writers drain; repeat 7.4–7.7 until the threshold is met. |
-| 7.8 / `7.8-gate` | Run the complete gate battery. |
-| 7.9 / `7.9-repair` | Owner agents repair every gate failure; the orchestrator recertifies changed items after writers drain. |
-| 7.10 / `7.10-gate` | Rerun the complete gate battery; repeat 7.9–7.10 until green. |
+| 7.1 / `7.1-adjudicate` | One Sol xhigh adjudicator per batch resolves Step-6 rejections and repairs confirmed frontier defects. |
+| 7.2 / `7.2-impact` | Three Sol xhigh owner agents concurrently close disjoint frontier impact assignments; empty lanes record no-ops. |
+| 7.3 / `7.3-certify` | After all frontier repairs/reviews close and writers drain, certify the stable state centrally. |
+| 7.4 / `7.4-rejudge` | Terra rejudges repaired frontier items against the stable state. |
+| 7.5 / `7.5-adjudicate` | Sol xhigh batch adjudicators resolve renewed frontier rejections and repair confirmed defects. |
+| 7.6 / `7.6-impact` | Three concurrent owner lanes close frontier impacts. |
+| 7.7 / `7.7-certify` | Certify once after repair closure and all writers drain; repeat 7.4–7.7 until below threshold. |
+| 7.8 / `7.8-gate` | Run the complete battery with item findings scoped to the frozen frontier. |
+| 7.9 / `7.9-repair` | Three concurrent owner lanes repair actual frontier gate subjects; no additions. Centrally recertify after closure. |
+| 7.10 / `7.10-gate` | Rerun the same scoped battery; repeat 7.9–7.10 until green. |
 
 The threshold is `20 * unique_fatal_original_frontier_items < original_scope_size`
-in the latest completed adjudication round. Count each original item once even
-if several judges or rejection rows name it. The denominator is immutable;
-new suppliers, published consumers and a shrinking repair queue do not change
-it. Exactly 5% continues the loop. The threshold licenses entry to the final
-gate, never acceptance of an unresolved defect. Missing verdicts or decisions,
-uncertainty, stale certification and incomplete impact coverage block closure.
-Fatal classification controls only the threshold. Confirmed nonfatal defects
-also require repair; false positives require evidence without unnecessary edits.
-New adjudicator packs require `defect_type` (`logic`, `dependency_citation`,
-or `other`) for confirmed fatal decisions. Original V2 packs omitted that
-category. Coverage accepts a missing historical category only when the exact
-row matches the frozen pack, collected decision, hash-bound worker report and
-successful Sol xhigh dispatch. It remains fatal, explicitly `unclassified` in
-statistics; no historical decision is rewritten or mathematical category guessed.
-Changed evidence and unbound legacy omissions still fail. This compatibility
-does not replace current-carrier, repair, judgment or certification checks.
+in the latest completed adjudication round. Count each original item once;
+additions, outside consumers and smaller queues do not change the denominator.
+Exactly 5% continues the loop. The threshold permits the final gate, never
+unresolved defects or uncertainty. Confirmed nonfatal defects also require repair;
+false positives require evidence without unnecessary edits.
 
-Downstream work is triggered only by a change to the original `## Statement`
-or `## Definition` section, including lemmas, propositions and corollaries.
-The engine freezes section hashes in repair packs and compares them after
-repairs; no semantic classifier. Proof-only, citation, dependency and metadata
-edits leave consumers alone. New prerequisite interfaces count as additions.
-Gate subjects remain mandatory independently. Historical frozen packs without
-section snapshots retain their existing obligations; no before-state is guessed.
+New adjudication packs require `defect_type` (`logic`,
+`dependency_citation` or `other`) for confirmed fatal decisions. Historical V2
+omissions remain usable only when the exact row matches the frozen pack,
+collected decision, hash-bound report and successful Sol xhigh dispatch.
+They remain fatal and explicitly unclassified; never guess the category or
+rewrite historical evidence.
 
-For qualifying statement changes, discovery includes transitive dependencies and uses
-in proofs, citations and page interfaces throughout the library. Record exact
-dependency paths and mathematical effects, distinguish candidates from confirmed
-repair targets, and reconcile newly discovered consumers before certification.
-The graph keeps declared `deps`, `justified_by` and `forward_refs` separate from
-body links and `external_refs`. Declared dependencies propagate transitively.
-References to a repaired item or its declared transitive consumers require
-examination, but a reference-only edge terminates automatic propagation.
-It does not declare the reference irrelevant: owners check the actual use,
-repair genuine effects and reconcile missing load-bearing dependencies. A
-restated reference consumer becomes a new propagation source. This prevents
-explanatory reference cycles from turning a local correction into a whole-library
-review while retaining direct-reference and explicit-discovery coverage.
-New review contexts bind the reviewed item's full guard and its direct suppliers'
-Statement/Definition hashes, not supplier proofs or internal dependency closures.
-Proof-only supplier edits therefore do not invalidate consumer reviews.
-Certification still binds complete stable content and context.
-Legacy review evidence is not rewritten. It may be reused only when its original
-broader hash is exactly reconstructible, covered every now-required carrier,
-and those carriers remain unchanged; otherwise a genuine new review is required.
-Worker-reported consumers of qualifying statement changes enter assignments even when the dependency
-graph has no edge to them. Continuations retain those IDs until a current review
-covers them; a sound consumer closes unchanged, and only necessary minimal
-repairs are made.
-All three owners run concurrently in 7.2, 7.6, 7.9 and their continuation passes.
-Before launching a continuation, the engine compares its pending item set and
-whole-library content guards with prior assignments. An exact repeat is a
-no-progress owner hold, not another paid wave. This also catches a return to an
-earlier content state with the same pending work. Resolve the stale evidence or
-repair oscillation before retry; the hold never certifies or waives unfinished work.
-Pre-statement-policy packs are excluded from this comparison so a one-time
-migration to statement-based review contexts is not mistaken for stagnation.
-Owners have disjoint item assignments and repair suppliers before consumers
-within each assignment. Shared metadata changes use the short acquire/edit/release
-protocol in `briefs/step7-owner-repair.md` and `tools/step7-shared-write-lock.mjs`.
-Reread shared files after acquisition; keep mathematical research outside the
-lock. Later supplier statement changes requeue stale reviews before certification.
-If a repair reveals additional relevant consumers, the engine continues the
-repair phase with fresh disjoint assignments. Complete that work and any further
-downstream effects before entering the one stable certification pass.
-Published status does not exempt a relevant consumer from this authorized
-repair pass; maintain the canonical published-defect ledger with evidence and
-current audit status. Shared ledgers and metadata require the shared metadata
-lock, never overlapping edits to those files.
+A change to the original `## Statement` or `## Definition`, including a
+lemma, proposition or corollary, triggers downstream examination. New packs
+freeze section hashes and compare them directly after repair. Proof, citation,
+dependency and metadata changes with unchanged interfaces do not propagate.
+Examine direct consumers through declared dependencies and references; a
+reference is a candidate for examination, not automatic repair authority.
+Record exact mathematical uses and explicit discoveries, including missing
+load-bearing dependencies. Repair only a genuine effect with the smallest
+logically sufficient change. Continue another hop only if that consumer's
+Statement/Definition changes. Never expand a blanket transitive closure through
+unchanged consumers.
 
-Mathematical workers record evidence, outcomes and repairs only. The central
-tool stage certifies after all writers finish; there is no per-item resealing
-while another worker can change context. Round identity and exact current hashes
-bind verdicts, decisions and certificates. Historical terminal receipts remain
-audit evidence and do not close a new round.
-Owner reports must copy the exact frozen assignment identity. `repaired` means
-the item's guarded content changed in that wave. A contract/page-only correction
-uses an `unaffected` item review with its actual metadata repair recorded in the
-reason and `metadata_repair_only:true`. Unfamiliar mathematics requires sources
-actually consulted, not an empty citation list or invented familiarity.
-An owner-authorized correction to an uncollected handoff preserves the original
-report and attributes any new review separately. Report `supporting_evidence`
-maps repository research paths to SHA-256 hashes; collection verifies and binds
-those originals and supplements into the resulting evidence. This never waives
-normal assignment, review, source, current-carrier or dispatch checks.
+Frontier consumers enter Step-7 assignments, whether published or draft.
+Outside consumers enter the separate durable protocol in
+`tools/consumer-maintenance.mjs`, using `briefs/consumer-maintenance.md`.
+After frontier writers drain, three disjoint maintenance lanes examine direct
+consumer obligations before central certification. Each obligation binds the
+supplier's exact Statement/Definition event and its consumer, and closes once
+for that event. Step-7 gates, rejudgment and unrelated context changes cannot
+requeue outside work. A genuine later supplier-interface event creates a new
+obligation.
 
-Batch adjudicators and all three owner repair agents may author new items only
-to satisfy genuine unmet prerequisites of assigned repairs. Document the precise
-missing claim, the consuming proof step and why existing items do not suffice.
-Fully author definitions/proofs with explicit hypotheses and source evidence;
-uncertain mathematics remains a blocker. Check existing IDs, aliases and active
-assignments before choosing unique IDs. Register additions in the canonical
-registry/index, owning page, applicable manifest and proof contract through the
-shared metadata lock for owner waves. Discover dependencies and all downstream consumers,
-including published consumers, and finish every relevant repair before central
-certification. New items join the complete certification inventory and gate
-battery without enlarging the frozen original scope. Their author-provenance
-evidence never fabricates a judge verdict or waives other gates. Unrelated
-new results, orphan item files and overlapping ownership remain unauthorized.
+All statement changes propagate under the same direct-hop rule, including
+changes made to published or draft maintenance items. A necessary maintenance
+statement change emits a new event; a proof-only edit emits none. A cascade
+may return to the frontier, where the ordinary frontier owner protocol handles
+it. Never send a frontier item to outside maintenance, or an outside item to
+Step-7 repair, adjudication, rejudgment or item gates.
 
-`7-freeze` snapshots the successfully closed state for Step 8. Legacy terminal
-resolution and recovery tools remain available only for their historical
-protocols; they are not the new workflow's convergence mechanism.
-Preflight retains dependency, contract, boundary, citation and ledger checks.
-Repair prompts contain current unresolved findings and assigned impact targets;
-upheld records and mere supplier mentions are not repair targets.
-Step-7 gate routing flattens all failed primary/advisory checks and extracts
-subjects using each detector's failure format. PASS rows, inventories and cited
-suppliers do not confer repair ownership. Three disjoint lanes receive the
-diagnostics relevant to their subjects; global or unrecognized components remain
-explicit obligations assigned to one lane. Full diagnostics and assignments stay
-in frozen files, read in bounded chunks rather than embedded in launch prompts.
-Gate candidates are not propagation seeds: actual statement changes and their explicit
-consumer discoveries trigger downstream closure before certification.
-Forward-reference gates suppress inventories and drain their output before exit.
-Inherited published items need not acquire a new-batch proof contract merely
-to enter certification; their licence, precheck and final published-repair checks
-remain mandatory. New proof-bearing items require their owning contract;
-definitions explicitly marked proof-not-applicable need no new proof contract.
-Contract ownership comes from its explicit `scope`, never textual dependency mentions.
-Inherited Step-5 cross-group published repairs retain their original provenance.
-The Step-7 guard requires their claim file to match the frozen Step-5 receipt
-and their historical repaired content to match the Step-7 baseline; this
-recognition grants no licence for a new edit or exemption from later certification.
+For each proposed maintenance edit, record the exact `affected_use`,
+`invalidated_claim`, `minimality` explanation and exact before/after snippets.
+Reconstruct the resulting file from those snippets against its frozen input;
+reject unreported changes. Leave a sound consumer unchanged with a specific
+unaffected explanation. This mechanical evidence check does not prove that an
+edit is mathematically necessary or minimal. Source reading, uncertainty and
+independent reasoning requirements apply in full. Report unresolved mathematics
+as a blocker. Maintenance authorizes no unrelated rewrites or new items.
+Keep candidate, assigned and completed evidence distinct. Finish the required
+maintenance and any frontier work it discovers before central certification.
+Confirmed published defects remain in the canonical published-consumer ledger;
+operational queue state belongs in run records.
+
+Review contexts bind the reviewed item's full guard and its direct suppliers'
+Statement/Definition hashes. Supplier proof-only changes do not invalidate a
+consumer review. Certification still binds the complete stable content and
+context. Historical packs and reports remain immutable; missing before-section
+snapshots are never reconstructed by guesswork. Their historical obligations
+remain recorded, while new assignments obey current frontier scope. Reuse
+legacy reviews only when the original hash is reconstructible, the review
+covered the required carriers, and those carriers remain unchanged.
+
+All three owner lanes run concurrently in 7.2, 7.6, 7.9 and every continuation.
+Assignments stay disjoint. Finish the preceding writers before continuing and
+finish all required frontier reviews/repairs and separate consumer maintenance
+before the one central certification pass. Later supplier statement changes requeue affected frontier
+reviews before certification. Shared metadata edits use short acquire/read/edit/
+release sections under `tools/step7-shared-write-lock.mjs`; never hold the lock
+during research. Read shared files again after acquiring it.
+A repeated pending set at any previously assigned content state holds for
+operator resolution of stale evidence or oscillation. The hold neither
+dispatches another identical wave nor certifies unfinished work. Historical
+policy migration must preserve original evidence.
+
+Workers record evidence and repairs; they do not certify their own dispatches
+or manufacture judgments. Round identity and current hashes bind every verdict,
+decision and certificate. Missing evidence, stale certification and incomplete
+frontier coverage block closure. Reports copy the frozen assignment identity.
+`repaired` requires a guarded item change; a contract/page-only correction
+uses an `unaffected` item review, an exact reason and
+`metadata_repair_only:true`. Unfamiliar mathematics needs sources actually read.
+An authorized correction to an uncollected handoff preserves its original
+report and attributes new review separately; `supporting_evidence` paths and
+hashes bind originals and supplements without waiving dispatch or source checks.
+
+Before 7.9, adjudicators and frontier owner agents may author a genuine unmet
+prerequisite of an assigned repair. Record the missing claim, consuming proof
+step and why existing items do not suffice. Fully author it with explicit
+hypotheses, source evidence and honest uncertainty; use a unique ID and register
+its index, page, manifest and contract with the shared-write protocol.
+Preserve author-origin and certification integrity. Additions stay outside the
+immutable frontier and its Step-7 rejudgment/gate loops. 7.9 and its
+continuations permit no new items. Unrelated additions remain unauthorized.
+
+`tools/step7-frontier-gate.mjs` scopes the 7.8/7.10 battery. Precheck,
+rendercheck and prosecheck receive explicit frontier item paths. Supported
+broad detectors expose JSON findings, partitioned by actual failing subject.
+The defect ledger validates its frozen `--frontier` and excludes known outside
+subjects while retaining structural/history checks. Outside-maintenance and
+auditor-addition certification gates do not gate Step 7. Published frontier
+items retain their ordinary frontier gates. PASS rows, inventories,
+upheld records and merely cited suppliers confer no repair ownership.
+
+Keep complete raw diagnostics, raw exit codes and explicit outside exclusions.
+An outside-only result may clear the scoped gate but is not a mathematical pass
+for those outside findings. Mixed results retain frontier failures; global
+integrity, cycles, runtime errors, malformed output and unknown diagnostics
+remain blocking. Global/tool failures require operator resolution when content
+repair cannot resolve them. Gate candidates alone never seed downstream work.
+Failed primary and advisory findings retain their actual subject ownership in
+frozen evidence; current frontier statement changes independently trigger
+impact examination.
+
+Historical published repairs, including Step-5 cross-group repairs, retain their
+original claims, provenance and content evidence. This grants no new Step-7
+outside assignment or certification obligation. Keep historical licenses and
+source reports intact; a scoped Step-7 pass cannot attest outside mathematics.
+
+`7-freeze` snapshots the closed frontier state for Step 8. Historical terminal
+resolution tools remain available for their original protocols, not as new
+convergence shortcuts. Explicit post-freeze recovery follows the guarded
+Step-8 controls below.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current
 stamps through the tool. Genuine Step-8 auditor/adjudicator-created additions

@@ -39,44 +39,52 @@ Step 5a runs independent reviewers, read-only refuters and routed group
 adjudication; Step 5b reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when
 unsure. Logical validity governs decisions; sources and judges can be mistaken.
-Step 7 runs batch Sol xhigh adjudication/repair, three Sol xhigh owner agents
-in parallel to examine downstream consumers across the whole library including published
-items, and one orchestrator certification pass after all writers drain. A
-consumer is changed only when absolutely necessary and then with the smallest
-logically sufficient edit; sound consumers remain unchanged with an evidenced
-review. The orchestrator verifies complete examination and necessary-repair
-closure before certifying.
-Shared metadata edits use short exclusive sections through
-`tools/step7-shared-write-lock.mjs`; item review and disjoint repairs remain
-parallel in all owner waves and continuations. Terra rejudgment,
-Sol adjudication, three-owner downstream repair and stable recertification repeat
-until the latest round's unique fatal original-frontier items are strictly less
-than 5% of the frozen original scope. Every confirmed defect, including nonfatal
-defects, requires repair; fatal classification controls only that threshold.
-New downstream work continues in the repair phase until complete, before
-certification.
+Step 7 must confine repair, adjudication, Terra rejudgment and item gates to the
+immutable frontier in `research/<run>-step7-v2/frontier.json`. Sol xhigh batch
+adjudicators repair confirmed frontier defects, and three Sol xhigh owner lanes
+run concurrently on disjoint frontier impact assignments. Every necessary
+frontier repair and review finishes before one central certification pass after
+all writers drain. Repeat judgment and repair until the latest round's unique
+fatal original items are strictly below 5% of the frozen frontier. Nonfatal
+defects also require repair; the threshold only permits the final gate.
+
 Downstream work starts only when a repair changes its `## Statement` or
-`## Definition` section, including theorem-like lemmas and corollaries.
-Proof-only, citation and metadata repairs do not trigger downstream review or
-invalidate consumer reviews. New packs freeze section hashes; historical packs
-without them keep existing obligations without guessing old content.
-An identical pending set at a previously assigned content state holds for
-operator resolution instead of launching a duplicate repair wave.
-For statement changes, declared dependencies propagate transitively; explanatory links remain direct
-examination candidates without automatically spreading impact through reference
-cycles. Necessary statement changes restart propagation, and explicit worker discoveries
-always remain in scope.
-Batch adjudicators and all three owner agents may fully author new items for
-genuine unmet prerequisites only. Additions require unique IDs, registry/index
-and metadata registration, downstream repair closure, central certification and
-all applicable gates; they never change the frozen threshold denominator.
-The complete gate then repeats with owner repairs and recertification until green.
-Gate repair assigns actual failing subjects, not passing inventories or cited
-suppliers. Full diagnostics remain in frozen files; only statement/definition changes and
-reported consumer effects propagate into further downstream review.
-Historical V2 fatal decisions lacking a category require exact original evidence
-to remain usable; reports label their category unclassified, without changing
-their fatal outcome. New adjudications must provide the category explicitly.
+`## Definition`. Examine direct dependency/reference consumers; continue a
+further hop only when a necessary repair changes that consumer's own interface.
+Proof-only, citation, dependency and metadata edits do not propagate. Never
+pre-expand a blanket transitive closure. Sound consumers remain unchanged.
+New packs retain section hashes, and historical evidence stays immutable.
+Repeated pending work at an earlier content state holds for operator resolution.
+
+Frontier membership governs scope: published frontier items follow ordinary
+Step 7; published or draft outside consumers use separate maintenance.
+After frontier writers drain, three disjoint maintenance lanes examine direct
+consumer events before central certification. Each supplier-interface event and
+consumer is handled once; gates and unrelated context changes do not reopen it.
+A necessary maintenance statement change may propagate another hop, returning
+frontier targets to ordinary owner work. No outside target enters Step-7 repair,
+adjudication, rejudgment or item gates.
+
+Maintenance reports bind exact edit snippets and explain the affected use,
+invalidated claim and minimality. Unreported changes are rejected; mathematical
+necessity still requires an honest examination of the argument. Sound consumers
+remain unchanged. Frontier repair and separate maintenance must both finish
+before certification; candidate records alone do not establish completion.
+
+Steps 7.8/7.10 run the battery with item findings scoped to the frozen frontier.
+Outside findings are explicitly excluded, with complete raw diagnostics retained;
+they are neither mathematical passes nor frontier blockers. Global integrity,
+runtime and unknown failures still block. Three parallel 7.9 lanes repair actual
+frontier failures, followed by central recertification and the same gate.
+7.9 permits no new items. Earlier repair phases may fully author genuine unmet
+prerequisites, with registered ownership and author-origin evidence, without
+adding them to the frozen frontier or its rejudgment/gate loops.
+Shared metadata writes use short sections under
+`tools/step7-shared-write-lock.mjs`; continuations wait for previous writers.
+Historical repairs and certificates remain evidence, not fresh repair authority.
+Historical V2 fatal decisions lacking a category need exact original evidence
+and remain explicitly unclassified; new adjudications provide the category.
+
 Across Steps 1–9 outside this authorized Step-7 loop, every failed gate is
 immediately escalated to the owner. A
 gate failure never launches another automatic repair, review, author or judge

@@ -9,6 +9,7 @@ import {MODELS} from '../../models.mjs';
 import {assertImpactProgress} from '../../step7-workflow.mjs';
 import {recoverStep7Impact} from '../../step7-impact-recovery.mjs';
 import {writeAuditorCreatedBaseline,certifyAuditorCreatedItems} from '../../auditor-created-items.mjs';
+import {maintenanceStatus} from '../../consumer-maintenance.mjs';
 
 const run='fixture', reason='The proof and its supplier hypotheses were checked for logical validity.', h='a'.repeat(64);
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
@@ -42,7 +43,7 @@ test('new adjudication packs require an explicit fatal category before collectio
   const f=fixture();try{
     const pack=prepareAdjudication(f.root,run,'initial',1);
     assert.equal(pack.adjudicationSchemaVersion,1);
-    item(f.root,'thm-item-0','Corrected proof.');reports(f.root,pack,{},['thm-published-consumer']);
+    item(f.root,'thm-item-0','Corrected proof.');reports(f.root,pack,{},['thm-frontier-consumer']);
     const path=workerReport(f.root,run,'initial',1,'1'),report=JSON.parse(readFileSync(path,'utf8'));
     delete report.decisions[0].defect_type;json(path,report);
     assert.throws(()=>collect(f.root,run,'initial',1),/missing or invalid fatal defect_type/);
@@ -109,14 +110,14 @@ test('review contexts bind direct supplier statements, not indirect proof depend
 test('a reference candidate closes unchanged, or propagates after necessary repair before certification',()=>{
   for(const repair of [false,true]){
     const f=fixture();try{
-      item(f.root,'thm-reference','Orientation [[thm-item-0]].',[],true);
-      item(f.root,'thm-reference-consumer','Uses reference result.',['thm-reference'],true);
+      item(f.root,'thm-reference','Orientation [[thm-item-0]].',[],false);
+      item(f.root,'thm-reference-consumer','Uses reference result.',['thm-reference'],false);
       const adjudicate=prepareAdjudication(f.root,run,'initial',1);
-      item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-published-consumer','thm-reference']);
+      item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-frontier-consumer','thm-reference']);
       const owners=prepareImpact(f.root,run,'impact-initial',1);
       assert.ok(Object.values(owners.assignments).flat().includes('thm-reference'));
       assert.equal(Object.values(owners.assignments).flat().includes('thm-reference-consumer'),false);
-      if(repair)item(f.root,'thm-reference','Corrected orientation [[thm-item-0]].',[],true);
+      if(repair)item(f.root,'thm-reference','Corrected orientation [[thm-item-0]].',[],false);
       reports(f.root,owners);
       const next=advanceImpact(f.root,run,'impact-initial',1);
       if(repair){
@@ -132,15 +133,23 @@ test('a reference candidate closes unchanged, or propagates after necessary repa
 function item(root:string,id:string,body='Original proof.',deps:string[]=[],published=false,kind='theorem') {
   const content=body.startsWith('## ')?body:`## ${kind==='definition'?'Definition':'Statement'}\n${body}`;
   writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: ${kind}\nstatus: ${published?'published':'draft'}\ndeps: [${deps.join(', ')}]\n---\n${content}\n`);
+  const manifest=join(root,'research',`${run}-batch-1.pages.json`);
+  if(!published&&existsSync(manifest)&&!existsSync(join(workflowDir(root,run),'frontier.json'))){
+    const pages=JSON.parse(readFileSync(manifest,'utf8'));
+    if(!pages.some((page:any)=>page.items.some((row:any)=>row.id===id))){
+      pages[0].items.push({id});json(manifest,pages);
+      appendFileSync(join(root,'research',`${run}-judge.jsonl`),JSON.stringify({id,model:MODELS.terra.id,context_sha256:h,item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),keep:true})+'\n');
+    }
+  }
 }
 function guard(root:string,id:string){return itemHashGuard(readFileSync(join(root,'items',`${id}.md`),'utf8'));}
 function contexts(root:string,ids:string[]){return new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),context_sha256:h}]));}
 function fixture() {
   const root=mkdtempSync(join(tmpdir(),'step7-workflow-'));
   mkdirSync(join(root,'items'));mkdirSync(join(root,'research'));
-  const ids=Array.from({length:21},(_,i)=>`thm-item-${i}`);
+  const ids=[...Array.from({length:21},(_,i)=>`thm-item-${i}`),'thm-frontier-consumer'];
   for(const id of ids)item(root,id);
-  item(root,'thm-published-consumer','Uses root.',[ids[0]],true);
+  item(root,'thm-frontier-consumer','Uses root.',[ids[0]],false);
   item(root,'thm-unrelated-consumer');
   json(join(root,'research',`${run}-batch-1.pages.json`),[{id:'page',items:ids.map(id=>({id}))}]);
   writeFileSync(join(root,'research',`${run}-judge.jsonl`),ids.map((id,i)=>JSON.stringify({id,model:MODELS.terra.id,context_sha256:h,item_sha256:contexts(root,[id]).get(id).item_sha256,keep:i!==0})).join('\n')+'\n');
@@ -160,7 +169,7 @@ function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
 }
 function initial(root:string,ids:string[]) {
   const pack=prepareAdjudication(root,run,'initial',1);
-  item(root,ids[0],'Repaired root proof.');reports(root,pack,{},['thm-published-consumer']);
+  item(root,ids[0],'Repaired root proof.');reports(root,pack,{},['thm-frontier-consumer']);
   return prepareImpact(root,run,'impact-initial',1);
 }
 function registerCreated(root:string,id:string,kind:string) {
@@ -169,16 +178,129 @@ function registerCreated(root:string,id:string,kind:string) {
   json(join(root,'research',`${run}-batch-1.proof-contracts.json`),{contracts:{[id]:{risk:'medium',kind}}});
 }
 
+test('policy: published outside consumers are maintenance candidates, never owner repair assignments',()=>{
+  const f=fixture();try{
+    item(f.root,'thm-published-outside','Uses the root.',['thm-item-0'],true);
+    const owners=initial(f.root,f.ids);
+    assert.ok(owners.consumer_maintenance.some((row:any)=>row.id==='thm-published-outside'));
+    assert.equal(Object.values(owners.assignments).flat().includes('thm-published-outside'),false);
+    item(f.root,'thm-published-outside','An unauthorized cosmetic rewrite.',['thm-item-0'],true);
+    reports(f.root,owners);
+    assert.throws(()=>collect(f.root,run,'impact-initial',1),/out-of-frontier consumer cannot be repaired by Step 7/);
+  }finally{f.cleanup();}
+});
+
+function maintenanceReports(root:string,pack:any,changes:Record<string,Array<{before:string,after:string}>>={}) {
+  for(const lane of pack.lanes){
+    const assignment=JSON.parse(readFileSync(join(root,lane.assignment),'utf8'));
+    const decisions=lane.ids.map((id:string)=>{
+      const edits=(changes[id]??[]).map(edit=>({...edit,necessity:reason}));
+      let text=readFileSync(join(root,'items',`${id}.md`),'utf8');
+      for(const edit of edits)text=text.replace(edit.before,edit.after);
+      writeFileSync(join(root,'items',`${id}.md`),text);
+      return {id,disposition:edits.length?'repaired':'sound',reason,
+        understanding:{basis:'familiarity',evidence:reason,uncertainty:false},
+        event_uses:assignment.obligations.filter((row:any)=>row.id===id).map((row:any)=>({event_key:row.event_key,affected_use:reason,reason})),
+        affected_use:reason,invalidated_claim:reason,minimality:reason,edits};
+    });
+    json(join(root,lane.report),{run,pack:pack.id,lane:lane.lane,input_sha256:digest(readFileSync(join(root,lane.assignment),'utf8')),decisions});
+    const label=`consumer-maintenance-impact-initial-r1-${pack.id}-lane-${lane.lane}`;
+    json(join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`),{run,role:'alpha-repair',label,ok:true,model:MODELS.sol.id,provider_effort:'xhigh'});
+  }
+}
+
+// Exercise the real separate maintenance path, not the Step 7 owner report
+// schema. Fixtures use synthetic evidence; they make no mathematical claims.
+function completedPublishedRepair(statementChange:boolean) {
+  const f=fixture();
+  item(f.root,'thm-published-outside','## Statement\nOriginal assertion.\n## Proof\nOriginal proof.',['thm-item-0'],true);
+  item(f.root,'thm-published-leaf','Uses the published assertion.',['thm-published-outside'],true);
+  const owners=initial(f.root,f.ids);
+  reports(f.root,owners);
+  const next=advanceImpact(f.root,run,'impact-initial',1);
+  assert.equal(next.complete,false);assert.ok(next.maintenance);
+  assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:contexts}),/continuation must finish/);
+  maintenanceReports(f.root,next.maintenance,{'thm-published-outside':[
+    ...(statementChange?[{before:'Original assertion.',after:'Corrected assertion.'}]:[]),
+    {before:'Original proof.',after:'Corrected proof.'},
+  ]});
+  let progress=advanceImpact(f.root,run,'impact-initial',1);
+  if(statementChange){
+    assert.ok(progress.maintenance.ids.includes('thm-published-leaf'));
+    maintenanceReports(f.root,progress.maintenance);
+    progress=advanceImpact(f.root,run,'impact-initial',1);
+  }
+  assert.equal(progress.complete,true);
+  assert.equal(maintenanceStatus(f.root,run).complete,true);
+  return f;
+}
+
+test('policy: published statement repairs propagate to their own downstream maintenance consumers',()=>{
+  const f=completedPublishedRepair(true);try{
+    const closed=JSON.parse(readFileSync(join(workflowDir(f.root,run),'impact-initial-1-closed.json'),'utf8'));
+    assert.ok(closed.consumer_maintenance.some((row:any)=>row.id==='thm-published-leaf'),
+      'Published restatement was dropped instead of propagating to its consumer');
+  }finally{f.cleanup();}
+});
+
+test('policy: published proof-only repairs do not propagate',()=>{
+  const f=completedPublishedRepair(false);try{
+    const closed=JSON.parse(readFileSync(f.root+'/research/'+run+'-step7-v2/impact-initial-1-closed.json','utf8'));
+    assert.equal(closed.consumer_maintenance.some((row:any)=>row.id==='thm-published-leaf'),false);
+  }finally{f.cleanup();}
+});
+
+test('policy: separate published repairs are excluded from Terra and renewed adjudication',()=>{
+  const f=completedPublishedRepair(false);try{
+    certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+    const calls:string[][]=[];
+    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
+    judge(f.root,run,1,{contextHasher:contexts,runSweep});
+    assert.equal(calls.flat().includes('thm-published-outside'),false);
+    json(join(workflowDir(f.root,run),'judge-2.json'),{verdicts:[{id:'thm-published-outside',model:MODELS.terra.id,...contexts(f.root,['thm-published-outside']).get('thm-published-outside'),keep:false}]});
+    assert.equal(prepareAdjudication(f.root,run,'repeat',2).rejected.length,0);
+  }finally{f.cleanup();}
+});
+
+test('policy: published consumers inside the frozen frontier remain in Step 7 repair scope',()=>{
+  const f=fixture();try{
+    item(f.root,'thm-frontier-consumer','Published consumer.',['thm-item-0'],true);
+    const owners=initial(f.root,f.ids);
+    assert.equal(Object.values(owners.assignments).flat().includes('thm-frontier-consumer'),true,
+      'Frontier membership, not publication status, determines Step 7 scope');
+  }finally{f.cleanup();}
+});
+
+test('separate maintenance can return a statement impact to the frontier before certification',()=>{
+  const f=fixture();try{
+    item(f.root,'thm-published-outside','## Statement\nOriginal assertion.\n## Proof\nOriginal proof.',['thm-item-0'],true);
+    item(f.root,'thm-item-20','Uses the published interface.',['thm-published-outside']);
+    const owners=initial(f.root,f.ids);reports(f.root,owners);
+    const outside=advanceImpact(f.root,run,'impact-initial',1).maintenance;
+    maintenanceReports(f.root,outside,{'thm-published-outside':[{before:'Original assertion.',after:'Corrected assertion.'}]});
+    const returned=advanceImpact(f.root,run,'impact-initial',1);
+    assert.equal(returned.complete,false);
+    assert.deepEqual(Object.values(returned.pack.assignments).flat(),['thm-item-20']);
+    assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:contexts}),/continuation must finish/);
+    reports(f.root,returned.pack);
+    assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
+    const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+    assert.ok(cert.items.some((row:any)=>row.id==='thm-item-20'));
+    assert.equal(cert.items.some((row:any)=>row.id==='thm-published-outside'),false);
+    assert.equal(maintenanceStatus(f.root,run).packs.length,1,'frontier closure must not requeue outside maintenance');
+  }finally{f.cleanup();}
+});
+
 test('proof-only initial and gate repairs create no downstream assignments and still certify repairs',()=>{
   for(const phase of ['initial','gate']){
     const f=fixture();try{
       item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nBroken proof.');
       initialize(f.root,run);
       const pack=phase==='initial'?prepareAdjudication(f.root,run,'initial',1):prepareImpact(f.root,run,'gate',1,{failures:{id:'precheck',output:'FAIL thm-item-0: invalid proof'}});
-      const before=reviewContextHashes(f.root,['thm-published-consumer'])['thm-published-consumer'];
+      const before=reviewContextHashes(f.root,['thm-frontier-consumer'])['thm-frontier-consumer'];
       item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nRepaired proof.', ['thm-item-1']);
-      assert.deepEqual(reviewContextHashes(f.root,['thm-published-consumer'])['thm-published-consumer'],before);
-      reports(f.root,pack,{},['thm-published-consumer']);
+      assert.deepEqual(reviewContextHashes(f.root,['thm-frontier-consumer'])['thm-frontier-consumer'],before);
+      reports(f.root,pack,{},['thm-frontier-consumer']);
       if(phase==='initial'){
         const owners=prepareImpact(f.root,run,'impact-initial',1);
         assert.deepEqual(Object.values(owners.assignments).flat(),[]);
@@ -188,20 +310,20 @@ test('proof-only initial and gate repairs create no downstream assignments and s
       assert.equal(advanceImpact(f.root,run,ownerPhase,1).complete,true);
       const certificate=certify(f.root,run,ownerPhase,1,{contextHasher:contexts});
       assert.ok(certificate.changed.includes('thm-item-0'));
-      assert.equal(certificate.items.some((row:any)=>row.id==='thm-published-consumer'),false);
+      assert.equal(certificate.items.some((row:any)=>row.id==='thm-frontier-consumer'),false);
     }finally{f.cleanup();}
   }
 });
 
 test('a proof-only owner repair preserves a parallel consumer review and starts no further wave',()=>{
   const f=fixture();try{
-    item(f.root,'thm-published-consumer','## Statement\nStable interface.\n## Proof\nOld proof.',['thm-item-0'],true);
-    item(f.root,'thm-leaf','Uses published supplier.',['thm-published-consumer'],true);
+    item(f.root,'thm-frontier-consumer','## Statement\nStable interface.\n## Proof\nOld proof.',['thm-item-0'],false);
+    item(f.root,'thm-leaf','Uses published supplier.',['thm-frontier-consumer'],false);
     const adjudicate=prepareAdjudication(f.root,run,'initial',1);
-    item(f.root,'thm-item-0','Restated root.');reports(f.root,adjudicate,{},['thm-published-consumer','thm-leaf']);
+    item(f.root,'thm-item-0','Restated root.');reports(f.root,adjudicate,{},['thm-frontier-consumer','thm-leaf']);
     const owners=prepareImpact(f.root,run,'impact-initial',1);
     const before=reviewContextHashes(f.root,['thm-leaf'])['thm-leaf'];
-    item(f.root,'thm-published-consumer','## Statement\nStable interface.\n## Proof\nRepaired proof.',['thm-item-0'],true);
+    item(f.root,'thm-frontier-consumer','## Statement\nStable interface.\n## Proof\nRepaired proof.',['thm-item-0'],false);
     reports(f.root,owners);
     assert.deepEqual(reviewContextHashes(f.root,['thm-leaf'])['thm-leaf'],before);
     assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
@@ -210,9 +332,9 @@ test('a proof-only owner repair preserves a parallel consumer review and starts 
 
 test('initialization freezes real batch shape and initial reports bind exact rejection inputs',()=>{
   const f=fixture();try {
-    const frontier=initialize(f.root,run);assert.equal(frontier.ids.length,21);assert.deepEqual(frontier.batches[0].items,f.ids.sort());
+    const frontier=initialize(f.root,run);assert.equal(frontier.ids.length,22);assert.deepEqual(frontier.batches[0].items,f.ids.sort());
     const pack=prepareAdjudication(f.root,run,'initial',1);assert.equal(pack.rejected.length,1);assert.equal(pack.units.length,1);
-    item(f.root,'thm-item-0','Repair.');reports(f.root,pack,{},['thm-published-consumer']);
+    item(f.root,'thm-item-0','Repair.');reports(f.root,pack,{},['thm-frontier-consumer']);
     const path=workerReport(f.root,run,'initial',1,'1'),report=JSON.parse(readFileSync(path,'utf8'));
     report.input_sha256='b'.repeat(64);
     assert.match(validateReports(pack,[report],{...pack.before,'thm-item-0':guard(f.root,'thm-item-0')}).errors.join('\n'),/mismatched/);
@@ -227,7 +349,7 @@ test('an adjudicator may author a registered load-bearing prerequisite before ow
     const pack=prepareAdjudication(f.root,run,'initial',1),created='lem-created-prerequisite';
     item(f.root,created,'A complete proof of the missing prerequisite.',[],false,'lemma');registerCreated(f.root,created,'lemma');
     item(f.root,f.ids[0],'Repaired proof using the new prerequisite.',[created]);
-    reports(f.root,pack,{},[f.ids[0],'thm-published-consumer']);
+    reports(f.root,pack,{},[f.ids[0],'thm-frontier-consumer']);
     const path=workerReport(f.root,run,'initial',1,'1'),report=JSON.parse(readFileSync(path,'utf8'));
     report.created_items=[{id:created,kind:'lemma',home_page:'page',batch:'1',consumers:[f.ids[0]],...evidence}];
     report.reviews.push({id:created,disposition:'authored',...reviewContextHashes(f.root,[created])[created],...evidence});json(path,report);
@@ -236,20 +358,20 @@ test('an adjudicator may author a registered load-bearing prerequisite before ow
     reports(f.root,owners);const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     assert.ok(cert.items.some((row:any)=>row.id===created));assert.equal(cert.creations[0].id,created);
     assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
-    assert.equal(JSON.parse(readFileSync(join(workflowDir(f.root,run),'frontier.json'),'utf8')).ids.length,21);
+    assert.equal(JSON.parse(readFileSync(join(workflowDir(f.root,run),'frontier.json'),'utf8')).ids.length,22);
   }finally{f.cleanup();}
 });
 
-test('an owner may author a missing definition and the next Terra wave includes it',()=>{
+test('an owner may author a missing definition without adding it to Terra scope',()=>{
   const f=fixture();try{
     writeAuditorCreatedBaseline(f.root,run,7);
     const pack=initial(f.root,f.ids),created='def-created-prerequisite';
     item(f.root,created,'The exact missing definition used below.',[],false,'definition');registerCreated(f.root,created,'definition');
-    item(f.root,'thm-published-consumer','Repaired published proof using the definition.',[f.ids[0],created],true);
-    reports(f.root,pack,{},['thm-published-consumer']);
-    const unit=pack.units.find((value:string)=>pack.assignments[value].includes('thm-published-consumer'));
+    item(f.root,'thm-frontier-consumer','Repaired published proof using the definition.',[f.ids[0],created],false);
+    reports(f.root,pack,{},['thm-frontier-consumer']);
+    const unit=pack.units.find((value:string)=>pack.assignments[value].includes('thm-frontier-consumer'));
     const path=workerReport(f.root,run,pack.phase,1,unit),report=JSON.parse(readFileSync(path,'utf8'));
-    report.created_items=[{id:created,kind:'definition',home_page:'page',batch:'1',consumers:['thm-published-consumer'],...evidence}];
+    report.created_items=[{id:created,kind:'definition',home_page:'page',batch:'1',consumers:['thm-frontier-consumer'],...evidence}];
     report.reviews.push({id:created,disposition:'authored',...reviewContextHashes(f.root,[created])[created],...evidence});json(path,report);
     const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});assert.ok(cert.creations.some((row:any)=>row.id===created));
     assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
@@ -257,19 +379,19 @@ test('an owner may author a missing definition and the next Terra wave includes 
       for(const id of ids){const current=contexts(f.root,[id]).get(id);appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...current,keep:true})+'\n');}
       return {status:0};
     }});
-    assert.ok(judged.items.includes(created));
+    assert.equal(judged.items.includes(created),false);
   }finally{f.cleanup();}
 });
 
-test('all three owners review published downstreams before single stable, idempotent certification',()=>{
+test('all three owners review frontier downstreams before single stable, idempotent certification',()=>{
   const f=fixture();try {
-    const pack=initial(f.root,f.ids);assert.equal(pack.units.length,3);assert.ok(Object.values(pack.assignments).flat().includes('thm-published-consumer'));
+    const pack=initial(f.root,f.ids);assert.equal(pack.units.length,3);assert.ok(Object.values(pack.assignments).flat().includes('thm-frontier-consumer'));
     const task=readFileSync(join(workflowDir(f.root,run),`${workerLabel(pack.phase,pack.round,'1')}.task.md`),'utf8');
-    assert.match(task,/Assignment requires impact review, not an edit/);
-    assert.match(task,/smallest logically sufficient change/);
-    item(f.root,'thm-published-consumer','Updated published proof.',['thm-item-0'],true);reports(f.root,pack);
+    assert.match(task,/Assignment requires examination, not an edit/);
+    assert.match(task,/smallest sufficient edit/);
+    item(f.root,'thm-frontier-consumer','Updated published proof.',['thm-item-0'],false);reports(f.root,pack);
     const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
-    assert.ok(cert.changed.includes('thm-published-consumer'));assert.equal(cert.items.length,2);
+    assert.ok(cert.changed.includes('thm-frontier-consumer'));assert.equal(cert.items.length,2);
     assert.deepEqual(certify(f.root,run,'impact-initial',1,{contextHasher:contexts}),cert);
     assert.equal(verifyCertification(f.root,run).sha256,cert.sha256);
     assert.throws(()=>checkWorkflow(f.root,run,{contextHasher:contexts}),/not completed/);
@@ -279,12 +401,12 @@ test('all three owners review published downstreams before single stable, idempo
 test('worker-reported consumers without graph edges require owner coverage before certification',()=>{
   for(const reporter of ['adjudicator','owner']){
     const f=fixture();try{
-      const target='thm-unrelated-consumer';
+      const target='thm-item-19';
       let pack;
       if(reporter==='adjudicator'){
         const initialPack=prepareAdjudication(f.root,run,'initial',1);
         item(f.root,f.ids[0],'Repaired root proof.');
-        reports(f.root,initialPack,{},['thm-published-consumer',target]);
+        reports(f.root,initialPack,{},['thm-frontier-consumer',target]);
         pack=prepareImpact(f.root,run,'impact-initial',1);
         assert.ok(Object.values(pack.assignments).flat().includes(target));
         reports(f.root,pack);
@@ -347,7 +469,7 @@ test('stale downstream review and newly introduced downstream edge prevent any c
   for(const mode of ['stale','new-edge']){
     const f=fixture();try{
       const pack=initial(f.root,f.ids);reports(f.root,pack);
-      if(mode==='stale') item(f.root,'thm-published-consumer','A late writer changed this.',['thm-item-0'],true);
+      if(mode==='stale') item(f.root,'thm-frontier-consumer','A late writer changed this.',['thm-item-0'],false);
       else item(f.root,'thm-unrelated-consumer','Newly linked consumer.',['thm-item-0']);
       assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:contexts}),/invalid review|unlicensed|downstream|continuation/);
       assert.equal(existsSync(join(workflowDir(f.root,run),'certification.json')),false);
@@ -357,15 +479,15 @@ test('stale downstream review and newly introduced downstream edge prevent any c
 
 test('owner continuation requeues stale suppliers and unchanged consumers, preserves receipts, then certifies once',()=>{
   const f=fixture();try{
-    item(f.root,'thm-leaf','Uses published supplier.',['thm-published-consumer'],true);
+    item(f.root,'thm-leaf','Uses published supplier.',['thm-frontier-consumer'],false);
     const adjudicate=prepareAdjudication(f.root,run,'initial',1);
-    item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-published-consumer','thm-leaf']);
+    item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-frontier-consumer','thm-leaf']);
     const pack=prepareImpact(f.root,run,'impact-initial',1);reports(f.root,pack);
     // The supplier's final carrier differs from what its first report reviewed.
-    item(f.root,'thm-published-consumer','A late completed repair.',['thm-item-0'],true);
+    item(f.root,'thm-frontier-consumer','A late completed repair.',['thm-item-0'],false);
     const next=advanceImpact(f.root,run,'impact-initial',1);
     assert.equal(next.complete,false);
-    assert.deepEqual(Object.values(next.pack.assignments).flat().sort(),['thm-leaf','thm-published-consumer']);
+    assert.deepEqual(Object.values(next.pack.assignments).flat().sort(),['thm-frontier-consumer','thm-leaf']);
     assert.deepEqual(impactPasses(f.root,run,'impact-initial',1),['impact-initial','impact-initial-pass-2']);
     assert.equal(advanceImpact(f.root,run,'impact-initial',1).pack.phase,next.pack.phase);
     assert.equal(existsSync(join(workflowDir(f.root,run),'certification.json')),false);
@@ -380,9 +502,9 @@ test('owner continuation requeues stale suppliers and unchanged consumers, prese
 
 test('new alias-resolved downstream consumers automatically receive an additional owner pass',()=>{
   const f=fixture();try{
-    item(f.root,'thm-unrelated-consumer','Uses an alias requiring impact reconciliation.',['new-published-alias'],true);
+    item(f.root,'thm-unrelated-consumer','Uses an alias requiring impact reconciliation.',['new-published-alias'],false);
     const pack=initial(f.root,f.ids);
-    const supplier=join(f.root,'items','thm-published-consumer.md');
+    const supplier=join(f.root,'items','thm-frontier-consumer.md');
     writeFileSync(supplier,readFileSync(supplier,'utf8').replace('status: published','status: published\naliases: [new-published-alias]'));
     reports(f.root,pack,{},['thm-unrelated-consumer']);
     const next=advanceImpact(f.root,run,'impact-initial',1);
@@ -396,12 +518,12 @@ test('new alias-resolved downstream consumers automatically receive an additiona
 
 test('an earlier consumer review cannot inherit a later supplier repair context within the same wave',()=>{
   const f=fixture();try{
-    item(f.root,'thm-leaf','Uses published supplier.',['thm-published-consumer'],true);
+    item(f.root,'thm-leaf','Uses published supplier.',['thm-frontier-consumer'],false);
     const adjudicate=prepareAdjudication(f.root,run,'initial',1);
-    item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-published-consumer','thm-leaf']);
+    item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-frontier-consumer','thm-leaf']);
     const pack=prepareImpact(f.root,run,'impact-initial',1);
     const oldLeaf={id:'thm-leaf',disposition:'unaffected',...reviewContextHashes(f.root,['thm-leaf'])['thm-leaf'],...evidence};
-    item(f.root,'thm-published-consumer','Supplier repaired after leaf review.',['thm-item-0'],true);
+    item(f.root,'thm-frontier-consumer','Supplier repaired after leaf review.',['thm-item-0'],false);
     reports(f.root,pack,{},['thm-leaf']);
     for(const unit of pack.units){
       const path=workerReport(f.root,run,pack.phase,1,unit),report=JSON.parse(readFileSync(path,'utf8'));
@@ -419,7 +541,7 @@ test('an earlier consumer review cannot inherit a later supplier repair context 
 test('confirmed nonfatal findings are repaired while false positives do not license edits',()=>{
   const f=fixture();try{
     const pack=prepareAdjudication(f.root,run,'initial',1);item(f.root,'thm-item-0','Corrected nonfatal exposition.');
-    reports(f.root,pack,{'thm-item-0':'confirmed_nonfatal'},['thm-published-consumer']);
+    reports(f.root,pack,{'thm-item-0':'confirmed_nonfatal'},['thm-frontier-consumer']);
     assert.equal(collect(f.root,run,'initial',1).decisions[0].outcome,'confirmed_nonfatal');
     const report=JSON.parse(readFileSync(workerReport(f.root,run,'initial',1,'1'),'utf8'));
     report.decisions[0].outcome='false_positive';
@@ -484,7 +606,7 @@ test('gate item repairs still trigger downstream review before certification',()
     item(f.root,'thm-item-0','Necessary repair after gate failure.');reports(f.root,pack);
     const next=advanceImpact(f.root,run,'gate',1);
     assert.equal(next.complete,false);
-    assert.deepEqual(Object.values(next.pack.assignments).flat(),['thm-published-consumer']);
+    assert.deepEqual(Object.values(next.pack.assignments).flat(),['thm-frontier-consumer']);
     assert.throws(()=>certify(f.root,run,'gate',1,{contextHasher:contexts}),/continuation/);
     reports(f.root,next.pack);
     assert.equal(advanceImpact(f.root,run,'gate',1).complete,true);
@@ -513,13 +635,13 @@ test('missing paid verdict and a metadata writer during central hashing fail clo
   }
 });
 
-test('Terra rejudges changed published items and current context; complete repeat evidence permits threshold gate',()=>{
+test('Terra rejudges changed frontier items and current context; complete repeat evidence permits threshold gate',()=>{
   const f=fixture();try{
-    const pack=initial(f.root,f.ids);item(f.root,'thm-published-consumer','Updated published proof.',['thm-item-0'],true);reports(f.root,pack);
+    const pack=initial(f.root,f.ids);item(f.root,'thm-frontier-consumer','Updated published proof.',['thm-item-0'],false);reports(f.root,pack);
     certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     const calls:string[][]=[];
     const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
-    judge(f.root,run,1,{contextHasher:contexts,runSweep});assert.deepEqual(calls[0],['thm-item-0','thm-published-consumer']);
+    judge(f.root,run,1,{contextHasher:contexts,runSweep});assert.deepEqual(calls[0],['thm-frontier-consumer','thm-item-0']);
     const repeat=prepareAdjudication(f.root,run,'repeat',1);assert.equal(repeat.rejected.length,0);reports(f.root,repeat);
     const impact=prepareImpact(f.root,run,'impact-repeat',1);reports(f.root,impact);
     const cert=certify(f.root,run,'impact-repeat',1,{contextHasher:contexts});assert.equal(cert.latest_adjudication_round,1);
