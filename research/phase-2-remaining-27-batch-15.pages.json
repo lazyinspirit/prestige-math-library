@@ -35,8 +35,8 @@
             }
           ]
         },
-        "statement": "Use the library convention that q≤p means q is stronger. A Shelah sweetness model is a tuple (P,D,(E_n) for n<ω) where P is a forcing preorder, D is dense, each E_n is an equivalence relation on D with countably many classes, E_(n+1) refines E_n, and every E_n-class is downward directed. If p_i∈D for i≤ω and p_i E_i p_ω for every i<ω, then the sequence has a common lower bound; moreover, for every n the tail {p_i:n≤i≤ω} has a common lower bound in the E_n-class of p_ω. Finally, for every p,q∈D and n there is k such that, for every p' E_k p, if some r E_n q satisfies r≤p, then some r' E_n q satisfies r'≤p'. A sweetness model M_2 extends M_1 exactly when P_1 is a complete suborder of P_2 in the maximal-antichain sense (not necessarily dense), D_1⊆D_2, each old E_n is the restriction of the new one, each new E_n-class based at D_1 stays inside P_1, and if p∈D_2 has a stronger q∈P_1 then p∈D_1. Boolean-algebra language means the corresponding separative completion.",
-        "proof_plan": "Translate Shelah Definitions 7.2 and 7.9 once and for all from the paper's larger-is-stronger order to the library's smaller-is-stronger order. In particular, source upper bounds become library lower bounds. Verify that the displayed conditional transfer clause is exactly source 7.2(d). Also prove the frequently used comparable reformulation: if q≤p, then for every n some k makes each p' E_k p have a common strengthening q' E_n q with q'≤q,p'; conversely, apply that comparable case to the source clause's witness r E_n q to recover the full conditional form. Passing to the separative quotient and regular-open completion preserves compatibility, density, complete embeddings and generic extensions, so all later preorder and Boolean presentations are typed consistently.",
+        "statement": "Use the library convention that q≤p means q is stronger. A Shelah sweetness model is a tuple (P,D,(E_n) for n<ω) where P is a forcing preorder, D is dense, each E_n is an equivalence relation on D with countably many classes, E_(n+1) refines E_n, and every E_n-class is downward directed. If p_i∈D for i≤ω and p_i E_i p_ω for every i<ω, then the sequence has a common lower bound; moreover, for every n the tail {p_i:n≤i≤ω} has a common lower bound in the E_n-class of p_ω. Finally, for every p,q∈D and n there is k such that, for every p' E_k p, if some r E_n q satisfies r≤p, then some r' E_n q satisfies r'≤p'. A sweetness model M_2 extends M_1 exactly when P_1 is a complete suborder of P_2 in the maximal-antichain sense (not necessarily dense), D_1⊆D_2, each old E_n is the restriction of the new one, each new E_n-class based at D_1 stays inside P_1, and if p∈D_2 has a stronger q∈P_1 then p∈D_1. Boolean-algebra shorthand retains the original sweetness presentation; transport of equivalence relations is proved only for a specified dense order embedding.",
+        "proof_plan": "Translate Shelah Definitions 7.2 and 7.9 once and for all from the paper's larger-is-stronger order to the library's smaller-is-stronger order. In particular, source upper bounds become library lower bounds. Verify that the displayed conditional transfer clause is exactly source 7.2(d). Also prove the frequently used comparable reformulation: if q≤p, then for every n some k makes each p' E_k p have a common strengthening q' E_n q with q'≤q,p'; conversely, apply that comparable case to the source clause's witness r E_n q to recover the full conditional form. Passing to the separative quotient and regular-open completion preserves compatibility, density, complete embeddings and generic extensions, so all later preorder and Boolean presentations are typed consistently. Do not infer descent of equivalence relations from forcing equivalence. Under a dense order embedding, transport D and E_n bijectively and map original lower bounds to nonzero Boolean elements. Explicitly exclude Boolean zero and the one-element algebra.",
         "axiom_base": "ZF; no choice principle is used in the definition"
       },
       {
@@ -74,12 +74,15 @@
           "def-shelah-sweetness-model",
           "thm-forcing-equivalence-and-boolean-completion",
           "def-complete-boolean-algebra-and-regular-open-sets",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-forcing-preorders-have-regular-open-completions",
+          "thm-n-cross-n-countable",
+          "thm-zorn"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -87,12 +90,12 @@
             {
               "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
               "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Claim 7.4, p. 35"
+              "locator": "Claim 7.4, pp. 34-35"
             }
           ]
         },
         "statement": "Assume ZFC. Let P be a complete suborder of B=BA(Q), let (Q,D,(E_n)) be sweet, and let (A_j)_(j<ω) be subsets of P whose union is dense. For the canonical dense completion map e:Q→B without zero, define p to force q∈Q/P exactly when every P-strengthening of p is compatible with e(q). If q∈D and p∈P forces q∈Q/P, then some j,k have the following uniform property: for every q' E_k q there is p'∈A_j below p which forces q'∈Q/P. Moreover, the union of all A_j for which such a k exists is dense below p.",
-        "proof_plan": "Repeat every j infinitely often as j(i), and use Choice to select q_i E_i q which is bad for A_(j(i)) whenever a bad witness exists. The canonical completion map has dense image and reflects compatibility, so compatibility of p with e(q) yields r≤q in the sweet dense set with e(r)≤p. Transfer and sequential sweetness give a diagonal q* compatible with p. Completeness does not make P dense in BA(Q): instead, if no P-strengthening of p forced q* into the quotient, the P-conditions below p incompatible with e(q*) would be dense. Extend a maximal antichain of those conditions to a maximal antichain of P; maximal-antichain preservation in BA(Q) contradicts compatibility of p and e(q*). Now meet the dense union in one A_j and use a later occurrence j(i)=j to contradict the choice of q_i. Repeating below each p_0≤p proves density of the union of good A_j.",
+        "proof_plan": "Repeat every j infinitely often as j(i), and use Choice to select q_i E_i q which is bad for A_(j(i)) whenever a bad witness exists. The canonical completion map has dense image and reflects compatibility, so compatibility of p with e(q) yields r≤q in the sweet dense set with e(r)≤p. Transfer and sequential sweetness give a diagonal q* compatible with p. Completeness does not make P dense in BA(Q): instead, if no P-strengthening of p forced q* into the quotient, the P-conditions below p incompatible with e(q*) would be dense. Extend a maximal antichain of those conditions to a maximal antichain of P; maximal-antichain preservation in BA(Q) contradicts compatibility of p and e(q*). Now meet the dense union in one A_j and use a later occurrence j(i)=j to contradict the choice of q_i. Repeating below each p_0≤p proves density of the union of good A_j. Use i+1=2^m(2r+1), including index zero, and Zorn on chain-union-closed antichain posets.",
         "axiom_base": "ZFC; Choice selects the countable bad-witness sequence and the maximal antichains used in the complete-suborder reduction argument"
       },
       {
@@ -123,7 +126,7 @@
           ]
         },
         "statement": "Let Q_1 and Q_2 be sweet forcings and let P_0 be completely embedded in BA(Q_1) and BA(Q_2). Their Boolean amalgam Q_1*_(P_0)Q_2 is sweet and contains complete canonical copies of Q_1 and Q_2. If the sweetness model on Q_2 extends a fixed model on Q_1 in the sense of Definition 7.9, the amalgam can be equipped with a sweetness model extending that fixed model. The formulation also permits two named complete embeddings of P_0, by identifying their images before taking the amalgam.",
-        "proof_plan": "Use pairs (q_1,q_2) simultaneously admitted by one P_0-condition as the dense presentation. Invoke Shelah's exact Claim 7.3(1), not merely sigma-directedness of Q_1, to decompose the complete suborder P_0 into countably many directed sets A_j. Apply the full uniform conclusion of Claim 7.4 first to Q_1 and then to Q_2; this yields, for every pair, a least common modulus m such that all sufficiently equivalent coordinate pairs have compatible P_0-reductions in one A_j. Define the nth amalgam equivalence relation by the two old E_(m+n)-classes together with equality of m. The uniform modulus proves directedness, the sequential bound and transfer clauses. Verify both canonical embeddings by reductions. For the extension form, use the disjoint dense-set construction and mixed-clause check of Claim 7.12. Sweetness then gives ccc.",
+        "proof_plan": "Use the pairs admitted by one P_0-condition as the amalgam and retain the same admission witness while applying Claim 7.4 successively in the two coordinates. Define the intrinsic modulus m(x) as the least level at which every coordinatewise equivalent pair is admitted; it carries no selected reduction or witness. Define E_n by equality of m and the two old E_(m+n)-classes. Lemma 7.5 gives density, directedness, the diagonal bound and transfer, while Definition 7.1 gives the two named canonical complete embeddings. For the fixed-model form, use Claim 7.12's separated dense-open presentation D* union D_1 and check all five extension clauses, including the mixed transfer case.",
         "axiom_base": "ZFC, as required by the full Claim 7.4 supplier and its witness selections"
       },
       {
@@ -133,12 +136,13 @@
         "deps": [
           "def-trees-and-bodies-on-discrete-alphabets",
           "def-nowhere-dense-meagre-and-residual-subsets",
-          "def-forcing-preorder-compatibility-and-filter"
+          "def-forcing-preorder-compatibility-and-filter",
+          "def-dense-open-sets-and-model-generic-filters"
         ],
         "justified_by": [],
         "provenance": {
-          "statement": "literature-derived",
-          "proof": "literature-derived"
+          "statement": "ai-altered",
+          "proof": "not-applicable"
         },
         "sources": {
           "scraped": [],
@@ -146,12 +150,17 @@
             {
               "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
               "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Definition 7.7, pp. 36-37"
+              "locator": "Definition 7.7 and Claims 7.11, 7.15, pp. 36, 41 and 43"
+            },
+            {
+              "title": "Andrzej Roslanowski and Saharon Shelah, Sweet & sour and other flavours of ccc forcing notions",
+              "url": "https://shelah.logic.at/files/95909/672.pdf",
+              "locator": "§0.2(9), printed p. 586"
             }
           ]
         },
-        "statement": "The universal-meagre forcing UM consists of pairs (t,T), where T is a perfect nowhere-dense subtree of 2^(<ω) and t=T∩2^(≤n) is its finite initial tree through some height n. In the library order, (t_2,T_2)≤(t_1,T_1) exactly when T_1⊆T_2 and t_1 is the restriction of t_2 through the old height. Thus stronger conditions enlarge the witness tree while permanently preserving the recorded finite initial tree. The generic union of the finite initial trees is a perfect nowhere-dense tree U_G. The meagre envelope of the old nowhere-dense sets is a countable union of finite-prefix rearrangements of [U_G], not [U_G] alone.",
-        "proof_plan": "Spell out finite tree restriction, perfection, nowhere density and the agreement clause, translating Definition 7.7 from Shelah's order to the library order. Reflexivity and transitivity follow because successive initial-tree agreement composes and witness-tree inclusion is transitive. Compatible conditions have a common extension obtained from the finite union of their witness trees; that union remains perfect and nowhere dense and respects the longer recorded initial tree. Height extensions are dense in the cone below the condition whose witness tree supplies the node; they are not asserted dense below incompatible conditions. This cone density makes U_G closed and nowhere dense. Do not claim that one arbitrary old tree is directly included in U_G; Claim 7.15 uses the countable family of prefix rearrangements built in the next lemma.",
+        "statement": "UM has a separately adjoined weakest condition and nontrivial pairs (t,T), with T a nonempty perfect nowhere-dense binary tree and t its initial tree through ht(t). Stronger conditions enlarge T while preserving the recorded initial tree. Over a transitive ZF ground, a generic filter produces a perfect tree whose body is nowhere dense; finite-prefix rearrangements are finite level permutations preserving tails.",
+        "proof_plan": "Verify the two-clause compatibility criterion and fixed-record directed classes by finite unions. Meet the relative height dense sets to include witness trees in U_G. Separately, for each cylinder record a missing extension of its prefix; genericity and directedness permanently exclude it from U_G and prove nowhere density. Use canonical finite codes to inject antichains into omega without Choice. No absorption lemma is used to justify this definition.",
         "axiom_base": "ZF"
       },
       {
@@ -166,7 +175,7 @@
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -179,8 +188,8 @@
           ]
         },
         "statement": "Forcing with UM makes the union of all ground-model closed nowhere-dense subsets of Cantor space meagre. Therefore every ground-model meagre set is contained in one meagre set coded by the UM generic.",
-        "proof_plan": "Let U_G be the generic perfect nowhere-dense tree. Enumerate the countable set of finite prefix rearrangements π of the binary tree, and put M_G equal to the union of the closed nowhere-dense sets [π(U_G)]. For a fixed old nowhere-dense tree S and condition, choose a later level n and one node η of the witness tree at that level. Graft every one of the finitely many sections of S at level n below this same η. The finite union of the grafted sections remains nowhere dense; no comparison of the level widths of S and the witness tree is needed. For each s in S∩2^n, a level-n prefix permutation sends η to s, so the resulting condition forces [S] into a finite subunion of M_G. Genericity meets this dense set separately for every old S, so the union of all old closed nowhere-dense interpretations is contained in the one countable F-sigma meagre set M_G; no enumeration of the ground-model trees is used. An old countable closed-nowhere-dense cover of each old meagre set proves the second assertion. This is the finite-prefix-rearrangement proof implicit in Shelah Claim 7.15, not the false assertion that [S]⊆[U_G].",
-        "axiom_base": "ZF in the forcing argument; no enumeration of all ground-model nowhere-dense sets is used"
+        "proof_plan": "Enlarge an arbitrary nonempty closed nowhere-dense set C to a perfect nowhere-dense set by adjoining fixed perfect binary copies in least cylinders disjoint from C near each cylinder meeting C. Prove closedness and nowhere density by local finiteness outside C, and absence of isolated points directly. Graft all sections of that perfect envelope under one witness node above the recorded height. Meet the dense sets for every old code and for holes in the generic tree. Use the countable prefix-rearrangement envelope; handle the empty set and adjoined weakest condition explicitly.",
+        "axiom_base": "ZF in a transitive ground with a supplied generic; no Countable Choice used."
       },
       {
         "id": "thm-shelah-universal-meagre-composition-preserves-sweetness",
@@ -190,12 +199,13 @@
           "def-shelah-sweetness-model",
           "def-shelah-universal-meagre-forcing",
           "def-two-step-forcing-iteration",
-          "thm-forcing-theorem"
+          "thm-forcing-theorem",
+          "def-dependent-choice"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -203,12 +213,12 @@
             {
               "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
               "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Composition Lemma 7.6, Definition 7.7, Subclaim 7.8, and Claim 7.11, pp. 36-40"
+              "locator": "Composition Lemma 7.6, Subclaim 7.8 and Claim 7.11, pp. 36-41"
             }
           ]
         },
-        "statement": "If P has a sweetness model and P forces that Q is UM, then the two-step iteration P*Q has a sweetness model extending that of P. This remains true in the strengthened extension-of-models form used at successor stages.",
-        "proof_plan": "Use the dense set of pairs (p,(t,T)) with p in the old sweet dense set. Enumerate all old equivalence classes A_m. The old sweetness transfer clause itself supplies the trace modulus k_m(p); no complete-suborder density theorem is involved. Define E_n by equality of t, sufficiently fine old E-relations, agreement on which A_m reduce p, agreement on the finitely many level-n omission decisions, and equality of the finitely many k_m(p). Subclaim 7.8 gives stability under a fine equivalent strengthening. Verify equivalence and countably many classes; directedness by unioning two tree names over a common old bound; sequential common lower bounds by unioning the tree names and proving the union forced nowhere dense via the source's diagonal avoidance construction; and transfer by synchronizing the finitely many k_m. Finally verify exact restriction to P.",
+        "statement": "Assume ZF+DC. If P has a sweetness model and P forces that Q is UM, then the two-step iteration P*Q has a sweetness model extending that of P. This remains true in the strengthened extension-of-models form used at successor stages.",
+        "proof_plan": "Use the source's dense pairs (p,(t,T)) and enumerate the old equivalence classes A_m. Define E_n by all five of Definition 7.7's interfaces: a sufficiently fine old relation, equality of t, agreement for every m<n of the cone-meeting traces, agreement for every active m<n of the conditional level-n nonmembership decisions, and equality of the finitely many transfer moduli k_m. Subclaim 7.8 stabilizes the data under fine equivalent strengthening. Prove directedness by a common old bound and union of tree names, and prove the sequential clause by Shelah's full block-diagonal avoidance construction. The strengthened fixed-model conclusion is verified separately through Claim 7.11 rather than transported across a bare forcing equivalence. Use total names and the longer target record in the correctly reversed comparable transfer clause; conditional perfect fallback trees justify density.",
         "axiom_base": "ZF+DC; the source proof uses countable quotient-class enumerations and recursive witness choices"
       },
       {
@@ -217,7 +227,8 @@
         "kind": "lemma",
         "deps": [
           "def-shelah-sweetness-model",
-          "def-countable-choice"
+          "def-countable-choice",
+          "thm-countable-union-of-countable"
         ],
         "justified_by": [],
         "provenance": {
@@ -230,12 +241,12 @@
             {
               "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
               "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Claim 7.10, p. 40"
+              "locator": "Definitions 7.2 and 7.9, pp.34 and 40; Claim 7.10, p.41"
             }
           ]
         },
-        "statement": "Assume Countable Choice. Let (P_i,D_i,(E_n^i)) for i<δ be a continuous increasing chain of sweetness models, where δ has countable cofinality and every successor extends its predecessor in the exact sweetness-model sense. Then the direct union forcing, dense set, and stabilized equivalence relations form a sweetness model, and every P_i is a complete subforcing of the union.",
-        "proof_plan": "Choose a fixed increasing cofinal sequence in δ and take the direct unions. Completeness follows directly from the extension definition: every union condition lies in a later stage, where each old maximal antichain is still maximal. The exact class-containment clause makes every union E_n-class meeting an old stage equal to its old class. Countable Choice counts the union of the stagewise quotient classes; directedness occurs in a common later stage. For the sequential clause, all q_i E_i q_omega already lie in the single stage containing q_omega, so apply that stage's clause directly. The same class stabilization reduces the transfer clause to one common stage.",
+        "statement": "Assume Countable Choice. Let (P_i,D_i,(E_n^i)) for i<δ be a continuous increasing chain of sweetness models, where δ has countable cofinality and every successor extends its predecessor in the exact sweetness-model sense. Then the direct union forcing, dense set, and stabilized equivalence relations form a sweetness model, and every P_i is a complete subforcing of the union. All stages have a common distinguished weakest condition.",
+        "proof_plan": "Choose a fixed increasing cofinal sequence in δ and take the direct unions. Completeness follows directly from the extension definition: every union condition lies in a later stage, where each old maximal antichain is still maximal. The exact class-containment clause makes every union E_n-class meeting an old stage equal to its old class. Countable Choice counts the union of the stagewise quotient classes; directedness occurs in a common later stage. For the sequential clause, all q_i E_i q_omega already lie in the single stage containing q_omega, so apply that stage's clause directly. The same class stabilization reduces the transfer clause to one common stage. Explicitly derive D_j intersect P_i=D_i using an old dense strengthening and the last extension clause; combine this with containment in P_i to stabilize each class. Check the union preorder and density before the sweetness clauses. The common weakest condition remains weakest in the union; without this hypothesis the current extension definition does not ensure a union top.",
         "axiom_base": "ZF+Countable Choice; CC is used to count the union of the stagewise quotient classes"
       },
       {
@@ -259,12 +270,12 @@
             {
               "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
               "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Claim 7.13, pp. 40-42"
+              "locator": "Claims 7.12-7.13, pp. 41-42"
             }
           ]
         },
         "statement": "Let B_0 and B_1 be countably generated complete subalgebras of a sweet complete Boolean algebra B, and let h:B_0→B_1 be a complete Boolean isomorphism. There is a sweet complete Boolean algebra B* containing B completely in which h extends to an automorphism of B*. The extension may be chosen compatibly with any previously fixed sweetness-model embedding.",
-        "proof_plan": "Start with two copies of B amalgamated over h. Alternately amalgamate the current algebra with its two images so that the partial map acquires a forward and an inverse extension. At each finite stage apply the sweet amalgamation theorem and track the canonical complete embeddings. At the omega limit let P* be the sweet union forcing and C the union of the stage completions. The coherent union map is a Boolean automorphism of C, but C need not be complete. Take B*=BA(P*); C is order-dense there, and the exact completion clause of Claim 7.13(2) extends the automorphism uniquely to B*. Sweetness transfers from the dense P* presentation to the nonzero part of B*.",
+        "proof_plan": "For the one-sided extension, amalgamate the old copy with a disjoint copy over C_1 using the inclusion and the twisted embedding b↦c(g^{-1}(b)); the resulting copy map extends g. Claim 7.12 equips this amalgam with a model extending the old first factor and imposes no extension requirement on the disjoint copy. Alternate that construction with its inverse. The direct union P* is sweet by the continuous-union lemma. The union C of the stage completions is only a Boolean algebra, but the coherent maps form an automorphism of C. Since C is order-dense in BA(P*), Claim 7.13(2) uniquely extends that automorphism to the completion. Sweetness is retained through the dense forcing presentation P*, not transported through an unspecified completion map.",
         "axiom_base": "ZFC; Choice supplies the countable induction data used in the source construction"
       },
       {
@@ -276,14 +287,15 @@
           "def-aleph-and-beth-hierarchies",
           "thm-cardinal-power-set-and-cantor",
           "thm-shelah-sweet-partial-isomorphism-extension",
+          "thm-shelah-sweet-amalgamation-preserves-sweetness",
           "thm-shelah-universal-meagre-composition-preserves-sweetness",
           "lem-shelah-continuous-unions-of-sweetness-models",
-          "lem-finite-support-iteration-size-bound"
+          "lem-shelah-sweet-forcings-are-sigma-directed-ccc"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -295,8 +307,8 @@
             }
           ]
         },
-        "statement": "Assume ZFC and CH, explicitly |P(omega)|=aleph_1. There is a continuous chain (B_α) for α<ω_1 of sweet complete Boolean algebras of size at most ω_1 whose union B is ccc and has size ω_1, such that every isomorphism between countably generated complete subalgebras that appears at a stage extends to an automorphism at a later stage, every required free-amalgamation task is met, and above every stage there is a later quotient forcing equivalent to UM. This is Shelah's continuous sweet construction; it is not identified with an ordinary finite-support iteration.",
-        "proof_plan": "Under AC and CH, well-order all stage data of hereditary size at most ω_1: names for countably generated complete subalgebras, their isomorphisms, free-amalgamation requests, and UM requests. Use an ω_1 bookkeeping map that repeats every task cofinally often. At an isomorphism stage apply the preceding extension theorem; at a UM stage apply the composition theorem; at limit ordinals use the continuous-union lemma, which is applicable because every limit below ω_1 has countable cofinality. Induction preserves size at most ω_1 and complete embeddings. For the final ω_1-union, invoke Main Lemma 7.14(a) directly for ccc and BA(P)=union BA(P_α); the countable-cofinality lemma does not apply there. Invoke clauses (b)-(d) directly for union-level automorphism extension, free amalgamation and late UM quotients, avoiding an invalid ω_1-union of stage automorphisms or complete subalgebras. AC is used exactly to well-order the task set and choose the recursive construction; CH bounds it by ω_1.",
+        "statement": "Assume ZFC and CH. There is a continuous increasing chain of sweetness models P_α for α<ω_1. Put B_α=BA(P_α) and P=union P_α. The B_α form an increasing chain of complete Boolean algebras of size at most ω_1, while the final completion satisfies the special identity B=BA(P)=union B_α, is ccc, and has size ω_1. Every complete isomorphism between countably generated complete subalgebras of B extends to an automorphism of B; every scheduled free-amalgamation task is met; and above every stage a later quotient has the canonical UM presentation.",
+        "proof_plan": "Under CH, enumerate all countable stage data and repeat the isomorphism, free-amalgamation and UM tasks cofinally. Construct a continuous chain of sweet forcing presentations P_α, with B_α=BA(P_α). At a countable limit take P_λ=union P_α and only then complete it; do not identify B_λ with the direct union of the prior completions. Successor tasks use the twisted partial-isomorphism extension, named-embedding amalgamation and canonical UM composition interfaces. Sweetness gives ccc, so CH bounds each completion. At the final union invoke Main Lemma 7.14's special identity BA(union P_α)=union B_α and its union-level clauses directly; the countable-cofinality lemma is not applied at ω_1. For previously extended maps over whole completions use original Claim 7.13 with arbitrary complete subalgebras. Well-order only the task-code sets using AC.",
         "axiom_base": "ZFC+CH; full AC is used for the global bookkeeping well-order and transfinite recursive choices"
       },
       {
@@ -309,6 +321,7 @@
           "thm-forcing-theorem",
           "lem-forcing-monotonicity-density-and-decision",
           "lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets",
+          "thm-canonical-definable-global-well-order-of-l",
           "def-axiom-of-choice"
         ],
         "justified_by": [],
@@ -327,7 +340,7 @@
           ]
         },
         "statement": "In the generic extension by the final algebra B, every name for a real, a Borel code, or a countable sequence of ordinals is equivalent to a name over some B_α. Consequently, for every such sequence s, a later UM quotient makes the union of all meagre Borel sets coded in V[s] meagre. When the construction starts over L, the choices made by the generic on the countably many deciding antichains for s are coded by one real, while the ground-model name and antichain enumerations have ordinal codes; hence s is definable from that real and finitely many ordinals.",
-        "proof_plan": "For each coordinate of a real, Borel code, or ordinal-sequence name, use the forcing decision lemma to take a maximal deciding antichain. The construction theorem's ccc clause makes each antichain countable. Ambient AC makes their countable union countable; its stage set is bounded in ω_1, so completeness makes the labelled antichains maximal at one stage and their generic traces define an equivalent B_α-name. Over L, enumerate each deciding antichain canonically and let one real record the unique index met by the generic at every coordinate. An ordinal codes the ground-model name together with these enumerations, so valuation defines s from that real and ordinal; no claim that an ultrafilter on an arbitrary countably generated complete algebra is determined by its generators is needed. Now choose one later stage β whose quotient is UM. Since V[s]⊆V[G_α], every closed nowhere-dense code in V[s] is old at stage β; Claim 7.15 absorbs all of them into one generic meagre F-sigma envelope. Replacing each meagre Borel code by its countable closed-nowhere-dense cover proves the stated union meagre. No ω_1-long stage-by-stage union is asserted.",
+        "proof_plan": "For every coordinate take a maximal deciding antichain; ccc makes it countable, and the countably many Boolean values occur below one stage of the final special union. Completeness preserves maximality and yields a stage name, including for ordinal coordinates. Over L, use its canonical definable well-order to code the ground name, the antichains and their enumerations by ordinals, while one real records the unique generic index chosen in each antichain. Choose a later quotient with the exact canonical UM presentation. Every meagre Borel set coded in V[s] is then old, and the UM absorption theorem puts all such codes into one meagre F-sigma envelope. This uses the construction's actual completion identity and no arbitrary forcing-equivalence substitution.",
         "axiom_base": "ZFC in the ambient forcing extension; regularity of ω_1 and the ccc name calculation are explicit"
       },
       {
@@ -363,7 +376,7 @@
           ]
         },
         "statement": "Let B be the final Boolean algebra of the Shelah construction. For every formula φ(x,s,γ⃗) with a countable ordinal-sequence parameter s and finitely many ordinal parameters γ⃗, the set of reals x for which the B-generic extension satisfies φ(x,s,γ⃗) differs from a Borel set by a meagre set. In particular this holds for real-and-ordinal parameters. The Borel code and meagre-error code belong to the final extension.",
-        "proof_plan": "Capture the name for s in a countably generated complete subalgebra B_0. For the Cohen algebra C over B_0, compare any two complete embeddings of B_0*C into B which agree on B_0. The free-amalgamation clause of the CH construction embeds their ranges freely over B_0, and the partial-isomorphism clause extends the induced map to an automorphism of B. Thus the Boolean truth value of φ(c,s,γ⃗), for the canonical Cohen name c, depends only on a finite Cohen condition. The union of basic cylinders whose conditions force φ gives an open set U; reals on which neither side is locally forced lie in the union of the Borel meagre sets coded over V[s]. The preceding one-stage UM absorption theorem makes that entire error set meagre. Every real outside it is Cohen generic over the captured parameter model and is carried to the canonical name by the extended automorphisms, so membership agrees with U. This is the countable-sequence specialization of Solovay's category argument, using the displayed Shelah free-amalgamation, automorphism and absorption hypotheses. Borel-code absoluteness transfers U and the error witness to the inner model.",
+        "proof_plan": "Capture the parameter in a countably generated complete algebra whose generic extension is exactly V[s]: labelled deciding antichains both recover s and determine the generic trace on a countable dense subalgebra. Free amalgamation over the parameter-and-Cohen algebra forces the formula Boolean value into that algebra. Read it as a Cohen regular-open code and transport it by automorphism extension to every Cohen real over V[s]. Absorb precisely those V[s]-coded nongenericity witnesses using the later canonical UM quotient, then apply Borel-to-open conversion.",
         "axiom_base": "ZFC in the ambient extension; the conclusion is a statement later internalized in ZF+DC"
       },
       {
@@ -406,7 +419,9 @@
         "deps": [
           "def-shelah-hereditarily-ordinal-sequence-definable-model",
           "def-axiom-of-choice",
-          "lem-solovay-inner-model-is-closed-under-ambient-omega-sequences"
+          "def-ordinal-definability-and-hod",
+          "thm-n-cross-n-countable",
+          "thm-montague-levy-finite-reflection"
         ],
         "justified_by": [],
         "provenance": {
@@ -424,7 +439,7 @@
           ]
         },
         "statement": "If f belongs to the ambient ZFC forcing extension and maps omega into N=HOD(S), then f itself belongs to N.",
-        "proof_plan": "Formula, rank, finite-ordinal and S-parameter codes give a definable class surjection onto N. Apply Collection to the existence of a code for each value f(n), obtaining one set of codes meeting every fibre; only then use ambient AC once on the resulting set-indexed family of nonempty set-sized fibres. Interleave the selected S-parameters and ordinal-code sequence into one member of S. The graph of f is then definable from that S-parameter, and heredity follows because every value lies in N. This uses neither UM nor a claim that an ordinal sequence is a real.",
+        "proof_plan": "Use full definition codes (formula, rank, finite tuple length, tuple, S parameter). Collection bounds the fibres before one ambient AC selection. Encode every field by an explicit row and a fixed pairing; decode a unique function and apply finite reflection with its S parameter. Prove finite-set OD(S) closure and account for the Kuratowski graph transitive closure. The proof works in any ambient ZFC universe for this HOD(S) definition.",
         "axiom_base": "Ambient ZFC; AC is used only for simultaneous selection of definition codes"
       },
       {
@@ -470,13 +485,18 @@
         "deps": [
           "thm-shelah-inner-model-satisfies-zf-and-dependent-choice",
           "lem-shelah-homogeneous-truth-has-baire-representatives",
+          "lem-solovay-borel-code-and-regularity-absoluteness",
+          "def-well-founded-borel-evaluation-codes",
+          "lem-cantor-and-baire-sequence-coding",
+          "cor-baire-sequence-space-is-homeomorphic-to-the-irrationals",
+          "thm-rationals-countable",
           "def-property-of-baire-for-subsets",
           "def-shelah-hereditarily-ordinal-sequence-definable-model"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -493,8 +513,8 @@
             }
           ]
         },
-        "statement": "N satisfies: every subset of the reals has the property of Baire. Explicitly, for each A in N there are in N an open set U and a meagre set M such that A is the symmetric difference of U and a subset of M.",
-        "proof_plan": "A set A of reals in N has a rank-bounded definition from one s∈S and finitely many ordinals. Apply the preceding homogeneity theorem to obtain an open approximation and a coded meagre error. The open code and the paired sequence of closed nowhere-dense tree codes are reals, hence belong to N because N and the ambient extension have the same reals. Their interpretations and the finite-cylinder test for empty interior are arithmetic in those codes and therefore absolute between the two transitive models. Thus N verifies the same symmetric-difference inclusion and meagreness witness.",
+        "statement": "N satisfies that every subset of the reals has the property of Baire. This is first proved for the set-theoretic real space 2^ω and transferred to the usual real line through comeagre homeomorphic coding subspaces. For each real set A in N there are in N an open set U and a meagre set M in the relevant space such that A symmetric-difference U is contained in M.",
+        "proof_plan": "For A⊆2^ω in N, use its rank-bounded definition and the homogeneity theorem to obtain a Borel representative with coded meagre error. Apply the uniform Solovay code construction to turn that Borel code into an open code plus a coded nowhere-dense error. Same reals puts all codes in N. Prove evaluation agreement locally: ill-foundedness of a countable code would yield a descending real, nodewise well-founded induction makes evaluation absolute, and the finite-cylinder test makes closed nowhere density arithmetic. DC, hence Countable Choice, verifies the displayed union is meagre in N. For the usual real-line convention, pass through the infinitely-many-ones subspace of Cantor space, Baire space and the irrationals; the omitted binary sequences and rationals are countable, so the transported open approximation remains valid modulo meagre sets.",
         "axiom_base": "ZF+DC inside N"
       },
       {
@@ -525,7 +545,7 @@
           ]
         },
         "statement": "The following theories are equiconsistent: ZFC; ZFC plus every real set first-order definable from a real and ordinal parameter has the Baire property; and ZF+DC plus every set of reals has the Baire property. In particular, Con(ZFC) is equivalent to Con(ZF+DC+all real sets have BP), with no inaccessible-cardinal hypothesis.",
-        "proof_plan": "Invoke Shelah's published Conclusion 7.17 as the exact equiconsistency theorem. Its forward proof uses the CH sweet construction; the page's results identify the definable-BP full extension and the HOD(S) inner model satisfying ZF+DC+all BP. Its reverse proof invokes Gödel's L, matching the library's semantic constructible-inner-model theorem. Do not infer a uniform formal forcing compiler from the construction theorem, whose interface supplies only the mathematical construction.",
+        "proof_plan": "Invoke Shelah's published Conclusion 7.17 as the exact equiconsistency theorem. Its forward proof and Theorem 7.16 directly supply the definable-BP full extension; the local inner-model results separately identify HOD(S) as satisfying ZF+DC+all BP. Its reverse proof invokes Gödel's L, matching the library's semantic constructible-inner-model theorem. Do not infer either the full-extension clause from same-real inner-model witnesses or a uniform formal forcing compiler from the construction theorem.",
         "axiom_base": "Metatheory of formal relative consistency; object-theory conclusions exactly as stated"
       },
       {
@@ -536,12 +556,15 @@
           "def-analytic-and-coanalytic-by-closed-projection",
           "lem-cantor-and-baire-sequence-coding",
           "lem-dyadic-coding-coin-measure-and-lebesgue-transfer",
-          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-completion-of-a-measure-space",
+          "thm-completion-of-a-measure-space",
+          "def-countable-choice"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "ai-altered"
+          "proof": "not-applicable"
         },
         "sources": {
           "scraped": [],
@@ -549,13 +572,17 @@
             {
               "title": "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals",
               "url": "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf",
-              "locator": "Theorems 3.3-3.4 and Lemma 3.9, pp. 43 and 47"
+              "locator": "Definition 1.17 and Facts 1.17-1.18, pp. 10-11; Chapter 3, Section 3.1, pp. 43-44"
+            },
+            {
+              "title": "Terence Tao, An Introduction to Measure Theory, Exercise 1.4.26, p. 94",
+              "url": "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
             }
           ]
         },
         "statement": "For a real parameter x, a subset A of Cantor space is Sigma^1_3(x) when membership has the form: there exists a Baire real y, for every Baire real z, there exists a Baire real w such that an arithmetic predicate of the displayed reals, x, and a natural-number code holds. Boldface Sigma^1_3 measurability means that every Sigma^1_3(x) subset of Cantor space is measurable for completed coin measure for every real x. Sigma^1_2(x) sets are included by a dummy final existential quantifier.",
-        "proof_plan": "Define arithmetic predicates using natural-number quantification and fixed real coding on Cantor space, with auxiliary quantifiers over Baire space. Use coordinate pairing only to fold tuples of codes; record explicitly that the published Baire-space map is a homeomorphism onto a proper subspace of Cantor space and supplies no measure transport. Take completed coin measure from the dedicated dyadic-coding interface. Verify closure under adding a dummy real quantifier.",
-        "axiom_base": "ZF; this is a coding definition"
+        "proof_plan": "Define the arithmetic existential-universal-existential prefix in ZF, retaining Cantor measured carrier and Baire real quantifiers. Under Countable Choice use the Borel coin measure supplied by the dyadic construction after its choice step and form its completion E=B union N, with N contained in a Borel null set, by the measure-completion theorem. Tuple pairing and a dummy quantifier give the indicated coding inclusion.",
+        "axiom_base": "ZF for the pointclass syntax; Countable Choice for the Borel coin measure and completed-measure interpretation."
       },
       {
         "id": "def-rapid-and-raisonnier-filters",
@@ -564,7 +591,10 @@
         "deps": [
           "def-filter",
           "def-cantor-sequence-space-for-descriptive-set-theory",
-          "def-constructible-hierarchy-and-constructible-rank"
+          "def-constructible-hierarchy-and-constructible-rank",
+          "def-definable-subsets-of-a-membership-structure",
+          "thm-set-structure-satisfaction-recursion",
+          "thm-transfinite-recursion"
         ],
         "justified_by": [],
         "provenance": {
@@ -581,8 +611,8 @@
             }
           ]
         },
-        "statement": "A filter F on omega is rapid when it extends the Frechet filter and, for every increasing f:omega→omega, some a∈F satisfies |a∩f(n)|≤n for every n. Equivalently, it is enough that one fixed strictly increasing g uniformly replace n on the right for every increasing f; the Frechet filter then permits deletion of one finite initial segment to recover the exact inequality. For distinct binary reals u,v let h(u,v) be their first differing coordinate and H(X)={h(u,v):u,v∈X,u≠v}. For a real x, a∈F(x) exactly when a countable cover (F_n) of L[x]∩2^omega satisfies the union of all H(F_n) is contained in a.",
-        "proof_plan": "Prove Ishii Lemma 3.6 explicitly. The forward direction takes g(n)=n. Conversely apply the uniform-g hypothesis to f*(n)=f(g(n+1)); for k in [g(n),g(n+1)) use the exact inequality g(n)<=k, then delete the finite set f(g(0)), which preserves filter membership because the Frechet filter is contained in F. Check that first difference exists and that H is invariant under closure by approximating two distinct closure points through their first-difference coordinate. Thus witnessing cover members may be replaced by closed tree bodies. The filter and rapidity assertions are still proved separately from the definition.",
+        "statement": "A filter F on omega is rapid when it extends the Frechet filter and, for every increasing f:omega→omega, some a∈F satisfies |a∩f(n)|≤n for every n. Equivalently, it is enough that one fixed strictly increasing g uniformly replace n on the right for every increasing f; the Frechet filter then permits deletion of one finite initial segment to recover the exact inequality. For distinct binary reals u,v let h(u,v) be their first differing prefix length (one plus the zero-based first differing coordinate) and H(X)={h(u,v):u,v∈X,u≠v}. For a real x, F(x) is a subfamily of P(omega), and a subset a of omega belongs to F(x) exactly when a countable cover (F_n) of L[x]∩2^omega satisfies the union of all H(F_n) is contained in a.",
+        "proof_plan": "Prove Ishii Lemma 3.6 explicitly. The forward direction takes g(n)=n. Conversely apply the uniform-g hypothesis to f*(n)=f(g(n+1)); for k in [g(n),g(n+1)) use the exact inequality g(n)<=k, then delete the finite set f(g(0)), which preserves filter membership because the Frechet filter is contained in F. Check that first difference exists and that H is invariant under closure by approximating two distinct closure points through their first-difference coordinate. Thus witnessing cover members may be replaced by closed tree bodies. Define F(x) explicitly as a subfamily of P(omega), so the displayed membership variable is always a subset of omega. The filter and rapidity assertions are still proved separately from the definition. Retain Ishii prefix-length convention explicitly, and define the relativized L[x] hierarchy using the real graph predicate.",
         "axiom_base": "ZF"
       },
       {
@@ -591,10 +621,13 @@
         "kind": "lemma",
         "deps": [
           "def-rapid-and-raisonnier-filters",
+          "def-filter",
           "def-boldface-sigma-one-three-measurability",
-          "thm-generalized-continuum-hypothesis-in-l",
+          "thm-canonical-definable-global-well-order-of-l",
           "def-countable-choice",
-          "lem-closed-subsets-of-baire-space-are-tree-bodies"
+          "lem-closed-subsets-of-baire-space-are-tree-bodies",
+          "lem-cantor-and-baire-sequence-coding",
+          "cor-countable-choice-and-omega-one-cofinality"
         ],
         "justified_by": [],
         "provenance": {
@@ -607,13 +640,18 @@
             {
               "title": "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals",
               "url": "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf",
-              "locator": "Lemmas 3.8-3.9, pp. 46-47"
+              "locator": "Lemma 3.8 and the complexity discussion before Theorem 3.12, pp. 46-48"
+            },
+            {
+              "title": "Thomas Jech, Set Theory, Chapter 25",
+              "url": "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/25-descriptive_set_theory.pdf",
+              "locator": "Theorem 25.26 and Lemma 25.27, pp. 494-495"
             }
           ]
         },
         "statement": "Assume Countable Choice and omega_1^{L[x]}=omega_1. Then F(x) is a proper filter on omega extending the Frechet filter, and membership a∈F(x) is a Sigma^1_3(x) property of the real a.",
-        "proof_plan": "Upward closure is immediate. For a,b, intersect their two countable covers using a fixed pairing of omega; first differences in an intersection lie in both a and b. To exclude the empty set, GCH in L[x] gives omega_1 many constructible reals; regularity of omega_1 from CC implies one member of any countable cover is uncountable and therefore has two distinct elements. The cylinder cover by strings of length n witnesses every cofinite tail. For complexity, replace cover members by closed tree bodies using H(cl F)=H(F), code the tree sequence by one real, and write coverage of L[x] reals plus the first-difference inclusion as a Pi^1_2(x) matrix using the canonical definability of L[x]. Its existential tree-code prefix is Sigma^1_3(x).",
-        "axiom_base": "ZF+Countable Choice; CC is used exactly for regularity of omega_1 and the countable-cover argument"
+        "proof_plan": "Upward closure and finite intersections follow from the cover definition. Canonical least well-order codes inject omega_1^{L[x]} into the constructible reals without simultaneous choice; Countable Choice then rules out a countable singleton cover and proves properness. Cylinder covers give the Frechet filter. For complexity, countable well-founded level certificates make z in L[x] Sigma^1_2(x); a real codes a sequence of binary trees, and the coverage clause quantifies only z in 2^omega, exactly matching the domain L[x] intersect 2^omega in the definition. That clause is Pi^1_2(x), and its first-difference clause is Pi^1_1, so existentially quantifying the tree code gives Sigma^1_3(x). Well-order codes include a domain subset of omega, so finite and zero ordinals are represented as well as infinite countable ordinals.",
+        "axiom_base": "ZF+Countable Choice; no GCH cardinality shortcut is used"
       },
       {
         "id": "thm-rapid-filters-are-not-lebesgue-measurable",
@@ -656,7 +694,7 @@
           "thm-canonical-definable-global-well-order-of-l",
           "thm-tonelli-and-fubini-for-completed-product-measures",
           "def-countable-choice",
-          "cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls"
+          "def-rapid-and-raisonnier-filters"
         ],
         "justified_by": [],
         "provenance": {
@@ -670,12 +708,17 @@
               "title": "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals",
               "url": "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf",
               "locator": "Definition 3.4 and Lemma 3.10, pp. 47-48"
+            },
+            {
+              "title": "Thomas Jech, Set Theory, Chapter 25",
+              "url": "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/25-descriptive_set_theory.pdf",
+              "locator": "Theorem 25.26 and Lemma 25.27, pp. 494-495"
             }
           ]
         },
         "statement": "For a real x define A(x) on pairs (u,v) by comparing the least canonical L[x] null G-delta codes containing u and v. Then A(x) is Sigma^1_2(x). Under Countable Choice, if A(x) is measurable, the union G of all null Borel sets coded in L[x] is null in the ambient universe.",
-        "proof_plan": "Enumerate the canonical L[x] null G-delta codes by increasing constructible order and disjointify their interpretations as G_tilde_ξ. Then A(x) is the set of pairs whose unique first-code indices satisfy ξ(u)<ξ(v); coding a well-founded countable L-level gives the Sigma^1_2 definition. Every horizontal section at v is a countable initial union and hence null under CC. Fubini makes the exceptional set Z of u with non-null vertical section null. If every u in G has non-null vertical section, then G is a subset of Z. Otherwise choose u in G with null vertical section and decompose G into the null lower horizontal section at u, the single null layer G_tilde_{ξ(u)}, and the null upper vertical section at u. This avoids ever assigning a measure to G before proving it null.",
-        "axiom_base": "ZF+Countable Choice; CC is used for omega_1 regularity/countability of initial code segments, and completed Fubini is used exactly once"
+        "proof_plan": "Relativize the canonical definition-code order to L[x]. A well-founded countable-level certificate, obtained by a canonical Skolem hull, is Pi^1_1 and exactly enumerates each real-code predecessor segment. Define the strict order A(x) only on G times G by witnessing a code below the first code of v that contains u but not v. This gives Sigma^1_2(x). Every horizontal section is a countable union of coded null sets. Tonelli and completed Fubini make A(x) product-null and give a null exceptional set for vertical sections; either G lies in it or one good u splits G into its lower section, one null layer, and its upper section.",
+        "axiom_base": "ZF+Countable Choice; the relative L[x] certificates use canonical witnesses, and completed Fubini is used exactly once"
       },
       {
         "id": "lem-uniform-null-g-delta-capture-functions",
@@ -683,8 +726,6 @@
         "kind": "lemma",
         "deps": [
           "def-countable-borel-hierarchy",
-          "thm-first-borel-cantelli",
-          "lem-dyadic-coding-coin-measure-and-lebesgue-transfer",
           "thm-separable-complete-metric-baire-in-zf",
           "thm-complete-subspace-iff-closed",
           "lem-cantor-and-baire-sequence-coding"
@@ -700,12 +741,17 @@
             {
               "title": "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals",
               "url": "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf",
-              "locator": "Lemma 3.11, pp. 48-50"
+              "locator": "Lemma 3.11, pp. 47-50"
+            },
+            {
+              "title": "Terence Tao, An Introduction to Measure Theory",
+              "url": "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf",
+              "locator": "Outer measure and the Caratheodory construction, Chapter 1"
             }
           ]
         },
-        "statement": "There are uniformly assigned null G-delta sets N_f in Cantor space for f in omega^omega and, for each open U of measure below one, finite capture sets φ_U(n) of size at most 2^(n+1), such that N_f⊆U implies f(n)∈φ_U(n) for all sufficiently large n. If f belongs to a transitive model, the code for N_f belongs to that model.",
-        "proof_plan": "Use independent coordinate blocks B_(n,m), each of measure 2^{-(n+1)}, and set N_f to the intersection over k of the union over n≥k of B_(n,f(n)); the tail-union estimate makes it null G-delta and its code is uniform in f. For K=2^omega minus U, remove the countably many null basic pieces and let A_s(n) list those m for which K∩[s] misses B_(n,m). Coordinate independence shows the series sum_n |A_s(n)|/2^{n+1} converges; choose the least threshold n(s), then unite A_s(n) over canonically indexed s with n(s)≤n to obtain |φ_U(n)|≤2^{n+1}. If N_f⊆U, the closed Baire space K cannot meet every tail union densely; a basic piece [s] and tail k missed by K force f(n)∈A_s(n)⊆φ_U(n) eventually. Every choice is least in a fixed countable order.",
+        "statement": "There are uniformly assigned null G-delta sets N_f in Cantor space for f in omega^omega and, for each open U whose canonical coin content is below one, finite capture sets φ_U(n) of size at most 2^(n+1), such that N_f⊆U implies f(n)∈φ_U(n) for all sufficiently large n. If f belongs to a transitive model, the code for N_f belongs to that model.",
+        "proof_plan": "Construct coin content directly from prefix-free cylinder codes in ZF. Finite binary-pattern counts give the block contents and independence products. Remove every zero-content basic trace from the positive closed complement of U using canonical finite covers with summable errors. Tail content estimates prove N_f null directly. Independence bounds the weighted missed-block sets A_s; canonical thresholds and least witnesses give the finite slaloms with the sharp size bound. The ZF Baire theorem on the remaining closed separable complete set yields eventual capture.",
         "axiom_base": "ZF; canonical least choices and the complete-metric Baire theorem avoid an unstated choice principle"
       },
       {
@@ -718,7 +764,7 @@
           "lem-uniform-null-g-delta-capture-functions",
           "def-countable-choice",
           "def-rapid-and-raisonnier-filters",
-          "lem-dyadic-coding-coin-measure-and-lebesgue-transfer",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
           "def-boldface-sigma-one-three-measurability"
         ],
         "justified_by": [],
@@ -742,7 +788,7 @@
           ]
         },
         "statement": "Assume Countable Choice and omega_1^{L[x]}=omega_1. If the null-code order A(x join r) is measurable for every real r, then the Raisonnier filter F(x) is rapid; boldface Sigma^1_2 measurability is a sufficient uniform hypothesis.",
-        "proof_plan": "For arbitrary increasing block endpoints n_i, let r code the sequence and work in M=L[x join r]. The equality omega_1^{L[x]}=omega_1 implies omega_1^M=omega_1, and uniform measurability applies the null-code lemma to A(x join r). Now every block-prefix function i maps to f restricted to n_i for f in M belongs to M, so its uniformly assigned null G-delta has an M-code. Cover their union by one open U of measure below one and obtain finite slaloms Psi_i consisting only of length-n_i strings. Put into a the first-difference coordinates in block i realized by pairs from Psi_i. The countable classes F_(k,s) of reals sharing their n_k-prefix s and captured at every level i at least k cover M and have first-difference sets contained in a, so a belongs to F(x join r) and hence to F(x). A finite binary prefix tree gives at most |Psi_i|-1 splitting levels in block i, yielding |a intersection n_i| at most 2^(i+2)-2. The uniform-bound equivalence gives rapidity.",
+        "proof_plan": "For arbitrary increasing block endpoints n_i, code the sequence by r and work in M=L[x join r]. Uniform measurability and the null-code lemma make the union of M-coded null Borel sets null. Put it inside a Borel null hull; inner regularity of the complement yields one open U of measure below one. Apply the uniform capture lemma to every M-real's prefix function. The countable classes of reals sharing an initial prefix and captured at all later levels cover M, while their first differing prefix lengths lie in a set a assembled in the blocks (n_(i-1),n_i]. Finite binary prefix trees give |a intersection n_i| below the fixed exponential bound, and the uniform-bound criterion makes F(x) rapid.",
         "axiom_base": "ZF+Countable Choice; CC enters through the two preceding filter/null-code lemmas"
       },
       {
@@ -772,7 +818,7 @@
           ]
         },
         "statement": "Work in ZF+Countable Choice. If the ambient omega_1 is not an inaccessible cardinal of L, then there is a real x such that omega_1^{L[x]} equals the ambient omega_1.",
-        "proof_plan": "Countable Choice makes ambient omega_1 regular. It is a cardinal and regular in L because any contrary L map remains a contrary map in V. If it is not inaccessible in L, GCH in L therefore makes it (mu^+)^L for an L-cardinal mu<omega_1; do not claim that mu remains a cardinal in V. The ordinal mu is ambient-countable, so choose one real x coding a bijection omega→mu. For every beta<(mu^+)^L, L contains a surjection mu→beta, which remains in L[x]; composing with x makes beta countable in L[x]. Thus omega_1^{L[x]} is at least ambient omega_1, while ambient omega_1 remains uncountable in the inner model because any L[x] bijection would exist in V. Hence equality. Only this existential x is retained.",
+        "proof_plan": "Countable Choice makes ambient omega_1 regular. It is a cardinal and regular in L because any contrary L map remains a contrary map in V. If it is not inaccessible in L, GCH in L therefore makes it (mu^+)^L for an infinite L-cardinal mu<omega_1; do not claim that mu remains a cardinal in V. The ordinal mu is ambient-countable, so choose one real x coding a bijection omega→mu. The zero ordinal is countable trivially. For every nonzero beta<(mu^+)^L, Choice in L gives a surjection mu→beta, which remains in L[x]; composing with x makes beta countable in L[x]. Thus omega_1^{L[x]} is at least ambient omega_1, while ambient omega_1 remains uncountable in the inner model because any L[x] bijection would exist in V. Hence equality. Only this existential x is retained.",
         "axiom_base": "ZF+Countable Choice; CC supplies regularity of ambient omega_1 and the enumeration of the countable α"
       },
       {
@@ -785,30 +831,26 @@
           "lem-raisonnier-family-is-a-sigma-one-three-filter",
           "thm-raisonnier-filter-is-rapid-from-null-code-measurability",
           "thm-rapid-filters-are-not-lebesgue-measurable",
-          "def-countable-choice"
+          "def-countable-choice",
+          "lem-measurable-null-code-orders-bound-constructible-null-unions"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "ai-altered"
+          "proof": "literature-derived"
         },
         "sources": {
           "scraped": [],
           "references": [
             {
-              "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
-              "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Main Theorem 5.1 and Remark (1), p. 18"
-            },
-            {
               "title": "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals",
               "url": "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf",
-              "locator": "Theorems 3.3-3.4 and their proofs, pp. 43 and 50-51"
+              "locator": "Theorem 3.4 and Theorem 3.3, pp. 50-51"
             }
           ]
         },
         "statement": "Assume ZF+Countable Choice and boldface Sigma^1_3 measurability. Then the ambient omega_1 is an inaccessible cardinal in L.",
-        "proof_plan": "Suppose not. The preceding lemma gives a real x with omega_1^{L[x]}=omega_1. The null-code order A(x) is Sigma^1_2(x), hence Sigma^1_3(x) and measurable by the boldface hypothesis. The Raisonnier theorem therefore makes F(x) a rapid filter, while its complexity lemma makes it Sigma^1_3(x). Mokobodzki's theorem says every rapid filter is nonmeasurable, contradicting the hypothesis. Therefore omega_1 is inaccessible in L. This proof uses no Recorded result and states only the binding L conclusion, although the consulted secondary treatment proves a stronger theorem.",
+        "proof_plan": "Suppose not and obtain x with omega_1^{L[x]}=omega_1. For every real r, A(x join r) is Sigma^1_2(x join r), hence Sigma^1_3(x join r) and measurable by the boldface hypothesis. This verifies the repaired rapidity theorem's uniform premise, so F(x) is rapid. Its complexity lemma makes it Sigma^1_3(x), while the rapid-filter theorem makes it nonmeasurable, a contradiction.",
         "axiom_base": "ZF+Countable Choice; no full AC"
       },
       {
@@ -820,7 +862,8 @@
           "thm-choice-implies-dependent-implies-countable-choice",
           "thm-constructible-inner-model-semantic-and-formal-schema",
           "thm-constructible-universe-satisfies-choice",
-          "def-lc-inaccessible-and-mahlo-cardinals"
+          "def-lc-inaccessible-and-mahlo-cardinals",
+          "def-boldface-sigma-one-three-measurability"
         ],
         "justified_by": [],
         "provenance": {
@@ -888,18 +931,26 @@
         "title": "Shelah's model separates universal Baire property from universal measurability",
         "kind": "theorem",
         "deps": [
+          "thm-countable-first-order-completeness",
+          "thm-forcing-theorem",
           "thm-baire-property-model-equiconsistent-with-zfc",
+          "thm-shelah-ch-omega-one-sweet-construction",
           "thm-shelah-inner-model-all-sets-of-reals-have-baire-property",
-          "thm-all-real-sets-measurable-gives-an-inaccessible-inner-model",
-          "thm-chain-condition-preserves-cofinalities-and-cardinals",
           "thm-constructibility-is-absolute-and-l-is-minimal",
           "thm-shelah-inner-model-satisfies-zf-and-dependent-choice",
-          "def-lc-inaccessible-and-mahlo-cardinals"
+          "def-lc-inaccessible-and-mahlo-cardinals",
+          "thm-lc-inaccessible-rank-segments-model-zfc",
+          "lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one",
+          "thm-raisonnier-filter-is-rapid-from-null-code-measurability",
+          "lem-raisonnier-family-is-a-sigma-one-three-filter",
+          "thm-rapid-filters-are-not-lebesgue-measurable",
+          "def-countable-choice",
+          "def-dependent-choice"
         ],
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "ai-altered"
+          "proof": "literature-derived"
         },
         "sources": {
           "scraped": [],
@@ -907,17 +958,12 @@
             {
               "title": "Saharon Shelah, Can You Take Solovay's Inaccessible Away?",
               "url": "https://shelah.logic.at/files/95333/176.pdf",
-              "locator": "Main Theorem 5.1 and Conclusions 5.1A and 7.17, pp. 18-19 and 43-44"
-            },
-            {
-              "title": "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals",
-              "url": "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf",
-              "locator": "Theorems 3.1-3.2 and discussion after Theorem 3.2, p. 43"
+              "locator": "Theorem 7.16, Conclusion 7.17 and remarks (3)-(4), pp. 43-44"
             }
           ]
         },
         "statement": "Relative to Con(ZFC), it is consistent that ZF+DC holds, every set of reals has the Baire property, and not every set of reals is Lebesgue measurable. Thus universal Baire property does not entail universal Lebesgue measurability over ZF+DC.",
-        "proof_plan": "First pass inside the starting ZFC model M to L^M. If L^M has no inaccessible, use L^M; otherwise let κ be the least inaccessible of L^M and use the set model (L^M)_κ. Prove directly that an inaccessible below κ in this set model would remain inaccessible in L^M, since every relevant subset and cofinal-function witness below κ already has rank below κ; minimality then rules it out. In either case the chosen constructible ZFC model satisfies CH and its own constructible universe has no inaccessible. Perform the ccc Shelah construction over that model and take the repaired hereditary real-and-ordinal/HOD(S) inner model N. N has the same ordinals, reals and omega_1 as the ccc extension, and every real set in N has BP. Constructibility is absolute between these transitive same-ordinal models, so L^N has no inaccessible. If N made every real set measurable, the preceding L-only lower-bound theorem would make omega_1^N inaccessible in L^N, a contradiction. This source-backed semantic construction proves the external relative-consistency implication without asserting an additional proof-code compiler.",
+        "proof_plan": "Use first-order completeness to take a countable, possibly externally ill-founded model M of ZFC. Internally choose L^M if it has no inaccessible, or the L^M-rank segment at its least inaccessible; the internal rank-segment and constructibility theorems give a ZFC+V=L+no-inaccessible model N_0. Apply the direct CH sweet-construction theorem inside N_0, rather than treating equiconsistency as a forcing interface, and externally meet the countably many internal dense sets, forming the extension as the Boolean-valued quotient of internal names. The local HOD(S) theorems give ZF+DC+all BP. The internal forcing theorem proves that set forcing preserves the internal ordinals and L-levels, and the transitive same-ordinal inner model HOD(S) therefore has L equal to N_0. If every real set there were measurable, DC gives Countable Choice, noninaccessibility supplies x with correct omega_1, and measurability of every A(x join r) makes F(x) rapid, contradicting rapid-filter nonmeasurability.",
         "axiom_base": "Relative consistency over ZFC; the final inner model satisfies ZF+DC"
       }
     ]
@@ -944,7 +990,7 @@
         "justified_by": [],
         "provenance": {
           "statement": "literature-derived",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -957,7 +1003,7 @@
           ]
         },
         "statement": "For every old perfect nowhere-dense binary tree S and UM condition (t,T), the absorption lemma gives a direct extension whose generic F-sigma code contains [S]. If some level beyond t satisfies |T_n|≥|S_n|, the finite graft is explicit; this always covers the singleton {0^omega} instance.",
-        "proof_plan": "Invoke the absorption lemma for the general existence assertion. For the explicit display, assume a matched-width level beyond t, assign the finitely many S-sections there to distinct T-nodes, graft the sections, and record the finite prefix substitutions. For {0^omega}, a single target node suffices; nowhere density follows from the body being a finite union of closed nowhere-dense sets, without any sibling-at-the-same-level assertion.",
+        "proof_plan": "For the matched-width case replace each old section prefix by its distinct target node, appending only tails and closing under prefixes. Use full level permutations to recover branches, and assign each one its least index in the absorption lemma's fixed canonical enumeration before naming the finite subunion. For the singleton use the explicit perfect tree with even coordinates zero and odd coordinates free, grafted under one node. Use ht(t) and refine the adjoined weakest condition first. General absorption is supplied by the repaired absorption lemma.",
         "axiom_base": "ZF"
       },
       {
@@ -983,8 +1029,8 @@
             }
           ]
         },
-        "statement": "For fixed n, enumerate the finitely many length-n binary strings s and use their cylinders [s] as a countable cover of L[x]∩2^omega. Any two distinct reals in one cylinder first differ at a coordinate at least n. Hence omega minus n belongs to F(x), concretely demonstrating that F(x) extends the Frechet filter.",
-        "proof_plan": "List all 2^n strings and pad the finite list by empty sets to an omega-sequence. Every binary real extends exactly one listed string. If u and v lie in the same cylinder they agree below n, so h(u,v)≥n; therefore the union of all H([s]) is contained in the cofinite tail of coordinates at least n. Apply the defining cover criterion. Check n=0 separately: the one empty-string cylinder gives omega itself.",
+        "statement": "For fixed n, enumerate the finitely many length-n binary strings s and use their cylinders [s] as a countable cover of L[x]∩2^omega. Any two distinct reals in one cylinder first differ at a coordinate at least n, so their first differing prefix length is at least n+1. Hence omega minus n belongs to F(x), concretely demonstrating that F(x) extends the Frechet filter.",
+        "proof_plan": "List all 2^n strings and pad the finite list by empty sets to an omega-sequence. Every binary real extends exactly one listed string. If u and v lie in the same cylinder they agree below n, so the first differing coordinate is at least n and the prefix-length convention gives h(u,v)≥n+1; therefore the union of all H([s]) is contained in the cofinite tail of integers at least n. Apply the defining cover criterion. Check n=0 separately: every distinct pair in the one empty-string cylinder has prefix length at least one, and the witness gives omega itself.",
         "axiom_base": "ZF"
       },
       {
@@ -1025,7 +1071,7 @@
         "justified_by": [],
         "provenance": {
           "statement": "ai-altered",
-          "proof": "literature-derived"
+          "proof": "ai-altered"
         },
         "sources": {
           "scraped": [],
@@ -1037,8 +1083,8 @@
             }
           ]
         },
-        "statement": "False: obtaining a model of ZF+DC in which every set of reals has the Baire property requires the consistency of an inaccessible cardinal. In fact its consistency strength is exactly ZFC, whereas making every set of reals Lebesgue measurable has the consistency strength of an inaccessible cardinal.",
-        "proof_plan": "The Baire-property equiconsistency theorem gives Con(ZFC) iff Con(ZF+DC+all BP), directly refuting the alleged inaccessible requirement. Contrast this with the exact measurability equiconsistency theorem. The separation theorem supplies a single relative model satisfying all BP but not all measurability, so the contrast is semantic as well as a comparison of upper bounds. Do not infer from the lower bound for measurability any lower bound for BP.",
+        "statement": "False: an inaccessible-cardinal hypothesis is needed as an upper-bound assumption to establish the relative consistency of ZF+DC plus universal Baire property. Con(ZFC) already implies the consistency of that theory, whereas universal Lebesgue measurability is equiconsistent with an inaccessible. This does not assert the separate metatheoretic negation of Con(all BP) implying Con(ZFC+inaccessible).",
+        "proof_plan": "Fix the refuted reading as the alleged need for an inaccessible hypothesis in the relative-consistency construction. The Baire-property theorem gives Con(ZFC) implies Con(ZF+DC+all BP), directly refuting that need. Contrast this with the exact measurability equiconsistency theorem. The separation theorem supplies a single relative model satisfying all BP but not all measurability, so the regularity assertions separate semantically. Explicitly do not infer from equiconsistency with ZFC that Con(all BP) cannot imply Con(ZFC+inaccessible), and do not transfer the measurability lower bound to BP.",
         "axiom_base": "Metatheory of relative consistency"
       },
       {
@@ -1066,8 +1112,8 @@
             }
           ]
         },
-        "statement": "Let (P_1, Q_1, E^1_n) and (P_2, Q_2, E^2_n) be sweetness models whose complete Boolean algebras share a common complete subalgebra B_0. Then the amalgam P_1 *_{B_0} P_2 is sweet, has complete canonical embeddings of both factors, and is ccc.",
-        "proof_plan": "Instantiate the amalgamation theorem with the two sweet notions. Use the uniform density-transfer modulus and the amalgam E_n-classes to display sweetness, take completeness of the canonical copies directly from the theorem, and derive ccc from the sigma-directed decomposition of every sweet forcing. No partial-isomorphism or CH-length construction is used.",
+        "statement": "Let (P_1,D_1,E^1_n) and (P_2,D_2,E^2_n) be sweetness models whose complete Boolean algebras share a common complete subalgebra B_0. Then the admitted-pair amalgam P_1*_{B_0}P_2 is sweet, has complete canonical embeddings of both factors, and is ccc.",
+        "proof_plan": "Apply the exact named-embedding amalgamation theorem over the arbitrary complete subalgebra. On the dense admitted pairs use the intrinsic least modulus m(x), defined by admission of every coordinatewise E_m-perturbation and carrying no chosen witness. The shifted coordinate classes supply the sweetness clauses, the theorem supplies complete canonical copies, and sigma-directedness supplies ccc. No countable-generation, partial-isomorphism or CH-length hypothesis is used.",
         "axiom_base": "The choice cost is inherited from the amalgamation and density-transfer suppliers; no CH-length construction is invoked."
       }
     ]

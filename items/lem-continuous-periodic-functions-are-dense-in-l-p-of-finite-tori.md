@@ -54,7 +54,7 @@ $n\ge1$ and $1\le p<+\infty$.
 
 2.1 Given $\varepsilon>0$ choose $\delta>0$ with $\lambda_n([0,1)^n\setminus[\delta,1-\delta]^n)<\delta_0$, where $\delta_0$ is a threshold for $|G|^p$ and $\varepsilon^p$ from [A3]; put $G_\delta:=G\cdot\mathbf 1_{[\delta,1-\delta]^n}$. Then $\|G-G_\delta\|_p^p=\int_{[0,1)^n\setminus[\delta,1-\delta]^n}|G|^p<\varepsilon^p$, so $\|G-G_\delta\|_p<\varepsilon$. [step 1.1, A3]
 
-3.1 By density of $C_c^\infty(\mathbb R^n)$ choose $H\in C_c^\infty(\mathbb R^n)$ with $\|G_\delta-H\|_p<\varepsilon$, and let $\chi$ be the cutoff of [A4] for this $\delta$. Since $\chi=1$ on the support of $G_\delta$ and $|\chi|\le1$, one has $\|G_\delta-\chi H\|_p=\|\chi(G_\delta-H)\|_p\le\|G_\delta-H\|_p<\varepsilon$, and $\chi H$ is continuous with compact support inside $(0,1)^n$. [step 2.1, A1, A4]
+3.1 By density of $C_c^\infty(\mathbb R^n)$ choose $H\in C_c^\infty(\mathbb R^n)$ with $\|G_\delta-H\|_p<\varepsilon$, and let $\chi$ be the cutoff of [A4] for this $\delta$. Since $\chi=1$ on the support of $G_\delta$ and $|\chi|\le1$, one has $\|G_\delta-\chi H\|_p=\|\chi(G_\delta-H)\|_p\le\|G_\delta-H\|_p<\varepsilon$, and $\chi H$ is continuous, compactly supported in $[0,1]^n$, and vanishes on the boundary of that cube. [step 2.1, A1, A4]
 
 4.1 Let $K$ be the continuous function on $\mathbb T^n$ obtained by periodising $\chi H$, as in [A4]; on the fundamental domain $K$ agrees with $\chi H$. Therefore, using that the torus $L^p$ integral is represented on $[0,1)^n$ and Minkowski's inequality, $\|f-K\|_{L^p(\mathbb T^n)}=\|G-\chi H\|_{L^p([0,1)^n)}\le\|G-G_\delta\|_p+\|G_\delta-\chi H\|_p<2\varepsilon$. [step 2.1, step 3.1, A2, A4]
 

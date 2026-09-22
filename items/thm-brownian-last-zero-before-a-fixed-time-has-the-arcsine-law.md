@@ -4,7 +4,7 @@ kind: theorem
 title: "The last Brownian zero has the arcsine law"
 status: draft
 origin: pipeline
-deps: [def-brownian-zero-set, thm-brownian-future-path-markov-property, cor-law-of-the-brownian-maximum, def-brownian-motion-started-at-x, thm-brownian-scaling, def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-substitution, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, def-brownian-motion]
+deps: [def-brownian-zero-set, thm-brownian-future-path-markov-property, cor-law-of-the-brownian-maximum, def-brownian-motion, def-standard-normal-and-normal-laws, thm-tonelli-theorem-for-sigma-finite-product-spaces, cor-c-one-change-of-variables-for-l-one-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-monotone-convergence-for-the-integral, lem-probability-measure-basic-identities, thm-probability-law-and-distribution-function-correspondence, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -17,59 +17,52 @@ sources:
 
 ## Statement
 
-Let $B$ be a standard Brownian motion [[def-brownian-motion]] and fix $t>0$.
-Let
-$$L_t:=\sup\{s\in[0,t]:B_s=0\}$$
-be the last zero of the path before time $t$. Then for every $0\le u\le t$,
-$$P(L_t\le u)=\frac{2}{\pi}\arcsin\sqrt{\frac ut},$$
-and consequently the random variable $L_t/t$ has the arcsine density
-$$f(x)=\frac{1}{\pi\sqrt{x(1-x)}},\qquad 0<x<1 .$$
-Both endpoints receive no mass: $P(L_t=0)=0$ and $P(L_t=t)=0$.
+Assume the Axiom of Choice. Let B be a standard Brownian motion and use the everywhere-continuous, zero-start representative $\widehat B$ fixed by [[def-brownian-zero-set]]. For t>0 put
+$$L_t=\max\{s\in[0,t]:\widehat B_s=0\}.$$
+This is a random variable and, for $0\le u\le t$,
+$$P(L_t\le u)=\frac2\pi\arcsin\sqrt{u/t}.$$
+Consequently $L_t/t$ has density $1/(\pi\sqrt{x(1-x)})$ on (0,1), with no mass at either endpoint. On the supplied measurable full event of all-time agreement, this maximum is also the last zero of the original B. The distribution is independent of the normalized representative.
 
 ## Facts & Assumptions
 
-**Given:** AC, a standard Brownian motion $B$, a time $t>0$, and $u\in[0,t)$ with $s:=t-u>0$.
+**Given:** AC, B and its normalized representative, and t>0.
 
-[F1] The zero set $Z$ is closed and contains $0$, so $L_t=\max Z_t$ is a zero of the path and $\{L_t\le u\}=\{Z\cap(u,t]=\emptyset\}$ for $0\le u\le t$. [[def-brownian-zero-set]]
+[F1] The normalized zero set is closed, contains zero, and agrees with the original zero set on a measurable full event; its normalized coordinates are measurable. [[def-brownian-zero-set]]
 
-[F2] Future-path Markov property: for every $u\ge0$ and every bounded Borel functional $\Phi$ on $\mathbb R^{[0,\infty)}$, $E[\Phi((B_{u+r})_{r\ge0})\mid\mathcal F_u]=\Psi_\Phi(B_u)$ almost surely, with $\Psi_\Phi(x)=\int\Phi(x+w)\,\mu(dw)$; in particular the conditional law of the shifted future given the past depends on the past only through $B_u$. [[thm-brownian-future-path-markov-property]]
+[F2] For a bounded product-measurable future functional G and deterministic u, its conditional expectation given the raw Brownian past is the Borel function $x\mapsto\int G(x+w)\mu(dw)$ evaluated at B_u, where mu is Wiener measure on continuous paths. [[thm-brownian-future-path-markov-property]]
 
-[F3] Maximum law: for a standard Brownian motion $W$ and $s>0$, $P(\sup_{0\le r\le s}W_r\le x)=2\Phi(x/\sqrt s)-1$ for $x\ge0$, so $P(\sup_{0\le r\le s}W_r\ge x)=2\overline\Phi(x/\sqrt s)$ for $x>0$. [[cor-law-of-the-brownian-maximum]]
+[F3] For normalized Brownian motion W and s>0, its maximum has continuous distribution $P(M_s\le x)=2\Phi(x/\sqrt s)-1$ for x>=0. [[cor-law-of-the-brownian-maximum]]
 
-[F4] Shifted laws: $P_y$ is the law of $y+B$, under which increments are again independent Gaussian increments, so every distributional statement for the standard motion transfers to the motion started at $y$. [[def-brownian-motion-started-at-x]]
+[F4] B_u has law N(0,u) for u>0: its increment from zero has that law and B_0=0 almost surely. This law is the pushforward of $\varphi(z)dz$ under z mapped to sqrt(u)z, where $\varphi(z)=e^{-z^2/2}/\sqrt{2\pi}$. Negation preserves all independent centered Gaussian increments and continuity, so -W is Brownian as well. [[def-brownian-motion]] [[def-standard-normal-and-normal-laws]]
 
-[F5] Scaling: for $c>0$ the process $Y_r=c^{-1/2}B_{cr}$ is again a standard Brownian motion, and zeros correspond under the time change, so $L_t(B)/t$ has the law of $L_1$. [[thm-brownian-scaling]]
+[F5] Tonelli for nonnegative product-measurable functions on sigma-finite spaces. One-dimensional C1 diffeomorphisms transport integrable functions with their absolute derivative. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]] [[cor-c-one-change-of-variables-for-l-one-functions]]
 
-[F6] For bounded Borel $f$ and $u>0$, $E[f(B_u)]=P_uf(0)=\int_{\mathbb R}f(x)p_u(0,x)\,dx$, where $p_u$ is the Brownian transition density. [[def-brownian-transition-semigroup]] [[lem-brownian-transition-semigroup-property]]
+[F6] Absolutely continuous functions obey the Lebesgue fundamental theorem; monotone convergence exhausts nonnegative integrals. Every C1 function on a compact interval is Lipschitz by its bounded derivative and the mean value theorem, hence absolutely continuous directly from the definition. [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]] [[thm-monotone-convergence-for-the-integral]]
 
-[F7] $\varphi(x)=(2\pi)^{-1/2}e^{-x^2/2}$ is the standard normal density, so $2\Phi(a|z|)-1=\int_{-a|z|}^{a|z|}\varphi(y)\,dy$, and Tonelli applies to the resulting double integral over the plane. [[def-standard-normal-and-normal-laws]] [[lem-normal-density-has-total-mass-one]] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
+[F7] Probability is continuous along increasing or decreasing sequences of events, and a Borel probability law is uniquely determined by its distribution function. [[lem-probability-measure-basic-identities]] [[thm-probability-law-and-distribution-function-correspondence]]
 
-[F8] Substitution: $\int_{\mathbb R}(2\Phi(a|z|)-1)\varphi(z)\,dz$ is computed in polar coordinates, where $dx\,dy=r\,dr\,d\theta$ and $\int_0^\infty re^{-r^2/2}\,dr=1$; also $\arctan a=\arcsin\bigl(a/\sqrt{1+a^2}\bigr)$ for $a>0$. [[thm-substitution]] [[lem-normal-density-has-total-mass-one]]
-
-[F9] AC is the ambient assumption of the Brownian and conditional-expectation interfaces. [[def-axiom-of-choice]]
+[F8] Full AC is inherited from the Brownian and conditional-expectation interfaces and directly supplies all dependent or countable witness choices used by the integration and distribution interfaces. [[def-axiom-of-choice]]
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Since $Z$ is closed and $0\in Z$, the supremum $L_t$ is attained in $Z$, and $\{L_t\le u\}=\{Z\cap(u,t]=\emptyset\}$ for every $0\le u\le t$; moreover $L_t(B)/t$ has the law of $L_1$ by [F5], because zeros of $B$ on $[0,t]$ correspond to zeros of $Y$ on $[0,1]$. [given, F1, F5]
+1.1 By [F1], the zero set in [0,t] is nonempty compact, so its maximum exists and lies in [0,t]. For 0<v<=t, the event L_t<v is exactly that the path has no zero in [v,t]. For v<t this is the event that the infimum of $|\widehat B_r|$ over $(\mathbb Q\cap[v,t])\cup\{v,t\}$ is positive, since this dense infimum equals the attained compact minimum. For v=t it is simply $|\widehat B_t|>0$. Both are measurable; the cases v<=0 and v>t are empty and whole. Thus L_t is measurable. [F1]
 
-2.1 First let $u\in(0,t)$ and put $s:=t-u>0$. Let $\Phi$ be the indicator of $\{w:\inf_{r\in\mathbb Q\cap[0,s]}|w(r)|>0\}$. This is a bounded Borel functional because the infimum uses countably many coordinate maps. On continuous paths that start away from zero it is exactly the event of having no zero in $[0,s]$, hence no zero in $(0,s]$. Since $P(B_u=0)=0$, [F2] and [F1] therefore give $P(L_t\le u\mid\mathcal F_u)=E[\Phi((B_{u+r})_{r\ge0})\mid\mathcal F_u]=\Psi_\Phi(B_u)$ almost surely, where for $x\ne0$, $\Psi_\Phi(x)=P_x(\text{no zero in }(0,s])$. [step 1.1, F1, F2, F6]
+2.1 Fix 0<u<t and s=t-u. Define the bounded product-measurable functional $G(w)=1_{\{\inf_{r\in(\mathbb Q\cap[0,s])\cup\{s\}}|w(r)|>0\}}$. On continuous paths it is the indicator of no zero in [0,s]. On the common full event in [F1], and outside {B_u=0}, the indicator of L_t<=u equals G applied to the original future $(B_{u+r})_{r\ge0}$. The excluded event has probability zero by [F4], since the normal density gives zero mass to a singleton. Taking expectations in [F2] therefore gives $P(L_t\le u)=E\Psi(B_u)$, where $\Psi(x)=\int G(x+w)\mu(dw)$. No all-time event on the full cylinder space or shifted hitting law is used. [F1, F2, F4, step 1.1]
 
-3.1 For $x\ne0$ the shifted probability in [step 2.1] is $\Psi_\Phi(x)=2\Phi(|x|/\sqrt s)-1$: for $x>0$, absence of zeros in $(0,s]$ is the event that the motion started at $x$ stays positive, whose complement has probability $P(\sup_{0\le r\le s}(-W_r)\ge x)=2\overline\Phi(x/\sqrt s)$ by [F3] and [F4]; the case $x<0$ is analogous by symmetry. [step 2.1, F3, F4]
+3.1 For x>0 a continuous zero-start W makes x+W zero-free on [0,s] precisely when it stays positive there, or equivalently when the maximum of -W is strictly less than x. By [F3] and [F4], $\Psi(x)=2\Phi(x/\sqrt s)-1$; strict versus weak inequality makes no difference because the maximum law has no atom at x. For x<0 apply the same argument to -x-W. At x=0, G(x+W)=0 since W_0=0, also agreeing with $2\Phi(0)-1=0$ by symmetry of the normal density. Hence $\Psi(x)=2\Phi(|x|/\sqrt s)-1$ for every x. [F3, F4, step 2.1]
 
-4.1 Since $P(B_u=0)=0$ for $u>0$, [step 3.1] applies at $x=B_u$; taking expectations and using the tower property, $P(L_t\le u)=E\Psi_\Phi(B_u)=\int_{\mathbb R}\bigl(2\Phi(|x|/\sqrt s)-1\bigr)p_u(0,x)\,dx$, where $p_u$ is the transition density of [F6]. [step 2.1, step 3.1, F6]
+4.1 Using the pushforward law in [F4], not an unproved density transformation, step 3.1 gives $P(L_t\le u)=I(a)$, where $a=\sqrt{u/(t-u)}>0$ and $I(a)=\int_{\mathbb R}(2\Phi(a|z|)-1)\varphi(z)dz$. Symmetry of the even density gives $I(a)=4\int_0^\infty\varphi(z)\int_0^{az}\varphi(y)dy\,dz$. For fixed z>0, apply [F5] to the diffeomorphism v mapped to zv from (0,a) onto (0,az); the normal density is integrable on this bounded interval. Thus the inner integral equals $\int_0^a z\varphi(zv)dv$. Endpoints have Lebesgue measure zero. [F4, F5, step 2.1, step 3.1]
 
-5.1 Substituting $x=\sqrt u\,z$ and writing the $N(0,u)$ density as $\varphi(z)$ gives $P(L_t\le u)=\int_{\mathbb R}\bigl(2\Phi(a|z|)-1\bigr)\varphi(z)\,dz$ with $a:=\sqrt{u/s}=\sqrt{u/(t-u)}$. [step 4.1, F6, F7]
+5.1 Tonelli [F5] now gives $I(a)=\frac2\pi\int_0^a\int_0^\infty z e^{-(1+v^2)z^2/2}dz\,dv$. The explicit primitive $-e^{-(1+v^2)z^2/2}/(1+v^2)$ on [0,R], followed by monotone convergence R increasing to infinity, makes the inner integral $1/(1+v^2)$. The primitive arctan(v) on [0,a] therefore gives $I(a)=2\arctan(a)/\pi$ by [F6]. Since a>0, the angle arctan(a) is in (0,pi/2) and has sine $a/\sqrt{1+a^2}=\sqrt{u/t}$; hence it equals arcsin(sqrt(u/t)). This proves the asserted formula for 0<u<t without a polar substitution. [F5, F6, step 4.1]
 
-6.1 By [F7] and Tonelli, the last integral equals the planar standard Gaussian measure of the cone $C=\{(z,y):|y|\le a|z|\}$; in polar coordinates the Gaussian density is $(2\pi)^{-1}e^{-r^2/2}$ and each of the two opposite angular sectors has half-angle $\arctan a$, so the measure is $\frac{4\arctan a}{2\pi}=\frac2\pi\arctan a$ by [F8]. [step 5.1, F7, F8]
+6.1 Since 0<=L_t<=t, its distribution function equals one at t. Decreasing u to zero and increasing u to t through explicit sequences in (0,t), [F7] and step 5.1 give $P(L_t=0)=0$ and $P(L_t<t)=1$. Thus there is no atom at t either, and both endpoint values of the formula follow. [F7, step 1.1, step 5.1]
 
-7.1 Since $a/\sqrt{1+a^2}=\sqrt{u/t}$ and $\arctan a=\arcsin\bigl(a/\sqrt{1+a^2}\bigr)$ for $a>0$, [step 6.1] gives $P(L_t\le u)=\frac2\pi\arcsin\sqrt{u/t}$ for every $0\le u<t$; the values $u=0$ and $u=t$ are limits, equal to $0$ and $1$, and are covered by the endpoints discussion below. [step 6.1, F8]
+7.1 Put $H(v)=2\arcsin(\sqrt v)/\pi$ for 0<v<1. Its derivative is $f(v)=1/(\pi\sqrt{v(1-v)})>0$. On every compact subinterval of (0,1), H is C1, so [F6] gives $\int_b^c f=H(c)-H(b)$. Let b decrease to zero and c increase to one. Monotone convergence gives total integral one and $\int_0^v f=H(v)$. Extend f by zero off (0,1). The probability measure with this density has the same distribution function as L_t/t by steps 5.1 and 6.1, and uniqueness in [F7] identifies the laws. [F6, F7, step 5.1, step 6.1]
 
-8.1 Consequently $P(L_t/t\le v)=\frac2\pi\arcsin\sqrt v$ for $v\in[0,1]$, and differentiation on $(0,1)$ gives $\frac{d}{dv}\frac2\pi\arcsin\sqrt v=\frac2\pi\cdot\frac{1}{2\sqrt{v(1-v)}}=\frac{1}{\pi\sqrt{v(1-v)}}$, which is integrable on $(0,1)$ and hence is the density of $L_t/t$. [step 7.1]
-
-9.1 The endpoint and degenerate cases are covered: $u=t$ gives the empty interval $(t,t]$ and probability $1$; and, since $\{L_t\le0\}\subseteq\{L_t\le u\}$ for every $u>0$, step 7.1 followed by $u\downarrow0$ gives $P(L_t\le0)=0$, agreeing with the formula value $\frac2\pi\arcsin0=0$.  The case $B_u=0$ has probability zero for the positive times used in step 2.1; the substitution of step 5.1 is likewise only for $u>0$; and AC enters only through [F9]. [step 2.1, step 7.1, step 8.1, F9, given] ∎
+8.1 On the supplied measurable full event, the original B and normalized process have identical zero sets and hence identical last zeros. Two permitted normalized representatives agree on the intersection of their supplied full events, so give the same distribution. No measurability of the original last-zero functional on exceptional paths is asserted. The assumption t>0 is essential to the ratio; u=0,t and x=0 were handled separately. AC is used exactly through [F8]; the exhaustion sequences are fixed. [F1, F8, step 1.1, step 3.1, step 6.1, step 7.1] ∎
 
 ## Source notes
 
-Durrett, Example 7.4.3 with equation (7.4.7), computes the last-zero distribution by conditioning on $B_u$ and evaluating the resulting Gaussian integral, obtaining $P(L\le s)=\frac2\pi\arcsin\sqrt{s/t}$ for the last zero before $t$. The proof above performs the conditioning through the future-path Markov property of the page, evaluates the conditional probability $2\Phi(|x|/\sqrt{t-u})-1$ from the maximum law, and computes the remaining planar Gaussian integral in polar coordinates.
+Durrett, Example 7.4.3, printed p.374, equation (7.4.7), proves the last-zero law by conditioning and a nonnegative iterated integral. Here the equivalent Gaussian integral is evaluated by one-dimensional substitution and Tonelli. The normalized zero-set convention and endpoint/density justifications are explicit.

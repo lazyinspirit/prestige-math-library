@@ -339,7 +339,7 @@
         "id": "thm-regular-value-theorem-for-banach-manifolds",
         "kind": "theorem",
         "title": "Regular value theorem for Banach manifolds",
-        "statement": "Assume AC. If f:M→N is C^k and for every p∈f^{-1}(q), Df(p) is onto with complemented kernel, then f^{-1}(q) is a split C^k submanifold and T_p f^{-1}(q)=ker Df(p).",
+        "statement": "Assume AC and that M carries its maximal specified C^k atlas. If f:M→N is C^k and for every p∈f^{-1}(q), Df(p) is onto with complemented kernel, then f^{-1}(q) is a split C^k submanifold and T_p f^{-1}(q)=ker Df(p).",
         "deps": [
           "thm-implicit-function-theorem-for-banach-spaces",
           "def-split-banach-submanifold",
@@ -353,7 +353,7 @@
           "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
           "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
         ],
-        "strategy": "In charts split X=ker L⊕X_1 for L=Df(p). Surjectivity makes L|X_1 bijective, and bounded inverse makes its inverse bounded. Apply the implicit theorem in X_1, express the level set as a graph over ker L, straighten it, and differentiate to identify the tangent.",
+        "strategy": "In charts split X=ker L⊕X_1 for L=Df(p). Surjectivity makes L|X_1 bijective, and bounded inverse makes its inverse bounded. Apply the implicit theorem in X_1, express the level set as a graph over ker L, straighten it, prove the adapted chart is compatible, use maximality to place it in the specified atlas, and differentiate to identify the tangent.",
         "axiom_audit": "Full AC is inherited from the implicit/bounded inverse route. No complement is chosen: split kernel is an explicit hypothesis.",
         "provenance": {
           "statement": "literature-derived",
@@ -403,7 +403,7 @@
         "id": "thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold",
         "kind": "theorem",
         "title": "A transverse Banach bundle section has a split zero submanifold",
-        "statement": "Assume AC. If a smooth section s is transverse to the zero section—at every zero its vertical derivative is onto with complemented kernel—then s^{-1}(0) is split smooth and T_p s^{-1}(0)=ker D^v s(p).",
+        "statement": "Assume AC and that the base M carries its maximal specified smooth atlas. If a smooth section s is transverse to the zero section—at every zero its vertical derivative is onto with complemented kernel—then s^{-1}(0) is split smooth and T_p s^{-1}(0)=ker D^v s(p).",
         "deps": [
           "def-smooth-banach-vector-bundle-and-section",
           "thm-regular-value-theorem-for-banach-manifolds",
@@ -464,7 +464,7 @@
         "id": "lem-local-finite-dimensional-reduction-for-a-fredholm-map",
         "kind": "lemma",
         "title": "Local finite-dimensional reduction for a Fredholm map",
-        "statement": "Assume AC. After choosing centred charts at p and f(p), let L be the derivative of the chart representative and fix splittings E=ker L plus E_1 and F=ran L plus C. Near p the map is smoothly equivalent to (u,v)↦(u,g(u,v)), with v in the finite-dimensional kernel and g valued in the fixed finite-dimensional complement C.",
+        "statement": "Assume AC. After choosing arbitrary specified-atlas charts at p and f(p), recenter their coordinate representatives by affine translations, let L be the derivative at zero, and fix splittings E=ker L plus E_1 and F=ran L plus C. Near p the map is smoothly equivalent to (u,v)↦(u,g(u,v)), with v in the finite-dimensional kernel and g valued in the fixed finite-dimensional complement C.",
         "deps": [
           "def-fredholm-map-between-banach-manifolds",
           "lem-fredholm-splitting-and-parametrix",
@@ -493,6 +493,28 @@
             }
           ]
         }
+      },
+      {
+        "id": "rem-fredholm-maps-have-countable-proper-local-restrictions",
+        "kind": "remark",
+        "title": "Fredholm maps have countable proper local restrictions externally",
+        "statement": "Assume AC. A Fredholm map between Hausdorff second-countable real Banach manifolds admits countably many closed proper local restrictions whose interiors cover the source, each inside a Fredholm normal-form neighbourhood mapped into a target chart.",
+        "deps": ["def-axiom-of-choice", "def-countable-base-banach-manifold-and-smooth-map", "lem-local-finite-dimensional-reduction-for-a-fredholm-map"],
+        "strategy": "Record Smale's local-properness/countable-localization package explicitly as an external prerequisite; do not claim compactness of infinite-dimensional closed balls.",
+        "axiom_audit": "Full AC is explicit. The result is recorded externally and not proved here.",
+        "provenance": {"statement": "literature-derived", "proof": "not-supplied"},
+        "sources": {"references": [{"title": "Stephen Smale, An Infinite Dimensional Version of Sard's Theorem — Theorem (1.6) and proof of Theorem (1.3), pp. 862–863", "url": "https://people.math.harvard.edu/~dafr/M392C-2018-MorseTheory/Readings/Smale.pdf"}]}
+      },
+      {
+        "id": "rem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense",
+        "kind": "remark",
+        "title": "Critical images of proper local Fredholm restrictions are nowhere dense externally",
+        "statement": "Assume AC. At the Sard--Smale differentiability threshold, the critical image of a closed proper restriction inside one fixed-index Fredholm normal-form neighbourhood is closed and nowhere dense.",
+        "deps": ["def-axiom-of-choice", "def-countable-base-banach-manifold-and-smooth-map", "lem-local-finite-dimensional-reduction-for-a-fredholm-map", "def-nowhere-dense-meagre-and-residual-subsets"],
+        "strategy": "Record Smale's localized finite-dimensional-Sard/category conclusion explicitly as an external prerequisite.",
+        "axiom_audit": "Full AC is explicit. The result is recorded externally and not proved here.",
+        "provenance": {"statement": "literature-derived", "proof": "not-supplied"},
+        "sources": {"references": [{"title": "Stephen Smale, An Infinite Dimensional Version of Sard's Theorem — localized proof of Theorem (1.3), pp. 862–863", "url": "https://people.math.harvard.edu/~dafr/M392C-2018-MorseTheory/Readings/Smale.pdf"}]}
       },
       {
         "id": "prop-the-index-of-a-fredholm-map-is-locally-constant",
@@ -573,7 +595,7 @@
         "id": "ex-the-derivative-of-a-bounded-bilinear-map",
         "kind": "example",
         "title": "The derivative of a bounded bilinear map",
-        "statement": "For bounded bilinear B:X×Y→Z, DB(x,y)(h,k)=B(h,y)+B(x,k). Thus Banach-algebra multiplication has Dm(a,b)(h,k)=hb+ak and x↦B(x,x) has derivative h↦B(h,x)+B(x,h).",
+        "statement": "For bounded bilinear B:X×Y→Z, DB(x,y)(h,k)=B(h,y)+B(x,k). Thus Banach-algebra multiplication has Dm(a,b)(h,k)=hb+ak; when X=Y, the diagonal x↦B(x,x) has derivative h↦B(h,x)+B(x,h).",
         "deps": [
           "def-frechet-derivative-between-banach-spaces",
           "def-bounded-bilinear-map",
@@ -693,10 +715,15 @@
         "id": "cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold",
         "kind": "counterexample",
         "title": "A closed uncomplemented subspace is not a split Banach submanifold",
-        "statement": "Assuming the Axiom of Countable Choice, c_0 is closed in ℓ∞ but is not a split Banach submanifold of ℓ∞.",
+        "statement": "Assuming the Axiom of Countable Choice, c_0 is a closed Banach subspace of ℓ∞ but is not complemented, so the identity-coordinate split condition fails. Since ℓ∞ is not second countable, this is a Banach-space counterexample rather than a literal Banach submanifold under the library definition.",
         "deps": [
           "def-split-banach-submanifold",
+          "lem-real-and-complex-c-zero-are-banach",
           "lem-c-zero-is-a-closed-subspace-of-ell-infinity",
+          "thm-reals-cauchy-complete",
+          "thm-complex-plane-is-complete",
+          "def-axiom-schema-of-replacement",
+          "def-banach-space",
           "def-countable-choice",
           "def-c-zero-and-ell-infinity",
           "def-tangent-space-and-differential-on-a-banach-manifold",
@@ -716,7 +743,7 @@
           "def-countable-base-banach-manifold-and-smooth-map",
           "lem-closed-subspace-of-a-banach-space-is-banach"
         ],
-        "strategy": "Closedness makes c_0 a Banach subspace of ℓ∞. Its tangent cone at 0 is exactly c_0: every v∈c_0 is the velocity of t↦tv, while every derivative at 0 of a curve in c_0 is a norm limit of difference quotients in the closed subspace c_0. If the inclusion were a split submanifold near 0, the split chart and its derivative would therefore make this tangent copy of c_0 complemented in ℓ∞, contradicting the published Phillips-theorem consequence.",
+        "strategy": "Build an uncountable almost-disjoint family of subsets of N and corresponding unit vectors in ℓ∞/c_0. Every quotient functional is nonzero on only countably many of them, so no countable dual family separates the quotient. A bounded projection onto c_0 would induce a countable separating family from the coordinate functionals, a contradiction.",
         "axiom_audit": "AC_omega is used exactly through the published noncomplementation theorem.",
         "provenance": {
           "statement": "literature-derived",
@@ -805,7 +832,7 @@
           "thm-well-ordering-principle",
           "def-countable-choice"
         ],
-        "strategy": "Use AC_omega for unit x_n with |⟨Tx_n,x_n⟩|>||T||-1/n and pass to an infinite subsequence on which one sign occurs, choosing its least successive indices. For λ=±||T||, expand ||(T-λI)x_n||² and use ||Tx_n||≤||T|| to get convergence to zero. The compact closure of T of the unit ball is sequentially compact by the choice-free compactness implication, so a subsequence Tx_{n_j} converges; λ≠0 then makes x_{n_j} converge to a unit eigenvector.",
+        "strategy": "Use AC_omega for unit x_n with |⟨Tx_n,x_n⟩|>||T||-1/(n+1) and pass to an infinite subsequence on which one sign occurs, choosing its least successive indices. For λ=±||T||, expand ||(T-λI)x_n||² and use ||Tx_n||≤||T|| to get convergence to zero. The compact closure of T of the unit ball is sequentially compact by the choice-free compactness implication, so a subsequence Tx_{n_j} converges; λ≠0 then makes x_{n_j} converge to a unit eigenvector.",
         "axiom_audit": "AC_omega is used exactly to choose the approximate maximizers. Subsequences are selected by least indices, and compactness implies sequential compactness in ZF; no DC or full AC is used.",
         "provenance": {
           "statement": "literature-derived",
@@ -1058,8 +1085,8 @@
           "def-countable-choice",
           "thm-hilbert-space-fourier-expansion"
         ],
-        "strategy": "Scaffold repair (Step 3b): the self-adjointness hypothesis is necessary; over a real Hilbert space a skew operator with vanishing quadratic form (a 90 degree rotation) is positive in the scaffold's sense but is not self-adjoint. Construct S by the spectral series sum sqrt(lambda) P_lambda; compactness is immediate for empty or finite positive spectrum and follows from finite-rank truncations only in the countably infinite case; uniqueness over all compact positive square roots via A=(R+R*)/2, K=(R-R*)/2 with AK=-KA.",
-        "axiom_audit": "AC_omega is inherited from the support spectral theorem and compact norm closure; finite-dimensional diagonalization adds no infinite selection.",
+        "strategy": "Construct S by the spectral series sum sqrt(lambda) P_lambda. Approximate it by the finite-rank sums over lambda>=1/(n+1), with norm error at most (n+1)^(-1/2), covering empty, finite and infinite spectra uniformly. For any competing compact positive R, positivity at x+tRx for x in ker T forces Rx=0; for x in E_lambda the vector v=(R-sqrt(lambda)I)x satisfies Rv=-sqrt(lambda)v, so positivity forces v=0. Density of the spectral support proves uniqueness over both scalar fields without compactness of R*. ",
+        "axiom_audit": "Countable Choice is inherited from the spectral and compact norm-limit theorems. Uniqueness uses only algebra and positivity; no further selection is used.",
         "provenance": {
           "statement": "literature-derived",
           "proof": "ai-altered"
@@ -1100,7 +1127,7 @@
           "def-countable",
           "def-countable-choice"
         ],
-        "strategy": "The ideal property makes T*T compact and adjoint identities make it positive. Apply the square-root lemma, order its countable positive spectrum using finiteness above thresholds, and specify zero padding.",
+        "strategy": "The ideal property makes T*T compact and adjoint identities make it positive. Apply the square-root lemma, order its countable positive spectrum using finiteness above thresholds, and specify zero padding. The numerical sequence has the auxiliary initial value s_0(T)=||T||=s_1(T); multiplicity counts, singular vectors and singular-value sums use only labels n>=1.",
         "axiom_audit": "AC_omega is propagated from compact square roots and the adjoint interface; ordering the already countable multiset adds no stronger choice.",
         "provenance": {
           "statement": "literature-derived",
@@ -1181,6 +1208,7 @@
           "thm-singular-value-decomposition-for-compact-operators",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "thm-rank-nullity",
+          "thm-infimum-property",
           "def-dimension",
           "def-kernel-and-image-of-a-linear-map",
           "def-operator-norm",
@@ -1231,9 +1259,10 @@
           "def-hilbert-space",
           "def-banach-space",
           "def-countable-choice",
-          "thm-singular-value-decomposition-for-compact-operators"
+          "thm-singular-value-decomposition-for-compact-operators",
+          "thm-infimum-property"
         ],
-        "strategy": "Define the harmless initial value a_0(T)=||T|| so convergence has the library's required ℕ-domain. For compact T use equality with singular values on the positive-indexed tail and their decay. Conversely use AC_omega for finite-rank F_n with ||T-F_n||≤a_n+1/n for n≥1, set F_0=0, and invoke compact-operator norm closure. Thus the iff concerns arbitrary bounded T without defining singular values circularly there.",
+        "strategy": "The finite-rank error set contains ||T|| and is bounded below by zero, so thm-infimum-property defines every a_n for n>=1; set a_0=||T||. Compactness gives a_n=s_n tending to zero. Conversely Countable Choice on shifted near-minimizer sets gives F_n of rank<n and error<a_n+1/n for n>=1; append F_0=0 and apply norm-limit compactness with Hilbert target.",
         "axiom_audit": "AC_omega supplies approximate minimizers and is propagated by the norm-closure theorem; no full AC is used.",
         "provenance": {
           "statement": "literature-derived",
@@ -1337,6 +1366,8 @@
         "deps": [
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "thm-singular-value-decomposition-for-compact-operators",
+          "lem-finite-rank-operators-are-compact",
+          "lem-nth-term-test",
           "def-series-and-absolute-convergence-in-a-normed-space",
           "def-compact-linear-operator",
           "def-operator-norm",
@@ -1372,6 +1403,7 @@
         "statement": "Assume the Axiom of Countable Choice. T on H is trace class iff T=AB for Hilbert–Schmidt B:H→K and A:K→H for some K. Moreover ||AB||_1≤||A||_HS||B||_HS, and trace-class T has a factorization attaining equality.",
         "deps": [
           "def-trace-class-operator",
+          "def-compact-linear-operator",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "thm-singular-value-decomposition-for-compact-operators",
           "lem-positive-square-root-of-a-compact-positive-operator",
@@ -1418,27 +1450,25 @@
         "id": "lem-nuclear-series-characterizes-trace-norm",
         "kind": "lemma",
         "title": "Nuclear series characterizes trace norm",
-        "statement": "Assume the Axiom of Countable Choice. T is trace class iff a positive-integer-indexed operator series T=Σ_j(x↦⟨x,u_j⟩v_j) converges in operator norm with Σ_j||u_j||||v_j||<∞. The trace norm is the infimum of these sums, attained after explicitly reindexing the SVD series by the positive integers.",
+        "statement": "Assume the Axiom of Countable Choice. T is trace class iff a positive-integer-indexed operator family has zero-based partial sums R_0=0, R_m=Σ_{j=1}^m(x↦⟨x,u_j⟩v_j) converging in operator norm, with the shifted series Σ_{m∈N}||u_{m+1}||||v_{m+1}|| finite. The trace norm is the infimum of these sums, attained using the SVD positive indices and zero padding in finite rank.",
         "deps": [
           "def-trace-class-operator",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "thm-singular-value-decomposition-for-compact-operators",
-          "thm-hilbert-space-fourier-expansion",
-          "thm-norm-limit-of-compact-operators-is-compact",
-          "lem-finite-rank-operators-are-compact",
           "thm-cauchy-schwarz-in-an-inner-product-space",
           "lem-finite-bessel-inequality",
           "def-operator-norm",
           "def-bounded-linear-operator",
           "def-metric-convergence",
           "def-infimum",
-          "def-dimension",
           "def-hilbert-space",
           "def-countable-choice",
-          "def-real-and-complex-inner-product-space"
+          "def-real-and-complex-inner-product-space",
+          "def-compact-linear-operator",
+          "thm-monotone-convergence"
         ],
-        "strategy": "SVD yields a nuclear series attaining Σs_j. Conversely summable rank-one norms give operator-norm convergence and compactness. For the first n singular pairs expand Σ_{k≤n}⟨Te_k,f_k⟩ through any nuclear series; absolute convergence, finite Cauchy–Schwarz and Bessel bound it by Σ||u_j||||v_j||. Supremum in n gives trace class and the norm infimum.",
-        "axiom_audit": "AC_omega is inherited from SVD, Fourier expansion, and compact norm closure; given nuclear sequences require no additional selection.",
+        "strategy": "Use the positive-indexed SVD to attain the nuclear norm sum. For any given nuclear representation, finite Bessel and Cauchy–Schwarz bound the finite singular sums; operator-norm error estimates and monotone convergence give trace class. Compactness is an initial hypothesis, not re-proved.",
+        "axiom_audit": "Countable Choice comes from the SVD; all nuclear data in the reverse direction are given and only finite Bessel sums are used.",
         "provenance": {
           "statement": "literature-derived",
           "proof": "ai-altered"
@@ -1467,7 +1497,6 @@
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "lem-finite-rank-operators-are-compact",
           "thm-norm-limit-of-compact-operators-is-compact",
-          "thm-hilbert-schmidt-operators-form-a-two-sided-ideal",
           "thm-hilbert-adjoint-properties",
           "def-operator-norm",
           "def-bounded-linear-operator",
@@ -1479,8 +1508,7 @@
           "def-metric-space",
           "def-infimum",
           "def-dimension",
-          "def-countable-choice",
-          "def-square-summable-family-on-an-arbitrary-index-set"
+          "def-countable-choice"
         ],
         "strategy": "Rank-one norms and the nuclear infimum give operator norm, triangle, and ideal bounds, with compactness established in each converse use by finite-rank partial sums and the norm-limit theorem. For a trace-norm Cauchy sequence choose a subsequence with summable differences and near-minimizing nuclear representations, flatten them to build a compact operator-norm limit, and prove trace-norm convergence; then recover the whole sequence.",
         "axiom_audit": "AC_omega supplies the needed countable selections of a fast subsequence and near-minimizing nuclear series; no stronger use occurs.",
@@ -1603,6 +1631,7 @@
           "thm-singular-value-decomposition-for-compact-operators",
           "thm-hilbert-schmidt-operators-form-a-two-sided-ideal",
           "thm-hilbert-schmidt-operators-are-compact",
+          "def-hilbert-schmidt-operator",
           "lem-compositions-with-a-compact-operator-are-compact",
           "thm-hilbert-adjoint-properties",
           "def-hilbert-space-adjoint",
@@ -1618,8 +1647,8 @@
           "def-metric-convergence",
           "def-countable-choice"
         ],
-        "strategy": "For rank-one R(x)=⟨x,u⟩v, the nuclear trace formula gives tr(SR)=⟨Sv,u⟩=⟨v,S*u⟩=tr(RS). Pass from finite rank to T using trace-norm density, the ideal estimate, and |tr|≤||·||_1. For two HS factors use the absolutely convergent double matrix-coefficient sum.",
-        "axiom_audit": "AC_omega is inherited from trace-norm density and factorization; no series is rearranged before absolute convergence.",
+        "strategy": "Use nuclear representations and the bounded adjoint identity directly for trace-class cyclicity. For two HS factors establish compactness and trace class, then use the explicitly cited diagonal trace formula and an absolutely summable double coefficient family.",
+        "axiom_audit": "AC_omega inherited from nuclear representations, adjoints, compactness and factorization. No ambient basis needed for general cyclicity; supplied E used throughout the HS case.",
         "provenance": {
           "statement": "literature-derived",
           "proof": "ai-altered"
@@ -1680,6 +1709,26 @@
             }
           ]
         }
+      },
+      {
+        "id": "rem-external-separable-trace-class-fredholm-determinant-theorem", "kind": "remark", "title": "Separable trace-class determinant theorem recorded externally",
+        "statement": "Assume AC. On a separable complex Hilbert space, including the zero space, the trace-class Fredholm determinant has the spectral product, finite-rank limit, growth, continuity, multiplicativity, zero-order and derivative-at-zero properties stated in the item, with nonzero eigenvalues counted by stabilized generalized-kernel dimension.",
+        "deps": ["def-axiom-of-choice", "def-trace-class-operator", "def-absolute-value-and-singular-values-of-a-compact-operator"], "strategy": "Record the complete separable determinant theorem as a source-backed external prerequisite.", "axiom_audit": "Full AC is explicit; this result is external.", "provenance": {"statement": "literature-derived", "proof": "not-supplied"}, "sources": {"references": [{"title": "Aleksey Kostenko, Trace Ideals with Applications — Sections 3.4–3.5, printed pp. 34–45", "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"}]}
+      },
+      {
+        "id": "def-fredholm-determinant", "kind": "definition", "title": "Fredholm determinant of a trace-class operator",
+        "statement": "Assume AC. For trace-class T on an arbitrary complex Hilbert space, define det_H(I+zT) by restricting T to any separable reducing support obtained from a nuclear representation; the definition is independent of that support and equals 1 on the zero space.",
+        "deps": ["def-axiom-of-choice", "def-trace-class-operator", "lem-nuclear-series-characterizes-trace-norm", "thm-trace-is-absolutely-convergent-and-basis-independent", "thm-orthogonal-decomposition-by-a-closed-subspace", "lem-positive-square-root-of-a-compact-positive-operator", "def-absolute-value-and-singular-values-of-a-compact-operator", "rem-external-separable-trace-class-fredholm-determinant-theorem", "thm-sequential-characterization-of-compact-operators"], "strategy": "Produce a separable reducing nuclear support and preserve the trace, singular-value and generalized-eigenvalue data.", "axiom_audit": "Full AC is explicit.", "provenance": {"statement": "ai-altered", "proof": "ai-altered"}, "sources": {"references": [{"title": "Aleksey Kostenko, Trace Ideals with Applications — Section 3.4, printed pp. 34–41", "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"}]}
+      },
+      {
+        "id": "prop-fredholm-determinant-properties-for-trace-class-operators", "kind": "proposition", "title": "Fredholm determinant properties for trace-class operators",
+        "statement": "Assume AC. The arbitrary-space trace-class determinant has the spectral product, growth, continuity, multiplicativity, finite-rank approximation, zero-multiplicity and logarithmic derivative properties stated in the item.",
+        "deps": ["def-axiom-of-choice", "def-fredholm-determinant", "rem-external-separable-trace-class-fredholm-determinant-theorem", "thm-trace-class-is-a-two-sided-banach-operator-ideal", "thm-trace-is-absolutely-convergent-and-basis-independent", "def-absolute-value-and-singular-values-of-a-compact-operator"], "strategy": "Transfer through common separable support and derive the logarithmic derivative by multiplicativity.", "axiom_audit": "Full AC is explicit.", "provenance": {"statement": "ai-altered", "proof": "ai-altered"}, "sources": {"references": [{"title": "Aleksey Kostenko, Trace Ideals with Applications — Sections 3.4–3.5, printed pp. 34–45", "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"}]}
+      },
+      {
+        "id": "thm-lidskii-for-trace-class-operators", "kind": "theorem", "title": "Lidskii trace formula for trace-class operators",
+        "statement": "Assume AC. For trace-class T on any complex Hilbert space, the nonzero eigenvalues counted with algebraic multiplicity are absolutely summable and tr(T) equals their sum, including empty and zero-space cases.",
+        "deps": ["def-axiom-of-choice", "def-fredholm-determinant", "prop-fredholm-determinant-properties-for-trace-class-operators", "def-trace-class-operator"], "strategy": "Compare the determinant product derivative at zero with the trace.", "axiom_audit": "Full AC is explicit.", "provenance": {"statement": "literature-derived", "proof": "ai-altered"}, "sources": {"references": [{"title": "Aleksey Kostenko, Trace Ideals with Applications — Theorem 3.4.7, printed p. 41", "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"}]}
       }
     ]
   },
@@ -1701,31 +1750,29 @@
         "statement": "Assume the Axiom of Countable Choice. For Te_n=d_ne_n on ℓ²(N), T is bounded iff d∈ℓ∞, compact iff d_n→0, Hilbert–Schmidt iff Σ|d_n|²<∞, and trace class iff Σ|d_n|<∞. In the trace-class case tr(T)=Σd_n.",
         "deps": [
           "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "lem-positive-square-root-of-a-compact-positive-operator",
           "def-hilbert-schmidt-operator",
           "thm-hilbert-schmidt-norm-is-basis-independent",
           "def-trace-class-operator",
           "thm-trace-is-absolutely-convergent-and-basis-independent",
           "def-trace-of-a-trace-class-operator",
-          "thm-hilbert-space-fourier-expansion",
           "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
-          "cor-compact-operator-iff-approximation-numbers-tend-to-zero",
           "thm-norm-limit-of-compact-operators-is-compact",
           "lem-finite-rank-operators-are-compact",
           "def-compact-linear-operator",
           "def-operator-norm",
           "def-bounded-linear-operator",
-          "thm-bounded-linear-operator-equivalences",
-          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
           "def-square-summable-family-on-an-arbitrary-index-set",
-          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
           "def-real-and-complex-inner-product-space",
           "def-hilbert-space",
           "def-banach-space",
           "def-metric-convergence",
           "def-countable-choice",
-          "thm-singular-value-decomposition-for-compact-operators"
+          "thm-reals-cauchy-complete",
+          "thm-complex-plane-is-complete",
+          "def-hilbert-space-adjoint"
         ],
-        "strategy": "Compute ||T||=sup|d_n|. Coordinate truncations prove compactness if d_n→0, and compactness of {Te_n} proves the converse. Since |T| is diagonal with entries |d_n|, the standard basis computes HS norm, trace norm, and trace.",
+        "strategy": "Prove ell2 completeness by unique coordinate limits and finite-sum bounds; prove standard-basis density by small tails. Construct the bounded diagonal map directly. Use finite compact-ball covers for necessity, finite-rank truncations for sufficiency. In the compact case construct the positive diagonal root and count every repeated modulus. Apply supplied-basis HS and trace interfaces.",
         "axiom_audit": "AC_omega is inherited from the singular-value and trace interfaces; the standard basis is explicit.",
         "provenance": {
           "statement": "literature-derived",
@@ -1771,9 +1818,11 @@
           "thm-cauchy-schwarz-in-an-inner-product-space",
           "def-hilbert-schmidt-operator",
           "def-hilbert-space-adjoint",
-          "def-self-adjoint-positive-unitary-and-normal-operator"
+          "def-self-adjoint-positive-unitary-and-normal-operator",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-archimedean-reciprocal"
         ],
-        "strategy": "Its kernel 1_{0≤t≤x} has L² norm squared 1/2, so the imported kernel theorem gives HS and compactness. Iterated integration gives V^nf(x)=1/(n-1)!∫_0^x(x-t)^{n-1}f(t)dt and the explicit factorial operator-norm bound. If Vf=λf with λ≠0, divide that bound by |λ|^n and use the ratio test to show the quotient tends to zero, contradicting the eigenvector inequality. Riesz–Schauder then gives spectrum {0}. Finally compare the pairings on f=1 and g=x to prove V is not self-adjoint directly.",
+        "strategy": "Its kernel 1_{0≤t≤x} has L² norm squared 1/2, so the imported kernel theorem gives HS and compactness. Iterated integration gives V^nf(x)=1/(n-1)!∫_0^x(x-t)^{n-1}f(t)dt and the explicit factorial operator-norm bound. If Vf=λf with λ≠0, divide that bound by |λ|^n and use the ratio test to show the quotient tends to zero, contradicting the eigenvector inequality. Riesz–Schauder then gives spectrum {0}. Finally compare the pairings on f=1 and g=x to prove V is not self-adjoint directly. Before Fubini, bound the double absolute integral by ||f||_2. Use an explicit eventual ratio <=1/2. Prove zero spectral by short-interval normalized indicators.",
         "axiom_audit": "Full AC is propagated from the sigma-finite kernel theorem and Riesz–Schauder.",
         "provenance": {
           "statement": "literature-derived",
@@ -1791,7 +1840,7 @@
       {
         "id": "ex-rank-one-operator-adjoint-norm-and-trace",
         "kind": "example",
-        "title": "Rank one operator adjoint norm and trace",
+        "title": "Adjoint, norm and trace of an operator of rank at most one",
         "statement": "Assume the Axiom of Countable Choice. With the first-variable-linear convention, T(x)=⟨x,v⟩u has T*(x)=⟨x,u⟩v, ||T||=||u||||v||, one nonzero singular value ||u||||v|| when u,v≠0, and tr(T)=⟨u,v⟩.",
         "deps": [
           "thm-hilbert-adjoint-properties",
@@ -1994,7 +2043,7 @@
         "deps": [
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "def-hilbert-schmidt-operator",
-          "thm-hilbert-schmidt-norm-is-basis-independent",
+          "thm-hilbert-schmidt-operators-are-compact",
           "def-trace-class-operator",
           "thm-singular-value-decomposition-for-compact-operators",
           "def-square-summable-family-on-an-arbitrary-index-set",
@@ -2007,10 +2056,10 @@
           "def-countable-choice"
         ],
         "strategy": "State the scale and identify p=1,2,∞. Do not develop interpolation, duality, Hölder inequalities, or allow later dependencies on this remark.",
-        "axiom_audit": "AC_omega is inherited from singular values and endpoints; no new claim of basis existence.",
+        "axiom_audit": "AC_omega; Hilbert basis E of H supplied, no basis of K required. HS,E notation retained; HS compactness justifies reverse endpoint identification.",
         "provenance": {
           "statement": "literature-derived",
-          "proof": "not-applicable"
+          "proof": "ai-altered"
         },
         "sources": {
           "references": [

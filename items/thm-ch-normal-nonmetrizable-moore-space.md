@@ -28,11 +28,11 @@ the CH instance of the failure of the normal Moore space conjecture.
 
 **Given:** The continuum hypothesis $\mathrm{CH}$ ([[rem-continuum-hypothesis]]): every uncountable set of reals is equinumerous with $\mathbb{R}$; equivalently here $2^{\aleph_0} = \aleph_1$, i.e. $2^\omega = \omega_1$ in the von Neumann ordinals ([[def-cardinal]], [[def-natural-numbers]]).
 
-[F1] $\omega = \aleph_0$ is the least infinite cardinal and $\omega_1 = \omega^+$ is the least uncountable cardinal; a countable ordinal is one below $\omega_1$, and the limit ordinals below $\omega_1$ are exactly the countable ordinals of cofinality $\omega$ ([[def-natural-numbers]], [[def-cardinal]]).
+[F1] $\omega = \aleph_0$ is the least infinite cardinal and $\omega_1 = \omega^+$ is the least uncountable cardinal; a countable ordinal is one below $\omega_1$, and the nonzero limit ordinals below $\omega_1$ are exactly the countable ordinals of cofinality $\omega$ ([[def-natural-numbers]], [[def-cardinal]]).
 
 [F2] Clubs and stationarity in $\omega_1$: the set of nonzero limit ordinals below $\omega_1$ contains the club of all limit ordinals and is therefore stationary ([[def-club-subsets-of-ordinals]], [[prop-basic-stationary-set-calculus]]).
 
-[F3] Fleissner's construction ([[thm-fleissner-normal-moore-space-construction]]): if $\kappa, (\kappa_n), E$ satisfy $\sup_n \kappa_n = \kappa$, $2^{\kappa_n} < \kappa$, $2^\kappa = \kappa^+$, $E \subseteq \{\delta < \kappa^+ : \operatorname{cf}(\delta) = \omega\}$ stationary, and some fixed ladders admit the separation functions $m_\beta$ for every $\beta < \kappa^+$, then a normal nonmetrizable Moore space exists ([[def-fleissner-hyp-covering-interface]], [[def-moore-spaces-and-developments]]).
+[F3] Fleissner's construction ([[thm-fleissner-normal-moore-space-construction]]): if $\kappa$ is an infinite cardinal, $(\kappa_n)_{n\in\omega}$ is an increasing sequence of cardinals with $\sup_n \kappa_n = \kappa$ and $2^{\kappa_n} < \kappa$ for every $n$, $2^\kappa = \kappa^+$, $E \subseteq \{\delta < \kappa^+ : \operatorname{cf}(\delta) = \omega\}$ is stationary, and some fixed ladders admit the separation functions $m_\beta$ for every $\beta < \kappa^+$, then a normal nonmetrizable Moore space exists ([[def-fleissner-hyp-covering-interface]], [[def-moore-spaces-and-developments]]).
 
 [F4] In ZFC, for every at-most-countable set $A$ there is an index set $I_A$ which is either a finite initial segment of $\omega$ or all of $\omega$, and a bijection $I_A \to A$; choice permits these bijections to be fixed simultaneously for all $\beta < \omega_1$ ([[def-axiom-of-choice]], [[def-function]]).
 
@@ -51,6 +51,6 @@ the CH instance of the failure of the normal Moore space conjecture.
 
 ## Remarks
 
-- **The CH instance is not literally an instance of HYP as printed.** With this $E$ the all-$\beta$ reading of HYP's clause (3b) fails at $\beta = \omega^2$: the set $\{\omega \cdot n : 1 \le n\}$ is a club in $\omega^2$ contained in $E \cap \omega^2$. The construction nevertheless applies, because it consumes only $\sup_n \kappa_n = \kappa$, $2^{\kappa_n} < \kappa$, $2^\kappa = \kappa^+$, the stationarity of $E$ and the ladder separation of step 3.1, which is proved directly in the countable case exactly as the source's parenthetical indicates ("in the case $\kappa = \omega$ there is a straightforward, noninductive proof, which is left to the reader"). This is the convention recorded for the CH item; no stronger claim is asserted.
+- **The CH instance satisfies the local HYP interface.** For every $\beta<\omega_1$ one has $\operatorname{cf}(\beta)\le\omega$, so the interface's clause (3b), which concerns only $\operatorname{cf}(\beta)>\omega$, is vacuous. At $\beta=\omega^2$, the two disjoint sets $\{\omega n:1\le n<\omega\}$ and $\{\omega n+1:n<\omega\}$ are both clubs; thus $E\cap\omega^2$ contains a club but is nevertheless nonstationary. Step 3.1 independently proves the countable ladder separation that the construction consumes, as in the source's parenthetical countable-case argument.
 
 - **Where CH is used.** Only in $2^\omega = \omega_1$ (step 2.1). The stationarity of $E$ and the countable ladder separation are theorems of $\mathrm{ZFC}$.

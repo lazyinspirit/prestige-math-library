@@ -1,0 +1,7 @@
+# Position 1 recovery reseal — repaired
+
+Queue-status explicitly reports changed bytes since the owner-escalation receipt and instructs a repaired reseal. Re-read the complete new definition and both immediately affected consumers. The substantive change removes the claim that every torus is isomorphic to a product of circles; the new text gives products of circles only as examples. Thus the existing structure theorem is no longer needed to justify this definition, and the specific owner obligation identified in the earlier FA evidence has been removed from this item.
+
+The remaining defining clauses are consistent: a torus is a compact connected abelian Lie group, a torus of G is a closed embedded subgroup of that kind, and maximality is inclusion maximality. The trivial group is allowed. Products of circles satisfy these elementary properties; the O(2) and abelian-group remarks agree with these conventions. The contextual closed-subgroup remark is not used to infer the removed classification. This is familiar mathematics; no external source verification was required. No claim is made that the nonqueued structure theorem has been certified.
+
+The recovery expressly permits this changed-byte owner-escalation case; the prior receipt is preserved and the terminal recorder will bind the new bytes. No mathematical edit was made by this reseal, no supplier was edited and no judge stamp was created. Next reseal position 2.

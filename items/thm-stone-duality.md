@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Marcus Tressl, Stone Duality for Boolean Algebras — Theorem 3.1.6, p. 12; Lemma 4.1, Definitions 4.2–4.3, p. 16; Theorem 4.4, pp. 16–17"

@@ -1,0 +1,8 @@
+# Position 12 context reseal
+
+Read the current full definition and latest reseal against the current choice-strength A/B summaries. The transitive ZFC+GCH ground, regular uncountable lambda and ambient generic are explicit hypotheses. The later consistency summaries do not eliminate those hypotheses from this construction. Composition of affine real isometries and reindexed fibre permutations is again of the specified form; the coordinate action preserves reverse inclusion. Conjugation carries each support stabilizer to its image stabilizer. Ground AC and regularity give the asserted small-intersection closure. Fresh fourth coordinates distinguish any two triples, making different labelled families disjoint. Fixing one triple fixes its real label, hence its entire family; whole-group invariance of the bounded distance follows from real isometry invariance. Subadditivity of t/(1+t), plus the real triangle inequality, supplies the metric inequality.
+
+No closure-under-sequences or selector obstruction is assumed to define these objects, and neither is certified by this reseal. The page context leaves these arguments intact. Retain repaired disposition. The support, algebra and metric arguments needed for this context comparison are familiar; no additional source reading is claimed or required. The prior source-convention finding remains in the original FA evidence. No dependency change requires a consumer-ledger update.
+
+
+Current itemHashJudge: 7166a194a9169fa289c59b81a829756a7a0efec4ff6856816cb577d69a65e70e, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

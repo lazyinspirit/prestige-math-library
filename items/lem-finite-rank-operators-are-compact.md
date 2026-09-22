@@ -1,7 +1,7 @@
 ---
 id: lem-finite-rank-operators-are-compact
 kind: lemma
-title: Finite rank operators are compact
+title: Bounded finite rank operators are compact
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27

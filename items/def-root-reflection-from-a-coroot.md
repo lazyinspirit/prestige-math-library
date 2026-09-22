@@ -5,7 +5,7 @@ title: Root reflection defined by a coroot
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,7 +19,7 @@ landmark: false
 
 ## Definition
 
-Let $\alpha$ be a root of a finite-dimensional complex semisimple Lie algebra
+Assume the Axiom of Choice. Let $\alpha$ be a root of a finite-dimensional complex semisimple Lie algebra
 $\mathfrak g$ with respect to a Cartan subalgebra $\mathfrak h$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]) and let
 $h_\alpha\in\mathfrak h$ be its coroot

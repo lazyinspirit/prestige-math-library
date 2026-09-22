@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Zuoqin Wang, Lecture 6 — §§2.1.1–2.1.4"
@@ -43,7 +48,18 @@ about one $x$ at a time.
 
 ## Facts & Assumptions
 
-**Given:** An open $U \subseteq X$ in a real Banach space $X$, real Banach spaces $Y, Z, W$, a point $x \in U$, maps $f_1,f_2 : U \to Y$, $f : U \to Y$, $g : U \to Z$ all differentiable at $x$, and a bounded bilinear $B : Y \times Z \to W$ with constant $C \ge 0$ for the estimate $\|B(u,v)\| \le C\|u\|\,\|v\|$ from [L3].
+**Given:** An open $U\subseteq X$ in a real Banach space $X$, real Banach
+spaces $Y,Z,W$, and $x\in U$. The three claims have separate map data:
+
+- For claim 1, $f_1,f_2:U\to Y$ are differentiable at $x$ and $a,b\in\mathbb R$.
+- For claim 2, $f:U\to Y$ and $g:U\to Z$ are differentiable at $x$, and
+  $B:Y\times Z\to W$ is bounded bilinear with a constant $C\ge0$ as in [L3].
+- For claim 3, $f:U\to Y$ is differentiable at $x$, $W_0\subseteq Y$ is
+  open with $f[U]\subseteq W_0$, and $g:W_0\to Z$ is differentiable at $f(x)$.
+
+The symbols $f,g$ are local to their respective claims. Throughout the proof,
+source increments $h$ satisfy $x+h\in U$; in claim 3 this guarantees
+$y+k(h)=f(x+h)\in W_0$.
 
 [L1] Fréchet differentiability at $x$ with derivative $T$ means that for every real $\varepsilon > 0$ there is a real $\delta > 0$ such that $\|f(x+h)-f(x)-Th\| \le \varepsilon\|h\|$ for every $h$ with $\|h\| < \delta$ and $x+h \in U$ ([[def-frechet-derivative-between-banach-spaces]]).
 
@@ -51,7 +67,7 @@ about one $x$ at a time.
 
 [L3] A bounded bilinear map $B$ has a real constant $C \ge 0$ with $\|B(u,v)\| \le C\|u\|\,\|v\|$ for all $u,v$, and is jointly continuous ([[def-bounded-bilinear-map]], [[thm-bounded-bilinear-map-equivalences]]).
 
-[L4] A composite of bounded linear operators is bounded linear, and $\|ST\| \le \|S\|\,\|T\|$; the operator norm satisfies $\|Tu\| \le \|T\|\,\|u\|$ ([[lem-composition-operator-norm-inequality]], [[def-operator-norm]], [[def-space-of-bounded-linear-operators]]).
+[L4] Linear combinations of bounded linear operators with a common source and target are bounded linear. A composite of bounded linear operators is bounded linear, and $\|ST\| \le \|S\|\,\|T\|$; the operator norm satisfies $\|Tu\| \le \|T\|\,\|u\|$ ([[lem-composition-operator-norm-inequality]], [[def-operator-norm]], [[def-space-of-bounded-linear-operators]]).
 
 [L5] If two bounded linear operators satisfy the Fréchet remainder condition for the same map at the same point, they are equal ([[lem-the-frechet-derivative-is-unique]]).
 

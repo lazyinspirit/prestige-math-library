@@ -29,7 +29,7 @@ subalgebra $\mathfrak h_0\subseteq\mathfrak g_0$
 $\theta(\mathfrak h_0)\subseteq\mathfrak h_0$; since $\theta$ is an
 involution, this is equivalent to $\theta(\mathfrak h_0)=\mathfrak h_0$.
 
-Let $\mathfrak h_0$ be a $\theta$-stable Cartan subalgebra. The restrictions
+Let $\mathfrak h_0$ be a $\theta$-stable Cartan subalgebra. The restriction
 of $\theta$ to $\mathfrak h_0$ is an involutive linear map of $\mathfrak h_0$
 preserving the bracket, so the two subspaces
 
@@ -48,14 +48,16 @@ $\dim_{\mathbb R}\mathfrak t_0$ and $\dim_{\mathbb R}\mathfrak a_0$ are the
 The Cartan subalgebra $\mathfrak h_0$ is **maximally compact** if its compact
 dimension is maximal among the $\theta$-stable Cartan subalgebras of
 $\mathfrak g_0$, and **maximally noncompact**, or **maximally split**, if its
-noncompact dimension is maximal. Both maxima exist because
+noncompact dimension is maximal. Whenever the collection of $\theta$-stable
+Cartan subalgebras is nonempty, both maxima exist because
 $0\le\dim_{\mathbb R}\mathfrak t_0\le\dim_{\mathbb R}\mathfrak k_0$ and
 $0\le\dim_{\mathbb R}\mathfrak a_0\le\dim_{\mathbb R}\mathfrak p_0$ for every
 $\theta$-stable Cartan subalgebra, the two dimensions being nonnegative
 integers bounded by the fixed dimensions of the summands of the Cartan
-decomposition; the set of $\theta$-stable Cartan subalgebras is nonempty,
-since every Cartan subalgebra of $\mathfrak g_0$ is conjugate to a
-$\theta$-stable one.
+decomposition. In particular, once a $\theta$-stable Cartan subalgebra has
+been specified, the collection is nonempty and each of these bounded sets of
+integer dimensions has a largest member. This conditional attainment argument
+does not assert the existence of a Cartan subalgebra.
 
 The decomposition is compatible with the bracket in the following sense.
 Since $[\mathfrak k_0,\mathfrak k_0]\subseteq\mathfrak k_0$,
@@ -87,9 +89,6 @@ $(\dim\mathfrak t_0',\dim\mathfrak a_0')$. Sylvester's law of inertia
 ([[thm-sylvesters-law-of-inertia]]) therefore gives
 $\dim\mathfrak t_0=\dim\mathfrak t_0'$ and
 $\dim\mathfrak a_0=\dim\mathfrak a_0'$. Thus the compact and noncompact
-dimensions are invariants of the conjugacy class of $\mathfrak h_0$. This is the sense in which the
-compact and noncompact dimensions are used in the classification of the
-$\theta$-stable Cartan subalgebras. The maximality criteria in terms of the
-roots of $(\mathfrak g,\mathfrak h)$ and in terms of maximal abelian
-subspaces of $\mathfrak k_0$ and $\mathfrak p_0$ are established in
-[[thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification]].
+dimensions are invariants of the conjugacy class of $\mathfrak h_0$. This is
+the sense in which the compact and noncompact dimensions are used in the
+classification of the $\theta$-stable Cartan subalgebras.

@@ -8,6 +8,11 @@ deps: [lem-brownian-motion-has-a-jointly-measurable-continuous-version, def-axio
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Perla Sousi, Advanced Probability, Theorem 6.39"

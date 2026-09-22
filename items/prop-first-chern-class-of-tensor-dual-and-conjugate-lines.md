@@ -21,7 +21,8 @@ sources:
 ## Statement
 
 Assume AC. Let $L,M$ be numerable complex line bundles over a path-connected
-CW complex (or a CW-type base). Then
+CW complex with a vertex basepoint, or over a path-connected paracompact
+Hausdorff CGWH space of CW homotopy type. Then
 $$c_1(L\otimes M)=c_1(L)+c_1(M),\qquad c_1(L^*)=-c_1(L),\qquad c_1(\overline L)=-c_1(L),$$
 where $L^*$ is the dual line and $\overline L$ the conjugate line.
 
@@ -31,7 +32,7 @@ where $L^*$ is the dual line and $\overline L$ the conjugate line.
 
 [F1] $c_1:\operatorname{Pic}_{\mathrm{top}}(X)\to H^2(X;\mathbb Z)$ is a natural group isomorphism, tensor product corresponding to addition ([[thm-first-chern-class-classifies-complex-line-bundles]]).
 
-[F2] Tensor products, duals and conjugates of complex line bundles are formed by the corresponding transition functions, and the canonical evaluation pairing $L\otimes L^*\to\varepsilon^1$ is an isomorphism of line bundles ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F2] Tensor products, duals and conjugates of complex line bundles are formed by the corresponding transition functions, and evaluation $v\otimes\lambda\mapsto\lambda(v)$ is an isomorphism of line bundles (in a local line frame it is multiplication of the two scalar coordinates) ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
 [F3] Every numerable complex bundle admits a Hermitian metric ([[thm-numerable-vector-bundles-admit-bundle-metrics]]).
 
@@ -41,13 +42,13 @@ where $L^*$ is the dual line and $\overline L$ the conjugate line.
 
 **Proof technique:** direct.
 
-**Given:** AC and numerable complex lines $L,M$ over a path-connected CW complex.
+**Given:** AC and numerable complex lines $L,M$ over either of the bases in the statement.
 
 1.1 The tensor formula is the additivity clause of the group isomorphism of [F1]: linearity of $c_1$ under the group structure of $\operatorname{Pic}_{\mathrm{top}}$ is exactly $c_1(L\otimes M)=c_1(L)+c_1(M)$. [F1]
 
 2.1 The dual formula: the evaluation pairing of [F2] shows $L\otimes L^*\cong\varepsilon^1$, so by step 1.1 and $c_1(\varepsilon^1)=0$ one has $c_1(L^*)=-c_1(L)$. [F2, step 1.1]
 
-3.1 The conjugate formula: a Hermitian metric on $L$ given by [F3] provides, for each $x$, the conjugate-linear isomorphism $L_x\to L_x^*$, $v\mapsto\langle v,-\rangle$, which is complex-linear on the conjugate line; these fiberwise maps are continuous and define an isomorphism $\overline L\cong L^*$. Hence $c_1(\overline L)=c_1(L^*)=-c_1(L)$ by step 2.1. [F2, F3, step 2.1]
+3.1 The conjugate formula: write a Hermitian metric from [F3] as $h$, conjugate-linear in its first argument and linear in its second (transpose the arguments if using the opposite convention). It provides, for each $x$, the conjugate-linear isomorphism $L_x\to L_x^*$, $v\mapsto h(v,-)$, which is complex-linear on the conjugate line; in a local frame $e$, the functional sends $we$ to $\overline z w h(e,e)$ for $v=ze$, so it is continuous with nonzero coefficient $h(e,e)>0$. Hence the maps define an isomorphism $\overline L\cong L^*$. Hence $c_1(\overline L)=c_1(L^*)=-c_1(L)$ by step 2.1. [F2, F3, step 2.1]
 
 3.2 Specialization to underlying real bundles: for a complex line with $c_1(L)=e(L_{\mathbb R})$ by [F4], the dual identity reads $e((L^*)_{\mathbb R})=-e(L_{\mathbb R})$, consistent with the orientation-reversal sign. [F4, step 2.1]
 

@@ -5,7 +5,7 @@ title: Compact and split real forms of sl two c
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-special-linear-lie-algebra-sl-two, def-real-form-of-a-complex-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, ex-killing-form-of-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, ex-unitary-and-special-unitary-lie-groups, ex-general-and-special-linear-lie-groups, def-cartan-subalgebra-of-a-lie-algebra, def-transpose-of-a-matrix, def-countable-choice]
+deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-special-linear-lie-algebra-sl-two, def-real-form-of-a-complex-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, ex-killing-form-of-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion, ex-unitary-and-special-unitary-lie-groups, ex-general-and-special-linear-lie-groups, def-cartan-subalgebra-of-a-lie-algebra, def-transpose-of-a-matrix, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -51,7 +51,7 @@ $\mathfrak s$.
 
 [L4] The Killing form of $\mathfrak{sl}_2$ satisfies $B(h,h)=8$, $B(e,f)=B(f,e)=4$, and all other pairings of basis vectors zero; equivalently $B(X,Y)=4\operatorname{tr}(XY)$ for all $X,Y$ ([[ex-killing-form-of-sl-two]], [[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
 
-[L5] A real form $\mathfrak g_0$ is a compact real form exactly when $B(X,X)<0$ for every nonzero $X\in\mathfrak g_0$; it is a split real form exactly when it contains a Cartan subalgebra $\mathfrak h_0$ such that every $\operatorname{ad}_H$, $H\in\mathfrak h_0$, is diagonalizable over $\mathbb R$ ([[def-compact-real-form-of-a-complex-semisimple-lie-algebra]], [[def-split-real-form]], [[def-cartan-subalgebra-of-a-lie-algebra]]).
+[L5] When the ambient complex Lie algebra is finite-dimensional and semisimple, a real form $\mathfrak g_0$ is a compact real form exactly when $B(X,X)<0$ for every nonzero $X\in\mathfrak g_0$; it is a split real form exactly when it contains a Cartan subalgebra $\mathfrak h_0$ such that every $\operatorname{ad}_H$, $H\in\mathfrak h_0$, is diagonalizable over $\mathbb R$ ([[def-compact-real-form-of-a-complex-semisimple-lie-algebra]], [[def-split-real-form]], [[def-cartan-subalgebra-of-a-lie-algebra]]).
 
 [L6] The conjugate transpose $X^{*}=\overline{X}^{\mathsf T}$ is additive, and $(XY)^{*}=Y^{*}X^{*}$ ([[def-transpose-of-a-matrix]]).
 
@@ -67,7 +67,7 @@ $\mathfrak s$.
 
 1.3 The fixed algebra of $\sigma_s$ is $\mathfrak{sl}_2(\mathbb R)$: a matrix is fixed by entrywise conjugation exactly when it is real, and a real traceless matrix lies in $\mathfrak{sl}_2(\mathbb R)$ by [L1]. [given, L1, algebra]
 
-1.4 The Killing form of $\mathfrak s$ is $B(X,Y)=4\operatorname{tr}(XY)$. Both sides are symmetric bilinear, so it suffices to compare them on basis pairs: $4\operatorname{tr}(ef)=4=B(e,f)$, $4\operatorname{tr}(h^2)=8=B(h,h)$, and $4\operatorname{tr}(e^2)=4\operatorname{tr}(f^2)=4\operatorname{tr}(eh)=4\operatorname{tr}(fh)=0$, matching the vanishing pairings of [L4]. [L4, algebra]
+1.4 The Killing form of $\mathfrak s$ is $B(X,Y)=4\operatorname{tr}(XY)$. Both sides are symmetric bilinear, so it suffices to compare them on basis pairs: $4\operatorname{tr}(ef)=4=B(e,f)$, $4\operatorname{tr}(h^2)=8=B(h,h)$, and $4\operatorname{tr}(e^2)=4\operatorname{tr}(f^2)=4\operatorname{tr}(eh)=4\operatorname{tr}(fh)=0$, matching the vanishing pairings of [L4]. In the basis $(e,f,h)$ its Gram matrix is $\begin{pmatrix}0&4&0\\4&0&0\\0&0&8\end{pmatrix}$, whose determinant is $-128\ne0$; hence $B$ is nondegenerate and $\mathfrak s$ is semisimple by Cartan's criterion over the characteristic-zero field $\mathbb C$. Thus the ambient hypothesis in [L5] has been established before either definition is invoked. [L4, [[thm-cartans-semisimplicity-criterion]], algebra]
 
 1.5 The line $\mathbb Rh$ is a Cartan subalgebra of $\mathfrak{sl}_2(\mathbb R)$: it is abelian, hence nilpotent, and its normalizer is itself because $[h,X]=0$ for $X=\begin{pmatrix}a&b\\c&-a\end{pmatrix}$ forces $2b=0$ and $-2c=0$, so $X\in\mathbb Rh$. Since $[h,h]=0$, $[h,e]=2e$ and $[h,f]=-2f$ by the given relations, $\operatorname{ad}_h$ is diagonal on the basis $(h,e,f)$ with real eigenvalues $0,2,-2$, so $\mathfrak{sl}_2(\mathbb R)$ is a split real form by [L5]. [given, L1, L5, algebra]
 

@@ -1,0 +1,10 @@
+# Position 12: current-context reseal
+
+Read the complete current definition, original FA mathematical/source evidence, preceding reseal and current choice-strength A/B summaries. The definition is conditional on a transitive ZFC+GCH ground and an ambient generic; the downstream consistency claims do not strengthen that hypothesis here. Its existing symmetric-model suppliers supply ZF, not DC or Stone failure.
+
+Checked directly the affine-isometry composition and inverse formulas, the coordinate action with fixed fourth coordinate, and the stabilizer equations. Unions of fewer than lambda small supports remain small by ground AC and regularity. Distinct triples can be separated at a fresh fourth coordinate because both used coordinate sets have size below lambda. This proves disjointness of the X-families and makes the real-label metric well-defined. Fixing one triple over a label fixes its X-family; each metric pair has finite support and affine isometries preserve its value. The bounded metric triangle inequality follows from monotonicity and subadditivity of t/(1+t). None of these checks uses the later closure or selector obstruction.
+
+Current page context does not invalidate any construction or convert an internal enumeration into an available symmetric object. Retain repaired disposition and unchanged bytes. This context check and the displayed algebra/support arguments are familiar; no additional external verification is needed. Prior original-source verification and the source's reflection-group defect are already documented in research/phase-2-remaining-27-step7-fa-e-12-def-good-tree-watson-symmetric-stone-model.md; no fresh reading is claimed here.
+
+
+Current itemHashJudge: 7166a194a9169fa289c59b81a829756a7a0efec4ff6856816cb577d69a65e70e; matches the latest receipt. Queue-status was run immediately before recording; all predecessors must be current for recorder acceptance. This is a context reseal, not a judge verdict or pass stamp. Next: the next stale position in ascending order.

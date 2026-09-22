@@ -30,11 +30,11 @@ $\operatorname{ad}_x$.
 
 **Given:** The Axiom of Choice, a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, and an element $x\in\mathfrak g$.
 
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it is used only through [L1].
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it is inherited through [L1] and [L2], with [L2] itself using the operator theorem [L1].
 
 [L1] Under the Axiom of Choice, every endomorphism of a finite-dimensional vector space over a perfect field has a unique additive Jordan–Chevalley decomposition into commuting semisimple and nilpotent parts ([[thm-additive-jordan-chevalley-decomposition]]).
 
-[L2] If $\operatorname{ad}_x=S+N$ is that additive decomposition, there are unique $y_s,y_n\in\mathfrak g$ with $S=\operatorname{ad}_{y_s}$ and $N=\operatorname{ad}_{y_n}$; they give the unique abstract Jordan decomposition of $x$. Conversely, any abstract Jordan decomposition has adjoints $S,N$ ([[lem-jordan-chevalley-parts-agree-under-adjoint-representation]]).
+[L2] Under the Axiom of Choice, if $\operatorname{ad}_x=S+N$ is that additive decomposition, there are unique $y_s,y_n\in\mathfrak g$ with $S=\operatorname{ad}_{y_s}$ and $N=\operatorname{ad}_{y_n}$; they give the unique abstract Jordan decomposition of $x$. Conversely, any abstract Jordan decomposition has adjoints $S,N$ ([[lem-jordan-chevalley-parts-agree-under-adjoint-representation]]).
 
 [L3] An abstract Jordan decomposition is a decomposition $x=x_s+x_n$ with commuting parts whose adjoints are semisimple, respectively nilpotent ([[def-abstract-jordan-decomposition-in-a-lie-algebra]]).
 

@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Definitions 2.1.1, 2.1.18 and §3.1, printed pp. 11–13 and 54–61"
@@ -43,7 +48,9 @@ The last identity is the **C\*-identity**. Two immediate consequences are worth
 recording, and both are proved from the displayed axioms alone:
 
 - **the involution is isometric**: $\|a^*\| = \|a\|$. Indeed $\|a\|^2 = \|a^*a\| \le \|a^*\|\,\|a\|$ gives $\|a\| \le \|a^*\|$ when $a \ne 0$, and applying this inequality to $a^*$ and using $(a^*)^* = a$ gives $\|a^*\| \le \|a\|$; the case $a = 0$ is trivial;
-- **the norm is determined by the algebraic data in the commutative case**; this is not proved here and is a consequence of [[thm-commutative-gelfand-naimark]].
+- **no norm-uniqueness assertion is part of this definition**: such a theorem
+  needs additional hypotheses and proof, and does not follow merely by naming
+  the displayed C\*-identity.
 
 Let $A$ and $B$ be complex C\*-algebras. A **bounded star-homomorphism**, or
 bounded $*$-homomorphism, is a bounded complex-linear map

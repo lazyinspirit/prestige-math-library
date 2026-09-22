@@ -16,15 +16,26 @@ sources:
 
 ## Remark
 
-The development on this page covers **continuous Brownian-driven Ito
-processes** only: processes of the form
+The stochastic-integration and Ito-formula part of this page is scoped to
+**continuous Brownian-driven Ito processes**: processes of the form
 $X_t=X_0+\int_0^tb_s\,ds+\int_0^t\sigma_s\,dB_s$
 [[def-continuous-brownian-ito-process]], their quadratic covariation along
 deterministic partition sequences
 [[def-quadratic-covariation-of-brownian-ito-processes]]
 [[def-quadratic-variation-along-a-partition-sequence]], and the one- and
-multidimensional Ito formulas [[thm-ito-formula-one-dimensional]]
+multidimensional Ito formula items [[thm-ito-formula-one-dimensional]]
 [[thm-multidimensional-ito-formula-for-brownian-driven-processes]].
+
+The partition definitions are broader. The pathwise quadratic-variation
+definition takes an arbitrary continuous real function and a specified
+partition sequence. The process covariation definition takes arbitrary real
+processes with measurable fixed-time values and almost-sure continuous paths;
+it imposes no Brownian representation, filtration or adaptedness. It names
+a covariation only when its stated common uniform-in-probability limit exists.
+These definitions do not assert existence for every continuous process.
+The page also contains characterizations stated for continuous local
+martingales; such statements do not construct integration against every such
+martingale.
 
 **Outside the block.** The following are not defined, proved or used here, and
 none of the statements on this page may be quoted as covering them:
@@ -32,7 +43,7 @@ none of the statements on this page may be quoted as covering them:
 1. Ito formulas with jump terms and integration with respect to discontinuous
    semimartingales or compensated random measures;
 2. stochastic integration against a general continuous local martingale or a
-   general semimartingale, and the corresponding covariation theory; the
+   general semimartingale, and a general existence theory of covariation for those integrators; the
    Brownian integral of this block is not a general stochastic integral;
 3. the Burkholder--Davis--Gundy inequalities and the predictable quadratic
    variation $\langle M\rangle$, which are distinct from the realized
@@ -51,5 +62,7 @@ tending to zero, and only when one common limit arises for every such sequence
 that convention do not automatically transfer to random, path-adapted or
 non-vanishing-mesh partitions, and no such transfer is claimed.
 
-No proof is attached: this remark records the scope boundary of the preceding
-constructions rather than a mathematical assertion.
+This remark records intended scope and the domains of the cited definitions.
+It does not prove the formula items or enlarge their hypotheses. No choices
+are made here; the cited stochastic constructions retain their declared AC
+assumptions.

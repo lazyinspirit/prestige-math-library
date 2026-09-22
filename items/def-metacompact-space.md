@@ -9,6 +9,11 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   scraped: []
   references:

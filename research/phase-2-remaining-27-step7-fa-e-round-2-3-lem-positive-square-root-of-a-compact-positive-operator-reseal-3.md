@@ -1,0 +1,7 @@
+# FA reseal 3 — position 3
+
+Disposition repaired; source status familiar. The current itemHashJudge 355373272f26ad506e117226681d63e65a6fbacbdd9a5b145ac8c388bba28ad0 matches the recorded item_sha256. Re-read the whole lemma, compared every source-section quote, and inspected the changed square-summability interface. The preceding spectral theorem was rechecked and resealed first.
+
+The changed supplier supplies precise complex finite-subset sums, zero-based finite Cauchy-Schwarz lists, and a separate +infinity norm case. This lemma only uses finite squared sums, bounded by ||T||||x||² for the root family and by ||x||² for projection tails. Thus its real nonnegative square roots are well defined and its orthogonal finite-subset nets and positivity arguments remain valid. At stage n the finite spectral threshold is 1/(n+1), with norm error at most (n+1)^(-1/2). The uniqueness proof still kills the kernel by varying the real scalar t in positivity, and kills (R-sqrt(lambda)I)x through its negative eigenvalue -sqrt(lambda). No self-adjointness or compactness of an adjoint of R is assumed.
+
+The source correction invalidates no mathematical step. Refreshed its exact quote in the two own contract carriers and updated the owning consumer-batch input row; no item or supplier bytes were changed. This is familiar elementary Hilbert-space analysis, requiring no new external verification. Focused contract validation precedes resealing; then reseal position 10 before recording position 11.

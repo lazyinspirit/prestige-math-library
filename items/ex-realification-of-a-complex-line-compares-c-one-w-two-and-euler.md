@@ -20,7 +20,7 @@ sources:
 ## Example
 
 Assume AC. Let $L\to B$ be a numerable complex line over a path-connected CW
-base (or CW-type base), and let $\rho_2$ denote reduction mod two. Then
+base, and let $\rho_2$ denote reduction mod two. Then
 $$e(L_{\mathbb R})=c_1(L),\qquad w_1(L_{\mathbb R})=0,\qquad w_2(L_{\mathbb R})=\rho_2c_1(L).$$
 
 ## Facts & Assumptions

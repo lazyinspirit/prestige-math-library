@@ -18,8 +18,11 @@ sources:
 ## Statement
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. For a standard Brownian
-motion $B$ and every real $\theta$, the process
+[[def-elementary-predictable-brownian-integrand]], and suppose the filtration
+satisfies the usual conditions. Use the $\mathcal F_0$-normalized representative
+of the standard Brownian motion that is set to $0$ off its measurable
+probability-one continuity event, and continue to denote it by $B$. For every
+real $\theta$, the process
 $$Z_t:=\exp\Bigl(\theta B_t-\frac{\theta^2t}{2}\Bigr),\qquad t\ge0,$$
 is a positive continuous martingale with $EZ_t=1$ for every $t$, and
 $$Z_t=1+\theta\int_0^tZ_s\,dB_s\qquad\text{up to indistinguishability},$$
@@ -28,9 +31,9 @@ square-integrable process $\theta Z$.
 
 ## Facts & Assumptions
 
-**Given:** AC, (H), a standard Brownian motion $B$, a real parameter $\theta$, and a finite horizon $T>0$.
+**Given:** AC, (H), the usual conditions, the $\mathcal F_0$-normalized everywhere-continuous adapted representative of the standard Brownian motion $B$, a real parameter $\theta$, and a finite horizon $T>0$.
  
-[F1] **Class structure.** $B$ is a continuous Brownian Ito process with drift $0$ and diffusion coefficient $1$; the exponential process $Z$ is continuous and adapted, hence predictable, and locally bounded, hence locally square-integrable as an integrand. [[def-continuous-brownian-ito-process]] [[def-brownian-motion]] [[def-locally-square-integrable-predictable-brownian-integrand]]
+[F1] **Class structure.** Under the usual conditions the continuity event is in $\mathcal F_0$, so setting $B$ to $0$ off it preserves adaptedness, all finite-dimensional laws, and the increment-independence hypothesis while making every path continuous. The normalized $B$ is therefore predictable and is a continuous Brownian Ito process with drift $0$ and diffusion coefficient $1$; the exponential process $Z$ is everywhere continuous and adapted, hence predictable, and locally bounded, hence locally square-integrable as an integrand. [[def-continuous-brownian-ito-process]] [[def-brownian-motion]] [[def-locally-square-integrable-predictable-brownian-integrand]]
  
 [F2] **Ito formula.** For $f\in C^{1,2}([0,\infty)\times\mathbb R)$ the one-dimensional Ito formula holds for every continuous Brownian Ito process, so $f(t,B_t)=f(0,0)+\int_0^t(\partial_tf+\tfrac12\partial^2_xf)(s,B_s)ds+\int_0^t\partial_xf(s,B_s)dB_s$ up to indistinguishability. [[thm-ito-formula-one-dimensional]]
  

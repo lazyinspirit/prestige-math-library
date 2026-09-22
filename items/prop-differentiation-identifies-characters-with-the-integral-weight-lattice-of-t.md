@@ -9,6 +9,11 @@ deps: [thm-structure-of-a-compact-connected-abelian-lie-group, def-character-and
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"

@@ -1,0 +1,13 @@
+# FA position 13 — repaired
+
+Independently read the current definition, batch-14 manifest and proof contract, page pair and coverage conventions, original judge rejection, Alpha normalization repair, and final Terra rejection. The final rejection is correct: the binary product definition does not supply an arbitrary-index product.
+
+The published arbitrary-product corollary and its Kolmogorov supplier were read in full. Instantiate the former with the finite discrete standard-Borel probability space {0,1} of equal point masses. Finite assignment cylinders generate exactly its cylinder sigma-algebra. Their masses determine finite marginals and hence the unique product. Empty support and empty index set both give mass one on the whole product; finite lambda has normalized counting measure.
+
+Source verification: https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf, 1C (printed p. 3), 8A(ii) and 8B (printed pp. 69–70), explicitly use disjoint families of size strictly below the additivity cardinal and full-domain extensions of the usual binary product. https://diposit.ub.edu/server/api/core/bitstreams/d5caf92a-962e-496a-a31e-5630dafa67ec/content, Definition 2.6 (printed p. 6), gives the countably additive full-domain PMEA-sigma assertion. These relevant passages were read directly; no search snippet substitutes for them. No large-cardinal consistency proof is asserted by this definition.
+
+A further independent defect was corrected: continuum-length increasing continuity is not the source definition of continuum additivity. The item now uses disjoint families of cardinality < continuum and proves the null-ideal equivalence. Disjointification preserves nullity because the full domain is complete; conversely finite mass bounds the number of members of mass at least 1/n by n, so the positive-mass subfamily is countable. Countable additivity and null-union closure then give the required sum, defined by finite subsums. This argument uses the stated ZFC background. Full extension is distinguished from mere completeness.
+
+Changed only this definition and its own batch manifest/contracts. Updated the owning batch-14 dependency input to record that the repaired dependency is published and therefore supplies no same-run cross-batch row; regenerate the derived ledger. No supplier or published file was edited, no new item or review stamp created.
+
+Checks: precheck reports 0 checked/0 failing (definition has no proof steps); both owning and merged strict proof contracts pass, 1/1 item checked. Earlier page-context receipts 10 and 11 are resealed in ascending order before this record. Next action: record position 13, then independently inspect position 14.

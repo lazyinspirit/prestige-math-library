@@ -58,18 +58,19 @@ and carries the metric topology of $X$ onto the subspace topology of $\iota[X]$
 space" is an accurate reading of the definition, and the pedantic version with
 $\iota$ written out is used only where two completions have to be compared.
 
-**Existence and uniqueness are theorems, not part of the definition.** That every
-metric space has a completion is [[thm-metric-completion-exists]]; that any two
-are isometric by a unique isometry commuting with the embeddings is
+**Existence and uniqueness are theorems, not part of the definition.** Under
+Countable Choice, every metric space has a completion
+([[thm-metric-completion-exists]]) and any two are isometric by a unique
+isometry commuting with the embeddings
 [[thm-metric-completion-unique]]. Until the first of those is proved, the phrase
 *the* completion is not licensed, and it is not used here.
 
 ## Remarks
 
 - **A complete space is its own completion**, with $\iota$ the identity: the
-  identity is an isometric embedding and $X$ is dense in itself. Combined with
-  uniqueness, this says that completing changes nothing when there was nothing to
-  complete.
+  identity is an isometric embedding and $X$ is dense in itself. Under Countable
+  Choice, uniqueness then says that completing changes nothing when there was
+  nothing to complete.
 - **Density is what pins the completion down.** Without it, any complete space
   containing an isometric copy of $X$ would qualify, and $\mathbb{R}^2$ would be
   a "completion" of $\mathbb{Q}$. Density is exactly the demand that no room be

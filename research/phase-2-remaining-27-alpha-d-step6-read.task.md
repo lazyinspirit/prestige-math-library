@@ -189,13 +189,13 @@ files under `items/` for that.
 - `lem-unbounded-adjoint-is-well-defined-and-closed` · lemma — The adjoint is well defined, closed, and reverses inclusions
 - `thm-closable-iff-adjoint-domain-is-dense` · theorem — Closability is equivalent to density of the adjoint domain
 - `def-symmetric-self-adjoint-and-essentially-self-adjoint` · definition — Symmetric, self-adjoint, and essentially self-adjoint operators
-- `cex-symmetric-need-not-be-self-adjoint` · counterexample — The minimal derivative is symmetric but not self-adjoint
-- `def-resolvent-and-spectrum-of-a-closed-unbounded-operator` · definition — Resolvent and spectrum of a closed operator
+- `cex-symmetric-need-not-be-self-adjoint` · counterexample — A symmetric closed operator that is not self-adjoint
+- `def-resolvent-and-spectrum-of-a-closed-unbounded-operator` · definition — Resolvent and spectrum of an unbounded operator
 - `thm-self-adjoint-resolvent-estimate` · theorem — Resolvent of a self-adjoint operator: nonreal resolvents and the estimate
 - `thm-self-adjointness-range-criterion` · theorem — Range criterion for self-adjointness
 - `def-cayley-transform-of-a-self-adjoint-operator` · definition — Cayley transform of a self-adjoint operator
 - `thm-cayley-correspondence` · theorem — Cayley correspondence between self-adjoint operators and unitaries
-- `def-unbounded-integral-against-a-pvm` · definition — Integral of a Borel function against a projection-valued measure
+- `def-unbounded-integral-against-a-pvm` · definition — Integral of a measurable function against a projection-valued measure
 - `lem-unbounded-pvm-integral-is-well-defined-and-closed` · lemma — The unbounded PVM integral is densely defined, closed and normal
 - `thm-spectral-theorem-for-unbounded-self-adjoint-operators` · theorem — Spectral theorem for unbounded self-adjoint operators (PVM form)
 - `thm-unbounded-borel-functional-calculus` · theorem — Unbounded Borel functional calculus: domains, products, spectral mapping
@@ -226,7 +226,7 @@ files under `items/` for that.
 
 ### `unbounded-self-adjoint-operators-and-stones-theorem-examples` — Unbounded Self Adjoint Operators and Stones Theorem — Examples (7 item(s))
 
-- `ex-unbounded-multiplication-operator-and-its-domain` · example — Unbounded multiplication operators: domain, spectral measure and spectrum
+- `ex-unbounded-multiplication-operator-and-its-domain` · example — Multiplication operators: domain, spectral measure and spectrum
 - `ex-position-operator-on-l-two-of-r` · example — Position operator on $L^2(\mathbb R)$
 - `ex-periodic-derivative-and-its-unitary-translation-group` · example — Periodic derivative and its unitary translation group
 - `cex-the-minimal-derivative-is-symmetric-not-self-adjoint` · counterexample — The minimal derivative has deficiency indices $(1,1)$ and many self-adjoint extensions

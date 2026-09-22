@@ -150,7 +150,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-        "strategy": "Decompose ad(x) by the cited operator theorem. Prove its polynomial parts are derivations by decomposing g into generalized eigenspaces and checking brackets add eigenvalues. Innerness produces x_s,x_n; centerlessness transfers sum and commutation from adjoints to elements. Uniqueness follows from uniqueness of the operator split. AC is used only through the published operator theorem.",
+        "strategy": "Apply the published additive Jordan–Chevalley theorem to ad(x), then clause (ii) of the preceding adjoint-compatibility lemma to obtain the internal decomposition; clause (i) and uniqueness give uniqueness. AC is inherited through both cited interfaces; the compatibility lemma itself uses the operator theorem. The zero algebra is included.",
         "axiom_base": "ZFC"
       },
       {
@@ -293,7 +293,7 @@
         "id": "thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras",
         "kind": "theorem",
         "title": "Existence of Cartan subalgebras",
-        "statement": "Assume AC. Every finite-dimensional complex semisimple Lie algebra has a Cartan subalgebra.",
+        "statement": "Assume AC. Every finite-dimensional complex semisimple Lie algebra has a Cartan subalgebra; indeed every maximal toral subalgebra is Cartan.",
         "deps": [
           "def-cartan-subalgebra-of-a-lie-algebra",
           "def-normalizer-of-a-lie-subalgebra",
@@ -302,6 +302,7 @@
           "prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal",
           "def-simple-semisimple-and-reductive-lie-algebras",
           "thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra",
+          "thm-additive-jordan-chevalley-decomposition",
           "thm-engels-theorem",
           "prop-nilpotent-lie-algebras-are-solvable",
           "thm-lies-theorem",
@@ -327,7 +328,7 @@
         "source_locators": [
           "Chapter II"
         ],
-        "strategy": "The zero algebra has Cartan subalgebra zero. Otherwise Engel and the internal Jordan decomposition produce a nonzero semisimple element, so finite dimension gives a toral subalgebra t maximal by dimension. Simultaneously diagonalize ad(t) and put l=C_g(t), the zero weight space. Killing invariance pairs only opposite t-weights; Cartan's semisimplicity criterion therefore makes B_g|l nondegenerate. For x in l, polynomial functoriality puts its Jordan parts x_s,x_n in l, and maximality of t forces x_s in t. Hence ad_l(x)=ad_l(x_n) is nilpotent, so Engel makes l nilpotent. Lie triangularization of l on g makes [l,l] strictly upper triangular, giving B_g([l,l],l)=0; nondegeneracy forces l abelian. Now ad(x_n) commutes with ad(l), so every product ad(x_n)ad(y), y in l, is nilpotent and has trace zero. Thus x_n is B_g-orthogonal to l and vanishes. Every element of l is therefore semisimple, so l is toral and maximality gives l=t. The joint-weight calculation then gives N_g(t)=C_g(t)=t; hence t is Cartan. AC is used only through the published Jordan–Chevalley supplier.",
+        "strategy": "The zero algebra has Cartan subalgebra zero. Otherwise Engel and the internal Jordan decomposition produce a nonzero semisimple element, so finite dimension ensures existence of maximal toral subalgebras. Fix any inclusion-maximal toral subalgebra t. Simultaneously diagonalize ad(t) and put l=C_g(t), the zero weight space. Killing invariance pairs only opposite t-weights; Cartan's semisimplicity criterion therefore makes B_g|l nondegenerate. For x in l, the directly cited additive Jordan–Chevalley theorem and internal compatibility puts its Jordan parts x_s,x_n in l, and maximality of t forces x_s in t. Hence ad_l(x)=ad_l(x_n) is nilpotent, so Engel makes l nilpotent. Repeated application of the common-eigenvector Lie theorem on successive quotients gives an invariant flag; triangularization of l on g makes [l,l] strictly upper triangular, giving B_g([l,l],l)=0; nondegeneracy forces l abelian. Now ad(x_n) commutes with ad(l), so every product ad(x_n)ad(y), y in l, is nilpotent and has trace zero. Thus x_n is B_g-orthogonal to l and vanishes. Every element of l is therefore semisimple, so l is toral and maximality gives l=t. The joint-weight calculation then gives N_g(t)=C_g(t)=t; hence t is Cartan. AC is used only through the published Jordan–Chevalley supplier.",
         "axiom_base": "ZFC"
       },
       {
@@ -415,11 +416,9 @@
           "def-cartan-subalgebra-of-a-lie-algebra",
           "def-normalizer-of-a-lie-subalgebra",
           "def-toral-and-maximal-toral-subalgebra",
-          "def-derivation-of-a-lie-algebra",
           "prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal",
           "thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra",
           "thm-additive-jordan-chevalley-decomposition",
-          "thm-engels-theorem",
           "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms",
           "def-killing-form-of-a-finite-dimensional-lie-algebra",
           "prop-trace-forms-are-symmetric-and-invariant",
@@ -428,13 +427,18 @@
           "thm-lie-third-fundamental-theorem",
           "thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup",
           "def-conjugation-and-the-adjoint-representation-of-a-lie-group",
+          "prop-adjoint-is-a-smooth-lie-group-representation",
           "def-smooth-left-action-of-a-lie-group",
           "def-orbit-stabilizer-and-orbit-map-of-a-smooth-action",
           "def-immersion-submersion-and-constant-rank-map",
           "cor-local-normal-form-for-submersions",
           "cor-every-submersion-is-an-open-map",
           "def-countable-choice",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-the-differential-of-adjoint-is-ad",
+          "thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism",
+          "prop-adjoint-exponential-identity",
+          "cor-the-exponential-map-is-a-local-diffeomorphism-at-zero"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -830,11 +834,11 @@
         "title": "Root-string property",
         "statement": "For a root α and β either a root or zero, the nonzero spaces g_{β+kα} occur for an unbroken interval -p≤k≤q and satisfy p-q=β(h_α)∈Z.",
         "deps": [
-        "thm-root-sl-two-triple",
-        "def-coroot-of-a-lie-algebra-root",
-        "thm-finite-dimensional-representations-of-sl-two",
-        "prop-brackets-of-root-spaces",
-        "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
+          "thm-root-sl-two-triple",
+          "def-coroot-of-a-lie-algebra-root",
+          "thm-finite-dimensional-representations-of-sl-two",
+          "prop-brackets-of-root-spaces",
+          "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
           "def-special-linear-lie-algebra-sl-two"
         ],
@@ -1394,11 +1398,11 @@
         "deps": [
           "def-special-linear-lie-algebra-sl-two",
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
-        "def-semisimple-and-nilpotent-endomorphisms",
-        "def-simple-semisimple-and-reductive-lie-algebras",
-        "def-derivation-of-a-lie-algebra",
-        "ex-killing-form-of-sl-two",
-        "thm-cartans-semisimplicity-criterion"
+          "def-semisimple-and-nilpotent-endomorphisms",
+          "def-simple-semisimple-and-reductive-lie-algebras",
+          "def-derivation-of-a-lie-algebra",
+          "ex-killing-form-of-sl-two",
+          "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1429,10 +1433,10 @@
           "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras",
           "def-cartan-subalgebra-of-a-lie-algebra",
           "def-normalizer-of-a-lie-subalgebra",
-        "def-toral-and-maximal-toral-subalgebra",
-        "def-special-linear-lie-algebra-sl-two",
-        "ex-classical-simple-lie-algebras-and-their-killing-forms",
-        "thm-cartans-semisimplicity-criterion"
+          "def-toral-and-maximal-toral-subalgebra",
+          "def-special-linear-lie-algebra-sl-two",
+          "ex-classical-simple-lie-algebras-and-their-killing-forms",
+          "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1477,9 +1481,9 @@
           "def-normalizer-of-a-lie-subalgebra",
           "def-special-linear-lie-algebra-sl-two",
           "def-killing-dual-vector-of-a-root",
-        "def-coroot-of-a-lie-algebra-root",
-        "def-killing-form-of-a-finite-dimensional-lie-algebra",
-        "thm-cartans-semisimplicity-criterion"
+          "def-coroot-of-a-lie-algebra-root",
+          "def-killing-form-of-a-finite-dimensional-lie-algebra",
+          "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1952,7 +1956,7 @@
         "id": "prop-root-systems-decompose-uniquely-into-irreducible-components",
         "kind": "proposition",
         "title": "Unique irreducible decomposition",
-        "statement": "Every root system is the orthogonal disjoint union of irreducible root systems, uniquely up to order.",
+        "statement": "Every root system is the orthogonal disjoint union of nonempty irreducible components, uniquely up to order; the zero-rank system has the empty decomposition. Any orthogonal decomposition is a coarsening, and an irreducible comparison agrees after empty factors are discarded.",
         "deps": [
           "def-reducible-and-irreducible-root-system",
           "def-reduced-crystallographic-euclidean-root-system"
@@ -2116,7 +2120,7 @@
         "id": "prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system",
         "kind": "proposition",
         "title": "Existence and uniqueness of the highest root",
-        "statement": "Every irreducible reduced crystallographic finite root system has a unique highest root relative to each chosen base.",
+        "statement": "Every nonempty irreducible reduced crystallographic finite root system has a unique highest root, dominant on all positive roots; the empty irreducible zero-space system is excluded.",
         "deps": [
           "def-height-of-a-root-and-highest-root",
           "def-positive-system-and-base-of-simple-roots",
@@ -2142,7 +2146,7 @@
         "source_locators": [
           "Chapter II, Problems 7–8, printed p. 204: positive-root chains and largest-root dominance; uniqueness is completed by the local finite root-order argument"
         ],
-        "strategy": "Finiteness gives a maximal positive root theta. If (theta,alpha_i)<0 for a simple root, the rank-two alternatives force theta+alpha_i to be a root, contradicting maximality; hence theta is dominant. Connectedness also forces theta to have full simple-root support: a first vertex just outside its support would again pair negatively and could be added. If theta and theta' were two maximal positive roots, both have full support, so dominance gives (theta,theta')>0 unless they coincide. The rank-two alternatives then make theta-theta' a root; signed simple-root coordinates make one of its two signs positive, so one maximal root strictly dominates the other, a contradiction. Reducedness handles the proportional case.",
+        "strategy": "Use finite maximality, height descent to simple roots, connected simple-root graph and full support. Two maximal roots pair positively and their difference is a root, forcing comparability and equality. Check rank one and non-strict dominance.",
         "axiom_base": "ZF"
       },
       {
@@ -2201,12 +2205,12 @@
         "kind": "definition",
         "title": "Open and closed Weyl chambers",
         "statement": "The root hyperplanes divide E into open chambers. The fundamental chamber is C={x:(x,α_i)>0}; its closure replaces > by ≥.",
-      "deps": [
-        "def-weyl-group-of-a-root-system",
-        "def-positive-system-and-base-of-simple-roots",
-        "def-reduced-crystallographic-euclidean-root-system",
-        "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates"
-      ],
+        "deps": [
+          "def-weyl-group-of-a-root-system",
+          "def-positive-system-and-base-of-simple-roots",
+          "def-reduced-crystallographic-euclidean-root-system",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates"
+        ],
         "provenance": {
           "statement": "literature-derived",
           "proof": "not-applicable"
@@ -2233,9 +2237,9 @@
           "def-open-and-closed-weyl-chambers",
           "prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system",
           "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
-          "def-length-and-longest-element-of-a-finite-weyl-group",
           "def-positive-system-and-base-of-simple-roots",
-          "def-weyl-group-of-a-root-system"
+          "def-weyl-group-of-a-root-system",
+          "def-reduced-crystallographic-euclidean-root-system"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2252,7 +2256,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-        "strategy": "First lower the height of a positive root by simple reflections until it is simple; conjugating its reflection proves that the simple reflections generate W. Reflect a regular point across a simple wall whenever a positive root has negative pairing; the number of sign disagreements strictly falls, proving transitivity. For freeness, define inside the proof a shortest simple-reflection expression for a nonidentity w and induct on its last factor, using signed simple-root coordinates to exhibit a positive root that w sends negative. Therefore no nonidentity element preserves the fundamental chamber.",
+        "strategy": "Simple-root height descent proves generation; finite-orbit maximization proves chamber transitivity; deletion of repeated-wall pairs in a shortest simple word proves trivial chamber stabilizers.",
         "landmark": true,
         "axiom_base": "ZF"
       },
@@ -2454,15 +2458,15 @@
         "id": "prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram",
         "kind": "proposition",
         "title": "Irreducibility and connected Dynkin diagrams",
-        "statement": "A root system is irreducible exactly when its Dynkin diagram is connected.",
+        "statement": "Under the local rank-zero convention, a root system is irreducible exactly when its Dynkin diagram is empty or connected; for nonempty systems this is connectedness.",
         "deps": [
           "prop-root-systems-decompose-uniquely-into-irreducible-components",
           "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
-        "def-reducible-and-irreducible-root-system",
-        "def-cartan-matrix-of-a-based-root-system",
-        "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
-        "def-positive-system-and-base-of-simple-roots",
-        "def-reduced-crystallographic-euclidean-root-system"
+          "def-reducible-and-irreducible-root-system",
+          "def-cartan-matrix-of-a-based-root-system",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
+          "def-positive-system-and-base-of-simple-roots",
+          "def-reduced-crystallographic-euclidean-root-system"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2516,16 +2520,18 @@
         "id": "thm-classification-of-irreducible-reduced-crystallographic-root-systems",
         "kind": "theorem",
         "title": "Classification of irreducible reduced crystallographic root systems",
-        "statement": "The irreducible reduced crystallographic root systems are exactly A_n (n≥1), B_n (n≥2), C_n (n≥3), D_n (n≥4), E₆,E₇,E₈,F₄,G₂, with B₁=C₁=A₁, B₂=C₂, D₂=A₁⊔A₁, and D₃=A₃.",
+        "statement": "With the empty rank-zero exception under the local irreducibility convention, the positive-rank irreducible reduced crystallographic root systems have exactly the types A_n (n>=1), B_n (n>=2), C_n (n>=3), D_n (n>=4), E6,E7,E8,F4,G2; low-rank identifications B1=C1=A1, B2=C2, D2=A1 disjoint union A1, D3=A3.",
         "deps": [
           "lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching",
           "thm-rank-two-root-system-classification",
           "thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix",
-        "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
-        "prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram",
-        "def-reducible-and-irreducible-root-system",
-        "def-rank-and-isomorphism-of-root-systems",
-        "prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers"
+          "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
+          "prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram",
+          "def-reducible-and-irreducible-root-system",
+          "def-rank-and-isomorphism-of-root-systems",
+          "prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers",
+          "def-reduced-crystallographic-euclidean-root-system",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2555,7 +2561,8 @@
           "thm-classification-of-irreducible-reduced-crystallographic-root-systems",
           "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
           "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
-          "def-reduced-crystallographic-euclidean-root-system"
+          "def-reduced-crystallographic-euclidean-root-system",
+          "def-reducible-and-irreducible-root-system"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2576,7 +2583,7 @@
         "source_locators": [
           "Knapp, Chapter II; Etingof, Lecture 23, Exercises 23.10 and 23.13"
         ],
-        "strategy": "Construct A_n as {e_i-e_j} in the sum-zero space, B_n as {±e_i, ±e_i±e_j}, C_n as {±2e_i, ±e_i±e_j}, D_n as {±e_i±e_j}, and G2 in the hexagonal lattice. Construct F4 from ±e_i, ±e_i±e_j and the half-sums, and E8 from the D8 roots plus the even-sign half-sums; Etingof's exact polarization exercises certify the displayed F4 and E8 simple systems, while the item verifies the root-system axioms. Obtain E7 and E6 as explicit E8 subsystems and identify them by rank, root count, and the classification.",
+        "strategy": "Explicit coordinate constructions; complete reflection and integrality checks; classical bases and G2 reflection orbits; exceptional types identified by irreducibility, rank and directly counted roots using the preceding classification.",
         "axiom_base": "ZF"
       },
       {
@@ -2727,14 +2734,19 @@
           "def-serre-lie-algebra-of-a-finite-type-cartan-matrix",
           "thm-poincare-birkhoff-witt",
           "thm-finite-dimensional-representations-of-sl-two",
-          "thm-root-string-property",
           "thm-root-sl-two-triple",
-          "thm-existence-of-each-classified-root-system",
           "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional",
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-axiom-of-choice",
           "prop-dimension-formula-from-roots",
-          "def-cartan-matrix-of-a-based-root-system"
+          "def-cartan-matrix-of-a-based-root-system",
+          "prop-finite-type-cartan-matrix-properties",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
+          "def-reduced-crystallographic-euclidean-root-system",
+          "def-cartan-subalgebra-of-a-lie-algebra",
+          "thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system",
+          "thm-universal-property-of-the-free-lie-algebra",
+          "thm-universal-property-of-the-universal-enveloping-algebra"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2751,7 +2763,7 @@
         "source_locators": [
           "Chapter II"
         ],
-        "strategy": "First use PBW and the free-Lie universal property to obtain a triangular vector-space quotient. The adjoint triples act integrably: the Serre exponents are precisely the finite sl₂-string endpoints. Height induction shows every nonzero positive weight can be lowered by some f_i; the positive-definite root form then restricts possible weights to the finite root system Φ(A), proving finite dimensionality and one-dimensional real-root spaces. Pair opposite spaces by the invariant form constructed from the symmetrizer; its radical is an ideal meeting h trivially and height lowering makes it zero, so g(A) is semisimple. For a given semisimple g choose simple-root triples; root strings verify the relations and give a surjection g(A)→g. Both have h plus one-dimensional spaces indexed by the same Φ, so equal dimensions make it an isomorphism.",
+        "strategy": "Triangular presentation and explicit free-word representation; Serre-ideal invariance; local finite sl2 modules and exponential reflection automorphisms; signed-support height induction; root-space dimensions and ideal propagation; converse by generators and equal dimensions.",
         "landmark": true,
         "axiom_base": "ZFC"
       },
@@ -2814,7 +2826,7 @@
         "source_locators": [
           "Chapter II"
         ],
-      "strategy": "Handle the empty system by the zero algebra. Otherwise choose component bases, apply the Serre construction to each component Cartan matrix, identify each resulting root system by its Cartan matrix, and take the direct sum.",
+        "strategy": "Handle the empty system by the zero algebra. Otherwise choose component bases, apply the Serre construction to each component Cartan matrix, identify each resulting root system by its Cartan matrix, and take the direct sum.",
         "axiom_base": "ZFC"
       },
       {
@@ -2829,7 +2841,13 @@
           "thm-existence-theorem-for-complex-semisimple-lie-algebras",
           "def-axiom-of-choice",
           "prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram",
-          "thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system"
+          "thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system",
+          "thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers",
+          "thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras",
+          "thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate",
+          "thm-serre-presentation-theorem",
+          "def-serre-lie-algebra-of-a-finite-type-cartan-matrix",
+          "def-simple-semisimple-and-reductive-lie-algebras"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2938,11 +2956,10 @@
         "id": "prop-root-systems-of-the-classical-complex-lie-algebras",
         "kind": "proposition",
         "title": "Root systems of the classical complex Lie algebras",
-        "statement": "With respect to the diagonal Cartan subalgebra h and the coordinate functionals e_i, assume n >= 2 for sl_n(C) and so_{2n}(C), and n >= 1 for sp_{2n}(C) and so_{2n+1}(C). The roots of sl_n(C) are the e_i - e_j with i != j; the roots of sp_{2n}(C) are the ±e_i ± e_j with i < j together with the ±2e_i; the roots of so_{2n}(C) are the ±e_i ± e_j with i < j; the roots of so_{2n+1}(C) are the ±e_i ± e_j with i < j together with the ±e_i. Each listed set is a reduced crystallographic Euclidean root system of type A_{n-1}, C_n, D_n, B_n respectively, subject to the standard low-rank identifications, and every root space is one-dimensional.",
+        "statement": "With respect to the diagonal Cartan subalgebra h and the coordinate functionals e_i(H)=x_i on the a-block (the odd full diagonal starts with zero), assume n >= 2 for sl_n(C) and so_{2n}(C), and n >= 1 for sp_{2n}(C) and so_{2n+1}(C). The roots of sl_n(C) are the e_i - e_j with i != j; the roots of sp_{2n}(C) are the ±e_i ± e_j with i < j together with the ±2e_i; the roots of so_{2n}(C) are the ±e_i ± e_j with i < j; the roots of so_{2n+1}(C) are the ±e_i ± e_j with i < j together with the ±e_i. Each listed set is a reduced crystallographic Euclidean root system of type A_{n-1}, C_n, D_n, B_n respectively, subject to the standard low-rank identifications, and every root space is one-dimensional.",
         "deps": [
           "def-classical-complex-matrix-lie-algebras",
           "prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras",
-          "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-reduced-crystallographic-euclidean-root-system",
           "def-cartan-subalgebra-of-a-lie-algebra",
           "thm-existence-of-each-classified-root-system"
@@ -2962,7 +2979,7 @@
         "source_locators": [
           "Lecture 20.3, Examples 20.12-20.14, printed pp. 110-111"
         ],
-        "strategy": "For each family take the matrix units adapted to the block form and compute [A, E_{ij}] = lambda(A) E_{ij} for A in h, reading off the listed roots and one-dimensional root spaces. Verify the root-system axioms and simple-root Cartan matrices directly, including explicit coordinate checks of the low-rank identifications.",
+        "strategy": "Construct explicit simultaneous eigenbases in the defining blocks; identify all nonzero weight lines directly, without assuming semisimplicity. Check coordinate reflections and Cartan integrality, then match the constructed classical systems and exhibit low-rank isomorphisms.",
         "axiom_base": "ZF"
       },
       {
@@ -3270,7 +3287,7 @@
         "statement": "For n >= 1, W(B_n) is the full group of signed permutations of the coordinates, of order 2^n n!. For n >= 2, W(D_n) is the subgroup with an even number of sign changes, of order 2^{n−1} n!.",
         "deps": [
           "def-weyl-group-of-a-root-system",
-          "ex-classical-root-systems-in-euclidean-coordinates"
+          "prop-root-systems-of-the-classical-complex-lie-algebras"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3287,8 +3304,8 @@
         "source_locators": [
           "Chapter II, §6 and Problem 15, printed pp. 162-170 and 205"
         ],
-        "strategy": "Read the reflections of B_n and D_n off the coordinate formulas, then count signed permutations with even sign change.",
-        "axiom_base": "ZFC"
+        "strategy": "Compute each reflection from its formula; generate individual sign changes for B and paired sign changes for D, prove parity invariance, and count unique permutation/sign data including endpoint ranks.",
+        "axiom_base": "ZF"
       }
     ]
   },
@@ -3338,11 +3355,11 @@
         "id": "ex-root-systems-a-two-b-two-and-g-two",
         "kind": "example",
         "title": "Rank-two systems A₂, B₂, and G₂",
-      "statement": "Explicit planar 6-, 8-, and 12-root configurations realize A₂, B₂, and G₂ with Cartan products 1, 2, and 3.",
-      "deps": [
-        "def-reduced-crystallographic-euclidean-root-system",
-        "def-cartan-matrix-of-a-based-root-system",
-        "thm-rank-two-root-system-classification"
+        "statement": "Explicit planar 6-, 8-, and 12-root configurations realize A₂, B₂, and G₂ with Cartan products 1, 2, and 3.",
+        "deps": [
+          "def-reduced-crystallographic-euclidean-root-system",
+          "def-cartan-matrix-of-a-based-root-system",
+          "thm-rank-two-root-system-classification"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3452,10 +3469,10 @@
         "kind": "example",
         "title": "Low-rank Dynkin coincidences",
         "statement": "B₁=C₁=A₁, B₂=C₂, D₂=A₁⊔A₁, and D₃=A₃.",
-      "deps": [
-        "ex-classical-root-systems-in-euclidean-coordinates",
-        "ex-root-system-a-one",
-        "prop-root-systems-of-the-classical-complex-lie-algebras"
+        "deps": [
+          "ex-classical-root-systems-in-euclidean-coordinates",
+          "ex-root-system-a-one",
+          "prop-root-systems-of-the-classical-complex-lie-algebras"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3472,7 +3489,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-      "strategy": "Identify the rank-one systems and B₂/C₂ by explicit similarities, then compute the D₂ decomposition and the D₃ Cartan graph from coordinate roots.",
+        "strategy": "Identify the rank-one systems and B₂/C₂ by explicit similarities, then compute the D₂ decomposition and the D₃ Cartan graph from coordinate roots.",
         "axiom_base": "ZF"
       },
       {
@@ -3481,9 +3498,10 @@
         "title": "Serre relations for A₂ recover sl₃",
         "statement": "For A=[[2,-1],[-1,2]], the Serre generators map to E₁₂,E₂₃,E₂₁,E₃₂ and diagonal coroots in sl₃, yielding an isomorphism.",
         "deps": [
-        "thm-serre-presentation-theorem",
-        "def-serre-lie-algebra-of-a-finite-type-cartan-matrix",
-        "def-classical-complex-matrix-lie-algebras"
+          "def-axiom-of-choice",
+          "thm-serre-presentation-theorem",
+          "def-serre-lie-algebra-of-a-finite-type-cartan-matrix",
+          "def-classical-complex-matrix-lie-algebras"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3563,8 +3581,11 @@
         "id": "cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two",
         "kind": "counterexample",
         "title": "SL₂ and PGL₂ have the same Lie algebra but differ globally",
-        "statement": "SL₂(C) and PGL₂(C) are connected Lie groups with Lie algebra sl₂(C) and Dynkin diagram A₁, but are not isomorphic.",
+        "statement": "Under countable choice, SL₂(C) and PGL₂(C) are connected complex Lie groups with the same complex semisimple Lie algebra sl₂(C), but are not isomorphic.",
         "deps": [
+          "def-countable-choice",
+          "def-lie-bracket-on-the-tangent-space-of-a-lie-group",
+          "thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group",
           "thm-mobius-group-and-projective-linear-identification",
           "def-invertible-matrix-and-general-linear-group",
           "def-special-linear-lie-algebra-sl-two"
@@ -3582,10 +3603,10 @@
           ]
         },
         "source_locators": [
-          "Lectures 19–24"
+          "Example 3.14; tangent quotient and center calculations proved locally"
         ],
-        "strategy": "The quotient map has kernel {±I}; SL₂ has nontrivial center while PGL₂ has trivial center, an isomorphism invariant.",
-        "axiom_base": "ZF"
+        "strategy": "Construct matrix charts and tangent commutators; use the closed normal scalar quotient interface and explicit complex charts; identify its tangent algebra by removing trace. Prove simplicity, connectedness by paths, and distinguish centers.",
+        "axiom_base": "ZF + AC_omega"
       }
     ]
   }

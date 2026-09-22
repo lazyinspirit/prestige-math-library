@@ -5,7 +5,7 @@ title: Regular elements form a dense Zariski-open subset of a Cartan subalgebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-centralizer-dimension-from-vanishing-roots, def-regular-root-hyperplanes, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [prop-centralizer-dimension-from-vanishing-roots, def-regular-root-hyperplanes, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -20,7 +20,8 @@ proof_strategy: direct
 
 ## Statement
 
-Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\mathfrak h$ be a
+Cartan subalgebra of a finite-dimensional complex
 semisimple Lie algebra $\mathfrak g$ with root set $\Phi$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]). Then the
 regular set $\mathfrak h_{\mathrm{reg}}$ of [[def-regular-root-hyperplanes]]
@@ -31,7 +32,8 @@ centralizer has minimal dimension among elements of $\mathfrak h$.
 
 ## Facts & Assumptions
 
-**Given:** Such $\mathfrak g,\mathfrak h$ and its finite root set $\Phi$.
+**Given:** The Axiom of Choice; such $\mathfrak g,\mathfrak h$ and its finite
+root set $\Phi$.
 
 [L1] $\mathfrak h_{\mathrm{reg}}$ is the complement in $\mathfrak h$ of the finite union of the root hyperplanes $\ker\alpha$, and $\dim\mathfrak g^H=\dim\mathfrak h+\#\{\alpha:\alpha(H)=0\}$ for $H\in\mathfrak h$ ([[def-regular-root-hyperplanes]], [[prop-centralizer-dimension-from-vanishing-roots]]).
 

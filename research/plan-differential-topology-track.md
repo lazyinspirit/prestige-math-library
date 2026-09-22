@@ -2253,12 +2253,14 @@ Rows not named here retain their §7 statement, proof obligation, and sources.
 These amendments are mandatory before the affected empty A page is authored.
 
 - **DT-4:** consume FA's
-  `lem-local-finite-dimensional-reduction-for-a-fredholm-map`, then insert
-  before Sard--Smale
-  `lem-countable-locally-proper-restrictions-cover-a-fredholm-map-source` and
-  `lem-critical-values-on-each-proper-restriction-are-nowhere-dense`.
-  Sard--Smale must cite these three rather than assert local properness in one
-  sentence.  Insert
+  `lem-local-finite-dimensional-reduction-for-a-fredholm-map`.  The existing
+  Sard--Smale theorem now depends backward on the FA-owned draft external
+  records `rem-fredholm-maps-have-countable-proper-local-restrictions` and
+  `rem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense`;
+  these occupy the formerly planned local-properness/category seam without a
+  duplicate theorem, new page, or forward proof dependency.  Their local
+  proofs remain future internalization work, and the published theorem is not
+  publication-ready while they remain draft.  Insert
   `lem-universal-metric-variations-annihilate-the-adjoint-cokernel`,
   `lem-the-universal-trajectory-zero-set-is-a-banach-manifold`, and
   `lem-a-regular-level-slice-makes-the-translation-quotient-smooth` before the
@@ -2446,14 +2448,15 @@ together and rerun the complete transitive audit.
    adjoint solvability identification without a dependency.  Add and cite the
    two exact DT-4 lemmas in §12.5; the current assertion cannot serve as their
    proof.
-7. **The published Sard--Smale proof is not dependency-closed.**
-   `thm-sard-smale-residual-regular-values-for-fredholm-maps`, steps 1.1--2.1,
-   asserts Lyapunov--Schmidt reduction and countably many locally proper closed
-   restrictions although neither is a dependency and neither follows from
-   finite-dimensional Morse--Sard alone.  Depend on FA's local
-   finite-dimensional-reduction lemma and insert the two DT-4 category lemmas
-   in §12.5.  Do not treat the current three-sentence proof as a proof of
-   Sard--Smale.  Once the FA pair is published, remove DT-4's duplicate
+7. **The published Sard--Smale proof now has a bounded external-dependency
+   repair, but not internal closure.**
+   `thm-sard-smale-residual-regular-values-for-fredholm-maps` now states AC and
+   proves the residual conclusion relative to the two draft external FA
+   records named in §12.5.  Those records preserve the exact local properness
+   and critical-image category hypotheses and prominently disclose the
+   remaining external proof debt.  Fresh engine-owned judgment and eventual
+   publication or local replacement of those records remain required.  Once
+   the FA pair is published, remove DT-4's duplicate
    `def-fredholm-maps-and-regular-values-on-countable-banach-manifolds` and
    repoint its consumers to FA's
    `def-fredholm-map-between-banach-manifolds` and regular-value theorem.

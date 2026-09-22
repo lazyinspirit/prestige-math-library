@@ -37,7 +37,7 @@ nonreflecting stationary set $E \subseteq \{\, \delta < \kappa^+ :
 
 [F1] The package: $\operatorname{Cov}(V,K)$; GCH and square in $K$; an uncountable strong limit cardinal $\kappa$ of countable cofinality with $2^\kappa = \kappa^+$ and $\square_\kappa$; $\diamondsuit_{\kappa^+}(W)$ for $W = \{\alpha < \kappa^+ : \operatorname{cf}(\alpha) = \omega\}$; and a stationary $E \subseteq W$ with $\square_\kappa(E)$ ([[def-dodd-jensen-covering-and-square-package]]).
 
-[F2] If $C \subseteq \kappa^+$ is a club and $\alpha < \kappa^+$ is a limit point of $C$, then $\alpha \in C$; the limit points of a club in an ordinal form a club; and "$\beta$ is a limit point of $C_\alpha$" means $\beta = \sup(C_\alpha \cap \beta)$ ([[def-cardinal]]).
+[F2] If $C$ is club in an ordinal $\beta$ of uncountable cofinality, then the set $\operatorname{acc}(C)$ of its limit points is also club in $\beta$; closedness gives $\operatorname{acc}(C)\subseteq C$. The uncountable-cofinality qualification is essential: a club of order type $\omega$ can have no limit points below its supremum. Here "$\alpha$ is a limit point of $C_\beta$" means $\alpha=\sup(C_\beta\cap\alpha)$ ([[def-cardinal]]).
 
 [L1] A cardinal $\kappa$ is a strong limit exactly when $2^\lambda < \kappa$ for every $\lambda < \kappa$; if in addition $\operatorname{cf}(\kappa) = \omega$, then there is an increasing sequence of cardinals $(\kappa_n)_{n \in \omega}$ cofinal in $\kappa$ ([[def-cardinal]], [[def-aleph-and-beth-hierarchies]]).
 
@@ -55,9 +55,9 @@ nonreflecting stationary set $E \subseteq \{\, \delta < \kappa^+ :
 
 2.3 $E$ is stationary in $\kappa^+$: it is stationary in $\kappa^+$ as a subset of $W$ by step 1.1, and $E \subseteq W \subseteq \kappa^+$. Hence clause (3a) of HYP holds. [step 1.1]
 
-2.4 $E$ is nonreflecting. Suppose towards a contradiction that $E \cap \beta$ is stationary in $\beta$ for some $\beta < \kappa^+$. Let $\langle C_\alpha \rangle$ witness $\square_\kappa(E)$. Since $C_\beta$ is club in $\beta$ and $E \cap \beta$ is stationary, choose $\alpha \in (E \cap \beta) \cap C_\beta$ that is a limit point of $E \cap \beta$; such an $\alpha$ exists because the limit points of the club $C_\beta$ form a club and a stationary set meets every club. Then $\alpha$ is a limit point of $C_\beta$ with $\alpha \in E$, and clause (iii) of $\square_\kappa(E)$ says that limit points of $C_\gamma$ never lie in $E$; applied with $\gamma = \beta$ this contradicts $\alpha \in E$. Hence $E \cap \beta$ is nonstationary in $\beta$ for every $\beta < \kappa^+$, which is clause (3b). [step 1.1, F2]
+2.4 Clause (3b) holds. Suppose towards a contradiction that $E\cap\beta$ is stationary in some $\beta<\kappa^+$ with $\operatorname{cf}(\beta)>\omega$. Let $\langle C_\alpha\rangle$ witness $\square_\kappa(E)$. By [F2], $\operatorname{acc}(C_\beta)$ is club in $\beta$, so stationarity gives $\alpha\in E\cap\operatorname{acc}(C_\beta)$. But clause (iii) of $\square_\kappa(E)$ says that every limit point of $C_\beta$ lies outside $E$, a contradiction. Hence $E\cap\beta$ is nonstationary for every such $\beta$, exactly as required by the local HYP interface. [step 1.1, F2]
 
-3.1 By steps 2.1, 2.2, 2.3 and 2.4 the objects $\kappa, (\kappa_n)_{n \in \omega}, E$ satisfy clauses (1a), (1b), (2), (3a) and (3b); that is, HYP holds, with $\kappa$ singular of cofinality $\omega$ and $E$ nonreflecting stationary as asserted. [step 2.1, step 2.2, step 2.3, step 2.4] ∎
+3.1 By steps 2.1, 2.2, 2.3 and 2.4 the objects $\kappa,(\kappa_n)_{n\in\omega},E$ satisfy clauses (1a), (1b), (2), (3a) and (3b) of the local interface. Thus HYP holds, with $\kappa$ singular of cofinality $\omega$ and $E$ nonreflecting at every uncountable-cofinality stage as asserted. [step 2.1, step 2.2, step 2.3, step 2.4] ∎
 
 ## Remarks
 

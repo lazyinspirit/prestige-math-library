@@ -22,7 +22,8 @@ landmark: false
 
 ## Definition
 
-Let $\mathfrak g_0$ be a finite-dimensional real semisimple Lie algebra with
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\mathfrak g_0$ be a
+finite-dimensional real semisimple Lie algebra with
 Killing form $B_0$ and Cartan involution $\theta$, let
 $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$ be the Cartan decomposition
 ([[def-cartan-involution-of-a-real-semisimple-lie-algebra]],

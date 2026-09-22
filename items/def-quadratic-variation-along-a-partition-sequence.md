@@ -4,7 +4,7 @@ kind: definition
 title: "Quadratic variation along a partition sequence"
 status: draft
 origin: pipeline
-deps: [def-partition-and-refinement, def-continuity-real]
+deps: [def-partition-and-refinement, def-continuity-real, thm-heine-borel-r]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -18,12 +18,14 @@ sources:
 
 Fix $T>0$ and a continuous function $x:[0,T]\to\mathbb R$
 ([[def-continuity-real]]). A **partition sequence of $[0,T]$** is a sequence
-$(\pi_n)_{n\ge1}$ of partitions of $[0,T]$ in the sense of
+$(\pi_n)_{n\ge0}$ of partitions of $[0,T]$ in the sense of
 [[def-partition-and-refinement]], written
 $$\pi_n=(m_n,s^{(n)}),\qquad 0=s^{(n)}_0<s^{(n)}_1<\cdots<s^{(n)}_{m_n}=T,$$
 whose **mesh** $\operatorname{mesh}(\pi_n):=\max_{1\le k\le m_n}\bigl(s^{(n)}_k-s^{(n)}_{k-1}\bigr)$
 tends to zero as $n\to\infty$. The partitions need not refine one another and
-no regularity of the points beyond mesh convergence is assumed.
+no regularity of the points beyond mesh convergence is assumed. A family
+originally indexed by positive integers is read as the zero-indexed family
+$q_n=\pi_{n+1}$; this changes none of its limiting assertions.
 
 For $t\in[0,T]$ two partial sums are attached to $(\pi_n)$. If $t$ is a
 partition point, both are defined by the same formula; the cases $t=0$ and
@@ -50,10 +52,20 @@ form.
    $$\bigl|[x]^{\pi_n,\mathrm{part}}_t-[x]^{\pi_n,\mathrm{step}}_t\bigr|=\bigl(x_t-x_{s^{(n)}_{k(t)}}\bigr)^2\ \le\ \Bigl(\max_{k}\ \sup_{u,v\in[s^{(n)}_{k-1},s^{(n)}_k]}|x_u-x_v|\Bigr)^2,$$
    and the right-hand side tends to $0$ as $n\to\infty$ because $x$ is
    uniformly continuous on the compact interval $[0,T]$ and the mesh tends to
-   $0$. In particular the two conventions have the same limit whenever either
+   $0$. For completeness this uniform-continuity assertion is choice-free:
+   for each $c\in[0,T]$ and $\varepsilon>0$, continuity supplies a least
+   integer $j(c)\ge0$ such that $|x_y-x_c|<\varepsilon/2$ whenever
+   $y\in[0,T]$ and $|y-c|<2^{1-j(c)}$. The intervals of radius
+   $r_c=2^{-j(c)}$ centered at $c$ cover $[0,T]$. Its compactness
+   [[thm-heine-borel-r]] gives finitely many such intervals covering it.
+   Put $\delta$ equal to the minimum of their positive radii. If
+   $|u-v|<\delta$ and $u$ belongs to the interval centered at $c$,
+   then both $u,v$ are within $2r_c$ of $c$, so $|x_u-x_v|<\varepsilon$.
+   This proves uniform continuity without selecting arbitrary radii.
+   In particular the two conventions have the same limit whenever either
    limit exists.
 2. **No partition-independent object is defined.** The symbol
-   $[x]^{\pi_n}$ names a limit along the named sequence $(\pi_n)$; it is not a
+   $[x]^{\pi_n}$ names the $n$th sum along the named sequence $(\pi_n)$, and any quadratic-variation limit is attached to that sequence; it is not a
    claim that the sums converge along every refining sequence, nor that a
    path-dependent choice of partitions leaves the limit unchanged. When a
    statement below says "quadratic variation", the partition sequence is part

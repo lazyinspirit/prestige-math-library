@@ -1,0 +1,13 @@
+# Final adjudication — position 65
+
+Disposition: repaired. Source status: familiar.
+
+Independently inspected the example, cited matrix/Cartan/real-form interfaces, real-form A/B conventions, batch-13 manifest and coverage context, Alpha adjudication, original rejection and terminal Terra rejection. The refuter record has no flagged entry for this ID. The original root-space objection was partly repaired by Alpha; the final objection correctly identifies use of a definition as a classification theorem.
+
+The repair proves real-form status through the three explicit conjugate-linear involutions, then verifies Cartan-involution positivity with B(X,Y)=6 tr(XY). For the two unitary forms the imaginary diagonal Cartan complexifies to the published diagonal Cartan; self-normalization and the no-real-root criterion justify maximal compactness. The complex extension of the su(2,1) involution is IXI, giving signs + on E12 and − on E23. For sl(3,R), Q^{-1}H1Q=diag(i,−i,0) and Q^{-1}H2Q=diag(1,1,−2). The root values 2ix, −ix+3y, ix+3y establish the no-real-root criterion directly. The compatible positive roots beta1, −beta2, beta1+beta2 are positive on −iH1; theta interchanges the two simple roots −beta2 and beta1+beta2. In particular the old two-element orbit missing a minus sign is corrected.
+
+The exact equivalence moves separate the three classes: an empty identity painting is isolated from nonempty paintings since a painted reflection retains its reflected painted vertex, and the vertex involution remains identity under painted reflections and relabelings. Isomorphism invariance now cites the proved Vogan invariance theorem; classification is cited through its theorem, not its definition. There is no claim here to exhaust all real forms, nor dependence on the unresolved enumerations at positions 63–64. AC is explicitly inherited through the Cartan/classification interfaces. These are familiar finite matrix, root-value and diagram-move calculations; no new external verification was needed for this example.
+
+Dependencies added for the actual real-form, semisimplicity, Killing form, Cartan maximality and diagram interfaces; the unresolved classical enumeration was removed. Updated only the owning item, manifest entry, proof contract/scope, cross-batch dependency entries, and owning consumer-batch dependency ledger via its refresh command. No existing supplier was edited and no new item or pass stamp was created.
+
+Validation: contract regeneration succeeded; strict focused proof-contract check: 0 errors, 0 warnings; focused precheck: 0 issues; rendercheck passed; frontier dependency ledger refresh succeeded. Next action: record this exact item, then inspect position 66 only after the receipt succeeds.

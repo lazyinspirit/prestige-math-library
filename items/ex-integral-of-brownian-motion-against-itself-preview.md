@@ -4,7 +4,7 @@ kind: example
 title: "Integral of Brownian motion against itself"
 status: draft
 origin: pipeline
-deps: [lem-adapted-continuous-processes-are-progressively-measurable, def-progressively-measurable-and-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, thm-ito-isometry-and-linearity-in-predictable-l2, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-brownian-motion, thm-dominated-convergence, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [def-progressively-measurable-and-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, thm-ito-isometry-and-linearity-in-predictable-l2, thm-ito-integral-process-has-a-continuous-martingale-version, def-brownian-motion, thm-dominated-convergence, thm-fatou-lemma, thm-tonelli-theorem-for-sigma-finite-product-spaces, lem-gaussian-even-moment-bound-for-brownian-increments, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -17,43 +17,53 @@ sources:
 
 ## Example
 
-Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Let $B$ be a standard
-Brownian motion [[def-brownian-motion]]. Then for every $t\ge0$
-$$\int_0^tB_s\,dB_s=\frac{B_t^2-t}{2}\qquad\text{almost surely},$$
-and since both sides are continuous in $t$ the two processes are
-indistinguishable. In particular the integral has mean $0$ and variance
-$E(B_t^2-t)^2/4=(2t^2)/4=t^2/2$; it is not a Brownian integral of the type
-arising from a deterministic integrand.
+Assume AC and (H) of [[def-elementary-predictable-brownian-integrand]].
+Let $B$ be standard Brownian motion. In the integrand, $B$ means the
+predictable representative $\beta$ constructed below, agreeing with $B$ at
+all times on one measurable full event. This convention does not assert
+predictability of the original joint map on its exceptional paths.
+Then
+$$\int_0^t\beta_s\,dB_s=\frac{B_t^2-t}{2}\quad\hbox{almost surely for every }t\ge0.$$
+For the continuous adapted version of the integral, equality holds for every
+time on one measurable probability-one event. Its mean is zero and its
+variance is $t^2/2$. For $t>0$ its terminal law is not the law of an Ito
+integral of a deterministic square-integrable integrand; at $t=0$ both are
+zero.
 
 ## Facts & Assumptions
 
-**Given:** AC, the standing hypothesis (H), a standard Brownian motion $B$ with its usual filtrations, and $t>0$ with the dyadic partition $t_k=kt/2^n$, $0\le k\le2^n$.
+**Given:** AC, (H) and $B$ as in the Example; a fixed horizon $t>0$ when a finite grid is used.
 
-[F1] $B$ is adapted with continuous paths, so it is predictable and progressively measurable; and $B$ has finite energy on $[0,t]$: $E\int_0^tB_s^2ds=\int_0^ts\,ds=t^2/2<\infty$. [[lem-adapted-continuous-processes-are-progressively-measurable]] [[def-brownian-motion]] [[thm-ito-isometry-and-linearity-in-predictable-l2]]
+[F1] The predictable sigma-algebra contains $(u,v]\times A$, $A\in\mathcal F_u$, and $\{0\}\times A$, $A\in\mathcal F_0$. Countable pointwise limits of measurable real functions, with zero assigned where no finite limit exists, are measurable. Predictable processes are product measurable. [[def-progressively-measurable-and-predictable-process]]
 
-[F2] The left-endpoint dyadic integrands $H^n:=\sum_{k=0}^{2^n-1}B_{t_k}1_{(t_k,t_{k+1}]}$ are predictable and square-integrable, though their unbounded coefficients mean that they need not be elementary in the bounded-coefficient convention. Moreover $E\int_0^t|H^n_s-B_s|^2ds=\sum_k\int_{t_k}^{t_{k+1}}(s-t_k)ds=t^2/2^{n+1}\to0$. [[def-progressively-measurable-and-predictable-process]] [[def-brownian-motion]]
+[F2] Brownian paths are continuous and start at zero on a common measurable full event. Under (H), $B_v-B_u$ is independent of $\mathcal F_u$ and has law $N(0,v-u)$. The second and fourth Gaussian moments are $EB_t^2=t$ and $EB_t^4=3t^2$. [[def-brownian-motion]] [[def-elementary-predictable-brownian-integrand]] [[lem-gaussian-even-moment-bound-for-brownian-increments]]
 
-[F3] Consequently $\int_0^tH^n\,dB\to\int_0^tB\,dB$ in $L^2(P)$. For $r>0$, truncate each coefficient by $B_{t_k}^{(r)}=(-r)\vee(B_{t_k}\wedge r)$ and write $H^{n,r}:=\sum_kB_{t_k}^{(r)}1_{(t_k,t_{k+1}]}$. Then $H^{n,r}$ is elementary, $H^{n,r}\to H^n$ in predictable $L^2$ as $r\to\infty$, and the elementary integral formula plus the Ito isometry gives
-$$\int_0^tH^n\,dB=\lim_{r\to\infty}\sum_k B_{t_k}^{(r)}(B_{t_{k+1}}-B_{t_k})=\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})$$
-in $L^2(P)$. The last finite sum satisfies $2\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})=B_t^2-\sum_k(B_{t_{k+1}}-B_{t_k})^2$. [[def-ito-integral-for-square-integrable-predictable-processes]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-elementary-predictable-brownian-integrand]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[thm-dominated-convergence]]
+[F3] The predictable finite-energy integral extends bounded elementary sums isometrically and has mean zero. It has an adapted continuous version, with continuity and all-time equalities understood on measurable full events. [[def-ito-integral-for-square-integrable-predictable-processes]] [[def-ito-integral-of-an-elementary-predictable-process]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[thm-ito-integral-process-has-a-continuous-martingale-version]]
 
-[F4] Along the dyadic partitions of $[0,t]$, $\sum_k(B_{t_{k+1}}-B_{t_k})^2\to t$ uniformly on $[0,t]$ almost surely, in the step convention of the quadratic variation. [[thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes]] [[def-quadratic-variation-along-a-partition-sequence]]
+[F4] Tonelli computes nonnegative product integrals; dominated convergence gives integral convergence under one integrable majorant; Fatou bounds the integral of a nonnegative lower limit. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]] [[thm-dominated-convergence]] [[thm-fatou-lemma]]
 
-[F5] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
+[F5] For the dyadic partitions of a fixed $[0,t]$, the terminal sums of squared Brownian increments converge almost surely to $t$. Only this terminal consequence is used here. [[thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes]]
+
+[F6] Deterministic square-integrable integrands have centered normal integral laws, including the variance-zero point mass. A positive-variance normal law has a strictly positive density everywhere on the real line. Full AC is inherited by these Brownian, conditional-expectation and integral interfaces. [[cor-deterministic-ito-integrals-are-gaussian]] [[def-standard-normal-and-normal-laws]] [[def-axiom-of-choice]]
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 By the truncation argument in [F3], the general integral of $H^n$ equals $\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})$ in $L^2(P)$; since $H^n\to B$ in predictable $L^2$ by [F2], these sums converge to $\int_0^tB\,dB$ in $L^2(P)$. [F2, F3, given]
+1.1 For each $n\ge1$, set $L^n_0=B_0$ and $L^n_s=B_{k2^{-n}}$ on $(k2^{-n},(k+1)2^{-n}]$, $k=0,1,\ldots$. Each $L^n$ is predictable by the countable interval generators in [F1]; the coefficients need not be bounded to give measurability. Define $\beta_s=\lim_n L^n_s$ wherever this limit exists as a finite real number, and zero elsewhere. The convergence set is measurable by the countable Cauchy criterion, hence $\beta$ is predictable by [F1]. On the single full event of continuous Brownian paths the left grid points tend to $s$ for every $s>0$, so $\beta_s=B_s$ simultaneously for all $s\ge0$. No membership of that full event in $\mathcal F_0$ is needed, and the limiting map is never defined by multiplying B by that event. [F1, F2, given]
 
-1.2 The telescoping identity of [F3] writes the same sums as $\tfrac12\bigl(B_t^2-\sum_k(B_{t_{k+1}}-B_{t_k})^2\bigr)$, and by [F4] the quadratic sum converges to $t$ almost surely, so the elementary sums converge almost surely to $\tfrac12(B_t^2-t)$. [F3, F4]
+2.1 In particular for every fixed $s$, $E\beta_s^2=EB_s^2=s$. Tonelli in [F4] applies to the measurable nonnegative map $\beta^2$ and gives $E\int_0^t\beta_s^2ds=t^2/2$. For the dyadic grid $t_k=kt/2^n$ put $H^n_s=\sum_{k<2^n}B_{t_k}1_{(t_k,t_{k+1}]}(s)$. This is predictable, and its finite energy follows from $EB_{t_k}^2=t_k$. By deterministic-time equality of $\beta_s$ and $B_s$, [F2] and Tonelli give $$E\int_0^t|H^n_s-\beta_s|^2ds=\sum_k\int_{t_k}^{t_{k+1}}(s-t_k)ds=\frac{t^2}{2^{n+1}}.$$ Thus the integrals of $H^n$ converge in $L^2(P)$ to the integral of $\beta$ by [F3]. [F1, F2, F3, F4, step 1.1]
 
-2.1 Two convergent sequences in $L^2(P)$ and almost surely respectively have the same limit when their difference tends to $0$ in probability; the difference of the two candidate limits is $\int_0^tB\,dB-\tfrac12(B_t^2-t)$, which is therefore $0$ almost surely. [F3, step 1.1, step 1.2]
+3.1 Fix $n$ and truncate the coefficient $B_{t_k}$ to $c_r(B_{t_k})$, where $c_r(x)=\max(-r,\min(x,r))$, to obtain bounded elementary $H^{n,r}$. Dominated convergence applies to each coefficient error squared, bounded by $B_{t_k}^2$ and tending to zero. Hence $H^{n,r}\to H^n$ in predictable $L^2$. For each increment $\Delta_k B=B_{t_{k+1}}-B_{t_k}$, independence in [F2] gives $$E|(c_r(B_{t_k})-B_{t_k})\Delta_k B|^2=(t_{k+1}-t_k)E|c_r(B_{t_k})-B_{t_k}|^2\longrightarrow0.$$ The finite sum therefore converges in $L^2$ by the triangle inequality. Comparing this with the isometric convergence of the elementary integrals proves $$\int_0^tH^n_s\,dB_s=S_n:=\sum_kB_{t_k}\Delta_k B$$ in $L^2(P)$. This explicitly licenses unbounded step coefficients without calling them elementary. [F2, F3, F4, step 2.1]
 
-3.1 The identities at $t=0$ give $0=0$; the variance computation $E(B_t^2-t)^2/4=(EB_t^4-2tEB_t^2+t^2)/4=(3t^2-2t^2+t^2)/4=t^2/2$ uses the Gaussian fourth moment. AC enters only through [F5], and no use is made of the later Ito-formula page. [F1, F5, step 2.1, given] ∎
+4.1 Finite telescoping gives $2S_n=B_t^2-B_0^2-\sum_k(\Delta_k B)^2$. Since $B_0=0$ almost surely, [F5] implies $S_n\to Y_t=(B_t^2-t)/2$ almost surely. Write $I_t$ for the integral class of $\beta$. Steps 2.1 and 3.1 give $E|I_t-S_n|^2\to0$, whereas Fatou in [F4] gives $E|I_t-Y_t|^2\le\liminf_nE|I_t-S_n|^2=0$. Thus $I_t=Y_t$ almost surely. [F2, F4, F5, step 2.1, step 3.1]
+
+5.1 Choose the continuous adapted integral version supplied by [F3]. Intersect its continuity event, the common Brownian continuity and zero-start event, and the equality events of step 4.1 for all positive rational t. This is a measurable full event; continuity of both sides extends the equality from rational to all nonnegative real times. At time zero the integral is zero and $B_0=0$ on this event. No claim is made that the identity holds on every exceptional constant Brownian path, or that the entire all-time equality set must itself be measurable in an incomplete space. [F2, F3, step 1.1, step 4.1]
+
+6.1 By [F3] the mean is zero. By [F2], $$E Y_t^2=\tfrac14(EB_t^4-2tEB_t^2+t^2)=t^2/2,$$ in agreement with the isometry and step 2.1. For $t>0$ this variance is positive, while $Y_t\ge-t/2$. Every centered normal with positive variance gives positive probability to an interval below $-t/2$, because its density there is positive; a zero-variance normal has zero variance. Thus [F6] rules out a deterministic-integrand law for $t>0$. At $t=0$ both sides vanish and there is no such non-Gaussian claim. Finite grids include both endpoints, and n can start at 1 without changing any limit. Full AC covers [F6]; the predictable representative and grids are explicit and no additional choice of paths is made. No later Ito formula is used. [F2, F3, F6, step 2.1, step 4.1, step 5.1] ∎
 
 ## Source notes
 
-Lawler, equation (3.8), records $\int_0^tB\,dB=(B_t^2-t)/2$; the proof here derives it from the left-dyadic elementary sums and the dyadic quadratic variation of Brownian motion, so the example does not depend on the later Ito formula theorem, as required by the plan's forward-reference seam.
+Lawler's equation (3.8) gives the identity. The argument here derives it from
+bounded truncations, the predictable left-grid representative, and terminal
+dyadic quadratic variation, respecting the page's forward-reference boundary.

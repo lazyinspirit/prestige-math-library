@@ -12,12 +12,19 @@ sources:
   references:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Sections 5.4-5.5"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+    - title: "Andreas Eberle, Stochastic Analysis, Sections 3.1 and 5.3"
+      url: "https://wt.iam.uni-bonn.de/fileadmin/WT/Inhalt/people/Andreas_Eberle/IntroStoAn1516/IntroStochAnalysis2015.pdf"
 ---
 
 ## Definition
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Let
+[[def-elementary-predictable-brownian-integrand]]. For this localization
+interface, assume in addition that $(\mathcal F_t)_{t\ge0}$ satisfies the
+**usual conditions**: $\mathcal F_0$ contains every subset of every
+$P$-null event in $\mathcal F$, and
+$\mathcal F_t=\bigcap_{u>t}\mathcal F_u$ for every $t\ge0$. The earlier
+finite-energy construction does not require these additional conditions. Let
 $H=(H_s)_{s\ge0}$ be a predictable process
 [[def-progressively-measurable-and-predictable-process]]. Its **energy
 process** is
@@ -26,7 +33,7 @@ the integral of the nonnegative function $s\mapsto H_s(\omega)^2$; it may be
 $+\infty$. The process $H$ is **locally square-integrable** when
 $$A_t<\infty\ \text{almost surely for every finite }t\ge0 .$$
 No uniform bound over $t$ and no bound on $E A_t$ is imposed; the localization
-below converts the almost-sure finiteness into finite energy.
+below converts almost-sure local finiteness into finite energy.
 
 The following properties are part of the definition and are used in items 16
 to 18.
@@ -38,29 +45,37 @@ to 18.
    $A_t=\int_0^\infty H_s^21_{[0,t]}(s)\,ds$ as an integral of measurable
    sections and, for $t'\le t$, the section computation over $[0,t]$ shows
    that $A_t$ is $\mathcal F_t$-measurable (the integral of a nonnegative
-   measurable function is measurable in the parameter). The maps
-   $t\mapsto A_t(\omega)$ are nondecreasing, and for almost every $\omega$ they
-   are finite-valued and continuous on $[0,\infty)$: on $[0,n]$ the
-   nonnegative integrand $H^2$ has finite integral $A_n(\omega)<\infty$ for
-   almost every $\omega$, and dominated convergence applied on the finite
-   interval gives $A_t\to A_{t_0}$ as $t\to t_0$ along sequences, hence
-   continuity.
+   measurable function is measurable in the parameter). Thus every level or
+   sublevel event of $A_t$ belongs to $\mathcal F_t$. On the event
+   $$G:=\bigcap_{m\ge1}\{A_m<\infty\},$$
+   which has probability one, the maps $t\mapsto A_t(\omega)$ are
+   nondecreasing, finite-valued and continuous on $[0,\infty)$: on each
+   $[0,m]$ the nonnegative integrand $H(\omega)^2$ has finite integral, and
+   dominated convergence on that finite interval gives continuity. Moreover
+   $G^c$ is a null event in $\mathcal F$, so completeness gives
+   $G^c\in\mathcal F_0$ and every subset of $G^c$ belongs to every
+   $\mathcal F_t$.
 
 2. **Canonical localization times.** For $n\ge1$ put
    $$\sigma_n:=\inf\{t\ge0:A_t\ge n\},\qquad\inf\emptyset:=+\infty,\qquad \tau_n:=\sigma_n\wedge n .$$
    Then $\tau_n\le n$ everywhere, the sequence $(\tau_n)$ is nondecreasing and
-   $\tau_n\uparrow\infty$ almost surely: on the full-measure event
-   $\bigcap_{m\ge1}\{A_m<\infty\}$ one has $\sigma_n>m$ for all $n>A_m(\omega)$,
-   hence $\tau_n>m$ eventually. Each $\tau_n$ is a stopping time for
-   $(\mathcal F_t)$ [[def-continuous-time-stopping-time]]: for $t\ge n$ the
-   event $\{\tau_n\le t\}$ is $\Omega\in\mathcal F_t$, and for $t<n$ the
-   continuity and monotonicity of $A$ give the identity
-   $$\{\tau_n\le t\}=\{\sigma_n\le t\}=\{A_t\ge n\}\in\mathcal F_t .$$
+   $\tau_n\uparrow\infty$ almost surely: on $G$, for fixed $m$, one has
+   $\sigma_n>m$ and $n>m$ for every sufficiently large integer $n>A_m$, hence
+   $\tau_n>m$ eventually. Each $\tau_n$ is a stopping time for
+   $(\mathcal F_t)$ [[def-continuous-time-stopping-time]]. For $t\ge n$ the
+   event $\{\tau_n\le t\}$ is $\Omega$. For $t<n$, continuity and
+   monotonicity give
+   $$\{\tau_n\le t\}\cap G=\{A_t\ge n\}\cap G.$$
+   Thus the symmetric difference of $\{\tau_n\le t\}$ and the
+   $\mathcal F_t$-event $\{A_t\ge n\}$ is a subset of $G^c$ and belongs to
+   $\mathcal F_0\subseteq\mathcal F_t$ by completeness. Hence
+   $\{\tau_n\le t\}\in\mathcal F_t$.
 
 3. **The localization localizes the energy.** For every $n$ and every
    $t\ge0$,
-   $$A_{t\wedge\tau_n}\le n\qquad\text{identically},$$
-   because $A$ is nondecreasing, $t\wedge\tau_n\le\tau_n\le n$, and
+   $$A_{t\wedge\tau_n}\le n\qquad\text{almost surely},$$
+   because on $G$ the process $A$ is nondecreasing,
+   $t\wedge\tau_n\le\tau_n\le n$, and
    $A_{\tau_n}\le n$: if $\sigma_n<n$ then continuity gives
    $A_{\sigma_n}=n$ and $\tau_n=\sigma_n$, while if $\sigma_n\ge n$ then
    $\tau_n=n$ and $A_n\le n$ by the definition of $\sigma_n$ as an infimum.
@@ -81,6 +96,20 @@ to 18.
 These conventions are the only sense in which the definition localizes: the
 times $\tau_n$ are canonical functions of the energy process, so no auxiliary
 sequence of stopping times is selected, and the constants $n$ are the natural
-numbers. AC is declared because the ambient $L^2$ integral interface assumes
-it; the definition of the energy process and of the times $\tau_n$ uses no
-choice beyond that interface.
+numbers. Completeness is what makes exceptional-path discrepancies measurable;
+right-continuity is retained as part of the standard usual-conditions
+convention used by the localization sources and downstream stopping theory.
+AC is declared because the ambient $L^2$ integral interface assumes it; the
+definition of the energy process and of the times $\tau_n$ uses no choice
+beyond that interface.
+
+## Source notes
+
+Van der Vaart, Definition 5.32 and Theorem 5.36, defines stochastic integration
+from an actual localizing sequence of stopping times and works throughout with
+filtrations satisfying the usual conditions. Eberle, Remark on the usual
+conditions and Lemma 5.11, likewise obtains the energy hitting times on the
+completed right-continuous filtration. The present page therefore keeps its
+finite-energy construction on raw filtrations but adopts the usual conditions
+at the point where almost-sure local energy, continuous versions and stopping
+must interact.

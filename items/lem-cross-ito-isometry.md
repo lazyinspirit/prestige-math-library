@@ -36,7 +36,11 @@ finite.
 
 [F3] The pointwise identity $(H+K)^2-(H-K)^2=4HK$ holds on $[0,T]\times\Omega$, and the same expansion applies to the random variables $I_t(H)\pm I_t(K)$. [[def-elementary-predictable-brownian-integrand]]
 
-[F4] AC enters only through the ambient isometry item and its conditional-expectation interface. [[def-axiom-of-choice]]
+[F4] AC is inherited from the elementary isometry and
+representation-independence interfaces. In particular, the proof of the
+elementary isometry uses conditional expectations, but its exported interface
+here is only the martingale and squared-isometry statement [F2].
+[[def-axiom-of-choice]]
 
 ## Proof
 
@@ -48,7 +52,7 @@ finite.
 
 2.1 Subtracting the second identity of step 1.2 from the first and expanding with [F3] gives $E\bigl[(I_t(H)+I_t(K))^2\bigr]-E\bigl[(I_t(H)-I_t(K))^2\bigr]=E\int_0^t\bigl((H+K)^2-(H-K)^2\bigr)ds=4E\int_0^tH_sK_s\,ds$, where the right-hand side is finite because $|HK|\le\tfrac12(H^2+K^2)$ and both elementary integrands have finite energy. [F2, F3, step 1.2]
 
-3.1 The left-hand side of step 2.1 equals $4E[I_t(H)I_t(K)]$ by the algebraic expansion [F3], and $4$ is invertible in $\mathbb R$, so $E[I_t(H)I_t(K)]=E\int_0^tH_sK_s\,ds$. Representation independence follows from [[lem-elementary-ito-integral-is-independent-of-the-step-representation]] applied to $H$ and to $K$; AC is used only through [F4] and the conditional-expectation interface of the isometry item. [step 2.1, F3, F4, given] ∎
+3.1 The left-hand side of step 2.1 equals $4E[I_t(H)I_t(K)]$ by the algebraic expansion [F3], and $4$ is invertible in $\mathbb R$, so $E[I_t(H)I_t(K)]=E\int_0^tH_sK_s\,ds$. Representation independence follows from [[lem-elementary-ito-integral-is-independent-of-the-step-representation]] applied to $H$ and to $K$; the AC bookkeeping is exactly the inherited use recorded in [F4], not an additional conditional-expectation interface asserted by this lemma. [step 2.1, F3, F4, given] ∎
 
 ## Source notes
 

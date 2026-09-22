@@ -31,7 +31,7 @@ $w$ of the Weyl group $W(G,T)=N_G(T)/T$.
 
 **Given:** Assume the Axiom of Choice, a compact connected Lie group $G$, a maximal torus $T\le G$, and $t,t'\in T$.
 
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the conjugacy theorem [L2] and the covering theorem [L1].
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the covering theorem [L1], the conjugacy theorem [L2], and the closed-subgroup theorem used in [L4] via its countable-choice hypothesis.
 
 [L1] Every element of $G$ lies in a maximal torus ([[thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus]]).
 
@@ -51,4 +51,4 @@ $w$ of the Weyl group $W(G,T)=N_G(T)/T$.
 
 2.1 By [L2] applied to the compact connected Lie group $H$, there is $h\in H$ with $hTh^{-1}=M=gTg^{-1}$. Then $n:=g^{-1}h\in N_G(T)$, and since $h$ centralizes $t'$ we obtain $t'=h^{-1}t'h=h^{-1}(gtg^{-1})h=n^{-1}t\,n$; hence $t'$ lies in the $W(G,T)$-orbit of $t$ by [L3]. [L2, L3, step 1.2]
 
-3.1 Conversely, if $t'=ntn^{-1}$ for some $n\in N_G(T)$, then $t'=ntn^{-1}$ is conjugate to $t$ and lies in $T$; hence conjugacy in $G$ between points of $T$ is exactly the orbit relation of the Weyl group action, and by step 1.1 every conjugacy class meets $T$. The Axiom of Choice entered only through [L1] and [L2]. [A1, L3, step 1.1, step 2.1] ∎
+3.1 Conversely, if $t'=ntn^{-1}$ for some $n\in N_G(T)$, then $t'=ntn^{-1}$ is conjugate to $t$ and lies in $T$; hence conjugacy in $G$ between points of $T$ is exactly the orbit relation of the Weyl group action, and by step 1.1 every conjugacy class meets $T$. The Axiom of Choice entered through [L1], [L2], and the countable-choice closed-subgroup input in [L4]. [A1, L3, step 1.1, step 2.1] ∎

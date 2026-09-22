@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §1.3 and §2.11"
@@ -29,8 +34,8 @@ Let $k \in \mathbb N \cup \{\infty\}$ and let $E$ be a real Banach space
 * Two charts $(\varphi,U)$ and $(\psi,V)$ of $M$ with $U \cap V \ne \varnothing$
   are **$C^k$ compatible** when the **transition map**
   $$\psi \circ \varphi^{-1} : \varphi[U \cap V] \to \psi[U \cap V]$$
-  is of class $C^k$ ([[def-c-k-map-between-banach-spaces]]) as a map between
-  open subsets of $E$. Two charts with disjoint domains are declared compatible.
+  and its inverse are of class $C^k$ ([[def-c-k-map-between-banach-spaces]])
+  as maps between open subsets of $E$. Two charts with disjoint domains are declared compatible.
 * An **atlas of class $C^k$** on $M$ is a family of pairwise $C^k$ compatible
   charts whose domains cover $M$, and the space $M$ together with such an atlas
   is a **$C^k$ Banach manifold modelled on $E$** — a **Banach manifold** for
@@ -52,8 +57,9 @@ manifold modelled on $F$, and let $f : M \to N$ be a map.
   atlas of $M$ and every chart $(\psi,V)$ in the specified atlas of $N$ the
   **coordinate representative**
   $$\psi \circ f \circ \varphi^{-1} : \varphi\bigl[U \cap f^{-1}[V]\bigr] \to F$$
-  is of class $C^k$ where it is defined, that is on the open set
-  $\varphi[U \cap f^{-1}[V]] \subseteq E$.
+  has open domain $\varphi[U \cap f^{-1}[V]] \subseteq E$ and is of class
+  $C^k$ on that domain. Openness is part of the requirement, not an
+  assumption about an arbitrary set map $f$.
 * $f$ is **smooth** when it is of class $C^\infty$.
 * A bijection $f : M \to N$ is a **$C^k$ diffeomorphism** when both $f$ and
   $f^{-1}$ are of class $C^k$; likewise for $C^\infty$.
@@ -87,12 +93,14 @@ manifold modelled on $F$, and let $f : M \to N$ be a map.
 - **Open sets are the basic examples, when the model space is second
   countable.** If $E$ is second countable, then an open subset $W$ of $E$ is a
   $C^\infty$ Banach manifold modelled on $E$ with the single chart
-  $(W,\mathrm{id}_W)$: a basis of $E$ restricts to a basis of the subspace $W$,
+  $(\mathrm{id}_W,W)$: a basis of $E$ restricts to a basis of the subspace $W$,
   and $W$ is Hausdorff because $E$ is. The hypothesis cannot be dropped: for
   $E=\ell^\infty$ and $W=E$ the identity chart covers $E$, but $E$ is not
   second countable — the uncountably many $0$-$1$ sequences are pairwise at
-  distance $1$, so any dense subset is uncountable and $E$ is not separable,
-  hence not second countable. A map between open subsets of a second countable
+  distance $1$. Their radius-$1/3$ balls are pairwise disjoint. A countable
+  basis would assign to each such sequence the least indexed basis member
+  containing it and contained in its ball, giving an injection of the
+  uncountable set of $0$-$1$ sequences into $\mathbb N$, a contradiction. A map between open subsets of a second countable
   $E$ is of class $C^k$ as a map of manifolds exactly when it is of class $C^k$
   in the sense of [[def-c-k-map-between-banach-spaces]]. All the local theorems
   of this page are statements about such open sets, transported to manifolds

@@ -1,0 +1,13 @@
+# FA terminal basis — position 10
+
+Disposition repaired; source status familiar.
+
+Independently read the complete item, all five dependency Definitions, the later metrization theorem's exact Statement, the owning normal-Moore A/B pages, batch-14 manifest and coverage clause Definitions 1.1–1.2, own risk/boundary contract, Alpha's adjudication and both Terra rejections. The library's regularity does not include T1, neighbourhoods need not be open, and natural indexing starts at zero. The item correctly defines Moore as regular T1 plus developable.
+
+Alpha's repair to intersect covers G_0 through G_n is correct: for each fixed point and fixed finite n, finitely many covering members exist, their intersection is an open neighbourhood, and the family of all such intersections covers. Truncating a representing finite tuple gives refinement of every earlier common refinement and every earlier original cover. Stars decrease accordingly, and the original witnessing index for any open neighbourhood still works. This uses finite existential choices only, not simultaneous choice over points or n. Open star neighbourhoods refine arbitrary neighbourhoods via their open subsets. Their indexed family is at most countable, so first countability follows without any selection of base members.
+
+Terra's final objection is valid. For example, the two-point indiscrete space has the constant cover {X} as a development but cannot be metrizable. The cited theorem actually says: in ZFC, every collectionwise normal Moore space is metrizable. The remark now describes exactly that later theorem's scope, including regular T1 and ZFC, and no longer asserts a metrization equivalence for arbitrary developable spaces. It is a forward reference explaining the page's purpose, not an imported premise of the current ZF definition. Removed a misplaced reference to a Mrowka-plane example which is not on the current companion page.
+
+The empty boundary in both own contract carriers was also inaccurate: the empty space has both the empty cover and {empty}. Both are now covered explicitly, and any resulting development/normalization is vacuous on points. Singleton and zero-index cases remain correct. No suppliers, dependencies, pages or scope were changed, and no dependency-ledger edge repair occurred.
+
+This is familiar elementary topology: the relevant definitions, finite intersections and hypothesis comparison settle the mathematics directly. No external verification was needed or claimed. Focused definition precheck reports 0 checked, 0 failing; strict scoped batch and merged contracts each report 0 errors, 0 warnings. Queue status is checked before recording. No later item has been substantively reviewed. Next: position 11 after recording.

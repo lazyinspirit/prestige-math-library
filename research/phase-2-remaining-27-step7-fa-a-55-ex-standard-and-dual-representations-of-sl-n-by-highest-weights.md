@@ -1,0 +1,13 @@
+# Final adjudication — position 55
+
+Disposition: repaired. Source status: familiar.
+
+Read the current item, batch-12 proof contract and risk record, both Terra rejections, Alpha's adjudication, and the exact current root-system, coroot, fundamental-weight, matrix-algebra, irreducibility and highest-weight interfaces. The batch-12 refuter has no separate flagged entry. Applied the compact/highest-weight page conventions: positive roots epsilon_i-epsilon_j for i<j, complex representations, AC explicitly inherited by highest-weight theory.
+
+The final rejection is correct: E_ll is not traceless. Repaired Verification 1.2 uses E_il only for i distinct from l, then E_li e_i=e_l. Because n>=2 such an i exists; every operator is now in sl_n. This proves irreducibility without an appeal to classification. The dual action is -transpose and annihilates e_n^* under all positive root matrices. W's annihilator is invariant since phi(Xv)=-(Xphi)(v); finite-dimensional dimension duality and the first irreducibility result prove dual irreducibility. Removed the self-reference to step 2.1 in that step's own justification.
+
+Verified coroot normalization: B on the diagonal Cartan is 2n times trace, so H_alpha=(E_ii-E_jj)/(2n), alpha(H_alpha)=1/n, and h_alpha=E_ii-E_jj. Evaluating epsilon_1 and -epsilon_n on the simple coroot basis gives respectively the first and last Kronecker coordinates, hence the stated fundamental weights. At n=2 both weights coincide on the traceless Cartan, consistently with self-duality. To discharge semisimplicity hypotheses explicitly, added the published classical Killing-form example (only its sl_n clause and its direct trace proof) and Cartan's semisimplicity criterion. The former has a correct sl_n trace calculation and nondegenerate trace pairing; no defective orthogonal assertion is used. All nonzero modules and highest vectors are exhibited.
+
+This is familiar matrix and finite-dimensional representation theory, verified directly without external source consultation. No unverified source reading is claimed. Updated this item's manifest dependencies, contract citations/derivations and boundary/risk checks. Refreshed the owning consumer-batch record in briefs/tasks/frontier-dependency-ledger.md after the dependency repair. No existing supplier was edited and no new lemma was created.
+
+Validation: focused strict proof contract zero errors/warnings; precheck one item, zero failures; rendercheck passed. Queue-status showed positions 1–54 current before recording. No unresolved mathematical obligation for this item. Next action after successful recording: position 56.

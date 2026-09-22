@@ -69,5 +69,9 @@ roots form a reduced crystallographic root system. The final items record the
 dimension formula, the centre as the common kernel of the roots, the
 centralizer dimension from vanishing roots, and the density of the regular
 locus. Every theorem that uses the additive Jordan–Chevalley decomposition
-declares the Axiom of Choice and identifies that use; the remaining arguments
-are choice-free.
+declares the Axiom of Choice and identifies that use. The root-space
+decomposition, Killing-form, root-triple, coroot, root-string, reflection,
+regular-locus, and classification chain likewise states its Choice hypothesis
+explicitly. Coordinate computations that do not invoke those general interfaces
+remain choice-free; examples that identify their calculations with the
+Choice-scoped chain state the same hypothesis.

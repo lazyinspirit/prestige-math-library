@@ -5,7 +5,7 @@ title: Cartan subalgebra and roots of sl_2
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-special-linear-lie-algebra-sl-two, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
+deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-special-linear-lie-algebra-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -26,13 +26,14 @@ $[h,f]=-2f$, $[e,f]=h$, the line $\mathfrak h=\mathbb Ch$ is a Cartan
 subalgebra; the roots are $\pm\alpha$, where $\alpha\in\mathfrak h^*$ is
 determined by $\alpha(h)=2$, with root spaces $\mathfrak g_\alpha=\mathbb Ce$
 and $\mathfrak g_{-\alpha}=\mathbb Cf$, so that
-$\mathfrak{sl}_2=\mathfrak h\oplus\mathbb Ce\oplus\mathbb Cf$ is the
-root-space decomposition
-([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]). With
+$\mathfrak{sl}_2=\mathfrak h\oplus\mathbb Ce\oplus\mathbb Cf$ is its
+directly computed root-space decomposition. With
 the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]],
 $B(h,h)=8$, and the Killing-dual vector and coroot of $\alpha$ are
-$H_\alpha=\tfrac14h$ and $h_\alpha=h$
-([[def-killing-dual-vector-of-a-root]], [[def-coroot-of-a-lie-algebra-root]]).
+$H_\alpha=\tfrac14h$ and $h_\alpha=h$, where here these names mean the
+directly verified identities
+$B(H_\alpha,H)=\alpha(H)$ for every $H\in\mathfrak h$ and
+$h_\alpha=2H_\alpha/\alpha(H_\alpha)$.
 
 ## Facts & Assumptions
 

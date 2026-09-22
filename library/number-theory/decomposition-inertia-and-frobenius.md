@@ -6,7 +6,7 @@ items: [thm-completion-of-an-absolutely-valued-field, def-normed-vector-space-ov
 examples: []
 ---
 
-Completions and unique extension of nonarchimedean absolute values provide the local bridge. The absolute value normalized by the residue-field norm restricts as an $ef$-th power; the extending normalization uses its $1/(ef)$-th power.
+Under the Axiom of Choice, completions and unique extension of nonarchimedean absolute values provide the local bridge. The absolute value normalized by the residue-field norm restricts as an $ef$-th power; the extending normalization uses its $1/(ef)$-th power.
 
 For a chosen prime, the decomposition group is its stabilizer and inertia is the kernel of the residue action. A direct CRT construction lifts residue Frobenius and proves surjectivity. Exact sequences, tower formulas, and fixed fields then separate ramification, residue degree, and splitting. Complete splitting in the decomposition field requires the stated normality qualification.
 

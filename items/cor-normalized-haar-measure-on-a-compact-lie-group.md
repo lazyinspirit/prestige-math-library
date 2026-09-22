@@ -34,7 +34,7 @@ probability measure invariant under left and right translations and inversion.
 
 [L1] Every compact Hausdorff group has a unique left Haar probability measure, and that measure is right invariant and inversion invariant as well ([[cor-normalized-haar-probability-on-a-compact-group]]).
 
-[L2] A left Haar measure is by definition a nonzero Borel measure that is finite on compact sets, outer regular on Borel sets and inner regular on open sets; a probability measure is a left Haar measure of total mass one ([[def-left-haar-integral-and-left-haar-measure]]).
+[L2] A left Haar measure is by definition a nonzero left-invariant Borel measure that is finite on compact sets, outer regular on Borel sets and inner regular on open sets; a left Haar probability measure is a left Haar measure whose total mass is one ([[def-left-haar-integral-and-left-haar-measure]]).
 
 [L3] A finite Radon measure is left invariant when $\mu(gE)=\mu(E)$ for all Borel $E$ and $g$, right invariant when $\mu(Eg)=\mu(E)$, inversion invariant when $\mu(E^{-1})=\mu(E)$, and bi-invariant when both translation conditions hold; for a compact group a finite Radon measure is a probability measure exactly when its total mass is one ([[def-left-right-and-bi-invariant-borel-measure-on-a-lie-group]]).
 
@@ -44,7 +44,7 @@ probability measure invariant under left and right translations and inversion.
 
 1.1 A finite-dimensional Lie group is a Hausdorff topological group, and compactness is a topological property, so a compact Lie group is a compact Hausdorff group; by [L1] it therefore carries a unique left Haar probability measure $\mu$, which is right invariant and inversion invariant. [L1, L2, algebra]
 
-1.2 Since $G$ is compact, every left Haar measure on $G$ has finite positive total mass and can be normalized by dividing by that mass; compactness alone does not make an arbitrary Haar measure a probability measure. Conversely, a regular Borel probability measure that is left invariant is a left Haar measure of total mass one in the sense of [L2]. Hence the uniqueness assertion of [L1] is exactly uniqueness among regular Borel probability measures that are left invariant. [L1, L2]
+1.2 Since $G$ is compact, every left Haar measure on $G$ has finite positive total mass and can be normalized by dividing by that mass; compactness alone does not make an arbitrary Haar measure a probability measure. For the normalized measure, outer regularity also gives inner regularity on every Borel $E$: for $\epsilon>0$ choose open $U\supseteq G\setminus E$ with $\mu(U)<\mu(G\setminus E)+\epsilon$; then $C=G\setminus U$ is compact, $C\subseteq E$, and $\mu(C)>\mu(E)-\epsilon$. Conversely, a regular Borel probability measure that is left invariant is a left Haar measure of total mass one in the sense of [L2]. Hence the uniqueness assertion of [L1] is exactly uniqueness among regular Borel probability measures that are left invariant. [L1, L2]
 
 2.1 By [L3] the measure $\mu$ of step 1.1 is bi-invariant satisfying all three invariance conditions, so a measure with the stated properties exists. [L3, step 1.1]
 

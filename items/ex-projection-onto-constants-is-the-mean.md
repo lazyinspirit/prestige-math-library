@@ -34,7 +34,7 @@ the mean of $f$; in particular $P_M[f]$ is the unique constant $c$ with $\int_X(
 
 [A3] The Hilbert projection is characterised by $P_M[f]\in M$ and $[f]-P_M[f]\in M^\perp$ ([[def-hilbert-orthogonal-projection]]).
 
-[A4] Countable Choice is the hypothesis under which the projection is available ([[def-countable-choice]]).
+[A4] Countable Choice is the standing choice hypothesis ([[def-countable-choice]]), while existence and uniqueness of the projection onto a closed subspace are supplied by the Hilbert-projection interface ([[def-hilbert-orthogonal-projection]]).
 
 ## Verification
 

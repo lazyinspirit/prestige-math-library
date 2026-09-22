@@ -5,7 +5,7 @@ title: AHSS collapse generally determines only the associated graded object
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-homological-atiyah-hirzebruch-spectral-sequence, def-extension-problem-of-a-convergent-spectral-sequence, def-associated-graded-object-of-a-filtered-object]
+deps: ["def-abutment-to-a-filtered-object", "def-extension-problem-of-a-convergent-spectral-sequence", "def-associated-graded-object-of-a-filtered-object"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,39 +22,31 @@ sources:
 
 ## Statement
 
-For the Atiyah–Hirzebruch spectral sequences of
-[[thm-cohomological-atiyah-hirzebruch-spectral-sequence]] and
-[[thm-homological-atiyah-hirzebruch-spectral-sequence]], a collapse of the
-spectral sequence always determines the associated graded object
-$\operatorname{gr}_Fh^*(X)$, but in general does not determine the abutment: the
-pages determine the filtration quotients, while a filtration with more than one
-nonzero quotient may require additional additive extension data, and when the
-theory is multiplicative also multiplicative extension data. For a one-jump
-filtration there is no additive extension problem.
-In particular there is no general rule recovering $h^n(X)$ from a collapsed
-$E_2=E_\infty$ page.
+For a convergent Atiyah–Hirzebruch spectral sequence on a finite CW complex, equipped with its finite skeletal abutment filtration, collapse determines the associated graded family of the abutment: the quotients $F^ph^n(X)/F^{p+1}h^n(X)$ in cohomology or $F_ph_n(X)/F_{p-1}h_n(X)$ in homology. These are the data supplied by convergence. Reconstructing the filtered abutment from these data is the extension problem; collapse alone supplies no splitting. Multiple nonzero quotients may leave additive extensions to resolve and, for a multiplicative spectral sequence, multiplicative extensions. A one-jump filtration has no additive extension problem. Thus there is no general reconstruction rule based solely on collapsed-page and associated-graded data. The algebraic examples below demonstrate this limitation of those data; they do not assert that each displayed filtered object is realized by an AHSS.
 
 ## Facts & Assumptions
 
-[F1] The AHSS converges to the associated graded of the skeletal filtration: $E_\infty^{p,q}\cong F^ph^{p+q}(X)/F^{p+1}h^{p+q}(X)$ in the cohomological case and $E^\infty_{p,q}\cong F_ph_{p+q}(X)/F_{p-1}h_{p+q}(X)$ in the homological case ([[thm-cohomological-atiyah-hirzebruch-spectral-sequence]], [[thm-homological-atiyah-hirzebruch-spectral-sequence]]).
+[F1] Abutment data identify stable-page entries with the successive quotients of a finite, exhaustive, separated filtration in each total degree; in decreasing cohomological indexing the quotient is $F^p/F^{p+1}$ ([[def-abutment-to-a-filtered-object]]).
 
 [F2] The extension problem consists of reconstructing an object from its associated graded pieces through the short exact sequences $0\to F^{p+1}\to F^p\to\operatorname{gr}^p\to0$; specifying the outside objects does not specify the middle one or the maps, and a splitting is extra data ([[def-extension-problem-of-a-convergent-spectral-sequence]], [[def-associated-graded-object-of-a-filtered-object]]).
 
-[F3] A filtration of an abelian group determines the associated graded as the direct sum of its successive quotients; no converse reconstruction of the group is asserted ([[def-associated-graded-object-of-a-filtered-object]]).
+[F3] A filtration of an abelian group determines the associated graded as the indexed family of its successive quotients; no converse reconstruction of the group is asserted ([[def-associated-graded-object-of-a-filtered-object]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** The two AHSSs of [F1] and a collapsed page $E_2=E_\infty$.
+**Given:** A convergent AHSS with the stated finite abutment filtration and a collapsed page $E_2=E_\infty$.
 
 1.1 By [F1] the collapsed page determines exactly the filtration quotients $F^p/F^{p+1}$ (cohomologically) or $F_p/F_{p-1}$ (homologically); nothing in the identification uses or supplies the extension classes, and the collapse hypothesis only asserts the vanishing of the differentials, so it adds no data beyond the pages. [F1, F2, given]
 
-1.2 Additively, let $A=\mathbb Z/4$ with the filtration $F^0=A$, $F^1=2\mathbb Z/4\cong\mathbb Z/2$, $F^2=0$, and let $B=\mathbb Z/2\oplus\mathbb Z/2$ with the filtration $F^0=B$, $F^1=0\oplus\mathbb Z/2$, $F^2=0$. Then $\operatorname{gr}_FA\cong\mathbb Z/2\oplus\mathbb Z/2\cong\operatorname{gr}_FB$, but $A$ and $B$ are not isomorphic; hence the additive extension data are not determined by the graded pieces. [F2, F3, given]
+1.2 Additively, let $A=\mathbb Z/4$ with the filtration $F^0=A$, $F^1=2\mathbb Z/4\cong\mathbb Z/2$, $F^2=0$, and let $B=\mathbb Z/2\oplus\mathbb Z/2$ with the filtration $F^0=B$, $F^1=0\oplus\mathbb Z/2$, $F^2=0$. Both graded families have $\mathbb Z/2$ in degrees zero and one and zero elsewhere. (They can also be packaged as a finite direct sum, but that packaging is not the definition.) Yet $A$ has an element of order four and every element of $B$ is killed by two, so they are not isomorphic; hence the additive extension data are not determined by the graded pieces. [F2, F3, given]
 
-1.3 Multiplicatively, let $A=\mathbb Z/4$ with the ideal filtration $F^0=A$, $F^1=(2)$, $F^2=0$ and let $R=\mathbb F_2[t]/(t^2)$ with the ideal filtration $F^0=R$, $F^1=(t)$, $F^2=0$. Both associated graded rings are $\mathbb Z/2\oplus\mathbb Z/2$, with the second summand in filtration degree one and square zero, but $A$ has characteristic four while $R$ has characteristic two, so the underlying rings differ; hence multiplicative extension data are additional. [F2, F3, algebra]
+1.3 Multiplicatively, an ambiguity can remain even when the additive groups are known. Set $A=\mathbb F_2[x]/(x^4)$ and $R=\mathbb F_2[u,v]/(u^2,v^2)$. Give $A$ the filtration $F^0=A$, $F^1=(x^2)$, $F^2=0$ and $R$ the filtration $F^0=R$, $F^1=(v)$, $F^2=0$, extending by the whole ring below zero and zero above one. Both are multiplicative since the displayed ideals square to zero. In each case the degree-zero quotient is $\mathbb F_2[a]/(a^2)$ and the degree-one piece is its free rank-one module generated by $z$; products of two degree-one pieces vanish. Thus their graded rings are both $\mathbb F_2[a,z]/(a^2,z^2)$ with filtration degrees $|a|=0$, $|z|=1$. Their additive groups are both $\mathbb F_2^4$, as witnessed by bases $1,x,x^2,x^3$ and $1,u,v,uv$. But $x\in A$ is nilpotent with $x^2\ne0$, whereas every nilpotent of $R$ has constant coefficient zero and squares to zero. The rings cannot be isomorphic. These are explicitly computed filtered rings, not claimed AHSS realizations. [F2, F3, algebra]
 
-2.1 Steps 1.1 to 1.3 show that the collapsed pages determine the associated graded object and that distinct filtered objects, additively and multiplicatively, share that associated graded; therefore recovering the abutment requires the extension data of [F2]. [step 1.1, step 1.2, step 1.3] ∎
+1.4 If the sole nonzero quotient of a finite decreasing filtration is $F^j/F^{j+1}$, all earlier quotients zero force equality of the preceding stages with the whole group, and all later quotients zero force equality of the following stages with zero. Hence $F^j=H$, $F^{j+1}=0$ and that quotient is $H$ itself. If every quotient vanishes, finite exhaustiveness and separation similarly force $H=0$. Reversing indices gives the increasing case. Multiple quotients do not force ambiguity in every example; they merely permit an extension problem. [F1, F2, F3, algebra]
+
+2.1 Steps 1.1 to 1.3 show that the collapsed pages determine the associated graded object and that distinct filtered objects, additively and multiplicatively, share that associated graded; so the pages alone do not contain general extension data. Step 1.4 records the zero and one-jump exceptions. This establishes the stated limitation without claiming that every individual collapse is ambiguous. [step 1.1, step 1.2, step 1.3, step 1.4] ∎
 
 ## Source notes
 

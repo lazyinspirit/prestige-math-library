@@ -9,6 +9,11 @@ deps: [thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coo
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II"

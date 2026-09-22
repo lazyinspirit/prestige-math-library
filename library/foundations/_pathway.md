@@ -40,6 +40,9 @@ parts:
       - finite-support-iterations-and-martins-axiom
       - preservation-cohen-forcing-and-the-continuum
       - permutation-models-and-transfer-to-zf
+      - shelahs-baire-property-model-and-inner-model-lower-bounds
+      - normal-moore-spaces-pmea-and-consistency-strength
+      - choice-strength-in-baire-urysohn-stone-and-tychonoff
       - minimal-walks-oscillation-and-l-and-s-spaces
       - proper-forcing-countable-support-iterations-and-pfa
       - halpern-lauchli-and-bpi-without-choice
@@ -71,18 +74,16 @@ first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Ordinals: well-ordering, recursion, rank, arithmetic, cofinality, alephs,
-weak choice; clubs, stationarity, trees, delta systems, Diamond; analytic
-sets, determinacy; PCF, Dowker spaces; completeness, incompleteness;
-reflection, elementary submodels; BPI, Stone duality, Halpern--Läuchli, BPI
-below Choice (basic Cohen model). Large cardinals: ultrafilters,
-ultrapowers, embeddings, supercompactness yielding PFA by countable-support
-proper iterations; Prikry forcing, Gitik's all-singular model; minimal
-walks: ZFC L-space, PFA killing S-spaces. $L$, HOD: definable well-orders,
-condensation, GCH, diamond; Suslin trees, lines, algebras equivalent, SH
-conditionally independent. Forcing: generics, names, truth lemma, chain
-conditions, Cohen, collapse, Lévy collapse, finite-support iterations
-forcing MA+$\neg$CH; symmetric extensions and permutation models fail
-choice: Dedekind-finite reals, non-well-orderable atoms, countable pairs,
-Jech--Sochor. Feferman--Levy, Blass, Solovay give countable unions of
-countable sets, principal ultrafilters, regular sets of reals.
+Ordinals: well-ordering, recursion, rank, arithmetic, cofinality, alephs, weak
+choice, clubs, stationarity, trees, Diamond, determinacy, PCF, Dowker spaces,
+completeness, incompleteness, reflection, elementary submodels, BPI, Stone
+duality, Halpern--Läuchli. Large cardinals: ultrafilters, ultrapowers,
+supercompactness yielding PFA, Prikry forcing, Gitik's all-singular model;
+Suslin trees, $L$, HOD, GCH; forcing: generics, names, truth lemma, chain
+conditions, Cohen and Lévy collapse, finite-support MA+$\neg$CH, symmetric
+extensions, permutation models. Choice strength is calibrated: complete-metric
+Baire exactly DC, compact-Hausdorff Baire exactly DMC, Urysohn's lemma from DMC
+but not CC or BPI, Stone's metrization failing under DC and BPI; PMEA proves the
+normal Moore space conjecture, refuted by $V=L$ and sandwiched between an
+inner-model measurable and a strongly compact cardinal; Shelah's Baire-property
+model equiconsistent with ZFC, measurability costing an inaccessible.

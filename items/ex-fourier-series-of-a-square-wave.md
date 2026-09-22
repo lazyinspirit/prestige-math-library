@@ -47,6 +47,8 @@ and no endpoint statement is made.
 
 [A5] The coefficient family is square-summable in the finite-subset sense, and its total square sum is the supremum of the symmetric partial sums ([[def-square-summable-family-on-an-arbitrary-index-set]], [[thm-parseval-identity-for-fourier-series]]).
 
+[A6] For every $f\in L^2(\mathbb T;\mathbb C)$, the symmetric Fourier partial sums $\sum_{|k|\le N}\widehat f(k)e_k$ converge to $f$ in the $L^2$ norm ([[thm-l-two-fourier-series-converges-in-mean-square]]).
+
 ## Verification
 
 **Proof technique:** direct.
@@ -61,4 +63,4 @@ and no endpoint statement is made.
 
 3.1 Parseval's identity gives $1=\|s\|_2^2=\sum_{k\in\mathbb Z}|\widehat s(k)|^2$, because $|s|=1$ and the domain has measure one; and $|\widehat s(k)|^2=\frac{(1-(-1)^k)^2}{\pi^2k^2}$ equals $\frac{4}{\pi^2k^2}$ for odd $k$ and $0$ for even $k$. Hence $1=\frac{4}{\pi^2}\sum_{k\ \text{odd}}\frac{1}{k^2}=\frac{8}{\pi^2}\sum_{k\ \text{odd},\,k\ge1}\frac{1}{k^2}$, and multiplying by $\pi^2/8$ gives $\sum_{k\ \text{odd},\,k\ge1}k^{-2}=\pi^2/8$. [step 1.1, step 2.1, A1, A5, algebra]
 
-4.1 The coefficients of steps 1.1 and 2.1 are the displayed ones, the Fourier series converges to $s$ in mean square, and step 3.1 evaluates the associated square sum as $\pi^2/8$; all statements are about the $L^2$ class, and no pointwise or endpoint convergence is asserted. [step 1.1, step 2.1, step 3.1] ∎
+4.1 The coefficients of steps 1.1 and 2.1 are the displayed ones, [A6] gives convergence of the symmetric Fourier partial sums to $s$ in mean square, and step 3.1 evaluates the associated square sum as $\pi^2/8$; all statements are about the $L^2$ class, and no pointwise or endpoint convergence is asserted. [step 1.1, step 2.1, step 3.1, A6] ∎

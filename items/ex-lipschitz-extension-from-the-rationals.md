@@ -40,7 +40,8 @@ pipeline_run: null
 
 ## Example
 
-Regard $\mathbb{Q}$ as a subspace of $\mathbb{R}$ with the metric inherited from
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Regard
+$\mathbb{Q}$ as a subspace of $\mathbb{R}$ with the metric inherited from
 the usual metric ([[lem-rat-embeds-dense]],
 [[lem-real-line-is-a-metric-space]], [[def-isometry-and-metric-embedding]]), let
 $L \in \mathbb{R}$ with $L \ge 0$, and let $f : \mathbb{Q} \to \mathbb{R}$ be
@@ -54,7 +55,7 @@ the same constant $L$.**
 
 ## Facts & Assumptions
 
-**Given:** $\mathbb{Q}$ as a metric subspace of $\mathbb{R}$; a real $L \ge 0$; a Lipschitz $f : \mathbb{Q} \to \mathbb{R}$ with constant $L$; reals $x, y$.
+**Given:** The Axiom of Countable Choice; $\mathbb{Q}$ as a metric subspace of $\mathbb{R}$; a real $L \ge 0$; a Lipschitz $f : \mathbb{Q} \to \mathbb{R}$ with constant $L$; reals $x, y$.
 
 [A1] Lipschitz hypothesis: $|f(p) - f(q)| \le L\,|p-q|$ for all $p,q \in \mathbb{Q}$ ([[def-lipschitz-holder-contraction]]).
 

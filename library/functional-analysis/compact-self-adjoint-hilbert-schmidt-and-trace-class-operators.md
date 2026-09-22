@@ -2,7 +2,7 @@
 page: compact-self-adjoint-hilbert-schmidt-and-trace-class-operators
 title: Compact Self Adjoint Hilbert Schmidt and Trace Class Operators
 status: draft
-items: [lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form, lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, lem-orthogonal-complement-of-an-eigenspace-is-invariant, thm-spectral-theorem-for-compact-self-adjoint-operators, cor-orthonormal-eigenbasis-for-a-compact-self-adjoint-operator, lem-positive-square-root-of-a-compact-positive-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, lem-singular-values-equal-approximation-numbers, cor-compact-operator-iff-approximation-numbers-tend-to-zero, cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators, thm-hilbert-schmidt-operators-form-a-two-sided-ideal, def-trace-class-operator, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, lem-nuclear-series-characterizes-trace-norm, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-trace-of-a-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-cyclicity-of-the-trace, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues]
+items: [lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form, lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, lem-orthogonal-complement-of-an-eigenspace-is-invariant, thm-spectral-theorem-for-compact-self-adjoint-operators, cor-orthonormal-eigenbasis-for-a-compact-self-adjoint-operator, lem-positive-square-root-of-a-compact-positive-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, lem-singular-values-equal-approximation-numbers, cor-compact-operator-iff-approximation-numbers-tend-to-zero, cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators, thm-hilbert-schmidt-operators-form-a-two-sided-ideal, def-trace-class-operator, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, lem-nuclear-series-characterizes-trace-norm, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-trace-of-a-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-cyclicity-of-the-trace, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, rem-external-separable-trace-class-fredholm-determinant-theorem, def-fredholm-determinant, prop-fredholm-determinant-properties-for-trace-class-operators, thm-lidskii-for-trace-class-operators]
 examples: []
 ---
 
@@ -59,6 +59,12 @@ every nuclear representation, using a deterministically constructed separable
 support Hilbert space rather than a basis of the ambient space; cyclicity
 $\operatorname{tr}(ST)=\operatorname{tr}(TS)$ follows by rank-one computation
 and trace-norm density, and for self-adjoint positive operators the trace is the
-eigenvalue sum $\operatorname{tr}(T)=\sum_n\lambda_n=\|T\|_1$. General Lidskii
-theory is deliberately not claimed; it belongs to the later
-Fredholm-determinant pair.
+eigenvalue sum $\operatorname{tr}(T)=\sum_n\lambda_n=\|T\|_1$.
+
+The final draft block conditionally extends this to arbitrary complex Hilbert
+spaces: a source-backed external separable determinant theorem is recorded
+with its precise algebraic-multiplicity and zero-space conventions, the local
+definition extends it through a separable reducing support, and the determinant
+properties yield general nonnormal Lidskii.  These records prominently retain
+their external-proof status; the future determinant module must replace the
+external theorem rather than create duplicate determinant or Lidskii items.

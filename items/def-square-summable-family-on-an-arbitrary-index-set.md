@@ -5,10 +5,15 @@ title: Square-summable families on an arbitrary index set and the space $\ell^2(
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-directed-set-and-net, def-net-convergence-and-cluster-point, thm-hausdorff-iff-net-limits-are-unique, def-extended-reals, lem-extended-reals-complete, def-finite-sum, def-complete-ordered-field, lem-sup-epsilon, def-complex-conjugate-real-imaginary-part-and-modulus, def-real-numbers]
+deps: [def-directed-set-and-net, def-net-convergence-and-cluster-point, thm-hausdorff-iff-net-limits-are-unique, def-extended-reals, lem-extended-reals-complete, def-finite-sum, def-complete-ordered-field, lem-sup-epsilon, def-complex-conjugate-real-imaginary-part-and-modulus, def-real-numbers, def-finite-sum-in-a-commutative-monoid, lem-finite-sum-reindexing-and-fubini, lem-complex-conjugation-and-modulus-laws, thm-metric-hausdorff-separation, def-complex-metric-convergence-and-continuity, thm-of-square-roots]
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1, pp.48–49 and p.52"
@@ -20,8 +25,7 @@ sources:
 ## Definition
 
 Throughout, $\mathbb F$ is $\mathbb R$ or $\mathbb C$ and families are indexed by
-an arbitrary set $I$, with no enumeration or countability assumed. Finite sums
-are those of [[def-finite-sum]]; all suprema and infima of real sets below are
+an arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are
 taken in the complete ordered field $\mathbb R$
 ([[def-complete-ordered-field]]) or in $[0,+\infty]\subseteq\overline{\mathbb R}$
 ([[def-extended-reals]], [[lem-extended-reals-complete]]).
@@ -65,8 +69,7 @@ $F\cup G$ is a common upper bound of $F$ and $G$
 ([[def-directed-set-and-net]]). Hence $(s_F)_{F\in\operatorname{Fin}(I)}$ is a
 net in $\mathbb F$, the **finite-subset net** of the family, and the family is
 **summable** when this net converges
-([[def-net-convergence-and-cluster-point]]). A net in the metric space
-$\mathbb F$ has at most one limit
+([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\mathbb F$ has at most one limit
 ([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the
 limit is unique and we write $\sum_{i\in I}a_i:=\lim_F s_F$ for it. The family is
 **absolutely summable** when $\sum_{i\in I}|a_i|<+\infty$ in the sense above.
@@ -119,16 +122,15 @@ $F$, because finite subsums over sets containing $F$ converge to the left-hand
 side and equal the finite sum over $F$ plus the finite subsum of the tail, whose
 net converges to the tail sum.
 
-**The finite-dimensional Cauchy-Schwarz inequality.** Let $u_1,\dots,u_m$ and
-$v_1,\dots,v_m$ be scalars and let $t\in\mathbb R$. Every term of
+**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\le k<m}$ and $(v_k)_{0\le k<m}$ be scalar lists, for $m\in\mathbb N$ and let $t\in\mathbb R$. Every term of
 $\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$
 
 $$0\le\sum_{k<m}|u_k|^2-2t\sum_{k<m}|u_k||v_k|+t^2\sum_{k<m}|v_k|^2 .$$
 
 If $\sum_{k<m}|v_k|^2>0$, substituting
-$t=\bigl(\sum_k|u_k||v_k|\bigr)/\bigl(\sum_k|v_k|^2\bigr)$ gives
-$\bigl(\sum_k|u_k||v_k|\bigr)^2\le\bigl(\sum_k|u_k|^2\bigr)\bigl(\sum_k|v_k|^2\bigr)$;
-if $\sum_k|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case
+$t=\bigl(\sum_{k<m}|u_k||v_k|\bigr)/\bigl(\sum_{k<m}|v_k|^2\bigr)$ gives
+$\bigl(\sum_{k<m}|u_k||v_k|\bigr)^2\le\bigl(\sum_{k<m}|u_k|^2\bigr)\bigl(\sum_{k<m}|v_k|^2\bigr)$;
+if $\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case
 $\sum_{k<m}|u_k||v_k|\le\bigl(\sum_{k<m}|u_k|^2\bigr)^{1/2}\bigl(\sum_{k<m}|v_k|^2\bigr)^{1/2}$
 after taking square roots, and applying the modulus inequality for finite sums
 to $u_k\overline{v_k}$ also gives
@@ -136,8 +138,7 @@ to $u_k\overline{v_k}$ also gives
 $$\Bigl|\sum_{k<m}u_k\overline{v_k}\Bigr|\le\Bigl(\sum_{k<m}|u_k|^2\Bigr)^{1/2}\Bigl(\sum_{k<m}|v_k|^2\Bigr)^{1/2} . \qquad (3)$$
 
 **The space $\ell^2(I)$.** For a family $a=(a_i)_{i\in I}$ in $\mathbb F$ define
-$\|a\|_2:=\bigl(\sum_{i\in I}|a_i|^2\bigr)^{1/2}\in[0,+\infty]$, the square root
-being the nonnegative one, and let
+$Q(a):=\sum_{i\in I}|a_i|^2$. If $Q(a)$ is finite, set $\|a\|_2:=\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\infty$, set $\|a\|_2:=+\infty$. This is a case definition, not exponentiation of an extended real. Let
 
 $$\ell^2(I,\mathbb F):=\{\,a=(a_i)_{i\in I} : \|a\|_2<+\infty\,\}.$$
 

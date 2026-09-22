@@ -5,7 +5,7 @@ title: Regular and singular diagonal elements of sl_n
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, prop-centralizer-dimension-from-vanishing-roots, def-regular-root-hyperplanes, cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra, def-regular-element-and-rank-of-a-complex-lie-algebra]
+deps: [def-axiom-of-choice, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, prop-centralizer-dimension-from-vanishing-roots, def-regular-root-hyperplanes, cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra, def-regular-element-and-rank-of-a-complex-lie-algebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -16,11 +16,12 @@ sources:
       locator: "Example 20.3"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the regular-root and centralizer suppliers."
 ---
 
 ## Example
 
-In $\mathfrak{sl}_n(\mathbb C)$ with the diagonal Cartan subalgebra
+Assume AC ([[def-axiom-of-choice]]). In $\mathfrak{sl}_n(\mathbb C)$ with the diagonal Cartan subalgebra
 $\mathfrak h$ of [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], an
 element $H=\operatorname{diag}(x_1,\dots,x_n)\in\mathfrak h$ is a regular
 element of $\mathfrak h$ in the sense of [[def-regular-root-hyperplanes]]
@@ -31,7 +32,7 @@ which equals the Cartan dimension $n-1$ exactly in the regular case.
 
 ## Facts & Assumptions
 
-**Given:** The algebra $\mathfrak{sl}_n(\mathbb C)$ with diagonal Cartan subalgebra and roots $\varepsilon_i-\varepsilon_j$ as in [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], and the centralizer formula $\mathfrak g^H=\mathfrak h\oplus\bigoplus_{\alpha(H)=0}\mathfrak g_\alpha$ of [[prop-centralizer-dimension-from-vanishing-roots]] with the regular set of [[def-regular-root-hyperplanes]] and [[cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra]].
+**Given:** AC; the algebra $\mathfrak{sl}_n(\mathbb C)$ with diagonal Cartan subalgebra and roots $\varepsilon_i-\varepsilon_j$ as in [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], and the centralizer formula $\mathfrak g^H=\mathfrak h\oplus\bigoplus_{\alpha(H)=0}\mathfrak g_\alpha$ of [[prop-centralizer-dimension-from-vanishing-roots]] with the regular set of [[def-regular-root-hyperplanes]] and [[cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra]].
 
 ## Verification
 

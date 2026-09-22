@@ -1,0 +1,13 @@
+# FA position 33: context reseal
+
+Disposition: repaired (retained); source status: familiar. Current item SHA256 1bd9450e43615db1e36a5618ea3ebeefc505e214e8f739ece10a929f2b02a07b matches the latest receipt. No item or metadata changes were needed.
+
+Read the current corollary, original FA evidence, Alpha row 19, both Terra rejections, owning batch-6 manifest and contract/risk/boundaries, and current continuous-calculus and generation suppliers. The established page convention is complex first-variable-linear Hilbert spaces, zI-S resolvents, U(t)=exp(itS), and explicit AC. The context changes preserve all used interfaces.
+
+The first rejection concerned a lower bound not assumed for A; the statement now explicitly bounds A and every A_n. The rejudge concerned negative times; step 1.1 now fixes arbitrary real t, so bounded continuous exp(it lambda) is admissible for either sign. The previously reviewed repaired continuous-calculus theorem proves its strong conclusion for every bounded continuous function, without limits at infinity. The generation lemma supplies the group interpretation with generator iS, not S.
+
+For the semigroup, B_m=[-m,gamma-1/m] increase to the open half-line below gamma, allowing initially empty intervals. A nonzero spectral projection supplies a nonzero bounded-spectral-support domain vector; its quadratic form is strictly below the assumed bound, impossible. Scalar monotone convergence and the projection norm identity therefore annihilate the entire half-line. The continuous function exp(-t max(lambda,gamma)) for t>=0 is bounded by exp(-t gamma) and agrees with exp(-t lambda) off that null projection. The integral definition supplies identical domains and operators; the squared-integrability bound makes those domains all H. Thus the same strong-calculus conclusion applies. Zero time and zero Hilbert space are explicitly covered.
+
+This direct bounded-calculus and spectral-projection argument is familiar enough to check without new external verification. The prior source reading is historical evidence, not a claim of a new source consultation. The contract quotations support the exact domain, quadratic-pairing, null-set and scalar-measure clauses used here. Focused precheck PASS; strict selected proof contract: zero errors, zero warnings. No dependency repair occurred, hence no consumer-ledger alteration is needed. No published edit, judge verdict or pass stamp was created.
+
+Queue-status shows positions 1-32 current. Record this reseal, retain current positions 34-35, then review position 36. A navigation reference to Stone before opening this item did not change any files or decisions.

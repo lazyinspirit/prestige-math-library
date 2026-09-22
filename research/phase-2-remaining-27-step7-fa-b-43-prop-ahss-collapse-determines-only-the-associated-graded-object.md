@@ -1,0 +1,15 @@
+# FA position 43 — repaired
+
+Independently reviewed the item, its four original dependency interfaces, batch-9 page and manifest context, contract, critical-risk record, original rejection, Alpha repair and Terra rejudge. Alpha correctly qualified the blanket claim for a one-jump filtration. Terra correctly rejected F3: the library defines an indexed family of quotients, expressly without presupposing an infinite direct sum.
+
+The repair consistently uses the indexed family. The two finite graded examples can be packaged by finite direct sums, but this is explicitly distinguished from the definition. It also proves the single-jump and zero-family cases: finite exhaustive separatedness and zero neighboring quotients imply equality of stages, so the sole nonzero quotient is the entire abutment. Multiple quotients permit, but do not invariably force, ambiguity.
+
+I checked the cited cohomological construction and the repaired homological theorem at position 42. This proposition does not need either existence proof: it is a formal consequence of the abutment data of an already given convergent AHSS. Its proof now cites the exact `def-abutment-to-a-filtered-object` interface instead of relying on the independently unresolved reduced/unreduced and suspension-normalization claims. The scope remains the extension problem for a finite convergent AHSS; no spectral sequence existence or realization theorem is asserted.
+
+The additive example is explicit: Z/4 with subgroup 2Z/4 and (Z/2)^2 with its second factor have equal graded families but different element orders. I strengthened the multiplicative example to isolate ring ambiguity from additive ambiguity. F2[x]/(x^4), filtered by (x^2), and F2[u,v]/(u^2,v^2), filtered by (v), both have additive group F2^4 and associated graded ring F2[a,z]/(a^2,z^2), with a in filtration zero and z in filtration one. In the first ring x is nilpotent with nonzero square; all nilpotents in the second square to zero. This proves the claimed ambiguity. These are algebraic examples of the insufficiency of graded data; the item expressly does not claim that both are AHSS realizations.
+
+This mathematics is familiar finite group/ring arithmetic and finite-filtration algebra. I checked each quotient, multiplication and nilpotence calculation directly; no external verification was needed. No external source is claimed to have supplied an AHSS realization. The original literature references remain orientation, not an unverified proof premise.
+
+Updated only this item and its owning manifest/contracts and consumer dependency records. Refreshed `briefs/tasks/frontier-dependency-ledger.md` through the owning cross-batch record and the ledger refresh command. No supplier, published content, judge record or pass stamp was edited.
+
+Validation: focused precheck PASS, 1 checked/0 failing; strict proof contract 0 errors/0 warnings. Queue-status before recording showed all positions 1–42 current. No unresolved mathematical obligation remains for this conditional extension statement. Next action after successful recording: position 44.

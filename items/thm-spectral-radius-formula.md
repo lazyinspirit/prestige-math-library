@@ -5,7 +5,7 @@ title: Spectral radius formula
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectral-radius, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-unital-banach-algebra, lem-neumann-series, lem-resolvent-identity, thm-resolvent-is-banach-valued-holomorphic, thm-cauchy-integral-formula-higher-derivatives, thm-circle-integrals-of-integer-monomials, cor-norm-recovered-from-the-dual-unit-ball, lem-submultiplicative-root-limit, lem-nth-root-of-constant-tends-to-one, thm-polynomial-spectral-mapping, def-axiom-of-choice]
+deps: ["def-spectral-radius", "def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-unital-banach-algebra", "lem-neumann-series", "lem-resolvent-identity", "thm-resolvent-is-banach-valued-holomorphic", "thm-cauchy-integral-formula-higher-derivatives", "thm-circle-integrals-of-integer-monomials", "cor-norm-recovered-from-the-dual-unit-ball", "lem-submultiplicative-root-limit", "lem-nth-root-of-constant-tends-to-one", "thm-polynomial-spectral-mapping", "def-axiom-of-choice", "cor-ml-estimate-for-complex-line-integrals"]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -27,9 +27,9 @@ complex Banach algebra and let $a \in A$, with spectral radius $r(a)$
 
 $$r(a) \;=\; \lim_{n\to\infty}\|a^n\|^{1/n} \;=\; \inf_{n \ge 1}\|a^n\|^{1/n},$$
 
-with the convention $a^0 = 1$ and $\|a^0\|^{1/0}$ not used. The Axiom of Choice
+Here the root sequence means $v_j=\|a^{j+1}\|^{1/(j+1)}$ for $j\in\mathbb N$; $a^0=1$, and no zeroth root is used. The Axiom of Choice
 is used only through the spectrum nonemptiness and Hahn–Banach content of
-[[def-spectral-radius]] and [[cor-norm-recovered-from-the-dual-unit-ball]]; the
+[[def-spectral-radius]], [[cor-norm-recovered-from-the-dual-unit-ball]] and the declared polynomial spectral-mapping supplier; the
 analytic estimate itself is choice-free.
 
 ## Facts & Assumptions
@@ -50,23 +50,25 @@ analytic estimate itself is choice-free.
 
 [L7] For every $x$ in a complex normed space, $\|x\| = \sup\{|\varphi(x)| : \varphi \in X^*,\ \|\varphi\| \le 1\}$ ([[cor-norm-recovered-from-the-dual-unit-ball]]).
 
-[L8] If $u_n \ge 0$ and $u_{m+n} \le u_mu_n$ for all $m,n \ge 1$, then $\lim_n u_n^{1/n} = \inf_n u_n^{1/n}$ ([[lem-submultiplicative-root-limit]]).
+[L8] With roots interpreted as the zero-based sequence $u_{j+1}^{1/(j+1)}$, if $u_n \ge 0$ and $u_{m+n} \le u_mu_n$ for all $m,n \ge 1$, then $\lim_n u_n^{1/n} = \inf_n u_n^{1/n}$ ([[lem-submultiplicative-root-limit]]).
 
 [L9] For every polynomial $p$, $\sigma_A(p(a)) = p(\sigma_A(a))$, so in particular $\sigma_A(a^n) = \{\lambda^n : \lambda \in \sigma_A(a)\}$ for $n \ge 1$ ([[thm-polynomial-spectral-mapping]]).
 
 [L10] $r(a) = \max\{|z| : z \in \sigma_A(a)\}$ and $r(b) \le \|b\|$ for every $b \in A$ ([[def-spectral-radius]]).
 
-[L11] For every $c > 0$ one has $c^{1/n} \to 1$ ([[lem-nth-root-of-constant-tends-to-one]]).
+[L11] For every $c > 0$ the sequence $d_j=c^{1/(j+1)}$, $j\in\mathbb N$, converges to $1$ ([[lem-nth-root-of-constant-tends-to-one]]).
 
-[AC] The standing hypothesis is the Axiom of Choice, used through [L10] and [L7] and nowhere else ([[def-axiom-of-choice]]).
+[L12] For a rectifiable contour, the modulus of the integral is at most its length times an upper bound for the integrand modulus ([[cor-ml-estimate-for-complex-line-integrals]]).
+
+[A1] The standing hypothesis is the Axiom of Choice, used through [L10], [L7] and the declared [L9] interface ([[def-axiom-of-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Since $z \mapsto z1-a$ is linear, for $z \ne 0$ one has $1 - za = -z\,(a - z^{-1}1)$; hence $1-za$ is invertible exactly when $a - z^{-1}1$ is, that is exactly when $z^{-1} \in \rho_A(a)$. [L1, L3, algebra]
+1.1 First, if $a=0$, then $r(a)=0$ by $0\le r(a)\le\|a\|$ in [L10], and every positive power and root norm is zero, proving the formula. In the remainder assume $a\ne0$, so $\|a\|>0$ and divisions by this number are legitimate. For $z\ne0$ one has $1 - za = -z\,(a - z^{-1}1)$; hence $1-za$ is invertible exactly when $a - z^{-1}1$ is, that is exactly when $z^{-1} \in \rho_A(a)$. [L1, L3, L10, A1, algebra]
 
-1.2 For every $n \ge 1$ one has $\|a^{m+n}\| \le \|a^m\|\,\|a^n\|$ for all $m,n \ge 1$, so the sequence $u_n := \|a^n\|$ is submultiplicative and nonnegative. [L1, algebra]
+1.2 For every $n \ge 1$ one has $\|a^{m+n}\| \le \|a^m\|\,\|a^n\|$ for all $m,n \ge 1$, so the positive-indexed family $u_n:=\|a^n\|$ is submultiplicative and nonnegative, and its root sequence is $v_j=u_{j+1}^{1/(j+1)}$ for $j\ge0$. [L1, algebra]
 
 1.3 For every $n \ge 1$, [L9] gives $\sigma_A(a^n) = \{\lambda^n : \lambda \in \sigma_A(a)\}$, hence by [L10] applied to $a^n$ and the multiplicativity of the modulus, $r(a^n) = \max\{|\lambda|^n : \lambda \in \sigma_A(a)\} = r(a)^n$; and $r(a^n) \le \|a^n\|$ by the last clause of [L10], so $r(a)^n \le \|a^n\|$. [L9, L10, algebra]
 
@@ -80,12 +82,12 @@ analytic estimate itself is choice-free.
 
 5.1 Let $\varphi \in A^*$ be a bounded linear functional and let $g := \varphi \circ h : D_R \to \mathbb C$. Since $h$ is holomorphic by [step 4.1] and $\varphi$ is continuous linear, $g$ is holomorphic on $D_R$ with $g'(z) = \varphi(h'(z))$. [step 4.1, L4, algebra]
 
-6.1 Fix $R'$ with $r(a) < R' < R$ and put $D_{R'} := \{z : |z| < 1/R'\}$. The argument of steps 2.2-4.1 with $R'$ in place of $R$ shows that $h$ is holomorphic on $D_{R'}$; since $1/R < 1/R'$, the disc $D_{R'}$ contains the closed disc of radius $1/R$ around $0$, so [L5] applies to $g$ with $\rho = 1/R$ and gives $g^{(n)}(0) = \frac{n!}{2\pi i}\int_{|\zeta|=1/R}g(\zeta)\zeta^{-n-1}\,d\zeta$ for every $n \ge 0$. [step 2.2, step 5.1, L5]
+6.1 Fix $R'$ with $r(a) < R' < R$ and put $D_{R'} := \{z : |z| < 1/R'\}$. The argument of steps 2.2-4.1 with $R'$ in place of $R$ shows that $h$ is holomorphic on $D_{R'}$; since $1/R < 1/R'$, the disc $D_{R'}$ contains the closed disc of radius $1/R$ around $0$, the same inverse formula extends $h$ consistently, and $g=\varphi\circ h$ extends by that formula as well. Thus [L5] applies to this extended $g$ with $\rho = 1/R$ and gives $g^{(n)}(0) = \frac{n!}{2\pi i}\int_{|\zeta|=1/R}g(\zeta)\zeta^{-n-1}\,d\zeta$ for every $n \ge 0$. [step 2.2, step 4.1, step 5.1, L5]
 
-7.1 For $0 < \rho < \min(1/R,\,1/\|a\|)$ the series of [step 2.1] converges uniformly on the circle $|\zeta| = \rho$, so $g(\zeta) = \varphi((1-\zeta a)^{-1}) = \sum_{k\ge0}\varphi(a^k)\zeta^k$ uniformly there, and integrating term by term using [L6] gives $g^{(n)}(0) = n!\,\varphi(a^n)$ for every $n \ge 0$. [step 6.1, step 2.1, L6, algebra]
+7.1 For $0 < \rho < \min(1/R,\,1/\|a\|)$ the series of [step 2.1] converges uniformly on the circle $|\zeta| = \rho$, so $g(\zeta) = \varphi((1-\zeta a)^{-1}) = \sum_{k\ge0}\varphi(a^k)\zeta^k$ uniformly there, and [L5] also applies on this smaller circle. For fixed $n$, the uniform remainder after multiplying by $\zeta^{-n-1}$ is bounded by $\|\varphi\|\rho^{-n-1}(\rho\|a\|)^{N+1}/(1-\rho\|a\|)$, which tends to zero. By [L12] its integral tends to zero. Integrating the finite sums and using [L6] therefore gives $g^{(n)}(0) = n!\,\varphi(a^n)$ for every $n \ge 0$. [step 6.1, step 2.1, L2, L5, L6, L12, algebra]
 
-8.1 Norm estimate for the coefficients: for $n \ge 0$, by [step 7.1] and the integral formula of [step 6.1], $|\varphi(a^n)| = \frac{1}{2\pi}\left|\int_{|\zeta|=1/R}g(\zeta)\zeta^{-n-1}d\zeta\right| \le \left(\sup_{|\zeta|=1/R}\|h(\zeta)\|\right)\|\varphi\|\,R^n$; the supremum is finite because [step 6.1] places the circle $|\zeta|=1/R$ as a compact subset of the larger disc $D_{R'}$, on which the argument of [step 4.1] makes $h$ holomorphic and hence continuous. [step 6.1, step 7.1, step 4.1, L4, algebra]
+8.1 Norm estimate for the coefficients, using [L12] on the circle of length $2\pi/R$: for $n \ge 0$, by [step 7.1] and the integral formula of [step 6.1], $|\varphi(a^n)| = \frac{1}{2\pi}\left|\int_{|\zeta|=1/R}g(\zeta)\zeta^{-n-1}d\zeta\right| \le \left(\sup_{|\zeta|=1/R}\|h(\zeta)\|\right)\|\varphi\|\,R^n$; the supremum is finite because [step 6.1] places the circle $|\zeta|=1/R$ as a compact subset of the larger disc $D_{R'}$, on which the argument of [step 4.1] makes $h$ holomorphic and hence continuous. [step 6.1, step 7.1, step 4.1, L4, L12, algebra]
 
-9.1 Put $C_R := \sup_{|\zeta| = 1/R}\|h(\zeta)\| < \infty$. Taking the supremum in [step 8.1] over all $\varphi$ with $\|\varphi\| \le 1$ and using [L7] gives $\|a^n\| \le C_RR^n$ for every $n \ge 0$; hence $\|a^n\|^{1/n} \le C_R^{1/n}R$ for $n \ge 1$, and since $C_R^{1/n} \to 1$ by [L11], the limit superior satisfies $\limsup_n\|a^n\|^{1/n} \le R$ for every $R > r(a)$, so $\limsup_n\|a^n\|^{1/n} \le r(a)$. [step 8.1, L7, L11, algebra]
+9.1 Put $C_R := \sup_{|\zeta| = 1/R}\|h(\zeta)\| < \infty$. This constant is positive because $h(1/R)$ is invertible and therefore nonzero. Taking the supremum in [step 8.1] over all $\varphi$ with $\|\varphi\| \le 1$ and using [L7] gives $\|a^n\| \le C_RR^n$ for every $n \ge 0$; hence $v_j\le R C_R^{1/(j+1)}$ for every $j\ge0$. By [L8] and step 1.2, $v_j$ has a real limit $Q$ equal to the stated infimum. By [L11], $C_R^{1/(j+1)}\to1$, and passing to these real limits gives $Q\le R$. (If $Q>R$, convergence of both sequences would contradict their termwise inequality.) Since this holds for every $R>r(a)$, $Q\le r(a)$: otherwise choose $R=(Q+r(a))/2$. [step 8.1, step 1.2, L7, L8, L11, algebra]
 
-10.1 By [L8] applied to the submultiplicative sequence $u_n = \|a^n\|$ of [step 1.2], the limit $Q := \lim_n\|a^n\|^{1/n} = \inf_n\|a^n\|^{1/n}$ exists; [step 9.1] gives $Q \le r(a)$, while [step 1.3] gives $\|a^n\|^{1/n} \ge r(a)$ for every $n$, hence $Q \ge r(a)$. Therefore $Q = r(a)$ and the formula holds. [step 1.2, step 1.3, step 9.1, L8] ∎
+10.1 By [L8] applied to the submultiplicative family $u_n = \|a^n\|$ of [step 1.2], the limit $Q := \lim_j v_j = \inf_n\|a^n\|^{1/n}$ exists; [step 9.1] gives $Q \le r(a)$, while [step 1.3] gives $\|a^n\|^{1/n} \ge r(a)$ for every $n$, hence $Q \ge r(a)$. Therefore $Q = r(a)$ and the formula holds for $a\ne0$; step 1.1 already proved the zero case. [step 1.1, step 1.2, step 1.3, step 9.1, L8] ∎

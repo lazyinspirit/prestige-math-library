@@ -27,7 +27,7 @@ Borel measure and a continuous Hermitian positive semidefinite kernel $k$, the
 reproducing-kernel space of $k$ is separable, the inclusion $J$ into $L^2$ is
 Hilbert–Schmidt, the operator factors as $T_k=JJ^*$, and hence
 $\operatorname{tr}(T_k)=\int_Xk(x,x)\,d\mu(x)$; the example also records that an
-arbitrary $L^2$-kernel has no pointwise diagonal and that continuity without
+arbitrary $L^2$-kernel need not determine diagonal values and that continuity without
 positivity does not give trace class.
 
 Boundary phenomena are collected as three separating counterexamples and one

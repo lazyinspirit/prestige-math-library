@@ -5,7 +5,7 @@ title: Cartan involution of a real semisimple Lie algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-killing-form-of-a-finite-dimensional-lie-algebra]
+deps: [def-killing-form-of-a-finite-dimensional-lie-algebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -39,5 +39,5 @@ anti-fixed subspaces respectively, and $B_\theta$ being positive definite makes
 the decomposition orthogonal for $B$ with $B$ negative definite on
 $\mathfrak k_0$ and positive definite on $\mathfrak p_0$
 ([[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]]).
-Existence of Cartan involutions is proved in
-[[thm-existence-of-a-cartan-involution]].
+Under the Axiom of Choice ([[def-axiom-of-choice]]), existence of Cartan
+involutions is proved in [[thm-existence-of-a-cartan-involution]].

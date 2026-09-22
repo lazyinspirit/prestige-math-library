@@ -5,8 +5,9 @@ title: Spectrum and resolvent set in a Banach algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-invertible-element-and-general-linear-group-of-a-banach-algebra]
+deps: ["def-invertible-element-and-general-linear-group-of-a-banach-algebra", "def-unital-banach-algebra", "def-axiom-of-choice"]
 justified_by: []
+axiom_strength: "ZF for the definition; the forward nonemptiness remark explicitly assumes AC."
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -43,14 +44,22 @@ $$(z1-a)R(z,a) = R(z,a)(z1-a) = 1 ,$$
 
 and it is the unique element with these properties. The subscript in
 $\sigma_A(a)$ and $\rho_A(a)$ records the ambient algebra: if $B \subseteq A$
-is a unital subalgebra containing $a$ and $1$, then $\sigma_A(a)$ and
-$\sigma_B(a)$ can differ, and the smaller spectrum contains the larger one.
+is a closed unital subalgebra containing $a$ and having the same unit, then
+$B$ is itself a unital complex Banach algebra in the inherited norm, so both
+spectra are defined. They can differ, and the spectrum in the smaller algebra
+contains the spectrum in the larger one:
+$\sigma_B(a)\supseteq\sigma_A(a)$.
+
+The zero algebra is excluded by the unital-algebra convention. For $a=0$,
+$\sigma_A(0)=\{0\}$: $z1$ has inverse $z^{-1}1$ for $z\ne0$, whereas
+$0$ cannot have a two-sided inverse since $1\ne0$.
 
 ## Remarks
 
 - **The ambient algebra is always part of the data.** Every use of a spectrum
-  below states the algebra in which it is computed. For $a \in A$ and a unital
-  subalgebra $B \subseteq A$ with $a \in B$, containment of the invertible
+  below states the algebra in which it is computed. For $a \in A$ and a closed
+  unital subalgebra $B \subseteq A$ with $a \in B$ and the same unit,
+  containment of the invertible
   groups $B^{\times} \subseteq A^{\times}$ gives
   $\sigma_B(a) \supseteq \sigma_A(a)$, and the companion page exhibits a case
   where the inclusion is strict
@@ -68,12 +77,13 @@ $\sigma_B(a)$ can differ, and the smaller spectrum contains the larger one.
   inverse-closed, so no agreement with that algebra is asserted
   (`ex-bounded-operators-form-a-noncommutative-banach-algebra`).
 
-- **The spectrum is a closed bounded set, and it is nonempty.** The map
+- **The spectrum is closed and bounded; under AC it is nonempty.** The map
   $z \mapsto z1 - a$ is continuous and $A^{\times}$ is open
   ([[thm-invertible-group-is-open-and-inversion-is-continuous]]), so
   $\rho_A(a)$ is open and $\sigma_A(a)$ is closed. The Neumann series gives
   $\{z : |z| > \|a\|\} \subseteq \rho_A(a)$ and hence bounds the spectrum by
-  $\|a\|$; that the spectrum cannot be empty is the substance of
+  $\|a\|$; under the Axiom of Choice ([[def-axiom-of-choice]]), the nonempty-spectrum
+  conclusion is the substance of
   [[thm-spectrum-is-nonempty-compact-and-norm-bounded]]. Nothing in the present
   definition assumes either conclusion.
 
@@ -81,7 +91,8 @@ $\sigma_B(a)$ can differ, and the smaller spectrum contains the larger one.
   order of the factors the resolvent identity reads
   $R(z,a) - R(w,a) = (w-z)R(z,a)R(w,a)$ and the derivative of the resolvent
   map is $-R(z,a)^2$ ([[lem-resolvent-identity]],
-  [[thm-resolvent-is-banach-valued-holomorphic]]). The opposite sign convention
-  would reverse the roles of $z$ and $w$ throughout.
+  [[thm-resolvent-is-banach-valued-holomorphic]]). For the opposite convention $\widetilde R(z,a)=(a-z1)^{-1}=-R(z,a)$,
+  the identity has factor $z-w$ and the derivative is
+  $+\widetilde R(z,a)^2$.
 
 - **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

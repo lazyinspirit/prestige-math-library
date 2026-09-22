@@ -1,7 +1,7 @@
 ---
 id: rem-baire-category-choice-strength
 kind: remark
-title: "The Baire category theorem is four inequivalent statements over ZF"
+title: "Choice strengths of Baire category principles over ZF"
 status: published
 origin: session
 proved_here: false
@@ -28,8 +28,14 @@ sources:
       url: "https://www.cambridge.org/core/journals/journal-of-the-london-mathematical-society/article/abs/baire-category-property-and-some-notions-of-compactness/5C6265B552C8D43D21F16C60802D6109"
     - title: "A. Blass, Injectivity, projectivity, and the axiom of choice, Trans. Amer. Math. Soc. 255 (1979), 31-59 (Section 7: DMC, 'every tree has a subtree whose levels are finite')"
       url: "https://doi.org/10.1090/S0002-9947-1979-0542870-6"
-    - title: "E. Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice, Proc. Amer. Math. Soc. 147 (2019), 4029-4038 (introduction: DMC is strictly weaker than each of DC and MC)"
+    - title: "E. Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice, Proc. Amer. Math. Soc. 147 (2019), 4029-4038"
       url: "https://doi.org/10.1090/proc/14590"
+    - title: "J. Dodu and M. Morillon, The Hahn-Banach Property and the Axiom of Choice"
+      url: "https://lim.univ-reunion.fr/staff/mar/dodu.pdf"
+      locator: "Section 7, printed p. 10"
+    - title: "Marianne Morillon, Axiom of Choice"
+      url: "https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf"
+      locator: "Section 2.1, Question 1, printed p. 6"
 pipeline_run: null
 ---
 
@@ -52,22 +58,25 @@ ZF this is equivalent to the principle "every tree has a subtree all of whose
 levels are finite", introduced by Blass (1979) and known as **dependent multiple
 choice (DMC)**. The equivalence is Fossy and Morillon (1998).
 
-**Separating them.** DMC is strictly weaker than each of DC and the axiom of
-multiple choice, in ZF and in ZFA alike, so BCT-metric and BCT-compact-Hausdorff
-are genuinely different assumptions. The Boolean prime ideal theorem does not
-imply DMC either, and so does not give BCT-compact-Hausdorff. The ground for that
-last point is recorded elsewhere on this page: DMC implies Urysohn's lemma
+**Comparing them.** DC implies DMC over ZF, but whether DMC implies DC over ZF
+is open, so no ZF strictness between BCT-metric and BCT-compact-Hausdorff is
+asserted here. In ZFA, Fraenkel's second model satisfies DMC and refutes DC, so
+the two principles are separated there. The Boolean prime ideal theorem does
+not imply DMC over ZF, and so does not give BCT-compact-Hausdorff. The ground for
+that last point is recorded elsewhere on this page: DMC implies Urysohn's lemma
 (Blass 1979) while BPI does not (Brunner 1983, in the Mostowski linearly ordered
 model). The same pair shows DMC is not itself a theorem of ZF, since Urysohn's
 lemma is not.
 
 **If ZF is consistent**, none of these principles is a theorem of ZF except
-BCT-separable, and the non-implications listed are witnessed by models.
+BCT-separable. The ZF nonimplication from BPI to DMC and the ZFA nonimplication
+from DMC to DC are witnessed by models; no ZF separation of DMC from DC is
+claimed.
 
 ## Remarks
 
-- **Where the DMC separations are recorded.** The two facts about DMC used in
-  "Separating them" are the ones stated in
+- **Where the BPI separation is recorded.** The two facts about DMC used for
+  the BPI comparison are the ones stated in
   [[rem-urysohn-lemma-not-a-zf-theorem]]: Blass's implication from DMC to
   Urysohn's lemma, and Brunner's model in which BPI holds and Urysohn's lemma
   fails.
@@ -98,6 +107,7 @@ BCT-separable, and the non-implications listed are witnessed by models.
   not state it.
 
 - **Conditional discipline.** The unprovability and non-implication clauses are
-  relative to the consistency of ZF. The two equivalences are ordinary ZF
-  theorems and need no consistency hypothesis; they are on this page because
-  their proofs, not their status, are out of reach here.
+  relative to the consistency of their ambient base theory. The two
+  equivalences and the implication from DC to DMC are ordinary ZF theorems and
+  need no consistency hypothesis; they are on this page because their proofs,
+  not their status, are out of reach here.

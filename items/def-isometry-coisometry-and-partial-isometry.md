@@ -9,6 +9,11 @@ deps: [thm-hilbert-adjoint-properties, thm-orthogonal-decomposition-by-a-closed-
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "John B. Conway, A Course in Functional Analysis, 2nd ed., Chapter IX §3, printed pp.239–243"

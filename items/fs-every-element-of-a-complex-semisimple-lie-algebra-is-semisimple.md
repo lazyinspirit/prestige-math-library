@@ -9,6 +9,11 @@ deps: [def-special-linear-lie-algebra-sl-two, def-semisimple-and-nilpotent-endom
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II"

@@ -10,6 +10,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 p.71, Lemma 3.4"
@@ -39,11 +44,11 @@ on $C([a,b],\mathbb K)$ ([[def-compact-linear-operator]]).
 
 ## Facts & Assumptions
 
-[A1] The square $[a,b]\times[a,b]$ is a compact subset of $\mathbb R^2$ ([[thm-heine-borel-rn]], [[lem-metrics-on-rn]]); a continuous function on a compact metric space is uniformly continuous ([[thm-heine-cantor-metric]]) and bounded, and a continuous real function on a nonempty compact space attains a maximum ([[thm-extreme-value-metric]], [[def-bounded-set]], [[def-complete-ordered-field]]).
+[A1] The square $[a,b]\times[a,b]$ is a compact subset of $\mathbb R^2$ ([[thm-heine-borel-rn]], [[lem-metrics-on-rn]]); a continuous function on a compact metric space is uniformly continuous ([[thm-heine-cantor-metric]]) and bounded in modulus (apply the real extreme-value theorem to the continuous function $|k|$), and a continuous real function on a nonempty compact space attains a maximum ([[thm-extreme-value-metric]], [[def-bounded-set]], [[def-complete-ordered-field]]).
 
-[A2] For a real continuous $g$ on $[a,b]$ the Riemann integral exists and the uniform estimate $|\int_a^b u-\int_a^b v|\le\eta(b-a)$ holds whenever $|u-v|\le\eta$ ([[thm-continuous-implies-integrable]], [[lem-uniform-integral-error-bound]]); complex-valued functions use the real-and-imaginary-part Riemann convention in the example, and the complex modulus satisfies the triangle inequality $|z+w|\le|z|+|w|$, $|\operatorname{Re}z|\le|z|$ and $|\operatorname{Im}z|\le|z|$ ([[lem-complex-conjugation-and-modulus-laws]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).
+[A2] For a real continuous $g$ on $[a,b]$ the Riemann integral exists and the uniform estimate $|\int_a^b u-\int_a^b v|\le\eta(b-a)$ holds for real Riemann-integrable $u,v$ and $\eta\ge0$ whenever $|u-v|\le\eta$ ([[thm-continuous-implies-integrable]], [[lem-uniform-integral-error-bound]]); complex-valued functions use the real-and-imaginary-part Riemann convention in the example, and the complex modulus satisfies the triangle inequality $|z+w|\le|z|+|w|$, $|\operatorname{Re}z|\le|z|$ and $|\operatorname{Im}z|\le|z|$ ([[lem-complex-conjugation-and-modulus-laws]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).
 
-[A3] For a nonempty compact metric space $K$, the closure in the supremum metric of a family $F\subseteq C(K,\mathbb R)$ is compact if and only if $F$ is equicontinuous and pointwise bounded ([[thm-arzela-ascoli-for-real-ck]]); under $\mathrm{AC}_\omega$ and DC every equicontinuous pointwise bounded sequence in $C(K,\mathbb R)$ has a uniformly convergent subsequence ([[cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence]], [[def-equicontinuity-and-boundedness-in-ck]]). Under the same two hypotheses, compactness, sequential compactness and "complete and totally bounded" agree for metric spaces ([[thm-metric-compactness-equivalences]]).
+[A3] Under $\mathrm{AC}_\omega$ and DC, for a nonempty compact metric space $K$, the closure in the supremum metric of a family $F\subseteq C(K,\mathbb R)$ is compact if and only if $F$ is equicontinuous and pointwise bounded ([[thm-arzela-ascoli-for-real-ck]]); under $\mathrm{AC}_\omega$ and DC every equicontinuous pointwise bounded sequence in $C(K,\mathbb R)$ has a uniformly convergent subsequence ([[cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence]], [[def-equicontinuity-and-boundedness-in-ck]]). Under the same two hypotheses, compactness, sequential compactness and "complete and totally bounded" agree for metric spaces ([[thm-metric-compactness-equivalences]]).
 
 [A4] $\mathrm{DC}$ implies $\mathrm{AC}_\omega$ ([[lem-dependent-choice-implies-countable-choice]], [[def-countable-choice]], [[def-dependent-choice]]), and a countable selection of approximating elements of a closure uses $\mathrm{AC}_\omega$ ([[def-metric-compactness]], [[def-metric-convergence]], [[def-sequence]], [[lem-index-map-grows]]).
 
@@ -57,7 +62,7 @@ on $C([a,b],\mathbb K)$ ([[def-compact-linear-operator]]).
 
 1.1 For every $f\in C([a,b],\mathbb K)$ the function $\mathcal Kf$ is well defined and continuous, and $\|\mathcal Kf\|_\infty\le 2M(b-a)\|f\|_\infty$: for real scalars the sharper bound without the factor $2$ is the uniform integral estimate of [A2] applied to $y\mapsto k(x,y)f(y)$; for complex scalars the real and imaginary parts of the integrand are continuous, each has absolute value at most $M\|f\|_\infty$, and [A2] bounds each real integral by $M(b-a)\|f\|_\infty$, so the complex triangle inequality gives the displayed factor $2$. Continuity in $x$ follows from the uniform continuity of $k$ on the square and the same real-component estimates. Linearity follows componentwise from real Riemann-integral linearity ([[thm-linearity-of-the-integral]]), so this bound also makes $\mathcal K$ a bounded linear operator. [A1, A2, algebra]
 
-2.1 For all $f$ and all $x,x'\in[a,b]$ one has $|\mathcal Kf(x)-\mathcal Kf(x')|\le2(b-a)\,\omega(x,x')\|f\|_\infty$, where $\omega(x,x')=\sup_{y\in[a,b]}|k(x,y)-k(x',y)|$ and $\omega(x,x')\to0$ as $|x-x'|\to0$ uniformly in $y$, by the uniform continuity of $k$ on the square; the factor $2$ covers the complex real-and-imaginary-part estimate and is harmless in the real case. In particular the family $F:=\{\mathcal Kf:\|f\|_\infty\le1\}$ is equicontinuous in the sense of [A3] and pointwise bounded with $|\mathcal Kf(x)|\le2M(b-a)$. [step 1.1, A1, A2, algebra]
+2.1 For all $f$ and all $x,x'\in[a,b]$ one has $|\mathcal Kf(x)-\mathcal Kf(x')|\le2(b-a)\,\omega(x,x')\|f\|_\infty$, where $\omega(x,x')=\sup_{y\in[a,b]}|k(x,y)-k(x',y)|$ and $\omega(x,x')\to0$ as $|x-x'|\to0$ uniformly in $y$, by the uniform continuity of $k$ on the square; the factor $2$ covers the complex real-and-imaginary-part estimate and is harmless in the real case. In particular the family $F:=\{\mathcal Kf:\|f\|_\infty\le1\}$ is equicontinuous (with complex modulus in the complex case, so both real component families satisfy [A3]) and pointwise bounded with $|\mathcal Kf(x)|\le2M(b-a)$. [step 1.1, A1, A2, algebra]
 
 3.1 In the real case $\mathbb K=\mathbb R$ the closure of $F$ in the supremum metric is compact by [A3] and [step 2.1], hence $\mathcal K$ is compact by [A5]. [step 2.1, A3, A5]
 

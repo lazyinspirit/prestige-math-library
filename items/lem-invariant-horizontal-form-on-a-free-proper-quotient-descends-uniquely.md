@@ -9,6 +9,11 @@ deps: [thm-free-proper-action-quotient-manifold, prop-tangent-space-of-a-free-pr
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: John M. Lee, Introduction to Smooth Manifolds, 2nd ed.

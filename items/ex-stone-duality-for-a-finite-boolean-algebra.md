@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Marcus Tressl, Stone Duality for Boolean Algebras — Theorem 2.3.4, pp. 9–10, and Theorem 3.1.5, pp. 11–12; the finite computation is supplied locally"
@@ -40,7 +45,10 @@ hence $u\le\neg b$, giving $\neg b\in U$; both cannot lie in a proper filter.
 The principal filter $\uparrow\!\{i\} = \{S : i \in S\}$ is an ultrafilter of
 $\mathcal P(\{1,2,3\})$ by this criterion.
 
-[L2] An atom of a Boolean algebra $B$ is a minimal nonzero element; a finite Boolean algebra has atoms, and every element is the join of the atoms below it. [algebra]
+[L2] An atom of a Boolean algebra $B$ is a minimal nonzero element. Every
+nontrivial finite Boolean algebra has atoms, and every element is the join of
+the atoms below it. In the trivial algebra the atom set is empty and its sole
+element $0=1$ is the empty join. [algebra]
 
 ## Verification
 
@@ -50,7 +58,7 @@ $\mathcal P(\{1,2,3\})$ by this criterion.
 
 1.2 Consequently $\operatorname{Ult}(B) = \{\uparrow\!\{1\}, \uparrow\!\{2\}, \uparrow\!\{3\}\}$ has three points, and the basic open sets $[S] = \{U : S \in U\}$ are in bijection with the subsets $S \subseteq \{1,2,3\}$ through $S \leftrightarrow \{i : i \in S\}$; in particular every subset of the three-point space is basic open, so the topology is discrete and $\operatorname{Clop}(\operatorname{Ult}(B)) = \mathcal P(\operatorname{Ult}(B))$ has eight elements, matching $|B| = 8$. [1.1, algebra]
 
-2.1 For a general finite Boolean algebra: by [L2] the atoms $a$ of $B$ satisfy $a \wedge a' = 0$ for distinct atoms, every $b \in B$ is the join of the atoms below it, and the map $b \mapsto \{a \text{ atom} : a \le b\}$ is a bijection onto the power set of the atom set preserving joins, meets and complements; hence $B \cong \mathcal P(\mathrm{Atoms}(B))$ and, by [step 1.1] applied with the finite atom set in place of $\{1,2,3\}$, the ultrafilters are the principal ones at the atoms, so the Stone space of $B$ is the finite discrete space on the atoms. [1.1, L2, algebra] ∎
+2.1 Let $B$ be a general finite Boolean algebra. If $B$ is trivial, then $\mathrm{Atoms}(B)=\varnothing$, the unique map $B\to\mathcal P(\varnothing)$ is an isomorphism, and both $B$ and $\mathcal P(\varnothing)$ have no ultrafilters; their Stone space is the empty discrete space. If $B$ is nontrivial, [L2] says that distinct atoms have meet $0$ and every $b\in B$ is the join of the atoms below it. Thus $b\mapsto\{a\text{ atom}:a\le b\}$ is a bijection onto the power set of the finite atom set and preserves joins, meets and complements. Hence $B\cong\mathcal P(\mathrm{Atoms}(B))$; the argument of [step 1.1], with the finite nonempty atom set in place of $\{1,2,3\}$, says its ultrafilters are the principal ones at atoms, so its Stone space is finite and discrete. [step 1.1, L2, algebra] ∎
 
 ## Remarks
 

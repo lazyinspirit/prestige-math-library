@@ -5,7 +5,7 @@ title: Cartan decomposition identifies p with the noncompact symmetric space
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-riemannian-symmetric-pair-of-noncompact-type, thm-quotient-manifold-by-a-closed-lie-subgroup, def-homogeneous-space-of-a-lie-group, def-axiom-of-choice, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]
+deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-riemannian-symmetric-pair-of-noncompact-type, thm-quotient-manifold-by-a-closed-lie-subgroup, def-axiom-of-choice, cor-local-normal-form-for-submersions, prop-exponential-scales-one-parameter-subgroups]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -33,24 +33,20 @@ the closed subgroup $K$
 
 **Given:** The Axiom of Choice; a connected real semisimple Lie group $G$ with finite center, a global Cartan involution $\Theta$, $K=G^\Theta$, the Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, and the quotient map $q:G\to G/K$.
 
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it is inherited from [L1] and [L2].
+[A1] The Axiom of Choice is assumed ([[def-axiom-of-choice]]), supplying L1 and the countable-choice assumptions of L2 and L3.
 
 [L1] The map $K\times\mathfrak p_0\to G$, $(k,X)\mapsto k\exp X$, is a diffeomorphism; $K$ is closed with Lie algebra $\mathfrak k_0$ ([[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]]).
 
-[L2] $G/K$ has a unique smooth structure for which $q$ is a surjective submersion and the left $G$-action is smooth, with $\dim(G/K)=\dim G-\dim K$; the differential of $q$ at the identity identifies $T_{eK}(G/K)$ with $\mathfrak g_0/\mathfrak k_0$, and the projection $\mathfrak g_0\to\mathfrak g_0/\mathfrak k_0$ restricts to an isomorphism $\mathfrak p_0\to\mathfrak g_0/\mathfrak k_0$ ([[thm-quotient-manifold-by-a-closed-lie-subgroup]], [[def-homogeneous-space-of-a-lie-group]], [[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]]).
+[L2] The quotient map $q:G\to G/K$ is a surjective smooth submersion ([[thm-quotient-manifold-by-a-closed-lie-subgroup]]). Local submersion coordinates have the form $(u,v)\mapsto u$ ([[cor-local-normal-form-for-submersions]]).
+
+[L3] For real $s,t$, $\exp((s+t)X)=\exp(sX)\exp(tX)$, so $\exp(-X)=\exp(X)^{-1}$ ([[prop-exponential-scales-one-parameter-subgroups]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 $\Phi$ is smooth: it is the composition of the smooth exponential map $\mathfrak p_0\to G$, $X\mapsto\exp X$, with the quotient map $q$, both smooth by [L1] and [L2]. [L1, L2]
+1.1 Let $D:K\times\mathfrak p_0\to G$ be $D(k,X)=k\exp X$. Define $D_R:\mathfrak p_0\times K\to G$ by $D_R(X,k)=\exp X\,k$. It is a diffeomorphism: explicitly $D_R(X,k)=D(k^{-1},-X)^{-1}$ by [L3], a composition of $D$ with the product diffeomorphism $(X,k)\mapsto(k^{-1},-X)$ and the smooth inversion diffeomorphism of $G$. Thus every $g$ is uniquely $\exp X\,k$, and its first coordinate $F(g)=X$ is smooth. [L1, L3, algebra]
 
-1.2 $\Phi$ is surjective: given $gK$, write $g=k\exp X$ with $k\in K$, $X\in\mathfrak p_0$ by [L1]; then $gK=k\exp(X)K=k\exp(X)k^{-1}K=\exp(\operatorname{Ad}_kX)K$, and $\operatorname{Ad}_kX\in\mathfrak p_0$ because $K$ preserves $\mathfrak p_0$, so $gK=\Phi(\operatorname{Ad}_kX)$ lies in the image. [L1]
+2.1 For $h\in K$, $gh=\exp X\,(kh)$, so uniqueness gives $F(gh)=F(g)$. Hence $F$ factors as $\overline F\circ q$ for a unique set map $\overline F:G/K\to\mathfrak p_0$. It is smooth: near any quotient point, fix the $v$-coordinate in a local submersion chart of [L2] to obtain a smooth section $s$ of $q$; on that neighborhood $\overline F=F\circ s$. Smoothness is local, so no global section choice is needed. [L2, step 1.1, algebra]
 
-1.3 $\Phi$ is injective: if $\exp(X)K=\exp(X')K$, then $\exp(X)=\exp(X')k$ for some $k\in K$. Since $\exp(X')k=k\exp(\operatorname{Ad}_{k^{-1}}X')$, uniqueness in the global Cartan decomposition [L1], applied to $e\exp X=k\exp(\operatorname{Ad}_{k^{-1}}X')$, gives $k=e$ and $X=X'$. [L1]
-
-1.4 Let $g=k\exp X$ be its unique global Cartan decomposition and define $F(g):=\operatorname{Ad}_kX\in\mathfrak p_0$. The map $F:G\to\mathfrak p_0$ is smooth by [L1]. It is constant on the right $K$-cosets: for $h\in K$, one has $gh=k\exp Xh=kh\exp(\operatorname{Ad}_{h^{-1}}X)$, so uniqueness in [L1] gives $F(gh)=\operatorname{Ad}_{kh}\operatorname{Ad}_{h^{-1}}X=\operatorname{Ad}_kX=F(g)$. Since $q:G\to G/K$ is a quotient submersion, its local smooth sections show that $F$ descends uniquely to a smooth map $\overline F:G/K\to\mathfrak p_0$. [L1, L2]
-
-2.1 The descended map is inverse to $\Phi$. For $Y\in\mathfrak p_0$, the Cartan decomposition of $\exp Y$ is $e\exp Y$, so $\overline F(\Phi(Y))=F(\exp Y)=Y$. Conversely, if $g=k\exp X$, then $\Phi(\overline F(gK))=\exp(\operatorname{Ad}_kX)K=k\exp Xk^{-1}K=k\exp XK=gK$. Thus $\Phi$ is a smooth bijection with smooth inverse $\overline F$. [L1, step 1.1, step 1.4]
-
-3.1 By steps 1.1 and 2.1, $\Phi$ and $\overline F$ are mutually inverse smooth maps. Hence $\Phi$ is a diffeomorphism, as claimed. [L2, step 1.1, step 2.1, A1] ∎
+3.1 The map $\Phi(X)=q(\exp X)$ is smooth by [L1] and [L2]. Uniqueness in step 1.1 gives $F(\exp X)=X$, hence $\overline F\circ\Phi=\operatorname{id}$. Conversely, if $g=\exp X\,k$, then $\Phi(\overline F(gK))=\exp X K=gK$. These smooth maps are mutually inverse, proving the assertion. The zero-dimensional case is included: if $\mathfrak p_0=0$, [L1] gives $G=K$ and both sides are singletons. [L1, L2, step 1.1, step 2.1, algebra, A1] ∎

@@ -5,10 +5,15 @@ title: Schatten p classes
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-absolute-value-and-singular-values-of-a-compact-operator, def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, def-trace-class-operator, thm-singular-value-decomposition-for-compact-operators, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-compact-linear-operator, def-countable-choice]
+deps: [def-absolute-value-and-singular-values-of-a-compact-operator, def-hilbert-schmidt-operator, thm-hilbert-schmidt-operators-are-compact, def-trace-class-operator, thm-singular-value-decomposition-for-compact-operators, def-square-summable-family-on-an-arbitrary-index-set, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-compact-linear-operator, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, Schatten classes"
@@ -49,9 +54,21 @@ and the last sum is the zero-padded singular-value sum
 [[def-hilbert-schmidt-operator]],
 [[thm-parseval-equivalences-for-a-complete-orthonormal-family]],
 [[def-square-summable-family-on-an-arbitrary-index-set]],
-[[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]), so
-that $\|T\|_2=\|T\|_{HS}$ by the basis-independence of the Hilbert–Schmidt norm
-([[thm-hilbert-schmidt-norm-is-basis-independent]]). For $p=+\infty$ one writes
+[[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]), so that, when the common sum is finite, $\|T\|_2=\|T\|_{HS,E}$.
+For clarity, the interchange uses only finite rectangles: every finite subset
+of $E\times J$ lies in the product of its two finite projections, and finitely
+many finite sets of indices have finite union. Thus both iterated nonnegative
+suprema equal the supremum over finite rectangles, even when they are infinite.
+The norm identity for each $Te$ follows first for finite orthogonal sums and
+then by norm convergence of its SVD expansion. Parseval is applied in $H$ to
+$e_j$, with $|\langle e,e_j\rangle|=|\langle e_j,e\rangle|$.
+Conversely, every bounded operator Hilbert–Schmidt relative to $E$ is compact
+by [[thm-hilbert-schmidt-operators-are-compact]], so the same calculation applies
+to it and puts it in $\mathcal S_2(H,K)$. No basis of $K$ is required, and the
+norm retains the notation $\|T\|_{HS,E}$ of its definition. The formula proves
+the same value for every supplied basis of $H$ in this compact-operator setting;
+it does not assert existence of such a basis. Empty singular families and an
+empty domain basis contribute zero. For $p=+\infty$ one writes
 $\mathcal S_\infty(H,K)$ for the compact operators with the operator norm
 $\|T\|_{S_\infty}:=\|T\|=s_1(T)$ ([[def-operator-norm]]).
 

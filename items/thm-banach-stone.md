@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Orr Shalit, Advanced Analysis Notes 14: the isometric structure of C(K) — Theorem 2 and Exercises B–C, HTML lines 38–54; the adjoint and extreme-point inputs are supplied locally"

@@ -8,7 +8,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [ex-c0-is-a-banach-space,
-       cor-normed-space-completions-are-uniquely-linearly-isometric,
+       def-completion-of-a-normed-space,
        rem-lp-spaces-are-banach-spaces]
 justified_by: []
 aliases: []
@@ -33,7 +33,9 @@ Let
 $$c_{00}:=\{x=(x_n)_{n\ge 0}: x_n=0 \text{ for all but finitely many } n\}.$$
 Then $c_{00}$ is an incomplete normed space for the supremum norm, its
 completion for that norm is $c_0$, and for each $1\le p<\infty$ its completion
-for the $\ell^p$ norm is $\ell^p$.
+for the $\ell^p$ norm is $\ell^p$, in the precise sense that the standard
+inclusions exhibit $c_0$ and $\ell^p$ as completions of the corresponding
+normed versions of $c_{00}$.
 
 ## Facts & Assumptions
 
@@ -41,7 +43,7 @@ for the $\ell^p$ norm is $\ell^p$.
 
 [L1] The space $c_0$ is Banach for the supremum norm ([[ex-c0-is-a-banach-space]]).
 
-[L2] Any two completions of a normed space are uniquely linearly isometric ([[cor-normed-space-completions-are-uniquely-linearly-isometric]]).
+[L2] A completion of a normed space is a Banach space together with a linear isometry having dense image ([[def-completion-of-a-normed-space]]).
 
 [L3] The classical $L^p$ and hence $\ell^p$ spaces are Banach ([[rem-lp-spaces-are-banach-spaces]]).
 
@@ -53,6 +55,6 @@ for the $\ell^p$ norm is $\ell^p$.
 
 1.2 For $1\le p<\infty$ and $x\in \ell^p$, the truncations satisfy $\|x-x^{(N)}\|_p^p=\sum_{n>N}|x_n|^p\to 0$, so $c_{00}$ is dense in $\ell^p$ for the $\ell^p$ norm. [L3]
 
-2.1 The sequence $u=(1,1/2,1/3,\dots)$ lies in $c_0$ but not in $c_{00}$, while its truncations $u^{(N)}\in c_{00}$ converge to $u$ in the supremum norm by step 1.1. Hence $c_{00}$ is not complete for that norm, and since $c_0$ is Banach by [L1], [L2] identifies the supremum-norm completion of $c_{00}$ with $c_0$. [step 1.1, L1, L2]
+2.1 The sequence $u=(1,1/2,1/3,\dots)$ lies in $c_0$ but not in $c_{00}$, while its truncations $u^{(N)}\in c_{00}$ converge to $u$ in the supremum norm by step 1.1. Hence $c_{00}$ is not complete for that norm. Since $c_0$ is Banach by [L1] and the standard inclusion is a linear isometry with dense image by step 1.1, [L2] says that this inclusion exhibits $c_0$ as a supremum-norm completion of $c_{00}$. [step 1.1, L1, L2]
 
-3.1 Because $\ell^p$ is Banach by [L3], the uniqueness statement [L2] identifies the $\ell^p$-completion of $c_{00}$ with $\ell^p$. [step 1.2, L2, L3] ∎
+3.1 Because $\ell^p$ is Banach by [L3] and the standard inclusion of $c_{00}$ is a linear isometry with dense image by step 1.2, [L2] says that this inclusion exhibits $\ell^p$ as an $\ell^p$-completion of $c_{00}$. [step 1.2, L2, L3] ∎

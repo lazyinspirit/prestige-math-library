@@ -1,0 +1,10 @@
+# Position 39 — context reseal
+
+Read the full current union lemma, original FA and repaired reseal-1, current sweetness definition including all five extension clauses, and the Shelah A/B quotient convention. The current statement explicitly requires a common distinguished weakest condition. This resolves the previously discovered failure of unions with drifting weakest conditions; no newer context removes that requirement or changes the stronger-smaller order.
+
+The last extension clause plus old density gives D_j intersect P_i = D_i. Combining that identity with old-class containment and restriction gives exact stabilization of every equivalence class meeting an old dense set. Therefore a sequence E_i-related to q_omega belongs to one stage containing q_omega, and the sequential bounds there suffice. The same stabilization places the transfer test conditions and class witnesses in one stage. Countability of quotient sets follows from the cofinal omega-sequence and CC countable-union theorem. Density and directedness are stagewise; completeness follows by checking old maximal antichains against individual conditions in a later stage. The common weakest condition persists by the inherited order.
+
+The check uses the explicit local axioms and familiar directed-union reasoning, so no new external verification is necessary. Previously documented source verification remains in the original and reseal-1 evidence. Focused batch-15 strict proof-contract check passes with zero errors and warnings. No new repair is required, and the unchanged repaired receipt is resealed. Positions 40–44 are already current; next stale position is 45.
+
+
+Previous receipt item_sha256: 98b16a87756b40a98f55fc33f40a467222a34a484da1e249f789080c7cb8ac25. Current itemHashJudge: 98b16a87756b40a98f55fc33f40a467222a34a484da1e249f789080c7cb8ac25. The item bytes match the prior receipt. Queue-status was run immediately before recording; the recorder enforces ascending reseals. This is terminal evidence, not a judge verdict or pass stamp.

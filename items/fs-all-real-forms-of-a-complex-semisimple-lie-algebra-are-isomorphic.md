@@ -5,7 +5,7 @@ title: All real forms of a complex semisimple lie algebra are isomorphic
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-classical-complex-matrix-lie-algebras, prop-real-cartan-subalgebras-need-not-be-conjugate, def-special-linear-lie-algebra-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra]
+deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-classical-complex-matrix-lie-algebras, ex-killing-form-of-sl-two, def-special-linear-lie-algebra-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra]
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -28,7 +28,7 @@ False: all real forms of a complex semisimple Lie algebra are isomorphic.
 
 [L1] A compact real form of a complex semisimple Lie algebra is a real form whose Killing form is negative definite, and a split real form is a real form containing a Cartan subalgebra whose adjoint operators are diagonalizable over $\mathbb R$ ([[def-compact-real-form-of-a-complex-semisimple-lie-algebra]], [[def-split-real-form]]).
 
-[L2] On $\mathfrak{sl}_2(\mathbb R)$ the Killing form takes the values $B(h,h)=8$, $B(e,e)=B(f,f)=0$, $B(e,f)=4$, and $B(e-f,e-f)=-8$ ([[prop-real-cartan-subalgebras-need-not-be-conjugate]], [[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
+[L2] On $\mathfrak{sl}_2(\mathbb R)$ the Killing form takes the values $B(h,h)=8$, $B(e,e)=B(f,f)=0$, $B(e,f)=4$, and $B(e-f,e-f)=-8$ ([[ex-killing-form-of-sl-two]], [[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
 
 [L3] The matrices $e,f,h$ form a real basis of $\mathfrak{sl}_2(\mathbb R)$ and a complex basis of $\mathfrak{sl}_2(\mathbb C)$, and $\mathfrak{sl}_2(\mathbb R)$ is a split real form of $\mathfrak{sl}_2(\mathbb C)$; the unitary algebra $\mathfrak{su}(2)$ has real basis $ih$, $e-f$, $i(e+f)$ and is the compact real form of $\mathfrak{sl}_2(\mathbb C)$ ([[def-special-linear-lie-algebra-sl-two]], [[def-classical-complex-matrix-lie-algebras]], [[def-split-real-form]], [[def-compact-real-form-of-a-complex-semisimple-lie-algebra]]).
 

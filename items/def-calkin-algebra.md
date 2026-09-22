@@ -5,7 +5,7 @@ title: Calkin algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-unital-banach-algebra, thm-quotient-of-banach-by-closed-subspace-is-banach, thm-norm-limit-of-compact-operators-is-compact, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-bounded-operator-space-is-banach, cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact, def-countable-choice, def-compact-linear-operator, def-operator-norm]
+deps: ["def-unital-banach-algebra", "thm-quotient-of-banach-by-closed-subspace-is-banach", "thm-norm-limit-of-compact-operators-is-compact", "lem-compositions-with-a-compact-operator-are-compact", "lem-linear-combinations-of-compact-operators-are-compact", "thm-bounded-operator-space-is-banach", "cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact", "def-countable-choice", "def-compact-linear-operator", "def-operator-norm", "lem-finite-rank-operators-are-compact"]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -31,7 +31,7 @@ of compact operators ([[def-compact-linear-operator]]). Then:
   ([[lem-compositions-with-a-compact-operator-are-compact]]);
 * it is closed in the operator norm: a norm limit of compact operators is
   compact ([[thm-norm-limit-of-compact-operators-is-compact]], which is stated
-  under Countable Choice and requires the target to be Banach, as here);
+  under Countable Choice and requires the target to be Banach, as here). More explicitly, if $T$ lies in the norm closure, Countable Choice selects $K_n\in\mathcal K(X)$ with $\|K_n-T\|<1/n$ for $n\ge1$; the theorem makes $T$ compact;
 * and it is proper: the identity $I_X$ is not compact precisely because $X$ is
   infinite-dimensional
   ([[cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact]]).
@@ -56,23 +56,24 @@ $1 := I_X + \mathcal K(X)$.
 ## Remarks
 
 - **The unit has norm one and is nonzero.** The quotient norm satisfies
-  $\|I_X+\mathcal K\| \le \|I_X\| = 1$. Conversely, if $\|I_X - K\| < 1$ for
-  some compact $K$, then $K = I_X - (I_X-K)$ is invertible by the Neumann
-  series applied to $I_X - K$ of norm $< 1$, so $I_X = K K^{-1}$ would be
-  compact, contradicting the infinite-dimensionality of $X$; hence
-  $\|I_X - K\| \ge 1$ for every compact $K$ and the quotient norm of the unit is
-  exactly $1$. It is nonzero because $I_X \notin \mathcal K(X)$.
+  $\|I_X+\mathcal K\|\le\|I_X\|=1$. The quotient norm is definite because
+  $\mathcal K$ is closed, and $I_X\notin\mathcal K$, so $c=\|I_X+\mathcal K\|>0$.
+  The unit is idempotent and the quotient norm is submultiplicative, giving
+  $c\le c^2$. Division by $c$ yields $c\ge1$, hence $c=1$.
 
 - **Finite-dimensional $X$ is excluded, not normalized away.** If $\dim X <
-  \infty$ then every operator is compact, $\mathcal K(X) = \mathcal B(X)$ and
+  \infty$ then every bounded operator has finite-dimensional range and is compact
+  ([[lem-finite-rank-operators-are-compact]]), $\mathcal K(X) = \mathcal B(X)$ and
   the quotient is the zero algebra, which carries no unit in the sense of
   [[def-unital-banach-algebra]]. The definition therefore restricts to
   infinite-dimensional $X$; the finite-dimensional case is the zero quotient and
   is not called a Calkin algebra here.
 
-- **Where Countable Choice is spent.** The only place is the completeness of the
-  quotient in [[thm-quotient-of-banach-by-closed-subspace-is-banach]]; the ideal
-  properties, properness and the norm of the unit are choice-free.
+- **Where Countable Choice is spent.** It is used in the norm-limit
+  compactness theorem, in selecting the approximating sequence above to turn
+  sequential closure into norm closure, and in quotient completeness.
+  The ideal formulas, identity noncompactness and the unit-norm argument
+  introduce no further choice beyond those supplied closed-quotient facts.
 
 - **The Calkin algebra forgets compact perturbations.** Two operators have the
   same coset exactly when they differ by

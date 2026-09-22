@@ -5,7 +5,7 @@ title: Root strings in type A_2
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-string-property, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-the-root-sl-two-triple-inside-sl-n, def-coroot-of-a-lie-algebra-root, cor-cartan-integers-are-integral, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [def-axiom-of-choice, thm-root-string-property, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-the-root-sl-two-triple-inside-sl-n, def-coroot-of-a-lie-algebra-root, cor-cartan-integers-are-integral, def-root-and-root-space-relative-to-a-cartan-subalgebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -16,11 +16,12 @@ sources:
       locator: "Chapter II, Figure 2.1 and Proposition 2.29"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the root-string, coroot and Cartan-integrality suppliers."
 ---
 
 ## Example
 
-In $\mathfrak{sl}_3(\mathbb C)$ with the diagonal Cartan subalgebra and the
+Assume AC ([[def-axiom-of-choice]]). In $\mathfrak{sl}_3(\mathbb C)$ with the diagonal Cartan subalgebra and the
 roots $\varepsilon_i-\varepsilon_j$ of
 [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], take
 $\alpha=\varepsilon_1-\varepsilon_2$ and $\beta=\varepsilon_2-\varepsilon_3$,
@@ -36,7 +37,7 @@ $\alpha(h_\alpha)=2$.
 
 ## Facts & Assumptions
 
-**Given:** The algebra $\mathfrak{sl}_3(\mathbb C)$ with the roots $\varepsilon_i-\varepsilon_j$ of [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], the roots $\alpha=\varepsilon_1-\varepsilon_2$, $\beta=\varepsilon_2-\varepsilon_3$, the coroot $h_\alpha=E_{11}-E_{22}$ from [[ex-the-root-sl-two-triple-inside-sl-n]] and [[def-coroot-of-a-lie-algebra-root]], and the string description of [[thm-root-string-property]] with the root set of [[def-root-and-root-space-relative-to-a-cartan-subalgebra]].
+**Given:** AC; the algebra $\mathfrak{sl}_3(\mathbb C)$ with the roots $\varepsilon_i-\varepsilon_j$ of [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], the roots $\alpha=\varepsilon_1-\varepsilon_2$, $\beta=\varepsilon_2-\varepsilon_3$, the coroot $h_\alpha=E_{11}-E_{22}$ from [[ex-the-root-sl-two-triple-inside-sl-n]] and [[def-coroot-of-a-lie-algebra-root]], and the string description of [[thm-root-string-property]] with the root set of [[def-root-and-root-space-relative-to-a-cartan-subalgebra]].
 
 ## Verification
 

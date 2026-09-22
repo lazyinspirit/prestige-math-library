@@ -36,7 +36,7 @@ Assume AC. For a bounded normal operator $T$ on a nonzero complex Hilbert space 
 
 [A6] The operator spectrum of $f(T)\in C^*(I,T)\subseteq\mathcal B(H)$ is the spectrum in $\mathcal B(H)$ ([[def-spectrum-and-resolvent-of-a-bounded-operator]] for the spectrum convention).
 
-[A7] A multiplication operator on a commutative algebra is determined by its values under characters, and a constant function $f\equiv c$ gives $f(T)=cI$ with $\sigma(cI)=\{c\}$ ([[def-self-adjoint-positive-unitary-and-normal-operator]] for the scalar-multiple convention).
+[A7] For a constant function $f\equiv c$, unitality and linearity give $f(T)=cI$; moreover $\lambda I-cI=(\lambda-c)I$ is boundedly invertible exactly when $\lambda\ne c$, so $\sigma(cI)=\{c\}$ ([[thm-continuous-functional-calculus-for-bounded-normal-operators]], [[def-spectrum-and-resolvent-of-a-bounded-operator]]).
 
 [A8] AC is the hypothesis of the permanence and character-space suppliers ([[def-axiom-of-choice]]).
 

@@ -32,16 +32,21 @@ Then $(D,E,i,j,k)$ is an initial exact couple in the sense of
 $$E^1_{p,q}=h_{p+q}(X^p,X^{p-1})\cong C_p^{\mathrm{cell}}\bigl(X;h_q(*)\bigr),$$
 and its first differential $d_1=j\circ k$ is the cellular boundary with the
 incidence-degree matrix. In particular $E^2_{p,q}\cong H_p(X;h_q(*))$.
+Here the displayed identification of each sphere summand with $h_q(*)$ is
+**suspension-normalized**: it uses the oriented quotient sphere and the
+structural suspension isomorphisms of the theory. The pair boundary is the
+cofiber map followed by inverse structural suspension, so the same
+normalization is used in the calculation of $d_1$.
 
 ## Facts & Assumptions
 
-[F1] A reduced generalized homology theory has based homotopy invariance, a long exact sequence of a pair, and for a finite wedge an isomorphism $\bigoplus_\alpha\widetilde h_n(S^p_\alpha)\cong\widetilde h_n(\bigvee_\alpha S^p_\alpha)$ ([[def-reduced-generalized-homology-theory]]).
+[F1] A reduced generalized homology theory has based homotopy invariance, suspension-compatible cofiber exact sequences, and for a finite wedge an isomorphism $\bigoplus_\alpha\widetilde h_n(S^p_\alpha)\cong\widetilde h_n(\bigvee_\alpha S^p_\alpha)$ ([[def-reduced-generalized-homology-theory]]).
 
-[F2] For a reduced generalized homology theory define the pair groups of a CW pair $(X,A)$ by $h_n(X,A):=\widetilde h_n(C_i)$ for the based inclusion $i:A_+\to X_+$, and $h_n(X,\varnothing):=\widetilde h_n(X_+)$. For $A\ne\varnothing$ a CW subcomplex inclusion is a based cofibration and the collapse $C_i\to X/A$ is a based homotopy equivalence, so $h_n(X,A)\cong\widetilde h_n(X/A)$; the exact cofiber sequence of [F1] is then the pair long exact sequence with its natural boundary, natural in maps of pairs ([[def-reduced-generalized-homology-theory]], [[prop-relative-cw-inclusions-are-cofibrations]], [[lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient]]).
+[F2] For a reduced generalized homology theory define the pair groups of a CW pair $(X,A)$ by $h_n(X,A):=\widetilde h_n(C_i)$ for the based inclusion $i:A_+\to X_+$, and $h_n(X,\varnothing):=\widetilde h_n(X_+)$. For $A\ne\varnothing$ a CW subcomplex inclusion is a based cofibration and the collapse $C_i\to X/A$ is a based homotopy equivalence, so $h_n(X,A)\cong\widetilde h_n(X/A)$. The cofiber exact sequence is the pair long exact sequence, and its natural boundary is the structural cofiber map followed by inverse suspension ([[def-reduced-generalized-homology-theory]], [[prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs]], [[prop-relative-cw-inclusions-are-cofibrations]], [[lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient]]).
 
 [F3] For $p\geq1$ the quotient $X^p/X^{p-1}$ is the finite wedge of the $p$-spheres belonging to the $p$-cells, and $X^0$ is a finite discrete set ([[lem-cw-quotients-and-collapse-of-a-contractible-subcomplex]], [[def-wedge-of-pointed-spaces]]).
 
-[F4] Iterated homological suspension identifies $\widetilde h_{p+q}(S^p)\cong h_q(*)$ for every $p\geq0$ ([[def-coefficient-groups-of-a-generalized-homology-theory]]).
+[F4] The chosen orientation $D^p/S^{p-1}\cong S^p$, followed by the $p$-fold structural suspension isomorphism, gives the canonical coefficient identification $\widetilde h_{p+q}(S^p)\cong h_q(*)$ of [[def-coefficient-groups-of-a-generalized-homology-theory]]. For the disk pair, the pair boundary has target $h_{n-1}(S^{p-1})=\widetilde h_{n-1}((S^{p-1})_+)$, not merely $\widetilde h_{n-1}(S^{p-1})$. Its image is the kernel of $h_{n-1}(S^{p-1})\to h_{n-1}(D^p)$; under the usual based-sphere splitting this kernel is the reduced sphere summand, and [F2] identifies the induced map onto that summand with inverse structural suspension. No isomorphism onto the whole unreduced target is asserted.
 
 [F5] A based degree-$d$ map $S^p\to S^p$ induces multiplication by $d$ on every reduced generalized homology group ([[prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory]]).
 
@@ -53,15 +58,15 @@ incidence-degree matrix. In particular $E^2_{p,q}\cong H_p(X;h_q(*))$.
 
 **Given:** A finite CW complex $X$ with chosen cells and orientations, a reduced generalized homology theory $\widetilde h$, and the groups and maps displayed in the statement.
 
-1.1 The exactness conditions of [[def-exact-couple]] hold with $r=1$: the image of $i_{p-1,q+1}$ equals the kernel of $j_{p,q}$ by exactness of the pair sequence of $(X^p,X^{p-1})$ at $h_{p+q}(X^p)$; the image of $j_{p,q}$ equals the kernel of $k_{p,q}$ by exactness of that same sequence at $E_{p,q}=h_{p+q}(X^p,X^{p-1})$; and the image of $k_{p+1,q}$ equals the kernel of $i_{p,q}$ by exactness of the pair sequence of $(X^{p+1},X^p)$ at $h_{p+q}(X^p)$. [F1, given]
+1.1 The exactness conditions of [[def-exact-couple]] hold with $r=1$: the image of $i_{p-1,q+1}$ equals the kernel of $j_{p,q}$ by exactness of the pair sequence of $(X^p,X^{p-1})$ at $h_{p+q}(X^p)$; the image of $j_{p,q}$ equals the kernel of $k_{p,q}$ by exactness of that same sequence at $E_{p,q}=h_{p+q}(X^p,X^{p-1})$; and the image of $k_{p+1,q}$ equals the kernel of $i_{p,q}$ by exactness of the pair sequence of $(X^{p+1},X^p)$ at $h_{p+q}(X^p)$. [F2, given]
 
-1.2 The wedge decomposition [F3] and the quotient identification of [F2] give $E_{p,q}\cong\widetilde h_{p+q}(\bigvee_{\alpha\in I_p}S^p_\alpha)$, and the wedge axiom [F1] followed by the suspension identification [F4] gives $\widetilde h_{p+q}(\bigvee_{\alpha\in I_p}S^p_\alpha)\cong\bigoplus_{\alpha\in I_p}h_q(*)$. [F1, F2, F3, F4]
+1.2 The wedge decomposition [F3] and the quotient identification of [F2] give $E_{p,q}\cong\widetilde h_{p+q}(\bigvee_{\alpha\in I_p}S^p_\alpha)$. The wedge axiom [F1], followed on every oriented sphere summand by the boundary-normalized identification of [F4], gives $\widetilde h_{p+q}(\bigvee_{\alpha\in I_p}S^p_\alpha)\cong\bigoplus_{\alpha\in I_p}h_q(*)$. [F1, F2, F3, F4]
 
 1.3 The right-hand side $\bigoplus_{\alpha\in I_p}h_q(*)$ is the free cellular chain group $C_p^{\mathrm{cell}}(X;h_q(*))=\bigoplus_{\alpha\in I_p}h_q(*)$ on the oriented $p$-cells, and the cellular boundary sends the $\sigma$-summand to the sum over $(p-1)$-cells of the incidence numbers. [F6]
 
-1.4 The differential is $d_1=j\circ k$: the connecting map sends the $\sigma$-summand of $E_{p,q}$ to $h_{p+q-1}(X^{p-1})$ by composing with the attaching map of $e^p_\sigma$, and the pair map then collapses the $(p-1)$-skeleton quotient; on the $\tau$-summand the induced map is therefore induced by the composite of the attaching map with the collapse to the sphere of $\tau$. [given]
+1.4 The differential is $d_1=j\circ k$. By naturality of the pair boundary for the characteristic map $(D^p,S^{p-1})\to(X^p,X^{p-1})$ and the cofiber-boundary formula in [F2], the $\sigma$-summand first maps by the attaching map into $h_{p+q-1}(X^{p-1})$. Projecting with $j$ to the $\tau$-summand composes the attaching map with the collapse $X^{p-1}\to X^{p-1}/X^{p-2}$ and then with the projection to the sphere of $e^{p-1}_\tau$. Under the suspension-normalized coordinates of [F4], the resulting coefficient homomorphism is the map induced by that attaching-and-collapse self-map of $S^{p-1}$; this uses compatibility of the pair boundary with suspension, not an isomorphism from the disk pair group onto all of $h_{p+q-1}(S^{p-1})$. [F2, F4, given]
 
-2.1 For $p\ge2$, the component map in step 1.4 is a self-map of $S^{p-1}$, so the degree action [F5] makes the $(\tau,\sigma)$ component multiplication by the incidence number $[e^p_\sigma:e^{p-1}_\tau]$. For $p=1$, the boundary of the oriented interval is its terminal endpoint minus its initial endpoint; naturality of the pair boundary therefore gives coefficients $+1$ and $-1$ on the corresponding $0$-cell summands directly, without representing $-1$ by a based self-map of $S^0$. For $p=0$ the target is zero. Hence in every dimension [F6] identifies $d_1$ with the cellular boundary. [F1, F6, step 1.4]
+2.1 For $p\ge2$, the suspension-normalized comparison in step 1.4 reduces the $(\tau,\sigma)$ component to the self-map of $S^{p-1}$ defining the incidence number; [F5] therefore makes it multiplication by $[e^p_\sigma:e^{p-1}_\tau]$. For $p=1$, the cofiber-boundary convention of [F2] for an oriented characteristic interval gives terminal endpoint minus initial endpoint, so the two possible $0$-cell projections have coefficients $+1$ and $-1$. For $p=0$ the target is zero. Thus [F6] identifies $d_1$ with the cellular boundary in every dimension. [F2, F4, F5, F6, step 1.4]
 
 3.1 Steps 1.1, 1.2 and 2.1 exhibit an initial exact couple whose first page is the cellular chain complex with coefficients $h_q(*)$ and whose first differential is the cellular boundary; hence $E^2_{p,q}\cong H_p(X;h_q(*))$ by definition of the second page and the identification of cellular with singular homology. [F6, step 1.1, step 1.2, step 2.1]
 

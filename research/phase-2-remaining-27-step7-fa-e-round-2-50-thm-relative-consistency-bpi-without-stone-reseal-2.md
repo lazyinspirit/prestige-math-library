@@ -1,0 +1,10 @@
+# FA position50 context review
+
+Retain escalated-to-owner; rejected item untouched. Read full current item, original FA evidence, both Terra rejections/Alpha adjudication, owning manifest/contract/risk, and current Corson definition, obstruction/boundability and fixed-point supplier interfaces. The old allegation that the Corson definition itself requires an external transitive ground is withdrawn: its current text explicitly works internally in arbitrary M. But the settled fixed-point BPI supplier still explicitly assumes a transitive ZFA+AC ground. Formal Con(ZF) does not supply that hypothesis. Position48's tagged real-order interpretation fixes its CC route and does not generalize this different BPI supplier.
+
+Independently opened Corson's original https://arxiv.org/pdf/2001.06513 and read §§2.2–2.3, Lemma5 and Proposition6, printed3–4. The finite chain/least occupied index distinguishes arbitrarily many translated cover members through a; the typed bounded coding supports transfer with the exceptional BPI clause. Those are conditional on a suitable permutation model. The local remaining fixed-point interface's transitivity requirement is not discharged by calling the construction external. No reading of the inaccessible full Pincus proof is claimed.
+
+Owner owes an arbitrary-model internalization (or verified finite-fragment proof interpretation) of the BPI route, or a stronger premise with appropriate scope authorization. I have not established that bridge under the current licensed interfaces. This is not a claim that Corson's independence result is false. Also the unqualified 'no point-finite refinement' phrases must mean open refining cover; the empty bare refinement otherwise refutes the literal phrase. No partial edit of an escalated item, no pass stamp. Next51 after record.
+
+
+Current itemHashJudge: 41912c12d3c41a55dc492c0b7ea31c52815e37eae4ec6221c5daeefff39acc12. Matches the latest receipt. Queue-status immediately before recording shows every predecessor current. No judge verdict or pass stamp is created.

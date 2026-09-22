@@ -44,7 +44,7 @@ finite successor menus.
 
 [L2] Finite intersections of dense open sets are dense and open, by induction on the number of factors, and finite unions of closed sets are closed ([[def-dense-top]], [[def-interior-closure-boundary-top]]).
 
-[L3] A finite union of finite sets is finite and a subset of a finite set is finite; the empty sequence is not used as a menu ([[def-finite-intersection-property]], [[def-natural-numbers]]).
+[L3] A subset of a finite set is finite ([[thm-subset-of-a-finite-set]]); the empty sequence is not used as a menu.
 
 ## Proof
 
@@ -68,7 +68,7 @@ finite successor menus.
 
 6.1 Prune the menus: put $V'_0 := V_0$ and $V'_{n+1} := \{\, V \in V_{n+1} : U \succ V \text{ for some } U \in V'_n \,\}$. Then each $V'_n$ is a nonempty finite subset of $V_n$: nonemptiness is by induction, since each $U \in V'_n$ has a $\succ$-successor in $V_{n+1}$ which then lies in $V'_{n+1}$, and finiteness is [L3]. [step 5.1, L3]
 
-7.1 Induction on $n$: every $U \in V'_n$ satisfies $U \subseteq G'_n$. For $n = 0$ this is $G'_0 = X$. For the step, let $V \in V'_{n+1}$ and fix $U \in V'_n$ with $U \succ V$; then $\overline{V} \subseteq U \cap G'_k$ for some $k$ with $U \not\subseteq G'_k$. By the induction hypothesis $U \subseteq G'_n$, so $k > n$: otherwise $G'_k \supseteq G'_n \supseteq U$, contradicting $U \not\subseteq G'_k$. Hence $G'_k \subseteq G'_{n+1}$ and $V \subseteq \overline{V} \subseteq G'_k \subseteq G'_{n+1}$. [step 3.1, step 6.1, step 2.3]
+7.1 Induction on $n$: every $U \in V'_n$ satisfies $\overline{U} \subseteq G'_n$. For $n = 0$ this is $\overline{U} \subseteq X = G'_0$. For the step, let $V \in V'_{n+1}$ and fix $U \in V'_n$ with $U \succ V$; then $\overline{V} \subseteq U \cap G'_k$ for some $k$ with $U \not\subseteq G'_k$. By the induction hypothesis $U \subseteq \overline{U} \subseteq G'_n$, so $k > n$: otherwise $G'_k \supseteq G'_n \supseteq U$, contradicting $U \not\subseteq G'_k$. Hence $\overline{V} \subseteq G'_k \subseteq G'_{n+1}$. [step 3.1, step 6.1, step 2.3]
 
 8.1 Put $W_n := \bigcup V'_n$, a nonempty set with $W_n \subseteq G'_n$ by step 6.1, and $W_{n+1} \subseteq W_n$: every $V \in V'_{n+1}$ satisfies $V \subseteq \overline{V} \subseteq U$ for some $U \in V'_n \subseteq W_n$. Put $K_n := \bigcup \{\, \overline{V} : V \in V'_n \,\}$, a nonempty closed set by [L2], with $K_{n+1} \subseteq W_n \subseteq K_n$ and $K_n \subseteq G'_n$. [step 6.1, step 7.1, L2]
 
@@ -80,6 +80,6 @@ finite successor menus.
 
 ## Remarks
 
-- **Which hypothesis of the source is used.** Fossy and Morillon state the result for countably compact regular spaces; compactness enters here twice, once to make the space regular and countably compact (steps 2.2 and 2.2) and once to make the decreasing closed sets of step 8.1 have a common point. Hausdorffness is used only through the compact-Hausdorff regularity theorem.
+- **Which hypothesis of the source is used.** Fossy and Morillon state the result for countably compact regular spaces; compactness makes the space regular and countably compact in step 2.2, and countable compactness gives the common point of the decreasing closed sets in step 9.1. Hausdorffness is used only through the compact-Hausdorff regularity theorem.
 
 - **Why the sets $G'_k$ are not closed.** They are finite intersections of dense open sets, hence dense and open, and they are decreasing; the closed sets whose intersection is taken in step 9.1 are the finite unions of closures of the pruned menus, which is why the pruning of step 6.1 is needed.

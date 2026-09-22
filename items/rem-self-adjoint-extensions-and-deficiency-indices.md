@@ -5,7 +5,7 @@ title: "Self-adjoint extensions and deficiency indices: agreement pointer"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-von-neumann-self-adjoint-extension-parameterization, cor-self-adjoint-extension-exists-iff-deficiency-indices-agree, def-deficiency-subspaces-and-deficiency-indices, cex-the-minimal-derivative-is-symmetric-not-self-adjoint]
+deps: [thm-von-neumann-self-adjoint-extension-parameterization, cor-self-adjoint-extension-exists-iff-deficiency-indices-agree, def-deficiency-subspaces-and-deficiency-indices, cex-the-minimal-derivative-is-symmetric-not-self-adjoint, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -18,7 +18,8 @@ sources:
 
 ## Remark
 
-The extension theorem is proved on the companion A page of this pair:
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). The extension theorem is
+proved on the companion A page of this pair:
 self-adjoint extensions of a closed symmetric operator $T$ correspond
 bijectively to the unitary operators $K_+\to K_-$
 ([[thm-von-neumann-self-adjoint-extension-parameterization]]), and such a

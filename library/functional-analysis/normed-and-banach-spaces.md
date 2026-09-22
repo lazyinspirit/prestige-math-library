@@ -26,7 +26,7 @@ This page fixes the basic normed-space vocabulary used later in functional
 analysis and keeps the route deliberately small. It adds Banach spaces, the
 reverse triangle inequality, normed subspaces, finite product norms, the series
 criterion for completeness, and the completion package built on the already
-published metric completion.
+published metric completion under Countable Choice.
 
 Two scope boundaries matter. First, quotient norms and the full bounded-linear
 operator package are deferred to the next page; here boundedness appears only as

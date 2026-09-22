@@ -140,7 +140,9 @@
         "kind": "definition",
         "title": "Spectrum and resolvent set in a banach algebra",
         "deps": [
-          "def-invertible-element-and-general-linear-group-of-a-banach-algebra"
+          "def-invertible-element-and-general-linear-group-of-a-banach-algebra",
+          "def-unital-banach-algebra",
+          "def-axiom-of-choice"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -162,7 +164,7 @@
           ]
         },
         "statement": "For a in a complex unital Banach algebra A, sigma_A(a)={z in C:z1-a is not invertible}, rho_A(a)=C\\sigma_A(a), and R(z,a)=(z1-a)^{-1}.",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
+        "axiom_audit": "ZF for spectrum/resolvent definitions; AC is explicitly assumed in the forward nonemptiness remark."
       },
       {
         "id": "lem-resolvent-identity",
@@ -331,9 +333,16 @@
         "id": "lem-submultiplicative-root-limit",
         "kind": "lemma",
         "title": "Submultiplicative root limit",
-        "deps": [],
+        "deps": [
+          "thm-nth-roots-exist",
+          "lem-power-monotone",
+          "def-limsup-liminf",
+          "thm-convergence-iff-limsup-equals-liminf",
+          "lem-limsup-monotone-comparison",
+          "lem-nth-root-of-constant-tends-to-one"
+        ],
         "statement": "If u_n>=0 and u_{m+n}<=u_m u_n, then lim_{n→∞}u_n^{1/n}=inf_{n>=1}u_n^{1/n}, with the zero-term case included.",
-        "strategy": "Handle a zero term, otherwise write n=qk+r and estimate by u_k^q times the finite maximum over remainders; take limsup then infimum over k.",
+        "strategy": "Use the N-indexed sequence v_j=u_{j+1}^{1/(j+1)}. Handle a zero term; otherwise divide n=qk+r, bound by t^n D_k for fixed positive t=u_k^(1/k), and apply the shifted constant-root lemma to D_k^(1/(j+1)). Compare limsup and liminf of v only.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -360,19 +369,25 @@
         "title": "Spectral radius formula",
         "deps": [
           "def-spectral-radius",
+          "def-spectrum-and-resolvent-set-in-a-banach-algebra",
+          "def-unital-banach-algebra",
           "lem-neumann-series",
+          "lem-resolvent-identity",
           "thm-resolvent-is-banach-valued-holomorphic",
           "thm-cauchy-integral-formula-higher-derivatives",
+          "thm-circle-integrals-of-integer-monomials",
           "cor-norm-recovered-from-the-dual-unit-ball",
           "lem-submultiplicative-root-limit",
+          "lem-nth-root-of-constant-tends-to-one",
           "thm-polynomial-spectral-mapping",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "cor-ml-estimate-for-complex-line-integrals"
         ],
         "provenance": {
           "statement": "literature-derived",
           "proof": "ai-altered"
         },
-        "strategy": "For each bounded functional phi, put g_phi(z)=phi((1-za)^{-1}). The resolvent theorem makes g_phi holomorphic on |z|<1/r(a), while the Neumann series near zero identifies its nth Taylor coefficient as phi(a^n). For every R>r(a), scalar Cauchy estimates on |z|=1/R give |phi(a^n)|<=M_R R^n uniformly for ||phi||<=1. The dual-unit-ball norm formula therefore gives ||a^n||<=M_R R^n; taking nth roots and then decreasing R to r(a) yields the upper bound. Polynomial spectral mapping gives r(a)^n=r(a^n)<=||a^n|| for the reverse inequality, and the submultiplicative-root lemma identifies the limit with the infimum. Handle r(a)=0 by using every R>0.",
+        "strategy": "Treat a=0 first. For a nonzero, use h(z)=(1-za)^-1 on |z|<1/Rprime with r(a)<Rprime<R, then scalar Cauchy on |z|=1/R. Uniform Neumann tails and ML justify coefficient extraction. Dual norm gives ||a^n||≤C_R R^n with C_R>0. Use the explicit zero-based root sequence and its submultiplicative limit; polynomial spectral mapping gives the reverse inequality.",
         "sources": {
           "references": [
             {
@@ -388,7 +403,7 @@
           ]
         },
         "statement": "Assume AC. For a in a complex unital Banach algebra, r(a)=lim_{n→∞}||a^n||^{1/n}=inf_{n>=1}||a^n||^{1/n}.",
-        "axiom_audit": "Full AC is assumed and is used exactly through the declared Zorn, Hahn–Banach, ultrafilter/Tychonoff, or inherited AC supplier; all remaining steps are choice-free."
+        "axiom_audit": "AC is assumed through spectrum nonemptiness/spectral-radius existence, Hahn–Banach dual norm, and the declared polynomial spectral-mapping interface."
       },
       {
         "id": "lem-canonical-banach-complexification-of-a-real-banach-space",
@@ -396,11 +411,20 @@
         "title": "Canonical Banach complexification of a real Banach space",
         "deps": [
           "def-banach-space",
+          "def-norm-and-normed-space",
           "def-bounded-linear-operator",
+          "def-operator-norm",
           "def-complex-numbers-and-arithmetic",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
           "def-complete-ordered-field",
           "thm-sine-and-cosine-addition-formulas",
-          "thm-polar-form-with-unique-principal-argument"
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-complex-numbers-form-a-field",
+          "lem-complex-conjugation-and-modulus-laws",
+          "rem-real-and-complex-normed-space-convention",
+          "cor-cauchy-reals-lub-complete",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-quarter-turn-values-and-shift-formulas"
         ],
         "strategy": "On X×X use complex scalar multiplication and the rotation-supremum norm. Prove the norm axioms and max(||x||,||y||)<=||x+iy||_C<=||x||+||y||, so completeness follows componentwise. For T_C(x+iy)=Tx+iTy, rotations give ||T_C||<=||T|| and the real copy gives equality. For any other compatible Banach complexification Z with an isometric real embedding j, conjugation, and fixed real copy, z=j(x)+ij(y) uniquely and x=(z+conj(z))/2, y=(z-conj(z))/(2i). These formulas and the triangle inequality bound the canonical intertwiner and its inverse; it is therefore a bounded complex-linear isomorphism intertwining all complexified operators. It is isometric only when the comparison model carries the same rotation-supremum norm.",
         "provenance": {
@@ -429,7 +453,14 @@
         "kind": "definition",
         "title": "Complexification and spectrum of a real operator",
         "deps": [
-          "lem-canonical-banach-complexification-of-a-real-banach-space"
+          "def-bounded-linear-operator",
+          "lem-canonical-banach-complexification-of-a-real-banach-space",
+          "def-spectrum-and-resolvent-set-in-a-banach-algebra",
+          "def-spectral-radius",
+          "def-axiom-of-choice",
+          "thm-bounded-operator-space-is-banach",
+          "def-operator-norm",
+          "def-unital-banach-algebra"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -450,8 +481,8 @@
             }
           ]
         },
-        "statement": "For a bounded real operator T, define its spectrum and spectral radius as those of its complex-linear extension T_C on the rotation-supremum complexification. Canonical bounded complex-linear conjugacy makes these notions independent of the compatible complexification model.",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
+        "statement": "Assume AC. For a bounded real operator on a nonzero real Banach space, use the canonical rotation-supremum complexification to define its complex spectrum and radius. Bounded complex-linear conjugacy preserves both and conjugates resolvents.",
+        "axiom_audit": "ZF + AC, inherited from spectral-radius existence."
       },
       {
         "id": "thm-gelfand-mazur",
@@ -488,11 +519,15 @@
         "kind": "definition",
         "title": "Banach algebra valued contour integral",
         "deps": [
+          "def-banach-space",
           "def-unital-banach-algebra",
-          "thm-banach-series-criterion",
           "def-complex-contours-reversal-concatenation-and-closedness",
           "def-bochner-integrable-function",
-          "thm-bochner-integrability-criterion"
+          "thm-bochner-integrability-criterion",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "cor-mean-value-theorem",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "def-integration-and-index-of-complex-chain"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -513,7 +548,7 @@
             }
           ]
         },
-        "statement": "For a continuous Banach-algebra-valued integrand on a piecewise C1 contour, define the contour integral by norm limits of tagged sums; it agrees with the Bochner integral of t↦f(gamma(t))gamma'(t) and extends additively to finite cycles.",
+        "statement": "For continuous complex-Banach-space-valued integrands on piecewise C1 contours, define the norm limit of tagged derivative sums, verify Bochner agreement by explicit simple approximants, and prove the length bound, operations and admissible reparametrization invariance. Banach-algebra integrals are the special case.",
         "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
       },
       {
@@ -554,6 +589,10 @@
           "cor-global-cauchy-theorem-homology",
           "cor-dual-separates-points",
           "def-axiom-of-choice",
+          "def-banach-algebra-valued-contour-integral",
+          "def-complex-chain-and-cycle",
+          "def-null-homologous-and-homologous-complex-cycles",
+          "def-dual-space-of-a-normed-space",
           "def-integration-and-index-of-complex-chain"
         ],
         "provenance": {
@@ -576,7 +615,7 @@
           ]
         },
         "statement": "Assume AC. If F is continuous and weakly holomorphic on U and Gamma is null-homologous in U, then integral_Gamma F(z)dz=0.",
-        "axiom_audit": "Full AC is assumed and is used exactly through the declared Zorn, Hahn–Banach, ultrafilter/Tychonoff, or inherited AC supplier; all remaining steps are choice-free."
+        "axiom_audit": "AC through dual separation only; finite chain sums omit zero-coefficient contours to respect the integrand domain."
       },
       {
         "id": "lem-admissible-cycle-around-a-compact-plane-set",
@@ -817,7 +856,10 @@
           "lem-linear-combinations-of-compact-operators-are-compact",
           "thm-bounded-operator-space-is-banach",
           "cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact",
-          "def-countable-choice"
+          "def-countable-choice",
+          "def-compact-linear-operator",
+          "def-operator-norm",
+          "lem-finite-rank-operators-are-compact"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -839,7 +881,7 @@
           ]
         },
         "statement": "Assume Countable Choice. For an infinite-dimensional complex Banach space X, the Calkin algebra is B(X)/K(X) with quotient norm and unit I+K(X); it is a normalized unital complex Banach algebra.",
-        "axiom_audit": "Countable Choice is assumed exactly for the declared quotient-completeness or sequential-selection supplier; no stronger choice is used."
+        "axiom_audit": "Countable Choice is inherited in norm-limit compactness and quotient completeness and explicitly selects a sequence from the norm closure. No stronger choice is used."
       },
       {
         "id": "cor-atkinson-in-calkin-algebra-language",
@@ -879,7 +921,9 @@
         "title": "Point continuous and residual spectrum",
         "deps": [
           "def-spectrum-and-resolvent-set-in-a-banach-algebra",
-          "def-bounded-linear-operator"
+          "def-bounded-linear-operator",
+          "def-dependent-choice",
+          "thm-bounded-inverse-theorem"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -901,7 +945,7 @@
           ]
         },
         "statement": "For T on a complex Banach space, the point, continuous, and residual spectra classify spectral lambda by noninjectivity; injectivity with dense nonsurjective range; and injectivity with nondense range, respectively.",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
+        "axiom_audit": "ZF for the definitions and disjointness; the spectral partition uses DC through bounded inverse."
       },
       {
         "id": "def-approximate-point-and-compression-spectrum",
@@ -1118,14 +1162,15 @@
           "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
           "thm-riesz-fischer-completeness-of-l-p",
           "lem-complex-lp-completeness-density-and-inner-product",
-          "def-countable-choice"
+          "def-countable-choice",
+          "def-axiom-of-choice"
         ],
         "provenance": {
           "statement": "literature-derived",
           "proof": "ai-altered"
         },
-        "statement": "Assume Countable Choice. Let (X,Sigma,mu) be a nonzero sigma-finite measure space and m:X→C an essentially bounded measurable function. On complex L^2(mu), the multiplication operator M_m is bounded and sigma(M_m)=essran(m), where essran(m)={lambda∈C:mu({x:|m(x)-lambda|<epsilon})>0 for every epsilon>0}. For the zero measure space, L^2 is the zero space and the normalized nonzero-algebra spectral convention does not apply.",
-        "strategy": "Multiplication by m respects almost-everywhere equivalence classes, is measurable, and satisfies ||M_m f||_2<=||m||_infinity||f||_2. If lambda is outside the displayed essential range, |m-lambda| is bounded below almost everywhere, so multiplication by (m-lambda)^{-1} is a bounded two-sided inverse. If lambda is in the essential range, A_n={|m-lambda|<1/n} has positive measure. From a fixed sigma-finite exhaustion X=union_k E_k with mu(E_k)<infinity, choose the first k for which A_n intersect E_k has positive measure; its normalized indicator is in L^2 and satisfies ||(M_m-lambda)f_n||_2<1/n, ruling out invertibility. The only choice used beyond this deterministic least-index construction is inherited from Riesz-Fischer completeness.",
+        "statement": "Assume AC. Let (X,Sigma,mu) be a nonzero sigma-finite measure space and m:X→C an essentially bounded measurable function. On complex L^2(mu), the multiplication operator M_m is bounded and sigma(M_m)=essran(m), where essran(m)={lambda∈C:mu({x:|m(x)-lambda|<epsilon})>0 for every epsilon>0}. For the zero measure space, L^2 is the zero space and the normalized nonzero-algebra spectral convention does not apply.",
+        "strategy": "Multiplication by m respects almost-everywhere equivalence classes, is measurable, and satisfies ||M_m f||_2<=||m||_infinity||f||_2. If lambda is outside the displayed essential range, |m-lambda| is bounded below almost everywhere, so multiplication by (m-lambda)^{-1} is a bounded two-sided inverse. If lambda is in the essential range, A_n={|m-lambda|<1/n} has positive measure. From a fixed sigma-finite exhaustion X=union_k E_k with mu(E_k)<infinity, choose the first k for which A_n intersect E_k has positive measure; its normalized indicator is in L^2 and satisfies ||(M_m-lambda)f_n||_2<1/n, ruling out invertibility. AC is inherited from the bounded-operator algebra supplier and implies Countable Choice for completeness. Multiplication and composition are proved directly on representatives; nonzero L2 follows from a finite positive-measure member of the exhaustion.",
         "sources": {
           "references": [
             {
@@ -1140,7 +1185,7 @@
             }
           ]
         },
-        "axiom_audit": "Countable Choice is inherited exactly from the declared Riesz–Fischer completeness supplier, where measurable representatives are selected; the multiplier argument uses no stronger choice."
+        "axiom_audit": "AC is inherited from the bounded-operator algebra supplier and implies Countable Choice for complex L2 completeness. The least-index selection is deterministic."
       },
       {
         "id": "ex-spectrum-of-the-unilateral-shift",
@@ -1527,7 +1572,11 @@
         "title": "Gelfand transform",
         "strategy": "For unital commutative complex A define a-hat(chi)=chi(a); evaluation topology proves continuity. Nonunital target C0 is established later, not included by definition.",
         "deps": [
-          "def-character-and-maximal-ideal-space"
+          "def-character-and-maximal-ideal-space",
+          "def-unital-banach-algebra",
+          "thm-maximal-ideal-space-is-compact-hausdorff",
+          "def-axiom-of-choice",
+          "thm-spectrum-as-character-values"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -1548,7 +1597,7 @@
           ]
         },
         "statement": "For commutative unital A, the Gelfand transform sends a to the continuous function a-hat on Delta(A), a-hat(chi)=chi(a).",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
+        "axiom_audit": "ZF for the evaluation definition; nonempty compact character space, supremum-norm target and spectrum identity are qualified by nonzero Banach and AC; the nonunital forward theorem is for commutative C*-algebras under AC."
       },
       {
         "id": "thm-gelfand-transform-is-a-contractive-unital-homomorphism",
@@ -1761,7 +1810,7 @@
       {
         "id": "lem-characters-on-a-commutative-c-star-algebra-preserve-star",
         "kind": "lemma",
-        "title": "Characters on a commutative c star algebra preserve star",
+        "title": "Characters on a unital commutative C star algebra preserve star",
         "strategy": "For self-adjoint a and real t, |chi(a)+it|^2<=||a+it||^2=||a^2+t^2 1||<=||a||^2+t^2. Both signs of arbitrarily large t force Im chi(a)=0. Decompose arbitrary a into real and imaginary self-adjoint parts. No appeal to the later real-spectrum theorem.",
         "deps": [
           "thm-characters-on-a-unital-banach-algebra-are-continuous",
@@ -1844,12 +1893,13 @@
         "deps": [
           "thm-characters-on-a-unital-banach-algebra-are-continuous",
           "thm-urysohn-lemma",
-          "thm-uniform-limit-continuous-complex-functions",
+          "thm-uniform-cauchy-criterion-complex-functions",
           "thm-complex-plane-is-complete",
           "thm-compactness-under-continuous-maps",
           "def-dependent-choice",
           "def-character-and-maximal-ideal-space",
-          "def-compact-support-c-c-and-c-zero-on-an-lch-space"
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "thm-a-compact-hausdorff-space-is-regular-and-normal"
         ],
         "strategy": "For compact Hausdorff K, a character kernel has a common zero: otherwise finitely many functions with no common zero yield an invertible sum of squared absolute values in the ideal. At a common zero x, ker(chi) is contained in ker(ev_x); both are codimension-one kernels of unital maps to C, so they agree and chi=ev_x. Use Urysohn separation for uniqueness. Check continuity of the evaluation map in the pointwise topology and conclude it is a homeomorphism from compact K to the Hausdorff character space. Treat K empty/the zero algebra separately, and verify C(K) is complete by the uniform-limit theorem.",
         "provenance": {
@@ -1871,7 +1921,7 @@
           ]
         },
         "statement": "Assume DC. For compact Hausdorff K, every character of C(K,C) is evaluation at a unique point, and K→Delta(C(K)) is a homeomorphism; the empty/zero case is separate.",
-        "axiom_audit": "Dependent Choice is assumed exactly for the declared Urysohn or bounded-inverse supplier; no stronger choice is used."
+        "axiom_audit": "DC only for Urysohn separation. The kernel-indexed cover and a finite subcover require no arbitrary selection."
       },
       {
         "id": "thm-commutative-gelfand-duality",
@@ -1913,17 +1963,23 @@
         "title": "Zero free entire function of exponential type is an exponential",
         "deps": [
           "thm-path-independence-and-complex-primitive-criterion",
-          "thm-local-maximum-modulus-principle",
           "cor-cauchy-theorem-convex-domain",
           "thm-algebra-of-complex-derivatives",
           "thm-chain-rule-for-complex-derivatives",
           "cor-complex-power-series-sums-have-derivatives-of-all-orders",
-          "cor-zero-derivative-implies-constant",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant",
           "thm-liouville-bounded-entire-function",
           "cor-complex-power-series-sums-are-analytic",
-          "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition"
+          "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-holomorphic-if-and-only-if-analytic",
+          "thm-unit-disc-schwarz-lemma-with-rigidity",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-exponential-is-strictly-increasing"
         ],
-        "strategy": "If f is entire, zero-free, f(0)=1, |f(z)|<=exp(C|z|), prove f(z)=exp(az). Obtain entire logarithm by integrating f'/f on C, then apply the maximum-modulus disk estimate to the logarithm after subtracting its linear term. Rescale Shirbisheh Lemma 3.1.10. Replace its incompatible strict growth inequality by <=; spell out the removable singularities and large-radius limit.",
+        "strategy": "For the stated M>0,C>=0 bound, integrate f prime/f to normalized entire h. Apply the strict-denominator Schwarz estimate with K=A+BR+1 directly to h. Entire h/z is bounded and hence constant by Liouville, giving h(z)=f prime(0)/f(0) times z; include C=0 and normalization f(0)=1.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1949,7 +2005,7 @@
         "id": "thm-gleason-kahane-zelazko",
         "kind": "theorem",
         "title": "Gleason kahane zelazko",
-        "strategy": "For each a, phi(a) belongs to sigma(a): otherwise a-phi(a)1 is invertible but is sent to zero. Hence |phi(a)|<=||a||, so phi is continuous. Define exp(za) by its absolutely norm-convergent Banach-algebra series; the scalar exponential bounds it, and the absolute Cauchy-product theorem gives exp(za)exp(-za)=1. Thus f_a(z)=phi(exp(za)) is zero-free entire of exponential type with f_a(0)=1. The preceding one-variable lemma and differentiation at zero give f_a(z)=exp(z phi(a)). For a,b define F(z,w)=phi(exp(za)exp(wb)). Fixing w and dividing by F(0,w)=exp(w phi(b)) gives a zero-free entire function of z equal to exp(c(w)z). Here c(w)=phi(a exp(wb))/phi(exp(wb)) is entire in w. The norm bound on F, tested along rays in z and then sent to infinity, gives |c(w)|<=||a||; Liouville makes c constant, and c(0)=phi(a). Therefore F(z,w)=exp(z phi(a)+w phi(b)). Comparing the mixed zw derivative at (0,0) gives phi(ab)=phi(a)phi(b), with the multiplication order fixed by exp(za)exp(wb).",
+        "strategy": "Choose lambda=phi(a) under a norm-bound contradiction. Construct exp(za) and its inverse by explicit finite-product tail bounds. Establish scalar entire power series by direct exponential comparison, not an uncited radius formula. Apply the exponential-type lemma for fixed w, bound |c(w)| along a ray depending explicitly on c(w), use Liouville, and differentiate successively at zero to preserve the ordered product ab.",
         "deps": [
           "lem-zero-free-entire-function-of-exponential-type-is-an-exponential",
           "def-unital-banach-algebra",
@@ -1961,7 +2017,13 @@
           "cor-complex-power-series-sums-are-analytic",
           "thm-complex-power-series-converge-locally-uniformly",
           "def-complex-exponential",
-          "cor-complex-power-series-sums-have-derivatives-of-all-orders"
+          "cor-complex-power-series-sums-have-derivatives-of-all-orders",
+          "def-complex-series-power-series-and-absolute-convergence",
+          "thm-direct-comparison-test",
+          "thm-absolute-convergence-of-complex-series",
+          "thm-complex-analytic-functions-are-holomorphic",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -2279,12 +2341,13 @@
         "id": "thm-stone-representation-for-boolean-algebras",
         "kind": "theorem",
         "title": "Stone representation for boolean algebras",
-        "strategy": "The map b↦[b] preserves Boolean operations and is injective by ultrafilter separation; the basic clopens separate distinct ultrafilters, so Ult(B) is Hausdorff. To prove compactness directly, suppose a cover by basic clopens has no finite subcover. The complements then have the finite-intersection property and generate a proper Boolean filter; extend it by the preceding lemma. The resulting ultrafilter lies in every complement, contradicting the cover. Any clopen subset is compact and hence a finite union of basic clopens, therefore [b] for their finite join. This avoids an undeclared product-Tychonoff route.",
+        "strategy": "Derive complement dichotomy from maximal proper filters, then prove meet/join/complement identities and the basic clopen basis. Use extension and separation only for their stated claims. Build the proper filter of elements above finite meets of cover complements to prove basic-cover compactness. Refine arbitrary covers and cover each clopen only by contained basic sets. Include the empty join and trivial Boolean algebra explicitly; no product-Tychonoff argument.",
         "deps": [
           "def-stone-space-and-clopen-algebra",
           "def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality",
           "lem-boolean-ultrafilter-extension-from-compact-products",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -2353,7 +2416,7 @@
         "id": "def-algebraic-unitization-of-a-star-algebra",
         "kind": "definition",
         "title": "Algebraic unitization of a star algebra",
-        "strategy": "For nonunital A define A plus C, product (a,l)(b,m)=(ab+lb+ma,lm), involution (a,l)*=(a*,conj(l)), identity (0,1), and quotient character chi_infinity(a,l)=l. Algebraic verification precedes any norm claims.",
+        "strategy": "Verify the full seven-term associativity expansion, involution and ideal directly. Distinguish the broad algebraic definition from the narrower later norm and compactification statements.",
         "deps": [
           "def-c-star-algebra"
         ],
@@ -2375,14 +2438,14 @@
             }
           ]
         },
-        "statement": "For a nonunital star-algebra A, define A^+=A⊕C with the standard unitization product, involution, identity, and quotient character chi_infinity(a,lambda)=lambda.",
+        "statement": "For a possibly unital complex C*-algebra A, define the algebraic A^+=A plus C, with the stated multiplication, involution, unit and quotient character. No norm is asserted; the later minimal-norm theorem is referenced only for genuinely nonunital A, with zero separate.",
         "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
       },
       {
         "id": "thm-minimal-c-star-unitization",
         "kind": "theorem",
         "title": "Minimal c star unitization",
-        "strategy": "For genuinely nonunital nonzero C*-algebra A represent (a,l) by L_a+lI on Banach A. Prove ||L_a||=||a|| using aa*; if L_a+lI=0 and l!=0, a scalar multiple of a is an identity, contradiction. Its range is closed since L(A) is closed and codimension one. Verify the C* identity via ||Tb||^2<=||b|| ||T*T b|| and the reverse bound. For any unital C*-algebra containing A as a closed ideal, the extension is injective since a+l1=0 with l!=0 would give a unit in A; uniqueness is algebraic. The zero algebra is treated separately as unitizing to C, not by a supremum over its zero unit ball.",
+        "strategy": "Represent (a,lambda) as L_a+lambda I. Prove L is isometric and the representation faithful by nonunitality. The positive distance d=dist(I,L(A)) controls the scalar coordinate and proves the range closed. Verify involution contractivity directly using y=x*b, then the C*-identity. Compare the algebraically identical spectra of x*x for uniqueness of complete C*-norms. Treat A=0 separately as C.",
         "deps": [
           "def-algebraic-unitization-of-a-star-algebra",
           "def-c-star-algebra",
@@ -2390,7 +2453,10 @@
           "lem-c-star-spectral-radius-equals-norm-for-normal-elements",
           "def-spectrum-and-resolvent-set-in-a-banach-algebra",
           "def-spectral-radius",
-          "def-unital-banach-algebra"
+          "def-unital-banach-algebra",
+          "def-axiom-of-choice",
+          "thm-complex-plane-is-complete",
+          "lem-complex-conjugation-and-modulus-laws"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -2415,14 +2481,14 @@
             }
           ]
         },
-        "statement": "Every nonzero genuinely nonunital C-star algebra has a canonical minimal C-star norm on A^+, represented by L_a+lambda I on A, and this unitization is unique over A; the zero algebra unitizes to C.",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
+        "statement": "Assume AC. Every nonzero genuinely nonunital C-star algebra has a canonical minimal C-star norm on A^+, represented by L_a+lambda I on A, and this unitization is unique over A; the zero algebra unitizes to C.",
+        "axiom_audit": "AC is inherited from spectral-radius and normal-element norm interfaces; it also permits sequential approximation of closure points."
       },
       {
         "id": "thm-character-space-of-the-unitization-is-one-point-compactification",
         "kind": "theorem",
         "title": "Character space of the unitization is one point compactification",
-        "strategy": "Nonunital commutative A: every nonzero character extends by chi(a,l)=chi(a)+l; other than the quotient character restriction is nonzero. Extension proves continuity and boundedness of characters. The complement of chi_infinity is LCH; prove it is dense for genuinely nonunital A, since an isolated infinity under the unital representation would make A unital. Compact Hausdorff topology then gives its one-point compactification. Include the zero/empty convention separately.",
+        "strategy": "Prove extension and restriction are inverse and continuous for the evaluation topologies before any compactification argument. Identify A with the functions vanishing at the quotient character by the explicit Gelfand evaluation formula. Isolation would supply a nonzero identity. Compare infinity neighborhoods in both directions by closed compact complements; treat the zero algebra separately.",
         "deps": [
           "thm-minimal-c-star-unitization",
           "def-algebraic-unitization-of-a-star-algebra",
@@ -2434,7 +2500,9 @@
           "thm-locally-compact-hausdorff-basics",
           "thm-commutative-gelfand-naimark",
           "thm-compactness-under-continuous-maps",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -2537,14 +2605,16 @@
         "id": "thm-every-commutative-c-star-algebra-has-an-approximate-unit",
         "kind": "theorem",
         "title": "Every commutative c star algebra has an approximate unit",
-        "strategy": "In C0(X) take all compactly supported functions 0<=e<=1 ordered pointwise. It is directed by max and contains zero; local cutoff existence makes it approximate every f uniformly using a compact level set and the small tail. This avoids a simultaneous choice of bumps but inherits the published cutoff's DC assumption. Transport through Gelfand.",
+        "strategy": "Use all compactly supported [0,1]-valued functions ordered pointwise, with maximum proving directedness. Prove positivity by the continuous square root with the same compact support and transport that explicit factorization. A cutoff on the epsilon/2 level set gives both norm convergences. AC supplies Gelfand–Naimark and DC for cutoffs; empty space gives the singleton zero net.",
         "deps": [
           "thm-nonunital-commutative-gelfand-naimark",
           "def-approximate-unit-and-proper-c-star-morphism",
           "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
           "def-axiom-of-choice",
           "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
-          "def-c-star-algebra"
+          "def-c-star-algebra",
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -2576,7 +2646,7 @@
         "id": "thm-locally-compact-gelfand-duality",
         "kind": "theorem",
         "title": "Locally compact gelfand duality",
-        "strategy": "Use throughout the bounded, not-necessarily-unital star-homomorphisms defined by def-c-star-algebra, and impose properness from the approximate-unit definition. For proper continuous g:Y->X, pullback is such a morphism and lands in C0(Y); compact cutoffs show every approximate unit pulls back to one. Conversely proper phi:A->B makes chi phi nonzero because characters tend to 1 on approximate units. Extend characters to unitizations; the compact extension has exactly infinity over infinity, so restricting is proper (mere restriction of a proper map does not suffice). Show evaluations identify Delta(C0 X) with X by extending to X+ and excluding infinity. Verify naturality and inverse correspondences, including mixed unital/nonunital and zero cases. The compact duality theorem retains its separate unital-arrow and empty-space/zero-algebra convention.",
+        "strategy": "Prove C0 as the closed ideal of continuous functions on X+ vanishing at infinity. Approximate units make transpose characters nonzero and evaluations give continuity. Prove transpose properness directly by a cutoff on compact K in Delta(A) and a compact level set of Gamma_B(phi(a)). Pullback preserves every approximate unit by uniform compact cutoff estimates. Extend characters algebraically to C(X+) for evaluation bijectivity, and use supported cutoffs for inverse continuity. Check natural isomorphisms are proper. Compact agreement is restricted to nonempty spaces/nonzero unital algebras; zero arrows are treated separately.",
         "deps": [
           "def-c-star-algebra",
           "def-approximate-unit-and-proper-c-star-morphism",
@@ -2590,7 +2660,12 @@
           "thm-one-point-compactification-properties",
           "lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set",
           "def-axiom-of-choice",
-          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-character-and-maximal-ideal-space",
+          "thm-compactness-under-continuous-maps",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-one-point-compactification"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -2612,6 +2687,16 @@
         },
         "statement": "Assume AC. Locally compact Hausdorff spaces with proper continuous maps are contravariantly equivalent via C_0 and Delta to commutative C-star algebras with bounded, not-necessarily-unital proper star-homomorphisms in the sense of def-c-star-algebra and def-approximate-unit-and-proper-c-star-morphism.",
         "axiom_audit": "Full AC is assumed and is used exactly through the declared Zorn, Hahn–Banach, ultrafilter/Tychonoff, or inherited AC supplier; all remaining steps are choice-free."
+      },
+      {
+        "id": "rem-lca-group-algebra-and-character-space-external", "kind": "remark", "title": "LCA group algebra and character-space results recorded externally",
+        "statement": "Assume AC. For an LCA group G with Haar measure, L1(G) is the stated commutative Banach star convolution algebra, unital exactly for discrete G; in the nondiscrete scalar unitization, the characters and their topology are the one-point compactification of the compact-open dual as stated in the item.",
+        "deps": ["def-axiom-of-choice", "def-character-and-maximal-ideal-space"], "strategy": "Record Williams Example 3.10 as the explicit external LCA analytic and character-space prerequisite.", "axiom_audit": "Full AC is explicit; this result is external.", "provenance": {"statement": "literature-derived", "proof": "not-supplied"}, "sources": {"references": [{"title": "Dana P. Williams, Lecture Notes on the Spectral Theorem — Example 3.10, printed p. 9", "url": "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"}]}
+      },
+      {
+        "id": "ex-gelfand-transform-of-l-one-of-an-lca-group", "kind": "example", "title": "Fourier transform as the Gelfand transform of an LCA group algebra",
+        "statement": "Assume AC. Relative to the recorded external LCA theorem, the scalar unitization of nondiscrete L1(G) is a commutative unital Banach star algebra and its Gelfand transform restricts to the Fourier transform on the dual, while the point at infinity evaluates the scalar coordinate.",
+        "deps": ["rem-lca-group-algebra-and-character-space-external", "def-gelfand-transform", "def-axiom-of-choice", "thm-complex-plane-is-complete"], "strategy": "Prove the sum-norm unitization estimates and evaluate the Gelfand transform at the externally classified characters.", "axiom_audit": "Full AC is explicit and inherited from the external LCA theorem.", "provenance": {"statement": "ai-altered", "proof": "ai-altered"}, "sources": {"references": [{"title": "Dana P. Williams, Lecture Notes on the Spectral Theorem — Example 3.10, printed p. 9", "url": "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"}]}
       }
     ]
   },
@@ -2696,7 +2781,7 @@
         "id": "ex-gelfand-transform-of-ell-one-of-z",
         "kind": "example",
         "title": "Gelfand transform of ell one of z",
-        "strategy": "Fix explicit bijections N↔Z and N↔Z^2 and define ell1(Z) and convolution coordinatewise. Tonelli applied to |a_j b_{n-j}| gives ||a*b||_1<=||a||_1||b||_1 and absolute convergence of every convolution coordinate. Tonelli again gives absolute convergence of the relevant double and triple arrays; applying real double-series Fubini to real and imaginary parts justifies all regroupings and proves associativity and character multiplicativity. Complex completeness gives coordinate limits, while finite partial-sum bounds and a fixed Cauchy-tail estimate prove completeness of ell1(Z). The point mass delta_0 is the unit. Since delta_1 is invertible with inverse delta_{-1}, every character sends it to z with |z|=1. Finite-truncation density and continuity give chi(a)=sum_n a_n z^n; conversely this absolutely convergent Laurent series defines a character. Its tail is uniformly bounded by the ell1 tail, so the circle-to-character map is continuous; evaluation on delta_1 is its continuous inverse (equivalently use compact-to-Hausdorff), giving the claimed topological parameterization. The inverse-closed Wiener consequence remains only a separate orientation remark.",
+        "strategy": "Fix explicit bijections N↔Z and N↔Z^2 and define ell1(Z) and convolution coordinatewise. Tonelli applied to |a_j b_{n-j}| gives ||a*b||_1<=||a||_1||b||_1 and absolute convergence of every convolution coordinate. Tonelli again gives absolute convergence of the relevant double and triple arrays; applying real double-series Fubini to real and imaginary parts justifies all regroupings and proves associativity and character multiplicativity. Complex completeness gives coordinate limits, while finite partial-sum bounds and a fixed Cauchy-tail estimate prove completeness of ell1(Z). The point mass delta_0 is the unit. Since delta_1 is invertible with inverse delta_{-1}, every character sends it to z with |z|=1. Transport P_N by the explicit isometry U(a)_k=a_{b(k)} and define Q_N=U^{-1}P_NU. This transported finite-truncation density and continuity give chi(a)=sum_n a_n z^n; conversely this absolutely convergent Laurent series defines a character. Its tail is uniformly bounded by the ell1 tail, so the circle-to-character map is continuous; evaluation on delta_1 is its continuous inverse (equivalently use compact-to-Hausdorff), giving the claimed topological parameterization. The inverse-closed Wiener consequence remains only a separate orientation remark.",
         "deps": [
           "thm-characters-on-a-unital-banach-algebra-are-continuous",
           "lem-finite-truncations-are-dense-in-c0-and-ell-one",
@@ -2705,14 +2790,16 @@
           "thm-double-series-fubini",
           "thm-complex-plane-is-complete",
           "thm-compactness-under-continuous-maps",
-          "def-the-one-dimensional-torus-and-normalized-haar-integral"
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-countable-choice",
+          "def-character-and-maximal-ideal-space"
         ],
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
         },
         "statement": "Characters of ell^1(Z) under convolution are indexed by z on the unit circle and the Gelfand transform is the absolutely convergent Laurent series sum_n a_n z^n.",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used.",
+        "axiom_audit": "Countable Choice, inherited from the torus interface; all reindexing and finite-tail arguments use the fixed enumerations.",
         "sources": {
           "references": [
             {
@@ -2766,7 +2853,10 @@
         "strategy": "On C([0,1],C), Tf(t)=exp(it)f(1-t) is a surjective linear isometry with explicit inverse. It need not preserve 1 or multiplication. In real scalars use the sign weight -1.",
         "deps": [
           "thm-banach-stone",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "lem-sine-positive-and-cosine-decreasing-on-zero-two"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -3010,12 +3100,19 @@
         "id": "ex-unitization-corresponds-to-one-point-compactification",
         "kind": "example",
         "title": "Unitization corresponds to one point compactification",
-        "strategy": "For c0(N), unitization consists of convergent sequences, norm sup_n|a_n+lambda| including limit lambda; identify with continuous functions on N plus infinity. Infinity character is the limit. General genuinely noncompact LCH X follows by extending f with f(infinity)=0.",
+        "strategy": "Prove zero-extension equivalence, closed kernel and completeness; separate each point from infinity to prove genuine nonunitality, then apply norm uniqueness and specialize to cofinite infinity neighborhoods.",
         "deps": [
           "def-c-zero-and-ell-infinity",
           "thm-minimal-c-star-unitization",
           "thm-one-point-compactification-properties",
-          "def-compact-support-c-c-and-c-zero-on-an-lch-space"
+          "def-compact-support-c-c-and-c-zero-on-an-lch-space",
+          "def-one-point-compactification",
+          "def-axiom-of-choice",
+          "thm-urysohn-lemma",
+          "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "thm-uniform-cauchy-criterion-complex-functions",
+          "thm-compactness-under-continuous-maps",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
         ],
         "provenance": {
           "statement": "ai-altered",
@@ -3035,8 +3132,8 @@
             }
           ]
         },
-        "statement": "The minimal unitization of c_0(N) is the C-star algebra of convergent sequences, canonically C(N∪{infinity}); the quotient character is the limit at infinity.",
-        "axiom_audit": "ZF relative to the stated spaces and previously established structures; no new choice principle is used."
+        "statement": "Under AC, c0(N) unitizes to convergent sequences and more generally noncompact LCH X has C0(X)+ isometrically star-isomorphic to C(X+), with quotient character evaluation at infinity.",
+        "axiom_audit": "AC for Urysohn separation via DC and minimal C*-unitization uniqueness."
       },
       {
         "id": "rem-wiener-lemma-is-developed-on-the-fourier-analysis-track",

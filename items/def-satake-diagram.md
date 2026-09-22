@@ -5,7 +5,7 @@ title: Satake diagram
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-positive-system-and-base-of-simple-roots, def-axiom-of-choice, def-cayley-transform-of-a-theta-stable-cartan-subalgebra, def-maximal-split-abelian-subspace-and-real-rank, def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-vogan-diagram]
+deps: [def-axiom-of-choice, def-theta-stable-cartan-subalgebra-and-compact-split-parts, def-maximal-split-abelian-subspace-and-real-rank, def-cayley-transform-of-a-theta-stable-cartan-subalgebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification, def-positive-system-and-base-of-simple-roots, def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-vogan-diagram]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -13,11 +13,13 @@ sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter VI"
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
-      locator: "Chapter VI, §6, root types and Proposition 6.70, printed pp. 386-388; §7, Cayley transforms and Propositions 6.69-6.72, printed pp. 389-394; §11, restricted roots in the classification, printed pp. 422-425; §12, Problem 7, printed p. 427; Historical Notes, printed p. 767"
+      locator: "Chapter VI §12, Problem 7(a)-(e), printed p.427: compatible positivity and the white-root involution modulo imaginary simple roots; pairing proof supplied below"
 landmark: false
 ---
 
 ## Definition
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Let $\mathfrak g_0$ be a finite-dimensional real semisimple Lie algebra with
 Cartan involution $\theta$ and Cartan decomposition
@@ -46,7 +48,9 @@ equivalently $\theta\alpha=-\alpha$, $\theta\alpha=\alpha$, or neither, where
 $\theta\alpha=\alpha\circ\theta^{-1}$. In particular an imaginary root is
 exactly a root whose restriction to $\mathfrak a_0$ vanishes, and $\theta$
 permutes the three classes of roots. An imaginary root has $\theta$-stable
-root space $\mathfrak g_\alpha$, which is one-dimensional, so it lies either
+root space $\mathfrak g_\alpha$, which is one-dimensional
+([[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]]),
+so it lies either
 in the $+1$-eigenspace $\mathfrak k$ of $\theta$ or in the $-1$-eigenspace
 $\mathfrak p$; the imaginary root is **compact** in the first case and
 **noncompact** in the second. Because $\mathfrak h_0$ is maximally split, no
@@ -59,23 +63,39 @@ assertion 2).
 **Compatible positive systems.** A positive system $\Phi^{+}$ of $\Phi$ and
 its base $\Delta$ are as in
 [[def-positive-system-and-base-of-simple-roots]]. Let
-$\Sigma=\Sigma(\mathfrak g_0,\mathfrak a_0)$ be the restricted-root system of
-$\mathfrak g_0$ with respect to the maximal abelian subspace $\mathfrak a_0$
-([[def-restricted-root-and-restricted-root-space]],
-[[thm-restricted-root-space-decomposition]]), and let $\Sigma^{+}$ be a
-positive system of $\Sigma$. A positive system $\Phi^{+}$ of $\Phi$ is
-**compatible** with $\Sigma^{+}$ if every root of $\Phi^{+}$ whose restriction
-to $\mathfrak a_0$ is nonzero has that restriction in $\Sigma^{+}$:
-$$\alpha\in\Phi^{+},\ \alpha|_{\mathfrak a_0}\ne0\quad\Longrightarrow\quad\alpha|_{\mathfrak a_0}\in\Sigma^{+}.$$
-Compatible positive systems exist: choose $H\in\mathfrak a_0$ with
-$\lambda(H)\ne0$ for every $\lambda\in\Sigma$ and $T\in\mathfrak t_0$ with
-$\alpha(T)\ne0$ for every imaginary root $\alpha$, and declare $\alpha$ to be
-positive when the pair
-$\bigl(\alpha(H),\ \operatorname{Im}\alpha(T)\bigr)\in\mathbb R^{2}$ is
-strictly positive for the lexicographic order; this is a positive system,
-because $(\alpha(H),\operatorname{Im}\alpha(T))\ne(0,0)$ for every root, and
-it is compatible with the positive system
-$\Sigma^{+}=\{\lambda\in\Sigma:\lambda(H)>0\}$.
+$\Sigma=\Sigma(\mathfrak g_0,\mathfrak a_0)$ be the finite set of restricted
+roots ([[def-restricted-root-and-restricted-root-space]],
+[[thm-restricted-root-space-decomposition]]). A restricted positive system
+means $\Sigma^+=\{\lambda\in\Sigma:\lambda(H)>0\}$ for a regular
+$H\in\mathfrak a_0$, with $\lambda(H)\ne0$ for all $\lambda\in\Sigma$.
+This definition also applies when the restricted root system is nonreduced.
+The nonzero restrictions of complex roots are exactly $\Sigma$: restriction
+of the complex root decomposition groups its weight spaces according to
+$\alpha|_{\mathfrak a_0}$, while complexification of a real restricted-weight
+space gives the same joint eigenspace, since its eigenvalue equations have
+real coefficients
+([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]],
+[[def-restricted-root-and-restricted-root-space]]).
+
+A positive system $\Phi^+$ is **compatible** with $\Sigma^+$ if
+$$\alpha\in\Phi^+,\quad\alpha|_{\mathfrak a_0}\ne0\quad\Longrightarrow\quad\alpha|_{\mathfrak a_0}\in\Sigma^+.$$
+Given the specified $\Sigma^+$, take a regular $H$ defining it. Choose
+$T\in\mathfrak t_0$ with $\alpha(T)\ne0$ for every imaginary root; the
+finite-union lemma gives such a $T$ because those restrictions are nonzero
+([[lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces]]).
+Use lexicographic positivity of
+$(\alpha(H),\operatorname{Im}\alpha(T))$.
+To see that this is a positive system in the stated Euclidean sense, choose
+$\epsilon>0$ so small that
+$|\epsilon\operatorname{Im}\alpha(T)|<|\alpha(H)|$ for every root with
+$\alpha(H)\ne0$. There are only finitely many such inequalities, so they can
+all hold. The regular vector $H-i\epsilon T\in\mathfrak a_0\oplus i\mathfrak t_0$
+then gives exactly those signs, since
+$\alpha(H-i\epsilon T)=\alpha(H)+\epsilon\operatorname{Im}\alpha(T)$.
+The real positive Killing space here is justified in step 2.1 of
+[[thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification]].
+If a relevant root family is empty, choose the corresponding vector to be
+zero and omit its inequalities.
 
 **The Satake diagram.** Let $\Phi^{+}$ be a positive system of $\Phi$
 compatible with a positive system $\Sigma^{+}$ of $\Sigma$, with base $\Delta$.
@@ -98,55 +118,60 @@ with the following two decorations of its vertices:
   style, so that it is not confused with the arrows attached to multiple
   edges of the underlying Dynkin diagram.
 
-That the arrow relation is the pairing of Satake's construction, and not an
-arbitrary decoration, is the content of Knapp, Chapter VI, §12, Problem 7,
-printed p. 427: part (a) shows that every simple restricted root of
-$\Sigma^{+}$ is the restriction of a simple root of $\Phi^{+}$; part (b) shows
-that for every simple root $\alpha$ whose restriction is nonzero the root
-$-\theta\alpha$ differs by an element of the span $V$ of the imaginary simple
-roots from a unique simple root $\alpha'$, so that $\alpha\mapsto\alpha'$ is
-an involution of the simple roots outside $V$ (it may fix a root, as for the
-real roots, and two distinct simple roots outside $V$ have the same nonzero
-restriction exactly when they form an orbit of this involution); and parts (c)
-and (d) show, by exhibiting
-elements of $\mathfrak a_0$ that separate the various restricted simple roots,
-that two distinct white simple roots have equal restriction if and only if they
-are paired in this way. The Satake diagram therefore records the same
-structure that the Vogan diagram of [[def-vogan-diagram]] records, in the
-coordinate system of the restricted roots rather than that of a maximally
-compact Cartan subalgebra.
+Here the equal-restriction relation really is a pairing. We give the
+linear-algebra verification. Put $\Delta_0=\{\delta\in\Delta:\delta|_{\mathfrak a_0}=0\}$,
+$V_0=\operatorname{span}_{\mathbb R}\Delta_0$, and $s=-\theta$ on the real
+root space. The map $s$ is a root-system involution, acts as minus identity
+on $V_0$, and preserves restrictions to $\mathfrak a_0$. For a white simple
+root $\alpha$, $s\alpha$ is positive, since its nonzero restriction is the
+same positive restricted root as that of $\alpha$. The simple-root
+expansion theorem
+([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]])
+therefore makes the induced matrix of $s$ on the quotient by $V_0$
+nonnegative integral in the basis of white simple-root classes. Its inverse
+is itself and is also nonnegative. Such an invertible matrix permutes the
+extreme rays of the nonnegative coordinate cone: those rays are exactly the
+coordinate axes, since a vector with two positive coordinates splits into two
+nonproportional nonnegative vectors. Thus the matrix permutes axes up to
+positive scalars. The matrix and its inverse are integral, so each scalar
+and its reciprocal are positive integers, forcing the scalar to be one.
+Consequently there is an involution $\alpha\mapsto\alpha'$ of the white
+simple roots such that $s\alpha-\alpha'\in V_0$.
 
-**Equivalent Satake diagrams.** Two quadruples determine diagrams over the
-same root system $\Phi$, and the passage between the diagrams of one real
-form is generated by the following moves, in the same way as for Vogan
-diagrams in [[def-vogan-diagram]]:
+It follows that $\alpha'$ and $\alpha$ have equal restriction. Conversely,
+if white $\alpha,\beta$ have equal restriction, then
+$\alpha+s\alpha=\beta+s\beta$: half of either sum is the corresponding
+functional on $\mathfrak a_0$, extended by zero on $i\mathfrak t_0$.
+Modulo $V_0$, equality reads
+$[\alpha]+[\alpha']=[\beta]+[\beta']$ in the basis of white classes.
+This forces the two unordered orbits, with repetitions for a fixed point,
+to be the same. Hence a nonzero restriction is shared by at most two white
+simple roots, and the distinct pair is precisely a two-element orbit of
+this involution. This proves the assertion behind the arrow drawing, without
+identifying the pairing with the possibly base-nonpreserving map $-\theta$
+itself.
 
-1. conjugating the Cartan subalgebra by a real inner automorphism of
-   $\mathfrak g_0$; every maximally split $\theta$-stable Cartan subalgebra of
-   $\mathfrak g_0$ is conjugate to $\mathfrak h_0$ by such an automorphism
-   ([[thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification]],
-   assertion 4);
-2. replacing the compatible positive system $\Phi^{+}$ by another compatible
-   positive system for the same Cartan subalgebra, which changes the base and
-   the decorations by the corresponding diagram automorphism and by changes of
-   base.
+**Isomorphism and equivalence.** Two Satake diagrams are **equivalent** if
+they are isomorphic as decorated Dynkin diagrams: a vertex bijection
+preserves edge multiplicities, edge arrows, black and white colors, and
+Satake pairs. In based-root-system language the isomorphism preserves roots
+and Cartan integers; arbitrary absolute length scales on separate components
+are not part of these data.
 
-For Satake diagrams arising from such quadruples, the decorations after a
-change of base are recomputed using the same split part $\mathfrak a_0$ and
-restriction map $\mathfrak h^*\to\mathfrak a_0^*$; the two geometric moves
-above generate **equivalence**. An **abstract Satake diagram** with no chosen
-real-form realization is only the decorated based root system, and two such
-abstract diagrams are called equivalent precisely when they are isomorphic as
-decorated data: an isometry carries one root system and base to the other and
-preserves the colouring and arrow pairing. An arbitrary change of base is not
-a move on the abstract decoration alone, because that decoration does not
-contain the split part or restriction map needed to redecorate the new base.
-The equivalence of the Vogan and Satake pictures, and the fact that the
-realized decorated data are determined by the pair
-$(\mathfrak g_0,\theta)$ rather than by the choices made in their construction,
-is the content of
-[[thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications]];
-the passage between the two pictures is given by real-root and
-noncompact-imaginary Cayley transforms
-([[def-cayley-transform-of-a-theta-stable-cartan-subalgebra]],
-[[thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification]]).
+A formally colored and paired finite-type Dynkin diagram is called
+**admissible Satake data** if it occurs from a quadruple as above; the word
+Satake diagram is reserved here for these admissible data. This definition
+does not assert that arbitrary black subsets and pairings are realizable.
+In particular the admissibility condition for Satake data differs from the
+unrestricted fixed-vertex painting in an abstract Vogan diagram
+([[def-vogan-diagram]]).
+
+A change of compatible positive system on a realized quadruple requires
+recomputing colors and pairs using the actual restriction map. It is not an
+operation specified by an arbitrary abstract decoration. Independence of the
+resulting equivalence class from the choices, and its relation to the Vogan
+classification, are the assertions of
+[[thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications]].
+They are not assumed in this definition. For $\mathfrak a_0=0$ all vertices
+are black and no Satake arrows occur; for the zero algebra the whole diagram
+is empty.

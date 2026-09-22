@@ -5,12 +5,17 @@ title: Characters of continuous functions are evaluations
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-urysohn-lemma, thm-uniform-cauchy-criterion-complex-functions, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-dependent-choice, def-character-and-maximal-ideal-space, def-compact-support-c-c-and-c-zero-on-an-lch-space]
+deps: ["thm-characters-on-a-unital-banach-algebra-are-continuous", "thm-urysohn-lemma", "thm-uniform-cauchy-criterion-complex-functions", "thm-complex-plane-is-complete", "thm-compactness-under-continuous-maps", "def-dependent-choice", "def-character-and-maximal-ideal-space", "def-compact-support-c-c-and-c-zero-on-an-lch-space", "thm-a-compact-hausdorff-space-is-regular-and-normal"]
 justified_by: []
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Remark 3.1.36 and §3.1, printed pp. 54–67"
@@ -57,13 +62,15 @@ by one function and apply that function's continuity.
 
 [L4] Under Dependent Choice the Urysohn lemma holds: in a normal space, disjoint closed sets are separated by a continuous function into $[0,1]$ ([[thm-urysohn-lemma]], [[def-dependent-choice]]).
 
-[L5] A continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]]).
+[L6] Every compact Hausdorff space is normal and $T_1$ ([[thm-a-compact-hausdorff-space-is-regular-and-normal]]).
+
+[L5] A continuous real function on a nonempty compact space attains a finite maximum; a continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 $C(K)$ is a nonzero commutative unital complex Banach algebra: pointwise operations give an associative commutative bilinear product and the constant function $\mathbf 1$ is a unit with $\|\mathbf 1\| = 1$; the supremum norm is submultiplicative and satisfies the triangle inequality; and $C(K)$ is complete, because a Cauchy sequence $(f_n)$ in the supremum norm is uniformly Cauchy, so its pointwise limit $f$ exists by [L2] and is continuous by [L1], and $\|f_n - f\|_\infty \to 0$ by the definition of uniform Cauchyness. Nonzero: since $K \ne \varnothing$, the constant function $\mathbf 1$ is not the zero function. [L1, L2, algebra]
+1.1 For $f\in C(K)$, continuity of $|f|$ and compactness give a finite maximum by [L5], so the supremum norm is well-defined. $C(K)$ is a nonzero commutative unital complex Banach algebra: pointwise operations give an associative commutative bilinear product and the constant function $\mathbf 1$ is a unit with $\|\mathbf 1\| = 1$; the supremum norm is submultiplicative and satisfies the triangle inequality; and $C(K)$ is complete, because a Cauchy sequence $(f_n)$ in the supremum norm is uniformly Cauchy, so its pointwise limit $f$ exists by [L2] and is continuous by [L1], and $\|f_n - f\|_\infty \to 0$ by the definition of uniform Cauchyness. Nonzero: since $K \ne \varnothing$, the constant function $\mathbf 1$ is not the zero function. [L1, L2, L5, algebra]
 
 1.2 For every $x \in K$ the evaluation $\mathrm{ev}_x(f) := f(x)$ is a character of $C(K)$: it is complex-linear, multiplicative, and nonzero since $\mathrm{ev}_x(\mathbf 1) = 1 \ne 0$. [algebra]
 
@@ -71,9 +78,9 @@ by one function and apply that function's continuity.
 
 1.4 The map $e : K \to \Delta(C(K))$, $e(x) = \mathrm{ev}_x$, is continuous, because for each $f \in C(K)$ the composition $x \mapsto \mathrm{ev}_x(f) = f(x)$ is continuous by the continuity of $f$. [1.2, algebra]
 
-1.5 The evaluations are pairwise distinct: if $x \ne y$ in $K$, then $\{x\}$ and $\{y\}$ are disjoint closed subsets of the normal space $K$, so by [L4] there is a continuous $f : K \to [0,1]$ with $f(x) = 0$ and $f(y) = 1$; then $\mathrm{ev}_x(f) = 0 \ne 1 = \mathrm{ev}_y(f)$. [L4, algebra]
+1.5 The evaluations are pairwise distinct: if $x \ne y$ in $K$, then $\{x\}$ and $\{y\}$ are disjoint closed subsets of the normal space $K$ by [L6], so by [L4] there is a continuous $f : K \to [0,1]$ with $f(x) = 0$ and $f(y) = 1$; then $\mathrm{ev}_x(f) = 0 \ne 1 = \mathrm{ev}_y(f)$. [L4, L6, algebra]
 
-2.1 Let $\chi$ be a character of $C(K)$. Suppose that the ideals' common zero set is empty, that is, for every $x \in K$ there is $f_x \in \ker\chi$ with $f_x(x) \ne 0$. The sets $U_x := \{f_x \ne 0\}$ are open and cover $K$, so by compactness there are $x_1,\dots,x_n \in K$ with $K = \bigcup_{i \le n} U_{x_i}$. Then $g := \sum_{i\le n} |f_{x_i}|^2 = \sum_{i\le n} \overline{f_{x_i}} f_{x_i}$ lies in $\ker\chi$ (a finite sum of products of elements of the ideal $\ker\chi$) and satisfies $g > 0$ on $K$; hence $1/g \in C(K)$ and $\mathbf 1 = g \cdot (1/g) \in \ker\chi$, so $\chi(\mathbf 1) = 0$, contradicting $\chi(\mathbf 1) = 1$ from [L3] and [step 1.1]. Hence there is $x \in K$ with $f(x) = 0$ for every $f \in \ker\chi$. [1.1, 1.2, L3, algebra]
+2.1 Let $\chi$ be a character of $C(K)$ and suppose the common zero set of $\ker\chi$ is empty. The family $\{U_f:f\in\ker\chi\}$, where $U_f=\{x:f(x)\ne0\}$, is an open cover of $K$ formed without choosing a function for each point. Compactness gives a finite subcover; choosing a witnessing function for each of its finitely many members gives $f_1,\ldots,f_n\in\ker\chi$ with no common zero. Here $n\ge1$ since $K$ is nonempty. Then $g=\sum_{i=1}^n\overline{f_i}f_i$ is in $\ker\chi$: each $\overline{f_i}$ is continuous and the kernel is an ideal, without any assumption that $\chi$ preserves conjugation. Also $g>0$ everywhere, so $1/g$ is continuous and $1=g(1/g)\in\ker\chi$. This contradicts $\chi(1)=1$ from [L3] applied using [step 1.1]. Thus there is $x\in K$ at which every member of $\ker\chi$ vanishes. [1.1, L3, algebra]
 
 3.1 With $x$ as in [step 2.1], $\ker\chi \subseteq \ker\mathrm{ev}_x$. Both are kernels of nonzero multiplicative linear functionals, hence both are maximal ideals: if $f \notin \ker\chi$ then every $h \in C(K)$ has $h - (\chi(h)/\chi(f))f \in \ker\chi$, so any ideal strictly containing $\ker\chi$ contains $f$ and hence equals $C(K)$. Therefore $\ker\chi = \ker\mathrm{ev}_x$. [1.2, step 2.1, algebra]
 
@@ -83,5 +90,5 @@ by one function and apply that function's continuity.
 
 ## Remarks
 
-- **Dependent Choice is inherited from Urysohn.** It is used twice: for the separation of distinct points in [step 1.5], and nowhere else; the common-zero argument is choice-free once finitely many functions are chosen by compactness.
+- **Dependent Choice is inherited from Urysohn.** It is used for the separation of distinct points in [step 1.5], and nowhere else; the common-zero argument is choice-free once finitely many functions are chosen by compactness.
 - **The empty case.** If $K = \varnothing$ then $C(K) = \{0\}$ and there is no character, so $\Delta(C(K)) = \varnothing = e[K]$, and claim 2 holds trivially with the empty map; the proof above uses $K \ne \varnothing$ only to know that $\mathbf 1 \ne 0$ in $C(K)$.

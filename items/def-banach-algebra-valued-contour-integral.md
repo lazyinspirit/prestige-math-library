@@ -5,7 +5,7 @@ title: Banach algebra valued contour integral
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-unital-banach-algebra, thm-banach-series-criterion, def-complex-contours-reversal-concatenation-and-closedness, def-bochner-integrable-function, thm-bochner-integrability-criterion]
+deps: ["def-banach-space", "def-unital-banach-algebra", "def-complex-contours-reversal-concatenation-and-closedness", "def-bochner-integrable-function", "thm-bochner-integrability-criterion", "cor-piecewise-c1-paths-have-additive-speed-integral-length", "cor-mean-value-theorem", "def-complex-line-integral-over-a-rectifiable-path", "def-integration-and-index-of-complex-chain"]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -20,97 +20,102 @@ sources:
 
 ## Definition
 
-Let $A$ be a unital complex Banach algebra ([[def-unital-banach-algebra]]),
-let $\gamma : [a,b] \to \mathbb C$ be a piecewise $C^1$ complex contour
+Let $E$ be a complex Banach space ([[def-banach-space]]), let
+$\gamma:[a,b]\to\mathbb C$ be a piecewise $C^1$ contour
 ([[def-complex-contours-reversal-concatenation-and-closedness]]), and let
-$f : \gamma^\ast \to A$ be continuous on the trace of $\gamma$. The
-**contour integral of $f$ along $\gamma$**,
+$f:\gamma^*\to E$ be continuous. The construction applies in particular to
+$E=A$ for a unital complex Banach algebra ([[def-unital-banach-algebra]]);
+no algebra multiplication or unit is used.
 
-$$\int_\gamma f(z)\,dz \;\in\; A,$$
+For $a<b$ fix a finite subdivision $a=t_0<\cdots<t_m=b$ such that the
+restriction of $\gamma$ on each piece has a continuous derivative extension
+$v_k$ to its closed interval. Given a tagged partition $P=(s_j,\xi_j)$
+refining these nodes, define
+$$S(f,\gamma,P,\xi)=\sum_j f(\gamma(\xi_j))v_{k(j)}(\xi_j)(s_j-s_{j-1})\in E,$$
+where $[s_{j-1},s_j]$ lies in the $k(j)$-th piece. At a node, use the
+derivative extension from this piece; the two adjacent intervals may therefore
+use different values. The **contour integral** is the norm limit
+$$\int_\gamma f(z)\,dz=\lim_{\operatorname{mesh}(P)\to0}S(f,\gamma,P,\xi).$$
+Existence and independence of all these choices are verified below. On a
+singleton parameter interval the integral is defined to be zero.
 
-is defined as follows.
+Equivalently it is the Bochner integral on the finite Lebesgue measure interval
+$$\int_a^b f(\gamma(t))\gamma'(t)\,dt,$$
+where the finitely many corner values may be assigned arbitrarily. It satisfies
+$$\left\|\int_\gamma f(z)\,dz\right\|\le L(\gamma)\sup_{z\in\gamma^*}\|f(z)\|.$$
+Concatenation adds the integrals and reversal negates them. An increasing
+piecewise-$C^1$ bijection of compact parameter intervals whose inverse is also
+piecewise $C^1$ leaves the integral unchanged.
 
-Choose a partition $a = t_0 < t_1 < \cdots < t_m = b$ such that $\gamma$ is
-$C^1$ on every closed interval $[t_{k-1},t_k]$ (with one-sided derivatives at
-the nodes). Consider partitions
-$P = \{a = s_0 < s_1 < \cdots < s_N = b\}$ refining this one, with tags
-$\xi_j \in [s_{j-1},s_j]$, and form the **tagged Riemann sum**
-
-$$S(f,\gamma,P,\xi) \;:=\; \sum_{j=1}^{N} f(\gamma(\xi_j))\, \gamma'(\xi_j)\,(s_j - s_{j-1}) ,$$
-
-a finite sum in the Banach algebra $A$. When the interval $[s_{j-1},s_j]$
-contains a node of the $C^1$ partition, the tag is read as a one-sided
-derivative; the finitely many such sums contribute nothing in the limit, and
-partitions are always taken to refine the $C^1$ partition.
-
-Then $S(f,\gamma,P,\xi)$ converges in $A$ as the mesh
-$\max_j(s_j - s_{j-1})$ tends to $0$; the limit, which is independent of the
-refining partitions and tags, is denoted $\int_\gamma f(z)\,dz$. The construction
-is the Banach-algebra case of the vector-valued integral of continuous functions
-along a compact interval:
-
-$$\int_\gamma f(z)\,dz \;=\; \int_a^b f(\gamma(t))\,\gamma'(t)\,dt ,$$
-
-where the right-hand side is the Bochner integral
-([[def-bochner-integrable-function]]) of the function
-$t \mapsto f(\gamma(t))\gamma'(t)$, which is continuous on each of the finitely
-many subintervals $[t_{k-1},t_k]$ and bounded on $[a,b]$. The integral satisfies
-
-$$\left\|\int_\gamma f(z)\,dz\right\| \;\le\; L(\gamma)\, \sup_{z \in \gamma^\ast}\|f(z)\| ,$$
-
-$L(\gamma)$ the length of $\gamma$, and it is additive over concatenation and
-negates under reversal:
-
-$$\int_{\gamma_1 \ast \gamma_2} f\,dz = \int_{\gamma_1} f\,dz + \int_{\gamma_2} f\,dz , \qquad \int_{\gamma^-} f\,dz = -\int_{\gamma} f\,dz ,$$
-
-whenever $f$ is continuous on the relevant traces, and it is unchanged by an
-orientation-preserving piecewise-$C^1$ reparametrization whose inverse is also
-piecewise $C^1$. Finally, for a **complex
-chain** $\Gamma = \sum_{k<r}m_k\gamma_k$ with trace $\Gamma^\ast$ and a function
-$f$ continuous on $\Gamma^\ast$, the **integral over the chain** is
-
-$$\int_\Gamma f(z)\,dz \;:=\; \sum_{\substack{k<r\\ m_k \ne 0}} m_k \int_{\gamma_k} f(z)\,dz ,$$
-
-a finite sum of elements of $A$; the empty chain integrates to $0$.
+For a finite complex chain $\Gamma=\sum_{k<r}m_k\gamma_k$ whose nonzero terms
+are piecewise $C^1$ contours, and continuous $f:\Gamma^*\to E$, define
+$$\int_\Gamma f(z)\,dz=\sum_{\substack{k<r\\m_k\ne0}}m_k\int_{\gamma_k}f(z)\,dz.$$
+Zero-coefficient terms are omitted; the empty chain integrates to zero.
 
 ## Remarks
 
-- **Why the sums converge, and why the value is well defined.** Write
-$F(t) := f(\gamma(t))\gamma'(t)$. On each subinterval $[t_{k-1},t_k]$ both
-factors are continuous, $\gamma'$ is bounded there, and $f$ is bounded on the
-compact trace, so $F$ is uniformly continuous on $[t_{k-1},t_k]$; let $\omega$
-be a common modulus of uniform continuity. For a partition refining the nodes
-and tags inside one subinterval, the estimate
-$\bigl\|\sum_j F(\xi_j)\Delta_j - \int F\bigr\| =
-\bigl\|\sum_j \int_{s_{j-1}}^{s_j}(F(\xi_j)-F(t))\,dt\bigr\| \le
-(b-a)\,\omega(\text{mesh})$
-shows that the sums converge to the Bochner integral of $F$ and that the limit
-does not depend on the refining partition or the tags. The Bochner integral
-exists because $F$ is bounded and measurable (piecewise continuous), so
-$\int\|F\| < \infty$ and [[thm-bochner-integrability-criterion]] applies; this
-is the agreement asserted above, and it is proved here rather than assumed from
-the scalar theory.
+**Existence and Bochner agreement.** On the $k$-th closed piece put
+$F_k(t)=f(\gamma(t))v_k(t)$. This is uniformly continuous and bounded.
+Subdivide each piece into $2^n$ equal intervals and use its left endpoint
+values to obtain finite-valued measurable step functions $h_n$. Assign fixed
+values at the finitely many nodes. Uniform continuity on the finitely many
+pieces shows $h_n\to F$ uniformly away from these nodes; here $F$ denotes
+$f(\gamma)\gamma'$ with the chosen node values. In particular $F$ is strongly
+measurable, not merely scalar measurable. Each $h_n$ is integrable, and
+$\int\|F-h_n\|\to0$ on this finite interval. Thus the definition of Bochner
+integration ([[def-bochner-integrable-function]]) supplies its integral, and
+[[thm-bochner-integrability-criterion]] gives independence of the approximants.
 
-- **The norm estimate is the Riemann-sum estimate in the limit.** For every
-tagged partition,
-$\|S(f,\gamma,P,\xi)\| \le \sum_j \|f(\gamma(\xi_j))\|\,
-|\gamma'(\xi_j)|\,\Delta_j \le \sup_{\gamma^\ast}\|f\| \cdot
-\sum_j |\gamma'(\xi_j)|\Delta_j$, and the last sums converge to the length
-$L(\gamma)$; passing to the limit gives the displayed bound. This is the only
-estimate used when integrals are bounded in the calculus below.
+For arbitrary tagged refinements the corresponding step function differs
+from $F$ in norm by at most a common modulus $\omega(\operatorname{mesh}P)$
+off the nodes. Hence its $L^1$ difference from $F$ is at most
+$(b-a)\omega(\operatorname{mesh}P)$. Comparing its simple integral with those
+of $h_n$, the triangle inequality for finite sums bounds the difference of
+integrals by the $L^1$ difference. Passing to the limit proves convergence of
+all tagged sums to the same Bochner value. Different finite subdivisions
+have a common refinement and the same a.e. function $F$; changing finitely
+many endpoint values changes neither integral. This proves all independence
+claims without a choice of an infinite family of tags.
 
-- **Additivity and reversal are inherited from the parameter integral.** The
-Bochner integral is additive over adjacent intervals and reverses sign under an
-orientation-reversing affine change of parameter; concatenation of contours is
-by definition the two affine pieces, reversal replaces $t$ by $a+b-t$, and the
-one-dimensional substitution theorem applies to the piecewise-$C^1$
-reparametrizations just specified. Consequently
-the chain integral is a finite linear combination of contour integrals and
-inherits additivity in the chain: $\int_{\Gamma_1+\Gamma_2} = \int_{\Gamma_1} +
-\int_{\Gamma_2}$ and $\int_{-\Gamma} = -\int_\Gamma$.
+**Norm estimate.** The triangle inequality gives
+$$\|S(f,\gamma,P,\xi)\|\le \sup_{\gamma^*}\|f\|\sum_j|v_{k(j)}(\xi_j)|(s_j-s_{j-1}).$$
+The scalar sums tend to the sum of the speed integrals on the pieces,
+which is $L(\gamma)$ by
+[[cor-piecewise-c1-paths-have-additive-speed-integral-length]]. Taking the
+limit proves the bound. A constant contour and a zero integrand therefore
+have zero integral, as does a contour with singleton parameter interval.
 
-- **Consistency with the scalar and the complex line integral.** For
-$A = \mathbb C$ the construction is the complex line integral of a continuous
-scalar function over a piecewise $C^1$ contour; the limit definition agrees with
-[[def-integration-and-index-of-complex-chain]], so the results about scalar
-contour integrals apply to the scalar special case.
+**Increment sums and parameter changes.** The same value is the limit of
+$$T(f,\gamma,P,\xi)=\sum_j f(\gamma(\xi_j))\bigl(\gamma(s_j)-\gamma(s_{j-1})\bigr).$$
+To see this, apply the real mean-value theorem
+([[cor-mean-value-theorem]]) separately to the two coordinates of $\gamma$
+on an interval contained in one smooth piece. If $\eta$ is a common modulus
+of the derivative extensions, the difference between its complex increment
+and $v_{k(j)}(\xi_j)(s_j-s_{j-1})$ is at most
+$\sqrt2\eta(\operatorname{mesh}P)(s_j-s_{j-1})$. Therefore
+$\|T-S\|\le\sqrt2\sup\|f\|(b-a)\eta(\operatorname{mesh}P)\to0$.
+This also holds for partitions not containing the original nodes: inserting
+the finitely many nodes changes only intervals of total length at most
+$2m\operatorname{mesh}P$. The bounded derivative extensions bound the
+variation of $\gamma$ there by a constant times this length, so both their
+old and subdivided contributions tend to zero.
+
+Under an increasing reparametrization as specified above, tagged partitions
+and tags map to tagged partitions and tags with exactly the same increment
+sums. Uniform continuity of the parameter map makes the image mesh tend to
+zero. Both contours remain piecewise $C^1$, so their integrals agree.
+Reversal reverses the order and the signs of the increments. For concatenation,
+split a partition at the joining parameter and use its two affine pieces;
+the increment sums split into the two sums. These facts prove the asserted
+reversal and concatenation identities. Finite linearity in chains follows
+from their definition. No claim is made here for a reparametrization taking
+a contour outside the piecewise-$C^1$ domain.
+
+**Scalar consistency.** When $E=\mathbb C$, expansion into real and imaginary
+parts turns the increment sums into the four Riemann–Stieltjes sums in
+[[def-complex-line-integral-over-a-rectifiable-path]]. Thus the limits agree
+on the common piecewise-$C^1$ domain. Taking finite sums gives agreement with
+[[def-integration-and-index-of-complex-chain]]. The zero Banach space is
+allowed and all its integrals are zero. The construction uses completeness,
+uniform continuity and explicitly prescribed finite subdivisions; it makes
+no new choice assumption.

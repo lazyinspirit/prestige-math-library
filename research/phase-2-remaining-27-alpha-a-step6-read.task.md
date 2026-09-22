@@ -247,7 +247,7 @@ files under `items/` for that.
 - `thm-maximal-tori-exist-in-compact-lie-groups` · theorem — Existence of maximal tori
 - `thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus` · theorem — Every element lies in a maximal torus
 - `thm-conjugacy-of-maximal-tori` · theorem — Conjugacy of maximal tori
-- `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus` · corollary — Connected abelian subgroups lie in maximal tori
+- `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus` · corollary — Compact connected abelian subgroups lie in maximal tori
 - `cor-rank-of-a-compact-connected-lie-group-is-well-defined` · corollary — Rank is well-defined
 - `def-weyl-group-of-a-compact-connected-lie-group` · definition — Compact Weyl group
 - `thm-compact-group-weyl-group-is-finite` · theorem — The compact Weyl group is finite

@@ -1,0 +1,11 @@
+# FA position 56 — repaired
+
+Independently inspected the current item, its supplier statements, batch-8 A/B context and coverage, owning manifest, proof contract, risk and boundary records, Alpha row 69, and both Terra judgments. The positive-index repair addresses the first judgment. The rejudge is correct that a zero L2 space need not arise from zero measure: on a singleton of infinite measure every nonzero function has infinite squared integral.
+
+The repaired item retains arbitrary measure spaces and both scalar fields. It invokes the explicit real/complex Hilbert-space supplier under Countable Choice, supplied by AC, and derives parallelogram by expanding the first-linear pairing. The older parallelogram supplier's displayed proof uses real squares; this consumer no longer relies on that proof for complex vectors. No existing supplier was edited, and this limited observation is not a finding that its real statement is defective.
+
+The distance set contains the distance to zero and is bounded below by zero. For n>=1, sqrt(d²+1/n)>d gives a nonempty set of candidates, from which AC supplies the sequence. Parallelogram and midpoint membership give squared differences at most 2/n+2/m. Completeness and closedness give a minimizer, with its distance recovered by norm continuity. Perturbing by tw annihilates the real part; perturbing by tiw annihilates the imaginary part because Re<z,iw>=Im<z,w> in the first-linear convention. Thus x-v belongs to the zero orthogonal complement. The corrected boundary makes no zero-measure inference and records both inherited completeness choice and explicit minimizing-sequence choice.
+
+This is familiar Hilbert-space geometry and elementary integration on a singleton; no external verification was needed. The cited library Hilbert, norm, infimum and AC interfaces were inspected directly. No claim of fresh reading of the bibliographic source is made.
+
+Updated only the queued item and its owning manifest, proof contract/risk/boundaries, and consumer dependency metadata. Refreshed the owning frontier dependency ledger. Item precheck PASS; strict proof-contract check: zero errors, zero warnings. Queue-status immediately before recording showed positions 1–55 current, no stale predecessors. This is a terminal resolution, not a judge verdict or pass stamp. Next action after successful recording: position 57.

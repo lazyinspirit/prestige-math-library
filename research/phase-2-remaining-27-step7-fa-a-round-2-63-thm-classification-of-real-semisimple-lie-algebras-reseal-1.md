@@ -1,0 +1,13 @@
+# FA reseal — position 63
+
+Disposition: repaired. Source status: verified. This reseals the later owner correction, not the previously escalated bytes, and does not constitute a judge verdict.
+
+Inspected the current item, its actual dependency statements, batch-13 manifest, coverage and proof contract, real-forms A/B-page context, both judge rejections, Alpha adjudication, original FA escalation and the owner-prerequisite repair record. The owner changed the argument rather than merely its receipt. The manifest now explicitly calls for application of Knapp's completed classification theorem.
+
+The original final rejection correctly objected to erasing the diagram involution. Current steps 1.3–1.4 retain it; L5 expressly imports both directions and the range normalization of the classification theorem. This is a source-based proof of the assembly theorem, not an independently authored enumeration. Its reliance on that theorem is explicit in facts, proof, remarks and manifest; I do not certify a local case analysis that is absent.
+
+Source verification: https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf — read §10, printed pp. 408–422, including both preliminary lemmas, the complete proof of 6.96, the classical/exceptional case analysis, 6.104 and 6.105. These support retaining the involution, the complete normalized list and its stated duplicate. https://math.mit.edu/~etingof/lnlg.pdf — read §§40.2–40.3 and 41.1, printed pp. 186–193; the independent type analysis confirms the outer classes and exceptional count. These are full source passages, not search snippets.
+
+Independent application check: L1 applies over R in characteristic zero and yields finitely many nonabelian simple ideals. L2 separates complex-type summands from real forms of complex simple algebras. L3 classifies the latter by the page's Vogan equivalence (including painted reflections), or realized Satake classes. Hence the source classification applies to each such summand. Source-normalized ranges are essential to the single-duplicate clause; the item explicitly includes that qualification. Reassembling finitely many simple summands gives a semisimple algebra; the zero algebra is the empty sum. The proof no longer equates diagram equivalence with graph symmetry or discards outer classes. No dependency edge or published item was edited in this reseal.
+
+Validation: precheck, rendercheck and strict batch-13 proof-contract check passed (zero errors and warnings). Queue-status showed positions 1–62 current immediately before recording. No unresolved mathematical obligation remains for this source-based strategy. Next: record these bytes, then position 64.

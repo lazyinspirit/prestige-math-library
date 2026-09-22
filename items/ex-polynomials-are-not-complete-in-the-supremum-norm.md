@@ -8,7 +8,6 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [ex-c-of-a-compact-space-is-banach,
-       cor-normed-space-completions-are-uniquely-linearly-isometric,
        thm-real-stone-weierstrass-for-compact-metric-spaces]
 justified_by: []
 aliases: []
@@ -41,8 +40,6 @@ is $C([a,b])$.
 
 [L2] The space $C([a,b])$ is Banach for the supremum norm ([[ex-c-of-a-compact-space-is-banach]]).
 
-[L3] Any two completions of a normed space are uniquely linearly isometric ([[cor-normed-space-completions-are-uniquely-linearly-isometric]]).
-
 ## Verification
 
 **Proof technique:** direct.
@@ -53,4 +50,4 @@ is $C([a,b])$.
 
 2.1 Steps 1.1 and 1.2 show that $P[a,b]$ is dense and proper in the Banach space $C([a,b])$, so it is not complete. [step 1.1, step 1.2, L2]
 
-3.1 Since $C([a,b])$ is Banach by [L2] and contains $P[a,b]$ densely, [L3] identifies the completion of $P[a,b]$ with $C([a,b])$. [step 2.1, L2, L3] ∎
+3.1 Since $C([a,b])$ is Banach by [L2], and the natural inclusion of $P[a,b]$ into $C([a,b])$ is a linear isometry with dense image by [L1], $C([a,b])$ is a completion of $P[a,b]$. [L1, L2] ∎

@@ -39,7 +39,7 @@ splittings, frame bundles, and explicit Gauss maps. It treats real, complex,
 and oriented real bundles, including rank zero and the empty base.
 
 Numerability is kept visible throughout. Assuming AC, paracompact Hausdorff
-CGWH bases have the partitions and countable refinements needed for the
+CGWH bases have the partitions and countable trivializing recharts needed for the
 classification bijections with $B\operatorname O(n)$,
 $B\operatorname U(n)$, and $B\operatorname{SO}(n)$. The supplied-numeration
 constructions remain valid over arbitrary CGWH bases, while no classification

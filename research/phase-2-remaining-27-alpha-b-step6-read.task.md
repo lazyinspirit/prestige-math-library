@@ -61,7 +61,7 @@ files under `items/` for that.
 - `thm-naturality-and-edge-maps-of-the-ahss` · theorem — Naturality and edge maps of the AHSS
 - `lem-pairings-of-skeletal-exact-couples-induce-multiplicative-ahss` · lemma — Pairings of skeletal exact couples induce multiplicative AHSS
 - `thm-multiplicative-ahss-for-a-multiplicative-generalized-theory` · theorem — Multiplicative AHSS for a multiplicative generalized theory
-- `prop-ahss-collapse-determines-only-the-associated-graded-object` · proposition — AHSS collapse determines only the associated graded object
+- `prop-ahss-collapse-determines-only-the-associated-graded-object` · proposition — AHSS collapse generally determines only the associated graded object
 - `cor-complex-k-theory-ahss` · corollary — Complex K-theory AHSS
 - `lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three` · lemma — The first connective complex K-theory Postnikov invariant is integral Sq-three
 - `lem-ku-representability-and-skeletal-postnikov-d-three-comparison` · lemma — KU representability and the skeletal–Postnikov d-three comparison
@@ -219,7 +219,7 @@ files under `items/` for that.
 - `def-c-star-algebra` · definition — C star algebra
 - `def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra` · definition — Self adjoint positive unitary and normal elements of a c star algebra
 - `lem-c-star-spectral-radius-equals-norm-for-normal-elements` · lemma — C star spectral radius equals norm for normal elements
-- `lem-characters-on-a-commutative-c-star-algebra-preserve-star` · lemma — Characters on a commutative c star algebra preserve star
+- `lem-characters-on-a-commutative-c-star-algebra-preserve-star` · lemma — Characters on a unital commutative C star algebra preserve star
 - `thm-commutative-gelfand-naimark` · theorem — Commutative gelfand naimark
 - `lem-characters-of-continuous-functions-are-evaluations` · lemma — Characters of continuous functions are evaluations
 - `thm-commutative-gelfand-duality` · theorem — Commutative gelfand duality

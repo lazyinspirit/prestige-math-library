@@ -254,11 +254,13 @@
           "lem-vector-operations-are-continuous-in-a-normed-space",
           "lem-reverse-triangle-inequality-in-a-normed-space",
           "def-countable-choice",
+          "cor-archimedean-reciprocal",
+          "cor-inner-product-induces-a-norm",
           "def-hilbert-space"
         ],
         "statement": "Assuming the Axiom of Countable Choice, the norm completion of an inner-product space carries an inner product extending the original one whose induced norm is the completion norm, and it is the unique such extension among inner products that induce the completion norm.",
-        "strategy": "For Cauchy representatives (x_n),(y_n), define the pairing as lim <x_n,y_n>. Joint continuity/Cauchy–Schwarz proves the scalar sequence is Cauchy and that equivalent representatives give the same limit. Pass sesquilinearity, symmetry and positivity to limits; prove definiteness from the completed norm and identify that norm by lim ||x_n||. Uniqueness follows from density and joint continuity.",
-        "axiom_audit": "Uses AC_omega exactly through the published Cauchy-sequence metric-completion supplier; the pairing extension adds no further choice.",
+        "strategy": "Pass the parallelogram law to the completion using Countable Choice for approximating sequences; apply the Jordan-von Neumann converse, recover the original pairing by polarization, and prove uniqueness by joint continuity.",
+        "axiom_audit": "Uses AC_omega for the completion interface and explicitly to choose the two countable approximation sequences.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -476,8 +478,6 @@
           "thm-hilbert-projection-variational-characterization",
           "def-linear-subspace",
           "def-orthogonality-and-orthogonal-complement",
-          "lem-orthogonal-complement-is-closed",
-          "def-metric-topology",
           "def-real-and-complex-inner-product-space",
           "def-countable-choice"
         ],
@@ -885,7 +885,11 @@
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
           "lem-complex-lp-completeness-density-and-inner-product",
           "thm-riesz-fischer-completeness-of-l-p",
-          "def-countable-choice"
+          "def-countable-choice",
+          "thm-complex-numbers-form-a-field",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "cor-inner-product-induces-a-norm",
+          "def-integrable-real-and-complex-functions-and-their-integrals"
         ],
         "statement": "Assuming the Axiom of Countable Choice, the standard dot/Hermitian products make K^n, ell^2, and quotient L^2 Hilbert spaces, with <x,y>=sum x_j conjugate(y_j) or integral f conjugate(g).",
         "strategy": "Check the finite-dimensional dot/Hermitian form directly. Identify ell^2 with counting-measure L^2. For quotient L^2 use the published real Riesz–Fischer and Cauchy–Schwarz suppliers in the real case and the complete complex Lp/pairing interface in the complex case, including null-class independence.",
@@ -1219,7 +1223,13 @@
           "def-complete-ordered-field",
           "lem-sup-epsilon",
           "def-complex-conjugate-real-imaginary-part-and-modulus",
-          "def-real-numbers"
+          "def-real-numbers",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-metric-hausdorff-separation",
+          "def-complex-metric-convergence-and-continuity",
+          "thm-of-square-roots"
         ],
         "axiom_audit": "ZF: the arbitrary supremum is taken in the complete extended real line, and all finite estimates are choice-free.",
         "provenance": {
@@ -1472,9 +1482,13 @@
           "def-linear-subspace",
           "thm-recursion",
           "def-countable",
-          "def-real-and-complex-inner-product-space"
+          "def-real-and-complex-inner-product-space",
+          "def-linear-combination-and-span",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-subset-of-countable",
+          "cor-inner-product-induces-a-norm"
         ],
-        "strategy": "Run Gram–Schmidt in the given order, discard zero residuals, normalize each nonzero residual. Every input vector lies in the span of outputs generated up to its index; their span is dense. The infinite-dimensional case supplies infinitely many outputs.",
+        "strategy": "Iterate a total fixed map on natural stages paired with finite orthonormal subsets. Run Gram–Schmidt in the given order, discard zero residuals, normalize each nonzero residual. Every input vector lies in the span of outputs generated up to its index; their span is dense. The infinite-dimensional case supplies infinitely many outputs.",
         "statement": "A Hilbert space supplied with a countable dense sequence has a finite or countable orthonormal basis.",
         "axiom_audit": "Deterministic from a supplied dense sequence; no maximal-family choice.",
         "provenance": {
@@ -1608,9 +1622,18 @@
           "thm-compactness-under-continuous-maps",
           "def-real-numbers",
           "thm-lebesgue-measure-is-a-complete-measure",
-          "def-measure-space"
+          "def-measure-space",
+          "thm-heine-borel-r",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-metric-hausdorff-separation",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
         ],
-        "strategy": "Let q:R->T be the quotient map. For Borel E in T define m_T(E)=lambda(q^{-1}(E) intersect [0,1)); continuity of q makes the preimage measurable, restriction of Lebesgue measure handles the half-open fundamental interval, and disjoint preimages plus countable additivity prove directly that m_T is a probability measure because every class has exactly one representative in [0,1). Prove the pushforward integral identity first for indicators and finite simple functions, then for nonnegative functions by increasing simple approximation and monotone convergence, and finally for integrable real/complex functions by decomposition. Splitting a translated fundamental interval and using Lebesgue translation invariance makes every torus rotation measure preserving, so the published integral-invariance theorem gives normalized Haar invariance without invoking abstract Haar theory. Finite-product measure and Fubini give T^n and its [0,1)^n formula. The following local lemma supplies compact Hausdorff topology; do not cite the later order-295 fundamental-group page.",
+        "strategy": "Let q:R->T be the quotient map. For Borel E in T define m_T(E)=lambda(q^{-1}(E) intersect [0,1)); continuity of q makes the preimage measurable, restriction of Lebesgue measure handles the half-open fundamental interval, and disjoint preimages plus countable additivity prove directly that m_T is a probability measure because every class has exactly one representative in [0,1). Prove the pushforward integral identity first for indicators and finite simple functions, then for nonnegative functions by increasing simple approximation and monotone convergence, and finally for integrable real/complex functions by decomposition. Splitting a translated fundamental interval and using Lebesgue translation invariance makes every torus rotation measure preserving, so the published integral-invariance theorem gives normalized Haar invariance without invoking abstract Haar theory. Finite-product measure and Fubini give T^n and its [0,1)^n formula. Inline compact quotient-to-circle and finite-product arguments supply the topology; the countable rectangular base identifies Borel and product sigma-algebras.",
         "statement": "Assuming the Axiom of Countable Choice, T=R/Z with its quotient topology carries the Borel probability measure m_T(E)=lambda(q^{-1}(E) intersect [0,1)), whose integral is represented on [0,1) and is invariant under every torus translation. For positive integer n, T^n has the finite product topology and product probability measure, with integral represented on [0,1)^n.",
         "axiom_audit": "Uses only AC_omega, inherited through the published Lebesgue-measure supplier; the quotient and finite-product definitions add no choice.",
         "provenance": {
@@ -2018,7 +2041,9 @@
         "kind": "example",
         "title": "Legendre polynomials from gram schmidt",
         "deps": [
-          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-gram-schmidt-orthonormalisation",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
           "cor-weierstrass-approximation-on-a-closed-interval",
           "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
           "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
@@ -2028,10 +2053,9 @@
           "lem-derivative-of-a-power",
           "thm-continuous-implies-integrable",
           "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
-          "def-real-and-complex-inner-product-space",
-          "lem-finite-bessel-inequality"
+          "def-real-and-complex-inner-product-space"
         ],
-        "strategy": "Compute the three projections and normalizations explicitly. The published real Weierstrass theorem makes real polynomials uniformly dense on [-1,1]; combine this with interval continuous L^2 density to prove completeness of the Gram–Schmidt family. Standard Legendre P_n use P_n(1)=1, not unit L^2 norm.",
+        "strategy": "Use the finite Gram–Schmidt theorem on each compatible initial monomial list, after proving those lists are independent as L^2 classes from the finite root bound and positive measure of a nondegenerate interval. Compute the first three projections and normalizations explicitly. The published real Weierstrass theorem and interval continuous L^2 density prove completeness. Standard Legendre P_n use P_n(1)=1, not unit L^2 norm.",
         "statement": "Assuming the Axiom of Countable Choice, gram–Schmidt on 1,x,x^2,... in real L^2([-1,1],dx) gives a complete orthonormal family, beginning 1/sqrt(2), sqrt(3/2)x, sqrt(5/8)(3x^2-1).",
         "axiom_audit": "Uses only AC_omega through L2 completeness and continuous-function density. Gram–Schmidt from the displayed ordered sequence is deterministic.",
         "provenance": {
@@ -2061,10 +2085,14 @@
           "lem-pythagorean-theorem-and-finite-orthogonal-sums",
           "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
           "thm-continuous-implies-integrable",
-          "def-real-and-complex-inner-product-space"
+          "def-real-and-complex-inner-product-space",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
         ],
         "strategy": "Disjoint supports or zero integral on nested dyadic intervals prove orthogonality; compute norm one. Induct on levels to identify finite Haar spans with dyadic step functions. Heine–Cantor on compact [0,1] makes every continuous real- or complex-valued function uniformly approximable by its dyadic step samples (apply the metric theorem directly, or to real and imaginary parts); interval continuous L^2 density proves completeness. Endpoints are null.",
-        "statement": "Assuming the Axiom of Countable Choice, the constant 1 and h_{j,k}=2^(j/2)(1_left-half-1_right-half) of each dyadic interval [k2^-j,(k+1)2^-j), j>=0,0<=k<2^j, form an orthonormal basis of L^2([0,1]).",
+        "statement": "Assuming the Axiom of Countable Choice, the constant 1 and h_{j,k}=2^(j/2)(1_left-half-1_right-half) of each dyadic interval [k2^-j,(k+1)2^-j), j>=0,0<=k<2^j, form an orthonormal basis of L^2((0,1)).",
         "axiom_audit": "Uses only AC_omega through L2 completeness and interval density; the dyadic orthogonality and span calculations are ZF.",
         "provenance": {
           "statement": "ai-altered",

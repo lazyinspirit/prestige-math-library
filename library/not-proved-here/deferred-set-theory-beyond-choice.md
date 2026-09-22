@@ -53,9 +53,10 @@ model, and Shelah's sharpening of it, measure how much choice the pathologies of
 the real line actually cost, and Gitik's model shows that without choice every
 uncountable cardinal can be singular at once.
 
-**The price of theorems that look like pure topology.** The Baire category
-theorem is four inequivalent statements over ZF, not one. Urysohn's lemma is not
-a theorem of ZF, and not a theorem of ZF plus countable choice either. A. H.
+**The price of theorems that look like pure topology.** The principles called
+the Baire category theorem correspond to different named choice principles
+over ZF; in particular, the DMC-to-DC reversal remains open. Urysohn's lemma is
+not a theorem of ZF, and not a theorem of ZF plus countable choice either. A. H.
 Stone's theorem that metric spaces are paracompact is not provable from ZF plus
 dependent choice. And Kelley's classical derivation of the Axiom of Choice from
 Tychonoff's theorem contains an error that changes its conclusion: as written it

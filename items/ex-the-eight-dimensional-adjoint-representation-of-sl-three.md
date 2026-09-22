@@ -5,7 +5,7 @@ title: The eight-dimensional adjoint representation of sl3
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-the-adjoint-representation-and-the-highest-root, ex-standard-and-dual-representations-of-sl-n-by-highest-weights, prop-root-systems-of-the-classical-complex-lie-algebras, def-fundamental-weights, def-adjoint-representation-of-a-lie-algebra, def-weight-and-weight-space-of-a-lie-algebra-representation, def-highest-weight-vector-and-highest-weight-module, def-axiom-of-choice]
+deps: [ex-the-adjoint-representation-and-the-highest-root, ex-standard-and-dual-representations-of-sl-n-by-highest-weights, prop-root-systems-of-the-classical-complex-lie-algebras, def-positive-system-and-base-of-simple-roots, def-fundamental-weights, def-adjoint-representation-of-a-lie-algebra, def-weight-and-weight-space-of-a-lie-algebra-representation, def-highest-weight-vector-and-highest-weight-module, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -35,7 +35,7 @@ and a two-dimensional zero-weight space.
 
 [L1] The adjoint representation of $\mathfrak{sl}_n(\mathbb C)$ has highest vector $E_{1n}$ and highest weight $\varepsilon_1-\varepsilon_n$, the highest root ([[ex-the-adjoint-representation-and-the-highest-root]], [[def-highest-weight-vector-and-highest-weight-module]]).
 
-[L2] The roots of $\mathfrak{sl}_3$ are the six functionals $\varepsilon_i-\varepsilon_j$ with $i\ne j$, with one-dimensional root spaces $\mathbb CE_{ij}$; $\mathfrak h$ has dimension $2$, and the positive system is $\{\varepsilon_i-\varepsilon_j:i<j\}$ with $\alpha_1+\alpha_2=\varepsilon_1-\varepsilon_3$ ([[prop-root-systems-of-the-classical-complex-lie-algebras]]).
+[L2] The roots of $\mathfrak{sl}_3$ are the six functionals $\varepsilon_i-\varepsilon_j$ with $i\ne j$, with one-dimensional root spaces $\mathbb CE_{ij}$, and $\mathfrak h$ has dimension $2$ ([[prop-root-systems-of-the-classical-complex-lie-algebras]]). We choose $\Phi^+=\{\varepsilon_i-\varepsilon_j:i<j\}$; directly from this three-element set, its indecomposable positive roots are $\alpha_1=\varepsilon_1-\varepsilon_2$ and $\alpha_2=\varepsilon_2-\varepsilon_3$, so they are its base and $\alpha_1+\alpha_2=\varepsilon_1-\varepsilon_3$ ([[def-positive-system-and-base-of-simple-roots]]).
 
 [L3] The fundamental weights satisfy $\omega_k(h_{\alpha_j})=\delta_{kj}$ with $h_{\alpha_j}=E_{jj}-E_{j+1,j+1}$; for $k=1,2$ one computes $(\varepsilon_1-\varepsilon_3)(h_{\alpha_1})=1=\omega_1(h_{\alpha_1})+\omega_2(h_{\alpha_1})$ and $(\varepsilon_1-\varepsilon_3)(h_{\alpha_2})=1=\omega_1(h_{\alpha_2})+\omega_2(h_{\alpha_2})$, so $\varepsilon_1-\varepsilon_3=\omega_1+\omega_2$ ([[def-fundamental-weights]], [[ex-standard-and-dual-representations-of-sl-n-by-highest-weights]]).
 

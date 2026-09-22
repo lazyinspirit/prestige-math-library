@@ -5,11 +5,16 @@ title: Trace class is a two sided Banach operator ideal
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-nuclear-series-characterizes-trace-norm, def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-hilbert-schmidt-operators-form-a-two-sided-ideal, thm-hilbert-adjoint-properties, def-operator-norm, def-bounded-linear-operator, lem-composition-operator-norm-inequality, def-metric-convergence, def-banach-space, def-norm-and-normed-space, def-hilbert-space, def-metric-space, def-infimum, def-dimension, def-countable-choice, def-square-summable-family-on-an-arbitrary-index-set]
+deps: [lem-nuclear-series-characterizes-trace-norm, def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-hilbert-adjoint-properties, def-operator-norm, def-bounded-linear-operator, lem-composition-operator-norm-inequality, def-metric-convergence, def-banach-space, def-norm-and-normed-space, def-hilbert-space, def-metric-space, def-infimum, def-dimension, def-countable-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, Lemmas 3.26 and 3.28–3.29 (printed pp. 95–100)"
@@ -44,9 +49,9 @@ and $L$ be real or complex Hilbert spaces ([[def-hilbert-space]]). Then:
 
 [A1] **Nuclear characterization.** For a compact operator $R$, trace class is equivalent to having a nuclear representation $R=\sum_j\langle\cdot,u_j\rangle v_j$ (operator-norm convergence, $\sum_j\|u_j\|\|v_j\|<+\infty$); the trace norm is the infimum of the nuclear sums and is attained by the singular series. In particular, for trace-class $R$, $s_n(R)$ is zero-padded and $\|R\|=s_1(R)$ is bounded by $\|R\|_1$, because $\|R\|=s_1(R)\le\sum_ns_n(R)=\|R\|_1$ ([[lem-nuclear-series-characterizes-trace-norm]], [[def-trace-class-operator]], [[def-absolute-value-and-singular-values-of-a-compact-operator]]).
 
-[A2] **Infimum and series.** The infimum of a nonempty bounded-below set of reals is its greatest lower bound, so for every $\varepsilon>0$ there is an element below $\inf+\varepsilon$; absolute convergence of a scalar family implies summability of the finite-subset net, with the sum of the moduli bounding the modulus of the sum ([[def-infimum]], [[def-square-summable-family-on-an-arbitrary-index-set]], [[def-metric-convergence]]).
+[A2] **Infimum and series.** The infimum of a nonempty bounded-below set of reals is its greatest lower bound, so for every $\varepsilon>0$ there is an element below $\inf+\varepsilon$ ([[def-infimum]]).  Convergence of the zero-based partial-sum sequences occurring below is interpreted as in [[def-metric-convergence]].
 
-[A3] **Ideal calculus.** $\|SB\|_{HS}\le\|S\|\|B\|_{HS}$ and the Hilbert–Schmidt norm is adjoint-stable ([[thm-hilbert-schmidt-operators-form-a-two-sided-ideal]], [[thm-hilbert-adjoint-properties]]); $\|UV\|\le\|U\|\|V\|$ and $\|U^*\|=\|U\|$ for bounded operators ([[lem-composition-operator-norm-inequality]], [[def-bounded-linear-operator]], [[def-operator-norm]]).
+[A3] **Operator and adjoint calculus.** For composable bounded operators, $\|UV\|\le\|U\|\|V\|$; a bounded operator between Hilbert spaces has a bounded adjoint with $\|U^*\|=\|U\|$ ([[lem-composition-operator-norm-inequality]], [[thm-hilbert-adjoint-properties]], [[def-bounded-linear-operator]], [[def-operator-norm]]).
 
 [A4] **Cauchy sequences and subsequences.** A sequence in a metric space is Cauchy when for every real $\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\varepsilon$ for $m,n\ge N$; under $\mathrm{AC}_\omega$ one may choose indices $m_1<m_2<\cdots$ with $\|T_{m_{k+1}}-T_{m_k}\|_1<2^{-k}$, and a Cauchy sequence with a convergent subsequence converges to the same limit ([[def-metric-space]], [[def-metric-convergence]], [[def-countable-choice]]).
 

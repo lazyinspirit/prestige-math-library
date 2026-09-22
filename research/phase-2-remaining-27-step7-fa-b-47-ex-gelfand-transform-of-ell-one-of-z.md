@@ -1,0 +1,17 @@
+# Final adjudication: position 47
+
+Disposition: repaired. Source status: familiar.
+
+Read the complete current example, each direct dependency's exact Statement/Definition, both Terra rejections (judge rows 220 and 1236), Alpha row 102, the owning batch-4 manifest, A/B-page context (the current batch coverage file has no exact item-ID entry), and the entire item proof contract and risk/boundary record. The independent risk review explicitly did not rederive every numbered step; this adjudication does. Alpha correctly propagated Countable Choice into the item, but its manifest retained a stale ZF claim. The final rejection is valid: the truncation supplier proves only N-indexed truncations.
+
+L2 now states that exact supplied interface. Step 2.1 defines U(a)_k=a_{b(k)} for the fixed bijection b:N→Z, gives its explicit inverse and norm equality, and sets Q_N=U^{-1}P_NU. Therefore ||a-Q_Na||_1=||Ua-P_NUa||_1→0. Q_N is explicitly the finite point-mass sum over b(0),...,b(N). Applying a continuous character to this finite sum and passing to the limit proves the Laurent formula without an implicit domain change.
+
+The same index issue is checked for Tonelli and Fubini in step 1.1: use b×b and invariance of nonnegative sums as suprema of finite subsums. Real/imaginary parts of absolutely summable families satisfy the real Fubini hypotheses. The convolution estimate bounds their total by ||a||_1||b||_1, and the associativity array by ||a||_1||b||_1||c||_1. The finite-subset Cauchy estimate proves completeness with unique coordinate limits, not arbitrary choices. Convolution is bilinear by absolute convergence and linearity of convergent scalar series, commutative, associative, and has nonzero norm-one unit delta_0. The continuity theorem is therefore applicable. Norm bounds on delta_1 and its inverse force |chi(delta_1)|=1, including negative powers. Conversely each Laurent evaluation is multiplicative by the verified absolutely convergent double-series regrouping.
+
+Step 1.5 now proves ordinary epsilon-neighborhood continuity directly: finite-tail bound plus |z^n-w^n|≤|n||z-w| gives a modulus epsilon/(2(M+1)), including M=0. Evaluation at delta_1 gives the continuous inverse after bijectivity is established. Hausdorffness also follows directly because distinct characters differ on an evaluation and C is Hausdorff. No sequential-topology criterion or choice beyond the stated Countable Choice is needed. The Wiener-algebra refinement remains an explicitly deferred orientation remark, not an input to the proof.
+
+This mathematics is familiar: norm-preserving reindexing of absolutely summable sequences, nonnegative double sums, Cauchy-tail completeness and elementary character evaluation. No uncertainty required external source verification, and no external source reading is claimed for this decision.
+
+Updated this item, its own batch and aggregate contracts, its manifest dependencies/choice audit/strategy, and the owning consumer-batch dependency record for the truncation supplier. Refreshed briefs/tasks/frontier-dependency-ledger.md using the prescribed tool. No supplier or published file changed. The stale torus citation quote in the item's contract was refreshed from the exact Definition; prior independent reviews remain preserved.
+
+Focused precheck: 1 checked, 0 failing. Strict proof-contract check after updating the exact quote and anchored boundary evidence: 0 errors, 0 warnings. Next: queue-status and any required ascending reseals, then record this repaired item before reviewing position 48.

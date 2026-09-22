@@ -9,6 +9,11 @@ deps: [thm-spectral-theorem-for-compact-self-adjoint-operators, lem-positive-squ
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.5, singular values of a compact operator (printed pp. 89–93)"
@@ -51,7 +56,7 @@ values of $T$** is the multiset of positive eigenvalues of $|T|$, counted with
 multiplicity ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).
 
 **The ordered singular-value sequence.** The **distinct** positive singular
-values are arranged in *nonincreasing* order $\mu_1>\mu_2>\cdots$ as follows:
+values are listed with positive labels in *decreasing* order $\mu_1>\mu_2>\cdots$ as follows:
 if the multiset of positive eigenvalues is empty (equivalently $|T|=0$,
 equivalently $T=0$), the list is empty; otherwise $\mu_1:=\max\{\lambda>0:\lambda$
 is an eigenvalue of $|T|\}$, a maximum and not merely a supremum, because a
@@ -68,6 +73,16 @@ on; if the multiset is finite with total multiplicity $r=d_1+\cdots+d_m$, one
 sets $s_n:=0$ for every $n>r$, and if $T=0$ one sets $s_n:=0$ for every
 $n\ge1$. The number $s_n$ is written $s_n(T)$ and called the $n$-th **singular
 value** of $T$.
+
+**Zero-based domain and positive labels.** Set $s_0(T):=\|T\|=s_1(T)$.
+Thus the numerical sequence is the function $n\mapsto s_n(T)$ on all of
+$\mathbb N$, including zero. The positive-labelled tail $(s_{m+1}(T))_{m\in\mathbb N}$
+is the multiplicity-counting list constructed above. The auxiliary initial
+value $s_0$ is not an additional entry of the eigenvalue multiset, does not index
+a singular vector, and is excluded from multiplicity counts and singular-value
+sums, which use $n\ge1$. The full sequence satisfies
+$s_0\ge s_1\ge s_2\ge\cdots$ and tends to zero. This preserves the page's
+positive rank labels while giving convergence statements a zero-based domain.
 
 **Rank and the finiteness of the list.** The map $\Phi:\operatorname{ran}|T|\to\operatorname{ran}T$
 given by $\Phi(|T|x):=Tx$ is well defined and linear, because $|T|x=|T|x'$ forces

@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Marcus Tressl, Stone Duality for Boolean Algebras — Example 2.3.2, p. 8; the beta-N universal-property verification is local from the declared Stone–Čech suppliers"

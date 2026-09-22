@@ -29,7 +29,7 @@ compression spectra of [[def-approximate-point-and-compression-spectrum]]. Then
 
 1. $\sigma_p(T)$, $\sigma_c(T)$ and $\sigma_r(T)$ are pairwise disjoint and
    $\sigma_p(T) \cup \sigma_c(T) \cup \sigma_r(T) = \sigma(T)$;
-2. $\sigma_r(T) \subseteq \sigma_{cp}(T)$ and
+2. $\sigma_r(T) = \sigma_{cp}(T)\setminus\sigma_p(T)$ and
    $\sigma_p(T) \subseteq \sigma_{ap}(T)$;
 3. $\sigma(T) = \sigma_{ap}(T) \cup \sigma_{cp}(T)$.
 
@@ -57,7 +57,14 @@ other.
 
 1.1 If $T_\lambda$ is not injective then it is not bounded below: a bounded-below $T_\lambda$ satisfies $c\|x\| \le \|T_\lambda x\|$ for $c>0$, so $T_\lambda x = 0$ forces $x = 0$. Hence $\sigma_p(T) \subseteq \sigma_{ap}(T)$, which is the second inclusion of claim 2. [L2, L3, L5, algebra]
 
-1.2 If $\lambda \in \sigma_r(T)$ then, by definition, $T_\lambda$ is injective with non-dense range; hence $\lambda \in \sigma_{cp}(T)$, which is the first inclusion of claim 2. [L1, L2]
+1.2 If $\lambda \in \sigma_r(T)$ then, by definition, $T_\lambda$ is
+injective with non-dense range. Hence $\lambda\in\sigma_{cp}(T)$ and
+$\lambda\notin\sigma_p(T)$, so
+$\sigma_r(T)\subseteq\sigma_{cp}(T)\setminus\sigma_p(T)$. Conversely, if
+$\lambda\in\sigma_{cp}(T)\setminus\sigma_p(T)$, then $T_\lambda$ has
+non-dense range and is injective, which is exactly
+$\lambda\in\sigma_r(T)$. Thus
+$\sigma_r(T)=\sigma_{cp}(T)\setminus\sigma_p(T)$. [L1, L2]
 
 1.3 If $\lambda \notin \sigma(T)$ then $T_\lambda$ is invertible, hence bounded below and of dense range; so $\lambda \notin \sigma_{ap}(T) \cup \sigma_{cp}(T)$. [L2, L4, algebra]
 

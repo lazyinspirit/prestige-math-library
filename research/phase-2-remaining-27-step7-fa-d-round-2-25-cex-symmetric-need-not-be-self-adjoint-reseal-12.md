@@ -1,0 +1,13 @@
+# FA position 25: derivative-domain reseal
+
+Disposition repaired; source-status familiar. I inspected the entire current proof, selected manifest/coverage, A/B spectral context, proof contract/risk/boundaries, both Terra rejections, Alpha row 7 and prior FA evidence. Exact calculus, cutoff, smooth-density, complex L2 and adjoint interfaces were read. Countable Choice and Dependent Choice suffice for the stated suppliers; no full AC is silently assumed.
+
+The explicit cutoffs vanish near both endpoints, converge pointwise to one in (0,1), and are uniformly bounded by one. Multiplying whole-line smooth approximants yields interval test functions; the two-term norm bound applies DCT to the fixed target, so the original false restriction assertion is gone. Unique continuous representatives make traces and derivatives well-defined on null classes. Uniform convergence of primitives, bounded by the L2 derivative error on a unit interval, proves zero-boundary graph closedness with both traces preserved.
+
+With the first-linear pairing, integration by parts gives the maximal adjoint action -ig'. In the converse calculation, k=H+ig and H'=h satisfy integral phi conjugate(k)=0 for every zero-mean phi. Testing phi=k-integral(k) forces k constant, so g=iH-im and g'=ih. Thus the signs are correct. Constants show proper adjoint extension, and pairing x with 1 gives boundary discrepancy -i, proving that maximal derivative is not symmetric.
+
+For the periodic restriction, an adjoint vector first lies in the maximal domain by restriction to the zero-boundary domain. The constant periodic test then forces equal endpoint values, and integration by parts proves the converse. Therefore its adjoint equals itself with exactly the periodic domain; closedness follows from adjoint closedness. This resolves the final Terra objection without inferring self-adjointness from closed symmetry. Constants and x establish both strict inclusions.
+
+Only the selected nonempty-choice contract note needed correction: step 2.1 does explicitly select a sequence of smooth approximants using Countable Choice. That choice, inherited calculus choices and the sequential graph criterion are now recorded accurately in batch-6/master contracts. Updated this consumer's existing dependency rows and refreshed the frontier ledger. Item bytes remain unchanged. Precheck PASS; strict selected contract zero errors/warnings. The argument is familiar one-dimensional AC calculus and L2 duality, so no external reading was needed or claimed. No published finding, unresolved mathematics, new lemma, supplier/page edit, judgment or stamp.
+
+Queue-status verifies 1–24 current. Record this reseal. Positions 26–29 are current; next stale position is 30, subject to the next queue-status.

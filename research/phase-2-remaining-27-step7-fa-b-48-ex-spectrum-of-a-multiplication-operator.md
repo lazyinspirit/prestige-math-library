@@ -1,0 +1,15 @@
+# Final adjudication: position 48
+
+Disposition: repaired. Source status: familiar.
+
+Inspected the complete item, all direct dependency Statements/Definitions/Example, both Terra rejections (judge rows 152 and 1274), Alpha row 64, the owning batch-4 manifest, A/B-page conventions, coverage search, and the entire proof contract with independent risk review. The current coverage file has no multiplication-spectrum entry. Alpha correctly introduced AC into the item but left stale Countable Choice-only manifest metadata. Terra's final objection is valid: a general multiplier is not the identity, and the operator-algebra Example does not supply multiplication-operator composition.
+
+L4 now states only the actual operator-algebra interface. Step 1.1 proves the multiplier construction and composition on representatives: [f] maps to [kf] then [hkf], giving M_h M_k=M_hk, with M_1=I. No unsupported multiplication-operator theorem is imported. The exact essential bound r is attained a.e.: each {|m|>r+1/j} is null by the infimum definition, and their countable union is null by disjointification and countable additivity. Integrating |mf|²≤r²|f|² gives the norm estimate; null-set changes respect classes. A finite positive-measure member of the sigma-finite exhaustion supplies a nonzero L² indicator, so the nonzero operator-algebra hypothesis is now explicit. AC supplies the Countable Choice needed for complex L² completeness.
+
+Outside the essential range, the measurable reciprocal on {|m-lambda|≥epsilon}, set to zero on the null complement, is bounded and has product one a.e.; the local composition identity gives both inverse equations. The sign difference between M_m-lambda I and the definition's lambda I-M_m is explicitly accounted for. Inside the essential range, a least exhaustion index gives positive finite measure, and the normalized indicator has norm one and shifted image norm ≤1/n. A bounded inverse would force all these norms to be bounded away from zero. Both inclusions are therefore proved with no spectral theorem.
+
+The old boundary worksheet falsely claimed that zero belongs to the essential range exactly when m vanishes on a positive-measure set. This is corrected: every {|m|<epsilon} must have positive measure. For example m(x)=x on (0,1) has no zeros but has zero in its essential range. The zero-measure exclusion and deterministic least-index selection are now documented accurately.
+
+These arguments are familiar measure and Banach-space calculations; no uncertainty required external verification. No external source reading is claimed. Preserved all independent review records. Updated only the queued item and its own manifest, contracts and consumer dependency record, and refreshed briefs/tasks/frontier-dependency-ledger.md through the tool. No existing supplier or published file changed, and no new lemma or pass stamp was created.
+
+Focused precheck: 1 checked, 0 failing. Strict proof-contract check: 0 errors, 0 warnings. Next: queue-status, any ascending reseals, record repaired, then position 49.

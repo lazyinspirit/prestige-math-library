@@ -5,11 +5,16 @@ title: Compact operator iff approximation numbers tend to zero
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-singular-values-equal-approximation-numbers, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-infimum, def-dimension, def-metric-convergence, def-hilbert-space, def-banach-space, def-countable-choice, thm-singular-value-decomposition-for-compact-operators]
+deps: [lem-singular-values-equal-approximation-numbers, def-absolute-value-and-singular-values-of-a-compact-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-infimum, thm-infimum-property, def-dimension, def-metric-convergence, def-hilbert-space, def-banach-space, def-countable-choice, thm-singular-value-decomposition-for-compact-operators]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.5, Lemma 3.19 and its converse (printed pp. 92–93)"
@@ -25,7 +30,7 @@ $K$ be real or complex Hilbert spaces and let $T\in\mathcal B(H,K)$ be a bounded
 linear operator ([[def-bounded-linear-operator]], [[def-hilbert-space]]). Put
 $a_0(T):=\|T\|$, and for $n\ge1$ put
 $$a_n(T):=\inf\bigl\{\|T-F\|:\ F\in\mathcal B(H,K),\ \dim\operatorname{ran}F<n\bigr\}$$
-([[def-infimum]], [[def-operator-norm]], [[def-dimension]]). Thus
+([[def-infimum]], [[def-operator-norm]], [[def-dimension]]), where only finite-rank $F$ are admitted. The error set contains $\|T\|$ by taking $F=0$ and is bounded below by $0$, so its real infimum exists by [[thm-infimum-property]]. Thus
 $(a_n(T))_{n\in\mathbb N}$ is a sequence in the library's zero-based
 convention. Then $T$ is compact
 ([[def-compact-linear-operator]]) if and only if $a_n(T)\to0$
@@ -42,7 +47,7 @@ $n\ge1$.
 
 [A2] **Finite-rank operators are compact.** A bounded finite-rank operator is compact; a norm limit of compact operators with Banach target is compact under $\mathrm{AC}_\omega$; a Hilbert space is a Banach space ([[lem-finite-rank-operators-are-compact]], [[thm-norm-limit-of-compact-operators-is-compact]], [[def-hilbert-space]], [[def-banach-space]]).
 
-[A3] **Infimum and convergence.** For a nonempty set of reals bounded below, the infimum is the greatest lower bound, so for every real $\varepsilon>0$ there is an element $x$ of the set with $x<\inf+\varepsilon$; a sequence of real numbers tends to $0$ when for every $\varepsilon>0$ eventually $|a_n|<\varepsilon$ ([[def-infimum]], [[def-metric-convergence]]).
+[A3] **Infimum and convergence.** Every nonempty bounded-below set of reals has a real infimum ([[thm-infimum-property]]). Each defining error set is nonempty because it contains the error of $F=0$, and is bounded below by $0$. For every real $\varepsilon>0$ it has an element $x<\inf+\varepsilon$: otherwise $\inf+\varepsilon$ would be a larger lower bound, contradicting the greatest-lower-bound definition; a sequence of real numbers tends to $0$ when for every $\varepsilon>0$ eventually $|a_n|<\varepsilon$ ([[def-infimum]], [[def-metric-convergence]]).
 
 [A4] Countable Choice selects one finite-rank approximant for each $n\ge1$ by
 applying it to the shifted family indexed by $\mathbb N$; assigning $F_0=0$

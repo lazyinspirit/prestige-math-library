@@ -5,6 +5,7 @@ title: "Ito integral of an elementary predictable process"
 status: draft
 origin: pipeline
 deps: [def-elementary-predictable-brownian-integrand, def-brownian-motion, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+justified_by: [lem-elementary-ito-integral-is-independent-of-the-step-representation]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -52,9 +53,10 @@ Three conventions are part of the definition.
    rearrangement of finitely many terms, not a limiting statement.
 
 3. **Dependence on the representation is temporary.** The definition attaches
-   $I_t(H)$ to a *chosen* elementary representation. Item 6 below proves that
+   $I_t(H)$ to a *chosen* elementary representation.
+   [[lem-elementary-ito-integral-is-independent-of-the-step-representation]] proves that
    two representations that agree $(\mathrm dt\otimes P)$-almost everywhere
-   produce the same random variables almost surely, so that from item 6 onward
+   produce the same random variables almost surely at each fixed time, so that
    $I_t(H)$ is a function of the $(\mathrm dt\otimes P)$-class of $H$ alone.
    Until then, every statement about an elementary integrand names the
    representation it uses.

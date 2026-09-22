@@ -49,9 +49,11 @@ $\|(T-\lambda)x_n\| \to 0$ rules out every constant $c > 0$ in the estimate.
 
 - **The two sets are not spectral parts in the disjoint sense.** They may
   overlap each other and the classical parts: an eigenvalue is in
-  $\sigma_{ap}$ but may also be a compression value, and a value whose range is
-  dense but not closed, with $T-\lambda$ bounded below, lies in neither
-  $\sigma_{ap}$ nor $\sigma_{cp}$. The exact relations are proved in
+  $\sigma_{ap}$ but may also be a compression value. A value whose range is
+  dense but not closed is not in $\sigma_{cp}$ and cannot be bounded below;
+  indeed, under Countable Choice a convergent sequence of range points has
+  Cauchy preimages under a lower bound, and completeness then puts its limit
+  back in the range. Thus the value lies in $\sigma_{ap}$. The exact relations are proved in
   [[lem-relations-among-the-five-spectral-parts]]; no disjointness is claimed
   here.
 

@@ -11,7 +11,7 @@ deps: [thm-metric-completion-exists, thm-metric-completion-unique, def-metric-co
        def-rationals, lem-rat-embeds-dense, lem-real-line-is-a-metric-space,
        def-isometry-and-metric-embedding, thm-euclidean-space-complete,
        def-metric-interior-closure-boundary, def-metric-ball, def-interval,
-       def-complete-metric-space, def-metric-space]
+       def-complete-metric-space, def-metric-space, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: true
@@ -36,7 +36,8 @@ pipeline_run: null
 
 ## Example
 
-Regard $\mathbb{Q}$ ([[def-rationals]]) as the subset $\widehat{\mathbb{Q}}$ of
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Regard
+$\mathbb{Q}$ ([[def-rationals]]) as the subset $\widehat{\mathbb{Q}}$ of
 $\mathbb{R}$ that is the image of the canonical embedding $q \mapsto \hat q$
 ([[lem-rat-embeds-dense]]), carrying the subspace metric
 $d_{\mathbb{Q}}(p,q) = |\hat p - \hat q|$ inherited from the usual metric of
@@ -54,7 +55,9 @@ an isometry. In this sense $\mathbb{R}$ **is** the completion of $\mathbb{Q}$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathbb{Q}$ with the metric $d_{\mathbb{Q}}$ inherited from $\mathbb{R}$ through $\iota : q \mapsto \hat q$; a real $x$; a real $r > 0$.
+**Given:** The Axiom of Countable Choice; $\mathbb{Q}$ with the metric $d_{\mathbb{Q}}$ inherited from $\mathbb{R}$ through $\iota : q \mapsto \hat q$; a real $x$; a real $r > 0$.
+
+[A1] Countable Choice has the meaning fixed in [[def-countable-choice]].
 
 [L1] $q \mapsto \hat q$ is an injective, order-preserving embedding of ordered fields, and strictly between any two reals lies a rational ([[lem-rat-embeds-dense]]).
 
@@ -66,7 +69,7 @@ an isometry. In this sense $\mathbb{R}$ **is** the completion of $\mathbb{Q}$.
 
 [L5] Density: $A$ is dense in $X$ when every ball around every point of $X$ meets $A$ ([[def-metric-interior-closure-boundary]]).
 
-[L6] A completion is a complete space together with an isometric embedding with dense image, and two completions are related by a unique compatible isometry ([[def-metric-completion]], [[thm-metric-completion-unique]]).
+[L6] A completion is a complete space together with an isometric embedding with dense image, and under Countable Choice two completions are related by a unique compatible isometry ([[def-metric-completion]], [[thm-metric-completion-unique]]).
 
 ## Verification
 
@@ -80,7 +83,7 @@ an isometry. In this sense $\mathbb{R}$ **is** the completion of $\mathbb{Q}$.
 
 2.1 So the complete space $(\mathbb{R}, d_{\mathbb{R}})$, together with the isometric embedding $\iota$ whose image is dense, is a completion of $(\mathbb{Q}, d_{\mathbb{Q}})$. [step 1.1, step 1.2, step 1.3, L6]
 
-3.1 By uniqueness of completions, any other completion $\big((\widehat{Y},\widehat{d}), j\big)$ of $(\mathbb{Q}, d_{\mathbb{Q}})$ receives exactly one continuous $\varphi : \mathbb{R} \to \widehat{Y}$ with $\varphi \circ \iota = j$, and that $\varphi$ is an isometry. [step 2.1, L6] ∎
+3.1 By [A1] and uniqueness of completions, any other completion $\big((\widehat{Y},\widehat{d}), j\big)$ of $(\mathbb{Q}, d_{\mathbb{Q}})$ receives exactly one continuous $\varphi : \mathbb{R} \to \widehat{Y}$ with $\varphi \circ \iota = j$, and that $\varphi$ is an isometry. [step 2.1, A1, L6] ∎
 
 ## Remarks
 

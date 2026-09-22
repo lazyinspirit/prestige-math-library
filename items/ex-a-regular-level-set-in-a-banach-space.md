@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §2.11"
@@ -25,8 +30,10 @@ topological direct sum, with bounded coordinate projections
 ([[def-complemented-subspace]]), where the direct sum is *second countable*
 ([[def-second-countable-space]]) — for instance this holds whenever $K$ and $Y$
 are second countable, since the direct sum is a finite product
-([[thm-countable-products-of-second-countable-spaces]]). Then $X$ and $Y$ are
-$C^\infty$ Banach manifolds in the sense of
+([[thm-countable-products-of-second-countable-spaces]]). Equip $X$ and $Y$
+with their standard maximal $C^\infty$ atlases, namely the maximal atlases
+containing their global identity charts. Then $X$ and $Y$ are $C^\infty$
+Banach manifolds in the sense of
 [[def-countable-base-banach-manifold-and-smooth-map]], and the projection
 $p : X \to Y$, $p(k+y) := y$, has every $y \in Y$ as a regular value in the
 sense of the regular value theorem
@@ -41,11 +48,13 @@ of $X$, and its tangent space at every point is $K$.
 
 ## Facts & Assumptions
 
-**Given:** Real Banach spaces $K,Y$ with second countable topological direct sum $X = K\oplus Y$ with bounded projections, and a point $y \in Y$.
+**Given:** Real Banach spaces $K,Y$ with second countable topological direct
+sum $X = K\oplus Y$ with bounded projections; the standard maximal smooth
+atlases on $X$ and $Y$; and a point $y \in Y$.
 
 [L1] In a topological direct sum $X = K\oplus Y$ every $x$ has a unique decomposition $x = k+y$ with $k\in K$, $y\in Y$, and the coordinate maps $p(x)=y$, $q(x)=k$ are bounded linear operators; $p$ is the projection onto $Y$ along $K$ ([[def-complemented-subspace]]).
 
-[L2] A bounded linear operator $T$ is differentiable everywhere with $DT(x)=T$, and the regular value theorem applies to a smooth map whose derivative at every point of a level set is onto with complemented kernel ([[def-frechet-derivative-between-banach-spaces]], [[thm-regular-value-theorem-for-banach-manifolds]]).
+[L2] A bounded linear operator $T$ is differentiable everywhere with $DT(x)=T$, and the regular value theorem applies to a smooth map whose derivative at every point of a level set is onto with complemented kernel when the domain carries the stated maximal atlas ([[def-frechet-derivative-between-banach-spaces]], [[thm-regular-value-theorem-for-banach-manifolds]]).
 
 ## Verification
 

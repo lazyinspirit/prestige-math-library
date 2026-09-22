@@ -33,7 +33,7 @@ subspace and whose kernel is $L^2((\tfrac12,1])$.
 
 [A2] The indicator $\mathbf 1_{[0,1/2]}$ is bounded Borel on $[0,1]$ and satisfies $\mathbf 1_{[0,1/2]}^2=\mathbf 1_{[0,1/2]}=\overline{\mathbf 1_{[0,1/2]}}$, so its calculus value is an orthogonal projection equal to the spectral projection $E([0,1/2])$ ([[thm-borel-functional-calculus-for-bounded-normal-operators]], [[cor-spectral-projections-and-resolution-of-the-identity]]).
 
-[A3] In $L^2$, multiplication by an indicator $\mathbf 1_A$ has range exactly the classes supported in $A$ and kernel exactly the classes supported in the complement of $A$; these are closed subspaces, and $L^2(A)$ for a Borel $A\subseteq[0,1]$ denotes the subspace of classes supported in $A$ ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-orthogonality-and-orthogonal-complement]], [[def-hilbert-space]]).
+[A3] Elements of $L^2$ are equivalence classes modulo almost-everywhere equality; a class is supported in a Borel set $A$ when it has a representative vanishing almost everywhere off $A$, and $L^2(A)$ denotes this subspace of classes ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-orthogonality-and-orthogonal-complement]], [[def-hilbert-space]]).
 
 [A4] AC is the declared choice hypothesis of this page from the construction item onward ([[def-axiom-of-choice]]).
 
@@ -47,7 +47,7 @@ subspace and whose kernel is $L^2((\tfrac12,1])$.
 
 1.2 By the computation of the calculus for multiplication operators, $\mathbf 1_{[0,1/2]}(T)=M_{\mathbf 1_{[0,1/2]}\circ x}=M_{\mathbf 1_{[0,1/2]}}$, acting by $\bigl(M_{\mathbf 1_{[0,1/2]}}h\bigr)(x)=\mathbf 1_{[0,1/2]}(x)h(x)$. [A1]
 
-2.1 Its range is the closed subspace of classes vanishing almost everywhere on $(1/2,1]$ and its kernel is the closed subspace of classes vanishing almost everywhere on $[0,1/2]$; equivalently the range is $L^2([0,1/2])$ and the kernel is $L^2((1/2,1])$. [step 1.2, A3]
+2.1 Put $A=[0,1/2]$ and $P=M_{\mathbf 1_A}$. For every $h$, $Ph$ vanishes almost everywhere off $A$; conversely, if $g$ is supported in $A$, then $Pg=g$, so $\operatorname{ran}P=L^2(A)$. Also $Ph=0$ exactly when $h$ vanishes almost everywhere on $A$, so $\ker P=L^2((1/2,1])$. Both subspaces are closed: if $Ph_n=h_n\to h$, boundedness and $P^2=P$ give $Ph=\lim Ph_n=h$, while if $Ph_n=0$ and $h_n\to h$, then $Ph=\lim Ph_n=0$. [step 1.2, A1, A3]
 
 3.1 The spectral projection $E([0,1/2])$ agrees with this multiplication by the pulled-back indicator, so the discontinuous characteristic function of the Borel set has produced a genuine orthogonal projection of the operator, not merely a continuous-calculus value. [step 1.2, step 2.1, A2, A4]
 

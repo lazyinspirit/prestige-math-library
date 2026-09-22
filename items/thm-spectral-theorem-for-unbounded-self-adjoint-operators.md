@@ -55,14 +55,24 @@ spectral projection valued measure is $E$ again.
 
 1.1 By [A3] the operator $C$ is unitary with $\ker(I-C)=\{0\}$, and by [A4] its spectrum lies in $S^1$. Let $F_0$ be the regular spectral PVM of $C$ on $\sigma(C)$ supplied by [A2], and extend it to $S^1$ by $F(B):=F_0(B\cap\sigma(C))$ for Borel $B\subseteq S^1$. Then $F$ is a regular PVM on $S^1$, is carried by $\sigma(C)$, and $C=\int_{S^1}z\,dF(z)$. [A2, A3, A4]
 
-2.1 $F(\{1\})=0$: for a bounded normal operator the spectral projection at a point $\lambda$ is the orthogonal projection onto $\ker(C-\lambda)$, because $F(\{\lambda\})x=x$ gives $Cx=\int z\,dF_x=\lambda x$, while $Cx=\lambda x$ gives $\int|z-\lambda|^2dF_x=\|(C-\lambda)x\|^2=0$, hence $F_x(\{z\ne\lambda\})=0$ and $F(\{\lambda\})x=x$; with $\lambda=1$ the kernel is $\{0\}$ by [A3]. [A2, A3, step 1.1]
+1.2 $F(\{1\})=0$: for a bounded normal operator the spectral projection at a
+point $\lambda$ is the orthogonal projection onto $\ker(C-\lambda)$. Indeed,
+if $F(\{\lambda\})x=x$, then $F_x$ is carried by $\{\lambda\}$, so the bounded
+calculus gives
+$$\|(C-\lambda)x\|^2=\int_{S^1}|z-\lambda|^2\,dF_x(z)=0.$$
+Conversely, if $Cx=\lambda x$, the same identity shows that $F_x$ is carried
+by $\{\lambda\}$; hence
+$\|(I-F(\{\lambda\}))x\|^2=F_x(S^1\setminus\{\lambda\})=0$ and
+$F(\{\lambda\})x=x$. Thus
+$\operatorname{ran}F(\{\lambda\})=\ker(C-\lambda)$; with $\lambda=1$ this
+kernel is $\{0\}$ by [A3], so the projection $F(\{1\})$ is zero. [A2, A3, A5, step 1.1]
 
-3.1 Let $\psi(\lambda)=(\lambda-i)(\lambda+i)^{-1}$. Then $\psi$ is a homeomorphism of $\mathbb R$ onto $S^1\setminus\{1\}$, and $E(B):=F(\psi(B))$ is a PVM on the Borel sets of $\mathbb R$ with $E(\mathbb R)=F(S^1\setminus\{1\})=I-F(\{1\})=I$; it is regular because $F$ is and $\psi$ is a homeomorphism, and $C=\int z\,dF=\int\psi(\lambda)\,dE(\lambda)$. [A5, step 2.1]
+2.1 Let $\psi(\lambda)=(\lambda-i)(\lambda+i)^{-1}$. Then $\psi$ is a homeomorphism of $\mathbb R$ onto $S^1\setminus\{1\}$, and $E(B):=F(\psi(B))$ is a PVM on the Borel sets of $\mathbb R$ with $E(\mathbb R)=F(S^1\setminus\{1\})=I-F(\{1\})=I$; it is regular because $F$ is and $\psi$ is a homeomorphism, and $C=\int z\,dF=\int\psi(\lambda)\,dE(\lambda)$. [A5, step 1.2]
 
-4.1 Let $A$ be the self-adjoint operator $\int\lambda\,dE$ with domain $D(A)=\{x:\int\lambda^2dE_x<\infty\}$, given by [A1]; write $h(\lambda)=(\lambda+i)^{-1}$, a bounded Borel function. Then $1-C=\int(1-\psi)dE=\int2i h\,dE=2i\,h(E)$, and $(A+i)h(E)=I$ because $(\lambda+i)h(\lambda)=1$ and $A h(E)=( \lambda h)(E)$ on the natural domain; hence $h(E)=(A+i)^{-1}$ and $(A+i)(1-C)=2iI$, so $A+i=2i(1-C)^{-1}$ on $\operatorname{ran}(1-C)=D(A)$. [A1, A3, A5, step 3.1]
+3.1 Let $A$ be the self-adjoint operator $\int\lambda\,dE$ with domain $D(A)=\{x:\int\lambda^2dE_x<\infty\}$, given by [A1]; write $h(\lambda)=(\lambda+i)^{-1}$, a bounded Borel function. Then $1-C=\int(1-\psi)dE=\int2i h\,dE=2i\,h(E)$, and $(A+i)h(E)=I$ because $(\lambda+i)h(\lambda)=1$ and $A h(E)=( \lambda h)(E)$ on the natural domain; hence $h(E)=(A+i)^{-1}$ and $(A+i)(1-C)=2iI$, so $A+i=2i(1-C)^{-1}$ on $\operatorname{ran}(1-C)=D(A)$. [A1, A3, A5, step 2.1]
 
-5.1 Substituting 2.1 into the formula $T=i(I+C)(I-C)^{-1}$ of [A3] gives $T=(1/2)(I+C)(A+i)$; now $I+C=\int(1+\psi)dE=\int2\lambda h(\lambda)\,dE=2\lambda h(\lambda)(E)$, so $T=(\lambda h)(E)(A+i)=(\lambda^2h)(E)+i(\lambda h)(E)=(\lambda)(E)=A$ on $D(A)$, because $\lambda^2h+i\lambda h=\lambda h(\lambda+i)=\lambda$. [A1, A3, step 4.1]
+4.1 Using step 3.1 in the formula $T=i(I+C)(I-C)^{-1}$ of [A3] gives $T=(1/2)(I+C)(A+i)$; now $I+C=\int(1+\psi)dE=\int2\lambda h(\lambda)\,dE=2\lambda h(\lambda)(E)$, so $T=(\lambda h)(E)(A+i)=(\lambda^2h)(E)+i(\lambda h)(E)=(\lambda)(E)=A$ on $D(A)$, because $\lambda^2h+i\lambda h=\lambda h(\lambda+i)=\lambda$. [A1, A3, step 3.1]
 
-5.2 Uniqueness: let $E'$ be a regular PVM on $\mathbb R$ with $D(T)=\{x:\int\lambda^2dE'_x<\infty\}$ and $Tx=\int\lambda\,dE'x$ for $x\in D(T)$, and put $F'(B):=E'(\psi^{-1}(B\setminus\{1\}))$ for Borel $B\subseteq S^1$. Then $F'$ is a regular PVM on $S^1$, $F'(\{1\})=0$, and $\int z\,dF'=\int\psi\,dE'=I-2i\,h(E')=I-2i(T+i)^{-1}=C$, where $(T+i)^{-1}=h(E')$ is proved as in step 4.1 with $E'$ in place of $E$. By the uniqueness clause of [A2] applied to the bounded normal operator $C$, $F'$ is carried by $\sigma(C)$ and agrees there with $F_0$, hence $F'=F$ on $S^1$. Therefore $E'(B)=F'(\psi(B))=F(\psi(B))=E(B)$. [A2, A5, step 3.1, step 4.1]
+4.2 Uniqueness: let $E'$ be a regular PVM on $\mathbb R$ with $D(T)=\{x:\int\lambda^2dE'_x<\infty\}$ and $Tx=\int\lambda\,dE'x$ for $x\in D(T)$, and put $F'(B):=E'(\psi^{-1}(B\setminus\{1\}))$ for Borel $B\subseteq S^1$. Then $F'$ is a regular PVM on $S^1$, $F'(\{1\})=0$, and $\int z\,dF'=\int\psi\,dE'=I-2i\,h(E')=I-2i(T+i)^{-1}=C$, where $(T+i)^{-1}=h(E')$ is proved as in step 3.1 with $E'$ in place of $E$. By the uniqueness clause of [A2] applied to the bounded normal operator $C$, $F'$ is carried by $\sigma(C)$ and agrees there with $F_0$, hence $F'=F$ on $S^1$. Therefore $E'(B)=F'(\psi(B))=F(\psi(B))=E(B)$. [A2, A5, step 2.1, step 3.1]
 
-6.1 Conversely, if $E$ is a regular PVM on $\mathbb R$, then $A=\int\lambda\,dE$ is self-adjoint by [A1] and $E$ represents $A$; by step 5.2 the representing PVM is unique, so $E$ is the spectral PVM of $A$. [A1, step 5.2] ∎
+5.1 Conversely, if $E$ is a regular PVM on $\mathbb R$, then $A=\int\lambda\,dE$ is self-adjoint by [A1] and $E$ represents $A$; by step 4.2 the representing PVM is unique, so $E$ is the spectral PVM of $A$. [A1, step 4.2] ∎

@@ -2,7 +2,7 @@
 page: banach-space-differential-calculus-and-banach-manifolds
 title: Banach-Space Differential Calculus and Banach Manifolds
 status: draft
-items: [def-frechet-derivative-between-banach-spaces, lem-the-frechet-derivative-is-unique, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-c-k-map-between-banach-spaces, lem-banach-mean-value-estimate-on-a-convex-set, thm-inverse-function-theorem-for-banach-spaces, thm-implicit-function-theorem-for-banach-spaces, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, def-split-banach-submanifold, thm-regular-value-theorem-for-banach-manifolds, def-smooth-banach-vector-bundle-and-section, thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, prop-the-index-of-a-fredholm-map-is-locally-constant, rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel]
+items: [def-frechet-derivative-between-banach-spaces, lem-the-frechet-derivative-is-unique, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-c-k-map-between-banach-spaces, lem-banach-mean-value-estimate-on-a-convex-set, thm-inverse-function-theorem-for-banach-spaces, thm-implicit-function-theorem-for-banach-spaces, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, def-split-banach-submanifold, thm-regular-value-theorem-for-banach-manifolds, def-smooth-banach-vector-bundle-and-section, thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, rem-fredholm-maps-have-countable-proper-local-restrictions, rem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense, prop-the-index-of-a-fredholm-map-is-locally-constant, rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel]
 examples: []
 ---
 
@@ -38,17 +38,22 @@ representatives, and the chart independence of both, together with
 functoriality, is proved from the chain rule. Split submanifolds are defined by
 the existence of charts that flatten them onto a slice $E_0\times\{0\}$ with
 $E_0$ complemented, and the regular value theorem is proved by applying the
-implicit function theorem in a complement of the kernel: the kernel is printed
-as a complemented subspace in the hypothesis, and the closing remark explains
-why surjectivity alone cannot replace it.
+implicit function theorem in a complement of the kernel: its domain carries a
+maximal specified atlas, the kernel is printed as a complemented subspace in the
+hypothesis, and the closing remark explains why surjectivity alone cannot
+replace it.
 
 The final block treats the infinite-dimensional transversality package: smooth
 Banach vector bundles and their sections, the vertical derivative at a zero of
 a section and its independence of the local trivialisation, the theorem that a
 section transverse to the zero section — vertical derivative onto with
-complemented kernel — has a split zero submanifold with tangent equal to that
-kernel, the definition of a Fredholm map between Banach manifolds with its
+complemented kernel, on a domain with maximal specified atlas — has a split zero
+submanifold with tangent equal to that kernel, the definition of a Fredholm map
+between Banach manifolds with its
 pointwise index, the local finite-dimensional reduction of a Fredholm map to the
 normal form $(u,v)\mapsto(u,g(u,v))$ with finite-dimensional obstruction map
-$g$, and the local constancy of the index, which makes the index constant on
-connected components.
+$g$. Two following draft remarks explicitly record Smale's external countable
+proper-localization and nowhere-dense critical-image results; they are the
+bounded backward prerequisites for the existing DT-4 Sard--Smale theorem and
+are not local proofs. The block ends with local constancy of the index, which
+makes the index constant on connected components.

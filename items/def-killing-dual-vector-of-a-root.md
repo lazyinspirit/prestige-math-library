@@ -5,7 +5,7 @@ title: Killing-dual vector of a root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-killing-form-orthogonality-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra]
+deps: [prop-killing-form-orthogonality-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,7 +19,7 @@ landmark: false
 
 ## Definition
 
-Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
+Assume the Axiom of Choice. Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
 semisimple Lie algebra $\mathfrak g$, with root set $\Phi$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]), and let $B$ be
 the Killing form ([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).

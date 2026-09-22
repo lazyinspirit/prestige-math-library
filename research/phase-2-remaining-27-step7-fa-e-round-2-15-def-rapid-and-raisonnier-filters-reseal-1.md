@@ -1,0 +1,5 @@
+# Position 15 context reseal
+
+Re-read the complete item against the changed sweetness definition. Before this reread itemHashJudge equalled the latest receipt. The rapidity proof uses finite deletion and the Frechet hypothesis, not sweetness or forcing equivalence. Prefix lengths h=k+1 and closure invariance remain valid; the real-graph relativized hierarchy uses set satisfaction and recursion, independent of Boolean presentation. During this required reread corrected the concluding inequality to name the retained a* rather than the old a after explicitly replacing it. This is a notation correction in the already-authorized finite-deletion proof; all other bytes and the mathematical argument remain unchanged. Focused strict contracts still pass.
+
+Source https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf, Definitions 1.23, 3.2–3.3 and Lemma 3.6, read directly during position 15, supports these conventions. No change to a supplier or dependency set. Next: confirm predecessors current, then record position 16.

@@ -5,10 +5,15 @@ title: Trace class operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, def-series-and-absolute-convergence-in-a-normed-space, def-compact-linear-operator, def-operator-norm, def-metric-convergence, def-infimum, def-dimension, def-hilbert-space, def-countable-choice]
+deps: [def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, lem-finite-rank-operators-are-compact, lem-nth-term-test, def-series-and-absolute-convergence-in-a-normed-space, def-compact-linear-operator, def-operator-norm, def-metric-convergence, def-infimum, def-dimension, def-hilbert-space, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, trace class operators (printed pp. 93–96)"
@@ -20,7 +25,8 @@ sources:
 ## Definition
 
 Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and
-$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]) and let
+$K$ be Hilbert spaces over the same field $\mathbb F\in\{\mathbb R,\mathbb C\}$
+([[def-hilbert-space]]) and let
 $T\in\mathcal B(H,K)$ be a compact operator ([[def-compact-linear-operator]])
 with zero-padded singular-value sequence $(s_n(T))_{n\ge1}$
 ([[def-absolute-value-and-singular-values-of-a-compact-operator]]).
@@ -40,12 +46,15 @@ operators $H\to K$ is written $\mathcal S_1(H,K)$.
 are nonnegative and $\|T\|_1\ge\|T\|\ge0$ whenever $T$ is trace class; the zero
 operator is trace class with $\|0\|_1=0$. When $T$ has finite rank $r$ the
 sequence is zero-padded, the series is the finite sum
-$\sum_{n=1}^r s_n(T)=\sum_{\lambda>0}\lambda\dim E_\lambda(|T|)$ over the finitely
+$\sum_{n=1}^r s_n(T)=\sum_{\lambda>0}\lambda\dim_{\mathbb F} E_\lambda(|T|)$ over the finitely
 many positive eigenvalues of $|T|$ counted with multiplicity ([[def-dimension]]),
-and every finite-rank operator is therefore trace class; in particular every
+and every finite-rank operator is compact
+([[lem-finite-rank-operators-are-compact]]) and therefore trace class; in particular every
 operator with finite-dimensional range and every rank-one operator is trace
 class. If $T$ has infinite rank then $s_n(T)>0$ for every $n$ and the series
-$\sum_{n\ge1}s_n(T)$ converges in the summable case. A trace-class operator with infinite rank has $s_n(T)\to0$, hence
+$\sum_{n\ge1}s_n(T)$ converges in the summable case. By the necessary
+condition for convergence of a scalar series ([[lem-nth-term-test]]), a
+trace-class operator with infinite rank has $s_n(T)\to0$, hence
 is a norm limit of finite-rank operators
 ([[thm-singular-value-decomposition-for-compact-operators]]).
 

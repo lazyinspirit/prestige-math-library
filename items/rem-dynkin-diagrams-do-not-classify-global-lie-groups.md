@@ -5,7 +5,7 @@ title: Dynkin diagrams do not classify global Lie groups
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cartan-killing-classification-of-complex-simple-lie-algebras, cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams]
+deps: [thm-cartan-killing-classification-of-complex-simple-lie-algebras, cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,11 +19,12 @@ landmark: false
 
 ## Remark
 
-Assume the Axiom of Choice; it is inherited from the classification theorem cited below.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]); it is inherited from the classification theorem cited below.
 
-A connected Dynkin diagram classifies a complex simple Lie algebra, and finite
-disjoint unions of connected Dynkin diagrams classify complex semisimple Lie
-algebras. Neither classifies a real form or a connected Lie group with that
+A connected Dynkin diagram classifies a finite-dimensional complex simple Lie
+algebra, and finite disjoint unions of connected Dynkin diagrams classify
+finite-dimensional complex semisimple Lie algebras. Neither classifies a real
+form or a connected Lie group with that
 Lie algebra
 ([[thm-cartan-killing-classification-of-complex-simple-lie-algebras]],
 [[cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams]]).

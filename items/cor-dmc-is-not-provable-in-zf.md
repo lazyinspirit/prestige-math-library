@@ -1,7 +1,7 @@
 ---
 id: cor-dmc-is-not-provable-in-zf
 kind: corollary
-title: "DMC is not provable in ZF"
+title: "If ZF is consistent, DMC is not provable in ZF"
 status: draft
 origin: pipeline
 deps: [thm-relative-consistency-countable-choice-without-urysohn, thm-dmc-implies-urysohn-lemma, def-countable-choice, def-dependent-multiple-choice-finite-level-tree]
@@ -13,9 +13,12 @@ proof_strategy: contradiction
 sources:
   scraped: []
   references:
-    - title: "Norbert Brunner, Geordnete Läuchli Kontinuen"
-      url: "https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf"
-      locator: "§3.4(a)-(b), printed pp. 72-73"
+    - title: "Eleftherios Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14590"
+      locator: "Main relative-consistency theorem, Proc. Amer. Math. Soc. 147 (2019), 4029-4038"
+    - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14848"
+      locator: "Published erratum to the cited theorem"
 ---
 
 ## Statement
@@ -41,4 +44,4 @@ fails.
 
 2.1 Then $\mathrm{ZF} + \mathrm{AC}_{\omega}$ proves DMC, hence by [F2] proves $\mathrm{URY}$; but by [F1] the theory $\mathrm{ZF}+\mathrm{AC}_{\omega}+\neg\mathrm{URY}$ is consistent, and it would prove both $\mathrm{URY}$ and its negation, hence be inconsistent. [step 1.1, F1, F2]
 
-3.1 This contradiction shows that $\mathrm{ZF}$ does not prove DMC, conditionally on $\operatorname{Con}(\mathrm{ZF})$; the witness model is the transferred countable-choice model, in which Urysohn's lemma fails and therefore DMC fails. [step 2.1, F1, F2, discharge-contradiction] ∎
+3.1 This contradiction shows that $\mathrm{ZF}$ does not prove DMC, conditionally on $\operatorname{Con}(\mathrm{ZF})$; the witness model supplied by [F1] has countable choice, while Urysohn's lemma fails there and therefore DMC fails. [step 2.1, F1, F2, discharge-contradiction] ∎

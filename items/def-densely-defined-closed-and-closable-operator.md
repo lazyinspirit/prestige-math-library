@@ -5,7 +5,7 @@ title: "Densely defined, closed and closable operators, and cores"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-unbounded-linear-operator-domain-and-graph, def-dense-top, def-complete-metric-space, def-hilbert-space]
+deps: [def-unbounded-linear-operator-domain-and-graph, def-dense-top, def-complete-metric-space, def-hilbert-space, def-countable-choice]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -22,7 +22,8 @@ sources:
 
 ## Definition
 
-Let $T$ be a linear operator on $H$ with domain $D(T)$ and graph $\Gamma(T)$
+Assume Countable Choice ([[def-countable-choice]]). Let $T$ be a linear
+operator on $H$ with domain $D(T)$ and graph $\Gamma(T)$
 ([[def-unbounded-linear-operator-domain-and-graph]]).
 
 $T$ is **densely defined** when $D(T)$ is a dense subset of $H$
@@ -50,19 +51,27 @@ $H\oplus H$ and $T|_{D_0}$ denotes the restriction of $T$ to $D_0$.
 ## Remarks
 
 **Claim 1.** $\|\cdot\|_T=\|\cdot\|$ holds on $\ker T$, and
-$\|x\|\le\|x\|_T$ always. $\|\cdot\|_T$ is a seminorm because $\|\cdot\|$ and
-$T$ are linear, and it is definite because $\|x\|_T=0$ forces $\|x\|=0$ and
-$x=0$. The map $x\mapsto(x,Tx)$ is linear, isometric by definition, and its
-image is $\Gamma(T)$ with
+$\|x\|\le\|x\|_T$ always. The map $J:x\mapsto(x,Tx)$ is linear, and
+$\|x\|_T=\|Jx\|_{H\oplus H}$. Hence homogeneity and the triangle inequality
+for $\|\cdot\|_T$ are the corresponding norm properties in $H\oplus H$ pulled
+back along $J$. It is definite because $\|x\|_T=0$ forces $\|x\|=0$ and
+$x=0$. The map $J$ is therefore linear and isometric, and its image is
+$\Gamma(T)$ with
 $\|(x,Tx)\|^2=\|x\|^2+\|Tx\|^2=\|x\|_T^2$; a linear isometry is injective, so
 it is a bijection onto $\Gamma(T)$.
 
-**Claim 2.** A subset of a complete metric space is complete for the subspace
-metric exactly when it is closed, and $H\oplus H$ is complete with
-$\|(x,y)\|$ ([[def-complete-metric-space]], [[def-hilbert-space]]), while
-$\Gamma(T)$ carries the subspace metric. Since the map of claim 1 is an
-isometry onto $\Gamma(T)$, the space $(D(T),\|\cdot\|_T)$ is complete exactly
-when $\Gamma(T)$ is closed, that is, exactly when $T$ is closed.
+**Claim 2.** The space $H\oplus H$ is complete with $\|(x,y)\|$
+([[def-complete-metric-space]], [[def-hilbert-space]]), while $\Gamma(T)$
+carries the subspace metric. If $\Gamma(T)$ is closed, every Cauchy sequence in
+it converges in $H\oplus H$ and its limit remains in $\Gamma(T)$, so the graph
+is complete. Conversely suppose $\Gamma(T)$ is complete and
+$q\in\overline{\Gamma(T)}$. Countable Choice selects
+$q_n\in\Gamma(T)$ with $\|q_n-q\|<1/(n+1)$ for every $n\in\mathbb N$.
+Then $(q_n)$ is Cauchy, so it converges to a point of $\Gamma(T)$; uniqueness
+of metric limits makes that point $q$. Thus $\Gamma(T)$ is closed. Since the
+map of claim 1 is an isometry onto $\Gamma(T)$, the space
+$(D(T),\|\cdot\|_T)$ is complete exactly when $\Gamma(T)$ is closed, that is,
+exactly when $T$ is closed.
 
 **Claim 3.** If $T$ is closed then $\Gamma(T)$ is a closed subspace of the
 Hilbert space $H\oplus H$, hence a Hilbert space in its own right, and the
@@ -71,11 +80,9 @@ transfers to $D(T)$ through the isometry of claim 1, making $D(T)$ a Hilbert
 space with inner product $\langle x,y\rangle_T$ and induced norm
 $\|\cdot\|_T$.
 
-**Core.** If $D_0$ is dense in $(D(T),\|\cdot\|_T)$, then every $x\in D(T)$ is
-the $\|\cdot\|_T$-limit of a sequence from $D_0$, hence
-$(x,Tx)=\lim(x_n,Tx_n)\in\overline{\Gamma(T|_{D_0})}$, so
-$\Gamma(T)\subseteq\overline{\Gamma(T|_{D_0})}\subseteq\Gamma(T)$ and the
-closures agree. Conversely if the closures agree, the set of pairs
-$(x,Tx)$ with $x\in D_0$ has closure $\Gamma(T)$, so every point of $\Gamma(T)$
-is a limit of points $(x_n,Tx_n)$ with $x_n\in D_0$, and the isometry of
-claim 1 turns this into $\|x-x_n\|_T\to0$.
+**Core.** The isometry $J:x\mapsto(x,Tx)$ of claim 1 is a homeomorphism from
+$(D(T),\|\cdot\|_T)$ onto $\Gamma(T)$ and maps $D_0$ onto
+$\Gamma(T|_{D_0})$. Hence it carries the closure of $D_0$ onto the closure of
+$\Gamma(T|_{D_0})$ inside $\Gamma(T)$. Therefore $D_0$ is graph-norm dense
+exactly when $\overline{\Gamma(T|_{D_0})}=\Gamma(T)$; this topological
+argument does not replace density by sequential density.

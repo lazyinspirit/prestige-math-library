@@ -5,7 +5,7 @@ title: The root sl_2 triple inside sl_n
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-killing-form-of-a-finite-dimensional-lie-algebra, def-special-linear-lie-algebra-sl-two]
+deps: [def-axiom-of-choice, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-killing-form-of-a-finite-dimensional-lie-algebra, def-special-linear-lie-algebra-sl-two]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -16,11 +16,12 @@ sources:
       locator: "Lecture 19, Lemma 19.16"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the root-triple, Killing-dual and coroot suppliers."
 ---
 
 ## Example
 
-In $\mathfrak{sl}_n(\mathbb C)$ with the diagonal Cartan subalgebra
+Assume AC ([[def-axiom-of-choice]]). In $\mathfrak{sl}_n(\mathbb C)$ with the diagonal Cartan subalgebra
 $\mathfrak h$ and the root $\alpha=\varepsilon_i-\varepsilon_j$ of
 [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]] ($i\ne j$), the triple
 $$e_\alpha=E_{ij},\qquad f_\alpha=E_{ji},\qquad h_\alpha=E_{ii}-E_{jj}$$
@@ -34,7 +35,7 @@ $h_\alpha=2H_\alpha/\alpha(H_\alpha)$
 
 ## Facts & Assumptions
 
-**Given:** The algebra $\mathfrak{sl}_n(\mathbb C)$ with its diagonal Cartan subalgebra $\mathfrak h$ and root $\alpha=\varepsilon_i-\varepsilon_j$, $i\ne j$, as in [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], the matrix units $E_{ab}$, and the notions of Killing-dual vector and coroot from [[def-killing-dual-vector-of-a-root]] and [[def-coroot-of-a-lie-algebra-root]].
+**Given:** AC; the algebra $\mathfrak{sl}_n(\mathbb C)$ with its diagonal Cartan subalgebra $\mathfrak h$ and root $\alpha=\varepsilon_i-\varepsilon_j$, $i\ne j$, as in [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], the matrix units $E_{ab}$, and the notions of Killing-dual vector and coroot from [[def-killing-dual-vector-of-a-root]] and [[def-coroot-of-a-lie-algebra-root]].
 
 ## Verification
 

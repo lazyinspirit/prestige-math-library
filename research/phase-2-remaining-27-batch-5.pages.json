@@ -88,13 +88,15 @@
     "id": "lem-spectrum-of-a-positive-operator-is-nonnegative",
     "kind": "lemma",
     "title": "Spectrum of a positive operator is nonnegative",
-    "strategy": "For positive self-adjoint T and real t<0, <(T-t)x,x>>=|t| ||x||^2, hence bounded below; the same closed/dense range argument gives invertibility. Combine with real spectrum. This direction does not assume square roots.",
+    "strategy": "Normalize the positive quadratic form for x nonzero. For z outside the nonnegative real axis derive a positive lower bound; completeness gives closed range and the adjoint kernel gives dense range. This does not assume self-adjointness, real spectrum or square roots.",
     "deps": [
      "def-self-adjoint-positive-unitary-and-normal-operator",
      "def-countable-choice",
      "def-spectrum-and-resolvent-of-a-bounded-operator",
      "thm-cauchy-schwarz-in-an-inner-product-space",
      "lem-kernel-range-orthogonality-for-hilbert-adjoints",
+     "def-hilbert-space-adjoint",
+     "def-real-and-complex-inner-product-space",
      "thm-hilbert-adjoint-properties",
      "def-operator-norm",
      "def-hilbert-space",
@@ -300,7 +302,7 @@
     "id": "thm-partial-isometry-characterizations",
     "kind": "theorem",
     "title": "Partial isometry characterizations",
-    "strategy": "Equivalence of the partial-isometry definition, U*U being the orthogonal projection onto (ker U)^perp, and UU* being the projection onto ran U. Prove the adjoint version and closedness of range; neither projection is assumed to be I. Define the orthogonal projection onto a closed Hilbert subspace inline from its orthogonal decomposition; the published def-orthogonal-projection is finite-dimensional and is inadequate here.",
+    "strategy": "Use the norm identity and explicit sesquilinear polarization to prove U*U=P_M first, then derive U=UU*U. Show UU* is a bounded self-adjoint idempotent with range ran U, hence a closed-range orthogonal projection. Prove partial isometry of the adjoint and its converse using U**=U.",
     "deps": [
      "def-isometry-coisometry-and-partial-isometry",
      "lem-kernel-range-orthogonality-for-hilbert-adjoints",
@@ -309,7 +311,10 @@
      "def-hilbert-orthogonal-projection",
      "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
      "thm-hilbert-adjoint-properties",
-     "def-operator-norm"
+     "def-operator-norm",
+        "def-hilbert-space-adjoint",
+        "def-inner-product-space",
+        "lem-orthogonal-complement-is-closed"
     ],
     "provenance": {
      "statement": "ai-altered",
@@ -368,10 +373,14 @@
     "id": "thm-numerical-radius-is-an-equivalent-operator-norm",
     "kind": "theorem",
     "title": "Numerical radius is an equivalent operator norm",
-    "strategy": "Complex polarization of the bounded sesquilinear form gives ||T||<=2w(T), while w(T)<=||T|| is Cauchy-Schwarz; prove triangle inequality, homogeneity and definiteness. For normal T show each spectral value is an approximate eigenvalue: normality equates kernel norms of T-lambda and its adjoint, so bounded below would give a bounded inverse. Thus sigma(T) lies in closure W(T), yielding equality. A real skew-symmetric nonzero matrix has zero quadratic form, so do not state the estimate over R.",
+    "strategy": "Treat the zero operator space directly under w(0)=0. Explicit sesquilinear expansion gives ||T||<=2w(T), while w(T)<=||T|| is Cauchy-Schwarz; prove triangle inequality, homogeneity and definiteness. For normal T show each spectral value is an approximate eigenvalue: normality equates kernel norms of T-lambda and its adjoint, so bounded below would give a bounded inverse. Thus sigma(T) lies in closure W(T), yielding equality. A real skew-symmetric nonzero matrix has zero quadratic form, so do not state the estimate over R.",
     "deps": [
      "def-numerical-range-and-numerical-radius",
-     "thm-jordan-von-neumann-polarization",
+     "def-inner-product-space",
+"thm-parallelogram-law",
+"def-hilbert-space-adjoint",
+"cor-archimedean-reciprocal",
+"lem-complex-conjugation-and-modulus-laws",
      "cor-normal-operator-norm-equals-spectral-radius",
      "def-axiom-of-choice",
      "thm-cauchy-schwarz-in-an-inner-product-space",
@@ -403,7 +412,7 @@
      ]
     },
     "statement": "Assume AC. On a complex Hilbert space, w is a norm with w(T)<=||T||<=2w(T); if T is normal, w(T)=||T||.",
-    "axiom_audit": "Uses full AC through the C-star spectral-radius/Gelfand route and declares def-axiom-of-choice; no weaker branch is collapsed."
+    "axiom_audit": "Uses full AC through the C-star spectral-radius/Gelfand route and declares def-axiom-of-choice; AC also selects closure approximants and approximate eigenvectors; no weaker branch is collapsed."
    },
    {
     "id": "lem-polynomial-calculus-is-isometric-for-self-adjoint-operators",
@@ -526,6 +535,7 @@
     "kind": "lemma",
     "title": "Character space of generated normal algebra is operator spectrum",
     "deps": [
+     "def-complex-metric-convergence-and-continuity",
      "def-c-star-algebra-generated-by-a-normal-operator",
      "lem-spectral-permanence-for-unital-c-star-subalgebras",
      "thm-spectrum-as-character-values",
@@ -534,7 +544,7 @@
      "def-character-and-maximal-ideal-space",
      "thm-maximal-ideal-space-is-compact-hausdorff",
      "thm-bounded-inverse-theorem",
-     "thm-continuous-image-of-a-compact-space-is-compact",
+     "thm-compactness-under-continuous-maps",
      "thm-compact-subset-of-a-hausdorff-space-is-closed",
      "def-spectrum-and-resolvent-of-a-bounded-operator",
      "lem-bounded-hilbert-operators-form-a-c-star-algebra"
@@ -677,6 +687,10 @@
     "title": "Self adjoint norm and spectrum extrema",
     "strategy": "For nonzero H and self-adjoint T let m=min sigma(T), M=max sigma(T). Spectral positivity via calculus gives mI<=T<=MI. Conversely any quadratic lower/upper bound lies below/above spectral extrema by the resolvent lemma for positive shifts. Hence inf/sup unit-vector quadratic forms are m,M, and ||T||=max(|m|,|M|). Suprema need not be attained by vectors.",
     "deps": [
+     "lem-spectrum-of-a-self-adjoint-operator-is-real",
+     "lem-bounded-hilbert-operators-form-a-c-star-algebra",
+     "thm-spectrum-is-nonempty-compact-and-norm-bounded",
+     "thm-compactness-under-continuous-maps",
      "thm-continuous-functional-calculus-properties",
      "lem-spectrum-of-a-positive-operator-is-nonnegative",
      "def-axiom-of-choice",
@@ -894,9 +908,12 @@
      "def-countable-choice",
      "def-inner-product-space",
      "def-hilbert-space",
-     "thm-jordan-von-neumann-polarization"
+     "thm-gram-schmidt-orthonormalisation",
+"thm-rank-nullity",
+"thm-of-square-roots",
+"cor-inner-product-induces-a-norm"
     ],
-    "strategy": "For a complex 2x2 matrix write rank-one orthogonal projections as (I+r.sigma)/2 with r in the real unit sphere S^2; verify the coordinates directly (diagonal entries (1+z)/2,(1-z)/2). W is an affine real-linear image of S^2 in R^2. Since the linear map has nontrivial kernel, its image of S^2 equals its image of the closed unit ball, which is convex. One-dimensional compressions give singletons.",
+    "strategy": "For a complex 2x2 matrix write rank-one orthogonal projections as (I+r.sigma)/2 with r in the real unit sphere S^2; verify the coordinates directly (diagonal entries (1+z)/2,(1-z)/2). W is an affine real-linear image of S^2 in R^2. Since the linear map has nontrivial kernel, its image of S^2 equals its image of the closed unit ball, which is convex. Zero-dimensional compressions have W(0)={0} by library convention; one-dimensional compressions give singletons.",
     "provenance": {
      "statement": "ai-altered",
      "proof": "ai-altered"
@@ -916,7 +933,7 @@
      ]
     },
     "statement": "Assume Countable Choice. The numerical range of the compression of an operator to any complex subspace of dimension at most two is convex.",
-    "axiom_audit": "Uses Countable Choice through the Hilbert adjoint/orthogonal-decomposition suppliers and declares def-countable-choice; no full AC is used."
+    "axiom_audit": "Retains Countable Choice as page hypothesis; the explicit finite orthonormal projection and coordinate proof require no further choice."
    },
    {
     "id": "thm-toeplitz-hausdorff",
@@ -1015,7 +1032,13 @@
      "def-spectrum-and-resolvent-of-a-bounded-operator",
      "thm-spectral-mapping-for-continuous-normal-functional-calculus",
      "def-self-adjoint-positive-unitary-and-normal-operator",
-     "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+     "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "def-hilbert-space-adjoint",
+          "thm-continuous-implies-integrable",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-heine-borel-r",
+          "thm-metric-hausdorff-separation"
     ],
     "provenance": {
      "statement": "ai-altered",
@@ -1242,7 +1265,7 @@
      "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
      "thm-cauchy-schwarz-in-an-inner-product-space",
      "def-real-and-complex-inner-product-space",
-     "thm-hilbert-adjoint-properties",
+     "def-hilbert-space-adjoint",
      "def-countable-choice"
     ],
     "statement": "Assume Countable Choice. For orthogonal projection values multiplicative on intersections, weak countable additivity and strong countable additivity are equivalent.",
@@ -1278,7 +1301,7 @@
      "def-measure",
      "def-total-variation-of-a-signed-or-complex-measure",
      "def-real-and-complex-inner-product-space",
-     "thm-hilbert-adjoint-properties",
+     "def-hilbert-space-adjoint",
      "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
      "def-countable-choice"
     ],
@@ -1302,7 +1325,7 @@
      "proof": "ai-altered"
     },
     "axiom_audit": "Uses Countable Choice only through the Hilbert adjoint/projection infrastructure and declares def-countable-choice; no full AC or maximality argument is used.",
-    "strategy": "Polarize quadratic measures using E_{x,y}=1/4 Σ_{k=0}^3 i^k E_{x+i^k y}. For each finite disjoint partition use Cauchy–Schwarz twice to bound Σ|〈E(B_j)x,y〉| by ||x||||y||."
+    "strategy": "Use strong countable additivity and Cauchy–Schwarz to construct scalar measures. Bound every finite partial sum of each countable partition by the scalar total masses, then take the supremum. Expand the four-root polarization identity."
    },
    {
     "id": "def-integral-of-a-simple-function-against-a-pvm",
@@ -1346,9 +1369,11 @@
      "def-simple-integral-against-a-signed-or-complex-measure",
      "def-complex-simple-function",
      "def-projection-valued-measure",
-     "thm-hilbert-adjoint-properties",
+     "def-hilbert-space-adjoint",
      "def-real-and-complex-inner-product-space",
-     "def-countable-choice"
+     "def-countable-choice",
+     "def-operator-norm",
+     "def-total-variation-of-a-signed-or-complex-measure"
     ],
     "statement": "Assume Countable Choice. The simple integral is independent of its disjoint presentation, satisfies 〈(∫s dE)x,y〉=∫s dE_{x,y}, and ||(∫s dE)x||²=∫|s|² dE_x.",
     "sources": {
@@ -1370,7 +1395,7 @@
      "proof": "ai-altered"
     },
     "axiom_audit": "Uses Countable Choice only through the Hilbert adjoint/projection infrastructure and declares def-countable-choice; no full AC or maximality argument is used.",
-    "strategy": "Refine two partitions by all intersections; use orthogonality. Its norm is the maximum of |a_j| over nonzero projections, with zero for the zero operator."
+    "strategy": "Refine partitions by intersections; regroup scalar sums by level values. Expand the norm using self-adjoint idempotence. Ignore empty cells in the coefficient bound M_s=max({0} union |s|(X)), which is zero on the empty domain."
    },
    {
     "id": "thm-bounded-borel-pvm-integral",
@@ -1418,6 +1443,7 @@
     "kind": "theorem",
     "title": "Pvm integral is a star homomorphism",
     "deps": [
+     "def-integral-of-a-simple-function-against-a-pvm",
      "thm-bounded-borel-pvm-integral",
      "thm-dominated-convergence",
      "def-countable-choice",
@@ -1430,7 +1456,7 @@
      "lem-composition-operator-norm-inequality",
      "def-projection-valued-measure"
     ],
-    "statement": "Assume Countable Choice. Φ_E is a unital star homomorphism. If f_n→f pointwise E-almost everywhere and sup_n||f_n||∞<∞, then Φ_E(f_n)→Φ_E(f) strongly.",
+    "statement": "Assume Countable Choice. Φ_E is a unital star homomorphism. For bounded measurable f_n and f, if f_n→f pointwise E-almost everywhere and sup_n||f_n||∞<∞, then Φ_E(f_n)→Φ_E(f) strongly.",
     "sources": {
      "references": [
       {
@@ -1552,6 +1578,10 @@
     "kind": "definition",
     "title": "Borel functional calculus for a bounded normal operator",
     "deps": [
+     "lem-continuous-functional-calculus-produces-a-regular-pvm",
+     "thm-continuous-functional-calculus-properties",
+     "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals",
+     "def-hilbert-space-adjoint",
      "thm-spectral-theorem-for-bounded-normal-operators-pvm-form",
      "thm-bounded-borel-pvm-integral",
      "thm-pvm-integral-is-a-star-homomorphism",
@@ -1579,7 +1609,7 @@
      "proof": "not-applicable"
     },
     "axiom_audit": "Assumes AC through the normal continuous calculus and spectral representation suppliers; any additional Zorn use is identified in the strategy and def-axiom-of-choice is declared.",
-    "strategy": "Well-definedness follows from the preceding spectral theorem's uniqueness of the regular PVM E and the previously constructed bounded-Borel PVM integral Phi_E. Restricting to bounded Borel functions ensures Phi_E(f) is a bounded operator. The following theorem proves the algebraic, norm, convergence, and compatibility properties; none is silently built into this definition."
+    "strategy": "Well-definedness follows from the preceding spectral theorem's uniqueness of the regular PVM E and the previously constructed bounded-Borel PVM integral Phi_E. Restricting to bounded Borel functions ensures Phi_E(f) is a bounded operator. Algebraic, norm and convergence properties follow from the preceding PVM integral; commutation is proved directly from uniqueness of regular scalar representing measures."
    },
    {
     "id": "thm-borel-functional-calculus-for-bounded-normal-operators",
@@ -1795,9 +1825,15 @@
      "def-dense-top",
      "def-hilbert-space",
      "def-complete-metric-space",
-     "def-axiom-of-choice"
+     "def-axiom-of-choice",
+        "def-hilbert-space-adjoint",
+        "lem-orthogonal-complement-is-closed",
+        "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+        "thm-double-orthogonal-complement-is-closure",
+        "thm-bounded-linear-operator-equivalences",
+        "thm-hilbert-adjoint-properties"
     ],
-    "statement": "Assume AC. Every bounded normal operator admits a family of mutually orthogonal cyclic reducing subspaces whose Hilbert sum is H. General existence uses AC/Zorn; in separable H a given dense sequence constructs a finite or countable such family.",
+    "statement": "Assume AC. Every bounded normal operator admits a family of mutually orthogonal cyclic reducing subspaces whose Hilbert sum is H. General existence uses AC/Zorn; in separable H a given zero-based dense sequence constructs a finite or countable such family.",
     "sources": {
      "references": [
       {
@@ -2053,9 +2089,12 @@
      "def-operator-norm",
      "def-hilbert-space",
      "def-self-adjoint-positive-unitary-and-normal-operator",
-     "def-axiom-of-choice"
+     "def-axiom-of-choice",
+          "def-hilbert-space-adjoint",
+          "thm-complex-plane-is-complete",
+          "def-projection-valued-measure"
     ],
-    "statement": "Assume AC. For a bounded diagonal operator on ell²(I) with entries λ_i, E(B)(x_i)=(1_B(λ_i)x_i), and f(T)(x_i)=(f(λ_i)x_i).",
+    "statement": "Assume AC. For nonempty I and a bounded diagonal operator on ell²(I) with entries λ_i, E(B)(x_i)=(1_B(λ_i)x_i), and f(T)(x_i)=(f(λ_i)x_i).",
     "sources": {
      "references": [
       {
@@ -2070,7 +2109,7 @@
      "proof": "ai-altered"
     },
     "axiom_audit": "Inherits full AC from the cited A-page spectral theorem or multiplicity supplier; the displayed concrete calculation introduces no stronger choice principle.",
-    "strategy": "Check SOT additivity coordinatewise and the squared-sum bound; σ(T)=closure{λ_i}."
+    "strategy": "Prove ell2 completeness by coordinate limits; prove SOT additivity and scalar regularity with finite coordinate tails; σ(T)=closure{λ_i}."
    },
    {
     "id": "ex-pvm-of-a-multiplication-operator",
@@ -2092,9 +2131,13 @@
      "thm-dominated-convergence",
      "def-hilbert-space",
      "def-self-adjoint-positive-unitary-and-normal-operator",
-     "def-axiom-of-choice"
+     "def-axiom-of-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-projection-valued-measure",
+          "thm-bounded-borel-pvm-integral"
     ],
-    "statement": "Assume AC. For a bounded measurable m on a sigma-finite measure space, M_m on L² has E(B)=M_(1_(m^{-1}B)), calculus M_(f∘m), and spectrum the essential range of m.",
+    "statement": "Assume AC. For a bounded measurable m on a sigma-finite measure space with positive total measure, M_m on L² has E(B)=M_(1_(m^{-1}B)), calculus M_(f∘m), and spectrum the essential range of m.",
     "sources": {
      "references": [
       {
@@ -2128,7 +2171,11 @@
      "def-borel-functional-calculus-for-a-bounded-normal-operator",
      "def-spectrum-and-resolvent-of-a-bounded-operator",
      "def-hilbert-space",
-     "def-axiom-of-choice"
+     "def-axiom-of-choice",
+        "def-banach-space",
+        "thm-uniform-limit-theorem",
+        "thm-bounded-operator-space-is-banach",
+        "thm-spectral-theorem-for-bounded-normal-operators-pvm-form"
     ],
     "statement": "Assume AC. At an isolated spectral point λ of a bounded normal T, E({λ}) is the Riesz projection (2πi)^(-1)∮(zI-T)^(-1)dz along a positively oriented separating contour.",
     "sources": {

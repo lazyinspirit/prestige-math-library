@@ -10,6 +10,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 pp.69–70, Theorem 3.1"
@@ -39,9 +44,9 @@ the composites $TA:W\to Y$ and $BT:X\to Z$ are compact.
 
 **Given:** Normed spaces $W,X,Y,Z$ over one scalar field, a compact $T:X\to Y$, and bounded linear $A:W\to X$, $B:Y\to Z$.
 
-1.1 If $E\subseteq W$ is bounded and nonempty, say $E\subseteq B(w_0,r)$, then $\|Aw\|\le\|A\|(\|w_0\|+r)$ for every $w\in E$ by [A1], so $A(E)$ is bounded; and $A(\varnothing)=\varnothing$ is bounded, so $A$ carries bounded sets to bounded sets. [A1, A2, algebra]
+1.1 If $E\subseteq W$ is bounded and nonempty, say $E\subseteq B(w_0,r)$, then $\|Aw\|\le\|A\|(\|w_0\|+r)$ for every $w\in E$ by [A1], so $A(E)\subseteq B(0,\|A\|(\|w_0\|+r)+1)$ is bounded; and $A(\varnothing)=\varnothing$ is bounded, so $A$ carries bounded sets to bounded sets. [A1, A2, algebra]
 
-1.2 If $E$ is a bounded subset of $X$ with $E\ne\varnothing$ and $E\subseteq B(x_0,R_0)$, then $\|x\|\le\|x_0\|+R_0=:R$ for every $x\in E$ by [A2] and the triangle inequality, so $E\subseteq R\,\overline B_X$; the same holds in any normed space. [A2, algebra]
+1.2 If $E=\varnothing$, take $R=1$, so $E\subseteq R\,\overline B_X$ holds immediately. If $E$ is a bounded subset of $X$ with $E\ne\varnothing$ and $E\subseteq B(x_0,R_0)$, then $\|x\|\le\|x_0\|+R_0=:R$ for every $x\in E$ by [A2] and the triangle inequality, so $E\subseteq R\,\overline B_X$; the same holds in any normed space. [A2, algebra]
 
 1.3 The set $B(\overline{T(\overline B_X)})$ is compact: $\overline{T(\overline B_X)}$ is compact by [A1], and $B$ is continuous by [A1], so the image under $B$ is compact by [A3]. [A1, A3]
 

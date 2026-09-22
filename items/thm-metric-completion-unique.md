@@ -43,7 +43,8 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]); completions of it exist
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $(X,d)$ be
+a metric space ([[def-metric-space]]); completions of it exist
 ([[thm-metric-completion-exists]], [[def-metric-completion]]). Then:
 
 1. **Universal property.** Let $\big((\widehat{X},\widehat{d}), \iota\big)$ be a
@@ -65,7 +66,7 @@ the embeddings, which is what licenses the phrase *the* completion from here on.
 
 ## Facts & Assumptions
 
-**Given:** A metric space $(X,d)$; completions $\big((\widehat{X},\widehat{d}),\iota\big)$, $\big((\widehat{X}_1,\widehat{d}_1),\iota_1\big)$ and $\big((\widehat{X}_2,\widehat{d}_2),\iota_2\big)$ of it; a complete metric space $(Z,d_Z)$; a uniformly continuous $f : X \to Z$; a real $\varepsilon > 0$.
+**Given:** The Axiom of Countable Choice; a metric space $(X,d)$; completions $\big((\widehat{X},\widehat{d}),\iota\big)$, $\big((\widehat{X}_1,\widehat{d}_1),\iota_1\big)$ and $\big((\widehat{X}_2,\widehat{d}_2),\iota_2\big)$ of it; a complete metric space $(Z,d_Z)$; a uniformly continuous $f : X \to Z$; a real $\varepsilon > 0$.
 
 [A1] Completion: $\widehat{X}$ is complete, $\iota$ is an isometric embedding, and $\iota[X]$ is dense in $\widehat{X}$ ([[def-metric-completion]], [[def-metric-interior-closure-boundary]]).
 

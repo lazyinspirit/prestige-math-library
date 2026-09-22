@@ -1,7 +1,7 @@
 ---
 id: cor-zf-does-not-prove-urysohn-lemma
 kind: corollary
-title: "ZF does not prove Urysohn's lemma"
+title: "If ZF is consistent, ZF does not prove Urysohn's lemma"
 status: draft
 origin: pipeline
 deps: [thm-relative-consistency-countable-choice-without-urysohn, def-countable-choice, def-normal-and-t4-spaces]
@@ -13,9 +13,12 @@ proof_strategy: contradiction
 sources:
   scraped: []
   references:
-    - title: "Norbert Brunner, Geordnete Läuchli Kontinuen"
-      url: "https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf"
-      locator: "§3.4(a)-(b), printed pp. 72-73"
+    - title: "Eleftherios Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14590"
+      locator: "Main relative-consistency theorem, Proc. Amer. Math. Soc. 147 (2019), 4029-4038"
+    - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14848"
+      locator: "Published erratum to the cited theorem"
 ---
 
 ## Statement

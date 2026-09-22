@@ -1,0 +1,14 @@
+# FA position39: union under the new weakest-condition convention
+
+Disposition repaired. Read current full proof, original FA evidence, both Terra verdicts/Alpha adjudications, own manifest and contract/risk, current exact five extension clauses and the previously inspected A/B context. Reread https://shelah.logic.at/files/95333/176.pdf original pp.40–41 Definition7.9 and entire Claim7.10 proof ('Easy'). The local proof must supply the details; the source order is opposite to the library order.
+
+The new context requires a distinguished weakest condition. This is not preserved by the five extension clauses alone. Explicit counterexample: P_n={0,...,n} in the ordinary numerical order, D_n={0}, each E_n the singleton relation. Every stage is sweet with top n; every inclusion is complete since all conditions are compatible and singleton antichains remain maximal; the other four extension clauses hold. The omega union has no weakest condition. Thus the old proof was invalid in the new context.
+
+I added the necessary common distinguished weakest condition hypothesis to Statement/Given, and proved its persistence in step1.1. This is a repair of the queued lemma, not a change to the existing extension definition. Updated its owning manifest and own batch15/merged contract entry, including the degenerate boundary and risk explanation. Consumers must discharge this explicit hypothesis; none were edited in this position.
+
+The rest is independently valid. Density gives D_j intersect P_i=D_i via the last extension clause. Class containment in P_i plus that identity and relation restriction gives exact stabilization of old classes. This resolves Terra's last objection. Hence every E_i-related sequence with limit point in a stage actually lies in that stage, where sequential bounds apply; likewise transfer's test points and witnesses lie in one stage. Countably many cofinal quotient sets give countably many union classes by the cited CC countable-union theorem. Directedness and equivalence are checked in a common stage. Completeness reflects common lower bounds into a later stage and tests any old maximal antichain against each union condition there. Density and preorder properties are checked before these arguments.
+
+Precheck PASS; strict own contract check 0 errors,0 warnings. Owning batch15 cross-batch record has no edge for this consumer; atomically retained its rows and refreshed the ledger. No new supplier or published edit. Queue-status must show all predecessors current before record. Next position40, including its use of the now-explicit common-top hypothesis.
+
+
+Current itemHashJudge: 98b16a87756b40a98f55fc33f40a467222a34a484da1e249f789080c7cb8ac25. Changed from the latest receipt; the changed text is reviewed above. Queue-status immediately before recording shows every predecessor current. No judge verdict or pass stamp is created.

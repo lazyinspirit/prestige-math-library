@@ -42,7 +42,7 @@ $$\int_G f(hx)\,d\mu(x)=\int_G f(xh)\,d\mu(x)=\int_G f(hxh^{-1})\,d\mu(x)=\int_G
 
 **Proof technique:** direct.
 
-1.1 Let $E\subseteq G$ be Borel. Since $x\mapsto 1_E(hx)$ is the indicator of $h^{-1}E$, the right invariance in [L1] gives $\int_G 1_E(hx)\,d\mu(x)=\mu(h^{-1}E)=\mu(E)$; since $x\mapsto1_E(xh)$ is the indicator of $Eh^{-1}$, the left invariance gives $\int_G1_E(xh)\,d\mu(x)=\mu(Eh^{-1})=\mu(E)$; and since $x\mapsto1_E(x^{-1})$ is the indicator of $E^{-1}$, inversion invariance gives $\int_G1_E(x^{-1})\,d\mu(x)=\mu(E^{-1})=\mu(E)$. [L1, algebra]
+1.1 Let $E\subseteq G$ be Borel. Since $x\mapsto 1_E(hx)$ is the indicator of $h^{-1}E$, the left invariance in [L1] gives $\int_G 1_E(hx)\,d\mu(x)=\mu(h^{-1}E)=\mu(E)$; since $x\mapsto1_E(xh)$ is the indicator of $Eh^{-1}$, the right invariance gives $\int_G1_E(xh)\,d\mu(x)=\mu(Eh^{-1})=\mu(E)$; and since $x\mapsto1_E(x^{-1})$ is the indicator of $E^{-1}$, inversion invariance gives $\int_G1_E(x^{-1})\,d\mu(x)=\mu(E^{-1})=\mu(E)$. [L1, algebra]
 
 2.1 Let $g\ge0$ be Borel. By [L2] choose an increasing sequence of nonnegative simple Borel functions $s_n\nearrow g$. Each $s_n$ is a finite linear combination of Borel indicators, so the three translation/inversion identities of step 1.1 and linearity of the simple integral give $\int s_n(hx)\,d\mu=\int s_n(xh)\,d\mu=\int s_n(x^{-1})\,d\mu=\int s_n\,d\mu$; the same sequences $s_n(h\cdot)$, $s_n(\cdot h)$, $s_n(\cdot^{-1})$ increase to $g(h\cdot)$, $g(\cdot h)$, $g(\cdot^{-1})$, so two applications of monotone convergence in [L2] identify all four nonnegative integrals. [L2, step 1.1]
 

@@ -68,15 +68,16 @@ particular every Moore space is first countable.
 
 - **Conventions.** *Regular* and *normal* name separation conditions alone in
   this library, with $T_1$ written separately; *Moore space* is defined as
-  regular $T_1$ plus developable. The Mrowka plane of the companion page is the
-  standard witness that a Moore space need not be normal.
+  regular $T_1$ plus developable.
 
 - **Why a development and not a metric.** Both structures define the topology
   by countably many "approximations"; a development survives in spaces that
   carry no compatible metric, and the whole point of this page is that a
-  developable space is metrizable exactly when it is collectionwise normal,
-  by [[thm-collectionwise-normal-moore-spaces-are-metrizable]] together with
-  the local Bing-style argument recorded on this page.
+  later ZFC theorem [[thm-collectionwise-normal-moore-spaces-are-metrizable]]
+  concerns collectionwise normal **Moore spaces**, including the regular
+  $T_1$ hypotheses. It does not assert metrization of arbitrary developable
+  spaces. That later theorem is separate from the ZF definitions and finite
+  normalization argument here.
 
 - **The normalization uses no choice.** The family $\mathcal G'_n$ is described
   by a formula from the given $\mathcal G_0, \dots, \mathcal G_n$, and per point

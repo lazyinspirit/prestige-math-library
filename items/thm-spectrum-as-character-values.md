@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Corollary 3.1.8 and §3.1, printed pp. 54–61"

@@ -24,23 +24,33 @@ parts:
       - banach-alaoglu-goldstine-and-krein-milman
       - schauder-bases-approximation-and-banach-space-pathologies
       - banach-valued-integration-and-the-radon-nikodym-property
+      - unbounded-self-adjoint-operators-and-stones-theorem
+      - spectral-measures-and-borel-functional-calculus
+      - continuous-functional-calculus-for-self-adjoint-and-normal-operators
+      - compact-self-adjoint-hilbert-schmidt-and-trace-class-operators
+      - square-integrable-kernels-and-hilbert-schmidt-compactness
+      - gelfand-theory-and-commutative-c-star-algebras
+      - orthonormal-bases-parseval-and-fourier-series
+      - banach-space-differential-calculus-and-banach-manifolds
+      - banach-algebras-spectrum-and-holomorphic-functional-calculus
+      - hilbert-space-geometry-and-riesz-representation
+      - compact-operators-and-riesz-schauder-theory
 ---
 
 ## foundations
 
-Normed spaces and Banach completeness: subspaces, products, series,
-completion, bounded maps, quotients; finite-dimensional equivalence, Riesz's
-lemma, Baire category under DC: open mapping, bounded inverse, closed graph,
-$\mathrm{AC}_\omega$ uniform boundedness. Fourier analysis: convolution,
-Gaussian approximate identities, inversion, Schwartz-space Parseval, unitary
-Plancherel, Poisson summation, tempered distributions with finite-seminorm
-bounds and the $2\pi$-normalized Fourier automorphism. Hahn--Banach supplies
-norming functionals, bidual maps and separation. Distributions, annihilators,
-transposes, closed range and the weak, weak-star and locally convex
-topologies follow, choice hypotheses stated: Banach--Alaoglu, Goldstine,
-Krein--Milman, reflexivity, $L^p$, Eberlein--Šmulian, Schur, uniform
-convexity, James, Bishop--Phelps. Schauder bases, unconditional convergence,
-bounded approximation, the charge dual of $\ell^\infty$, James space, Enflo's
-reflexive space without approximation, then Bochner integration, vector
-measures, the Radon--Nikodym property and Dunford--Pettis, failing for $c_0$,
-$L^1([0,1])$.
+Banach spaces: subspaces, completions, quotients, finite-dimensional
+equivalence, Riesz's lemma and Baire category under DC (open mapping,
+$\mathrm{AC}_\omega$ uniform boundedness); Fourier analysis: convolution,
+Gaussian kernels, inversion, Schwartz Parseval, Plancherel, Poisson summation,
+tempered distributions; Hahn--Banach separation and norming, distributions,
+annihilators, transposes, weak and weak-star topologies, locally convex spaces,
+Banach--Alaoglu, Goldstine, Krein--Milman, reflexivity, Eberlein--Šmulian and
+James; Schauder bases, bounded approximation, Bochner integration and the
+Radon--Nikodym property; then Hilbert-space geometry, projections and Riesz
+representation; orthonormal bases, Parseval and Fourier series; compact
+operators, Riesz--Schauder theory and the Fredholm index; Banach algebras,
+spectra and holomorphic calculus; Gelfand theory for commutative C*-algebras;
+the continuous, Borel, unbounded and spectral-measure calculi; the compact
+self-adjoint spectral theorem with Hilbert--Schmidt kernels, trace-class
+operators; Fréchet calculus on Banach manifolds; Stone's theorem.

@@ -5,7 +5,7 @@ title: Coroot of a Lie-algebra root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-killing-length-of-a-root-is-nonzero, def-killing-dual-vector-of-a-root]
+deps: [lem-killing-length-of-a-root-is-nonzero, def-killing-dual-vector-of-a-root, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,7 +19,7 @@ landmark: false
 
 ## Definition
 
-Let $\alpha$ be a root of a finite-dimensional complex semisimple Lie algebra
+Assume the Axiom of Choice. Let $\alpha$ be a root of a finite-dimensional complex semisimple Lie algebra
 $\mathfrak g$ with respect to a Cartan subalgebra $\mathfrak h$, and let
 $H_\alpha\in\mathfrak h$ be its Killing-dual vector
 ([[def-killing-dual-vector-of-a-root]]). By

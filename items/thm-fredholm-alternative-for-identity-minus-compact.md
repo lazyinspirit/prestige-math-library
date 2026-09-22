@@ -21,7 +21,7 @@ sources:
 ## Statement
 
 Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a Banach space
-over $\mathbb R$ or $\mathbb C$, let $K:X\to X$ be a compact operator
+over a fixed field $F\in\{\mathbb R,\mathbb C\}$, let $K:X\to X$ be a compact operator
 ([[def-compact-linear-operator]]) and put $A:=I-K$. Then:
 
 1. $A$ is injective if and only if it is surjective, and in that case $A$ is
@@ -32,23 +32,23 @@ over $\mathbb R$ or $\mathbb C$, let $K:X\to X$ be a compact operator
    ([[def-transpose-of-a-bounded-operator]]);
 3. $\ker A$ and the cokernel $X/\operatorname{ran}A$
    ([[def-quotient-vector-space-coset-notation]]) are finite dimensional with
-   equal dimensions ([[def-dimension]]).
+   equal dimensions over $F$ ([[def-dimension]]).
 
 ## Facts & Assumptions
 
-[A1] Under DC there is $m_0$ from which the kernel and range chains stabilize; since every larger exponent has the same properties, take $m\ge\max\{m_0,1\}$. Then $\ker A^m=\ker A^n$ and $\operatorname{ran}A^m=\operatorname{ran}A^n$ for all $n\ge m$, and with $N:=\ker A^m$, $Y:=\operatorname{ran}A^m$ one has $X=N\oplus Y$, $N$ finite dimensional, $Y$ closed, $A(Y)=Y$ and $A|_Y$ a bounded isomorphism ([[lem-riesz-schauder-ascent-and-descent-stabilize]], [[def-dependent-choice]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
+[A1] The compact $K$ is bounded; if $C$ is a bound for $K$, then $\|Ax\|\le(1+C)\|x\|$, so $A$ is bounded and linear ([[def-compact-linear-operator]], [[def-bounded-linear-operator]]). Under DC there is $m_0$ from which the kernel and range chains stabilize; since every larger exponent has the same properties, take $m\ge\max\{m_0,1\}$. Then $\ker A^m=\ker A^n$ and $\operatorname{ran}A^m=\operatorname{ran}A^n$ for all $n\ge m$, and with $N:=\ker A^m$, $Y:=\operatorname{ran}A^m$ one has $X=N\oplus Y$, $N$ finite dimensional, $Y$ closed, $A(Y)=Y$ and $A|_Y$ a bounded isomorphism ([[lem-riesz-schauder-ascent-and-descent-stabilize]], [[def-dependent-choice]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
 [A2] $A^*=I-K^*$: the transpose of the identity is the identity and the transpose is additive ([[lem-transpose-reverses-composition]], [[def-transpose-of-a-bounded-operator]]); under DC the range of $I-K$ is closed ([[lem-range-of-identity-minus-compact-is-closed]]). For a bounded linear $T$ with closed range one has $(\operatorname{ran}T)^\perp=\ker T^*$ and $\overline{\operatorname{ran}T}={}^\perp(\ker T^*)$ ([[lem-elementary-kernel-range-annihilator-identities]]).
 
-[A3] A bounded bijection between Banach spaces has a bounded inverse ([[thm-bounded-inverse-theorem]], [[def-banach-space]]). For a linear map $T:V\to W$ with $V$ finite dimensional, $\dim V=\dim\ker T+\dim\operatorname{ran}T$ ([[thm-rank-nullity]], [[def-dimension]]); for a linear subspace $U\le V$ the quotient $V/U$ is a vector space and a surjective linear map induces a linear isomorphism $V/\ker T\cong\operatorname{ran}T$ ([[thm-first-isomorphism-theorem-for-vector-spaces]], [[def-quotient-vector-space-coset-notation]], [[def-linear-subspace]]).
+[A3] A bounded bijection between Banach spaces has a bounded inverse ([[thm-bounded-inverse-theorem]], [[def-banach-space]]). For a linear map $T:V\to W$ over $F$ with $V$ finite dimensional, $\dim_F V=\dim_F\ker T+\dim_F\operatorname{ran}T$ ([[thm-rank-nullity]], [[def-dimension]]); for a linear subspace $U\le V$ the quotient $V/U$ is a vector space and a surjective linear map induces a linear isomorphism $V/\ker T\cong\operatorname{ran}T$ ([[thm-first-isomorphism-theorem-for-vector-spaces]], [[def-quotient-vector-space-coset-notation]], [[def-linear-subspace]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** $\mathrm{AC}$, a Banach space $X$ over $\mathbb R$ or $\mathbb C$, a compact $K:X\to X$, $A=I-K$; and $m$, $N=\ker A^m$, $Y=\operatorname{ran}A^m$ as in [A1].
+**Given:** $\mathrm{AC}$, a Banach space $X$ over the fixed field $F\in\{\mathbb R,\mathbb C\}$, a compact $K:X\to X$, $A=I-K$; and $m$, $N=\ker A^m$, $Y=\operatorname{ran}A^m$ as in [A1].
 
-1.1 $N$ is finite dimensional, $Y$ is closed, $A|_Y$ is a bounded isomorphism of $Y$ onto $Y$, and $X=N\oplus Y$. [A1]
+1.1 $N$ is finite dimensional, $Y$ is closed, $A|_Y$ is a bounded isomorphism of $Y$ onto $Y$, and $X=N\oplus Y$. Moreover $A(N)\subseteq N$, because $A^m(An)=A(A^mn)=0$ for $n\in N$. All subspaces, quotients and dimensions below are over $F$. [A1]
 
 2.1 $\ker A\subseteq N$ and $\ker A=\ker(A|_N)$: if $Ax=0$ then $A^mx=0$, so $x\in N$; conversely $x\in N$ with $Ax=0$ means $x\in\ker A$. [step 1.1]
 
@@ -60,12 +60,12 @@ over $\mathbb R$ or $\mathbb C$, let $K:X\to X$ be a compact operator
 
 3.2 The inclusion $N\hookrightarrow X$ induces a linear isomorphism $N/A(N)\cong X/\operatorname{ran}A$: the map $\varphi(n)=n+\operatorname{ran}A$ has kernel $N\cap\operatorname{ran}A=N\cap(A(N)+Y)=A(N)+(N\cap Y)=A(N)$, and it is surjective because every coset $x+\operatorname{ran}A$ with $x=n+y$ equals $n+\operatorname{ran}A$. [step 1.1, step 2.2, A3]
 
-3.3 The following are equivalent: $A$ injective, $\ker A=\{0\}$, $N=\{0\}$, $A$ surjective. Indeed $\ker A=\{0\}$ is $A$ injective; $N=\{0\}$ gives $\ker A=\{0\}$ by [step 2.1], and conversely $N\ne\{0\}$ makes $A|_N$ non-injective by [step 2.3], so $\ker A\ne\{0\}$; finally $N=\{0\}$ gives $X=Y=\operatorname{ran}A$ so $A$ is surjective, while if $N\ne\{0\}$ and $A$ is surjective then $N=N\cap\operatorname{ran}A=A(N)+(N\cap Y)=A(N)$, contradicting [step 2.3]. [step 1.1, step 2.1, step 2.3]
+3.3 The following are equivalent: $A$ injective, $\ker A=\{0\}$, $N=\{0\}$, $A$ surjective. Indeed $\ker A=\{0\}$ is $A$ injective; $N=\{0\}$ gives $\ker A=\{0\}$ by [step 2.1], and conversely $N\ne\{0\}$ makes $A|_N$ non-injective by [step 2.3], so $\ker A\ne\{0\}$; finally $N=\{0\}$ gives $X=Y=\operatorname{ran}A$ so $A$ is surjective, while if $N\ne\{0\}$ and $A$ is surjective then $N=N\cap\operatorname{ran}A=A(N)+(N\cap Y)=A(N)$, contradicting [step 2.3]. [step 1.1, step 2.1, step 2.2, step 2.3, A3]
 
 4.1 If $A$ is injective, hence bijective by [step 3.3], then $A^{-1}$ is bounded by [A3]. [step 3.3, A3]
 
 4.2 For $y\in X$ the equation $Ax=y$ is solvable if and only if $y\in\operatorname{ran}A$ if and only if $\varphi(y)=0$ for every $\varphi\in\ker A^*$, by [step 3.1]. [step 3.1, A2]
 
-4.3 $\dim\ker A=\dim N-\dim A(N)$ and $\dim(X/\operatorname{ran}A)=\dim(N/A(N))=\dim N-\dim A(N)$: the first is rank-nullity for $A|_N:N\to N$ together with [step 2.1], the second is rank-nullity for the quotient map $N\to N/A(N)$ together with [step 3.2], whose kernel is $A(N)$. [step 2.1, step 3.2, A3]
+4.3 Rank–nullity for $A|_N:N\to N$ gives $\dim_F N=\dim_F\ker A+\dim_F A(N)$. The surjective quotient map $N\to N/A(N)$ has kernel $A(N)$, so rank–nullity also gives $\dim_F N=\dim_F A(N)+\dim_F(N/A(N))$. Both its image and the first map's kernel are finite dimensional by rank–nullity. Cancelling the common natural summand and using the isomorphism in step 3.2 yields $\dim_F\ker A=\dim_F(X/\operatorname{ran}A)$, with both spaces finite dimensional. [step 2.1, step 3.2, A3, algebra]
 
 5.1 Collecting: [step 3.3] and [step 4.1] give claim 1, [step 4.2] gives claim 2, and [step 4.3] gives finite dimensionality and equality of the dimensions of kernel and cokernel, claim 3. [step 3.3, step 4.1, step 4.2, step 4.3] ∎

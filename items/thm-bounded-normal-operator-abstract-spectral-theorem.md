@@ -30,7 +30,7 @@ Assume AC. A bounded operator $T$ on a nonzero complex Hilbert space is normal e
 
 [A3] For normal $T$ the continuous functional calculus is a unital isometric star-isomorphism $C(\sigma(T))\to C^*(I,T)$ with $z\mapsto T$ ([[thm-continuous-functional-calculus-for-bounded-normal-operators]]).
 
-[A4] For every bounded $T$ the spectrum is a compact subset of $\mathbb C$: $\mathcal B(H)$ is a unital complex Banach algebra, its algebra spectrum agrees with the operator spectrum by the bounded inverse theorem, and spectra in nonzero unital Banach algebras are compact ([[def-spectrum-and-resolvent-of-a-bounded-operator]], [[lem-bounded-hilbert-operators-form-a-c-star-algebra]], [[thm-bounded-inverse-theorem]], [[thm-spectrum-is-nonempty-compact-and-norm-bounded]]).
+[A4] For every bounded $T$ the spectrum is a nonempty compact subset of $\mathbb C$: $\mathcal B(H)$ is a nonzero unital complex Banach algebra, its algebra spectrum agrees with the operator spectrum by the bounded inverse theorem, and spectra in nonzero unital complex Banach algebras are nonempty and compact ([[def-spectrum-and-resolvent-of-a-bounded-operator]], [[lem-bounded-hilbert-operators-form-a-c-star-algebra]], [[thm-bounded-inverse-theorem]], [[thm-spectrum-is-nonempty-compact-and-norm-bounded]]).
 
 [A5] AC is the hypothesis of the calculus supplier ([[def-axiom-of-choice]]).
 
@@ -42,6 +42,6 @@ Assume AC. A bounded operator $T$ on a nonzero complex Hilbert space is normal e
 
 1.1 Suppose $K\subseteq\mathbb C$ is nonempty and compact and $T=\rho(z)$ for a unital star-homomorphism $\rho:C(K)\to\mathcal B(H)$, where $z$ is the coordinate function; then $T^*=\rho(z)^*=\rho(\overline z)$ and $T^*T=\rho(\overline z)\rho(z)=\rho(\overline zz)=\rho(z\overline z)=\rho(z)\rho(\overline z)=TT^*$, so $T$ is normal. [A1, A2]
 
-1.2 Conversely, if $T$ is normal, take $K:=\sigma(T)$, a compact Hausdorff space, and the continuous functional calculus $\Psi:C(\sigma(T))\to C^*(I,T)$; it is a unital star-homomorphism into $\mathcal B(H)$ with $\Psi(z)=T$. [A3, A4]
+1.2 Conversely, if $T$ is normal, take $K:=\sigma(T)$, a nonempty compact Hausdorff space, and the continuous functional calculus $\Psi:C(\sigma(T))\to C^*(I,T)$; it is a unital star-homomorphism into $\mathcal B(H)$ with $\Psi(z)=T$. [A3, A4]
 
 2.1 The two implications show that normality is equivalent to being the image of the coordinate function under a unital star representation of some $C(K)$ with nonempty compact $K\subseteq\mathbb C$; the canonical instance is $K=\sigma(T)$ with the continuous functional calculus, and no other compact set is needed for the equivalence. [step 1.1, step 1.2, A5] ∎

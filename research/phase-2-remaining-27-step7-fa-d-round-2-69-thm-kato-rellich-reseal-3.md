@@ -1,0 +1,11 @@
+# FA position 69 — context reseal
+
+Retain repaired disposition. Current SHA256 cc9992c9ad14bbaac26ec78330c4c352b8f2c9233cbc0e5702cd850a943a9f16 matches the last receipt. Reviewed the full current theorem, original FA basis and previous reseal, both Terra objections, Alpha row 104, batch-6 manifest and contract/risk/boundaries, and current spectral/range interfaces. Complex first-linear inner products, R_A(z)=(z-A)^(-1), domain conventions and full AC are unchanged.
+
+The spectral symbols at z=plus/minus i mu give R_A(H) contained in D(A), norm bounds 1/mu and 1 for R_A and A R_A, and both inverse identities on their correct domains. Thus BR_A has norm below one at the explicit positive mu. The sign-correct factorization (I-BR_A)(z-A) yields both ranges for the symmetric densely defined sum and hence self-adjointness by the range criterion. No already-self-adjoint second-resolvent identity is assumed.
+
+The lower-bound proof uses bounded-band projections to prove T>=c iff E((-infinity,c))=0. Every real point below the perturbation threshold is a resolvent point; the essential-range characterization and a countable rational cover give zero projection on that half-line, including the claimed lower-bound endpoint. For d>max(a|gamma|+b,b/(1-a)), both cases d>=|gamma| and d<|gamma| make a max(1,|gamma|/d)+b/d strictly below one. No spectral infimum at minus infinity or unsupported real resolvent-distance formula occurs. Graph approximation extends precisely B restricted to D(A), preserves its bound and symmetry, and proves both graph inclusions for the closure. Zero space, B=0 and strict a<1 remain explicit.
+
+Current PVM product domains, scalar norms and essential-range interfaces still support the proof; changed spectral consumers do not enter it. These resolvent and graph-closure arguments are familiar enough for this context check without further external verification. The original source verification is retained in its FA evidence; no fresh reading is claimed. No item or dependency repair is needed and no published defect or owner obligation arises.
+
+Strict contract: zero errors and warnings. Focused phase precheck: PASS. Queue-status confirms positions 1–68 current. Reseal unchanged bytes through the recorder, without any judge verdict or pass stamp. Next after acceptance: position 70.

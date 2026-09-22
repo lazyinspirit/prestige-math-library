@@ -5,12 +5,17 @@ title: Zero free entire function of exponential type is an exponential
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-path-independence-and-complex-primitive-criterion, thm-local-maximum-modulus-principle, cor-cauchy-theorem-convex-domain, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, cor-complex-power-series-sums-have-derivatives-of-all-orders, thm-zero-complex-derivative-on-a-domain-implies-constant, thm-liouville-bounded-entire-function, cor-complex-power-series-sums-are-analytic, thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]
+deps: ["thm-path-independence-and-complex-primitive-criterion", "cor-cauchy-theorem-convex-domain", "thm-algebra-of-complex-derivatives", "thm-chain-rule-for-complex-derivatives", "cor-complex-power-series-sums-have-derivatives-of-all-orders", "thm-zero-complex-derivative-on-a-domain-implies-constant", "thm-liouville-bounded-entire-function", "thm-boundary-maximum-modulus-principle", "cor-complex-power-series-sums-are-analytic", "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition", "thm-holomorphic-if-and-only-if-analytic", "thm-complex-exponential-is-entire-with-derivative-itself", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-complex-exponential-addition-and-real-extension", "cor-exponential-is-a-bijection-onto-positive-reals", "thm-exponential-is-strictly-increasing"]
 justified_by: []
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Lemma 3.1.10 (rescaled to a non-strict growth bound), printed pp. 58–59"
@@ -36,46 +41,30 @@ linearity in $|z|$, and the constant factor is exactly what survives.
 
 ## Facts & Assumptions
 
-**Given:** An entire zero-free $f$ with constants $M>0$, $C\ge0$ such that $|f(z)| \le M e^{C|z|}$ for all $z$.
+**Given:** The zero-free entire function and constants $M>0$, $C\ge0$ of the statement.
 
-[L1] On a complex domain $U$ and for a continuous $g : U \to \mathbb C$ the following are equivalent: $g$ has a primitive on $U$; the contour integral of $g$ depends only on endpoints; the integral of $g$ around every closed rectifiable contour in $U$ is $0$ ([[thm-path-independence-and-complex-primitive-criterion]]).
+[F1] On a convex complex domain every closed rectifiable contour integral of a holomorphic function vanishes; vanishing of these integrals for a continuous function is equivalent to existence of a primitive. ([[cor-cauchy-theorem-convex-domain]], [[thm-path-independence-and-complex-primitive-criterion]]).
 
-[L2] If $U$ is a convex complex domain and $g$ is holomorphic on $U$, then the integral of $g$ around every closed rectifiable contour in $U$ is $0$ ([[cor-cauchy-theorem-convex-domain]]).
+[F2] Holomorphic functions are exactly the locally analytic functions. Power-series sums are analytic and admit derivatives of every order by termwise differentiation; analytic functions are closed under algebraic operations, nonvanishing quotients and composition. ([[thm-holomorphic-if-and-only-if-analytic]], [[cor-complex-power-series-sums-are-analytic]], [[cor-complex-power-series-sums-have-derivatives-of-all-orders]], [[thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]]).
 
-[L3] The sum, product and quotient rules hold for complex derivatives; the derivative of the exponential is the exponential ([[thm-algebra-of-complex-derivatives]], [[cor-complex-power-series-sums-have-derivatives-of-all-orders]]).
+[F3] Complex derivatives satisfy the linear, product, quotient and chain rules; a holomorphic function with derivative zero on a domain is constant. ([[thm-algebra-of-complex-derivatives]], [[thm-chain-rule-for-complex-derivatives]], [[thm-zero-complex-derivative-on-a-domain-implies-constant]]).
 
-[L4] The chain rule holds for complex derivatives: $(g \circ h)'(z) = g'(h(z))h'(z)$ ([[thm-chain-rule-for-complex-derivatives]]).
+[F4] The complex exponential is entire with derivative itself, satisfies $\exp(z+w)=\exp z\exp w$, agrees with the real exponential on the real axis and has modulus $|\exp z|=e^{\operatorname{Re}z}$. The real exponential is a strictly increasing bijection onto the positive reals. ([[thm-complex-exponential-is-entire-with-derivative-itself]], [[thm-complex-exponential-addition-and-real-extension]], [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[cor-exponential-is-a-bijection-onto-positive-reals]], [[thm-exponential-is-strictly-increasing]]).
 
-[L5] A holomorphic function on a complex domain with zero complex derivative is
-constant ([[thm-zero-complex-derivative-on-a-domain-implies-constant]]).
-
-[L6] Quotients of holomorphic functions with nonvanishing denominators and power series sums are holomorphic ([[thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]], [[cor-complex-power-series-sums-are-analytic]]), so $f'/f$ is holomorphic on $\mathbb C$ and, if $H$ is entire with $H(0)=0$, then $H(z)/z$ extends to an entire function.
-
-[L7] The Schwarz lemma on the unit disc: if $G$ is holomorphic on the unit disc with $G(0)=0$ and $|G(\zeta)| \le 1$, then $|G(\zeta)| \le |\zeta|$; the underlying engine is the maximum modulus principle ([[thm-local-maximum-modulus-principle]]).
-
-[L8] Every bounded entire function is constant ([[thm-liouville-bounded-entire-function]]).
+[F5] A function continuous on the closure of a bounded domain and holomorphic inside attains its maximum modulus on the boundary. Every bounded entire function is constant. ([[thm-boundary-maximum-modulus-principle]], [[thm-liouville-bounded-entire-function]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 **A maximum-modulus estimate.** If $H$ is entire with $H(0)=0$ and $\operatorname{Re}H(w) \le A + B|w|$ for all $w$ and constants $A,B \ge 0$, then $|H(w)| \le 2B|w|$ for all $w$: for fixed $w \ne 0$ and $0<t<1$ put $R := |w|/t$ and $G(\zeta) := H(R\zeta)/\bigl(2(A+BR) - H(R\zeta)\bigr)$, whose denominator has real part $\ge A+BR > 0$ so that $G$ is holomorphic on the unit disc with $G(0) = 0$, and $|\eta/(2(A+BR)-\eta)| \le 1$ exactly when $\operatorname{Re}\eta \le A+BR$, so $|G| \le 1$; by [L7] $|G(\zeta)| \le |\zeta|$, whence $|H(R\zeta)| \le |\zeta|\bigl(2(A+BR) + |H(R\zeta)|\bigr)$ and, with $\zeta = tw/|w|$, $|H(w)| \le (2tA + 2B|w|)/(1-t)$, whose infimum over $t \in (0,1)$ is $2B|w|$. [L7, algebra]
+1.1 A disk estimate including zero growth. Suppose $H$ is entire, $H(0)=0$, and $\operatorname{Re}H(w)\le A+B|w|$ with $A,B\ge0$. Fix $w\ne0$ and $0<t<1$, put $R=|w|/t$ and $K=A+BR+1>0$. For $|\zeta|<1$, the denominator $2K-H(R\zeta)$ has real part at least $K+1>0$. Thus $G(\zeta)=H(R\zeta)/(2K-H(R\zeta))$ is holomorphic by [F2] and satisfies $G(0)=0$. For $\eta=H(R\zeta)$, $|2K-\eta|^2-|\eta|^2=4K(K-\operatorname{Re}\eta)>0$, so $|G(\zeta)|<1$. The local power series at zero shows that $G(\zeta)/\zeta$ extends holomorphically through zero. For $0<r<1$, [F5] applied on $|\zeta|\le r$ gives $|G(\zeta)/\zeta|\le1/r$ there; fixing $\zeta$ and letting $r$ increase to one proves $|G(\zeta)|\le|\zeta|$. Hence $|H(R\zeta)|\le|\zeta|(2K+|H(R\zeta)|)$. At $\zeta=tw/|w|$ this becomes $|H(w)|\le[2t(A+1)+2B|w|]/(1-t)$. Let $t$ decrease to zero to conclude $|H(w)|\le2B|w|$; at $w=0$ the same holds. In particular $A=B=0$ never produces division by zero, and $B=0$ forces $H=0$. [F2, F5, algebra]
 
-1.2 The function $g := f'/f$ is holomorphic on $\mathbb C$ by [L6]; the complex plane is a convex domain, so by [L2] every closed rectifiable contour integral of $g$ vanishes, and by [L1] there is a primitive $h$ of $g$ on $\mathbb C$ with $h' = f'/f$; normalise $h(0) := 0$ by adding a constant. [L1, L2, L6]
+1.2 Construct the entire logarithm. By the local power series and derivative statements of [F2], $f'$ is holomorphic, and because $f$ is zero-free, $g=f'/f$ is holomorphic. On the convex plane [F1] gives a primitive $h$; subtract its value at zero so $h(0)=0$ and $h'=f'/f$. A primitive is holomorphic by definition, so [F2] also supplies its local power series. [F1, F2, F3]
 
-2.1 The function $z \mapsto f(z)e^{-h(z)}$ has zero derivative: by the product rule and the chain rule [L3], [L4] and [step 1.2], $(fe^{-h})' = f'e^{-h} - fh'e^{-h} = e^{-h}\bigl(f' - f\cdot (f'/f)\bigr) = 0$ since $f$ is zero-free. [step 1.2, L3, L4, algebra]
+2.1 By [F3] and [F4], $(fe^{-h})'=f'e^{-h}-fh'e^{-h}=0$. Hence $fe^{-h}$ is constant with value $f(0)$, and the exponential addition formula gives $f=f(0)e^h$. Here $f(0)\ne0$ by zero-freeness. [F3, F4, step 1.2, algebra]
 
-3.1 By [L5] the conclusion of [step 2.1] makes $fe^{-h}$ constant with value $f(0)e^{-h(0)} = f(0)$, so $f = f(0)e^{h}$. [step 2.1, L5]
+3.1 The growth bound at zero gives $M/|f(0)|\ge1$. Let $A$ be the unique real number with $e^A=M/|f(0)|$, supplied by [F4]. Since the exponential is increasing and $e^0=1$, $A\ge0$. Taking moduli in step 2.1 and using [F4] gives $e^{\operatorname{Re}h(z)}\le e^{A+C|z|}$, so $\operatorname{Re}h(z)\le A+C|z|$. The disk estimate of step 1.1, applied directly to $h$, yields $|h(z)|\le2C|z|$ for all $z$. [F4, step 1.1, step 2.1, algebra]
 
-4.1 Taking moduli in [step 3.1] gives $|f(z)| = |f(0)|e^{\operatorname{Re}h(z)} \le Me^{C|z|}$, hence $\operatorname{Re}h(z) \le A + C|z|$ with $A := \log\bigl(M/|f(0)|\bigr) \ge -\infty$ finite, since $M>0$ and $f(0) \ne 0$. [step 3.1, algebra]
+4.1 Near zero write the convergent power series $h(z)=\sum_{k\ge1}b_k z^k$, with no constant term because $h(0)=0$. Then $h(z)/z=\sum_{k\ge1}b_k z^{k-1}$ extends analytically through zero, with value $b_1=h'(0)$; the shifted series converges on the same disk by comparison on any smaller radius. Away from zero the quotient is holomorphic by [F2]. This defines an entire function $q$, bounded by $2C$ off zero by step 3.1 and at zero by continuity. By [F5], $q$ is constant and equals $h'(0)=f'(0)/f(0)$ from step 1.2. Consequently $h(z)=az$ with the stated $a$, and step 2.1 gives $f(z)=f(0)e^{az}$. [F2, F5, step 1.2, step 2.1, step 3.1, algebra]
 
-5.1 Apply [step 1.1] to $H := h - h'(0)z$, an entire function with $H(0) = 0$ and $\operatorname{Re}H(z) \le A + (C + |h'(0)|)|z|$ by [step 4.1]: then $|H(z)| \le 2(C+|h'(0)|)|z|$ for all $z$. [step 1.1, step 4.1, algebra]
-
-6.1 By [step 5.1] the entire extension $\zeta \mapsto H(\zeta)/\zeta$ supplied by [L6] is bounded by $2(C+|h'(0)|)$, hence constant by [L8]; its value at $0$ is $H'(0) = h'(0) - h'(0) = 0$, so $H \equiv 0$ and $h(z) = h'(0)z$ for all $z$. [step 5.1, L6, L8, algebra]
-
-7.1 By [step 3.1] and [step 6.1], $f(z) = f(0)e^{h'(0)z}$ with $h'(0) = g(0) = f'(0)/f(0)$, and if $f(0) = 1$ this reads $f(z) = e^{f'(0)z}$; the lemma is proved. [step 3.1, step 6.1, algebra] ∎
-
-## Remarks
-
-- **Why the constant $M$ cannot be dropped from the statement.** The proof uses $M$ only to produce the affine upper bound $\operatorname{Re}h \le A + C|z|$ with a finite constant $A$; any extra multiplicative constant in the growth assumption enters exactly there and nowhere else.
-- **No use of the argument principle.** The logarithm is obtained by integrating $f'/f$ along the convex plane, and the rigidity of $h$ comes from the maximum-modulus estimate of [step 1.1] plus Liouville; no winding number is needed.
+5.1 If $C=0$ the bound in step 3.1 forces $h=0$ and hence $a=0$ and $f=f(0)$, including $f=1,M=1$. If $f(0)=1$, step 4.1 gives the advertised normalized formula. The assumptions exclude $M=0$ and $f(0)=0$; the removable value at zero and the open parameter limit $t\downarrow0$ have both been checked. All constructions use uniquely determined analytic operations or one primitive, not any simultaneous choice of arbitrary witnesses. [F3, step 1.1, step 3.1, step 4.1] ∎

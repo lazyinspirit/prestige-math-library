@@ -5,7 +5,7 @@ title: "Infinitesimal generator of a unitary group"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-strongly-continuous-one-parameter-unitary-group, def-hilbert-space, def-linear-subspace, def-metric-convergence, def-linear-map]
+deps: [def-strongly-continuous-one-parameter-unitary-group, def-hilbert-space, def-linear-subspace, def-metric-continuity, def-linear-map]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -26,12 +26,18 @@ Let $U$ be a strongly continuous one-parameter unitary group on $H$
 ([[def-strongly-continuous-one-parameter-unitary-group]]). Its
 **infinitesimal generator** is the linear operator $G$ with domain
 $$D(G):=\Bigl\{x\in H:\ \lim_{t\to0}\frac1t\bigl(U(t)x-x\bigr)\ \text{exists in }H\Bigr\},\qquad Gx:=\lim_{t\to0}\frac1t\bigl(U(t)x-x\bigr),$$
-the limit being taken in the norm of $H$ ([[def-metric-convergence]]).
+where this is the two-sided norm limit over real $t\ne0$: it has value $y$
+precisely when for every $\varepsilon>0$ there is $\delta>0$ such that
+$$0<|t|<\delta\quad\Longrightarrow\quad \left\|\frac{U(t)x-x}{t}-y\right\|<\varepsilon.$$
+Equivalently, defining the quotient's value at $t=0$ to be $y$ makes it
+continuous there from the usual metric on $\mathbb R$ to the norm metric on
+$H$ ([[def-metric-continuity]]). Such a $y$ is unique by the triangle
+inequality.
 
 $D(G)$ is a linear subspace and $G$ is linear: if $x,y\in D(G)$ and $a,b$ are
 scalars, then $\frac1t(U(t)(ax+by)-(ax+by))=a\frac1t(U(t)x-x)+b\frac1t(U(t)y-y)$
 converges with limit $aGx+bGy$, because the operations of $H$ are continuous
-and the limit is taken over the same net of $t$'s; the restriction to $D(G)$
+and both estimates use the same punctured real parameter $t$; the restriction to $D(G)$
 is therefore well defined and linear ([[def-linear-subspace]],
 [[def-linear-map]]).
 

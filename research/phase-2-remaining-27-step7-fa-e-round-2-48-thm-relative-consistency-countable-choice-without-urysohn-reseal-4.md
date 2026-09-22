@@ -1,0 +1,10 @@
+# Position 48 — context reseal
+
+Read the current full theorem, original escalation, later reseal records, current Brunner definition/obstruction already examined at position 31, and exact transfer and obstruction-certificate statements. The repaired theorem uses countable completeness only to obtain an arbitrary ZFC+GCH model. Its tagged hierarchy is constructed internally, with atoms indexed by that model's reals; it no longer requests a transitive model or an internally countably infinite real order.
+
+The tagged membership relation interprets sets by their underlying member sets and atoms by separate tags. Pairing, union, power sets, relativised Separation, rank-bounded Replacement, internal Foundation and tagged well-orders verify the stated interpretation. The Brunner suppliers are explicitly internal in arbitrary ZFA+AC grounds, so the real countable-compact-support construction applies there. It gives internal CC and the nonseparable endpoint obstruction. The checked certificate carries only that boundable obstruction; CC crosses through the named exceptional transfer clause. Neither full AC nor arbitrary truth crosses. The conclusion is the external consistency implication, not an unsupported formal proof-reduction map.
+
+The newly internal BPI criterion at position 32 is not a premise of this CC branch. The restored or repaired neighboring summary likewise supplies no hypothesis. These interface and model-interpretation checks are familiar; no fresh external source verification was needed. Prior mathematical/source evidence is preserved rather than overwritten. Focused strict batch-14 contract check: zero errors/warnings. No new repair or dependency change is required. Retain the existing repaired disposition on unchanged bytes. Next: position 49.
+
+
+Previous receipt item_sha256: 0d546998481f66fef265d312b44001c37a316bd192cdcf69faa50f93b156c0bd. Current itemHashJudge: 0d546998481f66fef265d312b44001c37a316bd192cdcf69faa50f93b156c0bd. The item bytes match the prior receipt. Queue-status was run immediately before recording; the recorder enforces ascending reseals. This is terminal evidence, not a judge verdict or pass stamp.

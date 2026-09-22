@@ -1,0 +1,8 @@
+# Position 15 context reseal
+
+Read the full current definition and previous reseal against the current Shelah A/B context. This is a ZF definition independent of the changed universal-meagre forcing construction. It does not assume later proper-filter or descriptive-complexity conclusions. Its first-difference convention is prefix length k+1, agreeing with the stated cylinder argument: two witnesses in the disjoint length-m cylinders have the same first difference. Closure therefore preserves H using finite existential choices only. Functional Replacement supplies the sequence of closures. The predicate hierarchy uses uniform set satisfaction and compatible set-length recursions, without a set of all ordinals.
+
+The uniform-bound equivalence is still valid: strictly increasing g is unbounded; each k>=g(0) belongs to one interval [g(n),g(n+1)), giving the estimate g(n)<=k. Deleting the finite ordinal f(g(0)) handles the initial k and preserves membership in a filter extending the Frechet filter. No new page convention changes these arguments. Retain repaired disposition. These explicit elementary arguments are familiar enough not to require external verification for this reseal; prior source evidence is retained without claiming fresh source reading. No dependency change or consumer-ledger update is needed.
+
+
+Current itemHashJudge: 55163ccbfd036dbb4788f0df64c1e05677ee0f4c575876db635c9c582a34dad8, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

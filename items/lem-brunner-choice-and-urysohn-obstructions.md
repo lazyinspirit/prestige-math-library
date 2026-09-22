@@ -4,12 +4,17 @@ kind: lemma
 title: "Brunner's models satisfy the required choice and Urysohn obstructions"
 status: draft
 origin: pipeline
-deps: [def-brunner-ordered-lauchli-permutation-models, def-normal-and-t4-spaces, def-hausdorff-space, def-continuous-map-top, thm-a-compact-hausdorff-space-is-regular-and-normal, def-countable-choice, def-compact-space, def-subspace-topology-top, def-order-topology-on-a-linearly-ordered-set, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-interval, thm-fraenkel-mostowski-permutation-model]
+deps: [def-brunner-ordered-lauchli-permutation-models, def-normal-and-t4-spaces, def-hausdorff-space, def-continuous-map-top, thm-a-compact-hausdorff-space-is-regular-and-normal, def-countable-choice, def-compact-space, def-subspace-topology-top, def-order-topology-on-a-linearly-ordered-set, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-interval, def-axiom-of-choice, thm-countable-union-of-countable, thm-heine-borel-characterisation-r, cor-interval-uncountable, lem-q-and-irrationals-dense-r, thm-intermediate-value, thm-rationals-countable]
 justified_by: []
 provenance:
   statement: literature-derived
-  proof: literature-derived
+  proof: ai-altered
 proof_strategy: direct
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   scraped: []
   references:
@@ -30,57 +35,40 @@ on which every continuous real-valued function is constant
 
 ## Facts & Assumptions
 
-**Given:** The two Läuchli models of [[def-brunner-ordered-lauchli-permutation-models]], their continuum $L$, and a countable family $(F_n)_{n \in \mathbb{N}}$ of nonempty sets in the real-ordered model.
+**Given:** The two models of [[def-brunner-ordered-lauchli-permutation-models]], formed internally in a ground model $M$ of ZFA+AC. All constructions and arguments below, including ranks, real coordinates, compactness and sequences, are interpreted inside $M$; no external well-foundedness or transitivity of $M$ is required. Write $N$ for either symmetric model and $L=[a,b]_A$ for the closed atom interval, with $a<b$. Ground order coordinates identify $A$ with $\mathbb R$ or $\mathbb Q$ in $M$, outside $N$; no such enumeration is asserted to belong to $N$.
 
-[F1] In a transitive ZFA model with an internal normal permutation system, the hereditarily symmetric interpretation is a ZFA model with the same atoms and kernel; a set is in it exactly when it has a support in the filter ([[thm-fraenkel-mostowski-permutation-model]], [[def-symmetric-and-hereditarily-symmetric-sets]], [[def-permutation-support-system-and-normal-filter]]).
+[F1] Internally in $M$, the permutation model is membership-closed with the same pure kernel; its objects are hereditarily symmetric, not merely symmetric. Pure reals and natural numbers are fixed by every atom permutation. Conjugation transports supports, and a symmetric set of hereditarily symmetric members is hereditarily symmetric ([[def-brunner-ordered-lauchli-permutation-models]], [[def-permutation-support-system-and-normal-filter]], [[def-symmetric-and-hereditarily-symmetric-sets]]).
 
-[F2] In the countable-compact-support instance, every set in the model has a
-support contained in a compact subset of the order completion
-([[def-brunner-ordered-lauchli-permutation-models]]). Thus the countable family
-$(F_n)$ has one compact support $e$, while each chosen element $x_n$ may be
-given a compact support $e_n$.
+[F2] The real model's support ideal consists of subsets of countable compact ground sets; the rational model's supports are finite. The group is all increasing atom bijections. The interval and its internal order topology are objects of the model ([[def-brunner-ordered-lauchli-permutation-models]], [[def-order-topology-on-a-linearly-ordered-set]], [[def-subspace-topology-top]]).
 
-[F3] Brunner's componentwise compression construction (Example 3.4(a), printed
-p. 72) says the following. Given compact supports $e,e_0,e_1,\ldots$ in the
-real completion of the countable ordered atom set, there are order
-automorphisms $p_n\in\operatorname{fix}(e)$ such that
-$$f:=e\cup\bigcup_{n\in\mathbb N}p_n[e_n]$$
-is compact. On every component interval of the complement of $e$, $p_n$ is a
-piecewise-linear increasing bijection which moves the part of $e_n$ in that
-component to within $1/(n+1)$ of its boundary; the construction is performed
-simultaneously on all components, not by moving $e_n$ into one component.
+[F3] Ground AC permits simultaneous witness choices and countable unions of countable sets are countable there ([[def-axiom-of-choice]], [[thm-countable-union-of-countable]]). A compact real set is closed and bounded, and conversely ([[thm-heine-borel-characterisation-r]]). Every nondegenerate real interval is uncountable ([[cor-interval-uncountable]]); the rationals are dense and countable ([[lem-q-and-irrationals-dense-r]], [[thm-rationals-countable]]).
 
-[F4] $L$ is a compact Hausdorff ordered space with two distinct endpoint cuts; a compact Hausdorff space is regular and normal ([[thm-a-compact-hausdorff-space-is-regular-and-normal]], [[def-hausdorff-space]], [[def-order-topology-on-a-linearly-ordered-set]], [[def-subspace-topology-top]]).
+[F4] A continuous real function on a closed real interval has the intermediate-value property ([[thm-intermediate-value]]). Continuity and the order topology have their ordinary preimage-of-open-set meaning ([[def-continuous-map-top]], [[def-order-topology-on-a-linearly-ordered-set]]).
 
-[L1] A continuous map $f : L \to \mathbb{R}$ is constant when it is invariant under a family of automorphisms that moves every point of $L$ through every interval: if $x,y \in L$ then some support-fixing automorphism sends $x$ to a point arbitrarily close to $y$, and continuity together with invariance gives $f(x) = f(y)$ ([[def-continuous-map-top]], [[def-interval]]).
+[F5] A compact Hausdorff space is normal, without an additional choice hypothesis ([[thm-a-compact-hausdorff-space-is-regular-and-normal]], [[def-compact-space]], [[def-hausdorff-space]], [[def-normal-and-t4-spaces]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $(F_n)$ be a countable family of nonempty sets in the real-ordered model; by [F2] and [F1] the family has a single support $e$ that is compact in the completion of the ordered atoms, and each $F_n$ is nonempty in the model. [given, F1, F2]
+1.1 All constructions involving order coordinates in the following support argument take place in $M$. Given a sequence $(F_n)$ of nonempty sets in the real model, enlarge a support for the sequence to a nonempty countable compact set $e$. Ground AC chooses $x_n\in F_n$ and countable compact supports $e_n$ for them. Each $x_n$ is hereditarily symmetric by membership closure. The sequence support fixes each $F_n$, since the index $n$ is pure. [given, F1, F2, F3]
 
-1.2 For the Urysohn obstruction: let $g : L \to \mathbb{R}$ be continuous in one of the two models and fix a support $e$ of $g$; any two points $x,y \in L$ lie in intervals that can be compressed into one another by automorphisms of $\operatorname{fix}(e)$ by [F2], so invariance of $g$ under $\operatorname{fix}(e)$ and continuity give $g(x) = g(y)$ as in [L1]; hence $g$ is constant. [given, F2, L1]
+1.2 In the real model the internal interval $L$ is compact: each internal open cover is, in ground real coordinates, an open cover of the real closed bounded interval, hence has a finite subcover by [F3]. Every member of this subcover is already hereditarily symmetric, and a finite set of such objects is hereditarily symmetric by combining their finitely many supports. Thus that finite subcover belongs to $N$. The internal order topology is Hausdorff in either model: between two distinct points choose two intervening points and use the disjoint order rays. This is a finite existence argument in the dense atom order. [given, F1, F2, F3]
 
-2.1 In the ground model, which satisfies AC, choose $x_n \in F_n$ and a support $e_n$ for $x_n$ for every $n$; the ground model contains the chosen points because each $F_n$ is a nonempty set of the ground universe, and a support exists for each by [F1]. [step 1.1, F1]
+1.3 In the rational model, every nonempty internal subset $S\subseteq L$ has a supremum in $L$. Enlarge a finite support for $S$ by $a,b$, and call it $e$. In the ground real completion of the rational order let $r=\sup S$. If $r\notin e$, it lies in a complementary interval of the finite set $e$. Choose rational points $u<r<v$ inside that interval and an increasing rational order automorphism fixing $e$ whose extension to real cuts moves $r$: for instance choose rational breakpoints around $r$ and a piecewise-affine map with positive rational slopes, identity outside the component, which moves the whole small interval containing $r$ to its right. Such a map preserves the rational order and fixes $e$, hence preserves $S$, contradicting uniqueness of its real supremum. Therefore $r\in e\cap L$, so it is an atom and is the supremum internally too. This concerns internal sets only; no ambient irrational cut is added to $N$. [given, F1, F2, F3]
 
-3.1 Apply Brunner's simultaneous componentwise construction [F3] to $e,e_0,e_1,\ldots$. It supplies $p_n\in\operatorname{fix}(e)$ for every $n$ such that $f=e\cup\bigcup_n p_n[e_n]$ is compact. Notice that this does not require $e_n$ to be disjoint from $e$ or to lie in one component of its complement: $p_n$ fixes $e_n\cap e$, and on every complementary component it compresses the remaining part of $e_n$ toward that component's boundary. [step 1.1, step 2.1, F3]
+1.4 Let $g:L\to\mathbb R$ be an internal continuous map. Enlarge a support of $g$ to include $a,b$, using a countable compact support in the real model and a finite support in the rational model. An automorphism fixing this support fixes every pure real value, hence $g(px)=g(x)$. On each complementary interval of the support in $L$, increasing automorphisms fixing the support act transitively: a piecewise-affine increasing map sends any prescribed interior point to another and fixes the boundary, and in the rational case its pieces can have rational coefficients. Hence $g$ is constant on each such interval. No assertion is made that supported points move. [given, F1, F2, F4]
 
-4.1 The set $f$ is compact by the conclusion of [F3]. Concretely, each $p_n[e_n]$ is compact, and if a convergent sequence in their union uses unboundedly many indices, the $1/(n+1)$ compression forces its limit into the closed compact set $e$; this is precisely the closure argument in Brunner's construction. [step 3.1, F3]
+2.1 Put $\varepsilon_n=1/(n+1)$. There is an increasing bijection $p_n$ of the real order fixing $e$ and sending every point of $e_n$ within distance $\varepsilon_n$ of $e$. Here is the component construction. On a bounded complementary interval $(c,d)$ of $e$, choose $c<u<v<d$ with $[u,v]\cap e_n=\varnothing$: the closed countable set $e_n$ cannot contain an interval by [F3]. Choose $0<\delta<\min(\varepsilon_n,(d-c)/3)$. Map $[c,u]$ affinely to $[c,c+\delta]$, $[u,v]$ affinely to $[c+\delta,d-\delta]$, and $[v,d]$ affinely to $[d-\delta,d]$. The pieces agree, are strictly increasing and send the portion of $e_n$ into the two boundary strips. On a right unbounded component $(c,\infty)$, choose $R>c$ above all of $e_n$, map $[c,R]$ affinely onto $[c,c+\varepsilon_n/2]$, and continue by a positive-slope affine bijection onto $[c+\varepsilon_n/2,\infty)$; treat the left ray by reflection. Fix $e$ pointwise. The component maps and this fixed part form a global increasing bijection, since each component maps onto itself with its endpoints fixed. AC in $M$ permits these choices for all components and $n$. [step 1.1, F2, F3]
 
-5.1 Since each $p_n$ fixes $e$ pointwise it fixes every set supported by $e$, in particular each $F_n$, so $y_n := p_n(x_n) \in F_n$; and $y_n$ is supported by $p_n(e_n)$, so the single compact set $f$ supports the whole sequence $(y_n)$. [step 3.1, step 4.1, F1]
+2.2 Order completeness from step 1.3 implies compactness of the rational-model interval without choice. Given an internal open cover, internally form $C=\{x\in L:[a,x]\text{ has a finite subcover}\}$. It contains $a$ and has a supremum $c$. A cover member containing $c$ contains an interval neighbourhood of $c$. If $c>a$, choose $x\in C$ in the left part of that neighbourhood using the supremum property; its finite subcover together with this member covers $[a,c]$. If $c=a$, that member alone covers $[a,c]$. Thus $c\in C$. If $c<b$, the same neighbourhood extends to a point to the right of $c$ and would put that point in $C$, a contradiction. Hence $c=b$, and the cover has a finite subcover. This whole argument is internal to $N$. Combined with step 1.2, both intervals are compact Hausdorff and therefore normal by [F5]. [step 1.2, step 1.3, F2, F5]
 
-6.1 The countable choice function $n \mapsto y_n$ therefore lies in the symmetric model, because it is supported by the single set $f$ of the support ideal; as the family $(F_n)$ was arbitrary, countable choice holds in the real-ordered model. [step 5.1, F1]
+2.3 In the rational model there are only finitely many support points and complementary intervals. Continuity at each interior support point makes the constants on its two adjacent intervals equal to its value: if a constant differed, disjoint real neighbourhoods of the two values would contradict continuity along that adjacent interval. The same one-sided argument applies at $a,b$. Moving across the finite ordered list of support points proves that $g$ is constant on $L$. [step 1.4, F4]
 
-7.1 The two endpoint cuts of $L$ are disjoint closed subsets by [F4], and a continuous $f$ separating them in the sense of Urysohn's lemma would be nonconstant, since it takes the value $0$ at one endpoint and $1$ at the other; by step 1.2 no such continuous map exists, so Urysohn's lemma fails in both models. [step 1.2, F4] ∎
+2.4 In the real model the complementary intervals are countable in $M$: enumerate the ground rationals and assign to each interval the least rational index inside it; disjoint intervals get different indices. Together with the countable support and step 1.4 this makes $g[L]$ at most countable in $M$, by [F3]. But $g$, viewed in ground real coordinates, is continuous: the preimage of every ground open real set is internally open (the pure kernel is unchanged), and internally open subsets of $L$ are ground open subsets. If two values differed, the intermediate-value theorem on the real subinterval between their arguments would put a nondegenerate real interval in $g[L]$, contrary to [F3]. Thus $g$ is constant here as well. [step 1.4, F1, F3, F4]
 
-## Remarks
+3.1 Let $K=e\cup\bigcup_n p_n[e_n]$. It is countable by [F3] and bounded, since every new point is within $1$ of the bounded nonempty set $e$. It is closed: if $z\notin e$, some neighbourhood of $z$ has positive distance from $e$, so it misses $p_n[e_n]$ for all sufficiently large $n$. The remaining finitely many sets $p_n[e_n]$, and $e$, are closed, since increasing real bijections are homeomorphisms (they map order intervals to order intervals). Thus a point outside $K$ has an open neighbourhood missing $K$. By [F3], $K$ is compact and is an allowed support. [step 2.1, F3]
 
-- **Where the compactness of the support is used.** An arbitrary union
-  $\bigcup_n p_n(e_n)$ of moved compact supports need not be compact. Brunner's
-  automorphisms act simultaneously on every component of the complement of
-  $e$, and their $1/(n+1)$ bounds force every cross-index accumulation point
-  back into $e$. No unsupported relocation of a whole $e_n$ into a component
-  disjoint from $e$ is used.
+4.1 Set $y_n=p_n(x_n)$. Since $p_n$ fixes $e$, $y_n\in F_n$; conjugation makes $p_n[e_n]$ a support for $y_n$. Hence $K$ supports the graph $\{(n,y_n):n\in\mathbb N\}$. Its members and all their membership descendants are hereditarily symmetric by [F1], so this graph belongs to $N$. It is a choice function for the given sequence. This proves Countable Choice in the real model; AC was used only in $M$ to obtain the supported graph. [step 1.1, step 2.1, step 3.1, F1, F3]
 
-- **Why continuous functions are constant.** The invariance is under the whole stabiliser of a support, which acts transitively on the relevant intervals; continuity converts that into constancy. Both models share this argument, and it is the same obstruction that refutes Urysohn's lemma in the two transfer theorems below.
+5.1 The endpoint atoms $a,b$ are distinct closed singleton subsets of the normal space $L$. A Urysohn separator would take values $0$ and $1$ at these endpoints and would be a nonconstant internal continuous real-valued function, contradicting steps 2.3 and 2.4. Hence Urysohn's lemma fails in both models, while step 4.1 establishes Countable Choice in the real model. [step 4.1, step 2.2, step 2.3, step 2.4, F2, F5] ∎

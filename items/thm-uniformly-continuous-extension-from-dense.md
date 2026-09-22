@@ -43,7 +43,8 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d_X)$ be a metric space ([[def-metric-space]]), let $A \subseteq X$ be
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let
+$(X,d_X)$ be a metric space ([[def-metric-space]]), let $A \subseteq X$ be
 dense in $X$ ([[def-metric-interior-closure-boundary]]) and carry the subspace
 metric ([[def-isometry-and-metric-embedding]]), let $(Y,d_Y)$ be a **complete**
 metric space ([[def-complete-metric-space]]), and let $f : A \to Y$ be uniformly
@@ -60,7 +61,7 @@ selected, each is determined.
 
 ## Facts & Assumptions
 
-**Given:** A metric space $(X,d_X)$, a dense $A \subseteq X$, a complete metric space $(Y,d_Y)$, a uniformly continuous $f : A \to Y$, and a real $\varepsilon > 0$. For $x \in X$ and $n \in \mathbb{N}$ write $U_n(x) := B_X\big(x, 1/(n+1)\big) \cap A$, $S_n(x) := f[U_n(x)]$ and $T_n(x) := \overline{S_n(x)}$, the closure taken in $Y$.
+**Given:** The Axiom of Countable Choice; a metric space $(X,d_X)$, a dense $A \subseteq X$, a complete metric space $(Y,d_Y)$, a uniformly continuous $f : A \to Y$, and a real $\varepsilon > 0$. For $x \in X$ and $n \in \mathbb{N}$ write $U_n(x) := B_X\big(x, 1/(n+1)\big) \cap A$, $S_n(x) := f[U_n(x)]$ and $T_n(x) := \overline{S_n(x)}$, the closure taken in $Y$.
 
 [A1] Density: $\overline{A} = X$, so $B_X(x,r) \cap A \ne \emptyset$ for every $x \in X$ and every real $r > 0$ ([[def-metric-interior-closure-boundary]], [[def-metric-ball]]).
 

@@ -9,6 +9,11 @@ deps: [def-coadjoint-representation-of-a-lie-group, def-orbit-stabilizer-and-orb
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: Ana Cannas da Silva, Lectures on Symplectic Geometry

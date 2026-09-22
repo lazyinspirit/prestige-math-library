@@ -25,7 +25,7 @@ sources:
 ## Statement
 
 Assume AC. Let $E\to B$ and $F\to B$ be numerable real vector bundles of ranks
-$m,n\geq0$ over an admissible base. Then the total Stiefel–Whitney classes
+$m,n\geq0$ over a paracompact Hausdorff CGWH base of CW homotopy type. Then the total Stiefel–Whitney classes
 satisfy
 $$w(E\oplus F)=w(E)w(F),\qquad\text{equivalently}\qquad w_k(E\oplus F)=\sum_{i+j=k}w_i(E)w_j(F)\quad(k\geq0).$$
 In particular $w(0_B)=1$, and adjoining a trivial summand does not change the
@@ -33,7 +33,7 @@ positive classes: $w(E\oplus\varepsilon_B^r)=w(E)$ for $r\geq0$.
 
 ## Facts & Assumptions
 
-**Given:** AC, numerable real bundles $E,F\to B$ of ranks $m,n\geq0$ over an admissible base, and the projective bundle $X:=P(E\oplus F)$ of their Whitney sum.
+**Given:** AC, numerable real bundles $E,F\to B$ of ranks $m,n\geq0$ over a paracompact Hausdorff CGWH base of CW homotopy type, and the projective bundle $X:=P(E\oplus F)$ of their Whitney sum.
 
 [F1] The bundles $E$ and $F$ are subbundles of $E\oplus F$ in the first and second summand, and over a trivializing chart $U$ the projective bundle is $X|_U\cong U\times\mathbb P^{m+n-1}$ with $P(E)|_U=U\times\mathbb P^{m-1}$ and $P(F)|_U=U\times\mathbb P^{n-1}$; the tautological line of $E\oplus F$ over $P(E)$ is the tautological line of $E$, and symmetrically ([[def-real-projective-bundle-and-tautological-line]], [[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
@@ -43,7 +43,14 @@ positive classes: $w(E\oplus\varepsilon_B^r)=w(E)$ for $r\geq0$.
 
 [F4] Relative cup products exist for subspaces $A,B$ that are open in $A\cup B$, take values in $H^{p+q}(X,A\cup B;R)$, and are natural: for $f:X'\to X$ with $f(A')\subseteq A$ and $f(B')\subseteq B$ one has $f^*(u\smile v)=f^*u\smile f^*v$; with $A'=B'=\varnothing$ this says that the relative-to-absolute map carries $u\smile v$ to the absolute product ([[def-relative-cup-product]], [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]).
 
-[F5] The projective-bundle theorem applies to $X=P(E\oplus F)$ over $B$: with $x=x_{E\oplus F}$, the classes $1,x,\ldots,x^{m+n-1}$ are an $H^*(B;\mathbb F_2)$-basis and the unique monic degree-$(m+n)$ relation determines $w_{m+n}(E\oplus F)$ ([[thm-mod-two-real-projective-bundle-theorem]], [[def-stiefel-whitney-classes-from-the-projective-bundle-relation]]).
+[F5] When $m+n\geq1$, the projective-bundle theorem applies to
+$X=P(E\oplus F)$ over $B$: with $x=x_{E\oplus F}$, the classes
+$1,x,\ldots,x^{m+n-1}$ are an $H^*(B;\mathbb F_2)$-basis and the unique monic
+degree-$(m+n)$ relation determines the classes of $E\oplus F$
+([[thm-mod-two-real-projective-bundle-theorem]],
+[[def-stiefel-whitney-classes-from-the-projective-bundle-relation]]). When
+$m+n=0$, $P(E\oplus F)=\varnothing$ and the rank-zero convention is used
+instead; no tautological class or projective-bundle basis is asserted.
 
 [F6] Under the inclusion $i_E:P(E)\hookrightarrow P(E\oplus F)$, the bundle projection satisfies $p i_E=p_E$ and the tautological line pulls back to the tautological line of $E$; hence naturality gives $i_E^*x_{E\oplus F}=x_E$, while $i_E^*p^*w_j(E)=p_E^*w_j(E)$ ([[def-real-projective-bundle-and-tautological-line]], [[thm-naturality-of-stiefel-whitney-classes]]).
 

@@ -5,9 +5,9 @@ title: The universal complex flag bundle is BT-n
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complex-flag-bundle-and-chern-roots, thm-stable-stiefel-space-is-contractible, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, thm-principal-bundles-are-classified-by-maps-to-bg, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, thm-five-lemma-for-a-morphism-of-long-exact-sequences, thm-whitehead-theorem, thm-milnor-join-model-is-a-contractible-free-g-space, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, lem-cohomology-ring-of-infinite-complex-projective-space, def-axiom-of-choice]
+deps: ["def-complex-flag-bundle-and-chern-roots", "def-axiom-of-choice", "thm-stable-stiefel-space-is-contractible", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "thm-milnor-join-model-is-a-contractible-free-g-space", "thm-principal-bundles-are-classified-by-maps-to-bg", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-fibration-sequence-is-natural", "thm-whitehead-theorem", "lem-cohomology-ring-of-infinite-complex-projective-space", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "thm-subordinate-partitions-of-unity-exist", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-chern-classes-from-the-projective-bundle-relation", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes"]
 proof_strategy: direct
-axiom_strength: "ZF + AC; inherited from the classification and product-model constructions."
+axiom_strength: "ZF + AC; inherited from partitions of unity, bundle classification, Whitehead and Kunneth."
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -23,7 +23,7 @@ sources:
 
 ## Statement
 
-Assume AC. Let $E\mathbb U(n)$ be the model $V_n(\mathbb C^\infty)$ of the
+Assume AC and let $n\geq1$. Let $E\mathbb U(n)$ be the model $V_n(\mathbb C^\infty)$ of the
 universal principal $\mathbb U(n)$-bundle, so that
 $B\mathbb U(n)=E\mathbb U(n)/\mathbb U(n)=\operatorname{Gr}_n(\mathbb C^\infty)$,
 and let $T^n\subseteq\mathbb U(n)$ be the maximal torus of diagonal unitary
@@ -31,7 +31,12 @@ matrices. Then the complete flag bundle of the universal rank-$n$ complex
 bundle is homotopy equivalent over $B\mathbb U(n)$ to $BT^n$, and $BT^n$ is
 homotopy equivalent to $(\mathbb{CP}^\infty)^n$.
 
-Under such an equivalence the Chern roots $t_i=c_1(L_i)$ of
+Here one may take the product of the standard circle classifying bundles as
+the model of $BT^n$; its map to $B\mathbb U(n)$ is the sum of the coordinate
+lines. The flag identification uses the equivalent quotient model
+$V_n(\mathbb C^\infty)/T^n$, with its displayed map to $B\mathbb U(n)$.
+
+Under the explicit equivalence constructed below the Chern roots $t_i=c_1(L_i)$ of
 [[def-complex-flag-bundle-and-chern-roots]] are the coordinate generators:
 $$H^*(BT^n;\mathbb Z)=\mathbb Z[t_1,\dots,t_n],$$
 the $i$-th tautological line being the pullback of the universal line from the
@@ -44,7 +49,7 @@ $\mathbb Z[t_1,\dots,t_n]$.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited from the classifying-space and Kunneth suppliers ([[def-axiom-of-choice]]).
 
-[F1] The stable Stiefel space $V_n(\mathbb C^\infty)$ is contractible, and $\mathbb U(n)$ acts freely on it with quotient the Grassmannian $\operatorname{Gr}_n(\mathbb C^\infty)$, the chosen model of $B\mathbb U(n)$ carrying the universal rank-$n$ bundle ([[thm-stable-stiefel-space-is-contractible]], [[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
+[F1] The stable Stiefel space $V_n(\mathbb C^\infty)$ is contractible, and $\mathbb U(n)$ acts freely on it with quotient the Grassmannian $\operatorname{Gr}_n(\mathbb C^\infty)$, the chosen model of $B\mathbb U(n)$ carrying the universal rank-$n$ bundle ([[thm-stable-stiefel-space-is-contractible]], [[def-stiefel-space-grassmannian-and-tautological-bundle]], [[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
 
 [F2] For $G=S^1$ the Milnor bundle $ES^1\to BS^1$ is a numerable principal bundle with contractible total space, and $BS^1$ is the weak CW colimit $\mathbb{CP}^\infty$ ([[thm-milnor-join-model-is-a-contractible-free-g-space]]).
 
@@ -52,13 +57,17 @@ $\mathbb Z[t_1,\dots,t_n]$.
 
 [F4] For a fibration $F\to P\to B$ with contractible total space, the long exact sequence gives $\pi_k(B)\cong\pi_{k-1}(F)$ for $k\geq2$. If $F$ is path connected, its exact low-degree segment also gives $\pi_1(B)=0$; and if $P$ is path connected, the quotient base $B$ is path connected as a continuous image ([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
 
-[F5] A morphism of long exact sequences that is an isomorphism on the two outer families and on one middle family is an isomorphism on the remaining family ([[thm-five-lemma-for-a-morphism-of-long-exact-sequences]]).
+[F5] The homotopy long exact sequence is natural for maps of based fibrations ([[thm-fibration-sequence-is-natural]]).
 
 [F6] A map of CW complexes inducing isomorphisms on all homotopy groups is a homotopy equivalence ([[thm-whitehead-theorem]]).
 
 [F7] $H^*(\mathbb{CP}^\infty;\mathbb Z)=\mathbb Z[u]$ with $|u|=2$, with free finitely generated homology in each degree, and the cohomological Kunneth cross product identifies the cohomology ring of a finite product of such spaces with the tensor product of the factors when the coefficient ring is a PID and the homology of one factor is finite free in each degree ([[lem-cohomology-ring-of-infinite-complex-projective-space]], [[thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism]]).
 
-[F8] The flag bundle of a rank-$n$ complex bundle is the quotient of the associated principal bundle by $T^n$, with tautological lines $L_i$ and $q^*E=L_1\oplus\cdots\oplus L_n$ ([[def-complex-flag-bundle-and-chern-roots]]).
+[F8] The iterated flag construction gives ordered orthogonal lines splitting the pulled-back bundle, and its total space is paracompact Hausdorff CGWH of CW type ([[def-complex-flag-bundle-and-chern-roots]]).
+
+[F9] Stable Grassmannians have their Schubert CW structures ([[thm-schubert-cells-give-the-stable-grassmannian-cw-structure]]). Under AC (hence DC), paracompact Hausdorff chart covers admit subordinate partitions of unity ([[thm-subordinate-partitions-of-unity-exist]]); numerable fiber bundles are Hurewicz, hence Serre, fibrations ([[thm-numerable-fiber-bundles-are-hurewicz-fibrations]]).
+
+[F10] For a complex line, $c_1(L)=e(L_{\mathbb R})$ with the complex orientation ([[def-chern-classes-from-the-projective-bundle-relation]]), and this Euler class is natural for oriented pullbacks ([[thm-naturality-orientation-sign-and-whitney-product-for-euler-classes]]).
 
 ## Proof
 
@@ -66,18 +75,20 @@ $\mathbb Z[t_1,\dots,t_n]$.
 
 **Given:** AC, the universal principal $\mathbb U(n)$-bundle $E\mathbb U(n)=V_n(\mathbb C^\infty)$, and its maximal torus $T^n$.
 
-1.1 By [F1] the space $E\mathbb U(n)$ is contractible and $\mathbb U(n)$ acts freely on it with quotient $B\mathbb U(n)$; the associated flag bundle of the universal bundle is $E\mathbb U(n)/T^n$, and by [F8] its tautological lines $L_i$ satisfy $q^*E=L_1\oplus\cdots\oplus L_n$. [F1, F8]
+1.1 Write $V=V_n(\mathbb C^\infty)$ and $Q=\operatorname{Fl}(\gamma_n)$. A frame $(v_1,\ldots,v_n)$ determines the flag spanned by its first $i$ vectors. Two frames give the same flag precisely when their individual vectors differ by unit scalars, so this identifies $Q$ with $V/T^n$ over the Grassmannian. This is a topological identification: in a Grassmannian graph chart, Gram–Schmidt identifies the frame projection with $U\times U(n)\to U$; the flag construction in [F8] identifies the corresponding flag chart with $U\times U(n)/T^n$. These identifications agree on overlaps. The stable graph formulas are continuous on each finite stage, and their inverses remain continuous after multiplying by the compact group $U(n)$, so give the ordinary stable bundle charts. Equivalently, over a flag chart choose a nonzero local section of each orthogonal line and normalize it; the resulting unit vectors give local sections of $V\to Q$. Thus this is a principal $T^n$-bundle, and $L_i$ is its $i$-th coordinate line. The Grassmannian is a paracompact Hausdorff CW complex by [F9], its tautological charts are numerable by [F9], and [F8] supplies that $Q$ is paracompact Hausdorff CGWH of CW type. Applying [F9] to the flag chart cover makes $V\to Q$ numerable. [F1, F8, F9]
 
-1.2 The product $(S^\infty)^n$ is contractible and carries a free action of $T^n=(S^1)^n$ with quotient $(\mathbb{CP}^\infty)^n$, so both $E\mathbb U(n)/T^n$ and $(\mathbb{CP}^\infty)^n$ are quotients of contractible spaces by free $T^n$-actions. [F2, algebra]
+1.2 Let $P=(\mathbb{CP}^\infty)^n$ with ordinary product topology and let $A=(S^\infty)^n\to P$ be the product of the standard circle bundles. These are the circle models of [F2]. A product of their finitely many local charts is an ordinary principal $T^n$-chart; multiplying the finitely many partition functions gives a support-subordinate locally finite numeration. Their total product is contractible, by taking the product of their contractions. Moreover this product is a classifying bundle, without assuming that assertion from contractibility: a numerable principal $T^n$-bundle $D\to X$ gives the $n$ circle bundles $D/K_i$, where $K_i$ is the kernel of the $i$-th coordinate homomorphism. Its charts and numeration descend to each quotient. The map $D\to\prod_X(D/K_i)$ is a bundle isomorphism, as is seen in every principal chart, where it is the identity of $(S^1)^n$. Conversely a finite collection of numerable circle bundles has a numerable fiber product by multiplying partitions. These two constructions are inverse on isomorphism classes. By [F3] for $S^1$, such classes are therefore naturally $\prod_i[X,\mathbb{CP}^\infty]=[X,P]$; the equality holds since maps and homotopies into finite products are coordinatewise. Thus $P$ is a model of $BT^n$. [F2, F3]
 
-2.1 The projections $E\mathbb U(n)\to E\mathbb U(n)/T^n$ and $(S^\infty)^n\to(\mathbb{CP}^\infty)^n$ are numerable principal $T^n$-bundles with contractible total spaces. By [F3], the first is classified by a map $f:E\mathbb U(n)/T^n\to BT^n=(\mathbb{CP}^\infty)^n$, and pulling back the universal bundle supplies a map of principal bundles whose fiber map is the identity of $T^n$. For $k\geq2$, comparison of the two long exact sequences gives isomorphisms on base homotopy groups by [F5]. Since $T^n$ is path connected, [F4] gives trivial $\pi_1$ for both bases, while both bases are path connected as images of their contractible total spaces. Thus $f$ induces isomorphisms on all homotopy groups, and [F6] makes it a homotopy equivalence because both bases have CW type. [F3, F4, F5, F6, step 1.2]
+1.3 The ordinary space $P$ is a CW complex. Here the countability qualification matters: each factor has countably many cells by [F9], so the finite product CW structure has the ordinary product topology. One can check the latter directly by exhausting each of two countable CW complexes by finite subcomplexes $X_j,Y_j$. If $W$ is open in the product cell topology and $(a,b)\in W$, start with a compact product neighborhood $K_1\times M_1\subset W$ in $X_1\times Y_1$. Inductively choose compact neighborhoods $K_{j+1}$ of $K_j$ and $M_{j+1}$ of $M_j$ in the next finite stages with $K_{j+1}\times M_{j+1}\subset W$: compactness first gives product neighborhoods at each point of $K_j$, then a finite subcover gives the union in the first coordinate and intersection in the second. The unions of their interiors are open by the weak topologies and their product lies in $W$. This proves equality of the product and cell topologies; iterate finitely. Closure finiteness and the cell characteristic maps follow from products of the finite-stage cells. [F9]
 
-3.1 The tautological lines on $E\mathbb U(n)/T^n$ are the associated bundles for the coordinate characters of $T^n$, so under the equivalence of step 2.1 the $i$-th line is the pullback of the universal line from the $i$-th factor of $(\mathbb{CP}^\infty)^n$. Hence $t_i=c_1(L_i)$ is the pullback of the generator of the $i$-th factor, and [F7] gives $H^*(BT^n;\mathbb Z)=\mathbb Z[t_1,\dots,t_n]$ by Kunneth. [F7, step 2.1]
+2.1 Send a frame to its ordered unit vectors, obtaining a continuous $T^n$-equivariant map $V\to A$. It descends to $f:Q\to P$, sending a flag to its ordered orthogonal lines viewed as lines in $\mathbb C^\infty$. The principal fiber map is the identity of $T^n$ after choosing corresponding basepoints. Both bundle projections are Serre fibrations by [F9]. Their total spaces are contractible by [F1] and step 1.2. For every $k\geq2$, the connecting maps identify each base's $\pi_k$ with $\pi_{k-1}(T^n)$ by [F4], and naturality [F5] identifies $f_*$ with the identity through these isomorphisms. The low-degree exact sequence gives $\pi_1=0$ since $T^n$ is path connected. Both bases are path connected as images of their contractible total spaces, so $f$ is a weak homotopy equivalence in every degree. To apply [F6] correctly to the CW-type space $Q$, choose a homotopy equivalence $h:C\to Q$ with $C$ CW. The composite $fh:C\to P$ is a weak equivalence of CW complexes, hence a homotopy equivalence. Since $h$ is also a homotopy equivalence, so is $f$. The bundle over $Q$ is the pullback of the classifying product bundle along $f$, hence is itself classifying: precomposition with a homotopy equivalence gives bijections $[X,Q]\cong[X,P]$ for every $X$. This licenses the quotient model $Q=BT^n$ over $BU(n)$. [F1, F4, F5, F6, F9, step 1.1, step 1.2, step 1.3]
 
-4.1 The permutation matrices normalize $T^n$ in $\mathbb U(n)$ and act on $E\mathbb U(n)$ by bundle automorphisms covering the identity of $B\mathbb U(n)$; the induced maps on $E\mathbb U(n)/T^n$ permute the coordinate characters and hence the tautological lines, so they permute $t_1,\dots,t_n$. Therefore a class in the image of $q^*:H^*(B\mathbb U(n);\mathbb Z)\to H^*(BT^n;\mathbb Z)$ is fixed by every permutation, i.e. lies in the symmetric invariants. [F1, F8, step 3.1]
+3.1 Explicitly, the $i$-th coordinate of $f$ is the line $L_i$ itself, so $L_i$ is the pullback of the standard tautological line on the $i$-th factor. By [F10], $t_i=f^*\operatorname{pr}_i^*u$ with the tautological Euler generator $u$ of [F7]; no sign change to the dual-line convention is made. Iterating [F7] is valid because a projective-space factor has finite free integral homology in each degree. It gives $H^*(P;\mathbb Z)=\mathbb Z[u_1,\ldots,u_n]$, and the homotopy equivalence $f$ gives the asserted ring on $Q$. [F7, F10, step 2.1]
 
-5.1 Boundary cases. For $n=1$ the torus is $T^1=S^1$ and the flag bundle is the universal line bundle's own sphere bundle quotient $BS^1=\mathbb{CP}^\infty$; the single root is the generator and the symmetric group is trivial. The empty and zero cases are excluded by $n\geq1$; the coefficient ring $\mathbb Z$ is nonzero and the products are finite, so no infinite-product convergence question arises. AC enters only through the classification and Milnor-model suppliers recorded in [A1], including the standard identification of the product of the Milnor models with a model of $BT^n$. [A1, F1, F2, step 3.1] ∎
+4.1 Permutation matrices normalize $T^n$. Right multiplication therefore descends from $V$ to homeomorphisms of $Q$ covering the identity on $BU(n)$; it need not be an equivariant automorphism of the original principal $U(n)$-bundle. On the ordered orthogonal lines it is the corresponding permutation, and $f$ intertwines this action with permutation of the coordinates of $P$. Thus it permutes the $t_i$. For any $a\in H^*(BU(n);\mathbb Z)$ and any such homeomorphism $\sigma$, the equality $q\sigma=q$ gives $\sigma^*q^*a=q^*a$. The image is therefore contained in the symmetric invariants, as claimed. [F1, F8, step 3.1]
+
+5.1 For $n=1$, there are no flag-construction steps: $Q=BU(1)=\mathbb{CP}^\infty$, $f$ is the identity, the sole line is the universal line and the permutation group is trivial. The hypothesis $n\geq1$ excludes rank zero; these universal bases are nonempty. All products are finite and $\mathbb Z$ is nonzero. AC is inherited from classification, partitions, Whitehead and Kunneth, not from any finite choice of coordinates. [A1, F3, F6, F7, F8, F9, step 3.1] ∎
 
 ## Source notes
 
-The identification of the complete flag bundle of the universal bundle with $BT^n=E\mathbb U(n)/T^n$ and the coordinate description of the Chern roots are Miller's Lectures 34-35 and May's Chapter 24 section 3. The model comparison between $E\mathbb U(n)/T^n$ and $(\mathbb{CP}^\infty)^n$ is the standard contractible-free-quotient argument; both are models of $BT^n$, and the five lemma and Whitehead's theorem convert the map of fibrations into a homotopy equivalence.
+The explicit ordered-line map compares the quotient flag model with the product circle model. The classifying property of the latter is proved by the coordinate quotient/fiber-product argument, not inferred merely from a free action. For the ordinary topology of the countable CW product, Hatcher, Algebraic Topology, Appendix Theorem A.6, printed p.524, proves the finite-exhaustion neighborhood argument used in step 1.3: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf . Miller's Lectures 34–35 and May's Chapter 24 section 3 provide the flag/splitting context.

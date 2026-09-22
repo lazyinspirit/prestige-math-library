@@ -5,7 +5,7 @@ title: Dynkin diagram with edge multiplicity and arrow convention
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-finite-type-cartan-matrix-properties]
+deps: [prop-finite-type-cartan-matrix-properties, thm-rank-two-root-system-classification]
 provenance:
   statement: literature-derived
   proof: not-applicable

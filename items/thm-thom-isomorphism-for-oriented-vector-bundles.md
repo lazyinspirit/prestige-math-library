@@ -39,7 +39,7 @@ The finite supplied-trivializing-cover theorem is a choice-free special case.
 
 [F1] [[thm-numerable-vector-bundles-admit-bundle-metrics]] supplies the metric.
 
-[F2] [[lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence]] gives the relative skeletal spectral sequence with $E_2^{p,q}=H^p(B;\mathcal H^q(D^n,S^{n-1};R))$, finite convergence, and the normalized cup-product edge in the oriented case.
+[F2] [[lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence]] gives the relative skeletal spectral sequence with $E_2^{p,q}=H^p(B;\mathcal H^q(D^n,S^{n-1};R))$ and finite convergence.  For an arbitrary numerable bundle it identifies the only nonzero row with $\mathcal O_R(\xi)$ and collapses it to the canonical additive twisted isomorphism, and when an orientation is supplied it additionally yields the normalized class and the cup-product edge.
 
 [F3] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] makes the fiber cohomology vanish off degree $n$, and [[def-r-oriented-vector-bundle-and-orientation-local-system]] identifies the degree-$n$ system as $\mathcal O_R(\xi)$ before any orientation is supplied. [[def-homology-and-cohomology-with-local-coefficients]] types its cohomology.
 
@@ -51,12 +51,12 @@ The finite supplied-trivializing-cover theorem is a choice-free special case.
 
 **Proof technique:** read both oriented and twisted forms from the one-row edge.
 
-1.1 Choose the metric by [F1].  With the orientation supplied, [F2] gives a normalized class $u_\xi$ and identifies the only relative Serre row with $H^k(B;R)$.  Its edge is the displayed cup-product map and is an isomorphism in every degree. [F1, F2]
+1.1 Choose the metric by [F1].  With the orientation supplied, the oriented clause of [F2] gives a normalized class $u_\xi$ and identifies the only relative Serre row with $H^k(B;R)$.  Its edge is the displayed cup-product map and is an isomorphism in every degree. [F1, F2]
 
-1.2 For the unoriented calculation, use the $E_2$ formula and finite convergence stated in [F2]. By [F3], every row is zero except $q=n$, and that row is exactly $\mathcal O_R(\xi)$ before any orientation is selected. Thus the sequence collapses with one filtration quotient and gives the canonical isomorphism $H^k(B;\mathcal O_R(\xi))\cong H^{k+n}(D(\xi),S(\xi);R)$. A global untwisted Thom class is neither chosen nor asserted in this clause. [F2, F3]
+1.2 For the unoriented calculation, use the unoriented clause of [F2]: for the arbitrary numerable bundle its only nonzero relative Serre row is $\mathcal O_R(\xi)$, the orientation local system identified in [F3] and defined before any orientation is selected, so the sequence collapses with one filtration quotient and gives the canonical additive isomorphism $H^k(B;\mathcal O_R(\xi))\cong H^{k+n}(D(\xi),S(\xi);R)$.  This clause invokes no oriented statement, and a global untwisted Thom class is neither chosen nor asserted. [F2, F3]
 
 2.1 If $u$ and $u'$ are normalized, step 1.1 writes $u-u'=\pi^*a\smile u_\xi$ for a unique $a\in H^0(B;R)$.  Fiber restriction gives $a(b)o_b=0$ for every $b$; since $o_b$ is a free rank-one generator, $a(b)=0$.  Thus $a=0$ componentwise and $u=u'$. [F2, step 1.1]
 
 3.1 Under a supplied finite trivializing cover, [F4] constructs the same unique normalized class and cup isomorphism by finite Mayer–Vietoris.  Uniqueness from step 2.1 identifies it with the Serre class, so this is genuinely a special case and not an additional hypothesis on the general theorem. [F4, step 1.1, step 2.1]
 
-4.1 For $n=0$, $u=1$ and both maps are identities; on an empty base they are the unique maps of zero groups.  Point and disconnected bases, the zero ring, degree-zero/negative input, the only Serre row and both filtration endpoints are covered by [F2].  AC is used exactly through [F1], [F2], and the local-coefficient cohomology interface [F3]; the finite-cover proof [F4] uses none. [F1, F2, F3, F4, A1, step 1.1, step 1.2, step 2.1, step 3.1] ∎
+4.1 For $n=0$, identify the supplied orientation with the class $o\in H^0(B;R)$ whose value on every component is a unit.  Fiber normalization gives $u=o$, so the displayed untwisted Thom map is multiplication by $o$ and is inverted by multiplication by the componentwise inverse $o^{-1}$.  For the standard unit orientation, $u=1$ and this map is the identity; for the reversed integral orientation it is multiplication by $-1$.  On an empty base the maps are the unique maps of zero groups.  Point and disconnected bases, the zero ring, degree-zero/negative input, the only Serre row and both filtration endpoints are covered by [F2].  AC is used exactly through [F1], [F2], and the local-coefficient cohomology interface [F3]; the finite-cover proof [F4] uses none. [F1, F2, F3, F4, A1, step 1.1, step 1.2, step 2.1, step 3.1] ∎

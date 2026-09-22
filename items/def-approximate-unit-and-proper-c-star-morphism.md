@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Definition 3.1.38 and Example 3.1.39, printed pp. 66–67"
@@ -46,11 +51,13 @@ $Y$.
 
 ## Remarks
 
-- **The unital case forces a unital target.** A unital C\*-algebra has the
+- **A nonzero target of a proper map from a unital algebra is unital.** A unital C\*-algebra has the
   constant net $e_i=1_A$ as an approximate unit.  If $\varphi:A\to B$ is
   proper, the constant net $\varphi(1_A)$ is therefore an approximate unit of
-  $B$, so $\varphi(1_A)b=b=b\varphi(1_A)$ for every $b\in B$.  Thus $B$ is
-  unital and $\varphi(1_A)=1_B$; in the unital case properness is not weaker
-  than unitality.
-- **The two uses of "proper" are linked by the duality.** Under [[thm-locally-compact-gelfand-duality]] the proper continuous maps correspond exactly to the proper star-homomorphisms, and this is where the pullback of a compactly supported function uses the compact-preimage condition.
-- **No choice principle is used in the definition.** The definition is a condition on nets and maps; existence of approximate units is the theorem [[thm-every-commutative-c-star-algebra-has-an-approximate-unit]].
+  $B$, so $\varphi(1_A)b=b=b\varphi(1_A)$ for every $b\in B$.  If $B\ne\{0\}$, this identity is nonzero, so $B$ is
+  unital in the convention $1_B\ne0$ and $\varphi(1_A)=1_B$. If
+  $B=\{0\}$, every approximate unit of $A$ maps to the constant zero
+  approximate unit, so the unique zero map is proper. The zero algebra is
+  nevertheless nonunital under the stated convention.
+- **The two uses of "proper" are linked by the duality.** Under [[thm-locally-compact-gelfand-duality]] proper maps of locally compact Hausdorff spaces correspond exactly to proper star-homomorphisms of commutative complex C\*-algebras, and this is where the pullback of a compactly supported function uses the compact-preimage condition.
+- **No choice principle is used in the definition.** The definition is a condition on nets and maps; existence for commutative C\*-algebras is the theorem [[thm-every-commutative-c-star-algebra-has-an-approximate-unit]].

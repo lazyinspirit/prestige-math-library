@@ -19,6 +19,9 @@ sources:
     - title: "J. P. May, A Concise Course in Algebraic Topology, Chapter 22 §2, printed pp. 175–179; Chapter 24 §§1–2, printed pp. 204–208"
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: "Chapter 22 §2, printed pp. 175–179; Chapter 24 §§1–2, printed pp. 204–208"
+    - title: "C. R. F. Maunder, The spectral sequence of an extraordinary cohomology theory, Theorem 3.3"
+      url: https://doi.org/10.1017/S0305004100037245
+      locator: "Theorem 3.3, pp. 567–574"
 ---
 
 ## Statement
@@ -28,14 +31,17 @@ May represents the locally defined complex topological $K$-groups $K^*$
 constructed from vector bundles: there are natural isomorphisms
 $$KU^n(X,A)\cong K^n(X,A)$$
 for all $n$, compatible with suspension and the cofiber connecting maps. After
-Bott translation of any coefficient row to nonpositive total coefficient index,
+Bott translation of any coefficient row to coefficient index at most $-2$,
 Adams's connective cover $ku\to KU$ identifies the $E_3$ source, the $E_3$ target
 and the differential $d_3$ of the two skeletal Atiyah–Hirzebruch spectral
-sequences in that row. For $p\geq1$ the resulting skeletal $d_3$ on a class
-represented by a cellular $E_1$-cocycle is exactly the cellular lifting
-obstruction given by the first Postnikov invariant of the corresponding $ku$
-representing space, independently of the chosen lifts; the case $p=1$ follows by
-suspension and the case of a finite CW pair by passing to the quotient.
+sequences in that row. At bidegree $(p,q)$, put $t=p+q$. For $p\geq1$ the
+resulting skeletal $d_3$ on a class represented by a cellular $E_1$-cocycle is
+exactly the cellular lifting obstruction given by the Postnikov invariant of
+the total-degree representing space $ku_t$ linking
+$\pi_p(ku_t)=\pi_{-q}(ku)$ to $\pi_{p+2}(ku_t)=\pi_{2-q}(ku)$. Under the stable
+Bott identifications this is the corresponding translate of the first stable
+$ku$ invariant. It is independent of the chosen lifts; the case of a finite CW
+pair follows by passing to the quotient.
 
 ## Facts & Assumptions
 
@@ -47,7 +53,7 @@ suspension and the case of a finite CW pair by passing to the quotient.
 
 [A4] The cohomological AHSS of a finite CW complex has $E_1^{p,q}=h^{p+q}(X^p,X^{p-1})$, $d_1$ the cellular coboundary and $E_2^{p,q}=H^p(X;h^q(*))$, and the exact-couple machinery gives, for every $r$ and every class $e$ with $k(e)=i^{r-1}x$ in the skeletal couple, $d_r[e]=[j(x)]$ with $j$ the connecting and $k$ the pair map ([[thm-cohomological-atiyah-hirzebruch-spectral-sequence]], [[lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients]], [[thm-an-exact-couple-generates-a-spectral-sequence]]).
 
-[A5] Assume AC. The first Postnikov $k$-invariant of a connected spectrum is the primary obstruction to a section of its first Postnikov fibration, and the cellular obstruction theory identifies the obstruction on an oriented cell with the composite represented by the attaching map, independently of the chosen lifting data ([[def-postnikov-k-invariant]], [[thm-obstruction-theory-for-lifting-through-a-fibration]], [[thm-eilenberg-maclane-spaces-represent-singular-cohomology]]).
+[A5] Assume AC. For a represented extraordinary cohomology theory, Maunder's comparison theorem identifies, from $E_2$ onward and compatibly with every differential, the spectral sequence from the skeletal filtration of the source with the spectral sequence from the Postnikov tower of the representing spaces. At bidegree $(p,q)$ of total degree $t=p+q$, the relevant representing space is $ku_t$, because $\pi_p(ku_t)=\pi_{p-t}(ku)=\pi_{-q}(ku)$ (Maunder, Theorem 3.3). The Postnikov invariant joining this group to $\pi_{p+2}(ku_t)$ is the primary obstruction of the relevant Postnikov fibration, and cellular lifting obstruction theory evaluates it on attaching maps independently of the chosen partial lifts ([[def-postnikov-k-invariant]], [[thm-obstruction-theory-for-lifting-through-a-fibration]], [[thm-eilenberg-maclane-spaces-represent-singular-cohomology]]). The comparison is applied componentwise to this representing space, not to the spectrum as though it were a single space.
 
 ## Proof
 
@@ -59,18 +65,21 @@ suspension and the case of a finite CW pair by passing to the quotient.
 
 1.2 The adjoint structure maps of $KU$ are equivalences, so $KU$ represents a cohomology theory; the degree-zero bundle-classification identification, the suspension adjunction and the natural Bott maps identify $KU^n(X,A)$ with the two-periodic $K^n(X,A)$ in every degree, because both connecting maps are induced by the same quotient map followed by suspension. [A1, A2, given]
 
-1.3 Let $p\geq2$ and represent an $E_3$ class in the $ku$ skeletal AHSS by an $E_1$ cellular cocycle $e$. The $r=3$ subquotient formula says precisely that, after changing $e$ by the permitted earlier boundaries, there is $y$ with $k(e)=i^2y$, and it gives $d_3[e]=[j(y)]$. Under spectrum representability, the $D$-groups are homotopy classes of maps from skeleta to the relevant $ku$ representing space, $i$ is restriction along one skeletal inclusion, $k$ forgets the relative trivialization of a class on a skeletal pair, and $j$ is the boundary obtained by precomposing with the attaching maps of the next cells. These identifications follow directly by applying the represented cohomology functor to the cofiber sequence $X^{s-1}\to X^s\to X^s/X^{s-1}$. [A2, A3, A4, given]
+1.3 If the chosen $KU$ coefficient row is odd, its source and target groups are zero and the comparison assertion is vacuous. Thus fix $p\ge1$ on a nonzero row and Bott-translate it to an even index $q\le-2$. Put $t=p+q$. A bidegree-$(p,q)$ class has total cohomological degree $t$, so its representing space in Maunder's comparison is $ku_t$, not $ku_{-q}$. The spectrum-space indexing gives
+$$\pi_p(ku_t)=\pi_{p-t}(ku)=\pi_{-q}(ku)\cong\mathbb Z,$$
+$$\pi_{p+1}(ku_t)=\pi_{1-q}(ku)=0,\qquad \pi_{p+2}(ku_t)=\pi_{2-q}(ku)\cong\mathbb Z.$$
+Apply [A5] to the component containing the representing map. It gives an isomorphism from $E_2$ onward between the skeletal AHSS of [A4] and the Postnikov spectral sequence for $ku_t$, commuting with $d_3$. [A3, A4, A5, given]
 
-2.1 Read the equation of step 1.3 through those represented cofiber sequences, rather than treating it by itself as a construction of maps. Exactness at the first intermediate skeleton says that the relative class has a compatible representing-map extension over $X^{p+1}$; exactness at the second says that this extension lifts over $X^{p+2}$. Changing either extension changes $y$ by the indeterminacy already quotiented in $B^3$. Pull back the first Postnikov fibration of the corresponding $ku$ representing space along this partial lift. By [A5], its obstruction on an oriented $(p+3)$-cell is obtained by precomposing with that cell's attaching map. By the description of $j$ in step 1.3, the resulting cellular obstruction cochain is exactly $j(y)$, so its class is the exact-couple differential $d_3[e]=[j(y)]$ and is independent of the chosen extensions. [A4, A5, step 1.3]
+2.1 In the Postnikov spectral sequence of step 1.3, the vanishing of $\pi_{p+1}(ku_t)$ makes the first possible differential out of this bidegree the operation represented by the relevant class $k_{p+3}$ linking $\pi_p(ku_t)$ to $\pi_{p+2}(ku_t)$. This need not be the first Postnikov invariant of the whole space $ku_t$: by [A3] it is the Bott translate, in this coefficient row, of the first stable $ku$ invariant. By the definition and lifting theorem cited in [A5], evaluating it on a cellular cocycle is the primary obstruction to lifting the corresponding map through that Postnikov stage: on each oriented $(p+3)$-cell it is obtained from the attaching map, and changing the partial lift changes the obstruction cochain by a coboundary. Maunder's differential-compatible comparison transports exactly this obstruction class to the skeletal $d_3$. [A3, A5, step 1.3]
 
-2.2 Bott-translate any coefficient row to $q\leq0$. Since $E^q(*)=\pi_{-q}(E)$ for a representing spectrum, the map $ku\to KU$ is an isomorphism on the coefficient groups in every such row; the target row $q-2$ is still nonpositive. On $E_1$ it is therefore the direct sum, over the cells, of coefficient isomorphisms. The morphism of reduced theories in [A3] gives a morphism of skeletal exact couples, so the induced page maps identify the $E_3$ source and target and commute with $d_3$. [A3, A4, step 1.2]
+2.2 Bott-translate any coefficient row to $q\le-2$. Since $E^q(*)=\pi_{-q}(E)$ for a representing spectrum, $ku\to KU$ is an isomorphism on the coefficient groups in the source row $q$ and target row $q-2$. It is also an isomorphism on the intervening odd rows, both of which are zero. Hence its map of skeletal exact couples induces isomorphisms on the relevant $E_2$ and $E_3$ source and target groups and commutes with $d_3$. [A3, A4, step 1.2]
 
-3.1 For $p=1$ suspend the reduced class once: suspension of every skeletal-pair long exact sequence gives a termwise isomorphism of exact couples commuting with the $r=3$ local-lift formula, and the $p=2$ comparison of step 2.1 desuspends to $p=1$. Quotienting a finite CW pair by its subcomplex and repeating the argument gives the relative case. [A4, step 2.1, given]
+3.1 Maunder's comparison and the relevant Postnikov obstruction in step 2.1 apply componentwise for every $p\ge1$, including $p=1$; no class in $H^p$ is evaluated on a space indexed by $-q$. For a finite CW pair $(X,A)$, apply the reduced comparison to the finite quotient $X/A$; represented cohomology identifies this with the relative group and preserves the skeletal filtration and connecting maps. [A2, A5, step 2.1, given]
 
-4.1 Combining steps 1.3, 2.1 and 2.2 identifies the skeletal $d_3$ of the $K$-AHSS with the first representing-space Postnikov obstruction of $ku$, and step 1.2 identifies the local $K$-groups with those represented by $KU$; step 3.1 covers $p=1$ and finite CW pairs. [step 1.2, step 1.3, step 2.1, step 2.2, step 3.1]
+4.1 Combining steps 1.3, 2.1 and 2.2 identifies the skeletal $d_3$ of the $K$-AHSS with the relevant Postnikov obstruction in the total-degree space $ku_{p+q}$, equivalently the coefficient-row translate of the first stable $ku$ invariant. Step 1.2 identifies the local $K$-groups with those represented by $KU$, and step 3.1 covers all $p\ge1$ and finite CW pairs. [step 1.2, step 1.3, step 2.1, step 2.2, step 3.1]
 
 5.1 Steps 1.2 and 4.1 give the asserted representability, the $E_3$ comparison in nonpositive coefficient rows and the identification of the skeletal $d_3$ with the Postnikov obstruction. [step 1.2, step 4.1] ∎
 
 ## Source notes
 
-The representability statements are May's [Chapter 22 §2 and Chapter 24 §§1–2](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf), printed pp. 175–179 and 204–208; the connective cover and its stable homotopy are Adams's [Chapter 2 and Chapter 6(v)](https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Adams-SHGH-latex2.pdf), printed pp. 174–179 and 245–246, with the first $k$-invariant supplied by Proposition 16.6 at pp. 391–393. The skeletal-to-Postnikov comparison itself is proved here from the exact-couple lift formula and cellular obstruction theory; Adams does not supply it.
+The representability statements are May's [Chapter 22 §2 and Chapter 24 §§1–2](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf), printed pp. 175–179 and 204–208; the connective cover and its stable homotopy are Adams's [Chapter 2 and Chapter 6(v)](https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Adams-SHGH-latex2.pdf), printed pp. 174–179 and 245–246, with the first $k$-invariant supplied by Proposition 16.6 at pp. 391–393. The comparison between the skeletal and representing-space Postnikov spectral sequences is [Maunder's Theorem 3.3](https://doi.org/10.1017/S0305004100037245); it supplies isomorphisms from $E_2$ onward commuting with every differential. Adams identifies the $ku$ invariant, while Maunder is the missing comparison that makes it the skeletal $d_3$.

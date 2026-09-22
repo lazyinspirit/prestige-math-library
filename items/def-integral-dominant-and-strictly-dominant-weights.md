@@ -37,10 +37,12 @@ for the pairing with the simple coroots
 * **strictly dominant** if $\langle\lambda,\alpha_i^\vee\rangle>0$ for every $i$;
 * **antidominant** if $\langle\lambda,\alpha_i^\vee\rangle\le0$ for every $i$.
 
-These notions depend on the chosen base $\Delta$ and hence on the positive
-system: the same functional may be dominant for one choice and antidominant for
-another. Only the integer and the sign of the finitely many pairings enter, so
-the definitions are finite verifications.
+Dominance, strict dominance, and antidominance depend on the chosen base
+$\Delta$ and hence on the positive system: the same functional may be dominant
+for one choice and antidominant for another. Integrality is independent of that
+choice, because, as verified below, it is exactly membership in the weight
+lattice $P$. Only the integer and the sign of the finitely many simple-coroot
+pairings enter the displayed tests, so they are finite verifications.
 
 **Integral weights are the weight lattice.** By
 [[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]

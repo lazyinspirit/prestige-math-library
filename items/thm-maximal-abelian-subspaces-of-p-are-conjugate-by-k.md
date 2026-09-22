@@ -5,7 +5,7 @@ title: Maximal abelian subspaces of p are conjugate by K
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-maximal-split-abelian-subspace-and-real-rank, thm-conjugacy-of-maximal-tori, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-axiom-of-choice]
+deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-riemannian-symmetric-pair-of-noncompact-type, def-maximal-split-abelian-subspace-and-real-rank, thm-conjugacy-of-maximal-tori, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, prop-trace-forms-are-symmetric-and-invariant, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -22,7 +22,8 @@ proof_strategy: direct
 
 Assume the Axiom of Choice. Let $(G,K)$ be a Riemannian symmetric pair of
 noncompact type with Cartan decomposition
-$\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, and let
+$\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$
+([[def-riemannian-symmetric-pair-of-noncompact-type]]), and let
 $\mathfrak a,\mathfrak a'$ be maximal abelian subspaces of $\mathfrak p_0$
 ([[def-maximal-split-abelian-subspace-and-real-rank]]). Then there is
 $k\in K$ with $\operatorname{Ad}_k\mathfrak a'=\mathfrak a$. Consequently
@@ -31,15 +32,30 @@ rank of $\mathfrak g_0$ is well defined.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice; a real semisimple Lie algebra $\mathfrak g_0$ with Cartan involution $\theta$, Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, inner product $B_\theta$, and maximal abelian subspaces $\mathfrak a,\mathfrak a'$ of $\mathfrak p_0$.
+**Given:** The Axiom of Choice; a Riemannian symmetric pair $(G,K)$ of noncompact type with global Cartan involution $\Theta$, differential $\theta$, Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, inner product $B_\theta$, and maximal abelian subspaces $\mathfrak a,\mathfrak a'$ of $\mathfrak p_0$.
 
 [A1] The Axiom of Choice is [[def-axiom-of-choice]]; it is inherited through the existence of the global decomposition and the compactness of $K$ recorded in [L2].
 
 [L1] $B$ is negative definite on $\mathfrak k_0$, positive definite on $\mathfrak p_0$, the summands are $B$-orthogonal, and $[\mathfrak k_0,\mathfrak p_0]\subseteq\mathfrak p_0$, $[\mathfrak p_0,\mathfrak p_0]\subseteq\mathfrak k_0$ ([[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]]).
 
-[L2] $(k,X)\mapsto k\exp X$ is a diffeomorphism $K\times\mathfrak p_0\to G$, $K$ is compact, and $\operatorname{Ad}_K$ preserves $\mathfrak p_0$ and $B_\theta$ ([[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]]).
+[L2] By the symmetric-pair definition, $K=G^\Theta$, and the global Cartan
+decomposition makes $K$ compact and $(k,X)\mapsto k\exp X$ a diffeomorphism
+$K\times\mathfrak p_0\to G$
+([[def-riemannian-symmetric-pair-of-noncompact-type]],
+[[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]]).
+For $k\in K$, the identity $\Theta\circ C_k=C_k\circ\Theta$ differentiates
+to $\theta\operatorname{Ad}_k=\operatorname{Ad}_k\theta$, so
+$\operatorname{Ad}_k$ preserves the $-1$-eigenspace $\mathfrak p_0$.
+Moreover every Lie-algebra automorphism $A$ preserves the Killing form because
+$\operatorname{ad}_{AX}=A\operatorname{ad}_XA^{-1}$ and trace is invariant
+under conjugation. Hence
+$$
+B_\theta(\operatorname{Ad}_kX,\operatorname{Ad}_kY)=-B(\operatorname{Ad}_kX,\theta\operatorname{Ad}_kY)=-B(\operatorname{Ad}_kX,\operatorname{Ad}_k\theta Y)=B_\theta(X,Y).
+$$
 
-[L3] For $X\in\mathfrak p_0$ the operator $\operatorname{ad}_X$ is self-adjoint for $B_\theta$, hence diagonalizable with real eigenvalues; a family of pairwise commuting diagonalizable endomorphisms is simultaneously diagonalizable ([[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]], [[thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms]]).
+[L3] The Killing form is invariant.  Hence, for $X\in\mathfrak p_0$ and $Y,Z\in\mathfrak g_0$, invariance and $\theta X=-X$ give
+$$B_\theta([X,Y],Z)=-B([X,Y],\theta Z)=-B(Y,[\theta Z,X])=B_\theta(Y,[X,Z]).$$
+Thus $\operatorname{ad}_X$ is self-adjoint for $B_\theta$ and consequently is diagonalizable with real eigenvalues; a family of pairwise commuting diagonalizable endomorphisms is simultaneously diagonalizable ([[prop-trace-forms-are-symmetric-and-invariant]], [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], [[thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms]]).
 
 [L4] A finite-dimensional vector space over an infinite field is not a finite union of proper subspaces; any two maximal tori of a compact connected Lie group are conjugate ([[lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces]], [[thm-conjugacy-of-maximal-tori]]).
 

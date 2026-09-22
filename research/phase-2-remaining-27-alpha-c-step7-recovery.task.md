@@ -12,18 +12,10 @@ about mathematics.
 
 ## What you recorded at step 6
 
-`research/phase-2-remaining-27-alpha-c-step7-context.json` is what a group Alpha for this group wrote during step 6,
-while the judges were still sweeping and no verdict existed. It records the
-conventions your pages fix, which items the rest lean on, which published
-dependencies were actually opened, and what already looked thin.
-
-**Its `concerns` list is evidence, not decoration.** Each entry was found with
-nobody suggesting where to look. A judge rejection landing at the same place is
-two independent readings agreeing and should be very hard to call a
-`false_positive`; a rejection landing nowhere near any of them is not thereby
-wrong, but it is the case to read most carefully against the text.
-
-It is notes, not authority. Where it and the item files disagree, the files win.
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
 
 ## Read scope, write scope
 
@@ -288,22 +280,7 @@ changed a domain, quantifier, hypothesis, direction or conclusion.
 
 ## Step-6 reader warnings
 
-8 warning(s) a Step-6 reader recorded in items you own.
-They were read-only and could not repair or adjudicate them. You own these decisions.
-
-- **s8a-dec329ad2223a8dab75d6eb1 · `lem-l-two-with-the-integral-pairing-is-a-hilbert-space`** (from group a, presentation) — The numbered claims in the Statement are not rendered as a list: claim 1 is run into the lead sentence ('...; with it $L^2(\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\mu;\mathbb C)$ ...'), so the first item has no marker and the second is inline. Purely presentational, but the statement does not read as the intended two-part claim.
-- **s8a-cd3570ad251db24d3fb862cd · `ex-standard-basis-of-ell-two`** (from group c, gap-a-reader-closes) — The example claims that l^2(N,F) is complete and points to the inline fact [A3], but [A3] is conditional on the Cauchy sequence already having coordinate-wise limits; the completeness of the scalar field F that produces those limits, hence the completeness of l^2, is not supplied by any cited item (the dependency list omits the completeness/Riesz-Fischer supplier that the sibling example ex-standard-inner-products-on-kn-ell-two-and-l-two cites for exactly this claim).
-- **s8a-740bb14ed6917643818a401c · `def-square-summable-family-on-an-arbitrary-index-set`** (from group c, gap-a-reader-closes) — In the proof that every absolutely summable family is summable, the justification sentence says that taking F = G = F_0 in relation (2) gives B_{F_0} - A_{F_0} <= epsilon. Relation (2) at F = G = F_0 gives 0 <= S - S_{F_0}, not the diameter bound; the intended bound follows from (2) for arbitrary finite F,G containing F_0. The argument is correct but the displayed justification is not.
-- **s8a-ec4bab00c6600c72eca519a1 · `lem-two-dimensional-numerical-range-is-convex`** (from group c, gap-a-reader-closes) — The statement covers complex subspaces of dimension at most two, so V = {0} is included, but step 1.1 asserts that for dim V <= 1 the numerical range is a single scalar; for dim V = 0 the unit sphere is empty, so that numerical range is empty (convex, but not a singleton), and the boundary case is not addressed.
-- **s8a-dd636e0bfc93c0663492b8c6 · `def-cyclic-vector-and-cyclic-normal-operator`** (from group c, presentation) — The sentence 'cyclicity uses the unitary operator T together with its adjoint, never only the nonnegative powers of T' is inaccurate: T is only assumed normal, not unitary; the intended content is that the adjoint pair (T,T*) generates the algebra.
-- **s8a-40965c6dceb6f12bd4527b4b · `def-hilbert-space-adjoint`** (from group c, presentation) — The closing sentence 'it is a different operator from T' whenever the Riesz maps are conjugate-linear' compares T*: K to H with T': K* to H*, which have different domains and codomains, so the stated criterion is not a meaningful distinction.
-- **s8a-c5897e92e6f8d22700af2267 · `thm-hilbert-projection-variational-characterization`** (from group c, presentation) — The statement carries 'Assume the Axiom of Countable Choice' although the equivalence is choice-free once p in C is given, and the proof itself says the hypothesis is used only to invoke the existence theorem for nearest points; a consumer may wrongly read the equivalence as requiring AC_w.
-- **s8a-8e970f8ab86eae17d8bfa11a · `def-spectral-multiplicity-function-in-the-separable-case`** (from group c, presentation) — The definition fixes multiplicity data from a chosen cyclic decomposition and asserts that the measure class of mu and the a.e. class of m are independent of that choice, while locating the justification in items later on the same page; a judge should confirm the classification theorem, which is stated through these data, does not presuppose the independence it is invoked to justify (I found no circular use, but the organisation invites the objection).
-
-Append one owning-group disposition per warning to `research/phase-2-remaining-27-step7-alert-decisions.jsonl`.
-A Step-6 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
-pre/post guard hashes. A later Step-7 cross-group alert still requires a real targeted
-judge rejection; never reuse its source rejection as target evidence.
+None. No Step-6 reader warning targets an item you own.
 
 ## Your rejections
 
@@ -314,25 +291,16 @@ a rejection recorded after this file was rendered is still yours.
 
 ---
 
-# Step 7 — exact closure recovery, `phase-2-remaining-27`
+# Historical Step-7 closure recovery, `phase-2-remaining-27`
 
-Read `research/phase-2-remaining-27-judge-closure.json`,
-`research/phase-2-remaining-27-judge.jsonl`,
-`research/phase-2-remaining-27-judge-adjudications.jsonl`, and the generated `by_item`
-ownership map in `research/phase-2-remaining-27-step7-scope.json`. Take only current
-unadjudicated `(id, model, context_sha256)` rows owned by this group; leave
-other groups' rows untouched. A row owned by no group is a reported blocker,
-not a row to discard.
+Historical compatibility task only. Preserve historical exact-tuple decisions
+as evidence; this template grants no current repair or certification authority.
+Historical receipts constrain `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`; do not reinterpret those records
+as current round coverage.
 
-Append one exact adjudication outcome per owned row. Only
-`confirmed_fatal` licenses its coherent repair and matching ledger row; update
-only records made stale by that repair. Send a concrete other-group finding to
-`research/phase-2-remaining-27-step7-cross-group.jsonl`, never repair that item.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Do not use a descriptive
-defect-ledger subclass in that field.
-
-Write `research/phase-2-remaining-27-alpha-step7-closure-recovery-<group>.md` with the rows
-handled, outcomes, licensed repairs, rejudge targets, cross-group alerts, and
-blockers. Preserve shared append-only ledgers.
+Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
+and `briefs/step7-owner-repair.md`. Follow WORKFLOW.md's 7.1–7.10 protocol
+and the generated round-bound task. Repair all confirmed defects, including
+nonfatal defects, and continue downstream repair until complete before the
+single central certification pass.

@@ -1,0 +1,9 @@
+# FA position 51 — repaired
+
+Reviewed the example, contract, Alpha adjudication and both Terra decisions, moment-map A/B conventions, owning manifest and risk record (no refuter flag). Alpha correctly restored n>=1 and c>0. Terra correctly rejects the equation h=iota*H: its two sides have different domains.
+
+The Example now defines h on projective space by pi*h=iota*H, naming the inclusion, quotient and radius sqrt(2c). AC_omega and the standard symplectic form are explicit in the Example as well as the Given. The exact circle-moment and Hopf-reduction suppliers were read in full. Regularity and freeness are supplied there for c>0; properness is justified by the compact domain of the action map on the sphere. The repaired invariant-Hamiltonian descent proposition applies and gives h=c, hence X_h=0 by the exact Hamiltonian-field uniqueness theorem, now cited. The n=1 point quotient is explicit.
+
+The direct calculation fixes time normalization: contraction of sum_j(y_j partial_xj - x_j partial_yj) with sum_j dx_j wedge dy_j equals dH. Thus zdot=-iz and the flow is exactly e^{-it}z, without an unspecified time reparametrization. These trajectories are the Hopf fibres and project to points. The general invariant-Hamiltonian assertion is limited to the actual integral-curve intervals and need not give a vanishing field.
+
+This is familiar coordinate symplectic algebra and quotient descent; no external verification was necessary or claimed. Only the queued example and its own manifest/contract/dependency metadata changed. The owning consumer-batch frontier ledger was refreshed. Strict contract, precheck and rendercheck pass. queue-status shows positions 1–50 current, no stale predecessor. No published edit, new item or judge verdict. Next: record repaired/familiar, then position 52.

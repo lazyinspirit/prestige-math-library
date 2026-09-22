@@ -45,12 +45,19 @@ subspace by definition, it contains $x=\mathbf 1(T)x$, and it is invariant under
 $T$ and $T^*$: for $f$ continuous one has $Tf(T)x=(zf)(T)x$ and
 $T^*f(T)x=(\overline zf)(T)x$, both again of the form $g(T)x$ with $g$
 continuous ([[thm-continuous-functional-calculus-properties]]). Hence $H_x$ is
-a **reducing subspace** for $T$ and the restriction $T|_{H_x}$ is again a
-bounded normal operator, for which $x$ is cyclic: the closure of
-$\{f(T|_{H_x})x\}$ equals $H_x$ by construction. Finally, $x$ is cyclic for $T$
-if and only if no nonzero $y\in H$ is orthogonal to every $f(T)x$; this is the
-standard description of a closed span as the orthogonal complement of its
-annihilator ([[def-orthogonality-and-orthogonal-complement]],
-[[def-hilbert-space]], [[def-self-adjoint-positive-unitary-and-normal-operator]]),
-and the case $x=0$ gives $H_x=\{0\}$, which is cyclic for $T$ only when
-$H=\{0\}$, excluded here.
+a **reducing subspace** for $T$. If $x\ne0$, then $H_x\ne\{0\}$ and the
+restriction $R:=T|_{H_x}$ is a bounded normal operator. It is cyclic with
+cyclic vector $x$: every $f(T)\in C^*(I,T)$ is a norm limit of star-polynomials
+$q_n(T,T^*)$, and restriction to $H_x$ gives
+$q_n(R,R^*)\to f(T)|_{H_x}$, so $f(T)|_{H_x}\in C^*(I,R)$. The continuous
+calculus for $R$ is onto $C^*(I,R)$, so its orbit of $x$ contains the original
+orbit $\{f(T)x:f\in C(\sigma(T))\}$, whose closed span is $H_x$ by definition;
+therefore $x$ is cyclic for $R$. If $x=0$, then $H_x=\{0\}$; the restriction to
+this zero space is not fed to the library's nonzero-space functional calculus,
+and $0$ is not cyclic for the original nonzero $H$.
+
+Finally, $x$ is cyclic for $T$ if and only if no nonzero $y\in H$ is
+orthogonal to every $f(T)x$; this is the standard description of a closed span
+as the orthogonal complement of its annihilator
+([[def-orthogonality-and-orthogonal-complement]], [[def-hilbert-space]],
+[[def-self-adjoint-positive-unitary-and-normal-operator]]).

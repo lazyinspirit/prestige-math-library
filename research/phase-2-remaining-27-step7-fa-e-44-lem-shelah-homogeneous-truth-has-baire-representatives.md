@@ -1,0 +1,18 @@
+# Final adjudication — position 44
+
+Disposition: escalated-to-owner. Source status: verified. The rejected item is untouched.
+
+Read the current Statement and entire argument, its direct dependencies, owning batch-15 manifest/coverage and proof contract including risk and boundary claims, Alpha's repair and Terra's final rejection. Ambient ZFC and the specific Shelah construction, rather than a generic assertion about all homogeneous forcings, are the intended conventions.
+
+Terra's objection is sustained. If x is Cohen generic over V[s], the Cohen truth lemma evaluates a formula in V[s][x]. It does not evaluate the same arbitrary formula in V[G]. Step 3.1 therefore has not shown A symmetric-difference U is contained in the nongenerics. Alpha correctly removed the false assertion that all old dense sets are countable, and step 4.1 correctly describes each dense-set failure as a coded closed nowhere-dense set. Conditional absorption of their union would repair that *different* issue, not the truth comparison.
+
+The preceding steps do not supply the comparison. Step 1.1 asks for a base algebra containing a Boolean truth value for a canonical Cohen name over that same base before specifying the embedding/name; the claimed capture is circular as written. In 1.2 an extension of the isomorphism between two embedded ranges yields equivariance of Boolean truth as names move. It does not say a fixed truth value is invariant while the Cohen name moves, nor imply the asserted transitivity on all finite conditions. For example, for the formula that the first Cohen bit is zero, moving that bit moves its nonconstant Boolean truth value. A proof must identify the correct quotient forcing/translated formula and prove that its truth is independent of the remaining generic. F5 supplies no such assertion.
+
+Authorities verified:
+
+- https://people.math.ethz.ch/~fdalio/ZKmodel.pdf — read all of Part III §§1.3–1.6, printed pp.41–42 (and the immediate preceding setup on p.40). In §1.5 Solovay first presents the final model as a further generic extension over the intermediate model containing the chosen real, applies a separate homogeneity result to reduce ambient truth to forcing by the weakest condition, and then uses definability of that forcing assertion to obtain a *new* formula over the intermediate model. Only afterwards is the Borel representative obtained. §1.6 takes the category analogue. This is not the direct equality of model truth asserted in 3.1.
+- https://shelah.logic.at/files/95333/176.pdf — Main Lemma 7.14(c)–(d), Claim 7.15 and Theorem 7.16, complete printed pp.42–43, read. The theorem refers to Solovay's argument. It requires using the free-amalgamation/homogeneity properties, not merely invoking the forcing theorem. The local construction and absorption interfaces are already unresolved at positions 42–43.
+
+Exact unresolved point: construct and prove the Shelah-specific intermediate-model/quotient homogeneity and formula-translation argument for the stated ordinal-sequence parameters, and show it gives one Borel code valid on all the relevant generics. I have not established this argument from the available interfaces and sources. Owner owes that proof (and settlement of the existing construction/absorption suppliers), or an explicitly authorized change of scope/statement. Citing the target theorem itself would not complete this Foundations proof. No defect is attributed to the published forcing theorem or Borel-code lemma for not proving arbitrary formula absoluteness.
+
+Validation: no repairs, new lemmas, dependency changes, judge verdicts or pass stamps. No consumer-batch ledger update is due. Run queue-status before recording; next item is position 45 after acceptance.

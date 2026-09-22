@@ -1,0 +1,9 @@
+# Position 60 — repaired supplier description and inner-model transfer
+
+Read the complete current carrier, owner item resolution and risk record, and exact ZF+DC/same-reals and Borel-code transfer statements. The HOD(S) definition and repaired Baire-representative lemma were independently checked above. F2 still described the discarded whole-stage quotient-homogeneity proof. Replaced only that descriptive clause with the actual free-amalgamation Boolean-value argument and automorphism reading. The supplier's output statement is unchanged.
+
+A rank definition of A supplies a first-order membership formula using set satisfaction and the defining rank as an ordinal parameter. Thus the representative lemma applies to exactly A. The ambient Borel, open and countable nowhere-dense witness codes are reals, hence all lie in N. Same reals makes their evaluations and nowhere-density witnesses agree, and DC supplies any required countable ideal closure. The result therefore holds internally, not merely in the ambient extension.
+
+The infinitely-many-ones subspace is dense with explicitly countable complement; its homeomorphism through Baire space to the irrationals is fixed and internal. Restricting ambient nowhere-dense sets to a dense subspace preserves nowhere density, and taking ambient closure of a nowhere-dense set in a dense subspace is nowhere dense. Thus transport and addition of the rational complement give the ordinary real-line result. There is no claimed global Cantor/real-line homeomorphism.
+
+These code-transfer and topology arguments are familiar, so no additional external verification is required. Updated only F2 and own risk note; synchronized the older merged contract from the current batch entry. Batch/merged strict contracts, precheck and real rendercheck pass. No dependency edge changed. Record repaired/familiar and continue position 61. No published edit or pass stamp.

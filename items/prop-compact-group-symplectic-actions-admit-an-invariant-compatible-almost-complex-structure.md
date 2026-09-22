@@ -41,7 +41,7 @@ also $G$-invariant.
 
 [F2] Every smooth manifold admits a Riemannian metric. [[cor-every-smooth-manifold-admits-a-riemannian-metric]].
 
-[F3] A smooth positive-definite bundle endomorphism has a unique smooth positive-definite square root. [[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]].
+[F3] A smooth self-adjoint positive-definite bundle endomorphism has a unique smooth self-adjoint positive-definite square root. [[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]].
 
 [F4] The action is symplectic: $a_g^*\omega=\omega$ for all $g$, where $a_g(p)=g\cdot p$. [[def-symplectic-and-hamiltonian-lie-group-action]].
 
@@ -55,7 +55,7 @@ also $G$-invariant.
 
 2.2 Define a bundle endomorphism $A$ by $\omega_p(u,v)=h_p(A_pu,v)$; it exists and is unique because $h_p$ is nondegenerate. It is invertible because $\omega_p$ is nondegenerate, and it is skew-adjoint for $h$: expanding $\omega_p(u,v)+\omega_p(v,u)=0$ gives $h_p((A_p+A_p^*)u,v)=0$ for all $u,v$, hence $A^*=-A$. Therefore $-A^2=A^*A$ is $h$-positive-definite, and it commutes with $A$. [step 1.1]
 
-3.1 By [F3] the positive-definite endomorphism $-A^2$ has a unique smooth positive-definite square root; set $$J:=A\,(-A^2)^{-1/2}.$$ Since $A$ commutes with $-A^2$ and with its functional calculus, $J^2=A^2(-A^2)^{-1}=-\operatorname{id}$. [step 2.2, F3]
+3.1 By step 2.2 the endomorphism $-A^2=A^*A$ is self-adjoint and positive definite, so [F3] gives its unique smooth self-adjoint positive-definite square root; set $$J:=A\,(-A^2)^{-1/2}.$$ Since $A$ commutes with $-A^2$ and with its functional calculus, $J^2=A^2(-A^2)^{-1}=-\operatorname{id}$. [step 2.2, F3]
 
 4.1 Compatibility: from $J^2=-\operatorname{id}$ and $A^*=-A$ one computes $\omega(Ju,Jv)=\omega(u,v)$ and that $(u,v)\mapsto\omega(u,Jv)$ is symmetric; positivity follows from $\omega(u,Ju)=h(Au,Ju)=h((-A^2)^{1/2}u,u)>0$ for $u\ne0$, so $g_\omega(u,v):=\omega(u,Jv)$ is a Riemannian metric. [step 3.1]
 

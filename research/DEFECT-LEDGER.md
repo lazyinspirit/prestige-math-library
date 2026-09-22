@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 9664bbd6d9cb by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ f992d7fa5a69 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 9943 |
+| defects caught before publication | 10121 |
 | now mechanically prevented | 371 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -772,38 +772,39 @@
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
 
-## phase-2-remaining-27 — 1144 row(s)
+## phase-2-remaining-27 — 1322 row(s)
 
-| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 7-rejudge |
-|---|---|---|---|---|
-| citation-inaccurate | 28 |  | 285 |  |
-| invalid-inference | 7 |  | 297 |  |
-| false-claim | 72 |  | 43 |  |
-| citation-missing | 5 | 16 | 38 |  |
-| citation-inflated |  | 15 | 37 |  |
-| ill-typed-construction |  |  | 48 |  |
-| false-or-overstrong-statement | 7 |  | 32 | 3 |
-| missing-hypothesis | 8 |  | 33 |  |
-| unlicensed-inference | 28 |  |  |  |
-| false-computation | 13 |  | 11 |  |
-| ill-formed | 20 |  |  |  |
-| missing-case |  |  | 18 |  |
-| arithmetic-error | 8 |  | 8 |  |
-| contract-mismatch | 3 |  | 7 |  |
-| missing-choice-scope | 1 |  | 8 |  |
-| ill-typed-claim | 1 |  | 8 |  |
-| unsupported-inference | 4 |  | 3 |  |
-| false-boundary-disposition |  |  | 6 |  |
-| invalid-witness | 2 |  | 3 |  |
-| false-or-overstrong-title |  |  | 4 |  |
-| undefined-notation | 3 |  |  |  |
-| other | 2 |  | 1 |  |
-| citation-truncated |  |  | 3 |  |
-| reader-repair | 1 |  |  |  |
-| citation-misattributed |  |  | 1 |  |
-| invalid-refutation |  |  | 1 |  |
-| unsupported-universal-property |  |  | 1 |  |
-| frontmatter-schema |  |  | 1 |  |
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 7-rejudge | 8-scope | owner |
+|---|---|---|---|---|---|---|
+| invalid-inference | 7 |  | 341 | 2 |  |  |
+| citation-inaccurate | 28 |  | 311 | 2 |  | 1 |
+| false-claim | 72 |  | 43 |  |  |  |
+| false-or-overstrong-statement | 7 |  | 44 | 9 | 3 | 2 |
+| missing-hypothesis | 8 |  | 48 | 5 |  | 1 |
+| citation-missing | 5 | 16 | 38 |  |  |  |
+| citation-inflated |  | 15 | 37 |  |  |  |
+| ill-typed-construction |  |  | 49 | 1 |  |  |
+| arithmetic-error | 8 |  | 22 | 1 |  |  |
+| unlicensed-inference | 28 |  |  |  |  |  |
+| false-computation | 13 |  | 11 |  |  |  |
+| missing-choice-scope | 1 |  | 20 |  |  |  |
+| ill-formed | 20 |  |  |  |  |  |
+| contract-mismatch | 3 |  | 7 | 2 |  | 7 |
+| ill-typed-claim | 1 |  | 13 | 5 |  |  |
+| missing-case |  |  | 18 |  |  |  |
+| unsupported-inference | 4 |  | 3 | 2 |  |  |
+| false-boundary-disposition |  |  | 6 | 2 |  |  |
+| false-or-overstrong-title |  |  | 8 |  |  |  |
+| invalid-witness | 2 |  | 3 | 1 |  |  |
+| undefined-notation | 3 |  |  |  |  |  |
+| other | 2 |  | 1 |  |  |  |
+| citation-truncated |  |  | 3 |  |  |  |
+| missing-map |  |  |  | 2 |  |  |
+| reader-repair | 1 |  |  |  |  |  |
+| citation-misattributed |  |  | 1 |  |  |  |
+| invalid-refutation |  |  | 1 |  |  |  |
+| unsupported-universal-property |  |  | 1 |  |  |  |
+| frontmatter-schema |  |  | 1 |  |  |  |
 
 ## phase-2-wave-1 — 74 row(s)
 

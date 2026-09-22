@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-p-adic-absolute-value-on-the-rationals, def-metric-completion, thm-metric-completion-exists]
+deps: [def-p-adic-absolute-value-on-the-rationals, thm-metric-completion-exists]
 verification:
   audited: 2026-09-04
   precheck: n/a
@@ -24,7 +24,7 @@ pipeline_run: null
 ## Definition
 
 Let $p$ be a prime. The **space of $p$-adic numbers** $\mathbb Q_p$ is the
-Cauchy-sequence completion constructed in
+Cauchy-sequence quotient and metric constructed in assertions 1--4 of
 [[thm-metric-completion-exists]] for the metric
 
 $$d_p(x,y) := |x-y|_p,$$
@@ -32,7 +32,9 @@ $$d_p(x,y) := |x-y|_p,$$
 where $|\cdot|_p$ is the absolute value of
 [[def-p-adic-absolute-value-on-the-rationals]]. Thus its points are equivalence
 classes of rational $d_p$-Cauchy sequences, two sequences being equivalent when
-their termwise distance tends to $0$. The completion datum is taken in the
-sense of [[def-metric-completion]], so $\mathbb Q$ comes equipped with its named
-dense isometric embedding into $\mathbb Q_p$. The next theorem equips this
-complete metric space with the field operations extending those of $\mathbb Q$.
+their termwise distance tends to $0$. Assertions 1--4 are choice-free and give
+$\mathbb Q_p$ its metric and its named dense isometric embedding of $\mathbb Q$.
+The general theorem's Countable-Choice-dependent completeness assertion is not
+used in this definition. The next theorem equips this metric space with the
+field operations extending those of $\mathbb Q$ and proves its completeness
+choice-free from the fixed countable enumeration of $\mathbb Q$.

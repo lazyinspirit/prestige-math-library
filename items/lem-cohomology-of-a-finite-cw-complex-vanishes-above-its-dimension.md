@@ -11,6 +11,11 @@ axiom_strength: "ZF + AC; inherited from the cellular-cochain comparison."
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, section 2.2"

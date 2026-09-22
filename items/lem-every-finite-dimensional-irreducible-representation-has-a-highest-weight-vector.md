@@ -35,7 +35,7 @@ a highest weight module for some highest weight $\lambda$.
 
 **Given:** The Axiom of Choice, such $\mathfrak g,\mathfrak h$, a chosen positive system, and a nonzero finite-dimensional irreducible module $V$.
 
-[A1] The Axiom of Choice is assumed; it enters through the weight decomposition [L1] and the shift property [L2] ([[def-axiom-of-choice]]).
+[A1] The Axiom of Choice is assumed; among the facts used below, it enters through the weight decomposition [L1] ([[def-axiom-of-choice]]). The algebraic shift property [L2] has no choice hypothesis.
 
 [L1] $V=\bigoplus_\mu V_\mu$ is a direct sum over its finitely many weights, and each weight space is finite dimensional ([[prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces]]).
 

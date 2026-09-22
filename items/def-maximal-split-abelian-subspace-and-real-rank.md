@@ -5,7 +5,8 @@ title: Maximal split abelian subspace and real rank
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-split-real-form, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-riemannian-symmetric-pair-of-noncompact-type, def-axiom-of-choice]
+deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-split-real-form, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-riemannian-symmetric-pair-of-noncompact-type, cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra, thm-every-derivation-of-a-semisimple-lie-algebra-is-inner, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
+justified_by: [thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -35,13 +36,30 @@ $\mathfrak p_0$. The **real rank** of $\mathfrak g_0$ is
 
 $$\operatorname{rank}_{\mathbb R}\mathfrak g_0:=\dim\mathfrak a,$$
 
-which is independent of the choice of $\mathfrak a$. Indeed, split off the
-compact ideals of $\mathfrak g_0$ as in
-[[def-riemannian-symmetric-pair-of-noncompact-type]]. They lie in
-$\mathfrak k_0$ and contribute nothing to $\mathfrak p_0$, so the maximal
-abelian subspaces of $\mathfrak p_0$ are exactly those for the remaining
-noncompact-type summand. Their conjugacy, and hence equality of their
-dimensions, is [[thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k]].
+which is independent of the choice of $\mathfrak a$.  The Lie-algebra form of
+the noncompact symmetric-pair construction in
+[[def-riemannian-symmetric-pair-of-noncompact-type]] applies to the pair
+$(\mathfrak g_0,\theta)$ after its compact ideals are split off: those ideals
+lie in $\mathfrak k_0$ and contribute nothing to $\mathfrak p_0$, while the
+remaining ideal $\mathfrak g_{nc}$ has no compact ideal.  This Lie-algebra datum
+does produce a symmetric pair.  Namely, let
+$G=\operatorname{Aut}(\mathfrak g_{nc})^0$.  Its Lie algebra is
+$\operatorname{Der}(\mathfrak g_{nc})=\operatorname{ad}\mathfrak g_{nc}$, and
+centerlessness identifies this with $\mathfrak g_{nc}$
+([[cor-the-lie-algebra-of-the-automorphism-group-of-a-semisimple-lie-algebra]],
+[[thm-every-derivation-of-a-semisimple-lie-algebra-is-inner]],
+[[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).  The center of
+$G$ is trivial: a central automorphism commutes with every
+$e^{t\operatorname{ad}X}$, so differentiation gives
+$\operatorname{ad}(AX)=\operatorname{ad}X$ for every $X$, and injectivity of
+$\operatorname{ad}$ gives $A=1$.  Conjugation
+$A\mapsto\theta A\theta$ is a global involution of $G$ whose differential is
+$\theta$ under this identification.  Thus $(G,G^\Theta)$ is the required
+noncompact-type symmetric pair, and
+[[thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k]] conjugates any two
+maximal abelian subspaces of its $\mathfrak p_0$.  They therefore have equal
+dimension.  This downstream theorem is the well-definedness justification
+recorded in `justified_by`.
 
 The terminology is related to the split real forms of
 [[def-split-real-form]]: a real form $\mathfrak g_0$ is split precisely when

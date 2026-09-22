@@ -1,0 +1,5 @@
+# FA position 16 reseal
+
+Re-read the current item and its relevant interfaces against the changed page context: thm-fredholm-alternative-for-identity-minus-compact now names its fixed scalar field F and makes all finite dimensions explicit over F. Its three mathematical claims are unchanged. The repair adds boundedness and kernel-summand invariance and corrects choice accounting; no earlier supplier changed.
+
+The real/complex component Riemann estimates and Ascoli compactness argument are independent of Fredholm defect dimensions. The complete argument previously read remains valid under this changed context. Hash 627da7f53e02b46c96d2dea88c3ecd0b99df23b5093b0ee36b568b13e46c7577 equals the prior recorded item_sha256. No bytes changed and no new repair is needed; retain the repaired disposition. This context check is familiar mathematics, with no external verification needed or claimed; prior source verification and focused checks remain in the main evidence. Next: record this reseal, then continue the stale positions in ascending order before position 33.

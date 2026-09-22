@@ -1,0 +1,10 @@
+# Position 51 — context reseal
+
+Read the full current theorem, its original escalation and latest repaired reseal, the GTW construction/sequence-closure interfaces already checked at position 34, and the current choice-topology pages. The current theorem explicitly names the published relative-consistency construction as F5. It does not infer a transitive ground from Con(ZF). This already-settled source-backed interface remains unchanged; the arbitrary-ground BPI repair does not replace or strengthen it.
+
+Inside the construction, full-extension DC with a prescribed starting point and omega-sequence closure yields internal DC. The invariant all-centres radius-1/3 cover is internal and every ball is a proper subset of its component: distance |r-s|/(1+|r-s|)<1/3 bounds |r-s| by 1/2. A locally finite refinement would define the boundary-avoiding set S canonically. Restricting its local neighbourhood to the component, then avoiding finitely many open-set boundaries, gives a nonempty piece in each component; no simultaneous witness selection is needed. A nonempty refinement member inside a proper ball has nonempty boundary by connectedness, making each S_xi proper. The resulting definable selector contradicts the stated obstruction. The witness is explicitly not zero-dimensional, consistently with its nondegenerate connected clopen components.
+
+The local topology and compatibility checks are familiar and need no new external verification. The original and subsequent source evidence remains the basis for F5; this note makes no new source-reading claim. Focused strict batch-14 contract check: zero errors/warnings. No repair or dependency modification required. Retain repaired on unchanged bytes. Next: position 52.
+
+
+Previous receipt item_sha256: 8f6ad870be5ac5b8c660cbac3be08853804452d3c5e5d6450c217434a04b8c80. Current itemHashJudge: 8f6ad870be5ac5b8c660cbac3be08853804452d3c5e5d6450c217434a04b8c80. The item bytes match the prior receipt. Queue-status was run immediately before recording; the recorder enforces ascending reseals. This is terminal evidence, not a judge verdict or pass stamp.

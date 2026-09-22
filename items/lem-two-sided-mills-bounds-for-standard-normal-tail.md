@@ -9,6 +9,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Lemma 1.2.6 and the Gaussian tail estimates (8.5.2) in the proof of Theorem 8.5.1"

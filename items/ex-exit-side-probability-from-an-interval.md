@@ -17,25 +17,35 @@ sources:
 
 ## Example
 
-Assume the Axiom of Choice and let $B$ be a standard Brownian motion started at
-$0$ [[def-brownian-motion]]
-[[def-brownian-motion-started-at-x]]. For the interval with endpoints $-2$ and
-$3$,
+Assume the Axiom of Choice and fix the everywhere-continuous zero-start
+representative $B$ used for the law $P_0$ in
+[[def-brownian-motion-started-at-x]] (hence a standard Brownian motion in the
+sense of [[def-brownian-motion]]). Define $T_c$ from this fixed representative.
+For the interval with endpoints $-2$ and $3$,
 $$P(T_3<T_{-2})=\frac25,\qquad P(T_{-2}<T_3)=\frac35,$$
 where $T_c$ denotes the first hitting time of the level $c$. The two values sum
 to $1$, as they must.
 
 ## Facts & Assumptions
 
-**Given:** AC and a standard Brownian motion started at $0$.
+**Given:** AC and the fixed everywhere-continuous representative of standard
+Brownian motion started at $0$ under $P_0$.
 
 [F1] Two-sided exit probability: for $a<x<b$ and the shifted law $P_x$, $P_x(T_b<T_a)=\frac{x-a}{b-a}$. [[thm-two-sided-exit-probability-for-brownian-motion]]
 
-[F2] The unshifted law is $P_0$, the law of $x+B$ at $x=0$, so $P(T_3<T_{-2})=P_0(T_3<T_{-2})$. [[def-brownian-motion-started-at-x]] [[def-brownian-motion]]
+[F2] The unshifted law is $P_0$, and the hitting times in the Example are
+defined from the same fixed everywhere-continuous zero-start representative,
+so $P(T_3<T_{-2})=P_0(T_3<T_{-2})$.
+[[def-brownian-motion-started-at-x]] [[def-brownian-motion]]
 
 [F3] AC is the ambient assumption of the Brownian construction. [[def-axiom-of-choice]]
 
-[F4] One-dimensional Brownian motion hits every level almost surely, so both $T_3$ and $T_{-2}$ are finite almost surely, and the process cannot be at the two levels at the same time. [[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]] [[def-brownian-motion-started-at-x]]
+[F4] For this fixed everywhere-continuous zero-start representative,
+one-dimensional Brownian motion hits every level almost surely, so both $T_3$
+and $T_{-2}$ are finite almost surely, and the process cannot be at the two
+levels at the same time.
+[[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]]
+[[def-brownian-motion-started-at-x]]
 
 ## Verification
 

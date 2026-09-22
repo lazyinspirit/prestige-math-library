@@ -5,7 +5,7 @@ title: If alpha and beta are roots then alpha plus beta is always a root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-string-property, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [def-axiom-of-choice, thm-root-string-property, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -16,16 +16,17 @@ sources:
       locator: "Chapter II, Corollary 2.35 and Proposition 2.21"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the opposite-root, reducedness and root-string suppliers."
 ---
 
 ## Statement
 
-If $\alpha$ and $\beta$ are roots of a complex semisimple Lie algebra relative
+Assume AC ([[def-axiom-of-choice]]). If $\alpha$ and $\beta$ are roots of a complex semisimple Lie algebra relative
 to a Cartan subalgebra, then $\alpha+\beta$ is again a root.
 
 ## Facts & Assumptions
 
-**Given:** Roots are nonzero functionals with $\mathfrak g_\alpha\ne0$ ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]), and $[\mathfrak g_\alpha,\mathfrak g_\beta]\subseteq\mathfrak g_{\alpha+\beta}$ with $\mathfrak g_\gamma=0$ for $\gamma$ neither a root nor $0$ ([[prop-brackets-of-root-spaces]]). The set of indices $k$ with $\beta+k\alpha\in\Phi\cup\{0\}$ is a nonempty interval $\{-p,\dots,q\}$ ([[thm-root-string-property]]). For every root $\alpha$, the opposite $-\alpha$ is a root ([[cor-opposite-root-spaces-pair-nondegenerately]]), and the only scalar multiples of $\alpha$ that are roots are $\pm\alpha$ ([[cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root]]).
+**Given:** AC; roots are nonzero functionals with $\mathfrak g_\alpha\ne0$ ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]), and $[\mathfrak g_\alpha,\mathfrak g_\beta]\subseteq\mathfrak g_{\alpha+\beta}$ with $\mathfrak g_\gamma=0$ for $\gamma$ neither a root nor $0$ ([[prop-brackets-of-root-spaces]]). The set of indices $k$ with $\beta+k\alpha\in\Phi\cup\{0\}$ is a nonempty interval $\{-p,\dots,q\}$ ([[thm-root-string-property]]). For every root $\alpha$, the opposite $-\alpha$ is a root ([[cor-opposite-root-spaces-pair-nondegenerately]]), and the only scalar multiples of $\alpha$ that are roots are $\pm\alpha$ ([[cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root]]).
 
 ## Refutation
 

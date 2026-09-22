@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Hatcher, Vector Bundles & K-Theory, proof of Theorem 1.16"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
-      locator: "Numerated embedding and classifying map, printed pp.29–33; countable refinement Lemma 1.21, pp.36–37"
+      locator: "Numerated embedding and classifying map, printed pp.29–33; countable regrouping Lemma 1.21, pp.36–37"
     - title: "MIT 18.906 notes, Lecture 20"
       url: https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf
       locator: "Gauss map from a bundle embedding, printed pp.66–68"
@@ -31,10 +31,10 @@ $X\to\operatorname{Gr}_n(\mathbb F^N)$, and
 $e\mapsto(p(e),j(e))$ identifies $E$ with $c_j^*\gamma_n^N$.
 
 A supplied numeration gives an embedding into $X\times\mathbb F^S$ with
-locally finite coordinates. Every numeration has a countable numerable
-refinement under AC, so one may take $S=\mathbb N$ and target
-$\mathbb F^\infty$. Over a compact Hausdorff base, finitely many coordinates
-suffice.
+locally finite coordinates. Under AC, every numeration can be regrouped into
+a countable numerable trivializing cover, whose members need not refine the
+original cover. Thus one may take $S=\mathbb N$ and target $\mathbb F^\infty$.
+Over a compact Hausdorff base, finitely many coordinates suffice.
 
 ## Facts & Assumptions
 

@@ -69,7 +69,7 @@ by $i\lambda$ for any real $\lambda>0$.
 
 2.1 Closed range for closed symmetric $S$. If in addition $S$ is closed, then $\operatorname{ran}(S-z)$ is closed for nonreal $z$: given $(S-z)x_n\to y$, step 1.1 makes $(x_n)$ Cauchy with limit $x$, so $Sx_n\to zx+y$, and closedness of $S$ gives $x\in D(S)$ with $Sx=zx+y$, that is $y=(S-z)x$. [A1, step 1.1]
 
-2.2 (5) implies (3): by 1.1 with $S=T$ and $z=-i$ the map $T+i$ satisfies $\|(T+i)x\|\ge\|x\|$, so its inverse on its range is bounded by $1$; since the range is $H$ by (5), $i\in\rho(T)$, and $T$ is closed by [A5]. The two kernels vanish by [A2] and (5). [A2, A5, step 1.1]
+2.2 (5) implies (3): by 1.1 with $S=T$ and $z=-i$ the map $T+i$ satisfies $\|(T+i)x\|\ge\|x\|$, so its inverse on its range is bounded by $1$; since the range is $H$ by (5), $-i\in\rho(T)$ because $-i-T=-(T+i)$, and $T$ is closed by [A5]. The two kernels vanish by [A2] and (5). [A2, A5, step 1.1]
 
 3.1 (2) implies (4): for nonreal $z$, [A2] and (2) give $\operatorname{ran}(T-z)^\perp=\ker(T^*-\overline z)=\{0\}$, while (2) and step 2.1 show $\operatorname{ran}(T-z)$ is closed; hence the range is all of $H$ by [A3]. [A2, A3, step 2.1]
 

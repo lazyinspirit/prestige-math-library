@@ -5,7 +5,7 @@ title: Sign and positive negative parts of a self adjoint operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, cor-spectral-projections-and-resolution-of-the-identity, def-absolute-value-of-a-bounded-operator, thm-positive-square-root, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, thm-continuous-functional-calculus-properties, def-order-on-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-projection-valued-measure, def-axiom-of-choice]
+deps: [thm-borel-functional-calculus-for-bounded-normal-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, cor-spectral-projections-and-resolution-of-the-identity, def-absolute-value-of-a-bounded-operator, thm-positive-square-root, lem-spectrum-of-a-self-adjoint-operator-is-real, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, thm-continuous-functional-calculus-properties, def-order-on-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-projection-valued-measure, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -22,7 +22,7 @@ sources:
 
 Assume AC. Let $T$ be a bounded self-adjoint operator on a nonzero complex
 Hilbert space $H$, so that $\sigma(T)\subseteq\mathbb R$
-([[thm-continuous-functional-calculus-for-bounded-self-adjoint-operators]]), and
+([[lem-spectrum-of-a-self-adjoint-operator-is-real]]), and
 let $E$ be its spectral projection valued measure. Write
 $$|T|:=|\lambda|(T),\qquad T_+:=\max(\lambda,0)(T),\qquad T_-:=\max(-\lambda,0)(T),\qquad \operatorname{sgn}(T):=s(\lambda)(T),$$
 where $|\lambda|$, $\max(\lambda,0)$, $\max(-\lambda,0)$ are continuous on
@@ -40,7 +40,7 @@ $(\ker T)^\perp$.
 
 ## Facts & Assumptions
 
-[A1] The Borel calculus is a unital $\ast$-homomorphism: $(fg)(T)=f(T)g(T)$, $\overline f(T)=f(T)^*$ and $\mathbf 1_B(T)=E(B)$ for every Borel $B\subseteq\sigma(T)$; it extends the continuous calculus on continuous $f$ ([[thm-borel-functional-calculus-for-bounded-normal-operators]], [[def-borel-functional-calculus-for-a-bounded-normal-operator]]).
+[A1] A bounded self-adjoint operator has $\sigma(T)\subseteq\mathbb R$, and its Borel calculus is a unital $\ast$-homomorphism: $(fg)(T)=f(T)g(T)$, $\overline f(T)=f(T)^*$ and $\mathbf 1_B(T)=E(B)$ for every Borel $B\subseteq\sigma(T)$; it extends the continuous calculus on continuous $f$ ([[lem-spectrum-of-a-self-adjoint-operator-is-real]], [[thm-borel-functional-calculus-for-bounded-normal-operators]], [[def-borel-functional-calculus-for-a-bounded-normal-operator]]).
 
 [A2] Scalar identities for real $\lambda$: $\lambda=\max(\lambda,0)-\max(-\lambda,0)$, $|\lambda|=\max(\lambda,0)+\max(-\lambda,0)$, $\max(\lambda,0)\max(-\lambda,0)=0$, $s(\lambda)^2=\mathbf 1_{\mathbb R\setminus\{0\}}(\lambda)$, $|\lambda|^2=\lambda^2$ and $|\lambda|\ge0$; the functions $\max(\lambda,0)$, $\max(-\lambda,0)$ and $|\lambda|$ are continuous on the compact real spectrum and $s$ is Borel and bounded by $1$. [algebra]
 

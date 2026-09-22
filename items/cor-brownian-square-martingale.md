@@ -18,8 +18,10 @@ sources:
 ## Statement
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. For a standard Brownian
-motion $B$ [[def-brownian-motion]],
+[[def-elementary-predictable-brownian-integrand]], and suppose the filtration
+satisfies the usual conditions. Use the $\mathcal F_0$-normalized representative
+of the standard Brownian motion whose paths are everywhere continuous and
+which starts at $0$, and continue to denote it by $B$ [[def-brownian-motion]].
 $$B_t^2-t=2\int_0^tB_s\,dB_s\qquad\text{up to indistinguishability},$$
 so $B_t^2-t$ is a continuous square-integrable martingale relative to the
 filtration with
@@ -27,11 +29,11 @@ $$E(B_t^2-t)=0,\qquad E\int_0^tB_s^2\,ds=\frac{t^2}{2},\qquad E(B_t^2-t)^2=2t^2 
 
 ## Facts & Assumptions
 
-**Given:** AC, (H), a standard Brownian motion $B$ with $B_0=0$ almost surely, and a finite horizon $T>0$.
+**Given:** AC, (H), the usual conditions, the $\mathcal F_0$-normalized everywhere-continuous adapted representative of a standard Brownian motion $B$ with $B_0=0$ identically, and a finite horizon $T>0$.
  
-[F1] **$B$ is a continuous Brownian Ito process** with drift $0$ and diffusion coefficient $1$. [[def-continuous-brownian-ito-process]] [[def-brownian-motion]]
+[F1] **$B$ is a continuous Brownian Ito process.** Under the usual conditions the full event on which the Brownian paths are continuous and start at $0$ belongs to $\mathcal F_0$; setting the process to $0$ off that event preserves adaptedness, finite-dimensional laws, and the increment-independence hypothesis. The resulting everywhere-continuous adapted process is predictable and is a continuous Brownian Ito process with drift $0$ and diffusion coefficient $1$. [[def-continuous-brownian-ito-process]] [[def-brownian-motion]]
  
-[F2] **Elementary and localized integral of the constant integrand $1$.** The constant $1$ is an elementary predictable integrand with a single block $(0,T]$, its elementary integral is $\int_0^t1\,dB=B_t-B_0$, the $L^2$ integral of an elementary process agrees with its defining sums, and the localized integral of the locally square-integrable constant $1$ is therefore $B$ up to indistinguishability. [[def-elementary-predictable-brownian-integrand]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-ito-integral-for-square-integrable-predictable-processes]] [[thm-localized-ito-integral]] [[def-locally-square-integrable-predictable-brownian-integrand]]
+[F2] **Elementary and localized integral of the constant integrand class.** The one-block elementary process $1_{(0,T]}$ represents the same $L^2(\mathrm dt\otimes P)$ class as the constant process $1$, and its elementary integral is $\int_0^t1_{(0,T]}\,dB=B_t-B_0=B_t$. The $L^2$ integral depends only on that class, and the localized integral of the locally square-integrable constant representative is therefore $B$ up to indistinguishability. [[def-elementary-predictable-brownian-integrand]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-ito-integral-for-square-integrable-predictable-processes]] [[thm-localized-ito-integral]] [[def-locally-square-integrable-predictable-brownian-integrand]]
  
 [F3] **Ito formula for the class.** For $f\in C^{1,2}([0,\infty)\times\mathbb R)$ the one-dimensional Ito formula of [[thm-ito-formula-one-dimensional]] gives $f(t,X_t)=f(0,X_0)+\int_0^t(\partial_tf+b\partial_xf+\tfrac12\sigma^2\partial^2_xf)(s,X_s)ds+\int_0^t\sigma_s\partial_xf(s,X_s)dB_s$ for every continuous Brownian Ito process $X=X_0+\int b+\int\sigma\,dB$, up to indistinguishability.
  

@@ -36,8 +36,9 @@ A **positive system** of $\Sigma$ is a subset
 $\Sigma^+\subseteq\Sigma$ for which there is a regular $H_0\in\mathfrak a$ with
 $$\Sigma^+=\{\lambda\in\Sigma:\lambda(H_0)>0\};$$
 since $\lambda(H_0)\ne0$ for every $\lambda\in\Sigma$, such a set satisfies
-$\Sigma=\Sigma^+\sqcup(-\Sigma^+)$ and is cut out by a linear functional on
-$\mathfrak a$, namely by $H_0$. Write
+$\Sigma=\Sigma^+\sqcup(-\Sigma^+)$ and is cut out on $\mathfrak a^*$ by the
+linear evaluation functional $\operatorname{ev}_{H_0}:\mathfrak a^*\to
+\mathbb R$, $\lambda\mapsto\lambda(H_0)$. Write
 $\Sigma^-=-\Sigma^+$ for the
 **negative** restricted roots.
 

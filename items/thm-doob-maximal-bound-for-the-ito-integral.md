@@ -19,13 +19,18 @@ sources:
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
 [[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable
-process with $E\int_0^TH_s^2ds<\infty$, and let
+process on $[0,T]$, where $T\ge0$, with $E\int_0^TH_s^2ds<\infty$. Extend $H$ by zero after $T$ when applying the global continuous-version theorem, and let
 $M_t=\int_0^tH_s\,dB_s$ be the continuous version of
 [[thm-ito-integral-process-has-a-continuous-martingale-version]]. Then
 $$E\sup_{0\le t\le T}|M_t|^2\le4\,E\int_0^TH_s^2\,ds .$$
 The left-hand side is finite and does not depend on the chosen version, since
 any two continuous versions are indistinguishable. Every continuous version of
-the integral process satisfies the same bound.
+the integral process satisfies the same bound. The path supremum in this
+expectation means its measurable version $S_D=\sup_{q\in D}|M_q|$ on the
+countable scaled dyadic grid $D$ (including both endpoints). Continuity
+identifies it with the path supremum on a measurable event of probability one.
+Indistinguishability here uses that full-event convention, as in the cited
+continuous-version theorem, without assuming completeness of the filtration.
 
 ## Facts & Assumptions
 
@@ -47,14 +52,14 @@ the integral process satisfies the same bound.
 
 **Proof technique:** direct.
 
-1.1 For fixed $m$ the finite-grid quantity $\max_{k\le2^m}|M_{kT/2^m}|^2$ is square-integrable, and [F2] gives $E\max_{k\le2^m}|M_{kT/2^m}|^2\le4EM_T^2=4E\int_0^TH^2ds$. [F1, F2]
+1.1 If $T=0$, $M_0=0$ almost surely and both sides vanish. For $T>0$ and fixed $m\ge1$ the finite-grid quantity $\max_{k\le2^m}|M_{kT/2^m}|^2$ is integrable, and [F2] gives $E\max_{k\le2^m}|M_{kT/2^m}|^2\le4EM_T^2=4E\int_0^TH^2ds$. [F1, F2]
 
-1.2 As $m$ increases the grids $\{kT/2^m:0\le k\le2^m\}$ are nested, so the maxima increase pointwise to the measurable random variable $S_D:=\sup_{q\in D}|M_q|$. By [F3], $S_D=\sup_{t\in[0,T]}|M_t|$ almost surely. [F3]
+1.2 As $m$ increases the grids $\{kT/2^m:0\le k\le2^m\}$ are nested, so the unsquared maxima increase pointwise to the measurable random variable $S_D:=\sup_{q\in D}|M_q|$. By [F3], $S_D=\sup_{t\in[0,T]}|M_t|$ almost surely. [F3]
 
 2.1 Monotone convergence [F4] applies pointwise to $Z_m:=\max_{k\le2^m}|M_{kT/2^m}|^2\uparrow S_D^2$. Hence, using the almost-sure equality in step 1.2, $E\sup_{t\le T}|M_t|^2=ES_D^2=\lim_mEZ_m\le4E\int_0^TH^2ds$, and the bound is finite because the right-hand side is finite. [F1, F4, step 1.1, step 1.2]
 
-3.1 Every continuous version $N$ of the integral satisfies the same identity $EN_t^2=E\int_0^tH^2ds$ and the same discrete martingale property, so the argument gives the bound for $N$; and $N$ is indistinguishable from $M$ by [F5], so the path suprema, and hence the expectations, agree. AC enters only through the declared ambient interfaces [F6]. [F5, F6, step 2.1] ∎
+3.1 For any other continuous version $N$, intersect the fixed-time equality events $\{N_q=M_q\}$ over the countable grid $D$ and the two measurable continuity events. On the resulting measurable probability-one event the paths agree at every time by continuity, and their grid suprema agree. Thus the measurable supremum for $N$ has the same expectation and satisfies the bound, even if $N$ is not adapted. AC enters through the declared ambient interfaces [F6]. [F5, F6, step 2.1] ∎
 
 ## Source notes
 
-Lawler, Proposition 3.2.4, states the maximal bound for the completed integral and proves it by discrete Doob on refining grids. The form here follows exactly that route, with monotone convergence replacing the almost-sure subsequence criterion of Lawler's proof.
+Lawler, Proposition 3.2.4, uses discrete maximal estimates on refining grids to prove a uniform-convergence criterion. The expectation bound here follows directly from the library discrete Doob inequality with p=2 and monotone convergence; no fourth moment is assumed.

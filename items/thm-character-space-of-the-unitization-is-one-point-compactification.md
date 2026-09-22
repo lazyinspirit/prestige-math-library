@@ -5,12 +5,17 @@ title: Character space of the unitization is one-point compactification
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-minimal-c-star-unitization, def-algebraic-unitization-of-a-star-algebra, thm-maximal-ideal-space-is-compact-hausdorff, thm-characters-on-a-unital-banach-algebra-are-continuous, def-character-and-maximal-ideal-space, thm-one-point-compactification-properties, def-one-point-compactification, thm-locally-compact-hausdorff-basics, thm-commutative-gelfand-naimark, thm-compactness-under-continuous-maps, def-axiom-of-choice]
+deps: ["thm-minimal-c-star-unitization", "def-algebraic-unitization-of-a-star-algebra", "thm-maximal-ideal-space-is-compact-hausdorff", "thm-characters-on-a-unital-banach-algebra-are-continuous", "def-character-and-maximal-ideal-space", "thm-one-point-compactification-properties", "def-one-point-compactification", "thm-locally-compact-hausdorff-basics", "thm-commutative-gelfand-naimark", "thm-compactness-under-continuous-maps", "def-axiom-of-choice", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-subset-of-a-hausdorff-space-is-closed"]
 justified_by: []
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Exercise 3.1.15 and Lemma 3.1.20, printed pp. 60–62"
@@ -39,35 +44,30 @@ consistent with the same formula.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a nonzero genuinely nonunital commutative C\*-algebra $A$, its minimal unitization $A^+$, and the quotient character $\chi_\infty$.
+**Given:** AC, nonzero genuinely nonunital commutative $A$, its minimal unitization and quotient character as in the statement.
 
-[L1] $A^+$ is a unital C\*-algebra with norm extending that of $A$, and $A$ is a closed two-sided $\ast$-ideal of codimension one ([[thm-minimal-c-star-unitization]]).
+[A1] AC is assumed for the unitization, compact character-space and Gelfand–Naimark suppliers. ([[def-axiom-of-choice]]).
 
-[L2] $\Delta(A^+)$ is a nonempty compact Hausdorff space in the weak-star topology, which on characters agrees with the pointwise-evaluation topology ([[thm-maximal-ideal-space-is-compact-hausdorff]], [[def-axiom-of-choice]]).
+[F1] The algebraic unitization has product $(a,\lambda)(b,\mu)=(ab+\lambda b+\mu a,\lambda\mu)$ and quotient character $\chi_\infty(a,\lambda)=\lambda$. Under AC the minimal norm makes it a nonzero unital C*-algebra extending the norm of $A$, with $A\oplus0$ a closed ideal. For zero $A$ the unitization is $\mathbb C$. ([[def-algebraic-unitization-of-a-star-algebra]], [[thm-minimal-c-star-unitization]]).
 
-[L3] Characters of a unital Banach algebra are unital and contractive, and the extension $\tilde\varphi(a,\lambda) = \varphi(a)+\lambda$ of a character $\varphi$ of $A$ is a character of $A^+$: it is complex-linear, multiplicative by the product formula of the unitization, nonzero, and $\chi_\infty$ is a character as well ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[def-character-and-maximal-ideal-space]], [[def-algebraic-unitization-of-a-star-algebra]]).
+[F2] A character is a nonzero multiplicative complex-linear functional, with pointwise-evaluation topology on the character space. On a nonzero unital Banach algebra characters are unital and contractive. Under AC its commutative character space is compact Hausdorff, with pointwise topology equal to the weak-star subspace topology. ([[def-character-and-maximal-ideal-space]], [[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[thm-maximal-ideal-space-is-compact-hausdorff]]).
 
-[L4] $\Delta(A^+)$ and $\Delta(A) \cup \{\chi_\infty\}$ are related by the bijection $\Psi$ of [step 1.1] below; the unital Gelfand–Naimark theorem gives $A^+ \cong C(\Delta(A^+))$, under which $A$ corresponds to the ideal of functions vanishing at $\chi_\infty$ ([[thm-commutative-gelfand-naimark]], [[def-axiom-of-choice]]).
+[F3] Under AC the Gelfand transform of a nonzero unital commutative C*-algebra is an isometric unital star-isomorphism onto its continuous functions, given by evaluation at characters. ([[thm-commutative-gelfand-naimark]]).
 
-[L5] The one-point compactification $X^+$ of a locally compact Hausdorff space $X$ is compact and Hausdorff and contains $X$ as an open subspace; this copy of $X$ is dense exactly when $X$ is noncompact. An open subset of a compact Hausdorff space is locally compact and Hausdorff ([[thm-one-point-compactification-properties]], [[def-one-point-compactification]], [[thm-locally-compact-hausdorff-basics]]).
+[F4] An open subset of a locally compact Hausdorff space is locally compact Hausdorff. In the one-point topology, neighborhoods of infinity are complements of closed compact subsets of the original space; an LCH space has compact Hausdorff one-point compactification, and is dense there exactly when noncompact. ([[thm-locally-compact-hausdorff-basics]], [[def-one-point-compactification]], [[thm-one-point-compactification-properties]]).
 
-[L6] A continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]]).
+[F5] Closed subsets of compact spaces are compact, continuous images of compact sets are compact, and compact subsets of Hausdorff spaces are closed. ([[thm-closed-subspace-of-a-compact-space-is-compact]], [[thm-compactness-under-continuous-maps]], [[thm-compact-subset-of-a-hausdorff-space-is-closed]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Define $\Psi : \Delta(A) \cup \{\chi_\infty\} \to \Delta(A^+)$ by $\Psi(\varphi) := \tilde\varphi$ for $\varphi \in \Delta(A)$ and $\Psi(\chi_\infty) := \chi_\infty$. This is well defined and bijective: every character $\chi$ of $A^+$ satisfies $\chi(a,\lambda) = \chi(a,0) + \lambda\chi(0,1) = \chi(a,0)+\lambda$ by linearity and $\chi(0,1) = 1$ from [L3]; if the restriction $\chi|_A$ is zero then $\chi = \chi_\infty$, and otherwise $\chi|_A$ is a nonzero multiplicative linear functional on $A$, that is, a character, and $\chi = \widetilde{\chi|_A}$; conversely the $\tilde\varphi$ and $\chi_\infty$ are characters by [L3]. [L3, algebra]
+1.1 The algebraic correspondence. Put $K=\Delta(A^+)$ and $q=\chi_\infty$. For a character $\varphi$ on $A$, define $E\varphi(a,\lambda)=\varphi(a)+\lambda$. By [F1], $E\varphi((a,\lambda)(b,\mu))=\varphi(a)\varphi(b)+\lambda\varphi(b)+\mu\varphi(a)+\lambda\mu=E\varphi(a,\lambda)E\varphi(b,\mu)$. It is linear, unital, and nonzero. Conversely any $\chi\in K$ has $\chi(a,\lambda)=\chi(a,0)+\lambda$ by [F2]; its restriction to $A$ is either zero, giving $\chi=q$, or a character $\varphi$, giving $\chi=E\varphi$. Restriction is inverse to $E$ on $K\setminus\{q\}$, and $E\varphi\ne q$ because $\varphi$ is nonzero. Contractivity of $E\varphi$ and the norm extension give $|\varphi(a)|\le\|a\|$, so the nonunital characters are bounded too. [A1, F1, F2, algebra]
 
-1.2 $\Psi$ is continuous at every $\varphi \in \Delta(A)$ and at $\chi_\infty$: for a basic evaluation-open set $U = \{\chi \in \Delta(A^+) : |\chi(a_i,\lambda_i) - \tilde\varphi(a_i,\lambda_i)| < \varepsilon\}$ around $\tilde\varphi$ its preimage is $\{\varphi' : |\varphi'(a_i)-\varphi(a_i)| < \varepsilon\}$, open in $\Delta(A)$; for a basic evaluation-open set $U$ around $\chi_\infty$ with data $(a_i,\lambda_i)$ one has $\chi_\infty(a_i,\lambda_i) = \lambda_i$, so $\Psi^{-1}(U) = \{\chi_\infty\} \cup \{\varphi : |\varphi(a_i)| < \varepsilon \text{ for all } i\}$, and its complement in $\Delta(A) \cup \{\chi_\infty\}$ corresponds to the set $K := \bigcup_i \{\varphi : |\varphi(a_i)| \ge \varepsilon\}$, a finite union of closed subsets of the compact space $\Delta(A^+)$ (each $\{\chi : |\chi(a_i,0)| \ge \varepsilon\}$ is closed and does not contain $\chi_\infty$, since $\chi_\infty(a_i,0) = 0$), hence compact and contained in $\Delta(A)$, so $\Psi^{-1}(U)$ is a neighbourhood of $\chi_\infty$ in the one-point compactification topology. [1.1, L2, L5, algebra]
+2.1 Identify the topology on the complement first. For fixed $(a,\lambda)$, evaluation of $E\varphi$ is the continuous function $\varphi\mapsto\varphi(a)+\lambda$. By the evaluation-topology definition [F2], $E:\Delta(A)\to K$ is continuous. Its inverse on its image is restriction, whose evaluation at $a$ is the continuous function $\chi\mapsto\chi(a,0)$. Hence $E$ is a homeomorphism onto $K\setminus\{q\}$ with its subspace topology. Since $K$ is compact Hausdorff by [F2], it is locally compact (the whole space is a compact neighborhood of every point); its complement of the closed singleton $q$ is open and LCH by [F4]. Thus $\Delta(A)$ is LCH without using any assumed compactification topology. [F2, F4, step 1.1]
 
-1.3 $\Delta(A) = \Delta(A^+) \setminus \{\chi_\infty\}$ is an open subset of the compact Hausdorff space $\Delta(A^+)$ (the complement of a point), hence locally compact and Hausdorff by [L5]; and it is dense in $\Delta(A^+)$: if $\chi_\infty$ were isolated, then under the isomorphism $A^+ \cong C(\Delta(A^+))$ of [L4] the ideal $A \cong \{f : f(\chi_\infty) = 0\}$ would contain the function that is $1$ off $\chi_\infty$ and $0$ at $\chi_\infty$, which is then an identity for that ideal, making $A$ unital, contrary to the hypothesis; so $\chi_\infty$ is not isolated, which for a compact Hausdorff space means precisely that the complement is dense. [1.1, L2, L4, L5, algebra]
+2.2 The point $q$ is not isolated. Under the isomorphism $\Gamma:A^+\to C(K)$ of [F3], $\Gamma(a,\lambda)(q)=\lambda$. Therefore $\Gamma(A\oplus0)$ is exactly the ideal $J=\{f\in C(K):f(q)=0\}$: one inclusion follows by evaluation, and for the reverse use surjectivity and the same equality. If $q$ were isolated, the function equal to zero at $q$ and one on its complement would be continuous and an identity for $J$. This ideal is nonzero because $A$ is nonzero, so its identity would be nonzero; its preimage would be a two-sided identity for $A$, contradicting genuine nonunitality. Hence $q$ is not isolated and $K\setminus\{q\}$ is dense. It is noncompact: otherwise its continuous image in Hausdorff $K$ would be closed by [F5], making $q$ isolated. [A1, F1, F2, F3, F5, step 1.1, algebra]
 
-2.1 The space $\Delta(A) \cup \{\chi_\infty\}$ with the topology that makes $\{\chi_\infty\}$ the point at infinity of the one-point compactification of $\Delta(A)$ is compact and Hausdorff by [L5] (using local compactness and Hausdorffness of $\Delta(A)$ from [step 1.3]), and $\Psi$ is a continuous bijection from it onto the Hausdorff space $\Delta(A^+)$ by [step 1.1] and [step 1.2], hence a homeomorphism by [L6]; here A^+ is a unital C*-algebra with A as a closed ideal of codimension one by [L1]. [step 1.1, step 1.2, step 1.3, L1, L2, L5, L6]
+3.1 Compare all neighborhoods at infinity. Extend $E$ to a bijection $\Psi:\Delta(A)^+\to K$ by sending the added point to $q$. The two topologies already agree off infinity by step 2.1. If $U$ is open in $K$ and contains $q$, its complement $D=K\setminus U$ is compact by [F5] and contained in $K\setminus\{q\}$. The inverse homeomorphism in step 2.1 carries $D$ to a compact subset of $\Delta(A)$, which is closed because that space is Hausdorff. Thus $\Psi^{-1}U$ is open at infinity by [F4]. Conversely, if $C$ is closed compact in $\Delta(A)$, then $E(C)$ is compact in Hausdorff $K$ and hence closed by [F5]; its complement is an open neighborhood of $q$ corresponding to $\Delta(A)^+\setminus C$. This proves equality of the topologies and that $\Psi$ is a homeomorphism. This argument also covers open sets containing both a character and infinity; no preimage is incorrectly confined to $\Delta(A)$. [F4, F5, step 2.1, step 2.2]
 
-3.1 By [step 2.1] $\Delta(A^+)$ is homeomorphic to the one-point compactification of $\Delta(A)$ and equals $\{\tilde\varphi : \varphi \in \Delta(A)\} \cup \{\chi_\infty\}$, with the identification of $\Delta(A)$ as the open dense subspace obtained by deleting $\chi_\infty$; the zero algebra case is the separate convention of the statement. [step 2.1] ∎
-
-## Remarks
-
-- **Genuine nonunitality is used twice**: to build the minimal unitization and to ensure $\chi_\infty$ is not isolated in [step 2.1].
-- **The topology at infinity is the weak-star topology.** The compactness argument in [step 1.2] uses only that characters are pointwise limits of characters and that the character space of $A^+$ is compact.
+4.1 The zero case and conclusion. If $A=0$, [F1] gives $A^+=\mathbb C$. A nonzero complex-linear multiplicative functional on $\mathbb C$ is the identity: it has value one at 1 by [F2], so at $\lambda$ it has value $\lambda$. There are no nonzero linear functionals from the zero algebra. Hence $\Delta(A)=\varnothing$ and $K$ is the singleton, exactly $\varnothing^+$. Its original subspace is not dense; density was asserted only in the nonzero genuinely nonunital case of step 2.2. In that case step 1.1 proves the displayed disjoint character decomposition, step 2.1 the complement homeomorphism and step 3.1 the one-point compactification with its weak-star topology. [F1, F2, F4, step 1.1, step 2.1, step 2.2, step 3.1, algebra] ∎

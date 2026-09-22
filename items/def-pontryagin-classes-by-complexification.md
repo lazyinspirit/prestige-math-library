@@ -34,7 +34,8 @@ complexification $E_{\mathbb C}$ is determined by $E$ up to canonical
 isomorphism, so its even Chern classes are determined, and the sign $(-1)^i$
 is a fixed normalization (it makes $p_i$ of a line vanish and makes the top
 class $p_n$ of an oriented rank-$2n$ bundle equal to $e(E)^2$ in the next
-items). The odd Chern classes of $E_{\mathbb C}$ are two-torsion by
+items). When $E$ is numerable and $B$ is a path-connected paracompact
+Hausdorff CW complex, the odd Chern classes of $E_{\mathbb C}$ are two-torsion by
 [[cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion]] and
 enter no Pontryagin class; conjugation invariance of the even classes,
 $c_{2i}(\overline{E_{\mathbb C}})=c_{2i}(E_{\mathbb C})$, is what makes the

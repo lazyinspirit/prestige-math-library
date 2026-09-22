@@ -32,7 +32,7 @@ countably many classes per level, directed classes, sequential lower bounds and
 the transfer clause, together with the extension relation between models. Sweet
 forcings are countable unions of directed sets and hence ccc; Claim 7.4's
 uniform density transfer and the amalgamation theorem build new conditions along
-a complete suborder; universal-meagre forcing and its two-step composition
+a complete suborder; universal-meagre forcing and, under AC, its two-step composition
 preserve sweetness and absorb all old closed nowhere-dense sets into one coded
 meagre envelope. Continuous countable unions, the partial-isomorphism extension
 and a CH-length bookkeeping recursion then produce one ccc complete Boolean
@@ -41,8 +41,10 @@ homogeneous enough to turn generic truth about a countable ordinal sequence
 into an open approximation modulo meagre error. The hereditary
 ordinal-sequence-definable inner model $N=HOD(S)$ satisfies ZF+DC, has the same
 reals and ordinals, and every set of reals in it has the Baire property;
-fragment-by-fragment formal transfer gives the equiconsistency of ZFC and
-ZF+DC plus universal Baire property with no inaccessible hypothesis.
+Shelah's published conclusion gives the equiconsistency of ZFC and ZF+DC plus
+universal Baire property with no inaccessible hypothesis. The full-extension
+definable-Baire clause comes directly from the same source theorem, not by
+transferring witnesses upward from $N$.
 
 The lower branch works from RAISONNIER filters: rapid filters extending the
 Fréchet filter are non-measurable by Mokobodzki's argument, the Raisonnier
@@ -51,4 +53,7 @@ order together with Fubini makes the constructible null union null, which makes
 $F(x)$ rapid. Hence boldface $\Sigma^1_3$ measurability forces the ambient
 $\omega_1$ to be inaccessible in $L$; with the published Solovay Levy-collapse
 construction this is exactly the consistency strength of an inaccessible, and
-the separating model shows that universal Baire property is strictly weaker.
+the separating model shows that universal Baire property does not imply
+universal measurability. The equiconsistency statements separately calibrate
+the sufficient hypotheses for the two constructions; they are not used to
+assert an unproved nonimplication between bare consistency statements.

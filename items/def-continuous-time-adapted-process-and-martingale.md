@@ -35,7 +35,9 @@ interface are declared as dependencies of this item.
    [[def-continuous-time-stopping-time]] the **stopped process** is
    $$X^{\tau}_t(\omega):=X_{t\wedge\tau(\omega)}(\omega),\qquad t\ge0,$$
    with the convention $t\wedge\infty:=t$, so no value $X_\infty$ is ever
-   required and $X^\tau_0=X_0$ identically. If in addition $\tau\le c$ for a
+   required and $X^\tau_0=X_0$ identically. This formula defines a pathwise
+   family; adaptedness of $X$ alone does not assert measurability or
+   adaptedness of its stopped values. If in addition $\tau\le c$ for a
    deterministic constant $c$, then $X^\tau_t=X_{t\wedge\tau}$, and only the
    values of $X$ on $[0,c]$ enter. Stopping at a stopping time is not the same
    as replacing a process by a modification; it is a pathwise operation.
@@ -52,14 +54,19 @@ interface are declared as dependencies of this item.
    continuity.
 
 4. **Local martingale.** $X=(X_t)_{t\ge0}$ is a **local martingale** relative
-   to $(\mathcal F_t)$ when it is adapted and there exist stopping times
-   $\tau_1\le\tau_2\le\cdots$ with $\tau_n\uparrow\infty$ almost surely such
-   that for every $n$ the stopped process
+   to $(\mathcal F_t)$ when it is adapted, $E|X_0|<\infty$, and there exist stopping times
+   $(\tau_n)_{n\ge0}$ with $\tau_0\le\tau_1\le\cdots$ and
+   $\tau_n\uparrow\infty$ almost surely such that for every $n\ge0$ the stopped process
    $$X^{\tau_n}-X_0=(X_{t\wedge\tau_n}-X_0)_{t\ge0}$$
    is a martingale in the sense of clause 3. The sequence $(\tau_n)$ is called
-   a **localizing sequence**. The initial value is subtracted so that the
-   localized process starts at $0$; no claim is made that $X$ itself is
-   integrable at any time, and no claim is made that $X$ has continuous paths.
+   a **localizing sequence**. Equivalently, every $X^{\tau_n}$ is a
+   martingale: adaptedness makes the integrable variable $X_0$ measurable with
+   respect to every $\mathcal F_t$, so the constant process with value $X_0$
+   is a martingale and may be added to, or subtracted from, each stopped
+   process. The centering merely makes every localized process start at $0$;
+   apart from the required integrability of $X_0$, no claim is made that $X$
+   is integrable at a positive deterministic time, and no claim is made that
+   $X$ has continuous paths.
 
 5. **Path and integrability attributes.** A process has **continuous paths**
    when $t\mapsto X_t(\omega)$ is continuous on $[0,\infty)$ for every $\omega$
@@ -71,20 +78,24 @@ interface are declared as dependencies of this item.
    a modification of a martingale need not be adapted, so every later statement
    names the adapted versions it uses.
 
-The following two remarks record the conventions in which the vocabulary is
-used below, and are direct consequences of the clauses above.
+The following remarks specify what follows directly from this vocabulary.
 
 1. **A martingale is a local martingale.** If $M$ is a martingale, the constant
-   sequence $\tau_n:=n$ localizes it: the stopped process $M^{n}-M_0$ is again
+   sequence $\tau_n:=n$, $n\ge0$, localizes it: the stopped process $M^{n}-M_0$ is again
    a martingale by the martingale identity applied at the deterministic times
    $s\wedge n\le t\wedge n$. The converse fails; a local martingale need not be
    a martingale, and no such implication is used in this development.
-2. **Localization is stable under stopping.** If $(\tau_n)$ localizes $X$ and
-   $\sigma$ is any stopping time, then the original sequence $(\tau_n)$
-   localizes $X^\sigma$: it still increases to infinity, and the stopped
-   pieces $(X^{\sigma})^{\tau_n}=X^{\sigma\wedge\tau_n}$ are stopped versions
-   of the martingales $X^{\tau_n}-X_0$, hence are martingales. This remark is used by the localized-integral
-   item below.
+2. **Localization after a separately justified stopping operation.** Suppose
+   $(\tau_n)$ localizes $X$, $\sigma$ is a stopping time, $X^\sigma$ is
+   adapted, and each $(X^{\tau_n}-X_0)^\sigma$ is a martingale. Then
+   $(\tau_n)$ localizes $X^\sigma$. Indeed it still increases to infinity,
+   $(X^\sigma)_0=X_0$, and the pathwise identity
+   $$(X^\sigma)^{\tau_n}-(X^\sigma)_0=X^{\sigma\wedge\tau_n}-X_0=(X^{\tau_n}-X_0)^\sigma$$
+   verifies exactly clause 4. The stopped-piece martingale assertion and
+   adaptedness are hypotheses here, not consequences of the unrestricted
+   all-pairs definition. They must be established in each application.
+   The sequence $(\sigma\wedge\tau_n)$ is not a substitute for $(\tau_n)$:
+   its almost-sure limit is $\sigma$, which need not be infinity.
 
 No path continuity, no right continuity of the filtration, and no completeness
 of the underlying probability space is imposed by this definition. Choice

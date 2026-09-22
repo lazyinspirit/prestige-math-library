@@ -1,0 +1,10 @@
+# Position 43 — independent context reseal
+
+Read the current carrier, owner resolution and own risk/boundary contract against the corrected CH construction and UM absorption supplier already reviewed. The repaired CH construction retains ccc, complete stage embeddings, the final union identity, and arbitrarily late canonical UM quotients. Its explicit use of the unrestricted source extension interface does not alter these outputs.
+
+For each ordinal coordinate the set of deciding conditions is dense by the forcing theorem (the name has set-rank bounded possible ordinal values); AC chooses maximal deciding antichains. Ccc makes their countable union countable. Bounding their birth stages places every Boolean condition in a single complete stage, and maximality remains valid there. Ground ordinal labels do not require a bound below omega-one. Over L, names and enumerations have ordinal codes via its canonical definable set-like well-order; a real records least enumeration indices met by the generic, including padded finite antichains. Thus the coding is restricted correctly to the constructible branch.
+
+The canonical UM envelope absorbs all old closed nowhere-dense codes. In the intermediate ZFC model, every meagre Borel set has a coded such cover, so its interpretation, including new reals, is included. The later forcing preserves the closed nowhere-dense code properties. This is not an arbitrary equivalence-of-forcings transfer. Verified the precise stage/quotient conclusions in Shelah Main Lemma 7.14 and Claim 7.15, printed pp.42–43, https://shelah.logic.at/files/95333/176.pdf; the antichain and ordinal-code reasoning is familiar. Preserve the settled repaired disposition. No new mathematical obligation is introduced by the context change.
+
+
+Current itemHashJudge: 27f60c9b2491a0be661a08a65aa0194f003362747e50c39e16414070c47d864e, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

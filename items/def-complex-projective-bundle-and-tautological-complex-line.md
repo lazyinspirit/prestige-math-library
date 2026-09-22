@@ -5,13 +5,16 @@ title: Complex projective bundle and tautological complex line
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-real-and-complex-topological-vector-bundle, def-euler-class-by-zero-section-pullback-of-the-thom-class, lem-complex-orientation-of-underlying-real-bundles, def-stiefel-space-grassmannian-and-tautological-bundle, def-axiom-of-choice]
+deps: [def-real-and-complex-topological-vector-bundle, def-euler-class-by-zero-section-pullback-of-the-thom-class, def-stiefel-space-grassmannian-and-tautological-bundle, def-axiom-of-choice, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, thm-subordinate-partitions-of-unity-exist, def-oriented-real-vector-bundle-and-oriented-frame-bundle]
 axiom_strength: "ZF + AC; inherited from the bundle and Thom suppliers."
 provenance:
   statement: literature-derived
   proof: not-applicable
 sources:
   references:
+    - title: "Rolf Schon, Fibrations Over a CWh-Base, Theorem 2"
+      url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/schoen.pdf
+      locator: "pp.165–166, total-space CW type"
     - title: "Hatcher, Vector Bundles & K-Theory, section 3.1"
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Projective bundles and the class x, printed pp.77-82"
@@ -23,7 +26,7 @@ sources:
 ## Definition
 
 Assume AC. Let $E\to B$ be a numerable complex vector bundle of rank $n\geq1$
-over a CW complex $B$, with zero section $0_B$ and total space $E$. Its
+over a paracompact Hausdorff CW complex $B$, with zero section $0_B$ and total space $E$. Its
 **projective bundle** is the quotient
 $$P(E):=(E\setminus 0_B(B))/\mathbb C^\times,$$
 where $\lambda\in\mathbb C^\times$ acts fiberwise by $v\mapsto\lambda v$; write
@@ -49,11 +52,26 @@ structure induced from $E$; its transition functions are the projectivized
 linear maps restricted to the selected line, so it is a complex line bundle
 over $P(E)$.
 
-The underlying real bundle $(\gamma_E)_{\mathbb R}$ carries the complex
-orientation of [[lem-complex-orientation-of-underlying-real-bundles]]; it is
-numerable, so its Euler class in the sense of
-[[def-euler-class-by-zero-section-pullback-of-the-thom-class]] is defined. We
-put
+Here is the base and orientation justification needed to define its Euler
+class. The numeration for $E$ also numerates the displayed projective charts.
+The CW complex $B$ is CGWH. The fiber $\mathbb{CP}^{n-1}$ is compact Hausdorff and a finite CW complex
+(with one cell in dimensions $0,2,\ldots,2n-2$). Thus
+[[lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type]]
+applies and makes $P(E)$ paracompact Hausdorff, CGWH, and of CW type. The tautological
+line is locally trivial: in a projective coordinate chart $v_j\ne0$, choose
+the unique representative with $v_j=1$ and write each vector on the line as
+its scalar multiple. These charts, combined with the charts of $E$, give
+linear trivializations. Under AC (hence DC),
+[[thm-subordinate-partitions-of-unity-exist]] numerates their open cover.
+
+Orient the underlying real line bundle by the frame $(v,iv)$ in each such
+complex trivialization. Changing $v$ to $(a+ib)v$ has real matrix
+$\begin{pmatrix}a&-b\\b&a\end{pmatrix}$, of determinant $a^2+b^2>0$.
+Hence these orientations agree on overlaps by
+[[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]. This direct
+rank-one construction uses no CW structure on $P(E)$ itself. The resulting
+numerable oriented real rank-two bundle is in the general Thom scope, so
+[[def-euler-class-by-zero-section-pullback-of-the-thom-class]] defines
 $$x=x_E:=e\bigl((\gamma_E)_{\mathbb R}\bigr)\in H^2(P(E);\mathbb Z).$$
 Defining $x$ by the Euler class of the tautological line avoids any circular use
 of Chern classes, which are introduced only afterwards on this page. For the

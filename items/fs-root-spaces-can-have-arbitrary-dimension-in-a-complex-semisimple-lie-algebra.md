@@ -5,7 +5,7 @@ title: Root spaces can have arbitrary dimension in a complex semisimple Lie alge
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two, def-coroot-of-a-lie-algebra-root, thm-root-sl-two-triple]
+deps: [def-axiom-of-choice, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two, def-coroot-of-a-lie-algebra-root, thm-root-sl-two-triple]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -16,17 +16,18 @@ sources:
       locator: "Chapter II, Proposition 2.21"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the one-dimensionality and root-triple suppliers."
 ---
 
 ## Statement
 
-The root spaces of a complex semisimple Lie algebra relative to a Cartan
+Assume AC ([[def-axiom-of-choice]]). The root spaces of a complex semisimple Lie algebra relative to a Cartan
 subalgebra can have arbitrary dimension, so no uniform bound on
 $\dim\mathfrak g_\alpha$ holds.
 
 ## Facts & Assumptions
 
-**Given:** Root spaces are the eigenspaces $\mathfrak g_\alpha=\{x:[H,x]=\alpha(H)x\text{ for all }H\in\mathfrak h\}$ of [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], and for a root $\alpha$ the theorem [[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]] asserts $\dim\mathfrak g_\alpha=1$. In $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ ([[def-special-linear-lie-algebra-sl-two]]) the Cartan subalgebra $\mathbb Ch$ has a root $\alpha$ with $\alpha(h)=2$, and the root triple of [[thm-root-sl-two-triple]] realizes the roots $\pm\alpha$ ([[def-coroot-of-a-lie-algebra-root]]).
+**Given:** AC; root spaces are the eigenspaces $\mathfrak g_\alpha=\{x:[H,x]=\alpha(H)x\text{ for all }H\in\mathfrak h\}$ of [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], and for a root $\alpha$ the theorem [[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]] asserts $\dim\mathfrak g_\alpha=1$. In $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ ([[def-special-linear-lie-algebra-sl-two]]) the Cartan subalgebra $\mathbb Ch$ has a root $\alpha$ with $\alpha(h)=2$, and the root triple of [[thm-root-sl-two-triple]] realizes the roots $\pm\alpha$ ([[def-coroot-of-a-lie-algebra-root]]).
 
 ## Refutation
 

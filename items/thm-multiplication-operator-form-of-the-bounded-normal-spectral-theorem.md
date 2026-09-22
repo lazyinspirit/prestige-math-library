@@ -5,7 +5,7 @@ title: Multiplication operator form of the bounded normal spectral theorem
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, thm-cyclic-spectral-representation, def-cyclic-vector-and-cyclic-normal-operator, lem-scalar-and-complex-measures-from-a-pvm, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-separable-space, def-axiom-of-choice]
+deps: [lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, thm-cyclic-spectral-representation, def-cyclic-vector-and-cyclic-normal-operator, thm-continuous-functional-calculus-for-bounded-normal-operators, def-c-star-algebra-generated-by-a-normal-operator, lem-scalar-and-complex-measures-from-a-pvm, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-separable-space, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -41,7 +41,7 @@ index set may be taken finite or countable.
 
 [A2] If $x\in H$ has cyclic subspace $H_x$, then $U_x[f]:=f(T)x$ extends to a unitary $U_x:L^2(\sigma(T),E_x)\to H_x$ with $U_xM_z=TU_x$, where $E_x$ is the finite positive regular measure $\langle E(\cdot)x,x\rangle$ ([[thm-cyclic-spectral-representation]], [[lem-scalar-and-complex-measures-from-a-pvm]]).
 
-[A3] If $H_j$ reduces $T$, then both $T$ and $T^*$ preserve $H_j$ and agree there with the restriction and its adjoint. Hence a vector cyclic for $T|_{H_j}$ has the same cyclic subspace when computed for $T$, namely $H_x=H_j$ ([[def-cyclic-vector-and-cyclic-normal-operator]]).
+[A3] If $H_j$ reduces $T$ and $R_j:=T|_{H_j}$, then $T^*|_{H_j}=R_j^*$ and every star-polynomial restricts by $q(T,T^*)|_{H_j}=q(R_j,R_j^*)$. The normal calculus maps onto $C^*(I,R_j)$, the norm closure of those restricted star-polynomials ([[def-cyclic-vector-and-cyclic-normal-operator]], [[thm-continuous-functional-calculus-for-bounded-normal-operators]], [[def-c-star-algebra-generated-by-a-normal-operator]]).
 
 [A4] Orthogonal direct sums of Hilbert spaces: vectors with pairwise orthogonal component subspaces have squares of norms summing, and a direct sum of unitaries between corresponding summands is a unitary between the Hilbert sums; the direct sum of multiplication operators acts componentwise ([[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
@@ -53,7 +53,7 @@ index set may be taken finite or countable.
 
 **Given:** A nonzero complex Hilbert space $H$ and a bounded normal operator $T$ with spectral PVM $E$; a family $(H_j)$ as in the maximal-orthogonal-family lemma, with cyclic vectors $x_j\in H_j$.
 
-1.1 For each $j$ the vector $x_j$ has cyclic subspace $H_{x_j}=H_j$ for the operator $T$, since $H_j$ is $T$-invariant and the closed span of $\{f(T|_{H_j})x_j\}$ equals $H_j$. [A1, A3]
+1.1 For each $j$ put $R_j:=T|_{H_j}$. Since $H_j$ reduces $T$, every star-polynomial in $T,T^*$ preserves $H_j$, and norm approximation in $C^*(I,T)$ shows $f(T)x_j\in H_j$ for every $f\in C(\sigma(T))$; hence $H_{x_j}\subseteq H_j$. Conversely, if $g\in C(\sigma(R_j))$, choose star-polynomials $q_n(R_j,R_j^*)\to g(R_j)$ using the range description of the calculus. Then $q_n(R_j,R_j^*)x_j=q_n(T,T^*)x_j\in H_{x_j}$, so closedness gives $g(R_j)x_j\in H_{x_j}$. Since $x_j$ is cyclic for $R_j$, these vectors have dense span in $H_j$, whence $H_j\subseteq H_{x_j}$ and therefore $H_{x_j}=H_j$. [A1, A3]
 
 2.1 For each $j$ the cyclic representation gives a unitary $U_j:L^2(\sigma(T),E_{x_j})\to H_j$ with $U_j[f]=f(T)x_j$ on continuous $f$ and $U_jM_z=TU_j$. [step 1.1, A2]
 

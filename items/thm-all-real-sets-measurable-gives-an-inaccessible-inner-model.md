@@ -32,7 +32,7 @@ cardinal. No arithmetized consistency implication is asserted by this item.
 
 [F3] [[thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l]]: under ZF+Countable Choice and boldface $\Sigma^1_3$ measurability, the ambient $\omega_1$ is inaccessible in $L$.
 
-[F4] [[thm-constructible-inner-model-semantic-and-formal-schema]] with [[thm-constructible-universe-satisfies-choice]]: for every model of ZF, its constructible universe satisfies ZFC and has the same ordinals.
+[F4] [[thm-constructible-inner-model-semantic-and-formal-schema]] with [[thm-constructible-universe-satisfies-choice]]: for each fixed ZFC axiom, ZF proves that axiom relativized to its constructible class $L$; in particular the ambient ZF universe proves internally that $L$ satisfies ZFC. The separate external set-model clause of the first supplier is not applied to the proper class $V$.
 
 [F5] [[def-lc-inaccessible-and-mahlo-cardinals]]: the definition of inaccessibility, so that the same ordinal certified in [F3] is verified to be uncountable, regular and a strong limit inside $L$.
 
@@ -44,6 +44,6 @@ cardinal. No arithmetized consistency implication is asserted by this item.
 
 2.1 By [F3] the ambient $\omega_1$ is inaccessible in $L$. [F3, step 1.1, step 1.2]
 
-3.1 By [F4], $L$ satisfies ZFC and has the same ordinals as $V$; by [F5] the ordinal certified in step 2.1 is uncountable, regular and a strong limit in $L$, so $L\models$ "there is an inaccessible cardinal". [F4, F5, step 2.1]
+3.1 Apply the fixed-axiom relativization clause of [F4] inside the given ambient ZF universe. It proves that its definable constructible class $L$ satisfies every ZFC axiom. Step 2.1 already says that the ambient $\omega_1$, viewed as an ordinal of $L$, is inaccessible there; equivalently [F5] verifies inside $L$ that it is uncountable, regular and a strong limit. Hence $L\models$ "there is an inaccessible cardinal". [F4, F5, step 2.1]
 
 4.1 The steps above give the semantic conclusion that the ambient $\omega_1$ is inaccessible in the definable inner model $L\models\mathrm{ZFC}$. The formal-inner-model supplier [F4] expressly supplies no arithmetized consistency transfer, so this proof stops at that exact conclusion. [step 2.1, step 3.1, F4] ∎

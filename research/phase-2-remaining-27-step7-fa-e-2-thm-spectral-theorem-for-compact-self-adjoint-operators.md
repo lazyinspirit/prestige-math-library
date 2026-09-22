@@ -1,0 +1,21 @@
+# FA item 2 — repaired
+
+Queue position 2, group e. Position 1 was successfully recorded before this review began.
+
+Reviewed the entire current spectral theorem and its dependency statements, A/B page context, batch-3 manifest and coverage, proof-contract citation mapping, derivations, boundaries and historical risk review. Also reviewed Alpha's local-finiteness repair (`phase-2-remaining-27-alpha-step7-e.md`, entry at line 124), the original Terra rejection and its final rejudge in `phase-2-remaining-27-judge.jsonl` (lines 84 and 1688). The prior risk review's claim that the inverse identities were checked does not establish correctness: the current 5.1 indeed double-counted T and incorrectly said that mu I-T kills the kernel component.
+
+The theorem retains Countable Choice, both scalar fields for the decomposition, complex scalars only for the resolvent, finite-subset norm convergence, finite nonzero multiplicities, local finiteness away from zero, and no choice of a kernel basis. Alpha's correction of the neighbourhood quantifier is mathematically right.
+
+Independent proof audit: the unit ball of E_lambda is a closed subset of lambda^{-1} times the compact image closure, giving finite dimension. The threshold finiteness argument was rewritten to the finite-cover argument already specified in the manifest: cover the compact image closure by finitely many epsilon/2 balls; each ball can meet unit-eigenvector images from at most one eigenvalue of modulus at least epsilon, since two such images have squared distance at least 2 epsilon^2. This proves finiteness without any infinite choice of distinct eigenvalues. Countable Choice then applies to the zero-based threshold family Sigma_{1/(n+1)} and to the finite orthonormal bases. The extremal lemma on the closed invariant complement forces T to vanish there; I made explicit that compactness also holds with the restricted codomain. Orthogonality and the double-complement theorem identify M=(ker T)^perp=closure(ran T). Bessel and orthogonal-summation convergence give the spectral expansion.
+
+For mu nonzero outside Sigma, the finite set of eigenvalues with modulus at least |mu|/2 supplies a positive uniform gap delta. The diagonal inverse series converges by the square-summable orthogonal-family lemma and has norm bound max(delta^{-1},|mu|^{-1}). The new 5.1 proves, for each finite F,
+(mu I-T) sum_F (mu-lambda)^{-1} P_lambda z = sum_F P_lambda z,
+and passes to the limit by boundedness. The kernel term maps to n(z), not zero. For the reverse identity, self-adjointness gives P_lambda T=lambda P_lambda and Tw lies in M, so the complementary component of (mu I-T)w is mu n(w). Both inverse identities follow without subtracting T twice. Eigenvalues lie in the spectrum by noninjectivity. Empty Sigma and H={0} are covered by empty sums; if Sigma is empty the extremal lemma forces T=0. No new dependency lemma, theorem, page or supplier edit is required.
+
+Removed the unused and unsupported claim in A3 that the definition of bounded operator proves completeness of B(H); no step needs completeness of B(H). Updated this item's derivation and citation-use mappings in the batch and merged proof contracts, preserving prior independent-review evidence. Updated only its existing consumer rows in the batch-3 dependency ledger and refreshed the unified ledger.
+
+Source status: familiar. Finite-cover separation, Hilbert orthogonal decomposition, square-summable orthogonal expansions and the bounded diagonal resolvent construction are familiar mathematics; their complete local arguments and the cited interfaces suffice for this review. No external source reading is claimed. Exact local suppliers are the frontmatter dependency IDs and source sections in `phase-2-remaining-27-batch-3.proof-contracts.json`; the extremal lemma is the preceding recorded FA item.
+
+Validation: item precheck PASS. After updating the changed citation-use mappings, strict batch and merged contract checks both returned zero errors and warnings. Frontier dependency refresh succeeded; git diff --check was clean. These checks are structural checks, not a judge verdict.
+
+Next action: record repaired/familiar through the prescribed recorder, then and only then review queue position 3.

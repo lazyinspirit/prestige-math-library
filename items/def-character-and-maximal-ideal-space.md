@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Chapter 3 §3.1 and §3.3, printed pp. 54–69 and 80–87"

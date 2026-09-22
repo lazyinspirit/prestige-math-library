@@ -1,0 +1,10 @@
+# Position 28 context reseal
+
+Read the current full amalgamation item and the relevant item-resolution section of the latest owner terminal basis. Read the complete source Lemma 7.5 on printed pp.35–36 and Claims 7.11–7.12 on pp.41–42 of https://shelah.logic.at/files/95333/176.pdf (direct original PDF, PyMuPDF text; p.35 also visually checked). These support the intrinsic least admission modulus and the separate fixed-model presentation. This is a reseal of the owner's settled repair, not reopening its earlier escalation.
+
+The new page/UM context leaves the abstract amalgam unchanged: pairs are admitted existentially, no chosen reduction is part of a condition. The just-resealed density-transfer interface still supplies the two dense refinements needed for common admission. A perturbation within the modulus classes preserves the least modulus because all coarser classes coincide. Shifted coordinate equivalences therefore remain genuine countably indexed refining classes. Directed bounds stay admitted; for sequential bounds one can pad the coordinate sequence with its last term for the first m positions, then apply the coordinate clause to the shifted tail. Canonical embeddings use the distinguished weak conditions, which the current sweetness definition explicitly supplies; no assertion puts the canonical copies inside the initial product dense set. Fixed-model extension uses the separate source presentation and preserves old classes, rather than transporting classes through mere forcing equivalence.
+
+No changed supplier hypothesis invalidates the owner's repaired justification. Retain repaired disposition on identical bytes. No dependency or contract edit is required for this context comparison. Source verification is as described above; the owner report's other source readings are not claimed as my own.
+
+
+Current itemHashJudge: 123ae8063525e73f91fa261aca4f98b852fd536a5407a76c281ccfe12e2960ec, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

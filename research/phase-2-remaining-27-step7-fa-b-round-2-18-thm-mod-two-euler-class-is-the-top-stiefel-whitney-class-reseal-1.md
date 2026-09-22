@@ -1,0 +1,10 @@
+# Position 18: independent context reseal
+
+Disposition: repaired; familiar mathematics. Read the current proof, previous FA evidence, own contract/risk/boundaries, manifest/coverage and both judge objections with Alpha's row. The real A/B context and Euler supplier were read at position 1; the real splitting, normalization and coefficient interfaces were checked here.
+
+The identity classifies the universal real line, so its degree-one class is the fixed generator a. The unit-sphere identification is literal and the Gysin map H^0 -> H^1 is surjective because the next sphere-total group vanishes. Its value is therefore the unique nonzero element a, proving the line case. On the admissible flag base the Euler and Whitney products are both the product of these line classes; injectivity descends the equality. Coefficient reduction is proved by postcomposition on relative cochains, not asserted from an unrelated interface. On the relative disk cellular complex it sends either integral generator to the unique nonzero mod-two generator, so uniqueness identifies the reduced Thom class. Both subsequent pullbacks commute with the reduction. This includes rank zero even for integral sign -1, since reduction makes it 1. The repaired positive-rank reversal restriction in position 1 is not violated.
+
+These are familiar exactness, cellular coefficient and splitting arguments. No external verification was necessary or claimed. The earlier evidence's description of a repaired published Euler definition is not used as authority: the checked run proof derives the rank-zero reduction directly, and the supplier inconsistency recorded at position 1 remains deferred. No content or dependency change was made in this reseal. The existing consumer record is unchanged. Next: record, then stale position 27; no new judgment or pass stamp.
+
+
+Hash check: previous item_sha256 d965d21eea070b0e9bc3bcc4a4a5fb4bc8f3096b6396390c2923f612e2e1d180; current item_sha256 d965d21eea070b0e9bc3bcc4a4a5fb4bc8f3096b6396390c2923f612e2e1d180. Item bytes match; context reseal only.

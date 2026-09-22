@@ -5,7 +5,7 @@ title: The first connective complex K-theory Postnikov invariant is integral Sq-
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, def-stable-natural-cohomology-operation, cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces, def-postnikov-k-invariant, def-bockstein-connecting-operation, def-steenrod-squares-from-cup-i-products, def-sequential-prespectrum-spectrum-and-adjoint-structure-maps, def-stable-homotopy-groups-of-a-sequential-prespectrum, thm-eilenberg-maclane-spaces-represent-singular-cohomology, def-axiom-of-choice]
+deps: ["def-postnikov-k-invariant", "def-postnikov-section-and-postnikov-tower", "thm-postnikov-towers-exist-for-connected-cw-complexes", "thm-simple-postnikov-stages-are-classified-by-k-invariants", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces", "def-stable-natural-cohomology-operation", "def-bockstein-connecting-operation", "def-steenrod-squares-from-cup-i-products", "def-sequential-prespectrum-spectrum-and-adjoint-structure-maps", "def-stable-homotopy-groups-of-a-sequential-prespectrum", "def-axiom-of-choice"]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the constructed complex K-theory spectrum."
 provenance:
@@ -20,44 +20,46 @@ sources:
 
 ## Statement
 
-Assume AC. Write $ku$ for Adams's connective complex $K$-theory spectrum $bu$,
-with its Bott generator $t\in\pi_2(ku)\cong\mathbb Z$, so that
-$\pi_0(ku)\cong\mathbb Z$, $\pi_1(ku)=0$ and $\pi_2(ku)=\mathbb Z t$. Then its
-first Postnikov $k$-invariant is the nonzero degree-three stable integral
-operation
-$$\delta_2Sq^2=\beta_{\mathbb Z}\,Sq^2\,\rho_2,$$
-where $\rho_2$ is reduction modulo two, $Sq^2$ is the Steenrod square and
-$\beta_{\mathbb Z}$ is the integral Bockstein of
-$0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2\to0$. The same stable
-operation occurs in every space of the $ku$-spectrum, so the fixed Bott
-translates carry this normalization to every coefficient row.
+Assume AC. Write $ku$ for Adams's connective complex $K$-theory spectrum $bu$, with its fixed Bott generator $t\in\pi_2(ku)\cong\mathbb Z$, and $\pi_0(ku)\cong\mathbb Z$, $\pi_1(ku)=0$. Its first stable Postnikov invariant is the nonzero degree-three integral operation
+$$\beta_{\mathbb Z}Sq^2\rho_2,$$
+where $\rho_2$ is reduction modulo two and $\beta_{\mathbb Z}$ is the integral Bockstein of $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2\to0$.
+
+Here the stable invariant means the operation whose degree-$m$ universal class is the first potentially nonzero space Postnikov class
+$$k_{m+3}(ku_m)\in H^{m+3}(K(\mathbb Z,m);\mathbb Z),\qquad m\ge2,$$
+with the stage and fiber identifications fixed by the spectrum and $t$. The compatibility of these classes is the stable compatibility for Adams's spectrum recorded in the source input below, not a spectral assertion supplied by the definition for spaces. Its occurrence in each representing space is evaluation of this same operation; it does not assert that every evaluation is nonzero. The fixed Bott identifications transport this normalization to its coefficient rows.
 
 ## Facts & Assumptions
 
-[F1] Assume AC. The primary obstruction of the first Postnikov fibration of a connected spectrum, with fiber $K(\pi_2,2)$ over the Eilenberg–Mac Lane stage for $\pi_0$, is its first $k$-invariant, a class in $H^3$ of that stage with coefficients in $\pi_2$; it is independent of the chosen stage model up to the stated identifications ([[def-postnikov-k-invariant]]).
+**Given:** Adams's connective spectrum $ku=bu$ and its specified Bott data as in the Statement.
 
-[F2] Assume AC. Natural cohomology operations on based CW complexes are in bijection with universal classes on Eilenberg–Mac Lane spaces, so classes in $H^{3}(H;\mathbb Z)$ correspond to degree-three stable operations out of integral cohomology; commutation with suspension is exactly compatibility of the universal classes ([[cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces]], [[def-stable-natural-cohomology-operation]], [[thm-eilenberg-maclane-spaces-represent-singular-cohomology]]).
+[A1] AC is assumed for the space Postnikov constructions, representability and cellular cohomology ([[def-axiom-of-choice]]).
 
-[F3] The Steenrod square $Sq^2$ is defined on mod-two cohomology by the cup-one formula, and the integral Bockstein $\beta_{\mathbb Z}$ is the connecting operation of the coefficient sequence $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2\to0$; the composite $\beta_{\mathbb Z}Sq^2\rho_2$ is the stable integral operation denoted $\delta_2Sq^2$ in the source ([[def-steenrod-squares-from-cup-i-products]], [[def-bockstein-connecting-operation]]).
+[F1] For a connected simple space, a marked Postnikov stage with fiber $K(A,n)$ has its class in $H^{n+1}(P_{n-1}X;A)$; this is a statement about spaces ([[def-postnikov-k-invariant]], [[def-postnikov-section-and-postnikov-tower]]). For connected CW complexes, $P_nX$ can be constructed by adjoining cells of dimension at least $n+2$ ([[thm-postnikov-towers-exist-for-connected-cw-complexes]]). A marked simple stage is the homotopy fiber of a map representing its class ([[thm-simple-postnikov-stages-are-classified-by-k-invariants]]).
 
-[F4] A sequential prespectrum has stable homotopy groups $\pi_k$ computed from its structure maps, and a spectrum in the sense used here has its adjoint structure maps weak homotopy equivalences; the coefficient groups of the associated cohomology theory are the stable homotopy groups of the representing spectrum ([[def-sequential-prespectrum-spectrum-and-adjoint-structure-maps]], [[def-stable-homotopy-groups-of-a-sequential-prespectrum]], [[thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory]]).
+[F2] Positive-degree operations correspond to universal classes on $K(A,m)$, with their positive-degree suspension identities characterized by the corresponding universal-class identities ([[cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces]]). Full stability requires every suspension identity, including degree zero ([[def-stable-natural-cohomology-operation]]).
 
-[F5] Adams's computation of the first $bu$ $k$-invariant, printed pp. 391–393, states: the invariant lies in $H^3(H)$, which is $\mathbb Z/2$ generated by $\delta_2Sq^2$; it is therefore $0$ or $\delta_2Sq^2$; the third space of the $bu$-spectrum is $SU$, and $\delta_2Sq^2\ne0$ in $H^6(H,3)$ while $H^6(SU)=0$; hence the invariant is the nonzero generator; moreover the same stable operation occurs in every space of the spectrum. These are the source computations used here, not assertions reproved in this library.
+[F3] On a degree-$n$ cocycle, $Sq^2$ uses $a\smile_{n-2}a$ for $n\ge2$ and vanishes for $n<2$ ([[def-steenrod-squares-from-cup-i-products]]). The integral and mod-two Bocksteins have different targets and come from different coefficient sequences ([[def-bockstein-connecting-operation]]).
+
+[F4] A spectrum here has weak-equivalence adjoint structure maps and stable groups are their indicated colimits ([[def-sequential-prespectrum-spectrum-and-adjoint-structure-maps]], [[def-stable-homotopy-groups-of-a-sequential-prespectrum]]).
+
+[F5] The source computations used here are the opening of Adams, Proposition 16.6, printed p.391: the first stable invariant of $bu$ belongs to the order-two group of degree-three stable integral operations, generated by $\delta_2Sq^2$; each spectrum space has the evaluation of the same stable operation; the third space is $SU$; and $\delta_2Sq^2(\iota_3)\ne0$ in $H^6(K(\mathbb Z,3);\mathbb Z)$ whereas $H^6(SU;\mathbb Z)=0$. These computations and their spectrum compatibility are source inputs, not results asserted to follow from [F1] or [F2]. Adams distinguishes the mod-two Bockstein $\beta_2$ on printed p.326 from the integral Bockstein $\delta_2$ on printed p.398. Thus his integral operation here is $\delta_2Sq^2\rho_2=\beta_{\mathbb Z}Sq^2\rho_2$ in the present fully typed notation. Source: https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Adams-SHGH-latex2.pdf .
+
+[F6] Cellular cochains compute the cohomology of a CW pair, including constant integral coefficients ([[thm-cellular-cochains-compute-cohomology-with-local-coefficients]]); the pair cohomology sequence is exact ([[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** Assume AC, the connective spectrum $ku=bu$ with Bott generator $t\in\pi_2(ku)$, and the first Postnikov stage of [F1].
+1.1 We first locate the space classes correctly. For a connective Omega-spectrum, [F4] identifies $\pi_i(ku_m)$ with $\pi_{i-m}(ku)$ for $i\ge1$: each adjoint map is a weak equivalence, so the bonding maps in that stable colimit are isomorphisms. For $m\ge2$ the space is connected (its components identify with $\pi_1(ku_{m+1})=\pi_{-m}(ku)=0$), and it is simply connected by connectivity. Its first groups are $\pi_m=\mathbb Z$, $\pi_{m+1}=0$ and $\pi_{m+2}=\mathbb Zt$. Consequently the lower space stage $P_{m+1}ku_m$ is a $K(\mathbb Z,m)$ model. Presenting the next stage as the marked fibration of [F1], its class lies in $H^{m+3}(K(\mathbb Z,m);\mathbb Z)$. This uses [F1] only for connected simple spaces, with $n=m+2$, never for a spectrum or a degree-zero space stage. [F1, F4, given]
 
-1.1 Since $\pi_0(ku)=\mathbb Z$ and $\pi_1(ku)=0$, the first Postnikov stage of $ku$ is the integral Eilenberg–Mac Lane stage $H$ and the first $k$-invariant is a class in $H^3(H;\pi_2(ku))=H^3(H;\mathbb Z)$, a degree-three stable integral operation by [F2]. [F1, F2, F4, given]
+2.1 By [F5] the classes of step 1.1 are evaluations of a single stable operation $\kappa$ and its group has just two elements: $0$ and $\theta=\beta_{\mathbb Z}Sq^2\rho_2$. The target types are integral to mod-two, then mod-two, then integral, respectively. [F3] supplies these local conventions; [F5], rather than [F2], supplies the stable group calculation and compatibility. In particular we are not inferring an operation group for an Eilenberg–Mac Lane spectrum from the theorem for one space $K(A,m)$. [F2, F3, F5, step 1.1, algebra]
 
-1.2 By the computation recorded in [F5], this operation group is $\mathbb Z/2$ generated by $\delta_2Sq^2$, so the first $k$-invariant equals either $0$ or the nonzero generator $\delta_2Sq^2=\beta_{\mathbb Z}Sq^2\rho_2$ of [F3]. [F3, F5, given]
+3.1 Suppose $\kappa=0$. Its evaluation at the third space is then zero. Here $Y=SU$, and step 1.1 gives $P_4Y=K(\mathbb Z,3)$ up to the fixed stage equivalence. The fibration $P_5Y\to P_4Y$ has fiber $K(\mathbb Z,5)$ and zero class. By [F1] it is fiber homotopy equivalent to the homotopy fiber of the constant map $P_4Y\to K(\mathbb Z,6)$, which has a section given by the constant loop. Hence $H^6(P_4Y;\mathbb Z)\to H^6(P_5Y;\mathbb Z)$ is injective, since section pullback is its left inverse. [F1, F5, step 1.1, step 2.1, algebra]
 
-1.3 The same stable operation gives the $k$-invariant of every space of the $ku$-spectrum, and evaluating on the third space $SU$ gives a nonzero class: $\delta_2Sq^2\ne0$ in $H^6(H,3)$ while $H^6(SU)=0$, so the invariant cannot vanish. [F5, given]
+4.1 Choose the CW Postnikov model in [F1] for $Y=SU$. The pair $(P_5Y,Y)$ has only relative cells of dimension at least seven. Its cellular cochain group in degree six is zero, so $H^6(P_5Y,Y;\mathbb Z)=0$ by [F6]. The pair sequence therefore makes $H^6(P_5Y;\mathbb Z)\to H^6(Y;\mathbb Z)$ injective. Composing with step 3.1 would inject the nonzero class $\theta(\iota_3)$ of [F5] into $H^6(SU;\mathbb Z)=0$, a contradiction. Equivalences of stage models transport these maps and do not affect injectivity. [F1, F5, F6, step 3.1, algebra]
 
-2.1 Steps 1.2 and 1.3 identify the first $k$-invariant with the unique nonzero element of the order-two operation group recorded in [F5], namely $\delta_2Sq^2=\beta_{\mathbb Z}Sq^2\rho_2$ by [F3]. The same source computation gives its occurrence in every representing space, so the fixed Bott translates carry this operation to every coefficient row. [F3, F5, step 1.2, step 1.3] ∎
+5.1 Thus $\kappa\ne0$, and the two-element alternative of step 2.1 forces $\kappa=\theta$. Its evaluation gives the stated universal class in each space by [F5]. The two identifications of an integral coefficient generator differ by sign; that sign cannot change an element of an order-two group, since $-\theta=\theta$. Hence the fixed Bott identifications preserve this normalization. In low degrees evaluations may be zero: for instance $Sq^2$ is zero on degree-zero and degree-one classes by [F3]; this illustrates why nonzero stable operation does not mean nonzero on every space. The nonvanishing used in the proof is specifically the degree-three universal class. [A1, F3, F5, step 2.1, step 4.1, algebra] ∎
 
 ## Source notes
 
-The argument above reconstructs the opening of [Adams](https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Adams-SHGH-latex2.pdf), Proposition 16.6, printed pp. 391–393: the operation group $H^3(H)$ is $\mathbb Z/2$ generated by $\delta_2Sq^2$, and the third spectrum space $SU$ forces the invariant to be nonzero. The cohomology facts $H^6(H,3)$ and $H^6(SU)$ are used only as recorded source computations; the proof does not identify Adams's separately notated mod-two Bockstein with the integral Bockstein.
+The source inputs are those in Adams, *Stable Homotopy and Generalised Homology*, Proposition 16.6, opening on printed p.391. The full proof continues on pp.392–393 with a mod-two module calculation; that later Bockstein is not substituted for the integral one. Steps 3.1–4.1 give the missing explanation for the nonvanishing deduction using space Postnikov stages and relative cellular cohomology. Stable group classification and spectrum compatibility remain explicitly identified source computations.

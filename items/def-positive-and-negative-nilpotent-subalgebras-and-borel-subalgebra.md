@@ -13,7 +13,7 @@ sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
-      locator: "Chapter V §1, (5.8)"
+      locator: "Chapter V §3, (5.8), printed p. 284; §7, definition of Borel subalgebra, printed p. 325"
 proof_strategy: direct
 ---
 
@@ -29,7 +29,7 @@ Write $\Phi^-=-\Phi^+$ for the negative roots. Define
 $$\mathfrak n^+=\sum_{\alpha\in\Phi^+}\mathfrak g_\alpha,\qquad \mathfrak n^-=\sum_{\alpha\in\Phi^-}\mathfrak g_\alpha,\qquad \mathfrak b=\mathfrak h\oplus\mathfrak n^+ .$$
 Then $\mathfrak n^+$ and $\mathfrak n^-$ are called the **positive** and
 **negative nilpotent subalgebras** and $\mathfrak b$ the **Borel subalgebra**
-attached to $\Phi^+$. The definition depends only on the set $\Phi^+$ and not
+attached to $\Phi^+$. Here the term Borel uses this root-space construction as its defining convention, as in Knapp, Chapter V §7. The definition depends only on the set $\Phi^+$ and not
 on any enumeration of it, because each sum is the span of a fixed set of
 subspaces.
 

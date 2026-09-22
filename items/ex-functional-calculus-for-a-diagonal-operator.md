@@ -28,7 +28,7 @@ Assume AC. Let $(\lambda_n)_{n\in\mathbb N}$ be a bounded complex sequence and l
 
 [A2] $z\in\rho(T)$ exactly when $zI-T$ is bijective with bounded inverse; a bounded operator that is not bounded below has no bounded inverse ([[def-spectrum-and-resolvent-of-a-bounded-operator]], [[def-operator-norm]]).
 
-[A3] For normal $T$ with $Tx=\lambda x$ and $f$ continuous on $\sigma(T)$ one has $f(T)x=f(\lambda)x$ ([[thm-continuous-functional-calculus-properties]], [[thm-continuous-functional-calculus-for-bounded-normal-operators]]).
+[A3] For normal $T$ with a nonzero eigenvector $x$ satisfying $Tx=\lambda x$, one has $\lambda\in\sigma(T)$ and, for every $f\in C(\sigma(T))$, $f(T)x=f(\lambda)x$ ([[thm-continuous-functional-calculus-properties]], [[thm-continuous-functional-calculus-for-bounded-normal-operators]]).
 
 [A4] AC is the hypothesis of the calculus supplier ([[def-axiom-of-choice]]).
 

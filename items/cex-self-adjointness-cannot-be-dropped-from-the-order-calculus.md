@@ -46,4 +46,4 @@ Assume Countable Choice. For every bounded operator whose spectrum is a subset o
 
 2.1 The witness $J$ therefore has nonnegative real spectrum but is neither positive nor self-adjoint, so nonnegativity of the spectrum alone does not give the quadratic-form inequalities of the order calculus. [step 1.1, step 1.2, step 1.3]
 
-3.1 The statement is refuted, and self-adjointness is exactly the hypothesis that cannot be dropped: for self-adjoint operators the identification of spectral nonnegativity with positivity is the content of the order calculus on the main page. [step 2.1, A1, A4] ∎
+3.1 The statement is refuted: $J$ satisfies its spectral antecedent but fails its quadratic-form conclusion, so spectral nonnegativity alone cannot extend the self-adjoint order definition to all bounded operators. [step 2.1, A1, A4] ∎

@@ -49,4 +49,4 @@ $T$.
 
 3.1 The two evaluations give $f(1/2)=1$ and $f(1/2)=0$ simultaneously, a contradiction. [step 2.1, step 2.2]
 
-4.1 No continuous function on $[0,1]$ can satisfy $f(T)=E([0,1/2])$ for $T=M_x$: the spectral projection of a Borel set with a jump in its indicator is not a continuous-calculus value of $T$. [step 3.1, A4] ∎
+4.1 No continuous function on $[0,1]$ can satisfy $f(T)=E([0,1/2])$ for $T=M_x$: this particular spectral projection forces incompatible one-sided values at $1/2$ and is not a continuous-calculus value of $T$. [step 3.1, A4] ∎

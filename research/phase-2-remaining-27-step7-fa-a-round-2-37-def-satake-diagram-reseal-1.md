@@ -1,0 +1,9 @@
+# FA reseal — position 37
+
+Re-read the complete current Satake definition against the changed classification-comparison context at position 62. Its item SHA256 remains 2415fd78efe245be7d404be783a923a1654e8b9494d0066685afd4853538e164, exactly the recorded hash. No item bytes changed.
+
+The definition still uses maximally split theta-stable Cartans, compact imaginary black vertices, and white pairing by equal nonzero restriction. Its proof of the white involution modulo the black span remains valid: the induced nonnegative integral involution permutes the quotient basis, and equality of restrictions identifies precisely those unordered white orbits. It does not identify the entire restriction kernel with the black span. Equivalence remains decorated-diagram isomorphism; admissibility means realization, with no assertion that arbitrary formal decorations occur.
+
+The repaired position-62 proof now uses exactly these interfaces. It proves compatible-positive-system independence by actual restricted reflection automorphisms and the imaginary-root subsystem, and proves uniqueness by reconstructing theta and extending a unitary character of (theta-1)Q. Thus the definition's non-load-bearing forward pointer to that theorem is justified in the new context; no statement or proof change is needed here.
+
+Source remains https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf, Chapter VI Problem 7(a)-(e), printed p.427, read again during position 62; it supports the white permutation modulo black roots. The definition supplies its own complete pairing proof. Original position-37 evidence remains applicable. This is a context reseal, not a judge verdict or pass stamp. Resume recording position 62 after this receipt is accepted and queue-status shows all predecessors current.

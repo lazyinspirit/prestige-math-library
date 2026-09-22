@@ -12,18 +12,10 @@ about mathematics.
 
 ## What you recorded at step 6
 
-`research/phase-2-remaining-27-alpha-d-step7-context.json` is what a group Alpha for this group wrote during step 6,
-while the judges were still sweeping and no verdict existed. It records the
-conventions your pages fix, which items the rest lean on, which published
-dependencies were actually opened, and what already looked thin.
-
-**Its `concerns` list is evidence, not decoration.** Each entry was found with
-nobody suggesting where to look. A judge rejection landing at the same place is
-two independent readings agreeing and should be very hard to call a
-`false_positive`; a rejection landing nowhere near any of them is not thereby
-wrong, but it is the case to read most carefully against the text.
-
-It is notes, not authority. Where it and the item files disagree, the files win.
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
 
 ## Read scope, write scope
 
@@ -208,13 +200,13 @@ files under `items/` for that.
 - `lem-unbounded-adjoint-is-well-defined-and-closed` · lemma — The adjoint is well defined, closed, and reverses inclusions
 - `thm-closable-iff-adjoint-domain-is-dense` · theorem — Closability is equivalent to density of the adjoint domain
 - `def-symmetric-self-adjoint-and-essentially-self-adjoint` · definition — Symmetric, self-adjoint, and essentially self-adjoint operators
-- `cex-symmetric-need-not-be-self-adjoint` · counterexample — The minimal derivative is symmetric but not self-adjoint
-- `def-resolvent-and-spectrum-of-a-closed-unbounded-operator` · definition — Resolvent and spectrum of a closed operator
+- `cex-symmetric-need-not-be-self-adjoint` · counterexample — A symmetric closed operator that is not self-adjoint
+- `def-resolvent-and-spectrum-of-a-closed-unbounded-operator` · definition — Resolvent and spectrum of an unbounded operator
 - `thm-self-adjoint-resolvent-estimate` · theorem — Resolvent of a self-adjoint operator: nonreal resolvents and the estimate
 - `thm-self-adjointness-range-criterion` · theorem — Range criterion for self-adjointness
 - `def-cayley-transform-of-a-self-adjoint-operator` · definition — Cayley transform of a self-adjoint operator
 - `thm-cayley-correspondence` · theorem — Cayley correspondence between self-adjoint operators and unitaries
-- `def-unbounded-integral-against-a-pvm` · definition — Integral of a Borel function against a projection-valued measure
+- `def-unbounded-integral-against-a-pvm` · definition — Integral of a measurable function against a projection-valued measure
 - `lem-unbounded-pvm-integral-is-well-defined-and-closed` · lemma — The unbounded PVM integral is densely defined, closed and normal
 - `thm-spectral-theorem-for-unbounded-self-adjoint-operators` · theorem — Spectral theorem for unbounded self-adjoint operators (PVM form)
 - `thm-unbounded-borel-functional-calculus` · theorem — Unbounded Borel functional calculus: domains, products, spectral mapping
@@ -245,7 +237,7 @@ files under `items/` for that.
 
 ### `unbounded-self-adjoint-operators-and-stones-theorem-examples` — Unbounded Self Adjoint Operators and Stones Theorem — Examples (7 item(s))
 
-- `ex-unbounded-multiplication-operator-and-its-domain` · example — Unbounded multiplication operators: domain, spectral measure and spectrum
+- `ex-unbounded-multiplication-operator-and-its-domain` · example — Multiplication operators: domain, spectral measure and spectrum
 - `ex-position-operator-on-l-two-of-r` · example — Position operator on $L^2(\mathbb R)$
 - `ex-periodic-derivative-and-its-unitary-translation-group` · example — Periodic derivative and its unitary translation group
 - `cex-the-minimal-derivative-is-symmetric-not-self-adjoint` · counterexample — The minimal derivative has deficiency indices $(1,1)$ and many self-adjoint extensions
@@ -265,19 +257,7 @@ changed a domain, quantifier, hypothesis, direction or conclusion.
 
 ## Step-6 reader warnings
 
-5 warning(s) a Step-6 reader recorded in items you own.
-They were read-only and could not repair or adjudicate them. You own these decisions.
-
-- **s8a-d856c7790dfb31a2858760ee · `cor-self-adjoint-extension-exists-iff-deficiency-indices-agree`** (from group c, gap-a-reader-closes) — Fact [A2] asserts 'two Hilbert spaces are unitarily isomorphic exactly when their orthonormal bases have the same cardinality' with citation ([[thm-existence-of-a-maximal-orthonormal-family]], [[thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). My items supply existence of a Hilbert basis and, for a given basis, the norm- and inner-product-preserving bijection H to l^2(I); neither states that a unitary isomorphism preserves the cardinality of a basis, so the 'exactly when' direction is not supplied as cited.
-- **s8a-ab268debdef740fb3fd509b9 · `thm-weyl-criterion-for-essential-spectrum`** (from group c, presentation) — Fact [A4] supports 'by Bessel's inequality only finitely many terms of the sequence can have |<x_n,y>| > epsilon' with ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). The definition item states orthonormality, finite independence and coefficient uniqueness, not Bessel's inequality; the cited supplier should be lem-finite-bessel-inequality or thm-bessel-inequality-for-an-arbitrary-orthonormal-family.
-- **s8a-a8c2cd2e7f540362feb7c29b · `lem-cross-ito-isometry`** (from group d, presentation) — Wrong source title on 15 items of the Ito-integral pair. The Step-5a audit entry refuter:8:8 (confirmed nonfatal, repaired only in the routed carrier) found that the PDF at https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf has the title page 'Martingales, Diffusions and Financial Mathematics', yet the source titles read 'Aad van der Vaart, Stochastic Integration and Differential Equations, ...' in lem-cross-ito-isometry, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-ito-integral-process-has-a-continuous-martingale-version, def-ito-integral-for-square-integrable-predictable-processes, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, thm-stopping-an-ito-integral, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-quadratic-variation-of-an-ito-integral, ex-covariance-of-two-deterministic-ito-integrals, cex-pathwise-riemann-stieltjes-integration-does-not-construct-the-brownian-ito-integral and cex-product-measure-ae-equality-is-not-pointwise-equality-of-integrands. The numbered results cited (Definition 5.20, Lemma 5.22, Theorem 5.26, etc.) are then attributed to the wrong book; the URL points to the correct document.
-- **s8a-efce313c0ce17bdfd9ce7d2e · `thm-von-neumann-self-adjoint-extension-parameterization`** (from group d, gap-a-reader-closes) — Fact [A4] states 'If a unitary V satisfies ||Vu|| = ||u|| and V(K_+) = K_-, then U := C_T direct-sum (-V) is unitary on H' and cites thm-partial-isometry-characterizations. The cited item characterizes partial isometries by U*U being the orthogonal projection onto (ker U)^perp (and UU* the projection onto ran U); it says nothing about direct sums or about unitarity of a direct sum, so the citation supports less than the fact asserted (the missing argument is elementary but is not in the cited statement).
-- **s8a-17d0b0d4a5f8633c7f9328d3 · `cor-self-adjoint-extension-exists-iff-deficiency-indices-agree`** (from group d, gap-a-reader-closes) — Fact [A2] asserts 'two Hilbert spaces are unitarily isomorphic exactly when their orthonormal bases have the same cardinality' and cites thm-existence-of-a-maximal-orthonormal-family together with thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set. The cited items state existence/completeness of a maximal orthonormal family and the isometric isomorphism H -> ell^2(I) for a given basis respectively; the unitary-isomorphism criterion for equal cardinalities has to be assembled from the two, and is not stated in either cited item.
-
-Append one owning-group disposition per warning to `research/phase-2-remaining-27-step7-alert-decisions.jsonl`.
-A Step-6 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
-pre/post guard hashes. A later Step-7 cross-group alert still requires a real targeted
-judge rejection; never reuse its source rejection as target evidence.
+None. No Step-6 reader warning targets an item you own.
 
 ## Your rejections
 
@@ -288,25 +268,16 @@ a rejection recorded after this file was rendered is still yours.
 
 ---
 
-# Step 7 — exact closure recovery, `phase-2-remaining-27`
+# Historical Step-7 closure recovery, `phase-2-remaining-27`
 
-Read `research/phase-2-remaining-27-judge-closure.json`,
-`research/phase-2-remaining-27-judge.jsonl`,
-`research/phase-2-remaining-27-judge-adjudications.jsonl`, and the generated `by_item`
-ownership map in `research/phase-2-remaining-27-step7-scope.json`. Take only current
-unadjudicated `(id, model, context_sha256)` rows owned by this group; leave
-other groups' rows untouched. A row owned by no group is a reported blocker,
-not a row to discard.
+Historical compatibility task only. Preserve historical exact-tuple decisions
+as evidence; this template grants no current repair or certification authority.
+Historical receipts constrain `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`; do not reinterpret those records
+as current round coverage.
 
-Append one exact adjudication outcome per owned row. Only
-`confirmed_fatal` licenses its coherent repair and matching ledger row; update
-only records made stale by that repair. Send a concrete other-group finding to
-`research/phase-2-remaining-27-step7-cross-group.jsonl`, never repair that item.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Do not use a descriptive
-defect-ledger subclass in that field.
-
-Write `research/phase-2-remaining-27-alpha-step7-closure-recovery-<group>.md` with the rows
-handled, outcomes, licensed repairs, rejudge targets, cross-group alerts, and
-blockers. Preserve shared append-only ledgers.
+Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
+and `briefs/step7-owner-repair.md`. Follow WORKFLOW.md's 7.1–7.10 protocol
+and the generated round-bound task. Repair all confirmed defects, including
+nonfatal defects, and continue downstream repair until complete before the
+single central certification pass.

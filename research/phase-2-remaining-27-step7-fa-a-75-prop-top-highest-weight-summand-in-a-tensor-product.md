@@ -1,0 +1,11 @@
+# Final adjudication — position 75
+
+Disposition: repaired. Source status: familiar.
+
+Read the current proof, both Terra reasons, Alpha's removal of the fixed-summand submodule fallacy, own contract/risk record, and the exact highest-weight classification, decomposition, weight-bound, top-line, tensor-action, weight-space, root-shift, order and integrality interfaces. The refuter has no flag with this item's ID; another flag only mentions an earlier self-citation repair here.
+
+Terra correctly identifies that the arbitrary summand's weight bound was attributed to classification/decomposition rather than the actual supplier. L2 now separately cites lem-highest-weight-modules-have-weights-below-the-top-weight for every summand's bound and prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional for its top-line dimension. Both suppliers apply because each finite-dimensional summand is an irreducible highest-weight module.
+
+Independently checked the proof: negative-root words span each factor and shift its highest vector into weight spaces, yielding finite direct weight decompositions; tensor bases then show all tensor weights are sums of factor weights. If (lambda-nu1)+(mu-nu2)=0 in Q+, linear independence of simple roots and nonnegative coefficients force both differences zero. Thus the top tensor space is exactly the tensor of the two top lines and has dimension one. A summand containing this weight has top nu both <=lambda+mu (a tensor weight) and >=lambda+mu (its own weight bound), hence equal by antisymmetry. Each such summand contributes one dimension, so exactly one occurs. All other tops are strictly lower. This does not assert that a submodule of a fixed semisimple direct sum must be a selected sum of its displayed summands.
+
+The sum weight is explicitly dominant integral; zero weights and the zero algebra case are included. AC is inherited through the named highest-weight interfaces. This is familiar finite weight-space linear algebra; no external verification needed. Dependencies unchanged, but own fact-to-supplier contract was repaired, own manifest strategy updated, and the consumer-batch frontier ledger refreshed. Focused strict contract (zero errors/warnings), precheck and rendercheck passed. Next: record before inspecting position 76.

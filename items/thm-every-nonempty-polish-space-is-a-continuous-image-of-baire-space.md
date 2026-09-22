@@ -14,6 +14,10 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
   audited: 2026-08-16
 sources:
   scraped: []
@@ -43,9 +47,11 @@ Assume Dependent Choice. Every nonempty Polish space is the image of a continuou
 
 [F3] Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $$\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. The statement is: for every nonempty set $X$, every relation $R$ entire on $X$, and every $a\in X$, there is a sequence $x:\mathbb N\to X$ with $x_0=a$ and $x_n\mathbin{R}x_{n+1}$ for every $n\in\mathbb N$. ([[def-dependent-choice]]).
 
-[F4] Let $(X,d)$ be a metric space (def-metric-space). Call a sequence $(F_k)_{k \in \mathbb{N}}$ of subsets of $X$ a **Cantor chain** if every $F_k$ is nonempty, closed (def-metric-topology) and bounded, $F_{k+1} \subseteq F_k$ for every $k$, and $\operatorname{diam}(F_k) \to 0$ in $\mathbb{R}$ (def-metric-bounded-diameter, def-real-limit). Then: 1. If $(X,d)$ is complete (def-complete-metric-space), every Cantor chain in $X$ has an intersection $\bigcap_{k \in \mathbb{N}} F_k$ with **exactly one** element. 2. Conversely, if every Cantor chain in $X$ has nonempty intersection, then $(X,d)$ is complete. Boundedness of each $F_k$ is part of the definition of a Cantor chain because $\operatorname{diam}$ is defined for nonempty bounded sets only in this library (def-metric-bounded-diameter); it is not an extra hypothesis but the precondition for writing the diameter condition down. ([[thm-cantor-intersection-metric]]).
+[F4] Under Countable Choice for assertion 1, let $(X,d)$ be a metric space (def-metric-space). Call a sequence $(F_k)_{k \in \mathbb{N}}$ of subsets of $X$ a **Cantor chain** if every $F_k$ is nonempty, closed (def-metric-topology) and bounded, $F_{k+1} \subseteq F_k$ for every $k$, and $\operatorname{diam}(F_k) \to 0$ in $\mathbb{R}$ (def-metric-bounded-diameter, def-real-limit). Then: 1. If $(X,d)$ is complete (def-complete-metric-space), every Cantor chain in $X$ has an intersection $\bigcap_{k \in \mathbb{N}} F_k$ with **exactly one** element. 2. Conversely, if every Cantor chain in $X$ has nonempty intersection, then $(X,d)$ is complete. Boundedness of each $F_k$ is part of the definition of a Cantor chain because $\operatorname{diam}$ is defined for nonempty bounded sets only in this library (def-metric-bounded-diameter); it is not an extra hypothesis but the precondition for writing the diameter condition down. ([[thm-cantor-intersection-metric]]).
 
 [F5] Let $(X,d)$ be a metric space (def-metric-space), let $x \in X$ and let $r \in \mathbb{R}$ with $r > 0$ (def-real-order). Define $$B(x,r) := \{\, y \in X : d(x,y) < r \,\}, \qquad \bar B(x,r) := \{\, y \in X : d(x,y) \le r \,\}, \qquad S(x,r) := \{\, y \in X : d(x,y) = r \,\}.$$ $B(x,r)$ is the **open ball**, $\bar B(x,r)$ the **closed ball** and $S(x,r)$ the **sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly positive real; a ball of radius $0$ or of negative radius is never written in this library. ([[def-metric-ball]]).
+
+[F6] Dependent Choice implies Countable Choice directly: for a sequence $(A_n)_{n\in\mathbb N}$ of nonempty sets, let $S$ be the set of finite sequences $s$ with $s(i)\in A_i$ for $i<\operatorname{length}(s)$. The empty sequence belongs to $S$. Relate $s$ to each extension by one entry from $A_{\operatorname{length}(s)}$; this relation is entire because that set is nonempty. Apply [F3] starting at the empty sequence. The resulting nested sequences have lengths $0,1,2,\ldots$, and their union is a function choosing an element of every $A_n$. No simultaneous choices were used to establish that the relation is entire.
 
 ## Proof
 
@@ -53,7 +59,7 @@ Assume Dependent Choice. Every nonempty Polish space is the image of a continuou
 
 1.1 Choose a compatible complete metric and recursively refine each nonempty open set into a countable cover by open sets whose closures remain inside the parent and whose diameters tend to zero. [given, F4, F2, F5]
 
-2.1 An infinite branch determines one point by completeness, giving a continuous map from Baire space. [step 1.1, F1, F2, F4]
+2.1 An infinite branch determines one point by completeness. By [F3] and [F6], the Countable Choice hypothesis in [F4] holds, giving a continuous map from Baire space. [step 1.1, F1, F2, F3, F4, F6]
 
 3.1 For a prescribed target point, dependent choice selects a nested branch containing it, proving surjectivity. [step 2.1, F3]
 

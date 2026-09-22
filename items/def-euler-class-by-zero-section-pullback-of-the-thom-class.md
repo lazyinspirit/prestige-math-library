@@ -32,9 +32,11 @@ $$j^*:H^n(D(\xi),S(\xi);R)\longrightarrow H^n(D(\xi);R)$$ be the relative-to-abs
 This is the class already introduced in
 [[def-thom-euler-class-of-an-oriented-vector-bundle]]: on this page we write
 $e(\xi)$ for it, and the shorthand $s^*u_\xi$ always means the composite
-$s^*j^*(u_\xi)$, the relative-to-absolute map being understood. For rank zero,
-$j$ and $s$ are identities and $u_\xi=1$, so
-$$e(0_B)=1\in H^0(B;R).$$
+$s^*j^*(u_\xi)$, the relative-to-absolute map being understood. For rank zero
+with supplied orientation $o\in H^0(B;R)$, normalization gives $u_\xi=o$ and
+$j$ and $s$ are identities, so
+$$e(0_B,o)=o\in H^0(B;R).$$
+In particular, the standard unit orientation gives $e(0_B,1)=1$.
 For $R=\mathbb F_2$ every real bundle is canonically $\mathbb F_2$-oriented by
 [[def-r-oriented-vector-bundle-and-orientation-local-system]], so in that
 case $e_2(\xi):=e(\xi)\in H^n(B;\mathbb F_2)$ is defined for every real
@@ -45,7 +47,7 @@ integral orientation, and reversing the orientation negates it.
 
 **Given:** AC, a commutative ring $R$, a base in the scope of the general Thom theorem, and an $R$-oriented numerable rank-$n$ real bundle $\xi\to B$ with normalized Thom class $u_\xi$.
 
-[F1] The Thom-defined Euler class of an oriented bundle is $e_{\rm Th}(\xi)=s^*j^*(u_\xi)\in H^n(B;R)$, where $j^*$ is relative-to- absolute and $s$ is the zero section; it is natural for orientation-preserving pullbacks, negated by reversing an integral orientation, and equals $1$ in rank zero ([[def-thom-euler-class-of-an-oriented-vector-bundle]]).
+[F1] The Thom-defined Euler class of an oriented bundle is $e_{\rm Th}(\xi)=s^*j^*(u_\xi)\in H^n(B;R)$, where $j^*$ is relative-to-absolute and $s$ is the zero section; it is natural for orientation-preserving pullbacks and is negated by reversing an integral orientation. In rank zero it equals the supplied orientation $o$, and hence equals $1$ for the standard unit orientation ([[def-thom-euler-class-of-an-oriented-vector-bundle]]).
 
 [F2] A normalized Thom class is defined by fiberwise normalization: restricting it to each fiber disk pair gives the chosen orientation class ([[def-thom-class-by-fiberwise-normalization]]).
 
@@ -54,6 +56,6 @@ integral orientation, and reversing the orientation negates it.
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]], used only as the general Thom theorem uses it.
 
 ## Verification
-1.1 The definition is the published one. The composite $s^*j^*u_\xi$ has the same domain, the same maps and the same normalization data as the class of [F1]: the pair $(D(\xi),S(\xi))$, the relative-to-absolute map $j^*$, the zero section $s$, and the normalized Thom class $u_\xi$ of [F2]. Thus $e(\xi)$ is not a second Euler construction but the same class, and every property recorded in [F1] — naturality for orientation-preserving pullbacks, the sign under orientation reversal, and the rank-zero value — applies to it verbatim. In particular the shorthand $s^*u_\xi$ in the statement means $s^*j^*(u_\xi)$ and never the pullback of an absolute class along the zero section alone. [F1, F2, A1]
+1.1 The definition is the published one. The composite $s^*j^*u_\xi$ has the same domain, the same maps and the same normalization data as the class of [F1]: the pair $(D(\xi),S(\xi))$, the relative-to-absolute map $j^*$, the zero section $s$, and the normalized Thom class $u_\xi$ of [F2]. Thus $e(\xi)$ is not a second Euler construction but the same class, and every property recorded in [F1] — naturality for orientation-preserving pullbacks, the sign under orientation reversal, and the orientation-dependent rank-zero value — applies to it verbatim. In particular the shorthand $s^*u_\xi$ in the statement means $s^*j^*(u_\xi)$ and never the pullback of an absolute class along the zero section alone. [F1, F2, A1]
 
-2.1 Coefficient and rank conventions. For $R=\mathbb F_2$, [F3] supplies the canonical orientation, so $e_2(\xi)$ is defined for every real bundle in the Thom scope and, in characteristic two, reversing the orientation does not change the class. For $R=\mathbb Z$ the class depends on the supplied integral orientation and changes sign when that orientation is reversed. In rank zero, $D(\xi)=B$, $S(\xi)=\varnothing$, $j$ and $s$ are the identity maps and $u_\xi=1$ by the normalization of [F2] read in degree zero, so the composite is $1\in H^0(B;R)$; over the empty base there is exactly one class, the zero class, and over the zero ring the unit and the zero class coincide. These conventions agree with the corresponding clauses of [F1]. [F1, F2, F3, step 1.1] ∎
+2.1 Coefficient and rank conventions. For $R=\mathbb F_2$, [F3] supplies the canonical orientation, so $e_2(\xi)$ is defined for every real bundle in the Thom scope and, in characteristic two, reversing the orientation does not change the class. For $R=\mathbb Z$ the class depends on the supplied integral orientation and changes sign when that orientation is reversed. In rank zero, $D(\xi)=B$, $S(\xi)=\varnothing$, and $j$ and $s$ are the identity maps. Fiberwise normalization [F2] says that $u_\xi$ restricts to the supplied orientation $o$ on every point, hence $u_\xi=o$ and the composite is $o\in H^0(B;R)$; it is $1$ only for the standard unit orientation. Over the empty base there is exactly one class, the zero class, and over the zero ring the unit and the zero class coincide. These conventions agree with the corresponding clauses of [F1]. [F1, F2, F3, step 1.1] ∎

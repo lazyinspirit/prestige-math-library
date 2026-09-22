@@ -42,6 +42,6 @@ the empty sum on the right being $0$ at $n=0$.
 
 1.2 For two orthogonal vectors $x,y$, expansion gives $\|x+y\|^2=\|x\|^2+\langle x,y\rangle+\langle y,x\rangle+\|y\|^2=\|x\|^2+\|y\|^2$, and the same computation with $y$ replaced by $-y$ shows that the sum of a finite orthogonal family may be split off one term at a time. [A1, A2, algebra]
 
-2.1 Suppose the identity holds for orthogonal families of $n-1$ terms, $n\ge2$, and let $x_1,\dots,x_n$ be pairwise orthogonal; the partial sum $s=\sum_{j<n}x_j$ satisfies $\langle s,x_n\rangle=\sum_{j<n}\langle x_j,x_n\rangle=0$ by linearity in the first argument, and $\|s\|^2=\sum_{j<n}\|x_j\|^2$ by the induction hypothesis, so $\|\sum_{j\le n}x_j\|^2=\|s+x_n\|^2=\|s\|^2+\|x_n\|^2=\sum_{j\le n}\|x_j\|^2$. [step 1.2, step 1.1, A1, algebra]
+2.1 Suppose the identity holds for orthogonal families of $n-1$ terms, $n\ge2$, and let $x_1,\dots,x_n$ be pairwise orthogonal; the partial sum $s=\sum_{j=1}^{n-1}x_j$ satisfies $\langle s,x_n\rangle=\sum_{j=1}^{n-1}\langle x_j,x_n\rangle=0$ by linearity in the first argument, and $\|s\|^2=\sum_{j=1}^{n-1}\|x_j\|^2$ by the induction hypothesis, so $\|\sum_{j=1}^{n}x_j\|^2=\|s+x_n\|^2=\|s\|^2+\|x_n\|^2=\sum_{j=1}^{n}\|x_j\|^2$. [step 1.2, step 1.1, A1, algebra]
 
-3.1 Induction on $n$ from the cases $n=0,1$ of step 1.1 and the induction step of step 2.1 proves the identity for every $n$, so pairwise orthogonal vectors satisfy $\|\sum_j x_j\|^2=\sum_j\|x_j\|^2$. [step 1.1, step 2.1] ∎
+3.1 Induction on $n$ from the cases $n=0,1$ of step 1.1 and the induction step of step 2.1 proves the identity for every $n$, so pairwise orthogonal vectors satisfy $\|\sum_{j=1}^{n}x_j\|^2=\sum_{j=1}^{n}\|x_j\|^2$. [step 1.1, step 2.1] ∎

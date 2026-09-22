@@ -36,9 +36,14 @@ contour, and let $f : \gamma^\ast \to A$ be continuous. Then
 
 ## Facts & Assumptions
 
-**Given:** A unital complex Banach algebra $A$, a complex Banach space $E$, a bounded linear $B : A \to E$, a piecewise $C^1$ contour $\gamma : [a,b] \to \mathbb C$ with trace $\gamma^\ast$ and length $L(\gamma)$, and a continuous $f : \gamma^\ast \to A$; write $F(t) := f(\gamma(t))\gamma'(t)$.
+**Given:** A unital complex Banach algebra $A$, a complex Banach space $E$, a bounded linear $B : A \to E$, a piecewise $C^1$ contour $\gamma : [a,b] \to \mathbb C$ with trace $\gamma^\ast$ and length $L(\gamma)$, a $C^1$ subdivision $a=t_0<\cdots<t_m=b$ with derivative extensions $v_k$ on the closed pieces, and a continuous $f : \gamma^\ast \to A$.
 
-[L1] $\int_\gamma f\,dz$ is the limit of the tagged Riemann sums $\sum_j f(\gamma(\xi_j))\gamma'(\xi_j)\Delta_j$ and equals the Bochner integral of $F$ over $[a,b]$; the chain version is the corresponding finite sum ([[def-banach-algebra-valued-contour-integral]]).
+[L1] $\int_\gamma f\,dz$ is the limit, over tagged partitions refining the
+subdivision, of
+$\sum_j f(\gamma(\xi_j))v_{k(j)}(\xi_j)\Delta_j$, where the derivative
+extension belonging to the subinterval is used even when a tag is a corner;
+the chain version is the corresponding finite sum
+([[def-banach-algebra-valued-contour-integral]]).
 
 [L2] $B$ is complex-linear and bounded, and its operator norm satisfies
 $B(\lambda u + \mu v) = \lambda B(u) + \mu B(v)$ and
@@ -55,9 +60,9 @@ to this sum ([[cor-piecewise-c1-paths-have-additive-speed-integral-length]]).
 
 **Proof technique:** direct.
 
-1.1 $B \circ f$ is continuous as a composition of continuous maps, and for every tagged partition $\sum_j B(f(\gamma(\xi_j)))\gamma'(\xi_j)\Delta_j = B\bigl(\sum_j f(\gamma(\xi_j))\gamma'(\xi_j)\Delta_j\bigr)$, because $B$ is linear and the scalars $\gamma'(\xi_j)\Delta_j$ pull out of $B$. [L1, L2, algebra]
+1.1 $B \circ f$ is continuous as a composition of continuous maps, and for every tagged partition refining the fixed subdivision, $\sum_j B(f(\gamma(\xi_j)))v_{k(j)}(\xi_j)\Delta_j=B\!\left(\sum_j f(\gamma(\xi_j))v_{k(j)}(\xi_j)\Delta_j\right)$, because $B$ is linear and the scalars $v_{k(j)}(\xi_j)\Delta_j$ pull out of $B$. [L1, L2, algebra]
 
-1.2 For every tagged partition, $\bigl\|\sum_j f(\gamma(\xi_j))\gamma'(\xi_j)\Delta_j\bigr\| \le \sum_j\|f(\gamma(\xi_j))\|\,\bigl|\gamma'(\xi_j)\bigr|\,\Delta_j \le \bigl(\sup_{\gamma^\ast}\|f\|\bigr)\sum_j|\gamma'(\xi_j)|\Delta_j$. [L1, L2, algebra]
+1.2 For every such tagged partition, $\left\|\sum_j f(\gamma(\xi_j))v_{k(j)}(\xi_j)\Delta_j\right\|\le \left(\sup_{\gamma^\ast}\|f\|\right)\sum_j|v_{k(j)}(\xi_j)|\Delta_j$. [L1, L2, algebra]
 
 2.1 Passing to the limit in [step 1.1] using continuity of $B$ and the convergence of the Riemann sums in [L1] gives $B(\int_\gamma f\,dz) = \int_\gamma (B\circ f)\,dz$, which is claim 1. [step 1.1, L1, L2]
 

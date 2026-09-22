@@ -1,0 +1,8 @@
+# Position 34 context reseal
+
+Read the complete sequence-closure proof against the current regular-lambda construction already inspected at position 12. Its small-support and closure assumptions are unchanged by the later page context. For each coordinate the definable set D_xi of conditions deciding an HS name need only meet the actual generic, not be dense. The enlarged E_xi, consisting of D_xi and conditions admitting no extension into it, is dense and downward closed. A ground recursion through fewer than lambda E_xi, using a fixed well-order and unions at limits, proves their intersection dense. Genericity then supplies one q in the intersection; directedness with a generic D_xi-member excludes the second alternative for every xi.
+
+Collection bounds the HS-name/support witnesses in a set before ground AC chooses them. Their union support is small by regularity. The all-conditions graph-name construction is fixed by that support and has HS constituent names, so it is hereditarily symmetric, not merely symmetric. Evaluation at the common q yields the given graph. The empty domain and ground omega1 case are covered. No assumption places an arbitrary extension sequence of ground names back in M. These closure/forcing/support checks are familiar enough for this reseal without fresh external verification. Retain repaired disposition; no dependency or metadata change is required.
+
+
+Current itemHashJudge: 35fdeb8f425d78dc2387fa5d88d49712812dea5fd2638cf41f455507eb7331d7, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

@@ -1,0 +1,10 @@
+# FA position47 context review
+
+Retain escalated-to-owner, untouched bytes. Read full current proof/originalFA, Terra and Alpha evidence, own manifest/contract/risk, all current supplier statements relevant to the consistency bridge. Brunner original source https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf §§3.3–3.4 printed71–73 was visually read at31; Blass https://janos.cs.technion.ac.il/RESEARCH/AMS-Book-files/pdfs/11_Blass.pdf fixed-point argument was read at32. These support the obstruction and conditional BPI route, not an external transitive-model existence claim. No new reading of the unavailable full Pincus paper is claimed.
+
+The current ordered-Lauchli definition and obstruction now work internally in an arbitrary ZFA+AC ground. The old assertion that these two suppliers themselves require transitivity is withdrawn. But the exact BPI supplier at32 still begins 'Work in a transitive ZFA+AC ground model'. It was settled conditionally at32 and cannot be generalized by editing it at this later position. Con(ZF) yields Con(ZFC+GCH), expressly not a transitive model; F4 and1.1 supply no internalized version of the fixed-point construction meeting that remaining hypothesis.
+
+Conditionally, the finite rational stabilizers, interval obstruction, typed boundability certificate and exceptional BPI transfer clause fit. The transfer statement starts with a permutation model satisfying BPI; it does not produce the missing transitive ground. Calling the route external does not bridge that inference. Owner owes a verified arbitrary-model/internal or finite-fragment implementation of the remaining fixed-point/permutation/transfer route, or an authorized stronger premise. I have not established that metamathematical bridge from the inspected authorities; no claim that the intended consistency result is false. No partial edits/pass. Continue48 after record.
+
+
+Current itemHashJudge: 08a12e7928ae918b609548245b1da6f4ff36a5e88dcd2c0ddffa62a72f773e53. Matches the latest receipt. Queue-status immediately before recording shows every predecessor current. No judge verdict or pass stamp is created.

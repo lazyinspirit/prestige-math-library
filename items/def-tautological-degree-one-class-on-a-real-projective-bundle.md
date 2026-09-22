@@ -4,7 +4,7 @@ kind: definition
 title: Tautological degree-one class on a real projective bundle
 status: draft
 origin: pipeline
-deps: ["def-real-projective-bundle-and-tautological-line", "def-stiefel-space-grassmannian-and-tautological-bundle", "lem-a-bundle-embedding-produces-its-grassmannian-classifying-map", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
+deps: ["def-real-projective-bundle-and-tautological-line", "def-stiefel-space-grassmannian-and-tautological-bundle", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,16 +22,12 @@ sources:
 ## Definition
 
 Assume AC, and let $E\to B$ be a numerable real vector bundle of rank $n\geq1$
-over an admissible base. Put $P(E)$ and $\gamma_E$ as in
+over an paracompact Hausdorff CGWH base of CW homotopy type. Put $P(E)$ and $\gamma_E$ as in
 [[def-real-projective-bundle-and-tautological-line]]; both are numerable.
 
-By the bundle embedding lemma there is a countable bundle embedding of
-$\gamma_E$ into $P(E)\times\mathbb R^S$, and its image-plane map
-$$c:P(E)\longrightarrow\operatorname{Gr}_1(\mathbb R^\infty)=\mathbb{RP}^\infty =\operatorname{Gr}_1(\mathbb R^\infty)$$
-is continuous and satisfies $c^*\gamma_1\cong\gamma_E$, that is, $c$ classifies
-$\gamma_E$. Here $\gamma_1$ denotes the tautological line over
-$\mathbb{RP}^\infty$, and the finite-stage Grassmannian is regarded inside the
-stable one by the coordinate inclusions.
+The projective total space is paracompact Hausdorff CGWH of CW type and the tautological line has the refined numeration of the projective-bundle definition. The stable-Grassmannian classification theorem therefore gives a classifying map
+$$c:P(E)\longrightarrow\operatorname{Gr}_1(\mathbb R^\infty)=\mathbb{RP}^\infty$$
+with $c^*\gamma_1\cong\gamma_E$, where $\gamma_1$ is the tautological line. Here a classifying map means precisely a map with this bundle-pullback isomorphism.
 
 Let $a\in H^1(\mathbb{RP}^\infty;\mathbb F_2)$ be the fixed generator of
 $H^*(\mathbb{RP}^\infty;\mathbb F_2)\cong\mathbb F_2[a]$ supplied by
@@ -48,9 +44,9 @@ $x_E$ as a class in $H^1(B;\mathbb F_2)$.
 
 ## Facts & Assumptions
 
-**Given:** AC, a numerable real rank-$n$ bundle $E\to B$ with $n\geq1$ over an admissible base, and the bundles $P(E),\gamma_E$ of [[def-real-projective-bundle-and-tautological-line]].
+**Given:** AC, a numerable real rank-$n$ bundle $E\to B$ with $n\geq1$ over an paracompact Hausdorff CGWH base of CW homotopy type, and the bundles $P(E),\gamma_E$ of [[def-real-projective-bundle-and-tautological-line]].
 
-[F1] Under AC, a supplied numeration of a rank-one bundle gives a countable bundle embedding $j$ of it into the base times $\mathbb R^\infty$; the image-plane map $c_j$ is continuous and satisfies $c_j^*\gamma_1\cong \gamma_E$ ([[lem-a-bundle-embedding-produces-its-grassmannian-classifying-map]]).
+[F1] Over the specified base under AC, the projective total space is paracompact Hausdorff CGWH of CW type and its tautological line is numerable on refined projective-coordinate charts ([[def-real-projective-bundle-and-tautological-line]]).
 
 [F2] The stable Grassmannian $\operatorname{Gr}_1(\mathbb R^\infty)$ is the chosen model $B\operatorname O(1)$ of [[def-stiefel-space-grassmannian-and-tautological-bundle]], and pullback of its tautological line gives natural bijections $[X,B\operatorname O(1)]\cong\operatorname{Vect}^{\mathbb R}_1(X)$ on paracompact Hausdorff CGWH spaces under AC ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
 
@@ -59,6 +55,6 @@ $x_E$ as a class in $H^1(B;\mathbb F_2)$.
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]].
 
 ## Verification
-1.1 A classifying map of $\gamma_E$ exists. By the projective-bundle definition, $\gamma_E\to P(E)$ is a numerable rank-one real bundle. Apply [F1] to a supplied numeration of $\gamma_E$, which is the numeration inherited from $E$ in the definition of the tautological line: it gives a countable embedding of $\gamma_E$ and the continuous image-plane map $c:P(E)\to\operatorname{Gr}_1(\mathbb R^\infty)$ with $c^*\gamma_1\cong\gamma_E$. This is the sense in which $c$ classifies $\gamma_E$; the classification bijection [F2] records that the same assignment is the classifying map of the line bundle and is natural for base maps. AC is used exactly through [F1] and [F2]. [F1, F2, A1]
+1.1 By [F1], $\gamma_E$ is a numerable rank-one real bundle on the paracompact Hausdorff CGWH space $P(E)$. Surjectivity of the classification bijection [F2] gives a map $c:P(E)\to\operatorname{Gr}_1(\mathbb R^\infty)$ and a bundle isomorphism $c^*\gamma_1\cong\gamma_E$. This is all the classifying-map assertion needed here. AC is inherited from [F1] and [F2]. [F1, F2, A1]
 
-2.1 The class is well typed. The generator $a$ of [F3] is a class in $H^1(\mathbb{RP}^\infty;\mathbb F_2)$, and $c^*$ is defined on it, so $x_E=c^*a$ is a class in $H^1(P(E);\mathbb F_2)$. The definition has fixed one classifying map; it asserts nothing about other choices, and the next lemma shows that any other choice gives the same class. When $n=1$, $P(E)\cong B$ and $\gamma_E\cong E$ by the projective-bundle definition, so $x_E=c^*a$ is the degree-one cohomology class obtained from a classifying map of $E$; the later classification theorem proves that this class determines $E$, but no such injectivity is asserted here. For the empty base, $P(E)=\varnothing$ and $H^1(P(E);\mathbb F_2)=0$, so the unique value is $x_E=0$; the rank-zero convention of the projective-bundle definition is not used here because $n\geq1$. [F2, F3, step 1.1] ∎
+2.1 The class is well typed. The generator $a$ of [F3] is a class in $H^1(\mathbb{RP}^\infty;\mathbb F_2)$, and $c^*$ is defined on it, so $x_E=c^*a$ is a class in $H^1(P(E);\mathbb F_2)$. The definition has fixed one classifying map; it asserts nothing about other choices, and the next lemma shows that any other choice gives the same class. When $n=1$, $P(E)\cong B$ and $\gamma_E\cong E$ by the projective-bundle definition, so $x_E=c^*a$ is the degree-one cohomology class obtained from a classifying map of $E$; no injectivity of the assignment of cohomology classes to line bundles is asserted or used here. For the empty base, $P(E)=\varnothing$ and $H^1(P(E);\mathbb F_2)=0$, so the unique value is $x_E=0$; the rank-zero convention of the projective-bundle definition is not used here because $n\geq1$. [F2, F3, step 1.1] ∎

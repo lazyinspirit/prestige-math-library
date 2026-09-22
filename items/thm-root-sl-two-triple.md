@@ -5,7 +5,7 @@ title: The root sl_2 triple
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-special-linear-lie-algebra-sl-two, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, prop-killing-form-orthogonality-of-root-spaces]
+deps: [def-coroot-of-a-lie-algebra-root, def-killing-dual-vector-of-a-root, def-special-linear-lie-algebra-sl-two, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, prop-killing-form-orthogonality-of-root-spaces, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -20,7 +20,7 @@ proof_strategy: direct
 
 ## Statement
 
-Let $\alpha$ be a root of a finite-dimensional complex semisimple Lie algebra
+Assume the Axiom of Choice. Let $\alpha$ be a root of a finite-dimensional complex semisimple Lie algebra
 $\mathfrak g$ with respect to a Cartan subalgebra $\mathfrak h$, with coroot
 $h_\alpha$ as in [[def-coroot-of-a-lie-algebra-root]]. Then there are
 $e_\alpha\in\mathfrak g_\alpha$ and $f_\alpha\in\mathfrak g_{-\alpha}$ with
@@ -33,7 +33,9 @@ $\mathfrak{sl}_2$ inside $\mathfrak g$
 
 ## Facts & Assumptions
 
-**Given:** Such $\mathfrak g,\mathfrak h,\alpha$ and the Killing form $B$.
+**Given:** The Axiom of Choice, such $\mathfrak g,\mathfrak h,\alpha$ and the Killing form $B$.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it licenses the Killing-dual, coroot, and opposite-root pairing facts in [L1]--[L3].
 
 [L1] The pairing $\mathfrak g_\alpha\times\mathfrak g_{-\alpha}\to\mathbb C$, $(x,y)\mapsto B(x,y)$, is nondegenerate ([[cor-opposite-root-spaces-pair-nondegenerately]]).
 
@@ -47,7 +49,7 @@ $\mathfrak{sl}_2$ inside $\mathfrak g$
 
 **Proof technique:** direct.
 
-1.1 Choose $0\ne e\in\mathfrak g_\alpha$, which is possible because $\alpha$ is a root. By [L1] the linear functional $y\mapsto B(e,y)$ on the nonzero space $\mathfrak g_{-\alpha}$ is not identically zero, hence surjective onto $\mathbb C$; choose $f\in\mathfrak g_{-\alpha}$ with $B(e,f)=2/\alpha(H_\alpha)$, a nonzero number by [L3]. [L1, L3, algebra]
+1.1 Choose $0\ne e\in\mathfrak g_\alpha$, which is possible because $\alpha$ is a root. By [L1] the linear functional $y\mapsto B(e,y)$ on the nonzero space $\mathfrak g_{-\alpha}$ is not identically zero, hence surjective onto $\mathbb C$; choose $f\in\mathfrak g_{-\alpha}$ with $B(e,f)=2/\alpha(H_\alpha)$, a nonzero number by [L3]. [A1, L1, L3, algebra]
 
 2.1 For every $H\in\mathfrak h$, invariance and the root-space identity give $B([e,f],H)=B(e,[f,H])=\alpha(H)B(e,f)=B(B(e,f)H_\alpha,H)$. Both $[e,f]$ and $H_\alpha$ lie in $\mathfrak h$ by [L2], so nondegeneracy of $B|_{\mathfrak h}$ yields $[e,f]=B(e,f)H_\alpha=\frac{2}{\alpha(H_\alpha)}H_\alpha=h_\alpha$. By [L4] and [L3], $[h_\alpha,e]=\alpha(h_\alpha)e=2e$ and $[h_\alpha,f]=-2f$. Thus all three bracket relations of [[def-special-linear-lie-algebra-sl-two]] hold for $(e,f,h_\alpha)$. [L2, L3, L4, step 1.1, algebra]
 

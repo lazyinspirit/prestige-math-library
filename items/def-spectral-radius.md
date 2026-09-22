@@ -46,8 +46,9 @@ is fixed by the spectrum definition above.
   compact set of moduli uses no further choice, since a nonempty compact subset
   of $\mathbb R$ contains its supremum.
 
-- **Monotonicity under containment.** If $B$ is a unital subalgebra of $A$
-  containing $a$ and the same unit, then
+- **Monotonicity under containment.** If $B$ is a closed unital subalgebra of
+  $A$ containing $a$ and the same unit, then $B$ is a unital Banach algebra in
+  the inherited norm and
   $\sigma_A(a)\subseteq\sigma_B(a)$: invertibility in $B$ implies
   invertibility in $A$. Consequently $r_A(a)\le r_B(a)$.
 

@@ -21,13 +21,13 @@ proof_strategy: direct
 
 Assume the Axiom of Choice. For type $A_1$ with fundamental weight $\omega$ one
 has $P=\mathbb Z\omega$ and $Q=2\mathbb Z\omega$. The character lattice of the
-maximal torus of $SU(2)=\{g:\det g=1\}$ is $P$, while that of the maximal torus
-of $SO(3)=SU(2)/\{\pm I\}$ is $Q$; consequently precisely the even $SU(2)$
+maximal torus of $SU(2)=\{g\in U(2):\det g=1\}$ is $P$, while that of the maximal torus
+of $SO(3)\cong SU(2)/\{\pm I\}$ is $Q$; consequently precisely the even $SU(2)$
 highest weights descend to $SO(3)$.
 
 ## Facts & Assumptions
 
-**Given:** Assume the Axiom of Choice; $SU(2)$ with maximal torus $T_{SU(2)}=\{\operatorname{diag}(z,z^{-1})\}$ and the central quotient $SO(3)=SU(2)/\{\pm I\}$.
+**Given:** Assume the Axiom of Choice; $SU(2)$ with maximal torus $T_{SU(2)}=\{\operatorname{diag}(z,z^{-1}):|z|=1\}$ and the standard central quotient identification $SO(3)\cong SU(2)/\{\pm I\}$.
 
 [L1] For a compact connected semisimple group $Q\subseteq X^*(T)\subseteq P$, the simply connected form has character lattice $P$ and the adjoint form has character lattice $Q$; central quotients correspond to intermediate lattices ([[prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group]], [[prop-central-quotients-correspond-to-intermediate-character-lattices]]).
 
@@ -39,7 +39,7 @@ highest weights descend to $SO(3)$.
 
 1.1 $SU(2)$ is simply connected and semisimple with root system $A_1$, so $X^*(T_{SU(2)})=P=\mathbb Z\omega$ by [L1]; the characters are $\operatorname{diag}(z,z^{-1})\mapsto z^n$, with weight $n\omega$. [L1, L2]
 
-2.1 The kernel of $SU(2)\to SO(3)$ is $\{\pm I\}$, and for the character of weight $n\omega$ one has $(-I)\cdot z=-z$; since $-I=\operatorname{diag}(-1,-1)$ corresponds to $z=-1$, the character takes the value $(-1)^n$ there, so it is trivial on the kernel exactly when $n$ is even. [L2, step 1.1]
+2.1 The kernel of $SU(2)\to SO(3)$ is $\{\pm I\}$. Since $-I=\operatorname{diag}(-1,-1)$ corresponds to $z=-1$ in $T_{SU(2)}$, the character of weight $n\omega$ takes the value $(-1)^n$ there, so it is trivial on the kernel exactly when $n$ is even. [L2, step 1.1]
 
 3.1 By [L1] the intermediate lattice of $SO(3)$ is $X^*(T_{SO(3)})=\{\text{characters trivial on }\{\pm I\}\}=2\mathbb Z\omega=Q$, and the adjoint-form computation of [L1] gives the same answer. [L1, step 2.1]
 

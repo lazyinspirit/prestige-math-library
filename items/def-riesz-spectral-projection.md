@@ -5,7 +5,7 @@ title: Riesz spectral projection
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-holomorphic-functional-calculus-homomorphism, def-holomorphic-functional-calculus, lem-admissible-cycle-around-a-compact-plane-set, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-axiom-of-choice]
+deps: [thm-holomorphic-functional-calculus-homomorphism, def-holomorphic-functional-calculus, lem-admissible-cycle-around-a-compact-plane-set, lem-banach-valued-cauchy-integral-vanishes, def-null-homologous-and-homologous-complex-cycles, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-axiom-of-choice]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -51,10 +51,23 @@ $1-0=1$ on $E$, index $1-1=0$ on $\sigma_A(a)\setminus E$, and index $0$
 outside $U_1\cup U_0$, because $c_{\mathrm{all}}$ has index $0$ there and
 $c_E$ has index $0$ outside $U_0\subseteq U_1\cup U_0$. Such cycles exist by
 [[lem-admissible-cycle-around-a-compact-plane-set]] applied to the two compact
-sets $\sigma_A(a)$ and $\sigma_A(a)\setminus E$; the value is independent of
-the choice of $U_0,U_1$ and of the cycle by
-[[lem-holomorphic-functional-calculus-is-contour-independent]], applied to the
-germ of $\chi_E$ near $\sigma_A(a)$.
+sets $\sigma_A(a)$ and $\sigma_A(a)\setminus E$.
+
+Here the equality with the displayed integral, and its independence of the
+separating cycle, do not use contour independence outside its admissible-cycle
+hypothesis. Indeed, put
+$F(z)=\chi_E(z)R(z,a)$ on
+$\Omega:=(U_1\setminus E)\cup U_0$. This is Banach-valued holomorphic: it is
+$R(z,a)$ on $U_1\setminus E$ and identically zero on $U_0$, so in particular
+it extends holomorphically across $\sigma_A(a)\setminus E$. If
+$c_{\mathrm{all}}$ is admissible and $\Gamma$ has the separating indices just
+specified, then $c_{\mathrm{all}}-\Gamma$ has index zero on $E$ and outside
+$U_1\cup U_0$, hence is null-homologous in $\Omega$. Therefore
+[[lem-banach-valued-cauchy-integral-vanishes]] gives
+$$\int_{c_{\mathrm{all}}}F(z)\,dz=\int_\Gamma F(z)\,dz.$$
+The left side is the defining calculus integral for $\chi_E(a)$. Thus every
+such $\Gamma$ gives $P_E$, while germ independence of the calculus makes the
+value independent of the chosen $U_0,U_1$.
 
 ## Remarks
 

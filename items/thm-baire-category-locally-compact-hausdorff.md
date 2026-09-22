@@ -48,10 +48,10 @@ every sequence $(U_n)_{n \in \mathbb{N}}$ of dense open subsets of $X$
 $\bigcap_{n \in \mathbb{N}} U_n$ is dense in $X$.
 
 **Dependent choice is sufficient here and no claim of necessity is made.** The
-several statements that go by the name "Baire category theorem" are inequivalent
-over ZF, and the choice principles they correspond to differ; that account,
-including the fact that the compact Hausdorff version is equivalent to a
-principle strictly weaker than dependent choice, is
+several statements that go by the name "Baire category theorem" have different
+choice-theoretic statuses over ZF. The compact Hausdorff version is equivalent
+to dependent multiple choice; DC implies DMC in ZF, the reversal remains open
+in ZF, and DMC does not imply DC in ZFA. That account is
 [[rem-baire-category-choice-strength]], which this library states and does not
 prove. Nothing below asserts that dependent choice is needed for the statement
 above.

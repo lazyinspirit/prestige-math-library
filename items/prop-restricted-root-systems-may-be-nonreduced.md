@@ -81,9 +81,10 @@ for the standard orthonormal basis $e_1,\dots,e_r$, and $\varphi$ preserves all
 Cartan integers: $2\langle\varphi(\mu),\varphi(\lambda)\rangle
 |\varphi(\lambda)|^{-2}=2\langle\mu,\lambda\rangle|\lambda|^{-2}$ for all
 $\mu,\lambda\in\Sigma$. In particular the irreducible nonreduced restricted-root
-systems are exactly the systems of type $BC_r$: the doubled roots form the
-$B_r$-part $\{\pm e_i\}$ and the reduced part of $\Sigma$ is the type-$B_r$
-system $\{\pm e_i\}\cup\{\pm e_i\pm e_j\}$.
+systems are exactly the systems of type $BC_r$: the indivisible roots that
+admit doubling correspond to $\Psi=\{\pm e_i\}$, the actual doubled roots
+$2\Psi$ correspond to $\{\pm2e_i\}$, and the reduced subsystem $\Sigma_s$ is
+the type-$B_r$ system $\{\pm e_i\}\cup\{\pm e_i\pm e_j\}$.
 
 ## Facts & Assumptions
 
@@ -155,6 +156,6 @@ system $\{\pm e_i\}\cup\{\pm e_i\pm e_j\}$.
 
 11.1 $\Psi$ is exactly the set of short roots of $\Sigma_s$: $\Psi$ is $W(\Sigma_s)$-invariant by step 7.1, and under the isomorphism of step 10.1 the roots of $\Sigma_s$ correspond to $B_r=\{\pm e_i\}\cup\{\pm e_i\pm e_j\}$ with $\beta$ corresponding to a short root $e_r$; since $W(B_r)$ is the group of signed permutations and acts transitively on $\{\pm e_i\}$ by [L5], $\Psi$ contains the whole short class; conversely no long root $e_i\pm e_j$ lies in $\Psi$, because for such a root $\alpha$, the short root $e_i$ satisfies $(\alpha,\alpha)=2(e_i,e_i)$ and $|(e_i,\alpha)|=(e_i,e_i)$, so $(e_i,\alpha)(\alpha,\alpha)^{-1}=\pm1/2\notin\mathbb Z$, contradicting step 7.4. [step 7.4, step 10.1, L5]
 
-12.1 Conclusion of (c): by steps 10.1 and 11.1 there is a linear isomorphism $\varphi$ of $\mathfrak a^*$ onto $\mathbb R^r$ carrying $\Sigma_s$ onto $B_r=\{\pm e_i\}\cup\{\pm e_i\pm e_j\}$ and $\Psi$ onto $\{\pm e_i\}$; therefore $\varphi$ carries $\Sigma=\Sigma_s\sqcup2\Psi$ onto $B_r\cup2\{\pm e_i\}=BC_r$; and $\varphi$ preserves Cartan integers: on pairs of roots of $\Sigma_s$ this holds by the definition of a root-system isomorphism, and for pairs involving a doubled root $2\alpha$ with $\alpha\in\Psi$ one computes $2\langle2\alpha,\beta\rangle|\beta|^{-2}=2\cdot2\langle\alpha,\beta\rangle|\beta|^{-2}$ and $2\langle2\alpha,2\beta\rangle|2\beta|^{-2}=2\langle\alpha,\beta\rangle|\beta|^{-2}$, which are the corresponding Cartan integers computed in $BC_r$ because the doubled roots are the short roots; combined with the rank-one case of step 8.2 this proves (c) for all $\dim\mathfrak a\ge1$. [step 8.2, step 10.1, step 11.1, algebra]
+12.1 Conclusion of (c): by steps 10.1 and 11.1 there is a linear isomorphism $\varphi$ of $\mathfrak a^*$ onto $\mathbb R^r$ carrying $\Sigma_s$ onto $B_r=\{\pm e_i\}\cup\{\pm e_i\pm e_j\}$ and $\Psi$ onto $\{\pm e_i\}$; therefore $\varphi$ carries $\Sigma=\Sigma_s\sqcup2\Psi$ onto $B_r\cup2\{\pm e_i\}=BC_r$; and $\varphi$ preserves Cartan integers: on pairs of roots of $\Sigma_s$ this holds by the definition of a root-system isomorphism, and for pairs involving a doubled root $2\alpha$ with $\alpha\in\Psi$ one computes $2\langle2\alpha,\beta\rangle|\beta|^{-2}=2\cdot2\langle\alpha,\beta\rangle|\beta|^{-2}$ and $2\langle2\alpha,2\beta\rangle|2\beta|^{-2}=2\langle\alpha,\beta\rangle|\beta|^{-2}$, which are the corresponding Cartan integers in $BC_r$ because $\alpha,\beta$ correspond to short roots $\pm e_i$ while $2\alpha,2\beta$ correspond to the doubled roots $\pm2e_i$; combined with the rank-one case of step 8.2 this proves (c) for all $\dim\mathfrak a\ge1$. [step 8.2, step 10.1, step 11.1, algebra]
 
 13.1 Statements (a), (b) and (c) are now proved: finiteness, spanning and the reflection and integrality properties of $\Sigma$ in steps 1.3, 4.3 and 5.1, together with the realisation of $s_\lambda$ in $N_K(\mathfrak a)$ in step 5.1, give (a); the explicit nonreduced restricted-root system of the pair $(\mathfrak{su}(2,1),\mathbb RH)$ in step 4.2 gives (b); and the classification of the irreducible nonreduced case in step 12.1 completes (c). The Axiom of Choice was used only through the representation theory of [L6] in step 4.3. [A1, step 1.3, step 4.2, step 4.3, step 5.1, step 12.1] ∎

@@ -79,10 +79,13 @@ is defined as follows.
 
 5. **Comparison with deterministic Riemann integration.** The integral is a
    stochastic integral: the integrand is paired with the Brownian path through
-   left-endpoint sums, and no pathwise Riemann--Stieltjes interpretation is
-   available (the companion examples page exhibits the failure of the
-   bounded-variation construction). The notation $\int_0^TH\,dB$ always refers
-   to the $L^2(P)$-class defined above.
+   left-endpoint sums and an $L^2(P)$ limit. This definition does not assert
+   convergence of arbitrary tagged Riemann--Stieltjes sums for a general
+   predictable integrand. Particular integrands can have a pathwise
+   interpretation: for $H\equiv1$ every tagged sum telescopes to $B_T-B_0$,
+   which is also its Ito integral by clause 3 (the value at time zero is
+   irrelevant to its product-measure class). The notation $\int_0^TH\,dB$
+   here always refers to the $L^2(P)$-class defined above.
 
 The Axiom of Choice is declared because the construction selects an
 approximating sequence and uses the completeness and conditional-expectation

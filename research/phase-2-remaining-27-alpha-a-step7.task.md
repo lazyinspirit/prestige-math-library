@@ -12,18 +12,10 @@ about mathematics.
 
 ## What you recorded at step 6
 
-`research/phase-2-remaining-27-alpha-a-step7-context.json` is what a group Alpha for this group wrote during step 6,
-while the judges were still sweeping and no verdict existed. It records the
-conventions your pages fix, which items the rest lean on, which published
-dependencies were actually opened, and what already looked thin.
-
-**Its `concerns` list is evidence, not decoration.** Each entry was found with
-nobody suggesting where to look. A judge rejection landing at the same place is
-two independent readings agreeing and should be very hard to call a
-`false_positive`; a rejection landing nowhere near any of them is not thereby
-wrong, but it is the case to read most carefully against the text.
-
-It is notes, not authority. Where it and the item files disagree, the files win.
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
 
 ## Read scope, write scope
 
@@ -266,7 +258,7 @@ files under `items/` for that.
 - `thm-maximal-tori-exist-in-compact-lie-groups` · theorem — Existence of maximal tori
 - `thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus` · theorem — Every element lies in a maximal torus
 - `thm-conjugacy-of-maximal-tori` · theorem — Conjugacy of maximal tori
-- `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus` · corollary — Connected abelian subgroups lie in maximal tori
+- `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus` · corollary — Compact connected abelian subgroups lie in maximal tori
 - `cor-rank-of-a-compact-connected-lie-group-is-well-defined` · corollary — Rank is well-defined
 - `def-weyl-group-of-a-compact-connected-lie-group` · definition — Compact Weyl group
 - `thm-compact-group-weyl-group-is-finite` · theorem — The compact Weyl group is finite
@@ -464,26 +456,7 @@ changed a domain, quantifier, hypothesis, direction or conclusion.
 
 ## Step-6 reader warnings
 
-12 warning(s) a Step-6 reader recorded in items you own.
-They were read-only and could not repair or adjudicate them. You own these decisions.
-
-- **s8a-d1d94383483c8b5b570d7e11 · `thm-root-sl-two-triple`** (from group a, would-be-fatal) — Fact [L2] states '[x,y] = -B(x,y)H_alpha' for x in g_alpha, y in g_{-alpha}. With the library's own definitions and its own sl_2 data this is false: B(h,h)=8 gives H_alpha=h/4 and B(e,f)=4, while [e,f]=h, so [e,f]=+B(e,f)H_alpha. Step 1.1 then chooses f with B(e,f)=-2/alpha(H_alpha), which under the true identity yields [e,f]=-h_alpha, not h_alpha; the theorem's conclusion is true (take the opposite sign of f), but the stated fact and the displayed construction are wrong as written.
-- **s8a-504d6f91bba7d13a5818352d · `prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra`** (from group a, gap-a-reader-closes) — Step 1.1 misapplies invariance: from B([e,f],H) = B(e,[f,H]) (not B(e,[H,f])) and [f,H]=alpha(H)f one gets B([e,f],H)=+alpha(H)B(e,f), hence [e,f]=+B(e,f)H_alpha. The identity actually derived, [e,f]=-B(e,f)H_alpha, is false. The item's own statement ([g_alpha,g_{-alpha}]=C H_alpha) still holds, since the bracket is a nonzero multiple of H_alpha; the repair is a one-line sign flip (same convention issue as thm-root-sl-two-triple, and def-cayley-transform-of-a-theta-stable-cartan-subalgebra uses the correct + sign).
-- **s8a-8a04705b005451a70517e6fa · `lem-killing-length-of-a-root-is-nonzero`** (from group a, gap-a-reader-closes) — Step 1.1 imports the wrong-sign version of the root-space identity (z=-B(e,f)H_alpha, alpha(z)=-B(e,f)alpha(H_alpha)) from the item above. The conclusion B(H_alpha,H_alpha)=alpha(H_alpha) nonzero is unaffected, because the argument only uses z nonzero, alpha(z) proportional to alpha(H_alpha), and the case alpha(H_alpha)=0; a reader repairs the sign in seconds.
-- **s8a-ca3e35230c0f4eba4b54efcc · `thm-rank-two-root-system-classification`** (from group a, would-be-fatal) — Statement (i) lists the unequal-length Cartan pairs transposed: with |alpha|>=|beta| and the item's own definition n_{alpha beta}=2(beta,alpha)/(alpha,alpha), n_{beta alpha}=2(alpha,beta)/(beta,beta), one has |n_{alpha beta}|/|n_{beta alpha}|=|beta|^2/|alpha|^2, so for |alpha|^2=2|beta|^2 the pair is (1,2) (and (-1,-2) at 135 degrees), and for |alpha|^2=3|beta|^2 it is (1,3) ((-1,-3) at 150 degrees), not (2,1), (-2,-1), (3,1), (-3,-1) as printed. The item's own steps 1.2 and 2.1 derive the correct values (|n_{alpha beta}|=1, |n_{beta alpha}|=2 or 3), so the hypothesis section and the statement conflict; e.g. in B_2 with long alpha=eps_1+eps_2 and short beta=eps_1 (45 degrees) one computes n_{alpha beta}=1, n_{beta alpha}=2.
-- **s8a-95c9c72fdb655c4bbe61b22b · `ex-root-strings-in-type-a-two`** (from group a, would-be-fatal) — The closing sentence asserts that the alpha-string through alpha is {-alpha,0,alpha} 'so p=q=1 and p-q=0 ... consistent with ... p-q=0 for beta=alpha'. Under the cited thm-root-string-property the index set for beta=alpha is {-2,-1,0}, so p=2, q=0 (p-q=0 is also inconsistent with p-q=beta(h_alpha)=alpha(h_alpha)=2, which the same sentence states). The set {-alpha,0,alpha} is right; the (p,q) labelling and the 'consistent' clause are wrong.
-- **s8a-4454bbe082772fc44e0e7520 · `cor-complete-reducibility-for-compact-lie-groups`** (from group a, gap-a-reader-closes) — Fact [L3] cites def-real-and-complex-inner-product-space for 'dim W-perp = dim V - dim W for a subspace of a finite-dimensional inner-product space' and for '0 is the direct sum of the empty family'. The cited definition states neither; the orthogonal complement and its dimension formula are stated elsewhere on the cited page (def-orthogonality-and-orthogonal-complement / thm-orthogonal-decomposition-by-a-closed-subspace). Citation over-attribution; the mathematics is unaffected.
-- **s8a-32a5894c99c2e337c193ecbd · `thm-peter-weyl-for-compact-lie-groups`** (from group a, gap-a-reader-closes) — Fact [L5] bundles 'a proper closed subspace has nonzero orthogonal complement' under a citation of thm-hilbert-space-fourier-expansion; that item's statement contains only the finite-subset-net convergence, coefficient uniqueness and countable-support claims, not the orthocomplement statement. The convergence half is quoted faithfully; the second half is attributed to an item that does not contain it (see seam report).
-- **s8a-957adcaa2f669c513daa2534 · `thm-structure-of-a-compact-connected-abelian-lie-group`** (from group a, presentation) — Fact [L3] cites def-the-one-dimensional-torus-and-normalized-haar-integral for 'the circle group is S^1=R/Z with its Lie-group structure'. That definition constructs R/Z as a compact Hausdorff topological group with normalized Haar measure and notes it is homeomorphic to the Euclidean circle, but does not state a Lie-group (smooth) structure claim; the smooth structure and the identification with the circle as a Lie group are not contained in the cited item.
-- **s8a-0c4f5daa7b7ad293b0e3bfbd · `prop-restricted-root-systems-may-be-nonreduced`** (from group a, presentation) — Part (a) concludes 'Thus Sigma is a finite abstract root system in a* with the reflections s_lambda realised inside N_K(a)'. The library's root-system notion (def-reduced-crystallographic-euclidean-root-system) requires reducedness, which Sigma need not satisfy (as the same item proves in (b)), and 'abstract root system' is not a defined library notion; readers should be told the phrase is used in the non-reduced axiomatic sense only.
-- **s8a-6620c22509cb5bf85dd67ba3 · `thm-classification-of-real-forms-by-vogan-diagrams`** (from group a, presentation) — Reading-depth disclosure, not an asserted defect: this item's 16-step existence/uniqueness proof (and the long constructive proofs of thm-serre-presentation-theorem and the Weyl character/denominator items) were read at statement and facts level in this pass, together with their cited statements; their internal case analyses were not re-derived, so no defect is asserted there and none is excluded. Everything I do assert above rests on the full texts I read.
-- **s8a-912c4448ec9268d07012201a · `thm-peter-weyl-for-compact-lie-groups`** (from group c, gap-a-reader-closes) — Fact [L5] states: 'In a Hilbert space, the finite-subset net of coefficients along a complete orthonormal family converges to the vector, and a proper closed subspace has nonzero orthogonal complement ([[thm-hilbert-space-fourier-expansion]])'. The cited item states only expansion, coefficient uniqueness and unconditional convergence for a complete orthonormal family; it does not contain the second assertion, which is a consequence of thm-orthogonal-decomposition-by-a-closed-subspace (also on the required geometry page, not of the cited Fourier-expansion item).
-- **s8a-86041504bf6d2fcc5e6f5825 · `thm-structure-of-a-compact-connected-abelian-lie-group`** (from group c, presentation) — Fact [L3] states 'The circle group is S^1 = R/Z with its Lie-group structure' citing ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]). That item constructs R/Z as a compact Hausdorff topological group with the normalized Haar measure and shows a homeomorphism onto the Euclidean circle; it does not construct a smooth (Lie-group) structure, so the smooth structure is attributed to a supplier that does not provide it.
-
-Append one owning-group disposition per warning to `research/phase-2-remaining-27-step7-alert-decisions.jsonl`.
-A Step-6 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
-pre/post guard hashes. A later Step-7 cross-group alert still requires a real targeted
-judge rejection; never reuse its source rejection as target evidence.
+None. No Step-6 reader warning targets an item you own.
 
 ## Your rejections
 
@@ -494,75 +467,17 @@ a rejection recorded after this file was rendered is still yours.
 
 ---
 
-# Step 7 — fatal-only judge and reader-warning adjudication, `phase-2-remaining-27`
+# Step 7 batch adjudication, `phase-2-remaining-27`
 
-The generated scope header supplies the owned pages, items, seams, rejections,
-and incoming alerts. Read each owned rejection against the current item and its
-cited dependencies; the exact `(id, model, context_sha256)` tuple identifies
-one adjudication.
+Follow `briefs/step7-adjudicator.md` and the engine-generated, round-bound task.
+It supplies the batch, exact rejections, ownership, evidence paths and structured
+result schema. Do not reconstruct these from an old group task.
 
-Audit one item, record its decision, complete its authorized repair and focused
-checks, then continue to the next item. Do not run judges or final adjudicators.
-The engine runs repair checks, one rejudge, then one terminal adjudication pass
-after every group finishes. On resume, retain completed decisions and repairs.
-
-Web search is available in this role. If any mathematics is uncertain, use it
-and verify the point against original sources before deciding the outcome or
-making a repair. Record the sources consulted and the exact claim each source
-supports in the group report; do not resolve uncertainty from memory or a
-secondary summary alone.
-
-Append one row per rejection to `research/phase-2-remaining-27-judge-adjudications.jsonl`
-with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
-`confirmed_fatal` licenses a content repair and matching defect-ledger row;
-`confirmed_nonfatal` and `false_positive` close the rejection without content,
-contract, impact, or judge changes. The engine rejudges exactly changed items
-against the configured judge set after preflight.
-
-You may add and author new lemma items when a licensed fatal repair needs a
-genuinely missing dependency. Prove each lemma fully, verify unfamiliar or
-uncertain mathematics against authoritative sources, and cite it in the
-consumer's `deps` and proof. Supporting chains of new lemmas are permitted.
-Place the lemmas on an owned page before their consumers and update that page,
-the owning batch manifest and proof contract, and the Step-7 scope's group item
-list and `by_item` entries. Record the missing dependency and its consuming
-fatal repair in your report. This is an authorized scope addition; do not
-invent a rejection or adjudication for a new lemma. New lemmas enter the
-engine's normal coverage and targeted judgment checks.
-
-Every entry under **Step-6 reader warnings** also requires an owning-group
-decision in `research/phase-2-remaining-27-step7-alert-decisions.jsonl`. Use `not_defect` or
-`nonfatal` when no content change is warranted, and `covered_by_rejection` when
-an exact judge rejection already licenses the same repair. If a Step-6 reader
-warning is independently `confirmed_fatal`, record `defect_type`, the full
-pre-edit `itemHashGuard` digest as `item_sha256`, the full repaired digest as
-`post_sha256`, repair the item before returning, and add exactly one matching
-defect-ledger row whose structured `adjudication_ref` contains this `alert_id`,
-`item`, and `item_sha256`. Only Step-6 reader warnings have this direct fatal
-licence; later cross-group alerts raised while
-adjudicating a judge rejection still require a targeted judge rejection.
-
-A warning may name an owned page, for example a missing prerequisite page.
-Read the page and its declared prerequisites and retain an explicit disposition.
-The frontier policy permits unbuilt cross-category prerequisites. Check actual
-item dependencies and citations before classifying such an absence as fatal;
-the scheduling allowance does not excuse a missing fact used in a proof.
-A page warning grants no item-edit authority: identify the affected item and its
-fatal evidence, or report an unresolved page defect with
-`confirmed_fatal_unlicensed`. Never dismiss it merely because it names a page.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Descriptive defect-ledger subclasses
-such as `invalid-inference`, `false-claim`, or `ill-typed-construction` are not
-valid adjudication `defect_type` values.
-
-For every reader warning, append the owning-group disposition to
-`research/phase-2-remaining-27-step7-alert-decisions.jsonl`. A defect in another group is a
-`research/phase-2-remaining-27-step7-cross-group.jsonl` alert, not permission to repair it. Use
-`published-repairs.mjs append` with a namespaced temporary row for an obvious
-source-grounded published-item repair; a debatable published change is an
-escalation.
-
-Do not create a Step-7 baseline or rewrite shared ledgers. Run the Step-7 guard
-and scope check, then write `research/phase-2-remaining-27-alpha-step7-<group>.md` with every
-rejection, outcome, repair, alert, and rejudge target for this group.
+Adjudicate by logical validity, repair all confirmed defects (including nonfatal
+defects), and identify all
+relevant downstream consumers including published items. The engine routes
+downstream repairs to three Sol xhigh owners and certifies once after all
+writers drain. Terra rejudgment and adjudication/repair/certification repeat
+under WORKFLOW.md. New downstream work continues in the repair phase until
+complete before certification. Fatal classification controls only the threshold.
+Historical terminal receipts cannot close current rounds.

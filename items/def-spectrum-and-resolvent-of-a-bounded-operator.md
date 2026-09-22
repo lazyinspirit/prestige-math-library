@@ -9,6 +9,11 @@ deps: [def-bounded-linear-operator, def-banach-space, def-space-of-bounded-linea
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.1 pp.163–164, definitions preceding Lemma 6.1"
@@ -44,7 +49,7 @@ operator $x\mapsto\lambda x-Tx$ ([[def-linear-map]]).
   is
   $$G_\lambda(T):=\bigcup_{n\ge1}\ker\bigl((T-\lambda I)^n\bigr),$$
   an increasing union of linear subspaces ([[def-linear-subspace]]); the union
-  is a linear subspace because the union is increasing. If $G_\lambda(T)$ is
+  is a linear subspace because the union is increasing. If $\lambda$ is an eigenvalue and $G_\lambda(T)$ is
   finite dimensional, $\dim_{\mathbb C}G_\lambda(T)$
   ([[def-dimension]]) is the **algebraic multiplicity** of the eigenvalue
   $\lambda$.
@@ -54,7 +59,7 @@ conversely.** If $(T-\lambda I)^nx=0$ with $x\ne0$, let $k\ge1$ be least with
 $(T-\lambda I)^kx=0$; then $y:=(T-\lambda I)^{k-1}x$ is nonzero and satisfies
 $(T-\lambda I)y=0$. So $G_\lambda(T)\ne\{0\}$ exactly when $\lambda$ is an
 eigenvalue. In particular $\lambda\in\rho(T)$ implies
-$G_\lambda(T)=\{0\}$. If $G_\lambda(T)$ is finite dimensional, then the
+$G_\lambda(T)=\{0\}$. If $\lambda$ is an eigenvalue and $G_\lambda(T)$ is finite dimensional, then the
 algebraic multiplicity is defined and is at least
 $\dim_{\mathbb C}E_\lambda(T)$, because $E_\lambda(T)\subseteq G_\lambda(T)$.
 

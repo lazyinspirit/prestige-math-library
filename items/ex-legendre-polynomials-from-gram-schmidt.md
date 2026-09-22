@@ -5,7 +5,7 @@ title: Legendre polynomials from Gram–Schmidt
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-separable-hilbert-space-has-a-countable-orthonormal-basis, cor-weierstrass-approximation-on-a-closed-interval, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-countable-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-ftc-second-part, lem-derivative-of-a-power, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, def-real-and-complex-inner-product-space, lem-finite-bessel-inequality]
+deps: [thm-gram-schmidt-orthonormalisation, thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots, thm-lebesgue-measure-of-a-box-of-every-kind, cor-weierstrass-approximation-on-a-closed-interval, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-countable-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-ftc-second-part, lem-derivative-of-a-power, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, def-real-and-complex-inner-product-space]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -24,7 +24,7 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). On the real
 Hilbert space $L^2([-1,1])$ with the integral pairing
 ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]) apply Gram–Schmidt
 elimination to the sequence of monomial classes $1,x,x^2,\dots$
-([[thm-separable-hilbert-space-has-a-countable-orthonormal-basis]]). The result
+([[thm-gram-schmidt-orthonormalisation]]). The result
 is a complete orthonormal family — an orthonormal basis of $L^2([-1,1])$ — whose
 first three members are
 
@@ -36,7 +36,7 @@ polynomials. No general formula for $P_n$ or its norm is asserted here.
 
 ## Facts & Assumptions
 
-[A1] Gram–Schmidt elimination applied to a sequence with dense range in a Hilbert space yields an orthonormal family whose closed linear span is the closed linear span of the sequence; explicitly $e_0=x_0/\|x_0\|$ when $x_0\ne0$, and each further nonzero residual $v_n=x_n-\sum_{m}\langle x_n,e_m\rangle e_m$ is normalised ([[thm-separable-hilbert-space-has-a-countable-orthonormal-basis]], [[lem-finite-bessel-inequality]]).
+[A1] Every finite initial monomial list $(1,x,\dots,x^r)$ is linearly independent as a list of $L^2([-1,1])$ classes: a nontrivial linear combination is a nonzero polynomial, which has only finitely many roots, so some nondegenerate subinterval of $[-1,1]$ contains no root and has positive Lebesgue measure; the combination therefore cannot vanish almost everywhere ([[thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]). Finite Gram–Schmidt sends each such list to an orthonormal list with the same successive spans, using the displayed residual formula ([[thm-gram-schmidt-orthonormalisation]]).
 
 [A2] The polynomials are uniformly dense in $C([-1,1],\mathbb R)$, and continuous functions are dense in $L^2$ of a bounded interval, so the $L^2$-closure of the polynomials is all of $L^2([-1,1])$ ([[cor-weierstrass-approximation-on-a-closed-interval]], [[lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori]]).
 
@@ -50,7 +50,7 @@ polynomials. No general formula for $P_n$ or its norm is asserted here.
 
 **Given:** The sequence of monomial classes $1,x,x^2,\dots$ in $L^2([-1,1],\mathbb R)$.
 
-1.1 Gram–Schmidt applies to the monomials and produces an orthonormal family $(e_n)$ with the same closed linear span as the monomials; that closed span is all of $L^2([-1,1])$, because the polynomials are uniformly dense in $C([-1,1])$ and the continuous functions are dense in $L^2$. Hence $(e_n)$ is a complete orthonormal family, that is, an orthonormal basis of $L^2([-1,1])$. [A1, A2, A4]
+1.1 For each $r$, apply finite Gram–Schmidt to $(1,x,\dots,x^r)$. By [A1] every residual is nonzero, and the recursive formula is independent of how far the finite list is extended, so these finite outputs are compatible and define one orthonormal sequence $(e_n)_{n\in\mathbb N}$. The successive-span identity gives $\operatorname{span}\{e_0,\dots,e_r\}=\operatorname{span}\{1,x,\dots,x^r\}$ for every $r$. Hence the sequence and the monomials have the same closed linear span; this is all of $L^2([-1,1])$, because the polynomials are uniformly dense in $C([-1,1])$ and the continuous functions are dense in $L^2$. Thus $(e_n)$ is a complete orthonormal family, that is, an orthonormal basis. [A1, A2, A4]
 
 1.2 First element: $x_0=1$ has $\|1\|_2^2=\int_{-1}^11\,dx=2$, so $e_0=1/\sqrt2$. [A1, A3]
 

@@ -11,7 +11,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Lemma 5.28 and Theorem 5.36"
+    - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics, Lemma 5.28 and Theorem 5.36"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
 ---
 
@@ -21,7 +21,11 @@ Assume the Axiom of Choice and the standing hypothesis (H) of
 [[def-elementary-predictable-brownian-integrand]]. Let $H$ be a locally
 square-integrable predictable process
 [[def-locally-square-integrable-predictable-brownian-integrand]] with localized
-integral $H\cdot B$ [[thm-localized-ito-integral]], and let $\tau$ be a
+integral $H\cdot B$ in the progressively measurable version of
+[[thm-localized-ito-integral]], with its measurable-full-event convention
+for indistinguishability. The filtration satisfies the usual conditions and
+local energy is finite almost surely on every finite horizon, as required by
+the local-integrability definition. Let $\tau$ be a
 stopping time [[def-continuous-time-stopping-time]]. Then the process
 $s\mapsto(H\cdot B)_{s\wedge\tau}$ and the localized integral of the process
 $1_{[0,\tau]}H$ are indistinguishable:
@@ -32,15 +36,15 @@ definition of the localized integral.
 
 ## Facts & Assumptions
 
-**Given:** AC, the standing hypothesis (H), a locally square-integrable predictable $H$ with energy $A$ and canonical times $\tau_n$, its localized integral $H\cdot B$, and a stopping time $\tau$.
+**Given:** AC, the standing hypothesis (H), a locally square-integrable predictable $H$ with energy $A$ and canonical stopping times $\tau_n$, $n\ge1$, its localized integral $H\cdot B$, and a stopping time $\tau$.
 
-[F1] $1_{[0,\tau]}$ is predictable for every stopping time, and $1_{[0,\tau]}H$ is predictable and locally square-integrable with energy $\int_0^t1_{[0,\tau]}H^2ds\le A_t<\infty$ a.s.; its localized integral exists and is a continuous local martingale. [[def-progressively-measurable-and-predictable-process]] [[thm-localized-ito-integral]]
+[F1] $1_{[0,\tau]}$ is predictable for every stopping time, and $1_{[0,\tau]}H$ is predictable and locally square-integrable with energy $\int_0^t1_{[0,\tau]}H^2ds\le A_t<\infty$ almost surely for every finite $t$; its localized integral exists and is a continuous local martingale. [[def-progressively-measurable-and-predictable-process]] [[thm-localized-ito-integral]]
 
 [F2] The canonical times $\tau_n$ satisfy $\tau_n\le n$, $\tau_n\uparrow\infty$ a.s., $1_{(0,\tau_n]}H$ has finite energy $EA_{t\wedge\tau_n}\le n$, and $(H\cdot B)^{\tau_n}$ is the finite-energy integral of $H1_{(0,\tau_n]}$; the finite-energy stopping identity gives $(G\cdot B)^{\sigma}_t=\int_0^tG1_{(0,\sigma]}dB$ for finite-energy $G$ and any stopping time $\sigma$. [[def-locally-square-integrable-predictable-brownian-integrand]] [[thm-localized-ito-integral]]
 
-[F3] If $(\rho_k)$ is nondecreasing with $\rho_k\uparrow\infty$ a.s., each $H1_{(0,\rho_k]}$ has finite energy, and a continuous adapted $N$ with $N_0=0$ has $N^{\rho_k}$ indistinguishable from the finite-energy integral of $H1_{(0,\rho_k]}$ for every $k$, then $N$ is indistinguishable from the localized integral of $H$. [[thm-localized-ito-integral]]
+[F3] If $(\rho_k)$ is a nondecreasing sequence of stopping times with $\rho_k\uparrow\infty$ a.s., each $H1_{(0,\rho_k]}$ has finite energy, and a continuous adapted $N$ with $N_0=0$ has $N^{\rho_k}$ indistinguishable from the finite-energy integral of $H1_{(0,\rho_k]}$ for every $k$, then $N$ is indistinguishable from the localized integral of $H$. [[thm-localized-ito-integral]]
 
-[F4] Stopping preserves adaptedness and continuity, so $N:=(H\cdot B)^{\tau}$ is an adapted continuous process with $N_0=0$.  The proof below uses the original sequence $(\tau_n)\uparrow\infty$ to localize $N$; the bounded sequence $(\tau\wedge\tau_n)$ is not asserted to be a localizing sequence. [[def-continuous-time-adapted-process-and-martingale]] [[thm-localized-ito-integral]]
+[F4] The chosen localized integral is progressive. The measurable stopped-evaluation argument of [[thm-localized-ito-integral]], proof step 1.1, shows that its stopped values are adapted; stopping also preserves continuity on the same full event. Thus $N:=(H\cdot B)^{\tau}$ is an adapted continuous process with $N_0=0$.  The proof below uses the original sequence $(\tau_n)\uparrow\infty$ to localize $N$; the bounded sequence $(\tau\wedge\tau_n)$ is not asserted to be a localizing sequence. [[def-continuous-time-adapted-process-and-martingale]] [[thm-localized-ito-integral]]
 
 [F5] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
@@ -48,11 +52,11 @@ definition of the localized integral.
 
 **Proof technique:** direct.
 
-1.1 Put $G:=1_{[0,\tau]}H$ and $N:=(H\cdot B)^{\tau}$, so that $N$ is adapted with continuous paths and $N_0=(H\cdot B)_0=0$ by [F4]; by [F1] the localized integral $G\cdot B$ exists and both $N$ and $G\cdot B$ are continuous local martingales. [F1, F4, given]
+1.1 Put $G:=1_{[0,\tau]}H$ and $N:=(H\cdot B)^{\tau}$, so that $N$ is adapted with continuous paths and $N_0=(H\cdot B)_0=0$ by [F4]; by [F1] the localized integral $G\cdot B$ exists and is a continuous local martingale. No local-martingale property of $N$ is assumed at this stage. [F1, F4, given]
 
 1.2 For every $k$ the stopped integral $(H\cdot B)^{\tau_k}$ is the finite-energy integral of $H1_{(0,\tau_k]}$ by [F2], and the finite-energy stopping identity applied with the stopping time $\tau$ gives $(H\cdot B)^{\tau\wedge\tau_k}=(H1_{(0,\tau_k]}\cdot B)^{\tau}=\int_0^tH1_{(0,\tau_k]}1_{(0,\tau]}dB$. [F2, given]
 
-2.1 The integrand identity $H1_{(0,\tau_k]}1_{(0,\tau]}=G1_{(0,\tau\wedge\tau_k]}=G1_{(0,\tau_k]}$ holds for every $(s,\omega)$ with $s>0$, the three expressions differing at most at $s=0$, a $(\mathrm dt\otimes P)$-null set; hence $\int_0^tH1_{(0,\tau_k]}1_{(0,\tau]}dB$ equals the finite-energy integral of $G1_{(0,\tau_k]}$, and the canonical sequence $\rho_k:=\tau_k$ is nondecreasing with $\rho_k\uparrow\infty$ almost surely, while $G1_{(0,\rho_k]}$ has finite energy $E\int_0^tG_s^21_{(0,\rho_k]}ds\le EA_{t\wedge\rho_k}\le k$. [F2, step 1.2]
+2.1 The integrand identity $H1_{(0,\tau_k]}1_{(0,\tau]}=G1_{(0,\tau\wedge\tau_k]}=G1_{(0,\tau_k]}$ holds for every $(s,\omega)$ with $s>0$, the three expressions differing at most at $s=0$, a $(\mathrm dt\otimes P)$-null set; hence $\int_0^tH1_{(0,\tau_k]}1_{(0,\tau]}dB$ equals the finite-energy integral of $G1_{(0,\tau_k]}$, and the canonical sequence $\rho_k:=\tau_k$ consists of stopping times, is nondecreasing with $\rho_k\uparrow\infty$ almost surely, (indexed by $k\ge1$, or reindexed by $k=j+1$ when required), while $G1_{(0,\rho_k]}$ has finite energy $E\int_0^tG_s^21_{(0,\rho_k]}ds\le EA_{t\wedge\rho_k}\le k$. [F2, step 1.2]
 
 3.1 Steps 1.1, 1.2 and 2.1 verify the hypotheses of [F3] for the process $N=(H\cdot B)^{\tau}$ and the localizing sequence $(\rho_k)$: $N$ is adapted and continuous with $N_0=0$, and $N^{\rho_k}=(H\cdot B)^{\tau\wedge\tau_k}$ is indistinguishable from the finite-energy integral of $G1_{(0,\rho_k]}$ for every $k$. Therefore $N$ is indistinguishable from the localized integral $G\cdot B$, which is exactly the identity $(H\cdot B)_{t\wedge\tau}=\int_0^t1_{[0,\tau]}H\,dB$ up to indistinguishability. [F3, step 1.1, step 1.2, step 2.1]
 

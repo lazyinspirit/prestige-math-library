@@ -17,9 +17,14 @@ sources:
 
 ## Example
 
-Assume the Axiom of Choice, let $B$ be a standard Brownian motion
-[[def-brownian-motion]] and let $M_t=\sup_{0\le s\le t}B_s$. For $a>0$ and
-$t>0$,
+Assume the Axiom of Choice and let $B$ be a standard Brownian motion
+[[def-brownian-motion]]. Use the everywhere-continuous, zero-start
+representative fixed in [[cor-law-of-the-brownian-maximum]]: replace the path
+by zero outside a measurable probability-one event of continuity and zero
+start, retaining the notation $B$. Let $M_t=\sup_{0\le s\le t}B_s$. This is a
+finite measurable random variable because its continuous-path supremum on
+$[0,t]$ equals the supremum over $(\mathbb Q\cap[0,t])\cup\{t\}$. For $a>0$
+and $t>0$,
 $$P(M_t\ge a)=2\left(1-\Phi\!\left(\frac{a}{\sqrt t}\right)\right),$$
 where $\Phi$ is the standard normal distribution function
 [[def-standard-normal-and-normal-laws]]
@@ -29,13 +34,14 @@ probability is decreasing in $a$.
 
 ## Facts & Assumptions
 
-**Given:** AC, a standard Brownian motion $B$ and reals $a>0$, $t>0$.
+**Given:** AC, a standard Brownian motion $B$ in the stated
+everywhere-continuous zero-start representative, and reals $a>0$, $t>0$.
 
 [F1] $P(M_t\le x)=2\Phi(x/\sqrt t)-1$ for $x\ge0$, and the law of $M_t$ is atomless; hence $P(M_t<a)=P(M_t\le a)$ and $P(M_t\ge a)=1-P(M_t<a)$. [[cor-law-of-the-brownian-maximum]]
 
 [F2] $\Phi(0)=1/2$, $\lim_{x\to\infty}\Phi(x)=1$, and $\Phi$ is continuous and nondecreasing. [[def-standard-normal-and-normal-laws]] [[def-cumulative-distribution-function-of-a-random-variable]]
 
-[F3] AC is the ambient assumption of the Brownian construction. [[def-axiom-of-choice]]
+[F3] AC is the standing hypothesis under which the Brownian maximum and normal-law interfaces in [F1]-[F2] are supplied; this example makes no additional selection. [[def-axiom-of-choice]]
 
 ## Verification
 

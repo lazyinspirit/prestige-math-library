@@ -4,13 +4,14 @@ kind: definition
 title: Boldface Sigma-one-three measurability
 status: draft
 origin: pipeline
-deps: [def-analytic-and-coanalytic-by-closed-projection, lem-cantor-and-baire-sequence-coding, lem-dyadic-coding-coin-measure-and-lebesgue-transfer, def-lebesgue-measure-and-the-lebesgue-sigma-algebra]
+deps: [def-analytic-and-coanalytic-by-closed-projection, lem-cantor-and-baire-sequence-coding, lem-dyadic-coding-coin-measure-and-lebesgue-transfer, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-completion-of-a-measure-space, thm-completion-of-a-measure-space, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 sources:
   references:
-    - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Chapter 3, Section 3.1, pp. 43-44"}
+    - {title: "Hiromi Ishii, Regularity Properties and Inaccessible Cardinals", url: "https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf", locator: "Definition 1.17 and Facts 1.17-1.18, pp. 10-11; Chapter 3, Section 3.1, pp. 43-44"}
+    - {title: "Terence Tao, An Introduction to Measure Theory, Exercise 1.4.26, p. 94", url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"}
 ---
 
 ## Definition
@@ -29,12 +30,23 @@ quantifiers are number quantifiers and its atomic statements are those of a
 fixed recursive decoding of the sequences involved. Thus the leading real
 quantifiers are one existential, one universal and one existential, the last
 being the one that may be dummy. A set is **boldface $\Sigma^1_3$** when it is
-$\Sigma^1_3(x)$ for some real $x$, and a statement is
-**$\Sigma^1_3$-measurable** when every $\Sigma^1_3(x)$ subset of $\mathcal C$
-is measurable for the completed coin measure, for every real $x$; the coin
-measure and its precise Lebesgue coding are those of
-[[lem-dyadic-coding-coin-measure-and-lebesgue-transfer]] under the ambient
-choice hypothesis used in an application.
+$\Sigma^1_3(x)$ for some real $x$, and the regularity assertion **boldface $\Sigma^1_3$-measurability** means that every such set belongs to the completed coin-measure domain specified below.
+
+**The measured domain.** In applications assume Countable Choice
+([[def-countable-choice]]). The proof of
+[[lem-dyadic-coding-coin-measure-and-lebesgue-transfer]] uses DC only in its
+step 1.2 to derive Countable Choice; after that step, its cylinder-pullback
+construction of the Borel coin probability $\nu$ uses only the resulting
+Countable Choice hypotheses. Thus the same construction is available directly
+under the present assumption. Write $\mathcal B$ for its Borel sigma-algebra. Define
+$$\overline{\mathcal B}:=\{E\subseteq\mathcal C:E=B\cup N,\ B,Z\in\mathcal B,\ N\subseteq Z,\ \nu(Z)=0\}.$$
+For such a representation put $\overline\nu(E):=\nu(B)$. This is exactly the
+completion construction of [[def-completion-of-a-measure-space]], so
+[[thm-completion-of-a-measure-space]] proves that this value is independent of
+the representation and is a complete measure on the displayed sigma-algebra.
+Thus the regularity assertion is precisely
+$$\forall x\in\mathcal N\ \forall A\subseteq\mathcal C\quad (A\in\Sigma^1_3(x)\ \Longrightarrow\ A\in\overline{\mathcal B}).$$
+The dyadic lemma supplies the Borel measure; the completion theorem supplies its completed domain and measure. No completion or measure transport is inferred from a homeomorphism between sequence spaces.
 
 **Elementary codings.** Coordinate pairing gives the homeomorphisms
 $\mathcal C\cong\mathcal C^{\mathbb N}$ and
@@ -48,6 +60,6 @@ quantifier shows that every $\Sigma^1_2(x)$ subset of $\mathcal C$ is
 $\Sigma^1_3(x)$: prefix a redundant $\exists w$ and ignore $w$ in $\theta$.
 This inclusion is the one used below when a
 $\Sigma^1_3$-measurability hypothesis is applied to the $\Sigma^1_2(x)$
-null-code order. The definition itself uses no choice, and the ambient versions
-of $\Sigma^1_3$-measurability used later carry the hypotheses needed for the
-completed coin measure.
+null-code order. The quantifier-prefix definition uses no choice. The measured
+interpretation above is used under Countable Choice, which licenses both the
+Borel coin-measure construction and its completion.

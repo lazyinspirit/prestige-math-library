@@ -77,13 +77,13 @@
         "id": "lem-adapted-continuous-processes-are-progressively-measurable",
         "kind": "lemma",
         "title": "Adapted continuous processes are progressively measurable",
-        "statement": "Every real adapted process with continuous sample paths is progressively measurable and predictable, including at time zero under the generator convention {0} times F_0.",
+        "statement": "Every real process with F_t-measurable sections and everywhere continuous paths is progressively measurable and predictable, including time zero; normalization off a full-probability F_0 event is allowed.",
         "deps": [
           "def-progressively-measurable-and-predictable-process",
           "def-continuous-time-adapted-process-and-martingale",
           "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
         ],
-        "strategy": "On each [0,T], approximate at positive time by left-endpoint dyadic steps. These are predictable and product measurable; path continuity gives pointwise convergence on (0,T]. At time zero use the F_0-measurable section on the generator {0} times F_0. Pointwise-limit measurability closes both claims.",
+        "strategy": "On each [0,T], approximate at positive time by left-endpoint dyadic steps. These are predictable and product measurable; path continuity gives pointwise convergence on (0,T]. At time zero use the F_0-measurable section on the generator {0} times F_0. Pointwise-limit measurability closes both claims. The measurable-section hypothesis is explicit; no conditional-expectation interface is imported.",
         "axiom_base": "ZF",
         "sources": {
           "references": [
@@ -150,7 +150,10 @@
         "provenance": {
           "statement": "literature-derived",
           "proof": "not-applicable"
-        }
+        },
+        "justified_by": [
+          "lem-elementary-ito-integral-is-independent-of-the-step-representation"
+        ]
       },
       {
         "id": "lem-elementary-ito-integral-is-independent-of-the-step-representation",
@@ -407,7 +410,7 @@
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Choose elementary approximants with summable L2 errors. Discrete Doob on increasing rational grids yields the supremum bound; a subsequence converges uniformly almost surely to a continuous adapted process. Fixed-time L2 limits identify it and pass conditional expectations. Diagonalize over integer horizons; rational equality plus continuity proves uniqueness.",
+        "strategy": "Use AC to select elementary representations at summable L2 tolerances and integer horizons. Countable-grid Doob bounds give uniform convergence on a measurable probability-one event. Define the finite limsup, zero otherwise, separately at each time to preserve adaptedness without completing the filtration. Fixed-time L2 convergence passes martingale identities. Glue integer horizons and use rational equality plus continuity for uniqueness on a measurable full-probability event.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -511,9 +514,11 @@
           "thm-monotone-convergence-for-the-integral",
           "lem-rat-embeds-dense",
           "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-dominated-convergence-in-lp"
         ],
-        "strategy": "Construct finite-energy stopped integrals. Isometry proves agreement on overlaps; continuity upgrades rational-time equality to indistinguishability. Patch them, then compare pairwise minima for any second localization. The stopped pieces prove the local-martingale property.",
+        "strategy": "Construct finite-energy stopped integrals. Isometry proves agreement on overlaps; continuity upgrades rational-time equality to indistinguishability. Patch them, then compare pairwise minima for any second localization. The stopped pieces prove the local-martingale property. First construct progressive versions by left dyadic samples; finite normalized limits and measurable stopped evaluations avoid raw-filtration null-set issues. Use almost-sure locally finite energy under the supplier's usual conditions and positive localization indices; completeness makes the exceptional-path hitting-time discrepancies measurable.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -545,7 +550,7 @@
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Prove it for elementary H and finite-valued tau by refinement. Approximate tau from above dyadically and H in L2; isometry and the maximal bound give uniform convergence in probability. Localize and use continuity.",
+        "strategy": "Apply the already proved finite-energy stopping identity on the original positive-index canonical energy intervals. For G=H1_[0,tau], those stopping times exhaust almost surely under the usual conditions and bound the stopped expected energy. Progressive stopped evaluation gives adapted N; the localization characterization identifies N with G dot B.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -581,16 +586,16 @@
           "lem-gaussian-even-moment-bound-for-brownian-increments",
           "cor-chebyshev-inequality-for-random-variables",
           "thm-heine-cantor-r",
-          "thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes",
           "thm-density-of-elementary-predictable-processes-in-predictable-l2",
           "thm-tower-property-of-conditional-expectation",
           "cor-cauchy-schwarz-for-random-variables",
           "def-continuous-time-adapted-process-and-martingale",
           "def-law-modification-and-indistinguishability-of-processes",
           "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-monotone-convergence-for-the-integral"
         ],
-        "strategy": "For arbitrary deterministic Brownian partitions, centered squared increments form a discrete martingale with variance at most 2T times mesh; Doob and continuity give uniform convergence. Prove the claim blockwise for elementary H. For L2 limits, Cauchy-Schwarz bounds differences of square sums by the product of sum-squares for M-M^n and M+M^n; isometry controls them. Finish by energy localization.",
+        "strategy": "For arbitrary deterministic Brownian partitions, centered squared increments form a discrete martingale with variance at most 2T times mesh; Doob and continuity give uniform convergence. Prove the claim blockwise for elementary H. For L2 limits, Cauchy-Schwarz bounds differences of square sums by the product of sum-squares for M-M^n and M+M^n; isometry controls them. Finish by energy localization. Correct zero partial sum and deterministic boundary-refinement bound; uniform expected approximation errors and epsilon split, then almost-sure energy localization under usual conditions, with energy normalized on its F_0 null exceptional event. No general almost-sure dyadic claim.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -631,11 +636,11 @@
           "def-convergence-in-probability",
           "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
           "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
-          "cor-cauchy-schwarz-for-random-variables",
+          "thm-box-step-functions-are-dense-in-l-p-of-rn",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Step functions give linear combinations of independent Gaussian increments. Approximate h in deterministic L2; isometry gives convergence in probability and the variances converge. The Gaussian-parameter weak-convergence example identifies the limit law, including zero variance. Apply the same argument to every scalar linear combination of a finite family and use the stated Cramer-Wold definition; cross isometry yields the covariance integral.",
+        "strategy": "Use published box-step density on the zero extension of h to R, restrict the approximants to [0,T], and refine their finitely many endpoints to deterministic elementary step functions. Their integrals are linear combinations of independent Gaussian increments; isometry gives convergence in probability and the variances converge. Characteristic functions identify the limit law, including zero variance. Apply the same argument to every scalar linear combination of a finite family and use the stated projection definition; cross isometry yields the covariance integral.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -657,7 +662,7 @@
     "id": "the-ito-integral-with-respect-to-brownian-motion-examples",
     "kind": "B",
     "category": "probability",
-    "title": "The Ito Integral with Respect to Brownian Motion — Examples",
+    "title": "The Ito Integral with Respect to Brownian Motion \u2014 Examples",
     "companion": "the-ito-integral-with-respect-to-brownian-motion",
     "requires": [
       "the-ito-integral-with-respect-to-brownian-motion"
@@ -773,22 +778,25 @@
         "id": "ex-integral-of-brownian-motion-against-itself-preview",
         "kind": "example",
         "title": "Integral of Brownian motion against itself",
-        "statement": "Assume AC. Up to indistinguishability, for every t>=0, integral_0^t B_s dB_s=(B_t^2-t)/2.",
+        "statement": "Assume AC and (H). Use the explicitly constructed predictable Brownian representative beta. Integral beta dB=(B_t^2-t)/2 on a common full event for the continuous integral version; mean zero, variance t^2/2, non-Gaussian for t>0.",
         "deps": [
-          "lem-adapted-continuous-processes-are-progressively-measurable",
+          "def-progressively-measurable-and-predictable-process",
           "def-ito-integral-for-square-integrable-predictable-processes",
           "def-ito-integral-of-an-elementary-predictable-process",
           "def-elementary-predictable-brownian-integrand",
           "thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes",
-          "def-quadratic-variation-along-a-partition-sequence",
           "thm-ito-isometry-and-linearity-in-predictable-l2",
-          "thm-density-of-elementary-predictable-processes-in-predictable-l2",
+          "thm-ito-integral-process-has-a-continuous-martingale-version",
           "def-brownian-motion",
-          "cor-law-of-the-brownian-maximum",
-          "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+          "thm-dominated-convergence",
+          "thm-fatou-lemma",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "cor-deterministic-ito-integrals-are-gaussian",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice"
         ],
-        "strategy": "Left-dyadic steps converge to B in predictable L2. Use 2 sum B_left Delta B=B_t^2-sum(Delta B)^2 and uniform dyadic quadratic variation. Prove at rational times and extend by continuity, without the later Ito-formula result.",
+        "strategy": "Construct beta by predictable left-grid finite limits. Prove L2 step approximation and coefficient truncation; telescope squares and use terminal dyadic QV plus Fatou to identify the limit. Rational times and continuity give the process identity. No later Ito formula.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -963,7 +971,7 @@
         "id": "def-continuous-brownian-ito-process",
         "kind": "definition",
         "title": "Continuous Brownian Ito processes",
-        "statement": "Assume AC. A real continuous Brownian Ito process is X_t=X_0+integral_0^t b_s ds+integral_0^t sigma_s dB_s, where X_0 is finite and F_0-measurable, b is real progressively measurable with integral_0^t |b_s|ds finite a.s., and sigma is real predictable with integral_0^t sigma_s^2ds finite a.s. for every finite t. In dimension d driven by m-dimensional Brownian motion, X_0 is finite F_0-measurable in R^d, b takes values in R^d, and sigma takes values in R^{d times m}, with the same componentwise local integrability conditions.",
+        "statement": "Assume AC. A real continuous Brownian Ito process is X_t=X_0+integral_0^t b_s ds+integral_0^t sigma_s dB_s, where X_0 is finite and F_0-measurable, b is real progressively measurable with integral_0^t |b_s|ds finite a.s., and sigma is real predictable with integral_0^t sigma_s^2ds finite a.s. for every finite t. In dimension d driven by m-dimensional Brownian motion, X_0 is finite F_0-measurable in R^d, b takes values in R^d, and sigma takes values in R^{d times m}, with the same componentwise local integrability conditions. Use progressive process representatives and almost-sure locally integrable drift/energy coefficients under the usual conditions; indistinguishability means agreement on a measurable full event.",
         "deps": [
           "def-elementary-predictable-brownian-integrand",
           "def-progressively-measurable-and-predictable-process",
@@ -974,7 +982,8 @@
           "def-continuous-time-adapted-process-and-martingale",
           "def-continuous-time-filtration-and-all-pairs-martingale",
           "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
         ],
         "strategy": "Use pathwise Lebesgue integration for b and the localized Ito integral for each row of sigma; finite componentwise sums give continuity and adaptedness. The displayed dimensions prevent an untyped matrix convention.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
@@ -1002,7 +1011,7 @@
           "def-continuity-real",
           "def-partition-and-refinement"
         ],
-        "strategy": "Specify the stopped partial-sum convention and require the same UCP limit for every deterministic vanishing-mesh sequence, rather than a sequence-dependent value. Record polarization 4[X,Y]=[X+Y]-[X-Y] whenever these common quadratic variations exist.",
+        "strategy": "Specify the stopped partial-sum convention and require the same UCP limit for every deterministic vanishing-mesh sequence, rather than a sequence-dependent value. Record polarization 4[X,Y]=[X+Y]-[X-Y] whenever these common quadratic variations exist. Require fixed-time random variables and continuous candidate limits; normalize on measurable continuity events and use rational suprema for measurable uniform errors and uniqueness.",
         "axiom_base": "ZF",
         "sources": {
           "references": [
@@ -1057,7 +1066,7 @@
           "lem-ac-supplies-sequential-choices-for-probability-constructions",
           "def-natural-and-usual-augmented-brownian-filtrations"
         ],
-        "strategy": "For terms driven by the same Brownian coordinate, polarize the scalar quadratic-variation theorem. For distinct coordinates, prove the elementary cross-increment sums converge to zero by conditional centering and an L2 mesh bound, then pass through predictable-L2 approximation and localization. Bound finite-variation cross sums by maximum martingale increment times total variation, which vanishes after localization by continuity.",
+        "strategy": "For terms driven by the same Brownian coordinate, polarize the scalar quadratic-variation theorem. For distinct coordinates, prove the elementary cross-increment sums converge to zero by conditional centering and an L2 mesh bound, then pass through predictable-L2 approximation and localization. Bound finite-variation cross sums by maximum martingale increment times total variation, which vanishes after localization by continuity. Use vector increments independent of the full past on a refined grid, explicit oscillation error, both finite-energy approximation terms and common pairwise energy stopping times; zero drift does not imply zero bracket. Use usual conditions and normalize all coefficient path integrals on the common full event of local integrability.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1081,32 +1090,22 @@
           "def-continuous-brownian-ito-process",
           "def-quadratic-covariation-of-brownian-ito-processes",
           "thm-quadratic-covariation-of-brownian-ito-processes",
-          "def-quadratic-variation-along-a-partition-sequence",
-          "thm-quadratic-variation-of-an-ito-integral",
+          "thm-ito-formula-one-dimensional",
           "def-locally-square-integrable-predictable-brownian-integrand",
           "def-progressively-measurable-and-predictable-process",
           "lem-adapted-continuous-processes-are-progressively-measurable",
           "def-elementary-predictable-brownian-integrand",
-          "def-ito-integral-of-an-elementary-predictable-process",
-          "def-ito-integral-for-square-integrable-predictable-processes",
           "thm-localized-ito-integral",
           "thm-stopping-an-ito-integral",
           "thm-ito-integral-process-has-a-continuous-martingale-version",
           "thm-ito-isometry-and-linearity-in-predictable-l2",
-          "thm-density-of-elementary-predictable-processes-in-predictable-l2",
-          "def-continuous-time-stopping-time",
           "def-continuous-time-adapted-process-and-martingale",
           "thm-heine-cantor-r",
-          "def-continuity-real",
-          "def-convergence-in-probability",
           "def-law-modification-and-indistinguishability-of-processes",
-          "cor-cauchy-schwarz-for-random-variables",
-          "thm-dominated-convergence",
           "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions",
-          "def-partition-and-refinement"
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Sum the exact partition identity Delta(XY)=X_left Delta Y+Y_left Delta X+Delta X Delta Y. Covariation handles the last sum; localized left-step convergence in time-L1 and predictable-L2 handles the first two.",
+        "strategy": "Normalize X,Y and coefficients simultaneously on a common F0 full event under the usual conditions. Local compact bounds make all drift and diffusion products integrable. Apply scalar Ito to z\u00b2 for X,Y and X+Y; subtract and divide by two. Common energy stops justify localized linearity. Identify the cross coefficient with covariation. In the zero-drift case prove the local-martingale assertion under the initial-value convention; finite energy and the two additional L1 assumptions license each expectation.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1167,7 +1166,7 @@
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "First prove the formula for C^3 functions after stopping X, integral |b|, and integral sigma^2 inside deterministic compact bounds. Apply third-order Taylor on deterministic partitions; the first-order terms converge to the Lebesgue and Ito integrals, the quadratic term uses the already proved covariation theorem, and mixed, time-square, and cubic remainders vanish locally uniformly in probability by continuity, Cauchy-Schwarz, and maximal-mesh control. For f in C^{1,2}, choose a compact space-time cylinder strictly containing the stopped path range, multiply by a cutoff, extend across t=0 by the explicit C1 reflection 2f(0,x)-f(-t,x), and convolve with an explicit smooth product mollifier. On the smaller cylinder f_n, partial_t f_n, partial_x f_n, and partial_xx f_n converge uniformly to the corresponding derivatives. Apply the C^3 case and pass the drift terms by dominated convergence and the stochastic terms by Ito isometry plus the maximal bound. Then remove the localization. This is the binding C^3-first, localization-and-mollification route.",
+        "strategy": "First prove the formula for C^3 functions after stopping X, integral |b|, and integral sigma^2 inside deterministic compact bounds. Apply third-order Taylor on deterministic partitions; the first-order terms converge to the Lebesgue and Ito integrals, the quadratic term uses the already proved covariation theorem, and mixed, time-square, and cubic remainders vanish locally uniformly in probability by continuity, Cauchy-Schwarz, and maximal-mesh control. For f in C^{1,2}, choose a compact space-time cylinder strictly containing the stopped path range, multiply by a cutoff, extend across t=0 by the explicit C1 reflection 2f(0,x)-f(-t,x), and convolve with an explicit smooth product mollifier. On the smaller cylinder f_n, partial_t f_n, partial_x f_n, and partial_xx f_n converge uniformly to the corresponding derivatives. Apply the C^3 case and pass the drift terms by dominated convergence and the stochastic terms by Ito isometry plus the maximal bound. Then remove the localization. This is the binding C^3-first, localization-and-mollification route. Normalize on the F_0 null event first. Use separate X and M quadratic sums, an explicit tightness cutoff for weighted convergence, absolute remainder bounds, and eventual rho_c=T to remove localization. Mollify the continuous cutoff on nested cylinders before smoothing f.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1190,7 +1189,7 @@
         "id": "thm-multidimensional-ito-formula-for-brownian-driven-processes",
         "kind": "theorem",
         "title": "Multidimensional Ito formula for Brownian-driven processes",
-        "statement": "Assume AC. Let X be an R^d-valued continuous Brownian Ito process dX=b dt+sigma dB driven by m-dimensional Brownian motion and let f belong to C^{1,2}([0,infinity) times R^d). Then, up to indistinguishability, for every t, df(t,X_t)=(f_t+sum_i b^if_i+(1/2)sum_{i,j}(sigma sigma^T)_{ij}f_{ij})dt+sum_{i,k} f_i sigma^{ik}dB^k, in the corresponding integral identity after localization.",
+        "statement": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $m,d\\ge1$ be finite\nintegers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional Brownian motion,\nand let $X$ be an $\\mathbb R^d$-valued continuous Brownian Ito process\n$$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\nin the sense of [[def-continuous-brownian-ito-process]], including its usual-filtration and almost-sure coefficient-integrability conventions. Let\n$f\\in C^{1,2}([0,\\infty)\\times\\mathbb R^d)$, meaning that $f,\\partial_tf$,\n$\\partial_if$ and $\\partial_i\\partial_jf$ ($1\\le i,j\\le d$) exist and are\ncontinuous. Then, up to indistinguishability, for every $t\\ge0$\n$$f(t,X_t)=f(0,X_0)+\\int_0^t\\Bigl(\\partial_tf+\\sum_ib^i\\partial_if+\\tfrac12\\sum_{i,j}(\\sigma\\sigma^{\\mathsf T})^{ij}\\partial_i\\partial_jf\\Bigr)(s,X_s)\\,ds+\\sum_{i,k}\\int_0^t\\partial_if(s,X_s)\\sigma^{ik}_s\\,dB^k_s,$$\nFor the displayed integrands, intersect the measurable full events of continuity and the decomposition of $X$, and of coefficient integrability at all integer horizons. Its null complement belongs to $\\mathcal F_0$ under the usual conditions. Set $X,X_0,b,\\sigma$ to zero there. These representatives preserve all coefficient classes and the decomposition up to indistinguishability, with everywhere continuous $X$ and everywhere locally finite coefficient path integrals. All displayed integrands use these representatives.\n\nThe stochastic integrals are localized Ito integrals of the predictable\nlocally square-integrable integrands $\\partial_if(\\cdot,X)\\sigma^{ik}$, and\n$(\\sigma\\sigma^{\\mathsf T})^{ij}_s=\\sum_k\\sigma^{ik}_s\\sigma^{jk}_s$. In\ndifferential form,\n$df(t,X_t)=\\bigl(\\partial_tf+\\sum_ib^i\\partial_if+\\tfrac12\\sum_{i,j}(\\sigma\\sigma^{\\mathsf T})^{ij}\\partial_i\\partial_jf\\bigr)(t,X_t)\\,dt+\\sum_{i,k}\\partial_if(t,X_t)\\sigma^{ik}_t\\,dB^k_t$.",
         "deps": [
           "def-continuous-brownian-ito-process",
           "def-d-dimensional-brownian-motion",
@@ -1234,7 +1233,7 @@
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "First repeat the localized deterministic-partition argument for C^3 functions. Multivariable third-order Taylor supplies the remainder; first-order terms converge componentwise, and the already proved covariation theorem plus polarization identifies every Delta X^i Delta X^j term without falsely assuming independent diffusion coordinates. For C^{1,2}, cut off on a compact cylinder and use product mollifiers so f and exactly its time-first and space-first/second derivatives converge uniformly there. Dominated convergence handles drift, Ito isometry and the maximal bound handle stochastic terms, and localization is then removed.",
+        "strategy": "Usual conditions and F0 null normalization; initial-value restriction and path/drift/energy stopping; dimension-correct C3 Taylor bound; weighted covariance convergence with explicit tightness split; C1,2 reflection/cutoff/mollifier derivative convergence and countable localization removal.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1330,9 +1329,14 @@
       {
         "id": "thm-space-time-harmonic-functions-yield-brownian-local-martingales",
         "kind": "theorem",
-        "title": "Space-time harmonic functions yield Brownian local martingales",
-        "statement": "Assume AC. If f in C^{1,2} satisfies f_t+(1/2)Delta f=0 on an open space-time domain, then f(t,B_t), stopped before leaving compact subdomains, is a continuous local martingale; square-integrable stopped gradients make it a true square-integrable martingale.",
+        "title": "Space-time harmonic functions yield Brownian local martingales up to exit lifetime",
+        "statement": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $d\\ge1$, let\n$U\\subseteq[0,\\infty)\\times\\mathbb R^d$ be open in the relative topology, and let\n$f\\in C^{1,2}(U)$ satisfy the space-time harmonicity equation\n$$\\partial_tf+\\tfrac12\\Delta f=0\\qquad\\text{on }U,$$\nwhere $\\Delta=\\sum_{k=1}^d\\partial^2_{x_k}$ is the spatial Laplacian. Let $B$ be\na standard $d$-dimensional Brownian motion on a filtration satisfying the usual\nconditions, with $(0,0)\\in U$. Use its everywhere-continuous adapted representative obtained by setting $B$ to zero off the measurable full event of continuity and $B_0=0$; the usual conditions make that null event $\\mathcal F_0$-measurable. This preserves all Brownian laws and the standing increment hypothesis. All exit times and integrands below use this representative. For a compact\n$K\\subseteq U$ put $\\tau_K:=\\inf\\{t\\ge0:(t,B_t)\\notin\\operatorname{int}K\\}$,\nwhere the interior is relative to $[0,\\infty)\\times\\mathbb R^d$.\n\n1. For every compact $K\\subseteq U$ with $(0,0)\\in\\operatorname{int}K$, up to\n   indistinguishability\n   $$f(t\\wedge\\tau_K,B_{t\\wedge\\tau_K})=f(0,0)+\\sum_{k=1}^d\\int_0^t1_{[0,\\tau_K]}(s)\\partial_{x_k}f(s,B_s)\\,dB^k_s,$$\n   and the right-hand integral is a continuous square-integrable martingale;\n   thus each stopped piece is a true martingale. In this display the stopped\n   gradient is the predictable bounded extension supplied by [F3], equal to\n   $\\nabla f(s,B_s)$ through $\\tau_K$ and zero afterwards; it does not evaluate\n   $f$ outside $U$.\n2. If $\\tau_U:=\\inf\\{t\\ge0:(t,B_t)\\notin U\\}$ and\n   $E\\int_0^t|\\nabla f|^2(s,B_s)1_{[0,\\tau_U)}(s)\\,ds<\\infty$ for a given\n   $t\\ge0$, then the process\n   $$N_r:=\\sum_{k=1}^d\\int_0^r1_{[0,\\tau_U)}(s)\\partial_{x_k}f(s,B_s)\\,dB^k_s, \\qquad 0\\le r\\le t,$$\n   is a square-integrable martingale, and for every $0\\le r\\le t$ one has\n   $$f(r,B_r)-f(0,0)=N_r\\qquad\\text{on the event }\\{r<\\tau_U\\}.$$\n   No value of $f$ at the exit point $(\\tau_U,B_{\\tau_U})\\notin U$ is asserted.\n3. On the stochastic interval $[0,\\tau_U)$ the process $t\\mapsto f(t,B_t)$,\n   read through continuous versions, is a continuous local martingale **up to\n   lifetime $\\tau_U$**: for any time-capped compact exhaustion satisfying\n   $K_n\\subseteq\\operatorname{int}K_{n+1}$ and $\\bigcup_nK_n=U$, after discarding finitely many initial sets so that $(0,0)\\in\\operatorname{int}K_1$, its stopped\n   pieces at $\\tau_{K_n}$ are true martingales and\n   $\\tau_{K_n}\\uparrow\\tau_U$ almost surely. This is not a claim that\n   $f(t,B_t)$ is defined after the lifetime or that these times tend to infinity.",
         "deps": [
+          "thm-heine-borel-rn",
+          "lem-distance-to-set-is-lipschitz",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-heine-cantor-metric",
+          "thm-dominated-convergence",
           "thm-multidimensional-ito-formula-for-brownian-driven-processes",
           "def-continuous-brownian-ito-process",
           "def-d-dimensional-brownian-motion",
@@ -1358,7 +1362,7 @@
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Ito cancels the drift and leaves integral grad f dB. Compact stopping bounds the gradient and gives a true martingale; exhaust the domain for the local statement.",
+        "strategy": "Normalize Brownian null paths under usual conditions; smooth a continuous cutoff in an ambient extension neighbourhood. Prove distance-based exit measurability and compact exhaustion. Strict-lifetime predictable indicator is a union of stopped intervals; apply finite-energy dominated convergence and identify limits on increasing pre-exit events.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1413,7 +1417,7 @@
         "id": "lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t",
         "kind": "lemma",
         "title": "Characteristic exponential for a continuous local martingale with deterministic clock",
-        "statement": "Assume AC. If M is a real continuous local martingale with M_0=0 and quadratic variation [M]_t=t, then for every real theta the bounded-on-finite-horizons process exp(i theta M_t+theta^2t/2), interpreted by real and imaginary parts, is a complex martingale.",
+        "statement": "Assume AC. For a real continuous local martingale M with M_0=0 almost surely on an arbitrary filtration and deterministic-partition quadratic variation [M]_t=t, the increment conditional characteristic function is exp(-theta^2(t-s)/2) and exp(i theta M_t+theta^2t/2) is a complex martingale.",
         "deps": [
           "def-continuous-time-adapted-process-and-martingale",
           "def-continuous-time-filtration-and-all-pairs-martingale",
@@ -1421,25 +1425,28 @@
           "def-quadratic-variation-along-a-partition-sequence",
           "def-convergence-in-probability",
           "def-conditional-expectation-as-an-ae-class",
-          "def-conditional-expectation-as-an-ae-class",
           "thm-tower-property-of-conditional-expectation",
           "def-continuous-time-stopping-time",
           "def-continuity-real",
           "thm-heine-cantor-r",
           "cor-cauchy-schwarz-for-random-variables",
           "thm-dominated-convergence",
-          "def-law-modification-and-indistinguishability-of-processes",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions",
           "cor-taylor-remainder-bound",
-          "def-taylor-polynomial-and-remainder"
+          "def-taylor-polynomial-and-remainder",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence",
+          "thm-extreme-value-r",
+          "thm-heine-borel-r"
         ],
-        "strategy": "Stop first at tau_n=inf{t:|M_t|>=n} wedge n. Deterministic-partition second-order Taylor applied to the real and imaginary parts gives the stopped complex local-martingale identity with compensator [M^{tau_n}]_t=t wedge tau_n: continuity and tightness of quadratic-variation sums kill the remainders, summation by parts identifies the weighted quadratic term, and stopped martingale-increment orthogonality plus uniform L2 bounds and the stated probability-to-L1 result justify conditional expectations. The stopped identities agree on overlaps and hence patch to exp(i theta M_t+theta^2t/2). Its modulus is the deterministic exp(theta^2t/2), bounded on each finite horizon, so the patched local martingale is a true complex martingale there. No incorrect t compensator is assigned after stopping.",
+        "strategy": "Normalize on one measurable null set in an explicitly enlarged filtration and descend event tests at the end. Prove continuous stopping through finite-grid sampling and terminal conditional-expectation uniform integrability. Use the original localizers to justify bounded level stops. Prove the stopped partition clock, weighted convergence with ordered limits, L2 bounds on square sums, Taylor remainder L1 convergence, and telescope on [s,t].",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
             {
-              "title": "van der Vaart, Stochastic Integration and Differential Equations, Theorem 6.4",
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics, Theorems 4.21 and 6.1",
               "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
             }
           ]
@@ -1492,26 +1499,27 @@
         "title": "Vector Levy characterization",
         "statement": "Assume AC. If continuous local M=(M^1,...,M^d) starts at zero and [M^i,M^j]_t=delta_ij t, then M is standard d-dimensional Brownian motion.",
         "deps": [
-          "thm-levy-characterization-of-brownian-motion",
+          "lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t",
           "def-quadratic-covariation-of-brownian-ito-processes",
           "def-d-dimensional-brownian-motion",
           "def-continuous-time-adapted-process-and-martingale",
           "def-continuous-time-filtration-and-all-pairs-martingale",
-          "def-continuous-time-stopping-time",
           "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-monotone-convergence-for-the-integral",
           "cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms",
           "thm-tower-property-of-conditional-expectation",
           "def-conditional-expectation-as-an-ae-class",
-          "def-law-modification-and-indistinguishability-of-processes",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Every a dot M has quadratic variation |a|^2t and is scalar Brownian after normalization. Cramer-Wold and the conditional characteristic identities give joint normal increments independent of the past.",
+        "strategy": "Use the scalar characteristic exponential coordinatewise and one-dimensional finite-measure Fourier uniqueness to obtain integrable zero-mean increments and true coordinate martingales. Finite linear combinations are then true martingales. Exact finite partition algebra gives their clocks. Apply the characteristic exponential componentwise, then multivariate finite-measure Fourier uniqueness on each earlier event, and induct on increment lists.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
             {
-              "title": "van der Vaart, Stochastic Integration and Differential Equations, Corollary 6.5",
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics, Exercise 6.5 and Theorem 6.1",
               "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
             }
           ]
@@ -1527,19 +1535,19 @@
         "title": "The Brownian differential generator",
         "statement": "Assume AC. For f in C^2(R^d), write Lf=(1/2)Delta f for the Brownian Ito differential operator. This does not assert that every C^2 function lies in the closed-operator domain of the Brownian semigroup generator on C_0(R^d).",
         "deps": [
+          "def-elementary-predictable-brownian-integrand",
           "thm-multidimensional-ito-formula-for-brownian-driven-processes",
-          "def-c-c-and-c-c-infinity-on-rn",
           "thm-ito-formula-one-dimensional",
           "thm-space-time-harmonic-functions-yield-brownian-local-martingales",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Read the dt coefficient from Ito's formula and explicitly separate this differential notation from semigroup-domain claims, which are outside scope.",
+        "strategy": "Define the differential expression pointwise; identify its coefficients algebraically. Stochastic applications require their full hypotheses, explicitly including (H).",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
             {
-              "title": "Lawler, Stochastic Calculus, Section 3.6",
+              "title": "Lawler, Stochastic Calculus, Sections 2.10.2 and 3.7",
               "url": "https://www.math.uchicago.edu/~lawler/finbook.pdf"
             }
           ]
@@ -1553,38 +1561,28 @@
         "id": "thm-dynkin-formula-for-bounded-brownian-stopping",
         "kind": "theorem",
         "title": "Dynkin formula for bounded Brownian stopping",
-        "statement": "Assume AC. Let B be standard d-dimensional Brownian motion started at x, let tau be a bounded stopping time, and let f belong to C_c^2(R^d). Then E_x[f(B_tau)]=f(x)+E_x integral_0^tau Lf(B_s)ds.",
+        "statement": "Assume AC and the explicit vector Brownian filtration hypothesis. For a bounded stopping time tau and real C_c^2 function f, normalized continuous path evaluation on the original space gives E f(x+B_tau)=f(x)+E integral_0^tau (Delta f/2)(x+B_s) ds.",
         "deps": [
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "cor-second-order-taylor-expansion-with-the-hessian",
           "def-brownian-generator",
-          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
-          "def-continuous-brownian-ito-process",
           "def-d-dimensional-brownian-motion",
-          "def-brownian-motion",
-          "def-brownian-motion-started-at-x",
           "def-c-c-and-c-c-infinity-on-rn",
-          "def-locally-square-integrable-predictable-brownian-integrand",
-          "def-elementary-predictable-brownian-integrand",
-          "def-ito-integral-of-an-elementary-predictable-process",
-          "def-ito-integral-for-square-integrable-predictable-processes",
-          "thm-localized-ito-integral",
-          "thm-stopping-an-ito-integral",
-          "thm-ito-integral-process-has-a-continuous-martingale-version",
-          "thm-ito-isometry-and-linearity-in-predictable-l2",
-          "thm-doob-maximal-bound-for-the-ito-integral",
+          "def-ck-and-multi-index-notation-in-several-variables",
           "def-continuous-time-stopping-time",
-          "def-continuous-time-adapted-process-and-martingale",
-          "def-partition-and-refinement",
-          "def-continuity-real",
-          "thm-heine-cantor-r",
+          "def-continuous-time-filtration-and-all-pairs-martingale",
+          "lem-brownian-motion-has-a-jointly-measurable-continuous-version",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-heine-cantor-metric",
+          "thm-heine-borel-rn",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
           "thm-dominated-convergence",
-          "def-convergence-in-probability",
-          "def-conditional-expectation-as-an-ae-class",
-          "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions",
-          "lem-adapted-continuous-processes-are-progressively-measurable",
-          "thm-optional-sampling-for-bounded-stopping-times"
+          "def-axiom-of-choice"
         ],
-        "strategy": "Apply multidimensional Ito through t wedge tau. Compact support makes the gradient and Hessian bounded; bounded tau makes the stopped stochastic integral square-integrable with mean zero and the drift integrable. Take expectations and choose t beyond the deterministic bound for tau. No general local-martingale optional-stopping theorem or semigroup-domain claim is used.",
+        "strategy": "Direct finite-grid stopped Taylor telescoping. Independent vector increments cancel the linear terms and evaluate the Hessian terms. Uniform Hessian continuity and fourth moments make total remainder o(1). Bounded f and Lf pass limits through expectations. No general Ito or shifted-law event interface.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1608,13 +1606,13 @@
           "def-ito-integral-of-an-elementary-predictable-process",
           "def-ito-integral-for-square-integrable-predictable-processes",
           "def-elementary-predictable-brownian-integrand",
+          "thm-localized-ito-integral",
           "def-quadratic-covariation-of-brownian-ito-processes",
-          "thm-ito-formula-one-dimensional",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "State the convention boundary and point to quadratic variation as the reason the ordinary chain rule cannot replace Ito's rule.",
-        "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
+        "strategy": "Distinguish elementary left-time measurable coefficients, the global L2 extension, and localization. Prove the finite symmetric-minus-left sum identity termwise; assert no convergence or Hessian-only conversion for arbitrary predictable coefficients.",
+        "axiom_base": "No selections in the remark; cited integral constructions retain their own assumptions.",
         "sources": {
           "references": [
             {
@@ -1632,17 +1630,18 @@
         "id": "rem-general-semimartingale-calculus-is-outside-this-block",
         "kind": "remark",
         "title": "General semimartingale calculus is outside this block",
-        "statement": "Assume AC. Only continuous Brownian-driven processes are covered. Jump corrections, general semimartingales, SDE existence, Girsanov theory and stochastic geometry are outside this pair.",
+        "statement": "The stochastic integration and Ito formulas are scoped to Brownian-driven processes, while the partition definitions accept broader continuous inputs conditionally on existence of the specified limits. General semimartingale integration and the enumerated further theories remain outside this block.",
         "deps": [
           "def-continuous-brownian-ito-process",
           "def-quadratic-covariation-of-brownian-ito-processes",
           "def-quadratic-variation-along-a-partition-sequence",
           "thm-ito-formula-one-dimensional",
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
         "strategy": "Record the precise scope boundary so Brownian formulas are not misread as general definitions or theorems.",
-        "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
+        "axiom_base": "This scope remark selects nothing; cited stochastic constructions retain their own AC assumptions.",
         "sources": {
           "references": [
             {
@@ -1662,15 +1661,13 @@
         "title": "A closed L2 subspace with trivial orthogonal complement fills L2",
         "statement": "Assume AC. If V is a closed linear subspace of real or complex L2(mu) and V perpendicular={0}, then V=L2(mu).",
         "deps": [
-          "thm-riesz-fischer-completeness-of-l-p",
-          "thm-parallelogram-law-in-l-two",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
           "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
-          "cor-cauchy-schwarz-inequality-for-l-two",
-          "def-complete-metric-space",
+          "thm-infimum-property",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "Choose a distance-minimizing sequence. Parallelogram makes it Cauchy; completeness and closedness give a minimizer v. Minimality under real and, in the complex case, imaginary scalar perturbations gives x-v perpendicular to V, hence x=v.",
+        "strategy": "Under AC use the real/complex Hilbert pairing, derive parallelogram by expansion, choose a positive-index minimizing sequence and obtain a nearest point by completeness and closedness. Real and imaginary perturbations force orthogonality. Zero Hilbert space does not imply zero measure.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1727,9 +1724,18 @@
           "thm-dominated-convergence",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions",
-          "cor-absolute-value-and-powers-of-a-martingale-are-submartingales"
+          "cor-absolute-value-and-powers-of-a-martingale-are-submartingales",
+          "thm-levy-downward-convergence-of-conditional-expectations",
+          "thm-blumenthal-zero-one-law",
+          "def-germ-sigma-algebra-at-zero",
+          "def-wiener-measure-on-continuous-path-space",
+          "cor-conditional-lp-contraction",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
         ],
-        "strategy": "Fix T and let R_T be the range of terminal Ito integrals in mean-zero L2(F_T). Isometry makes R_T closed. For a mean-zero Z orthogonal to R_T, apply one-dimensional Ito separately to exp(q(t)/2)cos x and exp(q(t)/2)sin x along X_t=integral_0^t h_s dB_s for deterministic step h and q(t)=integral_0^t h_s^2ds. This proves the complex characteristic exponential is 1 plus an Ito integral, so orthogonality makes every finite Brownian-cylinder Fourier transform of the finite signed measure Z dP vanish. Fourier uniqueness, followed by a cylinder pi-system/Dynkin-lambda argument on the raw natural F_T and then the null-set completion step, gives Z=0. The closed-subspace lemma yields R_T=mean-zero L2(F_T). For an integrable Brownian-filtration martingale, truncate its terminal variable in L1; the L1 Doob inequality makes the bounded L2 represented martingales converge uniformly in probability, and a summable subsequence gives a continuous version. Apply this to each stopped piece of a cadlag local martingale, obtain compatible continuous versions, then stop those at continuous level exits to get L2 terminal variables. Represent the stopped pieces, use isometry to prove equality of their integrands on overlaps, and patch the predictable integrands along stopping intervals. Localization and the stopping identity yield the stated representation and uniqueness, without enlarging the usual Brownian filtration.",
+        "strategy": "First remove the raw right germ by independent product density, Levy downward convergence, Blumenthal and L2 contraction; this establishes the Brownian increment interface for the usual filtration before integration is used. Characteristic step exponentials, Fourier uniqueness and pi-lambda show trivial mean-zero orthogonal complement. Apply the closed-subspace lemma to R_T plus constants in full real L2. Terminal truncations and Doob L1 on grids including the terminal endpoint establish continuity before level stopping. Prove bounded continuous stopping by grid optional sampling and fixed-terminal uniform integrability. Represent bounded pieces; use finite-energy isometry, independent combined-energy uniqueness and Tonelli on countable overlaps to patch twice. No general semimartingale representation is used.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1825,7 +1831,7 @@
     "id": "itos-formula-and-brownian-martingales-examples",
     "kind": "B",
     "category": "probability",
-    "title": "Itos Formula and Brownian Martingales — Examples",
+    "title": "Itos Formula and Brownian Martingales \u2014 Examples",
     "companion": "itos-formula-and-brownian-martingales",
     "requires": [
       "itos-formula-and-brownian-martingales"
@@ -1835,24 +1841,27 @@
         "id": "ex-ito-formula-for-brownian-powers",
         "kind": "example",
         "title": "Ito formula for Brownian powers",
-        "statement": "Assume AC. For integer n>=2, B_t^n=n integral_0^t B_s^{n-1}dB_s+(n(n-1)/2)integral_0^t B_s^{n-2}ds; drift cancellation gives polynomial martingales such as B_t^2-t and B_t^3-3tB_t.",
+        "statement": "Assume AC and (H). Brownian power identity for n>=2, with explicit predictable integrand and normalized Lebesgue-path representatives, at all times on one full event. Square and cubic polynomial processes are continuous square-integrable martingales.",
         "deps": [
-          "thm-ito-formula-one-dimensional",
-          "cor-brownian-square-martingale",
           "def-brownian-motion",
-          "def-continuous-brownian-ito-process",
-          "def-locally-square-integrable-predictable-brownian-integrand",
-          "thm-localized-ito-integral",
+          "def-elementary-predictable-brownian-integrand",
+          "def-progressively-measurable-and-predictable-process",
+          "def-ito-integral-of-an-elementary-predictable-process",
           "thm-ito-integral-process-has-a-continuous-martingale-version",
           "thm-ito-isometry-and-linearity-in-predictable-l2",
           "lem-gaussian-even-moment-bound-for-brownian-increments",
           "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-fatou-lemma",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "cor-cauchy-schwarz-for-random-variables",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-taking-out-what-is-known",
           "def-continuous-time-adapted-process-and-martingale",
-          "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions",
-          "def-elementary-predictable-brownian-integrand"
+          "lem-brownian-motion-has-a-jointly-measurable-continuous-version",
+          "def-axiom-of-choice"
         ],
-        "strategy": "Apply Ito to x^n after stopping at |B|=m, then remove the stop using finite Gaussian moments. Apply space-time Ito to x^3-3tx for the cubic example.",
+        "strategy": "Finite binomial telescope: L2 step-integral convergence, orthogonal centered weighted squared increments, L1 vanishing higher powers and pathwise Riemann sums. Rational continuity gives process equality. Deterministic-time product telescope supplies cubic martingale integral.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1877,23 +1886,21 @@
         "id": "ex-logarithm-of-geometric-brownian-motion",
         "kind": "example",
         "title": "Logarithm of geometric Brownian motion",
-        "statement": "Assume AC. For x>0 and explicitly defined X_t=x exp((mu-sigma^2/2)t+sigma B_t), dX_t=mu X_tdt+sigma X_tdB_t and d log X_t=(mu-sigma^2/2)dt+sigma dB_t.",
+        "statement": "Assume AC and (H), with usual filtration conditions. Normalize B on an F_0-null event to an everywhere-continuous adapted zero-start Bhat. For x>0, define X_t=x exp((mu-sigma^2/2)t+sigma Bhat_t). Then X is a positive continuous Brownian Ito process with drift mu X and diffusion sigma X, and log X has drift mu-sigma^2/2 and diffusion sigma.",
         "deps": [
+          "lem-adapted-continuous-processes-are-progressively-measurable",
+          "def-ito-integral-of-an-elementary-predictable-process",
           "thm-ito-formula-one-dimensional",
           "def-brownian-motion",
+          "def-natural-and-usual-augmented-brownian-filtrations",
           "def-continuous-brownian-ito-process",
           "def-continuity-real",
           "thm-heine-cantor-r",
-          "def-locally-square-integrable-predictable-brownian-integrand",
-          "thm-localized-ito-integral",
-          "thm-stopping-an-ito-integral",
-          "def-continuous-time-stopping-time",
-          "def-convergence-in-probability",
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions",
           "def-elementary-predictable-brownian-integrand"
         ],
-        "strategy": "Apply Ito to the displayed exponential, then to log under compact positive localization. Positivity removes the localization; no SDE existence theorem is asserted.",
+        "strategy": "Apply Ito to the smooth global exponential along Bhat. Continuous adaptation proves predictability/progressivity and explicit finite-horizon exponential bounds prove local coefficient integrability. Take the ordinary logarithm of the defining exponential; no logarithmic localization or SDE existence theorem is used.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1918,26 +1925,18 @@
         "id": "ex-exponential-martingale-and-a-brownian-tail-bound",
         "kind": "example",
         "title": "Exponential martingale Brownian tail bound",
-        "statement": "Assume AC. For a,T>0, P(sup_{t<=T}B_t>=a)<=exp(-a^2/(2T)).",
+        "statement": "Assume AC and (H). For a,T>0 the supremum of the normalized continuous Brownian representative satisfies P(M_T>=a)<=exp(-a^2/(2T)).",
         "deps": [
           "cor-exponential-brownian-martingale",
           "def-brownian-motion",
-          "def-continuous-time-stopping-time",
-          "def-standard-normal-and-normal-laws",
-          "lem-normal-density-has-total-mass-one",
-          "thm-optional-sampling-for-bounded-stopping-times",
           "def-elementary-predictable-brownian-integrand",
           "def-continuous-time-filtration-and-all-pairs-martingale",
-          "def-continuity-real",
-          "thm-heine-cantor-r",
-          "thm-fatou-lemma",
-          "def-convergence-in-probability",
-          "def-partition-and-refinement",
-          "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions",
-          "thm-two-sided-exit-probability-for-brownian-motion"
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "lem-brownian-motion-has-a-jointly-measurable-continuous-version",
+          "thm-continuity-from-below-for-measures",
+          "def-axiom-of-choice"
         ],
-        "strategy": "Let tau_a be the first hit of a and take theta>0. Sample the positive exponential martingale on dyadic ceiling approximations to tau_a wedge T. Finite-grid optional sampling has expectation one, and Fatou gives E[Z_{tau_a wedge T}]<=1 without silently assuming continuous-time optional stopping. On the hitting event Z_{tau_a}>=exp(theta a-theta^2T/2), so Markov gives the bound; optimize at theta=a/T.",
+        "strategy": "Finite dyadic first-crossing index, discrete optional sampling of the Gaussian exponential martingale, increasing strict grid exceedance events, then b increases to a and theta=b/T. No continuous hitting time or exit law.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -1962,16 +1961,18 @@
         "id": "ex-harmonic-functions-of-planar-brownian-motion",
         "kind": "example",
         "title": "Harmonic functions of planar Brownian motion",
-        "statement": "Assume AC. For planar Brownian motion, B_t^1B_t^2 and (B_t^1)^2-(B_t^2)^2 are continuous local martingales and become true martingales after bounded-domain stopping.",
+        "statement": "Assume AC and (H). For planar Brownian motion on its usual augmented natural filtration, normalized everywhere continuous and zero-start, B_t^1 B_t^2 and (B_t^1)^2-(B_t^2)^2 are continuous local martingales. Stopping at any origin-centred disc of radius R>0 gives true square-integrable martingales.",
         "deps": [
           "thm-space-time-harmonic-functions-yield-brownian-local-martingales",
           "def-d-dimensional-brownian-motion",
           "def-brownian-motion",
+          "def-natural-and-usual-augmented-brownian-filtrations",
           "def-c-c-and-c-c-infinity-on-rn",
           "def-continuous-time-stopping-time",
           "def-continuous-time-adapted-process-and-martingale",
           "def-locally-square-integrable-predictable-brownian-integrand",
           "thm-localized-ito-integral",
+          "thm-stopping-an-ito-integral",
           "thm-ito-integral-process-has-a-continuous-martingale-version",
           "thm-ito-isometry-and-linearity-in-predictable-l2",
           "lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff",
@@ -1980,7 +1981,7 @@
           "lem-ac-supplies-sequential-choices-for-probability-constructions",
           "def-elementary-predictable-brownian-integrand"
         ],
-        "strategy": "Compute Delta(xy)=Delta(x^2-y^2)=0 and apply the harmonic theorem. Bounded-domain stopping bounds gradients and makes the integrals square-integrable.",
+        "strategy": "Both polynomials are harmonic on the whole plane. Apply the compact space-time theorem to K_n=[0,n] times the closed radius-R disc, whose exit is n wedge tau_R. For each finite horizon choose n larger than it, identifying the disc-stopped identities and martingales. Gradient norms are bounded by R and 2R; integer radii exhaust all finite path segments.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -2005,13 +2006,14 @@
         "id": "ex-expected-exit-time-from-an-interval-via-ito-formula",
         "kind": "example",
         "title": "Expected exit time from an interval",
-        "statement": "Assume AC. For a,b>0, Brownian motion started at x in (-a,b), and tau its first exit from (-a,b), E_x tau=(x+a)(b-x), hence E_0 tau=ab.",
+        "statement": "Assume AC and (H). For a,b>0 and x in (-a,b), let B^x be the continuous canonical coordinate process under P_x with its usual augmented natural filtration and tau its first exit from (-a,b). Then E_x tau=(x+a)(b-x), hence E_0 tau=ab.",
         "deps": [
           "thm-dynkin-formula-for-bounded-brownian-stopping",
           "def-brownian-motion-started-at-x",
           "def-brownian-motion",
+          "def-natural-and-usual-augmented-brownian-filtrations",
           "def-c-c-and-c-c-infinity-on-rn",
-          "lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
           "thm-two-sided-exit-probability-for-brownian-motion",
           "def-continuous-time-stopping-time",
           "thm-dominated-convergence",
@@ -2022,7 +2024,7 @@
           "lem-ac-supplies-sequential-choices-for-probability-constructions",
           "def-elementary-predictable-brownian-integrand"
         ],
-        "strategy": "Let u(x)=(x+a)(b-x). Multiply u by the explicit C2 cutoff that is one on [-a,b], zero outside a slightly larger interval, and on each transition uses 1-10r^3+15r^4-6r^5; this gives a compactly supported C2 function agreeing with u near the stopped path. Apply bounded-stop Dynkin to tau wedge n, where Lu=-1 and u vanishes at the exit endpoints. Bounded convergence sends u(B_{tau wedge n}) to zero and monotone convergence yields the formula.",
+        "strategy": "A rational-distance test on compact time intervals proves the literal exit is a stopping time. Multiply u(y)=(y+a)(b-y) by the explicit smooth chi_R for R>max(a,b); this agrees near the closed interval. Apply bounded Dynkin to tau wedge n, using normalized evaluations agreeing on the common full initial-value event. Finite endpoint exit gives the bounded-convergence limit zero; MCT identifies E tau without presupposing its integrability.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -2047,17 +2049,20 @@
         "id": "ex-brownian-hitting-probability-from-an-exponential-martingale",
         "kind": "example",
         "title": "Hitting probabilities from an exponential martingale",
-        "statement": "Assume AC. For a,b>0, x in (-a,b), and X_t=x+B_t+mu t, P_x(X exits (-a,b) at b)=(1-exp(-2mu(x+a)))/(1-exp(-2mu(a+b))) when mu is nonzero; for mu=0 it is (x+a)/(a+b).",
+        "statement": "Assume AC and (H). On continuous canonical path space under shifted law P_x, equip Z with its usual augmented natural filtration and set X_t=Z_t+mu t, a,b>0, x in (-a,b). The upper-exit probability is (1-exp(-2mu(x+a)))/(1-exp(-2mu(a+b))) for nonzero mu, and (x+a)/(a+b) for zero mu.",
         "deps": [
           "cor-exponential-brownian-martingale",
           "def-brownian-motion-started-at-x",
           "def-brownian-motion",
+          "def-natural-and-usual-augmented-brownian-filtrations",
           "thm-two-sided-exit-probability-for-brownian-motion",
           "thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity",
           "def-continuous-time-stopping-time",
           "def-standard-normal-and-normal-laws",
           "lem-normal-density-has-total-mass-one",
           "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence",
           "def-elementary-predictable-brownian-integrand",
           "def-continuous-time-filtration-and-all-pairs-martingale",
           "def-continuity-real",
@@ -2067,7 +2072,7 @@
           "def-axiom-of-choice",
           "lem-ac-supplies-sequential-choices-for-probability-constructions"
         ],
-        "strategy": "For nonzero mu, exp(-2mu X_t) is a constant multiple of an exponential Brownian martingale. The LIL makes the drifted path tend in the sign of mu, so the continuous path exits in finite time. For C=(-infinity,-a] union [b,infinity) and tau=inf{t>=0:X_t in C}, continuity gives {tau<=t}=intersection_{m>=1} union_{q in Q intersection [0,t]}{dist(X_q,C)<1/m}: a hit implies the rational approximations, while on the compact interval [0,t] the reverse inclusion makes the continuous distance function attain its zero infimum. Since X is adapted, every event on the right lies in F_t, so the stopping-time definition applies directly without the Brownian-specific closed-hit lemma. Stop at tau wedge n; endpoint bounds give uniform integrability and dominated convergence, then solve the two-point expectation. For mu=0 invoke the earlier two-sided Brownian exit theorem directly (equivalently take the displayed continuous limit).",
+        "strategy": "For nonzero mu, exp(-2mu X_t) is a constant multiple of an exponential Brownian martingale. The LIL makes the drifted path tend in the sign of mu, so the continuous path exits in finite time. For C=(-infinity,-a] union [b,infinity) and tau=inf{t>=0:X_t in C}, continuity gives {tau<=t}=intersection_{m>=1} union_{q in Q intersection [0,t]}{dist(X_q,C)<1/m}: a hit implies the rational approximations, while on the compact interval [0,t] the reverse inclusion makes the continuous distance function attain its zero infimum. Since X is adapted, every event on the right lies in F_t, so the stopping-time definition applies directly without the Brownian-specific closed-hit lemma. Stop at tau wedge n; endpoint bounds give uniform integrability and dominated convergence, then solve the two-point expectation. For mu=0 invoke the earlier two-sided Brownian exit theorem directly (equivalently take the displayed continuous limit). For each bounded horizon, upward finite-grid rounding is justified by optional sampling and UI of conditional expectations of the fixed M_T; only exact stopped values have the almost-sure endpoint bound K. Infinite-exit evaluation is explicitly extended on its null event.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [
@@ -2155,9 +2160,16 @@
           "def-elementary-predictable-brownian-integrand",
           "def-conditional-expectation-as-an-ae-class",
           "def-axiom-of-choice",
-          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-wiener-measure-on-continuous-path-space",
+          "def-natural-and-usual-augmented-brownian-filtrations",
+          "thm-monotone-convergence-for-the-integral",
+          "cor-cauchy-schwarz-for-random-variables",
+          "thm-bolzano-weierstrass",
+          "lem-rat-embeds-dense",
+          "thm-intermediate-value"
         ],
-        "strategy": "The LIL gives B_t/t->0, hence log Z_t->-infinity; continuity makes tau finite. For fixed t, dyadic ceiling approximations to tau wedge t and the discrete optional-sampling identity give mean one. The sampled variables converge a.s.; Doob L2 applied to Z on [0,t], together with the finite Gaussian exponential moment of Z_t^2, makes sup_{s<=t}Z_s integrable, so dominated convergence yields E Z_{t wedge tau}=1. Yet Z_{t wedge tau}->1/2 a.s. Uniform integrability would promote this last convergence to L1 and preserve mean, a contradiction.",
+        "strategy": "Assume AC and (H), normalize to an everywhere-continuous zero-start realization before its filtration. Gaussian conditioning gives mean-one Z and EZ_t^2=e^t. LIL and IVT give finite level hit; exact rational contacts and compactness prove stopping, with countable choices covered by AC. Nested-grid Doob and MCT give L2 supremum control; bounded discrete sampling and DCT give mean one at t wedge tau. Integer-time UI convergence would force mean 1/2, a contradiction.",
         "axiom_base": "Full AC is stated and declared directly; the implication bridge supplies every inherited DC or AC_omega obligation.",
         "sources": {
           "references": [

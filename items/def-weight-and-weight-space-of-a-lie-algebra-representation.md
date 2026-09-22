@@ -9,6 +9,11 @@ deps: [def-representation-of-a-lie-algebra, def-cartan-subalgebra-of-a-lie-algeb
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Alexander Kirillov Jr., An Introduction to Lie Groups and Lie Algebras"

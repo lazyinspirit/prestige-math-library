@@ -9,6 +9,11 @@ deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, def-root-and
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Alexander Kirillov Jr., An Introduction to Lie Groups and Lie Algebras"

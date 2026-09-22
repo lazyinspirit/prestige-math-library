@@ -9,7 +9,7 @@ examples: [ex-maximal-ideal-space-of-c-of-k, ex-maximal-ideal-space-of-the-disc-
 These companion examples exercise the Gelfand machinery of the main page on its
 standard models. The character spaces of $C(K)$ and of the disc algebra show the
 two extreme behaviours of a uniform algebra: for $C(K)$ the evaluations are all
-the characters and the maximal ideals are all fixed, while for the disc algebra
+the characters, while for the disc algebra
 the character space is the closed disc even though the boundary restriction is
 isometric, so the transform sees the interior. The Laurent example computes the
 characters of $\ell^1(\mathbb Z)$ under convolution: they are the evaluations of
@@ -24,8 +24,9 @@ multiplicative, displaying the full freedom allowed by Banach–Stone.
 
 The topological examples unpack the dictionary. For discrete $\mathbb N$ a free
 ultrafilter produces a free maximal ideal of $\mathbb R^{\mathbb N}$, so the ring
-of all continuous functions reconstructs $\beta\mathbb N$ rather than
-$\mathbb N$; the Stone space of the power-set algebra is $\beta\mathbb N$ with
+of all continuous functions has its maximal ideals in set-theoretic bijection
+with $\beta\mathbb N$, with fixed ideals corresponding exactly to
+$\mathbb N$; no topology on that ideal set is inferred. The Stone space of the power-set algebra is $\beta\mathbb N$ with
 its universal property, and the finite power-set examples compute the degenerate
 case where ultrafilters are principal and the Stone space is discrete. On the
 nonunital side, $c_0(\mathbb N)$ has exactly the evaluation characters, no unit

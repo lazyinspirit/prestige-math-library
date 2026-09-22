@@ -31,7 +31,9 @@ write judge verdicts or stamps. Published content, scope changes, deletion,
 and reading-order changes require the exact task-authorised protocol. Step-7
 adjudicators may add fully proved missing-dependency lemmas and register them
 on their owned pages under the Step-7 task's explicit exception; otherwise
-report the issue without changing it.
+report the issue without changing it. Current Step-7 dispatches also follow
+`step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
+published downstream repairs across the whole library.
 
 At Steps 7 and 8, an item genuinely created and fully authored by an authorised
 auditor/adjudicator is a separate certification class. Do not manufacture a
@@ -39,11 +41,13 @@ judge verdict or send that addition through a judge/audit-repair loop. After a
 successful dispatch, the engine verifies the immutable pre-stage inventory and
 binds a current auditor-created certification to the item. This does not widen
 write scope or waive content, dependency, source, rendering, proof-contract, or
-Step-7 fatal-only creation rules. Existing-item edits still require ordinary
+Step-7 task ownership rules. Existing-item edits still require ordinary
 current judge evidence.
 
 ## Review and repair standard
 
+Logical validity is the ground truth; authoritative sources and judges can err.
+State uncertainty honestly and consult primary sources when unsure.
 Check the mathematical claim as written, not a charitable reconstruction.
 Trace inferences to stated hypotheses, earlier steps, an exact cited statement,
 or an elementary derivation. Preserve domains, quantifiers, hypotheses,
@@ -65,11 +69,11 @@ its prior `verification.judge` record.
 
 Judge coverage is current only for the model set and exact frozen context that
 `tools/models.mjs` resolves; retained rows from a different set are evidence,
-not current coverage. In a Step-7 adjudication, only a `confirmed_fatal`
-outcome for the exact assigned rejection licenses a content repair.
-`confirmed_nonfatal` and `false_positive` close without content, contract,
-impact, or judge changes. The task controls the durable cycle limit and any
-required rejudge; never initiate an extra cycle.
+not current coverage. Current Step-7 adjudication repairs every confirmed defect,
+including `confirmed_nonfatal`; `confirmed_fatal` additionally enters the fatal
+threshold count. A `false_positive` requires evidence without unnecessary edits.
+The task controls repair ownership, fresh downstream continuation and any
+required rejudge; never initiate a cycle independently.
 
 Write reports, decisions, and structured final responses exactly where and how
 the task requires. Use the prescribed append interface for shared JSONL
@@ -369,6 +373,11 @@ Return only the supplied Step-7 context JSON. `pages_read`, `items_read`, and
 group's conventions, load-bearing items, opened published dependencies, and
 concrete concerns; an empty concerns or alerts list is valid.
 
+The reply is parsed as JSON, so every backslash inside a string is an escape:
+write a LaTeX command as a doubled backslash (`\\perp`, `\\omega`), never as
+`\perp`. An invalid escape invalidates the whole digest. When a symbol is
+available in plain text or Unicode (⊥, ω, ≤, ∈), prefer it over TeX.
+
 Inventory boundary: `pages_read` must contain exactly the ids under **Your
 pages**, and `items_read` exactly the ids under **Your content**, with no extras.
 Opening a published dependency does not expand either inventory; record its item
@@ -394,6 +403,13 @@ exclude dispatch logs from routine content searches. Fetch complete relevant sou
 sections and dependency statements, using bounded output chunks. A truncated result
 is not evidence of absence; continue reading until the required argument is complete.
 Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+Read each file ONCE per session, in the order the task gives it, and pull only the sections
+and clauses you need — use the rendered evidence bundle first, and read the cited lines
+rather than re-reading whole items. Budget the context you carry: this same
+context is re-sent on every turn. The bundle is an entry point, never a fence: read
+whatever else the mathematics requires, including other items of this frontier and the
+published library, and search the web when a source must be checked.
 
 For writing roles, after each completed item update the task-authorized notes or report with the
 current item IDs, exact claim and conventions, source paths/URLs and locators,

@@ -1043,18 +1043,33 @@ only an unnamed abstract cyclic group requires choosing a generator.
 **B page:** `bochner-inversion-and-plancherel-on-lca-groups-examples`
 **Requires:** the FR-15 A page, FA
 `fourier-transform-convolution-and-approximate-identities` and the FA-17 A
-Banach-algebra character theorem, MT Radon measures/Riesz--Markov, and RG-18
+general Banach-algebra foundations, MT Radon measures/Riesz--Markov, and RG-18
 `haar-measure-existence-and-uniqueness`.  **Sources read:** Lo §§34 and
 §§36A--D, pp. 134–137 and 141–146; Ko §§10--12, pp. 22–26; EW Appendix
 C.2–C.3, printed pp. 432–439.
+
+**External prerequisite already included conditionally:** the Gelfand A page
+now carries `rem-lca-group-algebra-and-character-space-external` and
+`ex-gelfand-transform-of-l-one-of-an-lca-group`.  Williams Example 3.10's LCA
+convolution algebra, unit-iff-discrete result, all-character classification and
+compact-open topology identification are explicitly source-backed external
+inputs; the companion example proves the unitization/Gelfand evaluation only
+relative to them.  FR-16 still owes their complete local replacement before
+items 2, 3 and 5 can count as internally dependency-closed; it must reuse these
+stable identities rather than duplicate them.
+Haar existence is available; this substantial local package is not yet proved.
+Do not import the later RG-19 group-algebra page or apply a C*-specific
+unitization theorem to $L^1(G)$. See
+`phase-2-remaining-27-step8-external-inclusion-review.md` for exact remaining
+external assumptions.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
 | 1 | `def-fourier-transform-on-an-lca-group` (definition) — for $f\in L^1(G,m_G)$, $\widehat f(\gamma)=\int_Gf(x)\overline{\gamma(x)}\,dm_G(x)$. | Generalises the existing transform only after Haar is cited. | literature-derived | not-applicable | Lo §34/EW C.2. |
 | 2 | `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` (lemma) — record the exact character factors and $\widehat{f*g}=\widehat f\widehat g$. | Algebraic calculus for all later theorems. | literature-derived | ai-altered | Lo §34/EW C.2; Fubini hypotheses explicit. |
-| 3 | `thm-riemann-lebesgue-lemma-on-lca-groups` (theorem) — $\widehat f\in C_0(\widehat G)$ and $\|\widehat f\|_\infty\le\|f\|_1$. | Identifies the correct transform codomain. | literature-derived | ai-altered | FR-15 joint evaluation, compactly supported $L^1$ approximation, and the FA-17 character-space identification; no Pontryagin separation is used. |
+| 3 | `thm-riemann-lebesgue-lemma-on-lca-groups` (theorem) — $\widehat f\in C_0(\widehat G)$ and $\|\widehat f\|_\infty\le\|f\|_1$. | Identifies the correct transform codomain. | literature-derived | ai-altered | FR-15 joint evaluation, compactly supported $L^1$ approximation, and the unbuilt FR-16-local LCA character-space identification; no Pontryagin separation is used. |
 | 4 | `lem-lca-positive-convolution-squares-form-an-inversion-core` (lemma) — functions $g*\widetilde g$ with $g\in C_c(G)$ give a dense positive core on which both Fourier integrals are absolutely controlled. | Starting point for normalization and inversion. | literature-derived | literature-derived | Lo §36B/Ko §§10--12. |
-| 5 | `lem-fourier-stieltjes-transforms-determine-finite-radon-measures` (lemma) — a finite regular measure on $\widehat G$ whose inverse transform vanishes on $G$ is zero. | Supplies Bochner uniqueness and the inversion construction before biduality. | literature-derived | literature-derived | Ko Theorem 10.6; the proof uses the FR-15/FA-17 identification of all characters of $L^1(G)$, not $G\cong\widehat{\widehat G}$. |
+| 5 | `lem-fourier-stieltjes-transforms-determine-finite-radon-measures` (lemma) — a finite regular measure on $\widehat G$ whose inverse transform vanishes on $G$ is zero. | Supplies Bochner uniqueness and the inversion construction before biduality. | literature-derived | literature-derived | Ko Theorem 10.6; the proof requires the unbuilt FR-16-local identification of all characters of $L^1(G)$ after FR-15, not $G\cong\widehat{\widehat G}$. |
 | 6 | `def-positive-definite-function-on-an-abelian-group` (definition) — $\phi$ is positive definite when $\sum_{j,k}c_j\overline{c_k}\phi(x_j-x_k)\ge0$ for every finite choice, including the empty sum. | Sets the finite-matrix convention for Bochner. | literature-derived | not-applicable | Lo §36A/EW C.3. |
 | 7 | `lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite` (lemma) — $\phi(x)=\int_{\widehat G}\gamma(x)\,d\mu(\gamma)$ is continuous positive definite for finite positive $\mu$. | Easy direction of Bochner with continuity justified. | literature-derived | ai-altered | FR-15 joint evaluation plus compact/tail splitting; sequential DCT is not used on a non-first-countable group. |
 | 8 | `lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core` (lemma) — integrate $\phi$ against convolution squares and prove positivity and the $\phi(0)$ norm bound. | Construction behind Bochner. | literature-derived | literature-derived | Lo §36A/EW C.3. |

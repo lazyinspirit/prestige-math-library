@@ -41,7 +41,7 @@ ideal, so that $\mathfrak b$ is the semidirect sum $\mathfrak h\ltimes\mathfrak 
 
 [L1] $\Phi$ is finite and $\mathfrak g=\mathfrak h\oplus\bigoplus_{\alpha\in\Phi}\mathfrak g_\alpha$ is a direct sum over distinct eigenspaces ([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]); also $[\mathfrak g_\alpha,\mathfrak g_\beta]\subseteq\mathfrak g_{\alpha+\beta}$ with $\mathfrak g_\gamma=0$ when $\gamma\notin\Phi\cup\{0\}$ ([[prop-brackets-of-root-spaces]]).
 
-[L2] $\mathfrak n^\pm$ are nilpotent Lie subalgebras, $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$ is a Lie subalgebra containing $\mathfrak n^+$ as the sum of the root spaces $\mathfrak g_\alpha$ with $\alpha\in\Phi^+$, and $\Phi=\Phi^+\sqcup\Phi^-$ ([[def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra]]).
+[L2] $\mathfrak n^\pm$ are nilpotent Lie subalgebras, $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$ is a Lie subalgebra containing $\mathfrak n^+$ as the sum of the root spaces $\mathfrak g_\alpha$ with $\alpha\in\Phi^+$, $[\mathfrak h,\mathfrak g_\alpha]\subseteq\mathfrak g_\alpha$, and $\Phi=\Phi^+\sqcup\Phi^-$ ([[def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra]]).
 
 [L3] A Lie algebra is nilpotent when its lower central series reaches $0$, and solvable when its derived series reaches $0$ ([[def-lower-central-series-and-nilpotent-lie-algebra]], [[def-derived-series-and-solvable-lie-algebra]]).
 
@@ -53,7 +53,7 @@ ideal, so that $\mathfrak b$ is the semidirect sum $\mathfrak h\ltimes\mathfrak 
 
 1.2 The subalgebras $\mathfrak n^\pm$ are nilpotent by [L2]; this is the nilpotent part of (ii). [L2, L3]
 
-1.3 $\mathfrak b$ is a subalgebra by [L2], and its derived algebra satisfies $[\mathfrak b,\mathfrak b]\subseteq[\mathfrak h,\mathfrak h]+[\mathfrak h,\mathfrak n^+]+[\mathfrak n^+,\mathfrak n^+]\subseteq\mathfrak n^+$, because $[\mathfrak h,\mathfrak h]=0$, $[\mathfrak h,\mathfrak g_\alpha]\subseteq\mathfrak g_\alpha$ for $\alpha\in\Phi^+$ by [L1], and $[\mathfrak n^+,\mathfrak n^+]\subseteq\mathfrak n^+$ by [L2]. [A1, L1, L2]
+1.3 $\mathfrak b$ is a subalgebra by [L2], and its derived algebra satisfies $[\mathfrak b,\mathfrak b]\subseteq[\mathfrak h,\mathfrak h]+[\mathfrak h,\mathfrak n^+]+[\mathfrak n^+,\mathfrak n^+]\subseteq\mathfrak n^+$, because $[\mathfrak h,\mathfrak h]=0$, $[\mathfrak h,\mathfrak g_\alpha]\subseteq\mathfrak g_\alpha$ for $\alpha\in\Phi^+$ by [L2], and $[\mathfrak n^+,\mathfrak n^+]\subseteq\mathfrak n^+$ by [L2]. [A1, L2]
 
 2.1 By step 1.3 the derived series of $\mathfrak b$ satisfies $\mathfrak b^{(0)}=\mathfrak b$, $\mathfrak b^{(1)}\subseteq\mathfrak n^+$, and inductively $\mathfrak b^{(k)}\subseteq\gamma_k(\mathfrak n^+)$ for every $k\ge1$, because $\mathfrak b^{(k+1)}=[\mathfrak b^{(k)},\mathfrak b^{(k)}]\subseteq[\mathfrak n^+,\gamma_k(\mathfrak n^+)]=\gamma_{k+1}(\mathfrak n^+)$ by monotonicity of the bracket and the definition of the lower central series ([[def-lower-central-series-and-nilpotent-lie-algebra]]); since $\mathfrak n^+$ is nilpotent, $\gamma_k(\mathfrak n^+)=0$ for some $k$ by [L3], hence $\mathfrak b^{(k)}=0$ and $\mathfrak b$ is solvable. [L2, L3, step 1.3]
 

@@ -66,7 +66,7 @@ strictly weaker than "carries this particular complete metric".
   closed subspace of a completely metrizable space is completely metrizable,
   with no completeness hypothesis on the ambient metric. What happens for
   subspaces that are **not** closed is left open here.
-- [[thm-metric-completion-exists]] embeds every metric space densely in a
+- Under Countable Choice, [[thm-metric-completion-exists]] embeds every metric space densely in a
   complete one. The completion is a complete space, but the original space
   usually sits inside it as a proper dense subspace, and being a dense subspace
   of a complete space says nothing on its own about complete metrizability.

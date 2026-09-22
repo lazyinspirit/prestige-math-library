@@ -1,0 +1,12 @@
+# FA position32: reseal of unchanged repaired theorem
+
+Read the full current theorem, original FA basis, both Terra verdicts, Alpha correction, own batch14 boundary/risk contract, and the BPI/prime-ideal/AC/ultrafilter/product-compactness/closed-subspace supplier statements. The finite-support hereditary-symmetry and topology interfaces and owning A/B context were inspected in this session. Unlike the general Brunner definition, this theorem explicitly states a transitive ZFA+AC ground; its proof and conclusion are reviewed under that stated hypothesis, not silently generalized to arbitrary grounds.
+
+The repaired argument is correct under those hypotheses. Supporting the full Boolean structure makes H act by automorphisms. In the ground, AC gives a nonempty prime-ideal space. Every failure of an ideal or primality axiom is witnessed at finitely many coordinates, so the space is closed in compact 2^B; a differing coordinate separates any two ideals. Joint continuity is correctly proved on finite-coordinate cylinders: choose supports for h0^{-1}C, intersect their point stabilizers to form open K, and use h0K times the cylinder agreeing on h0^{-1}C. No infinite intersection of open subgroups is asserted open. The fixed ideal has support E, and its members inherit hereditary symmetry from B. Bounded algebraic conditions are absolute to the transitive interpretation. Thus this ideal witnesses internal BPI. Empty support has stabilizer G, and the trivial Boolean algebra is correctly excluded.
+
+Source read directly this review: https://janos.cs.technion.ac.il/RESEARCH/AMS-Book-files/pdfs/11_Blass.pdf, Blass, Definition2.1 and preceding joint-continuity definition p2, §3 pp2–3 (normal support filters, hereditary symmetry, BPI and ground AC). These support the exact conventions used. The proof of the fixed ideal here is independently checked; the unconsulted Ramsey equivalence proofs are not claimed as read or used as a substitute. The later internal-ground repair at31 does not alter this explicitly transitive theorem's assumptions or any of its suppliers.
+
+No new repair is needed; retain repaired disposition and unchanged bytes. Record before33. No judge verdict or pass stamp is made.
+
+
+Current itemHashJudge: 9ba81a915091a2886e8644419c3b43bb904c9a5c620d59f67d2faff7a66c19b8. Matches the latest receipt. Queue-status immediately before recording shows every predecessor current. No judge verdict or pass stamp is created.

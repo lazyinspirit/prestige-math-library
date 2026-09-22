@@ -38,11 +38,11 @@ $Sq^3_{\mathbb Z}=\beta_{\mathbb Z}Sq^2\rho_2:H^n(X;\mathbb Z)\to H^{n+3}(X;\mat
 
 [A1] Assume AC. For a finite CW complex the $K$-AHSS has $E_2^{p,q}=H^p(X;\mathbb Z)$ for even $q$, $E_2^{p,q}=0$ for odd $q$, and $d_r:E_r^{p,q}\to E_r^{p+r,q-r+1}$ ([[cor-complex-k-theory-ahss]]).
 
-[A2] Under the $K$-AHSS, for $p\geq1$ and after Bott translation to a nonpositive coefficient row, the differential $d_3$ agrees with the first representing-space Postnikov obstruction, which is the stable operation $\beta_{\mathbb Z}Sq^2\rho_2$ ([[lem-ku-representability-and-skeletal-postnikov-d-three-comparison]], [[lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three]]).
+[A2] Under the $K$-AHSS, for $p\geq1$ the differential $d_3$ is read from the relevant $k_{p+3}$ Postnikov layer of the total-degree representing space $ku_{p+q}$; after Bott translation to a nonpositive coefficient row, this is the stable operation $\beta_{\mathbb Z}Sq^2\rho_2$ ([[lem-ku-representability-and-skeletal-postnikov-d-three-comparison]], [[lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three]]).
 
 [A3] Steenrod squares vanish above the degree: for $x\in H^n(X;\mathbb F_2)$ one has $Sq^kx=0$ when $k>n$, so in particular $Sq^2(\rho_2y)=0$ for $y\in H^0(X;\mathbb Z)$ ([[prop-steenrod-square-normalization-instability-and-top-square]], [[def-steenrod-squares-from-cup-i-products]]).
 
-[A4] A finite CW complex has finitely many path components, each a connected finite CW complex with $H^0(X_a;\mathbb Z)=\mathbb Z$; the projections to the components give a natural decomposition of the $K$-AHSS, so a differential vanishing on every component vanishes on the disjoint union ([[cor-complex-k-theory-ahss]], [[thm-naturality-and-edge-maps-of-the-ahss]]).
+[A4] A finite CW complex has finitely many path components, each a connected finite CW complex with $H^0(X_a;\mathbb Z)=\mathbb Z$. Naturality gives restriction maps of the $K$-AHSS along the component inclusions ([[thm-naturality-and-edge-maps-of-the-ahss]]).
 
 [A5] Bott periodicity gives natural isomorphisms $K^q(X)\cong K^{q-2}(X)$ and identifies all even coefficient rows with the row $K^0(*)=\mathbb Z$ ([[thm-complex-bott-periodicity]]).
 
@@ -54,7 +54,7 @@ $Sq^3_{\mathbb Z}=\beta_{\mathbb Z}Sq^2\rho_2:H^n(X;\mathbb Z)\to H^{n+3}(X;\mat
 
 1.1 The differential $d_2$ has bidegree $(2,-1)$: it maps the even coefficient row $q$ to the odd row $q-1$, which is zero by the coefficient computation; hence $d_2=0$ and $E_3=E_2$. [A1, A5, given]
 
-1.2 On each connected component $X_a$ every class of $H^0(X_a;\mathbb Z)=\mathbb Z$ is the pullback of the generator along $X_a\to\mathrm{pt}$, so naturality of the AHSS identifies $d_3$ on that row with the pullback of $d_3$ on the point; on the point the target $H^3(\mathrm{pt};\mathbb Z)=0$, so $d_3=0$ on $H^0(X_a;\mathbb Z)$, and then $d_3=0$ on $H^0(X;\mathbb Z)$ by the component decomposition. [A1, A4, given]
+1.2 Let $X=\coprod_{a=1}^mX_a$ be the finite decomposition into connected components. On each $X_a$, every class of $H^0(X_a;\mathbb Z)=\mathbb Z$ is pulled back from the point, so naturality identifies its $d_3$ with the pullback of $d_3$ on the point; the latter has target $H^3(\mathrm{pt};\mathbb Z)=0$. For $y\in H^0(X;\mathbb Z)$, naturality along $X_a\hookrightarrow X$ therefore makes every restriction of $d_3y\in H^3(X;\mathbb Z)$ zero. Every singular simplex of a disjoint union lies in one component, so restriction gives an isomorphism of singular cochain complexes $C^*(X;\mathbb Z)\cong\prod_{a=1}^mC^*(X_a;\mathbb Z)$ and hence an injective map $H^3(X;\mathbb Z)\to\prod_aH^3(X_a;\mathbb Z)$. Thus $d_3y=0$ without assuming a componentwise decomposition of the entire AHSS. [A1, A4, given]
 
 1.3 For $p\geq1$ and any even coefficient row, the comparison and $k$-invariant lemmas identify $d_3$ on $E_3^{p,q}$ with $\beta_{\mathbb Z}Sq^2\rho_2$, transported along the Bott identification of the coefficient rows. [A2, A5, given]
 

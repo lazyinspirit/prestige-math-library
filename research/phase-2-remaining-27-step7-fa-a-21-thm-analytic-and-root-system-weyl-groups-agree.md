@@ -1,0 +1,15 @@
+# Final adjudication — position 21
+
+Disposition: repaired. Source status: verified.
+
+Inspected the current statement and entire proof, both Terra rejections, Alpha's compact-conjugation repair, the batch-12 manifest, proof contract and risk record. Read the exact root-triple, one-dimensional-root-space, integration, sphere, unitary-group, conjugation, simple-root-coordinate and Weyl-vector suppliers; earlier reviewed torus/root/page interfaces remain the context. No other queued item was reviewed in advance.
+
+Terra's final objection is correct. On this page the root differential is real on i t, not t. The B-dual H_rho belongs to i t_s, and the proof must exponentiate V_rho=iH_rho in t_s. Now beta(V_rho)=i(beta,rho) is nonzero for every root. Positivity is proved from the simple-root pairing and nonnegative coordinates, not attributed wholesale to the Weyl-vector supplier. The connected centralizer therefore has algebra t and equals T via local exponential charts. The empty-root case yields G=T explicitly.
+
+Independently checked the earlier normalization: B(h,h)=2B(e,f)>0 and B(e,sigma(e))=B(U,U)+B(V,V)<0 prove the coefficient c is real and negative. Rescaling multiplies c by |a|^2. The fixed real vectors e-f, i(e+f), ih have exactly the su(2) brackets. Added the missing one-dimensional-root-space and conjugation interfaces. The explicit first-column identification SU(2)=S^3 supplies connectedness and simple connectivity for Lie's second theorem. Naturality puts the diagonal circle in T with root pairing 2. The displayed normalizer matrix is exp(-pi X_0/2); it negates ih and fixes the kernel of alpha, including the center. The analytic action fixes the center for connected G, so faithfulness restricts to the semisimple summand. Conjugation preserves Killing form and permutes root spaces; chamber transitivity followed by the corrected rho argument proves the reverse inclusion.
+
+Verified source: https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf, Chapter IV section 6, printed pp.260–264, Theorem 4.54, complete proof read (PDF pp.277–281). It defines t_R=i t_0, locates dual vectors there, constructs the reflection using the compact real root plane, and explicitly uses exp(i r H_delta) in the centralizer argument. Section 7 Proposition 4.59, printed pp.265–266 (PDF pp.282–283), complete proof read: compact su(2) integration supplies the coroot period. The repair spells out the prerequisites and local normalizations instead of citing these conclusions as proof.
+
+Scope: only this item, its manifest/contract, and the owning batch-12 dependency record changed. New cross-batch entries identify the exact conjugation, root-space dimension, and simple-root-coordinate uses. No new lemma or published edit; no judge verdict or pass stamp.
+
+Validation: direct precheck, strict focused proof-contract check (zero errors/warnings), and rendercheck all passed; dependency ledger refreshed. No unresolved mathematical obligation. Next: record final bytes, then position 22.

@@ -1,0 +1,8 @@
+# Position 19 context reseal
+
+Read the complete current Baire proof and padded-enumeration supplier against the current choice-strength A/B context. Their ZF hypotheses are unaffected by the later symmetric-model/forcing context. The empty space is disposed of without inventing a sequence; a nonempty finite dense set is enumerated by padding at e(0), while an infinite countable one already has a bijection. These are finitely many existential choices, not a countable choice application.
+
+For each nonempty open G the triangle inequality gives a closed reciprocal-radius ball inside G with centre in the fixed dense sequence. The least admissible centre index and then radius index define a function. Its set of states includes the integer stage, so ordinary natural recursion applies. Nested closed balls have diameters at most 2^(-n-1); their explicit centres are Cauchy, completeness gives a limit, and closedness places it in every ball. Closedness of a metric closed ball follows directly by using the positive distance excess and the triangle inequality. Hence the limit lies in W and every dense open U_n. No choice, compactness, or later model theorem is introduced by the current page. Retain repaired disposition; the familiar elementary metric argument needs no new external verification. No dependency or contract change was needed.
+
+
+Current itemHashJudge: ce836b04c92acd244799fa684718b7e9a285482444f3f8d2829615ccc799febf, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

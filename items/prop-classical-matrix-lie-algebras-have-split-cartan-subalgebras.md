@@ -28,8 +28,9 @@ $a$-part is a diagonal matrix $\operatorname{diag}(x_1,\dots,x_n)$ (in the
 $\mathfrak{sl}_n$ case, with $\sum_ix_i=0$) and whose remaining blocks vanish
 form a Cartan subalgebra $\mathfrak h$
 ([[def-cartan-subalgebra-of-a-lie-algebra]]); it is abelian and
-$\mathfrak h\cong\mathbb C^n$ (respectively $\mathbb C^{n-1}$), is maximal
-toral, and equals its own centralizer in $\mathfrak g$.
+$\mathfrak h\cong\mathbb C^{n-1}$ for $\mathfrak{sl}_n$ while
+$\mathfrak h\cong\mathbb C^n$ for each symplectic or orthogonal algebra; it
+is maximal toral and equals its own centralizer in $\mathfrak g$.
 
 ## Facts & Assumptions
 

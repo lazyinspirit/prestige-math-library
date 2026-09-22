@@ -46,12 +46,16 @@ of nonvanishing functions, to satisfy the holomorphic spectral mapping theorem
 $\sigma(f(a)) = f(\sigma(a))$ and the composition law $g(f(a)) = (g\circ f)(a)$,
 and to produce Riesz projections for clopen spectral subsets, with the
 invariant splitting $X = \operatorname{ran}(P_E)\oplus\ker(P_E)$ and the
-restriction spectra $E$ and $\sigma(T)\setminus E$.
+restriction spectra $E$ and $\sigma(T)\setminus E$ on the corresponding
+nonzero summands; an empty spectral part gives the zero summand, to which the
+page's nonzero-algebra convention assigns no spectrum.
 
 The page closes with the Calkin algebra $\mathcal B(X)/\mathcal K(X)$ and
 Atkinson's theorem in quotient language, and with the five spectral parts: the
 disjoint point, continuous and residual spectra, the approximate point and
-compression spectra, the covering relation $\sigma = \sigma_{ap}\cup\sigma_{cp}$
+compression spectra, the identity
+$\sigma_r=\sigma_{cp}\setminus\sigma_p$, the covering relation
+$\sigma = \sigma_{ap}\cup\sigma_{cp}$
 under Dependent Choice, and the theorem that the boundary of the spectrum lies
 in the approximate point spectrum. Full choice strength is stated wherever it is
 used: the nonemptiness of the spectrum, the spectral radius formula and the

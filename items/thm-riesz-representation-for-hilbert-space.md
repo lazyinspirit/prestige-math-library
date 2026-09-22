@@ -10,6 +10,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, Theorems 1.43 and 5.35, pp.39 and 236"

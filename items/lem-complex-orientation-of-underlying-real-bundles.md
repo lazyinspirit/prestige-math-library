@@ -31,10 +31,10 @@ CW complex and let $E_{\mathbb R}$ be its underlying real bundle.
    frame $(v_1,iv_1,\dots,v_n,iv_n)$ is positive. The orientation is
    independent of the complex frame used to define it, is natural under
    pullback, and is preserved by complex-linear bundle isomorphisms.
-2. For complex bundles $E,F$ the complex orientation of $(E\oplus F)_{\mathbb R}$
+2. For numerable complex bundles $E,F$ over $B$, the complex orientation of $(E\oplus F)_{\mathbb R}$
    is the ordered direct-sum orientation of the complex orientations of
    $E_{\mathbb R}$ and $F_{\mathbb R}$.
-3. Let $V$ be a real bundle of rank $2n$ with an integral orientation $o$, and
+3. Let $V$ be a numerable real bundle of rank $2n$ over $B$ with an integral orientation $o$, and
    let $\varphi:V_{\mathbb C}\to V\oplus V$ be the canonical real-linear
    isomorphism $v\otimes(a+ib)\mapsto(av,bv)$. Then $\varphi$ carries the
    complex orientation of $(V_{\mathbb C})_{\mathbb R}$ to $(-1)^n$ times the
@@ -48,7 +48,7 @@ canonical orientation and $e(0_B)=1$.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited by the numerability, Thom and Euler-class suppliers used below ([[def-axiom-of-choice]]).
 
-[F1] The underlying real bundle $E_{\mathbb R}$ is obtained by regarding the complex transition matrices as real-linear; the construction commutes with pullback and with direct sums ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F1] The underlying real bundle $E_{\mathbb R}$ is obtained by regarding the complex transition matrices as real-linear; the construction commutes with pullback and with direct sums ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]). Complexification, passage to the underlying real bundle and finite direct sums use the same trivializing cover, so a partition of unity numerating that cover also numerates each resulting bundle.
 
 [F2] For positive rank, an orientation of a real bundle is a continuous choice of one of the two fiber orientations and is determined by positive local frames; the zero vector space and every rank-zero bundle have one canonical orientation ([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
 
@@ -66,7 +66,7 @@ canonical orientation and $e(0_B)=1$.
 
 **Proof technique:** direct.
 
-**Given:** AC, a numerable complex rank-$n$ bundle $E\to B$, local complex frames $(v_1,\dots,v_n)$ and $(w_1,\dots,w_n)$ over a common open set, and the data of statements 2 and 3.
+**Given:** AC, numerable complex bundles over $B$ as in statements 1 and 2, a numerable oriented real rank-$2n$ bundle $V\to B$ as in statement 3, and local complex frames $(v_1,\dots,v_n)$ and $(w_1,\dots,w_n)$ over a common open set.
 
 1.1 The list $(v_1,iv_1,\dots,v_n,iv_n)$ is a real basis of each fiber: since the $v_j$ form a complex basis, $\sum_j(a_jv_j+b_jiv_j)=\sum_j(a_j+ib_j)v_j$ vanishes only when all $a_j+ib_j=0$, that is, all $a_j=b_j=0$. Hence the list orients the fibers of $E_{\mathbb R}$ over the chart, and by [F2] these local data are the candidate local orientations. [F1, F2, given]
 
@@ -78,11 +78,11 @@ canonical orientation and $e(0_B)=1$.
 
 3.2 For rank $n=0$ the frame list of step 1.1 is empty and the determinant computation of step 2.1 is vacuous, so the zero bundle carries its canonical orientation; [F7] supplies $e(0_B)=1$ for use below. [F7, step 1.1]
 
-3.3 Taking Euler classes. If two orientations of a real bundle differ by a sign $\varepsilon=\pm1$ on positive frames, their Euler classes differ by the same $\varepsilon$ by the orientation-sign clause of [F4]; for the ordered direct sum $V\oplus V$ the Whitney product clause of [F4] applied twice gives $e(V\oplus V)=e(V)e(V)$. Therefore $e((V_{\mathbb C})_{\mathbb R})=(-1)^ne(V\oplus V)=(-1)^ne(V)^2$, which is statement 3. [F4, step 2.2]
+3.3 Taking Euler classes. The numeration of $V$ also numerates $V_{\mathbb C}$, $(V_{\mathbb C})_{\mathbb R}$ and $V\oplus V$ by [F1], so every Euler class in this step lies in the scope of [F4]. If two orientations of a real bundle differ by a sign $\varepsilon=\pm1$ on positive frames, their Euler classes differ by the same $\varepsilon$ by the orientation-sign clause of [F4]; for the ordered direct sum $V\oplus V$ the Whitney product clause of [F4] gives $e(V\oplus V)=e(V)e(V)$. Therefore $e((V_{\mathbb C})_{\mathbb R})=(-1)^ne(V\oplus V)=(-1)^ne(V)^2$, which is statement 3. [F1, F4, step 2.2]
 
 4.1 Direct sums. A local complex frame of $E\oplus F$ is the concatenation of a complex frame $(v_1,\dots,v_m)$ of $E$ and a complex frame $(w_1,\dots,w_k)$ of $F$, so the real frame of step 1.1 is $(v_1,iv_1,\dots,v_m,iv_m,w_1,iw_1,\dots,w_k,iw_k)$, exactly the ordered direct-sum frame of the complex-oriented summands $E_{\mathbb R}$ and $F_{\mathbb R}$. By [F2] the two orientations coincide, so statement 2 holds, and the rank-zero case is step 3.2. [F1, F2, step 1.1, step 3.2]
 
-5.1 Boundary cases. Rank zero is step 3.2, where statement 2 reads $e(0\oplus F)=1\cdot e(F)$ and statement 3 reads $(-1)^0e(V)^2=e(V)^2$. For a complex line, $n=1$ in step 2.1 gives $|\det_{\mathbb C}A|^2>0$ directly, and for $V$ of rank $2$ step 2.2 has inversion number $2\cdot1/2=1$ and sign $(-1)^1=-1$. The argument uses no choice beyond the inherited numerability data recorded in [A1]. [A1, F7, step 3.2, step 2.2] ∎
+5.1 Boundary cases. Rank zero is step 3.2. In statement 2, step 4.1 says that the complex orientation on $0\oplus F$ is the ordered sum of the canonical orientation on $0$ and the complex orientation on $F$; only after applying the Whitney product formula [F4] and $e(0)=1$ from [F7] does one obtain $e(0\oplus F)=1\cdot e(F)$. In statement 3 with $n=0$, both sides are the unit. For a complex line, $n=1$ in step 2.1 gives $|\det_{\mathbb C}A|^2>0$ directly, and for $V$ of rank $2$ step 2.2 has inversion number $2\cdot1/2=1$ and sign $(-1)^1=-1$. The argument uses no choice beyond the inherited numerability data recorded in [A1]. [A1, F4, F7, step 3.2, step 4.1, step 2.2] ∎
 
 ## Source notes
 

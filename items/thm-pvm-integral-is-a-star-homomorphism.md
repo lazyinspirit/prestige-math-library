@@ -5,7 +5,7 @@ title: Pvm integral is a star homomorphism
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-bounded-borel-pvm-integral, thm-dominated-convergence, def-countable-choice, lem-simple-pvm-integral-is-representation-independent, lem-scalar-and-complex-measures-from-a-pvm, def-integration-against-a-signed-or-complex-measure, def-measurable-function-between-measurable-spaces, def-complex-simple-function, thm-hilbert-adjoint-properties, lem-composition-operator-norm-inequality, def-projection-valued-measure]
+deps: [def-integral-of-a-simple-function-against-a-pvm, thm-bounded-borel-pvm-integral, thm-dominated-convergence, def-countable-choice, lem-simple-pvm-integral-is-representation-independent, lem-scalar-and-complex-measures-from-a-pvm, def-integration-against-a-signed-or-complex-measure, def-measurable-function-between-measurable-spaces, def-complex-simple-function, thm-hilbert-adjoint-properties, lem-composition-operator-norm-inequality, def-projection-valued-measure]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -39,15 +39,15 @@ the operator of [[thm-bounded-borel-pvm-integral]]. Then:
 
 [A1] $\Phi_E(g)$ is the unique operator with $\langle\Phi_E(g)x,y\rangle=\int g\,dE_{x,y}$ for all $x,y$, it satisfies $\|\Phi_E(g)\|\le\|g\|_\infty$ and $\|\Phi_E(g)x\|^2=\int|g|^2\,dE_x$, and it is the norm limit of $\int s_n\,dE$ for any complex simple $s_n\to g$ uniformly ([[thm-bounded-borel-pvm-integral]]).
 
-[A2] For complex simple functions the simple integral satisfies $\|(\int s\,dE)x\|^2=\int|s|^2\,dE_x$, $\int(s-t)\,dE=\int s\,dE-\int t\,dE$ over a common refinement, and $\langle(\int s\,dE)x,y\rangle=\int s\,dE_{x,y}$ ([[lem-simple-pvm-integral-is-representation-independent]], [[def-complex-simple-function]]).
+[A2] The simple integral of $s=\sum_jc_j\mathbf 1_{D_j}$ over a disjoint measurable cover is $\sum_jc_jE(D_j)$ ([[def-integral-of-a-simple-function-against-a-pvm]]), independently of the presentation; it has the scalar pairing and quadratic identities ([[lem-simple-pvm-integral-is-representation-independent]]). Complex simple functions have finite measurable range ([[def-complex-simple-function]]).
 
 [A3] $E_{y,x}=\overline{E_{x,y}}$, $E_x$ is a positive measure of mass $\|x\|^2$, and $E_x(B)=\langle E(B)x,x\rangle$ ([[lem-scalar-and-complex-measures-from-a-pvm]]).
 
-[A4] $E(\varnothing)=0$, $E(X)=I$ and $E(B\cap C)=E(B)E(C)$ ([[def-projection-valued-measure]]).
+[A4] Each $E(B)$ is self-adjoint and idempotent, $E(\varnothing)=0$, $E(X)=I$ and $E(B\cap C)=E(B)E(C)$ ([[def-projection-valued-measure]]).
 
 [A5] Dominated convergence: if $g_n\to g$ pointwise almost everywhere and $|g_n|\le C$ for an integrable constant $C$, then $\int g_n\,d\mu\to\int g\,d\mu$ ([[thm-dominated-convergence]]).
 
-[A6] The adjoint is norm-preserving, $\|S^*\|=\|S\|$, and operator multiplication is norm-continuous, $\|ST\|\le\|S\|\,\|T\|$ ([[thm-hilbert-adjoint-properties]], [[lem-composition-operator-norm-inequality]]).
+[A6] The adjoint is conjugate-linear on operator sums and norm-preserving, $\|S^*\|=\|S\|$, and operator multiplication is norm-continuous, $\|ST\|\le\|S\|\,\|T\|$ ([[thm-hilbert-adjoint-properties]], [[lem-composition-operator-norm-inequality]]).
 
 [A7] Countable Choice is the declared standing hypothesis of this block of the page ([[def-countable-choice]]).
 
@@ -63,10 +63,10 @@ the operator of [[thm-bounded-borel-pvm-integral]]. Then:
 
 1.3 Multiplicativity on simple functions: over a common disjoint normal form $s=\sum_jc_j\mathbf 1_{D_j}$, $t=\sum_jd_j\mathbf 1_{D_j}$ one has $st=\sum_jc_jd_j\mathbf 1_{D_j}$ and $\bigl(\int s\,dE\bigr)\bigl(\int t\,dE\bigr)=\sum_{j,k}c_jd_kE(D_j)E(D_k)=\sum_jc_jd_jE(D_j)=\int st\,dE$, because $E(D_j)E(D_k)=E(D_j\cap D_k)$ vanishes for $j\ne k$ and equals $E(D_j)$ for $j=k$. [A2, A4]
 
-1.4 Conjugation on simple functions: for $s=\sum_jc_j\mathbf 1_{D_j}$ one has $\int\overline s\,dE_{x,y}=\sum_j\overline{c_j}E_{x,y}(D_j)=\overline{\sum_jc_jE_{y,x}(D_j)}=\overline{\int s\,dE_{y,x}}$ using $E_{y,x}=\overline{E_{x,y}}$; hence $\langle\Phi_E(\overline s)x,y\rangle=\overline{\langle\Phi_E(s)y,x\rangle}=\langle\Phi_E(s)^*x,y\rangle$ for all $x,y$, so $\Phi_E(\overline s)=\Phi_E(s)^*$. [A1, A2, A3]
+1.4 Conjugation on simple functions: self-adjointness of the projection values and conjugate-linearity of the adjoint give $(\int s\,dE)^*=(\sum_jc_jE(D_j))^*=\sum_j\overline{c_j}E(D_j)=\int\overline s\,dE$. The bounded integral agrees with the simple integral by taking a constant approximating sequence. [A1, A2, A4, A6]
 
-1.5 Strong convergence: if $\sup_n\|f_n\|_\infty\le C<\infty$ and $f_n\to f$ $E$-almost everywhere, then for each $x$ the functions $|f_n-f|^2$ converge to $0$ $E_x$-almost everywhere and are dominated by the constant $(C+\|f\|_\infty)^2$, which is integrable for the finite measure $E_x$; hence $\|\Phi_E(f_n)x-\Phi_E(f)x\|^2=\int|f_n-f|^2\,dE_x\to0$. [A1, A3, A5]
+2.1 Linearity, multiplicativity and conjugation pass to uniform limits: if $s_n\to f$ and $t_n\to g$ uniformly then $as_n+bt_n\to af+bg$, $s_nt_n\to fg$ and $\overline{s_n}\to\overline f$ uniformly, and A1 gives convergence of the simple integrals to the integrals of each of these limits, so $\Phi_E(af+bg)=a\Phi_E(f)+b\Phi_E(g)$, $\Phi_E(fg)=\Phi_E(f)\Phi_E(g)$ and $\Phi_E(\overline f)=\Phi_E(f)^*$ by taking norm limits and using norm continuity of the adjoint. [A1, A6, step 1.2, step 1.3, step 1.4]
 
-2.1 Linearity, multiplicativity and conjugation pass to uniform limits: if $s_n\to f$ and $t_n\to g$ uniformly then $as_n+bt_n\to af+bg$, $s_nt_n\to fg$ and $\overline{s_n}\to\overline f$ uniformly, and $\Phi_E$ is norm continuous on its arguments, so $\Phi_E(af+bg)=a\Phi_E(f)+b\Phi_E(g)$, $\Phi_E(fg)=\Phi_E(f)\Phi_E(g)$ and $\Phi_E(\overline f)=\Phi_E(f)^*$ by taking norm limits and using norm continuity of the adjoint. [A1, A6, step 1.2, step 1.3, step 1.4]
+3.1 Strong convergence: if $\sup_n\|f_n\|_\infty\le C<\infty$ and $f_n\to f$ $E$-almost everywhere, then for each $x$ the functions $|f_n-f|^2$ converge to $0$ $E_x$-almost everywhere and are dominated by the constant $(C+\|f\|_\infty)^2$, which is integrable for the finite measure $E_x$; hence $\|\Phi_E(f_n)x-\Phi_E(f)x\|^2=\int|f_n-f|^2\,dE_x\to0$. [step 2.1, A1, A3, A5]
 
-3.1 $\Phi_E$ is a unital star homomorphism on the bounded measurable functions, and bounded pointwise $E$-almost everywhere convergence with a uniform bound implies strong convergence of the operators. [step 1.1, step 2.1, step 1.5, A7] ∎
+4.1 $\Phi_E$ is a unital star homomorphism on the bounded measurable functions, and bounded pointwise $E$-almost everywhere convergence with a uniform bound implies strong convergence of the operators. [step 1.1, step 2.1, step 3.1, A7] ∎

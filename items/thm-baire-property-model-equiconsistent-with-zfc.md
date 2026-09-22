@@ -31,9 +31,9 @@ with no inaccessible-cardinal hypothesis.
 
 [F2] [[thm-shelah-ch-omega-one-sweet-construction]]: under ZFC+CH there is a CH-length sweet construction whose final algebra is ccc and has the stated homogeneity, free-amalgamation and $\mathrm{UM}$-quotient properties. This interface supplies that mathematical construction, not a uniform formal forcing verification.
 
-[F3] Shelah's numbered conclusion cited in the source block states exactly that ZFC, ZFC plus the real-and-ordinal-definable Baire-property assertion, and ZF+DC plus universal Baire property are equiconsistent. Its proof remark gives the forcing construction for the forward implications and Gödel's $L$ for the reverse implications. This item invokes that published equiconsistency theorem directly; it does not infer a proof-code compiler from [F2].
+[F3] Shelah's numbered conclusion cited in the source block states exactly that ZFC, ZFC plus the real-and-ordinal-definable Baire-property assertion, and ZF+DC plus universal Baire property are equiconsistent. Its proof remark supplies both forward models: Theorem 7.16 gives the definable-set Baire property in the full forcing extension, while $HOD(S)$ gives the ZF+DC model with universal Baire property. It invokes Gödel's $L$ for the reverse implications. This item uses that published equiconsistency theorem directly; it does not infer a proof-code compiler from [F2].
 
-[F4] [[thm-shelah-inner-model-satisfies-zf-and-dependent-choice]] with [[thm-shelah-inner-model-all-sets-of-reals-have-baire-property]]: inside the extension, $N$ satisfies ZF+DC, and every set of reals in $N$ has the Baire property; hence the definable-real-and-ordinal-parameter clause of the second theory holds in the full extension.
+[F4] [[thm-shelah-inner-model-satisfies-zf-and-dependent-choice]] with [[thm-shelah-inner-model-all-sets-of-reals-have-baire-property]]: inside the extension, $N$ satisfies ZF+DC and every set of reals in $N$ has the Baire property. This interface supplies only the inner model; it is not used to transfer Baire-property witnesses or arbitrary definable sets upward to the full extension.
 
 [F5] [[thm-constructible-inner-model-semantic-and-formal-schema]] with [[thm-constructible-universe-satisfies-choice]]: for every model of any of the three theories, its constructible universe satisfies ZFC internally.
 
@@ -41,7 +41,7 @@ with no inaccessible-cardinal hypothesis.
 
 1.1 The exact three-way equiconsistency assertion is Shelah's cited conclusion by [F3]. We record how its two directions match the semantic interfaces developed on this page. [F3]
 
-1.2 For the forward construction, the standard $L$ reduction and [F1] provide the CH ground assumed by [F2]. In its forcing extension, [F4] gives the real-and-ordinal-definable Baire-property clause and the inner model $N\models\mathrm{ZF}+\mathrm{DC}+$ universal Baire property. These are the two models named in the proof remark of [F3]. [F1, F2, F4]
+1.2 For the forward construction, the standard $L$ reduction and [F1] provide the CH ground assumed by [F2]. The source theorem and proof remark incorporated in [F3] give the real-and-ordinal-definable Baire-property clause in the full forcing extension. Separately, [F4] gives the inner model $N\models\mathrm{ZF}+\mathrm{DC}+$ universal Baire property. These are the two models named in [F3]; no inference from the inner model's witnesses to the full extension is made. [F1, F2, F3, F4]
 
 1.3 For the reverse direction, [F3] invokes Gödel's work on $L$; [F5] is the library's semantic counterpart: the constructible universe internally satisfies ZFC, and the Baire-property clause plays no role. [F3, F5]
 

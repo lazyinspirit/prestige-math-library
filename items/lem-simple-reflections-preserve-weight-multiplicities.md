@@ -5,7 +5,7 @@ title: Simple reflections preserve weight multiplicities
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-weyl-group-of-a-root-system, def-root-reflection-from-a-coroot, prop-weyl-length-equals-positive-root-inversion-number, def-axiom-of-choice]
+deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-positive-system-and-base-of-simple-roots, def-weyl-group-of-a-root-system, def-root-reflection-from-a-coroot, prop-weyl-length-equals-positive-root-inversion-number, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -24,8 +24,11 @@ proof_strategy: direct
 
 Assume the Axiom of Choice. Let $\mathfrak g$ be a finite-dimensional complex
 semisimple Lie algebra with Cartan subalgebra $\mathfrak h$ and root system
-$\Phi$, let $V$ be a finite-dimensional representation of $\mathfrak g$, and
-let $W$ be the Weyl group of $\Phi$, acting on $\mathfrak h^*$ by
+$\Phi$, choose a positive system $\Phi^+$ with base
+$\Delta=\{\alpha_1,\ldots,\alpha_r\}$
+([[def-positive-system-and-base-of-simple-roots]]), let $V$ be a
+finite-dimensional representation of $\mathfrak g$, and let $W$ be the Weyl
+group of $\Phi$, acting on $\mathfrak h^*$ by
 complex-linear extension of its action on $E=\operatorname{span}_{\mathbb R}\Phi$
 ([[def-weyl-group-of-a-root-system]],
 [[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]]).
@@ -37,7 +40,7 @@ $\mu\in\mathfrak h^*$
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, such $\mathfrak g,\mathfrak h,\Phi$, a finite-dimensional representation $V$, and the Weyl group $W$ acting on $\mathfrak h^*$.
+**Given:** The Axiom of Choice, such $\mathfrak g,\mathfrak h,\Phi$, the chosen positive system $\Phi^+$ with simple roots $\Delta$, a finite-dimensional representation $V$, and the Weyl group $W$ acting on $\mathfrak h^*$.
 
 [A1] The Axiom of Choice is assumed; it enters through the root-space theory supplying [L1] and the abstract root-system identification [L4] ([[def-axiom-of-choice]]).
 
@@ -49,7 +52,7 @@ $\mu\in\mathfrak h^*$
 
 [L4] The roots of $\mathfrak g$ form a reduced crystallographic Euclidean root system on $E$, and its root reflections coincide with the $s_\alpha$ of [L1] after complex-linear extension to $\mathfrak h^*$ ([[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]], [[def-weyl-group-of-a-root-system]], [[def-root-reflection-from-a-coroot]]).
 
-[L5] Every element of the Weyl group is a product of simple reflections ([[prop-weyl-length-equals-positive-root-inversion-number]]).
+[L5] Relative to the chosen base $\Delta$, every element of the Weyl group is a product of the corresponding simple reflections ([[def-positive-system-and-base-of-simple-roots]], [[prop-weyl-length-equals-positive-root-inversion-number]]).
 
 ## Proof
 

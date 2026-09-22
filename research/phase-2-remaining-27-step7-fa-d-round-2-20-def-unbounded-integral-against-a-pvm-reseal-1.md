@@ -1,0 +1,7 @@
+# FA position 20 reseal after position 21
+
+Disposition: repaired. Source status: familiar.
+
+Re-read the complete item while resealing after the PVM-lemma repair. Its initial bytes matched the preceding receipt a9bc2f67f50805a115de87161de06e6a558ff708d87af6ccd315aa73d844365b, but the literal text exposed an editing error: the bounded-integral wiki link contained three comma-separated IDs, so the intended zero-space paragraph replacement had not matched. The prior evidence incorrectly described that paragraph as installed. This reseal repairs the actual text: for nonzero H apply thm-bounded-borel-pvm-integral; for H={0}, define every bounded integral as the unique operator, with E_0 zero, full unbounded domain and zero action. The link is now a single valid ID. Current item_sha256 is b9a737c144ab42ccfcb4c38ae8a1595fa3af54647662958b2fa4a1eef750f12c. The uniform tail bound, Hilbert completeness, domain linearity and null-representative proof are unchanged and remain valid. The consumer position-21 A1 exact quote was refreshed. Strict contract checks for positions 20 and 21 report 0 errors, 0 warnings, 2/2 checked. No new external verification is needed for this elementary zero-space repair. Familiar mathematics; no supplier beyond this stale position was edited.
+
+Next action: reseal in ascending order, verify queue status, then record position 21. No judge verdict or pass stamp is created.

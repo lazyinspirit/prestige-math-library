@@ -10,6 +10,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Joel H. Shapiro, Notes on the Numerical Range, Theorem 6.1, PDF pp.15–17"

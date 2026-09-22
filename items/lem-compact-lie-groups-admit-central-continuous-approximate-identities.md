@@ -5,7 +5,7 @@ title: Central continuous approximate identities
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, cor-normalized-haar-measure-on-a-compact-lie-group, def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, thm-c-c-is-dense-in-l-p-for-radon-measures, def-axiom-of-choice, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-integration-against-haar-is-invariant-under-translations-and-conjugation]
+deps: [prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, cor-normalized-haar-measure-on-a-compact-lie-group, def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, thm-c-c-is-dense-in-l-p-for-radon-measures, def-axiom-of-choice, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-integration-against-haar-is-invariant-under-translations-and-conjugation]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -48,7 +48,7 @@ measure $dg$. Then:
 
 [L2] $C_c(G)$ is dense in $L^2(G)$ for the Radon measure $dg$, and $C_c(G)=C(G)$ because $G$ is compact; the convolution operator $T_k$ is defined by $(T_kf)(x)=\int_Gk(x^{-1}y)f(y)\,dy=\int_Gk(u)f(xu)\,du$ ([[thm-c-c-is-dense-in-l-p-for-radon-measures]], [[def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group]]).
 
-[L3] Haar measure is positive on nonempty open sets; a continuous function on the compact group is uniformly continuous; and the integral is linear, monotone, and translation invariant ([[lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[prop-integration-against-haar-is-invariant-under-translations-and-conjugation]]).
+[L3] Haar measure is positive on nonempty open sets; a continuous function on the compact group is uniformly continuous; and the integral is linear, monotone, and translation invariant ([[lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[prop-integration-against-haar-is-invariant-under-translations-and-conjugation]]).
 
 ## Proof
 

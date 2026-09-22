@@ -1,0 +1,6 @@
+# Position 28 reseal after composition correction
+
+Rechecked the amalgamation item against the corrected iteration context. Its intrinsic admission modulus concerns pairs in the Boolean amalgam, not forced tree-membership traces. The two density applications and shifted coordinate equivalences remain as previously checked. The separate fixed-model interface uses the abstract comparable transfer form, whose library direction is unchanged. Its source reference to the preceding mixed-case strategy does not require the erroneous membership transcription in the local composition item; that transcription has now been corrected. Canonical weak-coordinate copies and the retained dense presentation remain the same. Retain the owner's repaired disposition. The source comparison is already documented in this session; this context compatibility check is familiar and needs no new external verification or dependency edit.
+
+
+Current itemHashJudge: 123ae8063525e73f91fa261aca4f98b852fd536a5407a76c281ccfe12e2960ec, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

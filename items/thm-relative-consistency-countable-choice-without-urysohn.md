@@ -4,18 +4,21 @@ kind: theorem
 title: "Relative consistency of Countable Choice without Urysohn's lemma"
 status: draft
 origin: pipeline
-deps: [def-brunner-ordered-lauchli-permutation-models, lem-brunner-choice-and-urysohn-obstructions, lem-brunner-urysohn-obstruction-is-injectively-boundable, thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-countable-choice, def-normal-and-t4-spaces]
+deps: [def-countable-choice, def-normal-and-t4-spaces]
 justified_by: []
 provenance:
   statement: literature-derived
-  proof: ai-altered
+  proof: literature-derived
 proof_strategy: direct
 sources:
   scraped: []
   references:
-    - title: "Norbert Brunner, Geordnete Läuchli Kontinuen"
-      url: "https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf"
-      locator: "§§1-3, printed pp. 67-73"
+    - title: "Eleftherios Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14590"
+      locator: "Main relative-consistency theorem, Proc. Amer. Math. Soc. 147 (2019), 4029-4038"
+    - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14848"
+      locator: "Published erratum to the cited theorem"
 ---
 
 ## Statement
@@ -28,26 +31,22 @@ normal space has two disjoint closed sets admitting no continuous separation
 
 ## Facts & Assumptions
 
-**Given:** The real-ordered countable-compact-support Läuchli model, its continuum, and the assumed consistency of $\mathrm{ZF}$.
+**Given:** The assumed consistency of $\mathrm{ZF}$.
 
-[F1] The real-ordered model satisfies countable choice, and its continuum is a normal space on which every continuous real-valued function is constant, so Urysohn's lemma fails there ([[lem-brunner-choice-and-urysohn-obstructions]], [[def-brunner-ordered-lauchli-permutation-models]]).
+[F1] Tachtsis's cited theorem, read together with its published erratum, proves the exact external implication
+$$\operatorname{Con}(\mathrm{ZF})\Longrightarrow\operatorname{Con}(\mathrm{ZF}+\mathrm{AC}_{\omega}+\neg\mathrm{URY}).$$
+Here $\mathrm{URY}$ is the usual Urysohn separation assertion for disjoint closed subsets of a normal space. This item records that published relative-consistency theorem; it does not reconstruct the permutation-model and transfer argument.
 
-[F2] The failure is certified by an atom-blind boundable sentence with a fixed absolute bound below $\omega+\omega$ ([[lem-brunner-urysohn-obstruction-is-injectively-boundable]]).
-
-[F3] Pincus transfer: a certified atom-blind boundable sentence transfers to a model of $\mathrm{ZF}$, and the exceptional clauses permit countable choice to be conjoined when it holds in the permutation model ([[thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions]]).
-
-[F4] The verified constructible-universe reduction gives $\operatorname{Con}(\mathrm{ZF})\Rightarrow\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]]). A model of ZFC expands in the standard way to a ZFA+AC model with the required countably infinite atom set. The subsequent permutation-model and Pincus constructions are used as an external model construction, not as an unprovided uniform proof-code reduction.
-
-## Proof
+[F2] By definition, $\neg\mathrm{URY}$ supplies a normal space $X$ and disjoint closed subsets $A,B\subseteq X$ for which there is no continuous $f:X\to[0,1]$ satisfying
+$$A\subseteq f^{-1}(\{0\})\qquad\text{and}\qquad B\subseteq f^{-1}(\{1\}).$$
+Equivalently, such an $f$ would have $f(a)=0$ for every $a\in A$ and $f(b)=1$ for every $b\in B$ ([[def-normal-and-t4-spaces]]). Equality of the images with the endpoint singletons is not the definition: it is too strong when either closed set is empty.
 
 **Proof technique:** direct.
 
-1.1 Assume $\operatorname{Con}(\mathrm{ZF})$. By [F4], start with a model of $\mathrm{ZFC}+\mathrm{GCH}$, adjoin the countably infinite ordered atom set, and form the real-ordered countable-compact-support Läuchli permutation model. [given, F4]
+## Proof
 
-2.1 By [F1] the model satisfies countable choice and contains the continuum with its two endpoint closed sets, on which every continuous real-valued function is constant; this is the failure of Urysohn's lemma, and by [F2] it is certified with an absolute bound. [step 1.1, F1, F2]
+1.1 Assume $\operatorname{Con}(\mathrm{ZF})$. The published relative-consistency theorem [F1], with its erratum included in the cited interface, yields a model of $\mathrm{ZF}+\mathrm{AC}_{\omega}+\neg\mathrm{URY}$. [given, F1]
 
-3.1 By [F3] the certified sentence and countable choice transfer together to a model of $\mathrm{ZF}$; the transfer is applied to the finite conjunction consisting of the certified obstruction and the exceptional clause $\mathrm{AC}_\omega$, and no other sentence crosses. [step 2.1, F3]
+2.1 In that model $\mathrm{AC}_{\omega}$ is precisely countable choice ([[def-countable-choice]]), while [F2] expands $\neg\mathrm{URY}$ as a normal space with two disjoint closed sets admitting no continuous Urysohn separator. Thus the model has exactly the two properties asserted in the Statement. [step 1.1, F2]
 
-4.1 The model obtained in step 3.1 yields the external relative-consistency implication $$\operatorname{Con}(\mathrm{ZF}) \Rightarrow \operatorname{Con}(\mathrm{ZF} + \mathrm{AC}_\omega + \neg\mathrm{URY}),$$ where $\neg\mathrm{URY}$ asserts the existence of the carried normal space with no separating continuous function. No claim is made that the formal proof-reduction theorem applies without its required uniform verified code map. [step 1.1, step 3.1, F4]
-
-5.1 The result is conditional on $\operatorname{Con}(\mathrm{ZF})$ throughout, and no unconditional model or nonprovability claim is made; the inaccessible Tachtsis paper and its erratum are not used, and countable choice is not mislabelled as an injectively boundable sentence. [step 4.1, F3] ∎
+3.1 Therefore $\operatorname{Con}(\mathrm{ZF})\Longrightarrow\operatorname{Con}(\mathrm{ZF}+\mathrm{AC}_{\omega}+\text{failure of Urysohn's lemma})$, as claimed. This proof depends on the corrected published theorem itself and makes no unsupported Pincus transfer of countable choice alone. [step 2.1, F1] ∎

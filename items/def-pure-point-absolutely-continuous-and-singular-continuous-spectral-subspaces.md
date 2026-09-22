@@ -5,7 +5,7 @@ title: "Pure point, absolutely continuous and singular continuous spectral subsp
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, def-atom-of-a-measure-on-r, def-mutually-singular-measures, def-absolutely-continuous-with-respect-to-a-positive-measure, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator]
+deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, def-atom-of-a-measure-on-r, def-mutually-singular-measures, def-absolutely-continuous-with-respect-to-a-positive-measure, thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -19,11 +19,14 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral
-projection valued measure $E$ on $\mathbb R$
-([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and scalar
-measures $E_x(B)=\langle E(B)x,x\rangle$
-([[def-unbounded-integral-against-a-pvm]]). Put
+Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on $H$. If
+$H\ne\{0\}$, let $E$ be its spectral projection valued measure on $\mathbb R$
+from [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]; if
+$H=\{0\}$, let $E(B)=0$ for every Borel $B$, the unique PVM on the zero space.
+In either case put $E_x(B)=\langle E(B)x,x\rangle$
+([[def-unbounded-integral-against-a-pvm]]). Call a finite Borel measure on
+$\mathbb R$ **purely atomic** (equivalently, **discrete**) when it is
+concentrated on a countable subset of $\mathbb R$. Then
 $$H_{\mathrm{pp}}=\{x\in H:\ E_x\text{ is purely atomic}\},$$
 $$H_{\mathrm{ac}}=\{x\in H:\ E_x\ll\lambda\ \text{(Lebesgue measure)}\},$$
 $$H_{\mathrm{sc}}=\{x\in H:\ E_x\text{ is atomless and singular with respect to }\lambda\},$$
@@ -32,8 +35,9 @@ that of [[def-absolutely-continuous-with-respect-to-a-positive-measure]] and
 singularity that of [[def-mutually-singular-measures]].
 
 **Well-definedness.** Every finite Borel measure on $\mathbb R$ has a unique
-decomposition into a purely atomic, an absolutely continuous and an atomless
-singular part, and the three classes of nonzero measures are mutually
+decomposition into a discrete (hence, by the convention above, purely atomic),
+an absolutely continuous and an atomless singular part
+([[thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition]]), and the three classes of nonzero measures are mutually
 exclusive; hence each $x$ either satisfies one of the three defining
 conditions or none, and the zero vector lies in all three subspaces. Whether
 the three subspaces do cover $H$ and are closed is not part of this definition

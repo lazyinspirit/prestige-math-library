@@ -20,7 +20,9 @@ sources:
 ## Example
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Let
+[[def-elementary-predictable-brownian-integrand]], and assume that the
+filtration satisfies the usual conditions required by
+[[def-locally-square-integrable-predictable-brownian-integrand]]. Let
 $M_t=\int_0^ts\,dB_s$, the Ito integral of the deterministic integrand
 $H_s=s$. Then $M$ is a continuous square-integrable martingale
 [[def-locally-square-integrable-predictable-brownian-integrand]], and
@@ -34,7 +36,7 @@ elapsed time $t$ that governs Brownian motion itself.
 
 ## Facts & Assumptions
 
-**Given:** AC, the standing hypothesis (H), $T>0$, the deterministic integrand $H_s=s$, its energy $A_t=\int_0^ts^2ds=t^3/3$, and a deterministic partition sequence of $[0,T]$ with mesh tending to $0$.
+**Given:** AC, the standing hypothesis (H), the usual conditions on the filtration, $T>0$, the deterministic integrand $H_s=s$, its energy $A_t=\int_0^ts^2ds=t^3/3$, and a deterministic partition sequence of $[0,T]$ with mesh tending to $0$.
 
 [F1] A deterministic Borel function of the time variable is a predictable process; $H_s=s$ is continuous, and its energy is finite at every finite time: $A_t=t^3/3<\infty$. [[def-progressively-measurable-and-predictable-process]] [[def-locally-square-integrable-predictable-brownian-integrand]]
 
@@ -46,7 +48,7 @@ elapsed time $t$ that governs Brownian motion itself.
 
 **Proof technique:** direct.
 
-1.1 The integrand $H_s=s$ is deterministic and continuous, hence predictable with finite energy $A_t=t^3/3$ at every $t$; so its localized integral $M=H\cdot B$ is defined and is a continuous square-integrable martingale. [F1]
+1.1 The integrand $H_s=s$ is deterministic and continuous, hence predictable with finite energy $A_t=t^3/3$ at every $t$; under the given usual conditions its localized integral $M=H\cdot B$ is defined and is a continuous square-integrable martingale. [F1, given]
 
 2.1 Applying [F2] to $H_s=s$ and to the given partition sequence gives $[M]_t=\int_0^ts^2ds=t^3/3$ for every $t\in[0,T]$, with the convergence uniform in probability; the value does not depend on the chosen deterministic partition sequence because the theorem holds for every such sequence. [F2, step 1.1]
 

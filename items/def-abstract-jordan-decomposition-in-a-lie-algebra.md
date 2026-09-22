@@ -9,6 +9,11 @@ deps: [def-lie-algebra-over-a-field, def-semisimple-and-nilpotent-endomorphisms]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19–24"

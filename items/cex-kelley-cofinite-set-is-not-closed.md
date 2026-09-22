@@ -20,22 +20,27 @@ sources:
 
 ## Statement refuted
 
-The claim that in the cofinite space on an infinite set $A$ every infinite subset
-with infinite complement is closed; equivalently, the claim that the coordinate
-set $A$ is closed in the cofinite topology on $A \cup \{\infty\}$ when $A$ is
-infinite ([[def-standard-topologies]], [[def-topological-space]]).
+The following two related claims both fail, but they are not equivalent instances
+of one claim:
+
+1. in the cofinite space on an infinite set $A$, every infinite subset with
+   infinite complement is closed; and
+2. the coordinate set $A$ is closed in the cofinite topology on
+   $A\cup\{\infty\}$ when $A$ is infinite
+   ([[def-standard-topologies]], [[def-topological-space]]).
 
 ## Counterexample
 
-Take $A = \mathbb{N}$ with the cofinite topology
-([[def-natural-numbers]], [[def-countable]]) and let $E \subseteq \mathbb{N}$ be
-the set of even naturals.
+Take $A=\mathbb{N}$ with the cofinite topology
+([[def-natural-numbers]], [[def-countable]]) and let $E\subseteq\mathbb{N}$ be
+the set of even naturals. For the second claim, give
+$Y=\mathbb{N}\cup\{\infty\}$ its cofinite topology.
 
 ## Facts & Assumptions
 
-**Given:** The cofinite space $A_c$ on $A = \mathbb{N}$ and the set $E$ of even naturals.
+**Given:** The cofinite spaces on $A=\mathbb{N}$ and $Y=\mathbb{N}\cup\{\infty\}$, and the set $E$ of even naturals.
 
-[F1] In the cofinite topology the open sets are $\varnothing$ and the sets with finite complement, and the closed sets are $A$ and the finite subsets; hence every finite set, in particular every singleton, is closed ([[def-standard-topologies]], [[thm-t1-iff-singletons-are-closed]], [[def-t0-and-t1-spaces]]).
+[F1] In the cofinite topology on a set $S$, the open sets are $\varnothing$ and the sets with finite complement, and the closed sets are $S$ and the finite subsets; hence every finite set, in particular every singleton, is closed ([[def-standard-topologies]], [[thm-t1-iff-singletons-are-closed]], [[def-t0-and-t1-spaces]]).
 
 [F2] The repaired coordinate of [[lem-isolated-point-kelley-repair]] is a different space: there $A$ is closed because the added point is isolated, which is why the cofinite presentation on $A \cup \{\infty\}$ is not the coordinate used in the product argument.
 
@@ -45,6 +50,8 @@ the set of even naturals.
 
 1.2 $\mathbb{N} \setminus E$, the set of odd naturals, is infinite: $k \mapsto 2k+1$ is injective from $\mathbb{N}$ into it, so it is not finite. [given]
 
-2.1 $E$ is not closed: if $E$ were closed then its complement $\mathbb{N} \setminus E$ would be open, hence by [F1] either empty or cofinite; it is nonempty because $0 \in E$ is even and so $0 \notin \mathbb{N} \setminus E$, and it is infinite by step 1.2, so it is neither empty nor cofinite, a contradiction. [step 1.2, F1]
+1.3 In the cofinite space $Y$, the coordinate set $A=\mathbb{N}$ is not closed. Indeed, its complement is the singleton $\{\infty\}$; this set is nonempty but is not open because its complement $A$ is infinite. [given, F1]
 
-3.1 Thus an infinite subset of an infinite cofinite space with infinite complement need not be closed, which refutes the displayed claim; this is exactly the closedness obligation that the cofinite presentation of $A \cup \{\infty\}$ fails, and which the isolated-point repair of [F2] meets by making $\{\infty\}$ open. [step 2.1, F1, F2] ∎
+2.1 $E$ is not closed: if $E$ were closed then its complement $\mathbb{N} \setminus E$ would be open. It is nonempty because $1$ is odd, and it is not cofinite because its complement $E$ is infinite by step 1.1. Thus $\mathbb{N} \setminus E$ is neither empty nor cofinite, contrary to [F1]. [step 1.1, step 1.2, F1]
+
+3.1 Step 2.1 refutes the first claim using an infinite subset whose complement is infinite, whereas step 1.3 separately refutes the coordinate claim using a subset whose complement is finite. The isolated-point repair of [F2] meets the latter closedness obligation by making $\{\infty\}$ open. [step 2.1, step 1.3, F2] ∎

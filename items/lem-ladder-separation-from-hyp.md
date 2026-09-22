@@ -32,7 +32,7 @@ $$\delta_i \ne \eta_i \quad \text{for every } i \ge \max(m_\beta(\delta), m_\bet
 
 **Given:** Witnesses $\kappa, (\kappa_n), E$ for HYP and ladders $(\delta_i)$ for $\delta \in E$; the induction is on $\beta < \kappa^+$.
 
-[F1] HYP clause (3b) says $E\cap\beta$ is not stationary in $\beta$, so for every limit $\beta<\kappa^+$ there is a club $C\subseteq\beta$ with $C\cap E=\varnothing$. No assertion that the members of $C$ are limit ordinals is needed or generally true when $\beta$ has cofinality $\omega$ ([[def-fleissner-hyp-covering-interface]]).
+[F1] For every limit $\beta<\kappa^+$ there is a club $C\subseteq\beta$ disjoint from $E$. If $\operatorname{cf}(\beta)>\omega$, this is exactly HYP clause (3b). If $\operatorname{cf}(\beta)=\omega$, fix a strictly increasing cofinal sequence $(b_n)$ in $\beta$ and take $C=\{0\}\cup\{b_n+1:n\in\omega\}$. This set is unbounded; it has no limit point below $\beta$ (every proper initial segment of an increasing $\omega$-sequence is finite), hence is closed; and its nonzero members are successors, while every member of $E$ has cofinality $\omega$ by clause (3a). These are all possible cofinalities of a nonzero limit ordinal in ZFC ([[def-fleissner-hyp-covering-interface]], [[def-cardinal]]).
 
 [F2] Every element of $E$ has cofinality $\omega$, so successor ordinals are not in $E$. If $C\subseteq\beta$ is club, $0\in C$, and $\delta<\beta$ is not in $C$, then $\gamma=\sup(C\cap\delta)$ belongs to $C$ and is below $\delta$, while $\min(C\setminus\delta)$ exists and is strictly between $\delta$ and $\beta$ ([[def-cardinal]]).
 
@@ -50,7 +50,7 @@ $$\delta_i \ne \eta_i \quad \text{for every } i \ge \max(m_\beta(\delta), m_\bet
 
 2.2 Successor case. Let $\beta = \alpha + 1$. If $\alpha \notin E$ put $m_\beta := m_\alpha$; this keeps the domain and the strengthened property. If $\alpha \in E$, define, for $\delta \in E \cap \alpha$, $m_\beta(\delta) := \max(m_\alpha(\delta), j(\delta,\alpha))$ where $j(\delta,\alpha)$ is the least $i$ with $\alpha_i > \delta$, and put $m_\beta(\alpha) := 0$. [step 1.1, F2, L1]
 
-2.3 Limit case. Let $\beta$ be a limit ordinal. By [F1] choose a club $C\subseteq\beta$ disjoint from $E$, and adjoin $0$ to $C$; this preserves closedness, unboundedness, and disjointness because members of $E$ have cofinality $\omega$. For $\delta\in E\cap\beta$, [F2] gives $\gamma(\delta):=\sup(C\cap\delta)\in C$ with $\gamma(\delta)<\delta$ and $\bar\gamma(\delta):=\min(C\setminus\delta)\in C$ with $\delta<\bar\gamma(\delta)<\beta$. Thus $m_{\bar\gamma(\delta)}$ is defined by induction and contains $\delta$ in its domain. Define $m_\beta(\delta):=\max(m_{\bar\gamma(\delta)}(\delta),i(\delta))$, where $i(\delta)$ is the least $i$ with $\delta_i>\gamma(\delta)$. [step 1.1, F1, F2, L1]
+2.3 Limit case. Let $\beta$ be a limit ordinal. By [F1] choose a club $C\subseteq\beta$ disjoint from $E$ and containing $0$. For $\delta\in E\cap\beta$, [F2] gives $\gamma(\delta):=\sup(C\cap\delta)\in C$ with $\gamma(\delta)<\delta$ and $\bar\gamma(\delta):=\min(C\setminus\delta)\in C$ with $\delta<\bar\gamma(\delta)<\beta$. Thus $m_{\bar\gamma(\delta)}$ is defined by induction and contains $\delta$ in its domain. Define $m_\beta(\delta):=\max(m_{\bar\gamma(\delta)}(\delta),i(\delta))$, where $i(\delta)$ is the least $i$ with $\delta_i>\gamma(\delta)$. [step 1.1, F1, F2, L1]
 
 3.1 In the successor case, pairs inside $E \cap \alpha$ keep the strengthened property because $m_\beta \ge m_\alpha$ pointwise, so their separating level is not decreased. For $\delta \in E \cap \alpha$ and the new point $\alpha$: for $i \ge \max(m_\beta(\delta), m_\beta(\alpha)) = m_\beta(\delta) \ge j(\delta,\alpha)$ we have $\alpha_i \ge \alpha_{j(\delta,\alpha)} > \delta > \delta_i$, so $\alpha_i \ne \delta_i$. Hence $m_\beta$ works. [step 2.2, F2, L1]
 
@@ -62,6 +62,6 @@ $$\delta_i \ne \eta_i \quad \text{for every } i \ge \max(m_\beta(\delta), m_\bet
 
 ## Remarks
 
-- **Why (3b) is exactly what the construction needs.** It supplies, for each limit $\beta$, a club disjoint from $E$; the gaps of that club make each $\delta \in E$ sit below a smaller ordinal $\bar\gamma(\delta)$ at which the induction hypothesis already separates points, while the ladders cross the gap endpoints exactly when needed.
+- **Where (3b) is needed.** At limit stages of uncountable cofinality it supplies a club disjoint from $E$. At countable-cofinality stages such a club is automatic from clause (3a), by using a cofinal $\omega$-sequence of successors. In either case the club gaps put each $\delta\in E$ below a smaller ordinal $\bar\gamma(\delta)$ where the induction hypothesis separates ladders.
 
 - **The strengthened form is not needed elsewhere**, but it is what makes both the same-gap and the different-gap cases work at once; the paper's Lemma 1 is the special case of the single level $m$.

@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Marcus Tressl, Stone Duality for Boolean Algebras — Definition 2.2.13, Observation 2.2.14, Definition 2.3.1 and Characterization 2.3.3, pp. 7–9"

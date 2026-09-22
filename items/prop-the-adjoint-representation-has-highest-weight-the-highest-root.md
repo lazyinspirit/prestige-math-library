@@ -5,7 +5,7 @@ title: The adjoint highest weight is the highest root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system, def-height-of-a-root-and-highest-root, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-brackets-of-root-spaces, def-adjoint-representation-of-a-lie-algebra, def-simple-semisimple-and-reductive-lie-algebras, def-lie-subalgebra-ideal-and-center, def-highest-weight-vector-and-highest-weight-module, def-partial-order-on-weights, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
+deps: ["def-height-of-a-root-and-highest-root", "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra", "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional", "prop-brackets-of-root-spaces", "def-adjoint-representation-of-a-lie-algebra", "def-simple-semisimple-and-reductive-lie-algebras", "def-lie-subalgebra-ideal-and-center", "def-highest-weight-vector-and-highest-weight-module", "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates", "def-axiom-of-choice", "def-derived-series-and-solvable-lie-algebra", "def-semisimple-lie-algebra-by-vanishing-radical"]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -38,20 +38,22 @@ highest weight is $\theta$.
 
 [L1] The adjoint map $\operatorname{ad}:\mathfrak g\to\mathfrak{gl}(\mathfrak g)$ is a representation; a subspace $W\subseteq\mathfrak g$ is a subrepresentation if and only if $[x,W]\subseteq W$ for all $x$, that is, if and only if $W$ is an ideal of $\mathfrak g$ ([[def-adjoint-representation-of-a-lie-algebra]], [[def-lie-subalgebra-ideal-and-center]]).
 
-[L2] $\mathfrak g$ is simple: its only ideals are $0$ and $\mathfrak g$, and $\mathfrak g\ne0$ ([[def-simple-semisimple-and-reductive-lie-algebras]]).
+[L2] $\mathfrak g$ is simple: it is nonabelian and its only ideals are $0$ and $\mathfrak g$ ([[def-simple-semisimple-and-reductive-lie-algebras]]).
 
 [L3] $\mathfrak g=\mathfrak h\oplus\bigoplus_{\alpha\in\Phi}\mathfrak g_\alpha$ with $\dim\mathfrak g_\alpha=1$; the adjoint action of $H\in\mathfrak h$ on $\mathfrak g_\alpha$ is multiplication by $\alpha(H)$, and $[\mathfrak g_\alpha,\mathfrak g_\beta]\subseteq\mathfrak g_{\alpha+\beta}$ ([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]], [[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]], [[prop-brackets-of-root-spaces]]).
 
-[L4] The highest root $\theta$ is a positive root with $\theta\le\gamma$ for no positive root $\gamma\ne\theta$; every positive root $\gamma$ satisfies $\gamma\le\theta$, and every negative root $-\gamma$ with $\gamma\in\Phi^+$ satisfies $-\gamma\le\theta$ ([[prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system]], [[def-height-of-a-root-and-highest-root]], [[def-partial-order-on-weights]], [[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
+[L4] The supplied highest root $\theta$ is positive and maximal in the root order ([[def-height-of-a-root-and-highest-root]]). Positive roots are nonnegative integral combinations of simple roots, so adding a positive root strictly increases this order ([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
+
+[L5] The derived subalgebra is an ideal; a Lie algebra is solvable when its derived series eventually vanishes ([[def-derived-series-and-solvable-lie-algebra]]). The radical is its largest solvable ideal, and semisimple means that radical is zero ([[def-semisimple-lie-algebra-by-vanishing-radical]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1] the subrepresentations of the adjoint module are exactly the ideals of $\mathfrak g$; since $\mathfrak g$ is simple and nonzero, [L2] shows that the only subrepresentations are $0$ and $\mathfrak g$, so the adjoint module is irreducible. [A1, L1, L2]
+1.1 Since $\mathfrak g$ is nonabelian, its derived ideal $[\mathfrak g,\mathfrak g]$ is nonzero. Simplicity and [L5] give $[\mathfrak g,\mathfrak g]=\mathfrak g$, so every term of the derived series equals $\mathfrak g\ne0$. Thus $\mathfrak g$ is not solvable. Its radical, being an ideal, is either zero or $\mathfrak g$; the latter would make $\mathfrak g$ solvable. Hence the radical is zero and $\mathfrak g$ is semisimple, licensing the semisimple root-space interfaces [L3]. [L2, L5, algebra]
 
-1.2 Its weights are the functionals occurring on nonzero weight spaces of $\mathfrak g$, namely $\alpha$ for $\alpha\in\Phi$ (on the line $\mathfrak g_\alpha$) and $0$ (on $\mathfrak h$); in particular $\theta$ is a weight and all weights are $\le\theta$ by [L4]. [L3, L4]
+1.2 By [L1] subrepresentations of the adjoint module are precisely ideals. Simplicity and nonzeroness imply this representation is irreducible. [L1, L2]
 
-1.3 Choose $0\ne x\in\mathfrak g_\theta$; for a positive root $\alpha$ we have $[y,x]\in\mathfrak g_{\alpha+\theta}$ for $y\in\mathfrak g_\alpha$, and $\mathfrak g_{\alpha+\theta}=0$ because $\alpha+\theta>\theta$ is not a root by maximality of $\theta$; hence every positive root space annihilates $x$, that is, $\mathfrak n^+\cdot x=0$, and $H\cdot x=\theta(H)x$ for $H\in\mathfrak h$; thus $x$ is a highest weight vector of weight $\theta$. [L3, L4]
+2.1 Apply [L3] using step 1.1. The weights of the adjoint module are the roots on their root spaces and zero on $\mathfrak h$. In particular the specified root $\theta$ has a nonzero one-dimensional weight space. Choose $0\ne x\in\mathfrak g_\theta$. For every positive root $\alpha$, the bracket $[\mathfrak g_\alpha,x]$ lies in $\mathfrak g_{\alpha+\theta}$. Since $\alpha+\theta$ is nonzero and strictly greater than $\theta$ in the root order, it cannot be a root by maximality, so this bracket vanishes. Therefore $\mathfrak n^+x=0$ and $Hx=\theta(H)x$ for every $H\in\mathfrak h$. [A1, L3, L4, step 1.1, algebra]
 
-2.1 The vector $x$ of step 1.3 is nonzero, so the submodule $U(\mathfrak g)x$ is nonzero and therefore equals the whole adjoint module by irreducibility from step 1.1. Thus $x$ generates the adjoint module and is killed by $\mathfrak n^+$ with weight $\theta$; by the definition of a highest-weight module, the adjoint module has highest weight $\theta$. Together with step 1.1, this proves the assertion. ([[def-highest-weight-vector-and-highest-weight-module]], step 1.1, step 1.3) ∎
+3.1 The subrepresentation generated by the nonzero $x$ of step 2.1 is nonzero, hence is the entire adjoint representation by step 1.2. Thus $x$ is a highest weight vector of weight $\theta$ generating the module, exactly the definition of a highest weight module ([[def-highest-weight-vector-and-highest-weight-module]]). The proof uses the given maximal root directly and does not presume that an arbitrary irreducible module has a unique maximal weight. Simplicity excludes both the zero algebra and a one-dimensional abelian algebra; no additional choice beyond [A1] is needed to select one nonzero vector in the given root line. [A1, step 1.2, step 2.1, algebra] ∎

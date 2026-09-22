@@ -44,9 +44,11 @@ $F\mapsto F\circ R_h$; replacing $\alpha(t)^{-1}$ by $\alpha(t)$ does not
 change $J$, since $|1-\alpha(t)^{-1}|=|1-\alpha(t)|$ for $|\alpha(t)|=1$.
 
 The product is finite because a root system is finite, and it does not depend on
-the numbering of the roots. On the identity element, $J(e)=0$; in fact
-$J(t)=0$ exactly for those $t\in T$ at which some root is trivial, and those
-$t$ form the finite union of the kernels of the finitely many root characters.
+the numbering of the roots. If $\Phi\ne\varnothing$, then $J(e)=0$. If
+$\Phi=\varnothing$ (in particular, when $G=T$ is a torus), the empty product is
+$J\equiv1$. In all cases $J(t)=0$ exactly when some root takes the value $1$ at
+$t$; the zero set is the finite union of the kernels of the root characters,
+with the empty union understood as the empty set.
 
 ## Remarks
 

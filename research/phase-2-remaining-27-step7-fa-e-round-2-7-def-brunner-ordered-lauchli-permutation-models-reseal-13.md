@@ -1,0 +1,8 @@
+# Position 7 context reseal
+
+Read the full current definition, original FA evidence, latest reseal, current A/B pages, own boundary/risk contract and the support-system and hereditary-symmetry definitions. The updated context does not alter the internal ZFA+AC ground convention or the two support ideals. Finite unions combine supports and conjugation carries fix(e) to fix(g[e]), giving normality; singletons ensure all atoms are symmetric. The internal power set is the HS part of the ground power set, and relativized Replacement yields an invariant image with HS members. Internal rank induction suffices without external well-foundedness. The supported closed atom interval has actual atom endpoints; an ambient irrational cut is movable inside a component of the complement of any finite support and is therefore not inserted into the rational model. Countable compact generators and their downward closure belong to the real-order instance only. The page's later choice and separation claims remain separate obligations and supply no assumption here.
+
+Retain repaired disposition. This elementary support and internal-interpretation reasoning is familiar enough for this context check without fresh external verification. Historical Brunner verification remains in the original position-7 evidence; no new reading of that article is claimed. No consumer dependency changed, so no ledger refresh is needed.
+
+
+Current itemHashJudge: 9457b0b98aa3c6cb13339caf15b89e31ce2efaa6a8be5303b07331f00b2219e0, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

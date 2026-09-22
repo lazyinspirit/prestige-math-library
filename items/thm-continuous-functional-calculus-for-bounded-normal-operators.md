@@ -5,7 +5,7 @@ title: Continuous functional calculus for bounded normal operators
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-character-space-of-generated-normal-algebra-is-operator-spectrum, thm-commutative-gelfand-naimark, def-axiom-of-choice, def-c-star-algebra-generated-by-a-normal-operator, thm-complex-stone-weierstrass-self-adjoint, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra]
+deps: [lem-character-space-of-generated-normal-algebra-is-operator-spectrum, thm-maximal-ideal-space-is-compact-hausdorff, thm-commutative-gelfand-naimark, def-axiom-of-choice, def-c-star-algebra-generated-by-a-normal-operator, thm-complex-stone-weierstrass-self-adjoint, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -24,7 +24,7 @@ Assume AC. For a bounded normal operator $T$ on a nonzero complex Hilbert space 
 
 ## Facts & Assumptions
 
-[A1] For normal $T$ the map $\Phi:\Delta(C^*(I,T))\to\sigma(T)$, $\chi\mapsto\chi(T)$, is a homeomorphism from the compact Hausdorff character space onto the compact spectrum; pullback $f\mapsto f\circ\Phi$ is therefore an isometric bijection $C(\sigma(T))\to C(\Delta(C^*(I,T)))$ preserving pointwise sums, products and conjugation ([[lem-character-space-of-generated-normal-algebra-is-operator-spectrum]], [[def-c-star-algebra]]).
+[A1] For normal $T$ the nonzero unital commutative C\*-algebra $C^*(I,T)$ has a nonempty compact Hausdorff character space, and the map $\Phi:\Delta(C^*(I,T))\to\sigma(T)$, $\chi\mapsto\chi(T)$, is a homeomorphism onto the therefore nonempty compact spectrum; pullback $f\mapsto f\circ\Phi$ is consequently an isometric bijection $C(\sigma(T))\to C(\Delta(C^*(I,T)))$ preserving pointwise sums, products and conjugation ([[thm-maximal-ideal-space-is-compact-hausdorff]], [[lem-character-space-of-generated-normal-algebra-is-operator-spectrum]], [[def-c-star-algebra]]).
 
 [A2] For a nonzero unital commutative complex C\*-algebra $C$ the Gelfand transform $\Gamma:C\to C(\Delta(C))$ is an isometric unital $\ast$-isomorphism onto $C(\Delta(C))$, so its inverse has the same properties ([[thm-commutative-gelfand-naimark]]).
 

@@ -70,6 +70,6 @@ to this metric*, always.
   coincide. It is the converse inclusion that carries all the content.
 - **Three sources of completeness are proved on this page.** The real line and
   $\mathbb{R}^n$ are complete ([[thm-euclidean-space-complete]]); a closed subset
-  of a complete space is complete ([[thm-complete-subspace-iff-closed]]); and
-  every metric space sits densely and isometrically inside a complete one
-  ([[thm-metric-completion-exists]]).
+  of a complete space is complete ([[thm-complete-subspace-iff-closed]]); and,
+  under Countable Choice, every metric space sits densely and isometrically
+  inside a complete one ([[thm-metric-completion-exists]]).

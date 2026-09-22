@@ -16,6 +16,12 @@ sources:
     - title: "Norbert Brunner, Geordnete Läuchli Kontinuen"
       url: "https://matwbn.icm.edu.pl/ksiazki/fm/fm117/fm11718.pdf"
       locator: "§§1-3, printed pp. 67-73"
+    - title: "Eleftherios Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14590"
+      locator: "Main relative-consistency theorem, Proc. Amer. Math. Soc. 147 (2019), 4029-4038"
+    - title: "Eleftherios Tachtsis, Erratum to The Urysohn Lemma is independent of ZF + Countable Choice"
+      url: "https://doi.org/10.1090/proc/14848"
+      locator: "Published erratum to the cited theorem"
 ---
 
 ## Statement

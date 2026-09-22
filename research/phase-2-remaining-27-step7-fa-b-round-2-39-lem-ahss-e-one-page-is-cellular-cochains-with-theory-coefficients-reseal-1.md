@@ -1,0 +1,10 @@
+# FA 39 — context reseal
+
+Repaired disposition retained. Independently rechecked current proof, both Terra reasons, Alpha correction, previous FA evidence, manifest/coverage and boundary/risk record against the normalized reduced-theory supplier and the newly settled correspondence at position 32. The old evidence's assertion that position 32 remains escalated is historical only.
+
+The present proof needs only relative cofiber groups. Empty X and negative p give the cofiber of a point identity and hence zero, while p=0 uses X^0_+. For nonempty X and p>=1 the collapsed skeleton contains a vertex, so the precise nonempty quotient theorem applies. The quotient CW cells are exactly the wedge spheres. Inverse suspension and wedge restriction give Hom from the free oriented chain group. Pinch pullback adds two coordinates, sphere degree classifies the pinch group, and inverses induce negatives; thus the integer cellular matrix gives precisely contravariant coefficient pullback. Vertex signs and empty cell sets are explicitly covered. No boundary or arbitrary connector is smuggled into this group calculation. New normalized connectors therefore do not invalidate the proof.
+
+The mathematics of cofiber quotients, finite wedges, pinch additivity and degree matrices is familiar and was checked directly against the exact supplier statements. No additional external verification is needed for this reseal. The previous source reading remains in the original evidence. Refreshed only this item's stale exact citation quotes in its two contracts, preserving its independent risk record. Strict selected contract: zero errors, zero warnings. Item content, dependency declarations and manifest are unchanged. No published edit, new review wave or pass stamp. Next: position 40 after recorder acceptance.
+
+
+Hash check: previous item_sha256 1d712d6d784c34cdc1acc43d19e2c8b0e0b46b7964bb38cc9d549e40cd938257; current item_sha256 1d712d6d784c34cdc1acc43d19e2c8b0e0b46b7964bb38cc9d549e40cd938257. Item bytes match; context reseal only.

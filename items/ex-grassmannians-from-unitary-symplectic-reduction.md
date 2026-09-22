@@ -5,7 +5,7 @@ title: Grassmannians from unitary symplectic reduction
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-dimension-of-a-regular-nonzero-reduced-space, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-coadjoint-representation-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-countable-choice, ex-unitary-and-special-unitary-lie-groups]
+deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-dimension-of-a-regular-nonzero-reduced-space, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-coadjoint-representation-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-countable-choice, ex-unitary-and-special-unitary-lie-groups, thm-heine-borel-rn]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -41,14 +41,18 @@ reduction is the Grassmannian
 $$M_0=\{A:AA^*=2\lambda I\}/U(k)=\operatorname{Gr}(k,n),$$
 
 of dimension $2k(n-k)$, carrying the reduced form characterised by
-$\pi^*\omega^{\mathrm{red}}=\iota^*\omega$, which is the standard Kähler form of
-the Grassmannian in this frame model.
+$\pi^*\omega^{\mathrm{red}}_\lambda=\iota^*\omega$. Under the common
+row-space identification of all these quotients with $\operatorname{Gr}(k,n)$,
+the form depends linearly on the level: if
+$\omega_{\operatorname{Gr}}:=\omega^{\mathrm{red}}_{1/2}$ is the
+unit-frame normalization, then
+$\omega^{\mathrm{red}}_\lambda=2\lambda\,\omega_{\operatorname{Gr}}$.
 
 ## Facts & Assumptions
 
 **Given:** $\mathrm{AC}_\omega$, integers $1\le k\le n$, the space $M=\mathbb C^{k\times n}$ with the forms above, the left action of $U(k)$, and $\lambda>0$.
 
-[F1] $U(k)$ is a compact Lie group with Lie algebra $\mathfrak u(k)=\{X:X^*+X=0\}$. [[ex-unitary-and-special-unitary-lie-groups]].
+[F1] $U(k)$ is a Lie group with Lie algebra $\mathfrak u(k)=\{X:X^*+X=0\}$ by [[ex-unitary-and-special-unitary-lie-groups]]. It is compact: inside $M_k(\mathbb C)\cong\mathbb R^{2k^2}$ the equation $A^*A=I$ defines a closed set, and it is bounded because $\sum_{i,j}|A_{ij}|^2=\operatorname{tr}(A^*A)=k$; Heine--Borel now applies ([[thm-heine-borel-rn]]).
 
 [F2] $\omega(X,Y)=\operatorname{Im}\operatorname{tr}(X^*Y)$ is a symplectic form on the real vector space $M$, since it is an alternating bilinear form with $\omega(X,iX)=\|X\|^2>0$. [algebra]
 
@@ -74,4 +78,4 @@ the Grassmannian in this frame model.
 
 5.1 Quotient: two frames $A,A'$ with $AA^*=A'A^*=2\lambda I$ lie in the same $U(k)$-orbit exactly when their rows span the same $k$-plane, so the quotient is the Grassmannian $\operatorname{Gr}(k,n)$ of $k$-planes in $\mathbb C^n$. [step 4.1]
 
-6.1 Dimension check: $\dim M=2kn$ and $\dim G=\dim G_0=k^2$ because $0$ is a central coadjoint value, so by [F5] $\dim M_0=2kn-2k^2=2k(n-k)$, the dimension of $\operatorname{Gr}(k,n)$, and the reduced form is characterised by the pullback identity, which in this frame model is the standard Kähler form of the Grassmannian. [step 5.1, F5] ∎
+6.1 Dimension check: $\dim M=2kn$ and $\dim G=\dim G_0=k^2$ because $0$ is a central coadjoint value, so by [F5] $\dim M_0=2kn-2k^2=2k(n-k)$, the dimension of $\operatorname{Gr}(k,n)$. For the form, let $S_\lambda(A)=\sqrt{2\lambda}\,A$ carry the unit-frame level $AA^*=I$ onto the level $AA^*=2\lambda I$. This map is $U(k)$-equivariant, preserves row spaces, and satisfies $S_\lambda^*\omega=2\lambda\,\omega$. Pulling the two reduction identities back along $S_\lambda$ therefore gives $\bar S_\lambda^*\omega^{\mathrm{red}}_\lambda=2\lambda\,\omega^{\mathrm{red}}_{1/2}$ on the common Grassmannian quotient. Thus, with $\omega_{\operatorname{Gr}}:=\omega^{\mathrm{red}}_{1/2}$, the reduced form at level $\lambda$ is $2\lambda\,\omega_{\operatorname{Gr}}$, rather than one fixed form for every $\lambda$. [step 5.1, F2, F5, algebra] ∎

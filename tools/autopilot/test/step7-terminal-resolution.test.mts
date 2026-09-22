@@ -311,6 +311,27 @@ test('the FA recorder structurally refuses item N until every predecessor is res
   assert.deepEqual(finalAdjudicatorPredecessorProblems(queue, 'thm-two', latest, queueHash), []);
 });
 
+test('a current owner resolution may supersede a historically reached FA predecessor', () => {
+  const queue = {
+    version: 1, run: 'fixture', stage: '7-rejudge', group: 'a', dispatch_label: 'step7-fa-a-round-3',
+    items: [
+      { id: 'thm-one', owner: 'a', position: 1 },
+      { id: 'thm-two', owner: 'a', position: 2 },
+    ],
+  };
+  const queueHash = 'a'.repeat(64);
+  const latest = new Map([['thm-one', { resolved_by: 'owner' }]]);
+  const historical = [{
+    id: 'thm-one', resolved_by: 'final-adjudicator',
+    final_adjudicator: { queue_sha256: queueHash, queue_position: 1 },
+  }];
+  assert.deepEqual(
+    finalAdjudicatorPredecessorProblems(queue, 'thm-two', latest, queueHash, historical), []);
+  assert.match(
+    finalAdjudicatorPredecessorProblems(queue, 'thm-two', latest, queueHash, [])[0],
+    /thm-one.*must be resolved before thm-two/);
+});
+
 test('resealing an earlier item does not erase a completed queue\'s historical order', () => {
   const queue = {
     items: [

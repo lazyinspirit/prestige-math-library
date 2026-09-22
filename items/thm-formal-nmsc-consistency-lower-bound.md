@@ -1,10 +1,10 @@
 ---
 id: thm-formal-nmsc-consistency-lower-bound
 kind: theorem
-title: "Formal consistency lower bound for NMSC"
+title: "Metatheoretic consistency lower bound for NMSC"
 status: draft
 origin: pipeline
-deps: [thm-normal-moore-implies-inner-model-measurable, lem-interpretation-translates-finite-derivations, thm-formal-relative-consistency-from-verified-proof-reduction, thm-finite-fragment-relative-consistency-transfer, def-arithmetic-provability-and-consistency, def-axiom-of-choice]
+deps: [thm-normal-moore-implies-inner-model-measurable, def-relativization-to-a-definable-class, lem-interpretation-translates-finite-derivations, thm-formal-relative-consistency-from-verified-proof-reduction, thm-finite-fragment-relative-consistency-transfer, def-arithmetic-provability-and-consistency, def-axiom-of-choice]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -34,11 +34,11 @@ unspecified arithmetic base proves the displayed implication.
 
 **Given:** The metatheory $\mathrm{ZFC}$; the fixed arithmetization of the calculus of [[def-arithmetic-provability-and-consistency]].
 
-[F1] $\mathrm{ZFC} + \mathrm{NMSC}$ proves "there is an inner model with a measurable cardinal" ([[thm-normal-moore-implies-inner-model-measurable]]); unpacked, it proves the existence of a transitive class $M$ containing all ordinals with $M \models \mathrm{ZFC}$ and $M \models$ "$\kappa$ is measurable" for some $\kappa$.
+[F1] $\mathrm{ZFC}+\mathrm{NMSC}$ proves that there is an inner model with a measurable cardinal ([[thm-normal-moore-implies-inner-model-measurable]]). In the first-order class convention this has the following finite-fragment meaning: for each externally fixed finite set $\Delta$ of target axioms, one uses a single class-defining formula (with its fixed parameters) for the asserted inner model, and the source theory proves nonemptiness of that class and every $\sigma^M$ for $\sigma\in\Delta$. This is separate relativization for each fixed formula, not quantification over a class truth predicate ([[def-relativization-to-a-definable-class]]).
 
-[F2] Relativizing every axiom of $\mathrm{ZFC}$ and the sentence "there is a measurable cardinal" to the fixed formula defining $M$ gives an interpretation of the target theory in the source theory: each relativized axiom is a theorem of $\mathrm{ZFC}+\mathrm{NMSC}$ by [F1] together with the standard relativization properties of the ZF axioms. As an interpretation it transports derivations: every target derivation of $\varphi$ yields a source derivation of the guarded relativization, and in particular a target refutation yields a source refutation ([[lem-interpretation-translates-finite-derivations]]).
+[F2] Every actual derivation is finite. If an actual $U$-refutation uses the finite set $\Delta$ of nonlogical axioms, apply [F1] only to that $\Delta$. Relativization to its one nonempty class predicate is an interpretation of the finite theory $\Delta$ in the source theory, so the finite derivation translates to a source refutation ([[lem-interpretation-translates-finite-derivations]], [[thm-finite-fragment-relative-consistency-transfer]]).
 
-[F3] The effective interpretation of [F2] sends every actual finite target derivation to an actual finite source derivation, so an actual target refutation yields an actual source refutation ([[lem-interpretation-translates-finite-derivations]]). This proves the external consistency implication. The stronger conclusion that a specified arithmetic base $B$ proves the implication would additionally require $B$-verification of a total refutation-code map ([[thm-formal-relative-consistency-from-verified-proof-reduction]]); no such internal-base conclusion is used here. The finite-fragment theorem records the same external-versus-uniform distinction for the model-theoretic sibling route ([[thm-finite-fragment-relative-consistency-transfer]]).
+[F3] This per-refutation, externally selected finite translation proves only the external consistency implication. It does not provide one fixed interpretation of all of $U$, an effective selector of class predicates from proof codes, or a base-verifiable total refutation-code map. Any assertion that an arithmetic base $B$ proves the implication would require exactly such additional uniform data ([[thm-formal-relative-consistency-from-verified-proof-reduction]]).
 
 
 
@@ -46,11 +46,11 @@ unspecified arithmetic base proves the displayed implication.
 
 **Proof technique:** direct.
 
-1.1 Let $T := \mathrm{ZFC} + \mathrm{NMSC}$ and $U := \mathrm{ZFC} + \text{there is a measurable cardinal}$. By [F1] the fixed source theory proves that a transitive class model $M$ of $\mathrm{ZFC}$ with a measurable cardinal exists. [given, F1]
-2.1 Relativize each $U$-axiom to $M$. By [F2] every such relativization is a $T$-theorem, so the relativization is an interpretation of $U$ in $T$. [step 1.1, F2]
-3.1 Suppose $U$ had an actual refutation. Relativizing the finitely many axioms that refutation uses produces an actual $T$-refutation by [F2] and [F3]. Hence the absence of an actual $T$-refutation excludes every actual $U$-refutation. Equivalently, under the standard-natural-number reading fixed in the Statement, $\operatorname{Con}(T) \to \operatorname{Con}(U)$ holds. [step 2.1, F2, F3] ∎
+1.1 Let $T:=\mathrm{ZFC}+\mathrm{NMSC}$ and $U:=\mathrm{ZFC}+\text{there is a measurable cardinal}$. Suppose, contrapositively, that an actual finite $U$-refutation $p$ exists, and let $\Delta$ be the finite set of nonlogical $U$-axioms occurring in $p$. [given, F2]
+2.1 Apply the finite-fragment reading of the inner-model theorem [F1] to this particular $\Delta$. It supplies one definable nonempty class $M$ and $T$-proofs of $\sigma^M$ for every $\sigma\in\Delta$. With membership and equality unchanged, these finitely many obligations make relativization to $M$ an interpretation of the finite theory $\Delta$ in $T$. [step 1.1, F1, F2]
+3.1 Translate the fixed refutation $p$ through that finite interpretation. By [F2], its translated logical steps and the finitely many proofs from step 2.1 assemble into an actual $T$-refutation. Thus every actual $U$-refutation entails an actual $T$-refutation, so absence of a $T$-refutation entails absence of a $U$-refutation. Under the standard-natural-number convention in the Statement, this is $\operatorname{Con}(T)\to\operatorname{Con}(U)$. [step 1.1, step 2.1, F2, F3] ∎
 
 ## Remarks
 
-- **What is and is not used.** The proof supplies the external syntactic consistency implication from the internal theorem plus the effective relativization map. It neither claims that a named arithmetic base proves the implication nor builds a set model of $\mathrm{ZFC}$, and it does not assume a transitive set model of the source theory.
+- **What is and is not used.** The proof supplies the external syntactic consistency implication by selecting a definable-class relativization after a particular finite refutation is fixed. It neither claims one fixed global interpretation nor that a named arithmetic base proves the implication, and it does not build or assume a transitive set model of the source theory.
 - **AC.** $\mathrm{ZFC}$ is part of both theories; the relativization of AC to the inner model is part of [F1], and no additional choice principle is used in the transfer ([[def-axiom-of-choice]]).

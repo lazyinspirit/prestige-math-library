@@ -1,0 +1,5 @@
+# FA reseal — position 10
+
+Disposition repaired; source status familiar. Current itemHashJudge 05c0cc153a815246565f11ce528b58b99d1ec2ef6ff962d410ac0a0c242db053 equals its recorded item_sha256. Re-read the complete current Definition and Remarks against the new HYP context.
+
+The later HYP definition now correctly restores the CH case and uses the library trace convention; this changes none of the Moore definition's topological premises. Its development is still a given zero-indexed sequence of open covers, normalized using all finite intersections G_0 through G_n. Its stars give an at most countable open neighbourhood base. Moore still means regular T1 plus developable. Its later metrization reference remains explicitly ZFC and Moore-scoped, and imports no HYP assumption. The finite choice and empty-space arguments remain valid. No mathematical repair is needed and no dependency interface of this item changed. The previous scoped contract checks therefore remain applicable. This is familiar elementary topology with no new external verification. Positions 2 and 3 were resealed first; reseal this item before recording position 11.

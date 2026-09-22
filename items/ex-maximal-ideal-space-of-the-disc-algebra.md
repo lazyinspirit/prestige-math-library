@@ -1,16 +1,21 @@
 ---
 id: ex-maximal-ideal-space-of-the-disc-algebra
 kind: example
-title: Maximal ideal space of the disc algebra
+title: Character space of the disc algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-taylor-expansion-holomorphic-function, thm-uniform-limit-continuous-complex-functions, thm-uniform-limit-interchanges-complex-line-integrals, thm-morera-triangle-theorem, thm-boundary-maximum-modulus-principle, thm-complex-power-series-converge-locally-uniformly, def-character-and-maximal-ideal-space, thm-compactness-under-continuous-maps]
+deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-taylor-expansion-holomorphic-function, thm-uniform-cauchy-criterion-complex-functions, thm-uniform-limit-continuous-complex-functions, thm-uniform-limit-interchanges-complex-line-integrals, thm-goursat-triangle-theorem, thm-morera-triangle-theorem, thm-boundary-maximum-modulus-principle, thm-complex-power-series-converge-locally-uniformly, def-character-and-maximal-ideal-space, thm-compactness-under-continuous-maps]
 justified_by: []
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis — §5.5.1 and Chapter 4, printed pp. 258–267"
@@ -45,9 +50,17 @@ circle.
 
 [L2] A holomorphic function on an open set has a Taylor expansion at every interior point, convergent on the largest centred disc inside the domain; the partial sums of a power series converge uniformly on compact subsets of the disc of convergence ([[thm-taylor-expansion-holomorphic-function]], [[thm-complex-power-series-converge-locally-uniformly]]).
 
-[L3] Uniform limits of continuous complex functions are continuous, and uniform convergence interchanges with contour integrals ([[thm-uniform-limit-continuous-complex-functions]], [[thm-uniform-limit-interchanges-complex-line-integrals]]).
+[L3] A uniformly Cauchy sequence of complex-valued functions has a uniform
+limit; uniform limits of continuous complex functions are continuous, and
+uniform convergence interchanges with contour integrals
+([[thm-uniform-cauchy-criterion-complex-functions]],
+[[thm-uniform-limit-continuous-complex-functions]],
+[[thm-uniform-limit-interchanges-complex-line-integrals]]).
 
-[L4] A continuous function on an open set is holomorphic if its integral around the boundary of every filled triangle in the open set vanishes ([[thm-morera-triangle-theorem]]).
+[L4] A holomorphic function integrates to zero around every filled triangle in
+its domain, and conversely a continuous function on an open set is holomorphic
+if all those triangle integrals vanish ([[thm-goursat-triangle-theorem]],
+[[thm-morera-triangle-theorem]]).
 
 [L5] For $f$ continuous on $\overline\Omega$ and holomorphic on a bounded domain $\Omega$, the maximum of $|f|$ is attained on $\partial\Omega$ ([[thm-boundary-maximum-modulus-principle]]).
 
@@ -64,7 +77,16 @@ compact space to a Hausdorff space is a homeomorphism
 
 1.1 $A(\mathbb D)$ is a complex vector space closed under pointwise multiplication, with unit the constant function $1$ of norm one, and the supremum norm is submultiplicative; the constant functions and the coordinate function $z$ show that it is nonzero. [algebra]
 
-1.2 $A(\mathbb D)$ is complete: if $(f_n) \subseteq A(\mathbb D)$ is Cauchy in the supremum norm, then it converges uniformly to a continuous $f$ by [L3]; each $f_n$ is holomorphic on $\mathbb D$, and for every filled triangle $\Delta \subseteq \mathbb D$ one has $\int_{\partial\Delta}f_n = 0$ (for monomials this is the vanishing of the integral of an exact derivative, and for each $f_n$ it follows by uniform convergence of its Taylor series on the compact triangle by [L2] and [L3]), so by [L3] $\int_{\partial\Delta}f = 0$, and [L4] makes $f$ holomorphic; hence $f \in A(\mathbb D)$ and $\|f_n - f\|_\infty \to 0$. [1.1, L2, L3, L4]
+1.2 $A(\mathbb D)$ is complete: if $(f_n)\subseteq A(\mathbb D)$ is Cauchy
+in the supremum norm, then it is uniformly Cauchy on
+$\overline{\mathbb D}$, so [L3] supplies a uniform limit $f$, and [L3] also
+makes $f$ continuous. For every filled triangle
+$\Delta\subseteq\mathbb D$, [L4] gives
+$\int_{\partial\Delta}f_n=0$ because $f_n$ is holomorphic. Passing to the
+uniform limit in the contour integral by [L3] gives
+$\int_{\partial\Delta}f=0$, and Morera's direction of [L4] makes $f$
+holomorphic on $\mathbb D$. Hence $f\in A(\mathbb D)$ and
+$\|f_n-f\|_\infty\to0$. [step 1.1, L3, L4]
 
 1.3 For every $a \in \overline{\mathbb D}$ the evaluation $\mathrm{ev}_a$ is a character: it is nonzero, complex-linear and multiplicative, and $\mathrm{ev}_a(1) = 1$. [algebra]
 

@@ -5,7 +5,7 @@ title: The center is the common kernel of the roots inside the Cartan subalgebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]
+deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -20,7 +20,7 @@ proof_strategy: direct
 
 ## Statement
 
-Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
+Assume the Axiom of Choice. Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
 semisimple Lie algebra $\mathfrak g$, with root set $\Phi$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]). Then
 $$\{H\in\mathfrak h:\alpha(H)=0\text{ for all }\alpha\in\Phi\}=Z(\mathfrak g)\cap\mathfrak h=0 .$$
@@ -29,7 +29,9 @@ common-root-kernel as the center is an equality inside $\mathfrak h$.
 
 ## Facts & Assumptions
 
-**Given:** Such $\mathfrak g$ and $\mathfrak h$.
+**Given:** The Axiom of Choice and such $\mathfrak g$ and $\mathfrak h$.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it licenses the structural suppliers [L1] and [L2].
 
 [L1] $\mathfrak g=\mathfrak h\oplus\bigoplus_{\alpha\in\Phi}\mathfrak g_\alpha$ is a direct sum over the root spaces ([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]], [[thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system]], [[def-root-and-root-space-relative-to-a-cartan-subalgebra]]).
 
@@ -41,6 +43,6 @@ common-root-kernel as the center is an equality inside $\mathfrak h$.
 
 **Proof technique:** direct.
 
-1.1 If $H\in\mathfrak h$ has $\alpha(H)=0$ for every $\alpha\in\Phi$, then $[H,\mathfrak g_\alpha]=\alpha(H)\mathfrak g_\alpha=0$ for every root, and $[H,\mathfrak h]=0$ by [L2]; by [L1] $[H,\mathfrak g]=0$, so $H\in Z(\mathfrak g)$ and $H=0$ by [L3]. [L1, L2, L3, algebra]
+1.1 If $H\in\mathfrak h$ has $\alpha(H)=0$ for every $\alpha\in\Phi$, then $[H,\mathfrak g_\alpha]=\alpha(H)\mathfrak g_\alpha=0$ for every root, and $[H,\mathfrak h]=0$ by [L2]; by [L1] $[H,\mathfrak g]=0$, so $H\in Z(\mathfrak g)$ and $H=0$ by [L3]. [A1, L1, L2, L3, algebra]
 
 2.1 Conversely every central element of $\mathfrak h$ is annihilated by all roots, since $\alpha(H)=0$ is the eigenvalue of $\operatorname{ad}_H$ on $\mathfrak g_\alpha$ and $\operatorname{ad}_H=0$ for central $H$. Hence the common kernel equals $Z(\mathfrak g)\cap\mathfrak h=0$; and because no nonzero $H$ annihilates all roots, the finite set $\Phi$ spans $\mathfrak h^*$. [L1, step 1.1, algebra] ∎

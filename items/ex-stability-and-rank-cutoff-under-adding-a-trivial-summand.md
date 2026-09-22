@@ -20,15 +20,15 @@ sources:
 ## Example
 
 Assume AC. Let $E$ be a numerable complex bundle of rank $m$ and $F$ a
-numerable real bundle of rank $n$ over a path-connected CW base (or CW-type
-base), and let $\varepsilon^r$ denote a trivial summand of the same kind. Then
+numerable real bundle of rank $n$ over a nonempty path-connected paracompact
+Hausdorff CW base, and let $\varepsilon^r$ denote a trivial summand of the same kind. Then
 $$c(E\oplus\varepsilon^r)=c(E),\qquad p(F\oplus\varepsilon^r)=p(F),$$
 and the coefficient cutoffs hold: $c_i(E)=0$ for $i>m$ and $p_i(F)=0$ whenever
 $2i>n$.
 
 ## Facts & Assumptions
 
-**Given:** AC, a numerable complex bundle $E$ of rank $m$, a numerable real bundle $F$ of rank $n$, and trivial summands $\varepsilon^r$.
+**Given:** AC, a nonempty path-connected paracompact Hausdorff CW base, a numerable complex bundle $E$ of rank $m$, a numerable real bundle $F$ of rank $n$, and trivial summands $\varepsilon^r$.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited from the characteristic-class suppliers ([[def-axiom-of-choice]]).
 
@@ -48,7 +48,7 @@ $2i>n$.
 
 2.1 Consistency of the two parities: in the complex case the total class is unchanged, so all components are unchanged; in the real case the total Pontryagin class as a finite sum $\sum_ip_i$ is unchanged because each $p_i$ is. [step 1.1, step 1.2]
 
-3.1 Boundary cases. For $r=0$ both identities are trivial; for $E$ or $F$ trivial of rank zero, $c(0)=1$ and $p(0)=1$ by the conventions, so the identities read $c(\varepsilon^r)=1$ and $p(\varepsilon^r)=1$. The cutoffs at $i=m$ and $2i=n$ are included, not excluded. The coefficient ring $\mathbb Z$ is nonzero and the sums are finite. AC is used only through [A1]. [A1, F1, F2, step 2.1] ∎
+3.1 Boundary cases. For $r=0$ both identities are trivial; for $E$ or $F$ trivial of rank zero, $c(0)=1$ and $p(0)=1$ by the conventions, so the identities read $c(\varepsilon^r)=1$ and $p(\varepsilon^r)=1$. The rank cutoffs are strict: they force $c_i(E)=0$ only for $i>m$ and $p_i(F)=0$ only for $2i>n$. They do not include $i=m$ or $2i=n$, where the top Chern or Pontryagin class may be nonzero. The coefficient ring $\mathbb Z$ is nonzero and the sums are finite. AC is used only through [A1]. [A1, F1, F2, step 2.1] ∎
 
 ## Source notes
 

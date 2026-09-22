@@ -25,7 +25,7 @@ sources:
 
 ## Definition
 
-Let $T$ be a linear operator on $H$ with domain $D(T)$. The **resolvent set**
+Let $H$ be a complex Hilbert space and $T$ a linear operator on $H$ with domain $D(T)$. Write $(z-T)x=zx-Tx$ for $x\in D(T)$. The **resolvent set**
 of $T$ is
 $$\rho(T):=\{z\in\mathbb C:\ z-T:D(T)\to H\text{ is bijective and }(z-T)^{-1}\in\mathcal B(H)\},$$
 where $\mathcal B(H)$ is the space of bounded everywhere defined operators on
@@ -34,22 +34,25 @@ $\sigma(T):=\mathbb C\setminus\rho(T)$. For $z\in\rho(T)$ the bounded operator
 $$R_T(z):=(z-T)^{-1}\in\mathcal B(H)$$
 is the **resolvent** of $T$ at $z$. This is the library convention used
 throughout the page, matching the bounded resolvent of
-[[def-spectrum-and-resolvent-of-a-bounded-operator]]: the parameter appears
-with a plus sign in front of $T$.
+[[def-spectrum-and-resolvent-of-a-bounded-operator]]: the shift is $zI-T$, with coefficient $-1$ on $T$.
 
 **The resolvent determines $T$ back.** If $z\in\rho(T)$ and $R:=R_T(z)$, then
-$D(T)=\operatorname{ran}R$, $Tx=z\,Rx-x$ for $x\in D(T)$; equivalently
+$D(T)=\operatorname{ran}R$ and $TRy=zRy-y$ for $y\in H$; equivalently
 $T=zI-R^{-1}$ with $D(T)=\operatorname{ran}R$, and $R(z-T)x=x$ for
 $x\in D(T)$, $(z-T)Ry=y$ for $y\in H$.
 
 **Nonempty resolvent set forces closedness, without the closed graph
 theorem.** Assume $\rho(T)\ne\varnothing$ and fix $z\in\rho(T)$ with
-$R:=R_T(z)$. Since $R$ is bounded, its graph is closed: if $y_n\to y$ and
-$Ry_n\to w$, then $w=\lim Ry_n=Ry$ by continuity. Because
-$D(T)=\operatorname{ran}R$ and $(z-T)Rx=x$ for $x\in D(T)$, the graph of $T$ is
+$R:=R_T(z)$. Choose a bound $C\ge0$ such that $\|Rv\|\le C\|v\|$.
+The map $F(v,w)=w-Rv$ is continuous, since
+$\|F(v,w)-F(v',w')\|\le\|w-w'\|+C\|v-v'\|$.
+Its zero set $\Gamma(R)=F^{-1}(\{0\})$ is closed. Because
+$D(T)=\operatorname{ran}R$ and $(z-T)Rv=v$ for every $v\in H$, the graph of $T$ is
 $$\Gamma(T)=\{(x,Tx):x\in D(T)\}=\{(Rv,zRv-v):v\in H\}=\Phi(\Gamma(R)),$$
-where $\Phi(v,w):=(w,zw-v)$ is a linear bijection of $H\oplus H$ with
+where $\Phi(v,w):=(w,zw-v)$ is a continuous linear bijection of $H\oplus H$ with
 continuous inverse $\Psi(u,v)=(zu-v,u)$, since $\Phi(\Psi(u,v))=(u,z u-(zu-v))=(u,v)$
 and $\Psi(\Phi(v,w))=\Psi(w,zw-v)=(v,w)$. A homeomorphism carries closed sets
 to closed sets, so $\Gamma(T)$ is closed and $T$ is closed.
 No closed graph theorem and hence no choice principle is used here.
+
+For the zero operator on a nonzero $H$, $\rho(0)=\mathbb C\setminus\{0\}$: the nonzero shifts have inverse $z^{-1}I$, whereas the zero shift is not bijective. If $H=\{0\}$, every shift is the unique bijection of the zero space, so $\rho(T)=\mathbb C$ and $\sigma(T)=\varnothing$.

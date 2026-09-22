@@ -19,6 +19,11 @@ sources:
 
 ## Statement refuted
 
+Assume the Axiom of Choice and the standing hypothesis (H) of
+[[def-elementary-predictable-brownian-integrand]], with the filtration satisfying
+the usual conditions, and use the $\mathcal F_0$-normalized everywhere-continuous
+representative of the standard Brownian motion.
+
 The ordinary chain rule
 $$d(B_t^2)=2B_t\,dB_t\qquad\text{(claimed)}$$
 is false for standard Brownian motion. The correct identity is
@@ -28,7 +33,7 @@ $t>0$: the missing term is exactly the quadratic-variation correction $t$.
 
 ## Facts & Assumptions
 
-**Given:** AC, (H), a standard Brownian motion $B$, and $t>0$.
+**Given:** AC, (H), the usual conditions, the $\mathcal F_0$-normalized everywhere-continuous adapted representative of a standard Brownian motion $B$, and $t>0$.
  
 [F1] **Correct identity.** $B_t^2-t=2\int_0^tB_s\,dB_s$ up to indistinguishability, so $B_t^2=2\int_0^tB_s\,dB_s+t$; the integral is the localized integral of the predictable process $2B$, whose energy on $[0,t]$ is $E\int_0^t4B_s^2ds=4E\int_0^tB_s^2ds=2t^2<\infty$. [[cor-brownian-square-martingale]] [[thm-localized-ito-integral]] [[def-locally-square-integrable-predictable-brownian-integrand]] [[def-ito-integral-for-square-integrable-predictable-processes]]
  

@@ -58,6 +58,6 @@ stafull extraction, the Erdős–Rado/Ramsey colouring and the closing chain. Th
 CH instance is the case $\kappa = \omega$, $\kappa_n = n$, with the ladder
 separation proved directly; $V = L$ therefore refutes the normal Moore space
 conjecture, the failure of the conjecture yields an inner model with a
-measurable cardinal, the formal consistency lower bound follows, and with the
+measurable cardinal, the metatheoretic consistency lower bound follows, and with the
 strongly compact upper bound this is the consistency-strength sandwich for
 NMSC.

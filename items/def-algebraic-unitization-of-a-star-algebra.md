@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Definition 2.1.18 and Proposition 2.1.15, printed pp. 11–13"
@@ -29,7 +34,7 @@ $$(a,\lambda)(b,\mu) \;:=\; (ab + \lambda b + \mu a,\ \lambda\mu), \qquad (a,\la
 
 The pair is written $a + \lambda 1$ for $(a,\lambda)$, so that the displayed
 product is the expansion of $(a + \lambda1)(b + \mu1)$ with the convention
-$\lambda b = b\lambda$. The element $\chi_\infty(a,\lambda) := \lambda$ is the
+$\lambda b = b\lambda$. The map $\chi_\infty(a,\lambda) := \lambda$ is the
 **quotient character** of $A^+$; it is complex-linear, multiplicative and
 nonzero, and it vanishes exactly on $A \oplus \{0\}$.
 
@@ -49,9 +54,10 @@ without further comment:
   $(a,\lambda)(b,0) = (ab + \lambda b, 0)$ and $(b,0)(a,\lambda) = (ba + \lambda b, 0)$
   in $A \oplus \{0\}$.
 
-No norm is defined here; the C\*-norm on $A^+$ is constructed in
-[[thm-minimal-c-star-unitization]], where genuineness of the nonunitality of $A$
-is used to make the construction injective. If $A$ is the zero algebra then
+No norm is defined here. For nonzero genuinely nonunital $A$,
+[[thm-minimal-c-star-unitization]] constructs a C\*-norm on $A^+$;
+its operator construction uses nonunitality to be injective. That theorem
+is not invoked here for unital $A$. If $A$ is the zero algebra then
 $A^+ \cong \mathbb C$ is the complex numbers with their usual structure, and
 the quotient character is the identity map.
 
@@ -62,6 +68,7 @@ the quotient character is the identity map.
   its product, but the unit of $A^+$ differs from the unit of the ideal $A$, and
   for that reason the C\*-norm theorem below is stated only for genuinely
   nonunital $A$.
-- **The quotient character is the point at infinity.** Under the representation
-  theorems $\chi_\infty$ becomes evaluation at the added point of the one-point
+- **The quotient character is the point at infinity.** For commutative, genuinely
+  nonunital $A$ (with the zero algebra treated separately), the later
+  representation theorem identifies $\chi_\infty$ with evaluation at the added point of the one-point
   compactification ([[thm-character-space-of-the-unitization-is-one-point-compactification]]).

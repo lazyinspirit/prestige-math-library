@@ -1,10 +1,10 @@
 ---
 id: ex-successive-brownian-hits-restart-independent-copies
 kind: example
-title: "Successive hits restart independent Brownian copies"
+title: "Successive Brownian exit segments are independent copies"
 status: draft
 origin: pipeline
-deps: [thm-strong-markov-property-of-brownian-motion, thm-two-sided-exit-probability-for-brownian-motion, cor-one-dimensional-brownian-motion-hits-every-point-almost-surely, lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times, def-brownian-motion, def-brownian-motion-started-at-x, def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, def-axiom-of-choice]
+deps: [thm-strong-markov-property-of-brownian-motion, lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times, def-brownian-motion, def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, thm-dynkin-pi-lambda, def-standard-normal-and-normal-laws, lem-probability-measure-basic-identities, def-axiom-of-choice, thm-extreme-value-r, thm-intermediate-value, thm-heine-borel-r, cor-c-one-change-of-variables-for-l-one-functions]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -19,51 +19,67 @@ sources:
 
 ## Example
 
-Assume the Axiom of Choice and let $B$ be a standard Brownian motion
-[[def-brownian-motion]]. Define
-$$S_1:=\inf\{t\ge0:|B_t|=1\},\qquad S_{n+1}:=S_n+\inf\{t\ge0:|B_{S_n+t}-B_{S_n}|=1\}\quad(n\ge1),$$
-and for $n\ge1$ let
-$$E_n:=\bigl(t\mapsto B_{S_n+t}-B_{S_n},\ 0\le t\le S_{n+1}-S_n\bigr)$$
-be the $n$-th excursion. Then:
+Assume AC and let B be standard Brownian motion. Use the following path
+convention throughout this example: choose the measurable full event of
+continuous paths starting at zero supplied by [[def-brownian-motion]], and
+replace B by the zero path on its complement. Denote this version by X.
+It agrees with the original B at every time on one measurable full event;
+no assertion about the original raw filtration on exceptional paths is made.
 
-1. $S_n<\infty$ almost surely and $S_1<S_2<\cdots$ almost surely;
-2. the excursions $E_1,E_2,\dots$ are independent and identically distributed,
-   each having the law of the exit path $(W_t)_{t\le\sigma}$ of a standard
-   Brownian motion $W$ at $\sigma=\inf\{t\ge0:|W_t|=1\}$;
-3. the displacements $D_n:=B_{S_{n+1}}-B_{S_n}\in\{-1,1\}$ are independent with
-   $P(D_n=1)=P(D_n=-1)=1/2$ and are independent of $B_{S_1}$, so the
-   increments $(B_{S_1},D_1,D_2,\dots)$ are independent fair signs and
-   $(0,B_{S_1},B_{S_2},\dots)$ is a simple symmetric random walk on
-   $\mathbb Z$ started at $0$.
+Put $S_0=0$ and, whenever $S_n<\infty$,
+$$S_{n+1}=S_n+\inf\{t\ge0:|X_{S_n+t}-X_{S_n}|=1\}.$$
+If a time is infinite, all subsequent times are set to infinity. Then all
+$S_n$ are finite and $S_0<S_1<S_2<\cdots$ on a measurable probability-one event.
+The segments
+$$E_n=(S_{n+1}-S_n,\ (X_{(S_n+t)\wedge S_{n+1}}-X_{S_n})_{t\ge0}),\qquad n\ge0,$$
+are independent and identically distributed. This encodes each finite-length
+segment by its duration and its path held constant after exit; its law is that
+of a standard Brownian path stopped on first reaching {-1,1}. The proof gives
+a measurable convention when one of the times is infinite.
+Consequently $(X_{S_1},X_{S_2}-X_{S_1},\ldots)$ are independent fair signs,
+and $(0,X_{S_1},X_{S_2},\ldots)$ is a simple symmetric random walk on the
+integers. In particular the original numbering $E_1,E_2,\ldots$ has the same
+claims and its displacements are independent of $X_{S_1}$.
 
 ## Facts & Assumptions
 
-**Given:** AC and a standard Brownian motion $B$.
+**Given:** AC and the Brownian process and continuous-path convention in the Example.
 
-[F1] Hitting times of closed sets are stopping times, and Brownian motion hits every level almost surely, so $\inf\{t\ge0:|W_t|=1\}$ is an a.s. finite stopping time for every standard Brownian motion $W$. [[lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times]] [[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]] [[def-continuous-time-stopping-time]]
+[F1] Brownian paths are continuous on a measurable full event and start at zero almost surely; increments are independent centered normals. A N(0,m) variable for m>0 is the image of the standard normal density under multiplication by sqrt(m). The density is even and bounded above by $(2\pi)^{-1/2}$. [[def-brownian-motion]] [[def-standard-normal-and-normal-laws]]
 
-[F2] Strong Markov: at an a.s. finite stopping time $\tau$ of the usual augmentation the shifted increment process $(B_{\tau+t}-B_\tau)_{t\ge0}$ is a standard Brownian motion independent of $\mathcal F_\tau$. [[thm-strong-markov-property-of-brownian-motion]] [[def-natural-and-usual-augmented-brownian-filtrations]]
+[F2] A closed-set hitting time for an everywhere-continuous Brownian motion is a stopping time for its raw natural filtration, and hence its usual augmentation. Stopped sigma-algebras use the tests A intersect {tau<=t}. [[lem-brownian-first-hitting-times-of-closed-sets-are-stopping-times]] [[def-continuous-time-stopping-time]] [[def-natural-and-usual-augmented-brownian-filtrations]]
 
-[F3] Two-sided exit probability for a standard Brownian motion started at $0$: $P(T_1<T_{-1})=\frac{0-(-1)}{1-(-1)}=\frac12$, and symmetrically $P(T_{-1}<T_1)=\frac12$. [[thm-two-sided-exit-probability-for-brownian-motion]] [[def-brownian-motion-started-at-x]]
+[F3] At an almost surely finite stopping time for the usual Brownian filtration, the restarted process is independent of the stopped sigma-algebra and has Wiener finite-dimensional distributions. Values on the infinite-time event are assigned zero by the theorem's convention. [[thm-strong-markov-property-of-brownian-motion]]
 
-[F4] AC is the ambient assumption of the Brownian and strong-Markov interfaces. [[def-axiom-of-choice]]
+[F4] For $C=C([0,\infty),\mathbb R)$ with the uniform-on-compacts topology, its Borel sigma-algebra is generated by rational evaluations. A pi-system generates its sigma-algebra by the pi-lambda theorem. [[lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates]] [[thm-dynkin-pi-lambda]]
+
+[F5] Probabilities are continuous from above and below; countable unions of null events are null. AC supplies the Brownian and strong-Markov interfaces. [[lem-probability-measure-basic-identities]] [[def-axiom-of-choice]]
+
+[F6] Closed bounded real intervals are compact; continuous real functions attain their extrema on a nonempty compact set and take all intermediate values. Reflection x maps to -x preserves Lebesgue integration by the change-of-variables formula (absolute Jacobian one); AC supplies its Countable Choice hypothesis. [[thm-heine-borel-r]] [[thm-extreme-value-r]] [[thm-intermediate-value]] [[cor-c-one-change-of-variables-for-l-one-functions]]
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 $S_1$ is the hitting time of the closed set $\{-1,1\}$, hence a stopping time and a.s. finite by [F1], and $B_{S_1}\in\{-1,1\}$ by continuity; also $S_1>0$ almost surely because $B_0=0\notin\{-1,1\}$. [F1, given]
+1.1 The normalized process X has measurable coordinates, all its paths are continuous, and X_0=0 everywhere. It retains every finite-dimensional Brownian law, since its coordinates were changed on one measurable null event. By [F4] it is a C-valued random element, supported on the closed subspace C_0 of paths starting at zero. Work with the usual augmentation of this process, as defined in [F2], when applying strong Markov. This does not transfer a stopping-time claim to the original B filtration. [F1, F2, F4, given]
 
-2.1 Put $W^{(1)}_t:=B_{S_1+t}-B_{S_1}$ and $\sigma_1:=\inf\{t\ge0:|W^{(1)}_t|=1\}$. By [F2] the process $W^{(1)}$ is a standard Brownian motion independent of $\mathcal F_{S_1}$, so [F1] applied to $W^{(1)}$ makes $\sigma_1$ an a.s. finite stopping time of the filtration generated by $W^{(1)}$; consequently $S_2=S_1+\sigma_1<\infty$ almost surely, $S_2>S_1$ almost surely because $W^{(1)}_0=0$, and $W^{(2)}_t:=B_{S_2+t}-B_{S_2}=W^{(1)}_{\sigma_1+t}-W^{(1)}_{\sigma_1}$. [F1, F2, step 1.1]
+2.1 For w in C_0 define $\sigma(w)=\inf\{t\ge0:|w(t)|=1\}$. This is measurable: for t>=0, continuity gives $\{\sigma\le t\}=\{\sup_{0\le s\le t}|w(s)|\ge1\}$, and the supremum is over the countable set of rationals in [0,t] together with t. Continuity, the intermediate value property and attainment of the maximum on a compact interval prove this equality. It also shows sigma is strictly positive on C_0. For a continuous Brownian W, [F2] makes sigma(W) a stopping time. If sigma(W)>m, then |W_m|<1; hence [F1] gives $P(\sigma>m)\le P(|W_m|<1)\le2/\sqrt{2\pi m}$. Continuity from above in [F5] proves sigma finite almost surely. At a finite sigma, continuity gives $W_\sigma\in\{-1,1\}$. [F1, F2, F5, F6, step 1.1]
 
-3.1 Iterating step 2.1 with $W^{(n)}$ in place of $B$ defines stopping times $\sigma_n$, times $S_{n+1}=S_n+\sigma_n$, and standard Brownian motions $W^{(n+1)}_t=W^{(n)}_{\sigma_n+t}-W^{(n)}_{\sigma_n}$ satisfying $W^{(n)}_t=B_{S_n+t}-B_{S_n}$ and $E_n=(W^{(n)}_t)_{0\le t\le\sigma_n}$; by induction every $S_n$ is finite almost surely and increasing. [F1, F2, step 2.1]
+3.1 Define the segment map $e(w)=(\sigma(w),(w(t\wedge\sigma(w)))_{t\ge0})$ into $[0,\infty]\times C$, and the remainder $r(w)(t)=w(\sigma(w)+t)-w(\sigma(w))$ if sigma is finite, and the zero path otherwise. Both are Borel maps. Indeed evaluation (w,s) maps to w(s) continuously for finite s: if w_j converges uniformly on compact sets and s_j tends to s, bound by the uniform error on one common compact interval plus continuity of w there. Compose with measurable sigma for each fixed coordinate, using t wedge infinity=t and the zero convention for r; then [F4] proves path-valued measurability. The duration sigma is measurable by step 2.1. [F4, step 2.1]
 
-4.1 For each $n$, [F2] applied to the standard Brownian motion $W^{(n)}$ at its stopping time $\sigma_n$ shows that $W^{(n+1)}$ is a standard Brownian motion independent of the filtration generated by $W^{(n)}$ up to $\sigma_n$, which contains $\sigma(E_n)$; hence $W^{(n+1)}$ is independent of $\sigma(E_1,\dots,E_n)$ by induction, and it has the same law as $W^{(1)}$. Therefore the excursions $E_n$ are independent and identically distributed, each with the law of the exit path $(W_t)_{t\le\sigma}$ described in the statement. [F2, step 3.1]
+4.1 For a continuous Brownian W and its sigma, e(W) is measurable for the stopped sigma-algebra. Sigma itself is measurable there by its defining tests. For a fixed t and u, on {sigma<=u} the value W_{t wedge sigma} equals W_{t wedge sigma wedge u}, which is measurable at time u: approximate t wedge sigma wedge u from below by a finite grid in [0,u], use adaptation and continuity. Thus the Borel inverse images of W_{t wedge sigma}, intersected with {sigma<=u}, lie in F_u. Rational coordinates and [F4] finish this claim. By [F3], r(W) is independent of F_sigma and has Brownian finite-dimensional laws. It is C_0-valued by construction; [F4] and the pi-lambda theorem identify its C_0 law with that of X and promote coordinate independence to independence of every Borel path event. Therefore e(W) and r(W) are independent, and r(W) again has the law of X. [F2, F3, F4, step 1.1, step 2.1, step 3.1]
 
-5.1 Since $E_n$ determines $D_n=W^{(n)}_{\sigma_n}\in\{-1,1\}$ and $W^{(n)}$ has the law of a standard Brownian motion, [F3] gives $P(D_n=1)=P(T_1<T_{-1})=\frac12$ and hence $P(D_n=-1)=\frac12$; independence of the $D_n$ follows from step 4.1. Finally $B_{S_1}\in\{-1,1\}$ is $\mathcal F_{S_1}$-measurable while every $W^{(n)}$ is a functional of $W^{(1)}$, which is independent of $\mathcal F_{S_1}$ by step 2.1, so $B_{S_1}$ is independent of $(D_1,D_2,\dots)$ as well; hence the increments $(B_{S_1},D_1,D_2,\dots)$ of the sequence $(0,B_{S_1},B_{S_2},\dots)$ are independent with $P(\pm1)=\frac12$ each, and that sequence has the law of a simple symmetric random walk on $\mathbb Z$ started at $0$. [F3, step 1.1, step 2.1, step 4.1]
+5.1 Set $W^0=X$, $W^{n+1}=r(W^n)$, $\sigma_n=\sigma(W^n)$, $E_n=e(W^n)$, and $S_n=\sum_{j<n}\sigma_j$. These are measurable by step 3.1. Inductively each W^n has the law of X by step 4.1, so each sigma_n is finite and strictly positive almost surely by step 2.1. Their countable intersection is a measurable full event by [F5]. On it, finite induction gives $W^n_t=X_{S_n+t}-X_{S_n}$ simultaneously for all t, and hence the formulas for S_n and E_n in the statement. Outside this event the just-defined measurable E_n provide the promised convention; S_n are extended sums, so subsequent times after infinity stay infinite. [F5, step 2.1, step 3.1, step 4.1]
 
-6.1 The degenerate cases are consistent: $S_1>0$ and each $\sigma_n>0$ almost surely, so the sequence is strictly increasing; the case of no displacement cannot occur because $\sigma_n<\infty$ almost surely; and the conclusion concerns the law of the embedded walk, not the integrability of the $S_n$, whose expectations are infinite as on the density example of this page. AC is used only through [F4]. [F4, given, step 5.1] ∎
+6.1 Prove by induction that W^n is independent of H_n=sigma(E_0,...,E_{n-1}) and that the preceding E_j are iid with law nu=law(e(X)). For n=0 this is vacuous. If it holds at n, the pair (e(W^n),r(W^n)) is independent of H_n, since it is a measurable function of W^n. Its components are independent by step 4.1. Thus for A in H_n and Borel segment and path sets D,L, $$P(A\cap\{E_n\in D\}\cap\{W^{n+1}\in L\})=P(A)\nu(D)P(X\in L).$$ For fixed L, the pi-lambda theorem extends this identity from intersections A intersect {E_n in D} to all of H_{n+1}. It follows that W^{n+1} is independent of H_{n+1}; taking L to be the whole path space also proves E_n independent of H_n with law nu. Induction proves mutual independence of every finite family of segments, hence the asserted iid sequence. It does not assert independence of the nested entire future processes W^n. [F4, step 3.1, step 4.1, step 5.1]
+
+7.1 Negation preserves the law of X on C_0: centered independent normal increments are unchanged jointly under sign reversal by the even normal density and reflection substitution in [F6], so finite-dimensional laws agree, and [F4] and pi-lambda give equality of path laws. The map d(w)=w(sigma(w)) on finite sigma, zero otherwise, is Borel by the evaluation argument in step 3.1. Also sigma(-w)=sigma(w) and d(-w)=-d(w). Step 2.1 makes its value a sign almost surely, so its two probabilities are equal and sum to one. Each displacement d(W^n) is a function of E_n: for finite duration it is the stopped path evaluated at that duration. Step 6.1 therefore makes these displacements independent fair signs, including the first d(W^0)=X_{S_1}. Telescoping gives X_{S_n}=sum_{j<n}d(W^j) on the full event in step 5.1, proving the embedded-walk claim. [F1, F4, F6, step 2.1, step 3.1, step 5.1, step 6.1]
+
+8.1 At time zero X starts at zero and each duration is strictly positive; at exit the value is exactly one of the two endpoints. Infinite durations lie in a measurable null event and have explicit segment/remainder conventions. The empty history in the induction is the trivial sigma-algebra. The claims concern exit segments and signs; no inference about moments of a two-sided exit time is made from a one-sided hitting-time density. Full AC is inherited through [F5]; normalization uses one supplied full event, not a choice of paths. [F5, step 2.1, step 3.1, step 5.1, step 6.1, step 7.1] ∎
 
 ## Source notes
 
-Sousi, Sections 6.5-6.7, restarts Brownian motion at successive hitting times using the strong Markov property; Durrett, Section 7.3, contains the same restart pattern. The example records the excursion-level independence and the fairness of the displacements, which follow from the two-sided exit value $1/2$.
+The cited strong Markov theorem supplies independence of each restarted future
+from its own stopped history. The proof above explicitly factors this with
+independence of the earlier segments. Symmetry gives fairness directly, so no
+shifted-law hitting event or two-sided exit-probability supplier is required.

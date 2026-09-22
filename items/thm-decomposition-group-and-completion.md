@@ -4,7 +4,7 @@ title: "Decomposition group and completion"
 kind: theorem
 status: published
 origin: pipeline
-deps: [def-decomposition-group-of-a-prime, lem-number-field-completions-as-local-polynomial-factors, thm-galois-action-on-primes-above-a-prime-is-transitive, cor-galois-prime-decomposition-efg, thm-orbit-stabilizer]
+deps: [def-decomposition-group-of-a-prime, lem-number-field-completions-as-local-polynomial-factors, thm-galois-action-on-primes-above-a-prime-is-transitive, cor-galois-prime-decomposition-efg, thm-orbit-stabilizer, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -23,13 +23,15 @@ proof_strategy: direct argument
 
 ## Statement
 
-Let L/K be finite Galois and $P\mid p$ nonzero primes. Then $L_P/K_p$ is finite Galois of degree $e(P/p)f(P/p)$. Continuous extension gives a canonical isomorphism
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let L/K be finite Galois and $P\mid p$ nonzero primes. Then $L_P/K_p$ is finite Galois of degree $e(P/p)f(P/p)$. Continuous extension gives a canonical isomorphism
 $$D(P/p)\ \cong\ \operatorname{Gal}(L_P/K_p),$$
 whose inverse restricts an automorphism to the embedded copy of L.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** The Axiom of Choice and the data and hypotheses of the statement.
+
+[A1] AC has the meaning fixed in [[def-axiom-of-choice]].
 
 [F1] [[def-decomposition-group-of-a-prime]]: For finite Galois L/K and a chosen nonzero prime $P\mid p$, the **decomposition group** is the stabilizer $D(P/p)=\{\sigma\in\operatorname{Gal}(L/K):\sigma(P)=P\}.$ It is a subgroup: identity stabilizes P and stabilizers are closed under composition and inverse. The prime P, not just p, is part of the data.
 
@@ -43,9 +45,9 @@ whose inverse restricts an automorphism to the embedded copy of L.
 
 ## Proof
 
-1.1 Every element of D preserves $\operatorname{ord}_P$, so preserves the absolute value at P and extends uniquely to the completion. It fixes $K_p$ by density of K. Extension is an injective homomorphism since L embeds in its completion. [F1]
+1.1 Under [A1], every element of D preserves $\operatorname{ord}_P$, so preserves the absolute value at P and extends uniquely to the completion. It fixes $K_p$ by density of K. Extension is an injective homomorphism since L embeds in its completion. [A1, F1]
 
-1.2 Write $L=K(\alpha)$. The local factor description gives $L_P=K_p(\alpha)$ and a separable minimal polynomial over $K_p$ dividing the global minimal polynomial. Since L/K is normal, all global roots already lie in L. Thus the local polynomial splits in $L_P$, which proves that this finite extension is Galois. [F2]
+1.2 Under [A1], write $L=K(\alpha)$. The local factor description gives $L_P=K_p(\alpha)$ and a separable minimal polynomial over $K_p$ dividing the global minimal polynomial. Since L/K is normal, all global roots already lie in L. Thus the local polynomial splits in $L_P$, which proves that this finite extension is Galois. [A1, F2]
 
 2.1 For each prime Q above p the injection in the first step gives $|D(Q/p)|\le[L_Q:K_p]$. Transitivity identifies all stabilizer orders with $|G|/g$ by orbit-stabilizer. Summing these inequalities over the g primes gives $|G|\le\sum_Q[L_Q:K_p]=[L:K]=|G|$. Thus every inequality is equality. In particular the injection at P accounts for every local automorphism, since the local extension is Galois. Each is consequently the continuous extension of a unique element of D; its restriction is that element. [F2, F3, F4, F5, step 1.1, step 1.2]
 

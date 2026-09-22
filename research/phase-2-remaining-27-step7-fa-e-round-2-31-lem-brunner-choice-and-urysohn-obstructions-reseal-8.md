@@ -1,0 +1,10 @@
+# Position 31 context reseal
+
+Read the complete current Brunner proof against the internally interpreted model definition already resealed at position 7 and current choice-strength page. The changed amenability supplier is not a premise of this lemma. All coordinate constructions are internal to the ZFA+AC ground; none require external transitivity. Rational internal suprema are fixed by a finite stabilizer and hence lie among its supported cuts; otherwise a rational piecewise-affine order automorphism moves the supremum while preserving the set. Internal order completeness with endpoints proves compactness by the finite-subcover initial-segment supremum argument.
+
+For real supports, each countable compact support can be compressed into shrinking neighbourhoods of the fixed sequence support, component by component. Their union with that support is countable, bounded and closed: away from the support only finitely many compressed sets can meet a small neighbourhood. It is therefore an allowed compact support for the graph of the moved choices. Ground AC is explicit and is not asserted in the symmetric model. Supported continuous functions are constant on complement components. In the rational case finitely many boundary continuity checks identify the constants; in the real case the range is countable and the intermediate-value theorem precludes two values. Compact Hausdorff normality then gives the endpoint Urysohn obstruction.
+
+Current context preserves all those hypotheses and arguments. Retain repaired disposition on identical bytes. This support/real-topology context check is familiar enough without new external verification; no new original-source reading is claimed. No dependency or metadata edit is needed.
+
+
+Current itemHashJudge: 9f018dff4b214daa978d82b26e808e45df0d8ac59440adcad7da8a06b0c8b32a, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

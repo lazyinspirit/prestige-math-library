@@ -5,7 +5,7 @@ title: "Relative boundedness with respect to an operator"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-unbounded-linear-operator-domain-and-graph, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-bounded-linear-operator]
+deps: [def-unbounded-linear-operator-domain-and-graph, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-bounded-linear-operator]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -36,6 +36,9 @@ intrinsic, and no closedness, density or resolvent hypothesis is needed for
 the definition. If $A$ is closed with nonempty resolvent set, then $A$-bounded
 operators are exactly those with $D(A)\subseteq D(B)$ for which $BR_A(z)$ is
 bounded for some, equivalently every, $z\in\rho(A)$
-([[def-densely-defined-closed-and-closable-operator]],
-[[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]); this is used
-in the Kato-Rellich theorem below and recorded here as an interface.
+([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]). Indeed, an
+$A$-bound makes $BR_A(z)$ bounded because
+$AR_A(z)=zR_A(z)-I$; conversely, if $BR_A(z)$ is bounded, then
+$Bx=BR_A(z)(z-A)x$ gives an $A$-bound. Thus boundedness for one resolvent
+implies relative boundedness and hence boundedness for every resolvent. This
+is used in the Kato-Rellich theorem below and recorded here as an interface.

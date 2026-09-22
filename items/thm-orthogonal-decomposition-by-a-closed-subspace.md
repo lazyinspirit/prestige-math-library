@@ -46,7 +46,7 @@ so that $H=M\oplus M^\perp$ as a direct sum of the subspace $M$ and its orthogon
 
 1.1 Since $M$ is a nonempty closed convex set, $x$ has a unique nearest point $p$ in $M$. [A1, A4]
 
-2.1 The variational inequality gives $\operatorname{Re}\langle x-p,w-p\rangle\le0$ for every $w\in M$; applying it to $w=p+tu$ with $t>0$ and $u\in M$ gives $\operatorname{Re}\langle x-p,u\rangle\le0$, and replacing $u$ by $-u$ gives $\operatorname{Re}\langle x-p,u\rangle=0$, while applying it to $w=p+itu$ and using conjugate-linearity in the second argument gives $\operatorname{Im}\langle x-p,u\rangle=0$; hence $\langle x-p,u\rangle=0$ for every $u\in M$, that is $x-p\in M^\perp$. [step 1.1, A1, A2, A3, algebra]
+2.1 The variational inequality gives $\operatorname{Re}\langle x-p,w-p\rangle\le0$ for every $w\in M$. For $u\in M$, take $w=p+u$ and $w=p-u$ to obtain $\operatorname{Re}\langle x-p,u\rangle=0$. Over $\mathbb R$ the pairing is real-valued, so this already gives $\langle x-p,u\rangle=0$. Over $\mathbb C$, also $iu\in M$, and the same real-part conclusion applied to $iu$ gives $0=\operatorname{Re}\langle x-p,iu\rangle=\operatorname{Re}(-i\langle x-p,u\rangle)=\operatorname{Im}\langle x-p,u\rangle$. Thus in either scalar field $\langle x-p,u\rangle=0$ for every $u\in M$, that is $x-p\in M^\perp$. [step 1.1, A1, A2, A3, algebra]
 
 3.1 Setting $m=p$ and $n=x-p$ gives a decomposition $x=m+n$ with $m\in M$ and $n\in M^\perp$. [step 2.1, A3]
 

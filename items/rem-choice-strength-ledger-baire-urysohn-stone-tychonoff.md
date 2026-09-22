@@ -4,7 +4,7 @@ kind: remark
 title: "Choice ledger for Baire, Urysohn, Stone, and Tychonoff"
 status: draft
 origin: pipeline
-deps: [thm-separable-complete-metric-baire-in-zf, thm-dmc-implies-compact-hausdorff-baire, thm-compact-hausdorff-baire-iff-dmc, thm-dc-iff-products-compact-hausdorff-are-baire, thm-dmc-implies-urysohn-lemma, rem-dmc-versus-dc-over-zf-is-open, thm-stone-metric-spaces-are-paracompact, thm-products-of-cofinite-spaces-compact-iff-bpi, thm-compact-t1-product-theorem-iff-ac, thm-arbitrary-compact-product-theorem-iff-ac, rem-urysohn-implies-dmc-open-status, rem-stone-exact-choice-strength-open-status, cor-brunner-models-also-refute-tietze-extension, cor-bpi-does-not-imply-dmc, cor-dmc-is-not-provable-in-zf, rem-dmc-mc-ac-zfa-qualification, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, thm-relative-consistency-dc-without-stone, thm-relative-consistency-bpi-without-stone]
+deps: [thm-separable-complete-metric-baire-in-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, thm-dmc-implies-compact-hausdorff-baire, thm-compact-hausdorff-baire-iff-dmc, thm-dc-iff-products-compact-hausdorff-are-baire, thm-dmc-implies-urysohn-lemma, rem-dmc-versus-dc-over-zf-is-open, thm-stone-metric-spaces-are-paracompact, thm-products-of-cofinite-spaces-compact-iff-bpi, thm-compact-t1-product-theorem-iff-ac, thm-arbitrary-compact-product-theorem-iff-ac, rem-urysohn-implies-dmc-open-status, rem-stone-exact-choice-strength-open-status, cor-brunner-models-also-refute-tietze-extension, cor-bpi-does-not-imply-dmc, cor-dmc-is-not-provable-in-zf, rem-dmc-mc-ac-zfa-qualification, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, thm-relative-consistency-dc-without-stone, thm-relative-consistency-bpi-without-stone]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -36,7 +36,9 @@ metric Baire is DC; compact-Hausdorff Baire is exactly DMC; Baireness of
 products of compact Hausdorff spaces is DC; DMC implies Urysohn's lemma, while,
 relative to the consistency of ZF, countable choice and BPI are each consistent
 with the failure of Urysohn's lemma and of bounded Tietze extension; Stone
-follows from AC but neither DC nor BPI suffices; the stronger
+follows from AC, while relative to the consistency of ZF both DC and BPI are
+separately consistent with a metrizable space having an open cover with no
+locally finite open refinement; the stronger
 per-cover effective refinement assertion for discrete metrizable spaces implies
 AC; compact Hausdorff products and cofinite products have the strength of BPI;
 compact $T_1$ and arbitrary compact products have the strength of AC. DC
@@ -45,7 +47,10 @@ $\mathrm{ZF}$ remains open.
 
 ## Remarks
 
-- **Baire rows.** [[thm-separable-complete-metric-baire-in-zf]] is ZF;
+- **Baire rows.** [[thm-separable-complete-metric-baire-in-zf]] is ZF, whereas
+  [[thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf]]
+  proves over ZF that the unrestricted complete-metric Baire principle is
+  equivalent to DC;
   [[thm-dmc-implies-compact-hausdorff-baire]] gives DMC implies compact-Hausdorff
   Baire, [[thm-compact-hausdorff-baire-implies-dmc]] gives the converse and
   [[thm-compact-hausdorff-baire-iff-dmc]] packages the equivalence;
@@ -61,7 +66,10 @@ $\mathrm{ZF}$ remains open.
 
 - **Stone rows.** [[thm-stone-metric-spaces-are-paracompact]] is the AC row;
   [[thm-relative-consistency-dc-without-stone]] and
-  [[thm-relative-consistency-bpi-without-stone]] are the separations;
+  [[thm-relative-consistency-bpi-without-stone]] are relative-consistency
+  separations from DC and BPI, respectively. In the BPI model the sharper
+  obstruction is a metrizable space with an open cover having no point-finite
+  open refinement, hence no locally finite open refinement;
   [[thm-effective-metacompact-discrete-metrics-implies-ac]] is the effective
   strengthening, and the exact strength of the ordinary theorem is recorded as
   open in [[rem-stone-exact-choice-strength-open-status]].

@@ -1,0 +1,10 @@
+# Position 37 context reseal
+
+Read the complete current null-code-order proof against the current completed-measure and L[x] definitions already inspected. Checked https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/25-descriptive_set_theory.pdf, printed pp.494–495: Theorem 25.26 and the complete proof of Lemma 25.27, including the countable transitive-model certificate for the complete predecessor list and the stated relativization. The PDF was retrieved from that exact URL and the relevant pages read through PyMuPDF. This supports the specialized coding interface, not a new proof of Fubini.
+
+The local certificate contains the well-founded structure as part of the witness; hence the certificate check is coanalytic and a leading existential code yields Sigma-one-two. In the displayed formula, d contains u, does not contain v, and no predecessor of d contains v; the existence of a constructible code containing v therefore makes d strictly earlier than the least v-code. Conversely the least u-code witnesses every strict comparison. Countable predecessors give null horizontal sections under the stated Countable Choice. Completed-product Fubini gives a null exceptional set for vertical sections. Either G lies in that exceptional set, or one u in G outside it splits G into its null lower section, one null layer and its null upper section. Thus no measurability of G was presupposed.
+
+The changed forcing branch does not enter this proof. The completed carrier remains the one fixed at position 6, and the hierarchy remains the one fixed at position 15. Retain repaired disposition and unchanged bytes. No dependency or metadata change, and no new consumer-ledger edge, is needed.
+
+
+Current itemHashJudge: 48d5a837d60444ba2db5f7d098006cea69f9db34b09b20349ac29161a549abd7, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

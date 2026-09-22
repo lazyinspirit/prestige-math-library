@@ -1,0 +1,11 @@
+# FA position 69 — repaired
+
+Independently read the item, six original dependency interfaces, current Chern/Pontryagin A/B pages, batch-9 manifest and both relevant coverage entries, proof contract and high risk record (score 6), original Terra row 512, Alpha's row and final Terra row 1596. Rejected SHA-256: 8a6554a7b9650c323150ce401286efa237a5c7475ed4a3778c3562d62bc1757a.
+
+Alpha's transition-matrix comparisons are the right repair to the original supplier overstatement, but the final Terra rejection is valid: “every pullback” exceeded the Chern-class interface. The statement now explicitly specifies continuous maps between nonempty path-connected paracompact Hausdorff CW bases, with numerable bundles, matching the page and the mod-two comparison supplier. F2 and F3 now carry these qualifications; F5 states only the actual transition-matrix interface, rather than attributing scalar extension to a definition that does not give it.
+
+The mathematical calculation was independently checked. The same real transition matrices, viewed as complex matrices, commute with pullback and with block sums. The real-linear map v tensor(a+ib) to (av,bv) has inverse (x,y) to x tensor1+y tensor i; both are continuous in charts and commute with real transition functions. Thus (E_C)_R is E plus E. Chern reduction gives rho_2 c_{2i}(E_C)=w_{4i}(E plus E). The Whitney formula and graded commutativity over F2 cancel the off-diagonal terms in the finite square of total w, leaving precisely w_{2i}(E)^2 in degree 4i. Reduction removes (-1)^i. Stability follows from the trivial complex summand. The added exact Stiefel–Whitney definition supplies w_0, rank-zero and above-rank conventions, so both sides vanish when 2i exceeds the real rank.
+
+Added and read the graded-commutativity and Stiefel–Whitney convention interfaces; synchronized own manifest, both proof contracts and owning consumer dependency record, then refreshed briefs/tasks/frontier-dependency-ledger.md. No supplier or published edit and no added item. This is familiar characteristic-class algebra with explicit bundle comparisons, so external verification was unnecessary.
+
+Focused precheck: 1 checked, 0 failing. Strict own contract: 0 errors, 0 warnings. Queue-status shows all positions 1–68 current, no stale predecessors. Terminal resolution only; no judge verdict or pass stamp.

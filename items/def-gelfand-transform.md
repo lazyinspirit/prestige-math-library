@@ -5,11 +5,16 @@ title: Gelfand transform
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-character-and-maximal-ideal-space, def-unital-banach-algebra, thm-maximal-ideal-space-is-compact-hausdorff, def-axiom-of-choice]
+deps: ["def-character-and-maximal-ideal-space", "def-unital-banach-algebra", "thm-maximal-ideal-space-is-compact-hausdorff", "def-axiom-of-choice", "thm-spectrum-as-character-values"]
 justified_by: []
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Definition 3.1.17, printed pp. 61–62"
@@ -44,10 +49,17 @@ of Choice is assumed ([[def-axiom-of-choice]]), then
 [[thm-maximal-ideal-space-is-compact-hausdorff]] makes $\Delta(A)$ compact and
 $C(\Delta(A))$ carries its supremum norm.
 
+The formula also makes sense if $\Delta(A)$ is empty: every transform is the
+unique function on the empty set. It sends $0$ to the zero function. For any
+character choose $b$ with $\chi(b)\ne0$; the equality
+$\chi(b)=\chi(1)\chi(b)$ gives $\chi(1)=1$. Thus the unit maps to the
+constant-one function (also well defined on an empty character space).
+
 Two qualifications are part of the definition:
 
 - the notation is introduced for **unital commutative** algebras here; the
-  nonunital version with target $C_0(\Delta(A))$ is a theorem proved later
+  nonunital version with target $C_0(\Delta(A))$ for commutative C*-algebras
+  under AC is a theorem proved later
   ([[thm-nonunital-commutative-gelfand-naimark]]) and is not smuggled into the
   definition;
 - no injectivity, surjectivity, isometry or *-preservation is claimed at this
@@ -60,7 +72,8 @@ Two qualifications are part of the definition:
 - **Notation.** We write $\hat a$ for $\Gamma_A(a)$ and drop the subscript
   $\Gamma = \Gamma_A$ when the algebra is clear; the algebra, not the element,
   is what $\Gamma$ encodes.
-- **Values are character values.** With the definition in hand, the identity
+- **Values are character values.** If $A$ is a nonzero commutative unital
+  complex Banach algebra and AC is assumed, the identity
   $\sigma_A(a) = \{\chi(a) : \chi \in \Delta(A)\}$ of
   [[thm-spectrum-as-character-values]] reads
   $\operatorname{ran}(\hat a) = \sigma_A(a)$, which is the form in which the

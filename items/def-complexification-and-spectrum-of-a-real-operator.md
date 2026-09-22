@@ -5,8 +5,9 @@ title: Complexification and spectrum of a real operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-bounded-linear-operator, lem-canonical-banach-complexification-of-a-real-banach-space, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-spectral-radius]
+deps: ["def-bounded-linear-operator", "lem-canonical-banach-complexification-of-a-real-banach-space", "def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-spectral-radius", "def-axiom-of-choice", "thm-bounded-operator-space-is-banach", "def-operator-norm", "def-unital-banach-algebra"]
 justified_by: []
+axiom_strength: "ZF + AC; inherited by spectral-radius existence."
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -20,6 +21,7 @@ sources:
 
 ## Definition
 
+Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited by the spectral-radius definition.
 Let $X$ be a nonzero real Banach space and let $T : X \to X$ be a bounded real-linear
 operator ([[def-bounded-linear-operator]]). Let
 $X_{\mathbb C} = X \times X$ be the canonical complexification with the
@@ -35,6 +37,14 @@ $$\sigma(T) := \sigma_{\mathcal B(X_{\mathbb C})}(T_{\mathbb C}), \qquad \rho(T)
 
 with the conventions of [[def-spectrum-and-resolvent-set-in-a-banach-algebra]]
 and [[def-spectral-radius]].
+
+The operator algebra is complete by [[thm-bounded-operator-space-is-banach]].
+Composition is bilinear and associative, and
+$\|STu\|\le\|S\|\|T\|\|u\|$ gives submultiplicativity by
+[[def-operator-norm]]. Its identity has norm one: it is bounded by one,
+and a nonzero vector, normalized to norm one, gives equality. Thus it is
+nonzero and satisfies [[def-unital-banach-algebra]]. The same argument applies
+to each comparison model below, since its embedded real copy is nonzero.
 
 **Well-definedness (independence of the complexification model).** Let $Z$ be
 another compatible complexification of $X$ in the sense of claim 3 of
@@ -64,11 +74,20 @@ computed below in the canonical model.
 
 - **Why not "real $\lambda$ with $\lambda I - T$ not invertible".** Restricting
   the discussion to real scalars would discard the genuinely complex part of
-  the spectrum: a real rotation matrix in the plane has no real eigenvalue but
-  has the two nonreal spectral values $\pm i$. The definition above computes
-  the spectrum of the complex-linear extension, which is the convention used by
-  the surrounding theory; for $T$ with a complexification that happens to be a
-  real Banach space regarded over $\mathbb C$, the two notions do agree.
+  the spectrum. For example the quarter-turn $J(u,v)=(-v,u)$ on
+  Euclidean $\mathbb R^2$ has complexified spectrum exactly $\{i,-i\}$:
+  $J^2=-I$, so for $z^2+1\ne0$ the inverse of $zI-J$ is
+  $(zI+J)/(z^2+1)$; at $z=i,-i$ the respective nonzero complex vectors
+  $(1,-i)$ and $(1,i)$ are in the kernel. Its real-scalar resolvent is all
+  of $\mathbb R$, whereas its complex spectrum is nonempty.
+  More precisely the real-scalar noninvertibility set equals
+  $\sigma(T)\cap\mathbb R$. Indeed, a bounded real inverse extends
+  componentwise to a bounded complex inverse. Conversely, for real $z$ the
+  operator $zI-T_{\mathbb C}$ commutes with the canonical conjugation
+  $C(x,y)=(x,-y)$, which is isometric by replacing $\theta$ with $-\theta$
+  in the norm formula. Its bounded inverse therefore also commutes with $C$
+  and restricts to a bounded inverse on its fixed real copy $X\times\{0\}$.
+  This gives both directions without conflating real and complex spectra.
 
 - **The operator is bounded by hypothesis.** The same-norm extension statement
   of the complexification lemma is used only for bounded real-linear $T$; it is

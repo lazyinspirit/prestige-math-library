@@ -10,7 +10,8 @@ provenance:
 deps: [def-banach-space, def-completion-of-a-normed-space,
        lem-completion-operations-are-well-defined,
        thm-metric-completion-exists,
-       lem-vector-operations-are-continuous-in-a-normed-space]
+       lem-vector-operations-are-continuous-in-a-normed-space,
+       def-countable-choice]
 justified_by: []
 aliases: []
 landmark: true
@@ -30,17 +31,20 @@ pipeline_run: frontier-27
 
 ## Statement
 
-Let $X$ be a normed space. The published metric completion of the norm metric on
-$X$ admits a unique vector-space structure and norm whose induced metric is the
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a
+normed space. The published metric completion of the norm metric on $X$ admits
+a unique vector-space structure and norm whose induced metric is the
 published completion metric and such that the constant sequence embedding
 $i:X\to \widehat X$ is a dense linear isometry. With this structure,
 $\widehat X$ is a Banach space.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$, its published metric completion $\widehat X$ by Cauchy classes, and the constant-sequence embedding $i:X\to\widehat X$.
+**Given:** The Axiom of Countable Choice; a normed space $X$, its published metric completion $\widehat X$ by Cauchy classes, and the constant-sequence embedding $i:X\to\widehat X$.
 
-[L1] The published metric completion exists, is complete, and $i[X]$ is dense in it ([[thm-metric-completion-exists]]).
+[A1] Countable Choice has the meaning fixed in [[def-countable-choice]].
+
+[L1] Under Countable Choice, the published metric completion exists, is complete, and $i[X]$ is dense in it ([[thm-metric-completion-exists]]).
 
 [L2] Termwise addition, scalar multiplication, and the limiting norm on Cauchy classes are well defined ([[lem-completion-operations-are-well-defined]]).
 
@@ -58,7 +62,7 @@ $\widehat X$ is a Banach space.
 
 2.2 For classes $[x_n]$ and $[y_n]$, the distance of the published metric completion is $\lim_n\|x_n-y_n\|$, while the new difference class is $[x_n-y_n]$; therefore the completion metric is exactly the metric induced by the norm from step 1.1. [step 1.1, L1, L2]
 
-3.1 Because the underlying metric space is complete by [L1], step 2.2 makes $\widehat X$ complete for its new norm metric. So $\widehat X$ is Banach and $(\widehat X,i)$ is a completion of $X$ in the sense of [L3]. [step 2.1, step 2.2, L1, L3]
+3.1 By [A1], the underlying metric space is complete by [L1], so step 2.2 makes $\widehat X$ complete for its new norm metric. Thus $\widehat X$ is Banach and $(\widehat X,i)$ is a completion of $X$ in the sense of [L3]. [step 2.1, step 2.2, A1, L1, L3]
 
 3.2 Suppose a second Banach-space structure on the same underlying set induces the published completion metric and also makes $i$ a dense linear isometry. Its addition and scalar multiplication are continuous by [L4], and they agree with the operations of step 1.1 on the dense subset $i[X]\times i[X]$ and on $\mathbb K\times i[X]$; therefore they agree everywhere. [step 2.1, L4]
 

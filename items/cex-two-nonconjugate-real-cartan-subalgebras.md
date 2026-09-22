@@ -36,7 +36,7 @@ are conjugate by an inner automorphism of $\mathfrak{sl}_2(\mathbb R)$.
 
 [L3] The lines $\mathbb RK_0$ and $\mathbb RH$ are $\theta$-stable Cartan subalgebras of $\mathfrak{sl}_2(\mathbb R)$: $\mathbb RK_0$ is the compact one and $\mathbb RH$ the split one ([[ex-compact-and-split-cartan-subalgebras-of-sl-two-r]], [[ex-cartan-involution-and-k-plus-p-for-sl-n-r]]).
 
-[L4] The two Cartan subalgebras $\mathbb RH$ and $\mathbb R i h_B=\mathbb RK_0$ of $\mathfrak{sl}_2(\mathbb R)$ are not conjugate by any real inner automorphism ([[prop-real-cartan-subalgebras-need-not-be-conjugate]]).
+[L4] The two Cartan subalgebras $\mathbb RH$ and $\mathbb RK_0$ of $\mathfrak{sl}_2(\mathbb R)$ are not conjugate by any real inner automorphism ([[prop-real-cartan-subalgebras-need-not-be-conjugate]]).
 
 
 

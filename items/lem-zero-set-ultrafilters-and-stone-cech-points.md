@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "L. Gillman, M. Henriksen and M. Jerison, On a Theorem of Gelfand and Kolmogoroff Concerning Maximal Ideals in Rings of Continuous Functions (1954) — §2, Theorem 1 proof, pp. 448–449. This endpoint was inaccessible in the current run; the complete local alternative and failed recovery record are in the Batch 4 coverage ledger."
@@ -41,7 +46,16 @@ is a **bijection** from $\beta X$ onto the set of z-ultrafilters on $X$
 
 [L3] A family of closed subsets of a compact space has nonempty intersection whenever every finite subfamily has nonempty intersection: otherwise the complements form an open cover and a finite subcover exhibits a finite subfamily with empty intersection.
 
-[L4] If $Z = Z(f)$ with $f \in C(X)$ and $\tilde f := \min(1,|f|) \in C(X,[0,1])$, then $Z(\tilde f) = Z$ and for every $u \in C(X,[0,1])$ the quotient $u\,\tilde f_1/(\tilde f_1+\tilde f_2)$ (with value $0$ where $\tilde f_1 = \tilde f_2 = 0$) is a continuous $[0,1]$-valued function vanishing on $Z(f_1)$ and bounded by $|u|$; this elementary construction is used in [step 3.1] to write $u$ as $u_1+u_2$ with $u_i$ vanishing on $Z_i$. [algebra]
+[L4] If $Z_i=Z(f_i)$ and
+$\tilde f_i:=\min(1,|f_i|)\in C(X,[0,1])$, then
+$Z(\tilde f_i)=Z_i$. If $u\in C(X,[0,1])$ vanishes on $Z_1\cap Z_2$, define
+$$
+u_i=\frac{u\,\tilde f_i}{\tilde f_1+\tilde f_2}\quad\text{off }Z_1\cap Z_2,\qquad u_i=0\quad\text{on }Z_1\cap Z_2.
+$$
+Each $u_i$ is continuous: away from the common zero this is a quotient of
+continuous functions, while at a common zero $|u_i|\le |u|\to0$. Moreover
+$u_1+u_2=u$, $u_i$ is $[0,1]$-valued, and $u_i$ vanishes on $Z_i$.
+This is the decomposition used in [step 3.1]. [algebra]
 
 ## Proof
 

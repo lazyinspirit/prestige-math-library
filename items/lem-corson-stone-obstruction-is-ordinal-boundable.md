@@ -36,7 +36,7 @@ $\omega + 41$ of the source's Lemma 5.
 
 [L1] With the standard set encodings, $\omega\in V_{\omega+1}(\varnothing)$, and successively constructing $(\omega,+)$, $\mathbb Z$, $(\mathbb Z,+)$, $\mathbb Q$, and $(\mathbb Q,+)$ puts $(\mathbb Q,+)$ in $V_{\omega+30}(\varnothing)$. [source, Corson Lemma 5]
 
-[L2] If $X$ is a set, then $X\times X\in V_2(X)$; hence a function $d:X\times X\to\mathbb Q$ lies in $V_{\omega+33}(X)$. A family of subsets of $X$ lies in $V_2(X)$; an ordered triple $(X,d,\mathcal U)$ lies in $V_{\omega+37}(X)$; and a function from a natural number into an open cover of $X$ lies in $V_{\omega+41}(X)$. [L1, source, Corson Lemma 5]
+[L2] With Kuratowski ordered pairs, each $(x,y)$ for $x,y\in X$ lies in $V_2(X)$, so the set $X\times X$ of all those pairs lies in $V_3(X)$, not necessarily in $V_2(X)$. The larger stated bounds remain valid: the pure rational codebook from [L1] dominates this one-level correction, so a function $d:X\times X\to\mathbb Q$ lies in $V_{\omega+33}(X)$; a family of subsets of $X$ lies in $V_2(X)$; an ordered triple $(X,d,\mathcal U)$ lies in $V_{\omega+37}(X)$; and a function from a natural number into an open cover of $X$ lies in $V_{\omega+41}(X)$. [L1, source, Corson Lemma 5]
 
 ## Proof
 

@@ -5,7 +5,7 @@ title: "Norm and strong resolvent convergence"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-resolvent-and-spectrum-of-a-closed-unbounded-operator, thm-self-adjoint-resolvent-estimate, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-operator-norm, def-bounded-linear-operator, def-weak-convergence-of-nets-and-sequences]
+deps: [def-countable-choice, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, thm-self-adjoint-resolvent-estimate, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-operator-norm, def-bounded-linear-operator, def-weak-convergence-of-nets-and-sequences]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -19,7 +19,8 @@ sources:
 
 ## Definition
 
-Let $A_n$ $(n\in\mathbb N)$ and $A$ be self-adjoint operators on the same
+Assume Countable Choice ([[def-countable-choice]]). Let $A_n$
+$(n\in\mathbb N)$ and $A$ be self-adjoint operators on the same
 Hilbert space $H$ and fix a nonreal $z_0$. One writes $A_n\to A$ in the
 **norm resolvent sense** when
 $$\|R_{A_n}(z_0)-R_A(z_0)\|\longrightarrow0$$

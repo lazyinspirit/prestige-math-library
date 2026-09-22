@@ -32,7 +32,7 @@ semisimple if and only if $\mathfrak g_{\mathbb C}$ is semisimple.
 
 **Given:** A finite-dimensional real Lie algebra $\mathfrak g_0$ with complexification $\mathfrak g_{\mathbb C}=\mathfrak g_0\otimes_{\mathbb R}\mathbb C$ and canonical real embedding $\varepsilon(X)=X\otimes1$.
 
-[L1] For a finite-dimensional Lie algebra $\mathfrak l$ with Killing form $B_{\mathfrak l}$, the algebra is semisimple if and only if $B_{\mathfrak l}$ is nondegenerate; the Killing form is the trace form of the adjoint representation, $B_{\mathfrak l}(X,Y)=\operatorname{tr}(\operatorname{ad}_X\circ\operatorname{ad}_Y)$ ([[thm-cartans-semisimplicity-criterion]], [[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
+[L1] For a finite-dimensional Lie algebra $\mathfrak l$ over a field of characteristic zero (in particular over $\mathbb R$ or $\mathbb C$), the algebra is semisimple if and only if $B_{\mathfrak l}$ is nondegenerate; the Killing form is the trace form of the adjoint representation, $B_{\mathfrak l}(X,Y)=\operatorname{tr}(\operatorname{ad}_X\circ\operatorname{ad}_Y)$ ([[thm-cartans-semisimplicity-criterion]], [[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
 
 [L2] The complexification carries the bracket $[X\otimes z,Y\otimes w]=[X,Y]\otimes zw$ and every element has a unique expression $X\otimes1+i\,Y\otimes1$ with $X,Y\in\mathfrak g_0$; the embedded copy of $\mathfrak g_0$ is a real form, in particular a real Lie subalgebra ([[def-complexification-of-a-real-lie-algebra]]).
 

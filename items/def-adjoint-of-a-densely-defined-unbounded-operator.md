@@ -57,7 +57,9 @@ $\langle x,aw+bw'\rangle=\overline a\langle x,w\rangle+
 \overline b\langle x,w'\rangle$; the representing vector is unique. By Riesz representation for the Hilbert space
 $H$ a vector $w\in H$ is determined by the values $\langle z,w\rangle$ with
 $z$ ranging over $H$, and those values are determined by the functional
-$\widetilde{\varphi_y}$; uniqueness also follows directly by taking
-$x\mapsto\langle Tx,y-y'\rangle$ with $T$ densely defined. Finally only
+$\widetilde{\varphi_y}$. Equivalently, if $w,w'$ both represent $\varphi_y$,
+then $\langle x,w-w'\rangle=0$ for every $x\in D(T)$; density of $D(T)$ and
+continuity of the inner product extend this equality to every $x\in H$, and
+taking $x=w-w'$ gives $w=w'$. Finally only
 ambient-norm boundedness of $\varphi_y$ on $D(T)$ is required: no extension,
 no closure and no closedness of $T$ is presupposed.

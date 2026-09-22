@@ -31,7 +31,9 @@ write judge verdicts or stamps. Published content, scope changes, deletion,
 and reading-order changes require the exact task-authorised protocol. Step-7
 adjudicators may add fully proved missing-dependency lemmas and register them
 on their owned pages under the Step-7 task's explicit exception; otherwise
-report the issue without changing it.
+report the issue without changing it. Current Step-7 dispatches also follow
+`step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
+published downstream repairs across the whole library.
 
 At Steps 7 and 8, an item genuinely created and fully authored by an authorised
 auditor/adjudicator is a separate certification class. Do not manufacture a
@@ -39,11 +41,13 @@ judge verdict or send that addition through a judge/audit-repair loop. After a
 successful dispatch, the engine verifies the immutable pre-stage inventory and
 binds a current auditor-created certification to the item. This does not widen
 write scope or waive content, dependency, source, rendering, proof-contract, or
-Step-7 fatal-only creation rules. Existing-item edits still require ordinary
+Step-7 task ownership rules. Existing-item edits still require ordinary
 current judge evidence.
 
 ## Review and repair standard
 
+Logical validity is the ground truth; authoritative sources and judges can err.
+State uncertainty honestly and consult primary sources when unsure.
 Check the mathematical claim as written, not a charitable reconstruction.
 Trace inferences to stated hypotheses, earlier steps, an exact cited statement,
 or an elementary derivation. Preserve domains, quantifiers, hypotheses,
@@ -65,11 +69,11 @@ its prior `verification.judge` record.
 
 Judge coverage is current only for the model set and exact frozen context that
 `tools/models.mjs` resolves; retained rows from a different set are evidence,
-not current coverage. In a Step-7 adjudication, only a `confirmed_fatal`
-outcome for the exact assigned rejection licenses a content repair.
-`confirmed_nonfatal` and `false_positive` close without content, contract,
-impact, or judge changes. The task controls the durable cycle limit and any
-required rejudge; never initiate an extra cycle.
+not current coverage. Current Step-7 adjudication repairs every confirmed defect,
+including `confirmed_nonfatal`; `confirmed_fatal` additionally enters the fatal
+threshold count. A `false_positive` requires evidence without unnecessary edits.
+The task controls repair ownership, fresh downstream continuation and any
+required rejudge; never initiate a cycle independently.
 
 Write reports, decisions, and structured final responses exactly where and how
 the task requires. Use the prescribed append interface for shared JSONL
@@ -191,7 +195,7 @@ files under `items/` for that.
 - `lem-metrizable-spaces-are-collectionwise-normal` · lemma — Metrizable spaces are collectionwise normal
 - `thm-moore-spaces-are-subparacompact` · theorem — Moore spaces are subparacompact
 - `lem-collectionwise-normal-moore-spaces-are-screenable` · lemma — Collectionwise normal Moore spaces are screenable
-- `lem-sigma-cellular-base-yields-a-compatible-metric` · lemma — A sigma-cellular base yields a compatible metric
+- `lem-sigma-cellular-base-yields-a-compatible-metric` · lemma — A sigma-cellular base metrizes a normal Moore space
 - `thm-normal-screenable-moore-spaces-are-metrizable` · theorem — Normal screenable Moore spaces are metrizable
 - `thm-collectionwise-normal-moore-spaces-are-metrizable` · theorem — Collectionwise normal Moore spaces are metrizable
 - `def-q-sets-and-heath-moore-space-interface` · definition — Q-sets and Bing's tangent-disk Moore-space interface
@@ -227,7 +231,7 @@ files under `items/` for that.
 ### `shelahs-baire-property-model-and-inner-model-lower-bounds` — Shelah's Baire-Property Model and Inner-Model Lower Bounds (29 item(s))
 
 - `def-shelah-sweetness-model` · definition — Shelah sweetness models for forcing
-- `lem-shelah-sweet-forcings-are-sigma-directed-ccc` · lemma — Sweet forcings are sigma-directed and ccc
+- `lem-shelah-sweet-forcings-are-sigma-directed-ccc` · lemma — Sweet forcings are countable unions of directed sets and ccc
 - `lem-shelah-sweet-density-transfer-along-complete-suborders` · lemma — Sweet density transfers along complete suborders
 - `thm-shelah-sweet-amalgamation-preserves-sweetness` · theorem — Shelah amalgamation preserves sweetness
 - `def-shelah-universal-meagre-forcing` · definition — Shelah's universal-meagre forcing
@@ -249,7 +253,7 @@ files under `items/` for that.
 - `thm-rapid-filters-are-not-lebesgue-measurable` · theorem — Rapid filters are not Lebesgue measurable
 - `lem-measurable-null-code-orders-bound-constructible-null-unions` · lemma — A measurable null-code order bounds the constructible null union
 - `lem-uniform-null-g-delta-capture-functions` · lemma — Uniform null G-delta sets capture block functions
-- `thm-raisonnier-filter-is-rapid-from-null-code-measurability` · theorem — Null-code measurability makes the Raisonnier filter rapid
+- `thm-raisonnier-filter-is-rapid-from-null-code-measurability` · theorem — Uniform null-code measurability makes the Raisonnier filter rapid
 - `lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one` · lemma — Failure of inaccessibility in L produces a real with correct omega-one
 - `thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l` · theorem — Sigma-one-three measurability makes omega-one inaccessible in L
 - `thm-all-real-sets-measurable-gives-an-inaccessible-inner-model` · theorem — All-real-set measurability yields an inaccessible inner model
@@ -283,7 +287,7 @@ files under `items/` for that.
 - `def-fredholm-map-between-banach-manifolds` · definition — Fredholm map between Banach manifolds
 - `lem-local-finite-dimensional-reduction-for-a-fredholm-map` · lemma — Local finite-dimensional reduction for a Fredholm map
 - `prop-the-index-of-a-fredholm-map-is-locally-constant` · proposition — The index of a Fredholm map is locally constant
-- `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` · remark — Surjectivity alone does not give a Banach submanifold without a split kernel
+- `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` · remark — Surjectivity alone does not imply a complemented kernel
 
 ### `banach-space-differential-calculus-and-banach-manifolds-examples` — Banach-Space Differential Calculus and Banach Manifolds: Examples (5 item(s))
 
@@ -321,11 +325,11 @@ files under `items/` for that.
 
 - `ex-diagonal-schatten-class-criteria-on-ell-two` · example — Diagonal Schatten class criteria on ell two
 - `ex-volterra-operator-is-hilbert-schmidt-and-quasinilpotent` · example — Volterra operator is Hilbert Schmidt and quasinilpotent
-- `ex-rank-one-operator-adjoint-norm-and-trace` · example — Rank one operator adjoint norm and trace
+- `ex-rank-one-operator-adjoint-norm-and-trace` · example — Adjoint, norm and trace of an operator of rank at most one
 - `ex-integral-operator-trace-under-a-valid-diagonal-hypothesis` · example — Integral operator trace under a valid diagonal hypothesis
 - `cex-compact-does-not-imply-hilbert-schmidt` · counterexample — Compact does not imply Hilbert Schmidt
 - `cex-hilbert-schmidt-does-not-imply-trace-class` · counterexample — Hilbert Schmidt does not imply trace class
-- `cex-trace-of-products-is-not-cyclic-without-summability` · counterexample — Trace of products is not cyclic without summability
+- `cex-trace-of-products-is-not-cyclic-without-summability` · counterexample — The unilateral shift obstructs a cyclic linear trace extension
 - `rem-schatten-p-classes` · remark — Schatten p classes
 
 ## Your seams
@@ -358,6 +362,11 @@ Return only the supplied Step-7 context JSON. `pages_read`, `items_read`, and
 group's conventions, load-bearing items, opened published dependencies, and
 concrete concerns; an empty concerns or alerts list is valid.
 
+The reply is parsed as JSON, so every backslash inside a string is an escape:
+write a LaTeX command as a doubled backslash (`\\perp`, `\\omega`), never as
+`\perp`. An invalid escape invalidates the whole digest. When a symbol is
+available in plain text or Unicode (⊥, ω, ≤, ∈), prefer it over TeX.
+
 Inventory boundary: `pages_read` must contain exactly the ids under **Your
 pages**, and `items_read` exactly the ids under **Your content**, with no extras.
 Opening a published dependency does not expand either inventory; record its item
@@ -383,6 +392,13 @@ exclude dispatch logs from routine content searches. Fetch complete relevant sou
 sections and dependency statements, using bounded output chunks. A truncated result
 is not evidence of absence; continue reading until the required argument is complete.
 Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+Read each file ONCE per session, in the order the task gives it, and pull only the sections
+and clauses you need — use the rendered evidence bundle first, and read the cited lines
+rather than re-reading whole items. Budget the context you carry: this same
+context is re-sent on every turn. The bundle is an entry point, never a fence: read
+whatever else the mathematics requires, including other items of this frontier and the
+published library, and search the web when a source must be checked.
 
 For writing roles, after each completed item update the task-authorized notes or report with the
 current item IDs, exact claim and conventions, source paths/URLs and locators,

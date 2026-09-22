@@ -1267,10 +1267,18 @@ Items:
 19. `thm-trace-is-absolutely-convergent-and-basis-independent` (theorem).
 20. `thm-cyclicity-of-the-trace` (theorem) — $\operatorname{tr}(ST)=\operatorname{tr}(TS)$ whenever one factor is trace class and the other bounded.
 21. `thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues` (theorem).
+22. `rem-external-separable-trace-class-fredholm-determinant-theorem` (remark, external) — source-backed separable determinant, spectral-product, zero-order, growth and continuity package.
+23. `def-fredholm-determinant` (definition) — extend the determinant to an arbitrary complex Hilbert space through a separable reducing support, including the zero space.
+24. `prop-fredholm-determinant-properties-for-trace-class-operators` (proposition) — transfer the external separable properties and prove the logarithmic derivative formula.
+25. `thm-lidskii-for-trace-class-operators` (theorem) — general nonnormal Lidskii, explicitly conditional on item 22.
 
 The Hilbert--Schmidt definition, basis independence, compactness theorem, and
-$L^2$-kernel theorem live only in §14.5's earlier square-kernel pair. Lidskii
-lives only in §14.5's later Fredholm-determinant pair and is not an FA-16 item.
+$L^2$-kernel theorem live only in §14.5's earlier square-kernel pair.  By the
+owner-authorized Step-8 inclusion, the stable determinant and Lidskii identities
+now live here as draft items 22--25, with the exact label that their proofs use
+external results not yet established in this library.  Section 14.5's later
+pair remains the plan for internalizing those external inputs, not a second
+copy of `def-fredholm-determinant` or `thm-lidskii-for-trace-class-operators`.
 
 **Choice and proof plan.**  A sequence of approximate maximizers uses
 countable choice under the library's ordinary completeness convention.  The
@@ -1278,8 +1286,10 @@ spectral theorem itself constructs a countable list only for the nonzero
 spectral subspaces; a basis for a possibly nonseparable kernel is a separate
 AC consequence and is not smuggled into item 5. Basis independence of the
 trace is proved first for finite sums, then by monotone/absolute convergence.
-Lidskii is deliberately deferred to the dedicated Fredholm-determinant A/B
-pair because its complete proof requires that pair's determinant machinery.
+The included Lidskii proof is logically complete relative to the source-backed
+external determinant theorem; the complete exterior-power, Weyl-inequality,
+zero-multiplicity and factorization machinery remains future internal-proof
+work in the dedicated determinant module.
 
 **B page:** `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples`
 
@@ -1424,6 +1434,8 @@ Items:
 26. `def-approximate-unit-and-proper-c-star-morphism` (definition) — define an approximate unit as a net of positive contractions $(e_\lambda)$ with $e_\lambda a\to a$ and $ae_\lambda\to a$ for every $a$, and, following Shirbisheh, call $\varphi:A\to B$ proper when the image of every approximate unit of $A$ is an approximate unit of $B$.
 27. `thm-every-commutative-c-star-algebra-has-an-approximate-unit` (theorem) — through item 25, the directed family of compactly supported positive contractions in $C_0(\Delta(A))$ is an approximate unit; index by all admissible functions rather than making one choice for every compact set.
 28. `thm-locally-compact-gelfand-duality` (theorem) — $X\mapsto C_0(X)$ and $A\mapsto\Delta(A)$ give a contravariant equivalence between locally compact Hausdorff spaces with proper continuous maps and commutative $C^*$-algebras with proper morphisms; the compact/unital subcategories recover item 15.
+29. `rem-lca-group-algebra-and-character-space-external` (remark, external) — record Williams's general LCA $L^1$ convolution algebra, unit criterion, character classification and compact-open one-point-compactification result without pretending to prove them locally.
+30. `ex-gelfand-transform-of-l-one-of-an-lca-group` (example) — prove the scalar-unitization Banach-star-algebra calculations and Fourier/Gelfand evaluation formula relative to item 29.  FR-16 owns eventual internalization of the external LCA package and must reuse these identities.
 
 **Hard proof and seam plan.**  Character existence is not inferred from
 Alaoglu: one first places a proper ideal in a maximal ideal, then applies
@@ -3296,16 +3308,19 @@ now been acquired and is specified below.
 1. `def-algebraic-multiplicity-for-compact-operators`.
 2. `lem-finite-rank-compressions-converge-in-trace-norm`.
 3. `lem-weyl-eigenvalue-singular-value-inequalities`.
-4. `def-fredholm-determinant` — trace-norm limit of finite-rank determinants.
+4. Internalize the external theorem used by the existing
+   `def-fredholm-determinant`; do not create a duplicate definition.  Prove the
+   trace-norm finite-rank limit locally.
 5. `lem-fredholm-determinant-trace-norm-continuity-and-growth`.
 6. `lem-fredholm-determinant-logarithmic-derivative`.
 7. `lem-fredholm-determinant-zeros-and-algebraic-multiplicities`.
 8. `lem-quasinilpotent-trace-class-operator-has-zero-trace`.
 9. `lem-generalized-eigenspace-trace-decomposition` — use invariant
    quotient/compression arguments, never an unjustified orthogonal reduction.
-10. `thm-lidskii-for-trace-class-operators` — moved stable endpoint, with
-    algebraic multiplicity, absolute summability, and separable-support
-    reduction explicit.
+10. Upgrade the existing `thm-lidskii-for-trace-class-operators` by retiring
+    its external determinant dependency after items 1--9 are local; retain its
+    stable identity, algebraic-multiplicity, absolute-summability and
+    separable-support conventions.
 
 **B page:** `fredholm-determinants-and-the-lidskii-trace-formula-examples`
 

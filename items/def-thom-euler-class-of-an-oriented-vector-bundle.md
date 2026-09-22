@@ -44,3 +44,10 @@ zero class; over the zero ring it is zero (and also the unit).  Point bases,
 identity pullbacks, the zero section and both maps of the pair all follow the
 displayed composite.  The formula is choice-free once $u_\xi$ is supplied;
 AC is inherited only from general Thom existence and naturality.
+
+The rank-zero assertion in the preceding paragraph is restricted to the
+standard unit orientation.  For an arbitrary supplied rank-zero orientation
+$o\in H^0(B;R)$, fiber normalization gives $u=o$; since $j$ and $s$ are
+identities, $e_{\rm Th}(0_B,o)=o$.  Thus reversing the integral unit orientation
+gives $u=-1$ and $e_{\rm Th}(0_B,-1)=-1$, consistently with the orientation-sign
+convention above.

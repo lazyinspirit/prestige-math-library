@@ -1,0 +1,7 @@
+# FA context reseal: position 6
+
+Re-read the current definition, current A/B page summaries, owning manifest, previous position-6 mathematical evidence, latest receipt and the full dyadic-coding and completion proofs. Current itemHashJudge 5eac6cd2094a339db48db059da7bd4fe01f3f897effd0b6b38e3b148763a83f2 equals the preceding receipt.
+
+The page still separates the ZFC sweetness branch from the weak-choice measurability branch. The quotient convention affects only forcing arguments; it changes neither the arithmetic real-quantifier prefix nor the measured carrier. Countable Choice suffices: in the dyadic supplier DC is used only at step 1.2 to derive CC; steps 2.1 and 3.1 construct the Borel probability by inverse images. Completion uses CC to select countably many measurable cores and null envelopes; the inspected completion proof establishes additivity, representation independence and completeness. A dummy Baire real gives Sigma-one-two inclusion, and coordinate coding asserts no Baire/Cantor measure equivalence. No invalidated hypothesis or new dependency use was found.
+
+This elementary coding and measure-completion mathematics is familiar enough that no new external verification was needed. Earlier source verification remains recorded in research/phase-2-remaining-27-step7-fa-e-6-def-boldface-sigma-one-three-measurability.md; this reseal does not claim fresh source reading. Retain repaired disposition; no content or dependency edits, judge verdicts or stamps. Next: position 7 after the recorder accepts this reseal.

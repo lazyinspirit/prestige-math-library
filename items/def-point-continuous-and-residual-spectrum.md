@@ -5,8 +5,9 @@ title: Point continuous and residual spectrum
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, def-bounded-linear-operator]
+deps: ["def-spectrum-and-resolvent-set-in-a-banach-algebra", "def-bounded-linear-operator", "def-dependent-choice", "thm-bounded-inverse-theorem"]
 justified_by: []
+axiom_strength: "ZF for the definitions and disjointness; DC for exhaustion of the spectrum."
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -34,12 +35,19 @@ The spectral value $\lambda$ is
 * in the **residual spectrum** $\sigma_r(T)$ when $T - \lambda$ is injective
   and its range is not dense in $X$.
 
-Thus $\sigma_p(T) \cup \sigma_c(T) \cup \sigma_r(T) \subseteq \sigma(T)$, and
-the three sets are pairwise disjoint: for $\lambda \in \sigma(T)$ the operator
-$T-\lambda$ either fails to be injective, or is injective, and then its range
-is either dense or not dense; if it is injective with dense range it cannot be
-surjective, because an injective operator with dense range that is surjective
-has dense closed range $X$ and bounded inverse.
+The three sets are pairwise disjoint by their injectivity and density
+conditions, and each is contained in $\sigma(T)$: every listed condition
+precludes a two-sided inverse in $\mathcal B(X)$.
+
+Assume additionally Dependent Choice ([[def-dependent-choice]]) for the
+partition assertion. If $T-\lambda$ is injective and surjective, the bounded
+inverse theorem [[thm-bounded-inverse-theorem]] makes its inverse bounded.
+Consequently, for a spectral value with injective dense range, surjectivity
+is impossible. Splitting first by injectivity and then by density therefore gives
+$$\sigma_p(T)\sqcup\sigma_c(T)\sqcup\sigma_r(T)=\sigma(T)\qquad\text{under DC}.$$
+The definitions themselves do not require DC. For $T=0$ on the nonzero space,
+$\sigma_p(T)=\{0\}$ and the other two parts are empty, since
+$-\lambda I$ has inverse $-\lambda^{-1}I$ for $\lambda\ne0$.
 
 ## Remarks
 
@@ -50,15 +58,16 @@ has dense closed range $X$ and bounded inverse.
   definition is to separate dense range from non-dense range, and a non-dense
   range may still fail to be closed.
 
-- **Eigenvalues with non-dense range are residual, not continuous.** If
+- **Eigenvalues belong only to the point spectrum.** If
   $T-\lambda$ is not injective, then $\lambda \in \sigma_p(T)$ and, whatever the
   range is, $\lambda$ is not in $\sigma_c(T)$ or $\sigma_r(T)$ by the disjoint
-  classification above. This is why the relation lemma
-  [[lem-relations-among-the-five-spectral-parts]] states
-  $\sigma_r = \sigma_{cp}\setminus\sigma_p$ rather than identifying
-  $\sigma_r$ with the compression spectrum.
+  classification above. Consequently
+  $\sigma_r=\sigma_{cp}\setminus\sigma_p$: after compression values that are
+  eigenvalues are removed, the remaining operators are exactly the injective
+  ones with non-dense range. This identity is recorded and proved in
+  [[lem-relations-among-the-five-spectral-parts]] rather than identifying
+  $\sigma_r$ with the whole compression spectrum.
 
-- **The three sets are not individually closed.** The spectrum is closed, but
+- **Individual parts need not be closed.** The spectrum is closed, but
   the point spectrum need not be, and the closures of the three disjoint parts
-  may meet at accumulation points of the whole spectrum; only their union is
-  known to be closed from this definition.
+  may meet at accumulation points of the whole spectrum; under DC their union is the closed spectrum by the partition argument above.

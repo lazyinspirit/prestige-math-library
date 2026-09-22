@@ -31,8 +31,10 @@ load-bearing, and nothing on this page asserts a smooth quotient without them:
   of the ambient symplectic manifold at all
   ([[lem-differential-of-the-moment-map-and-orbit-orthogonal-identity]]);
 * if the action on the level is not free, the quotient is only an orbifold or
-  a stratified space in general. For the weighted circle actions
-  $e^{i\theta}\cdot(z_1,z_2)=(e^{ik\theta}z_1,e^{i\ell\theta}z_2)$ the quotient
+  a stratified space in general. For positive coprime integers $k,\ell$, the
+  effective weighted circle action
+  $e^{i\theta}\cdot(z_1,z_2)=(e^{ik\theta}z_1,e^{i\ell\theta}z_2)$ has a level
+  whose quotient
   of a level is a weighted projective space, and the stabilizers of the
   coordinate axes produce cone points of orders $k$ and $\ell$; the classical
   teardrop and football orbifolds arise this way (da Silva, §24.5).

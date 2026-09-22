@@ -9,6 +9,11 @@ deps: [prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: Ana Cannas da Silva, Lectures on Symplectic Geometry

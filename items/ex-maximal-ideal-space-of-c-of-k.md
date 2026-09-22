@@ -1,7 +1,7 @@
 ---
 id: ex-maximal-ideal-space-of-c-of-k
 kind: example
-title: Maximal ideal space of C(K)
+title: Character space of C(K)
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Vahid Shirbisheh, Lectures on C-star Algebras, v2 — Remark 3.1.36 and §3.1, printed pp. 54–67"
@@ -49,5 +54,8 @@ $f \mapsto f(t)$ at points $t \in [0,1]$, and each occurs exactly once.
 
 ## Remarks
 
-- **The example is the extreme case of the maximal-ideal description**: for a compact space the maximal ideals are exactly the fixed ideals $\{f : f(x) = 0\}$, in contrast with [[ex-gelfand-kolmogorov-recovers-beta-x-not-x]].
+- **Only the character space is asserted here.** Under Dependent Choice the
+  supplied evaluation lemma identifies $\Delta(C(K))$ with $K$; this example
+  does not claim the stronger, AC-dependent correspondence with all maximal
+  ideals.
 - **Dependent Choice is inherited** from the Urysohn input of [L1] and is used only there.

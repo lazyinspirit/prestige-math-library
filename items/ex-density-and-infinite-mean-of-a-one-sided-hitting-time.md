@@ -19,23 +19,30 @@ sources:
 
 ## Example
 
-Assume the Axiom of Choice, let $B$ be a standard Brownian motion
-[[def-brownian-motion]], let $a>0$ and $\tau_a=\inf\{t\ge0:B_t=a\}$. Then
-$\tau_a<\infty$ almost surely, while
+Assume the Axiom of Choice and let $B$ be a standard Brownian motion
+[[def-brownian-motion]]. Use the everywhere-continuous, zero-start
+representative fixed in
+[[cor-distribution-of-a-one-sided-brownian-hitting-time]]: replace the path by
+zero outside a measurable probability-one event of continuity and zero start,
+retaining the notation $B$. Let $a>0$ and
+$\tau_a=\inf\{t\ge0:B_t=a\}$, with $\inf\varnothing=+\infty$. Then $\tau_a$
+is a measurable extended random variable and $\tau_a<\infty$ almost surely,
+while
 $$\mathbb E[\tau_a]=\int_0^\infty t\,g(t)\,dt=+\infty,\qquad g(t)=\frac{a}{(2\pi t^3)^{1/2}}e^{-a^2/(2t)} .$$
 Thus almost-sure finiteness does not imply integrability for this random time.
 
 ## Facts & Assumptions
 
-**Given:** AC, a standard Brownian motion $B$ and $a>0$.
+**Given:** AC, a standard Brownian motion $B$ in the stated
+everywhere-continuous zero-start representative, and $a>0$.
 
-[F1] $\tau_a<\infty$ almost surely, and on $t>0$ the law of $\tau_a$ has the displayed density $g$. [[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]] [[cor-distribution-of-a-one-sided-brownian-hitting-time]]
+[F1] For the representative fixed in the statement, $\tau_a$ is measurable and finite almost surely, and on $t>0$ its law has the displayed density $g$. [[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]] [[cor-distribution-of-a-one-sided-brownian-hitting-time]]
 
 [F2] For a nonnegative random variable with a density, the expectation is the integral of $t$ against that density; integration against a density is integration of the product with the density. [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] [[thm-integration-against-a-density]]
 
 [F3] Monotone convergence applies to nonnegative integrands. [[thm-monotone-convergence-for-the-integral]]
 
-[F4] AC is the ambient assumption of the Brownian construction. [[def-axiom-of-choice]]
+[F4] AC is the standing hypothesis under which the Brownian and hitting-time interfaces in [F1] are supplied; this expectation calculation makes no additional selection. [[def-axiom-of-choice]]
 
 ## Verification
 

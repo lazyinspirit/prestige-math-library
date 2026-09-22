@@ -5,7 +5,7 @@ title: Resolvent is Banach-valued holomorphic
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-neumann-series, thm-invertible-group-is-open-and-inversion-is-continuous, def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-termwise-differentiation-of-complex-power-series, def-unital-banach-algebra]
+deps: [lem-neumann-series, thm-invertible-group-is-open-and-inversion-is-continuous, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-unital-banach-algebra]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -49,8 +49,6 @@ $\rho_A(a)$ and resolvent $R(z,a) = (z1-a)^{-1}$
 
 [L4] Inversion is continuous on the invertible group, and $\rho_A(a)$ is therefore open: it is the preimage of the open set $A^{\times}$ under the continuous map $z \mapsto z1-a$ ([[thm-invertible-group-is-open-and-inversion-is-continuous]]).
 
-[L5] Let $f(h) = \sum_{n\ge0} c_n h^n$ be a complex power series with radius of convergence $R > 0$. Then for $|h| < R$ the function $f$ is complex differentiable at $h$ with $f'(h) = \sum_{n\ge1} n c_n h^{n-1}$ ([[thm-termwise-differentiation-of-complex-power-series]]).
-
 ## Proof
 
 **Proof technique:** direct.
@@ -63,8 +61,8 @@ $\rho_A(a)$ and resolvent $R(z,a) = (z1-a)^{-1}$
 
 4.1 The map $z \mapsto R(z,a)$ is norm continuous at $z_0$: from [step 3.1], $R(z_0+h,a) - R_0 = \sum_{n\ge1}(-h)^nR_0^{n+1}$, whose norm is at most $\sum_{n\ge1}|h|^n\|R_0\|^{n+1} = |h|\|R_0\|^2/(1-|h|\|R_0\|)$, and this tends to $0$ with $h$; independently, continuity of inversion [L4] applied to the continuous map $z \mapsto z1-a$ gives the same conclusion. [step 3.1, L4, L1]
 
-4.2 The expansion of [step 3.1] is a power series in $h$ with coefficients $c_n := (-1)^nR_0^{n+1}$: the series $\sum_n\|c_n\|\,|h|^n \le \|R_0\|\sum_n(|h|\|R_0\|)^n$ converges for $|h| < 1/\|R_0\|$, and the differentiated series $\sum_{n\ge1} n\,c_n\,h^{n-1}$ is dominated by $\|R_0\|^2\sum_{n\ge1}n\,|h|^{n-1}\|R_0\|^{n-1}$, which converges uniformly on every closed disc $|h| \le \rho < 1/\|R_0\|$; so the dominated-series argument of [L5], with the norm in place of the modulus, applies verbatim to this $A$-valued series. [step 3.1, L5, L1, algebra]
+4.2 For nonzero $h$ with $|h|\,\|R_0\|<1$, divide the expansion of [step 3.1] by $h$ after subtracting $R_0$: $\frac{R(z_0+h,a)-R_0}{h}+R_0^2=\sum_{n\ge2}(-1)^nh^{n-1}R_0^{n+1}$. The right-hand side converges in $A$ and has norm at most $\sum_{n\ge2}|h|^{n-1}\|R_0\|^{n+1}=\frac{|h|\,\|R_0\|^3}{1-|h|\,\|R_0\|}$, which tends to $0$ as $h\to0$. [step 3.1, L1, algebra]
 
-5.1 Applying the differentiation rule of [L5] through its verification in [step 4.2], the function $h \mapsto R(z_0+h,a)$ is complex differentiable at $h = 0$ with derivative the coefficient $c_1 = -R_0^2$; translating back, $R(\cdot,a)$ is holomorphic on $\rho_A(a)$ with $R'(z_0,a) = -R(z_0,a)^2$. [step 4.2, L5]
+5.1 Thus the norm difference quotient of $h\mapsto R(z_0+h,a)$ at $0$ converges to $-R_0^2$. Since $z_0$ was arbitrary in the open set $\rho_A(a)$, the resolvent is Banach-valued holomorphic there and $R'(z_0,a)=-R(z_0,a)^2$. [step 4.2, L4]
 
 6.1 The three claims are established: claim 1 by [step 3.1], claim 3 together with its continuity and estimate by [step 4.1] and [step 5.1], and claim 2 is exactly the expansion of [step 3.1]. [step 3.1, step 4.1, step 5.1] ∎

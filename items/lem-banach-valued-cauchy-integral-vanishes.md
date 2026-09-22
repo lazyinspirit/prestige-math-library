@@ -41,22 +41,22 @@ step supplied by [[cor-dual-separates-points]].
 
 **Given:** An assumed Axiom of Choice, an open $U \subseteq \mathbb C$, a continuous weakly holomorphic $F : U \to A$, and a chain $\Gamma = \sum_{k<r} m_k\gamma_k$ which is a cycle with trace $\Gamma^\ast \subseteq U$ and is null-homologous in $U$.
 
-[L1] For $p \notin \Gamma^\ast$ one has $\int_\Gamma dz/(z-p) = 2\pi i\,n(\Gamma,p)$, and $\int_\Gamma g\,dz = \sum_k m_k\int_{\gamma_k}g\,dz$ for every $g$ continuous on $\Gamma^\ast$; integrals over chains are additive ([[def-banach-algebra-valued-contour-integral]], [[def-integration-and-index-of-complex-chain]]).
+[F1] For $p \notin \Gamma^\ast$ one has $\int_\Gamma dz/(z-p) = 2\pi i\,n(\Gamma,p)$, and $\int_\Gamma g\,dz = \sum_{\substack{k<r\\m_k\ne0}} m_k\int_{\gamma_k}g\,dz$ for every $g$ continuous on $\Gamma^\ast$; integrals over chains are additive ([[def-banach-algebra-valued-contour-integral]], [[def-integration-and-index-of-complex-chain]]).
 
-[L2] For a bounded linear $\varphi:A\to\mathbb C$ and a single contour $\gamma$, bounded linearity commutes with the contour integral ([[lem-contour-integral-commutes-with-bounded-linear-maps]]). Hence for the finite chain $\Gamma=\sum_{k<r}m_k\gamma_k$ and every $f$ continuous on its trace, $$\varphi\!\left(\int_\Gamma f\,dz\right) =\sum_{k<r}m_k\varphi\!\left(\int_{\gamma_k}f\,dz\right) =\int_\Gamma(\varphi\circ f)\,dz,$$ by the chain-integral definition in [L1].
+[F2] For a bounded linear $\varphi:A\to\mathbb C$ and a single contour $\gamma$, bounded linearity commutes with the contour integral ([[lem-contour-integral-commutes-with-bounded-linear-maps]]). Hence for the finite chain $\Gamma=\sum_{k<r}m_k\gamma_k$ and every $f$ continuous on its trace, $$\varphi\!\left(\int_\Gamma f\,dz\right) =\sum_{\substack{k<r\\m_k\ne0}}m_k\varphi\!\left(\int_{\gamma_k}f\,dz\right) =\int_\Gamma(\varphi\circ f)\,dz,$$ by the chain-integral definition in [F1]. Each retained contour has trace contained in $\Gamma^\ast$, so its integral is defined; zero-coefficient contours are omitted even if their traces lie outside the domain of $f$. For an empty retained list, both sides are zero by linearity.
 
-[L3] If $\Omega \subseteq \mathbb C$ is open, $g : \Omega \to \mathbb C$ is holomorphic, and $\Gamma$ is a complex chain which is a cycle with trace in $\Omega$ and null-homologous in $\Omega$, then $\int_\Gamma g\,dz = 0$ ([[cor-global-cauchy-theorem-homology]]).
+[F3] If $\Omega \subseteq \mathbb C$ is open, $g : \Omega \to \mathbb C$ is holomorphic, and $\Gamma$ is a complex chain which is a cycle with trace in $\Omega$ and null-homologous in $\Omega$, then $\int_\Gamma g\,dz = 0$ ([[cor-global-cauchy-theorem-homology]]).
 
-[L4] If $x \ne y$ in a complex normed space $V$ then there is a bounded linear functional $\varphi$ on $V$ with $\varphi(x) \ne \varphi(y)$ ([[cor-dual-separates-points]]).
+[F4] If $x \ne y$ in a complex normed space $V$ then there is a bounded linear functional $\varphi$ on $V$ with $\varphi(x) \ne \varphi(y)$ ([[cor-dual-separates-points]]).
 
-[A1] The standing hypothesis is the Axiom of Choice, used here through [L4] and nowhere else ([[def-axiom-of-choice]]).
+[A1] The standing hypothesis is the Axiom of Choice, used here through [F4] and nowhere else ([[def-axiom-of-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For every bounded linear functional $\varphi : A \to \mathbb C$ the composition $\varphi \circ F$ is holomorphic on $U$ by weak holomorphy, and it is continuous; moreover $\Gamma$ is a cycle with trace in $U$ that is null-homologous in $U$ by hypothesis, so [L3] applies to $g := \varphi\circ F$ and gives $\int_\Gamma \varphi(F(z))\,dz = 0$. [L1, L3]
+1.1 For every bounded linear functional $\varphi : A \to \mathbb C$ the composition $\varphi \circ F$ is holomorphic on $U$ by weak holomorphy, and it is continuous; moreover $\Gamma$ is a cycle with trace in $U$ that is null-homologous in $U$ by hypothesis, so [F3] applies to $g := \varphi\circ F$ and gives $\int_\Gamma \varphi(F(z))\,dz = 0$. [F1, F3]
 
-2.1 For every bounded linear $\varphi$, $\varphi\bigl(\int_\Gamma F\,dz\bigr) = \int_\Gamma \varphi(F(z))\,dz = 0$: the first equality is [L2], and the second is [step 1.1]. [step 1.1, L2]
+2.1 For every bounded linear $\varphi$, $\varphi\bigl(\int_\Gamma F\,dz\bigr) = \int_\Gamma \varphi(F(z))\,dz = 0$: the first equality is [F2], and the second is [step 1.1]. [step 1.1, F2]
 
-3.1 Suppose $\int_\Gamma F\,dz \ne 0$. Then [L4] applied to the distinct points $x := \int_\Gamma F\,dz$ and $0$ produces a bounded linear functional $\varphi$ with $\varphi\bigl(\int_\Gamma F\,dz\bigr) \ne 0$, contradicting [step 2.1]; hence $\int_\Gamma F\,dz = 0$. [step 2.1, L4, A1] ∎
+3.1 Suppose $\int_\Gamma F\,dz \ne 0$. Then [F4] applied to the distinct points $x := \int_\Gamma F\,dz$ and $0$ produces a bounded linear functional $\varphi$ with $\varphi\bigl(\int_\Gamma F\,dz\bigr) \ne 0$, contradicting [step 2.1]; hence $\int_\Gamma F\,dz = 0$. [step 2.1, F4, A1] ∎

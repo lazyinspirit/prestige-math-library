@@ -1,0 +1,11 @@
+# FA position 2 — repaired
+
+Independently read the item, owning contract including every citation and risk entry, batch-8 manifest entry, Alpha row 98 and both Terra rejections. A/B pages, standing hypothesis, coverage scope and all dependency statements were read during position 1 and retained as the current context. The repaired position-1 supplier is used here only after its recorder acceptance.
+
+Terra's final rejection is correct: Z_m=max|M_grid|^2 needs only L1, and finite energy does not imply a fourth moment. Step 1.1 now states integrability, exactly what discrete Doob p=2 gives. The unsquared grid maxima increase to S_D; their squares increase pointwise to S_D^2, so ordinary MCT applies. The displayed expectation uses that measurable grid version of the almost-sure path supremum. This also resolves the incomplete-space issue from position 1 without editing the published definition. Extend H by zero after T to use the global supplier; T=0 is treated explicitly. An arbitrary continuous modification need not be adapted, so step 3.1 transfers the bound by countable-grid equality rather than falsely asserting it is a martingale for the original filtration. All claims and the constant 4 remain intact.
+
+Source: https://www.math.uchicago.edu/~lawler/finbook.pdf , Proposition 3.2.4, printed p.92, complete proof read during position 1. It supports the discrete-grid maximal-estimate mechanism; the previous source note incorrectly described it as the exact expectation bound. The note now identifies its actual uniform-convergence claim. The exact bound here is derived from the already inspected library thm-doob-lp-maximal-inequality and thm-monotone-convergence-for-the-integral. The L1/L2 distinction, zero extension and countable-event argument are elementary and were checked directly.
+
+Contract source quotes were synchronized with the repaired supplier, derivations and zero/single-grid boundaries corrected. Updated the owning batch-8 consumer record and refreshed the frontier ledger. Focused precheck passes; strict proof-contract check has zero errors and warnings. No new dependencies, lemmas, judge verdicts or stamps. Position 1 remains current under queue-status; no reseal is requested.
+
+Next action: record position 2, then inspect position 3 only after acceptance. No later item has been substantively reviewed.

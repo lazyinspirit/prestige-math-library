@@ -5,7 +5,7 @@ title: "Cayley transform of a self-adjoint operator"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-self-adjoint-resolvent-estimate, thm-self-adjointness-range-criterion, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph]
+deps: [thm-self-adjoint-resolvent-estimate, thm-self-adjointness-range-criterion, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph, def-countable-choice]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -22,7 +22,8 @@ sources:
 
 ## Definition
 
-Let $T$ be a self-adjoint operator on $H$. By
+Assume Countable Choice ([[def-countable-choice]]). Let $T$ be a self-adjoint
+operator on $H$. By
 [[thm-self-adjoint-resolvent-estimate]] the points $\pm i$ lie in $\rho(T)$, so
 $T+i$ and $T-i$ are bijections of $D(T)$ onto $H$ with bounded inverses, and
 $$C_T:=(T-i)(T+i)^{-1}\in\mathcal B(H)$$

@@ -5,7 +5,7 @@ title: Pontryagin Whitney product away from two
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-pontryagin-classes-by-complexification, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, thm-naturality-normalization-and-whitney-sum-for-chern-classes, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
+deps: [def-pontryagin-classes-by-complexification, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, thm-naturality-normalization-and-whitney-sum-for-chern-classes, def-real-and-complex-topological-vector-bundle, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, thm-vector-bundles-glued-from-transition-cocycles, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the Chern-class suppliers."
 provenance:
@@ -23,8 +23,8 @@ sources:
 
 ## Statement
 
-Assume AC. Let $E,F\to B$ be numerable real bundles over a path-connected CW
-base. Over $\mathbb Z[1/2]$, or any coefficient ring in which
+Assume AC. Let $E,F\to B$ be numerable real bundles over a path-connected
+paracompact Hausdorff CW base. Over $\mathbb Z[1/2]$, or any coefficient ring in which
 $2$ is invertible, the total Pontryagin classes multiply:
 $$p(E\oplus F)=p(E)\,p(F).$$
 No integral multiplicativity is asserted: integrally the omitted odd-Chern
@@ -41,23 +41,15 @@ a witness for that failure.
 
 [F3] Total Chern classes are multiplicative over Whitney sums and natural ([[thm-naturality-normalization-and-whitney-sum-for-chern-classes]]).
 
-[F4] Direct sums and scalar extensions of bundles are formed fiberwise from
-their transition functions
-([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F4] A Whitney sum of two bundles over the same field has block-diagonal transition matrices ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]). Real and complex vector bundles are specified locally by real- or complex-linear trivializations ([[def-real-and-complex-topological-vector-bundle]]), and compatible transition cocycles glue to bundle isomorphisms ([[thm-vector-bundles-glued-from-transition-cocycles]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** AC and numerable real bundles $E,F\to B$ over a path-connected CW base.
+**Given:** AC and numerable real bundles $E,F\to B$ over a path-connected paracompact Hausdorff CW base.
 
-1.1 Distributivity gives a fiberwise complex-linear isomorphism
-$((E\oplus F)\otimes_{\mathbb R}\mathbb C)_b\to
-(E_b\otimes_{\mathbb R}\mathbb C)\oplus
-(F_b\otimes_{\mathbb R}\mathbb C)$; compatibility with the transition
-functions makes this an isomorphism
-$(E\oplus F)_{\mathbb C}\cong E_{\mathbb C}\oplus F_{\mathbb C}$. Hence by
-multiplicativity [F3], $c((E\oplus F)_{\mathbb C})=c(E_{\mathbb C})c(F_{\mathbb C})$; expanding in degree $2i$ gives the sum of the even-even and odd-odd terms. [F3, F4]
+1.1 On each fiber define $\Phi_b:((E_b\oplus F_b)\otimes_{\mathbb R}\mathbb C)\to(E_b\otimes_{\mathbb R}\mathbb C)\oplus(F_b\otimes_{\mathbb R}\mathbb C)$ by $\Phi_b((e,f)\otimes z)=(e\otimes z,f\otimes z)$ and extend additively. The tensor balancing relations make this well defined, and the inclusions of the two direct summands give its inverse. In simultaneous real bundle charts, a Whitney-sum transition is $\operatorname{diag}(g_{ji},h_{ji})$ by [F4]; complexification reads the same real matrix over $\mathbb C$, which is exactly the block-diagonal transition for $E_{\mathbb C}\oplus F_{\mathbb C}$. Thus the $\Phi_b$ are locally the same fixed coordinate isomorphism, hence continuous and compatible with all transitions, and [F4] glues them to $(E\oplus F)_{\mathbb C}\cong E_{\mathbb C}\oplus F_{\mathbb C}$. Multiplicativity [F3] now gives $c((E\oplus F)_{\mathbb C})=c(E_{\mathbb C})c(F_{\mathbb C})$; expanding in degree $2i$ gives the sum of the even-even and odd-odd terms. [F3, F4, algebra]
 
 2.1 In the even-even terms write $a=2r$, $b=2s$ with $r+s=i$: then $(-1)^ic_{2r}(E_{\mathbb C})c_{2s}(F_{\mathbb C})=(-1)^{r+s}c_{2r}(E_{\mathbb C})c_{2s}(F_{\mathbb C})=p_r(E)p_s(F)$ by [F1], since $(-1)^{r+s}=(-1)^i$. [F1, step 1.1]
 

@@ -5,10 +5,12 @@
     "id": "generalized-cohomology-and-the-atiyah-hirzebruch-spectral-sequence",
     "items": [
       {
-        "deps": [],
+        "deps": [
+          "def-reduced-cone-suspension-and-cofiber-sequence"
+        ],
         "id": "def-reduced-generalized-cohomology-theory",
         "kind": "definition",
-        "proof_plan": "Fix variance, boundary and suspension conventions explicitly; this is a choice-free axiomatic definition.",
+        "proof_plan": "Fix variance and the sphere-first suspension convention, define every cofiber connector as q_f^* followed after the suspension isomorphism, and impose exactness and the wedge axiom; this is a choice-free axiomatic definition with no independent connector sign.",
         "provenance": {
           "proof": "not-applicable",
           "statement": "literature-derived"
@@ -18,6 +20,10 @@
             {
               "title": "Loizides, The Atiyah\u2013Hirzebruch Spectral Sequence",
               "url": "https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf"
+            },
+            {
+              "title": "Davis\u2013Kirk, Lecture Notes in Algebraic Topology",
+              "url": "https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf"
             }
           ]
         },
@@ -26,11 +32,17 @@
       },
       {
         "deps": [
-          "def-reduced-generalized-cohomology-theory"
+          "def-reduced-generalized-cohomology-theory",
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
+          "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient",
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "def-wedge-of-pointed-spaces",
+          "thm-five-lemma-for-modules"
         ],
         "id": "prop-reduced-and-unreduced-generalized-cohomology-theories-correspond",
         "kind": "proposition",
-        "proof_plan": "Translate homotopy and exactness through CW quotients and disjoint basepoints, then verify the two constructions are naturally inverse.",
+        "proof_plan": "Derive the quotient axiom from pair exactness, cone excision and the five lemma. Construct the pair theory from reduced cofibers with the empty quotient X_+. Construct reduced suspension from the cone-pair boundary with the coordinate reflection; verify its connector by an explicit mapping-cylinder map. Prove arbitrary wedges through a star of intervals and excision, and verify inverse suspension maps by an explicit double-cone homotopy.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -40,6 +52,10 @@
             {
               "title": "Davis\u2013Kirk, Lecture Notes in Algebraic Topology",
               "url": "https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf"
+            },
+            {
+              "title": "Loizides, The Atiyah\u2013Hirzebruch Spectral Sequence",
+              "url": "https://math.gmu.edu/~yloizide/Atiyah-Hirzebruch.pdf"
             }
           ]
         },
@@ -72,7 +88,7 @@
         "deps": [],
         "id": "def-reduced-generalized-homology-theory",
         "kind": "definition",
-        "proof_plan": "Fix covariance and the degree-lowering boundary convention; this is choice-free and axiomatic.",
+        "proof_plan": "Fix covariance and require the degree-lowering cofiber boundary to be the cofiber map followed by inverse suspension; this is choice-free and prevents an independent sign normalization.",
         "provenance": {
           "proof": "not-applicable",
           "statement": "literature-derived"
@@ -85,7 +101,7 @@
             }
           ]
         },
-        "statement": "A reduced generalized homology theory on based CW complexes is a covariant Z-graded functor with based homotopy invariance, exact cofiber sequences, suspension isomorphisms and the wedge axiom, without the dimension axiom.",
+        "statement": "A reduced generalized homology theory on based CW complexes is a covariant Z-graded functor with based homotopy invariance, exact cofiber sequences, suspension isomorphisms and the wedge axiom, without the dimension axiom; each cofiber boundary is the cofiber map followed by inverse suspension.",
         "title": "Reduced generalized homology theory"
       },
       {
@@ -114,12 +130,16 @@
         "deps": [
           "def-reduced-generalized-cohomology-theory",
           "def-reduced-generalized-homology-theory",
-          "def-coefficient-groups-of-a-generalized-cohomology-theory",
-          "def-coefficient-groups-of-a-generalized-homology-theory"
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "def-degree-of-a-self-map-of-an-oriented-sphere",
+          "def-wedge-of-pointed-spaces",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-cellular-homology-computes-singular-homology",
+          "cor-homology-of-spheres"
         ],
         "id": "prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory",
         "kind": "proposition",
-        "proof_plan": "Factor positive degree through pinch and fold, use wedge additivity, obtain negative degrees from reflection and composition, and suspend/desuspend to all gradings.",
+        "proof_plan": "Use the one-vertex sphere CW structures to type all based maps as cellular; wedge axioms make pinch/fold additive, including inverse classes; compare geometric and homological degrees by ordinary cellular sphere-wedge homology.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -159,12 +179,20 @@
       },
       {
         "deps": [
-          "def-skeletal-filtration-for-generalized-cohomology",
-          "def-coefficient-groups-of-a-generalized-cohomology-theory"
+          "def-reduced-generalized-cohomology-theory",
+          "def-coefficient-groups-of-a-generalized-cohomology-theory",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient",
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "def-wedge-of-pointed-spaces",
+          "def-oriented-cellular-chain-group",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree"
         ],
         "id": "lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients",
         "kind": "lemma",
-        "proof_plan": "Collapse X^{p-1} to obtain a finite wedge of p-spheres, then apply wedge additivity and suspension while tracking chosen cell orientations.",
+        "proof_plan": "Use based cofibers of disjoint-basepoint skeletal inclusions, separate the empty and negative cases, then wedge and suspension. Prove degree action by pinch additivity and sphere degree classification, so cellular naturality is an actual degree-matrix computation.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -182,13 +210,21 @@
       },
       {
         "deps": [
+          "prop-reduced-and-unreduced-generalized-cohomology-theories-correspond",
           "lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients",
           "prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory",
-          "thm-cellular-boundary-is-the-incidence-degree-matrix"
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "def-incidence-number-of-two-cw-cells",
+          "def-oriented-cellular-chain-group",
+          "def-exact-couple",
+          "thm-an-exact-couple-generates-a-spectral-sequence",
+          "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "thm-cellular-approximation-for-maps-of-cw-pairs"
         ],
         "id": "lem-the-ahss-first-differential-is-the-cellular-coboundary",
         "kind": "lemma",
-        "proof_plan": "Resolve the boundary through three adjacent skeleta; each cell component is an attaching incidence sphere map, hence multiplication by its incidence degree.",
+        "proof_plan": "Use finite cellular approximation to type characteristic pair maps, prove disk-boundary suspension sign by the oriented cone and the interval graph endpoint degrees, then identify the incidence matrix and give the finite skeletal cohomology comparison without an infinite-CW AC step.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -243,7 +279,7 @@
         ],
         "id": "lem-homological-ahss-exact-couple-from-the-skeletal-filtration",
         "kind": "lemma",
-        "proof_plan": "Splice inclusion, quotient and connecting maps into an exact couple; collapse relative quotients to sphere wedges. On each cell component the connecting map is induced by the attaching incidence sphere map, so the degree-action proposition and cellular incidence theorem identify d1 with the cellular boundary, including its chosen orientation sign.",
+        "proof_plan": "Splice inclusion, quotient and connecting maps into an exact couple; collapse relative quotients to sphere wedges and use structural suspension coordinates. Compatibility of pair boundaries with inverse suspension reduces each component to the attaching incidence sphere map, so degree action gives the cellular boundary with its orientation sign.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -262,12 +298,23 @@
       },
       {
         "deps": [
-          "lem-homological-ahss-exact-couple-from-the-skeletal-filtration",
-          "thm-an-exact-couple-generates-a-spectral-sequence"
+          "def-reduced-generalized-homology-theory",
+          "def-coefficient-groups-of-a-generalized-homology-theory",
+          "thm-an-exact-couple-generates-a-spectral-sequence",
+          "def-exact-couple",
+          "def-homological-spectral-sequence",
+          "def-associated-graded-object-of-a-filtered-object",
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient",
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory",
+          "def-incidence-number-of-two-cw-cells",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology"
         ],
         "id": "thm-homological-atiyah-hirzebruch-spectral-sequence",
         "kind": "theorem",
-        "proof_plan": "Derive the homological exact couple, compute E2 and the bidegrees, and fix n before forming the adjacent filtration quotient. The finite exhaustive skeletal filtration gives strong convergence without changing total degree between F_p and F_{p-1}.",
+        "proof_plan": "Build the pair exact couple directly; absorb the standard disk boundary automorphisms by recursively changed cellular coordinates, then prove the image filtration and its stable subquotient using the exact couple.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -291,13 +338,12 @@
       },
       {
         "deps": [
-          "thm-cohomological-atiyah-hirzebruch-spectral-sequence",
-          "thm-homological-atiyah-hirzebruch-spectral-sequence",
-          "def-exact-couple"
+          "def-exact-couple",
+          "thm-an-exact-couple-generates-a-spectral-sequence"
         ],
         "id": "lem-edge-maps-of-a-bounded-skeletal-ahss",
         "kind": "lemma",
-        "proof_plan": "Iterate the exact-couple i-map to identify stable D-images with the stated kernel/image filtration. At either extreme skeletal column, follow j or k and quotient by the adjacent stable image; exactness makes the result independent of the chosen representative. Finite p-bounds make these the usual restriction, inclusion and quotient edge maps even when coefficient rows extend infinitely in q.",
+        "proof_plan": "Given skeletal pair exact couples, apply the exact-couple subquotient theorem and compute stable numerators and denominators in both variances. Prove quotient maps by explicit kernel/lift calculations; specialize extreme columns. No E2 identification or general reduced/pair correspondence is used.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -344,12 +390,13 @@
       {
         "deps": [
           "thm-cohomological-atiyah-hirzebruch-spectral-sequence",
-          "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences",
-          "thm-cellular-approximation-for-maps-of-cw-pairs"
+          "thm-cellular-approximation-for-maps-of-cw-pairs",
+          "def-exact-couple",
+          "def-skeletal-filtration-for-generalized-cohomology"
         ],
         "id": "lem-pairings-of-skeletal-exact-couples-induce-multiplicative-ahss",
         "kind": "lemma",
-        "proof_plan": "The relative support inclusion for (X,X^{p-1}) and (X,X^{q-1}) maps under a cellular diagonal to support in (X,X^{p+q-1}); pair the D and E vertices by the external product and this diagonal. The two boundary identities give k(xy)=k(x)y+(-1)^{|x|}xk(y). If kx=i^{r-1}u and ky=i^{r-1}v, compatibility with i gives k(xy)=i^{r-1}(uy+(-1)^{|x|}xv), proving the Leibniz rule on the rth derived couple and independence from lifts. Products of cycles and boundaries identify E_{r+1} with H(E_r,d_r) as algebras. Forgetting support gives F^pF^q\u2286F^{p+q}, and finite convergence identifies the stable quotient product with gr_F. Homotopic cellular diagonals agree from E2 onward.",
+        "proof_plan": "Pair the relative groups of skeletal pairs by the external product, the collapse to the (p,r) block of the product filtration quotient, and pullback along the cellular diagonal, giving a typed bilinear mu_1: E_1^{p,q} x E_1^{r,s} -> E_1^{p+r,q+s} together with the corresponding pairing of the relative D-terms; naturality of the external product makes the restriction, connecting and pair maps multiplicative. The two relative connecting-map Leibniz identities give d_1 mu_1(x,y) = mu_1(d_1x,y) + (-1)^{p+q} mu_1(x,d_1y) for d_1 = jk, so mu_1 carries cycles to cycles and sends B x Z + Z x B to boundaries and descends to a pairing mu_2 on E_2 = H(E_1,d_1). Forgetting support gives F^p F^q contained in F^{p+q}, and finite convergence identifies the stable product with the associated-graded product. Only the ring products from E_2 on, their derivations and the ring isomorphism E_{r+1} = H(E_r,d_r) are taken from the standard multiplicative structure of a pairing of filtering towers; step 7.2 records an explicit six-segment cellular diagonal of the interval whose first-page pairing is not associative, so no E_1 ring is asserted.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -357,18 +404,23 @@
         "sources": {
           "references": [
             {
-              "locator": "Discussion following Theorem 1.4 and \u00a73.1",
-              "title": "Ji, The Atiyah\u2013Hirzebruch Spectral Sequence",
-              "url": "https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf"
+              "locator": "\u00a73.1 pairing of filtering towers, \u00a73.3 first page and Theorem 3.4 diagonal case, printed pp. 4\u20135",
+              "title": "Daniel Dugger, Multiplicative structures on homotopy spectral sequences II",
+              "url": "https://pages.uoregon.edu/ddugger/multb.pdf"
             },
             {
-              "locator": "Lecture 29, paired exact-couple calculation, printed pp.100\u2013101",
+              "locator": "Lecture 29, product structure, printed pp. 100\u2013101",
               "title": "Miller, MIT 18.906 Algebraic Topology II",
-              "url": "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            },
+            {
+              "locator": "\u00a71.3, printed p. 4: the AHSS as stated carries no information about multiplicative structure",
+              "title": "Ji, The Atiyah\u2013Hirzebruch Spectral Sequence",
+              "url": "https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf"
             }
           ]
         },
-        "statement": "Let h be a generalized cohomology theory with a coherent external product whose relative products satisfy the two connecting-map Leibniz identities. For a finite CW complex, relative products for skeletal pairs and a cellular approximation to the diagonal pair the skeletal exact couple with itself. Every derived couple inherits products, d_r is a derivation of total degree one, and the stable product is the associated-graded product of the skeletal filtration.",
+        "statement": "Let h be a reduced generalized cohomology theory with a coherent external product (unital, associative, graded-commutative, compatible with suspension, with the two relative connecting-map Leibniz identities). For a finite CW complex with skeleta X^p and a cellular approximation of the diagonal: the relative products of skeletal pairs, the collapse to the (p,r) block and the diagonal give a typed bilinear pairing mu_1: E_1^{p,q} x E_1^{r,s} -> E_1^{p+r,q+s} with E_1^{p,q}=h^{p+q}(X^p,X^{p-1}), and the same construction pairs h^m(X,X^{p-1}) with h^n(X,X^{r-1}) into h^{m+n}(X,X^{p+r-1}); mu_1 is natural for morphisms of theories and for cellular maps whose chosen filtered diagonals commute strictly, but no naturality is claimed for independently chosen diagonals, and it carries no associativity, graded commutativity or unitality in general. d_1 = jk satisfies the Leibniz rule with respect to mu_1, and mu_1 descends to a pairing mu_2 on E_2 = H(E_1,d_1); from E_2 on the products make every page a natural unital associative graded-commutative bigraded ring on which d_r is a derivation, with E_{r+1} = H(E_r,d_r) as bigraded rings and mu_2 the graded cup product under E_2^{p,q} = H^p(X;h^q(*)), so the product is independent of the diagonal from the second page on. The filtration is multiplicative, F^p F^q contained in F^{p+q}, and E_infinity = gr_F h^*(X) as graded rings.",
         "title": "Pairings of skeletal exact couples induce multiplicative AHSS"
       },
       {
@@ -378,7 +430,7 @@
         ],
         "id": "thm-multiplicative-ahss-for-a-multiplicative-generalized-theory",
         "kind": "theorem",
-        "proof_plan": "Apply the paired-skeletal-exact-couple lemma. Its derived-couple calculation supplies all page products and signs, while its relative-support argument supplies filtration multiplicativity and the E-infinity associated-graded product; no filtered-DGA model is assumed.",
+        "proof_plan": "Apply the pairing lemma. It supplies the typed first-page pairing, its Leibniz rule for d_1, the descent to E_2, the ring products and derivations from E_2 on, the ring isomorphism E_{r+1} = H(E_r,d_r), the identification of the E_2 product with the graded cup product and hence independence from the chosen diagonal, filtration multiplicativity and the stable associated-graded product. The theorem therefore asserts multiplicativity from the second page on and records that the first page carries only the pairing and its Leibniz rule, since the lemma's explicit six-segment diagonal of the interval makes the first-page pairing non-associative.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -386,24 +438,29 @@
         "sources": {
           "references": [
             {
-              "locator": "Discussion following Theorem 1.4 and \u00a73.1",
-              "title": "Ji, The Atiyah\u2013Hirzebruch Spectral Sequence",
-              "url": "https://www.math.columbia.edu/~calebji/atiyah-hirzebruch-final.pdf"
+              "locator": "Lecture 29, product structure, printed pp. 100\u2013101",
+              "title": "Miller, MIT 18.906 Algebraic Topology II",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            },
+            {
+              "locator": "\u00a73.1 pairing of filtering towers and Theorem 3.4 diagonal case, printed pp. 4\u20135",
+              "title": "Daniel Dugger, Multiplicative structures on homotopy spectral sequences II",
+              "url": "https://pages.uoregon.edu/ddugger/multb.pdf"
             }
           ]
         },
-        "statement": "If h has a specified unital, associative, graded-commutative coherent external product compatible with suspension and satisfying the two relative cofiber-boundary Leibniz identities, then the finite-CW AHSS is multiplicative, d_r is a graded derivation, F^pF^q\u2286F^{p+q}, and E\u221e is the associated-graded ring. A ring prespectrum is only an example.",
+        "statement": "If h has a specified unital, associative, graded-commutative coherent external product compatible with suspension and satisfying the two relative cofiber-boundary Leibniz identities, then for a finite CW complex and a cellular approximation of the diagonal the cohomological AHSS is multiplicative from its second page on: the relative products and the diagonal pair the skeletal exact couple with itself, that pairing satisfies the Leibniz rule for d_1 and descends to E_2; for every r \u2265 2 the page E_r is a unital associative graded-commutative bigraded ring on which d_r is a derivation with E_{r+1} = H(E_r,d_r) as bigraded rings; the E_2 product is the graded cup product under E_2^{p,q} = H^p(X;h^q(*)), hence independent of the diagonal; the filtration is multiplicative and E_infinity = gr_F h^*(X) as graded rings. The first page carries the pairing and its Leibniz rule but is not a ring in general. A ring prespectrum is only an example of the hypotheses.",
         "title": "Multiplicative AHSS for a multiplicative generalized theory"
       },
       {
         "deps": [
-          "thm-cohomological-atiyah-hirzebruch-spectral-sequence",
-          "thm-homological-atiyah-hirzebruch-spectral-sequence",
-          "def-extension-problem-of-a-convergent-spectral-sequence"
+          "def-abutment-to-a-filtered-object",
+          "def-extension-problem-of-a-convergent-spectral-sequence",
+          "def-associated-graded-object-of-a-filtered-object"
         ],
         "id": "prop-ahss-collapse-determines-only-the-associated-graded-object",
         "kind": "proposition",
-        "proof_plan": "Unpack E\u221e=gr_F and compare two-step filtrations on Z/4 and Z/2\u2295Z/2, which have identical Z/2 graded pieces.",
+        "proof_plan": "Apply the abutment definition to the given convergent AHSS, compute explicit ambiguous filtered groups and rings, and prove the zero and one-jump exceptions.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -416,8 +473,8 @@
             }
           ]
         },
-        "statement": "Collapse canonically determines only the graded filtration quotients; recovering the abutment requires additive and, when relevant, multiplicative extension data.",
-        "title": "AHSS collapse determines only the associated graded object"
+        "statement": "For a given convergent finite AHSS, collapse identifies the graded family but supplies no splitting; additive and multiplicative extension data may remain, with no additive problem in the one-jump case.",
+        "title": "AHSS collapse generally determines only the associated graded object"
       },
       {
         "axiom_strength": "ZF + AC; inherited from complex K-theory.",
@@ -448,17 +505,23 @@
       {
         "axiom_strength": "ZF + AC; inherited from the constructed complex K-theory spectrum.",
         "deps": [
-          "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory",
-          "def-stable-natural-cohomology-operation",
-          "cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces",
           "def-postnikov-k-invariant",
+          "def-postnikov-section-and-postnikov-tower",
+          "thm-postnikov-towers-exist-for-connected-cw-complexes",
+          "thm-simple-postnikov-stages-are-classified-by-k-invariants",
+          "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces",
+          "def-stable-natural-cohomology-operation",
           "def-bockstein-connecting-operation",
           "def-steenrod-squares-from-cup-i-products",
+          "def-sequential-prespectrum-spectrum-and-adjoint-structure-maps",
+          "def-stable-homotopy-groups-of-a-sequential-prespectrum",
           "def-axiom-of-choice"
         ],
         "id": "lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three",
         "kind": "lemma",
-        "proof_plan": "Write ku for Adams's bu and H for the integral Eilenberg\u2013Mac Lane spectrum. Reconstruct exactly the opening of Adams Proposition 16.6: with the generator t\u2208\u03c0\u2082(bu) fixed, the first k-invariant is a degree-three stable integral operation; Adams identifies its two possibilities as 0 and \u03b4\u2082Sq\u00b2, because the relevant operation group H\u00b3(H) is Z/2 generated by \u03b4\u2082Sq\u00b2. He then examines the third spectrum space SU: the same passage supplies both \u03b4\u2082Sq\u00b2\u22600 in H\u2076(K(Z,3);Z) and H\u2076(SU;Z)=0, forcing the invariant to be the nonzero generator. Finally Adams uses the Bott cofiber S\u00b2\u2227bu\u2192bu\u2192H and its long exact mod-two cohomology sequence; the boundary sends the suspended fundamental class to \u03b2\u2082Sq\u00b2 of the fundamental class, fixing the generator rather than only its nonvanishing. Under the local Bockstein and Steenrod conventions \u03b4\u2082Sq\u00b2 is \u03b2_ZSq\u00b2\u03c1\u2082. Adams also states that every representing space has this same stable operation, so the fixed Bott maps transport the normalization. The H\u00b3, H\u2076(K(Z,3);Z), and H\u2076(SU;Z) facts are used only as facts explicitly supplied in that proof; no independent computation of them is asserted here.",
+        "proof_plan": "Retain exactly the authorized Adams operation-group, SU and compatibility computations. Interpret first stable invariant by the space stages P_(m+2)ku_m over K(Z,m), m>=2. Space Postnikov classification makes a zero SU invariant give a section; the P5SU model attaches cells >=7, so H6(P5SU) injects H6(SU), contradicting the nonzero base class. Distinguish integral delta2 from mod-two beta2 and stable nonzero from low-degree evaluations.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -496,7 +559,7 @@
         ],
         "id": "lem-ku-representability-and-skeletal-postnikov-d-three-comparison",
         "kind": "lemma",
-        "proof_plan": "First identify theories, rather than silently changing models. For a based finite CW quotient Y=X/A, the finite-rank complement theorem writes every virtual bundle as [E]\u2212[epsilon^N]. Stable complex-bundle classification sends this to the component rank(E)\u2212N of a map Y\u2192Z\u00d7BU; adding a trivial summand does not change the stabilized classifying map, while a homotopy gives the corresponding stable bundle isomorphism. Thus Grothendieck's common-summand relation proves, in both directions, the natural isomorphism reduced K^0(Y)\u2245[Y,Z\u00d7BU]. May constructs the Bott-compatible Omega-prespectrum KU with KU_(2i)=Z\u00d7BU and KU_(2i+1)=U; its adjoint structure equivalences are the loop equivalence and Bott equivalence. Therefore the degree-zero identification, suspension adjunction, and the proved natural Bott maps give, inductively in both directions, natural isomorphisms KU^n(X,A)\u2245K^n(X,A) in every degree. Because both connecting maps are obtained from the same quotient/cofiber map followed by suspension, these isomorphisms commute with relative maps and connectors, so they identify the locally constructed skeletal K-AHSS with the KU skeletal exact couple. Next use Adams's connective spectrum bu (modern ku) and map ku\u2192KU: its stable homotopy is zero below zero and maps isomorphically to KU in nonnegative degrees. Bott-translate any KU coefficient row to q\u22640. On the E1 cellular groups the induced map of skeletal exact couples is the wedge, over the p-cells, of ku^q(*)\u2192KU^q(*), hence is an isomorphism throughout q\u22640; the intervening odd groups vanish and the target row q\u22122 is still nonpositive. Naturality for theory morphisms and induction with the exact-couple local-lift formula therefore identify the E3 source, target, and d3 for ku and KU in these rows. Finally let p\u22652 and represent an E3 class by an E1 cellular cocycle e. The r=3 local-lift formula gives k(e)=i\u00b2y and d3[e]=[j(y)]. In the skeletal-pair couple the two i-preimages are exactly the compatible extensions of the representing map over X^(p+1) and X^(p+2). Pulling back the first Postnikov fibration of the corresponding ku representing space, the cellular lifting-obstruction theorem says that its obstruction on each oriented (p+3)-cell is the attaching-map composite represented by j(y). Thus the skeletal d3 is exactly pullback of that representing-space Postnikov invariant, independently of the chosen lifts. For p=1, suspend the reduced class once: suspension of every skeletal-pair long exact sequence gives a termwise isomorphism of exact couples, so it commutes with the r=3 local-lift formula; the p=2 comparison desuspends to p=1. Quotienting a finite CW pair by its subcomplex and applying the same argument proves the relative case.",
+        "proof_plan": "Identify the bundle theory with represented KU and compare ku with KU after Bott translation to q<=-2. At bidegree (p,q), use the total-degree representing space ku_(p+q), whose homotopy groups in degrees p,p+1,p+2 are respectively pi_(-q)ku, 0 and pi_(2-q)ku. Maunder's comparison carries d3 to the Postnikov obstruction joining those two nonzero groups; Adams's stable invariant and Bott normalization identify that layer with the appropriate translate of the first stable ku invariant. Apply obstruction theory cellwise and pass from pairs to quotients.",
         "provenance": {
           "proof": "ai-generated",
           "statement": "literature-derived"
@@ -515,7 +578,7 @@
             }
           ]
         },
-        "statement": "Assume AC. On finite CW pairs the Bott-compatible Omega-prespectrum KU represents the locally defined complex K^* groups. After Bott translation to a nonpositive coefficient row, Adams's connective cover ku\u2192KU identifies the E3 source and target and the d3 of their skeletal AHSSs. For p\u22651 this skeletal d3 is the cellular lifting obstruction given by the first Postnikov invariant of the corresponding ku representing space.",
+        "statement": "Assume AC. On finite CW pairs the Bott-compatible Omega-prespectrum KU represents the locally defined complex K^* groups. After Bott translation to q<=-2, ku->KU identifies the E3 source, target and d3. At (p,q), p>=1, this d3 is the cellular obstruction from the Postnikov layer of ku_(p+q) joining pi_p=pi_(-q)ku to pi_(p+2)=pi_(2-q)ku, the corresponding Bott translate of the first stable ku invariant.",
         "title": "KU representability and the skeletal\u2013Postnikov d-three comparison"
       },
       {
@@ -575,6 +638,8 @@
         "deps": [
           "cor-complex-k-theory-ahss",
           "prop-ahss-collapse-determines-only-the-associated-graded-object",
+          "cor-complex-k-theory-of-spheres",
+          "thm-complex-bott-periodicity",
           "def-axiom-of-choice"
         ],
         "id": "ex-complex-k-ahss-for-spheres",
@@ -598,14 +663,24 @@
       {
         "axiom_strength": "ZF + AC; inherited from complex K-theory.",
         "deps": [
-          "cor-complex-k-theory-ahss",
-          "thm-multiplicative-ahss-for-a-multiplicative-generalized-theory",
+          "def-axiom-of-choice",
+          "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "def-schubert-cells-in-real-and-complex-grassmannians",
+          "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "thm-an-exact-couple-generates-a-spectral-sequence",
+          "def-exact-couple",
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "thm-complex-bott-periodicity",
+          "def-external-product-in-complex-k-theory",
           "prop-ahss-collapse-determines-only-the-associated-graded-object",
-          "def-axiom-of-choice"
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient"
         ],
         "id": "ex-complex-k-ahss-for-complex-projective-space",
         "kind": "example",
-        "proof_plan": "Even free cohomology kills differentials; use multiplicativity and the published K-ring calculation to solve the extensions rather than infer the ring from collapse.",
+        "proof_plan": "Construct the additive K-pair exact couple, use even-cell support and finite convergence, then prove the K-ring by relative Bott products on the disk faces: simultaneous odd-group induction, explicit U-to-CP^(r-1) retraction, clutching generators and all-face nilpotence.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -618,7 +693,7 @@
             }
           ]
         },
-        "statement": "Assume AC. For CP^n the K-AHSS collapses, K^1=0, and K^0=Z[\u03b1]/(\u03b1^{n+1}) for \u03b1=[L]-1, whose leading filtered class is the degree-two generator.",
+        "statement": "Assume AC. For n>=0 the K-AHSS of CP^n collapses, K^1=0, and K^0=Z[alpha]/(alpha^(n+1)), alpha=[L]-1; the ring is proved independently by relative products.",
         "title": "Complex K-AHSS for complex projective space"
       },
       {
@@ -732,11 +807,16 @@
           "lem-mod-two-cohomology-ring-of-infinite-real-projective-space",
           "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
           "thm-cartan-formula-for-steenrod-squares",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "thm-cellular-homology-computes-singular-homology",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "prop-steenrod-square-normalization-instability-and-top-square",
+          "thm-steenrod-squares-are-well-defined-and-natural"
         ],
         "id": "lem-a-bockstein-class-on-rp-two-times-rp-four-has-nonzero-integral-sq-three",
         "kind": "lemma",
-        "proof_plan": "Field Kunneth and the truncated projective-space rings make u\u00b2v\u2074 nonzero. For z=\u03b2_Z(uv), the reduction lemma and Cartan formula give \u03c1_2z=Sq\u00b9(uv)=u\u00b2v+uv\u00b2. The projective-space square formula and Cartan then give Sq\u00b2(\u03c1_2z)=uv\u2074: the possible u\u2074v term vanishes on RP\u00b2 and the mixed Sq\u00b9 terms vanish. Thus Sq_Z\u00b3(z)=\u03b2_Z(uv\u2074). Its reduction is Sq\u00b9(uv\u2074)=u\u00b2v\u2074\u22600, so the integral class itself is nonzero.",
+        "proof_plan": "Prove finite truncation and finite-free homology cellularly plus field duality; apply the exact Kunneth interface. Derive binomial formulas from normalization/instability and repeated Cartan. Compute rho(z), Sq2 rho(z), then detect beta(uv4) by its nonzero reduction u2v4.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -751,7 +831,8 @@
           ]
         },
         "statement": "Assume AC. Let u and v be the degree-one mod-two generators on RP\u00b2 and RP\u2074. For z=\u03b2_Z(uv)\u2208H\u00b3(RP\u00b2\u00d7RP\u2074;Z), one has Sq_Z\u00b3(z)=\u03b2_Z(uv\u2074)\u22600.",
-        "title": "A Bockstein class on RP-two times RP-four has nonzero integral Sq-three"
+        "title": "A Bockstein class on RP-two times RP-four has nonzero integral Sq-three",
+        "axiom_audit": "AC in projective cohomology, field duality and Kunneth; no choice needed for Bockstein or finite Cartan computation."
       },
       {
         "axiom_strength": "ZF + AC; inherited from complex K-theory and the finite field Kunneth calculation.",
@@ -850,21 +931,22 @@
             }
           ]
         },
-        "statement": "Assume AC. A numerable complex bundle's underlying real bundle carries the canonical complex orientation (v_1,iv_1,...); it is natural under pullback, additive over direct sums, and for a real rank-2n bundle V the complexification satisfies e((V_C)_R)=(-1)^n e(V)^2.",
+        "statement": "Assume AC. A numerable complex bundle's underlying real bundle carries the canonical complex orientation (v_1,iv_1,...); it is natural under pullback, additive over direct sums, and for a numerable real rank-2n bundle V the complexification satisfies e((V_C)_R)=(-1)^n e(V)^2.",
         "title": "The complex orientation of the underlying real bundle"
       },
       {
         "deps": [
           "def-real-and-complex-topological-vector-bundle",
-          "thm-vector-bundles-glued-from-transition-cocycles",
           "def-euler-class-by-zero-section-pullback-of-the-thom-class",
-          "lem-complex-orientation-of-underlying-real-bundles",
           "def-stiefel-space-grassmannian-and-tautological-bundle",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type",
+          "thm-subordinate-partitions-of-unity-exist",
+          "def-oriented-real-vector-bundle-and-oriented-frame-bundle"
         ],
         "id": "def-complex-projective-bundle-and-tautological-complex-line",
         "kind": "definition",
-        "proof_plan": "Projectivize transition functions and glue selected lines; defining x by the prior Euler class avoids circular use of Chern classes. Fiber normalization is proved separately in the following lemma.",
+        "proof_plan": "Use quotient projective charts and the inherited numeration. Apply the compact-fiber total-space lemma, numerate the tautological coordinate charts by partitions of unity, and orient the line directly by the real determinant a^2+b^2 before applying the Thom-defined Euler construction.",
         "provenance": {
           "proof": "not-applicable",
           "statement": "literature-derived"
@@ -877,7 +959,7 @@
             }
           ]
         },
-        "statement": "Assume AC. For a numerable complex rank-n bundle E over a CW complex B, P(E) has fiber CP^{n-1}, tautological line \u03b3_E, and x=e((\u03b3_E)_R)\u2208H\u00b2(P(E);Z) in the complex orientation; P(0)=\u2205.",
+        "statement": "Assume AC. For a numerable complex rank-n bundle E over a paracompact Hausdorff CW complex B, P(E) has fiber CP^{n-1}, tautological line \u03b3_E, and x=e((\u03b3_E)_R)\u2208H\u00b2(P(E);Z) in the complex orientation; P(0)=\u2205.",
         "title": "Complex projective bundle and tautological complex line"
       },
       {
@@ -942,21 +1024,18 @@
         "axiom_strength": "ZF + AC; inherited from oriented bundle classification and the Euler-class supplier.",
         "deps": [
           "def-complex-projective-bundle-and-tautological-complex-line",
-          "lem-complex-orientation-of-underlying-real-bundles",
           "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle",
-          "thm-stable-stiefel-space-is-contractible",
-          "def-oriented-grassmannian-and-tautological-oriented-bundle",
-          "def-stiefel-space-grassmannian-and-tautological-bundle",
-          "lem-integral-cohomology-ring-of-complex-projective-space-by-splitting",
-          "lem-cohomology-ring-of-infinite-complex-projective-space",
           "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "def-schubert-cells-in-real-and-complex-grassmannians",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "cor-homology-of-spheres",
           "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
-          "def-singular-cohomology-with-coefficients",
           "def-axiom-of-choice"
         ],
         "id": "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator",
         "kind": "lemma",
-        "proof_plan": "Identify BSO(2) with CP^\u221e by sending an oriented real plane to its complex line. The unit-circle bundle of the universal oriented plane has the contractible stable Stiefel space as total space, so the vector-bundle Gysin sequence makes multiplication by its Euler class an isomorphism H\u2070\u2192H\u00b2; hence that Euler class is a generator. On a fiber CP^{n-1}, the restricted tautological line is classified by the standard inclusion CP^{n-1}\u2192CP^\u221e. Naturality and the published integral ring calculation therefore make its Euler class a degree-two generator and its powers a basis; for n=1 the basis is just 1 and the restricted degree-two class is zero.",
+        "proof_plan": "Identify the fiber line directly. Finite Schubert cochains give degree bounds and coefficient reduction; the finite tautological sphere bundle and Gysin give generation in the range 2 through 2N. No BSO model identification or infinite-stage calculation is used.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -975,7 +1054,7 @@
             }
           ]
         },
-        "statement": "Assume AC. For n\u22651, the class x=e((\u03b3_E)_R) restricts on every fiber CP^{n-1} to the standard integral degree-two generator up to the fixed complex-orientation sign; consequently 1,x,\u2026,x^{n-1} restrict to its integral cohomology basis, and their reductions do so over every field F_p.",
+        "statement": "Under AC over a paracompact Hausdorff CW base, the complex-oriented tautological Euler class restricts to the same tautological Euler generator, with powers giving integral and prime-field bases; the rank-one fiber is a point.",
         "title": "The complex tautological Euler class restricts to the projective-fiber generator"
       },
       {
@@ -986,11 +1065,22 @@
           "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
           "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type",
           "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
-          "def-axiom-of-choice"
+          "def-partition-of-unity-subordinate-to-a-cover",
+          "def-axiom-of-choice",
+          "thm-subordinate-partitions-of-unity-exist",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "prop-pullbacks-of-fibrations-are-fibrations",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "thm-fibration-sequence-is-natural",
+          "lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "thm-five-lemma-for-modules",
+          "thm-singular-cohomology-is-graded-commutative"
         ],
         "id": "thm-integral-complex-projective-bundle-theorem",
         "kind": "theorem",
-        "proof_plan": "The numerable projective bundle is a Serre fibration. Apply Leray\u2013Hirsch componentwise to the preceding proved fiber basis, first over Z and then after coefficient reduction over each F_p. Expand x^n uniquely over Z, use grading for the coefficients, and use monic division plus basis uniqueness for the relation ideal.",
+        "proof_plan": "Numerable projective charts and finite fiber basis give Leray\u2013Hirsch on CW bases. On paracompact Hausdorff CGWH CW-type bases, construct the oriented tautological Euler class locally and compare pullback fibrations by the natural homotopy LES; weak equivalence gives homology, then cohomology isomorphisms by UCT. Transfer the actual module map; divide by the central monic even polynomial. Handle disconnected bases degreewise using finite sums and component products.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1041,11 +1131,13 @@
           "thm-numerable-vector-bundles-admit-bundle-metrics",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
           "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-integral-complex-projective-bundle-theorem",
+          "thm-subordinate-partitions-of-unity-exist"
         ],
         "id": "def-complex-flag-bundle-and-chern-roots",
         "kind": "definition",
-        "proof_plan": "Split off a tautological line at each finite stage using a metric, and define roots after c1 exists.",
+        "proof_plan": "Iterate the CW-type projective construction proved in the projective-bundle theorem. Orthogonal projections give locally trivial complements; partitions of unity give their numerability. Compact-fiber total-space preservation licenses each next stage. There are no stages when n=1.",
         "provenance": {
           "proof": "not-applicable",
           "statement": "literature-derived"
@@ -1072,7 +1164,7 @@
         ],
         "id": "thm-complex-splitting-principle-with-integral-injective-pullback",
         "kind": "theorem",
-        "proof_plan": "For R=Z or a field F_p, each projective pullback is the coefficient-of-one inclusion in the corresponding Leray\u2013Hirsch module from the strengthened projective-bundle theorem. Compose the tower and iterate for finitely many bundles; the same construction supplies a common injection for every stated coefficient ring.",
+        "proof_plan": "Each original CW-base flag tower has coefficient-of-one injective projective maps. For multiple bundles pull their original towers back successively; projectivization and numeration commute with pullback and the CW-type projective theorem applies at each stage. Pull the original splittings back. Omit zero ranks and use the identity for an empty family.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1125,14 +1217,19 @@
       },
       {
         "deps": [
+          "def-axiom-of-choice",
+          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
           "def-chern-classes-from-the-projective-bundle-relation",
           "thm-complex-splitting-principle-with-integral-injective-pullback",
-          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
-          "def-axiom-of-choice"
+          "def-complex-flag-bundle-and-chern-roots",
+          "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "def-hurewicz-and-serre-fibrations",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"
         ],
         "id": "thm-uniqueness-of-chern-classes-from-the-splitting-principle",
         "kind": "theorem",
-        "proof_plan": "Pull to a flag space, where the axioms force the product over line roots, and descend equality by injectivity.",
+        "proof_plan": "Prove the flag total path-connected through its projective tower and choose an actual path-connected CW model h:C->Fl(E). Evaluate d and c only on C, where the pulled-back bundle splits into numerable lines. Naturality along p=q h and injectivity of p*=h* q* descend the equality; treat rank zero separately.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1146,27 +1243,33 @@
             }
           ]
         },
-        "statement": "Assume AC. The total Chern class is uniquely determined by pullback naturality, Whitney multiplication, degree-zero part one, and c(L)=1+e(L_R) on lines.",
+        "statement": "Assume AC. Natural assignments on isomorphism classes of numerable complex bundles over nonempty path-connected CW complexes, normalized by degree zero one, rank cutoff, and d_1(L)=e(L_R), and satisfying Whitney multiplication, are uniquely the Chern classes.",
         "title": "Uniqueness of Chern classes from the splitting principle"
       },
       {
         "axiom_strength": "ZF + AC; inherited from bundle classification and the cohomological Kunneth theorem.",
         "deps": [
           "def-complex-flag-bundle-and-chern-roots",
+          "def-axiom-of-choice",
           "thm-stable-stiefel-space-is-contractible",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
           "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
+          "thm-milnor-join-model-is-a-contractible-free-g-space",
           "thm-principal-bundles-are-classified-by-maps-to-bg",
           "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
-          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "thm-fibration-sequence-is-natural",
           "thm-whitehead-theorem",
-          "thm-milnor-join-model-is-a-contractible-free-g-space",
-          "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
           "lem-cohomology-ring-of-infinite-complex-projective-space",
-          "def-axiom-of-choice"
+          "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "thm-subordinate-partitions-of-unity-exist",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes"
         ],
         "id": "lem-universal-complex-flag-bundle-is-bt-n",
         "kind": "lemma",
-        "proof_plan": "Use the stable contractible Stiefel space EU(n). Its U(n)-quotient is BU(n); quotienting by the maximal torus T^n gives the complete flag bundle, and the same contractible total space identifies EU(n)/T^n with BT^n=(CP^\u221e)^n. The ordered tautological lines are the n coordinate universal lines. Compatible finite products of finite projective skeleta, their integral polynomial rings, and Kunneth give H^*(BT^n;Z)=Z[t_1,\u2026,t_n]. Permutation matrices normalize T^n, permute the line factors, and cover the identity of BU(n), so every class pulled back from BU(n) is symmetric.",
+        "proof_plan": "Identify orthogonal flags with the torus quotient by explicit frame charts. Prove the finite product circle model is classifying using coordinate quotients and fiber products. The ordered-line map is a homotopy equivalence by the natural fibration sequence and Whitehead after a CW model. Compute roots by Euler naturality and Kunneth, then use permutation homeomorphisms over the Grassmannian.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1180,22 +1283,26 @@
             }
           ]
         },
-        "statement": "Assume AC. For the universal rank-n complex bundle over BU(n), its complete flag bundle is homotopy equivalent over BU(n) to BT^n=(CP^\u221e)^n. Under this equivalence the Chern roots are the coordinate generators t_i and H^*(BT^n;Z)=Z[t_1,\u2026,t_n]. The symmetric group permutes the t_i by bundle maps over BU(n), so the image of q^* is contained in the symmetric invariants.",
+        "statement": "For n>=1 under AC, the universal complex flag bundle is the quotient model BT^n over BU(n), and the explicit ordered-line map to the finite product of CP-infinity spaces is a homotopy equivalence identifying roots with tautological Euler generators. Permutations fix the image of flag pullback.",
         "title": "The universal complex flag bundle is BT-n"
       },
       {
         "deps": [
+          "lem-universal-complex-flag-bundle-is-bt-n",
+          "def-axiom-of-choice",
           "thm-complex-splitting-principle-with-integral-injective-pullback",
           "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
-          "lem-universal-complex-flag-bundle-is-bt-n",
           "thm-fundamental-theorem-of-symmetric-polynomials",
           "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
           "def-complex-flag-bundle-and-chern-roots",
-          "def-axiom-of-choice"
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "def-stiefel-space-grassmannian-and-tautological-bundle"
         ],
         "id": "thm-integral-cohomology-of-bu-n",
         "kind": "theorem",
-        "proof_plan": "Apply integral splitting to the universal bundle, so q^* is injective. The flag-space lemma identifies the target as Z[t_1,\u2026,t_n] and puts the image inside its symmetric invariants. Whitney multiplication after splitting sends q^*c_i to the ith elementary symmetric polynomial e_i. Hence the image contains Z[e_1,\u2026,e_n], while the fundamental theorem of symmetric polynomials says this is the entire invariant ring. Therefore q^* identifies H^*(BU(n);Z) with Z[e_1,\u2026,e_n], proving both generation and algebraic independence without a Gysin or finite-index shortcut.",
+        "proof_plan": "Apply integral splitting to the universal bundle, so q^* is injective. The flag-space lemma identifies the target as Z[t_1,\u2026,t_n] and puts the image inside its symmetric invariants. Whitney multiplication after splitting sends q^*c_i to the ith elementary symmetric polynomial e_i. Hence the image contains Z[e_1,\u2026,e_n], while the fundamental theorem of symmetric polynomials says this is the entire invariant ring. Therefore q^* identifies H^*(BU(n);Z) with Z[e_1,\u2026,e_n], proving both generation and algebraic independence without a Gysin or finite-index shortcut. Apply Whitney on the actual product CW model and descend by homotopy-invariant cohomology, using Euler naturality for line roots on the CW-type flag model.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1208,28 +1315,30 @@
             }
           ]
         },
-        "statement": "Assume AC. H^*(BU(n);Z)=Z[c_1,\u2026,c_n], and restriction to BT^n sends c_i to the ith elementary symmetric polynomial in universal line roots.",
+        "statement": "For n>=1 under AC, H^*(BU(n);Z)=Z[c_1,...,c_n] for the associated tautological vector bundle; flag pullback sends c_i to e_i in the coordinate roots.",
         "title": "Integral cohomology of BU(n)"
       },
       {
         "deps": [
-          "def-chern-classes-from-the-projective-bundle-relation",
-          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
-          "thm-integral-cohomology-of-bu-n",
+          "def-axiom-of-choice",
           "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
           "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
           "thm-eilenberg-maclane-spaces-represent-singular-cohomology",
           "lem-circle-and-path-loop-models-for-eilenberg-maclane-induction",
           "thm-milnor-join-model-is-a-contractible-free-g-space",
           "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
           "lem-cohomology-ring-of-infinite-complex-projective-space",
           "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "def-axiom-of-choice"
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"
         ],
         "id": "thm-first-chern-class-classifies-complex-line-bundles",
         "kind": "theorem",
-        "proof_plan": "Identify BU(1)=CP\u221e with K(Z,2), and use bundle classification plus representability to obtain the natural bijection. The universal c1 is the integral generator by the projective-bundle normalization. On CP\u221e\u00d7CP\u221e, Kunneth makes H\u00b2 free on the two coordinate generators; the tensor product of universal lines restricts to the universal line on either axis, so naturality forces its c1 to be their sum. Pullback proves that tensor product corresponds to addition for every allowed base.",
+        "proof_plan": "Identify BU(1)=CP\u221e with K(Z,2), and use bundle classification plus representability to obtain the natural bijection. The universal c1 is the integral generator by the projective-bundle normalization. On CP\u221e\u00d7CP\u221e, Kunneth makes H\u00b2 free on the two coordinate generators; the tensor product of universal lines restricts to the universal line on either axis, so naturality forces its c1 to be their sum. Pullback proves that tensor product corresponds to addition for every allowed base. Use the exact pointed-set tail only to show pi_1=0 for the connected circle fiber. HEP at the vertex and cohomology representability explicitly identify based and free classes. Transport the group isomorphism to CW-type bases by the natural classification/cohomology square.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1242,7 +1351,7 @@
             }
           ]
         },
-        "statement": "Assume AC. For every CW complex X, and more generally every paracompact Hausdorff CGWH space having CW homotopy type, c_1:Pic_top(X)\u2192H\u00b2(X;Z) is a natural group isomorphism, with tensor product corresponding to addition.",
+        "statement": "Assume AC. For a path-connected CW complex with vertex basepoint, and more generally a path-connected paracompact Hausdorff CGWH space of CW type, c_1 gives a natural group isomorphism from numerable line-bundle classes under tensor product to H^2(-;Z).",
         "title": "The first Chern class classifies complex line bundles"
       },
       {
@@ -1269,7 +1378,7 @@
             }
           ]
         },
-        "statement": "Assume AC. For complex lines, c_1(L\u2297M)=c_1(L)+c_1(M), c_1(L^*)=\u2212c_1(L), and the first Chern class of the conjugate line is \u2212c_1(L).",
+        "statement": "Assume AC. On a path-connected CW base with vertex, or a path-connected paracompact Hausdorff CGWH base of CW type, numerable complex lines satisfy c_1(L tensor M)=c_1(L)+c_1(M), c_1(L*)=-c_1(L), c_1(conjugate L)=-c_1(L).",
         "title": "First Chern class of tensor, dual, and conjugate lines"
       },
       {
@@ -1308,11 +1417,18 @@
           "prop-first-stiefel-whitney-class-classifies-orientability",
           "lem-complex-orientation-of-underlying-real-bundles",
           "def-chern-classes-from-the-projective-bundle-relation",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-naturality-of-stiefel-whitney-classes",
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation",
+          "def-complex-flag-bundle-and-chern-roots",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "def-singular-cup-product-on-cochains",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles"
         ],
         "id": "thm-mod-two-reduction-of-chern-classes",
         "kind": "theorem",
-        "proof_plan": "Split into lines; each underlying oriented real plane has w1=0 and w2=\u03c12e=\u03c12c1. Multiply and descend using the explicitly supplied F_2-injectivity of the strengthened splitting theorem.",
+        "proof_plan": "Pull the flag splitting to an actual CW model, retain mod-two injectivity, multiply line identities there, and use both characteristic-class naturalities and coefficient naturality to descend.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1330,17 +1446,18 @@
       },
       {
         "deps": [
+          "def-axiom-of-choice",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "thm-complex-splitting-principle-with-integral-injective-pullback",
-          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
-          "prop-first-chern-class-of-tensor-dual-and-conjugate-lines",
-          "thm-numerable-vector-bundles-admit-bundle-metrics",
           "def-real-and-complex-topological-vector-bundle",
-          "def-axiom-of-choice"
+          "thm-vector-bundles-glued-from-transition-cocycles",
+          "prop-first-chern-class-of-tensor-dual-and-conjugate-lines",
+          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
+          "thm-complex-splitting-principle-with-integral-injective-pullback",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"
         ],
         "id": "prop-complexification-is-conjugation-invariant",
         "kind": "proposition",
-        "proof_plan": "Map v\u2297z to v\u2297conjugate(z) in the conjugate target. Split V into lines, negate every root, and descend the elementary-symmetric formula.",
+        "proof_plan": "Glue complexification using the real transitions and use coordinate conjugation for its canonical complex-linear comparison. For a positive-rank V pull the flag splitting to a CW model; Whitney and the line conjugation formula negate each root. Injectivity of the composite pullback descends the sign formula. Treat rank zero directly by conventions.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1412,11 +1529,13 @@
           "thm-mod-two-reduction-of-chern-classes",
           "thm-whitney-sum-formula-for-stiefel-whitney-classes",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-singular-cohomology-is-graded-commutative",
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation"
         ],
         "id": "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes",
         "kind": "theorem",
-        "proof_plan": "Complexification commutes with pullback and trivial sums. Reduce c_{2i}(E_C), identify (E_C)_R\u2245E\u2295E, and read degree 4i from w(E)^2.",
+        "proof_plan": "Check complexification/pullback and sum comparisons by transition matrices. Give the real-linear isomorphism (E_C)_R to E plus E and its inverse. Apply the exact mod-two Chern supplier, use graded commutativity in characteristic two to cancel cross terms, and check both rank cutoffs.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1429,7 +1548,7 @@
             }
           ]
         },
-        "statement": "Assume AC. Pontryagin classes are pullback natural and stable, and \u03c1_2p_i(E)=w_{2i}(E)^2.",
+        "statement": "Assume AC. For numerable real bundles over nonempty path-connected paracompact Hausdorff CW bases, Pontryagin classes are natural for continuous maps between those bases, stable, and satisfy rho_2 p_i=w_{2i}^2.",
         "title": "Naturality, stability, and mod-two reduction of Pontryagin classes"
       },
       {
@@ -1469,7 +1588,7 @@
         ],
         "id": "thm-top-pontryagin-class-is-the-square-of-the-euler-class",
         "kind": "theorem",
-        "proof_plan": "Identify (E_C)_R with E\u2295E. The product and complex orientations differ by (\u22121)^n; this cancels the defining (\u22121)^n in p_n and Euler multiplicativity gives e\u00b2.",
+        "proof_plan": "Use the explicit real isomorphism from clause 3 of the complex-orientation lemma. Count n(2n-1) interchanges from interleaved to product frame, so the sign is (-1)^n. Top Chern equals complex-oriented Euler and Whitney Euler multiplication then cancel the defining Pontryagin sign. Handle canonical rank zero separately.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1482,22 +1601,27 @@
             }
           ]
         },
-        "statement": "Assume AC. For oriented real rank-2n E, p_n(E)=e(E)^2 integrally.",
+        "statement": "Assume AC. For a numerable oriented real rank-2n bundle over a nonempty path-connected paracompact Hausdorff CW base, p_n=e^2 integrally. Rank zero has its canonical unit orientation; orientation reversal is asserted only for n>0.",
         "title": "Top Pontryagin class is the square of the Euler class"
       },
       {
-        "axiom_strength": "ZF + AC; inherited from the stable classifying-space construction.",
+        "axiom_strength": "ZF + AC; numerations, compact-fiber CW-type comparison and Euler-class suppliers.",
         "deps": [
           "def-oriented-grassmannian-and-tautological-oriented-bundle",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
           "thm-stable-stiefel-space-is-contractible",
-          "thm-principal-bundles-are-classified-by-maps-to-bg",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
           "prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
           "def-real-and-complex-topological-vector-bundle",
+          "def-oriented-real-vector-bundle-and-oriented-frame-bundle",
           "def-axiom-of-choice"
         ],
         "id": "lem-universal-oriented-sphere-bundle-has-bso-n-minus-one-total-space",
         "kind": "lemma",
-        "proof_plan": "Model BSO(n) by oriented n-planes in R^\u221e. A point of the unit-sphere bundle is an oriented n-plane V with a unit vector v\u2208V; the orthogonal complement v^\u22a5\u2229V inherits the unique orientation for which (v,positive basis) is positive. Stable orthogonal transitivity identifies this space with the oriented (n-1)-plane model BSO(n-1), and the projection forgets v. Equivalently it is ESO(n)/SO(n-1)\u2192ESO(n)/SO(n), whose fiber is SO(n)/SO(n-1)=S^{n-1}.",
+        "proof_plan": "Use graph charts and compact-fiber admissibility. Construct r by the oriented perpendicular complement and inverse s(W)=(R e_1 plus P W,e_1), P the even-coordinate embedding. Descend the equivariant Gram-normalized parity homotopy and rotate Pv to e_1 to prove both inverse homotopies. Split by av+w with the trivial line first; apply Euler naturality and the nonzero section. BSO(1) is contractible, not literally a point.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1508,23 +1632,38 @@
               "locator": "Lectures 35\u201336, universal oriented sphere bundles and BSO induction, printed pp.130\u2013137",
               "title": "Miller, MIT 18.906 Algebraic Topology II",
               "url": "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            },
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "Lemma 1.15 pp.28\u201329; parity argument p.30; Proposition 1.19 p.36 (paracompact numerations for compact exhaustions); oriented complement p.95."
             }
           ]
         },
-        "statement": "Assume AC. For n\u22652, the unit-sphere bundle of the universal oriented rank-n bundle over BSO(n) is the fibration S^{n-1}\u2192BSO(n-1)\u2192BSO(n), with the total-space identification preserving the induced orientation conventions.",
-        "title": "The universal oriented sphere bundle has BSO(n-1) as total space"
+        "statement": "For n>=2 the actual sphere bundle S_n of the universal oriented n-plane is a Hurewicz fibration over BSO(n), and complement r:S_n->BSO(n-1) is a homotopy equivalence. With v-first complement orientation the ordered splitting is epsilon^1 plus r*gamma_(n-1), and p*e=0.",
+        "title": "The universal oriented sphere-bundle total space has the homotopy type of BSO(n-1)"
       },
       {
         "axiom_strength": "ZF + AC; AC chooses the simplex lifts used to define transfer simultaneously.",
         "deps": [
           "def-covering-map-and-evenly-covered-neighbourhoods",
           "def-deck-transformation-and-deck-group",
+          "def-regular-covering",
+          "thm-uniqueness-of-lifts-from-a-connected-space",
+          "thm-covering-space-lifting-criterion",
+          "thm-path-connected-implies-connected",
+          "thm-convex-subsets-have-trivial-fundamental-group",
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients",
           "def-singular-cohomology-with-coefficients",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "prop-cup-product-is-natural-unital-and-associative",
           "def-axiom-of-choice"
         ],
         "id": "lem-rational-transfer-identifies-a-finite-regular-cover-with-deck-invariants",
         "kind": "lemma",
-        "proof_plan": "For a finite d-sheeted regular cover p:Y\u2192X, lift each singular simplex after choosing one lift and sum its d deck translates; this is a chain map because the full lift-sum is independent of the initial lift. Dualize to transfer tr. Directly on simplices, tr\u2218p^*=d on H^*(X;Q) and p^*\u2218tr=\u03a3_{g\u2208G}g^* on H^*(Y;Q). Division by d makes p^* injective. Its image is invariant, while an invariant y equals p^*((1/d)tr(y)), proving equality with deck invariants in every degree.",
+        "proof_plan": "Prove freeness by uniqueness of lifts and transitivity by the regular-cover definition, hence |G|=d for nonempty covers. Prove simplex lifting and face-restriction bijections with the lifting criterion. Form the full lift-sum chain map, dualize to transfer, verify T p*=d and p*T=sum g*, divide by d and use cup naturality. Treat the empty case separately.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1538,7 +1677,7 @@
             }
           ]
         },
-        "statement": "Assume AC. If p:Y\u2192X is a finite d-sheeted regular covering of CW complexes with deck group G, then p^*:H^*(X;Q)\u2192H^*(Y;Q) is injective and its image is exactly H^*(Y;Q)^G.",
+        "statement": "Assume AC. For a finite d-sheeted regular CW covering with d>=1, regular meaning path-connected total space and fiber-transitive deck group, rational pullback is injective with image precisely the deck-invariant graded subalgebra; the empty case gives zero groups.",
         "title": "Rational transfer identifies a finite regular cover with deck invariants"
       },
       {
@@ -1551,11 +1690,22 @@
           "prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion",
           "def-oriented-grassmannian-and-tautological-oriented-bundle",
           "thm-oriented-real-vector-bundles-are-classified-by-bso",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-stable-stiefel-space-is-contractible",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cup-product-on-cochains",
+          "def-thom-class-by-fiberwise-normalization",
+          "thm-naturality-and-uniqueness-of-thom-classes",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "thm-singular-cohomology-is-graded-commutative"
         ],
         "id": "thm-rational-cohomology-of-bo-and-bso-by-pontryagin-and-euler-classes",
         "kind": "theorem",
-        "proof_plan": "Use the identified universal sphere bundle and the vector-bundle Gysin sequence inductively, beginning with BSO(1)=*. In odd rank the Euler class is rationally zero; in even rank the Gysin multiplication is by e. Exactness gives the displayed polynomial rings, and the top relation p_m=e\u00b2 identifies the even-rank square. The forget-orientation map BSO(n)\u2192BO(n) is the regular two-sheeted cover obtained from the oriented Grassmannian. Apply rational transfer: orientation reversal fixes each p_i and negates e, so the invariant subrings are exactly the displayed BO rings.",
+        "proof_plan": "Induct on n from BSO(1) contractible, assuming only P(n-1). Even n: sphere restriction surjects onto the preceding polynomial ring; Gysin makes multiplication by e injective, giving generation by degree induction and independence by finite E-degree induction. Odd n: Euler is rationally zero; inject into the preceding even ring and compare finite dimensions with its subring generated by p_i and e^2. Use the actual sphere total and its homotopy equivalence via j=p s, never a literal equality. Apply rational transfer to the connected orientation double cover, fixing p_i and negating positive even-rank e.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1568,11 +1718,12 @@
             },
             {
               "title": "Hatcher, Vector Bundles & K-Theory",
-              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "Proposition 1.19, printed p.36 (complete proof); paragraph preceding Theorem 3.16, printed p.94; rational/away-from-two Gysin induction and transfer, printed pp.95\u201396."
             }
           ]
         },
-        "statement": "Assume AC. For m\u22651, H^*(BO(2m);Q)=H^*(BO(2m+1);Q)=Q[p_1,\u2026,p_m], H^*(BSO(2m+1);Q)=Q[p_1,\u2026,p_m], and H^*(BSO(2m);Q)=Q[p_1,\u2026,p_{m-1},e], with p_m=e\u00b2. Also BO(0), BSO(0), and BSO(1) are points and have rational cohomology Q.",
+        "statement": "Assume AC. For m\u22651, H^*(BO(2m);Q)=H^*(BO(2m+1);Q)=Q[p_1,\u2026,p_m], H^*(BSO(2m+1);Q)=Q[p_1,\u2026,p_m], and H^*(BSO(2m);Q)=Q[p_1,\u2026,p_{m-1},e], with p_m=e\u00b2. BO(0) and BSO(0) are points; BSO(1) is the contractible stable unit sphere. All have rational cohomology Q.",
         "title": "Rational cohomology of BO and BSO by Pontryagin and Euler classes"
       },
       {
@@ -1603,12 +1754,21 @@
       {
         "deps": [
           "thm-complex-splitting-principle-with-integral-injective-pullback",
-          "thm-integral-cohomology-of-bu-n",
           "thm-fundamental-theorem-of-symmetric-polynomials",
           "lem-cohomology-of-a-finite-cw-complex-vanishes-above-its-dimension",
           "def-chern-classes-from-the-projective-bundle-relation",
-          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "def-axiom-of-choice"
+          "def-complex-flag-bundle-and-chern-roots",
+          "def-axiom-of-choice",
+          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
+          "thm-leray-hirsch-module-isomorphism",
+          "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator",
+          "def-schubert-cells-in-real-and-complex-grassmannians",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "def-singular-cup-product-on-cochains"
         ],
         "id": "def-chern-character-of-a-complex-vector-bundle",
         "kind": "definition",
@@ -1626,7 +1786,8 @@
           ]
         },
         "statement": "Assume AC. For a complex vector bundle E over a finite CW complex X, define ch(E)=\u03a3exp(t_i) in the direct sum H^{even}(X;Q); each homogeneous term is the corresponding rational Newton polynomial in c_1,\u2026,c_n, and finite dimension leaves only finitely many nonzero evaluated terms.",
-        "title": "Chern character of a complex vector bundle"
+        "title": "Chern character of a complex vector bundle",
+        "axiom_strength": "ZF + AC; Chern, Euler, numerable-fibration, universal coefficient and Leray\u2013Hirsch suppliers."
       },
       {
         "deps": [
@@ -1664,8 +1825,16 @@
           "thm-chern-character-is-a-natural-ring-homomorphism-on-k-zero",
           "thm-complex-bott-periodicity",
           "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory",
-          "prop-reduced-and-unreduced-generalized-cohomology-theories-correspond",
           "def-chern-character-of-a-complex-vector-bundle",
+          "def-reduced-complex-k-theory",
+          "def-negative-degree-complex-k-groups",
+          "def-external-product-in-complex-k-theory",
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator",
+          "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms",
+          "lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses",
+          "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
           "def-axiom-of-choice"
         ],
         "id": "def-graded-chern-character-by-suspension-and-bott-periodicity",
@@ -1683,24 +1852,23 @@
             }
           ]
         },
-        "statement": "Assume AC. For an unbased finite CW complex X, subtract rank to get reduced ch and define odd ch through K^{-1}(X)=K~^0(\u03a3X_+) and reduced cohomology suspension; for based reduced theory use K~^{-1}(X)=K~^0(\u03a3X). Bott periodicity, normalized on the Bott generator, then gives ch:K^j(X)\u2192\u2295_kH^{j+2k}(X;Q). These maps commute with external products and hence with the internal Z/2-graded products.",
+        "statement": "Assume AC. Restrict the degree-zero Chern character to the kernel of basepoint restriction, retaining ranks on other components. Define degree -1 by suspension, and all integer degrees by the fixed Bott maps, normalized by ch(beta)=c1(gamma). Naturality and products use the coherent suspension products.",
         "title": "Graded Chern character by suspension and Bott periodicity"
       },
       {
         "deps": [
           "def-graded-chern-character-by-suspension-and-bott-periodicity",
-          "prop-reduced-and-unreduced-generalized-cohomology-theories-correspond",
-          "def-skeletal-filtration-for-generalized-cohomology",
           "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory",
-          "prop-singular-cohomology-is-contravariantly-functorial",
-          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
-          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
-          "thm-excision-for-singular-cohomology",
+          "def-negative-degree-complex-k-groups",
+          "thm-reduced-k-theory-exact-sequence-of-a-cofibration",
+          "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
+          "prop-relative-cw-inclusions-are-cofibrations",
           "def-axiom-of-choice"
         ],
         "id": "lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations",
         "kind": "lemma",
-        "proof_plan": "Apply the based character to X/A. A class vanishing on X^{p-1} lifts relatively; its character remains relative and therefore restricts to zero on that skeleton.",
+        "proof_plan": "Use the cofiber of A+ to X+ for actual K and ordinary cohomology, collar excision and X+ for empty A. Normalize pair boundaries as -q*s to match the ordinary cochain boundary; apply based character naturality/suspension. Filtration is preserved by naturality of restriction into HP.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1714,22 +1882,26 @@
           ]
         },
         "statement": "Assume AC. For finite CW pairs, the graded character gives maps on relative groups commuting with connecting maps and sends the K-theory skeletal filtration F^p into the ordinary-cohomology filtration F^p.",
-        "title": "The graded Chern character respects relative maps and skeletal filtrations"
+        "title": "The graded Chern character respects relative maps and skeletal filtrations",
+        "axiom_audit": "AC inherited from actual K-theory and graded character; no arbitrary reduced/pair correspondence is used."
       },
       {
         "deps": [
           "lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations",
           "def-graded-chern-character-by-suspension-and-bott-periodicity",
-          "cor-complex-k-theory-ahss",
-          "thm-naturality-and-edge-maps-of-the-ahss",
-          "thm-cohomological-atiyah-hirzebruch-spectral-sequence",
           "lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients",
           "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory",
+          "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms",
+          "def-exact-couple",
+          "thm-an-exact-couple-generates-a-spectral-sequence",
+          "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "lem-edge-maps-of-a-bounded-skeletal-ahss",
           "def-axiom-of-choice"
         ],
         "id": "lem-chern-character-induces-the-rational-isomorphism-on-ahss-e-two",
         "kind": "lemma",
-        "proof_plan": "Map every skeletal pair. On quotient sphere wedges the Bott normalization sends the K coefficient generator to the rational generator, so E1 and E2 are coefficientwise isomorphisms.",
+        "proof_plan": "Construct actual pair exact couples; prove rational tensor exactness by fractions and identify rationalized derived pages. The relative graded character induces a couple morphism; first-page finite-cell coefficient maps are isomorphisms by Bott normalization, hence so are second-page maps. Check stable filtration compatibility by representative maps.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1800,16 +1972,19 @@
       {
         "deps": [
           "prop-first-chern-class-of-tensor-dual-and-conjugate-lines",
-          "thm-first-chern-class-classifies-complex-line-bundles",
-          "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range",
-          "def-clutching-construction-for-bundles-over-a-suspension",
           "lem-integral-cohomology-ring-of-complex-projective-space-by-splitting",
           "def-chern-classes-from-the-projective-bundle-relation",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "def-thom-class-by-fiberwise-normalization",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "thm-excision-for-singular-cohomology",
+          "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms",
+          "def-kronecker-evaluation-pairing",
           "def-axiom-of-choice"
         ],
         "id": "ex-chern-class-of-tautological-and-hyperplane-lines-on-complex-projective-space",
         "kind": "example",
-        "proof_plan": "Identify the hyperplane line with \u03b3* and apply the dual-line formula with the fixed cellular orientation.",
+        "proof_plan": "Duality and tautological Euler generation; compute the hyperplane Euler number +1 using the coordinate-functional section and its normalized Thom pullback at its unique zero.",
         "provenance": {
           "proof": "ai-altered",
           "statement": "literature-derived"
@@ -1828,11 +2003,13 @@
       {
         "deps": [
           "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
-          "thm-integral-cohomology-of-bu-n",
           "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
           "lem-cohomology-ring-of-infinite-complex-projective-space",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-universal-complex-flag-bundle-is-bt-n",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "def-schubert-cells-in-real-and-complex-grassmannians"
         ],
         "id": "ex-chern-classes-of-a-sum-of-universal-complex-lines",
         "kind": "example",
@@ -1930,7 +2107,7 @@
             }
           ]
         },
-        "statement": "Assume AC. For trivial \u03b5^r, c(E\u2295\u03b5^r)=c(E) and p(F\u2295\u03b5^r)=p(F); c_i vanishes above complex rank and p_i when 2i exceeds real rank.",
+        "statement": "Assume AC. Over a nonempty path-connected paracompact Hausdorff CW base, for trivial \u03b5^r one has c(E\u2295\u03b5^r)=c(E) and p(F\u2295\u03b5^r)=p(F); c_i vanishes above complex rank and p_i when 2i exceeds real rank.",
         "title": "Stability and rank cutoff under adding a trivial summand"
       },
       {
@@ -1942,9 +2119,13 @@
           "def-stiefel-whitney-classes-from-the-projective-bundle-relation",
           "def-tautological-degree-one-class-on-a-real-projective-bundle",
           "lem-mod-two-cohomology-ring-of-infinite-real-projective-space",
-          "lem-complex-orientation-of-underlying-real-bundles",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "prop-complexification-is-conjugation-invariant",
+          "thm-naturality-of-stiefel-whitney-classes",
+          "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "def-singular-cup-product-on-cochains"
         ],
         "id": "lem-integral-powers-of-the-complexified-universal-real-line",
         "kind": "lemma",
@@ -1971,7 +2152,8 @@
           "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
           "lem-integral-powers-of-the-complexified-universal-real-line",
           "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "prop-complexification-is-conjugation-invariant"
         ],
         "id": "cex-integral-total-pontryagin-multiplicativity-cannot-ignore-two-torsion",
         "kind": "counterexample",

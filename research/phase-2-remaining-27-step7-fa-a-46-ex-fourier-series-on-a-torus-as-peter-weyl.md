@@ -1,0 +1,9 @@
+# FA position 46 — repaired
+
+Reviewed the current example, exact contract and dependency statements, Alpha repair and both Terra decisions, compact-group page conventions and risk record. The original scalar-endomorphism gap was repaired correctly by Alpha. The rejudge correctly observes that the published Fourier supplier assumes positive rank. The example did not exclude rank zero, and its boundary record did not prove that case.
+
+The scope now explicitly says integer r>=0 and finite-dimensional continuous irreducible unitary representations, as in this page's Peter–Weyl convention. The abelian scalar-endomorphism argument forces dimension one. For the quotient exponential R^r -> R^r/Z^r, the exact character supplier gives differentials 2 pi i n.x, with distinct n giving distinct characters; the converse is also stated. The normalized sole matrix entry of a one-dimensional representation is exactly e_n. Under left translation its type is e_{-n}, which gives multiplicity one because negation permutes the lattice. Positive rank uses the Fourier supplier within its stated scope. Rank zero is proved directly: singleton Haar probability, one empty-tuple index, sole function 1, L2=C, expansion f=f(e)1 and Parseval |f(e)|^2. AC and its supplier uses are explicit.
+
+Read the full character-lattice proof and scalar-endomorphism proof; read the Fourier theorem's complete statement and the repaired Peter–Weyl interface. These elementary finite-dimensional representation and Fourier specialization arguments are familiar enough not to require external verification. No external source consultation is claimed. Refuter has no flagged record for this item.
+
+Changed only this example and its owning manifest/contract entry; no dependency change, new lemma or published edit. Strict contract (0 errors/warnings), precheck and rendercheck pass. queue-status reports positions 1–45 current and no stale predecessor. Next: record repaired/familiar, then position 47.

@@ -8,6 +8,11 @@ deps: [def-quadratic-variation-along-a-partition-sequence, thm-uniform-brownian-
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 2.8 (partition-dependence warning)"

@@ -9,6 +9,11 @@ deps: [ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-diff
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Kirillov, An Introduction to Lie Groups and Lie Algebras, SU(2) and SO(3)"

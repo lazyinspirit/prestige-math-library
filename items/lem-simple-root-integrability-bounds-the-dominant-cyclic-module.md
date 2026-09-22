@@ -50,7 +50,7 @@ $M_{\mathrm{int}}(\lambda)$ of
 
 [L8] $\lambda$ is an integral element of $E$ with $\lambda=\sum_im_i\omega_i$, $m_i\ge0$, and $(\lambda,\alpha_i)=m_i(\alpha_i,\alpha_i)/2$; the form on $E$ is a positive definite inner product ([[prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights]], [[def-fundamental-weights]], [[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]]).
 
-[L9] The positive roots are the nonzero nonnegative integral combinations of the simple roots, which form a basis of $E$ ([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
+[L9] Every positive root is a nonzero nonnegative integral combination of the simple roots, and the simple roots form a basis of $E$ ([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
 
 ## Proof
 

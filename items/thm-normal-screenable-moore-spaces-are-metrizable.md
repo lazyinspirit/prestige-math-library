@@ -30,7 +30,7 @@ and covers the space
 
 **Given:** A normal Moore space $X$ with a decreasing development $(\mathcal G_n)_{n\in\mathbb N}$ ([[def-moore-spaces-and-developments]]), and for every open cover $\mathcal U$ of $X$ a refinement $\bigcup_{i\in\mathbb N}\mathcal H_i$ of $\mathcal U$ by pairwise disjoint families of open sets covering $X$.
 
-[F1] Every Moore space is $T_1$ and hence satisfies the hypothesis of [[lem-sigma-cellular-base-yields-a-compatible-metric]]; a Moore space is developable, and a development may be taken decreasing ([[def-moore-spaces-and-developments]]).
+[F1] A Moore space is regular $T_1$ and developable, and a development may be taken decreasing ([[def-moore-spaces-and-developments]]). Together with the normality in the Given clause, this supplies the normal-Moore-space hypothesis of [[lem-sigma-cellular-base-yields-a-compatible-metric]].
 
 [F2] A base of a space is a family of open sets such that every open set is a union of members; equivalently every point of an open set has a base member between it and the set ([[def-topology-basis-subbasis]]).
 
@@ -48,12 +48,12 @@ and covers the space
 
 3.1 Each $\mathcal H_{n,i}$ is a pairwise disjoint family of open sets, and the index set $\mathbb N\times\mathbb N$ is countable, so the base of step 2.1 is $\sigma$-cellular in the sense of [[lem-sigma-cellular-base-yields-a-compatible-metric]]. [step 2.1]
 
-4.1 By [F1] the space $X$ is $T_1$ and has a $\sigma$-cellular base by step 3.1; the lemma therefore supplies a metric on $X$ whose metric topology is the topology of $X$, so $X$ is metrizable. [step 2.1, step 3.1, F1] ∎
+4.1 The Given clause and [F1] say that $X$ is a normal Moore space, and step 3.1 supplies its $\sigma$-cellular base. Therefore [[lem-sigma-cellular-base-yields-a-compatible-metric]] supplies a metric whose metric topology is the topology of $X$, so $X$ is metrizable. [given, step 3.1, F1] ∎
 
 ## Remarks
 
 - **Relation to Bing's route.** Bing proves this theorem by showing that a normal screenable developable space is strongly screenable (Theorem 8), that strongly screenable developable spaces are perfectly screenable (Theorem 6), and that perfectly screenable regular spaces are metrizable (Theorems 3 and 7). Steps 1.1-2.2 above are the first two of those reductions in the equivalent language of a $\sigma$-cellular base, and step 3.1 replaces Bing's displayed weighted metric by the explicit level metric of [[lem-sigma-cellular-base-yields-a-compatible-metric]]; the conclusion is the same.
 
-- **Normality is not used in the proof above.** It is used upstream: the screening of each development cover is what the hypothesis makes available in the applications of this theorem on this page, where normality is needed to produce it ([[lem-collectionwise-normal-moore-spaces-are-screenable]] and the normalization of discrete closed families). The theorem as stated is the one promised, and its proof uses exactly the screenability hypothesis.
+- **Where normality enters.** Screenability produces the $\sigma$-cellular base in steps 1.1-3.1. Normality is then an essential hypothesis of [[lem-sigma-cellular-base-yields-a-compatible-metric]], whose proof uses normal shrinking to turn the cellular levels into a $\sigma$-discrete base. Thus normality is used at step 4.1 rather than in the screening construction itself.
 
 - **Choice.** The only choice is the countable selection of one screening per development level in step 1.1; the metric is then defined by a formula.

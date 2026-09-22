@@ -78,7 +78,8 @@ uniformly continuous, which is how that condition is read from here on.
   **every** $x \in X$ simultaneously ([[def-metric-ball]]).
 - **What uniform continuity buys.** It transports Cauchy sequences
   ([[thm-uniform-continuity-preserves-cauchy]]), which ordinary continuity does
-  not, and that single property is what makes extension from a dense subspace
-  possible ([[thm-uniformly-continuous-extension-from-dense]]) and what makes
-  completion functorial enough to be unique
+  not. Under Countable Choice, that single property is what makes extension
+  from a dense subspace possible
+  ([[thm-uniformly-continuous-extension-from-dense]]) and what makes completion
+  functorial enough to be unique
   ([[thm-metric-completion-unique]]).

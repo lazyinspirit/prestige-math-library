@@ -1,0 +1,15 @@
+# Final adjudication: position 51
+
+Disposition: repaired. Source status: familiar.
+
+Reviewed the complete current theorem, exact direct dependency interfaces (including the repaired zero-based root-limit lemma), proof contract and independent risk record, batch-4 owning manifest and A/B-page conventions, coverage entries, both Terra verdicts (judge rows 216 and 1658), and Alpha row 100. Alpha's larger-disc correction is mathematically right, but Terra's remaining objection is valid: the zero element was not handled before dividing by ||a||.
+
+Step 1.1 now proves a=0 immediately: 0≤r(a)≤||a|| forces r(a)=0 and every positive power/root norm is zero. The rest assumes a nonzero. Corrected the incidental false description of z↦z1-a as linear; only its elementary invertibility identity is needed. The statement, L8, L11 and step 9.1 explicitly use v_j=||a^(j+1)||^(1/(j+1)) and d_j=C_R^(1/(j+1)) on N.
+
+Independently checked the analytic argument. For R>r(a), h(z)=(1-za)^-1 is defined on |z|<1/R, with h(0)=1. At nonzero z the resolvent identity yields the derivative with the required factor a. The Neumann remainder proves differentiability at zero. Choosing r(a)<Rprime<R puts the closed circle |z|=1/R strictly inside the larger holomorphy disc. The same inverse formula consistently extends h and phi∘h, so Cauchy's higher-derivative formula applies. On a smaller circle the Neumann tail is uniform; after multiplying by zeta^(-n-1), its supremum still tends to zero for each fixed n. The newly explicit ML dependency bounds the integral remainder and justifies extraction of n! phi(a^n), rather than assuming termwise integration.
+
+The circle length 2pi/R gives |phi(a^n)|≤C_R||phi||R^n. C_R is finite by continuity on the compact circle, and positive because h(1/R) is an invertible nonzero element. The dual-unit-ball formula gives the norm bound uniformly over functionals. The existing submultiplicative lemma gives a real limit Q for v; the shifted constant-root lemma and the bound give Q≤R. Since every R>r(a) is allowed, Q≤r(a), including r(a)=0 for a nonzero quasinilpotent element. Polynomial spectral mapping and r(a^n)≤||a^n|| give the reverse inequality. Nilpotent and zero cases are covered, with no zeroth root or division by zero. AC is now attributed also to the declared polynomial-spectral-mapping interface.
+
+This is familiar scalar Cauchy-estimate and Banach-algebra reasoning; no uncertainty required external verification, and no external source reading is claimed for this adjudication. Updated only the queued theorem and its own manifest, citations/derivations/boundaries, and owning consumer dependency rows. Refreshed briefs/tasks/frontier-dependency-ledger.md through the tool. Preserved independent reviews. No existing supplier or published file was edited; no new lemma or pass stamp was created.
+
+Focused precheck: 1 checked, 0 failing. Strict proof-contract check after replacing the old noncanonical AC fact label with A1: 0 errors, 0 warnings. Next: queue-status, recheck/reseal stale predecessors in ascending order, then record repaired before reviewing position 52.

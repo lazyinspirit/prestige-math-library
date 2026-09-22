@@ -4,7 +4,7 @@ title: "Number field completions as local polynomial factors"
 kind: lemma
 status: published
 origin: pipeline
-deps: [def-completion-of-a-number-field-at-a-prime, thm-number-field-places-classification, thm-unique-extension-of-a-nonarchimedean-absolute-value, thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field, thm-primitive-element-theorem-for-finite-separable-extensions, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-field-norm-and-trace-agree-with-operator-determinant-and-trace]
+deps: [def-completion-of-a-number-field-at-a-prime, thm-number-field-places-classification, thm-unique-extension-of-a-nonarchimedean-absolute-value, thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field, thm-primitive-element-theorem-for-finite-separable-extensions, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-field-norm-and-trace-agree-with-operator-determinant-and-trace, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -23,13 +23,15 @@ proof_strategy: direct argument
 
 ## Statement
 
-Let L/K be a finite separable extension of number fields, $L=K(\alpha)$ with monic minimal polynomial F, and p a finite prime of K. Factor F over $K_p$ into distinct monic irreducibles $F_i$. Then
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let L/K be a finite separable extension of number fields, $L=K(\alpha)$ with monic minimal polynomial F, and p a finite prime of K. Factor F over $K_p$ into distinct monic irreducibles $F_i$. Then
 $$L\otimes_K K_p\cong\prod_i K_p[T]/(F_i)\cong\prod_{P\mid p}L_P,\qquad\sum_{P\mid p}[L_P:K_p]=[L:K].$$
 Use extending absolute values on each factor; their positive powers give the normalized number-field completions. Under this product, local multiplication matrices give $N_{L/K}(x)=\prod_{P\mid p}N_{L_P/K_p}(x)$ and $\operatorname{Tr}_{L/K}(x)=\sum_{P\mid p}\operatorname{Tr}_{L_P/K_p}(x)$, with values embedded in $K_p$.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** The Axiom of Choice and the data and hypotheses of the statement.
+
+[A1] AC has the meaning fixed in [[def-axiom-of-choice]].
 
 [F1] [[def-completion-of-a-number-field-at-a-prime]]: For a nonzero prime P of $\mathcal O_K$, let $K_P$ be the completion at $|x|_P=(NP)^{-\operatorname{ord}_P x}$. Its valuation ring has residue field $\mathcal O_K/P$, since the original valuation ring is $(\mathcal O_K)_P$ and completion preserves residues. In L/K with $P\mid p$, the normalized value restricts as $|\cdot|_P|_K=|\cdot|_p^{ef}$, because $NP=(Np)^f$ and $\operatorname{ord}_P|_K=e\operatorname{ord}_p$. When a literal extension of $|\cdot|_p$ is needed use $|\cdot|_P^{1/(ef)}$. Positive powers define the same topology and completion.
 
@@ -47,8 +49,8 @@ Use extending absolute values on each factor; their positive powers give the nor
 
 1.1 The primitive-element theorem supplies alpha if needed. The presentation $L=K[T]/(F)$ remains $K_p[T]/(F)$ after scalar extension, as is seen on the power basis. Separability gives a Bezout identity for F,F' over K, hence over $K_p$, so the irreducible factors remain distinct. Polynomial CRT gives the product of factor fields. [F4, F5]
 
-2.1 Each factor E has the unique extending absolute value and is complete. Its element $\alpha_i=T\bmod F_i$ generates E over $K_p$. Approximating each coefficient of a finite polynomial in $\alpha_i$ by elements of K shows that the image of L in E is dense. Thus E is the completion of the induced nonarchimedean place on L. Its restriction to K is the p-adic place, so [F6] classifies it by a unique prime P of $\mathcal O_L$ above p. [F1, F2, F3, F6, step 1.1]
+2.1 Under [A1], each factor E has the unique extending absolute value and is complete. Its element $\alpha_i=T\bmod F_i$ generates E over $K_p$. Approximating each coefficient of a finite polynomial in $\alpha_i$ by elements of K shows that the image of L in E is dense. Thus E is the completion of the induced nonarchimedean place on L. Its restriction to K is the p-adic place, so [F6] classifies it by a unique prime P of $\mathcal O_L$ above p. [A1, F1, F2, F3, F6, step 1.1]
 
-3.1 Conversely the inclusion K into $L_P$, using the extending power normalization, extends to $K_p$. The natural algebra map $L\otimes_KK_p\to L_P$ has finite-dimensional image over $K_p$. With its inherited norm this image is complete and therefore closed; it also contains the dense L. Hence the map is surjective onto the field $L_P$, and so factors through exactly one of the displayed factor fields. Two factors cannot induce the same place: equivalent extending values agree on K and hence have exponent one, so the completion isometry fixes K and alpha and, by density, $K_p$; the minimal polynomial of alpha over $K_p$ would then be the same factor. This establishes the bijection. [F1, F3, step 1.1, step 2.1]
+3.1 Conversely, under [A1], the inclusion K into $L_P$, using the extending power normalization, extends to $K_p$. The natural algebra map $L\otimes_KK_p\to L_P$ has finite-dimensional image over $K_p$. With its inherited norm this image is complete and therefore closed; it also contains the dense L. Hence the map is surjective onto the field $L_P$, and so factors through exactly one of the displayed factor fields. Two factors cannot induce the same place: equivalent extending values agree on K and hence have exponent one, so the completion isometry fixes K and alpha and, by density, $K_p$; the minimal polynomial of alpha over $K_p$ would then be the same factor. This establishes the bijection. [A1, F1, F3, step 1.1, step 2.1]
 
 4.1 Dimensions in the finite product add to the degree of F. For x in L, scalar extension of its multiplication matrix preserves its determinant and trace; in the product it becomes block diagonal with the local multiplication matrices. The determinant of a block diagonal matrix is the product of its block determinants and its trace their sum. This proves the norm and trace formulas, including x=0 and degree one. [step 1.1, step 3.1, algebra] ∎

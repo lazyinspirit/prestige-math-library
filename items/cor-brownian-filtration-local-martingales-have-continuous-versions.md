@@ -1,7 +1,7 @@
 ---
 id: cor-brownian-filtration-local-martingales-have-continuous-versions
 kind: corollary
-title: "Brownian-filtration local martingales have continuous versions"
+title: "Cadlag Brownian-filtration local martingales have continuous versions"
 status: draft
 origin: pipeline
 deps: [thm-brownian-filtration-martingale-representation, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, def-locally-square-integrable-predictable-brownian-integrand, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]

@@ -35,12 +35,12 @@ usual absolute value and to $0$ in $\mathbb Q_p$.
 
 [L1] $|p|_p = p^{-1}$ by definition of the $p$-adic absolute value ([[def-p-adic-absolute-value-on-the-rationals]]).
 
-[L2] $\mathbb Q_p$ is the completion field for this metric ([[def-field-of-p-adic-numbers]]).
+[L2] $\mathbb Q_p$ is the p-adic Cauchy-sequence quotient with its named isometric embedding of $\mathbb Q$ ([[def-field-of-p-adic-numbers]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 By [L1], $|p^n|_p = p^{-n} \to 0$, so the sequence converges to $0$ in the $p$-adic metric and hence in the completion $\mathbb Q_p$. [L1, L2, given, algebra]
+1.1 By [L1], $|p^n|_p = p^{-n} \to 0$, so under the named isometric embedding the sequence converges to $0$ in $\mathbb Q_p$. [L1, L2, given, algebra]
 
 2.1 In the usual absolute value, $|p^n|_\infty = p^n \to \infty$, so the same sequence runs away instead of converging to $0$. [step 1.1, algebra] ∎

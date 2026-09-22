@@ -1,0 +1,5 @@
+# Position 1 context reseal
+
+Disposition: repaired; source status: familiar. Re-read the current proof against the new shared context after position 3 clarified that its complex essential norm is the real essential norm of |f| and corrected zero-based denominators and nonnegative thresholds. This later theorem is not used by this earlier lemma; none of its supplier hypotheses or conventions changed. Current item_sha256 e9afccaf8860b74a57b33930aa969c11b13f6de547b0d49929dd341abefee4b3 matches its preceding receipt.
+
+The countable-partition variation bound still follows from strong additivity and finite Cauchy–Schwarz; positivity, conjugate symmetry and the four-root polarization expansion retain the same first-linear convention. The dependency statements, A/B context, contracts, risk and boundary records were inspected in this dispatch; their applicable interfaces remain unchanged. The elementary mathematics is familiar and requires no external verification. No item edit is necessary, no unresolved obligation is introduced, and this is a terminal reseal, not a judge verdict. Next action: record in ascending queue order.

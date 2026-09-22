@@ -19,7 +19,7 @@ sources:
 
 ## Statement
 
-Let $B$ be a standard Brownian motion [[def-brownian-motion]]. Almost surely
+Assume the Axiom of Choice. Let $B$ be a standard Brownian motion [[def-brownian-motion]]. Almost surely
 both of the following hold.
 
 1. For every exponent $0<\alpha<1/2$ and every $T>0$ the path is
@@ -28,8 +28,8 @@ both of the following hold.
    and no $\delta>0$ with $|B_t|\le C\sqrt t$ for all $0<t<\delta$. In fact
    $|B_t|/\sqrt t$ is unbounded as $t\downarrow0$.
 
-The failure is at the critical exponent and at the single point $0$; it is not
-a statement about uniform Hölder regularity on intervals.
+The second assertion concerns the critical exponent at the single point $0$;
+the first concerns uniform subcritical Hölder bounds on each compact interval.
 
 ## Facts & Assumptions
 
@@ -49,12 +49,12 @@ a statement about uniform Hölder regularity on intervals.
 
 1.1 On the probability-one event of [F1], for every $T>0$ and every $0<\gamma<1/2$ there is a finite constant $K$ with $|B_t-B_s|\le K|t-s|^\gamma$ on $[0,T]$; since $[0,T]$ contains $0$ and the exponents are ordered, this is precisely assertion 1. [F1, given]
 
-1.2 On the probability-one event of [F2], $\limsup_{t\downarrow0}|B_t|/\sqrt{2t\log\log(1/t)}=1$, because the two assertions of [F2] give both $+1$ and $-1$ as limit points of $B_t/\sqrt{2t\log\log(1/t)}$; equivalently there are $t_n\downarrow0$ with $|B_{t_n}|/\sqrt{2t_n\log\log(1/t_n)}\to1$. [F2]
+1.2 On the probability-one event of [F2], put $r(t)=B_t/\sqrt{2t\log\log(1/t)}$ for $0<t<e^{-1}$. For every $\varepsilon>0$ the limsup and liminf bounds imply $-1-\varepsilon<r(t)<1+\varepsilon$ for all sufficiently small $t$, and $r(t)>1-\varepsilon$ occurs at arbitrarily small positive times. Hence $\limsup_{t\downarrow0}|r(t)|=1$; in particular $|r(t)|>1/2$ at arbitrarily small positive times. [F2]
 
-2.1 For such a sequence, $\frac{|B_{t_n}|}{\sqrt{t_n}}=\sqrt{2\log\log(1/t_n)}\,\frac{|B_{t_n}|}{\sqrt{2t_n\log\log(1/t_n)}}\to\infty$; hence for every finite $C$ there are arbitrarily small $t>0$ with $|B_t|>C\sqrt t$, so no finite $C$ and no $\delta>0$ satisfy $|B_t|\le C\sqrt t$ on $(0,\delta)$, which is assertion 2. [step 1.2]
+2.1 Fix any finite $C\ge0$ and $\delta>0$. Since $\sqrt{2\log\log(1/t)}\to\infty$, choose $\eta>0$ smaller than $\delta$ and $e^{-1}$ such that this factor exceeds $2C$ whenever $0<t<\eta$. Step 1.2 supplies such a $t$ with $|r(t)|>1/2$. Then $|B_t|/\sqrt t=\sqrt{2\log\log(1/t)}\,|r(t)|>C$. As this works for every $C$ and $\delta$, the ratio is unbounded in every right neighborhood of zero and assertion 2 follows. A negative $C$ cannot bound the nonnegative ratio either. [step 1.2]
 
-3.1 Intersecting the two probability-one events gives both assertions simultaneously; the quantifiers are covered as follows: the subcritical assertion is restricted to exponents below the critical value and makes no claim at $\alpha=1/2$; the exponents may be taken rational by [F3] and the horizons integer, both countable families, and larger exponents follow by monotonicity of power comparisons on $[0,T]$; the point $t=0$ is excluded from the one-half bound because only $t>0$ is quantified; and AC enters only through [F4]. [step 1.1, step 2.1, F3, F4, given] ∎
+3.1 Intersect the events in steps 1.1 and 1.2 with $\{B_0=0\}$, also of probability one by the Brownian definition. Both assertions then hold simultaneously; since $B_0=0$, the critical bound written with $|B_t|$ is precisely the pointwise Hölder bound at zero. The correct exponent comparison is downward: for any $0<\alpha<1/2$, choose a rational $q$ with $\alpha<q<1/2$ using [F3] and an integer $N\ge\max(1,T)$. A bound with exponent $q$ on $[0,N]$ implies $|B_t-B_s|\le K N^{q-\alpha}|t-s|^\alpha$ on $[0,T]$, since $|t-s|^{q-\alpha}\le N^{q-\alpha}$; the diagonal is immediate. Thus rational exponents above each desired exponent suffice, not exponents below it. In this proof [F1] already supplies the single event for every exponent and horizon, so no further uncountable intersection is made. The normalizer in step 1.2 is used only at positive $t<e^{-1}$. AC is inherited through [F4] and the two Brownian suppliers; the arbitrarily-small-time argument requires no selected sequence of times. [step 1.1, step 1.2, step 2.1, F3, F4, given] ∎
 
 ## Source notes
 
-Yoshida, Section 6.3, proves the subcritical uniform Hölder statement and remarks that the one-half endpoint fails; Durrett's Theorem 8.5.1, transported to zero by time inversion, provides the explicit divergent sequence $|B_{t_n}|/\sqrt{t_n}\to\infty$ that rules out any finite one-half constant at the origin. The corollary keeps the two quantifier levels separate: uniform subcritical regularity on compact intervals, and pointwise failure of the critical exponent at zero.
+The local Hölder supplier gives one full-measure event for all subcritical positive exponents and compact horizons. The zero-time LIL supplier gives arbitrarily small times at which its normalized absolute value exceeds one half. The proof combines these interfaces and gives the explicit downward power comparison.

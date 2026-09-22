@@ -30,11 +30,11 @@ function.
 
 ## Facts & Assumptions
 
-**Given:** Assume the Axiom of Choice, a compact Lie group $G$ with normalized Haar measure $\mu$, and pairwise inequivalent irreducible unitary representations $\pi,\sigma$ with characters $\chi_\pi,\chi_\sigma$.
+**Given:** Assume the Axiom of Choice, a compact Lie group $G$ with normalized Haar measure $\mu$, and irreducible unitary representations $\pi,\sigma$ chosen from a family containing one representative of each equivalence class, with characters $\chi_\pi,\chi_\sigma$. Thus either $\pi=\sigma$ with the same chosen model and basis, or $\pi$ and $\sigma$ are inequivalent.
 
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the normalized Haar measure used in [L1] and [L3].
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the normalized Haar measure and the Schur-orthogonality supplier [L1]. The finite-sum linearity statement [L3] is choice-free.
 
-[L1] Schur orthogonality with respect to the matrix coefficient functions fixed on this page: $\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=0$ for inequivalent irreducible $\pi,\sigma$ and $\int_G\pi_{ij}(g)\overline{\pi_{kl}(g)}\,d\mu(g)=\delta_{ik}\delta_{jl}/d_\pi$ in the equivalent case, for orthonormal bases and $d_\pi=\dim\pi$ ([[thm-schur-orthogonality-for-compact-lie-groups]]).
+[L1] Schur orthogonality with respect to the matrix coefficient functions fixed on this page gives $\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=0$ for inequivalent irreducible $\pi,\sigma$. For equivalent models and an intertwining isomorphism $S:V_\sigma\to V_\pi$, the integral is $S_{ik}(S^{-1})_{lj}/d_\pi$; in the equal-model, equal-basis case used below, $S=I$ and this specializes to $\delta_{ik}\delta_{jl}/d_\pi$ ([[thm-schur-orthogonality-for-compact-lie-groups]]).
 
 [L2] The character is $\chi_\pi(g)=\operatorname{tr}\pi(g)=\sum_{i=1}^{d_\pi}\pi_{ii}(g)$ in an orthonormal basis, is independent of that basis, and is a class function: $\chi_\pi(ghg^{-1})=\chi_\pi(h)$ for all $g,h$ ([[def-matrix-coefficient-and-character-of-a-compact-group-representation]]).
 
@@ -48,4 +48,4 @@ function.
 
 2.1 If $\pi$ and $\sigma$ are inequivalent, every term in step 1.1 vanishes by the first case of [L1], so $\langle\chi_\pi,\chi_\sigma\rangle=0$. If $\pi=\sigma$, then the terms equal $\delta_{ik}\delta_{ik}/d_\pi=\delta_{ik}/d_\pi$ by the second case of [L1] with $j=i$ and $l=k$, so $\langle\chi_\pi,\chi_\pi\rangle=\sum_{i=1}^{d_\pi}1/d_\pi=1$. [L1, step 1.1]
 
-3.1 Conjugation invariance is [L2], so every character is a class function; combining with step 2.1, the characters of pairwise inequivalent irreducible unitary representations are orthonormal in $L^2(G,\mu)$. The Axiom of Choice entered only through the Haar measure implicit in [L1] and [L3]. [A1, L2, step 2.1] ∎
+3.1 Conjugation invariance is [L2], so every character is a class function; combining with step 2.1, the characters of pairwise inequivalent irreducible unitary representations are orthonormal in $L^2(G,\mu)$. The Axiom of Choice entered only through the Haar-based supplier [L1]. [A1, L2, step 2.1] ∎

@@ -1,0 +1,13 @@
+# FA position 12 — context reseal
+
+Repaired disposition retained. Current itemHashJudge 7166a194a9169fa289c59b81a829756a7a0efec4ff6856816cb577d69a65e70e matches the latest receipt. Read the full current item, original FA evidence, both Terra reasons and Alpha adjudication, own batch-14 boundary/risk contract, cited dependency statements and current A/B context. No new mathematical edit is needed.
+
+Independent check: affine isometries compose and invert within the specified group, with fibre permutations reindexed by the real map. The condition action preserves sizes and reverse inclusion and extends to regular opens. Small support unions and conjugate supports establish normality; ground AC and regularity establish the stated completeness of the filter. A fresh last coordinate separates any two canonical subset names densely. Single-triple stabilizers fix the x names and their X families, while the whole group preserves the components and the bounded-distance metric. Hereditary symmetry follows through these explicit name ranks. The metric triangle inequality follows by bounding the two positive fractions with the common larger denominator. No target-model choice is used.
+
+The revised Brunner definition elsewhere on this page works internally over arbitrary ZFA+AC models; this item independently fixes a transitive ZFC ground with an ambient generic and continues to meet its own symmetric-forcing theorem's hypotheses. The distinct constructions are not identified. Later consumer obligations do not enter this definition's proof. Its source discrepancy remains disclosed and bypassed by the explicit affine group.
+
+Verified original source https://web.mat.bham.ac.uk/C.Good/research/pdfs/stone.pdf, reading sections 2–3 through the regular-lambda paragraph after Theorem 3, printed pp.2–6. The source supplies the coordinate construction and canonical names, the single-component symmetry moves, bounded metric and regular-lambda replacement. Its literal identity/reflection group description is not closed under composition. The current item explicitly corrects this and verifies the replacement directly.
+
+PUBLISHED-DEFECT def-good-tree-watson-symmetric-stone-model: the cited Good–Tree–Watson Theorem 1 group description allows only identity or a reflection, but two distinct reflections compose to a nonzero translation; the literal class is not a group.
+
+The source finding and repair strategy already exist in research/defect-ledger.jsonl as recorded by the original FA evidence; no duplicate finding or operational ledger row is needed. No published library item was edited. This compatibility review creates no judge stamp. Queue status confirms positions 1–11 current. Next: record this reseal, then earliest stale position 15.

@@ -21,12 +21,12 @@ sources:
 
 ## Statement
 
-Let $(u_n)_{n \ge 1}$ be a sequence of nonnegative real numbers satisfying the
+Let $(u_n)_{n \ge 1}$ be a positive-indexed family of nonnegative real numbers satisfying the
 submultiplicative inequality
 
 $$u_{m+n} \;\le\; u_m\,u_n \qquad \text{for all } m,n \ge 1 .$$
 
-Then the sequence of $n$-th roots $u_n^{1/n}$ converges in $\mathbb R$ and
+Then the $\mathbb N$-indexed sequence $v_j:=u_{j+1}^{1/(j+1)}$ ($j\ge0$) converges in $\mathbb R$. Writing the limit of the positive-indexed root family for this sequence limit,
 
 $$\lim_{n \to \infty} u_n^{1/n} \;=\; \inf_{n \ge 1} u_n^{1/n} .$$
 
@@ -35,7 +35,7 @@ $u_n = 0$ for all $n \ge k$ and both sides equal $0$.
 
 ## Facts & Assumptions
 
-**Given:** A sequence $(u_n)_{n\ge1}$ of reals with $u_n \ge 0$ and $u_{m+n} \le u_mu_n$ for all $m,n \ge 1$; put $u_0 := 1$ and extend the inequality by this convention, so that $u_{m+0} = u_m \le u_m\,u_0$.
+**Given:** A positive-indexed family $(u_n)_{n\ge1}$ of reals with $u_n \ge 0$ and $u_{m+n} \le u_mu_n$ for all $m,n \ge 1$; put $u_0 := 1$ and extend the inequality by this convention, so that $u_{m+0} = u_m \le u_m\,u_0$. Define $v_j=u_{j+1}^{1/(j+1)}$ for $j\in\mathbb N$; no zeroth root is defined.
 
 [L1] For every $a \ge 0$ and $n \ge 1$ there is a unique $a^{1/n} \ge 0$ with $(a^{1/n})^n = a$; moreover $0^{1/n} = 0$ and $a^{1/n} > 0$ when $a > 0$ ([[thm-nth-roots-exist]]).
 
@@ -45,9 +45,7 @@ $u_n = 0$ for all $n \ge k$ and both sides equal $0$.
 
 [L4] If $x_k \le y_k$ eventually, then $\limsup_k x_k \le \limsup_k y_k$ and $\liminf_k x_k \le \liminf_k y_k$ ([[lem-limsup-monotone-comparison]]).
 
-[L5] For every real $c > 0$ the positive-indexed sequence
-$(c^{1/n})_{n\geq1}$ converges to $1$
-([[lem-nth-root-of-constant-tends-to-one]]).
+[L5] For every real $c>0$, the $\mathbb N$-indexed sequence $d_j=c^{1/(j+1)}$ converges to $1$ ([[lem-nth-root-of-constant-tends-to-one]]).
 
 ## Proof
 
@@ -59,16 +57,16 @@ $(c^{1/n})_{n\geq1}$ converges to $1$
 
 1.3 Now suppose $u_n > 0$ for every $n \ge 1$. Fix $k \ge 1$, put $t := u_k^{1/k} > 0$ and $C_k := \max\{u_r : 0 \le r < k\} > 0$; then for every $n \ge k$, writing $n = qk + r$ with $q \ge 1$ and $0 \le r < k$, iterated submultiplicativity gives $u_n \le u_k^q\,u_r \le u_k^q\,C_k$. [given, L1, algebra]
 
-2.1 Suppose $u_k = 0$ for some $k$. Then $u_n^{1/n} = 0$ for all $n \ge k$ by [step 1.2] and [L1], and $L = 0$ because the term $u_k^{1/k} = 0$ occurs in the set whose infimum is $L$; hence $u_n^{1/n} \to 0 = L$. [step 1.2, step 1.1, L1, L3]
+2.1 Suppose $u_k = 0$ for some $k$. Then $u_n^{1/n} = 0$ for all $n \ge k$ by [step 1.2] and [L1], and $L = 0$ because the term $u_k^{1/k} = 0$ occurs in the set whose infimum is $L$; hence $v_j=0$ for $j\ge k-1$ and $v_j\to0=L$. [step 1.2, step 1.1, L1, L3]
 
-2.2 With $t = u_k^{1/k} > 0$ as in [step 1.3] the bound $u_k^q \le t^n\,B_k$ holds for $n = qk + r \ge k$ and the constant $B_k := \max(1, t^{-k})$: indeed $u_k^q = (t^k)^q = t^{kq} = t^{n-r}$ by the integer index laws, and the correction factor satisfies $t^{-r} \le t^{-k} \le B_k$ when $t \le 1$ (then $r < k$ makes $t^{-r} \le t^{-k}$) and $t^{-r} \le 1 \le B_k$ when $t \ge 1$, so in both cases $t^{n-r} = t^n\,t^{-r} \le t^n\,B_k$. [L1, L2, algebra]
+2.2 With $t = u_k^{1/k} > 0$ as in [step 1.3] the bound $u_k^q \le t^n\,B_k$ holds for $n = qk + r \ge k$ and the constant $B_k := \max(1, t^{-k})$: indeed $u_k^q = (t^k)^q = t^{kq} = t^{n-r}$ by the integer index laws, and the correction factor satisfies $t^{-r} \le t^{-k} \le B_k$ when $t \le 1$ (then $r < k$ makes $t^{-r} \le t^{-k}$) and $t^{-r} \le 1 \le B_k$ when $t \ge 1$, so in both cases $t^{n-r} = t^n\,t^{-r} \le t^n\,B_k$. [step 1.3, L1, L2, algebra]
 
-2.3 On the other hand every term satisfies $u_n^{1/n} \ge L$ by [step 1.1], so the liminf clause of [L4] applied to the constant sequence $L$ gives $L = \liminf_n L \le \liminf_n u_n^{1/n}$, that is $\liminf_n u_n^{1/n} \ge L$. [step 1.1, L4]
+2.3 On the other hand every term satisfies $v_j=u_{j+1}^{1/(j+1)}\ge L$ by [step 1.1], so the liminf clause of [L4] applied to the constant sequence $L$ gives $L = \liminf_j L \le \liminf_j v_j$, that is $\liminf_j v_j \ge L$. [step 1.1, L4]
 
-3.1 Define the positive constant $B_k := \max(1,t^{-k})\,C_k$. Combining [step 1.3] and [step 2.2] gives $u_n \le t^nB_k$, hence $u_n^{1/n} \le t\,B_k^{1/n}$ for every $n \ge k$, taking $n$-th roots by [L2]. [step 1.3, step 2.2, L1, L2]
+3.1 Define the positive constant $D_k := \max(1,t^{-k})\,C_k$. Combining [step 1.3] and [step 2.2] gives $u_n \le t^nD_k$, hence $u_n^{1/n} \le t\,D_k^{1/n}$ for every $n \ge k$, taking $n$-th roots by [L2]. [step 1.3, step 2.2, L1, L2]
 
-4.1 Since $B_k^{1/n} \to 1$ by [L5], for every real $\varepsilon > 0$ the inequality $B_k^{1/n} \le 1+\varepsilon$ holds eventually; hence $u_n^{1/n} \le t(1+\varepsilon)$ eventually, and [L4] gives $\limsup_n u_n^{1/n} \le t(1+\varepsilon)$. [step 3.1, L4, L5, algebra]
+4.1 Apply [L5] to $d_j=D_k^{1/(j+1)}$. Substituting $n=j+1$ in step 3.1 gives $v_j\le t d_j$ whenever $j+1\ge k$. Since $d_j\to1$, for every real $\varepsilon > 0$ the inequality $d_j\le1+\varepsilon$ holds eventually; hence $v_j\le t(1+\varepsilon)$ eventually, and [L4] gives $\limsup_j v_j \le t(1+\varepsilon)$. [step 3.1, L4, L5, algebra]
 
-5.1 Since $\varepsilon > 0$ was arbitrary in [step 4.1] and $t = u_k^{1/k}$, one has $\limsup_n u_n^{1/n} \le u_k^{1/k}$ for every $k \ge 1$, hence $\limsup_n u_n^{1/n} \le L$. [step 4.1, step 1.1, algebra]
+5.1 Since $\varepsilon > 0$ was arbitrary in [step 4.1] and $t = u_k^{1/k}$, one has $\limsup_j v_j \le u_k^{1/k}$ for every $k \ge 1$, hence $\limsup_j v_j \le L$. [step 4.1, step 1.1, algebra]
 
-6.1 In the positive case, [step 5.1] and [step 2.3] yield $\limsup \le L \le \liminf \le \limsup$, so all three are equal to $L$ and $u_n^{1/n} \to L$ by [L3]; in the vanishing case [step 2.1] gives the same conclusion. Hence in all cases $\lim_n u_n^{1/n} = \inf_{n\ge1}u_n^{1/n}$. [step 2.1, step 5.1, step 2.3, L3] ∎
+6.1 In the positive case, [step 5.1] and [step 2.3] yield $\limsup \le L \le \liminf \le \limsup$, so all three (for the sequence $v$) are equal to $L$ and $v_j\to L$ by [L3]; in the vanishing case [step 2.1] gives the same conclusion. Hence in all cases $\lim_n u_n^{1/n} = \inf_{n\ge1}u_n^{1/n}$. [step 2.1, step 5.1, step 2.3, L3] ∎

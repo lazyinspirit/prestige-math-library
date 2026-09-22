@@ -1,0 +1,96 @@
+# Step 7 adjudicate: repeat, round 1, unit 12
+
+Read briefs/step7-adjudicator.md.
+
+Frozen inputs: /home/lazyinspirit/Projects/prestige-math-library/research/phase-2-remaining-27-step7-v2/repeat-1.json.
+
+Write only your assigned item files, genuinely required new prerequisite items, their owning contracts/metadata, and /home/lazyinspirit/Projects/prestige-math-library/research/phase-2-remaining-27-step7-v2/step7-v2-repeat-r1-u12.json.
+
+Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.
+
+Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.
+
+Read all cited suppliers and relevant consumers. Repair confirmed fatal defects fully. Identify all downstream consumers, including published items.
+
+Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.
+
+Return JSON {run,phase,round,unit,input_sha256:"aebd8478a16fa4d7b4006b0433b138d177058998ef64d668e9a1d594216923ba",decisions:[],reviews:[],created_items:[],downstream:[]}. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters); unresolved uncertainty blocks completion.
+
+Immediately after completing each mathematical review, before editing another supplier, run node tools/step7-workflow.mjs review-contexts --run phase-2-remaining-27 --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.
+
+Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.
+
+
+
+For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.
+
+Empty assignments return empty arrays. Downstream is an array of item IDs; include consumers reached through changed intermediate items.
+
+Assigned input:
+[
+  {
+    "id": "cor-irreducible-characters-are-orthonormal-class-functions",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "[L1] inaccurately restates Schur orthogonality: for merely equivalent \u0000cf\u0000 and \u0000cf\u0000, the interface gives S_{ik}(S^{-1})_{lj}/d_\u0000cf\u0000, not Kronecker deltas. The delta formula is only for \u0000cf\u0000=\u0000cf\u0000 on the same space with the same basis.",
+    "context_sha256": "41147c27833f0670ed64cb47f7764b7722a0f7dc3fe7f5218b12eedb9261c7e7",
+    "item_sha256": "a85e354bdb441360019428fc2ab38e126cca6b25fb315545a3bb62f6a16674d5",
+    "at": "2026-09-22T00:24:16.786Z"
+  },
+  {
+    "id": "lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "Step 4.1 only proves e_j w_i=0 for simple-root vectors. Neither L5 as stated nor any cited prior step says that these e_j generate n^+, so it does not establish n^+w_i=0. Thus L4 cannot be applied in 5.1, and the nonvanishing argument fails.",
+    "context_sha256": "2c008f4d7e6175d3c92361c5795391d27732aece23dd0d387fc960f2f5a407b2",
+    "item_sha256": "a2f717b7f7892500b2d156e997db833873db7fc91cb8b577b7d5e6d1ec3af31f",
+    "at": "2026-09-22T00:28:37.715Z"
+  },
+  {
+    "id": "prop-central-quotients-correspond-to-intermediate-character-lattices",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "[L3] asserts the adjoint root-space decomposition, but none of its cited interfaces supplies it. Step 1.1 crucially uses that unsupported assertion to identify the common root kernel with the center, so the correspondence proof is not licensed.",
+    "context_sha256": "a3eca3144c6a1281a5cab845a06cd5ebbc6c90e8860916ef87d28fe0ba6b1a7b",
+    "item_sha256": "c25089c0be98dc7504f76e4522c077f7d8876e22d77319d5b5828c05d339b70d",
+    "at": "2026-09-22T00:30:15.546Z"
+  },
+  {
+    "id": "thm-analytic-and-root-system-weyl-groups-agree",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "[L1] overstates its dependency: it does not supply that [g,g]_C is semisimple with Cartan (t∩[g,g])_C or that G-roots are its Lie-algebra roots. Thus applying L2/L7 in 1.1 is unlicensed.",
+    "context_sha256": "ea73ebfaddf1c6d33641b7cf28876461b36620c487c88748032605f614521431",
+    "item_sha256": "7abd1aee3e4c51f6d31988ac7caf59506ca21b6a2f024b2a53cbc97d6b42f529",
+    "at": "2026-09-22T00:32:59.502Z"
+  },
+  {
+    "id": "thm-compact-connected-lie-groups-are-classified-by-root-data",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "L2 overstates its interfaces: neither cited result supplies a simply connected compact semisimple form with torus lattice P. Steps 2.2 and 3.1 require exactly this group, so the finite-cover and realization arguments are unsupported.",
+    "context_sha256": "e92ded49b41c8981ad4a9b19ac761e4256b5d02f64ccdbd0bb21a0904a57ddbc",
+    "item_sha256": "c1e389550aa1fc051053b4708c61ceadd7de91ad86cc8bff86d65fca1b682744",
+    "at": "2026-09-22T00:32:31.808Z"
+  },
+  {
+    "id": "thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "[L5] inaccurately attributes to the Serre-presentation interface a construction of locally nilpotent Weyl automorphisms carrying all root spaces to simple root spaces. The supplied interface contains no such result, yet step 2.1 crucially uses it to prove positivity.",
+    "context_sha256": "179882811fa4f7d259957ce285e19800bc6362b90327b42d8a560d31fceeab7a",
+    "item_sha256": "225c4e4bc2487e5aa2120c7ddbe9971bca9a3ba5a3c0b4d18b7fa0d387ade078",
+    "at": "2026-09-22T00:31:03.297Z"
+  },
+  {
+    "id": "thm-schur-orthogonality-for-compact-lie-groups",
+    "model": "gpt-5.6-terra",
+    "keep": false,
+    "reason": "Continuity of π and σ is never assumed. The cited matrix-coefficient interface applies only to continuous representations, so the proof's continuous/integrable-integrand claim is unsupported; discontinuous unitary representations can have nonmeasurable coefficients.",
+    "context_sha256": "ab1e4e4466f5bd907a883e45cbb565756212da9cb78839bc62492ea32cf0c05d",
+    "item_sha256": "8918d10dc548dfe651d233da9740ac426e873195d517a4f68e85cb4c967406f0",
+    "at": "2026-09-22T00:32:32.343Z"
+  }
+]
+
+

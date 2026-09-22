@@ -28,8 +28,9 @@ relative to $\Delta$ is the $r\times r$ matrix $A=(a_{ij})$ with rows indexed
 by coroots,
 $$a_{ij}=(\alpha_j,\alpha_i^{\vee})=\frac{2(\alpha_j,\alpha_i)}{(\alpha_i,\alpha_i)} .$$
 Thus $a_{ij}$ is the Cartan integer of the ordered pair $(\alpha_j,\alpha_i)$,
-that is, the eigenvalue by which $\alpha_j$ is multiplied in the reflection
-$s_{\alpha_i}(\alpha_j)=\alpha_j-a_{ij}\alpha_i$. All entries are integers by
+that is, the coefficient of $\alpha_i$ subtracted from $\alpha_j$ in the reflection
+$s_{\alpha_i}(\alpha_j)=\alpha_j-a_{ij}\alpha_i$; it is not in general an
+eigenvalue of $\alpha_j$. All entries are integers by
 the root-system axioms, $a_{ii}=2$ for every $i$, and $a_{ij}\le0$ for
 $i\ne j$ ([[prop-distinct-simple-roots-have-nonpositive-inner-product]]).
 The Cartan matrix depends on the numbering of the simple roots: renumbering

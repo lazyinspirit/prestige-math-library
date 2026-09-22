@@ -1,0 +1,21 @@
+# FA position 45 — bounded Brownian Dynkin identity
+
+Disposition: repaired. Source status: verified.
+
+Read the original statement/proof, Terra's two rejections, Alpha row 99, owning batch-8 manifest and contract/risk record, and the Ito A/B-page context. The final rejection is valid: scalar (H) alone does not assert the required independence of vector increments from the given filtration. Merely naming a vector Brownian law does not fix that. Also the original proof contained the false equality of a martingale increment with its zero conditional mean, used predictable versions not justified in the general raw setting, and mentioned noncompact affine functions and an uncited maximum principle as boundary cases.
+
+The repaired item explicitly requires adaptation and independence of the entire vector increment from F_s, with law N_d(0,(t-s)I). It retains the original-space expectation formula, avoiding the separate shifted cylinder-law obstruction. A common measurable continuity/zero-start event fixes normalized path values; the original adapted process is retained for deterministic-grid conditioning. Thus no arbitrary null modification is claimed to preserve adaptation. Values at tau are measurable finite-grid limits. An almost-sure deterministic bound is handled by tau wedge K on the exceptional set.
+
+The proof is now direct and independent of the owner-held general Ito theorem. For compactly supported C^2 f, the Hessian is bounded and globally uniformly continuous (compact ball plus vanishing outside the support). The degree-one Lagrange remainder gives
+R(y,z)=f(y+z)-f(y)-grad f(y).z-(1/2)z^T H_f(y)z,
+with |R| <= (1/2)omega(|z|)|z|^2. This defines R without choosing a random Lagrange point. Gaussian second and fourth moments give uniformly in random Y
+E|R(Y,Z)| <= (d/2)omega(delta)h+3 C d^2 h^2/delta^2.
+First h tends to zero and then delta tends to zero; total error over K/h steps is o(1). No independence between Y and Z is needed for this uniform remainder bound.
+
+At grid time t_j multiply the Taylor increment by 1_{tau>t_j}, a known bounded factor. Conditional Gaussian means cancel its linear part and give h Lf for the Hessian part. The finite sum telescopes to f(x+B_tau_n)-f(x+B_0). Its expected error tends to zero. Continuous normalized paths give convergence at tau_n down to tau, dominated by ||f|| infinity. The drift sums tend to the pathwise Lebesgue integral, with error at most K times the path modulus of continuity plus h||Lf|| infinity, dominated by K||Lf|| infinity. The Riemann–Lebesgue bridge is cited with its Countable Choice supplied by AC. These two limits prove exactly the claimed expectation identity. Zero stopping, zero f, d=1 and bounded-horizon boundaries are explicit.
+
+Inspected the actual Brownian coordinate equivalence, jointly measurable normalization, multivariable Lagrange formula, Hessian expansion, Euclidean Heine–Borel and metric Heine–Cantor, Gaussian moments, independent-variable conditioning, taking-out-known-factors, expectation preservation, and Riemann–Lebesgue bridge. C_c^2 is defined explicitly because the cited C_c/C_c-infinity definition only names those two spaces. No published supplier is edited or alleged defective merely for not naming C_c^2.
+
+Source: https://www.math.uchicago.edu/~lawler/finbook.pdf , Section 2.10.2, Theorem 2.10.3 and its complete Taylor derivation, printed pp. 75–76 (PDF pages 80–81), supports the Gaussian Hessian/generator calculation. The source's short o(t) justification is replaced here by the explicit uniform fourth-moment estimate, and bounded stopping is proved with the finite-grid telescoping argument above. This is not a claim that the source states our normalization convention or supplies the entire stopped proof verbatim.
+
+Validation: focused item precheck passes; strict proof contract reports 0 errors and 0 warnings after the final citation/derivation synchronization. The owning manifest, boundaries/risk record and consumer dependency record were replaced to describe the direct proof, and the frontier dependency ledger refresh completed. Queue status showed positions 1–44 current, with no stale predecessor. No existing supplier, page, new theorem, new lemma, judge verdict or pass stamp was created. Next action: record exact repaired bytes, then position 46.

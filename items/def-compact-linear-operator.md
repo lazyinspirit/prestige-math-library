@@ -9,6 +9,11 @@ deps: [def-bounded-linear-operator, def-metric-compactness, def-metric-bounded-d
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.183, Definition 4.20"

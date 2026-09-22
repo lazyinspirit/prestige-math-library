@@ -10,6 +10,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "H. Herrlich, Axiom of Choice, Lecture Notes in Mathematics 1876 — the finite-history proof that DC implies AC_omega"

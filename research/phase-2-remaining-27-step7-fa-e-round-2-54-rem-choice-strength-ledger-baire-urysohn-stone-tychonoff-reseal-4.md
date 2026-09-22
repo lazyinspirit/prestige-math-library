@@ -1,0 +1,10 @@
+# Position 54 — ledger consistency reseal
+
+Read the current remark, owner's resolution, and the exact statements for compact-Hausdorff Baire/DMC, product Baire/DC, compact T1 and arbitrary compact products/AC, bounded Tietze, BPI nonimplication, DMC nonprovability, and the three open-status remarks. The queued positive and separation suppliers were checked and resealed in order above. The remark preserves Con(ZF) for both independent BPI/CC Urysohn separations and both DC/BPI Stone separations. Corson's sharper obstruction is explicitly about point-finite OPEN refinements. The effective per-cover refinement map is kept distinct from ordinary metacompactness. Cofinite products do not assert nonempty products. No strict DMC/DC separation over ZF is inferred from a ZFA separation.
+
+Checked the source's research-question discussion directly on printed p.7 of https://web.mat.bham.ac.uk/C.Good/research/pdfs/stone.pdf. It asks the historical BPI/OP/SP questions; the present BPI separation is supplied by the later Corson theorem, not claimed open. A fresh web search for the DMC/DC and Stone exact-strength questions found no authoritative later resolution; search absence is not a proof of openness. The open rows here are preserved as the stated status of the cited line of work and the dated local status suppliers, not a new universal literature claim. No aggregator or the library's own indexed web pages was used as external verification.
+
+The other implication matching is familiar. Current neighbor changes preserve all logical rows. No new mathematical claim, dependency or publication edit is needed. Preserve repaired on unchanged bytes; positions 55–58 are already current, so proceed to position 59.
+
+
+Current itemHashJudge: 9f8a5403d9aa586847bcd776a387a58f61fa1cf9c81a70812b87a3ad223d8168, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

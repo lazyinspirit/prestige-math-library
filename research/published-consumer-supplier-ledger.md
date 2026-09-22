@@ -4,9 +4,199 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1365, U-C 0, A-R 190, A-P 331. The
+Current classifications: U-P 1361, U-C 0, A-R 200, A-P 330. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## DMC versus DC: ZF open reversal and ZFA separation — 2026-09-22
+
+The published consumer `rem-baire-category-choice-strength` is now **A-R** for
+this defect-focused authorized repair. Its title and comparison paragraph no
+longer assert that DMC is strictly weaker than DC over ZF. They now state the exact
+supplier interface from `rem-dmc-versus-dc-over-zf-is-open`: DC implies DMC in
+ZF; Fraenkel's second ZFA model satisfies DMC and refutes DC; whether DMC
+implies DC in ZF remains open. The compact-Hausdorff Baire/DMC equivalence and
+the separate BPI nonimplication discussion are unchanged. Direct source rows
+with exact locators replace the misleading Tachtsis annotation.
+
+Source verification: Dodu--Morillon, Section 7, printed p. 10,
+[author-hosted paper](https://lim.univ-reunion.fr/staff/mar/dodu.pdf), explicitly
+records the ZFA model and calls the ZF implication question open; Morillon,
+Section 2.1, Question 1, printed p. 6,
+[author-hosted habilitation](https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf),
+again states the equivalent DMC-to-DC question as open. The owning catalogue
+page was minimally synchronized. The two published consumers that repeated the
+unsupported ZF strictness wording,
+`thm-baire-category-locally-compact-hausdorff` and
+`fs-every-baire-space-is-completely-metrizable`, are now **A-R** below: only
+their orientation sentences were changed to the ZF implication/open reversal
+and ZFA separation. Their DC-based shrinking proof and Cantor-cube refutation
+are unchanged. The other direct textual and declared consumers use only
+unchanged Baire/DMC, separable/general-metric, or choice-accounting interfaces.
+This is a bounded defect and impact audit, not independent judgment or
+whole-library certification.
+
+## Countable bundle recharting versus cover refinement — 2026-09-20
+
+The published
+`lem-a-bundle-embedding-produces-its-grassmannian-classifying-map` is now
+**A-R** for this defect-focused authorized repair. Its Statement and Hatcher
+locator now describe a countable numerable trivializing cover obtained by
+regrouping, explicitly noting that the new members need not refine the
+original cover. This removes the false ordinary-refinement claim witnessed by
+an uncountable discrete singleton cover.
+
+The countable embedding conclusion is unchanged. The exact
+published supplier `thm-principal-bundles-are-classified-by-maps-to-bg`,
+Proof 1.1 and 2.1, groups disjoint open pieces into countably many new chart
+domains and patches their sections. Those new domains need not refine the
+original cover. The embedding lemma's Proof 2.2 already used that recharting
+construction, so no proof step changed. This repair uses only the
+already published principal-classification supplier; no Phase-2 supplier
+or new theorem is needed. The arbitrary-index and finite-dimensional
+embedding clauses are unchanged. The two declared item consumers,
+`lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely`
+and `thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians`,
+were reread in this final impact lane: both use only the unchanged embedding
+and tautological-pullback conclusions and remain byte-for-byte sound;
+the owning page's parallel refinement wording was synchronized.
+
+Exact witness and consumer-use review:
+[mathematical evidence](phase-2-remaining-27-step7-fa-b-13-def-tautological-degree-one-class-on-a-real-projective-bundle.md).
+This is a bounded repair and impact audit, not whole-library certification.
+
+## Cantor intersection countable-choice interface — 2026-09-22
+
+The published `thm-cantor-intersection-metric` is now **A-R** for this
+defect-focused authorized repair. Its first assertion selects one point from
+each member of an arbitrary countable Cantor chain, exactly as Proof 1.2 and
+the existing choice-accounting remark already record. The Statement and Given
+interface now assume the Axiom of Countable Choice for assertion 1. The
+converse completeness assertion is unchanged and remains choice-free: it
+forms closures of the supplied Cauchy sequence's tails and chooses only a
+single witness from one nonempty ball at a time.
+
+The owning topology page now says explicitly that the nested-set
+characterization uses Countable Choice. The reference-only counterexample
+`cex-cantor-intersection-needs-vanishing-diameters` remains sound because it
+uses only the diameter hypothesis being necessary, not the existence clause.
+Two DC-qualified published consumers are now **A-R**:
+`thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space` and
+`thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space` retain
+their Dependent Choice statements, but their Cantor-intersection fact now
+states the Countable Choice premise and proves the DC-to-CC bridge locally
+using finite partial choice sequences, avoiding a later-page dependency.
+The unique-point proof step invokes that bridge. Their exported surjection
+conclusions are unchanged. The remaining two direct consumers have now been
+repaired in this final impact lane. `thm-uniformly-continuous-extension-from-dense`
+states Countable Choice at its public interface, and completion results that
+actually invoke it propagate that premise. `lem-goursat-nested-triangle-selection`
+no longer cites Cantor intersection: its canonically selected first vertices
+form a Cauchy sequence in the complete complex plane, closedness puts the limit
+in every triangle, and vanishing diameters gives uniqueness. Its exported
+triangle and common-point conclusions are unchanged, so its complex-analysis
+consumers remain sound. No new prerequisite item is needed. This is a bounded
+interface repair and impact audit, not independent judgment or whole-library
+certification.
+
+## Countable p-adic completion after generic completion choice repair — 2026-09-22
+
+The published `def-field-of-p-adic-numbers` and
+`thm-p-adic-completion-is-a-field` are now **A-R** for a downstream defect
+exposed when `thm-metric-completion-exists` made its Countable Choice premise
+explicit. The definition formerly imported the generic theorem's completeness
+conclusion without that premise. It now imports only assertions 1--4: the
+Cauchy-sequence quotient metric, the rational isometric embedding and density.
+
+The field theorem now starts from the specialized Cauchy-sequence quotient,
+rather than presupposing it is a completion, and preserves its choice-free
+public conclusion by proving that quotient complete. A fixed published bijection
+`thm-rationals-countable` enumerates the dense rational image. For each term of
+a Cauchy sequence of p-adic classes, the least enumeration index lying within
+$2^{-n}$ is uniquely determined by `thm-well-ordering-principle`; this produces
+a rational Cauchy representative without Countable Choice. The quotient-metric
+formula then proves convergence. The assigned
+`lem-p-adic-balls-are-clopen` is also **A-R**: its nonarchimedean law formerly
+cited the rational-only supplier
+`thm-p-adic-absolute-value-is-nonarchimedean`; it now declares and cites the
+field theorem that actually extends this law to $\mathbb Q_p$. Other assigned
+p-adic consumers use only unchanged metric, density, field, nonarchimedean or
+completeness conclusions. Two direct consumers owned by another repair lane
+are routed for fresh context review because the supplier Statement/Definition
+interface changed: `ex-p-adic-geometric-series` uses the preserved field
+conclusion, while `ex-the-same-sequence-in-real-and-p-adic-metrics` has
+completion-field wording that requires examination against the split
+definition/theorem interface. Focused precheck, rendercheck, depcheck and diff
+whitespace checks pass; no new prerequisite item or judge is claimed. This is
+a bounded downstream repair and impact audit, not whole-library certification.
+
+## Rank-zero Thom and Euler normalization — 2026-09-20
+
+Bounded interface audit; two confirmed published defects remain **A-P**.
+Both items are published on
+`library/algebraic-topology/leray-hirsch-thom-isomorphism-and-gysin-sequences.md`.
+For the zero bundle over a point with coefficients Z, the published
+`def-r-oriented-vector-bundle-and-orientation-local-system` permits orientation
+-1. Fiber normalization gives u = -1; the zero-section and
+relative-to-absolute maps are identities.
+
+- `def-thom-euler-class-of-an-oriented-vector-bundle`, Definition: its
+  general formula gives e = -1 for that input, but its rank-zero paragraph
+  unconditionally claims u = 1 and e = 1. Qualify that paragraph by the
+  standard unit orientation, retaining e(0,o) = o for a supplied generator.
+- `thm-thom-isomorphism-for-oriented-vector-bundles`, Proof 4.1: the
+  arbitrary supplied orientation in the Statement does not imply u = 1
+  or that cup product is the identity in rank zero. It is multiplication
+  by o (by -1 in the witness), still an isomorphism. Correct this boundary
+  specialization without weakening the general isomorphism statement.
+
+Published suppliers already available: the R-orientation definition,
+`def-thom-class-by-fiberwise-normalization`, and
+`thm-naturality-and-uniqueness-of-thom-classes`. The last theorem's Proof 3.1
+explicitly permits rank-zero reversal from 1 to -1. Distinguish these
+cohomological orientations from the unique geometric rank-zero orientation
+in `def-oriented-real-vector-bundle-and-oriented-frame-bundle`.
+No new Phase-2 supplier is required. The draft alias
+`def-euler-class-by-zero-section-pullback-of-the-thom-class` and draft
+`thm-naturality-orientation-sign-and-whitney-product-for-euler-classes`
+need corresponding normalization reconciliation; their presence does not
+repair the published definitions. Other consumers remain impact-review
+candidates, not newly confirmed defects.
+
+Source verification: J. P. May, Chapter 23 section 5, printed pp.194–196,
+[author-hosted text](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf):
+the fiber-generator definition and cup-with-the-chosen-class formulation
+support the distinction between arbitrary and standard orientation.
+Exact point calculation, current item digests, bounded audit scope and source
+locators: [FA mathematical evidence](phase-2-remaining-27-step7-fa-b-1-thm-naturality-orientation-sign-and-whitney-product-for-euler-classes.md).
+At the original audit no published content was repaired; this is not a
+whole-closure audit. The current relative-Serre supplier now states the
+unoriented additive collapse and correctly handles a supplied rank-zero unit.
+A bounded audit of that revised supplier confirms a remaining proof-interface
+finding, classified **A-P**:
+`lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence`,
+Proof 3.1, identifies the additive collapse with cup product by the Thom class
+without supplying the absolute-relative filtered pairing, its fiber-row action
+and its abutment compatibility. The notation for the base sequence can be
+read charitably; that does not supply the missing pairing.
+
+Required repair: fully construct that pairing and its comparisons, or give a
+complete alternative proof. Existing published ingredients are
+`thm-cohomological-serre-spectral-sequence`,
+`thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence`,
+`prop-relative-cup-products-are-natural-and-compatible-with-connectors`,
+`lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring`, and the existing
+orientation/normalization definitions. The multiplicative theorem is absolute;
+the relative cup proposition supplies ordinary products and connectors, not
+the needed filtered interface. No new Phase-2 supplier is claimed to discharge
+this obligation. May Chapter 23 section 5 gives the Thom diagonal and an
+absolute sphere-compactification proof sketch, a potential alternative route.
+The classical Thom isomorphism is not refuted. Preserve the previous consumer
+finding and its [evidence](phase-2-remaining-27-step7-fa-b-item-d4ee60f2a1aed1ff-evidence.md);
+its supplier-dependent proof closure remains pending. Exact current clauses,
+source verification and bounded audit limitations are in the
+[relative-Serre mathematical evidence](phase-2-remaining-27-step7-fa-b-item-1370b268cd7af4ec-evidence.md).
+Published proof completion and contract reconciliation remain owner work.
 
 ## Published example home updates for b-leaf legality — 2026-09-17
 
@@ -8672,6 +8862,70 @@ Exact planned-item mapping required by the deferred repairs:
 | `thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold` | same |
 | `def-fredholm-map-between-banach-manifolds` | same |
 
+**Sard–Smale bounded repair audit — Astra medium, 2026-09-22.** The full
+published `items/thm-sard-smale-residual-regular-values-for-fredholm-maps.md`
+was read (SHA-256
+`9a71045c7a5b8f20e2305358f8f0c9ff6f3fe4cc6950bff27dfab6830307d49e`).
+Its proof 1.1 asserts local reduction without a supplier; 2.1 asserts local
+properness, a countable cover by closed restrictions, and closed nowhere-dense
+critical images without proving those claims. Finite-dimensional Sard and
+parametric transversality do not supply this infinite-dimensional argument.
+The theorem remains **A-P, pending Phase 3**, moved from its single U-P row;
+it has not been repaired or independently certified.
+
+The four FA suppliers mapped to this theorem above are now authored **draft**
+items in `phase-2-remaining-27`, not published suppliers. In particular, the
+full proof of `lem-local-finite-dimensional-reduction-for-a-fredholm-map`
+was read and supplies `(u,v) -> (u,g(u,v))`, retaining the infinite-dimensional
+parameter u. Its explicit AC assumption must be propagated into the repaired
+theorem and declared through `def-axiom-of-choice`. Publication of the FA
+suppliers is a prerequisite to the published-consumer cutover, not proof
+closure by itself. The Banach regular-value theorem supports the broader DT
+cutover but is not needed for the residual-values argument alone.
+
+As already required by Differential Topology §12.5, author the currently absent
+DT-4 lemmas
+`lem-countable-locally-proper-restrictions-cover-a-fredholm-map-source` and
+`lem-critical-values-on-each-proper-restriction-are-nowhere-dense`, then cite
+them and the FA normal form in the repaired theorem. Use compactness only in
+the finite-dimensional kernel coordinate to establish closed proper local
+restrictions; prove derivative surjectivity equivalent to surjectivity of
+`D_v g`; apply finite-dimensional Sard on each fixed-u slice to exclude
+interior in the closed critical image; conclude by countable localization.
+Handle zero-dimensional obstruction space separately (no critical points).
+
+**Owner-authorized Step-8 external inclusion update — 2026-09-22.** The
+published theorem has now received the bounded dependency/proof repair under
+the Axiom of Choice.  It depends backward on the two draft FA-owned external
+records `rem-fredholm-maps-have-countable-proper-local-restrictions` and
+`rem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense`;
+no duplicate theorem, new page, or forward proof dependency was created.  The
+proof now takes the countable proper local restrictions and their closed
+nowhere-dense critical images as exactly those external inputs and performs the
+countable meagreness argument locally.  The inherited AC hypothesis was
+propagated to direct consumer
+`lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics` and then
+to `thm-morse-smale-metrics-are-residual-for-a-fixed-morse-function`.
+
+This is a logical repair, not current publication closure.  Both external
+records remain draft and explicitly say that their proofs use results not yet
+established in the library; the materially changed published theorem and both
+published downstream consumers require fresh engine-owned judgment.  Future
+internal work may replace those two records with local proofs without changing
+the theorem identity.  Exact source evidence, changes and checks are in
+`research/phase-2-remaining-27-step8-external-inclusion-review.md`.
+
+Primary-source evidence: Abbondandolo–Majer, Theorem 2.19, printed p. 78,
+states the broader Lindelöf-domain theorem and refers to Smale for its proof;
+it does not contain that proof. Smale (1965), §1, Theorems (1.3)/(1.6),
+pp. 862–863, supplies the countable-base theorem/local-properness route.
+The published statement is the genuine countable-base specialization, not a
+proof of the source's full Lindelöf variant. Source-access limitations,
+exact source/supplier hashes and the independently checked repair strategy:
+[`phase-2-remaining-27-step8-sard-smale-investigation.md`](phase-2-remaining-27-step8-sard-smale-investigation.md).
+This audit covers the target and local normal-form interface, not every
+Euclidean Sard prerequisite, the whole source, or the transitive closure.
+
 Current transitive impact cone:
 
 - `lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics`
@@ -8680,6 +8934,24 @@ Current transitive impact cone:
 
 The linearized-flow theorem needs new DT-4 local Fredholm lemmas in Phase 3;
 those lemmas then join the same cone.
+
+**Bounded local Baire-diagonal repair — 2026-09-22.** The implication from a
+Fredholm universal projection to universal-section surjectivity was invalid
+without further work. The Baire-diagonal lemma now proves that missing step
+locally: a functional annihilating the fixed-metric Fredholm range has an
+adjoint-ODE representation on compactly supported tests; a supported symmetric
+metric variation contradicts any nonzero such functional. A finite-dimensional
+cokernel lift and bounded inverse then give a bounded right inverse of the
+universal derivative, and the authored Banach implicit-function theorem gives
+the tangent-kernel identity and Fredholm projection. The old dependency on
+`lem-universal-metric-trajectory-projection-is-fredholm` is removed. The
+Baire-diagonal Statement is unchanged, so the Morse–Smale consumer needs no
+new mathematical edit. This local repair still relies on the published
+fixed-metric Fredholm/transversality interface and on the draft
+`thm-implicit-function-theorem-for-banach-spaces`; it does not discharge the
+former supplier's recorded Phase-3 proof debt or imply publication readiness.
+Keep the existing A-P classification. Source, review and checks are recorded in
+`research/phase-2-remaining-27-baire-local-repair-report.md`.
 
 ### `riemannian-metrics-length-distance-and-volume` and
 `connections-levi-civita-and-parallel-transport`
@@ -29615,11 +29887,11 @@ reader (`reader:11:3`) and re-read here at the adjudication stage.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,958 unique
+subsequently reconciled published IDs. It currently contains **2,961 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-12 from item front matter, has **16,555 published items**. All
-2,954 indexed IDs are published; **13,601 published items remain outside this
+2,961 indexed IDs are published; **13,594 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -29628,13 +29900,13 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1365 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1360 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 190 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 332 | Recorded direct review and an unresolved item-specific repair. | Recorded direct review and an unresolved item-specific repair. |
+| A-R | Audited and repaired items | 197 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 331 | Recorded direct review and an unresolved item-specific repair. | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,886 distinct items.
+defect classes. The four queues currently contain 1,888 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -30824,6 +31096,10 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-sard-smale-residual-regular-values-for-fredholm-maps` | Owner-authorized Step-8 bounded repair completed logically under AC: the theorem now declares the two draft external FA records for countable proper local restrictions and closed nowhere-dense critical images and proves the residual conclusion relative to them. AC was propagated through its two direct published consumer levels. It remains A-P because those source records are draft external prerequisites and the changed published theorem/consumers require fresh engine-owned judgment; no local proof of the external records, publication transition, or certification is claimed. Exact evidence and limitations: `research/phase-2-remaining-27-step8-external-inclusion-review.md`. |
+| `lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence` | Bounded proof-interface audit 2026-09-21: Proof 3.1 lacks the absolute-relative filtered pairing and E2/abutment comparison identifying the Thom map. Complete that construction or an alternative proof and synchronize the contract; existing published ingredients and source evidence are listed above. |
+| `def-thom-euler-class-of-an-oriented-vector-bundle` | Rank-zero Thom and Euler normalization — 2026-09-20: bounded supplied-orientation audit; qualify the unit/identity specialization, preserving arbitrary cohomological orientations. Published suppliers suffice; repair pending. Exact mathematical evidence linked above. |
+| `thm-thom-isomorphism-for-oriented-vector-bundles` | Rank-zero Thom and Euler normalization — current supplier now states the unoriented interface and the rank-zero clause is corrected; supplier-dependent proof closure remains pending the relative-Serre pairing repair described above. Historical and current bounded evidence retained above. |
 | `thm-additive-jordan-chevalley-decomposition` | Run phase-2-remaining-27 Step 5a group-a adjudication 2026-09-17 (reader:11:3, re-read against the current published bytes): the Statement assumes AC but the direct `deps` omit published `def-axiom-of-choice`. Add that published axiom edge, confirm the exact AC use through the algebraic-closure/perfect-field interface, and audit direct published consumers for the inherited declaration. Bounded assumption-interface audit, not a full proof rejudgment. New A-P; evidence in “Published AC-dependency gap: additive Jordan–Chevalley” above. |
 | `rem-fraenkel-socks-model` | Bounded owner review 2026-09-13: the Statement discussion overstates Jech–Sochor by claiming transfer of any statement bounded in the carried hierarchy. Replace with the typed pair-family no-choice certificate and existential consequence; audit direct consumers for the general wording. The socks consistency conclusion remains sound. New A-P; exact hash and scope in “Fraenkel socks remark: Jech–Sochor transfer scope” above. |
 | `lem-nat-trichotomy` | Independent Sol xhigh proof-body review 2026-09-14: steps 1.3 and 2.1 omit the nonzero-addend proof needed for strict inequality. Use existing published commutativity and `lem-nat-add-cancellative` to show `m+j=m` forces `j=0`; cite the argument at each use and audit direct consumers. Earlier Frontier-22 bounded clear remains historical. Exact hash and scope are in “High-impact arithmetic spine follow-up” above. |
@@ -31156,7 +31432,6 @@ owner's scan policy.
 | `thm-operator-determinant-is-basis-independent` | Linear Algebra §16; paired construction/order rewrite with def-determinant-of-a-linear-operator. Recorded category audit; no new semantic audit or Phase-2 supplier. |
 | `thm-second-mertens-theorem-for-primes` | Number Theory §16; paired construction/order rewrite with def-meissel-mertens-constant. Recorded category audit; no new semantic audit or Phase-2 supplier. |
 | `thm-sylvesters-law-of-inertia` | Linear Algebra §16; paired construction/order rewrite with def-definiteness-inertia-and-signature-data-over-the-reals. Recorded category audit; no new semantic audit or Phase-2 supplier. |
-
 ### U-C — Unaudited and confirmed defective items
 
 | Published item | Exact prerequisite debt at classification |
@@ -31175,6 +31450,13 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 
 | Published item | Repair evidence and scope |
 |---|---|
+| `def-field-of-p-adic-numbers` | Repaired 2026-09-22 after the generic Cauchy-quotient theorem exposed its Countable Choice cost: the definition now imports only choice-free assertions 1--4 of `thm-metric-completion-exists` and no longer calls the quotient complete by definition. The named quotient metric and dense rational embedding are unchanged; completeness is established by the following specialized theorem. No new item or judge. |
+| `thm-p-adic-completion-is-a-field` | Repaired 2026-09-22: the Statement now starts from the Cauchy-sequence quotient instead of presupposing it is a completion, and the proof replaces the generic Countable-Choice-dependent completeness clause by a choice-free argument for the countable dense rational model. A fixed bijection from `thm-rationals-countable` and the least-index rule from `thm-well-ordering-principle` canonically approximate each term within `2^{-n}`; the resulting rational Cauchy class is the required limit. The field, valuation and completeness conclusions are unchanged. Focused precheck and rendercheck pass; depcheck resolves all references with only the pre-existing repository warning set. No new item or judge. |
+| `lem-p-adic-balls-are-clopen` | Repaired 2026-09-22 after the p-adic definition/field interface was separated: its nonarchimedean law on $\mathbb Q_p$ no longer cites `thm-p-adic-absolute-value-is-nonarchimedean`, whose statement is only about rational arguments. It now declares and cites `thm-p-adic-completion-is-a-field`, which supplies the extended nonarchimedean absolute value and complete field structure actually used by every proof step. The clopen and nesting conclusions are unchanged. Focused precheck and rendercheck pass; no new item or judge. |
+| `thm-cantor-intersection-metric` | Repaired 2026-09-22: the Statement and Given interface now assume Countable Choice only for assertion 1, matching Proof 1.2's selection of one point from each member of the arbitrary Cantor chain and the existing choice-accounting remark. The converse completeness direction is unchanged and choice-free. The owning page was synchronized; the negative-diameter counterexample remains sound. Its four published existence-clause consumers have now been reconciled: two DC-qualified consumers explicitly derive Countable Choice, the dense-extension theorem states Countable Choice, and the Goursat selection lemma uses a direct choice-free Cauchy argument. Focused precheck and rendercheck pass; no new supplier or judge. |
+| `thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space` | Repaired 2026-09-22: the DC-qualified statement is unchanged and the copied Cantor-intersection fact includes Countable Choice. The later-page DC-implies-CC citation was replaced by the explicit local finite-partial-choice-sequence argument from the already declared Dependent Choice axiom. The unique-point proof step still invokes this bridge. Focused precheck/rendercheck and global fwdcheck pass. This is a bounded local repair, not independent judgment; see research/phase-2-remaining-27-step8-local-choice-bridge-repair.md. |
+| `thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space` | Repaired 2026-09-22: the DC-qualified statement is unchanged and the copied Cantor-intersection fact includes Countable Choice. The later-page DC-implies-CC citation was replaced by the explicit local finite-partial-choice-sequence argument from the already declared Dependent Choice axiom. The unique-point proof step still invokes this bridge. Focused precheck/rendercheck and global fwdcheck pass. This is a bounded local repair, not independent judgment; see research/phase-2-remaining-27-step8-local-choice-bridge-repair.md. |
+| `lem-a-bundle-embedding-produces-its-grassmannian-classifying-map` | Repaired 2026-09-22: replaced the false assertion that every numeration has a countable refinement by the exact countable numerable trivializing rechart obtained by regrouping disjoint open pieces; the new chart domains need not refine the original cover. Published `thm-principal-bundles-are-classified-by-maps-to-bg`, Proof 1.1/2.1, supplies this construction, and the embedding proof already used it. The source locator and owning page metadata were synchronized. Both declared item consumers use only the unchanged embedding and tautological-pullback clauses. No new supplier or judge. Original witness and bounded evidence are linked in the section above. |
 | `def-complex-lp-and-euclidean-test-function-conventions` | Repaired 2026-09-13: the finite-`p` functional now assigns `+∞` directly when the nonnegative integral diverges and uses the real power only on finite values, making its membership predicate total. Focused rendercheck passes; the definition has no precheck proof block. No new supplier or judge. Exact hashes and scope: `research/phase-2-next-21-published-complex-lp-repair.md`; original finding: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `prop-order-and-scalar-rules-for-the-nonnegative-integral` | Repaired 2026-09-13: positive-scalar homogeneity and the zero-function integral are stated separately; the proof declares and uses the simple-integral scaling supplier and avoids both undefined `0f` and `0·(+infinity)` expressions. Monotonicity is retained. Focused precheck, rendercheck and depcheck pass; no independent judge. Exact hashes and local scope: `research/phase-2-next-21-published-simple-integral-repair.md`; original finding: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `prop-basic-properties-of-the-nonnegative-simple-integral` | Repaired 2026-09-13 after its representation-independence supplier: the statement and proof separate the zero-scalar result from positive-scalar homogeneity, avoiding the globally undefined `0·(+infinity)` product. Common finite refinement supplies monotonicity and additivity. Focused precheck and rendercheck pass; no independent judge. Exact before/after hashes and local scope: `research/phase-2-next-21-published-simple-integral-repair.md`; original finding: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
@@ -31385,6 +31667,9 @@ mathematical repairs. Evidence:
 | `ex-tor-of-two-cyclic-groups-from-a-two-term-resolution` | Root local repair2026-09-10: inherited AC and explicit choice-free Z/6 kernel isomorphism. Full target and repaired two-cyclic supplier read. Canonical/live/HA prose synchronized; precheck and real rendercheck pass, no independent judge. Receipt research/phase-2-catchup-24-cyclic-tor-root-repair.md, examples section. |
 
 | `ex-tor-symmetry-over-a-commutative-ring` | Root individual local repair2026-09-10: explicit AC/DC and supplied resolutions, exact natural symmetry map, and previously implicit cyclic suppliers declared. Full target/symmetry/cyclic supplier proofs read. Canonical/live/HA prose synchronized; precheck and real rendercheck pass, no independent judge. Receipt research/phase-2-catchup-24-cyclic-tor-root-repair.md, examples section. |
+| `rem-baire-category-choice-strength` | Authorized repair 2026-09-22: removed the ZF strictness claim and "four inequivalent" title, stated DC implies DMC with the ZF reversal open and ZFA separation explicit, corrected the Tachtsis annotation, and added exact Dodu--Morillon/Morillon source rows. The Baire equivalences and BPI comparison are unchanged. Owning catalogue prose synchronized; focused checks and exact hashes are in the run-local owner report. This is a defect-focused repair, not independent judgment. |
+| `fs-every-baire-space-is-completely-metrizable` | Authorized downstream repair 2026-09-22: Fact F1 now records DC implies DMC in ZF, the ZF reversal remains open, and DMC does not imply DC in ZFA. The Cantor-cube refutation uses only the unchanged DC-sufficient Baire theorem and was left intact. Focused precheck passes; exact hashes and sources are in the Step-7 owner report. |
+| `thm-baire-category-locally-compact-hausdorff` | Authorized downstream repair 2026-09-22: the orientation paragraph now distinguishes the ZF implication/open reversal from the ZFA separation. The core locally compact Hausdorff Baire assertion and its DC-based nested-shrinking proof are unchanged. Focused precheck passes; exact hashes and sources are in the Step-7 owner report. |
 
 ### U-P — Unaudited and potentially defective items
 
@@ -32320,7 +32605,6 @@ mathematical repairs. Evidence:
 | `prop-universal-central-extension-group-is-superperfect` | 30.7 Group-owned low-degree (co)homology Phase-2 supplier |
 | `prop-verma-and-finite-dimensional-modules-lie-in-category-o` | Cross-category Phase-2 roots and their published impact |
 | `prop-verma-composition-multiplicities-are-finite` | Supplier-to-published-consumer map |
-| `rem-baire-category-choice-strength` | Recorded-material path classification — 2026-09-08 |
 | `rem-bass-guivarch-growth-degree-formula` | Recorded-material path classification — 2026-09-08 |
 | `rem-blass-model-without-ultrafilters` | 7.1 Recorded-Not-Proved closure and prose defects |
 | `rem-carleson-hunt-almost-everywhere-convergence` | carleson-hunt-time-frequency-theorem |
@@ -32424,7 +32708,6 @@ mathematical repairs. Evidence:
 | `thm-auslander-buchsbaum-formula` | Item-exact impact of the Dependent Choice rehome |
 | `thm-auslander-buchsbaum-serre-regularity-criterion` | Item-exact impact of the Dependent Choice rehome |
 | `thm-baire-category-for-complete-metric-spaces` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-baire-category-locally-compact-hausdorff` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-banach-closed-range-theorem` | norming-and-separation-under-hahn-banach |
 | `thm-banach-series-criterion` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-banach-steinhaus-dichotomy` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
@@ -32451,7 +32734,6 @@ mathematical repairs. Evidence:
 | `thm-busy-beaver-dominates-every-total-computable-function` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-c-c-infinity-rn-is-dense-in-l-p-of-rn` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-canonical-bidual-map-is-an-isometry` | norming-and-separation-under-hahn-banach |
-| `thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-cardinal-arithmetic-agrees-with-finite-counting` | 7.4 Published metadata snapshot amendments |
 | `thm-cardinal-power-set-and-cantor` | 7.4 Published metadata snapshot amendments |
 | `thm-cartan-matrix-is-d-transpose-d` | Transitive consumers (166), grouped by home page |
@@ -32532,7 +32814,6 @@ mathematical repairs. Evidence:
 | `thm-event-independence-and-indicator-independence` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-every-category-o-object-has-finite-length` | Supplier-to-published-consumer map |
 | `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` | Recorded-material path classification — 2026-09-08 |
-| `thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-every-oracle-is-strictly-below-its-jump` | 51. Exact live-plan metadata resynchronization set |
 | `thm-excision-for-singular-homology` | Singular subdivision and simplicial comparison |
 | `thm-existence-of-a-universal-turing-machine` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
@@ -32688,7 +32969,6 @@ mathematical repairs. Evidence:
 | `thm-relative-cellular-homology-computes-relative-singular-homology` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `thm-relative-halting-is-oracle-ce-complete` | 51. Exact live-plan metadata resynchronization set |
 | `thm-relative-homology-of-consecutive-cw-skeleta` | Singular subdivision and simplicial comparison, now extended by AT6 compact-CW choice impact 2026-09-11: proof 2.1 uses the affected compact-subspace lemma to force every singular chain in the infinite wedge quotient to have finite summand support. The direct-sum conclusion is sound after that input is repaired or qualified. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`. |
-| `thm-sard-smale-residual-regular-values-for-fredholm-maps` | banach-space-differential-calculus-and-banach-manifolds |
 | `thm-sat-search-reduces-to-sat-decision` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-scalar-extension-of-an-irreducible-finite-group-representation` | Transitive consumers (166), grouped by home page |
 | `thm-scheme-theoretic-image-quasi-compact-morphism` | Published scheme-pair repair |

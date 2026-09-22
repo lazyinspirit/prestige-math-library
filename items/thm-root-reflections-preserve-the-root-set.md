@@ -5,7 +5,7 @@ title: Root reflections preserve the root set
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-root-reflection-from-a-coroot, thm-root-string-property, cor-cartan-integers-are-integral, def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [def-root-reflection-from-a-coroot, thm-root-string-property, cor-cartan-integers-are-integral, def-coroot-of-a-lie-algebra-root, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -20,7 +20,7 @@ proof_strategy: direct
 
 ## Statement
 
-Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
+Assume the Axiom of Choice. Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
 semisimple Lie algebra $\mathfrak g$ with root set $\Phi$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]). For roots
 $\alpha,\beta\in\Phi$, the reflected functional $s_\alpha(\beta)$
@@ -28,7 +28,9 @@ $\alpha,\beta\in\Phi$, the reflected functional $s_\alpha(\beta)$
 
 ## Facts & Assumptions
 
-**Given:** Such $\mathfrak g,\mathfrak h$ and roots $\alpha,\beta$.
+**Given:** The Axiom of Choice, such $\mathfrak g,\mathfrak h$ and roots $\alpha,\beta$.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it licenses the root-string, coroot, and reflection facts in [L1] and [L2].
 
 [L1] The set $\{k\in\mathbb Z:\mathfrak g_{\beta+k\alpha}\ne0\}$ of indices $k$ with $\beta+k\alpha$ a root or zero is a nonempty interval $\{-p,\dots,q\}$ of consecutive integers with $p-q=\beta(h_\alpha)$ ([[thm-root-string-property]]).
 
@@ -38,7 +40,7 @@ $\alpha,\beta\in\Phi$, the reflected functional $s_\alpha(\beta)$
 
 **Proof technique:** direct.
 
-1.1 By [L1] applied to the pair $(\alpha,\beta)$ there are integers $p,q\ge0$ with $p-q=\beta(h_\alpha)$ and such that $\beta+k\alpha\in\Phi\cup\{0\}$ for every $k$ with $-p\le k\le q$. [L1, L2]
+1.1 By [L1] applied to the pair $(\alpha,\beta)$ there are integers $p,q\ge0$ with $p-q=\beta(h_\alpha)$ and such that $\beta+k\alpha\in\Phi\cup\{0\}$ for every $k$ with $-p\le k\le q$. [A1, L1, L2]
 
 2.1 By [L2] we may rewrite $s_\alpha(\beta)=\beta-\beta(h_\alpha)\alpha=\beta+(q-p)\alpha$, and the index $k=q-p$ satisfies $-p\le q-p\le q$ because $p,q\ge0$. Hence $s_\alpha(\beta)=\beta+k\alpha$ with $-p\le k\le q$, so $s_\alpha(\beta)\in\Phi\cup\{0\}$ by step 1.1. [L1, L2, step 1.1, algebra]
 

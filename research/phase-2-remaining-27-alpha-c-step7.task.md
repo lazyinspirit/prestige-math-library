@@ -12,18 +12,10 @@ about mathematics.
 
 ## What you recorded at step 6
 
-`research/phase-2-remaining-27-alpha-c-step7-context.json` is what a group Alpha for this group wrote during step 6,
-while the judges were still sweeping and no verdict existed. It records the
-conventions your pages fix, which items the rest lean on, which published
-dependencies were actually opened, and what already looked thin.
-
-**Its `concerns` list is evidence, not decoration.** Each entry was found with
-nobody suggesting where to look. A judge rejection landing at the same place is
-two independent readings agreeing and should be very hard to call a
-`false_positive`; a rejection landing nowhere near any of them is not thereby
-wrong, but it is the case to read most carefully against the text.
-
-It is notes, not authority. Where it and the item files disagree, the files win.
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
 
 ## Read scope, write scope
 
@@ -288,22 +280,7 @@ changed a domain, quantifier, hypothesis, direction or conclusion.
 
 ## Step-6 reader warnings
 
-8 warning(s) a Step-6 reader recorded in items you own.
-They were read-only and could not repair or adjudicate them. You own these decisions.
-
-- **s8a-dec329ad2223a8dab75d6eb1 · `lem-l-two-with-the-integral-pairing-is-a-hilbert-space`** (from group a, presentation) — The numbered claims in the Statement are not rendered as a list: claim 1 is run into the lead sentence ('...; with it $L^2(\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\mu;\mathbb C)$ ...'), so the first item has no marker and the second is inline. Purely presentational, but the statement does not read as the intended two-part claim.
-- **s8a-cd3570ad251db24d3fb862cd · `ex-standard-basis-of-ell-two`** (from group c, gap-a-reader-closes) — The example claims that l^2(N,F) is complete and points to the inline fact [A3], but [A3] is conditional on the Cauchy sequence already having coordinate-wise limits; the completeness of the scalar field F that produces those limits, hence the completeness of l^2, is not supplied by any cited item (the dependency list omits the completeness/Riesz-Fischer supplier that the sibling example ex-standard-inner-products-on-kn-ell-two-and-l-two cites for exactly this claim).
-- **s8a-740bb14ed6917643818a401c · `def-square-summable-family-on-an-arbitrary-index-set`** (from group c, gap-a-reader-closes) — In the proof that every absolutely summable family is summable, the justification sentence says that taking F = G = F_0 in relation (2) gives B_{F_0} - A_{F_0} <= epsilon. Relation (2) at F = G = F_0 gives 0 <= S - S_{F_0}, not the diameter bound; the intended bound follows from (2) for arbitrary finite F,G containing F_0. The argument is correct but the displayed justification is not.
-- **s8a-ec4bab00c6600c72eca519a1 · `lem-two-dimensional-numerical-range-is-convex`** (from group c, gap-a-reader-closes) — The statement covers complex subspaces of dimension at most two, so V = {0} is included, but step 1.1 asserts that for dim V <= 1 the numerical range is a single scalar; for dim V = 0 the unit sphere is empty, so that numerical range is empty (convex, but not a singleton), and the boundary case is not addressed.
-- **s8a-dd636e0bfc93c0663492b8c6 · `def-cyclic-vector-and-cyclic-normal-operator`** (from group c, presentation) — The sentence 'cyclicity uses the unitary operator T together with its adjoint, never only the nonnegative powers of T' is inaccurate: T is only assumed normal, not unitary; the intended content is that the adjoint pair (T,T*) generates the algebra.
-- **s8a-40965c6dceb6f12bd4527b4b · `def-hilbert-space-adjoint`** (from group c, presentation) — The closing sentence 'it is a different operator from T' whenever the Riesz maps are conjugate-linear' compares T*: K to H with T': K* to H*, which have different domains and codomains, so the stated criterion is not a meaningful distinction.
-- **s8a-c5897e92e6f8d22700af2267 · `thm-hilbert-projection-variational-characterization`** (from group c, presentation) — The statement carries 'Assume the Axiom of Countable Choice' although the equivalence is choice-free once p in C is given, and the proof itself says the hypothesis is used only to invoke the existence theorem for nearest points; a consumer may wrongly read the equivalence as requiring AC_w.
-- **s8a-8e970f8ab86eae17d8bfa11a · `def-spectral-multiplicity-function-in-the-separable-case`** (from group c, presentation) — The definition fixes multiplicity data from a chosen cyclic decomposition and asserts that the measure class of mu and the a.e. class of m are independent of that choice, while locating the justification in items later on the same page; a judge should confirm the classification theorem, which is stated through these data, does not presuppose the independence it is invoked to justify (I found no circular use, but the organisation invites the objection).
-
-Append one owning-group disposition per warning to `research/phase-2-remaining-27-step7-alert-decisions.jsonl`.
-A Step-6 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
-pre/post guard hashes. A later Step-7 cross-group alert still requires a real targeted
-judge rejection; never reuse its source rejection as target evidence.
+None. No Step-6 reader warning targets an item you own.
 
 ## Your rejections
 
@@ -314,75 +291,17 @@ a rejection recorded after this file was rendered is still yours.
 
 ---
 
-# Step 7 — fatal-only judge and reader-warning adjudication, `phase-2-remaining-27`
+# Step 7 batch adjudication, `phase-2-remaining-27`
 
-The generated scope header supplies the owned pages, items, seams, rejections,
-and incoming alerts. Read each owned rejection against the current item and its
-cited dependencies; the exact `(id, model, context_sha256)` tuple identifies
-one adjudication.
+Follow `briefs/step7-adjudicator.md` and the engine-generated, round-bound task.
+It supplies the batch, exact rejections, ownership, evidence paths and structured
+result schema. Do not reconstruct these from an old group task.
 
-Audit one item, record its decision, complete its authorized repair and focused
-checks, then continue to the next item. Do not run judges or final adjudicators.
-The engine runs repair checks, one rejudge, then one terminal adjudication pass
-after every group finishes. On resume, retain completed decisions and repairs.
-
-Web search is available in this role. If any mathematics is uncertain, use it
-and verify the point against original sources before deciding the outcome or
-making a repair. Record the sources consulted and the exact claim each source
-supports in the group report; do not resolve uncertainty from memory or a
-secondary summary alone.
-
-Append one row per rejection to `research/phase-2-remaining-27-judge-adjudications.jsonl`
-with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
-`confirmed_fatal` licenses a content repair and matching defect-ledger row;
-`confirmed_nonfatal` and `false_positive` close the rejection without content,
-contract, impact, or judge changes. The engine rejudges exactly changed items
-against the configured judge set after preflight.
-
-You may add and author new lemma items when a licensed fatal repair needs a
-genuinely missing dependency. Prove each lemma fully, verify unfamiliar or
-uncertain mathematics against authoritative sources, and cite it in the
-consumer's `deps` and proof. Supporting chains of new lemmas are permitted.
-Place the lemmas on an owned page before their consumers and update that page,
-the owning batch manifest and proof contract, and the Step-7 scope's group item
-list and `by_item` entries. Record the missing dependency and its consuming
-fatal repair in your report. This is an authorized scope addition; do not
-invent a rejection or adjudication for a new lemma. New lemmas enter the
-engine's normal coverage and targeted judgment checks.
-
-Every entry under **Step-6 reader warnings** also requires an owning-group
-decision in `research/phase-2-remaining-27-step7-alert-decisions.jsonl`. Use `not_defect` or
-`nonfatal` when no content change is warranted, and `covered_by_rejection` when
-an exact judge rejection already licenses the same repair. If a Step-6 reader
-warning is independently `confirmed_fatal`, record `defect_type`, the full
-pre-edit `itemHashGuard` digest as `item_sha256`, the full repaired digest as
-`post_sha256`, repair the item before returning, and add exactly one matching
-defect-ledger row whose structured `adjudication_ref` contains this `alert_id`,
-`item`, and `item_sha256`. Only Step-6 reader warnings have this direct fatal
-licence; later cross-group alerts raised while
-adjudicating a judge rejection still require a targeted judge rejection.
-
-A warning may name an owned page, for example a missing prerequisite page.
-Read the page and its declared prerequisites and retain an explicit disposition.
-The frontier policy permits unbuilt cross-category prerequisites. Check actual
-item dependencies and citations before classifying such an absence as fatal;
-the scheduling allowance does not excuse a missing fact used in a proof.
-A page warning grants no item-edit authority: identify the affected item and its
-fatal evidence, or report an unresolved page defect with
-`confirmed_fatal_unlicensed`. Never dismiss it merely because it names a page.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Descriptive defect-ledger subclasses
-such as `invalid-inference`, `false-claim`, or `ill-typed-construction` are not
-valid adjudication `defect_type` values.
-
-For every reader warning, append the owning-group disposition to
-`research/phase-2-remaining-27-step7-alert-decisions.jsonl`. A defect in another group is a
-`research/phase-2-remaining-27-step7-cross-group.jsonl` alert, not permission to repair it. Use
-`published-repairs.mjs append` with a namespaced temporary row for an obvious
-source-grounded published-item repair; a debatable published change is an
-escalation.
-
-Do not create a Step-7 baseline or rewrite shared ledgers. Run the Step-7 guard
-and scope check, then write `research/phase-2-remaining-27-alpha-step7-<group>.md` with every
-rejection, outcome, repair, alert, and rejudge target for this group.
+Adjudicate by logical validity, repair all confirmed defects (including nonfatal
+defects), and identify all
+relevant downstream consumers including published items. The engine routes
+downstream repairs to three Sol xhigh owners and certifies once after all
+writers drain. Terra rejudgment and adjudication/repair/certification repeat
+under WORKFLOW.md. New downstream work continues in the repair phase until
+complete before certification. Fatal classification controls only the threshold.
+Historical terminal receipts cannot close current rounds.

@@ -5,7 +5,7 @@ title: Global cartan and iwasawa decompositions hold for every nonlinear cover w
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, thm-global-iwasawa-decomposition, thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, def-axiom-of-choice, def-special-linear-lie-algebra-sl-two, thm-cartans-closed-subgroup-theorem, thm-lie-subgroup-lie-subalgebra-correspondence, thm-one-parameter-subgroups-are-exactly-exponentials, prop-exponential-map-is-natural-for-lie-group-homomorphisms, def-cartan-involution-of-a-real-semisimple-lie-algebra, prop-real-cartan-subalgebras-need-not-be-conjugate]
+deps: ["thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group", "thm-global-iwasawa-decomposition", "prop-real-cartan-subalgebras-need-not-be-conjugate", "thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations", "prop-exponential-map-is-natural-for-lie-group-homomorphisms", "cor-real-line-is-universal-cover-of-circle", "thm-universal-cover-uniqueness-and-dominating-property", "thm-cartans-closed-subgroup-theorem", "thm-lie-subgroup-lie-subalgebra-correspondence", "thm-one-parameter-subgroups-are-exactly-exponentials", "def-special-linear-lie-algebra-sl-two", "thm-finite-dimensional-representations-of-sl-two", "def-axiom-of-choice"]
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -16,58 +16,43 @@ sources:
       locator: "Chapter VI, §3, Theorem 6.31 with its finite-center hypothesis, printed pp. 361-368; Chapter VII, §1, the covering and center hypotheses, printed pp. 434-446"
     - title: "Pavel Etingof, Lie Groups and Lie Algebras"
       url: "https://math.mit.edu/~etingof/lnlg.pdf"
-      locator: "Lecture 43, §43.3, the universal cover of SL(2,R) is not linear, printed p. 199"
+      locator: "Lecture 43, §43.3, the universal cover of SL(2,R) is not linear, printed pp. 197-198"
 landmark: false
 proof_strategy: counterexample
 ---
 
 ## Statement
 
-Assume the Axiom of Choice. False: the global Cartan and Iwasawa decompositions, as stated for connected
-semisimple groups with finite center and compact $K$, hold verbatim for every
-nonlinear cover with the same compact $K$, so that no modification of $K$ is
-needed.
+Assume the Axiom of Choice. False: the global Cartan and Iwasawa decompositions stated for connected semisimple groups with finite center and compact $K$ hold verbatim on every nonlinear cover with the same compact $K$. The universal cover of $\operatorname{SL}_2(\mathbb R)$ is a counterexample: its lifted compact-direction subgroup is a closed copy of $\mathbb R$, not a compact circle.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice; the group $G=\operatorname{SL}_2(\mathbb R)$, its maximal compact subgroup $K=\operatorname{SO}(2)$, the Cartan involution $\theta(X)=-X^{T}$ of $\mathfrak{sl}_2(\mathbb R)$ with $\mathfrak k_0=\mathfrak{so}(2)=\mathbb Rk$, $k=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, and the universal covering homomorphism $\pi\colon\widetilde G\to G$.
+**Given:** $G=\operatorname{SL}_2(\mathbb R)$, $K=\operatorname{SO}(2)$, $k=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, $\mathfrak p$ the symmetric traceless real matrices, and the based universal covering homomorphism $\pi:\widetilde G\to G$.
 
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; in particular it supplies the countable-choice hypothesis of the closed-subgroup and subgroup-correspondence interfaces in [L3].
+[A1] We assume [[def-axiom-of-choice]], including the countable choice inherited by the Lie-group and covering interfaces.
 
-[L1] For a connected semisimple Lie group with finite center and a global Cartan involution with differential $\theta$, the fixed group $K$ is a closed compact subgroup with Lie algebra $\mathfrak k_0$ and $K\times\mathfrak p_0\to G$, $(k,X)\mapsto k\exp X$, is a diffeomorphism; moreover $G=KAN$ with $A=\exp\mathfrak a$, $N$ the connected subgroup with Lie algebra $\mathfrak n$, and the multiplication map $K\times A\times N\to G$ is a diffeomorphism ([[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]], [[thm-global-iwasawa-decomposition]]).
+[L1] The global Cartan and Iwasawa theorems apply to connected semisimple groups with finite center and an involutive automorphism whose differential is a Cartan involution **and which fixes the center pointwise**; they give compact $K$ and diffeomorphic product factorizations ([[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]], [[thm-global-iwasawa-decomposition]]).
 
-[L2] Every connected real Lie group $G$ is isomorphic to $\widetilde G/\Gamma$ for its simply connected covering group and a discrete central subgroup $\Gamma$, and a covering homomorphism is a surjective homomorphism and a covering map ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
+[L2] The algebra $\mathfrak{sl}_2(\mathbb R)$ is semisimple and $\theta X=-X^{\mathsf T}$ is a Cartan involution with compact eigenspace $\mathbb Rk$ ([[prop-real-cartan-subalgebras-need-not-be-conjugate]]).
 
-[L3] A closed subgroup of a finite-dimensional real Lie group is an embedded Lie subgroup whose Lie algebra is $\{X:\exp(tX)\in H\text{ for all }t\}$; connected immersed subgroups with the same Lie algebra are uniquely isomorphic by an isomorphism commuting with their inclusions; and every one-parameter subgroup is $t\mapsto\exp(tX)$ for a unique $X$ ([[thm-cartans-closed-subgroup-theorem]], [[thm-lie-subgroup-lie-subalgebra-correspondence]], [[thm-one-parameter-subgroups-are-exactly-exponentials]]).
+[L3] The simply connected covering Lie group maps onto $G$ with discrete central kernel, and covering homomorphisms intertwine exponentials ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]], [[prop-exponential-map-is-natural-for-lie-group-homomorphisms]]). The line covers the circle universally, and based universal covers of a path-connected locally path-connected space are uniquely isomorphic over the base ([[cor-real-line-is-universal-cover-of-circle]], [[thm-universal-cover-uniqueness-and-dominating-property]]).
 
-[L4] The map $\theta(X)=-X^{T}$ is a Cartan involution of $\mathfrak{sl}_2(\mathbb R)$, the group $G=\operatorname{SL}_2(\mathbb R)$ is connected semisimple with finite center $\{\pm I\}$ and Lie algebra $\mathfrak{sl}_2(\mathbb R)$, and the involutive automorphism $\Theta(g)=(g^{-1})^{T}$ of $G$ has differential $\theta$ and fixed group $K=\operatorname{SO}(2)$ ([[def-cartan-involution-of-a-real-semisimple-lie-algebra]], [[def-special-linear-lie-algebra-sl-two]], [[prop-real-cartan-subalgebras-need-not-be-conjugate]]).
+[L4] Closed subgroups are embedded Lie subgroups; a Lie subalgebra has a unique connected immersed subgroup; and one-parameter subgroups are precisely exponential curves ([[thm-cartans-closed-subgroup-theorem]], [[thm-lie-subgroup-lie-subalgebra-correspondence]], [[thm-one-parameter-subgroups-are-exactly-exponentials]]).
 
-[L5] The universal cover $\widetilde G$ of $G$ is connected and simply connected, and every loop in $G$ lifts. The covering homomorphism intertwines exponential maps, so the one-parameter subgroup $t\mapsto\widetilde\exp(tX)$ projects to $t\mapsto\exp(tX)$ ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]], [[prop-exponential-map-is-natural-for-lie-group-homomorphisms]], [[thm-one-parameter-subgroups-are-exactly-exponentials]]).
+[L5] The standard complex $\mathfrak{sl}_2$ triple has $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$, and in every finite-dimensional complex module $h$ acts diagonally with integer eigenvalues ([[def-special-linear-lie-algebra-sl-two]], [[thm-finite-dimensional-representations-of-sl-two]]).
 
 ## Refutation
 
 **Proof technique:** counterexample.
 
-1.1 For $G=\operatorname{SL}_2(\mathbb R)$ the Iwasawa decomposition of [L1] reads $G=KAN$ with $K=\operatorname{SO}(2)$, $A=\exp(\mathbb R h)$ and $N=\exp(\mathbb R e)$, so as a manifold $G$ is diffeomorphic to $\operatorname{SO}(2)\times\mathbb R^{2}$; consequently the fundamental group of $G$ is $\pi_1(G)\cong\pi_1(\operatorname{SO}(2))\cong\mathbb Z$. [L1, L4]
+1.1 The group $K$ is a circle, parametrized by $r(t)=\exp(tk)$ with period $2\pi$. The group $G$ is connected: for $g=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ put $s=(a^2+c^2)^{1/2}$ and $q=s^{-1}\begin{pmatrix}a&-c\\c&a\end{pmatrix}\in K$; then $q^{-1}g=\begin{pmatrix}s&u\\0&s^{-1}\end{pmatrix}$, which is joined to $I$ through upper triangular determinant-one matrices with positive diagonal, while $q$ is joined to $I$ inside the circle. A central matrix of $G$ commutes with $I+te$ and $I+tf$ for every real $t$; commuting with both matrix units forces it to be scalar. Determinant one then gives center $\{I,-I\}$. The automorphism $\Theta(g)=(g^{-1})^{\mathsf T}$ fixes both central elements, has differential $\theta$, and fixed group $K$. Thus every hypothesis in [L1] holds for the base group, while no such hypothesis has been presumed for its cover. [L1, L2, L5, algebra]
 
-1.2 The subgroup $\widetilde K:=\pi^{-1}(K)$ is closed because $K$ is closed and $\pi$ is continuous, hence is an embedded Lie subgroup by [L3]. Its Lie algebra is $\mathfrak k_0=\mathbb Rk$: after identifying the two Lie algebras by the differential of the covering homomorphism, naturality of the exponential map in [L5] shows that $\widetilde\exp(tX)\in\widetilde K$ for every $t$ exactly when $\exp(tX)\in K$ for every $t$, which by [L3] is exactly $X\in\mathfrak k_0$. [L3, L4, L5]
+2.1 By [L1] and step 1.1, $K\times\mathfrak p\to G$, $(q,X)\mapsto q\exp X$, is a diffeomorphism. Precomposing its first factor with the universal covering map $r:\mathbb R\to K$ shows that $P:\mathbb R\times\mathfrak p\to G$, $P(t,X)=r(t)\exp X$, is a covering. Its domain is a vector space, hence connected and simply connected by straight-line contraction. By [L3] it identifies, preserving basepoints, with the universal cover $\widetilde G$. The identification is smooth in covering charts, since both coverings are local diffeomorphisms. Under it the entire inverse image $\widetilde K=\pi^{-1}(K)$ is exactly $\mathbb R\times\{0\}$, a connected closed embedded submanifold. [L1, L3, step 1.1, algebra]
 
-2.1 By [L2] the universal cover $\pi\colon\widetilde G\to G$ satisfies $G\cong\widetilde G/\Gamma$ with $\Gamma$ a discrete central subgroup isomorphic to $\pi_1(G)$, so $\Gamma\cong\mathbb Z$ and the center of $\widetilde G$ contains a copy of $\mathbb Z$; in particular $Z(\widetilde G)$ is infinite and $\widetilde G$ does not have finite center. [L2, step 1.1]
+3.1 The lift starting at the identity of $r(t)$ is $t\mapsto\widetilde\exp(tk)$ by exponential naturality and uniqueness of path lifts in a covering. In the coordinates of step 2.1 it is $t\mapsto(t,0)$. Thus it is a diffeomorphism and group isomorphism from the additive line onto $\widetilde K$, not merely an injective immersion. The kernel of $\pi$ consists of $(2\pi m,0)$, $m\in\mathbb Z$, and is central by [L3]. Its element $z=\widetilde\exp(2\pi k)$ is nonidentity and has infinite order; in particular the cover has infinite center. [L3, L4, step 2.1, algebra]
 
-2.2 The group $\widetilde K$ is noncompact and contains a subgroup isomorphic to $\mathbb R$: the one-parameter subgroup $t\mapsto\exp(tk)$ of $G$ is the loop of rotations generating $\pi_1(G)\cong\mathbb Z$ of step 1.1, so its lift $t\mapsto\widetilde\exp(tk)$ to $\widetilde G$ is injective and its image $\widetilde K_0=\widetilde\exp(\mathbb Rk)$ is a subgroup isomorphic to $\mathbb R$; explicitly the loop $t\mapsto\exp(tk)$, $0\le t\le2\pi$, is the standard generator of $\pi_1(\operatorname{SO}(2))$ under the diffeomorphism of step 1.1, hence is not null-homotopic, so the lifted one-parameter subgroup never returns to the identity. [L3, L5, step 1.1, step 1.2]
+4.1 No compact subgroup $H$ of $\widetilde G$ can have Lie algebra $\mathbb Rk$. Such an $H$ would be closed, hence embedded by [L4], and its identity component $H^0$ would be closed in the compact group $H$, hence compact. Uniqueness of the connected immersed subgroup would identify $H^0$, with its intrinsic Lie-group topology, with $\widetilde K\cong\mathbb R$ from step 3.1, a contradiction. This uses closedness of an identity component; it does not assert that any subgroup abstractly isomorphic to $\mathbb R$ inside a compact group is noncompact in the subspace topology. [L4, step 3.1, algebra]
 
-3.1 No compact subgroup of $\widetilde G$ has Lie algebra $\mathfrak k_0$: if a subgroup $H\subseteq\widetilde G$ had Lie algebra $\mathfrak k_0$, then its identity component would be a connected subgroup with Lie algebra $\mathfrak k_0$, hence by [L3] would coincide with the connected one-dimensional subgroup $\widetilde K_0\cong\mathbb R$ of step 2.2; thus $H$ would contain a subgroup isomorphic to $\mathbb R$ and could not be compact. [L3, step 2.2]
+4.2 The cover is genuinely nonlinear. Let $\rho:\widetilde G\to\operatorname{GL}(V)$ be any finite-dimensional real representation and complexify its differential to a complex $\mathfrak{sl}_2$ representation on $V_{\mathbb C}$. The complex matrix $-ik$ has eigenvalues $1,-1$, hence is conjugate in $\operatorname{GL}_2(\mathbb C)$ to $h$. Conjugating the other two members of the standard triple gives a triple with semisimple member $-ik$, so [L5] makes $d\rho(-ik)$ diagonalizable with integer eigenvalues. Therefore $d\rho(k)=i\,d\rho(-ik)$ has eigenvalues in $i\mathbb Z$ and $\exp(2\pi d\rho(k))=I$. Naturality of the exponential gives $\rho(z)=I$ for the nonidentity $z$ of step 3.1. Every such representation has nontrivial kernel, so no faithful finite-dimensional real representation exists. The same proof applies to a complex representation without first complexifying. [L3, L5, step 3.1, algebra]
 
-4.1 Now suppose that the global Cartan and Iwasawa decompositions held for the nonlinear cover $\widetilde G$ with the same compact $K$, that is, with a compact subgroup of $\widetilde G$ playing the role of the group $K$ of [L1] and having Lie algebra $\mathfrak k_0$. By step 3.1 no such compact subgroup exists; the natural group to use is the preimage $\widetilde K=\pi^{-1}(K)$, which by step 2.2 contains a subgroup isomorphic to the noncompact group $\mathbb R$ and is not the compact circle. Therefore the decompositions do not automatically hold on $\widetilde G$ with the same compact $K$, and $K$ must be replaced by the noncompact fixed group of the lifted Cartan involution; the finite-center and compactness hypotheses of [L1] cannot be erased. This refutes the statement. [L1, step 1.2, step 2.1, step 3.1] ∎
-
-## Remarks
-
-- The witness is the universal cover of $\operatorname{SL}_2(\mathbb R)$,
-  which has infinite center by step 2.1 and is not a linear Lie group: it has
-  no faithful finite-dimensional representation (Etingof, Lecture 43, §43.3,
-  printed p. 199). The inverse image of the compact group
-  $K=\operatorname{SO}(2)$ is the noncompact group $\widetilde K\cong\mathbb R$
-  that must replace the compact circle in the Cartan and Iwasawa statements,
-  exactly as recorded in the pair's
-  [[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]]
-  and [[thm-global-iwasawa-decomposition]].
+5.1 A verbatim compact-$K$ factorization on this nonlinear cover would require a compact subgroup with Lie algebra $\mathbb Rk$, impossible by step 4.1. The correct lifted Cartan factor is $\widetilde K$. Explicitly, the lift of $\Theta$ in the covering coordinates of step 2.1 is $(t,X)\mapsto(t,-X)$, because $\Theta(r(t)\exp X)=r(t)\exp(-X)$. It is a group automorphism: its compositions with multiplication on either side are lifts of the same base map on connected $\widetilde G\times\widetilde G$ and agree at the identity, hence agree everywhere; its square is the identity by the same uniqueness argument. Its fixed group is precisely $\mathbb R\times\{0\}=\widetilde K$. Thus the replacement is noncompact, and neither the finite-center nor compact-$K$ qualification may be discarded in the stated theorems. This is a counterexample to the joint claim, without asserting that every nonlinear cover has identical behavior. [A1, L1, step 2.1, step 4.1, step 4.2, algebra] ∎

@@ -4,7 +4,7 @@ kind: example
 title: "Exponential martingale Brownian tail bound"
 status: draft
 origin: pipeline
-deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-fatou-lemma, def-convergence-in-probability, def-partition-and-refinement, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, thm-two-sided-exit-probability-for-brownian-motion]
+deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, thm-optional-sampling-for-bounded-stopping-times, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-continuity-from-below-for-measures, def-axiom-of-choice]
 proof_strategy: direct
 generation:
   role: example
@@ -19,39 +19,45 @@ sources:
 
 ## Example
 
-Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. For a standard Brownian
-motion $B$ and real $a>0$, $T>0$,
-$$P\Bigl(\sup_{0\le t\le T}B_t\ge a\Bigr)\le e^{-a^2/(2T)} .$$
+Assume AC and hypothesis (H) of
+[[def-elementary-predictable-brownian-integrand]]. Let $B$ be standard
+Brownian motion. Fix a measurable probability-one event of continuous paths
+and zero start, and replace the whole path by zero outside it, obtaining
+$\widehat B$. The supremum below means the supremum of this continuous
+representative; its distribution is independent of that normalization.
+For $a>0$ and $T>0$,
+$$P\left(\sup_{0\le t\le T}\widehat B_t\ge a\right) \le \exp\left(-\frac{a^2}{2T}\right).$$
 
 ## Facts & Assumptions
 
-**Given:** AC, (H), a standard Brownian motion $B$ equipped with its usual augmented natural filtration and with continuous paths on a full-measure event, real $a>0$, $T>0$, and $\theta>0$. [[def-natural-and-usual-augmented-brownian-filtrations]]
- 
-[F1] **Exponential martingale.** For every real $\theta$ the process $Z_t=\exp(\theta B_t-\theta^2t/2)$ is a positive continuous martingale with $EZ_t=1$ and $E[Z_t\mid\mathcal F_s]=Z_s$ almost surely for $s\le t$. [[cor-exponential-brownian-martingale]] [[def-brownian-motion]]
- 
-[F2] **Hitting time of a closed half-line is a stopping time.** Let $\tau_a:=\inf\{t\ge0:B_t\ge a\}$ (with $\inf\emptyset=+\infty$). On the full-measure continuity event one has, for every $t\ge0$, $$\Bigl\{\sup_{0\le u\le t}B_u\ge a\Bigr\}\cap C=\{\tau_a\le t\}\cap C=\Bigl(\bigcap_{m\ge1}\bigcup_{q\in\mathbb Q\cap[0,t]}\{B_q>a-1/m\}\Bigr)\cap C,$$ because a path that reaches height $\ge a$ at some time $\le t$ has rational times arbitrarily close with values above $a-1/m$, and conversely approximate rational hitting above $a-1/m$ for every $m$ produces a convergent rational sequence whose limit time $q^*\le t$ has $B_{q^*}\ge a$ by continuity. The events on the right lie in $\mathcal F_t$ when they are evaluated through rational times, and the usual augmentation contains the null exceptional set. Moreover, the two-sided exit law of [[thm-two-sided-exit-probability-for-brownian-motion]] tends to $1$ as the lower endpoint tends to $-\infty$, so $\tau_a<\infty$ almost surely. [[def-continuous-time-stopping-time]] [[def-brownian-motion]] [[def-continuity-real]]
- 
-[F3] **Discrete optional sampling and Fatou.** If a martingale is sampled on a deterministic finite grid, the sampled process is a discrete martingale, and for every grid stopping time bounded by the last grid point the expectation is unchanged; dyadic ceilings of a stopping time give such grid stopping times increasing to the original stopping time, and Fatou's lemma bounds the expectation of the almost-sure limit by the liminf of the expectations. [[thm-optional-sampling-for-bounded-stopping-times]] [[thm-fatou-lemma]] [[def-continuous-time-filtration-and-all-pairs-martingale]]
- 
-[F4] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
- 
- 
- 
- 
+**Given:** AC, (H), $B$, its normalized representative $\widehat B$, and $a,T>0$ as in the Example.
+
+[F1] The positive process $Z_t=\exp(\theta B_t-\theta^2t/2)$ is a unit-mean martingale for each real $\theta$. Only the direct Gaussian conditioning argument in the cited corollary (steps 1.2 and 2.1), not its stochastic integral representation, is used: the normal exponential moment gives $EZ_t=1$ and the independent increment multiplier has conditional mean one. [[cor-exponential-brownian-martingale]] [[def-elementary-predictable-brownian-integrand]] [[def-continuous-time-filtration-and-all-pairs-martingale]]
+
+[F2] A martingale sampled on a deterministic finite grid is a discrete martingale, and its expectation at a bounded discrete stopping index is unchanged. [[thm-optional-sampling-for-bounded-stopping-times]]
+
+[F3] The normalized Brownian process has measurable time coordinates, continuous paths and zero initial value everywhere, and agrees with the original process on one measurable full event. No claim of adaptation of the normalized process to the original filtration is needed. [[def-brownian-motion]] [[lem-brownian-motion-has-a-jointly-measurable-continuous-version]]
+
+[F4] For increasing measurable events, the measure of their union is the supremum of their measures. [[thm-continuity-from-below-for-measures]]
+
+[F5] Full AC is assumed for the Brownian and conditional-expectation interfaces and the discrete optional-sampling theorem. [[def-axiom-of-choice]]
 
 ## Verification
 
 **Proof technique:** direct.
- 
-1.1 The hitting time is a stopping time: by the pathwise identity of [F2] the event $\{\tau_a\le t\}$ agrees, up to the null continuity event, with a countable combination of the events $\{B_q>a-1/m\}$ with $q\in\mathbb Q\cap[0,t]$, each of which lies in $\mathcal F_q\subseteq\mathcal F_t$; off the continuity event the difference is a null set and the usual augmentation contains it. Hence $\tau_a$ is a stopping time with $\{\tau_a\le T\}=\{\sup_{t\le T}B_t\ge a\}$ almost surely. [F2, given]
- 
-2.1 Dyadic sampling: for the grid of mesh $2^{-n}T$ in $[0,T]$, the sampled process $Z_{j2^{-n}T}$ is a discrete martingale by [F1]; the ceiling $\tau_a^{(n)}:=2^{-n}T\lceil2^n(\tau_a\wedge T)/T\rceil$ is a grid stopping time bounded by $T$, so by [F3] $EZ_{\tau_a^{(n)}}=EZ_0=1$. Since $\tau_a^{(n)}\downarrow\tau_a\wedge T$ and the path of $Z$ is continuous, $Z_{\tau_a^{(n)}}\to Z_{\tau_a\wedge T}$ almost surely; Fatou's lemma gives $EZ_{\tau_a\wedge T}\le\liminf_nEZ_{\tau_a^{(n)}}=1$. [F1, F3, step 1.1]
- 
-3.1 Markov bound: on the event $\{\tau_a\le T\}$, using continuity of the path at time $\tau_a\wedge T=\tau_a$, $Z_{\tau_a}=\exp(\theta a-\theta^2\tau_a/2)\ge\exp(\theta a-\theta^2T/2)$, so $$P(\tau_a\le T)e^{\theta a-\theta^2T/2}\le E\bigl[Z_{\tau_a\wedge T}1_{\{\tau_a\le T\}}\bigr]\le EZ_{\tau_a\wedge T}\le1$$ by step 2.1, that is $P(\sup_{t\le T}B_t\ge a)\le\exp(\theta^2T/2-\theta a)$ for every $\theta>0$. [F1, step 2.1]
- 
-4.1 Optimizing: the exponent $\theta^2T/2-\theta a$ is a convex quadratic in $\theta$ with minimum $-a^2/(2T)$ at $\theta=a/T>0$; substituting gives $P(\sup_{t\le T}B_t\ge a)\le e^{-a^2/(2T)}$. Boundary and consistency cases: for $a\le0$ the bound is trivial and the event has probability one; as $a\to0^+$ the bound tends to $1$, consistent with $P(\sup_{t\le T}B_t\ge0)=1$; as $T\to\infty$ or $a\to\infty$ the bound tends to $0$, and both limits are finite; the sampled expectations in step 2.1 are exactly $1$, so no uniform integrability of the stopped family is assumed; the martingale used has deterministic modulus $e^{\theta^2t/2}$ and is therefore integrable; and AC enters only through [F4]. [F1, F3, F4, step 3.1] ∎
+
+1.1 Fix $0<b<a$, $\theta>0$ and an integer $n\ge1$. Set $m=2^n$, $t_j=jT/m$, and use the original adapted process on this grid. Define $J$ as the first index $j\in\{0,\ldots,m\}$ with $B_{t_j}>b$, or $m$ if there is no such index. For $j<m$, the event $\{J\le j\}$ is the finite union $\bigcup_{k\le j}\{B_{t_k}>b\}$ and is in $\mathcal F_{t_j}$; the event for $j=m$ is the whole space. Thus $J$ is a bounded discrete stopping index for the grid filtration. By [F1] and [F2], $EZ_{t_J}=1$. This variable is measurable and integrable, being a finite sum of integrable grid values times indicators. [F1, F2, given]
+
+2.1 Let $E_n=\{\max_{0\le j\le m}B_{t_j}>b\}$. On $E_n$ the selected value satisfies $B_{t_J}>b$ and $t_J\le T$, whence $Z_{t_J}\ge\exp(\theta b-\theta^2T/2)$. Positivity therefore gives $$P(E_n)\le\exp(\theta^2T/2-\theta b).$$ No continuous-time hitting time or finiteness of an unbounded hitting time has entered. [F1, step 1.1]
+
+3.1 Write $M_T=\sup_{t\le T}\widehat B_t$. This is the supremum over the countable union of the nested dyadic grids: for any $t$ in the interval there are grid times tending to it, and continuity gives convergence of the path values. The supremum is finite, since a continuous function on a compact interval is bounded. Measurability also follows from the countable supremum. The normalized grid events $\widehat E_n=\{\max_j\widehat B_{t_j}>b\}$ increase to $\{M_T>b\}$ and have the same probabilities as $E_n$, since the original and normalized paths agree on the common full event. Consequently [F4] and step 2.1 give $P(M_T>b)\le\exp(\theta^2T/2-\theta b)$. Normalizing on another full event gives the same $M_T$ on their full intersection, so its distribution is independent of the choice. [F3, F4, step 2.1]
+
+4.1 Choose $\theta=b/T$ in step 3.1, the positive minimizer of the quadratic, to get $P(M_T>b)\le e^{-b^2/(2T)}$. Since $\{M_T\ge a\}\subseteq\{M_T>b\}$ for every $0<b<a$, take the explicit sequence $b_k=a(1-1/k)$, $k\ge2$, and let $k$ tend to infinity in the numerical upper bounds. Continuity of the exponential gives $P(M_T\ge a)\le e^{-a^2/(2T)}$. This last argument does not assume that a dyadic grid attains the continuous maximum or that $M_T$ has no atoms. [step 3.1]
+
+5.1 The parameter range is $a,T>0$. At $a=0$ the probability is one and the limiting bound is one; for $a<0$ the probability is also one, but the displayed formula would be less than one and is not asserted. At $T=0$ and $a>0$ the probability is zero and division by $T$ is not used. With $T$ fixed, the bound tends to zero as $a\to\infty$; with $a>0$ fixed, it tends to one as $T\to\infty$ and to zero as $T\downarrow0$. The real exponential martingale has random magnitude; its integrability follows from its Gaussian unit mean, not a deterministic modulus. Only finite-grid optional sampling is used, so no uniform-integrability assertion for an unbounded stopped family is needed. AC has exactly the interface uses in [F5]. [F1, F3, F5, step 1.1, step 4.1] ∎
 
 ## Source notes
 
-Lawler, Sections 3.3 and 3.5, obtains exponential bounds from the exponential martingale. The proof above avoids unbounded optional stopping: it samples the martingale on dyadic grids, applies the discrete optional sampling theorem, and recovers the stopped expectation by Fatou's lemma, as the source's own boundary warning about unbounded stopping times requires.
+The exponential-martingale method is the one indicated by the cited Lawler
+reference. This proof uses the corollary's direct Gaussian conditioning
+calculation, finite-grid optional sampling, and a countable dense-grid limit.

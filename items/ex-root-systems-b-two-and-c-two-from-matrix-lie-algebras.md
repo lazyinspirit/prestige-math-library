@@ -5,7 +5,7 @@ title: Root systems B_2 and C_2 from matrix Lie algebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion]
+deps: [def-axiom-of-choice, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion]
 forward_refs: [def-rank-and-isomorphism-of-root-systems]
 provenance:
   statement: literature-derived
@@ -20,11 +20,12 @@ sources:
       locator: "Chapter II, §1 and §5"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the general reduced crystallographic root-system theorem."
 ---
 
 ## Example
 
-For the symmetric matrix $S=\sum_{i=1}^{5}E_{i,6-i}$ let
+Assume AC ([[def-axiom-of-choice]]). For the symmetric matrix $S=\sum_{i=1}^{5}E_{i,6-i}$ let
 $$\mathfrak{so}_5(\mathbb C)=\{X\in M_5(\mathbb C):X^tS+SX=0\},$$
 the complex orthogonal Lie algebra of the symmetric bilinear form with Gram
 matrix $S$ (whose quadratic form is $2x_1x_5+2x_2x_4+x_3^2$), and for
@@ -46,7 +47,7 @@ carries $\Phi_B$ bijectively onto $\Phi_C$, so $B_2\cong C_2$.
 
 ## Facts & Assumptions
 
-**Given:** The matrix realizations $\mathfrak{so}_5(\mathbb C)$ and $\mathfrak{sp}_4(\mathbb C)$ defined in the Example, their diagonal subalgebras $\mathfrak h_B,\mathfrak h_C$, and the bracket formula $[H,E_{ab}]=(H_{aa}-H_{bb})E_{ab}$ for diagonal $H$.
+**Given:** AC; the matrix realizations $\mathfrak{so}_5(\mathbb C)$ and $\mathfrak{sp}_4(\mathbb C)$ defined in the Example, their diagonal subalgebras $\mathfrak h_B,\mathfrak h_C$, and the bracket formula $[H,E_{ab}]=(H_{aa}-H_{bb})E_{ab}$ for diagonal $H$.
 
 [L1] A Cartan subalgebra is nilpotent and self-normalizing; roots are the nonzero adjoint weights relative to it ([[def-cartan-subalgebra-of-a-lie-algebra]], [[def-normalizer-of-a-lie-subalgebra]], [[def-root-and-root-space-relative-to-a-cartan-subalgebra]]).
 

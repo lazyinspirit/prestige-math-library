@@ -15,7 +15,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, §5, Propositions 2.54-2.55 and their combinatorial content, printed pp. 158-159"
     - title: "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19-24"
-      url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-in-fall-2020/mit18_745_f20_lec_full.pdf"
+      url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
       locator: "Lecture 23, Proposition 23.3 area"
 landmark: false
 proof_strategy: direct
@@ -24,7 +24,7 @@ proof_strategy: direct
 ## Statement
 
 Let $\Phi\subseteq E$ be a reduced crystallographic root system. Then $\Phi$ is
-the disjoint union $\Phi=\Phi_1\sqcup\cdots\sqcup\Phi_m$ of root systems
+the disjoint union $\Phi=\Phi_1\sqcup\cdots\sqcup\Phi_m$ of nonempty root systems
 $\Phi_i\subseteq E_i:=\operatorname{span}\Phi_i$ that are irreducible, pairwise
 orthogonal, and span $E$ as an orthogonal direct sum
 $E=E_1\oplus\cdots\oplus E_m$. More generally, if
@@ -32,9 +32,7 @@ $\Phi=\Psi_1\sqcup\cdots\sqcup\Psi_k$ is any decomposition into pairwise
 orthogonal root systems $\Psi_j$ spanning pairwise orthogonal subspaces $F_j$
 with $E=\bigoplus_jF_j$, then each $\Psi_j$ is a union of some of the
 $\Phi_i$, and each $\Phi_i$ is contained in some $\Psi_j$. If the $\Psi_j$
-are also irreducible, the two decompositions agree up to the order of their
-terms. Thus the decomposition into irreducible components is unique up to
-order.
+are also irreducible, deleting their empty terms makes the two decompositions agree up to order. Thus the decomposition into nonempty irreducible components is unique up to order. For $\Phi=\varnothing$ and $E=0$, this is the empty decomposition ($m=0$); the empty root system remains irreducible under the definition, but is not counted as a component.
 
 ## Facts & Assumptions
 
@@ -44,13 +42,13 @@ order.
 
 [L2] $\Phi$ is reducible when $\Phi=(\Phi\cap E_1)\sqcup(\Phi\cap E_2)$ for an orthogonal direct decomposition $E=E_1\oplus E_2$ with both $E_i$ nonzero, and irreducible otherwise; each part of such a decomposition spans its subspace ([[def-reducible-and-irreducible-root-system]]).
 
-[L3] For a linear subspace $V\subseteq E$ with $\Phi\cap V\ne\varnothing$, the set $\Phi\cap V$ is a reduced crystallographic root system in $\operatorname{span}(\Phi\cap V)$: it is finite, $0\notin$ it, reducibility and integrality are inherited, and for $\alpha,\beta\in\Phi\cap V$ one has $s_\alpha(\beta)\in\Phi\cap V$ because $s_\alpha$ preserves $\Phi$ and maps $V$ into $V$. ([[def-reduced-crystallographic-euclidean-root-system]])
+[L3] For a linear subspace $V\subseteq E$ with $\Phi\cap V\ne\varnothing$, the set $\Phi\cap V$ is a reduced crystallographic root system in $\operatorname{span}(\Phi\cap V)$: it is finite, $0\notin$ it, reducedness and integrality are inherited, and for $\alpha,\beta\in\Phi\cap V$ one has $s_\alpha(\beta)\in\Phi\cap V$ because $s_\alpha$ preserves $\Phi$ and maps $V$ into $V$. ([[def-reduced-crystallographic-euclidean-root-system]])
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Define a graph $G$ with vertex set $\Phi$, two distinct vertices $\alpha,\beta$ being joined by an edge exactly when $(\alpha,\beta)\ne0$. Let $C_1,\dots,C_m$ be the connected components of $G$, so that $\Phi=C_1\sqcup\cdots\sqcup C_m$ and every $C_i$ is nonempty. [given, algebra]
+1.1 Define a graph $G$ with vertex set $\Phi$, two distinct vertices $\alpha,\beta$ being joined by an edge exactly when $(\alpha,\beta)\ne0$. Let $C_1,\dots,C_m$ be the connected components of $G$, with $m=0$ if $\Phi$ is empty, so that $\Phi=C_1\sqcup\cdots\sqcup C_m$ and every $C_i$ is nonempty. [given, algebra]
 
 2.1 If $\alpha\in C_i$ and $\beta\in C_j$ with $i\ne j$, then $(\alpha,\beta)=0$, since otherwise an edge would join the two vertices and they would lie in one component. Consequently $\operatorname{span}C_i\perp\operatorname{span}C_j$ for $i\ne j$, and $E=\operatorname{span}\Phi=\operatorname{span}C_1\oplus\cdots\oplus\operatorname{span}C_m$ is an orthogonal direct sum. [L1, step 1.1, algebra]
 
@@ -64,4 +62,4 @@ order.
 
 5.1 Steps 3.1 and 4.1 exhibit $\Phi$ as the disjoint union of the irreducible root systems $C_1,\dots,C_m$, whose spans are pairwise orthogonal and span $E$; this is the asserted decomposition. [step 3.1, step 4.1]
 
-6.1 If each $\Psi_j$ is irreducible, then by step 4.2 each $\Psi_j$ is a nonempty union of components, and by step 4.1 each component is irreducible; an irreducible root system cannot be the orthogonal disjoint union of two nonempty root subsystems, so $\Psi_j$ contains exactly one component. Therefore the components $C_1,\dots,C_m$ are a permutation of the parts $\Psi_1,\dots,\Psi_k$, and the decomposition is unique up to order. [L2, step 4.1, step 2.2, step 4.2] ∎
+6.1 If each $\Psi_j$ is irreducible, discard all empty $\Psi_j$ (whose spans are zero). Each remaining $\Psi_j$ is by step 4.2 a nonempty union of components, and by step 4.1 each component is irreducible; an irreducible root system cannot be the orthogonal disjoint union of two nonempty root subsystems, so $\Psi_j$ contains exactly one component. Therefore the components $C_1,\dots,C_m$ are a permutation of the nonempty parts $\Psi_j$, and the decomposition into nonempty components is unique up to order. If $\Phi=\varnothing$, every $\Psi_j$ is empty and deleting them leaves exactly the empty decomposition with $E=0$. [L2, step 4.1, step 2.2, step 4.2] ∎

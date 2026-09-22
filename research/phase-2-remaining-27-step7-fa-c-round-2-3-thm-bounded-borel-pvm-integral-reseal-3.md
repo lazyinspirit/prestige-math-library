@@ -1,0 +1,5 @@
+# FA position 3 reseal
+
+Rechecked the current statement and dependency interfaces against the shared-page correction to lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces. That later lemma now starts at zero, treats zero summands through the ambient operator and proves finite orthogonal sums closed; its Hilbert sum remains the closed span. This item does not use that decomposition lemma. The page's nonzero spectral-calculus, first-linear pairing, choice and PVM conventions remain unchanged.
+
+Uniform simple approximation, finite-variation pairings and the projected-vector lower norm bound remain valid. The complete argument previously read remains valid under this changed context. Hash ba19b9eb8fe25bfc2ad868d80a6d482877ac839b5d3ebb526768931f76f928fb equals the prior recorded item_sha256. No bytes changed and no new repair is needed; retain the repaired disposition. This context check is familiar mathematics, with no external verification needed or claimed; prior source verification and focused checks remain in the main evidence. Next: record this reseal, then continue the stale positions in ascending order before position 29.

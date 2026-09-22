@@ -9,6 +9,11 @@ deps: [def-symplectic-and-hamiltonian-lie-group-action, def-fundamental-vector-f
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: Ana Cannas da Silva, Lectures on Symplectic Geometry

@@ -12,18 +12,10 @@ about mathematics.
 
 ## What you recorded at step 6
 
-`research/phase-2-remaining-27-alpha-e-step7-context.json` is what a group Alpha for this group wrote during step 6,
-while the judges were still sweeping and no verdict existed. It records the
-conventions your pages fix, which items the rest lean on, which published
-dependencies were actually opened, and what already looked thin.
-
-**Its `concerns` list is evidence, not decoration.** Each entry was found with
-nobody suggesting where to look. A judge rejection landing at the same place is
-two independent readings agreeing and should be very hard to call a
-`false_positive`; a rejection landing nowhere near any of them is not thereby
-wrong, but it is the case to read most carefully against the text.
-
-It is notes, not authority. Where it and the item files disagree, the files win.
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
 
 ## Read scope, write scope
 
@@ -251,7 +243,7 @@ files under `items/` for that.
 
 - `ex-diagonal-schatten-class-criteria-on-ell-two` · example — Diagonal Schatten class criteria on ell two
 - `ex-volterra-operator-is-hilbert-schmidt-and-quasinilpotent` · example — Volterra operator is Hilbert Schmidt and quasinilpotent
-- `ex-rank-one-operator-adjoint-norm-and-trace` · example — Rank one operator adjoint norm and trace
+- `ex-rank-one-operator-adjoint-norm-and-trace` · example — Adjoint, norm and trace of an operator of rank at most one
 - `ex-integral-operator-trace-under-a-valid-diagonal-hypothesis` · example — Integral operator trace under a valid diagonal hypothesis
 - `cex-compact-does-not-imply-hilbert-schmidt` · counterexample — Compact does not imply Hilbert Schmidt
 - `cex-hilbert-schmidt-does-not-imply-trace-class` · counterexample — Hilbert Schmidt does not imply trace class
@@ -277,28 +269,7 @@ changed a domain, quantifier, hypothesis, direction or conclusion.
 
 ## Step-6 reader warnings
 
-14 warning(s) a Step-6 reader recorded in items you own.
-They were read-only and could not repair or adjudicate them. You own these decisions.
-
-- **s8a-6b82815b3d101b985142a511 · `thm-dmc-implies-urysohn-lemma`** (from group e, gap-a-reader-closes) — Step 8.1 defines U_r := U_{n,i} for r = i/2^n in D and then 'put U_1 := X', but the construction's tuples index the dyadic rationals i/2^n in (0,1] with top entry U_{n,2^n} = X minus G at r = 1 for every n, so U_1 receives two different values, and r = 0 (which the cited def-the-dyadic-rationals-of-the-unit-interval includes in D) receives none; step 10.1's claim '{r in D : a in U_r} = D' needs a in U_0. The cited dyadic-scale lemma hypothesises a family on all of D with U_1 = X, so its hypothesis is not literally met. Repairable by defining U_0 := empty, setting U_1 := X (the closure condition for r < 1 is then automatic) and replacing D by D minus {0} in step 10.1, or by reindexing the scale by (0,1].
-- **s8a-d8db0ad2543ea7799a6ff7fb · `lem-pmea-three-quarter-separation-estimate`** (from group e, would-be-fatal) — The Statement assumes only a discrete family {F_i} of subsets of X, but step 2.1 via [L1] needs 'unions over subfamilies of a discrete family are locally finite, hence closed', which is false without closedness: for X = R the one-member family {(0,1)} is discrete and its union is not closed, and the two subunions must be disjoint closed sets before normality can separate them. The proved claim is the closed-family version, which is exactly what the consumer thm-pmea-normal-low-character-spaces-are-collectionwise-normal assumes. Fix: add 'closed' to the hypothesis (or take closures).
-- **s8a-2d8c48ec90229bcaf82b2c3f · `thm-hilbert-schmidt-operators-form-a-two-sided-ideal`** (from group e, gap-a-reader-closes) — Step 2.1 fixes 'a Hilbert basis F of K' to run the adjoint argument, but claim 3 supplies bases E of H and E_0 of H_0 only and the item assumes AC_omega; the pair's convention elsewhere (def-trace-of-a-trace-class-operator) is that bases are supplied data and existence is not asserted, so the written proof invokes an object its hypotheses do not provide. The claim itself is true (compare s_n(TB) <= ||B|| s_n(T) via the singular-value characterisation).
-- **s8a-266a9a4c5a85e2e016394b1d · `lem-corson-rational-metric-not-metacompact`** (from group e, would-be-fatal) — Steps 3.1-4.1 assert that automorphisms fixing a finite E and a point a move an 'unsupported witness of V' through rational positions and thereby produce 'infinitely many distinct members of V through a'. V is an arbitrary refinement member rather than a ball, 'witness of V' is undefined, and nothing shows the images p(V) (p in fix(E union {a})) are distinct, so the contradiction with point-finiteness is not established by the written proof; the statement is Corson's and presumably has a fuller argument in the source.
-- **s8a-ec870d980f5276b76506b70d · `thm-fleissner-normal-moore-space-construction`** (from group e, gap-a-reader-closes) — The Statement's metacompactness clause ('The same space carries the stated uniform base, hence is metacompact') is discharged only by citing the Aleksandrov-Arhangel'skij uniform-base/metacompact equivalence from the source, which the item itself records the library does not re-prove; the proof-technique line also cites 'steps 11.2-7.6', which do not exist in the item's own numbering, and the Remarks list two local repairs to the printed source (the (12) bound and the strictness in j(sigma)).
-- **s8a-ca824311788e232f38dcc36a · `thm-compact-hausdorff-baire-implies-dmc`** (from group e, gap-a-reader-closes) — Several load-bearing steps are compressed. Step 5.1's description of the complement of K ('s not an initial segment of t ... equal-but-not-required') is garbled and has to be read as pairs for which s is not a proper initial segment of t. Step 6.2 passes from a family of closed subsets of K to 'closed subsets of X' without saying how closedness in K is upgraded or how the added cylinder-complement sets enter. Step 8.2's 'pi_n[E] is closed ... hence finite because the discrete space T is compact only when finite' needs the argument that a closed subset of T* contained in T is compact in the discrete space, hence finite. Steps 9.2-9.3 need reconstruction of the role of E* and of the sets added to it.
-- **s8a-bc74725cf03dc8489a16047a · `thm-dc-iff-products-compact-hausdorff-are-baire`** (from group e, gap-a-reader-closes) — Step 4.1 uses that the cylinder C = intersection of pi_i^{-1}[B_i] over the finite F is nonempty; the membership condition of Y only says C is contained in B intersect U_n, so nonemptiness follows from the assumed X nonempty plus finite choice but is not stated. Step 5.2 asserts that A^omega with the product topology 'is the discrete sequence space with its reciprocal first-difference metric' and that the U_i are open dense, without a cited topology equality.
-- **s8a-855e17bcad2d1e9c25d40ad4 · `thm-moore-spaces-are-subparacompact`** (from group e, gap-a-reader-closes) — Step 2.2 concludes from 'z, y in G in G_n and G contained in St(y,G_n) contained in U_alpha' that 'every member of G_n containing z lies in U_alpha'; that does not follow from the single G. The correct argument is that each G' in G_n containing z meets F(alpha,n) by the closure criterion [L2], and then G' is contained in St(y',G_n) contained in U_alpha for y' in G' intersect F(alpha,n).
-- **s8a-1fb518e7fb1d4fb4ceb8668e · `lem-collectionwise-normal-moore-spaces-are-screenable`** (from group e, gap-a-reader-closes) — Same closure step as thm-moore-spaces-are-subparacompact (step 2.2): the passage from one G in G_n containing z to 'every member of G_n containing z lies in H_alpha' is not justified as written; each such G' has to be intersected with F(alpha,n)-style data via the closure criterion.
-- **s8a-ca1bd3129306695006bee125 · `thm-products-of-cofinite-spaces-compact-iff-bpi`** (from group e, gap-a-reader-closes) — Step 4.1's 'maximality of G_i forces A_i to be a singleton' needs the argument that if the intersection A_i of the closed members of the ultrafilter is finite and nonempty, then for a in A_i the finitely many closed members witnessing the omission of the other points have an intersection in G_i equal to {a}; A_i itself need not be a member of G_i.
-- **s8a-d37abfcfbcb27418abfb7b32 · `thm-shelah-sweet-amalgamation-preserves-sweetness`** (from group e, presentation) — Step 3.1 says 'the finitely many witness choices are available in ZF+DC', and lem-shelah-sweet-density-transfer-along-complete-suborders step 2.1 builds its sequence by DC, but neither item lists def-dependent-choice or def-axiom-of-choice among its deps nor mentions a choice principle in its Statement, although the page prose claims the branches are stated with exact choice costs. Bookkeeping only if the ambient theory is ZFC.
-- **s8a-071b5ee7ed3b0b8a77c3cd10 · `rem-choice-strength-ledger-baire-urysohn-stone-tychonoff`** (from group e, presentation) — The Statement's clause 'countable choice and BPI imply neither Urysohn's lemma nor bounded Tietze extension' reads as an implication claim; what the cited items prove is that each is consistent with the failure of Urysohn's lemma and of bounded Tietze extension. Reword to 'are consistent with the failure of'.
-- **s8a-14e742b1710841155dcff0da · `ex-a-universal-meagre-stage-absorbs-old-nowhere-dense-sets`** (from group e, presentation) — Step 2.2 says 'the sibling of eta remains in T'' and carries the splitting that keeps [T''] of empty interior', but a node eta of T at level n need not have a sibling in T at level n (perfectness gives two incomparable extensions above eta, not a sibling at the same level). The empty-interior conclusion is correctly obtained in step 1.2 as a finite union of closed nowhere-dense sets; only the displayed level-by-level sentence is wrong.
-- **s8a-1ebb02de9a4c307923f578ae · `lem-sigma-cellular-base-yields-a-compatible-metric`** (from group e, presentation) — Step 4.1(i) introduces an undefined 'N' ('for y with d(x,y) < 2^{-(N+1)} and N >= k'); the intended quantifier is over y with d(x,y) < 2^{-(k+1)}, so that k(x,y) > k and delta_k(x,y) = 0. Presentation only, but the sentence does not typecheck.
-
-Append one owning-group disposition per warning to `research/phase-2-remaining-27-step7-alert-decisions.jsonl`.
-A Step-6 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
-pre/post guard hashes. A later Step-7 cross-group alert still requires a real targeted
-judge rejection; never reuse its source rejection as target evidence.
+None. No Step-6 reader warning targets an item you own.
 
 ## Your rejections
 
@@ -309,25 +280,16 @@ a rejection recorded after this file was rendered is still yours.
 
 ---
 
-# Step 7 — exact closure recovery, `phase-2-remaining-27`
+# Historical Step-7 closure recovery, `phase-2-remaining-27`
 
-Read `research/phase-2-remaining-27-judge-closure.json`,
-`research/phase-2-remaining-27-judge.jsonl`,
-`research/phase-2-remaining-27-judge-adjudications.jsonl`, and the generated `by_item`
-ownership map in `research/phase-2-remaining-27-step7-scope.json`. Take only current
-unadjudicated `(id, model, context_sha256)` rows owned by this group; leave
-other groups' rows untouched. A row owned by no group is a reported blocker,
-not a row to discard.
+Historical compatibility task only. Preserve historical exact-tuple decisions
+as evidence; this template grants no current repair or certification authority.
+Historical receipts constrain `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`; do not reinterpret those records
+as current round coverage.
 
-Append one exact adjudication outcome per owned row. Only
-`confirmed_fatal` licenses its coherent repair and matching ledger row; update
-only records made stale by that repair. Send a concrete other-group finding to
-`research/phase-2-remaining-27-step7-cross-group.jsonl`, never repair that item.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Do not use a descriptive
-defect-ledger subclass in that field.
-
-Write `research/phase-2-remaining-27-alpha-step7-closure-recovery-<group>.md` with the rows
-handled, outcomes, licensed repairs, rejudge targets, cross-group alerts, and
-blockers. Preserve shared append-only ledgers.
+Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
+and `briefs/step7-owner-repair.md`. Follow WORKFLOW.md's 7.1–7.10 protocol
+and the generated round-bound task. Repair all confirmed defects, including
+nonfatal defects, and continue downstream repair until complete before the
+single central certification pass.

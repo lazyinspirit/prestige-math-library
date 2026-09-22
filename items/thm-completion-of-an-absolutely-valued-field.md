@@ -4,7 +4,7 @@ title: "Completion of an absolutely valued field"
 kind: theorem
 status: published
 origin: pipeline
-deps: [def-multiplicative-absolute-value-on-a-field, thm-metric-completion-exists, thm-metric-completion-unique]
+deps: [def-multiplicative-absolute-value-on-a-field, thm-metric-completion-exists, thm-metric-completion-unique, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -23,11 +23,13 @@ proof_strategy: direct argument
 
 ## Statement
 
-The metric completion $\widehat F$ of an absolutely valued field F has a unique compatible complete valued-field structure. The map $F\to\widehat F$ is a dense isometric field embedding, universal for isometric field maps from F to complete valued fields. In the nonarchimedean case the value group and residue field are unchanged. We use the ordinary metric-completion construction with its countable-choice assumption for arbitrary metric spaces.
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). The metric completion $\widehat F$ of an absolutely valued field F has a unique compatible complete valued-field structure. The map $F\to\widehat F$ is a dense isometric field embedding, universal for isometric field maps from F to complete valued fields. In the nonarchimedean case the value group and residue field are unchanged. We use the ordinary metric-completion construction with its countable-choice assumption for arbitrary metric spaces.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** The Axiom of Countable Choice and the data and hypotheses of the statement.
+
+[A1] Countable Choice has the meaning fixed in [[def-countable-choice]].
 
 [F1] [[def-multiplicative-absolute-value-on-a-field]]: Let $F$ be a field. An **absolute value** on $F$ is a function $|\cdot| : F \to \mathbb R_{\ge 0}$ such that for all $x,y \in F$: $|x| = 0 \iff x = 0,\qquad |xy| = |x||y|,\qquad |x+y| \le |x| + |y|.$ It is **nonarchimedean** when it satisfies the stronger inequality $|x+y| \le \max\{|x|,|y|\}$ for all $x,y \in F$. It is **trivial** when $|x| = 1$ for every nonzero $x \in F$.
 
@@ -41,6 +43,6 @@ The metric completion $\widehat F$ of an absolutely valued field F has a unique 
 
 2.1 For a nonzero class x, eventually $|x_n|\ge|x|/2>0$. The tail reciprocals are Cauchy because $|x_n^{-1}-x_m^{-1}|=|x_n-x_m|/(|x_n||x_m|)$; finitely many initial entries may be set to one. Their class is the inverse of x. Zero and one are the constant classes, so this proves the field structure on the complete metric space. [step 1.1]
 
-3.1 An isometric field map to a complete field extends uniquely as a continuous map by the metric universal property. Taking limits of sums and products shows that the extension is a field map; taking distance limits shows it is an isometry. Density forces uniqueness of all these operations and of the extending map. The general completion theorem is used with its usual countable choices of representatives; no choice-free assertion for arbitrary F is inferred. [F3, step 2.1]
+3.1 An isometric field map to a complete field extends uniquely as a continuous map by the metric universal property under [A1]. Taking limits of sums and products shows that the extension is a field map; taking distance limits shows it is an isometry. Density forces uniqueness of all these operations and of the extending map. The general completion theorem is used with its usual countable choices of representatives; no choice-free assertion for arbitrary F is inferred. [F3, A1, step 2.1]
 
 4.1 In the nonarchimedean case the strong triangle inequality passes to limits. If $x\ne0$ in the completion, choose $a\in F$ with $|x-a|<|x|$; the strong inequality applied in both directions gives $|a|=|x|$. Thus no new nonzero values appear. If $|x|\le1$, approximation with $|x-a|<1$ has $|a|\le1$ and gives the same residue. The kernel of the map of original valuation rings on residues is exactly $|a|<1$, proving the residue-field isomorphism. A trivial value gives the discrete already-complete field. [step 1.1, step 3.1] ∎

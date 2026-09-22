@@ -27,9 +27,9 @@ highest weight module $M(\lambda)$ of weight $\lambda$ is finite-dimensional.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, $\mathfrak{sl}_2(\mathbb C)$ with Cartan subalgebra $\mathfrak h=\mathbb Ch$ and root $\alpha$, $\alpha(h)=2$, with coroot $h_\alpha=h$ ([[def-coroot-of-a-lie-algebra-root]], [[def-special-linear-lie-algebra-sl-two]]), the functional $\lambda\in\mathfrak h^*$ with $\lambda(h)=-1$, and the highest weight module $M(\lambda)$ of [[ex-verma-modules-for-sl-two]].
+**Given:** The Axiom of Choice, $\mathfrak{sl}_2(\mathbb C)$ with Cartan subalgebra $\mathfrak h=\mathbb Ch$ and chosen positive system $\Phi^+=\{\alpha\}$ with simple-root base $\Delta=\{\alpha\}$, where $\alpha(h)=2$, with coroot $h_\alpha=h$ ([[def-coroot-of-a-lie-algebra-root]], [[def-special-linear-lie-algebra-sl-two]]), the functional $\lambda\in\mathfrak h^*$ with $\lambda(h)=-1$, and the highest weight module $M(\lambda)$ of [[ex-verma-modules-for-sl-two]].
 
-[A1] The Axiom of Choice is assumed; it enters through the highest-weight construction of the cited module ([[def-axiom-of-choice]]).
+[A1] The Axiom of Choice is assumed; it is inherited through the cited module and the general highest-weight and integral-weight definitions ([[def-axiom-of-choice]]).
 
 [L1] $\lambda$ is integral: $\langle\lambda,\alpha^\vee\rangle=\lambda(h_\alpha)=\lambda(h)=-1\in\mathbb Z$, but it is not dominant, since $-1$ is not nonnegative ([[def-integral-dominant-and-strictly-dominant-weights]], [[def-coroot-of-a-lie-algebra-root]]).
 

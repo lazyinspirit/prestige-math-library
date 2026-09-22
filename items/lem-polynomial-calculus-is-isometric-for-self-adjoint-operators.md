@@ -44,7 +44,7 @@ Assume AC. If $T=T^*$ and $p$ is a complex polynomial, then $\|p(T)\|=\max_{\lam
 
 1.1 $p(T)^*=\overline p(T)$, and $p(T)$ and $\overline p(T)$ are polynomials in $T$, hence commute; therefore $p(T)$ is normal. [A4, algebra]
 
-1.2 The spectrum of $T$ is a nonempty compact subset of $\mathbb R$ and $\sigma(p(T))=p(\sigma(T))$. [A1, A2]
+1.2 The spectrum of $T$ is contained in $\mathbb R$, and polynomial spectral mapping gives $\sigma(p(T))=p(\sigma(T))$. [A1, A2]
 
 2.1 $\|p(T)\|=\max_{\lambda\in\sigma(T)}|p(\lambda)|$: by normality of $p(T)$ its norm is the spectral radius, the spectral radius is the maximum of $|z|$ over $\sigma(p(T))$, and $\sigma(p(T))=p(\sigma(T))$. [step 1.1, step 1.2, A3, A5, A6]
 

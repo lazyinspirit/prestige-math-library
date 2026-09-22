@@ -41,7 +41,8 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]). Call a sequence
+Assume the Axiom of Countable Choice for assertion 1. Let $(X,d)$ be a metric
+space ([[def-metric-space]]). Call a sequence
 $(F_k)_{k \in \mathbb{N}}$ of subsets of $X$ a **Cantor chain** if every $F_k$ is
 nonempty, closed ([[def-metric-topology]]) and bounded, $F_{k+1} \subseteq F_k$
 for every $k$, and $\operatorname{diam}(F_k) \to 0$ in $\mathbb{R}$
@@ -60,7 +61,8 @@ precondition for writing the diameter condition down.
 
 ## Facts & Assumptions
 
-**Given:** A metric space $(X,d)$; a Cantor chain $(F_k)$ in $X$; a real $\varepsilon > 0$.
+**Given:** For assertion 1, the Axiom of Countable Choice; a metric space
+$(X,d)$; a Cantor chain $(F_k)$ in $X$; a real $\varepsilon > 0$.
 
 [A1] Completeness of $(X,d)$: every Cauchy sequence in $X$ converges to a point of $X$ ([[def-complete-metric-space]], [[def-cauchy-in-metric]]).
 

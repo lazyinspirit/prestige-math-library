@@ -1,0 +1,5 @@
+# Position 2 context reseal
+
+Disposition: repaired; source status: familiar. Re-read the current proof against the new shared context after position 3 clarified that its complex essential norm is the real essential norm of |f| and corrected zero-based denominators and nonnegative thresholds. This later theorem is not used by this earlier lemma; none of its supplier hypotheses or conventions changed. Current item_sha256 030d73a75fdc8e775062d92a8602b7f4b37fcb1e4930c18f561020dd9afc838e matches its preceding receipt.
+
+Intersection refinement and canonical level-set regrouping still prove independence and both integral identities. The nonempty-cell coefficient bound and M_s=0 on the empty domain remain valid. The dependency statements, A/B context, contracts, risk and boundary records were inspected in this dispatch; their applicable interfaces remain unchanged. The elementary mathematics is familiar and requires no external verification. No item edit is necessary, no unresolved obligation is introduced, and this is a terminal reseal, not a judge verdict. Next action: record in ascending queue order.

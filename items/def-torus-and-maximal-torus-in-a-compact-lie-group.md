@@ -25,8 +25,7 @@ Let $G$ be a compact Lie group with identity $e$ ([[def-lie-group]]).
 
 - A **torus** is a compact connected abelian Lie group. The basic example is
   the circle group $S^1=\mathbb R/\mathbb Z$; the product of $r$ copies of
-  $S^1$ is a torus of dimension $r$, and every torus is isomorphic to such a
-  product (proved on this page).
+  $S^1$ is a torus of dimension $r$.
 - A **subgroup** of $G$ is a subgroup in the algebraic sense; by a Lie
   subgroup we mean a subgroup that is an immersed, embedded or closed Lie
   subgroup in the sense of

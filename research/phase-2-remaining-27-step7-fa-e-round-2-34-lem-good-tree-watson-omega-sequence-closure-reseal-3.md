@@ -1,0 +1,12 @@
+# FA position34: unchanged repaired closure lemma
+
+Read the full item, original FA repair, both Terra verdicts, Alpha adjudications and own batch14 risk/boundary contract. Re-read the complete regular-lambda GTW definition, names-for-pairs/functions statement, forcing density/monotonicity statement and transfinite-recursion statement; the remaining forcing/HS interfaces were inspected with the model definition. Owning A/B context is unchanged in the clauses used here.
+
+The direct fusion proof resolves both rejected issues. D_xi is a ground set by Separation with the definable forcing/HS predicates, and the actual generic meets it by truth and directedness, one coordinate at a time. E_xi adds the conditions with no possible D_xi extension, making a downward dense set below p. A ground well-order and <lambda-closure make their intersection dense by a beta-length recursion, including a final lower bound. A generic condition in the intersection cannot lie in any avoidance part because the generic already meets the corresponding D_xi. Thus all equalities hold below one actual q in H. Collection bounds the name/support witnesses before ground AC selects them. Regularity keeps the support union small; the all-conditions graph-name construction is recursively HS, and its value equals g. No unsupported simultaneous extension-name choice or identification of support with HS membership remains. Beta0 and limit beta<lambda are handled, with no closure at lambda claimed.
+
+Source verification: https://web.mat.bham.ac.uk/C.Good/research/pdfs/stone.pdf, re-read Theorem3 and its complete proof plus the following regular-lambda paragraph, printed6, in the original PDF text. These specify the intended full-extension omega-sequence closure and regular-lambda construction. The local fusion proof above supplies the proof that the source refers to Jech for; no new Jech reading is claimed. The corrected affine group at12 does not affect the union-closure of forcing conditions, definability of HS, or small-support union calculation.
+
+No new repair is necessary. Retain repaired and unchanged item bytes, record before35. This is a terminal context reseal, not a judge verdict/pass stamp.
+
+
+Current itemHashJudge: 35fdeb8f425d78dc2387fa5d88d49712812dea5fd2638cf41f455507eb7331d7. Matches the latest receipt. Queue-status immediately before recording shows every predecessor current. No judge verdict or pass stamp is created.

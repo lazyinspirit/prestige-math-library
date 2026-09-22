@@ -47,9 +47,9 @@ linear $S:Y\to X$ such that both $ST-I_X$ and $TS-I_Y$ are compact
 
 1.1 If $T$ is Fredholm, then the operator $S$ of [A1] satisfies: $ST-I_X$ and $TS-I_Y$ have finite-dimensional ranges, hence are compact. [A1]
 
-1.2 Conversely assume there is a bounded $S:Y\to X$ with $F:=ST-I_X$ and $G:=TS-I_Y$ compact, and put $C:=\max(\|S\|,1)>0$. [A2]
+1.2 Conversely assume there is a bounded $S:Y\to X$ with $F:=ST-I_X$ and $G:=TS-I_Y$ compact. By boundedness choose a real $b\ge0$ such that $\|Sy\|\le b\|y\|$ for every $y\in Y$, and put $C:=\max(b,1)>0$. [assume-hyp]
 
-2.1 For every $x\in X$ one has $x=STx-Fx$, hence $\|x\|\le\|S\|\,\|Tx\|+\|Fx\|\le C\|Tx\|+\|Fx\|$. [step 1.2, algebra]
+2.1 For every $x\in X$ one has $x=STx-Fx$, hence $\|x\|\le\|STx\|+\|Fx\|\le b\|Tx\|+\|Fx\|\le C\|Tx\|+\|Fx\|$. [step 1.2, algebra]
 
 2.2 By [A3] the transpose of $G=TS-I_Y$ is $G^*=S^*T^*-I_{Y^*}$, so $S^*T^*=I_{Y^*}+G^*=I_{Y^*}-(-G^*)$; for $g\in Y^*$ with $T^*g=0$ one has $S^*T^*g=S^*(T^*g)=0$ by linearity of $S^*$, hence $(I_{Y^*}-(-G^*))g=S^*T^*g=0$ and $\ker T^*\subseteq\ker(I_{Y^*}-(-G^*))$. [step 1.2, A3]
 

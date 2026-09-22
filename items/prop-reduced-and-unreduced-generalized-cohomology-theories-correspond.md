@@ -5,7 +5,7 @@ title: Reduced and unreduced generalized cohomology theories correspond
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-reduced-generalized-cohomology-theory, prop-relative-cw-inclusions-are-cofibrations, def-reduced-cone-suspension-and-cofiber-sequence, lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces]
+deps: [def-reduced-generalized-cohomology-theory, prop-relative-cw-inclusions-are-cofibrations, def-reduced-cone-suspension-and-cofiber-sequence, lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces, thm-five-lemma-for-modules]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -23,7 +23,7 @@ sources:
 ## Statement
 
 Call a **CW-pair cohomology theory** a contravariant functor $h$ on CW pairs
-$(X,A)$ with a CW subcomplex $A\subseteq X$ and maps of pairs, taking values in
+$(X,A)$ with a CW subcomplex $A\subseteq X$ and cellular maps of pairs, taking values in
 abelian groups $h^n(X,A)$ for $n\in\mathbb Z$, together with natural connecting
 homomorphisms $\partial:h^n(A)\to h^{n+1}(X,A)$ such that:
 
@@ -55,9 +55,18 @@ map of the cofiber sequence of $i$.
 **(B)** Given a CW-pair theory $h$, put, for a based CW complex $Y$ whose
 basepoint is a vertex,
 $$\widetilde h^n(Y):=h^n(Y,*).$$
-The suspension isomorphism is the composite of the connecting map of the triple
-$(CY,Y,*)$ with the quotient identification
-$$h^{n+1}(CY,Y)\cong h^{n+1}(\Sigma Y,*).$$
+The suspension isomorphism is the connecting map of $(CY,Y)$ restricted to
+$h^n(Y,*)$, followed by the quotient identification and suspension reflection:
+$$\sigma=\rho_Y^*\,\kappa_Y^{-1}\,\partial: h^n(Y,*)\longrightarrow h^{n+1}(\Sigma Y,*),$$
+where $\kappa_Y:h^{n+1}(\Sigma Y,*)\to h^{n+1}(CY,Y)$ is quotient pullback
+and $\rho_Y([y,t])=[y,1-t]$. The reflection is required by the fixed cone
+coordinate convention, as checked below.
+For a based cellular map $f:X\to Y$, its reduced connector is then
+$\delta_f=q_f^*\sigma$, where $q_f:C_f\to\Sigma X$ is the collapse in the
+fixed reduced cofiber sequence.
+
+In all quotient formulas use the based convention $X/\varnothing:=X_+$;
+when $A$ is nonempty, $X/A$ is the usual collapsed quotient.
 
 The two constructions are canonically inverse: for a reduced theory
 $\widetilde h$ the theory obtained by (B) from the theory built in (A) satisfies
@@ -70,7 +79,7 @@ $h^n(X)=\widetilde h^n(X_+)$ hold with all structure maps transported.
 
 ## Facts & Assumptions
 
-[F1] A reduced generalized cohomology theory consists of contravariant functors on based CW complexes, natural suspension isomorphisms $\sigma:\widetilde h^n(X)\to\widetilde h^{n+1}(\Sigma X)$, natural connecting maps $\delta_f:\widetilde h^n(X)\to\widetilde h^{n+1}(C_f)$ for a based cellular map $f:X\to Y$ with reduced cofiber $C_f$, and the axioms (H), (E) and (W) ([[def-reduced-generalized-cohomology-theory]]).
+[F1] A reduced generalized cohomology theory consists of contravariant functors on based CW complexes and natural suspension isomorphisms $\sigma:\widetilde h^n(X)\to\widetilde h^{n+1}(\Sigma X)$ satisfying (H), (E) and (W); for the fixed cofiber sequence $X\xrightarrow{f}Y\to C_f\xrightarrow{q_f}\Sigma X$, its connector is normalized as $\delta_f=q_f^*\sigma$ ([[def-reduced-generalized-cohomology-theory]]).
 
 [F2] A CW subcomplex inclusion is a cofibration, and the reduced cofiber of the based inclusion $A_+\to X_+$ is the space $X\cup_A CA$ ([[prop-relative-cw-inclusions-are-cofibrations]], [[def-reduced-cone-suspension-and-cofiber-sequence]]).
 
@@ -80,7 +89,7 @@ $h^n(X)=\widetilde h^n(X_+)$ hold with all structure maps transported.
 
 [F5] The wedge of based spaces is the quotient of their disjoint union identifying all basepoints; a disjoint union of based spaces whose basepoints are identified with one new point is the wedge of the based spaces ([[def-wedge-of-pointed-spaces]]).
 
-[F6] The long exact sequence of a triple $B\subseteq A\subseteq X$ is natural in maps of triples, and successive connecting maps in such a sequence compose to zero. This is the standard exactness clause of a CW-pair theory applied twice, as in (LES) above.
+[F6] The five lemma compares exact sequences of abelian groups when the four surrounding maps are isomorphisms ([[thm-five-lemma-for-modules]]).
 
 ## Proof
 
@@ -88,29 +97,25 @@ $h^n(X)=\widetilde h^n(X_+)$ hold with all structure maps transported.
 
 **Given:** A reduced theory $\widetilde h$ and a CW-pair theory $h$ as in the statement; all CW pairs have supplied characteristic maps and all based spaces are based at vertices.
 
-1.1 Suppose $\widetilde h$ is given and define $h^n(X,A):=\widetilde h^n(C_i)$ for the based inclusion $i:A_+\to X_+$. A map of CW pairs restricts to a based map of the respective inclusions and hence induces a based map of reduced cofibers, so the induced map $h^n(Y,B)\to h^n(X,A)$ is contravariant and functorial, and a homotopy of maps of pairs induces a based homotopy of cofibers, so (H) holds. [F1, F2, given]
+1.1 First record two consequences of the pair axioms, for use in construction (B). The sequence of $(Z,Z)$ gives $h^n(Z,Z)=0$: the adjacent maps $h^n(Z)\to h^n(Z)$ are identities. For a based complex $Z$, the retraction $Z\to *$ splits $h^n(Z)\to h^n(*)$. Thus the sequence of $(Z,*)$ identifies $h^n(Z,*)$ naturally with its kernel and gives $h^n(Z)=h^n(Z,*)\oplus h^n(*)$. For a based subcomplex $D\subseteq Z$, remove the split point summands from the pair sequence to obtain the exact sequence $\cdots\to h^n(Z,D)\to h^n(Z,*)\to h^n(D,*)\to h^{n+1}(Z,D)\to\cdots$. Indeed the pair boundary kills the point summand because it is in the image of $h^n(Z)$. [given, algebra]
 
-1.2 For $A\ne\varnothing$ the cofiber $C_i$ is $X\cup_A CA$ and the collapse $C_i\to X/A$ is a based homotopy equivalence, since a CW subcomplex inclusion is a cofibration; hence $h^n(X,A)\cong\widetilde h^n(X/A)$ naturally, while for $A=\varnothing$ the cofiber of the based inclusion $\mathrm{pt}=S^0\to X_+$ is $X_+$ up to canonical homotopy equivalence, so $h^n(X,\varnothing)=\widetilde h^n(X_+)$. [F1, F2, F3, given]
+1.2 The quotient axiom for a pair theory follows from the stated axioms, rather than being an additional assumption. For nonempty $D\subseteq Z$, form $T=Z\cup_D CD$, where $CD$ here is the ordinary cone with its tip as basepoint; equivalently it is the reduced cone on $D_+$. The collapse $T\to Z/D$ is a homotopy equivalence by [F2] and [F3]. Its restriction $CD\to *$ is also a homotopy equivalence. The natural pair sequences and [F6] therefore make $h^n(Z/D,*)\to h^n(T,CD)$ an isomorphism. Excision for the subcomplex cover $T=Z\cup CD$ makes $h^n(T,CD)\to h^n(Z,D)$ an isomorphism. Their composite is precisely the pullback of the quotient map of pairs $(Z,D)\to(Z/D,*)$, so this identification is natural. For $D=\varnothing$, additivity identifies $h^n(Z_+,*)$ with $h^n(Z,\varnothing)$. This proves the same assertion with the stipulated convention $Z/\varnothing=Z_+$. [F2, F3, F4, F6, given]
 
-1.3 Axiom (E) of [F1] applied to the based inclusion $i:A_+\to X_+$ gives exactness of $\widetilde h^n(C_i)\to\widetilde h^n(X_+)\to\widetilde h^n(A_+)$, and adjoining the natural connecting maps gives the long exact sequence $\cdots\to h^n(X,A)\to h^n(X)\to h^n(A)\xrightarrow{\partial}h^{n+1}(X,A)\to\cdots$, which is (LES); the boundary is the connecting map $\delta_i$ and is natural by [F1], while for $A=\varnothing$ one has $h^n(\varnothing)=\widetilde h^n(\mathrm{pt})=0$ and the sequence reduces to the identity of $h^n(X)$. [F1, given]
+1.3 Starting with a reduced theory, define $h^n(X,A)=\widetilde h^n(C_{A_+\to X_+})$. Maps and homotopies of pairs induce maps and homotopies of these cofibers, proving functoriality and (H). Cofibration collapse identifies the cofiber with $X/A$ when $A\ne\varnothing$. For $A=\varnothing$, $A_+$ is a point, and its reduced cone adds nothing to $X_+$, so the cofiber is $X_+$. In all cases the cofiber exact sequence gives (LES), with boundary $q_i^*\sigma$. [F1, F2, F3]
 
-1.4 If $U,V\subseteq X$ are subcomplexes with $X=U\cup V$, then the quotients $U/(U\cap V)$ and $X/V$ have the same cells and the canonical comparison is a homeomorphism, so $h^n(U,U\cap V)\cong\widetilde h^n(U/(U\cap V))\cong\widetilde h^n(X/V)\cong h^n(X,V)$, which is (Ex). [F1, F4, given]
+2.1 For subcomplexes $X=U\cup V$, the map $U/(U\cap V)\to X/V$ is a based homeomorphism under the empty-quotient convention. If $U\cap V$ is empty and $V$ is nonempty, the collapsed $V$ is the adjoined isolated basepoint of $U_+$; if $V$ is empty both quotients are $X_+$. In the remaining case both quotients have the same cell characteristic maps and weak topology. This proves (Ex). Also $(\coprod X_\alpha)_+=\bigvee (X_\alpha)_+$, including an empty family, and the cofiber of the wedge of these inclusions is the wedge of their cofibers, by their explicit quotient constructions. The reduced wedge axiom proves (Add). [F1, F2, F4, F5, step 1.3]
 
-1.5 The quotient of a disjoint union of pairs by the disjoint union of its subcomplexes is the disjoint union of the quotients, whose one-point compactification basepoint is the single new point of [F5]; the wedge axiom of [F1] therefore gives $\widetilde h^n\bigl(\bigvee_\alpha(X_\alpha/A_\alpha)_+\bigr)\cong\prod_\alpha\widetilde h^n((X_\alpha/A_\alpha)_+)\cong\prod_\alpha h^n(X_\alpha,A_\alpha)$, and both sides are zero for the empty family, which is (Add). [F1, F5, given]
+2.2 Conversely set $\widetilde h^n(Y)=h^n(Y,*)$. This is a homotopy-invariant functor and is zero at a point by step 1.1. For the reduced cone pair $(CY,Y)$, step 1.1 and based contractibility of $CY$ give an isomorphism $\partial:h^n(Y,*)\to h^{n+1}(CY,Y)$. By step 1.2 the quotient map induces an isomorphism $\kappa_Y:h^{n+1}(\Sigma Y,*)\to h^{n+1}(CY,Y)$. Define $\sigma=\rho_Y^*\kappa_Y^{-1}\partial$ as in (B). All these maps are natural, so this is a natural suspension isomorphism. [F2, step 1.1, step 1.2]
 
-1.6 Conversely let the CW-pair theory $h$ be given and put $\widetilde h^n(Y):=h^n(Y,*)$ for a nonempty based CW complex $Y$; for the one-point space this is $h^n(*,*)=0$, and functoriality and homotopy invariance are inherited from $h$, so the homotopy axiom of [F1] holds. [F1, given]
+2.3 For the wedge axiom, form a CW complex $Z$ from the disjoint union of the $Y_\alpha$ by adjoining one new vertex and an interval from it to each supplied basepoint. Let $T$ be the union of those intervals and their endpoints. The simultaneous linear contraction of the intervals to the new vertex contracts $T$; it is continuous in the CW weak topology. The quotient $Z/T$ is the wedge with its CW topology. Excision for the subcomplex cover by $T$ and $\coprod Y_\alpha$, and then (Add), give $h^n(Z,T)\cong h^n(\coprod Y_\alpha,\coprod\{*_\alpha\})\cong\prod h^n(Y_\alpha,*_\alpha)$. Step 1.2 identifies the left side with $h^n(\bigvee Y_\alpha,*)$. The comparison is the map induced by summand inclusions, since all the quotient and excision maps restrict to those inclusions. For the empty family $Z=T=*$ and all groups are zero. Thus (W) holds. [F4, F5, step 1.1, step 1.2, given]
 
-1.7 Let $CY$ be the reduced cone and $j:Y\to CY$ its base inclusion. The pair $(CY,*)$ is homotopy equivalent to $(*,*)$, so $h^i(CY,*)=0$ for all $i$ by homotopy invariance; the long exact sequence of the triple $(*,Y,CY)$ therefore collapses to an isomorphism $\partial:h^n(Y,*)\xrightarrow{\cong}h^{n+1}(CY,Y)$, and under the quotient identification $CY/Y=\Sigma Y$ and excision the target is $h^{n+1}(\Sigma Y,*)$, which is the suspension isomorphism of [F1]. [F1, F4, F6, given]
+3.1 To check the connector including its sign, use the reduced mapping cylinder $M_f=Y\cup_f(X\times I)$, attaching $X\times\{0\}$ to $Y$ and collapsing the basepoint track. Its free end $X\times\{1\}$ is a CW subcomplex, $M_f$ retracts onto $Y$, and $M_f/(X\times\{1\})=C_f$ with the cone coordinate of [F2]. Define a map of pairs $(M_f,X\times\{1\})\to(CX,X\times\{0\})$ by sending $Y$ to the cone tip and $[x,t]$ to $[x,1-t]$. It is the identity on the identified copies of $X$. On quotients it induces $\rho_X q_f:C_f\to\Sigma X$. Naturality of the pair boundary and the quotient isomorphisms of step 1.2 now identify the cylinder boundary on $h^n(X,*)$ with $(\rho_X q_f)^*\kappa_X^{-1}\partial=q_f^*\sigma$. The reduced pair sequence of step 1.1, together with the retraction, is exactly (E), with this connector. This proves both exactness and the normalization required by [F1]. [F1, F2, step 1.1, step 1.2, step 2.2]
 
-1.8 Let $f:X\to Y$ be a based cellular map with reduced cofiber $C_f=Y\cup_f CX$. The structural inclusion $Y\hookrightarrow C_f$ is a CW-subcomplex cofibration and its quotient is $C_f/Y\cong\Sigma X$, so excision identifies $h^{n+1}(C_f,Y)\cong h^{n+1}(\Sigma X,*)$. In the long exact sequence of the pair $(C_f,Y)$, the connecting map $h^n(Y,*)\to h^{n+1}(C_f,Y)$ becomes, under the suspension isomorphism, the map induced by $-\Sigma f$; hence its kernel is $\ker(f^*)$. Exactness therefore gives $\operatorname{im}(h^n(C_f,*)\to h^n(Y,*))=\ker(f^*:h^n(Y,*)\to h^n(X,*))$, which is (E) of [F1]. [F1, F2, F3, F6, given]
+4.1 Starting from a reduced theory, applying (A) and (B) yields $h^n(Y,*)=\widetilde h^n(C_{S^0\to Y_+})\cong\widetilde h^n(Y_+/S^0)=\widetilde h^n(Y)$; this is natural, not a claimed decomposition of $Y_+$. Check suspension as well. The cofiber of $Y\hookrightarrow CY$ is two reduced cones glued along their bases. Collapsing the attached cone gives the quotient model $CY/Y=\Sigma Y$, whereas the cofiber-to-suspension map collapses the first cone. These two maps differ, up to based homotopy, by reflection of the suspension coordinate: parametrize it by $s\in[0,2]$ from the first tip through the equator at $1$ to the second tip. If $\psi$ collapses the attached cone, then $\rho\psi$ is $[y,s]\mapsto[y,\min(s,1)]$, and $q$ is $[y,s]\mapsto[y,\max(s-1,0)]$. The maps $[y,s]\mapsto[y,\min(1,\max(0,s-a))]$ for $0\le a\le1$ give the required based homotopy. Consequently the cone-pair boundary transported to $\Sigma Y$ is $\rho_Y^*\sigma_{\rm original}$. The additional reflection in (B) cancels this, since $\rho_Y^2=\mathrm{id}$. Thus the recovered suspension is the original one. All cofiber connectors then agree because both are $q_f^*\sigma$. [F1, F2, F3, step 2.2, step 3.1]
 
-1.9 For a family $(Y_\alpha)$ the collapse map of pairs $\bigl(\bigsqcup_\alpha Y_\alpha,\bigsqcup_\alpha\{*_\alpha\}\bigr)\to(\bigvee_\alpha Y_\alpha,*)$ is a quotient by a discrete set of points, so excision makes it an isomorphism on $h^n$, and additivity gives $\widetilde h^n\bigl(\bigvee_\alpha Y_\alpha\bigr)\cong\prod_\alpha h^n(Y_\alpha,*_\alpha)=\prod_\alpha\widetilde h^n(Y_\alpha)$, which is the wedge axiom of [F1]; both sides vanish for the empty family. [F1, F5, given]
+4.2 Starting from a pair theory, (B) followed by (A) gives $h'^n(X,A)=h^n(C_i,*)$. Cofibration collapse and step 1.2 identify this naturally with $h^n(X,A)$, including $A=\varnothing$. To check boundaries, replace $A_+\to X_+$ by its reduced mapping cylinder. The cylinder collapse is a map of pairs to $(X_+,A_+)$, an ordinary homotopy equivalence on total spaces and the identity on the identified copies of $A_+$. Naturality of the pair sequences and the five lemma make its relative pullback an isomorphism. Additivity identifies the latter relative and absolute maps with those for $(X,A)$. The coordinate calculation of step 3.1 identifies its connecting map under the quotient comparison with $q_i^*\sigma$. Hence the pair boundary recovered by (A) is the original one, with its sign. The same constructions commute with morphisms of theories, since they use only pullbacks, boundaries and inverses of natural isomorphisms. [F1, F2, F3, F6, step 1.2, step 3.1]
 
-2.1 Starting from $\widetilde h$, build $h$ by (A) and then $\widetilde h'$ by (B). Then $\widetilde h'^n(Y)=h^n(Y,*)=\widetilde h^n(C_j)$ for the based inclusion $j:S^0\to Y_+$; the cofiber sequence of $j$, the splitting $Y_+\to S^0$ of the basepoint inclusion and the wedge decomposition $Y_+=Y\vee S^0$ exhibit $C_j$ up to homotopy as the cofiber of the summand inclusion $S^0\to Y_+$, so exactness identifies $\widetilde h^n(C_j)$ with the kernel of the restriction $\widetilde h^n(Y_+)\to\widetilde h^n(S^0)$, which is $\widetilde h^n(Y)$; hence $\widetilde h'^n(Y)\cong\widetilde h^n(Y)$ naturally. [F1, F5, step 1.2]
-
-2.2 Starting from $h$, build $\widetilde h$ by (B) and then $h'$ by (A). For $A\ne\varnothing$ one has $h'^n(X,A)=\widetilde h^n(X/A)=h^n(X/A,*)$, and excision for the subcomplexes $X$ and $CA$ of the cofiber $C_i=X\cup_ACA$, together with the quotient equivalence $X/A\simeq C_i$, gives $h^n(X/A,*)\cong h^n(C_i,CA)\cong h^n(X,A)$; for $A=\varnothing$ both constructions give $h^n(X,\varnothing)$. The identifications are natural and transport the connecting map of (A) to the connecting map of the triple used in (B). [F2, F3, F4, step 1.2, step 1.7]
-
-3.1 Steps 2.1 and 2.2 exhibit the two constructions as mutually inverse up to natural isomorphism, and steps 1.3 and 1.8 show that the long exact sequences and hence the connecting maps correspond, so the three displayed formulas hold with all structure maps transported. [step 1.3, step 1.8, step 2.1, step 2.2] ∎
+5.1 The two natural comparisons of steps 4.1 and 4.2 preserve all structure maps and give the asserted inverse constructions. Empty spaces and empty subcomplexes use $X/\varnothing=X_+$, points have zero reduced groups, and no dimension axiom or coefficient restriction has entered. No family of arbitrary choices is used: cones, cylinders, quotients and the interval contraction are specified constructions on the supplied CW data. [step 2.1, step 2.3, step 4.1, step 4.2] ∎
 
 ## Source notes
 

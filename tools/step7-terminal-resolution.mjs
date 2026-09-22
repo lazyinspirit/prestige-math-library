@@ -67,15 +67,25 @@ export function finalAdjudicatorQueueProblems(queue, { run, id, group } = {}) {
 
 /** Structural half of the serial-attention rule.  Current-hash checks stay at
  * the call site because the pure shape is useful to tests and receipt audits. */
-export function finalAdjudicatorPredecessorProblems(queue, id, latest, queueSha256) {
+export function finalAdjudicatorPredecessorProblems(queue, id, latest, queueSha256, rows = []) {
   const position = queue?.items?.findIndex((item) => item.id === id) ?? -1;
   if (position < 0) return [`queue does not contain ${id}`];
   const errors = [];
   for (const prior of queue.items.slice(0, position)) {
     const priorRow = latest.get(prior.id);
-    if (priorRow?.resolved_by !== 'final-adjudicator'
-      || priorRow?.final_adjudicator?.queue_sha256 !== queueSha256
-      || priorRow?.final_adjudicator?.queue_position !== prior.position) {
+    const latestIsQueueResolution = priorRow?.resolved_by === 'final-adjudicator'
+      && priorRow?.final_adjudicator?.queue_sha256 === queueSha256
+      && priorRow?.final_adjudicator?.queue_position === prior.position;
+    // An owner resolution may legitimately supersede an escalated FA row at an
+    // earlier position.  It satisfies the current predecessor check only when
+    // the immutable ledger still proves that this exact queue position was
+    // reached first; the subsequent current-hash check below remains binding.
+    const ownerSupersedesQueueResolution = priorRow?.resolved_by === 'owner'
+      && rows.some((row) => row?.id === prior.id
+        && row?.resolved_by === 'final-adjudicator'
+        && row?.final_adjudicator?.queue_sha256 === queueSha256
+        && row?.final_adjudicator?.queue_position === prior.position);
+    if (!latestIsQueueResolution && !ownerSupersedesQueueResolution) {
       errors.push(`queue item ${prior.id} at position ${prior.position} must be resolved before ${id}`);
     }
   }
@@ -425,10 +435,17 @@ function main() {
       if (status === 'stale') {
         const resealsSoFar = parsed.rows.filter((row) => row.id === item.id).length;
         const evidenceRel = `research/${run}-${queue.dispatch_label}-${item.position}-${item.id}-reseal-${resealsSoFar}.md`;
+        // An owner repair can change the item while its escalated receipt is
+        // still open. Repeating the old disposition would be refused (an
+        // escalation may not cover edited bytes), so the reseal is recorded
+        // against what the item is now: repaired text.
+        const changed = hashes.get(item.id)?.item_sha256
+          && hashes.get(item.id).item_sha256 !== latest.item_sha256;
         reseals.push(`node tools/step7-terminal-resolution.mjs record --run ${run} --id ${item.id}`
           + ` --resolved-by final-adjudicator --group ${queue.group} --queue ${queuePath}`
           + ` --state-dir ${value(argv, '--state-dir') || queue.state_dir || '.autopilot'}`
-          + ` --disposition ${latest.disposition} --source-status verified --basis-file ${evidenceRel}`);
+          + ` --disposition ${changed ? 'repaired' : latest.disposition} --source-status verified --basis-file ${evidenceRel}`);
+        if (changed) console.log(`NOTE ${item.id}: bytes changed since its ${latest.disposition} receipt; reseal as repaired after re-reading the new text`);
       }
       console.log(`${item.position}\t${status}\t${item.id}`);
     }
@@ -589,7 +606,8 @@ function main() {
       for (const error of existing.errors) console.error(`ERROR ${error}`);
       process.exit(2);
     }
-    const predecessorErrors = finalAdjudicatorPredecessorProblems(queue, id, existing.latest, queueSha256);
+    const predecessorErrors = finalAdjudicatorPredecessorProblems(
+      queue, id, existing.latest, queueSha256, existing.rows);
     for (const error of predecessorErrors) {
       console.error(`ERROR ${id}: ${error}`);
     }

@@ -38,7 +38,7 @@ $EX+\int_0^tH_s\,dB_s$.
  
 [F3] **Conditional expectation.** $E[X\mid\mathcal F_t]$ is the unique a.s. class with $\int_AE[X\mid\mathcal F_t]dP=\int_AXdP$ for all $A\in\mathcal F_t$, and the tower property identifies $E[X\mid\mathcal F_T]=X$ as an a.s. class. [[def-conditional-expectation-as-an-ae-class]] [[thm-tower-property-of-conditional-expectation]] [[def-continuous-time-adapted-process-and-martingale]]
  
-[F4] **AC bookkeeping.** Choice is declared for the conditional-expectation and completeness interfaces. [[def-axiom-of-choice]]
+[F4] **AC bookkeeping.** Choice is an ambient assumption, not a source of Brownian or conditional-expectation data. It is declared because the representation theorem [F1], the Ito construction and martingale interfaces [F2], and the conditional-expectation interfaces [F3] are themselves stated under AC. [[def-axiom-of-choice]]
  
  
  
@@ -52,7 +52,7 @@ $EX+\int_0^tH_s\,dB_s$.
  
 2.1 Uniqueness: if $H$ and $K$ both represent $X-EX$, then $\int_0^T(H-K)dB=0$ almost surely, so by the isometry of [F2] $E\int_0^T(H-K)^2ds=0$, which is exactly $H=K$ $(\mathrm dt\otimes P)$-almost everywhere. [F2, step 1.1]
  
-3.1 Endpoint and degenerate cases: for $X$ constant, $H=0$ and the representation reads $X=EX$; for $X=E[X\mid\mathcal F_T]$ the tower property [F3] supplies the conditional-expectation interpretation used in the last sentence of the statement; the uniqueness is modulo $(\mathrm dt\otimes P)$-null sets, so two integrands differing on a $dt$-null set of times or on a $P$-null set of paths are the same element of $L^2(\mathrm dt\otimes P)$; and AC enters only through [F4]. [F2, F3, F4, step 2.1] ∎
+3.1 Endpoint and degenerate cases: for $X$ constant, $H=0$ and the representation reads $X=EX$; for $X=E[X\mid\mathcal F_T]$ the tower property [F3] supplies the conditional-expectation interpretation used in the last sentence of the statement; the uniqueness is modulo $(\mathrm dt\otimes P)$-null sets, so two integrands differing on a $dt$-null set of times or on a $P$-null set of paths are the same element of $L^2(\mathrm dt\otimes P)$; and AC is inherited through each of [F1]--[F3], as recorded in [F4]. [F1, F2, F3, F4, step 2.1] ∎
 
 ## Source notes
 

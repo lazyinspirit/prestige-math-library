@@ -7,14 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [def-morse-smale-pair, def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, def-nowhere-dense-meagre-and-residual-subsets, thm-sard-smale-residual-regular-values-for-fredholm-maps, lem-universal-metric-trajectory-projection-is-fredholm, lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics]
+deps: [def-axiom-of-choice, def-morse-smale-pair, def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, def-nowhere-dense-meagre-and-residual-subsets, thm-sard-smale-residual-regular-values-for-fredholm-maps, lem-universal-metric-trajectory-projection-is-fredholm, lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
+  precheck: pass
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-22
+  audited: 2026-09-07
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex, §2.12"
@@ -23,11 +24,14 @@ sources:
 
 ## Statement
 
-Assume dependent choice.  Let $M$ be closed and $f:M\to\mathbb R$ Morse.  The set of smooth Riemannian metrics $g$ for which $(f,g)$ is Morse--Smale is residual in the $C^\infty$ metric space.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be closed and
+$f:M\to\mathbb R$ Morse. The set of smooth Riemannian metrics $g$ for which
+$(f,g)$ is Morse--Smale is residual in the $C^\infty$ metric space.
 
 ## Facts & Assumptions
 
-**Given:** Dependent choice, a closed manifold $M$, and a fixed Morse function $f$.
+**Given:** The Axiom of Choice, a closed manifold $M$, and a fixed Morse
+function $f$.
 
 [F1] A fixed pair of critical points is transverse for a residual set of smooth metrics ([[lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics]]).
 

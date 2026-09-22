@@ -1,7 +1,7 @@
 ---
 id: cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus
 kind: corollary
-title: Connected abelian subgroups lie in maximal tori
+title: Compact connected abelian subgroups lie in maximal tori
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -26,7 +26,7 @@ compact Lie group is contained in a maximal torus.
 
 **Given:** Assume the Axiom of Choice, a compact Lie group $G$, and a subgroup $A\le G$ that is compact, connected and abelian.
 
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it supplies the countable choice assumed by the closed-subgroup theorem in [L2] and also enters through the structure theory of [L3].
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it supplies the countable choice assumed by the closed-subgroup theorem in [L2] and supplies the stated hypothesis of [L3], whose current maximum-dimension proof needs no choice.
 
 [L1] A compact subset of a Hausdorff space is closed ([[thm-compact-subset-of-a-hausdorff-space-is-closed]]).
 
@@ -40,4 +40,4 @@ compact Lie group is contained in a maximal torus.
 
 1.1 Since $G$ is Hausdorff and $A$ is compact, $A$ is closed by [L1]; by [L2] the subgroup $A$ is an embedded Lie subgroup, and it is a compact connected abelian Lie group, hence a torus in the sense of the definition. [L1, L2]
 
-2.1 By [L3] the torus $A$ is contained in a maximal torus of $G$, which is the required conclusion. The Axiom of Choice entered through the closed-subgroup theorem in [L2] and the structure theory in [L3]. [A1, L2, L3, step 1.1] ∎
+2.1 By [L3] the torus $A$ is contained in a maximal torus of $G$, which is the required conclusion. The Axiom of Choice entered through the closed-subgroup theorem in [L2] and supplies the retained hypothesis of [L3]; the proof of [L3] itself uses no choice. [A1, L2, L3, step 1.1] ∎

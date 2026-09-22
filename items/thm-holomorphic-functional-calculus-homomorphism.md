@@ -5,7 +5,7 @@ title: Holomorphic functional calculus homomorphism
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-holomorphic-functional-calculus-is-contour-independent, lem-resolvent-identity, lem-contour-integral-commutes-with-bounded-linear-maps, thm-global-cauchy-integral-formula-homology, thm-circle-integrals-of-integer-monomials, lem-admissible-cycle-around-a-compact-plane-set, def-axiom-of-choice, def-holomorphic-functional-calculus, def-banach-algebra-valued-contour-integral, lem-neumann-series, cor-global-cauchy-theorem-homology, thm-winding-number-circle-traversed-k-times, cor-contour-integral-of-a-constant-is-an-endpoint-increment, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-complex-chain-and-cycle]
+deps: [lem-holomorphic-functional-calculus-is-contour-independent, lem-resolvent-identity, lem-contour-integral-commutes-with-bounded-linear-maps, thm-global-cauchy-integral-formula-homology, lem-admissible-cycle-around-a-compact-plane-set, def-axiom-of-choice, def-holomorphic-functional-calculus, def-banach-algebra-valued-contour-integral, lem-neumann-series, cor-global-cauchy-theorem-homology, cor-cycle-integral-of-a-derivative-vanishes, cor-contour-integral-of-a-constant-is-an-endpoint-increment, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-complex-chain-and-cycle, def-integration-and-index-of-complex-chain]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -51,19 +51,28 @@ polynomials and reciprocals of nonvanishing functions.
 
 [L1] $f(a) = \frac{1}{2\pi i}\int_\Gamma f(z)R(z,a)\,dz$, independent of the admissible cycle, and the chain integral is additive over sums of contours with the norm bound $\|\int_\Gamma h\,dz\| \le L(\Gamma)\sup_{\Gamma^\ast}\|h\|$ for continuous $h$ ([[def-holomorphic-functional-calculus]], [[lem-holomorphic-functional-calculus-is-contour-independent]], [[def-banach-algebra-valued-contour-integral]], [[lem-contour-integral-commutes-with-bounded-linear-maps]]).
 
+[L9] The spectrum is contained in the closed disc of radius $\|a\|$
+([[thm-spectrum-is-nonempty-compact-and-norm-bounded]]).
+
 [L2] Resolvent identity: $R(w,a)R(z,a) = (R(w,a)-R(z,a))/(z-w)$ for distinct $w,z \in \rho_A(a)$; all resolvents and the element $a$ commute with one another ([[lem-resolvent-identity]], [[def-spectrum-and-resolvent-set-in-a-banach-algebra]]).
 
 [L3] Cauchy formula on a cycle: if $g$ is holomorphic on an open $\Omega$ and $\Gamma$ is a cycle with trace in $\Omega$ null-homologous in $\Omega$, then $n(\Gamma,p)g(p) = \frac{1}{2\pi i}\int_\Gamma g(\zeta)/(\zeta-p)\,d\zeta$ for every $p \in \Omega\setminus\Gamma^\ast$ ([[thm-global-cauchy-integral-formula-homology]]).
 
 [L4] Vanishing Cauchy theorem: if $h$ is holomorphic on an open $\Omega$ and $\Gamma$ is a cycle with trace in $\Omega$ null-homologous in $\Omega$, then $\int_\Gamma h\,dz = 0$ ([[cor-global-cauchy-theorem-homology]]).
 
-[L5] Nested cycles: for compact $K \subseteq U$ with $U$ open there are cycles $\beta,\gamma$ with traces in $U\setminus K$, disjoint, with $n(\beta,\cdot) = n(\gamma,\cdot) = 1$ on $K$, $n(\gamma,w) = 1$ for $w \in \beta^\ast$ and $n(\beta,z) = 0$ for $z \in \gamma^\ast$; their contours are closed ([[lem-admissible-cycle-around-a-compact-plane-set]]).
+[L5] Nested cycles: for compact $K \subseteq U$ with $U$ open there are cycles $\beta,\gamma$ with traces in $U\setminus K$, disjoint, with $n(\beta,\cdot) = n(\gamma,\cdot) = 1$ on $K$, $n(\gamma,w) = 1$ for $w \in \beta^\ast$ and $n(\beta,z) = 0$ for $z \in \gamma^\ast$; each is a finite chain of directed line segments whose boundary function vanishes, although its constituent contours need not be closed ([[lem-admissible-cycle-around-a-compact-plane-set]]).
 
-[L6] $\int_{|\zeta| = r}\zeta^m\,d\zeta = 2\pi i$ for $m = -1$ and $0$ otherwise ([[thm-circle-integrals-of-integer-monomials]]), and for a closed contour $\int_\gamma c\,dz = 0$ for every constant $c$ ([[cor-contour-integral-of-a-constant-is-an-endpoint-increment]], [[def-complex-chain-and-cycle]]).
+[L6] For a cycle $\Gamma$ and $0\notin\Gamma^\ast$,
+$\int_\Gamma z^{-1}\,dz=2\pi i\,n(\Gamma,0)$ by the definition of index
+([[def-integration-and-index-of-complex-chain]]).
+For $n\ge1$, the function $z^{-n-1}$ has the primitive
+$-z^{-n}/n$ on $\mathbb C\setminus\{0\}$, so its integral over $\Gamma$
+vanishes ([[cor-cycle-integral-of-a-derivative-vanishes]]). Also
+$\int_\Gamma c\,dz=0$ for every constant $c$, by summing endpoint increments
+over the cycle ([[cor-contour-integral-of-a-constant-is-an-endpoint-increment]],
+[[def-complex-chain-and-cycle]]).
 
 [L7] $\|y\| < 1$ implies $(1-y)^{-1} = \sum_{n\ge0}y^n$ with the series converging in norm, and every convergent series on a compact $C^\infty$ contour may be integrated termwise: if $h_N \to h$ uniformly on the trace then $\int_\Gamma h_N\,dz \to \int_\Gamma h\,dz$ by the norm bound of [L1] ([[lem-neumann-series]]).
-
-[L8] For the circle $\gamma_r(t) = re^{it}$, $0 \le t \le 2\pi$, one has $n(\gamma_r,z) = 1$ for $|z| < r$ and $n(\gamma_r,z) = 0$ for $|z| > r$ ([[thm-winding-number-circle-traversed-k-times]]).
 
 ## Proof
 
@@ -71,9 +80,9 @@ polynomials and reciprocals of nonvanishing functions.
 
 1.1 Linearity: for a common admissible cycle $\Gamma$ in $U_f\cap U_g$ one has $(\alpha f+\beta g)(a) = \frac{1}{2\pi i}\int_\Gamma(\alpha f(z)+\beta g(z))R(z,a)\,dz = \alpha\, f(a) + \beta\, g(a)$, because the chain integral is $\mathbb C$-linear in the integrand. [L1, algebra]
 
-1.2 Unit law, cycle choice: for the constant function $1$ the circle $\gamma_r$ with $r > \|a\|$ is admissible: it has index $1$ on $\sigma_A(a)$ by [L8] and index $0$ outside the disc $D(0,r) \supseteq \sigma_A(a)$, and $1$ is holomorphic on $\mathbb C$; by contour independence [L1] the value of $1(a)$ may be computed with $\gamma_r$. [L1, L8, algebra]
+1.2 Unit law, cycle choice: choose $r>\|a\|$ and apply [L5] to the compact closed disc $K=\{z:|z|\le r\}$ inside $\mathbb C$. It gives a finite polygonal cycle $\Gamma_r$ whose trace lies outside $K$ and whose index is $1$ on $K$. Since $\sigma_A(a)\subseteq K$ and the constant function $1$ is entire, $\Gamma_r$ is admissible for its calculus value; by contour independence [L1], $1(a)$ may be computed on $\Gamma_r$. [L1, L5, L9, algebra]
 
-1.3 Coordinate identity: for every closed admissible cycle $\Gamma$ and the function $\mathrm{id}(z) = z$ one has the pointwise identity $zR(z,a) = 1 + aR(z,a)$ on $\Gamma^\ast$, hence $\mathrm{id}(a) = \frac{1}{2\pi i}\int_\Gamma dz + a\cdot\frac{1}{2\pi i}\int_\Gamma R(z,a)dz = 0 + a\,1(a)$ by [L6] and [L1]. [L1, L6, algebra]
+1.3 Coordinate identity: for every admissible cycle $\Gamma$ and the function $\mathrm{id}(z) = z$ one has the pointwise identity $zR(z,a) = 1 + aR(z,a)$ on $\Gamma^\ast$, hence $\mathrm{id}(a) = \frac{1}{2\pi i}\int_\Gamma dz + a\cdot\frac{1}{2\pi i}\int_\Gamma R(z,a)dz = 0 + a\,1(a)$ by [L6] and [L1]. [L1, L6, algebra]
 
 1.4 Nested cycles: apply [L5] to the compact set $K := \sigma_A(a)$ and the open set $U_f\cap U_g$; this produces cycles $\beta,\gamma$ with disjoint traces in $(U_f\cap U_g)\setminus\sigma_A(a)$, both admissible for $f$ and for $g$, with $n(\gamma,w) = 1$ for every $w \in \beta^\ast$ and $n(\beta,z) = 0$ for every $z \in \gamma^\ast$. [L5, algebra]
 
@@ -81,7 +90,7 @@ polynomials and reciprocals of nonvanishing functions.
 
 2.2 Second Cauchy integral: for each fixed $z \in \gamma^\ast$ the function $w \mapsto \frac{f(w)}{z-w}$ is holomorphic on $U_f\setminus\{z\}$, a neighbourhood of $\beta^\ast$; and $\beta$ is null-homologous in $U_f\setminus\{z\}$, because $n(\beta,p) = 0$ for every $p \notin U_f$ by admissibility and $n(\beta,z) = 0$ by the nesting; hence [L4] gives $\frac{1}{2\pi i}\int_\beta\frac{f(w)}{z-w}dw = 0$. [step 1.4, L4, algebra]
 
-2.3 Unit law, value: on the circle $\gamma_r$ one has the pointwise norm-convergent expansion $R(z,a) = \frac{1}{z}(1-a/z)^{-1} = \sum_{n\ge0}a^nz^{-n-1}$, uniformly in $z$ because $\|a/z\| = \|a\|/r < 1$; integrating termwise by [L7] and evaluating the monomial integrals with [L6] leaves only $n = 0$ and gives $\frac{1}{2\pi i}\int_{\gamma_r}R(z,a)dz = 1$, so $1(a) = 1$. [step 1.2, L6, L7, algebra]
+2.3 Unit law, value: the compact trace of $\Gamma_r$ lies in the open set $\{|z|>r\}$, so $q:=\max_{z\in\Gamma_r^\ast}\|a\|/|z|<1$. Hence $R(z,a)=\frac1z(1-a/z)^{-1}=\sum_{n\ge0}a^nz^{-n-1}$ uniformly on the trace. Integrating termwise by [L7], [L6] gives $\int_{\Gamma_r}z^{-1}dz=2\pi i\,n(\Gamma_r,0)=2\pi i$ and $\int_{\Gamma_r}z^{-n-1}dz=0$ for $n\ge1$. Thus $\frac{1}{2\pi i}\int_{\Gamma_r}R(z,a)dz=1$ and $1(a)=1$. [step 1.2, L6, L7, algebra]
 
 3.1 The double integral: the function $H(w,z):=f(w)g(z)R(w,a)R(z,a)$ is continuous on the compact product $\beta^\ast\times\gamma^\ast$; the two-dimensional tagged Riemann sums of $H$ over refined partitions of $\beta$ and $\gamma$ converge in $A$, by the uniform-continuity mesh estimate underlying the Banach-valued contour integral in [L1] applied in both variables, so the two iterated integrals $\frac{1}{2\pi i}\int_\beta(\frac{1}{2\pi i}\int_\gamma H\,dz)dw$ and $\frac{1}{2\pi i}\int_\gamma(\frac{1}{2\pi i}\int_\beta H\,dw)dz$ exist and agree. [step 1.4, step 2.1, L1, algebra]
 

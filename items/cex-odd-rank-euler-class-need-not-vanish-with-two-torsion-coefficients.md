@@ -4,7 +4,7 @@ kind: counterexample
 title: An odd-rank Euler class need not vanish in the presence of two-torsion
 status: draft
 origin: pipeline
-deps: ["prop-first-stiefel-whitney-class-classifies-orientability", "ex-total-stiefel-whitney-class-of-a-sum-of-universal-lines", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
+deps: ["prop-first-stiefel-whitney-class-classifies-orientability", "ex-total-stiefel-whitney-class-of-a-sum-of-universal-lines", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
 proof_strategy: construction
 provenance:
   statement: literature-derived
@@ -34,7 +34,7 @@ nonzero and of order two. Only the weaker statement $2e=0$ is true in general.
 
 [F2] $H^*(B;\mathbb F_2)=\mathbb F_2[a,b]$ where $a,b$ are the pullbacks of the generators of the two factors, and $w_1$ of a pullback of the universal line is the corresponding coordinate class ([[ex-total-stiefel-whitney-class-of-a-sum-of-universal-lines]], [[thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism]]).
 
-[F3] The Whitney product formula and naturality give $w_1(E\oplus F)=w_1(E)+w_1(F)$ and $w_3(L_1\oplus L_2\oplus L_3)=w_1(L_1)w_1(L_2)w_1(L_3)$ for line bundles $L_j$ ([[thm-whitney-sum-formula-for-stiefel-whitney-classes]], [[thm-naturality-of-stiefel-whitney-classes]]).
+[F3] The defining rank convention gives $w_i(L)=0$ for $i>1$ for every line bundle, hence $w(L)=1+w_1(L)$. Together with naturality and the Whitney product formula this gives $w_1(E\oplus F)=w_1(E)+w_1(F)$ and $w_3(L_1\oplus L_2\oplus L_3)=w_1(L_1)w_1(L_2)w_1(L_3)$ for line bundles $L_j$ ([[def-stiefel-whitney-classes-from-the-projective-bundle-relation]], [[thm-whitney-sum-formula-for-stiefel-whitney-classes]], [[thm-naturality-of-stiefel-whitney-classes]]).
 
 [F4] A real bundle with $w_1=0$ is orientable, so it admits an orientation; the equivalence between vanishing first Stiefel–Whitney class and orientability is available over admissible bases ([[prop-first-stiefel-whitney-class-classifies-orientability]]).
 

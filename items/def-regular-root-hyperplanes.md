@@ -5,7 +5,7 @@ title: Regular root hyperplanes
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system]
+deps: [def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,7 +19,7 @@ landmark: false
 
 ## Definition
 
-Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\mathfrak h$ be a Cartan subalgebra of a finite-dimensional complex
 semisimple Lie algebra $\mathfrak g$ with finite root set $\Phi$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]],
 [[thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system]]).

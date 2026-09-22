@@ -52,8 +52,8 @@ $D(A+K)=D(A)$.
 
 2.1 Then $(C-\lambda)R_C(z)x_n=(z-\lambda)R_C(z)x_n-x_n\to0$ by [A2] and step 1.1, and $\|R_C(z)x_n\|\to|\lambda-z|^{-1}>0$; the normalized vectors $y_n:=\|R_C(z)x_n\|^{-1}R_C(z)x_n$ lie in $D(C)$, have unit norm, converge weakly to $0$ and satisfy $(C-\lambda)y_n\to0$, so they form a singular Weyl sequence and $\lambda\in\sigma_{\mathrm{ess}}(C)$ by [A1]. Interchanging the roles of $A$ and $C$ gives equality. [A1, A2, step 1.1]
 
-3.1 Bounded compact perturbations: if $K$ is bounded, symmetric and compact, then $A+K$ is self-adjoint with $D(A+K)=D(A)$ by Kato-Rellich applied with the admissible pair $(0,\|K\|)$, and the second resolvent identity gives $R_{A+K}(z)-R_A(z)=R_{A+K}(z)KR_A(z)$, compact as a product of the compact $K$ with bounded factors; so $\sigma_{\mathrm{ess}}(A+K)=\sigma_{\mathrm{ess}}(A)$ by steps 1.1-1.2. [A4, A5, step 2.1]
+3.1 Bounded compact perturbations: if $K$ is bounded, symmetric and compact, then $A+K$ is self-adjoint with $D(A+K)=D(A)$ by Kato-Rellich applied with the admissible pair $(0,\|K\|)$, and the second resolvent identity gives $R_{A+K}(z)-R_A(z)=R_{A+K}(z)KR_A(z)$, compact as a product of the compact $K$ with bounded factors; so $\sigma_{\mathrm{ess}}(A+K)=\sigma_{\mathrm{ess}}(A)$ by step 2.1. [A4, A5, step 2.1]
 
-3.2 $A$-compact perturbations: for symmetric $K$ that is $A$-compact, [A5] makes $A+K$ self-adjoint with $D(A+K)=D(A)$ and gives $R_{A+K}(z)-R_A(z)=R_{A+K}(z)KR_A(z)$, a product of the bounded operator $R_{A+K}(z)$ with the compact operator $KR_A(z)$, hence compact; then steps 1.1-1.2 apply. [A5, step 2.1]
+3.2 $A$-compact perturbations: for symmetric $K$ that is $A$-compact, [A5] makes $A+K$ self-adjoint with $D(A+K)=D(A)$ and gives $R_{A+K}(z)-R_A(z)=R_{A+K}(z)KR_A(z)$, a product of the bounded operator $R_{A+K}(z)$ with the compact operator $KR_A(z)$, hence compact; then step 2.1 applies. [A5, step 2.1]
 
 4.1 The claims are steps 1.1, 1.2 and 2.1 (compact resolvent difference), 3.1 (bounded compact perturbations) and 3.2 ($A$-compact perturbations). ∎

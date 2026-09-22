@@ -20,7 +20,8 @@ sources:
 
 ## Statement
 
-Assume AC. Let $E\to B$ be a real vector bundle over a path-connected CW base
+Assume AC. Let $E\to B$ be a numerable real vector bundle over a path-connected
+paracompact Hausdorff CW base
 and let $E_{\mathbb C}$ be its complexification. Then for every $j\geq0$
 $$2\,c_{2j+1}(E_{\mathbb C})=0\qquad\text{in }H^{4j+2}(B;\mathbb Z).$$
 
@@ -30,13 +31,13 @@ No integral vanishing of $c_{2j+1}(E_{\mathbb C})$ is asserted.
 
 [A1] The Axiom of Choice is assumed, inherited from the conjugation-invariance supplier ([[def-axiom-of-choice]]).
 
-[F1] For every complex bundle $V$ one has $c_i(\overline V)=(-1)^ic_i(V)$, and the complexification $E_{\mathbb C}$ is canonically isomorphic to its conjugate ([[prop-complexification-is-conjugation-invariant]]).
+[F1] On a path-connected paracompact Hausdorff CW complex, every numerable complex bundle $V$ satisfies $c_i(\overline V)=(-1)^ic_i(V)$; for a numerable real bundle $E$ on that base, the complexification $E_{\mathbb C}$ is canonically isomorphic to its conjugate ([[prop-complexification-is-conjugation-invariant]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** AC, a real bundle $E\to B$ with complexification $E_{\mathbb C}$, and an index $j\geq0$.
+**Given:** AC, a numerable real bundle $E\to B$ over a path-connected paracompact Hausdorff CW complex, its complexification $E_{\mathbb C}$, and an index $j\geq0$.
 
 1.1 By [F1] the bundle $E_{\mathbb C}$ is isomorphic to $\overline{E_{\mathbb C}}$, and conjugation acts on its Chern classes by $c_i\mapsto(-1)^ic_i$. [F1, given]
 

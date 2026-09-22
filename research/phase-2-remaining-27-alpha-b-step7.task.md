@@ -12,18 +12,10 @@ about mathematics.
 
 ## What you recorded at step 6
 
-`research/phase-2-remaining-27-alpha-b-step7-context.json` is what a group Alpha for this group wrote during step 6,
-while the judges were still sweeping and no verdict existed. It records the
-conventions your pages fix, which items the rest lean on, which published
-dependencies were actually opened, and what already looked thin.
-
-**Its `concerns` list is evidence, not decoration.** Each entry was found with
-nobody suggesting where to look. A judge rejection landing at the same place is
-two independent readings agreeing and should be very hard to call a
-`false_positive`; a rejection landing nowhere near any of them is not thereby
-wrong, but it is the case to read most carefully against the text.
-
-It is notes, not authority. Where it and the item files disagree, the files win.
+**No step-6 digest exists for this group.** The reading half did not run or did
+not produce one, so you are meeting this mathematics for the first time with the
+rejections already in front of you. Read the pages before the verdicts anyway —
+the order matters more than where the notes came from.
 
 ## Read scope, write scope
 
@@ -80,7 +72,7 @@ files under `items/` for that.
 - `thm-naturality-and-edge-maps-of-the-ahss` · theorem — Naturality and edge maps of the AHSS
 - `lem-pairings-of-skeletal-exact-couples-induce-multiplicative-ahss` · lemma — Pairings of skeletal exact couples induce multiplicative AHSS
 - `thm-multiplicative-ahss-for-a-multiplicative-generalized-theory` · theorem — Multiplicative AHSS for a multiplicative generalized theory
-- `prop-ahss-collapse-determines-only-the-associated-graded-object` · proposition — AHSS collapse determines only the associated graded object
+- `prop-ahss-collapse-determines-only-the-associated-graded-object` · proposition — AHSS collapse generally determines only the associated graded object
 - `cor-complex-k-theory-ahss` · corollary — Complex K-theory AHSS
 - `lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three` · lemma — The first connective complex K-theory Postnikov invariant is integral Sq-three
 - `lem-ku-representability-and-skeletal-postnikov-d-three-comparison` · lemma — KU representability and the skeletal–Postnikov d-three comparison
@@ -238,7 +230,7 @@ files under `items/` for that.
 - `def-c-star-algebra` · definition — C star algebra
 - `def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra` · definition — Self adjoint positive unitary and normal elements of a c star algebra
 - `lem-c-star-spectral-radius-equals-norm-for-normal-elements` · lemma — C star spectral radius equals norm for normal elements
-- `lem-characters-on-a-commutative-c-star-algebra-preserve-star` · lemma — Characters on a commutative c star algebra preserve star
+- `lem-characters-on-a-commutative-c-star-algebra-preserve-star` · lemma — Characters on a unital commutative C star algebra preserve star
 - `thm-commutative-gelfand-naimark` · theorem — Commutative gelfand naimark
 - `lem-characters-of-continuous-functions-are-evaluations` · lemma — Characters of continuous functions are evaluations
 - `thm-commutative-gelfand-duality` · theorem — Commutative gelfand duality
@@ -296,18 +288,7 @@ changed a domain, quantifier, hypothesis, direction or conclusion.
 
 ## Step-6 reader warnings
 
-4 warning(s) a Step-6 reader recorded in items you own.
-They were read-only and could not repair or adjudicate them. You own these decisions.
-
-- **s8a-6a84568dfbc24ea4cad866ef · `thm-cohomological-atiyah-hirzebruch-spectral-sequence`** (from group b, presentation) — The statement includes naturality in X for cellular maps and in the theory for morphisms, but the proof only asserts this in step 5.1 ("naturality is inherited from the naturality of the pair long exact sequences and of the exact-couple construction"); the map-of-exact-couples proposition is not in the deps list, and the page proves the naturality statement only in the separate item thm-naturality-and-edge-maps-of-the-ahss. A reader must supply that cross-reference to close the naturality clause as stated.
-- **s8a-f2a78c8bc633c71a1059882e · `lem-the-ahss-first-differential-is-the-cellular-coboundary`** (from group b, gap-a-reader-closes) — The (τ,σ)-component of d_1 is asserted to be multiplication by the degree of the composite "attaching map of e^{p+1} followed by collapse onto the σ-sphere" (steps 1.2-2.1), matching the incidence number [e^{p+1}:e^p] exactly; this normalization depends on the library's suspension convention (sphere coordinate first, def-reduced-generalized-cohomology-theory) and on the connecting maps of the pair long exact sequences, and the identification is made by appeal to the cited source diagram rather than recomputed from the local definitions. The claim d_1 = δ (rather than −δ) is the point to check against those conventions.
-- **s8a-df925d6241e808bc3f990a7a · `lem-ku-representability-and-skeletal-postnikov-d-three-comparison`** (from group b, gap-a-reader-closes) — Step 2.1 concludes that the E_3 source, target and d_3 of the ku- and KU-skeletal AHSSs agree, from an E_1-level coefficient isomorphism plus "naturality for theory morphisms". This presupposes that ku's representing spectrum gives a reduced generalized cohomology theory in the sense of def-reduced-generalized-cohomology-theory (so that the AHSS theorem applies and E_2 computes H^p(X;coefficient ring) in the translated rows); no dependency listed supplies that the spectrum ku (rather than the bundle model of K-theory) satisfies those axioms, and the proof only displays the E_1 coefficient comparison.
-- **s8a-69eea3986b04808345861d89 · `lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three`** (from group b, gap-a-reader-closes) — The load-bearing inputs are recorded source computations rather than local proofs: H^3(H)≅Z/2 generated by δ_2Sq^2, the nonvanishing δ_2Sq^2≠0 in H^6(H,3), H^6(SU)=0, and the Bott-cofiber boundary k_*f^3=β_2Sq^2f^0 (F5/F6, explicitly "not assertions reproved in this library"). The local proof adds only the Z/2 dichotomy. Since lem-ku-representability... and thm-first-possible-complex-k-ahss-differential... consume this exact normalization, the source-read status is load-bearing for the K-AHSS d_3 formula.
-
-Append one owning-group disposition per warning to `research/phase-2-remaining-27-step7-alert-decisions.jsonl`.
-A Step-6 reader warning may be adjudicated `confirmed_fatal` and repaired with exact
-pre/post guard hashes. A later Step-7 cross-group alert still requires a real targeted
-judge rejection; never reuse its source rejection as target evidence.
+None. No Step-6 reader warning targets an item you own.
 
 ## Your rejections
 
@@ -318,75 +299,17 @@ a rejection recorded after this file was rendered is still yours.
 
 ---
 
-# Step 7 — fatal-only judge and reader-warning adjudication, `phase-2-remaining-27`
+# Step 7 batch adjudication, `phase-2-remaining-27`
 
-The generated scope header supplies the owned pages, items, seams, rejections,
-and incoming alerts. Read each owned rejection against the current item and its
-cited dependencies; the exact `(id, model, context_sha256)` tuple identifies
-one adjudication.
+Follow `briefs/step7-adjudicator.md` and the engine-generated, round-bound task.
+It supplies the batch, exact rejections, ownership, evidence paths and structured
+result schema. Do not reconstruct these from an old group task.
 
-Audit one item, record its decision, complete its authorized repair and focused
-checks, then continue to the next item. Do not run judges or final adjudicators.
-The engine runs repair checks, one rejudge, then one terminal adjudication pass
-after every group finishes. On resume, retain completed decisions and repairs.
-
-Web search is available in this role. If any mathematics is uncertain, use it
-and verify the point against original sources before deciding the outcome or
-making a repair. Record the sources consulted and the exact claim each source
-supports in the group report; do not resolve uncertainty from memory or a
-secondary summary alone.
-
-Append one row per rejection to `research/phase-2-remaining-27-judge-adjudications.jsonl`
-with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
-`confirmed_fatal` licenses a content repair and matching defect-ledger row;
-`confirmed_nonfatal` and `false_positive` close the rejection without content,
-contract, impact, or judge changes. The engine rejudges exactly changed items
-against the configured judge set after preflight.
-
-You may add and author new lemma items when a licensed fatal repair needs a
-genuinely missing dependency. Prove each lemma fully, verify unfamiliar or
-uncertain mathematics against authoritative sources, and cite it in the
-consumer's `deps` and proof. Supporting chains of new lemmas are permitted.
-Place the lemmas on an owned page before their consumers and update that page,
-the owning batch manifest and proof contract, and the Step-7 scope's group item
-list and `by_item` entries. Record the missing dependency and its consuming
-fatal repair in your report. This is an authorized scope addition; do not
-invent a rejection or adjudication for a new lemma. New lemmas enter the
-engine's normal coverage and targeted judgment checks.
-
-Every entry under **Step-6 reader warnings** also requires an owning-group
-decision in `research/phase-2-remaining-27-step7-alert-decisions.jsonl`. Use `not_defect` or
-`nonfatal` when no content change is warranted, and `covered_by_rejection` when
-an exact judge rejection already licenses the same repair. If a Step-6 reader
-warning is independently `confirmed_fatal`, record `defect_type`, the full
-pre-edit `itemHashGuard` digest as `item_sha256`, the full repaired digest as
-`post_sha256`, repair the item before returning, and add exactly one matching
-defect-ledger row whose structured `adjudication_ref` contains this `alert_id`,
-`item`, and `item_sha256`. Only Step-6 reader warnings have this direct fatal
-licence; later cross-group alerts raised while
-adjudicating a judge rejection still require a targeted judge rejection.
-
-A warning may name an owned page, for example a missing prerequisite page.
-Read the page and its declared prerequisites and retain an explicit disposition.
-The frontier policy permits unbuilt cross-category prerequisites. Check actual
-item dependencies and citations before classifying such an absence as fatal;
-the scheduling allowance does not excuse a missing fact used in a proof.
-A page warning grants no item-edit authority: identify the affected item and its
-fatal evidence, or report an unresolved page defect with
-`confirmed_fatal_unlicensed`. Never dismiss it merely because it names a page.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Descriptive defect-ledger subclasses
-such as `invalid-inference`, `false-claim`, or `ill-typed-construction` are not
-valid adjudication `defect_type` values.
-
-For every reader warning, append the owning-group disposition to
-`research/phase-2-remaining-27-step7-alert-decisions.jsonl`. A defect in another group is a
-`research/phase-2-remaining-27-step7-cross-group.jsonl` alert, not permission to repair it. Use
-`published-repairs.mjs append` with a namespaced temporary row for an obvious
-source-grounded published-item repair; a debatable published change is an
-escalation.
-
-Do not create a Step-7 baseline or rewrite shared ledgers. Run the Step-7 guard
-and scope check, then write `research/phase-2-remaining-27-alpha-step7-<group>.md` with every
-rejection, outcome, repair, alert, and rejudge target for this group.
+Adjudicate by logical validity, repair all confirmed defects (including nonfatal
+defects), and identify all
+relevant downstream consumers including published items. The engine routes
+downstream repairs to three Sol xhigh owners and certifies once after all
+writers drain. Terra rejudgment and adjudication/repair/certification repeat
+under WORKFLOW.md. New downstream work continues in the repair phase until
+complete before certification. Fatal classification controls only the threshold.
+Historical terminal receipts cannot close current rounds.

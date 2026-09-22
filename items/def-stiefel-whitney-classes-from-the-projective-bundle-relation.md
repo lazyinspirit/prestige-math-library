@@ -25,7 +25,8 @@ sources:
 ## Definition
 
 Assume AC, let $E\to B$ be a numerable real vector bundle of rank $n\geq1$ over
-an admissible base, and let
+a paracompact Hausdorff CGWH base of CW homotopy type (an admissible base on
+this page), and let
 $x_E\in H^1(P(E);\mathbb F_2)$ be its tautological degree-one class. By
 [[thm-mod-two-real-projective-bundle-theorem]] there are unique classes
 $c_i\in H^i(B;\mathbb F_2)$, $1\leq i\leq n$, with
@@ -45,9 +46,14 @@ $w(L)=1+x_L$.
 
 ## Facts & Assumptions
 
-**Given:** AC, a numerable real rank-$n$ bundle $E\to B$ with $n\geq1$ over an admissible base, its projective bundle, and the class $x_E$.
+**Given:** AC, a numerable real rank-$n$ bundle $E\to B$ with $n\geq1$ over a paracompact Hausdorff CGWH base of CW homotopy type, its projective bundle, and the class $x_E$.
 
-[F1] Under AC, $H^*(P(E);\mathbb F_2)$ is free over $H^*(B;\mathbb F_2)$ on $1,x_E,\ldots,x_E^{n-1}$, and there is a unique monic degree-$n$ relation $x_E^n+c_1x_E^{n-1}+\cdots+c_n=0$ with $c_i\in H^i(B;\mathbb F_2)$, which generates all polynomial relations ([[thm-mod-two-real-projective-bundle-theorem]]).
+[F1] Under AC, for a numerable positive-rank real bundle over a paracompact
+Hausdorff CGWH base of CW homotopy type, $H^*(P(E);\mathbb F_2)$ is free over
+$H^*(B;\mathbb F_2)$ on $1,x_E,\ldots,x_E^{n-1}$, and there is a unique monic
+degree-$n$ relation $x_E^n+c_1x_E^{n-1}+\cdots+c_n=0$ with
+$c_i\in H^i(B;\mathbb F_2)$, which generates all polynomial relations
+([[thm-mod-two-real-projective-bundle-theorem]]).
 
 [F2] For a rank-one bundle $L$, the projection $P(L)\to B$ is a homeomorphism over $B$ and $\gamma_L$ corresponds to $L$ ([[def-real-projective-bundle-and-tautological-line]]).
 

@@ -1,0 +1,14 @@
+# FA position 68 — repaired, current-context reseal
+
+Read the complete current item, old FA basis, original judge rejection, Alpha adjudication and Terra rejudge, all declared supplier statements/definitions, both Gelfand pages, batch-4 manifest and relevant coverage, and own contract/risk worksheet. The compact-density and zero-arrow objections remain resolved by the present formulation. The current compact-duality supplier itself now explicitly restricts to nonempty compact spaces and nonzero unital algebras, matching this consumer.
+
+Independently checked the proof. Extension by zero identifies C0(X) with a closed star-ideal of C(X+); the latter space is nonempty compact even for empty X. An approximate unit and a nonzero character value prove precomposition nonzero; evaluation coordinates prove its continuity. For compact K in Delta(A), its inverse image is closed in the compact level set of Gamma_B(phi(Gamma_A^-1(u))), where u is a cutoff equal to one on K. This proves properness without any minimal-unitization map. Algebraic extension of characters to C(X+) is legitimate even for unital C0(X), and the infinity evaluation has zero restriction. Cutoffs show evaluation inverse continuity.
+
+For every approximate unit, not just the canonical one, the compact-level-set estimate with delta=epsilon/(2(1+norm f)) proves pullback convergence uniformly; positive b*b factorizations and norm contractions are preserved. The naturality identities hold at each character, and both natural identifications and their inverses are proper arrows. The unital converse obtains contractivity from the representation and nonzero character composition, so positivity alone is not being mistaken for a contraction bound. Zero targets admit exactly the constant-zero approximate unit image; zero sources cannot approximate a nonzero target. This matches empty-space maps contravariantly.
+
+No content or dependency change is needed. The unused unitization dependencies impose no invalid application; the proof explicitly bypasses their genuinely-nonunital restriction. AC covers the DC cutoff hypothesis. These are familiar elementary function-algebra, compactness and categorical arguments, fully checked against the local supplier interfaces; no external verification was required. No new published defect found.
+
+Focused precheck PASS and strict own batch-4 proof-contract check 0 errors, 0 warnings. Existing independent review records preserved. This is a terminal context reseal, not a judge verdict. Next action: position 70 after predecessor recovery.
+
+
+Hash check: previous item_sha256 0e14cf77cbf2ad50d8d4f28093dd57655ecebbee87c077a397fe3779377b5cbb; current item_sha256 3e0a9dbaa597e69e8222a4adc067afdfe48d2b827f4cf417c6d7ae1017a1bc2f. Item bytes changed; current repair reviewed above. All 67 preceding positions current immediately before recording.

@@ -1,0 +1,10 @@
+# FA position53 context review
+
+Retain repaired, unchanged bytes. Read complete item, original FA, both Terra judgments/Alpha adjudication, owning manifest/contract/risk, current ultrafilter/BPI, finite-intersection and cofinite-topology interfaces. Current shared-page repairs do not alter any premise of this equivalence. This ultrafilter/finite-coordinate proof is familiar enough for direct verification without new external source reading; the original FA's source verification is retained but not claimed as newly performed.
+
+Forward: empty product sets are compact for any reason; otherwise one fixed product point is allowed. Pushforward by inverse images is an ultrafilter on each factor. Its closed-member intersection is either the whole factor or a singleton; the latter is forced by a finite member and finite primeness. Singleton priority and otherwise the fixed coordinate define the point without choice. Finite unions of closed coordinate cylinders, not arbitrary product-closed sets, suffice for the closed-basis compactness test, and finite primeness places the point in every member. This resolves Terra's original coordinate-membership objection.
+
+Reverse: compactness of the two-point cofinite cubes gives compact 2^{P(S)}. The Boolean constraints are clopen finite-coordinate patterns; any finite list is witnessed by evaluation at a point of the finite intersection of the mentioned proper-filter members. The empty list uses nonempty S (proper filter). A simultaneous valuation is obtained by compactness; its one-fibre is proper, upward closed, intersection closed and decides every complement, hence an extending ultrafilter. This proves the needed cube-to-UFL implication rather than importing an unavailable converse, resolving the rejudge rejection. All arguments tolerate repeated coordinate labels and empty indexing sets. No further repair, judgment or pass stamp. Next54 after record.
+
+
+Current itemHashJudge: 4989a7ab935dd4d683c3810eef7fe0ebbc0d3e363beab8ed2576a73c4e86457d. Matches the latest receipt. Queue-status immediately before recording shows every predecessor current. No judge verdict or pass stamp is created.

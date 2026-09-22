@@ -5,7 +5,7 @@ title: Chern character induces the rational isomorphism on AHSS E-two
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations, def-graded-chern-character-by-suspension-and-bott-periodicity, cor-complex-k-theory-ahss, thm-naturality-and-edge-maps-of-the-ahss, thm-cohomological-atiyah-hirzebruch-spectral-sequence, lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients, thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, def-axiom-of-choice]
+deps: ["lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations", "def-graded-chern-character-by-suspension-and-bott-periodicity", "lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients", "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory", "cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms", "def-exact-couple", "thm-an-exact-couple-generates-a-spectral-sequence", "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences", "def-tensor-product-of-modules-by-generators-and-relations", "lem-edge-maps-of-a-bounded-skeletal-ahss", "def-axiom-of-choice"]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from complex K-theory."
 provenance:
@@ -23,46 +23,53 @@ sources:
 
 ## Statement
 
-Assume AC, let $X$ be a finite CW complex, and let
-$$h^j(X):=\bigoplus_kH^{j+2k}(X;\mathbb Q)$$
-be two-periodic rational ordinary cohomology, so that $h^{j}(*)\cong\mathbb Q$
-for even $j$ and $h^{j}(*)=0$ for odd $j$. Then the graded Chern character of
-[[def-graded-chern-character-by-suspension-and-bott-periodicity]], tensored
-with $\mathbb Q$, induces a morphism of the Atiyah-Hirzebruch spectral
-sequences
-$$E_r(K)^{\bullet,\bullet}\longrightarrow E_r(h)^{\bullet,\bullet}$$
-of complex $K$-theory and of $h$, and on the second page the coefficient map
-is the isomorphism $K^{q}(*)\otimes\mathbb Q\cong\mathbb Q\cong h^{q}(*)$ for
-even $q$ and the zero map $0\to0$ for odd $q$.
+Assume AC and let $X$ be a finite CW complex. Put
+$$HP^j(X,A;\mathbb Q)=\bigoplus_{k\in\mathbb Z}H^{j+2k}(X,A;\mathbb Q).$$
+Use the actual K-theory and ordinary-cohomology pair sequences, with the common pair-boundary normalization of [[lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations]]. Write $E_r(K)$ and $E_r(HP)$ for their skeletal spectral sequences, beginning with the relative groups on page one. Rationalization of the K-theory skeletal exact couple gives a spectral sequence canonically identified pagewise with $E_r(K)\otimes_{\mathbb Z}\mathbb Q$.
+
+The rationalized graded character induces a morphism
+$$\operatorname{ch}_{\mathbb Q,r}:E_r(K)^{p,q}\otimes\mathbb Q\longrightarrow E_r(HP)^{p,q}.$$
+It is an isomorphism on page two (indeed on page one). Under the cellular-cochain coordinates on page one, it applies the coefficient map
+$$K^q(*)\otimes\mathbb Q\longrightarrow HP^q(*;\mathbb Q)$$
+to each cell: this sends the fixed Bott translate of $1$ to $1$ in the sole $H^0(*;\mathbb Q)$ summand when $q$ is even, and is the unique isomorphism $0\to0$ when $q$ is odd. The page-two map is the homology map induced by this coefficientwise cochain isomorphism. The stable map agrees with the map on skeletal filtration quotients induced by the rationalized character.
 
 ## Facts & Assumptions
 
-[A1] The Axiom of Choice is assumed, inherited from complex K-theory ([[def-axiom-of-choice]]).
+**Given:** AC, the finite CW complex and the actual pair theories in the Statement; orient its finitely many cells.
 
-[F1] The first page of the skeletal exact couple of a theory $h$ is naturally $E_1^{p,q}=C^p_{\mathrm{cell}}(X;h^q(*))=\operatorname{Hom}(C_p^{\mathrm{cell}}(X),h^q(*))$, functorially in the coefficient group ([[lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients]]).
+[A1] AC is inherited from K-theory and the graded character ([[def-axiom-of-choice]]).
 
-[F2] The cohomological AHSS has $E_2^{p,q}\cong H^p(X;h^q(*))$ and is natural in the theory for morphisms of reduced generalized cohomology theories commuting with suspension and cofiber connecting maps ([[thm-cohomological-atiyah-hirzebruch-spectral-sequence]], [[thm-naturality-and-edge-maps-of-the-ahss]]).
+[F1] The cofiber first-page groups identify with finite cellular cochains, naturally in a suspension-compatible theory map ([[lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients]]).
 
-[F3] The graded character is natural, carries relative classes to relative classes, and commutes with the connecting maps and with the skeletal filtrations; it is additive and multiplicative ([[lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations]], [[def-graded-chern-character-by-suspension-and-bott-periodicity]]).
+[F2] The graded character is additive, natural and suspension-compatible with the fixed Bott normalization; on degree-zero coefficients it sends virtual rank to its rational image ([[def-graded-chern-character-by-suspension-and-bott-periodicity]]). Its relative maps commute with pair connectors and preserve the skeletal kernel filtrations ([[lem-graded-chern-character-respects-relative-maps-and-skeletal-filtrations]]).
 
-[F4] $K^{2k}(*)\cong\mathbb Z$ generated by the $k$-th Bott power and $K^{2k+1}(*)=0$. In the shifted theory $h^{2k}(*)=\bigoplus_jH^{2k+2j}(*;\mathbb Q)$, the sole nonzero summand is $H^0(*;\mathbb Q)$ at $j=-k$, and the graded character sends the Bott generator to its rational generator ([[cor-complex-k-theory-ahss]], [[thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory]], [[def-graded-chern-character-by-suspension-and-bott-periodicity]]).
+[F3] Actual complex K-theory has natural pair exact sequences and coefficients $\mathbb Z$ in even degrees and zero in odd degrees ([[thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory]]). Ordinary cohomology has natural pair sequences, the dimension axiom and finite additivity ([[cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms]]).
+
+[F4] An initial exact couple generates spectral pages by images, kernels and homology, and a morphism of couples induces compatible maps of all pages ([[def-exact-couple]], [[thm-an-exact-couple-generates-a-spectral-sequence]], [[prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences]]).
+
+[F5] Tensor products are generated by elementary tensors with bilinearity and balancing relations, and every tensor is a finite sum ([[def-tensor-product-of-modules-by-generators-and-relations]]).
+
+[F6] For given finite skeletal pair couples, stable subquotients identify with the kernel filtrations in cohomology by restricting classes to skeleta and lifting their images; the edge maps are the corresponding restriction/quotient maps ([[lem-edge-maps-of-a-bounded-skeletal-ahss]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** AC and a finite CW complex $X$ with its skeletal filtration.
+1.1 We check exactness of rationalization explicitly. For an abelian group $M$, form fractions $(m,s)$ with positive integers $s$, identifying $(m,s)\sim(m',s')$ if $t(s'm-sm')=0$ for some positive integer $t$. Reflexivity and symmetry are immediate; for transitivity multiply the two witnessing relations by the other denominators and add, producing a positive integer witness. Addition by common denominator and multiplication by rational scalars respect this relation by the same cross multiplication, giving a rational vector space $S^{-1}M$. The map $m\otimes(a/s)\mapsto(am,s)$ respects [F5]'s defining relations. Conversely $(m,s)\mapsto m\otimes(1/s)$ is well defined: a witnessing relation makes the difference $(s'm-sm')\otimes1/(ss')$ equal $t(s'm-sm')\otimes1/(tss')=0$. These maps are inverse on the generators, so $M\otimes\mathbb Q=S^{-1}M$. In particular $m/s=0$ exactly when some positive integer kills $m$. If $L\to M\xrightarrow{f}P$ is exact and $f(m)/s=0$, then $tf(m)=0$ for some $t>0$, so $tm$ has a preimage $l\in L$ and $m/s$ is the image of $l/(ts)$. Conversely the composite is zero. Injectivity and surjectivity are preserved by the same fraction criterion. Thus rationalization is exact. [F5, algebra]
 
-1.1 By [F3] the character is a natural transformation of cohomology theories on pairs that commutes with suspension and connecting maps; by the naturality clause of [F2] it therefore induces a morphism of the associated Atiyah-Hirzebruch spectral sequences, and by [F1] this morphism is coefficientwise on the first page. [F1, F2, F3]
+1.2 The actual pair sequences of [F3] and [F2] give skeletal exact couples. Explicitly for either cohomology theory use $D_{a,b}=h^{-a-b-1}(X^{-a-1})$, $E_{a,b}=h^{-a-b}(X^{-a},X^{-a-1})$, with restriction, boundary and pair map as $i,j,k$, then reindex the output by $(p,q)=(-a,-b)$. Exactness is exactly the three corresponding portions of the pair sequences. For $HP$, direct sums over the even shifts are exact: every element has finite support, and preimages for a finite support can be chosen finitely. Its pair maps are the ordinary ones. The character on the skeletal groups commutes with all three arrows by [F2]. [F2, F3, F4, given]
 
-1.2 On the first page, the induced map $C^p_{\mathrm{cell}}(X;K^q(*))\otimes\mathbb Q\to C^p_{\mathrm{cell}}(X;h^q(*))$ is determined by the coefficient map; by [F4] this is an isomorphism $\mathbb Z\otimes\mathbb Q\cong\mathbb Q$ for even $q$ (the Bott generator mapping to the rational generator) and the zero map $0\to0$ for odd $q$. [F1, F4]
+2.1 Tensor the K-theory exact couple of step 1.2 with $\mathbb Q$. Step 1.1 preserves each exactness identity, hence gives another exact couple. For every differential group, exactness applied to $0\to\ker d\to E\to\operatorname{im}d\to0$ and $0\to\operatorname{im}d\to\ker d\to H(E,d)\to0$ proves that kernels, images and homology commute with rationalization. Induction over derived couples therefore identifies its $r$th page with $E_r(K)\otimes\mathbb Q$, and its differential with $d_r\otimes1$. The target couple consists of rational vector spaces, so the additive character extends uniquely by $x\otimes a\mapsto a\operatorname{ch}(x)$. It still commutes with $i,j,k$, and [F4] supplies the asserted page morphism. [F4, step 1.1, step 1.2, algebra]
 
-2.1 Passing to cohomology of the first page and using $E_2^{p,q}=H^p(X;h^q(*))$ from [F2] gives an isomorphism on $E_2$ for even $q$ and the zero map on the vanishing odd rows; this is exactly the asserted $E_2$ coefficient map. [F2, step 1.2]
+2.2 Apply [F1] to the two actual theories and the character from [F2]. Each first-page map is the coefficient map on each cell. By [F3] the source coefficient is $\mathbb Z$ in even degree and zero in odd degree. By the dimension axiom the target coefficient has only its $H^0(*)$ summand in even degree and is zero in odd degree. The normalization in [F2] sends $1$ to $1$ in degree zero, and its fixed Bott transport gives the same assertion in every even degree, positive or negative. Thus the coefficient map after tensoring is $\mathbb Q\to\mathbb Q$, $a\mapsto a$, or $0\to0$. There are finitely many cells in a column, so tensoring its finite product of coefficient groups is the same as taking their tensor products coordinatewise, using the finite projections and inclusions. Consequently the rationalized first-page map is an isomorphism in every bidegree. [F1, F2, F3, step 1.1, algebra]
 
-3.1 The morphism of spectral sequences is compatible with the graded character on the abutments because [F3] identifies the character with the map induced on the associated graded of the skeletal filtration. [F2, F3, step 2.1]
+3.1 The first-page map of step 2.2 is a cochain map by step 2.1. A bijective cochain map has a cochain inverse: conjugate the differential-commutation identity by its inverse. It therefore induces an isomorphism on homology, giving the asserted page-two isomorphism and its coefficient description. The same argument inductively also gives isomorphisms on all later pages. This argument needs no claim that an arbitrary theory's independently specified suspension and pair connector produce a normalized cellular differential. [step 2.1, step 2.2, algebra]
 
-4.1 Boundary cases. For odd $q$ both coefficient groups are zero, so the zero map is between zero groups and the condition is vacuous. For $q$ even and negative, Bott periodicity identifies $K^q(*)\otimes\mathbb Q$ with $\mathbb Q$ in the corresponding even degree, so the same statement holds in every even degree. The finite CW complex has finitely many cells, hence finitely many nonzero rows and columns in each total degree; the coefficient field $\mathbb Q$ is nonzero, so no zero-ring degeneration occurs. AC enters only through [A1]. [A1, F2, F4, step 1.2] ∎
+3.2 By [F2] the absolute character preserves the skeletal kernels. Step 1.1 identifies the rationalized kernels and their quotients with the kernels and quotients for the rationalized theory. In [F6]'s stable formula a relative representative maps to its pair image on a skeleton, and a lift from X determines a unique filtration coset. The commuting pair and restriction squares of step 1.2 carry such a representative and lift to the corresponding ones for $HP$. Thus the stable page map is precisely the associated-graded map of the rationalized character. [F2, F6, step 1.1, step 1.2, step 2.1, algebra]
+
+4.1 If $X$ is empty or a column has no cells, [F1] gives zero first pages and hence zero subsequent pages. For a zero-dimensional complex only column zero remains. In every total degree there are at most $\dim X+1$ columns; no global bound on the coefficient rows is asserted. Odd rows have the zero isomorphism, not an omitted comparison, and every negative even degree is included by step 2.2. AC is exactly the inherited assumption [A1]; the fraction and finite-coordinate arguments introduce no further choice requirement. These checks complete the claim. [A1, F1, step 2.2, step 3.1, step 3.2] ∎
 
 ## Source notes
 
-Hatcher's section 4.1 and Ji's notes, section 3.1, printed pp. 10-13, compute the character on the $E_2$ page of the $K$-theory AHSS: after inverting the coefficient degrees, the even rows become copies of $\mathbb Q$ and the odd rows vanish, so the induced map on $E_2$ is an isomorphism.
+Hatcher, *Vector Bundles & K-Theory*, §4.1, printed pp.110–111,
+https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf , proves the character's Bott normalization and suspension compatibility and uses exactness after tensoring with the rationals in the proof of Proposition 4.5. The exact-couple rationalization and pagewise comparison are proved here; no AHSS comparison theorem is attributed to that passage.

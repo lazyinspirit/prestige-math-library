@@ -54,7 +54,7 @@ $\sigma(K)$ ([[def-metric-interior-closure-boundary]]) is $0$.
 
 2.1 $\sigma(K)\subseteq U$ by [step 1.1]. [step 1.1]
 
-2.2 Claim 2: let $\lambda\ne0$ and choose $n$ with $1/n\le|\lambda|/2$ by [A2]. Every $z\in B(\lambda,|\lambda|/2)$ satisfies $|z|\ge|\lambda|-|z-\lambda|>|\lambda|/2\ge1/n$, so $\sigma(K)\cap B(\lambda,|\lambda|/2)\subseteq S_{1/n}$ is finite by [step 1.1]. This finite set consists of $\lambda$ together with finitely many points $z\ne\lambda$, so its distance from $\lambda$ over the points different from $\lambda$ has a minimum $\rho>0$ when such points exist, and any $\rho>0$ works otherwise; then $B(\lambda,r)\cap\sigma(K)\subseteq\{\lambda\}$ for $r:=\min(\rho,|\lambda|/2)$. [step 1.1, A2, A4]
+2.2 Claim 2: let $\lambda\ne0$ and choose $n$ with $1/n\le|\lambda|/2$ by [A2]. Every $z\in B(\lambda,|\lambda|/2)$ satisfies $|z|\ge|\lambda|-|z-\lambda|>|\lambda|/2\ge1/n$, so the set $F:=\sigma(K)\cap B(\lambda,|\lambda|/2)$ is contained in $S_{1/n}$ and is finite by [step 1.1]. Put $E:=F\setminus\{\lambda\}$. If $E$ is nonempty, the finite set of positive numbers $\{|z-\lambda|:z\in E\}$ has a minimum $\rho>0$; if $E$ is empty, put $\rho:=|\lambda|/2$. For $r:=\min(\rho,|\lambda|/2)>0$, any $z\in B(\lambda,r)\cap\sigma(K)$ lies in $F$, while $z\ne\lambda$ would put $z$ in $E$ and give the contradiction $|z-\lambda|\ge\rho\ge r>|z-\lambda|$. Hence $B(\lambda,r)\cap\sigma(K)\subseteq\{\lambda\}$. [step 1.1, A2, A4]
 
 3.1 Claim 1: $\sigma(K)$ is at most countable, being a subset of the at most countable set $U$, by [A3]; moreover $U$ is at most countable by [step 1.2] and $\sigma(K)\subseteq U$ by [step 2.1]. [step 1.2, step 2.1, A3]
 

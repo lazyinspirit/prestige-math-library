@@ -5,7 +5,7 @@ title: Diagonal operator on ell p is compact iff diagonal tends to zero
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-sequential-characterization-of-compact-operators, def-dependent-choice, def-countable-choice, lem-dependent-choice-implies-countable-choice, def-counting-measure, prop-counting-measure-is-a-measure, rem-ell-p-is-l-p-of-counting-measure, def-complex-lp-and-euclidean-test-function-conventions, lem-complex-lp-completeness-density-and-inner-product, thm-riesz-fischer-completeness-of-l-p, def-banach-space, def-norm-and-normed-space, def-linear-map, def-sequence, lem-index-map-grows, def-metric-convergence, def-metric-ball, def-continuous-map-top]
+deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-sequential-characterization-of-compact-operators, def-dependent-choice, def-countable-choice, lem-dependent-choice-implies-countable-choice, def-counting-measure, prop-counting-measure-is-a-measure, rem-ell-p-is-l-p-of-counting-measure, def-complex-lp-and-euclidean-test-function-conventions, lem-complex-lp-completeness-density-and-inner-product, thm-riesz-fischer-completeness-of-l-p, def-banach-space, def-norm-and-normed-space, def-linear-map, lem-index-map-grows, def-metric-convergence, def-metric-ball, def-continuous-map-top]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -22,8 +22,9 @@ sources:
 
 Assume the Axiom of Dependent Choice ([[def-dependent-choice]]). Let
 $\mathbb K=\mathbb R$ or $\mathbb C$, let $1\le p\le\infty$ and let
-$a=(a_n)_{n\in\mathbb N}$ be a bounded scalar sequence
-([[def-sequence]]). Write $\ell^p(\mathbb N,\mathbb K)$ for the counting-measure
+$a:\mathbb N\to\mathbb K$, $n\mapsto a_n$, be bounded in modulus: there is a
+real $M\ge0$ such that $|a_n|\le M$ for every $n$. Write
+$\ell^p(\mathbb N,\mathbb K)$ for the counting-measure
 space $L^p(\#;\mathbb K)$ on $(\mathbb N,\mathcal P(\mathbb N),\#)$, read as the
 space of scalar sequences $x$ with $\sum_n|x_n|^p<\infty$ for $p<\infty$ and
 with $\sup_n|x_n|<\infty$ for $p=\infty$
@@ -34,7 +35,9 @@ with $\sup_n|x_n|<\infty$ for $p=\infty$
 $$D_a:\ell^p(\mathbb N,\mathbb K)\longrightarrow\ell^p(\mathbb N,\mathbb K),\qquad (D_ax)_n:=a_nx_n ,$$
 
 be the diagonal operator. Then $D_a$ is compact
-([[def-compact-linear-operator]]) if and only if $a_n\to0$.
+([[def-compact-linear-operator]]) if and only if $a_n\to0$, meaning that for
+every real $\varepsilon>0$ there is $N\in\mathbb N$ such that
+$|a_n|<\varepsilon$ whenever $n\ge N$.
 
 ## Facts & Assumptions
 
@@ -46,7 +49,7 @@ be the diagonal operator. Then $D_a$ is compact
 
 [A4] A bounded finite-rank operator is compact ([[lem-finite-rank-operators-are-compact]]); under $\mathrm{AC}_\omega$ a norm limit of compact operators with Banach target is compact ([[thm-norm-limit-of-compact-operators-is-compact]]); under DC a compact operator sends bounded sequences to sequences with convergent subsequences ([[thm-sequential-characterization-of-compact-operators]], [[def-dependent-choice]], [[def-countable-choice]], [[lem-dependent-choice-implies-countable-choice]]).
 
-[A5] The operator norm bounds $\|Tx\|\le\|T\|\,\|x\|$ and equals the supremum of $\|Tx\|$ over the closed unit ball ([[def-operator-norm]], [[def-bounded-linear-operator]], [[def-metric-ball]]); convergence of scalar sequences and of operator norms is metric convergence ([[def-metric-convergence]]).
+[A5] The operator norm bounds $\|Tx\|\le\|T\|\,\|x\|$ and equals the supremum of $\|Tx\|$ over the closed unit ball ([[def-operator-norm]], [[def-bounded-linear-operator]], [[def-metric-ball]]); operator-norm convergence is metric convergence ([[def-metric-convergence]]), while scalar convergence has the explicit epsilon meaning in the statement.
 
 ## Verification
 
@@ -62,7 +65,7 @@ be the diagonal operator. Then $D_a$ is compact
 
 2.1 For every $N$ one has $\|D_a-D_a^{(N)}\|=\sup_{n\ge N}|a_n|$: the upper bound is [step 1.1] applied to the tail sequence, and the lower bound follows by testing $e_n$ for $n\ge N$, where $\|(D_a-D_a^{(N)})e_n\|_p=|a_n|$. [step 1.1, A3, A5]
 
-2.2 Under the hypothesis of [step 1.3], the bounded sequence $(e_{n_k})$ has $\|D_ae_{n_k}-D_ae_{n_l}\|_p\ge\varepsilon$ for all $k\ne l$ (equality $(\varepsilon^p+\varepsilon^p)^{1/p}$ at least for $p<\infty$ and $\ge\varepsilon$ for $p=\infty$), so the sequence of images has no convergent subsequence; by the sequential characterization [A4] the operator $D_a$ is not compact. [step 1.3, A3, A4, A5]
+2.2 Under the hypothesis of [step 1.3], the bounded sequence $(e_{n_k})$ has $\|D_ae_{n_k}-D_ae_{n_l}\|_p\ge\varepsilon$ for all $k\ne l$ (indeed it is at least $(\varepsilon^p+\varepsilon^p)^{1/p}$ for $p<\infty$ and at least $\varepsilon$ for $p=\infty$), so the sequence of images has no convergent subsequence; by the sequential characterization [A4] the operator $D_a$ is not compact. [step 1.3, A3, A4, A5]
 
 3.1 If $a_n\to0$, then for every real $\varepsilon>0$ there is $N$ with $|a_n|<\varepsilon$ for all $n\ge N$, so $\|D_a-D_a^{(N)}\|\le\varepsilon$ by [step 2.1]; hence $D_a$ is a norm limit of the compact operators $D_a^{(N)}$ and is compact by [A4], the target $\ell^p$ being Banach by [A1] and [A2]. [step 1.2, step 2.1, A1, A2, A4]
 

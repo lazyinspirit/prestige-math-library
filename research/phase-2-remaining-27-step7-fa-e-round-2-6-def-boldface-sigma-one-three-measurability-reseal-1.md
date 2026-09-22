@@ -1,0 +1,5 @@
+# Position 6 context reseal
+
+Re-read the complete current definition following the Raisonnier definition repair. itemHashJudge equals the latest receipt item_sha256. Its quantifier prefix is still existential/universal/existential over Baire reals with arithmetic matrix. DC supplies the Borel coin measure and, through DC implies countable choice, the completion theorem. The completed domain is explicit, and no homeomorphism is used as measure transport. The Raisonnier family now explicitly retains source prefix lengths and defines its relativized L[x] predicate; neither is a premise of this descriptive-set or measure definition. Thus no item repair is required.
+
+The source verification already recorded remains applicable: https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf, Definition 1.17 and Facts 1.17–1.18, and https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf, Definition 1.4.31 and Exercise 1.4.26. Earlier checks and detailed FA evidence stand. Next: record position 15 after confirming all predecessors current.

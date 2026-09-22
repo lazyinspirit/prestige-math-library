@@ -11,6 +11,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §2.11, regular values"
@@ -21,7 +26,9 @@ sources:
 
 Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ and $N$ be
 $C^k$ Banach manifolds with $k \ge 1$
-([[def-countable-base-banach-manifold-and-smooth-map]]), let $f : M \to N$ be of
+([[def-countable-base-banach-manifold-and-smooth-map]]), and assume that the
+specified $C^k$ atlas of $M$ is **maximal**: every $C^k$ chart compatible with
+all of its charts is already a member of that atlas. Let $f : M \to N$ be of
 class $C^k$, let $q \in N$ and suppose that
 
 $$Df(p) : T_pM \to T_qN \ \text{ is surjective with complemented kernel for every } p \in f^{-1}(q).$$
@@ -33,9 +40,9 @@ $$T_p\bigl(f^{-1}(q)\bigr) = \ker Df(p) \qquad \text{for every } p \in f^{-1}(q)
 
 ## Facts & Assumptions
 
-**Given:** AC, $C^k$ Banach manifolds $M,N$ with $k \ge 1$, a $C^k$ map $f : M \to N$, a point $q \in N$, and for every $p \in f^{-1}(q)$ a surjective $Df(p)$ with complemented kernel.
+**Given:** AC, $C^k$ Banach manifolds $M,N$ with $k \ge 1$, a maximal specified $C^k$ atlas on $M$, a $C^k$ map $f : M \to N$, a point $q \in N$, and for every $p \in f^{-1}(q)$ a surjective $Df(p)$ with complemented kernel.
 
-[L1] Tangents and differentials on Banach manifolds, the chart-independence of the differential, and functoriality ([[def-tangent-space-and-differential-on-a-banach-manifold]], [[lem-banach-manifold-differentials-are-chart-independent]]); split submanifolds and their slices ([[def-split-banach-submanifold]]).
+[L1] Tangents and differentials on Banach manifolds, the chart-independence of the differential, and functoriality ([[def-tangent-space-and-differential-on-a-banach-manifold]], [[lem-banach-manifold-differentials-are-chart-independent]]); split submanifolds and their slices ([[def-split-banach-submanifold]]). A chart of a structured manifold means a member of its specified atlas; by the maximal-atlas hypothesis on $M$, every $C^k$ chart compatible with that atlas is such a member ([[def-countable-base-banach-manifold-and-smooth-map]]).
 
 [L2] Implicit function theorem for $C^k$ maps between Banach spaces, $k \ge 1$ ([[thm-implicit-function-theorem-for-banach-spaces]]); it is applied under the assumed AC.
 
@@ -51,7 +58,11 @@ $$T_p\bigl(f^{-1}(q)\bigr) = \ker Df(p) \qquad \text{for every } p \in f^{-1}(q)
 
 **Proof technique:** direct.
 
-1.1 Fix $p \in S := f^{-1}(q)$; choose a chart $\varphi$ of $M$ at $p$ with $\varphi(p) = 0$ and a chart $\psi$ of $N$ at $q$ with $\psi(q)=0$; writing $L := Df(p)$ and using the chain rule in the form of [L1], the coordinate representative $\hat f := \psi \circ f \circ \varphi^{-1}$ is $C^k$ on the open set $\Omega := \varphi[U \cap f^{-1}[V]] \subseteq E$, satisfies $\hat f(0) = 0$, and has $D\hat f(0) = D\psi(q) \circ L \circ D\varphi(p)^{-1}$. [L1, L5]
+1.1 Fix $p \in S := f^{-1}(q)$ and choose specified-atlas charts $\varphi_0:U\to E$ of $M$ at $p$ and $\psi:V\to F$ of $N$ at $q$. Put $a:=\varphi_0(p)$ and $b:=\psi(q)$. The translated coordinate map $\varphi:=\varphi_0-a$ is a $C^k$ chart compatible with the specified atlas of $M$; maximality therefore makes $\varphi$ a chart of the structured manifold, and $\varphi(p)=0$. Writing $L:=Df(p)$, the recentered coordinate representative
+$$\hat f(x):=\psi\bigl(f(\varphi^{-1}(x))\bigr)-b$$
+is $C^k$ on the open set $\Omega:=\varphi[U\cap f^{-1}[V]]\subseteq E$, satisfies $\hat f(0)=0$, and has
+$$D\hat f(0)=D\psi(q)\circ L\circ D\varphi(p)^{-1}.$$
+Translations have identity derivative, so this follows from chart functoriality and the chain rule without requiring a translated target chart to belong to the atlas of $N$. [L1, L5]
 
 2.1 The kernel of $D\hat f(0)$ is $K := D\varphi(p)[\ker L]$, a complemented subspace of $E$: the chart derivative $D\varphi(p)$ is a bounded linear isomorphism by [L1] and [L5] applied to $\varphi \circ \varphi^{-1} = \mathrm{id}$, and [L4] transports the given complement of $\ker L$ to a complement of $K$; moreover $D\hat f(0)$ is surjective, because $D\psi(q)$ and $D\varphi(p)$ are isomorphisms and $L$ is onto. [step 1.1, L1, L4, L5]
 
@@ -59,8 +70,12 @@ $$T_p\bigl(f^{-1}(q)\bigr) = \ker Df(p) \qquad \text{for every } p \in f^{-1}(q)
 
 4.1 Define $G : \Omega' \to F$ on the open set $\Omega' := \{(w,u) \in K \times E_1 : w+u \in \Omega\}$ by $G(w,u) := \hat f(w+u)$. Then $G$ is $C^k$, $G(0,0) = 0$, and its partial derivative in the second variable at $(0,0)$ is $L_1$, a bounded linear isomorphism by [step 3.1]; by [L2] there are open neighbourhoods $A \subseteq K$ of $0$ and $B \subseteq E_1$ of $0$ and a $C^k$ map $h : A \to B$ with $$\{(w,u) \in A \times B : \hat f(w+u) = 0\} = \{(w,h(w)) : w \in A\}.$$ [step 3.1, L2]
 
-5.1 The map $\Theta(w,u) := (w, u - h(w))$ is a homeomorphism of $A \times E_1$ onto itself with inverse $(w,v) \mapsto (w,v+h(w))$, both maps are $C^k$, and $\Theta$ carries the zero set $\{(w,h(w))\}$ of [step 4.1] onto the slice $(A \times E_1) \cap (K \times \{0\})$; hence $\Phi := \Theta \circ \varphi$ restricted to the open set $U_1 := \varphi^{-1}(A \times B)$ is a chart of $M$ at $p$ satisfying $\Phi[U_1 \cap S] = \Phi[U_1] \cap (K \oplus \{0\})$. [step 4.1, L1, L4, algebra]
+5.1 The map $\Theta(w,u):=(w,u-h(w))$ is a homeomorphism of $A\times E_1$ onto itself with inverse $(w,v)\mapsto(w,v+h(w))$, and both maps are $C^k$. It carries the zero set $\{(w,h(w)):w\in A\}$ of [step 4.1] onto the slice $A\times\{0\}$. Let $U_1:=\varphi^{-1}(A\times B)$ and define $\Phi:=\Theta\circ\varphi|_{U_1}$. Its image $\Theta(A\times B)$ is open, and $\Phi$ is a $C^k$ chart compatible with every specified-atlas chart $\chi$: on each overlap the two transitions are
+$$\Phi\circ\chi^{-1}=\Theta\circ\varphi\circ\chi^{-1},\qquad\chi\circ\Phi^{-1}=\chi\circ\varphi^{-1}\circ\Theta^{-1},$$
+restricted to open domains, hence are $C^k$. Maximality of the specified atlas of $M$ now implies that $\Phi$ is a chart of the structured manifold. Finally,
+$$\Phi[U_1\cap S]=\Phi[U_1]\cap(K\oplus\{0\}),$$
+so $\Phi$ is the split chart required by the library definition. [step 4.1, L1, L4, L5, algebra]
 
-6.1 In the chart $\Phi$ of [step 5.1] the representative of $f$ is $\hat f \circ \Theta^{-1}$; its derivative at $0$ is $D\hat f(0) \circ D\Theta(0)^{-1} = D\hat f(0)$ because $D\Theta(0) = I$: indeed $h(0) = 0$ and $Dh(0) = 0$, the latter by differentiating $G(w,h(w)) = 0$ at $w=0$ with [L5], which gives $D_KG(0,0) + L_1\,Dh(0) = 0$ and $D_KG(0,0) = D\hat f(0)|_K = 0$. Consequently the kernel of the differential of $f$ at $p$, computed in the charts $\Phi$ and $\psi$, is exactly the set of classes $[\Phi,k]$ with $k \in K$, which by [step 5.1] is the tangent space of $S$ at $p$; hence $T_pS = \ker Df(p)$. [step 5.1, L1, L4, L5, algebra]
+6.1 In the charts $\Phi$ and $\psi$ of [step 5.1], the coordinate representative of $f$ is $b+\hat f\circ\Theta^{-1}$; its derivative at $0$ is $D\hat f(0)\circ D\Theta(0)^{-1}=D\hat f(0)$ because $D\Theta(0)=I$. Indeed, $h(0)=0$ and $Dh(0)=0$, the latter by differentiating $G(w,h(w))=0$ at $w=0$ with [L5], which gives $D_KG(0,0)+L_1\,Dh(0)=0$ and $D_KG(0,0)=D\hat f(0)|_K=0$. Consequently the kernel of the differential of $f$ at $p$, computed in the charts $\Phi$ and $\psi$, is exactly the set of classes $[\Phi,k]$ with $k\in K$, which by [step 5.1] is the tangent space of $S$ at $p$; hence $T_pS=\ker Df(p)$. [step 5.1, L1, L4, L5, algebra]
 
 7.1 Since $p \in S$ was arbitrary, [step 5.1] gives a split chart for $S$ at every one of its points, so $S$ is a split $C^k$ submanifold of $M$, and [step 6.1] identifies its tangent space at each $p \in S$ with $\ker Df(p)$. [step 5.1, step 6.1] ∎

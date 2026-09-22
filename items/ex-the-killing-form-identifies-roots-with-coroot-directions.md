@@ -5,7 +5,7 @@ title: The Killing form identifies roots with coroot directions
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-the-root-sl-two-triple-inside-sl-n, prop-killing-form-orthogonality-of-root-spaces, lem-killing-length-of-a-root-is-nonzero, def-killing-form-of-a-finite-dimensional-lie-algebra]
+deps: [def-axiom-of-choice, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-the-root-sl-two-triple-inside-sl-n, prop-killing-form-orthogonality-of-root-spaces, lem-killing-length-of-a-root-is-nonzero, def-killing-form-of-a-finite-dimensional-lie-algebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -16,11 +16,12 @@ sources:
       locator: "Lecture 19, before Lemma 19.15"
 landmark: false
 proof_strategy: direct
+axiom_strength: "ZF + AC; inherited from the Killing-dual and coroot construction chain."
 ---
 
 ## Example
 
-In $\mathfrak{sl}_n(\mathbb C)$ with the diagonal Cartan subalgebra
+Assume AC ([[def-axiom-of-choice]]). In $\mathfrak{sl}_n(\mathbb C)$ with the diagonal Cartan subalgebra
 $\mathfrak h$ of [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]] and the
 root $\alpha=\varepsilon_i-\varepsilon_j$, the Killing form
 $B(X,Y)=2n\operatorname{tr}(XY)$ establishes the isomorphism
@@ -34,7 +35,7 @@ scalars are $\alpha(H_\alpha)=B(H_\alpha,H_\alpha)=\frac1n$.
 
 ## Facts & Assumptions
 
-**Given:** The algebra $\mathfrak{sl}_n(\mathbb C)$ with diagonal Cartan subalgebra and root $\alpha=\varepsilon_i-\varepsilon_j$ from [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]] with the nondegeneracy on $\mathfrak h$ of [[prop-killing-form-orthogonality-of-root-spaces]], and the dual vector and coroot of [[def-killing-dual-vector-of-a-root]], [[def-coroot-of-a-lie-algebra-root]] and [[lem-killing-length-of-a-root-is-nonzero]].
+**Given:** AC; the algebra $\mathfrak{sl}_n(\mathbb C)$ with diagonal Cartan subalgebra and root $\alpha=\varepsilon_i-\varepsilon_j$ from [[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]], the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]] with the nondegeneracy on $\mathfrak h$ of [[prop-killing-form-orthogonality-of-root-spaces]], and the dual vector and coroot of [[def-killing-dual-vector-of-a-root]], [[def-coroot-of-a-lie-algebra-root]] and [[lem-killing-length-of-a-root-is-nonzero]].
 
 ## Verification
 

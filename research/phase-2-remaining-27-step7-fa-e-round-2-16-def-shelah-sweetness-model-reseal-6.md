@@ -1,0 +1,8 @@
+# Position 16 context reseal
+
+Read the full sweetness definition and latest receipt against the current page's quotient convention and changed universal-meagre context. The definition retains stronger-is-smaller order, nonzero Boolean conditions, a distinguished weakest condition and no automatic transport through a noninjective separative quotient. The comparable transfer formulation follows by applying transfer and then directedness within the same class. Conversely any witness in the target class supplies the comparable pair; absence of a witness makes the implication vacuous. Density of D1 inside P1 permits the extension clause to quantify over P1, and that clause plus inclusion gives D2 intersect P1=D1. It does not make P1 dense in P2.
+
+Order-embedding transport preserves all comparisons and maps actual lower bounds to positive bounds; it is stated only under the required stronger embedding hypothesis. A downstream common-top hypothesis is still separate from extension, which does not itself require preserving distinguished tops. The changed tree forcing is an instance to be checked against these clauses, not a prerequisite of the definition. No justification here is invalidated. Retain repaired disposition. These order and logic checks are familiar and require no fresh external verification; this is not a new claim of source reading. No dependency change requires ledger maintenance.
+
+
+Current itemHashJudge: 95a937d9c375b23e19d3a3cb53dfe6353794b906dd80c13779c01939bf013b38, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

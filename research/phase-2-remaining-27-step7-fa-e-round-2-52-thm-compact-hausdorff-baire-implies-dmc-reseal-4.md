@@ -1,0 +1,10 @@
+# Position 52 — finite-coordinate and tree recheck
+
+Read the full present dichotomy proof and prior FA/risk basis. The changed page still uses ZF, proper initial segments and unique predecessors; no product compactness is available or assumed. The constant-infinity point makes K nonempty, and forbidden finite cylinders make it closed in a Hausdorff product. In the compact case, a single finite extension beyond the constrained coordinates proves each G_n dense. A Baire point yields an infinite chain with unbounded lengths and singleton levels.
+
+In the noncompact case canonical cylinder complements and constraint complements give the directed closed family with empty intersection. At processing coordinate n, the finite expression has no infinity test at n. Replacing a value outside its finitely many tested labels by infinity preserves membership, so a projection excluding infinity must be finite. Directedness gives a nonempty finite intersection F_n and a member attaining it, using only finite choice. If only finitely many coordinates lack an infinity cylinder, successive finite compatible cells give a point in every closed member, a contradiction. Constraint complements guarantee forward extensions between F_m and F_n. The restricted menus provide both predecessor and successor links; every level-r prefix comes from the r-th finite menu, so each level is finite without countable choices.
+
+This explicit finite-coordinate/FIP argument is familiar and unchanged by the neighboring repairs; no new source reading is needed. The DMC supplier is invoked only after producing exactly its nonempty finite-level subtree. No new repair or dependency is required. Preserve repaired on identical bytes and continue position 53.
+
+
+Current itemHashJudge: af954009bb8e059959172345b18c6c8659f1e2e9895e045d9f985a73a5628ed5, equal to the preceding receipt. Queue-status was run before recording; the recorder enforces current predecessors. No content or dependency edits, judge verdict, or pass stamp. Next: the next stale position in ascending order.

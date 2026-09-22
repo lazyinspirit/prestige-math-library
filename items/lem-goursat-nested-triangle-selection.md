@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-oriented-complex-triangle-and-boundary, lem-goursat-four-triangle-boundary-cancellation, thm-cantor-intersection-metric, thm-complex-plane-is-complete, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, thm-recursion, thm-well-ordering-principle, thm-induction-principle, lem-geometric-sequence-null, lem-complex-conjugation-and-modulus-laws]
+deps: [def-oriented-complex-triangle-and-boundary, lem-goursat-four-triangle-boundary-cancellation, thm-complex-plane-is-complete, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, thm-recursion, thm-well-ordering-principle, thm-induction-principle, lem-geometric-sequence-null, lem-complex-conjugation-and-modulus-laws, def-metric-bounded-diameter, def-cauchy-in-metric, def-metric-convergence, def-metric-topology, def-metric-space]
 justified_by: []
 aliases: []
 landmark: true
@@ -47,7 +47,7 @@ Here $I_f(T)$ denotes the integral over the oriented boundary prescribed by [[de
 
 [L1] The four midpoint subtriangle boundary integrals sum to the parent boundary integral ([[lem-goursat-four-triangle-boundary-cancellation]]).
 
-[L2] A nested sequence of nonempty closed bounded subsets of a complete metric space whose diameters tend to zero has intersection consisting of exactly one point ([[thm-cantor-intersection-metric]]).
+[L2] In a metric space, pairwise distances inside a nonempty bounded set are at most its diameter; Cauchy sequences and convergence are tested by positive real tolerances; the complement of a closed set is open; and distance zero forces equality ([[def-metric-bounded-diameter]], [[def-cauchy-in-metric]], [[def-metric-convergence]], [[def-metric-topology]], [[def-metric-space]]).
 
 [L3] The complex plane with its usual metric is complete ([[thm-complex-plane-is-complete]]).
 
@@ -71,4 +71,4 @@ Here $I_f(T)$ denotes the integral over the oriented boundary prescribed by [[de
 
 3.1 Induction applied to step 2.1 and the retained one-quarter estimate gives, including at $n=0$, $|I_f(T_n)|\ge4^{-n}|I_f(T_0)|$, $P(T_n)=2^{-n}P(T_0)$, and $\operatorname{diam}(T_n)=2^{-n}\operatorname{diam}(T_0)$. [step 1.1, step 2.1, L5]
 
-4.1 By [L6] and step 3.1, the diameters tend to zero, even when the initial diameter is zero. Steps 2.1 and 1.2 give a nested sequence of nonempty closed bounded subsets of the complete complex plane, so [L2] and [L3] give a unique common point $z_*$. [step 2.1, step 3.1, step 1.2, L2, L3, L6] ∎
+4.1 By [L6] and step 3.1, the diameters tend to zero, even when the initial diameter is zero. Write $v_n$ for the first listed vertex of the ordered triangle $T_n$; this is determined by the recursive construction and makes no choice. If $m,n\ge N$, then $v_m,v_n\in T_N$ by nestedness, so $|v_m-v_n|\le\operatorname{diam}(T_N)$. Thus $(v_n)$ is Cauchy and [L3] gives a limit $z_*\in\mathbb C$. For fixed $N$, the tail $(v_n)_{n\ge N}$ lies in the closed set $T_N$. If $z_*\notin T_N$, its open complement would contain a ball about $z_*$, contradicting convergence of that tail; hence $z_*\in T_N$. Therefore $z_*$ lies in every $T_N$. If $w$ is another common point, then $w,z_*\in T_N$ gives $|w-z_*|\le\operatorname{diam}(T_N)$ for every $N$; since these diameters tend to zero, $|w-z_*|=0$ and $w=z_*$. Hence the intersection is exactly $\{z_*\}$. [step 2.1, step 3.1, step 1.2, L2, L3, L6] ∎

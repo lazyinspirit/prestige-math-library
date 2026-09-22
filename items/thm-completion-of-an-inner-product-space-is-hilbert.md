@@ -5,7 +5,7 @@ title: The norm completion of an inner-product space is a Hilbert space
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-completion-of-a-normed-space, thm-metric-completion-carries-a-unique-banach-space-structure, lem-inner-product-is-jointly-continuous, thm-parallelogram-law, thm-jordan-von-neumann-polarization, thm-cauchy-schwarz-in-an-inner-product-space, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, cor-archimedean-reciprocal, def-countable-choice, def-hilbert-space]
+deps: [def-completion-of-a-normed-space, thm-metric-completion-carries-a-unique-banach-space-structure, lem-inner-product-is-jointly-continuous, thm-parallelogram-law, thm-jordan-von-neumann-polarization, thm-cauchy-schwarz-in-an-inner-product-space, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, cor-archimedean-reciprocal, def-countable-choice, def-hilbert-space, cor-inner-product-induces-a-norm]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -26,9 +26,9 @@ Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product
 
 [A1] The completion $(\widehat X,\kappa)$ is a Banach space, $\kappa:X\to\widehat X$ is a dense linear isometry, and $\widehat X$ carries the unique compatible vector-space structure of the published metric completion ([[thm-metric-completion-carries-a-unique-banach-space-structure]], [[def-completion-of-a-normed-space]]).
 
-[A2] The induced length of an inner-product space is a norm, and the original inner product recovers from it by the polarisation formulas ([[thm-jordan-von-neumann-polarization]]).
+[A2] The induced length of an inner-product space is a norm ([[cor-inner-product-induces-a-norm]]). Conversely, a norm on a real or complex vector space is induced by an inner product if and only if it satisfies the parallelogram law. That inner product is unique and is recovered by the real or first-linear complex polarisation formula ([[thm-jordan-von-neumann-polarization]]).
 
-[A3] Cauchy–Schwarz holds in every inner-product space ([[thm-cauchy-schwarz-in-an-inner-product-space]]).
+[A3] Cauchy–Schwarz holds in every inner-product space; the resulting two-variable difference estimate proves joint continuity ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[lem-inner-product-is-jointly-continuous]]).
 
 [A4] Vector addition and scalar multiplication are continuous, and $\bigl|\|u\|-\|v\|\bigr|\le\|u-v\|$ ([[lem-vector-operations-are-continuous-in-a-normed-space]], [[lem-reverse-triangle-inequality-in-a-normed-space]]).
 

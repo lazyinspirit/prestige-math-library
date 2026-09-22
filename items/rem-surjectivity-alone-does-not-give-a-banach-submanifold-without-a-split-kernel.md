@@ -10,6 +10,11 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §2.11 (regular values as onto with complemented kernel)"
@@ -19,8 +24,9 @@ sources:
 ## Remarks
 
 The regular value theorem of this page
-([[thm-regular-value-theorem-for-banach-manifolds]]) assumes that at every point
-of the level set the derivative is surjective **with complemented kernel**
+([[thm-regular-value-theorem-for-banach-manifolds]]) separately requires the
+specified atlas of the domain manifold to be maximal and assumes that at every
+point of the level set the derivative is surjective **with complemented kernel**
 ([[def-complemented-subspace]]). For general Banach spaces the second clause is
 not a consequence of the first, and it cannot be dropped:
 
@@ -60,6 +66,7 @@ not a consequence of the first, and it cannot be dropped:
 
 - **Bookkeeping.** The equivalence in the first bullet is a Dependent Choice
   theorem, and the regular value theorem is proved under the Axiom of Choice
-  ([[def-axiom-of-choice]]), which supplies DC. The counterexample on the
-  companion page uses only the Axiom of Countable Choice, since the
-  non-complementation it appeals to is proved at that strength.
+  ([[def-axiom-of-choice]]), which supplies DC; it also has the independent
+  structural hypothesis that the specified domain atlas is maximal. The
+  counterexample on the companion page uses only the Axiom of Countable Choice,
+  since the non-complementation it appeals to is proved at that strength.

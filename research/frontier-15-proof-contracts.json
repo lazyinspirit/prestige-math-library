@@ -30996,15 +30996,6 @@
           ]
         },
         {
-          "fact": "L2",
-          "source": "thm-cantor-intersection-metric",
-          "source_section": "Statement",
-          "quote": "If $(X,d)$ is complete ([[def-complete-metric-space]]), every Cantor chain in $X$ has an intersection $\\bigcap_{k \\in \\mathbb{N}} F_k$ with **exactly one** element.",
-          "uses": [
-            "4.1"
-          ]
-        },
-        {
           "fact": "L3",
           "source": "thm-complex-plane-is-complete",
           "source_section": "Statement",
@@ -31017,7 +31008,7 @@
           "fact": "L4",
           "source": "thm-heine-borel-rn",
           "source_section": "Statement",
-          "quote": "**Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$ is a compact subset of $(\\mathbb{R}^n, d_2)$",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
           "uses": [
             "1.2"
           ]
@@ -31086,9 +31077,54 @@
           "fact": "L7",
           "source": "lem-complex-conjugation-and-modulus-laws",
           "source_section": "Statement",
-          "quote": "$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
           "uses": [
             "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-metric-bounded-diameter",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let\n$A, B \\subseteq X$.\n\n**Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$\nand a real $r > 0$ with $A \\subseteq B(x_0, r)$ ([[def-metric-ball]]). The space\n$(X,d)$ is a **bounded metric space** if $X$ is a bounded subset of itself.\n\n**Diameter, for nonempty bounded $A$ only.** Suppose $A$ is nonempty and\nbounded, and put\n\n$$D(A) := \\{\\, d(a,b) : a, b \\in A \\,\\} \\subseteq \\mathbb{R}.$$\n\nThen $D(A)$ is nonempty, since $A$ is, and it is bounded above: fixing $x_0$ and\n$r$ with $A \\subseteq B(x_0,r)$, every $a, b \\in A$ satisfy\n$d(a,b) \\le d(a,x_0) + d(x_0,b) < r + r$ by the triangle inequality, symmetry\n([[def-metric-space]]) and addition of inequalities ([[lem-of-add-order]],\n[[def-ordered-field]]), so $r + r$ is an upper bound of $D(A)$\n([[def-bounded-set]]). Hence $D(A)$ has a least upper bound in $\\mathbb{R}$ by\nthe least-upper-bound property ([[def-complete-ordered-field]]), and that bound\nis unique ([[lem-sup-unique]]). Define\n\n$$\\operatorname{diam}(A) := \\sup D(A).$$\n\n**Distance from a point to a set, for nonempty $A$ only.** Let $x \\in X$ and let\n$A$ be nonempty, and put $E(x,A) := \\{\\, d(x,a) : a \\in A \\,\\}$. Then $E(x,A)$ is\nnonempty and bounded below by $0$, since a metric is nonnegative\n([[lem-metric-nonnegativity]], [[def-bounded-set]]), so it has a greatest lower\nbound ([[thm-infimum-property]], [[def-infimum]]), unique by [[lem-sup-unique]].\nDefine\n\n$$d(x,A) := \\inf E(x,A).$$\n\n**Distance between two sets, for nonempty $A$ and $B$ only.** Put\n$E(A,B) := \\{\\, d(a,b) : a \\in A,\\ b \\in B \\,\\}$, again nonempty and bounded\nbelow by $0$, and define\n\n$$d(A,B) := \\inf E(A,B).$$\n\n**Every one of the three scope restrictions is load bearing.** In this library\n$\\sup$ and $\\inf$ denote real numbers and are written only after existence has\nbeen established; the extended real line is introduced on a later page and is\nnot used for the suprema and infima taken here, and no convention\n$\\sup \\emptyset = -\\infty$ is in force in this development\n([[rem-sup-conventions]]). Accordingly:\n\n- $\\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**\n  bounded. It is not defined for $A = \\emptyset$, and it is not defined, not even\n  as an infinite value, for an unbounded $A$.\n- $d(x,A)$ is defined exactly when $A \\ne \\emptyset$, and $d(A,B)$ exactly when\n  both $A$ and $B$ are nonempty. No boundedness is needed for these two, because\n  $0$ is always a lower bound.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cauchy-in-metric",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $(x_k)$ be a\nsequence in $X$, that is a function $\\mathbb{N} \\to X$ written $x_k := x(k)$\n([[def-metric-convergence]], [[def-sequence]]). As everywhere in this library\n$\\mathbb{N}$ contains $0$, so a sequence is indexed from $0$.\n\n$(x_k)$ is a **Cauchy sequence in $(X,d)$** if for every rational\n$\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ such that\n\n$$d(x_m, x_n) < \\varepsilon \\qquad \\text{for all } m, n \\ge K .$$\n\n**Rational and real $\\varepsilon$ agree here.** The test is written with a\nrational $\\varepsilon$ to match [[def-real-limit]] and [[def-metric-convergence]],\nand nothing is lost by using a real one: below any real $\\eta > 0$ lies a\npositive rational ([[lem-rat-embeds-dense]]), and the index belonging to that\nrational serves for $\\eta$. So a proof may establish Cauchyness by producing an\nindex for every real $\\varepsilon > 0$, and may use a Cauchy hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**The condition is exactly $d(x_m,x_n) \\to 0$ as $m$ and $n$ grow\nindependently.** The distances $d(x_m,x_n)$ are nonnegative reals\n([[lem-metric-nonnegativity]]), and the displayed condition asks them to be\nuniformly small on a tail of the doubly indexed family. It is not the same as\n$d(x_{k+1}, x_k) \\to 0$, which is a strictly weaker condition and is a standing\nsource of error. The partial sums $H_n$ of the harmonic series separate the two:\nconsecutive ones differ by $1/(n+1)$, which tends to $0$, while the sequence is\nunbounded, and an unbounded sequence of reals is not Cauchy\n([[lem-metric-cauchy-bounded]]).\n\n**Consistency with the real line.** For $X = \\mathbb{R}$ with the usual metric\n$d(x,y) = |x-y|$ ([[lem-real-line-is-a-metric-space]]) the condition above reads\n$|x_m - x_n| < \\varepsilon$ for $m,n \\ge K$, which is verbatim the definition of a\nCauchy sequence of reals ([[def-real-limit]]). So the notion introduced here\nrestricts on $\\mathbb{R}$ to the one already in use, and no ambiguity is created.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-metric-convergence",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA **sequence in $X$** is a function $x : \\mathbb{N} \\to X$, written $(x_k)$ with\n$x_k := x(k)$. As everywhere in this library, $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]) and a sequence is indexed from $0$\n([[def-sequence]]); an index range copied from a text that starts at $1$ must be\nshifted before it is used here.\n\nLet $(x_k)$ be a sequence in $X$ and $p \\in X$. The function\n$k \\mapsto d(x_k, p)$ is a sequence of reals ([[def-sequence]]), and it is\nnonnegative ([[lem-metric-nonnegativity]]), so $|d(x_k,p)| = d(x_k,p)$\n([[def-abs-value]]). Define\n\n$$x_k \\longrightarrow p \\text{ in } (X,d) \\quad :\\Longleftrightarrow \\quad d(x_k,p) \\longrightarrow 0 \\text{ in } \\mathbb{R},$$\n\nthe convergence on the right being that of [[def-real-limit]]. Unwound, this\nsays: for every **rational** $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ with\n$d(x_k, p) < \\varepsilon$ for every $k \\ge K$. We then call $p$ a **limit** of\n$(x_k)$, and say $(x_k)$ **converges** in $(X,d)$ if it has a limit.\n\n**Rational and real $\\varepsilon$ agree here, as they do on the real line.**\n[[def-real-limit]] tests convergence against rational $\\varepsilon$ only, and its\nown remark, restated for sequences in [[def-sequence]], records that nothing is\nlost: below any real $\\eta > 0$ lies a positive rational\n([[lem-rat-embeds-dense]]), and the index belonging to that rational serves for\n$\\eta$. So a proof may establish convergence by producing an index for every\nreal $\\varepsilon > 0$, and may use a convergence hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**Subsequences and subsequential limits.** A **subsequence** of $(x_k)$ is the\ncomposite $x \\circ n$ for a strictly increasing $n : \\mathbb{N} \\to \\mathbb{N}$,\nwritten $(x_{n_j})$, exactly as for sequences of reals ([[def-sequence]]); and\n$p$ is a **subsequential limit** of $(x_k)$ in $(X,d)$ when some subsequence\nconverges to $p$, which is the metric-space form of [[def-subsequential-limit]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any open set containing $x$. The condition\nabove therefore reads: $U$ is open exactly when every point of $U$ has a ball\naround it inside $U$, and it is the balls alone that have to be tested.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "4.1"
           ]
         }
       ],
@@ -31134,7 +31170,7 @@
         },
         {
           "id": "derive-4-1",
-          "claim": "By [L6] and step 3.1, the diameters tend to zero, even when the initial diameter is zero. Steps 2.1 and 1.2 give a nested sequence of nonempty closed bounded subsets of the complete complex plane, so [L2] and [L3] give a unique common point $z_*$.",
+          "claim": "By [L6] and step 3.1, the diameters tend to zero. Choose the first vertex of each deterministically constructed triangle. Nestedness and the diameter bound make those vertices Cauchy; completeness [L3] gives a limit. For each fixed triangle, all later vertices lie in it, so closedness from step 1.2 puts the limit in every triangle. Any two common points have distance bounded by every later diameter, hence coincide.",
           "step": "4.1",
           "inputs": [
             "step 2.1",
@@ -31151,7 +31187,7 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "Step 1.2 proves every selected filled triangle is nonempty before Cantor's theorem is applied in step 4.1."
+          "evidence": "Step 1.2 proves every selected filled triangle is nonempty; step 4.1 then uses its deterministically specified first vertex."
         },
         {
           "case": "zero",
@@ -31193,7 +31229,7 @@
       "risk_review": {
         "status": "complete",
         "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
-        "notes": "The quarter-retention selection is by least qualifying index, so no choice principle is used, and it is checked to work when the parent integral is zero. Verified the barycentric surjection from [0,1]^2 that supplies compactness, and that all four midpoint children (the medial triangle included) are similar to the parent with ratio 1/2, so perimeter and diameter genuinely halve. Cantor intersection is applied with its own hypotheses. Degenerate initial triangle checked. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+        "notes": "The quarter-retention selection is by least qualifying index, so no choice principle is used. The common point is obtained choice-freely from the Cauchy sequence of the deterministically specified first vertices; closedness gives membership in every triangle and vanishing diameters gives uniqueness. Degenerate initial triangles remain covered."
       }
     },
     "thm-goursat-triangle-theorem": {

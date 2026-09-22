@@ -32,11 +32,16 @@ complex-bilinear Lie bracket extending the original one, that is
 $$[X\otimes z,\,Y\otimes w]=[X,Y]\otimes zw \qquad (X,Y\in\mathfrak g_0,\ z,w\in\mathbb C),$$
 
 extended to all of $\mathfrak g_{\mathbb C}$ by linearity. Well-definedness and
-the Lie-algebra axioms for this bracket are proved in
-[[prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero]],
-whose argument verifies bilinearity and the Jacobi identity on generators; the
-definition is not being used circularly, since that proof only uses the explicit
-formula recorded here.
+the Lie-algebra axioms can be checked without using any later property of the
+complexification.  Indeed, the tensor-product relations give the canonical
+real-linear isomorphism
+$$\Phi:\mathfrak g_0\otimes_{\mathbb R}\mathbb C\longrightarrow\mathfrak g_0\oplus\mathfrak g_0,\qquad \Phi(X\otimes(a+ib))=(aX,bX),$$
+whose inverse is $(U,V)\mapsto U\otimes1+V\otimes i$.  Under $\Phi$ the displayed
+bracket is the unambiguous formula
+$$[(X,Y),(U,V)]=([X,U]-[Y,V],[X,V]+[Y,U]).$$
+It is complex bilinear for $i(X,Y)=(-Y,X)$; skew-symmetry and the Jacobi
+identity follow componentwise by expanding and using those identities in
+$\mathfrak g_0$.  Thus the formula defines a complex Lie algebra directly.
 
 The map $\varepsilon\colon\mathfrak g_0\to\mathfrak g_{\mathbb C}$,
 $\varepsilon(X)=X\otimes 1$, is the **canonical real embedding**, and we write

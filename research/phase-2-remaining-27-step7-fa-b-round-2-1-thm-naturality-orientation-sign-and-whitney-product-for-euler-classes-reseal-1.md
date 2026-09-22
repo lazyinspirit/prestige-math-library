@@ -1,0 +1,14 @@
+# Position 1: independent reseal
+
+Disposition: repaired; source status: familiar. The current bytes differ from the earlier repaired receipt; the supplied recovery command explicitly permits resealing these corrected bytes. No item or supplier was edited in this reseal.
+
+Read the current theorem, its batch-10 manifest and complete contract/risk/boundary entry, the A/B pages, Alpha's adjudication row, both Terra rejections, and the preserved position-1 evidence. The rendered bundle has no item blocks. Read the current Euler alias, Thom naturality and ordered-product proofs, relative-product naturality proof, and the general Thom domain. The other cited statements are quoted in the contract. The page adopts the Thom composite, with ordered orientations and AC inherited from its existence theorem.
+
+The current statement excludes the precise rank-zero counterexample: every zero-rank input has unit orientation, and reversal is asserted only for positive integral rank. Thus j and s are identities at rank zero and the chosen normalized class really is 1. Naturality follows from commuting pair and zero-section pullbacks, under the explicit Thom-domain requirement on both bases. The relative external product restricts to the ordered fiber generator; radial disk-product comparison fixes zero and therefore its zero-section pullback is the ordered product of Euler classes. Swapping m and n coordinates contributes (-1)^(mn), before pullback; no unsigned interchange remains. Negating an integral orientation negates its normalized class and hence its image under the linear composite. Empty-base and zero-ring cases are consistent.
+
+This is familiar Thom-class functoriality and relative cup-product algebra; no new external verification was necessary or is claimed. Historical source verification remains in the earlier evidence, not asserted as a new reading. The inherited arbitrary-orientation rank-zero claims remain defective outside this item's explicitly restricted inputs; published repair stays deferred.
+
+PUBLISHED-DEFECT def-thom-euler-class-of-an-oriented-vector-bundle: its unconditional rank-zero value e=1 conflicts with a supplied cohomological orientation -1 over Z, for which the defining composite gives -1.
+PUBLISHED-DEFECT thm-thom-isomorphism-for-oriented-vector-bundles: its rank-zero proof claims u=1 and an identity Thom map for arbitrary supplied orientation; orientation -1 instead gives u=-1 and multiplication by -1.
+
+These findings and source citations are already preserved in the original position-1 evidence and published ledgers; no duplicate finding is added. No new dependency repair was made, so the previously updated batch-10 consumer record needs no new edit. Focused precheck passed (1 checked, 0 failing). This is a terminal resolution, not a judge verdict or stamp. Next action: record this reseal, then inspect the next stale position (3).

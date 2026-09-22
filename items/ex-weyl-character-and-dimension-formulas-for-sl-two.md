@@ -33,7 +33,7 @@ $$\dim V(n)=n+1 .$$
 
 ## Facts & Assumptions
 
-**Given:** The module $V(n)$ with its basis and $h$-eigenvalues $n-2k$ ([[ex-all-finite-dimensional-irreducible-sl-two-modules]]), the Cartan subalgebra $\mathbb Ch$, and the variable $z\in\mathbb C^\times$; a weight $\mu$ with $\mu(h)=m$ contributes the monomial $z^m$ ([[def-weight-and-weight-space-of-a-lie-algebra-representation]]).
+**Given:** The module $V(n)$ with its basis and $h$-eigenvalues $n-2k$ ([[ex-all-finite-dimensional-irreducible-sl-two-modules]]), the standard diagonal subalgebra $\mathbb Ch$ from [[def-special-linear-lie-algebra-sl-two]], and the variable $z\in\mathbb C^\times$. In this example we define the rank-one formal character by assigning the monomial $z^m$ to the $h$-eigenspace of eigenvalue $m$ and summing with eigenspace multiplicities; this convention is not attributed to the weight-space definition.
 
 [L1] The $h$-eigenvalues on $V(n)$ are $n,n-2,\dots,-n$, each with multiplicity one, and $\dim V(n)=n+1$ ([[ex-all-finite-dimensional-irreducible-sl-two-modules]], [[thm-finite-dimensional-representations-of-sl-two]], [[def-special-linear-lie-algebra-sl-two]]).
 
@@ -41,7 +41,7 @@ $$\dim V(n)=n+1 .$$
 
 **Proof technique:** direct.
 
-1.1 By [L1] the sum $\chi_n(z)=\sum_{k=0}^nz^{n-2k}$ is the sum of $z^m$ over the weights $m$ of $V(n)$, each counted with its multiplicity, so $\chi_n$ is the character of $V(n)$ in the rank-one variable $z$. [L1]
+1.1 By [L1] the sum $\chi_n(z)=\sum_{k=0}^nz^{n-2k}$ is the sum of $z^m$ over the $h$-eigenvalues $m$ of $V(n)$, each counted with its multiplicity, so it is the rank-one formal character under the convention fixed in the given data. [L1, given]
 
 1.2 The telescoping identity $(z-z^{-1})\chi_n(z)=\sum_{k=0}^n(z^{n-2k+1}-z^{n-2k-1})=z^{n+1}-z^{-(n+1)}$ holds as an identity of Laurent polynomials. [given]
 

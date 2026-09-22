@@ -27,7 +27,7 @@ and the highest root is $3\alpha+2\beta$.
 
 ## Facts & Assumptions
 
-**Given:** The $G_2$ model $\Phi=\{\pm\alpha,\pm\beta,\pm(\alpha+\beta),\pm(\alpha+2\beta),\pm(\alpha+3\beta),\pm(2\alpha+3\beta)\}$ with a long root $\alpha_0$ and a short root $\beta_0$, and the base $\{\alpha,\beta\}$ consisting of the short simple root $\alpha$ and the long simple root $\beta$.
+**Given:** The $G_2$ model $\Phi=\{\pm\alpha_0,\pm\beta_0,\pm(\alpha_0+\beta_0),\pm(\alpha_0+2\beta_0),\pm(\alpha_0+3\beta_0),\pm(2\alpha_0+3\beta_0)\}$ with long root $\alpha_0$ and short root $\beta_0$. Rename the ordered base $\{\beta_0,\alpha_0\}$ as $\{\alpha,\beta\}$, so $\alpha=\beta_0$ is short and $\beta=\alpha_0$ is long.
 
 [L1] In the model the roots $\pm(\alpha_0+\beta_0)$, $\pm(\alpha_0+2\beta_0)$, $\pm(\alpha_0+3\beta_0)$, $\pm(2\alpha_0+3\beta_0)$ occur, and the Cartan matrix relative to $\{\beta_0,\alpha_0\}$ is the $G_2$ matrix ([[ex-root-systems-a-two-b-two-and-g-two]], [[thm-existence-of-each-classified-root-system]]).
 

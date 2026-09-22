@@ -61,7 +61,7 @@ connected manifold $M$, because $c$ is constant there by the first part.
 
 [F6] The bracket of a Lie algebra is bilinear, alternating and satisfies the Jacobi identity. [[def-lie-algebra-over-a-field]].
 
-[F7] Our cocycle equation is the vanishing of the Chevalley--Eilenberg differential of the two-cochain $c$ with trivial coefficients: $(dc)(x_0,x_1,x_2)=c([x_0,x_1],x_2)-c([x_0,x_2],x_1)+c([x_1,x_2],x_0)$. [[def-chevalley-eilenberg-differential]].
+[F7] Our cocycle equation is the vanishing of the Chevalley--Eilenberg differential of the two-cochain $c$ with trivial coefficients: $(dc)(x_0,x_1,x_2)=-c([x_0,x_1],x_2)+c([x_0,x_2],x_1)-c([x_1,x_2],x_0)$. [[def-chevalley-eilenberg-differential]].
 
 [F8] A smooth function whose differential vanishes is locally constant, hence constant on each connected component. [[prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function]].
 
@@ -77,6 +77,6 @@ connected manifold $M$, because $c$ is constant there by the first part.
 
 2.1 By step 1.1 the smooth function $c(\xi,\eta)$ has zero differential, so it is locally constant by [F8]; since $M$ is connected, it is constant on $M$. [step 1.1, F8]
 
-3.1 Jacobi for the Poisson bracket applied to $\mu^\xi,\mu^\eta,\mu^\zeta$ reads $$0=\{\{\mu^\xi,\mu^\eta\},\mu^\zeta\}+\{\{\mu^\eta,\mu^\zeta\},\mu^\xi\}+\{\{\mu^\zeta,\mu^\xi\},\mu^\eta\}.$$ Replacing each inner bracket by $\mu^{[\cdot,\cdot]}+c(\cdot,\cdot)$ and using that a constant Poisson-commutes with every function, the three $\mu$-terms combine into $\mu^{\lbrack\lbrack\xi,\eta\rbrack,\zeta\rbrack+\lbrack\lbrack\eta,\zeta\rbrack,\xi\rbrack+\lbrack\lbrack\zeta,\xi\rbrack,\eta\rbrack}=0$ by the Jacobi identity in $\mathfrak g$, and the three defect terms give exactly $c([\xi,\eta],\zeta)+c([\eta,\zeta],\xi)+c([\zeta,\xi],\eta)$. Hence this cyclic sum vanishes, which by [F7] is $dc=0$. [step 2.1, F1, F5, F6, F7]
+3.1 Jacobi for the Poisson bracket applied to $\mu^\xi,\mu^\eta,\mu^\zeta$ reads $$0=\{\{\mu^\xi,\mu^\eta\},\mu^\zeta\}+\{\{\mu^\eta,\mu^\zeta\},\mu^\xi\}+\{\{\mu^\zeta,\mu^\xi\},\mu^\eta\}.$$ Replacing each inner bracket by $\mu^{[\cdot,\cdot]}+c(\cdot,\cdot)$ and using that a constant Poisson-commutes with every function, the three $\mu$-terms combine into $\mu^{\lbrack\lbrack\xi,\eta\rbrack,\zeta\rbrack+\lbrack\lbrack\eta,\zeta\rbrack,\xi\rbrack+\lbrack\lbrack\zeta,\xi\rbrack,\eta\rbrack}=0$ by the Jacobi identity in $\mathfrak g$, and the three defect terms give exactly $c([\xi,\eta],\zeta)+c([\eta,\zeta],\xi)+c([\zeta,\xi],\eta)$. Hence this cyclic sum vanishes. By alternation it is the negative of the zero-based differential displayed in [F7], so it vanishes if and only if $dc=0$. [step 2.1, F1, F5, F6, F7]
 
 4.1 Since $c$ is constant on the connected manifold $M$, the bracket identity of [F9] holds if and only if $c=0$, and it suffices to test $c=0$ at a single point of $M$. By [F9] that bracket identity is equivalent to equivariance under the identity component $G^0$, and hence to coadjoint equivariance of $\mu$ when $G$ is connected; for a general $G$, equivariance under all of $G$ additionally requires equivariance under one representative of each coset of $G/G^0$. [step 2.1, step 3.1, F9, A1] ∎

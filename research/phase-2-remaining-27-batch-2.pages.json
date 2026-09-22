@@ -115,7 +115,7 @@
       {
         "id": "lem-finite-rank-operators-are-compact",
         "kind": "lemma",
-        "title": "Finite rank operators are compact",
+          "title": "Bounded finite rank operators are compact",
         "deps": [
           "def-compact-linear-operator",
           "def-bounded-linear-operator",
@@ -156,7 +156,9 @@
           "thm-bounded-linear-operator-equivalences",
           "lem-vector-operations-are-continuous-in-a-normed-space",
           "thm-compact-subset-is-closed-and-bounded",
-          "def-metric-bounded-diameter"
+          "def-metric-bounded-diameter",
+        "def-operator-norm",
+        "lem-closed-subset-of-a-compact-space-is-compact"
         ],
         "strategy": "A sends bounded sets to bounded sets; B maps compact closures continuously to compact sets.",
         "statement": "If T:X->Y is compact and A:W->X, B:Y->Z are bounded linear, then TA and BT are compact.",
@@ -377,15 +379,18 @@
           "def-bounded-linear-operator",
           "thm-bounded-linear-operator-equivalences",
           "thm-closed-unit-ball-compact-iff-finite-dimensional",
-          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "lem-closed-subset-of-a-compact-space-is-compact",
           "def-metric-convergence",
           "lem-metric-limits-unique",
           "def-metric-ball",
           "def-linear-basis",
-          "def-norm-and-normed-space"
+          "def-norm-and-normed-space",
+        "thm-metric-open-set-algebra",
+        "lem-compactness-is-intrinsic",
+        "rem-real-and-complex-normed-space-convention"
         ],
         "strategy": "The kernel is closed; its unit ball is closed in the compact closure of K(B_X), since K is the identity there. Apply the finite-dimensional compact-ball characterization.",
-        "statement": "For compact K:X->X on a Banach space, ker(I-K) is finite dimensional.",
+        "statement": "For compact K:X->X on a normed space, ker(I-K) is finite dimensional.",
         "axiom_audit": "No new choice is used beyond the explicitly declared supplier dependencies; any DC, AC_omega, or AC use is inherited along those dependency paths.",
         "provenance": {
           "statement": "ai-altered",
@@ -490,7 +495,7 @@
           "def-quotient-vector-space-coset-notation"
         ],
         "strategy": "On the stabilized decomposition, A is invertible on the range summand and nilpotent on its finite-dimensional kernel summand; rank-nullity gives equality of defect dimensions and injectivity/surjectivity equivalence. Since ran A is closed, the elementary annihilator identity gives the stated solvability condition.",
-        "statement": "Assume AC. For compact K on Banach X, I-K is injective iff surjective, then boundedly invertible. For general y, (I-K)x=y is solvable iff phi(y)=0 for every phi in ker(I-K*). The kernel and cokernel are finite dimensional of equal dimension.",
+        "statement": "Assume AC. For compact K on Banach X over a fixed F=R or C, I-K is injective iff surjective, then boundedly invertible. For general y, (I-K)x=y is solvable iff phi(y)=0 for every phi in ker(I-K*). The kernel and cokernel are finite dimensional of equal dimension over F.",
         "axiom_audit": "Full AC supplies Hahn--Banach annihilator separation, and through lem-ac-supplies-countable-and-dependent-choice-for-banach-integration the DC used by stabilization and bounded inversion.",
         "provenance": {
           "statement": "ai-altered",
@@ -550,7 +555,7 @@
         "kind": "definition",
         "title": "Spectrum and resolvent of a bounded operator",
         "statement": "For bounded T on a complex Banach space X, rho(T)={lambda in C:lambda I-T has a bounded two-sided inverse}; sigma(T)=C minus rho(T).",
-        "strategy": "Define eigenvalues, eigenspaces, and generalized eigenspace union_n ker(T-lambda I)^n; algebraic multiplicity is its dimension when finite. The real-operator complexification convention belongs to later FA-17. No Banach algebra or general spectral nonemptiness theorem is presumed.",
+        "strategy": "Define eigenvalues, eigenspaces, and generalized eigenspace union_n ker(T-lambda I)^n; algebraic multiplicity is its dimension when finite and lambda is an eigenvalue. The real-operator complexification convention belongs to later FA-17. No Banach algebra or general spectral nonemptiness theorem is presumed.",
         "deps": [
           "def-bounded-linear-operator",
           "def-banach-space",
@@ -655,7 +660,9 @@
           "def-linear-subspace",
           "def-linear-basis",
           "def-dimension",
-          "def-integers"
+          "def-integers",
+          "def-int-operations",
+          "thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed"
         ],
         "strategy": "Distinguish algebraic cokernel from its quotient topology; closed range is explicitly part of the definition.",
         "statement": "A bounded T:X->Y between Banach spaces is Fredholm if ker T is finite dimensional, ran T is closed, and coker T=Y/ran T is finite dimensional; ind T=dim ker T-dim coker T.",
@@ -778,7 +785,7 @@
           "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
           "def-dependent-choice"
         ],
-        "strategy": "Fredholm=>S is the preceding splitting construction. Conversely ||x||<=||S||||Tx||+||(I-ST)x|| gives finite kernel and closed range by the compact-remainder lemma. Apply Schauder to I_Y-TS: its transpose I_{Y*}-S*T* is compact. Thus ker T* is contained in ker(S*T*)=ker(I_{Y*}-(I_{Y*}-S*T*)), which is finite dimensional by the identity-minus-compact kernel lemma. The dual of Y/ran T is ker T*; dual norming implies a normed space with finite-dimensional dual is finite dimensional (embed by a dual basis), proving finite cokernel. The later Calkin equivalence is orientation only and supplies nothing here.",
+          "strategy": "Fredholm=>S is the preceding splitting construction. Conversely choose a bound b for the bounded operator S; then ||x||<=b||Tx||+||(I-ST)x|| gives finite kernel and closed range by the compact-remainder lemma. Apply Schauder to I_Y-TS: its transpose I_{Y*}-S*T* is compact. Thus ker T* is contained in ker(S*T*)=ker(I_{Y*}-(I_{Y*}-S*T*)), which is finite dimensional by the identity-minus-compact kernel lemma. The dual of Y/ran T is ker T*; dual norming implies a normed space with finite-dimensional dual is finite dimensional (embed by a dual basis), proving finite cokernel. The later Calkin equivalence is orientation only and supplies nothing here.",
         "statement": "Assume AC. For bounded T:X->Y between Banach spaces, T is Fredholm iff some bounded S:Y->X satisfies ST-I_X and TS-I_Y compact.",
         "axiom_audit": "Full AC is declared directly for splitting, Schauder, and Hahn--Banach dual norming; lem-ac-supplies-countable-and-dependent-choice-for-banach-integration supplies the DC compact-remainder lemma.",
         "provenance": {
@@ -1008,15 +1015,14 @@
           "thm-riesz-fischer-completeness-of-l-p",
           "def-banach-space",
           "def-norm-and-normed-space",
-          "def-linear-map",
-          "def-sequence",
+            "def-linear-map",
           "lem-index-map-grows",
           "def-metric-convergence",
           "def-metric-ball",
           "def-continuous-map-top"
         ],
         "strategy": "First use the counting-measure proposition to make (N,P(N),#) a measure space and the ell-p/counting-measure remark to identify its real Lp quotient isometrically with the usual real sequence space; Riesz-Fischer completeness of Lp therefore transfers to real ell-p. For complex scalars, take real and imaginary parts of a Cauchy sequence, use that real and imaginary parts are norm contractions, and recombine their real ell-p limits; the triangle inequality gives complex norm convergence. Truncations have finite rank and operator-norm error sup_{n>N}|a_n|. Conversely nonvanishing tail gives infinitely many separated D_a e_n, contradicting compactness. This covers p=infinity without falsely calling e_n a Schauder basis there.",
-        "statement": "Assume DC. For 1<=p<=infinity and a bounded scalar sequence a, D_a on ell^p(N), identified with counting-measure L^p(N), is compact iff a_n->0.",
+          "statement": "Assume DC. For 1<=p<=infinity and a function a:N->K bounded in modulus, D_a on ell^p(N), identified with counting-measure L^p(N), is compact iff for every epsilon>0 the tail satisfies |a_n|<epsilon.",
         "axiom_audit": "DC is used by the sequential characterization converse; lem-dependent-choice-implies-countable-choice supplies the AC_omega assumptions of the norm-closure and Lp-completeness suppliers.",
         "provenance": {
           "statement": "ai-altered",
@@ -1060,14 +1066,14 @@
           "thm-extreme-value-metric",
           "def-bounded-set",
           "def-complete-ordered-field",
-          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-integral",
           "def-continuity-real",
           "def-metric-ball",
           "def-metric-bounded-diameter",
           "def-sequence",
           "lem-index-map-grows"
         ],
-        "strategy": "Continuous-integrability makes K well defined. Heine--Cantor and the uniform integral bound give boundedness of the image unit ball and the modulus estimate (b-a)sup_y|k(x,y)-k(xprime,y)|. Apply the published real compact-metric Ascoli theorem. For complex functions prove the same integral estimates by real/imaginary parts and apply Ascoli to those two parts, then take a finite product.",
+        "strategy": "Continuous-integrability makes K well defined. Heine--Cantor and the uniform integral bound give boundedness of the image unit ball and the componentwise modulus estimate 2(b-a)sup_y|k(x,y)-k(xprime,y)|. Apply the published real compact-metric Ascoli theorem. For complex functions prove the same integral estimates by real/imaginary parts and apply Ascoli to those two parts, then choose a nested subsequence and approximate sequences in the closure using Countable Choice.",
         "statement": "Assume DC. For a<b and continuous real- or complex-valued k on [a,b]^2, Kf(x)=integral_a^b k(x,y)f(y)dy is compact on C([a,b]) over the same scalar field, with its supremum norm.",
         "axiom_audit": "DC, and AC_omega through the locally proved lem-dependent-choice-implies-countable-choice, are used exactly by the published Arzela--Ascoli subsequence corollary and the metric-compactness equivalence; the integration and real/imaginary-part reductions are ZF.",
         "provenance": {
@@ -1292,7 +1298,8 @@
           "def-bounded-linear-operator",
           "def-operator-norm",
           "lem-finite-choice",
-          "def-countable-choice"
+          "def-countable-choice",
+        "def-finite-cardinality"
         ],
         "statement": "Assume AC_ω. For bounded T:H→K and Hilbert bases E of H, F of K, the rectangle supremum sup_{A⊆E,B⊆F finite}Σ|⟨Te,f⟩|² equals Σ_{e∈E}||Te||² and Σ_{f∈F}||T*f||²; hence the square-sum is independent of the Hilbert basis of H and equals the adjoint square-sum, and Hilbert–Schmidt membership and the relative norm are basis independent.",
         "strategy": "Apply Parseval to each Te, but never replace an arbitrary-index sum by an enumeration. Show both iterated finite-subset suprema equal the supremum over finite rectangles A×B: for a fixed finite A, finite choice permits combining the finitely many approximating B_e into one finite B, and then interchange A and B. Use ⟨Te,f⟩=⟨e,T*f⟩ with the page's first-variable-linear convention, and apply Parseval in the other direction.",
@@ -1492,9 +1499,11 @@
           "def-operator-norm",
           "def-bounded-linear-operator",
           "def-axiom-of-choice",
-          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+        "def-completion-of-a-measure-space",
+        "def-integral-of-a-nonnegative-simple-function"
         ],
-        "statement": "Assume AC. For sigma-finite (X,μ),(Y,ν), a∈L²(μ;C), b∈L²(ν;C), the kernel k(x,y)=a(x)overline{b(y)} is square integrable of norm ||a||₂||b||₂, T_kf=a⟨f,b⟩, the range lies in the one-dimensional space C·a (ordered basis of length at most one), and ||T_k||=||T_k||_HS=||a||₂||b||₂, with the zero cases a=0 and b=0 included.",
+        "statement": "Assume AC. For sigma-finite (X,μ),(Y,ν), a∈L²(μ;C), b∈L²(ν;C), the kernel k(x,y)=a(x)overline{b(y)} is square integrable of norm ||a||₂||b||₂, T_kf=a⟨f,b⟩, the range lies in the space of dimension at most one C·a (ordered basis of length at most one), and ||T_k||=||T_k||_HS=||a||₂||b||₂, with the zero cases a=0 and b=0 included.",
         "strategy": "Use Tonelli to factor ||k||_2^2, observe the first-variable-linear inner-product convention in the integral, and invoke the kernel theorem for the exact Hilbert–Schmidt norm. Treat a=0 or b=0 explicitly.",
         "axiom_audit": "AC is declared and propagated from the kernel theorem (its AC_ω consequences are supplied by the published bridge lemma); the product-kernel factorization and norm computations are otherwise choice-free.",
         "provenance": {
@@ -1524,7 +1533,7 @@
           "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
           "def-countable-choice"
         ],
-        "statement": "Assume AC. On [0,1]² with the completed product of the two factor Lebesgue measures, the kernel k(x,y)=1_{[0,1/2]}(x) is square integrable of norm squared 1/2 with rank-one operator T_kf=⟨f,1_{[0,1]}⟩1_{[0,1/2]}, and its L² class has no continuous representative: no continuous h on the square agrees with k almost everywhere.",
+        "statement": "Assume AC. On [0,1]² with the completed product of the two factor Lebesgue measures, the kernel k(x,y)=1_{[0,1/2]}(x) is square integrable of norm squared 1/2 with rank-one operator (the formula is an identity of L² classes) T_kf=⟨f,1_{[0,1]}⟩1_{[0,1/2]}, and its L² class has no continuous representative: no continuous h on the square agrees with k almost everywhere.",
         "strategy": "The product example proves square-integrability and rank one. If a continuous h agreed with k a.e., continuity plus positivity of every nonempty open rectangle forces h=1 on (0,1/2)×(0,1) and h=0 on (1/2,1)×(0,1), contradicting continuity along x=1/2. Handle boundary/null-set conventions explicitly.",
         "axiom_audit": "AC is declared; Countable Choice is used exactly to select one point outside the null disagreement set in each of countably many balls. The positivity of boxes, the propagation of values along sequences and the interface contradiction are choice-free.",
         "provenance": {

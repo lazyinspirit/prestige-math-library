@@ -5,7 +5,7 @@ title: Character space of generated normal algebra is operator spectrum
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-c-star-algebra-generated-by-a-normal-operator, lem-spectral-permanence-for-unital-c-star-subalgebras, thm-spectrum-as-character-values, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-axiom-of-choice, def-character-and-maximal-ideal-space, thm-maximal-ideal-space-is-compact-hausdorff, thm-bounded-inverse-theorem, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed, def-spectrum-and-resolvent-of-a-bounded-operator, lem-bounded-hilbert-operators-form-a-c-star-algebra]
+deps: [def-complex-metric-convergence-and-continuity, def-c-star-algebra-generated-by-a-normal-operator, lem-spectral-permanence-for-unital-c-star-subalgebras, thm-spectrum-as-character-values, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-axiom-of-choice, def-character-and-maximal-ideal-space, thm-maximal-ideal-space-is-compact-hausdorff, thm-bounded-inverse-theorem, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed, def-spectrum-and-resolvent-of-a-bounded-operator, lem-bounded-hilbert-operators-form-a-c-star-algebra]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -34,7 +34,7 @@ Assume AC. For a bounded normal operator $T$ on a nonzero complex Hilbert space,
 
 [A5] Characters satisfy $\chi(a^*)=\overline{\chi(a)}$, and a character is continuous for the norm ([[lem-characters-on-a-commutative-c-star-algebra-preserve-star]], [[thm-maximal-ideal-space-is-compact-hausdorff]]).
 
-[A6] $\sigma(T)$ is compact in $\mathbb C$ ([[def-spectrum-and-resolvent-of-a-bounded-operator]]).
+[A6] The spectrum is a subset of the metric space $\mathbb C$ with its usual subspace topology ([[def-spectrum-and-resolvent-of-a-bounded-operator]], [[def-complex-metric-convergence-and-continuity]]). It is Hausdorff: distinct $z,w$ have disjoint relative open balls of radius $|z-w|/3$, by the triangle inequality.
 
 [A7] The continuous image of an arbitrary compact space is compact, and every compact subset of a Hausdorff space is closed; hence a continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]], [[thm-compact-subset-of-a-hausdorff-space-is-closed]]).
 

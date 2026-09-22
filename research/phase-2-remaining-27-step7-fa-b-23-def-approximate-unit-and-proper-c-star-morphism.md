@@ -1,0 +1,9 @@
+# FA position 23 — repaired
+
+Read the complete definition, C*-algebra and positive-element definitions, owning batch-4 manifest/coverage and proof contract, Gelfand A/B context, Alpha row 82, initial objection and final Terra zero-target objection. No risk-review object is present in this item's contract; none is invented. The approximate-unit definition uses nonempty directed nets, positive elements b*b, norm <=1 and both norm-convergence conditions, consistently with the local conventions.
+
+Terra's final objection is correct. The constant approximate unit of a unital source forces phi(1) to act as a two-sided identity on B, but a nonzero identity follows only when B is nonzero. If B=0, the unique map sends every approximate unit to the constant zero approximate unit and is proper, although the local convention calls the zero algebra nonunital. The repaired remark now gives this exact dichotomy. Restricted the duality forward reference to commutative C*-algebras/LCH spaces and the existence forward reference to commutative algebras, matching their theorem titles and interfaces. Read the duality statement solely for that scope comparison, not as review of its later queued proof.
+
+These are familiar elementary algebra and constant-net limit arguments; no external source verification was needed or claimed. Own item and zero-boundary metadata only; no dependency change and thus no frontier dependency repair. No supplier or published edit, new lemma or verdict. Precheck for this unnumbered definition may inspect no proof items; strict contract is checked separately. Next: queue-status, record repaired/familiar, then position 24.
+
+Validation: strict contract 0 errors and 0 warnings; precheck exited successfully with 0 proof items checked. Position 22 was reread against the changed context, its exact item hash confirmed unchanged, and its receipt resealed through the recorder before recording this position.

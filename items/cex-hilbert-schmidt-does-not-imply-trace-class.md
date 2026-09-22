@@ -10,6 +10,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.6, Hilbert–Schmidt but not trace-class diagonal operators"
@@ -45,6 +50,6 @@ imply the trace-class property.
 
 1.1 **$T$ is Hilbert–Schmidt.** The sequence $(d_n)$ is bounded by $1$ and $\sum_{n\ge1}|d_n|^2=\sum_{n\ge1}n^{-2}<+\infty$ by [A2]; hence $T$ is Hilbert–Schmidt relative to the standard basis with $\|T\|_{HS}^2=\sum_{n\ge1}n^{-2}$ by the diagonal criterion [A1]. [A1, A2]
 
-1.2 **$T$ is not trace class.** The singular values of the diagonal operator with entries $d_n=n^{-1}$ are the moduli $n^{-1}$ in nonincreasing order with multiplicity [A1], so $\|T\|_1=\sum_{n\ge1}n^{-1}=+\infty$ by [A2]; hence the defining series of trace class diverges and $T$ is not trace class. [A1, A2]
+1.2 **$T$ is not trace class.** The positive singular values of the diagonal operator are $n^{-1}$, $n\ge1$, in nonincreasing order with multiplicity [A1]. Their series $\sum_{n\ge1}n^{-1}$ diverges by [A2], so the finiteness condition in the trace-class definition fails and $T$ is not trace class. No value of $\|T\|_1$ is assigned, because that norm is defined only for trace-class operators. [A1, A2]
 
 2.1 **Conclusion.** $T$ is Hilbert–Schmidt by [step 1.1] and not trace class by [step 1.2]; hence the Hilbert–Schmidt property does not imply the trace-class property. [step 1.1, step 1.2, A3] ∎

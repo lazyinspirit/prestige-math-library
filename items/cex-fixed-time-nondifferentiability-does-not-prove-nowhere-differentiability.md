@@ -11,6 +11,11 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 7.1.6 and the surrounding discussion of fixed-time versus pathwise statements"

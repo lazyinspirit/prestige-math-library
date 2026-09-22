@@ -1,0 +1,11 @@
+# FA position 35 — repaired
+
+Reviewed the complete current item, cited definitions and adjoint/projection/decomposition interfaces, continuous-calculus A/B context, manifest and partial-isometry coverage, contract/risk, Alpha repair and Terra judgments. Alpha correctly supplied the converse from partial isometry of U*. Terra correctly identifies the remaining forward dependency: step 1.3 used U*U=P_M before step 2.1 established it. The earlier risk record explicitly acknowledged but did not resolve that ordering problem.
+
+The repaired order is: norm identity on ker U plus its orthogonal complement; diagonal polarization establishing U*U=P_M; then U=UP_M=UU*U; then Q=UU* is a bounded self-adjoint idempotent whose range equals ran U. Its range is ker(I-Q), so is closed by a direct bounded-operator estimate. The residual x-Qx is perpendicular to the range, which identifies Q with the Hilbert orthogonal projection by the actual defining decomposition. Thus no unproved closed-image theorem or forward use remains. The adjoint is isometric on ran U because ||U*Ux||=||P_Mx||=||Ux||, and the converse follows by applying that result to U* and using U**=U.
+
+The polarization calculation uses a first-linear sesquilinear form with zero diagonal; expanding its four diagonal values gives every off-diagonal value. It does not presume that U*U-P_M is positive definite. The zero operator has ker U=H and initial space M={0}; the contract's incorrect M=H sentence was repaired. Countable Choice remains exactly the declared Hilbert projection/adjoint hypothesis, with no new selection argument.
+
+This is familiar Hilbert-space algebra and bounded-kernel geometry, so external verification was not needed. Added the actual Hilbert adjoint definition, inner-product axioms and closed-complement lemma as dependencies. Updated only the item's manifest/strategy, proof contract and risk/boundary record, plus its consumer-batch dependency rows and regenerated frontier ledger. No supplier or published edit.
+
+Validation: precheck and rendercheck PASS; strict proof-contract 0 errors/0 warnings after moving the choice citation to the decomposition step. Statement unchanged. Next action: queue-status and record 35, then review 36. No unresolved obligation; no judge verdict or pass stamp.

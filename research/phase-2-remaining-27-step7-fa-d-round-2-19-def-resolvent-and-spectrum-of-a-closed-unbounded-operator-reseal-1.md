@@ -1,0 +1,5 @@
+# FA position 19 reseal after position 20
+
+Disposition: repaired; source status: familiar.
+
+Re-read the complete resolvent definition against the changed shared page context. Its bytes match the recorded item_sha256 91d03887e471e614379ada15d8271fa752f4c6ed6f823aca6517eedd8e4a4c15. Position 20 adds an explicit zero-space PVM construction, Sigma-measurable terminology and a uniform truncation tail bound. None is a dependency of position 19. The zI-T convention, recovery TRy=zRy-y, continuous-zero-set proof of Graph(R) closed and graph homeomorphism remain valid for the same general complex Hilbert space, including H={0}. No PVM theorem or choice principle enters this proof. The complete mathematical basis and focused checks in research/phase-2-remaining-27-step7-fa-d-19-def-resolvent-and-spectrum-of-a-closed-unbounded-operator.md remain applicable. No item changes or additional external verification are needed. This is a context reseal, not a judge verdict. Next action: record position 20 after queue status reports all predecessors current.

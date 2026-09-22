@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-field-of-p-adic-numbers, thm-p-adic-absolute-value-is-nonarchimedean]
+deps: [def-field-of-p-adic-numbers, thm-p-adic-completion-is-a-field]
 proof_strategy: direct
 verification:
   audited: 2026-09-04
@@ -32,9 +32,9 @@ the larger.
 
 **Given:** Points $a,b,x \in \mathbb Q_p$ and positive radii $r \le s$.
 
-[L1] The absolute value on $\mathbb Q_p$ is nonarchimedean ([[thm-p-adic-absolute-value-is-nonarchimedean]]).
+[L1] The extended absolute value on $\mathbb Q_p$ is nonarchimedean ([[thm-p-adic-completion-is-a-field]]).
 
-[L2] $\mathbb Q_p$ is the $p$-adic completion field ([[def-field-of-p-adic-numbers]]).
+[L2] $\mathbb Q_p$ is the p-adic Cauchy quotient of [[def-field-of-p-adic-numbers]], equipped with its complete valued-field structure by [[thm-p-adic-completion-is-a-field]].
 
 ## Proof
 

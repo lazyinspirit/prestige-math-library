@@ -5,7 +5,7 @@ title: "Von Neumann parameterization of self-adjoint extensions"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-deficiency-subspaces-and-deficiency-indices, thm-cayley-correspondence, def-cayley-transform-of-a-self-adjoint-operator, thm-self-adjointness-range-criterion, thm-partial-isometry-characterizations, thm-double-orthogonal-complement-is-closure, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-orthogonality-and-orthogonal-complement, def-countable-choice]
+deps: [def-deficiency-subspaces-and-deficiency-indices, thm-cayley-correspondence, def-cayley-transform-of-a-self-adjoint-operator, def-densely-defined-closed-and-closable-operator, def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, def-axiom-of-choice, def-countable-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,7 +22,7 @@ sources:
 
 ## Statement
 
-Assume Countable Choice. Let $T$ be a densely defined closed symmetric operator
+Assume the Axiom of Choice. Let $T$ be a densely defined closed symmetric operator on a complex Hilbert space H, with first-variable-linear inner product,
 with deficiency subspaces $K_\pm$ ([[def-deficiency-subspaces-and-deficiency-indices]]),
 and let $V:K_+\to K_-$ be a unitary operator. Then
 $$D(T_V)=D(T)\oplus\{u+Vu:u\in K_+\},\qquad T_V(x+u+Vu)=Tx+iu-iVu$$
@@ -32,32 +32,28 @@ operators $K_+\to K_-$ onto the set of self-adjoint extensions of $T$.
 
 ## Facts & Assumptions
 
-[A1] $H=\operatorname{ran}(T+i)\oplus K_+=\operatorname{ran}(T-i)\oplus K_-$ orthogonally, $K_+\cap K_-=\{0\}$, and $C_T:\operatorname{ran}(T+i)\to\operatorname{ran}(T-i)$ is an isometric isomorphism ([[def-deficiency-subspaces-and-deficiency-indices]], [[def-cayley-transform-of-a-self-adjoint-operator]]).
+[A1] For the given closed densely defined symmetric T, $K_+=\ker(T^*-i)$ and $K_-=\ker(T^*+i)$ are closed, and $H=\operatorname{ran}(T+i)\oplus K_+=\operatorname{ran}(T-i)\oplus K_-$ orthogonally. The linear map $C_T((T+i)x)=(T-i)x$ is an isometric isomorphism between these ranges, and $(I-C_T)(T+i)x=2ix$. Full AC licenses this deficiency-space interface, including its Hilbert-dimension convention. [[def-deficiency-subspaces-and-deficiency-indices]]
 
-[A2] For a self-adjoint operator $S\supseteq T$, its Cayley transform $U_S$ is unitary and extends $C_T$. Hence $U_S$ maps $\operatorname{ran}(T+i)$ onto $\operatorname{ran}(T-i)$ and maps their orthogonal complements onto one another, so $U_S(K_+)=K_-$ ([[thm-cayley-correspondence]], [[def-cayley-transform-of-a-self-adjoint-operator]], [A1]).
+[A2] Under Countable Choice the Cayley correspondence sends a unitary U with $\ker(I-U)=\{0\}$ to the self-adjoint operator $S(I-U)y=i(I+U)y$, with domain $\operatorname{ran}(I-U)$, and recovers $C_S=U$. For self-adjoint S its Cayley transform satisfies $C_S(S+i)x=(S-i)x$ on D(S). [[thm-cayley-correspondence]] [[def-cayley-transform-of-a-self-adjoint-operator]]
 
-[A3] A densely defined symmetric operator $S$ with $\operatorname{ran}(S\pm i)=H$ is self-adjoint, and the inverse Cayley construction $S=i(I+U)(I-U)^{-1}$ on $\operatorname{ran}(I-U)$ produces a self-adjoint operator for every unitary $U$ with $\ker(I-U)=\{0\}$ ([[thm-cayley-correspondence]], [[thm-self-adjointness-range-criterion]]).
+[A3] D(T) is norm dense in H. Orthogonal decompositions have zero intersection and their squared norms add. A vector orthogonal to a dense subspace is zero: continuity of pairings follows from Cauchy-Schwarz. [[def-densely-defined-closed-and-closable-operator]] [[def-orthogonality-and-orthogonal-complement]] [[thm-cauchy-schwarz-in-an-inner-product-space]]
 
-[A4] If a unitary $V$ satisfies $\|Vu\|=\|u\|$ and $V(K_+)=K_-$, then $U:=C_T\oplus(-V)$ is unitary on $H$ ([[thm-partial-isometry-characterizations]], [A1]).
+[A4] Full AC is assumed to use [A1]. It implies the Countable Choice required by [A2] directly: AC supplies a choice function for the range family of any given sequence of nonempty sets, and composing that choice function with the sequence gives the required indexed choices. No additional family of choices is made in the construction from the supplied unitary V. [[def-axiom-of-choice]] [[def-countable-choice]]
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** A closed symmetric densely defined $T$ and a unitary $V:K_+\to K_-$.
+**Given:** T as in the statement and a unitary $V:K_+\to K_-$. Put $M_+=\operatorname{ran}(T+i)$ and $M_-=\operatorname{ran}(T-i)$.
 
-1.1 Define $U:=C_T\oplus(-V)$ on $H=\operatorname{ran}(T+i)\oplus K_+$; by [A1] and [A4] the operator $U$ is unitary and extends $C_T$. [A1, A4]
+1.1 Define $U(m+u)=C_Tm-Vu$ for $m\in M_+$ and $u\in K_+$. The orthogonal decomposition in [A1] makes this a uniquely defined linear map on H. Its two output terms lie in the orthogonal subspaces $M_-$ and $K_-$, so $\|U(m+u)\|^2=\|C_Tm\|^2+\|Vu\|^2=\|m\|^2+\|u\|^2=\|m+u\|^2$. Since both component maps are onto their corresponding summands, U is onto H. Thus U is unitary and extends C_T; the minus sign on K_+ is necessary for the displayed plus sign in u+Vu. [A1, A3, A4]
 
-2.1 $I-U$ is injective: for $z=(T+i)x+u$ with $x\in D(T)$, $u\in K_+$ one has $(I-U)z=2ix+u+Vu$, so $(I-U)z=0$ gives $u+Vu=-2ix$. Both sides of this identity lie in $D(T^*)$ and $T^*x=Tx$ because $T$ is symmetric, while $T^*(u+Vu)=iu-iVu$ because $u\in K_+$ and $Vu\in K_-$; applying $T^*$ is therefore legitimate and gives $Tx=-\frac12(u-Vu)$. Pairing the two identities $u+Vu=-2ix$ and $Tx=-\frac12(u-Vu)$ with $u$, and using $\langle Tx,u\rangle=\langle x,T^*u\rangle=-i\langle x,u\rangle$, gives $\|u\|^2+\langle Vu,u\rangle=-\|u\|^2+\langle Vu,u\rangle$, so $\|u\|^2=0$ and $u=0$; then $2ix=0$ gives $x=0$. [A1, step 1.1]
+2.1 For $x\in D(T)$, $(I-U)(T+i)x=2ix$, hence $\operatorname{ran}(I-U)$ contains D(T) and is dense. If Uz=z, then for every y in H, $\langle z,(I-U)y\rangle=\langle z,y\rangle-\langle Uz,Uy\rangle=0$, since a unitary preserves inner products. Consequently z is orthogonal to the dense D(T), so z=0 by [A3]. This proves $\ker(I-U)=\{0\}$. [A1, A3, step 1.1]
 
-2.2 Distinct unitaries give distinct extensions: if $T_V=T_{V'}$, their Cayley transforms agree, and on $K_+$ this transform equals $-V$ and $-V'$ respectively by step 1.1; hence $V=V'$. [A3, step 1.1]
+3.1 Apply [A2], licensed by [A4], to get the self-adjoint operator $S(I-U)y=i(I+U)y$ on $\operatorname{ran}(I-U)$, with $C_S=U$. Because $(I-U)((T+i)x+u)=2ix+u+Vu$, that domain equals $D(T)+\{u+Vu:u\in K_+\}$; scalar multiplication by 2i maps D(T) onto itself. To prove the sum direct, suppose $x=u+Vu\in D(T)$. Then $(I-U)(T+i)x=2ix=(I-U)(2iu)$, and injectivity from step 2.1 gives $(T+i)x=2iu$. The two sides lie in M_+ and K_+, whose intersection is zero. Hence u=0 and x=0. Also u+Vu=(I-U)u shows the parametrization of the second summand is injective. Thus every vector has a unique representation x+u+Vu, and the domain contains the dense D(T). [A1, A2, A3, A4, step 1.1, step 2.1]
 
-3.1 The operator $T_V:=i(I+U)(I-U)^{-1}$ with domain $\operatorname{ran}(I-U)$ is self-adjoint by [A3]; its domain is $D(T)\oplus\{u+Vu:u\in K_+\}$, because $(I-U)((T+i)x+u)=2ix+(u+Vu)$ and the sum is direct: if $x\in D(T)$ satisfies $x=u+Vu=(I-U)u$, then $2ix=(I-U)(T+i)x=(I-U)2iu$, so by step 2.1 $(T+i)x=2iu$, and this forces $u=0$ and $x=0$ because $\operatorname{ran}(T+i)$ meets $K_+$ only in $0$. [A1, A3, step 2.1]
+4.1 On D(T), $S(2ix)=i(I+U)(T+i)x=2iTx$, so Sx=Tx. On the second summand, $S(u+Vu)=S(I-U)u=i(I+U)u=iu-iVu$. Linearity yields $S(x+u+Vu)=Tx+iu-iVu$. Thus S is exactly the well-defined operator T_V in the statement and is a self-adjoint extension of T. [A1, step 1.1, step 3.1]
 
-4.1 $T_V$ extends $T$: for $x\in D(T)$ one has $(I-U)(T+i)x=2ix$ and hence $T_V(2ix)=i(I+U)(T+i)x=i(2Tx)=2iTx$, that is $T_Vx=Tx$ by linearity. [step 3.1]
+5.1 Let R be any self-adjoint extension of T and put W=C_R. For x in D(T), $(R+i)x=(T+i)x$, so $W(T+i)x=(R-i)x=(T-i)x$. Thus W agrees with C_T on M_+ and maps M_+ onto M_-. For u in K_+ and m in M_+, $\langle Wu,Wm\rangle=\langle u,m\rangle=0$, so Wu belongs to K_-. Conversely, for v in K_-, take the unique y with Wy=v. For every m in M_+, $\langle y,m\rangle=\langle v,Wm\rangle=0$, hence y belongs to K_+. This proves W(K_+)=K_-, without treating W* as the Cayley transform of R. Consequently V=-W restricted to K_+ is unitary from K_+ onto K_-, and the construction of step 1.1 returns U=W. The inverse correspondence [A2] then gives T_V=R. [A1, A2, A3, step 1.1, step 4.1]
 
-4.2 The stated action: for $x\in D(T)$ and $u\in K_+$ the vector $2i(x+u+Vu)$ equals $2ix+u'+Vu'$ with $u':=2iu\in K_+$, so by step 3.1 $T_V(2ix+u'+Vu')=i(2Tx+u'-Vu')=i(2Tx+2iu-2iVu)$, that is $2i(Tx+iu-iVu)$; dividing by the nonzero scalar $2i$ gives the displayed formula $T_V(x+u+Vu)=Tx+iu-iVu$. [step 3.1]
-
-5.1 Every self-adjoint extension $S\supseteq T$ arises this way: by [A2] its unitary $U_S$ extends $C_T$ and maps $K_+$ onto $K_-$. Thus $V:=-U_S|_{K_+}$ is a unitary $K_+\to K_-$ whose construction reproduces $S$, the Cayley transform being recovered as $U$. [A2, A3, step 4.2]
-
-6.1 By steps 4.1, 4.2, 5.1 and 2.2 the map $V\mapsto T_V$ is a bijection from unitaries $K_+\to K_-$ onto the self-adjoint extensions of $T$, with the displayed domain and action. ∎
+6.1 If T_V=T_{V'}, their Cayley transforms agree by [A2]. Step 3.1 identifies these transforms with the constructed U and U', whose restrictions to K_+ are -V and -V'. Hence V=V'. Along with steps 4.1 and 5.1, this proves the bijection. This includes empty parameter sets: if no such unitary exists, step 5.1 rules out every self-adjoint extension. If K_+=K_-={0}, the unique unitary of the zero spaces gives D(T_V)=D(T) and T_V=T, so T is already self-adjoint. If H={0}, every displayed map is its unique zero-space map and the same conclusion holds directly. No finite-dimensional or separability assumption is used. AC is used only through [A4]. [A1, A2, A4, step 1.1, step 3.1, step 4.1, step 5.1] ∎

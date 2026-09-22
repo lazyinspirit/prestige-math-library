@@ -1,0 +1,10 @@
+# Position 34 — context reseal
+
+Re-read the full current closure proof, the regular-lambda GTW definition and original FA basis against the choice-topology A/B pages and revised BPI supplier. The GTW construction still explicitly uses a transitive ZFC+GCH ground, reverse-inclusion partial-function forcing of size-below-lambda domains, and small-coordinate supports. It is separate from the arbitrary internal ZFA ground used by the BPI permutation-model criterion. Neither that criterion nor its changed proof is a premise of the GTW closure proof.
+
+Checked the common-condition argument: each actual coordinate has some HS representative, so H meets D_xi individually. Adjoining conditions incompatible with further D_xi extensions gives dense downward E_xi. Ground well-ordering and beta<lambda closure make their intersection dense; a generic q in that intersection cannot avoid any D_xi by directedness of H. Collection and ground AC then provide a ground set-sized sequence of HS names and supports all decided by q. Their support union remains small by regularity, and all-conditions graph names preserve hereditary symmetry recursively. Evaluation gives exactly g. The empty ordinal case and the restriction beta<lambda are explicit.
+
+This is a familiar forcing/dense-set and support-union argument, and the change under review introduces no uncertain mathematical step requiring fresh external verification. The original FA file retains the GTW/Jech source checks; this note makes no claim to have reread those sources. The changed neighboring BPI context does not invalidate the proof or its hypotheses. No content or metadata repair is required; unchanged repaired bytes may be resealed. Next: position 35.
+
+
+Previous receipt item_sha256: 35fdeb8f425d78dc2387fa5d88d49712812dea5fd2638cf41f455507eb7331d7. Current itemHashJudge: 35fdeb8f425d78dc2387fa5d88d49712812dea5fd2638cf41f455507eb7331d7. The item bytes match the prior receipt. Queue-status was run immediately before recording; the recorder enforces ascending reseals. This is terminal evidence, not a judge verdict or pass stamp.

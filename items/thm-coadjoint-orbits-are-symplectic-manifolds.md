@@ -9,6 +9,11 @@ deps: [def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit, lem-kks-form-is-i
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-22
 sources:
   references:
     - title: Eckhard Meinrenken, Symplectic Geometry

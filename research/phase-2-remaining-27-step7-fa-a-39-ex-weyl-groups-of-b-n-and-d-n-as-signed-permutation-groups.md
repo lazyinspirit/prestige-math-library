@@ -1,0 +1,11 @@
+# FA position 39 — signed permutation Weyl groups
+
+Disposition: repaired. Source status: familiar. Terminal review, not a judge verdict.
+
+Read the complete example, the two supplied dependency interfaces and coordinate example proof, the batch-11 manifest and proof contract, risk/refuter evidence (no flag for this ID), root-systems page/coverage conventions, both Terra rejections and Alpha adjudication. Alpha correctly imposed n>=1 for B and n>=2 for D. Terra's final objection is valid at the stated interface: the coordinate example restricts n>=2 and its Example section lists sets, not reflection formulas.
+
+Use the already recorded classical root-system proposition directly: it covers B1 and D2. Derive reflection actions from the Weyl definition's displayed formula: e_i negates one coordinate, e_i-e_j swaps two, and e_i+e_j swaps and negates both. Negative roots give identical reflections. Each generating reflection is therefore in the stated signed group.
+
+The previous D argument also incorrectly relied on an even number of sum-root reflections alone. The repaired proof uses s_(e_i+e_j)s_(e_i-e_j), which flips exactly i,j. Finite pairing of any even set yields every even sign pattern; difference-root transpositions yield every permutation. The product of the signs is multiplicative under composition, so no odd pattern enters D. Unique permutation/sign data give orders 2^n n! and 2^(n-1)n!, with the final sign forced in D. B1 has two elements, D2 four; D0 and D1 are excluded. All bases, reflections and finite generation/counting arguments are familiar and verified directly; no external verification was needed.
+
+Only this example and its owning batch-11 manifest/contract entry changed. Dependency now names the exact rank-covering supplier, with no existing supplier edit or new item. Refreshed the owning consumer-batch record in briefs/tasks/frontier-dependency-ledger.md. Replaced the generic boundary record with explicit checks for parity, rank endpoints, both group inclusions and finite choice. Precheck, strict focused proof-contract check and YAML/KaTeX rendercheck passed. Before recording, queue-status reports positions 1–38 current and no stale predecessor. Next action: record this item, then review 40 after success.

@@ -5,7 +5,7 @@ title: Fredholm operator cokernel and index
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-bounded-linear-operator, def-banach-space, def-quotient-vector-space-coset-notation, def-quotient-seminorm, def-linear-subspace, def-linear-basis, def-dimension, def-integers]
+deps: [def-bounded-linear-operator, def-banach-space, def-quotient-vector-space-coset-notation, def-quotient-seminorm, def-linear-subspace, def-linear-basis, def-dimension, def-integers, def-int-operations, thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -34,15 +34,18 @@ all three of the following hold:
 
 Here the cokernel is the algebraic quotient vector space; it also carries the
 quotient seminorm of [[def-quotient-seminorm]], which is a norm when the range
-is closed, but the dimension in clause 3 is the vector-space dimension of the
+is closed ([[thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]]), but the dimension in clause 3 is the vector-space dimension of the
 quotient and does not depend on that norm.
 
 For a Fredholm operator $T$ the **index** of $T$ is the integer
 
 $$\operatorname{ind}T:=\dim_{\mathbb F}\ker T-\dim_{\mathbb F}\operatorname{coker}T$$
 
-([[def-integers]]). Both terms are natural numbers by the definition, so the
-index is a well-defined integer; it may be positive, negative or zero.
+Here subtraction is in $\mathbb Z$, not in $\mathbb N$: write $a=\dim_{\mathbb F}\ker T$ and $b=\dim_{\mathbb F}\operatorname{coker}T$ and identify a natural $n$ with $[(n,0)]$. Precisely,
+
+$$\operatorname{ind}T=[(a,b)]=[(a,0)]+(-[(b,0)])\in\mathbb Z$$
+
+by [[def-integers]] and [[def-int-operations]]. Both dimensions are natural numbers, so this class is defined even when $a<b$; the index may be positive, negative or zero.
 
 **Two remarks on the definition.** The closedness of the range is listed
 explicitly as a hypothesis of the definition rather than extracted from the

@@ -1,0 +1,10 @@
+# Position 45 — context reseal
+
+Read the entire current closure lemma, the defining HOD(S) item, original FA evidence and current Shelah A/B conventions. S still consists of all ambient countable ordinal sequences, and N is hereditary rank-definability from one S parameter and finitely many ordinals. The ambient universe remains ZFC. The additional real-ordinal presentation over L is not needed by this closure proof; neither a homogeneity theorem nor a real-parameter-only definition is substituted for HOD(S).
+
+The proof retains each full definition code: formula, rank, tuple length, finite ordinal tuple and sequence. Collection bounds possible codes in a set before AC chooses one per n. The explicit row packing separates tuple entries from sequence entries and stores formula/rank/length, so a fixed pairing recovers all data. Replacement bounds the range by one ordinal, putting the packed sequence in S. Set satisfaction gives a uniform first-order reconstruction of the unique graph f. Reflection supplies a rank definition without a universe truth predicate. The subsequent finite-set closure and Kuratowski-pair analysis checks every hereditary descendant, not only f itself. No values of f are assumed to be ordinals.
+
+This familiar coding/reflection argument is unchanged by the current neighboring construction and BPI revisions; no fresh source check is required for this reseal. The original evidence retains source locators without a claim of new reading. Focused strict batch-15 proof-contract check passes with zero errors and warnings. No content or dependency edit is needed. Retain repaired on unchanged bytes; next position 46.
+
+
+Previous receipt item_sha256: e104e84d8835e54f4aaebcce8d230d036532e1722582fdbcc85c2a5cd45be15b. Current itemHashJudge: e104e84d8835e54f4aaebcce8d230d036532e1722582fdbcc85c2a5cd45be15b. The item bytes match the prior receipt. Queue-status was run immediately before recording; the recorder enforces ascending reseals. This is terminal evidence, not a judge verdict or pass stamp.

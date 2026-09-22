@@ -1,0 +1,11 @@
+# Final adjudication: position 25
+
+Disposition: repaired; source status familiar. Read the full current item, both judge objections, Alpha adjudication, batch-14 manifest, proof contract and risk/boundary worksheet against the already inspected page conventions and published closure/topology interfaces. The final Terra rejection is correct: j<=m includes zero in this library, whereas the listed nodes start at 1. All intersections now explicitly use 1<=j<=m. The closure assertion also now restricts i<2^n, avoiding an undefined last successor coordinate.
+
+Independently checked closure monotonicity: the intersection lies in each entry, so its closure lies in each entry closure and hence each next entry. Nonempty menus preserve the last entry X minus G and containment of F. Both coverage directions under the explicit even-coordinate relation give equality of the coordinate ranges and their intersections. These are elementary set and topology arguments familiar enough not to need external mathematical verification.
+
+The initial text promised first-two-level computations but gave none. Step 3.1 now computes the unique level-0 node and the level-1 menu (V_j,X minus G), with intersection (intersection V_j,X minus G). It includes singleton menus and clarifies that no countable sequence of finite enumerations is chosen. Level alignment and both coverage directions are explicitly given; abstract DMC is not claimed to supply aligned levels without the construction proved at position 24. No proof-only content is imported under a Statement citation.
+
+Source attribution corrected using the PDF already read for position 24: https://alg-d.com/math/ac/urysohn.pdf is an alg-d note, not a Schechter text; Theorem 5 p. 3 is strategy provenance only. No new source reading or external theorem verification is claimed here.
+
+Updated the item's own manifest and both contracts, including actual boundary calculations. No dependency edges changed, so no cross-batch dependency repair was required. Item precheck passed, both strict contracts passed with 0 errors and 0 warnings. Queue-status shows positions 1–24 current; no reseal was needed. No published item, supplier, new lemma, verdict or pass stamp was created. Next: record this repaired item, then review position 26.

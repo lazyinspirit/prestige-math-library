@@ -42,8 +42,10 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\mathcal{C}$ be the
-set of all Cauchy sequences in $X$ ([[def-cauchy-in-metric]]). Then:
+Assume the Axiom of Countable Choice for assertion 5 and the consequent
+existence claim ([[def-countable-choice]]). Let $(X,d)$ be a metric space
+([[def-metric-space]]) and let $\mathcal{C}$ be the set of all Cauchy sequences
+in $X$ ([[def-cauchy-in-metric]]). Then:
 
 1. For all $x = (x_n)$ and $y = (y_n)$ in $\mathcal{C}$ the real sequence
    $\big(d(x_n,y_n)\big)_n$ converges, so
@@ -74,7 +76,7 @@ transitivity argument is visible at the point of use.
 
 ## Facts & Assumptions
 
-**Given:** A metric space $(X,d)$; the set $\mathcal{C}$ of Cauchy sequences in $X$; elements $x = (x_n)$, $y = (y_n)$, $z = (z_n)$ of $\mathcal{C}$; a real $\varepsilon > 0$.
+**Given:** For assertion 5, the Axiom of Countable Choice; a metric space $(X,d)$; the set $\mathcal{C}$ of Cauchy sequences in $X$; elements $x = (x_n)$, $y = (y_n)$, $z = (z_n)$ of $\mathcal{C}$; a real $\varepsilon > 0$.
 
 [A1] Cauchyness: for every real $\varepsilon > 0$ there is $K$ with $d(x_n,x_m) < \varepsilon$ for all $n,m \ge K$ ([[def-cauchy-in-metric]], [[lem-rat-embeds-dense]]).
 

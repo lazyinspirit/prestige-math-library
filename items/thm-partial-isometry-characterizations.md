@@ -5,7 +5,7 @@ title: Partial isometry characterizations
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-isometry-coisometry-and-partial-isometry, lem-kernel-range-orthogonality-for-hilbert-adjoints, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, thm-hilbert-adjoint-properties, def-operator-norm]
+deps: [def-isometry-coisometry-and-partial-isometry, lem-kernel-range-orthogonality-for-hilbert-adjoints, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, thm-hilbert-adjoint-properties, def-operator-norm, def-hilbert-space-adjoint, def-inner-product-space, lem-orthogonal-complement-is-closed]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -26,15 +26,15 @@ Assume Countable Choice. For a bounded operator $U$ on a nonzero complex Hilbert
 
 [A1] $U$ is a partial isometry when it vanishes on $\ker U$ and is isometric on the initial space $(\ker U)^\perp$; an isometry is exactly an operator with $U^*U=I$ ([[def-isometry-coisometry-and-partial-isometry]]).
 
-[A2] $\langle U^*x,y\rangle=\langle x,Uy\rangle$, $U^{**}=U$, and $U^*U$ is self-adjoint for every bounded $U$ ([[thm-hilbert-adjoint-properties]]).
+[A2] $\langle U^*x,y\rangle=\langle x,Uy\rangle$, $U^{**}=U$, and $U^*U$ is self-adjoint for every bounded $U$ ([[def-hilbert-space-adjoint]], [[thm-hilbert-adjoint-properties]]).
 
-[A3] The kernel of a bounded operator is closed, $H=\ker U\oplus(\ker U)^\perp$ for the closed subspace $\ker U$, and the Hilbert orthogonal projection $P_M$ onto a closed subspace $M$ is the linear self-adjoint idempotent with range $M$ and kernel $M^\perp$; a self-adjoint idempotent with range $M$ equals $P_M$ ([[thm-orthogonal-decomposition-by-a-closed-subspace]], [[def-hilbert-orthogonal-projection]], [[lem-orthogonal-projection-is-linear-self-adjoint-contractive]]).
+[A3] The kernel of a bounded operator is closed: if $Ux\ne0$ and $C$ bounds $U$, the ball about $x$ of radius $\|Ux\|/(2(C+1))$ misses its kernel. Orthogonal complements are closed linear subspaces ([[lem-orthogonal-complement-is-closed]]), so $H=\ker U\oplus(\ker U)^\perp$ ([[thm-orthogonal-decomposition-by-a-closed-subspace]]). The Hilbert orthogonal projection $P_M$ onto a closed subspace $M$ is the linear self-adjoint idempotent with range $M$ and kernel $M^\perp$ ([[def-hilbert-orthogonal-projection]], [[lem-orthogonal-projection-is-linear-self-adjoint-contractive]]). Conversely, a bounded self-adjoint idempotent $Q$ has closed range $\ker(I-Q)$ (the same kernel argument applies), and $x-Qx$ is perpendicular to its range since $\langle x-Qx,Qy\rangle=\langle Q(x-Qx),y\rangle=0$. Thus the defining decomposition shows $Q=P_{\operatorname{ran}Q}$.
 
 [A4] $(\operatorname{ran}U)^\perp=\ker U^*$ and $\overline{\operatorname{ran}U}=(\ker U^*)^\perp$ ([[lem-kernel-range-orthogonality-for-hilbert-adjoints]]).
 
 [A5] Countable Choice is the hypothesis of the adjoint, projection and decomposition suppliers ([[def-countable-choice]]).
 
-[A6] $\|S\|\le C$ means $\|Sx\|\le C\|x\|$ for all $x$, and a Hilbert space is complete for its norm ([[def-operator-norm]], [[def-isometry-coisometry-and-partial-isometry]]).
+[A6] For a bounded operator $S$ and $C\ge0$, $\|S\|\le C$ is equivalent to $\|Sx\|\le C\|x\|$ for all $x$ ([[def-operator-norm]]). The pairing is linear in its first argument and conjugate-linear in its second ([[def-inner-product-space]]). For any such sesquilinear form $B$, direct expansion gives $4B(x,y)=B(x+y,x+y)-B(x-y,x-y)+iB(x+iy,x+iy)-iB(x-iy,x-iy)$; hence a form with zero diagonal is zero.
 
 ## Proof
 
@@ -42,20 +42,18 @@ Assume Countable Choice. For a bounded operator $U$ on a nonzero complex Hilbert
 
 **Given:** A nonzero complex Hilbert space $H$ and a bounded operator $U\in\mathcal B(H)$, with $M:=(\ker U)^\perp$.
 
-1.1 If $U$ is a partial isometry, then for $x=m+n$ with $m\in M$, $n\in\ker U$ one has $Ux=Um$ and $\|Ux\|=\|Um\|=\|m\|=\|P_Mx\|$. [A1, A3, algebra]
+1.1 If $U$ is a partial isometry, then for $x=m+n$ with $m\in M$, $n\in\ker U$ one has $Ux=Um$ and $\|Ux\|=\|Um\|=\|m\|=\|P_Mx\|$. [A1, A3, A5, algebra]
 
 1.2 If $U^*U=P_M$, then $U$ vanishes on $\ker U$ and is isometric on $M$: for $x\in\ker U$ one has $\|Ux\|^2=\langle P_Mx,x\rangle=0$, and for $x\in M$ one has $\|Ux\|^2=\langle P_Mx,x\rangle=\|x\|^2$. [A2, A3, algebra]
 
-1.3 If $U$ is a partial isometry then $\operatorname{ran}U$ is closed and $U=UU^*U$: the restriction of $U$ to $M$ is isometric with closed image, so $\operatorname{ran}U=U[M]$ is closed, and $Ux=UP_Mx=UU^*Ux$ for every $x$. [A1, A2, A3, A6, algebra]
-
-2.1 If $U$ is a partial isometry then $\langle U^*Ux,y\rangle=\langle Ux,Uy\rangle=\langle P_Mx,P_My\rangle=\langle P_Mx,y\rangle$ for all $x,y$, so $U^*U=P_M$. [step 1.1, A2, A3, A5]
+2.1 If $U$ is a partial isometry, put $D=U^*U-P_M$. The adjoint and projection identities and step 1.1 give $\langle Dx,x\rangle=\|Ux\|^2-\|P_Mx\|^2=0$ for every $x$. Applying the expansion in [A6] to $B(x,y)=\langle Dx,y\rangle$ gives $\langle Dx,y\rangle=0$ for all $x,y$; taking $y=Dx$ gives $Dx=0$. Hence $U^*U=P_M$. [step 1.1, A2, A3, A6]
 
 2.2 Conversely, if $U^*U=P_M$ then $U$ is a partial isometry, since it vanishes on $\ker U$ and is isometric on the initial space $M$. [step 1.2]
 
-3.1 If $U$ is a partial isometry then $UU^*$ is a self-adjoint idempotent with range $\operatorname{ran}U$: $(UU^*)^2=U(U^*U)U^*=UP_MU^*=UU^*$ by step 2.1 and step 1.3, $\operatorname{ran}(UU^*)\subseteq\operatorname{ran}U$, and $U=UU^*U$ puts $\operatorname{ran}U\subseteq\operatorname{ran}(UU^*)$; hence $UU^*=P_{\operatorname{ran}U}$. [step 2.1, step 1.3, A3]
+3.1 If $U$ is a partial isometry, then $U=UP_M=UU^*U$: the first identity follows since $x-P_Mx\in\ker U$, and the second uses step 2.1. Let $Q=UU^*$. It is bounded and self-adjoint by [A2], and $Q^2=(UU^*U)U^*=UU^*=Q$. Its range is contained in $\operatorname{ran}U$, while $U=QU$ gives the reverse inclusion. By [A3], $\operatorname{ran}U=\operatorname{ran}Q$ is closed and $UU^*=P_{\operatorname{ran}U}$. [step 1.1, step 2.1, A2, A3]
 
-3.2 If $U$ is a partial isometry then $U^*$ is a partial isometry: $\ker U^*=(\operatorname{ran}U)^\perp$ and $(\ker U^*)^\perp=\operatorname{ran}U$ by closedness of the range, $U^*$ vanishes on its kernel, and for $y=Ux\in\operatorname{ran}U$ one has $\|U^*y\|=\|U^*Ux\|=\|P_Mx\|=\|Ux\|=\|y\|$. [step 2.1, step 1.3, A4, algebra]
+4.1 If $U$ is a partial isometry, then $U^*$ is a partial isometry: [A4] and step 3.1 give $(\ker U^*)^\perp=\operatorname{ran}U$. On this space, write $y=Ux$; then $\|U^*y\|=\|U^*Ux\|=\|P_Mx\|=\|Ux\|=\|y\|$. On its kernel $U^*$ vanishes by definition. [step 1.1, step 2.1, step 3.1, A1, A4]
 
-4.1 Conversely, if $U^*$ is a partial isometry, then step 3.2 applied to $U^*$ shows that $U^{**}=U$ is a partial isometry. [step 3.2, A2]
+5.1 Conversely, if $U^*$ is a partial isometry, apply step 4.1 to the bounded operator $U^*$; it shows $U^{**}=U$ is a partial isometry. [step 4.1, A2]
 
-5.1 Therefore $U$ is a partial isometry exactly when $U^*U=P_{(\ker U)^\perp}$, and exactly when $U^*$ is a partial isometry; whenever these conditions hold, $\operatorname{ran}U$ is closed and $UU^*=P_{\operatorname{ran}U}$. [step 2.1, step 2.2, step 3.1, step 3.2, step 4.1] ∎
+6.1 Therefore $U$ is a partial isometry exactly when $U^*U=P_{(\ker U)^\perp}$, and exactly when $U^*$ is a partial isometry; whenever these conditions hold, $\operatorname{ran}U$ is closed and $UU^*=P_{\operatorname{ran}U}$. [step 2.1, step 2.2, step 3.1, step 4.1, step 5.1] ∎

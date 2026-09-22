@@ -1,0 +1,3 @@
+# Position 6 context reseal
+
+Re-read the definition against the corrected sweetness presentation paragraph. Its exact item hash still equals the latest receipt. Real quantifier coding and the DC-based completed coin measure are independent of forcing presentations and their E_n relations; no transfer through Boolean completion is used. The displayed completed domain and DC-to-countable-choice supplier remain sufficient. No repair required. Source https://tsukuba.repo.nii.ac.jp/record/37187/files/Hiromi%20ISHII.pdf, Definition 1.17 and Facts 1.17–1.18, and https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf, Exercise 1.4.26, were verified in the original FA evidence. Next: reseal position 15, then record 16.

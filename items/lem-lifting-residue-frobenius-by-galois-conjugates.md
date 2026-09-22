@@ -4,7 +4,7 @@ title: "Lifting residue frobenius by galois conjugates"
 kind: lemma
 status: published
 origin: pipeline
-deps: [def-inertia-group-of-a-prime, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-multiplicative-group-of-a-finite-field-is-cyclic, thm-decomposition-group-and-completion]
+deps: [def-inertia-group-of-a-prime, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-multiplicative-group-of-a-finite-field-is-cyclic]
 provenance:
   statement: ai-altered
   proof: ai-altered

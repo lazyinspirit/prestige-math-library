@@ -4,7 +4,7 @@ kind: theorem
 title: "The arbitrary compact product theorem is equivalent to AC"
 status: draft
 origin: pipeline
-deps: [thm-compact-t1-product-theorem-iff-ac, def-axiom-of-choice, def-product-topology, def-compact-space, thm-tychonoff, def-t0-and-t1-spaces]
+deps: [thm-compact-t1-product-theorem-iff-ac, thm-bpi-equivalent-to-compact-hausdorff-tychonoff, def-axiom-of-choice, def-product-topology, def-compact-space, thm-tychonoff, def-t0-and-t1-spaces]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -33,6 +33,8 @@ is a one-point space and is included.
 
 [F2] Over ZF, AC is equivalent to compactness of every product of compact $T_1$ spaces ([[thm-compact-t1-product-theorem-iff-ac]], [[def-t0-and-t1-spaces]]).
 
+[F3] Over ZF, BPI is equivalent to compactness of every product of compact Hausdorff spaces ([[thm-bpi-equivalent-to-compact-hausdorff-tychonoff]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -41,8 +43,8 @@ is a one-point space and is included.
 
 2.1 Conversely, if every product of compact spaces is compact then in particular every product of compact $T_1$ spaces is compact, since compact $T_1$ spaces are compact spaces; by [F2] this gives AC. [step 1.1, F2]
 
-3.1 The two directions give the displayed equivalence; in particular the compact-Hausdorff case is a different statement, whose strength is BPI and which is not identified with the arbitrary compact case here. [step 1.1, step 2.1, F2] ∎
+3.1 The two directions give the displayed equivalence; in particular the compact-Hausdorff case is a different statement, whose strength is BPI by [F3] and which is not identified with the arbitrary compact case here. [step 1.1, step 2.1, F2, F3] ∎
 
 ## Remarks
 
-- **Why the two strengths differ.** Products of compact $T_1$ spaces and products of compact Hausdorff spaces are not the same assertion: the first is equivalent to AC and the second to BPI, as recorded by the two equivalences of this page. The empty product is compact in both cases and therefore separates nothing.
+- **Why the two strengths differ.** Products of compact $T_1$ spaces and products of compact Hausdorff spaces are not the same assertion: the first is equivalent to AC by [F2] and the second to BPI by [F3]. The empty product is compact in both cases and therefore separates nothing.
