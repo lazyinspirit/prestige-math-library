@@ -265,6 +265,9 @@ test('handoff supporting evidence is hash-bound and later tampering blocks colle
     const pack=initial(f.root,f.ids);reports(f.root,pack);
     const supplement=join(f.root,'research','owner-review-supplement.json');json(supplement,{by:'owner-authorized reviewer',reason});
     const path=workerReport(f.root,run,pack.phase,1,pack.units[0]),report=JSON.parse(readFileSync(path,'utf8'));
+    report.supporting_evidence={repaired_claim:'Narrative belongs in repair_notes, not in the hash-bound evidence map.'};json(path,report);
+    assert.throws(()=>collect(f.root,run,'impact-initial',1),/invalid supporting evidence path or hash/);
+    report.repair_notes=report.supporting_evidence;
     report.supporting_evidence={[supplement]:digest(readFileSync(supplement,'utf8'))};json(path,report);
     const receipt=collect(f.root,run,pack.phase,1,{deferImpactClosure:true});
     assert.equal(receipt.evidence[supplement],report.supporting_evidence[supplement]);

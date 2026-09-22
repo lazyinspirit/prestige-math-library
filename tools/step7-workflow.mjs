@@ -182,6 +182,7 @@ function writeTasks(root,pack,mode) {
       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
       `Write only your assigned item files, genuinely required new prerequisite items, their owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
+      'Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.',
       'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
       'Read all cited suppliers and relevant consumers. Repair confirmed fatal defects fully. Identify all downstream consumers, including published items.',
       mode==='adjudicate' ? 'Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.' :
