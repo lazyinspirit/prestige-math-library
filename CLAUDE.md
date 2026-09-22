@@ -143,6 +143,10 @@ This threshold permits the final gate, never unresolved defects or uncertainty.
 7.8 runs the complete gate battery; 7.9 owner agents repair every failure and
 the orchestrator recertifies changed items; 7.10 reruns the complete battery.
 Repeat 7.9–7.10 until green, then freeze the result and proceed to Step 8.
+Gate repair ownership comes from actual failing subjects, never passing
+inventories or merely cited suppliers. Preserve every diagnostic, including
+global/tool failures, as an explicit assigned obligation. Propagate downstream
+from actual repairs and discoveries, not speculative gate candidates.
 Fatal classification controls only the convergence threshold; all actual defects
 must be repaired. Newly discovered downstream work continues in the repair phase
 with fresh disjoint assignments until every relevant repair is complete, before

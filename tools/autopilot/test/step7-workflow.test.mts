@@ -6,11 +6,32 @@ import {tmpdir} from 'node:os';
 import { initialize,prepareAdjudication,prepareImpact,validateReports,collect,certify,judge,checkWorkflow,verifyCertification,workflowDir,workerReport,workerLabel,digest,advanceImpact,impactPasses,reviewContextHashes,reviewMatchesCurrent } from '../../step7-workflow.mjs';
 import {itemHashGuard,itemHashJudge} from '../../item-hash.mjs';
 import {MODELS} from '../../models.mjs';
+import {recoverStep7Impact} from '../../step7-impact-recovery.mjs';
 import {writeAuditorCreatedBaseline,certifyAuditorCreatedItems} from '../../auditor-created-items.mjs';
 
 const run='fixture', reason='The proof and its supplier hypotheses were checked for logical validity.', h='a'.repeat(64);
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
+
+test('recovered gate base excludes obsolete assignments through closure and certification',()=>{
+  const f=fixture();try{
+    initialize(f.root,run);
+    const pack=prepareImpact(f.root,run,'gate',1,{failures:{id:'precheck',output:'FAIL thm-item-0: repair required'}});
+    // Simulate the historical overbroad planner before recovery.
+    pack.assignments['2']=['thm-item-20'];pack.seeds=['thm-item-0'];
+    json(join(workflowDir(f.root,run),'gate-1.json'),pack);
+    const stateDir=join(f.root,'.autopilot',run);mkdirSync(stateDir,{recursive:true});
+    json(join(stateDir,'state.json'),{run,paused:true,stage:'7.9-repair',stages:{},dispatches:{}});
+    const recovered=recoverStep7Impact({repo:f.root,run,stateDir,reason:'Fix obsolete speculative gate assignments and preserve evidence.'});
+    assert.deepEqual(Object.values(recovered.pack.assignments).flat(),['thm-item-0']);
+    reports(f.root,recovered.pack);
+    assert.equal(advanceImpact(f.root,run,'gate',1).complete,true);
+    const cert=certify(f.root,run,'gate',1,{contextHasher:contexts});
+    assert.deepEqual(cert.items.map((row:any)=>row.id),['thm-item-0']);
+    assert.equal(advanceImpact(f.root,run,'gate',1).complete,true);
+    assert.deepEqual(certify(f.root,run,'gate',1,{contextHasher:contexts}),cert);
+  }finally{f.cleanup();}
+});
 
 test('legacy context reuse requires exact historical binding and unchanged typed context',()=>{
   const items=[
@@ -333,6 +354,58 @@ test('metadata-only gate failures require explicit assigned resolutions even wit
     assert.equal(validateReports(pack,list,pack.before).errors.length,0);
     list[0].gate_resolutions=[];
     assert.match(validateReports(pack,list,pack.before).errors.join('\n'),/missing gate resolution/);
+  }finally{f.cleanup();}
+});
+
+test('gate planning routes failing subjects and nested diagnostics without speculative downstream expansion',()=>{
+  const f=fixture();try{
+    initialize(f.root,run);
+    const failures={id:'fwdcheck',ok:false,output:'1 ERROR(s):\n  [forward-undeclared] items/thm-item-0.md: wikilink [[thm-item-1]] points forward',
+      advisory:[{id:'finite-smoke',ok:false,output:'PASS [thm-item-2] sound\nFAIL [thm-item-3] failed check'},
+        {id:'unknown-metadata',ok:false,output:'Global failure mentions thm-item-4, not an item finding'},
+        {id:'precheck',ok:true,output:'PASS items/thm-item-5.md'}]};
+    const pack=prepareImpact(f.root,run,'gate',1,{failures});
+    assert.deepEqual(Object.values(pack.assignments).flat().sort(),['thm-item-0','thm-item-3']);
+    assert.deepEqual(pack.seeds,[]);assert.deepEqual(pack.impacts,[]);
+    const indices=new Set(Object.values(pack.gateAssignments).flat().map((row:any)=>row.index));
+    assert.equal(indices.size,3);
+    for(const unit of pack.units)for(const row of pack.gateAssignments[unit])
+      assert.ok(row.subjects.every((id:string)=>pack.assignments[unit].includes(id)));
+    reports(f.root,pack);
+    assert.equal(advanceImpact(f.root,run,'gate',1).complete,true);
+  }finally{f.cleanup();}
+});
+
+test('gate prompts stay bounded while full diagnostic evidence remains on disk',()=>{
+  const f=fixture();try{
+    initialize(f.root,run);
+    const output='UNKNOWN GLOBAL FAILURE '+ 'x'.repeat(1_200_000);
+    const pack=prepareImpact(f.root,run,'gate',1,{failures:{id:'unknown',ok:false,output}});
+    const path=workerReport(f.root,run,'gate',1,'1').replace(/\.json$/,'.gate-diagnostics.json');
+    assert.equal(JSON.parse(readFileSync(path,'utf8'))[0].failure.output,output);
+    for(const unit of pack.units){
+      const task=readFileSync(workerReport(f.root,run,'gate',1,unit).replace(/\.json$/,'.task.md'),'utf8');
+      assert.ok(task.length<64000);assert.equal(task.includes(output),false);
+      assert.match(task,/gate-diagnostics\.json/);
+    }
+    reports(f.root,pack);
+    json(path,[]);
+    assert.throws(()=>collect(f.root,run,'gate',1,{deferImpactClosure:true}),/diagnostic input changed/);
+  }finally{f.cleanup();}
+});
+
+test('gate item repairs still trigger downstream review before certification',()=>{
+  const f=fixture();try{
+    initialize(f.root,run);
+    const pack=prepareImpact(f.root,run,'gate',1,{failures:{id:'finite-smoke',ok:false,output:'FAIL [thm-item-0] genuine finding'}});
+    item(f.root,'thm-item-0','Necessary repair after gate failure.');reports(f.root,pack);
+    const next=advanceImpact(f.root,run,'gate',1);
+    assert.equal(next.complete,false);
+    assert.deepEqual(Object.values(next.pack.assignments).flat(),['thm-published-consumer']);
+    assert.throws(()=>certify(f.root,run,'gate',1,{contextHasher:contexts}),/continuation/);
+    reports(f.root,next.pack);
+    assert.equal(advanceImpact(f.root,run,'gate',1).complete,true);
+    certify(f.root,run,'gate',1,{contextHasher:contexts});
   }finally{f.cleanup();}
 });
 

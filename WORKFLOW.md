@@ -432,7 +432,14 @@ protocols; they are not the new workflow's convergence mechanism.
 Preflight retains dependency, contract, boundary, citation and ledger checks.
 Repair prompts contain current unresolved findings and assigned impact targets;
 upheld records and mere supplier mentions are not repair targets.
-Full reports stay on disk.
+Step-7 gate routing flattens all failed primary/advisory checks and extracts
+subjects using each detector's failure format. PASS rows, inventories and cited
+suppliers do not confer repair ownership. Three disjoint lanes receive the
+diagnostics relevant to their subjects; global or unrecognized components remain
+explicit obligations assigned to one lane. Full diagnostics and assignments stay
+in frozen files, read in bounded chunks rather than embedded in launch prompts.
+Gate candidates are not propagation seeds: actual subsequent repairs and explicit
+consumer discoveries trigger downstream closure before certification.
 Forward-reference gates suppress inventories and drain their output before exit.
 Inherited published items need not acquire a new-batch proof contract merely
 to enter certification; their licence, precheck and final published-repair checks
@@ -493,14 +500,17 @@ Migration authorizes no new frontier, publication or push.
 
 ### Run controls
 
-To recover an interrupted, uncollected owner continuation after fixing impact
-tracking, pause and stop the controller, then run
+To recover an interrupted, uncollected owner continuation or initial gate repair
+wave after fixing routing, pause and stop the controller, then run
 `node tools/step7-impact-recovery.mjs --run RUN --state-dir .autopilot/RUN
 --reason "Explanation of the corrected routing defect"`.
 The guarded operation refuses active work, completed evidence or item changes
 since the pending assignment. It preserves old tasks and failed dispatches,
 records their supersession, and recomputes a fresh monotonically numbered pass
-from completed evidence. It never overwrites successful reviews, certifies
+from completed evidence. Initial gate recovery instead reparses the preserved
+failures into a fresh base assignment, retaining prior certification as immutable
+historical evidence and excluding superseded speculative seeds. It never
+overwrites successful reviews, certifies
 items, or resumes automatically. Resume/start the controller only after checking
 the corrected assignments. Repeating the same recovery reason is idempotent.
 

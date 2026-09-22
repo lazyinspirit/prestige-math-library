@@ -10,6 +10,7 @@ import { freezeFrontier, validateFrontier, readLibraryItems, discoverDownstream,
 import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step7-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
+import { gateDiagnostics } from './step7-gate-diagnostics.mjs';
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -171,6 +172,8 @@ function writeTasks(root,pack,mode) {
   for(const unit of pack.units) {
     const report=workerReport(root,pack.run,pack.phase,pack.round,unit);
     const task=report.replace(/\.json$/,'.task.md');
+    const gateInput=task.replace(/\.task\.md$/,'.gate-diagnostics.json');
+    if(pack.gateRoutingVersion===1)frozen(gateInput,(pack.gateAssignments??{})[unit]??[]);
     if(existsSync(task)) continue;
     const assigned=pack.assignments[unit];
     const body=[`# Step 7 ${mode}: ${pack.phase}, round ${pack.round}, unit ${unit}`,
@@ -189,9 +192,14 @@ function writeTasks(root,pack,mode) {
       pack.ledger_updates?.length ? `Adjudicator ledger proposals requiring reconciliation:\n${JSON.stringify(pack.ledger_updates,null,2)}` : '',
       'For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.',
       'Empty assignments return empty arrays. Downstream is an array of item IDs; include consumers reached through changed intermediate items.',
-      `Assigned input:\n${JSON.stringify(assigned,null,2)}`,
-      pack.failures ? `Your gate diagnostics:\n${JSON.stringify((pack.gateAssignments??{})[unit]??[],null,2)}\nAll failures:\n${JSON.stringify(pack.failures,null,2)}` : '',
+      pack.gateRoutingVersion===1
+        ? `Assigned input: read assignments["${unit}"] from the frozen pack above (${assigned.length} item(s)). Do not dump the whole pack or the entire library into context. Read your assignment array and the needed item files in bounded chunks.`
+        : `Assigned input:\n${JSON.stringify(assigned,null,2)}`,
+      pack.gateRoutingVersion===1
+        ? `Gate diagnostics: read ${gateInput}. This file contains your diagnostic indices, scoped subject IDs and complete raw failure outputs. Examine every assigned diagnostic in bounded chunks, filtering item diagnostics to its subjects list; passing inventories and cited supplier names are not repair authority. Each item has exactly one owner. For a shared diagnostic, resolve only your listed subjects, not another lane's items. Global/owner-held diagnostic components belong only to the designated owner; reconcile shared metadata under the lock and report operator-only work honestly. Record gate_resolutions for every assigned index, stating the actual scope resolved. A resolution does not certify or waive the gate. Full diagnostics remain preserved on disk; never ignore a failure because its output is large. Further downstream work is scheduled after actual repairs, not from merely named suppliers.`
+        : pack.failures ? `Your gate diagnostics:\n${JSON.stringify((pack.gateAssignments??{})[unit]??[],null,2)}\nAll failures:\n${JSON.stringify(pack.failures,null,2)}` : '',
     ].join('\n\n');
+    requireValue(pack.gateRoutingVersion!==1||body.length<64000,'gate launch task exceeds bounded prompt budget');
     writeFileSync(task,body+'\n',{flag:'wx'});
   }
 }
@@ -293,6 +301,11 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const creationAuthors=new Map();
   for(const unit of pack.units) {
     const p=workerReport(root,run,phase,round,unit); evidence[p]=digest(readFileSync(p,'utf8'));
+    if(pack.gateRoutingVersion===1){
+      const diagnosticPath=p.replace(/\.json$/,'.gate-diagnostics.json');
+      requireValue(existsSync(diagnosticPath)&&JSON.stringify(read(diagnosticPath))===JSON.stringify(pack.gateAssignments[unit]),`gate diagnostic input changed: ${unit}`);
+      evidence[diagnosticPath]=digest(readFileSync(diagnosticPath,'utf8'));
+    }
     // Owner-authorized handoff corrections retain the original report and
     // any separately attributed review supplements as bound audit evidence.
     const supporting=reports.find(value=>String(value.unit)===unit)?.supporting_evidence??{};
@@ -342,7 +355,7 @@ export function advanceImpact(root,run,phase,round) {
   collect(root,run,active.phase,round,{deferImpactClosure:true});
   const completed=progress.passes.map(pass=>read(join(workflowDir(root,run),`${pass}-${round}-collected.json`)));
   for(const receipt of completed)verifyEvidence(receipt.evidence);
-  const base=readPack(root,run,phase,round),current=hashes(root),items=readLibraryItems(root);
+  const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
   const changed=diff(base.before,current),seeds=[...new Set([...(base.seeds??[]),...changed])];
   const impacts=discoverDownstream({items,repairedIds:seeds});
   const required=new Set([...Object.values(base.assignments).flat(),...impacts.map(row=>row.id),...changed]);
@@ -390,24 +403,49 @@ function orderImpacts(items,targets) {
 export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid impact phase');
   const path=packPath(root,run,phase,round); if(existsSync(path))return read(path);
+  if(phase==='gate')return prepareGateRepairPack(root,run,phase,round,failures);
   const source=phase==='impact-initial'?'initial':'repeat';
-  const result=phase==='gate' ? null : collect(root,run,source,round);
-  const items=readLibraryItems(root), allIds=new Set(items.map(r=>r.id));
-  const named=failures ? [...new Set(JSON.stringify(failures).match(/\b(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*\b/g)??[])].filter(id=>allIds.has(id)) : [];
-  const seeds=result?.changed??named;
+  const result=collect(root,run,source,round);
+  const items=readLibraryItems(root);
+  const seeds=result.changed;
   const impacts=discoverDownstream({items,repairedIds:seeds});
-  const targets=[...new Set([...impacts.map(r=>r.id),...(result?.downstream??[]),...named])].sort();
+  const targets=[...new Set([...impacts.map(r=>r.id),...(result.downstream??[])])].sort();
   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
   // Closure requeues reviews invalidated by a concurrent supplier repair.
   const assignments={'1':[],'2':[],'3':[]};
-  // Conservative body-link impact graphs can contain orientation cycles. Do
-  // not suppress their repair tasks; the dependency gate still judges cycles.
+  // Preserve explicit dependency cycles for the dependency gate to judge.
   const {order,cycles}=orderImpacts(items,targets);
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
-  const diagnostics=failures===null?[]:(Array.isArray(failures)?failures:[failures]);
-  const gateAssignments=Object.fromEntries(['1','2','3'].map(unit=>[unit,diagnostics.map((failure,index)=>({index,failure})).filter(row=>String(row.index%3+1)===unit)]));
   const identity=libraryIdentity(root);
-  const pack={version:2,run,phase,round,units:['1','2','3'],assignments,before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures,gateAssignments,cycles:[...new Set(cycles)],ledger_updates:result?.ledger_updates??[]};
+  const pack={version:2,run,phase,round,units:['1','2','3'],assignments,before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
+  frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+}
+
+/** Gate failures identify repair candidates, not already-repaired suppliers.
+ * Only real subsequent changes (or explicit worker discoveries) propagate. */
+export function prepareGateRepairPack(root,run,phase,round,failures) {
+  requireValue(/^gate(?:-pass-[0-9]+)?$/.test(phase),'invalid gate repair phase');
+  const path=packPath(root,run,phase,round);
+  if(existsSync(path)){const saved=read(path);writeTasks(root,saved,'repair');return saved;}
+  requireValue(failures!==null,'gate repair requires failed diagnostics');
+  const identity=libraryIdentity(root),diagnostics=gateDiagnostics(failures,identity.ids);
+  requireValue(diagnostics.length>0,'gate repair requires at least one failed diagnostic');
+  const targets=[...new Set(diagnostics.flatMap(row=>row.subjects))].sort();
+  const {order,cycles}=orderImpacts(identity.items,targets),assignments={'1':[],'2':[],'3':[]};
+  order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+  const owner=new Map(Object.entries(assignments).flatMap(([unit,ids])=>ids.map(id=>[id,unit])));
+  const gateAssignments={'1':[],'2':[],'3':[]};
+  let globals=0;
+  for(const diagnostic of diagnostics){
+    const scoped=new Map();
+    for(const id of diagnostic.subjects){const unit=owner.get(id);if(!scoped.has(unit))scoped.set(unit,[]);scoped.get(unit).push(id);}
+    const globalOwner=diagnostic.ownerHeld||!diagnostic.subjects.length?String(globals++%3+1):null;
+    if(globalOwner&&!scoped.has(globalOwner))scoped.set(globalOwner,[]);
+    for(const [unit,subjects] of scoped)gateAssignments[unit].push({...diagnostic,subjects,ownerHeld:unit===globalOwner});
+  }
+  const pack={version:2,gateRoutingVersion:1,run,phase,basePhase:'gate',round,units:['1','2','3'],assignments,
+    before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+    impacts:[],seeds:[],failures,gateAssignments,cycles,ledger_updates:[]};
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
@@ -445,7 +483,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const current=hashes(root), rawBefore=rawHashes(root), baseline=read(join(dir,'baseline.json'));
   const changed=diff(baseline,current);
   const priorItems=new Map((prior?.items??[]).map(row=>[row.id,row]));
-  const impactPack=readPack(root,run,phase,round);
+  const progress=read(impactProgressPath(root,run,phase,round));
+  const impactPack=readPack(root,run,progress.repairBasePhase??phase,round);
   // Every writer's final report must still describe its actual final carrier.
   // This also rejects post-collection edits before certification can be minted.
   for(const id of diff(result.post,current))requireValue(false,`writer changed content after collection: ${id}`);

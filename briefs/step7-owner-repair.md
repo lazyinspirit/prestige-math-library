@@ -81,6 +81,11 @@ original-frontier denominator or authorize self-issued verdicts or stamps.
 For 7.9, resolve every assigned full-battery failure, not only the first printed
 error. Distinguish mathematical defects from detector/runtime defects and name
 any operator work required. A check that cannot run remains unresolved.
+Read your frozen assignment and lane diagnostic files in bounded chunks. For a
+diagnostic shared across lanes, resolve only your scoped subjects; global
+components belong to its designated owner. PASS rows, inventories and cited
+suppliers are not additional repair assignments. Preserve and report every
+assigned diagnostic obligation, even when it has no item subjects.
 The engine reruns the complete battery after collection and recertification;
 your focused checks do not replace it.
 

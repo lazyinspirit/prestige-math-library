@@ -64,6 +64,9 @@ genuine unmet prerequisites only. Additions require unique IDs, registry/index
 and metadata registration, downstream repair closure, central certification and
 all applicable gates; they never change the frozen threshold denominator.
 The complete gate then repeats with owner repairs and recertification until green.
+Gate repair assigns actual failing subjects, not passing inventories or cited
+suppliers. Full diagnostics remain in frozen files; only actual repairs and
+reported consumer effects propagate into further downstream review.
 Across Steps 1–9 outside this authorized Step-7 loop, every failed gate is
 immediately escalated to the owner. A
 gate failure never launches another automatic repair, review, author or judge

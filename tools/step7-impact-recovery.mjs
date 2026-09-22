@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// Recover a never-completed continuation after an engine planning defect.
+// Recover an uncollected continuation or initial gate wave after a planning defect.
 // Old assignments and failed dispatch artifacts remain immutable audit evidence.
 import { existsSync, readFileSync, readdirSync, writeFileSync, renameSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { advanceImpact, digest, impactProgressPath, packPath, workerLabel, workerReport, workflowDir } from './step7-workflow.mjs';
+import { advanceImpact, prepareGateRepairPack, digest, impactProgressPath, packPath, workerLabel, workerReport, workflowDir } from './step7-workflow.mjs';
 import { readLibraryItems } from './step7-rounds.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 
@@ -37,6 +37,25 @@ function assertInactive(state, stateDir) {
   requireValue(!Object.values(state.dispatches ?? {}).some(row => row.startedAt && !row.endedAt), 'a dispatch is active or unresolved');
 }
 
+function assertUnchangedItems(repo, pack) {
+  const current = Object.fromEntries(readLibraryItems(repo).map(row => [row.id,
+    itemHashGuard(readFileSync(join(repo, 'items', `${row.id}.md`), 'utf8'))]));
+  requireValue(Object.keys(current).length === Object.keys(pack.before ?? {}).length
+    && Object.entries(current).every(([id, hash]) => pack.before[id] === hash),
+  'items changed since the pending pack; preserve and reconcile partial repairs before recovery');
+}
+
+function replaceBaseGate(repo, run, round, progressPath, progress, entry) {
+  const original = read(entry.pack);
+  assertUnchangedItems(repo, original);
+  const pack = prepareGateRepairPack(repo, run, entry.replacementPhase, round, original.failures);
+  progress.passes = [entry.replacementPhase];
+  progress.activePhase = entry.replacementPhase;
+  progress.repairBasePhase = entry.replacementPhase;
+  atomic(progressPath, progress);
+  return { complete: false, phase: 'gate', round, passes: progress.passes, pack };
+}
+
 export function recoverStep7Impact({ repo, run, stateDir, reason }) {
   requireValue(typeof run === 'string' && /^[A-Za-z0-9._-]+$/.test(run), 'invalid run');
   requireValue(typeof reason === 'string' && reason.trim().length >= 20, 'reason must explain the planning defect (at least 20 characters)');
@@ -49,7 +68,16 @@ export function recoverStep7Impact({ repo, run, stateDir, reason }) {
   requireValue(phase, 'current stage is not an owner impact repair stage');
   requireValue(!state.stages?.[state.stage]?.doneAt, 'impact stage already completed');
   const dir = workflowDir(repo, run), progressPath = impactProgressPath(repo, run, phase, round);
-  const progress = read(progressPath);
+  const progressExists = existsSync(progressPath);
+  if (!progressExists) {
+    requireValue(phase === 'gate', 'missing continuation progress cannot be inferred');
+    requireValue(!readdirSync(dir).some(name => new RegExp(`^gate-pass-\\d+-${round}(?:[.-]|$)`).test(name)),
+      'missing gate progress has continuation evidence; reconcile it before recovery');
+  }
+  // The engine has no durable progress file until the initial owners drain.
+  // Infer only its exact initial default, then apply every normal safety guard.
+  const progress = progressExists ? read(progressPath)
+    : { version: 2, run, phase, round, passes: [phase], activePhase: phase, complete: false };
   requireValue(progress.run === run && progress.phase === phase && progress.round === round, 'wrong progress identity');
 
   // A crash after recording the supersession must never cause the replacement
@@ -59,20 +87,24 @@ export function recoverStep7Impact({ repo, run, stateDir, reason }) {
     verifyEvidence(recorded.evidence);
     const resultPath = join(dir, `${recorded.phase}-${round}-recovery-result.json`);
     if (existsSync(resultPath)) return read(resultPath);
-    const result = progress.activePhase === recorded.previousPhase && !progress.complete
+    const result = recorded.replacementPhase && progress.activePhase === recorded.phase
+      ? replaceBaseGate(repo, run, round, progressPath, progress, recorded)
+      : progress.activePhase === recorded.previousPhase && !progress.complete
       ? advanceImpact(repo, run, phase, round)
       : { complete: progress.complete, phase, round, passes: progress.passes };
     const receipt = { run, phase, round, superseded: recorded.phase, ...result };
     frozen(resultPath, receipt); return receipt;
   }
   requireValue(progress.complete === false, 'impact wave already closed');
-  requireValue(Array.isArray(progress.passes) && progress.passes.length > 1
+  const baseGate = phase === 'gate' && progress.activePhase === 'gate'
+    && JSON.stringify(progress.passes) === JSON.stringify(['gate']);
+  requireValue(baseGate || (Array.isArray(progress.passes) && progress.passes.length > 1
     && progress.activePhase === progress.passes.at(-1)
-    && progress.activePhase.startsWith(`${phase}-pass-`), 'only the active continuation can be superseded');
+    && progress.activePhase.startsWith(`${phase}-pass-`)), 'only the active continuation or initial gate repair can be superseded');
   const activePhase = progress.activePhase, activePath = packPath(repo, run, activePhase, round);
   const pack = read(activePath);
   requireValue(pack.run === run && pack.phase === activePhase && pack.round === round
-    && JSON.stringify(pack.units) === JSON.stringify(['1', '2', '3']), 'invalid continuation pack');
+    && JSON.stringify(pack.units) === JSON.stringify(['1', '2', '3']), 'invalid owner repair pack');
   for (const path of [join(dir, `${activePhase}-${round}-collected.json`), join(dir, `${phase}-${round}-closed.json`),
     join(dir, `certification-${phase}-${round}.json`), join(dir, `certification-${activePhase}-${round}.json`)])
     requireValue(!existsSync(path), `completed collection or certification exists: ${path}`);
@@ -98,11 +130,11 @@ export function recoverStep7Impact({ repo, run, stateDir, reason }) {
     const task = workerReport(repo, run, activePhase, round, unit).replace(/\.json$/, '.task.md');
     if (existsSync(task)) artifacts.push(task);
   }
-  const current = Object.fromEntries(readLibraryItems(repo).map(row => [row.id,
-    itemHashGuard(readFileSync(join(repo, 'items', `${row.id}.md`), 'utf8'))]));
-  requireValue(Object.keys(current).length === Object.keys(pack.before ?? {}).length
-    && Object.entries(current).every(([id, hash]) => pack.before[id] === hash),
-  'items changed since the pending pack; preserve and reconcile partial repairs before recovery');
+  assertUnchangedItems(repo, pack);
+  if (baseGate) {
+    requireValue(pack.failures != null, 'initial gate repair has no failure diagnostics');
+    requireValue(!existsSync(packPath(repo, run, 'gate-pass-2', round)), 'replacement gate pack already exists without recovery evidence');
+  }
   for (const pass of progress.passes.slice(0, -1)) {
     const path = join(dir, `${pass}-${round}-collected.json`);
     verifyEvidence(read(path).evidence); artifacts.push(path);
@@ -112,17 +144,27 @@ export function recoverStep7Impact({ repo, run, stateDir, reason }) {
     const path = join(dir, `${source}-${round}-collected.json`);
     verifyEvidence(read(path).evidence); artifacts.push(path);
   }
+  if (baseGate && existsSync(latest)) {
+    // certification.json is a mutable alias. A subsequent legitimate gate
+    // certificate must not invalidate this historical supersession evidence.
+    const previousCertification = join(dir, `${activePhase}-${round}-certification-before-supersession.json`);
+    frozen(previousCertification, read(latest)); artifacts.push(previousCertification);
+  }
   const snapshot = join(dir, `${activePhase}-${round}-progress-before-supersession.json`);
   frozen(snapshot, progress); artifacts.push(snapshot);
   const evidence = Object.fromEntries(artifacts.map(path => [path, digest(readFileSync(path, 'utf8'))]));
   const entry = { phase: activePhase, reason, previousPhase: progress.passes.at(-2),
+    ...(baseGate ? { replacementPhase: 'gate-pass-2' } : {}),
     pack: activePath, pack_sha256: evidence[activePath], evidence };
   frozen(join(dir, `${activePhase}-${round}-supersession.json`), { version: 1, run, phase, round, ...entry });
   progress.superseded = [...(progress.superseded ?? []), entry];
-  progress.passes = progress.passes.slice(0, -1);
-  progress.activePhase = entry.previousPhase;
+  if (!baseGate) {
+    progress.passes = progress.passes.slice(0, -1);
+    progress.activePhase = entry.previousPhase;
+  }
   atomic(progressPath, progress);
-  const result = advanceImpact(repo, run, phase, round);
+  const result = baseGate ? replaceBaseGate(repo, run, round, progressPath, progress, entry)
+    : advanceImpact(repo, run, phase, round);
   const receipt = { run, phase, round, superseded: activePhase, ...result };
   frozen(join(dir, `${activePhase}-${round}-recovery-result.json`), receipt);
   return receipt;
