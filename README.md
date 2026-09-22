@@ -100,6 +100,8 @@ See [WORKFLOW.md](WORKFLOW.md) for source recovery, reconciliation and controls.
 
 Verify active runs against their state directory and Git history.
 Historical `research/*RESUME.md` files are not current status.
+Past-run counters, coverage limitations and recoverable cleanup records live in
+[research/run-telemetry/README.md](research/run-telemetry/README.md).
 Owner-authorized historical continuations use the verified checkpoint migration
 in WORKFLOW.md: fresh state, current author/review gates and fresh Step 5b closure.
 Change generators or templates instead of hand-editing generated run artifacts.

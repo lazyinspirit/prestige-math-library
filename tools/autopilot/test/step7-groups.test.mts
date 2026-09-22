@@ -4,7 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { appendFileSync, writeFileSync, readFileSync, rmSync, existsSync, mkdtempSync, mkdirSync } from 'node:fs';
+import { appendFileSync, writeFileSync, readFileSync, readdirSync, rmSync, existsSync, mkdtempSync, mkdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -277,6 +277,11 @@ function withFixtureRun(files: Record<string, unknown>, body: (run: string) => v
     body(run);
   } finally {
     for (const p of written) rmSync(p, { force: true });
+    for (const name of readdirSync(join(REPO, 'research'))) {
+      if (name.startsWith(`${run}-step7-bundle-`) && name.endsWith('.md')) {
+        rmSync(join(REPO, 'research', name), { force: true });
+      }
+    }
   }
 }
 
