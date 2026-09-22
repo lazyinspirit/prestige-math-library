@@ -4,6 +4,7 @@ Snapshot: 2026-09-22, baseline `b40da0d52`. Read
 [run counters](2026-09-22/runs.tsv) first; [summary](2026-09-22/summary.json)
 contains model breakdowns, event counts and per-namespace measurement gaps.
 Names are observed run/ledger namespaces, not a claim of 94 distinct builds.
+TSV cells use `unknown` for missing values.
 
 ## Coverage
 
