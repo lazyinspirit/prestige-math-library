@@ -27,6 +27,10 @@
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import {
+  MAX_GROUPS as PIPELINE_MAX_GROUPS,
+  MAX_BATCHES_PER_GROUP as PIPELINE_MAX_BATCHES_PER_GROUP,
+} from './autopilot/src/capacity.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
@@ -34,10 +38,10 @@ const run = opt('run');
 const wantFacts = argv.includes('--facts');
 const asJson = argv.includes('--json');
 // The group-lane cap and the owner's per-Alpha batch bound. A run may contain
-// 27 batches, and no Alpha may own more than three, so nine groups are enough
+// 30 batches, and no Alpha may own more than three, so ten groups are enough
 // to expose the full legal width without weakening the attention bound.
-const MAX_GROUPS = Number(opt('max-groups', '9'));
-const MAX_BATCHES_PER_GROUP = Number(opt('max-batches', '3'));
+const MAX_GROUPS = Number(opt('max-groups', String(PIPELINE_MAX_GROUPS)));
+const MAX_BATCHES_PER_GROUP = Number(opt('max-batches', String(PIPELINE_MAX_BATCHES_PER_GROUP)));
 
 if (!run) {
   console.error('usage: node tools/alpha-groups.mjs --run <run> [--facts] [--max-groups N] [--max-batches N] [--json]');

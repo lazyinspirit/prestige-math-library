@@ -56,7 +56,7 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 7 batch adjudicators and three owner repair agents | Sol / xhigh |
 
 tools/models.mjs owns profiles; stages override role defaults. The owner selected
-Sol for the former Terra lanes and for Steps 1 and 8. Group capacity is nine, batch capacity 27; the
+Sol for the former Terra lanes and for Steps 1 and 8. Group capacity is ten, batch capacity 30; the
 global limit is in autopilot.config.json. The `alpha-high` lane permits twelve
 concurrent authors for an owner-directed three-lead/nine-helper partition;
 helpers write only their assigned pair files and leads integrate shared batch

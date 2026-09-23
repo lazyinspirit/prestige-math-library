@@ -29,6 +29,7 @@ import { Executor } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 import { writeCommand } from '../src/control.mts';
 import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
+import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
@@ -258,7 +259,7 @@ switch (cmd) {
 
   case 'frontier': {
     if (has('next')) {
-      const maxPairs = Number(opt('max-pairs', '27'));
+      const maxPairs = Number(opt('max-pairs', String(MAX_RUN_PAIRS)));
       const next = nextBuildableSet(repo, { maxPairs });
       console.log(`${next.pages.length} A/B pair(s) selected from all categories for the next run (cap ${maxPairs})`);
       console.log('buildable means BOTH pages have strictly more than 95% of same-category dependencies already published');
@@ -304,8 +305,8 @@ switch (cmd) {
     const pairsArg = opt('pairs');
     let pages;
     if (pairsArg === 'next') {
-      const maxPairs = Number(opt('max-pairs', '27'));
-      if (maxPairs > 27) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 27');
+      const maxPairs = Number(opt('max-pairs', String(MAX_RUN_PAIRS)));
+      if (maxPairs > MAX_RUN_PAIRS) die(`plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of ${MAX_RUN_PAIRS}`);
       const next = nextBuildableSet(repo, { maxPairs });
       pages = next.pages.map((p: any) => p.id);
       if (!pages.length) die('nothing buildable');
@@ -319,6 +320,8 @@ switch (cmd) {
     } else {
       pages = pairsArg.split(',').map((s: any) => s.trim()).filter(Boolean);
     }
+
+    if (pages.length > MAX_RUN_PAIRS) die(`plan: ${pages.length} pairs exceed the pipeline ceiling of ${MAX_RUN_PAIRS}`);
 
     // REFUSE A PAIR SET THAT CANNOT BE BUILT, before a single agent starts.
     // This is the same >95%-already-published predicate `drift-review-check`

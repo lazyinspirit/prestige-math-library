@@ -25,6 +25,7 @@ import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { loadAuditorCreatedCertifications } from '../../auditor-created-items.mjs';
 import { certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
 import { step1Decision } from '../../step1-decisions.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
@@ -1417,7 +1418,7 @@ export const stages = [
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
     pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
     labelFor: (u) => `batch-${u}`,
-    concurrency: 27,
+    concurrency: MAX_RUN_BATCHES,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `batch-${u}`,
@@ -1501,7 +1502,7 @@ export const stages = [
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
     pattern: ctx => resultPattern('alpha', legacyStep3(ctx)
       ? 'step3a-[a-z]+-[a-f0-9]+' : 'step3a-pair-[a-z0-9-]+-[a-f0-9]+'),
-    concurrency: 9,
+    concurrency: MAX_GROUPS,
     plan: (ctx, pending) => legacyStep3(ctx)
       ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
         .map(g => step3Plan(ctx, g, 'scope'))
@@ -1535,7 +1536,7 @@ export const stages = [
     artifacts: (ctx, u) => legacyStep3(ctx) ? authorArtifacts(ctx, u) : pairAuthorArtifacts(ctx, u),
     pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)
       ? 'step3b-[a-z]+-[a-f0-9]+' : 'step3b-pair-[a-z0-9-]+-[a-f0-9]+'),
-    concurrency: 9,
+    concurrency: MAX_GROUPS,
     plan: (ctx, pending) => legacyStep3(ctx)
       ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
         .map(g => step3Plan(ctx, g, 'final'))
@@ -1768,8 +1769,8 @@ export const stages = [
     // for the unit's own coverage.
     pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
     // One judge-sweep controller plus one read-only lane for each of nine
-    // groups. The sweep's own 27-way item pool is independently bounded.
-    concurrency: 10,
+    // groups. The sweep's own item pool is independently bounded.
+    concurrency: MAX_GROUPS + 1,
     // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
     // owns its own lane pools, retry semantics and attestation. The A-page ids
     // are computed here rather than in a shell sub-invocation: the first

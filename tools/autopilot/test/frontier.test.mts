@@ -128,14 +128,14 @@ test('next-run selection applies its cap in deterministic plan order', () => {
   assert.deepEqual(next.skipped, [{ id: 'b1', reason: 'capacity' }]);
 });
 
-test('next-run selection defaults to the 27-pair pipeline ceiling', () => {
-  const pages = Array.from({ length: 28 }, (_, i) => [
+test('next-run selection defaults to the 30-pair pipeline ceiling', () => {
+  const pages = Array.from({ length: 31 }, (_, i) => [
     A(`a${i + 1}`, i * 2 + 1, [], 'a'),
     B(`a${i + 1}`, i * 2 + 1),
   ]).flat();
   const next = nextBuildableSet(repo({ pages }));
-  assert.equal(next.pages.length, 27);
-  assert.deepEqual(next.skipped, [{ id: 'a28', reason: 'capacity' }]);
+  assert.equal(next.pages.length, 30);
+  assert.deepEqual(next.skipped, [{ id: 'a31', reason: 'capacity' }]);
 });
 
 test('a published A with a draft B companion remains in scope', () => {

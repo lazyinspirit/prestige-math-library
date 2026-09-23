@@ -27,6 +27,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from '../../buildability.mjs';
+import { MAX_RUN_PAIRS } from './capacity.mjs';
 
 export function loadPlan(repo: string): any {
   return JSON.parse(readFileSync(join(repo, 'research', 'plan-spec.json'), 'utf8'));
@@ -197,7 +198,7 @@ export function waves(repo: string, { categories = null }: { categories?: string
  * breaker when the pipeline cap defers otherwise-buildable pairs.
  */
 export function nextBuildableSet(repo: string, {
-  maxPairs = 27,
+  maxPairs = MAX_RUN_PAIRS,
 }: { maxPairs?: number } = {}): any {
   if (!Number.isInteger(maxPairs) || maxPairs < 1) throw new Error('maxPairs must be a positive integer');
   const spec = loadPlan(repo);

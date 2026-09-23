@@ -2,6 +2,7 @@
 // cross-group audit and closure.
 
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { holdStep5 } from './step5-hold.mts';
 
 // Step-5 lanes: readers Sol/high, refuters Sol/xhigh,
@@ -59,7 +60,7 @@ export function step5Stages(d: any) {
         `research/${ctx.run}-reader-${unit}.md`,
         `research/${ctx.run}-reader-findings-${unit}.json`,
       ],
-      concurrency: 27,
+      concurrency: MAX_RUN_BATCHES,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
         role: 'reader', label: `reader-${unit}`, job: 'audit', covers: [unit],
@@ -81,7 +82,7 @@ export function step5Stages(d: any) {
       pattern: resultPattern('tool', 'split-\\d+'),
       labelFor: (unit: string) => `split-${unit}`,
       artifacts: (ctx: any, unit: string) => `research/${ctx.run}-step5-scope-${unit}.json`,
-      concurrency: 27,
+      concurrency: MAX_RUN_BATCHES,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
         role: 'tool', label: `split-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
@@ -102,7 +103,7 @@ export function step5Stages(d: any) {
       pattern: resultPattern('refuter', 'refute-\\d+'),
       labelFor: (unit: string) => `refute-${unit}`,
       artifacts: (ctx: any, unit: string) => `research/${ctx.run}-refute-${unit}.json`,
-      concurrency: 27,
+      concurrency: MAX_RUN_BATCHES,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
         role: 'refuter', label: `refute-${unit}`, job: 'refutation', covers: [unit],
@@ -124,7 +125,7 @@ export function step5Stages(d: any) {
       pattern: resultPattern('tool', 'collect-\\d+'),
       labelFor: (unit: string) => `collect-${unit}`,
       artifacts: (ctx: any, unit: string) => `research/${ctx.run}-step5-scope-${unit}.json`,
-      concurrency: 27,
+      concurrency: MAX_RUN_BATCHES,
       cohort: solo,
       plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
         role: 'tool', label: `collect-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
@@ -146,7 +147,7 @@ export function step5Stages(d: any) {
         const report = `research/${ctx.run}-alpha-${group.label}-5a.md`;
         return [report, `research/${ctx.run}-alpha-${group.label}-5a-decisions.json`];
       },
-      concurrency: 9,
+      concurrency: MAX_GROUPS,
       cohort: alphaCohort,
       plan: (ctx: any, pending: string[]) => alphaGroups(ctx)
         .filter((group: any) => group.covers.some((unit: any) => pending.includes(String(unit))))

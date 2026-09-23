@@ -1,6 +1,8 @@
 // Pure mapping helpers for owner-authorized post-6B run imports.
 // Source verdicts remain attributed to their original runs and are never
 // represented as new model executions.
+import { MAX_GROUPS, MAX_RUN_PAIRS } from './capacity.mjs';
+
 export function buildMapping(sources) {
   const pages = new Set(), items = new Set(), mappings = [], groups = [];
   let batchNumber = 0, groupNumber = 0;
@@ -33,7 +35,7 @@ export function buildMapping(sources) {
     if (covered.size !== source.batches.length) throw new Error(`Incomplete group coverage ${source.run}`);
     mappings.push({ run: source.run, batchMap, groupMap });
   }
-  if (groupNumber > 9 || pages.size / 2 > 27) throw new Error('Merged scope exceeds engine capacity');
+  if (groupNumber > MAX_GROUPS || pages.size / 2 > MAX_RUN_PAIRS) throw new Error('Merged scope exceeds engine capacity');
   return { mappings, groups, pageCount: pages.size, itemCount: items.size, batchCount: batchNumber };
 }
 
