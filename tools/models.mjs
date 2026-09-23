@@ -8,12 +8,7 @@ export const MODELS = Object.freeze({
     family: 'openai',
   }),
   sol: Object.freeze({
-    id: process.env.SOL_MODEL ?? 'gpt-5.6-sol',
-    runner: 'codex',
-    family: 'openai',
-  }),
-  terra: Object.freeze({
-    id: process.env.TERRA_MODEL ?? 'gpt-5.6-terra',
+    id: process.env.SOL_MODEL ?? 'gpt-6-sol',
     runner: 'codex',
     family: 'openai',
   }),
@@ -33,17 +28,11 @@ export const MODELS = Object.freeze({
 // a profile changes only the model/provider, reasoning tier and context window.
 export const MODEL_PROFILE_NAMES = Object.freeze({
   astraMedium: 'gpt-6-astra-medium',
-  solHigh: 'gpt-5.6-sol-high',
-  solXHigh: 'gpt-5.6-sol-xhigh',
-  terraHigh: 'gpt-5.6-terra-high',
-  terraXHigh: 'gpt-5.6-terra-xhigh',
+  solHigh: 'gpt-6-sol-high',
+  solXHigh: 'gpt-6-sol-xhigh',
+  solMax: 'gpt-6-sol-max',
   deepseekFlashMax: 'deepseek-v4.1-flash-max',
 });
-
-// `gpt-5.6-terra-xhigh` is the canonical Step-5 refuter profile (owner,
-// 2026-09-19: 5a reviewers Sol/high, 5a refuters Terra/xhigh, 5a adjudicators
-// and every 5b agent Sol/xhigh) and the compatibility name controllers started
-// before the 2026-09-05 lane change still hold in memory.
 
 export const MODEL_PROFILES = Object.freeze({
   [MODEL_PROFILE_NAMES.astraMedium]: Object.freeze({
@@ -58,14 +47,9 @@ export const MODEL_PROFILES = Object.freeze({
     model: MODELS.sol.id, runner: MODELS.sol.runner, family: MODELS.sol.family,
     provider: 'openai', effort: 'xhigh', requestedEffort: 'xhigh', contextWindow: 1_000_000,
   }),
-  [MODEL_PROFILE_NAMES.terraHigh]: Object.freeze({
-    model: MODELS.terra.id,
-    runner: MODELS.terra.runner,
-    family: MODELS.terra.family,
-    provider: 'openai',
-    effort: 'high',
-    requestedEffort: 'high',
-    contextWindow: 872_000,
+  [MODEL_PROFILE_NAMES.solMax]: Object.freeze({
+    model: MODELS.sol.id, runner: MODELS.sol.runner, family: MODELS.sol.family,
+    provider: 'openai', effort: 'max', requestedEffort: 'max', contextWindow: 1_000_000,
   }),
   [MODEL_PROFILE_NAMES.deepseekFlashMax]: Object.freeze({
     model: MODELS.deepseekFlash.id,
@@ -76,36 +60,27 @@ export const MODEL_PROFILES = Object.freeze({
     requestedEffort: 'max',
     contextWindow: 1_048_576,
   }),
-  [MODEL_PROFILE_NAMES.terraXHigh]: Object.freeze({
-    model: MODELS.terra.id,
-    runner: MODELS.terra.runner,
-    family: MODELS.terra.family,
-    provider: 'openai',
-    effort: 'xhigh',
-    requestedEffort: 'xhigh',
-    contextWindow: 872_000,
-  }),
 });
 
 export const LANES = Object.freeze({
-  agentic: 'terra',
-  secondary: 'terra',
-  partition: 'terra',
+  agentic: 'sol',
+  secondary: 'sol',
+  partition: 'sol',
   adjudication: 'sol',
   finalAdjudication: 'astra',
 });
 
 export const JUDGE_LINEUPS = Object.freeze({
-  terra: Object.freeze([MODELS.terra.id]),
+  sol: Object.freeze([MODELS.sol.id]),
 });
 
 export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUPS).flat())]);
-export const DEFAULT_LINEUP = 'terra';
+export const DEFAULT_LINEUP = 'sol';
 
 // Each item judge is ephemeral, but keep the active lane's context window
 // explicit so an unusually large target and its compact interfaces fit without
 // inheriting user configuration.
-export const JUDGE_CONTEXT_WINDOW = 872_000;
+export const JUDGE_CONTEXT_WINDOW = 1_000_000;
 
 export function resolveLineup(name = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP) {
   const models = JUDGE_LINEUPS[name];

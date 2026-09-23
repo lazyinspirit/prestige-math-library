@@ -141,7 +141,7 @@ test('coverage reports a run whose only confirmed fatal came from a Step-6 reade
 
 test('two models may record different defects on the same item version', () => {
   const context = 'ctx-1';
-  const terra = { id: 'thm-x', model: 'gpt-5.6-terra', context_sha256: context,
+  const terra = { id: 'thm-x', model: 'gpt-6-sol', context_sha256: context,
     outcome: 'confirmed_fatal', item_sha256: 'abc' };
   const gpt54 = { id: 'thm-x', model: 'gpt-5.4', context_sha256: context,
     outcome: 'confirmed_fatal', item_sha256: 'abc' };

@@ -76,7 +76,7 @@ test('the sweep gives each item a fresh compact Terra call and records real usag
     ], {
       cwd: REPO, encoding: 'utf8', timeout: 120_000,
       env: { ...process.env, CODEX_BIN: f.fakeCodex, CODEX_HOME: f.home,
-        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'terra',
+        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'sol',
         JUDGE_CONCURRENCY_GPT_5_6_TERRA: '1' },
     });
     assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
@@ -86,7 +86,7 @@ test('the sweep gives each item a fresh compact Terra call and records real usag
     for (const call of calls) {
       assert.ok(call.args.includes('--ephemeral'));
       assert.ok(!call.args.includes('resume'), 'item calls never inherit chat history');
-      assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-5.6-terra');
+      assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-6-sol');
       assert.ok(call.args.includes('model_reasoning_effort="xhigh"'));
       assert.ok(call.args.includes(`model_context_window=${JUDGE_CONTEXT_WINDOW}`));
       assert.equal(call.target_blocks, 1, 'one full target item per judge');
@@ -112,11 +112,11 @@ test('an ephemeral call preserves a genuinely refreshed credential', () => {
   try {
     const result = spawnSync(process.execPath, [
       join(REPO, 'tools', 'tsx-run.mjs'), join(REPO, 'tools', 'judge.mts'),
-      `items/${id}.md`, '--model', 'gpt-5.6-terra',
+      `items/${id}.md`, '--model', 'gpt-6-sol',
     ], {
       cwd: REPO, encoding: 'utf8', timeout: 120_000,
       env: { ...process.env, CODEX_BIN: f.fakeCodex, CODEX_HOME: f.home,
-        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'terra' },
+        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'sol' },
     });
     assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
     assert.deepEqual(JSON.parse(readFileSync(join(f.home, 'auth.json'), 'utf8')), { rotation: 1 });
@@ -137,7 +137,7 @@ test('a provider usage limit stops the sweep without manufacturing a verdict', (
     ], {
       cwd: REPO, encoding: 'utf8', timeout: 120_000,
       env: { ...process.env, CODEX_BIN: f.fakeCodex, CODEX_HOME: f.home,
-        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'terra',
+        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'sol',
         JUDGE_CONCURRENCY_GPT_5_6_TERRA: '1' },
     });
     assert.equal(result.status, 3, `${result.stdout}\n${result.stderr}`);

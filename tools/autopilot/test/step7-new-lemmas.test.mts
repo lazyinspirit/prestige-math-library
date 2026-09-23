@@ -78,7 +78,7 @@ test('the actual Step-7 guard admits a new fatal-repair lemma and rejects an unr
     ] }));
     writeFileSync(join(root, 'research/scope.json'), JSON.stringify({ run: 'demo', groups: [{ label: 'a' }],
       by_item: { 'thm-consumer': 'a', 'lem-missing': 'a' } }));
-    const tuple = { id: 'thm-consumer', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64) };
+    const tuple = { id: 'thm-consumer', model: 'gpt-6-sol', context_sha256: 'a'.repeat(64) };
     writeFileSync(join(root, 'research/judge.jsonl'), JSON.stringify({ ...tuple, keep: false }) + '\n');
     writeFileSync(join(root, 'research/adjudications.jsonl'), JSON.stringify({ ...tuple,
       outcome: 'confirmed_fatal', item_sha256: itemHashGuard(before), defect_type: 'dependency_citation' }) + '\n');
@@ -150,7 +150,7 @@ test('owner impact receipts license only an exact, ordered downstream repair pat
     ] }));
     writeFileSync(join(root, 'research/scope.json'), JSON.stringify({ run: 'demo', groups: [{ label: 'a' }],
       by_item: { 'def-root': 'a', 'lem-middle': 'a', 'cor-target': 'a' } }));
-    const tuple = { id: 'def-root', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64) };
+    const tuple = { id: 'def-root', model: 'gpt-6-sol', context_sha256: 'a'.repeat(64) };
     writeFileSync(join(root, 'research/judge.jsonl'), JSON.stringify({ ...tuple, keep: false }) + '\n');
     writeFileSync(join(root, 'research/adjudications.jsonl'), JSON.stringify({ ...tuple,
       outcome: 'confirmed_fatal', item_sha256: itemHashGuard(before['def-root']), defect_type: 'logic' }) + '\n');

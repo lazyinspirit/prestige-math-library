@@ -32,7 +32,7 @@ const audit = (dir: string) => spawnSync(process.execPath,
 
 test('both lanes rejecting one text version is ONE refutation, not two', () => {
   const dir = fixture([
-    { id: 'thm-x', model: 'gpt-5.6-terra', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-6-sol', keep: false, item_sha256: 'aaa' },
     { id: 'thm-x', model: 'gpt-5.4', keep: false, item_sha256: 'aaa' },
   ]);
   const r = audit(dir);
@@ -42,9 +42,9 @@ test('both lanes rejecting one text version is ONE refutation, not two', () => {
 
 test('two rejected versions of one item is a real 2x — the converging-or-false signal', () => {
   const dir = fixture([
-    { id: 'thm-x', model: 'gpt-5.6-terra', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-6-sol', keep: false, item_sha256: 'aaa' },
     { id: 'thm-x', model: 'gpt-5.4', keep: false, item_sha256: 'aaa' },
-    { id: 'thm-x', model: 'gpt-5.6-terra', keep: false, item_sha256: 'bbb' },
+    { id: 'thm-x', model: 'gpt-6-sol', keep: false, item_sha256: 'bbb' },
   ]);
   const r = audit(dir);
   assert.match(r.stdout, /thm-x/);

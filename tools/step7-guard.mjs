@@ -594,7 +594,7 @@ for (const id of changed) {
   // A published-page repair is licensed by its own row against the same
   // pre-edit state. It is not a weaker licence: the row must name the falsehood
   // and what makes the replacement right, and the repaired item is then routed
-  // back to the sole Terra judge, which is stronger certification than the single
+  // back to the configured item judge, which is stronger certification than the single
   // reader the published-dependency-repair rule asks for at step 5.
   if (publishedLicences.get(id)?.has(baseline.hashes[id])) continue;
   if (ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])) continue;

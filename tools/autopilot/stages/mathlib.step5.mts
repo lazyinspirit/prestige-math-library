@@ -4,11 +4,10 @@
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { holdStep5 } from './step5-hold.mts';
 
-// Step-5 lanes (owner, 2026-09-19): readers Sol/high, refuters Terra/xhigh,
+// Step-5 lanes: readers Sol/high, refuters Sol/xhigh,
 // group adjudicators and every 5b agent Sol/xhigh.
 const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
 const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
-const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXHigh;
 
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
 export function step5Stages(d: any) {
@@ -96,7 +95,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-refute',
       label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? TERRA_XHIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL_XHIGH : undefined,
       pipeline: 'read',
       role: 'refuter',
       units: batches,

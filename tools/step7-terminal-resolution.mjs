@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // step7-terminal-resolution.mjs — exact-hash terminal closure after the one
-// paid Step-7 Terra rejudge.
+// paid Step-7 judge recheck.
 //
 // The ordinary closure remains judge -> Alpha adjudication -> repair ->
 // targeted rejudge. If that rejudge rejects, one independent Astra-medium Final
@@ -340,7 +340,7 @@ export function terminalEvidence(root, run, id, stateDir = '.autopilot') {
   if (seedErrors.length) throw new Error(seedErrors.join('; '));
   const distinctCycleIds = new Set(paidCycles.map((cycle) => cycle.cycle_id));
   if (distinctCycleIds.size < TERMINAL_REJUDGE_ROUNDS)
-    throw new Error(`${id}: completed ${paidCycles.length}/${TERMINAL_REJUDGE_ROUNDS} paid Terra rejudge; final adjudication is not licensed`);
+    throw new Error(`${id}: completed ${paidCycles.length}/${TERMINAL_REJUDGE_ROUNDS} paid judge recheck; final adjudication is not licensed`);
 
   const candidates = [
     join(root, 'research', `${run}-step7-item-${id}-closure.json`),
@@ -473,7 +473,7 @@ function main() {
               if ((row.version === TERMINAL_RESOLUTION_VERSION || row.version === OWNER_TERMINAL_RESOLUTION_VERSION)
                 && (String(cycle.kind ?? '').startsWith('initial-')
                   || cycle.exit_code !== 0 || typeof cycle.completed_at !== 'string')) {
-                errors.push(`${row.id}: failure evidence cycle ${cycleId} is not a completed paid Terra rejudge`);
+                errors.push(`${row.id}: failure evidence cycle ${cycleId} is not a completed paid judge recheck`);
               }
             }
           }

@@ -46,6 +46,7 @@ const { step7Stages } = await import(
 );
 
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
+const SOL_MAX = MODEL_PROFILE_NAMES.solMax;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -1407,7 +1408,7 @@ export const stages = [
     id: '1-scaffold',
     label: 'Beta scaffolding',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
-      ? DEEPSEEK_FLASH_MAX
+      ? SOL_MAX
       : undefined,
     units: (ctx: any) => batches(ctx),
     unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
@@ -2528,7 +2529,7 @@ export const stages = [
   },
 ];
 
-// Owner-selected late-stage model boundary (2026-08-29). Apply it at the
+// Owner-selected late-stage model boundary. Apply it at the
 // stage boundary so repair hooks and obligation re-dispatches cannot silently
 // fall back to their role's ordinary lane. Tool plans remain deterministic.
 for (const stage of stages) {
@@ -2544,11 +2545,11 @@ for (const stage of stages) {
       ...(previousGates?.(ctx) ?? [])];
   }
   if (/^(?:8|9)-/.test(stage.id)) {
-    // Owner decision (2026-09-19): every agent lane in Steps 8 and 9 runs on
-    // the DeepSeek V4.1 Flash max lane, so the late-stage repair hooks and
-    // obligation re-dispatches cannot fall back to a Terra or Astra lane. The
-    // item-judge lineup is a separate lane and is unchanged.
-    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : DEEPSEEK_FLASH_MAX;
+    // Step 8 uses Sol max; Step 9 keeps DeepSeek max. The stage boundary also
+    // covers repair hooks and obligation re-dispatches. Item judges are selected
+    // by the separate judge lineup.
+    const profile = stage.id.startsWith('8-') ? SOL_MAX : DEEPSEEK_FLASH_MAX;
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : profile;
   }
 }
 

@@ -40,10 +40,10 @@ test('every lineup names unique models the registry knows', () => {
   }
 });
 
-test('Terra is the singleton default judge lineup', () => {
-  assert.equal(DEFAULT_LINEUP, 'terra');
-  assert.deepEqual(resolveLineup().models, [MODELS.terra.id]);
-  assert.deepEqual(JUDGE_LINEUPS.terra, [MODELS.terra.id]);
+test('Sol is the singleton default judge lineup', () => {
+  assert.equal(DEFAULT_LINEUP, 'sol');
+  assert.deepEqual(resolveLineup().models, [MODELS.sol.id]);
+  assert.deepEqual(JUDGE_LINEUPS.sol, [MODELS.sol.id]);
   assert.throws(() => resolveLineup('nonesuch'), /must be one of/);
 });
 

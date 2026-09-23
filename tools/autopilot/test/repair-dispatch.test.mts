@@ -152,7 +152,7 @@ test('Step-7 repair envelopes retain every failure and split run/published tuple
   const repo = groupedFixture();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
     needs_rejudge: [], unadjudicated: ['thm-demo-x'],
-    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64) }],
+    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'gpt-6-sol', context_sha256: 'a'.repeat(64) }],
     open_fatal: [], open_fatal_rows: [], closed: false,
   }));
   writeFileSync(join(repo, 'research', 'demo-step7-published-repairs.jsonl'), `${JSON.stringify({
@@ -160,7 +160,7 @@ test('Step-7 repair envelopes retain every failure and split run/published tuple
   })}\n`);
   writeFileSync(join(repo, 'research', 'demo-step7-published-closure.json'), JSON.stringify({
     needs_rejudge: [], unadjudicated_rows: [], open_fatal: ['lem-published-y'],
-    open_fatal_rows: [{ id: 'lem-published-y', model: 'gpt-5.6-terra', context_sha256: 'b'.repeat(64) }],
+    open_fatal_rows: [{ id: 'lem-published-y', model: 'gpt-6-sol', context_sha256: 'b'.repeat(64) }],
     escalations: [],
   }));
   const started: any[] = [];
@@ -248,7 +248,7 @@ test('Step-7 repair removes mechanically handled owners and serializes unknown s
 
 test('preflight retains original fatal licences after live rejection closure; frozen close does not', async () => {
   const repo = groupedFixture();
-  const row = { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64),
+  const row = { id: 'thm-demo-x', model: 'gpt-6-sol', context_sha256: 'a'.repeat(64),
     item_sha256: 'b'.repeat(64), outcome: 'confirmed_fatal' };
   const put = (suffix: string, value: any) => writeFileSync(join(repo, 'research', `demo-${suffix}`), JSON.stringify(value) + '\n');
   put('judge.jsonl', { ...row, keep: false });
@@ -318,8 +318,8 @@ test('step 7 routes exact unadjudicated closure rows to one narrow recovery Alph
     needs_rejudge: [],
     unadjudicated: ['thm-demo-x'],
     unadjudicated_rows: [
-      { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
-      { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
+      { id: 'thm-demo-x', model: 'gpt-6-sol', context_sha256: 'abc123' },
+      { id: 'thm-demo-x', model: 'gpt-6-sol', context_sha256: 'abc123' },
     ],
     open_fatal: [],
     closed: false,
@@ -490,7 +490,7 @@ test('closure recovery is routed per group and keeps the recovery brief', async 
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
     needs_rejudge: [],
     unadjudicated: ['thm-demo-x'],
-    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' }],
+    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'gpt-6-sol', context_sha256: 'abc123' }],
     open_fatal: [], closed: false,
   }));
   const started: any[] = [];
@@ -590,7 +590,7 @@ test('the judge tools agree on the configured lineup', () => {
     const r = spawnSync(process.execPath, [join(REPO, tool), ...args],
       { cwd: REPO, encoding: 'utf8', env: { ...process.env, JUDGE_LINEUP: '__nope__' }, timeout: 60_000 });
     const out = `${r.stdout}\n${r.stderr}`;
-    assert.match(out, /terra/, `${tool} lost the Terra lineup`);
+    assert.match(out, /sol/, `${tool} lost the Sol lineup`);
   }
 });
 

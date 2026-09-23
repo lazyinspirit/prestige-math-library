@@ -138,7 +138,7 @@ function item(root:string,id:string,body='Original proof.',deps:string[]=[],publ
     const pages=JSON.parse(readFileSync(manifest,'utf8'));
     if(!pages.some((page:any)=>page.items.some((row:any)=>row.id===id))){
       pages[0].items.push({id});json(manifest,pages);
-      appendFileSync(join(root,'research',`${run}-judge.jsonl`),JSON.stringify({id,model:MODELS.terra.id,context_sha256:h,item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),keep:true})+'\n');
+      appendFileSync(join(root,'research',`${run}-judge.jsonl`),JSON.stringify({id,model:MODELS.sol.id,context_sha256:h,item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),keep:true})+'\n');
     }
   }
 }
@@ -152,7 +152,7 @@ function fixture() {
   item(root,'thm-frontier-consumer','Uses root.',[ids[0]],false);
   item(root,'thm-unrelated-consumer');
   json(join(root,'research',`${run}-batch-1.pages.json`),[{id:'page',items:ids.map(id=>({id}))}]);
-  writeFileSync(join(root,'research',`${run}-judge.jsonl`),ids.map((id,i)=>JSON.stringify({id,model:MODELS.terra.id,context_sha256:h,item_sha256:contexts(root,[id]).get(id).item_sha256,keep:i!==0})).join('\n')+'\n');
+  writeFileSync(join(root,'research',`${run}-judge.jsonl`),ids.map((id,i)=>JSON.stringify({id,model:MODELS.sol.id,context_sha256:h,item_sha256:contexts(root,[id]).get(id).item_sha256,keep:i!==0})).join('\n')+'\n');
   return {root,ids,cleanup:()=>rmSync(root,{recursive:true,force:true})};
 }
 function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
@@ -254,10 +254,10 @@ test('policy: separate published repairs are excluded from Terra and renewed adj
   const f=completedPublishedRepair(false);try{
     certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     const calls:string[][]=[];
-    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
+    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
     judge(f.root,run,1,{contextHasher:contexts,runSweep});
     assert.equal(calls.flat().includes('thm-published-outside'),false);
-    json(join(workflowDir(f.root,run),'judge-2.json'),{verdicts:[{id:'thm-published-outside',model:MODELS.terra.id,...contexts(f.root,['thm-published-outside']).get('thm-published-outside'),keep:false}]});
+    json(join(workflowDir(f.root,run),'judge-2.json'),{verdicts:[{id:'thm-published-outside',model:MODELS.sol.id,...contexts(f.root,['thm-published-outside']).get('thm-published-outside'),keep:false}]});
     assert.equal(prepareAdjudication(f.root,run,'repeat',2).rejected.length,0);
   }finally{f.cleanup();}
 });
@@ -376,7 +376,7 @@ test('an owner may author a missing definition without adding it to Terra scope'
     const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});assert.ok(cert.creations.some((row:any)=>row.id===created));
     assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
     const judged=judge(f.root,run,1,{contextHasher:contexts,runSweep:({ids,ledger}:any)=>{
-      for(const id of ids){const current=contexts(f.root,[id]).get(id);appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...current,keep:true})+'\n');}
+      for(const id of ids){const current=contexts(f.root,[id]).get(id);appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...current,keep:true})+'\n');}
       return {status:0};
     }});
     assert.equal(judged.items.includes(created),false);
@@ -620,7 +620,7 @@ test('missing paid verdict and a metadata writer during central hashing fail clo
       const pack=initial(f.root,f.ids);reports(f.root,pack);
       if(mode==='missing-verdict'){
         certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
-        assert.throws(()=>judge(f.root,run,1,{contextHasher:contexts,runSweep:()=>({status:0})}),/missing current Terra verdict/);
+        assert.throws(()=>judge(f.root,run,1,{contextHasher:contexts,runSweep:()=>({status:0})}),/missing current Sol verdict/);
         assert.equal(existsSync(join(workflowDir(f.root,run),'judge-1.json')),false);
       }else{
         const contextHasher=(root:string,ids:string[])=>{
@@ -635,12 +635,12 @@ test('missing paid verdict and a metadata writer during central hashing fail clo
   }
 });
 
-test('Terra rejudges changed frontier items and current context; complete repeat evidence permits threshold gate',()=>{
+test('Sol rejudges changed frontier items and current context; complete repeat evidence permits threshold gate',()=>{
   const f=fixture();try{
     const pack=initial(f.root,f.ids);item(f.root,'thm-frontier-consumer','Updated published proof.',['thm-item-0'],false);reports(f.root,pack);
     certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     const calls:string[][]=[];
-    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
+    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
     judge(f.root,run,1,{contextHasher:contexts,runSweep});assert.deepEqual(calls[0],['thm-frontier-consumer','thm-item-0']);
     const repeat=prepareAdjudication(f.root,run,'repeat',1);assert.equal(repeat.rejected.length,0);reports(f.root,repeat);
     const impact=prepareImpact(f.root,run,'impact-repeat',1);reports(f.root,impact);
@@ -648,7 +648,7 @@ test('Terra rejudges changed frontier items and current context; complete repeat
     assert.equal(checkWorkflow(f.root,run,{contextHasher:contexts}).sha256,cert.sha256);
     const shifted=(root:string,ids:string[])=>new Map([...contexts(root,ids)].map(([id,row])=>[id,{...row,context_sha256:'b'.repeat(64)}]));
     assert.throws(()=>checkWorkflow(f.root,run,{contextHasher:shifted}),/stale.*context/);
-    assert.throws(()=>judge(f.root,run,2,{contextHasher:shifted,runSweep}),/context changed before Terra/);
+    assert.throws(()=>judge(f.root,run,2,{contextHasher:shifted,runSweep}),/context changed before Sol/);
     judge(f.root,run,2,{contextHasher:contexts,runSweep});assert.equal(calls.length,1);
   }finally{f.cleanup();}
 });

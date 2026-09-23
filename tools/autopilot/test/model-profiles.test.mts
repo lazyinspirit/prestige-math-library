@@ -39,22 +39,19 @@ test('the tracked dispatcher argv forwards stage-selected profiles', () => {
 });
 
 test('registered owner profiles name the exact models, efforts, and windows', () => {
-  const terraHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.terraHigh];
-  assert.equal(terraHigh.model, 'gpt-5.6-terra');
-  assert.equal(terraHigh.effort, 'high');
-  assert.equal(terraHigh.contextWindow, 872_000);
-
-  const terraXHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.terraXHigh];
-  assert.equal(terraXHigh.model, 'gpt-5.6-terra');
-  assert.equal(terraXHigh.effort, 'xhigh');
-  assert.equal(terraXHigh.requestedEffort, 'xhigh');
-  assert.equal(terraXHigh.contextWindow, 872_000);
-
+  const solHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.solHigh];
+  assert.equal(solHigh.model, 'gpt-6-sol');
+  assert.equal(solHigh.effort, 'high');
+  assert.equal(solHigh.contextWindow, 1_000_000);
   const solXHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.solXHigh];
-  assert.equal(solXHigh.model, 'gpt-5.6-sol');
+  assert.equal(solXHigh.model, 'gpt-6-sol');
   assert.equal(solXHigh.effort, 'xhigh');
   assert.equal(solXHigh.requestedEffort, 'xhigh');
   assert.equal(solXHigh.contextWindow, 1_000_000);
+  const solMax = MODEL_PROFILES[MODEL_PROFILE_NAMES.solMax];
+  assert.equal(solMax.model, 'gpt-6-sol');
+  assert.equal(solMax.effort, 'max');
+  assert.equal(solMax.requestedEffort, 'max');
 
   const deepseek = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax];
   assert.equal(deepseek.model, 'deepseek-flash');
@@ -88,10 +85,10 @@ test('Step 3a and 3b use DeepSeek Flash max while Step 5a adjudication and the 5
     'the judge tool is not a Step-6 reader agent');
 });
 
-test('Step 5a readers run Sol high and refuters Terra xhigh, and the tool lanes stay model-free', () => {
+test('Step 5a readers run Sol high and refuters Sol xhigh, and the tool lanes stay model-free', () => {
   for (const [id, role, profile] of [
     ['5a-read', 'reader', MODEL_PROFILE_NAMES.solHigh],
-    ['5a-refute', 'refuter', MODEL_PROFILE_NAMES.terraXHigh],
+    ['5a-refute', 'refuter', MODEL_PROFILE_NAMES.solXHigh],
   ] as const) {
     const st = stage(id);
     const plan = st.plan(ctx, ['1'])[0];
@@ -105,10 +102,10 @@ test('Step 5a readers run Sol high and refuters Terra xhigh, and the tool lanes 
   }
 });
 
-test('Step 1 scaffolders use DeepSeek Flash max', () => {
+test('Step 1 scaffolders use Sol max', () => {
   const scaffoldStage = stage('1-scaffold');
   const scaffold = scaffoldStage.plan(ctx, ['1'])[0];
-  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.solMax);
   assert.equal(selected(scaffoldStage, {
     role: 'beta', job: 'scouting', label: 'source-scout-1-b1',
   }), undefined, 'source scouting is not a Step 1 scaffolding dispatch');
@@ -148,22 +145,22 @@ test('Step-7 fatal group adjudicator uses Sol xhigh', () => {
   assert.equal(row.provider_effort, 'xhigh');
 });
 
-test('every Step 8 and Step 9 agent uses DeepSeek Flash max', () => {
+test('Step 8 agents use Sol max and Step 9 agents use DeepSeek Flash max', () => {
   for (const s of stages.filter((candidate: any) => /^(?:8|9)-/.test(candidate.id))) {
+    const expected = s.id.startsWith('8-') ? MODEL_PROFILE_NAMES.solMax : MODEL_PROFILE_NAMES.deepseekFlashMax;
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
-      assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.deepseekFlashMax,
+      assert.equal(selected(s, { role, job: 'audit' }), expected,
         `${s.id}/${role}`);
     }
     assert.equal(selected(s, { role: 'tool', job: 'bookkeeping-mechanical' }), undefined,
       `${s.id} changed a deterministic tool job into a model call`);
   }
   assert.equal(selected(stage('8-scope'), { role: 'alpha', label: 'step8-lead', job: 'audit' }),
-    MODEL_PROFILE_NAMES.deepseekFlashMax, 'the Step 8 lead no longer runs on the Astra lane');
-  assert.equal(selected(stage('7-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }), undefined,
-    'Step 7 must retain its dedicated adjudication role');
-  const profile = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax];
-  assert.equal(profile.provider, 'deepseek');
-  assert.equal(profile.effort, 'max');
+    MODEL_PROFILE_NAMES.solMax);
+  assert.equal(selected(stage('7.1-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }),
+    MODEL_PROFILE_NAMES.solXHigh, 'Step 7 retains its dedicated adjudication profile');
+  assert.equal(MODEL_PROFILES[MODEL_PROFILE_NAMES.solMax].provider, 'openai');
+  assert.equal(MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax].provider, 'deepseek');
 });
 
 test('the shared Step-3 authoring brief mandates authoritative web verification', () => {

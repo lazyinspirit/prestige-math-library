@@ -27,7 +27,7 @@ generated per-batch task both name it as a binding input. If it is added after
 not omit it.
 Step7 runs batch Sol xhigh adjudicators, three Sol xhigh owner agents for all
 relevant downstream repairs (including published items), then one stable
-orchestrator certification pass. Terra rejudgment, Sol adjudication, three-owner
+orchestrator certification pass. Sol rejudgment, Sol adjudication, three-owner
 downstream repair and recertification repeat until the latest round's unique
 fatal original-frontier count is strictly below 5% of the frozen original scope.
 All confirmed defects, including nonfatal defects, require repair. New downstream
@@ -71,8 +71,8 @@ original evidence, creates no model-success receipts, and runs current gates
 before fresh cross-group closure and judgment.
 
 The active model boundary is stage-owned; see WORKFLOW.md and tools/models.mjs.
-Step7 adjudicators and owner repair agents use Sol xhigh, and item rejudgments
-use Terra. DeepSeek dispatches require the
+Step7 adjudicators, owner repair agents and item rejudgments use Sol xhigh.
+DeepSeek dispatches in Steps 2, 3, 6 and 9 require the
 repository's single-tool live web bridge. It prefers Tavily and falls back to
 Firecrawl when Tavily is not configured. Deterministic tool plans remain
 model-free.

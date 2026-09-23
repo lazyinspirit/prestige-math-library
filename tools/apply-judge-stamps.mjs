@@ -18,7 +18,7 @@
 //
 // Published-page audit A8 has one deliberately narrower route:
 //
-//   JUDGE_LINEUP=terra node tools/apply-judge-stamps.mjs \
+//   JUDGE_LINEUP=sol node tools/apply-judge-stamps.mjs \
 //     --ledger research/audit/wave<k>-judge.jsonl \
 //     --audit-targeted-rejudges research/audit/wave<k>-targeted-judge-receipt.json \
 //     [--apply] [--report out.json]

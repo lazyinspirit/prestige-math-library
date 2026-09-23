@@ -113,7 +113,7 @@ actual focused checks, unfinished repairs and blockers honestly.
 
 Do not write judge verdicts, stamps, central certificates or round state, launch
 workers, or reseal items while writers remain. The engine alone dispatches
-Terra and controls repeats. Central certification follows complete repair and
+Sol judgment and controls repeats. Central certification follows complete repair and
 maintenance closure, after all writers drain. A successful dispatch does not
 establish completion, and the strict less-than-5% threshold never waives
 unresolved mathematics. Do not claim independent review for your own repair.

@@ -635,20 +635,20 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   if(existsSync(path))return read(path);
   const cert=verifyCertification(root,run,{allowMissing:false});
   const frontier=gateFrontier(root,run),candidates=cert.items.filter(row=>frontier.has(row.id));
-  const current=hashes(root);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Terra judgment: ${row.id}`);
-  requireValue((round===1&&cert.phase==='impact-initial')||(round>1&&cert.phase==='impact-repeat'&&cert.round===round-1),'Terra round does not follow a completed certification barrier');
+  const current=hashes(root);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
+  requireValue((round===1&&cert.phase==='impact-initial')||(round>1&&cert.phase==='impact-repeat'&&cert.round===round-1),'Sol judge round does not follow a completed certification barrier');
   const prev=round===1?{}:Object.fromEntries(read(join(dir,`judge-${round-1}.json`)).verdicts.map(r=>[r.id,r]));
   const beforeContexts=contextHasher(root,candidates.map(row=>row.id));
-  for(const row of candidates){const now=beforeContexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`certified context changed before Terra judgment: ${row.id}`);}
+  for(const row of candidates){const now=beforeContexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`certified context changed before Sol judgment: ${row.id}`);}
   const ids=cert.changed.filter(id=>frontier.has(id)).filter(id=>{const now=beforeContexts.get(id);requireValue(now,`missing judge context ${id}`);return prev[id]?.item_sha256!==now.item_sha256||prev[id]?.context_sha256!==now.context_sha256;});
   const ledger=join(root,'research',`${run}-judge.jsonl`);
   if(ids.length) {
-    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--models',MODELS.terra.id],{cwd:root,stdio:'inherit',timeout:43200000});
-    if(out.status!==0)throw Error(`Terra sweep failed (${out.status}); resume preserves completed verdicts`);
+    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--models',MODELS.sol.id],{cwd:root,stdio:'inherit',timeout:43200000});
+    if(out.status!==0)throw Error(`Sol sweep failed (${out.status}); resume preserves completed verdicts`);
   }
   const currentContexts=contextHasher(root,ids), verdicts=[];
-  for(const id of ids)requireValue(JSON.stringify(beforeContexts.get(id))===JSON.stringify(currentContexts.get(id)),`item changed during Terra judgment: ${id}`);
-  for(const id of ids){const now=currentContexts.get(id);const row=lines(ledger).filter(r=>r.id===id&&r.model===MODELS.terra.id&&r.item_sha256===now.item_sha256&&r.context_sha256===now.context_sha256&&typeof r.keep==='boolean').at(-1);if(!row)throw Error(`missing current Terra verdict ${id}`);verdicts.push(row);}
+  for(const id of ids)requireValue(JSON.stringify(beforeContexts.get(id))===JSON.stringify(currentContexts.get(id)),`item changed during Sol judgment: ${id}`);
+  for(const id of ids){const now=currentContexts.get(id);const row=lines(ledger).filter(r=>r.id===id&&r.model===MODELS.sol.id&&r.item_sha256===now.item_sha256&&r.context_sha256===now.context_sha256&&typeof r.keep==='boolean').at(-1);if(!row)throw Error(`missing current Sol verdict ${id}`);verdicts.push(row);}
   const carried=Object.values(prev).filter(row=>frontier.has(row.id)&&!ids.includes(row.id));
   const receipt={version:2,run,round,items:ids,verdicts:[...carried,...verdicts],certification_sha256:cert.sha256};frozen(path,receipt);return receipt;
 }
@@ -665,7 +665,7 @@ export function verifyWave(root,run,{contextHasher=currentHashesMany,frontierOnl
 
 export function checkWorkflow(root,run,options={}) {
   const cert=verifyWave(root,run,{...options,frontierOnly:true});
-  requireValue(['impact-repeat','gate'].includes(cert.phase)&&Number.isInteger(cert.latest_adjudication_round),'Step 7 has not completed its Terra/adjudication cycle');
+  requireValue(['impact-repeat','gate'].includes(cert.phase)&&Number.isInteger(cert.latest_adjudication_round),'Step 7 has not completed its Sol judgment/adjudication cycle');
   const thresholdPath=join(workflowDir(root,run),`threshold-${cert.latest_adjudication_round}.json`);
   requireValue(cert.evidence[thresholdPath]&&existsSync(thresholdPath),'missing bound fatal threshold');
   const threshold=read(thresholdPath);requireValue(threshold.belowThreshold===true&&threshold.errors?.length===0&&threshold.fatalCount*20<threshold.originalCount,'Step 7 fatal threshold not reached');

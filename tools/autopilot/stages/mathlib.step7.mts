@@ -97,11 +97,11 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
       plan:(ctx:any)=>[{role:'tool',label:'step7-v2-init',covers:['all'],job:'bookkeeping-mechanical',argv:tool(ctx,'init','initial',1)}],
       gatesWaived:'Initialization freezes the original frontier and Step 6 evidence; every later round validates these immutable inputs.'},
     workerStage('7.1-adjudicate','initial',true),workerStage('7.2-impact','impact-initial',false),certifyStage('7.3-certify','impact-initial'),
-    {id:'7.4-rejudge',label:'7.4 Terra judges repaired items',units:()=>['all'],pattern:pattern('judge','7.4-rejudge'),concurrency:1,maxAttempts:1,
+    {id:'7.4-rejudge',label:'7.4 Sol judges repaired items',units:()=>['all'],pattern:pattern('judge','7.4-rejudge'),concurrency:1,maxAttempts:1,
       artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`judge-${round(ctx,'7.4-rejudge')}.json`)),
       plan:(ctx:any)=>[{role:'tool',label:`step7-v2-judge-r${round(ctx,'7.4-rejudge')}-all`,covers:['all'],job:'judgement',timeout:43200,
         argv:tool(ctx,'judge','repeat',round(ctx,'7.4-rejudge'))}],
-      gatesWaived:'The judge command requires a complete current Terra verdict for each frozen repaired target before writing its round receipt.'},
+      gatesWaived:'The judge command requires a complete current Sol verdict for each frozen repaired target before writing its round receipt.'},
     workerStage('7.5-adjudicate','repeat',true),workerStage('7.6-impact','impact-repeat',false),recert,
     gateStage('7.8-gate'),repair,gateStage('7.10-gate'),
   ];

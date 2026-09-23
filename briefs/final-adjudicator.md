@@ -6,7 +6,7 @@ brief for a new round or use old terminal receipts as current coverage.
 
 Current Step 7 uses `briefs/step7-adjudicator.md` for Sol xhigh adjudicators
 and `briefs/step7-owner-repair.md` for downstream/gate repairs. The engine
-controls Terra rejudgment and repeat transitions. Certification occurs centrally
+controls Sol rejudgment and repeat transitions. Certification occurs centrally
 on the stable complete state after all writers drain. See WORKFLOW.md.
 
 An explicitly authorized historical recovery must use its exact scoped task

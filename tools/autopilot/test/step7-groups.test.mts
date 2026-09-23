@@ -294,11 +294,11 @@ test('render writes an item-grouped evidence bundle and a grouped rejection queu
       requires: [],
     }],
     'judge.jsonl': [
-      { id: 'thm-parallelogram-law', model: 'gpt-5.6-terra', keep: false,
+      { id: 'thm-parallelogram-law', model: 'gpt-6-sol', keep: false,
         reason: 'the converse direction is unproved', context_sha256: 'a'.repeat(64) },
-      { id: 'thm-cauchy-schwarz-in-an-inner-product-space', model: 'gpt-5.6-terra', keep: false,
+      { id: 'thm-cauchy-schwarz-in-an-inner-product-space', model: 'gpt-6-sol', keep: false,
         reason: 'equality case missing', context_sha256: 'b'.repeat(64) },
-      { id: 'thm-parallelogram-law', model: 'gpt-5.6-sol', keep: false,
+      { id: 'thm-parallelogram-law', model: 'gpt-6-astra', keep: false,
         reason: 'the real case assumes the complex convention', context_sha256: 'c'.repeat(64) },
     ].map((row) => JSON.stringify(row)).join('\n') + '\n',
     'alpha-a-step7-context.json': {
@@ -509,7 +509,7 @@ test('step7-scope published refuses retired-lineup-only evidence', () => {
   const { foundVia } = publishedFixtureRoute();
   const files = [
     [`${run}-step7-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
-    [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'gpt-5.6-terra', context_sha256: 'abc', keep: true })}\n`],
+    [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'retired-judge', context_sha256: 'abc', keep: true })}\n`],
   ];
   try {
     for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);

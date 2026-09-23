@@ -14,7 +14,7 @@ function fixture(t){
   const dir=join(root,'research','demo-step7-v2'),dispatch=join(root,'research','demo-dispatch');
   mkdirSync(dir,{recursive:true});mkdirSync(dispatch);
   const save=(p,r)=>writeFileSync(p,JSON.stringify(r)+'\n');
-  const decision={id:'thm-example',model:MODELS.terra.id,context_sha256:'a'.repeat(64),outcome:'confirmed_fatal',reason:'The actual evidence describes a fatal defect without assigning a legacy category.',uncertain:false,familiar:true,source_urls:[]};
+  const decision={id:'thm-example',model:MODELS.sol.id,context_sha256:'a'.repeat(64),outcome:'confirmed_fatal',reason:'The actual evidence describes a fatal defect without assigning a legacy category.',uncertain:false,familiar:true,source_urls:[]};
   const pack={version:2,run:'demo',phase:'initial',round:1,units:['1'],assignments:{1:[decision]},before:{'thm-example':'b'.repeat(64)}};
   const label='step7-v2-initial-r1-u1',packPath=join(dir,'initial-1.json'),reportPath=join(dir,`${label}.json`),dispatchPath=join(dispatch,`alpha-adjudicate-${label}.result.json`),receiptPath=join(dir,'initial-1-collected.json');
   save(packPath,pack);
@@ -50,8 +50,8 @@ test('legacy missing categories remain invalid; explicit categories remain suppo
 test('judge statistics count authentic missing categories separately, not as other or nonfatal',t=>{
   const f=fixture(t),ledger=join(f.root,'judge.jsonl'),adjudications=join(f.root,'adjudications.jsonl');
   f.save(ledger,{id:f.row.id,model:f.row.model,context_sha256:f.row.context_sha256,keep:false});f.save(adjudications,f.row);
-  const result=spawnSync(process.execPath,[new URL('./judge-compare.mjs',import.meta.url).pathname,ledger,'--adjudications',adjudications],{cwd:f.root,encoding:'utf8',env:{...process.env,JUDGE_LINEUP:'terra'}});
+  const result=spawnSync(process.execPath,[new URL('./judge-compare.mjs',import.meta.url).pathname,ledger,'--adjudications',adjudications],{cwd:f.root,encoding:'utf8',env:{...process.env,JUDGE_LINEUP:'sol'}});
   assert.equal(result.status,0,result.stderr);
-  const counts=JSON.parse(result.stdout).adjudicated_detection_effectiveness.models[MODELS.terra.id];
+  const counts=JSON.parse(result.stdout).adjudicated_detection_effectiveness.models[MODELS.sol.id];
   assert.equal(counts.confirmed_fatal,1);assert.equal(counts.fatal_unclassified,1);assert.equal(counts.fatal_other,0);assert.equal(counts.confirmed_nonfatal,0);
 });

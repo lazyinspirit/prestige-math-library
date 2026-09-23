@@ -1135,7 +1135,7 @@ export class Executor {
         for (const [stageId, st] of Object.entries<any>(this.state.data.stages)) {
           if (st.doneAt) continue;
           const stage = this.stages.find((candidate: Stage) => candidate.id === stageId);
-          // Step 7's one paid Terra rejudge is a lifetime ceiling. `retry` is
+          // Step 7's one paid judge recheck is a lifetime ceiling. `retry` is
           // still useful after the owner/session resolves the terminal blocker:
           // it invalidates the battery cache and re-runs the gates, but it may
           // not quietly buy another paid context.

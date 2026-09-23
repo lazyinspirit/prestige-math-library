@@ -94,7 +94,7 @@ const terminalParsed = parseTerminalResolutions(
 );
 for (const message of terminalParsed.errors) error('terminal-resolution-shape', message);
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is Terra alone (owner, 2026-08-26), and the published-page audit
+// default is Sol alone, and the published-page audit
 // (AUDIT-WORKFLOW.md) verifies the same configured set on current frozen context.
 // Rows from a retired lane remain evidence only and never satisfy coverage —
 // which matters more after a lane change than at any other time, because a

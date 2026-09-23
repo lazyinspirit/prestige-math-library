@@ -107,8 +107,8 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
   currentHashes.set(result.id, { context: result.context, item: result.item });
 }
 
-const TERRA = MODELS.terra.id;
-const hardCaps = Object.freeze({ [TERRA]: 27 });
+const SOL = MODELS.sol.id;
+const hardCaps = Object.freeze({ [SOL]: 27 });
 const capFor = (model) => {
   const hard = hardCaps[model];
   if (!hard) throw new Error(`no concurrency cap configured for ${model}`);

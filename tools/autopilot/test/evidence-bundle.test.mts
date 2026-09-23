@@ -95,8 +95,8 @@ test('a group bundle quotes the claim, the facts and every cited clause verbatim
     group: 'a',
     items: ['thm-a'],
     rejections: [
-      { id: 'thm-a', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64), reason: 'citation L1 is misattributed' },
-      { id: 'thm-a', model: 'gpt-5.6-sol', context_sha256: 'b'.repeat(64), reason: 'the converse direction is unproved' },
+      { id: 'thm-a', model: 'gpt-6-sol', context_sha256: 'a'.repeat(64), reason: 'citation L1 is misattributed' },
+      { id: 'thm-a', model: 'gpt-6-astra', context_sha256: 'b'.repeat(64), reason: 'the converse direction is unproved' },
     ],
   });
   // Verbatim evidence, never a summary.
@@ -118,8 +118,8 @@ test('a group bundle quotes the claim, the facts and every cited clause verbatim
   const again = buildGroupBundle({
     repo, run: 'demo', group: 'a', items: ['thm-a'],
     rejections: [
-      { id: 'thm-a', model: 'gpt-5.6-sol', context_sha256: 'b'.repeat(64), reason: 'the converse direction is unproved' },
-      { id: 'thm-a', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64), reason: 'citation L1 is misattributed' },
+      { id: 'thm-a', model: 'gpt-6-astra', context_sha256: 'b'.repeat(64), reason: 'the converse direction is unproved' },
+      { id: 'thm-a', model: 'gpt-6-sol', context_sha256: 'a'.repeat(64), reason: 'citation L1 is misattributed' },
     ],
   });
   assert.equal(bundle, again);
@@ -138,7 +138,7 @@ test('a rejected item with no file on disk is named rather than skipped', () => 
   const repo = fixture();
   const bundle = buildGroupBundle({
     repo, run: 'demo', group: 'a', items: ['thm-missing'], rejections: [
-      { id: 'thm-missing', model: 'gpt-5.6-terra', context_sha256: 'c'.repeat(64), reason: 'unknown' },
+      { id: 'thm-missing', model: 'gpt-6-sol', context_sha256: 'c'.repeat(64), reason: 'unknown' },
     ],
   });
   assert.match(bundle, /MISSING ITEM FILE/);

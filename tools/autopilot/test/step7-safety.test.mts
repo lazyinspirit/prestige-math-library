@@ -58,7 +58,7 @@ test('the Step-7 paid budget permits exactly one Terra rejudge per repaired item
 test('the fatal context that licensed the first repair does not consume the paid rejudge', () => {
   const row = {
     id: 'thm-demo-one',
-    model: 'gpt-5.6-terra',
+    model: 'gpt-6-sol',
     context_sha256: 'a'.repeat(64),
     outcome: 'confirmed_fatal',
     at: '2026-08-25T00:00:00Z',
@@ -119,7 +119,7 @@ test('cross-group alert identity includes the exact source rejection tuple', () 
     severity: 'fatal',
     source_rejection: {
       id: 'thm-demo-source',
-      model: 'gpt-5.6-terra',
+      model: 'gpt-6-sol',
       context_sha256: 'a'.repeat(64),
     },
   };
@@ -127,7 +127,7 @@ test('cross-group alert identity includes the exact source rejection tuple', () 
     ...base,
     source_rejection: {
       context_sha256: 'a'.repeat(64),
-      model: 'gpt-5.6-terra',
+      model: 'gpt-6-sol',
       id: 'thm-demo-source',
     },
   }), 'object key order cannot change identity');
@@ -151,7 +151,7 @@ test('the Step-7 guard rejects an adjudication that no judge rejection supports'
   const root = mkdtempSync(join(tmpdir(), 'step7-evidence-guard-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const decision = {
-    id: 'thm-fixture', model: 'gpt-5.6-terra',
+    id: 'thm-fixture', model: 'gpt-6-sol',
     context_sha256: 'a'.repeat(64), item_sha256: 'b'.repeat(64),
     outcome: 'confirmed_fatal',
   };
@@ -193,11 +193,11 @@ test('terminal intervention binds the exact unresolved item and completed Terra 
   writeFileSync(join(root, '.autopilot', 'state.json'), JSON.stringify({ run: 'demo' }));
   const initialContext = 'a'.repeat(64);
   writeFileSync(join(root, 'research', 'demo-judge.jsonl'), `${JSON.stringify({
-    id: 'thm-demo-target', model: 'gpt-5.6-terra',
+    id: 'thm-demo-target', model: 'gpt-6-sol',
     context_sha256: initialContext, keep: false,
   })}\n`);
   writeFileSync(join(root, 'research', 'demo-judge-adjudications.jsonl'), `${JSON.stringify({
-    id: 'thm-demo-target', model: 'gpt-5.6-terra',
+    id: 'thm-demo-target', model: 'gpt-6-sol',
     context_sha256: initialContext, outcome: 'confirmed_fatal',
   })}\n`);
   writeFileSync(join(root, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({

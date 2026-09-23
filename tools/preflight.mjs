@@ -16,7 +16,7 @@
 // `judge.mts --preflight`. It is opt-in because it costs money and a live token,
 // and it is the single check most likely to catch the thing that actually kills
 // an overnight run: an expired Codex subscription token, which takes out the
-// Sol and Terra lanes simultaneously and cannot be fixed without a human.
+// Sol judge and author lanes simultaneously and cannot be fixed without a human.
 //
 // Exit 0 = every REQUIRED check passed. Exit 1 = at least one failed.
 

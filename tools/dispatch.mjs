@@ -91,13 +91,13 @@ const ROLES = Object.freeze({
   'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'Step-7 logical adjudication and repair, one Sol xhigh worker per batch' },
   'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, requiresTask: true, why: 'Three Step-7 Sol xhigh owner agents repair all assigned downstream consumers, including published items, before centralized recertification' },
   // `final-adjudicator` — the independent Step-7 close after the owning group
-  // Alpha's initial repair receives a rejecting Terra rejudge. It is
+  // Alpha's initial repair receives a rejecting Sol rejudge. It is
   // intentionally a fresh Astra conversation rather than a
   // resume of the Alpha: independence is the point of the escalation. Medium
   // reasoning and web search are both owner requirements; the task queue and
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
-  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: 9, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid Terra rejudge; one independent Astra-medium agent per affected group, with authoritative web verification' },
+  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: 9, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid judge recheck; one independent Astra-medium agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-6 pass that reads a group's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 6 applies the DeepSeek
   // Flash max profile; the durable digest hands its findings to a fresh Sol xhigh

@@ -123,8 +123,8 @@ test('owner terminal receipts require bound research evidence and a rejected ite
   }
 });
 
-test('one current Terra verdict completes singleton judge coverage', () => {
-  const dir = mkdtempSync(join(tmpdir(), 'step7-terra-coverage-'));
+test('one current Sol verdict completes singleton judge coverage', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'step7-sol-coverage-'));
   try {
     const manifest = join(dir, 'batch.pages.json');
     const ledger = join(dir, 'judge.jsonl');
@@ -133,7 +133,7 @@ test('one current Terra verdict completes singleton judge coverage', () => {
     writeFileSync(manifest, `${JSON.stringify([{ id: 'fixture-page', items: [{ id: ITEM, deps: [] }] }])}\n`);
     writeFileSync(ledger, `${JSON.stringify({
       id: ITEM,
-      model: MODELS.terra.id,
+      model: MODELS.sol.id,
       keep: true,
       context_sha256: now.context_sha256,
       item_sha256: now.item_sha256,
@@ -148,7 +148,7 @@ test('one current Terra verdict completes singleton judge coverage', () => {
     assert.match(result.stdout, /1\/1 current pair/,
       'the live pre-singleton-lineup engine must still be able to parse its liveness counter');
     const parsed = JSON.parse(readFileSync(closure, 'utf8'));
-    assert.equal(parsed.judge_lineup, 'terra');
+    assert.equal(parsed.judge_lineup, 'sol');
     assert.equal(parsed.verdicts_complete, 1);
     assert.equal(parsed.closed, true);
   } finally {
@@ -232,7 +232,7 @@ test('a fresh current judge pass supersedes a stale historical terminal resoluti
     const stale = { ...resolution(now), item_sha256: 'f'.repeat(64) };
     writeFileSync(manifest, `${JSON.stringify([{ id: 'fixture-page', items: [{ id: ITEM, deps: [] }] }])}\n`);
     writeFileSync(ledger, `${JSON.stringify({
-      id: ITEM, model: MODELS.terra.id, keep: true,
+      id: ITEM, model: MODELS.sol.id, keep: true,
       context_sha256: now.context_sha256, item_sha256: now.item_sha256,
       at: '2026-09-11T00:00:00.000Z',
     })}\n`);
@@ -264,7 +264,7 @@ test('stamp verification accepts terminal resolution but writes no pass stamp', 
     const now = currentHashes();
     writeFileSync(receipt, `${JSON.stringify(resolution(now))}\n`);
     writeFileSync(ledger, `${JSON.stringify({
-      id: ITEM, model: MODELS.terra.id, keep: false,
+      id: ITEM, model: MODELS.sol.id, keep: false,
       reason: 'Fixture rejection superseded by the exact terminal resolution.',
       context_sha256: now.context_sha256, item_sha256: now.item_sha256,
       at: '2026-09-05T00:00:00.000Z',

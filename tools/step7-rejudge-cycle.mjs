@@ -2,7 +2,7 @@
 // One durable Step-7 rejudge cycle. The receipt is per item, so an unrelated
 // repair does not spend another item's budget. The frozen context that
 // licensed the first repair is retained as provenance but does not spend it.
-// Exactly one paid Terra rejudge follows a Sol-licensed repair. A funded
+// Exactly one paid Sol rejudge follows a Sol-licensed repair. A funded
 // configured-judge preflight runs immediately before fan-out (or is reused
 // for at most five minutes under the identical lineup).
 
@@ -146,7 +146,7 @@ function main() {
   }
 
   // Check recorded lifetime currency before even reading the other ledgers. An item that has
-  // already consumed its paid Terra rejudge is an intervention blocker, not a
+  // already consumed its paid Sol rejudge is an intervention blocker, not a
   // reason to run another availability probe or judge call.
   let exhausted = exhaustedItems(ids, receipt);
   if (exhausted.length) {
@@ -157,7 +157,7 @@ function main() {
   }
 
   // Retain the frozen judge context that produced the Step-7 repair as
-  // provenance. It does not consume the one paid Terra rejudge budget.
+  // provenance. It does not consume the one paid Sol rejudge budget.
   const evidence = loadStep7JudgeEvidence(
     resolve(root, ledger),
     resolve(root, adjudications),
@@ -174,7 +174,7 @@ function main() {
   exhausted = exhaustedItems(ids, receipt);
   if (exhausted.length) {
     for (const id of exhausted) {
-      console.error(`ERROR rejudge-cycle-exhausted [${id}]: the one paid Terra rejudge is already recorded; intervention required`);
+      console.error(`ERROR rejudge-cycle-exhausted [${id}]: the one paid Sol rejudge is already recorded; intervention required`);
     }
     process.exit(1);
   }

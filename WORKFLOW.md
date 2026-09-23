@@ -43,20 +43,20 @@ The dispatcher and item-judge prompt apply this rule to every role.
 
 | Assignment | Model / effort |
 |---|---|
-| Step 1 scaffolding | DeepSeek V4.1 Flash / max |
+| Step 1 scaffolding | Sol / max |
 | Step 1 drift review; group Alpha | Sol / high |
 | Step 3a pair scope and Step 3b pair authors | DeepSeek V4.1 Flash / max |
 | Step 5a readers | Sol / high |
-| Step 5a refuters | Terra / xhigh |
+| Step 5a refuters | Sol / xhigh |
 | Step 5a adjudicators; Step 5b agents | Sol / xhigh |
-| Step 6 group readers; Step 8 and Step 9 agent lanes | DeepSeek V4.1 Flash / max |
+| Step 6 group readers; Step 9 agent lanes | DeepSeek V4.1 Flash / max |
+| Step 8 agent lanes | Sol / max |
 | Assignment | DeepSeek V4.1 Flash / max |
-| Item judges | Terra / xhigh |
+| Item judges | Sol / xhigh |
 | Step 7 batch adjudicators and three owner repair agents | Sol / xhigh |
 
-tools/models.mjs owns profiles; stages override role defaults. Substituting a
-model requires explicit owner authorization; the owner authorized DeepSeek
-V4.1 Flash / max for any lane the Codex provider cannot serve. Group capacity is nine, batch capacity 27; the
+tools/models.mjs owns profiles; stages override role defaults. The owner selected
+Sol for the former Terra lanes and for Steps 1 and 8. Group capacity is nine, batch capacity 27; the
 global limit is in autopilot.config.json. The `alpha-high` lane permits twelve
 concurrent authors for an owner-directed three-lead/nine-helper partition;
 helpers write only their assigned pair files and leads integrate shared batch
@@ -68,7 +68,7 @@ reread current proofs, dependencies and sources after compaction. Read-only
 roles write no extra files. Compaction starts at 200,000 total context tokens;
 usage telemetry is not a billing estimate.
 
-DeepSeek stages use the stable `deepseek-flash` API alias and maximum reasoning
+DeepSeek stages in Steps 2, 3, 6 and 9 use the stable `deepseek-flash` API alias and maximum reasoning
 through an isolated Codex home. Their required read-only `web_search` MCP tool
 prefers Tavily when `TAVILY_API_KEY` is configured and otherwise uses Firecrawl.
 Dispatch fails before launching if the DeepSeek key or both supported web-search
@@ -344,7 +344,7 @@ frontier. Outside consumers, published or draft, never enter these mechanisms.
 | 7.1 / `7.1-adjudicate` | One Sol xhigh adjudicator per batch resolves Step-6 rejections and repairs confirmed frontier defects. |
 | 7.2 / `7.2-impact` | Three Sol xhigh owner agents concurrently close disjoint frontier impact assignments; empty lanes record no-ops. |
 | 7.3 / `7.3-certify` | After all frontier repairs/reviews close and writers drain, certify the stable state centrally. |
-| 7.4 / `7.4-rejudge` | Terra rejudges repaired frontier items against the stable state. |
+| 7.4 / `7.4-rejudge` | Sol rejudges repaired frontier items against the stable state. |
 | 7.5 / `7.5-adjudicate` | Sol xhigh batch adjudicators resolve renewed frontier rejections and repair confirmed defects. |
 | 7.6 / `7.6-impact` | Three concurrent owner lanes close frontier impacts. |
 | 7.7 / `7.7-certify` | Certify once after repair closure and all writers drain; repeat 7.4–7.7 until below threshold. |

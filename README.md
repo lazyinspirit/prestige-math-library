@@ -39,7 +39,7 @@ Step 5a runs independent reviewers, read-only refuters and routed group
 adjudication; Step 5b reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when
 unsure. Logical validity governs decisions; sources and judges can be mistaken.
-Step 7 must confine repair, adjudication, Terra rejudgment and item gates to the
+Step 7 must confine repair, adjudication, Sol rejudgment and item gates to the
 immutable frontier in `research/<run>-step7-v2/frontier.json`. Sol xhigh batch
 adjudicators repair confirmed frontier defects, and three Sol xhigh owner lanes
 run concurrently on disjoint frontier impact assignments. Every necessary

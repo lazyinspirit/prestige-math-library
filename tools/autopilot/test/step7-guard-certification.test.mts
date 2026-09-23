@@ -100,7 +100,7 @@ test('a missing centralized certificate cannot fall back to historical licence p
 test('initial-wave certification cannot terminal-close Step7', () => {
   const fx = fixture(); fx.write(join(fx.dir, 'certification.json'), { ...fx.cert, phase: 'impact-initial' });
   const result = fx.guard(); assert.equal(result.status, 1);
-  assert.match(result.stdout, /completed repeat-round certification|not completed its Terra\/adjudication cycle/);
+  assert.match(result.stdout, /completed repeat-round certification|not completed its Sol judgment\/adjudication cycle/);
 });
 
 test('stale outside carriers are excluded but immutable source evidence remains mandatory', () => {

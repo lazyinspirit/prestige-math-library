@@ -132,7 +132,7 @@ turning their former scope into new repair authority.
 confirmed frontier defects. 7.2 three Sol xhigh owner agents run concurrently
 on disjoint frontier impact assignments. 7.3 the central tool verifies complete
 frontier repair and review coverage, waits for every writer, then certifies the
-stable state once. 7.4 Terra rejudges repaired frontier items; 7.5 Sol xhigh
+stable state once. 7.4 Sol xhigh rejudges repaired frontier items; 7.5 Sol xhigh
 adjudicators resolve renewed frontier rejections; 7.6 three parallel owner
 lanes close frontier impacts; 7.7 centrally recertifies after all work closes.
 Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original frontier

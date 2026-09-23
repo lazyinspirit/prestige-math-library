@@ -29,7 +29,7 @@ function fixture() {
   writeFileSync(join(root, 'research', 'demo-publication-readiness.json'), JSON.stringify({ run: 'demo',
     verdict: 'publishable-pending-owner-approval', workflow_owned_blockers: [], content_sha256: 'content',
     owner_actions_remaining: ['personal mathematical audit', 'deliberate status:published changes', 'push/deployment'] }));
-  writeFileSync(join(root, 'research', 'demo-judge-closure.json'), JSON.stringify({ judge_lineup: 'terra', closed: true,
+  writeFileSync(join(root, 'research', 'demo-judge-closure.json'), JSON.stringify({ judge_lineup: 'sol', closed: true,
     scope: 1, verdicts_complete: 1, needs_rejudge: [], unadjudicated: [], open_fatal: [] }));
   writeFileSync(join(root, 'research', 'demo-pathway-closure.json'), JSON.stringify({ briefs: [
     { category: 'analysis', status: 'closed', disposition: 'rewritten' },
@@ -38,7 +38,7 @@ function fixture() {
     { label: 'a', hashes: { 'thm-a': 'a' } }, { label: 'b', hashes: { 'thm-a': 'b' } }, { label: 'c', hashes: { 'thm-a': 'c' } },
   ] }));
   writeFileSync(join(root, 'research', 'demo-judge.jsonl'),
-    `${JSON.stringify({ id: 'thm-a', model: 'gpt-5.6-terra', context_sha256: 'ctx', item_sha256: 'item', keep: true })}\n`);
+    `${JSON.stringify({ id: 'thm-a', model: 'gpt-6-sol', context_sha256: 'ctx', item_sha256: 'item', keep: true })}\n`);
   writeFileSync(join(root, 'research', 'demo-judge-adjudications.jsonl'), '');
   writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'before' }));
   writeFileSync(join(root, 'research', 'defect-ledger.jsonl'), [
