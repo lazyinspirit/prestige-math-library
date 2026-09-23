@@ -68,7 +68,10 @@ test('doctor can inspect every future Step 7 command before prerequisite evidenc
   const f=fixture();try {
     rmSync(join(f.repo,'research/demo-step7-v2'),{recursive:true,force:true});
     const ctx={...f.ctx,doctor:true};
-    for(const stage of f.stages)assert.doesNotThrow(()=>stage.plan?.(ctx,stage.units(ctx))??[],stage.id);
+    for(const stage of f.stages){
+      assert.doesNotThrow(()=>stage.plan?.(ctx,stage.units(ctx))??[],stage.id);
+      assert.doesNotThrow(()=>stage.gates?.(ctx)??[],`${stage.id} gates`);
+    }
   }finally{f.close();}
 });
 

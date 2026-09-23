@@ -37,14 +37,29 @@ export function closure(byId, pid) {
  * Pack A pages into batches of at most `cap`, preferring pages that share
  * prerequisites so seams fall inside a batch.
  *
- * Greedy by shared-closure size. Optimal packing is not worth solving here: the
- * cap is 2, the candidate set is a handful of pages, and the cost of a
- * suboptimal pairing is one extra cross-batch edge, not a defect.
+ * Greedy by shared-closure size, but never merge pairs when that would make
+ * the quotient batch prerequisite graph cyclic. A cycle leaves Step 1 unable
+ * to release either scaffold batch.
  */
 export function packBatches(repo, pageIds, { cap = 2 } = {}) {
   const spec = loadPlan(repo);
   const byId = new Map(spec.pages.map((p) => [p.id, p]));
   const ids = [...pageIds];
+  const selected = new Set(ids);
+  const pairForPage = new Map();
+  for (const id of ids) {
+    const a = byId.get(id);
+    if (!a || a.kind !== 'A') throw new Error(`unknown A page ${id}`);
+    pairForPage.set(id, id);
+    pairForPage.set(a.companion ?? `${id}-examples`, id);
+  }
+  const pairDeps = new Map(ids.map(id => {
+    const a = byId.get(id);
+    const b = byId.get(a.companion ?? `${id}-examples`);
+    if (!b || b.kind !== 'B') throw new Error(`page ${id} has no B companion`);
+    return [id, new Set([...(a.requires ?? []), ...(b.requires ?? [])]
+      .map(req => pairForPage.get(req)).filter(req => req && req !== id && selected.has(req)))];
+  }));
   const cl = new Map(ids.map((id) => [id, closure(byId, id)]));
   const affinity = (a, b) => {
     const A = cl.get(a); const B = cl.get(b);
@@ -56,6 +71,24 @@ export function packBatches(repo, pageIds, { cap = 2 } = {}) {
 
   const remaining = new Set(ids);
   const out = [];
+  const acyclicWith = (candidateGroup) => {
+    const groups = [...out, candidateGroup, ...[...remaining].filter(id => !candidateGroup.includes(id)).map(id => [id])];
+    const groupFor = new Map(groups.flatMap((group, i) => group.map(id => [id, i])));
+    const edges = groups.map(group => new Set(group.flatMap(id => [...pairDeps.get(id)])
+      .map(dep => groupFor.get(dep)).filter(dep => dep !== groupFor.get(group[0]))));
+    const visiting = new Set(), visited = new Set();
+    const visit = (i) => {
+      if (visiting.has(i)) return false;
+      if (visited.has(i)) return true;
+      visiting.add(i);
+      for (const dep of edges[i]) if (!visit(dep)) return false;
+      visiting.delete(i);
+      visited.add(i);
+      return true;
+    };
+    return groups.every((_, i) => visit(i));
+  };
+  if (!acyclicWith([])) throw new Error('selected A/B pairs have a prerequisite cycle');
   // Deterministic seed order, so the same input always produces the same
   // batching — a run that batches differently on a re-plan is unreviewable.
   const ordered = ids.slice().sort((a, b) => (byId.get(a).order ?? 0) - (byId.get(b).order ?? 0));
@@ -76,6 +109,7 @@ export function packBatches(repo, pageIds, { cap = 2 } = {}) {
         // Only pair within a category: a Beta reading two literatures for two
         // unrelated subjects is slower and reads less of each.
         if (!sameCategory(seed, cand)) continue;
+        if (!acyclicWith([...group, cand])) continue;
         const score = affinity(seed, cand);
         if (score > bestScore) { best = cand; bestScore = score; }
       }

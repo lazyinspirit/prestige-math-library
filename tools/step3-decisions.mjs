@@ -78,9 +78,14 @@ export function loadStep3(root, run) {
     }
   }
   if (!pages.length) throw Error('No run manifests');
+  const claimedCompanions = new Set();
   for (const a of pages.filter(p => p.kind === 'A')) {
     const b = pages.find(p => p.id === a.companion && p.kind === 'B');
-    if (!b || b.companion !== a.id || pairs.has(a.id)) throw Error(`Invalid pair ${a.id}`);
+    // The plan contract names companions on A pages; B pages may omit the
+    // reverse pointer. Reject a contradictory pointer or a shared B page.
+    if (!b || (b.companion && b.companion !== a.id) || pairs.has(a.id)
+      || claimedCompanions.has(b.id)) throw Error(`Invalid pair ${a.id}`);
+    claimedCompanions.add(b.id);
     pairs.set(a.id, [a, b]);
   }
   if (pairs.size * 2 !== pages.length) throw Error('Every page must belong to one A/B pair');

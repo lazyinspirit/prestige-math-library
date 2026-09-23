@@ -50,6 +50,20 @@ test('Step 3 is two barriers with the requested profiles, not a Beta loop', t =>
   }
 });
 
+test('Step 3 accepts an omitted B back-reference but rejects conflicting or shared companions', t => {
+  const f = fixture(t);
+  delete f.pages[1].companion;
+  f.put('demo-batch-1.pages.json', f.pages);
+  assert.deepEqual([...loadStep3(f.root, 'demo').pairs.keys()], ['a']);
+  f.pages[1].companion = 'other-a';
+  f.put('demo-batch-1.pages.json', f.pages);
+  assert.throws(() => loadStep3(f.root, 'demo'), /Invalid pair a/);
+  delete f.pages[1].companion;
+  f.pages.push({ id: 'other-a', kind: 'A', companion: 'b', order: 3, requires: [], items: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  assert.throws(() => loadStep3(f.root, 'demo'), /Invalid pair other-a/);
+});
+
 test('scope is required; legacy sufficient pair verdicts cannot approve items', t => {
   const f = fixture(t);
   f.put('demo-scaffold-final-a.json', { decision: 'accept', confidence: 1 });

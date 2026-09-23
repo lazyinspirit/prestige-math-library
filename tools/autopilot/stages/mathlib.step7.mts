@@ -70,14 +70,19 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     if(threshold.errors?.length||typeof threshold.belowThreshold!=='boolean')throw Error('invalid fatal threshold evidence');
     return threshold.belowThreshold?null:{next:'7.4-rejudge'};
   };
-  const battery=(ctx:any)=>frontierGateBattery(ctx,[
+  const battery=(ctx:any)=>{
+    const gates=[
     gate('step7-round-certification',tool(ctx,'check','final',1)),
     ...(step7GuardGate?[step7GuardGate(ctx)]:[]),
     ...repoWide(ctx),...contractGates(ctx,{reviewed:true}),
     // Published maintenance and auditor additions are outside the immutable
     // original frontier; their certification gates belong to later stages.
     closureGate(ctx),ledgerGate(ctx),
-  ]);
+    ];
+    // Doctor inspects future command descriptors before 7-scope creates the
+    // frontier. Actual execution always scopes the complete battery.
+    return ctx.doctor ? gates : frontierGateBattery(ctx,gates);
+  };
   const gateStage=(id:string):any=>({id,label:`${id.split('-')[0]} complete Step 7 gate battery`,units:()=>['all'],
     concurrency:1,
     plan:(ctx:any)=>[{role:'tool',label:`step7-v2-gate-check-r${round(ctx,id)}-${id}-all`,covers:['all'],job:'bookkeeping-mechanical',argv:['node','-e','console.log("Step 7 gate battery ready")']}],

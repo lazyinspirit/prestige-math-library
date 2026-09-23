@@ -78,6 +78,11 @@ LLM.
 ## Scaffold, audit and author
 
 Step 1 drift review/materialization precedes dependency-safe scaffold construction.
+A/B pairs are packed within a category only when the resulting batch
+prerequisite graph remains acyclic; a transitive supplier chain can therefore
+separate two otherwise similar pairs. The A page declares its B companion in
+the plan; a matching B back-reference is optional, but a conflicting one is
+invalid.
 A consumer batch waits for artifact-complete, stable transitive supplier batches;
 independent DAG branches remain parallel. A cyclic condensed batch graph is a
 planning error and blocks before dispatch. Every item needs a current

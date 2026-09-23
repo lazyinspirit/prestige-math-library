@@ -171,6 +171,16 @@ test('batching is deterministic — the same input gives the same batches', () =
   assert.deepEqual(packBatches(r, ['a', 'b', 'c']), packBatches(r, ['c', 'b', 'a']));
 });
 
+test('batching does not merge the ends of an in-run dependency path', () => {
+  const pages = [
+    A('a', 1, [], 'geometry'), B('a', 1),
+    A('b', 3, ['a'], 'schemes'), B('b', 3),
+    A('c', 5, ['b'], 'geometry'), B('c', 5),
+  ];
+  const groups = packBatches(repo({ pages }), ['a', 'b', 'c']);
+  assert.deepEqual(groups, [['a'], ['b'], ['c']]);
+});
+
 test('drift evidence: assembles closure and pointers without judging', () => {
   const pages = [A('page', 5, ['have']), B('page', 5), A('have', 1), A('want', 3)];
   const r = repo({
