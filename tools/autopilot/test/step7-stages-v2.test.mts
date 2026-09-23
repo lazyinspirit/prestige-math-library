@@ -72,6 +72,9 @@ test('doctor can inspect every future Step 7 command before prerequisite evidenc
       assert.doesNotThrow(()=>stage.plan?.(ctx,stage.units(ctx))??[],stage.id);
       assert.doesNotThrow(()=>stage.gates?.(ctx)??[],`${stage.id} gates`);
     }
+    const freeze={id:'7-freeze',label:'freeze',units:()=>['all'],pattern:/freeze/,plan:()=>[],gates:()=>[gate('freeze',['node','check'])]};
+    assert.deepEqual(validateStages([...f.stages,freeze],f.ctx),[],
+      'start checks future gate descriptors before the Step 7 frontier exists');
   }finally{f.close();}
 });
 

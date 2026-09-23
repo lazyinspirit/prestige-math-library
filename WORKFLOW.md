@@ -556,6 +556,8 @@ node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts doctor --run RUN --stat
 Doctor probes each dispatch plan in descriptor-only mode with that stage's
 current declared unit IDs; future plans do not consume prerequisite artifacts
 during this probe, while runtime planning still validates them.
+The stage-table preflight checks future gate descriptors in the same mode;
+runtime gate execution still reads the frozen Step 7 frontier.
 pair-keyed stages therefore receive A-page IDs rather than synthetic batch
 numbers. For stages whose prerequisites have not produced units yet, it retains
 synthetic probes so later command flags and schemas are still checked.

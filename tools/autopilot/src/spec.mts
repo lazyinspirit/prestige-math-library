@@ -33,6 +33,9 @@ export interface SpecProblem { stage: string; message: string; }
 export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
   const problems: SpecProblem[] = [];
   const P = (stage: string, message: string) => problems.push({ stage, message });
+  // Gate descriptors for future stages may depend on artifacts those stages
+  // have not produced yet. Runtime gate execution still uses the live context.
+  const descriptorCtx = { ...ctx, doctor: true };
 
   if (!Array.isArray(stages) || !stages.length) {
     P('(spec)', 'the stage table is empty');
@@ -156,7 +159,7 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
         P(s.id, '`gatesWaived` must be a sentence saying WHY this stage needs no gate and what checks it instead. '
           + 'A bare `true` is how a missing gate looks like a deliberate one.');
       }
-      if (typeof s.gates === 'function' && (s.gates(ctx) ?? []).length) {
+      if (typeof s.gates === 'function' && (s.gates(descriptorCtx) ?? []).length) {
         P(s.id, 'declares both `gatesWaived` and actual gates; drop the waiver');
       }
       continue;
@@ -168,7 +171,7 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
       continue;
     }
     let list: Gate[] = [];
-    try { list = s.gates(ctx) ?? []; }
+    try { list = s.gates(descriptorCtx) ?? []; }
     catch (err: any) { P(s.id, `gates(ctx) threw — ${err?.message ?? err}`); continue; }
     if (!list.length) {
       P(s.id, 'declares `gates` but returns an empty list. An empty gate list is read as "gates passed"; '
