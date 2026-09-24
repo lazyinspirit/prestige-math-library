@@ -122,8 +122,9 @@ export class Executor {
    * requested lane here. The complete set is preflighted before any member is
    * launched, so a late bad sibling cannot race an early valid one. */
   _repairStarts?: Array<{ stage: Stage; plan: Plan }>;
-  /** Earliest wall-clock at which the next dispatch may SPAWN. See `start`. */
-  nextSpawnAt: number;
+  /** Serializes spawn decisions, without waiting for dispatched work to finish. */
+  spawnQueue: Promise<void>;
+  lastSpawnAt: number;
 
   constructor({ config, stages, adapter, state, reporter, clock = Date, signal }:
     { config: Config; stages: Stage[]; adapter: Adapter; state: any; reporter: any; clock?: { now(): number }; signal?: AbortSignal }) {
@@ -138,7 +139,8 @@ export class Executor {
     this.inflight = new Map();
     this.stopped = false;
     // No dispatch has spawned yet, so the first one owes no wait.
-    this.nextSpawnAt = 0;
+    this.spawnQueue = Promise.resolve();
+    this.lastSpawnAt = -Infinity;
     // EVENT-DRIVEN RE-VERIFICATION. A blocked stage's battery used to re-run
     // every tick against unchanged inputs: frontier-15 ran the 6-judge battery
     // 29 times during one account outage, re-probing archive.org each pass.
@@ -831,40 +833,18 @@ export class Executor {
       ? makeExecAdapter({ argv: plan.argv, cwd: this.config.repo,
         logger: (m: string) => this.reporter.event('exec', { label: plan.label, m }) })
       : this.adapter;
-    // STAGGER THE SPAWN (owner, 2026-08-24). A stage fans out to its cap in one
-    // millisecond — frontier-18's step 3 started four Alphas at .343, .345, .348
-    // and .423 — so every agent boots, reads the repo and opens its first API
-    // connection at the same instant. At the caps this run uses that is twelve
-    // Betas at once, and a simultaneous boot is the shape that produces a 429
-    // stampede and a lane of null verdicts.
-    //
-    // IT LIVES HERE, NOT IN THE FAN-OUT LOOP, for two reasons. The repair hooks
-    // (`dispatchSourceScouts`) call `start` directly
-    // and would otherwise keep stampeding. And the delay must not sit between
-    // the `inflight` registration and the cap arithmetic that reads it: the
-    // registration below is synchronous and already done, so a staggered spawn
-    // still counts against the cap from the moment it is decided. Delaying the
-    // loop instead would leave the engine free to over-dispatch in the gap.
-    //
-    // The wait is per-engine, not per-stage: two overlapping pipeline stages
-    // share one boot budget, because the API does not care which stage a
-    // process belongs to.
-    // 3s by default (owner, 2026-08-24), so a production path that forgets to
-    // configure it is still paced. Test harnesses set `dispatchStaggerMs: 0`
-    // explicitly: they drive stub adapters where there is nothing to pace, and
-    // real sleeps there buy nothing but a slower suite.
-    //
-    // 2s -> 3s ON EVIDENCE, not taste. frontier-18's step 3 dispatched all ten
-    // authors inside one millisecond — 05:29:51.794, .802, .805 — and every one
-    // came back `API Error: 529 Overloaded`. Two full rounds of ten Sol[1m]
-    // lanes were lost to a simultaneous boot before a single token of authoring
-    // was written. The owner's standing instruction sets the separation at
-    // three seconds, and a stampede is the one case that had already been
-    // pre-authorised precisely because waiting to ask costs another round.
-    const staggerMs = this.config.dispatchStaggerMs ?? 3000;
-    const waitMs = Math.max(0, this.nextSpawnAt - this.clock.now());
-    this.nextSpawnAt = this.clock.now() + waitMs + staggerMs;
-    if (waitMs > 0) this.reporter.event('spawn-stagger', { label: plan.label, waitMs });
+    // Count queued work as in flight immediately, then serialize actual process
+    // launches across stages. Reservation-time timers can all expire during a
+    // long synchronous manifest scan and wake in the same event-loop turn;
+    // measuring from the previous ACTUAL launch avoids that stampede. DeepSeek
+    // dispatches use the owner's one-second interval; other lanes retain three
+    // seconds. Test harnesses may disable pacing with dispatchStaggerMs: 0.
+    const staggerMs = String(vars.profile).startsWith('deepseek-')
+      ? (this.config.deepseekDispatchStaggerMs ?? (this.config.dispatchStaggerMs === 0 ? 0 : 1000))
+      : (this.config.dispatchStaggerMs ?? 3000);
+    const precedingSpawn = this.spawnQueue;
+    let releaseSpawn!: () => void;
+    this.spawnQueue = new Promise<void>((resolve) => { releaseSpawn = resolve; });
 
     // The adapter enforces the timeout; `plan.timeout` used to be only a
     // template variable, silently inert for every tool lane. The margin lets a
@@ -872,8 +852,22 @@ export class Executor {
     // cleanup before the engine kills the group. The timeout clock starts when
     // the process does, after the stagger — an agent must not be charged for
     // time it spent queued.
-    const promise = sleep(waitMs, this.signal)
-      .then(() => adapter.invoke(vars, { signal: this.signal, timeoutMs: (Number(vars.timeout) + 120) * 1000 }))
+    const promise = precedingSpawn.then(async () => {
+      const waitMs = Math.max(0, this.lastSpawnAt + staggerMs - this.clock.now());
+      if (waitMs > 0) this.reporter.event('spawn-stagger', { label: plan.label, waitMs });
+      await sleep(waitMs, this.signal);
+      if (this.signal?.aborted) throw new Error('dispatch aborted before spawn');
+      this.lastSpawnAt = this.clock.now();
+      try {
+        return adapter.invoke(vars, { signal: this.signal, timeoutMs: (Number(vars.timeout) + 120) * 1000 });
+      } finally {
+        // Release the next launch now, not when this dispatch completes.
+        releaseSpawn();
+      }
+    }).catch((error) => {
+      releaseSpawn();
+      throw error;
+    })
       .then((r) => {
         // THE ENGINE WRITES THE RECEIPT, not the command.
         //

@@ -257,12 +257,11 @@ export interface Config {
    * `owner-recertify` additionally requires repair and recertification of
    * every rejected item before `retry` reruns the gate. */
   gateFailurePolicy?: 'repair' | 'owner' | 'owner-recertify';
-  /** Minimum gap between two dispatch SPAWNS, in ms (default 2000; owner,
-   *  2026-08-24). A stage fans out to its cap in the same millisecond, so up to
-   *  twelve agent processes used to boot, read the repo and open their first
-   *  API connection simultaneously. Spacing them costs seconds against stages
-   *  that run for hours. 0 disables it. */
+  /** Minimum gap between non-DeepSeek process launches, in ms (default 3000).
+   *  Zero also disables DeepSeek pacing in test harnesses. */
   dispatchStaggerMs?: number;
+  /** DeepSeek process-launch gap in ms (default 1000). */
+  deepseekDispatchStaggerMs?: number;
   reportIntervalMin?: number;
   pollSec?: number;
   defaultTimeoutSec?: number;

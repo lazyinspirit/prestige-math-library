@@ -808,6 +808,37 @@ test('the spawn stagger spaces dispatches and is per-engine, not per-stage', asy
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('DeepSeek launches stay one paced queue after an event-loop stall', async () => {
+  const repo = fixtureRepo();
+  try {
+    const config: any = {
+      repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'],
+      dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {},
+      adoptCommand: false, dispatchStaggerMs: 3000, deepseekDispatchStaggerMs: 40,
+    };
+    const state = new State(statePath(config.stateDir)).init('demo');
+    const reporter = new Reporter({ dir: config.stateDir, intervalMs: 60_000 });
+    const spawnedAt: number[] = [];
+    const adapter: any = { invoke: async () => {
+      spawnedAt.push(Date.now());
+      return { ok: true, code: 0 };
+    } };
+    const ex = new Executor({ config, stages, adapter, state, reporter });
+    const stage: any = { id: 'x', label: 'x', units: () => ['1'], pattern: /never/,
+      modelProfile: 'deepseek-v4.1-flash-max' };
+    for (const label of ['a', 'b', 'c'])
+      ex.start(stage, { role: 'alpha-high', label, job: 'authoring', covers: [label] } as any);
+    // All reservation-time timers would expire during this synchronous work.
+    const until = Date.now() + 90;
+    while (Date.now() < until) { /* simulate a blocked event loop */ }
+    await Promise.all([...ex.inflight.values()].map((dispatch: any) => dispatch.promise));
+    assert.equal(spawnedAt.length, 3);
+    assert.ok(spawnedAt[1] - spawnedAt[0] >= 35, 'second DeepSeek launch was simultaneous');
+    assert.ok(spawnedAt[2] - spawnedAt[1] >= 35, 'third DeepSeek launch was simultaneous');
+    assert.ok(spawnedAt[2] - spawnedAt[0] < 500, 'DeepSeek used the slower default interval');
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
+
 test('dispatchStaggerMs 0 disables the wait entirely', async () => {
   const repo = fixtureRepo();
   const config: any = {
