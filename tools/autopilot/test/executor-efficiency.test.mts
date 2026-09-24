@@ -411,6 +411,18 @@ test('a tick that throws is recorded as a blocker and the loop keeps running', a
   assert.ok(notifications.some((n) => n.kind === 'tick-error'));
 });
 
+test('a recovered tick retires only the transient engine-loop blocker', async () => {
+  const fx = fixture();
+  const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'never')]));
+  ex.state.addBlocker('unrelated', 'owner repair still needed');
+  let calls = 0;
+  ex.tick = async () => { if (++calls === 1) throw new Error('Unterminated string in JSON'); return 'working'; };
+  assert.equal(await ex.run({ pollMs: 1, maxTicks: 2 }), 'working');
+  assert.equal(ex.state.data.blockers.length, 1);
+  assert.equal(ex.state.data.blockers[0].message, 'owner repair still needed');
+  assert.ok(notifications.some((n) => n.kind === 'unblocked'));
+});
+
 test('a pause-at marker stops the run at the named stage boundary', async () => {
   const fx = fixture();
   const stages = ['first', 'second'].map((id) => ({

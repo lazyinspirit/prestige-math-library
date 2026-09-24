@@ -2173,6 +2173,19 @@ export class Executor {
         } else {
           this.blockedTicks = 0;
         }
+        // A tick-level parse error can occur while another live author is
+        // replacing a shared JSON file. Once a complete iteration succeeds,
+        // its engine-loop blocker is historical evidence in the event log,
+        // not an active obstruction. Keep substantive stage blockers intact.
+        if (r === 'working') {
+          const old = this.state.data.blockers.length;
+          this.state.data.blockers = this.state.data.blockers.filter((b: any) =>
+            !String(b.message ?? '').startsWith('engine loop threw — '));
+          if (this.state.data.blockers.length !== old) {
+            this.state.save();
+            this.reporter.notify('unblocked', `retired ${old - this.state.data.blockers.length} recovered engine-loop blocker(s)`);
+          }
+        }
         ticks += 1;
         if (ticks >= maxTicks) return 'working';
         // Drain completed boundaries immediately; keep the polling fallback for
