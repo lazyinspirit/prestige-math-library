@@ -1232,7 +1232,9 @@ export class Executor {
       const doneIds = new Set(this.stages.filter((s: any) => this.stageStatus(s, ctx).done).map((s: any) => s.id));
       const completeByStage = new Map(this.stages.map((s: any) => [s.id, this.unitsComplete(s, ctx)]));
       const recoveredDispatch = (blocker: any) => {
-        const match = /\(covers ([^)]+)\)$/.exec(String(blocker.message ?? ''));
+        const message = String(blocker.message ?? '');
+        const match = /\(covers ([^)]+)\)$/.exec(message)
+          ?? /stage-stalemate: unit\(s\) (.+?) covered but artifact-incomplete/.exec(message);
         if (!match || match[1] === 'n/a') return false;
         const done = completeByStage.get(blocker.stage);
         const units = match[1].split(',').map((unit: string) => unit.trim()).filter(Boolean);

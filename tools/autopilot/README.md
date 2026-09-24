@@ -43,12 +43,19 @@ until green. The threshold never permits unresolved defects or missing evidence.
 Coverage, artifacts and gates are independently required. Every agent must be
 honest about uncertainty and read authoritative sources when unsure. Logical
 validity governs decisions; authoritative sources can also contain mistakes.
+An artifact-complete unit retires its own stale stalemate blocker on the next
+controller tick, even while sibling units in that stage are still writing.
 Outside the explicitly authorized Step7 gate-repair loop, Step 1–9 failures are
 owner-recertification holds: no failing gate invokes a stage repair hook or
 spends a repair budget. The owner/operator must repair every rejected item,
 refresh every certification invalidated by that repair, and retry the same gate;
 the stage cannot transition until the repaired, recertified carrier passes.
 This does not suppress the workflow's normal first-pass dispatches.
+
+Step 9 includes any run-local `deferred-pairs.json` and `deferred-items.json`
+records in its sealed evidence packet. It rejects a deferred page or item that
+is still active in the run scope, and the rendered owner report names each
+documented deferral and its reason separately from the built inventory.
 
 Standalone stages can declare a read-only `route({ctx, outcome, failure})`
 callback and explicit `routeTargets`. The engine evaluates it only after the

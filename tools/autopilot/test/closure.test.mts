@@ -241,6 +241,36 @@ test('owner-recertify policy blocks with the repair, recertification and same-ga
   assert.match(blocker?.message ?? '', /retry the gate before transition/);
 });
 
+test('a repaired artifact retires its unit stalemate while sibling work remains', async () => {
+  const repo = mkdtempSync(join(tmpdir(), 'ap-stalemate-recovery-'));
+  const dispatchDir = join(repo, 'dispatch');
+  mkdirSync(dispatchDir, { recursive: true });
+  const stateDir = join(repo, '.autopilot');
+  writeFileSync(join(dispatchDir, 'writer-first.result.json'), JSON.stringify({ ok: true, covers: ['first'] }));
+  writeFileSync(join(repo, 'first.artifact'), 'repaired');
+  const stage: any = {
+    id: 'author', label: 'author', units: () => ['first', 'second'],
+    pattern: /^writer-/, artifacts: (_ctx: any, unit: string) => `${unit}.artifact`,
+    plan: () => [], gates: () => [{ id: 'ok', argv: ['true'] }],
+  };
+  const state = new State(statePath(stateDir)).init('t');
+  const repaired = 'stage author: owner repair and recertification required — stage-stalemate: unit(s) first covered but artifact-incomplete and no longer running';
+  const stillOpen = 'stage author: owner repair and recertification required — stage-stalemate: unit(s) second covered but artifact-incomplete and no longer running';
+  state.addBlocker('author', repaired, 'owner:author');
+  state.addBlocker('author', stillOpen, 'owner:author-second');
+  const reporter = new Reporter({ dir: stateDir, intervalMs: 10 ** 9, sink: () => {} });
+  const adapter = makeExecAdapter({ argv: ['true'], cwd: repo });
+  const ex = new Executor({
+    config: { run: 't', repo, stateDir, dispatchDir, argv: ['true'], concurrency: 1,
+      maxAttempts: 1, gateFailurePolicy: 'owner', coversMap: {}, adoptCommand: false,
+      dispatchStaggerMs: 0 } as any,
+    stages: [stage], adapter, state, reporter,
+  });
+  await ex.tick();
+  assert.ok(!state.data.blockers.some((blocker: any) => blocker.message === repaired));
+  assert.ok(state.data.blockers.some((blocker: any) => blocker.message === stillOpen));
+});
+
 // --------------------------------------------------------------------------
 // RC1 — a gate whose input is absent used to report success.
 // --------------------------------------------------------------------------
