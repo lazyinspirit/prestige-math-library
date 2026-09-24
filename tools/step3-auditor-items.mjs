@@ -150,7 +150,17 @@ function certify(root, run, partial) {
       && JSON.stringify(prior.dependencies) === JSON.stringify(dependencies);
     const pair = [...s.pairs].find(([, pages]) => pages.some(page => page.id === value.page.id))?.[0];
     let author, ownerRecertification;
-    if (priorCurrent) author = { label: prior.author_result };
+    if (priorCurrent) {
+      author = { label: prior.author_result };
+      // A reused item hash is not permission to detach its owner repair from
+      // the provenance certificate. Also restore the binding if an older
+      // certifier pass accidentally dropped it from an otherwise current row.
+      ownerRecertification = currentOwnerRepair(s, id, dependencies, sha256);
+      if (prior.owner_recertification && !ownerRecertification) {
+        defer(`${id}: prior owner repair is no longer current`);
+        continue;
+      }
+    }
     else {
       author = results.filter(row => row.label.startsWith('step3b-pair-')
         ? Boolean(pair && row.label.startsWith(`step3b-pair-${pair}-`) && row.covers.includes(pair))

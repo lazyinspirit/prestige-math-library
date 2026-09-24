@@ -452,6 +452,19 @@ test('Step-3 first certification pairs original author provenance with a current
   assert.equal(receipt.items.length, 1);
   assert.equal(receipt.items[0].author_result, authorLabel);
   assert.ok(receipt.items[0].owner_recertification?.sha256);
+  const reused = certifyAuditorItems(root, 'r');
+  assert.deepEqual(reused.items[0].owner_recertification, receipt.items[0].owner_recertification,
+    'a later certification pass must retain the owner repair binding');
+  const certificationPath = join(root, 'research/r-step3-auditor-certifications.json');
+  const unbound = JSON.parse(readFileSync(certificationPath, 'utf8'));
+  delete unbound.items[0].owner_recertification;
+  writeFileSync(certificationPath, JSON.stringify(unbound));
+  const restored = certifyAuditorItems(root, 'r');
+  assert.deepEqual(restored.items[0].owner_recertification, receipt.items[0].owner_recertification,
+    'a current owner receipt restores a binding lost by an older certifier pass');
+  rmSync(join(root, 'research/r-step3b-owner-lem-created.json'));
+  assert.throws(() => certifyAuditorItems(root, 'r'), /prior owner repair is no longer current|changed after its latest successful Step 3/,
+    'the original author result cannot silently replace a missing owner repair');
 });
 
 for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a covering author dispatch`, () => {
@@ -563,7 +576,7 @@ test('judge closure requires full current carriers without fabricating a verdict
   writeAuditorCreatedBaseline(root, 'r', 8);
   mkdirSync(join(root, 'tools'));
   copyFileSync(join(REPO, 'tools/level-coverage.mjs'), join(root, 'tools/level-coverage.mjs'));
-  for (const module of ['models', 'judge-currency', 'step7-terminal-resolution',
+  for (const module of ['models', 'judge-currency', 'step7-adjudication-compat', 'step7-terminal-resolution',
     'step7-certification-consumer', 'step7-workflow', 'step7-rounds', 'context-hash-pool',
     'auditor-created-items', 'item-hash', 'frontmatter-list'])
     symlinkSync(join(REPO, `tools/${module}.mjs`), join(root, `tools/${module}.mjs`));

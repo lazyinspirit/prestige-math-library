@@ -145,15 +145,20 @@ against the original immutable v1 inventory baseline. On the author-dispatch
 path, no input write after the result's `ended_at` is accepted, including
 subsecond writes.
 
-For an item already certified as auditor-created, a later owner-held gate repair
-may instead use a current `record-item --owner --decision repaired` receipt with
-the exact examined dependencies and a reason. The certifier checks that this
+For an auditor-created item with a genuine successful covering author result,
+an owner-held gate repair may use a current `record-item --owner --decision
+repaired` receipt with the exact examined dependencies and a reason, either on
+first V2 certification or on renewal. The certifier checks that this
 owner decision postdates every current transitive input write, binds the current
 item hash, and preserves the original successful author result as origin
 evidence. It records a hash of the owner receipt in the renewed V2 certificate;
 altering that receipt invalidates provenance. This path cannot certify a newly
 created item lacking an original successful author dispatch, and a `reopen` or
 `hold` owner decision cannot serve as a repair certificate.
+Each later certification pass rechecks and retains the owner-repair binding on
+an unchanged item hash. It can restore a binding omitted by an earlier V2 pass
+only from a current hash-bound owner receipt and the original successful author
+result; a missing or stale bound receipt blocks reuse.
 
 Artifact-incomplete Step-3 results are owner-held and are not synthetically
 redispatched. After owner-authorized correction, eligible completed authors can
