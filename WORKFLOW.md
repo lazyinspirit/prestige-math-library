@@ -56,11 +56,11 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 7 batch adjudicators and three owner repair agents | Sol / xhigh |
 
 tools/models.mjs owns profiles; stages override role defaults. The owner selected
-Sol for the former Terra lanes and for Steps 1 and 8. Group capacity is ten, batch capacity 30; the
-global limit is in autopilot.config.json. The `alpha-high` lane permits twelve
-concurrent authors for an owner-directed three-lead/nine-helper partition;
-helpers write only their assigned pair files and leads integrate shared batch
-artifacts. Dispatches start three seconds apart. Shared-file stages are serial
+Sol for the former Terra lanes and for Steps 1 and 8. Group capacity is ten;
+Step 3b pair authoring and its `alpha-high` lane can fill the 30-pair run ceiling.
+The global limit in autopilot.config.json also permits 30 concurrent dispatches.
+Pair prerequisites and same-batch exclusion govern which authors can run
+together. Dispatches start three seconds apart. Shared-file stages are serial
 except Step 7 owner waves, which run parallel item assignments and lock only
 short shared-metadata edit sections.
 Writing agents checkpoint after each item and

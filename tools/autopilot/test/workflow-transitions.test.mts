@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { stages, step3Plan, workflowRevision } from '../stages/mathlib.mts';
 import { assertWorkflowRevision } from '../src/workflow-revision.mts';
 import { recordStep3 } from '../../step3-decisions.mjs';
+import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 
 const repo = fileURLToPath(new URL('../../..', import.meta.url));
 const stage = (id: string): any => stages.find(s => s.id === id);
@@ -15,14 +16,14 @@ const stage = (id: string): any => stages.find(s => s.id === id);
 test('author, splice, the reader pipeline, cross-closure and judgment keep their order', () => {
   const ids = stages.map(s => s.id);
   assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.every(id => /^[1-9][ab]?-/.test(id)));
+  assert.ok(ids.every(id => /^[1-9](?:\.\d+)?[ab]?-/.test(id)));
   assert.deepEqual(ids.slice(ids.indexOf('3a-scope'), ids.indexOf('6-judge') + 1), [
     '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
     '5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect',
     '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close',
     '6-scope', '6-judge',
   ]);
-  assert.ok(ids.includes('7-rejudge') && ids.includes('8-receipt') && ids.includes('9-close-v2'));
+  assert.ok(ids.includes('7.4-rejudge') && ids.includes('8-receipt') && ids.includes('9-close-v2'));
   // Only the reader pipeline overlaps; everything else in Steps 3-6 is a barrier.
   const pipelined = new Set(['5a-read', '5a-split', '5a-refute', '5a-collect']);
   for (const s of stages.filter(s => /^[3456]/.test(s.id) && !pipelined.has(s.id)))
@@ -39,7 +40,16 @@ test('the production Steps 1 through 9 require owner repair, recertification and
   const config = JSON.parse(readFileSync(join(repo, 'autopilot.config.json'), 'utf8'));
   assert.equal(config.gateFailurePolicy, 'owner-recertify');
   assert.ok(stages.length > 0);
-  assert.ok(stages.every(s => /^[1-9][ab]?-/.test(s.id)));
+  assert.ok(stages.every(s => /^[1-9](?:\.\d+)?[ab]?-/.test(s.id)));
+});
+
+test('pair authoring has no capacity queue within the run ceiling', () => {
+  const config = JSON.parse(readFileSync(join(repo, 'autopilot.config.json'), 'utf8'));
+  assert.equal(stage('3b-author').concurrency, MAX_RUN_BATCHES);
+  assert.ok(config.globalConcurrency >= MAX_RUN_BATCHES);
+  const dispatch = spawnSync(process.execPath, [join(repo, 'tools/dispatch.mjs'), '--help'],
+    { cwd: repo, encoding: 'utf8' });
+  assert.match(dispatch.stderr, new RegExp(`alpha-high \\(workspace-write, cap ${MAX_RUN_BATCHES}\\)`));
 });
 
 test('workflow revision rejects historical state/results without changing them', () => {

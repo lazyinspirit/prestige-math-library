@@ -1536,7 +1536,7 @@ export const stages = [
     artifacts: (ctx, u) => legacyStep3(ctx) ? authorArtifacts(ctx, u) : pairAuthorArtifacts(ctx, u),
     pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)
       ? 'step3b-[a-z]+-[a-f0-9]+' : 'step3b-pair-[a-z0-9-]+-[a-f0-9]+'),
-    concurrency: MAX_GROUPS,
+    concurrency: MAX_RUN_BATCHES,
     plan: (ctx, pending) => legacyStep3(ctx)
       ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
         .map(g => step3Plan(ctx, g, 'final'))
