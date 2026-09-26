@@ -7,8 +7,9 @@ normative instruction file. Do not duplicate those rules here; update
 `CLAUDE.md` instead.
 
 **Active run.** The build driver is `tools/autopilot/`; a live run has a
-`.autopilot/` state dir at the repo root (`node tools/autopilot/bin/autopilot.mts
-status` recomputes from disk). The many `research/*RESUME.md` files belong to
+`.autopilot/` state dir at the repo root (`node tools/tsx-run.mjs
+tools/autopilot/bin/autopilot.mts status --run RUN --state-dir .autopilot/RUN`
+recomputes from disk). The many `research/*RESUME.md` files belong to
 CONCLUDED runs — sixteen of them exist and none is in flight; verify against
 `.autopilot/` and `git log`, never against a RESUME file's own claim.
 
