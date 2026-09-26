@@ -127,7 +127,7 @@ unresolved mathematics. Record every published defect in the canonical ledger.
 Preserve cross-group dependency, impact and exact-hash closure checks. Every 5a
 and 5b gate failure is an owner hold: the owner repairs the rejected items and
 recertifies what the repair invalidates, then retries the same gate.
-For the pre-author to post-5a impact window, examine every direct dependency
+For both Step-5b impact windows, examine every direct dependency
 and reference use of a changed source. A consumer with a changed exported
 interface is another source event; later repairs enter the post-5a to current
 window. Stop at a consumer whose own claim and assumptions remain licensed,

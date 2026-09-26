@@ -219,6 +219,7 @@ export function step5Stages(d: any) {
         ...contractGates(ctx, { reviewed: true }), impactGate(ctx),
         gate('impact-audit-5b', ['node', 'tools/impact-audit.mjs',
           '--touches', touchesPath(ctx), '--from', 'post-5a', '--current',
+          '--direct-boundary',
           '--receipt', `research/${ctx.run}-impact-5b.json`]),
         gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
           ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),

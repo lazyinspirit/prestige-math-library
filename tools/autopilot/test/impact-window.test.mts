@@ -91,4 +91,8 @@ test('the 5b gate diffs pre-author -> post-5a, and a stage takes the post-5a sna
   assert.equal(argv[argv.indexOf('--to') + 1], 'post-5a',
     'without an explicit --to the gate diffs pre-author against the last snapshot, which at 5b IS pre-author');
   assert.ok(argv.includes('--direct-boundary'), '5b reviews direct uses and follows later exported-interface changes as new events');
+  const later = cross.gates({ run: 'frontier-14', repo: REPO })
+    .find((g: any) => g.id === 'impact-audit-5b');
+  const laterArgv: string[] = typeof later.argv === 'function' ? later.argv() : later.argv;
+  assert.ok(laterArgv.includes('--direct-boundary'), 'post-5a repairs use the same direct stopping rule');
 });
