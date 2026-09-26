@@ -16,15 +16,11 @@
 //                    unless `--rehomed FILE` names an owner-approved re-home of
 //                    that exact id from that exact page to this one
 //   9. prefix        item id prefix matches its declared kind (SCHEMA.md §2)
-//  10. size          ERROR when an A page exceeds --max-items (default 60;
-//                    owner, 2026-08-11). The remedy is ALWAYS to SPLIT the page
-//                    into two or more A pages, never to drop results: this
-//                    ceiling exists because the owner simultaneously required
-//                    Betas to build every prerequisite a theorem needs, which
-//                    pushes pages larger, and a 60-item reading unit is the
-//                    bound on how much a reader (or an auditor) can hold. It was
-//                    a warning at 100 until 2026-08-11; no published page has
-//                    ever exceeded 54, so tightening it strands nothing.
+//  10. size          ERROR when an A page exceeds --max-items (default 100;
+//                    owner, 2026-09-26). Split larger pages into two or more
+//                    A pages with B companions; never drop needed results to
+//                    meet the ceiling. The earlier default of 60 was raised
+//                    to keep the authored 67-item sheaf-cohomology A page.
 //  11. companion     every A page names a B companion that exists, and vice versa
 //
 // PAGE-LEVEL PREREQUISITES (`requires: [pageId, ...]` on each page)
@@ -63,9 +59,9 @@ import { frontmatterList } from './frontmatter-list.mjs';
 const args = process.argv.slice(2);
 const specPath = args.find((a) => !a.startsWith('--'));
 const repo = argVal('--repo') ?? REPO;
-// 60, not 100 (owner, 2026-08-11). Overridable, but an override is a decision to
-// record in the run's notes, not a way past a page that should have been split.
-const maxItems = Number(argVal('--max-items') ?? 60);
+// The owner raised the default to 100 on 2026-09-26. A run-specific override
+// still needs a recorded scope decision.
+const maxItems = Number(argVal('--max-items') ?? 100);
 const SET_THEORY_DEFERRED_PAGE = 'deferred-set-theory-beyond-choice';
 if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE]');
 

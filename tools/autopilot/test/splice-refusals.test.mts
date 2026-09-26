@@ -127,7 +127,7 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   assert.equal(started.length, 2);
   // ...and validate-plan itself still is, EXCEPT for the one class that is an
   // edge decision. That gate is repo-wide: a cycle, a forward reference, a
-  // page over the 60-item ceiling are not step 4's business, and an Alpha
+  // page over the 100-item ceiling are not step 4's business, and an Alpha
   // handed a `size` violation under an edge-adjudication task would reach for
   // the tool it was given and add an edge.
   //

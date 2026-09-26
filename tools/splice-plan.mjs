@@ -85,7 +85,7 @@ if (refusalsGateMode) {
   console.log(`splice-refusals: ${rows?.length ?? 0} edge(s) awaiting adjudication`);
   process.exit(rows?.length ? 1 : 0);
 }
-const SIZE_CEILING = 60;
+const SIZE_CEILING = 100;
 
 if (!run || (!batch && !verify && !allMode) || (update && !batch)
   || (acceptRequires && (!update || !batch))) {

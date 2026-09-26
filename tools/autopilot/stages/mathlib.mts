@@ -653,7 +653,7 @@ const sameUrl = (a: string, b: string) => {
 /** Is this `validate-plan` failure the one class that is an EDGE DECISION?
  *
  *  That gate is repo-wide and fails for heterogeneous reasons — a cycle, a
- *  forward reference, an unresolved id, a page over the 60-item ceiling — and
+ *  forward reference, an unresolved id, a page over the 100-item ceiling — and
  *  most are not anybody's edge to decide. Only `undeclared-prereq` is: an item
  *  whose `deps` reach a page outside its own page's `requires` closure, settled
  *  exactly as a splice refusal is (apply a backward edge the item genuinely
@@ -1630,7 +1630,7 @@ export const stages = [
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       // ONLY the undeclared-prereq class, not every validate-plan failure.
       // That gate is repo-wide and fails for heterogeneous reasons — a cycle,
-      // a forward reference, an unresolved id, a page over the 60-item
+      // a forward reference, an unresolved id, a page over the 100-item
       // ceiling — and most of them are not edge decisions at all. An Alpha
       // handed a `size` violation under an edge-adjudication task would reach
       // for the tool it was given and add an edge. Leaving the rest on the

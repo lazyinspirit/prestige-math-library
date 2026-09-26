@@ -20,6 +20,10 @@ orchestrator.
 | 8 — certify changes | 8-scope, 8-scope-render, 8-scope-freeze, 8-changes-judge, 8-close, 8-changes-stamp, 8-receipt | Scope review, change judgments, impact closure and stamps |
 | 9 — close run | 9-contract-close through 9-close-v2 | Contracts, pathways, readiness, evidence, owner report and commit |
 
+The Step 4 splice and plan validator use a 100-item ceiling per A page, set by
+the owner on 2026-09-26. Pages above that ceiling need a split into A/B pairs;
+needed results must remain in the plan.
+
 These are the only active step numbers. Historical run artifacts remain evidence,
 not aliases or current instructions. Do not install this workflow under a live
 engine or reuse historical receipts: use a fresh run after owner coordination.
