@@ -71,8 +71,8 @@ test('Step 3a and 3b use DeepSeek Flash max while Step 5a adjudication and the 5
   assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
   const adjudicate = stage('5a-adjudicate');
-  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solXHigh,
-    'Step 5a adjudication runs on the Sol xhigh lane');
+  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solHigh,
+    'Step 5a adjudication runs on the Sol high lane');
   const cross = stage('5b-cross');
   assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.solXHigh);
 

@@ -6,7 +6,7 @@ import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { holdStep5 } from './step5-hold.mts';
 
 // Step-5 lanes: readers Sol/high, refuters Sol/xhigh,
-// group adjudicators and every 5b agent Sol/xhigh.
+// group adjudicators Sol/high, and every 5b agent Sol/xhigh.
 const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
 const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 
@@ -138,7 +138,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-adjudicate',
       label: 'group Alpha adjudication of reader repairs, refuter findings and pages',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_XHIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_HIGH : undefined,
       units: batches,
       pattern: resultPattern('alpha', '5a-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {

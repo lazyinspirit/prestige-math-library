@@ -52,7 +52,8 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 3a pair scope and Step 3b pair authors | DeepSeek V4.1 Flash / max |
 | Step 5a readers | Sol / high |
 | Step 5a refuters | Sol / xhigh |
-| Step 5a adjudicators; Step 5b agents | Sol / xhigh |
+| Step 5a adjudicators | Sol / high |
+| Step 5b agents | Sol / xhigh |
 | Step 6 group readers; Step 9 agent lanes | DeepSeek V4.1 Flash / max |
 | Step 8 agent lanes | Sol / max |
 | Assignment | DeepSeek V4.1 Flash / max |
