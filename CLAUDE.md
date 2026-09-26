@@ -46,6 +46,13 @@ resolve the blocker
 autonomously while prioritizing mathematical accuracy, richness, token
 efficiency, and time efficiency.
 
+For each certification boundary, finish all authorized authoring and repairs
+that can change its covered content before refreshing scope, item, provenance,
+or gate receipts. Wait for the relevant writers to drain, then certify the
+stable final carriers together. Use targeted diagnostic checks during editing
+when useful, but do not repeatedly recertify intermediate versions. This rule
+also applies when continuing the work in a later session.
+
 **7. Major code changes.** After every major code change, update all relevant
 documentation and create a Git commit containing both the code and documentation.
 Rewrite or delete stale documentation instead of appending corrective text over
