@@ -58,8 +58,9 @@ pre-expand a blanket transitive closure. Sound consumers remain unchanged.
 New packs retain section hashes, and historical evidence stays immutable.
 Repeated pending work at an earlier content state holds for operator resolution.
 
-Frontier membership governs scope: published frontier items follow ordinary
-Step 7; published or draft outside consumers use separate maintenance.
+Frontier membership governs draft scope. Published-item repairs remain outside
+item gates, rejudgment and adjudication, even when a published ID appears in
+the frozen Step-7 frontier. Published consumers use separate maintenance.
 After frontier writers drain, three disjoint maintenance lanes examine direct
 consumer events before central certification. Each supplier-interface event and
 consumer is handled once; gates and unrelated context changes do not reopen it.
