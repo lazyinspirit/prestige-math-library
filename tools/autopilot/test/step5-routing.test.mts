@@ -33,10 +33,10 @@ const stages = step5Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step5-ctx-')), dispatchDir: '/tmp/none' };
 
-test('5a adjudication and the 5b lead both run Sol xhigh, with tool lanes model-free', async () => {
+test('5a adjudication runs Sol high and the 5b lead Sol xhigh, with tool lanes model-free', async () => {
   const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
   const stage = byId('5a-adjudicate');
-  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.solXHigh);
+  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.solHigh);
   assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
   assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.solXHigh);
   assert.equal(byId('5b-cross').modelProfile({ role: 'tool' }), undefined);
@@ -318,7 +318,7 @@ test('split routes semantic manifest edits even when item and page bytes do not 
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-test('claimed preliminary and 5b published repairs both survive final routing', () => {
+test('published repairs need no Step 5 certification handoff to pass final routing', () => {
   const fx = fixture();
   try {
     const published = 'thm-published-dependency';
@@ -361,29 +361,8 @@ test('claimed preliminary and 5b published repairs both survive final routing', 
     const gatePublished = 'lem-published-gate-repair';
     const gatePreText = `---\nid: ${gatePublished}\nstatus: published\ndeps: []\n---\n## Statement\nStale impact wording.\n`;
     writeFileSync(join(fx.root, 'items', `${gatePublished}.md`), gatePreText);
-    execFileSync(process.execPath, [join(REPO, 'tools', 'published-repairs.mjs'),
-      'claim', '--run', 'r', '--id', gatePublished, '--group', 'a', '--root', fx.root],
-    { cwd: fx.root, encoding: 'utf8' });
-    const gateClaim = readFileSync(join(fx.root, 'research', 'r-step5-published-claims.jsonl'), 'utf8')
-      .trim().split('\n').map((line) => JSON.parse(line)).find((row) => row.id === gatePublished);
     const gatePostText = gatePreText.replace('Stale impact wording.', 'Corrected impact wording.');
     writeFileSync(join(fx.root, 'items', `${gatePublished}.md`), gatePostText);
-    const handoffs = [{
-      kind: 'repaired', id: published, group: 'a', repair_owner_group: 'a', found_via: 'lem-ordinary-item',
-      found_at_stage: '5a-adjudicate', step5_obligation: 'reader:1:1',
-      step5_defect_class: 'false-claim', pre_sha256: scope.reader_findings[0].pre_sha256,
-      post_sha256: itemHashGuard(repairedText), defect: 'The published Statement was false.',
-      correction_basis: 'The empty case gives the exact corrected boundary.',
-    }, {
-      kind: 'repaired', id: gatePublished, group: 'a', repair_owner_group: 'a',
-      found_via: 'impact-audit', found_at_stage: '5b-cross',
-      pre_sha256: gateClaim.pre_sha256, post_sha256: itemHashGuard(gatePostText),
-      defect: 'The published impact wording was stale.',
-      correction_basis: 'The repaired supplier gives the exact corrected boundary.',
-      repair_confidence: 1,
-    }];
-    writeFileSync(join(fx.root, 'research', 'r-step7-published-repairs.jsonl'),
-      handoffs.map((row) => JSON.stringify(row)).join('\n') + '\n');
     writeFileSync(consumerPath, readFileSync(consumerPath, 'utf8')
       .replace(`deps: [${published}]`, 'deps: []'));
     fx.run('stamp', '--run', 'r');

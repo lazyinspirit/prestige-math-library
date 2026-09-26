@@ -15,7 +15,7 @@
 // gate ever demanded the edit.
 //
 // The replacement round protocol uses centralized certification of repaired
-// frontier items, including published items inside that frontier. When its frozen
+// draft frontier items. Published repairs are exempt. When its frozen
 // frontier exists, exact certification and baseline coverage are mandatory;
 // legacy adjudication/terminal licences cannot substitute for missing evidence.
 // Runs without that frontier retain the historical fatal-edit licence checks.
@@ -37,7 +37,8 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
 import { parseTerminalResolutions } from './step7-terminal-resolution.mjs';
-import { loadStep7JudgeEvidence, rejectionKey, isFrozenStep5CrossRepair } from './step7-evidence.mjs';
+import { loadStep7JudgeEvidence, rejectionKey } from './step7-evidence.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 import { permittedNewLemmas } from './step7-new-lemmas.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
@@ -60,18 +61,6 @@ const adjudicationsPath = option('--adjudications');
 const judgeLedgerPath = option('--judge-ledger');
 const scopePath = option('--scope');
 const againstLabel = option('--against');
-// THE SECOND LICENCE SOURCE (owner, 2026-08-25). A step-7 Alpha that finds a
-// falsehood in a PUBLISHED item must repair it, and that edit is real work with
-// no judge verdict behind it — published content was never in this run's frozen
-// pair context, so no adjudication row can exist for it. Before this flag the
-// only way to license such an edit was to write a `confirmed_fatal` row naming a
-// model that never judged the item, which is a fabricated verdict in an
-// append-only ledger step 9 reports from.
-//
-// A separate file with its own required shape keeps the two apart: an
-// adjudication answers a judge, a published repair answers the library. Omitting
-// the flag leaves the guard exactly as strict as it was.
-const publishedRepairsPath = option('--published-repairs');
 const terminalResolutionsPath = option('--terminal-resolutions');
 const auditorCertificationsPath = option('--auditor-certifications');
 // A fatal repair can expose a defect in one of its own run-local prerequisites,
@@ -92,7 +81,7 @@ const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
 const defectLedgerPath = option('--defect-ledger') ?? join(REPO, 'research', 'defect-ledger.jsonl');
 
 const usage = () => {
-  console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--workflow-root <repo>] [--auditor-certifications <file.json>] [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
+  console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--workflow-root <repo>] [--auditor-certifications <file.json>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
   process.exit(2);
 };
 if (!touchesPath || !baselineLabel || !judgeLedgerPath || !adjudicationsPath || !scopePath) usage();
@@ -160,9 +149,9 @@ if (existsSync(workflowDirectory)) {
       || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
       throw Error('frozen original frontier does not match Step-7 scope');
     const ids = new Set(frontier.ids);
-    scopedChanged = changed.filter(id => ids.has(id));
+    scopedChanged = changed.filter(id => ids.has(id) && !isPublishedItem(workflowRoot, id));
     scopedCreated = created.filter(id => ids.has(id));
-    excluded.changed = changed.filter(id => !ids.has(id));
+    excluded.changed = changed.filter(id => !ids.has(id) || isPublishedItem(workflowRoot, id));
     excluded.created = created.filter(id => !ids.has(id));
     const certificate = checkWorkflow(workflowRoot, workflowScope.run);
     if (!['impact-repeat', 'gate'].includes(certificate.phase)) throw Error('Step 7 requires a completed repeat-round certification');
@@ -250,14 +239,11 @@ for (const entry of evidence.answers.values()) {
   }
 }
 
-// ---- published repairs ------------------------------------------------------
-
-/** id -> Set of pre-edit text states a published-repair row licenses editing. */
-const publishedLicences = new Map();
-const publishedRows = [];
+// Published repairs are outside the Step-7 licence and certification gates.
+// Their provenance remains in the maintenance ledger, and statement changes
+// still create direct-consumer work.
 const scope = JSON.parse(readFileSync(resolvePath(scopePath), 'utf8'));
 const runItems = new Set(Object.keys(scope.by_item ?? {}));
-const groups = new Set((scope.groups ?? []).map((group) => String(group.label)));
 
 // A rejection-blind Step-6 reader warning is independent mathematical evidence,
 // not a fabricated judge verdict. The owning Sol adjudicator may confirm it
@@ -316,103 +302,6 @@ if (existsSync(alertsPath) && existsSync(alertDecisionsPath)) {
     seenOutcomes.get(record.item).push({ model: 'step6-reader', outcome: record.outcome });
   }
 }
-const realRejectionsById = new Map();
-for (const entry of evidence.rejections.values()) {
-  const rows = realRejectionsById.get(entry.row.id) ?? [];
-  rows.push(entry.row);
-  realRejectionsById.set(entry.row.id, rows);
-}
-if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
-  for (const [index, line] of readFileSync(resolvePath(publishedRepairsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
-    let record;
-    try { record = JSON.parse(line); } catch {
-      error('published-repair-json', `${publishedRepairsPath}:${index + 1}: invalid JSON`);
-      continue;
-    }
-    publishedRows.push(record);
-    if (record.kind === 'escalated') continue;   // the published gate blocks unresolved escalation
-    if (record.kind !== 'repaired' || typeof record.id !== 'string'
-      || typeof record.defect !== 'string' || !record.defect.trim()
-      || typeof record.correction_basis !== 'string' || !record.correction_basis.trim()
-      || typeof record.found_via !== 'string' || !record.found_via.trim()) {
-      error('published-repair-shape',
-        `${publishedRepairsPath}:${index + 1}: a repair row requires ` +
-        '{kind:"repaired", id, group, found_via, pre_sha256, defect, correction_basis}. ' +
-        '`defect` says what was false, `correction_basis` says what makes the replacement right ' +
-        '(the exact source-checked statement, or the elementary check), and `found_via` names the ' +
-        'run item whose rejection exposed it. A repair to published content with none of those ' +
-        'recorded is indistinguishable from an unlicensed edit.', record.id);
-      continue;
-    }
-    if (runItems.has(record.id)) {
-      error('published-repair-in-run',
-        `${publishedRepairsPath}:${index + 1}: ${record.id} belongs to this run; use its exact judge rejection and ordinary fatal licence`,
-        record.id);
-      continue;
-    }
-    if (!groups.has(String(record.group))) {
-      error('published-repair-group',
-        `${publishedRepairsPath}:${index + 1}: group ${record.group} is not a group in ${scopePath}`, record.id);
-      continue;
-    }
-    if (record.found_at_stage === '5b-cross') {
-      let inherited = false;
-      try {
-        inherited = isFrozenStep5CrossRepair(record, {
-          run: scope.run,
-          closure: JSON.parse(readFileSync(resolvePath(`research/${scope.run}-step5-closure.json`), 'utf8')),
-          claimsText: readFileSync(resolvePath(`research/${scope.run}-step5-published-claims.jsonl`), 'utf8'),
-          baselineHash: baseline.hashes?.[record.id],
-        });
-      } catch { /* Missing or malformed frozen evidence fails below. */ }
-      if (!inherited) error('published-repair-step5-provenance',
-        `${publishedRepairsPath}:${index + 1}: inherited cross-group repair must match frozen Step-5 claims and the pre-Step-7 baseline`, record.id);
-      continue; // Historical evidence grants no licence for a later edit.
-    }
-    if (!runItems.has(record.found_via) || scope.by_item?.[record.found_via] !== String(record.group)) {
-      error('published-repair-provenance',
-        `${publishedRepairsPath}:${index + 1}: found_via must be a run item owned by group ${record.group}`, record.id);
-      continue;
-    }
-    const fromStep5 = record.found_at_stage === '5a-adjudicate';
-    if (fromStep5) {
-      const decisionPath = resolvePath(`research/${scope.run}-alpha-${record.group}-5a-decisions.json`);
-      let decision = null;
-      try {
-        const doc = JSON.parse(readFileSync(decisionPath, 'utf8'));
-        decision = (doc.decisions ?? []).find((candidate) =>
-          candidate.obligation === record.step5_obligation && candidate.id === record.id
-          && candidate.route === 'reader'
-          && ['confirmed_fatal', 'confirmed_nonfatal'].includes(candidate.verdict));
-      } catch { /* exact diagnostic below */ }
-      if (!decision || !/^reader:\d+:\d+$/.test(record.step5_obligation ?? '')
-        || typeof record.step5_defect_class !== 'string' || !record.step5_defect_class
-        || typeof record.post_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.post_sha256)
-        || shortHash(record.post_sha256) !== baseline.hashes?.[record.id]) {
-        error('published-repair-step5-provenance',
-          `${publishedRepairsPath}:${index + 1}: Step-5 repair must exact-match its reader decision and the pre-Step-7 baseline`, record.id);
-        continue;
-      }
-    } else if (!(realRejectionsById.get(record.found_via) ?? []).length) {
-      error('published-repair-no-exposing-rejection',
-        `${publishedRepairsPath}:${index + 1}: found_via ${record.found_via} has no real keep:false judge verdict`, record.id);
-      continue;
-    }
-    if (typeof record.pre_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.pre_sha256)) {
-      error('published-repair-unhashed',
-        `${publishedRepairsPath}:${index + 1}: ${record.id} has no valid pre_sha256; record the GUARD ` +
-        'form (tools/item-hash.mjs `itemHashGuard`, whole `verification:` block excluded). Without the ' +
-        'text state the repair was made against, the row would license every future edit to this item.',
-        record.id);
-      continue;
-    }
-    if (!fromStep5) {
-      if (!publishedLicences.has(record.id)) publishedLicences.set(record.id, new Set());
-      publishedLicences.get(record.id).add(shortHash(record.pre_sha256));
-    }
-  }
-}
-
 // ---- exact owner-authorized run-local prerequisite repairs -----------------
 
 /** id -> Set of baseline states licensed by an exact owner run-local repair row. */
@@ -591,12 +480,8 @@ for (const id of changed) {
   const licensed = fatalLicences.get(id)?.has(baseline.hashes[id]);
   if (licensed) continue;
   if (readerFatalLicences.get(id)?.has(baseline.hashes[id])) continue;
-  // A published-page repair is licensed by its own row against the same
-  // pre-edit state. It is not a weaker licence: the row must name the falsehood
-  // and what makes the replacement right, and the repaired item is then routed
-  // back to the configured item judge, which is stronger certification than the single
-  // reader the published-dependency-repair rule asks for at step 5.
-  if (publishedLicences.get(id)?.has(baseline.hashes[id])) continue;
+  // Publication status exempts a repair from this licence gate.
+  if (isPublishedItem(workflowRoot, id)) continue;
   if (ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])) continue;
   // The post-rejudge terminal route is deliberately post-edit and exact: it
   // licenses only the current item bytes named by the manual resolution. Judge
@@ -626,7 +511,6 @@ const licensedConsumers = changed.filter((id) =>
   !errors.some((entry) => entry.id === id) && (
     fatalLicences.get(id)?.has(baseline.hashes[id])
     || readerFatalLicences.get(id)?.has(baseline.hashes[id])
-    || publishedLicences.get(id)?.has(baseline.hashes[id])
     || ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])
     || terminalParsed.latest.get(id)?.item_sha256 === itemHashJudge(readFileSync(join(ITEMS, `${id}.md`), 'utf8'))));
 const newLemmas = permittedNewLemmas({ created, licensedConsumers,

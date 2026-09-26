@@ -10,14 +10,13 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { stages, dependencyFirst } from '../stages/mathlib.mts';
-import { MODELS, resolveLineup } from '../../models.mjs';
-import { tsxLoader } from '../../paths.mjs';
+import { MODELS } from '../../models.mjs';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
 import { itemHashGuard } from '../../item-hash.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
-const READER_WARNING_ITEM = 'ex-the-mobius-band-presented-by-two-regular-patches';
+const READER_WARNING_ITEM = 'rem-invariance-of-domain';
 
 const stage = (id: string): any => stages.find((s: any) => s.id === id);
 
@@ -165,22 +164,14 @@ test('the step-6 reader hands off a digest without a resumable session', { skip:
 
 
 
-test('both current Step-7 role briefs authorize prerequisite additions with closed registration and repair obligations', () => {
+test('Step-7 role briefs limit repair assignments to draft frontier items', () => {
   for (const name of ['step7-adjudicator.md', 'step7-owner-repair.md']) {
     const brief = readFileSync(join(REPO, 'briefs', name), 'utf8').replace(/\s+/g, ' ');
-    assert.match(brief, /all three owner repair agents|All three owner repair agents/, name);
-    assert.match(brief, /only to satisfy genuine unmet prerequisites of assigned repairs/, name);
-    assert.match(brief, /precise missing claim.*consuming proof step.*existing items cannot supply it/, name);
-    assert.match(brief, /unique IDs.*existing IDs, aliases and current assignments/, name);
-    assert.match(brief, /canonical registry\/index, owning page, applicable manifest and proof contract/, name);
-    assert.match(brief, /serialized integration path/, name);
-    assert.match(brief, /central certification inventory and complete gate battery/, name);
-    assert.match(brief, /downstream consumer.*published consumers/, name);
-    assert.match(brief, /before certification/, name);
-    assert.match(brief, /frozen original-frontier denominator/, name);
+    assert.match(brief, /assigned draft items|assigned draft IDs/, name);
+    assert.match(brief, /Published repairs.*no .*item.gate.*rejudge.*adjudication|Published repairs.*no adjudication.*rejudge.*item.gate/, name);
+    assert.match(brief, /direct.*consumer|downstream consumer/i, name);
   }
 });
-
 test('the historical final-adjudicator lane retains its profile and explicitly retires from current Step 7', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'final-adjudicator', '--brief', 'briefs/final-adjudicator.md',
@@ -285,65 +276,26 @@ function withFixtureRun(files: Record<string, unknown>, body: (run: string) => v
   }
 }
 
-test('render writes an item-grouped evidence bundle and a grouped rejection queue', () => {
+test('render excludes published judge rejections from the adjudication queue', () => {
   withFixtureRun({
     'alpha-groups.json': [{ label: 'a', covers: ['1'] }],
-    'batch-1.pages.json': [{
-      id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
-      items: [{ id: 'thm-parallelogram-law' }, { id: 'thm-cauchy-schwarz-in-an-inner-product-space' }],
-      requires: [],
-    }],
-    'judge.jsonl': [
-      { id: 'thm-parallelogram-law', model: 'gpt-6-sol', keep: false,
-        reason: 'the converse direction is unproved', context_sha256: 'a'.repeat(64) },
-      { id: 'thm-cauchy-schwarz-in-an-inner-product-space', model: 'gpt-6-sol', keep: false,
-        reason: 'equality case missing', context_sha256: 'b'.repeat(64) },
-      { id: 'thm-parallelogram-law', model: 'gpt-6-astra', keep: false,
-        reason: 'the real case assumes the complex convention', context_sha256: 'c'.repeat(64) },
-    ].map((row) => JSON.stringify(row)).join('\n') + '\n',
-    'alpha-a-step7-context.json': {
-      group: 'a', pages_read: ['page-demo'],
-      items_read: ['thm-parallelogram-law', 'thm-cauchy-schwarz-in-an-inner-product-space'],
-      conventions: [{ convention: 'Demo convention', fixed_by: 'thm-parallelogram-law', matters_for: [] }],
-      load_bearing: [{ id: 'thm-parallelogram-law', statement: 'Demo statement', used_by: [] }],
-      published_dependencies: [], concerns: [], alerts: [], seams_checked: [],
-    },
+    'batch-1.pages.json': [{ id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
+      items: [{ id: 'thm-parallelogram-law' }], requires: [] }],
+    'judge.jsonl': `${JSON.stringify({ id: 'thm-parallelogram-law', model: 'gpt-6-sol', keep: false,
+      reason: 'A published claim needs correction.', context_sha256: 'a'.repeat(64) })}\n`,
   }, (run) => {
-    const generated = [
-      'step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
+    const generated = ['step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
       'alpha-a-step7-recovery.task.md', 'alpha-a-step7-preflight.task.md',
       'alpha-a-step7-close.task.md', 'alpha-a-step6-read.task.md',
-      'step7-alert-decisions.jsonl', 'step7-bundle-a.md',
-    ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
+      'step7-bundle-a.md'].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
     try {
       const rendered = render(run);
       assert.equal(rendered.status, 0, `${rendered.stdout}${rendered.stderr}`);
-      // The rejection queue is item-grouped: both judge lanes for one item sit
-      // together, so the lane settles the item once.
-      const task = readFileSync(generated[2], 'utf8');
-      const order = (['thm-cauchy-schwarz-in-an-inner-product-space', 'thm-parallelogram-law'] as string[])
-        .map((id): [string, number] => [id, task.indexOf(`| \`${id}\` |`)])
-        .sort((left, right) => left[1] - right[1])
-        .map(([id]) => id);
-      assert.deepEqual(order,
-        ['thm-cauchy-schwarz-in-an-inner-product-space', 'thm-parallelogram-law', 'thm-parallelogram-law']
-          .filter((id, index, all) => all.indexOf(id) === index)
-          .sort());
-      const rows = task.split('\n').filter((line) => line.startsWith('| `thm-parallelogram-law` |'));
-      assert.equal(rows.length, 2, 'both rejections of the item are listed');
-      assert.equal(Math.abs(task.indexOf(rows[0]) - task.indexOf(rows[1])) < 200, true,
-        'the two rows for one item are adjacent');
-      assert.match(task, /grouped by item/i);
-      assert.match(task, /step7-bundle-a\.md/);
-      // The bundle exists, names the access guarantees, and is verbatim evidence.
-      const bundle = readFileSync(generated[8], 'utf8');
-      assert.match(bundle, /Step-7 evidence bundle — group a/);
-      assert.match(bundle, /entry point, never a fence/);
-      assert.match(bundle, /web search/);
-      assert.match(bundle, /### `thm-parallelogram-law` — 2 rejection\(s\)/);
-      assert.match(bundle, /Every recorded block below|Every block below is verbatim/);
+      const scope = JSON.parse(readFileSync(generated[0], 'utf8'));
+      assert.deepEqual(scope.groups[0].rejections, []);
+      assert.doesNotMatch(readFileSync(generated[2], 'utf8'), /\| `thm-parallelogram-law` \|/);
     } finally {
-      for (const p of generated) rmSync(p, { force: true });
+      for (const path of generated) rmSync(path, { force: true });
     }
   });
 });
@@ -495,148 +447,25 @@ test('step7-guard licenses a published repair, and only a well-formed one', () =
   }
 });
 
-function publishedFixtureRoute() {
-  const pair = 'free-groups-and-presentations';
-  const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));
-  const page = plan.pages.find((candidate: any) => candidate.id === pair);
-  assert.ok(page?.items?.length, `test pair ${pair} must exist in plan-spec.json`);
-  const foundVia = page.items[0].id;
-  return { foundVia };
-}
-
-test('step7-scope published refuses retired-lineup-only evidence', () => {
-  const run = `step7pubtest${process.pid}`;
-  const { foundVia } = publishedFixtureRoute();
-  const files = [
-    [`${run}-step7-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
-    [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'retired-judge', context_sha256: 'abc', keep: true })}\n`],
-  ];
-  try {
-    for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
-    const r = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
-    assert.notEqual(r.status, 0, 'a retired judge row is not current certification');
-    assert.ok(`${r.stdout}${r.stderr}`.includes(
-      `lacks a current verdict from ${resolveLineup().models.join(', ')}`));
-  } finally {
-    for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
-    rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-  }
-});
-
-test('step7-scope published refuses a stale configured-model verdict', () => {
-  const run = `step7pubstaletest${process.pid}`;
-  const { foundVia } = publishedFixtureRoute();
-  const { models } = resolveLineup();
-  const files = [
-    [`${run}-step7-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
-    [`${run}-judge.jsonl`, models.map((model) => JSON.stringify({
-      id: 'lem-cauchy-bounded', model, context_sha256: 'stale', item_sha256: 'b'.repeat(64), keep: true,
-    })).join('\n') + '\n'],
-  ];
-  try {
-    for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
-    const r = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
-    assert.notEqual(r.status, 0, 'a stale configured-model row is not current certification');
-    assert.match(`${r.stdout}${r.stderr}`, /lacks a current verdict/);
-  } finally {
-    for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
-    rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-  }
-});
-
-test('step7-scope published accepts the configured model set on the current text', () => {
-  const run = `step7pubcurrenttest${process.pid}`;
-  const id = 'lem-cauchy-bounded';
-  const { foundVia } = publishedFixtureRoute();
-  const built = spawnSync(process.execPath,
-    ['--import', tsxLoader(), 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
-    { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
-  assert.equal(built.status, 0, built.stderr);
-  const hash = JSON.parse(built.stdout);
-  const { models } = resolveLineup();
-  const files = [
-    [`${run}-step7-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id, group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
-    [`${run}-judge.jsonl`, models.map((model) => JSON.stringify({
-      id, model, context_sha256: hash.context_sha256, item_sha256: hash.item_sha256, keep: true,
-    })).join('\n') + '\n'],
-  ];
-  try {
-    for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
-    const r = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
-    assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
-    assert.match(r.stdout, /1 published item\(s\) repaired and judged by the configured model set/);
-  } finally {
-    for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
-    rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-  }
-});
-
-test('step7-scope published accepts a current terminal resolution without inventing a verdict', () => {
-  const run = `step7pubterminaltest${process.pid}`;
-  const id = 'lem-cauchy-bounded';
-  const { foundVia } = publishedFixtureRoute();
-  const built = spawnSync(process.execPath,
-    ['--import', tsxLoader(), 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
-    { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
-  assert.equal(built.status, 0, built.stderr);
-  const hash = JSON.parse(built.stdout);
+test('published repair receipt has no judge or adjudication gate obligation', () => {
+  const run = `step7pubpolicy${process.pid}`;
+  const path = join(REPO, 'research', `${run}-step7-published-repairs.jsonl`);
   const receipt = join(tmpdir(), `${run}-published-closure.json`);
-  const files = [
-    [`${run}-step7-published-repairs.jsonl`, `${JSON.stringify({
-      kind: 'repaired', id, group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64),
-      defect: 'd', correction_basis: 'c',
-    })}\n`],
-    [`${run}-judge.jsonl`, ''],
-    [`${run}-step7-terminal-resolutions.jsonl`, `${JSON.stringify({
-      version: 1, run, stage: '7-rejudge', id, resolved_by: 'session',
-      disposition: 'accepted-after-review', rejudge_rounds_exhausted: 3,
-      exhausted_at: '2026-08-25T07:14:01.895Z', context_sha256: hash.context_sha256,
-      item_sha256: hash.item_sha256,
-      basis: 'A direct terminal review checked the stated domains, dependencies, and adopted conventions against the exact repaired bytes.',
-      at: '2026-08-25T08:00:00.000Z',
-    })}\n`],
-  ];
   try {
-    for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
+    writeFileSync(path, [
+      { kind: 'repaired', id: 'lem-cauchy-bounded', defect: 'A repaired published claim.', correction_basis: 'Direct mathematical correction.' },
+      { kind: 'escalated', id: 'thm-parallelogram-law', why: 'A separate owner decision is pending.' },
+    ].map(JSON.stringify).join('\n') + '\n');
     const result = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', run, '--out', receipt],
       { cwd: REPO, encoding: 'utf8' });
     assert.equal(result.status, 0, `${result.stdout}${result.stderr}`);
     const closure = JSON.parse(readFileSync(receipt, 'utf8'));
+    assert.deepEqual(closure.repaired, ['lem-cauchy-bounded']);
     assert.deepEqual(closure.needs_rejudge, []);
-    assert.deepEqual(closure.terminal_resolved, [{
-      id, resolved_by: 'session', disposition: 'accepted-after-review',
-    }]);
+    assert.deepEqual(closure.unadjudicated_rows, []);
+    assert.equal(closure.policy, 'published-repairs-exempt');
   } finally {
-    for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
-    rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
-    rmSync(receipt, { force: true });
-  }
-});
-
-test('step7-scope published passes with no repairs at all', () => {
-  const r = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', `nosuchrun${process.pid}`],
-    { cwd: REPO, encoding: 'utf8' });
-  assert.equal(r.status, 0, 'a run that repaired nothing published is not a failure');
-  assert.match(r.stdout, /0 published item\(s\) repaired/);
-});
-
-test('step7-scope published makes owner escalation a hard blocker and writes its receipt', () => {
-  const run = `step7pubescalation${process.pid}`;
-  const ledger = join(REPO, 'research', `${run}-step7-published-repairs.jsonl`);
-  const receipt = join(tmpdir(), `${run}-closure.json`);
-  try {
-    writeFileSync(ledger, `${JSON.stringify({
-      kind: 'escalated', id: 'lem-owner-change', group: 'a', found_via: 'thm-demo-x',
-      why: 'The correction requires a reading-order change reserved to the owner.',
-    })}\n`);
-    const r = spawnSync('node', ['tools/step7-scope.mjs', 'published', '--run', run, '--out', receipt],
-      { cwd: REPO, encoding: 'utf8' });
-    assert.notEqual(r.status, 0);
-    assert.match(`${r.stdout}${r.stderr}`, /escalated to the owner and unresolved/);
-    assert.equal(JSON.parse(readFileSync(receipt, 'utf8')).escalations.length, 1,
-      'the blocker remains machine-readable for routing and reporting');
-  } finally {
-    rmSync(ledger, { force: true });
+    rmSync(path, { force: true });
     rmSync(receipt, { force: true });
   }
 });

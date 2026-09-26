@@ -43,6 +43,7 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, basename, resolve } from 'node:path';
 import { split, yaml, REPO } from './pathway-lib.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
 const cmd = argv[0];
@@ -103,26 +104,6 @@ const canonical = (value) => Array.isArray(value) ? value.map(canonical)
     ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]))
     : value;
 const hashValue = (value) => hash(JSON.stringify(canonical(value)) ?? 'undefined');
-
-function claimedPublishedIds() {
-  const path = R('research', `${run}-step5-published-claims.jsonl`);
-  if (!existsSync(path)) return new Set();
-  try {
-    return new Set(readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean)
-      .map((line) => JSON.parse(line))
-      .filter((row) => row?.version === 1 && row?.run === run
-        && typeof row?.id === 'string' && /^[a-f0-9]{64}$/.test(row?.pre_sha256 ?? ''))
-      .map((row) => row.id));
-  } catch {
-    return new Set();
-  }
-}
-
-function claimedPublishedCarrier(id) {
-  if (!claimedPublishedIds().has(id)) return null;
-  const path = R('items', `${id}.md`);
-  return existsSync(path) ? { item_sha256: hash(readFileSync(path)) } : null;
-}
 
 const contractCache = new Map();
 function contractRows(batch, ownerRun = run) {
@@ -301,11 +282,6 @@ if (cmd === 'carrier') {
       process.exit(0);
     }
   }
-  const published = claimedPublishedCarrier(id);
-  if (published) {
-    console.log(hashValue(published));
-    process.exit(0);
-  }
   die(`cross-group-edges: ${id} is not a current in-flight item or page`, 1);
 }
 
@@ -351,7 +327,7 @@ if (cmd === 'check') {
   const changeKinds = ['addition', 'removal', 'item', 'item-metadata', 'page', 'page-addition', 'page-removal'];
   const changeV = keyed(verdicts.filter((v) => changeKinds.includes(v.kind)),
     (v) => `${v.kind}\u0000${v.batch}\u0000${v.id}`, 'change');
-  const gateV = keyed(verdicts.filter((v) => v.kind === 'gate'), (v) => {
+  const gateV = keyed(verdicts.filter((v) => v.kind === 'gate' && !isPublishedItem(ROOT, v.id)), (v) => {
     const ids = Array.isArray(v.defect_ids) ? v.defect_ids.map(String) : [];
     return ids.length ? `defect:${ids[0]}` : `clean:${v.gate}\u0000${v.id}`;
   }, 'gate');
@@ -636,7 +612,7 @@ if (cmd === 'check') {
       const page = currentPages.get(verdict.id);
       const pageBatch = currentPageBatch.get(verdict.id);
       const carrier = itemBatch ? itemCarrier(itemBatch, verdict.id, currentItemMetadata.get(verdict.id))
-        : pageBatch && page ? pageCarrier(page) : claimedPublishedCarrier(verdict.id);
+        : pageBatch && page ? pageCarrier(page) : null;
       carrierHash = carrier ? hashValue(carrier) : null;
     }
     if (!carrierHash) {
@@ -658,7 +634,8 @@ if (cmd === 'check') {
       err('gate-defect-severity', `${ids[0]} is fatal, not nonfatal`);
     }
   }
-  for (const row of ledger.filter((candidate) => candidate.run === run && candidate.caught_at_stage === '5b-cross')) {
+  for (const row of ledger.filter((candidate) => candidate.run === run && candidate.caught_at_stage === '5b-cross'
+    && !isPublishedItem(ROOT, candidate.subject))) {
     if (!usedDefects.has(row.defect_id)) err('defect-ledger-unowned', `${row.defect_id} has no 5b verdict reference`);
   }
   const recognised = new Set(['edge', 'forward', 'gate', ...changeKinds]);

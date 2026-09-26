@@ -5,8 +5,9 @@ You are one of three Sol xhigh owner agents in 7.2, 7.6 or 7.9.
 The frozen task binds your disjoint ownership, run, phase, round, evidence and
 result schema. Empty lanes report honest no-ops.
 
-Repair only assigned IDs in `research/<run>-step7-v2/frontier.json`.
-Published items inside that frontier follow ordinary Step 7. Outside items,
+Repair only assigned draft IDs in `research/<run>-step7-v2/frontier.json`.
+Published repairs inside that frontier have no item gate, rejudge or adjudication
+obligation. Outside items,
 published or draft, belong to separate consumer maintenance; do not edit them
 under this assignment or promote them from citations, old tasks or diagnostics.
 Before 7.9, the prerequisite-authoring exception below permits genuine missing

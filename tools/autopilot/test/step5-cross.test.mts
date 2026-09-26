@@ -224,23 +224,23 @@ test('5b cannot silently carry a proof-only edit past the post-5a boundary', () 
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-test('5b records a clean false-positive gate outcome for a claimed published repair', () => {
+test('5b does not require a gate verdict for a published repair', () => {
   const fx = fixture(false);
   try {
     const published = 'lem-published-repair';
-    const publishedText = item(published);
+    const publishedText = item(published).replace('status: draft', 'status: published');
     writeFileSync(join(fx.root, 'items', `${published}.md`), publishedText);
     writeFileSync(join(fx.root, 'research', 'r-step5-published-claims.jsonl'), `${JSON.stringify({
       version: 1, run: 'r', id: published, group: 'a', pre_sha256: sha(publishedText),
     })}\n`);
     assert.equal(fx.run('list').status, 0);
-    const carrier = fx.carrier(published);
-    assert.match(carrier, /^[a-f0-9]{64}$/);
-    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify({
-      kind: 'gate', id: published, gate: 'step5-routing-final', verdict: 'false_positive',
-      note: 'The frozen claimed reader obligation remains valid after its consumer edge is removed.',
-      subject_sha256: carrier, defect_ids: [],
-    })}\n`);
+    writeFileSync(join(fx.root, 'items', `${published}.md`),
+      publishedText.replace(`${published}.`, 'Corrected published claim.'));
+    const carrier = spawnSync(process.execPath,
+      [TOOL, 'carrier', '--run', 'r', '--id', published, '--root', fx.root],
+      { cwd: REPO, encoding: 'utf8', timeout: 60_000 });
+    assert.notEqual(carrier.status, 0,
+      'published repairs cannot be gate carriers');
     const result = fx.run('check');
     assert.equal(result.status, 0, result.stderr);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }

@@ -66,13 +66,13 @@ test('the Step 8 receipt includes created and modified mathematics and refuses d
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('a modified published item is retained in the targeted judge scope', () => {
+test('a modified published item is recorded but excluded from the targeted judge scope', () => {
   const root = mkdtempSync(join(tmpdir(), 'step8-published-change-'));
   mkdirSync(join(root, 'items'));
   mkdirSync(join(root, 'research'));
-  writeFileSync(join(root, 'items', 'published.md'), 'repaired published theorem\n');
+  writeFileSync(join(root, 'items', 'published.md'), '---\nid: published\nstatus: published\n---\nrepaired published theorem\n');
   writeFileSync(join(root, 'research', 'demo-touches.json'), JSON.stringify({ snapshots: [{ label: 'post-step7', hashes: {
-    published: shortHash(itemHashGuard('old published theorem\n')),
+    published: shortHash(itemHashGuard('---\nid: published\nstatus: published\n---\nold published theorem\n')),
   } }] }));
   writeFileSync(join(root, 'research', 'demo-batch-1.pages.json'), JSON.stringify([{ id: 'current-page', items: [] }]));
   const args = ['--touches', 'research/demo-touches.json', '--baseline', 'post-step7',
@@ -83,7 +83,8 @@ test('a modified published item is retained in the targeted judge scope', () => 
     assert.equal(result.status, 0, result.stderr);
     const receipt = JSON.parse(readFileSync(join(root, 'research', 'demo-step8-changes.json'), 'utf8'));
     assert.deepEqual(receipt.published_modified, ['published']);
-    assert.deepEqual(JSON.parse(readFileSync(join(root, 'research', 'demo-step8-changes.pages.json'), 'utf8'))[0].items, [{ id: 'published' }]);
+    assert.deepEqual(receipt.items, []);
+    assert.deepEqual(JSON.parse(readFileSync(join(root, 'research', 'demo-step8-changes.pages.json'), 'utf8'))[0].items, []);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

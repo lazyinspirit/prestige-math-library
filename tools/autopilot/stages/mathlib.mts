@@ -22,6 +22,7 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
+import { isPublishedItem } from '../../published-repair-policy.mjs';
 import { loadAuditorCreatedCertifications } from '../../auditor-created-items.mjs';
 import { certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
@@ -47,6 +48,9 @@ const { step7Stages } = await import(
 );
 
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
+// A live engine hot-reloads this stage module but retains its first models.mjs
+// import. The new profile name must also resolve in that already-running process.
+const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax ?? 'gpt-6-luna-max';
 const SOL_MAX = MODEL_PROFILE_NAMES.solMax;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
@@ -820,7 +824,6 @@ const contractsPath = (ctx) => `research/${ctx.run}-proof-contracts.json`;
 const touchesPath = (ctx) => `research/${ctx.run}-touches.json`;
 const closurePath = (ctx) => `research/${ctx.run}-judge-closure.json`;
 const terminalResolutionsPath = (ctx) => `research/${ctx.run}-step7-terminal-resolutions.jsonl`;
-const publishedClosurePath = (ctx) => `research/${ctx.run}-step7-published-closure.json`;
 const step8ChangesPath = (ctx) => `research/${ctx.run}-step8-changes.json`;
 const step8ChangesScopePath = (ctx) => `research/${ctx.run}-step8-changes.pages.json`;
 const step8ClosurePath = (ctx) => `research/${ctx.run}-step8-judge-closure.json`;
@@ -914,7 +917,7 @@ function step8ChangesOnDisk(ctx): string[] {
     const baseline = [...(touches.snapshots ?? [])].reverse().find((s: any) => s.label === 'post-step7');
     if (!baseline?.hashes) return [];
     return readdirSync(R(ctx, 'items')).filter((name) => name.endsWith('.md'))
-      .map((name) => name.slice(0, -3)).filter((id) => !certified.has(id)).filter((id) => {
+      .map((name) => name.slice(0, -3)).filter((id) => !certified.has(id) && !isPublishedItem(ctx.repo, id)).filter((id) => {
         const hash = shortHash(itemHashGuard(readFileSync(R(ctx, 'items', `${id}.md`), 'utf8')));
         return !(id in baseline.hashes) || baseline.hashes[id] !== hash;
       }).sort();
@@ -942,11 +945,7 @@ const step7GuardGate = (ctx) => gate('step7-guard', ['node', 'tools/step7-guard.
   '--scope', `research/${ctx.run}-step7-scope.json`,
   '--auditor-certifications', auditorCertificationsPath(ctx, 7),
   '--terminal-resolutions', terminalResolutionsPath(ctx),
-  '--published-repairs', `research/${ctx.run}-step7-published-repairs.jsonl`,
   '--owner-prerequisite-repairs', `research/${ctx.run}-step7-owner-prerequisite-repairs.jsonl`]);
-
-const publishedGate = (ctx) => gate('step7-published', ['node', 'tools/step7-scope.mjs',
-  'published', '--run', ctx.run, '--out', publishedClosurePath(ctx)]);
 
 /** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
 export function repairGateOutput(failure: any): string {
@@ -1138,8 +1137,8 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false } = {}) =>
-  gate('judge-closure', ['node', 'tools/level-coverage.mjs',
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol' } = {}) =>
+  gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
@@ -1232,7 +1231,7 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
   const task = `research/${ctx.run}-${label}.task.md`;
   writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: DEEPSEEK_FLASH_MAX,
+    profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : LUNA_MAX,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: group.covers,
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
@@ -1307,7 +1306,8 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
   const report = `research/${ctx.run}-${prefix}-pair-${unit}.md`;
   writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write ${report}.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: DEEPSEEK_FLASH_MAX, job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
+    profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : LUNA_MAX,
+    job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
 }
@@ -1532,7 +1532,7 @@ export const stages = [
   {
     id: '3b-author',
     label: 'Step 3b — pair scaffold audit, repair and authoring',
-    modelProfile: DEEPSEEK_FLASH_MAX,
+    modelProfile: LUNA_MAX,
     role: 'alpha-high',
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
     unitPrerequisites: (ctx, unit) => legacyStep3(ctx)
@@ -1760,7 +1760,7 @@ export const stages = [
     id: '6-judge',
     label: 'one stateless judge per item, with whole-group readers alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
-      ? DEEPSEEK_FLASH_MAX
+      ? LUNA_MAX
       : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
@@ -1835,7 +1835,7 @@ export const stages = [
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
-      closureGate(ctx, { allowUnadjudicated: true }),
+      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol' }),
       gate('step7-digests', ['node', 'tools/step7-scope.mjs', 'digests', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
       }),
@@ -1918,7 +1918,7 @@ export const stages = [
       + 'the step-7 guard measures the next stage against.',
   },
 
-  ...step7Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step7GuardGate, publishedGate }),
+  ...step7Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step7GuardGate }),
 
   {
     id: '7-freeze',

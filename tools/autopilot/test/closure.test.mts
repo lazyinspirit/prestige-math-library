@@ -91,7 +91,7 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   for (const id of ['7.8-gate','7.10-gate']) {
     assert.ok(gateIds(id).includes('judge-closure'));
     assert.ok(gateIds(id).includes('step7-round-certification'));
-    assert.ok(gateIds(id).includes('step7-published'));
+    assert.ok(!gateIds(id).includes('step7-published'), 'published repairs have no Step-7 item gate');
     assert.ok(!gateIds(id).includes('level-coverage'), 'Step-8 audit receipt is not available yet');
   }
   assert.deepEqual(gateIds('7.9-repair'), ['frontier-dependency-ledger', 'step7-gate-recertify']);

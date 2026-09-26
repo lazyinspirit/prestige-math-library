@@ -155,6 +155,23 @@ function fixture() {
   writeFileSync(join(root,'research',`${run}-judge.jsonl`),ids.map((id,i)=>JSON.stringify({id,model:MODELS.sol.id,context_sha256:h,item_sha256:contexts(root,[id]).get(id).item_sha256,keep:i!==0})).join('\n')+'\n');
   return {root,ids,cleanup:()=>rmSync(root,{recursive:true,force:true})};
 }
+test('Luna Step-6 verdicts route only to Astra-medium Step-7 adjudicators',()=>{
+  const f=fixture();try{
+    const ledger=join(f.root,'research',`${run}-judge.jsonl`);
+    for(const id of f.ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.luna.id,
+      ...contexts(f.root,[id]).get(id),keep:true})+'\n');
+    const pack=prepareAdjudication(f.root,run,'initial',1);
+    assert.equal(pack.judge_model,MODELS.luna.id);
+    assert.equal(pack.rejected.length,0);
+    reports(f.root,pack);
+    const path=join(f.root,'research',`${run}-dispatch`,`alpha-adjudicate-${workerLabel(pack.phase,pack.round,pack.units[0])}.result.json`);
+    const receipt=JSON.parse(readFileSync(path,'utf8'));
+    json(path,{...receipt,model:MODELS.sol.id,provider_effort:'xhigh'});
+    assert.throws(()=>collect(f.root,run,'initial',1),/authorized identity/);
+    json(path,receipt);
+    assert.doesNotThrow(()=>collect(f.root,run,'initial',1));
+  }finally{f.cleanup();}
+});
 function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
   mkdirSync(join(root,'research',`${run}-dispatch`),{recursive:true});
   for(const unit of pack.units) {
@@ -164,7 +181,8 @@ function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
       reviews:ids.map(id=>({id,disposition:guard(root,id)===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...evidence})),created_items:[],downstream,
       gate_resolutions:(pack.gateAssignments?.[unit]??[]).map((r:any)=>({index:r.index,...evidence}))});
     const role=pack.rejected?'alpha-adjudicate':'alpha-repair';
-    json(join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(pack.phase,pack.round,unit)}.result.json`),{run,role,label:workerLabel(pack.phase,pack.round,unit),covers:[unit],started_at:'2026-09-21T00:00:00Z',ended_at:'2026-09-21T23:59:59Z',ok:true,model:MODELS.sol.id,provider_effort:'xhigh'});
+    const astra=role==='alpha-adjudicate'&&pack.judge_model===MODELS.luna.id;
+    json(join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(pack.phase,pack.round,unit)}.result.json`),{run,role,label:workerLabel(pack.phase,pack.round,unit),covers:[unit],started_at:'2026-09-21T00:00:00Z',ended_at:'2026-09-21T23:59:59Z',ok:true,model:astra?MODELS.astra.id:MODELS.sol.id,provider_effort:astra?'medium':'xhigh'});
   }
 }
 function initial(root:string,ids:string[]) {
@@ -250,7 +268,7 @@ test('policy: published proof-only repairs do not propagate',()=>{
   }finally{f.cleanup();}
 });
 
-test('policy: separate published repairs are excluded from Terra and renewed adjudication',()=>{
+test('policy: separate published repairs are excluded from Sol rejudgment and renewed adjudication',()=>{
   const f=completedPublishedRepair(false);try{
     certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     const calls:string[][]=[];
@@ -262,12 +280,12 @@ test('policy: separate published repairs are excluded from Terra and renewed adj
   }finally{f.cleanup();}
 });
 
-test('policy: published consumers inside the frozen frontier remain in Step 7 repair scope',()=>{
+test('policy: published consumers inside the frozen frontier stay out of Step 7 adjudication',()=>{
   const f=fixture();try{
     item(f.root,'thm-frontier-consumer','Published consumer.',['thm-item-0'],true);
     const owners=initial(f.root,f.ids);
-    assert.equal(Object.values(owners.assignments).flat().includes('thm-frontier-consumer'),true,
-      'Frontier membership, not publication status, determines Step 7 scope');
+    assert.equal(Object.values(owners.assignments).flat().includes('thm-frontier-consumer'),false,
+      'A published repair has no Step 7 adjudication obligation');
   }finally{f.cleanup();}
 });
 
@@ -362,7 +380,7 @@ test('an adjudicator may author a registered load-bearing prerequisite before ow
   }finally{f.cleanup();}
 });
 
-test('an owner may author a missing definition without adding it to Terra scope',()=>{
+test('an owner may author a missing definition without adding it to Sol rejudge scope',()=>{
   const f=fixture();try{
     writeAuditorCreatedBaseline(f.root,run,7);
     const pack=initial(f.root,f.ids),created='def-created-prerequisite';

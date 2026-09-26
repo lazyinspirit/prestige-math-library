@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { freezeFrontier, validateFrontier, readLibraryItems, discoverDownstream, assessFatalThreshold } from './step7-rounds.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step7-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
@@ -38,7 +39,7 @@ function gateFrontier(root,run) {
   const frontier=existsSync(path)?read(path):initialize(root,run);
   validateFrontier(frontier);
   requireValue(frontier.run===run,'wrong run frontier');
-  return new Set(frontier.ids);
+  return new Set(frontier.ids.filter(id => !isPublishedItem(root, id)));
 }
 function impactTargets(root,run,phase,items,seeds,discovered=[]) {
   const frontier=gateFrontier(root,run),roots=[...new Set(seeds)];
@@ -183,15 +184,18 @@ export function prepareAdjudication(root,run,phase,round) {
   const frontier=initialize(root,run), dir=workflowDir(root,run);
   const judgeInput=phase==='initial'?join(dir,'step6-verdicts.json'):join(dir,`judge-${round}.json`);
   const verdicts=phase==='initial' ? read(judgeInput) : read(judgeInput).verdicts;
-  const latest=new Map(); for(const row of validVerdicts(verdicts)) latest.set(`${row.id}\0${row.model}`,row);
-  if(phase==='initial')for(const id of frontier.ids)requireValue([...latest.values()].some(row=>row.id===id&&typeof row.keep==='boolean'),`missing Step 6 verdict: ${id}`);
-  for(const row of latest.values())if(frontier.ids.includes(row.id))requireValue(typeof row.keep==='boolean',`missing complete judge verdict: ${row.id}`);
-  const rejected=[...latest.values()].filter(r=>r.keep===false&&frontier.ids.includes(r.id));
+  const activeModel=phase==='repeat'?MODELS.sol.id
+    : verdicts.some(row=>row.model===MODELS.luna.id)?MODELS.luna.id:MODELS.sol.id;
+  const latest=new Map(); for(const row of validVerdicts(verdicts).filter(row=>row.model===activeModel)) latest.set(`${row.id}\0${row.model}`,row);
+  const repairable=gateFrontier(root,run);
+  if(phase==='initial')for(const id of repairable)requireValue([...latest.values()].some(row=>row.id===id&&typeof row.keep==='boolean'),`missing Step 6 verdict: ${id}`);
+  for(const row of latest.values())if(repairable.has(row.id))requireValue(typeof row.keep==='boolean',`missing complete judge verdict: ${row.id}`);
+  const rejected=[...latest.values()].filter(r=>r.keep===false&&repairable.has(r.id));
   const byId=new Map(frontier.batches.flatMap(b=>b.items.map(id=>[id,String(b.id)])));
   const units=frontier.batches.map(b=>String(b.id));
   const assignments=Object.fromEntries(units.map(u=>[u,rejected.filter(r=>byId.get(r.id)===u)]));
   const identity=libraryIdentity(root);
-  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:frontier.ids,run,phase,round,units,assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
+  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:frontier.ids,run,phase,round,judge_model:activeModel,units,assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
   frozen(path,pack); writeTasks(root,pack,'adjudicate'); return pack;
 }
 
@@ -208,7 +212,7 @@ function writeTasks(root,pack,mode) {
       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
-      'SCOPE: repair only assigned frozen-frontier items, including published items if they belong to that frontier. Outside consumers are handled separately by consumer maintenance, never by this repair/adjudication task. Record their affected uses; do not edit them, rejudge them, or treat outside findings as frontier gate blockers.',
+      'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
       pack.phase==='gate'||pack.basePhase==='gate'?'Step 7.9 permits no new items.':'You may fully author and register a genuinely missing prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.',
       'Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.',
       'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
@@ -349,7 +353,13 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     verifyEvidence(supporting);Object.assign(evidence,supporting);
     const role=phase==='initial'||phase==='repeat'?'alpha-adjudicate':'alpha-repair';
     const dispatch=join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(phase,round,unit)}.result.json`);
-    const receipt=read(dispatch); if(receipt.ok!==true||receipt.run!==run||receipt.role!==role||receipt.label!==workerLabel(phase,round,unit)||receipt.model!==MODELS.sol.id||receipt.provider_effort!=='xhigh')throw Error(`worker did not succeed with required Sol xhigh identity: ${dispatch}`);
+    const receipt=read(dispatch);
+    const expected=role==='alpha-adjudicate'
+      ? pack.judge_model===MODELS.luna.id?[[MODELS.astra.id,'medium']]:[[MODELS.astra.id,'medium'],[MODELS.sol.id,'xhigh']]
+      : [[MODELS.sol.id,'xhigh']];
+    if(receipt.ok!==true||receipt.run!==run||receipt.role!==role||receipt.label!==workerLabel(phase,round,unit)
+      ||!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
+      throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
@@ -637,10 +647,12 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   const frontier=gateFrontier(root,run),candidates=cert.items.filter(row=>frontier.has(row.id));
   const current=hashes(root);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
   requireValue((round===1&&cert.phase==='impact-initial')||(round>1&&cert.phase==='impact-repeat'&&cert.round===round-1),'Sol judge round does not follow a completed certification barrier');
-  const prev=round===1?{}:Object.fromEntries(read(join(dir,`judge-${round-1}.json`)).verdicts.map(r=>[r.id,r]));
+  const priorVerdicts=round===1?[]:read(join(dir,`judge-${round-1}.json`)).verdicts;
+  const prev=Object.fromEntries(priorVerdicts.filter(r=>r.model===MODELS.sol.id).map(r=>[r.id,r]));
   const beforeContexts=contextHasher(root,candidates.map(row=>row.id));
   for(const row of candidates){const now=beforeContexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`certified context changed before Sol judgment: ${row.id}`);}
-  const ids=cert.changed.filter(id=>frontier.has(id)).filter(id=>{const now=beforeContexts.get(id);requireValue(now,`missing judge context ${id}`);return prev[id]?.item_sha256!==now.item_sha256||prev[id]?.context_sha256!==now.context_sha256;});
+  const migrationIds=priorVerdicts.filter(r=>r.model!==MODELS.sol.id).map(r=>r.id);
+  const ids=[...new Set([...cert.changed,...migrationIds])].filter(id=>frontier.has(id)).filter(id=>{const now=beforeContexts.get(id);requireValue(now,`missing judge context ${id}`);return prev[id]?.item_sha256!==now.item_sha256||prev[id]?.context_sha256!==now.context_sha256;});
   const ledger=join(root,'research',`${run}-judge.jsonl`);
   if(ids.length) {
     const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--lineup','sol','--effort','high'],{cwd:root,stdio:'inherit',timeout:43200000});

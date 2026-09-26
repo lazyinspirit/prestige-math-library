@@ -1,13 +1,13 @@
 # Step 7 batch adjudicator
 
 Read CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md and the generated task fully.
-You are the Sol xhigh adjudicator for one batch in 7.1 or 7.5. The task binds
+You are the Astra medium adjudicator for one batch in 7.1 or 7.5. The task binds
 the run, phase, round, exact rejected carriers, ownership and result schema.
 Do not substitute historical tasks or receipts.
 
-Adjudicate and repair only assigned items in the frozen frontier at
-`research/<run>-step7-v2/frontier.json`. Published frontier items follow the
-same protocol as draft frontier items. Outside consumers belong to separate
+Adjudicate and repair only assigned draft items in the frozen frontier at
+`research/<run>-step7-v2/frontier.json`. Published repairs have no adjudication,
+rejudge or item-gate obligation. Outside consumers belong to separate
 maintenance, never Step-7 repair, adjudication, rejudgment or item gates.
 
 Logical validity is the ground truth. Independently inspect each rejected
@@ -50,6 +50,9 @@ repair changes its own Statement/Definition; never pre-expand a transitive
 closure through unchanged statements.
 
 Report discoveries outside your lane or frontier without editing their items.
+Published repairs, including published IDs in the frozen frontier, do not enter
+this adjudication, a rejudge queue, or an item gate. Record the finding for
+maintenance and trace any changed Statement or Definition to direct consumers.
 The engine routes frontier effects to three parallel disjoint frontier owner
 lanes. After frontier writers drain, separate maintenance uses three disjoint
 lanes for outside consumers. Maintenance reports bind exact snippets and

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-// Exact certification scope for every mathematical item changed after Step 7.
+// Exact certification scope for draft mathematics changed after Step 7.
 //
 // Step 8 may create a missing result or repair an existing one.  Both actions
-// invalidate judge currency and every changed item must traverse the configured judge,
-// adjudication, rejudge, and stamp path.  This receipt compares the guarded
+// invalidate judge currency and changed draft items traverse the configured judge,
+// adjudication, rejudge, and stamp path. Published repairs are recorded but
+// have no judge or adjudication obligation. This receipt compares the guarded
 // mathematical hash (the same form used by touchlog and step7-guard) with the
 // immutable post-step7 snapshot and refuses deletions or unowned changes.
 
@@ -11,6 +12,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, shortHash } from './item-hash.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const at = argv.indexOf(flag); return at < 0 ? '' : argv[at + 1] ?? ''; };
@@ -70,7 +72,6 @@ const current = Object.fromEntries(readdirSync(itemsDir).filter((name) => name.e
 const created = Object.keys(current).filter((id) => !(id in baseline.hashes)).sort();
 const modified = Object.keys(current).filter((id) => id in baseline.hashes && current[id] !== baseline.hashes[id]).sort();
 const deleted = Object.keys(baseline.hashes).filter((id) => !(id in current)).sort();
-const items = [...created, ...modified].sort();
 
 for (const id of deleted) errors.push(`${id}: item present at ${baselineLabel} was deleted`);
 for (const id of created) {
@@ -82,9 +83,10 @@ for (const id of modified) {
   if (owners.length > 1) errors.push(`${id}: modified item appears in ${owners.length} run manifests (${owners.join(', ')})`);
 }
 
-const publishedModified = modified.filter((id) => !(ownersByItem.get(id)?.length));
-const receipt = { version: 1, baseline: baselineLabel, created, modified, published_modified: publishedModified, items, manifests };
-const scopeManifest = [{ id: 'step8-changes', kind: 'A', items: items.map((id) => ({ id })) }];
+const publishedModified = modified.filter((id) => isPublishedItem(root, id));
+const judgeItems = [...created, ...modified.filter((id) => !isPublishedItem(root, id))].sort();
+const receipt = { version: 2, baseline: baselineLabel, created, modified, published_modified: publishedModified, items: judgeItems, manifests };
+const scopeManifest = [{ id: 'step8-changes', kind: 'A', items: judgeItems.map((id) => ({ id })) }];
 const outPath = atRoot(outArg);
 const scopeOutPath = atRoot(scopeOutArg);
 if (check) {

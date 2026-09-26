@@ -3,6 +3,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { validateFrontier } from './step7-rounds.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const ITEM = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemId = new RegExp(`^${ITEM}$`);
@@ -94,6 +95,7 @@ export function frontierGateBattery(ctx, gates) {
   const path = join(ctx.repo, 'research', `${ctx.run}-step7-v2`, 'frontier.json');
   const frontier = validateFrontier(JSON.parse(readFileSync(path, 'utf8')));
   if (frontier.run !== ctx.run || frontier.ids.some(id => !itemId.test(id))) throw Error('invalid current Step 7 frontier');
+  const gateScope = { ...frontier, ids: frontier.ids.filter(id => !isPublishedItem(ctx.repo, id)) };
   const allIds = readdirSync(join(ctx.repo, 'items')).filter(name => name.endsWith('.md')).map(name => name.slice(0, -3));
   const preserveRaw = result => ({ ...result, output: `${result.stdout}${result.stderr}`,
     rawOutput: `${result.stdout}${result.stderr}`, rawCode: result.code });
@@ -101,12 +103,12 @@ export function frontierGateBattery(ctx, gates) {
     const argv = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
     if (gate.id === 'defect-ledger') return { ...gate, argv: [...argv, '--frontier', path], projectResult: preserveRaw };
     if (native.has(gate.id)) {
-      const files = frontier.ids.map(id => `items/${id}.md`);
+      const files = gateScope.ids.map(id => `items/${id}.md`);
       return { ...gate, argv: [...argv, ...files], needs: [...(typeof gate.needs === 'function' ? gate.needs() : gate.needs ?? []), ...files], projectResult: preserveRaw };
     }
     if (!supported.has(gate.id)) return gate; // Global/unsupported gates remain fail-closed.
     return { ...gate, argv: argv.includes('--json') ? argv : [...argv, '--json'],
       ...(gate.id === 'judge-closure' ? { liveness: { ...gate.liveness, pattern: '"frontier_judge_complete":(\\d+)' } } : {}),
-      projectResult: result => projectFrontierGate(gate.id, result, frontier, allIds) };
+      projectResult: result => projectFrontierGate(gate.id, result, gateScope, allIds) };
   });
 }

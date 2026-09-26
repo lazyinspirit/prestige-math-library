@@ -50,6 +50,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateFrontier } from './step7-rounds.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const STEP5_SCOPE_TOOL = fileURLToPath(new URL('./step5-scope.mjs', import.meta.url));
 const STEP5_CLOSE_TOOL = fileURLToPath(new URL('./step5-close.mjs', import.meta.url));
@@ -528,7 +529,7 @@ if (cmd === 'check') {
     const known = new Set(readdirSync('items').filter(name => name.endsWith('.md')).map(name => name.slice(0, -3)));
     // Unknown/page/global subjects remain obligations. Only known outside
     // item subjects are excluded; references to a supplier never own a row.
-    included = id => ids.has(id) || !known.has(id);
+    included = id => (ids.has(id) && !isPublishedItem(process.cwd(), id)) || !known.has(id);
   }
   const mine = runRows.filter(row => {
     if (included(row.subject)) return true;

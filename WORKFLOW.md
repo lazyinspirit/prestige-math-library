@@ -49,17 +49,19 @@ The dispatcher and item-judge prompt apply this rule to every role.
 |---|---|
 | Step 1 scaffolding | Sol / max |
 | Step 1 drift review; group Alpha | Sol / high |
-| Step 3a pair scope and Step 3b pair authors | DeepSeek V4.1 Flash / max |
-| Step 5a readers | Sol / high |
-| Step 5a refuters | Sol / xhigh |
+| Step 3a pair scope | DeepSeek V4.1 Flash / max |
+| Step 3b pair authors | Luna / max |
+| Step 5a readers and refuters | Luna / max |
 | Step 5a adjudicators | Sol / high |
 | Step 5b agents | Sol / xhigh |
-| Step 6 group readers; Step 9 agent lanes | DeepSeek V4.1 Flash / max |
+| Step 6 group readers | Luna / max |
+| Step 9 agent lanes | DeepSeek V4.1 Flash / max |
 | Step 8 agent lanes | Sol / max |
 | Assignment | DeepSeek V4.1 Flash / max |
 | Step 6 item judges; Step 7 rejudges | Sol / high |
 | Step 8 item judges | Sol / xhigh |
-| Step 7 batch adjudicators and three owner repair agents | Sol / xhigh |
+| Step 7 batch adjudicators | Astra / medium |
+| Step 7 three owner repair agents | Sol / xhigh |
 
 tools/models.mjs owns profiles; stages override role defaults. The owner selected
 Sol for the former Terra lanes and for Steps 1 and 8. Group capacity is ten;
@@ -75,7 +77,7 @@ reread current proofs, dependencies and sources after compaction. Read-only
 roles write no extra files. Compaction starts at 200,000 total context tokens;
 usage telemetry is not a billing estimate.
 
-DeepSeek stages in Steps 2, 3, 6 and 9 use the stable `deepseek-flash` API alias and maximum reasoning
+DeepSeek stages in Steps 2, 3a and 9 use the stable `deepseek-flash` API alias and maximum reasoning
 through an isolated Codex home. Their required read-only `web_search` MCP tool
 prefers Tavily when `TAVILY_API_KEY` is configured and otherwise uses Firecrawl.
 Dispatch fails before launching if the DeepSeek key or both supported web-search
@@ -305,7 +307,8 @@ existing `kind: "gate"` receipt with the stable ledger subject as `id` and expli
 `stage-unowned` rows qualify. The evidence must name the actual foreign draft;
 the hash binds its owner's current item, contract and manifest. This receipt
 resolves the runtime incident, not that draft's mathematical review. Ordinary
-gate verdicts retain their own-run or claimed-published carrier rule.
+draft gate verdicts retain their own-run carrier rule. Published repairs retain
+provenance without gate verdicts.
 Empty windows still need reviewer attribution. Historical
 reviews may supply evidence only after current hash and interface reconciliation;
 never reset a baseline or bulk-approve candidates to close a gate. Narrow gate
@@ -376,16 +379,17 @@ adjudication, not automatic authority to rewrite a sound result.
 `tools/step7-workflow.mjs` owns preparation, collection, central certification,
 judgment and closure. `7-baseline` and `7-scope` freeze the immutable frontier
 in `research/<run>-step7-v2/frontier.json`. Step-7 repair, adjudication,
-rejudgment and item gates use only those IDs, including published items in that
-frontier. Outside consumers, published or draft, never enter these mechanisms.
+rejudgment and item gates use only draft IDs in that frontier. Published repairs
+have no gate, rejudge or adjudication obligation at any stage. Record their
+corrections and trace changed statements or definitions to direct consumers.
 
 | Part / stage | Required work |
 |---|---|
-| 7.1 / `7.1-adjudicate` | One Sol xhigh adjudicator per batch resolves Step-6 rejections and repairs confirmed frontier defects. |
+| 7.1 / `7.1-adjudicate` | One Astra medium adjudicator per batch resolves Step-6 rejections and repairs confirmed frontier defects. |
 | 7.2 / `7.2-impact` | Three Sol xhigh owner agents concurrently close disjoint frontier impact assignments; empty lanes record no-ops. |
 | 7.3 / `7.3-certify` | After all frontier repairs/reviews close and writers drain, certify the stable state centrally. |
 | 7.4 / `7.4-rejudge` | Sol high rejudges repaired frontier items against the stable state. |
-| 7.5 / `7.5-adjudicate` | Sol xhigh batch adjudicators resolve renewed frontier rejections and repair confirmed defects. |
+| 7.5 / `7.5-adjudicate` | Astra medium batch adjudicators resolve renewed frontier rejections and repair confirmed defects. |
 | 7.6 / `7.6-impact` | Three concurrent owner lanes close frontier impacts. |
 | 7.7 / `7.7-certify` | Certify once after repair closure and all writers drain; repeat 7.4–7.7 until below threshold. |
 | 7.8 / `7.8-gate` | Run the complete battery with item findings scoped to the frozen frontier. |
@@ -402,7 +406,7 @@ false positives require evidence without unnecessary edits.
 New adjudication packs require `defect_type` (`logic`,
 `dependency_citation` or `other`) for confirmed fatal decisions. Historical V2
 omissions remain usable only when the exact row matches the frozen pack,
-collected decision, hash-bound report and successful Sol xhigh dispatch.
+collected decision, hash-bound report and successful authorized adjudicator dispatch.
 They remain fatal and explicitly unclassified; never guess the category or
 rewrite historical evidence.
 
@@ -418,7 +422,8 @@ logically sufficient change. Continue another hop only if that consumer's
 Statement/Definition changes. Never expand a blanket transitive closure through
 unchanged consumers.
 
-Frontier consumers enter Step-7 assignments, whether published or draft.
+Draft frontier consumers enter Step-7 assignments. Published consumers follow
+separate direct-use maintenance when a changed source affects them.
 Outside consumers enter the separate durable protocol in
 `tools/consumer-maintenance.mjs`, using `briefs/consumer-maintenance.md`.
 After frontier writers drain, three disjoint maintenance lanes examine direct
@@ -509,17 +514,18 @@ frozen evidence; current frontier statement changes independently trigger
 impact examination.
 
 Historical published repairs, including Step-5 cross-group repairs, retain their
-original claims, provenance and content evidence. This grants no new Step-7
-outside assignment or certification obligation. Keep historical licenses and
-source reports intact; a scoped Step-7 pass cannot attest outside mathematics.
+original claims, provenance and content evidence as records, not gates. They
+create no rejudge, adjudication or item-certification obligation. A changed
+statement or definition still requires direct-consumer tracing.
 
 `7-freeze` snapshots the closed frontier state for Step 8. Historical terminal
 resolution tools remain available for their original protocols, not as new
 convergence shortcuts. Explicit post-freeze recovery follows the guarded
 Step-8 controls below.
 
-Step 8 reviews scope and post-repair changes, closes impact and applies current
-stamps through the tool. Genuine Step-8 auditor/adjudicator-created additions
+Step 8 reviews scope and post-repair draft changes, closes impact and applies current
+stamps through the tool. Published repairs appear in the change record but stay
+out of judge and adjudication queues. Genuine Step-8 auditor/adjudicator-created additions
 receive the same distinct hash-bound certification and are excluded from the
 judge/re-adjudication loop. The same applies to legitimately refreshed earlier
 auditor-created items with retained origin evidence; ordinary baseline originals

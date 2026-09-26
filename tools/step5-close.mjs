@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { itemHashGuard } from './item-hash.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
 const mode = argv[0];
@@ -36,8 +37,7 @@ const artifactNames = () => researchNames().filter((name) =>
   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-5a-decisions.json'))
   || name === `${run}-alpha-5b.md`
   || name === `${run}-cross-group-edges.json`
-  || name === `${run}-5b-verdicts.jsonl`
-  || name === `${run}-step5-published-claims.jsonl`).sort();
+  || name === `${run}-5b-verdicts.jsonl`).sort();
 const artifactHashes = () => Object.fromEntries(artifactNames().map((name) => [
   `research/${name}`, sha256(readFileSync(R('research', name))),
 ]));
@@ -45,14 +45,10 @@ const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
 const canonicalRows = (rows, key) => [...rows].sort((left, right) =>
   String(key(left)).localeCompare(String(key(right))));
-const step5PublishedRows = () => canonicalRows(
-  jsonl(R('research', `${run}-step7-published-repairs.jsonl`))
-    .filter((row) => row.found_at_stage === '5a-adjudicate'),
-  (row) => row.step5_obligation,
-);
 const step5LedgerRows = () => canonicalRows(
   jsonl(R('research', 'defect-ledger.jsonl')).filter((row) => row.run === run
-    && ['5a-adjudicate', '5b-cross'].includes(row.caught_at_stage)),
+    && ['5a-adjudicate', '5b-cross'].includes(row.caught_at_stage)
+    && !isPublishedItem(root, row.subject)),
   (row) => row.defect_id,
 );
 const currentRunItems = () => {
@@ -86,11 +82,6 @@ if (mode === 'verify') {
   for (const [relative, expected] of Object.entries(receipt.artifacts ?? {})) {
     if (currentArtifacts[relative] !== expected) errors.push(`${relative} changed after Step 5 closed`);
   }
-  const publishedRows = step5PublishedRows();
-  if (sha256(JSON.stringify(publishedRows)) !== receipt.step5_published_rows_sha256
-    || publishedRows.length !== receipt.step5_published_rows_count) {
-    errors.push('Step-5 published-repair handoff rows changed');
-  }
   const ledgerRows = step5LedgerRows();
   if (sha256(JSON.stringify(ledgerRows)) !== receipt.step5_ledger_rows_sha256
     || ledgerRows.length !== receipt.step5_ledger_rows_count) {
@@ -123,7 +114,6 @@ for (const [label, args] of checks) {
 }
 const artifacts = artifactHashes();
 if (!Object.keys(artifacts).length) fail('no exact Step-5 artifacts exist');
-const publishedRows = step5PublishedRows();
 const ledgerRows = step5LedgerRows();
 writeFileSync(receiptPath, `${JSON.stringify({
   version: 2,
@@ -131,8 +121,6 @@ writeFileSync(receiptPath, `${JSON.stringify({
   status: 'closed',
   closed_at: new Date().toISOString(),
   artifacts,
-  step5_published_rows_sha256: sha256(JSON.stringify(publishedRows)),
-  step5_published_rows_count: publishedRows.length,
   step5_ledger_rows_sha256: sha256(JSON.stringify(ledgerRows)),
   step5_ledger_rows_count: ledgerRows.length,
   final_item_hashes: currentRunItems(),

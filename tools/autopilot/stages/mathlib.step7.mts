@@ -6,7 +6,7 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir } from '../../step7-workflow.mjs';
 import { frontierGateBattery } from '../../step7-frontier-gate.mjs';
 
-export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step7GuardGate, publishedGate }: any): any[] {
+export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step7GuardGate }: any): any[] {
   const round=(ctx:any,id:string)=>ctx.stageRounds?.[id]??1;
   const tool=(ctx:any,command:string,phase:string,n:number)=>['node','tools/step7-workflow.mjs',command,'--run',ctx.run,'--phase',phase,'--round',String(n)];
   const pattern=(phase:string,id:string)=>(ctx:any)=>new RegExp(`^(?:alpha-adjudicate|alpha-repair|tool)-step7-v2-${phase}(?:-pass-[0-9]+)?-r${round(ctx,id)}-(?:u[^.]+|all)\\.result\\.json$`);
@@ -17,7 +17,7 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
   const outsideLane=(ctx:any,u:string)=>{const [,pack,lane]=u.split(':');return maintenancePack(ctx.repo,ctx.run,pack).lanes.find((row:any)=>String(row.lane)===lane);};
   const workerStage=(id:string,phase:string,adjudication:boolean):any=>({
     id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
-    modelProfile:MODEL_PROFILE_NAMES.solXHigh,
+    modelProfile:adjudication?MODEL_PROFILE_NAMES.astraMedium:MODEL_PROFILE_NAMES.solXHigh,
     units:(ctx:any)=>adjudication ? (existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
       ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1']) : ownerUnits(ctx,phase,id),
     pattern:(ctx:any)=>adjudication?pattern(phase,id)(ctx):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$`),concurrency:adjudication?24:3,
@@ -47,7 +47,7 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
             brief:'briefs/consumer-maintenance.md',task:input.task,timeout:21600};
         }
         const [pass,unit]=decode(phase,u);return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
-        job:adjudication?'adjudication':'authoring',covers:[u],profile:MODEL_PROFILE_NAMES.solXHigh,
+        job:adjudication?'adjudication':'authoring',covers:[u],profile:adjudication?MODEL_PROFILE_NAMES.astraMedium:MODEL_PROFILE_NAMES.solXHigh,
         brief:`briefs/step7-${adjudication?'adjudicator':'owner-repair'}.md`,
         task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};});
     },
@@ -77,7 +77,7 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     ...repoWide(ctx),...contractGates(ctx,{reviewed:true}),
     // Published maintenance and auditor additions are outside the immutable
     // original frontier; their certification gates belong to later stages.
-    closureGate(ctx),ledgerGate(ctx),
+    closureGate(ctx,{judgeLineup:'sol'}),ledgerGate(ctx),
     ];
     // Doctor inspects future command descriptors before 7-scope creates the
     // frontier. Actual execution always scopes the complete battery.

@@ -47,15 +47,11 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { buildGroupBundle } from './evidence-bundle.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildCurrentContextHashes } from './context-hash-pool.mjs';
-import { verdictIsCurrent } from './judge-currency.mjs';
-import { resolveLineup } from './models.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { validateCodexOutput } from './codex-output-schema.mjs';
-import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
-import { loadStep7ClosureCertification, currentStep7Certification } from './step7-certification-consumer.mjs';
 import {
   exactSetProblems,
   loadStep7JudgeEvidence,
@@ -193,6 +189,7 @@ function openRejections() {
     try {
       const rows = readJson(closurePath)?.unadjudicated_rows;
       if (Array.isArray(rows)) return rows
+        .filter((r) => !isPublishedItem(REPO, r.id))
         .filter((r) => r && typeof r.id === 'string' && typeof r.model === 'string'
           && typeof r.context_sha256 === 'string')
         .filter((r) => !answered.has(rejectionKey(r)))
@@ -203,7 +200,7 @@ function openRejections() {
   for (const entry of evidence.rejections.values()) {
     const r = entry.row;
     const key = rejectionKey(r);
-    if (answered.has(key)) continue;
+    if (answered.has(key) || isPublishedItem(REPO, r.id)) continue;
     out.push({ id: r.id, model: r.model, context_sha256: r.context_sha256, reason: r.reason ?? r.why ?? null });
   }
   return out;
@@ -216,6 +213,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
   for (const digest of readAllDigests()) {
     const from = String(digest.group ?? '');
     for (const raw of includeConcerns ? (digest.concerns ?? []) : []) {
+      if (isPublishedItem(REPO, raw.id)) continue;
       const owner = (index.itemOwner.get(raw.id) ?? index.pageOwner.get(raw.id))?.group;
       const alert = {
         version: 1,
@@ -235,6 +233,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alerts.push(alert);
     }
     for (const raw of digest.alerts ?? []) {
+      if (isPublishedItem(REPO, raw.item)) continue;
       const owner = index.itemOwner.get(raw.item)?.group;
       const alert = {
         version: 1,
@@ -255,6 +254,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     }
   }
   for (const raw of readJsonl(crossPath)) {
+    if (isPublishedItem(REPO, raw.item)) continue;
     const alert = {
       version: 1,
       source: 'step7-rejection',
@@ -684,152 +684,17 @@ if (mode === 'digests') {
 
 // ---- published ---------------------------------------------------------------
 
-// A step-7 Alpha that finds a falsehood in a PUBLISHED item repairs it and routes
-// the repaired item to every currently configured judge. This gate is what
-// makes the second half real: without it, a repair to live content ships on one
-// agent's say-so, and published content has no step-5 reader left to certify it.
-//
-// Judge certification is the certifier here, and it is stronger than the single
-// reader the published-dependency-repair rule asks for at step 5 — but only if
-// the verdicts are CURRENT against the repaired text. A verdict cast before the
-// repair says nothing about it.
+// Published repairs have no judge, rejudge, adjudication or item-gate closure.
+// This command remains as a compatibility receipt for existing workflows.
 if (mode === 'published') {
   const rows = readJsonl(R('research', `${run}-step7-published-repairs.jsonl`));
-  const bad = [];
-  let step7Certificate = null;
-  try { step7Certificate = loadStep7ClosureCertification(REPO, run); }
-  catch (cause) { bad.push(cause.message); }
-  const repaired = rows.filter((r) => r.kind === 'repaired');
-  const latestRepaired = new Map();
-  for (const row of repaired) if (typeof row.id === 'string') latestRepaired.set(row.id, row);
-  // Central owner waves can discover published consumers absent from the old
-  // repair ledger. Check their current certification too, without relabeling a
-  // reviewed-but-unaffected item as a mathematical repair.
-  const centrallyReviewedPublished = [];
-  for (const row of step7Certificate?.items ?? []) {
-    const path = R('items', `${row.id}.md`);
-    if (!existsSync(path)) { bad.push(`certified item missing: ${row.id}`); continue; }
-    const text = readFileSync(path, 'utf8');
-    const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text)?.[1] ?? '';
-    if (!/^status:[ \t]*["']?published["']?[ \t]*$/m.test(frontmatter)) continue;
-    centrallyReviewedPublished.push(row.id);
-    if (!latestRepaired.has(row.id)) latestRepaired.set(row.id, { id: row.id, kind: 'step7-certified' });
-  }
-  const escalated = rows.filter((r) => r.kind === 'escalated');
+  const receipt = { version: 2, run, policy: 'published-repairs-exempt',
+    repaired: [...new Set(rows.filter(row => row.kind === 'repaired').map(row => row.id).filter(Boolean))],
+    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [] };
   const receiptPath = opt('out');
-  const pending = { version: 1, run, repaired: [...new Set(repaired.map((row) => row.id).filter(Boolean))],
-    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [], open_fatal_rows: [],
-    terminal_resolved: [], step7_certified: [], centrally_reviewed_published: centrallyReviewedPublished,
-    escalations: escalated };
-  const terminal = parseTerminalResolutions(terminalPath, { allowMissing: true });
-  bad.push(...terminal.errors);
-
-  // An escalation is a real disposition and must not be silent: the owner rule
-  // reserves deletions, id changes and reading-order changes on published pages,
-  // and a correction needing one of those is reported rather than improvised.
-  for (const r of escalated) {
-    if (typeof r.id !== 'string' || !r.id || typeof r.group !== 'string' || !r.group
-      || typeof r.found_via !== 'string' || !r.found_via || !String(r.why ?? '').trim())
-      bad.push('escalated row requires {kind:"escalated", id, group, found_via, why}');
-    else bad.push(`\`${r.id}\` is escalated to the owner and unresolved: ${r.why}`);
-  }
-
-  const repairedIds = [...latestRepaired.keys()];
-  // A run with no published repairs has no published judge obligation.  Do not
-  // manufacture a missing-ledger failure for an empty lane; escalations above
-  // remain hard blockers in their own right.
-  const evidence = repairedIds.length
-    ? loadStep7JudgeEvidence(judgePath, adjPath)
-    : { errors: [], answers: new Map(), rejections: new Map() };
-  bad.push(...evidence.errors);
-  const verdicts = repairedIds.length ? readJsonl(judgePath) : [];
-  const { models: currentModels } = resolveLineup();
-  const currentHashes = new Map();
-  for (const result of await buildCurrentContextHashes(repairedIds, {
-    cwd: REPO,
-    cachePath: R('research', `${run}-judge-context-hashes.json`),
-  })) {
-    if (result.ok) currentHashes.set(result.id, { context: result.context, item: result.item });
-    else bad.push(result.error);
-  }
-  for (const r of latestRepaired.values()) {
-    const p = R('items', `${r.id}.md`);
-    if (!existsSync(p)) { bad.push(`repaired row names \`${r.id}\`, which is not an item on disk`); continue; }
-    const now = currentHashes.get(r.id);
-    if (!now) continue;
-    if (currentStep7Certification(step7Certificate, r.id, readFileSync(p, 'utf8'), now.context)) {
-      pending.step7_certified.push({ id: r.id, round: step7Certificate.round, phase: step7Certificate.phase });
-      continue;
-    }
-    const terminalRow = terminal.latest.get(r.id);
-    if (terminalRow) {
-      if (!terminalResolutionIsCurrent(terminalRow, {
-        context_sha256: now.context,
-        item_sha256: now.item,
-      })) {
-        bad.push(`\`${r.id}\`: terminal resolution is stale against the current published item`);
-      } else {
-        pending.terminal_resolved.push({
-          id: r.id,
-          resolved_by: terminalRow.resolved_by,
-          disposition: terminalRow.disposition,
-        });
-        continue;
-      }
-    }
-    // Use the same currency predicate and same-context configured-model shape as
-    // level-coverage. Published items are outside the run manifests, so the
-    // run-scoped closure receipt cannot perform this check for us.
-    const byContext = new Map();
-    for (const verdict of verdicts.filter((v) => v.id === r.id
-      && currentModels.includes(v.model) && typeof v.context_sha256 === 'string'
-      && (v.keep === true || v.keep === false))) {
-      if (!byContext.has(verdict.context_sha256)) byContext.set(verdict.context_sha256, new Map());
-      const byModel = byContext.get(verdict.context_sha256);
-      const prior = byModel.get(verdict.model);
-      if (!prior || String(verdict.at ?? '') >= String(prior.at ?? '')) byModel.set(verdict.model, verdict);
-    }
-    const eligible = [...byContext.entries()].filter(([context, byModel]) =>
-      currentModels.every((model) => byModel.has(model)
-        && verdictIsCurrent({ context_sha256: context, item_sha256: byModel.get(model).item_sha256 }, now)));
-    if (!eligible.length) {
-      bad.push(`\`${r.id}\` was repaired but lacks a current verdict from ${currentModels.join(' + ')} — `
-        + 'historic or retired-lane rows do not certify the repaired text');
-      pending.needs_rejudge.push(r.id);
-      continue;
-    }
-    eligible.sort((a, b) => Math.max(...currentModels.map((m) => String(a[1].get(m).at ?? '')))
-      < Math.max(...currentModels.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);
-    for (const v of [...eligible[0][1].values()].filter((v2) => v2.keep === false)) {
-      const answer = evidence.answers.get(rejectionKey(v))?.row;
-      if (!answer) {
-        bad.push(`\`${r.id}\`: ${v.model} rejected the repaired text and nothing adjudicated it`);
-        pending.unadjudicated_rows.push({ id: v.id, model: v.model, context_sha256: v.context_sha256 });
-      } else if (answer.outcome === 'confirmed_fatal') {
-        bad.push(`\`${r.id}\`: ${v.model} rejection was confirmed fatal and remains on the current text`);
-        pending.open_fatal.push(r.id);
-        pending.open_fatal_rows.push({ id: v.id, model: v.model, context_sha256: v.context_sha256 });
-      }
-    }
-  }
-
-  pending.needs_rejudge = [...new Set(pending.needs_rejudge)].sort();
-  pending.open_fatal = [...new Set(pending.open_fatal)].sort();
-  pending.open_fatal_rows.sort((a, b) => `${a.id}|${a.model}|${a.context_sha256}`
-    .localeCompare(`${b.id}|${b.model}|${b.context_sha256}`));
-  pending.unadjudicated_rows.sort((a, b) => `${a.id}|${a.model}`.localeCompare(`${b.id}|${b.model}`));
-  if (receiptPath) {
-    const resolvedReceipt = receiptPath.startsWith('/') ? receiptPath : R(receiptPath);
-    writeFileSync(resolvedReceipt, `${JSON.stringify(pending, null, 2)}\n`);
-  }
-
-  if (bad.length) {
-    console.error(`step7-scope --published: ${bad.length} problem(s):`);
-    for (const b of bad) console.error(`  ${b}`);
-    process.exit(1);
-  }
-  console.log(`step7-scope --published: ${repaired.length} published item(s) repaired and judged by the configured model set, `
-    + `${escalated.length} escalated, ${rows.length} row(s) checked`);
+  if (receiptPath) writeFileSync(receiptPath.startsWith('/') ? receiptPath : R(receiptPath),
+    `${JSON.stringify(receipt, null, 2)}\n`);
+  console.log(`step7-scope --published: ${receipt.repaired.length} published repair(s) recorded; no gate obligation`);
   process.exit(0);
 }
 

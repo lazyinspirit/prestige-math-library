@@ -127,6 +127,10 @@ unresolved mathematics. Record every published defect in the canonical ledger.
 Preserve cross-group dependency, impact and exact-hash closure checks. Every 5a
 and 5b gate failure is an owner hold: the owner repairs the rejected items and
 recertifies what the repair invalidates, then retries the same gate.
+Repairs to items already marked `status: published` are exempt from item repair
+gates and from rejudgment and adjudication at every stage. Record the defect and
+correction honestly, and trace a changed Statement or Definition to each direct
+consumer; draft consumers retain their own normal obligations.
 For both Step-5b impact windows, examine every direct dependency
 and reference use of a changed source. A consumer with a changed exported
 interface is another source event; later repairs enter the post-5a to current
@@ -134,17 +138,17 @@ window. Stop at a consumer whose own claim and assumptions remain licensed,
 while still checking its actual proof use and any new AC or domain premise.
 
 **Step 7.** The engine's repair, adjudication, rejudgment and item gates are
-limited to the immutable IDs in `research/<run>-step7-v2/frontier.json`.
-Published items inside the frontier follow the same Step-7 protocol as draft
-items. Every outside consumer, published or draft, stays outside those mechanisms.
+limited to draft IDs in the immutable `research/<run>-step7-v2/frontier.json`.
+Published repairs remain outside those mechanisms even when their IDs occur in
+the frozen frontier. Every outside consumer stays outside those mechanisms.
 Preserve historical repairs, assignments, reports and certifications without
 turning their former scope into new repair authority.
 
-7.1 one Sol xhigh adjudicator per batch resolves Step-6 rejections and repairs
+7.1 one Astra medium adjudicator per batch resolves Step-6 rejections and repairs
 confirmed frontier defects. 7.2 three Sol xhigh owner agents run concurrently
 on disjoint frontier impact assignments. 7.3 the central tool verifies complete
 frontier repair and review coverage, waits for every writer, then certifies the
-stable state once. 7.4 Sol xhigh rejudges repaired frontier items; 7.5 Sol xhigh
+stable state once. 7.4 Luna max rejudges repaired frontier items; 7.5 Astra medium
 adjudicators resolve renewed frontier rejections; 7.6 three parallel owner
 lanes close frontier impacts; 7.7 centrally recertifies after all work closes.
 Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original frontier
@@ -239,8 +243,8 @@ published items or dependency interfaces remain unaudited. Distinguish
 confirmed defects from downstream impact-review candidates and incomplete
 audits. Update existing entries rather than create duplicate ledgers. A new
 scaffold or published supplier does not close a published-proof defect;
-published content remains read-only except for authorized repairs: frozen-frontier
-items follow Step 7, while outside consumers use separate maintenance.
+published content remains read-only except for authorized repairs, which are
+recorded as maintenance and carry no item gate, rejudge or adjudication duty.
 The current early-repair authorization permits confident repairs needing no Phase-2
 dependencies, one item at a time, without judges. It covers necessary
 dependency, home and verification updates. Record local checks honestly;

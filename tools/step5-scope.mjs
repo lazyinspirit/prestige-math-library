@@ -40,7 +40,6 @@ const refuterPath = (batch) => R('research', `${run}-refute-${batch}.json`);
 const readerFindingsPath = (batch) => R('research', `${run}-reader-findings-${batch}.json`);
 const decisionsPath = (group) => R('research', `${run}-alpha-${group}-5a-decisions.json`);
 const ledgerPath = R(option('ledger', 'research/defect-ledger.jsonl'));
-const publishedRepairsPath = R('research', `${run}-step7-published-repairs.jsonl`);
 const publishedClaimsPath = R('research', `${run}-step5-published-claims.jsonl`);
 const auditorCertificationsPath = R('research', `${run}-step5-auditor-certifications.json`);
 
@@ -95,8 +94,7 @@ function claimedPublishedIds() {
         && typeof row?.id === 'string' && /^[a-f0-9]{64}$/.test(row?.pre_sha256 ?? ''))
       .map((row) => row.id));
   } catch {
-    // The later published-claim validation owns the precise malformed-row
-    // diagnostic. An unreadable claim file must not widen reader scope here.
+    // An unreadable historical claim file must not widen reader scope.
     return new Set();
   }
 }
@@ -824,7 +822,6 @@ if (command === 'check') {
     const mine = ledgerRows.filter((row) => row.run === run);
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
-    const publishedBindings = [];
     const liveByBatch = new Map();
     const ownableSubjects = new Set();
     const liveFor = (batch) => {
@@ -967,10 +964,6 @@ if (command === 'check') {
           && decisionRows.some((row) => row.disposition !== 'false-positive' && !repaired.has(row.disposition))) {
           error('ledger-disposition', `${decision.obligation} reverted the change but its rows are neither repaired defects nor false positives`);
         }
-        if (target?.subject_type === 'published-dependency'
-          && decisionRows.some((row) => repaired.has(row.disposition))) {
-          publishedBindings.push({ group: group.label, decision, target });
-        }
         if (phase === 'final' && !/^[a-f0-9]{64}$/.test(decision.subject_sha256 ?? '')) {
           error('decision-hash-missing', `[${decision.id}] ${decision.obligation} has no sealed Step-5 carrier hash`);
         }
@@ -1021,74 +1014,8 @@ if (command === 'check') {
         error('decision-missing', `[${target.id}] ${group.label} did not decide ${obligation}`);
       }
     }
-    let publishedRows = [];
-    if (existsSync(publishedRepairsPath)) {
-      try { publishedRows = readFileSync(publishedRepairsPath, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)); }
-      catch (cause) { error('published-repair-invalid', cause.message); }
-    }
-    const step5Rows = publishedRows.filter((row) => row.found_at_stage === '5a-adjudicate');
-    const step5bRows = publishedRows.filter((row) => row.found_at_stage === '5b-cross');
-    const expectedPublished = new Map(publishedBindings.map((binding) => [binding.target.obligation, binding]));
-    let publishedClaims = [];
-    if (existsSync(publishedClaimsPath)) {
-      try { publishedClaims = readFileSync(publishedClaimsPath, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)); }
-      catch (cause) { error('published-claim-invalid', cause.message); }
-    }
-    const claimById = new Map();
-    for (const claim of publishedClaims) {
-      if (claimById.has(claim.id)) error('published-claim-duplicate', `${claim.id} has more than one repair owner`);
-      else claimById.set(claim.id, claim);
-      const bindings = publishedBindings.filter((binding) => binding.target.id === claim.id
-        && binding.target.pre_sha256 === claim.pre_sha256);
-      const path = R('items', `${claim.id}.md`);
-      const current = existsSync(path) ? itemHashGuard(readFileSync(path, 'utf8')) : null;
-      const gateRepairs = step5bRows.filter((row) => row.kind === 'repaired'
-        && row.id === claim.id && row.group === claim.group
-        && row.repair_owner_group === claim.group && row.pre_sha256 === claim.pre_sha256
-        && row.post_sha256 === current && row.repair_confidence === 1
-        && typeof row.defect === 'string' && row.defect.trim()
-        && typeof row.correction_basis === 'string' && row.correction_basis.trim());
-      if (claim.version !== 1 || claim.run !== run
-        || (!bindings.some((binding) => binding.group === claim.group) && gateRepairs.length !== 1)) {
-        error('published-claim-extra', `${claim.id ?? '(missing id)'} is not owned by one exact repaired Step-5 finding`);
-      }
-    }
-    const seenPublished = new Set();
-    for (const row of step5Rows) {
-      const binding = expectedPublished.get(row.step5_obligation);
-      if (!binding || seenPublished.has(row.step5_obligation)) {
-        error('published-repair-extra', `${row.step5_obligation ?? '(missing obligation)'} is not one exact repaired Step-5 reader finding`);
-        continue;
-      }
-      seenPublished.add(row.step5_obligation);
-      const { target, group } = binding;
-      const path = R('items', `${target.id}.md`);
-      const current = existsSync(path) ? itemHashGuard(readFileSync(path, 'utf8')) : null;
-      const claim = claimById.get(target.id);
-      if (row.kind !== 'repaired' || row.id !== target.id || row.group !== group
-        || row.found_via !== target.consumer_id || row.pre_sha256 !== target.pre_sha256
-        || !claim || row.repair_owner_group !== claim.group || claim.pre_sha256 !== target.pre_sha256
-        || row.post_sha256 !== current || row.step5_defect_class !== target.defect
-        || typeof row.defect !== 'string' || !row.defect.trim()
-        || typeof row.correction_basis !== 'string' || !row.correction_basis.trim()) {
-        error('published-repair-mismatch', `${target.obligation} has no exact current published-repair receipt`);
-      }
-    }
-    for (const [obligation, binding] of expectedPublished) if (!seenPublished.has(obligation)) {
-      error('published-repair-missing', `[${binding.target.id}] ${obligation} repaired published mathematics but has no certification handoff row`);
-    }
-    for (const row of step5bRows) {
-      const claim = claimById.get(row.id);
-      const path = R('items', `${row.id}.md`);
-      const current = existsSync(path) ? itemHashGuard(readFileSync(path, 'utf8')) : null;
-      if (row.kind !== 'repaired' || !claim || row.group !== claim.group
-        || row.repair_owner_group !== claim.group || row.pre_sha256 !== claim.pre_sha256
-        || row.post_sha256 !== current || row.repair_confidence !== 1
-        || typeof row.defect !== 'string' || !row.defect.trim()
-        || typeof row.correction_basis !== 'string' || !row.correction_basis.trim()) {
-        error('published-repair-mismatch', `${row.id ?? '(missing id)'} has no exact current 5b published-repair receipt`);
-      }
-    }
+    // Published repairs retain their optional provenance files, but those
+    // files are not a Step-5 certification or gate obligation.
     for (const row of earlyRows) {
       if (ownableSubjects.has(row.subject) && !referenced.has(row.defect_id)) {
         error('ledger-unowned', `[${row.subject}] ${row.defect_id} has no 5a decision reference`);
