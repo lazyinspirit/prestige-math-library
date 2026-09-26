@@ -112,6 +112,12 @@ potential published defects to the owner with exact IDs/evidence; the serial
 reconciler updates published-consumer-supplier-ledger.md.
 
 Use tools/step1-decisions.mjs and tools/step3-decisions.mjs for current evidence.
+`node tools/scope-decisions.mjs check --run <run>` checks each deferred or
+out-of-scope coverage row, including batches absent from the alpha-group
+assignment. Such rows use the fallback `all` label and the
+`alpha-all-scope-decisions.json` receipt. `prepare`, `refresh --all`, `delta`,
+default `check`, and `render` use the same complete set of labels; an explicit
+`--group` limits only that requested check or refresh.
 Step 3 item decisions are recorded after authoring and bind to transitive examined
 dependencies. During concurrent authoring, an item decision requires current
 scope approval for its own A/B pair; another pair's in-progress scope edit does

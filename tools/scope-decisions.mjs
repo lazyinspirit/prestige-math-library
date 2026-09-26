@@ -133,6 +133,13 @@ function currentDeclines() {
   return out.sort((a, b) => a.decline_id.localeCompare(b.decline_id));
 }
 
+// Coverage can contain a batch without an alpha-group assignment. Its rows
+// receive the fallback `all` label and must be checked like assigned rows.
+const decisionLabels = (current) => [...new Set([
+  ...groups.map((group) => String(group.label)),
+  ...current.map((row) => row.group),
+])];
+
 const decisionPath = (label) => join(research, `${run}-alpha-${label}-scope-decisions.json`);
 const loadDecisions = (label) => {
   const path = decisionPath(label);
@@ -165,7 +172,7 @@ function refreshDecisions(labels) {
 
 function writeDelta() {
   const current = currentDeclines();
-  const old = new Map(groups.flatMap((group) => loadDecisions(String(group.label))).map((row) => [row.decline_id, row]));
+  const old = new Map(decisionLabels(current).flatMap((label) => loadDecisions(label)).map((row) => [row.decline_id, row]));
   const rows = current.map((row) => ({ ...row, prior_decision: exact(old.get(row.decline_id), row) ? old.get(row.decline_id).decision : null,
     prior_evidence: exact(old.get(row.decline_id), row) ? old.get(row.decline_id).evidence : '' }));
   const pending = rows.filter((row) => !row.prior_decision);
@@ -176,12 +183,12 @@ function writeDelta() {
 
 if (command === 'prepare') {
   writeDelta();
-  refreshDecisions(groups.map((group) => String(group.label)));
+  refreshDecisions(decisionLabels(currentDeclines()));
   process.exit(0);
 }
 
 if (command === 'refresh') {
-  const labels = all ? groups.map((group) => String(group.label)) : [groupArg || die('refresh requires --group <label> or --all', 2)];
+  const labels = all ? decisionLabels(currentDeclines()) : [groupArg || die('refresh requires --group <label> or --all', 2)];
   refreshDecisions(labels);
   process.exit(0);
 }
@@ -191,11 +198,12 @@ if (command === 'delta') {
   process.exit(0);
 }
 
-function validate(labels = groups.map((group) => String(group.label))) {
-  const selected = new Set(labels);
-  const current = currentDeclines().filter((row) => selected.has(row.group));
+function validate(labels) {
+  const allCurrent = currentDeclines();
+  const selected = new Set(labels ?? decisionLabels(allCurrent));
+  const current = allCurrent.filter((row) => selected.has(row.group));
   const errors = [];
-  const recorded = labels.flatMap((label) => loadDecisions(label));
+  const recorded = [...selected].flatMap((label) => loadDecisions(label));
   const byId = new Map();
   for (const row of recorded) {
     if (byId.has(row.decline_id)) errors.push(`${row.decline_id}: duplicate decision`);
@@ -214,7 +222,7 @@ function validate(labels = groups.map((group) => String(group.label))) {
 }
 
 if (command === 'check') {
-  const { current, errors } = validate(groupArg ? [groupArg] : groups.map((group) => String(group.label)));
+  const { current, errors } = validate(groupArg ? [groupArg] : undefined);
   for (const error of errors) console.error(`ERROR ${error}`);
   console.log(`scope-decisions: ${current.length} current decline(s), ${errors.length} error(s)`);
   process.exit(errors.length ? 1 : 0);

@@ -31,6 +31,8 @@ unresolved findings do not trigger repair agents. A run-local
 `owner-authoring-direction.md`, when present, is a mandatory Step-1 Beta input
 and overrides stale generated task or design text.
 Step 3 assigns one scope reviewer and one scaffold auditor/item author per A/B pair.
+Its scope-decision check also covers declined source rows in batches outside
+the alpha-group assignment, using a fallback `all` receipt.
 Authors sharing a batch run sequentially. Across batches, consumers wait for
 artifact-complete transitive in-run prerequisites while independent branches run in parallel.
 They may supply local definitions/lemmas; substantial prerequisites and potential
