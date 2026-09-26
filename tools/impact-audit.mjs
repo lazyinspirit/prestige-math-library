@@ -11,14 +11,17 @@
 // must still clear its own audit and judge, but reopening every transitive
 // consumer for a wording repair would drown the actual defect signal.  Changes
 // to title, logical metadata, Facts, Statement/Definition/Example, or Remarks
-// require a documented review of every current logical consumer and every
-// direct citation consumer.
+// require a documented review of current logical consumers and direct citation
+// consumers. --direct-boundary stops logical propagation after one dependency
+// edge: a consumer whose exported interface changes is separately a changed
+// source in this window (or in the next window after a later repair).
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { logicalConsumers } from './impact-scope.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -27,6 +30,7 @@ const touchesPath = option('--touches');
 const fromLabel = option('--from');
 const toLabel = option('--to');
 const useCurrent = argv.includes('--current');
+const directBoundary = argv.includes('--direct-boundary');
 const receiptPath = option('--receipt');
 const templatePath = option('--template');
 if (!touchesPath || !fromLabel) usage();
@@ -128,14 +132,7 @@ for (const item of items.values()) {
 
 const impacts = [];
 for (const source of changed) {
-  const logical = new Set();
-  const work = [...(reverseDeps.get(source) ?? [])];
-  while (work.length) {
-    const consumer = work.pop();
-    if (logical.has(consumer)) continue;
-    logical.add(consumer);
-    for (const next of reverseDeps.get(consumer) ?? []) work.push(next);
-  }
+  const logical = logicalConsumers(reverseDeps, source, { directBoundary });
   const citations = directCitations.get(source) ?? new Map();
   const required = new Set([...logical, ...citations.keys()]);
   required.delete(source);
@@ -153,6 +150,7 @@ const template = {
   version: 1,
   reviewer: '',
   source: { touch_ledger: touchesPath, from: before.label, to: after.label },
+  ...(directBoundary ? { scope: 'direct-boundary' } : {}),
   changed_interfaces: changed,
   required_review: required,
   dispositions: required.map((id) => ({ id, status: 'pending', notes: '' })),
@@ -180,6 +178,7 @@ if (refreshPath) {
     catch (cause) { die(`${refreshPath}: unreadable — ${cause.message}`); }
   }
   receipt.version = 1;
+  if (directBoundary) receipt.scope = template.scope;
   receipt.changed_interfaces = changed;
   receipt.required_review = required;
   receipt.dispositions = Array.isArray(receipt.dispositions) ? receipt.dispositions : [];
@@ -208,6 +207,7 @@ if (receiptPath) {
   catch (cause) { error('receipt-read', `${receiptPath}: ${cause.message}`); }
   if (receipt) {
     if (receipt.version !== 1) error('receipt-version', `${receiptPath}: version must be 1`);
+    if (directBoundary && receipt.scope !== template.scope) error('receipt-scope', `${receiptPath}: scope must be ${template.scope}`);
     if (typeof receipt.reviewer !== 'string' || !receipt.reviewer.trim()) error('receipt-reviewer', `${receiptPath}: reviewer is required`);
     if (!Array.isArray(receipt.changed_interfaces) || JSON.stringify([...receipt.changed_interfaces].sort()) !== JSON.stringify(changed)) {
       error('receipt-changed-scope', `${receiptPath}: changed_interfaces must exactly match the computed interface changes`);
@@ -246,6 +246,6 @@ else {
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/impact-audit.mjs --touches <touches.json> --from <snapshot-label> [--to <snapshot-label>] [--receipt <impact.json> | --template <impact.json>] [--json]');
+  console.error('usage: node tools/impact-audit.mjs --touches <touches.json> --from <snapshot-label> [--to <snapshot-label>] [--direct-boundary] [--receipt <impact.json> | --template <impact.json>] [--json]');
   process.exit(2);
 }

@@ -426,6 +426,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   'impact-receipt': (ctx) => ['tools/impact-audit.mjs',
     '--touches', join(ctx.repo, touchesPath(ctx)),
     '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+    '--direct-boundary',
     '--refresh-receipt', R(ctx, 'research', `${ctx.run}-impact.json`)],
   // the configured-judge ledger licenses stamps the frontmatter does not carry ->
   // write them (and strip any pass block a current rejection contradicts).
@@ -1177,6 +1178,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-
  *  edits before Step 5 ends. */
 const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/impact-audit.mjs',
   '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-5a',
+  '--direct-boundary',
   '--receipt', `research/${ctx.run}-impact.json`,
 ]);
 

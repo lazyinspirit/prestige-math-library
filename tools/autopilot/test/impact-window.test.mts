@@ -12,6 +12,7 @@ import { mkdtempSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
+import { logicalConsumers } from '../../impact-scope.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -37,6 +38,18 @@ test('a seeded interface edit between the two labels is reported, not zero', () 
   );
   const r = runTool(['--touches', ledger, '--from', 'pre-author', '--to', 'post-5a', '--json']);
   assert.deepEqual(JSON.parse(r.stdout).changed, ['lem-b']);
+});
+
+test('direct boundary examines one dependency hop; an edited intermediate claim is its own source event', () => {
+  const reverse = new Map([
+    ['source', new Set(['consumer'])],
+    ['consumer', new Set(['grandchild'])],
+    ['grandchild', new Set(['great-grandchild'])],
+  ]);
+  assert.deepEqual([...logicalConsumers(reverse, 'source', { directBoundary: true })], ['consumer']);
+  assert.deepEqual([...logicalConsumers(reverse, 'consumer', { directBoundary: true })], ['grandchild']);
+  assert.deepEqual([...logicalConsumers(reverse, 'source')].sort(),
+    ['consumer', 'grandchild', 'great-grandchild']);
 });
 
 test('duplicate labels resolve to the NEWEST snapshot, so a re-entered stage sees later edits', () => {
@@ -77,4 +90,5 @@ test('the 5b gate diffs pre-author -> post-5a, and a stage takes the post-5a sna
   const argv: string[] = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
   assert.equal(argv[argv.indexOf('--to') + 1], 'post-5a',
     'without an explicit --to the gate diffs pre-author against the last snapshot, which at 5b IS pre-author');
+  assert.ok(argv.includes('--direct-boundary'), '5b reviews direct uses and follows later exported-interface changes as new events');
 });

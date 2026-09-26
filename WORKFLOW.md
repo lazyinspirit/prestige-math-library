@@ -311,6 +311,15 @@ reviews may supply evidence only after current hash and interface reconciliation
 never reset a baseline or bulk-approve candidates to close a gate. Narrow gate
 repairs retain their assigned scope.
 
+The pre-author to post-5a impact gate uses a direct boundary: review each direct
+dependency and reference consumer of a changed public surface against the
+source's current claim and hypotheses. A consumer whose exported interface
+changes is itself a changed source in this window; a later repair enters the
+post-5a to current window. Once a direct consumer's claim and assumptions remain
+licensed, its unchanged export stops propagation. This does not waive checking
+its proof or a newly load-bearing premise, including AC. The second receipt
+retains its existing scope; both windows still require exact item evidence.
+
 After an initial full-text retrieval failure, search alternatives and retry at
 most five times. Stop on success and reuse recorded attempts. After exhaustion,
 give a complete alternative local proof and prerequisites with justified
