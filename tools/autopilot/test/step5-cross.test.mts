@@ -34,6 +34,10 @@ function fixture(edge = false) {
   writeFileSync(join(root, 'research', 'r-alpha-groups.json'), JSON.stringify([
     { label: 'a', covers: ['1', '2'] },
   ]));
+  writeFileSync(join(root, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    { id: 'page-one', order: 1, items: [{ id: 'lem-source' }] },
+    { id: 'page-two', order: 2, items: [{ id: 'lem-target' }] },
+  ] }));
   for (const [batch, id, page] of [['1', 'lem-source', 'page-one'], ['2', 'lem-target', 'page-two']]) {
     const pageMetadata = { id: page, category: 'test' };
     const contract = {};
@@ -89,6 +93,53 @@ test('5b lists same-group cross-batch edges and closes an exact current verdict'
     }) + '\n');
     const result = fx.run('check');
     assert.equal(result.status, 0, result.stderr);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b retains an exact-hash orientation forward only while every target link stays in Remarks', () => {
+  const fx = fixture();
+  try {
+    const sourcePath = join(fx.root, 'items', 'lem-source.md');
+    const targetPath = join(fx.root, 'items', 'lem-target.md');
+    const evidencePath = join(fx.root, 'research', 'orientation-review.md');
+    const orientation = item('lem-source', [], ['lem-target']) + '\n## Remarks\nSee [[lem-target]] for an example.\n';
+    writeFileSync(sourcePath, orientation);
+    writeFileSync(evidencePath, 'Read the sole Remarks link and the target example.\n');
+    assert.equal(fx.run('list').status, 0);
+    const verdict = {
+      kind: 'forward', item: 'lem-source', target: 'lem-target', decision: 'orientation-reviewed',
+      item_sha256: sha(orientation), target_sha256: sha(readFileSync(targetPath)),
+      evidence: 'research/orientation-review.md', evidence_sha256: sha(readFileSync(evidencePath)),
+      defect_ids: [], note: 'The target is linked only in Remarks and supplies no premise to Statement or Proof.',
+    };
+    const verdictPath = join(fx.root, 'research', 'r-5b-verdicts.jsonl');
+    const changeVerdict = { kind: 'item', batch: '1', id: 'lem-source', verdict: 'accepted',
+      subject_sha256: fx.carrier('lem-source'), defect_ids: [],
+      note: 'The current item carrier and its orientation link were reviewed.' };
+    const saveVerdicts = () => {
+      changeVerdict.subject_sha256 = fx.carrier('lem-source');
+      writeFileSync(verdictPath, [verdict, changeVerdict].map((row) => JSON.stringify(row)).join('\n') + '\n');
+    };
+    saveVerdicts();
+    const initialCheck = fx.run('check');
+    assert.equal(initialCheck.status, 0, initialCheck.stderr);
+
+    const bearing = orientation.replace('## Statement\nlem-source.', '## Statement\nUses [[lem-target]].');
+    writeFileSync(sourcePath, bearing);
+    verdict.item_sha256 = sha(bearing);
+    saveVerdicts();
+    assert.match(fx.run('check').stderr, /forward-orientation-load-bearing/);
+
+    writeFileSync(sourcePath, orientation);
+    verdict.item_sha256 = sha(orientation);
+    writeFileSync(targetPath, item('lem-target') + '\nChanged target.\n');
+    saveVerdicts();
+    assert.match(fx.run('check').stderr, /forward-orientation-target-stale/);
+
+    verdict.target_sha256 = sha(readFileSync(targetPath));
+    writeFileSync(evidencePath, 'Changed review.\n');
+    saveVerdicts();
+    assert.match(fx.run('check').stderr, /forward-orientation-evidence-stale/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

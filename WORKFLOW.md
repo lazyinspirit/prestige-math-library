@@ -220,6 +220,14 @@ require a self-review decision. The complete gate battery runs at
 5a-adjudicate; a failing gate is an owner hold, never an agent repair round.
 Step 5b reconciles cross-batch dependencies, changed consumers, exact hashes,
 coverage, sources and ledger.
+For a forward link used only in `## Remarks`, the 5b `orientation-reviewed`
+verdict retains the visible link and `forward_refs` declaration. Its exact-use
+review binds the current citing item, target item and evidence-file hashes;
+the checker also verifies that every target wikilink remains in Remarks and
+that the authored target is on a strictly later planned page. A load-bearing
+forward use must first be repaired and receive its changed-carrier and impact
+reviews before it can qualify. `lemmas-added` remains for an actual earlier
+mathematical supplier, and `dropped` for a genuinely withdrawn item.
 
 Step-5/7/8 auditor-created certificates bind the item, manifest entry and owning
 contract. Initial certification requires a successful auditor/adjudicator author

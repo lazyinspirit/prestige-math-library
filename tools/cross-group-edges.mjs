@@ -26,7 +26,9 @@
 //
 // Verdicts: research/<run>-5b-verdicts.jsonl, one JSON object per line.
 //   {"kind":"edge","from":"<id>","to":"<id>","verdict":"accurate|repaired|struck","note":"..."}
-//   {"kind":"forward","item":"<id>","target":"<id>","decision":"lemmas-added|dropped","note":"..."}
+//   {"kind":"forward","item":"<id>","target":"<id>","decision":"orientation-reviewed|lemmas-added|dropped","note":"..."}
+// An orientation-reviewed row retains its visible forward link and binds an
+// exact current target hash and a hash-bound review file under research/.
 //   {"kind":"addition|removal|page","batch":"<n>","id":"<id>","verdict":"...","note":"..."}
 //   {"kind":"gate","id":"<id>","gate":"<gate>","verdict":"confirmed_fatal|confirmed_nonfatal|false_positive","note":"..."}
 // A repository-scoped engine-stage gate defect may bind its stable ledger
@@ -224,9 +226,29 @@ function loadItems(ids) {
       justified: strList(y.justified_by),
       forward: strList(y.forward_refs),
       sha256: hash(raw),
+      body: split(raw).body,
     });
   }
   return out;
+}
+
+/** A retained forward link is orientation only iff all of its occurrences
+ * are in a Remarks section. Keep this check independent of the verdict note:
+ * moving one occurrence into a claim or proof must reopen the obligation. */
+function forwardUse(body, target) {
+  let section = '';
+  let linked = 0;
+  let bearing = 0;
+  for (const line of body.split(/\r?\n/)) {
+    const heading = line.match(/^##\s+(.+?)\s*$/);
+    if (heading) section = heading[1];
+    for (const match of line.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) {
+      if (match[1].trim() !== target) continue;
+      linked += 1;
+      if (section !== 'Remarks') bearing += 1;
+    }
+  }
+  return { linked, bearing };
 }
 
 /** The cross-batch edges, forward references, and post-5a changes on disk now.
@@ -308,11 +330,9 @@ if (cmd === 'check') {
     : [];
 
   const EDGE_OK = new Set(['accurate', 'repaired', 'struck']);
-  // The owner's two options, and only those. A forward reference that reaches
-  // 5b is resolved, not justified: either the load-bearing lemmas are built so
-  // the citation points backwards, or the item is dropped because too many of
-  // its prerequisites are unmet. "Justified" is no longer a disposition here.
-  const FWD_OK = new Set(['lemmas-added', 'dropped']);
+  // Orientation links allowed by fwdcheck can remain visibly forward after an
+  // exact-use review. Load-bearing forwards still need earlier lemmas or removal.
+  const FWD_OK = new Set(['orientation-reviewed', 'lemmas-added', 'dropped']);
 
   let errors = 0;
   const err = (code, msg) => { console.error(`ERROR ${code}: ${msg}`); errors += 1; };
@@ -371,6 +391,19 @@ if (cmd === 'check') {
     }
   }
   const liveFwd = new Set(now.forwards.map((f) => pairKey(f.item, f.target)));
+  let plannedHome = new Map();
+  let planOrder = new Map();
+  if ([...fwdV.values()].some((v) => v.decision === 'orientation-reviewed')) {
+    try {
+      const plan = JSON.parse(readFileSync(R('research', 'plan-spec.json'), 'utf8'));
+      for (const page of plan.pages ?? []) {
+        planOrder.set(String(page.id), Number(page.order));
+        for (const item of page.items ?? []) plannedHome.set(String(item.id), String(page.id));
+      }
+    } catch (cause) {
+      err('forward-plan-invalid', `cannot check orientation against plan-spec.json: ${cause.message}`);
+    }
+  }
   for (const v of fwdV.values()) {
     const k = pairKey(v.item, v.target);
     const listedForward = forwards.find((forward) => forward.item === v.item && forward.target === v.target);
@@ -383,6 +416,34 @@ if (cmd === 'check') {
     }
     if (v.decision === 'lemmas-added' && liveFwd.has(k)) {
       err('forward-still-declared', `[${v.item}] is recorded as having its intermediate lemmas built but still declares forward_refs "${v.target}"`);
+    }
+    if (v.decision === 'orientation-reviewed') {
+      const item = now.items.get(v.item);
+      const targetPath = R('items', `${v.target}.md`);
+      if (!item || !liveFwd.has(k)) {
+        err('forward-orientation-missing', `[${v.item}] -> ${v.target}: reviewed link must remain declared on the current item`);
+      } else {
+        const use = forwardUse(item.body, v.target);
+        if (!use.linked) err('forward-orientation-unlinked', `[${v.item}] -> ${v.target}: current body has no target wikilink`);
+        if (use.bearing) err('forward-orientation-load-bearing', `[${v.item}] -> ${v.target}: ${use.bearing} target wikilink(s) occur outside ## Remarks`);
+      }
+      const fromPage = plannedHome.get(v.item);
+      const toPage = plannedHome.get(v.target);
+      if (!fromPage || !toPage || !(planOrder.get(toPage) > planOrder.get(fromPage))) {
+        err('forward-orientation-order', `[${v.item}] -> ${v.target}: target must be on a strictly later planned page`);
+      }
+      if (!existsSync(targetPath)) {
+        err('forward-orientation-target-missing', `[${v.item}] -> ${v.target}: target must already be authored`);
+      } else if (v.target_sha256 !== hash(readFileSync(targetPath))) {
+        err('forward-orientation-target-stale', `[${v.item}] -> ${v.target}: target hash does not match the current item`);
+      }
+      const evidence = v.evidence;
+      if (typeof evidence !== 'string' || !/^research\/[a-z0-9][a-z0-9._/-]*\.md$/.test(evidence)
+          || evidence.split('/').includes('..') || !existsSync(R(evidence))) {
+        err('forward-orientation-evidence-missing', `[${v.item}] -> ${v.target}: name an existing research Markdown review`);
+      } else if (v.evidence_sha256 !== hash(readFileSync(R(evidence)))) {
+        err('forward-orientation-evidence-stale', `[${v.item}] -> ${v.target}: evidence hash does not match the review file`);
+      }
     }
   }
   const listedEdges = new Set(edges.map((edge) => pairKey(edge.from, edge.to)));
@@ -511,7 +572,8 @@ if (cmd === 'check') {
   const repairedDispositions = ['fixed', 'narrowed', 'dropped'];
   for (const verdict of edgeV.values()) bindDefects(verdict, String(verdict.from),
     verdict.verdict !== 'accurate', `edge ${verdict.from} -> ${verdict.to}`, repairedDispositions);
-  for (const verdict of fwdV.values()) bindDefects(verdict, String(verdict.item), true,
+  for (const verdict of fwdV.values()) bindDefects(verdict, String(verdict.item),
+    verdict.decision !== 'orientation-reviewed',
     `forward ${verdict.item} -> ${verdict.target}`, repairedDispositions);
   for (const verdict of changeV.values()) {
     const clean = ['addition', 'item', 'item-metadata', 'page-addition', 'page'].includes(verdict.kind)
