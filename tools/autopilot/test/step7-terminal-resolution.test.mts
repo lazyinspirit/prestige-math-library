@@ -156,6 +156,30 @@ test('one current Sol verdict completes singleton judge coverage', () => {
   }
 });
 
+test('post-Step-6 judge closure excludes a published item even when it remains in the manifest', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'published-closure-'));
+  try {
+    const id = 'def-completion-of-a-normed-space';
+    const manifest = join(dir, 'batch.pages.json');
+    const ledger = join(dir, 'judge.jsonl');
+    const closure = join(dir, 'closure.json');
+    writeFileSync(manifest, `${JSON.stringify([{ id: 'fixture-page', items: [{ id, deps: [] }] }])}\n`);
+    writeFileSync(ledger, '');
+    const args = ['tools/level-coverage.mjs', '--judge-only', '--verify-current-context',
+      '--judge-ledger', ledger, '--out', closure, manifest];
+    const initial = run(args);
+    assert.equal(initial.status, 1, 'ordinary judge closure must still require a verdict');
+    const exempt = run([...args.slice(0, -1), '--exclude-published', manifest]);
+    assert.equal(exempt.status, 0, exempt.stderr || exempt.stdout);
+    const receipt = JSON.parse(readFileSync(closure, 'utf8'));
+    assert.equal(receipt.scope, 0);
+    assert.deepEqual(receipt.needs_rejudge, []);
+    assert.equal(receipt.closed, true);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('coverage rejects a cache/ledger collision before reading or writing evidence', () => {
   const result = run(['tools/level-coverage.mjs', '--judge-ledger', '/tmp/same-ledger.jsonl',
     '--context-hash-cache', '/tmp/same-ledger.jsonl']);

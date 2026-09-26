@@ -81,6 +81,8 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   const closureArgv = (id: string) => (stage(id).gates?.(ctx) ?? [])
     .find((candidate: any) => candidate.id === 'judge-closure')?.argv ?? [];
   assert.ok(gateIds('6-judge').includes('judge-closure'));
+  assert.ok(!closureArgv('6-judge').includes('--exclude-published'),
+    'initial Step-6 judgment retains its original scope');
   assert.ok(!gateIds('7-scope').includes('judge-closure'), 'unchanged Step-6 bytes are not rescanned at scope render');
   for (const id of ['7.3-certify', '7.7-certify']) {
     assert.deepEqual(gateIds(id), ['step7-wave-certification']);
@@ -90,6 +92,8 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   }
   for (const id of ['7.8-gate','7.10-gate']) {
     assert.ok(gateIds(id).includes('judge-closure'));
+    assert.ok(closureArgv(id).includes('--exclude-published'),
+      `${id} must not judge a repaired published item`);
     assert.ok(gateIds(id).includes('step7-round-certification'));
     assert.ok(!gateIds(id).includes('step7-published'), 'published repairs have no Step-7 item gate');
     assert.ok(!gateIds(id).includes('level-coverage'), 'Step-8 audit receipt is not available yet');
@@ -124,6 +128,8 @@ test('final readiness runs whole-level closure once and terminal close verifies 
   assert.ok(levelCoverage, 'final readiness owns the complete level scan');
   assert.ok(levelCoverage.argv.includes('--verify-current-context'),
     'the complete scan must bind verdicts to current mathematical text');
+  assert.ok(levelCoverage.argv.includes('--exclude-published'),
+    'published repairs remain outside final judge closure');
   assert.ok(!readinessGates.some((gate: any) => gate.id === 'judge-closure'),
     'final readiness must not repeat the judge-only subset of level coverage');
   assert.ok(readinessGates.some((gate: any) => gate.id === 'publication-readiness'));

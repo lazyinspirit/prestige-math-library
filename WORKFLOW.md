@@ -382,6 +382,8 @@ in `research/<run>-step7-v2/frontier.json`. Step-7 repair, adjudication,
 rejudgment and item gates use only draft IDs in that frontier. Published repairs
 have no gate, rejudge or adjudication obligation at any stage. Record their
 corrections and trace changed statements or definitions to direct consumers.
+Later judge-closure and judge-stamp scans exclude published items still present
+in a run manifest; Step 6's initial judgment of run items retains its scope.
 
 | Part / stage | Required work |
 |---|---|

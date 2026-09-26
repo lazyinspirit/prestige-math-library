@@ -440,6 +440,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   // items stamped, because no stage owned this act (owner, 2026-08-17).
   'judge-stamps': (ctx) => ['tools/apply-judge-stamps.mjs',
     '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
+    '--exclude-published',
     '--manifests', batches(ctx).map((b: any) => join(ctx.repo, 'research', `${ctx.run}-batch-${b}.pages.json`)).join(','),
     '--terminal-resolutions', R(ctx, terminalResolutionsPath(ctx)),
     ...auditorCertificationArgs(ctx),
@@ -1137,9 +1138,10 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol' } = {}) =>
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol', excludePublished = true } = {}) =>
   gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
+    ...(excludePublished ? ['--exclude-published'] : []),
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
     ...auditorCertificationArgs(ctx),
@@ -1154,6 +1156,7 @@ const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, 
 
 /** The whole-level receipt gate. The one frontier-14 never ran. */
 const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-coverage.mjs',
+  '--exclude-published',
   '--contracts', contractsPath(ctx),
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
@@ -1835,7 +1838,7 @@ export const stages = [
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
-      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol' }),
+      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol', excludePublished: false }),
       gate('step7-digests', ['node', 'tools/step7-scope.mjs', 'digests', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
       }),
@@ -2385,11 +2388,13 @@ export const stages = [
     pattern: resultPattern('tool', 'judge-stamps-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'judge-stamps-v2', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+        '--exclude-published',
         '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
         '--terminal-resolutions', terminalResolutionsPath(ctx),
         ...auditorCertificationArgs(ctx),
         '--apply', '--report', `research/${ctx.run}-judge-stamps.json`] }],
     gates: (ctx) => [gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+      '--exclude-published',
       '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
       '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {
       liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],

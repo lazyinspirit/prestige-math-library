@@ -27,6 +27,7 @@ import { itemHashJudge } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { loadStep7ClosureCertification, currentStep7Certification } from './step7-certification-consumer.mjs';
 import { adjudicationTypeResolver } from './step7-adjudication-compat.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -62,6 +63,10 @@ const templatePath = option('--template');
 // exact-hash adjudication matching) and a second implementation of it would
 // drift from this one and then disagree with it at 3am.
 const judgeOnly = argv.includes('--judge-only');
+// Later workflow stages may still carry published items in a manifest after a
+// maintenance repair. They remain in the nonjudge audit scope, but their repair
+// has no judge, rejudge, or adjudication obligation.
+const excludePublished = argv.includes('--exclude-published');
 // Step 6 runs before any adjudication exists, so an unadjudicated rejection is
 // the expected state there, not a defect. It is a hard error everywhere else.
 const allowUnadjudicated = argv.includes('--allow-unadjudicated');
@@ -215,6 +220,7 @@ if (judgeTargetsPath) {
     judgeScope = [];
   }
 }
+if (excludePublished) judgeScope = judgeScope.filter((id) => !isPublishedItem(REPO, id));
 for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);

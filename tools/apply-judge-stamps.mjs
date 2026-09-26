@@ -62,6 +62,7 @@ import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
 import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadStep7ClosureCertification, currentStep7Certification, stripStep7JudgeStamp } from './step7-certification-consumer.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -74,6 +75,7 @@ const auditorCertificationsArg = value('--auditor-certifications');
 const reportPath = value('--report');
 const apply = argv.includes('--apply');
 const verify = argv.includes('--verify');
+const excludePublished = argv.includes('--exclude-published');
 const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
 if (!ledgerPath || ordinaryScopes.length !== 1
   || (verify && (apply || targetedReceiptPath))) {
@@ -94,7 +96,7 @@ const terminalParsed = parseTerminalResolutions(terminalResolutionsPath, { allow
 // here and in the tool that WRITES the hash is how the two silently disagree.
 const attestedItemHash = itemHashJudge;
 let targeted = new Map();
-const ids = manifestsArg
+const scopedIds = manifestsArg
   ? [...new Set(manifestsArg.split(',').map((s) => s.trim()).filter(Boolean)
     .flatMap((file) => JSON.parse(readFileSync(file, 'utf8'))
       .flatMap((page) => page.items.map((item) => item.id))))]
@@ -130,6 +132,7 @@ const ids = manifestsArg
     }
     return [...targeted.keys()];
   })();
+const ids = excludePublished ? scopedIds.filter((id) => !isPublishedItem(process.cwd(), id)) : scopedIds;
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 let step7Certificate;

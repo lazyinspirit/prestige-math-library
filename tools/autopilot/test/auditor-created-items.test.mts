@@ -578,7 +578,7 @@ test('judge closure requires full current carriers without fabricating a verdict
   copyFileSync(join(REPO, 'tools/level-coverage.mjs'), join(root, 'tools/level-coverage.mjs'));
   for (const module of ['models', 'judge-currency', 'step7-adjudication-compat', 'step7-terminal-resolution',
     'step7-certification-consumer', 'step7-workflow', 'step7-rounds', 'context-hash-pool',
-    'auditor-created-items', 'item-hash', 'frontmatter-list'])
+    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy'])
     symlinkSync(join(REPO, `tools/${module}.mjs`), join(root, `tools/${module}.mjs`));
   const manifest = join(root, 'scope.pages.json');
   const ledger = join(root, 'judge.jsonl');

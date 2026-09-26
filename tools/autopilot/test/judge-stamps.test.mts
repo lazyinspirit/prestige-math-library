@@ -102,6 +102,24 @@ test('apply stamps a current configured-model pass, ignores retired-lane rows, a
   assert.equal(again.stamped[0].changed, false);
 });
 
+test('final stamp verification excludes published repairs left in the manifest', () => {
+  const dir = fixture(['itm-draft', 'itm-published']);
+  try {
+    const draft = readFileSync(join(dir, 'items', 'itm-draft.md'), 'utf8');
+    const publishedPath = join(dir, 'items', 'itm-published.md');
+    writeFileSync(publishedPath, itemText('itm-published').replace('status: draft', 'status: published'));
+    writeLedger(dir, LANES.map((model) => ledgerRow('itm-draft', model, true, itemHashJudge(draft))));
+    let result = run(dir, '--apply', '--exclude-published');
+    assert.equal(result.status, 0, result.stderr);
+    result = run(dir, '--verify', '--exclude-published');
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /judge-stamps: 1 item\(s\) in scope/);
+    assert.equal(readFileSync(publishedPath, 'utf8').includes('  judge:'), false);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('--items stamps an explicitly certified subset without needing a manifest-wide pass', () => {
   const dir = fixture(['itm-subset']);
   const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-subset.md'), 'utf8'));
