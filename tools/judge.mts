@@ -19,7 +19,7 @@ import {
 } from './models.mjs';
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = new Set(['model', 'topic', 'conventions', 'batch', 'context-hashes']);
+const VALUE_FLAGS = new Set(['model', 'effort', 'topic', 'conventions', 'batch', 'context-hashes']);
 const values = new Map<string, string>();
 const flags = new Set<string>();
 let file = '';
@@ -35,7 +35,7 @@ for (let i = 0; i < argv.length; i += 1) {
 }
 
 if (!file && !flags.has('preflight') && !values.has('context-hashes')) {
-  console.error('usage: node tools/tsx-run.mjs tools/judge.mts items/<id>.md [--model M] [--context-hash|--dump-prompt]');
+  console.error('usage: node tools/tsx-run.mjs tools/judge.mts items/<id>.md [--model M] [--effort low|medium|high|xhigh|max] [--context-hash|--dump-prompt]');
   console.error('       node tools/tsx-run.mjs tools/judge.mts --context-hashes <id,id,...>');
   console.error('       node tools/tsx-run.mjs tools/judge.mts --preflight [--model M]');
   process.exit(2);
@@ -47,6 +47,11 @@ if (!lineup) throw new Error(`unknown judge lineup ${lineupName}`);
 const models = values.get('model') ? [values.get('model')!] : [...lineup];
 if (!models.length || models.some((model) => !KNOWN_JUDGES.includes(model))) {
   throw new Error(`judge model must be one of ${KNOWN_JUDGES.join(', ')}`);
+}
+
+const effortOverride = values.get('effort');
+if (effortOverride && !['low', 'medium', 'high', 'xhigh', 'max'].includes(effortOverride)) {
+  throw new Error(`judge effort must be low, medium, high, xhigh, or max; got ${effortOverride}`);
 }
 
 const REPO = process.cwd();
@@ -271,7 +276,7 @@ const runCodex = (model: string, prompt: string, timeoutMs: number): Promise<Cod
   }
   const args = [
     'exec', '--ephemeral', '--model', model,
-    '-c', 'model_reasoning_effort="xhigh"',
+    '-c', `model_reasoning_effort="${effortOverride ?? 'xhigh'}"`,
     '-c', 'tools.web_search=true',
     '-c', `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
     '-c', 'model_auto_compact_token_limit=200000',

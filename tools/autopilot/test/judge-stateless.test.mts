@@ -106,6 +106,29 @@ test('the sweep gives each item a fresh compact Terra call and records real usag
   }
 });
 
+test('a Sol judge sweep forwards high reasoning to each stateless item call', () => {
+  const f = fixture();
+  const ledger = join(f.temp, 'sol-high-judge.jsonl');
+  const cost = join(f.temp, 'sol-high-cost.jsonl');
+  const [id] = pairItems();
+  try {
+    const result = spawnSync(process.execPath, [
+      join(REPO, 'tools', 'judge-sweep.mjs'), '--ledger', ledger, '--cost', cost,
+      '--items', id, '--lineup', 'sol', '--effort', 'high',
+    ], {
+      cwd: REPO, encoding: 'utf8', timeout: 120_000,
+      env: { ...process.env, CODEX_BIN: f.fakeCodex, CODEX_HOME: f.home,
+        JUDGE_TEST_CALLS: f.calls },
+    });
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    const [call] = readFileSync(f.calls, 'utf8').trim().split('\n').map(JSON.parse);
+    assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-6-sol');
+    assert.ok(call.args.includes('model_reasoning_effort="high"'));
+  } finally {
+    rmSync(f.temp, { recursive: true, force: true });
+  }
+});
+
 test('an ephemeral call preserves a genuinely refreshed credential', () => {
   const f = fixture('rotate');
   const [id] = pairItems();

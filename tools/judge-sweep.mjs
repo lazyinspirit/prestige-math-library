@@ -24,6 +24,8 @@ const pagesArg = option('--pages');
 const itemsArg = option('--items');
 const manifestsArg = option('--manifests');
 const modelsArg = option('--models');
+const lineupArg = option('--lineup');
+const effortArg = option('--effort');
 const limitArg = option('--limit');
 // Kept as run metadata for callers and logs. Stateless judging deliberately
 // does not use it as a session namespace.
@@ -37,7 +39,7 @@ const contextCache = option('--context-cache') || (/-judge\.jsonl$/.test(ledger)
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
   console.error('usage: node tools/judge-sweep.mjs --ledger FILE --cost FILE '
     + '(--pages PAGE,... | --items ID,... | --manifests FILE,...) '
-    + '[--models MODEL,...] [--limit N] [--run RUN]');
+    + '[--lineup sol] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
   process.exit(2);
 }
 if (manifestsArg && (pagesArg || itemsArg)) {
@@ -49,7 +51,11 @@ if (limit !== Infinity && (!Number.isInteger(limit) || limit < 1)) {
   throw new Error('--limit must be a positive integer');
 }
 
-const { name: lineupName, models: supportedModels } = resolveLineup();
+if (effortArg && !['low', 'medium', 'high', 'xhigh', 'max'].includes(effortArg)) {
+  throw new Error(`--effort must be low, medium, high, xhigh, or max; got ${effortArg}`);
+}
+
+const { name: lineupName, models: supportedModels } = resolveLineup(lineupArg || undefined);
 const models = modelsArg
   ? [...new Set(modelsArg.split(',').map((value) => value.trim()).filter(Boolean))]
   : [...supportedModels];
@@ -144,6 +150,7 @@ const capture = async (task, attempt) => {
     return await new Promise((done) => {
       const child = spawn(process.execPath, [
         '--import', loader, 'tools/judge.mts', `items/${task.id}.md`, '--model', task.model,
+        ...(effortArg ? ['--effort', effortArg] : []),
       ], {
         env: {
           ...process.env,

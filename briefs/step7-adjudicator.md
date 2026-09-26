@@ -96,7 +96,7 @@ frontier repair and separate maintenance, and certifies once after all writers
 drain. A successful dispatch alone does not close unfinished work. Repeated
 pending work at an earlier assigned content state holds for operator resolution.
 
-Sol rejudgment and renewed frontier adjudication/owner repair/certification
+Sol high rejudgment and renewed frontier adjudication/owner repair/certification
 repeat until unique fatal original-frontier items in the latest round are
 strictly below 5% of the immutable original scope. The threshold permits the
 final scoped gate, never unresolved defects, uncertainty or incomplete closure.

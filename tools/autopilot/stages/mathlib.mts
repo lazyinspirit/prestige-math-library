@@ -574,7 +574,7 @@ const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string
  *                 `fetch-check-...: <page>: <url>` lines, or a bare URL); the
  *                 caller may route the residue to a scouting dispatch.
  *  'unhandled'  — no table entry for any of the failing gates. */
-export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: any): Promise<{ outcome: string; stderr?: string; reason?: string; handledIds?: string[] }> => {
+export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [], judgeLineup = 'sol', judgeEffort = null }: any): Promise<{ outcome: string; stderr?: string; reason?: string; handledIds?: string[] }> => {
   const excluded = new Set((excludeGateIds ?? []).map(String));
   const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
   const handled = failing.filter((f: any) => !excluded.has(String(f.id)) && MECHANICAL_REPAIRS[f.id]);
@@ -609,7 +609,10 @@ export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: an
     // lost. Breaking on the first non-zero would skip the step that resolves
     // the case, which is the starvation this whole loop was rewritten to end.
     for (const argvTail of commands) {
-      r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
+      r = spawnSync('node', f.id === 'judge-closure'
+        ? [...argvTail, '--lineup', judgeLineup, ...(judgeEffort ? ['--effort', judgeEffort] : [])]
+        : argvTail,
+        { cwd: ctx.repo, encoding: 'utf8' });
     }
     const classify = OUTAGE_CLASSIFIERS[f.id];
     const directOutage = f.id === 'judge-closure' && r.status === 3
@@ -1794,6 +1797,7 @@ export const stages = [
           // argv, so there is nothing to quote and nothing to parse. The engine
           // writes the result record when this exits zero.
           argv: ['node', 'tools/judge-sweep.mjs', '--run', ctx.run,
+            '--lineup', 'sol', '--effort', 'high',
             '--ledger', `research/${ctx.run}-judge.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
             '--pages', aPages.join(',')],
@@ -1883,7 +1887,7 @@ export const stages = [
         return;
       }
       if (args.failure.id !== 'judge-closure') return;
-      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' } });
+      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' }, judgeLineup: 'sol', judgeEffort: 'high' });
       // A lane down to an account limit is not a failed repair: report the
       // outage and the executor refunds the round and waits on a clock.
       if (r.outcome === 'outage') return { outage: { reason: r.reason! } };

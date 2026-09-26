@@ -179,14 +179,15 @@ function main() {
     process.exit(1);
   }
 
-  const lineup = resolveLineup();
-  const lineupKey = `${lineup.name}:${lineup.models.join('+')}`;
+  const lineup = resolveLineup('sol');
+  const lineupKey = `${lineup.name}:${lineup.models.join('+')}:high`;
   let cached = null;
   try { cached = JSON.parse(readFileSync(preflightPath, 'utf8')); } catch { /* run a live preflight */ }
   if (!fundedPreflightIsFresh(cached, lineupKey)) {
     const preflight = spawnSync(process.execPath,
-      ['--import', tsxLoader(), 'tools/judge.mts', '--preflight', '--parallel'],
-      { cwd: root, encoding: 'utf8', timeout: 300_000 });
+      ['--import', tsxLoader(), 'tools/judge.mts', '--preflight', '--parallel', '--effort', 'high'],
+      { cwd: root, encoding: 'utf8', timeout: 300_000,
+        env: { ...process.env, JUDGE_LINEUP: 'sol' } });
     const row = {
       version: 1,
       run,
@@ -219,7 +220,7 @@ function main() {
   writeJsonAtomic(receiptPath, receipt);
 
   const sweep = spawnSync(process.execPath, ['tools/judge-sweep.mjs', '--run', run,
-    '--ledger', ledger, '--cost', cost, '--items', ids.join(',')],
+    '--ledger', ledger, '--cost', cost, '--items', ids.join(','), '--lineup', 'sol', '--effort', 'high'],
   { cwd: root, stdio: 'inherit', timeout: 43_200_000 });
   cycle.completed_at = new Date().toISOString();
   cycle.exit_code = sweep.status;

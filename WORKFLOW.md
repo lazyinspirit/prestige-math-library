@@ -56,7 +56,8 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 6 group readers; Step 9 agent lanes | DeepSeek V4.1 Flash / max |
 | Step 8 agent lanes | Sol / max |
 | Assignment | DeepSeek V4.1 Flash / max |
-| Item judges | Sol / xhigh |
+| Step 6 item judges; Step 7 rejudges | Sol / high |
+| Step 8 item judges | Sol / xhigh |
 | Step 7 batch adjudicators and three owner repair agents | Sol / xhigh |
 
 tools/models.mjs owns profiles; stages override role defaults. The owner selected
@@ -365,7 +366,7 @@ frontier. Outside consumers, published or draft, never enter these mechanisms.
 | 7.1 / `7.1-adjudicate` | One Sol xhigh adjudicator per batch resolves Step-6 rejections and repairs confirmed frontier defects. |
 | 7.2 / `7.2-impact` | Three Sol xhigh owner agents concurrently close disjoint frontier impact assignments; empty lanes record no-ops. |
 | 7.3 / `7.3-certify` | After all frontier repairs/reviews close and writers drain, certify the stable state centrally. |
-| 7.4 / `7.4-rejudge` | Sol rejudges repaired frontier items against the stable state. |
+| 7.4 / `7.4-rejudge` | Sol high rejudges repaired frontier items against the stable state. |
 | 7.5 / `7.5-adjudicate` | Sol xhigh batch adjudicators resolve renewed frontier rejections and repair confirmed defects. |
 | 7.6 / `7.6-impact` | Three concurrent owner lanes close frontier impacts. |
 | 7.7 / `7.7-certify` | Certify once after repair closure and all writers drain; repeat 7.4–7.7 until below threshold. |

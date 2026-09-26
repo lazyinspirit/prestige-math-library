@@ -643,7 +643,7 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   const ids=cert.changed.filter(id=>frontier.has(id)).filter(id=>{const now=beforeContexts.get(id);requireValue(now,`missing judge context ${id}`);return prev[id]?.item_sha256!==now.item_sha256||prev[id]?.context_sha256!==now.context_sha256;});
   const ledger=join(root,'research',`${run}-judge.jsonl`);
   if(ids.length) {
-    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--models',MODELS.sol.id],{cwd:root,stdio:'inherit',timeout:43200000});
+    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--lineup','sol','--effort','high'],{cwd:root,stdio:'inherit',timeout:43200000});
     if(out.status!==0)throw Error(`Sol sweep failed (${out.status}); resume preserves completed verdicts`);
   }
   const currentContexts=contextHasher(root,ids), verdicts=[];
