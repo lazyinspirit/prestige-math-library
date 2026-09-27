@@ -627,7 +627,7 @@ Curves*, Ch. 5 §§5.1--5.6, pp. 53--66; Artin, MIT 18.721, Ch. 1
 §§1.3--1.10, PDF pp. 9--34; MIT 18.725 Lectures 15--16,
 consolidated-notes PDF pp. 35--40.
 
-### Proposed A-page inventory (28 items)
+### Proposed A-page inventory (31 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1027,12 +1027,22 @@ pp. 171--189 and Ch. 11 §§11.2--11.3, pp. 236--246; Milne Ch. 7
 §§a--h, pp. 161--175 and Ch. 8 §§d--f, pp. 185--193; Tong Ch. 2 §2.6,
 pp. 67--71; Stacks Project, *Morphisms of Schemes* §§29.11, 29.42--29.45.
 
+**Frontier-36 owner resolution:** The relative-Spec characterization is
+proved here before AV-18. The affine-local algebra definition, principal-open
+localization of $f_*\mathcal O_X$, and gluing of relative spectra are explicit
+support items below. Stacks Project Lemma 29.11.3 (tag `01S8`) identifies the
+needed equivalence and its quasi-coherent-algebra input; the local proof must
+establish that input rather than cite the later AV-18 page.
+
 ### Proposed A-page inventory (28 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
 | `def-affine-morphism-schemes` | def | Define an affine morphism by affine inverse images of affine opens. | literature-derived | not-applicable |
-| `thm-affine-morphism-relative-spec-characterization` | thm | Characterize affine morphisms as relative spectra of quasi-coherent algebras, with proof completed after `AV-18`. | literature-derived | not-supplied |
+| `def-affine-local-quasi-coherent-algebra` | def | Define an affine-locally module-associated sheaf of $\mathcal O_S$-algebras, sufficient for relative Spec before the general AV-18 theory. | literature-derived | not-applicable |
+| `lem-affine-morphism-structure-sheaf-pushforward-localizes` | lem | For affine $f$, prove $f_*\mathcal O_X$ is locally $\widetilde B$ by checking principal-open localization $B_a$ on every affine base chart. | literature-derived | ai-altered |
+| `lem-relative-spectrum-glues-over-affine-base-cover` | lem | Glue $\operatorname{Spec}$ of an affine-locally associated algebra across overlaps and verify its affine-local universal property. | literature-derived | ai-altered |
+| `thm-affine-morphism-relative-spec-characterization` | thm | Characterize affine morphisms as relative spectra of quasi-coherent algebras using the three local constructions immediately above, without AV-18. | literature-derived | ai-altered |
 | `def-finite-morphism-schemes` | def | Define finite morphisms affine-locally by finite modules. | literature-derived | not-applicable |
 | `lem-finite-morphism-affine` | lem | Prove every finite morphism is affine. | literature-derived | ai-altered |
 | `lem-finite-stable-base-change-composition` | lem | Prove finiteness is stable under base change and composition. | literature-derived | ai-altered |
@@ -1137,12 +1147,17 @@ MIT 18.725 Lectures 18--20, consolidated-notes PDF pp. 42--48; Milne AG10
 
 ## AV-17. Flat, smooth, and étale morphisms
 
-`requires`: `AV-13`, `AV-16`, `flatness-and-faithful-flatness`, finite
+`requires`: `AV-13`, `AV-15`, `AV-16`, `flatness-and-faithful-flatness`, finite
 presentation, and generic freeness by citation. Pair sources: Vakil Ch. 25
 §§25.1--25.10, pp. 519--552 and Ch. 26 §§26.1--26.6, pp. 553--566;
 Tong Ch. 2 §2.7, pp. 72--84; Stacks Project, *Morphisms of Schemes*
 §§29.25--29.31 and §§29.35--29.37, plus *Étale Morphisms* §§41.11--41.18;
 Milne AG10 §l, pp. 29--33.
+
+**Frontier-36 owner resolution:** The fibre-dimension theorem uses the
+proper, flat, finite-presentation route of Stacks Project Lemma 37.30.6
+(tag `0D4J`). AV-15 is an earlier declared supplier for properness. This
+theorem does not assert local constancy for arbitrary flat families.
 
 ### Proposed A-page inventory (31 items)
 
@@ -1156,7 +1171,7 @@ Milne AG10 §l, pp. 29--33.
 | `thm-faithfully-flat-descent-vanishing` | thm | If a quasi-coherent module pulls back to zero along an fpqc cover, prove it was zero; first geometric descent application. | literature-derived | ai-altered |
 | `thm-generic-flatness-morphisms` | thm | For finite-type morphisms over an integral Noetherian base, find a dense open over which the morphism is flat, citing generic freeness. | literature-derived | ai-altered |
 | `thm-flat-finite-presentation-is-open` | thm | Prove a flat morphism locally of finite presentation is open. | literature-derived | ai-altered |
-| `thm-flat-families-fibre-dimension-locally-constant` | thm | Under finite-presentation and pure-dimensional hypotheses, control fibre dimension in a flat family. | literature-derived | ai-altered |
+| `thm-flat-families-fibre-dimension-locally-constant` | thm | For a proper, flat morphism of finite presentation, prove that the fibre-dimension function on the base is locally constant; do not claim this for arbitrary flat families. | literature-derived | ai-altered |
 | `def-smooth-morphism-schemes` | def | Define smooth as locally of finite presentation, flat, with geometrically regular fibres. | literature-derived | not-applicable |
 | `def-relative-dimension-smooth-morphism` | def | Define relative dimension $n$ when smooth fibres are pure dimension $n$. | literature-derived | not-applicable |
 | `thm-smooth-morphisms-stable-base-change-composition` | thm | Prove smoothness is stable under base change and composition. | literature-derived | ai-altered |
@@ -3070,7 +3085,7 @@ deliberately proves duality only for curves. Add this one planned-only AG pair:
 |---|---|
 | A page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles` / *Smooth-projective Serre duality and flag-variety line bundles* |
 | A category / order | `algebraic-geometry` / **510.0161**, after RL-8 B and before RL-9 A |
-| A `requires` | `kahler-differentials-conormal-sequences-and-infinitesimal-lifting`, `quasi-coherent-and-coherent-sheaves-and-vector-bundles`, `proj-projective-schemes-twisting-sheaves-and-ampleness`, `sheaf-cohomology-cech-cohomology-and-comparison`, `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes`, `ext-and-balanced-resolutions`, `derived-categories`, `spectral-sequences`, `grothendieck-spectral-sequences-and-computations`, `lie-subgroups-actions-and-homogeneous-spaces`, `cartan-subalgebras-and-root-space-decompositions`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` |
+| A `requires` | `kahler-differentials-conormal-sequences-and-infinitesimal-lifting`, `quasi-coherent-and-coherent-sheaves-and-vector-bundles`, `proj-projective-schemes-twisting-sheaves-and-ampleness`, `sheaf-cohomology-cech-cohomology-and-comparison`, `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes`, `ext-and-balanced-resolutions`, `derived-categories`, `spectral-sequences`, `grothendieck-spectral-sequences-and-computations`, `lie-subgroups-actions-and-homogeneous-spaces`, `cartan-subalgebras-and-root-space-decompositions`, `root-systems-dynkin-diagrams-and-cartan-killing-classification`, `highest-weight-theory-for-complex-semisimple-lie-algebras` |
 | B page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles-examples` / *Smooth-projective Serre duality and flag-variety line bundles — examples* |
 | B category / order / `requires` | `algebraic-geometry` / **510.0162** / singleton `smooth-projective-serre-duality-and-flag-variety-line-bundles` |
 | companions / phase | reciprocal; **planned-only**, with zero published consumers |
@@ -3085,6 +3100,31 @@ its future Borel--Weil--Bott prerequisite edge remains in force. The preserved
 scaffold and exact missing interfaces are recorded in
 `research/frontier-35-ten-categories-deferred-pairs.json`. Source access alone
 does not discharge these proof prerequisites.
+
+**Single-frontier owner direction (2026-09-27):** Build AV-18, AV-19 and
+AV-22, together with the two scheme-theory pairs that feed them, in the same
+29-pair run as this A/B pair. The algebraic-group bridge belongs inside this A
+page; the 100-item ceiling leaves room for necessary supporting definitions
+and lemmas before the seventeen binding targets below. The already published
+highest-weight page is now a declared supplier for the finite-dimensional
+representations used in a projective orbit construction. Its Lie-algebra
+results do not by themselves establish algebraic-group rationality or an
+algebraic quotient.
+
+The local support chain must establish, with full arguments and exact
+hypotheses, the Borel/maximal-torus and root-subgroup structure for connected
+simply connected complex semisimple algebraic groups; integration of the
+needed highest-weight modules to rational group representations; an algebraic
+construction of the smooth projective quotient $G/B$ and its big cell;
+Bruhat cells and their Weyl-group indexing; and the rank-one subgroup and
+minimal-parabolic quotient $P_\alpha/B\cong\mathbf P^1$. Subsequent rows must
+prove character descent, the $-2\rho$ canonical weight and coroot degree
+conventions from that chain. Milne's *Algebraic Groups* and Brion's *Lectures
+on the Geometry of Flag Varieties* are research starting points. A source
+citation is not a proof: scaffold and author agents must verify every invoked
+statement, fill the local arguments and escalate any interface they cannot
+establish. Do not weaken the general semisimple claims to special linear
+examples to clear a gate.
 
 Its exact 17-item A inventory, in proof order, is:
 
