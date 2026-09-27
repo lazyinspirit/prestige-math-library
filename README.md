@@ -26,11 +26,16 @@ Executable tools and configuration determine current behavior.
 
 Step 1 is drift review → dependency-safe scaffold construction → an owner-held
 final gate. A scaffold batch waits for artifact-complete in-run supplier batches;
-independent branches remain parallel. Scaffolders record item readiness;
-unresolved findings do not trigger repair agents. A run-local
+independent branches remain parallel. Scaffolders record item readiness and
+label each manifest item with its in-run dependency level. The Step-1 gate
+checks those levels against the item DAG. Unresolved findings do not trigger
+repair agents. Step-3 authors audit and author their assigned items from the
+lowest level upward, following the generated item order. A run-local
 `owner-authoring-direction.md`, when present, is a mandatory Step-1 Beta input
 and overrides stale generated task or design text.
 Step 3 assigns one scope reviewer and one scaffold auditor/item author per A/B pair.
+New plans place one pair in each batch so its author can follow the complete
+batch's dependency-level order.
 Its scope-decision check also covers declined source rows in batches outside
 the alpha-group assignment, using a fallback `all` receipt.
 Authors sharing a batch run sequentially. Across batches, consumers wait for

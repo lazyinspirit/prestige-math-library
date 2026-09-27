@@ -29,6 +29,7 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
 import { step1Decision } from '../../step1-decisions.mjs';
+import { dependencyLevels, orderedItems } from '../../item-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../pathway-lib.mjs';
@@ -94,6 +95,8 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
   try {
     const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
     const snapshot = loadStep3(ctx.repo, ctx.run);
+    const levelCheck = dependencyLevels(snapshot.pages);
+    if (levelCheck.errors.some((error: string) => error.startsWith('dependency cycle:'))) complete = false;
     if (!Array.isArray(pages) || !pages.length) complete = false;
     for (const page of Array.isArray(pages) ? pages : []) {
       if (!Array.isArray(page?.items) || !page.items.length) complete = false;
@@ -101,6 +104,7 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
         if (typeof item?.id === 'string' && item.id) {
           out.push(`research/${ctx.run}-step1-${item.id}.json`);
           if (!step1Decision(snapshot, item.id).closed) complete = false;
+          if (item.dependency_level !== levelCheck.levels.get(item.id)) complete = false;
         } else complete = false;
       }
     }
@@ -1232,12 +1236,23 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
   const prefix = phase === 'scope' ? 'step3a' : 'step3b';
   const label = `${prefix}-${group.label}-${key}`;
   const task = `research/${ctx.run}-${label}.task.md`;
-  writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
+  const itemOrder = phase === 'final' ? authorItemOrder(snapshot, pairs.map(([id]: any) => id)) : '';
+  writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n${itemOrder}- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
     profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : LUNA_MAX,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: group.covers,
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
+}
+
+function authorItemOrder(snapshot: any, pairIds: string[]): string {
+  const all = snapshot.pages.flatMap((page: any) => page.items ?? []);
+  // Historical completed runs predate scaffold labels. New runs are gated on
+  // them in Step 1; once any label exists, partial or stale labels fail closed.
+  if (!all.some((item: any) => item.dependency_level !== undefined)) return '';
+  const owned = new Set(pairIds.flatMap(id => (snapshot.pairs.get(id) ?? []).map((page: any) => page.id)));
+  const order = orderedItems(snapshot.pages).filter(row => owned.has(row.page));
+  return `- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):\n${order.map(row => `  ${row.level}. ${row.id} (${row.page})`).join('\n')}\n`;
 }
 
 /** Existing group dispatches keep their batch-sized identity through completion. */
@@ -1307,7 +1322,8 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
   const label = `${prefix}-pair-${unit}-${key}`;
   const task = `research/${ctx.run}-${label}.task.md`;
   const report = `research/${ctx.run}-${prefix}-pair-${unit}.md`;
-  writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write ${report}.\n`);
+  const itemOrder = phase === 'final' ? authorItemOrder(snapshot, [unit]) : '';
+  writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${itemOrder}- Write ${report}.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
     profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : LUNA_MAX,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
@@ -1438,6 +1454,7 @@ export const stages = [
     })),
     gates: (ctx) => [
       gate('step1-readiness', ['node', 'tools/step1-decisions.mjs', 'check', '--run', ctx.run]),
+      gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
       scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
       ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
@@ -1550,6 +1567,10 @@ export const stages = [
         .map(g => step3Plan(ctx, g, 'final'))
       : pairPlans(ctx, pending, 'final'),
     gates: ctx => [scopeGate(ctx),
+      ...(loadStep3(ctx.repo, ctx.run).pages.some((page: any) =>
+        page.items?.some((item: any) => item.dependency_level !== undefined))
+        ? [gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run])]
+        : []),
       // A successful scaffold auditor may create and fully author local supplier
       // items. They are absent from the pre-author scaffold inventory and are
       // certified mechanically as a distinct owner-authorized class before the

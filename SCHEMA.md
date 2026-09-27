@@ -49,6 +49,12 @@ that collide with existing IDs or aliases.
 | `proof_strategy` | Required when the body contains a proof-like section; see §3 |
 
 Use explicit `deps: []` in scaffold manifests when no prerequisites exist.
+Each scaffold manifest item also has a nonnegative integer `dependency_level`:
+0 if it has no `deps` on another item in the current run, otherwise one plus
+the maximum level of those in-run dependencies. The level orders Step-3
+authoring; it is not item frontmatter or a claim of proof validity. The
+`item-dependency-levels` gate recomputes it from the complete run DAG and
+rejects missing, stale or cyclic labels.
 Step-1 readiness is stored separately in `research/RUN-step1-ITEM_ID.json` by
 `tools/step1-decisions.mjs`: `ready` or `escalated`, evidence, examined dependency
 IDs and a current content hash. It is not an item verification or publication

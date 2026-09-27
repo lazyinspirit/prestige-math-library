@@ -348,7 +348,10 @@ switch (cmd) {
       }
     }
 
-    const cap = Number(opt('cap', '2'));
+    // Step 3 has one auditor/author per A/B pair. A one-pair batch makes the
+    // required ascending item-level order achievable across its whole batch.
+    const cap = Number(opt('cap', '1'));
+    if (cap !== 1) die('plan: --cap must be 1 so each batch can be audited and authored in dependency-level order');
     const groups = packBatches(repo, pages, { cap });
     const written = writeManifests(repo, run, groups, { force: has('force') });
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);

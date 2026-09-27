@@ -16,7 +16,11 @@ Step1 scaffold batches and Step3 pair authors declare their same-stage in-run
 prerequisites to the executor. Consumers wait for artifact-complete, stable
 transitive suppliers; independent branches retain parallelism. Step3 authors
 sharing a batch also serialize because their manifests are shared. The
-pre-author snapshot precedes them. A dependency read sampled while a stage
+planner now places one A/B pair in each batch. Step1 scaffolders label every
+manifest item with its in-run dependency level; the Step1 gate recomputes the
+labels from the item DAG. Step3 author tasks list their items from the lowest
+level upward, and the Step3 gate checks labels again after local additions.
+The pre-author snapshot precedes them. A dependency read sampled while a stage
 writer is replacing a manifest defers scheduling until the next tick; the same
 read failure after all stage writers drain is a persistent owner blocker. Step4
 still splices the plan and snapshots

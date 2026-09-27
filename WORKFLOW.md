@@ -102,7 +102,12 @@ invalid.
 A consumer batch waits for artifact-complete, stable transitive supplier batches;
 independent DAG branches remain parallel. A cyclic condensed batch graph is a
 planning error and blocks before dispatch. Every item needs a current
-ready/escalated record. The final gate holds unresolved
+ready/escalated record and a `dependency_level` in its scaffold manifest.
+Level 0 means no in-run item dependency; each in-run supplier raises a
+consumer to at least one more than its level. Out-of-run suppliers do not raise
+it; separate dependency gates check whether they are available. The Step-1 gate computes
+the levels from the complete in-run item DAG and rejects absent or stale
+labels and cycles. The final gate holds unresolved
 findings for the owner/operator; it does not launch a scaffold repair loop.
 When `research/<run>-owner-authoring-direction.md` exists, every Step-1 Beta
 prompt and generated batch task names it as a mandatory, precedence-bearing
@@ -114,13 +119,20 @@ ledger before clearing affected prerequisites.
 Step 3a assigns one scope reviewer per A/B pair; insufficient scope remains owner-held.
 Step 3b assigns one scaffold auditor/item author per A/B pair. Authors sharing
 a batch run sequentially because manifests and proof contracts are shared.
+New plans place one pair in each batch so an auditor/author can finish all of
+its items in ascending dependency-level order across that batch. The planner
+and drift materializer reject a larger batch cap.
 Across batches, the executor releases a consumer only after every transitive
 in-run prerequisite has successful coverage, all declared artifacts, and no
 live repair writer. This directed rule keeps independent branches parallel and
 prevents a later supplier write from invalidating a consumer receipt.
 They audit scaffolds and actual prerequisites, repair locally, then write
-every assigned item, example, counterexample, page and proof contract. They may
-insert necessary definitions/lemmas on assigned existing A pages before consumers.
+every assigned item, example, counterexample, page and proof contract. They
+follow ascending dependency levels within their assigned work, using the
+generated per-pair author task as the exact order; ties use page order and
+item ID. Local additions or dependency repairs require recomputing affected
+levels before further authoring, and the Step-3 gate checks the final labels.
+They may insert necessary definitions/lemmas on assigned existing A pages before consumers.
 Escalate substantial prerequisites, broader scope changes and unresolved
 mathematics. Do not drop claims, add pairs or edit published content. Report
 potential published defects to the owner with exact IDs/evidence; the serial

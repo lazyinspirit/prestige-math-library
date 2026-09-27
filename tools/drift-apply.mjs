@@ -41,7 +41,11 @@ const run = opt('run');
 if (!run) { console.error('usage: node tools/drift-apply.mjs --run <run> [--cap N] [--max-pairs N] [--allow-in-run-dependencies] [--dry-run]'); process.exit(2); }
 
 const repo = process.cwd();
-const cap = Number(opt('cap') ?? 2);
+const cap = Number(opt('cap') ?? 1);
+if (cap !== 1) {
+  console.error('ERROR drift-apply-cap: one A/B pair per batch is required for Step-3 item-level ordering');
+  process.exit(2);
+}
 // Rewriting the scope ledger must preserve the plan-time opt-in. Losing this
 // bit turns a valid earlier-prerequisite chain back into an unbuildable run at
 // the materialization gate. The explicit flag repairs an already-clobbered

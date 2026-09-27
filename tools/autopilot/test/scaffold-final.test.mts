@@ -154,6 +154,12 @@ test('Step 1 supplier batches owe populated-scaffold readiness artifacts', t => 
   const f = fixture(t);
   const scaffold: any = stages.find(s => s.id === '1-scaffold');
   assert.deepEqual(scaffold.unitPrerequisites(f.ctx, '1'), []);
+  assert.ok(scaffold.artifacts(f.ctx, '1').includes('research/demo-batch-1.scaffold-incomplete'),
+    'unlabelled scaffold items cannot release a supplier batch');
+  f.pages[0].items[0].dependency_level = 0;
+  f.pages[0].items[1].dependency_level = 1;
+  f.pages[1].items[0].dependency_level = 2;
+  f.put('demo-batch-1.pages.json', f.pages);
   for (const [item, dependencies] of [
     ['lem-a', ['lem-published']], ['thm-b', ['lem-a']], ['ex-c', ['thm-b']],
   ] as const) recordStep1(f.root, {

@@ -3,7 +3,12 @@
 Own the A/B pair(s) listed in this dispatch. Audit their scaffolds, repair them
 where necessary, then author every assigned item and A/B page. Preserve other
 pairs in any shared batch files. Work one item
-at a time in prerequisite order; checkpoint before moving on.
+at a time in ascending scaffold `dependency_level` order, breaking ties by
+page order and item ID; checkpoint before moving on. The generated dispatch
+task lists the exact order for your assigned items. Audit an item's scaffold
+and author that item before advancing to the next level. Recompute the order
+and labels when a local repair or new supplier changes dependencies. A later
+item must never be used to justify an earlier one.
 
 Read access covers the entire library and every pair in this frontier, including
 pairs still being constructed. Read sibling manifests, items and pages whenever
@@ -74,7 +79,7 @@ the current scope and item certifications needed to enter Step 4. This exception
 does not waive content, dependency, source, rendering, or proof-contract gates.
 
 For each containing batch, run explicit-path precheck and rendering, content-policy,
-strict proof-contract checks, and validate-plan with research/plan-spec.json.
+strict proof-contract checks, item-dependency-levels, and validate-plan with research/plan-spec.json.
 Report pre-splice plan mismatches for Step 4; do not hide actual unresolved
 dependencies. Refresh current scope-decline decisions with evidence, never an
 invented owner ruling. Preserve independent review records.
