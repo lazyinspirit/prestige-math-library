@@ -8,6 +8,23 @@ Current classifications: U-P 0, U-C 0, A-R 1203, A-P 13. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Configuration-space page prerequisite header repaired — 2026-09-27
+
+The published `ordered-and-unordered-configuration-spaces` page omitted
+`normed-and-banach-spaces` from its `requires` header and the canonical plan.
+Its published `lem-forgetting-configuration-points-is-locally-trivial` uses
+`lem-vector-operations-are-continuous-in-a-normed-space` to establish joint
+continuity of its point-moving trivialization. The B-page example
+`ex-the-two-point-unordered-cover-and-its-monodromy` uses the same lemma for
+continuous complex coordinate formulas. Both item dependencies were already
+declared; the missing page-level edge caused two `undeclared-prereq` plan
+errors. The supplier is published, strictly earlier, and supplies the exact
+continuity claim used. The A-page header, plan edge, and braid-track design
+now agree; the B page reaches the supplier through its A-page prerequisite.
+This is a page-header repair with unchanged item claims and proofs, so neither
+sound item is counted as an item repair in the classification index. This was
+a local dependency audit, not an independent mathematical rejudgment.
+
 ## Heine–Cantor title repaired to match current proof — 2026-09-27
 
 The published `thm-heine-cantor-r` title had said its proof ran “from

@@ -235,10 +235,11 @@ identities used in the three-strand example.
 ## BG-2 — Ordered and Unordered Configuration Spaces
 
 **Page id:** `ordered-and-unordered-configuration-spaces`  
-**Requires:** `the-fundamental-group`, `covering-spaces-and-lifting`,
+**Requires:** `normed-and-banach-spaces`, `the-fundamental-group`, `covering-spaces-and-lifting`,
 `fibrations-fiber-bundles-and-homotopy-exact-sequences`,
 `classification-of-covering-spaces`,
-`partitions-of-unity-and-paracompactness`, `subspaces-products-and-quotients`.
+`partitions-of-unity-and-paracompactness`, `subspaces-products-and-quotients`,
+`manifolds-with-boundary-collars-and-orientations`.
 
 | proposed item (kind) | deps | exact content and proof route | source locator |
 |---|---|---|---|

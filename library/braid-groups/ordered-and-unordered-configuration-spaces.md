@@ -2,7 +2,7 @@
 page: ordered-and-unordered-configuration-spaces
 title: "Ordered and Unordered Configuration Spaces"
 status: published
-requires: [the-fundamental-group, covering-spaces-and-lifting, fibrations-fiber-bundles-and-homotopy-exact-sequences, classification-of-covering-spaces, partitions-of-unity-and-paracompactness, subspaces-products-and-quotients, manifolds-with-boundary-collars-and-orientations]
+requires: [normed-and-banach-spaces, the-fundamental-group, covering-spaces-and-lifting, fibrations-fiber-bundles-and-homotopy-exact-sequences, classification-of-covering-spaces, partitions-of-unity-and-paracompactness, subspaces-products-and-quotients, manifolds-with-boundary-collars-and-orientations]
 items: [def-ordered-configuration-space,
         prop-the-symmetric-group-acts-freely-on-ordered-configurations,
         def-unordered-configuration-space,
