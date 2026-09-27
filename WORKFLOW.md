@@ -546,6 +546,9 @@ auditor-created items with retained origin evidence; ordinary baseline originals
 are not exempt. A missing or failed receipt gate is owner-held; it does not
 launch another author. Owner-authorized correction preserves completed spine
 readings and valid evidence.
+The Step-8 impact receipt refresh and close gate use the same direct-consumer
+boundary as Step 5b. A changed consumer interface opens its own direct review;
+an unchanged consumer export stops propagation.
 Coverage checks skip context hashing when the judge ledger is missing and keep
 the hash cache separate from the ledger, including nonstandard filenames.
 Proof-contract reports drain stdout/stderr before exit so large JSON diagnostics

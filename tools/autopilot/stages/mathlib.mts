@@ -2110,6 +2110,7 @@ export const stages = [
       gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
       gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
         '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+        '--direct-boundary',
         '--receipt', `research/${ctx.run}-impact.json`]),
       step8ChangesGate(ctx), step8ClosureGate(ctx), closureGate(ctx),
     ],

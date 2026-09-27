@@ -106,6 +106,8 @@ test('Step 8 closes impact work before stamping and receipts', () => {
   assert.ok(judge.gates(ctx).some((gate: any) => gate.id === 'step8-changes'));
   assert.ok(judge.gates(ctx).some((gate: any) => gate.id === 'step8-judge-closure'));
   assert.ok(close.gates(ctx).some((gate: any) => gate.id === 'step8-changes'), 'impact repairs must refresh the certification delta');
+  const impactReceipt: any = close.gates(ctx).find((gate: any) => gate.id === 'impact-receipt');
+  assert.ok(impactReceipt.argv.includes('--direct-boundary'), 'Step 8 must check the same direct boundary used to refresh its impact receipt');
   const receipts: any = stages.find((stage: any) => stage.id === '8-receipt');
   assert.deepEqual(receipts.gates(ctx).map((gate: any) => gate.id),
     ['step8-auditor-created-certifications', 'manifest-deps', 'level-coverage'],
