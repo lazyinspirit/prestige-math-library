@@ -78,7 +78,7 @@ test('Step 3 scopes use DeepSeek and authors use Luna while Step 5 adjudication 
   assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.lunaMax);
 
   const adjudicate = stage('5a-adjudicate');
-  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solHigh,
+  assert.equal(selected(adjudicate, adjudicate.plan({ ...ctx, doctor: true }, ['1'])[0]), MODEL_PROFILE_NAMES.solHigh,
     'Step 5a adjudication runs on the Sol high lane');
   const cross = stage('5b-cross');
   assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.solXHigh);

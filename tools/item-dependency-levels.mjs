@@ -14,7 +14,7 @@ export function runPages(root, run) {
       .map(page => ({ ...page, batch: name.match(/-batch-(\d+)/)[1] })));
 }
 
-export function dependencyLevels(pages) {
+export function dependencyLevels(pages, { validateLabels = true } = {}) {
   const items = new Map(), errors = [], levels = new Map(), visiting = new Set();
   for (const page of pages) {
     if (!Array.isArray(page.items) || !page.items.length)
@@ -49,6 +49,7 @@ export function dependencyLevels(pages) {
   };
   for (const id of items.keys()) visit(id);
   for (const [id, { item }] of items) {
+    if (!validateLabels) continue;
     if (!Number.isSafeInteger(item.dependency_level) || item.dependency_level < 0)
       errors.push(`${id}: dependency_level must be a nonnegative integer`);
     else if (item.dependency_level !== levels.get(id))
@@ -57,8 +58,8 @@ export function dependencyLevels(pages) {
   return { items, levels, errors };
 }
 
-export function orderedItems(pages) {
-  const { items, levels, errors } = dependencyLevels(pages);
+export function orderedItems(pages, options) {
+  const { items, levels, errors } = dependencyLevels(pages, options);
   if (errors.length) throw Error(errors.join('\n'));
   return [...items.entries()].map(([id, { item, page }]) => ({
     id, level: levels.get(id), batch: String(page.batch), page: page.id, order: Number(page.order), item,

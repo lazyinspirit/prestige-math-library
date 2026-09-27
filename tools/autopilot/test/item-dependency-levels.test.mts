@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { dependencyLevels, orderedItems } from '../../item-dependency-levels.mjs';
+import { prepareStep5AdjudicationOrder } from '../../step5-adjudication-order.mjs';
 import { stages, step3PairPlan } from '../stages/mathlib.mts';
 
 const pages: any[] = [
@@ -53,4 +54,26 @@ test('stale labels and item cycles fail closed', () => {
   const cyclic = structuredClone(pages);
   cyclic[0].items[1].deps = ['thm-late'];
   assert.match(dependencyLevels(cyclic).errors.join('\n'), /dependency cycle: .*lem-base/);
+});
+
+test('Step 5 group adjudication task orders routed items across batches', t => {
+  const root = mkdtempSync(join(tmpdir(), 'step5-level-order-'));
+  mkdirSync(join(root, 'research'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  writeFileSync(join(root, 'research/demo-batch-1.pages.json'), JSON.stringify(pages.slice(0, 2)));
+  writeFileSync(join(root, 'research/demo-batch-2.pages.json'), JSON.stringify(pages.slice(2)));
+  writeFileSync(join(root, 'research/demo-step5-scope-1.json'), JSON.stringify({
+    run: 'demo', batch: '1', group: 'a', touched: ['thm-late', 'lem-base'],
+    reader_findings: [{ id: 'lem-middle', obligation: 'reader:1:1' }],
+  }));
+  writeFileSync(join(root, 'research/demo-step5-scope-2.json'), JSON.stringify({
+    run: 'demo', batch: '2', group: 'a', touched: ['ex-cross'],
+    refuter_findings: [{ id: 'thm-cross', obligation: 'refuter:2:1' }],
+  }));
+  const path = prepareStep5AdjudicationOrder(root, 'demo', { label: 'a', covers: ['1', '2'] });
+  const task = readFileSync(join(root, path), 'utf8');
+  const ids = ['lem-base', 'lem-middle', 'thm-late', 'thm-cross', 'ex-cross'];
+  assert.deepEqual(ids.map(id => task.indexOf(`, ${id} —`)).sort((a, b) => a - b),
+    ids.map(id => task.indexOf(`, ${id} —`)));
+  assert.match(task, /level 2: batch 2, thm-cross/);
 });

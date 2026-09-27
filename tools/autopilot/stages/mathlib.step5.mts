@@ -4,6 +4,7 @@
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { holdStep5 } from './step5-hold.mts';
+import { prepareStep5AdjudicationOrder } from '../../step5-adjudication-order.mjs';
 
 // Step-5 lanes: readers and refuters Luna/max,
 // group adjudicators Sol/high, and every 5b agent Sol/xhigh.
@@ -156,7 +157,10 @@ export function step5Stages(d: any) {
         .map((group: any) => ({
           role: 'alpha', label: `5a-${group.label}`, job: 'adjudication', covers: group.covers,
           brief: 'briefs/alpha-step5.md',
-          task: 'briefs/tasks/alpha-5a-adjudicate.md',
+          task: ctx.doctor ? 'briefs/tasks/alpha-5a-adjudicate.md' : [
+            'briefs/tasks/alpha-5a-adjudicate.md',
+            prepareStep5AdjudicationOrder(ctx.repo, ctx.run, group),
+          ],
           timeout: 14400,
         })),
       gates: (ctx: any) => [

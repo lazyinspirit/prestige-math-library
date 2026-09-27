@@ -2,6 +2,7 @@
 
 - Write G as the group letter in your dispatch label (`5a-b` means G is `b`); every path below uses it.
 - Work only on your dispatched group and its `covers:` batches; for each of those batches read `research/<run>-step5-scope-<i>.json`, the reader report and findings, the refuter report, the current carriers, and every cited dependency.
+- Follow the generated `research/<run>-alpha-G-5a-order.task.md` across the whole group: adjudicate routed items and complete their risk reviews from lowest in-run dependency level to highest. Keep all findings for one item together. Page-only obligations retain their own scope.
 - Decide exactly the obligations the scope routes: `touched:BATCH:ID` and `page:BATCH:ID` for a changed carrier, `reader:BATCH:K` and `flagged:BATCH:K` for the K-th finding in that batch's reader or refuter artifact (BATCH is the batch id, ID the carrier id, K a 1-based position); an untouched, unflagged item owes no decision.
 - Apply `briefs/alpha-step5.md` for the verdict vocabulary, the repair standard, the risk review, and the published-consumer ledger.
 - Compare the current carriers with `research/<run>-step5-hash-<i>-pre.json` and `research/<run>-step5-hash-<i>-post.json` when deciding whether a reader repair was accepted, amended, or reverted.

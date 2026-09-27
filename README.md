@@ -43,11 +43,13 @@ artifact-complete transitive in-run prerequisites while independent branches run
 They may supply local definitions/lemmas; substantial prerequisites and potential
 published defects go to the owner. Step 4 splices the plan and snapshots content.
 Step 5a runs independent reviewers, read-only refuters and routed group
-adjudication; Step 5b reconciles dependencies and closes it.
+adjudication in ascending item dependency level across each group; Step 5b
+reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when
 unsure. Logical validity governs decisions; sources and judges can be mistaken.
-Step 7 must confine repair, adjudication, Sol rejudgment and item gates to the
-immutable frontier in `research/<run>-step7-v2/frontier.json`. Sol xhigh batch
+Step 7 batch adjudicators likewise work through rejected items from the lowest
+dependency level upward. Step 7 must confine repair, adjudication, Sol rejudgment and item gates to the
+immutable frontier in `research/<run>-step7-v2/frontier.json`. Astra medium batch
 adjudicators repair confirmed frontier defects, and three Sol xhigh owner lanes
 run concurrently on disjoint frontier impact assignments. Every necessary
 frontier repair and review finishes before one central certification pass after

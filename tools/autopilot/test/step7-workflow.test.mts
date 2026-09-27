@@ -15,6 +15,30 @@ const run='fixture', reason='The proof and its supplier hypotheses were checked 
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
 
+test('Step 7 adjudication packs and tasks order rejected items by dependency level',()=>{
+  const f=fixture();try{
+    const manifest=join(f.root,'research',`${run}-batch-1.pages.json`);
+    const pages=JSON.parse(readFileSync(manifest,'utf8'));
+    pages[0].items.find((row:any)=>row.id==='thm-item-19').deps=['thm-item-18'];
+    pages[0].items.find((row:any)=>row.id==='thm-item-20').deps=['thm-item-19'];
+    json(manifest,pages);
+    const ledger=join(f.root,'research',`${run}-judge.jsonl`);
+    for(const id of ['thm-item-20','thm-item-19','thm-item-18'])
+      appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...contexts(f.root,[id]).get(id),keep:false})+'\n');
+    const pack=prepareAdjudication(f.root,run,'initial',1);
+    assert.deepEqual(pack.assignments['1'].map((row:any)=>row.id),
+      ['thm-item-0','thm-item-18','thm-item-19','thm-item-20']);
+    assert.deepEqual(['thm-item-18','thm-item-19','thm-item-20'].map(id=>pack.dependency_levels[id]),[0,1,2]);
+    const task=readFileSync(workerReport(f.root,run,'initial',1,'1').replace(/\.json$/,'.task.md'),'utf8');
+    assert.match(task,/Assigned item order: 0:thm-item-0, 0:thm-item-18, 1:thm-item-19, 2:thm-item-20/);
+    const verdicts=readFileSync(ledger,'utf8').trim().split('\n').map(JSON.parse);
+    json(join(workflowDir(f.root,run),'judge-2.json'),{verdicts});
+    const repeat=prepareAdjudication(f.root,run,'repeat',2);
+    assert.deepEqual(repeat.assignments['1'].map((row:any)=>row.id),
+      ['thm-item-0','thm-item-18','thm-item-19','thm-item-20']);
+  }finally{f.cleanup();}
+});
+
 test('no-progress guard stops unchanged repeated assignments and exact state oscillations',()=>{
   const first={phase:'gate',assignments:{'1':['a'],'2':['b'],'3':[]},before:{a:'A',b:'B',supplier:'S'},before_statements:{a:'a',b:'b',supplier:'s'}};
   const second={...first,phase:'gate-pass-2',before:{...first.before,a:'repaired'}};
@@ -137,7 +161,7 @@ function item(root:string,id:string,body='Original proof.',deps:string[]=[],publ
   if(!published&&existsSync(manifest)&&!existsSync(join(workflowDir(root,run),'frontier.json'))){
     const pages=JSON.parse(readFileSync(manifest,'utf8'));
     if(!pages.some((page:any)=>page.items.some((row:any)=>row.id===id))){
-      pages[0].items.push({id});json(manifest,pages);
+      pages[0].items.push({id,deps});json(manifest,pages);
       appendFileSync(join(root,'research',`${run}-judge.jsonl`),JSON.stringify({id,model:MODELS.sol.id,context_sha256:h,item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),keep:true})+'\n');
     }
   }
@@ -151,7 +175,7 @@ function fixture() {
   for(const id of ids)item(root,id);
   item(root,'thm-frontier-consumer','Uses root.',[ids[0]],false);
   item(root,'thm-unrelated-consumer');
-  json(join(root,'research',`${run}-batch-1.pages.json`),[{id:'page',items:ids.map(id=>({id}))}]);
+  json(join(root,'research',`${run}-batch-1.pages.json`),[{id:'page',items:ids.map(id=>({id,deps:id==='thm-frontier-consumer'?['thm-item-0']:[]}))}]);
   writeFileSync(join(root,'research',`${run}-judge.jsonl`),ids.map((id,i)=>JSON.stringify({id,model:MODELS.sol.id,context_sha256:h,item_sha256:contexts(root,[id]).get(id).item_sha256,keep:i!==0})).join('\n')+'\n');
   return {root,ids,cleanup:()=>rmSync(root,{recursive:true,force:true})};
 }

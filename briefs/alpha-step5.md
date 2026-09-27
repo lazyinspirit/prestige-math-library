@@ -2,6 +2,7 @@
 
 - Read the dispatched task first; it names your batches or cross-group obligations, your outputs, and your focused checks. The engine owns scheduling and transitions.
 - Work only the routed work of your dispatch: the named batches or the computed cross-group findings. Open a dependency outside that scope only to test an assigned claim.
+- At 5a, use the generated group item order across all assigned batches, lowest dependency level first. Finish each item's routed decisions and required risk review before moving higher; page-only obligations still need review.
 - Treat every reader report, refuter report, gate diagnostic, and prior decision as evidence, not a verdict; re-read the current carrier, its cited dependencies, and the relevant source statements before deciding.
 - Be impartial: accept sound mathematics without inventing defects, and state uncertainty honestly rather than claiming understanding or a repair you cannot justify.
 - Search the web and read authoritative sources for unfamiliar mathematics; record the exact statements, checked hypotheses, and source locations in your evidence.

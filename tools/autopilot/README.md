@@ -25,13 +25,16 @@ writer is replacing a manifest defers scheduling until the next tick; the same
 read failure after all stage writers drain is a persistent owner blocker. Step4
 still splices the plan and snapshots
 content. Step5a reviews authored arguments; Step5b reconciles and closes them.
+Step5a group adjudicators receive a generated queue of routed items ordered by
+in-run dependency level across their assigned batches. Step7 batch adjudication
+packs and tasks order rejected items the same way within each batch.
 When a run-local owner authoring direction exists, the Step1 Beta brief and
 generated per-batch task both name it as a binding input. If it is added after
 `plan`, run `refresh-tasks` before any Beta dispatch so materialized prompts do
 not omit it.
-Step7 runs batch Sol xhigh adjudicators, three Sol xhigh owner agents for all
+Step7 runs batch Astra medium adjudicators, three Sol xhigh owner agents for all
 relevant downstream repairs (including published items), then one stable
-orchestrator certification pass. Sol rejudgment, Sol adjudication, three-owner
+orchestrator certification pass. Sol rejudgment, Astra adjudication, three-owner
 downstream repair and recertification repeat until the latest round's unique
 fatal original-frontier count is strictly below 5% of the frozen original scope.
 All confirmed defects, including nonfatal defects, require repair. New downstream

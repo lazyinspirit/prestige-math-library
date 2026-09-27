@@ -119,6 +119,9 @@ files, then a read-only refuter pass over every untouched carrier, every
 HIGH/CRITICAL item and every page carrier, then group adjudication of the
 routed obligations (touched, page, reader, refuter); Step 5b reconciles
 cross-group dependencies and closes. Do not repeat Step 3's scaffold audit. Be
+guided by the generated group queue at 5a: finish lower dependency level items
+before higher ones across all assigned batches, with all findings and risk
+reviews for an item together. Page-only obligations remain in scope. Be
 impartial, state uncertainty honestly, and read authoritative sources for
 unfamiliar mathematics. Accept sound content or repair locally, fully authoring
 necessary definitions and lemmas in assigned existing A pages. Escalate
@@ -145,10 +148,12 @@ Preserve historical repairs, assignments, reports and certifications without
 turning their former scope into new repair authority.
 
 7.1 one Astra medium adjudicator per batch resolves Step-6 rejections and repairs
-confirmed frontier defects. 7.2 three Sol xhigh owner agents run concurrently
+confirmed frontier defects. The 7.1 and 7.5 adjudicators follow each batch's
+generated rejected-item order from lowest dependency level to highest, keeping
+all tuples for one item together. 7.2 three Sol xhigh owner agents run concurrently
 on disjoint frontier impact assignments. 7.3 the central tool verifies complete
 frontier repair and review coverage, waits for every writer, then certifies the
-stable state once. 7.4 Luna max rejudges repaired frontier items; 7.5 Astra medium
+stable state once. 7.4 Sol high rejudges repaired frontier items; 7.5 Astra medium
 adjudicators resolve renewed frontier rejections; 7.6 three parallel owner
 lanes close frontier impacts; 7.7 centrally recertifies after all work closes.
 Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original frontier

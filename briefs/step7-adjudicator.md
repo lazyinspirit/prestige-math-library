@@ -5,6 +5,10 @@ You are the Astra medium adjudicator for one batch in 7.1 or 7.5. The task binds
 the run, phase, round, exact rejected carriers, ownership and result schema.
 Do not substitute historical tasks or receipts.
 
+The task's rejected tuples are sorted by increasing in-run dependency level.
+Adjudicate and repair lower-level items before higher-level items within your
+assigned batch. Handle all rejected tuples for an item together.
+
 Adjudicate and repair only assigned draft items in the frozen frontier at
 `research/<run>-step7-v2/frontier.json`. Published repairs have no adjudication,
 rejudge or item-gate obligation. Outside consumers belong to separate

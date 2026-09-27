@@ -234,8 +234,14 @@ current files, with exact opened/not_opened coverage. Group Alphas adjudicate
 the routed obligations only: touched carriers, page carriers, reader findings
 and refuter findings. An untouched, unflagged item owes no adjudication
 decision and proceeds to the gate. Every HIGH/CRITICAL item needs a current
-risk review from the adjudicator's own read. A genuine post-baseline supplier
-created and fully authored by the Step-5 adjudicator receives a hash-bound
+risk review from the adjudicator's own read. The engine generates one item queue
+per group from the collected scopes and current in-run dependency graph. Group
+adjudicators complete routed items from lowest dependency level to highest
+across their assigned batches, keeping all findings and risk review for each
+item together. Page-only obligations remain routed separately.
+
+A genuine post-baseline supplier created and fully authored by the Step-5
+adjudicator receives a hash-bound
 item/manifest/contract certificate after the successful dispatch and does not
 require a self-review decision. The complete gate battery runs at
 5a-adjudicate; a failing gate is an owner hold, never an agent repair round.
@@ -416,6 +422,11 @@ in a run manifest; Step 6's initial judgment of run items retains its scope.
 | 7.8 / `7.8-gate` | Run the complete battery with item findings scoped to the frozen frontier. |
 | 7.9 / `7.9-repair` | Three concurrent owner lanes repair actual frontier gate subjects; no additions. Centrally recertify after closure. |
 | 7.10 / `7.10-gate` | Rerun the same scoped battery; repeat 7.9–7.10 until green. |
+
+The engine orders each 7.1 and 7.5 batch's rejected tuples by current in-run
+dependency level, lowest first, and records that order in the frozen round
+pack and generated task. Adjudicators finish lower-level items before moving to
+higher-level items; multiple tuples for one item stay together.
 
 The threshold is `20 * unique_fatal_original_frontier_items < original_scope_size`
 in the latest completed adjudication round. Count each original item once;

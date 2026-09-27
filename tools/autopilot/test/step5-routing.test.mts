@@ -81,7 +81,7 @@ test('Step 5a is prepare, the reader pipeline and adjudication; 5b closure is un
     assert.equal(typeof stage.role, 'string', `${stage.id} declares the lane it pipes to`);
   assert.equal(byId('5a-adjudicate').pipeline, undefined);
   assert.deepEqual(byId('5a-adjudicate').cohort({}, '1'), ['1', '2']);
-  const ctx = { ...ordinaryCtx, run: 'r' };
+  const ctx = { ...ordinaryCtx, run: 'r', doctor: true };
   assert.equal(byId('5a-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-5a-adjudicate.md');
   assert.equal(byId('5b-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-5b-edges.md');
   assert.deepEqual(byId('5a-prepare').plan(ctx)[0].argv,
