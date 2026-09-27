@@ -77,6 +77,13 @@ Routed failures and bypassed gates never receive a gate-pass stamp. A pending
 `pause-at` boundary also takes effect before a repeated round starts.
 
 Use tools/tsx-run.mjs from the repository root for status, doctor and tests.
+Status recomputes the active stage and its overlapping group from disk. Later
+stages show as waiting until they become active; their expensive per-item
+artifact predicates are checked at their own stage boundary. This keeps
+status reporting from delaying worker launches on a large frontier.
+Step-1 scaffold artifact checks reuse one manifest snapshot across batches in
+a status pass. Manifest, plan, coverage, and item-body changes invalidate the
+corresponding cached data; readiness receipts are read afresh for each item.
 Tests use temporary fixtures and fake dispatches, never live state. Do not
 install a renumbered stage table or regenerate prompts under an active run.
 Historical receipts are not migration aliases; cutover requires a fresh run

@@ -88,14 +88,56 @@ function batchDependencies(ctx: any, unit: string): string[] {
  * coverage record, and every current item-readiness receipt exist. The item
  * list is read dynamically because planning intentionally creates empty page
  * shells before the Beta fills them. */
+const scaffoldSnapshots = new WeakMap<object, {
+  stamp: string;
+  snapshot: any;
+  levelCheck: ReturnType<typeof dependencyLevels>;
+  itemStamps: Map<string, string>;
+}>();
+
+function fileStamp(path: string): string {
+  try {
+    const stat = statSync(path, { bigint: true });
+    return `${stat.mtimeNs}:${stat.ctimeNs}:${stat.size}`;
+  } catch { return 'missing'; }
+}
+
+function scaffoldSnapshot(ctx: any) {
+  const dir = R(ctx, 'research');
+  const files = readdirSync(dir)
+    .filter((name: string) => name.startsWith(`${ctx.run}-batch-`)
+      && (name.endsWith('.pages.json') || name.endsWith('.coverage.json')))
+    .sort();
+  const stamp = [fileStamp(join(dir, 'plan-spec.json')),
+    ...files.map((name: string) => `${name}:${fileStamp(join(dir, name))}`)].join('|');
+  let cached = scaffoldSnapshots.get(ctx);
+  if (!cached || cached.stamp !== stamp) {
+    const snapshot = loadStep3(ctx.repo, ctx.run);
+    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map() };
+    scaffoldSnapshots.set(ctx, cached);
+  } else {
+    // Published and in-run item bodies can change without a manifest edit.
+    // Invalidate dependency bytes before checking the next unit in this same
+    // status pass; Step-1 receipt files themselves are read afresh below.
+    for (const [id, prior] of cached.itemStamps) {
+      if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
+        cached.snapshot.cache.clear();
+        cached.itemStamps.clear();
+        break;
+      }
+    }
+  }
+  return cached;
+}
+
 function scaffoldArtifacts(ctx: any, unit: string): string[] {
   const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
   const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
   let complete = true;
   try {
     const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
-    const snapshot = loadStep3(ctx.repo, ctx.run);
-    const levelCheck = dependencyLevels(snapshot.pages);
+    const cached = scaffoldSnapshot(ctx);
+    const { snapshot, levelCheck } = cached;
     if (levelCheck.errors.some((error: string) => error.startsWith('dependency cycle:'))) complete = false;
     if (!Array.isArray(pages) || !pages.length) complete = false;
     for (const page of Array.isArray(pages) ? pages : []) {
@@ -107,6 +149,9 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
           if (item.dependency_level !== levelCheck.levels.get(item.id)) complete = false;
         } else complete = false;
       }
+    }
+    for (const id of snapshot.cache.keys()) {
+      if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
     }
   } catch {
     complete = false;

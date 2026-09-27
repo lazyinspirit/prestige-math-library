@@ -550,7 +550,18 @@ export class Executor {
     // in flight. For a stage with no `pipeline` the group is itself, so this is
     // the previous behaviour exactly.
     const activeIds = new Set(stage ? this.pipelineGroup(stage).map((s: any) => s.id) : []);
-    const stages = this.stages.map((s: any) => {
+    const activeEnd = stage
+      ? Math.max(...this.stages.flatMap((s: any, index: number) => activeIds.has(s.id) ? [index] : []))
+      : this.stages.length - 1;
+    const stages = this.stages.map((s: any, index: number) => {
+      // A future stage cannot advance before the active group closes. Its
+      // artifact predicate can walk every item in the run, so evaluating all
+      // future stages for each status report starves queued dispatch launches
+      // on a large frontier. The owning stage is checked when it is reached.
+      if (stage && index > activeEnd && !this.state.data.stages[s.id]?.doneAt) {
+        return { id: s.id, label: s.label, done: false,
+          why: 'waiting for earlier stage', current: false };
+      }
       try {
         const st = this.stageStatus(s, ctx);
         return { id: s.id, label: s.label, done: st.done, why: st.why, current: activeIds.has(s.id) && !st.done };

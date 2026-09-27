@@ -74,6 +74,29 @@ const gatedStage = (fx: any, gates: any[], hooks: any = {}) => [{
   ...hooks,
 }];
 
+test('status defers future artifact scans until their stage is reached', () => {
+  const fx = fixture();
+  let futureScans = 0;
+  const stages = ['first', 'future'].map((id) => ({
+    id, label: id, units: () => ['1'], pattern: new RegExp(`^worker-${id}\\.result\\.json$`),
+    plan: () => [],
+    artifacts: () => {
+      if (id === 'future') futureScans++;
+      return [];
+    },
+  }));
+  const { ex } = makeExecutor(fx, stages);
+  const initial = ex.snapshot();
+  assert.equal(initial.stage?.id, 'first');
+  assert.equal(initial.stages[1].why, 'waiting for earlier stage');
+  assert.equal(futureScans, 0);
+
+  cover(fx, 'worker', 'first', ['1']);
+  const reached = ex.snapshot();
+  assert.equal(reached.stage?.id, 'future');
+  assert.ok(futureScans > 0, 'the future stage checks its artifacts when reached');
+});
+
 test('run wakes on child completion and drains a completed boundary without polling', async () => {
   const fx = fixture();
   const stages = ['first', 'second'].map((id) => ({
