@@ -7,18 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse, thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold]
+deps: [def-axiom-of-choice, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space, thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse, thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,24 +30,24 @@ sources:
 
 ## Statement
 
-Every compact smooth manifold admits an excellent Morse function.
+Assume the axiom of choice. Every compact smooth manifold admits an excellent Morse function.
 
 ## Facts & Assumptions
 
-**Given:** A compact smooth manifold $M$.
+**Given:** A compact smooth manifold $M$ and the axiom of choice ([[def-axiom-of-choice]]).
 
-[L1] Every smooth manifold embeds in some finite-dimensional Euclidean space ([[thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space]]).
+[L1] Under countable choice, every smooth manifold embeds in some finite-dimensional Euclidean space ([[thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space]]).
 
 [L2] On a compact embedded manifold, a generic linear height function is Morse ([[thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse]]).
 
-[L3] On a compact manifold, excellent Morse functions are dense among all smooth functions ([[thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold]]).
+[L3] On a compact manifold, excellent Morse functions are dense among all smooth functions ([[thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold]]). Its published density proof uses the relative jet-transversality construction, whose successive perturbation choices are covered here by the assumed axiom of choice.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1], choose a smooth embedding $M\hookrightarrow\mathbb R^N$. Then [L2] gives a Morse height function $h:M\to\mathbb R$ on that embedding. [L1, L2, given, choose]
+1.1 Use the assumed axiom of choice for the countable selections in [L1], and choose a smooth embedding $M\hookrightarrow\mathbb R^N$. Then [L2] gives a Morse height function $h:M\to\mathbb R$ on that embedding. [L1, L2, given, choose]
 
-2.1 Apply [L3] to the Morse function $h$. Since excellent Morse functions are dense on the compact manifold $M$, some excellent Morse function lies arbitrarily close to $h$ and in particular exists on $M$. [L3, step 1.1]
+2.1 Use the assumed axiom of choice for the successive selections in the density proof underlying [L3], and apply [L3] to the Morse function $h$. An excellent Morse function then lies arbitrarily close to $h$ and in particular exists on $M$. [L3, step 1.1]
 
 3.1 Therefore every compact smooth manifold admits an excellent Morse function. [step 2.1] ∎

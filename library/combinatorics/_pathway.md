@@ -7,6 +7,7 @@ parts:
     pages:
       - finite-counting-and-binomial-coefficients
       - inclusion-exclusion-and-the-pigeonhole-principle
+      - finite-abelian-characters-for-combinatorics
   - part: generating-functions
     title: "Generating functions"
     pages:
@@ -73,15 +74,21 @@ parts:
       - from-generalized-niceness-to-erdos-hajnal
       - the-structural-criterion-for-property-star
       - co-e-free-comb-structure
+      - erdos-hajnal-for-the-e-graph-and-bird
 ---
 
 ## counting
 
-Every count in this category is assembled from two rules, the sum rule and the product
-rule, applied to finite sets whose cardinality is a natural number rather than a symbol.
-Factorials and binomial coefficients follow, and then the two principles that do the work
-when a direct count is unavailable: inclusion-exclusion, which corrects an overcount, and
-the pigeonhole principle, which produces an object without exhibiting it.
+Every count in this category is assembled from the sum rule and the product rule, applied
+to finite sets whose cardinality is a natural number rather than a symbol. Factorials and
+binomial coefficients follow, and then the two principles that do the work when a direct
+count is unavailable: inclusion-exclusion, which corrects an overcount, and the pigeonhole
+principle, which produces an object without exhibiting it. Additive characters of a finite
+abelian group, valued in $\mathbb C^\times$, add the orthogonality relations, proved from
+representation orthogonality: the normalized average of one character against the conjugate
+of another is $1$ on equal characters and $0$ otherwise, and nontrivial characters sum to
+zero. That interface also records the dictionary with one-dimensional complex
+representations, choice-free.
 
 ## generating-functions
 
@@ -134,12 +141,13 @@ degree and gives the five colour theorem.
 ## probability
 
 Finite probability and expectation turn density into witnesses for homogeneous sets,
-induced-copy estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules, blockades,
-pure pairs, combs, restriction, and sparsification develop clique-or-stable-set structure
-for the bull and $C_5$. The quantitative induced-density page starts from few labelled
-induced copies, uses good-copy extension and restricted blockades, and turns finite density
-recursion into logarithmic and log-log homogeneous-set bounds, with explicit empty-block and
-singleton conventions. In the co-bird-free comb setting, overlapping induced $E$ copies yield
-anticonnected classes, and iterated mixed quotients end in a pure blockade with an $E$-free
-pattern. This supports the relevant Erdős--Hajnal input and the special-vertex criterion for
-property $(*)$ for $\{E\}$.
+induced-copy estimates, sparse pairs, and Erdős--Hajnal alternatives; modules, blockades,
+pure pairs, combs, restriction and sparsification develop clique-or-stable-set structure
+for the bull and $C_5$, and the quantitative induced-density page converts few labelled
+induced copies, good-copy extension and restricted blockades into logarithmic and log-log
+homogeneous-set bounds. In co-Bird-free combs, overlapping induced $E$ copies yield
+anticonnected classes and mixed quotients end in a pure blockade with an $E$-free pattern,
+feeding the special-vertex criterion for property $(*)$. The part closes both deductions:
+$E$ and Bird reduce by a pendant leaf to $P_5$ and the bull, and generic generalized
+niceness upgrades the certified family properties to the Erdős--Hajnal property, with no
+numerical exponent claimed.

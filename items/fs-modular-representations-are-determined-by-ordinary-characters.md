@@ -6,16 +6,16 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
-deps: [thm-brauer-nesbitt-module-determination]
+  proof: ai-altered
+deps: []
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -34,14 +34,12 @@ character data must be isomorphic.
 
 **Given:** The cyclic group $C_p$ over a field $k$ of characteristic $p$.
 
-[L1] Equality of Brauer characters determines only the semisimplification ([[thm-brauer-nesbitt-module-determination]]).
-
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 Let $V$ be the indecomposable $2$-dimensional $kC_p$-module with generator acting by $\bigl(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\bigr)$, and let $W=k\oplus k$ be the direct sum of two trivial modules. These modules are not isomorphic because $V$ is indecomposable while $W$ is semisimple. [given, algebra]
+1.1 Let $V$ be the $2$-dimensional $kC_p$-module with generator acting by $I+N=\bigl(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\bigr)$, and let $W=k\oplus k$ be the direct sum of two trivial modules. Since $N^2=0$ and $\operatorname{char}k=p$, $(I+N)^p=I$, so this is a representation of $C_p$. The modules are not isomorphic: the generator acts nontrivially on $V$ and trivially on $W$. [given, algebra]
 
-2.1 Their only composition factors are two copies of the trivial module, so they have the same semisimplification. By [L1], they therefore have the same Brauer character. [L1, step 1.1]
+2.1 For each group element $g^a$, the matrices are $(I+N)^a=I+aN$ on $V$ and $I$ on $W$, so their ordinary-style traces are both $2$ in $k$. The invariant line $ke_1\subset V$ and its quotient are both trivial, so $V$ and $W$ also have the same semisimplification. The only $p$-regular element of $C_p$ is the identity, where both Brauer characters, when defined through a splitting system, take the value $2$. These conclusions follow directly from the matrices and require no splitting-system hypothesis on $k$. [step 1.1, algebra]
 
-3.1 Thus the character data do not recover the full modular representation, only its semisimplification. The statement is false. [step 1.1, step 2.1] ∎
+3.1 Thus ordinary-style character data do not recover the full modular representation; even Brauer characters cannot distinguish these two modules. The statement is false. [step 1.1, step 2.1] ∎

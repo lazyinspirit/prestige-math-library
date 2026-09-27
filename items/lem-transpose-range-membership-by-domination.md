@@ -4,30 +4,35 @@ kind: lemma
 title: "Membership in the transpose range by an operator estimate"
 status: published
 origin: pipeline
-deps: ["def-transpose-of-a-bounded-operator", "thm-norm-preserving-extension-from-any-subspace"]
+deps: [def-axiom-of-choice, "def-transpose-of-a-bounded-operator", "thm-norm-preserving-extension-from-any-subspace"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Lemma 4.15, pp.175–176"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
 proof_strategy: "Define h(Tx)=f(x); the bound proves independence of x and boundedness on ran T, even if that range is not closed. HB extends h to Y."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded linear between normed spaces and $f\in X^*$. Then $$f\in\operatorname{ran}T^*\quad\Longleftrightarrow\quad\exists C\ge0\ \forall x\in X:\ |f(x)|\le C\|Tx\|.$$ For any such $C$, a representing $g\in Y^*$ can be chosen with $\|g\|\le C$.
+Assume the Axiom of Choice. Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded linear between normed spaces and $f\in X^*$. Then $$f\in\operatorname{ran}T^*\quad\Longleftrightarrow\quad\exists C\ge0\ \forall x\in X:\ |f(x)|\le C\|Tx\|.$$ For any such $C$, a representing $g\in Y^*$ can be chosen with $\|g\|\le C$.
 
 ## Facts & Assumptions
 
-**Given:** The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+**Given:** The Axiom of Choice, The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+
+[A1] AC is used through norm-preserving extension [F2] in step 2.1.
 
 [F1] From [[def-transpose-of-a-bounded-operator]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded and linear between normed spaces. Its **transpose**, or Banach adjoint, is $T^*:Y^*\longrightarrow X^*,\qquad (T^*g)(x)=g(Tx).$ The duals are def-dual-space-of-a-normed-space. Composition is bounded by lem-composition-operator-norm-inequality, so this has the displayed codomain. It is linear in $g$ over $\mathbb K$. No complex conjugation is inserted; a Hilbert adjoint uses a separate inner-product identification.
 

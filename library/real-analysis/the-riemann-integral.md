@@ -7,7 +7,8 @@ items: [def-partition-and-refinement, def-darboux-sums,
         lem-integral-elementary-bounds, thm-riemann-criterion,
         def-tagged-partition-and-riemann-sum, thm-darboux-equals-riemann,
         thm-continuous-implies-integrable, thm-monotone-implies-integrable,
-        thm-finitely-many-discontinuities-integrable, thm-lebesgue-criterion,
+        thm-finitely-many-discontinuities-integrable, lem-countable-union-of-compact-content-zero-sets-is-null-in-zf,
+        thm-lebesgue-criterion,
         cor-countably-many-discontinuities-integrable,
         rem-riemann-integral-choice-ledger]
 examples: [fs-bounded-implies-riemann-integrable,
@@ -64,13 +65,13 @@ partition by Cousin's supremum construction, from the completeness of
 $\mathbb{R}$ alone. [[cor-countably-many-discontinuities-integrable]] then
 records the countable case, which costs no choice.
 
-**Choice.** Every item on this page is a theorem of ZF except where countable
-choice is inherited, and it is inherited from exactly two places: the single use
-inside Heine-Cantor, which reaches
+**Choice.** The countable-choice use inside Heine-Cantor is inherited by
 [[thm-continuous-implies-integrable]] and
-[[thm-finitely-many-discontinuities-integrable]], and the single use inside the
-countable union of null sets, which reaches the forward half of
-[[thm-lebesgue-criterion]] and nothing else. [[rem-riemann-integral-choice-ledger]] tabulates the page
+[[thm-finitely-many-discontinuities-integrable]]. Lebesgue's criterion instead
+uses [[lem-countable-union-of-compact-content-zero-sets-is-null-in-zf]]:
+least-coded finite rational covers combine the compact oscillation superlevel
+sets without countable choice. Both directions of that criterion are proved
+in ZF. [[rem-riemann-integral-choice-ledger]] tabulates the page
 item by item and explains the four entries that are easy to get wrong — in
 particular that selecting a tag in each of finitely many subintervals is a
 theorem of ZF, not a choice principle.

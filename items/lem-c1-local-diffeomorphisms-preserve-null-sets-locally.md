@@ -10,14 +10,19 @@ provenance:
 deps: [lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets,
        thm-lipschitz-images-of-null-sets-in-rn-are-null,
        def-diffeomorphism-and-local-diffeomorphism-of-manifolds,
-       def-null-subset-of-a-smooth-manifold]
+       def-null-and-content-zero-in-rn]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-c1-local-diffeomorphisms-preserve-null-sets-locally). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,34 +32,36 @@ sources:
 
 ## Statement
 
-Let $F:M\to N$ be a $C^1$ local diffeomorphism. For every point $p\in M$ there
-is an open neighbourhood $U$ of $p$ such that $F|_U:U\to F(U)$ is a
-diffeomorphism and, for every $A\subseteq U$,
+Let $F:M\to N$ be a $C^1$ local diffeomorphism. For every $p\in M$
+there are coordinate neighbourhoods $(U,\varphi)$ of $p$ and
+$(V,\psi)$ of $F(p)$ such that $F|_U:U\to V$ is a diffeomorphism and,
+for every $A\subseteq U$, using the closed-cube nullity of [[def-null-and-content-zero-in-rn]],
 
-$$ A\text{ is null in }M\iff F(A)\text{ is null in }N. $$
+$$\varphi(A)\text{ is null in }\mathbb R^n \iff \psi(F(A))\text{ is null in }\mathbb R^n.$$
+
+For $n=0$, “null” means empty.
 
 ## Facts & Assumptions
 
-**Given:** A $C^1$ local diffeomorphism $F:M\to N$ and a point $p\in M$.
+**Given:** A $C^1$ local diffeomorphism $F:M\to N$ and $p\in M$.
 
 [F1] A local diffeomorphism restricts near $p$ to a diffeomorphism onto an open neighbourhood of $F(p)$ ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]).
 
-[F2] On a $0$-manifold, the only null subset is the empty set ([[def-null-subset-of-a-smooth-manifold]]).
+[F2] In dimension zero, the nullity convention in the Statement means emptiness.
 
-[L1] On compact coordinate pieces, a $C^1$ map is locally Lipschitz ([[lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets]]).
+[L1] A $C^1$ coordinate map has bounded derivative on a compact cube lying in its domain, hence is Lipschitz there ([[lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets]]).
 
-[L2] Lipschitz maps send Euclidean null sets to Euclidean null sets ([[thm-lipschitz-images-of-null-sets-in-rn-are-null]]).
+[L2] Global Lipschitz maps of $\mathbb R^n$ preserve closed-cube null sets ([[thm-lipschitz-images-of-null-sets-in-rn-are-null]]).
+
 
 ## Proof
+
 **Proof technique:** direct.
 
-1.1 By [F1], shrink around $p$ to a neighbourhood $U_0$ on which $F$ is a diffeomorphism onto an open set $V_0$. [F1, given, choose]
+1.1 By [F1], shrink around $p$ so that $F|_U:U\to V$ is a diffeomorphism and both $U$ and $V$ are chart domains. The coordinate map $T=\psi\circ F\circ\varphi^{-1}$ is a $C^1$ diffeomorphism between open subsets $D=\varphi(U)$ and $E=\psi(V)$ of $\mathbb R^n$. [F1, given, choose]
 
-2.1 If $\dim M=0$, then $U_0$ and $V_0$ are $0$-manifolds. [F2, step 1.1, cases, algebra]
-By [F2], a subset of $U_0$ is null exactly when it is empty, and the same holds in $V_0$; because $F|_{U_0}$ is bijective, $$ A\subseteq U_0\text{ is null }\iff A=\varnothing \iff F(A)=\varnothing \iff F(A)\text{ is null}. $$ So the claim is proved in this case. Assume henceforth that $\dim M>0$, and let $A\subseteq U_0$. [F2, step 1.1, cases, algebra]
+2.1 If $n=0$, $T$ is bijective between subsets of the one-point space $\mathbb R^0$, so a set is empty exactly when its image is empty. This gives the claim in dimension zero. [F2, step 1.1]
 
-3.1 Cover $A$ by relatively compact source-chart neighbourhoods $W\subseteq U_0$ whose images lie in target charts on $V_0$. [L1, L2, step 2.1, algebra]
-By [L1], the coordinate representatives of $F|_W$ and $(F|_W)^{-1}$ are Lipschitz on smaller compact closures. Therefore [L2] implies $$ B\subseteq W\text{ is null }\iff F(B)\subseteq F(W)\text{ is null} $$ for each such piece $B$. [L1, L2, step 2.1, algebra]
+2.2 Suppose $n>0$. Choose a closed coordinate cube $Q\subseteq D$ around $\varphi(p)$ and a closed coordinate cube $R\subseteq E$ around $T(\varphi(p))$, both with interiors containing those points. Shrink $U$ to the preimage of $\operatorname{int}Q\cap T^{-1}(\operatorname{int}R)$ and set $V=F(U)$. The continuous derivatives of $T$ on $Q$ and $T^{-1}$ on $R$ are bounded; the mean-value inequality on these convex cubes makes the restrictions Lipschitz, as in [L1]. [L1, step 1.1, construct]
 
-4.1 The manifold definition of nullity checks exactly these chart images, so [step 3.1]
-the equivalence in step 3.1 globalizes over $U:=U_0$. Hence $A$ is null in $M$ exactly when $F(A)$ is null in $N$. [step 3.1] ∎
+3.1 The coordinatewise clamps $r_Q:\mathbb R^n\to Q$ and $r_R:\mathbb R^n\to R$ are $1$-Lipschitz. Thus $T\circ r_Q$ and $T^{-1}\circ r_R$ are global Lipschitz maps; the first agrees with $T$ on $\varphi(U)\subseteq Q$, and the second agrees with $T^{-1}$ on $\psi(V)\subseteq R$. Apply [L2] to each. For every $B\subseteq\varphi(U)$, $B$ is null if and only if $T(B)$ is null. Taking $B=\varphi(A)$ and including step 2.1 proves the claim. [L2, step 2.1, step 2.2] ∎

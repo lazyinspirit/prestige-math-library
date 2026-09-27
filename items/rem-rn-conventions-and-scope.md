@@ -12,20 +12,12 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-10
-    scope: published-audit-targeted
-    context_sha256: 67135d00762e11f79bd1855a2f1545ff2a1a054c86b09cd5ca17c79d2649dfb3
-    item_sha256: 65dbd0009d77d917801aff19b4781271c8ac4eacc9c568db99f6ebc812902963
   verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-10
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -129,10 +121,10 @@ denies.
   second silent meaning of "linear map".
 - **Inner product spaces and orthogonality.** [[def-euclidean-inner-product]]
   defines the concrete Euclidean form on $\mathbb{R}^{n}$ and claims nothing
-  about abstract inner product spaces: orthonormal bases, Gram-Schmidt,
-  orthogonal projection, orthogonal complements of arbitrary subspaces and the
-  decomposition $V = W \oplus W^{\perp}$ all belong to a page earlier in the plan
-  order that is not yet built. **In particular nothing on this page asserts that
+  about abstract inner product spaces. Orthonormal bases, Gram-Schmidt,
+  orthogonal projection, orthogonal complements and finite-dimensional
+  orthogonal decomposition are now developed on a separate published linear
+  algebra page. **In particular nothing on this page asserts that
   $\mathbb{R}^{n}$ is the direct sum of $\Gamma$ and $\Gamma^{\perp}$**
   ([[def-the-space-of-summing-directions]]).
 - **Uniform convergence, the total derivative, and integration over subsets of
@@ -158,12 +150,11 @@ lemma in full. **The reverse inclusion is not proved on this page, and this page
 asserts nothing about it in either direction, for any $n \ge 2$.** No
 recorded-not-proved item has been created for it either.
 
-The obstruction is machinery and not effort. Every route to the reverse inclusion
-known to the author of this page reduces first to the case $\Gamma = \{0\}$ by an
-orthogonal projection, which needs the orthogonal decomposition named in §4, and
-then runs a separation argument for convex sets in $\mathbb{R}^{n}$, which
-exists nowhere in this library and is owned by no planned page. When both exist,
-the discharge is an **addition to this page**, not a new page.
+The reverse inclusion still needs an argument beyond the containment proof on
+this page. Orthogonal decomposition and convex separation are now available
+elsewhere in the library, but their existence alone does not establish the
+rearrangement construction. Any discharge here must supply that construction
+and its convergence estimates explicitly.
 
 The published [[rem-rearrangement-in-higher-dimensions]] raised this question on
 the series page and declined to state what the literature answers; this page

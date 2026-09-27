@@ -10,8 +10,13 @@ provenance:
 deps: [def-measure-with-density, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-monotone-convergence-for-the-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-integration-against-a-density). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,17 +47,6 @@ $$\int g\,d(f\,d\mu)=\int gf\,d\mu.$$
 
 **Proof technique:** direct.
 
-1.1 Suppose first that $g=\sum_{j=1}^m c_j\chi_{E_j}$ is a simple representation, so the sets $E_j$ are pairwise disjoint. Applying [L5] on the measure space $(X,\mathcal A,f\,d\mu)$ and then using [L1], one gets. [L1, L2, L5, given, algebra]
+1.1 Suppose first that $g=\sum_{j=1}^m c_j\chi_{E_j}$ is simple with pairwise disjoint measurable $E_j$. By [L5] for the measure $f\,d\mu$ and then [L1], $\int g\,d(f\,d\mu)=\sum_jc_j(f\,d\mu)(E_j)=\sum_jc_j\int_{E_j}f\,d\mu$. Also $gf=\sum_jc_jf\chi_{E_j}$ has pairwise disjoint summand supports, so [L2] and [L5] give $\int gf\,d\mu=\sum_jc_j\int_{E_j}f\,d\mu$. Hence $\int g\,d(f\,d\mu)=\int gf\,d\mu$. [L1, L2, L5, given, algebra]
 
-$$\int g\,d(f\,d\mu)=\sum_{j=1}^m c_j(f\,d\mu)(E_j) =\sum_{j=1}^m c_j\int_{E_j}f\,d\mu.$$
-
-Also $gf=\sum_{j=1}^m c_jf\chi_{E_j}$, and the summands have pairwise disjoint supports. Therefore [L2] and [L5] give
-
-$$\int gf\,d\mu=\sum_{j=1}^m\int c_jf\chi_{E_j}\,d\mu =\sum_{j=1}^m c_j\int_{E_j}f\,d\mu.$$
-
-Hence $\int g\,d(f\,d\mu)=\int gf\,d\mu$.
-
-
-2.1 For general measurable $g\ge0$, choose simple $g_n\uparrow g$ by [L3]. Then $g_nf\uparrow gf$ pointwise. Applying [L4] twice and step 1.1 to each $g_n$ yields. [step 1.1, L3, L4] ∎
-
-$$\int g\,d(f\,d\mu)=\lim_n\int g_n\,d(f\,d\mu) =\lim_n\int g_nf\,d\mu =\int gf\,d\mu.$$
+2.1 For general measurable $g\ge0$, choose simple $g_n\uparrow g$ by [L3]. Then $g_nf\uparrow gf$ pointwise (using $0\cdot\infty=0$). Applying [L4] to both measures and step 1.1 to each $g_n$ yields $\int g\,d(f\,d\mu)=\lim_n\int g_n\,d(f\,d\mu)=\lim_n\int g_nf\,d\mu=\int gf\,d\mu$. [step 1.1, L3, L4] ∎

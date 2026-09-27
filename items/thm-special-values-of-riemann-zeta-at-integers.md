@@ -7,24 +7,22 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-riemann-zeta-meromorphic-continuation, thm-riemann-zeta-functional-equation, def-bernoulli-numbers-by-their-generating-function, thm-mittag-leffler-expansion-of-pi-cotangent, thm-trivial-zeros-and-critical-strip]
+deps: [def-countable-choice, thm-riemann-zeta-meromorphic-continuation, thm-riemann-zeta-functional-equation, def-bernoulli-numbers-by-their-generating-function, thm-complex-exponential-addition-and-real-extension, def-complex-trigonometric-and-hyperbolic-functions, def-tangent-cotangent-secant-cosecant, thm-mittag-leffler-expansion-of-pi-cotangent, thm-trivial-zeros-and-critical-strip]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   references:
     - title: "K. Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 11 §3"
       url: "https://mathweb.tifr.res.in/Documents/Publications/Lectures/01.pdf"
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis, Ch. 6 §2.1"
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
+verification:
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For every integer $m\ge1$,
 
@@ -36,7 +34,7 @@ $$\zeta(0)=-\frac12.$$
 
 ## Facts & Assumptions
 
-**Given:** The Bernoulli generating function and the functional equation.
+**Given:** Countable choice, the Bernoulli generating function and the functional equation.
 
 [L1] Bernoulli numbers satisfy $$\frac{t}{e^t-1}=\sum_{n\ge0}\frac{B_n}{n!}t^n,$$ with $B_1=-1/2$ ([[def-bernoulli-numbers-by-their-generating-function]]).
 
@@ -48,6 +46,10 @@ $$\zeta(0)=-\frac12.$$
 
 [L5] The negative even integers are exactly the trivial zeros of zeta ([[thm-trivial-zeros-and-critical-strip]]).
 
+[L6] The complex exponential obeys $e^{u+v}=e^u e^v$ and $e^0=1$, so $e^u e^{-u}=1$ and $e^{-u}=1/e^u$ ([[thm-complex-exponential-addition-and-real-extension]], [[def-bernoulli-numbers-by-their-generating-function]]).
+
+[L7] Complex sine and cosine are $(e^{iu}-e^{-iu})/(2i)$ and $(e^{iu}+e^{-iu})/2$, and $\cot u=\cos u/\sin u$ where $\sin u\ne0$ ([[def-complex-trigonometric-and-hyperbolic-functions]], [[def-tangent-cotangent-secant-cosecant]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -56,6 +58,6 @@ $$\zeta(0)=-\frac12.$$
 
 1.2 Let $s\to0$ in [L3]. One has $\sin(\pi s/2)\sim \pi s/2$, $\Gamma(1-s)\to1$, and [L4] gives $\zeta(1-s)\sim -1/s$. Therefore $$\zeta(0)=\lim_{s\to0}2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)=-\frac12.$$ Also [L5] already gives $\zeta(-2m)=0$ for $m\ge1$. [L3, L4, L5, algebra]
 
-2.1 From [L1], $$\frac{t}{e^t-1}+\frac{t}{2}=\sum_{n\ge0}\frac{B_n}{n!}t^n+\frac{t}{2}$$ is even, so $B_{2m+1}=0$ for every $m\ge1$. Setting $t=2\pi i z$ and simplifying yields $$\pi z\cot(\pi z)=\sum_{m\ge0}\frac{B_{2m}(2\pi i z)^{2m}}{(2m)!}=1+\sum_{m\ge1}(-1)^m\frac{B_{2m}(2\pi)^{2m}}{(2m)!}z^{2m}.$$ Comparing coefficients with step 1.1 gives $$\zeta(2m)=(-1)^{m+1}\frac{B_{2m}(2\pi)^{2m}}{2(2m)!}\qquad(m\ge1).$$ [step 1.1, L1, algebra]
+2.1 Put $F(t)=t/(e^t-1)+t/2$ using the removable value at $t=0$ from [L1]. For nonzero $t$ near zero, [L6] gives $$F(-t)=\frac{-t}{e^{-t}-1}-\frac t2=\frac{t e^t}{e^t-1}-\frac t2=F(t).$$ Since $F$ is analytic at zero, it is even there too; comparing its power series from [L1] shows $B_{2m+1}=0$ for every $m\ge1$, using $B_1=-1/2$. For $t=2\pi i z$ and nonzero $z$ near zero, [L6] and [L7] give $$\pi z\cot(\pi z)=\frac t2\frac{e^t+1}{e^t-1}=\frac{t}{e^t-1}+\frac t2=F(t).$$ Both sides extend analytically to $z=0$, so their Taylor coefficients agree. Thus $$\pi z\cot(\pi z)=\sum_{m\ge0}\frac{B_{2m}(2\pi i z)^{2m}}{(2m)!}=1+\sum_{m\ge1}(-1)^m\frac{B_{2m}(2\pi)^{2m}}{(2m)!}z^{2m}.$$ Comparing coefficients with step 1.1 gives $$\zeta(2m)=(-1)^{m+1}\frac{B_{2m}(2\pi)^{2m}}{2(2m)!}\qquad(m\ge1).$$ [step 1.1, L1, L6, L7, algebra]
 
 3.1 For $m\ge1$, substitute $s=1-2m$ into [L3]. Since $\sin(\pi(1-2m)/2)=(-1)^m$ and $\Gamma(2m)=(2m-1)!$, step 2.1 yields $$\zeta(1-2m)=2^{1-2m}\pi^{-2m}(-1)^m(2m-1)!\,\zeta(2m)=-\frac{B_{2m}}{2m}.$$ Together with step 1.2, this gives all the displayed special values. [step 2.1, step 1.2, L3, algebra] ∎

@@ -3,14 +3,19 @@ id: lem-local-logarithmic-derivative-zeta
 kind: lemma
 title: "A local formula for the logarithmic derivative of zeta"
 status: published
-verification:
-  audited: 2026-09-07
 origin: pipeline
-deps: [def-riemann-zeta-zero-counting, thm-hadamard-product-for-riemann-xi, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, def-riemann-xi-function, thm-stirling-formula-gamma, thm-von-mangoldt-logarithmic-derivative-zeta]
+deps: [def-riemann-zeta-zero-counting, thm-hadamard-product-for-riemann-xi, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, def-riemann-xi-function, thm-stirling-formula-gamma, thm-von-mangoldt-logarithmic-derivative-zeta, def-countable-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Kiran S. Kedlaya, Analytic Number Theory, Lemma 10.4"
@@ -20,6 +25,8 @@ sources:
 ---
 
 ## Statement
+
+Assume countable choice.
 
 Uniformly for $-1\le\sigma\le2$ and $s=\sigma+it\ne1$ whose ordinate is not
 that of a nontrivial zero,
@@ -35,7 +42,7 @@ into the error, giving the usual large-height local formula.
 
 ## Proof
 
-**Given:** $-1\le\sigma\le2$, $s\ne1$, and $t$ away from the zero ordinates.
+**Given:** Countable choice, $-1\le\sigma\le2$, $s\ne1$, and $t$ away from the zero ordinates.
 
 1.1 Put $s_0=2+it$. Logarithmic differentiation of the Hadamard product and subtraction at $s_0$ give $$\frac{\xi'}{\xi}(s)-\frac{\xi'}{\xi}(s_0)=\sum_\rho\left(\frac1{s-\rho}-\frac1{s_0-\rho}\right).$$ The constants and genus-one correction terms cancel; the difference series converges absolutely, since its terms are $O_s(|\rho|^{-2})$ for large $|\rho|$. [given, algebra]
 

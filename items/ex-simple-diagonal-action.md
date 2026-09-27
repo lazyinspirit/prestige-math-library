@@ -7,20 +7,22 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, thm-onan-scott-classification-of-finite-primitive-groups]
+deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:
     - title: "Leonard H. Soicher, Primitive permutation groups"
       url: "https://web.archive.org/web/20180712185154if_/http://www.maths.qmul.ac.uk:80/~lsoicher/designtheory.org/library/encyc/topics/primitive.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-06-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
@@ -38,7 +40,7 @@ is the basic diagonal-type example.
 
 [A1] In this action the socle is $T \times T$, and the diagonal subgroup identifies the two factors in the stabilizer.
 
-[L1] The diagonal branch of the O'Nan-Scott dictionary is one of the five primitive socle types ([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
+[L1] The diagonal-type definition specifies a primitive coset action of a direct product of isomorphic nonabelian simple groups with diagonal point stabilizer ([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
 
 ## Verification
 

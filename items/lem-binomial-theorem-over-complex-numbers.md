@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
-  precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-receipts.jsonl (lem-binomial-theorem-over-complex-numbers). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,7 +40,7 @@ $$ (z+w)^n=\sum_{k\le n}\iota_{\mathbb C}\!\left(\binom nk\right) z^kw^{n-k}. $$
 
 **Proof technique:** induction.
 
-1.1 For $n=0$ both sides are the empty-sum convention $1$. [base]
+1.1 For $n=0$ the sum has the single index $k=0$. Its term is $\iota_{\mathbb C}(\binom00)z^0w^0=1$, since $\binom00=1$ and both zeroth powers are $1$. The left side is $(z+w)^0=1$ as well. [base]
 
 1.2 Assume the formula at $n$. [ih]
 

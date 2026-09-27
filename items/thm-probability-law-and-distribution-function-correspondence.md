@@ -8,11 +8,16 @@ landmark: true
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-cumulative-distribution-function-of-a-random-variable, def-law-or-distribution-of-a-random-element, lem-law-of-a-random-element-is-a-probability-measure, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, prop-measure-of-a-set-difference, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, prop-measure-monotonicity]
+deps: [def-countable-choice, def-cumulative-distribution-function-of-a-random-variable, def-law-or-distribution-of-a-random-element, lem-law-of-a-random-element-is-a-probability-measure, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, prop-measure-of-a-set-difference, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, prop-measure-monotonicity]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (thm-probability-law-and-distribution-function-correspondence). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "J. R. Norris, Probability and Measure, Section 2.3"
@@ -42,13 +47,13 @@ Assume the Axiom of Countable Choice.
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, a real random variable $X$, its law $\mathbb P_X$, and a function $F$ as in part 2.
+**Given:** Countable Choice ([[def-countable-choice]]), a real random variable $X$, its law $\mathbb P_X$, and a function $F$ as in part 2.
 
 [L1] The law $\mathbb P_X$ is a probability measure on $(\mathbb R,\mathcal B(\mathbb R))$ ([[def-law-or-distribution-of-a-random-element]], [[lem-law-of-a-random-element-is-a-probability-measure]]).
 
 [L2] For measures, monotonicity, set-difference subtraction, continuity from below, and continuity from above are available ([[prop-measure-monotonicity]], [[prop-measure-of-a-set-difference]], [[thm-continuity-from-below-for-measures]], [[thm-continuity-from-above-for-measures]]).
 
-[L3] Assuming Countable Choice, finite-on-compacts Borel measures on $\mathbb R$ correspond to nondecreasing right-continuous functions modulo constants, and the interval increments determine the measure ([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]]).
+[L3] Assuming Countable Choice, finite-on-compacts Borel measures on $\mathbb R$ correspond to nondecreasing right-continuous functions modulo constants, and the interval increments determine the measure ([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]]). Its application in steps 1.3 and 2.1 is the use of Countable Choice here.
 
 ## Proof
 

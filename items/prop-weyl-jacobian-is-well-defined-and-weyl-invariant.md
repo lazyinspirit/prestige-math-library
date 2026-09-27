@@ -5,10 +5,17 @@ title: The Weyl Jacobian is independent and invariant
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-weyl-jacobian-on-a-maximal-torus, def-weyl-group-of-a-compact-connected-lie-group, def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots, def-conjugation-and-the-adjoint-representation-of-a-lie-group]
+deps: [def-weyl-jacobian-on-a-maximal-torus, def-weyl-group-of-a-compact-connected-lie-group, def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots, def-conjugation-and-the-adjoint-representation-of-a-lie-group, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"
@@ -18,11 +25,11 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §6 and VIII §1"
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 The Weyl Jacobian $J(t)=\prod_{\alpha\in\Phi^+}|1-\alpha(t)^{-1}|^2$ of a compact
 connected Lie group $(G,T)$ is independent of the choice of positive system
@@ -31,7 +38,7 @@ $W(G,T)$ on $T$.
 
 ## Facts & Assumptions
 
-**Given:** Assume nothing beyond the standing hypotheses of the definition: $G$ is compact connected with maximal torus $T$, $\Phi(G,T)$ its root system, and $J$ the Weyl Jacobian for a positive system $\Phi^+$.
+**Given:** Assume the Axiom of Choice, as required by [[def-weyl-jacobian-on-a-maximal-torus]], and let $G$ be compact connected with maximal torus $T$, $\Phi(G,T)$ its root system, and $J$ the Weyl Jacobian for a positive system $\Phi^+$.
 
 [L1] A positive system is a set of the form $\Phi^+(v)=\{\alpha\in\Phi:(\alpha,v)>0\}$ for a regular $v$; it satisfies $\Phi=\Phi^+\sqcup\Phi^-$ with $\Phi^-=-\Phi^+$, so for every root $\alpha$ exactly one of $\alpha,-\alpha$ is positive ([[def-positive-system-and-base-of-simple-roots]], [[def-roots-of-a-compact-connected-lie-group]]).
 

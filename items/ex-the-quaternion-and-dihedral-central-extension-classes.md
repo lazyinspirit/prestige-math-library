@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-central-extensions-are-classified-by-h-two-with-trivial-action]
+deps: [def-axiom-of-choice, cor-central-extensions-are-classified-by-h-two-with-trivial-action]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -27,6 +27,8 @@ sources:
 
 ## Example
 
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
+
 The groups $D_8$ and $Q_8$ both fit into central extensions
 
 $$1\to C_2\to E\to C_2\times C_2\to1,$$
@@ -35,9 +37,9 @@ but they determine distinct classes in $H^2(C_2\times C_2,C_2)$.
 
 ## Facts & Assumptions
 
-**Given:** The dihedral group $D_8$ and the quaternion group $Q_8$.
+**Given:** The Axiom of Choice, the dihedral group $D_8$, and the quaternion group $Q_8$.
 
-[L1] Central extensions are classified by $H^2$ with trivial action ([[cor-central-extensions-are-classified-by-h-two-with-trivial-action]]).
+[L1] Under the assumed Axiom of Choice, central extensions are classified by $H^2$ with trivial action ([[cor-central-extensions-are-classified-by-h-two-with-trivial-action]]).
 
 ## Verification
 

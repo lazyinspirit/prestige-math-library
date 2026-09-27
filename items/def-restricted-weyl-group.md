@@ -5,23 +5,28 @@ title: Restricted weyl group
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-maximal-split-abelian-subspace-and-real-rank, def-restricted-root-and-restricted-root-space, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]
+deps: [def-axiom-of-choice, def-maximal-split-abelian-subspace-and-real-rank, def-restricted-root-and-restricted-root-space, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter VI"
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter VI, §5, definition of W(G,A) = N_K(a)/Z_K(a), printed p. 381"
 landmark: false
-verification:
-  audited: 2026-09-22
 ---
 
 ## Definition
 
-Let $\mathfrak g_0$ be a finite-dimensional real semisimple Lie algebra with
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\mathfrak g_0$ be a finite-dimensional real semisimple Lie algebra with
 Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, let $G$
 be a connected semisimple Lie group with finite center and Lie algebra
 $\mathfrak g_0$, let $\Theta$ be a global Cartan involution of $G$ with

@@ -12,13 +12,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -26,6 +19,16 @@ sources:
       url: "https://books.google.com/books/about/Introduction_to_Smooth_Manifolds.html?id=eqfgZtjQceYC"
     - title: "Will J. Merry, Differential Geometry"
       url: "https://www2.math.ethz.ch/will-merry/files/Merry%20-%20Differential%20Geometry%20(2021).pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-10-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
 

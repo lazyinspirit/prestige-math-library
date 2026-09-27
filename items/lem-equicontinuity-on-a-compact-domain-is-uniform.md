@@ -12,8 +12,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -29,7 +33,7 @@ Let $(K,d)$ be a nonempty compact metric space and let $\mathcal F\subseteq C(K,
 ## Facts & Assumptions
 **Given:** A positive real $\varepsilon$ and an equicontinuous family $\mathcal F$ on $K$.
 
-[L1] Equicontinuity at each $a\in K$ gives a radius $r_a>0$ such that $d(x,a)<r_a$ implies $|f(x)-f(a)|<\varepsilon/2$ for every $f\in\mathcal F$ ([[def-equicontinuity-and-boundedness-in-ck]]).
+[L1] For each $a\in K$ there exists some radius $r>0$ such that $d(x,a)<r$ implies $|f(x)-f(a)|<\varepsilon/2$ for every $f\in\mathcal F$ ([[def-equicontinuity-and-boundedness-in-ck]]).
 
 [L2] Compactness means that every open cover has a finite subcover ([[def-metric-compactness]]).
 
@@ -37,8 +41,8 @@ Let $(K,d)$ be a nonempty compact metric space and let $\mathcal F\subseteq C(K,
 
 **Proof technique:** direct.
 
-1.1 The balls $B(a,r_a/2)$ for $a\in K$ cover $K$, so choose finitely many centres $a_0,\ldots,a_N$ whose balls cover $K$. [L1, L2, choose]
+1.1 Form the set of all pairs $(a,r)$ with $a\in K$, $r>0$, and the property in [L1]. The balls $B(a,r/2)$ for these pairs form an open cover of $K$ by [L1]. Compactness gives finitely many such pairs $(a_0,r_0),\ldots,(a_N,r_N)$ whose balls cover $K$. No radius was selected simultaneously for every point of $K$. [L1, L2, construct]
 
-2.1 Let $\delta$ be the least of the finitely many positive radii $r_{a_i}/2$. If $d(x,y)<\delta$, choose $i$ with $x\in B(a_i,r_{a_i}/2)$; then both $x$ and $y$ lie in $B(a_i,r_{a_i})$. [step 1.1, algebra]
+2.1 Let $\delta$ be the least of the finitely many positive radii $r_i/2$. If $d(x,y)<\delta$, choose $i$ with $x\in B(a_i,r_i/2)$; then both $x$ and $y$ lie in $B(a_i,r_i)$. [step 1.1, algebra]
 
 3.1 The two estimates from [L1] and the triangle inequality give $|f(x)-f(y)|<\varepsilon$ for every $f\in\mathcal F$. [step 2.1, L1, algebra] ∎

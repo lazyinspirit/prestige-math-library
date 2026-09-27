@@ -7,7 +7,8 @@ examples: []
 ---
 
 The gauge turns a translated open convex neighbourhood into a real sublinear
-functional.  Hahn--Banach then supplies geometric separation, with real parts
-used throughout over complex scalars.  The later results apply this separation
-to subspace closure, complemented finite-dimensional directions, hyperplanes,
-and the weak/norm closure theorem for convex sets.
+functional. Under the Axiom of Choice, Hahn–Banach supplies geometric
+separation, with real parts used over complex scalars. The later results apply
+separation to subspace closure, complemented finite-dimensional directions,
+and weak/norm closure of convex sets. The closed-hyperplane theorem has a
+separate choice-free proof using the coefficient along one complementary vector.

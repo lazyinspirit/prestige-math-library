@@ -2,7 +2,7 @@
 page: geometric-actions-svarc-milnor-and-growth-examples
 title: "Geometric Actions Svarc Milnor and Growth Examples"
 status: published
-items: []
+items: [rem-every-subexponential-growth-group-has-polynomial-growth]
 examples: [ex-integers-acting-geometrically-on-the-line,
            ex-z-n-acting-geometrically-on-euclidean-n-space,
            ex-free-groups-acting-geometrically-on-regular-trees,
@@ -13,6 +13,5 @@ examples: [ex-integers-acting-geometrically-on-the-line,
            fs-proper-action-means-every-orbit-is-bounded,
            fs-cobounded-and-cocompact-are-unconditionally-identical,
            fs-growth-function-is-independent-of-the-generating-set-pointwise,
-           fs-every-subexponential-growth-group-has-polynomial-growth,
            fs-gromovs-polynomial-growth-theorem-is-proved-on-this-page]
 ---

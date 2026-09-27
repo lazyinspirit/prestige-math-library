@@ -10,8 +10,13 @@ provenance:
 deps: [thm-hyperbolic-groups-admit-finite-dehn-presentations]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (cor-hyperbolic-groups-have-solvable-word-problem). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -35,6 +40,6 @@ Every hyperbolic group has solvable word problem.
 
 **Proof technique:** direct.
 
-1.1 Starting from any input word $w$, repeatedly apply the replacement from [A1] whenever [L1] finds a long relator half. Because length strictly decreases, the process terminates after finitely many steps. [L1, A1]
+1.1 Fix the finite alphabet $S^{\pm1}$ and finite relator list $R$ supplied by [L1]. Freely reduce the input word. At each stage enumerate its finitely many subwords and the finitely many cyclic conjugates of relators in $R^{\pm1}$; if a subword is longer than half of one of those relators, replace it by the inverse of the complementary piece and freely reduce again. Choose the first match in a fixed finite ordering. Each replacement preserves the group element and strictly decreases length, so this effective procedure terminates. [L1, A1, construct]
 
-2.1 If the algorithm stops at the empty word, then $w=1$ in $G$. Conversely, if $w=1$ in $G$ and the current reduced word is nonempty, [L1] says that another shortening move exists, so the procedure cannot terminate early. Thus the algorithm decides whether $w$ represents the identity. [L1, step 1.1] ∎ 
+2.1 If the algorithm stops at the empty word, then $w=1$ in $G$. Conversely, if $w=1$ in $G$ and the current freely reduced word is nonempty, [L1] supplies another enumerated shortening move, so the procedure cannot stop there. Thus it decides whether $w$ represents the identity. [L1, step 1.1] ∎

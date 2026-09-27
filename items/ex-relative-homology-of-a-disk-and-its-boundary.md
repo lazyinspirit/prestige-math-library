@@ -9,15 +9,21 @@ provenance:
   proof: ai-altered
 deps: [thm-long-exact-sequence-of-a-pair-in-singular-homology, def-relative-homology-connecting-homomorphism-on-cycles, cor-homology-of-spheres]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Example 2.17"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
 pipeline_run: frontier-31a
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-09-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example

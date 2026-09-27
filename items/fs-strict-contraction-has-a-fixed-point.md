@@ -10,9 +10,9 @@ provenance:
 deps: [thm-banach-fixed-point, def-lipschitz-holder-contraction, def-complete-metric-space,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
        thm-complete-subspace-iff-closed, lem-of-inverse-positive,
-       thm-euclidean-space-complete, def-interval, thm-metric-sequential-closure,
-       lem-limit-preserves-order, def-metric-space, lem-of-abs-value, lem-of-sign-rules,
-       def-metric-convergence, def-metric-topology, def-metric-uniform-continuity]
+       thm-euclidean-space-complete, def-interval,
+       def-metric-space, lem-of-abs-value, lem-of-sign-rules,
+       def-metric-topology, def-metric-uniform-continuity]
 justified_by: []
 forward_refs: [cex-strict-contraction-without-a-fixed-point]
 aliases: []
@@ -20,12 +20,12 @@ landmark: true
 short: "FALSE: strict contractions have fixed points"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -62,9 +62,7 @@ two hypotheses is exactly what this item is about.
 
 [L2] $\mathbb{R}$ with the usual metric is complete ([[thm-euclidean-space-complete]]).
 
-[L3] A closed subset of a complete metric space is complete, and a subset is closed exactly when it is sequentially closed ([[thm-complete-subspace-iff-closed]], [[thm-metric-sequential-closure]], [[def-metric-topology]], [[def-metric-convergence]]).
-
-[L4] Limits of reals preserve non-strict inequalities ([[lem-limit-preserves-order]]).
+[L3] A closed subset of a complete metric space is complete without a choice assumption ([[thm-complete-subspace-iff-closed]], claim 2); a set is closed when its complement is open ([[def-metric-topology]]).
 
 [L5] $a > 0$ gives $a^{-1} > 0$, and a product of positives is positive; multiplying an inequality by a positive preserves it ([[lem-of-inverse-positive]], [[lem-of-sign-rules]]).
 
@@ -74,7 +72,7 @@ two hypotheses is exactly what this item is about.
 
 **Proof technique:** direct.
 
-1.1 $X$ is nonempty, since $1 \in X$; and $X$ is sequentially closed in $\mathbb{R}$, because a sequence in $X$ converging to a real $p$ satisfies $x_k \ge 1$ for every $k$ and hence $p \ge 1$, so $p \in X$. [L1, L4]
+1.1 $X$ is nonempty, since $1\in X$. Its complement is open: for each $p<1$, the ball $B(p,(1-p)/2)$ lies in $(-\infty,1)$. Thus $X$ is closed in $\mathbb R$. [L1, L3, given]
 
 1.2 $f$ maps $X$ into $X$: for $x \ge 1$ one has $1/x > 0$, so $f(x) = x + 1/x > x \ge 1$. [L5]
 

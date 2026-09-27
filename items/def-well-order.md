@@ -9,22 +9,16 @@ provenance:
   proof: not-applicable
 deps: [def-partial-order, def-chain, thm-well-ordering-principle, thm-nat-linear-order]
 justified_by: []
-external_refs: [rem-cohen-first-model]
 aliases: [def-well-ordered-set, def-well-ordering]
 landmark: false
 short: "total order in which every nonempty subset has a least element"
 verification:
-  precheck: n/a
   verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -90,27 +84,5 @@ $x = y)$, and we write $(W, <)$ or $(W, \le)$ as convenient.
   Every one element set carries exactly one.
 - A well-order admits no infinite strictly decreasing sequence
   $x_0 > x_1 > x_2 > \cdots$, since the set of its terms would have no least
-  element. That direction is a theorem of ZF and is used freely here. The
-  **converse**, that a total order with no infinite strictly decreasing sequence
-  is a well-order, is a different matter: the natural argument takes a nonempty
-  $S$ with no least element and assembles a decreasing sequence inside it by
-  choosing each term below the previous one, which is exactly the principle of
-  **dependent choice** (DC), described in [[def-countable-choice]]. DC is not a
-  theorem of ZF **unless ZF is inconsistent**; that much is recorded in the
-  ledger ([[rem-choice-ledger]]), which lists DC among the principles not
-  provable in ZF. Granted the consistency of ZF, the converse above is likewise
-  unprovable in ZF, and this is a *separate* statement that the ledger does not
-  record. The witness for it that the library does record is Cohen's first model
-  ([[rem-cohen-first-model]]), which contains an infinite set
-  $A \subseteq \mathbb{R}$ with no countably infinite subset. Order $A$ by the
-  order it inherits from $\mathbb{R}$: a strictly decreasing sequence in $A$
-  would be an injection $\mathbb{N} \to A$, so there is none, while $A$ is not
-  well ordered, since a well-ordered infinite set is order isomorphic to an
-  ordinal at least $\omega$ ([[thm-mostowski-collapse]]) and so does have a
-  countably infinite subset. Both statements are external metamathematical
-  results, established by forcing and permutation models; they are quoted from
-  the references below, and neither is proved anywhere in this library, which
-  contains neither technique. Nothing on this page depends on any of it: the
-  library takes the least element formulation as the definition and never uses
-  the descending sequence characterisation, precisely so that no result here
-  inherits that cost.
+  element. This direction follows directly from the definition; no converse is
+  used here.

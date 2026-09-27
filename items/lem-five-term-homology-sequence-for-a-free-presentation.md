@@ -4,7 +4,7 @@ kind: lemma
 title: "Low-degree sequence of a free presentation"
 status: published
 origin: pipeline
-deps: [def-free-presentation-kernel-data, def-group-homology-as-a-derived-functor]
+deps: [def-free-presentation-kernel-data, def-group-homology-as-a-derived-functor, thm-free-presentation-homology-five-term-sequence, def-dependent-choice]
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -15,31 +15,32 @@ sources:
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 ---
 
 ## Statement
 
-For an exact sequence $1\to R\to F\to G\to1$ with $F$ free, there is an
+Assume the Axiom of Dependent Choice and supplied projective-resolution data for the group-homology construction. For an exact sequence $1\to R\to F\to G\to1$ with $F$ free, there is an
 exact sequence
 
 $$0\to H_2(G;\mathbb Z)\to R/[F,R]\to F_{\mathrm{ab}}\to G_{\mathrm{ab}}\to0.$$
 
 ## Facts & Assumptions
 
-**Given:** Let $1\to R\to F\to G\to1$ be a free presentation.
+**Given:** Dependent choice, the supplied group-homology resolution data, and a free presentation $1\to R\to F\to G\to1$.
 
-[L1] The Lyndon--Hochschild--Serre low-degree homology sequence for this extension is $H_2(F;\mathbb Z)\to H_2(G;\mathbb Z)\to R/[F,R]\to F_{\mathrm{ab}} \to G_{\mathrm{ab}}\to0$.
+[L1] Under the stated conventions, the free-presentation homology five-term theorem supplies the natural exact sequence $0\to H_2(G;\mathbb Z)\to R/[F,R]\to F_{\mathrm{ab}}\to G_{\mathrm{ab}}\to0$ ([[thm-free-presentation-homology-five-term-sequence]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The Lyndon--Hochschild--Serre low-degree homology sequence for this extension is $H_2(F;\mathbb Z)\to H_2(G;\mathbb Z)\to R/[F,R]\to F_{\mathrm{ab}} \to G_{\mathrm{ab}}\to0$.  This is the five-term sequence recorded in the cited source. [L1, given]
+1.1 The hypotheses and group-homology conventions are exactly those of [L1]. Its first arrow is the free-presentation transgression, and its remaining arrows come from the inclusion $R\hookrightarrow F$ and quotient $F\twoheadrightarrow G$. [L1, given]
 
-2.1 A free group has zero second integral homology, so the first map has zero source and exactness gives the displayed sequence beginning with $0$. [step 1.1, algebra] ∎
+2.1 The exactness and initial injection asserted by [L1] therefore give the displayed sequence under the retained dependent-choice and resolution hypotheses. [L1, step 1.1] ∎

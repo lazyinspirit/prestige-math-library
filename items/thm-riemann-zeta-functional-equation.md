@@ -7,20 +7,29 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-completed-riemann-zeta-functional-equation, thm-euler-reflection-formula, thm-legendre-duplication-formula]
+deps: [def-countable-choice, thm-completed-riemann-zeta-functional-equation, thm-euler-reflection-formula, thm-legendre-duplication-formula]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   references:
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis, Ch. 6 §2.1"
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
     - title: "K. Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 12 §7"
       url: "https://mathweb.tifr.res.in/Documents/Publications/Lectures/01.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For all $s\in\mathbb C$,
 
@@ -30,7 +39,7 @@ as an identity of meromorphic functions.
 
 ## Facts & Assumptions
 
-**Given:** The completed functional equation.
+**Given:** Countable choice and the completed functional equation.
 
 [L1] The completed zeta function satisfies $$\pi^{-s/2}\Gamma(s/2)\zeta(s)=\pi^{-(1-s)/2}\Gamma((1-s)/2)\zeta(1-s)$$ ([[thm-completed-riemann-zeta-functional-equation]]).
 

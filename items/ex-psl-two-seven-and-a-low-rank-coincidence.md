@@ -8,19 +8,19 @@ deps: []
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
-    - title: "Stephen D. Smith, CFSG—A User’s Manual"
+    - title: "Stephen D. Smith, CFSG—A User’s Manual, lecture 1, pp. 17 and 43 n. 6"
       url: https://homepages.math.uic.edu/~smiths/talkv.pdf
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 ---
 
 ## Example
@@ -30,14 +30,14 @@ low-rank convention.
 
 ## Facts & Assumptions
 
-**Given:** Use Smith's Lie-type family table cited above.
+**Given:** Use Smith's Lie-type family table and its rank-one notation cited above.
 
-[L1] Smith's table places $\operatorname{PSL}(2,7)$ in the projective special linear family under its stated low-rank conventions.
+[L1] Smith's table lists type $A_n$ as the linear family $L_{n+1}(q)$, and its rank-one discussion explicitly names $L_2(q)$ as Lie type. In standard notation $L_2(q)=\operatorname{PSL}(2,q)$.
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 In that table $\operatorname{PSL}(2,7)$ occurs in the projective special linear family, with the source's stated low-rank naming conventions. [L1, given]
+1.1 Specializing [L1] to $n=1$ and $q=7$ places $L_2(7)=\operatorname{PSL}(2,7)$ in the linear Lie-type family. [L1, given]
 
 2.1 This is precisely the claimed table-level Lie-type example; no structural construction is being inferred. [step 1.1] ∎

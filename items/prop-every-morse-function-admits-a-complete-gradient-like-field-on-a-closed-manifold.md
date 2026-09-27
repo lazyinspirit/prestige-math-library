@@ -7,15 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [def-downward-gradient-like-vector-field, def-morse-function-and-excellent-morse-function, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]
+deps: [def-countable-choice, def-downward-gradient-like-vector-field, def-morse-function-and-excellent-morse-function, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]
 justified_by: []
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (prop-every-morse-function-admits-a-complete-gradient-like-field-on-a-closed-manifold). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Proposition 13.6"
@@ -24,16 +25,16 @@ sources:
 
 ## Statement
 
-If $M$ is a closed smooth manifold and $f:M\to\mathbb R$ is Morse, then
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). If $M$ is a closed smooth manifold and $f:M\to\mathbb R$ is Morse, then
 $f$ admits a complete downward gradient-like vector field.
 
 ## Facts & Assumptions
 
-**Given:** A closed smooth manifold $M$ and a Morse function $f:M\to\mathbb R$.
+**Given:** $\mathrm{AC}_\omega$, a closed smooth manifold $M$ and a Morse function $f:M\to\mathbb R$.
 
 [F1] $f$ has finitely many critical points ([[cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points]]).
 
-[F2] Every smooth vector field on a compact manifold is complete ([[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]]).
+[F2] Under the stated $\mathrm{AC}_\omega$ premise, every smooth vector field on a compact manifold is complete ([[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]]). Step 3.1 is the exact use of this choice assumption.
 
 [F3] A downward gradient-like field must have strict descent off the critical set and the stated Morse-coordinate model at every critical point ([[def-downward-gradient-like-vector-field]]).
 

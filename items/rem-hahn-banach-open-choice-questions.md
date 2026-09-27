@@ -1,7 +1,7 @@
 ---
 id: rem-hahn-banach-open-choice-questions
 kind: remark
-title: "Two choice-theoretic consequences of Hahn-Banach remain open"
+title: "Two recorded choice-theoretic questions about Hahn-Banach"
 status: published
 origin: session
 provenance:
@@ -12,12 +12,8 @@ deps: [rem-choice-strength-of-hahn-banach,
        rem-hahn-banach-discontinuous-additive-open]
 justified_by: []
 verification:
-  audited: 2026-09-05
+  audited: 2026-09-27
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -30,8 +26,8 @@ sources:
 ## Remark
 
 The established choice ledger for Hahn-Banach is summarized in
-[[rem-choice-strength-of-hahn-banach]]. Two natural next questions are still not
-settled in ZF:
+[[rem-choice-strength-of-hahn-banach]]. Two natural next questions are recorded
+here; their current status is not established here:
 
 - whether Hahn-Banach implies that $\mathbb{R}$ has a Hamel basis over
   $\mathbb{Q}$ ([[rem-hahn-banach-hamel-basis-open]]);

@@ -6,7 +6,7 @@ items: [def-starred-summatory-function, lem-perron-kernel, lem-truncated-perron-
 examples: []
 ---
 
-Symmetric Perron inversion gives half of a coefficient at a jump.  The sharp
+Symmetric Perron inversion gives half of a coefficient at a jump.  Under countable choice, the sharp
 explicit formula therefore concerns $\psi_0$, and its zero sum is finite at a
 chosen, zero-separated height; smoothing is the alternative that supports an
 honestly convergent infinite zero sum.

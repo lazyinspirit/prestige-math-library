@@ -6,6 +6,6 @@ items: [def-measure-concentrated-on-a-measurable-set, def-absolutely-continuous-
 examples: []
 ---
 
-This page isolates the scalar Radon-Nikodym and Lebesgue-decomposition package in the split the measure-theory design requires: existence of the decomposition, uniqueness of the decomposition, and existence plus almost-everywhere uniqueness of the density are separate items because later pages use them separately.
+This page isolates the scalar Radon-Nikodym and Lebesgue-decomposition package in the split the measure-theory design requires: existence of the decomposition, uniqueness of the decomposition, and existence plus almost-everywhere uniqueness of the density are separate items because later pages use them separately. Existence claims retain their stated choice hypotheses, including the Axiom of Choice for complex densities.
 
 The derivative calculus then follows from that spine: integration against the derivative, additivity, the chain and reciprocal rules, the total-variation formula, the finite $\varepsilon$-$\delta$ criterion, polar decomposition, and the concrete three-part decomposition of finite Borel measures on $\mathbb R$.

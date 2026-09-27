@@ -12,8 +12,13 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -55,4 +60,4 @@ Balls of a word metric are finite if and only if the generating set is finite.
 
 1.1 If $S$ is finite the Cayley graph is locally finite, so balls of its path metric are finite; left invariance moves this to every centre. [F1, L1, L2, L3, L4, L5, L6, L7, L8]
 
-2.1 If $S$ is infinite then the open ball of radius $2$ about the identity contains every element of $S\cup S^{-1}$, because each such element has word length $1$; so that ball is infinite. [F1, L1, L4, L5, L6, step 1.1] ∎
+2.1 If $S$ is infinite then the open ball of radius $2$ about the identity contains every element of $S\cup S^{-1}$: the identity, if present, has word length $0$, and every other element of that union has word length $1$. Since this union contains the infinite set $S$, the ball is infinite. [F1, L1, L5, L6, algebra] ∎

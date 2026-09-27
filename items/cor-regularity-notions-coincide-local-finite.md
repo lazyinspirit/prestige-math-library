@@ -7,15 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-local-koszul-acyclicity-iff-regular-sequence, lem-koszul-regular-implies-h-one-regular, lem-h-one-regular-local-implies-koszul-regular]
+deps: [cor-local-koszul-acyclicity-iff-regular-sequence, lem-koszul-regular-implies-h-one-regular, lem-h-one-regular-local-implies-koszul-regular, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (cor-regularity-notions-coincide-local-finite). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,11 +27,11 @@ pipeline_run: frontier-31a
 
 ## Statement
 
-For finite $M$ over Noetherian local $(R,\mathfrak m)$ and $\mathbf x\subseteq\mathfrak m$ with nonzero terminal quotient, ordinary regularity, $M$-Koszul-regularity, and $M$-$H_1$-regularity are equivalent.
+Assume the Axiom of Choice. For finite $M$ over Noetherian local $(R,\mathfrak m)$ and $\mathbf x\subseteq\mathfrak m$ with nonzero terminal quotient, ordinary regularity, $M$-Koszul-regularity, and $M$-$H_1$-regularity are equivalent.
 
 ## Facts & Assumptions
 
-**Given:** The rings, finite sequences, modules, and local hypotheses stated in the claim. The declared prerequisites used here are [[cor-local-koszul-acyclicity-iff-regular-sequence]], [[lem-koszul-regular-implies-h-one-regular]], [[lem-h-one-regular-local-implies-koszul-regular]].
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and the rings, finite sequences, modules, and local hypotheses stated in the claim. The declared prerequisites used here are [[cor-local-koszul-acyclicity-iff-regular-sequence]], [[lem-koszul-regular-implies-h-one-regular]], and [[lem-h-one-regular-local-implies-koszul-regular]].
 
 ## Proof
 
@@ -38,4 +39,4 @@ For finite $M$ over Noetherian local $(R,\mathfrak m)$ and $\mathbf x\subseteq\m
 
 1.1 Regularity implies Koszul regularity, which implies $H_1$-regularity. [given, algebra]
 
-2.1 The local $H_1$ implication and local acyclicity converse close the cycle. [step 1.1, algebra] ∎
+2.1 Under the assumed AC, the local $H_1$ implication and local acyclicity converse close the cycle. These applications are where Choice enters. [step 1.1, algebra] ∎

@@ -9,26 +9,11 @@ provenance:
   proof: not-applicable
 deps: [def-oriented-integral, def-darboux-integral, thm-darboux-equals-riemann, thm-ftc-first-part, thm-ftc-second-part, thm-substitution, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-integral-test-for-series, thm-second-mean-value-theorem-for-integrals, def-the-integral-function, thm-additivity-over-subintervals]
 external_refs: [rem-ftc-absolutely-continuous, rem-dominated-convergence-theorem]
-forward_refs: [cex-spikes-with-integral-one-converging-pointwise-to-zero, cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable]
+forward_refs: [cex-spikes-with-integral-one-converging-pointwise-to-zero, cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable, thm-dominated-convergence]
 justified_by: []
 aliases: []
 landmark: false
 short: "conventions and scope of this page"
-verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-09
-    scope: published-audit-targeted
-    context_sha256: bae50918b2cd1f67bb94ad0168c7c29f51bcae3af7e6f7473d78b016f34050f9
-    item_sha256: e9d21277062eff21152f0b567aed7ab9d15c13298b8ef70a1c6be4debc48b2f8
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-10
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -37,6 +22,15 @@ sources:
     - title: "Fundamental theorem of calculus (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 This item is the ledger of the page: what "integrable" means here, what the
@@ -93,16 +87,13 @@ discipline is followed in [[thm-second-mean-value-theorem-for-integrals]], where
 the approximating sums are built from the values of the integral function at the
 partition points and no tags are chosen.
 
-Choice does enter through published items that name their own cost, and those
-costs are inherited unchanged, not added to: [[thm-heine-cantor-r]] spends
-countable choice once, and every item here that rests on
-[[thm-continuous-implies-integrable]] or on
-[[thm-composition-with-a-continuous-function]] inherits that single use.
-[[thm-lebesgue-criterion]] spends countable choice once in the half that goes
-from integrability to the discontinuity set being null, and the companion page
-uses that half; that use too is inherited and not new. The choice ledger of the
-previous page, [[rem-riemann-integral-choice-ledger]], records the costs of the
-published items themselves.
+The current [[thm-heine-cantor-r]] proof uses a finite subcover and no countable
+choice. Its uses in [[thm-continuous-implies-integrable]] and
+[[thm-composition-with-a-continuous-function]] add no choice cost.
+The forward half of [[thm-lebesgue-criterion]] now uses the choice-free
+canonical rational-cover lemma, so its uses on this page add no choice cost.
+The choice ledger of the previous page,
+[[rem-riemann-integral-choice-ledger]], records the proofs' premises.
 
 ## 4. Index conventions
 
@@ -142,11 +133,13 @@ currently proves.
   $n$. What repairs it — uniform convergence, or a domination hypothesis — is not
   proved on this page and nothing here asserts any version of it.
 
-## 6. Two results a reader will want next, which this library records but does not prove
+## 6. Two results a reader will want next
 
-Both are recorded elsewhere as results the library does **not** establish, and
-they are mentioned here for orientation only; nothing on this page or its
-companion rests on either.
+Both are mentioned here for orientation only; nothing on this page or its
+companion rests on either. The sharp FTC remains unproved in this library.
+Dominated convergence is proved on the later
+[[thm-dominated-convergence]] page, although the earlier
+[[rem-dominated-convergence-theorem]] page records it without a proof.
 
 - [[rem-ftc-absolutely-continuous]] — the sharp form of the fundamental theorem:
   the absolutely continuous functions are exactly those for which $G'$ exists
@@ -155,6 +148,7 @@ companion rests on either.
   [[cex-an-integrable-function-with-no-primitive]] and
   [[cex-a-function-with-a-primitive-that-is-not-integrable]], are precisely the
   two ways the naive form fails, and that sharp form is the answer.
-- [[rem-dominated-convergence-theorem]] — the theorem that licenses interchanging
-  a limit with an integral under a domination hypothesis, and the natural sequel
-  to the spike counterexample above.
+- [[rem-dominated-convergence-theorem]] — the earlier external record of the
+  theorem that licenses interchanging a limit with an integral under a
+  domination hypothesis, and the natural sequel to the spike counterexample
+  above. The later [[thm-dominated-convergence]] supplies a proof.

@@ -7,11 +7,12 @@ origin: pipeline
 deps: [def-p-elementary-and-p-hyperelementary-finite-groups, lem-p-elementary-groups-are-supersolvable, thm-finite-supersolvable-groups-are-monomial, def-virtual-character-and-character-ring-of-a-finite-group]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: Wen-Wei Li, Yanqi Lake Lectures on Algebra I, Corollary 14.3.2
@@ -29,10 +30,12 @@ Every virtual character of a finite $p$-elementary group is an integral linear c
 
 [F1] The cited prerequisite is [[lem-p-elementary-groups-are-supersolvable]].
 
+[F2] Every irreducible character of a finite supersolvable group is induced from a linear character of a subgroup ([[thm-finite-supersolvable-groups-are-monomial]]).
+
 ## Proof
 
 **Given:** $E$ is $p$-elementary and $\xi\in R(E)$.
 
-1.1 The elementary-group lemma makes $E$ supersolvable, and the monomiality theorem writes every irreducible constituent of $\xi$ as an induction of a linear character. [F1, given]
+1.1 The elementary-group lemma makes $E$ supersolvable, and [F2] writes every irreducible constituent of $\xi$ as an induction of a linear character. [F1, F2, given]
 
-2.1 Add the resulting expressions with the integral multiplicities defining the virtual character $\xi$. ∎ [step 1.1]
+2.1 Add the resulting expressions with the integral multiplicities defining the virtual character $\xi$. [step 1.1] ∎

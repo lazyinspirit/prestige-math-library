@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [thm-onan-scott-classification-of-finite-primitive-groups]
+deps: [rem-onan-scott-classification-of-finite-primitive-groups]
 verification:
   audited: 2026-08-27
   precheck: n/a

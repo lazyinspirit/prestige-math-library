@@ -3,31 +3,36 @@ id: thm-relative-morse-smale-perturbation-of-a-gradient-like-field
 kind: theorem
 title: "Relative Morse--Smale perturbation of a gradient-like field"
 status: published
-verification:
-  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-morse-smale-pair, def-downward-gradient-like-vector-field, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, thm-parametric-transversality, thm-a-regular-level-set-is-an-embedded-submanifold]
+deps: [def-countable-choice, def-morse-smale-pair, def-downward-gradient-like-vector-field, cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points, thm-parametric-transversality, thm-a-regular-level-set-is-an-embedded-submanifold]
 proof_strategy: direct
 sources:
   references:
     - title: "Michèle Audin and Mihai Damian, Morse Theory and Floer Homology, Theorem 2.2.5 and Lemma 2.2.8"
       url: "https://audin.pages.math.unistra.fr/livres/audin-damian-en.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (thm-relative-morse-smale-perturbation-of-a-gradient-like-field). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $M$ be closed, let $f$ be Morse with pairwise distinct critical values, and let $X$ be a downward gradient-like field in its standard normal form on fixed sufficiently small Morse-coordinate balls with pairwise disjoint closures, each contained in a larger such coordinate chart.  There is an arbitrarily $C^1$-close downward gradient-like field $X'$ which equals $X$ on those balls and for which $(f,X')$ is Morse--Smale.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $M$ be closed, let $f$ be Morse with pairwise distinct critical values, and let $X$ be a downward gradient-like field in its standard normal form on fixed sufficiently small Morse-coordinate balls with pairwise disjoint closures, each contained in a larger such coordinate chart.  There is an arbitrarily $C^1$-close downward gradient-like field $X'$ which equals $X$ on those balls and for which $(f,X')$ is Morse--Smale.
 
 ## Facts & Assumptions
 
-**Given:** The stated distinct critical values and fixed small critical balls inside larger Morse charts, with $f=f(c)-|u|^2+|v|^2$ and $X=2u\partial_u-2v\partial_v$. The balls are small enough that the slightly larger charts have disjoint critical-value windows.
+**Given:** $\mathrm{AC}_\omega$ and the stated distinct critical values and fixed small critical balls inside larger Morse charts, with $f=f(c)-|u|^2+|v|^2$ and $X=2u\partial_u-2v\partial_v$. The balls are small enough that the slightly larger charts have disjoint critical-value windows.
 
 [F1] A compact Morse function has finitely many critical points ([[cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points]]).
 
-[F2] Parametric transversality gives transverse slices from a transverse finite-dimensional family ([[thm-parametric-transversality]]).
+[F2] Under $\mathrm{AC}_\omega$, parametric transversality gives transverse slices from a transverse finite-dimensional family ([[thm-parametric-transversality]]).
 
 [F3] Regular levels are embedded hypersurfaces ([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
 

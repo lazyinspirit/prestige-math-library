@@ -4,17 +4,19 @@ kind: lemma
 title: "Derivative estimate proof of one sided harmonic liouville"
 status: published
 origin: pipeline
-deps: [lem-smooth-sphere-data-have-a-harmonic-replacement, lem-derivatives-of-harmonic-functions-are-harmonic, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic]
+deps: [lem-smooth-sphere-data-have-a-harmonic-replacement, lem-derivatives-of-harmonic-functions-are-harmonic, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (lem-derivative-estimate-proof-of-one-sided-harmonic-liouville). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
@@ -27,11 +29,11 @@ sources:
 
 ## Statement
 
-Let $n\ge2$, $R>0$, and $u$ be real harmonic on $B_R(a)$. If $S=\sup_{B_R(a)}|u|<\infty$, then $|\nabla u(a)|\le nS/R$. If $u\ge0$, the stronger estimate $|\nabla u(a)|\le nu(a)/R$ holds without assuming a finite global supremum. Consequently, a nonnegative entire harmonic function has gradient zero everywhere.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $n\ge2$, $R>0$, and $u$ be real harmonic on $B_R(a)$. If $S=\sup_{B_R(a)}|u|<\infty$, then $|\nabla u(a)|\le nS/R$. If $u\ge0$, the stronger estimate $|\nabla u(a)|\le nu(a)/R$ holds without assuming a finite global supremum. Consequently, a nonnegative entire harmonic function has gradient zero everywhere.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
 [F1] Smooth sphere data have a unique smooth harmonic replacement given by the displayed sphere kernel, continuous with those data on the boundary. ([[lem-smooth-sphere-data-have-a-harmonic-replacement]]).
 

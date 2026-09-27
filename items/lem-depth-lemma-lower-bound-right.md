@@ -4,7 +4,7 @@ title: The right lower bound in the Depth Lemma
 kind: lemma
 status: published
 origin: pipeline
-deps: [cor-depth-as-first-nonzero-ext]
+deps: [def-axiom-of-choice, cor-depth-as-first-nonzero-ext]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,23 +14,23 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (lem-depth-lemma-lower-bound-right). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
 
-Under the hypotheses of the Depth Lemma,
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Under the hypotheses of the Depth Lemma,
 $$\operatorname{depth}_R(C)\ge \min\{\operatorname{depth}_R(A)-1,\operatorname{depth}_R(B)\}.$$
 When $\operatorname{depth}_R(A)=0$, the right side is $-1$ and the assertion
 is vacuous.
 
 ## Facts & Assumptions
 
-**Given:** a short exact sequence $0\to A\to B\to C\to0$ of finite modules over a Noetherian local ring $(R,\mathfrak m)$; write $a,b,c$ for their depths.
+**Given:** The Axiom of Choice; a short exact sequence $0\to A\to B\to C\to0$ of finite modules over a Noetherian local ring $(R,\mathfrak m)$; write $a,b,c$ for their depths.
 
 ## Proof
 

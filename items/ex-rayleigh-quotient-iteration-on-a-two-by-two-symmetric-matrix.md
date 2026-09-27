@@ -9,17 +9,18 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence]
+deps: [thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence, def-rayleigh-quotient-iteration]
 aliases: []
 landmark: false
 proof_strategy: computation
 verification:
-  audited: 2026-08-31
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references: []

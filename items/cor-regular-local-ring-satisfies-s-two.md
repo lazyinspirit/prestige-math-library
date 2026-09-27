@@ -2,19 +2,20 @@
 id: "cor-regular-local-ring-satisfies-s-two"
 kind: "corollary"
 title: "regular local ring satisfies s two"
-deps: ["def-serre-r-k-and-s-k-conditions", "cor-localisations-of-regular-local-rings-are-regular", "thm-regular-local-rings-are-domains-and-cohen-macaulay"]
+deps: ["def-axiom-of-choice", "def-serre-r-k-and-s-k-conditions", "cor-localisations-of-regular-local-rings-are-regular", "thm-regular-local-rings-are-domains-and-cohen-macaulay"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "10.157.5, S2 implication"
       url: "https://stacks.math.columbia.edu/tag/031O"
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 status: published
 origin: "pipeline"
@@ -22,6 +23,8 @@ proof_strategy: "Explicit algebraic derivation"
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Every regular local ring satisfies $(S_j)$ for every integer $j\ge0$, in particular $(S_2)$.
 
@@ -37,6 +40,6 @@ Every regular local ring satisfies $(S_j)$ for every integer $j\ge0$, in particu
 
 ## Proof
 
-1.1 At every prime the local ring is regular, hence Cohen–Macaulay. Its depth therefore equals its dimension. [F2, F3]
+1.1 The assumed Axiom of Choice supplies the premise of the localization theorem and the choice assumptions in the Cohen–Macaulay proof. At every prime the local ring is regular, hence Cohen–Macaulay. Its depth therefore equals its dimension. [F2, F3]
 
 2.1 For every $j\ge0$, that dimension is at least its minimum with $j$, which is the $(S_j)$ inequality. The inequality includes $j=0$ and local dimension zero. [F1, step 1.1, algebra] ∎

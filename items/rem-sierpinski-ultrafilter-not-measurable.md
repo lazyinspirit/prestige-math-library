@@ -5,23 +5,25 @@ title: "Sierpiński 1938: no free ultrafilter on $\\mathbb{N}$ is measurable or 
 status: published
 origin: session
 proved_here: false
-deps: [rem-lebesgue-measure-and-integral]
-justified_by: []
-forward_refs: [def-ultrafilter, thm-ultrafilter-lemma, thm-ultrafilter-characterisation, fs-every-ultrafilter-principal]
-aliases: [rem-free-ultrafilter-nonmeasurable]
-landmark: false
-short: "a free ultrafilter on $\\mathbb{N}$ is non-measurable and lacks the Baire property"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
+    date: 2026-09-26
+    scope: "Current recorded statement and cited passages; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
+deps: [rem-lebesgue-measure-and-integral]
+justified_by: []
+forward_refs: [def-ultrafilter, thm-ultrafilter-lemma, thm-ultrafilter-characterisation, fs-every-ultrafilter-principal, thm-kolmogorov-zero-one-law]
+aliases: [rem-free-ultrafilter-nonmeasurable]
+landmark: false
+short: "a free ultrafilter on $\\mathbb{N}$ is non-measurable and lacks the Baire property"
 sources:
   scraped: []
   references:
     - title: "W. Sierpinski, Fonctions additives non completement additives et fonctions non mesurables, Fund. Math. 30 (1938), 96-99"
       url: "https://doi.org/10.4064/fm-30-1-96-99"
+    - title: "A. Karagila, Zornian Functional Analysis, Theorem 30 (Oxtoby's zero-one law)"
+      url: "https://arxiv.org/abs/2010.15632"
     - title: "Property of Baire (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Property_of_Baire"
     - title: "Non-measurable set (Wikipedia)"
@@ -44,8 +46,8 @@ $\{0,1\}^{\mathbb{N}}$, is measurable, and none has the Baire property.**
 The non-measurability is Sierpiński (1938), where it appears as the
 observation that a free ultrafilter yields a non-measurable set and hence a
 non-measurable additive function. The category form, that no such set has the
-Baire property, is the standard analogue and is recorded in the same place in the
-literature on weak choice principles.
+Baire property, follows from Oxtoby's zero-one law as stated in Karagila,
+Theorem 30.
 
 The consequence usually wanted is negative: a free ultrafilter can never be
 exhibited by a construction that produces only measurable sets, or only sets with
@@ -54,11 +56,10 @@ written down.
 
 ## Remarks
 
-- **Not proved in this library.** The statement needs the product measure on
-  $\{0,1\}^{\mathbb N}$, or Lebesgue measure on $[0,1]$, and a specialised
-  topological zero-one law on a Polish space. The library now has the general
-  Baire/category background, but not that zero-one-law argument or the measure
-  and integration track.
+- **Not proved on this page.** The measure-theoretic zero-one law is available
+  in [[thm-kolmogorov-zero-one-law]], but applying it here requires passing from
+  measurable finite-change invariance to the tail setting. The Baire-category
+  analogue on Cantor space is also needed. Neither argument is supplied here.
 
 - **What would prove it.** A free ultrafilter $\mathcal{U}$ is unchanged by
   altering finitely many coordinates, since it contains every cofinite set, so it

@@ -1,7 +1,7 @@
 ---
 id: rem-aleph-one-dowker-space-open
 kind: remark
-title: "Is there a Dowker space of cardinality $\\aleph_1$ in ZFC? (open)"
+title: "Is there a Dowker space of cardinality $\\aleph_1$ in ZFC? (reported open in 2022)"
 status: published
 origin: session
 proved_here: false
@@ -10,12 +10,12 @@ justified_by: []
 forward_refs: []
 aliases: []
 landmark: false
-short: "Open: ZFC gives Dowker spaces, but none of size aleph_1 is known"
+short: "Dowker spaces of size aleph_1: reported open in September 2022"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
-    scope: citations
+    date: 2026-09-23
+    scope: "2022 source statement; no assertion of current open status"
     by: session-audit
 sources:
   scraped: []
@@ -41,21 +41,22 @@ preserved by so much as multiplying with the unit interval.
 **Question.** Does ZFC prove that a Dowker space of cardinality $\aleph_1$
 exists?
 
-**Status: open.** Dowker spaces themselves exist in ZFC, but only three
-constructions are known: M. E. Rudin's of 1971, of cardinality
+**Status reported on 21 September 2022: open.** The introduction of
+Rinot, Shalev and Todorcevic, arXiv:2209.10504v1, reports three known ZFC
+constructions: M. E. Rudin's of 1971, of cardinality
 $\aleph_\omega^{\aleph_0}$; Balogh's of 1996, of cardinality the continuum; and
 the Kojman-Shelah space of 1998, of cardinality $\aleph_{\omega+1}$, obtained
 from pcf theory as a subspace of Rudin's. Small ones exist under extra axioms: a
 Dowker space of cardinality $\aleph_1$ can be built under the continuum
 hypothesis (Juhász, Kunen and Rudin, 1976), from the existence of a Luzin set
 (Todorcevic), and from the guessing principle $\clubsuit$ (de Caux, 1977; note
-$\diamondsuit$ implies $\clubsuit$, so it suffices too). Whether ZFC alone
-suffices is not known; this is Conjecture 4 of Rudin's 1990 problem list, and it
-is still open.
+$\diamondsuit$ implies $\clubsuit$, so it suffices too). The cited introduction reports the ZFC question, Conjecture 4 of Rudin's
+1990 problem list, as still open at that date. This is a dated literature
+report, not a claim that its open status has been verified in 2026.
 
 ## Remarks
 
-**Not proved in this library, and not proved anywhere.** The library now
+**Not proved in this library; reported open in the cited 2022 source.** The library now
 develops the required general-topology background, but it does not build a
 Dowker-space construction or the forcing and independence machinery needed to
 analyse the $\aleph_1$ question.
@@ -63,14 +64,13 @@ analyse the $\aleph_1$ question.
 **What is known, and what would settle it.** Settling it means either a ZFC
 construction of a Dowker space of size $\aleph_1$, or a model of ZFC containing no
 such space. The consistency of the negative side is what the extra-axiom
-constructions do *not* rule out, and it is why the question is genuinely open
-rather than merely unresolved by the current constructions. Work since has gone
-on widening the hypotheses that suffice rather than removing them: Rinot, Shalev
+constructions do *not* rule out, and the cited extra-axiom constructions alone do not decide the ZFC question.
+The 2022 paper widens the hypotheses that suffice: Rinot, Shalev
 and Todorcevic derive the relevant guessing principle at $\aleph_1$ from the
 stick principle, from $\diamondsuit(\mathfrak{b})$, and from the existence of a
 Luzin set. Note the difference in status from the ambient theory: that a ZFC
-Dowker space exists at all was settled in 1971, and the open part is entirely
-about how small it can be forced to be.
+Dowker space exists at all was settled in 1971, and the question reported open in 2022 concerns existence at cardinality
+$\aleph_1$.
 
 **Why it matters here.** The library's separation-axiom material has to record
 that normality is badly behaved: not hereditary, not productive, and not even

@@ -10,8 +10,12 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, def-dirichlet-and-fejer-kernels]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (lem-fourier-partial-sums-are-dirichlet-convolutions). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,14 +27,15 @@ sources:
 
 ## Statement
 
-Let $f$ be a one-period integrable function on $\mathbb R$. Then for every
+Assume the Axiom of Countable Choice. Let $f$ be a one-period integrable
+function on $\mathbb R$. Then for every
 $N \ge 0$ and every $x \in \mathbb R$,
 
 $$S_Nf(x) = \int_0^1 f(x-t)D_N(t)\,dt = (f*D_N)(x).$$
 
 ## Facts & Assumptions
 
-**Given:** A one-period integrable function $f$, an integer $N \ge 0$, and a real $x$.
+**Given:** Countable Choice, a one-period integrable function $f$, an integer $N \ge 0$, and a real $x$.
 
 [L1] Fourier coefficients, Fourier partial sums, and torus convolution are defined exactly as in [[def-period-one-fourier-coefficients-partial-sums-and-convolution]].
 

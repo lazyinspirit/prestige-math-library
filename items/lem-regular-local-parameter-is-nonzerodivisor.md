@@ -2,13 +2,8 @@
 id: "lem-regular-local-parameter-is-nonzerodivisor"
 kind: "lemma"
 title: "regular local parameter is nonzerodivisor"
-deps: ["lem-regular-system-of-parameters-equivalent-basis", "lem-regular-local-domain-induction"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-regular-system-of-parameters-equivalent-basis", "lem-regular-local-domain-induction"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "10.106.2–10.106.3"
@@ -18,12 +13,20 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-In a positive-dimensional regular local ring, every member of a regular system of parameters is a nonzerodivisor.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). In a positive-dimensional regular local ring, every member of a regular system of parameters is a nonzerodivisor.
 
 ## Facts & Assumptions
 

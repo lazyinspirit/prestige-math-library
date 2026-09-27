@@ -4,16 +4,18 @@ title: "Positive smooth densities give Radon volume"
 kind: theorem
 status: published
 origin: pipeline
-deps: ["thm-density-measure-is-independent-of-the-chart-gluing", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "def-radon-measure-on-an-lch-space", "thm-completion-of-a-measure-space", "prop-topological-manifolds-are-locally-compact-and-locally-path-connected", "def-completion-of-a-measure-space"]
+deps: ["def-countable-choice", "thm-density-measure-is-independent-of-the-chart-gluing", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "def-radon-measure-on-an-lch-space", "thm-completion-of-a-measure-space", "prop-topological-manifolds-are-locally-compact-and-locally-path-connected", "def-completion-of-a-measure-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Folland Theorem 7.8 and complete proof p.217; \u00a711.4 pp.361\u2013363"
@@ -23,17 +25,17 @@ proof_strategy: direct
 
 ## Statement
 
-If $r$ is a finite-valued positive smooth density, $\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\overline{\mathcal B(M)},\overline\mu_r)$ and is not identified with its Borel domain.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. If $r$ is a finite-valued positive smooth density, $\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\overline{\mathcal B(M)},\overline\mu_r)$ and is not identified with its Borel domain.
 
 ## Facts & Assumptions
 
-**Given:** Assume $\mathrm{AC}_\omega$. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Positive finite smooth coefficients; local boundedness before regularity.
+**Given:** Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Positive finite smooth coefficients; local boundedness before regularity.
 
 [F1] [[thm-density-measure-is-independent-of-the-chart-gluing]]: Every Borel subset of a chart has measure equal to the integral of its coefficient.
 
 [F2] [[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]]: Bounded measurable Euclidean sets have finite Lebesgue measure.
 
-[F3] [[cor-second-countable-lch-locally-finite-borel-measures-are-regular]]: A compact-finite Borel measure on a second-countable LCH space is regular.
+[F3] [[cor-second-countable-lch-locally-finite-borel-measures-are-regular]]: Under $\mathrm{AC}_\omega$, a compact-finite Borel measure on a second-countable LCH space is regular.
 
 [F4] [[def-radon-measure-on-an-lch-space]]: Radon means compact-finite, outer regular on Borel sets and compact-inner-regular on open sets.
 

@@ -7,13 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-second-order-taylor-expansion-with-the-hessian, thm-algebra-of-derivatives]
+deps: [cor-second-order-taylor-expansion-with-the-hessian, thm-algebra-of-derivatives, thm-derivative-of-exponential]
 aliases: []
 landmark: false
 proof_strategy: calculation
 verification:
-  precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -31,7 +35,7 @@ For $f(x,y)=e^x(1+y+y^2)$, the second-order Taylor polynomial at the origin is $
 
 [L1] The second-order Taylor polynomial is determined by the value, gradient, and Hessian ([[cor-second-order-taylor-expansion-with-the-hessian]]).
 
-[L2] The standard algebra rules compute the displayed derivatives ([[thm-algebra-of-derivatives]]).
+[L2] The exponential is smooth and $(e^x)'=e^x$ ([[thm-derivative-of-exponential]]); the product and sum rules compute the displayed derivatives ([[thm-algebra-of-derivatives]]).
 
 ## Proof
 

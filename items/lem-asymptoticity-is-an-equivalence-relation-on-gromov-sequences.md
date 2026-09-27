@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-gromov-boundary-by-asymptotic-sequences, thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants]
+deps: [def-gromov-boundary-by-asymptotic-sequences, lem-slim-triangles-imply-the-gromov-product-inequality]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -32,7 +32,7 @@ equivalence relation.
 
 **Given:** A proper geodesic hyperbolic space $X$ with basepoint $o$.
 
-[L1] Hyperbolicity is equivalent to a Gromov-product inequality up to constants ([[thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants]]).
+[L1] The slim-triangle definition of hyperbolicity gives a Gromov-product inequality $(u,w)_o\ge\min\{(u,v)_o,(v,w)_o\}-3\delta$ for a fixed $\delta\ge0$ ([[lem-slim-triangles-imply-the-gromov-product-inequality]]).
 
 [A1] Reflexivity and symmetry are immediate from the definition of asymptoticity.
 
@@ -42,4 +42,4 @@ equivalence relation.
 
 1.1 By [A1], every Gromov sequence is asymptotic to itself, and if $(x_n)$ is asymptotic to $(y_n)$ then $(y_n)$ is asymptotic to $(x_n)$. [A1]
 
-2.1 Suppose $(x_n)$ is asymptotic to $(y_n)$ and $(y_n)$ is asymptotic to $(z_n)$. By [L1], there is $\delta \ge 0$ with $(x_m,z_n)_o \ge \min\{(x_m,y_k)_o,(y_k,z_n)_o\}-\delta$ for all $m,n,k$. Letting the indices go to infinity shows $(x_m,z_n)_o \to \infty$, so $(x_n)$ is asymptotic to $(z_n)$. [L1, step 1.1, algebra] ∎ 
+2.1 Suppose $(x_n)$ is asymptotic to $(y_n)$ and $(y_n)$ is asymptotic to $(z_n)$. By [L1], there is $\delta \ge 0$ with $(x_m,z_n)_o \ge \min\{(x_m,y_k)_o,(y_k,z_n)_o\}-3\delta$ for all $m,n,k$. Given $R>0$, choose $N$ so both mixed products exceed $R+3\delta$ whenever both of their indices are at least $N$. For every $m,n\ge N$, taking $k=N$ in the inequality gives $(x_m,z_n)_o>R$. Hence $(x_m,z_n)_o\to\infty$, so $(x_n)$ is asymptotic to $(z_n)$. [L1, step 1.1, algebra] ∎

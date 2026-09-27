@@ -1,0 +1,73 @@
+{
+  "run": "frontier-35-ten-categories",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "90768c273d6e963f7e14d09fd66f42f4306f5af461f572c797393bd9bd2d98c2",
+  "decisions": [
+    {
+      "id": "lem-monomial-representation-has-a-monomial-matrix-model",
+      "model": "gpt-6-sol",
+      "context_sha256": "8b8b22865898310ef682230af9a87bbed74d0fbf1bb8d7ac064d7472a4d4ec2b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 2.3 assumes that the claim-1 transversal represents cosets of the claim-2 line stabilizer, which need not hold. For G=C2, claim-1 subgroup {1}, T=G, and claim-2 trivial one-dimensional V, the stabilizer is G and both elements of T map to the same line. Thus the asserted bijection and ensuing unique coordinates fail. This is a logical gap in the proof, not a false theorem or missing citation. Repaired by choosing a separate finite transversal S of the stabilizer and using S throughout the converse.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-monomial-representation-has-a-monomial-matrix-model",
+      "disposition": "repaired",
+      "post_sha256": "98521faf499ac2146dd66f36aec57b4a239fda6dc6ca6f5ed2f10cb6db1550a6",
+      "review_context_sha256": "e9f5cc15f135594b8bad53e80eb146d4bc24a7bb68db52e045b3ef2d9a8e1229",
+      "reason": "Checked the original proof and all five direct dependency statements/definitions, the transversal supplier proof, owning contract and page interface. Claim 1 follows from evaluation of the coset-supported functions: xt=t′h gives coefficient lambda(h), with a permutation of cosets. In claim 2 irreducibility makes the basis-line orbit exhaustive; the separately chosen stabilizer transversal S bijects with those lines and yields unique coordinates. Covariance defines Psi, evaluation gives its inverse Phi, and x^{-1}t′=th^{-1} verifies equivariance with coefficient lambda(h). Only finite representative selection occurs, requiring no AC. Both statements remain unchanged. This is an author check of my repair, not an independent review of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "lem-monomial-representation-has-a-monomial-matrix-model",
+      "status": "repaired",
+      "defect_type": "logic",
+      "reason": "Record the confirmed missing stabilizer-transversal construction in proof step 2.3 and its completed proof-only correction. The converse now chooses S for its own H and uses it in steps 3.2, 4.1 and 4.2. No Statement/Definition changed and no consumer event is generated."
+    }
+  ],
+  "repair_notes": {
+    "changes": [
+      "Added explicit claim-local scoping for H and lambda; reserved T for claim 1.",
+      "Step 2.3 constructs a finite stabilizer transversal S; converse steps consistently use S.",
+      "Synchronized only the assigned contract derivations 2.3, 3.2, 4.1, 4.2, the step-1.2 input to 2.3, and the nonempty-choice boundary under the shared-write lock."
+    ],
+    "interface_check": "Direct comparison of original and repaired Statement section is byte-identical; no Definition exists. No downstream propagation, new prerequisites, page repair or published-ledger proposal is necessary.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-monomial-representation-has-a-monomial-matrix-model.md",
+        "result": "PASS; 1 checked, 0 failing; exit 0"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-monomial-representation-has-a-monomial-matrix-model.md",
+        "result": "OK; 1 file, including real KaTeX and YAML parsing; exit 0"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-35-ten-categories-batch-9.proof-contracts.json --strict --items lem-monomial-representation-has-a-monomial-matrix-model",
+        "result": "Final check: 0 errors, 0 warnings, 1/1 item checked. Initial contract check found the newly cited step 1.2 missing from inputs; repaired and reran successfully."
+      },
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-35-ten-categories --items lem-monomial-representation-has-a-monomial-matrix-model",
+        "result": "Captured post_sha256 and review_context_sha256 immediately after mathematical review; no later item or supplier edit."
+      }
+    ],
+    "source_evidence": "Familiar finite-group representation argument checked directly from local dependency definitions and the full local transversal proof. No external URLs were consulted and no claim of external source reading is made.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment under the existing workflow; no certification or judgments written by this dispatch."
+  }
+}

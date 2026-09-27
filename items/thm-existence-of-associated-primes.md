@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-associated-prime-of-a-module, lem-noetherian-ring-maximal-element-annihilator-exists, lem-maximal-element-annihilator-primality-step]
+deps: [def-dependent-choice, def-associated-prime-of-a-module, lem-noetherian-ring-maximal-element-annihilator-exists, lem-maximal-element-annihilator-primality-step]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-existence-of-associated-primes). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,16 +28,18 @@ sources:
 
 ## Statement
 
+Assume Dependent Choice.
+
 Let $R$ be a Noetherian commutative ring and let $M$ be a nonzero left
 $R$-module. Then $\operatorname{Ass}_R(M)$ is nonempty.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ and a nonzero left $R$-module $M$.
+**Given:** Dependent Choice, a Noetherian commutative ring $R$ and a nonzero left $R$-module $M$ ([[def-dependent-choice]]).
 
 [L1] A prime ideal belongs to $\operatorname{Ass}_R(M)$ exactly when it is the annihilator of some element of $M$ ([[def-associated-prime-of-a-module]]).
 
-[L2] Some nonzero element of $M$ has annihilator maximal among annihilators of nonzero elements ([[lem-noetherian-ring-maximal-element-annihilator-exists]]).
+[L2] Under Dependent Choice, some nonzero element of $M$ has annihilator maximal among annihilators of nonzero elements ([[lem-noetherian-ring-maximal-element-annihilator-exists]]).
 
 [L3] An annihilator maximal among annihilators of nonzero elements is prime ([[lem-maximal-element-annihilator-primality-step]]).
 

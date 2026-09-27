@@ -9,6 +9,13 @@ proof_strategy: construction
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: Allen Hatcher, Vector Bundles & K-Theory
@@ -17,13 +24,12 @@ sources:
     - title: Milnor and Stasheff, Characteristic Classes
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf
       locator: "§9 Euler class of odd-rank oriented bundles, printed pp.115–124"
-verification:
-  audited: 2026-09-22
 ---
 
 ## Statement refuted
 
-The slogan "the Euler class of an oriented odd-rank bundle vanishes" is false.
+Assume the Axiom of Choice. The slogan "the Euler class of an oriented
+odd-rank bundle vanishes" is false.
 There is an oriented real rank-three bundle over
 $B=\mathbb{RP}^\infty\times\mathbb{RP}^\infty$ whose integral Euler class is
 nonzero and of order two. Only the weaker statement $2e=0$ is true in general.

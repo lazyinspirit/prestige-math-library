@@ -1,0 +1,17 @@
+# Independent bounded audit, published shard 07 — 2026-09-26
+
+The companion JSONL records one current SHA-256-bound verdict for each of the 25 work-order proofs, with the mathematical argument checked, load-bearing supplier interfaces, prior ledger trace, and direct item consumers. All 25 local proofs passed this bounded review. This is audit evidence only; it does not set verification fields or certify a run. Source checks used the item's named references and existing receipt/ledger trail; this pass did not re-transcribe external PDFs.
+
+Five local interfaces changed from the prior committed statement. `lem-r-one-s-two-integral-element-membership` now explicitly requires AC, and its sole direct consumer `cor-serre-normality-criterion-two-directions` also assumes AC. `lem-radial-derivative-of-a-spherical-average` now assumes ACω; its two direct consumers, `lem-classical-subharmonic-mean-value-inequalities` and `thm-spherical-mean-value-property-for-harmonic-functions`, both assume ACω. `prop-cellular-maps-induce-cellular-chain-maps` qualifies arbitrary-CW singular comparison by AC and retains a choice-free finite-CW case; its ten direct consumers either assume AC or use finite CW complexes. `prop-homology-of-the-derived-tensor-product-is-tor` now assumes DC, and `prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking` now assumes ACω. Their direct consumers need the citation repairs below.
+
+Two downstream citations are stale, though neither invalidates its supplier's local proof:
+
+- At SHA-256 `d6e6106aa2c3e777b7ecb068e72974281383a4cb8707336bb8c99728ece08749`, `ex-derived-tensor-of-two-cyclic-abelian-groups` invokes the DC-qualified derived-tensor/Tor proposition as [F2] in step 2.1 without DC. Its explicit free resolution already computes kernel and cokernel and can justify the concrete Tor groups directly from that resolution, with a local citation repair.
+- At SHA-256 `14bd12ab6a8bbc23257a185160129debb0935c24b8b1d02eeff89312f6b971e2`, `cex-a-nearest-point-projection-is-not-unique-outside-the-tubular-radius` invokes the ACω-qualified nearest-point proposition as [L1] without ACω. Its unit-circle center counterexample is direct; remove the unused qualified [L1] and keep the distance calculation.
+
+`prop-cartan-commutator-identities` has a current local proof pass, but I found no exact row for it in `research/published-consumer-supplier-ledger.md`; its existing `verification.precheck: pass` is not an independent audit stamp. Its row should be reconciled during the later published-ledger pass.
+
+## Independent post-repair consumer check
+
+- `ex-derived-tensor-of-two-cyclic-abelian-groups`, SHA-256 `70675fc64a4f9d61fa5b042c73d452d996e03efe8719c29cd6d92dac5d2bf2ca`: pass. The explicit free resolution of $\mathbb Z/m$ remains exact for $m>0$; tensoring yields the stated two-term complex. Its kernel is the multiples of $n/g$ modulo $n$ and its cokernel is $\mathbb Z/g$, $g=\gcd(m,n)$. The final proof no longer invokes DC-qualified balanced Tor naturality, and its sole dependency is the supplied derived-tensor definition.
+- `cex-a-nearest-point-projection-is-not-unique-outside-the-tubular-radius`, SHA-256 `39d882aede32f89df7379f0b05f851bad435c251a436abd3d09a65d4b7503bb2`: pass. Every point on the unit circle is exactly distance one from the origin; that direct counterexample needs no ACω or tubular-retraction citation. The final page and plan have no supplier dependency.

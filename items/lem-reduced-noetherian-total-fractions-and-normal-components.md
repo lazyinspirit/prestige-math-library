@@ -2,13 +2,8 @@
 id: "lem-reduced-noetherian-total-fractions-and-normal-components"
 kind: "lemma"
 title: "reduced noetherian total fractions and normal components"
-deps: ["def-total-ring-of-fractions", "def-normal-noetherian-ring", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian", "thm-normality-is-local-for-domains", "thm-chinese-remainder-theorem-for-comaximal-ideals", "lem-finite-prime-avoidance"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-total-ring-of-fractions", "def-normal-noetherian-ring", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian", "thm-normality-is-local-for-domains", "thm-chinese-remainder-theorem-for-comaximal-ideals", "lem-finite-prime-avoidance", "thm-proper-ideal-contained-in-maximal-ideal"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "10.37.16, full proof"
@@ -20,12 +15,20 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-For a reduced commutative Noetherian ring $R$ with minimal primes $\mathfrak p_1,\ldots,\mathfrak p_s$, there is a canonical isomorphism $Q(R)\cong\prod_{i=1}^s\operatorname{Frac}(R/\mathfrak p_i)$. The following are equivalent: $R$ is normal; $R$ is integrally closed in $Q(R)$; and $R$ is a finite product of normal domains. For $R=0$ this is the empty product.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For a reduced commutative Noetherian ring $R$ with minimal primes $\mathfrak p_1,\ldots,\mathfrak p_s$, there is a canonical isomorphism $Q(R)\cong\prod_{i=1}^s\operatorname{Frac}(R/\mathfrak p_i)$. The following are equivalent: $R$ is normal; $R$ is integrally closed in $Q(R)$; and $R$ is a finite product of normal domains. For $R=0$ this is the empty product.
 
 ## Facts & Assumptions
 
@@ -45,6 +48,8 @@ For a reduced commutative Noetherian ring $R$ with minimal primes $\mathfrak p_1
 
 [F7] [[lem-finite-prime-avoidance]]: Let $R$ be a commutative ring, let $I \trianglelefteq R$ be an ideal, and let $\mathfrak p_1,\dots,\mathfrak p_n$ be prime ideals with $n \ge 1$. If $$ I\subseteq \mathfrak p_1\cup\cdots\cup \mathfrak p_n, $$ then $I\subseteq \mathfrak p_i$ for some $i$.
 
+[F8] Under AC, every proper ideal of a nonzero commutative ring lies in a maximal ideal ([[thm-proper-ideal-contained-in-maximal-ideal]]). Step 4.1 uses this to infer comaximality of distinct minimal primes.
+
 ## Proof
 
 1.1 For $R\ne0$, the finite minimal-prime intersection is zero. If $a$ avoids every minimal prime, $ab=0$ forces $b=0$. If $a\in\mathfrak p_i$, a product of elements in $\mathfrak p_j\setminus\mathfrak p_i$ for $j\ne i$ supplies nonzero $b$ with $ab=0$. Thus the nonzerodivisors are the complement of the union of the minimal primes. Prime avoidance implies that the primes surviving in $Q(R)$ are exactly these minimal primes. [F3, F4, F7, F1]
@@ -53,4 +58,4 @@ For a reduced commutative Noetherian ring $R$ with minimal primes $\mathfrak p_1
 
 3.1 If $R$ is integrally closed in $Q(R)$, it contains every coordinate idempotent $e_i$, since each solves $T^2-T=0$. Thus $R=\prod e_iR$, with $e_iR\cong R/\mathfrak p_i$. For an element integral over one factor, put it in that coordinate and zero in the other coordinates. A monic equation in the factor, multiplied by $T$ if necessary and with coefficients lifted to that coordinate, gives a monic equation over the product ring; integral closedness puts it in $R$. Each factor is integrally closed, hence a normal domain by local normality. [F5, step 2.1, algebra]
 
-4.1 If $R$ is normal, no prime can contain two distinct minimal primes: localization would give two distinct minimal primes in a domain. Hence the minimal primes are pairwise comaximal. CRT gives $R=\prod R/\mathfrak p_i$; the localizations of a component are the corresponding localizations of $R$, so the components are normal domains. Conversely a finite product of normal domains has normal prime localizations, and a monic equation in its total fractions is coordinatewise integral, so the product is integrally closed there. For $R=0$ all assertions hold directly without applying CRT to an empty family. [F2, F6, F5, step 2.1] ∎
+4.1 If $R$ is normal, no prime can contain two distinct minimal primes: localization would give two distinct minimal primes in a domain. Under the assumed AC, [F8] places every proper sum $\mathfrak p_i+\mathfrak p_j$ in a maximal ideal, which is impossible; hence the minimal primes are pairwise comaximal. CRT gives $R=\prod R/\mathfrak p_i$; the localizations of a component are the corresponding localizations of $R$, so the components are normal domains. Conversely a finite product of normal domains has normal prime localizations, and a monic equation in its total fractions is coordinatewise integral, so the product is integrally closed there. For $R=0$ all assertions hold directly without applying CRT to an empty family. [F2, F5, F6, F8, step 2.1] ∎

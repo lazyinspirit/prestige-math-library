@@ -4,7 +4,7 @@ kind: counterexample
 title: "Nonuniqueness of Schur covers"
 status: published
 origin: pipeline
-deps: [def-schur-covering-group-of-a-finite-group, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square]
+deps: [def-schur-covering-group-of-a-finite-group, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square, def-axiom-of-choice, def-supplied-projective-resolution-datum]
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -19,11 +19,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: gpt-6-astra
-    verdict: pass
-    date: 2026-09-09
-    scope: "Owner-authorized statement/refutation alignment repair; complete target and direct supplier texts read; targeted precheck/rendercheck. Not an independent judgment or whole-closure certification."
-    delegated_by: owner
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-05-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement refuted
@@ -32,9 +34,13 @@ Every finite group has a unique Schur covering group up to isomorphism.
 
 ## Counterexample
 
-The groups $D_8$ and $Q_8$ are nonisomorphic Schur covers of $C_2\times C_2$.
+Assume the Axiom of Choice and supplied projective-resolution data for group
+homology. The groups $D_8$ and $Q_8$ are nonisomorphic Schur covers of
+$C_2\times C_2$.
 
-**Given:** Both $D_8$ and $Q_8$ have central commutator subgroup of order two and quotient $C_2\times C_2$.
+**Given:** The stated choice and resolution hypotheses. Both $D_8$ and
+$Q_8$ have central commutator subgroup of order two and quotient
+$C_2\times C_2$.
 
 1.1 The exterior-square calculation gives $M(C_2\times C_2)\cong C_2$, so both are Schur covers. [given]
 

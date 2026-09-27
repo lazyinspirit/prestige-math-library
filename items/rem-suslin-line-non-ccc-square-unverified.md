@@ -5,18 +5,18 @@ title: "The square of a Suslin line is not ccc (checked on audit)"
 status: published
 origin: session
 proved_here: false
+verification:
+  precheck: n/a
+  sources_checked:
+    date: 2026-09-26
+    scope: "Current recorded statement and cited passages; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
 deps: [rem-suslin-hypothesis-independent]
 justified_by: []
 forward_refs: [def-separable-space]
 aliases: []
 landmark: false
 short: "Settled: L Suslin implies L x L is not ccc (Kunen 1980, II Lemma 4.3); previously flagged unverified, the check has now been done"
-verification:
-  precheck: n/a
-  sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
 sources:
   scraped: []
   references:
@@ -62,10 +62,11 @@ and no page here may present it as established from anything on these pages.
 Nothing in this library depends on it.
 
 **The proof, and why it is out of reach rather than hard.** Kunen's argument is a
-recursion of length $\omega_1$: one picks $a_\alpha < b_\alpha < c_\alpha$ in $L$
-with both intervals $(a_\alpha, b_\alpha)$ and $(b_\alpha, c_\alpha)$ nonempty
-and with $(a_\alpha, c_\alpha)$ avoiding every $b_\xi$ already chosen, which is
-possible because $L$ is not separable. The $\omega_1$ many open rectangles
+recursion of length $\omega_1$. First, the ccc makes the set $W$ of isolated
+points countable. At stage $\alpha$, nonseparability gives a nonempty open
+interval disjoint from the closure of $W\cup\{b_\xi:\xi<\alpha\}$. It contains
+no isolated points, so one can pick $a_\alpha<b_\alpha<c_\alpha$ in it with both
+$(a_\alpha,b_\alpha)$ and $(b_\alpha,c_\alpha)$ nonempty. The $\omega_1$ many open rectangles
 $V_\alpha = (a_\alpha, b_\alpha) \times (b_\alpha, c_\alpha)$ are then nonempty
 and pairwise disjoint, so $L^2$ is not ccc. The obstacle here is the setting, not
 the difficulty: separability is developed later in [[def-separable-space]], but
@@ -91,7 +92,7 @@ two ccc spaces is ccc" is not decided by ZFC.
 **Why it matters here.** Ccc arguments will appear in the library's topology
 material, and productivity of the countable chain condition is exactly the point
 at which a plausible-sounding claim silently imports an independence result. Any
-page wanting an unconditional ZFC counterexample about the countable chain
-condition should use the Cantor cube $\{0,1\}^{\kappa}$ for $\kappa$ larger than
+page wanting an unconditional ZFC example of a ccc nonseparable space can use
+the Cantor cube $\{0,1\}^{\kappa}$ for $\kappa$ larger than
 the continuum, which is ccc and not separable and needs no independence result at
 all, and leave the Suslin line to this item.

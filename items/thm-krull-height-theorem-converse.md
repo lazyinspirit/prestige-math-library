@@ -7,14 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-height-of-a-prime-ideal, lem-height-converse-parameter-selection, thm-localisation-at-a-prime-is-local, thm-noetherian-ring-quotients-and-localisations]
+deps: [def-axiom-of-choice, def-height-of-a-prime-ideal, lem-height-converse-parameter-selection, thm-localisation-at-a-prime-is-local, thm-noetherian-ring-quotients-and-localisations]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -23,22 +20,34 @@ sources:
     - title: "Melvin Hochster, Dimension theory and systems of parameters"
       url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
 pipeline_run: null
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 Let $R$ be a Noetherian commutative ring and let $\mathfrak p\in\operatorname{Spec}(R)$ have finite height $n$. Then in the local ring $R_{\mathfrak p}$ there exist elements $x_1,\ldots,x_n\in\mathfrak p$ such that the maximal ideal $\mathfrak pR_{\mathfrak p}$ is minimal over $(x_1/1,\ldots,x_n/1)$. Equivalently, $\mathfrak p$ is minimal over an $n$-generated ideal after localizing at $\mathfrak p$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ and a prime ideal $\mathfrak p$ with $\operatorname{ht}(\mathfrak p)=n<\infty$.
+**Given:** The Axiom of Choice, a Noetherian commutative ring $R$ and a prime ideal $\mathfrak p$ with $\operatorname{ht}(\mathfrak p)=n<\infty$.
 
 [L1] The localization $R_{\mathfrak p}$ is a Noetherian local ring with maximal ideal $\mathfrak pR_{\mathfrak p}$ ([[thm-noetherian-ring-quotients-and-localisations]], [[thm-localisation-at-a-prime-is-local]]).
 
 [L2] By definition, $\operatorname{ht}(\mathfrak p)=\dim(R_{\mathfrak p})$ ([[def-height-of-a-prime-ideal]]).
 
-[L3] In a Noetherian ring, a proper ideal of height $n$ contains $n$ elements whose successive generated ideals have heights $1,\ldots,n$ ([[lem-height-converse-parameter-selection]]).
+[L3] Under the Axiom of Choice, in a Noetherian ring a proper ideal of height $n$ contains $n$ elements whose successive generated ideals have heights $1,\ldots,n$ ([[lem-height-converse-parameter-selection]]).
 
 ## Proof
 

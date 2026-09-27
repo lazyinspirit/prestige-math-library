@@ -7,17 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [thm-jacobson-radical-unit-characterisation, lem-determinant-trick-for-nakayama, def-product-of-an-ideal-and-a-module]
+deps: [def-axiom-of-choice, thm-jacobson-radical-unit-characterisation, lem-determinant-trick-for-nakayama, def-product-of-an-ideal-and-a-module]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-nakayama-lemma). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,9 +37,9 @@ Let $R$ be a commutative ring, let $I \trianglelefteq R$ satisfy $I \subseteq J(
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, an ideal $I \trianglelefteq R$ with $I \subseteq J(R)$, and a finitely generated left $R$-module $M$ with $IM=M$.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), a commutative ring $R$, an ideal $I \trianglelefteq R$ with $I \subseteq J(R)$, and a finitely generated left $R$-module $M$ with $IM=M$.
 
-[L1] An element $x$ lies in $J(R)$ exactly when $1-rx$ is a unit for every $r \in R$ ([[thm-jacobson-radical-unit-characterisation]]).
+[L1] Under AC, an element $x$ lies in $J(R)$ exactly when $1-rx$ is a unit for every $r \in R$ ([[thm-jacobson-radical-unit-characterisation]]). This is the only use of AC in the proof.
 
 [L2] If $IM=M$ for finite $M$, then $(1-a)M=0$ for some $a \in I$ ([[lem-determinant-trick-for-nakayama]]).
 

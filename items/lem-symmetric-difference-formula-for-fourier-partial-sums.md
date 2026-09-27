@@ -10,12 +10,12 @@ provenance:
 deps: [lem-fourier-partial-sums-are-dirichlet-convolutions, def-dirichlet-and-fejer-kernels, lem-closed-form-and-size-bounds-for-the-dirichlet-kernel]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (lem-symmetric-difference-formula-for-fourier-partial-sums). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,7 +27,7 @@ sources:
 
 ## Statement
 
-Let $f$ be a one-period integrable function, let $x,s\in\mathbb R$, and let
+Assume the Axiom of Countable Choice. Let $f$ be a one-period integrable function, let $x,s\in\mathbb R$, and let
 $N\ge0$. Then
 
 $$S_Nf(x)-s=\int_0^{1/2}\bigl(f(x+t)+f(x-t)-2s\bigr)D_N(t)\,dt.$$
@@ -38,7 +38,7 @@ $$S_Nf(x)-s=\int_0^{1/2}\bigl(f(x+t)+f(x-t)-2s\bigr)\frac{\sin((2N+1)\pi t)}{\si
 
 ## Facts & Assumptions
 
-**Given:** A one-period integrable function $f$, reals $x,s$, and an integer $N \ge 0$.
+**Given:** Countable Choice, a one-period integrable function $f$, reals $x,s$, and an integer $N \ge 0$.
 
 [L1] Fourier partial sums are Dirichlet convolutions: $S_Nf(x)=\int_0^1 f(x-t)D_N(t)\,dt$ ([[lem-fourier-partial-sums-are-dirichlet-convolutions]]).
 

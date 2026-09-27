@@ -5,21 +5,24 @@ title: Split Banach submanifold
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, def-complemented-subspace, def-linear-subspace, def-subspace-topology-top, cor-finite-dimensional-subspaces-are-complemented]
+deps: [def-axiom-of-choice, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, def-complemented-subspace, def-linear-subspace, def-subspace-topology-top, cor-finite-dimensional-subspaces-are-complemented]
 justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §2.11 (regular values as onto with complemented kernel)"
       url: "https://people.dm.unipi.it/abbondandolo/preprints/montreal.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Definition
@@ -83,9 +86,9 @@ with a subspace of $T_pM$.
   below demands a complemented kernel rather than mere surjectivity of the
   derivative.
 
-- **Automatic cases.** If $E_0$ is finite dimensional or of finite codimension
+- **Automatic cases.** Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $E_0$ is finite dimensional or of finite codimension
   in $E$, then every closed subspace of that kind is complemented, so the only
   obstruction to splitness in these cases is the local product structure of $S$
   itself ([[cor-finite-dimensional-subspaces-are-complemented]]). In particular
-  finite-dimensional level sets of submersions are automatically split when the
-  derivative is surjective.
+  finite-dimensional level sets of submersions are split when the
+  derivative is surjective and the stated choice premise holds.

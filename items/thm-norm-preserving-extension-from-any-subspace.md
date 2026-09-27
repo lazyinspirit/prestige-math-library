@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-hahn-banach-norm-preserving-extension,
+deps: [def-axiom-of-choice, thm-hahn-banach-norm-preserving-extension,
        thm-complex-hahn-banach-norm-preserving-extension,
        rem-real-and-complex-normed-space-convention]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -26,11 +19,21 @@ sources:
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, Corollary 4.15 and Theorem 4.14"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $X$ be a normed space over $\mathbb{R}$ or $\mathbb{C}$, let
+Assume the Axiom of Choice. Let $X$ be a normed space over $\mathbb{R}$ or $\mathbb{C}$, let
 $M \subseteq X$ be a linear subspace, and let $f_0:M \to \mathbb{R}$ or
 $f_0:M \to \mathbb{C}$ be a bounded linear functional over the ambient scalar
 field. Then there exists a bounded linear extension $F$ of $f_0$ to all of $X$
@@ -40,7 +43,9 @@ No closedness hypothesis on $M$ is needed.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$, a linear subspace $M \subseteq X$, and a bounded linear functional $f_0$ on $M$.
+**Given:** The Axiom of Choice, A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$, a linear subspace $M \subseteq X$, and a bounded linear functional $f_0$ on $M$.
+
+[A1] AC is used through [L1] or [L2] in steps 1.1 and 1.2.
 
 [L1] In the real case, a bounded linear functional on a subspace extends with the same norm ([[thm-hahn-banach-norm-preserving-extension]]).
 

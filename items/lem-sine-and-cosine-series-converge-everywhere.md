@@ -8,14 +8,18 @@ authorship: ai-altered
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-sine-and-cosine-by-power-series, thm-ratio-test]
+deps: [def-real-power-series-and-radius-of-convergence, def-integer-power, def-factorial-and-falling-factorial, lem-of-naturals-positive, thm-ratio-test]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -28,13 +32,15 @@ pipeline_run: null
 
 ## Statement
 
-For every real $x$, the defining power series of $\sin x$ and $\cos x$ converge absolutely. Equivalently, both have infinite radius of convergence.
+For every real $x$, both series
+$$\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n+1}}{(2n+1)!}\quad\text{and}\quad\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n}}{(2n)!}$$
+converge absolutely. Equivalently, both power series have infinite radius of convergence.
 
 ## Facts & Assumptions
 
 **Given:** A real $x$.
 
-[L1] The sine and cosine series have terms $x^{2n+1}/(2n+1)!$ and $x^{2n}/(2n)!$ up to signs ([[def-sine-and-cosine-by-power-series]]).
+[L1] The two displayed series are real power series with the absolute terms $|x|^{2n+1}/(2n+1)!$ and $|x|^{2n}/(2n)!$; factorial denominators are positive ([[def-real-power-series-and-radius-of-convergence]], [[def-integer-power]], [[def-factorial-and-falling-factorial]], [[lem-of-naturals-positive]]).
 
 [L2] The ratio test proves absolute convergence when the ratio of successive absolute terms tends to a limit less than one ([[thm-ratio-test]]).
 
@@ -42,8 +48,8 @@ For every real $x$, the defining power series of $\sin x$ and $\cos x$ converge 
 
 **Proof technique:** direct.
 
-1.1 For the sine absolute terms, the successive ratio is $|x|^2/((2n+2)(2n+3))$, which tends to $0$. [L1, algebra]
+1.1 If $x=0$, the sine series is identically zero and the cosine series has only its initial term $1$; both converge absolutely. [L1, algebra]
 
-1.2 For the cosine absolute terms, the successive ratio is $|x|^2/((2n+1)(2n+2))$, which tends to $0$. [L1, algebra]
+1.2 If $x\ne0$, every absolute term is nonzero. The successive sine-term ratio is $|x|^2/((2n+2)(2n+3))$, and the successive cosine-term ratio is $|x|^2/((2n+1)(2n+2))$; both tend to $0$. [L1, algebra]
 
-2.1 The ratio test proves absolute convergence of both series for this arbitrary $x$. [step 1.1, step 1.2, L2] ∎
+2.1 For $x\ne0$, the ratio test proves absolute convergence of both series. Together with step 1.1 this covers every real $x$. [step 1.1, step 1.2, L2] ∎

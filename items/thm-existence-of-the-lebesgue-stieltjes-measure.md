@@ -7,12 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-borel-measure-finite-on-compact-sets-on-r, thm-caratheodory-extension-theorem, thm-seven-generators-of-the-borel-sigma-algebra-on-r, thm-stieltjes-interval-set-function-is-a-premeasure, lem-compact-implies-closed-and-bounded-r]
+deps: [def-borel-measure-finite-on-compact-sets-on-r, thm-caratheodory-extension-theorem, thm-seven-generators-of-the-borel-sigma-algebra-on-r, thm-stieltjes-interval-set-function-is-a-premeasure, lem-compact-implies-closed-and-bounded-r, def-countable-choice]
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-existence-of-the-lebesgue-stieltjes-measure). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 1.16"
@@ -38,6 +43,8 @@ $$\mu_F((a,b]) = F(b) - F(a) \qquad \text{for all } a < b.$$
 
 [L2] Assuming countable choice, a premeasure extends to a measure on the sigma-algebra it generates. ([[thm-caratheodory-extension-theorem]])
 
+[A1] [[def-countable-choice]] is the stated assumption spent through the extension theorem [L2].
+
 [L3] The family of half-open intervals $(a,b]$ with $a < b$ generates the Borel sigma-algebra $\mathcal{B}(\mathbb{R})$. ([[thm-seven-generators-of-the-borel-sigma-algebra-on-r]])
 
 [L4] A compact subset of $\mathbb{R}$ is bounded. ([[lem-compact-implies-closed-and-bounded-r]])
@@ -46,7 +53,7 @@ $$\mu_F((a,b]) = F(b) - F(a) \qquad \text{for all } a < b.$$
 
 **Proof technique:** direct.
 
-1.1 By [L1], $\mu_{0,F}$ is a premeasure, so [L2] gives a measure $\mu$ on the generated sigma-algebra $\sigma(\mathcal{H})$ extending $\mu_{0,F}$. [L1, L2, L3]
+1.1 By [L1], $\mu_{0,F}$ is a premeasure, so [L2], under [A1], gives a measure $\mu$ on the generated sigma-algebra $\sigma(\mathcal{H})$ extending $\mu_{0,F}$. [L1, L2, A1, L3]
 
 By [L3], that sigma-algebra is $\mathcal{B}(\mathbb{R})$, and therefore
 

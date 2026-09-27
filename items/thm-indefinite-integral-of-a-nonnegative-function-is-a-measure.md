@@ -10,8 +10,13 @@ provenance:
 deps: [def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, def-measure]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-indefinite-integral-of-a-nonnegative-function-is-a-measure). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,12 +48,9 @@ Then $\nu_f$ is a measure on $(X,\mathcal A)$.
 
 **Proof technique:** direct.
 
-1.1 One has $\nu_f(\varnothing)=0$. If $(A_n)$ is a pairwise disjoint sequence,[L1, L2, given]
-put $B_n:=\bigcup_{k<n}A_k$. Then $\chi_{B_n}\uparrow\chi_{\bigcup_kA_k}$, so $f\chi_{B_n}\uparrow f\chi_{\bigcup_kA_k}$ and [L2] gives $$\nu_f\!\left(\bigcup_kA_k\right)=\lim_n\nu_f(B_n).$$
+1.1 One has $\nu_f(\varnothing)=0$. If $(A_n)$ is a pairwise disjoint sequence, put $B_n:=\bigcup_{k<n}A_k$. Then $\chi_{B_n}\uparrow\chi_{\bigcup_kA_k}$, so $f\chi_{B_n}\uparrow f\chi_{\bigcup_kA_k}$, including where $f=+\infty$ under the convention $0\cdot\infty=0$. By [L2], $\nu_f(\bigcup_kA_k)=\lim_n\nu_f(B_n)$. [L1, L2, given]
 
 
-2.1 Because the sets $A_k$ are disjoint, repeated use of [L3] gives [step 1.1, L3, algebra]
-$$\nu_f(B_n)=\sum_{k<n}\nu_f(A_k).$$ Substituting this into step 1.1 proves countable additivity.
+2.1 Because the sets $A_k$ are disjoint, $f\chi_{B_n}=\sum_{k<n}f\chi_{A_k}$. Repeated use of [L3] gives $\nu_f(B_n)=\sum_{k<n}\nu_f(A_k)$. Taking the increasing limit in step 1.1 proves countable additivity. [step 1.1, L3, algebra]
 
-3.1 Steps 1.1 and 2.1 verify the two conditions in [L4], so $\nu_f$ is a [step 1.1, step 2.1, L4] ∎
-measure.
+3.1 Steps 1.1 and 2.1 verify the two conditions in [L4], so $\nu_f$ is a measure. [step 1.1, step 2.1, L4] ∎

@@ -10,17 +10,20 @@ provenance:
   proof: ai-altered
 generation:
   role: example
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "\u00a7\u00a71.3\u20131.4"
       url: https://kskedlaya.org/ant/chap-pnt.html
 proof_strategy: direct argument
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-maintenance-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example

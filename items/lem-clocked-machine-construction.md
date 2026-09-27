@@ -11,8 +11,12 @@ deps: [def-effective-encoding-of-turing-machines, def-universal-turing-machine, 
 justified_by: []
 proof_strategy: direct
 verification:
-  audited: 2026-09-12
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -52,6 +56,6 @@ $\operatorname{Clock}_{e,t}$ such that, on each input $x$:
 
 1.1 On input $x$, the machine $\operatorname{Clock}_{e,t}$ first scans the whole input once to learn $|x|$. The lower bound hypothesis $n\le t(n)$ together with [L4] ensures that this preliminary scan fits inside the intended asymptotic budget. It then runs the constructor from [L1] on unary input $1^{|x|}$ to obtain the binary numeral of $t(|x|)$ and writes a counter of that size on a work tape. [L1, L4, given, construct]
 
-2.1 Next, using the fixed code $e$ from [L3], the machine simulates $M$ on $x$ while decrementing the counter once per simulated step. If the simulation halts before the counter reaches $0$, the simulator outputs exactly what $M$ outputs; if the counter reaches $0$ first, the machine enters a rejecting state and stops. This is the standard clocked simulation built from the universal behavior in [L2]. [L2, L3, step 1.1, construct]
+2.1 Next, using the fixed code $e$ from [L3], the machine initializes the simulated configuration of $M$ on $x$. It first checks whether that configuration is already halting. Otherwise, while the counter is positive it simulates one transition, decrements the counter, and checks whether the new configuration is halting. If so, it outputs exactly what $M$ outputs, including when this was the $t(|x|)$-th transition. If the counter is zero and the simulated configuration is still nonhalting, it rejects. This is the standard clocked simulation built from the effective transition table [L3] and universal behavior in [L2]. [L2, L3, step 1.1, construct]
 
-3.1 Step 2.1 proves the two clauses of the statement: successful runs of $M$ before the deadline are preserved, and overlong runs are cut off by a halting reject state. [step 2.1] ∎
+3.1 Step 2.1 proves the two clauses of the statement: runs of $M$ halting in at most $t(|x|)$ transitions are preserved, and overlong runs are cut off by a halting reject state. [step 2.1] ∎

@@ -9,11 +9,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Folland, Real Analysis, second edition, \u00a711.4 pp.361\u2013363; Theorems 2.14\u20132.15 pp.50\u201351"
@@ -22,6 +23,8 @@ proof_strategy: direct
 ---
 
 ## Statement
+
+Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
 
 For a nonnegative Borel $f:M\to[0,\infty]$ and any chart partition $(x_i,\varphi_i)$,
 $$\int_M f\,d\mu_r=\sum_i\int_{x_i(U_i)}(\varphi_i f r)_{x_i}\,d\lambda_n,$$

@@ -4,7 +4,7 @@ title: Depth equals the maximal regular-sequence length
 kind: theorem
 status: published
 origin: pipeline
-deps: [def-depth-with-respect-to-an-ideal, cor-depth-as-first-nonzero-ext, lem-maximal-regular-sequences-have-common-length-ext]
+deps: [def-axiom-of-choice, def-depth-with-respect-to-an-ideal, cor-depth-as-first-nonzero-ext, lem-maximal-regular-sequences-have-common-length-ext]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,14 +14,18 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Let $R$ be Noetherian, $M\ne0$ finite, and $I$ an ideal contained in the
 Jacobson radical with $IM\ne M$. Then every maximal $M$-regular sequence in
@@ -30,7 +34,7 @@ first degree in which $\operatorname{Ext}^*_R(R/I,M)$ is nonzero.
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses in the statement.
+**Given:** The Axiom of Choice and the hypotheses in the statement.
 
 ## Proof
 

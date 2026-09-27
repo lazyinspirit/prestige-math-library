@@ -12,8 +12,13 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -49,4 +54,4 @@ A bijective quasi-isometry between word metric spaces of finitely generated grou
 
 2.1 Both $f$ and $f^{-1}$ are therefore coarse Lipschitz, hence Lipschitz by the previous proposition. [L1, L4, step 1.1]
 
-3.1 If $f$ has Lipschitz constant $L$ and $f^{-1}$ has Lipschitz constant $M$, then $$ M^{-1}d_G(x,x')\le d_H(f(x),f(x'))\le L\,d_G(x,x') $$ for all $x,x'\in G$, so $f$ is a bilipschitz equivalence. [L3, L4, step 2.1] ∎
+3.1 Enlarge Lipschitz constants for $f$ and $f^{-1}$, if needed, to choose $L,M\ge1$. Then $$ M^{-1}d_G(x,x')\le d_H(f(x),f(x'))\le L\,d_G(x,x') $$ for all $x,x'\in G$, so $f$ is a bilipschitz equivalence, including when both groups are trivial. [L3, L4, step 2.1] ∎

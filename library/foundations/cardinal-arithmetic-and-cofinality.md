@@ -13,6 +13,7 @@ items: [lem-cardinality-of-a-well-orderable-set,
         lem-successor-cardinal-exists,
         cor-the-aleph-and-beth-hierarchies-are-well-defined,
         def-aleph-and-beth-hierarchies,
+        thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero,
         thm-every-infinite-cardinal-is-an-aleph,
         thm-cardinal-comparability-iff-ac,
         thm-tarski-square,
@@ -95,6 +96,12 @@ infinite cardinals but **all** of them is a separate theorem, proved by a least
 counterexample rather than by the recursion, and its second clause — that every
 infinite *set* is equinumerous with an aleph — is where the Axiom of Choice
 enters ([[thm-every-infinite-cardinal-is-an-aleph]]).
+
+**The size of the continuum.** The choice-free bijections
+$\mathbb R\approx{}^\omega 2\approx\mathcal P(\mathbb N)$ are proved in
+[[thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero]]. Under the Axiom
+of Choice this becomes the initial-cardinal equation
+$|\mathbb R|=2^{\aleph_0}$ used on this page and by later topology examples.
 
 **Where choice is measured exactly.** Comparability of arbitrary sets is
 equivalent to the Axiom of Choice ([[thm-cardinal-comparability-iff-ac]]), so the

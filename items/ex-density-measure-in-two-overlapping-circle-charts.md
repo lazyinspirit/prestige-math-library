@@ -4,30 +4,33 @@ title: "Circle overlap weights count each arc once"
 kind: example
 status: published
 origin: pipeline
-deps: ["thm-density-measure-is-independent-of-the-chart-gluing", "thm-density-measure-integration-agrees-with-smooth-density-integration", "thm-lebesgue-measure-of-a-box-of-every-kind"]
+deps: ["def-countable-choice", "thm-density-measure-is-independent-of-the-chart-gluing", "thm-density-measure-integration-agrees-with-smooth-density-integration", "thm-lebesgue-measure-of-a-box-of-every-kind"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: "Folland, Real Analysis, second edition, \u00a711.4 pp.361\u2013363; Theorems 2.14\u20132.15 pp.50\u201351"
       url: "https://djvu.online/file/NPF4BEtSuqdFA"
 proof_strategy: direct
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (ex-density-measure-in-two-overlapping-circle-charts). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
 
-For $S^1=\mathbb R/(2\pi\mathbb Z)$ take the angular charts with images $(-\pi,\pi)$ and $(0,2\pi)$. The coefficient one in both charts defines a positive smooth density with total mass $2\pi$, for any subordinate partition.
+Assume $\mathrm{AC}_\omega$. For $S^1=\mathbb R/(2\pi\mathbb Z)$ take the angular charts with images $(-\pi,\pi)$ and $(0,2\pi)$. The coefficient one in both charts defines a positive smooth density with total mass $2\pi$, for any subordinate partition.
 
 ## Facts & Assumptions
 
 **Given:** Assume $\mathrm{AC}_\omega$. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Circle overlap translations and a disjoint semicircle calculation.
+
+[A1] Countable choice is [[def-countable-choice]]; it is assumed for the chart-gluing and integration results [F1] and [F2].
 
 [F1] [[thm-density-measure-is-independent-of-the-chart-gluing]]: Every Borel set in a chart has its coefficient integral, independent of partition.
 

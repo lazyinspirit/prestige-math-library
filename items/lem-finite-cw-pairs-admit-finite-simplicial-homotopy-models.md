@@ -7,11 +7,12 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, Theorem 2C.5, construction and proof pp.182–184"
@@ -44,6 +45,8 @@ Every finite CW pair $(X,A)$ is homotopy equivalent as a pair to a finite simpli
 
 3.1 Here is the induction with subpairs retained. Begin with the finitely many vertices of $A$, and adjoin its cells in increasing dimension. At each stage retain a common CW space $Z$ having both the current CW space and its simplicial model $Y$ as deformation retracts. Given finitely many new attaching maps $S^{r-1}\to X_{\mathrm{old}}$, retract to $Y$ and approximate simplicially by F1 after finitely many subdivisions of the sphere domains. For $r=0$, just adjoin isolated vertices. For $r\ge1$, adjoin the complexes $M(f)$ to $Z$ along $Y$. Each added subdivided sphere is homotopic in this common space to its original attaching map, by the old retraction homotopy, the simplicial approximation homotopy, and the cylinder homotopy just built. [F1, F2, step 2.1]
 
-4.1 For each of these homotopies glue $D^r\times I$ along its boundary cylinder. The bottom contains the original attached cell, and the top contains the cone on the new sphere; the top simplicial space is $Y\cup C(f)$ over all the new cells. The prism retractions in F2 give deformation retractions to the two end adjunctions. The old retractions extend over an attaching disk by first extending the boundary homotopy over its collar; this is again the relative prism construction, fixed on the unaltered old end. Hence the new common space has both new ends as deformation retracts. This is a finite construction and preserves the earlier common subspace wherever no new cell is being attached. [F2, step 3.1]
+4.1 Write $W=Z\cup_Y\bigcup_\alpha M(f_\alpha)$ and let $h_\alpha:S^{r-1}\times I\to W$ be the homotopy from the original attaching map at $t=0$ to the inclusion of the subdivided sphere in $M(f_\alpha)$ at $t=1$, supplied by step 3.1. Form $Z'=W\cup_{h_\alpha,\alpha}\bigcup_\alpha(D^r\times I)$. In each prism there is a strong deformation retraction onto $(S^{r-1}\times I)\cup(D^r\times\{1\})$, fixed on that side-and-top subset: for the unit disk, radially project from $(0,-1)$ to the side or top and join each point to its projection by a straight segment. The reflected formula retracts onto the side and bottom. Since each side is glued to $W$ and these homotopies fix it, they extend by the identity on $W$ and on the other prisms. Consequently $Z'$ strongly deformation retracts onto each end adjunction $W\cup_{h_\alpha(-,0)}\bigcup_\alpha D^r$ and $W\cup_{h_\alpha(-,1)}\bigcup_\alpha D^r$. This is the stronger common-space assertion needed here; the relative homotopy-equivalence conclusion of F2 alone would not imply it. [step 3.1, construct]
 
-5.1 After finishing $A$, keep its common space $Z_A$ and its two retracts $A$ and $L$. Now repeat the same construction for the cells of $X\setminus A$ in increasing dimension, with $Z_A$ designated as the subspace throughout. The homotopies on $Z_A$ are exactly its old retraction homotopies and remain within $Z_A$; every prism newly attached for a cell outside $A$ leaves this designated subspace alone. Thus the final common pair $(Z,Z_A)$ retracts as a pair to $(X,A)$ and to a finite simplicial pair $(K,L)$. Composing its retractions gives the required pair homotopy equivalence. Empty $A$ uses $Z_A=\varnothing$, and empty $X$ gives the empty simplicial pair. [F2, step 4.1] ∎
+5.1 Each $M(f_\alpha)$ strongly deformation retracts onto its target subcomplex in $Y$ by step 2.1, so $W$ strongly deformation retracts onto $Z$, fixing $Z$. On the bottom end, extend this retraction over the newly attached disks by the identity, then extend the inductive retraction $Z\to X_{\rm old}$ over those same disks; both extensions are well defined because their attaching boundaries already lie in the fixed subspace. Their composite strongly deformation retracts the bottom end onto the new CW space. On the top end, extend the inductive retraction $Z\to Y$ by the identity on the cylinders and top disks; it fixes their attaching sphere in $Y$, and its target is exactly $Y\cup_\alpha C(f_\alpha)$, a finite simplicial complex. Composing with the two prism retractions from step 4.1 gives strong deformation retractions of $Z'$ onto both new models. [step 2.1, step 4.1, construct]
+
+6.1 After finishing $A$, keep its common space $Z_A$ and its two strong deformation retracts $A$ and $L$. Repeat the construction for the finitely many cells of $X\setminus A$ in increasing dimension. Inductively retain $Z_A\subseteq Z$ and require both old retractions to carry $Z_A$ into $A$ or $L$, respectively; this holds at the initial stage. For each new prism, the retractions of step 4.1 fix the whole old space $W$ and therefore fix $Z_A$. The extensions in step 5.1 act on $Z_A$ only by the preceding pair-preserving retractions. Hence the induction preserves the designated subpair, and the final common pair $(Z,Z_A)$ strongly deformation retracts as a pair onto $(X,A)$ and onto a finite simplicial pair $(|K|,|L|)$. Composing the inclusions and retractions gives maps of pairs in both directions with pair homotopies to the identities. Empty $A$ uses $Z_A=\varnothing$, and empty $X$ gives the empty simplicial pair. [step 4.1, step 5.1] ∎

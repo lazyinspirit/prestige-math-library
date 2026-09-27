@@ -7,17 +7,17 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [thm-morse-functions-form-a-residual-subset, thm-morse-functions-are-open-dense-on-a-compact-manifold]
+deps: [def-axiom-of-choice, thm-morse-functions-form-a-residual-subset, thm-morse-functions-are-open-dense-on-a-compact-manifold]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-05
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -29,7 +29,8 @@ sources:
 
 ## Remark
 
-The compact theorem and the general theorem package different results.
+Assuming the Axiom of Choice ([[def-axiom-of-choice]]), the compact theorem and
+the general theorem package different results.
 
 On a compact manifold,
 [[thm-morse-functions-are-open-dense-on-a-compact-manifold]] gives an open dense

@@ -11,8 +11,12 @@ deps: [thm-multitape-machines-have-one-tape-simulations]
 justified_by: []
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-31
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -44,4 +48,4 @@ at most $c_M(|w|+t+1)$ tape cells and at most $c_M(|w|+t+1)^2$ time.
 
 3.1 One simulation cycle of $S_M$ at stage $j$ performs a constant number of full sweeps across that length-$O(|w|+j+1)$ encoding and, when needed, one local shift of a suffix of the same order. Hence the time for the $j$th simulated step is at most $c''_M(|w|+j+1)$ for some constant $c''_M>0$. [L1, step 2.1]
 
-4.1 Summing the estimate from step 3.1 for $j=0,1,\dots,t-1$ gives $$ \sum_{j=0}^{t-1} c''_M(|w|+j+1)\le c''_M t(|w|+1)+c''_M\frac{t(t-1)}2\le c_M(|w|+t+1)^2 $$ for a suitable constant $c_M$. Together with step 2.1, this proves the claimed linear space bound and quadratic time bound. [step 2.1, step 3.1] ∎
+4.1 The initial encoding from [L1] takes $O_M(|w|+1)$ time and space: the simulator makes a fixed number of sweeps over the input and writes a fixed number of blocks and delimiters. Adding this setup cost to the estimate from step 3.1 for $j=0,1,\dots,t-1$ gives $$ O_M(|w|+1)+\sum_{j=0}^{t-1} c''_M(|w|+j+1)\le O_M(|w|+1)+c''_M t(|w|+1)+c''_M\frac{t(t-1)}2\le c_M(|w|+t+1)^2 $$ for a suitable constant $c_M$, including when $t=0$. Together with step 2.1, this proves the claimed linear space bound and quadratic time bound. [L1, step 2.1, step 3.1] ∎

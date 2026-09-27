@@ -2,13 +2,7 @@
 id: "lem-normal-domain-implies-s-two"
 kind: "lemma"
 title: "normal domain implies s two"
-deps: ["def-serre-r-k-and-s-k-conditions", "thm-normality-is-local-for-domains", "thm-depth-zero-associated-prime-criterion", "lem-depth-quotient-by-regular-element", "thm-krull-height-theorem"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-serre-r-k-and-s-k-conditions", "thm-normality-is-local-for-domains", "thm-depth-zero-associated-prime-criterion", "lem-depth-quotient-by-regular-element", "thm-krull-height-theorem"]
 sources:
   references:
     - title: "Lemma 8.40 proof, pp.56–57 (normal hypothesis required); 8.41"
@@ -19,15 +13,24 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Every commutative Noetherian integrally closed domain satisfies $(S_2)$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every commutative Noetherian integrally closed domain satisfies $(S_2)$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement. The Axiom of Choice is assumed; cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[def-serre-r-k-and-s-k-conditions]]: For a commutative Noetherian ring $R$ and an integer $j\ge0$, condition $(R_j)$ means that $R_{\mathfrak p}$ is regular whenever $\operatorname{ht}\mathfrak p\le j$. Condition $(S_j)$ means that $\operatorname{depth}R_{\mathfrak p}\ge\min\{j,\dim R_{\mathfrak p}\}$ for every prime $\mathfrak p$. A finite module $M$ satisfies $(S_j)$ if $\operatorname{depth}_{R_{\mathfrak p}}M_{\mathfrak p}\ge\min\{j,\dim\operatorname{Supp}_{R_{\mathfrak p}}M_{\mathfrak p}\}$ for every prime in its support. Outside the support the condition is vacuous, consistent with depth of the zero module being $+\infty$ and the empty support having no nonnegative dimension. Thus the zero module satisfies all $(S_j)$ conditions, and the zero ring satisfies both families vacuously.
 

@@ -11,6 +11,7 @@ items: [def-bull-graph,
         rem-strong-perfect-graph-theorem-for-the-bull-route,
         def-good-function-on-a-graph,
         def-alpha-narrow-graph,
+        lem-perfect-vertex-deletions-imply-two-narrowness,
         prop-perfect-graphs-are-one-narrow,
         thm-alpha-narrow-graphs-contain-large-perfect-induced-subgraphs,
         cor-alpha-narrow-graphs-have-large-cliques-or-stable-sets,
@@ -22,6 +23,9 @@ items: [def-bull-graph,
         lem-basic-bull-free-hole-with-a-complete-outside-vertex,
         lem-basic-bull-free-hole-with-an-anticomplete-outside-vertex,
         rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route,
+        lem-replicating-a-vertex-of-a-perfect-graph-preserves-perfection,
+        thm-lovasz-perfect-graph-criterion-and-complement-invariance,
+        thm-substituting-perfect-graphs-preserves-perfection,
         thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect,
         thm-basic-bull-free-graphs-are-two-narrow,
         thm-alpha-narrowness-is-preserved-under-substitution,
@@ -30,13 +34,8 @@ items: [def-bull-graph,
 examples: []
 ---
 
-This draft page follows the Chudnovsky-Safra route to the bull theorem: define
-good functions and $\alpha$-narrowness, reduce composite graphs to modular
-decomposition, prove the basic-graph structural lemmas, and then close the
-induction by substitution. The perfect-graph ingredients that the source uses
-as external theorems are recorded honestly as not-proved-here remarks rather
-than being smuggled in as uncited assumptions.
+This page follows the Chudnovsky–Safra route through good functions, $\alpha$-narrowness, modular decomposition, and the basic-graph structural lemmas. Vertex replication, Lovász's numerical criterion and complement invariance, and substitution of perfect graphs have full local proofs.
 
-The final outcome is the explicit Erdős-Hajnal exponent $1/4$ for bull-free
-graphs. This page deliberately stays on that route and does not absorb the
-later cograph/perfect-pattern package that the live plan assigns to page 413.
+The perfect-vertex-deletion lemma gives an independent two-narrowness proof for the five-cycle example.
+
+The sharp Erdős–Hajnal exponent $1/4$ still has an unmet proof prerequisite: the neighborhood-perfection step invokes perfection of bull-free Berge graphs through the recorded strong perfect graph theorem. That proof has not been supplied here, so the sharp-bound chain remains pending. The separate qualitative bull-free Erdős–Hajnal argument uses the proved leaf–co-leaf extension route.

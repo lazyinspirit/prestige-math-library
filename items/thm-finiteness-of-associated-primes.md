@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-associated-primes-in-a-short-exact-sequence, thm-prime-filtration-of-a-finite-module]
+deps: [def-axiom-of-choice, thm-associated-primes-in-a-short-exact-sequence, thm-prime-filtration-of-a-finite-module]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-finiteness-of-associated-primes). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,14 +28,16 @@ sources:
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
 left $R$-module. Then $\operatorname{Ass}_R(M)$ is a finite set.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ and a finitely generated left $R$-module $M$.
+**Given:** The Axiom of Choice, a Noetherian commutative ring $R$ and a finitely generated left $R$-module $M$ ([[def-axiom-of-choice]]).
 
-[L1] The module $M$ admits a prime filtration $0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
+[L1] Under the stated Axiom of Choice, the module $M$ admits a prime filtration $0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
 
 [L2] In a short exact sequence, associated primes of the middle term are contained in the union of those of the outer terms ([[thm-associated-primes-in-a-short-exact-sequence]]).
 

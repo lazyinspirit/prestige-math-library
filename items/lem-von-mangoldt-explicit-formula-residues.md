@@ -4,24 +4,30 @@ kind: lemma
 title: "Residues in the von Mangoldt contour shift"
 status: published
 origin: pipeline
-deps: [thm-riemann-zeta-meromorphic-continuation, thm-von-mangoldt-logarithmic-derivative-zeta, thm-trivial-zeros-and-critical-strip, thm-riemann-zeta-functional-equation, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros]
+deps: [def-countable-choice, thm-riemann-zeta-meromorphic-continuation, thm-von-mangoldt-logarithmic-derivative-zeta, thm-trivial-zeros-and-critical-strip, thm-riemann-zeta-functional-equation, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Kiran S. Kedlaya, Analytic Number Theory, §10.1"
       url: "https://kskedlaya.org/ant/chapter-10.html"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For $x>1$, shifting $-\zeta'(s)x^s/(\zeta(s)s)$ left crosses residues
 $$x\quad(s=1),\qquad-\frac{x^\rho}{\rho}\quad(s=\rho),\qquad-\frac12\log(1-x^{-2})\quad(s=-2,-4,\ldots),\qquad-\frac{\zeta'(0)}{\zeta(0)}\quad(s=0).$$
@@ -37,7 +43,7 @@ Zeros are counted with multiplicity and $x^\rho=\exp(\rho\log x)$ uses real $\lo
 
 ## Proof
 
-**Given:** $x>1$ and the meromorphic continuation of zeta.
+**Given:** Countable choice, $x>1$ and the meromorphic continuation of zeta.
 
 1.1 A simple pole of zeta at $1$ makes $-\zeta'/\zeta$ have residue $1$; a zero $\rho$ of multiplicity $m$ makes it have residue $-m$.  Multiplication by $x^s/s$ gives the first two entries. [given, algebra]
 

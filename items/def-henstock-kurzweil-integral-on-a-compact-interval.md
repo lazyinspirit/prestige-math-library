@@ -8,17 +8,17 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-gauge-and-fine-tagged-partition, thm-cousins-lemma-for-gauges, def-tagged-partition-and-riemann-sum]
-justified_by: [prop-henstock-kurzweil-integral-is-unique]
+justified_by: []
 forward_refs: []
 aliases: []
 landmark: true
 verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-21
-  audited: 2026-08-21
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:

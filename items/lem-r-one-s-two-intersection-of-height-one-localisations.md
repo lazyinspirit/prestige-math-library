@@ -2,13 +2,15 @@
 id: "lem-r-one-s-two-intersection-of-height-one-localisations"
 kind: "lemma"
 title: "r one s two intersection of height one localisations"
-deps: ["def-serre-r-k-and-s-k-conditions", "thm-lasker-noether-primary-decomposition", "lem-associated-primes-from-a-minimal-primary-decomposition", "lem-depth-quotient-by-regular-element", "thm-depth-zero-associated-prime-criterion", "thm-associated-primes-localise", "thm-existence-of-associated-primes"]
+deps: ["def-axiom-of-choice", "def-serre-r-k-and-s-k-conditions", "thm-lasker-noether-primary-decomposition", "lem-associated-primes-from-a-minimal-primary-decomposition", "lem-depth-quotient-by-regular-element", "thm-depth-zero-associated-prime-criterion", "thm-associated-primes-localise", "thm-existence-of-associated-primes"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (lem-r-one-s-two-intersection-of-height-one-localisations). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Proposition 8.41 proof, pp.57–58; Stacks 10.157.6(1)–(2)"
@@ -23,11 +25,13 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 If $R$ is a commutative Noetherian domain satisfying $(S_2)$, then inside its fraction field $K$ one has $R=\bigcap_{\operatorname{ht}\mathfrak p=1}R_{\mathfrak p}$. For a field the empty intersection is interpreted as $K=R$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[def-serre-r-k-and-s-k-conditions]]: For a commutative Noetherian ring $R$ and an integer $j\ge0$, condition $(R_j)$ means that $R_{\mathfrak p}$ is regular whenever $\operatorname{ht}\mathfrak p\le j$. Condition $(S_j)$ means that $\operatorname{depth}R_{\mathfrak p}\ge\min\{j,\dim R_{\mathfrak p}\}$ for every prime $\mathfrak p$. A finite module $M$ satisfies $(S_j)$ if $\operatorname{depth}_{R_{\mathfrak p}}M_{\mathfrak p}\ge\min\{j,\dim\operatorname{Supp}_{R_{\mathfrak p}}M_{\mathfrak p}\}$ for every prime in its support. Outside the support the condition is vacuous, consistent with depth of the zero module being $+\infty$ and the empty support having no nonnegative dimension. Thus the zero module satisfies all $(S_j)$ conditions, and the zero ring satisfies both families vacuously.
 
@@ -41,7 +45,7 @@ If $R$ is a commutative Noetherian domain satisfying $(S_2)$, then inside its fr
 
 [F6] [[thm-associated-primes-localise]]: Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left $R$-module, and let $S \subseteq R$ be multiplicative. Then $$ \operatorname{Ass}_{S^{-1}R}(S^{-1}M)=\{S^{-1}\mathfrak p : \mathfrak p \in \operatorname{Ass}_R(M),\ \mathfrak p \cap S=\varnothing\}. $$
 
-[F7] [[thm-existence-of-associated-primes]]: Let $R$ be a Noetherian commutative ring and let $M$ be a nonzero left $R$-module. Then $\operatorname{Ass}_R(M)$ is nonempty.
+[F7] [[thm-existence-of-associated-primes]]: Under Dependent Choice, if $R$ is a Noetherian commutative ring and $M$ a nonzero left $R$-module, then $\operatorname{Ass}_R(M)$ is nonempty.
 
 ## Proof
 

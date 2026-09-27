@@ -4,8 +4,15 @@ title: "The Kunneth Tor map"
 kind: lemma
 status: published
 origin: pipeline
-deps: [lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid, lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free, thm-free-modules-are-projective-with-choice-boundary, def-balanced-tor-bifunctor, thm-long-exact-sequence-in-homology, cor-the-long-exact-homology-sequence-is-natural]
+deps: [def-axiom-of-choice, def-dependent-choice, lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid, lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free, thm-free-modules-are-projective-with-choice-boundary, def-balanced-tor-bifunctor, thm-long-exact-sequence-in-homology, cor-the-long-exact-homology-sequence-is-natural]
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Weibel, An Introduction to Homological Algebra"
@@ -13,9 +20,6 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-06
-  precheck: pass
 ---
 
 ## Statement
@@ -27,13 +31,15 @@ $$\pi_n:H_n(C\otimes_RD)\longrightarrow\bigoplus_{p+q=n-1}\operatorname{Tor}_1^R
 
 **Given:** The stated ring, complexes, Choice hypothesis, and degree $n$; all tensor complexes use the direct sum and Koszul differential.
 
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It supplies the arbitrary bases and projective splittings in [F2]. It also implies [[def-dependent-choice]]: for a serial relation on a set $X$, choose one successor for every $x\in X$, then iterate that fixed successor function from any prescribed starting point. This DC consequence licenses the comparison naturality in [F4] used in step 5.1.
+
 [F1] The cycle-boundary sequences are exact: [[lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid]].
 
 [F2] Under Choice, all $Z_pC,B_pC$ are free by [[lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free]], hence projective by [[thm-free-modules-are-projective-with-choice-boundary]].
 
 [F3] A short exact sequence of complexes gives a long exact homology sequence [[thm-long-exact-sequence-in-homology]], naturally in its maps [[cor-the-long-exact-homology-sequence-is-natural]].
 
-[F4] Tor can be computed from a projective resolution of its first variable: [[def-balanced-tor-bifunctor]].
+[F4] Under the DC consequence of [A1], Tor can be computed naturally from a supplied projective resolution of its first variable: [[def-balanced-tor-bifunctor]].
 
 ## Proof
 
@@ -47,4 +53,4 @@ $$\pi_n:H_n(C\otimes_RD)\longrightarrow\bigoplus_{p+q=n-1}\operatorname{Tor}_1^R
 
 4.1 The free presentation $0\to B_{p-1}C\to Z_{p-1}C\to H_{p-1}C\to0$ is a length-one projective resolution. Hence [F4] identifies $\ker(B_{p-1}C\otimes H_qD\to Z_{p-1}C\otimes H_qD)$ with $\operatorname{Tor}_1^R(H_{p-1}C,H_qD)$. Therefore $\ker\partial_n$ is exactly the displayed Tor sum after reindexing $p-1$. [F1, F2, F4, step 3.1, algebra]
 
-5.1 By [F3], $H_n(r)$ has image $\ker\partial_n$. Define $\pi_n$ as $H_n(r)$ corestricted to this kernel and followed by the identification in step 4.1. It is well defined on homology and surjective. A pair of chain maps induces maps of the sequence in step 1.1 and of the free presentations in step 4.1, so [F3] and the comparison naturality in [F4] prove naturality of $\pi_n$. Empty sums and zero modules cause no exception. [F3, F4, step 1.1, step 4.1, algebra] ∎
+5.1 By [F3], $H_n(r)$ has image $\ker\partial_n$. Define $\pi_n$ as $H_n(r)$ corestricted to this kernel and followed by the identification in step 4.1. It is well defined on homology and surjective. A pair of chain maps induces maps of the sequence in step 1.1 and of the free presentations in step 4.1, so [F3] and the comparison naturality in [F4], licensed by [A1], prove naturality of $\pi_n$. Empty sums and zero modules cause no exception. [A1, F3, F4, step 1.1, step 4.1, algebra] ∎

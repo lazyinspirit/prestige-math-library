@@ -4,17 +4,18 @@ title: "Integral of a compactly supported smooth density"
 kind: definition
 status: published
 origin: pipeline
-deps: ["def-density-bundle-and-smooth-density", "lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary"]
+deps: ["def-density-bundle-and-smooth-density", "lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary", "def-countable-choice"]
 justified_by: ["thm-density-integration-is-defined-without-an-orientation"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Lee density-integral construction pp.431–432; Nicolaescu Proposition 3.4.3"

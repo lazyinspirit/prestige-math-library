@@ -4,31 +4,37 @@ title: "Zeta horizontal logarithmic derivative comparison"
 kind: lemma
 status: published
 origin: pipeline
-deps: [thm-riemann-zeta-classical-zero-free-region, lem-local-logarithmic-derivative-zeta, lem-zeta-logarithmic-derivative-zero-bound, thm-von-mangoldt-logarithmic-derivative-zeta]
+deps: [thm-riemann-zeta-classical-zero-free-region, lem-local-logarithmic-derivative-zeta, lem-zeta-logarithmic-derivative-zero-bound, thm-von-mangoldt-logarithmic-derivative-zeta, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Theorem 6.7, equations (6.9)\u2013(6.11), pp.174\u2013175"
       url: https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 There are absolute $d>0,C>0$, with $d<c_0$, such that for $|t|\ge3$ and $\sigma\ge1-d/\log(|t|+2)$,
 $$\left|\frac{\zeta'(\sigma+it)}{\zeta(\sigma+it)}\right|\le C\log(|t|+2).$$
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** Countable choice and the data and hypotheses of the statement.
 
 [F1] [[thm-riemann-zeta-classical-zero-free-region]]: There is an absolute $c_0>0$ such that $\zeta$ has no zeros in $\sigma\ge1-c_0/\log(|t|+2)$. The pole at $s=1$ is not a zero.
 
@@ -40,7 +46,7 @@ $$\left|\frac{\zeta'(\sigma+it)}{\zeta(\sigma+it)}\right|\le C\log(|t|+2).$$
 
 ## Proof
 
-1.1 Put $L=\log(|t|+2)$, $s_1=1+L^{-1}+it$. The Euler series and the real-axis simple-pole expansion give $|\zeta'/\zeta(s_1)|\le-\zeta'/\zeta(1+L^{-1})=O(L)$. The same comparison holds for every $\sigma\ge1+L^{-1}$; for $\sigma\ge2$ it is even bounded by the convergent series at two. The real-part formula now gives $\sum_\rho\operatorname{Re}(1/(s_1-\rho))=O(L)$, all summands being positive. [F3, F4]
+1.1 Under countable choice, the supplied zero-bound identity and zero-free region apply. Put $L=\log(|t|+2)$, $s_1=1+L^{-1}+it$. The Euler series and the real-axis simple-pole expansion give $|\zeta'/\zeta(s_1)|\le-\zeta'/\zeta(1+L^{-1})=O(L)$. The same comparison holds for every $\sigma\ge1+L^{-1}$; for $\sigma\ge2$ it is even bounded by the convergent series at two. The real-part formula now gives $\sum_\rho\operatorname{Re}(1/(s_1-\rho))=O(L)$, all summands being positive. [F3, F4]
 
 1.2 For $|\operatorname{Im}\rho-t|\le1$, the region theorem implies $1-\operatorname{Re}\rho\ge c_0/(K L)$ with an absolute $K$, since $\log(|\operatorname{Im}\rho|+2)\le K L$. Choose $d<c_0/(2K)$. For $1-d/L\le\sigma\le1+1/L$, the positive real parts of $s-\rho$ and $s_1-\rho$ are comparable, hence $|s-\rho|\ge c|s_1-\rho|$. Consequently $|1/(s-\rho)-1/(s_1-\rho)|\le C/(L|s_1-\rho|^2)\le C\operatorname{Re}(1/(s_1-\rho))$. [F1, algebra]
 

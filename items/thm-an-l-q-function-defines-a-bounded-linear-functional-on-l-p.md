@@ -10,8 +10,12 @@ provenance:
 deps: [def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-l-p-space-as-a-quotient-by-null-functions, thm-holder-inequality-for-integrals, thm-the-lebesgue-integral-respects-almost-everywhere-equality, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Use Holder to make the pairing integrable, then use almost-everywhere invariance of the integral to descend from representatives to $L^p$ classes."
 verification:
-  audited: 2026-09-01
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 6.15"
@@ -54,6 +58,6 @@ $$\|\Lambda_g\|\le\|g\|_q.$$
 
 2.2 If $v'$ is another representative of $g$, then $v=v'$ almost everywhere. Hence $uv=uv'$ almost everywhere. Since both products are integrable by step 1.1, [L3] gives $$\int uv\,d\mu=\int uv'\,d\mu,$$ so $\Lambda_g([f])$ is independent of the chosen representative of $g$. [L1, L3, step 1.1]
 
-3.1 Let $[f],[h] \in L^p(\mu)$ and let $a,b \in \mathbb R$. Choose representatives $u,w$. By step 2.1 we may compute with representatives, and [L4] gives $$\Lambda_g(a[f]+b[h])=\int (au+bw)v\,d\mu =a\int uv\,d\mu+b\int wv\,d\mu =a\Lambda_g([f])+b\Lambda_g([h]).$$ The estimate from step 1.1 also shows $$|\Lambda_g([f])|\le\|[f]\|_p\|g\|_q,$$ so $\Lambda_g$ is linear and bounded. [step 1.1, step 2.1, step 2.2, L4, given]
+3.1 Let $[f],[h] \in L^p(\mu)$ and let $a,b \in \mathbb C$. Choose representatives $u,w$. By step 2.1 we may compute with representatives, and complex linearity in [L4] gives $$\Lambda_g(a[f]+b[h])=\int (au+bw)v\,d\mu =a\int uv\,d\mu+b\int wv\,d\mu =a\Lambda_g([f])+b\Lambda_g([h]).$$ The estimate from step 1.1 also shows $$|\Lambda_g([f])|\le\|[f]\|_p\|g\|_q,$$ so $\Lambda_g$ is complex linear and bounded. [step 1.1, step 2.1, step 2.2, L4, given]
 
 4.1 The estimate in step 3.1 holds for every $[f]$ with $\|[f]\|_p \le 1$. Taking the supremum over the unit ball gives $$\|\Lambda_g\|\le\|g\|_q.$$ Thus $\Lambda_g$ is a bounded linear functional on $L^p(\mu)$. [step 3.1, given] ∎

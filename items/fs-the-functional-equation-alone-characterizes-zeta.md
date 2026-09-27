@@ -6,16 +6,16 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
-deps: [thm-riemann-zeta-functional-equation]
+  proof: ai-altered
+deps: [def-riemann-zeta-function]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "K. Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 12 §7"
@@ -28,14 +28,16 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The modified function $$F(s):=e^{(s-1/2)^2}\zeta(s).$$
+**Given:** The classical homogeneous equation
+$$F(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)F(1-s),$$
+interpreted as an identity of meromorphic functions.
 
-[L1] Zeta satisfies the classical functional equation ([[thm-riemann-zeta-functional-equation]]).
+[L1] On $\operatorname{Re}s>1$, $\zeta(s)=\sum_{n\ge1}n^{-s}$ ([[def-riemann-zeta-function]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 The factor $e^{(s-1/2)^2}$ is entire, nonconstant, and invariant under $s\mapsto1-s$ because $(1-s-1/2)^2=(s-1/2)^2$. Therefore multiplying the functional equation in [L1] by this factor shows that $F$ satisfies the same functional equation as zeta. [L1, given, algebra]
+1.1 Take the entire function $F(s)=0$. Both sides of the given equation are identically zero wherever its displayed coefficient is finite. At its poles the product with the zero function has the zero meromorphic extension. Thus $F$ satisfies the equation as a meromorphic identity. [given, construct, algebra]
 
-2.1 The function $F$ is not equal to zeta, since for example $F(2)=e^{9/4}\zeta(2)\ne\zeta(2)$. Thus step 1.1 gives a different meromorphic function obeying the same functional equation, so that equation alone cannot characterize zeta. [step 1.1, algebra] ∎
+2.1 By [L1], $\zeta(2)=\sum_{n\ge1}n^{-2}\ge1$, whereas $F(2)=0$. Hence a meromorphic function different from zeta satisfies the equation, and the equation alone cannot determine zeta. No assertion that zeta itself satisfies the equation is needed for this counterexample. [L1, step 1.1, algebra] ∎

@@ -7,15 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-parameter-power-series-subring-makes-ring-finite, def-system-of-parameters-and-parameter-ideal, thm-dimension-as-minimal-number-of-radical-generators, lem-integral-extension-chain-contraction-is-strict, def-dependent-choice]
+deps: [lem-parameter-power-series-subring-makes-ring-finite, def-system-of-parameters-and-parameter-ideal, lem-integral-extension-chain-contraction-is-strict, def-dependent-choice]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   scraped: []
   references:
@@ -24,6 +17,15 @@ sources:
     - title: "The Stacks Project, Section 10.160: The Cohen structure theorem"
       url: "https://stacks.math.columbia.edu/tag/0323"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -42,7 +44,7 @@ is injective.
 
 [L1] The map $\phi$ makes $A$ finite over its image ([[lem-parameter-power-series-subring-makes-ring-finite]]).
 
-[L2] A system of parameters records that $\dim A=d$ ([[def-system-of-parameters-and-parameter-ideal]], [[thm-dimension-as-minimal-number-of-radical-generators]]).
+[L2] The given system of parameters has length $d$, and the statement already assumes $\dim A=d$ ([[def-system-of-parameters-and-parameter-ideal]]).
 
 [L3] The formal power-series ring $k\llbracket X_1,\ldots,X_d\rrbracket$ is a Noetherian local domain of dimension $d$ (Stacks Project, Section 10.160, Remark 10.160.9).
 

@@ -7,11 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-efficient-universal-simulation-with-clock, lem-effective-enumeration-of-clocked-machines, def-time-and-space-constructible-function, def-dtime-ntime-dspace-and-nspace]
+deps: [thm-nondeterministic-recursive-padding-separation, def-time-and-space-constructible-function, def-dtime-ntime-dspace-and-nspace]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-nondeterministic-time-hierarchy). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Section 3.3, Theorem 3.3"
@@ -31,14 +36,14 @@ $$ \mathrm{NTIME}(f(n))\subsetneq\mathrm{NTIME}(g(n)). $$
 
 ## Proof
 
-**Proof technique:** application of the sourced nondeterministic separation theorem, with a clock-convention translation.
+**Proof technique:** application of the internal nondeterministic recursive-padding separation theorem, with an exact-clock construction.
 
 1.1 Construct a deterministic unary-input clock as follows: read its input, compute the binary value $g(n)$ with the fixed constructor, and perform $g(n)$ countdown iterations before halting. A least-significant-bit-first binary counter has linear total decrement cost (the numbers of bit changes form a geometric sum); returning its head after each decrement has the same bound. Thus the clock's actual running time $T(n)$ is $\Theta(g(n))$ eventually, and can be arranged to be at least $n$ for every $n$. It is an exact running time in the terminology of Seiferas--Fischer--Meyer, even though $g$ was supplied only by an asymptotically bounded binary-output constructor. [given, construct]
 
-2.1 Use the first corollary to Seiferas--Fischer--Meyer Theorem 4 (the identity-function case, p. 155): for an exact running time $T$, there is a binary language $D$ accepted within $T$ but outside every acceptance-time class with bound $a$ satisfying $a(n)\ge n$ and $a(n+1)=o(T(n))$. Here acceptance time means the length of a shortest accepting branch, and nonmembers have no accepting branch. This is the external separation result being invoked. [step 1.1, construct]
+2.1 Apply [[thm-nondeterministic-recursive-padding-separation]] to the exact clock $T$ from step 1.1. It gives a binary language $D\in\mathrm{NTIME}(T)$ under the local all-branch convention, but $D\notin\mathrm{NTIME}(a)$ for every total recursive $a\ge n$ with $a(n+1)=o(T(n))$. [step 1.1]
 
-3.1 In particular, $D$ has an acceptor with an accepting branch of length at most $T(n)$ on each member. Run that fixed acceptor with the fixed unary clock from step 1.1 on separate tapes, interleaving one transition of each per round, and reject if the clock expires without acceptance. This preserves the language and forces every branch to halt within $O(T(n)+n)=O(g(n))$. The product machine has fixed finite control; this is direct clocking, not a claim of linear universal simulation. Hence $D\in\mathrm{NTIME}(g)$ under the local all-branch convention. [step 1.1, step 2.1, construct]
+3.1 Since $T(n)=O(g(n))$, the all-branch $O(T)$ machine from step 2.1 is an all-branch $O(g)$ machine. Hence $D\in\mathrm{NTIME}(g)$. [step 1.1, step 2.1]
 
-3.2 If $D$ belonged to local $\mathrm{NTIME}(f)$, a constant integer $C$ would bound its accepting times at every length by $a(n)=\max\{n,Cf(n),C\}$: enlarge $C$ to cover the finitely many exceptional lengths. Since $f(n)\ge n$ eventually, $a(n+1)=O(f(n+1))=o(g(n))=o(T(n))$. This contradicts the exclusion in step 2.1. Thus $D\notin\mathrm{NTIME}(f)$. [given, step 1.1, step 2.1, algebra]
+3.2 If $D$ belonged to local $\mathrm{NTIME}(f)$, a constant integer $C$ would bound its accepting times at every length by the total recursive function $a(n)=\max\{n,Cf(n),C\}$: enlarge $C$ to cover the finitely many exceptional lengths. Since $f(n)\ge n$ eventually, $a(n+1)=O(f(n+1))=o(g(n))=o(T(n))$. This contradicts the exclusion in step 2.1. Thus $D\notin\mathrm{NTIME}(f)$. [given, step 1.1, step 2.1, algebra]
 
 4.1 Nondecreasing $f$ gives $f(n)\le f(n+1)=o(g(n))$, so every all-branch $O(f)$ decider is an all-branch $O(g)$ decider. Together with steps 3.1 and 3.2 this proves the strict inclusion. [given, step 3.1, step 3.2, algebra] ∎

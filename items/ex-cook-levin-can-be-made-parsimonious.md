@@ -10,8 +10,12 @@ provenance:
 deps: [lem-cook-levin-can-be-made-parsimonious]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -31,14 +35,14 @@ assignments.
 
 **Given:** the displayed one-choice machine $N$.
 
-[L1] The Cook--Levin construction can be made parsimonious. by [[lem-cook-levin-can-be-made-parsimonious]].
+[L1] The Cook--Levin construction can be made parsimonious by [[lem-cook-levin-can-be-made-parsimonious]].
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The paths are ``start $\xrightarrow{0}$ accept-with-tag-$0$'' and ``start $\xrightarrow{1}$ accept-with-tag-$1$''. Padding repeats the final configuration, so these give two and only two legal accepting tableaux. [given, algebra]
+1.1 Use two distinct intermediate states $q_0'$ and $q_1'$ to record the first choice: from the initial state the machine branches to $q_b'$, then deterministically enters its single accepting state. These are its only two computation paths. Their first successor rows have different state tags, and padding repeats the final accepting configuration, so they give two and only two legal accepting tableaux. [given, construct]
 
-2.1 In the exact encoding of [L1], the tableau variables are uniquely fixed by one of these tableaux and every auxiliary variable is constrained by a biconditional with the subformula it names. Equivalently, after eliminating those uniquely determined variables, the formula is the tautology $b\lor\neg b$ with declared variable $b$. Its two assignments correspond bijectively to the two paths. [L1, step 1.1]
+2.1 In the exact encoding of [L1], every declared variable is a tableau cell variable and there are no auxiliary variables. Each of the two legal padded tableaux fixes every declared variable, and [L1] gives the converse from any satisfying assignment to exactly one accepting path. Hence the two paths correspond bijectively to the formula's satisfying assignments. [L1, step 1.1]
 
 3.1 Therefore the source accepting-path count and the formula's satisfying- assignment count are both exactly $2$. [step 1.1, step 2.1] ∎

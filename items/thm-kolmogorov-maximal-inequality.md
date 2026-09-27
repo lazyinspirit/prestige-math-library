@@ -9,11 +9,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (thm-kolmogorov-maximal-inequality). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Theorem 2.5.5, p. 84"
@@ -33,7 +34,7 @@ Thus controlling the whole finite maximum costs no larger bound than controlling
 
 [F1] [[thm-grouping-independent-sigma-algebras]]: Let $(\mathcal F_i)_{i\in I}$ be an independent family of sigma-algebras on a probability space, and let $J_0,\dots,J_{m-1}\subseteq I$ be pairwise disjoint index sets. For each $r<m$, define $\mathcal G_r:=\sigma\left(\bigcup_{i\in J_r}\mathcal F_i\right).$ Then the sigma-algebras $\mathcal G_0,\dots,\mathcal G_{m-1}$ are independent.
 
-[F2] [[thm-factorization-of-expectations-for-independent-variables]]: Let $n\ge1$, let $X_0,\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\mathbb R\to\mathbb R$ be Borel measurable for each $i<n$. 1. If every $g_i$ is nonnegative, then $\mathbb E\left[\prod_{i<n}g_i(X_i)\right]=\prod_{i<n}\mathbb E[g_i(X_i)]$ in $[0,+\infty]$. 2. If every $g_i(X_i)$ is integrable, then $\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\mathbb R$.
+[F2] For $n\ge1$, if $X_0,\dots,X_{n-1}$ are independent real random variables and $g_i:\mathbb R\to\mathbb R$ are Borel measurable with each $g_i(X_i)$ integrable, then $\prod_{i<n}g_i(X_i)$ is integrable and $\mathbb E[\prod_{i<n}g_i(X_i)]=\prod_{i<n}\mathbb E[g_i(X_i)]$ in $\mathbb R$ ([[thm-factorization-of-expectations-for-independent-variables]]).
 
 [F3] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space. Then $\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$ $\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$ Moreover, covariance is symmetric and bilinear on finite linear combinations. On finite full-power-set probability spaces these formulas reduce to the published finite identities.
 

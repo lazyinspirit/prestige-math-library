@@ -6,4 +6,8 @@ items: [def-schur-multiplier-of-a-group, def-free-presentation-kernel-data, lem-
 examples: []
 ---
 
-The convention throughout is $M(G)=H_2(G;\mathbb Z)$. The degree-two cohomology sequence is a related classification tool for central extensions, not the definition of the multiplier; its splitting is not natural.
+The convention throughout is $M(G)=H_2(G;\mathbb Z)$. The degree-two
+cohomology sequence classifies central extensions with the Axiom of Choice
+and resolution data specified in its statement; its splitting is not natural.
+The multiplier computations and universal-extension constructions retain
+their individual choice and resolution hypotheses.

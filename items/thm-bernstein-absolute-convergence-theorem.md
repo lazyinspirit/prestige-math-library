@@ -10,11 +10,12 @@ provenance:
 deps: [def-wiener-algebra-of-the-circle, lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz, lem-holder-fourier-coefficients-have-weighted-ltwo-decay]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (thm-bernstein-absolute-convergence-theorem). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, Theorem 3.3.16"
@@ -25,11 +26,11 @@ sources:
 
 ## Statement
 
-If $1/2<\alpha\le1$ and $f\in C^\alpha(\mathbb T)$ with respect to circular distance, then $f\in A(\mathbb T)$.
+Assume the Axiom of Countable Choice. If $1/2<\alpha\le1$ and $f\in C^\alpha(\mathbb T)$ with respect to circular distance, then $f\in A(\mathbb T)$.
 
 ## Facts & Assumptions
 
-**Given:** $1/2<\alpha\le1$ and $f\in C^\alpha(\mathbb T)$.
+**Given:** Countable Choice, $1/2<\alpha\le1$, and $f\in C^\alpha(\mathbb T)$.
 
 [L1] For every $0<s<\alpha$, the Fourier coefficients of $f$ have finite weighted $\ell^2$ norm of exponent $s$ ([[lem-holder-fourier-coefficients-have-weighted-ltwo-decay]]).
 

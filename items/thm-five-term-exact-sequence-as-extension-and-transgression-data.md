@@ -7,11 +7,15 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, thm-inflation-restriction-exact-sequence-in-degree-one]
+deps: [def-axiom-of-choice, def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, thm-inflation-restriction-exact-sequence-in-degree-one]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -23,7 +27,7 @@ sources:
 
 ## Statement
 
-For an extension $1\to N\to G\to Q\to1$ and an abelian $G$-module $A$, assume
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For an extension $1\to N\to G\to Q\to1$ and an abelian $G$-module $A$, assume
 the standard low-degree sequence
 
 $$
@@ -39,7 +43,9 @@ inclusion $A^N\hookrightarrow A$.
 
 ## Facts & Assumptions
 
-**Given:** An extension $1\to N\to G\to Q\to1$ and an abelian $G$-module $A$.
+**Given:** The Axiom of Choice, an extension $1\to N\to G\to Q\to1$, and an abelian $G$-module $A$.
+
+[A2] Choice supplies normalized sections to apply the extension classification [L2].
 
 [F1] Restriction and inflation in degree one are the explicit maps defined on cocycles in [[def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology]].
 
@@ -55,7 +61,7 @@ inclusion $A^N\hookrightarrow A$.
 
 1.1 The first three terms are exactly the degree-one inflation-restriction sequence, so they are exact by [L1], with maps described concretely by [F1]. [F1, L1, given]
 
-1.2 Under [L2], a class in $H^2(Q,A^N)$ is an extension of $Q$ by $A^N$. The map to $H^2(G,A)$ first pulls that extension back along $G\to Q$, producing an extension of $G$ by $A^N$, and then pushes out along the inclusion $A^N\hookrightarrow A$. That is the extension-theoretic meaning of the last inflation map in the displayed sequence. [L2, given, algebra]
+1.2 Under [A2] and [L2], a class in $H^2(Q,A^N)$ is an extension of $Q$ by $A^N$. The map to $H^2(G,A)$ first pulls that extension back along $G\to Q$, producing an extension of $G$ by $A^N$, and then pushes out along the inclusion $A^N\hookrightarrow A$. That is the extension-theoretic meaning of the last inflation map in the displayed sequence. [A2, L2, given, algebra]
 
 1.3 Exactness of [A1] at $H^1(N,A)^Q$ says $$\ker(\operatorname{Tra})=\operatorname{im}(\operatorname{Res}).$$ Thus $\operatorname{Tra}[u]=0$ exactly when $[u]$ is the restriction of a degree-one class on $G$, which is precisely the asserted extension criterion for the cohomology class. [A1, algebra]
 

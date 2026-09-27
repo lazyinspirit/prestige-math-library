@@ -6,12 +6,6 @@ deps: ["lem-finite-dimensional-skeletal-exactness-computes-axiomatic-homology", 
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, both cellular comparison theorems, pp.119–120"
@@ -23,6 +17,15 @@ sources:
 status: published
 origin: "pipeline"
 proof_strategy: "Define the relative class of an ordered simplex recursively by its boundary and base coefficient; prove adjacent transpositions reverse it. The relative boundary lands in the alternating sum of face classes by naturality/excision. Degenerate simplicial images factor through a lower-dimensional simplex. Compare the resulting explicit complex with published simplicial/singular homology; no tensor-exactness assumption on G."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-09-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -41,7 +44,7 @@ with the alternating face differential. Consequently they give a coefficient-nor
 
 [F3] If $\pi \in S_{n+1}$ is odd, then $$[v_{\pi(0)},\dots,v_{\pi(n)}]=-[v_0,\dots,v_n]$$ as oriented simplices. ([[lem-an-odd-permutation-reverses-oriented-simplex-sign]])
 
-[F4] For every simplicial complex $K$, the natural simplicial-to-singular chain map induces $H_n^{\mathrm{simp}}(K;G)\cong H_n(|K|;G)$ for all $n$. ([[thm-simplicial-and-singular-homology-agree-for-simplicial-complexes]])
+[F4] For every simplicial complex $K$, simplicial and singular homology are canonically naturally isomorphic. For a finite $K$, any finite vertex ordering gives the characteristic-simplex chain map inducing this isomorphism, independently of that order. ([[thm-simplicial-and-singular-homology-agree-for-simplicial-complexes]])
 
 ## Proof
 

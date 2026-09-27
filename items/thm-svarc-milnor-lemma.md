@@ -13,8 +13,12 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -27,7 +31,8 @@ pipeline_run: null
 
 ## Statement
 
-Let $G$ act geometrically on a geodesic metric space $X$, and fix $x_0 \in X$.
+Let $G$ act geometrically on a geodesic metric space $X$, fix $x_0 \in X$,
+and choose $D\ge0$ such that every point of $X$ lies within $D$ of $G\cdot x_0$.
 Then $G$ is finitely generated. More precisely, if
 $$S := \{\, g \in G : d_X(x_0,\ g \cdot x_0) \le 2D+1 \,\}$$
 is the finite generating set obtained from
@@ -56,9 +61,9 @@ is a quasi-isometry.
 
 1.2 The orbit $\phi_{x_0}(G)=G \cdot x_0$ is $D$-dense in $X$ by the choice of $D$, so it is coarsely dense in the sense of [L3]. [L3, given]
 
-1.3 For $g \in G$, the proof of [L1] writes $g$ as a product of at most $m$ elements of $S$, where $m$ is the least natural number with $d_X(x_0,\ g \cdot x_0) \le m$. Therefore $|g|_S \le d_X(x_0,\ g \cdot x_0) + 1$. Applying this to $g^{-1}h$ and using isometricity gives $d_S(g,h) = |g^{-1}h|_S \le d_X(g \cdot x_0,\ h \cdot x_0) + 1$. [L1, L4, algebra]
+1.3 For $g \in G$, the proof of [L1] writes $g$ as a product of at most $m$ elements of $S$, where $m$ is the least positive integer with $d_X(x_0,\ g \cdot x_0) \le m$. Therefore $|g|_S \le d_X(x_0,\ g \cdot x_0) + 1$. Applying this to $g^{-1}h$ and using isometricity gives $d_S(g,h) = |g^{-1}h|_S \le d_X(g \cdot x_0,\ h \cdot x_0) + 1$. [L1, L4, algebra]
 
-2.1 For each $x \in X$, choose $r(x) \in G$ with $d_X(x,\ r(x) \cdot x_0) \le D$; this is possible by step 1.2. [step 1.2, choose]
+2.1 The finite generating set $S$ gives a fixed enumeration of $G$: order words in the finite alphabet $S$ first by length and then lexicographically, and retain the first word representing each group element. The empty word represents the identity. For each $x\in X$, step 1.2 makes the set of words whose represented element $g$ satisfies $d_X(x,g\cdot x_0)\le D$ nonempty. Let $r(x)$ be the element represented by its first word. This defines one function $r:X\to G$ without choosing independently over $X$, and $d_X(x,r(x)\cdot x_0)\le D$ for every $x$. [L1, step 1.2, construct]
 
 3.1 For $x,y \in X$, step 1.3 with $g=r(x)$ and $h=r(y)$ gives $$d_S(r(x),r(y)) \le d_X(r(x) \cdot x_0,\ r(y) \cdot x_0) + 1 \le d_X(x,y) + 2D + 1.$$ So $r : X \to G$ is coarse Lipschitz. [step 1.3, step 2.1, algebra]
 

@@ -2,13 +2,14 @@
 id: "lem-minimal-free-resolutions-unique-up-to-chain-isomorphism"
 kind: "lemma"
 title: "minimal free resolutions unique up to chain isomorphism"
-deps: ["cor-betti-number-is-rank-in-minimal-resolution", "thm-projective-comparison-map-exists", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy", "thm-nakayama-lemma"]
+deps: ["cor-betti-number-is-rank-in-minimal-resolution", "thm-projective-comparison-map-exists", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy", "thm-nakayama-lemma", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (lem-minimal-free-resolutions-unique-up-to-chain-isomorphism). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Remark 12.28, p.121"
@@ -23,7 +24,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-Any two minimal degreewise finite free resolutions of a finite module over a nonzero Noetherian local ring are augmentation-preservingly chain-isomorphic, in general noncanonically. In particular their ranks agree in every degree.
+Assume the Axiom of Choice. Any two minimal degreewise finite free resolutions of a finite module over a nonzero Noetherian local ring are augmentation-preservingly chain-isomorphic, in general noncanonically. In particular their ranks agree in every degree.
 
 ## Facts & Assumptions
 
@@ -39,6 +40,6 @@ Any two minimal degreewise finite free resolutions of a finite module over a non
 
 ## Proof
 
-1.1 Choose comparison maps $f:F\to G$ and $g:G\to F$ lifting the identity on $M$. Their composites are homotopic to the identities. The cited comparison assertions use DC and supplied resolution data. [F2, F3]
+1.1 The stated AC implies the DC premise of [F2] and [F3], and the two given resolutions supply their resolution data. Choose comparison maps $f:F\to G$ and $g:G\to F$ lifting the identity on $M$. Their composites are homotopic to the identities. [given, F2, F3]
 
-2.1 After reduction modulo $\mathfrak m$, all differentials vanish, so the homotopy identities become $\bar g_i\bar f_i=1$ and $\bar f_i\bar g_i=1$. The finite ranks agree, also by the Betti rank theorem. Nakayama makes each $f_i$ surjective; equivalently its square matrix has determinant nonzero modulo $\mathfrak m$, hence unit. Its adjugate gives an inverse over $R$. These inverses form a chain map since $f$ does. Rank zero causes no difficulty: the unique map between zero modules is invertible. [F1, F4, step 1.1, algebra] ∎
+2.1 After reduction modulo $\mathfrak m$, all differentials vanish, so the homotopy identities become $\bar g_i\bar f_i=1$ and $\bar f_i\bar g_i=1$. The finite ranks agree, also by the AC-qualified Betti rank theorem [F1]. By AC-qualified Nakayama [F4], each $f_i$ is surjective because its mod-$\mathfrak m$ reduction is surjective; equivalently its square matrix has determinant nonzero modulo $\mathfrak m$, hence unit. Its adjugate gives an inverse over $R$. These inverses form a chain map since $f$ does. Rank zero causes no difficulty: the unique map between zero modules is invertible. [F1, F4, step 1.1, given, algebra] ∎

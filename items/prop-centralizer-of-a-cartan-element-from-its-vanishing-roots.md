@@ -12,19 +12,19 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
     - title: "Pavel Etingof, Lie Groups and Lie Algebras I"
       url: "https://math.mit.edu/~etingof/lnlg.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (prop-centralizer-of-a-cartan-element-from-its-vanishing-roots). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
@@ -44,6 +44,6 @@ $$C_{\mathfrak g}(h)=\mathfrak h\oplus \bigoplus_{\alpha(h)=0} \mathfrak g_\alph
 
 **Proof technique:** direct.
 
-1.1 Write $x=x_0+\sum_{\alpha}x_\alpha$ according to [[thm-root-space-decomposition-relative-to-a-cartan-subalgebra]], with $x_0\in \mathfrak h$ and $x_\alpha\in \mathfrak g_\alpha$. Then $[h,x]=\sum_{\alpha}\alpha(h)x_\alpha$. [given, algebra]
+1.1 Write $x=x_0+\sum_{\alpha}x_\alpha$ using the root-space decomposition supplied in the Statement, with $x_0\in\mathfrak h$ and $x_\alpha\in\mathfrak g_\alpha$. Then $[h,x]=\sum_{\alpha}\alpha(h)x_\alpha$. [given, algebra]
 
 2.1 The directness of the root-space decomposition implies that $[h,x]=0$ holds exactly when $x_\alpha=0$ for every root with $\alpha(h)\ne 0$. Thus the centralizer consists precisely of $\mathfrak h$ together with the root spaces on which $h$ vanishes. [step 1.1] ∎

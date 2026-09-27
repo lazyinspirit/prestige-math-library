@@ -7,13 +7,17 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [lem-equicontinuous-families-have-finite-sup-nets, thm-c-k-complete-in-the-sup-metric, thm-complete-subspace-iff-closed, thm-metric-compactness-equivalences, def-equicontinuity-and-boundedness-in-ck, thm-heine-cantor-metric]
+deps: [def-metric-compactness, thm-c-k-complete-in-the-sup-metric, thm-complete-subspace-iff-closed, thm-metric-compactness-equivalences, def-equicontinuity-and-boundedness-in-ck, thm-heine-cantor-metric, def-countable-choice, def-dependent-choice]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -29,7 +33,7 @@ pipeline_run: null
 ## Facts & Assumptions
 **Given:** The Axiom of Countable Choice, the Axiom of Dependent Choice, and a family $\mathcal F\subseteq C(K,\mathbb R)$.
 
-[L1] An equicontinuous pointwise-bounded family is totally bounded in the supremum metric ([[lem-equicontinuous-families-have-finite-sup-nets]]).
+[L1] Every open cover of the compact metric space $K$ has a finite subcover ([[def-metric-compactness]]).
 
 [L2] $C(K,\mathbb R)$ is complete in the supremum metric ([[thm-c-k-complete-in-the-sup-metric]]).
 
@@ -43,14 +47,14 @@ pipeline_run: null
 
 **Proof technique:** direct.
 
-1.1 Suppose $\mathcal F$ is equicontinuous and pointwise bounded. By [L1] it is totally bounded, and its closure is totally bounded as well. [L1, algebra]
+1.1 If $\mathcal F=\varnothing$, its closure is empty and compact, while both family properties hold vacuously. Hence assume $\mathcal F\ne\varnothing$. Suppose first that $\mathcal F$ is equicontinuous and pointwise bounded, and fix $\varepsilon>0$. Let $\mathcal U$ contain every ball $B(a,r)$ with $a\in K$, $r>0$, and $|f(x)-f(a)|<\varepsilon/3$ for all $f\in\mathcal F$ whenever $d(x,a)<2r$. Equicontinuity makes $\mathcal U$ an open cover without selecting a radius for every $a$. By [L1] take a finite subcover $B(a_i,r_i)$, $i=1,\ldots,N$. Pointwise boundedness supplies finite bounds $M_i$ for the values $|f(a_i)|$. Partition the bounded box $\prod_{i=1}^N[-M_i,M_i]$ into finitely many boxes of coordinate diameter less than $\varepsilon/3$, and choose one member of $\mathcal F$ from each box met by an evaluation vector $(f(a_i))_i$. For any $f\in\mathcal F$, a chosen $g$ in the same box satisfies $|f(a_i)-g(a_i)|<\varepsilon/3$ for all $i$; if $x\in B(a_i,r_i)$, the two equicontinuity bounds give $|f(x)-g(x)|<\varepsilon$. Thus these finitely many representatives form an $\varepsilon$-net. The closure is totally bounded as well, by using an $\varepsilon/2$-net for $\mathcal F$ and approximating each point of its closure by a member of $\mathcal F$. [L1, L4, algebra]
 
-1.2 Conversely suppose the closure is compact. For a positive $\varepsilon$, choose a finite $\varepsilon/3$-net $g_0,\ldots,g_N$ in the closure; by [L5], a common positive radius makes every $g_i$ vary by less than $\varepsilon/3$. [L3, L5, choose]
+1.2 Conversely suppose the closure is compact. For $\varepsilon>0$, [L3] supplies a finite $\varepsilon/3$-net $g_1,\ldots,g_N$ in the closure. By [L5], a common positive radius makes every $g_i$ vary by less than $\varepsilon/3$. [L3, L5]
 
-2.1 The closure is closed in the complete space of [L2], hence complete by [L3]. Therefore its closure is compact by [L3]. [step 1.1, L2, L3]
+2.1 The closure of $\mathcal F$ is closed in the complete space of [L2], hence complete by [L3]. It is totally bounded by step 1.1, so [L3] makes it compact. [L2, L3, step 1.1]
 
 2.2 For $f\in\mathcal F$, choose $g_i$ within $\varepsilon/3$ in supremum distance. The two uniform-distance bounds and step 1.2 give $|f(x)-f(y)|<\varepsilon$ whenever $d(x,y)$ is below the common radius. [step 1.2, algebra]
 
 2.3 The same finite net bounds $|f(a)|$ at each fixed $a\in K$, so $\mathcal F$ is pointwise bounded. [step 1.2, L4, algebra]
 
-3.1 Steps 2.2 and 2.3 give equicontinuity and pointwise boundedness, completing the converse. [step 2.2, step 2.3, L4] ∎
+3.1 Step 2.1 proves the forward implication; steps 2.2 and 2.3 give equicontinuity and pointwise boundedness in the converse. [step 2.1, step 2.2, step 2.3, L4] ∎

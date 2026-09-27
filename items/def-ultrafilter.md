@@ -9,25 +9,16 @@ provenance:
   proof: not-applicable
 deps: [def-filter, def-maximal-element, def-partial-order]
 justified_by: []
-external_refs: [rem-feferman-no-free-ultrafilter-in-zf, rem-blass-model-without-ultrafilters]
 aliases: [def-maximal-filter]
 landmark: true
 short: "maximal filter"
 verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-03
-    scope: published-audit-targeted
-    context_sha256: 14bec335264427502af0c3869f304eaf18b212e2cdbd5bab9f097529081c8dcb
-    item_sha256: 9dfe08a5d70b6b14bb2f4371e9f7e81b17f9cc556cec5d32564e98a8cda9682b
   verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-04
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -82,27 +73,12 @@ $\{\, A \subseteq X : x \in A \,\}$ for some $x \in X$, and **free**, or
   reformulation, that $\mathcal{U}$ decides every subset by containing either $A$
   or its complement, is [[thm-ultrafilter-characterisation]], and it is the form
   used in practice.
-- **Existence is free; extension and freeness are not.** Ultrafilters exist on
-  every nonempty set with no choice principle at all: the principal filter at a
-  point is one, as the next bullet verifies outright. Two stronger existence
-  statements are what cost something. That **every** filter is contained in an
-  ultrafilter is [[thm-ultrafilter-lemma]], proved here from Zorn's lemma
-  ([[thm-zorn]]); and that some ultrafilter is **free** is what the ultrafilter
-  lemma buys, since extending the filter of cofinite subsets of $\mathbb{N}$
-  produces a non-principal one. Neither is a theorem of ZF alone: if ZF is
-  consistent, ZF does not prove that a free ultrafilter on $\mathbb{N}$ exists
-  (Feferman 1965, [[rem-feferman-no-free-ultrafilter-in-zf]]), and hence does not
-  prove the ultrafilter lemma either. That external result is recorded, not
-  proved, in this library, and the strength the lemma costs is set out in
-  [[rem-choice-strengths]]. So on $\mathbb{N}$ the principal ultrafilters are the
-  only ones ZF alone can be relied on to produce. The same conclusion for
-  **every** set at once does not follow from Feferman's model, which concerns
-  $\mathbb{N}$; it is the separate and stronger external result
-  [[rem-blass-model-without-ultrafilters]], likewise recorded and not proved
-  here. Once the ultrafilter lemma is available -- and this library proves
-  it from the Axiom of Choice ([[thm-ultrafilter-lemma]]) -- the principal
-  ultrafilters are nevertheless not all of them
-  ([[fs-every-ultrafilter-principal]]); in ZF alone that cannot be concluded.
+- **Existence is free; the published extension theorem uses choice.** On every
+  nonempty set, the principal filter at any point is an ultrafilter, as the next
+  bullet verifies directly. [[thm-ultrafilter-lemma]] proves from Zorn's lemma
+  that every filter extends to an ultrafilter. Applied to the filter of tails
+  on $\mathbb{N}$, it produces a free ultrafilter under its stated hypotheses,
+  as [[fs-every-ultrafilter-principal]] verifies.
 - Principal ultrafilters really are ultrafilters: $\{A \subseteq X : x \in A\}$
   is a filter, and if a filter $\mathcal{G}$ contains it then any $B \in
   \mathcal{G}$ must meet $\{x\}$, since otherwise $B \cap \{x\} = \emptyset$ lies

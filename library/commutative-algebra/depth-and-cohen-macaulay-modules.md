@@ -12,3 +12,7 @@ Cohen--Macaulay modules, parameter sequences, regular quotients, polynomial
 extensions, completion, and flat local homomorphisms. Zero-module conventions
 and all nonzero and support hypotheses are stated at the point where they are
 used.
+
+The general Ext-depth, associated-prime, and Cohen–Macaulay arguments state AC
+where their proofs require it. Direct finite computations and conditional
+regular-sequence arguments retain their individual hypotheses.

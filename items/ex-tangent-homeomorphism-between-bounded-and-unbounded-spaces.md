@@ -10,7 +10,7 @@ provenance:
 deps: [def-principal-inverse-tangent, def-homeomorphism-and-open-maps,
        def-metric-bounded-diameter, lem-real-line-is-a-metric-space,
        thm-reals-cauchy-complete, lem-real-and-metric-notions-agree,
-       thm-complete-subspace-iff-closed, thm-metric-sequential-closure,
+       thm-metric-sequential-closure,
        cor-archimedean-reciprocal,
        def-pi-via-first-positive-cosine-zero,
        thm-cosine-has-a-smallest-positive-zero,
@@ -20,12 +20,12 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-21
-  audited: 2026-08-21
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -58,9 +58,7 @@ of metric spaces are not topological properties.
 
 [L5] For a subset of $\mathbb R$ with the subspace metric, metric Cauchy sequences are exactly real Cauchy sequences ([[lem-real-and-metric-notions-agree]], claim 7).
 
-[L6] A subset of a metric space is closed exactly when it is sequentially closed ([[thm-metric-sequential-closure]], claim 2).
-
-[L7] A subspace of a complete metric space is complete if and only if it is closed ([[thm-complete-subspace-iff-closed]]).
+[L6] A closed subset of a metric space contains every ambient limit of a convergent sequence of its points; this is the choice-free direction of [[thm-metric-sequential-closure]], proof step 2.2.
 
 [L8] For every real $\varepsilon>0$, there is a positive integer $N$ with $1/N<\varepsilon$ ([[cor-archimedean-reciprocal]]).
 
@@ -86,6 +84,6 @@ of metric spaces are not topological properties.
 
 1.4 For $k\in\mathbb N$, put $$x_k:=\frac\pi2\left(1-\frac1{k+2}\right).$$ By [L9], $0<x_k<\pi/2$, so $x_k\in I$; [L8] gives $x_k\to\pi/2$ as a real sequence, and [L11] identifies this with convergence in the usual metric, but $\pi/2\notin I$. Thus $I$ is not sequentially closed and is not closed by [L6]. [L6, L8, L9, L11, construct, algebra]
 
-2.1 The ambient real line is complete by step 1.3, while the subspace $I$ is not closed by step 1.4, so [L7] makes $I$ incomplete. [step 1.3, step 1.4, L7]
+2.1 The explicit sequence $(x_k)$ from step 1.4 is Cauchy in $I$: for every $\varepsilon>0$, its real convergence to $\pi/2$ makes both $|x_j-\pi/2|$ and $|x_k-\pi/2|$ smaller than $\varepsilon/2$ for all sufficiently large $j,k$, so $|x_j-x_k|<\varepsilon$. If it converged to some $y\in I$, then $|y-\pi/2|\le |y-x_k|+|x_k-\pi/2|$ would be smaller than every positive $\varepsilon$, forcing $y=\pi/2\notin I$. Thus this Cauchy sequence has no limit in $I$, and [L12] makes $I$ incomplete. [step 1.4, L5, L11, L12, algebra]
 
 3.1 The homeomorphic spaces in step 1.1 have opposite boundedness verdicts by step 1.2 and opposite completeness verdicts by steps 1.3 and 2.1. Therefore neither boundedness nor completeness is preserved by homeomorphism. [step 1.1, step 1.2, step 1.3, step 2.1] ∎

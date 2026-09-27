@@ -17,9 +17,10 @@ order: a density theorem isolates a large induced subgraph with few edges or few
 nonedges, trimming turns low density into bounded degree, colouring extracts a
 large stable set, and the complement turns the same argument into a clique bound.
 
-The page then records two source-cited quantitative density inputs, one on the
-classical $\sqrt{\log_2 n}$ scale and one on the improved
-$\sqrt{\log_2 n\,\log_2\log_2 n}$ scale, and proves from them the corresponding
-homogeneous-set lower bounds for $H$-free graphs. A final corollary compares the
-two exponents and shows that the log-log scale eventually dominates every fixed
-classical scale.
+The two density bounds proved earlier on
+`quantitative-induced-density-and-the-loglog-step` supply the classical
+$\sqrt{\log_2 n}$ and improved
+$\sqrt{\log_2 n\,\log_2\log_2 n}$ scales. This page derives the corresponding
+homogeneous-set lower bounds for $H$-free graphs; the source-cited remarks are
+historical context. A final corollary compares the two exponents and shows that
+the log-log scale eventually dominates every fixed classical scale.

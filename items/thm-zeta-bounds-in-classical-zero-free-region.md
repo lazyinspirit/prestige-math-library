@@ -4,24 +4,30 @@ title: "Zeta bounds in classical zero free region"
 kind: theorem
 status: published
 origin: pipeline
-deps: [lem-zeta-horizontal-logarithmic-derivative-comparison, thm-riemann-zeta-classical-zero-free-region, thm-euler-product-for-riemann-zeta, thm-riemann-zeta-continuation-to-the-right-half-plane]
+deps: [lem-zeta-horizontal-logarithmic-derivative-comparison, thm-riemann-zeta-classical-zero-free-region, thm-euler-product-for-riemann-zeta, thm-riemann-zeta-continuation-to-the-right-half-plane, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Theorem 6.7, pp.174\u2013175"
       url: https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 There are $0<c_2<c_1<c_0$ and $C>0$ such that for $|t|\ge3$ and $\sigma\ge1-c_1/\log(|t|+2)$,
 $$|\zeta'/\zeta(\sigma+it)|\le C\log(|t|+2)\le C\log^2(|t|+2).$$
@@ -31,7 +37,7 @@ with removable interpretations at one.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** Countable choice and the data and hypotheses of the statement.
 
 [F1] [[lem-zeta-horizontal-logarithmic-derivative-comparison]]: There are absolute $d>0,C>0$, with $d<c_0$, such that for $|t|\ge3$ and $\sigma\ge1-d/\log(|t|+2)$, $\left|\frac{\zeta'(\sigma+it)}{\zeta(\sigma+it)}\right|\le C\log(|t|+2).$
 
@@ -43,7 +49,7 @@ with removable interpretations at one.
 
 ## Proof
 
-1.1 Choose $c_1$ smaller than the constant in the horizontal comparison. This gives the stated derivative bound throughout the high-height region. [F1]
+1.1 Under countable choice, choose $c_1$ smaller than the constant in the horizontal comparison. This gives the stated derivative bound throughout the high-height region. [F1]
 
 2.1 At $s_1=1+1/L+it$, $L=\log(|t|+2)$, the Euler logarithm satisfies $|\log\zeta(s_1)|\le\log\zeta(1+1/L)\le\log(1+L)$, by comparing the positive real zeta series to its integral. Integrate $\zeta'/\zeta$ from $s_1$ horizontally to $s$ for $1-c_2/L\le\sigma\le1+1/L$. The length is $O(1/L)$ and the integrand is $O(L)$, so the change in the continued logarithm is $O(1)$. Exponentiating its negative real part gives $|1/\zeta(s)|=O(L)$. For larger sigma the Euler logarithm already gives that bound. [F3, step 1.1]
 

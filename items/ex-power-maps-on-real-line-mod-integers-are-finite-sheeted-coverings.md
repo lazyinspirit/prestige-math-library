@@ -13,12 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -53,10 +53,10 @@ For every integer $m\ge1$, the map $P_m:\mathbb R/\mathbb Z\to\mathbb R/\mathbb 
 
 **Proof technique:** direct.
 
-1.1 Check well-definedness modulo integer translation. [given, F1]
+1.1 If $[x]=[x+n]$ with $n\in\mathbb Z$, then $[m(x+n)]=[mx]$, so $P_m$ is well defined. Since $P_m\circ q=q\circ(x\mapsto mx)$ and $q$ is a quotient map, $P_m$ is continuous. It is surjective because $P_m([y/m])=[y]$. [given, F1]
 
-2.1 Around a class take an interval short enough that its $m$ inverse branches are disjoint; these branches give the evenly covered neighbourhood of [F2]. The fibre has exactly $m$ points because the branches are indexed by the residues of the integers modulo $m$, and by the division algorithm [F5] every integer has exactly one residue $r$ with $0\le r<m$: existence gives $m$ distinct branch labels and uniqueness stops two labels from coinciding. [F4] constructs $\mathbb Z$ but supplies no division algorithm. [step 1.1, F2, F4, F5]
+2.1 Fix $[a]$ and choose $I=(a-\delta,a+\delta)$ with $0<\delta<1/2$. The quotient map $q$ is open, since $q^{-1}(q(O))=\bigcup_{n\in\mathbb Z}(O+n)$ is open for every open $O\subseteq\mathbb R$. Thus $U=q(I)$ is open, and $q|_I$ is a homeomorphism onto $U$. For $0\le r<m$, put $V_r=q((I+r)/m)$. Each $V_r$ is open, and $P_m|_{V_r}$ is a homeomorphism onto $U$, with inverse $q(u)\mapsto q((u+r)/m)$ for $u\in I$. If points from $V_r$ and $V_s$ coincide, then $u-v+r-s$ is a multiple of $m$ for some $u,v\in I$. Since $|u-v|<1$ and $r-s$ is an integer between $-(m-1)$ and $m-1$, this forces $r=s$ and $u=v$. Finally, if $P_m([x])\in U$, then $mx=u+n$ for some $u\in I$ and $n\in\mathbb Z$; write $n=km+r$ with $0\le r<m$ by [F5], giving $[x]\in V_r$. Hence $P_m^{-1}(U)$ is the disjoint union of exactly $m$ sheets. [F1, F2, F5, step 1.1]
 
-3.1 At $m=1$ the map is the identity, so no zero-sheet or division-by-zero case is hidden. [step 2.1, F3]
+3.1 At $m=1$ the map is the identity, so no zero-sheet or division-by-zero case is hidden. [step 2.1]
 
 4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎

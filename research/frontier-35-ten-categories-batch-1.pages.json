@@ -1,0 +1,472 @@
+[
+  {
+    "order": 222.1,
+    "id": "finite-abelian-characters-for-combinatorics",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Finite Abelian Characters for Combinatorics",
+    "companion": "finite-abelian-characters-for-combinatorics-examples",
+    "requires": [
+      "characters-and-the-orthogonality-relations",
+      "cyclic-groups-and-direct-products",
+      "the-complex-exponential-and-eulers-formula",
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "def-additive-character-of-a-finite-abelian-group",
+        "kind": "definition",
+        "title": "Additive characters of a finite abelian group",
+        "deps": [
+          "def-group-homomorphism",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-character-of-a-complex-representation",
+          "def-group",
+          "thm-complex-numbers-form-a-field",
+          "lem-ring-units-form-a-group",
+          "lem-group-homomorphism-basic-properties",
+          "def-finite-dimensional-representation-of-a-group-over-a-field"
+        ],
+        "statement": "For a finite abelian group G written additively, an additive character is a group homomorphism chi:G to C^times, so chi(x+y)=chi(x)chi(y) and chi(0)=1. Write G-hat for the set of all such maps. This terminology is distinguished from the trace character of an arbitrary complex representation; no choice of an isomorphism G~=G-hat is part of the definition.",
+        "strategy": "Define C^times as the nonzero complex numbers under multiplication. Group-homomorphism laws give identity and inverse values. Do not assume that an arbitrary representation character is multiplicative; the precise one-dimensional bridge is the next lemma. Finite order and the modulus law give unit-modulus values there.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof et al., Introduction to Representation Theory, Section 3.3 Example 1",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/24d8b3fa2ce48e48ee6c2d8d5e3562f6_MIT18_712F10_replect.pdf"
+            },
+            {
+              "title": "Webb, A Course in Finite Group Representation Theory, Section 4.1",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-additive-characters-are-one-dimensional-complex-representations",
+        "kind": "lemma",
+        "title": "Additive characters are exactly one-dimensional complex representation characters",
+        "deps": [
+          "def-additive-character-of-a-finite-abelian-group",
+          "def-character-of-a-complex-representation",
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-irreducible-complex-character",
+          "def-order-in-a-group",
+          "def-splitting-field-for-a-finite-group",
+          "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars",
+          "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-subrepresentation-and-irreducible-representation",
+          "def-algebraically-closed-field",
+          "thm-degree-one-representations-are-exactly-homomorphisms-to-k-times-and-form-an-abelian-group",
+          "lem-standard-basis-of-f-n",
+          "thm-dimension-of-a-linear-subspace",
+          "def-trace-of-a-square-matrix",
+          "def-trace-of-an-endomorphism",
+          "lem-group-homomorphism-basic-properties",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "statement": "For every finite abelian G, each additive character chi uniquely determines the one-dimensional complex representation rho_chi(g)z=chi(g)z, whose trace character is chi. Conversely every one-dimensional complex representation gives an additive character, independent of a basis, and every irreducible complex representation of G arises this way up to equivalence. Consequently all additive-character values have modulus one and distinct additive characters give inequivalent irreducible representations.",
+        "strategy": "Check rho_chi(g+h)=rho_chi(g)rho_chi(h), rho_chi(0)=I and invertibility. A one-dimensional representation is irreducible; its trace is its scalar, independent of the chosen basis. Conversely the action of a one-dimensional representation is scalar, so the scalar function is a homomorphism into C^times. For g of finite order n, chi(g)^n=1; multiplicativity and definiteness of complex modulus force |chi(g)|=1. The fundamental theorem of algebra makes C algebraically closed, the scalar-commutant corollary makes it a splitting field for G, and the published finite-abelian irreducibility theorem makes every irreducible one-dimensional. An equivalence of scalar representations has the same scalar function, giving injectivity. This is a finite proof and uses no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof et al., Introduction to Representation Theory, Section 3.3 Example 1",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/24d8b3fa2ce48e48ee6c2d8d5e3562f6_MIT18_712F10_replect.pdf"
+            },
+            {
+              "title": "Webb, A Course in Finite Group Representation Theory, Proposition 4.1.1 and Section 4.1",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-additive-character-orthogonality-from-representation-orthogonality",
+        "kind": "lemma",
+        "title": "Row orthogonality for additive characters of a finite abelian group",
+        "deps": [
+          "lem-additive-characters-are-one-dimensional-complex-representations",
+          "thm-first-orthogonality-relation-for-irreducible-complex-characters",
+          "def-standard-inner-product-on-complex-class-functions",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-sum-over-a-finite-index-set",
+          "lem-finite-sum-laws",
+          "def-additive-character-of-a-finite-abelian-group",
+          "def-irreducible-complex-character",
+          "def-class-function-and-the-space-of-complex-class-functions",
+          "def-group"
+        ],
+        "statement": "For a finite abelian group G and additive characters chi, psi of G, (1/|G|) sum_{g in G} chi(g) conjugate(psi(g)) equals 1 when chi=psi and 0 otherwise. In particular a nontrivial additive character has sum zero. The normalized inner product is linear in the first argument, as on the published representation-character page.",
+        "strategy": "Apply the dictionary lemma: every additive character is the trace character of an irreducible one-dimensional complex representation, so chi and psi are irreducible complex characters, and distinct characters give inequivalent representations. The published first orthogonality relation for irreducible complex characters then gives the value 1 on the diagonal and 0 off it, and the published standard inner product on class functions contributes both the displayed normalized formula with its linear-first convention and the class-function setting (automatic here because G is abelian). The zero-sum clause for a nontrivial character is the psi = trivial case. The scaffold's optional independent finite-sum verification was not used: pulling the scalar chi(a) out of a complex-valued finite sum is not published as a standalone linearity statement, so that route would need a local lemma, and the representation route already proves the claim. The argument is finite and uses no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Webb, A Course in Finite Group Representation Theory, Theorem 3.2.3",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            },
+            {
+              "title": "Etingof et al., Introduction to Representation Theory, Theorem 3.8",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/24d8b3fa2ce48e48ee6c2d8d5e3562f6_MIT18_712F10_replect.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 222.2,
+    "id": "finite-abelian-characters-for-combinatorics-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Finite Abelian Characters for Combinatorics: Examples",
+    "companion": "finite-abelian-characters-for-combinatorics",
+    "requires": [
+      "finite-abelian-characters-for-combinatorics"
+    ],
+    "items": [
+      {
+        "id": "ex-characters-of-z-mod-five-and-their-orthogonality",
+        "kind": "example",
+        "title": "The five characters of Z/5Z and their orthogonality",
+        "deps": [
+          "def-additive-character-of-a-finite-abelian-group",
+          "lem-additive-characters-are-one-dimensional-complex-representations",
+          "lem-additive-character-orthogonality-from-representation-orthogonality",
+          "def-integers-modulo-n",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-standard-representatives-modulo-n",
+          "def-addition-and-multiplication-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-complex-exponential",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-sum-of-roots-of-unity",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "statement": "Put zeta=exp(2 pi i/5). For r=0,1,2,3,4 and s modulo 5, the five additive characters are chi_r([s])=zeta^(rs). Their 5-by-5 character table has entries zeta^(rs), and (1/5) sum_{s=0}^4 chi_r([s]) conjugate(chi_t([s]))=delta_{rt}. These are all additive characters of Z/5Z.",
+        "strategy": "The exponential addition law gives zeta^5=1, and its kernel theorem gives exact order five, so the formula is independent of the integer representative and the five functions are distinct. Any character is determined by chi([1]); its fifth power is one, and the kernel theorem lists precisely zeta^r for r=0,...,4, proving exhaustiveness. Calculate the table entries and apply the A-page row-orthogonality lemma, or directly sum the finite geometric progression when r differs from t. The A-page row-orthogonality supplier is now closed through its explicit published trace dependencies and backward page prerequisite. The example is B-only and supplies no later item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Webb, A Course in Finite Group Representation Theory, Proposition 4.1.1",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            },
+            {
+              "title": "Etingof et al., Introduction to Representation Theory, Section 3.3 Example 1",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/24d8b3fa2ce48e48ee6c2d8d5e3562f6_MIT18_712F10_replect.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 441,
+    "id": "erdos-hajnal-for-the-e-graph-and-bird",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "The Erdős–Hajnal Theorems for the E-Graph and Bird",
+    "companion": "erdos-hajnal-for-the-e-graph-and-bird-examples",
+    "requires": [
+      "from-generalized-niceness-to-erdos-hajnal",
+      "co-bird-free-comb-structure"
+    ],
+    "items": [
+      {
+        "id": "lem-the-e-graph-and-the-bird-are-leaf-reducible",
+        "kind": "lemma",
+        "title": "The E-graph and Bird singleton families are leaf-reducible",
+        "deps": [
+          "def-leaf-reducible-finite-family",
+          "def-e-graph-and-co-e-graph",
+          "def-bird-graph-and-co-bird-graph",
+          "def-bull-graph",
+          "cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property",
+          "cor-the-bull-graph-has-the-erdos-hajnal-property",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-tree-forest-and-leaf",
+          "def-graph-isomorphism-and-complement",
+          "def-induced-embedding-and-induced-copy",
+          "def-h-free-and-family-free-graph",
+          "def-erdos-hajnal-property-and-constant"
+        ],
+        "statement": "The singleton forbidden families {E} and {Bird} are leaf-reducible. In E, deleting the leaf q attached to the middle vertex gives P5. In Bird, deleting the added leaf w gives the bull. Both reduced singleton families have the Erdős-Hajnal property.",
+        "strategy": "Read the two published six-vertex edge lists. For E remove q and its sole edge p3q, leaving exactly the four path edges p1p2,p2p3,p3p4,p4p5. For Bird remove w and yw, leaving the specified triangle plus two horns, exactly the published bull; w has degree one. Invoke the published P5 and bull Erdős-Hajnal results for the reduced families and apply the definition of leaf-reducible. This uses only finite edge checks and no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Section 2.1",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-the-e-graph-is-generalized-nice",
+        "kind": "corollary",
+        "title": "The singleton E-graph family is generalized nice",
+        "deps": [
+          "lem-the-e-graph-and-the-bird-are-leaf-reducible",
+          "cor-the-singleton-family-containing-e-has-property-star",
+          "thm-property-star-and-leaf-reducibility-imply-generalized-niceness",
+          "lem-h-five-and-co-e-free-family-has-the-erdos-hajnal-property",
+          "thm-co-e-free-comb-blocks-admit-an-h-five-co-e-structural-partition",
+          "thm-special-vertex-local-structural-partition-criterion-implies-property-star",
+          "cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property",
+          "def-generalized-nice-finite-family",
+          "def-property-star-for-a-finite-family",
+          "lem-erdos-hajnal-constants-are-downward-closed",
+          "def-e-graph-and-co-e-graph",
+          "def-coleaf-of-a-graph"
+        ],
+        "statement": "The singleton finite family {E} is generalized nice, with the complement-family convention in the published definition.",
+        "strategy": "For the exact property-(*) premise, verify the published H5/co-E auxiliary family proof using the locally proved leaf/co-leaf transfer corollary for its induction step. For every co-E-free special-vertex comb, the published Lemma 6.4 partition gives both the Y and pattern family {H5,co-E}; the special-vertex-local criterion therefore proves property (*) for {E}, as also stated in the published E corollary. The preceding local lemma proves {E} leaf-reducible. Apply the published property-(*) plus leaf-reducibility implication with F={E}; its conclusion is generalized niceness of that same family, not of the complement family. This explicitly supplies the transfer dependency omitted from the published H5 proof and uses no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Lemmas 4.5, 5.1, 6.3 and 6.4",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            },
+            {
+              "title": "Nguyen, Notes on Recent Work on the Erdős-Hajnal Conjecture, Section 5 iterative-sparsification context",
+              "url": "https://web.math.princeton.edu/~tunghn/ehnotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-the-e-graph-has-the-erdos-hajnal-property",
+        "kind": "theorem",
+        "title": "The E-graph has the Erdős-Hajnal property",
+        "deps": [
+          "cor-the-e-graph-is-generalized-nice",
+          "lem-the-e-graph-and-the-bird-are-leaf-reducible",
+          "lem-the-e-graph-and-the-bird-graph-are-wonderful",
+          "thm-leaf-reducible-wonderful-generalized-nice-finite-families-have-the-erdos-hajnal-property",
+          "def-erdos-hajnal-property-and-constant",
+          "def-e-graph-and-co-e-graph",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary"
+        ],
+        "statement": "There exists epsilon_E>0 such that every nonempty finite simple graph G with no induced copy of the E-graph has a clique or stable set of size at least |V(G)|^epsilon_E. Equivalently the singleton family {E} has the Erdős-Hajnal property.",
+        "strategy": "Apply the published leaf-reducible/wonderful/generalized-nice family theorem to F={E}. The local leaf lemma supplies leaf reducibility, the published wonderfulness lemma supplies wonderfulness, and the preceding corollary supplies generalized niceness; all three properties concern F={E} itself under the same complement convention. The generic theorem first works in the co-E-free class and transfers by complement invariance, yielding the E-free exponent claimed here. Read the generic theorem proof to check that its exponent depends only on F and applies to every nonempty graph, including order one. This is Theorem 1.10, with no numerical exponent asserted and no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Theorem 1.10 and Section 6",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            },
+            {
+              "title": "Nguyen, Notes on Recent Work on the Erdős-Hajnal Conjecture, Section 5, restricted-set/blockade exponent mechanism",
+              "url": "https://web.math.princeton.edu/~tunghn/ehnotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-the-singleton-family-containing-bird-has-property-star",
+        "kind": "corollary",
+        "title": "The singleton Bird family has property (*)",
+        "deps": [
+          "thm-the-e-graph-has-the-erdos-hajnal-property",
+          "thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition",
+          "thm-special-vertex-local-structural-partition-criterion-implies-property-star",
+          "def-erdos-hajnal-property-and-constant",
+          "def-property-star-for-a-finite-family",
+          "def-bird-graph-and-co-bird-graph",
+          "def-e-graph-and-co-e-graph",
+          "lem-erdos-hajnal-constants-are-downward-closed",
+          "def-h-free-and-family-free-graph",
+          "def-structural-comb-partition-hypothesis"
+        ],
+        "statement": "The singleton finite family {Bird} has property (*), with the special-vertex comb trigger in co-Bird-free graphs.",
+        "strategy": "Take H={Bird} and F1=F2={E}. The preceding E theorem gives an Erdős-Hajnal exponent epsilon_E for both F1- and F2-free graphs; lower it to c=min(epsilon_E,1), still a common positive constant. Fix an arbitrary co-Bird-free graph and a special-vertex comb from property (*). Published Lemma 6.5 gives a partition of each comb block with E-free Y, a pure nonempty-block partition of X whose pattern is E-free, and external vertex-by-block purity. These are exactly the three local clauses of the special-vertex-local criterion, whose conclusion is property (*) for H={Bird}. The published source's Section 6.2 says 'Bird-free' in one heading but Lemma 6.5 itself and this application require co-Bird-free; retain the precise complement direction. No Choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Lemmas 5.1 and 6.5, Section 6.2",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-the-bird-graph-is-generalized-nice",
+        "kind": "corollary",
+        "title": "The singleton Bird family is generalized nice",
+        "deps": [
+          "cor-the-singleton-family-containing-bird-has-property-star",
+          "lem-the-e-graph-and-the-bird-are-leaf-reducible",
+          "thm-property-star-and-leaf-reducibility-imply-generalized-niceness",
+          "def-generalized-nice-finite-family",
+          "def-property-star-for-a-finite-family",
+          "def-bird-graph-and-co-bird-graph",
+          "def-leaf-reducible-finite-family"
+        ],
+        "statement": "The singleton finite family {Bird} is generalized nice.",
+        "strategy": "The preceding local corollary proves property (*) for the precise family {Bird}; the local leaf lemma proves that same family leaf-reducible by deletion to the bull. Apply the published Lemma 4.5 implication for finite F={Bird}, retaining its co-Bird-free quantifiers and its four generalized-niceness outcomes. This is a direct specialization, not a claim about {co-Bird}; no Choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Lemma 4.5 and Section 6.2",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-the-bird-graph-has-the-erdos-hajnal-property",
+        "kind": "theorem",
+        "title": "The Bird graph has the Erdős-Hajnal property",
+        "deps": [
+          "cor-the-bird-graph-is-generalized-nice",
+          "lem-the-e-graph-and-the-bird-are-leaf-reducible",
+          "lem-the-e-graph-and-the-bird-graph-are-wonderful",
+          "thm-leaf-reducible-wonderful-generalized-nice-finite-families-have-the-erdos-hajnal-property",
+          "def-erdos-hajnal-property-and-constant",
+          "def-bird-graph-and-co-bird-graph",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary"
+        ],
+        "statement": "There exists epsilon_B>0 such that every nonempty finite simple graph G with no induced copy of Bird has a clique or stable set of size at least |V(G)|^epsilon_B. Equivalently the singleton family {Bird} has the Erdős-Hajnal property.",
+        "strategy": "Specialize the published generic leaf-reducible/wonderful/generalized-nice theorem to F={Bird}. The preceding corollary gives generalized niceness, the local leaf lemma gives leaf reducibility via the bull, and the published wonderfulness lemma gives wonderfulness. The generic conclusion transfers from co-Bird-free graphs to Bird-free graphs by complement invariance, and yields a positive uniform exponent for all nonempty graph orders. The E-graph theorem is used only through the preceding Bird property-(*) chain, so the dependency order is E before Bird. This is Theorem 1.11 and uses no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Theorem 1.11 and Section 6",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            },
+            {
+              "title": "Nguyen, Notes on Recent Work on the Erdős-Hajnal Conjecture, Section 5, restricted-set/blockade exponent mechanism",
+              "url": "https://web.math.princeton.edu/~tunghn/ehnotes.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 442,
+    "id": "erdos-hajnal-for-the-e-graph-and-bird-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "The Erdős–Hajnal Theorems for the E-Graph and Bird — Examples",
+    "companion": "erdos-hajnal-for-the-e-graph-and-bird",
+    "requires": [
+      "erdos-hajnal-for-the-e-graph-and-bird"
+    ],
+    "items": [
+      {
+        "id": "ex-the-e-graph-theorem-properly-extends-the-p-five-case",
+        "kind": "example",
+        "title": "The E theorem reaches an induced P5 witness",
+        "deps": [
+          "thm-the-e-graph-has-the-erdos-hajnal-property",
+          "def-e-graph-and-co-e-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-h-free-and-family-free-graph",
+          "def-induced-embedding-and-induced-copy",
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property"
+        ],
+        "statement": "The five-vertex path P5 is E-free but is not P5-free. More generally every P5-free graph is E-free because the vertices p1,...,p5 of E induce P5. Thus the E-free theorem applies to a strictly larger forbidden-pattern class than the earlier P5-free theorem.",
+        "strategy": "List the four edges p1p2,p2p3,p3p4,p4p5 and all six nonedges of the induced five-vertex subgraph of E. An induced E in a P5-free graph would restrict to an induced P5, impossible. P5 itself has only five vertices so it cannot contain the six-vertex E, while its identity map is an induced P5. Invoke the A-page theorem for the resulting E-free witness and distinguish class containment from any numerical claim about optimal exponents. This B example supplies no later proof.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Introduction and Figure 4",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-the-bird-theorem-properly-extends-the-bull-case",
+        "kind": "example",
+        "title": "The Bird theorem reaches an induced bull witness",
+        "deps": [
+          "thm-the-bird-graph-has-the-erdos-hajnal-property",
+          "def-bird-graph-and-co-bird-graph",
+          "def-bull-graph",
+          "def-h-free-and-family-free-graph",
+          "def-induced-embedding-and-induced-copy",
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "cor-the-bull-graph-has-the-erdos-hajnal-property"
+        ],
+        "statement": "The five-vertex bull is Bird-free but is not bull-free. Every bull-free graph is Bird-free, since deleting Bird's added leaf w leaves an induced bull. Hence the Bird-free theorem covers a strictly larger forbidden-pattern class than the earlier bull-free theorem.",
+        "strategy": "Restrict Bird's six-vertex edge list to x1,x2,x3,y,z: the edges are the triangle x1x2,x2x3,x1x3 and horns x1y,x2z, with the remaining five pairs absent. This is exactly the published bull. Any induced Bird embedding restricts to an induced bull, establishing the class inclusion. The bull itself has five vertices so is Bird-free, while its identity embedding shows it is not bull-free. Apply the A-page theorem only to the Bird-free witness. This B example is a leaf.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Introduction and Figure 5",
+              "url": "https://arxiv.org/pdf/2606.06258v2"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -7,11 +7,12 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "May, A Concise Course in Algebraic Topology, 14§6, theorem and telescope proof pp.114–116"
@@ -22,7 +23,7 @@ sources:
       locator: "Theorem 3F.8 pp.314–315"
 status: published
 origin: "pipeline"
-proof_strategy: "Split the telescope into odd and even cylinder subcomplexes, with intersection the disjoint union of stages. MV and arbitrary additivity identify the overlap map with 1-shift after reindexing; its injectivity kills the next boundary and its cokernel is the colimit. Transfer through the explicit telescope homotopy equivalence. Combine with finite-dimensional finite support, and use compact images to prove continuous-map naturality of the finite-subcomplex colimit."
+proof_strategy: "Split the telescope into odd and even cylinder subcomplexes, with intersection the disjoint union of stages. MV and arbitrary additivity identify the overlap map with 1-shift after reindexing; its injectivity kills the next boundary and its cokernel is the colimit. Transfer through the explicit telescope homotopy equivalence. Combine with finite-dimensional finite support, then transport maps through the canonical colimit isomorphisms to prove naturality for arbitrary continuous maps."
 ---
 
 ## Statement
@@ -53,4 +54,4 @@ is an isomorphism. So is the canonical colimit over finite subcomplex pairs $(K,
 
 4.1 Each skeletal pair is finite-dimensional, so F4 identifies its group with the colimit of the finite subcomplex pairs it contains. Every finite CW subcomplex of X lies in some skeleton, as its finitely many cells have bounded dimensions. Thus the iterated colimit is precisely the colimit over all finite subcomplex pairs, proving that assertion. [F4, step 3.1]
 
-5.1 A continuous map takes a finite CW subcomplex into a finite subcomplex by compact-cell support, the same fact used in F4. Restrict the map to those finite pairs and use ordinary functoriality; their maps to the full pair commute. Since every class has finite support, this proves naturality for arbitrary maps, without assuming such maps preserve skeleta. Empty X and all zero groups give zero colimits, and all degrees, including negative ones, are covered by the same exact sequences. [F4, step 4.1] ∎
+5.1 Let $f:(X,A)\to(Y,B)$ be any continuous map of CW pairs, and write $j_X$ and $j_Y$ for the canonical finite-subcomplex colimit isomorphisms of step 4.1. Define the map between these colimits by $j_Y^{-1}\circ f_*\circ j_X$. This is well defined and functorial because $j_X,j_Y$ are canonical isomorphisms and ordinary homology is functorial. On a representative class from a finite subcomplex pair of $X$, it is exactly the finite-support representative of its image under $f_*$ in $Y$ furnished by step 4.1. Thus $j_Y$ composed with this map equals $f_*j_X$, proving the stated naturality for arbitrary maps without requiring a map to preserve skeleta or a finite image subcomplex. Empty $X$ and all zero groups give zero colimits, and all degrees, including negative ones, are covered by the same exact sequences. [step 4.1, construct] ∎

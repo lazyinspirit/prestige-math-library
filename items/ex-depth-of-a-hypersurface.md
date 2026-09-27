@@ -4,7 +4,7 @@ title: Depth of a hypersurface quotient
 kind: example
 status: published
 origin: pipeline
-deps: [lem-depth-quotient-by-regular-element]
+deps: [def-axiom-of-choice, lem-depth-quotient-by-regular-element]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,22 +14,22 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (ex-depth-of-a-hypersurface). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Example
 
-Let $(Q,\mathfrak n)$ be a regular local domain of dimension $d>0$ and let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(Q,\mathfrak n)$ be a regular local domain of dimension $d>0$ and let
 $0\ne f\in\mathfrak n$. Then
 $$\operatorname{depth}(Q/(f))=d-1=\dim(Q/(f)).$$
 
 ## Facts & Assumptions
 
-**Given:** $Q$ is Cohen--Macaulay of depth $d$, and $f$ is a nonzerodivisor.
+**Given:** The Axiom of Choice; $Q$ is Cohen--Macaulay of depth $d$, and $f$ is a nonzerodivisor.
 
 ## Verification
 

@@ -10,12 +10,12 @@ provenance:
 deps: [def-limit-computable-function, thm-shoenfield-limit-lemma, thm-halting-is-recognizable-and-undecidable]
 proof_strategy: contradiction
 verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, §4.7"
@@ -34,6 +34,6 @@ Every limit-computable function has a computable modulus of stabilization.
 
 **Proof technique:** contradiction.
 
-1.1 Assume a computable modulus is supplied for this approximation. Let $h(e,s)=1$ if program $e$ has halted by stage $s$, and $0$ otherwise. This is computable and converges pointwise to $\chi_{0'}$. [given, assume-contra, construct]
+1.1 Let $h(e,s)=1$ if program $e$ has halted by stage $s$, and $0$ otherwise. Bounded simulation makes $h$ total computable, and it converges pointwise to the characteristic function $\chi_{0'}$ of the halting set. Thus $\chi_{0'}$ is limit computable. [given, construct]
 
-2.1 If a computable modulus $m(e)$ were available, simulate $e$ for $m(e)$ steps and return $h(e,m(e))$. This would decide $0'$, contradicting undecidability of the halting problem. [step 1.1, discharge-contradiction] ∎
+2.1 Suppose $\chi_{0'}$ had a total computable approximation $g(e,s)$ with a computable stabilization modulus $m(e)$. Computing $g(e,m(e))$ would then decide $0'$, contradicting undecidability of the halting problem. This argument covers every possible approximation, including $h$ from step 1.1, so no such modulus exists. [step 1.1, assume-contra, discharge-contradiction] ∎

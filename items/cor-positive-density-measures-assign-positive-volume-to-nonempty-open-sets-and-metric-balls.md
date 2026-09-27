@@ -4,32 +4,31 @@ title: "Positive open-set and metric-ball volume"
 kind: corollary
 status: published
 origin: pipeline
-deps: ["thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-lebesgue-measure-of-a-box-of-every-kind", "def-metric-ball", "thm-density-measure-is-independent-of-the-chart-gluing"]
+deps: ["def-countable-choice", "thm-lebesgue-measure-of-a-box-of-every-kind", "def-metric-ball", "thm-density-measure-is-independent-of-the-chart-gluing"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: "Folland, Real Analysis, second edition, \u00a711.4 pp.361\u2013363; Theorems 2.14\u20132.15 pp.50\u201351"
       url: "https://djvu.online/file/NPF4BEtSuqdFA"
 proof_strategy: direct
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $r$ be positive smooth. Every nonempty open $O\subseteq M$ has $\mu_r(O)>0$. If $d$ induces the manifold topology, then for every $p\in M$ and $R>0$ the ball $B_d(p,R)$ is Borel and has positive measure. If its closure in $M$ is compact, it also has finite measure.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $r$ be positive smooth. Every nonempty open $O\subseteq M$ has $\mu_r(O)>0$. If $d$ induces the manifold topology, then for every $p\in M$ and $R>0$ the ball $B_d(p,R)$ is Borel and has positive measure. If its closure in $M$ is compact, it also has finite measure.
 
 ## Facts & Assumptions
 
-**Given:** Assume $\mathrm{AC}_\omega$. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Nonempty open set; topology-compatible positive-radius ball.
-
-[F1] [[thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure]]: Positive smooth densities give compact-finite Borel measures.
+**Given:** The Axiom of Countable Choice $\mathrm{AC}_\omega$ as in the Statement. Manifolds are Hausdorff, second countable and smooth, with boundary allowed; $n=0$ is allowed unless excluded. Densities are pointwise Borel, $0\cdot\infty=0$, and $\lambda_0(\mathbb R^0)=1$. Nonempty open set; topology-compatible positive-radius ball.
 
 [F2] [[thm-density-measure-is-independent-of-the-chart-gluing]]: The measure in any chart is its coefficient integral.
 
@@ -43,4 +42,6 @@ Let $r$ be positive smooth. Every nonempty open $O\subseteq M$ has $\mu_r(O)>0$.
 
 2.1 For $n=0$ the singleton $\{p\}$ is open with measure $r(p)>0$, so again $\mu_r(O)>0$. The empty manifold has no nonempty open subset, making this clause vacuous. [F2, step 1.1]
 
-3.1 If $q\in B_d(p,R)$, then $\epsilon=R-d(p,q)>0$ and the triangle inequality gives $B_d(q,\epsilon)\subset B_d(p,R)$. Thus the ball is open in the metric topology, hence in the manifold topology and Borel. It contains $p$ since $d(p,p)=0<R$, so the preceding positivity applies. If $\overline{B_d(p,R)}$ is compact, monotonicity and compact-finiteness give $\mu_r(B_d(p,R))\le\mu_r(\overline{B_d(p,R)})<\infty$. [F1, F4, step 1.1, step 2.1] ∎
+3.1 If $q\in B_d(p,R)$, then $\epsilon=R-d(p,q)>0$ and the triangle inequality gives $B_d(q,\epsilon)\subset B_d(p,R)$. Thus the ball is open in the metric topology, hence in the manifold topology and Borel. It contains $p$ since $d(p,p)=0<R$, so the preceding positivity applies. [F4, step 1.1, step 2.1]
+
+4.1 Suppose $K=\overline{B_d(p,R)}$ is compact. Each point of $K$ has a chart neighborhood contained in a bounded coordinate box on whose closure the smooth coefficient $r_x$ has a finite upper bound; the chart formula and finite Euclidean box measure make that neighborhood's measure finite. In dimension zero a singleton chart has finite weight instead. A finite subcover of $K$ therefore gives $\mu_r(K)<\infty$. Monotonicity yields $\mu_r(B_d(p,R))\le\mu_r(K)<\infty$. [F2, F3, step 3.1] ∎

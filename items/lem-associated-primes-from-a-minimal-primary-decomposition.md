@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-primary-decomposition-minimal-and-isolated-components, thm-associated-primes-in-a-short-exact-sequence, thm-primary-submodule-characterisations, thm-existence-of-associated-primes]
+deps: [def-axiom-of-choice, def-primary-decomposition-minimal-and-isolated-components, thm-associated-primes-in-a-short-exact-sequence, thm-primary-submodule-characterisations, thm-existence-of-associated-primes]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (lem-associated-primes-from-a-minimal-primary-decomposition). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,6 +28,8 @@ sources:
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 Let $R$ be a Noetherian commutative ring, let $M$ be a finitely generated left
 $R$-module, and let
 $$ N=Q_1\cap\cdots\cap Q_r $$
@@ -37,15 +40,15 @@ $$ \operatorname{Ass}_R(M/N)=\{\mathfrak p_1,\dots,\mathfrak p_r\}. $$
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, a finitely generated left $R$-module $M$, and a minimal primary decomposition $N=Q_1\cap\cdots\cap Q_r$ with each $Q_i$ $\mathfrak p_i$-primary for a prime ideal $\mathfrak p_i$.
+**Given:** The Axiom of Choice, a Noetherian commutative ring $R$, a finitely generated left $R$-module $M$, and a minimal primary decomposition $N=Q_1\cap\cdots\cap Q_r$ with each $Q_i$ $\mathfrak p_i$-primary for a prime ideal $\mathfrak p_i$ ([[def-axiom-of-choice]]).
 
 [L1] In a minimal primary decomposition, the component radicals are pairwise distinct and no component is redundant ([[def-primary-decomposition-minimal-and-isolated-components]]).
 
 [L2] Associated primes of a submodule lie in those of the ambient module, and associated primes of a direct sum are the union of those of the summands ([[thm-associated-primes-in-a-short-exact-sequence]]).
 
-[L3] If $Q_i$ is $\mathfrak p_i$-primary, then $\operatorname{Ass}_R(M/Q_i)=\{\mathfrak p_i\}$ ([[thm-primary-submodule-characterisations]]).
+[L3] Under the stated Choice hypothesis, if $Q_i$ is $\mathfrak p_i$-primary, then $\operatorname{Ass}_R(M/Q_i)=\{\mathfrak p_i\}$ ([[thm-primary-submodule-characterisations]]).
 
-[L4] Every nonzero module over a Noetherian ring has an associated prime ([[thm-existence-of-associated-primes]]).
+[L4] Under the stated Choice hypothesis, every nonzero module over a Noetherian ring has an associated prime ([[thm-existence-of-associated-primes]]).
 
 ## Proof
 

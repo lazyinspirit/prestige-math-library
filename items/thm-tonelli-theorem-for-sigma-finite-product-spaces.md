@@ -8,11 +8,16 @@ landmark: true
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-sections-of-product-measurable-functions-are-measurable, thm-iterated-section-measures-agree-on-product-measurable-sets, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-convergence-for-the-integral]
+deps: [thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-sections-of-product-measurable-functions-are-measurable, thm-iterated-section-measures-agree-on-product-measurable-sets, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (thm-tonelli-theorem-for-sigma-finite-product-spaces). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, Theorem 1.7.18"
@@ -42,10 +47,12 @@ $$\int_{X \times Y} f\,d(\mu \times \nu) = \int_X \left(\int_Y f_x\,d\nu\right)d
 
 [L4] Monotone convergence passes increasing limits through the integral. ([[thm-monotone-convergence-for-the-integral]])
 
+[L5] The nonnegative integral is additive for finite sums of measurable nonnegative functions. ([[cor-additivity-of-the-nonnegative-lebesgue-integral]])
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $s$ is a nonnegative simple function, write $s=\sum_{j=1}^m c_j\mathbf 1_{E_j}$ with $c_j \ge 0$ and measurable sets $E_j$. Applying [L2] to each indicator $\mathbf 1_{E_j}$ and summing yields $$\int s\,d(\mu \times \nu) = \int_X \left(\int_Y s_x\,d\nu\right)d\mu = \int_Y \left(\int_X s^y\,d\mu\right)d\nu.$$ The inner integral functions are measurable because the same is true for each $\mathbf 1_{E_j}$ and simple combinations preserve measurability. [L2]
+1.1 If $s$ is a nonnegative simple function, write $s=\sum_{j=1}^m c_j\mathbf 1_{E_j}$ with $c_j \ge 0$ and measurable sets $E_j$. Applying [L2] to each indicator $\mathbf 1_{E_j}$ and summing by [L5] yields $$\int s\,d(\mu \times \nu) = \int_X \left(\int_Y s_x\,d\nu\right)d\mu = \int_Y \left(\int_X s^y\,d\mu\right)d\nu.$$ The inner integral functions are measurable because the same is true for each $\mathbf 1_{E_j}$ and simple combinations preserve measurability. [L2, L5]
 
 2.1 Choose simple functions $s_n \uparrow f$ by [L3]. Then for each $x$ and $y$ one has $(s_n)_x \uparrow f_x$ and $(s_n)^y \uparrow f^y$, so [L4] gives $$\int_Y (s_n)_x\,d\nu \uparrow \int_Y f_x\,d\nu,\qquad \int_X (s_n)^y\,d\mu \uparrow \int_X f^y\,d\mu.$$ Applying [L4] once more to the equalities of step 1.1 yields the stated measurability and the equality of all three integrals. [L1, L3, L4, step 1.1] ∎

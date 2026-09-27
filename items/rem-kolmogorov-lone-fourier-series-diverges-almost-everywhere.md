@@ -30,7 +30,7 @@ verification:
 
 ## Recorded theorem
 
-There exists $f\in L^1(\mathbb T)$, where $\mathbb T=\mathbb R/\mathbb Z$ has Haar mass one, such that
+Assume the Axiom of Countable Choice for the torus $L^1$ and Fourier-coefficient conventions. There exists $f\in L^1(\mathbb T)$, where $\mathbb T=\mathbb R/\mathbb Z$ has Haar mass one, such that
 
 $$\sup_{N\ge0}|S_Nf(x)|=\infty\qquad\text{for almost every }x\in\mathbb T.$$
 

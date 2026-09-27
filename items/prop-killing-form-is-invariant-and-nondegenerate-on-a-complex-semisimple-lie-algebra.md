@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-killing-form-of-a-semisimple-lie-algebra]
+deps: [def-killing-form-of-a-semisimple-lie-algebra, lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -37,7 +38,9 @@ and $B$ is nondegenerate.
 
 ## Facts & Assumptions
 
-**Given:** A complex semisimple Lie algebra $\mathfrak g$ and its Killing form $B$.
+**Given:** A finite-dimensional complex semisimple Lie algebra $\mathfrak g$ and its Killing form $B$.
+
+[L1] The finite Engel/trace argument proves that the Killing form of every finite-dimensional complex semisimple Lie algebra is invariant and nondegenerate ([[lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy]]).
 
 ## Proof
 
@@ -45,6 +48,6 @@ and $B$ is nondegenerate.
 
 1.1 Using $\operatorname{ad}_{[x,y]}=[\operatorname{ad}_x,\operatorname{ad}_y]$ and cyclicity of trace, one gets $B([x,y],z)=\operatorname{tr}([\operatorname{ad}_x,\operatorname{ad}_y]\operatorname{ad}_z)=\operatorname{tr}(\operatorname{ad}_x[\operatorname{ad}_y,\operatorname{ad}_z])=B(x,[y,z])$. [given, algebra]
 
-2.1 The radical $\{x\in \mathfrak g : B(x,\mathfrak g)=0\}$ is an ideal because step 1.1 makes it stable under brackets. Cartan's semisimplicity criterion states that a finite-dimensional Lie algebra over characteristic $0$ is semisimple if and only if its Killing form is nondegenerate. Since $\mathfrak g$ is complex semisimple, this criterion makes the radical zero. [given, step 1.1]
+1.2 The nondegeneracy clause of [L1] applies to $\mathfrak g$. It proves that the radical $\{x\in\mathfrak g:B(x,\mathfrak g)=0\}$ is zero by an explicit finite trace-solvability argument, rather than leaving Cartan's criterion as an unproved appeal. [L1, given]
 
-3.1 Hence $B$ is invariant and has zero radical, so it is nondegenerate. [step 1.1, step 2.1] ∎
+2.1 Hence $B$ is invariant and has zero radical, so it is nondegenerate. [step 1.1, step 1.2, L1] ∎

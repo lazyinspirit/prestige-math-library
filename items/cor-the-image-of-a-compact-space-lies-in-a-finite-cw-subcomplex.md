@@ -7,12 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, def-skeleta-cw-subcomplex-and-relative-cw-complex]
+deps: [lem-compact-cw-images-have-finite-cell-support-without-choice, def-skeleta-cw-subcomplex-and-relative-cw-complex]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Appendix A
@@ -27,10 +30,12 @@ If $K$ is compact and $f:K\to X$ is continuous into a CW complex, then $f(K)$ li
 
 **Given:** A continuous map $f:K\to X$ with $K$ compact.
 
+[L1] With characteristic maps supplied, a compact CW image lies in a finite subcomplex without choice ([[lem-compact-cw-images-have-finite-cell-support-without-choice]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The image is compact, so [[lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells]] gives finitely many cells meeting it. [given]
+1.1 The characteristic maps are part of the supplied CW structure. Thus the given compact space and continuous map satisfy the hypotheses of [L1]. [given]
 
-2.1 Add the finitely many cells in the closures of those cells, repeating down dimensions. Closure finiteness makes this terminate in a finite union, and the result is a CW subcomplex by [[def-skeleta-cw-subcomplex-and-relative-cw-complex]]. [step 1.1] ∎
+2.1 Apply [L1] to obtain a finite CW subcomplex containing $f(K)$, including the empty-image case. The supplier uses canonical coordinate minima to prove finite cell support without a choice premise. [L1, step 1.1] ∎

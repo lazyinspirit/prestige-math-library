@@ -10,12 +10,12 @@ provenance:
 deps: [thm-a-vitali-set-is-not-lebesgue-measurable, thm-vitali-sets-exist-under-choice-on-r-over-q]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Sheldon Axler, Measure, Integration and Real Analysis, Exercise 29"
@@ -38,11 +38,6 @@ sources:
 
 **Proof technique:** direct.
 
-1.1 Define $f : [0,1] \to \mathbb{R}$ by $f=1$ on $V$ and $f=-1$ on [given, L1]
-$[0,1] \setminus V$. Then $|f|$ is the constant function $1$, hence measurable. [given, L1]
+1.1 By [L1], choose a Vitali set $V\subseteq[0,1]$. Define $f:[0,1]\to\mathbb R$ by $f(x)=1$ for $x\in V$ and $f(x)=-1$ for $x\in[0,1]\setminus V$. Then $|f|$ is the constant function $1$, hence measurable. [given, L1]
 
-2.1 But [step 1.1, L2]
-
-$$\{x : f(x) > 0\} = V,$$
-
-which is not measurable by [L2]. So $f$ is not measurable even though $|f|$ is. [step 1.1, L2] ∎
+2.1 The inverse image $f^{-1}((0,\infty))=\{x:f(x)>0\}=V$ is not Lebesgue measurable by [L2]. Since $(0,\infty)$ is open, $f$ is not measurable even though $|f|$ is. [step 1.1, L2] ∎

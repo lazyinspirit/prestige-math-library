@@ -1,0 +1,9 @@
+# Lane-2 field-differentials localization Fact repair
+
+Item: `thm-ag-field-differentials-separable-rank` (draft). Pre-edit item guard `dcd5bec2635fbe6d4b1ec1a2a917783e38ef2b48ff3e7387a85a4e720bbe0aeb`; post-edit guard `7130ff75db880df7aec25371297c96b00612fcb02723859e7c2a892014083b10`.
+
+Fact F6 had the two directions of the localization isomorphism mislabeled: it called `Ω_{U⁻¹B/A}→U⁻¹Ω_{B/A}` the canonical map and then described the fraction-derivative formula in that same direction as its inverse. The exact supplier `lem-ag-differentials-localization-base-change`, Statement 2, makes the canonical map `U⁻¹Ω_{B/A}→Ω_{U⁻¹B/A}`. The inverse sends `d(b/u)` to `u⁻¹db−bu⁻²du`. F6 now states those directions consistently. This is a confirmed nonfatal fact-orientation/citation defect; the proof's actual uses of the isomorphism and quotient rule in steps 1.2 and 5.1, and its use of the separate functorial map in step 6.1, are mathematically sound.
+
+The exported Statement did not change, including its AC-qualified characteristic-zero injection clause. The proof conclusion and dependency list did not change. The batch-3 proof contract already quotes the supplier's correct Statement and maps F6 to steps 1.2, 5.1 and 6.1, so it needs no edit. The five incoming changed-supplier pairs for this consumer are recorded at the post-edit guard in `research/frontier-35-ten-categories-step5b-impact-lane-2-evidence.jsonl`; its F6 pair is `repaired`, the others are `still-licensed`. No downstream consumer interface changed. Focused precheck passed, one item checked and zero failures.
+
+Central ledger proposal: draft `thm-ag-field-differentials-separable-rank`, confirmed nonfatal F6 localization-arrow/inverse labeling defect, repaired at the guards above; no Statement/Definition change and no central plan delta.

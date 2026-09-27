@@ -4,8 +4,15 @@ title: "A universal-coefficient splitting cannot in general be chosen naturally"
 kind: counterexample
 status: published
 origin: pipeline
-deps: ["thm-the-homology-universal-coefficient-sequence-splits-nonnaturally"]
+deps: ["def-chain-complex-with-coefficients-by-tensoring", "def-homology-object-of-a-chain-complex"]
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Weibel, An Introduction to Homological Algebra"
@@ -13,13 +20,6 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 ---
 
 ## Statement
@@ -30,7 +30,7 @@ The noncanonical splitting in the homological UCT cannot in general be chosen na
 
 **Given:** the free complex $C_1=\mathbb Ze\oplus\mathbb Zf$, $C_0=\mathbb Zg$, with $d(e)=2g$ and $d(f)=0$, together with $G=\mathbb Z/2$.
 
-1.1 Since $H_1(C)=\mathbb Zf$, $H_0(C)=\mathbb Z/2$, and $d\otimes G=0$, the degree-one UCT sequence is $0\longrightarrow (\mathbb Z/2)f\longrightarrow (\mathbb Z/2)e\oplus(\mathbb Z/2)f\xrightarrow{q}\mathbb Z/2\longrightarrow0$, with $q(ae+bf)=a$. [given, algebra]
+1.1 Since $H_1(C)=\mathbb Zf$, $H_0(C)=\mathbb Z/2$, and $d\otimes G=0$, direct kernel and cokernel calculations give the exact degree-one sequence $0\longrightarrow (\mathbb Z/2)f\longrightarrow (\mathbb Z/2)e\oplus(\mathbb Z/2)f\xrightarrow{q}\mathbb Z/2\longrightarrow0$, with $q(ae+bf)=a$. This is the UCT sequence in this finite example: its left map tensors the cycle $f$, and its right map records the coefficient of $e$ modulo $2$. [given, algebra]
 
 2.1 The chain automorphism $u_1(e)=e+f$, $u_1(f)=f$, $u_0(g)=g$ induces the identity on both integral homology groups and hence on both outer UCT terms, while its action on the middle term is $(a,b)\mapsto(a,a+b)$. [step 1.1, algebra]
 

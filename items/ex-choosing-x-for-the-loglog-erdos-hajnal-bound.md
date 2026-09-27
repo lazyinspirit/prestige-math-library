@@ -9,16 +9,17 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [rem-loglog-quantitative-density-theorem,
+deps: [thm-loglog-quantitative-induced-density-bound,
        def-logarithm-to-a-base]
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -28,16 +29,16 @@ sources:
 
 ## Example
 
-Fix a finite graph $H$, let $C_H>0$ be the constant from
-[[rem-loglog-quantitative-density-theorem]], and let $G$ be an $H$-free graph on
-$n$ vertices. Write $L:=\log_2 n$, and set
+Fix a nonempty finite graph $H$, let $C_H>0$ be the constant from
+[[thm-loglog-quantitative-induced-density-bound]], and let $G$ be an $H$-free graph on
+$n\ge3$ vertices. Write $L:=\log_2 n$, and set
 $\beta:=1/(4\sqrt{C_H})$ and $x:=2^{-\beta\sqrt{L\log_2 L}}$.
 
 ## Facts & Assumptions
 
 **Given:** The data in the Example.
 
-[L1] For $0<x<1/2$, every $H$-free $n$-vertex graph has a vertex set of order at least $2^{-C_H(\log_2(1/x))^2/\log_2\log_2(1/x)}n$ whose induced graph or complement has at most $x\binom{|S|}{2}$ edges ([[rem-loglog-quantitative-density-theorem]]).
+[L1] For nonempty $H,G$ and $0<x<1/2$, the proved quantitative induced-density theorem gives every $H$-free $n$-vertex graph a nonempty set $S$ of order at least $2^{-C_H(\log_2(1/x))^2/\log_2\log_2(1/x)}n$ whose induced graph or complement has at most $x\binom{|S|}{2}$ edges ([[thm-loglog-quantitative-induced-density-bound]]).
 
 ## Verification
 

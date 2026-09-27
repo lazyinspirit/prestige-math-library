@@ -13,8 +13,12 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -51,6 +55,6 @@ principal cofactor of the Laplacian is the same.
 
 1.1 Delete row $i$ from $B$ to obtain an $(n-1)\times |E(G)|$ matrix $B^{(i)}$. By [L1], the matrix $L^{(i)}$ obtained by deleting row $i$ and column $i$ from $L(G)$ is $L^{(i)}=B^{(i)}(B^{(i)})^{\mathsf T}$. Applying [L3] gives $\det L^{(i)}=\sum_{|S|=n-1}\det(B^{(i)}[S])^2$, where $S$ ranges over all $(n-1)$-edge subsets of $E(G)$. [L1, L3, algebra]
 
-1.2 Fix such a set $S$, and let $G_S$ be the spanning subgraph with edge set $S$. If $G_S$ is disconnected, then the vertex-indicator vector of the component of $v_i$ gives a nonzero linear relation among the rows of $B^{(i)}[S]$, so $\det(B^{(i)}[S])=0$. If $G_S$ is connected, then $G_S$ has $n-1$ edges and is therefore a tree by [L2]. In that case choose the orientation of every edge of $G_S$ away from the root $v_i$ and order the nonroot vertices so that every parent precedes its children. In this order the matrix $B^{(i)}[S]$ is triangular with diagonal entries all $\pm1$, hence $\det(B^{(i)}[S])=\pm1$. Therefore $\det(B^{(i)}[S])^2$ is $1$ when $S$ is the edge set of a spanning tree and $0$ otherwise. [F1, L2, choose, algebra]
+1.2 Fix such a set $S$, and let $G_S$ be the spanning subgraph with edge set $S$. If $G_S$ is disconnected, choose a component not containing $v_i$. Summing the rows of $B^{(i)}[S]$ indexed by its vertices gives zero: each edge inside that component contributes one $1$ and one $-1$, and no edge leaves it. This is a nonzero linear relation among the rows, so $\det(B^{(i)}[S])=0$. If $G_S$ is connected, then $G_S$ has $n-1$ edges and is therefore a tree by [L2]. In that case choose the orientation of every edge of $G_S$ away from the root $v_i$ and order the nonroot vertices so that every parent precedes its children. In this order the matrix $B^{(i)}[S]$ is triangular with diagonal entries all $\pm1$, hence $\det(B^{(i)}[S])=\pm1$. Therefore $\det(B^{(i)}[S])^2$ is $1$ when $S$ is the edge set of a spanning tree and $0$ otherwise. [F1, L2, choose, algebra]
 
 2.1 Substituting step 1.2 into the sum of step 1.1 shows that $\det L^{(i)}$ counts exactly the spanning trees of $G$, namely $\tau(G)$ by [F1]. Since the right-hand side does not depend on $i$, every principal cofactor of the Laplacian is equal. [step 1.1, step 1.2, F1] ∎

@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [rem-fox-sudakov-quantitative-density-theorem,
+deps: [cor-fox-sudakov-quantitative-induced-density-bound,
+       def-h-free-and-family-free-graph,
        def-homogeneous-set-and-homogeneous-number,
        lem-a-weakly-sparse-set-has-a-large-sparse-subset,
        lem-sparsity-depends-only-on-the-induced-subgraph,
@@ -18,8 +19,12 @@ deps: [rem-fox-sudakov-quantitative-density-theorem,
        def-edge-density-between-vertex-sets]
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -43,7 +48,9 @@ $2^{c_H\sqrt{\log_2 n}}$.
 
 [L1] The homogeneous number is $\operatorname{hom}(G)=\max\{\omega(G),\alpha(G)\}$ ([[def-homogeneous-set-and-homogeneous-number]]).
 
-[L2] Fox-Sudakov quantitative density: there exists $C_H>0$ such that for every real $x$ with $0<x<1/2$ there is $S\subseteq V(G)$ with $|S|\ge 2^{-C_H(\log_2(1/x))^2}n$ and one of $G[S]$ and $\overline{G}[S]$ has at most $x\binom{|S|}{2}$ edges ([[rem-fox-sudakov-quantitative-density-theorem]]).
+[L2] For nonempty $H$, the proved quantitative induced-density corollary supplies $C_H>0$ such that every $H$-free $G$ and every $0<x<1/2$ have a nonempty $S\subseteq V(G)$ with $|S|\ge 2^{-C_H(\log_2(1/x))^2}n$ and at most $x\binom{|S|}{2}$ edges in $G[S]$ or $\overline{G}[S]$ ([[cor-fox-sudakov-quantitative-induced-density-bound]]).
+
+[L9] A graph is $H$-free if it has no induced copy of $H$ ([[def-h-free-and-family-free-graph]]).
 
 [L3] If a nonempty vertex set $X$ satisfies $d_G(X,X)\le c$, then some $X'\subseteq X$ has $|X'|\ge |X|/2$ and is $4c$-sparse ([[lem-a-weakly-sparse-set-has-a-large-sparse-subset]]).
 
@@ -61,9 +68,9 @@ $2^{c_H\sqrt{\log_2 n}}$.
 
 **Proof technique:** direct.
 
-1.1 By [L2], choose a constant $C_H>0$. Write $L:=\log_2 n$ and set $x:=2^{-\sqrt{L/(2C_H)}}$. Since $n\ge2$, one has $L>0$, so $0<x<1/2$. [L2, choose]
+1.1 If $H$ is null, every graph has the empty induced copy, so no graph in the stated range is $H$-free and the assertion is vacuous. Hence assume $H$ is nonempty. By [L2], choose $C_H>0$. Write $L:=\log_2 n$ and set $x:=2^{-\sqrt{L/(2C_H)}}$. Choose $N_0$ so large that $L>2C_H$ whenever $n\ge N_0$. For these $n$ one has $0<x<1/2$, as required to apply [L2]. The finitely many smaller $n$ are handled after the large-$n$ argument. [L2, L9, choose]
 
-2.1 Because $\log_2(1/x)=\sqrt{L/(2C_H)}$, [L2] gives a set $S\subseteq V(G)$ with $|S|\ge 2^{-C_H(\log_2(1/x))^2}n=2^{-L/2}n=\sqrt n$, and one of $G[S]$ and $\overline G[S]$ has at most $x\binom{|S|}{2}$ edges. For that chosen graph $F$ on vertex set $S$, [L8] gives $d_F(S,S)=2|E(F)|/|S|^2\le 2x\binom{|S|}{2}/|S|^2=x(|S|-1)/|S|\le x$. [step 1.1, L2, L8, algebra]
+2.1 For $n\ge N_0$, because $\log_2(1/x)=\sqrt{L/(2C_H)}$, [L2] gives a set $S\subseteq V(G)$ with $|S|\ge 2^{-C_H(\log_2(1/x))^2}n=2^{-L/2}n=\sqrt n$, and one of $G[S]$ and $\overline G[S]$ has at most $x\binom{|S|}{2}$ edges. For that chosen graph $F$ on vertex set $S$, [L8] gives $d_F(S,S)=2|E(F)|/|S|^2\le 2x\binom{|S|}{2}/|S|^2=x(|S|-1)/|S|\le x$. [step 1.1, L2, L8, algebra]
 
 3.1 If $F=G[S]$, then [L3] gives $X\subseteq S$ with $|X|\ge|S|/2$ and $X$ $4x$-sparse in $G$. By [L4] every vertex of $G[X]$ has degree at most $4x|X|$, so [L5] gives $\chi(G[X])\le4x|X|+1$, and then [L6] yields $\alpha(G[X])\ge |X|/(4x|X|+1)$. [step 2.1, L3, L4, L5, L6]
 
@@ -71,8 +78,8 @@ $2^{c_H\sqrt{\log_2 n}}$.
 
 4.1 Steps 3.1 and 3.2 show that $G$ has a homogeneous set $Y$ with $|Y|\ge |X|/(4x|X|+1)$ for some $X\subseteq S$ satisfying $|X|\ge|S|/2\ge\sqrt n/2$. [step 3.1, step 3.2, step 2.1, L1]
 
-5.1 Because $x\sqrt n=2^{L/2-\sqrt{L/(2C_H)}}$, choose $N_H\ge2$ so that $x\sqrt n\ge1$ whenever $n\ge N_H$. For such $n$, step 4.1 gives $4x|X|\ge 2$, hence $4x|X|+1\le 8x|X|$, so $|Y|\ge 1/(8x)=2^{\sqrt{L/(2C_H)}-3}$. [step 4.1, step 1.1, choose, algebra]
+5.1 Because $x\sqrt n=2^{L/2-\sqrt{L/(2C_H)}}$, choose $N_H\ge N_0$ so that $x\sqrt n\ge1$ whenever $n\ge N_H$. For such $n$, step 4.1 gives $4x|X|\ge 2$, hence $4x|X|+1\le 8x|X|$, so $|Y|\ge 1/(8x)=2^{\sqrt{L/(2C_H)}-3}$. [step 4.1, step 1.1, choose, algebra]
 
-6.1 Set $c_H:=1/(4\sqrt{2C_H})$. Choose $N_H'\ge N_H$ so that $\sqrt{L/(2C_H)}-3\ge c_H\sqrt L$ whenever $n\ge N_H'$. Then step 5.1 gives $|Y|\ge 2^{c_H\sqrt L}$ for all $n\ge N_H'$. Shrinking $c_H$ if necessary handles the finitely many integers $2\le n<N_H'$, because every nonnull graph has $\operatorname{hom}(G)\ge1$. [step 5.1, L1, choose, algebra]
+6.1 Set $c_H:=1/(4\sqrt{2C_H})$. Choose $N_H'\ge N_H$ so that $\sqrt{L/(2C_H)}-3\ge c_H\sqrt L$ whenever $n\ge N_H'$. Then step 5.1 gives $|Y|\ge 2^{c_H\sqrt L}$ for all $n\ge N_H'$. For the finitely many integers $2\le n<N_H'$, every graph on at least two vertices has either an adjacent pair or a nonadjacent pair, so $\operatorname{hom}(G)\ge2$. Shrink $c_H>0$ if necessary so that $2^{c_H\sqrt{\log_2 n}}\le2$ for each of these $n$. [step 5.1, L1, choose, algebra]
 
 7.1 Therefore every nonnull finite $H$-free graph $G$ with $|V(G)|=n\ge2$ satisfies $\operatorname{hom}(G)\ge 2^{c_H\sqrt{\log_2 n}}$. [step 6.1, L1] ∎

@@ -2,24 +2,28 @@
 id: lem-pasted-squares-commute
 kind: lemma
 title: "Horizontally pasted commutative squares commute"
-status: draft
+status: published
 origin: session
-deps: []
+deps: [def-category]
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
     - title: "S. Mac Lane, Categories for the Working Mathematician, 2nd ed., Ch. 1"
       url: "https://link.springer.com/book/10.1007/978-1-4757-4721-8"
 pipeline_run: null
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-04-pasting-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement

@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-left-six-vertex-prime-h-graph, def-right-six-vertex-prime-h-graph, cor-the-bull-graph-has-the-erdos-hajnal-property, thm-leaf-deletion-preserves-virality-of-a-finite-family, cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence, prop-erdos-hajnal-property-is-complement-invariant]
+deps: [def-left-six-vertex-prime-h-graph, def-right-six-vertex-prime-h-graph, thm-every-graph-on-at-most-four-vertices-has-the-erdos-hajnal-property, thm-substitution-preserves-the-erdos-hajnal-property, thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family, cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence, prop-erdos-hajnal-property-is-complement-invariant]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -27,6 +20,16 @@ sources:
     - title: "Shenwei Huang, Yiao Ju, and Yidong Zhou, Erdős-Hajnal beyond the five-vertex path, Figure 2 discussion"
       url: "https://arxiv.org/pdf/2606.06258v2"
 pipeline_run: null
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-07-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -38,15 +41,17 @@ Erdős-Hajnal property.
 
 **Given:** The left and right six-vertex prime $\mathcal H$-graphs.
 
-[L1] The bull graph has the Erdős-Hajnal property ([[cor-the-bull-graph-has-the-erdos-hajnal-property]]).
+[L1] Every graph on at most four vertices has the Erdős-Hajnal property ([[thm-every-graph-on-at-most-four-vertices-has-the-erdos-hajnal-property]]).
 
 [L2] For a single graph, the Erdős-Hajnal property is equivalent to virality ([[cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
 
-[L3] Deleting a leaf from each of two forbidden graphs preserves virality ([[thm-leaf-deletion-preserves-virality-of-a-finite-family]]).
+[L3] Deleting a leaf and a co-leaf from two forbidden graphs preserves virality ([[thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family]]).
 
 [L4] A graph and its complement have the same Erdős-Hajnal constants ([[prop-erdos-hajnal-property-is-complement-invariant]]).
 
-[F1] In the left six-vertex prime $\mathcal H$-graph, deleting $\ell_1$ or $\ell_2$ leaves a bull: after deleting $\ell_1$, the triangle is $t_1t_2t_3$ with leaves $\ell_2,\ell_3$, and after deleting $\ell_2$, the same triangle has leaves $\ell_1,\ell_3$.
+[L5] Substituting one Erdős-Hajnal graph for a vertex of another preserves the Erdős-Hajnal property ([[thm-substitution-preserves-the-erdos-hajnal-property]]).
+
+[F1] In the graph $L$ of [[def-left-six-vertex-prime-h-graph]], $c$ is a leaf and $b$ is a co-leaf: $b$ is adjacent to $a,c,d,e$ and nonadjacent to $f$. The graph $L-c$ is the substitution of the edge $bd$ for the second vertex of the path $a-X-e-f$. The graph $L-b$ is the substitution of the path $a-d-e-f$ for one vertex of a two-vertex stable set whose other vertex is $c$.
 
 [F2] The right six-vertex prime $\mathcal H$-graph is the complement of the left one by definition.
 
@@ -54,9 +59,9 @@ Erdős-Hajnal property.
 
 **Proof technique:** direct.
 
-1.1 By [L1] and the direction $(1)\Rightarrow(3)$ in [L2], the singleton family consisting only of the bull graph is viral. [L1, L2]
+1.1 The two factor graphs in each substitution of [F1] have at most four vertices. By [L1] and [L5], both $L-c$ and $L-b$ have the Erdős-Hajnal property. By [L2], the singleton families $\{L-c\}$ and $\{L-b\}$ are viral. [L1, L2, L5, F1]
 
-2.1 Let $L$ be the left six-vertex prime $\mathcal H$-graph. By [F1], if we delete $\ell_1$ from one copy of $L$ and $\ell_2$ from another, both modified singleton families are the viral family $\{\text{bull}\}$. Applying [L3] with the same graph $L$ in both leaf-deletion slots shows that the singleton family $\{L\}$ is viral. Using the direction $(3)\Rightarrow(1)$ in [L2], we conclude that $L$ has the Erdős-Hajnal property. [step 1.1, L2, L3, F1]
+2.1 Apply [L3] to the family $\{L\}$, using $c$ in the leaf-deletion slot and $b$ in the co-leaf-deletion slot. Step 1.1 verifies both viral hypotheses, so $\{L\}$ is viral. The reverse direction of [L2] gives the Erdős-Hajnal property for $L$. [step 1.1, L2, L3, F1]
 
 3.1 Let $R$ be the right six-vertex prime $\mathcal H$-graph. By [F2], we have $R=\overline L$, so [L4] transfers the Erdős-Hajnal property from $L$ to $R$. [step 2.1, L4, F2]
 

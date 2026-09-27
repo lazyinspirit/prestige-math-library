@@ -9,7 +9,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
+deps: [def-dependent-choice, thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
        thm-metric-spaces-are-completely-normal, def-normal-and-t4-spaces,
        def-continuity-real, lem-continuity-is-local-and-pastes, def-interval,
        def-subspace-topology-top, thm-algebra-of-continuous-functions]
@@ -19,17 +19,12 @@ landmark: false
 short: "a hand-built Tietze extension"
 proof_strategy: direct
 verification:
-  precheck: pass
   verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -42,10 +37,11 @@ pipeline_run: null
 
 Let $A := [0,1] \subseteq \mathbb{R}$, closed, and $f : A \to \mathbb{R}$,
 $f(x) := x^2$, continuous. $\mathbb{R}$ is normal
-([[thm-metric-spaces-are-completely-normal]]), so
+([[thm-metric-spaces-are-completely-normal]]). Assuming dependent choice
+([[def-dependent-choice]]),
 [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] guarantees a
-continuous $F : \mathbb{R} \to \mathbb{R}$ with $F|_A = f$, with no formula
-supplied. One is written down here directly:
+continuous $F : \mathbb{R} \to \mathbb{R}$ with $F|_A = f$, without supplying a
+formula. The following formula gives such an extension without dependent choice:
 
 $$F(x) \;:=\; \big(\max\{0,\ \min\{1,\ x\}\}\big)^2.$$
 
@@ -63,7 +59,7 @@ $$F(x) \;:=\; \big(\max\{0,\ \min\{1,\ x\}\}\big)^2.$$
 
 1.2 For $x \in [0,1]$: $\min\{1,x\}=x$ and $\max\{0,x\}=x$, since $0 \le x \le 1$; so $F(x) = x^2 = f(x)$. [given, algebra]
 
-2.1 By steps 1.1 and 1.2, $F : \mathbb{R} \to \mathbb{R}$ is continuous with $F|_A = f$, an explicit witness for the extension [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] and [[thm-tietze-extension-theorem]] promise abstractly. [step 1.1, step 1.2] ∎
+2.1 By steps 1.1 and 1.2, $F : \mathbb{R} \to \mathbb{R}$ is continuous with $F|_A = f$, without a choice premise. Under dependent choice this is also a concrete instance of the extension promised by [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] and [[thm-tietze-extension-theorem]]. [step 1.1, step 1.2] ∎
 
 ## Remarks
 

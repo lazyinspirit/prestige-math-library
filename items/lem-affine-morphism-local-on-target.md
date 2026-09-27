@@ -4,16 +4,17 @@ kind: "lemma"
 title: "Affineness is local on the target"
 status: published
 origin: "pipeline"
-deps: ["def-affine-morphism-schemes", "lem-affineness-from-unit-generating-global-sections", "lem-spectrum-localization-open-immersion", "cor-affine-scheme-quasi-compact", "thm-proper-ideal-contained-in-maximal-ideal"]
+deps: ["def-affine-morphism-schemes", "lem-affineness-from-unit-generating-global-sections", "lem-spectrum-localization-open-immersion", "cor-affine-scheme-quasi-compact", "thm-proper-ideal-contained-in-maximal-ideal", "def-axiom-of-choice"]
 provenance:
-  statement: "literature-derived"
+  statement: "ai-altered"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Stacks 29.11.3(1) iff (2), Remark 29.11.4; 26.11.5–6"
@@ -23,11 +24,11 @@ proof_strategy: direct
 
 ## Statement
 
-A morphism $f:X\to S$ is affine if and only if there exists an affine open cover $S=\bigcup_i U_i$ for which every $f^{-1}(U_i)$ is affine.
+Assume the Axiom of Choice. A morphism $f:X\to S$ is affine if and only if there exists an affine open cover $S=\bigcup_i U_i$ for which every $f^{-1}(U_i)$ is affine.
 
 ## Facts & Assumptions
 
-**Given:** The objects, hypotheses and conventions in the statement above.
+**Given:** The objects, hypotheses and conventions in the statement above, including the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [F1] A morphism of schemes $f:X\to S$ is **affine** when $f^{-1}(U)$ is affine for every affine open subscheme $U\subseteq S$. Here the inverse image carries the restricted structure sheaf, as in def-affine-open-subscheme, and $f$ is a morphism of locally ringed spaces as in def-morphism-of-schemes. The empty scheme is affine, being $\operatorname{Spec}0$. Affineness of a morphism does not require its total source or target to be affine. ([[def-affine-morphism-schemes]])
 

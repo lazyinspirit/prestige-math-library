@@ -7,15 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [ex-c0-is-a-banach-space, ex-finite-sequences-c00-with-standard-norms,
-       lem-complete-subspace-is-closed]
+deps: [ex-c0-is-a-banach-space, ex-finite-sequences-c00-with-standard-norms]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (cex-an-incomplete-subspace-need-not-be-closed). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,8 +42,6 @@ Every incomplete normed subspace of a normed space is closed.
 
 [L2] The space $c_{00}$ is incomplete and dense in $c_0$ for the supremum norm ([[ex-finite-sequences-c00-with-standard-norms]]).
 
-[L3] A complete normed subspace is closed ([[lem-complete-subspace-is-closed]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -48,4 +50,4 @@ Every incomplete normed subspace of a normed space is closed.
 
 1.2 By [L2], the same subspace is dense in $c_0$, so if it were closed then it would equal all of $c_0$. But $c_{00}\ne c_0$, since for example $(1,1/2,1/3,\dots)\in c_0\setminus c_{00}$. [L2, algebra]
 
-2.1 Therefore $c_{00}$ is an incomplete normed subspace that is not closed, refuting the statement. The ambient space is Banach by [L1], and [L3] explains why no contradiction occurs: [L3] goes in the opposite direction. [step 1.1, step 1.2, L1, L3] ∎
+2.1 Therefore $c_{00}$ is an incomplete normed subspace that is not closed, refuting the statement. The ambient space is Banach by [L1]. [step 1.1, step 1.2, L1] ∎

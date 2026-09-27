@@ -12,14 +12,6 @@ justified_by: []
 aliases: [def-open-set-metric, def-closed-set-metric]
 landmark: true
 short: "metric topology"
-verification:
-  precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-08-02
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,6 +24,13 @@ sources:
     - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
       url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (def-metric-topology). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Definition
@@ -55,9 +54,11 @@ defining condition quantifies over no points; and $X$ is open, because
 $B(x,r) \subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and
 $\emptyset$ are also closed, and both are clopen.
 
-**A neighbourhood of a point $x$** is any open set containing $x$. The condition
-above therefore reads: $U$ is open exactly when every point of $U$ has a ball
-around it inside $U$, and it is the balls alone that have to be tested.
+**A neighbourhood of a point $x$** is any set containing an open set that
+contains $x$; an **open neighbourhood** is an open set containing $x$. In a
+metric space, a set is a neighbourhood of $x$ exactly when it contains some
+ball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of
+each of its points, and metric balls suffice to test this condition.
 
 **The metric, not the set, determines $\mathcal{T}_d$.** Two metrics on the same
 set may have different metric topologies, and two different metrics may have the

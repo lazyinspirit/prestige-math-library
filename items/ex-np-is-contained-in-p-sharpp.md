@@ -7,15 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-number-sat, prop-np-is-contained-in-p-sharpp]
+deps: [def-number-sat, def-p-with-a-sharpp-oracle]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -35,7 +35,9 @@ $\varphi$ is satisfiable.
 
 **Given:** the displayed formula and declared-variable list.
 
-[L1] NumberSAT is the exact number of satisfying declared assignments. by [[def-number-sat]].
+[L1] NumberSAT is the exact number of satisfying declared assignments ([[def-number-sat]]).
+
+[L2] A $\mathrm P^{\#\mathrm P}$ machine may query NumberSAT and receive its exact binary integer value ([[def-p-with-a-sharpp-oracle]]).
 
 ## Verification
 
@@ -45,4 +47,4 @@ $\varphi$ is satisfiable.
 
 2.1 Testing the returned integer against zero accepts, which is correct because the displayed satisfying assignments exist. The single exact query summarizes all four assignments. [step 1.1]
 
-3.1 This is the promised finite instance of the $\mathrm{NP}\subseteq \mathrm P^{\#\mathrm P}$ route. [step 1.1, step 2.1] ∎
+3.1 By [L2], this is a finite instance of deciding satisfiability in $\mathrm P^{\#\mathrm P}$ with one NumberSAT query. [L2, step 1.1, step 2.1] ∎

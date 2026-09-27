@@ -9,12 +9,12 @@ provenance:
 deps: [def-simplicial-cycles-boundaries-and-homology, def-connected-component-and-quasicomponent]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -41,6 +41,6 @@ abelian group on the connected components of $|K|$.
 
 3.1 Let $\pi_0(|K|)$ be the set of connected components of $|K|$. Since the vertices of every simplex lie in one component by step 1.1, the assignment sending a vertex $u$ to the basis vector $e_{[u]}$ of the free abelian group $\bigoplus_{C\in\pi_0(|K|)}\mathbb Z e_C$ extends to a homomorphism $C_0(K)\to\bigoplus_{C\in\pi_0(|K|)}\mathbb Z e_C$. Boundaries of edges map to $0$, so this homomorphism factors through $\Phi:H_0^{\mathrm{simp}}(K)\to\bigoplus_{C\in\pi_0(|K|)}\mathbb Z e_C$. If $|K|=\varnothing$, then $C_0(K)=0$ and both groups are zero. Otherwise step 2.1 shows that every connected component contains a vertex, so $\Phi$ is surjective. [step 1.1, step 2.1]
 
-4.1 Choose one vertex $a_C$ in each nonempty connected component $C$. Every class in $H_0^{\mathrm{simp}}(K)$ is represented by a finite $0$-chain $z=\sum_u n_u[u]$. By step 2.1, two vertices lie in the same connected component exactly when they are edge-path connected, so step 1.2 gives $[u]-[a_C]\in B_0(K)$ for every $u\in C$. Hence in $H_0^{\mathrm{simp}}(K)$ one has $[z]=\sum_C\left(\sum_{u\in C}n_u\right)[a_C]$. If $\Phi([z])=0$, then every component sum $\sum_{u\in C}n_u$ is zero, so $[z]=0$. Thus $\Phi$ is injective. [step 1.2, step 2.1, step 3.1]
+4.1 To prove injectivity, let a class be represented by a finite $0$-chain $z=\sum_u n_u[u]$ with $\Phi([z])=0$. Only finitely many connected components meet its support. For each of those components $C$, select one vertex $a_C$ from the support of $z$ in $C$; this is a finite selection. By step 2.1, two vertices lie in the same connected component exactly when they are edge-path connected, so step 1.2 gives $[u]-[a_C]\in B_0(K)$ for every supported $u\in C$. Hence $[z]=\sum_C\left(\sum_{u\in C}n_u\right)[a_C]$. Every coefficient in this finite sum is zero because $\Phi([z])=0$. Thus $[z]=0$ and $\Phi$ is injective. [step 1.2, step 2.1, step 3.1]
 
 5.1 Therefore $\Phi$ is an isomorphism, so $H_0^{\mathrm{simp}}(K)$ is the free abelian group on the connected components of $|K|$. [step 3.1, step 4.1] ∎

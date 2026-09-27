@@ -385,6 +385,43 @@ test('ordinary applied edges and reorders materialize instead of becoming a no-o
   rmSync(dir, { recursive: true, force: true });
 });
 
+test('drift rescope uses the shared 30-pair ceiling', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'drift-cap-'));
+  mkdirSync(join(dir, 'research'));
+  const pages = Array.from({ length: 31 }, (_, i) => {
+    const id = `prerequisite-${i + 1}`;
+    return [
+      { order: i * 2 + 1, id, kind: 'A', companion: `${id}-examples`, items: [] },
+      { order: i * 2 + 2, id: `${id}-examples`, kind: 'B', companion: id, items: [] },
+    ];
+  }).flat();
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages }));
+  writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify(pages.slice(0, 2)));
+  const report = (count: number) => [
+    '### prerequisite-1',
+    `VERDICT: drift-rescoped — ${Array.from({ length: count }, (_, i) =>
+      `prerequisite-${i + 1} (order ${i * 2 + 1})`).join(', ')}`,
+  ].join('\n');
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report(30));
+  const accepted = spawnSync(process.execPath, [APPLY, '--run', 'demo', '--dry-run'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(accepted.status, 0, accepted.stderr);
+  assert.match(accepted.stdout, /would rescope demo onto 30 pair/);
+
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report(31));
+  const rejected = spawnSync(process.execPath, [APPLY, '--run', 'demo', '--dry-run'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(rejected.status, 1);
+  assert.match(rejected.stderr, /over the cap of 30/);
+
+  const oversizedFlag = spawnSync(process.execPath,
+    [APPLY, '--run', 'demo', '--max-pairs', '31', '--dry-run'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(oversizedFlag.status, 2);
+  assert.match(oversizedFlag.stderr, /integer from 1 to 30/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
 test('same-scope drift sync preserves saved Beta items and batch identity', () => {
   const dir = mkdtempSync(join(tmpdir(), 'drift-resume-'));
   mkdirSync(join(dir, 'research'));

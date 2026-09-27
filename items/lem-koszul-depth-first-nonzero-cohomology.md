@@ -4,7 +4,7 @@ title: Depth from first nonzero Koszul cohomology
 kind: lemma
 status: published
 origin: pipeline
-deps: [def-depth-with-respect-to-an-ideal, def-koszul-complex-of-a-sequence-with-coefficients, thm-regular-sequences-give-acyclic-koszul-complexes, thm-finiteness-of-associated-primes, lem-zero-divisor-annihilator-contained-in-associated-prime, lem-finite-prime-avoidance, thm-krull-height-theorem, lem-depth-quotient-by-regular-element]
+deps: [def-depth-with-respect-to-an-ideal, def-koszul-complex-of-a-sequence-with-coefficients, thm-regular-sequences-give-acyclic-koszul-complexes, thm-finiteness-of-associated-primes, lem-zero-divisor-annihilator-contained-in-associated-prime, lem-finite-prime-avoidance, thm-krull-height-theorem, lem-depth-quotient-by-regular-element, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,14 +14,18 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
+
+Assume the Axiom of Choice.
 
 Let $(R,\mathfrak m)$ be Noetherian local, let $M$ be a nonzero finite
 $R$-module, and let $I=(x_1,\ldots,x_n)\subseteq\mathfrak m$. For the Koszul
@@ -31,7 +35,7 @@ $$\operatorname{depth}_I(M) =\min\{i:H^i(K^\bullet(\mathbf x;M))\ne0\} =n-\max\{
 
 ## Facts & Assumptions
 
-**Given:** $I\subseteq\mathfrak m$, so $M/IM\ne0$ by Nakayama. The maximal ideal of a Noetherian local ring is finitely generated, so the height theorem makes $\dim R$ finite; successive regular elements strictly lower support dimension. Hence the depth is finite, as are the degrees of the finite Koszul complex.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and $I\subseteq\mathfrak m$, so $M/IM\ne0$ by Nakayama. The maximal ideal of a Noetherian local ring is finitely generated, so the height theorem makes $\dim R$ finite; successive regular elements strictly lower support dimension. Hence the depth is finite, as are the degrees of the finite Koszul complex.
 
 ## Proof
 

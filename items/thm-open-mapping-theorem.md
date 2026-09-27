@@ -7,11 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-open-mapping-successive-approximation, def-bounded-linear-operator]
+deps: [lem-open-mapping-ball-closure-step, lem-open-mapping-successive-approximation, def-bounded-linear-operator, def-dependent-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources: {references: [{title: "Buhler--Salamon, Functional Analysis, Theorem 2.8", url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"}]}
 ---
 
@@ -23,11 +27,13 @@ Assume DC. A surjective bounded linear map $T:X\to Y$ between Banach spaces is o
 
 **Given:** DC and a surjective bounded linear map $T:X\to Y$ between Banach spaces.
 
+[A1] The stated Dependent Choice is the direct premise for the two open-mapping lemmas ([[def-dependent-choice]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The preceding successive-approximation lemma gives $\varepsilon>0$ with $B_Y(0,\varepsilon)\subseteq T(B_X(0,1))$. [given]
+1.1 Under [A1], [[lem-open-mapping-ball-closure-step]] gives some $r>0$ with $B_Y(0,r)\subseteq\overline{T(B_X(0,1))}$. The successive-approximation lemma [[lem-open-mapping-successive-approximation]] then gives $B_Y(0,r/2)\subseteq T(B_X(0,1))$. Put $\varepsilon=r/2>0$. [given, A1]
 
 2.1 For every $x\in X$ and $a>0$, linearity gives $B_Y(Tx,a\varepsilon)\subseteq T(B_X(x,a))$. [step 1.1, algebra]
 

@@ -15,12 +15,12 @@ landmark: true
 short: "derivative of the $n$-th root"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -63,12 +63,11 @@ $b = 0$ the displayed formula is not a statement at all; and the root really is
 not differentiable there, by claim 2 of [[thm-derivative-of-an-inverse]] applied
 on $[0,\infty)$, since $x \mapsto x^{n}$ has derivative $\iota(n)\,0^{\,n-1} = 0$
 at $0$ for $n \ge 2$ ([[lem-derivative-of-a-power]], [[def-integer-power]]). At
-$n = 1$ neither obstruction arises: the exponent $1/n - 1$ is $0$, not negative;
-$u^{1/1} = u$ is the identity ([[thm-nth-roots-exist]]); and the formula reads
-$g'(b) = b^{0} = 1$, which is correct at every real. So for $n = 1$ the
-restriction to $(0,\infty)$ is a convenience of the uniform statement rather
-than a necessity. Nothing below asserts anything about the root at $0$ in either
-case.
+$n = 1$ the inverse-map obstruction disappears: the root map is the identity
+on $[0,\infty)$ ([[thm-nth-roots-exist]]) and has derivative $1$ even at $0$.
+The rational-power expression $b^{1/n-1}=b^0$ used in the displayed formula
+is defined here only for $b>0$ ([[def-rational-power]]). The proof below
+addresses that common positive domain.
 
 ## Facts & Assumptions
 
@@ -102,7 +101,7 @@ case.
 
 2.1 The map $g : I \to I$, $u \mapsto u^{1/n}$, is the inverse of $f : I \to f[I] = I$. By [L7] and step 1.2 that bijection has a unique two-sided inverse; by step 1.3 the map $g$ takes values in $I$ and satisfies $f(g(u)) = u$ for every $u \in I$, so it is a right inverse of the bijection and therefore is that unique inverse. [step 1.2, step 1.3, L1, L7]
 
-2.2 $f$ is differentiable at every $c \in I$ with $f'(c) = \iota(n)c^{\,n-1}$, by [L5] together with step 1.1; and $f'(c) \ne 0$, since $\iota(n) > 0$ by [L8] and $c^{\,n-1} > 0$ by [L3] as $c > 0$. [step 1.1, L3, L5, L8]
+2.2 $f$ is differentiable at every $c \in I$ with $f'(c) = \iota(n)c^{\,n-1}$, by [L5] together with step 1.1; and $f'(c) \ne 0$, since $\iota(n) > 0$ by [L8] and $c^{\,n-1} > 0$: for $n=1$ this is $c^0=1$, and for $n>1$ it follows from [L3] as $c>0$. [step 1.1, L3, L5, L8]
 
 3.1 Let $b \in I$ and put $c := b^{1/n}$, an element of $I$ by [L1], with $f(c) = b$ by [L1]. By step 1.2, step 2.2 and [L6], applied on $I$ at $c$, the inverse $g$ is differentiable at $b = f(c)$ with $g'(b) = 1/f'(c) = 1/\bigl(\iota(n)\,c^{\,n-1}\bigr)$. [step 2.1, step 2.2, L1, L6]
 

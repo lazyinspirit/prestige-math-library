@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
+deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Exercise 13.4"
@@ -26,7 +27,7 @@ sources:
 
 ## Statement
 
-Let $\mu$ be a sigma-finite positive measure.
+Assume the Axiom of Choice. Let $\mu$ be a sigma-finite positive measure.
 
 1. If $\nu$ is a finite signed measure with $\nu\ll\mu$ and Radon-Nikodym derivative $h=d\nu/d\mu$, then
    $$|\nu|(E)=\int_E|h|\,d\mu\qquad(E\in\mathcal A).$$
@@ -35,13 +36,13 @@ Let $\mu$ be a sigma-finite positive measure.
 
 ## Facts & Assumptions
 
-**Given:** A sigma-finite positive measure $\mu$ and an absolutely continuous finite signed or finite complex measure $\nu$.
+**Given:** The Axiom of Choice, a sigma-finite positive measure $\mu$ and an absolutely continuous finite signed or finite complex measure $\nu$.
 
 [L1] A real $L^1$ density defines a finite signed measure whose total variation is the integral of its absolute value. ([[thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data]])
 
 [L2] A complex $L^1$ density defines a complex measure whose total variation is the integral of its modulus. ([[thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]])
 
-[L3] Finite absolutely continuous signed measures and finite absolutely continuous complex measures admit integrable representatives of their Radon-Nikodym derivatives. ([[def-radon-nikodym-derivative]], [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]])
+[L3] Under the Axiom of Choice, finite absolutely continuous signed and complex measures admit integrable representatives of their Radon-Nikodym derivatives ([[def-radon-nikodym-derivative]], [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]], [[def-axiom-of-choice]]).
 
 ## Proof
 

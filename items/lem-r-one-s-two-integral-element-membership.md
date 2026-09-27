@@ -2,13 +2,14 @@
 id: "lem-r-one-s-two-integral-element-membership"
 kind: "lemma"
 title: "r one s two integral element membership"
-deps: ["lem-r-one-s-two-intersection-of-height-one-localisations", "thm-valuation-ring-is-integrally-closed"]
+deps: ["def-axiom-of-choice", "lem-r-one-s-two-intersection-of-height-one-localisations", "thm-valuation-ring-is-integrally-closed"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Proposition 8.41 final proof paragraph, p.58"
@@ -23,11 +24,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-A commutative Noetherian $(S_2)$ domain whose height-one localizations are DVRs is integrally closed.
+Assume the Axiom of Choice. A commutative Noetherian $(S_2)$ domain whose height-one localizations are DVRs is integrally closed.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[lem-r-one-s-two-intersection-of-height-one-localisations]]: If $R$ is a commutative Noetherian domain satisfying $(S_2)$, then inside its fraction field $K$ one has $R=\bigcap_{\operatorname{ht}\mathfrak p=1}R_{\mathfrak p}$. For a field the empty intersection is interpreted as $K=R$.
 

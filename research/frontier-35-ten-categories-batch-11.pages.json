@@ -1,0 +1,1475 @@
+[
+  {
+    "order": 510.045,
+    "id": "young-diagrams-tableaux-and-permutation-modules",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "Young Diagrams Tableaux and Permutation Modules",
+    "companion": "young-diagrams-tableaux-and-permutation-modules-examples",
+    "requires": [
+      "group-actions-and-cayleys-theorem",
+      "induced-representations-and-frobenius-reciprocity"
+    ],
+    "items": [
+      {
+        "id": "def-partition-young-diagram-and-conjugate-partition",
+        "kind": "definition",
+        "title": "Partitions, English diagrams, and conjugation",
+        "statement": "A partition of n >= 0 is a finite weakly decreasing list of positive integers summing to n; the unique partition of 0 is empty. Its English diagram has row i of length lambda_i, and lambda' has column lengths lambda'_j = #{i: lambda_i >= j}. Set S_0 = {1}.",
+        "deps": [
+          "def-symmetric-group"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "Fix row numbers downward and column numbers rightward; trailing zeros do not create boxes. Conjugation transposes the finite diagram and is involutive."
+      },
+      {
+        "id": "def-young-tableau-standard-tableau-and-shape",
+        "kind": "definition",
+        "title": "Tableaux and standard tableaux",
+        "statement": "A tableau of shape lambda is a bijective filling of its boxes by {1,...,n}. It is standard when entries strictly increase left to right in rows and top to bottom in columns; the empty tableau is the unique standard tableau of empty shape.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "Define the left S_n action by permuting entries. Distinguish a tableau from its later row-equivalence class."
+      },
+      {
+        "id": "def-removable-and-addable-nodes-of-a-partition",
+        "kind": "definition",
+        "title": "Removable and addable nodes",
+        "statement": "A removable node belongs to the diagram and its deletion leaves a Young diagram; an addable node is outside it and its insertion leaves a Young diagram. Thus a row endpoint is removable only if no box lies immediately below it.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "Equivalent row condition: (i,lambda_i) is removable precisely when lambda_i > lambda_{i+1}; include the empty shape and addable first node."
+      },
+      {
+        "id": "lem-largest-entry-of-a-standard-tableau-is-removable",
+        "kind": "lemma",
+        "title": "The largest standard entry lies in a removable box",
+        "statement": "For n >= 1, the box occupied by n in a standard tableau of size n is removable, and deleting it leaves a standard tableau of size n-1.",
+        "deps": [
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-removable-and-addable-nodes-of-a-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "If a box lay to the right or below n, strict increase would make its entry larger than n. The box therefore ends its row and column, so its deletion leaves a partition; all remaining inequalities persist."
+      },
+      {
+        "id": "def-dominance-order-on-partitions",
+        "kind": "definition",
+        "title": "Dominance order on partitions",
+        "statement": "For partitions lambda, mu of the same n, lambda dominates mu, written lambda >=_dom mu, exactly when sum_{i<=r} lambda_i >= sum_{i<=r} mu_i for every r >= 1, padding each sequence by zeros.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "The partial order is reflexive and transitive by inequalities; antisymmetry follows by subtracting consecutive equal prefix sums. Do not identify it with lexicographic order."
+      },
+      {
+        "id": "lem-conjugation-reverses-dominance",
+        "kind": "lemma",
+        "title": "Conjugation reverses dominance",
+        "statement": "For partitions lambda and mu of the same size, lambda >=_dom mu if and only if mu' >=_dom lambda'.",
+        "deps": [
+          "def-dominance-order-on-partitions",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "For every k>=0, sum_{j<=k} lambda'_j = n - max_{r>=0}(sum_{i<=r} lambda_i - rk), including the empty prefix r=0. Dominance of lambda makes this no larger than the analogous sum for mu. Apply the same implication to conjugates and use double conjugation for the converse."
+      },
+      {
+        "id": "def-row-and-column-stabilizers-of-a-tableau",
+        "kind": "definition",
+        "title": "Row and column stabilizers",
+        "statement": "For a lambda-tableau t, R_t is the subgroup of S_n preserving each row set, and C_t preserves each column set. Each is a product of symmetric groups on its individual row or column sets.",
+        "deps": [
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "A tableau has labelled rows and columns; preserve each set individually, even when equal row lengths occur. This definition precedes the equality clause of the combinatorial lemma."
+      },
+      {
+        "id": "lem-basic-combinatorial-lemma-for-tableaux",
+        "kind": "lemma",
+        "title": "Basic row-column incidence lemma",
+        "statement": "Let t have shape lambda and s have shape mu, partitions of n. If every row of s meets each column of t in at most one entry, then lambda >=_dom mu. If lambda = mu, there are rho in R_s and gamma in C_t with rho s = gamma t.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-row-and-column-stabilizers-of-a-tableau",
+          "def-dominance-order-on-partitions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "For the first r rows of s, each column of t contains at most r of their entries, hence sum_{i<=r} mu_i <= sum_j min(r,lambda'_j)=sum_{i<=r} lambda_i. At equality for every r, row r of s meets precisely the columns of t of height at least r; reorder entries within each row to their columns, then permute within columns of t to align all entries."
+      },
+      {
+        "id": "def-young-subgroup-tabloid-and-permutation-module",
+        "kind": "definition",
+        "title": "Young subgroups, tabloids, and permutation modules",
+        "statement": "For lambda partitioning n, S_lambda <= S_n permutes consecutive labelled blocks of sizes lambda_i. Two lambda-tableaux are row equivalent when their corresponding row sets agree; their class {t} is a tabloid. M^lambda is the complex vector space with tabloids as basis, acted on by sigma{t}={sigma t}.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-row-and-column-stabilizers-of-a-tableau",
+          "def-trivial-regular-and-permutation-representations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "Choose the standard row-filled tableau t_0; its tabloid stabilizer is S_lambda. If t and u have identical row sets, the same row permutation witnesses equivalence after applying sigma, so the S_n action is well defined. The coset and induced identifications are proved in the next lemma."
+      },
+      {
+        "id": "lem-young-permutation-module-is-induced-from-the-trivial-character",
+        "kind": "lemma",
+        "title": "Young permutation modules are induced trivial modules",
+        "statement": "For every lambda partitioning n, M^lambda is naturally isomorphic to C[S_n/S_lambda] and hence to Ind_{S_lambda}^{S_n}(1), including n=0.",
+        "deps": [
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "Send sigma S_lambda to {sigma t_0}. If sigma S_lambda=tau S_lambda then tau^{-1}sigma preserves each row of t_0, giving equal tabloids; conversely equality forces this membership. The bijection respects left S_n actions and extends linearly. Apply the published induction-permutation isomorphism."
+      },
+      {
+        "id": "lem-tableau-stabilizers-transform-by-conjugation",
+        "kind": "lemma",
+        "title": "Tableau stabilizers transform by conjugation",
+        "statement": "For every sigma in S_n and tableau t, R_{sigma t}=sigma R_t sigma^{-1} and C_{sigma t}=sigma C_t sigma^{-1}.",
+        "deps": [
+          "def-row-and-column-stabilizers-of-a-tableau"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13; Basic Combinatorial Lemma 2.14, pp. 9-10"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18; Dominance Lemma 1.21, printed p. 16"
+            }
+          ]
+        },
+        "strategy": "A permutation preserves each row (or column) set of sigma t exactly when its conjugate by sigma^{-1} preserves each corresponding set of t. Prove both inclusions and check n=0."
+      },
+      {
+        "id": "def-semistandard-tableau-and-kostka-number",
+        "kind": "definition",
+        "title": "Semistandard tableaux and Kostka numbers",
+        "statement": "For partitions lambda and mu of n, a semistandard tableau of shape lambda and content mu fills lambda with mu_i copies of i, weakly increasing along rows and strictly increasing down columns. K_{lambda,mu} counts these tableaux; K_{empty,empty}=1.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Section 2.4, printed pp. 28-29, semistandard definition and Lemma 2.15"
+            }
+          ]
+        },
+        "strategy": "Keep semistandard content separate from a bijective standard tableau; the column-strict condition forces repeated labels into distinct columns. The number is finite."
+      }
+    ]
+  },
+  {
+    "order": 510.046,
+    "id": "young-diagrams-tableaux-and-permutation-modules-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "Young Diagrams Tableaux and Permutation Modules \u2014 Examples",
+    "companion": "young-diagrams-tableaux-and-permutation-modules",
+    "requires": [
+      "young-diagrams-tableaux-and-permutation-modules"
+    ],
+    "items": [
+      {
+        "id": "ex-partitions-and-dominance-through-size-five",
+        "kind": "example",
+        "title": "Small partitions and the first dominance incomparability",
+        "statement": "List all partitions through size five, their conjugates, and their dominance order; dominance is total for each n <= 5. The first incomparable pair appears at n=6: (4,1,1) and (3,3).",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-dominance-order-on-partitions",
+          "lem-conjugation-reverses-dominance"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18"
+            }
+          ]
+        },
+        "strategy": "Enumerate n=0,...,5 and compare every adjacent pair in the chain by prefix sums; give the n=5 chain (5)>(4,1)>(3,2)>(3,1,1)>(2,2,1)>(2,1,1,1)>(1^5). At n=6, compare first prefixes 4>3 and second prefixes 5<6, proving incomparability. Tabulate conjugation and check order reversal."
+      },
+      {
+        "id": "ex-removable-nodes-and-row-endpoints",
+        "kind": "example",
+        "title": "Removable nodes versus row endpoints",
+        "statement": "In shapes (3,3,1), (3,2,1), and the empty shape, identify removable and addable nodes and exhibit a row endpoint that is not removable.",
+        "deps": [
+          "def-removable-and-addable-nodes-of-a-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18"
+            }
+          ]
+        },
+        "strategy": "For (3,3,1), removable nodes are (2,3),(3,1), whereas (1,3) ends its row but cannot be removed because the second row has length 3; list addable nodes by lambda_{i-1}>lambda_i. In (3,2,1), all three row endpoints are removable; empty has one addable box."
+      },
+      {
+        "id": "ex-young-permutation-modules-for-row-and-column-partitions",
+        "kind": "example",
+        "title": "The two extreme Young permutation modules",
+        "statement": "For n>=1, M^(n) is the one-dimensional trivial S_n module and M^(1^n) is the regular C[S_n] module; for n=0 both descriptions give the same one-dimensional module.",
+        "deps": [
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "lem-young-permutation-module-is-induced-from-the-trivial-character",
+          "def-trivial-regular-and-permutation-representations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan, Representation Theory of Symmetric Groups",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Sections 2-3, printed pp. 7-13"
+            },
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Sections 1.4 and 1.6-1.8, printed pp. 7-18"
+            }
+          ]
+        },
+        "strategy": "For (n), S_lambda=S_n and one tabloid survives. For (1^n), S_lambda=1 and each tabloid is a permutation; the left action is regular. At n=0, S_0=1 and there is one empty tabloid."
+      },
+      {
+        "id": "ex-semistandard-tableaux-and-small-kostka-numbers",
+        "kind": "example",
+        "title": "Small Kostka numbers",
+        "statement": "For n=3, compute K_{(2,1),(2,1)}=1, K_{(2,1),(1,1,1)}=2, K_{(3),(2,1)}=1, and K_{(1,1,1),(2,1)}=0.",
+        "deps": [
+          "def-semistandard-tableau-and-kostka-number"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, Groups, Geometries and Representation Theory",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "Section 2.4, printed pp. 28-29, semistandard definition and Lemma 2.15"
+            }
+          ]
+        },
+        "strategy": "List the unique filling 11/2 for content (2,1), the two standard fillings 12/3 and 13/2 for content (1,1,1), and the row filling 112. A three-box column cannot be strictly filled using only labels 1 and 2."
+      }
+    ]
+  },
+  {
+    "order": 510.053,
+    "id": "bruhat-decomposition-and-flags-over-finite-fields",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "Bruhat Decomposition and Flags over Finite Fields",
+    "companion": "bruhat-decomposition-and-flags-over-finite-fields-examples",
+    "requires": [
+      "group-actions-and-cayleys-theorem",
+      "induced-representations-and-frobenius-reciprocity",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "determinants-of-matrices-over-a-commutative-ring",
+      "gaussian-elimination-and-row-reduction"
+    ],
+    "items": [
+      {
+        "id": "def-standard-subgroups-of-gl-n-over-a-finite-field",
+        "kind": "definition",
+        "title": "Standard subgroups of finite general linear groups",
+        "statement": "Fix n>=1 and a prime power q. Let G=GL_n(F_q), B the invertible upper triangular matrices, T the diagonal invertible matrices, and U the upper unitriangular matrices. Every b in B factors uniquely as t u, so B=T semidirect U with U normal.",
+        "deps": [
+          "def-finite-field-and-its-order",
+          "thm-existence-of-finite-fields",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-determinant-of-a-triangular-matrix",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "thm-matrix-multiplication-laws",
+          "cor-general-linear-group-is-a-group",
+          "def-subgroup",
+          "lem-standard-basis-of-f-n",
+          "def-matrices-over-a-commutative-ring"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "For b, take t=diag(b_11,...,b_nn) and u=t^{-1}b; nonzero diagonal entries follow from the triangular determinant. The diagonal map B->T has kernel U, and conjugation by T preserves U. No choice principle is needed."
+      },
+      {
+        "id": "thm-complete-flags-form-gl-n-over-b",
+        "kind": "theorem",
+        "title": "Complete flags are G/B",
+        "statement": "G acts transitively on complete flags 0=F_0 < F_1 < ... < F_n=F_q^n with dim F_i=i. The stabilizer of the standard coordinate flag is B, giving a G-equivariant bijection G/B with complete flags.",
+        "deps": [
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-group-action",
+          "thm-transitive-actions-are-coset-actions",
+          "thm-invertible-matrix-theorem",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-linear-basis",
+          "def-dimension",
+          "def-linear-subspace",
+          "thm-dimension-formula",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-rank-nullity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Choose successively vectors v_i in F_i outside F_{i-1}; the finite list is a basis and its matrix lies in G, proving transitivity. Preserving each coordinate prefix is equivalent to being upper triangular. The coset-action theorem gives the bijection. This finite construction uses no arbitrary-index choice."
+      },
+      {
+        "id": "def-compositions-partial-flags-and-standard-parabolics",
+        "kind": "definition",
+        "title": "Compositions, partial flags, and standard parabolics",
+        "statement": "A positive-part composition alpha=(a_1,...,a_r) of n indexes dimensions d_i=a_1+...+a_i, a partial flag of those dimensions, and its standard stabilizer P_alpha of invertible upper block triangular matrices. P_(n)=G and P_(1,...,1)=B.",
+        "deps": [
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "thm-complete-flags-form-gl-n-over-b",
+          "thm-dimension-of-a-linear-subspace",
+          "def-group-action",
+          "thm-transitive-actions-are-coset-actions",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-linear-basis",
+          "thm-matrix-multiplication-laws"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Use the standard coordinate subspaces of dimensions d_i. Matrices preserve all of them exactly when every block below the diagonal vanishes; any partial flag admits a basis adapted to the nested subspaces."
+      },
+      {
+        "id": "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+        "kind": "theorem",
+        "title": "Block Levi decomposition of standard parabolics",
+        "statement": "For alpha=(a_1,...,a_r), P_alpha=L_alpha semidirect U_alpha, where L_alpha consists of block diagonal matrices and is isomorphic to the product of GL_{a_i}(F_q), while U_alpha has identity diagonal blocks and arbitrary allowed upper off-diagonal blocks.",
+        "deps": [
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "thm-matrix-multiplication-laws",
+          "thm-invertible-matrix-theorem",
+          "cor-general-linear-group-is-a-group",
+          "def-subgroup",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "The block-diagonal projection is a surjective homomorphism P_alpha->L_alpha; its kernel is U_alpha. Split it by the block diagonal inclusion and verify multiplication, inverse, uniqueness, and normality blockwise, including the one-block and all-singletons cases."
+      },
+      {
+        "id": "def-weyl-group-and-length-for-finite-gl-n",
+        "kind": "definition",
+        "title": "Permutation Weyl group and inversion length",
+        "statement": "For G=GL_n(F_q), let N be the monomial subgroup generated by T and permutation matrices. Define the split Weyl group W=N/T, canonically isomorphic to S_n. Its simple reflections swap adjacent coordinates; length ell(w) is the number of inversions of w in one-line notation. For alpha, W_alpha<=S_n preserves each consecutive coordinate block.",
+        "deps": [
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-symmetric-group",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-quotient-group",
+          "lem-symmetric-group-is-a-group",
+          "thm-matrix-multiplication-laws",
+          "cor-general-linear-group-is-a-group",
+          "thm-adjacent-transpositions-generate-the-symmetric-group"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "A monomial matrix factors uniquely as a diagonal and a permutation matrix. Define N explicitly, then quotient by T. Do not identify W with N_G(T)/T when q=2: T is trivial then and its finite-group normalizer is all of G. Define inversion length directly so no Coxeter theorem is imported."
+      },
+      {
+        "id": "lem-gaussian-elimination-produces-a-pivot-permutation",
+        "kind": "lemma",
+        "title": "Triangular elimination produces a pivot permutation",
+        "statement": "Every g in GL_n(F_q) can be written b_1 P_sigma b_2 for b_1,b_2 in B and sigma in S_n=Sym({1,...,n}); the algorithm produces a permutation matrix P_sigma by elementary triangular row and column operations.",
+        "deps": [
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "thm-gaussian-elimination-produces-row-echelon-form",
+          "thm-invertible-matrix-theorem",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-multiplication-laws",
+          "def-invertible-matrix-and-general-linear-group"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Work from the bottom row: choose its leftmost nonzero column, clear entries above that pivot by adding a multiple of the bottom row to an earlier row, clear entries to its right by adding a multiple of the pivot column to a later column, and scale. Delete the pivot row and column and induct on the remaining invertible block. All left and right operations lie in B; at termination exactly one nonzero entry remains in each row and column. Uniqueness of the double coset is proved in the next lemma."
+      },
+      {
+        "id": "lem-rank-matrices-determine-the-pivot-permutation",
+        "kind": "lemma",
+        "title": "Southwest rank matrices determine Bruhat cells",
+        "statement": "Southwest submatrix ranks are invariant under upper triangular multiplication for all matrices. For invertible matrices, Gaussian elimination supplies a permutation representative, and the rank increments uniquely recover it and its Bruhat double coset.",
+        "deps": [
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "thm-row-rank-equals-column-rank",
+          "def-matrix-product-and-identity-matrix",
+          "thm-invertible-matrix-theorem",
+          "def-linear-basis",
+          "def-dimension",
+          "lem-gaussian-elimination-produces-a-pivot-permutation"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Left upper triangular multiplication restricts to invertible operations on suffix rows; right upper triangular multiplication restricts to invertible operations on prefix columns, proving invariance. For a permutation matrix count its ones in the southwest rectangle. The increment r_{i,j}-r_{i,j-1}=1 exactly when w(j)>=i, so each w(j) is recovered. Northwest ranks are not invariant for upper B."
+      },
+      {
+        "id": "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+        "kind": "theorem",
+        "title": "Bruhat decomposition of finite GL_n",
+        "statement": "For n>=1, GL_n(F_q) is the disjoint union of BwB over all permutation matrices w indexed by S_n.",
+        "deps": [
+          "lem-gaussian-elimination-produces-a-pivot-permutation",
+          "lem-rank-matrices-determine-the-pivot-permutation",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-symmetric-group"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Triangular elimination gives the covering. If two double cosets meet, the southwest-rank invariant gives identical values for their permutation representatives; the difference formula forces the same w. This proves disjointness without algebraic-group theory."
+      },
+      {
+        "id": "thm-relative-position-classifies-pairs-of-complete-flags",
+        "kind": "theorem",
+        "title": "Relative position of complete flags",
+        "statement": "Diagonal G-orbits on ordered pairs of complete flags are indexed by w in S_n. For flags F_i and E_j, the intersection dimensions dim(F_i intersect E_j) determine w, equivalently the southwest ranks of a matrix sending the standard flag to E.",
+        "deps": [
+          "thm-complete-flags-form-gl-n-over-b",
+          "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+          "lem-rank-matrices-determine-the-pivot-permutation",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "thm-dimension-formula",
+          "thm-dimension-of-a-linear-subspace",
+          "lem-quotient-basis-lifts-to-an-adapted-basis",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-linear-independence",
+          "def-linear-basis",
+          "def-injection-surjection-bijection",
+          "lem-standard-basis-of-f-n",
+          "def-linear-isomorphism-and-invertible-linear-map"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Move the first flag to the standard one; B-orbits on the second become B double cosets. If E_j is spanned by the first j columns of g, projection to the last n-i coordinates gives dim(F_i intersect E_j)=j-r_{i+1,j}(g). The rank invariant and uniqueness recover w; set r_{n+1,j}=0."
+      },
+      {
+        "id": "prop-cardinality-of-a-finite-bruhat-cell",
+        "kind": "proposition",
+        "title": "Size of a finite Bruhat cell in G/B",
+        "statement": "For w in S_n, the number of right B-cosets in BwB is q^{ell(w)}.",
+        "deps": [
+          "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "thm-lagrange",
+          "def-index",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-multiplication-laws",
+          "thm-product-rule",
+          "def-finite-field-and-its-order"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Use BwB/B equivariant to B/(B intersect wBw^{-1}). The diagonal torus cancels. Among upper entries (i,j), exactly those for which w^{-1}(i)>w^{-1}(j) are free modulo the intersection; there are ell(w^{-1})=ell(w) such pairs. Count q choices per pair, including the identity cell."
+      },
+      {
+        "id": "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+        "kind": "definition",
+        "title": "Harish-Chandra induction and restriction",
+        "statement": "For a parabolic P=L semidirect U of finite GL_n(F_q) and complex L-module V, define R_L^G(V)=Ind_P^G(Inf_L^P V). For a complex G-module X define star R_L^G(X)=X^U with L acting through P/U. Transport these definitions by conjugation for nonstandard parabolics.",
+        "deps": [
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-group-action",
+          "def-g-module-over-a-commutative-ring",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-quotient-group",
+          "thm-first-isomorphism-theorem-groups"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Define induction and invariants for a specified split parabolic over any commutative ring. Parabolic independence for coordinate parabolics with the same block subspaces is asserted only over C, by the later theorem."
+      },
+      {
+        "id": "lem-unipotent-invariants-are-exact-over-c",
+        "kind": "lemma",
+        "title": "Exactness of finite unipotent invariants over C",
+        "statement": "For a finite group U acting on complex modules, the invariants functor X->X^U is exact; in particular this applies to each unipotent radical U_alpha.",
+        "deps": [
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-g-module-over-a-commutative-ring",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "rem-standing-hypotheses-for-ordinary-character-theory",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-subgroup",
+          "def-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "The averaging idempotent e_U=|U|^{-1}sum_{u in U}u projects onto invariants. For a surjection X->Y and y in Y^U, lift y to x and average x; the lift e_U x is invariant and still maps to y. Kernels are automatically preserved. The exact use of characteristic zero is division by |U|."
+      },
+      {
+        "id": "thm-harish-chandra-adjunction-for-finite-gl-n",
+        "kind": "theorem",
+        "title": "Harish-Chandra induction is left adjoint to restriction",
+        "statement": "For complex L-module V and G-module X, Hom_G(R_L^G V,X) is naturally isomorphic to Hom_L(V,star R_L^G X).",
+        "deps": [
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Apply published Frobenius adjunction for P<=G. A P-map Inf_L^P V->X has image in X^U because U acts trivially on its source, and it is exactly an L-map V->X^U. Write both maps and verify their inverses. The stated direction is R left adjoint to star R."
+      },
+      {
+        "id": "lem-standard-parabolic-double-cosets-are-young-double-cosets",
+        "kind": "lemma",
+        "title": "Parabolic double cosets and block permutations",
+        "statement": "For standard parabolics P_alpha and P_beta, the double-coset set P_alpha\\G/P_beta is in bijection with W_alpha\\S_n/W_beta. Each class has a unique block-increasing minimal-length permutation representative.",
+        "deps": [
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+          "thm-relative-position-classifies-pairs-of-complete-flags",
+          "lem-rank-matrices-determine-the-pivot-permutation",
+          "def-symmetric-group",
+          "lem-symmetric-group-is-a-group",
+          "def-injection-surjection-bijection",
+          "def-linear-map",
+          "def-linear-subspace",
+          "thm-rank-nullity",
+          "thm-invertible-matrix-theorem",
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "thm-dimension-of-a-linear-subspace"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Identify P_alpha and P_beta as stabilizers of their standard partial flags. Refine each partial flag to a complete flag and apply the earlier relative-position theorem. The matrix m_{ij}=dim(F_i intersect E_j)-dim(F_{i-1} intersect E_j)-dim(F_i intersect E_{j-1})+dim(F_{i-1} intersect E_{j-1}) has nonnegative entries with row sums alpha and column sums beta; choose finite adapted bases to prove it classifies pairs of partial flags. This matrix is also the intersection-count matrix of a permutation, and changing complete-flag refinements permutes positions only within alpha and beta blocks, giving exactly W_alpha\\S_n/W_beta. Match positions monotonically within each block to obtain the unique minimal inversion-length representative. No unproved Bruhat-cell multiplication rule is used."
+      },
+      {
+        "id": "lem-parabolic-mackey-biset-splitting-in-gl-n",
+        "kind": "lemma",
+        "title": "Unipotent double-coset biset splitting",
+        "statement": "For standard parabolics P_alpha=L_alpha semidirect U_alpha and P_beta=L_beta semidirect U_beta, let w be any permutation matrix representing a P_alpha-P_beta double coset. Put C=L_alpha intersect wL_beta w^{-1}, A=L_alpha intersect wU_beta w^{-1}, and D=U_alpha intersect wL_beta w^{-1}. The (L_alpha,L_beta)-biset of (U_alpha,U_beta)-double cosets inside P_alpha w P_beta is isomorphic to the balanced product (L_alpha/A) times_C (D\\(wL_beta w^{-1})), with the right L_beta action transported by w.",
+        "deps": [
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "lem-standard-parabolic-double-cosets-are-young-double-cosets",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "lem-intersection-of-subgroups",
+          "def-normal-subgroup",
+          "def-coset",
+          "def-subgroup",
+          "def-group-action",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "For any permutation w, use the two block labels to project onto common-refinement blocks. The projections give L_alpha intersect wP_beta w^{-1}=C semidirect A and P_alpha intersect wL_beta w^{-1}=C semidirect D; C normalizes A and D. Map (lA,Dm) to U_alpha l m w U_beta. The two block projections prove surjectivity and identify the ambiguity with the balanced C action. No block-increasing hypothesis is needed."
+      },
+      {
+        "id": "def-coordinate-parabolics-for-ordered-partitions",
+        "kind": "definition",
+        "title": "Ordered partitions and coordinate parabolics",
+        "statement": "An ordered partition gamma=(S_1,...,S_r) of {1,...,n} indexes the coordinate parabolic P_gamma of invertible matrices with g_kl=0 whenever blk(k)>blk(l), its coordinate Levi L_gamma of matrices with g_kl=0 whenever blk(k)!=blk(l), and its unipotent radical U_gamma with g_kk=1 and g_kl=0 whenever k!=l and blk(k)>=blk(l), the stabiliser of the coordinate flag spanned by the blocks S_1,...,S_i. For gamma=sigma(alpha) one has P_gamma=P_sigma P_alpha P_sigma^{-1} and likewise for L and U, whence P_gamma=L_gamma semidirect U_gamma, W_gamma=sigma W_alpha sigma^{-1}, N cap P_gamma=T{P_rho:rho in W_gamma}, and L_gamma depends only on the unordered blocks; for q>2 these are exactly the parabolics containing the diagonal torus, while at q=2 the class of parabolics containing T is strictly larger.",
+        "deps": [
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-group-action",
+          "def-symmetric-group",
+          "lem-symmetric-group-is-a-group",
+          "def-linear-basis",
+          "thm-complete-flags-form-gl-n-over-b",
+          "def-linear-subspace",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-invertible-matrix-theorem",
+          "cor-general-linear-group-is-a-group",
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olivier Dudas and Jean Michel, Lectures on Finite Reductive Groups and Their Representations - Example 8.4 and the proof of Lemma 9.9, printed pp. 30 and 40",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf"
+            },
+            {
+              "title": "Jay Taylor, Finite Reductive Groups - Sections 3.5, 4.7 and 5.2, printed pp. 37-39 and 41-43",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
+            }
+          ]
+        },
+        "strategy": "Define the entry criteria blockwise, then conjugate by permutation matrices to reduce every ordered partition to a composition: the standard Levi decomposition, the stabiliser computation and the Weyl-group description transport, and the Levi depends only on the set of blocks. A T-eigenspace argument with distinct diagonal characters recovers, for q>2, exactly the parabolics containing T; the q=2 exception is an explicit count of the three Borels of GL_2(F_2)."
+      },
+      {
+        "id": "thm-parabolic-mackey-formula-for-finite-gl-n",
+        "kind": "theorem",
+        "title": "Parabolic Mackey formula for finite GL_n",
+        "statement": "Let P_alpha=L semidirect U and Q=P_beta=M semidirect V be standard parabolics of GL_n(F_q), R any set of permutation representatives indexing the (W_alpha,W_beta)-double cosets, and X a complex M-module. Then G is the disjoint union of the double cosets P_alpha w_rho Q over rho in R, and star R_L^G(R_M^G X) is isomorphic to the direct sum over rho in R of R_{C_rho}^L((rho X)^{D_rho}), where w_rho=P_rho, C_rho=L cap w_rho M w_rho^{-1}, A_rho=L cap w_rho V w_rho^{-1} and D_rho=U cap w_rho M w_rho^{-1} satisfy P_alpha cap w_rho M w_rho^{-1}=C_rho semidirect D_rho and L cap w_rho Q w_rho^{-1}=C_rho semidirect A_rho. The same formula holds for coordinate parabolics P_gamma=uP_alpha u^{-1} and P_delta=vQv^{-1} of arbitrary ordered partitions, conjugated by the permutation matrices u,v.",
+        "deps": [
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "def-coordinate-parabolics-for-ordered-partitions",
+          "lem-parabolic-mackey-biset-splitting-in-gl-n",
+          "lem-standard-parabolic-double-cosets-are-young-double-cosets",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-symmetric-group",
+          "lem-symmetric-group-is-a-group",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-coset",
+          "def-group-action",
+          "def-g-module-over-a-commutative-ring",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Use C[G/U] as a (G,L)-bimodule for induction and C[U\\G] for restriction, identify the tensor product with C[U\\G/V], partition this biset along the P_alpha-P_beta double cosets, and apply the balanced-product bijection of the preceding lemma to each of them, converting the two factors into parabolic restriction and induction. Coordinate parabolics are transported from the standard case by conjugation with permutation matrices. The published ordinary Mackey formula checks the orientation but does not alone give the U-quotient step."
+      },
+      {
+        "id": "thm-transitivity-and-parabolic-independence-of-harish-chandra-induction",
+        "kind": "theorem",
+        "title": "Transitivity and parabolic independence of Harish-Chandra induction",
+        "statement": "Let K=L_delta <= L=L_gamma <= G=GL_n(F_q) be coordinate Levis given by ordered partitions delta and gamma of {1,...,n} such that every block of gamma is a union of blocks of delta and blk_gamma(k)<=blk_gamma(l) whenever blk_delta(k)<blk_delta(l). Then L cap P_delta = K semidirect (L cap U_delta) is a coordinate parabolic of L, and there are isomorphisms of functors R_K^{G,P_delta} = R_L^{G,P_gamma} composed with R_K^{L,L cap P_delta}, and star R_K^{G,P_delta} = star R_K^{L,L cap P_delta} composed with star R_L^{G,P_gamma}. Over C, if P_gamma and P_gamma' are coordinate parabolics with the same Levi L, then R_L^{G,P_gamma} and R_L^{G,P_gamma'} are isomorphic as functors on complex L-modules and X^{U_gamma} is isomorphic to X^{U_gamma'} for every complex G-module X; the isomorphisms are built from finitely many choices and need not be canonical.",
+        "deps": [
+          "rem-induced-representation-agrees-with-the-tensor-product-model",
+          "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars",
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "def-coordinate-parabolics-for-ordered-partitions",
+          "thm-harish-chandra-adjunction-for-finite-gl-n",
+          "thm-parabolic-mackey-formula-for-finite-gl-n",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-g-module-over-a-commutative-ring",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-coset",
+          "def-group-action",
+          "def-symmetric-group",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "thm-invertible-matrix-theorem",
+          "cor-general-linear-group-is-a-group",
+          "thm-transitivity-of-induction-for-finite-groups",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-character-inner-product-computes-intertwiner-dimension",
+          "thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique",
+          "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "def-standard-inner-product-on-complex-class-functions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "For nested coordinate parabolics, identify U_delta as U_gamma semidirect (L intersect U_delta) by an explicit block factorisation, and obtain transitivity from the balanced-biset bijection G/U_delta = G/U_gamma x_L L/(L cap U_delta), or equivalently from transitivity of ordinary induction; adjunction gives the restriction composite. For a fixed Levi and two parabolics, induct on the total rank as in Dudas-Michel Theorem 10.1: Mackey expresses the mixed and the two self inner products as sums of terms indexed by (W_L,W_L)-double cosets, the full-rank normaliser terms are independent of the parabolics, and the lower-rank terms are equal by the induction hypothesis. The three pairings agree, so the character of the difference has norm zero. Semisimplicity over C upgrades equal characters on every simple L-module to an isomorphism of functors; adjunction gives the restriction claim. No chosen canonical intertwiner is asserted."
+      },
+      {
+        "id": "def-cuspidal-support-and-harish-chandra-series",
+        "kind": "definition",
+        "title": "Cuspidal representations and Harish-Chandra series",
+        "statement": "An ordered partition delta refines gamma when every block of delta lies in a block of gamma; then P_delta cap L_gamma = L_delta semidirect (U_delta cap L_gamma) is a coordinate parabolic of L_gamma with radical U_delta cap L_gamma, and one writes star R_{L_delta}^{L_gamma}(N):=N^{U_delta cap L_gamma} for the Harish-Chandra restriction, an L_delta-module independent up to isomorphism of the order of the blocks of delta. A complex L_gamma-module N is cuspidal when star R_{L_delta}^{L_gamma}(N)=0 for every proper refinement delta of gamma. A cuspidal pair is a pair (L_gamma,N) with N irreducible cuspidal, and the Harish-Chandra series of (L_gamma,N) is the nonempty set of isomorphism classes of irreducible complex G-modules that occur as quotients, equivalently as direct summands, of R_{L_gamma}^G(N). Transport by a permutation sigma in S_n conjugates L_gamma, P_gamma, U_gamma to the corresponding subgroups of sigma(gamma) by the permutation matrix w_sigma, and the transported modules N^sigma and X^sigma carry the conjugated actions; N is irreducible exactly when N^sigma is.",
+        "deps": [
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "def-coordinate-parabolics-for-ordered-partitions",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "thm-transitivity-and-parabolic-independence-of-harish-chandra-induction",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-g-module-over-a-commutative-ring",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-group-action",
+          "lem-symmetric-group-is-a-group",
+          "def-symmetric-group",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "cor-general-linear-group-is-a-group"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Use all conjugate split Levis, not only standard ones. Independence lets the series omit the choice of parabolic. The trivial Levi L=G makes every irreducible belong to at least one candidate series; uniqueness is proved next."
+      },
+      {
+        "id": "thm-existence-and-uniqueness-of-cuspidal-support-for-finite-gl-n",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of cuspidal support",
+        "statement": "Let M be a simple complex GL_n(F_q)-module and for an ordered partition eta=(S_i) set d(eta)=sum_i |S_i|^2, and let gamma minimize d(delta) among ordered partitions delta with M^{U_delta} nonzero. Then M^{U_gamma} is a nonzero cuspidal L_gamma-module, every simple L_gamma-submodule N of M^{U_gamma} is cuspidal and M lies in the Harish-Chandra series of the cuspidal pair (L_gamma,N). If two cuspidal pairs have intersecting series, then there is sigma in S_n with w_sigma L_gamma w_sigma^{-1}=L_gamma' and N' isomorphic to N^sigma, and conversely such a sigma matches the two series under the transport of modules; hence the assignment to M of the conjugacy class of a cuspidal pair whose series contains M is well defined, and the Harish-Chandra series partition the irreducible complex GL_n(F_q)-modules.",
+        "deps": [
+          "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars",
+          "def-cuspidal-support-and-harish-chandra-series",
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-coordinate-parabolics-for-ordered-partitions",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "thm-harish-chandra-adjunction-for-finite-gl-n",
+          "thm-transitivity-and-parabolic-independence-of-harish-chandra-induction",
+          "thm-parabolic-mackey-formula-for-finite-gl-n",
+          "lem-unipotent-invariants-are-exact-over-c",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "def-simple-module",
+          "def-g-module-over-a-commutative-ring",
+          "def-subgroup",
+          "def-normal-subgroup",
+          "def-group-action",
+          "def-symmetric-group",
+          "lem-symmetric-group-is-a-group",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "cor-general-linear-group-is-a-group"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Choose an ordered partition minimizing d(eta)=sum of squares of block sizes with nonzero restriction of the given irreducible M. Transitivity of parabolic restriction and exactness show that the restriction is cuspidal, and any simple submodule N of it is a cuspidal module with a nonzero induced map R_L^G(N)->M, so M lies in the series of (L,N). If M lies in two series, semisimplicity over C gives a nonzero Hom between the two induced modules; adjunction and the parabolic Mackey formula expand it into summands indexed by double cosets, and cuspidality of the two modules kills every summand over a proper Levi. The surviving double coset makes each Levi contained in the other up to conjugation, and the remaining Hom-space is nonzero between simple modules, so Schur gives the transported isomorphism N' = N^sigma. Conjugacy of the pairs conversely matches the series by transport, and counting the conjugacy classes partitions the irreducibles."
+      }
+    ]
+  },
+  {
+    "order": 510.054,
+    "id": "bruhat-decomposition-and-flags-over-finite-fields-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "Bruhat Decomposition and Flags over Finite Fields \u2014 Examples",
+    "companion": "bruhat-decomposition-and-flags-over-finite-fields",
+    "requires": [
+      "bruhat-decomposition-and-flags-over-finite-fields"
+    ],
+    "items": [
+      {
+        "id": "ex-gl-one-and-the-trivial-parabolic-boundary",
+        "kind": "example",
+        "title": "GL_1 and the trivial parabolic endpoints",
+        "statement": "At n=1 one has G=GL_1(F_q)=F_q^times, B=T=G, U={I_1} and W=S_1, there is exactly one complete flag and one Bruhat cell B P_id B=G, and the one-part composition alpha=(1) has P_alpha=L_alpha=G with trivial unipotent radical, so both Harish-Chandra functors attached to it are the identity. Every complex G-module is cuspidal, since the only ordered partition of {1} has no proper refinement, and each simple module forms a one-element Harish-Chandra series.",
+        "deps": [
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "thm-complete-flags-form-gl-n-over-b",
+          "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+          "prop-cardinality-of-a-finite-bruhat-cell",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq",
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "def-cuspidal-support-and-harish-chandra-series",
+          "def-simple-module",
+          "cor-general-linear-group-is-a-group"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Evaluate the definitions of B, T, U, N, W and of P_alpha, L_alpha, U_alpha at n=1 and at the one-part composition. The unique ordered partition of {1} has no proper refinement, so cuspidality is vacuous. Inflation and induction along the identity maps are the identity functors and the invariants of U={I_1} are the whole module."
+      },
+      {
+        "id": "ex-complete-flags-and-bruhat-cells-for-gl2-fq",
+        "kind": "example",
+        "title": "Flags and Bruhat cells for GL_2(F_q)",
+        "statement": "For G=GL_2(F_q) the flag variety G/B is the projective line P^1(F_q) with q+1 points; its two B-orbits are the standard line <e_1>, of size 1, and its complement {<e_2+a e_1>: a in F_q}, of size q, indexed by id and the transposition s, corresponding to q^{ell(id)}=1 and q^{ell(s)}=q right cosets of B in the two Bruhat cells.",
+        "deps": [
+          "thm-complete-flags-form-gl-n-over-b",
+          "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+          "prop-cardinality-of-a-finite-bruhat-cell",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Identify a complete flag of F_q^2 with its 1-dimensional member, so that G/B is the set of lines. Compute the B-action explicitly: an upper triangular matrix fixes <e_1> and sends <e_2+a e_1> to <e_2+(alpha a+beta)delta^{-1} e_1>, so B is transitive on the q lines different from <e_1>. Match the two orbits with the double cosets B and BsB and with the right-coset counts q^{ell(id)}=1 and q^{ell(s)}=q."
+      },
+      {
+        "id": "ex-relative-position-of-flags-in-gl3-fq",
+        "kind": "example",
+        "title": "The six relative positions of GL_3 flags",
+        "statement": "For G=GL_3(F_q) the six permutation matrices P_sigma, sigma in S_3, have southwest rank matrices r_{i,j}=#{k<=j: sigma(k)>=i}, r_{i,j}>=(i,j), displayed for sigma=123,132,213,231,312,321, and equivalent intersection-dimension matrices (dim(V_i \u2229 wV_j))_{i,j}=(j-r_{i+1,j})_{i,j}; the six rank matrices and the six intersection matrices are pairwise distinct, so the six permutations realise the six distinct relative positions of pairs of complete flags of F_q^3.",
+        "deps": [
+          "thm-relative-position-classifies-pairs-of-complete-flags",
+          "lem-rank-matrices-determine-the-pivot-permutation",
+          "thm-bruhat-decomposition-of-gl-n-over-a-finite-field",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "For each of the six permutations evaluate the defining count r_{i,j}=#{k<=j: sigma(k)>=i}, derive the intersection-dimension matrix from dim(V_i \u2229 wV_j)=j-r_{i+1,j}, and separate the six matrices by explicit entries: (1,1) splits {123,132} from {213,231,312,321}, (2,2) separates 123 from 132, and the pair ((1,2),(2,1)) takes the four distinct values (1,1),(1,0),(0,1),(0,0) on 213,312,231,321."
+      },
+      {
+        "id": "ex-grassmannians-as-maximal-parabolic-quotients",
+        "kind": "example",
+        "title": "Grassmannians as maximal parabolic quotients",
+        "statement": "For n>=2 and 1<=r<n the map gP_(r,n-r) -> g<e_1,...,e_r> is a G-equivariant bijection from G/P_(r,n-r) onto the Grassmannian of r-dimensional subspaces of F_q^n, with fibres the cosets of the stabiliser of <e_1,...,e_r>; the standard parabolic P_(r,n-r) is maximal among the standard parabolics, its only standard overgroup being P_(n)=G. For r=1 the quotient is the projective space of lines of F_q^n, of cardinality (q^n-1)/(q-1), which is q+1 for n=2 and q^2+q+1 for n=3.",
+        "deps": [
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "thm-transitive-actions-are-coset-actions",
+          "thm-dimension-of-a-linear-subspace",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field",
+          "def-group-action",
+          "def-finite-field-and-its-order",
+          "def-field",
+          "def-vector-space",
+          "def-linear-combination-and-span",
+          "def-linear-basis",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-multiplication-laws"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "Identify type-(r,n-r) partial flags with r-dimensional subspaces and compose the orbit map G/P_alpha -> F_alpha with that identification. Identify P_alpha with the stabiliser of <e_1,...,e_r> through the entry criterion. Prove maximality among standard parabolics by comparing the zero patterns T(beta) of the two entry criteria through the elementary matrices tau_kl(c)=I_n+c e_k e_l^T, and show T(beta) contained in T(alpha) iff every alpha-block lies in a beta-block, which for a two-block composition forces beta=alpha or beta=(n). Count lines by partitioning the q^n-1 nonzero vectors of V into the q-1 nonzero vectors of each line."
+      },
+      {
+        "id": "ex-parabolic-induction-as-functions-on-partial-flags",
+        "kind": "example",
+        "title": "Parabolic induction of the trivial module as flag functions",
+        "statement": "For every composition alpha of n, the Harish-Chandra induction R_{L_alpha}^G(C) of the trivial module is naturally isomorphic to the permutation module C[G/P_alpha], equivalently to the complex functions on the partial flags of type alpha with the action (x.f)(F)=f(x^{-1}F); for alpha=(n) it is the trivial module, and for alpha=(1^n) it is C[G/B] on the complete flags. Its dimension is the index [G:P_alpha], the number of type-alpha partial flags.",
+        "deps": [
+          "def-harish-chandra-induction-and-restriction-for-finite-gl-n",
+          "def-compositions-partial-flags-and-standard-parabolics",
+          "thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets",
+          "def-trivial-regular-and-permutation-representations",
+          "thm-complete-flags-form-gl-n-over-b",
+          "def-group-action",
+          "def-standard-subgroups-of-gl-n-over-a-finite-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dudas and Michel, Lectures on Finite Reductive Groups and Their Representations",
+              "url": "https://webusers.imj-prg.fr/~jean.michel/papiers/lectures_beijing_2015.pdf",
+              "locator": "Example 4.5 and Lemma 4.7, printed p. 18; Example 8.4, p. 30; Sections 9-10, pp. 34-43"
+            },
+            {
+              "title": "Taylor, Finite Reductive Groups",
+              "url": "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf",
+              "locator": "Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
+            }
+          ]
+        },
+        "strategy": "The inflation of the trivial L_alpha-module is the trivial P_alpha-module because the projection P_alpha -> L_alpha acts trivially on C. The induced-trivial theorem identifies Ind_{P_alpha}^G(C) with the permutation module on the left cosets G/P_alpha. Transporting functions along the G-equivariant bijection G/P_alpha -> F_alpha gives the permutation module on partial flags, and the dimension formula dim R=[G:P_alpha] dim V gives the index count."
+      }
+    ]
+  }
+]

@@ -4,16 +4,17 @@ kind: theorem
 title: "Banach closed-range theorem"
 status: published
 origin: pipeline
-deps: ["lem-closed-range-iff-quotient-estimate", "lem-transpose-range-membership-by-domination", "thm-surjective-iff-transpose-is-bounded-below", "lem-elementary-kernel-range-annihilator-identities", "thm-dual-of-a-closed-subspace-is-a-dual-quotient", "cor-distance-to-annihilator-is-restriction-norm", "lem-annihilators-are-closed-subspaces", "lem-transpose-is-bounded-and-has-the-same-norm", "thm-bounded-operator-space-is-banach", "lem-closed-subspace-of-a-banach-space-is-banach"]
+deps: ["lem-closed-range-iff-quotient-estimate", "lem-transpose-range-membership-by-domination", "thm-surjective-iff-transpose-is-bounded-below", "lem-elementary-kernel-range-annihilator-identities", "thm-dual-of-a-closed-subspace-is-a-dual-quotient", "cor-distance-to-annihilator-is-restriction-norm", "lem-annihilators-are-closed-subspaces", "lem-transpose-is-bounded-and-has-the-same-norm", "thm-bounded-operator-space-is-banach", "lem-closed-subspace-of-a-banach-space-is-banach", "thm-choice-implies-dependent-implies-countable-choice", "def-axiom-of-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Theorem 4.16, pp.178–181"
@@ -23,23 +24,27 @@ proof_strategy: "Forward: EST bounds every f annihilating ker T by C||f||||Tx||;
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume DC and let $T:X\to Y$ be bounded linear between Banach spaces. The following are equivalent: $\operatorname{ran}T$ is norm closed; $\operatorname{ran}T^*$ is norm closed; and there is $C>0$ such that $\operatorname{dist}(x,\ker T)\le C\|Tx\|$ for all $x\in X$. In that case $$\operatorname{ran}T={}^\perp(\ker T^*),\qquad \operatorname{ran}T^*=(\ker T)^\perp.$$
+Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume the Axiom of Choice and let $T:X\to Y$ be bounded linear between Banach spaces. The following are equivalent: $\operatorname{ran}T$ is norm closed; $\operatorname{ran}T^*$ is norm closed; and there is $C>0$ such that $\operatorname{dist}(x,\ker T)\le C\|Tx\|$ for all $x\in X$. In that case $$\operatorname{ran}T={}^\perp(\ker T^*),\qquad \operatorname{ran}T^*=(\ker T)^\perp.$$
 
 ## Facts & Assumptions
 
 **Given:** The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
 
+[A1] The stated Axiom of Choice is the direct premise for the AC-qualified range, annihilator, and dual-quotient suppliers below ([[def-axiom-of-choice]]).
+
+[F0] The Axiom of Choice implies Dependent Choice, so the DC-qualified suppliers below apply ([[thm-choice-implies-dependent-implies-countable-choice]]).
+
 [F1] From [[lem-closed-range-iff-quotient-estimate]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume DC. For a bounded linear map $T:X\to Y$ between Banach spaces, $\operatorname{ran}T\text{ is norm closed}\quad\Longleftrightarrow\quad\exists C>0\ \forall x\in X:\ \operatorname{dist}(x,\ker T)\le C\|Tx\|.$
 
-[F2] From [[lem-transpose-range-membership-by-domination]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded linear between normed spaces and $f\in X^*$. Then $f\in\operatorname{ran}T^*\quad\Longleftrightarrow\quad\exists C\ge0\ \forall x\in X:\ |f(x)|\le C\|Tx\|.$ For any such $C$, a representing $g\in Y^*$ can be chosen with $\|g\|\le C$.
+[F2] From [[lem-transpose-range-membership-by-domination]], under the stated Axiom of Choice: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded linear between normed spaces and $f\in X^*$. Then $f\in\operatorname{ran}T^*\quad\Longleftrightarrow\quad\exists C\ge0\ \forall x\in X:\ |f(x)|\le C\|Tx\|.$ For any such $C$, a representing $g\in Y^*$ can be chosen with $\|g\|\le C$.
 
-[F3] From [[thm-surjective-iff-transpose-is-bounded-below]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume DC. For a bounded linear $T:X\to Y$ between Banach spaces, $T\text{ is onto}\quad\Longleftrightarrow\quad\exists C>0\ \forall g\in Y^*:\ \|g\|\le C\|T^*g\|.$
+[F3] From [[thm-surjective-iff-transpose-is-bounded-below]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume the Axiom of Choice. For a bounded linear $T:X\to Y$ between Banach spaces, $T\text{ is onto}\quad\Longleftrightarrow\quad\exists C>0\ \forall g\in Y^*:\ \|g\|\le C\|T^*g\|.$
 
-[F4] From [[lem-elementary-kernel-range-annihilator-identities]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $(\operatorname{ran}T)^\perp=\ker T^*,\qquad {}^\perp(\operatorname{ran}T^*)=\ker T,\qquad \overline{\operatorname{ran}T}^{\|\cdot\|}={}^\perp(\ker T^*).$ The closure in the last identity is in $Y$.
+[F4] From [[lem-elementary-kernel-range-annihilator-identities]], under the stated Axiom of Choice: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $(\operatorname{ran}T)^\perp=\ker T^*,\qquad {}^\perp(\operatorname{ran}T^*)=\ker T,\qquad \overline{\operatorname{ran}T}^{\|\cdot\|}={}^\perp(\ker T^*).$ The closure in the last identity is in $Y$.
 
-[F5] From [[thm-dual-of-a-closed-subspace-is-a-dual-quotient]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $X$ be normed and $M\le X$ closed. Restriction $R:X^*\to M^*$ induces a linear isometric bijection $\widetilde R:X^*/M^\perp\longrightarrow M^*,\qquad f+M^\perp\longmapsto f|_M.$ Also $\|R\|\le1$; its norm is $1$ when $M\ne\{0\}$ and $0$ when $M=\{0\}$.
+[F5] From [[thm-dual-of-a-closed-subspace-is-a-dual-quotient]], under the stated Axiom of Choice: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $X$ be normed and $M\le X$ closed. Restriction $R:X^*\to M^*$ induces a linear isometric bijection $\widetilde R:X^*/M^\perp\longrightarrow M^*,\qquad f+M^\perp\longmapsto f|_M.$ Also $\|R\|\le1$; its norm is $1$ when $M\ne\{0\}$ and $0$ when $M=\{0\}$.
 
-[F6] From [[cor-distance-to-annihilator-is-restriction-norm]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. If $M$ is a closed linear subspace of a normed $X$ and $f\in X^*$, then $\operatorname{dist}(f,M^\perp)=\|f|_M\|.$
+[F6] From [[cor-distance-to-annihilator-is-restriction-norm]], under the stated Axiom of Choice: Let $\mathbb K=\mathbb R$ or $\mathbb C$. If $M$ is a closed linear subspace of a normed $X$ and $f\in X^*$, then $\operatorname{dist}(f,M^\perp)=\|f|_M\|.$
 
 [F7] From [[lem-annihilators-are-closed-subspaces]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For any normed $X$ and arbitrary $M\subseteq X$, $N\subseteq X^*$, both $M^\perp\subseteq X^*$ and ${}^\perp N\subseteq X$ are norm-closed linear subspaces. Moreover $\overline N^{\|\cdot\|}\subseteq({}^\perp N)^\perp$.
 

@@ -1,0 +1,14 @@
+# Relative differential sheaf: restriction-map typing repair
+
+The draft `def-sheaf-relative-differentials` had a confirmed nonfatal typing error in its exported Definition. For `W′⊆W`, the constructed map `P(W)→P(W′)` is linear over `O_X(W)` after restricting scalars along `O_X(W)→O_X(W′)`. The old sentence called the map `P(W′)`-linear. Since `P(W′)` is a module, not the scalar ring, this claim was not well-typed; moreover `P(W)` has no natural `O_X(W′)`-module structure. The algebraic universal property already constructed the correct map, so no sheaf, derivation or affine-chart formula needs alteration.
+
+- Pre-edit guard: `83be92644e55b2081f43aecab88ca98a136a77c073f2ddf3ef52272a5604b845`.
+- Post-edit guard: `b540f58e7160802989aa62a756ef089ddc43b239fffcfaff0fc075667c44dced`.
+- Exact edit in `items/def-sheaf-relative-differentials.md:62–64`: `...→P(W'); it is $P(W')$-linear in the obvious sense, and the restriction maps compose, so $P$ is a presheaf of...` became `...→P(W')$, where $P(W')$ is viewed as an $\mathcal O_X(W)$-module by restriction of scalars; the restriction maps compose, so $P$ is a presheaf of...`.
+- Affected use: the restriction maps in the presheaf construction. Invalidated claim: linearity over the module `P(W′)`. Minimality: one replacement clause states the precise scalar action needed for the universal-property map; every subsequent construction uses that action already.
+
+The exported `## Definition` changed textually. `tools/consumers.mjs` reports ten direct dependency/wikilink consumers, all reviewed on current hashes in `research/frontier-35-ten-categories-step5b-lane2-sheaf-direct-uses.jsonl`. Three definitions use the resulting `O_X`-module or its vanishing/rank; six theorems/lemmas use the universal derivation or affine description; the universal-property theorem itself requires `O_X(W)`-linear, restriction-compatible maps in Proof 1.1–1.2. Every use remains licensed by the corrected construction, including that theorem; none uses `P(W′)` as a scalar ring. No consumer Statement or Definition needs changing, so the impact path stops at these direct consumers.
+
+The batch-6 proof contracts quote only the unchanged sheaf, derivation, and affine clauses; no quote or obligation uses the deleted phrase. The batch page spec and library page describe the standard construction and need no change. Item precheck is clean. The strict batch-6 proof-contract check for its seven in-scope direct consumers has 0 errors and 0 warnings. The three direct consumers that are definitions are outside the proof-contract scope, and were inspected directly.
+
+Central draft-defect proposal: `def-sheaf-relative-differentials`, confirmed nonfatal ill-typed restriction-map linearity, repaired by the exact scalar-restriction clause above. Record pre/post guards and the ten direct-use rows in the post-5a→current impact receipt. It is a draft carrier, so no published-consumer ledger row is warranted.

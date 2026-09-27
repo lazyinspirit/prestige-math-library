@@ -9,17 +9,18 @@ provenance:
   proof: not-applicable
 deps: [def-smooth-manifold,
        def-manifold-chart-coordinate-domain-and-coordinate-functions,
-       def-null-and-content-zero-in-rn]
+       def-null-and-content-zero-in-rn, def-countable-choice]
 justified_by: [prop-the-null-set-definition-is-independent-of-the-smooth-atlas]
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (def-null-subset-of-a-smooth-manifold). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,5 +42,6 @@ is null in the Euclidean sense of [[def-null-and-content-zero-in-rn]] when
 $m\ge 1$, and is empty when $m=0$. Equivalently, on a $0$-manifold the only
 null subset is the empty set.
 
-The next proposition shows that this condition is independent of the chosen
-smooth atlas, so one may then speak simply of a **null subset of $M$**.
+Under the Axiom of Countable Choice ([[def-countable-choice]]), the next proposition shows that this
+condition is independent of the chosen smooth atlas. Under that premise one
+may therefore speak simply of a **null subset of $M$**.

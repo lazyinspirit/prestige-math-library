@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-braid-group-by-the-artin-presentation, thm-free-groups-are-torsion-free, thm-von-dyck]
+deps: [def-braid-group-by-the-artin-presentation, thm-reduced-words-form-the-free-group]
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -34,9 +35,9 @@ infinite order. Hence $B_2$ is an infinite cyclic group.
 
 [L1] The group $B_2$ is presented by one generator $\sigma_1$ and no braid relations ([[def-braid-group-by-the-artin-presentation]]).
 
-[L2] Free groups are torsion-free ([[thm-free-groups-are-torsion-free]]).
-
-[L3] A map of generators satisfying the relators extends uniquely from a presented group ([[thm-von-dyck]]).
+[L2] In the free group on an alphabet, reduced words are the elements,
+the empty word is the identity, and two reduced words represent the same
+element only when they are identical ([[thm-reduced-words-form-the-free-group]]).
 
 ## Proof
 
@@ -44,6 +45,6 @@ infinite order. Hence $B_2$ is an infinite cyclic group.
 
 1.1 By [L1], the presentation of $B_2$ has one generator and no defining relator, so every element of $B_2$ is a power of $\sigma_1$. Thus $B_2$ is cyclic. [given, L1, algebra]
 
-2.1 With no relators present, the presented group is the free group on one generator. By [L2], that generator has infinite order, so $\sigma_1^m\neq1$ for every nonzero integer $m$. [L1, L2, L3, step 1.1, algebra]
+2.1 With no relators present, the presented group is the free group on the singleton alphabet $\{\sigma_1\}$. For $m>0$ the power $\sigma_1^m$ is represented by a word of $m$ copies of $\sigma_1$; for $m<0$ it is represented by $|m|$ copies of the formal inverse. Each is a nonempty reduced word, distinct from the empty identity word by [L2]. Hence $\sigma_1^m\neq1$ for every nonzero integer $m$. [L1, L2, step 1.1]
 
 3.1 Therefore the cyclic group $B_2=\langle\sigma_1\rangle$ is infinite, so it is infinite cyclic. [step 1.1, step 2.1] ∎

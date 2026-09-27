@@ -5,13 +5,14 @@ title: Great circles as round-sphere geodesics
 status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
-deps: [def-geodesic-of-an-affine-connection, prop-geodesics-have-constant-speed-for-a-metric-compatible-connection, def-affine-connection-on-a-smooth-manifold, def-covariant-derivative-along-a-curve, thm-fundamental-theorem-of-riemannian-geometry, prop-coordinate-formula-for-the-lie-bracket, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions, def-riemannian-metric-and-riemannian-manifold, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-and-cosine-parametrize-the-unit-circle, thm-chain-rule, cor-zero-derivative-implies-constant]
+deps: [def-geodesic-of-an-affine-connection, prop-geodesics-have-constant-speed-for-a-metric-compatible-connection, def-affine-connection-on-a-smooth-manifold, def-covariant-derivative-along-a-curve, thm-fundamental-theorem-of-riemannian-geometry, def-lie-bracket-of-smooth-vector-fields, thm-clairaut-schwarz-mixed-partials, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions, def-riemannian-metric-and-riemannian-manifold, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-and-cosine-parametrize-the-unit-circle, thm-chain-rule, cor-zero-derivative-implies-constant]
 verification:
-  audited: 2026-09-13
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-12
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (ex-great-circles-as-round-sphere-geodesics). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: Ved Datar, Lectures on Riemannian Geometry, Proposition 15.3.1, pp. 117--118
@@ -36,7 +37,7 @@ where $p=\gamma(t_0)$ and $u=\gamma'(t_0)/c$ are orthonormal. Its image is there
 
 [F1] For $F(x)=\langle x,x\rangle$ on $\mathbb R^{n+1}$, $dF_p(v)=2\langle p,v\rangle$ is nonzero at every $p\in F^{-1}(1)$. Thus [[thm-a-regular-level-set-is-an-embedded-submanifold]] makes $S^n$ a smooth boundaryless $n$-manifold, and [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]] gives $T_pS^n=p^\perp$. The inclusion has injective differential on this tangent space, so [[prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions]] and [[def-riemannian-metric-and-riemannian-manifold]] make the restricted Euclidean inner product the round Riemannian metric.
 
-[F2] [[def-affine-connection-on-a-smooth-manifold]] gives the connection axioms; [[prop-coordinate-formula-for-the-lie-bracket]] gives the componentwise bracket identity; [[def-covariant-derivative-along-a-curve]] supplies differentiation along a curve; and [[thm-fundamental-theorem-of-riemannian-geometry]] gives the unique metric-compatible torsion-free connection of the round metric.
+[F2] [[def-affine-connection-on-a-smooth-manifold]] gives the connection axioms; [[def-lie-bracket-of-smooth-vector-fields]] defines the bracket as a commutator on smooth functions, and [[thm-clairaut-schwarz-mixed-partials]] cancels the mixed second derivatives in coordinates; [[def-covariant-derivative-along-a-curve]] supplies differentiation along a curve; and [[thm-fundamental-theorem-of-riemannian-geometry]] gives the unique metric-compatible torsion-free connection of the round metric.
 
 [F3] [[def-geodesic-of-an-affine-connection]] defines an affinely parametrized geodesic by $D_t\gamma'=0$ and includes constant curves.
 
@@ -52,7 +53,7 @@ where $p=\gamma(t_0)$ and $u=\gamma'(t_0)/c$ are orthonormal. Its image is there
 
 ## Verification
 
-1.1 Differentiating $\langle p,p\rangle=1$ along sphere curves shows $T_pS^n\subseteq p^\perp$. Both spaces have dimension $n$ by [F1], so equality holds. For tangent fields $X,Y$, differentiating $\langle Y,p\rangle=0$ gives $\langle D_XY,p\rangle=-\langle X,Y\rangle$; hence the tangent projection of the ambient derivative is $$\widetilde\nabla_XY=D_XY+\langle X,Y\rangle p.$$ The ordinary componentwise product rule makes this an affine connection. Its normal correction is orthogonal to tangent vectors, so differentiating the Euclidean pairing proves metric compatibility. Also $D_XY-D_YX=[X,Y]$ componentwise, while the displayed normal correction is symmetric in $X,Y$; thus its torsion vanishes. By [F2], $\widetilde\nabla$ is the round sphere's Levi--Civita connection. [F1, F2, given]
+1.1 Differentiating $\langle p,p\rangle=1$ along sphere curves shows $T_pS^n\subseteq p^\perp$. Both spaces have dimension $n$ by [F1], so equality holds. For tangent fields $X,Y$, differentiating $\langle Y,p\rangle=0$ gives $\langle D_XY,p\rangle=-\langle X,Y\rangle$; hence the tangent projection of the ambient derivative is $$\widetilde\nabla_XY=D_XY+\langle X,Y\rangle p.$$ The ordinary componentwise product rule makes this an affine connection. Its normal correction is orthogonal to tangent vectors, so differentiating the Euclidean pairing proves metric compatibility. In local sphere coordinates, applying the commutator from [F2] to a smooth test function cancels its mixed second derivatives and leaves $(D_XY-D_YX)$ acting on that function. Thus $D_XY-D_YX=[X,Y]$ as tangent fields; the normal correction is symmetric in $X,Y$, so torsion vanishes. By [F2], $\widetilde\nabla$ is the round sphere's Levi--Civita connection. [F1, F2, given, algebra]
 
 2.1 Applying the formula from step 1.1 along $\gamma$ to a tangent field $V$ gives $$D_t^{\widetilde\nabla}V=V'+\langle\gamma',V\rangle\gamma.$$ In particular, [F3] says that $\gamma$ is a geodesic exactly when $$\gamma''+|\gamma'|^2\gamma=0.$$ [F3, step 1.1]
 

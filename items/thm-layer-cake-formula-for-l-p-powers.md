@@ -11,8 +11,12 @@ provenance:
 deps: [def-distribution-function-of-absolute-value, def-real-power, thm-real-power-continuity-and-derivatives, thm-ftc-second-part, thm-monotone-convergence-for-the-integral, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Proposition 6.24"
@@ -32,7 +36,7 @@ where either side may be $+\infty$.
 
 [L1] The distribution function is $A_f(t)=\mu(\{|f|>t\})$. ([[def-distribution-function-of-absolute-value]])
 
-[L2] The derivative of $t^p$ is $p t^{p-1}$ on $(0,\infty)$, and the fundamental theorem of calculus recovers $a^p$ by integrating that derivative. ([[thm-real-power-continuity-and-derivatives]], [[thm-ftc-second-part]])
+[L2] The derivative of $t^p$ is $p t^{p-1}$ on $(0,\infty)$. Thus the fundamental theorem of calculus gives $\int_\varepsilon^a p t^{p-1}\,dt=a^p-\varepsilon^p$ for $0<\varepsilon<a$. ([[thm-real-power-continuity-and-derivatives]], [[thm-ftc-second-part]])
 
 [L3] Every nonnegative measurable function admits increasing simple approximations. ([[thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]])
 
@@ -42,7 +46,7 @@ where either side may be $+\infty$.
 
 **Proof technique:** direct.
 
-1.1 Fix $a \ge 0$. By [L2], $$ a^p = \int_0^a p t^{p-1}\,dt = \int_0^\infty p t^{p-1}\mathbf 1_{\{t<a\}}\,dt. $$ [L2]
+1.1 Fix $a \ge 0$. If $a=0$, both integrals below are zero. If $a>0$, apply [L2] on $[\varepsilon,a]$ and let $\varepsilon\downarrow0$. Since $p>0$, $\varepsilon^p\to0$; monotone convergence for the nonnegative integrand gives $$ a^p = \int_0^a p t^{p-1}\,dt = \int_0^\infty p t^{p-1}\mathbf 1_{\{t<a\}}\,dt. $$ This argument also covers $0<p<1$, when $t^{p-1}$ is unbounded at zero. [L2, L4]
 
 2.1 Let $s=\sum_{j=1}^m a_j \mathbf 1_{E_j}$ be a nonnegative simple function, with the sets $E_j$ pairwise disjoint and the coefficients $a_j \ge 0$. Then $$ \int_X s^p\,d\mu = \sum_{j=1}^m a_j^p \mu(E_j). $$ Using step 1.1 for each coefficient and exchanging the resulting finite sum with the real integral gives $$ \int_X s^p\,d\mu = p\int_0^\infty t^{p-1}\mu(\{s>t\})\,dt. $$ [step 1.1, algebra]
 

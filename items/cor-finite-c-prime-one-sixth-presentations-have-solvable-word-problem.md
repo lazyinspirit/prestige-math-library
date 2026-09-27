@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-dehn-algorithm-solves-the-word-problem, thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]
+deps: [thm-dehn-algorithm-solves-the-word-problem, thm-greendlinger-shell-existence-from-the-curvature-count, def-dehn-reduced-word-and-dehn-presentation]
 proof_strategy: "direct"
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -33,7 +38,9 @@ Every finite $C'(1/6)$ presentation has solvable word problem.
 
 **Given:** A finite presentation satisfying $C'(1/6)$.
 
-[L1] Greendlinger's lemma provides, for every nonempty freely reduced null word, a relator subword longer than half of a defining relator ([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
+[L1] For every nonempty freely reduced null word, the original linear word contains a contiguous initial segment of a symmetrised defining relator longer than half that relator ([[thm-greendlinger-shell-existence-from-the-curvature-count]]).
+
+[F1] A Dehn presentation requires this long relator subword in each nonempty freely reduced null word ([[def-dehn-reduced-word-and-dehn-presentation]]).
 
 [L2] Every finite Dehn presentation has a terminating decision procedure for the word problem ([[thm-dehn-algorithm-solves-the-word-problem]]).
 
@@ -41,6 +48,6 @@ Every finite $C'(1/6)$ presentation has solvable word problem.
 
 **Proof technique:** direct.
 
-1.1 By [L1], the given finite $C'(1/6)$ presentation is a Dehn presentation: every nonempty freely reduced trivial word contains the required long relator subword. [L1, given]
+1.1 By [L1], every nonempty freely reduced trivial word has the required long relator subword in its original linear reading. Thus the symmetrised finite $C'(1/6)$ presentation is a Dehn presentation in the sense of [F1]. [L1, F1, given]
 
 2.1 Apply [L2] to that Dehn presentation. The resulting Dehn algorithm decides triviality of words. [L2, step 1.1] ∎

@@ -18,8 +18,9 @@ examples: []
 
 This page follows the analytic route through Hahn-Banach. It starts with
 sublinear domination, isolates the one-step interval calculation and the
-chain-union upper bound needed for Zorn, and then proves the real dominated
-extension theorem. It next packages the normed-space consequences: the dual
+chain-union upper bound needed for Zorn under the Axiom of Choice, and then
+proves the real dominated extension theorem. Its norm-preserving extension
+and norming consequences inherit that choice assumption. It next develops the dual
 space, norm-preserving extension in the real and complex cases, norming
 functionals, separation by the dual, and recovery of the norm from the dual
 unit ball.

@@ -2,13 +2,8 @@
 id: "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number"
 kind: "lemma"
 title: "embedding dimension is minimal maximal ideal generator number"
-deps: ["def-embedding-dimension-and-regular-local-ring", "cor-minimal-generators-over-a-local-ring", "cor-nakayama-generators-modulo-an-ideal"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-embedding-dimension-and-regular-local-ring", "cor-minimal-generators-over-a-local-ring", "cor-nakayama-generators-modulo-an-ideal"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "12.3, p.115"
@@ -18,16 +13,24 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-For a nonzero Noetherian local ring $(R,\mathfrak m,k)$, $\operatorname{edim}R$ is the least number of generators of $\mathfrak m$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For a nonzero Noetherian local ring $(R,\mathfrak m,k)$, $\operatorname{edim}R$ is the least number of generators of $\mathfrak m$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The Axiom of Choice and the objects and hypotheses in the statement.
 
 [F1] [[def-embedding-dimension-and-regular-local-ring]]: For a nonzero commutative Noetherian local ring $(R,\mathfrak m,k)$, define $\operatorname{edim}R=\dim_k(\mathfrak m/\mathfrak m^2)$. The ring is **regular local** when $\operatorname{edim}R=\dim R$. The cotangent space is intrinsic, and is finite-dimensional because $\mathfrak m$ is finitely generated.
 

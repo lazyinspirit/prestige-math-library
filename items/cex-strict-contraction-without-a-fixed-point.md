@@ -11,8 +11,8 @@ deps: [fs-strict-contraction-has-a-fixed-point, thm-banach-fixed-point,
        def-lipschitz-holder-contraction, def-complete-metric-space, thm-of-archimedean,
        lem-of-inverse-positive, thm-complete-subspace-iff-closed,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
-       thm-euclidean-space-complete, def-interval, thm-metric-sequential-closure,
-       lem-limit-preserves-order, def-metric-space, lem-of-abs-value, lem-of-sign-rules,
+       thm-euclidean-space-complete, def-interval,
+       def-metric-space, lem-of-abs-value, lem-of-sign-rules,
        def-metric-topology, def-metric-convergence, cor-archimedean-reciprocal,
        lem-of-naturals-positive, def-metric-uniform-continuity]
 justified_by: []
@@ -22,12 +22,11 @@ short: "strict contraction, no fixed point"
 proof_strategy: direct
 cx_machine_verified: false
 verification:
-  precheck: pass
   verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-03
-    scope: published-audit
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-receipts.jsonl (cex-strict-contraction-without-a-fixed-point). No independent judge or whole-closure certification.
     delegated_by: owner
 sources:
   scraped: []
@@ -65,7 +64,7 @@ $d(f(x),f(y)) \le q\,d(x,y)$ for all $x,y \in X$.
 
 [L1] The absolute value makes $\mathbb{R}$ a metric space, a restriction of a metric is a metric, and $|uv| = |u||v|$ ([[lem-real-line-is-a-metric-space]], [[def-isometry-and-metric-embedding]], [[def-metric-space]], [[lem-of-abs-value]]).
 
-[L2] $\mathbb{R}$ is complete; a closed subset of a complete metric space is complete; a subset is closed exactly when it is sequentially closed; and limits preserve non-strict inequalities ([[thm-euclidean-space-complete]], [[thm-complete-subspace-iff-closed]], [[thm-metric-sequential-closure]], [[lem-limit-preserves-order]], [[def-metric-topology]], [[def-metric-convergence]], [[def-complete-metric-space]]).
+[L2] $\mathbb{R}$ is complete, and a closed subset of a complete metric space is complete ([[thm-euclidean-space-complete]], [[thm-complete-subspace-iff-closed]], [[def-metric-topology]], [[def-complete-metric-space]]).
 
 [L3] Positivity of inverses, reversal of order under reciprocation, and multiplication of inequalities by positives ([[lem-of-inverse-positive]], [[lem-of-sign-rules]]).
 
@@ -77,7 +76,7 @@ $d(f(x),f(y)) \le q\,d(x,y)$ for all $x,y \in X$.
 
 **Proof technique:** direct.
 
-1.1 $X$ is nonempty ($1 \in X$) and sequentially closed in $\mathbb{R}$, since a sequence in $X$ converging to a real $p$ has $x_k \ge 1$ for every $k$ and hence $p \ge 1$; so $X$ is closed in $\mathbb{R}$, and $\mathbb{R}$ being complete, $(X,d)$ is a nonempty complete metric space. [L1, L2]
+1.1 $X$ is nonempty ($1\in X$). Its complement is open directly: for every $p<1$, put $\rho=(1-p)/2>0$. If $|y-p|<\rho$, then $y<p+\rho=(1+p)/2<1$, so the metric ball $B_\rho(p)$ misses $X$. Thus $X$ is closed in $\mathbb R$ by the metric-topology definition. Since $\mathbb R$ is complete, its closed subspace $(X,d)$ is complete. [L1, L2]
 
 1.2 $f$ maps $X$ into $X$: $x \ge 1$ gives $1/x > 0$, so $f(x) = x + 1/x > x \ge 1$. [L3]
 

@@ -10,8 +10,13 @@ provenance:
 deps: [cor-integral-over-a-null-set-vanishes, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-integrable-real-and-complex-functions-and-their-integrals]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-the-lebesgue-integral-respects-almost-everywhere-equality). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -49,10 +54,8 @@ $|h\chi_A|\le|h|$.
 
 **Proof technique:** direct.
 
-1.1 Assume $f=g$ almost everywhere, with exceptional null set $N$. Then for [L1, L2, L4, given]
-every measurable $A$, the real and imaginary parts of $(f-g)\chi_A$ are supported on $N$, so [L1] and [L2] give $$\int_A(f-g)\,d\mu=0,$$ hence $\int_A f\,d\mu=\int_A g\,d\mu$.
+1.1 Assume $f=g$ almost everywhere, with exceptional null set $N$. For every measurable $A$, the positive and negative parts of the real and imaginary components of $(f-g)\chi_A$ are supported on $N$. By [L1] their nonnegative integrals vanish, and [L2] and [L4] give $\int_A(f-g)\,d\mu=0$, hence $\int_A f\,d\mu=\int_A g\,d\mu$. [L1, L2, L4, given]
 
-1.2 Assume instead that $\int_A f\,d\mu=\int_A g\,d\mu$ for every measurable [L2, L3, L4, given]
-$A$. Apply this to the real part $u:=\operatorname{Re}(f-g)$ on the set $A_+:=\{u>0\}$ and to $-u$ on $A_-:=\{u<0\}$. In each case the corresponding nonnegative integral is $0$, so [L3] gives $u=0$ almost everywhere. The same argument for $v:=\operatorname{Im}(f-g)$ shows $v=0$ almost everywhere. Hence $f=g$ almost everywhere.
+1.2 Assume instead that $\int_A f\,d\mu=\int_A g\,d\mu$ for every measurable $A$. Apply this to the real part $u:=\operatorname{Re}(f-g)$ on $A_+:=\{u>0\}$ and to $-u$ on $A_-:=\{u<0\}$. In each case the corresponding nonnegative integral is $0$, so [L3] gives $u=0$ almost everywhere. The same argument for $v:=\operatorname{Im}(f-g)$ shows $v=0$ almost everywhere. Hence $f=g$ almost everywhere. [L2, L3, L4, given]
 
-2.1 Step 1.1 proves $(1)\Rightarrow(2)$ and step 1.2 proves $(2)\Rightarrow(1)$.[step 1.1, step 1.2] ∎
+2.1 Step 1.1 proves $(1)\Rightarrow(2)$ and step 1.2 proves $(2)\Rightarrow(1)$. [step 1.1, step 1.2] ∎

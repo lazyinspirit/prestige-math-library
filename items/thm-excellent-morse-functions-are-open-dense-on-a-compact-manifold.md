@@ -5,20 +5,20 @@ title: "On a compact smooth manifold, the excellent Morse functions form an open
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
-deps: [def-morse-function-and-excellent-morse-function, thm-morse-functions-are-open-dense-on-a-compact-manifold, lem-finitely-many-critical-values-can-be-separated-locally, lem-compact-morse-critical-points-have-uniform-hessian-gaps, lem-no-new-critical-points-under-a-compact-c1-small-perturbation]
+deps: [def-axiom-of-choice, def-morse-function-and-excellent-morse-function, thm-morse-functions-are-open-dense-on-a-compact-manifold, lem-finitely-many-critical-values-can-be-separated-locally, lem-compact-morse-critical-points-have-uniform-hessian-gaps, lem-no-new-critical-points-under-a-compact-c1-small-perturbation]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,13 +30,13 @@ sources:
 
 ## Statement
 
-Let $M$ be a compact smooth manifold. Then the excellent Morse functions form
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a compact smooth manifold. Then the excellent Morse functions form
 an open dense subset of $C^\infty(M,\mathbb R)$ in the $C^2$ topology, and
 hence also in the $C^\infty$ topology.
 
 ## Facts & Assumptions
 
-**Given:** A compact smooth manifold $M$.
+**Given:** The Axiom of Choice and a compact smooth manifold $M$.
 
 [F1] An excellent Morse function is a Morse function whose distinct critical points have distinct critical values ([[def-morse-function-and-excellent-morse-function]]).
 
@@ -50,7 +50,7 @@ hence also in the $C^\infty$ topology.
 
 **Proof technique:** direct.
 
-1.1 To prove density, let $\mathcal U$ be a $C^\infty$ neighbourhood of an arbitrary smooth function $f$. By [L1], choose a Morse function $h\in\mathcal U$. Because $\mathcal U$ is itself a $C^\infty$ neighbourhood of the compact Morse function $h$, [L2] yields a function $g\in\mathcal U$ with the same critical points and Hessians as $h$, but with pairwise distinct critical values. By [F1], this $g$ is excellent Morse. [F1, L1, L2, given]
+1.1 To prove density, let $\mathcal U$ be a $C^\infty$ neighbourhood of an arbitrary smooth function $f$. Using the assumed Axiom of Choice to apply [L1], choose a Morse function $h\in\mathcal U$. Because $\mathcal U$ is itself a $C^\infty$ neighbourhood of the compact Morse function $h$, [L2] yields a function $g\in\mathcal U$ with the same critical points and Hessians as $h$, but with pairwise distinct critical values. By [F1], this $g$ is excellent Morse. [F1, L1, L2, given]
 
 1.2 Let $f$ be excellent Morse. By [L3], choose pairwise disjoint critical neighbourhoods $U_1,\dots,U_r$ around the critical points $p_1,\dots,p_r$ of $f$ such that every sufficiently small $C^2$ perturbation has exactly one nondegenerate critical point in each $U_i$ and none outside $\bigcup_iU_i$. Because the critical values $f(p_i)$ are pairwise distinct, choose pairwise disjoint open intervals $I_i$ with $f(p_i)\in I_i$ and $f(U_i)\subseteq I_i$. [F1, L3, given, choose]
 

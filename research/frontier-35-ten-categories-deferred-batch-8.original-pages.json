@@ -1,0 +1,935 @@
+[
+  {
+    "order": 510.0161,
+    "id": "smooth-projective-serre-duality-and-flag-variety-line-bundles",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Smooth-Projective Serre Duality and Flag-Variety Line Bundles",
+    "companion": "smooth-projective-serre-duality-and-flag-variety-line-bundles-examples",
+    "requires": [
+      "kahler-differentials-conormal-sequences-and-infinitesimal-lifting",
+      "quasi-coherent-and-coherent-sheaves-and-vector-bundles",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness",
+      "sheaf-cohomology-cech-cohomology-and-comparison",
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes",
+      "ext-and-balanced-resolutions",
+      "derived-categories",
+      "spectral-sequences",
+      "grothendieck-spectral-sequences-and-computations",
+      "lie-subgroups-actions-and-homogeneous-spaces",
+      "cartan-subalgebras-and-root-space-decompositions",
+      "root-systems-dynkin-diagrams-and-cartan-killing-classification"
+    ],
+    "items": [
+      {
+        "id": "def-smooth-projective-dualizing-line-bundle-and-trace",
+        "kind": "definition",
+        "title": "Dualizing line bundle and trace datum of a smooth projective variety",
+        "statement": "Assume AC. For a smooth projective pure n-dimensional k-scheme X set ω_X=∧^n Ω¹_{X/k}. A normalized trace datum is a k-linear map t_X:H^n(X,ω_X)→k compatible with the projective-space Laurent residue; existence and embedding independence are assertions to be proved in the smooth-projective duality theorem.",
+        "deps": [
+          "def-sheaf-relative-differentials",
+          "def-smooth-relative-dimension-via-differentials",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            }
+          ]
+        },
+        "strategy": "Define the determinant locally from smooth differential frames; use the projective-space residue as normalization and postpone existence/uniqueness of the general trace to the later theorem. Do not use the trace to prove its own existence. AC enters only through the supplied sheaf-cohomology construction."
+      },
+      {
+        "id": "lem-projective-space-twist-cohomology-cech",
+        "kind": "lemma",
+        "title": "Čech cohomology of projective-space twists",
+        "statement": "Assume AC. For k a field and n≥1, H^q(P^n_k,O(d)) is k[x_0,…,x_n]_d for q=0, the Laurent monomials with all exponents negative and total degree d for q=n, and zero otherwise.",
+        "deps": [
+          "thm-leray-acyclic-cover-theorem",
+          "def-cech-cohomology-open-cover",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            }
+          ]
+        },
+        "strategy": "On the n+1 standard affine Proj charts split the Čech complex by exponent vector; nonnegative vectors give degree-zero monomials, all-negative vectors survive only in degree n, and mixed-sign vectors contract by inserting a nonnegative coordinate. Use affine quasi-coherent acyclicity to identify Čech with derived cohomology. AC is inherited from that derived-cohomology comparison."
+      },
+      {
+        "id": "lem-projective-space-top-cohomology-residue-pairing",
+        "kind": "lemma",
+        "title": "Top-cohomology residue pairing on projective space",
+        "statement": "Assume AC. For every d≥0 the Laurent coefficient of (x_0⋯x_n)^−1 gives a perfect pairing H^0(P^n,O(d))×H^n(P^n,O(−n−1−d))→k, natural for multiplication maps.",
+        "deps": [
+          "lem-projective-space-twist-cohomology-cech",
+          "def-cup-product-sheaf-cohomology",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "Pair monomial x^a with x^(−a−1); the bases are dual term by term. Check that multiplication by a homogeneous polynomial acts contragrediently on top cohomology, as Stacks Lemma 30.8.2 proves. AC is inherited through sheaf cohomology."
+      },
+      {
+        "id": "thm-serre-duality-projective-space-twisting-sheaves",
+        "kind": "theorem",
+        "title": "Serre duality for projective-space twists",
+        "statement": "Assume AC. With ω_{P^n}=O(−n−1) and residue trace, for every integer d and q the cup/evaluation pairing H^q(P^n,O(d))×H^{n−q}(P^n,O(−d−n−1))→k is perfect.",
+        "deps": [
+          "def-smooth-projective-dualizing-line-bundle-and-trace",
+          "lem-projective-space-twist-cohomology-cech",
+          "lem-projective-space-top-cohomology-residue-pairing",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "On the standard charts calculate the Jacobian determinant of the coordinate change between top differential frames; it transforms by the O(−n−1) transition, so ω_{P^n}=O(−n−1). Use the complete twist cohomology calculation. Intermediate degrees vanish on both sides; in degrees zero and n the preceding Laurent coefficient pairing identifies dual bases. For n=0, P⁰=Spec k, all O(d) are trivial, ω=O, and the degree-zero pairing is ordinary multiplication k×k→k. AC enters through sheaf cohomology."
+      },
+      {
+        "id": "lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space",
+        "kind": "lemma",
+        "title": "Finite twisted locally free resolutions on projective space",
+        "statement": "Assume AC. Every coherent O_{P^n_k}-module F admits a finite exact resolution by finite direct sums of twists O(d), with length at most n+1 after a coherent first kernel.",
+        "deps": [
+          "thm-auslander-buchsbaum-serre-regularity-criterion",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the planned Proj/coherent-sheaf supplier to represent F as the sheafification of a finitely generated graded module M over S=k[x_0,…,x_n]. Because S is Noetherian, choose finite homogeneous generators and iteratively take graded free covers with finite graded kernels. At the homogeneous maximal ideal m=(x_0,…,x_n), S_m is regular local of dimension n+1; the published Auslander–Buchsbaum–Serre criterion gives projective dimension at most n+1, so the (n+1)st graded syzygy K becomes free at m. Choose a homogeneous basis of K/mK and lift it to a graded free cover F_K→K. Graded Nakayama makes this surjective; its kernel localizes to zero at m, hence is zero because a nonzero finitely generated graded module has nonzero localization at the homogeneous maximal ideal (the lowest-degree term defeats any multiplier with nonzero constant term). Thus K is graded free, proving the graded Hilbert syzygy bound without assuming every vector bundle splits. Sheafify the finite graded free resolution; exact localization and the identification of shifts S(d) with O(d) yield the required resolution. AC is inherited from the regular-local criterion and finite choices."
+      },
+      {
+        "id": "lem-ringed-space-module-injective-resolutions-and-cohomology-comparison",
+        "kind": "lemma",
+        "title": "Injective module sheaves and comparison with abelian sheaf cohomology",
+        "statement": "Assume AC. For every ringed space (X,O_X) with commutative structure sheaf, the category of O_X-modules has functorial injective embeddings and hence supplied injective resolutions. Every injective O_X-module is flasque, and for an O_X-module F the cohomology of an O_X-injective resolution computes the cohomology of its underlying abelian sheaf on every open subset.",
+        "deps": [
+          "thm-module-categories-have-enough-injectives",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-extension-by-zero-adjunction-exactness",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Injectives, §19.5 Lemma 19.5.1",
+              "url": "https://stacks.math.columbia.edu/download/injectives.pdf"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§20.12–20.13",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        },
+        "strategy": "At each x embed F_x functorially in an injective O_{X,x}-module J_x by the published module theorem. The product of skyscraper O_X-modules x_*J_x is injective: stalk is exact and Hom_{O_X}(M,x_*J_x)=Hom_{O_{X,x}}(M_x,J_x); the germwise map F→∏_x x_*J_x is monic by stalkwise exactness. Iterate to resolve. For an open j:U↪X, equip the published abelian j_!O_U with its evident O_X-action; j_!O_U→O_X is monic stalkwise and the same adjunction holds O-linearly. Injectivity extends any section of I(U) to I(X), so I is flasque. Also abelian injective sheaves are flasque by the published j_! adjunction. For a short exact sequence of flasque abelian sheaves 0→F→G→H→0, lift a section of H on an open by Zorn-maximizing a compatible local lift and using flasqueness of F to glue across each overlap; then H is flasque and Γ is exact. Embed a flasque F in an abelian injective I; its quotient is flasque, so the long exact sequence gives H¹(F)=0 and dimension shifting inductively gives H^q(F)=0 for q>0. The underlying abelian complex of an O_X-injective resolution is therefore an acyclic resolution, and the published acyclic-resolution theorem identifies its cohomology with abelian sheaf cohomology on every open. AC supplies stalk injectives, products, Zorn, and resolution choices; no enough-projectives assertion is made."
+      },
+      {
+        "id": "def-sheaf-ext-for-coherent-modules",
+        "kind": "definition",
+        "title": "Sheaf Ext of coherent modules",
+        "statement": "Assume AC. On a ringed space (Y,O_Y) with commutative structure sheaf, for O_Y-modules F,G choose a supplied O_Y-injective resolution G→I•. Define global Ext^q_Y(F,G)=H^q Hom_{O_Y}(F,I•) and sheaf Ext^q_Y(F,G)=H^q of the internal Hom complex Hom_{O_Y}(F,I•). Injective comparison maps and homotopies identify each construction across supplied resolutions.",
+        "deps": [
+          "lem-ringed-space-module-injective-resolutions-and-cohomology-comparison",
+          "def-ext-via-an-injective-resolution-of-the-second-variable",
+          "thm-injective-comparison-map-exists",
+          "thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            },
+            {
+              "title": "The Stacks Project, Injectives, §19.5 Lemma 19.5.1",
+              "url": "https://stacks.math.columbia.edu/download/injectives.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the preceding O_Y-module injective construction, then form global and internal Hom complexes. Use published injective comparison maps and homotopies in Mod(O_Y) for resolution independence; internal Hom sends a chain homotopy to a chain homotopy. Do not use the published balanced Ext bifunctor, which requires enough projectives. AC supplies the injective resolution and implies the DC used in comparison maps."
+      },
+      {
+        "id": "lem-global-sheaf-ext-long-exact-in-first-variable",
+        "kind": "lemma",
+        "title": "Long exact global sheaf Ext sequence in the first variable",
+        "statement": "Assume AC. On a ringed space (Y,O_Y) with commutative structure sheaf, a short exact sequence 0→F′→F→F″→0 of O_Y-modules and an O_Y-module G induce a natural long exact sequence 0→Hom(F″,G)→Hom(F,G)→Hom(F′,G)→Ext¹_Y(F″,G)→Ext¹_Y(F,G)→⋯, using the injective-resolution global Ext construction.",
+        "deps": [
+          "def-sheaf-ext-for-coherent-modules",
+          "thm-long-exact-sequence-in-cohomology",
+          "thm-injective-comparison-map-exists",
+          "thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose an injective O_Y-resolution G→I• from the preceding definition. For each p, injectivity of I^p makes 0→Hom(F″,I^p)→Hom(F,I^p)→Hom(F′,I^p)→0 exact. Apply the published long exact cohomology sequence to these complexes; H⁰ is ordinary Hom. Naturality of comparison maps and connecting morphisms makes the sequence independent of the chosen resolution. This injective route needs no projective sheaves. AC supplies the resolution and the DC required by comparison."
+      },
+      {
+        "id": "thm-serre-duality-projective-space-coherent-sheaves",
+        "kind": "theorem",
+        "title": "Serre duality for coherent sheaves on projective space",
+        "statement": "Assume AC. For every coherent F on P^n_k, the natural pairing Ext^{n−q}_{P^n}(F,ω_{P^n})×H^q(P^n,F)→k is perfect for 0≤q≤n.",
+        "deps": [
+          "thm-serre-duality-projective-space-twisting-sheaves",
+          "lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space",
+          "def-sheaf-ext-for-coherent-modules",
+          "lem-global-sheaf-ext-long-exact-in-first-variable",
+          "lem-ringed-space-module-injective-resolutions-and-cohomology-comparison",
+          "prop-yoneda-product-is-composition-in-the-derived-category",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §20.13 Lemma 20.13.3",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the O-module injective construction and cohomology comparison to identify Ext^q(O,F) with H^q(P^n,F). Compose in the derived category/Yoneda product with Ext^{n−q}(F,ω) and then apply the projective residue trace to define the natural pairing. For a finite direct sum of twists it is the proved monomial pairing. For a short exact sequence from a finite twisted locally free resolution, use the local first-variable Ext long exact sequence, the sheaf-cohomology long exact sequence, and naturality of Yoneda composition to obtain compatible connecting squares. Induct over the resolution length and apply the five lemma, using finite-dimensionality from the projective Čech calculation and the resolution. This proves perfectness for coherent F without invoking enough projective sheaves or an unproved abstract balanced Ext theorem. AC enters through injective resolutions and cohomology."
+      },
+      {
+        "id": "lem-smooth-closed-immersion-regular-conormal-sequence",
+        "kind": "lemma",
+        "title": "Smooth closed immersion is regular with exact conormal sequence",
+        "statement": "Assume AC. If i:X↪P^N_k is a closed immersion with X smooth of pure codimension c, then I/I² is locally free of rank c, its local generators form a regular sequence, and 0→I/I²→i*Ω¹_{P^N/k}→Ω¹_{X/k}→0 is exact.",
+        "deps": [
+          "thm-conormal-sequence-closed-immersion",
+          "lem-regular-local-regular-quotient-ideal-is-parameter-generated",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "At each point use regularity of the ambient and smooth quotient local rings and the published parameter-generated-ideal lemma. The chosen generators extend to regular parameters, so the Koszul complex resolves O_X and the cotangent map is injective. Sheafify the stalk calculations. AC is inherited from the regular-local lemma."
+      },
+      {
+        "id": "lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction",
+        "kind": "lemma",
+        "title": "Adjunction for a smooth closed subvariety",
+        "statement": "Assume AC. For a smooth closed immersion i:X↪P^N_k with ideal I and normal bundle N=(I/I²)∨, ω_X≅i*ω_{P^N}⊗det N.",
+        "deps": [
+          "def-smooth-projective-dualizing-line-bundle-and-trace",
+          "lem-smooth-closed-immersion-regular-conormal-sequence",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "Take determinants of the exact conormal sequence from the preceding lemma; calculate det Ω_{P^N}=O(−N−1) on projective coordinate charts. Keep track that det N is the dual of det(I/I²). AC is inherited from the regular-immersion proof."
+      },
+      {
+        "id": "lem-regular-immersion-koszul-ext-sheaf",
+        "kind": "lemma",
+        "title": "Koszul sheaf Ext of a smooth regular immersion",
+        "statement": "Assume AC. For i:X↪P^N_k smooth of codimension c and E finite locally free on X, the sheaf Ext^q_{P^N}(i_*E,ω_{P^N}) vanishes for q≠c and equals i_*(E∨⊗ω_X) for q=c.",
+        "deps": [
+          "lem-smooth-closed-immersion-regular-conormal-sequence",
+          "lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction",
+          "def-sheaf-ext-for-coherent-modules",
+          "cor-koszul-complex-resolves-a-regular-quotient",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "On an affine neighborhood where I=(f_1,…,f_c) is a regular sequence and E is free, resolve i_*E by the Koszul complex. Its dual has only top cohomology E∨⊗det(I/I²)∨⊗ω_P|X; use adjunction to identify ω_X, and check transition determinants glue. AC is inherited through the regular-immersion and sheaf-Ext constructions."
+      },
+      {
+        "id": "lem-regular-immersion-local-to-global-ext-collapse",
+        "kind": "lemma",
+        "title": "Local-to-global Ext collapse for a regular immersion",
+        "statement": "Assume AC. Under the preceding regular-immersion hypotheses, Ext^{c+j}_{P^N}(i_*E,ω_{P^N})≅H^j(X,E∨⊗ω_X), naturally in E.",
+        "deps": [
+          "lem-regular-immersion-koszul-ext-sheaf",
+          "def-sheaf-ext-for-coherent-modules",
+          "lem-ringed-space-module-injective-resolutions-and-cohomology-comparison",
+          "thm-grothendieck-spectral-sequence",
+          "thm-inverse-direct-image-adjunction",
+          "lem-stalk-inverse-image-sheaf",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the published Grothendieck spectral sequence to internal Hom_{O_Y}(i_*E,-) followed by Γ(Y,-), with Y=P^N. For an injective O_Y-module I, internal Hom(i_*E,I) is flasque: on U⊂V, extension by zero j_!(i_*E|_U)→i_*E|_V is monic stalkwise, restriction of I to V is injective because its exact extension-by-zero left adjoint preserves monomorphisms, and injectivity extends every map on U to V. Thus internal Hom sends injectives to Γ-acyclics; the composite Γ∘internal Hom is global Hom, so E₂^{p,q}=H^p(Y,sheaf Ext^q_Y(i_*E,ω_Y)) converges to global Ext^{p+q}_Y(i_*E,ω_Y). The preceding Koszul lemma concentrates sheaf Ext in row q=c, yielding the canonical natural edge isomorphism. For the underlying abelian sheaves of a closed immersion i, direct image is exact by stalks and sends abelian-sheaf injectives to injectives because inverse image is exact; Γ(Y,i_*M)=Γ(X,M), hence H^p(Y,i_*M)=H^p(X,M). The ready O-module/abelian-sheaf comparison identifies these cohomology groups. AC supplies the injective data. No affine quasi-coherent acyclicity or acyclic-cover Leray is needed for this transfer."
+      },
+      {
+        "id": "thm-serre-duality-smooth-projective-variety-locally-free-sheaves",
+        "kind": "theorem",
+        "title": "Serre duality for locally free sheaves on a smooth projective variety",
+        "statement": "Assume AC. For a smooth projective pure n-dimensional k-scheme X and finite locally free E, there is a normalized trace t_X:H^n(X,ω_X)→k making H^q(X,E)×H^{n−q}(X,E∨⊗ω_X)→k a functorial perfect pairing for all q.",
+        "deps": [
+          "thm-serre-duality-projective-space-coherent-sheaves",
+          "lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction",
+          "lem-regular-immersion-local-to-global-ext-collapse",
+          "def-cup-product-sheaf-cohomology",
+          "def-smooth-projective-dualizing-line-bundle-and-trace",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry Classes 53 and 54",
+              "url": "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose a closed embedding X↪P^N. Combine projective-space coherent Ext duality with the regular-immersion local-to-global Ext collapse and adjunction. Define t_X by the E=O_X duality functional corresponding to 1 and verify the evaluation/cup pairing and independence of embedding by uniqueness of the representing functional; include the zero-dimensional case. AC enters through injective resolutions and the projective-space cohomology route."
+      },
+      {
+        "id": "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+        "kind": "definition",
+        "title": "Complex semisimple algebraic group, Borel, and flag variety",
+        "statement": "Work over C. Fix a connected simply connected semisimple linear algebraic group G, a maximal torus T in a Borel subgroup B, its unipotent radical U, the positive roots determined by B, Weyl group W=N_G(T)/T, and the algebraic quotient X=G/B when constructed.",
+        "deps": [
+          "def-root-and-root-space-relative-to-a-cartan-subalgebra",
+          "def-positive-system-and-base-of-simple-roots",
+          "def-weyl-group-of-a-root-system"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Define the algebraic, not merely smooth Lie, setting and the chosen Borel/positive-root convention. State that existence of the algebraic quotient and root subgroups must be proved before using X geometrically; do not infer them from the smooth manifold G/H theorem."
+      },
+      {
+        "id": "thm-semisimple-flag-variety-smooth-projective",
+        "kind": "theorem",
+        "title": "Smooth projective semisimple flag variety",
+        "statement": "For connected simply connected complex semisimple algebraic G and Borel B, the algebraic quotient G/B exists, is connected and smooth, and admits a closed projective embedding.",
+        "deps": [
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "def-open-and-closed-weyl-chambers"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Construct the quotient and its Zariski-local principal B charts from algebraic-group quotient theory. Use a strictly dominant character/highest-weight representation to embed G/B as the closed orbit of a highest-weight line; smoothness follows from the homogeneous algebraic quotient tangent calculation, not from the smooth-manifold quotient alone."
+      },
+      {
+        "id": "thm-flag-variety-bruhat-cell-decomposition",
+        "kind": "theorem",
+        "title": "Bruhat cells of the flag variety",
+        "statement": "For G,B,T as fixed, G/B is the disjoint union of B-orbits BwB/B indexed by W. Each cell is affine of dimension ℓ(w); the longest cell is dense open.",
+        "deps": [
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "thm-semisimple-flag-variety-smooth-projective",
+          "prop-weyl-length-equals-positive-root-inversion-number"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            }
+          ]
+        },
+        "strategy": "Use root subgroup factorization U=U_wU^w and the Bruhat decomposition G=⨆_w BwB. The orbit map from the inversion-root product to BwB/B is an algebraic isomorphism. Identify the longest Weyl element via the published length/inversion theorem."
+      },
+      {
+        "id": "def-borel-character-equivariant-line-bundle",
+        "kind": "definition",
+        "title": "Borel-character equivariant line bundle",
+        "statement": "For λ∈X*(T)=X*(B), extend λ trivially across U and define L_λ=G×^B C_{−λ} on G/B, with (gb,v) identified with (g,b·v); the fiber at eB has B-weight −λ.",
+        "deps": [
+          "def-complex-semisimple-algebraic-group-borel-and-flag-variety",
+          "thm-semisimple-flag-variety-smooth-projective"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Use Zariski-local sections of G→G/B to glue the associated one-dimensional B-representation. The minus in the fiber character is fixed now so L_λ|_{P_α/B} has positive degree <λ,α∨> and ω_{G/B}=L_{−2ρ}."
+      },
+      {
+        "id": "thm-borel-characters-classify-equivariant-line-bundles-simply-connected",
+        "kind": "theorem",
+        "title": "Borel characters classify equivariant flag line bundles",
+        "statement": "For the fixed simply connected semisimple G, taking the fiber over eB gives an equivalence between G-equivariant algebraic line bundles on G/B and one-dimensional algebraic B-representations; consequently their isomorphism classes are X*(B)≅X*(T).",
+        "deps": [
+          "def-borel-character-equivariant-line-bundle",
+          "thm-semisimple-flag-variety-smooth-projective"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Recover a bundle as G×^B of its B-module fiber; evaluate the two constructions at eB to prove the quasi-inverse and full faithfulness. A character of the connected unipotent radical U is trivial, so characters restrict bijectively to T. This item does not assert all ordinary line bundles are equivariant."
+      },
+      {
+        "id": "lem-flag-variety-canonical-bundle-weight-minus-two-rho",
+        "kind": "lemma",
+        "title": "Canonical weight of a flag variety",
+        "statement": "For the fixed positive roots and L_λ=G×^B C_{−λ}, the canonical line of X=G/B is ω_X≅L_{−2ρ}, with 2ρ the sum of positive roots.",
+        "deps": [
+          "def-borel-character-equivariant-line-bundle",
+          "thm-flag-variety-bruhat-cell-decomposition",
+          "def-root-and-root-space-relative-to-a-cartan-subalgebra"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "At eB identify T_{eB}X with g/b, whose root weights are the negative roots. Its cotangent determinant has B-weight 2ρ; the chosen associated-bundle convention therefore labels it L_{−2ρ}. Check equivariance to extend from the base fiber."
+      },
+      {
+        "id": "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+        "kind": "theorem",
+        "title": "Minimal parabolic flag projection is a projective-line bundle",
+        "statement": "For a simple root α let P_α be the minimal parabolic with Weyl subgroup {1,s_α}. Then G/B→G/P_α is Zariski locally a P¹-bundle and each fiber P_α/B is P¹.",
+        "deps": [
+          "thm-flag-variety-bruhat-cell-decomposition",
+          "thm-semisimple-flag-variety-smooth-projective"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Use Bruhat cells B and Bs_αB to identify the rank-one homogeneous quotient, then the SL₂ root subgroup quotient to identify it with P¹. Local sections of the principal P_α-torsor G→G/P_α give Zariski local products. Distinguish this minimal-parabolic notation from conventions calling the maximal parabolic P_α."
+      },
+      {
+        "id": "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+        "kind": "lemma",
+        "title": "Flag line-bundle degree on a minimal-parabolic fiber",
+        "statement": "With L_λ=G×^B C_{−λ}, its restriction to P_α/B≅P¹ has degree <λ,α∨>. In particular L_α has degree 2 and L_{−α} degree −2.",
+        "deps": [
+          "def-borel-character-equivariant-line-bundle",
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "def-coroot-and-dual-root-system"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Pull back to the rank-one SL₂ subgroup. For its upper Borel, the B-character −m gives O_{P¹}(m); m=<λ,α∨>. Check m=1 on the tautological line dual to fix the sign."
+      },
+      {
+        "id": "lem-minimal-parabolic-relative-canonical-line-bundle-root-weight",
+        "kind": "lemma",
+        "title": "Relative canonical weight for a minimal-parabolic flag projection",
+        "statement": "For π:G/B→G/P_α, the relative canonical line bundle is K_π=ω_{(G/B)/(G/P_α)}≅L_{−α}; its fiber degree is −2.",
+        "deps": [
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "def-borel-character-equivariant-line-bundle",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "At the base coset the relative tangent is p_α/b≅g_{−α}, a B-weight −α line. Its dual has weight α, hence is L_{−α} in the fixed convention. Verify the fiber is O(−2) using the preceding degree lemma."
+      },
+      {
+        "id": "def-higher-direct-image-sheaf-cohomology",
+        "kind": "definition",
+        "title": "Higher direct image of an abelian sheaf",
+        "statement": "Assume AC. For a continuous map f:X→Y and abelian sheaf F on X, use the supplied functorial injective resolution F→I• to define R^qf_*F=H^q(f_*I•), an abelian sheaf on Y; comparison of supplied resolutions gives the natural isomorphism class.",
+        "deps": [
+          "thm-inverse-direct-image-adjunction",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            }
+          ]
+        },
+        "strategy": "The published direct image is additive and left exact because it evaluates sections on inverse images of opens. The batch-7 injective-resolution datum and published comparison theorem make the qth cohomology sheaf well defined. AC is used exactly to supply the functorial injective resolution."
+      },
+      {
+        "id": "thm-leray-spectral-sequence-for-sheaf-cohomology",
+        "kind": "theorem",
+        "title": "Leray spectral sequence for sheaf cohomology",
+        "statement": "Assume AC. For f:X→Y and an abelian sheaf F, there is a natural first-quadrant spectral sequence E₂^{p,q}=H^p(Y,R^qf_*F)⇒H^{p+q}(X,F), with the usual edge maps and finite filtration in each total degree.",
+        "deps": [
+          "def-higher-direct-image-sheaf-cohomology",
+          "thm-inverse-direct-image-adjunction",
+          "lem-stalk-inverse-image-sheaf",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-grothendieck-spectral-sequence",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            }
+          ]
+        },
+        "strategy": "The inverse-image functor on abelian sheaves is exact stalkwise, so by adjunction f_* sends injectives to injectives, hence to Γ(Y,−)-acyclics. Apply the published Grothendieck spectral sequence to f_* followed by Γ(Y,−), and identify Γ(Y,f_*F)=Γ(X,F). AC supplies the injective/Cartan–Eilenberg comparison data."
+      },
+      {
+        "id": "lem-relative-projective-line-cohomology-and-apolarity",
+        "kind": "lemma",
+        "title": "Relative projective-line cohomology and apolarity",
+        "statement": "Assume AC. For a Zariski locally trivial P¹-bundle π:E→S over a complex scheme and a line bundle L of constant fiber degree n≥−1, R^qπ_*L vanishes for q>0; R^qπ_*(L⊗K_π^{n+1}) vanishes for q≠1; after fixing the invariant SL₂ apolarity normalization there is a natural isomorphism π_*L≅R¹π_*(L⊗K_π^{n+1}).",
+        "deps": [
+          "lem-projective-space-twist-cohomology-cech",
+          "lem-projective-space-top-cohomology-residue-pairing",
+          "def-higher-direct-image-sheaf-cohomology",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Trivialize over S and write L as O(n)⊗π*M. Use the relative projective-bundle Čech computation and base-change compatibility. The wedge pairing V≅V∨⊗det V sends Sym^nV to its contragredient with the determinant twist, yielding a GL₂-equivariant map on R⁰/R¹; this descends across changes of trivialization and matches the fiberwise residue. For n=−1 both sides vanish. AC is used through sheaf cohomology."
+      },
+      {
+        "id": "thm-relative-p1-line-bundle-cohomology-shift",
+        "kind": "theorem",
+        "title": "Relative projective-line cohomology shift",
+        "statement": "Assume AC. Let π:E→S be a Zariski locally trivial P¹-bundle of complex schemes and L a line bundle of constant fiber degree n≥−1. After the fixed apolarity normalization, for every i≥0 there is a natural isomorphism H^i(E,L)≅H^{i+1}(E,L⊗K_π^{n+1}).",
+        "deps": [
+          "lem-relative-projective-line-cohomology-and-apolarity",
+          "thm-leray-spectral-sequence-for-sheaf-cohomology",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the relative direct-image comparison from the preceding lemma. Leray collapses to its q=0 row for L and q=1 row for the twist, so both sides identify with H^i(S,π_*L). Include n=−1, when both sides vanish. AC enters through the higher direct-image and Leray constructions."
+      }
+    ]
+  },
+  {
+    "order": 510.0162,
+    "id": "smooth-projective-serre-duality-and-flag-variety-line-bundles-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Smooth-Projective Serre Duality and Flag-Variety Line Bundles — Examples",
+    "companion": "smooth-projective-serre-duality-and-flag-variety-line-bundles",
+    "requires": [
+      "smooth-projective-serre-duality-and-flag-variety-line-bundles"
+    ],
+    "items": [
+      {
+        "id": "ex-sl2-flag-variety-line-bundles",
+        "kind": "example",
+        "title": "Flag line bundles for SL₂",
+        "statement": "For G=SL₂(C), B upper triangular, and T=diag(t,t⁻¹), G/B≅P¹, L_{mω₁}≅O(m), ω_{G/B}=O(−2), and the fiber degree is m.",
+        "deps": [
+          "def-borel-character-equivariant-line-bundle",
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+          "lem-flag-variety-canonical-bundle-weight-minus-two-rho"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "Jacob Lurie, A Proof of the Borel–Weil–Bott Theorem, pp. 1–3",
+              "url": "https://people.math.harvard.edu/~lurie/papers/bwb.pdf"
+            }
+          ]
+        },
+        "strategy": "Map gB to the line spanned by ge₁; compute B’s action on the tautological fiber as t and therefore L_{ω₁}=O(1) under the fixed −λ convention. Check m=−2 against the canonical bundle."
+      },
+      {
+        "id": "ex-sl3-two-minimal-parabolic-projections",
+        "kind": "example",
+        "title": "Two minimal-parabolic projections for SL₃",
+        "statement": "For G=SL₃(C), the two simple-root projections from complete flags (line L⊂plane H⊂C³) forget H or forget L, and each fiber is P¹; the corresponding fundamental line bundles have fiber-degree pairs (1,0) and (0,1).",
+        "deps": [
+          "thm-minimal-parabolic-flag-projection-is-p1-bundle",
+          "lem-flag-line-bundle-degree-on-minimal-parabolic-fibre",
+          "def-borel-character-equivariant-line-bundle"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Lectures on the Geometry of Flag Varieties, §§1.2–1.4, 2.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups, Chapters 7, 21–22",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "For fixed L, planes through L form P(C³/L); for fixed H, lines in H form P(H). Restrict the two fundamental associated line bundles and compute degrees from the simple coroot pairings."
+      },
+      {
+        "id": "ex-serre-duality-projective-space-twist-pairing",
+        "kind": "example",
+        "title": "Projective-space twist pairing in Serre duality",
+        "statement": "For P²_k and d=2, the class x₀²∈H⁰(O(2)) pairs to 1 with the top Čech class x₀⁻³x₁⁻¹x₂⁻¹∈H²(O(−5)) and to 0 with the other Laurent basis classes.",
+        "deps": [
+          "lem-projective-space-top-cohomology-residue-pairing",
+          "thm-serre-duality-projective-space-twisting-sheaves"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Schemes, §§30.2, 30.8, 30.14",
+              "url": "https://stacks.math.columbia.edu/download/coherent.pdf"
+            },
+            {
+              "title": "The Stacks Project, Duality for Schemes, §27",
+              "url": "https://stacks.math.columbia.edu/download/duality.pdf"
+            }
+          ]
+        },
+        "strategy": "Multiply the two Laurent monomials and take the coefficient of (x₀x₁x₂)⁻¹. Check that all other degree −5 all-negative basis monomials have a different exponent vector and therefore give zero."
+      }
+    ]
+  }
+]

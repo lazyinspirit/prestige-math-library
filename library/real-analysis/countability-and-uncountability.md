@@ -7,6 +7,7 @@ items: [def-equinumerous,
         thm-schroder-bernstein, lem-subset-of-countable,
         lem-countable-iff-surjection-from-n, lem-finite-subsets-listable,
         thm-n-cross-n-countable, thm-product-of-countable, def-countable-choice, def-dependent-choice,
+        def-choice-for-pairs-and-countable-finite-choice, thm-choice-implies-dependent-implies-countable-choice,
         thm-countable-union-of-countable, thm-rationals-countable,
         thm-cantor-powerset, thm-r-uncountable, cor-interval-uncountable,
         cor-irrationals-uncountable, rem-continuum-hypothesis]
@@ -74,7 +75,10 @@ interval, open or closed, is uncountable; that is the form the last of the false
 statements below actually needs.
 
 The choice principles [[def-countable-choice]] and [[def-dependent-choice]] are
-stated here as optional assumptions, not proved. Every lemma and theorem
+stated here as optional assumptions, not proved. The restricted forms are
+defined in [[def-choice-for-pairs-and-countable-finite-choice]], and
+[[thm-choice-implies-dependent-implies-countable-choice]] proves their
+implication chain in ZF before later arguments use it. Every lemma and theorem
 proved here is a theorem of ZF except
 [[thm-countable-union-of-countable]], which assumes the Axiom of
 Countable Choice ([[def-countable-choice]]) and flags the exact step that spends

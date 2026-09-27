@@ -12,8 +12,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -46,6 +50,6 @@ $$\lVert T^*T\rVert=\lVert T\rVert^2.$$
 
 **Proof technique:** direct.
 
-1.1 For every unit vector $v$ in the domain of $T$, [L1] gives $\lVert STv\rVert\le \lVert S\rVert\,\lVert Tv\rVert\le \lVert S\rVert\,\lVert T\rVert$. Taking the maximum over all unit $v$ yields $\lVert ST\rVert\le \lVert S\rVert\,\lVert T\rVert$. [L1, algebra]
+1.1 If the domain of $T$ is zero, then $T$ and $ST$ are zero maps and both norms vanish by [L1]. Otherwise, for every unit vector $v$ in that domain, [L1] gives $\lVert STv\rVert\le \lVert S\rVert\,\lVert Tv\rVert\le \lVert S\rVert\,\lVert T\rVert$. Taking the maximum over all unit $v$ yields $\lVert ST\rVert\le \lVert S\rVert\,\lVert T\rVert$. [L1, algebra]
 
-2.1 If $s_1\ge s_2\ge\cdots$ are the singular values of $T$, then [L3] shows that $T^*T$ has eigenvalues $s_1^2,s_2^2,\dots$ and is already non-negative. Hence its singular values are $s_1^2,s_2^2,\dots$, so [L2] gives $\lVert T^*T\rVert=s_1^2=\lVert T\rVert^2$. [L2, L3, algebra] ∎
+2.1 If the domain of $T$ is zero, then $T^*T$ is the zero map on the zero space, so both sides are zero by [L1]. Otherwise, if $s_1\ge s_2\ge\cdots$ are the singular values of $T$, then [L3] shows that $T^*T$ has eigenvalues $s_1^2,s_2^2,\dots$ and is already non-negative. Hence its singular values are $s_1^2,s_2^2,\dots$, so [L2] gives $\lVert T^*T\rVert=s_1^2=\lVert T\rVert^2$. [L1, L2, L3, algebra] ∎

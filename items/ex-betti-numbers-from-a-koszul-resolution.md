@@ -2,13 +2,14 @@
 id: "ex-betti-numbers-from-a-koszul-resolution"
 kind: "example"
 title: "betti numbers from a koszul resolution"
-deps: ["lem-regular-local-residue-field-koszul-resolution", "cor-betti-number-is-rank-in-minimal-resolution", "thm-localisation-and-polynomial-extension-of-regular-rings"]
+deps: ["def-axiom-of-choice", "lem-regular-local-residue-field-koszul-resolution", "cor-betti-number-is-rank-in-minimal-resolution", "thm-localisation-and-polynomial-extension-of-regular-rings"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 12.33 proof, p.123"
@@ -25,11 +26,15 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Example
 
+Assume the Axiom of Choice.
+
 For $R=k[x,y]_{(x,y)}$, the augmented complex $0\to R\xrightarrow{c\mapsto(-yc,xc)}R^2\xrightarrow{(a,b)\mapsto xa+yb}R\to k\to0$ is a minimal free resolution. Thus $\beta(k)=(1,2,1)$, with all higher Betti numbers zero.
 
 ## Facts & Assumptions
 
 **Given:** The objects and hypotheses in the example. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]] and supplies the premises required by [F1]–[F3].
 
 [F1] [[lem-regular-local-residue-field-koszul-resolution]]: For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, the Koszul complex on any regular system of parameters is a minimal free resolution of $k$ of length $d$.
 

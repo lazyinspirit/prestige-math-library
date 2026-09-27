@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-hahn-banach-norm-preserving-extension,
+deps: [def-axiom-of-choice, thm-hahn-banach-norm-preserving-extension,
        lem-real-part-determines-a-complex-linear-functional,
        rem-real-and-complex-normed-space-convention]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -26,18 +19,30 @@ sources:
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, Theorem 4.14"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $X$ be a complex normed space, let $M \subseteq X$ be a linear subspace, and
+Assume the Axiom of Choice. Let $X$ be a complex normed space, let $M \subseteq X$ be a linear subspace, and
 let $f_0:M \to \mathbb{C}$ be a bounded complex linear functional. Then there
 exists a bounded complex linear functional $F:X \to \mathbb{C}$ such that
 $F|_M=f_0$ and $\|F\|=\|f_0\|$.
 
 ## Facts & Assumptions
 
-**Given:** A complex normed space $X$, a linear subspace $M \subseteq X$, and a bounded complex linear functional $f_0:M \to \mathbb{C}$.
+**Given:** The Axiom of Choice, A complex normed space $X$, a linear subspace $M \subseteq X$, and a bounded complex linear functional $f_0:M \to \mathbb{C}$.
+
+[A1] AC is used through the real extension supplier [L1] in step 2.1.
 
 [L1] A bounded real linear functional on a real normed subspace extends with the same norm ([[thm-hahn-banach-norm-preserving-extension]]).
 

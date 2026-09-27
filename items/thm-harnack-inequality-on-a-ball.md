@@ -4,17 +4,19 @@ kind: theorem
 title: "Harnack inequality on a ball"
 status: published
 origin: pipeline
-deps: [cor-ball-mean-value-property-for-harmonic-functions, lem-sphere-and-ball-measures-scale]
+deps: [cor-ball-mean-value-property-for-harmonic-functions, lem-sphere-and-ball-measures-scale, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-harnack-inequality-on-a-ball). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Tsogtgerel Gantumur, Harmonic functions (2012)"
@@ -27,15 +29,15 @@ sources:
 
 ## Statement
 
-Let $n\ge2$, $R>0$, and let $u\ge0$ be harmonic on $B_R(a)\subset\mathbb R^n$. For every $x\in B_R(a)$,
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $n\ge2$, $R>0$, and let $u\ge0$ be harmonic on $B_R(a)\subset\mathbb R^n$. For every $x\in B_R(a)$,
 $$u(x)\le\left(\frac R{R-|x-a|}\right)^n u(a).$$
 For $0\le r<R$, set $m=\lceil4r/(R-r)\rceil+1$ and $C=2^{nm}$. Then $C^{-1}u(a)\le u(x)\le Cu(a)$ whenever $|x-a|\le r$. No trace on $\partial B_R(a)$ is assumed.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
-[F1] For a harmonic function, the value at a center equals its ball average whenever the closed ball is contained in its open domain. ([[cor-ball-mean-value-property-for-harmonic-functions]]).
+[F1] Under Countable Choice, for a harmonic function the value at a center equals its ball average whenever the closed ball is contained in its open domain ([[cor-ball-mean-value-property-for-harmonic-functions]]).
 
 [F2] Ball volume is $|B_s|=\omega_{n-1}s^n/n$ with $0<\omega_{n-1}<\infty$. ([[lem-sphere-and-ball-measures-scale]]).
 

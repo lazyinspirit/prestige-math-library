@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-smooth-partitions-of-unity-exist-on-manifolds]
+deps: [def-countable-choice, thm-smooth-partitions-of-unity-exist-on-manifolds]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -28,17 +21,24 @@ sources:
       url: "https://www2.math.ethz.ch/will-merry/files/Merry%20-%20Differential%20Geometry%20(2021).pdf"
     - title: "Nigel Hitchin, Differentiable Manifolds"
       url: "https://web.archive.org/web/20201111215108id_/https://people.maths.ox.ac.uk/hitchin/files/LectureNotes/Differentiable_manifolds/manifolds2014.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (cor-smooth-partitions-subordinate-to-a-countable-coordinate-cover). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Every countable cover of a smooth manifold by coordinate balls admits a smooth partition of unity subordinate to that cover.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Every countable cover of a smooth manifold by coordinate balls admits a smooth partition of unity subordinate to that cover.
 
 ## Facts & Assumptions
 
-**Given:** A countable coordinate-ball cover of a smooth manifold.
+**Given:** $\mathrm{AC}_\omega$ and a countable coordinate-ball cover of a smooth manifold.
 
-[L1] Every open cover of a smooth manifold admits a subordinate smooth partition of unity ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
+[L1] Under $\mathrm{AC}_\omega$, every open cover of a smooth manifold admits a subordinate smooth partition of unity ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
 
 ## Proof
 

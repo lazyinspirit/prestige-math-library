@@ -4,7 +4,7 @@ title: Regular quotients and Cohen--Macaulayness
 kind: theorem
 status: published
 origin: pipeline
-deps: [cor-regular-quotient-cohen-macaulay-equivalence]
+deps: [def-axiom-of-choice, cor-regular-quotient-cohen-macaulay-equivalence]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,14 +14,18 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Let $(R,\mathfrak m)$ be Noetherian local, let $0\ne M$ be finite, and let
 $x_1,\ldots,x_r$ be both $M$-regular and an initial segment of a system of
@@ -30,7 +34,7 @@ $M/(x_1,\ldots,x_r)M$ is Cohen--Macaulay.
 
 ## Facts & Assumptions
 
-**Given:** each successive quotient is nonzero, and the remaining parameter tuple shows that each $x_i$ is a parameter element on the preceding quotient.
+**Given:** The Axiom of Choice; each successive quotient is nonzero, and the remaining parameter tuple shows that each $x_i$ is a parameter element on the preceding quotient.
 
 ## Proof
 

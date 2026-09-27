@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [cor-affine-domain-maximal-ideal-height-equals-dimension, cor-minimal-prime-has-height-zero, lem-affine-domain-chain-dimension-formula-step, thm-dimension-formula-for-affine-domains]
+deps: [def-axiom-of-choice, cor-affine-domain-maximal-ideal-height-equals-dimension, cor-minimal-prime-has-height-zero, lem-affine-domain-chain-dimension-formula-step, thm-dimension-formula-for-affine-domains]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -27,24 +20,33 @@ sources:
     - title: "Melvin Hochster, Dimension theory and systems of parameters"
       url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
 ## Statement
 
-Let $k$ be a field and let $A$ be a finite-type $k$-domain. Every saturated prime chain from $(0)$ to a maximal ideal of $A$ has length $\dim A$.
+Assume the Axiom of Choice. Let $k$ be a field and let $A$ be a finite-type $k$-domain. Every saturated prime chain from $(0)$ to a maximal ideal of $A$ has length $\dim A$.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, a finite-type $k$-domain $A$, and a saturated prime chain $$ (0)=\mathfrak p_0\subsetneq\mathfrak p_1\subsetneq\cdots\subsetneq\mathfrak p_r=\mathfrak m. $$
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), a field $k$, a finite-type $k$-domain $A$, and a saturated prime chain $$ (0)=\mathfrak p_0\subsetneq\mathfrak p_1\subsetneq\cdots\subsetneq\mathfrak p_r=\mathfrak m. $$
 
 [L1] In a domain, the minimal prime $(0)$ has height zero ([[cor-minimal-prime-has-height-zero]]).
 
-[L2] Every maximal ideal of an affine domain has height equal to the full dimension ([[cor-affine-domain-maximal-ideal-height-equals-dimension]]).
+[L2] Under Choice, every maximal ideal of an affine domain has height equal to the full dimension ([[cor-affine-domain-maximal-ideal-height-equals-dimension]]).
 
-[L3] For primes $\mathfrak p\subseteq\mathfrak q$ in an affine domain, $$ \operatorname{ht}(\mathfrak q/\mathfrak p)+\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak q)=\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak p) $$ ([[lem-affine-domain-chain-dimension-formula-step]]).
+[L3] Under Choice, for primes $\mathfrak p\subseteq\mathfrak q$ in an affine domain, $$ \operatorname{ht}(\mathfrak q/\mathfrak p)+\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak q)=\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak p) $$ ([[lem-affine-domain-chain-dimension-formula-step]]).
 
-[L4] For every prime $\mathfrak p$ of an affine domain, $$ \operatorname{ht}(\mathfrak p)+\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak p)=\operatorname{trdeg}_k\operatorname{Frac}(A) $$ ([[thm-dimension-formula-for-affine-domains]]).
+[L4] Under Choice, for every prime $\mathfrak p$ of an affine domain, $$ \operatorname{ht}(\mathfrak p)+\operatorname{trdeg}_k\operatorname{Frac}(A/\mathfrak p)=\operatorname{trdeg}_k\operatorname{Frac}(A) $$ ([[thm-dimension-formula-for-affine-domains]]).
 
 ## Proof
 

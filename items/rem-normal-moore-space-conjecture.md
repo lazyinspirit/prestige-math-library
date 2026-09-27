@@ -1,7 +1,7 @@
 ---
 id: rem-normal-moore-space-conjecture
 kind: remark
-title: "The normal Moore space conjecture is independent, and its consistency needs a large cardinal"
+title: "The normal Moore space conjecture and its large-cardinal consistency strength"
 status: published
 origin: session
 proved_here: false
@@ -14,9 +14,9 @@ short: "PMEA gives it; CH refutes it; large cardinals are necessary"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
+    date: 2026-09-26
+    scope: "Current conditional statements; MA+not-CH subsidiary claim checked in cited secondary survey; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
 sources:
   scraped: []
   references:
@@ -28,6 +28,8 @@ sources:
       url: "https://doi.org/10.1090/S0002-9947-1982-0664048-8"
     - title: "P. J. Nyikos, A provisional solution to the normal Moore space problem, Proc. Amer. Math. Soc. 78 (1980), 429-435"
       url: "https://doi.org/10.1090/S0002-9939-1980-0553389-4"
+    - title: "D. H. Fremlin, Real-valued-measurable cardinals, Theorem 8C and Corollary 8G, p. 70"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf"
 pipeline_run: null
 ---
 
@@ -39,7 +41,8 @@ the collection of stars $\mathrm{St}(x, \mathcal{G}_n)$ is a neighbourhood base 
 $x$. The **normal Moore space conjecture** (NMSC) asserts that every normal Moore
 space is metrisable.
 
-**NMSC is not decided by ZFC**, and its two sides have very different costs.
+**Relative to the consistency of ZFC with a strongly compact cardinal, NMSC is
+not decided by ZFC.** Its two sides have very different costs.
 
 **(a) It fails under CH.** Fleissner (1982) constructs a normal nonmetrisable
 Moore space from the continuum hypothesis. Since CH holds in the constructible
@@ -70,10 +73,9 @@ the consistency of ZFC alone.
   inner-model theory and the covering lemma. Two deferred tracks meet here,
   set theory beyond choice and measure theory.
 
-- **Why it matters here.** It is the cleanest example in general topology of a
-  natural question whose answer is not merely independent but genuinely
-  **expensive**: unlike CH ([[rem-continuum-hypothesis]]), one side of it cannot
-  be obtained from Con(ZFC) at all. Any metrisation page in this library must
+- **Why it matters here.** The positive answer has a measurable-cardinal
+  consistency lower bound, unlike CH ([[rem-continuum-hypothesis]]).
+  Any metrisation page in this library must
   therefore state Bing's and Nagata-Smirnov's theorems and stop; the tempting
   further step, dropping collectionwise normality to plain normality, is not
   available and cannot be made available by working harder.

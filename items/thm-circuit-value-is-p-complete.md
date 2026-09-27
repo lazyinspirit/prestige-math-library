@@ -10,9 +10,12 @@ provenance:
 deps: [def-p-complete-under-logspace-reductions, lem-polynomial-time-computations-have-logspace-uniform-circuits]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Theorem 6.27"
@@ -37,7 +40,7 @@ one. Then CIRCUIT-VALUE is P-complete under logspace reductions.
 
 **Proof technique:** evaluation and uniform compilation.
 
-1.1 Evaluate a valid circuit in its topological order, retaining its gate values in an array and applying the fixed basis operation at each gate. This takes time polynomial in the encoding length, so CIRCUIT-VALUE is in P. [given, construct]
+1.1 On an arbitrary encoded pair, first check in polynomial time that the circuit syntax, input arity, single output, and predecessor indices form a valid topological ordering; reject malformed pairs. For a valid circuit, evaluate gates in that order, retaining their values in an array and applying the fixed basis operation at each gate. This takes time polynomial in the encoding length, so CIRCUIT-VALUE is in P. [given, construct]
 
 1.2 For $A\in\mathrm P$, choose its fixed P decider $M$ and the family $(C_n)$ supplied by [L2]. On $x$ of length $n$, output $\langle C_n,x\rangle$ by streaming the uniform circuit description and then copying $x$. [L2, construct]
 

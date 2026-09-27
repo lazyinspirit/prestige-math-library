@@ -2,13 +2,14 @@
 id: "lem-auslander-buchsbaum-projective-dimension-one"
 kind: "lemma"
 title: "auslander buchsbaum projective dimension one"
-deps: ["lem-minimal-free-matrix-induces-zero-on-residue-ext", "lem-projective-dimension-from-last-nonzero-betti-number", "lem-finite-local-modules-admit-minimal-free-resolutions", "cor-depth-as-first-nonzero-ext", "thm-long-exact-ext-sequence-in-the-second-variable"]
+deps: ["lem-minimal-free-matrix-induces-zero-on-residue-ext", "lem-projective-dimension-from-last-nonzero-betti-number", "lem-finite-local-modules-admit-minimal-free-resolutions", "cor-depth-as-first-nonzero-ext", "thm-long-exact-ext-sequence-in-the-second-variable", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 1.53, pp.24–25"
@@ -23,11 +24,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-If $M$ is a nonzero finite module of projective dimension one over a nonzero Noetherian local ring $R$, then $\operatorname{depth}R\ge1$ and $\operatorname{depth}M=\operatorname{depth}R-1$.
+Assume the Axiom of Choice. If $M$ is a nonzero finite module of projective dimension one over a nonzero Noetherian local ring $R$, then $\operatorname{depth}R\ge1$ and $\operatorname{depth}M=\operatorname{depth}R-1$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]). Cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[lem-minimal-free-matrix-induces-zero-on-residue-ext]]: For a nonzero commutative Noetherian local ring $(R,\mathfrak m,k)$, let $\alpha:R^s\to R^t$ be a map between finite free modules all of whose matrix entries lie in $\mathfrak m$. Then $\operatorname{Ext}^i_R(k,\alpha)=0$ for every $i\ge0$.
 

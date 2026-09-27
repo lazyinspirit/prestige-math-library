@@ -7,36 +7,38 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-noetherian-ring-and-module, def-divisibility-and-associates-in-a-domain, def-irreducible-and-prime-elements-in-a-domain]
+deps: [def-dependent-choice, def-noetherian-ring-and-module, thm-noetherian-ring-ideal-characterisations, def-divisibility-and-associates-in-a-domain, def-irreducible-and-prime-elements-in-a-domain]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
 sources:
   scraped: []
   references:
     - title: "The Stacks Project, Lemma 10.120.3"
       url: "https://stacks.math.columbia.edu/tag/034O"
 pipeline_run: frontier-22
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Every nonzero nonunit in a Noetherian integral domain is a finite product of
+Assume Dependent Choice ([[def-dependent-choice]]). Every nonzero nonunit in a Noetherian integral domain is a finite product of
 irreducible elements.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian integral domain $R$ and a nonzero nonunit $a\in R$.
+**Given:** Dependent Choice, a Noetherian integral domain $R$, and a nonzero nonunit $a\in R$.
 
-[L1] Noetherianity means the ascending chain condition on ideals, in particular on principal ideals ([[def-noetherian-ring-and-module]]).
+[L1] Under Dependent Choice, every nonempty family of ideals in a Noetherian ring has an inclusion-maximal member ([[def-noetherian-ring-and-module]], [[thm-noetherian-ring-ideal-characterisations]]). The use in step 1.1 is the only choice-dependent step.
 
 [L2] Divisibility and associates are those of [[def-divisibility-and-associates-in-a-domain]], and irreducible elements are those of [[def-irreducible-and-prime-elements-in-a-domain]].
 

@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-dual-space-of-a-normed-space,
+deps: [def-axiom-of-choice, def-dual-space-of-a-normed-space,
        thm-hahn-banach-norm-preserving-extension,
        thm-complex-hahn-banach-norm-preserving-extension]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -26,18 +19,30 @@ sources:
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, Section 4.2"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $X$ be a normed space over $\mathbb{R}$ or $\mathbb{C}$, and let
+Assume the Axiom of Choice. Let $X$ be a normed space over $\mathbb{R}$ or $\mathbb{C}$, and let
 $x \in X$ be nonzero. Then there exists $f \in X^*$ such that
 
 $$\|f\|=1 \qquad \text{and} \qquad f(x)=\|x\|.$$
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector $x \in X$ with $x \ne 0$.
+**Given:** The Axiom of Choice, A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector $x \in X$ with $x \ne 0$.
+
+[A1] AC is used through real or complex extension [L2] or [L3] in steps 2.1 and 2.2.
 
 [L1] The dual space $X^*$ is the space of bounded linear functionals on $X$ ([[def-dual-space-of-a-normed-space]]).
 

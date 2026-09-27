@@ -15,6 +15,6 @@ examples: [ex-polynomial-algebras-are-faithfully-flat,
 These examples show the abstract flatness criteria in the smallest standard
 families: polynomial algebras, localizations, fraction fields, product-ring
 quotients by idempotents, nilpotent quotients that fail flatness, principal-open
-faithfully flat covers, and the residue-basis lifting that turns finite flat
+faithfully flat covers, and, under the Axiom of Choice, the residue-basis lifting that turns finite flat
 local modules into free ones in the Noetherian case written on the companion
 page.

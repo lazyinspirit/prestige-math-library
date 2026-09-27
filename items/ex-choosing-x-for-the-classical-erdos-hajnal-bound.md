@@ -9,16 +9,15 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [rem-fox-sudakov-quantitative-density-theorem,
-       def-logarithm-to-a-base]
+deps: [def-logarithm-to-a-base, cor-fox-sudakov-quantitative-induced-density-bound]
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -28,8 +27,8 @@ sources:
 
 ## Example
 
-Fix a finite graph $H$, let $C_H>0$ be the constant from
-[[rem-fox-sudakov-quantitative-density-theorem]], and let $G$ be an $H$-free
+Fix a nonempty finite graph $H$, let $C_H>0$ be the constant from
+[[cor-fox-sudakov-quantitative-induced-density-bound]], and let $G$ be an $H$-free
 graph on $n$ vertices. Write $L:=\log_2 n$, assume $L>2C_H$, and choose
 $x:=2^{-\sqrt{L/(2C_H)}}$.
 
@@ -37,7 +36,7 @@ $x:=2^{-\sqrt{L/(2C_H)}}$.
 
 **Given:** The data in the Example, in particular $L>2C_H$.
 
-[L1] For $0<x<1/2$, the quantitative-density theorem gives every $H$-free $n$-vertex graph a set $S$ of order at least $2^{-C_H(\log_2(1/x))^2}n$ such that $G[S]$ or its complement has at most $x\binom{|S|}{2}$ edges ([[rem-fox-sudakov-quantitative-density-theorem]]).
+[L1] For nonempty $H$ and $G$ and $0<x<1/2$, the proved quantitative-density corollary gives every $H$-free $n$-vertex graph a nonempty set $S$ of order at least $2^{-C_H(\log_2(1/x))^2}n$ such that $G[S]$ or its complement has at most $x\binom{|S|}{2}$ edges ([[cor-fox-sudakov-quantitative-induced-density-bound]]). The hypothesis $L>2C_H>0$ ensures $n>1$, so $G$ is nonempty.
 
 ## Verification
 
@@ -47,4 +46,4 @@ $x:=2^{-\sqrt{L/(2C_H)}}$.
 
 2.1 Therefore $2^{-C_H(\log_2(1/x))^2}n=2^{-C_H\cdot L/(2C_H)}n=2^{-L/2}n=\sqrt n$. [step 1.1, L1, algebra]
 
-3.1 So the source theorem guarantees a dense-or-sparse set of order at least $\sqrt n$. [step 2.1, L1] ∎
+3.1 So the proved quantitative-density corollary guarantees a dense-or-sparse set of order at least $\sqrt n$. [step 2.1, L1] ∎

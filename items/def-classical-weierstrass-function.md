@@ -9,18 +9,18 @@ provenance:
   proof: not-applicable
 deps: [def-series-of-real-functions, def-sine-and-cosine-by-power-series,
        def-pi-via-first-positive-cosine-zero, def-integer-power, def-integers,
-       lem-int-embeds-rat, lem-rat-embeds-dense]
-justified_by: [thm-classical-weierstrass-series-converges-uniformly]
+       lem-int-embeds-rat, lem-rat-embeds-dense,
+       cor-trigonometric-parity-and-pythagorean-identity, thm-geometric-series]
 aliases: []
 landmark: true
 short: "$W_{a,b}(x)=\\sum a^n\\cos(b^n\\pi x)$"
 verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-21
-  audited: 2026-08-21
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -41,8 +41,12 @@ $a,b$ is
 
 $$W_{a,b}(x):=\sum_{n=0}^{\infty}a^n\cos(b^n\pi x).$$
 
-The sum begins at $n=0$. Its existence at every real $x$, and the fact that it
-defines a continuous real function, are proved in
+The sum begins at $n=0$. For each $x$, the estimate
+$|a^n\cos(b^n\pi x)|\le a^n$ follows from
+[[cor-trigonometric-parity-and-pythagorean-identity]], and
+$\sum_{n=0}^{\infty}a^n$ converges by [[thm-geometric-series]] since $0<a<1$.
+Thus the displayed series converges absolutely and defines a real number at
+every $x$. Continuity of the resulting function is proved in
 [[thm-classical-weierstrass-series-converges-uniformly]].
 
 ## Remarks

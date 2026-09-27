@@ -7,28 +7,32 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-strong-linkage-order-on-weights, prop-verma-composition-multiplicities-are-finite, lem-first-jantzen-filtration-term-is-the-verma-maximal-submodule, thm-jantzen-sum-formula-for-a-verma-module]
+deps: [def-axiom-of-choice, def-strong-linkage-order-on-weights, prop-verma-composition-multiplicities-are-finite, lem-first-jantzen-filtration-term-is-the-verma-maximal-submodule, thm-jantzen-sum-formula-for-a-verma-module]
 proof_strategy: induction
-verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, Theorem 20.13"
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-04-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 If $[M(\lambda):L(\mu)]\ne0$, then $\mu\uparrow\lambda$.
 
 ## Facts & Assumptions
 
-**Given:** Strong linkage [[def-strong-linkage-order-on-weights]], finite multiplicities [[prop-verma-composition-multiplicities-are-finite]], the first filtration term [[lem-first-jantzen-filtration-term-is-the-verma-maximal-submodule]], and the Jantzen sum formula [[thm-jantzen-sum-formula-for-a-verma-module]].
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), strong linkage [[def-strong-linkage-order-on-weights]], finite multiplicities under that Choice premise [[prop-verma-composition-multiplicities-are-finite]], the first filtration term [[lem-first-jantzen-filtration-term-is-the-verma-maximal-submodule]], and the Jantzen sum formula [[thm-jantzen-sum-formula-for-a-verma-module]].
 
 ## Proof
 

@@ -4,30 +4,35 @@ kind: lemma
 title: "Elementary kernel and range annihilator identities"
 status: published
 origin: pipeline
-deps: ["def-transpose-of-a-bounded-operator", "def-annihilator-and-preannihilator", "cor-annihilator-detects-closure", "thm-dual-norms-every-vector"]
+deps: [def-axiom-of-choice, "def-transpose-of-a-bounded-operator", "def-annihilator-and-preannihilator", "cor-annihilator-detects-closure", "thm-dual-norms-every-vector"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Theorem 4.8(i), pp.174; Corollary 2.55, p.84"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
 proof_strategy: "The first identity is composition; for the second norming separates Tx from zero. Apply the published primal annihilator-closure theorem for the third. This independent lemma carries all norm-topology uses; no FA-8 result is invoked."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $$(\operatorname{ran}T)^\perp=\ker T^*,\qquad {}^\perp(\operatorname{ran}T^*)=\ker T,\qquad \overline{\operatorname{ran}T}^{\|\cdot\|}={}^\perp(\ker T^*).$$ The closure in the last identity is in $Y$.
+Assume the Axiom of Choice. Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $$(\operatorname{ran}T)^\perp=\ker T^*,\qquad {}^\perp(\operatorname{ran}T^*)=\ker T,\qquad \overline{\operatorname{ran}T}^{\|\cdot\|}={}^\perp(\ker T^*).$$ The closure in the last identity is in $Y$.
 
 ## Facts & Assumptions
 
-**Given:** The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+**Given:** The Axiom of Choice, The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+
+[A1] AC is used through norming separation [F4] in step 1.2 and annihilator closure [F3] in step 2.1.
 
 [F1] From [[def-transpose-of-a-bounded-operator]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded and linear between normed spaces. Its **transpose**, or Banach adjoint, is $T^*:Y^*\longrightarrow X^*,\qquad (T^*g)(x)=g(Tx).$ The duals are def-dual-space-of-a-normed-space. Composition is bounded by lem-composition-operator-norm-inequality, so this has the displayed codomain. It is linear in $g$ over $\mathbb K$. No complex conjugation is inserted; a Hilbert adjoint uses a separate inner-product identification.
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space,
+deps: [def-countable-choice, thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space,
        prop-a-proper-injective-immersion-is-a-smooth-embedding,
        lem-a-generic-linear-projection-preserves-injectivity-and-immersion,
        lem-a-generic-projection-can-preserve-properness]
@@ -16,8 +16,13 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (thm-weak-whitney-proper-embedding-theorem). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,12 +36,14 @@ sources:
 
 ## Statement
 
-Every smooth $n$-manifold admits a proper smooth embedding into
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Every smooth
+$n$-manifold admits a proper smooth embedding into
 $\mathbb R^{2n+1}$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth $n$-manifold $M$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth $n$-manifold $M$. The choice
+assumption is used in [L1] to obtain the initial finite-dimensional embedding.
 
 [L1] The manifold embeds in some finite-dimensional Euclidean space, and in the noncompact case one may choose an embedding $(G,\rho)$ with $G$ bounded and $\rho$ proper ([[thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space]]).
 

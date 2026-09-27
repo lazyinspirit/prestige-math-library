@@ -41,4 +41,4 @@ comparison identifies completion with extension of scalars, and the ideal
 criterion then yields flatness. From there the page derives faithful flatness
 under the Jacobson-radical hypothesis, Noetherianity of the completed ring, the
 local-ring comparison, completeness of finite modules over complete Noetherian
-rings, complete Nakayama, and the final Hilbert-Samuel invariance statement.
+rings, complete Nakayama, and, under the Axiom of Choice, the final Hilbert–Samuel dimension and polynomial invariance statement.

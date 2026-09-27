@@ -7,11 +7,12 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Miller, Algebraic Topology I lecture notes, Definition 11.1 and ensuing verification, pp.25–26"
@@ -51,7 +52,7 @@ For every fixed abelian group $G$, singular homology $H_n(-,-;G)$, extended by z
 
 1.2 For a homotopy of pairs, the prism chain homotopy on $C_*(X;G)$ preserves $C_*(A;G)$: every prism simplex over a simplex in $A$ stays in the target subspace. It therefore descends to relative chain quotients. The identity $f_\#-g_\#=\partial P+P\partial$ gives relative homotopy invariance, with the same absolute conclusion as F2. Negative degrees are zero. [F2, given]
 
-1.3 Put $W=U\cap V$ and form $D=U\cup_W(W\times[0,1])\cup_W V$, attaching $W\times\{0\}$ to $U$ and $W\times\{1\}$ to $V$. Its collapse $c:D\to U\cup V$ is a homotopy equivalence relative to $V$. Here is the cofibration argument: write $D=(U\cup_W W\times[0,1])\cup_W V$. The mapping cylinder of the inclusion $W\hookrightarrow U$ retracts onto $U$, and the HEP for $(U,W)$ extends the path of $W$ from the zero end to the one end to a map $U\times[0,1]\to U\cup_W W\times[0,1]$. The resulting end map fixes the attaching copy of $W$ at the one end. The cylinder collapse and this end map are inverse up to homotopies fixed on that attaching copy, by contracting the traversed interval followed by its reverse. The HEP for the cylinder pair extends this contraction. Gluing $V$ by its identity gives the claimed relative equivalence. This uses F6 for the two CW inclusions. [F6]
+1.3 Put $W=U\cap V$ and form $D=U\cup_W(W\times[0,1])\cup_W V$, attaching $W\times\{0\}$ to $U$ and $W\times\{1\}$ to $V$. Let $c:D\to X=U\cup V$ collapse each cylinder fibre to $W$. Since $(U,W)$ is a CW pair, [F6] extends the homotopy $W\times[0,1]\to D$, $(w,t)\mapsto(w,t)$, starting from the inclusion $j_U:U\to D$, to a homotopy $H_U:U\times[0,1]\to D$ with $H_U(w,t)=(w,t)$. Its end map sends $W$ to the copy in $V$, so it glues with $j_V:V\to D$ to give $h:X\to D$ that fixes $V$. The maps $cH_U(-,t)$ on $U$ and the identity on $V$ glue to a homotopy $ch\simeq\operatorname{id}_X$ fixed on $V$, since $cH_U(w,t)=w$. Conversely, use $H_U(-,t)$ on $U$, $(w,s)\mapsto(w,s+t(1-s))$ on the cylinder, and the identity on $V$. These formulas agree at both attaching ends and give a homotopy $\operatorname{id}_D\simeq hc$ fixed on $V$. Thus $c$ is a homotopy equivalence of pairs $(D,V)\simeq(X,V)$, with explicit relative homotopies. [F6, algebra]
 
 2.1 In $D$ set $O=U\cup (W\times[0,2/3))$ and $N=V\cup(W\times(1/3,1])$. They are open and cover $D$. The closure of $D\setminus O$ is contained in $N$. Excision therefore identifies $H_n(O,O\cap N;G)$ with $H_n(D,N;G)$. Retraction of $N$ to $V$ and the pair exact sequence identify the latter with $H_n(D,V;G)$. The collapse $O\to U$ restricts on $O\cap N=W\times(1/3,2/3)$ to projection onto $W$. Both absolute maps are homotopy equivalences, so their commuting pair exact sequences give an isomorphism $H_n(O,O\cap N;G)\to H_n(U,W;G)$ by the exact-sequence injectivity and surjectivity chase. No inverse map of these pairs is needed. All maps commute with collapse to $(U\cup V,V)$, so the resulting isomorphism is the homomorphism of the original inclusion. [F5, F3, F4, step 1.2, step 1.3]
 

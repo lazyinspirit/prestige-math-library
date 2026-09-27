@@ -42,7 +42,7 @@ is continuous.
 
 **Proof technique:** direct.
 
-1.1 Choose $\rho>0$ with $0<\rho<r/2$. For all sufficiently large $k$, [given, choose, algebra] $|r_k-r|<\rho$ and $\|x_k-x\|_2<\rho$. Then $$B(x,r-\rho)\subseteq B(x_k,r_k)\subseteq B(x,r+2\rho).$$ Since $f$ is locally integrable, the function $$g:=|f|\,\mathbf{1}_{B(x,r+2\rho)}$$ is integrable. [given, choose, algebra]
+1.1 Choose $\rho>0$ with $0<\rho<r/2$. For all sufficiently large $k$, [given, choose, algebra] $|r_k-r|<\rho$ and $\|x_k-x\|_2<\rho$. Then $$B(x_k,r_k)\subseteq B(x,r+2\rho).$$ Since $f$ is locally integrable, the function $$g:=|f|\,\mathbf{1}_{B(x,r+2\rho)}$$ is integrable. [given, choose, algebra]
 
 1.2 Put $\chi_k:=\mathbf{1}_{B(x_k,r_k)}$ and $\chi:=\mathbf{1}_{B(x,r)}$. [algebra] If $y\notin\partial B(x,r)$, then $\|y-x\|_2\ne r$, so for all sufficiently large $k$ the membership of $y$ in $B(x_k,r_k)$ agrees with its membership in $B(x,r)$. Thus $\chi_k(y)\to\chi(y)$ for every $y\notin\partial B(x,r)$. [algebra]
 

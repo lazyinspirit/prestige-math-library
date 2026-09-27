@@ -1,5 +1,4 @@
 ---
----
 page: ext-and-balanced-resolutions
 title: "Ext and Balanced Resolutions"
 status: published

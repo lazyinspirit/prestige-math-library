@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, def-simple-integral-against-a-signed-or-complex-measure, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
+deps: [def-radon-nikodym-derivative, def-simple-integral-against-a-signed-or-complex-measure, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Theorem 13.4"
@@ -39,7 +39,7 @@ $$\int g\,d\nu=\int gh\,d\mu.$$
 
 **Given:** A representative $h$ of $d\nu/d\mu$.
 
-[L1] A representative of a Radon-Nikodym derivative recovers the measurable-set values of the measure: for signed measures by the Radon-Nikodym theorem, and for finite complex measures by the complex corollary. ([[def-radon-nikodym-derivative]], [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]])
+[L1] By definition, a representative of a Radon-Nikodym derivative satisfies the measurable-set integral formula ([[def-radon-nikodym-derivative]]). Its existence is not needed here because $h$ is supplied.
 
 [L3] For a simple function in canonical disjoint form with each $|\nu|(E_j)<+\infty$, the simple integral against $\nu$ is $$\int g\,d\nu=\sum_{j=1}^m c_j\nu(E_j).$$ ([[def-simple-integral-against-a-signed-or-complex-measure]])
 
@@ -51,4 +51,6 @@ $$\int g\,d\nu=\int gh\,d\mu.$$
 
 1.1 The measurable-set identity $\nu(E)=\int_Eh\,d\mu$ is exactly [L1]. [L1, given]
 
-2.1 If $g=\sum_{j=1}^m c_j\chi_{E_j}$ is canonical disjoint and each $|\nu|(E_j)<+\infty$, then [L3] and step 1.1 give $$\int g\,d\nu=\sum_{j=1}^m c_j\nu(E_j)=\sum_{j=1}^m c_j\int_{E_j}h\,d\mu.$$ If, in addition, the Lebesgue integral of $gh$ is defined, then [L4] identifies the same finite sum with $\int gh\,d\mu$. [L3, L4, step 1.1, algebra] ∎
+2.1 For each nonzero level set $E_j$, the hypothesis $|\nu|(E_j)<+\infty$ makes $h\mathbf1_{E_j}$ integrable. In the signed case, apply step 1.1 to $E_j\cap\{h\ge0\}$ and $E_j\cap\{h<0\}$: the positive and negative integrals are finite because the corresponding values of $\nu$ have absolute value at most $|\nu|(E_j)$. In the finite complex case, $h\in L^1(\mu)$ already by the definition of its derivative. [L1, given, algebra]
+
+3.1 If $g=\sum_{j=1}^m c_j\chi_{E_j}$ is canonical disjoint, then [L3] and step 1.1 give $$\int g\,d\nu=\sum_{j=1}^m c_j\nu(E_j)=\sum_{j=1}^m c_j\int_{E_j}h\,d\mu.$$ By step 2.1, every $h\mathbf1_{E_j}$ is in $L^1(\mu)$, so [L4] identifies this finite sum with $\int gh\,d\mu$. [L3, L4, step 1.1, step 2.1, algebra] ∎

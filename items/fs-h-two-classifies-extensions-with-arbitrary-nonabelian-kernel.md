@@ -7,11 +7,15 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, rem-nonabelian-extension-obstruction-in-h-three]
+deps: [def-normalized-two-cocycle-and-two-coboundary, def-second-cohomology-by-factor-sets, def-g-module-over-a-commutative-ring, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,16 +34,16 @@ kernel $N$.
 
 **Given:** A nonabelian kernel $N$.
 
-[L1] The theorem on this page classifies extensions only for abelian kernels ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L1] Ordinary $H^2(G,M)$ here is the quotient of additive cocycle and coboundary groups for an abelian $G$-module $M$ ([[def-normalized-two-cocycle-and-two-coboundary]], [[def-second-cohomology-by-factor-sets]], [[def-g-module-over-a-commutative-ring]]).
 
-[L2] For nonabelian kernels the obstruction moves to $H^3$ ([[rem-nonabelian-extension-obstruction-in-h-three]]).
+[L2] The published extension-classification theorem fixes an abelian $G$-module $M$ and its action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 The hypothesis of [L1] requires the kernel to be abelian, so it does not apply to a general nonabelian $N$. [L1, given]
+1.1 For a nonabelian group $N$, the coefficient $N$ is not an abelian group, hence is not an abelian $G$-module of the type required by [L1]. Consequently the ordinary group $H^2(G,N)$ asserted in the false claim is not defined by the cited construction. [given, L1]
 
-2.1 The boundary remark [L2] states the right replacement: nonabelian extensions are controlled by an $H^3$ obstruction together with an $H^2$ torsor when the obstruction vanishes. So a single $H^2$ group does not classify them. [L2, step 1.1]
+2.1 The classification in [L2] concerns extensions with a fixed abelian kernel and fixed action, so it cannot supply a classification for arbitrary nonabelian $N$. The proposed classification by the ordinary group $H^2(G,N)$ is therefore ill-typed and false as stated. [step 1.1, L2]
 
-3.1 Therefore the statement is false. [step 2.1] ∎
+3.1 This refutes the false claim without invoking any unproved nonabelian obstruction statement. [step 2.1] ∎

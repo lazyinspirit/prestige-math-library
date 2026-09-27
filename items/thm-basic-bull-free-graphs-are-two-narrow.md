@@ -7,19 +7,31 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-alpha-narrow-graph, prop-bull-free-graphs-are-complement-invariant, thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect, rem-weak-perfect-graph-theorem-for-the-bull-route, def-basic-and-composite-bull-free-graphs]
+deps: [def-alpha-narrow-graph, prop-bull-free-graphs-are-complement-invariant, thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect, thm-lovasz-perfect-graph-criterion-and-complement-invariance, def-basic-and-composite-bull-free-graphs]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Maria Chudnovsky and Shmuel Safra, The Erdős-Hajnal conjecture for bull-free graphs, Theorem 4.4"
       url: "https://web.math.princeton.edu/~mchudnov/EHbullfree.pdf"
+verification:
+  precheck: pass
+  review_pending:
+    date: '2026-09-24'
+    reason: 'Open load-bearing chain: rem-strong-perfect-graph-theorem-for-the-bull-route
+      -> thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect
+      -> thm-basic-bull-free-graphs-are-two-narrow -> thm-bull-free-graphs-are-two-narrow
+      -> cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter.
+      Chvátal–Sbihi 1987 restricted bull-free Berge perfection would suffice; original
+      Springer PDF requires login. Chudnovsky–Safra Theorem 4.3 uses full SPGT. Open
+      Numdam 2005 bull-reducible paper cites Chvátal–Sbihi as external Theorem 1;
+      open Chudnovsky–Penev 2012 structure paper uses SPGT. A complete structural
+      proof of this restricted criterion is still required.'
+    evidence: /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-07-receipts.jsonl
+  audited: 2026-09-26
 ---
 
 ## Statement
@@ -34,7 +46,7 @@ Every basic bull-free graph is two-narrow.
 
 [L1] For every vertex $u$, either $G[N(u)]$ or $G[V(G)\setminus N[u]]$ is perfect ([[thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect]]).
 
-[L2] Perfectness is complement-invariant ([[rem-weak-perfect-graph-theorem-for-the-bull-route]]).
+[L2] Perfectness is complement-invariant ([[thm-lovasz-perfect-graph-criterion-and-complement-invariance]]).
 
 [L3] Bull-freeness, hence basicness, is complement-invariant ([[prop-bull-free-graphs-are-complement-invariant]], [[def-basic-and-composite-bull-free-graphs]]).
 

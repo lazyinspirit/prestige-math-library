@@ -1,0 +1,9 @@
+# CH example: explicit ZFC premise (2026-09-27)
+
+`ex-ch-collapses-classical-cardinal-invariants` previously exported only CH while its Facts F1–F4 use ZFC claims from the basic cardinal-invariant suppliers. In particular the definitions of $b,d$ and the null/meagre add/cov/non/cof minima explicitly work in ZFC, and the ideal-bounds lemma states its inequalities in ZFC. CH as written did not discharge those choice premises. The pre-edit guard was `2ddb9bb2b93997a241b48780df1462e9f763b32365a1614a699020d5b9feebf7`.
+
+The current Statement begins `In ZFC (with the Axiom of Choice [[def-axiom-of-choice]]), assume the Continuum Hypothesis ...`; the Given and F5 choice accounting agree. The carrier and batch-13 page manifest now declare `def-axiom-of-choice`, and F5's exact cited Definition is in the batch-13 and merged proof contracts. Current guard: `224adc6d306e18c251bea2c7a1520f0c4ff06560dc1d01b68f22f06648ee8615`. The CH pinching proof and fourteen conclusions are otherwise unchanged.
+
+`tools/consumers.mjs` reports zero direct item consumers. The home page `library/foundations/eastons-theorem-and-cardinal-invariants-of-the-continuum-examples.md` lists this example in its inventory but makes no premise-sensitive mathematical use of it. No downstream item changes follow from this Statement repair.
+
+Owner plan delta: add `def-axiom-of-choice` to this item’s deps and prefix its existing `statement` summary with `In ZFC, ` (or the equivalent `In ZFC, assuming CH, ...`). Proposed defect-ledger row: `confirmed_nonfatal` missing exported AC prerequisite on pre-edit guard, disposition `fixed` at current guard. Strict batch and merged proof contracts, focused precheck, focused rendercheck, and batch-13 content-policy all pass with zero findings. No shared receipt or Step-5b gate was retried.

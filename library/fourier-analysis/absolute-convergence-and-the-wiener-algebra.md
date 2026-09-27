@@ -7,3 +7,8 @@ examples: []
 ---
 
 Absolute summability makes Fourier synthesis uniformly convergent and turns coefficient convolution into a Banach-algebra product. The page proves the sharp Hölder threshold above one half, a periodic weak-derivative criterion, Wiener inversion, and holomorphic composition.
+
+The Wiener-algebra and general Fourier-coefficient contracts, periodic $L^2$
+weak derivatives, and Bernstein conclusion use Countable Choice as stated.
+Finite coefficient estimates for continuous Holder data use Riemann integrals
+and retain their choice-free arguments.

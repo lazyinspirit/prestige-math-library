@@ -5,18 +5,18 @@ title: "Dominated convergence theorem"
 status: published
 origin: session
 proved_here: false
-deps: [rem-lebesgue-measure-and-integral, rem-fatou-lemma]
-justified_by: []
-forward_refs: []
-aliases: [rem-dct]
-landmark: true
-short: "A single integrable dominating function licenses passage to the limit"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
+    date: 2026-09-26
+    scope: "Current recorded statement and cited passages; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
+deps: [rem-lebesgue-measure-and-integral, rem-fatou-lemma]
+justified_by: []
+forward_refs: [thm-dominated-convergence]
+aliases: [rem-dct]
+landmark: true
+short: "A single integrable dominating function licenses passage to the limit"
 sources:
   scraped: []
   references:
@@ -40,26 +40,28 @@ $$\lim_{n \to \infty} \int_X |f_n - f| \, d\mu = 0, \qquad \text{hence} \qquad \
 
 The domination hypothesis cannot be dropped:
 $f_n = n\,\mathbf{1}_{(0,1/n)}$ on $[0,1]$ converges pointwise to $0$ while
-$\int f_n \, d\lambda = 1$, and the least function dominating all $f_n$ is
-$1/x$, which is not integrable on $(0,1)$.
+$\int f_n \, d\lambda = 1$. There is no integrable common dominator: on
+$0<x<1$ the pointwise supremum of the $f_n(x)$ is
+$\lceil 1/x\rceil-1\ge 1/x-1$, whose integral diverges near $0$.
 
 ## Remarks
 
-**Not proved in this library.** It is recorded with citations and used in no
-proof here.
+**Not proved on this page.** The separate published
+[[thm-dominated-convergence]] supplies a local proof. This page records the
+theorem and its scope without using it in a proof.
 
-**What would prove it.** Fatou's lemma ([[rem-fatou-lemma]]) applied to the
-nonnegative sequences $g + f_n$ and $g - f_n$, whose liminfs are $g + f$ and
-$g - f$; the two resulting inequalities squeeze $\int f_n$ to $\int f$. The
-convergence in $L^{1}$ comes from the same argument applied to
-$2g - |f_n - f| \ge 0$. So the three convergence theorems form one block: the
-monotone convergence theorem is proved from the construction of the integral,
-Fatou from monotone convergence, and this from Fatou.
+**How the published proof works.** After removing one null set for the
+countably many domination and convergence conditions, it bounds
+$|f_n-f|$ by $2g$ and applies reverse Fatou to obtain convergence in
+$L^1$. The integral triangle inequality then gives convergence of the
+integrals. See [[thm-dominated-convergence]] for the proof and
+[[rem-fatou-lemma]] for the underlying limit inequality.
 
 **Which page it serves.** It is the endpoint of the Riemann integral page and of
-the uniform convergence page. Uniform convergence on a bounded interval is what
-this library can offer for interchanging a limit and an integral, and it is a
-much heavier hypothesis than pointwise convergence with a dominating function.
+the uniform convergence page. Uniform convergence on a bounded interval is one
+Riemann-level sufficient condition for interchanging a limit and an integral;
+the published Lebesgue theorem allows pointwise almost-everywhere convergence
+under a single integrable dominator.
 
 **The Riemann-level substitute that is in scope.** Arzela's bounded convergence
 theorem, that a uniformly bounded sequence of Riemann integrable functions on

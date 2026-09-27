@@ -4,16 +4,17 @@ kind: lemma
 title: "The canonical map is natural"
 status: published
 origin: pipeline
-deps: ["def-canonical-map-into-the-bidual", "def-transpose-of-a-bounded-operator", "lem-transpose-is-bounded-and-has-the-same-norm"]
+deps: ["def-canonical-map-into-the-bidual", "def-transpose-of-a-bounded-operator"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Lemma 4.3(ii), p.173"
@@ -33,10 +34,8 @@ Let $\mathbb K=\mathbb R$ or $\mathbb C$. If $T:X\to Y$ is bounded linear betwee
 
 [F2] From [[def-transpose-of-a-bounded-operator]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $T:X\to Y$ be bounded and linear between normed spaces. Its **transpose**, or Banach adjoint, is $T^*:Y^*\longrightarrow X^*,\qquad (T^*g)(x)=g(Tx).$ The duals are def-dual-space-of-a-normed-space. Composition is bounded by lem-composition-operator-norm-inequality, so this has the displayed codomain. It is linear in $g$ over $\mathbb K$. No complex conjugation is inserted; a Hilbert adjoint uses a separate inner-product identification.
 
-[F3] From [[lem-transpose-is-bounded-and-has-the-same-norm]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $T^*:Y^*\to X^*$ is bounded linear and $\|T^*\|=\|T\|$.
-
 ## Proof
 
-1.1 The transpose is bounded, so its transpose $T^{**}:X^{**}\to Y^{**}$ is defined. For $x\in X$ and $g\in Y^*$, $(T^{**}J_Xx)(g)=(J_Xx)(T^*g)=(T^*g)(x)$. [F1, F2, F3]
+1.1 By [F2], $T^*$ is bounded, so its transpose $T^{**}:X^{**}\to Y^{**}$ is defined. For $x\in X$ and $g\in Y^*$, $(T^{**}J_Xx)(g)=(J_Xx)(T^*g)=(T^*g)(x)$. [F1, F2]
 
 2.1 The last expression is $g(Tx)=(J_YTx)(g)$. Equality at every $g$ proves equality in $Y^{**}$ and then equality of operators for every $x$. With $x=0$ or $T=0$ every expression vanishes; the same calculation covers zero spaces. [F1, F2, step 1.1] ∎

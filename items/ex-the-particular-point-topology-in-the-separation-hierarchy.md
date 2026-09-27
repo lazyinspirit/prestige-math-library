@@ -10,20 +10,19 @@ provenance:
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-regular-and-t3-spaces, def-normal-and-t4-spaces, def-hausdorff-space,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
-       def-topological-space, ex-sierpinski-space-is-t0-normal-and-not-regular]
+       def-topological-space]
 justified_by: []
 aliases: []
 landmark: false
 short: "particular-point topology in the hierarchy"
 proof_strategy: direct
 verification:
-  precheck: pass
   verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -56,7 +55,7 @@ subsets of $X$ that do **not** contain $p$. Then:
 
 Clause 4 needs one point more than clause 3, and the extra point is not
 slack: on a two-point set the particular-point topology *is* Sierpinski space,
-which is normal ([[ex-sierpinski-space-is-t0-normal-and-not-regular]]). So this
+which is normal. So this
 family separates the two failures, and it shows that "not regular" and "not
 normal" begin at different sizes.
 
@@ -82,13 +81,15 @@ normal" begin at different sizes.
 
 1.4 Suppose $X$ has at least three points and fix $x, y \in X$ with $x \ne y$, $x \ne p$ and $y \ne p$. Then $\{x\}$ and $\{y\}$ are disjoint nonempty closed sets by [A1]. [A1, assume-hyp]
 
+1.5 If $X=\{p,x\}$, its closed sets are $\varnothing$, $\{x\}$, and $X$ by [A1]. No two disjoint closed sets are both nonempty, so the normality condition in [L2] holds: for each disjoint pair, take the open neighbourhood of the empty set to be $\varnothing$ and that of the other set to be $X$. [A1, L2]
+
 2.1 Under step 1.3 fix $x \in X$ with $x \ne p$; then $\{x\}$ does not contain $p$, so $\{x\}$ is closed by [A1], and $p \notin \{x\}$. [step 1.3, A1]
 
 2.2 Under step 1.4: any open $U \supseteq \{x\}$ and open $V \supseteq \{y\}$ are nonempty, hence both contain $p$ by step 1.1, so $U \cap V \ne \varnothing$ and $(X,\mathcal{T}_p)$ is not normal, which is claim 4. [step 1.1, step 1.4, L2]
 
 3.1 Under step 1.3: any open $U$ with $p \in U$ and any open $V$ with $\{x\} \subseteq V$ are both nonempty, so both contain $p$ by step 1.1 and $U \cap V \ne \varnothing$. Hence the point $p$ and the closed set $\{x\}$ cannot be separated and $(X,\mathcal{T}_p)$ is not regular, which is claim 3. [step 1.1, step 2.1, L2]
 
-4.1 Steps 1.2, 1.3, 3.1 and 2.2 are claims 1 to 4. [step 1.2, step 1.3, step 3.1, step 2.2] ∎
+4.1 Steps 1.2, 1.3, 3.1 and 2.2 are claims 1 to 4, and step 1.5 verifies the two-point observation. [step 1.2, step 1.3, step 3.1, step 2.2, step 1.5] ∎
 
 ## Remarks
 

@@ -4,10 +4,12 @@ title: "Pure Pairs, Forests and Path–Antipath Classes — Examples"
 status: published
 items: []
 examples: [ex-the-path-antipath-theorem-specialized-to-the-five-vertex-path,
-           ex-a-coleaf-is-a-leaf-in-the-complement-of-the-five-vertex-path]
+        ex-the-forest-theorem-specialized-to-the-four-vertex-path,
+        ex-a-coleaf-is-a-leaf-in-the-complement-of-the-five-vertex-path,
+        ex-the-leaf-coleaf-corollary-recovers-the-five-vertex-path-case-from-the-four-vertex-path-case]
 ---
 
-These examples record the first concrete endpoint of the page's path–antipath
-theorem and make the co-leaf convention explicit on the standard $P_5$ test
-case. The remaining planned examples depend on forest and leaf-deletion results
-that are still blocked at step 5.
+These examples illustrate the path–antipath and forest results and the leaf–co-leaf extension construction.
+
+The forest and leaf-deletion proof chains are undergoing repair; publication
+status does not certify that those outstanding proof obligations are closed.

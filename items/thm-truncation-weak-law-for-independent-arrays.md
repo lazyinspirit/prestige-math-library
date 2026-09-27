@@ -9,11 +9,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (thm-truncation-weak-law-for-independent-arrays). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Theorem 2.2.11, pp. 62\u201363; second-moment sufficient form"
@@ -43,7 +44,7 @@ No independence between rows is required.
 
 [F5] [[thm-finite-and-countable-subadditivity-of-measures]]: Let $\mu$ be a measure and let $(E_k)_{k\in\mathbb N}$ be measurable. Then $\mu\left(\bigcup_{k\in\mathbb N}E_k\right)\le\sum_{k=0}^{\infty}\mu(E_k).$ For every $m\in\mathbb N$ one also has $\mu\left(\bigcup_{k<m}E_k\right)\le\sum_{k<m}\mu(E_k),$ including $m=0$, where both sides are $0$.
 
-[F6] [[thm-factorization-of-expectations-for-independent-variables]]: Let $n\ge1$, let $X_0,\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\mathbb R\to\mathbb R$ be Borel measurable for each $i<n$. 1. If every $g_i$ is nonnegative, then $\mathbb E\left[\prod_{i<n}g_i(X_i)\right]=\prod_{i<n}\mathbb E[g_i(X_i)]$ in $[0,+\infty]$. 2. If every $g_i(X_i)$ is integrable, then $\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\mathbb R$.
+[F6] For $n\ge1$, if $X_0,\dots,X_{n-1}$ are independent real random variables and $g_i:\mathbb R\to\mathbb R$ are Borel measurable with each $g_i(X_i)$ integrable, then $\prod_{i<n}g_i(X_i)$ is integrable and $\mathbb E[\prod_{i<n}g_i(X_i)]=\prod_{i<n}\mathbb E[g_i(X_i)]$ in $\mathbb R$ ([[thm-factorization-of-expectations-for-independent-variables]]).
 
 ## Proof
 

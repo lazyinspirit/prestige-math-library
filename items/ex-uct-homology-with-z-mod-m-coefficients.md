@@ -4,8 +4,15 @@ title: "Universal-coefficient homology with cyclic coefficients"
 kind: example
 status: published
 origin: pipeline
-deps: ["thm-universal-coefficient-theorem-for-homology-over-a-pid"]
+deps: ["def-chain-complex-with-coefficients-by-tensoring", "def-homology-object-of-a-chain-complex"]
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Weibel, An Introduction to Homological Algebra"
@@ -13,13 +20,6 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 ---
 
 ## Statement
@@ -32,4 +32,4 @@ For $C=(0\to\mathbb Z\xrightarrow{m}\mathbb Z\to0)$ in degrees $1,0$ and coeffic
 
 1.1 Its degree-one homology is the kernel and its degree-zero homology the cokernel of multiplication by $m$. [given]
 
-2.1 These are respectively the $m$-torsion subgroup and quotient displayed in the statement, exactly as the homological UCT predicts. [step 1.1, algebra] ∎
+2.1 These are respectively the $m$-torsion subgroup and quotient displayed in the statement. The calculation follows directly from the two-term tensor complex. [step 1.1, algebra] ∎

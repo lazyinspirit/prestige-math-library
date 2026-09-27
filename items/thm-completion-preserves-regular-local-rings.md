@@ -2,13 +2,8 @@
 id: "thm-completion-preserves-regular-local-rings"
 kind: "theorem"
 title: "completion preserves regular local rings"
-deps: ["lem-completion-preserves-embedding-dimension", "thm-completion-preserves-dimension-and-hilbert-samuel-data"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-completion-preserves-embedding-dimension", "thm-completion-preserves-dimension-and-hilbert-samuel-data"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "Lecture 25, property (6), p.69"
@@ -18,12 +13,20 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-A nonzero Noetherian local ring $R$ is regular if and only if its maximal-adic completion $\widehat R$ is regular.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). A nonzero Noetherian local ring $R$ is regular if and only if its maximal-adic completion $\widehat R$ is regular.
 
 ## Facts & Assumptions
 
@@ -35,6 +38,6 @@ A nonzero Noetherian local ring $R$ is regular if and only if its maximal-adic c
 
 ## Proof
 
-1.1 Completion preserves the embedding dimension. Applied to the nonzero finite module $R$, the completion dimension theorem also gives $\dim\widehat R=\dim R$, because the support of a ring over itself is its entire spectrum. [F1, F2]
+1.1 Completion preserves the embedding dimension. Under the assumed AC, apply [F2] to the nonzero finite module $R$: the completion dimension theorem gives $\dim\widehat R=\dim R$, because the support of a ring over itself is its entire spectrum. [F1, F2, given]
 
 2.1 Thus $\operatorname{edim}R=\dim R$ holds exactly when $\operatorname{edim}\widehat R=\dim\widehat R$. These are the two regularity conditions. The argument also applies when the common dimension or embedding dimension is zero. [step 1.1, algebra] ∎

@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-peano-system, def-natural-numbers, thm-induction-principle]
+deps: [def-peano-system, def-natural-numbers]
 aliases: [dedekind-recursion, recursion-theorem]
 landmark: true
 short: "$g(0)=a,\\ g(\\sigma n)=f(g n)$ unique"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-recursion). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,7 +42,7 @@ Let $(N,0,\sigma)$ be a Peano system ([[def-peano-system]]), in particular the n
 
 **Given:** a Peano system $(N,0,\sigma)$, a set $A$, an element $a \in A$, and a function $f : A \to A$. Call a set $R \subseteq N \times A$ **closed** when $(0,a) \in R$ and, for all $n \in N$ and $x \in A$, $(n,x) \in R$ implies $(\sigma(n),f(x)) \in R$.
 
-[L1] Induction holds in $N$: any $S \subseteq N$ with $0 \in S$ that is closed under $\sigma$ equals $N$ (axiom P3, [[thm-induction-principle]]).
+[L1] Induction holds in every Peano system $N$: any $S \subseteq N$ with $0 \in S$ that is closed under $\sigma$ equals $N$ (axiom P3 in [[def-peano-system]]).
 
 [L2] In a Peano system $\sigma(n) \ne 0$ (P1) and $\sigma$ is injective (P2) ([[def-peano-system]]).
 

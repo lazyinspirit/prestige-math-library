@@ -1,37 +1,45 @@
 ---
 id: rem-cfsg-refinements-of-the-onan-scott-reduction
 kind: remark
-title: "CFSG enters later refinements of the O'Nan-Scott reduction"
+title: "CFSG in the cited O'Nan-Scott proof and later refinements"
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-supplied
-deps: [thm-onan-scott-classification-of-finite-primitive-groups]
+deps: []
 proved_here: false
 external_dependency:
-  source_url: "https://web.archive.org/web/20180712185154if_/http://www.maths.qmul.ac.uk:80/~lsoicher/designtheory.org/library/encyc/topics/primitive.pdf"
-  exact_statement: "The structural O'Nan-Scott classification precedes the later CFSG-dependent analysis of the almost simple and related families."
-  local_proof_attempt: "A local proof would require the classification of finite simple groups and the detailed case analysis of primitive almost-simple and related types. This page develops only the socle-level reduction, not those global refinements."
-  necessity: "The batch needs an honest boundary marker separating the structural five-type theorem from later CFSG-driven refinements and applications."
-verification:
-  sources_checked:
-    date: 2026-08-27
-    scope: citations
-    by: session-audit
-  precheck: n/a
+  source_url: "https://doi.org/10.1017/S144678870003216X"
+  exact_statement: "The cited LPS five-type proof invokes Schreier in its twisted-wreath and regular simple-socle branches; later detailed family analysis uses further CFSG information."
+  local_proof_attempt: "The earlier remark incorrectly placed all CFSG consequences after the five-type reduction. The LPS source was read directly and the two Schreier uses were located."
+  necessity: "This is a source-scope remark; it does not assert that CFSG is logically necessary for every possible proof of the five-type theorem."
 sources:
   scraped: []
   references:
+    - title: "Liebeck, Praeger and Saxl, On the O'Nan-Scott Theorem for Finite Primitive Permutation Groups, pp. 394–396"
+      url: "https://doi.org/10.1017/S144678870003216X"
+    - title: "Stephen D. Smith, Applying the Classification of Finite Simple Groups, §§1.5 and 6.1"
+      url: "https://homepages.math.uic.edu/~smiths/book.pdf"
     - title: "Leonard H. Soicher, Primitive permutation groups"
       url: "https://web.archive.org/web/20180712185154if_/http://www.maths.qmul.ac.uk:80/~lsoicher/designtheory.org/library/encyc/topics/primitive.pdf"
+verification:
+  precheck: n/a
+  sources_checked:
+    date: '2026-09-24'
+    scope: Cited statement and missing local prerequisite examined; no proof-completion
+      verdict. See /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-06-receipts.jsonl
+    by: agent-06 (owner-delegated GPT-6-Sol xhigh)
 ---
 
-The O'Nan-Scott theorem classifies finite primitive permutation groups by the
-structure of their socles and actions. Later refinements, especially the
-detailed analysis of the almost simple and related families, bring in the
-classification of finite simple groups.
+The five-type O'Nan–Scott theorem sorts finite primitive permutation groups by
+their socles and actions. The cited Liebeck–Praeger–Saxl proof already invokes
+the Schreier theorem, a CFSG consequence: on printed p. 394 it uses
+solvability of outer automorphism groups to identify the twisted-wreath
+kernel, and on printed pp. 395–396 it uses the same theorem in the regular
+simple-socle exclusion. Later refinements, including detailed analysis of
+almost-simple families, use further information about finite simple groups.
 
-This page records that boundary but does not prove it here. The local argument
-stops at the structural reduction given by
-[[thm-onan-scott-classification-of-finite-primitive-groups]].
+These source dependencies do not show that CFSG is logically necessary for
+every proof of the five-type theorem. The library has not supplied a complete
+local proof of that theorem.

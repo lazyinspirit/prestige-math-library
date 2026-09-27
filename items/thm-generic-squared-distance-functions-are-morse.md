@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-morse-functions-are-transverse-differentials, thm-parametric-transversality, prop-the-zero-section-is-a-smooth-embedding]
+deps: [lem-morse-functions-are-transverse-differentials, thm-morse-sard-for-euclidean-maps]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -26,6 +19,13 @@ sources:
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes-11.pdf"
     - title: "Shintaro Fushida-Hardy, Morse theory"
       url: "https://www.scribd.com/document/488533132/morse"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (thm-generic-squared-distance-functions-are-morse). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
@@ -42,18 +42,16 @@ is Morse.
 
 [F1] A smooth function is Morse exactly when its differential section is transverse to the zero section ([[lem-morse-functions-are-transverse-differentials]]).
 
-[L1] Parametric transversality makes the set of bad parameters null once the total family is transverse to the target submanifold ([[thm-parametric-transversality]]).
+[L1] The critical values of a smooth Euclidean map $U\subseteq\mathbb R^N\to\mathbb R^N$ form a null set ([[thm-morse-sard-for-euclidean-maps]]).
 
-[L2] The zero section of the cotangent bundle is an embedded submanifold ([[prop-the-zero-section-is-a-smooth-embedding]]).
-
-[A1] For fixed $p\in\mathbb R^N$ and $x\in M$, the differential of $d_p$ at $x$ is the cotangent vector $v\mapsto 2(x-p)\cdot v$ on $T_xM$. Varying the parameter $p$ changes this differential by $v\mapsto -2w\cdot v$, and as $w$ ranges over $\mathbb R^N$ these restrictions realize every cotangent vector on $T_xM$.
+[A1] In local coordinates $x(u)$ on $M$, the critical-point equations for $d_p$ are $(p-x(u))\cdot\partial_i x(u)=0$. A smooth orthonormal frame of the Euclidean normal spaces exists locally by finite-dimensional Gram–Schmidt after shrinking a chart.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Define a smooth family of cotangent sections by $$\mathcal D:M\times\mathbb R^N\to T^*M,\qquad \mathcal D(x,p)=d(d_p)_x.$$ By [L2], the zero section is an embedded submanifold of the target bundle. At any zero $(x,p)$, the parameter-derivative description in [A1] spans the full fibre $T_x^*M$, so $\mathcal D$ is transverse to the zero section. [L2, A1, given, construct]
+1.1 If $\dim M=0$, compactness makes $M$ finite and every function on it is Morse. Assume $m=\dim M>0$, so $N\ge1$. Compactness supplies finitely many coordinate patches $x_j:U_j\to M$ on which there are smooth orthonormal normal frames $e_{j,a}(u)$, $1\le a\le N-m$. Each critical pair $(x_j(u),p)$ satisfies the equations in [A1], hence has a unique representation $p=\Psi_j(u,t):=x_j(u)+\sum_{a=1}^{N-m}t_a e_{j,a}(u)$. Thus the critical-pair manifold over this patch is parametrized by the open Euclidean set $U_j\times\mathbb R^{N-m}$, and the projection to centers is the smooth map $\Psi_j$ to $\mathbb R^N$. [A1, given]
 
-2.1 Apply [L1] to the family $\mathcal D$. The bad centers $p$ for which $d(d_p)$ is not transverse to the zero section form a null subset $E\subseteq\mathbb R^N$. For every $p\notin E$, [F1] turns this transversality conclusion into the statement that $d_p$ is Morse. [F1, L1, step 1.1]
+2.1 Put $H_i(u,p)=(p-x_j(u))\cdot\partial_i x_j(u)$. At a critical pair, the derivative of $H=(H_i)$ in the $p$ direction has rank $m$, because the tangent vectors $\partial_i x_j$ are independent. Hence a tangent vector to the critical-pair manifold lies in the kernel of the center projection precisely when $D_uH(u,p)$ has a nonzero kernel. But the coordinate gradient of $d_p$ is $-2H$, so its Hessian at that critical point is $-2D_uH(u,p)$. Therefore $p$ is a bad center exactly when it is a critical value of at least one of the finitely many maps $\Psi_j$. [A1, F1, step 1.1, algebra]
 
-3.1 Therefore squared-distance functions are Morse for generic centers in the ambient Euclidean space. [step 2.1] ∎
+3.1 By [L1], each $\operatorname{CritVal}(\Psi_j)$ is null in $\mathbb R^N$. Their finite union is null and contains every bad center by step 2.1. Outside it every critical point of $d_p$ has nondegenerate Hessian, so $d_p$ is Morse. This finite-chart argument does not invoke the countable-choice-qualified manifold parametric theorem. [L1, F1, step 2.1] ∎

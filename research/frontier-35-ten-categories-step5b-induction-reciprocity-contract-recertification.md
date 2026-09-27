@@ -1,0 +1,5 @@
+# Step 5b owner recertification: induction–restriction reciprocity
+
+`lem-induction-restriction-reciprocity-for-class-functions` is an existing Step 5 auditor-created item whose item and page-manifest entry did not change in this repair. Its batch-10 proof-contract F3 quote was stale after the published class-function inner product Definition changed its finite-sum citation to `def-finite-sum-in-a-commutative-monoid`. I replaced that quote with the exact current Definition text in the batch-10 and merged contracts; targeted strict contract checking passed for this lemma and the other affected batch-10 consumer.
+
+The mathematical use remains licensed. F3 uses the same normalized inner product on finite-group class functions. The reciprocity proof expands the finite induction sum, swaps two finite sums, and groups conjugate terms; changing which finite-sum definition the source cites does not alter the formula, hypotheses, or proof. The owner-reviewed current carrier should therefore retain the original successful Step 5 author provenance with an exact new contract hash.

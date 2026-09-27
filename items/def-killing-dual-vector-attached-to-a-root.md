@@ -7,28 +7,36 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [prop-killing-form-pairs-only-opposite-root-spaces]
+deps: [def-axiom-of-choice, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, lem-finite-semisimple-cartan-root-and-string-structure]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-09-05
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
     - title: "Pavel Etingof, Lie Groups and Lie Algebras I"
       url: "https://math.mit.edu/~etingof/lnlg.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (def-killing-dual-vector-attached-to-a-root). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Definition
 
-Let $\mathfrak g$ be a complex semisimple Lie algebra, let $\mathfrak h$ be a Cartan subalgebra, and let $\alpha\in \mathfrak h^*$ be a root. By [[prop-killing-form-pairs-only-opposite-root-spaces]], the Killing form restricts nondegenerately to $\mathfrak h$. Therefore there is a unique vector $H_\alpha\in \mathfrak h$ such that
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\mathfrak g$ be a
+finite-dimensional complex semisimple Lie algebra, let $\mathfrak h$ be a Cartan
+subalgebra in the nilpotent self-normalizing sense, and let
+$\alpha\in\mathfrak h^*$ be a root. By
+[[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]],
+$\mathfrak h$ is maximal toral. Thus
+[[lem-finite-semisimple-cartan-root-and-string-structure]] applies and the
+Killing form restricts nondegenerately to $\mathfrak h$. Therefore there is a
+unique vector $H_\alpha\in\mathfrak h$ such that
 
 $$\alpha(h)=B(H_\alpha,h) \qquad (h\in \mathfrak h).$$
 

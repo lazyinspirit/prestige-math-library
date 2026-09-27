@@ -7,14 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-baire-space-equivalent-characterisations, def-nowhere-dense-meagre-and-residual-subsets, cor-q-is-meager-and-not-g-delta, thm-rationals-countable, thm-metric-hausdorff-separation, thm-the-separation-implication-chain, thm-t1-iff-singletons-are-closed]
+deps: [thm-baire-space-equivalent-characterisations, def-nowhere-dense-meagre-and-residual-subsets, cor-q-is-meager-and-not-g-delta, thm-rationals-countable, thm-metric-hausdorff-separation, thm-the-separation-implication-chain, thm-t1-iff-singletons-are-closed, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -49,11 +53,13 @@ The false claim is: $\mathbb Q$, with its usual subspace topology from $\mathbb 
 
 [F7] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $\mathcal{T}_{\mathrm{cof}}$ be the cofinite topology on the set $X$ (def-standard-topologies). The following four conditions are equivalent. - **(a)** $X$ is $T_1$ (def-t0-and-t1-spaces). - **(b)** $\{x\}$ is closed for every $x \in X$. - **(c)** $F$ is closed for every finite $F \subseteq X$ (def-countable). - **(d)** $\mathcal{T}_{\mathrm{cof}} \subseteq \mathcal{T}$, that is, the topology of $X$ is finer than the cofinite topology on the same set. Condition (d) says that the cofinite topology is the **coarsest** $T_1$ topology on any set: it is $T_1$ by the equivalence, and every $T_1$ topology on that set contains it. ([[thm-t1-iff-singletons-are-closed]]).
 
+[F8] For every real $\varepsilon>0$, some natural $n\ge1$ satisfies $1/n<\varepsilon$ ([[cor-archimedean-reciprocal]]).
+
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 In the subspace topology each rational singleton is closed with empty interior, while the rational numbers are countable. [given, F7, F1, F6, F4]
+1.1 Each rational singleton is closed in the subspace topology, since the usual metric topology is Hausdorff and hence $T_1$. It has empty interior in $\mathbb Q$: for any $q\in\mathbb Q$ and any $\varepsilon>0$, choose $n$ from [F8]; then $q+1/n$ is a rational point distinct from $q$ inside the $\varepsilon$-neighbourhood of $q$. The rational numbers are countable. [given, F4, F5, F6, F7, F8, algebra]
 
 2.1 Thus the whole nonempty space is meagre in itself, contradicting the nonmeagre-open form of the Baire property. [step 1.1, F1, F5, F6]
 

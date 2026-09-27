@@ -1,7 +1,7 @@
 ---
 id: ex-zeta-zero-equals-minus-one-half
 kind: example
-title: "The functional equation gives $\\zeta(0)=-1/2$ without substituting into a zero-times-pole expression"
+title: "The fractional-part continuation gives $\\zeta(0)=-1/2$"
 status: published
 origin: session
 provenance:
@@ -9,15 +9,15 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-riemann-zeta-functional-equation, thm-riemann-zeta-meromorphic-continuation]
+deps: [thm-riemann-zeta-continuation-to-the-right-half-plane]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "K. Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 11 §3"
@@ -30,16 +30,16 @@ $$\zeta(0)=-\frac12.$$
 
 ## Facts & Assumptions
 
-**Given:** The classical functional equation and the pole at $1$.
+**Given:** The fractional-part continuation of the zeta function.
 
-[L1] Zeta satisfies $$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$ ([[thm-riemann-zeta-functional-equation]]).
+[L1] For $\operatorname{Re}s>0$ and $s\ne1$, $$\zeta(s)=\frac{s}{s-1}-s\int_1^\infty\{x\}x^{-s-1}\,dx$$ ([[thm-riemann-zeta-continuation-to-the-right-half-plane]]).
 
-[L2] Zeta has a simple residue-one pole at $1$ ([[thm-riemann-zeta-meromorphic-continuation]]).
+Here $\{x\}=x-\lfloor x\rfloor$.
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Let $s\to0$ in [L1]. Then $2^s\to1$, $\pi^{s-1}\to\pi^{-1}$, $\sin(\pi s/2)\sim\pi s/2$, and $\Gamma(1-s)\to1$. Also [L2] gives $\zeta(1-s)\sim -1/s$. [L1, L2, given, algebra]
+1.1 Put $q(x)=\{x\}-1/2$ and $Q(x)=\int_1^x q(t)\,dt$. The function $q$ has integral zero over each interval $[n,n+1]$, so $Q$ is bounded. Integration by parts shows that, for $\operatorname{Re}s>-1$, $$\int_1^\infty q(x)x^{-s-1}\,dx=(s+1)\int_1^\infty Q(x)x^{-s-2}\,dx.$$ The integral on the right converges locally uniformly in this half-plane and defines a holomorphic function there. [given, algebra]
 
-2.1 Multiplying the limits from step 1.1 yields $$\zeta(0)=\lim_{s\to0}2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)=-\frac12.$$ [step 1.1, algebra] ∎
+2.1 For $\operatorname{Re}s>0$, $$\int_1^\infty\{x\}x^{-s-1}\,dx=\frac{1}{2s}+\int_1^\infty q(x)x^{-s-1}\,dx.$$ Substituting this into [L1] gives $$\zeta(s)=\frac{s}{s-1}-\frac12-s\int_1^\infty q(x)x^{-s-1}\,dx.$$ By step 1.1, the right-hand side extends holomorphically across $s=0$ and has value $-1/2$ there. Uniqueness of analytic continuation identifies this value with $\zeta(0)$. [L1, step 1.1, algebra] ∎

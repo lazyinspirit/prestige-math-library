@@ -4,7 +4,7 @@ title: The first parameter of a Cohen--Macaulay module is regular
 kind: lemma
 status: published
 origin: pipeline
-deps: [def-cohen-macaulay-local-module-and-ring, thm-dimension-and-parameters-for-modules, lem-associated-primes-of-cohen-macaulay-module-have-full-dimension]
+deps: [def-axiom-of-choice, def-cohen-macaulay-local-module-and-ring, thm-dimension-and-parameters-for-modules, lem-associated-primes-of-cohen-macaulay-module-have-full-dimension, thm-zero-divisors-on-a-module]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,14 +14,19 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Let $(R,\mathfrak m)$ be Noetherian local and $M$ a nonzero finite
 Cohen--Macaulay module of positive dimension. If
@@ -30,12 +35,18 @@ $M$-regular.
 
 ## Facts & Assumptions
 
-**Given:** $d=\dim M>0$ and the parameter quotient has dimension $0$.
+**Given:** the Axiom of Choice, $d=\dim M>0$, and the parameter quotient has dimension $0$.
+
+[L1] Under Choice, every associated prime of $M$ has quotient dimension $d$ ([[lem-associated-primes-of-cohen-macaulay-module-have-full-dimension]]).
+
+[L2] Under Choice, an element is a zero divisor on $M$ exactly when it lies in an associated prime; only the union formula is used ([[thm-zero-divisors-on-a-module]]).
+
+[L3] A system of parameters is characterized by its finite-length quotient ([[thm-dimension-and-parameters-for-modules]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $x_1$ lay in an associated prime $\mathfrak p$ of $M$, then the full-dimension result would give $\dim(R/\mathfrak p)=d$. Moreover $\mathfrak p\in\operatorname{Supp}(M/x_1M)$ because $\operatorname{Supp}(M/x_1M)=\operatorname{Supp}(M)\cap V(x_1)$. [given]
+1.1 If $x_1$ lay in an associated prime $\mathfrak p$ of $M$, then [L1] would give $\dim(R/\mathfrak p)=d$. Moreover $\mathfrak p\in\operatorname{Supp}(M/x_1M)$ because $\operatorname{Supp}(M/x_1M)=\operatorname{Supp}(M)\cap V(x_1)$. [L1, given]
 
-2.1 The remaining $d-1$ elements make $$M/x_1M\big/(x_2,\ldots,x_d)(M/x_1M)$$ finite length. The minimal-generator characterization in `thm-dimension-and-parameters-for-modules` therefore gives $\dim(M/x_1M)\le d-1$. This contradicts step 1.1. Thus $x_1$ avoids every associated prime; the associated-prime zero-divisor criterion makes it $M$-regular. The quotient is nonzero by Nakayama. [step 1.1, algebra] ∎
+2.1 The remaining $d-1$ elements make $$M/x_1M\big/(x_2,\ldots,x_d)(M/x_1M)$$ finite length. The parameter characterization [L3] therefore gives $\dim(M/x_1M)\le d-1$. This contradicts step 1.1. Thus $x_1$ avoids every associated prime; [L2] makes it $M$-regular. The quotient is nonzero by Nakayama. [L2, L3, step 1.1, algebra] ∎

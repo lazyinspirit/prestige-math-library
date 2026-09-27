@@ -1,7 +1,7 @@
 ---
 id: lem-locally-finite-union-of-sigma-locally-finite-bases
 kind: lemma
-title: 'A locally finite open cover by subspaces with $\sigma$-locally-finite bases yields a $\sigma$-locally-finite basis of the whole space'
+title: 'A closure-controlled locally finite open cover transfers relative $\sigma$-locally-finite bases to the whole space'
 status: published
 origin: session
 authorship: ai-altered
@@ -13,24 +13,35 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  audited: 2026-08-02
 sources:
   scraped: []
   references:
     - title: "UCR, Partitions of Unity and a Metrization Theorem of Smirnov"
       url: "https://math.ucr.edu/~res/math205A/smirnov.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-09-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $\mathcal U$ be a locally finite open cover of $X$. If every $U\in\mathcal U$, with its subspace topology, has a $\sigma$-locally-finite open basis $\bigcup_n\mathcal B_{U,n}$, then $X$ has a $\sigma$-locally-finite open basis.
+Let $(W_s)_{s\in S}$ be a locally finite open cover of $X$. For each $s$,
+suppose an open set $U_s$ satisfies $\overline{W_s}\subseteq U_s$ and has a
+supplied relative $\sigma$-locally-finite open basis
+$\bigcup_{n<\omega}\mathcal B_{s,n}$. Then $X$ has a
+$\sigma$-locally-finite open basis. No choice principle is needed beyond the
+supplied indexed bases and assignments.
 
 ## Facts & Assumptions
 
-**Given:** A locally finite open cover $\mathcal U$ and the stated relative bases.
+**Given:** The locally finite cover, closure-controlled assignments, and indexed relative bases in the statement.
 
 [L1] A locally finite family has a neighbourhood at each point meeting only finitely many members ([[def-cover-refinement-and-local-finiteness]]).
 
@@ -40,10 +51,10 @@ Let $\mathcal U$ be a locally finite open cover of $X$. If every $U\in\mathcal U
 
 **Proof technique:** direct.
 
-1.1 Since every $U\in\mathcal U$ is open in $X$, every member of a relative open basis $\mathcal B_{U,n}$ is open in $X$ by [L2]. Put $\mathcal B_n=\bigcup_{U\in\mathcal U}\mathcal B_{U,n}$. [L2, construct]
+1.1 Put $\mathcal C_n=\{B\cap W_s:s\in S,\ B\in\mathcal B_{s,n}\}$. Each member is open in $X$, since $W_s$ is open and a set open in the open subspace $U_s$ is ambient open. [L2]
 
-2.1 The family $\mathcal B_n$ is locally finite. At $x$, take from [L1] a neighbourhood meeting only finitely many $U$; within each of those finitely many $U$, local finiteness of $\mathcal B_{U,n}$ supplies a neighbourhood meeting finitely many members, and their finite intersection meets only finitely many members of $\mathcal B_n$. [L1, step 1.1]
+2.1 Fix $x\in X$. By [L1], choose a neighborhood $N$ meeting only finitely many $W_s$. For each of these indices, if $x\in U_s$, relative local finiteness supplies an ambient neighborhood $N_s$ whose intersection with $U_s$ meets only finitely many $B\in\mathcal B_{s,n}$. If $x\notin U_s$, then $x\notin\overline{W_s}$, so choose $N_s$ disjoint from $W_s$. Intersect $N$ with this finite collection of $N_s$. It meets only finitely many members of $\mathcal C_n$; hence $\mathcal C_n$ is locally finite. [L1, step 1.1]
 
-2.2 If $O$ is open and $x\in O$, choose $U\in\mathcal U$ containing $x$ and then a member of the basis of $U$ containing $x$ and contained in $O\cap U$. Thus $\bigcup_n\mathcal B_n$ is a basis of $X$. [step 1.1]
+2.2 If $O$ is open and $x\in O$, choose $s$ with $x\in W_s$. A relative basis member $B\in\mathcal B_{s,n}$ contains $x$ and lies in $O\cap U_s$. Then $x\in B\cap W_s\subseteq O$. Thus $\bigcup_n\mathcal C_n$ is a basis. [step 1.1]
 
 3.1 Steps 2.1 and 2.2 prove the result. [step 2.1, step 2.2] ∎

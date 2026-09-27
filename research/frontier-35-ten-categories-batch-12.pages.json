@@ -1,0 +1,1741 @@
+[
+  {
+    "order": 643,
+    "id": "the-ip-equals-pspace-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "The IP = PSPACE Theorem",
+    "companion": "the-ip-equals-pspace-theorem-examples",
+    "requires": [
+      "arithmetization-and-the-sum-check-protocol",
+      "space-complexity-savitch-and-tqbf",
+      "chebyshev-bounds-and-mertens-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-qbf-arithmetization-operators",
+        "kind": "definition",
+        "title": "Field arithmetization of QBF quantifiers",
+        "statement": "Over a prime field F, arithmetize a Boolean matrix by NOT(a)=1-a, AND(a,b)=ab, OR(a,b)=a+b-ab. For a polynomial P, put A_x P=P|x=0 P|x=1 and E_x P=1-(1-P|x=0)(1-P|x=1). Apply inner quantifiers first.",
+        "deps": [
+          "def-arithmetization-of-a-boolean-formula",
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "State the ordered operator convention and distinguish field values from Boolean truth values; cite the published Boolean-formula and QBF definitions in the proof text. The operators are evaluable by two substitutions and field arithmetic."
+      },
+      {
+        "id": "lem-quantifier-polynomials-agree-on-booleans",
+        "kind": "lemma",
+        "title": "Quantifier polynomials agree with QBF semantics on Boolean assignments",
+        "statement": "On every Boolean assignment to the free variables, A_x and E_x of an arithmetized subformula equal the truth values of universal and existential quantification, respectively.",
+        "deps": [
+          "def-qbf-arithmetization-operators",
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-arithmetization-of-a-boolean-formula",
+          "lem-arithmetization-agrees-on-boolean-inputs"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Induct on the matrix connectives and then the quantifier suffix. At Boolean inputs, multiplication is conjunction and 1-(1-a)(1-b) is disjunction; use the quantifier definition for the two assignments x=0,1."
+      },
+      {
+        "id": "def-multilinearization-operator",
+        "kind": "definition",
+        "title": "Multilinearization in one variable",
+        "statement": "For P over F define R_x P=(1-x)P|x=0+xP|x=1; the ordered arithmetization inserts R_x for every currently free variable after each quantifier operation, before processing the next outer quantifier.",
+        "deps": [
+          "def-qbf-arithmetization-operators",
+          "def-field",
+          "def-quantified-boolean-formula-and-tqbf"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Specify the actual finite sequence: start with the matrix and, for j from n down to 1, apply R to x_1,...,x_j and then Q_j in {A,E}. The protocol later reverses this sequence."
+      },
+      {
+        "id": "lem-multilinearization-preserves-boolean-values",
+        "kind": "lemma",
+        "title": "Multilinearization preserves Boolean values and bounds individual degree",
+        "statement": "R_x P agrees with P at x=0,1, has degree at most one in x, and leaves each other variable degree no larger than before. In the ordered QBF sequence of n variables and matrix length L, every univariate message has degree at most D=max(L,2), with O(n^2) operators.",
+        "deps": [
+          "def-multilinearization-operator",
+          "lem-quantifier-polynomials-agree-on-booleans",
+          "def-qbf-arithmetization-operators",
+          "def-arithmetization-of-a-boolean-formula",
+          "lem-formula-arithmetization-degree-and-evaluation-cost",
+          "lem-degree-under-arithmetized-quantifiers"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Use interpolation at 0 and 1. After all currently free variables are reduced, A or E can at most double individual degree from one to two in a remaining variable; the following reductions restore multilinearity. Initial matrix degree is at most L. Count n(n+1)/2 reduction calls plus n quantifier calls."
+      },
+      {
+        "id": "lem-ordered-arithmetization-evaluates-to-the-truth-value",
+        "kind": "lemma",
+        "title": "The multilinearized ordered arithmetization evaluates to the quantified Boolean truth value",
+        "statement": "For every closed prenex quantified Boolean formula over a field, the stage polynomials of the multilinearized ordered arithmetization agree with the Boolean values of the quantifier suffixes at every Boolean assignment, so the final constant equals the truth value of the formula.",
+        "deps": [
+          "def-multilinearization-operator",
+          "def-qbf-arithmetization-operators",
+          "lem-quantifier-polynomials-agree-on-booleans",
+          "lem-multilinearization-preserves-boolean-values",
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-arithmetization-of-a-boolean-formula",
+          "lem-arithmetization-agrees-on-boolean-inputs"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Induct on the quantifier suffix from the matrix: the matrix arithmetization agrees with the Boolean value of the matrix, each reduction R preserves agreement on Boolean points, and the quantifier operators compute the quantified truth values at Boolean points."
+      },
+      {
+        "id": "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+        "kind": "lemma",
+        "title": "A polynomial-size prime field meets the soundness budget",
+        "statement": "For any polynomially bounded positive integers T,D computed from a QBF input, a prime p>12TD can be found deterministically in polynomial time, and all field operations and degree-D coefficient messages have polynomial bit complexity.",
+        "deps": [
+          "def-prime",
+          "thm-standard-representatives-modulo-n",
+          "thm-z-mod-p-is-a-field",
+          "thm-bertrands-postulate"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose integer N=max(2,12TD+1). Bertrand gives N<p<2N. Scan this interval by trial division through floor(sqrt p); because N is polynomial in input length, the number of candidates and divisions is polynomial. Represent F_p by residues and use modular arithmetic. The extra factor accommodates bounded-length random-bit sampling."
+      },
+      {
+        "id": "def-shamir-protocol-for-tqbf",
+        "kind": "definition",
+        "title": "Shamir interactive protocol for TQBF",
+        "statement": "The verifier begins with the asserted scalar 1 for the final QBF polynomial, traverses the explicit operator sequence backwards, asks for the predecessor polynomial in the active variable, checks its A/E/R identity against the current claim, samples a fresh field point from 2ceil(log2 p) independent random bits reduced modulo p after the message, and at the end directly evaluates the arithmetized matrix.",
+        "deps": [
+          "def-qbf-arithmetization-operators",
+          "def-multilinearization-operator",
+          "lem-multilinearization-preserves-boolean-values",
+          "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+          "def-interactive-proof-transcript-round-and-strategy",
+          "def-quantified-boolean-formula-and-tqbf",
+          "lem-formula-arithmetization-degree-and-evaluation-cost",
+          "thm-z-mod-p-is-a-field",
+          "def-arithmetization-of-a-boolean-formula"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Write the three check identities explicitly: c=s(0)s(1), c=1-(1-s(0))(1-s(1)), or c=(1-a)s(0)+a s(1) for an R_x gate at current x=a. Set c←s(r) only after checking. A fixed 2ceil(log2 p)-bit sample U reduced mod p gives every residue probability at most 1/p+2^(-2ceil(log2 p))≤2/p. Use coefficient vectors with degree cap D; final b(r_1,...,r_n) is computed by the verifier."
+      },
+      {
+        "id": "lem-honest-prover-maintains-the-claim-invariant",
+        "kind": "lemma",
+        "title": "Honest prover maintains the field-value claim",
+        "statement": "At every protocol stage for a true QBF, the honest prover can send the actual predecessor univariate polynomial and the current claim equals the true value of the current operator expression at all fixed challenges.",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "lem-multilinearization-preserves-boolean-values",
+          "def-multilinearization-operator",
+          "def-qbf-arithmetization-operators",
+          "lem-ordered-arithmetization-evaluates-to-the-truth-value",
+          "lem-quantifier-polynomials-agree-on-booleans"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Induct backward through the deterministic expression tree. Each identity holds as a polynomial identity, so each check accepts; evaluating the actual predecessor at the fresh challenge preserves the invariant."
+      },
+      {
+        "id": "lem-each-round-has-polynomial-communication",
+        "kind": "lemma",
+        "title": "Explicit communication, round, and evaluation bounds",
+        "statement": "For a QBF with n variables and matrix length L, the protocol uses T=O(n^2) prover messages, each at most D+1 coefficients of O(log p) bits with D=max(L,2), and verifier point evaluations of polynomial cost.",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "lem-multilinearization-preserves-boolean-values",
+          "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+          "lem-formula-arithmetization-degree-and-evaluation-cost"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Count one message for each reverse operator, at most n(n+1)/2+n. Horner-evaluate coefficient vectors at 0,1,a,r in O(D) field operations; the terminal matrix has O(L) gates. Include polynomial prime search and a fixed 2ceil(log2 p)-bit random block per challenge; reduction mod p gives point mass at most 2/p and never causes an unbounded loop."
+      },
+      {
+        "id": "lem-shamir-protocol-has-perfect-completeness",
+        "kind": "lemma",
+        "title": "Shamir protocol has perfect completeness",
+        "statement": "Every true TQBF input has an honest prover accepted with probability one.",
+        "deps": [
+          "lem-honest-prover-maintains-the-claim-invariant",
+          "def-shamir-protocol-for-tqbf",
+          "def-ip"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "The true quantified Boolean value is one; all algebraic identity checks pass for the actual polynomials, regardless of challenges, and the final direct matrix evaluation equals the maintained claim."
+      },
+      {
+        "id": "lem-first-false-claim-survives-with-root-bound-probability",
+        "kind": "lemma",
+        "title": "A false field claim survives one round with bounded probability",
+        "statement": "Conditioned on a false current claim and a prover message passing the local identity check, the chance that the next claim equals the true predecessor value is at most 2D/p.",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "lem-multilinearization-preserves-boolean-values",
+          "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+          "def-qbf-arithmetization-operators",
+          "def-multilinearization-operator",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "If the sent polynomial equalled the true predecessor, the checked operator identity would make the current claim true. Thus their difference is a nonzero univariate of degree ≤D. The fresh challenge is chosen after the message; the root bound gives at most D roots, and the fixed-bit sampler puts probability at most 2/p on each root. The terminal base polynomial is trusted, not supplied by the prover."
+      },
+      {
+        "id": "lem-total-soundness-follows-by-union-bound",
+        "kind": "lemma",
+        "title": "Total TQBF soundness by the first repaired claim",
+        "statement": "On a false TQBF input, acceptance probability is at most 2TD/p<1/6, hence at most 1/3.",
+        "deps": [
+          "lem-first-false-claim-survives-with-root-bound-probability",
+          "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+          "def-shamir-protocol-for-tqbf",
+          "lem-ordered-arithmetization-evaluates-to-the-truth-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "The initial claim 1 differs from the actual false QBF value 0. Acceptance forces some false claim to become true before the directly checked terminal value. Partition by the first such round, bound each conditional transition by 2D/p using the sampled-point mass, then union bound over T rounds. Choose p>12TD."
+      },
+      {
+        "id": "lem-shamir-qbf-verifier-runs-in-polynomial-time",
+        "kind": "lemma",
+        "title": "Shamir verifier runs in polynomial time",
+        "statement": "The TQBF verifier, including prime search, all field checks, random sampling, and terminal arithmetized-matrix evaluation, has worst-case polynomial running time in QBF length.",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "lem-each-round-has-polynomial-communication",
+          "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+          "def-interactive-proof-transcript-round-and-strategy"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the explicit T,D,p bounds. Sample each challenge with exactly 2ceil(log2 p) fresh bits and reduce modulo p; this is worst-case polynomial time and keeps perfect completeness. Evaluate the matrix at assigned field points by its arithmetic circuit in O(L) field operations."
+      },
+      {
+        "id": "thm-tqbf-has-a-polynomial-round-interactive-proof",
+        "kind": "theorem",
+        "title": "TQBF has a polynomial-round interactive proof",
+        "statement": "TQBF has a public-coin polynomial-round interactive proof with perfect completeness and soundness at most 1/3.",
+        "deps": [
+          "lem-shamir-protocol-has-perfect-completeness",
+          "lem-total-soundness-follows-by-union-bound",
+          "lem-shamir-qbf-verifier-runs-in-polynomial-time",
+          "lem-each-round-has-polynomial-communication",
+          "def-shamir-protocol-for-tqbf",
+          "def-ip"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Assemble the three verified protocol properties. The prover is unrestricted; only verifier time, coins, round count, and message lengths must be polynomial."
+      },
+      {
+        "id": "thm-pspace-is-contained-in-ip",
+        "kind": "theorem",
+        "title": "PSPACE is contained in IP",
+        "statement": "Every language in PSPACE has a polynomial-round interactive proof with perfect completeness.",
+        "deps": [
+          "thm-tqbf-has-a-polynomial-round-interactive-proof",
+          "thm-tqbf-is-pspace-complete",
+          "def-ip"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the deterministic polynomial-time many-one reduction from a PSPACE language to TQBF, run the TQBF verifier on the output, and preserve exact completeness and soundness; polynomial input expansion keeps the protocol polynomial."
+      },
+      {
+        "id": "thm-ip-equals-pspace",
+        "kind": "theorem",
+        "title": "IP equals PSPACE",
+        "statement": "The language classes IP and PSPACE are equal under the published constant-error IP convention.",
+        "deps": [
+          "thm-pspace-is-contained-in-ip",
+          "thm-ip-is-contained-in-pspace",
+          "def-ip"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Combine the two inclusions. The published upper inclusion computes the optimal game value in polynomial space, so no stronger space axiom is needed."
+      },
+      {
+        "id": "cor-ip-is-closed-under-complement",
+        "kind": "corollary",
+        "title": "IP is closed under complement",
+        "statement": "If L lies in IP, its complement also lies in IP.",
+        "deps": [
+          "thm-ip-equals-pspace",
+          "cor-pspace-equals-npspace-and-is-closed-under-complement"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Use deterministic polynomial-space complement closure by flipping acceptance in a space-bounded decider, then equality IP=PSPACE. This does not claim protocol transcript complementation works."
+      },
+      {
+        "id": "thm-ip-can-be-given-perfect-completeness",
+        "kind": "theorem",
+        "title": "IP admits perfect completeness",
+        "statement": "Every IP language has an interactive proof with perfect completeness and constant soundness error.",
+        "deps": [
+          "thm-ip-equals-pspace",
+          "thm-ip-is-contained-in-pspace",
+          "thm-pspace-is-contained-in-ip"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Move the language into PSPACE via equality and use the TQBF reduction protocol, whose honest prover succeeds for every challenge. Preserve polynomial rounds and the soundness budget."
+      },
+      {
+        "id": "fs-ip-equals-pspace-needs-no-degree-reduction",
+        "kind": "false-statement",
+        "title": "IP = PSPACE needs no degree reduction in this arithmetization",
+        "statement": "The naive protocol obtained by omitting all multilinearization operations from the quantified-arithmetic protocol still has polynomial-degree messages for every polynomial-size TQBF.",
+        "deps": [
+          "def-qbf-arithmetization-operators",
+          "def-multilinearization-operator",
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-arithmetization-of-a-boolean-formula"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Refute using a prenex formula with k inner universal quantifiers followed by an outer existential y, and matrix y. Repeated A_x of a polynomial independent of x squares it, giving y^(2^k) before the y check. Formula size O(k), so the message degree is exponential; the R operations are necessary for this proof route."
+      },
+      {
+        "id": "fs-the-verifier-trusts-the-final-field-value",
+        "kind": "false-statement",
+        "title": "The verifier can trust the final field value",
+        "statement": "The QBF verifier remains sound if the terminal arithmetized-matrix value is supplied unchecked by the prover.",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "lem-total-soundness-follows-by-union-bound",
+          "def-quantified-boolean-formula-and-tqbf",
+          "def-arithmetization-of-a-boolean-formula",
+          "def-completeness-and-soundness"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Refute by a false constant QBF and a prover who sends a consistent forged claim chain ending in a forged terminal value 1. The final direct evaluation is the base case that makes the first-false-claim argument work."
+      }
+    ]
+  },
+  {
+    "order": 644,
+    "id": "the-ip-equals-pspace-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "The IP = PSPACE Theorem: Examples and Counterexamples",
+    "requires": [
+      "the-ip-equals-pspace-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-two-quantifier-qbf-arithmetization-transcript",
+        "kind": "example",
+        "title": "A two-quantifier field transcript",
+        "statement": "For Φ=∃x∀y(x∨¬y) over F_101, the matrix is b(x,y)=1-y+xy. The ordered operators and a sample reverse transcript with challenges 2,3,4,5,6 end with the trusted value b(6,5)=26.",
+        "deps": [
+          "def-qbf-arithmetization-operators",
+          "def-multilinearization-operator",
+          "def-shamir-protocol-for-tqbf",
+          "def-arithmetization-of-a-boolean-formula",
+          "thm-z-mod-p-is-a-field",
+          "def-quantified-boolean-formula-and-tqbf"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute b→R_x→R_y→A_y→R_x→E_x=1. Reverse: E_x sends s(T)=T, c:1→2; R_x sends T, 2→3; A_y at x=3 sends 1+2T, 3→9; R_y sends 1+2T, 9→11; R_x at y=5 sends 5T-4, 11→26; final b(6,5)=26 mod 101. Check each identity and challenge order."
+      },
+      {
+        "id": "ex-multilinearization-preserves-boolean-values",
+        "kind": "example",
+        "title": "A concrete multilinearization calculation",
+        "statement": "For P(x,z)=x^3z+2x^2+z over F_101, R_x P=(1-x)z+x(2z+2)=z+x(z+2); it agrees at x=0,1 and has x-degree one.",
+        "deps": [
+          "def-multilinearization-operator",
+          "lem-multilinearization-preserves-boolean-values",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Evaluate P(0,z)=z and P(1,z)=2z+2, interpolate, and check endpoints explicitly."
+      },
+      {
+        "id": "ex-ip-can-be-given-perfect-completeness",
+        "kind": "example",
+        "title": "Perfect completeness through a TQBF reduction",
+        "statement": "For any IP language reduced to TQBF, the verifier can use the Shamir protocol and accepts every yes input with probability one while retaining bounded soundness on no inputs.",
+        "deps": [
+          "thm-ip-can-be-given-perfect-completeness",
+          "thm-tqbf-has-a-polynomial-round-interactive-proof",
+          "def-shamir-protocol-for-tqbf",
+          "lem-efficient-prime-field-for-a-polynomial-soundness-budget",
+          "lem-total-soundness-follows-by-union-bound",
+          "thm-z-mod-p-is-a-field"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Show the reduction changes the input instance only, and the honest field-polynomial messages pass on every random tape; do not assert arbitrary old IP verifiers already have perfect completeness."
+      },
+      {
+        "id": "cex-ip-equals-pspace-needs-no-degree-reduction",
+        "kind": "counterexample",
+        "title": "Exponential degree without multilinearization",
+        "statement": "The family ∃y∀x_1⋯∀x_k y has O(k)-size syntax but the naive inner-to-outer arithmetization contains y^(2^k) immediately before processing y.",
+        "deps": [
+          "fs-ip-equals-pspace-needs-no-degree-reduction",
+          "def-qbf-arithmetization-operators",
+          "def-arithmetization-of-a-boolean-formula",
+          "def-quantified-boolean-formula-and-tqbf"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "A. Shen, IP = PSPACE: Simplified Proof",
+              "url": "https://users.cs.fiu.edu/~giri/teach/5420/f01/IP_Pspace2.pdf"
+            }
+          ]
+        },
+        "strategy": "Each universal variable is absent from its current polynomial, so A_x(P)=P^2; induct over k and compare 2^k to the input length. The formula is true, showing the failure is degree and verifier complexity, not Boolean semantics."
+      }
+    ]
+  },
+  {
+    "order": 647,
+    "id": "gap-amplification-and-assignment-testing",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Gap Amplification and Assignment Testing",
+    "companion": "gap-amplification-and-assignment-testing-examples",
+    "requires": [
+      "expander-graphs-and-constraint-graphs",
+      "the-cook-levin-theorem",
+      "randomized-complexity-and-amplification",
+      "algebraic-extensions-degree-and-finite-fields",
+      "pi-the-equivalent-characterizations",
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "arithmetization-and-the-sum-check-protocol"
+    ],
+    "items": [
+      {
+        "id": "def-gap-preserving-csp-reduction",
+        "kind": "definition",
+        "title": "Complete uniform gap-preserving CSP reductions",
+        "statement": "A reduction on explicit binary constraint graphs is complete if value one maps to value one, is gap preserving with function g if UNSAT at least ε maps to UNSAT at least g(ε), has linear blowup M_out≤C M_in for fixed alphabet/degree parameters, and is uniform if the output is computed in time polynomial in the explicit input size.",
+        "deps": [
+          "def-constraint-graph-and-labeling-value",
+          "def-gap-csp"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Fix the edge-count and alphabet conventions, including empty graphs. Record arity and alphabet in each use; constants may depend on fixed parameters but not graph size."
+      },
+      {
+        "id": "lem-complete-linear-blowup-reductions-compose",
+        "kind": "lemma",
+        "title": "Complete linear-blowup reductions compose",
+        "statement": "If R_1 and R_2 are complete uniform CSP reductions with blowups C_1,C_2 and gap maps g_1,g_2, then R_2∘R_1 is complete, has blowup C_1C_2, gap map g_2∘g_1, and polynomial running time for fixed parameters.",
+        "deps": [
+          "def-gap-preserving-csp-reduction"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Chase value one and gap inequalities through both maps; multiply edge bounds. Ensure the intermediate alphabet and degree meet R_2 hypotheses and the explicit encoding grows by only a constant per fixed gadget."
+      },
+      {
+        "id": "def-degree-reduction-by-expander-clouds",
+        "kind": "definition",
+        "title": "Degree reduction by expander incidence clouds",
+        "statement": "Replace each vertex of a constraint graph by one port per incident edge, put an explicit constant-degree expander with equality constraints inside each cloud, retain one original relation edge between the designated ports, and add the published regularizing overlay, obtaining a constant-degree graph over the same alphabet.",
+        "deps": [
+          "def-constraint-graph-and-labeling-value",
+          "def-constraint-graph-regularization",
+          "lem-constraint-expander-overlay"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the published H_r degree-128 cloud, 129-degree intermediate, and 387-degree overlay exactly; account for loops as two incidences, removed isolated vertices, and edgeless input. The overlay has tautological edges and preserves satisfiability."
+      },
+      {
+        "id": "lem-cloud-consistency-forces-near-constant-labels",
+        "kind": "lemma",
+        "title": "Cloud violations control distance to plurality labels",
+        "statement": "For the cloud construction, if S ports disagree with their cloud plurality labels, U_int internal equality edges are violated, and U_G is the decoded original violation count, then U_int≥(7/20)S and U_G≤U_ext+S.",
+        "deps": [
+          "def-degree-reduction-by-expander-clouds",
+          "lem-cloud-plurality-rounding"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the published cloud plurality rounding proof: expansion of each nonplurality label class counts boundary edges at most twice; each changed port affects at most one external edge. Keep the exact h_0=7/10 and tie-breaking convention."
+      },
+      {
+        "id": "thm-degree-reduction-preserves-unsatisfaction",
+        "kind": "theorem",
+        "title": "Degree reduction preserves unsatisfaction quantitatively",
+        "statement": "For every nonempty-edge explicit graph G, the published cloud and overlay construction yields a 387-regular graph G_2 with O(|E(G)|) edges, the same alphabet, perfect completeness, and UNSAT(G_2)≥UNSAT(G)/(387K), where K=20/7; it is deterministic polynomial time.",
+        "deps": [
+          "lem-cloud-consistency-forces-near-constant-labels",
+          "lem-regularization-preserves-value-quantitatively",
+          "lem-constraint-expander-overlay",
+          "def-gap-preserving-csp-reduction",
+          "def-degree-reduction-by-expander-clouds"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the published assignment-level decoding inequality UNSAT_Dτ(G)≤387K UNSAT_τ(G_2), then minimize. Count |V_2|=2m, |E_2|=387m; canonical lifts satisfy internal, external, and overlay edges. Treat edgeless graph separately."
+      },
+      {
+        "id": "def-constraint-graph-powering",
+        "kind": "definition",
+        "title": "Constraint graph powering with local-view labels",
+        "statement": "For a d-regular lazy constraint graph and fixed integer t, let each new vertex label assign old labels to all vertices in its radius-(t+ceil(sqrt(t))) local view, counting repeated walk slots. An edge indexed by a length-(2t+1) walk checks old constraints and view consistency across the central overlap, with ordered endpoint views. The alphabet is at most |Σ|^{d^{O(t)}} and the number and tables of constraints are |V|d^{O(t)}.",
+        "deps": [
+          "def-graph-power-and-walk-constraint",
+          "def-constraint-graph-and-labeling-value",
+          "def-regular-multigraph-and-normalized-adjacency"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the Arora–Barak §18.5 length-(2t+1) walk version: views cover radius t+ceil(sqrt(t)), so both endpoints can report coordinates for every central-edge position within c sqrt(t) of the midpoint. Define all old-edge and overlap checks, including multiplicities, slot reversal, loops, and fixed relation tables. Enumerate every constant-length walk; fixed d,t give linear explicit size and polynomial construction. This is equivalent in role to Dinur §6 with its t-walk and radius-t/2 convention, but the two numerical conventions must not be mixed."
+      },
+      {
+        "id": "lem-canonical-local-view-lift-preserves-perfect-satisfiability",
+        "kind": "lemma",
+        "title": "Canonical local views preserve perfect satisfiability",
+        "statement": "A satisfying labeling of the base graph lifts to a powered labeling by recording its restriction on every local-view coordinate, and this lift satisfies every powered walk constraint.",
+        "deps": [
+          "def-constraint-graph-powering",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "All copies of an old vertex in the views carry the same label, so each agreement test holds and every old relation tested along a walk holds. Repeated vertices and loops do not change the argument."
+      },
+      {
+        "id": "def-plurality-decoding-of-powered-local-views",
+        "kind": "definition",
+        "title": "Plurality decoding of powered local views",
+        "statement": "Given any powered labeling, decode an old vertex v by the most frequent label claimed for v among local views centered at endpoints of a random t-step lazy walk from v, with fixed tie breaking.",
+        "deps": [
+          "def-constraint-graph-powering",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the stationary/reversible walk distribution of the published regular multigraph convention; count walk slots with multiplicity, so the finite empirical distribution is explicit. This is Dinur §6 popular opinion, not a uniform vote over distinct centers."
+      },
+      {
+        "id": "lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws",
+        "kind": "lemma",
+        "title": "Nearby lazy-walk lengths have close endpoint laws",
+        "statement": "For a walk with independent hold/go decisions of probability 1/2, endpoint distributions after t and t+s steps have total-variation distance O(|s|/sqrt(t)) uniformly in the start vertex for |s|=O(sqrt(t)); choose an absolute small multiple of sqrt(t) for the powering argument.",
+        "deps": [
+          "def-plurality-decoding-of-powered-local-views",
+          "def-constraint-graph-powering",
+          "cor-central-binomial-coefficient-asymptotic-from-wallis"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Couple endpoints by first coupling Bin(t,1/2) and Bin(t+s,1/2) step counts; data processing does not increase total variation. Prove the binomial shift bound from unimodality and max binomial mass O(1/sqrt t) (elementary factorial estimate), then telescope over |s|. Use only a small constant window."
+      },
+      {
+        "id": "lem-plurality-consistency-along-middle-walk-positions",
+        "kind": "lemma",
+        "title": "Plurality opinions agree with local views in middle positions",
+        "statement": "In Dinur powering, for a random powered walk and each middle position in a fixed c sqrt(t) window, the two endpoint views both report the decoded plurality labels of the central old edge with probability bounded below by a positive constant depending only on |Σ|.",
+        "deps": [
+          "def-plurality-decoding-of-powered-local-views",
+          "lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws",
+          "def-constraint-graph-powering"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Each plurality label has probability at least 1/|Σ| in the corresponding t-step endpoint law. Move from t to nearby lengths with the total-variation lemma, losing less than 1/(4|Σ|); conditional independence of the two walk halves yields ≥1/(4|Σ|²). Match the actual middle-edge orientations and endpoint coordinate domains."
+      },
+      {
+        "id": "lem-expander-walk-violated-edge-collision-bound",
+        "kind": "lemma",
+        "title": "Violating-edge positions have controlled collisions",
+        "statement": "For a stationary walk on the regularized graph with normalized second eigenvalue α<1, and a set F of ε edge slots, the sum of probabilities of two distinct F hits in a k-position window is O(k²ε²+kε/(1-α)); in the small-gap range kε≤c this is O(kε).",
+        "deps": [
+          "def-constraint-graph-powering",
+          "def-constraint-graph-and-labeling-value",
+          "def-regular-multigraph-and-normalized-adjacency",
+          "lem-expander-walk-contraction",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Condition on the first edge and use spectral mixing to bound a second hit h steps later by ε(ε+Cα^{h-1}) with the endpoint-incidence factor absorbed in constant d. Sum over h and positions. Count directed slots, loops, and repeated walks with their multiplicities; impose kε small."
+      },
+      {
+        "id": "lem-overlap-controlled-union-lower-bound",
+        "kind": "lemma",
+        "title": "Overlap control gives a union lower bound",
+        "statement": "For finite events B_i, if S=Σ_i Pr(B_i)>0 and the unordered pair-overlap sum is at most C S, then Pr(∪_i B_i)≥S/(1+2C).",
+        "deps": [
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Let N count occurring events. Then E N=S and E N²=S+2Σ_{i<j}Pr(B_i∩B_j)≤(1+2C)S. Cauchy–Schwarz gives (E N)^2≤Pr(N>0)E N². Include S=0 separately. Apply to the middle-window collision events."
+      },
+      {
+        "id": "lem-powering-preserves-perfect-satisfiability",
+        "kind": "lemma",
+        "title": "Powering preserves perfect satisfiability",
+        "statement": "If the base graph has value one, so does its local-view powered graph.",
+        "deps": [
+          "lem-canonical-local-view-lift-preserves-perfect-satisfiability",
+          "def-constraint-graph-powering",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the canonical lift and quantify over all walk constraints, including loops."
+      },
+      {
+        "id": "lem-powering-amplifies-small-gaps",
+        "kind": "lemma",
+        "title": "Powering amplifies a small unsatisfaction gap",
+        "statement": "For fixed d, alphabet Σ and spectral gap 1-α>0, there are absolute constants β,c>0 such that for even t sufficiently large and 0<ε≤c/t, every powered labeling has violation fraction at least β sqrt(t) ε whenever the base graph has UNSAT≥ε. For larger ε the lower bound saturates at β/ sqrt(t).",
+        "deps": [
+          "def-constraint-graph-powering",
+          "def-constraint-graph-and-labeling-value",
+          "def-plurality-decoding-of-powered-local-views",
+          "lem-plurality-consistency-along-middle-walk-positions",
+          "lem-expander-walk-violated-edge-collision-bound",
+          "lem-overlap-controlled-union-lower-bound"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Decode the powered labels to a base labeling, which violates ≥ε old edges. In a c sqrt(t) middle window of a stationary powered walk, each violated edge has a constant chance that both endpoint opinions match its decoded labels, forcing the powered relation to reject. Sum Ω(sqrt(t)ε) individual events; use spectral collision and overlap lemma to retain an Ω fraction. For ε>c/t, select an ε0=c/t subset of violated edge slots to get the saturated bound. This is Dinur §6 Lemmas 6.1–6.4, including laziness and walk multiplicity."
+      },
+      {
+        "id": "thm-gap-amplification-step",
+        "kind": "theorem",
+        "title": "A complete uniform graph gap-amplification step",
+        "statement": "For fixed alphabet and explicit regularizing expander family, there is a deterministic uniform reduction G↦G′ of linear edge blowup for fixed t, binary constraints, constant output degree and alphabet |Σ|^{d^{O(t)}}, preserving value one and mapping UNSAT(G)≥ε to UNSAT(G′)≥β sqrt(t) min(ε,c/t).",
+        "deps": [
+          "thm-degree-reduction-preserves-unsatisfaction",
+          "lem-constraint-expander-overlay",
+          "lem-powering-preserves-perfect-satisfiability",
+          "lem-powering-amplifies-small-gaps",
+          "lem-complete-linear-blowup-reductions-compose",
+          "def-gap-preserving-csp-reduction",
+          "def-constraint-graph-powering",
+          "def-degree-reduction-by-expander-clouds"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Compose the quantified degree-reduction map with powering. Its loss factor 387K must be included inside the new β and saturation threshold. Enumerate cloud expanders and constant-length walk constraints in polynomial time; state the relation-table and alphabet growth and that the step is not yet the fixed-alphabet PCP iteration."
+      },
+      {
+        "id": "def-explicit-constant-rate-constant-distance-code",
+        "kind": "definition",
+        "title": "Explicit binary codes of constant rate and distance",
+        "statement": "A family of binary codes C_k:{0,1}^k→{0,1}^{N(k)} is explicit constant-rate constant-distance when an injective encoder is computable in time polynomial in k, N(k)=O(k), and distinct codewords differ in at least δN(k) coordinates for one absolute δ>0.",
+        "deps": [
+          "def-gap-preserving-csp-reduction"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Specify uniformity, rate k/N(k), relative distance, and padding convention. This is a definition and does not assert existence."
+      },
+      {
+        "id": "def-reed-solomon-outer-code-and-binary-linear-inner-code",
+        "kind": "definition",
+        "title": "Reed–Solomon outer code and binary linear inner code",
+        "statement": "For q=2^m, choose F_q=F_2[z]/(f) with irreducible f of degree m, take a Reed–Solomon outer evaluation code of dimension K=q/2 and length q, and an inner binary linear map F_2^m→F_2^{16m}; concatenate to encode K m bits into 16qm bits.",
+        "deps": [
+          "def-explicit-constant-rate-constant-distance-code",
+          "thm-existence-of-finite-fields",
+          "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the published finite-field existence and quotient construction. Choose f deterministically by scanning monic degree-m polynomials and testing irreducibility by trial division; q is polynomial in the eventual message length. Define a fixed field-element bit basis and every evaluation coordinate. The inner map is constructed later by conditional expectation."
+      },
+      {
+        "id": "lem-reed-solomon-outer-code-has-constant-rate-and-distance",
+        "kind": "lemma",
+        "title": "Reed–Solomon outer code has constant rate and distance",
+        "statement": "The length-q evaluation code of polynomials of degree <K=q/2 over F_q has rate 1/2 and relative Hamming distance at least 1/2.",
+        "deps": [
+          "def-reed-solomon-outer-code-and-binary-linear-inner-code",
+          "def-explicit-constant-rate-constant-distance-code",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "lem-of-no-zero-divisors"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Distinct message polynomials differ in a nonzero polynomial of degree ≤K-1, which has at most K-1 roots among the q distinct evaluation points. Count at least q-K+1 differing coordinates. Field construction and evaluation are polynomial because q=O(k)."
+      },
+      {
+        "id": "lem-random-linear-inner-code-has-fewer-than-one-bad-codeword-in-expectation",
+        "kind": "lemma",
+        "title": "A random inner linear code has fewer than one bad word in expectation",
+        "statement": "For a uniformly random 16m×m binary matrix M, the expected number of nonzero u∈F_2^m with wt(Mu)<4m is less than one for every m≥1.",
+        "deps": [
+          "def-explicit-constant-rate-constant-distance-code",
+          "lem-chernoff-bound-for-bernoulli-trials",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-of-an-indicator-is-probability",
+          "def-independent-families-of-event-classes"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For fixed nonzero u, the 16m output bits are independent fair Bernoulli variables. Published Chernoff with μ=8m and α=1/2 gives P[wt≤4m]≤e^{-m}. Sum over at most 2^m−1 inputs: expectation <(2/e)^m<1. The strict <4m condition yields relative distance at least 1/4."
+      },
+      {
+        "id": "lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time",
+        "kind": "lemma",
+        "title": "Conditional expectation constructs the inner code deterministically",
+        "statement": "For every m, a deterministic polynomial-time procedure outputs a 16m×m binary matrix M such that wt(Mu)≥4m for every nonzero u∈F_2^m; the map has rate 1/16.",
+        "deps": [
+          "lem-random-linear-inner-code-has-fewer-than-one-bad-codeword-in-expectation",
+          "def-expectation-on-a-finite-probability-space",
+          "def-explicit-constant-rate-constant-distance-code"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Set matrix entries one at a time to the choice with no larger conditional expected bad-word count. For each of 2^m−1 candidate u, each matrix row output is either fixed or an unbiased bit under the remaining independent entries; compute its weight-tail probability by an O(m²) binomial table, sum rationally, and compare two choices exactly. Initial expectation <1 and final integer count <1, so zero. Since q=2^m=O(k), runtime is polynomial in k; the matrix has full rank by positive distance."
+      },
+      {
+        "id": "lem-concatenated-code-multiplies-rate-and-distance",
+        "kind": "lemma",
+        "title": "Concatenation multiplies rate and relative distance",
+        "statement": "If an outer q-ary code has rate R_o and distance δ_o and each q-symbol has an injective binary inner encoding of rate R_i and distance δ_i, then their concatenation has rate R_oR_i and relative distance at least δ_oδ_i.",
+        "deps": [
+          "def-reed-solomon-outer-code-and-binary-linear-inner-code",
+          "def-explicit-constant-rate-constant-distance-code",
+          "lem-reed-solomon-outer-code-has-constant-rate-and-distance",
+          "lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Two different messages differ in at least δ_o q outer symbols; each changed symbol yields ≥δ_i L differing inner bits. Divide by qL. Count input bits and encoded bits for the rate; compose uniform encoders."
+      },
+      {
+        "id": "thm-explicit-code-construction-and-distance",
+        "kind": "theorem",
+        "title": "A polynomial-time explicit constant-rate constant-distance code",
+        "statement": "There is a deterministic uniform binary code family with N(k)=O(k), rate at least an absolute positive constant and relative distance at least 1/8, computable in polynomial time.",
+        "deps": [
+          "def-explicit-constant-rate-constant-distance-code",
+          "def-reed-solomon-outer-code-and-binary-linear-inner-code",
+          "lem-reed-solomon-outer-code-has-constant-rate-and-distance",
+          "lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time",
+          "lem-concatenated-code-multiplies-rate-and-distance"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose the least m with (2^{m-1})m≥k, pad to K m bits, take q=2^m, and concatenate the rate-1/2, distance-1/2 RS outer code with the rate-1/16, distance-1/4 inner code. Then N=16qm=O(k) except bounded small k handled directly; relative distance≥1/8. Spell out irreducible-field search, matrix construction, and evaluation costs."
+      },
+      {
+        "id": "def-assignment-tester-and-rejection-ratio",
+        "kind": "definition",
+        "title": "Assignment tester and rejection ratio",
+        "statement": "An assignment tester maps a Boolean circuit C with input-coordinate set X to an explicit bounded-arity constraint system G containing X, with perfect completeness for every satisfying input x, and for every x and auxiliary labeling y, UNSAT_{x∪y}(G)≥ρ·δ(x,SAT(C)), where δ is relative Hamming distance on X and is defined as one if SAT(C) is empty.",
+        "deps": [
+          "def-constraint-graph-and-labeling-value",
+          "def-gap-preserving-csp-reduction",
+          "def-circuit-sat",
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "State alphabet, query arity, output-size, time, and fixed-input-coordinate conventions. Distinguish the proximity condition from the ordinary global UNSAT gap."
+      },
+      {
+        "id": "def-hadamard-linearity-constraint-system",
+        "kind": "definition",
+        "title": "Hadamard linearity constraints",
+        "statement": "For a function table f:F_2^n→F_2, the Walsh–Hadamard linearity test chooses uniform x,y and checks f(x)+f(y)=f(x+y); the full constraint system has one ternary constraint for each (x,y).",
+        "deps": [
+          "def-assignment-tester-and-rejection-ratio",
+          "def-linearity-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use indexed truth-table coordinates including 0 and count multiplicities. The test has perfect completeness for f(x)=u·x. In a constant-query verifier, a random constraint requires three table queries."
+      },
+      {
+        "id": "thm-linearity-test-rejects-proportionally-to-distance",
+        "kind": "theorem",
+        "title": "BLR rejection is proportional to distance from linearity",
+        "statement": "For every f:F_2^n→F_2, the BLR rejection probability ε is at least the relative Hamming distance from f to the nearest linear function.",
+        "deps": [
+          "def-hadamard-linearity-constraint-system",
+          "def-linearity-test",
+          "lem-blr-acceptance-fourier-identity",
+          "lem-boolean-cube-fourier-inversion-and-parseval"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Set F=(-1)^f and use the elementary character basis χ_a(x)=(-1)^{a·x}. Expand E_{x,y}F(x)F(y)F(x+y)=Σ_a hat F(a)^3. Orthogonality gives Σ hat F(a)^2=1; hence 1−2ε≤max_a hat F(a). The nearest linear-code distance is (1−max_a hat F(a))/2≤ε. Prove the finite Fourier orthogonality and Parseval sums inline, including n=0."
+      },
+      {
+        "id": "def-quadratic-consistency-test",
+        "kind": "definition",
+        "title": "Quadratic tensor consistency test",
+        "statement": "Given Hadamard tables f for u∈F_2^n and g for w∈F_2^{n×n}, a tensor test chooses uniform r,s∈F_2^n and checks g(r⊗s)=f(r)f(s), with self-corrected table queries when the tables are only near linear.",
+        "deps": [
+          "def-hadamard-linearity-constraint-system",
+          "thm-linearity-test-rejects-proportionally-to-distance",
+          "def-self-correction-of-a-noisy-linear-function",
+          "def-linearity-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Define the tensor coordinate order and arithmetic over F_2; the right side is a product of bits. Separate the ideal exact-codeword test from the noisy self-corrected implementation."
+      },
+      {
+        "id": "lem-quadratic-test-soundness",
+        "kind": "lemma",
+        "title": "Quadratic tensor test rejects an inconsistent tensor",
+        "statement": "If f and g encode linear forms for u and w and w≠u⊗u, the ideal tensor test rejects with probability at least 1/4; if each table is δ-close to its linear decoder, two-query self-correction of each queried value changes any constant collection of test outcomes with probability O(δ).",
+        "deps": [
+          "def-quadratic-consistency-test",
+          "thm-linearity-test-rejects-proportionally-to-distance",
+          "thm-linear-self-correction",
+          "def-self-correction-of-a-noisy-linear-function",
+          "lem-boolean-cube-fourier-inversion-and-parseval",
+          "def-linearity-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Write D=w−u⊗u as a nonzero matrix. At least half the r have rD≠0; conditioned on one, half the s have rDs=1. For noisy tables, decode h(z) from h(z+a)+h(a) with uniform a; by a union bound each decoded bit fails with probability ≤2δ. Choose δ a sufficiently small absolute constant before repeating tests."
+      },
+      {
+        "id": "lem-circuit-satisfaction-is-linear-quadratic-consistency",
+        "kind": "lemma",
+        "title": "Circuit satisfiability becomes linear-quadratic consistency",
+        "statement": "A Boolean circuit C with n specified inputs has a polynomial-size system of F_2 quadratic equations in its input and gate-wire variables, with a satisfying extension exactly when C accepts; a Hadamard pair encoding the wire vector and its tensor can test all equations with constant queries and constant error using a random binary subsum.",
+        "deps": [
+          "def-quadratic-consistency-test",
+          "lem-quadratic-test-soundness",
+          "def-circuit-sat",
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "lem-boolean-cube-fourier-inversion-and-parseval",
+          "def-linearity-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Encode NOT z=1+x, AND z=xy, OR z=x+y+xy, constants and output=1 as quadratic equations; preserve the input prefix. If any equation fails under decoded u, a uniform random linear combination is nonzero with probability 1/2. Its linear functional on u⊗u is queried once from the tensor table, with self-correction and constant repetition. Include the linear terms as diagonal tensor entries or an added constant coordinate."
+      },
+      {
+        "id": "lem-exponential-base-assignment-tester-from-quadratic-oracles",
+        "kind": "lemma",
+        "title": "An exponential-size constant-query base assignment tester",
+        "statement": "Every size-m Boolean circuit has a uniformly constructible assignment tester with constant arity and constant rejection ratio, whose explicit output size is at most 2^{poly(m)}; the original input bits remain named coordinates.",
+        "deps": [
+          "def-assignment-tester-and-rejection-ratio",
+          "thm-linearity-test-rejects-proportionally-to-distance",
+          "lem-quadratic-test-soundness",
+          "lem-circuit-satisfaction-is-linear-quadratic-consistency",
+          "def-quadratic-consistency-test",
+          "def-self-correction-of-a-noisy-linear-function",
+          "thm-linear-self-correction",
+          "def-linearity-test",
+          "lem-boolean-cube-fourier-inversion-and-parseval"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use Arora–Barak §18.4 Hadamard tables for all wire values and their tensor, BLR tests, tensor test, and random subsum of gate equations. Add uniform input-coordinate comparison tests: choose i, self-correct the decoded Hadamard value at e_i, compare with raw x_i. If decoded wires fail C, the algebraic tests reject with constant probability; if they satisfy C, at least dist(x,SAT(C))/n comparisons fail. Balance test families by constant duplication. Enumerate all random choices for an explicit exponential constraint system, as in the PCP-of-proximity argument."
+      },
+      {
+        "id": "lem-trivial-circuit-constraint-system-is-a-weak-assignment-tester",
+        "kind": "lemma",
+        "title": "Gate constraints are a weak assignment tester",
+        "statement": "A size-m circuit with n input bits has an O(m+n)-size binary-constraint gadget after fixed-arity conversion, containing the input bits, with perfect completeness and rejection ratio at least 1/O(m+n).",
+        "deps": [
+          "def-assignment-tester-and-rejection-ratio",
+          "def-circuit-sat",
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Introduce one vertex per wire and one fixed-alphabet tuple vertex per gate. Binary projection relations connect each tuple coordinate to its wire vertex; a loop or unary-coded binary relation restricts tuple labels to the gate truth table and forces output one. Use a fixed 8-symbol alphabet with wire labels restricted to 0,1, while retaining named raw input vertices. This uses O(m+n) binary constraints. If raw input x is not satisfying, every auxiliary labeling violates at least one constraint, so UNSAT≥1/M≥δ(x,SAT(C))/M, even if SAT(C) is empty under δ=1. A satisfying input extends to zero violations."
+      },
+      {
+        "id": "fs-repeating-constraints-amplifies-the-gap",
+        "kind": "false-statement",
+        "title": "Repeating constraints amplifies the gap",
+        "statement": "Duplicating every constraint of a CSP instance the same number of times strictly increases its unsatisfaction fraction.",
+        "deps": [
+          "def-constraint-graph-and-labeling-value",
+          "def-gap-preserving-csp-reduction"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Refute algebraically: for every labeling, both violation count and total edge count multiply by r, so their ratio and optimized UNSAT are unchanged. Give an instance with one satisfiable and one contradictory constraint to make the failure nonvacuous."
+      }
+    ]
+  },
+  {
+    "order": 648,
+    "id": "gap-amplification-and-assignment-testing-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Gap Amplification and Assignment Testing: Examples and Counterexamples",
+    "requires": [
+      "gap-amplification-and-assignment-testing"
+    ],
+    "items": [
+      {
+        "id": "ex-degree-reduction-preserves-unsatisfaction",
+        "kind": "example",
+        "title": "A cloud rounding calculation",
+        "statement": "If a cloud labeling changes S=10 ports, has U_int=4 and U_ext=2, then the published bounds give U_G≤2+10=12 and U_int≥(7/20)·10=7/2, consistent with integer U_int≥4.",
+        "deps": [
+          "lem-cloud-consistency-forces-near-constant-labels",
+          "thm-degree-reduction-preserves-unsatisfaction",
+          "def-degree-reduction-by-expander-clouds"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the two inequalities and explain that the 387-regular overlay rescales the global fraction; do not infer a stronger local bound from the example."
+      },
+      {
+        "id": "cex-repeating-constraints-amplifies-the-gap",
+        "kind": "counterexample",
+        "title": "Duplicating constraints does not change UNSAT",
+        "statement": "A CSP with one always-false and one always-true constraint has UNSAT=1/2, and duplicating each r times still has UNSAT=1/2.",
+        "deps": [
+          "fs-repeating-constraints-amplifies-the-gap",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Count r violated of 2r edges for every labeling, with explicit tautology and empty relation on an edge or loop allowed by the graph convention."
+      },
+      {
+        "id": "ex-plurality-decoding-of-powered-local-views",
+        "kind": "example",
+        "title": "Numerical local-view plurality decoding",
+        "statement": "At an old vertex v of a 4-regular constraint graph with t=1, so that the eight length-1 walk slots end in views claiming labels (a,a,a,a,a,b,b,c) for v, the plurality decoder assigns a, of frequency 5/8.",
+        "deps": [
+          "def-plurality-decoding-of-powered-local-views"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Count walk slots with multiplicity, not distinct centers. If two slots reach one center, both count; the example illustrates the distribution used in the powering proof and the fixed tie rule."
+      }
+    ]
+  }
+]

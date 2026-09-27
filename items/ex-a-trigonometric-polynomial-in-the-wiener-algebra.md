@@ -12,20 +12,21 @@ generation:
 deps: [def-wiener-algebra-of-the-circle]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (ex-a-trigonometric-polynomial-in-the-wiener-algebra). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
 
-For $p(x)=2-3e_1(x)+ie_{-2}(x)$, the only nonzero coefficients are $\widehat p(0)=2$, $\widehat p(1)=-3$, and $\widehat p(-2)=i$. Hence $p\in A(\mathbb T)$ and $\|p\|_A=6$.
+Assume the Axiom of Countable Choice for the Wiener-algebra convention. For $p(x)=2-3e_1(x)+ie_{-2}(x)$, the only nonzero coefficients are $\widehat p(0)=2$, $\widehat p(1)=-3$, and $\widehat p(-2)=i$. Hence $p\in A(\mathbb T)$ and $\|p\|_A=6$. The finite coefficient calculation itself is choice-free by ordinary Riemann integration.
 
 ## Facts & Assumptions
 
-**Given:** The displayed trigonometric polynomial and the definition [[def-wiener-algebra-of-the-circle]].
+**Given:** Countable Choice, the displayed trigonometric polynomial, and the definition [[def-wiener-algebra-of-the-circle]].
 
 ## Verification
 

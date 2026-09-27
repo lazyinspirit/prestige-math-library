@@ -1,5 +1,4 @@
 ---
----
 page: ext-and-balanced-resolutions-examples
 title: "Ext and Balanced Resolutions — Examples"
 status: published

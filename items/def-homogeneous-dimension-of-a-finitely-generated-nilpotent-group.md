@@ -7,17 +7,16 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-free-rank-of-a-finitely-generated-pid-module, def-nilpotent-group-and-nilpotency-class, def-subgroup-commutator-and-lower-central-series]
-justified_by: [rem-bass-guivarch-growth-degree-formula]
+deps: [def-free-rank-of-a-finitely-generated-pid-module, def-nilpotent-group-and-nilpotency-class, def-subgroup-commutator-and-lower-central-series, lem-lower-central-quotients-of-finitely-generated-nilpotent-groups-are-finitely-generated-abelian]
 aliases: []
 landmark: true
 verification:
-  audited: 2026-08-26
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -35,8 +34,7 @@ $$\gamma_1(G)=G, \qquad \gamma_{i+1}(G)=[G,\gamma_i(G)]$$
 for its lower central series ([[def-subgroup-commutator-and-lower-central-series]],
 [[def-nilpotent-group-and-nilpotency-class]]).
 
-The later source-backed remark
-[[rem-bass-guivarch-growth-degree-formula]] records that each quotient
+By [[lem-lower-central-quotients-of-finitely-generated-nilpotent-groups-are-finitely-generated-abelian]], each quotient
 $$\gamma_i(G)/\gamma_{i+1}(G)$$
 is a finitely generated abelian group, so its free rank as a $\mathbb Z$-module
 is defined ([[def-free-rank-of-a-finitely-generated-pid-module]]).

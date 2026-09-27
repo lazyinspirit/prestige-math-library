@@ -10,12 +10,13 @@ provenance:
 deps: [def-extended-real-valued-measurable-function, def-nonnegative-simple-measurable-function, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (thm-increasing-simple-approximation-of-a-nonnegative-measurable-function). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -45,11 +46,8 @@ for every $x\in X$.
 
 **Proof technique:** direct.
 
-1.1 Set $s_0:=0$. For $n\ge1$ and $0\le k<n2^n$, put [L1, L2, construct]
-$$E_{n,k}:=\{x:k2^{-n}\le f(x)<(k+1)2^{-n}\}\cap\{f<n\},$$ and set $$s_n:=\sum_{k=0}^{n2^n-1}k2^{-n}\chi_{E_{n,k}}+n\chi_{\{f\ge n\}}.$$ Each $E_{n,k}$ and $\{f\ge n\}$ is measurable by [L1], the range of $s_n$ is finite, and therefore each $s_n$ is simple by [L2]; $s_0$ is also simple.
+1.1 Set $s_0:=0$. For $n\ge1$ and $0\le k<n2^n$, put $E_{n,k}:=\{x:k2^{-n}\le f(x)<(k+1)2^{-n}\}$ and set $$s_n:=\sum_{k=0}^{n2^n-1}k2^{-n}\chi_{E_{n,k}}+n\chi_{\{f\ge n\}}.$$ Each $E_{n,k}$ and $\{f\ge n\}$ is measurable by [L1], the range of $s_n$ is finite, and therefore each $s_n$ is simple by [L2]; $s_0$ is also simple. [L1, L2, construct]
 
-2.1 For each $x$, one has $0\le s_n(x)\le f(x)$. If $f(x)<+\infty$ and [step 1.1, algebra]
-$n>f(x)$, then $f(x)-2^{-n}<s_n(x)\le f(x)$; if $f(x)=+\infty$, then $s_n(x)=n$. Hence $s_n(x)\to f(x)$.
+2.1 For each $x$, one has $0\le s_n(x)\le f(x)$. If $f(x)<+\infty$ and $n>f(x)$, then $f(x)-2^{-n}<s_n(x)\le f(x)$; if $f(x)=+\infty$, then $s_n(x)=n$. Hence $s_n(x)\to f(x)$. [step 1.1, algebra]
 
-3.1 The functions are increasing. Indeed, $s_n(x)$ is a dyadic multiple of [step 2.1, L3, algebra] ∎
-$2^{-n}$ below $f(x)\wedge n$, hence also a dyadic multiple of $2^{-(n+1)}$ below $f(x)\wedge(n+1)$; so the defining maximality of the $(n+1)$-st dyadic truncation gives $s_n(x)\le s_{n+1}(x)$. Therefore $s_n\uparrow f$, in accord with [L3].
+3.1 The functions are increasing. Indeed, $s_n(x)$ is the largest multiple of $2^{-n}$ at most $f(x)\wedge n$, hence is also a multiple of $2^{-(n+1)}$ at most $f(x)\wedge(n+1)$. The maximality of the latter dyadic truncation gives $s_n(x)\le s_{n+1}(x)$. Together with step 2.1, this proves $s_n\uparrow f$. [step 1.1, step 2.1, algebra] ∎

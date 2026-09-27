@@ -7,14 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-radon-measure-on-an-lch-space, def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p, def-l-p-space-as-a-quotient-by-null-functions]
+deps: [def-dependent-choice, def-radon-measure-on-an-lch-space, def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p, def-l-p-space-as-a-quotient-by-null-functions]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (thm-c-c-is-dense-in-l-p-for-radon-measures). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"
@@ -23,15 +24,15 @@ sources:
 
 ## Statement
 
-If $\mu$ is a Radon measure on an LCH space $X$ and $1\le p<\infty$, then $C_c(X)$ is dense in $L^p(\mu)$.
+Assume Dependent Choice ([[def-dependent-choice]]). If $\mu$ is a Radon measure on an LCH space $X$ and $1\le p<\infty$, then $C_c(X)$ is dense in $L^p(\mu)$.
 
 ## Facts & Assumptions
 
-**Given:** $\mu$ is Radon and $1\le p<\infty$.
+**Given:** DC, $\mu$ is Radon and $1\le p<\infty$.
 
 [L1] Finite-measure-support simple functions are dense in $L^p$. ([[thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p]])
 
-[L2] LCH cutoffs exist between compact and open sets. ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]])
+[L2] Under the stated DC premise, LCH cutoffs exist between compact and open sets ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]]). Proof 2.1 is the exact use of DC.
 
 ## Proof
 

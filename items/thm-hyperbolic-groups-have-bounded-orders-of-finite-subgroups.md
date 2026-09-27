@@ -7,16 +7,20 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-hyperbolic-group, thm-morse-stability-of-quasi-geodesics]
+deps: [def-hyperbolic-group, def-delta-slim-geodesic-triangle-and-hyperbolic-space]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
-    - title: "Brian H. Bowditch, A course on geometric group theory, Section 2.4"
-      url: "https://www.math.ucdavis.edu/~kapovich/280-2009/bhb-ggtcourse.pdf"
+    - title: "Clara Löh, Geometric Group Theory, Section 6.2.1 (slim-triangle background; the finite-orbit argument is proved below)"
+      url: "https://loeh.app.uni-regensburg.de/teaching/ggt_ss22/lecture_notes.pdf"
 ---
 
 ## Statement
@@ -27,18 +31,18 @@ $|F| \le B_S$.
 
 ## Facts & Assumptions
 
-**Given:** A hyperbolic group $G$ with finite generating set $S$.
+**Given:** A hyperbolic group $G$ with finite generating set $S$. Choose a finite generating set $T$ witnessing hyperbolicity and a slim-triangle constant $\delta$ for its Cayley graph $X$; the bound obtained from $T$ also supplies the asserted $B_S$.
 
-[A1] Every finite subgroup of a hyperbolic group has an orbit of uniformly bounded diameter in the Cayley graph, with the bound depending only on the generating set.
+[L1] The geometric Cayley graph $X$ is a geodesic metric space in which every geodesic triangle is $\delta$-slim ([[def-hyperbolic-group]], [[def-delta-slim-geodesic-triangle-and-hyperbolic-space]]).
 
-[A2] Only finitely many group elements can act faithfully on a fixed finite ball in the Cayley graph, so a uniform orbit-diameter bound yields a uniform order bound.
-
-[L1] Morse stability is one of the geometric tools used in the standard proof ([[thm-morse-stability-of-quasi-geodesics]]).
+[L2] The vertex ball of any fixed integer radius in $X$ is finite because $T$ is finite. Left translation by $G$ is free and transitive on Cayley vertices: $gx=hx$ for a vertex $x\in G$ implies $g=h$.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $F \le G$ be finite. By [A1], some $F$-orbit in the Cayley graph of $(G,S)$ has diameter bounded by a constant depending only on $S$. [given, A1]
+1.1 Let $F\le G$ be finite and put $M=F\cdot e$, a finite set of vertices of $X$. For a vertex $x$ define $R(x)=\max_{m\in M}d(x,m)$. The nonempty set of integer values $R(x)$ has a least value $R$, attained at some vertex $x$. Left translation by each $f\in F$ preserves $M$ and distances, so $R(fx)=R(x)=R$. Thus the center set $C=\{v\in G:R(v)=R\}$ is $F$-invariant and contains the orbit $Fx$. [L1, given, construct]
 
-2.1 That orbit lies in a finite ball, and the action of $F$ on its orbit is faithful. Therefore [A2] gives a uniform bound $|F| \le B_S$. The role of [L1] in the standard proof is to supply the geometric control behind [A1]. [A2, L1, step 1.1] ∎
+2.1 Let $x,y\in C$, write $D=d(x,y)$, and let $z$ be the midpoint of a geodesic $[x,y]$. For any $m\in M$, slimness of the triangle with vertices $x,y,m$ gives a point $p$ on $[x,m]$ or $[y,m]$ with $d(z,p)\le\delta$. In the first case, $d(x,p)\ge D/2-\delta$ and $d(x,m)\le R$, so $d(z,m)\le R-D/2+2\delta$; the second case is symmetric. Choose a vertex $v$ of the edge containing $z$, with $d(v,z)\le1/2$. Then $R(v)\le R-D/2+2\delta+1/2$. Minimality of $R$ forces $D\le4\delta+1$. Hence every two vertices of $C$, and in particular of $Fx$, are at distance at most $4\delta+1$. [L1, step 1.1]
+
+3.1 The map $f\mapsto fx$ is injective by [L2]. The orbit $Fx$ lies in the vertex ball about $x$ of radius $N=\lceil4\delta+1\rceil$, whose cardinality is the fixed finite number $B=|B_X(e,N)\cap G|$ by Cayley vertex transitivity. Thus $|F|=|Fx|\le B$ for every finite $F\le G$. Taking $B_S=B$ proves the assertion for the given $S$. [L2, step 1.1, step 2.1] ∎

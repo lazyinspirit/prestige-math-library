@@ -16,8 +16,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-17
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references: []
@@ -36,7 +40,7 @@ On the full subcategory of finite sets, the principal-unit map $\eta_X:X\to\beta
 
 [L2] The principal map $\eta_X$ is natural, and the flattening map is the multiplication of the ultrafilter monad ([[lem-the-principal-ultrafilter-and-ultrafilter-flattening-maps-are-natural]]; [[thm-the-ultrafilter-monad-is-a-monad]]).
 
-[L3] Assuming the Axiom of Choice, every filter on a set is contained in an ultrafilter on that set ([[thm-ultrafilter-lemma]]); a nonprincipal ultrafilter on $\mathbb N$ then exists ([[fs-every-ultrafilter-principal]]).
+[L3] Assuming the ultrafilter lemma, every filter on a set is contained in an ultrafilter on that set; this library proves the lemma from the Axiom of Choice ([[thm-ultrafilter-lemma]]). Applying it to the tail filter gives a nonprincipal ultrafilter on $\mathbb N$ by the explicit refutation in [[fs-every-ultrafilter-principal]].
 
 [L4] A filter contains the whole carrier, excludes the empty set, is upward closed, and is closed under finite intersections ([[def-filter]]).
 

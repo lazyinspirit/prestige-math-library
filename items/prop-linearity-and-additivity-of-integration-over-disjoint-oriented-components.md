@@ -4,16 +4,17 @@ title: "Linearity and additivity of the form integral"
 kind: proposition
 status: published
 origin: pipeline
-deps: ["thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement", "thm-multidimensional-integral-properties"]
+deps: ["lem-finite-chart-localization-for-compactly-supported-forms-on-manifolds-with-boundary", "thm-multidimensional-integral-properties"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (prop-linearity-and-additivity-of-integration-over-disjoint-oriented-components). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Lee Proposition 16.6(a), pp.407–408"
@@ -28,7 +29,7 @@ Also $\int_M\omega=\sum_C\int_C\omega|_C$, where $C$ ranges over connected compo
 
 ## Facts & Assumptions
 
-[F1] [[thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement]]: The compact-support integral on an oriented manifold is independent of the chart cover, coordinate maps, subordinate partition, and refinement. If $U\subset M$ is open and contains $\operatorname{supp}\omega$, with its restricted orientation, then $\int_U\omega|_U=\int_M\omega$.
+[F1] [[lem-finite-chart-localization-for-compactly-supported-forms-on-manifolds-with-boundary]] defines the compact-support integral by a finite nonnegative chart localization, proves independence, linearity and locality, and identifies it with the global partition integral whenever that construction is available. It includes manifolds with genuine boundary and dimension zero.
 
 [F2] [[thm-multidimensional-integral-properties]]: Let $Q=\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable $f,g:Q\to\mathbb R$ and scalars $\alpha,\beta$, the function $\alpha f+\beta g$ is integrable and its integral is $\alpha\int_Qf+\beta\int_Qg$. If $f\le g$, then $\int_Qf\le\int_Qg$. Also $|f|$ is integrable and $|\int_Qf|\le\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate hyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on $Q$ is equivalent to integrability on both restrictions, and their integral values add to the integral over $Q$.
 
@@ -36,8 +37,8 @@ Also $\int_M\omega=\sum_C\int_C\omega|_C$, where $C$ ranges over connected compo
 
 **Given:** The objects and hypotheses in the statement above.
 
-1.1 Choose a common chart partition for the compact union of the two supports. In positive dimension, each chart coefficient for $a\omega+b\eta$ is the corresponding linear combination. Riemann linearity, followed by summation of finitely many terms, gives the first formula. Empty supports and zero scalars cause no exception. [F1, F2]
+1.1 Choose a common finite chart localization near the compact union of the two supports by [F1]. In positive dimension, each chart coefficient for $a\omega+b\eta$ is the corresponding linear combination. Riemann linearity, followed by summation of finitely many terms, gives the first formula. Independence from the chosen localization, empty supports and zero scalars are covered by [F1]. [F1, F2]
 
-2.1 Manifolds have connected small ball or half-ball neighborhoods. Every connected component is therefore open. Its components form an open cover, so a compact support meets only finitely many of them. Choose the chart cover inside the components, group the finite sum accordingly, and use locality. [F1, step 1.1]
+2.1 Manifolds have connected small ball or half-ball neighborhoods. Every connected component is therefore open. Its components form an open cover, so a compact support meets only finitely many of them. Choose the finite chart localization inside those components, group its terms accordingly, and use the locality of [F1]. [F1, step 1.1]
 
 3.1 In dimension zero use the finite sums $\sum_p\varepsilon(p)\omega(p)$; both distributivity and grouping are identities of finite sums. A singleton contributes its one signed value. [step 1.1, algebra] ∎

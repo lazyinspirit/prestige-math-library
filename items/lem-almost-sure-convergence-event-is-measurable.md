@@ -9,17 +9,17 @@ provenance:
   proof: ai-generated
 deps: [def-almost-sure-convergence-of-random-variables]
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "S. Roch, Lecture 3: Modes of convergence, Definition 3.1"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
-verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 ---
 
 ## Statement
@@ -40,5 +40,4 @@ $\{\omega:X_n(\omega)\to X(\omega)\}$ is an event.
 1.1 By [L1], the convergence set has the following countable description. [L1]
 $$\bigcap_{r\in\mathbb Q_{>0}}\ \bigcup_{N=0}^\infty\ \bigcap_{n\ge N}\{|X_n-X|<r\}.$$ [L1]
 
-2.1 Each set in the display is measurable because $X_n-X$ is a real random. [step 1.1]
-variable; countable unions and intersections preserve measurability. Thus the displayed set, and hence the convergence event, is measurable. [step 1.1] ∎
+2.1 Each set $\{|X_n-X|<r\}$ in the display is measurable because $X_n-X$ is a real random variable and the interval $(-r,r)$ is Borel. Countable unions and intersections preserve measurability. Thus the displayed set, and hence the convergence event, is measurable. [step 1.1] ∎

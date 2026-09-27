@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-nowhere-dense-meagre-and-residual-subsets, lem-pointwise-lipschitz-sets-in-c01-are-closed, lem-steep-polygonal-functions-are-dense-in-c01, thm-nowhere-differentiable-functions-are-dense-in-c01, prop-meagre-subsets-form-a-sigma-ideal]
+deps: [def-nowhere-dense-meagre-and-residual-subsets, lem-pointwise-lipschitz-sets-in-c01-are-closed, lem-steep-polygonal-functions-are-dense-in-c01, thm-n-cross-n-countable]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (cor-nowhere-differentiable-functions-are-residual-in-c01). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -45,16 +46,14 @@ Assume Dependent Choice. The nowhere differentiable functions form a residual su
 
 [F3] For every $f\in C([0,1],\mathbb R)$, every $\varepsilon>0$, and every $M>0$, there is a piecewise-affine $h$ with finitely many vertices such that $\lVert f-h\rVert_\infty<\varepsilon$ and every slope on a nonvertex affine piece has absolute value greater than $M$. ([[lem-steep-polygonal-functions-are-dense-in-c01]]).
 
-[F4] Assume the Axiom of Dependent Choice ($\mathrm{DC}$). Then the set of continuous functions $[0,1]\to\mathbb R$ having no finite two-sided derivative at an interior point and no finite one-sided derivative at either endpoint is dense in $C([0,1],\mathbb R)$ for the supremum metric. ([[thm-nowhere-differentiable-functions-are-dense-in-c01]]).
-
-[F5] For every topological space $X$, the meagre subsets of $X$ contain $\varnothing$, are closed under taking subsets, and are closed under countable unions ([[prop-meagre-subsets-form-a-sigma-ideal]]).
+[F4] The pairs of natural numbers have a specified countable enumeration ([[thm-n-cross-n-countable]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Use the published closed pointwise-Lipschitz sets and the dense steep-polygonal perturbations to show every such closed set has empty interior. [given, F3, F1, F2]
+1.1 Fix positive integers $p,q$. By the now choice-free proof of [F2], $E_{p,q}$ is closed. Given any uniform open ball, [F3] supplies within it a polygonal function $h$ whose slopes on all nonvertex pieces have absolute value greater than $p$. At any $a\in[0,1]$, at least one side of $a$ contains arbitrarily close points on one such affine piece; the corresponding difference quotients have absolute value greater than $p$. Hence $h\notin E_{p,q}$. Every open ball meets the complement of $E_{p,q}$, so $E_{p,q}$ has empty interior and is nowhere dense. [F2, F3, F1]
 
-2.1 Their countable union $M$ is meagre by step 1.1 and contains every function with a finite derivative at some point, so the complement of $M$ is residual and consists of nowhere differentiable functions. The set $N$ of nowhere differentiable functions contains that residual complement, so its own complement is a subset of $M$; meagre sets are closed downward under subsets, being a sigma-ideal [F5], hence the complement of $N$ is meagre and $N$ is residual. One-sided endpoint derivatives are included. [step 1.1, F4, F1, F3, F5]
+2.1 Enumerate the positive-integer pairs $(p,q)$ using [F4], and let $M=\bigcup_{p,q\ge1}E_{p,q}$. Step 1.1 and [F1] make $M$ a countable union of nowhere dense sets. If $f$ has a finite derivative at some $a$ (one-sided at an endpoint), the difference quotient is bounded near $a$; choose positive integers $p$ above that bound and $q$ so that $1/q$ is within the neighborhood. Then $f\in E_{p,q}$. Thus the complement of the set $N$ of nowhere differentiable functions is a subset of $M$, and this same explicitly given countable family witnesses that the complement of $N$ is meagre. Hence $N$ is residual. [step 1.1, F1, F2, F4]
 
 3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎

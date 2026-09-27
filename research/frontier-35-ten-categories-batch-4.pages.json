@@ -1,0 +1,1384 @@
+[
+  {
+    "order": 366.0601,
+    "id": "normalization-finiteness-for-affine-domains",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Normalization Finiteness for Affine Domains",
+    "companion": "normalization-finiteness-for-affine-domains-examples",
+    "requires": [
+      "dedekind-domains-and-ideal-classes",
+      "noether-normalisation-and-nullstellensatz",
+      "algebraic-closure-embeddings-and-separability",
+      "affine-algebraic-sets-and-coordinate-rings",
+      "morphisms-local-rings-and-rational-maps-of-affine-varieties"
+    ],
+    "items": [
+      {
+        "id": "lem-integral-closure-unchanged-across-an-integral-intermediate-domain",
+        "kind": "lemma",
+        "title": "Integral closure is unchanged across an integral intermediate domain",
+        "deps": [
+          "def-integral-closure-and-integrally-closed-domain",
+          "thm-transitivity-of-integrality",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-ring-extension",
+          "cor-integral-elements-form-a-subring",
+          "def-zero-divisor-and-integral-domain"
+        ],
+        "statement": "If A⊆B⊆L are domains and B is integral over A, then z∈L is integral over A if and only if z is integral over B.",
+        "strategy": "For z integral over A, the same monic equation has coefficients in B. Conversely B[z]/B integral and B/A integral imply z/A integral by transitivity. Identify both sets in the fixed ambient field L; no new closure definition is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-purely-inseparable-rational-extension-envelope",
+        "kind": "lemma",
+        "title": "Finite purely inseparable rational extensions admit a finite Frobenius envelope",
+        "deps": [
+          "def-purely-inseparable-extension",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "def-extension-degree-and-finite-extension",
+          "def-dimension",
+          "def-finitely-generated-field-extension",
+          "def-field-of-fractions",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "lem-polynomial-factorisation-into-irreducibles",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible",
+          "def-quotient-ring",
+          "thm-well-ordering-principle",
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "lem-an-isomorphism-extends-across-a-simple-root-adjunction",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "def-ring-characteristic",
+          "thm-finite-field-extensions-are-algebraic",
+          "thm-tower-law-for-finite-field-extensions",
+          "def-algebraic-and-transcendental-elements",
+          "def-polynomial-evaluation-and-root"
+        ],
+        "statement": "Let K have characteristic p>0, F=K(x₁,…,x_d) with algebraically independent x_i, and L/F be finite purely inseparable. There are a finite purely inseparable K′/K and q=p^e such that L embeds over F in K′(x₁^{1/q},…,x_d^{1/q}).",
+        "strategy": "Take finitely many F-generators of L. By the defining p-power condition for a purely inseparable extension, choose one common q=p^e for which each generator has qth power in F. Express these finitely many rational functions as quotients of polynomials over K; adjoin the qth roots of all coefficients to form finite purely inseparable K′. Frobenius makes each rational function a qth power in K′(x_i^{1/q}); uniqueness of qth roots in a common finite algebraic overfield identifies the generators. The d=0 and q=1 boundaries are included; this finite construction does not invoke the published arbitrary-extension embedding criterion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "Stacks Project, Lemma 9.27.3 (normal extension decomposition)",
+              "url": "https://stacks.math.columbia.edu/tag/030M"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-polynomial-algebras-over-fields-are-integrally-closed",
+        "kind": "lemma",
+        "title": "Finite-variable polynomial algebras over fields are integrally closed",
+        "deps": [
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "lem-gauss-lemma-over-a-ufd",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-element-and-algebraic-integer",
+          "def-unique-factorisation-domain",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-divisibility-and-associates-in-a-domain",
+          "def-invertible-element",
+          "def-field-of-fractions",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-irreducible-polynomials-over-a-field-are-prime",
+          "thm-well-ordering-principle",
+          "def-zero-divisor-and-integral-domain",
+          "def-field",
+          "lem-field-is-a-commutative-ring",
+          "lem-domain-cancellation"
+        ],
+        "statement": "For every field K and finite d≥0, K[x₁,…,x_d] is an integrally closed domain.",
+        "strategy": "Use the one-variable Euclidean/PID result as the base. Inductively, Gauss content for a UFD R shows R[x] is a UFD: factor primitive polynomials over Frac(R)[x], clear contents, and use primeness of constant irreducibles. A reduced fraction a/b in a UFD satisfying a monic equation has b dividing a^n and hence b a unit. Apply this to the finite-variable polynomial ring; for d=0 it is a field.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.37 (normal polynomial rings)",
+              "url": "https://stacks.math.columbia.edu/tag/037B"
+            },
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+        "kind": "lemma",
+        "title": "Finite-variable polynomial algebras over fields are Noetherian by finite generators",
+        "deps": [
+          "def-noetherian-ring",
+          "def-noetherian-module",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-left-and-right-modules",
+          "def-submodule",
+          "def-left-right-and-two-sided-ideal",
+          "def-generated-and-principal-ideals",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "prop-polynomial-degree-laws-over-a-commutative-ring",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-field",
+          "lem-field-is-a-commutative-ring",
+          "thm-well-ordering-principle"
+        ],
+        "statement": "For every field K and finite d≥0, K[x₁,…,x_d] is Noetherian: each ideal has a finite generating list. The proof uses only finite selections and is choice-free.",
+        "strategy": "A field is Noetherian because each ideal is 0 or the unit ideal. For a Noetherian ring C and ideal I⊆C[x], let J_n⊆C be the ideal of coefficients of x^n in members of I of degree ≤n. The J_n increase, and their union J is an ideal; choose a finite generating list for J and a stage N containing representatives of all its generators, so J_n=J_N for n≥N. For each n≤N choose finite generators of J_n and witness polynomials in I with those top coefficients. These finitely many witnesses generate I: for any f∈I, cancel its leading coefficient using a witness of degree n if deg f≤N, or a suitable x-power of a witness at degree N if deg f>N; descend in degree. This proves the one-variable finite-generator Hilbert basis step without invoking ACC or DC. Iterate from C=K through d variables. At d=0, the field case applies.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §3 Theorem 3.7",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct",
+        "kind": "lemma",
+        "title": "Submodules of finite modules over a Noetherian ring are finite by induction",
+        "deps": [
+          "def-noetherian-ring",
+          "def-noetherian-module",
+          "def-submodule",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-universal-property-of-free-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "thm-module-kernel-image-and-injectivity",
+          "def-left-right-and-two-sided-ideal",
+          "def-generated-and-principal-ideals",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-left-and-right-modules"
+        ],
+        "statement": "If R is a commutative Noetherian ring, M is a finitely generated R-module, and N⊆M is a submodule, then N is finitely generated. This finite-list proof uses no choice axiom.",
+        "strategy": "First prove by induction on n that every submodule P⊆R^n is finitely generated. For n=0 this is immediate. Project P⊆R^n to the last coordinate; its image is an ideal, with a finite generating list because R is Noetherian. Lift this finite list to P, and use the induction hypothesis for the kernel P∩R^{n−1}. Together the lifts and kernel generators generate P. Now choose a finite generating list of M and its surjection R^n→M. The preimage of N is a submodule of R^n and has a finite generating list; its images generate N. Only finitely many lifts are selected at each stage.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §3 Proposition 3.4",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite",
+        "kind": "lemma",
+        "title": "Integral closure in a purely inseparable rational envelope is finite",
+        "deps": [
+          "lem-finite-purely-inseparable-rational-extension-envelope",
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-ring-extension",
+          "cor-integral-elements-form-a-subring",
+          "def-purely-inseparable-extension",
+          "def-extension-degree-and-finite-extension",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "def-dimension",
+          "def-field-of-fractions",
+          "def-finitely-generated-field-extension",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-finite-type-and-module-finite-algebras",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-evaluation-and-root",
+          "def-algebraic-and-transcendental-elements",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "def-zero-divisor-and-integral-domain",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ],
+        "statement": "For K′/K finite purely inseparable, q=p^e and algebraically independent x_i, the integral closure of K[x_i] in E=K′(x_i^{1/q}) is K′[x_i^{1/q}]. For every intermediate field K(x_i)⊆L⊆E, its integral closure over K[x_i] is a finite K[x_i]-module.",
+        "strategy": "Let y_i=x_i^{1/q}. The ring T=K′[y_i] is integral over R=K[x_i] because each element of K′ and each y_i is integral; T is normal by the preceding polynomial-normality lemma and Frac(T)=E. Thus the closure in E equals T. Choose a K-basis of K′; its products with monomials y₁^{a₁}⋯y_d^{a_d}, 0≤a_i<q, span T over R. The closure in L is T∩L by the ambient closure identity and is an R-submodule of finite T. The local choice-free Noetherian lemma gives R Noetherian; the local direct finite-module lemma then makes this submodule finite. The finite K-basis requires only a finite induction, not arbitrary basis choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-normal-extension-separable-over-maximal-purely-inseparable-subextension",
+        "kind": "lemma",
+        "title": "A finite normal extension is separable over its purely inseparable fixed field",
+        "deps": [
+          "def-normal-algebraic-extension",
+          "def-fixed-field-of-an-automorphism-group",
+          "def-relative-field-automorphism-group",
+          "lem-artin-fixed-field-lower-degree-bound",
+          "lem-artin-fixed-field-upper-degree-bound",
+          "prop-finitely-generated-normal-extensions-are-splitting-fields",
+          "thm-isomorphisms-extend-to-splitting-fields",
+          "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
+          "cor-irreducible-polynomial-is-separable-iff-derivative-nonzero",
+          "def-purely-inseparable-extension",
+          "def-separable-elements-and-separable-extensions",
+          "def-repeated-root-and-separable-polynomial",
+          "def-finite-galois-extension-and-galois-group",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "thm-finite-field-extensions-are-algebraic",
+          "def-extension-degree-and-finite-extension",
+          "def-dimension",
+          "def-finitely-generated-field-extension",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-polynomials-that-split-and-splitting-fields",
+          "def-algebraic-and-transcendental-elements",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-tower-law-for-finite-field-extensions"
+        ],
+        "statement": "If M/F is finite normal, the fixed field E=M^{Aut(M/F)} is finite purely inseparable over F, and M/E is finite Galois (hence separable). In characteristic zero E=F. The finite argument is choice-free.",
+        "strategy": "Let G=Aut(M/F). A finite generating list for M/F shows G is finite: an automorphism sends each generator to one of finitely many roots of its minimal polynomial. Put E=M^G. The published Artin lower bound gives [M:E]≥|G|. Prove the matching upper bound here without general rank-nullity: for any |G|+1 elements x_j∈M, finite Gaussian elimination gives a nonzero kernel vector for the |G|×(|G|+1) matrix (σ_i(x_j)). Choose one of least support and normalize its first nonzero coordinate to 1. Applying τ∈G to its equations and permuting rows leaves another kernel vector; subtracting it gives a vector of smaller support unless all coefficients are τ-fixed. Thus the coefficients lie in E, and the identity row gives an E-linear dependence. Hence [M:E]≤|G|. For α∈M the polynomial over E of its distinct G-orbit has coefficients fixed by G; its minimal polynomial over E both divides that polynomial and has every orbit element as a root, so the two are equal. It splits with distinct roots in M, proving M/E finite Galois. For a∈E, M is the splitting field of finitely many F-polynomials by the published finite-normal theorem. Every F-conjugate b of a lies in M. The isomorphism F(a)→F(b) extends to an F-automorphism of their common splitting field M by the published finite splitting-field extension theorem. Since a is G-fixed, b=a. In characteristic p, the published separable-core factorization of an irreducible polynomial with one distinct root gives a^{p^e}∈F; in characteristic zero the derivative makes such an irreducible linear. Thus E/F is purely inseparable. Every selection and matrix calculation is finite, so no choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 9.27.3 (normal extension decomposition)",
+              "url": "https://stacks.math.columbia.edu/tag/030M"
+            },
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            },
+            {
+              "title": "J. S. Milne, Fields and Galois Theory, Ch. 3 Theorems 3.4 and 3.10",
+              "url": "https://www.jmilne.org/math/Books/FT0.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-polynomial-algebras-over-fields-have-finite-integral-closures",
+        "kind": "theorem",
+        "title": "Polynomial algebras over fields have finite integral closures",
+        "deps": [
+          "lem-integral-closure-unchanged-across-an-integral-intermediate-domain",
+          "lem-finite-purely-inseparable-rational-extension-envelope",
+          "lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite",
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct",
+          "lem-normal-extension-separable-over-maximal-purely-inseparable-subextension",
+          "def-field-of-fractions",
+          "def-subfield",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-finitely-generated-field-extension",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-zero-divisor-and-integral-domain",
+          "def-field",
+          "lem-field-is-a-commutative-ring",
+          "def-extension-degree-and-finite-extension",
+          "def-dimension",
+          "def-linear-basis",
+          "thm-finite-field-extensions-are-algebraic",
+          "thm-tower-law-for-finite-field-extensions",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "def-polynomials-that-split-and-splitting-fields",
+          "cor-splitting-fields-exist-for-finite-families",
+          "prop-algebraic-splitting-extensions-are-normal",
+          "def-normal-algebraic-extension",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "def-relative-field-automorphism-group",
+          "def-fixed-field-of-an-automorphism-group",
+          "lem-artin-fixed-field-lower-degree-bound",
+          "lem-artin-fixed-field-upper-degree-bound",
+          "def-finite-galois-extension-and-galois-group",
+          "def-separable-elements-and-separable-extensions",
+          "def-noetherian-ring",
+          "lem-transitivity-of-module-finiteness",
+          "def-finite-type-and-module-finite-algebras",
+          "thm-transitivity-of-integrality",
+          "cor-integral-elements-form-a-subring",
+          "thm-integral-closure-is-integrally-closed",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-ring-extension",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "def-matrices-over-a-commutative-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-determinant-of-a-square-matrix",
+          "thm-cramers-rule-over-a-commutative-ring",
+          "thm-invertible-matrix-theorem",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "statement": "For any field K and finite extension L/K(x₁,…,x_d), the integral closure of K[x₁,…,x_d] in L is finite over K[x₁,…,x_d]. The finite-dimensional proof is choice-free.",
+        "strategy": "Put F=K(x_i). Choose a finite F-basis β_j of L and their minimal polynomials f_j∈F[T]. Form a splitting field M of the finite family f_j over L, using the published finite-family existence result. Its roots are algebraic over L, so M/L and hence M/F are finite. Because L=F(β_j) and every β_j is itself a root, M is generated over F by precisely the roots of the f_j; the published splitting-extension theorem makes M/F normal. This constructs a finite normal overfield without assuming an algebraic closure exists. The preceding fixed-field lemma gives E=M^{Aut(M/F)} purely inseparable over F and M/E finite separable. The rational-envelope lemma makes C, the closure of R=K[x_i] in E, finite over R; C is normal by integrality transitivity and Noetherian because it is finite over Noetherian R by the local direct finite-module lemma. Every e∈E has a nonzero R-multiple integral over R by clearing one finite algebraic equation, so Frac(C)=E. Prove the needed finite separable closure step here, without invoking the published trace theorem with broad basis-choice dependencies. By the published finite primitive-element theorem write M=E(θ), degree n. Clear denominators to replace θ by an integral θ₀=dθ over C, preserving the E-basis e_i=θ₀^i (0≤i<n). In a finite splitting field, the roots α_j of its separable minimal polynomial are distinct. Evaluation at the α_j gives the invertible Vandermonde matrix V_{j,i}=α_j^i, which conjugates the matrix of multiplication by θ₀ to the diagonal matrix with entries α_j. Thus Tr_{M/E}(θ₀^k)=∑α_j^k and the trace matrix H_{ij}=Tr_{M/E}(e_i e_j) equals VᵀV; hence det H=(∏_{r<s}(α_s−α_r))²≠0. Its inverse gives a trace-dual E-basis e_i*. Clear finitely many denominators with 0≠c∈C so c e_i* belongs to the C-span of the integral e_j and is integral over C. If z in the integral closure D of C in M has coordinates z=∑b_i e_i, then c b_i=Tr(z c e_i*)∈C: the product is integral, all its conjugates are integral, their finite sum is integral, and it lies in E=Frac(C), so normality of C applies. Thus D sits in the finite C-module c^{-1}ΣC e_i and is itself finite by the local direct finite-module lemma. Integral-intermediate equality identifies D with the closure of R in M, and finite modules compose. The closure of R in L is D∩L, an R-submodule of finite D; the same local Noetherian and finite-module lemmas make it finite. For characteristic zero E=F; for d=0 all polynomial and field cases still apply. All bases, roots, and denominators are finite choices.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            },
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "Stacks Project, Lemma 9.27.3 (normal extension decomposition)",
+              "url": "https://stacks.math.columbia.edu/tag/030M"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Propositions 1.40, 1.44, 1.51 and 8.3",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-integral-closure-finite-finite-type-domain-over-field",
+        "kind": "theorem",
+        "title": "A finite-type domain over a field has finite normalization",
+        "deps": [
+          "cor-noether-normalisation-module-finiteness",
+          "def-finite-type-and-module-finite-algebras",
+          "thm-integrality-and-finite-module-equivalences",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-ring-extension",
+          "thm-polynomial-algebras-over-fields-have-finite-integral-closures",
+          "lem-integral-closure-unchanged-across-an-integral-intermediate-domain",
+          "thm-transitivity-of-integrality",
+          "def-integral-closure-and-integrally-closed-domain",
+          "cor-integral-elements-form-a-subring",
+          "def-field-of-fractions",
+          "def-zero-divisor-and-integral-domain",
+          "def-field",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "def-finitely-generated-field-extension",
+          "def-extension-degree-and-finite-extension",
+          "def-algebraic-and-transcendental-elements",
+          "def-multivariate-polynomial-ring-by-iteration"
+        ],
+        "statement": "If A is a finite-type integral domain over a field k, its integral closure in Frac(A) is a finite A-module.",
+        "strategy": "Noether normalization supplies R=k[z₁,…,z_d]⊆A with A finite integral over R; therefore Frac(A)/Frac(R) is finite. Apply the preceding polynomial-closure theorem to B, the closure of R in Frac(A). The integral-intermediate lemma says B is exactly the closure of A in Frac(A). Since B is finite over R and R⊆A, the same finite R-generators also generate B as an A-module. Treat A=k (d=0) directly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            },
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Proposition 8.3",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-affine-normalization-is-finite",
+        "kind": "corollary",
+        "title": "The normalization of an irreducible affine variety is finite",
+        "deps": [
+          "thm-integral-closure-finite-finite-type-domain-over-field",
+          "def-finite-type-and-module-finite-algebras",
+          "thm-affine-algebraic-sets-coordinate-duality",
+          "def-reduced-affine-algebra",
+          "def-coordinate-ring-affine-algebraic-set",
+          "thm-affine-variety-prime-coordinate-ring",
+          "def-affine-variety-classical",
+          "def-affine-algebraic-set",
+          "thm-affine-nullstellensatz-correspondence",
+          "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+          "def-morphism-classical-varieties",
+          "thm-global-regular-functions-affine-variety-coordinate-ring",
+          "def-regular-function-classical-variety",
+          "def-function-field-variety",
+          "thm-birational-equivalence-function-fields",
+          "lem-dominant-map-pullback-function-fields",
+          "thm-rational-maps-to-affine-variety-function-field",
+          "def-dominant-morphism-and-rational-map",
+          "def-birational-equivalence-varieties",
+          "def-integral-closure-and-integrally-closed-domain",
+          "thm-integral-closure-is-integrally-closed",
+          "def-zero-divisor-and-integral-domain",
+          "def-field-of-fractions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For an irreducible affine variety X over an algebraically closed field k, the inclusion k[X]⊆overline{k[X]} in k(X) defines a birational affine normalization map ν:Y→X with normal affine source Y; ν is finite in the concrete sense that k[Y] is a finite k[X]-module. No smoothness or projectivity is asserted.",
+        "strategy": "The irreducible affine coordinate ring A=k[X] is a finite-type domain. Its normalization B is finite over A, hence a finite-type k-domain and therefore the coordinate ring of an irreducible affine variety Y by the published object-level affine dictionary. Choose coordinate generators x_j of A; their images in B are regular functions on Y and define a polynomial map Y→X because every relation in I(X) vanishes on those images. The induced map on coordinate rings is precisely A↪B. Normality of B follows by the integral-closure sandwich in the common fraction field; that common fraction field makes the map birational. Define finiteness here by the proved finite A-module condition, avoiding an appeal to the later full morphism anti-equivalence. AC enters only through the published classical affine coordinate dictionary and Nullstellensatz used to realize the finite normal k-algebra as a variety; the underlying module-finiteness theorem is choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Proposition 8.3",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-normalization-compatible-with-principal-opens",
+        "kind": "lemma",
+        "title": "Finite normalization commutes with principal localization",
+        "deps": [
+          "thm-integral-closure-finite-finite-type-domain-over-field",
+          "thm-integrality-commutes-with-localisation",
+          "def-principal-localisation",
+          "def-multiplicative-subset-and-localisation",
+          "def-field-of-fractions",
+          "def-zero-divisor-and-integral-domain",
+          "def-finite-type-and-module-finite-algebras",
+          "lem-transitivity-of-module-finiteness",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-integral-closure-and-integrally-closed-domain"
+        ],
+        "statement": "If A is a finite-type domain over k, B its normalization in Frac(A), and 0≠f∈A, then the normalization of A_f inside Frac(A) is canonically B_f, finite over A_f.",
+        "strategy": "Use the published equality of integral closures after localization inside the unchanged fraction field. Localize a finite list of A-module generators of B; their images generate B_f over A_f. The canonical equality fixes the ambient field and rules out an unspecified isomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemmas 10.161.12–13 (Japanese rings)",
+              "url": "https://stacks.math.columbia.edu/tag/032N"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.0602,
+    "id": "normalization-finiteness-for-affine-domains-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Normalization Finiteness for Affine Domains: Examples",
+    "companion": "normalization-finiteness-for-affine-domains",
+    "requires": [
+      "normalization-finiteness-for-affine-domains"
+    ],
+    "items": [
+      {
+        "id": "ex-integral-closure-cusp-semigroup-affine-domain",
+        "kind": "example",
+        "title": "Normalization of the cusp semigroup ring",
+        "deps": [
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-element-and-algebraic-integer",
+          "cor-integral-elements-form-a-subring",
+          "thm-transitivity-of-integrality",
+          "def-field-of-fractions",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-zero-divisor-and-integral-domain",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-finite-type-and-module-finite-algebras",
+          "def-invertible-element",
+          "def-divisibility-and-associates-in-a-domain"
+        ],
+        "statement": "For any field k, the normalization of k[t²,t³] in k(t) is k[t].",
+        "strategy": "Since t=t³/t² belongs to Frac(k[t²,t³]) and satisfies T²−t²=0, k[t] is integral and finite over the cusp ring with spanning set {1,t}. Every element integral over the cusp ring is integral over k[t]; k[t] is normal, so the closure is contained in k[t]. The reverse containment is integrality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Example 8.6(a)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-normalization-nodal-coordinate-domain",
+        "kind": "example",
+        "title": "Normalization of a nodal affine plane curve",
+        "deps": [
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-element-and-algebraic-integer",
+          "cor-integral-elements-form-a-subring",
+          "thm-transitivity-of-integrality",
+          "def-field-of-fractions",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-zero-divisor-and-integral-domain",
+          "thm-quotient-ring-universal-property",
+          "def-quotient-ring",
+          "def-polynomial-evaluation-and-root",
+          "thm-monic-polynomial-division",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "prop-polynomial-degree-laws-over-a-commutative-ring",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain"
+        ],
+        "statement": "For a field k of characteristic different from 2, the domain k[x,y]/(y²−x²(x+1)) embeds in k[t] by x=t²−1 and y=t(t²−1); its normalization is k[t]. The point (0,0) has two preimages t=±1.",
+        "strategy": "Divide every F(x,y) by the monic polynomial y²−x²(x+1) in the y-variable to get a unique remainder a(x)+b(x)y. Under x=t²−1 and y=t(t²−1), the even and odd parts in t vanish separately; injectivity of k[x]→k[t], x↦t²−1, forces a=b=0. Thus the parametrization embeds the displayed domain A in k[t], and in Frac(A) one has t=y/x. The element t satisfies T²−(x+1)=0 and k[t]=A+At is finite integral over A. Normality of k[t] and the ambient-field sandwich prove it is the full closure. At x=y=0, t²=1 gives two distinct points because char(k)≠2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Example 8.6(b)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-integral-closure-monomial-curve-t3-t4-t5",
+        "kind": "example",
+        "title": "Normalization of the t³,t⁴,t⁵ monomial curve",
+        "deps": [
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-element-and-algebraic-integer",
+          "cor-integral-elements-form-a-subring",
+          "thm-transitivity-of-integrality",
+          "def-field-of-fractions",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-zero-divisor-and-integral-domain",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-finite-type-and-module-finite-algebras"
+        ],
+        "statement": "For any field k, the normalization of k[t³,t⁴,t⁵] in k(t) is k[t].",
+        "strategy": "The quotient t=t⁴/t³ lies in the fraction field, and t satisfies T³−t³=0. The powers 1,t,t² span k[t] as module over k[t³,t⁴,t⁵]. Because k[t] is normal and integral over the semigroup ring, the same sandwich argument gives the full integral closure; do not confuse the conductor with the closure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 10.161.13 (polynomial N-2)",
+              "url": "https://stacks.math.columbia.edu/tag/032O"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.0603,
+    "id": "algebraic-zariski-main-for-quasi-finite-morphisms",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Algebraic Zariski Main for Quasi-Finite Morphisms",
+    "companion": "algebraic-zariski-main-for-quasi-finite-morphisms-examples",
+    "requires": [
+      "zariski-topology-on-prime-spectra",
+      "integral-extensions-and-going-up",
+      "morphisms-local-rings-and-rational-maps-of-affine-varieties",
+      "dimension-constructible-images-and-dimensions-of-fibres"
+    ],
+    "items": [
+      {
+        "id": "def-integral-subalgebra-of-an-arbitrary-ring-map",
+        "kind": "definition",
+        "title": "Integral elements subalgebra of an arbitrary ring map",
+        "deps": [
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-ring-extension",
+          "cor-integral-elements-form-a-subring",
+          "def-subring",
+          "def-algebra-over-a-commutative-ring",
+          "def-integral-closure-and-integrally-closed-domain",
+          "thm-integrality-commutes-with-localisation"
+        ],
+        "statement": "For any unital ring map R→S, write Int_R(S) for the elements of S satisfying a monic polynomial with coefficients in the image of R. This is an R-subalgebra of S; it is called the integral closure of the image of R in S. The definition allows zero divisors and noninjective maps.",
+        "strategy": "Pass to the image A of R in S. If A is nonzero, the published integral-elements subring theorem makes Int_R(S) a subring; if A=0, unitality forces S=0 and the assertion is immediate. All later S′ notation means this relative subalgebra, not the normalization of a domain in its fraction field.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+        "kind": "definition",
+        "title": "Quasi-finiteness at a prime of a finite-type algebra",
+        "deps": [
+          "def-finite-type-and-module-finite-algebras",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "thm-localisation-commutes-with-quotients",
+          "cor-tensor-product-with-a-quotient-ring",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-dimension",
+          "def-quasi-finite-morphism-classical"
+        ],
+        "statement": "For a finite-type ring map R→S and q∈Spec(S), p=q∩R, say R→S is quasi-finite at q when S_q/pS_q is a finite-dimensional κ(p)-algebra; equivalently the local ring of the fibre S⊗_Rκ(p) at q is finite over κ(p). The map is quasi-finite if this holds at all source primes.",
+        "strategy": "Identify S_q/pS_q with (S⊗_Rκ(p))_{q_fib} by quotient and localization/tensor laws. The definition is scheme-prime local and works for nonreduced rings and empty fibres; it is distinct from the classical closed-point convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zmt-polynomial-relation-leading-coefficient-is-integral",
+        "kind": "lemma",
+        "title": "The leading coefficient times a root is integral",
+        "deps": [
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-ring-extension"
+        ],
+        "statement": "If t in an R-algebra satisfies a₀+a₁t+⋯+a_ntⁿ=0, then a_nt is integral over R, even when a_n is a zero divisor.",
+        "strategy": "For n=0 the relation says a₀=0 in S, hence a₀t=0 is integral. For n≥1 multiply by a_n^{n−1} to obtain (a_nt)^n+a_{n−1}(a_nt)^{n−1}+a_{n−2}a_n(a_nt)^{n−2}+⋯+a₀a_n^{n−1}=0. This is monic over R; no cancellation or nonzero leading-coefficient hypothesis is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zmt-one-variable-integral-correction",
+        "kind": "lemma",
+        "title": "One-variable integral correction after leading-coefficient localization",
+        "deps": [
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-ring-extension",
+          "thm-monic-polynomial-division",
+          "thm-transitivity-of-integrality",
+          "thm-integrality-commutes-with-localisation",
+          "thm-integrality-and-finite-module-equivalences",
+          "cor-integral-elements-form-a-subring",
+          "def-principal-localisation",
+          "prop-localisation-zero-equality-and-kernel-criteria"
+        ],
+        "statement": "Let φ:R[x]→S, with t∈S integral over φ(R[x]) and tφ(p)∈Im φ for p=a₀+⋯+a_kx^k. If p is monic, there is q∈R[x] with t−φ(q) integral over R. In general, some a_k^n t−φ(q) is integral over R.",
+        "strategy": "For monic p divide r with tφ(p)=φ(r) as r=qp+r₀, deg r₀<deg p; replace t by t−φ(q). In S_t the identity tφ(p)=φ(r₀) makes φ(x) integral over φ(R)[1/t]. Since t is integral over φ(R)[φ(x)], transitivity makes t integral over φ(R)[1/t]. Clear finitely many t-denominators and the localization equality to obtain a monic equation for t over R. For nonmonic p, invert a_k, make p monic, apply the first case, and clear powers of a_k using localization of integral closure. Handle t nilpotent/zero-divisor via the same clearing step, without dividing in S.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-strongly-transcendental-element",
+        "kind": "definition",
+        "title": "Strong transcendence over a subring",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-subring",
+          "def-zero-divisor-and-integral-domain",
+          "def-field-of-fractions",
+          "def-integral-element-and-algebraic-integer"
+        ],
+        "statement": "For an inclusion R⊆S and x∈S, x is strongly transcendental over R if u∑_{i=0}^n a_ix^i=0 with u∈S and a_i∈R implies ua_i=0 for every i. When S is a domain, this is ordinary transcendence over Frac(R).",
+        "strategy": "Retain the multiplier u: it records annihilators and is essential in reduced rings with several minimal components. For a domain, cancel nonzero u and pass to fraction fields; conversely algebraic dependence contradicts the condition with u=1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-strong-transcendence-descends-to-minimal-prime-quotients",
+        "kind": "lemma",
+        "title": "Strong transcendence descends to reduced minimal-prime quotients",
+        "deps": [
+          "def-strongly-transcendental-element",
+          "def-nilradical-and-reduced-ring",
+          "cor-nilradical-as-intersection-of-primes",
+          "lem-radical-commutes-with-localisation",
+          "cor-primes-of-a-prime-local-ring",
+          "def-localisation-at-a-prime-ideal",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "def-quotient-ring",
+          "prop-canonical-quotient-ring-map",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. If R⊆S are reduced rings, x is strongly transcendental over R, q is a minimal prime of S and p=q∩R, then x mod q is strongly transcendental over R/p inside S/q.",
+        "strategy": "The localization S_q is a field: it is reduced and its only prime is qS_q, so its nilradical is zero. If uP(x)∈q, the image vanishes in S_q; clear one denominator u′∉q to get uu′P(x)=0 in S. Strong transcendence gives uu′a_i=0, hence ua_i∈q for all i. Their images in S/q vanish, which is exactly the desired annihilator-sensitive condition. AC supplies the published nilradical-as-prime-intersection theorem used to identify the localization at a minimal prime as a field.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zmt-polynomial-rings-over-normal-domains-are-normal",
+        "kind": "lemma",
+        "title": "Polynomial rings over normal domains are normal",
+        "deps": [
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-element-and-algebraic-integer",
+          "def-field-of-fractions",
+          "thm-universal-property-of-localisation",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "prop-polynomial-degree-laws-over-a-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-subring",
+          "thm-bezout-identity-for-polynomials",
+          "cor-polynomial-ring-over-a-field-is-euclidean",
+          "thm-integrality-and-finite-module-equivalences",
+          "def-noetherian-ring",
+          "def-noetherian-module",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "lem-subgroups-of-z-are-cyclic",
+          "prop-canonical-quotient-ring-map",
+          "thm-correspondence-theorem-ideals"
+        ],
+        "statement": "For every integrally closed domain R, the polynomial ring R[x] is integrally closed; the assertion does not require R to be Noetherian.",
+        "strategy": "Let K=Frac(R). A fraction z integral over R[x] is integral over K[x]; Euclidean division and a Bézout relation show directly that K[x] is integrally closed, so z=∑α_i x^i in K[x]. Work inside the finite-type Z-subring R₀⊆R generated by the numerators, denominators, and coefficients in one monic equation for z. Prove R₀ Noetherian choice-free: each ideal of Z has a least positive generator; for a Noetherian C and ideal I⊆C[x], the coefficient ideals J_d of x^d among members of I of degree ≤d form an ascending family; their union and the finitely many J_d before its generators appear each have finite generators. Choose polynomial representatives for those finite lists and cancel leading terms by degree descent. Thus C[x] and its quotients are Noetherian, so iterate from Z to R₀. Since z is integral over R₀[x], a common denominator h makes h z^n∈R₀[x] for every n. Its top coefficient shows α_top almost integral over R₀. Almost-integral elements are a subring by the binomial expansion, so subtract α_top x^r and descend to every α_i. For a Noetherian domain C, almost-integral α has C[α]⊆d^{-1}C for a nonzero d; multiplication by d identifies C[α] as an ideal of C, hence it is finitely generated directly from the Noetherian definition. The published finite-module criterion makes α integral. Consequently all α_i are integral over R₀ and hence over R, and normality of R places them in R. This reproduces the coefficient argument of Stacks §10.37 without importing the published Hilbert-basis dependency path, whose metadata includes DC although this finite-generator proof does not use it.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.37 (normal polynomial rings)",
+              "url": "https://stacks.math.columbia.edu/tag/037B"
+            },
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zmt-quasi-finite-transfer-through-intermediate-rings",
+        "kind": "lemma",
+        "title": "Quasi-finite local fibres transfer through quotients and intermediate rings",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-multiplicative-subset-and-localisation",
+          "def-field-of-fractions",
+          "thm-universal-property-of-localisation",
+          "thm-localisation-commutes-with-quotients",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "cor-tensor-product-with-a-quotient-ring"
+        ],
+        "statement": "For a finite-type map R→S quasi-finite at q: (i) S is quasi-finite at q over every intermediate R-subalgebra T⊆S; (ii) an intermediate finite-type T with T_u=S_u for u∈T∖q is quasi-finite over R at q∩T; (iii) arbitrary base change and quotients preserve quasi-finiteness at primes above q; hence a quotient that is not quasi-finite at its image rules out quasi-finiteness upstairs.",
+        "strategy": "Use S_q/pS_q finite over κ(p). For an intermediate T, the localized fibre over r=q∩T is a quotient of the finite-dimensional local fibre after extending its coefficient field, so finite. When T_u=S_u, the local fibre rings at corresponding primes are isomorphic. Quotients remain finite-dimensional. Under arbitrary base change R→R′, each chosen residue field κ(p′) extends κ(p), and the new fibre is the old fibre tensored with κ(p′), then localized at the selected prime; it remains finite-dimensional. Explicitly track the prime contractions and use finite-type hypotheses for all local fibre rings.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-strongly-transcendental-finite-one-variable-algebra-is-nowhere-quasi-finite",
+        "kind": "lemma",
+        "title": "Finite algebras over a strongly transcendental variable are nowhere quasi-finite",
+        "deps": [
+          "thm-integral-closure-is-integrally-closed",
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-strongly-transcendental-element",
+          "def-algebraic-and-transcendental-elements",
+          "def-nilradical-and-reduced-ring",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "def-axiom-of-choice",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-universal-property-of-a-polynomial-ring",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-universal-property-of-localisation",
+          "thm-integrality-and-finite-module-equivalences",
+          "thm-going-down-over-normal-domains",
+          "thm-lying-over",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
+          "lem-zmt-polynomial-rings-over-normal-domains-are-normal",
+          "lem-zmt-quasi-finite-transfer-through-intermediate-rings",
+          "lem-strong-transcendence-descends-to-minimal-prime-quotients",
+          "cor-primes-of-a-prime-local-ring",
+          "lem-minimal-prime-over-an-ideal-exists",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "def-localisation-at-a-prime-ideal",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "statement": "Assume the Axiom of Choice. If R⊆S are reduced rings, x∈S is strongly transcendental over R, and S is finite over R[x], then R→S is quasi-finite at no prime of S.",
+        "strategy": "First take domains. If R is normal and S were quasi-finite at q over p, the prime r=q∩R[x] strictly contains pR[x], since otherwise κ(r)=κ(p)(x) is transcendental and cannot sit in the finite residue extension from the local fibre. R[x] is normal by the preceding lemma. Going down for the integral extension R[x]⊆S yields q′⊊q over pR[x], still over p, giving a strict chain in the finite-dimensional local fibre S_q/pS_q. This is impossible: each prime quotient of a finite-dimensional algebra over κ(p) is a finite-dimensional domain, hence a field because multiplication by any nonzero element is injective and therefore surjective. If R is not normal, take its normalization Rbar inside Frac(R) and Sbar=Rbar S in Frac(S). It is integral over S and finite over Rbar[x]; lying over gives qbar above q. Base-change/quotient transfer keeps Sbar/Rbar quasi-finite there, contradicting the normal case. For reduced S choose a minimal q₀⊆q; the preceding lemma makes x transcendental in S/q₀ over R/(q₀∩R), while quotient transfer would retain quasi-finiteness, contradicting the domain case. AC is used through going down, lying over, minimal-prime descent and minimal-prime existence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            },
+            {
+              "title": "Stacks Project, §10.37 (normal polynomial rings)",
+              "url": "https://stacks.math.columbia.edu/tag/037B"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zmt-one-generator-local-integrality",
+        "kind": "lemma",
+        "title": "A quasi-finite one-generator quotient is locally its integral closure",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-multiplicative-subset-and-localisation",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "lem-zmt-polynomial-relation-leading-coefficient-is-integral",
+          "thm-transitivity-of-integrality",
+          "thm-localisation-commutes-with-quotients",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-universal-property-of-a-polynomial-ring",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "prop-localisation-zero-equality-and-kernel-criteria"
+        ],
+        "statement": "Let S=R[x]/I be quasi-finite at q and let S′ be the integral closure of the image of R in S. There is g∈S′∖q such that S′_g=S_g.",
+        "strategy": "The local fibre is finite-dimensional, so I has a polynomial relation f whose coefficient survives in κ(p), p=q∩R; otherwise the fibre is κ(p)[x], whose localization at any prime is infinite-dimensional. Regard the relation as one over S′ and choose minimal degree m with a coefficient outside q. If the leading coefficient b_m avoids q, the leading-coefficient lemma makes b_m x integral over S′, and transitivity through the integral ring S′/R makes b_m x integral over R, hence b_m x∈S′. Therefore x∈S′_{b_m} and equality follows. If b_m∈q, the same integrality argument puts b_m x in S′; replace b_{m−1} by b_m x+b_{m−1}. It has the same image modulo q, and one coefficient still avoids q, contradicting minimality. This argument is valid with zero divisors.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zmt-conductor-radical-coefficients",
+        "kind": "lemma",
+        "title": "Conductor radical detects every polynomial coefficient",
+        "deps": [
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "def-finite-type-and-module-finite-algebras",
+          "def-radical-of-an-ideal",
+          "lem-radical-is-an-ideal",
+          "thm-integrality-and-finite-module-equivalences",
+          "lem-zmt-one-variable-integral-correction",
+          "prop-polynomial-degree-laws-over-a-commutative-ring",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ],
+        "statement": "Let φ:R[x]→S be finite, with the image of R integrally closed in S, and J={s∈S:sS⊆Im φ}. If uφ(P)∈J for P=∑a_ix^i, some m has uφ(a_n)^m∈J. If uφ(P)∈√J, then uφ(a_i)∈√J for every i.",
+        "strategy": "Choose finite R[x]-module generators t_j of S. Every ut_j is integral over R[x], and uφ(P)t_j lies in Im φ. Apply the nonmonic integral-correction lemma to each ut_j: after a power of the leading coefficient, it differs from a polynomial image by an element integral over R. Integral closedness inside S makes that difference an R-image, so a common maximum power sends every ut_j into Im φ, proving the J claim. For √J, raise uP to a power, apply the J claim to its top coefficient, and deduce ua_n∈√J; subtract ua_nx^n and descend in degree. No assumption that leading coefficients are regular is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-algebraic-zariski-main-localization",
+        "kind": "theorem",
+        "title": "Algebraic Zariski Main localization at a quasi-finite prime",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "def-strongly-transcendental-element",
+          "def-axiom-of-choice",
+          "def-principal-localisation",
+          "def-multiplicative-subset-and-localisation",
+          "def-localisation-at-a-prime-ideal",
+          "def-radical-of-an-ideal",
+          "lem-radical-is-an-ideal",
+          "def-nilradical-and-reduced-ring",
+          "def-prime-and-maximal-ideals",
+          "lem-zmt-quasi-finite-transfer-through-intermediate-rings",
+          "lem-zmt-conductor-radical-coefficients",
+          "lem-zmt-one-generator-local-integrality",
+          "lem-strongly-transcendental-finite-one-variable-algebra-is-nowhere-quasi-finite",
+          "thm-transitivity-of-integrality",
+          "thm-integrality-and-finite-module-equivalences",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
+          "lem-localisation-preserves-injectivity",
+          "prop-iterated-localisation",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ],
+        "statement": "Assume the Axiom of Choice. For a finite-type ring map R→S, S′ the integral closure of the image of R in S, and q∈Spec(S) where R→S is quasi-finite, there is g∈S′∖q with S′_g≅S_g via inclusion.",
+        "strategy": "Induct on the least n for which S is finite over R[x₁,…,x_n]. At n=0, the finite-module criterion gives S=S′. For n=1 replace the image of R by S′; transfer preserves quasi-finiteness, and S is finite over R[x]. Let J be the conductor in S. The conductor-radical lemma makes x strongly transcendental in S/√J over R/(R∩√J). If q contained J, quotient transfer and the nowhere-quasi-finite lemma would contradict the hypothesis. Choose s∈J∖q, write s=φ(f) for f∈R[x], and set I=kerφ. Then S_s=(R[x]/I)_f. Transfer quasi-finiteness to R[x]/I at the contracted prime. Its integral closure of R is R, so the one-generator lemma gives h∈R∖q with (R[x]/I)_h=R_h. In R_h write s=a/h^N with a∈R∖q; localizing at the base element g=ha∈S′ gives S_g=R_g. For n>1 close R[x₁,…,x_{n−1}] integrally inside S to R′; S/R′ remains quasi-finite at q and S is finite over R′[x_n]. Apply the n=1 case to get g′∈R′∖q with R′_{g′}=S_{g′}. Express finite R-algebra generators of S_{g′} using finitely many numerators y_i∈R′; let R″=R[x₁,…,x_{n−1},y_i,g′]⊆R′. The integral-element finite-module lemma makes R″ finite over R[x₁,…,x_{n−1}], and R″_{g′}=S_{g′}; transfer gives quasi-finiteness of R″/R at q∩R″. Induction supplies R‴⊆R″ integral over R and g″∈R‴∖q with R‴_{g″}=R″_{g″}. Write g′=g‴/(g″)^m in that localization, with g‴∈R‴∖q, and take g=g″g‴∈R‴⊆S′. Then g′ is invertible after g-localization, so S′_g=S_g. AC enters through going down and lying over in the nowhere-quasi-finite lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-quasi-finite-locus-open-finite-type-algebra",
+        "kind": "corollary",
+        "title": "The quasi-finite locus of a finite-type algebra is open",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "thm-algebraic-zariski-main-localization",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
+          "prop-iterated-localisation",
+          "thm-localisation-commutes-with-quotients",
+          "def-multiplicative-subset-and-localisation",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "def-principal-localisation",
+          "def-principal-distinguished-subset-of-spectrum",
+          "lem-zariski-closed-set-axioms",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For a finite-type map R→S, the set of q∈Spec(S) at which the map is quasi-finite is open.",
+        "strategy": "At a quasi-finite q obtain g∈S′∖q with S′_g=S_g. Because S_g is finite type over R, choose finitely many numerator generators from S′ and let T⊆S′ be the R-subalgebra generated by them and g. Each generator is integral over R, so T is finite over R, and T_g=S_g. Every fibre of the finite R-algebra T is finite-dimensional; localization identifies all local fibres of S on D(g) with those of T. Hence D(g) is a quasi-finite neighbourhood of q.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-quasi-finite-algebra-open-finite-factorization",
+        "kind": "theorem",
+        "title": "A quasi-finite algebra factors openly through a finite algebra",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "thm-algebraic-zariski-main-localization",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
+          "prop-iterated-localisation",
+          "thm-prime-spectrum-is-compact",
+          "lem-spectrum-compactness-open-cover-to-unit-ideal",
+          "lem-localisation-spectrum-map-homeomorphism-onto-image",
+          "def-principal-distinguished-subset-of-spectrum",
+          "lem-zariski-closed-set-axioms",
+          "cor-spectrum-is-a-contravariant-topological-functor",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "def-principal-localisation",
+          "lem-localisation-preserves-injectivity",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. If R→S is finite type and quasi-finite at every source prime, let S′ be the integral closure of R in S. There is a finite R-subalgebra T⊆S′ such that Spec(S)→Spec(T) is a homeomorphism onto an open subset U. A finite principal-open cover D_T(g_i) of U has T_{g_i}→S_{g_i} isomorphisms; more generally T_g→S_g is an isomorphism for every g∈T with D_T(g)⊆U.",
+        "strategy": "The local theorem gives g_i∈S′ with S′_{g_i}=S_{g_i}; quasi-compactness of Spec(S) yields finitely many whose D_S(g_i) cover and whose g_i generate 1 in S. For each i, express finite R-algebra generators of S_{g_i} as numerators from S′ divided by powers of g_i. Let T be generated over R by all g_i and these finitely many numerators. Integrality makes T finite over R, and T_{g_i}=S_{g_i} for every i. Thus Spec(S) is identified piecewise with D_T(g_i), and the images glue to U=⋃D_T(g_i). For any g∈T with D_T(g)⊆U, the g_i generate the unit ideal of T_g. The kernel and cokernel of T_g→S_g vanish: each of their elements is killed by powers of every g_i, and finitely many such powers still generate 1. Hence T_g≅S_g. This is an algebraic finite/open factorization and leaves classical variety gluing to the AG consumer.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra",
+        "kind": "corollary",
+        "title": "Quasi-finite algebras are source locally localizations of finite algebras",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "thm-quasi-finite-algebra-open-finite-factorization",
+          "def-principal-localisation",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For every q∈Spec(S) in a finite-type quasi-finite R-algebra, there are a finite R-algebra T and g∈T avoiding the image of q such that the corresponding source principal open has algebra S_g≅T_g.",
+        "strategy": "Choose the finite T and cover D_T(g_i) from the factorization theorem. At the image of q, select an index i with g_i outside the prime; then the corresponding principal localization is an isomorphism. Make clear that g_i lies in the finite intermediate algebra, not necessarily R: no global or base-principal finiteness is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.0604,
+    "id": "algebraic-zariski-main-for-quasi-finite-morphisms-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Algebraic Zariski Main for Quasi-Finite Morphisms: Examples",
+    "companion": "algebraic-zariski-main-for-quasi-finite-morphisms",
+    "requires": [
+      "algebraic-zariski-main-for-quasi-finite-morphisms",
+      "fibre-products-base-change-and-scheme-theoretic-fibres"
+    ],
+    "items": [
+      {
+        "id": "ex-zariski-main-open-immersion-punctured-affine-line",
+        "kind": "example",
+        "title": "The punctured affine line as an open finite factorization",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-finite-type-and-module-finite-algebras",
+          "def-principal-localisation",
+          "cor-principal-localisation-spectrum-is-distinguished-open",
+          "lem-tensor-ring-presentations-for-base-change",
+          "prop-iterated-localisation",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-quasi-finite-algebra-open-finite-factorization",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "def-multiplicative-subset-and-localisation",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For any field k, R=k[t] and S=k[t,t^{-1}] give a quasi-finite finite-type R-algebra with factorization through the finite R-algebra T=R; Spec(S)=D_R(t).",
+        "strategy": "Present S=R[u]/(tu−1). Every fibre is either zero (at t=0) or the residue field (where t is invertible), so the map is quasi-finite. Taking T=R and g=t gives T_g=S_g and the open image D(t). AC is recorded solely because the referenced general factorization theorem assumes it; this explicit calculation itself is choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-zariski-main-finite-morphism-factorization",
+        "kind": "example",
+        "title": "A finite algebra is its own Zariski Main factor",
+        "deps": [
+          "def-finite-type-and-module-finite-algebras",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "thm-integrality-and-finite-module-equivalences",
+          "def-prime-and-maximal-ideals",
+          "def-principal-localisation",
+          "cor-spectrum-is-a-contravariant-topological-functor",
+          "lem-zariski-closed-set-axioms",
+          "lem-distinguished-subset-identities",
+          "thm-algebraic-zariski-main-localization",
+          "thm-quasi-finite-algebra-open-finite-factorization",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. If S is a finite R-algebra, then its integral closure of R inside S is S; the Zariski Main local element may be 1 and the finite factorization may take T=S.",
+        "strategy": "Every s∈S is integral over R by the finite-module criterion, so S′=S. Localizing at 1 changes nothing, and Spec(S)→Spec(T) for T=S is the identity with full open image. AC is inherited only from invoking the general theorems; the direct verification uses finite module algebra.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-quasi-finite-morphism-need-not-be-finite",
+        "kind": "counterexample",
+        "title": "Quasi-finite does not imply finite",
+        "deps": [
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra",
+          "def-axiom-of-choice",
+          "def-finite-type-and-module-finite-algebras",
+          "def-product-ring",
+          "def-principal-localisation",
+          "def-multiplicative-subset-and-localisation",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-field",
+          "def-field-of-fractions",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "prop-polynomial-degree-laws-over-a-commutative-ring",
+          "def-integral-element-and-algebraic-integer",
+          "def-integral-subalgebra-of-an-arbitrary-ring-map",
+          "def-integral-closure-and-integrally-closed-domain",
+          "lem-zmt-polynomial-rings-over-normal-domains-are-normal",
+          "thm-integrality-and-finite-module-equivalences",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "thm-universal-property-of-a-polynomial-ring",
+          "thm-monic-polynomial-division",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "lem-tensor-ring-presentations-for-base-change",
+          "def-principal-distinguished-subset-of-spectrum",
+          "lem-localisation-spectrum-map-homeomorphism-onto-image",
+          "lem-quotient-spectrum-map-is-closed",
+          "cor-spectrum-is-a-contravariant-topological-functor",
+          "def-prime-and-maximal-ideals",
+          "def-left-right-and-two-sided-ideal",
+          "thm-quasi-finite-algebra-open-finite-factorization"
+        ],
+        "statement": "Assume the Axiom of Choice. For a field k, R=k[t] and S=R×R[t^{-1}] (diagonal R-algebra) are finite type and quasi-finite, but S is not a finite R-module.",
+        "strategy": "The ring is generated by the idempotent e=(1,0) and u=(0,t^{-1}) with tu=1−e, so it is finite type. Fibres are k at t=0 and κ(p)×κ(p) at primes avoiding t, hence all local fibres are finite. If S were finite over R, its quotient R[t^{-1}] would be finite, so t^{-1} integral over R; multiplying its monic equation by a power of t gives 1∈(t), impossible. The finite factor T=R×R exhibits an open image consisting of the whole first component and D(t) in the second, in accord with the pointwise theorem. AC is inherited from the cited corollary, not used in this explicit counterexample.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §10.123 (algebraic Zariski Main)",
+              "url": "https://stacks.math.columbia.edu/tag/00PI"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, §§6, 17",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

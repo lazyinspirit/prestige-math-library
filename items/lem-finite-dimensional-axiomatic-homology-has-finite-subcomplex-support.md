@@ -2,16 +2,17 @@
 id: "lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support"
 kind: "lemma"
 title: "Finite dimensional axiomatic homology has finite subcomplex support"
-deps: ["lem-finite-dimensional-skeletal-exactness-computes-axiomatic-homology", "lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients", "cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex"]
+deps: ["lem-finite-dimensional-skeletal-exactness-computes-axiomatic-homology", "lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients", "def-cw-complex-with-closure-finiteness-and-weak-topology", "def-skeleta-cw-subcomplex-and-relative-cw-complex"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, cellular calculation pp.119–120"
@@ -22,7 +23,7 @@ sources:
       locator: "Lemma 2.34 p.138, finite support reasoning"
 status: published
 origin: "pipeline"
-proof_strategy: "Cellular chains are direct sums. Each cycle and each boundary witness has finite support contained, by closure finiteness, in a finite subcomplex. Use the natural skeletal isomorphism for subcomplex inclusions. Compact images will subsequently ensure compatibility under continuous maps; singular-chain support is not being assumed for h."
+proof_strategy: "Cellular chains are direct sums. Each cycle and each boundary witness has finite support contained, by closure finiteness, in a finite subcomplex. Use the natural skeletal isomorphism for subcomplex inclusions."
 ---
 
 ## Statement
@@ -39,12 +40,12 @@ is an isomorphism for every integer $n$.
 
 [F2] For a CW pair $(X,A)$, an ordinary theory $h$ with coefficient $G$, and chosen cell orientations, the complex $C_*^h(X,A)$ is canonically $$C_*^{\mathrm{cell}}(X,A;\mathbb Z)\otimes G.$$ Its differential is the integral incidence matrix acting on $G$. In degree one the entries are signed terminal-minus-initial endpoints. The direct-sum matrices have finite support in each column. ([[lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients]])
 
-[F3] If $K$ is compact and $f:K\to X$ is continuous into a CW complex, then $f(K)$ lies in a finite CW subcomplex of $X$. ([[cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex]])
+[F3] Each closed cell meets only finitely many open cells, and cell boundaries lie in lower skeleta ([[def-cw-complex-with-closure-finiteness-and-weak-topology]]). A CW subcomplex is a union of cells containing the closure of each of its cells ([[def-skeleta-cw-subcomplex-and-relative-cw-complex]]).
 
 ## Proof
 
 1.1 By F1 and F2, compute each of these groups using its oriented cellular direct-sum complex with coefficients $G$. Subcomplex inclusion preserves the basis cells and their incidence coefficients. The inclusion from a finite subcomplex therefore gives the actual inclusion of its relative cellular chains into those of $(X,A)$. [F1, F2]
 
-2.1 A cycle in the latter complex has finite support. Include the closures of its support cells in a finite CW subcomplex $K$: each closed cell is the compact image of a disk, and F3 places it in a finite subcomplex; a finite union of these remains finite. The cycle equation is unchanged in this subcomplex, so its homology class comes from $K$. [F3, step 1.1]
+2.1 A cycle in the latter complex has finite support. Starting with those finitely many cells, add every cell meeting one of their closures, then repeat on newly added cells. Each stage adds finitely many cells by F3, and every newly required boundary cell has lower dimension; since the initial cells have a finite maximum dimension, this process terminates after finitely many stages in a finite subcomplex $K$. The cycle equation is unchanged in this subcomplex, so its homology class comes from $K$. [F3, step 1.1]
 
 3.1 If a class from $K$ maps to zero, its representing cycle bounds a finite-support cellular chain in $X$. Enlarge $K$ to a finite subcomplex containing the closures of that chain's support cells. There the same boundary equation already witnesses zero. This is exactly injectivity of the colimit map. Finite unions show the indexing collection is directed, with the empty subcomplex included; zero complexes and negative degrees cause no exception. [F3, step 1.1, step 2.1] ∎

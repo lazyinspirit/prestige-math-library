@@ -5,18 +5,18 @@ title: "Martin's Axiom"
 status: published
 origin: session
 proved_here: false
+verification:
+  precheck: n/a
+  sources_checked:
+    date: 2026-09-26
+    scope: "Current recorded statement and cited passages; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
 deps: [rem-independence-of-ch-and-gch]
 justified_by: []
 forward_refs: [rem-continuum-hypothesis, def-cardinal]
 aliases: []
 landmark: true
 short: "MA is consistent with the negation of CH"
-verification:
-  precheck: n/a
-  sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
 sources:
   scraped: []
   references:
@@ -24,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Martin%27s_axiom"
     - title: "R. M. Solovay and S. Tennenbaum, Iterated Cohen extensions and Souslin's problem, Ann. of Math. 94 (1971), 201-245"
       url: "https://en.wikipedia.org/wiki/Suslin%27s_problem"
+    - title: "K. Kunen, Set Theory: An Introduction to Independence Proofs, Ch. II §2 and Ch. VIII §6"
+      url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/Kunen-1980-Set_Theory.pdf"
     - title: "Continuum hypothesis (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuum_hypothesis"
 pipeline_run: null
@@ -35,7 +37,7 @@ A partial order $P$ has the **countable chain condition** (ccc) when every famil
 of pairwise incompatible elements of $P$ is countable. For a cardinal $\kappa$,
 **$\mathrm{MA}(\kappa)$** asserts:
 
-> for every ccc partial order $P$ and every family $\mathcal{D}$ of at most
+> for every nonempty ccc partial order $P$ and every family $\mathcal{D}$ of at most
 > $\kappa$ dense subsets of $P$, there is a filter on $P$ meeting every member of
 > $\mathcal{D}$.
 
@@ -47,8 +49,9 @@ Three facts fix its status.
 **(a)** $\mathrm{MA}(\aleph_0)$ is a theorem of ZFC (the Rasiowa-Sikorski lemma),
 so MA is not vacuous but its content is entirely in the uncountable cases.
 
-**(b)** CH implies MA, trivially, since under CH there is no $\kappa$ with
-$\aleph_0 < \kappa < 2^{\aleph_0}$. So MA alone decides nothing that CH does not.
+**(b)** CH implies MA, since under CH there is no $\kappa$ with
+$\aleph_0 < \kappa < 2^{\aleph_0}$. The converse fails in the relative
+consistency sense stated in (c).
 
 **(c) If ZFC is consistent, then so is ZFC + MA + (not CH).** This is
 Solovay and Tennenbaum (1971), and it is where finite-support **iterated ccc

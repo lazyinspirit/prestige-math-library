@@ -7,9 +7,9 @@ examples: [ex-weak-star-compactness-of-probability-measures, ex-extreme-points-o
 ---
 
 The applications make every abstract compactness and extremality claim
-concrete.  Regular Borel probabilities are a weak-star closed positive
-normalized slice of a dual ball, and their extreme points are exactly the
-Dirac masses.  Coordinate calculations characterize the extreme boundary of
+concrete.  Under Dependent Choice, regular Borel probabilities are a weak-star closed
+positive normalized slice of a dual ball; the ultrafilter lemma supplies its
+compactness. Their extreme points are exactly the Dirac masses.  Coordinate calculations characterize the extreme boundary of
 the ell-infinity ball and show that the c0 ball has no extreme points, ruling
 out an isometric dual representation of c0 under AC.
 

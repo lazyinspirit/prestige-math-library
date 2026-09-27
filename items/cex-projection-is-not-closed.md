@@ -10,27 +10,19 @@ provenance:
 deps: [fs-projections-are-closed-maps, lem-product-topology-on-rn, thm-product-universal-property,
        def-metric-continuity, thm-metric-continuity-characterisations, lem-of-inverse-positive,
        lem-real-line-is-a-metric-space, def-max-min, lem-of-abs-value,
-       def-homeomorphism-and-open-maps, ex-rn-as-a-product, lem-of-triangle-inequality]
+       def-homeomorphism-and-open-maps, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
 landmark: false
 short: "a projection that is not closed"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-03
-    scope: published-audit-targeted
-    context_sha256: 1163e9bff3a7f8713cef06db920c30bcc7622b3a79dde14d6d7c8c84865cefc9
-    item_sha256: 5c4161f31bdd5b1e639358ae48ad9a427324ad2bba9feec59371399f50b4df39
   verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-04
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -53,7 +45,7 @@ closed maps ([[fs-projections-are-closed-maps]],
 
 **Witness.** In $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ with the product
 topology, which is the usual topology
-([[lem-product-topology-on-rn]], [[ex-rn-as-a-product]]), take
+([[lem-product-topology-on-rn]]), take
 
 $$H \;:=\; \{\, (x,y) \in \mathbb{R}^2 : xy = 1 \,\} .$$
 
@@ -95,4 +87,4 @@ $\pi_0$ is not a closed map, although it is a continuous open surjection
 
 - **Which hypothesis would repair it, and why it is not available.** If the second factor were compact, the projection along it would be a closed map, and $H$ would then have to meet the axis. Compactness is later in the reading order, so no repair is stated here; what is recorded is only the failure.
 
-- **The other two conclusions about projections survive untouched.** $\pi_0$ is open and surjective ([[thm-product-universal-property]], [[ex-rn-as-a-product]]); those hold for every product and are not affected by this witness. Openness and closedness are independent properties of a map, as [[def-homeomorphism-and-open-maps]] records.
+- **The other two conclusions about projections survive untouched.** $\pi_0$ is open and surjective ([[thm-product-universal-property]]); those hold for every product and are not affected by this witness. Openness and closedness are independent properties of a map, as [[def-homeomorphism-and-open-maps]] records.

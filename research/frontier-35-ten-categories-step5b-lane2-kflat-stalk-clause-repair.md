@@ -1,0 +1,9 @@
+# K-flat stalk-clause citation repair
+
+`lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms` F8 formerly attributed the Koszul-compatible total-complex stalk calculation to clause 1 of `lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product`. Clause 1 concerns a single tensor-product sheaf stalk. The bounded-above total-complex calculation, including its Koszul differential, is clause 3. F8 now cites clause 3. The proof at 3.1 uses only the same Koszul sign; no Statement or definition changes.
+
+Raw item guard: `9f76979d12a98ad9848aa3e58fd0dc9fe8364369391493b43f213226d3e070e1` → `5953b2ab356328e3a1ba4c4359f2ece87d2abe4079b42880482e739d647c063c`. Focused item precheck passes. No local contract quoted the erroneous clause number, so no contract edit was needed.
+
+Five direct consumers were checked against the unchanged conclusion. `def-k-flat-complex-of-abelian-sheaves` cites it as the promised preservation result. `lem-abelian-sheaves-admit-bounded-above-flat-resolutions` uses the K-flat preservation result for bounded-above flat resolutions. `lem-derived-tensor-product-of-abelian-sheaves` [F5]/[F6] invokes the two quasi-isomorphism-preservation directions. `lem-koszul-coherence-for-derived-sheaf-tensor` [F10] uses those directions for bounded-above flat complexes. `thm-cup-product-graded-associative-natural` [F8] and proof 1.4 apply the two directions to its canonical flat replacements. All uses match clauses 1 and 2 of the unchanged Statement; no consumer repair follows from this Fact citation correction.
+
+Central defect-ledger proposal: draft proof Fact misattributed supplier clause 1, repaired to exact supplier clause 3; Statement unchanged; guards as above. Current-hash direct-use evidence for this consumer's three changed-supplier pairs is in `research/frontier-35-ten-categories-step5b-impact-lane-2-evidence.jsonl`.

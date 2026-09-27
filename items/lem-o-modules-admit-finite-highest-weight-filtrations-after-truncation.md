@@ -2,13 +2,14 @@
 id: "lem-o-modules-admit-finite-highest-weight-filtrations-after-truncation"
 kind: "lemma"
 title: "Finite filtrations by highest-weight quotients"
-deps: ["lem-finite-b-stable-generators-and-weight-flags-in-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "thm-universal-property-of-verma-modules", "thm-category-o-is-abelian-and-extension-closed"]
+deps: ["lem-finite-b-stable-generators-and-weight-flags-in-category-o", "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra", "thm-universal-property-of-verma-modules", "prop-verma-and-finite-dimensional-modules-lie-in-category-o", "thm-category-o-is-abelian-and-extension-closed"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Chen, Lecture 2 §3 Proposition 3.6, p.5"
@@ -41,10 +42,12 @@ Every $M\in\mathcal O$ is a quotient of a module with a finite Verma flag. Conse
 
 [F4] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. The category $\mathcal O$ is closed under submodules, quotients and finite direct sums and is an abelian category. If $0\to A\to E\to B\to0$ is exact, $A,B\in\mathcal O$, and $E$ is $\mathfrak h$-semisimple, then $E\in\mathcal O$. The middle-term weight hypothesis is essential. ([[thm-category-o-is-abelian-and-extension-closed]])
 
+[F5] Every Verma module $M(\lambda)$ and every quotient of it lies in $\mathcal O$; the proof verifies finite generation, weight decomposition, and local $\mathfrak n^+$-finiteness from the PBW weight cone ([[prop-verma-and-finite-dimensional-modules-lie-in-category-o]]).
+
 ## Proof
 
 1.1 Choose the finite $\mathfrak b$-stable generating subspace $E$ and its one-dimensional weight flag. PBW, with negative roots ordered first, makes $U(\mathfrak g)$ free as a right $U(\mathfrak b)$-module. Tensoring with this right free module preserves injections and surjections, since it is a direct sum of copies of the input vector spaces. [F1, F2]
 
-2.1 Inducing the flag therefore gives a filtration of $P=U(\mathfrak g)\otimes_{U(\mathfrak b)}E$ with factors $M(\lambda_i)$. The map $u\otimes e\mapsto ue$ is well defined and surjective onto $M$. Images of the flag give a filtration of $M$ whose factors are quotients of the corresponding Vermas; delete repeated images to retain only nonzero factors. These are subquotients in the abelian category. [F3, F4, construct, step 1.1]
+2.1 Inducing the flag therefore gives a filtration of $P=U(\mathfrak g)\otimes_{U(\mathfrak b)}E$ with factors $M(\lambda_i)$. Each factor lies in $\mathcal O$ by [F5]. PBW identifies $P$ as $U(\mathfrak n^-)\otimes E$; its negative-root monomials applied to the weight vectors of $E$ are weight vectors, so $P$ and every filtration stage are $\mathfrak h$-semisimple. Starting with the zero stage, apply [F4] successively to the exact sequence from the preceding stage to the current one with Verma quotient: both ends lie in $\mathcal O$ by induction and [F5], and the middle stage is $\mathfrak h$-semisimple. Thus every stage and $P$ lie in $\mathcal O$. The map $u\otimes e\mapsto ue$ is well defined and surjective onto $M$. Images of the flag give a filtration of $M$ whose factors are quotients of the corresponding Vermas; delete repeated images to retain only nonzero factors. These are subquotients in the abelian category. [F2, F3, F4, F5, construct, step 1.1]
 
 3.1 PBW also identifies $P$ with $U(\mathfrak n^-)\otimes E$ as a left $U(\mathfrak n^-)$-module. A basis of $E$ is a finite generating set for this free module, and its image generates $M$ over $U(\mathfrak n^-)$. For $M=0$, choose $E=P=0$ and no factors. [F2, algebra, step 2.1] ∎

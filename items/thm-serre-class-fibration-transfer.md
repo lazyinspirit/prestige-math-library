@@ -7,12 +7,16 @@ origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class, thm-universal-coefficient-theorem-for-homology-over-a-pid, lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free, def-serre-class-ring-ideal-and-mod-c-morphism, prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion, def-serre-filtration-of-the-total-space-over-base-skeleta, lem-relative-homology-over-one-base-cell-is-the-shifted-fiber-homology, lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients, def-axiom-of-choice]
 proof_strategy: direct
-verification:
-  audited: 2026-09-14
-  precheck: pass
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Miller, MIT 18.906 notes, Serre classes in the Serre spectral sequence"
@@ -48,7 +52,7 @@ remain necessary. No claim is made outside the displayed ranges.
 
 **Given:** AC, the fibration and base/fiber hypotheses, the indicated Serre ideal or ring, and the displayed finite range.
 
-[A1] [[def-axiom-of-choice]] is assumed solely to discharge the explicit AC hypothesis in the freeness lemma cited in [F4].
+[A1] [[def-axiom-of-choice]] discharges the explicit AC hypotheses in [F4] and its freeness supplier.
 
 [F1] [[thm-homological-serre-spectral-sequence]] gives the natural choice-free sequence $E^2_{s,t}=H_s(B;\mathcal H_t)$, its finite strong convergence, and constant coefficients when the transport action is trivial.
 
@@ -56,7 +60,7 @@ remain necessary. No claim is made outside the displayed ranges.
 
 [F3] [[thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class]] transfers $\mathcal C$-membership from a bounded $E_2$ region to a finite filtered abutment.
 
-[F4] [[thm-universal-coefficient-theorem-for-homology-over-a-pid]] gives the natural exact sequence $$0\to H_s(B;\mathbb Z)\otimes M\to H_s(B;M)\to\operatorname{Tor}^{\mathbb Z}_1(H_{s-1}(B;\mathbb Z),M)\to0.$$ Its own statement omits AC, but its construction uses freeness of cycles and boundaries; [[lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free]] records AC explicitly. Thus [A1] is a conservative, source-visible hypothesis rather than an attribution to the UCT statement itself.
+[F4] Under AC, [[thm-universal-coefficient-theorem-for-homology-over-a-pid]] gives the natural exact sequence $$0\to H_s(B;\mathbb Z)\otimes M\to H_s(B;M)\to\operatorname{Tor}^{\mathbb Z}_1(H_{s-1}(B;\mathbb Z),M)\to0.$$ Its proof uses the AC-qualified freeness of cycles and boundaries in [[lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free]].
 
 [F5] [[prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion]] identifies the base edge with $p_*$ and the fiber edge with inclusion of $F$.
 
@@ -76,7 +80,7 @@ remain necessary. No claim is made outside the displayed ranges.
 
 3.1 The bottom row of (1) is $E^2_{s,0}=H_s(B,*;\mathbb Z)$. Repeating the finite base-edge argument of step 2.1, now for (1), shows that the edge $H_i(E,F)\to H_i(B,*)$ has kernel filtered by the off-bottom stable terms and cokernel filtered by the images of outgoing bottom-row differentials. Every such group lies in $\mathcal C$ by step 2.2. The quotient filtration is induced by the pair map, so its bottom edge is exactly the map of pairs $p_*$. This proves clause 2 for every $i\leq n$. [F2, F3, F5, step 1.2, step 2.1, step 2.2]
 
-4.1 When $N=0$, clause 1 uses only path-connectedness and gives the isomorphism on $H_0$. When $n=2$, the fiber range $0<t<n-1$ is empty and the off-bottom relative triangle is empty because columns zero and one vanish. Empty fiber is excluded by path-connectedness; the zero ring is not involved because coefficients are integral, but the zero group and zero Serre class are included. One basepoint cell is deleted in step 1.2, and extra zero-cells are handled by the relative cellular boundary before $E_2$. Degenerate singular simplices remain legitimate finite representatives. Both tensor and Tor ends of [F4], both Serre ideal/ring branches, both kernel and cokernel of each edge, and both finite-filtration endpoints are checked. AC is used only for the freeness lemma named in [F4]; no representatives are selected pagewise. There is no iff, no splitting claim, and no assertion beyond the stated bounds. [A1, F1, F2, F3, F4, F5, F6, step 1.1, step 1.2, step 2.1, step 2.2, step 3.1] ∎
+4.1 When $N=0$, clause 1 uses only path-connectedness and gives the isomorphism on $H_0$. When $n=2$, the fiber range $0<t<n-1$ is empty and the off-bottom relative triangle is empty because columns zero and one vanish. Empty fiber is excluded by path-connectedness; the zero ring is not involved because coefficients are integral, but the zero group and zero Serre class are included. One basepoint cell is deleted in step 1.2, and extra zero-cells are handled by the relative cellular boundary before $E_2$. Degenerate singular simplices remain legitimate finite representatives. Both tensor and Tor ends of [F4], both Serre ideal/ring branches, both kernel and cokernel of each edge, and both finite-filtration endpoints are checked. AC is assumed as required by [F4] and its freeness supplier; no representatives are selected pagewise. There is no iff, no splitting claim, and no assertion beyond the stated bounds. [A1, F1, F2, F3, F4, F5, F6, step 1.1, step 1.2, step 2.1, step 2.2, step 3.1] ∎
 
 ## Source notes
 

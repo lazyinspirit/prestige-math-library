@@ -7,14 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-alpha-narrow-graph, def-substitution-of-a-graph-for-a-vertex, rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route]
+deps: [def-alpha-narrow-graph, def-substitution-of-a-graph-for-a-vertex, thm-substituting-perfect-graphs-preserves-perfection]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -22,6 +19,16 @@ sources:
       url: "https://web.math.princeton.edu/~mchudnov/EHsurvey.pdf"
     - title: "Maria Chudnovsky and Shmuel Safra, The Erdős-Hajnal conjecture for bull-free graphs, proof of Theorem 1.3"
       url: "https://web.math.princeton.edu/~mchudnov/EHbullfree.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-07-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -37,7 +44,7 @@ substitution $G=H_1[v\to H_2]$ is defined, then $G$ is $\alpha$-narrow.
 
 [F2] In a substitution, every vertex of the substituted graph $H_2$ has exactly the outside adjacencies that the vertex $v$ had in $H_1$ ([[def-substitution-of-a-graph-for-a-vertex]]).
 
-[L1] Substituting a perfect graph for a vertex of a perfect graph preserves perfection ([[rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route]]).
+[L1] Substituting a perfect graph for a vertex of a perfect graph preserves perfection ([[thm-substituting-perfect-graphs-preserves-perfection]]).
 
 ## Proof
 

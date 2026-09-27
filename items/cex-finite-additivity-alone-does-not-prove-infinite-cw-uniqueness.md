@@ -2,16 +2,17 @@
 id: "cex-finite-additivity-alone-does-not-prove-infinite-cw-uniqueness"
 kind: "counterexample"
 title: "Finite additivity alone does not prove infinite cw uniqueness"
-deps: ["prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs", "thm-singular-homology-satisfies-dimension-and-arbitrary-additivity", "lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients", "lem-finite-dimensional-skeletal-exactness-computes-axiomatic-homology", "lem-additivity-and-compact-cell-support-control-the-infinite-cw-colimit"]
+deps: ["def-axiom-of-choice", "prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs", "thm-singular-homology-satisfies-dimension-and-arbitrary-additivity", "lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients", "lem-finite-dimensional-skeletal-exactness-computes-axiomatic-homology", "lem-additivity-and-compact-cell-support-control-the-infinite-cw-colimit"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, §2.3 Exercise 2, p.165"
@@ -24,6 +25,8 @@ proof_strategy: "Construct boundary maps by shifting the graded family of ordina
 
 ## Statement refuted
 
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
+
 Finite additivity cannot replace arbitrary additivity in uniqueness on all CW pairs. For every integer $n$, set
 $$E_n(X)=\left(\prod_{i\ge0}\widetilde H_i(X;\mathbb Z)\right)\Big/\left(\bigoplus_{i\ge0}\widetilde H_i(X;\mathbb Z)\right).$$
 This construction on based CW spaces satisfies the reduced homotopy, exactness, excision, suspension, and dimension axioms with zero coefficient group, and finite wedge additivity, but fails arbitrary wedge additivity. Its pair version is
@@ -33,6 +36,8 @@ The theory $H_n(X,A;\mathbb Z)\oplus E_n(X,A)$ satisfies the unreduced ordinary 
 ## Facts & Assumptions
 
 **Given:** The objects and hypotheses in the statement above.
+
+[A1] The assumed Axiom of Choice supplies a lift in each of the countably many nonempty coordinate preimage sets in step 1.1 ([[def-axiom-of-choice]]).
 
 [F1] Ordinary unreduced theories on CW pairs and reduced ordinary theories on based CW spaces with vertex basepoints determine one another, naturally and compatibly with morphisms and coefficients. For $A\ne\varnothing$ the correspondence gives $h_n(X,A)\cong\widetilde h_n(X/A)$; for $A=\varnothing$ it gives $h_n(X)\cong\widetilde h_n(X_+)$, where $X_+=X\sqcup\{*\}$. Under this correspondence, pair boundaries are cofiber boundaries followed by inverse suspension, and arbitrary disjoint-sum additivity corresponds to arbitrary wedge additivity. For a CW triple $B\subset A\subset X$ there is a natural exact sequence $\cdots\to h_n(A,B)\to h_n(X,B)\to h_n(X,A)\to h_{n-1}(A,B)\to\cdots$, whose last map is the pair boundary followed by $h_{n-1}(A)\to h_{n-1}(A,B)$. ([[prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs]])
 
@@ -46,7 +51,7 @@ The theory $H_n(X,A;\mathbb Z)\oplus E_n(X,A)$ satisfies the unreduced ordinary 
 
 ## Counterexample
 
-1.1 For a family of abelian groups $M_i$, denote $\prod_{i\ge0}M_i/\bigoplus_{i\ge0}M_i$ by $Q(M)$. Degreewise maps induce maps of $Q$, giving functoriality. If $A_i\xrightarrow{u_i}B_i\xrightarrow{v_i}C_i$ is exact at every $B_i$, then $Q(A)\to Q(B)\to Q(C)$ is exact: when $v(b)$ is finitely supported, replace the finitely many bad coordinates of $b$ by zero; the resulting equivalent tuple lies in $\prod\ker v_i$. Choose coordinate lifts in $A_i$ and obtain a preimage in $Q(A)$. The converse inclusion follows from $v_iu_i=0$. This uses ordinary choice for the countable family of nonempty lift sets. Adding, deleting, or altering finitely many initial coordinates has no effect on $Q$. [construct, algebra]
+1.1 For a family of abelian groups $M_i$, denote $\prod_{i\ge0}M_i/\bigoplus_{i\ge0}M_i$ by $Q(M)$. Degreewise maps induce maps of $Q$, giving functoriality. If $A_i\xrightarrow{u_i}B_i\xrightarrow{v_i}C_i$ is exact at every $B_i$, then $Q(A)\to Q(B)\to Q(C)$ is exact: when $v(b)$ is finitely supported, replace the finitely many bad coordinates of $b$ by zero; the resulting equivalent tuple lies in $\prod\ker v_i$. The assumed Choice selects coordinate lifts in $A_i$ and gives a preimage in $Q(A)$. The converse inclusion follows from $v_iu_i=0$. Adding, deleting, or altering finitely many initial coordinates has no effect on $Q$. [A1, construct, algebra]
 
 2.1 Apply step 1.1 to the ordinary singular pair sequence supplied by [F2]. Define the $E$ boundary by sending a representative $(x_i)_{i\ge0}$ to the tuple whose $j$th coordinate is the singular boundary $\partial x_{j+1}\in H_j(A;\mathbb Z)$. Dropping the unused initial coordinate is precisely the shift identification of step 1.1. At each term the coordinatewise singular exact sequence and that shift prove the required exactness, even though $E_n$ is independent of $n\in\mathbb Z$. Homotopies and excision induce coordinatewise equal maps and isomorphisms, so they do so on $Q$. Apply [F1] here only to the ordinary singular theory [F2]: its quotient identifications and suspension isomorphisms give coordinatewise reduced cofiber sequences and suspension maps. Applying $Q$ and step 1.1 gives the reduced $E$ axioms and identifies them with the displayed pair construction. Replacing reduced absolute groups by unreduced absolute groups changes only coordinate zero and therefore does not change $Q$. All structure maps are natural. [F1, F2, step 1.1, construct]
 

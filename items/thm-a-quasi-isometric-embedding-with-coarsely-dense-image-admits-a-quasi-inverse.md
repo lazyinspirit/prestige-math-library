@@ -11,9 +11,6 @@ deps: [def-coarse-lipschitz-map-and-quasi-isometric-embedding, def-bounded-dista
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -21,6 +18,13 @@ sources:
       url: "https://loeh.app.uni-regensburg.de/teaching/ggt_ws1415/lecture_notes_old.pdf"
     - title: "C. Drutu and M. Kapovich, Geometric Group Theory (with an appendix by B. Nica), 837 pp."
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
 
@@ -47,6 +51,6 @@ A quasi-isometric embedding with coarsely dense image has a quasi-inverse quasi-
 
 1.1 Let $f:X\to Y$ be an $(L,C)$-quasi-isometric embedding whose image is $R$-coarsely dense. By the definition of coarse density, for every $y\in Y$ the set $\{x\in X:d_Y(f(x),y)\le R\}$ is nonempty, so the Axiom of Choice gives a map $g:Y\to X$ with $d_Y(f(g(y)),y)\le R$ for every $y\in Y$. [F1, L1, A1, choose]
 
-2.1 For $y,y'\in Y$, the upper inequality for $f$ gives $$ L^{-1}d_X(g(y),g(y'))-C\le d_Y(f(g(y)),f(g(y')))\le d_Y(y,y')+2R, $$ so $d_X(g(y),g(y'))\le L\,d_Y(y,y')+L(C+2R)$. Likewise $$ d_Y(y,y')\le d_Y(y,f(g(y)))+d_Y(f(g(y)),f(g(y')))+d_Y(f(g(y')),y') $$ is at most $2R+L\,d_X(g(y),g(y'))+C$, so $g$ is a quasi-isometric embedding. [L1, step 1.1]
+2.1 For $y,y'\in Y$, the lower quasi-isometric-embedding inequality for $f$ gives $$ L^{-1}d_X(g(y),g(y'))-C\le d_Y(f(g(y)),f(g(y')))\le d_Y(y,y')+2R, $$ so $d_X(g(y),g(y'))\le L\,d_Y(y,y')+L(C+2R)$. Likewise $$ d_Y(y,y')\le d_Y(y,f(g(y)))+d_Y(f(g(y)),f(g(y')))+d_Y(f(g(y')),y') $$ is at most $2R+L\,d_X(g(y),g(y'))+C$, so $g$ is a quasi-isometric embedding. [L1, step 1.1]
 
 3.1 By step 1.1 the composite $f\circ g$ is at bounded distance at most $R$ from $\operatorname{id}_Y$. Also $$ L^{-1}d_X(g(f(x)),x)-C\le d_Y(f(g(f(x))),f(x))\le R, $$ so $d_X(g(f(x)),x)\le L(C+R)$ for every $x\in X$; hence $g\circ f$ is at bounded distance from $\operatorname{id}_X$. Therefore $g$ is a coarse Lipschitz quasi-inverse of $f$. [F1, L2, step 1.1, step 2.1] ∎

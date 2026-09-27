@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map,
+deps: [def-countable-choice, cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map,
        thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic,
        def-homotopy-relative-and-path-homotopy]
 justified_by: []
@@ -15,12 +15,13 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (cor-the-smooth-and-continuous-homotopy-categories-of-smooth-manifolds-have-the-same-morphism-sets). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,17 +31,17 @@ sources:
 
 ## Statement
 
-For smooth manifolds $M$ and $N$, the set of smooth-homotopy classes of smooth
+Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). For smooth manifolds $M$ and $N$, the set of smooth-homotopy classes of smooth
 maps $M\to N$ is naturally the same as the set of ordinary homotopy classes of
 continuous maps $M\to N$.
 
 ## Facts & Assumptions
 
-**Given:** Smooth manifolds $M$ and $N$.
+**Given:** Countable choice and smooth manifolds $M$ and $N$.
 
-[L1] Every continuous map is homotopic to a smooth map ([[cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map]]).
+[L1] Under countable choice, every continuous map is homotopic to a smooth map ([[cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map]]).
 
-[L2] Continuous homotopies between smooth maps can be smoothed ([[thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic]]).
+[L2] Under countable choice, continuous homotopies between smooth maps can be smoothed ([[thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic]]).
 
 ## Proof
 **Proof technique:** direct.

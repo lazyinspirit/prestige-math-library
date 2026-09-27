@@ -7,11 +7,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (cex-carleson-maximal-operator-is-not-strong-type-one-one). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 9, Example 9.4, p. 55'}]
 status: published
@@ -21,9 +22,9 @@ proof_strategy: Choose N with ||D_N||_1>A+1. For f=F_K, finite Fourier sums give
 
 ## Statement refuted
 
-There exists a finite constant bounding $\|Cf\|_1$ by that constant times $\|f\|_1$ for every $f\in L^1(\mathbb T)$.
+Under Countable Choice, there exists a finite constant bounding $\|Cf\|_1$ by that constant times $\|f\|_1$ for every $f\in L^1(\mathbb T)$.
 
-In fact, for every $A>0$ there is a nonnegative trigonometric polynomial $f$ on the period-one torus, with Haar mass one, such that
+Assume the Axiom of Countable Choice. In fact, for every $A>0$ there is a nonnegative trigonometric polynomial $f$ on the period-one torus, with Haar mass one, such that
 
 $$\|f\|_1=1,\qquad \|Cf\|_1>A.$$
 
@@ -31,7 +32,7 @@ As a further consequence under DC, there exists a real $h\in L^1(\mathbb T)$ wit
 
 ## Facts & Assumptions
 
-**Given:** $A>0$ and normalized Haar measure on $\mathbb T=\mathbb R/\mathbb Z$. DC is assumed only for the further norm-divergence consequence.
+**Given:** Countable Choice, $A>0$, and normalized Haar measure on $\mathbb T=\mathbb R/\mathbb Z$. DC is assumed only for the further norm-divergence consequence.
 
 [F1] The measurable maximal operator is $Cf=\sup_{N\ge0}|S_Nf|$ for $f\in L^1$ ([[def-carleson-maximal-partial-sum-operator]]).
 

@@ -11,14 +11,18 @@ deps: [cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one,
 justified_by: []
 aliases: []
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Section 4.11"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
-  audited: 2026-08-30
-  precheck: pass
 ---
 
 ## Example
@@ -45,6 +49,6 @@ irreducible degree-two character $(2,0,-1)$.
 
 1.1 By [F1] and [F2], the induced character counts fixed cosets of the left action on the three cosets of $H$. The identity fixes all three cosets, a transposition fixes exactly one coset, and a $3$-cycle fixes none, so $\operatorname{Ind}_H^{S_3}\mathbf 1_H=(3,1,0)$. [F1, F2, given]
 
-2.1 Subtracting the trivial character $(1,1,1)$ gives the class function $(2,0,-1)$. Its self-inner-product is $(1/6)(2^2+3\cdot 0^2+2\cdot (-1)^2)=1$, so [F3] makes it irreducible; its value at the identity is $2$, so it has degree $2$. [F3, step 1.1, algebra]
+2.1 In the coset permutation module $\mathbb C^3$, the constant vectors form an invariant trivial line and the coordinate-sum-zero plane is an invariant complement. Hence subtracting the trivial character $(1,1,1)$ gives the genuine character $(2,0,-1)$ of that plane. Its self-inner-product is $(1/6)(2^2+3\cdot 0^2+2\cdot (-1)^2)=1$, so [F3] makes it irreducible; its value at the identity is $2$, so it has degree $2$. [F3, step 1.1, algebra]
 
 3.1 Therefore $\operatorname{Ind}_H^{S_3}\mathbf 1_H=1+\chi_2$ with $\chi_2$ irreducible of degree $2$. [step 2.1] ∎

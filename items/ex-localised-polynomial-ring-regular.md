@@ -2,13 +2,14 @@
 id: "ex-localised-polynomial-ring-regular"
 kind: "example"
 title: "localised polynomial ring regular"
-deps: ["thm-localisation-and-polynomial-extension-of-regular-rings", "thm-dimension-at-most-embedding-dimension"]
+deps: ["def-axiom-of-choice", "thm-localisation-and-polynomial-extension-of-regular-rings", "thm-dimension-at-most-embedding-dimension"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Example 12.37, p.124"
@@ -25,7 +26,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Example
 
-For a field $k$ and integers $0\le r\le n$, the ring $R=k[x_1,\ldots,x_n]_{(x_1,\ldots,x_r)}$ is regular local of dimension $r$, with residue field $k(x_{r+1},\ldots,x_n)$ and regular system $(x_1,\ldots,x_r)$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For a field $k$ and integers $0\le r\le n$, the ring $R=k[x_1,\ldots,x_n]_{(x_1,\ldots,x_r)}$ is regular local of dimension $r$, with residue field $k(x_{r+1},\ldots,x_n)$ and regular system $(x_1,\ldots,x_r)$.
 
 ## Facts & Assumptions
 

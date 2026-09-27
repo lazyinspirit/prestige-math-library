@@ -9,6 +9,13 @@ provenance:
   proof: ai-generated
 deps: [def-clique-independent-set-and-vertex-cover-problems, def-polynomial-time-many-one-reduction, def-graph-isomorphism-and-complement, def-finite-cardinality]
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -16,13 +23,6 @@ sources:
       url: "https://lucatrevisan.github.io/30540/notes-np3.pdf"
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 ---
 
 ## Statement
@@ -50,4 +50,4 @@ polynomial-time many-one reduces to each of the other two.
 
 2.1 Use step 1.2 to define total reductions. For INDEPENDENT SET to VERTEX COVER, map $(G,k)$ to $(G,|V|-k)$ when $k\le |V|$, and map it to the fixed no-instance $(K_2,0)$ when $k>|V|$. For VERTEX COVER to INDEPENDENT SET, map $(G,k)$ to $(G,|V|-k)$ when $k\le |V|$, and map it to the fixed yes-instance $(K_1,1)$ when $k>|V|$. The exceptional branches are correct because no graph has an independent set larger than its vertex set, while every graph has a vertex cover of size at most $|V|$. Both maps are clearly polynomial-time. [L2, F1, step 1.2, construct]
 
-3.1 Step 1.1 gives reductions between CLIQUE and INDEPENDENT SET, and step 2.1 gives reductions between INDEPENDENT SET and VERTEX COVER. Composing these reductions yields reductions in every direction among the three problems. [step 1.1, step 2.1] ∎
+3.1 Encode a finite simple graph by its vertex count and adjacency matrix and encode $k$ in binary. Syntax and symmetry of the matrix can be checked in polynomial time. Extend each map above to malformed input words by outputting a fixed no-instance of its target problem: $(K_1,2)$ for CLIQUE or INDEPENDENT SET and $(K_2,0)$ for VERTEX COVER. Thus each map is total on encoded words, as required by [[def-polynomial-time-many-one-reduction]]. Step 1.1 gives reductions between CLIQUE and INDEPENDENT SET, and step 2.1 gives reductions between INDEPENDENT SET and VERTEX COVER. Composing these total reductions yields reductions in every direction among the three problems. [step 1.1, step 2.1, construct] ∎

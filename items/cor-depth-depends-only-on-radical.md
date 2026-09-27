@@ -4,7 +4,7 @@ title: Depth depends only on the radical of the ideal
 kind: corollary
 status: published
 origin: pipeline
-deps: [lem-depth-radical-invariance-via-ext]
+deps: [def-axiom-of-choice, lem-depth-radical-invariance-via-ext, cor-depth-as-first-nonzero-ext]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,28 +14,34 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
 
-Let $R$ be Noetherian, $M$ finite, and $I,J$ ideals contained in the Jacobson
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $R$ be Noetherian, $M$ finite, and $I,J$ ideals contained in the Jacobson
 radical. If $\sqrt I=\sqrt J$, then
 $$\operatorname{depth}_I(M)=\operatorname{depth}_J(M),$$
 including the value $\infty$.
 
 ## Facts & Assumptions
 
-**Given:** The data in the statement.
+**Given:** The Axiom of Choice and the ring, module, and ideals in the statement.
+
+[L1] Equal radicals give equal first nonzero Ext degrees, including simultaneous infinity ([[lem-depth-radical-invariance-via-ext]]).
+
+[L2] Under the assumed Axiom of Choice, depth for a finite module and a Jacobson-radical ideal is its first nonzero Ext degree ([[cor-depth-as-first-nonzero-ext]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Radical invariance gives equality of the two first nonzero Ext degrees. [given]
+1.1 Apply [L1] to $I$ and $J$: the least nonvanishing degrees of $\operatorname{Ext}^*_R(R/I,M)$ and $\operatorname{Ext}^*_R(R/J,M)$ agree, with both infinite if neither family has a nonzero group. [L1, given]
 
-2.1 The Ext characterization of depth identifies those degrees with the two depths, with the same infinity convention. [step 1.1] ∎
+2.1 Apply [L2] separately to $I$ and $J$; both lie in the Jacobson radical by hypothesis. Their depths are the degrees equal in step 1.1, including the infinite case. [L2, step 1.1, given] ∎

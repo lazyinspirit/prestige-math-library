@@ -4,7 +4,7 @@ title: Depth is bounded by the quotient dimension at every associated prime
 kind: lemma
 status: published
 origin: pipeline
-deps: [lem-associated-prime-after-power-regular-quotient, lem-regular-element-exists-by-prime-avoidance, lem-depth-quotient-by-regular-element, thm-krull-principal-ideal-theorem]
+deps: [lem-associated-prime-after-power-regular-quotient, lem-regular-element-exists-by-prime-avoidance, lem-depth-quotient-by-regular-element, thm-krull-principal-ideal-theorem, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,14 +14,16 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (lem-depth-bounded-by-associated-prime-quotient-dimension). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
+
+Assume the Axiom of Choice.
 
 Let $(R,\mathfrak m)$ be Noetherian local, let $M\ne0$ be finite, and let
 $\mathfrak p\in\operatorname{Ass}_R(M)$. Then
@@ -29,7 +31,7 @@ $$\operatorname{depth}(M)\le\dim(R/\mathfrak p).$$
 
 ## Facts & Assumptions
 
-**Given:** The data in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]); the data in the statement.
 
 ## Proof
 

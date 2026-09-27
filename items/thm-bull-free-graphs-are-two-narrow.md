@@ -12,13 +12,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
 sources:
   scraped: []
   references:
@@ -26,6 +19,21 @@ sources:
       url: "https://web.math.princeton.edu/~mchudnov/EHsurvey.pdf"
     - title: "Maria Chudnovsky and Shmuel Safra, The Erdős-Hajnal conjecture for bull-free graphs, Theorem 1.3"
       url: "https://web.math.princeton.edu/~mchudnov/EHbullfree.pdf"
+verification:
+  precheck: pass
+  review_pending:
+    date: '2026-09-24'
+    reason: 'Open load-bearing chain: rem-strong-perfect-graph-theorem-for-the-bull-route
+      -> thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect
+      -> thm-basic-bull-free-graphs-are-two-narrow -> thm-bull-free-graphs-are-two-narrow
+      -> cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter.
+      Chvátal–Sbihi 1987 restricted bull-free Berge perfection would suffice; original
+      Springer PDF requires login. Chudnovsky–Safra Theorem 4.3 uses full SPGT. Open
+      Numdam 2005 bull-reducible paper cites Chvátal–Sbihi as external Theorem 1;
+      open Chudnovsky–Penev 2012 structure paper uses SPGT. A complete structural
+      proof of this restricted criterion is still required.'
+    evidence: /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-07-receipts.jsonl
+  audited: 2026-09-26
 ---
 
 ## Statement

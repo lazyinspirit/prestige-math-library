@@ -3,10 +3,8 @@ id: thm-riemann-von-mangoldt-zero-counting
 kind: theorem
 title: "The Riemann--von Mangoldt zero count"
 status: published
-verification:
-  audited: 2026-09-07
 origin: pipeline
-deps: [def-riemann-zeta-zero-counting, def-riemann-xi-function, thm-completed-riemann-zeta-functional-equation, thm-argument-principle-null-homologous-cycle, thm-stirling-formula-gamma, thm-hadamard-product-for-riemann-xi, thm-trivial-zeros-and-critical-strip, thm-von-mangoldt-logarithmic-derivative-zeta]
+deps: [def-countable-choice, def-riemann-zeta-zero-counting, def-riemann-xi-function, thm-completed-riemann-zeta-functional-equation, thm-argument-principle-null-homologous-cycle, thm-stirling-formula-gamma, thm-hadamard-product-for-riemann-xi, thm-trivial-zeros-and-critical-strip, thm-von-mangoldt-logarithmic-derivative-zeta]
 proof_strategy: contour
 provenance:
   statement: literature-derived
@@ -15,9 +13,21 @@ sources:
   references:
     - title: "Nick Andersen, Analytic Number Theory, §11.2"
       url: "https://mathdept.byu.edu/~nick/ucla/205a/205a-notes.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For $T\ge2$,
 $$N(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}-\frac{T}{2\pi}+O(\log T).$$
@@ -28,7 +38,7 @@ $$N(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}-\frac{T}{2\pi}+O(\log T).$$
 
 ## Proof
 
-**Given:** $T\ge2$. We first treat sufficiently large $T$ not equal to a zero ordinate.
+**Given:** Countable choice and $T\ge2$. We first treat sufficiently large $T$ not equal to a zero ordinate.
 
 1.1 The Hadamard product [[thm-hadamard-product-for-riemann-xi]] gives $\xi'/\xi(s)=B+\sum_\rho(1/(s-\rho)+1/\rho)$. Write $\rho=\beta+i\gamma$, with $0<\beta<1$ by [[thm-trivial-zeros-and-critical-strip]]. Since $\sum_\rho|\rho|^{-2}<\infty$, the sum of $\Re(1/\rho)=\beta/|\rho|^2$ converges. At $s_0=2+iT$, the xi identity, Stirling's formula and [[thm-von-mangoldt-logarithmic-derivative-zeta]] give $\xi'/\xi(s_0)=O(\log T)$: the zeta term is bounded by $\sum_{n\ge2}(\log n)n^{-2}$, and the Gamma term is $O(\log T)$. Differentiating Stirling here is justified by Cauchy's estimate for its analytic remainder on disks of radius proportional to $|s_0|$ in a larger sector. Taking real parts of the product formula, all variable summands are positive and $$\sum_\rho\frac1{4+(T-\gamma)^2}\le\sum_\rho\frac{2-\beta}{(2-\beta)^2+(T-\gamma)^2}=O(\log T).$$ In particular there are $O(\log T)$ zeros with $|T-\gamma|<1$, without using the present theorem or its unit-interval corollary. [given, algebra]
 

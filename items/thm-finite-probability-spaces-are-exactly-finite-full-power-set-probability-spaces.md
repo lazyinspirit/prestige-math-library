@@ -10,8 +10,12 @@ provenance:
 deps: [def-probability-measure, def-finite-probability-space-and-event, thm-measures-on-finite-sigma-algebras-are-atomic]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 1.1"
@@ -51,7 +55,7 @@ outcomes remain genuine outcomes in both descriptions.
 
 **Proof technique:** direct.
 
-1.1 If $(\Omega,w)$ is a finite probability space, then [L1] already states that every subset of $\Omega$ is an event and that $A\mapsto\sum_{\omega\in A}w(\omega)$ is its probability. Therefore $\mathbb P_w$ is a probability measure on $(\Omega,\mathcal P(\Omega))$ by [L2]. [L1, L2]
+1.1 If $(\Omega,w)$ is a finite probability space, then [L1] makes every subset an event and gives the displayed formula. It is nonnegative, has $\mathbb P_w(\varnothing)=0$, and has $\mathbb P_w(\Omega)=1$. For a sequence of pairwise disjoint subsets $(A_j)_{j\ge0}$, at most $|\Omega|$ of them are nonempty. Each $\omega$ in their union occurs in exactly one $A_j$, so rearranging this finite sum gives $\mathbb P_w(\bigcup_j A_j)=\sum_j\mathbb P_w(A_j)$. Thus $\mathbb P_w$ is a probability measure on $(\Omega,\mathcal P(\Omega))$. [L1, L2, algebra]
 
 1.2 Conversely, let $\mathbb P$ be a probability measure on $(\Omega,\mathcal P(\Omega))$ and put $w(\omega)=\mathbb P(\{\omega\})$. Each singleton is an atom of the full power-set sigma-algebra, and every $A\subseteq\Omega$ is the union of the singletons it contains. Thus [L3] gives $$\mathbb P(A)=\sum_{\omega\in A}\mathbb P(\{\omega\})=\sum_{\omega\in A}w(\omega).$$ Taking $A=\Omega$ yields $\sum_{\omega\in\Omega}w(\omega)=\mathbb P(\Omega)=1$, and nonnegativity of $w$ comes from the measure axioms inside [L2]. So $(\Omega,w)$ is a finite probability space. [L2, L3]
 

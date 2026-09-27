@@ -34,11 +34,14 @@ track would not help. The normality of $\pi$ is open, and so is the question
 whether $e + \pi$ is irrational; the Jacobian conjecture is open in the plane,
 having been refuted in dimension three in July 2026; the Hausdorff dimension of
 the graph of the Weierstrass function is open outside the integer-base range
-settled in 2018; two questions about the price of standard analysis in units of
-the axiom of choice are open, namely whether Hahn-Banach alone yields a Hamel
-basis for $\mathbb{R}$ over $\mathbb{Q}$ and whether it yields a discontinuous
-additive function on the line; and so is the existence in ZFC of a Dowker space of
-cardinality $\aleph_1$.
+settled in 2018.
+
+**Historical questions and dated reports.** Two further entries discuss whether
+Hahn–Banach alone yields a Hamel basis for $\mathbb{R}$ over $\mathbb{Q}$ or
+a discontinuous additive function on the line. The additive-function entry
+records a historical question whose current status has not been verified here.
+The Dowker-space entry reports the $\aleph_1$ existence question as open in
+September 2022, without asserting a verified current status.
 
 **Settled, but outside this stack.** The result is a theorem, proved and
 uncontroversial, and the obstacle is a prerequisite this library has not built.
@@ -58,19 +61,12 @@ settled and reachable in principle, and they are held pending an explicit
 decision about scope, not deferred for a missing prerequisite. Hermite's proof
 that $e$ is transcendental is in scope and is not on this page.
 
-**Unverified here.** The claim was encountered, flagged for checking against a
-source, and not checked: this library does not assert such a claim, uses it
-nowhere, and records what would have to be read to settle its status. The tier is
-listed separately from the open problems on purpose, because "nobody knows" and
-"we have not looked" are not the same claim, and quietly merging them is how a
-reference work starts asserting things it never checked. **No entry on this page
-is currently of this kind.** One was: the claim that a Suslin line has a square
-failing the countable chain condition. The audit of 2026-07-26 carried out the
-check the entry called for, against the reference the entry named, and found the
-claim to be a theorem with a two-paragraph proof; the entry has accordingly moved
-into the settled category above and now says so, keeping its own record of having
-been unverified until then. The tier stays described here because it is the
-honest destination for the next such claim.
+**Unverified here.** A source question or historical status does not establish
+the current state of mathematics. The Hahn–Banach additive-function entry
+explicitly leaves its exact catalogue form and current implication status
+unverified. The earlier Suslin-line entry underwent a source check in July 2026
+and records its own settled, but locally unproved, status. Each entry states
+what was checked and what remains unverified.
 
 Read as a whole the page is the boundary of the library, drawn from the inside.
 Each item closes with what would discharge it: a research advance for the open

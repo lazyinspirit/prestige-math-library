@@ -14,7 +14,12 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
-  audited: 2026-08-13
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -27,7 +32,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $d\in\mathbb N$ and $p\ge0$. Let $(A_i)_{i\in I}$ have a dependency digraph of maximum out-degree at most $d$. If $\mathbb P(A_i)\le p$ for every $i$ and
+Let $d\in\mathbb N$ and $p\ge0$. Let $(A_i)_{i\in I}$ be a finite family of events with a dependency digraph of maximum out-degree at most $d$. If $\mathbb P(A_i)\le p$ for every $i$ and
 $$ep(d+1)\le1,$$
 then $\mathbb P(\bigcap_iA_i^c)>0$.
 

@@ -5,20 +5,20 @@ title: "On a compact smooth manifold, the Morse functions form an open dense sub
 status: published
 origin: session
 provenance:
-  statement: literature-derived
-  proof: ai-generated
-deps: [thm-morse-functions-are-dense-by-relative-jet-transversality, lem-compact-morse-critical-points-have-uniform-hessian-gaps, lem-no-new-critical-points-under-a-compact-c1-small-perturbation]
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-axiom-of-choice, thm-morse-functions-are-dense-by-relative-jet-transversality, lem-compact-morse-critical-points-have-uniform-hessian-gaps, lem-no-new-critical-points-under-a-compact-c1-small-perturbation]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,14 +30,14 @@ sources:
 
 ## Statement
 
-Let $M$ be a compact smooth manifold. Then the Morse functions
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a compact smooth manifold. Then the Morse functions
 $M\to\mathbb R$ form an open dense subset of $C^\infty(M,\mathbb R)$ in the
 $C^2$ topology. Consequently they also form an open dense subset in the
 $C^\infty$ topology.
 
 ## Facts & Assumptions
 
-**Given:** A compact smooth manifold $M$.
+**Given:** The Axiom of Choice and a compact smooth manifold $M$.
 
 [L1] Every $C^\infty$ neighbourhood contains a Morse function ([[thm-morse-functions-are-dense-by-relative-jet-transversality]]).
 
@@ -49,7 +49,7 @@ $C^\infty$ topology.
 
 **Proof technique:** direct.
 
-1.1 Density is immediate from [L1]: given any smooth function and any $C^\infty$ neighbourhood of it, there is a Morse function in that neighbourhood. Since the $C^\infty$ topology is finer than the $C^2$ topology on the same compact manifold, this already implies density in the $C^2$ topology as well. [L1, given]
+1.1 Use the assumed Axiom of Choice to apply the conditional density theorem [L1] (with the closed set empty): given any smooth function and any $C^\infty$ neighbourhood of it, there is a Morse function in that neighbourhood. Since the $C^\infty$ topology is finer than the $C^2$ topology on the same compact manifold, this already implies density in the $C^2$ topology as well. [L1, given]
 
 1.2 Let $f$ be Morse. Apply [L2] to choose pairwise disjoint critical neighbourhoods $U_1,\dots,U_r$ for the critical points of $f$, with the stated persistence and Hessian-gap properties. Apply [L3] to the complement $M\setminus\bigcup_iU_i$. Then every function $g$ sufficiently close to $f$ in the $C^2$ topology has exactly one critical point in each $U_i$, all those critical points are nondegenerate by [L2], and there are no further critical points outside the $U_i$ by [L3]. [L2, L3, given, choose]
 

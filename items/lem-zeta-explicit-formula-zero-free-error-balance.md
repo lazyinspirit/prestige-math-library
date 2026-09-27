@@ -4,24 +4,30 @@ title: "Zeta explicit formula zero free error balance"
 kind: lemma
 status: published
 origin: pipeline
-deps: [thm-von-mangoldt-explicit-formula-truncated, thm-riemann-zeta-classical-zero-free-region, lem-zeta-reciprocal-zero-sum-bound, def-half-weighted-chebyshev-psi]
+deps: [thm-von-mangoldt-explicit-formula-truncated, thm-riemann-zeta-classical-zero-free-region, lem-zeta-reciprocal-zero-sum-bound, def-half-weighted-chebyshev-psi, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "\u00a77.2, proof of Theorem 7.7"
       url: https://kskedlaya.org/ant/part-2-4.html
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For $x\ge2$ and finite $T\ge3$, the classical region and truncated explicit formula give
 $$\psi(x)-x=O\left(xe^{-c_0\log x/\log(T+2)}\log^2T+\frac{x\log^2(xT)}{T}+\log x\right).$$
@@ -29,7 +35,7 @@ Constants may be enlarged and the positive region constant decreased. The zero s
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** Countable choice and the data and hypotheses of the statement.
 
 [F1] [[thm-von-mangoldt-explicit-formula-truncated]]: For $x,T\ge2$, $\psi_0(x)-x=-\sum_{|\Im\rho|<T}\frac{x^\rho}{\rho}-\frac{\zeta'(0)}{\zeta(0)}-\frac12\log(1-x^{-2})+O\!\left(\frac{x\log^2(xT)}T+(\log x)\min\{1,\frac{x}{T\langle x\rangle}\}\right),$ where $\langle x\rangle$ is the distance to the nearest prime power other than possibly $x$. The zero sum is finite and counts multiplicities.
 
@@ -41,6 +47,6 @@ Constants may be enlarged and the positive region constant decreased. The zero s
 
 ## Proof
 
-1.1 For each zero in the finite sum $|\operatorname{Im}\rho|<T$, the region implies $|x^\rho|\le x\exp(-c_0\log x/\log(T+2))$. Summing absolute values and using the reciprocal estimate, including any real zeros, bounds the entire zero sum by the first displayed error. [F2, F3]
+1.1 Under countable choice, the zero-free region and reciprocal-zero bound apply. For each zero in the finite sum $|\operatorname{Im}\rho|<T$, the region implies $|x^\rho|\le x\exp(-c_0\log x/\log(T+2))$. Summing absolute values and using the reciprocal estimate, including any real zeros, bounds the entire zero sum by the first displayed error. [F2, F3]
 
 2.1 The supplied truncation error is at most $O(x\log^2(xT)/T+\log x)$ because its minimum is at most one. The fixed constant $\zeta'(0)/\zeta(0)$ and $\log(1-x^{-2})$ are bounded for $x\ge2$. Finally $|\psi(x)-\psi_0(x)|\le(\log x)/2$, so replacing the half-weighted value gives the asserted error, including prime-power endpoints. The supplied formula holds for all x,T at these bounds; if a contour construction avoids ordinates, a non-ordinate in [T,T+1] has comparable bounds. [F1, F4, step 1.1] ∎

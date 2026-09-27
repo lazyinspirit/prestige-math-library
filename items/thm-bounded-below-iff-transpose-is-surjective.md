@@ -4,16 +4,18 @@ kind: theorem
 title: "Bounded below is equivalent to surjectivity of the transpose"
 status: published
 origin: pipeline
-deps: ["thm-banach-closed-range-theorem", "lem-elementary-kernel-range-annihilator-identities", "lem-transpose-range-membership-by-domination", "thm-bounded-below-iff-injective-with-closed-range"]
+deps: ["thm-banach-closed-range-theorem", "lem-elementary-kernel-range-annihilator-identities", "lem-transpose-range-membership-by-domination", "thm-bounded-below-iff-injective-with-closed-range", "def-axiom-of-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (thm-bounded-below-iff-transpose-is-surjective). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Corollary 4.17(ii), p.181"
@@ -23,13 +25,15 @@ proof_strategy: "Bounded below gives injective closed range, so the closed-range
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume DC. If $T:X\to Y$ is bounded linear between Banach spaces, then $$\bigl(\exists c>0\ \forall x\in X:\|Tx\|\ge c\|x\|\bigr)\quad\Longleftrightarrow\quad T^*:Y^*\to X^*\text{ is onto}.$$
+Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume the Axiom of Choice. If $T:X\to Y$ is bounded linear between Banach spaces, then $$\bigl(\exists c>0\ \forall x\in X:\|Tx\|\ge c\|x\|\bigr)\quad\Longleftrightarrow\quad T^*:Y^*\to X^*\text{ is onto}.$$
 
 ## Facts & Assumptions
 
-**Given:** The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+**Given:** The Axiom of Choice and the spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
 
-[F1] From [[thm-banach-closed-range-theorem]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume DC and let $T:X\to Y$ be bounded linear between Banach spaces. The following are equivalent: $\operatorname{ran}T$ is norm closed; $\operatorname{ran}T^*$ is norm closed; and there is $C>0$ such that $\operatorname{dist}(x,\ker T)\le C\|Tx\|$ for all $x\in X$. In that case $\operatorname{ran}T={}^\perp(\ker T^*),\qquad \operatorname{ran}T^*=(\ker T)^\perp.$
+[F1] From [[thm-banach-closed-range-theorem]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume AC and let $T:X\to Y$ be bounded linear between Banach spaces. The following are equivalent: $\operatorname{ran}T$ is norm closed; $\operatorname{ran}T^*$ is norm closed; and there is $C>0$ such that $\operatorname{dist}(x,\ker T)\le C\|Tx\|$ for all $x\in X$. In that case $\operatorname{ran}T={}^\perp(\ker T^*),\qquad \operatorname{ran}T^*=(\ker T)^\perp.$
+
+[A1] [[def-axiom-of-choice]] is used exactly for the closed-range implication [F1] in step 1.2; it also implies the DC premise of [F4].
 
 [F2] From [[lem-elementary-kernel-range-annihilator-identities]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $(\operatorname{ran}T)^\perp=\ker T^*,\qquad {}^\perp(\operatorname{ran}T^*)=\ker T,\qquad \overline{\operatorname{ran}T}^{\|\cdot\|}={}^\perp(\ker T^*).$ The closure in the last identity is in $Y$.
 
@@ -41,6 +45,6 @@ Let $\mathbb K=\mathbb R$ or $\mathbb C$. Assume DC. If $T:X\to Y$ is bounded li
 
 1.1 If $T$ is bounded below with constant $c>0$, every $f\in X^*$ satisfies $|f(x)|\le\|f\|\|x\|\le (\|f\|/c)\|Tx\|$. Domination gives $f\in\operatorname{ran}T^*$, proving surjectivity. [F3]
 
-1.2 If $T^*$ is onto, its range $X^*$ is closed. Closed range duality makes $\operatorname{ran}T$ closed. Also $\ker T={}^\perp X^*=\{0\}$: the elementary identity applied to the identity operator on $X$ gives the last equality. Thus $T$ is injective with closed range, and the Banach bounded-below criterion applies. [F1, F2, F4]
+1.2 If $T^*$ is onto, its range $X^*$ is closed. Under [A1], closed range duality [F1] makes $\operatorname{ran}T$ closed. Also $\ker T={}^\perp X^*=\{0\}$: the elementary identity applied to the identity operator on $X$ gives the last equality. Thus $T$ is injective with closed range, and the Banach bounded-below criterion [F4] applies under the resulting DC premise. [F1, F2, F4, A1]
 
 2.1 When $X=0$, the lower bound holds for any positive $c$ and $T^*$ maps onto $X^*=0$. The preceding arguments cover this case without choosing a unit vector or dividing by its norm. [step 1.1, step 1.2] ∎

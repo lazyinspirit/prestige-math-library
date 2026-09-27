@@ -7,15 +7,12 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-class-function-and-the-space-of-complex-class-functions, def-complex-conjugate-real-imaginary-part-and-modulus, def-inner-product-space, def-sum-over-a-finite-index-set]
+deps: [def-class-function-and-the-space-of-complex-class-functions, def-complex-conjugate-real-imaginary-part-and-modulus, def-inner-product-space, def-finite-sum-in-a-commutative-monoid]
 justified_by: []
 aliases: []
 verification:
-  audited: 2026-08-29
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-29
+  audited: 2026-09-27
+  precheck: n/a
 sources:
   scraped: []
   references:
@@ -33,7 +30,8 @@ For two class functions $\varphi,\psi\in\mathrm{cf}(G)$
 $$\langle\varphi,\psi\rangle:=\frac{1}{|G|}\sum_{g\in G}\varphi(g)\,\overline{\psi(g)},$$
 
 the finite sum being that of
-([[def-sum-over-a-finite-index-set]]). This is the standard Hermitian form on
+([[def-finite-sum-in-a-commutative-monoid]]) for the additive commutative
+monoid of $\mathbb C$. This is the standard Hermitian form on
 the complex vector space of class functions.
 
 This assignment is an inner product in the exact sense of the published

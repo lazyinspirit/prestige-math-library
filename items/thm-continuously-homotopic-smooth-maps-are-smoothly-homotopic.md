@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-relative-whitney-approximation-for-manifold-valued-maps,
+deps: [def-countable-choice, thm-relative-whitney-approximation-for-manifold-valued-maps,
        def-homotopy-relative-and-path-homotopy,
        prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]
 justified_by: []
@@ -15,12 +15,13 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,18 +31,18 @@ sources:
 
 ## Statement
 
-If two smooth maps $f_0,f_1:M\to N$ are continuously homotopic, then they are
+Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). If two smooth maps $f_0,f_1:M\to N$ are continuously homotopic, then they are
 smoothly homotopic.
 
 ## Facts & Assumptions
 
-**Given:** Smooth maps $f_0,f_1:M\to N$ and a continuous homotopy $H:M\times I\to N$ from $f_0$ to $f_1$.
+**Given:** Countable choice, smooth maps $f_0,f_1:M\to N$, and a continuous homotopy $H:M\times I\to N$ from $f_0$ to $f_1$.
 
 [F1] Homotopies are maps on products with $I=[0,1]$ ([[def-homotopy-relative-and-path-homotopy]]).
 
 [L1] Products of smooth manifolds carry canonical smooth structures ([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
 
-[L2] Relative manifold-valued approximation can smooth a continuous map while fixing it on closed regions where it is already smooth ([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
+[L2] Under countable choice, relative manifold-valued approximation can smooth a continuous map while fixing it on closed regions where it is already smooth ([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
 
 ## Proof
 **Proof technique:** direct.

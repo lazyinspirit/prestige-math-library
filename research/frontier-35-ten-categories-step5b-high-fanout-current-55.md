@@ -1,0 +1,11 @@
+# Step 5b high-fanout current-source reconciliation
+
+This review covers the 55 still-pending `separate_high_fanout_owner` direct pairs after the earlier 87-pair review and the Heine–Cantor title reconciliation. The [55 per-use rows](frontier-35-ten-categories-step5b-high-fanout-current-55.jsonl) bind current full consumer and supplier guards, current line anchors, the clause used, hypotheses and a disposition. Every anchored line was checked verbatim against its current carrier. The outcome is 53 still licensed and two not load bearing.
+
+| Source | Pairs | Current change | Direct-use consequence |
+| --- | ---: | --- | --- |
+| `thm-chain-homotopic-maps-induce-the-same-map-on-homology` | 22 | Replaced an elementwise proof with a proof internal to an abelian category using cycle and boundary subobjects and the epic homology cokernel; Statement unchanged. | Twenty-one uses of homotopy invariance retain the same premise and conclusion. The contiguous-simplicial-maps proof gives its own prism argument, so its declared dependency is not load bearing. |
+| `def-sine-and-cosine-by-power-series` | 6 | Moved the everywhere-convergence lemma from `justified_by` to a dependency; the series and real domain are unchanged. | All six evaluations remain licensed for real arguments. |
+| `def-complex-exponential` | 27 | Moved the everywhere-convergence lemma from `justified_by` to a dependency; the series and complex domain are unchanged. | Twenty-six uses remain licensed. The trigonometric-polynomial density corollary uses more specific character and Fourier suppliers, so this declared dependency is not load bearing at its direct edge. |
+
+Two consumers have changed since the first high-fanout review. The Bernoulli definition now handles the removable value of `t/(e^t-1)` at zero; its current text still uses the complex exponential series, whose convergence is now an explicit dependency. The Jacobi theta definition gained real-order and geometric-domination suppliers; its numerical series still uses the same complex exponential at embedded real arguments. Both rows were checked against their current guards and lines. This is a source-use audit, not a whole-item acceptance of those consumers.

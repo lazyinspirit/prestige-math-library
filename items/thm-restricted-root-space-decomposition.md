@@ -9,6 +9,13 @@ deps: [def-restricted-root-and-restricted-root-space, prop-bracket-relations-and
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter VI"
@@ -16,8 +23,6 @@ sources:
       locator: "Chapter VI, §4, Proposition 6.40 and its proof, printed pp. 370-371"
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-22
 ---
 
 ## Statement
@@ -78,7 +83,7 @@ $\lambda\in\Sigma$, then $Z_{\mathfrak g_0}(H)=\mathfrak g_0^0$.
 
 1.5 $\mathfrak a=\mathfrak p_0\cap\mathfrak g_0^0$: the inclusion $\mathfrak a\subseteq\mathfrak p_0\cap\mathfrak g_0^0$ holds because $\mathfrak a\subseteq\mathfrak p_0$ and $\mathfrak a$ is abelian; conversely, if $X\in\mathfrak p_0\cap\mathfrak g_0^0$, then $[X,\mathfrak a]=0$ and $[X,X]=0$, so $\mathfrak a+\mathbb RX$ is an abelian subspace of $\mathfrak p_0$ containing $\mathfrak a$, and maximality of $\mathfrak a$ forces $X\in\mathfrak a$. [algebra]
 
-2.1 By [L2] there is a basis $\{X_1,\dots,X_N\}$ of $\mathfrak g_0$ consisting of common eigenvectors of the family of step 1.1; each $X_i$ lies in $\mathfrak g_0^{\lambda_{X_i}}$ by definition of $\lambda_{X_i}$, so the subspaces $\mathfrak g_0^\lambda$ span $\mathfrak g_0$ and only finitely many functionals $\lambda\in\mathfrak a^*$ occur with $\mathfrak g_0^\lambda\ne0$. [L2, step 1.2]
+2.1 Choose a finite basis $H_1,\dots,H_r$ of $\mathfrak a$. By [L2] the commuting operators $\operatorname{ad}H_1,\dots,\operatorname{ad}H_r$ have a common eigenbasis $\{X_1,\dots,X_N\}$ of $\mathfrak g_0$. Every $H\in\mathfrak a$ is a linear combination of the $H_j$, so each $X_i$ is an eigenvector of $\operatorname{ad}H$ as well and lies in $\mathfrak g_0^{\lambda_{X_i}}$. Thus the subspaces $\mathfrak g_0^\lambda$ span $\mathfrak g_0$ and only finitely many functionals $\lambda\in\mathfrak a^*$ occur with $\mathfrak g_0^\lambda\ne0$. This includes $\mathfrak a=0$, when the operator family is empty. [L2, step 1.1, step 1.2, algebra]
 
 2.2 Orthogonality: if $\lambda\ne\mu$ are occurring functionals, there is $H\in\mathfrak a$ with $\lambda(H)\ne\mu(H)$; the spaces $\mathfrak g_0^\lambda$ and $\mathfrak g_0^\mu$ are eigenspaces of the self-adjoint endomorphism $\operatorname{ad}H$ for the distinct real eigenvalues $\lambda(H)$ and $\mu(H)$, hence are orthogonal for $B_\theta$ by [L3]. [L3, step 1.1, algebra]
 

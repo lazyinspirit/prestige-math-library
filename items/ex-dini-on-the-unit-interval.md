@@ -12,7 +12,7 @@ deps: [thm-dini, lem-uniform-convergence-in-the-uniform-metric,
        def-interval, lem-continuity-is-local-and-pastes, lem-real-line-is-a-metric-space,
        def-metrizable-space, thm-monotone-convergence, def-canonical-natural,
        cor-archimedean-reciprocal, def-max-min, lem-finite-set-has-max,
-       cex-the-pointwise-limit-of-continuous-functions-need-not-be-continuous,
+       fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets,
        def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy,
        def-metric-continuity, def-continuous-map-top, def-monotone-sequence,
        lem-of-naturals-positive, lem-of-inverse-positive, def-abs-value,
@@ -24,12 +24,12 @@ landmark: false
 short: "Dini on $[0,1]$, and its failure"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -58,19 +58,18 @@ Then:
    $\mathrm{id}_I$ **uniformly** — which is confirmed by the direct estimate
    $|s_k(t) - t| \le a_k$ for every $t$.
 
-**And the hypothesis that the limit is continuous cannot be dropped.** The ramps
-$r_k$ of
-[[cex-the-pointwise-limit-of-continuous-functions-need-not-be-continuous]] are
-continuous on the same compact $I$ and pointwise *nonincreasing*, and they
-converge pointwise to the indicator of $\{1\}$, which is not continuous; the
-conclusion of Dini's theorem fails for them, since a uniform limit of continuous
-functions would be continuous. So on a compact domain, with monotonicity and with
-continuity of every term, continuity of the limit is exactly the missing
-hypothesis, and it is not implied by the others.
+**And the hypothesis that the limit is continuous cannot be dropped.** On the
+same interval, define the ramps
+$$r_k(t):=\max\{0,\,1-(1-t)/a_k\}\qquad(0\le t\le1).$$
+They are continuous and pointwise *nonincreasing*, but converge pointwise to
+the indicator of $\{1\}$, which is not continuous. The conclusion of Dini's
+theorem fails for them, since a uniform limit of continuous functions would
+be continuous. Thus continuity of the limit is not implied by the other
+hypotheses.
 
 ## Facts & Assumptions
 
-**Given:** $I = [0,1]$ with $d(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]], [[def-isometry-and-metric-embedding]], [[def-interval]]), the reals $a_k = 1/\iota(k+2)$, the functions $s_k$ displayed above, and the identity $\mathrm{id}_I$ of $I$.
+**Given:** $I = [0,1]$ with $d(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]], [[def-isometry-and-metric-embedding]], [[def-interval]]), the reals $a_k = 1/\iota(k+2)$, the functions $s_k$ and $r_k$ displayed above, and the identity $\mathrm{id}_I$ of $I$.
 
 [L1] $\iota$ is strictly increasing on $\mathbb{N}$ with $\iota(n) > 0$ for $n \ge 1$, and $0 < u \le v$ gives $0 < 1/v \le 1/u$; hence $0 < a_{k+1} \le a_k \le 1/2$ and $1/2 \le 1 - a_k \le 1 - a_{k+1} < 1$ ([[def-canonical-natural]], [[lem-of-naturals-positive]], [[lem-of-inverse-positive]]).
 
@@ -86,9 +85,7 @@ hypothesis, and it is not implied by the others.
 
 [L7] Uniform convergence, its identification with convergence in the uniform metric, and the uniform limit theorem: a uniform limit of continuous functions is continuous ([[def-topology-of-uniform-convergence]], [[lem-uniform-convergence-in-the-uniform-metric]], [[lem-uniform-metric-on-a-function-space]], [[thm-uniform-limit-theorem]], claim 2).
 
-[L8] The ramps $r_k$ on $I$ are continuous, are pointwise nonincreasing, and converge pointwise to the indicator $\chi$ of $\{1\}$, which is not continuous ([[cex-the-pointwise-limit-of-continuous-functions-need-not-be-continuous]]).
-
-[L9] The maximum and the minimum of a two-element set of reals exist and are among its elements ([[lem-finite-set-has-max]], [[def-max-min]]).
+[L8] The maximum and the minimum of a two-element set of reals exist and are among its elements ([[lem-finite-set-has-max]], [[def-max-min]]).
 
 ## Verification
 
@@ -96,11 +93,15 @@ hypothesis, and it is not implied by the others.
 
 1.1 The two formulas for $s_k$ agree at $t = 1 - a_k$, both giving $1 - a_k$, and the closed sets $[0,1-a_k]$ and $[1-a_k,1]$ cover $I$ since $0 < 1 - a_k < 1$; each restriction is the restriction of an affine map of $\mathbb{R}$, so $s_k$ is a well-defined continuous function on $I$. [L1, L3, L4]
 
-1.2 $s_k(t) = \min\{t,\ 1-a_k\}$ for every $t \in I$: for $t \le 1-a_k$ the minimum is $t$, and for $t \ge 1-a_k$ it is $1-a_k$. [L1, L9]
+1.2 $s_k(t) = \min\{t,\ 1-a_k\}$ for every $t \in I$: for $t \le 1-a_k$ the minimum is $t$, and for $t \ge 1-a_k$ it is $1-a_k$. [L1, L8]
 
-2.1 $s_k(t) \le s_{k+1}(t)$ for every $t$ and $k$, since $1 - a_k \le 1 - a_{k+1}$ makes $\min\{t, 1-a_k\} \le \min\{t, 1-a_{k+1}\}$; with step 1.1 this is claim 1. [step 1.1, step 1.2, L1, L9]
+1.3 For each $k$, the two affine pieces $0$ and $1-(1-t)/a_k$ meet at $t=1-a_k$, so their maximum $r_k$ is continuous by the finite closed-cover pasting lemma. Since $a_{k+1}\le a_k$ and $1-t\ge0$ on $I$, one has $1-(1-t)/a_{k+1}\le1-(1-t)/a_k$ and hence $r_{k+1}(t)\le r_k(t)$. [L1, L3, L4, L8]
+
+2.1 $s_k(t) \le s_{k+1}(t)$ for every $t$ and $k$, since $1 - a_k \le 1 - a_{k+1}$ makes $\min\{t, 1-a_k\} \le \min\{t, 1-a_{k+1}\}$; with step 1.1 this is claim 1. [step 1.1, step 1.2, L1, L8]
 
 2.2 $0 \le t - s_k(t) \le a_k$ for every $t \in I$: for $t \le 1-a_k$ the difference is $0$, and for $t > 1-a_k$ it is $t - (1-a_k) \le 1 - (1-a_k) = a_k$. [step 1.2, L1]
+
+2.3 For $t<1$, the reciprocal estimate [L2] gives $a_k<1-t$ for every sufficiently large $k$, so $r_k(t)=0$ eventually; but $r_k(1)=1$ for every $k$. Thus the pointwise limit is $\chi=\mathbf1_{\{1\}}$. It is discontinuous at $1$: for every $\delta>0$, the point $s=1-\min\{\delta/2,1/2\}$ satisfies $|s-1|<\delta$ and $|\chi(s)-\chi(1)|=1$. [L1, L2, L8, step 1.3]
 
 3.1 Let $\varepsilon > 0$ be real; by [L2] there is a natural $m \ge 1$ with $1/\iota(m) < \varepsilon$, and every $k \ge m$ has $a_k = 1/\iota(k+2) \le 1/\iota(m) < \varepsilon$, so $|s_k(t) - t| \le a_k < \varepsilon$ for every $t \in I$. [step 2.2, L1, L2]
 
@@ -108,12 +109,12 @@ hypothesis, and it is not implied by the others.
 
 5.1 $I$ is a compact metric space, every $s_k$ is continuous, the sequence is pointwise nondecreasing and its pointwise limit $\mathrm{id}_I$ is continuous, so Dini's theorem applies and $(s_k)$ converges to $\mathrm{id}_I$ uniformly; step 3.1 exhibits the same conclusion directly, an index $m$ serving every point at once. [step 2.1, step 3.1, step 4.1, L5, L6, L7]
 
-6.1 For the failure clause, the ramps $r_k$ are continuous on the same compact $I$ and pointwise nonincreasing with pointwise limit the discontinuous $\chi$; were the convergence uniform, the limit would be continuous, so it is not uniform, and the conclusion of Dini's theorem fails for a family satisfying every one of its hypotheses except continuity of the limit. [step 5.1, L5, L7, L8] ∎
+6.1 If the ramps converged uniformly, [L7] would make $\chi$ continuous. Hence they do not converge uniformly, although they satisfy compactness, termwise continuity and pointwise monotonicity. [L5, L7, step 1.3, step 2.3] ∎
 
 ## Remarks
 
 - **Dini's theorem is not needed for the positive half, and that is the point.** Step 3.1 proves uniform convergence of $(s_k)$ by hand, because the discrepancy $t - s_k(t)$ is bounded by $a_k$ independently of $t$. The example is worth stating because the general theorem gives the same conclusion from hypotheses that never mention a uniform bound: compactness, monotonicity, and continuity of the terms and of the limit.
 
-- **Each hypothesis of Dini's theorem is doing something.** Continuity of the limit fails for the ramps, and the conclusion fails with it. Compactness cannot be dropped either, though this page does not construct a witness for that. Monotonicity cannot be dropped: the moving spikes earlier on this page are continuous on the compact $I$, converge pointwise to the continuous $\mathbf{0}$, and do not converge uniformly, and they are not monotone at any point where the spike passes.
+- **Each hypothesis of Dini's theorem is doing something.** Continuity of the limit fails for the ramps, and the conclusion fails with it. Compactness cannot be dropped either, though this page does not construct a witness for that. For failure without monotonicity, the moving spikes in [[fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets]] are continuous on the compact $I$, converge pointwise to the continuous $\mathbf{0}$, and do not converge uniformly.
 
 - **The nonincreasing form is the one the ramps illustrate**, and it is the form obtained from [[thm-dini]] by applying it to the negatives of the functions, as that item's Statement records. Nothing here needs a separate proof.

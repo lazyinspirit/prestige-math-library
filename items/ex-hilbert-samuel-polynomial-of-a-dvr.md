@@ -7,16 +7,9 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-dvr-ideal-and-module-length, thm-existence-of-hilbert-samuel-polynomial, def-hilbert-samuel-multiplicity]
+deps: [thm-dvr-ideal-and-module-length, def-hilbert-samuel-multiplicity]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:
@@ -24,6 +17,16 @@ sources:
       url: "https://web.mit.edu/18.705/www/12Nts.pdf"
     - title: "J. S. Milne, A Primer of Commutative Algebra, discrete valuation rings"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
@@ -40,7 +43,7 @@ $$ e_{(\pi)}(V)=1. $$
 
 [L1] The quotient $V/(\pi^{n+1})$ has length $n+1$ for every $n\ge0$ ([[thm-dvr-ideal-and-module-length]]).
 
-[L2] The Hilbert-Samuel polynomial exists and multiplicity is its factorial scaled leading coefficient ([[thm-existence-of-hilbert-samuel-polynomial]], [[def-hilbert-samuel-multiplicity]]).
+[L2] When the Hilbert-Samuel function is explicitly polynomial, multiplicity is its factorial-scaled leading coefficient ([[def-hilbert-samuel-multiplicity]]).
 
 ## Verification
 

@@ -15,12 +15,12 @@ landmark: false
 short: "the cofinite topology on an infinite set"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -88,7 +88,7 @@ sets of finite complement ([[def-standard-topologies]], [[def-countable]]). Then
 
 ## Remarks
 
-- **Claim 3 is the reason the cofinite topology is a standard counterexample factory.** A space with at least two points in which any two nonempty open sets meet cannot be metrizable ([[thm-metric-hausdorff-separation]], [[def-metrizable-space]]), since a metric separates distinct points by disjoint balls. It does **not** follow that sequential limits fail to be unique there: the cocountable topology on $\mathbb{R}$ also has no two disjoint nonempty open sets and its sequential limits *are* unique ([[ex-cocountable-topology-on-r]]). In the cofinite topology uniqueness does fail, but the argument needs an injective sequence and not merely the meeting of open sets ([[cex-sequential-limits-not-unique]]).
+- **Claim 3 is the reason the cofinite topology is a standard counterexample factory.** A space with at least two points in which any two nonempty open sets meet cannot be metrizable ([[thm-metric-hausdorff-separation]], [[def-metrizable-space]]), since a metric separates distinct points by disjoint balls. It does **not** follow that sequential limits fail to be unique there: the cocountable topology on $\mathbb{R}$ also has no two disjoint nonempty open sets and its sequential limits *are* unique ([[ex-cocountable-topology-on-r]]). In the cofinite topology on $\mathbb{N}$ uniqueness does fail: the identity sequence is injective and converges to every point ([[cex-sequential-limits-not-unique]]). An arbitrary infinite set need not admit such a sequence in ZF.
 
 - **Finiteness of $X$ collapses the example.** If $X$ were finite then every subset would have finite complement, the topology would be discrete, and all four claims would read differently or vacuously. The hypothesis that $X$ is infinite is used in steps 1.5 and 2.2 and is not decoration.
 

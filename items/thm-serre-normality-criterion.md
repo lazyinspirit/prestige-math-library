@@ -2,13 +2,7 @@
 id: "thm-serre-normality-criterion"
 kind: "theorem"
 title: "serre normality criterion"
-deps: ["def-normal-noetherian-ring", "cor-serre-normality-criterion-two-directions", "lem-serre-r-zero-s-one-characterises-reducedness", "lem-reduced-noetherian-total-fractions-and-normal-components", "lem-depth-two-excludes-finite-punctured-extension", "thm-one-dimensional-regular-local-rings-are-dvrs", "thm-valuation-ring-is-integrally-closed", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number", "thm-dimension-at-most-embedding-dimension"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-normal-noetherian-ring", "cor-serre-normality-criterion-two-directions", "lem-serre-r-zero-s-one-characterises-reducedness", "lem-reduced-noetherian-total-fractions-and-normal-components", "lem-depth-two-excludes-finite-punctured-extension", "thm-one-dimensional-regular-local-rings-are-dvrs", "thm-valuation-ring-is-integrally-closed", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number", "thm-dimension-at-most-embedding-dimension", def-axiom-of-choice]
 sources:
   references:
     - title: "10.157.4 complete proof, with 030C and 0BHZ"
@@ -19,21 +13,32 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 For every commutative Noetherian ring $R$, including rings with zero divisors and the zero ring, $R$ is normal if and only if it satisfies $(R_1)$ and $(S_2)$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement. The Axiom of Choice is an explicit hypothesis ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[def-normal-noetherian-ring]]: A commutative Noetherian ring $R$ is **normal** if every prime localization $R_{\mathfrak p}$ is an integrally closed domain. This is a local condition and does not require $R$ itself to be a domain. The zero ring satisfies it vacuously. For a domain, integrally closed means that every element of its fraction field integral over it belongs to it.
 
 [F2] [[cor-serre-normality-criterion-two-directions]]: A commutative Noetherian domain is normal if and only if it satisfies $(R_1)$ and $(S_2)$. Equivalently its integral closedness is characterized by these two conditions.
 
-[F3] [[lem-serre-r-zero-s-one-characterises-reducedness]]: For a finite module $M$ over a commutative Noetherian ring, $(S_1)$ is equivalent to every associated prime being minimal in $\operatorname{Supp}M$. For the ring itself, this means no embedded associated primes. A commutative Noetherian ring is reduced if and only if it satisfies $(R_0)$ and $(S_1)$.
+[F3] [[lem-serre-r-zero-s-one-characterises-reducedness]]: Under the Axiom of Choice, for a finite module $M$ over a commutative Noetherian ring, $(S_1)$ is equivalent to every associated prime being minimal in $\operatorname{Supp}M$. For the ring itself, this means no embedded associated primes. A commutative Noetherian ring is reduced if and only if it satisfies $(R_0)$ and $(S_1)$.
 
 [F4] [[lem-reduced-noetherian-total-fractions-and-normal-components]]: For a reduced commutative Noetherian ring $R$ with minimal primes $\mathfrak p_1,\ldots,\mathfrak p_s$, there is a canonical isomorphism $Q(R)\cong\prod_{i=1}^s\operatorname{Frac}(R/\mathfrak p_i)$. The following are equivalent: $R$ is normal; $R$ is integrally closed in $Q(R)$; and $R$ is a finite product of normal domains. For $R=0$ this is the empty product.
 

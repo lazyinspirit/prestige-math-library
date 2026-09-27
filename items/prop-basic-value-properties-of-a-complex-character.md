@@ -12,8 +12,12 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -77,6 +81,6 @@ $g,h\in G$:
 
 3.1 Applying [A5] to the eigenvalues of step 1.3 gives $|\chi(g)|=|\sum_i\lambda_i|\le\sum_i|\lambda_i|=d=\dim V=\chi(1)$, which is the inequality in claim 4. [A5, step 2.2, step 1.3, step 1.1]
 
-4.1 Equality holds in step 3.1 exactly when the equality clause of [A5] applies: since every $|\lambda_i|=1$, all the eigenvalues share one argument, so all the $\lambda_i$ are equal to one root of unity $\lambda$. The diagonal form of step 1.3 then shows $\rho(g)=\lambda\operatorname{id}_V$, a scalar operator. [A5, step 1.3, algebra]
+4.1 If $V=0$, its only endomorphism is scalar, so the equality case is immediate. If $V\ne0$, equality holds in step 3.1 exactly when the equality clause of [A5] applies: since every $|\lambda_i|=1$, all the eigenvalues share one argument, so all the $\lambda_i$ are equal to one root of unity $\lambda$. The diagonal form of step 1.3 then shows $\rho(g)=\lambda\operatorname{id}_V$, a scalar operator. [A5, step 1.3, algebra]
 
 5.1 Hence, using [A2] for $\rho(g^{-1})=\rho(g)^{-1}$ and the additivity of conjugation from [A4], $\chi(g^{-1})=\sum_i\lambda_i^{-1}=\sum_i\overline{\lambda_i} =\overline{\sum_i\lambda_i}=\overline{\chi(g)}$, which is claim 5. [A2, A4, step 2.4, step 2.2] ∎

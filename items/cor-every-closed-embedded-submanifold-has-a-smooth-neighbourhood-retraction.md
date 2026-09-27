@@ -7,14 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]
+deps: [def-countable-choice, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (cor-every-closed-embedded-submanifold-has-a-smooth-neighbourhood-retraction). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,14 +29,14 @@ sources:
 
 ## Statement
 
-Let $i:S\hookrightarrow M$ be a closed smooth embedded submanifold. Then $S$ has
+Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $i:S\hookrightarrow M$ be a closed smooth embedded submanifold. Then $S$ has
 an open neighbourhood in $M$ that retracts smoothly onto $S$.
 
 ## Facts & Assumptions
 
-**Given:** A closed smooth embedded submanifold $i:S\hookrightarrow M$.
+**Given:** Countable choice and a closed smooth embedded submanifold $i:S\hookrightarrow M$.
 
-[L1] The ambient manifold tubular neighbourhood theorem provides a diffeomorphism $\Phi:\Omega\to U$ from a normal-bundle neighbourhood of the zero section onto an open neighbourhood $U$ of $S$ ([[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]]).
+[L1] Under countable choice, the ambient manifold tubular neighbourhood theorem provides a diffeomorphism $\Phi:\Omega\to U$ from a normal-bundle neighbourhood of the zero section onto an open neighbourhood $U$ of $S$ ([[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]]).
 
 ## Proof
 **Proof technique:** direct.

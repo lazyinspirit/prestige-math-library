@@ -15,12 +15,12 @@ landmark: true
 short: "additive implies $\\mathbb{Q}$-linear"
 proof_strategy: induction
 verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -46,12 +46,6 @@ every real $x$:
 
 In particular, taking $x = 1$ in claim 5, $f(q) = q\,f(1)$ at every rational $q$:
 **an additive function is determined on $\mathbb{Q}$ by its value at $1$.**
-
-**What this does not say.** Claim 5 is $\mathbb{Q}$-homogeneity, not
-$\mathbb{R}$-homogeneity: nothing here gives $f(\lambda x) = \lambda f(x)$ for
-irrational $\lambda$, and that is exactly the gap that
-[[fs-additive-implies-linear]] shows cannot be closed without a regularity
-hypothesis.
 
 ## Facts & Assumptions
 
@@ -90,6 +84,8 @@ hypothesis.
 6.1 Taking $x = 1$ in claim 5 gives $f(q) = q f(1)$ for every rational $q$, and all five claims are proved. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, discharge-induction] ∎
 
 ## Remarks
+
+- **What this does not say.** Claim 5 is $\mathbb{Q}$-homogeneity, not $\mathbb{R}$-homogeneity: nothing here gives $f(\lambda x) = \lambda f(x)$ for irrational $\lambda$, and that is exactly the gap that [[fs-additive-implies-linear]] shows cannot be closed without a regularity hypothesis.
 
 - **The induction is on $\mathbb{N}$ and everything else is algebra.** Only claim 3 needs induction; claims 4 and 5 are obtained from it by the two field operations, and claims 1 and 2 are two substitutions into the equation. The base case is $n = 0$, where $\iota(0) = 0$ and the identity reads $f(0) = 0$; it is a genuine case and not a convention, since $\mathbb{N}$ contains $0$.
 

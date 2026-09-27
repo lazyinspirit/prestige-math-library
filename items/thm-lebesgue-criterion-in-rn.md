@@ -7,19 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-multidimensional-riemann-criterion, def-multidimensional-darboux-sums, def-multidimensional-darboux-integral, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, def-null-and-content-zero-in-rn, lem-null-sets-in-rn-closed-under-subsets-and-countable-unions, lem-compact-null-iff-content-zero-in-rn, def-oscillation-in-rn, lem-oscillation-characterisation-in-rn, cor-archimedean-reciprocal, lem-finite-cube-covers-admit-grid-control, thm-heine-borel-rn, lem-closed-subset-of-a-compact-space-is-compact, def-metric-compactness, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-countable-choice, lem-integer-part, thm-algebra-of-continuous-functions, def-continuity-real, def-finite-sum, lem-finite-sum-laws]
+deps: [thm-rationals-countable, lem-q-and-irrationals-dense-r, thm-n-cross-n-countable, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, thm-multidimensional-riemann-criterion, def-multidimensional-darboux-sums, def-multidimensional-darboux-integral, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, def-null-and-content-zero-in-rn, lem-compact-null-iff-content-zero-in-rn, def-oscillation-in-rn, lem-oscillation-characterisation-in-rn, cor-archimedean-reciprocal, lem-finite-cube-covers-admit-grid-control, thm-heine-borel-rn, lem-closed-subset-of-a-compact-space-is-compact, def-metric-compactness, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-integer-part, thm-algebra-of-continuous-functions, def-continuity-real, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
   verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-10
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -50,6 +49,10 @@ A bounded real function on a closed nondegenerate rectangle in $\mathbb R^m$, $m
 
 [L6] For every positive real $u$ there is a natural $r\ge1$ with $1/r<u$ ([[cor-archimedean-reciprocal]]).
 
+[L7] The rationals have a fixed enumeration and are dense in the reals ([[thm-rationals-countable]], [[lem-q-and-irrationals-dense-r]]). The explicit pairing bijection in [[thm-n-cross-n-countable]] codes finite tuples: code their length and the recursively paired entries, so finite lists of rational cubes admit natural-number codes.
+
+[L8] The geometric series gives $\sum_{r\ge1}2^{-r}=1$, and a nonnegative series with bounded partial sums converges ([[thm-geometric-series]], [[thm-nonnegative-series-bounded-partial-sums]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -70,6 +73,8 @@ A bounded real function on a closed nondegenerate rectangle in $\mathbb R^m$, $m
 
 4.1 Refine $P_0$ to mesh small enough that the fixed norm comparison in [L4] makes every cell meeting a shrunken ball lie inside the corresponding original ball. Every cell not meeting $O$ contains a point of $K$, hence is contained in one of those original oscillation balls; refinement does not increase the total volume of cells meeting $O$.  [step 3.1, L3, L4]
 
+4.2 By [L1] and [L6], $D=\bigcup_{r\ge1}S_{1/r}$. Fix $\varepsilon>0$. Step 3.2 gives each $S_{1/r}$ a finite cube cover of arbitrarily small total volume. Enlarge each cube slightly to a cube with rational lower coordinates and rational side length whose interior contains the original cube. Density of the rationals and continuity of the finite sum of volumes ensure that, starting with volume below $\varepsilon2^{-r-1}$, this can be done with total volume below $\varepsilon2^{-r}$. This is a finite selection for each fixed $r$. [step 3.2, L1, L5, L6, L7]
+
 5.1 The Darboux gap is therefore below $\alpha\operatorname{vol}Q+2B\,\varepsilon/(4(B+1))<\varepsilon$. By [L3], $f$ is integrable.  [step 1.2, step 2.1, step 4.1, L3, algebra]
 
-6.1 By [L1] and [L6], $D=\bigcup_{r\ge1}S_{1/r}$. Countable-union closure makes $D$ null, with countable choice used exactly through [[lem-null-sets-in-rn-closed-under-subsets-and-countable-unions]] and [[def-countable-choice]]. Together with step 5.1, this proves both directions using cover-nullity only. [step 5.1, step 3.2, L1, L6] ∎
+6.1 Among the natural-number codes in [L7] for finite rational-cube lists whose interiors cover $S_{1/r}$ and whose total volume is below $\varepsilon2^{-r}$, take the least code. Step 4.2 shows this set of codes is nonempty. This rule uniquely defines the list for every $r$ without countable choice. Pad each list by zero-volume cubes and enumerate all pairs of indices by the explicit pairing bijection. The resulting sequence covers $D$. Each finite volume sum is bounded by the sum of the budgets $\varepsilon2^{-r}$, hence by $\varepsilon$; [L8] gives convergence with sum at most $\varepsilon$. Thus $D$ is null. Together with step 5.1 this proves both directions. [step 4.2, step 5.1, L7, L8] ∎

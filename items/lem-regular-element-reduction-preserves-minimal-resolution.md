@@ -2,13 +2,15 @@
 id: "lem-regular-element-reduction-preserves-minimal-resolution"
 kind: "lemma"
 title: "regular element reduction preserves minimal resolution"
-deps: ["lem-finite-local-modules-admit-minimal-free-resolutions", "lem-projective-dimension-from-last-nonzero-betti-number", "def-balanced-tor-bifunctor", "thm-tor-symmetry-over-a-commutative-ring", "thm-nakayama-lemma"]
+deps: ["def-axiom-of-choice", "lem-finite-local-modules-admit-minimal-free-resolutions", "lem-projective-dimension-from-last-nonzero-betti-number", "def-balanced-tor-bifunctor", "thm-tor-symmetry-over-a-commutative-ring", "thm-nakayama-lemma"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (lem-regular-element-reduction-preserves-minimal-resolution). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Lemma 12.32 and proof of 12.31 Case 2, p.122"
@@ -23,7 +25,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-Let $(R,\mathfrak m,k)$ be nonzero Noetherian local, let $M$ be a nonzero finite module, and let $x\in\mathfrak m$ be a nonzerodivisor on both $R$ and $M$. Reducing a minimal free resolution of $M$ modulo $x$ gives a minimal free resolution of $M/xM$ over $S=R/(x)$. Moreover $\operatorname{pd}_S(M/xM)=\operatorname{pd}_RM$, including infinity. For $M=0$ the zero-complex assertion also holds, with both projective dimensions zero.
+Assume the Axiom of Choice. Let $(R,\mathfrak m,k)$ be nonzero Noetherian local, let $M$ be a nonzero finite module, and let $x\in\mathfrak m$ be a nonzerodivisor on both $R$ and $M$. Reducing a minimal free resolution of $M$ modulo $x$ gives a minimal free resolution of $M/xM$ over $S=R/(x)$. Moreover $\operatorname{pd}_S(M/xM)=\operatorname{pd}_RM$, including infinity. For $M=0$ the zero-complex assertion also holds, with both projective dimensions zero.
 
 ## Facts & Assumptions
 
@@ -43,4 +45,4 @@ Let $(R,\mathfrak m,k)$ be nonzero Noetherian local, let $M$ be a nonzero finite
 
 1.1 The complex $0\to R\xrightarrow{x}R\to S\to0$ resolves $S$. Tensoring it with $M$ has no positive homology since multiplication by $x$ is injective on $M$. Balance and symmetry of Tor show that reducing any free resolution of $M$ modulo $x$ has no positive homology and degree-zero homology $M/xM$. [F3, F4]
 
-2.1 A minimal degreewise finite resolution exists, and its matrices reduce to entries in $\mathfrak m/(x)$. Its finite ranks do not change on reduction to the nonzero local ring $S$. Nakayama gives $M/xM\ne0$, so the last-nonzero-Betti criterion identifies both projective dimensions with the same last nonzero rank, or infinity if ranks persist arbitrarily far. For $M=0$ choose the zero complex on both sides. [F1, F2, F5, step 1.1] ∎
+2.1 AC licenses the existence in [F1], the use of Nakayama [F5], and the projective-dimension criterion [F2]. A minimal degreewise finite resolution exists, and its matrices reduce to entries in $\mathfrak m/(x)$. Its finite ranks do not change on reduction to the nonzero local ring $S$. Nakayama gives $M/xM\ne0$, so the last-nonzero-Betti criterion identifies both projective dimensions with the same last nonzero rank, or infinity if ranks persist arbitrarily far. For $M=0$ choose the zero complex on both sides. [given, F1, F2, F5, step 1.1] ∎

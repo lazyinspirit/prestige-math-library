@@ -2,13 +2,7 @@
 id: "cor-restricted-duality-preserves-linkage-blocks"
 kind: "corollary"
 title: "Duality preserves linkage blocks and block orthogonality"
-deps: ["thm-central-character-summands-split-into-linkage-blocks", "prop-restricted-duality-is-an-exact-involution-on-category-o", "def-chevalley-contravariant-form"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "thm-central-character-summands-split-into-linkage-blocks", "prop-restricted-duality-is-an-exact-involution-on-category-o", "def-chevalley-contravariant-form"]
 sources:
   references:
     - title: "Humphreys, §4.9 Exercise, p.84"
@@ -21,9 +15,20 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Duality preserves simple factors. A contravariant form induces a module map to the restricted dual because different weights are orthogonal. Hom between distinct block parts vanishes"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-04-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -31,9 +36,9 @@ Restricted duality preserves every linkage block. If $B$ is a Chevalley-contrava
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
-[F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. For a linkage class $C=W_\lambda\cdot\lambda$, let $\mathcal O_C$ be the full subcategory of objects all of whose simple composition factors have labels in $C$. Then $\mathcal O=\bigoplus_C\mathcal O_C$, and each nonzero $\mathcal O_C$ is indecomposable as a categorical direct summand. These are precisely the blocks. Each $\mathcal O_C$ lies in $\mathcal O_{\chi_\lambda}$; a central-character summand can contain several blocks. Independently, grouping weights by cosets of the root lattice $Q$ gives a canonical coarser decomposition by weight cosets. ([[thm-central-character-summands-split-into-linkage-blocks]])
+[F1] Under the Axiom of Choice, fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. For a linkage class $C=W_\lambda\cdot\lambda$, let $\mathcal O_C$ be the full subcategory of objects all of whose simple composition factors have labels in $C$. Then $\mathcal O=\bigoplus_C\mathcal O_C$, and each nonzero $\mathcal O_C$ is indecomposable as a categorical direct summand. These are precisely the blocks. Each $\mathcal O_C$ lies in $\mathcal O_{\chi_\lambda}$; a central-character summand can contain several blocks. Independently, grouping weights by cosets of the root lattice $Q$ gives a canonical coarser decomposition by weight cosets. ([[thm-central-character-summands-split-into-linkage-blocks]])
 
 [F2] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Restricted Chevalley duality is an exact contravariant equivalence $D:\mathcal O\to\mathcal O^{\mathrm{op}}$, with a natural isomorphism $D^2\cong\operatorname{id}$. It preserves each weight-space dimension, the formal character, and every simple composition multiplicity. ([[prop-restricted-duality-is-an-exact-involution-on-category-o]])
 

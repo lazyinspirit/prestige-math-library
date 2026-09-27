@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, thm-minkowski-inequality-for-integrals, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-vector-space, thm-finite-and-countable-subadditivity-of-measures]
-proof_strategy: "For 1 <= p < infinity, use Minkowski to keep sums in L^p and homogeneity of the integral to keep scalar multiples. For L^infinity, intersect the two essential-bound sets and use countable-union stability of null sets."
+deps: [def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-vector-space, thm-finite-and-countable-subadditivity-of-measures]
+proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -37,7 +42,7 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 [L2] Sums, scalar multiples, and absolute values of measurable real-valued functions are measurable ([[prop-closure-properties-of-measurable-functions-used-by-the-integral]]).
 
-[L3] Minkowski's inequality holds for integrals ([[thm-minkowski-inequality-for-integrals]]).
+[L3] The nonnegative integral is monotone, additive, and homogeneous for positive finite scalars; the zero function has integral zero ([[cor-additivity-of-the-nonnegative-lebesgue-integral]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
 
 [L4] A finite essential supremum is an attained essential bound ([[prop-essential-supremum-is-attained-as-the-least-essential-bound]]).
 
@@ -47,10 +52,9 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 ## Proof
 
-**Proof technique:** For $1 \le p < infinity$, use Minkowski to keep sums in $L^p$ and homogeneity of the integral to keep scalar multiples. For $L^\infty$, intersect the two essential-bound sets and use countable-union stability of null sets.
+**Proof technique:** direct.
 
-1.1 Fix $1\le p<\infty$ and let $f,g\in\mathcal L^p(\mu)$ and $a\in\mathbb R$. Then $f+g$ and $af$ are measurable, and Minkowski plus homogeneity give [L1, L2, L3, given]
-$$\|f+g\|_p\le\|f\|_p+\|g\|_p<\infty,\qquad \|af\|_p=|a|\,\|f\|_p<\infty,$$ so $f+g,af\in\mathcal L^p(\mu)$. The zero function is in $\mathcal L^p(\mu)$, and additive inverses are scalar multiples by $-1$.
+1.1 Fix $1\le p<\infty$ and let $f,g\in\mathcal L^p(\mu)$ and $a\in\mathbb R$. Measurability of $f+g$ and $af$ follows from [L2]. Pointwise, $$|f+g|^p\le (2\max\{|f|,|g|\})^p\le 2^p(|f|^p+|g|^p).$$ By [L3], $$\int|f+g|^p\,d\mu\le2^p\left(\int|f|^p\,d\mu+\int|g|^p\,d\mu\right)<\infty.$$ If $a\ne0$, positive homogeneity in [L3] gives $\int|af|^p\,d\mu=|a|^p\int|f|^p\,d\mu<\infty$; if $a=0$, the integral is zero without forming $0\cdot\infty$. Thus $f+g,af\in\mathcal L^p(\mu)$. The zero function belongs to the class, and additive inverses use $a=-1$. [L1, L2, L3, given, algebra]
 
 1.2 Let $f,g\in L^\infty(\mu)$ with $M:=\|f\|_\infty$ and $N:=\|g\|_\infty$. There are measurable null sets $E_f,E_g$ such that $|f|\le M$ on $X\setminus E_f$ and $|g|\le N$ on $X\setminus E_g$. With $E:=E_f\cup E_g$, $E$ is measurable and null, and on $X\setminus E$ one has [L1, L2, L4, L5, given]
 $$|f+g|\le |f|+|g|\le M+N,\qquad |af|=|a||f|\le |a|M.$$ Thus $f+g$ and $af$ are essentially bounded; measurability again comes from [L2].

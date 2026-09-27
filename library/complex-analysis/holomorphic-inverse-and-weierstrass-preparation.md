@@ -2,33 +2,7 @@
 page: holomorphic-inverse-and-weierstrass-preparation
 title: "The Holomorphic Inverse Function Theorem and Weierstrass Preparation"
 status: published
-items: [def-biholomorphic-map-several-complex-variables,
-        lem-real-jacobian-determinant-of-a-complex-linear-map,
-        thm-holomorphic-inverse-function-theorem-several-variables,
-        thm-holomorphic-implicit-function-theorem,
-        thm-holomorphic-constant-rank-theorem,
-        def-holomorphic-germ-ring-and-its-maximal-ideal,
-        prop-units-in-the-holomorphic-germ-ring,
-        def-regular-holomorphic-germ,
-        def-weierstrass-polynomial,
-        lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular,
-        lem-stability-of-slice-zero-count-under-holomorphic-parameters,
-        lem-holomorphic-power-sums-of-slice-zeros,
-        lem-newton-identities-for-slice-roots,
-        thm-weierstrass-preparation-theorem,
-        thm-uniqueness-in-weierstrass-preparation,
-        thm-weierstrass-division-theorem,
-        def-noetherian-ring-and-module,
-        lem-finite-modules-over-noetherian-rings-are-noetherian,
-        lem-weierstrass-quotient-is-a-finite-module,
-        thm-holomorphic-germ-ring-is-noetherian,
-        lem-noetherian-domains-are-atomic,
-        lem-gauss-lemma-over-a-ufd,
-        lem-prepared-factorizations-and-irreducibility,
-        thm-holomorphic-germ-ring-is-a-ufd,
-        thm-zero-set-has-no-isolated-points-in-several-complex-variables,
-        thm-riemann-extension-across-hypersurface-zero-sets,
-        cor-locally-bounded-meromorphic-poles-are-removable]
+items: ["def-biholomorphic-map-several-complex-variables", "lem-real-jacobian-determinant-of-a-complex-linear-map", "thm-holomorphic-inverse-function-theorem-several-variables", "thm-holomorphic-implicit-function-theorem", "thm-holomorphic-constant-rank-theorem", "def-holomorphic-germ-ring-and-its-maximal-ideal", "prop-units-in-the-holomorphic-germ-ring", "def-regular-holomorphic-germ", "def-weierstrass-polynomial", "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular", "lem-stability-of-slice-zero-count-under-holomorphic-parameters", "lem-holomorphic-power-sums-of-slice-zeros", "lem-newton-identities-for-slice-roots", "thm-weierstrass-preparation-theorem", "thm-uniqueness-in-weierstrass-preparation", "thm-weierstrass-division-theorem", "def-noetherian-ring-and-module", "lem-finite-modules-over-noetherian-rings-are-noetherian", "lem-weierstrass-quotient-is-a-finite-module", "thm-holomorphic-germ-ring-is-noetherian", "lem-noetherian-domains-are-atomic", "lem-prepared-factorizations-and-irreducibility", "thm-holomorphic-germ-ring-is-a-ufd", "thm-zero-set-has-no-isolated-points-in-several-complex-variables", "thm-riemann-extension-across-hypersurface-zero-sets", "cor-locally-bounded-meromorphic-poles-are-removable"]
 examples: []
 ---
 

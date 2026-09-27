@@ -4,16 +4,17 @@ title: "A nonzero period obstructs exactness and bounding"
 kind: corollary
 status: published
 origin: pipeline
-deps: ["cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero", "cor-closed-compactly-supported-forms-integrate-to-zero-on-boundaries", "prop-integration-over-an-oriented-embedded-submanifold", "lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary"]
+deps: ["cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero", "cor-closed-compactly-supported-forms-integrate-to-zero-on-boundaries", "prop-integration-over-an-oriented-embedded-submanifold", "lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary", "def-countable-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (cor-a-nonzero-period-obstructs-exactness-and-bounding). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Lee Corollary 16.15, pp.414–415"
@@ -22,9 +23,16 @@ proof_strategy: "Direct calculation and localization"
 ---
 ## Statement
 
-Let $S\hookrightarrow M$ be an oriented compact boundaryless embedded $k$-submanifold, $k\geq1$, and let $\omega$ be a closed smooth $k$-form on $M$. If $\int_S\omega\neq0$, then $\omega$ is not exact on $M$, and $S$ cannot be the induced oriented boundary of a compact embedded $(k+1)$-submanifold of $M$.
+Assume $\mathrm{AC}_\omega$ for the compact-support manifold integrals and
+general Stokes theorem. Let $S\hookrightarrow M$ be an oriented compact
+boundaryless embedded $k$-submanifold, $k\geq1$, and let $\omega$ be a closed
+smooth $k$-form on $M$. If $\int_S\omega\neq0$, then $\omega$ is not exact
+on $M$, and $S$ cannot be the induced oriented boundary of a compact embedded
+$(k+1)$-submanifold of $M$.
 
 ## Facts & Assumptions
+
+[A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used through the general Stokes consequence [F2].
 
 [F1] [[cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero]]: If $M^n$ is oriented and boundaryless, $n\geq1$, and $\eta\in\Omega_c^{n-1}(M)$, then $\int_Md\eta=0$. In particular, on a compact such manifold every exact smooth top form has zero integral. The compact-support assumption is on the primitive $\eta$, not merely on $d\eta$.
 
@@ -36,8 +44,8 @@ Let $S\hookrightarrow M$ be an oriented compact boundaryless embedded $k$-subman
 
 ## Proof
 
-**Given:** The objects and hypotheses in the statement above.
+**Given:** $\mathrm{AC}_\omega$ and the objects and hypotheses in the statement above.
 
 1.1 If $\omega=d\alpha$ on $M$, pullback to $S$ gives $j^*\omega=d(j^*\alpha)$. The primitive is compactly supported because $S$ is compact. Exact-integral vanishing on boundaryless $S$ gives $\int_S\omega=0$, contrary to the specified nonzero value. [F1, F3, F4]
 
-2.1 If $S=\partial T$ with the induced orientation for a compact oriented embedded $T$, the restriction of $\omega$ to $T$ is closed by pullback naturality. The closed-boundary integral result gives $\int_S\omega=0$, again inconsistent with the hypothesis. Empty $S$ or zero $\omega$ has zero integral and cannot meet that hypothesis; $k=1$ uses precisely the same two applications. [F2, F3, F4, given] ∎
+2.1 If $S=\partial T$ with the induced orientation for a compact oriented embedded $T$, the restriction of $\omega$ to $T$ is closed by pullback naturality. Under [A1], the closed-boundary integral result gives $\int_S\omega=0$, again inconsistent with the hypothesis. Empty $S$ or zero $\omega$ has zero integral and cannot meet that hypothesis; $k=1$ uses precisely the same two applications. [A1, F2, F3, F4, given] ∎

@@ -10,8 +10,13 @@ provenance:
 deps: [thm-greendlinger-lemma-for-c-prime-one-sixth-presentations, thm-diagram-area-agrees-with-algebraic-relator-area, lem-minimal-area-diagrams-are-reduced]
 proof_strategy: "direct"
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -46,7 +51,7 @@ inequality for van Kampen area.
 
 1.1 Freely reduce $w$ to a word $u$. Because free reduction does not change the represented group element, $u$ is still null, and $|u|\le |w|$. If $u$ is the empty word, then the null diagram with no faces has area $0$, so the claim is immediate. Otherwise let $D$ be a minimal-area van Kampen diagram for $u$. By [L2], the diagram $D$ is reduced, so [L1] applies. [L1, L2, given, cases]
 
-2.1 By [L1], some face $f$ of $D$ contributes an outer boundary arc $p$ with $|p|>|\partial f|/2$. Let $q$ be the complementary boundary arc of $f$, so $|q|<|p|$. Replacing $p$ by $q^{-1}$ and freely reducing gives a null word $u'$ with $|u'|\le |u|-1$. Conversely, attach one $f$-cell along the occurrence of $q^{-1}$ in any minimal diagram for the unreduced replacement word and add the free-cancellation strips. This constructs a diagram for $u$ with one more face, so $$\operatorname{Area}(u)\le\operatorname{Area}(u')+1.$$ [L1, step 1.1, construct, algebra]
+2.1 By [L1], some face $f$ of $D$ contributes a contiguous outer boundary arc $p$ with $|p|>|\partial f|/2$. Write $u=apb$ as a literal word from the chosen boundary basepoint, and orient the relator boundary of $f$ as $pq$. Its complementary arc $q$ has $|q|<|p|$. The word $a q^{-1}b$ represents the same group element as $u$, since $pq$ is a conjugate of a defining relator; let $u'$ be its free reduction. Then $u'$ is null and $|u'|\le |a|+|q|+|b|<|u|$. In the free group, $[u]=[a(pq)a^{-1}][a q^{-1}b]$, so the algebraic relator area of $u$ is at most one plus that of $u'$. By [F1], diagram and algebraic relator areas agree for both words; hence $\operatorname{Area}(u)\le\operatorname{Area}(u')+1$. [L1, F1, step 1.1, algebra]
 
 3.1 Induct on the freely reduced boundary length. Step 1.1 gives the base case $|u|=0$. For $|u|>0$, step 2.1 yields a shorter freely reduced null word $u'$. By the induction hypothesis, $$ \operatorname{Area}(u)\le \operatorname{Area}(u')+1\le |u'|+1\le |u|. $$ Because $|u|\le |w|$, this is a linear isoperimetric inequality. [step 1.1, step 2.1, induction]
 

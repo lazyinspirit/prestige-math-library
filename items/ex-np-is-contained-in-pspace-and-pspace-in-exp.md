@@ -10,8 +10,12 @@ provenance:
 deps: [prop-np-is-contained-in-pspace-and-pspace-in-exp, def-search-version-of-an-np-relation]
 proof_strategy: direct
 verification:
-  audited: 2026-09-02
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -21,14 +25,14 @@ sources:
 
 ## Example
 
-Suppose a language $L$ has a verifier whose certificates have length at most
+Suppose a language $L$ has a polynomial-time verifier whose certificates have length at most
 $n^k$. A deterministic search through those certificates illustrates why the
 containment $NP\subseteq PSPACE$ can hold even though the resulting algorithm
 may still take exponential time.
 
 ## Facts & Assumptions
 
-**Given:** A verifier with certificate length bound $n^k$.
+**Given:** A polynomial-time verifier with certificate length bound $n^k$.
 
 [L1] The verifier search problem asks for a certificate witnessing acceptance, by [[def-search-version-of-an-np-relation]].
 
@@ -38,6 +42,6 @@ may still take exponential time.
 
 **Proof technique:** direct.
 
-1.1 Enumerate all binary certificates of lengths at most $n^k$ in lexicographic order and run the verifier on each until one succeeds. At every stage the algorithm stores only the input, the current certificate, and the verifier workspace, so the space usage is polynomial. This is the concrete mechanism behind the first inclusion in [L2]. [L1, L2, given, construct]
+1.1 Enumerate all binary certificates of lengths at most $n^k$ in lexicographic order and run the verifier on each until one succeeds. At every stage the algorithm stores only the input, the current certificate, and the verifier workspace. The verifier's polynomial time bound also bounds its visited workspace polynomially, so the total space usage is polynomial. This is the concrete mechanism behind the first inclusion in [L2]. [L1, L2, given, construct]
 
-2.1 The same procedure may test exponentially many candidate certificates before success or exhaustion, so its running time can be exponential even while its space stays polynomial. That is exactly the gap displayed by the chain in [L2]. [L2, step 1.1] ∎
+2.1 There are fewer than $2^{n^k+1}$ candidate certificates, and the same procedure may test exponentially many of them before success or exhaustion. Its running time can therefore be exponential even while its space stays polynomial. That is exactly the gap displayed by the chain in [L2]. [L2, step 1.1] ∎

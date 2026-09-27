@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [lem-polynomial-ring-dimension-lower-chain, lem-polynomial-ring-dimension-upper-bound]
+deps: [def-axiom-of-choice, lem-polynomial-ring-dimension-lower-chain, lem-polynomial-ring-dimension-upper-bound]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -29,21 +22,30 @@ sources:
     - title: "Melvin Hochster, Dimension theory and systems of parameters"
       url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
 ## Statement
 
-Let $R$ be a Noetherian commutative ring of finite Krull dimension. Then
+Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring of finite Krull dimension. Then
 $$ \dim R[x]=\dim R+1. $$
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ of finite dimension.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and a Noetherian commutative ring $R$ of finite dimension.
 
 [L1] Every prime chain in $R$ extends to a prime chain in $R[x]$ that is longer by one step ([[lem-polynomial-ring-dimension-lower-chain]]).
 
-[L2] Every prime chain in $R[x]$ has length at most $\dim R+1$ ([[lem-polynomial-ring-dimension-upper-bound]]).
+[L2] Under Choice, every prime chain in $R[x]$ has length at most $\dim R+1$ ([[lem-polynomial-ring-dimension-upper-bound]]).
 
 ## Proof
 

@@ -7,14 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact, def-second-countable-space, lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure]
+deps: [def-countable-choice, thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact, def-second-countable-space, lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (cor-second-countable-lch-locally-finite-borel-measures-are-regular). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"
@@ -23,20 +25,20 @@ sources:
 
 ## Statement
 
-Every Borel measure finite on compact sets on a second-countable LCH space is regular.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Every Borel measure finite on compact sets on a second-countable LCH space is regular.
 
 ## Facts & Assumptions
 
-**Given:** $X$ is second-countable and LCH, and $\mu$ is finite on compact sets.
+**Given:** Countable Choice ([[def-countable-choice]]), $X$ is second-countable and LCH, and $\mu$ is finite on compact sets.
 
 [L1] An LCH space has a base of open sets with compact closure. ([[lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure]])
 
-[L2] If every open set is sigma-compact, compact-finite Borel measures are regular. ([[thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact]])
+[L2] Under Countable Choice, if every open set is sigma-compact, compact-finite Borel measures are regular ([[thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact]]). The stated choice assumption is spent only in this theorem.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Refining a countable base by [L1] gives a countable base $(V_n)$ with compact closures. Every open $U$ is the union of those $V_n$ whose closures lie in $U$, hence is a countable union of compact sets $\overline{V_n}$. [L1]
+1.1 Let $(B_n)$ be a given countable base and let $U$ be open. Take all indices $n$ for which $\overline{B_n}$ is compact and contained in $U$; this is a specified subfamily of the given base and needs no selection. For each $x\in U$, [L1] gives an open $W$ with $x\in W\subseteq\overline W\subseteq U$ and $\overline W$ compact. Choose one $B_n$ with $x\in B_n\subseteq W$; its closure is a closed subset of the compact $\overline W$, hence compact and contained in $U$. Thus the selected subfamily covers $U$, and $U$ is the union of the corresponding countably many compact closures. [L1, given, construct]
 
-2.1 Thus every open set is sigma-compact, and [L2] applies to $\mu$. [step 1.1, L2] ∎
+2.1 Thus every open set is sigma-compact. Apply [L2] under the stated Countable Choice premise to obtain regularity of $\mu$. [step 1.1, L2, given] ∎

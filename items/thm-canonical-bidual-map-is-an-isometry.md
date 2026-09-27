@@ -4,30 +4,35 @@ kind: theorem
 title: "The canonical bidual map is an isometry"
 status: published
 origin: pipeline
-deps: ["def-canonical-map-into-the-bidual", "thm-dual-norms-every-vector"]
+deps: [def-axiom-of-choice, "def-canonical-map-into-the-bidual", "thm-dual-norms-every-vector"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Lemma 2.68, p.88"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
 proof_strategy: "Use |f(x)|<=||f||||x|| and a norming functional for x nonzero; handle x=0 separately."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. For every normed $X$, the map $J_X:X\to X^{**}$ is linear and $\|J_Xx\|=\|x\|$ for every $x\in X$. In particular it is injective.
+Assume the Axiom of Choice. Let $\mathbb K=\mathbb R$ or $\mathbb C$. For every normed $X$, the map $J_X:X\to X^{**}$ is linear and $\|J_Xx\|=\|x\|$ for every $x\in X$. In particular it is injective.
 
 ## Facts & Assumptions
 
-**Given:** The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+**Given:** The Axiom of Choice, The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+
+[A1] AC is used through the norming-functional supplier [F2] in step 2.1.
 
 [F1] From [[def-canonical-map-into-the-bidual]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a normed $X$, define $J_X:X\to X^{**},\qquad (J_Xx)(f)=f(x)\quad(f\in X^*).$ With the dual norm from def-dual-space-of-a-normed-space, evaluation is linear in $f$ and $|(J_Xx)(f)|\le\|x\|\|f\|$, so $J_Xx$ is a bounded functional on $X^*$. The map is canonical and uses no chosen basis or conjugation.
 

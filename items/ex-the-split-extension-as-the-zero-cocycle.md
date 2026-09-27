@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-twisted-product-extension-from-a-two-cocycle, cor-zero-h-two-class-is-equivalent-to-splitting]
+deps: [def-twisted-product-extension-from-a-two-cocycle, def-second-cohomology-by-factor-sets, cor-an-extension-determines-a-well-defined-h-two-class]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -36,7 +36,9 @@ $M\rtimes G$, so it represents the zero class in $H^2(G,M)$.
 
 [F1] The twisted product uses the multiplication $(m,g)(n,h)=(m+g\cdot n+f(g,h),gh)$ ([[def-twisted-product-extension-from-a-two-cocycle]]).
 
-[L1] The zero class corresponds exactly to split extensions ([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
+[F2] $H^2(G,M)$ is the quotient of normalized two-cocycles by two-coboundaries, so the zero cocycle represents its zero class ([[def-second-cohomology-by-factor-sets]]).
+
+[L1] An extension with a specified normalized section has the cohomology class of that section's factor set, independently of the chosen normalized section ([[cor-an-extension-determines-a-well-defined-h-two-class]]).
 
 ## Verification
 
@@ -44,6 +46,6 @@ $M\rtimes G$, so it represents the zero class in $H^2(G,M)$.
 
 1.1 With $f=0$, [F1] becomes $$(m,g)(n,h)=(m+g\cdot n,gh),$$ which is the usual semidirect-product law on $M\rtimes G$. [F1, given]
 
-2.1 The section $g\mapsto(0,g)$ is then a homomorphism, so the extension splits. By [L1], this is precisely the zero class in $H^2(G,M)$. [L1, step 1.1, algebra]
+2.1 The explicit normalized section $s(g)=(0,g)$ is a homomorphism, so the extension splits. Its factor set is identically zero because $s(g)s(h)=s(gh)$; [L1] assigns the extension the class $[0]$, which is the zero class by [F2]. This uses the displayed section and needs no choice of fibres. [F1, F2, L1, step 1.1, algebra]
 
 3.1 Therefore the zero cocycle gives the split extension. [step 2.1] ∎

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-standard-inner-product-on-complex-class-functions, lem-averaging-operator-projects-onto-the-fixed-subspace, lem-g-equivariant-maps-are-the-fixed-points-of-the-dual-tensor-representation, thm-characters-of-direct-sums-tensor-products-and-duals]
+deps: [def-standard-inner-product-on-complex-class-functions, lem-averaging-operator-projects-onto-the-fixed-subspace, lem-g-equivariant-maps-are-the-fixed-points-of-the-dual-tensor-representation, thm-characters-of-direct-sums-tensor-products-and-duals, prop-trace-is-linear]
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -42,6 +42,8 @@ $$\langle\chi_V,\chi_W\rangle=\dim\operatorname{Hom}_G(W,V).$$
 
 [F4] Characters add on direct sums, multiply on tensor products, and conjugate on duals ([[thm-characters-of-direct-sums-tensor-products-and-duals]]).
 
+[F5] Trace is linear on finite square matrices ([[prop-trace-is-linear]]).
+
 [A1] The character of a representation is by definition the trace of its action operator, $\chi_U(g)=\operatorname{tr}\rho_U(g)$.
 
 ## Proof
@@ -50,7 +52,7 @@ $$\langle\chi_V,\chi_W\rangle=\dim\operatorname{Hom}_G(W,V).$$
 
 1.1 By [F3], $\dim\operatorname{Hom}_G(W,V)=\dim(W^{*}\otimes V)^{G}$. By [F2] applied to $U=W^{*}\otimes V$, this equals $\operatorname{tr}P_U$ for the averaging operator $P_U=\frac{1}{|G|}\sum_g\rho_{W^{*}\otimes V}(g)$. [F2, F3, given]
 
-1.2 Trace is linear, so $\operatorname{tr}P_U=\frac{1}{|G|}\sum_{g}\operatorname{tr}\rho_{W^{*} \otimes V}(g)=\frac{1}{|G|}\sum_g\chi_{W^{*}\otimes V}(g)$, the second equality by [A1]. [A1, algebra, given]
+1.2 By [F5], $\operatorname{tr}P_U=\frac{1}{|G|}\sum_{g}\operatorname{tr}\rho_{W^{*} \otimes V}(g)=\frac{1}{|G|}\sum_g\chi_{W^{*}\otimes V}(g)$, the second equality by [A1]. [F5, A1, given]
 
 1.3 By [F4], the tensor-product and dual clauses give $\chi_{W^{*}\otimes V}(g)=\chi_{W^{*}}(g)\chi_V(g)=\overline{\chi_W(g)} \chi_V(g)$. [F4, given]
 

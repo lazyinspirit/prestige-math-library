@@ -17,7 +17,12 @@ sources:
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-22
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 ---
 
 ## Statement
@@ -69,7 +74,7 @@ Thus $\operatorname{ad}_X$ is self-adjoint for $B_\theta$ and consequently is di
 
 2.1 There exists $H\in\mathfrak a$ with $\lambda(H)\ne0$ for every $\lambda\ne0$ occurring in step 1.1: the kernels of the finitely many nonzero $\lambda$ are proper subspaces of the real vector space $\mathfrak a$, and a finite union of proper subspaces cannot exhaust $\mathfrak a$. For such an $H$ one has $Z_{\mathfrak g_0}(H)=\mathfrak g_0^0$, because the eigenvalues of $\operatorname{ad}_H$ on $\mathfrak g_0^\lambda$ are the nonzero numbers $\lambda(H)$. [L4, step 1.1]
 
-3.1 For such a regular $H$ one has $Z_{\mathfrak p_0}(H)=\mathfrak a$: the inclusion $\mathfrak a\subseteq Z_{\mathfrak p_0}(H)$ is clear, and if $X\in Z_{\mathfrak p_0}(H)$ then $[H,X]=0$, so $X\in\mathfrak g_0^0$; the subspace $\mathfrak a+\mathbb RX$ of $\mathfrak p_0$ is abelian and contains the maximal $\mathfrak a$, hence equals $\mathfrak a$ and $X\in\mathfrak a$. The same argument with $\mathfrak a'$ in place of $\mathfrak a$ produces $H'\in\mathfrak a'$ with $Z_{\mathfrak p_0}(H')=\mathfrak a'$. [step 2.1]
+3.1 For such a regular $H$ one has $Z_{\mathfrak p_0}(H)=\mathfrak a$: the inclusion $\mathfrak a\subseteq Z_{\mathfrak p_0}(H)$ is clear. If $X\in Z_{\mathfrak p_0}(H)$, step 2.1 puts $X$ in the common zero-weight space $\mathfrak g_0^0$. By the definition of that space in step 1.1, $[A,X]=0$ for every $A\in\mathfrak a$. Thus $\mathfrak a+\mathbb RX$ is an abelian subspace of $\mathfrak p_0$ containing the maximal $\mathfrak a$, hence equals $\mathfrak a$ and $X\in\mathfrak a$. The same argument with $\mathfrak a'$ in place of $\mathfrak a$ produces $H'\in\mathfrak a'$ with $Z_{\mathfrak p_0}(H')=\mathfrak a'$. [step 1.1, step 2.1]
 
 4.1 By compactness of $K$ and continuity of $\operatorname{Ad}$ the function $f(k):=B(\operatorname{Ad}_kH',H)$ attains a minimum at some $k_0\in K$. [L1, L2, step 3.1]
 

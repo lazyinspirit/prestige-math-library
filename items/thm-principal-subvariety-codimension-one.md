@@ -6,14 +6,6 @@ deps: ["thm-affine-variety-dimension-coordinate-ring", "def-codimension-irreduci
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-verification:
-  precheck: pass
-  verified:
-    model: "gpt-6-astra"
-    verdict: pass
-    date: 2026-09-08
-    scope: "Local prerequisite and principal-section proof repair; not independent judging or whole-closure certification."
-    delegated_by: "Owner-requested UC-73 audit"
 sources:
   references:
     - title: "Milne Theorem 3.42, p.76"
@@ -23,6 +15,15 @@ sources:
 status: published
 origin: "pipeline"
 proof_strategy: "Minimal primes over (f) have height <=1 by PIT and >0 since the ring is a domain. Height-plus-quotient gives the exact dimension; a proper ideal lies in a maximal ideal."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -39,9 +40,9 @@ Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Clas
 
 [F2] Codimension in an irreducible variety is the difference of dimensions ([[def-codimension-irreducible-subvariety]]).
 
-[F3] A prime minimal over a principal ideal in a Noetherian ring has height at most one ([[thm-krull-principal-ideal-theorem]]).
+[F3] Under the Axiom of Choice, a prime minimal over a principal ideal in a Noetherian ring has height at most one ([[thm-krull-principal-ideal-theorem]]).
 
-[F4] For an affine domain A and prime p, $\operatorname{ht}p+\dim(A/p)=\dim A$ ([[cor-height-plus-quotient-dimension-affine-domain]]).
+[F4] Under the Axiom of Choice, for an affine domain A and prime p, $\operatorname{ht}p+\dim(A/p)=\dim A$ ([[cor-height-plus-quotient-dimension-affine-domain]]).
 
 [F5] Under AC, polynomial zero loci satisfy $I(V(J))=\sqrt J$ ([[cor-strong-nullstellensatz-two-inclusions]]).
 

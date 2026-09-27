@@ -29,7 +29,7 @@ verification:
 
 ## Recorded theorem
 
-On the period-one torus with normalized Haar measure, for every $1<p<\infty$ there is a finite constant $C_p$ such that
+Assume the Axiom of Countable Choice for the torus $L^p$ and Fourier-coefficient conventions. On the period-one torus with normalized Haar measure, for every $1<p<\infty$ there is a finite constant $C_p$ such that
 
 $$\|Cf\|_p\le C_p\|f\|_p\qquad(f\in L^p(\mathbb T)),$$
 

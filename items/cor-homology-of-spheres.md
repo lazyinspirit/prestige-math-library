@@ -9,14 +9,21 @@ provenance:
   proof: ai-altered
 deps: [thm-simplicial-and-singular-homology-agree-for-simplicial-complexes, cor-the-simplex-has-zero-reduced-simplicial-homology, def-zero-simplex-augmentation-and-reduced-singular-homology]
 proof_strategy: direct
-verification:
-  audited: 2026-09-06
-  precheck: pass
 sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Example 2.23"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
 pipeline_run: frontier-31a
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-09-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -38,6 +45,6 @@ $H_0(S^0;G)\cong G\oplus G$.
 
 2.1 In degree $n$, exactness for $D$ gives $\ker\partial_n=\operatorname{im}\partial_{n+1}$. The map $G=C_{n+1}(D;G)\to C_n(K;G)$ sends $g$ to the alternating sum of its facets with coefficient $g$; it is injective since any one facet has coefficient $g$ or $-g$. There are no $(n+1)$-chains in $K$, so $\widetilde H_n^{\mathrm{simp}}(K;G)\cong G$. This uses the augmentation as $\partial_0$ when $n=0$. Above degree $n$ all simplicial groups vanish. [step 1.1, algebra]
 
-3.1 The characteristic-simplex comparison of [[thm-simplicial-and-singular-homology-agree-for-simplicial-complexes]] sends each vertex with coefficient $g$ to the corresponding singular point with coefficient $g$, so it commutes with augmentation to $G$. For either theory, $\widetilde H_0=\ker(H_0\to G)$, directly from the kernel-in-degree-zero definition in [[def-zero-simplex-augmentation-and-reduced-singular-homology]]. Thus the ordinary comparison isomorphism restricts to an isomorphism on these kernels; in positive degrees reduced and ordinary homology agree. The calculation therefore transfers to $|K|\cong S^n$, and negative reduced groups are zero by convention. [step 2.1, algebra]
+3.1 The boundary $K$ of the single simplex is finite, so choose an order on its finite vertex set. The characteristic-simplex comparison of [[thm-simplicial-and-singular-homology-agree-for-simplicial-complexes]] sends each vertex with coefficient $g$ to the corresponding singular point with coefficient $g$; its homology map is independent of this order and commutes with augmentation to $G$. For either theory, $\widetilde H_0=\ker(H_0\to G)$, directly from the kernel-in-degree-zero definition in [[def-zero-simplex-augmentation-and-reduced-singular-homology]]. Thus the ordinary comparison isomorphism restricts to an isomorphism on these kernels; in positive degrees reduced and ordinary homology agree. The calculation therefore transfers to $|K|\cong S^n$, and negative reduced groups are zero by convention. [step 2.1, algebra]
 
 4.1 For $n\ge1$, the augmentation $H_0(S^n;G)\to G$ is surjective (use any vertex) with zero kernel, hence is an isomorphism. For $n=0$, the simplicial model consists of two vertices and no edges, giving $H_0(S^0;G)\cong G\oplus G$; its augmentation kernel is $\{(g,-g):g\in G\}$. This includes $G=0$. [step 3.1, algebra] ∎

@@ -4,21 +4,22 @@ kind: lemma
 title: "Finite evaluations separate a functional from a dual subspace"
 status: published
 origin: pipeline
-deps: ["def-annihilator-and-preannihilator", "cor-finite-dimensional-subspaces-are-closed", "thm-geometric-hahn-banach-for-subspaces"]
+deps: ["def-annihilator-and-preannihilator"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
-    - title: "Bühler–Salamon, Functional Analysis, Theorem 3.12(ii), pp.125–127, and Corollary 3.26(i), p.130; finite-coordinate adaptation using Theorem 2.53, pp.82–83"
+    - title: "Bühler–Salamon, Functional Analysis, Theorem 3.12(ii), pp.125–127, and Corollary 3.26(i), p.130; finite-coordinate adaptation"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
-proof_strategy: "E(N) is a linear subspace of K^n, hence finite dimensional and closed. Apply geometric Hahn–Banach in K^n to E(N) and E(f0), obtaining a K-linear h with h|E(N)=0 and h(E(f0))=1. Put a_j=h(e_j) and x=sum_j a_j x_j. Expansion in the standard coordinate basis gives h(E(f))=sum_j a_j f(x_j)=f(x); no complex conjugates occur. This is a finite-dimensional implementation of the source separation step, not an appeal to unplanned locally convex separation."
+proof_strategy: "Extend a finite basis of E(N), together with E(f0), to a basis of K^n. The coordinate functional h that vanishes on E(N) and sends E(f0) to 1 gives x=sum_j h(e_j)x_j; no infinite-dimensional separation or complex conjugation is needed."
 ---
 
 ## Statement
@@ -31,13 +32,9 @@ Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $X$ be normed, $N\le X^*$ a linear
 
 [F1] From [[def-annihilator-and-preannihilator]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a normed $X$ and arbitrary subsets $M\subseteq X$, $N\subseteq X^*$, define $M^\perp=\{f\in X^*:f(m)=0\text{ for all }m\in M\},\qquad {}^\perp N=\{x\in X:f(x)=0\text{ for all }f\in N\}.$ Here $X^*$ is def-dual-space-of-a-normed-space. The first notation agrees with def-continuous-annihilator-of-a-subspace on $\operatorname{span}M$, since linearity makes vanishing on $M$ equivalent to vanishing on its span. The preannihilator lies in $X$, not in $X^{**}$. Empty sets impose no conditions: $\varnothing^\perp=X^*$ and ${}^\perp\varnothing=X$.
 
-[F2] From [[cor-finite-dimensional-subspaces-are-closed]], with its stated hypotheses: Let $V$ be a normed space and let $W\subseteq V$ be a normed subspace. If $W$ admits an ordered basis of finite length, then $W$ is closed in $V$.
-
-[F3] From [[thm-geometric-hahn-banach-for-subspaces]], with its stated hypotheses: For a linear subspace $M\subseteq X$ and $x\notin\overline M$, there is $f\in M^\perp$ with $f(x)=1$.
-
 ## Proof
 
-1.1 The image $E(N)$ is a linear subspace of the finite-dimensional normed space $\mathbb K^n$, hence admits a finite basis and is closed. Geometric Hahn–Banach applied to $E(f_0)\notin E(N)$ supplies a linear functional $h$ on $\mathbb K^n$ with $h|_{E(N)}=0$ and $h(E(f_0))=1$. [F2, F3]
+1.1 The image $E(N)$ is a linear subspace of $\mathbb K^n$. Choose a finite basis of $E(N)$. Since $E(f_0)\notin E(N)$, append $E(f_0)$ to this independent list and extend it to a basis of $\mathbb K^n$. Define a $\mathbb K$-linear functional $h$ by assigning value $0$ to the chosen basis vectors of $E(N)$ and to the remaining extra vectors, and value $1$ to $E(f_0)$. Then $h|_{E(N)}=0$ and $h(E(f_0))=1$. [given, algebra]
 
 2.1 For the standard coordinate vectors $e_j$, set $a_j=h(e_j)$ and $x=\sum_{j=1}^n a_jx_j$. Expanding in that basis gives $h(E(f))=\sum_ja_jf(x_j)=f(x)$ for every $f\in X^*$. Thus $g(x)=0$ for $g\in N$ and $f_0(x)=1$; in particular $x\in{}^\perp N$. [F1, step 1.1]
 

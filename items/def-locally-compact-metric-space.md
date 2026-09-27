@@ -15,14 +15,6 @@ justified_by: []
 aliases: [def-locally-compact-metric]
 landmark: true
 short: "locally compact metric space"
-verification:
-  precheck: n/a
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +23,13 @@ sources:
     - title: "J. Munkres, Topology, 2nd ed., §29"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (def-locally-compact-metric-space). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Definition
@@ -53,14 +52,12 @@ ball $B(x,r)$ satisfies $B(x,r) \subseteq K$. So the displayed condition says
 precisely that $x$ has a compact neighbourhood, and the two readings are the same
 condition and not two notions.
 
-**Two conventions are fixed here, because both are live in the literature.**
+**Two conventions are fixed here.**
 
 - *Neighbourhoods need not be open.* This library's convention is
   [[def-neighbourhood-top]]'s, and it is what makes "compact neighbourhood" a
-  useful phrase at all: a compact set is rarely open. Note that
-  [[def-metric-topology]] uses the word *neighbourhood* for an open set
-  containing the point; that narrower usage is confined to that item, and the
-  present definition never relies on it.
+  useful phrase at all: a compact set is rarely open. The metric-topology
+  definition uses the same convention.
 - *Compactness of a subset is intrinsic.* $K$ compact means the metric subspace
   $(K, d_K)$ is a compact metric space ([[def-metric-compactness]],
   [[def-isometry-and-metric-embedding]]); the equivalent description by families

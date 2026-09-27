@@ -9,11 +9,12 @@ provenance:
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 verification:
-  audited: 2026-09-04
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (def-dirichlet-and-fejer-kernels). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,4 +42,7 @@ so $D_N$ is real-valued and even. Also
 
 $$\int_0^1 D_N(t)\,dt = 1,$$
 
-because every nonconstant character has integral $0$ over one period.
+where this is the ordinary Riemann integral of the continuous finite sum.
+Every nonconstant character has Riemann integral $0$ over one period. Under
+Countable Choice it agrees with the torus Lebesgue integral in
+[[def-period-one-fourier-coefficients-partial-sums-and-convolution]].

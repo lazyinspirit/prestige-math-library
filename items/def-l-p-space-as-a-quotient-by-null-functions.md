@@ -17,8 +17,15 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 7.4"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
 verification:
-  audited: 2026-08-31
   precheck: n/a
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Definition
@@ -38,6 +45,6 @@ When $1\le p\le\infty$, the displayed set quotient agrees with the usual
 quotient-vector-space construction of
 [[def-quotient-vector-space-and-canonical-projection]].
 
-For $0<p<1$, the same class notation is used, but the later item
+For $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item
 [[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]
 supplies the metric structure rather than a normed-space structure.

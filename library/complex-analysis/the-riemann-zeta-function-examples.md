@@ -20,7 +20,8 @@ examples: [ex-euler-product-numerically-approximates-zeta-at-two,
 The companion page keeps the computational and interpretive pressure points
 separate from the main proof route. The examples show how the Euler product,
 theta split, functional equation, and Bernoulli formulas behave on concrete
-inputs. The counterexamples and false statements isolate the three stock errors:
+inputs; those using the global theta route inherit its countable-choice
+hypothesis. The counterexamples and false statements isolate the three stock errors:
 confusing continuation with the original Dirichlet series, reading
 $\zeta(-1)=-1/12$ as an ordinary sum, and treating the functional equation as a
 complete characterization by itself.

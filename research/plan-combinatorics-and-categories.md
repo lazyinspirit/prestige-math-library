@@ -9671,6 +9671,11 @@ Make these nine exact page-membership repairs:
    `thm-leaf-deletion-preserves-virality-of-a-finite-family`,
    `thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family`, and
    `cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property`.
+   The published Erdős–Hajnal–Pach theorem remains A-P outside this run:
+   its current [F1] repeats the external theorem, so a full quantitative
+   candidate-set proof or exact proved supplier is still required before
+   it can count as a locally proved prerequisite. See
+   `frontier-35-ten-categories-eh-pach-step3-deferral-20260926.md`.
 9. `pure-pairs-forests-and-path-antipath-classes-examples`: remove
    `ex-the-forest-theorem-specialized-to-the-four-vertex-path` and
    `ex-the-leaf-coleaf-corollary-recovers-the-five-vertex-path-case-from-the-four-vertex-path-case`.
@@ -9862,9 +9867,9 @@ section,
 
 The two published remarks
 `rem-fox-sudakov-quantitative-density-theorem` and
-`rem-loglog-quantitative-density-theorem` currently support proof-bearing
-results.  Author the full proof chain in §III.5, then replace dependencies as
-follows:
+`rem-loglog-quantitative-density-theorem` formerly supported proof-bearing
+results. The full proof chain in §III.5 is published, and the four listed
+consumers now use the proved replacements directly:
 
 - `thm-classical-erdos-hajnal-bound`: replace the Fox--Sudakov remark with
   `cor-fox-sudakov-quantitative-induced-density-bound`;
@@ -9883,63 +9888,245 @@ The old remarks then remain orientation only.  Current published consumers are:
 
 ### III.4.4 Perfect-graph inputs on the bull route
 
-Two bounded repairs can be made on the published bull A page, strictly before
-their present consumers:
+**Current repair state, 2026-09-24.** The bounded Lovász and substitution
+obligations above were discharged by published
+`lem-replicating-a-vertex-of-a-perfect-graph-preserves-perfection`,
+`thm-lovasz-perfect-graph-criterion-and-complement-invariance`, and
+`thm-substituting-perfect-graphs-preserves-perfection`; the consumers now cite
+these IDs. Do not create the former proposed duplicate IDs. The quarter-power
+corollary's empty-graph arithmetic was also repaired. The qualitative bull-free
+Erdős--Hajnal corollary has an independent leaf/co-leaf proof. These results do
+not discharge the following exact chain:
 
-- insert `thm-weak-perfect-graph-theorem`, proved by the bounded Lovász
-  argument already researched for GT-13, and replace the dependency of
-  `thm-basic-bull-free-graphs-are-two-narrow` on
-  `rem-weak-perfect-graph-theorem-for-the-bull-route`;
-- insert `thm-substitution-preserves-perfect-graphs`, proved by the standard
-  colouring/clique-number argument, and replace the dependency of
-  `thm-alpha-narrowness-is-preserved-under-substitution` on
-  `rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route`.
-
-Their exact published consumer ledgers are:
-
-| repaired supplier | direct published consumers | full transitive published consumer closure |
-|---|---|---|
-| `thm-weak-perfect-graph-theorem` | `thm-basic-bull-free-graphs-are-two-narrow` | `cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`; `cor-the-bull-graph-has-the-erdos-hajnal-property`; `cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`; `ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`; `ex-the-five-cycle-is-not-one-narrow`; `fs-two-narrow-implies-one-narrow`; `lem-the-e-graph-and-the-bird-graph-are-wonderful`; `thm-basic-bull-free-graphs-are-two-narrow`; `thm-bull-free-graphs-are-two-narrow`; `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` |
-| `thm-substitution-preserves-perfect-graphs` | `thm-alpha-narrowness-is-preserved-under-substitution` | `cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`; `cor-the-bull-graph-has-the-erdos-hajnal-property`; `cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`; `ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`; `ex-the-five-cycle-is-not-one-narrow`; `fs-two-narrow-implies-one-narrow`; `lem-the-e-graph-and-the-bird-graph-are-wonderful`; `thm-alpha-narrowness-is-preserved-under-substitution`; `thm-bull-free-graphs-are-two-narrow`; `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` |
-
-The quarter-power corollary's empty-graph branch is repaired as of 2026-09-09:
-use the empty stable set and the published zero-base positive-power convention;
-apply the narrow-graph supplier only to nonempty graphs. This local repair
-does not discharge the perfect-graph retirement obligations; the published
-consumer remains A-P in the canonical ledger.
-
-The third input is a genuine hard blocker.  Chudnovsky--Safra's full bull-free
-paper, Theorem 4.3, explicitly invokes the Strong Perfect Graph Theorem; it does
-not supply a bounded replacement.  The full Annals proof of SPGT is 178 pages,
-and GT-13 correctly denies it as a subject-scale theorem.  Therefore
+`rem-strong-perfect-graph-theorem-for-the-bull-route` (recorded only) →
 `thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect`
-cannot be repaired within this scaffold.  The unrepaired supplier
-`rem-strong-perfect-graph-theorem-for-the-bull-route` has the direct published
-consumer
-`thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect`;
-its full transitive published consumer closure is:
+→ `thm-basic-bull-free-graphs-are-two-narrow` →
+`thm-bull-free-graphs-are-two-narrow` →
+`cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`.
+The first theorem's [L3] uses the implication “Berge implies perfect” only for
+induced subgraphs of a **bull-free** graph. Bull-freeness and the Berge property
+are hereditary, so the restricted theorem below has exactly the needed
+contract. It does not assert that every bull-free graph is perfect (the bull-free
+five-cycle refutes that assertion).
 
-`cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`;
-`cor-the-bull-graph-has-the-erdos-hajnal-property`;
-`cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`;
-`ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`;
-`ex-the-five-cycle-is-not-one-narrow`;
-`fs-two-narrow-implies-one-narrow`;
-`lem-the-e-graph-and-the-bird-graph-are-wonderful`;
-`thm-basic-bull-free-graphs-are-two-narrow`;
-`thm-bull-free-graphs-are-two-narrow`;
-`thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property`;
-`thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect`.
+#### New pair BF-FOUND: Bull, Hole and Perfection Interfaces
 
-The unpublished 441/442 E-graph/Bird pair reaches this closure through
-`lem-the-e-graph-and-the-bird-graph-are-wonderful`.  It is frozen: do not author
-or splice it as buildable unless a separate, proved SPGT supplier is undertaken.
-Recording SPGT again does not discharge the blocker.
+**Stable A/B page IDs:** `bull-hole-and-perfection-interfaces` and
+`bull-hole-and-perfection-interfaces-examples`, category `combinatorics`.
+Place A before BF-BERGE and the published bull A page. Rehome the four
+already-published Definitions `def-bull-graph`, `def-bull-free-graph`,
+`def-hole-antihole-and-odd-hole`, and
+`def-perfect-graph-for-the-bull-route` from the published bull A page,
+then rehome the already-published
+`prop-bull-free-graphs-are-complement-invariant`,
+`lem-replicating-a-vertex-of-a-perfect-graph-preserves-perfection` and
+`thm-lovasz-perfect-graph-criterion-and-complement-invariance` after those
+definitions, preserving all Statements/Definitions and proofs. Both are
+currently homed on the later bull A page, so this move is mandatory before
+the SPGT route can cite them without a page cycle. BF-FOUND-A requires exactly the
+published `graphs-walks-and-connectivity`,
+`induced-subgraphs-and-hereditary-graph-classes`, and `graph-colouring`
+A pages, plus `linear-independence-bases-and-dimension` in `linear-algebra`.
+The rehomed perfection definition directly uses the chromatic-number
+definition on `graph-colouring`; the Lovász proof directly uses
+`cor-independent-set-is-no-larger-than-a-finite-spanning-set` and
+`lem-standard-basis-of-f-n`, both on the stated linear-algebra page.
+Move the existing `cex-the-five-cycle-is-bull-free-but-not-perfect` from
+the bull B page to BF-FOUND-B; this is the needed counterexample, so do not
+duplicate it. BF-FOUND-B requires BF-FOUND-A only. Update both former bull
+page headers, plan rows and actual consumer page prerequisites when
+materialized. No proof is supplied by this rehome alone.
 
-Sources checked in full: Chudnovsky and Safra, *The Erdős--Hajnal conjecture for
-bull-free graphs*, JCTB 98 (2008), Theorem 4.3; Chudnovsky, Robertson, Seymour,
-and Thomas, *The strong perfect graph theorem*, Annals of Mathematics 164
-(2006), pp. 51--229.
+#### New pair BF-BERGE: Bull-Free Berge Perfection
+
+**Stable A/B page IDs:** `bull-free-berge-perfection` and
+`bull-free-berge-perfection-examples`, category `combinatorics`. Place the A
+page after BF-FOUND-A and before the published bull A page. That published
+page requires BF-BERGE-A only when the supplier is fully proved. BF-BERGE-A
+requires BF-FOUND-A and the published
+`induced-subgraphs-and-hereditary-graph-classes` A page on the preferred
+restricted route. The full-SPGT route below adds BF-SPGT-END-A. The exact
+BF-FOUND rehome above removes the would-be cycle. BF-BERGE-B
+requires only BF-BERGE-A and is a leaf.
+
+**A-page inventory, in proof order.** `def-berge-graph-for-the-bull-route` says
+that a finite graph has no induced odd hole or odd antihole, with holes of
+length at least five. `lem-bull-free-berge-closure-under-induced-subgraphs`
+states the hereditary closure of both hypotheses, including the null graph.
+`lem-bull-free-berge-closure-under-complement` uses the rehomed
+`prop-bull-free-graphs-are-complement-invariant` and checks that complementation
+exchanges holes with antiholes. These two lemmas are elementary
+and must be proved locally. `thm-bull-free-berge-graphs-are-perfect` has the
+precise contract: for every finite simple induced-bull-free Berge graph $G$,
+every induced subgraph $H$ satisfies $\chi(H)=\omega(H)$. The all-induced-
+subgraphs conclusion is essential; proving merely $\chi(G)=\omega(G)$ does
+not establish perfection. Its structural proof is the remaining substantial
+obligation. `cor-basic-bull-free-berge-induced-subgraphs-are-perfect` applies
+the theorem to any Berge induced subgraph of a basic bull-free graph; this is
+the item-level replacement for the recorded SPGT appeal at [L3].
+
+**B-page inventory.**
+`ex-complement-exchanges-the-bull-free-berge-obstructions` checks a short
+hole/antihole instance. The published C5 counterexample is rehomed to
+BF-FOUND-B. Neither example is a proof supplier. The main theorem cannot be
+marked proved because these examples and elementary closure lemmas are
+proved.
+
+**Source and proof gate.** Chvátal--Sbihi, *Bull-free Berge graphs are
+perfect*, *Graphs and Combinatorics* 3 (1987), 127--139,
+doi:10.1007/BF01788536, is the primary exact theorem. Springer returned a
+sign-in HTML page in both the previous repair and this follow-up; OpenAlex
+lists no open full text. Everett--de Figueiredo--Klein--Reed, *The perfection
+and recognition of bull-reducible Berge graphs*, RAIRO 39 (2005), 145--160,
+open Numdam PDF doi:10.1051/ita:2005009, p.147 Theorem 1, **cites** the
+restricted theorem and uses it as a base case; it does not prove it. The
+Figueiredo--Maffray--Porto 1997 and 2001 alternative structural papers are
+cited there at references [7]--[8], but their proofs were not retrieved or
+verified here. Thus no decomposition, even-pair, star-cutset or coloring
+lemma from them is silently admitted. Before the A page is built, retrieve
+and inspect a complete restricted proof, identify every nontrivial structural
+lemma it uses, and add further A/B supplier pairs in dependency order if they
+cannot be authored on BF-BERGE-A. The source-recovery attempts already in
+`research/ap-131-sol-repair/agent-07-report.md` and its receipts count toward
+the bounded retry rule; this follow-up's Springer/OpenAlex checks add no
+claim of successful retrieval. If the bound is exhausted, either construct
+and verify a complete alternative local proof or keep the theorem and its
+published chain A-P. A title, source citation or `proved_here: false` carrier
+is never proof closure.
+
+**Source-grounded alternative, not a short cut.** Chudnovsky--Safra,
+*The Erdős--Hajnal conjecture for bull-free graphs*, JCTB 98 (2008),
+Theorem 4.3, invokes full SPGT. The complete Annals PDF of
+Chudnovsky--Robertson--Seymour--Thomas, *The strong perfect graph theorem*,
+164 (2006), 51--229, is accessible at
+`https://annals.math.princeton.edu/wp-content/uploads/annals-v164-n1-p02.pdf`.
+Its Introduction, §1.3, states a Berge decomposition into basic classes,
+proper 2-joins, proper homogeneous pairs, and balanced skew partitions;
+§§2--24 carry its proof. A full-SPGT alternative must prove the basic classes
+perfect, exclude each decomposition in a minimal imperfect graph (the balanced
+skew-partition exclusion is §1.5), and prove the decomposition theorem itself.
+The Introduction, its twelve-step map (§1.8), and selected numbered claims
+were inspected here; the complete 179-page argument was **not** audited.
+The following pairs give a concrete section-level DAG for that full route.
+Each A page must author every definition and numbered intermediate result in
+its assigned section range needed by its endpoint; a headline source theorem
+alone is insufficient. Internal claims not yet transcribed and the three
+outside inputs below are explicit gates, not proof-complete inventory.
+
+**BF-SPGT-BASE — `berge-basic-classes-and-decomposition-interfaces` /
+`berge-basic-classes-and-decomposition-interfaces-examples`.** A requires
+BF-FOUND-A and published `matchings-covers-menger-and-network-flows`
+(for `thm-hall-marriage-finite-bipartite`). Define proper 2-join (including
+its odd-path exception),
+proper homogeneous pair, balanced skew partition, double split graph, line
+graph of a bipartite graph and its complement exactly as Annals §1 pp.51--54.
+Prove all five basic classes perfect for **every induced subgraph**: bipartite,
+co-bipartite, bipartite line graph by a new
+`thm-konig-bipartite-edge-colouring`, its complement by the rehomed Lovász
+complement theorem, and double split by explicit coloring/clique analysis.
+The edge-coloring theorem is **not** the published König matching-cover
+theorem. Prove it by padding the two sides to equal size, adding parallel
+edges to make the bipartite multigraph $\Delta$-regular (the total degree
+deficits on both sides agree), using Hall on the underlying support to find
+a perfect matching by $\Delta|S|\le\Delta|N(S)|$, deleting it, and
+inducting on $\Delta$. Restricted to the original edges this gives a
+$\Delta$-edge-coloring; each color class is a stable set in the line graph,
+while its maximal cliques correspond to stars in a bipartite graph. B checks
+a double split graph and 2-join. No
+perfectness premise may be inferred from the source's phrase “easy to see”.
+
+**BF-SPGT-OBS — `minimum-imperfect-decomposition-obstructions` /
+`minimum-imperfect-decomposition-obstructions-examples`.** A requires
+BF-SPGT-BASE-A and the rehomed replication theorem. Define a **minimum
+imperfect graph for this argument** as a minimum-vertex Berge counterexample
+to SPGT, as Annals p.52 does; induced-minimal imperfection alone is weaker.
+Prove Annals §1.5 pp.54--56: such a graph has no balanced skew partition,
+including the added-vertex Berge test and replicated-clique coloring. The
+step asserting the auxiliary graph $H$ is strictly smaller despite its new
+vertex uses the absence of a star cutset, cited to Chvátal,
+*Star-cutsets and perfect graphs*, JCTB 39 (1985), 189--199 [6]. Add a
+locally proved `lem-minimum-imperfect-graph-has-no-star-cutset` including
+the singleton-component exclusion needed there, or obtain and author that
+exact source proof. Separately prove exclusion of a proper 2-join in either
+graph/complement and of a proper homogeneous pair. Annals p.56 imports
+these two from Cornuéjols--Cunningham, *Compositions for perfect graphs*,
+Discrete Math. 55 (1985), 245--254 [13], and Chvátal--Sbihi 1987 [7].
+The latter is the inaccessible restricted-perfection source. Its homogeneous-
+pair lemma must be extracted independently of that paper's final bull-free
+perfection theorem, or proved locally, to avoid circularity. B illustrates a
+skew partition that fails balance. All three imported obstruction proofs
+remain open gates.
+
+**BF-SPGT-PAR — `berge-path-antipath-and-skew-partition-tools` /
+`berge-path-antipath-and-skew-partition-tools-examples`.** A requires
+BF-SPGT-BASE-A. Author Annals §§2--4 pp.60--72 in numbered order:
+Roussel--Rubio 2.1 with all three outcomes (complete edge, long-path leap,
+length-three odd antipath), extensions 2.2--2.11, path/antipath intersection
+3.1--3.3, and skew-partition kernels/balancedness 4.1--4.6. The endpoint
+4.6 has the exact printed even-path and even-antipath hypotheses. B shows a
+leap and the length-three exception. Do not erase exceptional outcomes.
+
+**BF-SPGT-LINE — `berge-line-attachments-and-double-split-reduction` /
+`berge-line-attachments-and-double-split-reduction-examples`.** A requires
+BF-SPGT-PAR-A. Author Annals §§5--9 pp.72--119: bipartite-subdivision
+appearances and local/nonlocal attachments 5.1--5.8, major attachments 6.1,
+rung replacement 7.1--7.5, strip systems 8.1--8.6, and knot/double-split
+analysis 9.1--9.7. Outputs are §1.8 steps **1--3**, proved at 5.1, 5.2 and
+9.6; 9.7 gives the K4-appearance summary. Define degeneracy and
+$F_1,F_2,F_3$ exactly as pp.58--59. B checks a bipartite-subdivision line
+graph and double split instance.
+
+**BF-SPGT-PRISM — `berge-prisms-staircases-and-double-diamonds` /
+`berge-prisms-staircases-and-double-diamonds-examples`.** A requires
+BF-SPGT-LINE-A. Author Annals §§10--15 pp.119--166: even prisms 10.1--10.6,
+step-connected strips 11.1--11.5, staircases 12.1--12.5, long odd prisms
+13.1--13.4, double diamonds 14.1--14.3, and strengthened parity/skew tools
+15.1--15.7. Outputs are §1.8 steps **4--6**, at 10.6, 13.4 and 14.3, with
+classes $F_4,F_5,F_6$. The 13.4 outcome includes a proper homogeneous pair,
+so BF-SPGT-OBS's independent exclusion is load-bearing. B distinguishes an
+even prism from a long odd prism. Preserve each prior-exclusion hypothesis.
+
+**BF-SPGT-WHEEL — `berge-wheels-pseudowheels-and-tails` /
+`berge-wheels-pseudowheels-and-tails-examples`.** A requires
+BF-SPGT-PRISM-A. Author Annals §§16--23 pp.166--224: odd wheels
+16.1--16.3, stronger parity tools 17.1--17.5, pseudowheels 18.1--18.7,
+wheel systems 19--21 (including conversion 21.3), diamond/square systems
+20, tails 22.1--22.5 and final wheel reduction 23.1--23.6. Outputs are
+§1.8 steps **7--11**, at 16.3, 18.7, 23.2, 23.4 and 23.5, with the
+source's precise $F_7$--$F_{11}$ definitions. B contrasts wheel types.
+
+**BF-SPGT-END — `berge-decomposition-and-strong-perfect-graph-theorem` /
+`berge-decomposition-and-strong-perfect-graph-theorem-examples`.** A
+requires BF-SPGT-WHEEL-A, BF-SPGT-OBS-A and BF-SPGT-BASE-A. Author Annals
+§24 pp.224--229, including 24.1's exact $F_{11}$ output (complete,
+bipartite or balanced skew partition) and 24.2--24.7. Assemble all twelve
+§1.8 outcomes into decomposition theorem §1.3, then deduce SPGT §1.2 using
+basic-class perfection and **each** minimum-imperfect obstruction. The
+terminal theorem says every finite Berge graph is perfect; the converse is
+the odd-hole/odd-antihole obstruction. B illustrates one basic line graph.
+BF-BERGE-A can cite this A page if the full route is selected, then derive
+its restricted theorem by specialization.
+
+The page DAG is BF-FOUND → BF-SPGT-BASE → (BF-SPGT-OBS, BF-SPGT-PAR);
+BF-SPGT-PAR → BF-SPGT-LINE → BF-SPGT-PRISM → BF-SPGT-WHEEL →
+BF-SPGT-END, with BF-SPGT-OBS also feeding BF-SPGT-END; then
+BF-SPGT-END → BF-BERGE → the published bull A page. Every B is a leaf.
+These seven SPGT A/B pairs plus BF-FOUND/BF-BERGE cover the source's
+**section-level** route. The unproved imported star-cutset, 2-join and homogeneous-pair
+obstructions and source-numbered internal arguments remain open. They must
+be expanded and authored before any SPGT or restricted-perfection proof is
+certified. A complete accessible proof of the restricted Chvátal--Sbihi
+theorem could retire the entire full-SPGT branch.
+
+**Downstream gate.** After a fully proved BF-BERGE theorem lands, replace
+the recorded SPGT dependency and [L3] of the neighborhood theorem with its
+restricted corollary, then re-read the neighborhood counting, basic two-
+narrowness, general two-narrowness, and sharp quarter-power proof in that
+order. Trace all direct and indirect Statement/Definition consumers of any
+interface change and repair actual affected uses. As of the prior run's exact
+current-content scan, the O'Nan--Scott chain is separate, and the bull chain's
+outside proof-bearing C5 example/refutation are being repaired independently.
+The historical broader closure above is not the current supplier debt census.
 
 ## III.5 New pair QID — quantitative induced density and the log-log step
 
@@ -10175,8 +10362,9 @@ that denied material.
 Resolved old blockers: the Skolem block list (§III.4.2) and species sources
 (§III.6).  Remaining hard blockers are exactly:
 
-1. the Strong Perfect Graph Theorem on the bull route, with the frozen closure
-   and future pair stated in §III.4.4;
+1. the restricted bull-free Berge perfection theorem on the sharp bull route,
+   with the BF-FOUND/BF-BERGE pair route and the separate source-gated full-
+   SPGT alternative in §III.4.4;
 2. any attempt to promote the Graph Minor/Grid, Four Colour, Whitney converse,
    Tutte 4-connected planar, or other clauses in §III.7 without a complete
    authoritative proof treatment; and

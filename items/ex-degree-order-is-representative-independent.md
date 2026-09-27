@@ -9,15 +9,15 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [def-turing-degree-and-degree-order, lem-degree-order-is-representative-independent]
+deps: [def-turing-degree-and-degree-order, def-tagged-join-of-oracles, lem-degree-order-is-representative-independent]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, Exercise 5.3"
@@ -36,7 +36,7 @@ $\widetilde B$.
 
 ## Facts & Assumptions
 
-**Given:** sets $A,B\subseteq\mathbb N$ and their zero-padded tagged versions.
+**Given:** sets $A,B\subseteq\mathbb N$ and their zero-padded tagged versions in the sense of [[def-tagged-join-of-oracles]].
 
 ## Verification
 

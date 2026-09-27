@@ -7,11 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-parsimonious-reduction, def-number-sat, def-bounded-computation-tableau, lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs, lem-cook-levin-map-is-polynomial-time]
+deps: [def-parsimonious-reduction, def-number-sat, def-bounded-computation-tableau, def-multitape-and-nondeterministic-machines, lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs, lem-cook-levin-map-is-polynomial-time]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-cook-levin-can-be-made-parsimonious). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -41,13 +46,15 @@ count of $N$ to $\mathrm{NumberSAT}$.
 
 [L5] NumberSAT counts assignments to the complete ordered declared-variable list, including unused variables, by [[def-number-sat]].
 
+[F1] A fixed nondeterministic multitape machine has a finite transition table and finitely many tape heads ([[def-multitape-and-nondeterministic-machines]]).
+
 [L4] A parsimonious reduction preserves the exact numerical count, by [[def-parsimonious-reduction]].
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Replace $N$ by a fixed one-tape simulator $N^*$. Between two transitions of $N$, the simulator's sweeps are deterministic; at an original nondeterministic transition it makes exactly the same tagged choice as $N$. Each such choice first enters a distinct intermediate state labelled by its transition tag, before deterministically executing that transition; these states are part of the recorded configuration. Even choices with the same eventual successor therefore give different tableau rows. Erasing the deterministic simulation steps and reading these tags is a bijection between accepting paths. The standard multitape-to-one-tape simulation has polynomial slowdown. Choose a polynomial $T(n)\ge n+1$ bounding both its running time and every tape position it can visit, and pad every halted branch to time $T(n)$. This supplies all hypotheses of [L1]--[L3]. [given, construct]
+1.1 Replace $N$ by a fixed one-tape simulator $N^*$. Encode the finitely many simulated tapes as delimiter-separated blocks with marked head cells. To simulate one step, make a deterministic sweep to collect the finitely many scanned symbols, choose exactly one transition of $N$ nondeterministically, record its transition tag in a distinct intermediate state, and make deterministic sweeps to update marked cells and shift blocks if a head enters a new blank cell. The finite transition table from [F1] makes all sweep-control states fixed. After $t$ simulated steps on an input of length $n$, at most $n+O(t)$ cells are represented, so each sweep costs $O(n+t)$ and the full simulation costs $O((n+t)^2)$; the tag step adds constant overhead. Even choices with the same eventual successor yield different tagged tableau rows. Erasing deterministic sweeps and reading tags is a bijection between accepting paths. Choose a polynomial $T(n)\ge n+1$ bounding the running time and every visited tape position on all bounded branches, then deterministically pad every halted branch to time $T(n)$. This supplies [L1]--[L3]. [F1, given, construct]
 
 2.1 Use one-hot tableau variables for the symbol (including the tagged state) in every time-cell position. The initial-row, exactly-one-symbol, local-transition, and accepting constraints use only those variables. Take their conjunction as $\varphi_{N,x}$ without introducing auxiliary variables. Let $V_{N,x}$ list every cell variable $X_{t,c,a}$ once, in lexicographic order of time, cell, and a fixed order on the simulator alphabet. Output the encoded pair $(\varphi_{N,x},V_{N,x})$, which is well formed for NumberSAT. [L1, L5, step 1.1, construct]
 

@@ -6,12 +6,15 @@ status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-dual-numbers-scheme, ex-spectrum-field-one-point, def-reduced-affine-scheme, cor-prime-spectrum-insensitive-to-nilpotents, def-residue-field-scheme-point]
+deps: [def-dual-numbers-scheme, def-reduced-affine-scheme, cor-prime-spectrum-insensitive-to-nilpotents, def-residue-field-scheme-point]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "James S. Milne, Algebraic Geometry, 10.28"
@@ -33,11 +36,11 @@ and it is not reduced.
 
 **Proof technique:** direct.
 
-1.1 Every element of $R$ has the form $a+b\epsilon$. If $a\ne0$, then $a+b\epsilon$ is a unit with inverse $a^{-1}-a^{-2}b\epsilon$; while $(b\epsilon)^2=0$. Thus $\operatorname{Nil}(R)=(\epsilon)$, and $R/(\epsilon)\cong k$, so [F1] identifies $\operatorname{Spec}R$ with $\operatorname{Spec}k$. [F1, given, algebra]
+1.1 Every element of $R$ has the form $a+b\epsilon$. If $a\ne0$, then $a+b\epsilon$ is a unit with inverse $a^{-1}-a^{-2}b\epsilon$; while $(b\epsilon)^2=0$. Thus $\operatorname{Nil}(R)=(\epsilon)$, and $R/(\epsilon)\cong k$. Since the field $k$ has exactly one prime ideal, $(0)$, [F1] identifies $\operatorname{Spec}R$ with its one-point spectrum; its sole prime is $(\epsilon)$. [F1, given, algebra]
 
 1.2 The nonzero class of $\epsilon$ squares to zero, so $R$ is not reduced. [given]
 
-2.1 Thus $(\epsilon)$ is the only point and its residue field is $R/(\epsilon)=k$. [step 1.1]
+2.1 Every element outside $(\epsilon)$ is a unit by step 1.1, so $R_{(\epsilon)}=R$. The residue-field definition therefore gives $\kappa((\epsilon))=R_{(\epsilon)}/(\epsilon)R_{(\epsilon)}\cong R/(\epsilon)\cong k$. [step 1.1]
 
 3.1 This is the asserted one-point nonreduced scheme. [step 2.1, step 1.2] ∎
  

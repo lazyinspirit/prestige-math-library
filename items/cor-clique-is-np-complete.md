@@ -17,12 +17,13 @@ sources:
     - title: "Fabrizio Iozzi and Luca Trevisan, Handout NP3"
       url: "https://lucatrevisan.github.io/30540/notes-np3.pdf"
 verification:
-  audited: 2026-09-05
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (cor-clique-is-np-complete). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
@@ -45,7 +46,7 @@ CLIQUE is NP-complete.
 
 **Proof technique:** direct.
 
-1.1 A certificate for $(G,k)\in CLIQUE$ is a list of $k$ vertices. One checks in polynomial time that the listed vertices are distinct and that every pair is adjacent, so CLIQUE lies in $NP$. [F1, given, construct]
+1.1 First reject malformed instances and any $k>|V(G)|$; such an instance cannot contain a $k$-clique. Otherwise $k\le|V(G)|$, so a certificate is a list of at most $|V(G)|$ vertices. Check that exactly $k$ listed vertices are distinct and every pair is adjacent. The certificate length and verification time are polynomial in the graph encoding length, even when $k$ is written in binary. Thus CLIQUE lies in $NP$. [F1, given, construct]
 
 1.2 Because [L2] says that $3$-SAT is NP-complete, every language in $NP$ reduces to $3$-SAT. Composing any such reduction with the fixed reduction [L1] shows that every language in $NP$ reduces to CLIQUE. Hence CLIQUE is NP-hard. [L1, L2, L3]
 

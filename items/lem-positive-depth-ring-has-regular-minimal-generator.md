@@ -2,13 +2,14 @@
 id: "lem-positive-depth-ring-has-regular-minimal-generator"
 kind: "lemma"
 title: "positive depth ring has regular minimal generator"
-deps: ["thm-depth-zero-associated-prime-criterion", "thm-finiteness-of-associated-primes", "thm-zero-divisors-on-a-module", "lem-finite-prime-avoidance", "thm-nakayama-lemma"]
+deps: ["def-axiom-of-choice", "thm-depth-zero-associated-prime-criterion", "thm-finiteness-of-associated-primes", "thm-zero-divisors-on-a-module", "lem-finite-prime-avoidance", "thm-nakayama-lemma"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 12.33 proof, p.123; Lemma 5.1 variant"
@@ -23,11 +24,13 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 If a nonzero Noetherian local ring $(R,\mathfrak m,k)$ has positive depth, then some $x\in\mathfrak m\setminus\mathfrak m^2$ is a nonzerodivisor. The residue field need not be infinite.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[thm-depth-zero-associated-prime-criterion]]: Let $(R,\mathfrak m)$ be a Noetherian local ring and let $M\ne0$ be a finite $R$-module. Then $$\operatorname{depth}(M)=0\quad\Longleftrightarrow\quad \mathfrak m\in\operatorname{Ass}_R(M).$$
 

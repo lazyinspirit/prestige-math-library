@@ -2,13 +2,14 @@
 id: "lem-flat-local-ascent-of-regularity"
 kind: "lemma"
 title: "flat local ascent of regularity"
-deps: ["thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-quotient-and-lifting-regularity-across-a-regular-element", "def-flat-and-faithfully-flat-modules-and-ring-maps", "thm-auslander-buchsbaum-serre-regularity-criterion", "lem-finite-local-modules-admit-minimal-free-resolutions", "lem-projective-dimension-from-last-nonzero-betti-number"]
+deps: ["def-axiom-of-choice", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-quotient-and-lifting-regularity-across-a-regular-element", "def-flat-and-faithfully-flat-modules-and-ring-maps", "thm-auslander-buchsbaum-serre-regularity-criterion", "lem-finite-local-modules-admit-minimal-free-resolutions", "lem-projective-dimension-from-last-nonzero-betti-number"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Exercise 12.40(i), p.124"
@@ -25,11 +26,13 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 For a flat local map $(R,\mathfrak m)\to(S,\mathfrak n)$ of nonzero Noetherian local rings: if $R$ and $S/\mathfrak mS$ are regular, then $S$ is regular. Conversely, regularity of $S$ implies regularity of $R$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[thm-regular-local-rings-are-domains-and-cohen-macaulay]]: A regular local ring $R$ of dimension $d$ is a domain and Cohen–Macaulay. For every regular system $(x_1,\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\le c\le d$.
 
@@ -49,4 +52,4 @@ For a flat local map $(R,\mathfrak m)\to(S,\mathfrak n)$ of nonzero Noetherian l
 
 2.1 The terminal quotient is the regular closed fibre. Repeatedly lift regularity across those nonzerodivisors to get regularity of $S$. If $d=0$, the fibre is $S$ and the implication is immediate. [F2, step 1.1]
 
-3.1 For descent, choose a degreewise finite minimal resolution of $k_R$ and tensor it with $S$. Flatness preserves its exactness, locality puts all differential entries in $\mathfrak n$, and $S/\mathfrak mS$ is a nonzero finite $S$-module. If $S$ is regular, its finite global dimension forces this minimal resolution to terminate by the Betti criterion. A term $S^r$ is zero only if $r=0$, so the original resolution over $R$ terminates as well. Finite $\operatorname{pd}_Rk_R$ gives regularity of $R$. This argument also covers global dimension zero. [F5, F3, F4, F6] ∎
+3.1 For descent, the assumed Choice supplies the degreewise finite minimal resolution of $k_R$ in [F5] and the Betti/global-dimension route in [F6] and [F4]. Tensor that resolution with $S$. Flatness preserves its exactness, locality puts all differential entries in $\mathfrak n$, and $S/\mathfrak mS$ is a nonzero finite $S$-module. If $S$ is regular, its finite global dimension forces this minimal resolution to terminate by the Betti criterion. A term $S^r$ is zero only if $r=0$, so the original resolution over $R$ terminates as well. Finite $\operatorname{pd}_Rk_R$ gives regularity of $R$. This argument also covers global dimension zero. [F5, F3, F4, F6, given] ∎

@@ -4,7 +4,7 @@ title: A regular parameter quotient preserves the depth--dimension gap
 kind: lemma
 status: published
 origin: pipeline
-deps: [lem-depth-quotient-by-regular-element, lem-parameter-dimension-drop-is-exact, thm-dimension-and-parameters-for-modules]
+deps: [def-axiom-of-choice, lem-depth-quotient-by-regular-element, lem-parameter-dimension-drop-is-exact, thm-dimension-and-parameters-for-modules]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,23 +14,25 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
 
-Let $(R,\mathfrak m)$ be Noetherian local, $0\ne M$ finite, and let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\mathfrak m)$ be Noetherian local, $0\ne M$ finite, and let
 $x\in\mathfrak m$ be $M$-regular and part of a system of parameters for $M$.
 Then
 $$\dim_R(M/xM)-\operatorname{depth}_R(M/xM) =\dim_R(M)-\operatorname{depth}_R(M).$$
 
 ## Facts & Assumptions
 
-**Given:** regularity makes $M/xM$ nonzero; complete $x$ to a system of parameters $x,x_2,\ldots,x_d$ for $M$, where $d=\dim_R(M)$.
+**Given:** The Axiom of Choice; regularity makes $M/xM$ nonzero; complete $x$ to a system of parameters $x,x_2,\ldots,x_d$ for $M$, where $d=\dim_R(M)$.
 
 ## Proof
 

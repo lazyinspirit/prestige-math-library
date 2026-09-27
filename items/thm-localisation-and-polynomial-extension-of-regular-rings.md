@@ -2,13 +2,9 @@
 id: "thm-localisation-and-polynomial-extension-of-regular-rings"
 kind: "theorem"
 title: "localisation and polynomial extension of regular rings"
-deps: ["cor-localisations-of-regular-local-rings-are-regular", "def-regular-noetherian-ring", "lem-flat-local-ascent-of-regularity", "lem-polynomial-local-regularity-fibre-step", "cor-finite-variable-polynomial-ring-noetherian", "thm-localisation-of-modules-is-exact", "cor-finite-flat-noetherian-modules-are-projective", "thm-flatness-is-local", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "lem-global-dimension-is-detected-on-cyclic-modules", "lem-dedekind-localisation-at-nonzero-prime-is-dvr", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "thm-auslander-buchsbaum-serre-regularity-criterion"]
+deps: ["cor-localisations-of-regular-local-rings-are-regular", "def-regular-noetherian-ring", "lem-flat-local-ascent-of-regularity", "lem-polynomial-local-regularity-fibre-step", "cor-finite-variable-polynomial-ring-noetherian", "thm-noetherian-ring-quotients-and-localisations", "thm-localisation-of-modules-is-exact", "cor-finite-flat-noetherian-modules-are-projective", "thm-flatness-is-local", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "lem-global-dimension-is-detected-on-cyclic-modules", "lem-dedekind-localisation-at-nonzero-prime-is-dvr", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "thm-auslander-buchsbaum-serre-regularity-criterion", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  audited: 2026-09-26
 sources:
   references:
     - title: "Corollary 12.34 and Proposition 12.36, pp.123–124"
@@ -25,7 +21,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular. Regularity can equivalently be tested at maximal ideals. For every nonzero such ring, $\operatorname{gldim}R=\dim R$, allowing infinity. More generally, for a finite module over any commutative Noetherian ring, projective dimension is the supremum of its prime-local projective dimensions. Dedekind domains and their finite polynomial extensions are regular.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular. Regularity can equivalently be tested at maximal ideals. For every nonzero such ring, $\operatorname{gldim}R=\dim R$, allowing infinity. More generally, for a finite module over any commutative Noetherian ring, projective dimension is the supremum of its prime-local projective dimensions. Dedekind domains and their finite polynomial extensions are regular.
 
 ## Facts & Assumptions
 
@@ -57,13 +53,15 @@ Localizations and finite polynomial extensions of a commutative regular Noetheri
 
 [F13] [[thm-auslander-buchsbaum-serre-regularity-criterion]]: For a nonzero Noetherian local ring $(R,\mathfrak m,k)$ the following are equivalent: $R$ is regular; $\operatorname{pd}_Rk<\infty$; $\operatorname{gldim}R<\infty$; and every finite $R$-module has finite projective dimension. When these hold, $\operatorname{gldim}R=\operatorname{pd}_Rk=\dim R$. A nonzero finite module over regular local $R$ is maximal Cohen–Macaulay (depth $\dim R$) if and only if it is free.
 
+[F14] [[thm-noetherian-ring-quotients-and-localisations]]: Every localization of a Noetherian commutative ring is Noetherian, including the zero localization.
+
 ## Proof
 
-1.1 If maximal localizations are regular, choose a maximal ideal above any prime and use transitivity of localization and regular-local localization to get regularity at that prime. The reverse implication follows by selecting the maximal primes. Localizing a regular ring again has only such prime-local rings, so is regular; the zero ring and a localization that becomes zero satisfy this vacuously. [F1, F2]
+1.1 If maximal localizations are regular, choose a maximal ideal above any prime and use transitivity of localization and regular-local localization to get regularity at that prime. The reverse implication follows by selecting the maximal primes. A localization of a Noetherian ring is Noetherian by [F14]; localizing a regular ring again has only regular prime-local rings, so is regular. The zero ring and a localization that becomes zero satisfy this vacuously. [F1, F2, F14]
 
 1.2 For a finite module $M$ over any Noetherian $R$, localization of a projective resolution gives $\operatorname{pd}_{R_{\mathfrak p}}M_{\mathfrak p}\le\operatorname{pd}_RM$. Conversely suppose every local dimension is at most a fixed $n<\infty$. If $n\ge1$, form a partial finite free resolution of length $n$ by successively taking finite generators of finite kernels. Its $n$th syzygy is projective at every prime by the syzygy criterion. It is therefore flat locally, hence globally, and finite flat implies projective. The syzygy criterion gives $\operatorname{pd}_RM\le n$. If $n=0$, apply the local-flat and finite-projective argument to $M$ itself. Thus the supremum formula holds, including infinity and $M=0$. [F6, F9, F12, F8, F7]
 
-2.1 The module $R[t]$ is free over $R$ on the monomials, hence flat. Tensoring followed by localization is exact, so at a prime $\mathfrak q$ over $\mathfrak p$ the map $R_{\mathfrak p}\to R[t]_{\mathfrak q}$ is flat and local. The base is regular and its closed fibre is regular by the fibre computation; flat-local ascent gives regularity of the target. Polynomial Noetherianity and finite iteration prove the assertion for any finite number of variables, including zero. [F12, F6, F4, F3, F5, step 1.1]
+2.1 The module $R[t]$ is free over $R$ on the monomials, hence flat. Tensoring followed by localization is exact, so at a prime $\mathfrak q$ over $\mathfrak p$ the map $R_{\mathfrak p}\to R[t]_{\mathfrak q}$ is flat and local. The base is regular; polynomial Noetherianity [F5] and localization [F14] make the target Noetherian; and its closed fibre is regular by [F4]. Flat-local ascent therefore applies. Finite iteration proves the assertion for any finite number of variables, including zero. [F12, F6, F4, F3, F5, F14, step 1.1]
 
 2.2 For regular nonzero $R$, local homological regularity gives $\operatorname{pd}_{R_{\mathfrak p}}k(\mathfrak p)=\operatorname{ht}\mathfrak p$. Applying the preceding lower bound to $R/\mathfrak p$ gives global dimension at least every height, hence at least $\dim R$. If $d=\dim R$ is finite, all localized finite modules have projective dimension at most $d$; the preceding upper bound and cyclic detection give global dimension at most $d$. If $d=\infty$, the lower bounds already give equality. [F13, F10, step 1.2]
 

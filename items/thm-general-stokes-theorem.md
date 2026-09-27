@@ -4,17 +4,18 @@ title: "The general Stokes theorem"
 kind: theorem
 status: published
 origin: pipeline
-deps: ["lem-half-space-stokes-for-a-compactly-supported-form", "lem-partition-localization-of-stokes", "thm-change-of-variables-for-oriented-manifold-diffeomorphisms", "prop-integration-over-an-oriented-embedded-submanifold", "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold"]
+deps: ["lem-half-space-stokes-for-a-compactly-supported-form", "lem-euclidean-stokes-for-a-compactly-supported-form", "lem-partition-localization-of-stokes", "thm-change-of-variables-for-oriented-manifold-diffeomorphisms", "prop-integration-over-an-oriented-embedded-submanifold", "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold"]
 landmark: true
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (thm-general-stokes-theorem). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Lee Theorem 16.11, pp.411–414; Merry Theorem 26.16"
@@ -39,6 +40,8 @@ An empty boundary contributes zero; in dimension one its integral is a finite si
 
 [F5] [[thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold]]: If $M$ has dimension $n\ge1$, the restrictions of boundary charts to their faces give $\partial M$ the structure of a closed embedded smooth boundaryless $(n-1)$-manifold. For $n=0$, $\partial M=\varnothing$.
 
+[F6] [[lem-euclidean-stokes-for-a-compactly-supported-form]]: The integral of the exterior derivative of a compactly supported $(n-1)$-form on standard oriented $\mathbb R^n$ is zero.
+
 ## Proof
 
 **Given:** The objects and hypotheses in the statement above.
@@ -47,4 +50,4 @@ An empty boundary contributes zero; in dimension one its integral is a finite si
 
 1.2 For a boundary-chart term, extend the coordinate primitive by zero across artificial edges within $H^n$. It remains smooth there, has compact support, and exterior differentiation commutes with its chart pullback by the local calculus used in the localization lemma. Apply half-space Stokes. Multiplication by the ambient chart sign multiplies the induced boundary sign by the same number: the transition preserves the outward side, and outward-first compares the two determinant rays. The signed change-of-variables formula therefore turns the local equality into $\int_Md\eta_i=\int_{\partial M}j^*\eta_i$. [F1, F2, F3]
 
-2.1 For an interior-chart term the Euclidean calculation in the half-space lemma’s dependency gives zero integral and zero boundary restriction. Equivalently translate its compact Euclidean support into the interior of $H^n$ and use the half-space identity with zero face value. Sum all finitely many equalities and use the localization identities to obtain Stokes. Empty support and empty boundary are included. For $n=1$ the local formula is the negative point value, transported with its chart sign; hence the boundary integral is exactly the specified signed sum. [F1, F2, F3, step 1.1, step 1.2] ∎
+2.1 For an interior-chart term [F6] gives zero integral, and its boundary restriction is zero. Equivalently, translate its compact Euclidean support into the interior of $H^n$ and use [F1] with zero face value. Sum all finitely many equalities and use the localization identities to obtain Stokes. Empty support and empty boundary are included. For $n=1$ the local formula is the negative point value, transported with its chart sign; hence the boundary integral is exactly the specified signed sum. [F1, F2, F3, F6, step 1.1, step 1.2] ∎

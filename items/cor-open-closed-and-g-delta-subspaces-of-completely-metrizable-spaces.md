@@ -13,12 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -45,7 +45,7 @@ Every open or closed subspace of a completely metrizable space is completely met
 
 [F2] Assume Dependent Choice. For a subspace $Y$ of a complete metric space $X$, $Y$ is completely metrizable if and only if $Y$ is a $G_\delta$ subset of $X$. ([[thm-alexandrov-complete-metrizability-characterisation]]).
 
-[F3] Let $(X,d)$ be a metric space (def-metric-space) and let $A \subseteq X$ carry the subspace metric $d_A$ (def-isometry-and-metric-embedding). Then: 1. If $(A,d_A)$ is complete (def-complete-metric-space), then $A$ is closed in $(X,d)$ (def-metric-topology). **No hypothesis on $X$ is needed.** 2. If $(X,d)$ is complete and $A$ is closed in $(X,d)$, then $(A,d_A)$ is complete. Consequently, for a complete $(X,d)$ a subset $A \subseteq X$ is complete if and only if it is closed. ([[thm-complete-subspace-iff-closed]]).
+[F3] If $(X,d)$ is complete and $A\subseteq X$ is closed, then the subspace metric on $A$ is complete, without a choice axiom. The converse, complete subspace implies closed, requires countable choice and is not used here ([[thm-complete-subspace-iff-closed]]).
 
 [F4] Let $(X,d)$ be a metric space (def-metric-space) and let $\mathcal{T}_d$ be its metric topology (def-metric-topology). Call $\mathcal{T}_d$ **completely metrizable** if some metric $\rho$ on $X$ is topologically equivalent to $d$, that is $\mathcal{T}_\rho = \mathcal{T}_d$ (def-equivalent-metrics), and makes $(X,\rho)$ complete (def-complete-metric-space). Then: 1. **Homeomorphism invariance.** Let $(Y,e)$ be a metric space and let $h : X \to Y$ be a bijection (def-injection-surjection-bijection) such that $h$ and $h^{-1}$ are continuous (def-metric-continuity). If $\mathcal{T}_d$ is completely metrizable then so is $\mathcal{T}_e$. 2. **Closed subspaces.** If $\mathcal{T}_d$ is completely metrizable and $A \subseteq X$ is closed in $(X,d)$, then $\mathcal{T}_{d_A}$ is completely metrizable, $d_A$ being the subspace metric (def-isometry-and-metric-embedding). 3. **The property is strictly weaker than completeness.** Let $P := (0,\infty) \subseteq \mathbb{R}$ (def-interval) carry $d(x,y) := |x-y|$ (lem-real-line-is-a-metric-space). Then $(P,d)$ is **not** complete, while $$\rho_P(x,y) \;:=\; |x-y| \;+\; \left| \frac{1}{x} - \frac{1}{y} \right|$$ is a complete metric on $P$ with $\mathcal{T}_{\rho_P} = \mathcal{T}_d$. So $\mathcal{T}_d$ is completely metrizable although no completeness assumption holds for $d$ itself. Complete metrizability is a condition on the *collection of open sets* alone: the metric is quantified over and does not survive into the statement. That is exactly what completeness fails to be, and claim 3 shows the two conditions are genuinely different rather than merely stated differently. ([[lem-complete-remetrisation]]).
 

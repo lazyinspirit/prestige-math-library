@@ -15,12 +15,12 @@ sources:
     - title: J. S. Milne, Algebraic Geometry, 6.23
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 ---
 
 ## Statement
@@ -35,4 +35,4 @@ For $d\ge1$, $\nu_{n,d}$ is a well-defined closed immersion of projective variet
 
 2.1 On the open where $x_i^d\ne0$, the ratios $x_jx_i^{d-1}/x_i^d=x_j/x_i$ recover the usual affine coordinates. These chart inverses show injectivity and regular local inverse maps. [step 1.1, algebra]
 
-3.1 The relations $Z_\alpha Z_\beta-Z_\gamma Z_\delta$ whenever $\alpha+\beta=\gamma+\delta$ vanish on monomial coordinates; on each $Z_{d e_i}\ne0$ chart they express every coordinate as a monomial in the recovered ratios. Hence they cut out exactly the image, which is closed, and step 2.1 makes the map a closed immersion. [step 2.1, algebra] ∎
+3.1 The relations $Z_\alpha Z_\beta-Z_\gamma Z_\delta$ whenever $\alpha+\beta=\gamma+\delta$ vanish on monomial coordinates. Repeatedly exchanging one variable between two degree-$d$ multi-indices gives $Z_\alpha^d=\prod_j Z_{d e_j}^{\alpha_j}$. Thus every point satisfying the relations has some $Z_{d e_i}\ne0$: otherwise every $Z_\alpha$ would vanish. On this chart the same exchanges give $Z_\alpha/Z_{d e_i}=\prod_j\left(Z_{(d-1)e_i+e_j}/Z_{d e_i}\right)^{\alpha_j}$. The chart is therefore precisely the image of the affine chart $x_i\ne0$, with inverse coordinates $x_j/x_i=Z_{(d-1)e_i+e_j}/Z_{d e_i}$. The common zero locus of the homogeneous relations is exactly the image, so the image is closed and these chart inverses make the map a closed immersion. [step 2.1, algebra] ∎

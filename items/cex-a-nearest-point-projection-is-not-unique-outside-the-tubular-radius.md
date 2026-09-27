@@ -9,14 +9,19 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-deps: [prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -33,11 +38,9 @@ everywhere in the ambient space.
 
 **Given:** The unit circle $S^1\subseteq\mathbb R^2$ and the center point $0\in\mathbb R^2$.
 
-[L1] Nearest-point projection agrees with the tubular retraction only after one shrinks to a sufficiently small tube ([[prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking]]).
-
 ## Counterexample
 **Proof technique:** direct.
 
 1.1 Every point of $S^1$ is distance $1$ from the origin. Hence the origin has infinitely many nearest points on $S^1$. [given, algebra]
 
-2.1 Therefore nearest-point projection is not uniquely defined at the origin, which lies outside every sufficiently small annular tubular neighbourhood. This is exactly the boundary described in [L1]. [L1, step 1.1] ∎
+2.1 Therefore nearest-point projection is not uniquely defined at the origin, which lies outside every sufficiently small annular tubular neighbourhood of the circle. [step 1.1, given] ∎

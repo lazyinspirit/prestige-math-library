@@ -7,15 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-sigma-n-pi-n-and-delta-n-sets, def-computable-and-partial-computable-function, def-decidable-and-recognizable-language, thm-kleene-normal-form]
+deps: [def-sigma-n-pi-n-and-delta-n-sets, def-computable-and-partial-computable-function, def-decidable-and-recognizable-language, def-kleene-t-predicate-and-output-function, thm-partial-recursive-iff-turing-computable]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (thm-sigma-one-sets-are-exactly-ce-sets). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Ludovic Patey, Computability Theory, Proposition 2.1"
@@ -35,6 +35,6 @@ computably enumerable (recognizable).
 
 **Proof technique:** direct.
 
-1.1 If $x\in A\iff\exists s\,R(x,s)$ with $R$ primitive recursive, search $s=0,1,\ldots$ and halt on the first true value. This recognizes exactly $A$. [given, construct]
+1.1 If $x\in A\iff\exists s\,R(x,s)$ with $R$ primitive recursive, evaluate $R(x,s)$ for $s=0,1,\ldots$ and accept on the first true value. Every primitive-recursive predicate is computable: its initial functions are computed directly and its finite composition and primitive-recursion derivation become composition and finite loops of machines, as in [[thm-partial-recursive-iff-turing-computable]]. The search therefore recognizes exactly $A$. [given, construct]
 
-2.1 Conversely, a recognizer has a finite halting computation exactly on its positive inputs. Its coded history gives an existential witness whose validity is primitive recursive, so $A$ has a $\Sigma_1^0$ definition. [step 1.1, construct] ∎
+2.1 Conversely, let $M$ recognize $A$. A recognizer may halt rejecting on negative inputs, so replace each rejecting halt of $M$ by a fixed loop, obtaining a machine $M'$ that halts exactly when $M$ accepts. Fix its code $e$. By [[def-kleene-t-predicate-and-output-function]], $T(e,x,s)$ is a primitive-recursive predicate saying exactly that $s$ codes a complete halting history of $M'$ on $x$. Thus $x\in A\iff\exists s\,T(e,x,s)$, a $\Sigma_1^0$ definition. [given, construct] ∎

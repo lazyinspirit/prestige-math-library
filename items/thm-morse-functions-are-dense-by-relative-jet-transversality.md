@@ -7,14 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [lem-morse-functions-are-transverse-differentials, prop-the-zero-section-is-a-smooth-embedding, thm-parametric-transversality, prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-a-locally-finite-sum-of-smooth-functions-is-smooth, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]
+deps: [lem-morse-functions-are-transverse-differentials, prop-the-zero-section-is-a-smooth-embedding, thm-parametric-transversality, prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-a-locally-finite-sum-of-smooth-functions-is-smooth, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -28,7 +32,7 @@ sources:
 
 ## Statement
 
-Let $M$ be a smooth manifold, let $f:M\to\mathbb R$ be smooth, and let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a smooth manifold, let $f:M\to\mathbb R$ be smooth, and let
 $A\subseteq M$ be closed. Assume that $df$ is transverse to the zero section on
 an open neighbourhood of $A$. Then every neighbourhood of $f$ in the strong
 $C^\infty$ topology contains a smooth function $g$ such that:

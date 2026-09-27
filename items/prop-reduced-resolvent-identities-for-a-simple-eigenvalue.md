@@ -13,8 +13,13 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (prop-reduced-resolvent-identities-for-a-simple-eigenvalue). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,7 +48,7 @@ and this $S$ is unique.
 ## Proof
 **Proof technique:** direct.
 
-1.1 Every vector $v$ decomposes uniquely as $v=(y^\ast v)x + (v-(y^\ast v)x)$, with the second term in $\ker y^\ast$. If $z\in\ker y^\ast$ and $(A-\lambda I)z=0$, then $z$ is a right eigenvector for the simple eigenvalue $\lambda$, so $z=cx$ for some scalar $c$. Applying $y^\ast$ gives $0=y^\ast z=c\,y^\ast x=c$, hence $z=0$. Therefore the restriction of $A-\lambda I$ to $\ker y^\ast$ is injective, and since both domain and codomain have dimension $n-1$, it is bijective. [given, algebra]
+1.1 Every vector $v$ decomposes uniquely as $v=(y^\ast v)x + (v-(y^\ast v)x)$, with the second term in $\ker y^\ast$. Because $y^\ast A=\lambda y^\ast$, the operator $A-\lambda I$ maps $\ker y^\ast$ into itself. If $z\in\ker y^\ast$ and $(A-\lambda I)z=0$, then $z$ is a right eigenvector for the simple eigenvalue $\lambda$, so $z=cx$ for some scalar $c$. Applying $y^\ast$ gives $0=y^\ast z=c\,y^\ast x=c$, hence $z=0$. Therefore the restriction of $A-\lambda I$ to $\ker y^\ast$ is injective, and since both domain and codomain have dimension $n-1$, it is bijective. [given, algebra]
 
 2.1 Define $S$ to be the inverse of that restriction on $\ker y^\ast$ and to vanish on $\operatorname{span}\{x\}$. Then $SP=PS=0$ by construction. For $v=\alpha x+z$ with $z\in\ker y^\ast$, [F1] gives $Pv=(y^\ast v)x=(\alpha+y^\ast z)x=\alpha x$, so $(I-P)v=z$. Therefore $S(A-\lambda I)v=S(A-\lambda I)z=z=(I-P)v$, and similarly $(A-\lambda I)Sv=(A-\lambda I)S z=z=(I-P)v$. Thus all displayed identities hold. [F1, construct, step 1.1, algebra]
 

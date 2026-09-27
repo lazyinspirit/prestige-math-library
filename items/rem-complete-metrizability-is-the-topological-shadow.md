@@ -1,7 +1,7 @@
 ---
 id: rem-complete-metrizability-is-the-topological-shadow
 kind: remark
-title: "Completeness belongs to the metric; the topological invariant is complete metrizability, which this page introduces and only a much later page characterises"
+title: "Completeness belongs to the metric; complete metrizability is characterised on a later page"
 status: published
 origin: session
 provenance:
@@ -12,15 +12,16 @@ deps: [fs-completeness-is-a-topological-property, def-complete-metric-space,
        thm-complete-subspace-iff-closed, thm-metric-completion-exists,
        lem-complete-remetrisation, fs-cauchy-implies-convergent-in-every-metric-space]
 justified_by: []
+forward_refs: [thm-alexandrov-complete-metrizability-characterisation, cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces]
 aliases: []
 landmark: false
 verification:
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -53,15 +54,16 @@ strictly weaker than "carries this particular complete metric".
 **What this page now settles.** Two of the three facts below are discharged by
 [[lem-complete-remetrisation]]; the third is not, and says so.
 
-- $(0,\infty)$ with its usual metric is not complete — claim 3 of
-  [[lem-complete-remetrisation]] proves it, by the same route that makes $(0,1)$
-  incomplete in [[fs-cauchy-implies-convergent-in-every-metric-space]], namely
-  that neither set is closed in $\mathbb{R}$. And yet *another* metric on
+- $(0,\infty)$ with its usual metric is not complete: the sequence
+  $1/(k+2)$ is Cauchy there and converges in $\mathbb R$ only to $0$, which is
+  outside the space. Claim 3 of [[lem-complete-remetrisation]] also states this
+  conclusion. And yet *another* metric on
   $(0,\infty)$, inducing exactly the same open sets, **is** complete: the same
   claim writes it down as $|x-y| + |1/x - 1/y|$. So the two notions genuinely
   differ, and the question above is not a distinction without a difference.
-- [[thm-complete-subspace-iff-closed]] says a subspace of a complete space is
-  complete precisely when it is closed. Claim 2 of
+- Under Countable Choice, [[thm-complete-subspace-iff-closed]] says a subspace
+  of a complete space is complete precisely when it is closed. Its
+  closed-implies-complete direction holds without choice. Claim 2 of
   [[lem-complete-remetrisation]] upgrades that to the topological statement: a
   closed subspace of a completely metrizable space is completely metrizable,
   with no completeness hypothesis on the ambient metric. What happens for
@@ -75,18 +77,19 @@ strictly weaker than "carries this particular complete metric".
   not — but that second half is **not** proved here and needs the Baire category
   theorem.
 
-**What is deliberately not asserted.** No *characterisation* of the completely
-metrizable topologies is stated here, and none is proved. The classical answer is
-Alexandroff's theorem — a subspace of a complete metric space is completely
-metrizable exactly when it is a $G_\delta$ subset of it — and it belongs to a
-later page of this library, `complete-metrizability-and-baire`, which is planned
-and not yet authored. What that page needs and this one has not got is countable
-intersections of open sets, the Baire category theorem, and a remetrisation built
-as a convergent series; general topological spaces are developed later in this
-library too, whereas [[def-metric-topology]] here supplies only the metric
-topology, as a collection of subsets. So beyond the three claims of
-[[lem-complete-remetrisation]], "completely metrizable" is used here as the name
-of a question and never as a tool in a proof.
+**What this early page does not prove.** The later published page
+`complete-metrizability-and-baire` proves the qualified Alexandrov
+characterisation: assuming Dependent Choice, a subspace of a complete metric
+space is completely metrizable exactly when it is a $G_\delta$ subset
+([[thm-alexandrov-complete-metrizability-characterisation]]). Its published
+subspace corollary proves the open and closed cases directly, and the general
+$G_\delta$ case under DC
+([[cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces]]).
+This early page has not yet developed countable intersections of open sets,
+the Baire category theorem, or the convergent-series remetrisation used later;
+[[def-metric-topology]] here supplies only the metric topology as a collection
+of subsets. Beyond the three claims of [[lem-complete-remetrisation]],
+"completely metrizable" is not used here as a proof tool.
 
 **How to read the rest of the library in the meantime.** Every statement of the
 form "$X$ is complete" in this library is a statement about a named metric on
@@ -104,14 +107,8 @@ matters, the metric is written out. This is the same discipline as for the word
   [[fs-completeness-is-a-topological-property]]: from "completeness is not
   topological" it does *not* follow that no topological invariant is in the
   neighbourhood.
-- **Forward-reference bookkeeping.** The part of the orientation that is now
-  proved is an ordinary same-page dependency on [[lem-complete-remetrisation]],
-  not a forward reference. What remains unproved is Alexandroff's theorem, which
-  is planned for `complete-metrizability-and-baire`; that page has no items yet,
-  so no target id can be declared in `forward_refs` and this item declares none.
-  When it is authored, the item stating the characterisation must be added to
-  this item's `forward_refs`, so that the pointer is rendered as a forward
-  reference and appears in the ledger produced by `tools/fwdcheck.mjs --ledger`.
-  The same applies to the second bullet above, whose open half — that an open
-  subspace of a completely metrizable space is completely metrizable — is the
-  easy corollary of that theorem.
+- **Forward-reference bookkeeping.** The part proved on this page is an
+  ordinary same-page dependency on [[lem-complete-remetrisation]]. The
+  Alexandrov theorem and the open/closed/$G_\delta$ subspace corollary are
+  published on the later page and are listed as forward references above.
+  Neither later result is a load-bearing premise for this orientation item.

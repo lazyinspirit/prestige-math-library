@@ -4,17 +4,19 @@ kind: theorem
 title: "Harnack convergence principle"
 status: published
 origin: pipeline
-deps: [cor-harnack-inequality-on-compact-subsets, thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]
+deps: [def-countable-choice, cor-harnack-inequality-on-compact-subsets, thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-harnack-convergence-principle). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gantumur, Harmonic functions"
@@ -24,15 +26,17 @@ sources:
 
 ## Statement
 
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$.
+
 Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be a domain, and let $u_1\le u_2\le\cdots$ be real harmonic functions on $\Omega$. Either $u_j(x)\to+\infty$ for every $x\in\Omega$, or the sequence converges uniformly on each compact subset of $\Omega$ to a harmonic function.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
-[F1] On any nonempty compact subset of a domain, nonnegative harmonic functions have supremum bounded by a fixed constant times their infimum. ([[cor-harnack-inequality-on-compact-subsets]]).
+[F1] Under Countable Choice, on any nonempty compact subset of a domain, nonnegative harmonic functions have supremum bounded by a fixed constant times their infimum. ([[cor-harnack-inequality-on-compact-subsets]]).
 
-[F2] A locally uniform limit of harmonic functions on an open set is harmonic. ([[thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]]).
+[F2] Under Countable Choice, a locally uniform limit of harmonic functions on an open set is harmonic. ([[thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]]).
 
 ## Proof
 

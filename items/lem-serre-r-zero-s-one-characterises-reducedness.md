@@ -2,13 +2,15 @@
 id: "lem-serre-r-zero-s-one-characterises-reducedness"
 kind: "lemma"
 title: "serre r zero s one characterises reducedness"
-deps: ["def-serre-r-k-and-s-k-conditions", "thm-depth-zero-associated-prime-criterion", "thm-zero-divisors-on-a-module", "thm-existence-of-associated-primes", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian", "thm-associated-primes-localise", "lem-finite-prime-avoidance", "thm-minimal-support-primes-are-associated"]
+deps: ["def-axiom-of-choice", "def-serre-r-k-and-s-k-conditions", "thm-depth-zero-associated-prime-criterion", "thm-zero-divisors-on-a-module", "thm-existence-of-associated-primes", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian", "thm-associated-primes-localise", "lem-finite-prime-avoidance", "thm-minimal-support-primes-are-associated"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (lem-serre-r-zero-s-one-characterises-reducedness). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "10.157.2–10.157.3"
@@ -23,19 +25,21 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
+Assume the Axiom of Choice.
+
 For a finite module $M$ over a commutative Noetherian ring, $(S_1)$ is equivalent to every associated prime being minimal in $\operatorname{Supp}M$. For the ring itself, this means no embedded associated primes. A commutative Noetherian ring is reduced if and only if it satisfies $(R_0)$ and $(S_1)$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[def-serre-r-k-and-s-k-conditions]]: For a commutative Noetherian ring $R$ and an integer $j\ge0$, condition $(R_j)$ means that $R_{\mathfrak p}$ is regular whenever $\operatorname{ht}\mathfrak p\le j$. Condition $(S_j)$ means that $\operatorname{depth}R_{\mathfrak p}\ge\min\{j,\dim R_{\mathfrak p}\}$ for every prime $\mathfrak p$. A finite module $M$ satisfies $(S_j)$ if $\operatorname{depth}_{R_{\mathfrak p}}M_{\mathfrak p}\ge\min\{j,\dim\operatorname{Supp}_{R_{\mathfrak p}}M_{\mathfrak p}\}$ for every prime in its support. Outside the support the condition is vacuous, consistent with depth of the zero module being $+\infty$ and the empty support having no nonnegative dimension. Thus the zero module satisfies all $(S_j)$ conditions, and the zero ring satisfies both families vacuously.
 
 [F2] [[thm-depth-zero-associated-prime-criterion]]: Let $(R,\mathfrak m)$ be a Noetherian local ring and let $M\ne0$ be a finite $R$-module. Then $$\operatorname{depth}(M)=0\quad\Longleftrightarrow\quad \mathfrak m\in\operatorname{Ass}_R(M).$$
 
-[F3] [[thm-zero-divisors-on-a-module]]: Let $R$ be a Noetherian commutative ring and let $M$ be a left $R$-module. Then the set of zero divisors on $M$ is $$ \bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}\mathfrak p. $$ If $M$ is finitely generated, this is a finite union.
+[F3] [[thm-zero-divisors-on-a-module]]: Under Dependent Choice, the zero divisors on a module over a Noetherian ring are $$ \bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}\mathfrak p. $$ Under the additional Axiom of Choice, this is a finite union for a finitely generated module. Both premises are supplied here.
 
-[F4] [[thm-existence-of-associated-primes]]: Let $R$ be a Noetherian commutative ring and let $M$ be a nonzero left $R$-module. Then $\operatorname{Ass}_R(M)$ is nonempty.
+[F4] [[thm-existence-of-associated-primes]]: Under Dependent Choice, if $R$ is a Noetherian commutative ring and $M$ a nonzero left $R$-module, then $\operatorname{Ass}_R(M)$ is nonempty.
 
 [F5] [[thm-noetherian-ring-has-finitely-many-minimal-primes]]: Let $R$ be a Noetherian commutative ring. Then $R$ has only finitely many minimal prime ideals. This theorem inherits only the dependent-choice cost already recorded in the cited Noetherian-induction corollary.
 

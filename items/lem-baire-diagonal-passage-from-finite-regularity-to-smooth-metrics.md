@@ -3,13 +3,6 @@ id: lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics
 kind: lemma
 title: "Baire diagonal passage from finite regularity to smooth metrics"
 status: published
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
-  audited: 2026-09-07
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +13,16 @@ sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex, Lemma 2.25"
       url: "https://people.dm.unipi.it/abbondandolo/preprints/montreal.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-10-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement

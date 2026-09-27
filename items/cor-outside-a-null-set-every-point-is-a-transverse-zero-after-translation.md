@@ -7,33 +7,37 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-generic-translations-of-a-map-to-euclidean-space-are-transverse,
+deps: [def-countable-choice, cor-generic-translations-of-a-map-to-euclidean-space-are-transverse,
        prop-transversality-to-a-point-is-the-regular-value-condition]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, cumulative notes"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $f:M\to\mathbb R^n$ be smooth and let $q\in\mathbb R^n$. Then outside a
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $f:M\to\mathbb R^n$ be smooth and let $q\in\mathbb R^n$. Then outside a
 null subset of $a\in\mathbb R^n$, the map $p\mapsto f(p)+a$ has $q$ as a regular
 value.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $f:M\to\mathbb R^n$ and a point $q\in\mathbb R^n$.
+**Given:** $\mathrm{AC}_\omega$, a smooth map $f:M\to\mathbb R^n$ and a point $q\in\mathbb R^n$.
 
-[L1] For the point submanifold $\{q\}$, generic translations are transverse to it outside a null set ([[cor-generic-translations-of-a-map-to-euclidean-space-are-transverse]]).
+[L1] Under $\mathrm{AC}_\omega$, for the point submanifold $\{q\}$, generic translations are transverse to it outside a null set ([[cor-generic-translations-of-a-map-to-euclidean-space-are-transverse]]).
 
 [L2] Transversality to a point is the regular-value condition ([[prop-transversality-to-a-point-is-the-regular-value-condition]]).
 

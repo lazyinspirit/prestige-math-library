@@ -858,11 +858,11 @@ groups.
     III(b)=PA/CD/HC, III(c)=TW. In particular HC/CD are product-action
     cases, not simple-diagonal cases. This terminology repair does not
     discharge the separate classification or twisted-wreath proof obligations.
-14. `thm-onan-scott-classification-of-finite-primitive-groups` — **theorem**
-    `[LL]` proof obligation: every finite primitive permutation group falls
-    into the stated socle types. U-C19 found the published proof assumes its
-    case analysis; exact proof scope remains unclosed as recorded below.
-    Do not consume the current defective proof or relabel it as retirement.
+14. `rem-onan-scott-classification-of-finite-primitive-groups` — **recorded
+    remark** `[LS]`: the cited five-type claim is retained, but its former
+    local proof assumed the classification as [A2]. A future proved theorem
+    requires the complete case analysis and the Schreier-dependent branches
+    described below; the current remark is not proof supply.
 15. `rem-cfsg-refinements-of-the-onan-scott-reduction` — **remark** `[LS]`,
     `proved_here: false`: classification of almost-simple cases uses CFSG and
     belongs to `GT-20`'s survey.
@@ -882,9 +882,9 @@ groups.
 - `fs-onan-scott-is-the-classification-of-finite-simple-groups` `[LN]` — it is
   a structural classification of primitive actions.
 - `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups`
-  `[LN]` — U-C19 leaves this independence assertion A-P: the exact cited
-  TW-inclusive construction uses Schreier; an adequate CFSG-free proof has
-  not been supplied. Preserve the uncertainty rather than assert necessity.
+  `[LN]` — its current repaired Statement refutes only the claim that the
+  **cited LPS proof** uses no CFSG consequence. LPS uses Schreier twice; this
+  does not show that every possible five-type proof requires CFSG.
 
 ### B page — `socles-and-the-onan-scott-landscape-examples`
 
@@ -921,6 +921,10 @@ normal factors transitive and sharply constrains how many can occur. Those
 facts explain the type labels but do not constitute a proof of O'Nan--Scott.
 The survey item prints the source's exact convention mapping and does not turn
 the theorem into a dependency for later pages.
+
+**Current unmet proof route:** the exact five-type theorem is A-P. See the
+paired prerequisite DAG in §30.4.1 below. The source-status carrier and the
+survey remarks are not mathematical suppliers.
 
 **Forward references: NONE.**
 
@@ -1652,8 +1656,11 @@ proved.
 - `fs-proper-action-means-every-orbit-is-bounded` `[LN]`.
 - `fs-cobounded-and-cocompact-are-unconditionally-identical` `[LN]`.
 - `fs-growth-function-is-independent-of-the-generating-set-pointwise` `[LN]`.
-- `fs-every-subexponential-growth-group-has-polynomial-growth` `[LN]`.
 - `fs-gromovs-polynomial-growth-theorem-is-proved-on-this-page` `[LN]`.
+
+The B-page item `rem-every-subexponential-growth-group-has-polynomial-growth`
+`[LS]` records the intermediate-growth counterexample: Löh's existence
+theorem is cited but not constructed or proved locally.
 
 ### B page — `geometric-actions-svarc-milnor-and-growth-examples`
 
@@ -3596,7 +3603,7 @@ binding repairs are:
 
 | recorded supplier | direct published consumers | complete additional transitive impact | repair |
 |---|---|---|---|
-| `rem-cfsg-refinements-of-the-onan-scott-reduction` | `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups` | unclosed proof scope | The classification-question comparison is repaired independently by S3. The independence assertion remains A-P; removing its edge does not prove it. |
+| `rem-cfsg-refinements-of-the-onan-scott-reduction` | Formerly `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups` | none after the 2026-09-24 repair | The false-statement item now refutes the source-specific claim that LPS uses no CFSG consequence; it does not assert proof-theoretic necessity for every possible route. The recorded remark is no longer a proof supplier. |
 | `rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form` | `thm-word-problem-for-finitely-generated-abelian-groups` | `ex-word-problem-in-a-finite-cyclic-presentation` on its B page | Repoint to the published invariant-factor theorem for finitely generated abelian groups/modules and make the algorithm explicit. |
 | `rem-novikov-boone-undecidability-of-the-word-problem` | `fs-every-finitely-presented-group-has-solvable-word-problem`; `fs-recursively-enumerable-trivial-words-form-a-decision-algorithm`; `fs-the-novikov-boone-theorem-proves-the-uniform-problem-only`; `fs-unsolvable-word-problem-means-no-word-can-be-decided`; `rem-adian-rabin-undecidability-for-markov-properties` | `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations` | Remove all five edges. The deep undecidability remarks and any false statement whose only counterwitness is one of them must be recorded leaves; no local proof is claimed. |
 | `rem-adian-rabin-undecidability-for-markov-properties` | `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations` | none | Remove the edge; both remarks are leaves. |
@@ -3606,7 +3613,7 @@ binding repairs are:
 | `rem-classification-of-finite-simple-groups` | `fs-the-library-proves-the-classification-of-finite-simple-groups` | none | Refute from `proved_here: false` metadata without a mathematical dependency edge. |
 | `rem-bass-guivarch-growth-degree-formula` | `cor-finitely-generated-nilpotent-groups-have-polynomial-growth`; `ex-growth-degree-of-the-discrete-heisenberg-group` | none | After repair pair BG lands, turn this into a proved agreement remark depending on BG-9; the two consumers then have proved closure. |
 | `rem-gromov-polynomial-growth-theorem` | `fs-gromovs-polynomial-growth-theorem-is-proved-on-this-page` | none | Remove the edge and use page metadata only. |
-| `rem-grigorchuk-groups-of-intermediate-growth` | `fs-every-subexponential-growth-group-has-polynomial-growth` | none | Remove the edge; without a full local construction the false statement is itself a recorded leaf. |
+| `rem-grigorchuk-groups-of-intermediate-growth` | `rem-every-subexponential-growth-group-has-polynomial-growth` (historically `fs-every-subexponential-growth-group-has-polynomial-growth`) | none | The edge is removed. The counterexample is now an explicitly recorded remark citing Löh's existence theorem; no local construction is claimed. |
 | `rem-nonamenable-groups-without-nonabelian-free-subgroups` | `fs-every-nonamenable-group-contains-a-rank-two-free-subgroup` | none | Remove the edge; without a full local counterexample the false statement is itself a recorded leaf. |
 
 The remaining recorded leaves already have zero consumers:
@@ -3621,20 +3628,16 @@ The remaining recorded leaves already have zero consumers:
 
 Additional nominal-proof repairs are mandatory:
 
-- U-C19 preserves the O'Nan–Scott five-type claim for genuine Phase-3 proof
-  repair; do not restore it to a recorded leaf and call the dependency closed.
-  The full Liebeck–Praeger–Saxl 1988 proof is now recovered/read, but its
-  Schreier uses in pp.394–396 leave the exact proof destination unclosed.
-  The excluded CFSG stub is not a supplier. Record the faithful twisted-wreath
-  construction, almost-simple nonregularity and finite case partition as
-  unresolved proof obligations, not nominally covered Phase-2 items.
-  The two-transitive proposition has meanwhile been repaired by a complete
-  elementary Burnside proof, and the classification-question comparison by S3.
-  The asserted CFSG-independence refutation remains A-P: a source that uses
-  Schreier neither proves independence nor proves that no alternative exists.
-  Correct the coarse map: III(a)=HS/SD, III(b)=HC/CD/PA. The TW definition
-  needs its actual inducing homomorphism, function group, faithful top action
-  and unique regular socle. Exact evidence: uc19-astra-agent-2.md.
+- The O'Nan–Scott five-type theorem remains A-P: the source-status carrier is
+  honest but not a proof. The complete eight-page Liebeck–Praeger–Saxl (LPS)
+  article was retrieved and read in the 2026-09-24 repair. Its p.394 twisted-
+  wreath branch and pp.395–396 simple-socle exclusion invoke Schreier, and
+  the complete case partition still needs local proof. §30.4.1 gives the
+  prerequisite DAG. The published two-transitive proposition now has a local
+  Burnside proof and no longer waits for O'Nan–Scott. The source-specific
+  false-statement correction is complete. The five/eight-type dictionary is
+  corrected to III(a)=HS/SD and III(b)=HC/CD/PA, and the twisted-wreath
+  definition includes its inducing map and faithful top action.
 - `thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups`
   must replace its unlinked `[A2]` by the short local argument: automorphic
   images of a minimal normal subgroup are minimal normal, distinct images
@@ -3643,13 +3646,11 @@ Additional nominal-proof repairs are mandatory:
   intersections trivial. Add that existing lemma to its header. This is a
   Phase-3 proof expansion with no new supplier.
 - `lem-distinct-components-commute` and
-  `thm-generalized-fitting-subgroup-contains-its-centralizer` currently cite
-  precisely those results as assumptions. The available Smith full text states
-  them but does not supply the omitted proof. Until an accessible full proof is
-  obtained and audited, mark both as not-proved-here dependency leaves and
-  remove the edge from the first to the second and from the second to
-  `rem-what-the-library-does-and-does-not-prove-about-cfsg`. The latter becomes
-  a metadata-only survey leaf. This is a source blocker, not a Phase-2 root.
+  `thm-generalized-fitting-subgroup-contains-its-centralizer` were repaired
+  with full local component and induction arguments in the 2026-09-24 run;
+  they are not prerequisites missing from §30.4.1. Their source and second-
+  reader evidence is in `research/ap-131-sol-repair/agent-06-report.md` and
+  `agent-04-cross-review.md`.
 - `thm-finitely-generated-free-groups-are-subgroup-separable` must depend on
   the proved `thm-marshall-hall-free-factor-theorem` and reproduce the finite
   covering completion while retaining a lifted path for $g\notin H$ with
@@ -3677,6 +3678,232 @@ Additional nominal-proof repairs are mandatory:
   universal-central-extension proof. It has zero downstream consumers; until
   the matrix presentation and universal property are checked locally, mark it
   a recorded B leaf even after the Hopf-formula supplier closure lands.
+
+### 30.4.1 Paired prerequisites for the exact five-type theorem
+
+This is a **future proof plan**, not a claim that a new source-status remark
+proves a theorem. The 2026-09-24 repair read all eight pages of LPS, printed
+pp.389--396 (`research/ap-131-sol-repair/agent-06-report.md`). LPS uses
+Schreier at two exact points. Smith, *Applying the Classification of Finite
+Simple Groups*, §1.5, printed pp.23--25, Theorems 1.5.1 and 1.5.4, identifies
+Schreier as a CFSG consequence and gives the alternating, sporadic and Lie-
+type outer-automorphism cases. This certifies **the source's dependencies**;
+it does not prove that every logically possible O'Nan--Scott proof needs CFSG.
+
+Use the following stable A/B page IDs, all in `group-theory`. Each B is an
+example/counterexample leaf requiring only its A page. The relative order is
+two converging branches: `GT-4C` → (`GT-4A`, `GT-4L`, `GT-4X`),
+then (`GT-4A`, `GT-4L`, `GT-4X`) → `GT-4S`; and
+`GT-4E` → `GT-4D`; then (`GT-4S`, `GT-4D`) → `GT-4P` → the existing
+`socles-and-the-onan-scott-landscape` A page. Every cross-page dependency
+must follow that DAG, and no pair
+may depend on the later CFSG **survey** page `the-finite-simple-group-classification-landscape`, which currently requires GT-4 and would create a
+cycle. Reuse its existing family names only as orientation, never as proved
+suppliers. The page numbers/plan-spec rows must be chosen after the existing
+GT-3 and before GT-4; these stable IDs determine homes now.
+
+**GT-4C — `finite-simple-family-constructions` /
+`finite-simple-family-constructions-examples`.** A must construct the finite
+alternating, Chevalley/Steinberg/Suzuki/Ree, and 26 sporadic simple groups,
+prove simplicity with exact low-parameter exceptions, and define the standard
+family naming convention. It does **not** claim that these exhaust all finite
+simple groups. B checks low-rank isomorphism collisions and excluded
+parameters; it is a leaf. The full constructive Lie-type theory and sporadic
+verification are substantial missing subprogrammes. Split them into further
+A/B pairs before marking GT-4C buildable. Smith, *CFSG—A User's Manual*,
+§§1.1--1.3, is an orientation source only.
+
+**GT-4X — `finite-simple-family-exhaustiveness` /
+`finite-simple-family-exhaustiveness-examples`.** A terminal item
+`thm-finite-simple-group-classification-for-schreier` must prove: every
+finite nonabelian simple group belongs to **at least one** GT-4C family,
+allowing overlapping low-rank isomorphism names. The proof cannot cite
+`rem-classification-of-finite-simple-groups` or infer completeness from
+known examples. B checks why construction of many families alone does not
+prove exhaustion. The component/characteristic-2/odd-type classification
+analysis is not inventoried or proved in this library. Smith, *CFSG—A User's
+Manual*, Chapter 2, surveys the architecture; GLS, *The Classification of
+the Finite Simple Groups*, Vols. 1--10, is a source programme, not a
+one-line proof. GT-4X is **not buildable**: its local-analysis and exhaustion
+modules must be split into further A/B pairs with all their own suppliers
+before the terminal item is authored. Current evidence does not determine
+an honest complete list of those internal pairs. Mark this gate unresolved.
+
+**GT-4A — `alternating-and-sporadic-simple-automorphisms` /
+`alternating-and-sporadic-simple-automorphisms-examples`.** A items:
+reuse published `def-outer-automorphism-group` from
+`semidirect-products-and-automorphism-groups`, which already defines
+$\operatorname{Aut}(T)/\operatorname{Inn}(T)$ for every group;
+`thm-outer-automorphisms-of-alternating-simple-groups` establishes
+$\operatorname{Out}(A_n)\cong C_2$ for $n\ge5$, $n\ne6$, and
+$C_2\times C_2$ at $n=6$; `thm-outer-automorphisms-of-the-sporadic-simple-groups` establishes order $1$ or $2$ for **each of the 26**, with the exact
+12 exceptional groups in an audited table; the final corollary proves
+solvability for these families. The B page checks $A_5$, $A_6$ and a
+sporadic order-2 instance. Prerequisites are GT-4C's constructive family
+definitions, not GT-4X's exhaustiveness theorem. Smith §1.5, printed
+pp.23--24, equations (1.5.2)--(1.5.3), points to
+GLS 5.2.1 and Table 5.3.a--z; Smith only summarizes these proofs. The exact
+sporadic verification and exceptional $A_6$ computation remain substantial
+unproved A obligations.
+
+**GT-4L — `finite-lie-type-simple-group-automorphisms` /
+`finite-lie-type-simple-group-automorphisms-examples`.** A items reuse
+GT-4C's constructed Chevalley, Steinberg, Suzuki and Ree groups and exact
+low-rank exceptions; construct diagonal, field and graph automorphisms; establish
+that each family exhausts its automorphisms modulo inner automorphisms; and
+prove `thm-diagonal-field-graph-outer-automorphism-structure`: for each
+finite simple Lie-type $T$, $\operatorname{Out}(T)$ has a normal diagonal
+subgroup $D$ with quotient built from field and graph automorphisms, with
+$D$, field and graph groups solvable (the graph group can be $S_3$ in type
+$D_4$, so do **not** call it abelian in every case). The last corollary deduces
+solvability. B checks $\operatorname{PSL}_2(q)$ and triality $D_4$ against
+the exact contract. Smith §1.5, pp.24--25, Theorem 1.5.4, cites GLS
+2.5.12/1.15.7. Its printed shorthand calls all three named groups abelian
+while also mentioning $S_3$ triality; the scaffold must use the logically
+valid solvable formulation and verify the exact extension before authoring.
+This pair depends on genuine constructive Lie-type proofs from GT-4C but not
+GT-4X's exhaustiveness conclusion. Those prerequisites are presently missing.
+
+**GT-4S — `schreier-solvability-of-simple-group-outer-automorphisms` /
+`schreier-solvability-of-simple-group-outer-automorphisms-examples`.** A:
+reuse published `thm-extensions-and-direct-products-of-solvable-groups-are-solvable`
+from `composition-series-and-solvable-groups`, whose proof covers extension
+solvability; `thm-schreier-solvability-of-outer-automorphisms` says
+for **every** finite nonabelian simple $T$, $\operatorname{Out}(T)$ is
+solvable. Its proof must use GT-4X's **proved exhaustiveness** and the
+proved GT-4A/GT-4L family cases. An assertion that those are the only
+families is the exact missing inference if GT-4X remains unproved. B gives
+small alternating and Lie-type illustrations and is non-load-bearing.
+
+**GT-4E — `primitive-minimal-normal-socle-foundations` /
+`primitive-minimal-normal-socle-foundations-examples`.** Rehome, in their
+existing dependency order and with unchanged Statements/Definitions, the
+first twelve published GT-4 A items listed in §GT-4: minimal-normal/socle
+definition, centralization, characteristic simplicity, direct-product
+structure, socle product, transitivity, two-regular-minimal-normal lemma,
+at-most-two corollary, affine-type lemma, almost-simple definition,
+`def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types`,
+and `lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses`.
+The latter two have only earlier GT-3, semidirect-product and GT-4E-prefix
+dependencies. They must precede GT-4P's type analysis and the affine B
+example. Any
+published consumer page receives the new page prerequisite before the move.
+Its B page can rehome the existing elementary `ex-affine-type-agl-one-p` and
+`ex-two-regular-minimal-normal-subgroups`, after their A suppliers; no new
+mathematical result is claimed. This exact rehome resolves the page cycle
+that would occur if GT-4D required elementary items still homed on the
+later GT-4 page. The twelve items' exact current external A-page homes are
+`monoids-groups-and-subgroups`, `normal-subgroups-and-quotient-groups`,
+`composition-series-and-solvable-groups`,
+`semidirect-products-and-automorphism-groups`,
+`group-homomorphisms-and-the-isomorphism-theorems`,
+`the-structure-of-finite-abelian-groups`,
+`conjugacy-and-simplicity-in-the-symmetric-groups`,
+`blocks-primitivity-and-multiple-transitivity`, and
+`frattini-subgroups-and-the-burnside-basis-theorem`.
+GT-4E requires these nine A pages, not GT-4 or GT-20.
+
+**GT-4D — `subdirect-diagonals-in-finite-simple-powers` /
+`subdirect-diagonals-in-finite-simple-powers-examples`.** A:
+`lem-two-factor-simple-subdirect-product` proves the Goursat dichotomy
+(full product or the graph of an isomorphism) directly from kernels and
+simplicity; `thm-scott-diagonal-decomposition-for-simple-powers` partitions
+the factors of any subdirect $S\le T_1\times\cdots\times T_k$ of nonabelian
+simple groups into blocks on which $S$ is a full diagonal, with an internal
+direct product across blocks; `lem-maximal-invariant-socle-stabilizer` proves
+LPS p.392 equation (1), namely $M_\alpha$ is maximal among proper
+$G_\alpha$-invariant subgroups of $M$; and
+`lem-diagonal-normalizer-action` identifies the normalizer of the standard
+diagonal coset action and its factor-permutation action. B works two-factor
+diagonal versus product and a four-factor block partition. Sources: LPS
+pp.392--394, Case 1; LPS **states** the subdirect decomposition in Case 1
+without proving it, so the two-factor and induction proofs are local
+obligations. This pair uses the rehomed GT-4E elementary socle statements
+but no Schreier and no CFSG family classification.
+
+**GT-4P — `primitive-product-and-twisted-wreath-reductions` /
+`primitive-product-and-twisted-wreath-reductions-examples`.** A inventory:
+`lem-diagonal-blocks-induce-product-action` proves LPS Case 1 ($\ell>1$),
+including the maximality of the induced stabilizer and the explicit
+coordinate/wreath embedding on p.394; `lem-proper-projection-socle-stabilizer` proves LPS Case 2, $M_\alpha=\prod_i R_i$ with each $R_i<T_i$;
+`lem-schreier-forces-faithful-factor-action-in-the-regular-case` proves
+$Y=M$ in LPS Case 2(a), p.394, with the following exact argument. Write
+$T_1^*$ and $N_\alpha^*$ for the conjugation images on $T_1$. The **Case
+2(a) hypothesis** is $T_1^*\le N_\alpha^*$; with
+$N^*=T_1^*N_\alpha^*$ this gives $N^*=N_\alpha^*$ and forces
+$R_1=1$ by the maximal proper invariant-stabilizer condition, hence
+$M_\alpha=1$. Define $Y$ as the kernel of the $G$-action on the set of
+simple factors. The map $Y_\alpha\to Y/M$ is then injective, and the latter embeds
+in $\operatorname{Out}(T)^k$; Schreier makes $Y_\alpha$ solvable. For one
+factor, put $N=N_G(T_1)$, $C=\ker(N_\alpha\to\operatorname{Aut}(T_1))$,
+and $Z$ the inverse image of $\operatorname{Inn}(T_1)$ under this map.
+**The Case 2(a) inclusion** makes its image contain the full
+$\operatorname{Inn}(T_1)$, so $Z/C\cong T_1$. In $N_\alpha/C$, both
+$Y_\alpha C/C$ and $Z/C$ are normal. Their commutator lies
+in their intersection, a **solvable normal subgroup of the simple** $Z/C$,
+so it is trivial. The centralizer of $\operatorname{Inn}(T_1)$ in
+$\operatorname{Aut}(T_1)$ is trivial since $T_1$ is centerless; hence
+$Y_\alpha\le C$. Repeat over all factors. Faithfulness gives
+$Y_\alpha=1$, and transitivity of $M$ gives $Y=MY_\alpha=M$. Mere
+solvability of an outer quotient does **not** itself imply centralization.
+`lem-regular-socle-gives-twisted-wreath-coordinates` proves the actual function-group isomorphism and faithful
+transitive top action on pp.394--395, with the action convention matching the
+published definition; `lem-proper-projection-gives-product-action` proves
+Case 2(b), p.395; `lem-coprime-automorphism-group-fixes-a-sylow-subgroup`
+uses the published p-group fixed-point congruence and Sylow theorem: if a
+$q$-group $Q$ acts by automorphisms on finite $T$ with $q\nmid|T|$, choose
+**any** prime $p\mid|T|$; since the number $n_p(T)$ divides $|T|$,
+$q\nmid n_p(T)$, so $Q$ fixes a Sylow $p$-subgroup; and
+`lem-simple-socle-is-not-regular-in-an-almost-simple-primitive-group`
+proves pp.395--396 using Schreier, a minimal normal elementary abelian
+$q$-subgroup $Q$ of the soluble point stabilizer, that coprime Sylow lemma,
+uniqueness of its normalized Sylow $p$-subgroup, and maximality of the
+point stabilizer. The point stabilizer is nontrivial: otherwise the regular
+action of the nonabelian simple $T$ has blocks given by cosets of a nontrivial
+proper subgroup, contradicting primitivity. Thus the indicated $Q$ exists.
+First prove $C_T(Q)=1$: it is $G_\alpha$-invariant;
+if nontrivial, maximality of $G_\alpha$ and regularity of $T$ force
+$C_T(Q)=T$, contrary to the faithful action of $G\le\operatorname{Aut}(T)$
+and $Q\ne1$. If $q\mid|T|$, the published $q$-group fixed-point
+congruence for $Q$ acting on the set $T$ gives
+$|C_T(Q)|\equiv|T|\equiv0\pmod q$, contradicting $C_T(Q)=1$;
+thus $q\nmid|T|$. For uniqueness, if $S^x$ is also $Q$-normalized,
+then $S$ is normalized by both $Q$ and $Q^{x^{-1}}$. Both are Sylow
+$q$-subgroups of $N_{TQ}(S)$, so conjugacy there gives
+$y\in N_T(S)$ with $Q^{x^{-1}y}=Q$. Because $x^{-1}y\in T$
+normalizes $Q$ and $Q\cap T=1$, it centralizes $Q$; the preceding
+$C_T(Q)=1$ forces $x=y\in N_T(S)$. Thus $S^x=S$. Since
+$Q\trianglelefteq G_\alpha$, uniqueness makes
+$G_\alpha$ normalize $S$. A nonabelian simple $T$ makes its Sylow $p$
+subgroup nontrivial and proper, so $G_\alpha<G_\alpha S<G$ contradicts
+maximality. This proof works for
+any $p\mid|T|$; no hidden odd-order or Feit--Thompson premise is needed.
+GT-4P additionally requires the published
+`sylow-theorems-and-nilpotent-groups` and
+`group-actions-and-cayleys-theorem` A pages. The terminal theorem on the
+existing GT-4 A page must
+then check existence **and pairwise exclusion** of I, II, III(a), III(b),
+III(c), including the two-distinct-regular-minimal-normals edge case. B tests
+a product-action example and evaluates the twisted-wreath function model
+for specified admissible data, without asserting primitivity from mere
+transitivity of the top group; these do not supply the classification.
+GT-4P requires GT-4D and GT-4S.
+LPS pp.392--396 is the exact primary proof map. No step is accepted merely
+because LPS calls its proof self-contained: the two Schreier uses have a
+separate proved supplier obligation.
+
+**Materialization gate.** Root/page-planning must execute the exact GT-4E
+rehome and update every affected page header and plan row before GT-4D; the
+recorded five-type remark stays after GT-4P until a complete local theorem
+can replace it. This is a future page-DAG
+design constraint, not an
+automatic authorization to edit published items now. Only once GT-4C, GT-4X,
+GT-4A, GT-4L, GT-4E, GT-4S, GT-4D and GT-4P have **fully proved** relevant A items may
+`rem-onan-scott-classification-of-finite-primitive-groups` be replaced by a
+proved theorem with the same mathematical claim. The current only direct item consumer,
+`rem-algorithmic-role-of-onan-scott`, is a survey statement; every future
+Statement/Definition change still requires the owner-requested direct and
+indirect consumer review.
 
 ### 30.5 Phase-2-eligible repair pairs
 
@@ -4524,15 +4751,15 @@ prerequisites remain outside the Group Theory audit.
   not supply Phase-2 items to this audit.
 - Stephen D. Smith, *CFSG---A User's Manual*, complete author-hosted text,
   <https://homepages.math.uic.edu/~smiths/talkv.pdf>, states the component and
-  generalized-Fitting facts in §1 but does not provide the missing elementary
-  proof. Consequently those two published nominal proofs are blocked and must
-  be isolated as recorded leaves, as §30.4 requires.
+  generalized-Fitting facts in §1. The component and generalized-Fitting
+  proofs were supplied locally in the 2026-09-24 repair; §30.4's current
+  status supersedes this historical source-access concern.
 - Liebeck--Praeger--Saxl, “On the O'Nan--Scott theorem for finite primitive
-  permutation groups,” is the primary self-contained source cited in §GT-4.
-  The search index exposed part of §2's proof, but full retrieval returned an
-  access error. Under the full-text rule this does not license a local proof;
-  §30.4 therefore restores the published theorem and two-transitive
-  consequence to their intended recorded-leaf status.
+  permutation groups,” is the primary source cited in §GT-4. Its full eight
+  pages were retrieved and read in the 2026-09-24 repair. §30.4.1 identifies
+  the precise LPS case dependencies and Schreier uses. The exact five-type
+  theorem remains A-P; the two-transitive proposition has an independent
+  complete elementary proof and is no longer a recorded leaf.
 
 The inaccessible monograph citations in §§0--29 are corroborating
 bibliography only. They do not license a proof claim. In particular, the Jay

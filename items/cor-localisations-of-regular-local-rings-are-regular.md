@@ -2,19 +2,15 @@
 id: "cor-localisations-of-regular-local-rings-are-regular"
 kind: "corollary"
 title: "localisations of regular local rings are regular"
-deps: ["thm-auslander-buchsbaum-serre-regularity-criterion", "thm-localisation-of-modules-is-exact", "lem-height-equals-local-dimension"]
+deps: ["def-axiom-of-choice", "thm-auslander-buchsbaum-serre-regularity-criterion", "thm-localisation-of-modules-is-exact", "thm-noetherian-ring-quotients-and-localisations", "lem-height-equals-local-dimension"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  audited: 2026-09-26
 sources:
   references:
     - title: "Corollary 12.34, p.123"
       url: "https://websites.umich.edu/~mmustata/CAnotes.pdf"
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 status: published
 origin: "pipeline"
@@ -22,6 +18,8 @@ proof_strategy: "Explicit algebraic derivation"
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Every prime localization $R_{\mathfrak p}$ of a regular local ring $R$ is regular, and $\operatorname{edim}R_{\mathfrak p}=\operatorname{ht}\mathfrak p$.
 
@@ -35,8 +33,10 @@ Every prime localization $R_{\mathfrak p}$ of a regular local ring $R$ is regula
 
 [F3] [[lem-height-equals-local-dimension]]: Let $R$ be a commutative ring and let $\mathfrak p\in\operatorname{Spec}(R)$. Then $\operatorname{ht}(\mathfrak p)=\sup\{n\ge 0:\mathfrak p_0\subsetneq\cdots\subsetneq\mathfrak p_n=\mathfrak p\text{ is a strict chain of prime ideals in }R\}$. The supremum is allowed to be infinite.
 
+[F4] [[thm-noetherian-ring-quotients-and-localisations]]: Every localization of a Noetherian ring is Noetherian.
+
 ## Proof
 
-1.1 The finite module $R/\mathfrak p$ has a finite projective resolution by the homological regularity criterion. Localizing preserves exactness; projective modules remain projective because their splittings as summands of free modules localize. The resulting resolution resolves $(R/\mathfrak p)_{\mathfrak p}=k(\mathfrak p)$. [F1, F2]
+1.1 Under the assumed Axiom of Choice, the finite module $R/\mathfrak p$ has a finite projective resolution by the homological regularity criterion. Localizing preserves exactness; projective modules remain projective because their splittings as summands of free modules localize. The resulting resolution resolves $(R/\mathfrak p)_{\mathfrak p}=k(\mathfrak p)$. [F1, F2]
 
-2.1 The residue field of $R_{\mathfrak p}$ thus has finite projective dimension, and the same criterion makes this local ring regular. Prime chains in the localization correspond exactly to prime chains below $\mathfrak p$, so its dimension is $\operatorname{ht}\mathfrak p$; regularity gives its embedding dimension. At height zero the localization is a field. [F1, F3, step 1.1] ∎
+2.1 The residue field of $R_{\mathfrak p}$ thus has finite projective dimension. Since $R$ is Noetherian, [F4] makes $R_{\mathfrak p}$ Noetherian, so [F1] applies and makes this local ring regular. Prime chains in the localization correspond exactly to prime chains below $\mathfrak p$, so its dimension is $\operatorname{ht}\mathfrak p$; regularity gives its embedding dimension. At height zero the localization is a field. [F1, F3, F4, step 1.1] ∎

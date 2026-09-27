@@ -12,8 +12,12 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
-  audited: 2026-08-26
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -55,6 +59,6 @@ The Cayley graph of a free group with respect to a free basis is a tree.
 
 1.1 A free basis generates, so the Cayley graph is connected. [F1, L1, L4, L5]
 
-1.2 Suppose it contains a cycle $g_0,\dots,g_{n-1}$ of length $n\ge3$. The successive quotients $g_{j+1}g_j^{-1}$ are basis letters or their inverses, and distinctness of the vertices makes the corresponding word reduced. [F1, L2, L6, L7, assume-contra]
+1.2 Suppose it contains a cycle $g_0,\dots,g_{n-1}$ of length $n\ge3$, with $g_n=g_0$. On each right Cayley edge, the quotient $g_j^{-1}g_{j+1}$ is a basis letter or its inverse. No two consecutive labels cancel, including the last and first: such cancellation would immediately return to the preceding vertex, contrary to the distinct vertices in a simple cycle. Thus the cyclic sequence of edge labels is a nonempty reduced word. [F1, L2, L6, L7, assume-contra]
 
-2.1 That reduced word is nonempty and evaluates to the identity, contradicting uniqueness of normal form; so the graph is a tree. [L2, L3, L8, step 1.1, step 1.2, discharge-contradiction] ∎
+2.1 The product of its labels telescopes to $g_0^{-1}g_n=e$. A nonempty reduced word cannot represent the identity by uniqueness of normal form, a contradiction. The graph is connected and has no cycle, hence is a tree. [L2, L8, step 1.1, step 1.2, discharge-contradiction] ∎

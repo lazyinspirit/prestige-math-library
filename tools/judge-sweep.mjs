@@ -39,7 +39,7 @@ const contextCache = option('--context-cache') || (/-judge\.jsonl$/.test(ledger)
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
   console.error('usage: node tools/judge-sweep.mjs --ledger FILE --cost FILE '
     + '(--pages PAGE,... | --items ID,... | --manifests FILE,...) '
-    + '[--lineup sol] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
+    + '[--lineup sol|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
   process.exit(2);
 }
 if (manifestsArg && (pagesArg || itemsArg)) {
@@ -50,7 +50,6 @@ const limit = limitArg ? Number(limitArg) : Infinity;
 if (limit !== Infinity && (!Number.isInteger(limit) || limit < 1)) {
   throw new Error('--limit must be a positive integer');
 }
-
 if (effortArg && !['low', 'medium', 'high', 'xhigh', 'max'].includes(effortArg)) {
   throw new Error(`--effort must be low, medium, high, xhigh, or max; got ${effortArg}`);
 }
@@ -113,8 +112,7 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
   currentHashes.set(result.id, { context: result.context, item: result.item });
 }
 
-const SOL = MODELS.sol.id;
-const hardCaps = Object.freeze({ [SOL]: 27 });
+const hardCaps = Object.freeze({ [MODELS.sol.id]: 27, [MODELS.luna.id]: 27 });
 const capFor = (model) => {
   const hard = hardCaps[model];
   if (!hard) throw new Error(`no concurrency cap configured for ${model}`);

@@ -1,24 +1,17 @@
 ---
 id: rem-riemann-integral-choice-ledger
 kind: remark
-title: "What this page costs in choice: Riemann's criterion, the Darboux-Riemann equivalence and integrability of a monotone function are theorems of ZF; integrability of a continuous function inherits the single use of countable choice inside Heine-Cantor; and only the forward half of the Lebesgue criterion spends countable choice, once, at the countable union of null sets"
+title: "Choice ledger for the Riemann integral: the page results are proved in ZF"
 status: published
 origin: session
 provenance:
   statement: ai-generated
   proof: not-applicable
-deps: [thm-lebesgue-criterion, thm-countable-union-of-null-is-null, def-countable-choice, thm-riemann-criterion, thm-darboux-equals-riemann, thm-continuous-implies-integrable, thm-monotone-implies-integrable, thm-finitely-many-discontinuities-integrable, cor-countably-many-discontinuities-integrable, thm-heine-cantor-r, rem-heine-criterion-choice-cost, thm-compact-iff-sequentially-compact-r, lem-finite-choice, lem-countable-sets-are-null, thm-compact-null-is-content-zero, lem-content-zero-implies-null, thm-heine-borel-characterisation-r, lem-oscillation-superlevel-sets-are-closed, def-tagged-partition-and-riemann-sum]
+deps: [thm-lebesgue-criterion, lem-countable-union-of-compact-content-zero-sets-is-null-in-zf, thm-riemann-criterion, thm-darboux-equals-riemann, thm-heine-cantor-r, lem-finite-choice]
 justified_by: []
 aliases: []
 landmark: false
 short: "choice ledger for the Riemann integral"
-verification:
-  audited: 2026-07-28
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -27,94 +20,72 @@ sources:
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
 pipeline_run: null
+verification:
+  precheck: n/a
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
-This page develops the Riemann integral over ZF except at the points recorded
-below. The only choice principle that appears anywhere on it is the Axiom of
-Countable Choice ([[def-countable-choice]]); the full Axiom of Choice is never
-used, and no claim is made anywhere that a use recorded here is *necessary*.
+The results on this page are proved in ZF. Their proofs use finite witness
+selection, explicit formulas, completeness of the real numbers, and finite
+subcovers. The only countable union in the proof of the Lebesgue criterion is a
+union of compact content-zero sets; its interval covers are chosen by least
+natural-number codes, so no countable-choice premise is spent.
 
 ## The ledger, item by item
 
-| item | choice used | where it enters |
+| item | choice used | where the apparent choice is resolved |
 |---|---|---|
-| [[def-partition-and-refinement]] | none | recursion only, over a totally defined map |
-| [[def-darboux-sums]] | none | suprema and infima are canonical |
-| [[lem-refinement-inequalities]] | none | one induction on the coarse index |
-| [[def-darboux-integral]] | none | $\sup$ and $\inf$ over a set of partitions |
-| [[lem-integral-elementary-bounds]] | none | — |
+| [[def-partition-and-refinement]] | none | finite lists and recursion |
+| [[def-darboux-sums]] | none | canonical suprema and infima |
+| [[lem-refinement-inequalities]] | none | finite induction |
+| [[def-darboux-integral]] | none | supremum and infimum over the set of partitions |
+| [[lem-integral-elementary-bounds]] | none | ordered-field bounds |
 | [[thm-riemann-criterion]] | none | finitely many existential instantiations |
-| [[def-tagged-partition-and-riemann-sum]] | none | a tagging is exhibited by a formula |
-| [[thm-darboux-equals-riemann]] | none | see the note on finite choice below |
-| [[thm-continuous-implies-integrable]] | $\mathrm{AC}_\omega$, once | inherited from [[thm-heine-cantor-r]] |
-| [[thm-monotone-implies-integrable]] | none | the partition is a formula in $N$ |
-| [[thm-finitely-many-discontinuities-integrable]] | $\mathrm{AC}_\omega$, once | inherited from [[thm-heine-cantor-r]] |
-| [[thm-lebesgue-criterion]] | $\mathrm{AC}_\omega$, once, in the forward half only | [[thm-countable-union-of-null-is-null]] |
-| [[cor-countably-many-discontinuities-integrable]] | none | see below |
-| [[fs-bounded-implies-riemann-integrable]] | none | — |
-| [[fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set]] | none | refuted from the interval-cover bound directly, not through the criterion |
-| [[fs-nonnegative-integrable-with-zero-integral-vanishes]] | none | rests on the corollary, which is choice-free |
-| [[fs-pointwise-limit-of-riemann-integrable-is-integrable]] | $\mathrm{AC}_\omega$, once | inherited through [[thm-finitely-many-discontinuities-integrable]] |
+| [[def-tagged-partition-and-riemann-sum]] | none | tags exhibited by formulas |
+| [[thm-darboux-equals-riemann]] | none | finite listed choice |
+| [[thm-continuous-implies-integrable]] | none | current [[thm-heine-cantor-r]] proof uses a finite subcover |
+| [[thm-monotone-implies-integrable]] | none | partition formula in $N$ |
+| [[thm-finitely-many-discontinuities-integrable]] | none | choice-free Heine–Cantor supplier |
+| [[lem-countable-union-of-compact-content-zero-sets-is-null-in-zf]] | none | least-coded rational finite covers |
+| [[thm-lebesgue-criterion]] | none | compact content-zero superlevel sets and the preceding lemma |
+| [[cor-countably-many-discontinuities-integrable]] | none | direct countable-set null cover |
+| [[fs-bounded-implies-riemann-integrable]] | none | explicit Dirichlet witness |
+| [[fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set]] | none | explicit fat-Cantor witness |
+| [[fs-nonnegative-integrable-with-zero-integral-vanishes]] | none | explicit Thomae witness |
+| [[fs-pointwise-limit-of-riemann-integrable-is-integrable]] | none | explicit pointwise-limit witness |
 
-## The four entries that are easy to get wrong
+## The three potentially misleading steps
 
-**Selecting a tag in every subinterval is not countable choice.**
-[[thm-darboux-equals-riemann]] picks, for a *single fixed* partition, one point
-in each of its $n$ subintervals subject to a supremum condition. That family is
-listed by the index $i < n$, and a family of nonempty sets listed by a natural
-number has a choice function outright, by
-[[lem-finite-choice]], which is a theorem of ZF proved by induction. (That
-lemma is careful to state only the listed form, since no definition of
-finiteness is available where it is proved; the listed form is what is used
-here.) The
-temptation to read this as a choice principle comes from the phrase "for each
-$i$ pick a point"; the number of picks is what matters, and it is finite.
+**Finite tags.** In [[thm-darboux-equals-riemann]], a fixed partition has
+finitely many subintervals. The required list of tags exists by finite
+induction ([[lem-finite-choice]]); it is not an instance of countable choice.
 
-**"For each $n$ pick a partition" would be countable choice, and the page never
-does it.** Both directions of [[thm-riemann-criterion]] and the whole of
-[[thm-darboux-equals-riemann]] instantiate an existential a fixed, finite number
-of times, once per $\varepsilon$ under consideration; no proof on this page ever
-forms a sequence of partitions indexed by $\mathbb{N}$ and reasons about it. The
-one place where a sequence of sets does appear is step 7.1 of
-[[thm-lebesgue-criterion]], and that is exactly where the ledger records a cost.
+**Partitions for each tolerance.** [[thm-riemann-criterion]] asserts that for
+each positive tolerance a suitable partition exists. Its proof never assembles
+these partitions into a sequence. The later Lebesgue-criterion proof likewise
+uses one partition for each fixed tolerance and oscillation threshold; it does
+not choose all such partitions simultaneously.
 
-**Only the forward half of [[thm-lebesgue-criterion]] costs anything.** The
-implication "integrable $\Rightarrow$ the discontinuity set is null" exhibits
-that set as $\bigcup_k E_{1/(k+1)}$ and applies
-[[thm-countable-union-of-null-is-null]], which assumes $\mathrm{AC}_\omega$ and
-names its own single use. The converse, "null $\Rightarrow$ integrable", is a
-theorem of ZF: [[lem-oscillation-superlevel-sets-are-closed]] and
-[[thm-heine-borel-characterisation-r]] are choice-free,
-[[thm-compact-null-is-content-zero]] and [[lem-content-zero-implies-null]] are
-choice-free, and the partition is built by Cousin's supremum construction, which
-uses the completeness of $\mathbb{R}$ and nothing else. This asymmetry is why
-[[cor-countably-many-discontinuities-integrable]] appears in the table with no
-cost at all: it uses the converse half only, together with
-[[lem-countable-sets-are-null]], whose own statement records that no choice
-principle is used there.
+**The discontinuity set.** In the forward half of
+[[thm-lebesgue-criterion]], each oscillation superlevel set is compact and has
+content zero. The set of discontinuities is their countable union. The
+choice-free lemma [[lem-countable-union-of-compact-content-zero-sets-is-null-in-zf]]
+encodes finite rational covers by naturals, takes the least valid code for each
+superlevel set, and combines those finite covers with a fixed pairing map.
+The converse implication uses the finite-cover and Cousin partition argument.
 
-**Heine-Cantor is the page's other source, and it is a single use.**
-[[thm-heine-cantor-r]] states that its proof invokes $\mathrm{AC}_\omega$ exactly
-once, to select one bad pair of points from each of countably many nonempty sets,
-and that the implication it borrows from
-[[thm-compact-iff-sequentially-compact-r]] — compact implies sequentially
-compact — spends nothing. So [[thm-continuous-implies-integrable]] and
-[[thm-finitely-many-discontinuities-integrable]] each inherit that one use and
-add none of their own. The neighbouring ledger for the same expenditure on the
-continuity page is [[rem-heine-criterion-choice-cost]].
+## Scope of this accounting
 
-## What is deliberately not claimed
-
-Nothing here says that $\mathrm{AC}_\omega$ is **necessary** for any of the three
-theorems that use it. The independence questions for the Heine-Cantor theorem
-and for the countable additivity of nullity over $\mathbb{R}$ are not settled in
-this library, and no item on this page asserts anything about them. What the
-table records is what the proofs on disk actually spend, and it is meant to be
-checked against them rather than believed.
-
-The one further caution is that a *later* proof of a result stated here could
-spend less. The direct argument for [[thm-monotone-implies-integrable]] is kept
-alongside the shorter route through
-[[cor-countably-many-discontinuities-integrable]] precisely for that reason: the
-direct one is elementary and quantitative, and both are choice-free, so nothing
-is lost by keeping the pair.
+The general union of an arbitrary sequence of null sets is a separate claim
+whose standard proof selects one cover for each set. This page uses the more
+specific compact content-zero lemma, so it makes no assertion here about the
+choice strength or independence of the general claim. The ledger records the
+premises of the proofs now on disk, rather than an optimality theorem for every
+possible proof.

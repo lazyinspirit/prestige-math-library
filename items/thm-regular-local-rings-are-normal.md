@@ -2,13 +2,14 @@
 id: "thm-regular-local-rings-are-normal"
 kind: "theorem"
 title: "regular local rings are normal"
-deps: ["lem-regular-local-domain-induction", "cor-regular-local-ring-satisfies-r-one", "cor-regular-local-ring-satisfies-s-two", "thm-serre-normality-criterion", "thm-localisation-and-polynomial-extension-of-regular-rings", "lem-reduced-noetherian-total-fractions-and-normal-components"]
+deps: ["def-axiom-of-choice", "lem-regular-local-domain-induction", "cor-regular-local-ring-satisfies-r-one", "cor-regular-local-ring-satisfies-s-two", "thm-serre-normality-criterion", "thm-localisation-and-polynomial-extension-of-regular-rings", "lem-reduced-noetherian-total-fractions-and-normal-components"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "10.157.5"
@@ -23,11 +24,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-Every regular local ring is an integrally closed domain. Every commutative regular Noetherian ring is normal and is a finite product of regular domains, with the zero ring corresponding to the empty product.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every regular local ring is an integrally closed domain. Every commutative regular Noetherian ring is normal and is a finite product of regular domains, with the zero ring corresponding to the empty product.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The Axiom of Choice and the regular local or commutative regular Noetherian ring in the Statement.
 
 [F1] [[lem-regular-local-domain-induction]]: Every regular local ring is an integral domain.
 

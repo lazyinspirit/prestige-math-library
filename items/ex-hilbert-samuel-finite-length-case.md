@@ -7,21 +7,24 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-composition-series-and-length-of-a-module, thm-existence-of-hilbert-samuel-polynomial]
+deps: [def-composition-series-and-length-of-a-module, thm-nilradical-of-a-noetherian-ring-is-nilpotent]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:
     - title: "Stacks Project, Section 10.59: Noetherian local rings"
       url: "https://stacks.math.columbia.edu/tag/00K4"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
@@ -39,17 +42,17 @@ $$ P_{\mathfrak m,M}(n)=\ell_R(M). $$
 
 [L1] The length $\ell_R(M)$ is defined for finite-length modules ([[def-composition-series-and-length-of-a-module]]).
 
-[L2] The Hilbert-Samuel polynomial exists ([[thm-existence-of-hilbert-samuel-polynomial]]).
+[L2] In a Noetherian ring the nilradical is nilpotent ([[thm-nilradical-of-a-noetherian-ring-is-nilpotent]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
 
-1.1 In a zero-dimensional Noetherian local ring, the maximal ideal is nilpotent on every finite module, so there is $N$ with $\mathfrak m^N M=0$. Hence for every $n\ge N-1$, $ M/\mathfrak m^{n+1}M=M. $ [given, algebra]
+1.1 In a zero-dimensional local ring every prime ideal is maximal, hence the only prime is $\mathfrak m$. Its nilradical is therefore $\mathfrak m$, and [L2] gives $\mathfrak m^N=0$ for some $N\ge1$. Hence for every $n\ge N-1$, $M/\mathfrak m^{n+1}M=M$. [L2, given, algebra]
 
 
-1.2 Therefore the Hilbert-Samuel function is eventually constant equal to $\ell_R(M)$, which is defined by [L1]. So the eventual polynomial provided by [L2] is the constant polynomial $\ell_R(M)$. [L1, L2]
+2.1 The finite module $M$ has finite length over the zero-dimensional Noetherian local ring: the filtration by powers of the nilpotent maximal ideal has finitely many quotients, each a finite-dimensional vector space over $R/\mathfrak m$. Thus $\ell_R(M)$ is defined by [L1]. Step 1.1 shows that the Hilbert-Samuel function is eventually the constant polynomial $\ell_R(M)$, uniquely so because two polynomials agreeing at all large integers are equal. [L1, step 1.1, algebra]
 
 
-2.1 This is exactly the zero-dimensional case. [algebra] ∎
+3.1 This is exactly the zero-dimensional case. [step 2.1] ∎

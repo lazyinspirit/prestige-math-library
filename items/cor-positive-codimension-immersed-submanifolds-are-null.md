@@ -8,14 +8,19 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [prop-the-image-of-a-lower-dimensional-c1-manifold-is-null,
-       def-immersed-submanifold]
+       def-immersed-submanifold, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (cor-positive-codimension-immersed-submanifolds-are-null). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -25,22 +30,20 @@ sources:
 
 ## Statement
 
-Every immersed submanifold of positive codimension in a smooth manifold is a
+Assume the Axiom of Countable Choice. Every immersed submanifold of positive codimension in a smooth manifold is a
 null subset of the ambient manifold.
 
 ## Facts & Assumptions
 
-**Given:** An immersed $m$-dimensional submanifold $S$ of an $n$-manifold $N$ with $m<n$.
+**Given:** Countable Choice and an immersed $m$-dimensional submanifold $S$ of an $n$-manifold $N$ with $m<n$.
 
-[F1] An immersed submanifold is locally the image of a smooth immersion from an $m$-manifold ([[def-immersed-submanifold]]).
+[F1] An immersed submanifold is an $m$-manifold equipped with a smooth injective immersion into the ambient manifold ([[def-immersed-submanifold]]).
 
 [L1] The image of a lower-dimensional $C^1$ manifold is null ([[prop-the-image-of-a-lower-dimensional-c1-manifold-is-null]]).
 
 ## Proof
 **Proof technique:** direct.
 
-1.1 By [F1], every point of $S$ has a neighbourhood in $N$ on which $S$ is the image of a smooth immersion from an $m$-manifold. [F1, given]
+1.1 By [F1], the immersed submanifold has a smooth injective immersion $i:S\to N$; its image is the subset of $N$ in the statement. [F1, given]
 
-2.1 Because $m<n$, [L1] makes each such local image null in the ambient neighbourhood. Therefore $S$ is locally null, and a countable cover of $S$ by such neighbourhoods shows that $S$ is null in $N$. [L1, step 1.1, algebra]
-
-3.1 Hence every positive-codimension immersed submanifold is null. [step 2.1] ∎
+2.1 Since $m<n$, [L1] under the stated Countable Choice makes $i(S)$ null in $N$. [L1, step 1.1] ∎

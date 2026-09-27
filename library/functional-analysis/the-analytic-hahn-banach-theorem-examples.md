@@ -17,5 +17,5 @@ example, and then uses the dominated form of Hahn-Banach to build a Banach
 limit and verify its standard properties.
 
 The counterexample isolates nonuniqueness as a reusable phenomenon, while the
-closing remark records two open choice-theoretic questions that the proved
-Hahn-Banach ledger does not settle.
+closing remark records two choice-theoretic questions whose current status the
+proved Hahn-Banach ledger does not establish.

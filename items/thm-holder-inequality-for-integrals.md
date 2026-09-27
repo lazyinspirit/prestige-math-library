@@ -8,11 +8,16 @@ landmark: true
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-young-inequality-real-exponents, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral]
+deps: [def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-young-inequality-real-exponents, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-integral-over-a-null-set-vanishes]
 proof_strategy: "For 1 < p < infinity, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs (1, infinity) and (infinity, 1) separately from the essential-bound definition."
 verification:
-  audited: 2026-08-31
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-holder-inequality-for-integrals). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -57,14 +62,15 @@ In every case the right-hand side is finite, so $fg$ is integrable.
 
 [L7] The nonnegative integral is additive ([[cor-additivity-of-the-nonnegative-lebesgue-integral]]).
 
+[L8] The integral of a nonnegative function over a null set is zero ([[cor-integral-over-a-null-set-vanishes]]).
+
 ## Proof
 
 **Proof technique:** For $1 < p < infinity$, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs $(1,\infty)$ and $(\infty,1)$ separately from the essential-bound definition.
 
-1.1 Assume first $1<p,q<\infty$, and put $A:=\|f\|_p$ and $B:=\|g\|_q$. If $A=0$ or $B=0$, then the corresponding power integral is $0$, so the corresponding function vanishes almost everywhere and $\int|fg|\,d\mu=0$. Thus only the case $A,B>0$ remains. [L2, L3, given]
+1.1 Assume first $1<p,q<\infty$, and put $A:=\|f\|_p$ and $B:=\|g\|_q$. If $A=0$ or $B=0$, then the corresponding power integral is $0$, so [L3] makes the corresponding function vanish outside a measurable null set. By [L8], $\int|fg|\,d\mu=0$. Thus only the case $A,B>0$ remains. [L2, L3, L8, given]
 
-1.2 For the endpoint pair $(p,q)=(1,\infty)$, let $M:=\|g\|_\infty$. Then [L2, L4, L6, given]
-$$\int |fg|\,d\mu\le M\int |f|\,d\mu=\|g\|_\infty\|f\|_1.$$ Indeed, [L4] gives a measurable null set $N$ with $|g|\le M$ on $X\setminus N$, so $|fg|\le M|f|$ almost everywhere.
+1.2 For the endpoint pair $(p,q)=(1,\infty)$, let $M:=\|g\|_\infty$. By [L4] there is a measurable null set $N$ outside which $|fg|\le M|f|$. On $N$, [L8] gives zero integral for $|fg|\chi_N$ and $M|f|\chi_N$. Integrating the inequality on $X\setminus N$ with [L6] and [L7] therefore gives $\int|fg|\,d\mu\le M\int|f|\,d\mu=\|g\|_\infty\|f\|_1$. [L2, L4, L6, L7, L8, given]
 
 2.1 In the remaining strict-exponent case, Young's inequality applied pointwise to $u=|f|/A$ and $v=|g|/B$ gives [step 1.1, L1, L2, L5, L6, L7, algebra]
 $$\frac{|f||g|}{AB}\le\frac{|f|^p}{pA^p}+\frac{|g|^q}{qB^q}.$$ Integrating and using additivity, monotonicity, homogeneity, and the definitions of $A$ and $B$ yields $$\int |fg|\,d\mu\le\frac{B}{pA^{p-1}}\int |f|^p\,d\mu+\frac{A}{qB^{q-1}}\int |g|^q\,d\mu=\frac{AB}{p}+\frac{AB}{q}=AB.$$

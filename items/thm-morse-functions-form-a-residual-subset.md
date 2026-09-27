@@ -7,18 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-morse-functions-are-transverse-differentials, thm-morse-functions-are-dense-by-relative-jet-transversality, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]
+deps: [lem-morse-functions-are-transverse-differentials, thm-morse-functions-are-dense-by-relative-jet-transversality, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,18 +30,18 @@ sources:
 
 ## Statement
 
-Let $M$ be a smooth manifold. In the strong $C^\infty$ topology on
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a smooth manifold. In the strong $C^\infty$ topology on
 $C^\infty(M,\mathbb R)$, the set of Morse functions is residual.
 
 ## Facts & Assumptions
 
-**Given:** A smooth manifold $M$.
+**Given:** A smooth manifold $M$ and the Axiom of Choice.
 
 [F1] A smooth function is Morse exactly when its differential section is transverse to the zero section ([[lem-morse-functions-are-transverse-differentials]]).
 
-[L1] Every smooth manifold admits a smooth proper exhaustion function ([[thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]]).
+[L1] Under countable choice, every smooth manifold admits a smooth proper exhaustion function ([[thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]]). The assumed Axiom of Choice supplies countable choice.
 
-[L2] Every strong neighbourhood of a smooth function contains a Morse perturbation, and that perturbation can be chosen to agree with the original function near any prescribed closed region where transversality already holds ([[thm-morse-functions-are-dense-by-relative-jet-transversality]]).
+[L2] Under the Axiom of Choice, every strong neighbourhood of a smooth function contains a Morse perturbation, and that perturbation can be chosen to agree with the original function near any prescribed closed region where transversality already holds ([[thm-morse-functions-are-dense-by-relative-jet-transversality]]).
 
 [A1] For a fixed compact set $K$, the condition that a differential section be transverse to the zero section on a neighbourhood of $K$ is open in the strong topology, because only finitely many first derivatives on a compact neighbourhood of $K$ are involved.
 

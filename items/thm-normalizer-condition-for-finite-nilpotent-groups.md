@@ -7,14 +7,14 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-upper-and-lower-central-characterizations-of-nilpotence, def-normalizer-of-a-subgroup]
+deps: [thm-upper-and-lower-central-characterizations-of-nilpotence, lem-central-series-commutator-criterion, def-normalizer-of-a-subgroup]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-17
+  audited: 2026-09-24
 sources:
   scraped: []
   references:
@@ -35,12 +35,14 @@ Every proper subgroup of a finite nilpotent group is properly contained in its n
 
 [L2] Let $H\le G$ be a subgroup (def-subgroup). The normalizer of $H$ in $G$ is $$N_G(H):=\{g\in G:gHg^{-1}=H\}.$$ Thus $g\in N_G(H)$ exactly when the conjugation automorphism $c_g$ preserves $H$ setwise (thm-conjugation-is-an-automorphism). The subgroup property is proved in lem-centralizers-and-normalizers-are-subgroups. ([[def-normalizer-of-a-subgroup]]).
 
+[L3] If $1=K_0\le\cdots\le K_c=G$ is a central series, then $[G,K_i]\le K_{i-1}$ for each $i\ge1$. With the library's convention $[h,z]=hzh^{-1}z^{-1}$, this gives $zhz^{-1}=[h,z]^{-1}h$ for $h\in G$ and $z\in K_i$. ([[lem-central-series-commutator-criterion]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 We use a central series and take the first term not contained in the proper subgroup $H$. [L1, L2, given, algebra]
+1.1 Let $H<G$. By [L1], choose a central series $1=K_0\le\cdots\le K_c=G$. Since $K_0=1\le H$ and $K_c=G\nleq H$, there is a least $i\ge1$ with $K_i\nleq H$. Then $K_{i-1}\le H$; choose $z\in K_i\setminus H$. [L1, given]
 
-2.1 The preceding term lies in $H$, so an element newly appearing at that stage normalizes $H$ modulo the preceding term but is not in $H$. [step 1.1, given, algebra]
+2.1 For every $h\in H$, [L3] gives $[h,z]\in K_{i-1}\le H$, hence $zhz^{-1}=[h,z]^{-1}h\in H$. Thus $zHz^{-1}\subseteq H$. Since $z^{-1}\in K_i$, the same calculation with $z^{-1}$ gives $z^{-1}Hz\subseteq H$; conjugating this inclusion by $z$ gives $H\subseteq zHz^{-1}$. Therefore $zHz^{-1}=H$ and $z\in N_G(H)\setminus H$. [step 1.1, L2, L3]
 
-3.1 Both boundary cases are admitted and hold. If $G$ has nilpotency class zero then $G=1$, which has no proper subgroup, so the claim is vacuously true and step 1.1 is never entered. If $H=1$ and $G\ne1$, then $N_G(H)=G$, which properly contains $H$. This proves the stated claim. [step 1.1, step 2.1, given, algebra] ∎
+3.1 Every $h\in H$ normalizes $H$, so $H\le N_G(H)$; the element $z\notin H$ from step 2.1 makes the inclusion strict. If $G=1$ there is no proper subgroup and the claim is vacuous. [step 2.1, L2] ∎

@@ -2,16 +2,17 @@
 id: "lem-zero-dimensional-classical-variety-finite"
 kind: "lemma"
 title: "Zero-dimensional varieties are finite sets"
-deps: ["def-dimension-classical-variety", "lem-classical-variety-noetherian-components", "thm-affine-variety-dimension-coordinate-ring", "thm-affine-nullstellensatz-correspondence"]
+deps: ["def-axiom-of-choice", "def-dimension-classical-variety", "lem-classical-variety-noetherian-components"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (lem-zero-dimensional-classical-variety-finite). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Arapura §4.1 opening, p.30"
@@ -35,7 +36,7 @@ Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Clas
 
 [F1] For a classical variety $X$, let $\dim X$ be its chain dimension. If $X_1,\ldots,X_m$ are its irreducible components and $x\in X$ is a closed point, define $\dim_xX=\max_{x\in X_i}\dim X_i$. The indexing family is nonempty. Say that $X$ has pure dimension $d$ if every irreducible component has dimension $d$; the condition on components is vacuous for the empty variety, whose dimension is nevertheless $-\infty$. Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Classical varieties are separated and admit finite affine covers; they may be reducible or empty unless irreducibility is specified. Irreducible means nonempty. All fibres and points below are classical closed-point fibres and points. ([[def-dimension-classical-variety]]).
 
-[F2] Every classical variety is Noetherian and has finitely many irreducible components. Every open or closed subvariety has a finite affine cover. Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Classical varieties are separated and admit finite affine covers; they may be reducible or empty unless irreducibility is specified. Irreducible means nonempty. All fibres and points below are classical closed-point fibres and points. ([[lem-classical-variety-noetherian-components]]).
+[F2] Under the Axiom of Choice ([[def-axiom-of-choice]]), every classical variety is Noetherian and has finitely many irreducible components ([[lem-classical-variety-noetherian-components]]). This is the only inherited use of Choice in the proof; choosing a point from each member of a finite component family needs no additional choice principle.
 
 ## Proof
 

@@ -2,13 +2,7 @@
 id: "lem-depth-two-excludes-finite-punctured-extension"
 kind: "lemma"
 title: "depth two excludes finite punctured extension"
-deps: ["def-total-ring-of-fractions", "thm-depth-lemma", "thm-depth-zero-associated-prime-criterion", "thm-support-and-annihilator-of-a-finite-module", "thm-nakayama-lemma"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-total-ring-of-fractions", "thm-depth-lemma", "thm-depth-zero-associated-prime-criterion", "thm-support-and-annihilator-of-a-finite-module", "thm-nakayama-lemma"]
 sources:
   references:
     - title: "10.119.2 last proof paragraph, restricted finite-extension rigidity"
@@ -19,15 +13,22 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (lem-depth-two-excludes-finite-punctured-extension). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $(R,\mathfrak m)$ be reduced Noetherian local with $\operatorname{depth}R\ge2$. If $R\subseteq B\subseteq Q(R)$ is a finite intermediate ring and $\operatorname{Supp}_R(B/R)\subseteq\{\mathfrak m\}$, then $B=R$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\mathfrak m)$ be reduced Noetherian local with $\operatorname{depth}R\ge2$. If $R\subseteq B\subseteq Q(R)$ is a finite intermediate ring and $\operatorname{Supp}_R(B/R)\subseteq\{\mathfrak m\}$, then $B=R$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement. The Axiom of Choice is assumed; cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[def-total-ring-of-fractions]]: For a nonzero commutative ring $R$, let $S$ be the set of its nonzerodivisors, meaning elements whose multiplication maps on $R$ are injective. Its **total ring of fractions** is $Q(R)=S^{-1}R$. The set $S$ is multiplicative since composites of injective multiplication maps are injective. The natural map $R\to Q(R)$ is injective: $a/1=0$ implies $sa=0$ for some $s\in S$, hence $a=0$. Set $Q(0)=0$. For a domain this recovers the fraction field; for a ring with zero divisors it need not be a field.
 

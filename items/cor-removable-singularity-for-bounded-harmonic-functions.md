@@ -1,34 +1,35 @@
 ---
 id: cor-removable-singularity-for-bounded-harmonic-functions
 kind: corollary
-title: "Removable singularity for bounded harmonic functions"
+title: "Removable singularity for bounded harmonic functions under Countable Choice"
 status: published
 origin: pipeline
-deps: [lem-smooth-sphere-data-have-a-harmonic-replacement, thm-comparison-principle-for-classical-subharmonic-functions, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic]
+deps: [def-countable-choice, lem-smooth-sphere-data-have-a-harmonic-replacement, thm-comparison-principle-for-classical-subharmonic-functions, cor-ball-mean-value-property-for-harmonic-functions, thm-continuous-mean-value-functions-are-harmonic]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Gantumur, Harmonic functions"
       url: https://www.math.mcgill.ca/gantumur/math580f12/harmonic.pdf
       locator: "§8 Theorem 17, p.14"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (cor-removable-singularity-for-bounded-harmonic-functions). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be open and $p\in\Omega$. If $u\in C^2(\Omega\setminus\{p\})$ is harmonic and bounded in some punctured neighborhood of $p$, it has a unique harmonic extension to $\Omega$. More generally the same conclusion holds under $u(x)=o(|x-p|^{2-n})$ for $n\ge3$, or $u(x)=o(\log(1/|x-p|))$ for $n=2$, as $x\to p$.
+Assume the Axiom of Countable Choice. Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be open and $p\in\Omega$. If $u\in C^2(\Omega\setminus\{p\})$ is harmonic and bounded in some punctured neighborhood of $p$, it has a unique harmonic extension to $\Omega$. More generally the same conclusion holds under $u(x)=o(|x-p|^{2-n})$ for $n\ge3$, or $u(x)=o(\log(1/|x-p|))$ for $n=2$, as $x\to p$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
 [F1] Smooth real sphere data have a smooth harmonic replacement continuous on the closed ball with the prescribed boundary values. ([[lem-smooth-sphere-data-have-a-harmonic-replacement]]).
 
@@ -42,10 +43,10 @@ Let $n\ge2$, let $\Omega\subseteq\mathbb R^n$ be open and $p\in\Omega$. If $u\in
 
 **Proof technique:** direct.
 
-1.1 Translate $p=0$ and choose $0<R<1$ so that $\overline B_R\subset\Omega$. On the punctured domain, ball mean values and the smoothness theorem make $u$ smooth; its trace on $\partial B_R$ is smooth. Let $h$ be its harmonic replacement on $B_R$, and $w=u-h$. Then $w$ is harmonic off zero and vanishes on the outer sphere. The replacement is bounded on the closed ball. [F1, F3, F4, given]
+1.1 Translate $p=0$ and choose $0<R<1$ so that $\overline B_R\subset\Omega$. Under the given Countable Choice premise, ball mean values and the smoothness theorem make $u$ smooth on the punctured domain; its trace on $\partial B_R$ is smooth. Let $h$ be its harmonic replacement on $B_R$, and $w=u-h$. Then $w$ is harmonic off zero and vanishes on the outer sphere. The replacement is bounded on the closed ball. [F1, F3, F4, given]
 
 2.1 For $0<\delta<R$, put $A_\delta=\max_{|x|=\delta}|w(x)|$, a finite nonnegative number. On $\delta<r=|x|<R$ take $\phi_\delta(x)=A_\delta(\delta/r)^{n-2}$ if $n\ge3$, and $\phi_\delta(x)=A_\delta\log(R/r)/\log(R/\delta)$ if $n=2$. For radial $f$, differentiation of $\partial_i f(r)=f\prime(r)x_i/r$ gives $\Delta f=f\prime\prime+(n-1)f\prime/r$. Substitution proves $\Delta\phi_\delta=0$ in both dimensions. Each barrier equals $A_\delta$ on the inner sphere and is nonnegative on the outer sphere. [step 1.1, algebra]
 
 3.1 Comparison on the bounded annulus applied separately to $w$ and $-w$ against $\phi_\delta$ yields $|w(x)|\le\phi_\delta(x)$. In the bounded case $A_\delta$ remains uniformly bounded for small $\delta$. At fixed $x\ne0$, the factor $\delta^{n-2}$ tends to zero for $n\ge3$, and the denominator $\log(R/\delta)$ tends to infinity for $n=2$. Thus $w(x)=0$. [F2, step 2.1, algebra]
 
-4.1 Under the stronger stated little-o hypotheses, $A_\delta=o(\delta^{2-n})$ or $A_\delta=o(\log(1/\delta))$, because $h$ is bounded. The same barrier bound again tends to zero at each fixed nonzero $x$. Hence $u=h$ on the punctured ball in either case. Define $u(0)=h(0)$ and retain the original $u$ outside the ball; equality on their overlap proves harmonicity locally everywhere. Any continuous extension must have this value at zero, proving uniqueness. [step 1.1, step 3.1, algebra] ∎
+4.1 Under the stated little-o hypotheses, $A_\delta=o(\delta^{2-n})$ or $A_\delta=o(\log(1/\delta))$, because $h$ is bounded. The same barrier bound again tends to zero at each fixed nonzero $x$. Hence $u=h$ on the punctured ball in either case. Define $u(0)=h(0)$ and retain the original $u$ outside the ball; equality on their overlap proves harmonicity locally everywhere. Any continuous extension must have this value at zero, proving uniqueness. [step 1.1, step 3.1, algebra] ∎

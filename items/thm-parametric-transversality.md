@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-smooth-family-of-maps-and-evaluation-map,
+deps: [def-countable-choice,
+       def-smooth-family-of-maps-and-evaluation-map,
        def-a-smooth-map-transverse-to-an-embedded-submanifold,
        thm-transverse-preimage-theorem,
        thm-morse-sard-for-smooth-manifolds]
@@ -15,32 +16,36 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, cumulative notes"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (thm-parametric-transversality). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $\mathcal F:M\times S\to N$ be a smooth family of maps and let $Z\subseteq N$
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $\mathcal F:M\times S\to N$ be a smooth family of maps and let $Z\subseteq N$
 be an embedded submanifold. If $\mathcal F\pitchfork Z$, then the set of
 parameters $s\in S$ for which the slice $\mathcal F_s:M\to N$ fails to be
 transverse to $Z$ is a null subset of $S$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth family $\mathcal F:M\times S\to N$ transverse to an embedded submanifold $Z\subseteq N$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth family $\mathcal F:M\times S\to N$ transverse to an embedded submanifold $Z\subseteq N$.
 
 [F1] The slice maps $\mathcal F_s$ come from the evaluation map $\mathcal F$ ([[def-smooth-family-of-maps-and-evaluation-map]]).
 
 [F2] Transversality to an embedded submanifold means a tangent-space spanning condition at each point of the preimage ([[def-a-smooth-map-transverse-to-an-embedded-submanifold]]).
 
-[L1] The preimage $W=\mathcal F^{-1}(Z)$ is an embedded submanifold, and for the projection $\pi_S:W\to S$, regular values are dense outside a null set ([[thm-transverse-preimage-theorem]], [[thm-morse-sard-for-smooth-manifolds]]).
+[L1] The preimage $W=\mathcal F^{-1}(Z)$ is an embedded submanifold, and under $\mathrm{AC}_\omega$ the critical values of the projection $\pi_S:W\to S$ form a null set ([[thm-transverse-preimage-theorem]], [[thm-morse-sard-for-smooth-manifolds]]).
 
 ## Proof
 **Proof technique:** direct.

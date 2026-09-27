@@ -10,9 +10,6 @@ provenance:
 deps: [thm-existence-of-hilbert-samuel-polynomial, thm-dimension-and-parameters-for-modules, thm-additivity-of-hilbert-samuel-multiplicity, thm-artin-rees-lemma, lem-determinant-trick-for-nakayama, thm-noetherian-ring-ideal-characterisations, thm-local-ring-unit-characterisations]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -20,6 +17,16 @@ sources:
       url: "https://web.mit.edu/18.705/www/12Nts.pdf"
     - title: "Stacks Project, Section 10.60: Dimension"
       url: "https://stacks.math.columbia.edu/tag/00KD"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement

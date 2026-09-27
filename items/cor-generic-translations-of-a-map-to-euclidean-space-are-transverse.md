@@ -7,25 +7,29 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-parametric-transversality,
+deps: [def-countable-choice, thm-parametric-transversality,
        cor-a-submersion-is-transverse-to-every-embedded-submanifold]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, cumulative notes"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (cor-generic-translations-of-a-map-to-euclidean-space-are-transverse). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $f:M\to\mathbb R^n$ be smooth and let $Z\subseteq\mathbb R^n$ be an embedded
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $f:M\to\mathbb R^n$ be smooth and let $Z\subseteq\mathbb R^n$ be an embedded
 submanifold. Then the set of $a\in\mathbb R^n$ for which the translated map
 
 $$ f_a(p):=f(p)+a $$
@@ -34,9 +38,9 @@ fails to be transverse to $Z$ is a null subset of $\mathbb R^n$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $f:M\to\mathbb R^n$ and an embedded submanifold $Z\subseteq\mathbb R^n$.
+**Given:** $\mathrm{AC}_\omega$, a smooth map $f:M\to\mathbb R^n$ and an embedded submanifold $Z\subseteq\mathbb R^n$.
 
-[L1] Parametric transversality applies to a smooth family whose evaluation map is transverse to $Z$ ([[thm-parametric-transversality]]).
+[L1] Under $\mathrm{AC}_\omega$, parametric transversality applies to a smooth family whose evaluation map is transverse to $Z$ ([[thm-parametric-transversality]]).
 
 [L2] A submersion is transverse to every embedded submanifold ([[cor-a-submersion-is-transverse-to-every-embedded-submanifold]]).
 

@@ -14,6 +14,8 @@ convergence on continuous data, and pointwise convergence at Lebesgue points and
 jumps. The closing comparison records the Gibbs overshoot for Dirichlet partial
 sums and explains why the positive kernels avoid it.
 
-The current on-disk $L^p$ proofs use the library's published real-line density
-theorem, so the norm-convergence items inherit the same Axiom-of-Countable-Choice
-cost already present elsewhere in the Fourier route on current bytes.
+The general $L^1$ coefficient and summability statements, including midpoint
+convergence and the Cesaro-to-Abel comparison, assume Countable Choice. The
+$L^p$ convergence proofs inherit that premise through integration and density.
+The kernel identities and continuous-data arguments have the explicit
+choice-free Riemann-integral routes stated in their items.

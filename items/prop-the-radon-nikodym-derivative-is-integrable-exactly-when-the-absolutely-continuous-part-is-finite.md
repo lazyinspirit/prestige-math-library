@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-the-absolutely-continuous-and-singular-parts-of-a-sigma-finite-signed-measure, def-radon-nikodym-derivative, def-integrable-real-and-complex-functions-and-their-integrals, def-total-variation-of-a-signed-or-complex-measure, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]
+deps: [def-the-absolutely-continuous-and-singular-parts-of-a-sigma-finite-signed-measure, def-radon-nikodym-derivative, def-integrable-real-and-complex-functions-and-their-integrals, def-total-variation-of-a-signed-or-complex-measure, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (prop-the-radon-nikodym-derivative-is-integrable-exactly-when-the-absolutely-continuous-part-is-finite). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Chapter 13"
@@ -20,20 +25,20 @@ sources:
 
 ## Statement
 
-Let $\mu$ be a sigma-finite positive measure and let $\nu_a$ be the absolutely
+Assume the Axiom of Choice. Let $\mu$ be a sigma-finite positive measure and let $\nu_a$ be the absolutely
 continuous part of a signed measure under the common finite-exhaustion
 hypothesis relative to $\mu$. Then
 $$\frac{d\nu_a}{d\mu}\in L^1(\mu)\qquad\Longleftrightarrow\qquad \nu_a\text{ is finite.}$$
 
 ## Facts & Assumptions
 
-**Given:** The absolutely continuous part $\nu_a$ of a measure relative to $\mu$.
+**Given:** The Axiom of Choice and the absolutely continuous part $\nu_a$ of a measure relative to $\mu$.
 
 [L1] Integrability means finiteness of the integral of the absolute value. ([[def-integrable-real-and-complex-functions-and-their-integrals]])
 
 [L2] A representative of $d\nu_a/d\mu$ recovers the measurable-set values of $\nu_a$. ([[def-radon-nikodym-derivative]])
 
-[L3] For an absolutely continuous finite signed or finite complex measure, the total variation has density $|d\nu_a/d\mu|$. ([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]])
+[L3] Under the stated Axiom of Choice, an absolutely continuous finite signed or complex measure has total-variation density $|d\nu_a/d\mu|$ ([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]], [[def-axiom-of-choice]]).
 
 [L4] For a finite signed measure, $|\nu_a|(X)=\nu_a^+(X)+\nu_a^-(X)$ ([[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]]).
 

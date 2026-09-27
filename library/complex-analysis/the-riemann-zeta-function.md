@@ -31,7 +31,7 @@ This page separates three roles that are easy to conflate. First, the Dirichlet
 series defines $\zeta(s)$ only on $\operatorname{Re}s>1$, where absolute
 convergence and the Euler product live. Second, analytic continuation enlarges
 that domain, first to $\operatorname{Re}s>0$ by the fractional-part integral and
-then to all of $\mathbb C$ by the theta-Mellin route. Third, the completed
+then, under countable choice, to all of $\mathbb C$ by the theta-Mellin route. Third, the completed
 functions $\Lambda$ and $\xi$ package the continuation so that the functional
 equation, the zero symmetries, the trivial zeros, and the Hadamard product can
 be stated cleanly.

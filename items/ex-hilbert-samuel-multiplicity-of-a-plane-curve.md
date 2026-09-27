@@ -7,16 +7,9 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-associated-graded-ring-and-module, def-hilbert-samuel-multiplicity, thm-existence-of-hilbert-samuel-polynomial]
+deps: [def-associated-graded-ring-and-module, def-hilbert-samuel-function-and-polynomial, def-hilbert-samuel-multiplicity]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
 sources:
   scraped: []
   references:
@@ -24,6 +17,16 @@ sources:
       url: "https://www.ams.org/books/surv/336/"
     - title: "Stacks Project, Section 10.59: Noetherian local rings"
       url: "https://stacks.math.columbia.edu/tag/00K4"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
@@ -42,7 +45,7 @@ $$ e_{\mathfrak m}(R)=2. $$
 
 **Given:** A field $k$, the cusp local ring $R$ above, and its maximal ideal $\mathfrak m$.
 
-[L1] The associated graded ring packages the quotients $\mathfrak m^n/\mathfrak m^{n+1}$, and the Hilbert-Samuel function is their cumulative length ([[def-associated-graded-ring-and-module]], [[thm-existence-of-hilbert-samuel-polynomial]]).
+[L1] The associated graded ring packages the quotients $\mathfrak m^n/\mathfrak m^{n+1}$, and the Hilbert-Samuel function is their cumulative length ([[def-associated-graded-ring-and-module]], [[def-hilbert-samuel-function-and-polynomial]]).
 
 [L2] Hilbert-Samuel multiplicity is the leading coefficient scaled by the factorial ([[def-hilbert-samuel-multiplicity]]).
 

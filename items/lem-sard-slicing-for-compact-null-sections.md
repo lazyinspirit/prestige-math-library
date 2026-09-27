@@ -8,15 +8,19 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-null-and-content-zero-in-rn,
-       thm-lebesgue-number-lemma,
-       prop-the-image-of-a-lower-dimensional-c1-manifold-is-null]
+       thm-lebesgue-number-lemma]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-sard-slicing-for-compact-null-sections). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,12 +46,10 @@ subset of $\mathbb R^{n+1}$.
 
 [L1] Every open cover of a compact metric space has a Lebesgue number ([[thm-lebesgue-number-lemma]]).
 
-[L2] The image of a lower-dimensional $C^1$ manifold is null ([[prop-the-image-of-a-lower-dimensional-c1-manifold-is-null]]).
-
 ## Proof
 **Proof technique:** direct.
 
-1.1 If $a=b$, then $K$ is contained in the hyperplane $\{a\}\times\mathbb R^n$, which is the image of the smooth map $y\mapsto(a,y)$ from $\mathbb R^n$ to $\mathbb R^{n+1}$; [L2] makes that hyperplane null, and hence $K$ is null. Assume henceforth that $a<b$. [L2, given, cases]
+1.1 If $a=b$, compactness bounds $K$ inside $\{a\}\times[-R,R]^n$ for some $R>0$. Divide the $n$-dimensional base into a finite grid of cubes of side at most $\delta$ and cover each corresponding point of $K$ by an $(n+1)$-cube of side $\delta$ centred in the first coordinate at $a$. The number of grid cubes is at most $(2R/\delta+2)^n$, so their total $(n+1)$-volume is at most $(2R+2\delta)^n\delta\to0$. By [F1], $K$ is null. Assume henceforth that $a<b$. [F1, given, cases]
 
 1.2 Fix $\varepsilon>0$ and put $L:=b-a+1$. For each $t\in[a,b]$, [F1] supplies the following covers. [F1, given, choose]
 There are finitely many closed $n$-cubes $Q_{t,1},\ldots,Q_{t,m_t}$ covering the compact section $K_t$ with total $n$-volume below $\varepsilon/(2^{n+3}L)$. Enlarge them slightly to open $n$-cubes $\widetilde Q_{t,\ell}\supseteq Q_{t,\ell}$ so that, with $$ O_t:=\bigcup_{\ell=1}^{m_t}\widetilde Q_{t,\ell}, $$ one still has $$ \sum_{\ell=1}^{m_t}\operatorname{vol}_n(\widetilde Q_{t,\ell}) <\frac{\varepsilon}{2^{n+2}L}. $$ Thus each section has an open finite cube cover with the stated uniform volume budget. [F1, given, choose]

@@ -7,14 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-plane-graph-face-and-boundary, thm-polygonal-jordan-curve, lem-polygonal-arc-does-not-separate-the-plane, thm-induction-principle, def-bounded-set]
+deps: [def-plane-graph-face-and-boundary, thm-induction-principle, def-bounded-set]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
 verification:
-  precheck: pass
-  audited: 2026-08-11
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -31,11 +35,7 @@ Every plane graph ([[def-plane-graph-face-and-boundary]]) has finitely many face
 
 **Given:** A finite polygonal plane drawing.
 
-[L1] A polygon has exactly two regions, each with frontier the polygon ([[thm-polygonal-jordan-curve]]).
-
-[L2] A polygonal arc does not separate the plane ([[lem-polygonal-arc-does-not-separate-the-plane]]).
-
-
+[L1] Each edge is a finite union of straight segments by the polygonal drawing definition ([[def-plane-graph-face-and-boundary]]).
 
 ## Proof
 
@@ -43,6 +43,6 @@ Every plane graph ([[def-plane-graph-face-and-boundary]]) has finitely many face
 
 1.1 The finite union of bounded line segments lies in a sufficiently large rectangle. The exterior of that rectangle is connected and disjoint from the drawing, so it lies in one face; every unbounded face must meet the exterior and hence equals that face. Thus there is exactly one unbounded face. [base]
 
-1.2 Add the edge arcs one at a time. An arc that does not close a cycle can be exposed inside one existing face and, by [L2], does not split it. An arc that closes a polygon lies in one existing face and, by [L1], splits that face into exactly two. Isolated vertices likewise do not disconnect a plane region. Each addition therefore changes the face count by at most one. [ih, L1, L2]
+1.2 Add the finitely many vertices and edge arcs one at a time. At every stage the partial drawing consists of finitely many points and straight segments by [L1]. Let $L_1,\ldots,L_s$ be the distinct full lines supporting its segments, together with a vertical line through each vertex. The complement of these lines has at most $2^s$ nonempty sign cells: for each choice of sides of the $s$ lines, the cell is an intersection of open half-planes, hence convex and connected. Every face of the drawing is a nonempty open set, so it meets the complement of this finite union of lines, which has empty interior. The sign cell containing such a point is disjoint from the drawing and connected, hence lies wholly in that face. Distinct faces contain distinct sign cells. Thus every partial drawing has at most $2^s$ faces. The empty drawing has one face, and each finite addition preserves the finite-face assertion. [L1, ih, algebra]
 
-2.1 Starting from the empty drawing with one face, finitely many additions yield finitely many faces, and step 1.1 identifies exactly one as unbounded. [step 1.1, step 1.2, discharge-induction] ∎
+2.1 Starting from the empty drawing with one face, finitely many additions yield finitely many faces by step 1.2, and step 1.1 identifies exactly one as unbounded. [step 1.1, step 1.2, discharge-induction] ∎

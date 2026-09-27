@@ -4,17 +4,19 @@ kind: corollary
 title: "Harnack inequality on compact subsets"
 status: published
 origin: pipeline
-deps: [thm-harnack-inequality-on-a-ball, lem-finite-harnack-chain-on-a-compact-connected-subset, cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes]
+deps: [def-countable-choice, thm-harnack-inequality-on-a-ball, lem-finite-harnack-chain-on-a-compact-connected-subset, cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (cor-harnack-inequality-on-compact-subsets). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
@@ -27,15 +29,17 @@ sources:
 
 ## Statement
 
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$.
+
 For $n\ge2$, a domain $\Omega\subseteq\mathbb R^n$ and a nonempty compact $K\subset\Omega$, there is $C=C(K,\Omega,n)\ge1$ such that every nonnegative harmonic function $u$ on $\Omega$ satisfies
 $$\sup_Ku\le C\inf_Ku.$$
 The compact set $K$ need not be connected.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
-[F1] On $B_R(a)$ a nonnegative harmonic function satisfies $u(x)\le(R/(R-|x-a|))^n u(a)$. ([[thm-harnack-inequality-on-a-ball]]).
+[F1] Under Countable Choice, on $B_R(a)$ a nonnegative harmonic function satisfies $u(x)\le(R/(R-|x-a|))^n u(a)$. ([[thm-harnack-inequality-on-a-ball]]).
 
 [F2] Any compact subset of a domain has a finite cover by interior balls with connected overlap graph and fourfold closed balls in the domain. ([[lem-finite-harnack-chain-on-a-compact-connected-subset]]).
 

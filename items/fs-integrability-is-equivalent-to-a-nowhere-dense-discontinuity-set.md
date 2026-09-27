@@ -13,13 +13,6 @@ aliases: []
 landmark: false
 short: "FALSE: integrable iff nowhere dense discontinuities"
 proof_strategy: direct
-verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -32,6 +25,15 @@ sources:
     - title: "J. Hunter, Chapter 11: The Riemann Integral"
       url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -100,8 +102,8 @@ biconditional, and the harder one is worked out below.
 
 ## Remarks
 
-- **Where the false claim comes from.** For a **closed** discontinuity set, being nowhere dense and being null are both ways of saying "small", and for the Cantor set they agree. They come apart exactly because a nowhere dense closed set may still swallow a fixed fraction of the length of every interval it meets, which is what the Smith-Volterra-Cantor construction arranges: it removes a middle interval of length $4^{-n}$ at stage $n$ rather than a fixed proportion ([[def-fat-cantor-set]]).
+- **Where the false claim comes from.** For a **closed** discontinuity set, being nowhere dense and being null are both ways of saying "small", and for the Cantor set they agree. They come apart because a nowhere dense closed set can require a fixed positive total length in every countable interval cover, as the Smith-Volterra-Cantor set does. Its construction removes a middle interval of length $4^{-n}$ at stage $n$ rather than a fixed proportion ([[def-fat-cantor-set]]).
 
-- **The correct statement is measure zero, in both directions.** That is [[thm-lebesgue-criterion]], and it explains both failures at once: $S$ is nowhere dense and not null, so $g$ is not integrable; $\mathbb{Q}\cap[0,1]$ is dense and null, so Thomae's function is integrable ([[fs-nonnegative-integrable-with-zero-integral-vanishes]]).
+- **The full criterion uses measure zero in both directions.** The choice-free [[thm-lebesgue-criterion]] explains both failures at once: $S$ is nowhere dense and not null, so $g$ is not integrable; $\mathbb{Q}\cap[0,1]$ is dense and null, so Thomae's function is integrable ([[fs-nonnegative-integrable-with-zero-integral-vanishes]]).
 
-- **Nothing here uses any choice principle.** The non-integrability of $g$ is proved directly from claim 4 of [[thm-fat-cantor-set-has-positive-measure]], which is a statement about interval covers, rather than through the forward half of [[thm-lebesgue-criterion]], which spends countable choice. See [[rem-riemann-integral-choice-ledger]].
+- **Nothing here uses any choice principle.** The non-integrability of $g$ is proved directly from claim 4 of [[thm-fat-cantor-set-has-positive-measure]], a statement about interval covers. The forward half of [[thm-lebesgue-criterion]] is now choice-free as well; see [[rem-riemann-integral-choice-ledger]].

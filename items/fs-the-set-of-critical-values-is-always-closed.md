@@ -7,15 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact,
-       cor-regular-values-form-a-dense-g-delta-set]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (fs-the-set-of-critical-values-is-always-closed). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,8 +35,6 @@ sources:
 
 **Given:** A smooth bump $\beta:\mathbb R\to\mathbb R$ supported in $[-1,1]$ with $\beta(0)=1$, $\beta'(0)=0$, and $0<\beta(t)<1$ for $0<|t|<1$, together with the smooth map $$ f(x):=\sum_{k=1}^\infty \left(1-\frac1k\right)\beta\bigl(2^k(x-k)\bigr). $$
 
-[L1] A sigma-compact set need not be closed, and regular values can be dense despite the presence of critical values accumulating at them ([[prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact]], [[cor-regular-values-form-a-dense-g-delta-set]]).
-
 ## Refutation
 **Proof technique:** direct.
 
@@ -40,4 +42,4 @@ sources:
 
 2.1 The sequence $1-\frac1k$ converges to $1$. But $f(x)\neq 1$ for every $x$, because every summand has height strictly below $1$ and outside the supports the function is $0$. Hence $1$ is a regular value with empty fibre, not a critical value. [step 1.1, algebra]
 
-3.1 Therefore the critical value set contains $\{1-\frac1k:k\ge 1\}$ but not its limit $1$, so it is not closed. This is consistent with [L1]. [L1, step 2.1] ∎
+3.1 Therefore the critical value set contains $\{1-\frac1k:k\ge 1\}$ but not its limit $1$, so it is not closed. [step 2.1] ∎

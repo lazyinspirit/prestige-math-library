@@ -2,13 +2,14 @@
 id: "ex-hypersurface-regularity-at-a-rational-point"
 kind: "example"
 title: "hypersurface regularity at a rational point"
-deps: ["thm-localisation-and-polynomial-extension-of-regular-rings", "thm-quotient-and-lifting-regularity-across-a-regular-element"]
+deps: ["thm-localisation-and-polynomial-extension-of-regular-rings", "thm-quotient-and-lifting-regularity-across-a-regular-element", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Exercise 12.17, p.117; rational-point calculation removes the unnecessary algebraic-closure hypothesis"
@@ -25,7 +26,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Example
 
-Let $k$ be any field, $a\in k^n$, and $0\ne f\in k[x_1,\ldots,x_n]$ with $f(a)=0$. The local hypersurface ring at $a$ is regular if and only if at least one formal partial derivative $\partial f/\partial x_i$ is nonzero at $a$.
+Assume the Axiom of Choice. Let $k$ be any field, $a\in k^n$, and $0\ne f\in k[x_1,\ldots,x_n]$ with $f(a)=0$. The local hypersurface ring at $a$ is regular if and only if at least one formal partial derivative $\partial f/\partial x_i$ is nonzero at $a$.
 
 ## Facts & Assumptions
 

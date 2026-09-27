@@ -32,6 +32,7 @@ import {
   syncManifestsPreservingItems,
   loadPlan,
 } from './plan-manifests.mjs';
+import { MAX_RUN_PAIRS } from './autopilot/src/capacity.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -53,7 +54,11 @@ try {
 // The owner's cap on a rescoped run (2026-08-24). A rescope replaces the run's
 // pair set wholesale, and without a ceiling a densely-blocked track could
 // expand it without bound.
-const maxPairs = Number(opt('max-pairs') ?? 27);
+const maxPairs = Number(opt('max-pairs') ?? MAX_RUN_PAIRS);
+if (!Number.isInteger(maxPairs) || maxPairs < 1 || maxPairs > MAX_RUN_PAIRS) {
+  console.error(`ERROR drift-apply-max-pairs: --max-pairs must be an integer from 1 to ${MAX_RUN_PAIRS}`);
+  process.exit(2);
+}
 // More than this many mintings means the run is aimed above its own
 // foundations, and the owner's ruling is to build the foundations instead.
 const MINT_RESCOPE_THRESHOLD = 3;

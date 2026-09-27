@@ -4,30 +4,36 @@ title: "Zeta zero count near the one line"
 kind: corollary
 status: published
 origin: pipeline
-deps: [thm-riemann-zeta-classical-zero-free-region, lem-zeta-logarithmic-derivative-zero-bound, thm-von-mangoldt-logarithmic-derivative-zeta, cor-zeta-zero-count-unit-interval]
+deps: [thm-riemann-zeta-classical-zero-free-region, lem-zeta-logarithmic-derivative-zero-bound, thm-von-mangoldt-logarithmic-derivative-zeta, cor-zeta-zero-count-unit-interval, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Theorem 6.8, p.175"
       url: https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For $t\in\mathbb R$ and $0<r\le3/4$, let $n(r;t)$ count nontrivial zeros with $|\rho-(1+it)|\le r$, including multiplicity. Then $n(r;t)=O(r\log(|t|+2))$, uniformly.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** Countable choice and the data and hypotheses of the statement.
 
 [F1] [[thm-riemann-zeta-classical-zero-free-region]]: There is an absolute $c_0>0$ such that $\zeta$ has no zeros in $\sigma\ge1-c_0/\log(|t|+2)$. The pole at $s=1$ is not a zero.
 
@@ -39,7 +45,7 @@ For $t\in\mathbb R$ and $0<r\le3/4$, let $n(r;t)$ count nontrivial zeros with $|
 
 ## Proof
 
-1.1 Write $L=\log(|t|+2)$. For a sufficiently small absolute $a>0$, $r<a/L$ makes the disc zero-free: within it $\log(|\operatorname{Im}\rho|+2)\le K L$, whereas $1-\operatorname{Re}\rho\le r$. This contradicts the region bound if a zero occurs. [F1]
+1.1 Under countable choice, the supplied zero-free region applies. Write $L=\log(|t|+2)$. For a sufficiently small absolute $a>0$, $r<a/L$ makes the disc zero-free: within it $\log(|\operatorname{Im}\rho|+2)\le K L$, whereas $1-\operatorname{Re}\rho\le r$. This contradicts the region bound if a zero occurs. [F1]
 
 2.1 For $|t|\ge3$ and $a/L\le r\le1/6$, evaluate at $s_1=1+r+it$. The Euler series gives $|\zeta'/\zeta(s_1)|=O(1/r)$, using its simple-pole expansion on the real axis. The positive real zero sum is thus $O(1/r+L)$. Every counted zero contributes at least $r/(4r^2+r^2)=1/(5r)$, since its real separation is between r and 2r and its imaginary separation at most r. Hence $n(r;t)=O(1+rL)=O(rL)$. [F2, F3, step 1.1]
 

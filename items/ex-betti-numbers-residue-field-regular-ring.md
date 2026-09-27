@@ -2,13 +2,14 @@
 id: "ex-betti-numbers-residue-field-regular-ring"
 kind: "example"
 title: "betti numbers residue field regular ring"
-deps: ["lem-regular-local-residue-field-koszul-resolution", "cor-betti-number-is-rank-in-minimal-resolution", "cor-regular-local-residue-field-projective-dimension-dimension", "thm-dimension-at-most-embedding-dimension"]
+deps: ["lem-regular-local-residue-field-koszul-resolution", "cor-betti-number-is-rank-in-minimal-resolution", "cor-regular-local-residue-field-projective-dimension-dimension", "thm-dimension-at-most-embedding-dimension", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 12.33, p.123"
@@ -25,11 +26,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Example
 
-For $R=k[x,y,z]_{(x,y,z)}$, the residue field has Betti numbers $(1,3,3,1)$ and projective dimension three.
+Assume the Axiom of Choice. For $R=k[x,y,z]_{(x,y,z)}$, the residue field has Betti numbers $(1,3,3,1)$ and projective dimension three.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the example. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the example, including the Axiom of Choice ([[def-axiom-of-choice]]); cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[lem-regular-local-residue-field-koszul-resolution]]: For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, the Koszul complex on any regular system of parameters is a minimal free resolution of $k$ of length $d$.
 

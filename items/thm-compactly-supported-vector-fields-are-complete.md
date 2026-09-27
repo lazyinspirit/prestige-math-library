@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-smooth-vector-field-as-a-tangent-bundle-section, def-complete-vector-field, thm-fundamental-theorem-on-flows, def-smooth-section-local-section-and-support, prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]
+deps: [def-countable-choice, def-smooth-vector-field-as-a-tangent-bundle-section, def-complete-vector-field, thm-fundamental-theorem-on-flows, def-smooth-section-local-section-and-support, prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (thm-compactly-supported-vector-fields-are-complete). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,11 +31,14 @@ sources:
 
 ## Statement
 
-Every compactly supported smooth vector field on a smooth manifold is complete.
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Every compactly
+supported smooth vector field on a smooth manifold is complete.
 
 ## Facts & Assumptions
 
-**Given:** A smooth vector field $X$ on $M$ with compact support $K$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth vector field $X$ on $M$ with
+compact support $K$. This assumption supplies the canonical smooth tangent
+bundle used in [[def-smooth-vector-field-as-a-tangent-bundle-section]].
 
 [L1] A vector field is complete if and only if its maximal flow is global ([[prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]]).
 

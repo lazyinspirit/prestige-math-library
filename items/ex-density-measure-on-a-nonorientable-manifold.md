@@ -4,26 +4,27 @@ title: "Flat Mobius strip density measure"
 kind: example
 status: published
 origin: pipeline
-deps: ["thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-density-measure-is-independent-of-the-chart-gluing", "fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold", "thm-lebesgue-measure-of-a-box-of-every-kind", "fs-orientation-is-required-for-a-density-measure"]
+deps: ["def-countable-choice", "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-density-measure-is-independent-of-the-chart-gluing", "fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold", "thm-lebesgue-measure-of-a-box-of-every-kind", "fs-orientation-is-required-for-a-density-measure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: "Lee Proposition 16.45 and proof pp.432\u2013433, specialized to the explicit flat strip"
       url: "https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf"
 proof_strategy: direct
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (ex-density-measure-on-a-nonorientable-manifold). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
 
-Let $M=(\mathbb R\times(-1,1))/\langle T\rangle$, $T(s,t)=(s+1,-t)$, be the open Möbius strip. The quadratic form $ds^2+dt^2$ and density $|ds\,dt|$ descend to $M$. The density takes value one on every orthonormal frame of this metric, defines a Radon measure, and has total mass two.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $M=(\mathbb R\times(-1,1))/\langle T\rangle$, $T(s,t)=(s+1,-t)$, be the open Möbius strip. The quadratic form $ds^2+dt^2$ and density $|ds\,dt|$ descend to $M$. The density takes value one on every orthonormal frame of this metric, defines a Radon measure, and has total mass two.
 
 ## Facts & Assumptions
 
@@ -33,7 +34,7 @@ Let $M=(\mathbb R\times(-1,1))/\langle T\rangle$, $T(s,t)=(s+1,-t)$, be the open
 
 [F2] [[thm-density-measure-is-independent-of-the-chart-gluing]]: Borel subsets of a chart have coefficient integrals.
 
-[F3] [[thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure]]: Finite positive smooth coefficients define a Radon measure.
+[F3] [[thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure]]: Under the displayed $\mathrm{AC}_\omega$ premise, finite positive smooth coefficients define a Radon measure.
 
 [F4] [[thm-lebesgue-measure-of-a-box-of-every-kind]]: Rectangles have their geometric area and degenerate rectangles are null.
 

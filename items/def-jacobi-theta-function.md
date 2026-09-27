@@ -7,14 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-complex-exponential]
+deps: [def-complex-exponential, thm-complex-exponential-addition-and-real-extension, def-pi-via-first-positive-cosine-zero, cor-exponential-reciprocal-and-positivity, thm-exponential-is-strictly-increasing, thm-exponential-addition-formula, thm-geometric-series]
 verification:
-  audited: 2026-09-04
+  audited: 2026-09-27
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
 sources:
   references:
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis, Ch. 6 §2.1"

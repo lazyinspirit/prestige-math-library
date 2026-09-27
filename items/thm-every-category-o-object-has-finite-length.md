@@ -2,13 +2,7 @@
 id: "thm-every-category-o-object-has-finite-length"
 kind: "theorem"
 title: "Every object of O has finite length"
-deps: ["lem-finite-dot-orbit-weight-spaces-detect-o-subquotients", "thm-category-o-decomposes-by-generalized-central-character", "prop-equivalent-support-description-of-category-o", "lem-n-plus-invariants-exist-in-every-nonzero-o-module", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-finite-dot-orbit-weight-spaces-detect-o-subquotients", "thm-category-o-decomposes-by-generalized-central-character", "prop-equivalent-support-description-of-category-o", "lem-n-plus-invariants-exist-in-every-nonzero-o-module", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar"]
 sources:
   references:
     - title: "Lecture 6 §2 Theorem 2.4 and proof, pp.5–6"
@@ -19,9 +13,18 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Sum the finite detector bounds over central summands. Refine a chain until no refinement is possible; the bound forces finite termination and all factors are simple"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-every-category-o-object-has-finite-length). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -29,9 +32,9 @@ Every object of $\mathcal O$ has a finite composition series and is both Noether
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
-[F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Suppose $M\in\mathcal O_{\chi_\lambda}$. Every nonzero subquotient $T$ of $M$ has $T_\mu\ne0$ for some $\mu\in W\cdot\lambda$. In particular the number of strict inclusions in any finite chain of submodules of $M$ is at most $$d_\lambda(M)=\sum_{\mu\in W\cdot\lambda}\dim M_\mu,$$ where distinct weights in the orbit are counted once. ([[lem-finite-dot-orbit-weight-spaces-detect-o-subquotients]])
+[F1] Under the Axiom of Choice, fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Suppose $M\in\mathcal O_{\chi_\lambda}$. Every nonzero subquotient $T$ of $M$ has $T_\mu\ne0$ for some $\mu\in W\cdot\lambda$. In particular the number of strict inclusions in any finite chain of submodules of $M$ is at most $$d_\lambda(M)=\sum_{\mu\in W\cdot\lambda}\dim M_\mu,$$ where distinct weights in the orbit are counted once. ([[lem-finite-dot-orbit-weight-spaces-detect-o-subquotients]])
 
 [F2] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. The category is the categorical direct sum $\mathcal O=\bigoplus_\chi\mathcal O_\chi$: objects have finite support in the index $\chi$, morphisms between distinct components vanish, and the canonical component projections are exact. ([[thm-category-o-decomposes-by-generalized-central-character]])
 

@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function,
        thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set,
+       def-countable-choice,
        def-smooth-manifold,
        lem-smooth-maps-paste-over-an-open-cover]
 justified_by: []
@@ -16,8 +17,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -29,7 +34,7 @@ sources:
 
 ## Statement
 
-Let $M^n$ be a noncompact smooth manifold. Then there exist a smooth proper
+Assume countable choice. Let $M^n$ be a noncompact smooth manifold. Then there exist a smooth proper
 function $\rho:M\to\mathbb R$, compact bands
 $$K_m:=\rho^{-1}\bigl([m-1,m+2]\bigr)\qquad(m\ge 1),$$
 and smooth maps $H_m:M\to\mathbb R^{Q_m}$ such that:
@@ -42,7 +47,7 @@ and smooth maps $H_m:M\to\mathbb R^{Q_m}$ such that:
 
 ## Facts & Assumptions
 
-**Given:** A noncompact smooth $n$-manifold $M$.
+**Given:** Countable choice and a noncompact smooth $n$-manifold $M$.
 
 [L1] The manifold admits a smooth proper exhaustion function $\rho:M\to\mathbb R$ ([[thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]]).
 
@@ -59,7 +64,7 @@ and smooth maps $H_m:M\to\mathbb R^{Q_m}$ such that:
 
 2.1 Put $O_m:=\rho^{-1}((m-5/4,m+9/4))$. Then $K_m\subseteq O_m$, and $O_m\cap O_{m'}=\varnothing$ for distinct congruent indices modulo $4$. If $K_m=\varnothing$, take $Q_m=1$ and $H_m=0$; all four requirements for this index are then immediate. Henceforth suppose $K_m\ne\varnothing$. [step 1.1, construct]
 
-3.1 For every $p\in K_m$, a chart from [F1] can be shrunk over a Euclidean ball to a coordinate domain $(U,x)$ with $p\in U$, compact closure, and $\overline U\subseteq O_m$. Applying [L2] to $\{p\}\subseteq U$ gives a smooth $\phi:M\to[0,1]$ supported in $U$ and equal to $1$ on an open neighbourhood $V$ of $p$. The collection of all plateau neighbourhoods $V$ obtainable in this way covers $K_m$, so compactness selects finitely many data $(U_{mj},x_{mj},\phi_{mj},V_{mj})$, $1\le j\le r_m$, whose $V_{mj}$ cover $K_m$. [F1, L2, step 2.1, choose]
+3.1 For every $p\in K_m$, a chart from [F1] can be shrunk over a Euclidean ball to a coordinate domain $(U,x)$ with $p\in U$, compact closure, and $\overline U\subseteq O_m$. Applying [L2] under countable choice to $\{p\}\subseteq U$ gives a smooth $\phi:M\to[0,1]$ supported in $U$ and equal to $1$ on an open neighbourhood $V$ of $p$. The collection of all plateau neighbourhoods $V$ obtainable in this way covers $K_m$, so compactness gives a finite covering list of data $(U_{mj},x_{mj},\phi_{mj},V_{mj})$, $1\le j\le r_m$. Countable choice selects one such list for each nonempty band $K_m$. [F1, L2, step 2.1, choose]
 
 4.1 For each selected datum define a global block $B_{mj}:M\to\mathbb R^{n+1}$ by $$B_{mj}(q):=\begin{cases}(\phi_{mj}(q),\,\phi_{mj}(q)x_{mj}(q)),&q\in U_{mj},\\0,&q\notin U_{mj}.\end{cases}$$ On the open cover $U_{mj}\cup(M\setminus\operatorname{supp}(\phi_{mj}))$ the two formulas are smooth and agree on the overlap, so [L3] makes $B_{mj}$ smooth. Set $H'_m:=(B_{m1},\ldots,B_{mr_m}):M\to\mathbb R^{r_m(n+1)}$. Its support lies in the finite union of the compact sets $\operatorname{supp}(\phi_{mj})\subseteq O_m$. [F1, L3, step 3.1, construct]
 

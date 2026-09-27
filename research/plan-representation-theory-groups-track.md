@@ -395,7 +395,9 @@ proved, including $N=1$, $N=G$, inertia $N$, and inertia $G$.
 
 **A page:** `projective-extensions-and-the-little-group-method`
 
-**Requires:** RG-4; group extensions and quotient groups from abstract algebra.
+**Requires:** RG-4; group extensions and quotient groups from abstract algebra;
+the published `second-cohomology-and-abelian-kernel-extensions` page for
+normalized cocycles, coboundaries, and the factor-set model of $H^2$.
 General Schur multipliers and universal central extensions are not required.
 
 **Source backing read:** Späth §1.A–§1.B, printed pp. 2–6; tom Dieck
@@ -2670,7 +2672,7 @@ the three displayed A ids, never their companions.  This table replaces all
 | new Galois-orbit supplier of §15.4 | `chain-conditions-and-semisimple-modules`; `the-galois-correspondence`; `tensor-products-of-modules`; `the-group-algebra-and-representations`; `maschkes-theorem-and-complete-reducibility` |
 | `schur-indices-and-fields-of-definition` | preceding Brauer A; the new Galois-orbit A; `field-extensions-and-the-complex-numbers`; `algebraic-extensions-degree-and-finite-fields`; `the-galois-correspondence`; `tensor-products-of-modules`; `chain-conditions-and-semisimple-modules` |
 | `clifford-theory-over-normal-subgroups` | the four abstract representation A pages; `normal-subgroups-and-quotient-groups`; `tensor-products-of-modules` |
-| `projective-extensions-and-the-little-group-method` | preceding Clifford A; `group-extensions-complements-and-schur-zassenhaus`; `normal-subgroups-and-quotient-groups` |
+| `projective-extensions-and-the-little-group-method` | preceding Clifford A; `group-extensions-complements-and-schur-zassenhaus`; `normal-subgroups-and-quotient-groups`; `second-cohomology-and-abelian-kernel-extensions` |
 | `monomial-characters-and-m-groups` | Brauer A; Clifford A; `induced-representations-and-frobenius-reciprocity` |
 | `frobenius-groups-and-the-normal-complement-theorem` | Clifford A; `characters-and-the-orthogonality-relations`; `induced-representations-and-frobenius-reciprocity`; `sylow-theorems-and-nilpotent-groups`; `normal-subgroups-and-quotient-groups` |
 | `young-diagrams-tableaux-and-permutation-modules` | `group-actions-and-cayleys-theorem`; `induced-representations-and-frobenius-reciprocity` |

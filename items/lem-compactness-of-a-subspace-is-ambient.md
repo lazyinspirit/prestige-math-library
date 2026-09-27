@@ -14,13 +14,12 @@ landmark: true
 short: "compactness read in the ambient space"
 proof_strategy: direct
 verification:
-  precheck: pass
   verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -88,7 +87,7 @@ anywhere below; the one place a selection is made is over a finite index set, an
 
 8.1 Putting $G_j := W_j \cap A$ for $j \le m$ gives members of $\mathcal{G}$ with $A = (W_0 \cap A) \cup \dots \cup (W_m \cap A) = G_0 \cup \dots \cup G_m$, so $\mathcal{G}$ has a finite subcover and $(A, \mathcal{T}_A)$ is compact. [L2, step 7.1]
 
-9.1 Claim 2 is proved by steps 4.1 and 8.1, and claim 1 is the special case of claim 2 in which $I = \mathcal{U}$ is a family of open subsets of $X$ and $U_i := i$, the conclusion of claim 2 then naming members of $\mathcal{U}$ itself. [step 4.1, step 8.1] ∎
+9.1 Claim 2 is proved by steps 4.1 and 8.1, and it implies claim 1 by taking $I=\mathcal U$ and $U_i=i$. Conversely, assume the ambient-cover condition of claim 1 and take an indexed cover $(U_i)_{i\in I}$ of a nonempty $A$. Its image $\mathcal U=\{U_i:i\in I\}$ is an ambient open cover, so claim 1 gives finitely many members $V_0,\ldots,V_m$ covering $A$. For each $j\le m$ the index fibre $\{i\in I:U_i=V_j\}$ is nonempty; [L3] chooses one index from each of these finitely many fibres. The chosen indexed members cover $A$. For $A=\varnothing$ both claims use their empty-set alternative. Thus claim 1 implies claim 2 as well. [step 4.1, step 8.1, L3, algebra] ∎
 
 ## Remarks
 

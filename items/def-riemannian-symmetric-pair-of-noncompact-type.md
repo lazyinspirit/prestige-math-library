@@ -5,7 +5,7 @@ title: Riemannian symmetric pair of noncompact type
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-homogeneous-space-of-a-lie-group]
+deps: [def-axiom-of-choice, def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, def-homogeneous-space-of-a-lie-group]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,10 +19,21 @@ sources:
       locator: "Lecture 43, §§43.1-43.6, printed pp. 217-222"
 landmark: false
 verification:
-  audited: 2026-09-22
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-10-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Definition
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]) for the global
+Lie-group, compactness, quotient and metric assertions below. The
+finite-dimensional Lie-algebra data themselves require no choice principle.
 
 A **Riemannian symmetric pair of noncompact type** is a pair $(G,K)$ together
 with a global Cartan involution $\Theta$ of $G$, in the following sense.

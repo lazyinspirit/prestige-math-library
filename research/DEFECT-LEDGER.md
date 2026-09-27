@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ f992d7fa5a69 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 7ac601de3f13 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 10121 |
+| defects caught before publication | 10438 |
 | now mechanically prevented | 371 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -595,6 +595,34 @@
 | false-claim | 1 |  |  |  |
 | missing-map |  |  |  | 1 |
 | unsupported-inference |  |  |  | 1 |
+
+## frontier-35-ten-categories — 317 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|
+| false-or-overstrong-statement | 37 | 1 | 49 |
+| invalid-inference | 20 | 1 | 32 |
+| other | 44 |  |  |
+| citation-inaccurate | 6 | 6 | 28 |
+| unlicensed-inference | 16 |  |  |
+| missing-choice-scope | 1 | 11 |  |
+| false-claim | 9 | 2 |  |
+| unsupported-inference |  | 8 |  |
+| arithmetic-error | 6 | 1 |  |
+| ill-typed-claim | 5 | 2 |  |
+| undefined-notation |  | 7 |  |
+| ill-typed-construction | 2 | 3 |  |
+| missing-hypothesis | 3 | 1 |  |
+| ill-formed | 2 |  |  |
+| citation-inflated | 1 | 1 |  |
+| citation-misattributed |  | 2 |  |
+| citation-missing |  | 2 |  |
+| false-or-overstrong-title |  | 2 |  |
+| missing-case |  | 2 |  |
+| overstrong-title-or-statement | 1 |  |  |
+| invalid-witness | 1 |  |  |
+| invalid-refutation | 1 |  |  |
+| false-computation |  | 1 |  |
 
 ## phase-2-catchup-24 — 14 row(s)
 

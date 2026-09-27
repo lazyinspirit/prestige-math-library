@@ -6,6 +6,7 @@ items: [def-riemannian-gradient-of-a-smooth-function, lem-riemannian-gradient-va
 examples: []
 ---
 
-The descending equation fixes the trajectory orientation. Compactness supplies
-flow completeness, tail-limit compactness, and critical-point finiteness in
-separate steps; it is not silently inherited by noncompact applications.
+The descending equation fixes the trajectory orientation. Under Countable Choice
+($\mathrm{AC}_\omega$), compactness supplies flow completeness; tail-limit
+compactness and critical-point finiteness are established separately. These
+compactness conclusions are not silently inherited by noncompact applications.

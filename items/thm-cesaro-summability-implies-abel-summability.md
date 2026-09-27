@@ -10,12 +10,12 @@ provenance:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (thm-cesaro-summability-implies-abel-summability). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."
@@ -26,7 +26,7 @@ sources:
 
 ## Statement
 
-Let $f:\mathbb R\to\mathbb C$ be one-periodic with $f|_{[0,1]}\in L^1([0,1])$,
+Assume the Axiom of Countable Choice. Let $f:\mathbb R\to\mathbb C$ be one-periodic with $f|_{[0,1]}\in L^1([0,1])$,
 and let $x,s\in\mathbb R$. If
 
 $$\sigma_Nf(x)\longrightarrow s \qquad (N\to\infty),$$
@@ -37,7 +37,7 @@ $$A_rf(x)\longrightarrow s \qquad (r\uparrow1).$$
 
 ## Facts & Assumptions
 
-**Given:** A one-periodic integrable function $f$, a point $x\in\mathbb R$, and a scalar $s$ such that $\sigma_Nf(x)\to s$.
+**Given:** Countable Choice, a one-periodic integrable function $f$, a point $x\in\mathbb R$, and a scalar $s$ such that $\sigma_Nf(x)\to s$.
 
 [L1] The Cesaro means and Abel means are defined in [[def-cesaro-and-abel-means-of-a-fourier-series]].
 

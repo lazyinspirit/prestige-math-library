@@ -15,12 +15,12 @@ sources:
     - title: "MIT 6.045J / 18.400J, Lecture 16: More NP-completeness"
       url: "https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/567d75f927ca3c11a819baee9ab260ac_MIT6_045JS11_lec16.pdf"
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 ---
 
 ## Statement
@@ -42,7 +42,7 @@ Hamiltonian cycle.
 
 **Proof technique:** direct.
 
-1.1 If $|V|\le 1$, decide directly whether $D$ has a directed Hamiltonian cycle and map it to a fixed yes-instance or no-instance of undirected Hamiltonian cycle accordingly. Thus it is enough to treat the case $|V|\ge 2$. Delete every loop, since a Hamiltonian cycle through at least two distinct vertices cannot use a loop. For each vertex $v\in V$, create three undirected vertices $v_1,v_2,v_3$ and the two edges $v_1v_2$ and $v_2v_3$. For each arc $(u,v)\in A$ with $u\ne v$, add the undirected edge $u_3v_1$. Call the resulting graph $G_D$. [F1, F2, given, construct]
+1.1 Use adjacency-matrix encodings of finite directed and undirected graphs. Matrix dimensions and entries are checked in polynomial time; a malformed source word denotes no instance and is sent to the fixed undirected no-instance consisting of one isolated vertex. If a valid $D$ has $|V|\le 1$, decide directly whether it has a directed Hamiltonian cycle and map it to the triangle as a fixed yes-instance or to that no-instance accordingly. Thus it is enough to treat the case $|V|\ge 2$. Delete every loop, since a Hamiltonian cycle through at least two distinct vertices cannot use a loop. For each vertex $v\in V$, create three undirected vertices $v_1,v_2,v_3$ and the two edges $v_1v_2$ and $v_2v_3$. For each arc $(u,v)\in A$ with $u\ne v$, add the undirected edge $u_3v_1$. Call the resulting graph $G_D$. [F1, F2, given, construct]
 
 2.1 In any Hamiltonian cycle of $G_D$, the middle vertex $v_2$ has degree two, so the cycle must traverse the gadget for $v$ as the consecutive path $v_1,v_2,v_3$ or as the consecutive path $v_3,v_2,v_1$. Moreover, every external gadget edge joins a $3$-vertex to a $1$-vertex. Hence, after orienting the cycle, once one gadget is traversed in one of those two directions, every subsequent gadget is forced to be traversed in the same direction around the cycle. [step 1.1, F1]
 

@@ -7,13 +7,17 @@ origin: pipeline
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-commutative-ring, def-left-and-right-modules, def-submodule, def-generated-cyclic-finitely-generated-and-free-modules]
+deps: [def-commutative-ring, def-left-and-right-modules, def-submodule, def-generated-cyclic-finitely-generated-and-free-modules, def-dependent-choice]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-08-28
-  precheck: n/a
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -36,6 +40,9 @@ The module $M$ is **Noetherian** if every submodule of $M$
 The ring $R$ is **Noetherian** if its regular module ${}_RR$ is Noetherian.
 Equivalently, every ideal of $R$ is finitely generated.
 
-For later contradiction arguments, we also use the standard equivalent
-reformulation: a module or ring is Noetherian exactly when every ascending chain
-of submodules or ideals stabilizes.
+Under Dependent Choice ([[def-dependent-choice]]), this is equivalent to every
+ascending chain of submodules or ideals stabilizing. The forward implication is
+choice-free: the union of a nonstabilizing ascending chain cannot be finitely
+generated. Conversely, from a submodule that is not finitely generated,
+Dependent Choice successively selects an element outside the span of those
+already selected, producing a nonstabilizing ascending chain.

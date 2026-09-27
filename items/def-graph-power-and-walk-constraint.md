@@ -9,11 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  audited: 2026-09-26
 sources:
   references:
     - title: "Irit Dinur, The PCP theorem by gap amplification; §1.2 Powering, pp4–5; underlying walk edges and original constraints."
@@ -22,6 +18,6 @@ sources:
 
 ## Definition
 
-For a $d$-regular constraint graph with normalized adjacency $M$ under [[def-constraint-graph-and-labeling-value]], and an integer $t\ge1$, the adjacency-slot graph power has one slot for every length-$t$ port walk. Its degree is $d^t$, its adjacency is $A^t$, and its transition matrix is $M^t$: matrix multiplication counts walks with all multiplicities. Walk reversal supplies an inverse slot.
+For a $d$-regular constraint graph with normalized adjacency $M$ under [[def-constraint-graph-and-labeling-value]], and an integer $t\ge1$, the adjacency-slot graph power has one slot for every length-$t$ port walk. Its degree is $d^t$, its adjacency is $A^t$, and its transition matrix is $M^t$: matrix multiplication counts walks with all multiplicities. Walk reversal is an involution on slots, but a backtracking walk may be fixed by reversal. If distinct paired incidence slots are required for an ordinary undirected multigraph, duplicate every walk slot; the resulting graph has adjacency $2A^t$, degree $2d^t$, and the same transition matrix $M^t$.
 
 The predicate of a walk $(v_0,e_1,v_1,\ldots,e_t,v_t)$ tests every original edge relation on the labels of its incident vertex occurrences. Repeated occurrences of one vertex use the same label. Thus it is a conjunction of $t$ tests, on at most $t+1$ original vertices; it is not in general a binary predicate on endpoint letters. A fixed labeling satisfies the walk predicate exactly when none of the traversed edges is violated.

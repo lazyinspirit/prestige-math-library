@@ -11,8 +11,13 @@ provenance:
 deps: [cor-reverse-fatou-lemma-under-an-integrable-majorant, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-integral-triangle-inequality, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-integral-over-a-null-set-vanishes, cor-finite-nonnegative-integral-implies-finite-almost-everywhere, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (thm-dominated-convergence). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -54,7 +59,7 @@ $$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
 
 **Proof technique:** direct.
 
-1.1 Let $N_0$ be a measurable null set outside which $f_n(x)\to f(x)$ and $|f_n(x)|\le g(x)$, and let $N_\infty:=\{g=\infty\}$. By [L6], the set $N_\infty$ is null. Put $N:=N_0\cup N_\infty$, $E:=X\setminus N$, $$\widetilde g:=g\chi_E,\qquad h_n:=|f_n-f|\chi_E.$$ Then $h_n\to0$ pointwise, $0\le h_n\le2\widetilde g$, and $\widetilde g$ is nonnegative, measurable, and finite everywhere. Also $$|f|\le|f|\chi_N+\widetilde g.$$ By [L5] and [L7], $$\int|f|\,d\mu\le\int|f|\chi_N\,d\mu+\int\widetilde g\,d\mu =0+\int\widetilde g\,d\mu\le\int g\,d\mu<+\infty,$$ so $f\in L^1(\mu)$ by [L4]. [L4, L5, L6, L7, given]
+1.1 Let $N_0$ be a measurable null set outside which $f_n(x)\to f(x)$ and $|f_n(x)|\le g(x)$ for every $n$, and let $N_\infty:=\{g=\infty\}$. By [L6], the set $N_\infty$ is null. Put $N:=N_0\cup N_\infty$, $E:=X\setminus N$, $$\widetilde g:=g\chi_E,\qquad h_n:=|f_n-f|\chi_E.$$ Then $h_n\to0$ pointwise, $0\le h_n\le2\widetilde g$, and $\widetilde g$ is nonnegative, measurable, and finite everywhere. Also $$|f|\le|f|\chi_N+\widetilde g.$$ By [L5] and [L7], $$\int|f|\,d\mu\le\int|f|\chi_N\,d\mu+\int\widetilde g\,d\mu =0+\int\widetilde g\,d\mu\le\int g\,d\mu<+\infty,$$ so $f\in L^1(\mu)$ by [L4]. The same null-set and domination argument gives $\int|f_n|\,d\mu\le\int g\,d\mu<\infty$ for each $n$, so every $f_n$ also belongs to $L^1(\mu)$. [L4, L5, L6, L7, given]
 
 2.1 The functions $h_n$ are nonnegative, converge pointwise to $0$, and are dominated by the finite everywhere majorant $2\widetilde g$. Applying [L1] therefore gives $$\limsup_n\int h_n\,d\mu\le\int0\,d\mu=0.$$ Hence $\int h_n\,d\mu\to0$. [step 1.1, L1]
 

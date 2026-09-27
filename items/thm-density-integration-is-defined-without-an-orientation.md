@@ -4,16 +4,17 @@ title: "Orientation-free density integration and its properties"
 kind: theorem
 status: published
 origin: pipeline
-deps: ["def-integral-of-a-compactly-supported-smooth-density", "prop-density-pullback-under-local-diffeomorphisms", "thm-oriented-chart-integrals-are-coordinate-independent", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-multidimensional-integral-properties", "prop-integration-of-top-forms-by-finite-parametrizations"]
+deps: ["def-countable-choice", "def-integral-of-a-compactly-supported-smooth-density", "prop-density-pullback-under-local-diffeomorphisms", "thm-oriented-chart-integrals-are-coordinate-independent", "lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form", "thm-multidimensional-integral-properties", "prop-integration-of-top-forms-by-finite-parametrizations"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Lee Propositions 16.41–16.42 and Exercises 16.43–16.44, pp.431–432; Nicolaescu Proposition 3.4.3"
@@ -22,9 +23,11 @@ proof_strategy: "Direct calculation and localization"
 ---
 ## Statement
 
-Compactly supported smooth density integration is independent of charts and partition, linear, local, nonnegative on nonnegative densities and strictly positive for a nonzero nonnegative density. It is invariant under every diffeomorphism, without choosing an orientation. The finite-parametrization formula holds under the hypotheses of [[prop-integration-of-top-forms-by-finite-parametrizations]], with orientation preservation omitted and absolute Jacobians used.
+Assume countable choice $\mathrm{AC}_\omega$. Compactly supported smooth density integration is independent of charts and partition, linear, local, nonnegative on nonnegative densities and strictly positive for a nonzero nonnegative density. It is invariant under every diffeomorphism, without choosing an orientation. The finite-parametrization formula holds under the hypotheses of [[prop-integration-of-top-forms-by-finite-parametrizations]], with orientation preservation omitted and absolute Jacobians used.
 
 ## Facts & Assumptions
+
+[A1] Countable choice is [[def-countable-choice]]; it supplies the premise of the density integral in [F1].
 
 [F1] [[def-integral-of-a-compactly-supported-smooth-density]]: Assume $\mathrm{AC}_\omega$. Let $\delta$ be a compactly supported smooth density on $M^n$, with boundary allowed. Choose a chart partition $(\rho_i)$ and write $\rho_i\delta=f_i|dx_i|$. For $n\geq1$ define $$\int_M\delta=\sum_i\int_{\mathbb R^n}\widetilde f_i(x_i)\,dx_i.$$ The zero extensions are Riemann integrable, including at genuine faces, by lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions. The compact-support/local-finiteness argument of lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form applies to density supports as closed sets, so the sum is finite. For $n=0$ sum the scalar density values over the finite support, without orientation signs. Empty support gives zero. Choice independence is discharged by thm-density-integration-is-defined-without-an-orientation.
 
@@ -40,11 +43,11 @@ Compactly supported smooth density integration is independent of charts and part
 
 ## Proof
 
-**Given:** The objects and hypotheses in the statement above.
+**Given:** Countable choice and the objects and hypotheses in the statement above.
 
 1.1 For a coordinate transition $G$, the coefficient law is $f_x=(f_y\circ G)|\det DG|$. On its local Euclidean extension neighborhoods, precisely the zero-extension change-of-variables argument used to prove chart independence of form integrals applies. The absolute determinant is already present, so no sign is inserted. This gives equality of each chart-supported density integral even at genuine faces. [F2, F3]
 
-2.1 For two partitions $(\rho_i)$ and $(\tau_j)$ near the compact support, all relevant sums are finite. Expand each original sum using the products $\rho_i\tau_j$; each product is chart-supported and has the same integral in either chart by the previous step. Both sums equal the same double sum. Restricting the charts to an open neighborhood of the support proves locality. [F1, F4, step 1.1]
+2.1 Under [A1], the integrals in [F1] are defined. For two partitions $(\rho_i)$ and $(\tau_j)$ near the compact support, all relevant sums are finite. Expand each original sum using the products $\rho_i\tau_j$; each product is chart-supported and has the same integral in either chart by the previous step. Both sums equal the same double sum. Restricting the charts to an open neighborhood of the support proves locality. [A1, F1, F4, step 1.1]
 
 3.1 A common partition and Riemann linearity prove linearity. Nonnegative coefficients give nonnegative chart integrals. For a nonzero nonnegative density some weighted coefficient is positive at a point, hence bounded below by a positive constant on a small positive-volume rectangle inside a ball or half-ball. Its integral is positive by monotonicity and all remaining summands are nonnegative. [F5, step 2.1]
 

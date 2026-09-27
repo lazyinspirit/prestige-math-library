@@ -12,8 +12,12 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -52,7 +56,7 @@ is finite and generates $G$.
 
 1.1 The set $S$ is finite because the action is proper by [L1], the singleton $\{x_0\}$ and the ball $\{y : d_X(x_0,y) \le 2D+1\}$ are bounded, and $S$ is exactly the transporter set from the first to the second. [L1]
 
-1.2 Let $g \in G$. By [L2], choose a geodesic $\gamma : [0,\ell] \to X$ from $x_0$ to $g \cdot x_0$, where $\ell = d_X(x_0,\ g \cdot x_0)$. By [L3] and [L4], let $m$ be the least natural number with $\ell \le m$. Put $p_i := \gamma(i\ell/m)$ for $0 \le i \le m$. Then $d_X(p_{i-1},p_i)=\ell/m \le 1$ for each $i$. [L2, L3, L4, choose]
+1.2 Let $g \in G$. By [L2], choose a geodesic $\gamma : [0,\ell] \to X$ from $x_0$ to $g \cdot x_0$, where $\ell = d_X(x_0,\ g \cdot x_0)$. By [L3] and [L4], let $m$ be the least **positive** natural number with $\ell \le m$. Thus $m\ge1$ even when $g\cdot x_0=x_0$. Put $p_i := \gamma(i\ell/m)$ for $0 \le i \le m$. Then $d_X(p_{i-1},p_i)=\ell/m \le 1$ for each $i$. [L2, L3, L4, choose]
 
 2.1 For each $i$, choose $g_i \in G$ with $d_X(p_i,\ g_i \cdot x_0) \le D$, and arrange $g_0 = e$ and $g_m = g$. This is possible because $p_0=x_0$ and $p_m=g \cdot x_0$. [given, step 1.2, choose]
 

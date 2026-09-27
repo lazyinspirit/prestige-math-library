@@ -6,15 +6,12 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: literature-derived
-deps: [cor-noetherian-local-domain-dimension-zero-iff-field, def-system-of-parameters-and-parameter-ideal, lem-parameter-ideal-equivalent-m-primary, thm-dimension-as-minimal-number-of-radical-generators]
+  proof: ai-altered
+deps: [cor-localisation-dimension-does-not-increase, def-system-of-parameters-and-parameter-ideal, thm-affine-domain-dimension-transcendence-degree]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -23,6 +20,15 @@ sources:
     - title: "Melvin Hochster, Dimension theory and systems of parameters"
       url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
@@ -36,20 +42,18 @@ Then $R$ has dimension $1$, the ideal $(\bar x)$ is a parameter ideal, but the m
 
 **Given:** A field $k$ and the cusp local ring $R=k[x,y]_{(x,y)}/(y^2-x^3)$ with maximal ideal $\mathfrak m=(\bar x,\bar y)$.
 
-[L1] A parameter ideal in a one-dimensional local ring is exactly a one-generated ideal with maximal radical ([[def-system-of-parameters-and-parameter-ideal]], [[lem-parameter-ideal-equivalent-m-primary]]).
+[L1] By definition, a one-element tuple in a one-dimensional local ring is a system of parameters when its generated ideal has maximal radical ([[def-system-of-parameters-and-parameter-ideal]]).
 
-[L2] The dimension of a Noetherian local ring is the least number of generators of an ideal with maximal radical ([[thm-dimension-as-minimal-number-of-radical-generators]]).
-
-[L3] A Noetherian local domain has dimension zero exactly when it is a field ([[cor-noetherian-local-domain-dimension-zero-iff-field]]).
+[L2] For a finite-type $k$-domain, dimension equals fraction-field transcendence degree ([[thm-affine-domain-dimension-transcendence-degree]]), and localization does not increase dimension ([[cor-localisation-dimension-does-not-increase]]).
 
 ## Verification
 
 **Proof technique:** direct computation.
 
-1.1 The quotient $R/(\bar x)\cong k[y]_{(y)}/(y^2)$ is Artinian local, so $(\bar x)$ has radical $\mathfrak m$. Thus there exists a one-generated ideal with maximal radical, and [L2] gives $\dim R\le1$. [L2, given]
+1.1 Put $T=k[x,y]/(y^2-x^3)$. Division by the monic polynomial in $y$ writes every element uniquely as $a(x)+yb(x)$; substituting $x=t^2$, $y=t^3$ maps this to $a(t^2)+t^3b(t^2)$, whose even and odd powers cannot cancel. Thus $T$ embeds in $k[t]$ and is a domain. Its fraction field is algebraic over $k(x)$ because $y^2=x^3$, so [L2] gives $\dim T=1$; localizing at $(x,y)$ gives $\dim R\le1$. Also $R/(\bar x)\cong k[y]_{(y)}/(y^2)$ is Artinian local, so $(\bar x)$ has radical $\mathfrak m$. [L2, given, algebra]
 
 1.2 If $\mathfrak m$ were principal, then $\mathfrak m/\mathfrak m^2$ would be one-dimensional over the residue field. But the classes of $\bar x$ and $\bar y$ are linearly independent modulo $\mathfrak m^2$, so $\mathfrak m$ is not principal. In particular $\mathfrak m\neq(0)$, so $R$ is not a field. [given, algebra]
 
-2.1 Since $R$ is a local domain and not a field, [L3] shows that $\dim R\neq0$. Together with step 1.1, this forces $\dim R=1$. Then [L1] makes $(\bar x)$ a parameter ideal. [L1, L3, step 1.1, step 1.2]
+2.1 The ring $R$ is a domain by step 1.1, so $(0)$ is prime. Its nonzero maximal ideal $\mathfrak m$ from step 1.2 gives a strict prime chain $(0)\subsetneq\mathfrak m$, hence $\dim R\ge1$ directly. Together with $\dim R\le1$ from step 1.1, this forces $\dim R=1$. Then [L1] makes $(\bar x)$ a parameter ideal. [L1, step 1.1, step 1.2, algebra]
 
 3.1 Therefore $(\bar x)$ is a parameter ideal while $\mathfrak m$ is not principal, so a system of parameters need not minimally generate the maximal ideal. [step 1.2, step 2.1] ∎

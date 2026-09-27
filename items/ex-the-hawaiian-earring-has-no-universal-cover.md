@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -47,13 +51,13 @@ The Hawaiian earring is locally path-connected but is not semilocally simply con
 
 **Proof technique:** direct.
 
-1.1 Model the earring as countably many copies of $\mathbb R/\mathbb Z$ with diameters tending to zero and all zero classes identified, using the standard shrinking-wedge metric. [given, F1]
+1.1 Model the earring in $\mathbb R^2$ as $H=\bigcup_{n\ge1}C_n$, where $C_n$ is the circle of radius $1/n$ centered at $(1/n,0)$ and all circles meet at $o=(0,0)$. Their diameters tend to zero. Each $C_n$ is homeomorphic to $\mathbb R/\mathbb Z$, with the unit loop based at $o$. [given, F1]
 
 2.1 Away from the wedge point, sufficiently short open arcs are path-connected neighbourhoods. [step 1.1, F3, F2]
 
-3.1 At the wedge point, every open neighbourhood contains a smaller metric ball whose intersection with each circle is an arc through the wedge point and which contains every sufficiently small circle, so that ball is path-connected. [step 2.1, F3, F2, F4]
+3.1 At the wedge point, every open neighbourhood contains a smaller metric ball whose intersection with each circle is either an arc through the wedge point or the whole circle. It contains every sufficiently small circle, and all these pieces share the wedge point, so the ball is path-connected. [step 1.1, step 2.1]
 
-4.1 Retraction to one such small circle and the essential unit loop show its inclusion carries a nontrivial loop, so semilocal simple connectedness fails at the wedge point. [step 3.1, F1, F2, F3]
+4.1 Every neighbourhood $U$ of $o$ contains some whole $C_n$. Define $r_n:H\to C_n$ to be the identity on $C_n$ and to send every other circle to $o$. This is continuous away from $o$ because each nonzero point has a neighbourhood meeting only its own circle; it is continuous at $o$ because $|r_n(z)|\le|z|$. The unit loop in $C_n\subset U$ is essential in $C_n$ by [F1], so its composite with the retraction cannot be nullhomotopic in $H$. Thus the inclusion-induced map from $U$ to $H$ is nontrivial, and semilocal simple connectedness fails at $o$. [step 1.1, step 3.1, F1, F3]
 
 5.1 The necessity theorem then rules out a universal cover. [step 4.1, F2]
 

@@ -4,30 +4,35 @@ kind: theorem
 title: "Kernel-range identities and the weak-star closure of the transpose range"
 status: published
 origin: pipeline
-deps: ["lem-elementary-kernel-range-annihilator-identities", "def-weak-star-topology", "thm-bipolar-closure-for-linear-subspaces"]
+deps: [def-axiom-of-choice, "lem-elementary-kernel-range-annihilator-identities", "def-weak-star-topology", "thm-bipolar-closure-for-linear-subspaces"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Theorem 4.8 and Corollary 3.26, pp.174 and 130"
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
 proof_strategy: "Apply the now preceding local bipolar-closure theorem to the linear subspace N=ran T*. The elementary preannihilator identity gives preannihilator(ran T*)=ker T. The first identity is the preceding elementary kernel-range lemma. Its injectivity consequence is that T is injective iff ran T* is weak-star dense. Preserve weak-star closure throughout."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. If $T:X\to Y$ is bounded linear between normed spaces, then $$(\operatorname{ran}T)^\perp=\ker T^*,\qquad (\ker T)^\perp=\overline{\operatorname{ran}T^*}^{\sigma(X^*,X)}.$$ The second closure is weak-star closure, with no norm-closure substitution.
+Assume the Axiom of Choice. Let $\mathbb K=\mathbb R$ or $\mathbb C$. If $T:X\to Y$ is bounded linear between normed spaces, then $$(\operatorname{ran}T)^\perp=\ker T^*,\qquad (\ker T)^\perp=\overline{\operatorname{ran}T^*}^{\sigma(X^*,X)}.$$ The second closure is weak-star closure, with no norm-closure substitution.
 
 ## Facts & Assumptions
 
-**Given:** The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+**Given:** The Axiom of Choice, The spaces, maps, scalar field, and hypotheses in the statement above. All duals consist of linear functionals over the ambient field; evaluation has no conjugation.
+
+[A1] AC is used through the preannihilator identity in [F1] at step 1.1, which separates nonzero values of $T$ by continuous functionals.
 
 [F1] From [[lem-elementary-kernel-range-annihilator-identities]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a bounded linear $T:X\to Y$ between normed spaces, $(\operatorname{ran}T)^\perp=\ker T^*,\qquad {}^\perp(\operatorname{ran}T^*)=\ker T,\qquad \overline{\operatorname{ran}T}^{\|\cdot\|}={}^\perp(\ker T^*).$ The closure in the last identity is in $Y$.
 

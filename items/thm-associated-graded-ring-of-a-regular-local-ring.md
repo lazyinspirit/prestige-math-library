@@ -2,13 +2,14 @@
 id: "thm-associated-graded-ring-of-a-regular-local-ring"
 kind: "theorem"
 title: "associated graded ring of a regular local ring"
-deps: ["lem-associated-graded-polynomial-surjection", "lem-regular-local-graded-surjection-has-zero-kernel", "thm-hilbert-samuel-dimension-theorem"]
+deps: ["lem-associated-graded-polynomial-surjection", "lem-regular-local-graded-surjection-has-zero-kernel", "thm-hilbert-samuel-dimension-theorem", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Proposition 25.6, p.67"
@@ -23,7 +24,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-If $(R,\mathfrak m,k)$ is regular local of dimension $d$, any cotangent basis induces a graded isomorphism $k[X_1,\ldots,X_d]\cong\operatorname{gr}_{\mathfrak m}R$. Conversely, if the associated graded ring of a nonzero Noetherian local ring is isomorphic as a graded $k$-algebra to $k[X_1,\ldots,X_d]$ with standard grading, then $R$ is regular of dimension $d$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). If $(R,\mathfrak m,k)$ is regular local of dimension $d$, any cotangent basis induces a graded isomorphism $k[X_1,\ldots,X_d]\cong\operatorname{gr}_{\mathfrak m}R$. Conversely, if the associated graded ring of a nonzero Noetherian local ring is isomorphic as a graded $k$-algebra to $k[X_1,\ldots,X_d]$ with standard grading, then $R$ is regular of dimension $d$.
 
 ## Facts & Assumptions
 
@@ -31,7 +32,7 @@ If $(R,\mathfrak m,k)$ is regular local of dimension $d$, any cotangent basis in
 
 [F1] [[lem-associated-graded-polynomial-surjection]]: Let $(R,\mathfrak m,k)$ be nonzero Noetherian local and let $x_1,\ldots,x_e$ lift a basis of $\mathfrak m/\mathfrak m^2$. There is a surjective graded $k$-algebra map $\phi:k[X_1,\ldots,X_e]\to\operatorname{gr}_{\mathfrak m}R$, determined by $X_i\mapsto x_i+\mathfrak m^2$, with every variable of degree one.
 
-[F2] [[lem-regular-local-graded-surjection-has-zero-kernel]]: For the graded map $\phi:k[X_1,\ldots,X_e]\twoheadrightarrow\operatorname{gr}_{\mathfrak m}R$ defined by a cotangent basis in a nonzero Noetherian local ring, if $e=\dim R$, then $\ker\phi=0$.
+[F2] [[lem-regular-local-graded-surjection-has-zero-kernel]]: Assume the Axiom of Choice. For the graded map $\phi:k[X_1,\ldots,X_e]\twoheadrightarrow\operatorname{gr}_{\mathfrak m}R$ defined by a cotangent basis in a nonzero Noetherian local ring, if $e=\dim R$, then $\ker\phi=0$.
 
 [F3] [[thm-hilbert-samuel-dimension-theorem]]: Assume the Axiom of Choice. Let $(R,\mathfrak m)$ be a Noetherian local ring, let $M\neq0$ be a finite $R$-module, and let $I$ be an ideal of definition for $M$. Then the Hilbert-Samuel polynomial $P_{I,M}$ has degree $$ \deg P_{I,M}=\dim \operatorname{Supp}(M). $$
 

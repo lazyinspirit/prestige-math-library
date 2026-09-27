@@ -2,7 +2,7 @@
 id: cor-forest-and-complement-free-graphs-have-the-erdos-hajnal-property
 kind: corollary
 title: "For every forest $H$, graphs excluding $H$ and $\\overline{H}$ have the Erdős-Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,12 @@ verification:
     model: "gpt-5.6-terra"
     verdict: pass
     date: 2026-08-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:

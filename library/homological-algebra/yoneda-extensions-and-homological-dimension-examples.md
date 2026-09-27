@@ -1,5 +1,4 @@
 ---
----
 page: yoneda-extensions-and-homological-dimension-examples
 title: "Yoneda Extensions and Homological Dimension — Examples"
 status: published

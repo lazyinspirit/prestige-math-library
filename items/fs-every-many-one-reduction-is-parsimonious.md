@@ -7,15 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-polynomial-time-many-one-reduction, def-parsimonious-reduction, def-number-sat]
+deps: [def-polynomial-time-many-one-reduction, def-parsimonious-reduction]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -31,20 +31,18 @@ the exact number of witnesses.
 
 ## Facts & Assumptions
 
-**Given:** a formula $\theta$ with declared variables $x_1,\ldots,x_n$ and a fresh variable $y$.
+**Given:** On binary inputs $w$, let $f(w)$ count the sole witness $\varepsilon$ and let $g(w)$ count the two witnesses $0$ and $1$. These are counting functions with $f(w)=1$ and $g(w)=2$ for every $w$; their associated decision languages, defined by positive count, are both $\{0,1\}^*$.
 
 [L1] A decision many-one reduction need preserve only membership, by [[def-polynomial-time-many-one-reduction]].
 
 [L2] A parsimonious reduction preserves exact counts, by [[def-parsimonious-reduction]].
 
-[L3] NumberSAT counts assignments to every declared variable, including an unused one, by [[def-number-sat]].
-
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 Define $r(\theta)=\theta\land(y\lor\neg y)$ and declare $y$ in addition to the original variables. The map is polynomial time, and $\theta$ is satisfiable iff $r(\theta)$ is satisfiable, so it is a SAT-to-SAT many-one reduction by [L1]. [L1, given, construct]
+1.1 Let $r(w)=w$ for every binary word $w$. This is a total linear-time map. The two positive-count decision languages are both $\{0,1\}^*$, so $r$ is a many-one reduction between them by [L1]. [L1, given, construct]
 
-2.1 Each satisfying assignment of $\theta$ has exactly two extensions, one for each value of $y$. Hence [L3] gives $\mathrm{NumberSAT}(r(\theta))=2\mathrm{NumberSAT}(\theta)$. For the concrete input $\theta=x_1$, the counts are $1$ and $2$, so the map is not parsimonious under [L2]. [L2, L3, step 1.1, algebra]
+2.1 For every $w$, the source has exactly one accepting witness $\varepsilon$, whereas the target has exactly the two accepting witnesses $0,1$. Hence $f(w)=1\ne2=g(r(w))$, so $r$ is not parsimonious under [L2]. Both witness relations are decidable in constant time once their witness is read. [L2, given, step 1.1]
 
 3.1 This one polynomial-time decision reduction refutes the universal claim. [step 1.1, step 2.1] ∎

@@ -4,7 +4,7 @@ kind: theorem
 title: "Integration by parts for Brownian Ito processes"
 status: published
 origin: pipeline
-deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, thm-quadratic-covariation-of-brownian-ito-processes, thm-ito-formula-one-dimensional, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, thm-heine-cantor-r, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, thm-quadratic-covariation-of-brownian-ito-processes, thm-ito-formula-one-dimensional, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, cor-boundedness-theorem-r, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -16,7 +16,8 @@ sources:
     - title: "Andreas Eberle, Introduction to Stochastic Analysis, Corollary 6.17"
       url: "https://wt.iam.uni-bonn.de/fileadmin/WT/Inhalt/people/Andreas_Eberle/IntroStoAn1516/IntroStochAnalysis2015.pdf"
 verification:
-  audited: 2026-09-22
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement
@@ -50,7 +51,7 @@ $E[X_tY_t]=E[X_0Y_0]+E[X,Y]_t$.
 
 [F2] **Integral interfaces.** Predictable integrands with almost-sure locally finite energy have continuous localized Ito integrals. Their finite-energy stopped pieces have the isometry and real linearity, and are mean-zero square-integrable martingales. Common energy stopping times give linearity of finite sums of localized integrals and make their sums local martingales. Adding an $\mathcal F_0$-measurable constant preserves the local-martingale property when that constant is integrable. [[thm-localized-ito-integral]] [[thm-stopping-an-ito-integral]] [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[def-continuous-brownian-ito-process]] [[def-continuous-time-adapted-process-and-martingale]]
 
-[F3] **Scalar Ito formula and compact continuity.** The one-dimensional Ito formula applies to every class process and every global $C^{1,2}$ function, with normalized representatives on a common full event. A continuous real path is bounded on every compact time interval. [[thm-ito-formula-one-dimensional]] [[thm-heine-cantor-r]]
+[F3] **Scalar Ito formula and compact boundedness.** The one-dimensional Ito formula applies to every class process and every global $C^{1,2}$ function, with normalized representatives on a common full event. A continuous real path is bounded on every compact time interval. [[thm-ito-formula-one-dimensional]] [[cor-boundedness-theorem-r]]
 
 [F4] **Covariation.** For two class processes over the same scalar Brownian motion, $[X,Y]_t=\int_0^t\xi_s\eta_s\,ds$ up to indistinguishability. Drifts contribute no covariation. [[thm-quadratic-covariation-of-brownian-ito-processes]] [[def-quadratic-covariation-of-brownian-ito-processes]]
 

@@ -2,13 +2,7 @@
 id: "lem-finite-dot-orbit-weight-spaces-detect-o-subquotients"
 kind: "lemma"
 title: "Finite weight-space detection of subquotients"
-deps: ["thm-category-o-is-abelian-and-extension-closed", "lem-n-plus-invariants-exist-in-every-nonzero-o-module", "cor-central-characters-are-dot-weyl-orbits", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar", "lem-generalized-central-character-submodules-are-direct-summands", "prop-equivalent-support-description-of-category-o", "lem-harish-chandra-projection-computes-highest-weight-scalars"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "thm-category-o-is-abelian-and-extension-closed", "lem-n-plus-invariants-exist-in-every-nonzero-o-module", "cor-central-characters-are-dot-weyl-orbits", "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar", "lem-generalized-central-character-submodules-are-direct-summands", "prop-equivalent-support-description-of-category-o", "lem-harish-chandra-projection-computes-highest-weight-scalars"]
 sources:
   references:
     - title: "Etingof, §15.1 Lemma 15.9, p.81: finite weight-space detector method"
@@ -21,9 +15,18 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "A singular vector gives a highest-weight cyclic submodule with scalar character equal to chi_lambda. Harish-Chandra identifies its highest label in the finite orbit. Weight-space exactness forces a positive detector increment at every strict chain step"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (lem-finite-dot-orbit-weight-spaces-detect-o-subquotients). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -35,13 +38,13 @@ where distinct weights in the orbit are counted once.
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
 [F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. The category $\mathcal O$ is closed under submodules, quotients and finite direct sums and is an abelian category. If $0\to A\to E\to B\to0$ is exact, $A,B\in\mathcal O$, and $E$ is $\mathfrak h$-semisimple, then $E\in\mathcal O$. The middle-term weight hypothesis is essential. ([[thm-category-o-is-abelian-and-extension-closed]])
 
 [F2] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Every nonzero $M\in\mathcal O$ contains a nonzero weight vector killed by $\mathfrak n^+$. ([[lem-n-plus-invariants-exist-in-every-nonzero-o-module]])
 
-[F3] Let $\chi_\lambda$ and $\chi_\mu$ be the central characters obtained from highest weights $\lambda$ and $\mu$. Then $$\chi_\lambda=\chi_\mu \quad \text{if and only if} \quad \mu\in W\cdot \lambda,$$ where $W\cdot \lambda:=\{w(\lambda+\rho)-\rho : w\in W\}$. ([[cor-central-characters-are-dot-weyl-orbits]])
+[F3] Under the Axiom of Choice, let $\chi_\lambda$ and $\chi_\mu$ be the central characters obtained from highest weights $\lambda$ and $\mu$. Then $$\chi_\lambda=\chi_\mu \quad \text{if and only if} \quad \mu\in W\cdot \lambda,$$ where $W\cdot \lambda:=\{w(\lambda+\rho)-\rho : w\in W\}$. ([[cor-central-characters-are-dot-weyl-orbits]])
 
 [F4] Every central element acts on a cyclic highest-weight module by a scalar. In particular, each cyclic highest-weight module has a well-defined central character in the sense of def-central-character-of-a-lie-algebra-module. ([[lem-central-action-on-a-cyclic-highest-weight-module-is-scalar]])
 
@@ -55,6 +58,6 @@ where distinct weights in the orbit are counted once.
 
 1.1 By closure, a nonzero subquotient $T$ is in $\mathcal O$. Choose a nonzero highest-weight vector $v\in T_\mu$. A common power of $\mathfrak m_{\chi_\lambda}$ kills $M$ and hence $T$. On the cyclic highest-weight module $U(\mathfrak g)v$, F4 gives scalar central action and F7 identifies its scalar as $\chi_\mu(z)$. Thus $(z-\chi_\lambda(z))^Nv=0$ forces $\chi_\mu(z)=\chi_\lambda(z)$ for each $z\in Z$. [F1, F2, F4, F5, F7]
 
-2.1 The exact central-character criterion now gives $\mu\in W\cdot\lambda$. The Weyl group is finite, and all weight spaces of an $\mathcal O$ object are finite dimensional, so the displayed detector is finite. For a short exact sequence of weight modules, taking any fixed weight is exact (decompose a lift into weight components). Thus $d_\lambda$ is additive on subquotients of $M$. [F6, F3, algebra, step 1.1]
+2.1 Under the stated Choice premise, the exact central-character criterion now gives $\mu\in W\cdot\lambda$. The Weyl group is finite, and all weight spaces of an $\mathcal O$ object are finite dimensional, so the displayed detector is finite. For a short exact sequence of weight modules, taking any fixed weight is exact (decompose a lift into weight components). Thus $d_\lambda$ is additive on subquotients of $M$. [F6, F3, algebra, step 1.1]
 
 3.1 Every nonzero factor of a strict chain has detector at least one by the first two steps. Additivity bounds the number of strict inclusions by $d_\lambda(M)$, whether the chain is written ascending or descending. If the detector is zero there is no nonzero subquotient; in particular $M=0$, with no strict inclusions. [algebra, step 2.1] ∎

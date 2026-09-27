@@ -9,3 +9,8 @@ examples: []
 The symmetric Fourier partial sums on $\mathbb T=\mathbb R/\mathbb Z$ can diverge at a prescribed point even for a continuous real function. The local proofs connect this failure to the exact Lebesgue-constant operator norm and show how a weak maximal estimate would close almost-everywhere convergence from Fejer polynomial approximation.
 
 Kolmogorov's almost-everywhere divergence theorem and the Carleson–Hunt maximal estimate are explicitly recorded literature results. Their deep proofs are not supplied. The convergence corollary retains the maximal estimate as a hypothesis, and the endpoint discussion keeps that literature boundary visible. All integrals use Haar measure of total mass one.
+
+The general $L^1$ and $L^p$ coefficient interfaces, including the recorded
+Kolmogorov and Carleson–Hunt claims, assume Countable Choice. Finite polynomial
+calculations remain choice-free; continuous-function arguments use their stated
+Riemann-integral or Dependent Choice hypotheses.

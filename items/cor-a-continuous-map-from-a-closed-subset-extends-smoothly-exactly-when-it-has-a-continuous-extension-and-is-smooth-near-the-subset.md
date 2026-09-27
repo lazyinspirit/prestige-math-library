@@ -7,18 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-relative-whitney-approximation-for-manifold-valued-maps]
+deps: [thm-relative-whitney-approximation-for-manifold-valued-maps, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -28,13 +28,13 @@ sources:
 
 ## Statement
 
-Let $A\subseteq M$ be closed and let $f:A\to N$ be continuous. Then $f$ extends
+Assume countable choice. Let $A\subseteq M$ be closed and let $f:A\to N$ be continuous. Then $f$ extends
 to a smooth map $M\to N$ if and only if it has a continuous extension to $M$
 that is smooth on a neighbourhood of $A$.
 
 ## Facts & Assumptions
 
-**Given:** A closed subset $A\subseteq M$ and a continuous map $f:A\to N$.
+**Given:** Countable choice ([[def-countable-choice]]), a closed subset $A\subseteq M$, and a continuous map $f:A\to N$.
 
 [L1] Relative Whitney approximation for manifold-valued maps smooths a continuous extension without changing it near the closed set ([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
 

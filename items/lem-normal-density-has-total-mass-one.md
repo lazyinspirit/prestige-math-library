@@ -3,12 +3,6 @@ id: lem-normal-density-has-total-mass-one
 kind: lemma
 title: The standard normal density has total mass one
 deps: ["thm-gaussian-integral", "thm-substitution", "thm-continuous-implies-integrable", "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral", "thm-monotone-convergence-for-the-integral", "thm-exponential-definition-equivalence", "thm-derivative-of-exponential", "cor-continuous-functions-are-borel-measurable", "thm-of-square-roots", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "def-axiom-of-choice", "def-countable-choice"]
-verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
 sources:
   references:
     - title: 'Durrett, Probability: Theory and Examples, Example 1.6.11, p.34; local normalization from the earlier published Gaussian integral'
@@ -19,6 +13,13 @@ provenance:
 status: published
 origin: pipeline
 proof_strategy: direct
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (lem-normal-density-has-total-mass-one). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
@@ -59,10 +60,7 @@ This is the point at which the completeness of Lebesgue measure is used essentia
 
 [F9] [[thm-gaussian-integral]]: $$\int_{-\infty}^{\infty}e^{-x^2}\,dx=\sqrt\pi.$$
 
-[F10] [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]: Let $f,g:X\to[0,+\infty]$ be measurable and let $c\ge0$.
-
-1. If $f\le g$, then $\int f\,d\mu\le\int g\,d\mu$.
-2. $\int cf\,d\mu=c\int f\,d\mu$.
+[F10] [[prop-order-and-scalar-rules-for-the-nonnegative-integral]]: The nonnegative integral is monotone, and for every positive real scalar $c$, $\int cf\,d\mu=c\int f\,d\mu$. The zero-scalar case is separate: the integral of the zero function is $0$.
 
 ## Proof
 
@@ -72,4 +70,4 @@ This is the point at which the completeness of Lebesgue measure is used essentia
 
 2.1 For integer $n\ge1$, F5 with $\varphi(x)=x/\sqrt2$ and continuous f(t)=exp(-t^2) gives $\int_{-n}^n e^{-x^2/2}\,dx=\sqrt2\int_{-n/\sqrt2}^{n/\sqrt2}e^{-t^2}\,dt$. The derivative is the constant 1/sqrt2, hence integrable. Both integrands are continuous on the compact intervals, so F6 gives bounded Riemann integrability. F7 identifies the left side with its Lebesgue integral, under the CC in step 1.1. [F5, F6, F7, step 1.1]
 
-3.1 The nonnegative functions $e^{-x^2/2}\mathbf1_{[-n,n]}$ increase to $e^{-x^2/2}$. By F8, its Lebesgue integral is the limit of the compact integrals in step 2.1. F9 identifies the right-hand improper limit as $\sqrt2\sqrt\pi=\sqrt{2\pi}$; the equality follows because both sides are positive with square 2pi, by square-root uniqueness. F10 now divides by sqrt(2pi) to give integral $\phi$=1. [F8, F9, F10, step 2.1] ∎
+3.1 The nonnegative functions $e^{-x^2/2}\mathbf1_{[-n,n]}$ increase to $e^{-x^2/2}$. By F8, its Lebesgue integral is the limit of the compact integrals in step 2.1. F9 identifies the right-hand improper limit as $\sqrt2\sqrt\pi=\sqrt{2\pi}$; the equality follows because both sides are positive with square $2\pi$, by square-root uniqueness. Applying F10 with the positive scalar $1/\sqrt{2\pi}$ gives $\int\phi\,d\lambda_1=1$. [F8, F9, F10, step 2.1] ∎

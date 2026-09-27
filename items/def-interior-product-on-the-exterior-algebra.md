@@ -7,13 +7,18 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-gram-inner-product-on-kth-exterior-power, thm-exterior-algebra-laws, thm-adjoint-exists-and-is-unique-in-finite-dimension]
+deps: [def-gram-inner-product-on-kth-exterior-power, thm-gram-inner-product-on-exterior-powers-is-positive-definite, thm-exterior-algebra-laws, thm-adjoint-exists-and-is-unique-in-finite-dimension]
 justified_by: [thm-interior-product-is-adjoint-to-exterior-multiplication]
 aliases: []
 landmark: false
 verification:
-  audited: 2026-08-29
   precheck: n/a
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (def-interior-product-on-the-exterior-algebra). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:

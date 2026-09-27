@@ -7,11 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, def-baer-sum-of-abelian-kernel-extensions, lem-baer-sum-is-independent-of-extension-representatives]
+deps: [def-axiom-of-choice, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, def-baer-sum-of-abelian-kernel-extensions, lem-baer-sum-is-independent-of-extension-representatives]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -23,12 +27,14 @@ sources:
 
 ## Statement
 
-Under the classification bijection between extension classes and $H^2(G,M)$,
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Under the classification bijection between extension classes and $H^2(G,M)$,
 the Baer sum of extensions corresponds to addition of cohomology classes.
 
 ## Facts & Assumptions
 
-**Given:** Two extension classes of $G$ by the abelian $G$-module $M$.
+**Given:** The Axiom of Choice and two extension classes of $G$ by the abelian $G$-module $M$.
+
+[A1] Choice supplies normalized sections for the classification [L1] of arbitrary extensions.
 
 [L1] $H^2(G,M)$ classifies the extension classes ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
@@ -40,7 +46,7 @@ the Baer sum of extensions corresponds to addition of cohomology classes.
 
 **Proof technique:** direct.
 
-1.1 Choose cocycle representatives $f_1$ and $f_2$ for the two classes via [L1]. The corresponding twisted-product extensions have a pullback whose kernel is $M\oplus M$, and pushing out along addition sends the pair $(f_1,f_2)$ to the cocycle $f_1+f_2$. [L1, F1, given, choose, algebra]
+1.1 Under [A1], choose cocycle representatives $f_1$ and $f_2$ for the two classes via [L1]. The corresponding twisted-product extensions have a pullback whose kernel is $M\oplus M$, and pushing out along addition sends the pair $(f_1,f_2)$ to the cocycle $f_1+f_2$. [A1, L1, F1, given, choose, algebra]
 
 2.1 Therefore the extension class of the Baer sum corresponds to the cohomology class $[f_1+f_2]=[f_1]+[f_2]$ in $H^2(G,M)$. By [L2], this description does not depend on the chosen cocycle representatives. [L2, step 1.1, algebra]
 

@@ -2,28 +2,31 @@
 id: "cor-regular-local-ring-satisfies-r-one"
 kind: "corollary"
 title: "regular local ring satisfies r one"
-deps: ["def-serre-r-k-and-s-k-conditions", "cor-localisations-of-regular-local-rings-are-regular", "thm-one-dimensional-regular-local-rings-are-dvrs", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-serre-r-k-and-s-k-conditions", "cor-localisations-of-regular-local-rings-are-regular", "thm-one-dimensional-regular-local-rings-are-dvrs", "lem-embedding-dimension-is-minimal-maximal-ideal-generator-number"]
 sources:
   references:
     - title: "10.157.5, R1 implication"
       url: "https://stacks.math.columbia.edu/tag/031O"
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Every regular local ring satisfies $(R_1)$. Its height-zero localizations are fields, and its height-one localizations are DVRs.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every regular local ring satisfies $(R_1)$. Its height-zero localizations are fields, and its height-one localizations are DVRs.
 
 ## Facts & Assumptions
 
@@ -39,6 +42,6 @@ Every regular local ring satisfies $(R_1)$. Its height-zero localizations are fi
 
 ## Proof
 
-1.1 Every prime localization is regular, and its dimension is the height of the prime. Thus at all heights at most one it is regular, which is precisely $(R_1)$. [F2, F1]
+1.1 Under the assumed Axiom of Choice, the homological criterion used in [F2] applies. Every prime localization is regular, and its dimension is the height of the prime. Thus at all heights at most one it is regular, which is precisely $(R_1)$. [F2, F1, given]
 
 2.1 At height one the DVR equivalence applies. At height zero regularity makes the cotangent space zero; the generator-number formula makes the maximal ideal zero, hence the local ring is a field. [F3, F2, F4, step 1.1] ∎

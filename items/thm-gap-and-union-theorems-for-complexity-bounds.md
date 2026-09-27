@@ -10,14 +10,17 @@ provenance:
 deps: [def-computable-and-partial-computable-function]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
-    - title: "Sebastiaan Terwijn, Complexity Theory, Theorem 5.6.1"
+    - title: "Sebastiaan Terwijn, Complexity Theory, Theorem 5.6.1 (time-complexity instance of the Gap Theorem)"
       url: "https://www.math.ru.nl/~terwijn/teaching/complexitytheory.pdf"
-    - title: "Hartmanis and Hopcroft, An Overview of the Theory of Computational Complexity, Theorem 16"
+    - title: "Hartmanis and Hopcroft, An Overview of the Theory of Computational Complexity, Theorems 7 and 16"
       url: "https://users.cs.fiu.edu/~giri/teach/5420/f01/papers/p444-hartmanis.pdf"
 ---
 

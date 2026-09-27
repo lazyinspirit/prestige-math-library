@@ -13,12 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -39,8 +39,8 @@ In a complex semisimple Lie algebra $\mathfrak g$, the set of regular elements i
 
 **Proof technique:** direct.
 
-1.1 In any fixed basis of $\mathfrak g$, the matrix entries of $\operatorname{ad}_x$ depend linearly on $x$. By [[def-regular-element-and-rank-for-a-complex-semisimple-lie-algebra]], regularity is the condition that $\operatorname{rank}(\operatorname{ad}_x)=n-r$, so the nonregular locus is cut out by the vanishing of all $(n-r)\times(n-r)$ minors and is therefore Zariski closed. [given, algebra]
+1.1 By [[def-regular-element-and-rank-for-a-complex-semisimple-lie-algebra]], $r$ is the minimum of the dimensions of the centralizers of elements of $\mathfrak g$. These dimensions belong to the finite set $\{0,\ldots,n\}$, and $\mathfrak g$ is nonempty, so the minimum is attained. Thus at least one regular element exists. [given, algebra]
 
-2.1 Standard structure theory for complex semisimple Lie algebras supplies at least one regular element, so the complement of the closed set from step 1.1 is a nonempty Zariski-open subset. Because a nonempty Zariski-open subset of the complex affine space underlying $\mathfrak g$ is dense, the regular set is dense. [step 1.1]
+2.1 In a fixed basis, the matrix entries of $\operatorname{ad}_x$ depend linearly on $x$. Rank-nullity gives $\dim C_{\mathfrak g}(x)=n-\operatorname{rank}(\operatorname{ad}_x)$. Hence regularity is the condition that the rank equals its attained maximum $n-r$. For $n-r>0$, the nonregular locus is the common zero set of the $(n-r)\times(n-r)$ minors. If $n-r=0$, every element is regular. In either case the regular locus is a nonempty Zariski-open set. A nonzero minor at a regular point remains nonzero on a Euclidean neighborhood; a polynomial vanishing on the regular locus therefore vanishes identically. Thus the regular locus is Zariski dense. [step 1.1, algebra]
 
-3.1 The complement of a proper complex algebraic subset of a finite-dimensional complex vector space is connected, so the nonempty open regular set from step 2.1 is connected as well. Hence the regular elements form a connected dense open subset. [step 2.1] ∎
+3.1 Let $x,y$ be regular. On the complex affine line through them, choose a maximal minor nonzero at $x$ (when $n-r=0$, the whole space is regular). Its restriction is a nonzero one-variable polynomial, so the nonregular points on that line form a finite set. A complex line with finitely many points removed is path connected, giving a path of regular elements from $x$ to $y$. The zero-dimensional case is a singleton. Thus the regular locus is connected. [step 2.1, algebra] ∎

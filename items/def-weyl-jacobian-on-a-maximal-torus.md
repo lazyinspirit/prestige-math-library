@@ -5,10 +5,17 @@ title: Weyl Jacobian
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots]
+deps: [def-roots-of-a-compact-connected-lie-group, def-positive-system-and-base-of-simple-roots, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Brian Conrad and Aaron Landesman, Compact Lie Groups"
@@ -17,13 +24,11 @@ sources:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §6 and Chapter VIII §1"
-verification:
-  audited: 2026-09-22
 ---
 
 ## Definition
 
-Let $G$ be a compact connected Lie group with maximal torus $T$, let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $G$ be a compact connected Lie group with maximal torus $T$, let
 $\Phi=\Phi(G,T)$ be its root system
 ([[def-roots-of-a-compact-connected-lie-group]]), and fix a positive system
 $\Phi^+\subseteq\Phi$

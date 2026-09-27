@@ -7,14 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [prop-casimir-eigenvalue-on-a-highest-weight-module]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -45,4 +49,4 @@ $$Cv_\lambda=\frac{\lambda(\lambda+2)}8 v_\lambda.$$
 
 1.1 The Killing form values are $B(h,h)=8$ and $B(e,f)=B(f,e)=4$, so the dual basis is $h/8,f/4,e/4$. Substituting into the definition of the Casimir gives $C=\frac18 h^2+\frac14 ef+\frac14 fe$. [given, algebra]
 
-2.1 For $\mathfrak{sl}_2$, the Weyl vector satisfies $\rho(h)=1$, so the scalar from [[prop-casimir-eigenvalue-on-a-highest-weight-module]] is $(\lambda,\lambda+2\rho)=\lambda(\lambda+2)/8$. Therefore $Cv_\lambda=\lambda(\lambda+2)v_\lambda/8$. [step 1.1, algebra] ∎
+2.1 Since $ev_\lambda=0$ and $[e,f]=h$, one has $fev_\lambda=0$ and $efv_\lambda=(fe+h)v_\lambda=\lambda v_\lambda$. The formula in step 1.1 therefore gives $Cv_\lambda=(\lambda^2/8+\lambda/4)v_\lambda=\lambda(\lambda+2)v_\lambda/8$. [step 1.1, given, algebra] ∎

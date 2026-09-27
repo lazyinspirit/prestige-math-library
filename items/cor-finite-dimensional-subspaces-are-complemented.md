@@ -4,31 +4,36 @@ kind: corollary
 title: Finite-dimensional subspaces are complemented
 status: published
 origin: pipeline
-deps: [thm-coordinate-map-for-a-finite-dimensional-normed-space, cor-finite-dimensional-subspaces-are-closed, thm-norm-preserving-extension-from-any-subspace, def-complemented-subspace, thm-complemented-subspace-iff-range-of-a-bounded-projection]
+deps: [def-axiom-of-choice, thm-coordinate-map-for-a-finite-dimensional-normed-space, cor-finite-dimensional-subspaces-are-closed, thm-norm-preserving-extension-from-any-subspace, def-complemented-subspace, thm-complemented-subspace-iff-range-of-a-bounded-projection]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: Piotr Hajlasz, Functional Analysis, Theorem 10.17(a)
       url: https://sites.pitt.edu/~hajlasz/Notatki/Functional%20Analysis2.pdf
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Every finite-dimensional linear subspace $M$ of a normed space $X$ is
+Assume the Axiom of Choice. Every finite-dimensional linear subspace $M$ of a normed space $X$ is
 complemented in $X$.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional subspace $M\subseteq X$.
+**Given:** The Axiom of Choice, A finite-dimensional subspace $M\subseteq X$.
+
+[A1] AC is used through functional extension [F2] in step 1.1.
 
 [F1] Relative to a fixed finite basis, every coordinate functional on a finite-dimensional normed space is bounded ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 

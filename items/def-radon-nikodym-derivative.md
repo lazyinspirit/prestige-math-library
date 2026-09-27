@@ -7,20 +7,23 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-measure-null-set-and-almost-everywhere]
-verification:
-  audited: 2026-08-31
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
+deps: [thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-measure-null-set-and-almost-everywhere, def-axiom-of-choice]
 sources:
   references:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, paragraph after 9.36"
       url: "https://measure.axler.net/MIRA.pdf"
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Chapter 13"
       url: "https://www.math.wustl.edu/~victor/classes/ma5051/rags100514.pdf"
+verification:
+  precheck: n/a
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Definition
@@ -28,7 +31,7 @@ sources:
 Let $\mu$ be a sigma-finite positive measure.
 
 1. If $\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.
-2. If $\nu$ is a finite complex measure and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of complex $L^1(\mu)$ functions $h$ satisfying
+2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\nu$ is a finite complex measure and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of complex $L^1(\mu)$ functions $h$ satisfying
    $$\nu(E)=\int_E h\,d\mu\qquad(E\in\mathcal A),$$
    as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].
 

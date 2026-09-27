@@ -12,18 +12,21 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
 sources:
   scraped: []
   references:
     - title: "Maria Chudnovsky and Shmuel Safra, The Erdős-Hajnal conjecture for bull-free graphs"
       url: "https://web.math.princeton.edu/~mchudnov/EHbullfree.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: 'Bounded delegated accept review: research/ap-prerequisite-followup/agent-02-receipts.jsonl;
+      root proof reading: research/ap-prerequisite-followup/root-local-proof-review.md.
+      Not an independent judge verdict or owner-human audit.'
+    delegated_by: user
 ---
 
 ## Statement

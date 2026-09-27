@@ -7,20 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-cauchy-schwarz-and-the-euclidean-norm, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, thm-all-norms-on-rn-are-equivalent, lem-standard-basis-of-f-n, def-integer-power, def-canonical-natural, lem-of-naturals-positive, thm-of-square-roots, def-abs-value, lem-of-abs-value]
+deps: [thm-cauchy-schwarz-and-the-euclidean-norm, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, thm-all-norms-on-rn-are-equivalent, lem-standard-basis-of-f-n, def-integer-power, def-canonical-natural, lem-of-naturals-positive, thm-of-square-roots, def-abs-value, lem-of-abs-value, rem-rn-conventions-and-scope]
 justified_by: []
 aliases: []
 landmark: false
 cx_machine_verified: false
 proof_strategy: direct
 verification:
-  precheck: pass
   verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-10
-    scope: published-audit
-    delegated_by: owner
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -52,9 +51,9 @@ $x = e_0$, $y = e_1$.
 hypothesis is a symmetric bilinear form on $\mathbb{R}^{2}$ written out in full.
 The general converse — that a norm **satisfying** the parallelogram law is
 induced by an inner product, the Jordan-von Neumann theorem — is **not proved
-here and is not used here**; nor is any abstract theory of inner product spaces,
-which belongs to a page of this library earlier in the plan order that is not yet
-built ([[rem-rn-conventions-and-scope]]).
+here and is not used here**. Abstract inner-product spaces are developed on a
+separate published page; the refutation below uses only bilinearity and the
+explicit one-norm calculation ([[rem-rn-conventions-and-scope]]).
 
 ## Facts & Assumptions
 

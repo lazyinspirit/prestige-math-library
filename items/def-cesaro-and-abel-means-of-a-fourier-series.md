@@ -9,11 +9,12 @@ provenance:
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, def-dirichlet-and-fejer-kernels]
 verification:
-  audited: 2026-09-05
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (def-cesaro-and-abel-means-of-a-fourier-series). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes"
@@ -26,7 +27,15 @@ sources:
 
 ## Definition
 
-Let $f$ be integrable on one period.
+The continuous kernel $P_r$ below is defined by its uniformly convergent
+series without a choice premise. For the means of an arbitrary integrable
+function $f$, assume the Axiom of Countable Choice, as in
+[[def-period-one-fourier-coefficients-partial-sums-and-convolution]], and let
+$f$ be integrable on one period.
+For a Riemann-integrable one-periodic representative, the coefficient and
+kernel integrals in the formulas below may instead be ordinary Riemann
+integrals; these formulas then need no choice premise and agree with their
+Lebesgue versions when Countable Choice is assumed.
 
 For $N \ge 0$, the **Cesaro mean** (or **Fejer mean**) of order $N$ of the
 Fourier series of $f$ is

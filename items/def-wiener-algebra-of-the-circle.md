@@ -9,11 +9,12 @@ provenance:
   proof: not-applicable
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (def-wiener-algebra-of-the-circle). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes, Chapter 4"
@@ -24,10 +25,10 @@ sources:
 
 ## Definition
 
-With the Fourier convention of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]], define
+Assume the Axiom of Countable Choice for the $L^1$ Fourier coefficients and
+norm below. With the Fourier convention of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]], define
 $$A(\mathbb T):=\left\{f\in L^1(\mathbb T):\sum_{k\in\mathbb Z}|\widehat f(k)|<\infty\right\}.$$
 Its Wiener norm is $\|f\|_A:=\sum_{k\in\mathbb Z}|\widehat f(k)|$. Functions
-in this definition are initially $L^1$-classes. Assuming the Axiom of
-Countable Choice, the later
+in this definition are initially $L^1$-classes. The later
 [[lem-absolutely-summable-fourier-coefficients-give-uniform-convergence]]
 supplies their distinguished continuous representatives.

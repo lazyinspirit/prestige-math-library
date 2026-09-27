@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-finiteness-of-associated-primes, lem-zero-divisor-annihilator-contained-in-associated-prime]
+deps: [thm-finiteness-of-associated-primes, lem-zero-divisor-annihilator-contained-in-associated-prime, def-dependent-choice, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (thm-zero-divisors-on-a-module). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,18 +27,18 @@ sources:
 
 ## Statement
 
-Let $R$ be a Noetherian commutative ring and let $M$ be a left $R$-module. Then
+Assume Dependent Choice. Let $R$ be a Noetherian commutative ring and let $M$ be a left $R$-module. Then
 the set of zero divisors on $M$ is
 $$ \bigcup_{\mathfrak p \in \operatorname{Ass}_R(M)}\mathfrak p. $$
-If $M$ is finitely generated, this is a finite union.
+If the Axiom of Choice also holds and $M$ is finitely generated, this is a finite union.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ and a left $R$-module $M$.
+**Given:** Dependent Choice, a Noetherian commutative ring $R$ and a left $R$-module $M$. The finite-union clause additionally assumes the Axiom of Choice ([[def-dependent-choice]], [[def-axiom-of-choice]]).
 
-[L1] Every zero divisor on $M$ lies in an associated prime of $M$ ([[lem-zero-divisor-annihilator-contained-in-associated-prime]]).
+[L1] Under Dependent Choice, every zero divisor on $M$ lies in an associated prime of $M$ ([[lem-zero-divisor-annihilator-contained-in-associated-prime]]).
 
-[L2] If $M$ is finitely generated, then $\operatorname{Ass}_R(M)$ is finite ([[thm-finiteness-of-associated-primes]]).
+[L2] Under the additional Axiom of Choice, if $M$ is finitely generated, then $\operatorname{Ass}_R(M)$ is finite ([[thm-finiteness-of-associated-primes]]).
 
 ## Proof
 
@@ -48,4 +48,4 @@ If $M$ is finitely generated, this is a finite union.
 
 1.2 Conversely, every zero divisor on $M$ lies in an associated prime by [L1]. [L1]
 
-2.1 Steps 1.1 and 1.2 prove the union formula. When $M$ is finitely generated, fact [L2] makes that union finite. [L2, step 1.1, step 1.2] ∎
+2.1 Steps 1.1 and 1.2 prove the union formula under Dependent Choice. Under the additional Axiom of Choice, when $M$ is finitely generated, fact [L2] makes that union finite. [L2, step 1.1, step 1.2] ∎

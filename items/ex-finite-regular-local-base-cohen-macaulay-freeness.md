@@ -2,13 +2,14 @@
 id: "ex-finite-regular-local-base-cohen-macaulay-freeness"
 kind: "example"
 title: "Cohen–Macaulayness over a finite regular local base"
-deps: ["thm-auslander-buchsbaum-formula", "thm-auslander-buchsbaum-serre-regularity-criterion", "cor-dimension-preserved-by-integral-extensions", "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module", "cor-one-regular-system-of-parameters-implies-cohen-macaulay", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-depth-bounded-by-support-dimension", "thm-nakayama-lemma"]
+deps: ["def-axiom-of-choice", "thm-auslander-buchsbaum-formula", "thm-auslander-buchsbaum-serre-regularity-criterion", "cor-dimension-preserved-by-integral-extensions", "cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module", "cor-one-regular-system-of-parameters-implies-cohen-macaulay", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-depth-bounded-by-support-dimension", "thm-nakayama-lemma"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Exercise 12.41, p.125"
@@ -25,11 +26,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Example
 
-Let $A\hookrightarrow B$ be an injective finite local map of nonzero Noetherian local rings, with $A$ regular. Then $B$ is Cohen–Macaulay if and only if it is free as an $A$-module.
+Assume the Axiom of Choice. Let $A\hookrightarrow B$ be an injective finite local map of nonzero Noetherian local rings, with $A$ regular. Then $B$ is Cohen–Macaulay if and only if it is free as an $A$-module.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the example. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the example, including the Axiom of Choice ([[def-axiom-of-choice]]). Cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[thm-auslander-buchsbaum-formula]]: For a nonzero finite module $M$ of finite projective dimension over a nonzero Noetherian local ring $R$, $\operatorname{pd}_RM+\operatorname{depth}_RM=\operatorname{depth}R$. Consequently such an $M$ with $\operatorname{depth}M=\operatorname{depth}R$ is free.
 

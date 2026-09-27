@@ -14,12 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-06
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 ---
 
 ## Statement
@@ -32,4 +32,4 @@ For the complex $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to0$ and coefficients $\m
 
 1.1 Tensoring produces $0\to\mathbb Z/2\xrightarrow0\mathbb Z/2\to0$, so $H_1(C\otimes\mathbb Z/2)\cong\mathbb Z/2$. [given]
 
-2.1 Since $H_1C\otimes\mathbb Z/2=0$, the degree-one UCT sequence identifies this nonzero group with the stated Tor correction. [step 1.1] ∎
+2.1 The displayed integral complex is itself a length-one free resolution of $H_0C=\mathbb Z/2$. Tensoring this resolution with $\mathbb Z/2$ makes its differential zero, so the definition of Tor (equivalently, [[thm-tor-of-two-cyclic-abelian-groups]]) gives $\operatorname{Tor}_1^{\mathbb Z}(H_0C,\mathbb Z/2)=\mathbb Z/2$. Since $H_1C\otimes\mathbb Z/2=0$, the degree-one correction is exactly the nonzero group computed in step 1.1. This finite free-resolution calculation needs no choice; under AC it is also the correction term in [[thm-universal-coefficient-theorem-for-homology-over-a-pid]]. [step 1.1] ∎

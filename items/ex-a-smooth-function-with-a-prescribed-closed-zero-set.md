@@ -9,14 +9,19 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (ex-a-smooth-function-with-a-prescribed-closed-zero-set). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,8 +41,6 @@ The function $g(x)=\sin^2(\pi x)$ is smooth and nonnegative on $\mathbb R$, and 
 
 **Given:** The function $g(x)=\sin^2(\pi x)$.
 
-[L1] Every closed subset of a manifold is the zero set of a smooth nonnegative function ([[cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function]]).
-
 [A1] One has $\sin(\pi x)=0$ exactly when $x\in \mathbb Z$.
 
 ## Verification
@@ -48,4 +51,4 @@ The function $g(x)=\sin^2(\pi x)$ is smooth and nonnegative on $\mathbb R$, and 
 
 1.2 By [A1], the equation $g(x)=0$ holds exactly when $x\in \mathbb Z$. [A1]
 
-2.1 Thus $g$ realizes the closed set $\mathbb Z$ as a smooth zero set, as promised abstractly by [L1]. [L1, step 1.1, step 1.2] ∎
+2.1 Thus $g$ realizes the closed set $\mathbb Z$ as a smooth zero set. This explicit construction uses no choice principle. [step 1.1, step 1.2] ∎

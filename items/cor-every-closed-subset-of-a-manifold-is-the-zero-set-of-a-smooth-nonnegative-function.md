@@ -7,14 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it, lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-a-locally-finite-sum-of-smooth-functions-is-smooth]
+deps: [def-countable-choice, lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it, lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking, lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-a-locally-finite-sum-of-smooth-functions-is-smooth]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -28,11 +33,11 @@ sources:
 
 ## Statement
 
-Every closed subset $A$ of a smooth manifold $M$ is the zero set of some smooth nonnegative function $g:M\to [0,\infty)$.
+Assume countable choice $\mathrm{AC}_\omega$. Every closed subset $A$ of a smooth manifold $M$ is the zero set of some smooth nonnegative function $g:M\to [0,\infty)$.
 
 ## Facts & Assumptions
 
-**Given:** A closed subset $A$ of a smooth manifold $M$.
+**Given:** Countable choice and a closed subset $A$ of a smooth manifold $M$.
 
 [L1] Every open cover of a manifold has a countable cover by relatively compact coordinate balls subordinate to it ([[lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it]]).
 
@@ -46,8 +51,8 @@ Every closed subset $A$ of a smooth manifold $M$ is the zero set of some smooth 
 
 **Proof technique:** direct.
 
-1.1 Apply [L1] to the one-set open cover $\{M\setminus A\}$ of the open manifold $M\setminus A$ to obtain a countable cover by coordinate balls with compact closures contained in $M\setminus A$. Then apply [L2] to obtain a countable locally finite shrinking $W_k\Subset V_k$ of that cover. For each $k$, apply [L3] to $\overline{W_k}\subseteq V_k$ to obtain a smooth function $b_k:M\to [0,1]$ that is positive on $W_k$ and supported in $M\setminus A$. [L1, L2, L3, given, choose]
+1.1 If $M\setminus A=\varnothing$, take $g=0$ and the claim follows. Otherwise apply [L1], under the stated $\mathrm{AC}_\omega$, to the one-set open cover $\{M\setminus A\}$ of the open manifold $M\setminus A$. It gives a finite or countable cover by coordinate balls with compact closures there; if finite, repeat one ball to index it by positive integers for [L2]. Apply [L2] to obtain an at-most-countable locally finite shrinking $(W_k,V_k)_{k\in I}$, where $I\subseteq\mathbb N$ after an enumeration. For each $k\in I$, [L3] supplies a bump $b_k:M\to[0,1]$ equal to $1$ near $\overline{W_k}$ and supported in $V_k\subseteq M\setminus A$. Use $\mathrm{AC}_\omega$ a further time to select these countably many bumps simultaneously; if $I$ is finite, finite choice suffices. [L1, L2, L3, given, choose]
 
-2.1 The family $(b_k)$ is locally finite, so $$g:=\sum_{k\ge 1}2^{-k}b_k$$ is smooth and nonnegative by [L4]. One has $g=0$ on $A$ because every $b_k$ vanishes there, and $g>0$ on $M\setminus A$ because each point there lies in some $W_k$. [L4, step 1.1]
+2.1 The family $(b_k)_{k\in I}$ is locally finite because $\operatorname{supp}b_k\subseteq V_k$, so $g:=\sum_{k\in I}2^{-k}b_k$ is smooth and nonnegative by [L4]. The sum is finite in a neighbourhood of each point, and the empty-index convention gives $g=0$. Every $b_k$ vanishes on $A$, whereas each point of $M\setminus A$ lies in some $W_k$ where $b_k=1$. Hence $g^{-1}(0)=A$. [L4, step 1.1]
 
-3.1 Therefore $A=g^{-1}(0)$. [step 2.1] ∎
+3.1 This establishes the required zero-set representation, including $A=M$. [step 1.1, step 2.1] ∎

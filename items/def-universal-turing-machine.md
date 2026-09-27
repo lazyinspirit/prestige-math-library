@@ -11,7 +11,12 @@ deps: [def-effective-encoding-of-turing-machines, def-partial-function-computed-
 justified_by: []
 verification:
   precheck: n/a
-  audited: 2026-08-31
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -26,7 +31,7 @@ sources:
 Fix the machine coding $\ulcorner M\urcorner$ from
 [[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write
 $$ c(z):=1^{|z|}0z. $$
-Encode a pair of binary words $(x,y)$ by the self-delimiting binary word
+Encode a pair of binary words $(x,y)$ by the binary word
 $$ \langle x,y\rangle:=1^{|x|}0xy. $$
 If $v=a_1\cdots a_\ell$ is a finite word whose symbols are natural numbers,
 write

@@ -7,14 +7,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: literature-derived
-deps: [cor-minimal-prime-has-height-zero, thm-krull-principal-ideal-theorem]
+deps: [cor-minimal-prime-has-height-zero]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -23,6 +20,15 @@ sources:
     - title: "Melvin Hochster, Dimension theory and systems of parameters"
       url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
@@ -38,13 +44,11 @@ the element $\bar x$ is a zero divisor, and the prime ideal $(\bar x)$ is minima
 
 [L1] Minimal primes are exactly the primes of height zero ([[cor-minimal-prime-has-height-zero]]).
 
-[L2] The principal ideal theorem gives only the upper bound $\operatorname{ht}(\mathfrak p)\le1$ for a prime minimal over a principal ideal ([[thm-krull-principal-ideal-theorem]]).
-
 ## Verification
 
 **Proof technique:** direct computation.
 
-1.1 In $R$, one has $\bar x\bar y=0$ with both factors nonzero, so $\bar x$ is a zero divisor. Also $R/(\bar x)\cong k[y]$ is a domain, hence $(\bar x)$ is a prime ideal minimal over the principal ideal $(\bar x)$. [L2, given]
+1.1 In $R$, one has $\bar x\bar y=0$ with both factors nonzero, so $\bar x$ is a zero divisor. Also $R/(\bar x)\cong k[y]$ is a domain, hence $(\bar x)$ is a prime ideal minimal over the principal ideal $(\bar x)$. [given, algebra]
 
 2.1 The ideal $(\bar x)$ is one of the two minimal primes of $k[x,y]/(xy)$, so [L1] gives $\operatorname{ht}((\bar x))=0$. Therefore the exact-height-one conclusion fails for a zerodivisor generator. [L1, step 1.1]
 

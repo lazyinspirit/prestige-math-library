@@ -7,11 +7,12 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (def-carleson-maximal-partial-sum-operator). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references: [{title: 'Laugesen, Harmonic Analysis Lecture Notes', url: 'https://arxiv.org/pdf/0903.3845', locator: 'ch. 8, pp. 51–52, Theorem 8.7 discussion'}]
 status: published
@@ -20,7 +21,7 @@ origin: pipeline
 
 ## Definition
 
-Use $\mathbb T=\mathbb R/\mathbb Z$ with Haar measure $m(\mathbb T)=1$ and the negative-sign Fourier coefficients and symmetric partial sums of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. For $f\in L^1(\mathbb T)$ define the **Carleson maximal partial-sum operator** by
+Assume the Axiom of Countable Choice for the torus $L^1$ integrals. Use $\mathbb T=\mathbb R/\mathbb Z$ with Haar measure $m(\mathbb T)=1$ and the negative-sign Fourier coefficients and symmetric partial sums of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. For $f\in L^1(\mathbb T)$ define the **Carleson maximal partial-sum operator** by
 
 $$Cf(x):=\sup_{N\in\mathbb Z_{\ge0}}|S_Nf(x)|\in[0,\infty].$$
 

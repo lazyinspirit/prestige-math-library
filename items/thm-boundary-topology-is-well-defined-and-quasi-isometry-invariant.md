@@ -7,42 +7,47 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-boundary-topology-by-gromov-products, lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences, thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces]
+deps: [def-boundary-topology-by-gromov-products, lem-boundary-products-are-independent-of-representative-and-basepoint, lem-quasi-isometries-extend-to-boundary-homeomorphisms, def-axiom-of-choice]
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:
     - title: "Brian H. Bowditch, A course on geometric group theory, Section 5.3"
       url: "https://www.math.ucdavis.edu/~kapovich/280-2009/bhb-ggtcourse.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-06-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-For a proper geodesic hyperbolic space, the topology defined on the Gromov
+Assume the Axiom of Choice. For a proper geodesic hyperbolic space, the topology defined on the Gromov
 boundary by Gromov products is well defined. Moreover, a quasi-isometry between
 proper geodesic hyperbolic spaces induces a homeomorphism of their boundaries.
 
 ## Facts & Assumptions
 
-**Given:** Proper geodesic hyperbolic spaces $X$ and $Y$.
+**Given:** AC and proper geodesic hyperbolic spaces $X$ and $Y$.
 
-[A1] Different representatives of the same boundary point and different basepoints define equivalent neighborhood systems on the boundary.
+[F1] The supremal boundary product and any supplied representative product differ by at most $2\kappa$, changing basepoints shifts products by at most their distance, and the threshold-neighbourhood criterion gives a Hausdorff topology ([[lem-boundary-products-are-independent-of-representative-and-basepoint]]).
 
-[A2] If $f:X\to Y$ is a quasi-isometry and $o'\in Y$ stays a bounded distance from $f(o)$, then there are constants $A\ge1$ and $C\ge0$, depending only on the quasi-isometry data, such that boundary Gromov products satisfy $$A^{-1}(\xi,\eta)_o-C\le (\partial f(\xi),\partial f(\eta))_{o'}\le A(\xi,\eta)_o+C.$$ In particular $f$ sends Gromov sequences to Gromov sequences, preserves asymptoticity, and carries product neighborhoods to cofinal product neighborhoods. A quasi-inverse satisfies the corresponding estimates.
+[F2] Under AC a quasi-isometry of geodesic hyperbolic spaces induces a continuous boundary map, bounded-distance maps induce the same map, and a controlled quasi-inverse supplies a continuous inverse ([[lem-quasi-isometries-extend-to-boundary-homeomorphisms]]).
 
-[L1] Asymptoticity of Gromov sequences is an equivalence relation ([[lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]]).
+[A1] AC is used in [F2] for the Morse projection families and coarse-inverse selection ([[def-axiom-of-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1], the boundary is already a quotient by a genuine equivalence relation. The comparison result [A1] then shows that changing representatives or the basepoint only changes the neighborhoods $U_o(\xi,R)$ by bounded shifts of the parameter $R$, so the topology is well defined. [L1, A1]
+1.1 The boundary product in [[def-boundary-topology-by-gromov-products]] is the supremal product of [F1]. Its comparison with every representative product proves independence of representatives; the basepoint inequality gives cofinal threshold neighbourhoods at any two basepoints. [F1]
 
-2.1 By [A2], a quasi-isometry induces a map on asymptoticity classes, and the two-sided product estimate makes that map continuous for the neighborhood systems from step 1.1. Applying the same argument to a quasi-inverse gives a continuous inverse. Thus the induced boundary map is a homeomorphism, and the boundary topology is quasi-isometry invariant. [A1, A2, step 1.1] ∎
+2.1 The definition's open-set criterion is exactly the one proved in [F1], including its treatment of threshold sets as neighbourhoods that need not be open. Hence it is a topology and is Hausdorff. [F1, step 1.1]
+
+3.1 By [F2] under [A1], the quasi-isometry induces a continuous map of these boundary topologies. Its controlled quasi-inverse induces a continuous inverse because the bounded-distance composites induce identity maps. This proves the claimed homeomorphism; properness is included in the statement but not required by [F1] or [F2]. [F1, F2, A1, step 2.1] ∎

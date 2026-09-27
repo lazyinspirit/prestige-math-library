@@ -2,13 +2,7 @@
 id: "thm-auslander-buchsbaum-serre-regularity-criterion"
 kind: "theorem"
 title: "auslander buchsbaum serre regularity criterion"
-deps: ["lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension", "cor-regular-local-residue-field-projective-dimension-dimension", "lem-local-global-dimension-equals-residue-field-projective-dimension", "thm-auslander-buchsbaum-formula", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-nakayama-lemma"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension", "cor-regular-local-residue-field-projective-dimension-dimension", "lem-local-global-dimension-equals-residue-field-projective-dimension", "thm-auslander-buchsbaum-formula", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-nakayama-lemma"]
 sources:
   references:
     - title: "Theorem 12.33 and Corollary 12.30, pp.121–123"
@@ -19,9 +13,20 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 For a nonzero Noetherian local ring $(R,\mathfrak m,k)$ the following are equivalent: $R$ is regular; $\operatorname{pd}_Rk<\infty$; $\operatorname{gldim}R<\infty$; and every finite $R$-module has finite projective dimension. When these hold, $\operatorname{gldim}R=\operatorname{pd}_Rk=\dim R$. A nonzero finite module over regular local $R$ is maximal Cohen–Macaulay (depth $\dim R$) if and only if it is free.
 

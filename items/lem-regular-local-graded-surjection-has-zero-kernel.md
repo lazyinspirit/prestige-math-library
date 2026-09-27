@@ -2,19 +2,20 @@
 id: "lem-regular-local-graded-surjection-has-zero-kernel"
 kind: "lemma"
 title: "regular local graded surjection has zero kernel"
-deps: ["lem-associated-graded-polynomial-surjection", "thm-hilbert-samuel-dimension-theorem", "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain"]
+deps: ["lem-associated-graded-polynomial-surjection", "thm-hilbert-samuel-dimension-theorem", "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "10.106.1 proof; Li Proposition 25.6"
       url: "https://stacks.math.columbia.edu/tag/00NN"
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 status: published
 origin: "pipeline"
@@ -23,11 +24,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-For the graded map $\phi:k[X_1,\ldots,X_e]\twoheadrightarrow\operatorname{gr}_{\mathfrak m}R$ defined by a cotangent basis in a nonzero Noetherian local ring, if $e=\dim R$, then $\ker\phi=0$.
+Assume the Axiom of Choice. For the graded map $\phi:k[X_1,\ldots,X_e]\twoheadrightarrow\operatorname{gr}_{\mathfrak m}R$ defined by a cotangent basis in a nonzero Noetherian local ring, if $e=\dim R$, then $\ker\phi=0$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [F1] [[lem-associated-graded-polynomial-surjection]]: Let $(R,\mathfrak m,k)$ be nonzero Noetherian local and let $x_1,\ldots,x_e$ lift a basis of $\mathfrak m/\mathfrak m^2$. There is a surjective graded $k$-algebra map $\phi:k[X_1,\ldots,X_e]\to\operatorname{gr}_{\mathfrak m}R$, determined by $X_i\mapsto x_i+\mathfrak m^2$, with every variable of degree one.
 

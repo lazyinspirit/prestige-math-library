@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-brauer-character-is-additive-on-short-exact-sequences, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
+deps: [def-splitting-p-modular-system-for-a-finite-group, def-brauer-character-of-a-finite-dimensional-kg-module, thm-brauer-character-is-additive-on-short-exact-sequences, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
 proof_strategy: iff
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -27,8 +27,11 @@ sources:
 
 ## Statement
 
-Let $V$ and $W$ be finite-dimensional $kG$-modules over a splitting field of
-characteristic $p$. Then
+Fix a finite group $G$, a prime $p$, and a splitting $p$-modular system
+$(K,\mathcal O,k)$ for $G$
+([[def-splitting-p-modular-system-for-a-finite-group]]). Let $V$ and $W$ be
+finite-dimensional $kG$-modules, with Brauer characters defined using this
+system ([[def-brauer-character-of-a-finite-dimensional-kg-module]]). Then
 
 $$\varphi_V=\varphi_W$$
 
@@ -37,7 +40,9 @@ are isomorphic.
 
 ## Facts & Assumptions
 
-**Given:** Finite-dimensional $kG$-modules $V$ and $W$.
+**Given:** A finite group $G$, a prime $p$, a fixed splitting $p$-modular
+system $(K,\mathcal O,k)$ for $G$, and finite-dimensional $kG$-modules $V$
+and $W$.
 
 [L1] Brauer characters are additive on short exact sequences ([[thm-brauer-character-is-additive-on-short-exact-sequences]]).
 

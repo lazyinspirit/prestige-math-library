@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]
+deps: [def-axiom-of-choice, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]
 proof_strategy: iff
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -27,13 +27,15 @@ sources:
 
 ## Statement
 
-An extension of $G$ by the abelian $G$-module $M$ has class $0$ in
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). An extension of $G$ by the abelian $G$-module $M$ has class $0$ in
 $H^2(G,M)$ if and only if it is equivalent to the semidirect product
 $M\rtimes G$, equivalently if and only if it splits.
 
 ## Facts & Assumptions
 
-**Given:** An extension $1\to M\to E\to G\to1$ inducing the given action.
+**Given:** The Axiom of Choice and an extension $1\to M\to E\to G\to1$ inducing the given action.
+
+[A1] Choice supplies the normalized sections required by the classification [L1] for arbitrary quotient surjections.
 
 [L1] $H^2(G,M)$ classifies such extensions ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
@@ -43,8 +45,8 @@ $M\rtimes G$, equivalently if and only if it splits.
 
 **Proof technique:** iff.
 
-1.1 The semidirect product $M\rtimes G$ is represented by the zero cocycle, so its class in $H^2(G,M)$ is $0$. Therefore any extension equivalent to $M\rtimes G$ has class $0$ by [L1]. [L1, given, algebra]
+1.1 The semidirect product $M\rtimes G$ is represented by the zero cocycle, so its class in $H^2(G,M)$ is $0$. Therefore any extension equivalent to $M\rtimes G$ has class $0$ by [L1] under [A1]. [A1, L1, given, algebra]
 
-1.2 Conversely, if the class of $E$ is $0$, then [L1] says that $E$ is equivalent to the extension attached to the zero cocycle, namely the semidirect product $M\rtimes G$. By [L2], that extension splits. [L1, L2, given]
+1.2 Conversely, if the class of $E$ is $0$, then [L1] under [A1] says that $E$ is equivalent to the extension attached to the zero cocycle, namely the semidirect product $M\rtimes G$. By [L2], that extension splits. [A1, L1, L2, given]
 
 2.1 A split extension is equivalent to a semidirect product by [L2], so steps 1.1 and 1.2 prove all claimed equivalences. [L2, step 1.1, step 1.2] ∎

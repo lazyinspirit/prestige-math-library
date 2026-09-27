@@ -10,6 +10,8 @@ provenance:
 deps: [thm-morse-sard-for-euclidean-maps,
        prop-countable-unions-and-subsets-of-manifold-null-sets-are-null,
        prop-a-countable-chart-cover-detects-manifold-null-sets,
+       prop-every-smooth-manifold-admits-a-countable-smooth-atlas-with-relatively-compact-domains,
+       def-countable-choice,
        def-critical-locus-and-critical-value-set,
        def-regular-and-critical-points-and-values,
        def-null-subset-of-a-smooth-manifold]
@@ -18,8 +20,13 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-morse-sard-for-smooth-manifolds). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,12 +38,12 @@ sources:
 
 ## Statement
 
-Let $F:M\to N$ be a smooth map between smooth manifolds. Then the critical value
+Assume the Axiom of Countable Choice. Let $F:M\to N$ be a smooth map between smooth manifolds. Then the critical value
 set of $F$ is a null subset of $N$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $F:M\to N$.
+**Given:** Countable Choice and a smooth map $F:M\to N$.
 
 [F1] The empty fibre case is regular, so if every differential $dF_p$ is surjective then every value of $F$ is regular ([[def-regular-and-critical-points-and-values]]).
 
@@ -48,17 +55,15 @@ set of $F$ is a null subset of $N$.
 
 [L2] In Euclidean charts, the critical value set of a smooth map is null ([[thm-morse-sard-for-euclidean-maps]]).
 
+[L3] Under Countable Choice, smooth manifolds admit countable smooth atlases with relatively compact domains ([[prop-every-smooth-manifold-admits-a-countable-smooth-atlas-with-relatively-compact-domains]]).
+
 ## Proof
 **Proof technique:** direct.
 
-1.1 If $\dim N=0$, then every differential [F1, F2, given, cases]
-$dF_p:T_pM\to T_{F(p)}N=\{0\}$ is surjective, so [F1] makes every value of $F$ regular. Thus the critical value set is empty, which is null by [F2]. Assume henceforth that $\dim N>0$. [F1, F2, given, cases]
+1.1 If $\dim N=0$, then every differential $dF_p:T_pM\to T_{F(p)}N=\{0\}$ is surjective, so [F1] makes every value of $F$ regular. Thus the critical value set is empty, which is null by [F2]. Assume henceforth that $\dim N>0$. [F1, F2, given, cases]
 
-2.1 Choose countable smooth atlases $\{(U_i,\varphi_i)\}$ on $M$ and [L1, step 1.1, given, choose]
-$\{(V_j,\psi_j)\}$ on $N$ detecting nullity by [L1], and refine the source atlas so that each $F(U_i)$ lies in some $V_{j(i)}$. [L1, step 1.1, given, choose]
+1.2 By [L3] under Countable Choice, take countable smooth atlases $\{(U_i,\varphi_i)\}$ on $M$ and $\{(V_j,\psi_j)\}$ on $N$; the latter detects nullity by [L1]. The countable open overlaps $U_{ij}=U_i\cap F^{-1}(V_j)$ cover $M$. [L1, L3, given]
 
-3.1 For each $i$, the coordinate representative [L2, step 2.1, algebra]
-$$ f_i:=\psi_{j(i)}\circ F\circ\varphi_i^{-1} $$ is smooth between Euclidean open sets with positive-dimensional target. A point of $U_i$ is critical for $F$ exactly when its coordinate representative is critical for $f_i$, because the chart maps have invertible differentials. By [L2], the critical value set of $f_i$ is null in $\psi_{j(i)}(V_{j(i)})$. Therefore $\psi_{j(i)}(F(\operatorname{Crit}(F)\cap U_i))$ is null for every $i$. [L2, step 2.1, algebra]
+2.1 For each pair $(i,j)$, the coordinate representative $$ f_{ij}:=\psi_j\circ F\circ\varphi_i^{-1} $$ on $\varphi_i(U_{ij})$ is smooth between Euclidean open sets with positive-dimensional target. A point of $U_{ij}$ is critical for $F$ exactly when its coordinate representative is critical for $f_{ij}$, because the chart maps have invertible differentials. By [L2], $\psi_j(F(\operatorname{Crit}(F)\cap U_{ij}))$ is null. [L2, step 1.2, algebra]
 
-4.1 By [F3], the critical value set of $F$ is the countable union of the sets [F3, L1, step 3.1]
-$F(\operatorname{Crit}(F)\cap U_i)$, so [L1] shows that it is null in $N$. [F3, L1, step 3.1] ∎
+3.1 Fix $j$. The chart image of the critical value set inside $V_j$ is the countable union over $i$ of the null sets from step 2.1. By the countable-union clause of [L1] in Euclidean coordinates, this chart image is null. Since this holds for every $j$, [L1] detects the critical value set of $F$ as null in $N$. [F3, L1, step 1.2, step 2.1] ∎

@@ -7,19 +7,19 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-product-varieties-universal-property, def-projective-space-points, def-morphism-to-projective-space-homogeneous-coordinates]
+deps: [def-projective-space-points]
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
     - title: J. S. Milne, Algebraic Geometry, The Segre map, §6i
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
-verification:
-  audited: 2026-09-07
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 ---
 
 ## Definition

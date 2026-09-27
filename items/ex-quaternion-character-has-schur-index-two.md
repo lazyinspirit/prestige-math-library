@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-quaternion-group-of-order-eight, def-character-of-a-complex-representation, def-schur-index-of-an-irreducible-character, thm-character-of-an-irreducible-over-a-nonsplitting-field, thm-schur-index-equals-division-algebra-index]
+deps: [def-quaternion-group-of-order-eight, def-character-of-a-complex-representation, def-schur-index-of-an-irreducible-character, thm-character-of-an-irreducible-over-a-nonsplitting-field, thm-schur-index-equals-division-algebra-index, def-axiom-of-choice]
 proof_strategy: computation
 verification:
-  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (ex-quaternion-character-has-schur-index-two). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gabor Wiese, Galois Representations, Section 2.5"
@@ -26,13 +27,16 @@ sources:
 
 For $Q_8=\{\pm1,\pm i,\pm j,\pm k\}$, its faithful complex irreducible
 character has values $\chi(1)=2$, $\chi(-1)=-2$, and $\chi(\pm i)=\chi(\pm j)=
-\chi(\pm k)=0$.  It is rational-valued, but $m_{\mathbb Q}(\chi)=2$.
+\chi(\pm k)=0$. It is rational-valued. The explicit irreducible rational
+quaternion module below has complex scalar-extension multiplicity two for
+$\chi$; under the Axiom of Choice, the general Schur-index definition
+identifies this value as $m_{\mathbb Q}(\chi)=2$.
 
 ## Facts & Assumptions
 
 **Given:** $Q_8$ with generators $i,j$ satisfying $i^2=j^2=-1$ and $ij=-ji$.
 
-[L1] The Schur index is the common scalar-extension multiplicity of the complex constituents of an irreducible representation over the character field ([[def-schur-index-of-an-irreducible-character]]).
+[L1] Under AC, the Schur index is the common scalar-extension multiplicity of the complex constituents of the unique attached irreducible representation over the character field ([[def-schur-index-of-an-irreducible-character]]).
 
 ## Verification
 
@@ -42,4 +46,4 @@ character has values $\chi(1)=2$, $\chi(-1)=-2$, and $\chi(\pm i)=\chi(\pm j)=
 
 1.2 Let $\mathbb H_{\mathbb Q}=\mathbb Q+\mathbb Qi+\mathbb Qj+\mathbb Qk$ and let $Q_8$ act on it by left multiplication.  The norm $q\bar q=a^2+b^2+c^2+d^2$ is nonzero for every nonzero rational quaternion, so $\mathbb H_{\mathbb Q}$ is a division algebra.  A $Q_8$-stable rational subspace is therefore a left ideal (the elements of $Q_8$ span $\mathbb H_{\mathbb Q}$), and this four-dimensional rational representation is irreducible. [algebra]
 
-2.1 The trace of left multiplication is $4$ at $1$, $-4$ at $-1$, and $0$ at the other six elements.  Thus the complexification of the irreducible rational representation in step 1.2 has character $2\chi$ (equivalently, $\mathbb H_{\mathbb Q}\otimes_{\mathbb Q}\mathbb C\cong M_2(\mathbb C)$ is two copies of the natural module under left multiplication).  By [L1], its common scalar-extension multiplicity is $m_{\mathbb Q}(\chi)=2$. [L1, step 1.1, step 1.2, algebra] ∎
+2.1 The trace of left multiplication is $4$ at $1$, $-4$ at $-1$, and $0$ at the other six elements. Thus the complexification of the irreducible rational representation in step 1.2 has character $2\chi$ (equivalently, $\mathbb H_{\mathbb Q}\otimes_{\mathbb Q}\mathbb C\cong M_2(\mathbb C)$ is two copies of the natural module under left multiplication). This explicit multiplicity computation uses no choice principle. Under AC, [L1] identifies this irreducible rational module with the attached one, so its multiplicity is $m_{\mathbb Q}(\chi)=2$. [L1, step 1.1, step 1.2, algebra] ∎

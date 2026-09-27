@@ -10,8 +10,12 @@ provenance:
 deps: [thm-blocks-partition-ordinary-and-brauer-irreducible-characters, prop-decomposition-matrix-is-block-diagonal-after-block-ordering]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -38,8 +42,8 @@ irreducible Brauer character.
 
 **Proof technique:** direct.
 
-1.1 The group algebra $kC_p$ has only one irreducible Brauer character, namely the trivial one, because $C_p$ is a $p$-group. But over characteristic $0$, the cyclic group $C_p$ has $p$ distinct ordinary irreducible characters. [given, algebra]
+1.1 The group algebra $kC_p$ has only one irreducible Brauer character, namely the trivial one: in characteristic $p$, a generator acts on every simple module as $1$, since $(g-1)^p=0$. Over a splitting field of characteristic $0$, $C_p$ has $p$ distinct ordinary irreducible characters, all linear. Each has a stable rank-one lattice, whose reduction is a one-dimensional $kC_p$-module and hence the trivial Brauer character. Thus every ordinary character has decomposition number $1$ in the unique Brauer column. [given, algebra]
 
-2.1 By [L1], all of those characters are distributed among the blocks of $C_p$, and [L2] shows that the decomposition data are organized blockwise. Since there is only one Brauer irreducible, some block contains more than one ordinary irreducible character. [L1, L2, step 1.1]
+2.1 By [L1] and [L2], a nonzero decomposition number joins an ordinary character to a Brauer character in the same block. Step 1.1 therefore places all $p$ ordinary irreducibles in the single block containing the trivial Brauer character. For any prime $p\ge2$, that block contains more than one ordinary irreducible. [L1, L2, step 1.1]
 
 3.1 Therefore the statement is false. [step 2.1] ∎

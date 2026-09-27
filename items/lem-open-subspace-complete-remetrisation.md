@@ -7,14 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-complete-remetrisation, lem-distance-to-set-is-lipschitz, thm-complete-subspace-iff-closed]
+deps: [lem-complete-remetrisation, lem-distance-to-set-is-lipschitz]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -41,21 +45,18 @@ If $X$ is completely metrizable and $U\subseteq X$ is open, then $U$ is complete
 
 [F2] Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be nonempty and let $x, y \in X$. Then $$|d(x,A) - d(y,A)| \le d(x,y),$$ with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter). Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$ between $u$ and $v$: it is **$1$-Lipschitz**. ([[lem-distance-to-set-is-lipschitz]]).
 
-[F3] Let $(X,d)$ be a metric space (def-metric-space) and let $A \subseteq X$ carry the subspace metric $d_A$ (def-isometry-and-metric-embedding). Then: 1. If $(A,d_A)$ is complete (def-complete-metric-space), then $A$ is closed in $(X,d)$ (def-metric-topology). **No hypothesis on $X$ is needed.** 2. If $(X,d)$ is complete and $A$ is closed in $(X,d)$, then $(A,d_A)$ is complete. Consequently, for a complete $(X,d)$ a subset $A \subseteq X$ is complete if and only if it is closed. ([[thm-complete-subspace-iff-closed]]).
-
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If the open subspace is empty, its unique metric is compatible and complete. [given, F1, F3, F2]
+1.1 If $U=\varnothing$, its unique metric is compatible and complete. Otherwise choose a complete metric $\rho$ on $X$ compatible with its given topology, as allowed by [F1]. Since $U$ is open, it is also $\rho$-open. [given, F1]
 
-2.1 Otherwise choose a compatible complete metric. [step 1.1, F1, F3, F2]
+2.1 If $U=X$, the restricted metric $\rho|_{U\times U}$ is compatible and complete. Hence assume $U$ is nonempty and proper, and put $F=X\setminus U$. Then $F$ is nonempty and $\rho$-closed. For $x\in U$, let $\delta(x)=\inf_{z\in F}\rho(x,z)$. Openness of $U$ gives $\delta(x)>0$, and [F2] gives $|\delta(x)-\delta(y)|\le\rho(x,y)$. [step 1.1, F2]
 
-3.1 If the open set is the whole space, restrict that metric. [step 2.1, F1, F3, F2]
+3.1 Define $\sigma(x,y)=\rho(x,y)+|1/\delta(x)-1/\delta(y)|$ on $U$. This is a metric: it is nonnegative and symmetric, vanishes only when $x=y$ because $\rho$ is a metric, and satisfies the triangle inequality by adding those for $\rho$ and absolute value. Also $\rho(x,y)\le\sigma(x,y)$. [step 2.1, algebra]
 
-4.1 In the remaining case add to the restricted metric the absolute difference of reciprocals of the distance to the nonempty closed complement. [step 3.1, F1, F3, F2]
+4.1 The metrics $\sigma$ and $\rho|_{U\times U}$ induce the same topology. Indeed, fix $x\in U$ and $\varepsilon>0$. If $\rho(x,y)<\delta(x)/2$, then $\delta(y)>\delta(x)/2$ by [F2], so $|1/\delta(x)-1/\delta(y)|\le 2\rho(x,y)/\delta(x)^2$. Thus $\rho(x,y)<\min\{\delta(x)/2,\varepsilon/(1+2/\delta(x)^2)\}$ implies $\sigma(x,y)<\varepsilon$. Conversely $\sigma(x,y)<\varepsilon$ implies $\rho(x,y)<\varepsilon$ by step 3.1. [step 2.1, step 3.1, F2]
 
-5.1 A Cauchy sequence for the new metric cannot approach the complement and therefore converges inside the open set. [step 4.1, F1, F3, F2]
+4.2 Let $(x_n)$ be $\sigma$-Cauchy. Then $(x_n)$ is $\rho$-Cauchy and the real sequence $(1/\delta(x_n))$ is Cauchy by step 3.1. Completeness of $(X,\rho)$ gives a limit $x\in X$, and every Cauchy real sequence is bounded, so $1/\delta(x_n)\le M$ for some finite $M>0$ and all $n$. Hence $\delta(x_n)\ge 1/M$; [F2] and $x_n\to x$ imply $\delta(x)\ge1/M>0$. If $x\in F$, its distance to $F$ would be zero, so $x\in U$. [step 1.1, step 2.1, step 3.1, F2]
 
-6.1 The preceding construction and implications establish the assertion. [step 5.1] ∎
-
+5.1 Since $x\in U$ and $\delta(x_n)\to\delta(x)>0$, the reciprocal estimate of step 4.1 gives $1/\delta(x_n)\to1/\delta(x)$. Therefore $\sigma(x_n,x)\to0$, proving completeness of $\sigma$. Steps 1.1–2.1 cover the empty and whole-space cases, and step 4.1 gives compatibility in the remaining case. Thus $U$ is completely metrizable. [step 1.1, step 2.1, step 4.1, step 4.2] ∎

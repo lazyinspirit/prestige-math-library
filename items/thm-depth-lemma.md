@@ -4,7 +4,7 @@ title: The three Depth Lemma inequalities
 kind: theorem
 status: published
 origin: pipeline
-deps: [lem-depth-lemma-lower-bound-middle, lem-depth-lemma-lower-bound-left, lem-depth-lemma-lower-bound-right]
+deps: [def-axiom-of-choice, lem-depth-lemma-lower-bound-middle, lem-depth-lemma-lower-bound-left, lem-depth-lemma-lower-bound-right]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,16 +14,16 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (thm-depth-lemma). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
 
-Let $(R,\mathfrak m)$ be a Noetherian local ring and
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\mathfrak m)$ be a Noetherian local ring and
 $0\to A\to B\to C\to0$ a short exact sequence of finite $R$-modules. With
 $a=\operatorname{depth}_R(A)$, $b=\operatorname{depth}_R(B)$, and
 $c=\operatorname{depth}_R(C)$,
@@ -32,7 +32,7 @@ The last inequality is vacuous when $a=0$.
 
 ## Facts & Assumptions
 
-**Given:** the displayed exact sequence and depth notation.
+**Given:** The Axiom of Choice, displayed exact sequence, and depth notation.
 
 ## Proof
 

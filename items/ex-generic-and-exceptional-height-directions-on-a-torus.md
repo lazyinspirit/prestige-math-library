@@ -7,18 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-morse-function-and-excellent-morse-function, thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse]
+deps: [def-morse-function-and-excellent-morse-function]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct computation
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -26,6 +19,13 @@ sources:
       url: "https://www.scribd.com/document/488533132/morse"
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, Part 10"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes-10.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (ex-generic-and-exceptional-height-directions-on-a-torus). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
@@ -43,8 +43,6 @@ exceptional symmetry directions explicitly.
 
 [F1] Morse and excellent Morse functions are defined on the A page ([[def-morse-function-and-excellent-morse-function]]).
 
-[L1] Generic directions on a compact embedded manifold give Morse height functions ([[thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse]]).
-
 ## Verification
 
 **Proof technique:** direct computation.
@@ -55,4 +53,4 @@ exceptional symmetry directions explicitly.
 
 2.2 If $A=0$, then $c=\pm1$ and the height is $k(u,v)=\pm r\sin u$. Its critical set is the union of the two circles $u=\pi/2$ and $u=3\pi/2$, so both vertical directions are degenerate and not Morse. [step 1.1, algebra]
 
-3.1 The two vertical poles form a null subset of the direction sphere, while every direction in their complement has the four Morse critical points from steps 1.1 and 2.1. This proves directly that generic directions have four critical points and identifies the exceptional symmetry directions, consistently with [L1]. [L1, step 2.1, step 2.2] ∎
+3.1 The two vertical poles form a finite subset of the direction sphere. Their image in every smooth sphere chart is finite, hence Euclidean null, so they are $\mathcal A$-null for every smooth atlas $\mathcal A$. Every direction in their complement has the four Morse critical points from steps 1.1 and 2.1. This proves the claimed generic and exceptional behaviour directly. [step 2.1, step 2.2] ∎

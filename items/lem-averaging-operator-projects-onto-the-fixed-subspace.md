@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-g-fixed-subspace-of-a-representation]
+deps: [def-g-fixed-subspace-of-a-representation, lem-trace-of-an-idempotent-is-the-dimension-of-its-image]
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -41,7 +41,7 @@ $\operatorname{tr}P=\dim V^{G}$.
 
 [F1] The fixed subspace is $V^{G}=\{v\in V:g\cdot v=v\text{ for every }g\in G\}$ ([[def-g-fixed-subspace-of-a-representation]]).
 
-[A2] If $T$ is a projection of a finite-dimensional vector space, meaning $T^2=T$, then $V=\operatorname{im}T\oplus\ker T$, $T$ restricts to the identity on $\operatorname{im}T$, and in a basis adapted to that decomposition the matrix of $T$ is block diagonal with an identity block and a zero block.
+[F2] An idempotent endomorphism has trace equal to the dimension of its image as a field scalar ([[lem-trace-of-an-idempotent-is-the-dimension-of-its-image]]).
 
 ## Proof
 
@@ -55,4 +55,4 @@ $\operatorname{tr}P=\dim V^{G}$.
 
 4.1 For $v\in V^{G}$, step 3.1 gives $P(Pv)=Pv=v=Pv$; for general $v$, $Pv\in V^{G}$ by step 2.1, so $P^2v=P(Pv)=Pv$. Hence $P^2=P$. [step 2.1, step 3.1, algebra]
 
-5.1 By [A2] applied to $P$ from step 4.1, $V=\operatorname{im}P\oplus\ker P$ and the matrix of $P$ in an adapted basis has an identity block of size $\dim(\operatorname{im}P)$ and a zero block. Its trace is therefore $\dim(\operatorname{im}P)$, and step 3.1 identifies $\operatorname{im}P$ with $V^{G}$. [A2, step 4.1, step 3.1, algebra] ∎
+5.1 Apply [F2] to the idempotent $P$ from step 4.1. Over $\mathbb C$ this gives $\operatorname{tr}P=\dim(\operatorname{im}P)$, and step 3.1 identifies $\operatorname{im}P$ with $V^{G}$. [F2, step 4.1, step 3.1] ∎

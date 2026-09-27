@@ -123,4 +123,4 @@ function has no Darboux sums at all ([[def-darboux-sums]]).
 
 - **The result is genuinely weaker than what is true.** Thomae's function has infinitely many discontinuities and is integrable, and so is the indicator of the Cantor set, whose discontinuity set is uncountable. What survives is that a *finite* discontinuity set never obstructs integrability, whatever the function does at those points.
 
-- **Choice.** The proof selects nothing from an infinite family; the only countable choice behind it is the single use inside [[thm-heine-cantor-r]], invoked at step 4.1. See [[rem-riemann-integral-choice-ledger]].
+- **Choice.** The proof selects nothing from an infinite family. The current finite-subcover proof of [[thm-heine-cantor-r]], invoked at step 4.1, is choice-free as well. See [[rem-riemann-integral-choice-ledger]].

@@ -1,5 +1,4 @@
 ---
----
 page: yoneda-extensions-and-homological-dimension
 title: "Yoneda Extensions and Homological Dimension"
 status: published

@@ -7,15 +7,20 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-regular-values-have-null-complement-and-are-dense,
+deps: [def-countable-choice, cor-regular-values-have-null-complement-and-are-dense,
        prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (cor-regular-values-form-a-dense-g-delta-set). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -25,14 +30,15 @@ sources:
 
 ## Statement
 
-For a smooth map $F:M\to N$, the set of regular values is a dense
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). For a smooth map
+$F:M\to N$, the set of regular values is a dense
 $G_\delta$ subset of $N$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $F:M\to N$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth map $F:M\to N$.
 
-[L1] The critical value set is $\sigma$-compact ([[prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact]]).
+[L1] Under $\mathrm{AC}_\omega$, the critical value set is $\sigma$-compact ([[prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact]]).
 
 [L2] Regular values are dense, and the critical value set is null ([[cor-regular-values-have-null-complement-and-are-dense]]).
 

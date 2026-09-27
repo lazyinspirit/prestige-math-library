@@ -4,24 +4,30 @@ title: "Zeta logarithmic derivative zero bound"
 kind: lemma
 status: published
 origin: pipeline
-deps: [thm-hadamard-product-for-riemann-xi, def-riemann-xi-function, thm-stirling-formula-gamma, thm-cauchy-integral-formula-higher-derivatives, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip]
+deps: [thm-hadamard-product-for-riemann-xi, def-riemann-xi-function, thm-stirling-formula-gamma, thm-cauchy-integral-formula-higher-derivatives, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "\u00a78.3, Hadamard calculation in proof of Theorem 8.8"
       url: https://kskedlaya.org/ant/chap-zeroes.html
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 Write $s=\sigma+it$ and let $\rho$ range over nontrivial zeta zeros with multiplicity. With the Hadamard constant $B$,
 $$\frac{\zeta'}{\zeta}(s)=B+\sum_\rho\left(\frac1{s-\rho}+\frac1\rho\right)-\frac1{s-1}+\frac{\log\pi}{2}-\frac{\Gamma'(1+s/2)}{2\Gamma(1+s/2)}.$$
@@ -31,7 +37,7 @@ and this real series is absolutely convergent.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** Countable choice and the data and hypotheses of the statement.
 
 [F1] [[thm-hadamard-product-for-riemann-xi]]: There exist constants $A,B\in\mathbb C$ such that $\xi(s)=e^{A+Bs}\prod_\rho E_1(s/\rho),$ where the product runs over the nontrivial zeros $\rho$ of $\zeta$, counted with multiplicity, and $E_1(w)=(1-w)e^w.$ The product converges in the genus-one canonical sense.
 
@@ -47,7 +53,7 @@ and this real series is absolutely convergent.
 
 ## Proof
 
-1.1 For bounded $s$ away from zeros, the terms $1/(s-\rho)+1/\rho$ are $O_s(|\rho|^{-2})$. The unit-interval count, reflected using conjugate zeros, makes their tails normally convergent. Logarithmically differentiating the canonical product therefore gives $\xi'/\xi=B+\sum_\rho(1/(s-\rho)+1/\rho)$. [F1, F5, F6]
+1.1 Under countable choice, use the supplied xi product and unit-band zero count. For bounded $s$ away from zeros, the terms $1/(s-\rho)+1/\rho$ are $O_s(|\rho|^{-2})$. The unit-interval count, reflected using conjugate zeros, makes their tails normally convergent. Logarithmically differentiating the canonical product therefore gives $\xi'/\xi=B+\sum_\rho(1/(s-\rho)+1/\rho)$. [F1, F5, F6]
 
 1.2 Put $z=1+s/2$. In a wider fixed sector containing these high-height points, Stirling gives $\Gamma(z)=\sqrt{2\pi}\exp((z-1/2)\operatorname{Log}z-z)(1+r(z))$ with $r(z)=O(|z|^{-1})$. On discs of radius $\epsilon|z|$ in that sector, Cauchy gives $r'(z)=O(|z|^{-2})$. Thus $\Gamma'/\Gamma(z)=\operatorname{Log}z-1/(2z)+O(|z|^{-2})$, whose real part is $\log|t|-\log2+O(1/|t|)$. Remaining bounded heights are compact. [F3, F4]
 

@@ -22,12 +22,8 @@ items: [def-finite-alphabet-encoding-and-algorithm,
         rem-undecidability-of-the-isomorphism-problem-for-finitely-presented-groups,
         rem-groups-with-unsolvable-conjugacy-problem,
         def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation,
-        lem-minimal-algebraic-relator-area-exists,
-        prop-recursive-dehn-function-implies-solvable-word-problem]
-examples: [fs-every-finitely-presented-group-has-solvable-word-problem,
-           fs-recursively-enumerable-trivial-words-form-a-decision-algorithm,
-           fs-unsolvable-word-problem-means-no-word-can-be-decided,
-           fs-the-novikov-boone-theorem-proves-the-uniform-problem-only,
+        lem-minimal-algebraic-relator-area-exists]
+examples: [fs-recursively-enumerable-trivial-words-form-a-decision-algorithm,
            fs-a-tietze-equivalent-presentation-can-change-solvability-of-the-word-problem]
 ---
 
@@ -38,5 +34,6 @@ classical negative theorems as exact cited boundary markers rather than
 synthetic reconstructions.
 
 The final seam defines algebraic relator area and the Dehn function in a way
-that stays inside presentations and normal closures. Van Kampen diagrams and
-the geometric reformulation are deferred to later pages.
+that stays inside presentations and normal closures. Van Kampen diagrams, their finite enumeration, and the resulting decision
+algorithm from a recursive Dehn bound are developed later on
+[[asymptotic-cones-and-the-sublinear-triangle-criterion]].

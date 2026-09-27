@@ -3070,10 +3070,21 @@ deliberately proves duality only for curves. Add this one planned-only AG pair:
 |---|---|
 | A page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles` / *Smooth-projective Serre duality and flag-variety line bundles* |
 | A category / order | `algebraic-geometry` / **510.0161**, after RL-8 B and before RL-9 A |
-| A `requires` | `kahler-differentials-conormal-sequences-and-infinitesimal-lifting`, `quasi-coherent-and-coherent-sheaves-and-vector-bundles`, `proj-projective-schemes-twisting-sheaves-and-ampleness`, `sheaf-cohomology-cech-cohomology-and-comparison`, `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes`, `ext-and-balanced-resolutions`, `derived-categories`, `spectral-sequences`, `lie-subgroups-actions-and-homogeneous-spaces`, `cartan-subalgebras-and-root-space-decompositions`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` |
+| A `requires` | `kahler-differentials-conormal-sequences-and-infinitesimal-lifting`, `quasi-coherent-and-coherent-sheaves-and-vector-bundles`, `proj-projective-schemes-twisting-sheaves-and-ampleness`, `sheaf-cohomology-cech-cohomology-and-comparison`, `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes`, `ext-and-balanced-resolutions`, `derived-categories`, `spectral-sequences`, `grothendieck-spectral-sequences-and-computations`, `lie-subgroups-actions-and-homogeneous-spaces`, `cartan-subalgebras-and-root-space-decompositions`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` |
 | B page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles-examples` / *Smooth-projective Serre duality and flag-variety line bundles — examples* |
 | B category / order / `requires` | `algebraic-geometry` / **510.0162** / singleton `smooth-projective-serre-duality-and-flag-variety-line-bundles` |
 | companions / phase | reciprocal; **planned-only**, with zero published consumers |
+
+**Frontier-35 disposition (2026-09-24):** this A/B pair was deferred from
+`frontier-35-ten-categories` after its Step-1 scaffold left 25 of 30 items
+escalated. AV-18 coherent sheaves, AV-19 Proj and twisting sheaves, and AV-22
+quasi-coherent cohomology are unbuilt, and the general complex semisimple
+algebraic-group quotient/root-subgroup/Bruhat bridge has no proved earlier
+supplier. The pair remains in the canonical plan with empty page inventories;
+its future Borel--Weil--Bott prerequisite edge remains in force. The preserved
+scaffold and exact missing interfaces are recorded in
+`research/frontier-35-ten-categories-deferred-pairs.json`. Source access alone
+does not discharge these proof prerequisites.
 
 Its exact 17-item A inventory, in proof order, is:
 

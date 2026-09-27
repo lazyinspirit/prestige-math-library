@@ -4,7 +4,7 @@ kind: false-statement
 title: "Universal coefficients split naturally"
 status: published
 origin: pipeline
-deps: [thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two, prop-schur-multiplier-of-a-cyclic-group-is-trivial, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square, lem-exterior-square-has-the-alternating-universal-property, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]
+deps: [thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two, prop-schur-multiplier-of-a-cyclic-group-is-trivial, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square, lem-exterior-square-has-the-alternating-universal-property, thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action, def-axiom-of-choice, def-supplied-projective-resolution-datum, def-supplied-injective-resolution-datum]
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -17,20 +17,34 @@ sources:
       url: https://math.jhu.edu/~jmb/note/uctcoh.pdf
 proof_strategy: contradiction
 verification:
-  audited: 2026-09-06
-  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-05-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-For groups $G$ and trivial $G$-modules $A$, the degree-two universal-coefficient
+Assume the Axiom of Choice and supplied projective and injective resolution
+data for group (co)homology. For groups $G$ and trivial $G$-modules $A$,
+the degree-two universal-coefficient
 short exact sequence splits naturally in $G$ and $A$.
 
 ## Facts & Assumptions
 
-**Given:** Fix $A=C_2$ with trivial action and $V=C_2\times C_2$, written as $\mathbb F_2^2$. Write $p_G:H^2(G;A)\to\operatorname{Hom}(M(G),A)$ for the universal-coefficient map.
+**Given:** The stated choice and resolution hypotheses. Fix $A=C_2$
+with trivial action and $V=C_2\times C_2$, written as $\mathbb F_2^2$.
+Write $p_G:H^2(G;A)\to\operatorname{Hom}(M(G),A)$ for the
+universal-coefficient map.
 
-[L1] The degree-two universal-coefficient sequence is natural and admits a splitting after choices ([[thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]]).
+[L1] [[thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]]
+supplies the degree-two universal-coefficient map $p_G$ under the stated
+hypotheses. The contradiction uses the hypothesized natural section only
+for finite groups.
 
 [L2] A cyclic group has zero Schur multiplier ([[prop-schur-multiplier-of-a-cyclic-group-is-trivial]]).
 
@@ -50,4 +64,4 @@ short exact sequence splits naturally in $G$ and $A$.
 
 4.1 Every element of $E$ either belongs to the kernel $A$, or maps to a nonzero vector of $V$ and therefore belongs to one of these three preimages. Thus every element of $E$ has square $1$. For $x,y\in E$, this gives $xy=(xy)^{-1}=y^{-1}x^{-1}=yx$, so $E$ is abelian. Choose lifts $u,v$ of the two standard basis vectors of $V$. Since $u^2=v^2=1$ and $uv=vu$, the map $(a,b)\mapsto u^av^b$ is a homomorphic section of $\pi$. [step 3.1, choose, algebra]
 
-5.1 This section makes $\alpha=0$, contradicting $p_V(\alpha)=\lambda\ne0$. Therefore no splitting can be natural in the group variable even for the fixed coefficient group $C_2$, and in particular none is natural in both variables. Individual sequences still split after choices by [L1]. [L4, L1, step 2.1, step 4.1, discharge-contradiction] ∎
+5.1 This section makes $\alpha=0$, contradicting $p_V(\alpha)=\lambda\ne0$. Therefore no splitting can be natural in the group variable even for the fixed coefficient group $C_2$, and in particular none is natural in both variables. Under the Axiom of Choice, the individual sequences split after choices by the separate splitting theorem cited in [L1]. [L4, L1, step 2.1, step 4.1, discharge-contradiction] ∎

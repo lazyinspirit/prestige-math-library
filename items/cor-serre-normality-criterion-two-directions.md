@@ -2,13 +2,7 @@
 id: "cor-serre-normality-criterion-two-directions"
 kind: "corollary"
 title: "serre normality criterion two directions"
-deps: ["lem-normal-domain-implies-r-one", "lem-normal-domain-implies-s-two", "lem-r-one-s-two-integral-element-membership", "thm-one-dimensional-regular-local-rings-are-dvrs", "thm-normality-is-local-for-domains"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-normal-domain-implies-r-one", "lem-normal-domain-implies-s-two", "lem-r-one-s-two-integral-element-membership", "thm-one-dimensional-regular-local-rings-are-dvrs", "thm-normality-is-local-for-domains"]
 sources:
   references:
     - title: "Proposition 8.41 and Lemma 8.40, pp.56–58"
@@ -19,15 +13,22 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (cor-serre-normality-criterion-two-directions). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-A commutative Noetherian domain is normal if and only if it satisfies $(R_1)$ and $(S_2)$. Equivalently its integral closedness is characterized by these two conditions.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). A commutative Noetherian domain is normal if and only if it satisfies $(R_1)$ and $(S_2)$. Equivalently its integral closedness is characterized by these two conditions.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement. The Axiom of Choice is assumed; cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[lem-normal-domain-implies-r-one]]: Every commutative Noetherian integrally closed domain satisfies $(R_1)$.
 

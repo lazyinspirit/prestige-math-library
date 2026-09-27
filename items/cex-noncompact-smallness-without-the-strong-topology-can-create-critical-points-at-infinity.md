@@ -15,12 +15,12 @@ aliases: []
 landmark: false
 proof_strategy: direct construction
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -43,7 +43,7 @@ create new critical points far out at infinity.
 
 **Proof technique:** direct construction.
 
-1.1 One has $\|g_n-f\|_\infty\le 1/n$, so the perturbations are uniformly tiny in value. Their supports lie in $[n-1/n^2,n+1/n^2]$, hence for every fixed compact set $K\subseteq\mathbb R$ one has $g_n=f$ on $K$ once $n$ is large enough. [given, algebra]
+1.1 Since $\beta$ has compact support, $\|g_n-f\|_\infty\le \|\beta\|_\infty/n\to0$, so the perturbations are uniformly tiny in value. Their supports lie in $[n-1/n^2,n+1/n^2]$, hence for every fixed compact set $K\subseteq\mathbb R$ one has $g_n=f$ on $K$ once $n$ is large enough. [given, algebra]
 
 2.1 Differentiating gives $g_n'(x)=1+n\,\beta'(n^2(x-n))$. In particular $g_n'(n)=1+n\beta'(0)=1-n\le 0$, with equality only when $n=1$, while outside the support interval one has $g_n'(x)=1$. Thus $g_1'(1)=0$, and for every $n\ge 2$ continuity gives some $x_n\in[n-1/n^2,n+1/n^2]$ with $g_n'(x_n)=0$. Thus each $g_n$ has a new critical point near $x=n$. [step 1.1, given, algebra]
 

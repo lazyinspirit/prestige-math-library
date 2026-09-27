@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-weak-whitney-proper-embedding-theorem]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (fs-every-proper-embedding-of-an-n-manifold-lands-in-r-n). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -35,8 +36,6 @@ $\mathbb R^n$.
 
 **Given:** The circle $S^1$.
 
-[L1] Every smooth manifold does embed properly in $\mathbb R^{2n+1}$ ([[thm-weak-whitney-proper-embedding-theorem]]).
-
 ## Refutation
 **Proof technique:** direct.
 
@@ -44,4 +43,4 @@ $\mathbb R^n$.
 
 2.1 Removing any point from $S^1$ leaves a connected space, but removing an interior point from $[a,b]$ disconnects it, while removing an endpoint leaves a noncompact interval. Therefore $S^1$ is not homeomorphic to any closed interval. This contradicts step 1.1. [step 1.1, algebra]
 
-3.1 So the claim already fails in dimension $1$. The honest general statement is the higher-dimensional existence theorem [L1], not an ambient-dimension-equality theorem. [L1, step 2.1] ∎
+3.1 So the claim already fails in dimension $1$. [step 2.1] ∎

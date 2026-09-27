@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-compactly-supported-vector-fields-are-complete, def-smooth-section-local-section-and-support, def-compact-space, thm-closed-subspace-of-a-compact-space-is-compact]
+deps: [def-countable-choice, thm-compactly-supported-vector-fields-are-complete, def-smooth-section-local-section-and-support, def-compact-space, thm-closed-subspace-of-a-compact-space-is-compact]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (cor-every-smooth-vector-field-on-a-compact-manifold-is-complete). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,13 +31,13 @@ sources:
 
 ## Statement
 
-Every smooth vector field on a compact manifold is complete.
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Every smooth vector field on a compact manifold is complete.
 
 ## Facts & Assumptions
 
-**Given:** A compact smooth manifold $M$ and a smooth vector field $X$ on $M$.
+**Given:** $\mathrm{AC}_\omega$, a compact smooth manifold $M$, and a smooth vector field $X$ on $M$.
 
-[L1] A compactly supported smooth vector field is complete ([[thm-compactly-supported-vector-fields-are-complete]]).
+[L1] Under $\mathrm{AC}_\omega$, a compactly supported smooth vector field is complete ([[thm-compactly-supported-vector-fields-are-complete]]). This is the exact use of the choice assumption.
 
 [L2] The support of a section is a closed subset of the base manifold ([[def-smooth-section-local-section-and-support]]).
 

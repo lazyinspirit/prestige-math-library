@@ -4,12 +4,17 @@ kind: "lemma"
 title: "Base change and composition of affine morphisms"
 status: published
 origin: "pipeline"
-deps: ["def-affine-morphism-schemes", "lem-affine-morphism-local-on-target", "thm-affine-fibre-product-tensor-ring", "lem-fibre-product-open-restriction", "thm-affine-closed-immersions-quotient-rings", "lem-base-change-quasi-compact-morphisms"]
+deps: ["def-affine-morphism-schemes", "lem-affine-morphism-local-on-target", "thm-affine-fibre-product-tensor-ring", "lem-fibre-product-open-restriction", "thm-affine-closed-immersions-quotient-rings", "lem-base-change-quasi-compact-morphisms", "def-axiom-of-choice"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Stacks 29.11.8–10"
@@ -19,11 +24,11 @@ proof_strategy: direct
 
 ## Statement
 
-Arbitrary base change preserves affine morphisms. Composites of affine morphisms are affine, and every closed immersion is affine.
+Assume the Axiom of Choice. Arbitrary base change preserves affine morphisms. Composites of affine morphisms are affine, and every closed immersion is affine.
 
 ## Facts & Assumptions
 
-**Given:** The objects, hypotheses and conventions in the statement above.
+**Given:** The objects, hypotheses and conventions in the statement above, including the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [F1] A morphism of schemes $f:X\to S$ is **affine** when $f^{-1}(U)$ is affine for every affine open subscheme $U\subseteq S$. Here the inverse image carries the restricted structure sheaf, as in def-affine-open-subscheme, and $f$ is a morphism of locally ringed spaces as in def-morphism-of-schemes. The empty scheme is affine, being $\operatorname{Spec}0$. Affineness of a morphism does not require its total source or target to be affine. ([[def-affine-morphism-schemes]])
 
@@ -41,6 +46,6 @@ Arbitrary base change preserves affine morphisms. Composites of affine morphisms
 
 1.1 Let $f:X\to S$ be affine and $S^{\prime}\to S$ arbitrary. Around each point of $S^{\prime}$ choose an affine $V^{\prime}$ mapping into an affine $U\subset S$. By F1, $f^{-1}(U)$ is affine. F4 identifies the inverse image of $V^{\prime}$ with $f^{-1}(U)\times_U V^{\prime}$, which is affine by F3. [given, F1, F3, F4]
 
-2.1 These $V^{\prime}$ cover the new base. Apply F2 to conclude that $f_{S^{\prime}}$ is affine. The proof includes empty charts and zero tensor rings. [F2, step 1.1]
+2.1 These $V^{\prime}$ cover the new base. Under the stated Choice premise, apply F2 to conclude that $f_{S^{\prime}}$ is affine. The proof includes empty charts and zero tensor rings. [F2, step 1.1, given]
 
 3.1 For affine $X\to Y\to Z$ and affine open $U\subset Z$, the successive inverse images are affine by F1, hence the composite is affine. For a closed immersion, its restriction over any affine open $\operatorname{Spec}A$ is $\operatorname{Spec}(A/I)$ by F5, again affine by F1. The cases $I=0,(1)$ are the identity and empty closed immersion. Affine inverse images are quasi-compact, so the target-local criterion F6 also proves every affine morphism, and in particular every closed immersion, quasi-compact. [F1, F5, F6] ∎

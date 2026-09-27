@@ -4,7 +4,7 @@ title: Depth is infinite when the ideal acts surjectively
 kind: lemma
 status: published
 origin: pipeline
-deps: [def-depth-with-respect-to-an-ideal, thm-nakayama-lemma]
+deps: [def-depth-with-respect-to-an-ideal, thm-nakayama-lemma, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,12 +14,12 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (lem-depth-infinity-when-ideal-acts-surjectively). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
 
@@ -39,4 +39,4 @@ $IM\ne M$.
 
 1.1 The first assertion is exactly the exceptional convention in the definition of $I$-depth; it includes $M=0$. [given]
 
-2.1 In the local case, $IM=M$ with $I\subseteq\mathfrak m$ would give $\mathfrak mM=M$. Under the stated AC hypothesis, `thm-nakayama-lemma` then forces $M=0$, contrary to the hypothesis. [step 1.1, algebra] ∎
+2.1 In the local case, $IM=M$ with $I\subseteq\mathfrak m$ would give $\mathfrak mM=M$. Under the stated AC hypothesis, [[thm-nakayama-lemma]] then forces $M=0$, contrary to the hypothesis. [step 1.1, algebra] ∎

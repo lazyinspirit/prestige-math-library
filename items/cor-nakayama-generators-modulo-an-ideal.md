@@ -7,16 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [thm-nakayama-lemma, def-product-of-an-ideal-and-a-module, def-generated-cyclic-finitely-generated-and-free-modules]
+deps: [def-axiom-of-choice, thm-nakayama-lemma, def-product-of-an-ideal-and-a-module, def-generated-cyclic-finitely-generated-and-free-modules]
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (cor-nakayama-generators-modulo-an-ideal). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -35,9 +36,9 @@ Let $R$ be a commutative ring, let $I \trianglelefteq R$ satisfy $I \subseteq J(
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, an ideal $I \trianglelefteq R$ with $I \subseteq J(R)$, a finitely generated left $R$-module $M$, and elements $x_1,\dots,x_r \in M$ whose images generate $M/IM$.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), a commutative ring $R$, an ideal $I \trianglelefteq R$ with $I \subseteq J(R)$, a finitely generated left $R$-module $M$, and elements $x_1,\dots,x_r \in M$ whose images generate $M/IM$.
 
-[L1] If a finite module $Q$ satisfies $IQ=Q$ and $I \subseteq J(R)$, then $Q=0$ ([[thm-nakayama-lemma]]).
+[L1] Under AC, if a finite module $Q$ satisfies $IQ=Q$ and $I \subseteq J(R)$, then $Q=0$ ([[thm-nakayama-lemma]]); applying this supplier in step 2.1 is the sole inherited use of AC here.
 
 [L2] The submodule $IM$ consists of finite sums of products $im$ with $i \in I$ and $m \in M$ ([[def-product-of-an-ideal-and-a-module]]).
 

@@ -7,11 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-integral-over-a-measurable-set, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral]
+deps: [def-integral-over-a-measurable-set, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,14 +34,12 @@ $$\mu(\{f\ge t\})\le\frac1t\int f\,d\mu.$$
 
 [L1] The nonnegative integral is monotone and homogeneous ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
 
+[L2] For measurable $E$ and $t>0$, the nonnegative integral of the simple function $t\chi_E$ is $t\mu(E)$ ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[def-integral-of-a-nonnegative-simple-function]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $E:=\{f\ge t\}$, then $t\chi_E\le f$. Applying [L1] gives[L1, given]
-$$t\,\mu(E)=\int t\chi_E\,d\mu\le\int f\,d\mu.$$
+1.1 Put $E:=\{f\ge t\}$, which is measurable. Since $t\chi_E\le f$, [L1] and [L2] give $$t\,\mu(E)=\int t\chi_E\,d\mu\le\int f\,d\mu.$$ [L1, L2, given]
 
-
-2.1 Dividing by the positive number $t$ yields[step 1.1, algebra] ∎
-$$\mu(\{f\ge t\})\le t^{-1}\int f\,d\mu.$$
-
+2.1 Dividing by the positive real $t$ gives $$\mu(\{f\ge t\})\le t^{-1}\int f\,d\mu.$$ [step 1.1, algebra] ∎

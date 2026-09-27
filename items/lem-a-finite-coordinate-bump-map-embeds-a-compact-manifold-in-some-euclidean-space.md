@@ -15,8 +15,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -39,14 +43,14 @@ is a smooth embedding.
 
 **Given:** A compact smooth $n$-manifold $M$.
 
-[L1] For every point of a smooth manifold there is a chart bump supported in a prescribed chart and equal to $1$ on a smaller neighbourhood ([[lem-chart-bump-at-a-point-with-prescribed-support]]).
+[L1] For every point of a smooth manifold, the construction in [[lem-chart-bump-at-a-point-with-prescribed-support]], Proof 2.1–5.1, gives a chart $(U,x)$, an open neighbourhood $V\Subset U$ of the point, and a smooth bump supported in $U$ and equal to $1$ on $V$.
 
 [L2] An injective immersion from a compact manifold is an embedding ([[cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding]]).
 
 ## Proof
 **Proof technique:** direct.
 
-1.1 For each $p\in M$, choose a coordinate chart $(U_p,x_p)$ and an open set $V_p\Subset U_p$ containing $p$. By [L1] there is a smooth function $\phi_p$ supported in $U_p$ and equal to $1$ on $V_p$. Compactness gives finitely many such $V_i$ covering $M$, with associated charts $(U_i,x_i)$ and bumps $\phi_i$. [L1, given, choose]
+1.1 Let $\mathcal T$ be the family of all triples $((U,x),V,\phi)$ where $(U,x)$ is a coordinate chart, $V\Subset U$ is open, and $\phi:M\to[0,1]$ is a smooth bump supported in $U$ and equal to $1$ on $V$. By [L1], the family of their open sets $V$ covers $M$. Compactness gives finitely many such sets $V_i$ covering $M$; retain a witnessing chart $(U_i,x_i)$ and bump $\phi_i$ for each of these finitely many sets. This uses only finite choices after the subcover is found. [L1, given]
 
 2.1 Define the coordinate-bump blocks $$B_i(q):=\bigl(\phi_i(q),\phi_i(q)x_i^1(q),\dots,\phi_i(q)x_i^n(q)\bigr)\in\mathbb R^{n+1},$$ and let $F:=(B_1,\dots,B_m)$. The map is smooth because each block is smooth on $U_i$ and vanishes off $U_i$. [step 1.1, construct]
 

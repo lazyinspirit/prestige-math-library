@@ -4,16 +4,17 @@ title: "Orientation identifies top forms with signed densities"
 kind: proposition
 status: published
 origin: pipeline
-deps: ["thm-density-integration-is-defined-without-an-orientation", "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold"]
+deps: ["thm-density-integration-is-defined-without-an-orientation", "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold", "def-countable-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Nicolaescu §3.4.2, p.120, paragraph from the orientation isomorphism through the gluing formula"

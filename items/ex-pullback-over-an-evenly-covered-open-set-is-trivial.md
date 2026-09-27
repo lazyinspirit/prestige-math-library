@@ -13,12 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -49,8 +49,10 @@ If $U$ is evenly covered by $p:E\to B$, then the pullback of $p$ along the inclu
 
 **Proof technique:** direct.
 
-1.1 For the inclusion $U\hookrightarrow B$ of an evenly covered open set of the base, identify the pullback with the disjoint union of the sheets over $U$. [given, F2, F1, F3]
+1.1 Let $f:U\hookrightarrow B$ be the inclusion. If $U=\varnothing$, its pullback is empty and is isomorphic over $U$ to $U\times\varnothing\to U$, which is a trivial covering by [F3]. Hence assume $U\ne\varnothing$. Choose an evenly covered decomposition $p^{-1}(U)=\bigsqcup_{j\in J}V_j$ as in [F2]. Surjectivity of $p$ makes $J$ nonempty. The pullback $f^*E$ is $\{(u,e):u=p(e)\in U\}$ by [F1]. [F1, F2, F3]
 
-2.1 Write the explicit mutually inverse maps over $U$ and verify their continuity from the pullback subspace topology. [step 1.1, F1, F2]
+2.1 Give $J$ the discrete topology. Define $h:U\times J\to f^*E$ by $h(u,j)=(u,(p|_{V_j})^{-1}(u))$. Each $e\in p^{-1}(U)$ belongs to exactly one sheet $V_j$, so the inverse is $h^{-1}(u,e)=(u,j)$ for that unique $j$. Both maps preserve the projection to $U$. [step 1.1, F1, F2]
 
-3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎
+3.1 The restriction of $h$ to each open slice $U\times\{j\}$ is continuous because $(p|_{V_j})^{-1}$ is continuous. These slices cover $U\times J$, so $h$ is continuous. The pullback subset $\{(u,e):e\in V_j,\ u=p(e)\}$ is open in $f^*E$, since $V_j$ is open in $E$; on it, $h^{-1}$ has the continuous form $(u,e)\mapsto(u,j)$. These subsets cover $f^*E$, so $h^{-1}$ is continuous. Thus $h$ is a homeomorphism over $U$. [step 1.1, step 2.1, F1, F2]
+
+4.1 By [F3], $U\times J\to U$ is a trivial covering. The homeomorphism of step 3.1 identifies it with the pullback covering, proving the Example. [step 3.1, F3] ∎

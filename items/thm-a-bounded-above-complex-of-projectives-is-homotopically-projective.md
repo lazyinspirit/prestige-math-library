@@ -4,11 +4,12 @@ kind: "theorem"
 title: "A bounded above complex of projectives is homotopically projective"
 deps: ["def-homotopically-projective-bounded-above-complex", "def-projective-object", "def-dependent-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - url: "https://stacks.math.columbia.edu/tag/0643"
@@ -27,7 +28,7 @@ A bounded-above cochain complex $P$ of projective objects is K-projective. Assum
 
 ## Facts & Assumptions
 
-**Given:** A bounded-above cochain complex $P$ of projective objects is K-projective. Assume dependent choice for the countable successive homotopy choices, or supply those lifts as data.
+**Given:** A bounded-above cochain complex $P$ of projective objects. Assume dependent choice, or supply the successive homotopy lifts used below as data.
 
 [F1] K-projectivity means vanishing of Hom in the homotopy category into every shift of every acyclic complex ([[def-homotopically-projective-bounded-above-complex]]).
 

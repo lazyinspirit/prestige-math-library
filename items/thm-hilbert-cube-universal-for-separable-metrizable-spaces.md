@@ -12,13 +12,6 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
 sources:
   scraped: []
   references:
@@ -31,6 +24,13 @@ sources:
     - title: "Jesse Peterson, Real Analysis, §§3.6–3.7"
       url: "https://math.vanderbilt.edu/peters10/teaching/fall2016/RealAnalysis.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (thm-hilbert-cube-universal-for-separable-metrizable-spaces). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
@@ -53,15 +53,14 @@ Every separable metrizable space is homeomorphic to a subspace of the Hilbert cu
 
 **Proof technique:** direct.
 
-1.1 The empty space embeds by its unique map into the Hilbert cube. [given, F2, F4, F1]
+1.1 The empty space embeds by its unique map into the Hilbert cube. Hence suppose $X\ne\varnothing$. [given]
 
-2.1 For a nonempty space choose a countable dense sequence and a bounded compatible metric. [step 1.1, F4, F2, F1]
+1.2 Choose a metric $d$ inducing the topology of $X$ and put $\rho(x,y)=\min\{d(x,y),1\}$. By [F4], $\rho$ is a metric with the same topology and values in $[0,1]$. Choose an at most countable dense set $D$ from [F1]. Since $X\ne\varnothing$, enumerate $D$ as a sequence $(a_n)_{n\in\mathbb N}$, repeating an element if $D$ is finite. [F1, F2, F4, choose]
 
-3.1 Map a point to its bounded distances from the dense sequence. [step 2.1, F4, F1]
+2.1 Define $e:X\to[0,1]^{\mathbb N}$ by $e(x)_n=\rho(x,a_n)$. For each $n$, the triangle inequality gives $|e(x)_n-e(y)_n|\le\rho(x,y)$, so every coordinate is continuous. In the product topology of [F3], inverse images of subbasic coordinate-open sets are therefore open; hence $e$ is continuous. [step 1.2, F3, algebra]
 
-4.1 The coordinates are continuous and separate points; if coordinate values converge, a coordinate centred close to the proposed point forces metric convergence. [step 3.1, F4, F2, F3]
+3.1 If $x\ne y$, set $\delta=\rho(x,y)>0$ and choose $a_n$ with $\rho(x,a_n)<\delta/3$. The triangle inequality gives $e(y)_n=\rho(y,a_n)>2\delta/3$, while $e(x)_n<\delta/3$. Thus $e(x)\ne e(y)$ and $e$ is injective. [step 1.2, step 2.1, F1, choose]
 
-5.1 Rescale the coordinate range to the unit interval and identify the induced topology with the product topology. [step 4.1, F3, F4, F2]
+4.1 Fix $x\in X$ and $\varepsilon>0$. Choose $a_n$ with $\rho(x,a_n)<\varepsilon/4$. The set $W=\{z\in e(X):|z_n-e(x)_n|<\varepsilon/2\}$ is open in the subspace $e(X)$ by [F3]. If $e(y)\in W$, then $\rho(y,x)\le\rho(y,a_n)+\rho(a_n,x)<\varepsilon/2+2\rho(x,a_n)<\varepsilon$. Consequently $e^{-1}(W)\subseteq B_\rho(x,\varepsilon)$, so the inverse $e^{-1}:e(X)\to X$ is continuous at every $e(x)$. [step 1.2, step 2.1, step 3.1, F1, F3, algebra]
 
-6.1 The preceding construction and implications establish the assertion. [step 5.1] ∎
-
+5.1 Steps 2.1--4.1 make $e$ a homeomorphism of $X$ onto the subspace $e(X)$ of $[0,1]^{\mathbb N}$. Together with step 1.1 this covers every separable metrizable space. [step 1.1, step 2.1, step 3.1, step 4.1] ∎

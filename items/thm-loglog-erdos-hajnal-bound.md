@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [rem-loglog-quantitative-density-theorem,
+deps: [thm-loglog-quantitative-induced-density-bound,
+       def-h-free-and-family-free-graph,
        def-homogeneous-set-and-homogeneous-number,
        lem-a-weakly-sparse-set-has-a-large-sparse-subset,
        lem-sparsity-depends-only-on-the-induced-subgraph,
@@ -18,8 +19,13 @@ deps: [rem-loglog-quantitative-density-theorem,
        def-edge-density-between-vertex-sets]
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -39,7 +45,9 @@ $$\operatorname{hom}(G)\ge 2^{c_H\sqrt{\log_2 n\,\log_2\log_2 n}}.$$
 
 [L1] The homogeneous number is $\operatorname{hom}(G)=\max\{\omega(G),\alpha(G)\}$ ([[def-homogeneous-set-and-homogeneous-number]]).
 
-[L2] Bucić-Nguyen-Scott-Seymour quantitative density: there exists $C_H>0$ such that for every real $x$ with $0<x<1/2$ there is $S\subseteq V(G)$ with $|S|\ge 2^{-C_H(\log_2(1/x))^2/\log_2\log_2(1/x)}n$ and one of $G[S]$ and $\overline{G}[S]$ has at most $x\binom{|S|}{2}$ edges ([[rem-loglog-quantitative-density-theorem]]).
+[L2] For nonempty $H$, the proved quantitative induced-density theorem supplies $C_H>0$ such that every $H$-free $G$ and every $0<x<1/2$ have a nonempty $S\subseteq V(G)$ with $|S|\ge 2^{-C_H(\log_2(1/x))^2/\log_2\log_2(1/x)}n$ and at most $x\binom{|S|}{2}$ edges in $G[S]$ or $\overline{G}[S]$ ([[thm-loglog-quantitative-induced-density-bound]]).
+
+[L9] A graph is $H$-free if it has no induced copy of $H$ ([[def-h-free-and-family-free-graph]]).
 
 [L3] If a nonempty vertex set $X$ satisfies $d_G(X,X)\le c$, then some $X'\subseteq X$ has $|X'|\ge |X|/2$ and is $4c$-sparse ([[lem-a-weakly-sparse-set-has-a-large-sparse-subset]]).
 
@@ -57,7 +65,7 @@ $$\operatorname{hom}(G)\ge 2^{c_H\sqrt{\log_2 n\,\log_2\log_2 n}}.$$
 
 **Proof technique:** direct.
 
-1.1 By [L2], choose a constant $C_H>0$. Because every nonnull graph has $\operatorname{hom}(G)\ge1$, it is enough to prove the bound for all sufficiently large $n$; assume from now on that $n$ is large enough that $L:=\log_2 n\ge4$. Set $\beta:=1/(4\sqrt{C_H})$ and $x:=2^{-\beta\sqrt{L\log_2 L}}$. Then $0<x<1/2$. [L1, L2, choose]
+1.1 If $H$ is null, every graph has the empty induced copy, so the stated $H$-free case is vacuous. Hence assume $H$ nonempty and choose $C_H>0$ from [L2]. Every graph on at least two vertices has an adjacent or nonadjacent pair, so $\operatorname{hom}(G)\ge2$; this handles finitely many small $n$ after shrinking the final positive constant (and the target is $1$ at $n=2$). For the large-$n$ argument assume $L:=\log_2 n\ge4$. Set $\beta:=1/(4\sqrt{C_H})$ and $x:=2^{-\beta\sqrt{L\log_2 L}}$. Then $0<x<1/2$ once $n$ is sufficiently large. [L1, L2, L9, choose]
 
 2.1 For large enough $L$, the inequality $\beta\sqrt{L\log_2 L}\ge \sqrt L$ holds, so $\log_2\log_2(1/x)=\log_2(\beta\sqrt{L\log_2 L})\ge \tfrac12\log_2 L$. Therefore $C_H(\log_2(1/x))^2/\log_2\log_2(1/x)\le 2C_H\beta^2L=L/8$. Using [L2], obtain $S\subseteq V(G)$ with $|S|\ge 2^{-L/8}n=2^{7L/8}\ge \sqrt n$, and one of $G[S]$ and $\overline G[S]$ has at most $x\binom{|S|}{2}$ edges. For that chosen graph $F$ on vertex set $S$, [L8] gives $d_F(S,S)\le 2x\binom{|S|}{2}/|S|^2=x(|S|-1)/|S|\le x$. [step 1.1, L2, L8, algebra]
 
@@ -69,6 +77,6 @@ $$\operatorname{hom}(G)\ge 2^{c_H\sqrt{\log_2 n\,\log_2\log_2 n}}.$$
 
 5.1 Because $x\sqrt n=2^{L/2-\beta\sqrt{L\log_2 L}}$, choose a threshold $N_H\ge2$ so that $x\sqrt n\ge1$ whenever $n\ge N_H$. For those $n$, step 4.1 gives $4x|X|\ge2$, hence $4x|X|+1\le8x|X|$, and therefore $|Y|\ge 1/(8x)=2^{\beta\sqrt{L\log_2 L}-3}$. [step 4.1, step 1.1, choose, algebra]
 
-6.1 Set $c_H:=\beta/2$. For all sufficiently large $n$, the inequality $\beta\sqrt{L\log_2 L}-3\ge c_H\sqrt{L\log_2 L}$ holds, so step 5.1 gives $|Y|\ge 2^{c_H\sqrt{L\log_2 L}}$. Shrinking $c_H$ if necessary handles the finitely many smaller values of $n$. [step 5.1, choose, algebra]
+6.1 Set $c_H:=\beta/2$. For all sufficiently large $n$, the inequality $\beta\sqrt{L\log_2 L}-3\ge c_H\sqrt{L\log_2 L}$ holds, so step 5.1 gives $|Y|\ge 2^{c_H\sqrt{L\log_2 L}}$. For each of the finitely many smaller integers $n\ge3$, the pair argument of step 1.1 gives $\operatorname{hom}(G)\ge2$; shrink $c_H>0$ so that $2^{c_H\sqrt{\log_2 n\,\log_2\log_2 n}}\le2$ for all of them. At $n=2$ the displayed target is $1$. [step 1.1, step 5.1, L1, choose, algebra]
 
 7.1 Hence every nonnull finite $H$-free graph $G$ with $|V(G)|=n\ge2$ satisfies $\operatorname{hom}(G)\ge 2^{c_H\sqrt{\log_2 n\,\log_2\log_2 n}}$. [step 6.1, L1] ∎

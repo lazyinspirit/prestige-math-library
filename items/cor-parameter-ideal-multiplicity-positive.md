@@ -7,12 +7,9 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-hilbert-samuel-multiplicity, thm-existence-of-hilbert-samuel-polynomial, cor-nakayama-generators-modulo-an-ideal]
+deps: [def-hilbert-samuel-multiplicity, thm-existence-of-hilbert-samuel-polynomial, cor-nakayama-generators-modulo-an-ideal, def-axiom-of-choice]
 aliases: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -20,6 +17,16 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/00K4"
     - title: "Allen B. Altman and Steven L. Kleiman, A Term of Commutative Algebra, §21"
       url: "https://web.mit.edu/18.705/www/12Nts.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -40,6 +47,8 @@ Hilbert-Samuel multiplicity $e_I(M)$ is a positive integer.
 
 [L3] Hilbert-Samuel multiplicity is the factorial-scaled leading coefficient of the eventual Hilbert-Samuel polynomial ([[def-hilbert-samuel-multiplicity]]).
 
+[A1] The Axiom of Choice supplies the choice assumed by the generator-lifting corollary in [L2] ([[def-axiom-of-choice]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -48,7 +57,7 @@ Hilbert-Samuel multiplicity $e_I(M)$ is a positive integer.
 1.1 By [L1], there are integers $a_0,\ldots,a_d$ and a polynomial $P_{I,M}(n)=\sum_{j=0}^d a_j\binom{n+j}{j}$ such that $\chi_{I,M}(n)=P_{I,M}(n)$ for all sufficiently large $n$. [L1, given]
 
 
-1.2 For every $n\ge0$, the quotient $M/I^{n+1}M$ is nonzero. Indeed, if $M/I^{n+1}M=0$, then $M=I^{n+1}M$; since $I^{n+1}\subseteq \mathfrak m=J(R)$, [L2] would force $M=0$, contradicting the hypothesis. Thus $\chi_{I,M}(n)=\ell_R(M/I^{n+1}M)>0$ for every $n$. [L2, given, algebra]
+1.2 For every $n\ge0$, the quotient $M/I^{n+1}M$ is nonzero. Indeed, if $M/I^{n+1}M=0$, then $M=I^{n+1}M$; since $I^{n+1}\subseteq \mathfrak m=J(R)$, [L2], under the choice assumption [A1], would force $M=0$, contradicting the hypothesis. Thus $\chi_{I,M}(n)=\ell_R(M/I^{n+1}M)>0$ for every $n$. [L2, A1, given, algebra]
 
 
 2.1 The polynomial $P_{I,M}$ therefore takes positive values for all sufficiently large integers, so its leading coefficient is positive. In the binomial expansion of step 1.1 the leading coefficient is $a_d/d!$, hence $a_d>0$. [step 1.1, step 1.2, algebra]

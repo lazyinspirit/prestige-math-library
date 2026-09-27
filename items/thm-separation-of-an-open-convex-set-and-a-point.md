@@ -4,17 +4,22 @@ kind: theorem
 title: Separate a point from an open convex set
 status: published
 origin: pipeline
-deps: [def-minkowski-functional, lem-minkowski-functional-is-sublinear, lem-open-convex-set-recovered-from-its-gauge, def-weak-and-strict-separation, thm-hahn-banach-dominated-extension, lem-real-part-determines-a-complex-linear-functional]
+deps: [def-minkowski-functional, lem-minkowski-functional-is-sublinear, lem-open-convex-set-recovered-from-its-gauge, def-weak-and-strict-separation, thm-hahn-banach-dominated-extension, lem-real-part-determines-a-complex-linear-functional, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  audited: 2026-09-06
 sources:
   references:
     - title: Gerald Teschl, Topics in Real and Functional Analysis, Theorems 5.2--5.3
       url: https://pdfcoffee.com/topics-in-real-and-functional-analysis-gerald-teschl-pdf-free.html
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (thm-separation-of-an-open-convex-set-and-a-point). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement

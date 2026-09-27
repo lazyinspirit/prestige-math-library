@@ -9,11 +9,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Folland, Real Analysis, second edition, \u00a711.4 pp.361\u2013363; Theorems 2.14\u20132.15 pp.50\u201351"
@@ -23,6 +24,7 @@ proof_strategy: direct
 
 ## Example
 
+Assume countable choice.
 On $(0,1)$ with Euclidean distance and density $x^{-1}|dx|$, the ball $B(1/2,1/4)$ has volume $\log3$, whereas $B(1/2,1)=(0,1)$ has infinite volume. Both are Borel and positive in volume.
 
 ## Facts & Assumptions

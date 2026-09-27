@@ -4,7 +4,7 @@ kind: example
 title: "Selecting an admissible contour height"
 status: published
 origin: pipeline
-deps: [cor-zeta-zero-count-unit-interval]
+deps: [cor-zeta-zero-count-unit-interval, def-countable-choice]
 proof_strategy: constructive
 provenance:
   statement: ai-generated
@@ -12,11 +12,12 @@ provenance:
 generation:
   role: example
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Kiran S. Kedlaya, Analytic Number Theory, §10.3"
@@ -25,12 +26,12 @@ sources:
 
 ## Example
 
-For $T\ge3$, one can choose $T'\in[T,T+1]$ with distance at least
+Assume countable choice. For $T\ge3$, one can choose $T'\in[T,T+1]$ with distance at least
 $c/\log T$ from every zero ordinate in $[T-1,T+2]$, for an absolute $c>0$.
 
 ## Verification
 
-**Given:** the $O(\log(T+2))$ unit-interval zero count.
+**Given:** Countable choice and the $O(\log(T+2))$ unit-interval zero count.
 
 1.1 The three adjacent unit-interval bounds show that the number of relevant ordinates is at most $C\log T$ after enlarging an absolute constant $C$ to cover $3\le T\le5$.  Around each such ordinate remove an interval of radius $c/\log T$, where $c<1/(2C)$. [given, construct]
 

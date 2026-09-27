@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: fixed-point
 verification:
-  precheck: pass
-  audited: 2026-08-11
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -49,6 +53,6 @@ Moreover, $F$ is injective on $C(a,r)$.
 
 1.1 Put $R=F-I$ and use [L1] with the Euclidean--sup norm comparison [L4] to obtain the contraction estimate $$\|R(x)-R(y)\|_\infty\le q\|x-y\|_\infty$$ on the cube. In particular $\|R(x)\|_\infty\le qr$, so $F(x)=x+R(x)$ lies in $C(a,(1+q)r)$. [L1, L4, given]
 
-2.1 Fix $z\in C(a,(1-q)r)$ and define $S_z(x)=z-R(x)$. Step 1.1 gives $S_z(C(a,r))\subseteq C(a,r)$ and makes $S_z$ a $q$-contraction. The cube is a nonempty closed subset of complete Euclidean space, so [L2]--[L3] give $x\in C(a,r)$ with $S_z(x)=x$, equivalently $F(x)=z$. This proves the inner containment. [L2, L3, step 1.1]
+2.1 Fix $z\in C(a,(1-q)r)$ and define $S_z(x)=z-R(x)$. Step 1.1 gives $S_z(C(a,r))\subseteq C(a,r)$ and makes $S_z$ a $q$-contraction in the sup metric. The cube is a nonempty closed subset of complete Euclidean space by [L3]. By [L4], a sup-Cauchy sequence is Euclidean Cauchy, and Euclidean convergence implies sup convergence, so the cube is complete in the sup metric as well. Thus [L2] gives $x\in C(a,r)$ with $S_z(x)=x$, equivalently $F(x)=z$. This proves the inner containment. [L2, L3, L4, step 1.1]
 
 3.1 If $F(x)=F(y)$, then $x-y=R(y)-R(x)$, so step 1.1 gives $\|x-y\|_\infty\le q\|x-y\|_\infty$. Since $q<1$, $x=y$. The assumptions $r>0$ and $q<1$ are essential to the nondegenerate fixed-point argument. [step 1.1, algebra] ∎

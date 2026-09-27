@@ -11,8 +11,13 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-fatou-lemma). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,8 +46,6 @@ $$\int \liminf_{n\to\infty}f_n\,d\mu\le\liminf_{n\to\infty}\int f_n\,d\mu.$$
 
 **Proof technique:** direct.
 
-1.1 For each $n$, define [L1, given, construct]
-$$g_n:=\inf_{k\ge n}f_k.$$ Then each $g_n$ is measurable by [L1], one has $g_n\le g_{n+1}$ and $g_n\uparrow\liminf_n f_n$ pointwise. Also $g_n\le f_n$ for every $n$.
+1.1 For each $n$, define $g_n:=\inf_{k\ge n}f_k$. Then each $g_n$ is measurable by [L1], one has $g_n\le g_{n+1}$ and $g_n\uparrow\liminf_n f_n$ pointwise. Also $g_n\le f_n$ for every $n$. [L1, given, construct]
 
-2.1 By [L2], [step 1.1, L2, L3] ∎
-$$\int \liminf_n f_n\,d\mu=\lim_n\int g_n\,d\mu.$$ Since $g_n\le f_n$, [L3] gives $\int g_n\,d\mu\le\int f_n\,d\mu$ for every $n$. Taking the limit in $n$ yields the claimed inequality.
+2.1 By [L2] and step 1.1, $\int\liminf_n f_n\,d\mu=\lim_n\int g_n\,d\mu$. For every fixed $n$ and all $k\ge n$, one has $g_n\le g_k\le f_k$. By [L3], $\int g_n\,d\mu\le\inf_{k\ge n}\int f_k\,d\mu$. Taking the supremum over $n$ and using monotone convergence on the left gives $\int\liminf_n f_n\,d\mu\le\liminf_n\int f_n\,d\mu$, including infinite values. [step 1.1, L2, L3] ∎

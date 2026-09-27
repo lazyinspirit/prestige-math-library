@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-premeasure-on-an-algebra, def-lebesgue-stieltjes-interval-set-function, prop-stieltjes-interval-set-function-is-finitely-additive, thm-heine-borel-r]
+deps: [def-premeasure-on-an-algebra, def-lebesgue-stieltjes-interval-set-function, prop-stieltjes-interval-set-function-is-finitely-additive, thm-heine-borel-r, thm-rationals-countable, lem-q-and-irrationals-dense-r]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-stieltjes-interval-set-function-is-a-premeasure). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Proposition 1.15"
@@ -34,13 +39,15 @@ premeasure on the half-open interval algebra in the sense of
 
 [L2] Every closed bounded interval $[a,b]$ is compact. ([[thm-heine-borel-r]])
 
+[L3] The rationals have a fixed enumeration and are dense in the reals ([[thm-rationals-countable]], [[lem-q-and-irrationals-dense-r]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 By [L1], it is enough to prove countable additivity when $E$ is a single h-interval. [L1, given, algebra]
 
-Indeed, if $E = \bigcup_{r=1}^m I_r$ is a finite disjoint union of h-intervals, then each $E_n \cap I_r$ is again a finite disjoint union of h-intervals, the families $(E_n \cap I_r)_n$ are pairwise disjoint, and $I_r = \bigcup_n (E_n \cap I_r)$. Applying the single-interval case to each $I_r$ and summing finitely gives the general case.
+Indeed, if $E = \bigcup_{r=1}^m I_r$ is a finite disjoint union of h-intervals, then each $E_n \cap I_r$ is again a finite disjoint union of h-intervals, the families $(E_n \cap I_r)_n$ are pairwise disjoint, and $I_r = \bigcup_n (E_n \cap I_r)$. Decompose each finite union into its uniquely ordered maximal h-interval components and flatten the resulting doubly indexed family. This is a canonical construction, with no countable choice. Applying the single-interval case to each $I_r$ and summing finitely gives the general case.
 
 2.1 Let $E = \bigcup_n I_n$ be a disjoint union of h-intervals, with $E$ itself an h-interval. [step 1.1, L1, given, algebra]
 
@@ -52,7 +59,7 @@ because $E$ is the disjoint union of $\bigcup_{n=0}^N I_n$ and the remainder $E 
 
 3.1 Assume first that $E = (a,b] = \bigcup_{n \in \mathbb{N}} I_n$, where the $I_n$ are pairwise disjoint h-intervals. [step 2.1, L1, given, algebra]
 
-Let $\varepsilon > 0$. Right continuity at $a$ gives $\delta > 0$ with $F(a+\delta) - F(a) < \varepsilon/2$. For each $n$, if $I_n$ meets $[a+\delta,b]$ then its right endpoint is finite; write that endpoint as $v_n$, let $u_n$ be its left endpoint, and choose $w_n > v_n$ with $F(w_n) - F(v_n) < \varepsilon 2^{-n-2}$. Then the open intervals $(u_n,w_n)$ cover $[a+\delta,b]$: every $x$ in that compact interval belongs to $\bigcup_n I_n = (a,b]$, hence lies in some $I_n$ that must have finite right endpoint and therefore satisfies $x \in (u_n,w_n)$. [given, L2, choose]
+Let $\varepsilon > 0$. Right continuity at $a$ gives $0<\delta<b-a$ with $F(a+\delta) - F(a) < \varepsilon/2$. Fix one enumeration $(q_m)_{m\ge0}$ of $\mathbb Q$ by [L3]. For each $n$ such that $I_n$ meets $[a+\delta,b]$, its right endpoint $v_n$ is finite; write $u_n$ for its left endpoint. Right continuity of $F$ at $v_n$ and density of $\mathbb Q$ show that the set of indices $m$ with $q_m>v_n$ and $F(q_m)-F(v_n)<\varepsilon2^{-n-2}$ is nonempty. Let $w_n$ be $q_m$ for its least such index. This formula fixes all the $w_n$ without Countable Choice. Then the open intervals $(u_n,w_n)$ cover $[a+\delta,b]$: every $x$ in that compact interval belongs to some $I_n\subseteq(a,b]$, hence $u_n<x\le v_n<w_n$. [given, L2, L3, construct]
 
 4.1 By compactness from [L2], finitely many of those open intervals cover $[a+\delta,b]$. [step 3.1, L1, algebra]
 

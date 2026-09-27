@@ -7,14 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [thm-wiener-algebra-is-a-banach-algebra, lem-absolutely-summable-fourier-coefficients-give-uniform-convergence]
+deps: [thm-wiener-algebra-is-a-banach-algebra, lem-absolutely-summable-fourier-coefficients-give-uniform-convergence, thm-characters-on-a-unital-banach-algebra-are-continuous, thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes, Theorem 4.3"
@@ -35,12 +36,16 @@ Assume the Axiom of Choice. If $f\in A(\mathbb T)$ and its continuous representa
 
 [L2] Every $\ell^1(\mathbb Z)$ coefficient sequence has a continuous uniform synthesis with exactly those Fourier coefficients ([[lem-absolutely-summable-fourier-coefficients-give-uniform-convergence]]).
 
+[L3] Under the Axiom of Choice, every proper ideal in a nonzero commutative unital complex Banach algebra is contained in the kernel of a character ([[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]], [[def-axiom-of-choice]]).
+
+[L4] Every character on a nonzero unital complex Banach algebra is bounded and continuous ([[thm-characters-on-a-unital-banach-algebra-are-continuous]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $\chi$ be a character of $A(\mathbb T)$ and put $z=\chi(e_1)$. Since $e_ne_{-n}=1$ and $\|e_{\pm n}\|_A=1$, boundedness applied for every $n\ge1$ gives $|z|^n\le\|\chi\|$ and $|z|^{-n}\le\|\chi\|$, hence $|z|=1$. By [L2], every $f\in A(\mathbb T)$ is the $A$-norm limit of its finite Fourier sums, so continuity gives $$\chi(f)=\sum_{k\in\mathbb Z}\widehat f(k)z^k.$$ Thus the characters of $A(\mathbb T)$ are exactly evaluations at points of $\mathbb T$. [L1, L2, algebra]
+1.1 Let $\chi$ be a character of $A(\mathbb T)$ and put $z=\chi(e_1)$. Since $e_ne_{-n}=1$ and $\|e_{\pm n}\|_A=1$, boundedness from [L4] applied for every $n\ge1$ gives $|z|^n\le\|\chi\|$ and $|z|^{-n}\le\|\chi\|$, hence $|z|=1$. By [L2], every $f\in A(\mathbb T)$ is the $A$-norm limit of its finite Fourier sums, so continuity from [L4] gives $$\chi(f)=\sum_{k\in\mathbb Z}\widehat f(k)z^k.$$ Thus the characters of $A(\mathbb T)$ are exactly evaluations at points of $\mathbb T$. [L1, L2, L4, algebra]
 
-2.1 The standard maximal-ideal/Gelfand--Mazur criterion for a unital commutative complex Banach algebra says that an element is invertible exactly when no character vanishes on it: under the Axiom of Choice a nonunit lies in a maximal ideal, whose quotient character vanishes there; conversely a vanishing character rules out a multiplicative inverse. Applying this criterion and step 1.1, $f$ is a unit exactly when it has no zero on $\mathbb T$. [L1, step 1.1, given, algebra]
+2.1 If $f$ were a nonunit, the ideal $(f)$ would be proper, so [L3] would give a character $\chi$ with $\chi(f)=0$. By step 1.1 this character is evaluation at a point of $\mathbb T$, contradicting the hypothesis. Conversely, a character vanishing on an element rules out a multiplicative inverse. Thus $f$ is a unit exactly when it has no zero on $\mathbb T$. [L1, L3, step 1.1, given, algebra]
 
 3.1 The hypothesis makes $f$ a unit, so its algebra inverse is the pointwise reciprocal $1/f$. [step 2.1, algebra] ∎

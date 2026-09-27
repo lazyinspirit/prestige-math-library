@@ -10,12 +10,12 @@ provenance:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series, def-period-one-fourier-coefficients-partial-sums-and-convolution]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes"
@@ -49,7 +49,7 @@ $$\int_\delta^{1-\delta}P_r(t)\,dt\longrightarrow0 \qquad (r\uparrow1).$$
 
 **Given:** A parameter $r$ with $0\le r<1$ and a real $\delta\in(0,1/2]$.
 
-[L1] The Poisson kernel $P_r$ and the characters $e_k(t)=e^{2\pi ikt}$ are defined in [[def-cesaro-and-abel-means-of-a-fourier-series]] and [[def-period-one-fourier-coefficients-partial-sums-and-convolution]].
+[L1] The Poisson kernel $P_r$ and the characters $e_k(t)=e^{2\pi ikt}$ are defined in [[def-cesaro-and-abel-means-of-a-fourier-series]] and [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. Their uniformly convergent series and the Riemann integral of the continuous kernel are choice-free; the Abel mean of a general $L^1$ function in the first definition assumes Countable Choice.
 
 ## Proof
 
@@ -57,6 +57,6 @@ $$\int_\delta^{1-\delta}P_r(t)\,dt\longrightarrow0 \qquad (r\uparrow1).$$
 
 1.1 Let $z=e^{2\pi it}$. By [L1], $$P_r(t)=1+\sum_{k=1}^\infty r^kz^k+\sum_{k=1}^\infty r^kz^{-k}.$$ Both geometric series converge absolutely, so $$P_r(t)=1+\frac{rz}{1-rz}+\frac{rz^{-1}}{1-rz^{-1}}=\frac{1-r^2}{(1-rz)(1-rz^{-1})}.$$ Since $z+z^{-1}=2\cos(2\pi t)$, this is exactly $$P_r(t)=\frac{1-r^2}{1-2r\cos(2\pi t)+r^2}.$$ [L1, algebra]
 
-2.1 Step 1.1 shows $P_r(t)\ge0$ because $$1-2r\cos(2\pi t)+r^2=(1-r)^2+2r(1-\cos(2\pi t))\ge0,$$ and the numerator is positive for $r<1$. Also the constant Fourier coefficient of $P_r$ is $1$, so $$\int_0^1P_r(t)\,dt=1.$$ [L1, step 1.1, algebra]
+2.1 Step 1.1 shows $P_r(t)\ge0$ because $$1-2r\cos(2\pi t)+r^2=(1-r)^2+2r(1-\cos(2\pi t))\ge0,$$ and the numerator is positive for $r<1$. Uniform convergence permits termwise ordinary Riemann integration of the defining series. Every nonconstant character has Riemann integral zero on a period, so $$\int_0^1P_r(t)\,dt=1.$$ [L1, step 1.1, algebra]
 
 3.1 The limit only concerns $r\uparrow1$, so it is enough to consider $r\in[1/2,1)$. If $t\in[\delta,1-\delta]$, then $$1-2r\cos(2\pi t)+r^2=(1-r)^2+4r\sin^2(\pi t)\ge 2\sin^2(\pi\delta).$$ Therefore step 1.1 gives $$P_r(t)\le \frac{1-r^2}{2\sin^2(\pi\delta)}.$$ As $r\uparrow1$, the right-hand side tends to $0$, so the displayed supremum tends to $0$. Multiplying that supremum bound by the interval length at most $1$ gives the same limit for the tail integral. [step 1.1, algebra] ∎

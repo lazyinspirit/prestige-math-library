@@ -2,13 +2,7 @@
 id: "ex-the-regular-integral-sl2-block-of-category-o"
 kind: "example"
 title: "The regular integral sl2 block"
-deps: ["thm-central-character-summands-split-into-linkage-blocks", "prop-restricted-duality-is-an-exact-involution-on-category-o", "prop-costandard-objects-have-simple-socles", "prop-simple-reflection-embedding-of-verma-modules", "thm-verma-module-has-a-unique-simple-quotient", "cor-verma-irreducibility-criterion-from-shapovalov-determinants", "prop-weights-of-a-verma-module-lie-below-lambda", "lem-simple-highest-weight-modules-are-restricted-self-dual", "def-standard-and-costandard-objects-in-category-o"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-special-linear-lie-algebra-sl-two", "def-verma-module", "thm-pbw-model-of-a-verma-module", "thm-category-o-decomposes-by-generalized-central-character", "cor-central-characters-are-dot-weyl-orbits", "thm-every-category-o-object-has-finite-length", "thm-simple-objects-of-category-o-are-highest-weight-modules", "prop-restricted-duality-is-an-exact-involution-on-category-o", "prop-costandard-objects-have-simple-socles", "prop-simple-reflection-embedding-of-verma-modules", "thm-verma-module-has-a-unique-simple-quotient", "prop-weights-of-a-verma-module-lie-below-lambda", "lem-simple-highest-weight-modules-are-restricted-self-dual", "def-standard-and-costandard-objects-in-category-o"]
 sources:
   references:
     - title: "Chen, Lecture 8 §3 Example 3.17, p.6"
@@ -21,9 +15,18 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Verify using the sl2 PBW action, weight dimensions and duality; indecomposability proves nonsplitting"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (ex-the-regular-integral-sl2-block-of-category-o). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -35,9 +38,13 @@ is nonsplit. Its costandards are $\nabla(n)$ and $\nabla(-n-2)=L(-n-2)$, with th
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the example.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the example.
 
-[F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. For a linkage class $C=W_\lambda\cdot\lambda$, let $\mathcal O_C$ be the full subcategory of objects all of whose simple composition factors have labels in $C$. Then $\mathcal O=\bigoplus_C\mathcal O_C$, and each nonzero $\mathcal O_C$ is indecomposable as a categorical direct summand. These are precisely the blocks. Each $\mathcal O_C$ lies in $\mathcal O_{\chi_\lambda}$; a central-character summand can contain several blocks. Independently, grouping weights by cosets of the root lattice $Q$ gives a canonical coarser decomposition by weight cosets. ([[thm-central-character-summands-split-into-linkage-blocks]])
+[F1] The category $\mathcal O$ is the categorical direct sum of its generalized central-character subcategories, and each object has only finitely many nonzero character components ([[thm-category-o-decomposes-by-generalized-central-character]]).
+
+[F10] Under the Axiom of Choice, $\chi_\lambda=\chi_\mu$ if and only if $\mu\in W\cdot\lambda$ ([[cor-central-characters-are-dot-weyl-orbits]]).
+
+[F11] Under the Axiom of Choice, every object of $\mathcal O$ has finite length ([[thm-every-category-o-object-has-finite-length]]), and its simple objects are exactly the distinct $L(\eta)$ ([[thm-simple-objects-of-category-o-are-highest-weight-modules]]).
 
 [F2] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Restricted Chevalley duality is an exact contravariant equivalence $D:\mathcal O\to\mathcal O^{\mathrm{op}}$, with a natural isomorphism $D^2\cong\operatorname{id}$. It preserves each weight-space dimension, the formal character, and every simple composition multiplicity. ([[prop-restricted-duality-is-an-exact-involution-on-category-o]])
 
@@ -47,7 +54,7 @@ is nonsplit. Its costandards are $\nabla(n)$ and $\nabla(-n-2)=L(-n-2)$, with th
 
 [F5] The proper submodule $J(\lambda)$ which is the sum of all proper submodules is the unique maximal submodule of $M(\lambda)$. The quotient $L(\lambda):=M(\lambda)/J(\lambda)$ is simple and is its unique simple quotient. ([[thm-verma-module-has-a-unique-simple-quotient]])
 
-[F6] $M(\lambda)$ is simple if and only if $\langle\lambda+\rho,\alpha^\vee\rangle\notin\mathbb Z_{>0}$ for every $\alpha\in\Phi^+$. ([[cor-verma-irreducibility-criterion-from-shapovalov-determinants]])
+[F6] The standard $\mathfrak{sl}_2$ generators satisfy $[e,f]=h$ and $[h,f]=-2f$ ([[def-special-linear-lie-algebra-sl-two]]). The induced Verma highest vector satisfies $ev_\eta=0$ and $hv_\eta=\eta v_\eta$ ([[def-verma-module]]), and PBW makes $v_k=f^kv_\eta$ ($k\ge0$) a basis ([[thm-pbw-model-of-a-verma-module]]).
 
 [F7] The weights of $M(\lambda)$ are exactly $\lambda-\beta$ for $\beta\in Q^+$; every weight space is finite dimensional, and $M(\lambda)_\lambda=\mathbb Cv_\lambda$. ([[prop-weights-of-a-verma-module-lie-below-lambda]])
 
@@ -57,10 +64,14 @@ is nonsplit. Its costandards are $\nabla(n)$ and $\nabla(-n-2)=L(-n-2)$, with th
 
 ## Verification
 
-1.1 The integral pairing is $n+1>0$, and the two distinct dot-orbit labels are $n$ and $-n-2$. The integral Weyl group is the full order-two Weyl group, so these labels form one block. At $-n-2$ the shifted pairing is $-n-1<0$, and the irreducibility criterion makes its Verma simple. [F1, F6]
+1.1 For any highest weight $\eta$, the PBW basis in [F6] and $[h,f]=-2f$ give $hv_k=(\eta-2k)v_k$. Also $ev_0=0$, and $[e,f]=h$ gives the induction step $ev_{k+1}=f(ev_k)+hv_k$. If $ev_k=k(\eta-k+1)v_{k-1}$, this step yields $ev_{k+1}=[k(\eta-k+1)+\eta-2k]v_k=(k+1)(\eta-k)v_k$. Therefore $ev_k=k(\eta-k+1)v_{k-1}$ for all $k\ge1$. [F6, induction, algebra]
 
-2.1 Write $v_k=f^kv_n$ in $M(n)$. The relations $[h,f]=-2f$ and $[e,f]=h$ give $hv_k=(n-2k)v_k$ and $ev_k=k(n-k+1)v_{k-1}$ for $k\geq1$, by commuting $e$ past the $k$ copies of $f$; $ev_0=0$. The negative nilpotent algebra is one dimensional, so its PBW monomials give one-dimensional Verma weight spaces. The singular vector $v_{n+1}$ generates the embedded $M(-n-2)$, which is also the embedding supplied by F4. [F4, F7, algebra, step 1.1]
+2.1 The integral pairing is $n+1>0$, and the two distinct dot-orbit labels are $n$ and $-n-2$. Under Choice, [F10] says that $L(n)$ and $L(-n-2)$ are exactly the simple labels in the central-character summand $\mathcal O_{\chi_n}$: by [F11] every simple is a highest-weight $L(\eta)$ and hence has the scalar character $\chi_\eta$. For $\eta=-n-2$, every coefficient $k(\eta-k+1)=-k(n+k+1)$ from step 1.1 is nonzero when $k\ge1$. A nonzero submodule of $M(\eta)$ contains a nonzero weight vector, hence some basis vector $v_k$; repeated application of $e$ reaches $v_0$, which generates the entire Verma module. Thus $M(-n-2)=L(-n-2)$ directly. [F6, F10, F11, step 1.1]
 
-3.1 The quotient has basis $v_0,\ldots,v_n$. A nonzero submodule contains a weight vector, and applying $e$ repeatedly reaches $v_0$, since $k(n-k+1)\ne0$ for $1\leq k\leq n$. Applying $f$ then generates the whole quotient. It is simple, hence is $L(n)$. A split sequence would make $M(n)$ a sum of two proper submodules, contrary to its unique maximal submodule. For $n=0$ the quotient consists just of $v_0$ and the same argument holds. [F5, algebra, step 2.1]
+3.1 Write $v_k=f^kv_n$ in $M(n)$. The action derived in step 1.1 gives $hv_k=(n-2k)v_k$ and $ev_k=k(n-k+1)v_{k-1}$ for $k\geq1$, with $ev_0=0$. The weight spaces are one dimensional. The singular vector $v_{n+1}$ generates the embedded $M(-n-2)$, which is also the embedding supplied by F4. [F4, F6, F7, step 1.1, step 2.1]
 
-4.1 By F8, exact duality fixes both simples; it reverses the sequence, and F9 identifies the middle term as $\nabla(n)$, giving the displayed costandard sequence. If it split, its dual would split the original. The costandard socle is $L(n)$ by F3. Since $M(-n-2)=L(-n-2)$, F8 and F9 also give $\nabla(-n-2)=L(-n-2)$. [F2, F3, F8, F9, step 3.1] ∎
+4.1 The quotient has basis $v_0,\ldots,v_n$. A nonzero submodule contains a weight vector, and applying $e$ repeatedly reaches $v_0$, since $k(n-k+1)\ne0$ for $1\leq k\leq n$ by step 1.1. Applying $f$ then generates the whole quotient. It is simple, hence is $L(n)$. A split sequence would make $M(n)$ a sum of two proper submodules, contrary to its unique maximal submodule. For $n=0$ the quotient consists just of $v_0$ and the same argument holds. [F5, algebra, step 1.1, step 3.1]
+
+5.1 By F8, exact duality fixes both simples; it reverses the sequence, and F9 identifies the middle term as $\nabla(n)$, giving the displayed costandard sequence. If it split, its dual would split the original. The costandard socle is $L(n)$ by F3. Since $M(-n-2)=L(-n-2)$, F8 and F9 also give $\nabla(-n-2)=L(-n-2)$. [F2, F3, F8, F9, step 2.1, step 4.1]
+
+6.1 By [F1], $\mathcal O_{\chi_n}$ is a categorical direct summand. It has exactly the two simple labels from step 2.1. If this summand decomposed into two nonzero categorical summands, finite length [F11] would place a simple in each; the two labels would therefore lie in different summands. Then $M(n)$, which has both as factors by steps 3.1 and 4.1, would split as a direct sum of two nonzero submodules, contradicting the unique-maximal-submodule property [F5]. Hence $\mathcal O_{\chi_n}$ is indecomposable and is the asserted regular integral block. The integral Weyl group is the full order-two Weyl group, giving the stated linkage order $-n-2<n$. [F1, F5, F11, step 2.1, step 4.1] ∎

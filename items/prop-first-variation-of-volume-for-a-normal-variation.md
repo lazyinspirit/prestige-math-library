@@ -4,7 +4,7 @@ kind: proposition
 title: First variation of volume for a normal variation
 status: published
 origin: pipeline
-deps: ["def-mean-curvature-vector", "def-riemannian-volume-density", "def-riemannian-volume-of-a-compactly-supported-smooth-density", "thm-density-integration-is-defined-without-an-orientation", "def-smooth-map-between-manifolds-with-boundary", "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions", "thm-determinant-differential-and-jacobis-formula", "thm-differentiation-under-the-integral-sign", "def-levi-civita-connection", "prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "cor-every-immersion-is-locally-an-embedding", "thm-compactly-supported-vector-fields-are-complete", "prop-time-t-flow-maps-are-diffeomorphisms-between-open-domains"]
+deps: ["def-mean-curvature-vector", "def-riemannian-volume-density", "def-riemannian-volume-of-a-compactly-supported-smooth-density", "thm-density-integration-is-defined-without-an-orientation", "def-smooth-map-between-manifolds-with-boundary", "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions", "thm-determinant-differential-and-jacobis-formula", "thm-differentiation-under-the-integral-sign", "def-levi-civita-connection", "prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "cor-every-immersion-is-locally-an-embedding", "thm-compactly-supported-vector-fields-are-complete", "prop-time-t-flow-maps-are-diffeomorphisms-between-open-domains", "def-countable-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -17,12 +17,13 @@ sources:
       url: https://www.math.uci.edu/~cterng/LectureNotes1353.pdf
       locator: Section 2.1, unnormalized mean-curvature trace and first-variation formula (2.1.22), printed pages 30–31
 verification:
-  audited: 2026-09-14
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 proof_strategy: direct
 ---
 

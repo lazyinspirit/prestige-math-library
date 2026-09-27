@@ -9,14 +9,21 @@ provenance:
   proof: ai-generated
 deps: [def-secant-and-tangent-direction-maps-of-an-euclidean-embedding,
        prop-the-image-of-a-lower-dimensional-c1-manifold-is-null,
-       prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]
+       prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold,
+       prop-countable-unions-and-subsets-of-manifold-null-sets-are-null,
+       def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-a-generic-linear-projection-preserves-injectivity-and-immersion). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -28,14 +35,14 @@ sources:
 
 ## Statement
 
-Let $f:M^n\to\mathbb R^N$ be a smooth embedding with $N>2n+1$. Then the set of
+Assume the Axiom of Countable Choice. Let $f:M^n\to\mathbb R^N$ be a smooth embedding with $N>2n+1$. Then the set of
 unit vectors $u\in S^{N-1}$ for which the orthogonal projection
 $$ P_u:\mathbb R^N\to u^\perp $$
 makes $P_u\circ f$ an injective immersion is dense in $S^{N-1}$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth embedding $f:M^n\to\mathbb R^N$ with $N>2n+1$.
+**Given:** Countable Choice and a smooth embedding $f:M^n\to\mathbb R^N$ with $N>2n+1$.
 
 [F1] The secant-direction map $\sigma_f$ is defined on $(M\times M)\setminus\Delta_M$, and the tangent-direction map $\tau_f$ is defined on $TM\setminus0_M$ ([[def-secant-and-tangent-direction-maps-of-an-euclidean-embedding]]).
 
@@ -43,12 +50,14 @@ makes $P_u\circ f$ an injective immersion is dense in $S^{N-1}$.
 
 [L2] A null subset of a positive-dimensional manifold has dense complement ([[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
 
+[L3] A finite union of manifold null sets is null under Countable Choice ([[prop-countable-unions-and-subsets-of-manifold-null-sets-are-null]]).
+
 ## Proof
 **Proof technique:** direct.
 
-1.1 The manifold $(M\times M)\setminus\Delta_M$ has dimension $2n$, and $TM\setminus0_M$ also has dimension $2n$. Since $S^{N-1}$ has dimension $N-1>2n$, [L1] shows that both images $\sigma_f\bigl((M\times M)\setminus\Delta_M\bigr)$ and $\tau_f(TM\setminus0_M)$ are null subsets of $S^{N-1}$. [F1, L1, given]
+1.1 The manifold $(M\times M)\setminus\Delta_M$ has dimension $2n$, and $TM\setminus0_M$ also has dimension $2n$. Since $S^{N-1}$ has dimension $N-1>2n$, [L1] under the stated Countable Choice shows that both images $\sigma_f\bigl((M\times M)\setminus\Delta_M\bigr)$ and $\tau_f(TM\setminus0_M)$ are null subsets of $S^{N-1}$. [F1, L1, given]
 
-2.1 By [L2], the complement of the union of those two bad sets is dense in $S^{N-1}$. Fix $u$ in that complement. [L2, step 1.1, choose]
+2.1 By [L3], the union of the two bad sets is null. By [L2], its complement is dense in $S^{N-1}$. Fix $u$ in that complement. [L2, L3, step 1.1, choose]
 
 3.1 If $P_u(f(p))=P_u(f(q))$, then $f(q)-f(p)$ is parallel to $u$. Because $f$ is injective, either $p=q$ or $u=\pm\sigma_f(p,q)$. The second alternative is impossible by step 2.1, so $p=q$. Thus $P_u\circ f$ is injective. [F1, step 2.1, algebra]
 

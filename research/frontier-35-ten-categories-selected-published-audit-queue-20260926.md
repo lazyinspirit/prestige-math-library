@@ -1,0 +1,43 @@
+# Selected-run published audit queue — 2026-09-26
+
+Read-only diagnostic snapshot around 09:42 UTC. Current 16 batch manifests contain 682 item IDs; frontmatter dependency traversal reaches 4,242 IDs. Of 334 current `published-unaudited` findings, 39 are in that transitive closure. Hashes below bind the observed unstamped bytes and must be rechecked before any audit record; this list is not an audit verdict. The repo-wide gate also requires review of the 295 findings outside this closure and nine `published-unchecked` source remarks.
+
+- `cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property` — `249a7456f76cb646db886dbd4410e6fc9cb34bb4b7828383520778509f801020`
+- `cor-localisations-of-regular-local-rings-are-regular` — `25159bbd307f3bc831ced3b6254e3ff58f6a0ea7cec2dca397d303ba90710e1c`
+- `def-betti-numbers-of-a-finite-local-module` — `6023647acb7d57b310bcadaa108e8962267b1ed6e5c366bbe22feca22e1bdaaf`
+- `def-constraint-graph-and-labeling-value` — `5ff864f3d3162d522a2221facfe0b02371b49f62fb263b5d2fe38b7f41902cb4`
+- `def-graph-power-and-walk-constraint` — `fe08102984ccc56fdbbadb0c4132c1ca4d351a57b0ac0e275fbc798274abb5d2`
+- `def-noetherian-ring-and-module` — `d7332291193768ab2f9fdbe340c848709e7e0a5b0ddc7d71c259c7198499f2e3`
+- `def-row-transformations-over-a-commutative-ring` — `e6fb6819ce4d3774da8b258eff7e9dbdb5164e98c24955c0b1288950beda1590`
+- `def-virtual-character-and-character-ring-of-a-finite-group` — `bb93d481db94eb3a602fb1c9a8b8dc23a9b4ec2e6eb33af3ed6827a6c8748341`
+- `def-well-order` — `cb2cd42af7e9561f18324f9ba5d0dadcb3c475f00cf9f09d078fce12ce2df2f1`
+- `lem-auslander-buchsbaum-projective-dimension-one` — `c6627b1d75e6498d28db232c010ad123f425df2b014b9365bc2b5cf966e72c56`
+- `lem-auslander-buchsbaum-syzygy-projective-dimension` — `52171603663ba7788a2ea65c24f458fec61cc65114f884c561db6ed92b2d499b`
+- `lem-compactness-of-a-subspace-is-ambient` — `6877abc55b861665bc26360829811f0c7480ba7f0cea1b2bccaa5a1c6d55f877`
+- `lem-complete-remetrisation` — `7eec540c3eb5519d97cdd3f8a0cd6583cbfcd8de00a6c2a7845acc4026777263`
+- `lem-complex-exponential-series-converges-everywhere` — `1b24cc198499cc7ee4de4ac95c14a559a0787635cfeaff8ad1635a16d8544f95`
+- `lem-constraint-expander-overlay` — `6c52d63ae4c363ee1bb40ef0fabf2a0d81c78386d079abb9d54fcd7336f683a2`
+- `lem-elementary-detection-at-a-fixed-element` — `2d3f8e97cc8e0b974ce23078fc3d46f546531d700c9cfc892506953fdfbf5502`
+- `lem-finite-type-local-on-source-and-target` — `ea0801410fdf0159ba4bc9b48dc46f9d8dc0c3b3ab7f1b258ca9f0d7068b96a6`
+- `lem-flat-local-ascent-of-regularity` — `d1a1c11435f7b3ecf74f86536286d7de05579930ec345a620183cc92ff5dac10`
+- `lem-local-global-dimension-equals-residue-field-projective-dimension` — `dd7c6b40c0c0ecbf48db364ddd987ecd52c8663adf3c84703e0a81e4eecf49a0`
+- `lem-local-sphere-orientations-and-finite-puncture-excision` — `995a3d7767f9378d83e60d0da66314fd6c9aa290753ebe6219dd7415db48b983`
+- `lem-near-identity-c-one-maps-sandwich-cubes` — `0552332cc28f9a4be2e42b539a33ac0230c9ac6885c064f8b5c640aa2e56012b`
+- `lem-p-elementary-characters-are-induced-from-linear-characters` — `40bbc4c6e158a5f7134a0898441b8946b34b0a3d71a1b8c177a5360732e0bed4`
+- `lem-polynomial-local-regularity-fibre-step` — `b2fd6d2c165650bbe19d542615f6356f6f6bf46a9f79ae745f3ce3d4d3f7c36c`
+- `lem-positive-depth-ring-has-regular-minimal-generator` — `bff240f8d3da82912dc83044ca2f280a51ed2b4da2f7bec332f2c8c4a45a8b87`
+- `lem-regular-local-graded-surjection-has-zero-kernel` — `b251240598cfe3c1b788b77b89426c319fcd715a498b2f5235085d02ad117f03`
+- `lem-regular-local-residue-field-koszul-resolution` — `4086b430a8429cb15ccdb33e96d0a9b419f0a015ea24967265d4f67c61890885`
+- `lem-sine-and-cosine-series-converge-everywhere` — `54fa4b9afe1f862f87830df57ba3d10485907046493fb7548500f8556daa7f15`
+- `prop-basic-value-properties-of-a-complex-character` — `cdbff5849ac27bc8f9e19cb466fb81d275eaa6a844a3c964b53ad9cba84495c5`
+- `prop-faithful-irreducible-character-is-induced-from-a-proper-inertia-subgroup` — `000a84f2b2ae9a10de4e38c8ea45cb4a1ad3d26eead0ec59409e065c2b75bff7`
+- `thm-a-bounded-above-complex-of-projectives-is-homotopically-projective` — `702c5d234cd2edf71931a0c8e749503fcaab104f823384e6cf60f53ed501336f`
+- `thm-associated-graded-ring-of-a-regular-local-ring` — `d67284657d2970ee1aa83c9c240a6055d63e8a78d62dee2ec4ef4211d990ec03`
+- `thm-barycentric-subdivision-is-a-chain-map` — `751a00463154da373c482f9cd4d6b9cfcb67a47ca72e8d76ba740c7524f58893`
+- `thm-cellular-homology-computes-singular-homology` — `0baf0c16a03e1a68a85dbd4632e1bd41ca48b39ade18811685495b6c8954e3c7`
+- `thm-depth-zero-associated-prime-criterion` — `1221634854d3daa9d01f02583b7fedc7980621a893110f896b25c8018c861049`
+- `thm-heine-cantor-r` — `e0382097bbed8e76a78732fb4ea952f0fc270fb325c82423cb29c1c37383adaa`
+- `thm-lebesgue-criterion-in-rn` — `5ca23f9d553acc47753b575a1ea9e572372b7fb025bcd802722cec838abb4a7b`
+- `thm-localisation-and-polynomial-extension-of-regular-rings` — `2d495e78e0bfa1423c1bd55a49f8a3b0505e8841c79af91797760c38c1821577`
+- `thm-singular-homology-satisfies-homotopy-exactness-and-excision` — `b5da20109e6b0020fe7baa19a37b82d89807cc6da13e309e7b7df0eb7b5afbb6`
+- `thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero` — `314bd0fd39de998e1630394b01dbd13fe6dc1ee4f47225daeb3c354595f86e54`

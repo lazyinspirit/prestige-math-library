@@ -10,12 +10,13 @@ provenance:
 deps: [def-nonnegative-lebesgue-integral, def-integral-of-a-nonnegative-simple-function, lem-well-definedness-of-the-simple-integral, prop-basic-properties-of-the-nonnegative-simple-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (prop-the-nonnegative-integral-agrees-with-the-simple-integral). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -49,5 +50,4 @@ gives $$\int s\,d\mu\ge\int_{\mathrm{simple}} s\,d\mu.$$ [given, L1, L3]
 1.2 If $u$ is any admissible simple minorant of $s$, then $u\le s$, so [L2]
 gives $$\int_{\mathrm{simple}} u\,d\mu\le\int_{\mathrm{simple}} s\,d\mu.$$ Taking the supremum over all such $u$ in [L1] yields the reverse inequality. [L1, L2, L3]
 
-2.1 The two inequalities from steps 1.1 and 1.2 are equalities, so the two [step 1.1, step 1.2] ∎
-integrals agree on simple functions.
+2.1 The two inequalities from steps 1.1 and 1.2 give equality of the nonnegative and simple integrals on $s$. [step 1.1, step 1.2] ∎

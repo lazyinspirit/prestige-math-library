@@ -52,6 +52,13 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(solMax.model, 'gpt-6-sol');
   assert.equal(solMax.effort, 'max');
   assert.equal(solMax.requestedEffort, 'max');
+  const lunaMax = MODEL_PROFILES[MODEL_PROFILE_NAMES.lunaMax];
+  assert.equal(lunaMax.model, 'gpt-6-luna');
+  assert.equal(lunaMax.effort, 'max');
+  assert.equal(lunaMax.requestedEffort, 'max');
+  const astraMedium = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
+  assert.equal(astraMedium.model, 'gpt-6-astra');
+  assert.equal(astraMedium.effort, 'medium');
 
   const deepseek = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax];
   assert.equal(deepseek.model, 'deepseek-flash');
@@ -60,15 +67,15 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3a and 3b use DeepSeek Flash max while Step 5a adjudication and the 5b lead use Sol xhigh', () => {
+test('Step 3 scopes use DeepSeek and authors use Luna while Step 5 adjudication stays Sol', () => {
   assert.equal(stage('3a-scope').modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax);
   const authorStage = stage('3b-author');
   const author = { role: 'alpha-high', job: 'authoring' };
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.lunaMax);
   assert.equal(selected(authorStage, {
     role: 'beta', job: 'authoring', label: 'author-recover-1-1',
-  }), MODEL_PROFILE_NAMES.deepseekFlashMax, 'Step 3 recovery authors use the same profile');
-  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  }), MODEL_PROFILE_NAMES.lunaMax, 'Step 3 recovery authors use the same profile');
+  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.lunaMax);
 
   const adjudicate = stage('5a-adjudicate');
   assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solHigh,
@@ -79,16 +86,24 @@ test('Step 3a and 3b use DeepSeek Flash max while Step 5a adjudication and the 5
   const judgeStage = stage('6-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
   for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-group-read')) {
-    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.deepseekFlashMax);
+    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.lunaMax);
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
     'the judge tool is not a Step-6 reader agent');
+  assert.deepEqual(plans.find((candidate: any) => candidate.role === 'tool').argv.slice(0, 8),
+    ['node', 'tools/judge-sweep.mjs', '--run', ctx.run, '--lineup', 'sol', '--effort', 'high']);
+  assert.deepEqual(judgeStage.gates(ctx)[0].argv.slice(0, 4),
+    ['env', 'JUDGE_LINEUP=sol', 'node', 'tools/level-coverage.mjs']);
+  assert.match(stage('7.4-rejudge').label, /Sol-high/);
+  assert.deepEqual(stage('7.8-gate').gates({ ...ctx, doctor: true })
+    .find((candidate: any) => candidate.id === 'judge-closure').argv.slice(0, 2),
+    ['env', 'JUDGE_LINEUP=sol']);
 });
 
-test('Step 5a readers run Sol high and refuters Sol xhigh, and the tool lanes stay model-free', () => {
+test('Step 5a readers and refuters run Luna max, and the tool lanes stay model-free', () => {
   for (const [id, role, profile] of [
-    ['5a-read', 'reader', MODEL_PROFILE_NAMES.solHigh],
-    ['5a-refute', 'refuter', MODEL_PROFILE_NAMES.solXHigh],
+    ['5a-read', 'reader', MODEL_PROFILE_NAMES.lunaMax],
+    ['5a-refute', 'refuter', MODEL_PROFILE_NAMES.lunaMax],
   ] as const) {
     const st = stage(id);
     const plan = st.plan(ctx, ['1'])[0];
@@ -124,25 +139,26 @@ test('group Alpha resolves to Sol high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step-3 scope and authoring both use DeepSeek Flash max', () => {
-  for (const id of ['3a-scope', '3b-author']) {
+test('Step-3 scope uses DeepSeek and authoring uses Luna', () => {
+  for (const [id, model] of [['3a-scope', MODELS.deepseekFlash.id], ['3b-author', MODELS.luna.id]]) {
     const profile = MODEL_PROFILES[stage(id).modelProfile];
-    assert.equal(profile.model, MODELS.deepseekFlash.id);
+    assert.equal(profile.model, model);
     assert.equal(profile.effort, 'max');
     assert.equal(profile.requestedEffort, 'max');
   }
 });
 
-test('Step-7 fatal group adjudicator uses Sol xhigh', () => {
+test('Step-7 fatal group adjudicator uses Astra medium', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'alpha-adjudicate', '--brief', 'briefs/alpha.md',
+    '--profile', MODEL_PROFILE_NAMES.astraMedium,
     '--label', 'step7-alpha-model-test', '--run', 'step7-alpha-model-test',
     '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const row = JSON.parse(result.stdout);
-  assert.equal(row.model, MODELS.sol.id);
-  assert.equal(row.requested_effort, 'xhigh');
-  assert.equal(row.provider_effort, 'xhigh');
+  assert.equal(row.model, MODELS.astra.id);
+  assert.equal(row.requested_effort, 'medium');
+  assert.equal(row.provider_effort, 'medium');
 });
 
 test('Step 8 agents use Sol max and Step 9 agents use DeepSeek Flash max', () => {
@@ -158,7 +174,8 @@ test('Step 8 agents use Sol max and Step 9 agents use DeepSeek Flash max', () =>
   assert.equal(selected(stage('8-scope'), { role: 'alpha', label: 'step8-lead', job: 'audit' }),
     MODEL_PROFILE_NAMES.solMax);
   assert.equal(selected(stage('7.1-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }),
-    MODEL_PROFILE_NAMES.solXHigh, 'Step 7 retains its dedicated adjudication profile');
+    MODEL_PROFILE_NAMES.astraMedium, 'Step 7 selects the Astra adjudication profile');
+  assert.equal(stage('7.5-adjudicate').modelProfile, MODEL_PROFILE_NAMES.astraMedium);
   assert.equal(MODEL_PROFILES[MODEL_PROFILE_NAMES.solMax].provider, 'openai');
   assert.equal(MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax].provider, 'deepseek');
 });

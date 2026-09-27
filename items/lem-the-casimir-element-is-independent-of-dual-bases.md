@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-quadratic-casimir-element]
+deps: [def-universal-enveloping-algebra-as-a-tensor-quotient, def-killing-form-of-a-semisimple-lie-algebra, prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (lem-the-casimir-element-is-independent-of-dual-bases). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,16 +32,22 @@ pipeline_run: null
 
 ## Statement
 
-The tensor $\sum_i x_i\otimes x^i\in \mathfrak g\otimes \mathfrak g$, and hence the element $C=\sum_i x_ix^i\in U(\mathfrak g)$ from [[def-quadratic-casimir-element]], is independent of the chosen pair of dual bases.
+Let $\mathfrak g$ be a complex semisimple Lie algebra with Killing form $B$.
+For any pair of $B$-dual bases $(x_i),(x^i)$, the tensor
+$\sum_i x_i\otimes x^i\in\mathfrak g\otimes\mathfrak g$, and hence its
+image $\sum_i x_ix^i\in U(\mathfrak g)$ under multiplication, is independent
+of the chosen pair.
 
 ## Facts & Assumptions
 
-**Given:** Two pairs of dual bases of a complex semisimple Lie algebra with respect to its Killing form.
+**Given:** Two pairs of dual bases of a complex semisimple Lie algebra with
+respect to its nondegenerate Killing form
+([[prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The Killing form identifies $\mathfrak g$ with $\mathfrak g^*$, and under that identification the tensor $\sum_i x_i\otimes x^i$ is the image of the identity map on $\mathfrak g$. Therefore it depends only on the form, not on the chosen dual bases. [given]
+1.1 Nondegeneracy identifies $\mathfrak g$ with $\mathfrak g^*$, and under that identification the tensor $\sum_i x_i\otimes x^i$ is the image of the identity map on $\mathfrak g$. Therefore it depends only on the form, not on the chosen dual bases. [given]
 
-2.1 Multiplication $\mathfrak g\otimes \mathfrak g\to U(\mathfrak g)$ sends that basis-independent tensor to the element $\sum_i x_ix^i$ from [[def-quadratic-casimir-element]], so the Casimir element is basis independent as well. [step 1.1] ∎
+2.1 Multiplication $\mathfrak g\otimes\mathfrak g\to U(\mathfrak g)$ ([[def-universal-enveloping-algebra-as-a-tensor-quotient]]) sends that basis-independent tensor to $\sum_i x_ix^i$. Its image is therefore basis independent as well. [step 1.1] ∎

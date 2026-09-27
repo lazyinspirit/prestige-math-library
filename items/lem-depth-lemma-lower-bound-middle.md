@@ -4,7 +4,7 @@ title: The middle lower bound in the Depth Lemma
 kind: lemma
 status: published
 origin: pipeline
-deps: [cor-depth-as-first-nonzero-ext]
+deps: [def-axiom-of-choice, cor-depth-as-first-nonzero-ext]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,23 +14,23 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (lem-depth-lemma-lower-bound-middle). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
 
-Let $(R,\mathfrak m)$ be a Noetherian local ring and let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\mathfrak m)$ be a Noetherian local ring and let
 $$0\longrightarrow A\longrightarrow B\longrightarrow C\longrightarrow0$$
 be a short exact sequence of finite $R$-modules. Then
 $$\operatorname{depth}_R(B)\ge \min\{\operatorname{depth}_R(A),\operatorname{depth}_R(C)\}.$$
 
 ## Facts & Assumptions
 
-**Given:** the displayed short exact sequence; write $a,b,c$ for the depths of $A,B,C$. Depth $+\infty$ has the convention fixed in `def-depth-with-respect-to-an-ideal`.
+**Given:** The Axiom of Choice; the displayed short exact sequence; write $a,b,c$ for the depths of $A,B,C$. Depth $+\infty$ has the convention fixed in `def-depth-with-respect-to-an-ideal`.
 
 ## Proof
 

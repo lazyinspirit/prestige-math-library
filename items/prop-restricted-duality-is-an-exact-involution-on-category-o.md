@@ -2,13 +2,7 @@
 id: "prop-restricted-duality-is-an-exact-involution-on-category-o"
 kind: "proposition"
 title: "Restricted duality is exact and involutive on O"
-deps: ["def-restricted-dual-of-a-weight-module", "lem-simple-highest-weight-modules-are-restricted-self-dual", "thm-every-category-o-object-has-finite-length", "thm-category-o-is-abelian-and-extension-closed", "thm-jordan-holder-theorem-in-an-abelian-category", "thm-simple-objects-of-category-o-are-highest-weight-modules"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-restricted-dual-of-a-weight-module", "lem-simple-highest-weight-modules-are-restricted-self-dual", "thm-every-category-o-object-has-finite-length", "thm-category-o-is-abelian-and-extension-closed", "thm-jordan-holder-theorem-in-an-abelian-category", "thm-simple-objects-of-category-o-are-highest-weight-modules"]
 sources:
   references:
     - title: "Chen, Lecture 8 §3 Lemma 3.8 and Theorem 3.9, p.5"
@@ -21,9 +15,18 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Dualize each finite weight space to prove exactness and biduality in the larger weight category. Dualize a finite composition series; its factors are the same simples. Qualified extension closure proves finite generation and membership in O without circularly assuming it"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (prop-restricted-duality-is-an-exact-involution-on-category-o). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -31,13 +34,13 @@ Restricted Chevalley duality is an exact contravariant equivalence $D:\mathcal O
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
 [F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. For an $\mathfrak h$-semisimple module $M$ with finite-dimensional weight spaces, its **restricted Chevalley dual** is $$D(M)=\bigoplus_{\mu\in\mathfrak h^*}M_\mu^*,\qquad (x\varphi)(m)=\varphi(\tau(x)m)\quad(x\in U(\mathfrak g)).$$ Here each functional is extended by zero on the other weight spaces and $\tau$ is the fixed anti-involution of def-chevalley-contravariant-form. In particular $\tau(h)=h$ and $D(M)_\mu=M_\mu^*$. A map $f:M\to N$ induces $D(f):D(N)\to D(M)$ by precomposition. The action law follows from $\tau(xy)=\tau(y)\tau(x)$; a root vector of weight $\alpha$ sends $M_\mu^*$ to $M_{\mu+\alpha}^*$, so the restricted sum is stable. This is a complex-linear algebraic dual, with no conjugation. Ordinary Lie-module duality has a minus sign and reverses weights; twisting that dual by the Lie automorphism $x\mapsto-\tau(x)$ gives the convention used here. ([[def-restricted-dual-of-a-weight-module]])
 
 [F2] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. For every highest weight $\lambda$, $D(L(\lambda))\cong L(\lambda)$ as $\mathfrak g$-modules. ([[lem-simple-highest-weight-modules-are-restricted-self-dual]])
 
-[F3] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Every object of $\mathcal O$ has a finite composition series and is both Noetherian and Artinian. The length of zero is zero. ([[thm-every-category-o-object-has-finite-length]])
+[F3] Under the Axiom of Choice, fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Every object of $\mathcal O$ has a finite composition series and is both Noetherian and Artinian. The length of zero is zero. ([[thm-every-category-o-object-has-finite-length]])
 
 [F4] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. The category $\mathcal O$ is closed under submodules, quotients and finite direct sums and is an abelian category. If $0\to A\to E\to B\to0$ is exact, $A,B\in\mathcal O$, and $E$ is $\mathfrak h$-semisimple, then $E\in\mathcal O$. The middle-term weight hypothesis is essential. ([[thm-category-o-is-abelian-and-extension-closed]])
 

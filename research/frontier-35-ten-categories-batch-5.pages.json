@@ -1,0 +1,845 @@
+[
+  {
+    "order": 366.0621,
+    "id": "homogeneous-resultants-and-projective-intersection-length",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Homogeneous Resultants and Projective Intersection Length",
+    "companion": "homogeneous-resultants-and-projective-intersection-length-examples",
+    "requires": [
+      "artinian-rings-and-length",
+      "rees-modules-artin-rees-and-hilbert-samuel-theory",
+      "koszul-complexes-and-regular-sequences",
+      "projective-algebraic-sets-projective-morphisms-and-cones",
+      "schemes-subschemes-and-morphisms-locally-of-finite-type",
+      "dimension-constructible-images-and-dimensions-of-fibres",
+      "linear-algebra-methods-in-combinatorics",
+      "the-fundamental-theorem-of-algebra"
+    ],
+    "items": [
+      {
+        "id": "def-sylvester-resultant-of-binary-forms",
+        "kind": "definition",
+        "title": "Sylvester resultant of two positive-degree binary forms",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix"
+        ],
+        "statement": "For a commutative coefficient ring R, positive integers d,e, and homogeneous F,G in R[X,Y] of nominated degrees d,e (including a zero form), define Res_{d,e}(F,G) as the determinant of (A,B)↦AF+BG from R[X,Y]_{e-1}⊕R[X,Y]_{d-1} to R[X,Y]_{d+e-1}, using descending X-power monomial bases and the F block first. For two linear forms this convention gives ad−bc. Dehomogenization retains the nominated degrees even when a leading coefficient vanishes.",
+        "strategy": "Specify all ordered bases and matrix block order; the map is square because e+d=d+e. Work over an arbitrary commutative ring so later coefficient specialization is literal. No assertion about roots is built into the definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, elimination theory, p. 166",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-binary-resultant-scaling-specialization-and-dehomogenization",
+        "kind": "lemma",
+        "title": "Scaling, specialization, and the affine and infinite charts of a binary resultant",
+        "deps": [
+          "def-sylvester-resultant-of-binary-forms",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-universal-property-of-a-polynomial-ring",
+          "def-projective-space-points",
+          "def-algebraically-closed-field",
+          "def-homogeneous-polynomial-and-homogeneous-ideal"
+        ],
+        "statement": "For F,G of nominated degrees d,e over a commutative ring, Res_{d,e}(uF,vG)=u^e v^d Res_{d,e}(F,G); every coefficient-ring map commutes with the resultant. For k a field and an algebraically closed extension K/k, write f(T)=F(T,1), g(T)=G(T,1). Their possible common zeros in P^1(K) are precisely the affine zeros [a:1] with a∈K and f(a)=g(a)=0, and the point [1:0] when both X^d and X^e coefficients vanish. This remains true if f or g has degree below its nominated degree.",
+        "strategy": "Use e F-columns and d G-columns for scaling, and the universal Leibniz polynomial for specialization. Analyze the two standard projective charts by direct substitution; explicitly identify the common-infinity condition, without replacing f,g by their actual lower degrees in the Sylvester determinant.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Proposition 7.27, p. 166",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-binary-resultant-zero-iff-common-geometric-projective-root",
+        "kind": "theorem",
+        "title": "The binary Sylvester resultant detects a common geometric projective root",
+        "deps": [
+          "def-sylvester-resultant-of-binary-forms",
+          "lem-binary-resultant-scaling-specialization-and-dehomogenization",
+          "def-algebraic-closure",
+          "def-algebraically-closed-field",
+          "def-projective-space-points",
+          "thm-universal-property-of-a-polynomial-ring",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "lem-field-is-a-commutative-ring",
+          "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+          "thm-coordinate-action-of-a-linear-map",
+          "thm-linear-kernel-image-and-injectivity",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-factor-theorem-over-a-commutative-ring",
+          "thm-bezout-identity-for-polynomials",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-polynomial-degree-of-a-product-over-a-domain"
+        ],
+        "statement": "Let k be any field, let K be any algebraic closure of k, and let F,G∈k[X,Y] be forms of nominated positive degrees d,e, including zero forms. Then Res_{d,e}(F,G)=0 in k if and only if F and G vanish together at a point of P^1(K). No k-rational common point is asserted.",
+        "strategy": "Fix the supplied algebraic closure K; the conditional theorem does not invoke its existence. Base-change the square multiplication map to K using specialization. If both leading X coefficients vanish, Y divides both forms, including zero forms, so [1:0] is common. If at least one form is nonzero, (A,B)=(G/Y,−F/Y) is a nonzero Sylvester-kernel vector; if both forms are zero, the whole map is zero. Otherwise interchange F,G if necessary, changing the determinant only by a unit sign, and scale the form with nonzero leading coefficient to make f(T)=F(T,1) monic of degree d. Dehomogenization identifies the Sylvester map with (A,B)↦Af+Bg on polynomials of degree below e,d into polynomials of degree below d+e, even if g has lower actual degree. In the target basis fT^{e−1},…,f,T^{d−1},…,1, this map is block triangular with upper identity block and lower block multiplication by g on K[T]/(f); its determinant differs from the nominated homogeneous determinant only by a nonzero basis factor. To identify that lower determinant with the published monic resultant, factor f=∏_{i=1}^d(T−α_i) over K and filter K[T]/(f) by the ideals generated by ∏_{j≤i}(T−α_j). Each successive one-dimensional quotient has g acting by g(α_i), including repeated roots, so the determinant is ∏_i g(α_i), the published root-product formula. The monic common-root criterion now proves vanishing exactly for a common affine root. The preceding chart lemma shows this is exactly the projective criterion when one leading coefficient is nonzero; the both-zero branch supplies the infinity point.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Propositions 7.27–7.28, pp. 166–167",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+        "kind": "lemma",
+        "title": "Every finite-variable polynomial ring over a field is a UFD",
+        "deps": [
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "lem-gauss-lemma-over-a-ufd",
+          "def-unique-factorisation-domain",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-height-of-a-prime-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "def-krull-dimension-of-a-ring",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-universal-property-of-a-polynomial-ring",
+          "lem-field-is-a-commutative-ring"
+        ],
+        "statement": "For any field k and finite r≥0, k[x_1,…,x_r] is a unique factorisation domain. Every irreducible in it is prime, and every height-one prime is generated by an irreducible element.",
+        "strategy": "Start with the field and the published one-variable UFD. For a UFD R, extract coefficient content in R[x]; Gauss's lemma makes primitive products primitive and lifts factorization from Frac(R)[x]. Factor the content in R and the primitive part in the PID Frac(R)[x]; irreducibles are prime by reduction modulo a coefficient prime or by divisibility in Frac(R)[x] plus primitivity. This proves R[x] UFD, so induction gives the finite-variable claim. A height-one prime contains an irreducible factor of a nonzero element; the generated prime has height one and hence equals it.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Propositions 1.24–1.31 and Theorem 1.32, pp. 22–25",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-coprime-plane-forms-form-a-homogeneous-regular-sequence",
+        "kind": "lemma",
+        "title": "Coprime positive-degree plane forms form a homogeneous regular sequence",
+        "deps": [
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "def-regular-sequence-on-a-module",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-height-of-a-prime-ideal",
+          "def-krull-dimension-of-a-ring",
+          "thm-prime-spectrum-of-a-localisation-bijection"
+        ],
+        "statement": "Let k be any field and S=k[x_0,x_1,x_2]. If nonzero homogeneous F,G have positive degrees and no common nonconstant factor in S, then (F,G) is an S-regular sequence in that order. Equivalently the plane forms have no common codimension-one component over k.",
+        "strategy": "S is a domain, so F is a nonzerodivisor. If GH∈(F), compare irreducible valuations in the finite-variable UFD; none of the factors of F divides G, so F divides H and G is a nonzerodivisor on S/(F). Because both generators have positive degree, (F,G) has no constant term and S/(F,G)≠0, meeting the published regular-sequence convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Theorem 1.32 and Corollary 1.25, pp. 22–25",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Gathmann, Algebraic Geometry, §6.2, p. 96",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complete-intersection-hilbert-series-two-plane-forms",
+        "kind": "lemma",
+        "title": "Hilbert series of a two-form plane complete intersection",
+        "deps": [
+          "lem-coprime-plane-forms-form-a-homogeneous-regular-sequence",
+          "def-regular-sequence-on-a-module",
+          "def-hilbert-function-and-hilbert-series",
+          "def-graded-ring-and-graded-module",
+          "cor-length-is-additive-in-short-exact-sequences",
+          "def-composition-series-and-length-of-a-module",
+          "def-simple-module",
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-monomials-multidegree-and-total-degree"
+        ],
+        "statement": "For S=k[x_0,x_1,x_2] and a homogeneous S-regular pair (F,G) of degrees d,e>0, HS_{S/(F,G)}(t)=(1−t^d)(1−t^e)/(1−t)^3=(1+⋯+t^{d−1})(1+⋯+t^{e−1})/(1−t). Its Hilbert function is therefore eventually the constant de.",
+        "strategy": "Use 0→S(−d)→S→S/(F)→0 and 0→(S/(F))(−e)→S/(F)→S/(F,G)→0, with injectivity from the preceding regular-sequence item. Count degree-n monomials of S to obtain (1−t)^{−3}; apply degreewise length additivity over k. Cancel the two numerator factors as formal power series to read the eventual coefficient de, without treating S/(F,G) as Artinian.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Theorem 6.2.1 and Example 6.2.2, p. 96",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Hilbert-function discussion, pp. 153–155",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-projective-scheme-from-a-homogeneous-quotient",
+        "kind": "definition",
+        "title": "Projective scheme of a homogeneous quotient and its standard affine charts",
+        "deps": [
+          "def-graded-ring-and-graded-module",
+          "def-affine-scheme-spectrum",
+          "thm-gluing-affine-schemes",
+          "def-scheme",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-projective-space-points"
+        ],
+        "statement": "For a field k, R=k[x_0,…,x_n] with standard grading, a homogeneous ideal I, and S=R/I, define Proj S as homogeneous prime ideals of S avoiding S_+=(x_0,…,x_n)S, equipped with the scheme obtained by gluing D_+(x_i)=Spec((S_{x_i})_0). On D_+(x_i), (S_{x_i})_0 is the quotient of k[x_j/x_i:j≠i] by the dehomogenized ideal; chart overlaps invert the appropriate coordinate ratio. This works over any k and for nonreduced I.",
+        "strategy": "Specify the prime set, irrelevant ideal, degree-zero localizations, and overlap maps; the cocycle is literal equality inside double localization, so published affine-scheme gluing provides the locally ringed space. Distinguish this scheme from the published classical projective algebraic set, which assumes k algebraically closed and is reduced.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §27.8, Definition 27.8.3 and Lemma 27.8.7",
+              "url": "https://stacks.math.columbia.edu/tag/01M3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+        "kind": "lemma",
+        "title": "Prime and local-ring correspondence on standard projective charts",
+        "deps": [
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-graded-ring-and-graded-module",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-prime-and-maximal-ideals",
+          "def-stalk-of-presheaf",
+          "thm-prime-spectrum-map-by-contraction",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "prop-iterated-localisation",
+          "thm-universal-property-of-localisation",
+          "cor-localisation-is-unique-up-to-unique-isomorphism",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras"
+        ],
+        "statement": "For standard graded S over k and any degree-one x_i, D_+(x_i) is canonically Spec((S_{x_i})_0); its points correspond in an inclusion-preserving way to homogeneous primes of S avoiding x_i. At a corresponding point x, O_{Proj S,x} is the localization of (S_{x_i})_0 at that affine prime. These identifications commute on overlaps and with field extension.",
+        "strategy": "Because x_i becomes an invertible homogeneous element of degree one, S_{x_i}≅(S_{x_i})_0[x_i,x_i^{-1}] as graded rings. Homogeneous primes are extensions of primes of the degree-zero ring. Combine ordinary localization-prime correspondence with the affine stalk theorem; the double-localization formulas give overlap and scalar-extension compatibility.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, §27.8, Lemmas 27.8.4 and 27.8.7",
+              "url": "https://stacks.math.columbia.edu/tag/01M3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-standard-open-affine-chart-of-a-projective-quotient",
+        "kind": "lemma",
+        "title": "The standard open $D_+(f)$ of a projective quotient is the affine chart $\\\\operatorname{Spec}((S_f)_0)$",
+        "deps": [
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "lem-localisation-of-a-graded-ring-at-a-homogeneous-element",
+          "def-graded-ring-and-graded-module",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-prime-and-maximal-ideals",
+          "def-affine-scheme-spectrum",
+          "def-scheme",
+          "thm-gluing-affine-schemes",
+          "thm-global-sections-affine-scheme",
+          "prop-iterated-localisation",
+          "thm-universal-property-of-localisation",
+          "cor-localisation-is-unique-up-to-unique-isomorphism",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence"
+        ],
+        "statement": "For a homogeneous f of degree d>=1 in a standard graded quotient S, with X=Proj S and standard charts D_+(x_i)=Spec(A_i): D_+(f) is an open subscheme, D_+(f) cap D_+(x_i)=D_+(fx_i), inside the chart D_+(x_i) it is the distinguished open Spec((A_i)_{f/x_i^d}) determined by the degree-zero element f/x_i^d, D_+(f) is affine, canonically Spec((S_f)_0) via glueing over the standard charts, its ring of global sections is (S_f)_0 compatibly with the chart localisations, and f=x_i recovers the standard chart.",
+        "strategy": "Compare the three subrings (S_{fx_i})_0, ((S_f)_0)_{x_i^d/f} and (A_i)_{f/x_i^d} inside S_{fx_i}, verify the cocycle condition on the overlaps and glue the affine pieces to Spec((S_f)_0).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Section 27.8: Projective schemes (tag 01M3), Lemma 27.8.4",
+              "url": "https://stacks.math.columbia.edu/tag/01M3"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry v6.10, Chapter 6 (Proj and its standard affine charts)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-no-common-component-projective-plane-intersection-is-zero-dimensional",
+        "kind": "corollary",
+        "title": "Coprime plane forms have a zero-dimensional projective scheme intersection",
+        "deps": [
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+          "lem-coprime-plane-forms-form-a-homogeneous-regular-sequence",
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "def-height-of-a-prime-ideal",
+          "def-krull-dimension-of-a-ring",
+          "def-dimension-noetherian-topological-space",
+          "def-irreducible-topological-space-and-subset",
+          "thm-irreducible-closed-subsets-and-prime-ideals",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-krull-height-theorem",
+          "lem-minimal-prime-over-an-ideal-exists",
+          "thm-artinian-ring-primes-are-maximal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Let k be any field and F,G∈k[x_0,x_1,x_2] be nonzero homogeneous forms of positive degrees with no common nonconstant factor. Then X=Proj(k[x_0,x_1,x_2]/(F,G)) is nonempty and zero-dimensional; its homogeneous coordinate quotient has ring dimension one, never ring dimension zero.",
+        "strategy": "By the finite-variable UFD, any height-one prime of R=k[x_0,x_1,x_2] is principal: choose an irreducible factor of a nonzero element in the prime; a strict smaller nonzero prime would contradict height one. Such a prime cannot contain both coprime forms, so every prime above (F,G) has height at least two. Under AC, iterate the published polynomial-ring height bound to get dim R=3, with the coordinate prime chain attaining three. Every proper homogeneous prime of R lies in the irrelevant maximal ideal, because it contains no nonzero degree-zero element. A chain of two Proj primes above (F,G), followed by that maximal ideal, would force a prime chain of length at least four in R. The chart-prime correspondence therefore makes every affine projective chart zero-dimensional. Because R is Noetherian, R/(F,G) has a minimal prime; Krull height theorem gives height at most two, so the preceding lower bound makes its height exactly two. This prime is properly contained in the irrelevant maximal ideal of height three and gives a chain of length one in the quotient. A chain of length two in the quotient would start above a prime of ambient height at least two and give a chain of length four in R, so the quotient has dimension exactly one. To show Proj is nonempty without assuming the chosen minimal prime is homogeneous, suppose every standard chart is empty. Then each localization S_{x_i} is zero, so each x_i is nilpotent in S. Because the coordinates finitely generate S over k, S is finite-dimensional over k and has ring dimension zero, contradicting the just-proved dimension one. Thus X is nonempty and zero-dimensional, while its coordinate ring has dimension one and is not Artinian.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Corollary 1.25 and Theorem 1.32, pp. 22–25",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Gathmann, Algebraic Geometry, §6.2, p. 96",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+        "kind": "lemma",
+        "title": "A zero-dimensional projective finite-type scheme is a finite union of finite local Artinian charts",
+        "deps": [
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+          "def-finite-type-and-module-finite-algebras",
+          "def-composition-series-and-length-of-a-module",
+          "def-simple-module",
+          "cor-noether-normalisation-module-finiteness",
+          "thm-integrality-and-finite-module-equivalences",
+          "thm-lying-over",
+          "cor-integral-extension-lifts-finite-prime-chains",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "def-krull-dimension-of-a-ring",
+          "def-artinian-ring",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-artinian-ring-has-finitely-many-maximal-ideals",
+          "thm-structure-theorem-for-artinian-rings",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. If X=Proj(k[x_0,…,x_n]/I) is zero-dimensional for a homogeneous ideal I, then X has finitely many points, all closed, and is the finite disjoint union of spectra of finite-dimensional local Artinian k-algebras. Each residue field κ(x) is finite over k, and each O_{X,x} has finite length.",
+        "strategy": "Each standard affine chart A_i=(S_{x_i})_0 is finite type over k and dimension zero by the chart-prime correspondence. For nonzero A_i, Noether normalization embeds k[z_1,…,z_d] finitely and integrally in A_i. If d>0, lying-over and going-up, using the stated AC, lift (0)⊊(z_1) to a strict prime chain in A_i, contradiction. Thus d=0 and A_i is finite-dimensional over k. Such an algebra is Artinian by descending vector-space dimension; the published Artinian local-product theorem gives finitely many local factors. Finitely many standard charts cover X; their singleton factors are open, so the finite space is discrete and glues as the stated disjoint union. Residue fields and local rings are k-quotients/summands of finite-dimensional algebras.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 33.20.2, complete proof",
+              "url": "https://stacks.math.columbia.edu/tag/06LH"
+            },
+            {
+              "title": "Gathmann, Algebraic Geometry, Lemma 6.1.4(i)–(ii), pp. 93–94",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-total-length-of-a-zero-dimensional-projective-scheme",
+        "kind": "definition",
+        "title": "Total length of a zero-dimensional projective k-scheme",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-krull-dimension-of-a-ring",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "def-composition-series-and-length-of-a-module",
+          "def-residue-field-scheme-point",
+          "def-extension-degree-and-finite-extension",
+          "def-affine-scheme-spectrum",
+          "def-dimension",
+          "thm-structure-theorem-for-artinian-rings",
+          "cor-length-is-additive-in-short-exact-sequences",
+          "cor-dimension-of-a-direct-sum"
+        ],
+        "statement": "Assume AC. For a zero-dimensional projective finite-type k-scheme X, define len_k(X)=Σ_{x∈|X|} length_{O_{X,x}}(O_{X,x})[κ(x):k]. The sum is finite, with len_k(∅)=0. Equivalently, when X=Spec A for its finite-dimensional k-algebra A, len_k(X)=dim_k A. The local length is taken in X, not in the ambient plane.",
+        "strategy": "Invoke the preceding finite-local-chart lemma for finite support and finite residue degrees. The Artinian local-product decomposition and length additivity identify each local algebra's k-dimension with its composition length times residue degree, and sum over its finitely many points. AC is inherited from the local finiteness and Artinian decomposition proofs, not from the notation for the sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Lemma 6.1.4 and Example 6.1.8(i), pp. 93–95",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Remark 6.38, p. 153",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-localisation-of-a-graded-ring-at-a-homogeneous-element",
+        "kind": "lemma",
+        "title": "Localisation at a homogeneous element is graded, with graded kernels and dehomogenised degree-zero parts",
+        "deps": [
+          "def-graded-ring-and-graded-module",
+          "def-principal-localisation",
+          "def-multiplicative-subset-and-localisation",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "cor-localisation-commutes-with-kernels-images-and-cokernels",
+          "thm-universal-property-of-localisation"
+        ],
+        "statement": "For a nonnegatively graded ring R and a homogeneous t in R of degree delta>=1: R_t is graded by (R_t)_n={r/t^m : r in R_{n+m delta}} with degree-preserving localisation map and multiplicative grading; a ring map out of R that is degree-preserving on homogeneous elements has graded kernel; the quotient by an ideal generated by homogeneous elements is graded with the quotient map degree-preserving; and for delta=1 the degree-zero part of JR_t is the ideal generated by the dehomogenised a_i/t^{d_i}, with ((R/J)_t)_0 = (R_t)_0/(a_1/t^{d_1},...,a_k/t^{d_k}).",
+        "strategy": "Direct fraction calculus in the principal localisation: decompose numerators into graded pieces, clear denominators, use the direct-sum property of the grading and the fraction criterion, then identify the degree-zero parts of the extended ideal and of the localised quotient.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Section 10.56 (tag 00JL): graded rings and localisation at a homogeneous element",
+              "url": "https://stacks.math.columbia.edu/tag/00JL"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry v6.10, Chapter 6 (graded rings and Proj)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union",
+        "kind": "lemma",
+        "title": "The spectrum of a finite product ring is the disjoint union of the factor spectra",
+        "deps": [
+          "def-commutative-ring",
+          "def-product-ring",
+          "def-ring-homomorphism",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring",
+          "def-prime-and-maximal-ideals",
+          "thm-ring-homomorphism-kernel-is-an-ideal",
+          "thm-quotient-ring-universal-property",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-correspondence-theorem-ideals",
+          "thm-third-isomorphism-theorem-rings",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "lem-zariski-closed-set-axioms",
+          "def-affine-scheme-spectrum",
+          "def-scheme",
+          "def-locally-ringed-space",
+          "def-morphism-locally-ringed-spaces",
+          "def-morphism-affine-schemes-from-ring-map",
+          "lem-spectrum-map-stalk-homomorphisms-local",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-principal-localisation",
+          "thm-universal-property-of-localisation",
+          "cor-localisation-is-unique-up-to-unique-isomorphism",
+          "lem-spectrum-localization-open-immersion",
+          "thm-sections-basic-open-affine-scheme",
+          "thm-global-sections-affine-scheme",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-sheaf-on-topological-space",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "statement": "Let r>=1, R_1,...,R_r commutative rings, R=prod_i R_i with coordinate idempotents e_i. Then: e_i are orthogonal idempotents summing to 1; every prime of R contains all but exactly one e_j, and the primes of R are exactly the pi_i^{-1}(p) with p subset R_i prime, uniquely; the D(e_i) are pairwise disjoint clopen sets covering Spec R and the morphism induced by pi_i is an isomorphism of locally ringed spaces onto the open piece D(e_i), with local rings the local rings of the factors; an ideal pi_i^{-1}(p) is maximal iff p is; and restriction to the pieces induces a canonical isomorphism Gamma(Spec R,O)=prod_i Gamma(Spec R_i,O)=prod_i R_i, which under Gamma(Spec R,O)=R is the identity.",
+        "strategy": "Componentwise idempotent computations; the localisation R_{e_i} and the quotient R/(1-e_i)R are both localisations of R at e_i, so they are canonically isomorphic to R_i; then the principal-localisation description of D(e_i) as an open locally ringed subspace, functoriality of Spec, the sheaf axioms on the clopen cover, and the distinguished-open section formula give the local rings, the maximal ideals and the product decomposition of global sections.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Lemma 10.21.2 (tag 00ED): the spectrum of a product of rings",
+              "url": "https://stacks.math.columbia.edu/tag/00ED"
+            },
+            {
+              "title": "The Stacks Project, Lemma 10.17.6 (tag 00DY) and Section 26.6 (tag 01HX)",
+              "url": "https://stacks.math.columbia.edu/tag/01HX"
+            },
+            {
+              "title": "J. S. Milne, A Primer of Commutative Algebra, v4.03, Section 14 The spectrum of a ring",
+              "url": "https://www.jmilne.org/math/xnotes/CA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-base-change-of-a-zero-dimensional-projective-quotient",
+        "kind": "lemma",
+        "title": "Field extension preserves the graded pieces and the total length of a zero-dimensional projective quotient",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-graded-ring-and-graded-module",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-product-of-an-ideal-and-a-module",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "thm-right-exactness-of-tensor-products",
+          "thm-localisation-of-modules-is-tensor-product",
+          "def-multiplicative-subset-and-localisation",
+          "lem-localisation-of-a-graded-ring-at-a-homogeneous-element",
+          "lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "def-composition-series-and-length-of-a-module",
+          "def-residue-field-scheme-point",
+          "def-extension-degree-and-finite-extension",
+          "def-dimension",
+          "def-artinian-ring",
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-structure-theorem-for-artinian-rings",
+          "cor-dimension-of-a-direct-sum",
+          "def-affine-scheme-spectrum",
+          "def-scheme",
+          "def-prime-and-maximal-ideals",
+          "def-krull-dimension-of-a-ring"
+        ],
+        "statement": "Assume AC. For a field extension k subset K, a homogeneous ideal I in k[x_0,...,x_n], the standard graded quotient S with X=Proj S chartwise zero-dimensional, and S_K=S tensor_k K graded degreewise with X_K=Proj(S_K): S_K is standard graded with (S_K)_m=S_m tensor_k K, so dim_K(S_K)_m=dim_k S_m; the chart rings of X_K are A_i tensor_k K and X_K is chartwise zero-dimensional; and len_K(X_K)=len_k(X).",
+        "strategy": "Identify the base-changed polynomial quotient and each graded piece by tensor algebra, then commute field extension with graded localization to obtain the charts A_i tensor_k K. Each zero-dimensional chart is finite-dimensional, so its base change remains zero-dimensional. An empty chart has A_i=0 and contributes no points; on a nonempty chart use the finite-product spectrum theorem for its local Artin factors. Compare the weighted local lengths through finite-dimensional affine consistency: each local factor B has dim_K(B tensor_k K)=dim_k B. This proves equality of total lengths even for empty X and arbitrary field extensions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Section 27.8 (tag 01M3) and Lemma 33.20.2 (tag 06LH)",
+              "url": "https://stacks.math.columbia.edu/tag/06LH"
+            },
+            {
+              "title": "A. Gathmann, Algebraic Geometry class notes (2002), Lemma 6.1.4 and Example 6.1.8(i), pp. 93-95",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-eventual-hilbert-function-equals-zero-dimensional-projective-length",
+        "kind": "lemma",
+        "title": "The eventual Hilbert value is the intrinsic length of a finite projective scheme",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-localisation-of-a-graded-ring-at-a-homogeneous-element",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-krull-dimension-of-a-ring",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "lem-standard-open-affine-chart-of-a-projective-quotient",
+          "lem-base-change-of-a-zero-dimensional-projective-quotient",
+          "lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces",
+          "lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "cor-dimension-of-a-direct-sum",
+          "def-dimension",
+          "def-composition-series-and-length-of-a-module",
+          "def-residue-field-scheme-point",
+          "def-extension-degree-and-finite-extension",
+          "def-affine-scheme-spectrum",
+          "def-scheme",
+          "def-prime-and-maximal-ideals",
+          "prop-iterated-localisation",
+          "thm-universal-property-of-localisation",
+          "cor-localisation-is-unique-up-to-unique-isomorphism",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence"
+        ],
+        "statement": "Assume AC. Let I⊂k[x_0,…,x_n] be any homogeneous ideal, S=k[x_0,…,x_n]/I, and X=Proj S zero-dimensional, including the empty case. Then for all sufficiently large m, dim_k S_m=len_k(X)=Σ_x length_{O_{X,x}}(O_{X,x})[κ(x):k]. Saturation of I is not assumed.",
+        "strategy": "If k is finite, pass to K=k(t), using the base-change lemma to preserve graded dimensions, chartwise dimension zero and total length. Over the resulting infinite field choose a degree-one L avoiding the finite Proj point set; for empty X take L=x_0. Then X=D_+(L)=Spec A with A=(S_L)_0. For nonempty X the finite local decomposition and nonempty finite-product spectrum theorem give finite-dimensional A and dim_k A=len_k(X); for empty X the sheaf empty-section lemma gives A=0 and the same equality. Fractions show the images of S_m→A eventually fill finite-dimensional A. Since D_+(L)=X, powers of the variables lie in LS; a pigeonhole bound gives S_m=LS_{m-1} in high degrees. The L-torsion kernels then have eventually constant dimensions and are killed by a common power of L, so they eventually vanish. Thus S_m≅A for all large m, with no saturation assumption.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Lemma 6.1.4(iii) and Remark 6.1.6, pp. 93–94",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            },
+            {
+              "title": "Stacks Project, Lemma 33.20.2 and §27.8 standard affine opens",
+              "url": "https://stacks.math.columbia.edu/tag/06LH"
+            },
+            {
+              "title": "Stacks Project, §27.8 standard affine opens",
+              "url": "https://stacks.math.columbia.edu/tag/01M3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-projective-plane-complete-intersection-total-length",
+        "kind": "theorem",
+        "title": "Two coprime projective plane forms meet in total length equal to their degree product",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-complete-intersection-hilbert-series-two-plane-forms",
+          "cor-no-common-component-projective-plane-intersection-is-zero-dimensional",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "lem-eventual-hilbert-function-equals-zero-dimensional-projective-length",
+          "lem-localisation-of-a-graded-ring-at-a-homogeneous-element",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-graded-ring-and-graded-module",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+          "def-krull-dimension-of-a-ring",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "cor-maximal-ideals-are-prime",
+          "def-prime-and-maximal-ideals",
+          "lem-coprime-plane-forms-form-a-homogeneous-regular-sequence",
+          "def-regular-sequence-on-a-module",
+          "def-hilbert-function-and-hilbert-series",
+          "thm-universal-property-of-localisation",
+          "def-multiplicative-subset-and-localisation",
+          "def-principal-localisation",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-monomials-multidegree-and-total-degree",
+          "def-homogeneous-polynomial-and-homogeneous-ideal"
+        ],
+        "statement": "Assume AC. Let k be any field and let F,G∈k[x_0,x_1,x_2] be nonzero homogeneous forms of positive degrees d,e with no common nonconstant factor. For X=Proj(k[x_0,x_1,x_2]/(F,G)), the finite intersection has total length len_k(X)=de. At each point the local algebra is the quotient by the two dehomogenized equations in an affine chart.",
+        "strategy": "The regular-sequence exact sequences give HS=(1+⋯+t^{d−1})(1+⋯+t^{e−1})/(1−t), hence eventual degree-piece dimension de. The projective chart/dimension corollary gives dimension zero and the local-length definition applies. Invoke the preceding elementary bridge to identify the eventual dimension with the local sum. The result is scheme-theoretic over arbitrary k, including residue-degree weights; the coordinate ring itself has dimension one and is not called Artinian. AC is spent in the dimension and finite-projective-length suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Lemma 6.1.4 and Theorem 6.2.1, pp. 93–96",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Theorem 6.37 and Remark 6.38, pp. 152–153",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-projective-plane-bezout-length-form",
+        "kind": "corollary",
+        "title": "Algebraic Bézout formula as a sum of local scheme lengths",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-projective-plane-complete-intersection-total-length",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "def-algebraically-closed-field",
+          "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+          "def-extension-degree-and-finite-extension",
+          "def-residue-field-scheme-point"
+        ],
+        "statement": "Assume AC. For coprime positive-degree plane forms F,G over any field k, of degrees d,e, Σ_{x∈V_+(F,G)} length_{O_{X,x}}(O_{X,x})[κ(x):k]=de for X=Proj(k[x_0,x_1,x_2]/(F,G)). Over an algebraically closed field the residue factors equal one. This is the algebraic length statement supplied to the later plane-curve page; invariance under different local curve equations and the geometric intersection formulation are not asserted here.",
+        "strategy": "Restate the total-length theorem using the explicit local sum from its definition. Identify the algebraically closed specialization [κ(x):k]=1, but leave invariance under local choices and geometric curve intersection to the planned consumer. AC is inherited from the theorem, declared here for users of the corollary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Example 6.2.2, p. 96",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Remark 6.38, p. 153",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.0622,
+    "id": "homogeneous-resultants-and-projective-intersection-length-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Homogeneous Resultants and Projective Intersection Length: Examples",
+    "companion": "homogeneous-resultants-and-projective-intersection-length",
+    "requires": [
+      "homogeneous-resultants-and-projective-intersection-length"
+    ],
+    "items": [
+      {
+        "id": "ex-binary-resultant-two-linear-forms",
+        "kind": "example",
+        "title": "Resultant of two binary linear forms",
+        "deps": [
+          "def-sylvester-resultant-of-binary-forms",
+          "def-determinant-of-a-square-matrix",
+          "thm-binary-resultant-zero-iff-common-geometric-projective-root",
+          "def-algebraic-closure",
+          "def-projective-space-points"
+        ],
+        "statement": "For F=aX+bY and G=cX+dY over any field k, Res_{1,1}(F,G)=ad−bc. It vanishes exactly when the two forms have a common point of P^1 over an algebraic closure, including zero-form cases.",
+        "strategy": "The defining multiplication map has matrix [[a,c],[b,d]] in the specified monomial bases, so its determinant is ad−bc. Apply the projective-root theorem and check directly that linear dependence of coefficient vectors gives the common projective zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Sylvester determinant and Proposition 7.28, pp. 166–167",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-resultant-detects-root-at-infinity",
+        "kind": "example",
+        "title": "A binary resultant detects a common root at infinity lost by naive dehomogenization",
+        "deps": [
+          "def-sylvester-resultant-of-binary-forms",
+          "def-determinant-of-a-square-matrix",
+          "thm-binary-resultant-zero-iff-common-geometric-projective-root",
+          "lem-binary-resultant-scaling-specialization-and-dehomogenization",
+          "def-projective-space-points",
+          "def-algebraic-closure",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ],
+        "statement": "For F(X,Y)=Y of nominated degree one and G(X,Y)=XY of nominated degree two, the homogeneous resultant is zero because both vanish at [1:0], whereas F(T,1)=1 and G(T,1)=T have no common affine root.",
+        "strategy": "Write the 3×3 Sylvester multiplication map or exhibit its nonzero kernel; the first output row is identically zero. The chart lemma identifies the common infinity point and confirms there is no affine root; do not reset the nominated degree of F after dehomogenization.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry v6.10, Proposition 7.27 boundary and Proposition 7.28, pp. 166–167",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hilbert-series-plane-complete-intersection",
+        "kind": "example",
+        "title": "A quadratic-cubic plane complete intersection has eventual Hilbert value six",
+        "deps": [
+          "lem-complete-intersection-hilbert-series-two-plane-forms",
+          "lem-coprime-plane-forms-form-a-homogeneous-regular-sequence",
+          "def-hilbert-function-and-hilbert-series",
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-monomials-multidegree-and-total-degree",
+          "def-graded-ring-and-graded-module",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "thm-projective-plane-complete-intersection-total-length",
+          "def-total-length-of-a-zero-dimensional-projective-scheme"
+        ],
+        "statement": "For S=k[x_0,x_1,x_2]/(x_0²,x_1³), HS_S(t)=(1+t)(1+t+t²)/(1−t). Its Hilbert function is 1,3,5,6,6,… in degrees 0,1,2,3,4,… over any field k.",
+        "strategy": "The monomials surviving modulo (x_0²,x_1³) have x_0 exponent 0 or 1, x_1 exponent 0,1,2 and arbitrary x_2 exponent. Multiply their two finite generating polynomials by (1−t)^{-1}; the coefficient sequence stabilizes at 2×3=6. This is a graded computation and does not assert the whole quotient ring is Artinian.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Theorem 6.2.1, p. 96",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-length-intersection-tangent-line-conic",
+        "kind": "example",
+        "title": "A tangent line and conic have one intersection point of local length two",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-projective-plane-complete-intersection-total-length",
+          "cor-projective-plane-bezout-length-form",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-composition-series-and-length-of-a-module",
+          "def-simple-module"
+        ],
+        "statement": "Assume the Axiom of Choice. Over any field k, the conic F=x_0x_2−x_1² and line G=x_2 meet only at P=[1:0:0]. On x_0≠0 their intersection local algebra is k[u,v]/(v−u²,v)≅k[u]/(u²), so length_{O_{X,P}}O_{X,P}=2 and [κ(P):k]=1. The total length two equals deg(F)deg(G).",
+        "strategy": "Set u=x_1/x_0 and v=x_2/x_0 on the standard affine chart. The homogeneous equations become v−u²=0 and v=0, leaving the two-dimensional local k-algebra with basis 1,u. The radical is (u), so this is the only projective point; no point lies on x_0=0 because then x_1=x_2=0 is irrelevant. Its composition series 0⊂(u)⊂k[u]/(u²) has length two. Cite the Bézout length corollary only as a consistency check, not as the local calculation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gathmann, Algebraic Geometry, Example 6.2.3 tangent intersections, pp. 96–97",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

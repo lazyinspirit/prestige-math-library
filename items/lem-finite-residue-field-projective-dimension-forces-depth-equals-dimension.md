@@ -2,13 +2,15 @@
 id: "lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension"
 kind: "lemma"
 title: "finite residue field projective dimension forces depth equals dimension"
-deps: ["thm-auslander-buchsbaum-formula", "lem-positive-depth-ring-has-regular-minimal-generator", "lem-residue-field-splits-off-reduced-maximal-ideal", "thm-quotient-and-lifting-regularity-across-a-regular-element", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "lem-depth-quotient-by-regular-element"]
+deps: ["def-axiom-of-choice", "thm-auslander-buchsbaum-formula", "lem-positive-depth-ring-has-regular-minimal-generator", "lem-residue-field-splits-off-reduced-maximal-ideal", "thm-quotient-and-lifting-regularity-across-a-regular-element", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "lem-depth-quotient-by-regular-element"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Theorem 12.33, p.123"
@@ -23,7 +25,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-If the residue field of a nonzero Noetherian local ring $R$ has finite projective dimension, then $R$ is regular and $\operatorname{depth}R=\dim R=\operatorname{edim}R$.
+Assume the Axiom of Choice. If the residue field of a nonzero Noetherian local ring $R$ has finite projective dimension, then $R$ is regular and $\operatorname{depth}R=\dim R=\operatorname{edim}R$.
 
 ## Facts & Assumptions
 
@@ -45,6 +47,6 @@ If the residue field of a nonzero Noetherian local ring $R$ has finite projectiv
 
 1.1 Induct on the finite integer $r=\operatorname{depth}R$. The residue field has depth zero, since every member of $\mathfrak m$ kills it. If $r=0$, Auslander–Buchsbaum gives $\operatorname{pd}k=0$ and its freeness consequence makes $k$ nonzero free. A nonzero free module has zero annihilator, so $\mathfrak m=0$ and $R=k$ is a field. [F1]
 
-2.1 For $r>0$ choose a nonzerodivisor $x\in\mathfrak m\setminus\mathfrak m^2$. The splitting lemma makes $\operatorname{pd}_{R/(x)}k$ finite, and the regular-element depth formula gives depth $r-1$ for the quotient. Depth of this annihilated module over $R$ equals its depth over $R/(x)$: lift sequences from the quotient or project sequences from $R$; multiplication and all successive quotients are identical. [F2, F3, F6, step 1.1]
+2.1 For $r>0$, the stated AC premise permits [F2] and [F3]; choose a nonzerodivisor $x\in\mathfrak m\setminus\mathfrak m^2$. The splitting lemma makes $\operatorname{pd}_{R/(x)}k$ finite, and the regular-element depth formula gives depth $r-1$ for the quotient. Depth of this annihilated module over $R$ equals its depth over $R/(x)$: lift sequences from the quotient or project sequences from $R$; multiplication and all successive quotients are identical. [given, F2, F3, F6, step 1.1]
 
 3.1 The inductive assertion makes $R/(x)$ regular. Lifting across the nonzerodivisor makes $R$ regular; its regular parameters make it Cohen–Macaulay, so depth equals dimension, and regularity equates that dimension with embedding dimension. This completes the induction. [F4, F5, step 2.1] ∎

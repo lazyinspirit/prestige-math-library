@@ -2,13 +2,8 @@
 id: "lem-regular-local-quotient-by-parameter-is-regular"
 kind: "lemma"
 title: "regular local quotient by parameter is regular"
-deps: ["lem-regular-system-of-parameters-equivalent-basis", "thm-dimension-at-most-embedding-dimension", "thm-dimension-as-minimal-number-of-radical-generators"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-regular-system-of-parameters-equivalent-basis", "thm-dimension-at-most-embedding-dimension", "thm-dimension-as-minimal-number-of-radical-generators"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "Proposition 12.7, p.115"
@@ -18,12 +13,20 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $(R,\mathfrak m,k)$ be regular local of dimension $d$, and let $x\in\mathfrak m\setminus\mathfrak m^2$. Then $R/(x)$ is regular local, of dimension and embedding dimension $d-1$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\mathfrak m,k)$ be regular local of dimension $d$, and let $x\in\mathfrak m\setminus\mathfrak m^2$. Then $R/(x)$ is regular local, of dimension and embedding dimension $d-1$.
 
 ## Facts & Assumptions
 
@@ -37,6 +40,6 @@ Let $(R,\mathfrak m,k)$ be regular local of dimension $d$, and let $x\in\mathfra
 
 ## Proof
 
-1.1 Extend the nonzero class of $x$ to a basis of $\mathfrak m/\mathfrak m^2$ and lift it. The resulting $d$ elements generate $\mathfrak m$; their last $d-1$ images generate the maximal ideal of $S=R/(x)$. Hence $\operatorname{edim}S\le d-1$. The hypotheses force $d\ge1$ and $S\ne0$. [F1, given]
+1.1 Extend the nonzero class of $x$ to a basis of $\mathfrak m/\mathfrak m^2$ and lift it. Under the assumed AC, [F1] makes the resulting $d$ elements generators of $\mathfrak m$; their last $d-1$ images generate the maximal ideal of $S=R/(x)$. Hence $\operatorname{edim}S\le d-1$. The hypotheses force $d\ge1$ and $S\ne0$. [F1, given]
 
 2.1 Let $t=\dim S$, which is finite by the embedding bound. Lift $t$ radical generators of the maximal ideal of $S$. Together with $x$ they generate an ideal of $R$ with radical $\mathfrak m$, so $d\le t+1$. Combining $d-1\le t\le\operatorname{edim}S\le d-1$ proves all the assertions, including the field quotient when $d=1$. [F3, F2, step 1.1, algebra] ∎

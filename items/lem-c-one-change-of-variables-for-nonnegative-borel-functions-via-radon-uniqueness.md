@@ -6,11 +6,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: Hunter, Notes on Partial Differential Equations
@@ -19,7 +20,7 @@ sources:
 status: published
 origin: pipeline
 proof_strategy: direct
-deps: ["thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "thm-rmk-uniqueness-among-radon-measures", "thm-monotone-convergence-for-the-integral", "thm-continuous-preimages-of-borel-sets-are-borel", "thm-arithmetic-and-lattice-operations-preserve-measurability", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values", "def-countable-choice", "cor-change-of-variables-for-compactly-supported-functions", "thm-continuous-on-a-rectangle-is-riemann-integrable", "thm-multidimensional-darboux-equals-riemann", "def-multidimensional-darboux-sums", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "thm-linearity-of-the-lebesgue-integral-on-l-one"]
+deps: ["thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "lem-relative-compact-closed-sets-have-a-positive-distance-gap", "lem-distance-to-set-is-lipschitz", "thm-monotone-convergence-for-the-integral", "thm-continuous-preimages-of-borel-sets-are-borel", "thm-arithmetic-and-lattice-operations-preserve-measurability", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values", "def-countable-choice", "cor-change-of-variables-for-compactly-supported-functions", "thm-continuous-on-a-rectangle-is-riemann-integrable", "thm-multidimensional-darboux-equals-riemann", "def-multidimensional-darboux-sums", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "thm-linearity-of-the-lebesgue-integral-on-l-one"]
 ---
 
 ## Statement
@@ -54,7 +55,7 @@ Assume $\mathrm{AC}_\omega$. Let $m\ge1$, let U,V be open subsets of $\mathbb R^
 
 [F12] Nonnegative increasing simple approximations converge in integral. ([[thm-monotone-convergence-for-the-integral]]).
 
-[F13] Equality of compactly supported continuous integrals identifies Radon measures. ([[thm-rmk-uniqueness-among-radon-measures]]).
+[F13] A compact set has a positive gap from a disjoint closed set, and distance to a nonempty set is continuous ([[lem-relative-compact-closed-sets-have-a-positive-distance-gap]], [[lem-distance-to-set-is-lipschitz]]).
 
 [F14] Pointwise products of measurable functions are measurable with the zero-times-infinity convention. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
 
@@ -68,9 +69,11 @@ Assume $\mathrm{AC}_\omega$. Let $m\ge1$, let U,V be open subsets of $\mathbb R^
 
 2.2 For nonnegative Borel psi on U, the definitions give $\int\psi\,d\mu=\int_V\psi(T^{-1}(y))\,dy$ and $\int\psi\,d\nu=\int_U\psi J\,dx$ first when psi is an indicator, then by finite additivity for nonnegative simple psi. For general psi use $s_k=2^{-k}\lfloor2^k\min(\psi,k)\rfloor$, taking min(infinity,k)=k. These are Borel simple, increase to psi, and their compositions and products with positive J increase to the required integrands. F12 proves both identities. F8 and F14 verify the measurability of every composition and product. Subtracting positive and negative parts extends the identities to real compact-support continuous psi, whose absolute integrals are finite by step 1.2. [step 1.2, F8, F12, F14]
 
-3.1 For $\varphi\in C_c(U)$ take $f=\varphi\circ T^{-1}\in C_c(V)$. Step 2.1 and the two identities in step 2.2 give $\int\varphi\,d\mu=\int_V f=\int_U(f\circ T)J=\int\varphi\,d\nu$. The Radon hypotheses were proved in step 1.2, so F13 yields mu=nu on all Borel subsets of U. [step 2.1, step 1.2, step 2.2, F13]
+3.1 For $\varphi\in C_c(U)$ take $f=\varphi\circ T^{-1}\in C_c(V)$. Step 2.1 and the two identities in step 2.2 give $\int\varphi\,d\mu=\int_V f=\int_U(f\circ T)J=\int\varphi\,d\nu$. [step 2.1, step 2.2]
 
-4.1 For the stated nonnegative Borel h put $\psi=h\circ T$, Borel by F8. The first identity in step 2.2 gives $\int_Vh=\int_U\psi\,d\mu$; step 3.1 replaces mu by nu, and the second identity gives $\int_U\psi\,d\nu=\int_U(h\circ T)J$. These are identities of nonnegative extended integrals and involve no subtraction of infinities. If U is empty then V is empty and both integrals are zero. [step 2.2, step 3.1, F8] ∎
+4.1 Here is the needed uniqueness argument on the Euclidean open set $U$. Let $K\subseteq O\subseteq U$ with $K$ compact and $O$ open. If $K=\varnothing$ the comparison is trivial. Otherwise, when $\mathbb R^m\setminus O$ is nonempty, [F13] gives a positive gap from $K$; choose $\delta>0$ smaller than it. When the complement is empty take any $\delta>0$. On $\mathbb R^m$ put $u(x)=\max\{0,1-d(x,K)/\delta\}$. By [F13] this is continuous, equals $1$ on $K$, and vanishes outside $O$. Its support lies in the closed $\delta$-neighbourhood of bounded $K$, which is compact by Heine--Borel, so $u|_U\in C_c(U)$. Step 3.1 gives $\mu(K)\le\int u\,d\mu=\int u\,d\nu\le\nu(O)$, and symmetrically $\nu(K)\le\mu(O)$. Radon outer regularity then gives equality on compact sets; inner regularity gives equality on open sets; outer regularity gives equality on every Borel set. Thus $\mu=\nu$ on $U$. [F13, step 1.2, step 3.1]
+
+5.1 For the stated nonnegative Borel h put $\psi=h\circ T$, Borel by F8. The first identity in step 2.2 gives $\int_Vh=\int_U\psi\,d\mu$; step 4.1 replaces mu by nu, and the second identity gives $\int_U\psi\,d\nu=\int_U(h\circ T)J$. These are identities of nonnegative extended integrals and involve no subtraction of infinities. If U is empty then V is empty and both integrals are zero. [step 2.2, step 4.1, F8] ∎
 
 ## Source notes
 

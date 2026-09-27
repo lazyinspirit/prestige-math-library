@@ -15,7 +15,7 @@ items: [def-minimal-normal-subgroup-and-socle,
         def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types,
         lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses,
         rem-onan-scott-eight-type-and-five-type-conventions,
-        thm-onan-scott-classification-of-finite-primitive-groups,
+        rem-onan-scott-classification-of-finite-primitive-groups,
         rem-cfsg-refinements-of-the-onan-scott-reduction,
         prop-two-transitive-groups-have-affine-or-almost-simple-socle-type,
         rem-algorithmic-role-of-onan-scott]
@@ -28,6 +28,7 @@ examples: [fs-the-socle-is-always-a-single-simple-group,
 This page isolates the socle-level structure behind finite primitive groups.
 The local development proves the elementary minimal-normal-subgroup facts that
 make the type language honest, and then records the five-type O'Nan-Scott
-landscape in the same convention used by the batch sources. The page is meant
-to explain how primitive groups reduce to their socles, not to reproduce the
-later CFSG-driven case analysis.
+landscape in the convention of the cited Liebeck–Praeger–Saxl proof.
+That proof uses Schreier's theorem, a consequence of CFSG, in two structural
+branches. The source-specific refutation below identifies those uses without
+claiming that CFSG is logically necessary for every possible proof.

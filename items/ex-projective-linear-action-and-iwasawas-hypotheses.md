@@ -12,8 +12,13 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -47,7 +52,7 @@ So this action satisfies the hypotheses of Iwasawa's criterion.
 
 **Proof technique:** direct.
 
-1.1 Fractional linear transformations send any ordered pair of distinct points of $\mathbb P^1(\mathbb F_q)$ to any other such pair, so the action is doubly transitive and therefore primitive by [L1]. [L1]
+1.1 The matrices $\begin{pmatrix}1&b\\0&1\end{pmatrix}$ give translations $x\mapsto x+b$, so the stabilizer of $\infty$ is transitive on $\mathbb F_q$. The matrix $\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ sends $\infty$ to $0$; composing it with translations sends $\infty$ to any finite point. All these matrices have determinant one, so they act through $G$, not merely through the full projective linear group. Hence the action is transitive, and its point stabilizer is transitive on the other points: it is doubly transitive and therefore primitive by [L1]. A fractional linear map fixing $\infty$, $0$, and $1$ is scalar as a matrix, hence the projective action is faithful. [L1, given, algebra]
 
 1.2 The subgroup $A$ fixes $\infty$, is abelian under composition, and is normal in the stabilizer of $\infty$ because conjugating a translation by an affine map gives another translation. [given, algebra]
 

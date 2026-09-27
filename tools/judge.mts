@@ -15,7 +15,7 @@ import { itemHashJudge } from './item-hash.mjs';
 import { section, interfaceText } from './evidence-bundle.mjs';
 import { extractEmbeddedVerdict } from './judge-parse.mjs';
 import {
-  DEFAULT_LINEUP, JUDGE_CONTEXT_WINDOW, JUDGE_LINEUPS, KNOWN_JUDGES,
+  DEFAULT_LINEUP, JUDGE_CONTEXT_WINDOW, JUDGE_LINEUPS, KNOWN_JUDGES, MODELS,
 } from './models.mjs';
 
 const argv = process.argv.slice(2);
@@ -48,7 +48,6 @@ const models = values.get('model') ? [values.get('model')!] : [...lineup];
 if (!models.length || models.some((model) => !KNOWN_JUDGES.includes(model))) {
   throw new Error(`judge model must be one of ${KNOWN_JUDGES.join(', ')}`);
 }
-
 const effortOverride = values.get('effort');
 if (effortOverride && !['low', 'medium', 'high', 'xhigh', 'max'].includes(effortOverride)) {
   throw new Error(`judge effort must be low, medium, high, xhigh, or max; got ${effortOverride}`);
@@ -276,7 +275,7 @@ const runCodex = (model: string, prompt: string, timeoutMs: number): Promise<Cod
   }
   const args = [
     'exec', '--ephemeral', '--model', model,
-    '-c', `model_reasoning_effort="${effortOverride ?? 'xhigh'}"`,
+    '-c', `model_reasoning_effort="${effortOverride ?? (model === MODELS.luna.id ? 'max' : 'xhigh')}"`,
     '-c', 'tools.web_search=true',
     '-c', `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
     '-c', 'model_auto_compact_token_limit=200000',

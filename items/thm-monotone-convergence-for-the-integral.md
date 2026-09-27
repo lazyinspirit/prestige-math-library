@@ -11,8 +11,13 @@ provenance:
 deps: [def-nonnegative-lebesgue-integral, def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-continuity-from-below-for-measures, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-basic-properties-of-the-nonnegative-simple-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-monotone-convergence-for-the-integral). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -46,17 +51,10 @@ $$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
 
 **Proof technique:** direct.
 
-1.1 By [L1], the numbers $\int f_n\,d\mu$ increase and satisfy[given, L1]
-$$\int f_n\,d\mu\le\int f\,d\mu$$ for every $n$. So their supremum $L$ exists in $[0,+\infty]$ and $L\le\int f\,d\mu$.
+1.1 By [L1], the integrals $\int f_n\,d\mu$ increase and are bounded above by $\int f\,d\mu$. Write $L=\sup_n\int f_n\,d\mu$, so $L\le\int f\,d\mu$ in $[0,+\infty]$. [given, L1]
 
+1.2 Fix a finite-valued nonnegative simple function $s\le f$ and $0<c<1$. Set $A_n=\{f_n\ge cs\}$. The sets $A_n$ increase to $X$: where $s=0$ membership is automatic, and where $s>0$, the limit $f\ge s>cs$ eventually forces $f_n\ge cs$. Since $A\mapsto\int_A s\,d\mu$ is a measure [L2], continuity from below [L3] gives $\int_{A_n}s\,d\mu\uparrow\int s\,d\mu$. [given, L2, L3]
 
-1.2 Fix a nonnegative simple function $s\le f$ and a real $c$ with $0<c<1$.[given, L2, L3]
-Put $A_n:=\{f_n\ge cs\}$. Then $A_n\uparrow X$: if $s(x)=0$ then $x\in A_n$ for all $n$, while if $s(x)>0$ then $f_n(x)\uparrow f(x)\ge s(x)>cs(x)$, so eventually $x\in A_n$. Since $A\mapsto\int_A s\,d\mu$ is a measure by [L2], [L3] gives $$\int_{A_n} s\,d\mu\uparrow\int_X s\,d\mu.$$
+2.1 On $A_n$, $cs\le f_n$, hence $cs\chi_{A_n}\le f_n$ everywhere. By monotonicity [L1] and simple-integral agreement and homogeneity [L4], $c\int_{A_n}s\,d\mu\le\int f_n\,d\mu\le L$. Letting $n\to\infty$ in step 1.2 yields $c\int s\,d\mu\le L$. Letting a fixed sequence $c_m\uparrow1$ shows $\int s\,d\mu\le L$, also when the simple integral is infinite. [step 1.2, L1, L4, algebra]
 
-
-2.1 On $A_n$ one has $cs\le f_n$, hence $cs\chi_{A_n}\le f_n$. By [L1] and [L4],[step 1.2, L1, L4, algebra]
-$$c\int_{A_n}s\,d\mu=\int cs\chi_{A_n}\,d\mu\le\int f_n\,d\mu\le L.$$ Letting $n\to\infty$ in step 1.2 yields $$c\int s\,d\mu\le L.$$ Now choose $c_m=1-2^{-m}$ and let $m\to\infty$; then $\int s\,d\mu\le L$.
-
-
-3.1 Step 2.1 holds for every simple minorant $s\le f$, so taking the supremum [step 1.1, step 2.1, given] ∎
-over such $s$ gives $\int f\,d\mu\le L$ by the definition of the nonnegative integral. Together with step 1.1, this proves $L=\int f\,d\mu$, so $\int f_n\,d\mu\uparrow\int f\,d\mu$.
+3.1 The inequality from step 2.1 holds for every admissible simple minorant $s\le f$. Taking their supremum, as in [[def-nonnegative-lebesgue-integral]], gives $\int f\,d\mu\le L$. Combine this with step 1.1 to obtain $\int f_n\,d\mu\uparrow\int f\,d\mu$. [step 1.1, step 2.1] ∎

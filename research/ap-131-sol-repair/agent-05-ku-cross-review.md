@@ -1,0 +1,13 @@
+# Agent 05 bounded read-only review: KU skeletal–Postnikov comparison
+
+Reviewed `lem-ku-representability-and-skeletal-postnikov-d-three-comparison` and its stated supplier contracts on 2026-09-24. I did not edit agent 09's item.
+
+I fetched and read the actual source PDFs: J. F. Adams, *Stable Homotopy and Generalised Homology*, printed pp. 174–179 (Omega-spectrum indexing and stable homotopy), 245–247 (KU and connective bu), 257–260 (skeletal pair/triple exact-couple construction), and 391–393 (first bu invariant and Bott cofiber); and J. P. May, *A Concise Course in Algebraic Topology*, printed pp. 203–208 (bundle representability and Bott-compatible KU prespectrum). The cited passages support the item's source inputs.
+
+The indexing is consistent: an `E_1^{p,q}` class has total cohomological degree `t=p+q`, so its representing space is `ku_t`. For negative `t`, the declared loop-space convention gives `π_p(ku_t)=π_{p-t}(ku)=π_{-q}(ku)`, and the next possible target is `π_{p+2}(ku_t)=π_{2-q}(ku)`; the intervening group is odd and zero. The Bott cofiber `Σ²ku→ku→HZ` makes the iterated map `ku_p→ku_{p-2k}` an isomorphism on `π_i` for `i≥p`, while the source's based component has no lower homotopy. It is therefore the needed `p`-connective cover, not an inference from coefficient groups alone.
+
+For an `E_3` representative, `d_1=0` permits extension over `(p+1)`-cells; the odd group makes extension over `(p+2)`-cells unobstructed. On a `(p+3)`-cell, restricting the extension to its attaching `S^{p+2}` is the generalized-cohomology connecting class in `E^{t+1}(S^{p+3})`. Under the skeletal pair/triple exact couple, that is the `j(x)` representative of `d_3`. The exact-couple quotient supplies the lift indeterminacy; the first Postnikov invariant of the `p`-connective cover supplies the operation. Adams's invariant source plus the existing library lemma identify the operation as the integral Bockstein of `Sq²ρ₂`. The degree-one case is treated separately because its universal target `H⁴(K(Z,1);Z)` vanishes.
+
+I found one concrete pair-boundary defect in the first reviewed version: it said all pairs are represented by `X/A`, whereas the library's relative cofiber convention uses `X_+` when `A=∅`. I reported this to agent 09; current A5 and step 3.2 use `X/A` for nonempty `A` and `X_+` for empty `A`, preserving the corresponding skeletal filtration. No further indexing, Bott-cofiber, or cellular exact-couple defect was found in this bounded audit.
+
+Reviewed current Git blob: `aab68c9c7f72f63d18a1aa8280bb58e4732371ef`. Focused rendercheck passed; agent 09 separately reports focused precheck/rendercheck/diff checks passed.

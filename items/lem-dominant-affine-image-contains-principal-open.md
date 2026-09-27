@@ -2,16 +2,18 @@
 id: "lem-dominant-affine-image-contains-principal-open"
 kind: "lemma"
 title: "Dominant affine images contain a principal open"
-deps: ["lem-dominant-affine-map-normalization-over-open", "thm-lying-over", "thm-affine-nullstellensatz-correspondence"]
+deps: ["lem-dominant-affine-map-normalization-over-open", "thm-lying-over", "def-classical-affine-coordinate-ring", "def-axiom-of-choice"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (lem-dominant-affine-image-contains-principal-open). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Milne Theorem 9.1, p.198"
@@ -37,10 +39,12 @@ Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Clas
 
 [F2] Assume the Axiom of Choice. Let $f:A\to B$ be an integral ring map, and let $\mathfrak p\in\operatorname{Spec}(A)$ with $\ker f\subseteq\mathfrak p$. Then there exists a prime ideal $\mathfrak q\in\operatorname{Spec}(B)$ such that $f^{-1}(\mathfrak q)=\mathfrak p$. ([[thm-lying-over]]).
 
-[F3] Assume the Axiom of Choice. Let $k$ be an algebraically closed field. 1. The assignments $$ X\longmapsto I(X),\qquad J\longmapsto V(J) $$ induce mutually inverse inclusion-reversing correspondences between affine algebraic sets $X\subseteq \mathbf A_k^n$ and radical ideals $J\subseteq k[x_1,\ldots,x_n]$. 2. Under this correspondence, nonempty irreducible affine algebraic sets correspond exactly to prime ideals. ([[thm-affine-nullstellensatz-correspondence]]).
+[F3] Elements of the coordinate ring of a classical affine variety are polynomial functions on its points ([[def-classical-affine-coordinate-ring]]).
+
+[A1] The lying-over theorem is invoked under the stated Axiom of Choice ([[def-axiom-of-choice]]).
 
 ## Proof
 
-1.1 Use normalization over an open to obtain $0\ne a\in A=k[Y]$ with $B_a=k[X]_a$ finite over the injected polynomial algebra $R=A_a[t_1,\ldots,t_r]$. The open $D_Y(a)$ is nonempty: if $a$ vanished at every point it would be zero in the reduced coordinate ring by the Nullstellensatz. [F1, F3]
+1.1 Use normalization over an open to obtain $0\ne a\in A=k[Y]$ with $B_a=k[X]_a$ finite over the injected polynomial algebra $R=A_a[t_1,\ldots,t_r]$. The open $D_Y(a)$ is nonempty: by [F3], $a$ is a nonzero polynomial function on $Y$, so it is nonzero at some point. [F1, F3]
 
-2.1 Fix $y\in D_Y(a)$ and the maximal ideal $\mathfrak n=(\mathfrak m_y,t_1,\ldots,t_r)\subset R$, whose quotient is $k$. Lying over gives a prime $\mathfrak q\subset B_a$ contracting to $\mathfrak n$. The domain $B_a/\mathfrak q$ is finite over $k$. Every nonzero element acts injectively on this finite-dimensional vector space, hence surjectively, so the domain is a field. Algebraic closedness forces it to be $k$. Images of the affine coordinates therefore give a classical point of $X$ lying over $y$, with $a$ nonzero. Thus every such $y$ lies in the image, including when $r=0$. [F2, step 1.1] ∎
+2.1 Fix $y\in D_Y(a)$ and the maximal ideal $\mathfrak n=(\mathfrak m_y,t_1,\ldots,t_r)\subset R$, whose quotient is $k$. By [A1] and [F2], lying over gives a prime $\mathfrak q\subset B_a$ contracting to $\mathfrak n$. The domain $B_a/\mathfrak q$ is finite over $k$. Every nonzero element acts injectively on this finite-dimensional vector space, hence surjectively, so the domain is a field. Algebraic closedness forces it to be $k$. The resulting $k$-algebra homomorphism $B\to B_a\to B_a/\mathfrak q=k$ evaluates the finitely many affine-coordinate classes at elements of $k$. All defining polynomials of $X$ vanish at this tuple because their classes are zero in $B$; the restrictions of $A=k[Y]$ evaluate at $y$ because $\mathfrak q\cap R=\mathfrak n$. Hence this tuple is a classical point $x\in X$ with $f(x)=y$. Thus $D_Y(a)$ lies in the image, including when $r=0$. [A1, F2, F3, step 1.1] ∎

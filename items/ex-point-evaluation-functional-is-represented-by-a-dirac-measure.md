@@ -7,14 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-rmk-positive-functional-is-integration-against-its-representing-measure, thm-rmk-uniqueness-among-radon-measures, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-nonnegative-lebesgue-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral]
+deps: [def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-nonnegative-lebesgue-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (ex-point-evaluation-functional-is-represented-by-a-dirac-measure). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"
@@ -39,4 +40,4 @@ For $x\in X$, the functional $L_x:C_c(X)\to\mathbb R$ defined by $L_x(f)=f(x)$ i
 and the set formula for $\delta_x$ give $\int s\,d\delta_x=s(x)$. Increasing simple approximation and monotone convergence extend this identity to every nonnegative measurable function, and positive/negative parts extend it to every integrable real function. In particular, $\int_Xf\,d\delta_x=f(x)=L_x(f)$ for every $f\in C_c(X)$. [given]
 
 2.1 The measure $\delta_x$ is finite on compact sets. If a Borel set $E$ [step 1.2]
-contains $x$, every open superset has $\delta_x$-measure one; if it does not, the open set $X\setminus\{x\}$ contains $E$ and has measure zero. Thus $\delta_x$ is outer regular. Likewise an open set containing $x$ contains the compact set $\{x\}$, while the empty compact set suffices otherwise, so $\delta_x$ is inner regular on opens. Hence $\delta_x$ is Radon, and RMK uniqueness identifies it as the representing measure. [step 1.2] ∎
+contains $x$, every open superset has $\delta_x$-measure one; if it does not, the open set $X\setminus\{x\}$ contains $E$ and has measure zero. Thus $\delta_x$ is outer regular. Likewise an open set containing $x$ contains the compact set $\{x\}$, while the empty compact set suffices otherwise, so $\delta_x$ is inner regular on opens. Hence $\delta_x$ is a Radon measure representing $L_x$ by step 1.2. [step 1.2] ∎

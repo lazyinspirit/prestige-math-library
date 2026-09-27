@@ -106,6 +106,31 @@ test('the sweep gives each item a fresh compact Terra call and records real usag
   }
 });
 
+test('the Luna lineup dispatches gpt-6-luna with max reasoning', () => {
+  const f = fixture();
+  const ledger = join(f.temp, 'luna-judge.jsonl');
+  const cost = join(f.temp, 'luna-cost.jsonl');
+  const [id] = pairItems();
+  try {
+    const result = spawnSync(process.execPath, [
+      join(REPO, 'tools', 'judge-sweep.mjs'), '--ledger', ledger, '--cost', cost,
+      '--items', id, '--lineup', 'luna',
+    ], {
+      cwd: REPO, encoding: 'utf8', timeout: 120_000,
+      env: { ...process.env, CODEX_BIN: f.fakeCodex, CODEX_HOME: f.home,
+        JUDGE_TEST_CALLS: f.calls, JUDGE_LINEUP: 'sol' },
+    });
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    const [call] = readFileSync(f.calls, 'utf8').trim().split('\n').map(JSON.parse);
+    assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-6-luna');
+    assert.ok(call.args.includes('model_reasoning_effort="max"'));
+    const [verdict] = readFileSync(ledger, 'utf8').trim().split('\n').map(JSON.parse);
+    assert.equal(verdict.model, 'gpt-6-luna');
+  } finally {
+    rmSync(f.temp, { recursive: true, force: true });
+  }
+});
+
 test('a Sol judge sweep forwards high reasoning to each stateless item call', () => {
   const f = fixture();
   const ledger = join(f.temp, 'sol-high-judge.jsonl');

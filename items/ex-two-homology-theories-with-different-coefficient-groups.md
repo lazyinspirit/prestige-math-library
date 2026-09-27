@@ -2,16 +2,17 @@
 id: "ex-two-homology-theories-with-different-coefficient-groups"
 kind: "example"
 title: "Two homology theories with different coefficient groups"
-deps: ["thm-singular-homology-satisfies-dimension-and-arbitrary-additivity", "thm-eilenberg-steenrod-uniqueness-on-all-cw-pairs"]
+deps: ["thm-singular-homology-satisfies-dimension-and-arbitrary-additivity"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Hatcher, Algebraic Topology, Axioms for Homology, coefficient discussion p.161"
@@ -35,10 +36,8 @@ Singular homology with coefficients $\mathbb Z$ and with coefficients $\mathbb Z
 
 [F1] For any abelian group $G$, $H_0(*;G)\cong G$ and $H_n(*;G)=0$ for every integer $n\ne0$. For every set-indexed family of pairs the canonical map $$\bigoplus_\alpha H_n(X_\alpha,A_\alpha;G)\longrightarrow H_n\left(\bigsqcup_\alpha X_\alpha,\bigsqcup_\alpha A_\alpha;G\right)$$ is an isomorphism. Together with the structural axioms, singular homology is an ordinary theory with coefficient group $G$. ([[thm-singular-homology-satisfies-dimension-and-arbitrary-additivity]])
 
-[F2] For any two ordinary homology theories $h,k$ on all CW pairs and a specified coefficient isomorphism $u:h_0(*)\to k_0(*)$, there is a unique natural equivalence $h\to k$ normalized by $u$ and commuting with connecting homomorphisms. In particular, a theory with coefficient group $G$ is naturally equivalent to singular homology with coefficients $G$, normalized by $\mathrm{id}_G$. Arbitrary additivity is part of the hypotheses. ([[thm-eilenberg-steenrod-uniqueness-on-all-cw-pairs]])
-
 ## Verification
 
 1.1 Apply [F1] with $G=\mathbb Z$ and with $G=\mathbb Z/2$. Both yield ordinary theories, and their degree-zero groups at a point are respectively $\mathbb Z$ and $\mathbb Z/2$. [F1]
 
-2.1 Any natural equivalence would in particular supply an isomorphism between these two groups at that point. No such isomorphism exists: every element of $\mathbb Z/2$ is annihilated by $2$, whereas $2\cdot1\ne0$ in $\mathbb Z$. The coefficient-isomorphism hypothesis of [F2] is therefore not satisfied, and its uniqueness assertion makes no equivalence claim for these two theories. [F2, step 1.1, algebra] ∎
+2.1 Any natural equivalence would in particular supply an isomorphism between these two groups at that point. No such isomorphism exists: every element of $\mathbb Z/2$ is annihilated by $2$, whereas $2\cdot1\ne0$ in $\mathbb Z$. Thus the two theories cannot be naturally equivalent, and the coefficient group must be specified for any uniqueness assertion. [step 1.1, algebra] ∎

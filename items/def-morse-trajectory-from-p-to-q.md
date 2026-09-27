@@ -7,14 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-negative-gradient-trajectory-of-a-morse-function, lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits]
+deps: [def-countable-choice, def-negative-gradient-trajectory-of-a-morse-function, lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits]
 justified_by: []
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (def-morse-trajectory-from-p-to-q). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, §13.1"
@@ -29,5 +30,5 @@ nonconstant full trajectory of $-\operatorname{grad}_g f$ with
 
 $$ \lim_{t\to-\infty}\gamma(t)=p\qquad\text{and}\qquad\lim_{t\to\infty}\gamma(t)=q. $$
 
-On a compact manifold the preceding endpoint lemma supplies these limits. On a
+On a compact manifold, under $\mathrm{AC}_\omega$ ([[def-countable-choice]]) as assumed in [[lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits|the preceding endpoint lemma]], that lemma supplies these limits. On a
 noncompact manifold, their existence is part of this definition's hypothesis.

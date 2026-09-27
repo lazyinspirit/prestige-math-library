@@ -3,14 +3,19 @@ id: thm-von-mangoldt-explicit-formula-smoothed
 kind: theorem
 title: "A smoothed von Mangoldt explicit formula"
 status: published
-verification:
-  audited: 2026-09-07
 origin: pipeline
-deps: [def-von-mangoldt-function, lem-local-logarithmic-derivative-zeta, lem-logarithmic-derivative-zeta-left-half-plane, lem-von-mangoldt-explicit-formula-residues, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, thm-riemann-zeta-continuation-to-the-right-half-plane, thm-gamma-weierstrass-product, thm-euler-mascheroni-constant-and-harmonic-asymptotic, thm-riemann-zeta-functional-equation, thm-von-mangoldt-logarithmic-derivative-zeta, thm-residue-theorem-null-homologous-cycle]
+deps: [def-von-mangoldt-function, lem-local-logarithmic-derivative-zeta, lem-logarithmic-derivative-zeta-left-half-plane, lem-von-mangoldt-explicit-formula-residues, cor-zeta-zero-count-unit-interval, thm-trivial-zeros-and-critical-strip, thm-riemann-zeta-continuation-to-the-right-half-plane, thm-gamma-weierstrass-product, thm-euler-mascheroni-constant-and-harmonic-asymptotic, thm-riemann-zeta-functional-equation, thm-von-mangoldt-logarithmic-derivative-zeta, thm-residue-theorem-null-homologous-cycle, def-countable-choice]
 proof_strategy: contour
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Nick Andersen, Analytic Number Theory, §§12.1--12.2"
@@ -18,6 +23,8 @@ sources:
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For $1<x<y$ and $u\ge0$, let $\phi_{x,y}(u)=1$ for $u\le x$, $(y-u)/(y-x)$ for $x<u<y$,
 and $0$ for $u\ge y$. For $\Re s>0$ put
@@ -35,7 +42,7 @@ multiplicity. In particular, symmetric ordinate truncations give the same zero s
 
 ## Proof
 
-**Given:** $1<x<y$ and the displayed piecewise-linear cutoff.
+**Given:** Countable choice, $1<x<y$, and the displayed piecewise-linear cutoff.
 
 1.1 Write $\Phi=\widetilde\phi$. Integration by parts gives $$\Phi(s)=\frac{y^{s+1}-x^{s+1}}{(y-x)s(s+1)}.$$ Its only pole is $0$, with residue $1$; the apparent singularity at $-1$ is removable, with value $-\log(y/x)/(y-x)$. On each fixed vertical strip it is $O_{x,y}(|\Im s|^{-2})$ at large height, with the constant also depending on the strip. [given, algebra]
 

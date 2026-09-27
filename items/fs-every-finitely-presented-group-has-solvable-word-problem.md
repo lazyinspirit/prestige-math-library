@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [rem-novikov-boone-undecidability-of-the-word-problem]
+deps: [def-axiom-of-choice, thm-novikov-boone-undecidability-of-the-word-problem]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-29
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (fs-every-finitely-presented-group-has-solvable-word-problem). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,13 +30,15 @@ pipeline_run: null
 
 ## Statement
 
-Every finitely presented group has solvable word problem.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every finitely
+presented group has solvable word problem.
 
 ## Facts & Assumptions
 
-**Given:** The Novikov-Boone existence theorem.
+**Given:** The Axiom of Choice and the local Novikov-Boone existence theorem.
 
-[L1] Some finitely presented group has unsolvable word problem. ([[rem-novikov-boone-undecidability-of-the-word-problem]])
+[L1] Under AC, one fixed finitely presented group has an unsolvable word
+problem ([[thm-novikov-boone-undecidability-of-the-word-problem]]).
 
 ## Refutation
 

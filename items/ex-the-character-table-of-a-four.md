@@ -7,13 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [ex-a-four-has-a-normal-klein-four-subgroup-and-four-conjugacy-classes, thm-classification-of-cyclic-groups, thm-degree-one-representations-are-exactly-homomorphisms-to-k-times-and-form-an-abelian-group, cor-the-regular-character-gives-the-sum-of-squares-formula, thm-first-orthogonality-relation-for-irreducible-complex-characters, thm-second-column-orthogonality-relation-for-irreducible-complex-characters]
+deps: [ex-a-four-has-a-normal-klein-four-subgroup-and-four-conjugacy-classes, thm-classification-of-cyclic-groups, thm-degree-one-representations-are-exactly-homomorphisms-to-k-times-and-form-an-abelian-group, thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order, cor-the-regular-character-gives-the-sum-of-squares-formula, thm-first-orthogonality-relation-for-irreducible-complex-characters, thm-second-column-orthogonality-relation-for-irreducible-complex-characters]
 justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -47,6 +51,8 @@ Both orthogonality relations hold.
 
 [F6] Column orthogonality: distinct columns are orthogonal, and a column has squared norm the centralizer size ([[thm-second-column-orthogonality-relation-for-irreducible-complex-characters]]).
 
+[F7] The number of irreducible complex characters equals the number of conjugacy classes ([[thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order]]).
+
 [A1] A homomorphism $A_4\to\mathbb C^{\times}$ that is trivial on $V_4$ factors through the quotient $A_4/V_4$; conversely, a homomorphism from $A_4/V_4$ pulls back to one on $A_4$ that is trivial on $V_4$.
 
 [A2] The commutator $[(123),(124)]$ equals $(12)(34)$, and a homomorphism to the abelian group $\mathbb C^\times$ is constant on conjugacy classes.
@@ -57,7 +63,7 @@ Both orthogonality relations hold.
 
 1.1 By [F1] and [F2] the quotient $A_4/V_4$ has order $3$, hence is cyclic. Its three homomorphisms to $\mathbb C^{\times}$ send a generator to $1$, $\omega$, or $\omega^{2}$; by [F3] and [A1], they pull back to three one-dimensional characters of $A_4$ whose values are the first three rows. Conversely, every homomorphism $A_4\to\mathbb C^\times$ kills commutators, so [A2] makes it kill $(12)(34)$ and therefore, by conjugacy, every nonidentity element of $V_4$. Hence every degree-one character is trivial on $V_4$ and factors through $A_4/V_4$ by [A1]. Thus these are exactly the three one-dimensional characters of $A_4$. [F1, F2, F3, A1, A2, given]
 
-2.1 By [F4], the remaining irreducible degree $d$ satisfies $1+1+1+d^{2}=12$, so $d=3$. [F4, step 1.1, algebra]
+2.1 By [F1] and [F7], there are exactly four irreducible characters. By [F4], the remaining irreducible degree $d$ satisfies $1+1+1+d^{2}=12$, so $d=3$. [F1, F4, F7, step 1.1, algebra]
 
 3.1 By [F6], the column of $(12)(34)$ is orthogonal to the column of $1$: $1+1+1+\psi((12)(34))=0$, so $\psi((12)(34))=-1$. [F6, step 1.1, step 2.1, algebra]
 

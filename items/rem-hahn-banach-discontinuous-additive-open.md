@@ -1,7 +1,7 @@
 ---
 id: rem-hahn-banach-discontinuous-additive-open
 kind: remark
-title: "Does Hahn-Banach yield a discontinuous additive $f : \\mathbb{R} \\to \\mathbb{R}$? (open)"
+title: "Hahn-Banach and discontinuous additive maps: a recorded question"
 status: published
 origin: session
 proved_here: false
@@ -10,13 +10,7 @@ justified_by: []
 forward_refs: [def-axiom-of-choice]
 aliases: []
 landmark: false
-short: "Open in ZF: whether Hahn-Banach implies a discontinuous solution of Cauchy's functional equation"
-verification:
-  precheck: n/a
-  sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
+short: "Recorded question about Hahn-Banach and discontinuous additive maps"
 sources:
   scraped: []
   references:
@@ -31,61 +25,40 @@ sources:
     - title: "S. Shelah, Can you take Solovay's inaccessible away?, Israel Journal of Mathematics 48 (1984) 1-47"
       url: "https://link.springer.com/article/10.1007/BF02760522"
 pipeline_run: null
+verification:
+  precheck: n/a
+  sources_checked:
+    date: '2026-09-24'
+    scope: Cited statement and missing local prerequisite examined; no proof-completion
+      verdict. See /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-receipts.jsonl
+    by: agent-08 (owner-delegated GPT-6-Sol xhigh)
 ---
 
 ## Statement
 
-Work in ZF, without the axiom of choice, and write **HB** for the Hahn-Banach
-theorem.
+Work in ZF. Write **HB** for the Hahn–Banach extension principle and consider
+the following implication:
 
-**Question.** Does HB imply the existence of a discontinuous additive function
-$f : \mathbb{R} \to \mathbb{R}$, that is, a solution of Cauchy's functional
-equation $f(x + y) = f(x) + f(y)$ that is not of the form $f(x) = cx$?
+> If HB holds, must there exist a discontinuous additive function
+> $f:\mathbb R\to\mathbb R$?
 
-**Status: open.** Like the companion question about a Hamel basis, this is
-recorded as open in Howard and Rubin's catalogue of consequences of the axiom of
-choice, as the implication from their form for Hahn-Banach to their form for a
-discontinuous additive function on the line.
+An additive function satisfies $f(x+y)=f(x)+f(y)$ for all real $x,y$; it is
+discontinuous exactly when it is not of the form $f(x)=cx$. The historical
+Howard–Rubin catalogue (1998) is the cited source for this question. This item
+records the question and does not assert its status as of 2026. The exact
+catalogue form and current implication status have not been independently
+verified here.
 
 ## Remarks
 
-**Not proved in this library, and not proved anywhere.** No page here depends on
-the existence of a pathological solution of Cauchy's equation, and this library
-develops neither functional analysis nor ZF model construction.
+This library develops functional analysis, including the HB theorem under the
+Axiom of Choice ([[def-axiom-of-choice]]). AC also gives a discontinuous
+additive function: a Hamel basis of $\mathbb R$ over $\mathbb Q$ permits a
+$\mathbb Q$-linear map that is not scalar multiplication. This establishes the
+implication under AC, but does not settle what HB alone entails over ZF.
 
-**What is known, and what would settle it.** For an additive
-$f : \mathbb{R} \to \mathbb{R}$, being continuous, being linear over $\mathbb{R}$,
-being measurable, being bounded on some set of positive measure and being bounded
-on some interval are all the same condition, so a discontinuous additive function
-is an extremely wild object: its graph is dense in the plane. The axiom of choice
-([[def-axiom-of-choice]]) produces one immediately from a Hamel basis for
-$\mathbb{R}$ over $\mathbb{Q}$, by choosing a $\mathbb{Q}$-linear map that is not
-$\mathbb{R}$-linear. In the other direction, **granted the consistency of ZF**,
-ZF + DC cannot produce one: in Solovay's model, and in Shelah's 1984
-strengthening that removes the inaccessible cardinal, every set of reals has the
-Baire property, and then every additive $f : \mathbb{R} \to \mathbb{R}$ is
-continuous. Shelah's version is what makes the consistency hypothesis just
-Con(ZF): Solovay's model on its own would need an inaccessible. So the statement
-sits strictly between ZF and AC, exactly as HB does, and the question is again
-how the two are ordered. Settling it means a ZF derivation from HB, or a model of
-ZF with HB and no discontinuous additive function.
-
-Two nearby results sharpen what is at stake. Larson and Shelah (2026) build a
-model of ZF + DC with a discontinuous additive endomorphism of $\mathbb{R}$ but no
-Hamel basis for $\mathbb{R}$, so this consequence is strictly weaker than the
-Hamel basis in that setting and the two open questions are genuinely distinct. And
-the $\mathbb{R}$-linear analogue is at least as expensive: in the same
-ZF + DC model in which every set of reals has the Baire property, every linear
-functional on a Banach space is continuous, so the existence of a discontinuous
-*linear* functional on an infinite-dimensional Banach space is itself not
-provable in ZF + DC. It follows from the axiom of choice, but it is not known to
-this library's sources to be equivalent to it, and nothing here claims that it
-is. The function asked about above is only $\mathbb{Q}$-linear, which is what
-leaves room for it to be cheaper than either.
-
-**Why it matters here.** A discontinuous additive function is the smallest and
-most-cited pathology in real analysis whose existence is not a theorem of ZF. Any
-statement of the form "the only additive functions are the linear ones" is a
-statement about the ambient set theory, not about the reals, and the library's
-choice ledger is where that has to be recorded. This item records that the exact
-price of the pathology, measured against Hahn-Banach, is unknown.
+Larson and Shelah, *Discontinuous homomorphisms without Hamel bases*
+(arXiv:2606.08384, 2026), Theorem 3.3, construct a model of ZF + DC with a
+discontinuous additive endomorphism of $\mathbb R$ and no Hamel basis for
+$\mathbb R$. That separates the two existence principles in that model; it
+does not by itself decide the HB implication above.

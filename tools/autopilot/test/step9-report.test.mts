@@ -24,6 +24,12 @@ function fixture() {
   mkdirSync(join(root, 'library', 'analysis'), { recursive: true });
   writeFileSync(join(root, 'tools', 'pathway-closure.mjs'), 'console.log("fixture pathway closed");\n');
   writeFileSync(join(root, 'research', 'demo-scope-ledger.json'), JSON.stringify({ pages: [{ id: 'page-a', kind: 'A', batch: '1' }] }));
+  writeFileSync(join(root, 'research', 'demo-deferred-pairs.json'), JSON.stringify({ run: 'demo', deferred: [
+    { page: 'future-pair', companion: 'future-pair-examples', reason: 'Its required supplier page is unbuilt.' },
+  ] }));
+  writeFileSync(join(root, 'research', 'demo-deferred-items.json'), JSON.stringify({ run: 'demo', deferred: [
+    { item: 'future-theorem', page: 'page-a', reason: 'Its deep proof prerequisites remain unverified.' },
+  ] }));
   writeFileSync(join(root, 'library', 'analysis', 'page-a.md'), '---\npage: page-a\nstatus: draft\nitems: [thm-a]\n---\nPage\n');
   writeFileSync(join(root, 'items', 'thm-a.md'), '---\nid: thm-a\nkind: theorem\nstatus: draft\n---\nTheorem\n');
   writeFileSync(join(root, 'research', 'demo-publication-readiness.json'), JSON.stringify({ run: 'demo',
@@ -80,6 +86,8 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     assert.equal(result.status, 0, result.stderr);
     const evidence = JSON.parse(readFileSync(join(root, 'research', 'demo-step9-evidence.json'), 'utf8'));
     assert.equal(evidence.defects.fatal_count, 2);
+    assert.equal(evidence.deferrals.pairs[0].page, 'future-pair');
+    assert.equal(evidence.deferrals.items[0].item, 'future-theorem');
     assert.equal(evidence.judges.configured_set_stats.complete_versions, 1);
     assert.equal(evidence.judges.configured_set_stats.all_keep, 1);
     assert.deepEqual(evidence.repeated_repairs, [{ id: 'thm-a', repairs: 2 }]);
@@ -106,6 +114,7 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     const report = readFileSync(join(root, 'research', 'demo-step9-report.md'), 'utf8');
     assert.equal((report.match(/demo-D001/g) ?? []).length, 1);
     assert.equal((report.match(/demo-D002/g) ?? []).length, 1);
+    assert.match(report, /Deferred from this run[\s\S]*future-pair[\s\S]*future-theorem/);
     assert.match(report, /after the 1-rejudge cap/,
       'the report must derive the executable Step-7 cap instead of retaining stale prose');
     assert.match(report, /Terminal resolutions after the 1-rejudge cap: 0/);
@@ -120,6 +129,20 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     assert.equal(result.status, 1);
     assert.match(result.stderr, /step9-report-tree-changed.*items\/thm-a.md/);
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('Step 9 refuses to report an active item as deferred', () => {
+  const root = fixture();
+  try {
+    writeFileSync(join(root, 'research', 'demo-deferred-items.json'), JSON.stringify({ run: 'demo', deferred: [
+      { item: 'thm-a', page: 'page-a', reason: 'This item is actually in the active scope.' },
+    ] }));
+    const result = runTool(root, 'evidence');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /deferred item missing a reason or still active/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('Step 9 places evidence after final readiness and before the protected report', () => {

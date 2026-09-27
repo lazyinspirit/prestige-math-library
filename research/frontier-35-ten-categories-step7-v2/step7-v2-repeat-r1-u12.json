@@ -1,0 +1,120 @@
+{
+  "run": "frontier-35-ten-categories",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "12",
+  "input_sha256": "90768c273d6e963f7e14d09fd66f42f4306f5af461f572c797393bd9bd2d98c2",
+  "decisions": [
+    {
+      "id": "lem-each-round-has-polynomial-communication",
+      "model": "gpt-6-sol",
+      "context_sha256": "d8faf29f6030946321bf7262d932ace1f662814f9631635b00b52f07a9c0c649",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The whole-run conclusion in proof 2.1 omits deterministic prime search. The supplied search tests up to N squared candidate/divisor pairs; its established cost is O(N^2 log^2 N), not part of the O((TD+L) log^2 p) round/evaluation count. Claim 4 now retains that latter component and explicitly adds the search cost, including constant setup at T=0. This is a logical accounting gap in the asserted total bound, not a missing citation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-powering-preserves-perfect-satisfiability",
+      "model": "gpt-6-sol",
+      "context_sha256": "34b933432cb84e3e6914a07f6bd848952ff77240e7a17fd2034986e201d6fe5b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final sentence of the Statement overclaims gap monotonicity. One vertex with an empty-relation ordinary loop is 2-regular in the slot convention. At t=1, all three positions are tested, any move violates, and the all-hold probability is (1/2)^3=1/8 independently of the view. Thus UNSAT falls from 1 to 7/8. The repair preserves the entire perfect-completeness contract and distinguishes it from the separate conditional small-gap estimate; the counterexample is recorded explicitly.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-each-round-has-polynomial-communication",
+      "disposition": "repaired",
+      "post_sha256": "8873477f2a4205c433225f1dc60c3ab0a588a33e8567e1d136fd75ace8bdabb7",
+      "review_context_sha256": "d05fe21a81b43f02bc87e8fc2503daa06414bb417672d72ad14d43ae1e5a476d",
+      "reason": "Checked the T=n(n+3)/2 operator schedule, D+1 fixed-width coefficients, at most T residue challenges and Tk coins, three Horner evaluations per passed round, and O(L) terminal circuit evaluation. Claim 4 and steps 2.1 and 3.1 now add the existing deterministic prime-search bound O(N^2 log^2 N); T=0 has p=3, no messages and constant setup. This is the adjudicator author check of this repair, not an independent review of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-powering-preserves-perfect-satisfiability",
+      "disposition": "repaired",
+      "post_sha256": "21b0e779fa2e25b7c2b8695d2c06800d47d54613be7d8fb38d2690deeee9e0b2",
+      "review_context_sha256": "3a4ea14ad6243f91ea1c98c04baa7d25ea43f458f6bbb4866b34c333b60ce401",
+      "reason": "Finite nonempty alphabet and finite vertex set ensure a maximizing base labeling exists. Its endpoint-defined canonical views read exactly the two base labels at each tested move, so all relations pass, including loops; holds impose no test. The hold^t-edge-hold^t argument in Remarks also proves the stated perfect-satisfiability converse by self-coordinate decoding. The repaired Statement preserves this completeness result and no longer asserts the false monotonicity inequality. This author check does not constitute independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-shamir-protocol-for-tqbf",
+    "lem-shamir-qbf-verifier-runs-in-polynomial-time",
+    "thm-tqbf-has-a-polynomial-round-interactive-proof",
+    "thm-gap-amplification-step"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-each-round-has-polynomial-communication",
+      "action": "record_repaired_finding",
+      "defect_type": "logic",
+      "finding": "The whole-run conclusion in proof 2.1 omits deterministic prime search. The supplied search tests up to N squared candidate/divisor pairs; its established cost is O(N^2 log^2 N), not part of the O((TD+L) log^2 p) round/evaluation count. Claim 4 now retains that latter component and explicitly adds the search cost, including constant setup at T=0. This is a logical accounting gap in the asserted total bound, not a missing citation.",
+      "repair": "Claim 4 and proof 2.1/3.1 distinguish round/evaluation work and include deterministic prime search. Updated this item only in both owning batch and aggregate contracts.",
+      "status": "repaired_by_assigned_adjudicator_pending_engine_independent_checks"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-powering-preserves-perfect-satisfiability",
+      "action": "record_repaired_finding",
+      "defect_type": "logic",
+      "finding": "The final sentence of the Statement overclaims gap monotonicity. One vertex with an empty-relation ordinary loop is 2-regular in the slot convention. At t=1, all three positions are tested, any move violates, and the all-hold probability is (1/2)^3=1/8 independently of the view. Thus UNSAT falls from 1 to 7/8. The repair preserves the entire perfect-completeness contract and distinguishes it from the separate conditional small-gap estimate; the counterexample is recorded explicitly.",
+      "repair": "Replaced the spurious monotonicity claim with the exact perfect-completeness/conditional-quantitative distinction and included the explicit 7/8 counterexample. Core proof and completeness contract unchanged.",
+      "status": "repaired_by_assigned_adjudicator_pending_engine_independent_checks"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "No published defect or outside consumer was discovered in these two direct-interface events. All four direct consumers are draft frozen-frontier items; their proofs remain sound for the exact uses recorded."
+    }
+  ],
+  "repair_notes": [
+    "Checkpoint: communication item repaired and review hashes captured immediately. Relevant suppliers read: def-shamir-protocol-for-tqbf Definition; lem-multilinearization-preserves-boolean-values Statement and proof; lem-efficient-prime-field-for-a-polynomial-soundness-budget Statement 2 and proof 2.1; lem-formula-arithmetization-degree-and-evaluation-cost Statement and proof. No new prerequisite or AC use. Pending: synchronize owning contract under shared lock, focused checks, powering item repair and hash, final direct-use evidence. Shared lock first acquisition was busy; no shared file was edited.",
+    "Powering checkpoint: item repaired and both hashes captured immediately. Read def-constraint-graph-powering in full (R=t+ceil(sqrt(t)), L=2t+1, holds probability 1/2, central J, copy-bit edge counting), def-constraint-graph-and-labeling-value in full, canonical-lift supplier proof in full, and the quantitative small-gap supplier statement and proof. Consulted Dinur \u00a71.2 Graph Powering, printed p.5, web lines 197-262: its perfect-completeness implication is explicit and its amplification bound has regularity/expansion/self-loop hypotheses and a min(UNSAT,1/t) saturation. Its construction is not identical to the repository lazy-window predicate; the 7/8 counterexample is calculated from the local definition, not attributed to Dinur. Pending: contract synchronization, focused checks, final direct-use accounting. No unresolved mathematical uncertainty.",
+    "Final communication review: focused precheck requested phase 3.1 in place of 2.2. Adopted that canonical numbering, checked that its reference to 2.1 and all mathematical arguments remained correct, then immediately captured post_sha256 8873477f2a4205c433225f1dc60c3ab0a588a33e8567e1d136fd75ace8bdabb7 and review_context_sha256 d05fe21a81b43f02bc87e8fc2503daa06414bb417672d72ad14d43ae1e5a476d. The intervening powering change is not a supplier of this item and causes no new effect. The powering review hashes were retained.",
+    "Shared metadata: after two busy responses acquired step7-shared-write lock as step7-v2-repeat-r1-u12. regen-contract-entries reread each owning JSON and regenerated only the communication item entry in research/frontier-35-ten-categories-batch-12.proof-contracts.json and research/frontier-35-ten-categories-proof-contracts.json. Ran scoped strict contract checks on both while locked, then released. The powering proof/facts and its contract stayed unchanged. No shared ledger edits or consumer-entry edits were made.",
+    "Final focused checks: precheck on the two assigned item files exited 0 with 2 checked, 0 failing; rendercheck on the same files exited 0, including YAML and KaTeX. Strict proof-contract checks on both batch and aggregate contracts each reported 0 errors, 0 warnings, 2/2 assigned items checked. git diff --check over the two assigned item files and two changed contract files exited 0.",
+    "Consumer metadata handoff: a read-only strict batch-contract check for lem-shamir-qbf-verifier-runs-in-polynomial-time, thm-tqbf-has-a-polynomial-round-interactive-proof and thm-gap-amplification-step exited 1 with exactly three citation-quote-mismatch errors (A2, A5 and F3 respectively). Their cached full supplier Statement quotations predate these interface repairs. Necessary minimal owner work is to refresh only those citation quote/source-section rows in their owning batch/aggregate contracts against the current supplier Statements. Consumer facts, proof text and Statements need no changes; do not propagate another hop. These consumer entries are outside this dispatch ownership and were not edited.",
+    "Both original Statement sections changed by direct textual comparison. Searched all current items and pages for the two IDs (both have empty aliases), read all four direct consumer uses, and read both A/B page pairs. Pages already distinguish setup from communication/evaluation and completeness from quantitative amplification; no page repair is needed. No outside consumers found, no new item, no AC requirement, and no Foundations supplier path was introduced. Remaining work belongs to the controller: route the three exact frontier consumer contract updates and perform independent rejudgment/certification. There is no unresolved mathematics in this assigned repair; this report does not assert independent acceptance or global closure.",
+    "Final report validation passed: SHA-256 of the exact frozen pack serialization matches input_sha256; both assigned (id,model,context_sha256) tuples occur exactly once; current itemHashGuard values match both reviews and differ from assignment before hashes; dispositions and required evidence fields are valid. Final scoped git diff --check passed."
+  ],
+  "gate_resolutions": [],
+  "downstream_uses": {
+    "def-shamir-protocol-for-tqbf": "items/def-shamir-protocol-for-tqbf.md, final Remarks bullet: the communication lemma establishes O(TD) round field operations and O(L) terminal field operations. These component bounds are unchanged. The Definition already specifies the deterministic prime search separately; no claim or proof repair is needed.",
+    "lem-shamir-qbf-verifier-runs-in-polynomial-time": "items/lem-shamir-qbf-verifier-runs-in-polynomial-time.md, Facts A2 and proof 1.2, 2.1, 3.1 use only round/message/randomness counts and O(TD+L) field operations. Its Statement 1 and proof 1.1 already add O(N^2 log^2 N) prime search; Statement 3 and proof 4.1 already give the repaired total. Mathematical content remains sound and unchanged. Its A2 contract quotation needs synchronization only.",
+    "thm-tqbf-has-a-polynomial-round-interactive-proof": "items/thm-tqbf-has-a-polynomial-round-interactive-proof.md, Facts A5 and proof 1.1 use only T rounds, D+1 coefficients and residue-based updates. The public-coin variant sends whole blocks and separately invokes the verifier-time lemma via A4. All used bounds remain true; no mathematical repair or further hop is needed. Its A5 contract quotation needs synchronization only.",
+    "thm-gap-amplification-step": "items/thm-gap-amplification-step.md, Facts F3 and proof 1.1 and 3.1 use val(G_2)=1 implies val((G_2)_t)=1. The regular intermediate graph has edges in the nonempty case, and the empty case is handled separately. Quantitative soundness is supplied by F4, never by monotonicity. All mathematical clauses remain licensed. Its F3 contract quotation needs synchronization only."
+  },
+  "interface_changes": [
+    {
+      "id": "lem-each-round-has-polynomial-communication",
+      "section": "Statement",
+      "before_clause": "Hence the whole run costs $O\\!\\left(TD\\log^2p+L\\log^2p\\right)$ bit operations for the rounds and the terminal step.",
+      "after_clause": "The rounds and the terminal step together cost $O\\!\\left((TD+L)\\log^2p\\right)$ bit operations. Including the deterministic prime search, the verifier's total cost is $O\\!\\left(N^2\\log^2N+(TD+L)\\log^2p\\right)$ bit operations, still polynomial in the input length; when $T=0$, setting $p=3$ costs only constant time."
+    },
+    {
+      "id": "lem-powering-preserves-perfect-satisfiability",
+      "section": "Statement",
+      "before_clause": "powering loses nothing in the satisfiable case and cannot decrease the gap in this direction.",
+      "after_clause": "This is perfect completeness; the quantitative lower bound for positive gaps is given, under its additional hypotheses, by [[lem-powering-amplifies-small-gaps]]. Perfect completeness does not assert $\\operatorname{UNSAT}(G_t)\\ge\\operatorname{UNSAT}(G)$."
+    }
+  ]
+}

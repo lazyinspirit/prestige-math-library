@@ -10,11 +10,12 @@ provenance:
 deps: [def-periodic-ltwo-weak-derivative]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (lem-fourier-coefficients-of-a-periodic-weak-derivative). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Michael E. Taylor, Fourier Analysis, Distributions, and Constant-Coefficient Linear PDE, Section 1"
@@ -23,12 +24,12 @@ sources:
 
 ## Statement
 
-If $f,g\in L^2(\mathbb T)$ and $g=f'$ in the periodic weak sense, then
+Assume the Axiom of Countable Choice. If $f,g\in L^2(\mathbb T)$ and $g=f'$ in the periodic weak sense, then
 $$\widehat g(k)=2\pi ik\widehat f(k)\qquad(k\in\mathbb Z).$$
 
 ## Facts & Assumptions
 
-**Given:** $f,g\in L^2(\mathbb T)$ with $g=f'$ in the sense of [[def-periodic-ltwo-weak-derivative]].
+**Given:** Countable Choice and $f,g\in L^2(\mathbb T)$ with $g=f'$ in the sense of [[def-periodic-ltwo-weak-derivative]].
 
 ## Proof
 

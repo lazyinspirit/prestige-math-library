@@ -8,11 +8,16 @@ landmark: true
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-monotone-convergence-for-the-integral, def-integrable-real-and-complex-functions-and-their-integrals, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral]
+deps: [thm-monotone-convergence-for-the-integral, def-integrable-real-and-complex-functions-and-their-integrals, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (thm-absolute-continuity-of-the-integral). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,12 +43,12 @@ $$\mu(E)<\delta\qquad\Longrightarrow\qquad\int_E|f|\,d\mu<\varepsilon.$$
 
 [L4] Integrability means $\int|f|\,d\mu<+\infty$ ([[def-integrable-real-and-complex-functions-and-their-integrals]]).
 
+[L5] The nonnegative integral is additive ([[cor-additivity-of-the-nonnegative-lebesgue-integral]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose $n$ so large that [L1, L4, choose]
-$$\int\bigl(|f|-|f|\wedge n\bigr)\,d\mu<\varepsilon/2,$$ which is possible by [L1] and [L4]. Put $\delta:=\varepsilon/(2n+1)$.
+1.1 Put $h_n=|f|-|f|\wedge n\ge0$. The pointwise identity $|f|=(|f|\wedge n)+h_n$ and [L5] give $\int h_n=\int|f|-\int(|f|\wedge n)$; the subtraction is valid because both integrals are finite by [L4]. By [L1] choose $n$ so large that $\int h_n\,d\mu<\varepsilon/2$, and put $\delta:=\varepsilon/(2n+1)$. [L1, L4, L5, choose]
 
-2.1 If $\mu(E)<\delta$, then [step 1.1, L2, L3, algebra] ∎
-$$\int_E|f|\,d\mu\le\int_E(|f|\wedge n)\,d\mu+\int\bigl(|f|-|f|\wedge n\bigr)\,d\mu \le n\mu(E)+\varepsilon/2<\varepsilon,$$ using [L2] and [L3] for the first term.
+2.1 If $\mu(E)<\delta$, then [L2], [L3], and [L5] give $\int_E|f|\,d\mu=\int_E(|f|\wedge n)\,d\mu+\int_Eh_n\,d\mu\le n\mu(E)+\int h_n\,d\mu<n\delta+\varepsilon/2<\varepsilon$. The last inequality follows from $n/(2n+1)<1/2$. [step 1.1, L2, L3, L5, algebra] ∎

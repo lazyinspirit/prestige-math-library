@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-prime-filtration-of-a-finite-module, thm-support-in-a-short-exact-sequence, lem-support-of-a-cyclic-module-is-its-vanishing-set]
+deps: [thm-prime-filtration-of-a-finite-module, thm-support-in-a-short-exact-sequence, lem-support-of-a-cyclic-module-is-its-vanishing-set, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-minimal-support-primes-are-associated). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,15 +28,15 @@ sources:
 
 ## Statement
 
-Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
+Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
 left $R$-module. If $\mathfrak p$ is minimal in $\operatorname{Supp}_R(M)$, then
 $$ \mathfrak p \in \operatorname{Ass}_R(M). $$
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, a finitely generated left $R$-module $M$, and a prime ideal $\mathfrak p$ minimal in $\operatorname{Supp}_R(M)$.
+**Given:** The Axiom of Choice, a Noetherian commutative ring $R$, a finitely generated left $R$-module $M$, and a prime ideal $\mathfrak p$ minimal in $\operatorname{Supp}_R(M)$.
 
-[L1] The module $M$ admits a prime filtration $0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ for prime ideals $\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
+[L1] Under AC the module $M$ admits a prime filtration $0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ for prime ideals $\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
 
 [L2] Support in a short exact sequence is the union of the supports of the outer terms ([[thm-support-in-a-short-exact-sequence]]).
 
@@ -41,7 +46,7 @@ $$ \mathfrak p \in \operatorname{Ass}_R(M). $$
 
 **Proof technique:** direct.
 
-1.1 Choose a prime filtration as in [L1]. Repeatedly applying [L2] to the short exact sequences $$ 0 \longrightarrow M_{i-1} \longrightarrow M_i \longrightarrow M_i/M_{i-1} \longrightarrow 0 $$ and then using [L3] for $M_i/M_{i-1}\cong R/\mathfrak p_i$ gives $$ \operatorname{Supp}_R(M)=V(\mathfrak p_1)\cup\cdots\cup V(\mathfrak p_n). $$ [L1, L2, L3, algebra]
+1.1 The stated AC discharges [L1]'s premise. Choose a prime filtration as in [L1]. Repeatedly applying [L2] to the short exact sequences $$ 0 \longrightarrow M_{i-1} \longrightarrow M_i \longrightarrow M_i/M_{i-1} \longrightarrow 0 $$ and then using [L3] for $M_i/M_{i-1}\cong R/\mathfrak p_i$ gives $$ \operatorname{Supp}_R(M)=V(\mathfrak p_1)\cup\cdots\cup V(\mathfrak p_n). $$ [given, L1, L2, L3, algebra]
 
 2.1 By step 1.1, the prime $\mathfrak p$ contains some $\mathfrak p_i$. Since $\mathfrak p_i \in V(\mathfrak p_i)\subseteq \operatorname{Supp}_R(M)$, the minimality of $\mathfrak p$ in the support forces $\mathfrak p_i=\mathfrak p$. Choose the smallest such index $i$, and choose $m \in M_i$ whose image in $M_i/M_{i-1}\cong R/\mathfrak p$ is nonzero. Then $\operatorname{Ann}_R(m)\subseteq \mathfrak p$, because any scalar killing $m$ kills its nonzero class in $R/\mathfrak p$. Also $\mathfrak p_jM_j\subseteq M_{j-1}$ for every $j$, so $(\mathfrak p_1\cdots\mathfrak p_i)m=0$. [L1, step 1.1, choose, algebra]
 

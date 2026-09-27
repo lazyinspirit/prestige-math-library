@@ -7,26 +7,26 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
-deps: [cor-central-characters-are-dot-weyl-orbits]
+deps: [lem-simple-root-singular-vector-in-a-verma-module, thm-universal-property-of-verma-modules, lem-harish-chandra-projection-computes-highest-weight-scalars]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 generation:
   role: example
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
     - title: "Yiannis Sakellaridis, Verma Modules and the Category O"
       url: "https://web.archive.org/web/20230424132820if_/https://math.jhu.edu/~sakellar/automorphic-files/vermamodules.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (ex-dot-conjugate-weights-have-the-same-central-character). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
@@ -47,4 +47,4 @@ and the basic symmetric invariants take the same values on those two triples.
 
 1.1 In the $A_2$ realization, $\rho=(1,0,-1)$ and $s_1$ swaps the first two coordinates. Hence $\mu=s_1\cdot 0=s_1(\rho)-\rho=-\alpha_1$, and $\mu+\rho=s_1(\rho)=(0,1,-1)$. [given, algebra]
 
-2.1 The degree-two and degree-three symmetric invariants from the $A_2$ Cartan take the same values on $\rho$ and $s_1(\rho)$ because those points are in the same ordinary Weyl orbit. Therefore [[cor-central-characters-are-dot-weyl-orbits]] gives $\chi_\mu=\chi_\lambda$. [step 1.1] ∎
+2.1 Here $\langle\rho,\alpha_1^\vee\rangle=1$. By [[lem-simple-root-singular-vector-in-a-verma-module]], $f_1v_0$ is a nonzero highest vector of weight $\mu=-\alpha_1$ in $M(0)$. The universal property [[thm-universal-property-of-verma-modules]] gives a nonzero map $M(\mu)\to M(0)$. Every central element acts by a scalar on either cyclic highest-weight module by [[lem-harish-chandra-projection-computes-highest-weight-scalars]], and the map intertwines these actions. Hence $\chi_\mu=\chi_\lambda$. The displayed degree-two and degree-three symmetric invariants also agree on $\rho$ and $s_1(\rho)$, as the coordinates show. [step 1.1] ∎

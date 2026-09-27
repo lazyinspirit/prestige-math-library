@@ -96,4 +96,4 @@ compactness of $[a,b]$ is used.
 
 - **Where compactness enters, and what it buys.** Only through [L1], and then twice: [[cor-boundedness-theorem-r]] to know that the Darboux sums exist at all, and [[thm-heine-cantor-r]] to get one $\delta$ for the whole interval. On a non-compact interval both can fail: $x \mapsto 1/x$ is continuous on $(0,1)$ and unbounded there, so it has no Darboux sums at all.
 
-- **The choice cost is inherited, not incurred.** Nothing in the proof above selects anything from an infinite family; the single use of countable choice behind this theorem sits inside [[thm-heine-cantor-r]], which names it in its own statement. See [[rem-riemann-integral-choice-ledger]].
+- **Choice.** The proof selects nothing from an infinite family. The current proof of [[thm-heine-cantor-r]] also uses only a finite subcover, so this integrability argument is choice-free. See [[rem-riemann-integral-choice-ledger]].

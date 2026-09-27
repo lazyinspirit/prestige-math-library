@@ -8,11 +8,16 @@ landmark: true
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-product-measure-on-sigma-finite-spaces, thm-iterated-section-measures-agree-on-product-measurable-sets, def-measure, def-pi-system, thm-measure-uniqueness-on-a-sigma-finite-pi-system, def-finite-sigma-finite-and-semifinite-measures, thm-monotone-convergence-for-the-integral, def-product-sigma-algebra-and-finite-product-sigma-algebras]
+deps: [def-product-measure-on-sigma-finite-spaces, thm-iterated-section-measures-agree-on-product-measurable-sets, def-measure, def-pi-system, thm-measure-uniqueness-on-a-sigma-finite-pi-system, def-finite-sigma-finite-and-semifinite-measures, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function, def-product-sigma-algebra-and-finite-product-sigma-algebras]
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, Proposition 1.7.11"
@@ -30,7 +35,8 @@ spaces. Then:
    [[def-product-measure-on-sigma-finite-spaces]] is a measure on
    $\mathcal A \otimes \mathcal B$;
 2. for measurable rectangles,
-   $$(\mu \times \nu)(A \times B)=\mu(A)\nu(B);$$
+   $$(\mu \times \nu)(A \times B)=\mu(A)\nu(B),$$
+   with the nonnegative extended-product convention $0\cdot\infty=\infty\cdot0=0$;
 3. the measure $\mu \times \nu$ is sigma-finite; and
 4. it is the unique measure on $\mathcal A \otimes \mathcal B$ with the
    rectangle formula.
@@ -45,6 +51,10 @@ spaces. Then:
 
 [L3] A measure is determined by its values on a sigma-finite generating pi-system. ([[thm-measure-uniqueness-on-a-sigma-finite-pi-system]])
 
+[L4] The nonnegative integral is additive for finite sums of nonnegative measurable functions. ([[cor-additivity-of-the-nonnegative-lebesgue-integral]])
+
+[L5] The nonnegative integral agrees with the simple integral, whose zero coefficient on a null cell contributes zero even when another factor is infinite ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[def-integral-of-a-nonnegative-simple-function]]).
+
 [A1] Measurable rectangles form a pi-system that generates $\mathcal A \otimes \mathcal B$.
 
 [A2] Since $\mu$ and $\nu$ are sigma-finite, there are measurable exhaustions $X_n \uparrow X$ and $Y_n \uparrow Y$ with $\mu(X_n),\nu(Y_n) < \infty$.
@@ -53,9 +63,9 @@ spaces. Then:
 
 **Proof technique:** direct.
 
-1.1 If $E=A \times B$ is a measurable rectangle, then $$ (A \times B)_x = \begin{cases} B,& x \in A,\\ \varnothing,& x \notin A,\end{cases} $$ so $$ (\mu \times \nu)(A \times B) = \int_X \nu((A \times B)_x)\,d\mu = \int_X \nu(B)\mathbf 1_A(x)\,d\mu = \mu(A)\nu(B). $$ This is the rectangle formula. [L1]
+1.1 If $E=A \times B$ is a measurable rectangle, then $$ (A \times B)_x = \begin{cases} B,& x \in A,\\ \varnothing,& x \notin A.\end{cases} $$ Thus its section-measure function is $\nu(B)\mathbf1_A$, where the value outside $A$ is zero even when $\nu(B)=\infty$. The simple-function integral [L5] gives $$ (\mu \times \nu)(A \times B) = \int_X \nu((A \times B)_x)\,d\mu=\mu(A)\nu(B) $$ with $0\cdot\infty=0$ when $\mu(A)=0$, and symmetrically when $\nu(B)=0$. This proves the rectangle formula in every extended-value case. [L1, L5]
 
-1.2 Let $E_1,E_2,\dots$ be pairwise disjoint measurable subsets of $X \times Y$, and put $F_N:=\bigcup_{k \le N} E_k$. Then $(F_N)_x = \bigcup_{k \le N} (E_k)_x$ is a disjoint union, so $\nu((F_N)_x)=\sum_{k \le N}\nu((E_k)_x)$ for every $x$. Therefore $$ (\mu \times \nu)(F_N) = \int_X \sum_{k \le N}\nu((E_k)_x)\,d\mu. $$ Since $F_N \uparrow \bigcup_{k \ge 1} E_k$, [L2] gives $$ (\mu \times \nu)\left(\bigcup_{k \ge 1} E_k\right) = \sum_{k \ge 1} (\mu \times \nu)(E_k). $$ Thus $\mu \times \nu$ is a measure. [L1, L2]
+1.2 Let $E_1,E_2,\dots$ be pairwise disjoint measurable subsets of $X \times Y$, and put $F_N:=\bigcup_{k \le N} E_k$. Then $(F_N)_x = \bigcup_{k \le N} (E_k)_x$ is a disjoint union, so $\nu((F_N)_x)=\sum_{k \le N}\nu((E_k)_x)$ for every $x$. The section functions are nonnegative measurable, and finite additivity of their integrals gives $$ (\mu \times \nu)(F_N) = \int_X \sum_{k \le N}\nu((E_k)_x)\,d\mu=\sum_{k\le N}(\mu\times\nu)(E_k). $$ Since the section functions for $F_N$ increase pointwise to that of $\bigcup_{k \ge 1} E_k$, [L2] gives $$ (\mu \times \nu)\left(\bigcup_{k \ge 1} E_k\right) = \sum_{k \ge 1} (\mu \times \nu)(E_k). $$ The empty set has product measure zero, so $\mu \times \nu$ is a measure. [L1, L2, L4]
 
 2.1 By [A2] and step 1.1, each rectangle $X_n \times Y_n$ has finite product measure $$ (\mu \times \nu)(X_n \times Y_n)=\mu(X_n)\nu(Y_n)<\infty, $$ and $$ \bigcup_n (X_n \times Y_n)=X \times Y. $$ Hence $\mu \times \nu$ is sigma-finite. [A2, step 1.1]
 

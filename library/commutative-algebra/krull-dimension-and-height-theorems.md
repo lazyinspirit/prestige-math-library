@@ -6,6 +6,6 @@ items: [cor-minimal-prime-has-height-zero, lem-prime-chains-in-a-domain-start-at
 examples: []
 ---
 
-This page turns the earlier spectrum-and-height definitions into working dimension theory. It proves Krull's principal ideal theorem and the height theorem, builds their local converse, and packages systems of parameters as the local radical form of dimension.
+This page turns the earlier spectrum-and-height definitions into working dimension theory. Under the Axiom of Choice, it proves Krull's principal ideal theorem and the height theorem, builds their local converse, and packages systems of parameters as the local radical form of dimension.
 
-The second half records the one-variable polynomial dimension jump, the affine-domain dimension equals transcendence-degree theorem, and the affine dimension formula. The examples page isolates the boundary cases where zero divisors, localization, and noncatenary behavior matter.
+The general Noetherian polynomial dimension jump and the affine height/dimension formulas also assume Choice. Polynomial-ring dimension over a field and affine-domain dimension equal to transcendence degree retain choice-free proofs: the latter lifts the finite coordinate-prime chain through a module-finite normalization using finite-dimensional residue algebras. The examples page isolates the boundary cases where zero divisors, localization, and noncatenary behavior matter.

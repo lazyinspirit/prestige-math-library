@@ -6,23 +6,28 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
-deps: [def-leaf-reducible-finite-family, def-c-sparse-and-c-restricted-vertex-set, def-induced-copy-number, def-viral-property-for-a-finite-family, def-h-free-and-family-free-graph, thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence, thm-leaf-deletion-preserves-virality-of-a-finite-family]
+  proof: ai-altered
+deps: [def-leaf-reducible-finite-family, def-c-sparse-and-c-restricted-vertex-set, def-induced-copy-number, def-viral-property-for-a-finite-family, def-h-free-and-family-free-graph, thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence, lem-leaf-extension-copy-or-sparse-pair]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
-    - title: "Shenwei Huang, Yiao Ju, and Yidong Zhou, Erdős-Hajnal beyond the five-vertex path, Lemma 2.7"
+    - title: "Huang, Ju and Zhou, Erdős-Hajnal beyond the five-vertex path, Lemma 2.7"
       url: "https://arxiv.org/pdf/2606.06258v2"
-    - title: "Tung Nguyen, Alex Scott, and Paul Seymour, Induced subgraph density. IV. New graphs with the Erdős-Hajnal property, Theorem 6.1"
+    - title: "Nguyen, Scott and Seymour, Induced subgraph density IV, Lemma 5.1"
       url: "https://arxiv.org/pdf/2307.06455"
-pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-07-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -41,24 +46,24 @@ vertices.
 
 ## Facts & Assumptions
 
-**Given:** A leaf-reducible finite family $\mathcal F$, parameters $y\in(0,\tfrac12)$ and $b>1$, and a $y$-sparse $\mathcal F$-free graph $G$.
+**Given:** A leaf-reducible family $\mathcal F$, $b>1$, $y\in(0,1/2)$, and a nonempty $y$-sparse $\mathcal F$-free graph $G$ on $n$ vertices.
 
-[L1] Because $\mathcal F$ is leaf-reducible, there exist $H\in\mathcal F$ and a leaf $v\in V(H)$ such that $$\mathcal F':=\{H\setminus\{v\}\}\cup(\mathcal F\setminus\{H\})$$ has the Erdős-Hajnal property ([[def-leaf-reducible-finite-family]]).
+[L1] Leaf-reducibility gives $H\in\mathcal F$ and a leaf $v$ such that $\mathcal F'=\{H-v\}\cup(\mathcal F\setminus\{H\})$ has the Erdős-Hajnal property ([[def-leaf-reducible-finite-family]]).
 
-[L2] For a finite family, the Erdős-Hajnal property, the polynomial Rödl property, and virality are equivalent ([[thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
+[L2] The Erdős-Hajnal property of a finite family implies its virality ([[thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
 
-[L3] Deleting a leaf from each of two forbidden graphs preserves virality ([[thm-leaf-deletion-preserves-virality-of-a-finite-family]]).
-
-[L4] A graph is $\mathcal F$-free when it contains no induced copy of any member of $\mathcal F$ ([[def-h-free-and-family-free-graph]]).
+[L3] The leaf-extension counting lemma gives, in a $y$-sparse host, many $H$ copies, few $H-v$ copies in a set of size at least $yn$, or a pair $A,B$ with $|A|\ge y^a n$, $|B|\ge(1-|H|y)n$, and $B$ $x$-sparse to $A$ ([[lem-leaf-extension-copy-or-sparse-pair]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1], fix $H$ and $v$ so that the modified family $\mathcal F':=\{H\setminus\{v\}\}\cup(\mathcal F\setminus\{H\})$ has the Erdős-Hajnal property. By the implication from assertion 1 to assertion 3 in [L2], the family $\mathcal F'$ is viral. [L1, L2]
+1.1 Fix $H,v$ from [L1], put $r=|H|$, and choose a viral exponent $D\ge1$ for $\mathcal F'$ by [L2]. If $r=2$, then $H$ is an edge, so the $H$-free graph $G$ is stable and its whole vertex set is $0$-sparse. Taking $d=h=1$ gives outcome 2 for all $y,b$. Hence assume $r\ge3$ and set $d=D(r-1)+2$ and $h=2r$. These constants depend only on $\mathcal F$. [L1, L2, given]
 
-2.1 Apply [L3] with both leaf-deletion slots equal to the same graph $H$ and with the same leaf $v$. The two modified families are both $\mathcal F'$, so step 1.1 makes them viral. Therefore $\mathcal F$ itself is viral. Using the implication from assertion 3 to assertion 2 in [L2], choose $d>0$ such that every $\mathcal F$-free graph has an $\epsilon$-restricted induced subgraph on at least $\epsilon^d$ times its number of vertices for every $\epsilon\in(0,\tfrac12)$. Set $h:=1$. [step 1.1, L2, L3, choose]
+2.1 If $y\ge(2r)^{-1}$, then $(1-hy)n\le0$. Taking $X=V(G)$ and $Y=\varnothing$ gives outcome 1, since $y^{bd+1}\le1$. Hence assume $y<(2r)^{-1}$. Put $x=\min\{y/2,(2n)^{-1}\}>0$ and $a=bD(r-1)+3$. Then $x\le y$, $a\ge2$, and [L3] applies. Its many-$H$ outcome is impossible because $G$ is $\mathcal F$-free. [step 1.1, L3, given, algebra]
 
-3.1 Since $G$ is $\mathcal F$-free by [L4], step 2.1 applies to $G$ with $\epsilon:=y^b\in(0,\tfrac12)$. We obtain a $y^b$-restricted induced subgraph of $G$ with at least $(y^b)^d|V(G)|=y^{bd}|V(G)|$ vertices. Since $y\in(0,\tfrac12)$, one has $y^{bd}\ge y^{bd+1}$, so this induced subgraph also has at least $y^{bd+1}|V(G)|$ vertices. Hence outcome 2 holds. [step 2.1, L4, algebra]
+3.1 Suppose the few-$H-v$ outcome of [L3] holds. It gives $S\subseteq V(G)$ with $|S|\ge yn$ and $\operatorname{ind}_{H-v}(G[S])\le y^{a-2}|S|^{r-1}<y^{bD(r-1)}|S|^{r-1}$, since $a-2=bD(r-1)+1$ and $y<1$. Every unchanged member of $\mathcal F'$ belongs to $\mathcal F$, so it has zero copies in $G[S]$. The viral premise for $\mathcal F'$ therefore holds at $\epsilon=y^b$. Virality yields a $y^b$-restricted induced subgraph with at least $y^{bD}|S|\ge y^{bD+1}n\ge y^{bd+1}n$ vertices. This is outcome 2. [step 1.1, step 2.1, L2, L3, algebra]
 
-4.1 Because outcome 2 always holds, the displayed dichotomy is satisfied. [step 3.1] ∎
+3.2 Otherwise [L3] gives disjoint $A,B$ with $|A|\ge y^a n$, $|B|\ge(1-ry)n\ge(1-hy)n$, and $B$ $x$-sparse to $A$. Since $x|A|\le xn\le1/2$, every vertex of $B$ has integer degree zero into $A$, so $B$ is anticomplete to $A$. Also $bd+1=bD(r-1)+2b+1\ge a$ because $b>1$. Thus $|A|\ge y^{bd+1}n$, and $X=A,Y=B$ give outcome 1. [step 1.1, step 2.1, L3, algebra]
+
+4.1 Step 2.1 handles the large-$y$ case, while steps 3.1 and 3.2 exhaust the two remaining alternatives of [L3]. Thus one of the stated outcomes always holds. [step 2.1, step 3.1, step 3.2] ∎

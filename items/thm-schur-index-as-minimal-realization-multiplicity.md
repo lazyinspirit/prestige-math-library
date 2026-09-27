@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [def-character-field-and-field-of-definition, def-schur-index-of-an-irreducible-character, thm-scalar-extension-of-an-irreducible-finite-group-representation, thm-schur-index-equals-division-algebra-index, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, thm-complex-representations-are-determined-by-their-characters]
+deps: [def-character-field-and-field-of-definition, def-schur-index-of-an-irreducible-character, thm-galois-orbits-classify-simple-modules-after-splitting-base-change, thm-scalar-extension-of-an-irreducible-finite-group-representation, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, thm-complex-representations-are-determined-by-their-characters, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-schur-index-as-minimal-realization-multiplicity). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gabor Wiese, Galois Representations, Definition 2.5.12 through Remark 2.5.15"
@@ -26,20 +27,20 @@ sources:
 
 ## Statement
 
-Let $\chi$ be an irreducible complex character of a finite group and put
+Assume the Axiom of Choice. Let $\chi$ be an irreducible complex character of a finite group and put
 $K=\mathbb Q(\chi)$.  Its Schur index $m_K(\chi)$ is the least positive integer
 $r$ for which the character $r\chi$ is afforded by a $K$-representation.
 Consequently $\chi$ itself is realizable over $K$ if and only if $m_K(\chi)=1$.
 
 ## Facts & Assumptions
 
-**Given:** An irreducible complex character $\chi$ and $K=\mathbb Q(\chi)$.
+**Given:** AC, an irreducible complex character $\chi$, and $K=\mathbb Q(\chi)$.
 
 [L1] The irreducible $K$-representation in the Schur-index definition has scalar extension $m_K(\chi)U$, where $U$ affords $\chi$ ([[def-schur-index-of-an-irreducible-character]], [[thm-scalar-extension-of-an-irreducible-finite-group-representation]]).
 
 [L2] A field of definition means a $K$-model whose complex scalar extension is equivalent to the given representation ([[def-character-field-and-field-of-definition]]).
 
-[L3] Proposition 4.3.2 in the cited notes of Zheng partitions all irreducible representations over a splitting field according to the unique irreducible $K$-representation from which they arise.  Thus $U$ occurs after scalar extension of exactly one irreducible $K$-module, namely the module $V$ in [L1].
+[L3] Under ZFC, simple $K[G]$-modules correspond bijectively to Galois orbits of simple modules after extension to the chosen finite splitting field. Thus $U$ occurs after scalar extension of exactly one irreducible $K$-module, namely the module $V$ in [L1] ([[thm-galois-orbits-classify-simple-modules-after-splitting-base-change]]).
 
 [L4] Every finite-dimensional $K$-representation of $G$ is completely reducible ([[cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]]).
 
@@ -49,7 +50,7 @@ Consequently $\chi$ itself is realizable over $K$ if and only if $m_K(\chi)=1$.
 
 **Proof technique:** direct.
 
-1.1 Let $V$ be the irreducible $K$-representation from the Schur-index definition.  By [L1], its scalar extension has character $m_K(\chi)\chi$, so $m_K(\chi)\chi$ is afforded over $K$. [L1, given]
+1.1 Under the stated AC premise, let $V$ be the irreducible $K$-representation from the Schur-index definition. By [L1], its scalar extension has character $m_K(\chi)\chi$, so $m_K(\chi)\chi$ is afforded over $K$. [L1, given]
 
 1.2 Conversely, if $r\chi$ is afforded by a $K$-representation $W$, [L4] decomposes $W$ into irreducible $K$-summands, while [L5] identifies its complex scalar extension with $U^{\oplus r}$.  By [L3], every summand that contributes $U$ is isomorphic to $V$, and by [L1] each copy contributes $U$ with multiplicity $m_K(\chi)$.  Hence $m_K(\chi)\mid r$. [L1, L3, L4, L5, given, algebra]
 

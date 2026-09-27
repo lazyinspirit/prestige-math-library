@@ -10,10 +10,10 @@ provenance:
 deps: [thm-banach-fixed-point, cor-banach-error-estimates, def-lipschitz-holder-contraction,
        thm-of-square-roots, thm-euclidean-space-complete, def-interval,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
-       thm-complete-subspace-iff-closed, thm-metric-sequential-closure,
-       lem-limit-preserves-order, lem-of-inverse-positive, lem-of-square-monotone,
+       thm-complete-subspace-iff-closed,
+       lem-of-inverse-positive, lem-of-square-monotone,
        def-integer-power, lem-of-abs-value, lem-of-sign-rules, def-metric-space,
-       def-metric-topology, def-metric-convergence, def-complete-metric-space,
+       def-metric-topology, def-complete-metric-space,
        lem-of-square-positive]
 justified_by: []
 aliases: []
@@ -21,12 +21,12 @@ landmark: true
 short: "Newton iteration for $\\sqrt{2}$"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -70,7 +70,7 @@ Then:
 
 [L1] The absolute value makes $\mathbb{R}$ a metric space, a restriction of a metric is a metric, and $|uv| = |u||v|$ ([[lem-real-line-is-a-metric-space]], [[def-isometry-and-metric-embedding]], [[def-metric-space]], [[lem-of-abs-value]]).
 
-[L2] $\mathbb{R}$ is complete; a closed subset of a complete metric space is complete; a subset is closed exactly when it is sequentially closed; and limits preserve non-strict inequalities ([[thm-euclidean-space-complete]], [[thm-complete-subspace-iff-closed]], [[thm-metric-sequential-closure]], [[lem-limit-preserves-order]], [[def-metric-topology]], [[def-metric-convergence]]).
+[L2] $\mathbb{R}$ is complete, and a closed subset of a complete metric space is complete by the choice-free direction of [[thm-complete-subspace-iff-closed]] ([[thm-euclidean-space-complete]], [[def-metric-topology]]).
 
 [L3] Every $a \ge 0$ has a unique $\sqrt{a} \ge 0$ with $(\sqrt a)^2 = a$, and $\sqrt{a}\sqrt{b} = \sqrt{ab}$ for $a,b \ge 0$, since both sides are nonnegative with the same square ([[thm-of-square-roots]], [[def-integer-power]]).
 
@@ -84,7 +84,7 @@ Then:
 
 **Proof technique:** direct.
 
-1.1 $X$ is nonempty, since $1 \in X$; and $X$ is sequentially closed in $\mathbb{R}$, since a sequence in $X$ converging to a real $p$ has $1 \le x_k \le 2$ for every $k$ and hence $1 \le p \le 2$. So $X$ is closed in $\mathbb{R}$, and $\mathbb{R}$ is complete, so $(X,d)$ is a nonempty complete metric space: claim 1. [L1, L2]
+1.1 $X$ is nonempty since $1\in X$. It is closed directly: if $p<1$, the open ball about $p$ of radius $(1-p)/2$ misses $[1,2]$; if $p>2$, the ball of radius $(p-2)/2$ does likewise. Thus its complement is open. Since $\mathbb R$ is complete, the choice-free closed-implies-complete direction of [L2] makes $(X,d)$ a nonempty complete metric space: claim 1. [L1, L2]
 
 1.2 $\sqrt{2}$ lies in $X$: $1^2 = 1 \le 2$ and $2^2 = 4 \ge 2$, so $1 \le \sqrt 2 \le 2$. [L3, L4]
 

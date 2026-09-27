@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -51,11 +55,10 @@ The tree is finitely branching with finite levels; it is not itself a finite set
 
 **Proof technique:** direct.
 
-1.1 At stage zero take the single root $r$ with $K_r=K$, a nonempty compact set, so $T_0$ is finite and nonempty. [given, F2, F1, F3]
+1.1 First the balls $B(x,1)$, $x\in K$, cover $K$. Compactness gives finitely many centers covering it, so the triangle inequality bounds all distances in $K$ by one finite real number. Hence $D=\operatorname{diam}_d(K)$ exists. Replace $d$ by $d'=d/\max\{1,D\}$; this positive constant rescaling preserves the compact topology and gives $\operatorname{diam}_{d'}(K)\le1$. Use $d'$ for every ball and diameter below. At stage zero take the single root $r$ with $K_r=K$, so $T_0$ is finite and nonempty and its diameter bound holds. [given, F1, F3]
 
 2.1 Let $L$ be a nonempty compact set and $\varepsilon>0$. The open balls $B(x,\varepsilon/3)$ for $x\in L$ form an open cover of $L$, so by the compactness clause of [F1] finitely many of them, say about $x_0,\dots,x_m$, already cover $L$. The sets $L\cap\overline{B(x_i,\varepsilon/3)}$ are then finitely many nonempty-or-discardable subsets of $L$ covering $L$; each is closed in $L$ and hence compact by [F2], and each has diameter at most $2\varepsilon/3<\varepsilon$ by the triangle inequality and the diameter clause of [F3]. Discarding the empty ones leaves a finite nonempty family of nonempty compact subsets of $L$, covering $L$, each of diameter below $\varepsilon$. [step 1.1, F2, F1, F3]
 
 3.1 Apply step 2.1 with $\varepsilon=2^{-(n+1)}$ to every node of level $n$ to obtain that node's children, and let $T_{n+1}$ be the resulting finite set of children. Each level is finite because level $n$ is finite and each of its nodes gets finitely many children, and each level is nonempty because every node has at least one child. The passage from one level to the next makes a selection — step 2.1 supplies at least one admissible finite family per node but names none canonically — and the family available at level $n+1$ is not known until level $n$ is fixed, so the recursion is licensed by Dependent Choice, applied via [F4] to the relation "is an admissible next level for" on finite levelled labellings, taking the root labelling of step 1.1 as the prescribed starting point. This is the Statement's hypothesis and the only place it is used. [step 2.1, F1, F4]
 
 4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎
-

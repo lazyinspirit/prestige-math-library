@@ -57,11 +57,16 @@ year.
 
 A permutation model is **not** a model of ZF, because ZF has no atoms. The
 conclusion is carried over to ZF proper by the **Jech-Sochor embedding theorem**
-(the First Embedding Theorem), which produces from a permutation model a
-symmetric extension of a model of ZF in which a prescribed initial segment
-$\mathcal{P}^\alpha$ of the permutation model reappears, so any statement bounded
-in that segment is preserved. The same conclusion is also reached directly,
-without atoms, by Cohen's symmetric submodels of a forcing extension: Jech's
+(the First Embedding Theorem). The transfer here concerns the particular
+pair-indexed sequence: choose a carried hierarchy large enough to contain the
+sequence, its pair and ordered-pair codes, and every possible choice graph.
+The membership isomorphism then preserves the typed assertion that this
+sequence has no choice graph, with atoms treated as opaque base objects. Its
+image is a witness to the existential assertion in the ZF model. An arbitrary
+formula about atoms need not transfer; for example, two distinct memberless
+atoms do not become two distinct empty sets in ZF. The same conclusion is also
+reached directly, without atoms, by Cohen's symmetric submodels of a forcing
+extension: Jech's
 **second Cohen model** is exactly the atom-free analogue of the model above, with
 the pairs realised as pairs of sets of generic reals rather than pairs of atoms.
 That is the machinery of [[rem-cohen-forcing-ac-independent]].

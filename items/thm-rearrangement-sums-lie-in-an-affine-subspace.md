@@ -117,7 +117,7 @@ real line; it is not evidence for any statement in higher dimensions.
 
 ## Remarks
 
-- **This theorem proves containment only, and the reverse inclusion is not proved, assumed, or asserted anywhere on this page.** For $n \ge 2$ the question whether every point of $s + \Gamma^{\perp}$ is a rearrangement sum is **open as far as this library is concerned**. It is not open in the mathematical literature, and this page deliberately states nothing about what the literature says, exactly as the published [[rem-rearrangement-in-higher-dimensions]] declines to. What is missing here is machinery, not effort: every route known to the author of this page passes through the orthogonal decomposition of a finite-dimensional inner product space and through a separation argument for convex sets, and neither exists in this library — the first belongs to a page earlier in the plan order that is not yet built, and the second to no planned page at all. See [[rem-rn-conventions-and-scope]].
+- **This theorem proves containment only, and the reverse inclusion is not proved, assumed, or asserted anywhere on this page.** For $n \ge 2$ the question whether every point of $s + \Gamma^{\perp}$ is a rearrangement sum remains open within this page; [[rem-rearrangement-in-higher-dimensions]] records that proof boundary. Finite-dimensional orthogonal decomposition and convex-separation results are now published elsewhere in this library, but this page supplies no reverse-inclusion rearrangement construction or convergence estimates. See [[rem-rn-conventions-and-scope]].
 
 - **The title claims exactly clause 2 and clause 1, and no more.** A title asserting that $\mathcal{S}(x)$ **is** the affine subspace would assert the reverse inclusion, which is not proved here.
 

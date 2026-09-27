@@ -1,0 +1,50 @@
+--- before/ex-a-compactly-supported-cutoff-of-an-incomplete-vector-field-is-complete.md
++++ items/ex-a-compactly-supported-cutoff-of-an-incomplete-vector-field-is-complete.md
+@@ -6,21 +6,16 @@
+ origin: session
+ provenance:
+   statement: ai-generated
+-  proof: ai-generated
++  proof: ai-altered
+ generation:
+   role: example
+-deps: [thm-compactly-supported-vector-fields-are-complete, lem-manifold-bump-for-a-compact-set-inside-an-open-set]
++deps: [lem-manifold-bump-for-a-compact-set-inside-an-open-set, thm-existence-and-uniqueness-of-a-maximal-ode-solution, cor-bounded-derivative-implies-lipschitz, thm-extreme-value-metric, thm-heine-borel-rn, lem-ode-extension-from-a-compact-interior-region]
+ justified_by: []
+ aliases: []
+ landmark: false
+ proof_strategy: direct
+ verification:
+-  audited: 2026-09-04
+   precheck: pass
+-  judge:
+-    model: "gpt-5.6-terra"
+-    verdict: pass
+-    date: 2026-09-04
+ sources:
+   scraped: []
+   references:
+@@ -45,12 +40,20 @@
+ 
+ [L1] Smooth bump functions with prescribed compact support exist ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]]).
+ 
+-[L2] Compactly supported smooth vector fields are complete ([[thm-compactly-supported-vector-fields-are-complete]]).
++[L2] A Picard–Lindelöf initial value problem has a unique maximal solution ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).
++
++[L3] A bounded derivative on an interval gives a Lipschitz bound ([[cor-bounded-derivative-implies-lipschitz]]).
++
++[L4] Continuous functions on compact metric spaces are bounded ([[thm-extreme-value-metric]]), and closed bounded Euclidean sets are compact ([[thm-heine-borel-rn]]).
++
++[L5] A solution with a sequence of graph points in a compact interior region approaching a finite endpoint extends beyond that endpoint ([[lem-ode-extension-from-a-compact-interior-region]]).
+ 
+ ## Verification
+ 
+ **Proof technique:** direct.
+ 
+-1.1 By [L1], such a bump function $\chi$ exists. The field $Y=\chi(x)x^2\,d/dx$ is smooth, agrees with $x^2\,d/dx$ on $[-1,1]$, and vanishes outside the compact interval $[-2,2]$. [L1, given]
++1.1 Apply [L1] to $[-1,1]\subset(-2,2)$ to obtain the required smooth bump. Put $f(x)=\chi(x)x^2$. It is smooth, equals $x^2$ on $[-1,1]$, and vanishes off $[-2,2]$. Hence $|f|\le4$. Its derivative is continuous and zero off $[-2,2]$, so [L4] bounds $|f'|$ globally. By [L3], $f$ is Lipschitz. [L1, L3, L4, given]
+ 
+-2.1 Since $Y$ has compact support, [L2] implies that $Y$ is complete. Thus a compactly supported cutoff can preserve the local model of an incomplete field while restoring global existence. [L2, step 1.1] ∎
++2.1 Fix any initial value $x(0)=a$ and take its maximal solution $x:(\alpha,\beta)\to\mathbb R$ from [L2]. Since $|x'|=|f(x)|\le4$, [L3] on the interval between $0$ and $t$ gives $|x(t)-a|\le4|t|$. If $\beta<\infty$, set $t_j=\beta(1-1/(j+1))$ for $j\ge1$. These times increase to $\beta$, and the graph points lie in the compact rectangle $[0,\beta]\times[-R,R]$, where $R=|a|+4\beta+1$. The ODE domain is all of $\mathbb R^2$, so [L5] extends the solution past $\beta$, contrary to maximality. Therefore $\beta=\infty$. Reflecting time applies the same argument to $-f$ and gives $\alpha=-\infty$. This uses an explicitly defined sequence and no choice assumption. [L2, L3, L4, L5, step 1.1]
++
++3.1 Every integral curve of $Y$ is thus global, so $Y$ is complete. In contrast, $x(t)=1/(1-t)$ solves $x'=x^2$ with $x(0)=1$ for $t<1$ and diverges as $t\uparrow1$, so the original field is incomplete. This verifies both the local agreement and the claimed change in completeness. [step 1.1, step 2.1, algebra] ∎

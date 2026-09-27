@@ -7,19 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-positive-continuous-error-function-for-strong-approximation,
-       thm-whitney-approximation-for-euclidean-valued-maps]
+deps: [def-positive-continuous-error-function-for-strong-approximation]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -38,13 +37,11 @@ the right notion of smooth approximation.
 
 [F1] A positive continuous error function may vary from point to point ([[def-positive-continuous-error-function-for-strong-approximation]]).
 
-[L1] Euclidean Whitney approximation is formulated with such pointwise positive error functions ([[thm-whitney-approximation-for-euclidean-valued-maps]]).
-
 ## Refutation
 **Proof technique:** direct.
 
-1.1 The function $\varepsilon(x)=e^{-|x|}$ tends to $0$ as $|x|\to\infty$, so the requirement $$|G(x)-F(x)|<\varepsilon(x)$$ demands finer and finer control at infinity. No single constant $\eta>0$ can encode that condition, because for large $|x|$ one has $\varepsilon(x)<\eta$. [F1, given, algebra]
+1.1 Fix any uniform tolerance $\eta>0$, choose $0<a<\eta$, and set $G_a(x)=\sqrt{x^2+a^2}$. This function is smooth on $\mathbb R$ and $$0<G_a(x)-|x|=\frac{a^2}{\sqrt{x^2+a^2}+|x|}\le a<\eta$$ for every $x$. Thus it uniformly approximates $F$. [given, algebra]
 
-2.1 The correct global theorem [L1] is therefore phrased with variable positive error functions rather than one uniform tolerance. That is exactly what allows the approximation scale to shrink along different ends of a noncompact source. [L1, step 1.1]
+2.1 For $x>0$, $$G_a(x)-F(x)=\frac{a^2}{\sqrt{x^2+a^2}+x}\ge\frac{a^2}{2x+a}.$$ The last expression eventually exceeds $e^{-x}=\varepsilon(x)$, since $(2x+a)e^{-x}\to0$. Therefore $G_a$ fails the pointwise error requirement despite its uniform error being less than $\eta$. [F1, step 1.1, algebra]
 
-3.1 Hence the claim that one global uniform bound is always the right notion is false. [step 2.1] ∎
+3.1 Since this happens for every $\eta>0$ on the noncompact manifold $\mathbb R$, no fixed uniform tolerance captures the stated fine approximation condition. This refutes the claim. [step 1.1, step 2.1] ∎

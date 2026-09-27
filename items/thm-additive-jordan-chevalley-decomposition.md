@@ -7,13 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-semisimple-and-nilpotent-endomorphisms, def-algebraic-closure, def-perfect-field, cor-algebraic-extensions-of-perfect-fields-are-separable, cor-primary-projections-are-polynomials-in-the-endomorphism, thm-jordan-form-exists-iff-the-characteristic-polynomial-splits, thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots, thm-finite-galois-extension-characterizations]
+deps: [def-axiom-of-choice, def-semisimple-and-nilpotent-endomorphisms, def-algebraic-closure, def-perfect-field, cor-algebraic-extensions-of-perfect-fields-are-separable, cor-primary-projections-are-polynomials-in-the-endomorphism, thm-jordan-form-exists-iff-the-characteristic-polynomial-splits, thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots, thm-finite-galois-extension-characterizations]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-additive-jordan-chevalley-decomposition). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -54,7 +59,7 @@ polynomials in $T$ with coefficients in $F$.
 
 **Proof technique:** direct.
 
-1.1 Choose an algebraic closure $\Omega/F$ as in [[def-algebraic-closure]]. Let $q$ be the product of the distinct monic irreducible factors of the characteristic polynomial of $T$, and let $E\subseteq\Omega$ be its splitting field. By [L1], the polynomial $q$ is separable, so [L4] makes $E/F$ finite Galois with fixed field $E^{\operatorname{Gal}(E/F)}=F$. The characteristic polynomial splits over $E$, and [L2] gives Jordan form for the matrix of $T$ over $E$. Thus $E^n$ decomposes as the direct sum of generalized eigenspaces $G_\lambda$, and $(T_E-\lambda I)|_{G_\lambda}$ is nilpotent. [L1, L2, L4]
+1.1 The Axiom of Choice permits the algebraic closure $\Omega/F$ used here; choose one as in [[def-algebraic-closure]]. Let $q$ be the product of the distinct monic irreducible factors of the characteristic polynomial of $T$, and let $E\subseteq\Omega$ be its splitting field. By [L1], the polynomial $q$ is separable, so [L4] makes $E/F$ finite Galois with fixed field $E^{\operatorname{Gal}(E/F)}=F$. The characteristic polynomial splits over $E$, and [L2] gives Jordan form for the matrix of $T$ over $E$. Thus $E^n$ decomposes as the direct sum of generalized eigenspaces $G_\lambda$, and $(T_E-\lambda I)|_{G_\lambda}$ is nilpotent. [given, L1, L2, L4]
 
 2.1 Let $P_\lambda$ be the projection onto $G_\lambda$ along the sum of the other generalized eigenspaces. By [L3], each $P_\lambda$ is a polynomial in $T_E$. Define $S_E:=\sum_\lambda \lambda P_\lambda$ and $N_E:=T_E-S_E=\sum_\lambda (T_E-\lambda I)P_\lambda$. Then $T_E=S_E+N_E$, the operators commute because they are polynomials in $T_E$, the minimal polynomial of $S_E$ divides $\prod_\lambda (x-\lambda)$ and therefore has distinct roots, so [L5] makes $S_E$ semisimple, and $N_E$ is nilpotent because its restriction to each $G_\lambda$ is $(T_E-\lambda I)|_{G_\lambda}$. [L3, L5, step 1.1]
 

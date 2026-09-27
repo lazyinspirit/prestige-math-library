@@ -7,12 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams, lem-minimal-area-diagrams-are-reduced]
+deps: [lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams, lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces, def-van-kampen-diagram-boundary-label-and-area]
 landmark: true
-proof_strategy: "contradiction"
+proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-greendlinger-lemma-for-c-prime-one-sixth-presentations). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -37,14 +42,18 @@ boundary to the outer boundary of $D$.
 
 **Given:** A nonempty reduced van Kampen diagram $D$ over a symmetrised $C'(1/6)$ presentation, with freely reduced nontrivial outer boundary word.
 
-[L1] Such a diagram contains a shell whose inner boundary is a concatenation of at most three maximal internal arcs ([[lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams]]).
+[L1] A reduced diagram with a face and freely reduced nontrivial boundary contains a shell with at most three maximal internal arcs ([[lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams]]).
+
+[L2] Every internal arc of a reduced diagram is a piece, even when both side occurrences belong to the same face; under $C'(1/6)$ its length is strictly less than one sixth of the incident face perimeter ([[lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces]]).
+
+[F1] A van Kampen diagram is a finite connected simply connected planar complex; in the absence of faces its graph is a tree ([[def-van-kampen-diagram-boundary-label-and-area]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1], some boundary face $f$ of $D$ is a shell whose inner boundary is a concatenation $q_1\cdots q_i$ of maximal internal arcs with $0\le i\le 3$. (For $i=0$, this is the empty concatenation.) Let $p$ be the complementary outer arc of $\partial f$ lying on $\partial D$. [L1, given]
+1.1 If $D$ had no faces, [F1] would make it a tree. Every nontrivial closed walk in a tree has immediate backtracking, contradicting the freely reduced nontrivial boundary word. Thus $D$ has a face, and by [L1] some boundary face $f$ of $D$ is a shell whose inner boundary is a concatenation $q_1\cdots q_i$ of maximal internal arcs with $0\le i\le 3$. (For $i=0$, this is the empty concatenation.) Let $p$ be the complementary outer arc of $\partial f$ lying on $\partial D$. [F1, L1, given]
 
-2.1 If $i=0$, the sum of the inner-arc lengths is $0<|\partial f|/2$. If $1\le i\le 3$, each internal arc $q_j$ is shared with a distinct neighbouring face, so reducedness makes its label a piece. Because the presentation satisfies $C'(1/6)$, every such arc satisfies $|q_j|<|\partial f|/6$, and hence $$ |q_1|+\cdots+|q_i|< i\,\frac{|\partial f|}{6}\le \frac{|\partial f|}{2}. $$ Thus in every case the total inner-arc length is less than half of $|\partial f|$. [step 1.1, given, algebra]
+2.1 If $i=0$, the sum of the inner-arc lengths is $0<|\partial f|/2$. If $1\le i\le 3$, each internal arc $q_j$ is a piece by [L2], including a possible self-incident arc. The strict $C'(1/6)$ bound in [L2] gives $|q_j|<|\partial f|/6$, and hence $$ |q_1|+\cdots+|q_i|< i\,\frac{|\partial f|}{6}\le \frac{|\partial f|}{2}. $$ Thus in every case the total inner-arc length is less than half of $|\partial f|$. [L2, step 1.1, given, algebra]
 
 3.1 Since $\partial f$ is the disjoint union of the outer arc $p$ and the inner arcs $q_1,\dots,q_i$, step 2.1 gives $$ |p|=|\partial f|-(|q_1|+\cdots+|q_i|)>\frac{|\partial f|}{2}. $$ Thus $f$ contributes more than half of its boundary to the outer boundary of $D$. [step 2.1, algebra] ∎

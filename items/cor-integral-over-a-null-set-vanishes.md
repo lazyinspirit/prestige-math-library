@@ -10,8 +10,13 @@ provenance:
 deps: [def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, def-measure-null-set-and-almost-everywhere, def-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (cor-integral-over-a-null-set-vanishes). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -39,10 +44,7 @@ $$\int_E f\,d\mu=0.$$
 
 **Proof technique:** direct.
 
-1.1 Let $s=\sum_j c_j\chi_{A_j}$ be a simple minorant of $f\chi_E$. If $c_j>0$,[L1, L2, given]
-then $A_j\subseteq E$, so $\mu(A_j)=0$. Since $A\mapsto\int_A s\,d\mu$ is a measure by [L1], every positive-coefficient term contributes $0$, and the zero-coefficient terms contribute $0$ as well. Hence $\int s\,d\mu=0$.
+1.1 Let $s=\sum_j c_j\chi_{A_j}$ be a nonnegative simple minorant of $f\chi_E$, with $c_j\ge0$. If $c_j>0$, then $A_j\subseteq E$ because $s=0$ outside $E$; hence $\mu(A_j)=0$. The simple-integral formula, equivalently the finite-sum calculation in [L1], gives $\int s\,d\mu=\sum_j c_j\mu(A_j)=0$, including when the original representation overlaps. [L1, L2, given]
 
 
-2.1 Taking the supremum over all such simple minorants in [L3] gives[step 1.1, L2, L3] ∎
-$$\int_E f\,d\mu=\int f\chi_E\,d\mu=0.$$
-
+2.1 Taking the supremum over all such simple minorants in [L3] gives $\int_E f\,d\mu=\int f\chi_E\,d\mu=0$. [step 1.1, L2, L3] ∎

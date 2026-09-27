@@ -1,0 +1,11 @@
+# Step 8 owner audit of five published repairs
+
+The Step 8 scope gate found five `published-unaudited` carriers. Their earlier repairs removed prior audit stamps while retaining `status: published`. On 2026-09-27 I reviewed the current mathematical delta from `HEAD` and placed a fresh `verification.audited` date on each current carrier. This records the current repair audit; it does not reinstate an earlier judge verdict or claim a new judge pass. Published repairs remain outside Step 7 rejudge and adjudication.
+
+- `def-bernoulli-numbers-by-their-generating-function`: The complex exponential series gives `e^t-1=t h(t)` with `h(0)=1`; the cited local reciprocal lemma makes `1/h` holomorphic near zero. The removable quotient therefore defines the Bernoulli coefficients, and the linear reciprocal coefficient is `-1/2`.
+- `def-jacobi-theta-function`: For `t>0` and `n>=1`, `n^2>=n` gives `e^{-pi n^2 t}<=e^{-pi n t}`. The geometric majorant converges, so the two-sided defining series is absolutely convergent. The added dependencies supply the exponential and positivity interfaces.
+- `def-standard-inner-product-on-complex-class-functions`: The finite sum is licensed by the finite-sum definition for the additive commutative monoid of complex numbers. The formula and inner-product statement remain the published ones; only the incorrect sum supplier was replaced.
+- `thm-integration-by-parts-for-brownian-ito-processes`: A continuous real path is bounded on each compact time interval by the cited boundedness theorem. The previous Heine–Cantor citation proved uniform continuity rather than the exact compact-boundedness fact. The stochastic formula and hypotheses are unchanged.
+- `thm-special-values-of-riemann-zeta-at-integers`: With `F(t)=t/(e^t-1)+t/2`, the exponential reciprocal identity gives `F(-t)=F(t)`. Thus odd Bernoulli coefficients above degree one vanish. Setting `t=2 pi i z` yields `pi z cot(pi z)=F(t)` near zero; coefficient comparison gives the displayed even zeta values, and the existing functional equation gives the negative odd values. The repair states its countable-choice premise and makes these algebraic steps explicit.
+
+The audit checks the edited mathematical text and its cited local interfaces. It makes no claim of a fresh independent LLM judgment or gate exemption for unrelated run content.

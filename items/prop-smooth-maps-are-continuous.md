@@ -19,8 +19,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -43,7 +47,7 @@ definition and is asserted, not proved.
 
 **Given:** Smooth manifolds $M,N$, a map $F:M\to N$, a point $p$, and $r\ge1$ such that $F$ is $C^r$ at $p$.
 
-[F1] $C^r$ at $p$ means that for smooth charts $(U,\varphi)$ at $p$ and $(V,\psi)$ at $F(p)$ with $F(U)\subseteq V$, the representative $\psi\circ F\circ\varphi^{-1}$ is $C^r$ near $\varphi(p)$; for finite $r$ every iterated coordinate partial derivative of order at most $r$ exists and is continuous ([[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-ck-and-multi-index-notation-in-several-variables]]).
+[F1] The published definition requires $F$ to be continuous at $p$ before calling it $C^r$ at $p$. It also requires smooth charts $(U,\varphi)$ at $p$ and $(V,\psi)$ at $F(p)$ with $F(U)\subseteq V$ for which the representative $\psi\circ F\circ\varphi^{-1}$ is $C^r$ near $\varphi(p)$ ([[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-ck-and-multi-index-notation-in-several-variables]]).
 
 [F2] Charts are homeomorphisms ([[def-manifold-chart-coordinate-domain-and-coordinate-functions]]).
 
@@ -55,8 +59,8 @@ definition and is asserted, not proved.
 
 **Proof technique:** direct.
 
-1.1 Choose smooth charts $(U,\varphi)$ at $p$ and $(V,\psi)$ at $F(p)$ with [given, F1, L1, choose] $F(U)\subseteq V$. Since $r\ge1$, [F1] gives the representative $\psi\circ F\circ\varphi^{-1}$ of class $C^r$, hence $C^1$, near $\varphi(p)$, so its first partial derivatives exist and are continuous there; [L1] makes it continuous on a neighbourhood of $\varphi(p)$. [given, F1, L1, choose]
+1.1 Continuity at $p$ follows immediately from the definition in [F1]. The same definition requires continuity on an open set when a map is called $C^r$ there. Thus the first and open-set conclusions hold directly, including the $r=0$ case. [F1]
 
-2.1 On $U\cap F^{-1}(V)$ the map $F$ equals [given, F2, L2, step 1.1] $\psi^{-1}\circ\bigl(\psi\circ F\circ\varphi^{-1}\bigr)\circ\varphi$: the three factors are continuous, $\varphi$ and $\psi^{-1}$ because [F2] makes charts homeomorphisms and the middle factor by step 1.1, so [L2] makes the composite continuous. The set $U\cap F^{-1}(V)$ contains a neighbourhood of $p$ and the agreement holds there, so by the locality clause of [L2] the map $F$ is continuous at $p$. [given, F2, L2, step 1.1]
+1.2 The coordinate condition gives the same conclusion directly when $r\ge1$: on a neighbourhood of $\varphi(p)$, the representative has continuous first partial derivatives and is continuous by [L1]. There $F=\psi^{-1}\circ(\psi\circ F\circ\varphi^{-1})\circ\varphi$. Charts and their inverses are continuous by [F2], so this composite is continuous near $p$. The required chart neighbourhood with $F(U)\subseteq V$ is already part of [F1]. [F1, F2, L1, L2]
 
-3.1 The smooth case is the case $r=\infty$, which includes $r=1$; the assertion [given, step 2.1] on an open set follows by applying the pointwise statement at every point. For $r=0$ the definition already requires continuity. [given, step 2.1] ∎
+2.1 A smooth map is $C^1$, and continuity on an open set also follows pointwise. The chart calculation in step 1.2 is compatible with, but not needed for, the continuity premise built into the published definition. [F1, step 1.1, step 1.2] ∎

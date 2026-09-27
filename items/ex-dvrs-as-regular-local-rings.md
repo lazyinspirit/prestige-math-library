@@ -2,13 +2,14 @@
 id: "ex-dvrs-as-regular-local-rings"
 kind: "example"
 title: "dvrs as regular local rings"
-deps: ["thm-one-dimensional-regular-local-rings-are-dvrs", "thm-associated-graded-ring-of-a-regular-local-ring"]
+deps: ["def-discrete-valuation-ring", "def-discrete-valuation", "def-valuation-on-a-field", "def-uniformising-parameter", "def-embedding-dimension-and-regular-local-ring", "def-regular-system-of-parameters", "def-associated-graded-ring-and-module"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Example 12.10, p.116"
@@ -29,14 +30,16 @@ A DVR $R$ with uniformizer $t$ and residue field $k$ is regular local of dimensi
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the example. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** A DVR $R=\{a\in K:v(a)\ge0\}$ in a field $K$, with discrete valuation $v$, uniformizer $t$ of value $1$, and residue field $k$.
 
-[F1] [[thm-one-dimensional-regular-local-rings-are-dvrs]]: A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring. Fields are excluded from the term DVR.
+[F1] A DVR is the nonnegative-value ring of a surjective integer-valued valuation; $v(ab)=v(a)+v(b)$ and $v(a^{-1})=-v(a)$ for $a\ne0$. A uniformizer has value $1$ ([[def-discrete-valuation-ring]], [[def-discrete-valuation]], [[def-valuation-on-a-field]], [[def-uniformising-parameter]]).
 
-[F2] [[thm-associated-graded-ring-of-a-regular-local-ring]]: If $(R,\mathfrak m,k)$ is regular local of dimension $d$, any cotangent basis induces a graded isomorphism $k[X_1,\ldots,X_d]\cong\operatorname{gr}_{\mathfrak m}R$. Conversely, if the associated graded ring of a nonzero Noetherian local ring is isomorphic as a graded $k$-algebra to $k[X_1,\ldots,X_d]$ with standard grading, then $R$ is regular of dimension $d$.
+[F2] Regular local means that dimension equals cotangent dimension; a minimal maximal-ideal generating tuple of that length is a regular system of parameters ([[def-embedding-dimension-and-regular-local-ring]], [[def-regular-system-of-parameters]]). The associated graded ring has degree-$n$ piece $(t^n)/(t^{n+1})$ and multiplication induced from $R$ ([[def-associated-graded-ring-and-module]]).
 
 ## Verification
 
-1.1 The DVR equivalence gives dimension-one regularity. Its maximal ideal is $(t)$ and $t\notin(t^2)$, since otherwise cancellation would make the nonunit $t$ a unit. Thus its cotangent basis is the class of $t$. [F1, algebra]
+1.1 Every nonzero $a\in R$ is $t^{v(a)}u$ with $v(u)=0$, so $u$ is a unit. Thus the nonunits form $(t)$, the unique maximal ideal. In each nonzero ideal, choose an element of least valuation; it divides every element of that ideal and hence generates it. The zero ideal is principal too, so $R$ is Noetherian. A nonzero proper prime contains some $t^nu$ with $n\ge1$, hence contains $t$ and equals $(t)$. Since $R\subseteq K$ is a domain and $(t)\ne0$, its only primes are $(0)$ and $(t)$, giving dimension one. These choices are of one element for a fixed ideal, not of a family. [F1, given, algebra]
 
-2.1 For every $n\ge0$, multiplication by $t^n$ identifies $k$ with $(t^n)/(t^{n+1})$: injectivity follows by cancellation and surjectivity by principality. Products of these classes are powers of the degree-one class, so the graded map $k[T]\to\operatorname{gr}_{(t)}R$ is an isomorphism, also as given by the regular graded theorem. [F2, step 1.1, algebra] ∎
+2.1 Since $t\notin(t^2)$ by valuation, the map $k=R/(t)\to(t)/(t^2)$ sending $a+(t)$ to $at+(t^2)$ is bijective: surjectivity is immediate, and cancellation proves injectivity. Thus the cotangent dimension is one, $R$ is regular local, and its minimal generating tuple $(t)$ is a regular system of parameters. [F1, F2, step 1.1, algebra]
+
+3.1 For each $n\ge0$, the map $a+(t)\mapsto at^n+(t^{n+1})$ is well-defined and identifies $k$ with $(t^n)/(t^{n+1})$, again by cancellation and principality. Multiplication of these classes agrees with polynomial multiplication. Hence the graded map $k[T]\to\operatorname{gr}_{(t)}R$ sending $T$ to $t+(t^2)$ is an isomorphism in every degree, and therefore an isomorphism of graded rings. No choice principle is used. [F2, step 1.1, step 2.1, algebra] ∎

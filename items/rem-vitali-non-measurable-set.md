@@ -5,18 +5,18 @@ title: "The Vitali set: a non-measurable subset of $\\mathbb{R}$"
 status: published
 origin: session
 proved_here: false
-deps: [rem-lebesgue-measure-and-integral]
-justified_by: []
-forward_refs: [def-axiom-of-choice, rem-choice-ledger]
-aliases: [rem-vitali-set]
-landmark: true
-short: "A choice set for R/Q is not Lebesgue measurable, and choice beyond ZF+DC is required"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
+    date: 2026-09-26
+    scope: "Current statement and citations; Shelah lower bound checked through Karagila summary; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
+deps: [rem-lebesgue-measure-and-integral]
+justified_by: []
+forward_refs: [def-axiom-of-choice, rem-choice-ledger, thm-vitali-sets-exist-under-choice-on-r-over-q, thm-a-vitali-set-is-not-lebesgue-measurable]
+aliases: [rem-vitali-set]
+landmark: true
+short: "A choice set for R/Q is not Lebesgue measurable, and choice beyond ZF+DC is required"
 sources:
   scraped: []
   references:
@@ -28,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Solovay_model"
     - title: "M. Foreman and F. Wehrung, The Hahn-Banach theorem implies the existence of a non-Lebesgue measurable set, Fund. Math. 138 (1991) 13-19"
       url: "https://eudml.org/doc/211870"
+    - title: "S. Shelah, Can you take Solovay's inaccessible away?, Israel J. Math. 48 (1984), 1-47"
+      url: "https://link.springer.com/article/10.1007/BF02760522"
+    - title: "A. Karagila, Zornian Functional Analysis, Theorem 8 and Section 3.2"
+      url: "https://arxiv.org/abs/2010.15632"
 pipeline_run: null
 ---
 
@@ -58,20 +62,21 @@ what Solovay's construction consumes, and by Shelah it cannot be removed.
 
 ## Remarks
 
-**Not proved in this library.** It is recorded with citations and used in no
-proof here.
+**Proved later in this library.** This remark records the argument without a
+local proof. [[thm-vitali-sets-exist-under-choice-on-r-over-q]] constructs the
+selector from AC, and [[thm-a-vitali-set-is-not-lebesgue-measurable]] proves
+its nonmeasurability using the published Lebesgue measure.
 
-**What would prove it.** The countable additivity and translation invariance of
-Lebesgue measure ([[rem-lebesgue-measure-and-integral]]), plus a choice function
-on the family of cosets ([[def-axiom-of-choice]]). The argument itself is three
-lines; the measure it argues about is what this library lacks.
+**What the proof uses.** Countable additivity and translation invariance of
+Lebesgue measure, plus a choice function on the family of cosets
+([[def-axiom-of-choice]]). The later theorems cited above supply these steps.
 
 **Which page it serves.** The order, Zorn and the Axiom of Choice page and its
 examples page, where the cost of choice is tracked result by result, and the
 Cantor set, Baire and measure zero page, which shows how badly a set can behave
 while remaining elementary. The Vitali set is the standard answer to "why is
-Lebesgue measure not defined on all of $\mathcal{P}(\mathbb{R})$", and it cannot
-be stated at all until a measure exists.
+Lebesgue measure not defined on all of $\mathcal{P}(\mathbb{R})$". The later
+measure construction makes that obstruction precise.
 
 **Where it sits in the choice ledger.** It needs a choice principle strictly
 beyond dependent choice, which is a strong statement in a library that otherwise

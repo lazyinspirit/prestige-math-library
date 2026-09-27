@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -53,6 +57,6 @@ For the quotient by integer translation, $q:\mathbb R\to\mathbb R/\mathbb Z$ is 
 
 2.1 For an **open** interval $I$ of length below $1$ the translates $I+k$, $k\in\mathbb Z$, are pairwise disjoint, since two points of $I$ differ by less than $1$ while distinct integer translates differ by at least $1$ in the order of [F5]; the preimage $q^{-1}(q[I])=\bigcup_{k\in\mathbb Z}(I+k)$ is then a union of open sets, so $q[I]$ is open and evenly covered. Openness of $I$ is required and not cosmetic: for $I=[0,\tfrac12]$ the preimage $\bigcup_{k\in\mathbb Z}[k,k+\tfrac12]$ is not open, so $q[I]$ is not even a neighbourhood. [step 1.1, F3, F4, F5]
 
-3.1 Verify directly that translations are deck transformations and that every deck transformation is the unique integer translation determined by the image of zero, without computing the fundamental group of the quotient. [step 2.1, F2, F3, F1]
+3.1 Each integer translation $\tau_n(x)=x+n$ is a homeomorphism satisfying $q\tau_n=q$. The intervals in step 2.1 show that this is a covering-space action of $\mathbb Z$ on $\mathbb R$. Since $\mathbb R$ is path-connected by straight-line paths, [F1] identifies the entire deck group with these translations. More explicitly, a deck transformation $h$ has $h(0)\in q^{-1}(q(0))=\mathbb Z$; the translation $\tau_{h(0)}$ agrees with $h$ at $0$, and the one-point determination used in [F1] makes them equal. Distinct integers give distinct translations. [step 2.1, F1, F2, F3]
 
 4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎

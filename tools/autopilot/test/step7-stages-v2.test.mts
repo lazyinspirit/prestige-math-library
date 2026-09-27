@@ -23,7 +23,10 @@ function fixture() {
 test('Step 7 exposes all ten phases with one adjudicator per batch and exactly three owner units',()=>{
   const f=fixture();try {
     assert.deepEqual(f.stages.map(s=>s.id),['7-scope','7.1-adjudicate','7.2-impact','7.3-certify','7.4-rejudge','7.5-adjudicate','7.6-impact','7.7-certify','7.8-gate','7.9-repair','7.10-gate']);
-    for(const id of ['7.1-adjudicate','7.5-adjudicate'])assert.deepEqual(f.stage(id).units(f.ctx),['1','2']);
+    for(const id of ['7.1-adjudicate','7.5-adjudicate']){
+      assert.deepEqual(f.stage(id).units(f.ctx),['1','2']);
+      assert.equal(f.stage(id).modelProfile,MODEL_PROFILE_NAMES.astraMedium);
+    }
     for(const id of ['7.2-impact','7.6-impact','7.9-repair']) {
       const stage=f.stage(id);assert.deepEqual(stage.units(f.ctx),['1','2','3']);assert.equal(stage.modelProfile,MODEL_PROFILE_NAMES.solXHigh);
       assert.equal(stage.concurrency,3);

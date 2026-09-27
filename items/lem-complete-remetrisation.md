@@ -10,7 +10,7 @@ provenance:
 deps: [def-complete-metric-space, def-equivalent-metrics, def-metric-topology, def-metric-space,
        def-metric-continuity, thm-metric-continuity-characterisations,
        def-isometry-and-metric-embedding, lem-isometry-is-an-embedding,
-       thm-complete-subspace-iff-closed, thm-metric-sequential-closure,
+       thm-complete-subspace-iff-closed,
        def-cauchy-in-metric, def-metric-convergence, lem-metric-nonnegativity,
        def-injection-surjection-bijection, lem-real-line-is-a-metric-space, def-interval,
        thm-cauchy-criterion-via-lub, lem-limit-unique, thm-algebra-of-limits,
@@ -22,12 +22,12 @@ landmark: true
 short: "complete metrizability: invariance, closed subspaces, $(0,\\infty)$"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -80,7 +80,7 @@ genuinely different rather than merely stated differently.
 
 [L2] The subspace metric is the restriction, $d_A = d \restriction (A \times A)$; so a sequence in $A$ is $d_A$-Cauchy exactly when it is $d$-Cauchy, and converges to $a \in A$ in $(A,d_A)$ exactly when it converges to $a$ in $(X,d)$ ([[def-isometry-and-metric-embedding]], [[def-cauchy-in-metric]], [[def-metric-convergence]]).
 
-[L3] A complete subspace of any metric space is closed, and a closed subspace of a complete space is complete ([[thm-complete-subspace-iff-closed]]).
+[L3] A closed subspace of a complete metric space is complete, without a choice assumption ([[thm-complete-subspace-iff-closed]]).
 
 [L4] An isometric embedding $f$ satisfies $d_Y(f(u),f(v)) = d_X(u,v)$, and a subset $U$ of its source is open exactly when $f[U]$ is open in the image with its subspace metric ([[def-isometry-and-metric-embedding]], [[lem-isometry-is-an-embedding]]).
 
@@ -89,8 +89,6 @@ genuinely different rather than merely stated differently.
 [L6] $\mathbb{R}$ under $|x-y|$ is a metric space ([[lem-real-line-is-a-metric-space]]); every Cauchy sequence of reals converges ([[thm-cauchy-criterion-via-lub]], [[def-cauchy-in-metric]]) and the limit of a real sequence is unique ([[lem-limit-unique]], [[def-real-limit]]).
 
 [L7] Limits of reals preserve non-strict inequalities, are additive and are multiplicative ([[lem-limit-preserves-order]], [[thm-algebra-of-limits]]); and $1/(k+2) \to 0$ ([[cor-archimedean-reciprocal]]).
-
-[L8] A subset of a metric space is closed exactly when it is sequentially closed ([[thm-metric-sequential-closure]]).
 
 [L9] For $x > 0$ the reciprocal $1/x$ is positive, $1/x = 1/y$ forces $x = y$, and $y > a/2 > 0$ gives $1/(ay) < 2/a^2$ ([[lem-of-inverse-positive]], [[prop-of-reciprocal-order]]).
 
@@ -110,7 +108,7 @@ genuinely different rather than merely stated differently.
 
 1.5 Let $a \in P$ and let $\varepsilon > 0$ be real; put $\delta := \min\{\, a/2,\ \varepsilon/(1 + 2/a^2) \,\}$, a positive real. For $y \in P$ with $|a - y| < \delta$ one has $y > a - a/2 = a/2$, hence $ay > a^2/2$ and $\sigma(a,y) = |a-y|/(ay) < 2|a-y|/a^2$, so $\rho_P(a,y) < |a-y| \cdot (1 + 2/a^2) < \varepsilon$. [L5, L9, algebra]
 
-1.6 The sequence $x_k := 1/(k+2)$ has all its terms in $P$ and converges in $\mathbb{R}$ to $0$, which is not in $P$; so $P$ is not sequentially closed in $\mathbb{R}$ and therefore not closed in $(\mathbb{R}, |x-y|)$. [L6, L7, L8, L9]
+1.6 The sequence $x_k := 1/(k+2)$ has all its terms in $P$ and converges in $\mathbb{R}$ to $0$, which is not in $P$. It is $d$-Cauchy: given $\varepsilon>0$, choose $K$ so that $x_k<\varepsilon/2$ for $k\ge K$; then $d(x_m,x_n)\le x_m+x_n<\varepsilon$ for $m,n\ge K$. It has no limit in $P$, since any such limit would also be a limit in $\mathbb{R}$, where limits are unique. [L5, L6, L7, L9]
 
 1.7 For claim 2 let $\rho$ be as in [A1]. Since $\mathcal{T}_\rho = \mathcal{T}_d$ and $A$ is closed in $(X,d)$, the set $A$ is closed in $(X,\rho)$ as well, so $(A, \rho_A)$ is complete by [L3], $\rho_A$ being the restriction of $\rho$ to $A \times A$. [A1, L2, L3]
 
@@ -122,7 +120,7 @@ genuinely different rather than merely stated differently.
 
 2.4 Claim 3, topology: by step 1.4 the identity $(P,\rho_P) \to (P,d)$ satisfies the first condition of step 1.1 with $\delta := \varepsilon$, and by step 1.5 the identity $(P,d) \to (P,\rho_P)$ satisfies the second; so $\mathcal{T}_{\rho_P} = \mathcal{T}_d$. [step 1.1, step 1.4, step 1.5]
 
-2.5 Claim 3, failure of completeness for $d$: were $(P,d)$ complete, [L3] would make $P$ closed in $(\mathbb{R}, |x-y|)$, contradicting step 1.6. So $(P,d)$ is not complete. [step 1.6, L2, L3, L6]
+2.5 Claim 3, failure of completeness for $d$: step 1.6 supplies a $d$-Cauchy sequence in $P$ with no limit in $P$. Hence $(P,d)$ is not complete. [step 1.6, L2]
 
 2.6 Claim 3, completeness of $\rho_P$: let $(x_k)$ be a $\rho_P$-Cauchy sequence in $P$. By the two inequalities of step 1.4 both $(x_k)$ and $(1/x_k)$ are Cauchy sequences of reals, so by [L6] they converge, say $x_k \to L$ and $1/x_k \to c$; and $L \ge 0$ and $c \ge 0$, all terms being positive. [step 1.3, step 1.4, L2, L6, L7]
 

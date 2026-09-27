@@ -2,13 +2,7 @@
 id: "thm-central-character-summands-split-into-linkage-blocks"
 kind: "theorem"
 title: "Central-character summands refine into linkage blocks"
-deps: ["def-integral-weyl-group-of-a-weight", "lem-integral-reflection-orbits-are-linkage-equivalence-classes", "lem-extensions-between-distinct-o-linkage-classes-split", "lem-o-modules-split-across-separated-simple-classes", "thm-verma-embedding-for-an-arbitrary-positive-root", "thm-verma-module-has-a-unique-simple-quotient", "cor-central-characters-are-dot-weyl-orbits"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "def-integral-weyl-group-of-a-weight", "lem-integral-reflection-orbits-are-linkage-equivalence-classes", "lem-extensions-between-distinct-o-linkage-classes-split", "lem-o-modules-split-across-separated-simple-classes", "thm-verma-embedding-for-an-arbitrary-positive-root", "thm-verma-module-has-a-unique-simple-quotient", "cor-central-characters-are-dot-weyl-orbits"]
 sources:
   references:
     - title: "§1.13 pp.30–32 and §4.9 pp.83–84"
@@ -19,9 +13,20 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Use the splitting lemma for existence. For indecomposability, an integral reflection with nonzero pairing gives an embedding in one direction; the containing Verma is indecomposable by its unique highest line. Its two simple labels therefore belong to the same categorical summand. Iterate generators; zero pairing is a fixed point"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-04-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -29,7 +34,7 @@ For a linkage class $C=W_\lambda\cdot\lambda$, let $\mathcal O_C$ be the full su
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
 [F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. For a weight $\lambda$, define $$\Phi_\lambda=\{\alpha\in\Phi:\langle\lambda+\rho,\alpha^\vee\rangle\in\mathbb Z\},\qquad W_\lambda=\langle s_\alpha:\alpha\in\Phi_\lambda\rangle\subset W.$$ Reflections and coroots are those of def-root-reflections-and-the-weyl-group-action, with the shift from def-weyl-vector-rho-for-a-chosen-positive-system. The **integral-reflection linkage class** through $\lambda$ is $W_\lambda\cdot\lambda$. The word integral includes zero and negative integral pairings. If $\Phi_\lambda$ is empty the generated group is $\{1\}$. This definition uses generating reflections; no identification with a root-lattice-coset stabilizer is assumed. ([[def-integral-weyl-group-of-a-weight]])
 
@@ -43,7 +48,7 @@ For a linkage class $C=W_\lambda\cdot\lambda$, let $\mathcal O_C$ be the full su
 
 [F6] The proper submodule $J(\lambda)$ which is the sum of all proper submodules is the unique maximal submodule of $M(\lambda)$. The quotient $L(\lambda):=M(\lambda)/J(\lambda)$ is simple and is its unique simple quotient. ([[thm-verma-module-has-a-unique-simple-quotient]])
 
-[F7] Let $\chi_\lambda$ and $\chi_\mu$ be the central characters obtained from highest weights $\lambda$ and $\mu$. Then $$\chi_\lambda=\chi_\mu \quad \text{if and only if} \quad \mu\in W\cdot \lambda,$$ where $W\cdot \lambda:=\{w(\lambda+\rho)-\rho : w\in W\}$. ([[cor-central-characters-are-dot-weyl-orbits]])
+[F7] Under the Axiom of Choice, let $\chi_\lambda$ and $\chi_\mu$ be the central characters obtained from highest weights $\lambda$ and $\mu$. Then $$\chi_\lambda=\chi_\mu \quad \text{if and only if} \quad \mu\in W\cdot \lambda,$$ where $W\cdot \lambda:=\{w(\lambda+\rho)-\rho : w\in W\}$. ([[cor-central-characters-are-dot-weyl-orbits]])
 
 ## Proof
 
@@ -55,6 +60,6 @@ For a linkage class $C=W_\lambda\cdot\lambda$, let $\mathcal O_C$ be the full su
 
 4.1 Every pair of labels in $C$ is joined by a finite word of these moves. Hence all its simples stay together under any categorical refinement. A nonzero object of a putative second summand has a simple composition factor, which is impossible. Therefore $\mathcal O_C$ is indecomposable, and the displayed direct sum lists all blocks. [F2, F4, step 3.1]
 
-5.1 Every label in $C$ lies in the full dot orbit, so its simple module has character $\chi_\lambda$. If a module has $r$ such composition factors, each element of $\mathfrak m_{\chi_\lambda}$ lowers its composition filtration by at least one step. Therefore $\mathfrak m_{\chi_\lambda}^r$ annihilates the module; for zero use exponent 1. This proves $\mathcal O_C\subset\mathcal O_{\chi_\lambda}$. [F7, algebra, step 4.1]
+5.1 Every label in $C$ lies in the full dot orbit, so under the stated Choice premise its simple module has character $\chi_\lambda$. If a module has $r$ such composition factors, each element of $\mathfrak m_{\chi_\lambda}$ lowers its composition filtration by at least one step. Therefore $\mathfrak m_{\chi_\lambda}^r$ annihilates the module; for zero use exponent 1. This proves $\mathcal O_C\subset\mathcal O_{\chi_\lambda}$. [F7, algebra, step 4.1]
 
 6.1 For each coset $c\in\mathfrak h^*/Q$ the sum $M^{(c)}=\bigoplus_{\mu\in c}M_\mu$ is a submodule, because root operators shift weights by roots and Cartan operators preserve weights. Their sum is direct and exhausts $M$; only finitely many occur, since finitely many weight generators occupy finitely many cosets. An integral-reflection move changes a label by an integral multiple of a root. Thus each linkage part occupies a single coset, but no converse identification with a coset stabilizer was used. [F1, algebra, step 5.1] ∎

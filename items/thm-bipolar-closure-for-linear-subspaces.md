@@ -4,16 +4,17 @@ kind: theorem
 title: "Double annihilators give norm and weak-star closures"
 status: published
 origin: pipeline
-deps: ["def-weak-star-topology", "def-annihilator-and-preannihilator", "lem-finite-evaluations-separate-from-a-dual-subspace", "cor-annihilator-detects-closure"]
+deps: ["def-axiom-of-choice", "def-weak-star-topology", "def-annihilator-and-preannihilator", "lem-finite-evaluations-separate-from-a-dual-subspace", "cor-annihilator-detects-closure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Bühler–Salamon, Functional Analysis, Corollary 3.26(i)–(iii), p.130; Corollary 2.55, p.84 (real source; K-linear finite-coordinate proof covers C)"
@@ -23,7 +24,9 @@ proof_strategy: "Every evaluation at x in preannihilator N vanishes on N and has
 
 ## Statement
 
-Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a normed $X$ and a linear subspace $N\le X^*$, $$({}^\perp N)^\perp=\overline N^{\sigma(X^*,X)}.$$ Consequently $N$ is weak-star closed if and only if $N=({}^\perp N)^\perp$, and weak-star dense in $X^*$ if and only if ${}^\perp N=\{0\}$. For a linear subspace $M\le X$, the primal formula is ${}^\perp(M^\perp)=\overline M^{\|\cdot\|}$.
+Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a normed $X$ and a linear subspace $N\le X^*$, $$({}^\perp N)^\perp=\overline N^{\sigma(X^*,X)}.$$ Consequently $N$ is weak-star closed if and only if $N=({}^\perp N)^\perp$. If ${}^\perp N=\{0\}$, then $N$ is weak-star dense in $X^*$.
+
+**Assume the Axiom of Choice** ([[def-axiom-of-choice]]) for the remaining conclusions. Then $N$ is weak-star dense in $X^*$ if and only if ${}^\perp N=\{0\}$. For a linear subspace $M\le X$, the primal formula is ${}^\perp(M^\perp)=\overline M^{\|\cdot\|}$.
 
 ## Facts & Assumptions
 
@@ -35,7 +38,7 @@ Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a normed $X$ and a linear subspace
 
 [F3] From [[lem-finite-evaluations-separate-from-a-dual-subspace]], with its stated hypotheses: Let $\mathbb K=\mathbb R$ or $\mathbb C$. Let $X$ be normed, $N\le X^*$ a linear subspace, and $x_1,\ldots,x_n\in X$ with $n\ge1$. Define $E(f)=(f(x_1),\ldots,f(x_n))$. If $f_0\in X^*$ satisfies $E(f_0)\notin E(N)$, there is $x\in\operatorname{span}\{x_1,\ldots,x_n\}$ such that $g(x)=0$ for all $g\in N$ and $f_0(x)=1$.
 
-[F4] From [[cor-annihilator-detects-closure]], with its stated hypotheses: For every linear subspace $M\subseteq X$, $\overline M=\bigcap_{f\in M^\perp}\ker f.$
+[F4] Under the Axiom of Choice, [[cor-annihilator-detects-closure]] gives for every linear subspace $M\subseteq X$ the identity $\overline M=\bigcap_{f\in M^\perp}\ker f$; its proof uses Hahn–Banach separation.
 
 ## Proof
 
@@ -45,6 +48,6 @@ Let $\mathbb K=\mathbb R$ or $\mathbb C$. For a normed $X$ and a linear subspace
 
 2.1 Finite-evaluation separation supplies $x\in{}^\perp N$ with $f_0(x)=1$. Hence $f_0\notin({}^\perp N)^\perp$. Together with step 1.1, this proves equality. [F2, F3, step 1.1, step 1.2]
 
-3.1 A set is closed exactly when it equals its closure, so the first equivalence follows in both directions. For density, if ${}^\perp N=0$, the equality gives closure $X^*$. Conversely if the closure is $X^*$, any $x\in{}^\perp N$ is annihilated by all of $X^*$. The published primal formula with $M=0$ says ${}^\perp X^*=0$, so $x=0$. [F2, F4, step 2.1]
+3.1 A set is closed exactly when it equals its closure, so the first equivalence follows in both directions. If ${}^\perp N=0$, the equality gives closure $X^*$ without choice. Conversely, assume AC and suppose the closure is $X^*$; then any $x\in{}^\perp N$ is annihilated by all of $X^*$. The primal formula [F4] with $M=0$ says ${}^\perp X^*=0$, so $x=0$. [F2, F4, step 2.1]
 
-4.1 The primal formula in the statement is exactly the published annihilator-closure identity, with the preannihilator notation unpacked. It also checks the extremes $N=0$ and $N=X^*$: their closures and double annihilators are respectively $0$ and $X^*$. For $X=0$ these coincide. [F2, F4, step 2.1] ∎
+4.1 Under AC, the primal formula in the statement is exactly [F4], with the preannihilator notation unpacked. The weak-star identity itself checks the extremes $N=0$ and $N=X^*$: their closures and double annihilators are respectively $0$ and $X^*$. For $X=0$ these coincide. [F2, F4, step 2.1] ∎

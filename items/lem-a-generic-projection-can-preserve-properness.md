@@ -7,15 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-secant-and-tangent-direction-maps-of-an-euclidean-embedding,
-       lem-a-generic-linear-projection-preserves-injectivity-and-immersion]
+deps: [def-secant-and-tangent-direction-maps-of-an-euclidean-embedding]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (lem-a-generic-projection-can-preserve-properness). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,12 +40,12 @@ projection $P_u\circ F$ is a proper injective immersion.
 
 **Given:** A smooth embedding $F=(g,\rho):M\to\mathbb R^N\times\mathbb R$ with $g(M)$ bounded and $\rho$ proper.
 
-[F1] The secant and tangent direction maps record exactly the projection directions that can destroy injectivity or immersion ([[def-secant-and-tangent-direction-maps-of-an-euclidean-embedding]], [[lem-a-generic-linear-projection-preserves-injectivity-and-immersion]]).
+[F1] Secant directions are normalized differences of distinct image points, and tangent directions are normalized images of nonzero tangent vectors ([[def-secant-and-tangent-direction-maps-of-an-euclidean-embedding]]).
 
 ## Proof
 **Proof technique:** direct.
 
-1.1 The injectivity and immersion assertions follow exactly as in the generic-projection lemma recorded in [F1]: since $u$ is not a secant direction, distinct points cannot collapse under $P_u$, and since $u$ is not a tangent direction, no nonzero tangent vector lies in the kernel of $d(P_u\circ F)$. [F1, given]
+1.1 The kernel of the orthogonal projection $P_u$ is $\mathbb Ru$. If distinct points $p,q$ collapsed, then $F(p)-F(q)$ would be a nonzero scalar multiple of $u$, making $u$ a secant direction up to sign, contrary to the hypothesis. If the differential killed a nonzero tangent vector $v$, then $dF_p(v)$ would lie in $\mathbb Ru$; since $F$ is an immersion, this vector is nonzero and makes $u$ a tangent direction up to sign. Thus $P_u\circ F$ is injective and immersive directly from [F1], with no generic-existence theorem invoked. [F1, given, algebra]
 
 1.2 Let $e=(0,1)$ be the last-coordinate unit vector and put $e':=P_u(e)$. The hypothesis that $u$ is not parallel to $e$ is exactly $e'\ne0$. Decompose $u^\perp=\mathbb Re'\oplus(e')^\perp$. Since $$P_u(F(p))=P_u(g(p),0)+\rho(p)e',$$ its $(e')^\perp$-component is bounded. Its scalar component along $e'/\|e'\|$ is $$\rho'(p)=\|e'\|\rho(p)+b(p),$$ where $b$ is bounded. [given, construct, algebra]
 

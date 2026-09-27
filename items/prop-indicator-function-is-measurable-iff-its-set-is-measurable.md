@@ -9,13 +9,17 @@ provenance:
   proof: ai-altered
 deps: [def-measurable-function-between-measurable-spaces]
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   references:
     - title: "Sheldon Axler, Measure, Integration and Real Analysis, Section 2B"
       url: "https://measure.axler.net/MIRA.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (prop-indicator-function-is-measurable-iff-its-set-is-measurable). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
@@ -37,13 +41,8 @@ is measurable as a map $X \to \mathbb{R}$ if and only if $E \in \mathcal{A}$.
 
 **Proof technique:** direct.
 
-1.1 If $E \in \mathcal{A}$, then the preimage of any Borel set $B \subseteq [given, L1]
-\mathbb{R}$ under $\mathbf{1}_E$ is one of $\varnothing$, $X$, $E$, or $X \setminus E$, because $\mathbf{1}_E$ takes only the values $0$ and $1$. Each of those sets lies in $\mathcal{A}$, so $\mathbf{1}_E$ is measurable by [L1]. [given, L1]
+1.1 If $E \in \mathcal{A}$, then the preimage of any Borel set $B \subseteq \mathbb{R}$ under $\mathbf{1}_E$ is one of $\varnothing$, $X$, $E$, or $X \setminus E$, because $\mathbf{1}_E$ takes only the values $0$ and $1$. Each of those sets lies in $\mathcal{A}$, so $\mathbf{1}_E$ is measurable by [L1]. [given, L1]
 
-1.2 If $\mathbf{1}_E$ is measurable, then [given, L1]
-
-$$E = \mathbf{1}_E^{-1}((1/2,\infty)),$$
-
-and $(1/2,\infty)$ is a Borel subset of $\mathbb{R}$. Hence [L1] gives $E \in \mathcal{A}$. [given, L1]
+1.2 If $\mathbf{1}_E$ is measurable, then $E = \mathbf{1}_E^{-1}((1/2,\infty))$. The interval $(1/2,\infty)$ is Borel, so [L1] gives $E \in \mathcal{A}$. [given, L1]
 
 2.1 Steps 1.1 and 1.2 prove the equivalence. [step 1.1, step 1.2] ∎

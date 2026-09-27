@@ -9,11 +9,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (cor-iid-finite-variance-weak-law). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Section 2.2.1, p. 58"
@@ -35,7 +36,7 @@ and $S_n/n\to\mu$ in $L^2$ and in probability. Also $\mathbb P(|S_n/n-\mu|\ge\va
 
 [F2] [[thm-chebyshev-weak-law-for-uncorrelated-arrays]]: For each $n\ge1$, let $X_{n,1},\ldots,X_{n,r_n}$ be square-integrable real random variables on one probability space, pairwise uncorrelated within the row, where $r_n\ge0$ is finite. Set $S_n=\sum_{k=1}^{r_n}X_{n,k}$ and let $b_n>0$ be deterministic. If $v_n:=b_n^{-2}\sum_{k=1}^{r_n}\operatorname{Var}(X_{n,k})\longrightarrow0,$ then $(S_n-\mathbb ES_n)/b_n\to0$ in $L^2$ and in probability. More precisely, its second moment is $v_n$, and its probability of absolute value at least $\varepsilon>0$ is at most $v_n/\varepsilon^2$. No independence between rows is required.
 
-[F3] [[thm-factorization-of-expectations-for-independent-variables]]: Let $n\ge1$, let $X_0,\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\mathbb R\to\mathbb R$ be Borel measurable for each $i<n$. 1. If every $g_i$ is nonnegative, then $\mathbb E\left[\prod_{i<n}g_i(X_i)\right]=\prod_{i<n}\mathbb E[g_i(X_i)]$ in $[0,+\infty]$. 2. If every $g_i(X_i)$ is integrable, then $\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\mathbb R$.
+[F3] For $n\ge1$, if $X_0,\dots,X_{n-1}$ are independent real random variables and $g_i:\mathbb R\to\mathbb R$ are Borel measurable with each $g_i(X_i)$ integrable, then $\prod_{i<n}g_i(X_i)$ is integrable and $\mathbb E[\prod_{i<n}g_i(X_i)]=\prod_{i<n}\mathbb E[g_i(X_i)]$ in $\mathbb R$ ([[thm-factorization-of-expectations-for-independent-variables]]).
 
 ## Proof
 

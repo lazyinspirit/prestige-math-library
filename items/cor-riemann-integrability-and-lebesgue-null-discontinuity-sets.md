@@ -13,9 +13,6 @@ aliases: []
 landmark: true
 short: "Riemann integrability and Lebesgue nullity"
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -24,6 +21,16 @@ sources:
     - title: "T. Tao, An Introduction to Measure Theory (GSM 126), Section 1.2"
       url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
 pipeline_run: null
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -38,12 +45,11 @@ pipeline_run: null
    $f$ is Riemann integrable if and only if $D$ is Lebesgue measurable with
    $\lambda_m(D) = 0$.
 
-**The choice ledger of the cited criteria is inherited, not discharged.** In
-[[thm-lebesgue-criterion]] the implication from integrability to nullity of $D$
-uses countable choice and the converse implication is a theorem of ZF; the
-translation performed here rests on the construction of $\lambda$, which uses
-countable choice in both directions, so the statement above carries the
-hypothesis throughout.
+**The choice premise here belongs to measure translation.** Both implications
+of [[thm-lebesgue-criterion]] are now proved in ZF. The translation between
+elementary interval-cover nullity and Lebesgue-measure nullity used here rests
+on the construction of $\lambda$ and requires countable choice in the cited
+suppliers, so the statement above retains that hypothesis throughout.
 
 ## Facts & Assumptions
 

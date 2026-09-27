@@ -1,26 +1,25 @@
 ---
 id: thm-heine-cantor-r
 kind: theorem
-title: "Heine-Cantor in $\\mathbb{R}$: a continuous real function on a compact subset of $\\mathbb{R}$ is uniformly continuous, proved $\\mathbb{R}$-natively from sequential compactness"
+title: "Heine-Cantor in $\\mathbb{R}$: a continuous real function on a compact subset of $\\mathbb{R}$ is uniformly continuous"
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-uniform-continuity-real, def-continuity-real, lem-real-and-metric-notions-agree, thm-sequential-criterion-for-continuity, thm-compact-iff-sequentially-compact-r, def-open-cover-r, def-real-limit, def-sequence, lem-index-map-grows, def-countable-choice, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-triangle-inequality, lem-of-abs-value, lem-rat-embeds-dense, def-ordered-field]
+deps: [def-uniform-continuity-real, def-continuity-real, lem-real-and-metric-notions-agree, def-open-cover-r, lem-of-triangle-inequality, lem-of-abs-value]
 justified_by: []
 aliases: [thm-uniform-continuity-on-compact-r]
-forward_refs: [cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval, cex-x-squared-is-not-uniformly-continuous-on-r]
 landmark: true
 short: "Heine-Cantor in R"
-proof_strategy: contradiction
+proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -45,63 +44,37 @@ is uniformly continuous on $K$ ([[def-uniform-continuity-real]]).
 
 **This theorem is stated twice in this library, on purpose.** Its metric-space
 twin is [[thm-heine-cantor-metric]], proved there from the cover machinery of
-metric spaces; the proof below is $\mathbb{R}$-native and runs through
-[[thm-compact-iff-sequentially-compact-r]], which is order-based. That the two
+metric spaces; the proof below uses the open-cover definition of compactness
+in $\mathbb{R}$ directly. That the two
 statements are the same statement in two vocabularies is
 [[lem-real-and-metric-notions-agree]], clauses 1, 2 and 5, immediately above.
 
-**The choice cost, named.** The proof invokes the axiom of countable choice
-([[def-countable-choice]]) exactly once, at step 3.1, to select one bad pair of
-points from each of countably many nonempty sets. The backward implication of
-[[thm-compact-iff-sequentially-compact-r]] also spends countable choice, and
-that item names its own uses; the forward implication used here, from compact to
-sequentially compact, does not. No claim is made that the axiom is necessary
-for either.
+**Choice-free proof.** The argument below uses the open-cover definition of compactness directly. It considers every continuity neighbourhood at once and extracts only a finite subcover, so no countable or global choice function is selected.
 
 ## Facts & Assumptions
 
-**Given:** A compact set $K \subseteq \mathbb{R}$ and a function $f : K \to \mathbb{R}$ continuous on $K$.
+**Given:** A compact set $K\subseteq\mathbb R$ and a continuous function $f:K\to\mathbb R$.
 
-[L1] Uniform continuity on $K$: for every real $\varepsilon > 0$ there is a real $\delta > 0$ such that all $x, x' \in K$ with $|x - x'| < \delta$ satisfy $|f(x) - f(x')| < \varepsilon$. Its negation: there is a real $\varepsilon_0 > 0$ such that for every real $\delta > 0$ some pair $x, x' \in K$ has $|x - x'| < \delta$ and $|f(x) - f(x')| \ge \varepsilon_0$ ([[def-uniform-continuity-real]], [[def-ordered-field]]).
+[L1] Continuity at $x\in K$ means that for every $\eta>0$ there is $r>0$ such that $|f(y)-f(x)|<\eta$ whenever $y\in K$ and $|y-x|<r$ ([[def-continuity-real]]).
 
-[L2] A compact subset of $\mathbb{R}$ is sequentially compact: every sequence with all terms in $K$ has a subsequence converging to a point of $K$ ([[thm-compact-iff-sequentially-compact-r]], [[def-open-cover-r]], [[def-sequence]], [[def-real-limit]]).
+[L2] Every open cover of compact $K$ has a finite subcover ([[def-open-cover-r]]).
 
-[L3] Countable choice: for a family $(P_k)_{k \in \mathbb{N}}$ of nonempty sets there is a function on $\mathbb{N}$ picking an element of each ([[def-countable-choice]]).
+[L3] Uniform continuity means that for every $\varepsilon>0$ one $\delta>0$ works for every pair of points of $K$ at distance less than $\delta$ ([[def-uniform-continuity-real]]).
 
-[L4] A strictly increasing index map satisfies $n_j \ge j$ ([[lem-index-map-grows]], [[def-sequence]]).
-
-[L5] Archimedean property in reciprocal form: for every real $\eta > 0$ there is a natural $n \ge 1$ with $1/n < \eta$; and $0 < s \le t$ implies $1/t \le 1/s$ ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-inverse-positive]]).
-
-[L6] Sequential criterion, the choice-free direction: if $f$ is continuous at $p \in K$ and $(z_j)$ has terms in $K$ with $z_j \to p$, then $f(z_j) \to f(p)$ ([[thm-sequential-criterion-for-continuity]], [[def-continuity-real]]).
-
-[L7] Triangle inequality and absolute value: $|u + v| \le |u| + |v|$, $|{-u}| = |u|$, $|u| \ge 0$ ([[lem-of-triangle-inequality]], [[lem-of-abs-value]]).
-
-[L8] Convergence of real sequences is tested at rational $\varepsilon > 0$, and below every positive real lies a positive rational, so the test may equally be run at every real $\varepsilon > 0$ ([[def-real-limit]], [[lem-rat-embeds-dense]]).
+[L4] The real absolute value satisfies the triangle inequality ([[lem-of-triangle-inequality]], [[lem-of-abs-value]]).
 
 ## Proof
 
-**Proof technique:** contradiction.
+**Proof technique:** direct.
 
-1.1 Suppose $f$ is not uniformly continuous on $K$. By [L1] fix a real $\varepsilon_0 > 0$ such that for every real $\delta > 0$ there are $x, x' \in K$ with $|x - x'| < \delta$ and $|f(x) - f(x')| \ge \varepsilon_0$. [L1, assume-contra]
+1.1 If $K=\varnothing$, the assertion is immediate. Otherwise fix $\varepsilon>0$. For each pair $(x,r)$ with $x\in K$, $r>0$, and $|f(y)-f(x)|<\varepsilon/2$ for every $y\in K$ satisfying $|y-x|<2r$, put $U_{x,r}:=(x-r,x+r)$. The family of all such open intervals is an open cover of $K$: for each $x$, [L1] gives the existence of at least one admissible $r$, and $x\in U_{x,r}$. This defines the full family by a property, without selecting one radius for each $x$. [given, L1]
 
-2.1 For $k \in \mathbb{N}$ put $P_k := \{\, (x,x') \in K \times K \ : \ |x - x'| < 1/(k+1) \text{ and } |f(x) - f(x')| \ge \varepsilon_0 \,\}$. Since $1/(k+1) > 0$, step 1.1 makes every $P_k$ nonempty. [step 1.1, L5]
+2.1 By [L2], finitely many members $U_{x_1,r_1},\ldots,U_{x_m,r_m}$ cover $K$. Since $K$ is nonempty, $m\ge1$. Set $\delta=\min_{1\le i\le m}r_i>0$. [step 1.1, L2]
 
-3.1 By [L3] applied to the family $(P_k)_{k \in \mathbb{N}}$ fix a function $k \mapsto (x_k, x'_k)$ with $(x_k, x'_k) \in P_k$ for every $k$. **This is the single use of countable choice in this proof.** [step 2.1, L3, choose]
-
-4.1 $(x_k)$ is a sequence of reals with all terms in $K$, so by [L2] there are a strictly increasing $n : \mathbb{N} \to \mathbb{N}$ and $p \in K$ with $x_{n_j} \to p$. [step 3.1, L2, choose]
-
-5.1 **The second sequence converges to $p$ as well.** Let a rational $\varepsilon > 0$ be given. By [L5] and [L8] fix $J_1$ with $1/(j+1) < \varepsilon/2$ for every $j \ge J_1$, and by step 4.1 fix $J_2$ with $|x_{n_j} - p| < \varepsilon/2$ for every $j \ge J_2$. For $j \ge \max\{J_1, J_2\}$, using $(x_{n_j}, x'_{n_j}) \in P_{n_j}$ and $n_j \ge j$ from [L4], we get $|x'_{n_j} - x_{n_j}| < 1/(n_j+1) \le 1/(j+1) < \varepsilon/2$, hence $|x'_{n_j} - p| \le |x'_{n_j} - x_{n_j}| + |x_{n_j} - p| < \varepsilon$ by [L7]. So $x'_{n_j} \to p$. [step 3.1, step 4.1, L4, L5, L7, L8]
-
-6.1 The point $p$ lies in $K$ and $f$ is continuous at $p$, so [L6] applied to the two sequences of steps 4.1 and 5.1, both with terms in $K$, gives $f(x_{n_j}) \to f(p)$ and $f(x'_{n_j}) \to f(p)$. [step 4.1, step 5.1, L6]
-
-7.1 By [L8] fix a rational $\varepsilon$ with $0 < \varepsilon < \varepsilon_0/2$, and by step 6.1 fix $J$ with $|f(x_{n_j}) - f(p)| < \varepsilon$ and $|f(x'_{n_j}) - f(p)| < \varepsilon$ for every $j \ge J$. For such $j$, [L7] gives $|f(x_{n_j}) - f(x'_{n_j})| \le |f(x_{n_j}) - f(p)| + |f(p) - f(x'_{n_j})| < 2\varepsilon < \varepsilon_0$. [step 6.1, L7, L8, choose]
-
-8.1 But $(x_{n_j}, x'_{n_j}) \in P_{n_j}$ gives $|f(x_{n_j}) - f(x'_{n_j})| \ge \varepsilon_0$ for every $j$, which contradicts step 7.1. The assumption of step 1.1 is therefore false, and $f$ is uniformly continuous on $K$. [step 3.1, step 7.1, discharge-contradiction] ∎
+3.1 Let $y,z\in K$ with $|y-z|<\delta$, and choose one index $i$ with $y\in U_{x_i,r_i}$. Then $|y-x_i|<r_i<2r_i$ and, by [L4], $|z-x_i|\le|z-y|+|y-x_i|<\delta+r_i\le2r_i$. Admissibility of $(x_i,r_i)$ gives $|f(y)-f(x_i)|<\varepsilon/2$ and $|f(z)-f(x_i)|<\varepsilon/2$. Thus $|f(y)-f(z)|<\varepsilon$. The same $\delta$ works for every such pair, proving uniform continuity by [L3]. [step 1.1, step 2.1, L3, L4] ∎
 
 ## Remarks
 
-- **Where compactness is used, and where continuity is used.** Compactness is used once, in step 4.1, to extract a convergent subsequence; continuity is used once, in step 6.1, at the single point $p$ that the extraction produces. Neither can be weakened: $x \mapsto 1/x$ on $(0,1)$ is continuous on a bounded non-closed set and not uniformly continuous ([[cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval]]), and $x \mapsto x^{2}$ on $\mathbb{R}$ is continuous on a closed unbounded set and not uniformly continuous ([[cex-x-squared-is-not-uniformly-continuous-on-r]]).
+- **Where compactness is used.** Continuity supplies all admissible local balls in step 1.1; compactness extracts finitely many in step 2.1. Taking the least of their radii gives the uniform bound. No simultaneous selection over the points of $K$ is made.
 
 - **The converse is sharp.** For every noncompact $E \subseteq \mathbb{R}$ that is bounded there is a continuous function on $E$ that is not uniformly continuous, and for every noncompact $E$ there is an unbounded continuous function and a bounded continuous one with no greatest value. That is [[thm-compactness-is-necessary-for-evt-and-uniform-continuity]], later on this page, and together with this theorem it says that compactness is exactly the hypothesis these results need.
-
-- **The pairs, not the points, are what is chosen.** A common presentation selects two sequences separately and then extracts twice. Selecting the pair once, as above, keeps the count of choice applications at one and makes the second sequence's convergence a consequence rather than a second extraction.

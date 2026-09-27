@@ -13,7 +13,7 @@ export const MODELS = Object.freeze({
     family: 'openai',
   }),
   luna: Object.freeze({
-    id: process.env.LUNA_MODEL ?? 'gpt-5.6-luna',
+    id: process.env.LUNA_MODEL ?? 'gpt-6-luna',
     runner: 'codex',
     family: 'openai',
   }),
@@ -28,6 +28,7 @@ export const MODELS = Object.freeze({
 // a profile changes only the model/provider, reasoning tier and context window.
 export const MODEL_PROFILE_NAMES = Object.freeze({
   astraMedium: 'gpt-6-astra-medium',
+  lunaMax: 'gpt-6-luna-max',
   solHigh: 'gpt-6-sol-high',
   solXHigh: 'gpt-6-sol-xhigh',
   solMax: 'gpt-6-sol-max',
@@ -38,6 +39,10 @@ export const MODEL_PROFILES = Object.freeze({
   [MODEL_PROFILE_NAMES.astraMedium]: Object.freeze({
     model: MODELS.astra.id, runner: MODELS.astra.runner, family: MODELS.astra.family,
     provider: 'openai', effort: 'medium', requestedEffort: 'medium', contextWindow: 1_000_000,
+  }),
+  [MODEL_PROFILE_NAMES.lunaMax]: Object.freeze({
+    model: MODELS.luna.id, runner: MODELS.luna.runner, family: MODELS.luna.family,
+    provider: 'openai', effort: 'max', requestedEffort: 'max', contextWindow: 1_000_000,
   }),
   [MODEL_PROFILE_NAMES.solHigh]: Object.freeze({
     model: MODELS.sol.id, runner: MODELS.sol.runner, family: MODELS.sol.family,
@@ -72,6 +77,7 @@ export const LANES = Object.freeze({
 
 export const JUDGE_LINEUPS = Object.freeze({
   sol: Object.freeze([MODELS.sol.id]),
+  luna: Object.freeze([MODELS.luna.id]),
 });
 
 export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUPS).flat())]);

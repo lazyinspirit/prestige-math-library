@@ -2,13 +2,8 @@
 id: "thm-regular-local-rings-are-domains-and-cohen-macaulay"
 kind: "theorem"
 title: "regular local rings are domains and cohen macaulay"
-deps: ["lem-regular-local-domain-induction", "lem-regular-local-parameter-is-nonzerodivisor", "lem-regular-local-quotient-by-parameter-is-regular", "def-cohen-macaulay-local-module-and-ring", "def-regular-sequence-on-a-module", "def-depth-with-respect-to-an-ideal", "thm-depth-bounded-by-support-dimension"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-regular-local-domain-induction", "lem-regular-local-parameter-is-nonzerodivisor", "lem-regular-local-quotient-by-parameter-is-regular", "def-cohen-macaulay-local-module-and-ring", "def-regular-sequence-on-a-module", "def-depth-with-respect-to-an-ideal", "thm-depth-bounded-by-support-dimension"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "10.106.2–10.106.3"
@@ -18,12 +13,20 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-A regular local ring $R$ of dimension $d$ is a domain and Cohen–Macaulay. For every regular system $(x_1,\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\le c\le d$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). A regular local ring $R$ of dimension $d$ is a domain and Cohen–Macaulay. For every regular system $(x_1,\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\le c\le d$.
 
 ## Facts & Assumptions
 
@@ -45,6 +48,6 @@ A regular local ring $R$ of dimension $d$ is a domain and Cohen–Macaulay. For 
 
 ## Proof
 
-1.1 The ring is a domain. Successively apply the parameter-quotient lemma: after $c$ quotients the remaining cotangent classes form a basis, and the quotient is regular of dimension $d-c$. This starts with $c=0$ and ends with $R/\mathfrak m=k\ne0$. [F1, F3]
+1.1 Under the assumed AC, [F1] makes the ring a domain. Successively apply the parameter-quotient lemma [F3]: after $c$ quotients the remaining cotangent classes form a basis, and the quotient is regular of dimension $d-c$. This starts with $c=0$ and ends with $R/\mathfrak m=k\ne0$. [F1, F3, given]
 
 2.1 At each nonterminal stage the next parameter is a nonzerodivisor. All the quotients are nonzero, so the tuple satisfies the definition of a regular sequence. Its length is $d$, and the depth definition therefore gives $\operatorname{depth}R\ge d$; the support-dimension bound gives $\operatorname{depth}R\le d$. Thus the Cohen–Macaulay definition holds. For $d=0$, the empty tuple and the field $R$ give the same conclusion. [F2, F4, F5, F6, F7, step 1.1] ∎

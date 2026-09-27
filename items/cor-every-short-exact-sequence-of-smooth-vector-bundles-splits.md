@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles, cor-every-vector-subbundle-has-a-smooth-complement, prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map, prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]
+deps: [prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles, cor-every-vector-subbundle-has-a-smooth-complement, prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map, prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (cor-every-short-exact-sequence-of-smooth-vector-bundles-splits). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,7 +30,7 @@ sources:
 ---
 ## Statement
 
-Every short exact sequence of smooth vector bundles over one base,
+Assume the Axiom of Countable Choice. Every short exact sequence of smooth vector bundles over one base,
 
 $$0\to E\xrightarrow{i}G\xrightarrow{q}F\to 0,$$
 
@@ -37,11 +38,11 @@ admits a smooth splitting $s:F\to G$ with $q\circ s=\operatorname{id}_F$.
 
 ## Facts & Assumptions
 
-**Given:** A short exact sequence of smooth vector bundles over one base $M$.
+**Given:** The Axiom of Countable Choice and a short exact sequence of smooth vector bundles over one base $M$.
 
 [L1] Constant-rank kernels and images of bundle maps over one base are smooth subbundles ([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
 
-[L2] Every vector subbundle has a smooth complement ([[cor-every-vector-subbundle-has-a-smooth-complement]]).
+[L2] Under Countable Choice, every vector subbundle has a smooth complement ([[cor-every-vector-subbundle-has-a-smooth-complement]], [[def-countable-choice]]).
 
 [L3] A fibrewise bijective smooth bundle map over the identity is a bundle isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]]).
 

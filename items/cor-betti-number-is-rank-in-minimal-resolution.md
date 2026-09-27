@@ -2,13 +2,14 @@
 id: "cor-betti-number-is-rank-in-minimal-resolution"
 kind: "corollary"
 title: "betti number is rank in minimal resolution"
-deps: ["def-betti-numbers-of-a-finite-local-module", "lem-minimal-free-resolution-reduces-to-zero-differential"]
+deps: ["def-betti-numbers-of-a-finite-local-module", "lem-minimal-free-resolution-reduces-to-zero-differential", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (cor-betti-number-is-rank-in-minimal-resolution). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Proposition 12.27, pp.120–121"
@@ -23,7 +24,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-For every minimal degreewise finite free resolution $F_\bullet\to M$ of a finite module over a nonzero Noetherian local ring, $\beta_i^R(M)=\operatorname{rank}_RF_i$ for all $i\ge0$.
+Assume the Axiom of Choice. For every minimal degreewise finite free resolution $F_\bullet\to M$ of a finite module over a nonzero Noetherian local ring, $\beta_i^R(M)=\operatorname{rank}_RF_i$ for all $i\ge0$.
 
 ## Facts & Assumptions
 
@@ -35,6 +36,6 @@ For every minimal degreewise finite free resolution $F_\bullet\to M$ of a finite
 
 ## Proof
 
-1.1 The residue complex has zero differentials and computes $\operatorname{Tor}_i^R(k,M)$, so this Tor group is $k\otimes_RF_i$. [F2]
+1.1 Under the stated AC premise the Betti definition supplies the Tor interpretation, and [F2] makes the residue complex have zero differentials. Thus $\operatorname{Tor}_i^R(k,M)\cong k\otimes_RF_i$. [F1, F2, given]
 
 2.1 Its vector-space dimension equals the finite free rank of $F_i$. By definition this is $\beta_i^R(M)$. This holds in degree zero, in all higher degrees, and for zero terms, including the zero module. [F1, step 1.1, algebra] ∎

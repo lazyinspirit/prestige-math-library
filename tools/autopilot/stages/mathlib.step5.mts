@@ -5,8 +5,10 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { holdStep5 } from './step5-hold.mts';
 
-// Step-5 lanes: readers Sol/high, refuters Sol/xhigh,
+// Step-5 lanes: readers and refuters Luna/max,
 // group adjudicators Sol/high, and every 5b agent Sol/xhigh.
+// The live engine can reload this module while retaining an older models.mjs import.
+const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax ?? 'gpt-6-luna-max';
 const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
 const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 
@@ -50,7 +52,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-read',
       label: 'independent readers over authored content',
-      modelProfile: (plan: any) => plan.role === 'reader' ? SOL_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'reader' ? LUNA_MAX : undefined,
       pipeline: 'read',
       role: 'reader',
       units: batches,
@@ -96,7 +98,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-refute',
       label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL_XHIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? LUNA_MAX : undefined,
       pipeline: 'read',
       role: 'refuter',
       units: batches,

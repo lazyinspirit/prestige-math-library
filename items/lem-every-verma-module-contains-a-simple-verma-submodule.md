@@ -10,12 +10,13 @@ provenance:
 deps: [lem-a-nonzero-verma-homomorphism-is-injective, lem-every-nonzero-verma-submodule-contains-a-singular-vector, prop-casimir-eigenvalue-on-a-highest-weight-module, prop-weights-of-a-verma-module-lie-below-lambda]
 proof_strategy: contradiction
 verification:
-  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (lem-every-verma-module-contains-a-simple-verma-submodule). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, Exercise 8.14(ii)"
@@ -34,6 +35,8 @@ Every Verma module contains a submodule isomorphic to a simple Verma module.
 
 **Proof technique:** contradiction.
 
-1.1 If no embedded Verma submodule were simple, repeatedly choose a nonzero proper submodule and then a singular vector in it; injectivity gives an infinite strictly descending chain of embedded Vermas $M(\lambda-\beta_j)\subset M(\lambda)$. [given, assume-contra]
+1.1 Suppose no embedded Verma submodule of $M(\lambda)$ is simple. Any proper nonzero submodule of an embedded Verma contains a singular vector; its generated submodule is another embedded Verma by injectivity. A proper inclusion strictly lowers the highest weight, so successive such submodules have weights $\lambda-\beta_j$ with strictly increasing heights of $\beta_j\in Q^+$. [given, assume-contra]
 
-2.1 Their Casimir scalars equal that of $M(\lambda)$, so $2(\lambda+\rho,\beta_j)=(\beta_j,\beta_j)$. The $\beta_j$ lie in the positive lattice cone and strictly increase in height, while this positive-definite quadratic equation has only finitely many lattice solutions. This contradiction yields a simple embedded Verma module. [step 1.1, algebra, discharge-contradiction] ∎
+2.1 Every such embedded Verma has the same Casimir scalar as $M(\lambda)$, so its nonzero $\beta_j$ satisfies $2(\lambda+\rho,\beta_j)=(\beta_j,\beta_j)$. Taking real parts in the real span of the roots places $\beta_j$ on a bounded sphere centred at the real part of $\lambda+\rho$. The root lattice is discrete, so the set $F$ of its solutions is finite. [step 1.1, algebra]
+
+3.1 Let $m=|F|$. Starting with $M(\lambda)$, apply step 1.1 only $m+1$ times. Finite induction and finite choice suffice to obtain $m+1$ proper, strictly nested embedded Vermas. Their distinct nonzero weights give $m+1$ distinct members of $F$, a contradiction. Hence some embedded Verma is simple. [step 1.1, step 2.1, discharge-contradiction] ∎

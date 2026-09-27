@@ -2,16 +2,10 @@
 id: "lem-dimension-local-ring-codimension-closure"
 kind: "lemma"
 title: "Closed-point local dimension equals ambient irreducible dimension"
-deps: ["thm-dimension-equals-transcendence-degree", "def-codimension-irreducible-subvariety", "thm-local-ring-affine-variety-localization", "cor-height-plus-quotient-dimension-affine-domain", "def-height-of-a-prime-ideal"]
+deps: ["def-axiom-of-choice", "thm-dimension-equals-transcendence-degree", "def-codimension-irreducible-subvariety", "thm-local-ring-affine-variety-localization", "cor-height-plus-quotient-dimension-affine-domain", "def-height-of-a-prime-ideal"]
 provenance:
   statement: "literature-derived"
   proof: "ai-altered"
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Milne §3l, chain-height interpretation"
@@ -19,6 +13,15 @@ sources:
 status: published
 origin: "pipeline"
 proof_strategy: "Choose an affine chart at x; quotient by its maximal ideal is k and has dimension zero. Apply the height formula and the local-ring identification. Inherit Choice where used by suppliers."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -29,7 +32,7 @@ Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Clas
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [F1] If $X$ is an irreducible classical variety, then $\dim X=\operatorname{trdeg}_k k(X)<\infty$. Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Classical varieties are separated and admit finite affine covers; they may be reducible or empty unless irreducibility is specified. Irreducible means nonempty. All fibres and points below are classical closed-point fibres and points. ([[thm-dimension-equals-transcendence-degree]]).
 
@@ -37,7 +40,7 @@ Work over a fixed algebraically closed field $k$, with the Axiom of Choice. Clas
 
 [F3] Assume the Axiom of Choice. Let $X$ be a classical affine variety over an algebraically closed field $k$, let $x \in X$, and let $$ \mathfrak m_x:=\{\overline f \in k[X]:\overline f(x)=0\}. $$ Then there is a canonical isomorphism of local rings $$ \mathcal O_{X,x}\xrightarrow{\sim}k[X]_{\mathfrak m_x}. $$ ([[thm-local-ring-affine-variety-localization]]).
 
-[F4] Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\mathfrak p\in\operatorname{Spec}(A)$. Then $$ \operatorname{ht}(\mathfrak p)+\dim(A/\mathfrak p)=\dim A. $$ ([[cor-height-plus-quotient-dimension-affine-domain]]).
+[F4] Under the Axiom of Choice, if $k$ is a field, $A$ is a finite-type $k$-domain, and $\mathfrak p\in\operatorname{Spec}(A)$, then $\operatorname{ht}(\mathfrak p)+\dim(A/\mathfrak p)=\dim A$ ([[cor-height-plus-quotient-dimension-affine-domain]]).
 
 [F5] Let $R$ be a commutative ring and let $\mathfrak p\in\operatorname{Spec}(R)$. The **height** of $\mathfrak p$ is the Krull dimension of the local ring $R_{\mathfrak p}$: $$ \operatorname{ht}(\mathfrak p)=\dim(R_{\mathfrak p}). $$ ([[def-height-of-a-prime-ideal]]).
 

@@ -7,12 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, def-singular-chain-complex-and-singular-homology]
+deps: [lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells, cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex, def-singular-chain-complex-and-singular-homology, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology, Appendix A
@@ -21,11 +24,11 @@ sources:
 
 ## Statement
 
-For a CW complex $X$, the natural map $\varinjlim_nH_k(X^n;G)\to H_k(X;G)$ is an isomorphism for every $k$.
+Assume the Axiom of Choice. For a CW complex $X$, the natural map $\varinjlim_nH_k(X^n;G)\to H_k(X;G)$ is an isomorphism for every $k$.
 
 ## Facts & Assumptions
 
-**Given:** A singular cycle or a singular bounding chain in $X$.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and a singular cycle or a singular bounding chain in $X$.
 
 ## Proof
 

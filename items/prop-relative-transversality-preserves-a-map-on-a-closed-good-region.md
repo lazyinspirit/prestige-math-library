@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family,
+deps: [def-countable-choice,
+       lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family,
        thm-parametric-transversality,
        prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold,
        cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function]
@@ -15,19 +16,23 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, Part 10, Theorem 3.29"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes-10.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (prop-relative-transversality-preserves-a-map-on-a-closed-good-region). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $f:M\to N$ be smooth and let $Z\subseteq N$ be a closed embedded
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Let $f:M\to N$ be smooth and let $Z\subseteq N$ be a closed embedded
 submanifold. Suppose $f$ is already transverse to $Z$ on an open neighbourhood
 of a closed set $A\subseteq M$. Then in the transversality homotopy theorem one
 can choose the perturbation family so that the perturbed map and the whole
@@ -35,13 +40,13 @@ homotopy agree with $f$ on a smaller neighbourhood of $A$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $f:M\to N$ that is transverse to $Z$ on an open neighbourhood of a closed set $A\subseteq M$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth map $f:M\to N$ that is transverse to $Z$ on an open neighbourhood of a closed set $A\subseteq M$.
 
 [L2] A smooth map admits a finite-dimensional perturbation family whose evaluation map is a submersion ([[lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family]]).
 
-[L3] Parametric transversality makes the nontransverse parameter set null, and a null subset of a positive-dimensional parameter ball has dense complement ([[thm-parametric-transversality]], [[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
+[L3] Under $\mathrm{AC}_\omega$, parametric transversality makes the nontransverse parameter set null, and a null subset of a positive-dimensional parameter ball has dense complement ([[thm-parametric-transversality]], [[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
 
-[L4] Every closed subset is the zero set of a smooth nonnegative function ([[cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function]]).
+[L4] Under $\mathrm{AC}_\omega$, every closed subset is the zero set of a smooth nonnegative function ([[cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function]]).
 
 ## Proof
 **Proof technique:** direct.

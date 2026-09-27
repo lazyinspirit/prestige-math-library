@@ -4,21 +4,25 @@ title: "Prime number theorem"
 kind: corollary
 status: published
 origin: pipeline
-deps: [thm-prime-number-theorem-logarithmic-integral, lem-logarithmic-integral-asymptotic-expansion, lem-prime-counting-chebyshev-partial-summation, lem-chebyshev-functions-prime-power-comparison]
+deps: [thm-prime-number-theorem-arithmetic-progressions, lem-logarithmic-integral-asymptotic-expansion, lem-prime-counting-chebyshev-partial-summation, lem-chebyshev-functions-prime-power-comparison]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "\u00a71.3, Lemma 1.7"
       url: https://kskedlaya.org/ant/chap-pnt.html
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -31,7 +35,7 @@ These three asymptotic assertions are equivalent.
 
 **Given:** The data and hypotheses of the statement.
 
-[F1] [[thm-prime-number-theorem-logarithmic-integral]]: For some absolute $c>0$ and every $x\ge2$, $\pi(x)=\operatorname{Li}(x)+O\left(xe^{-c\sqrt{\log x}}\right).$
+[F1] [[thm-prime-number-theorem-arithmetic-progressions]]: For each fixed $q\ge1$ and each unit class $a$ modulo $q$, $\pi(x;q,a)\sim\operatorname{Li}(x)/\varphi(q)$. In particular, the case $q=1$ gives $\pi(x)\sim\operatorname{Li}(x)$.
 
 [F2] [[lem-logarithmic-integral-asymptotic-expansion]]: For each fixed integer $m\ge1$, as $x\to\infty$, $\operatorname{Li}(x)=\sum_{j=0}^{m-1}\frac{j!x}{\log^{j+1}x}+O_m\left(\frac{x}{\log^{m+1}x}\right).$
 
@@ -41,7 +45,7 @@ These three asymptotic assertions are equivalent.
 
 ## Proof
 
-1.1 The quantitative counting theorem and the first Li term give $\pi(x)\sim x/\log x$, since $\log x\,e^{-c\sqrt{\log x}}\to0$. [F1, F2]
+1.1 Apply the progression theorem at $q=1$, where every prime belongs to the unique unit class and $\varphi(1)=1$. Its counting asymptotic and the first Li term give $\pi(x)\sim x/\log x$. [F1, F2]
 
 1.2 Independently, if $\theta(x)\sim x$, the exact Abel formula gives $\pi(x)\sim x/\log x$: its integral is $O(x/\log^2x)$, by splitting at $\sqrt x$ and using $\theta(t)=O(t)$. [F3]
 

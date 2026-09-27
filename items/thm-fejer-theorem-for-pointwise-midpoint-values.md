@@ -10,12 +10,12 @@ provenance:
 deps: [def-cesaro-and-abel-means-of-a-fourier-series, lem-fejer-kernel-is-a-positive-approximate-identity]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (thm-fejer-theorem-for-pointwise-midpoint-values). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes"
@@ -26,7 +26,7 @@ sources:
 
 ## Statement
 
-Let $f:\mathbb R\to\mathbb C$ be one-periodic with $f|_{[0,1]}\in L^1([0,1])$.
+Assume the Axiom of Countable Choice. Let $f:\mathbb R\to\mathbb C$ be one-periodic with $f|_{[0,1]}\in L^1([0,1])$.
 Assume the one-sided limits $f(x-)$ and $f(x+)$ exist at some point $x$.
 Then
 
@@ -34,7 +34,7 @@ $$\sigma_Nf(x)\longrightarrow \frac{f(x-)+f(x+)}2 \qquad (N\to\infty).$$
 
 ## Facts & Assumptions
 
-**Given:** A one-periodic function $f$ with $f|_{[0,1]}\in L^1([0,1])$, a point $x\in\mathbb R$, and existing one-sided limits $f(x-)$ and $f(x+)$.
+**Given:** Countable Choice, a one-periodic function $f$ with $f|_{[0,1]}\in L^1([0,1])$, a point $x\in\mathbb R$, and existing one-sided limits $f(x-)$ and $f(x+)$.
 
 [L1] The Cesaro means satisfy $\sigma_Nf=f*F_N$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
 

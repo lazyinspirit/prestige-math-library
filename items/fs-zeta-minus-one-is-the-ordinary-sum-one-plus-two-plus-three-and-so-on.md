@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-special-values-of-riemann-zeta-at-integers, rem-dirichlet-series-continuation-and-regularized-sums]
+deps: []
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "K. Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 11 §3"
@@ -28,16 +28,12 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The special value at $-1$.
-
-[L1] The special-values theorem gives $\zeta(-1)=-1/12$ ([[thm-special-values-of-riemann-zeta-at-integers]]).
-
-[L2] The continuation remark records that this value is not an ordinary series sum ([[rem-dirichlet-series-continuation-and-regularized-sums]]).
+**Given:** The ordinary meaning of an infinite-series sum as the limit of its partial sums.
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 By [L1], the continued zeta value at $-1$ is $-1/12$. [L1, given]
+1.1 The $N$th partial sum of $1+2+3+\cdots$ is $N(N+1)/2$, which tends to $+\infty$ as $N\to\infty$. Thus the series has no ordinary sum. [given, algebra]
 
-2.1 The ordinary partial sums of $1+2+3+\cdots$ are $1,3,6,\dots$, so they do not equal the fixed number $-1/12$. Step 1.1 and [L2] therefore refute the claim. [step 1.1, L2, algebra] ∎
+2.1 Since the right-hand side has no ordinary sum, it cannot equal any value assigned to $\zeta(-1)$ by analytic continuation. This refutes the claim independently of that value. [step 1.1] ∎

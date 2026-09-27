@@ -8,8 +8,8 @@ authorship: ai-altered
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-real-power-series-and-radius-of-convergence]
-justified_by: [lem-sine-and-cosine-series-converge-everywhere]
+deps: [def-real-power-series-and-radius-of-convergence, lem-sine-and-cosine-series-converge-everywhere]
+justified_by: []
 aliases: []
 landmark: true
 verification:

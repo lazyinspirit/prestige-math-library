@@ -7,20 +7,29 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-riemann-zeta-functional-equation, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros, def-riemann-zeta-function]
+deps: [def-countable-choice, thm-riemann-zeta-functional-equation, thm-riemann-zeta-meromorphic-continuation, thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane, thm-gamma-meromorphic-continuation, cor-gamma-function-has-no-zeros, def-riemann-zeta-function]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   references:
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis, Ch. 6 §2.1"
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
     - title: "K. Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 13 §8"
       url: "https://mathweb.tifr.res.in/Documents/Publications/Lectures/01.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 For each integer $m\ge1$,
 
@@ -32,7 +41,7 @@ $\rho$ is a nontrivial zero, then so are $1-\rho$ and $\overline{\rho}$.
 
 ## Facts & Assumptions
 
-**Given:** The classical functional equation.
+**Given:** Countable choice and the classical functional equation.
 
 [L1] Zeta satisfies $$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$ ([[thm-riemann-zeta-functional-equation]]).
 
@@ -44,13 +53,15 @@ $\rho$ is a nontrivial zero, then so are $1-\rho$ and $\overline{\rho}$.
 
 [L5] On $\operatorname{Re}s>1$, zeta is given by the Dirichlet series $\sum_{n\ge1}n^{-s}$ ([[def-riemann-zeta-function]]).
 
+[L6] The global meromorphic continuation has a single residue-one pole at $s=1$ ([[thm-riemann-zeta-meromorphic-continuation]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Let $m\ge1$. Substituting $s=-2m$ into [L1], the sine factor vanishes, $\Gamma(1+2m)$ is finite by [L3], and $\zeta(1+2m)\ne0$ by [L2]. Hence $\zeta(-2m)=0$. [L1, L2, L3, given, algebra]
 
-2.1 For $x<0$ real and not a negative even integer, the sine factor in [L1] is nonzero. Also $1-x>1$, so [L2] gives $\zeta(1-x)\ne0$, and [L3] with [L4] gives $\Gamma(1-x)\ne0$. Therefore [L1] forces $\zeta(x)\ne0$. To handle $x=0$, let $s\to0$ in [L1]: one has $\sin(\pi s/2)\sim \pi s/2$, $\Gamma(1-s)\to1$, and zeta has a simple residue-one pole at $1$, so $\zeta(1-s)\sim -1/s$. Thus $\zeta(0)=-1/2\ne0$. Hence the only nonpositive real zeros are the numbers $-2,-4,\dots$. [step 1.1, L1, L2, L3, L4, algebra]
+2.1 For $x<0$ real and not a negative even integer, the sine factor in [L1] is nonzero. Also $1-x>1$, so [L2] gives $\zeta(1-x)\ne0$, and [L3] with [L4] gives $\Gamma(1-x)\ne0$. Therefore [L1] forces $\zeta(x)\ne0$. To handle $x=0$, let $s\to0$ in [L1]: one has $\sin(\pi s/2)\sim \pi s/2$, $\Gamma(1-s)\to1$, and [L6] gives $\zeta(1-s)\sim -1/s$. Thus $\zeta(0)=-1/2\ne0$. Hence the only nonpositive real zeros are the numbers $-2,-4,\dots$. [step 1.1, L1, L2, L3, L4, L6, algebra]
 
 3.1 Now let $\rho$ be any zero of zeta that is not one of the negative even integers. If $\operatorname{Re}\rho\le0$, then [L2] gives $\zeta(1-\rho)\ne0$ because $\operatorname{Re}(1-\rho)\ge1$, and [L4] gives $\Gamma(1-\rho)\ne0$ unless $1-\rho$ is a nonpositive integer, which cannot happen when $\operatorname{Re}\rho\le0$. Since the sine factor in [L1] vanishes only at even integers, step 2.1 rules out that possibility. Therefore [L1] cannot vanish at $\rho$, a contradiction. So every zero not listed in step 1.1 satisfies $\operatorname{Re}\rho>0$. Applying [L2] again excludes $\operatorname{Re}\rho\ge1$, so every remaining zero lies in $0<\operatorname{Re}\rho<1$. [step 1.1, step 2.1, L1, L2, L4, algebra]
 

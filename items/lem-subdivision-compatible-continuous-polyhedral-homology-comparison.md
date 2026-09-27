@@ -2,16 +2,10 @@
 id: "lem-subdivision-compatible-continuous-polyhedral-homology-comparison"
 kind: "lemma"
 title: "Subdivision compatible continuous polyhedral homology comparison"
-deps: ["lem-oriented-simplex-comparison-for-an-ordinary-homology-theory", "lem-finite-simplicial-approximation-for-homology-comparison"]
+deps: ["lem-oriented-simplex-comparison-for-an-ordinary-homology-theory", "lem-finite-simplicial-approximation-for-homology-comparison", "lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, exact-diagram naturality and boundary compatibility, pp.119–120"
@@ -23,6 +17,15 @@ sources:
 status: published
 origin: "pipeline"
 proof_strategy: "For the identity from the old triangulation to its subdivision, each old skeleton lies in the new skeleton. Show the relative class of an old simplex maps to the sum of its consistently oriented subdivided simplices: induction on dimension identifies the boundary, and injectivity of the relative-simplex boundary fixes the class (dimension zero is the coefficient map). Apply the skeletal exact diagram. Then replace a continuous map by a simplicial approximation; homotopy invariance proves naturality and independence of all choices."
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-09-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -37,11 +40,13 @@ The ordered-simplex comparison for an ordinary homology theory on finite simplic
 
 [F2] For finite simplicial pairs $(K,L)$ and $(P,Q)$, every continuous map $f:(|K|,|L|)\to(|P|,|Q|)$ is homotopic through maps of pairs to a simplicial map $(\operatorname{sd}^r K,\operatorname{sd}^r L)\to(P,Q)$ for some $r\ge0$. ([[lem-finite-simplicial-approximation-for-homology-comparison]])
 
+[F3] Two finite linear simplicial subdivisions of the same embedded finite polyhedron have a common finite linear simplicial refinement ([[lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement]]).
+
 ## Proof
 
 1.1 Let $K'$ be a finite subdivision of $K$, with $L'$ the induced subdivision of $L$. The identity realization map is cellular from the old filtration to the new one, since $|K^r|\subset|(K')^r|$. On an ordered old $r$-simplex, the sum of its new oriented $r$-simplices has all interior faces cancelled in pairs and has boundary the subdivided old boundary. Starting with vertices and using the boundary characterization in F1, it represents the old relative simplex class: the boundary map for the disk pair is injective, with reduced target for $r=1$. Thus the induced cellular map is the signed subdivision chain map, with coefficient $g$ unchanged. [F1]
 
-2.1 The same argument applies to singular homology with $G$ coefficients. Hence the comparison square for the identity between the two triangulations commutes on their relative cell groups and on the skeletal lift isomorphisms. It follows that the homology comparison agrees before and after subdivision. Two successive subdivisions are covered by repetition; two finite linear subdivisions have a common refinement, obtained by triangulating their finite convex intersection cells in increasing face dimension. Applying the same argument to that refinement gives independence of its choice. [F1, step 1.1]
+2.1 The same argument applies to singular homology with $G$ coefficients. Hence the comparison square for the identity between the two triangulations commutes on their relative cell groups and on the skeletal lift isomorphisms. It follows that the homology comparison agrees before and after subdivision. Two successive subdivisions are covered by repetition; [F3] supplies a common refinement for two finite linear subdivisions. Applying the same argument to that refinement gives independence of its choice. [F1, F3, step 1.1]
 
 3.1 For a continuous map of finite pairs choose a simplicial approximation after a common barycentric subdivision of the source, by F2. F1 gives naturality for that simplicial map, the preceding step identifies the subdivided comparison with the original one, and homotopy invariance replaces the approximation by the given map in both theories. Thus the comparison is natural for the actual continuous map and cannot depend on the approximation chosen. [F1, F2, step 2.1]
 

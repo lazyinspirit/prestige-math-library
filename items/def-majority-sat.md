@@ -9,12 +9,12 @@ provenance:
   proof: not-applicable
 deps: [def-number-sat]
 verification:
-  audited: 2026-09-07
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -25,4 +25,4 @@ sources:
 
 ## Definition
 
-MajoritySAT asks whether NumberSAT(phi)>2^(n-1), where n is the declared-variable count. At n=0 this is equivalent to the empty assignment satisfying phi.
+On a well-formed NumberSAT input consisting of a formula $\varphi$ and a declared list $(x_1,\ldots,x_n)$ of $n$ distinct variables, **MajoritySAT** asks whether $\mathrm{NumberSAT}(\varphi,(x_1,\ldots,x_n))>2^{n-1}$. Every malformed input is a no-instance. At $n=0$ the inequality is equivalent to the empty assignment satisfying $\varphi$.

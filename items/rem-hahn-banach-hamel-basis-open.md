@@ -1,22 +1,22 @@
 ---
 id: rem-hahn-banach-hamel-basis-open
 kind: remark
-title: "Does Hahn-Banach yield a Hamel basis for $\\mathbb{R}$ over $\\mathbb{Q}$? (open)"
+title: "Hahn-Banach and a Hamel basis for $\\mathbb{R}$: a recorded question"
 status: published
 origin: session
 proved_here: false
+verification:
+  precheck: n/a
+  sources_checked:
+    date: 2026-09-26
+    scope: "Current question and verified related facts; no current HB-to-basis status claim; research/frontier-35-ten-categories-recorded-source-audit-20260926.md"
+    by: "owner-delegated source audit (GPT-6-Sol xhigh)"
 deps: []
 justified_by: []
 forward_refs: [def-axiom-of-choice, thm-zorn]
 aliases: []
 landmark: false
-short: "Open in ZF: whether Hahn-Banach implies a Hamel basis for R over Q"
-verification:
-  precheck: n/a
-  sources_checked:
-    date: 2026-07-26
-    scope: citations
-    by: session-audit
+short: "Recorded question whether Hahn-Banach implies a Hamel basis for R over Q"
 sources:
   scraped: []
   references:
@@ -30,6 +30,10 @@ sources:
       url: "https://link.springer.com/article/10.1007/BF02760522"
     - title: "D. Pincus, The strength of the Hahn-Banach theorem, Victoria Symposium on Nonstandard Analysis, Lecture Notes in Mathematics 369, Springer 1974, 203-248"
       url: "https://link.springer.com/chapter/10.1007/BFb0066014"
+    - title: "M. Foreman and F. Wehrung, The Hahn-Banach theorem implies the existence of a non-Lebesgue measurable set, Fund. Math. 138 (1991), 13-19"
+      url: "https://eudml.org/doc/211870"
+    - title: "J. Pawlikowski, The Hahn-Banach theorem implies the Banach-Tarski paradox, Fund. Math. 138 (1991), 21-22"
+      url: "https://doi.org/10.4064/fm-138-1-21-22"
     - title: "Hahn-Banach theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hahn%E2%80%93Banach_theorem"
 pipeline_run: null
@@ -45,18 +49,16 @@ linear functional on all of $X$ still dominated by $p$.
 **Question.** Does HB imply that $\mathbb{R}$, as a vector space over
 $\mathbb{Q}$, has a basis?
 
-**Status: open.** It is recorded as an open question in Howard and Rubin's
-catalogue of consequences of the axiom of choice, as the implication from their
-form for Hahn-Banach to their form for a Hamel basis of $\mathbb{R}$ over
-$\mathbb{Q}$. No proof of the implication and no model of ZF separating the two is
-known.
+This item records the question, without asserting its current status. Howard
+and Rubin's catalogue is a historical reference for comparing these choice
+principles, but the exact catalogue form and current implication status have
+not been independently verified here.
 
 ## Remarks
 
-**Not proved in this library, and not proved anywhere.** This library does not
-develop functional analysis and does not build models of ZF, so neither half of
-the question is reachable here; both belong to deferred tracks. Nothing on any
-page depends on the answer.
+**Proof boundary.** The library develops the AC-based analytic
+Hahn–Banach theorem, but it does not derive a Hamel basis from HB in ZF or build
+a model separating the two. No proved item here depends on the answer.
 
 **What is known, and what would settle it.** The endpoints are well understood.
 Full choice gives a Hamel basis, since "every vector space has a basis" is
@@ -82,11 +84,9 @@ choice (Halpern and Lévy, 1971), so neither does HB. Pincus (1974) proved the
 sharper separation that HB does not imply BPI, refuting the prevailing conjecture
 of the 1960s. All of these are relative-consistency results and nothing stronger.
 A Hamel basis for $\mathbb{R}$ over $\mathbb{Q}$ likewise yields a non-measurable
-set. So the two statements sit strictly between ZF and AC, on those cited results
-and under the consistency of ZF, and the question is how they are ordered with
-respect to each other. Settling it means either deriving a Hamel basis from HB in
-ZF, or producing a model of ZF in which HB holds and $\mathbb{R}$ has no basis
-over $\mathbb{Q}$.
+set. The question asks how HB and that particular basis-existence statement
+are ordered over ZF. A proof of the implication, or a model of ZF with HB and
+without a basis for $\mathbb{R}$ over $\mathbb{Q}$, would settle it.
 
 The nearest recent progress is a separation of the two classical consequences of a
 Hamel basis from each other: Larson and Shelah (2026) construct a model of
@@ -95,18 +95,12 @@ Hamel basis for $\mathbb{R}$. That does not touch HB, but it shows the two
 targets in this and the companion question are genuinely different targets and not
 notational variants.
 
-**A note on the reference.** The form numbers used for these questions in the
-working notes are $52$ for Hahn-Banach, $367$ for a Hamel basis of $\mathbb{R}$
-over $\mathbb{Q}$ and $366$ for a discontinuous additive function, taken from the
-Howard-Rubin numbering. **These three numbers are unverified.** The Consequences
-of the Axiom of Choice project database that hosted the searchable numbering, and
-the later mirror of it, both fail to answer as of 2026-07-26, and no other online
-source consulted lists the numbering, so they could not be re-checked; the book
-remains the reference and the numbers should be treated as a pointer into it
-rather than as a verified citation.
+**A note on the reference.** Howard and Rubin's book remains a historical
+pointer to the choice-principle comparison. Its form numbering and any claimed
+current resolution of this implication require a separate source check.
 
 **Why it matters here.** This library keeps an explicit ledger of what each result
 costs in choice, and the ledger is supposed to be exact. This entry is a place
-where exactness is impossible: the cost of one of the most-used theorems in
-analysis, measured against one of the most-used pathologies in analysis, is not
-known. That is worth stating rather than rounding off to "both need choice".
+where exactness requires more than the facts checked above: they do not decide
+the HB-to-Hamel-basis implication. The library therefore records the comparison
+as a question instead of assigning it an unverified answer.

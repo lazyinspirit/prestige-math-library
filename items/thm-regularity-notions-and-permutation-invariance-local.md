@@ -7,15 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-regularity-notions-coincide-local-finite, cor-regular-sequences-permutable-local]
+deps: [cor-regularity-notions-coincide-local-finite, cor-regular-sequences-permutable-local, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (thm-regularity-notions-and-permutation-invariance-local). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,16 +27,16 @@ pipeline_run: frontier-31a
 
 ## Statement
 
-Let $M$ be a finite module over a Noetherian local ring $(R,\mathfrak m)$, and let $\mathbf x\subseteq\mathfrak m$ satisfy $M/(\mathbf x)M\ne0$. Then ordinary, Koszul, and $H_1$ regularity coincide. Moreover, every permutation of an ordinary $M$-regular sequence in $\mathfrak m$ is $M$-regular.
+Assume the Axiom of Choice. Let $M$ be a finite module over a Noetherian local ring $(R,\mathfrak m)$, and let $\mathbf x\subseteq\mathfrak m$ satisfy $M/(\mathbf x)M\ne0$. Then ordinary, Koszul, and $H_1$ regularity coincide. Moreover, every permutation of an ordinary $M$-regular sequence in $\mathfrak m$ is $M$-regular.
 
 ## Facts & Assumptions
 
-**Given:** The rings, finite sequences, modules, and local hypotheses stated in the claim. The declared prerequisites used here are [[cor-regularity-notions-coincide-local-finite]], [[cor-regular-sequences-permutable-local]].
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and the rings, finite sequences, modules, and local hypotheses stated in the claim. The declared prerequisites used here are [[cor-regularity-notions-coincide-local-finite]] and [[cor-regular-sequences-permutable-local]].
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The preceding corollary identifies the three notions in the stated local setting. [given, algebra]
+1.1 Under the assumed AC, the preceding corollary identifies the three notions in the stated local setting. [given, algebra]
 
-2.1 The permutation corollary applies to ordinary regularity and equivalence transfers the conclusion. [step 1.1, algebra] ∎
+2.1 Under the same AC premise, the permutation corollary applies to ordinary regularity and equivalence transfers the conclusion. These two corollary applications are the uses of Choice. [step 1.1, algebra] ∎

@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-13
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -45,7 +49,7 @@ A finite family of events is mutually independent if and only if its indicator r
 
 1.1 Suppose the events are mutually independent. Every joint assignment $\mathbf1_{A_j}=b_j$, with $b_j\in\{0,1\}$, is an intersection of events $A_j$ and complements $A_j^c$, whose probability factors by [L1]. [L1, L2]
 
-1.2 Conversely, if the indicators are mutually independent, specialize their joint-value identity to $b_j=1$ for every chosen index; [L2] gives the event-intersection product identity. [L2, L3]
+1.2 Conversely, suppose the indicators are mutually independent and fix a nonempty subfamily. If one of its events is empty, both the probability of the intersection and the product of the individual probabilities are zero. Otherwise $1$ is an attained value of every indicator in the subfamily, so specialize the joint-value identity of [L3] to $b_j=1$ for every chosen index. By [L2] this is exactly the event-intersection product identity. [L2, L3, algebra]
 
 2.1 Hence the indicators are mutually independent by [L3]. [step 1.1, L3]
 

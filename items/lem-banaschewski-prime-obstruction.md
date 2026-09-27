@@ -7,7 +7,12 @@ origin: pipeline
 deps: [lem-hyperelementary-permutation-subring-reduction, thm-character-of-a-permutation-representation-counts-fixed-points]
 proof_strategy: contrapositive
 verification:
-  audited: 2026-09-06
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: Wen-Wei Li, Yanqi Lake Lectures on Algebra I, Lemma 14.3.4
@@ -25,10 +30,12 @@ Let $X$ be finite and let $A\subseteq\mathbb Z^X$ be a subring. If $1_X\notin A$
 
 [F1] The cited prerequisite is [[thm-character-of-a-permutation-representation-counts-fixed-points]].
 
+[F2] The additive span of the hyperelementary permutation characters is closed under products ([[lem-hyperelementary-permutation-subring-reduction]]).
+
 ## Proof
 
 **Given:** $A$ is closed under pointwise multiplication and addition.
 
 1.1 For $x\in X$, the value set $A_x=\{a(x):a\in A\}$ is an ideal $n_x\mathbb Z$. If every $A_x$ contained $1$, choose $a_x\in A$ with $a_x(x)=1$ and form $\prod_{x\in X}(1_X-a_x)=0$. [F1, given, assume-hyp, contrapositive-reduce]
 
-2.1 Expanding the finite product would put $1_X$ in $A$, a contradiction. Hence some $A_x=n_x\mathbb Z$ has $n_x>1$; any prime divisor $p$ of $n_x$ has the stated property. Permutation characters are integer-valued fixed-point counts, so their span is a subring of this form. ∎ [step 1.1, discharge-contrapositive]
+2.1 Expanding the finite product would put $1_X$ in $A$, a contradiction. Hence for some $x$, the ideal $A_x=n_x\mathbb Z$ does not contain $1$, so $n_x=0$ or $n_x>1$. If $n_x=0$, choose any prime $p$; otherwise choose a prime divisor of $n_x$. In either case $A_x\subseteq p\mathbb Z$. Permutation characters are integer-valued fixed-point counts by [F1], and their hyperelementary span is closed under products by [F2], so that span gives the stated instance of the subring. ∎ [step 1.1, F1, F2, discharge-contrapositive]

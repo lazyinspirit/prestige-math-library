@@ -4,7 +4,7 @@ title: Induction along a Cohen--Macaulay parameter sequence
 kind: lemma
 status: published
 origin: pipeline
-deps: [lem-cohen-macaulay-parameter-first-element-regular, cor-regular-quotient-cohen-macaulay-equivalence, thm-dimension-and-parameters-for-modules]
+deps: [def-axiom-of-choice, lem-cohen-macaulay-parameter-first-element-regular, cor-regular-quotient-cohen-macaulay-equivalence, thm-dimension-and-parameters-for-modules]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,14 +14,18 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Under the hypotheses of
 `lem-cohen-macaulay-parameter-first-element-regular`, $M/x_1M$ is
@@ -30,7 +34,7 @@ $x_2,\ldots,x_d$ is a system of parameters for it.
 
 ## Facts & Assumptions
 
-**Given:** $x_1,\ldots,x_d$ is a system of parameters of the Cohen--Macaulay module $M$.
+**Given:** The Axiom of Choice; $x_1,\ldots,x_d$ is a system of parameters of the nonzero Cohen--Macaulay module $M$, with $d=\dim M>0$.
 
 ## Proof
 

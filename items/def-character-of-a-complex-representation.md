@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-finite-dimensional-representation-of-a-group-over-a-field, def-trace-of-an-endomorphism]
+deps: [def-finite-dimensional-representation-of-a-group-over-a-field, def-trace-of-an-endomorphism, thm-trace-of-ab-equals-trace-of-ba]
 justified_by: []
 aliases: []
 verification:

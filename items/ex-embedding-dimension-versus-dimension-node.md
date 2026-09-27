@@ -2,13 +2,7 @@
 id: "ex-embedding-dimension-versus-dimension-node"
 kind: "example"
 title: "embedding dimension versus dimension node"
-deps: ["thm-dimension-at-most-embedding-dimension", "def-embedding-dimension-and-regular-local-ring"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-embedding-dimension-and-regular-local-ring"]
 sources:
   references:
     - title: "Lecture 25, Propositions 25.6–25.8, pp.67–68"
@@ -21,6 +15,16 @@ origin: "pipeline"
 generation:
   role: example
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-height-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
@@ -29,7 +33,7 @@ For every field $k$, the split node $R=(k[x,y]/(xy))_{(x,y)}$ is reduced and has
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the example. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The field and split-node ring in the example. The dimension and cotangent-space calculations below are direct.
 
 [F2] [[def-embedding-dimension-and-regular-local-ring]]: For a nonzero commutative Noetherian local ring $(R,\mathfrak m,k)$, define $\operatorname{edim}R=\dim_k(\mathfrak m/\mathfrak m^2)$. The ring is **regular local** when $\operatorname{edim}R=\dim R$. The cotangent space is intrinsic, and is finite-dimensional because $\mathfrak m$ is finitely generated.
 

@@ -4,24 +4,27 @@ title: "Weighted interval volume"
 kind: example
 status: published
 origin: pipeline
-deps: ["thm-density-measure-integration-agrees-with-smooth-density-integration", "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-logarithm-derivative-and-integral", "thm-monotone-convergence-for-the-integral", "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals", "thm-density-measure-is-independent-of-the-chart-gluing", "cor-integral-over-a-null-set-vanishes", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "thm-natural-logarithm-laws"]
+deps: ["def-countable-choice", "thm-density-measure-integration-agrees-with-smooth-density-integration", "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-logarithm-derivative-and-integral", "thm-monotone-convergence-for-the-integral", "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals", "thm-density-measure-is-independent-of-the-chart-gluing", "cor-integral-over-a-null-set-vanishes", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "thm-natural-logarithm-laws"]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-09
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-08
 sources:
   references:
     - title: "Folland, Real Analysis, second edition, \u00a711.4 pp.361\u2013363; Theorems 2.14\u20132.15 pp.50\u201351"
       url: "https://djvu.online/file/NPF4BEtSuqdFA"
 proof_strategy: direct
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (ex-positive-weighted-volume-on-an-open-interval). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
+
+Assume countable choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
 
 On $M=(0,1)$ take $r=x^{-1}|dx|$. For $0<a<b<1$,
 $$\mu_r((a,b))=\log(b/a).$$

@@ -13,11 +13,12 @@ landmark: false
 short: "exactly one of $<,=,>$"
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-nat-trichotomy). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -63,12 +64,12 @@ For all $m, n \in \mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds. In
 
 1.2 The two strict relations are incompatible: if $m < n$ and $m > n$ then $m + j = n$ and $n + i = m$ with $i, j \ne 0$, so $m + (j + i) = (m + j) + i = n + i = m = m + 0$; by commutativity [L7], $(j + i) + m = 0 + m$, so $j + i = 0$ by cancellation [L6]; yet $j = \sigma(a)$ [L4] gives, by the left successor law [L2], $j + i = \sigma(a) + i = \sigma(a + i) \ne 0$ [L5], a contradiction. [given, L2, L3, L4, L5, L6, L7]
 
-1.3 For every $n$ one has $n < \sigma(n)$, since $n + \sigma(0) = \sigma(n + 0) = \sigma(n)$ by the recursion, with $\sigma(0) \ne 0$ [L5]. [given, L5]
+1.3 For any $x$ and nonzero $t$, one has $x+t\ne x$: otherwise commutativity [L7] and $0+x=x$ [L1] give $t+x=0+x$, so cancellation [L6] gives $t=0$. Thus $x<x+t$ by the order definition. In particular $n+\sigma(0)=\sigma(n)$ by the recursion, and $\sigma(0)\ne0$ [L5], so $n<\sigma(n)$. [given, L1, L5, L6, L7]
 
 1.4 Base case $n = 0$: for arbitrary $m$, either $m = 0$, giving $m = n$, or $m \ne 0$ so $0 + m = m$ [L1] with $m \ne 0$ gives $0 < m$, that is $n < m$; so at least one of $m < n$, $m = n$, $m > n$ holds. [base, L1, L4]
 
 1.5 Inductive hypothesis: fix $n$ and assume that for every $m$ at least one of $m < n$, $m = n$, $m > n$ holds. [ih]
 
-2.1 Successor step: for arbitrary $m$, apply the hypothesis; if $m < n$ then $n = m + k$ with $k \ne 0$, and the recursion gives $m + \sigma(k) = \sigma(m + k) = \sigma(n)$, so $\sigma(n) = m + \sigma(k)$ with $\sigma(k) \ne 0$ [L5], giving $m < \sigma(n)$; if $m = n$ then $m + \sigma(0) = \sigma(m + 0) = \sigma(m) = \sigma(n)$, so $\sigma(n) = m + \sigma(0)$ with $\sigma(0) \ne 0$, giving $m < \sigma(n)$; if $m > n$ then $m = n + i$ with $i \ne 0$, so $i = \sigma(a)$ [L4], and the recursion gives $n + \sigma(a) = \sigma(n + a)$ while the left successor law [L2] gives $\sigma(n) + a = \sigma(n + a)$, so $m = n + \sigma(a) = \sigma(n + a) = \sigma(n) + a$, whence $a = 0$ gives $m = \sigma(n)$ and $a \ne 0$ gives $\sigma(n) < m$; in every case at least one of $m < \sigma(n)$, $m = \sigma(n)$, $m > \sigma(n)$ holds. [step 1.5, given, L2, L4, L5]
+2.1 Successor step: for arbitrary $m$, apply the hypothesis; if $m < n$ then $n = m + k$ with $k \ne 0$, and the recursion gives $m + \sigma(k) = \sigma(m + k) = \sigma(n)$, so $\sigma(n) = m + \sigma(k)$ with $\sigma(k) \ne 0$ [L5], giving $m < \sigma(n)$ by step 1.3; if $m = n$ then $m + \sigma(0) = \sigma(m + 0) = \sigma(m) = \sigma(n)$, so $\sigma(n) = m + \sigma(0)$ with $\sigma(0) \ne 0$, giving $m < \sigma(n)$ by step 1.3; if $m > n$ then $m = n + i$ with $i \ne 0$, so $i = \sigma(a)$ [L4], and the recursion gives $n + \sigma(a) = \sigma(n + a)$ while the left successor law [L2] gives $\sigma(n) + a = \sigma(n + a)$, so $m = n + \sigma(a) = \sigma(n + a) = \sigma(n) + a$, whence $a = 0$ gives $m = \sigma(n)$ and $a \ne 0$ gives $\sigma(n) < m$ by step 1.3; in every case at least one of $m < \sigma(n)$, $m = \sigma(n)$, $m > \sigma(n)$ holds. [step 1.3, step 1.5, given, L2, L4, L5]
 
 3.1 By the induction principle with base 1.4, hypothesis 1.5, and step 2.1, comparability holds for all $m, n$, and with the incompatibilities 1.1 and 1.2 exactly one of $m < n$, $m = n$, $m > n$ holds, so the order is total. [step 1.1, step 1.2, step 1.4, step 2.1, discharge-induction] ∎

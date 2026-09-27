@@ -12,8 +12,12 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -68,7 +72,7 @@ The normal subgroups of $S_4$ are exactly $\{1\}$, $V_4$, $A_4$, and $S_4$.
 
 2.1 By [F4], the sign twist $\varepsilon\chi_{3}$ has values $(3,-1,0,1,-1)$. [F4, step 1.1, algebra]
 
-3.1 The trivial and sign characters are one-dimensional, hence irreducible. Using [A3] and the values from steps 1.1 and 2.1 gives $$ \langle\chi_3,\chi_3\rangle=\frac{1}{24}(9+6+0+6+3)=1,\qquad \langle\chi_3,1\rangle=\frac{1}{24}(3+6+0-6-3)=0. $$ Because $|\varepsilon(g)|=1$ for every $g\in S_4$, the same computation gives $\langle\varepsilon\chi_3,\varepsilon\chi_3\rangle=1$, and multiplying one factor by $\varepsilon$ preserves orthogonality with $1$ and with $\varepsilon$. Therefore $1$, $\varepsilon$, $\chi_3$, and $\varepsilon\chi_3$ are four pairwise orthogonal irreducible characters, the last two by [F5]. [F5, step 1.1, step 2.1, A3, algebra]
+3.1 The trivial and sign characters are one-dimensional, hence irreducible. Using [A3] and the values from steps 1.1 and 2.1 gives $$ \langle\chi_3,\chi_3\rangle=\frac{1}{24}(9+6+0+6+3)=1,\qquad \langle\chi_3,1\rangle=\frac{1}{24}(3+6+0-6-3)=0. $$ The sign twist has the same self-inner-product, and $\langle\varepsilon\chi_3,\varepsilon\rangle=\langle\chi_3,1\rangle=0$. Directly, $\langle\chi_3,\varepsilon\rangle=(3-6+6-3)/24=0$, $\langle\varepsilon\chi_3,1\rangle=\langle\chi_3,\varepsilon\rangle=0$, and $\langle\chi_3,\varepsilon\chi_3\rangle=(9-6-6+3)/24=0$. Therefore $1$, $\varepsilon$, $\chi_3$, and $\varepsilon\chi_3$ are four pairwise orthogonal irreducible characters, the last two by [F5]. [F5, step 1.1, step 2.1, A3, algebra]
 
 4.1 By [F6], irreducible characters form an orthonormal basis of the $5$-dimensional class-function space of $S_4$, so after the four orthogonal irreducibles of step 3.1 there is exactly one remaining irreducible character, call it $\chi_2$. By [F7], its degree $d$ satisfies $1+1+9+9+d^{2}=24$, so $d=2$. [F6, F7, F1, step 3.1, algebra]
 

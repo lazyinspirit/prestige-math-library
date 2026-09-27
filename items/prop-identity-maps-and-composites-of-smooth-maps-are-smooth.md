@@ -18,8 +18,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -51,10 +55,10 @@ Let $M$, $N$, $P$ be smooth manifolds.
 
 **Proof technique:** direct.
 
-1.1 Claim 1: for a smooth chart $(U,\varphi)$, the representative of [given, F1, F2] $\mathrm{id}_M$ with respect to $(U,\varphi)$ and $(U,\varphi)$ is $\varphi\circ\mathrm{id}_M\circ\varphi^{-1}=\mathrm{id}_{\varphi(U)}$, which is smooth, each coordinate partial being a constant function; [F2] then declares $\mathrm{id}_M$ smooth at every point, and continuity holds by [[prop-smooth-maps-are-continuous]]. [given, F1, F2]
+1.1 Claim 1: $\mathrm{id}_M$ is continuous. For a smooth chart $(U,\varphi)$, its representative with respect to $(U,\varphi)$ on both sides is $\varphi\circ\mathrm{id}_M\circ\varphi^{-1}=\mathrm{id}_{\varphi(U)}$, which is smooth: its first coordinate partials are constant, and all higher partials vanish. Thus [F2] makes $\mathrm{id}_M$ smooth at every point. [given, F1, F2]
 
-1.2 Claim 2, continuity: both maps are continuous (smooth maps are continuous), [given, choose] so $G\circ F$ is continuous; for $p\in M$ choose a chart $(W,\chi)$ of $P$ at $G(F(p))$ and then charts $(V,\psi)$ of $N$ at $F(p)$ with $G(V)\subseteq W$ and $(U,\varphi)$ of $M$ at $p$ with $F(U)\subseteq V$, which is possible because $F$ and $G$ are continuous and charts exist. [given, choose]
+1.2 Claim 2, continuity: $F$ and $G$ are continuous by [[prop-smooth-maps-are-continuous]], so $G\circ F$ is continuous. For $p\in M$ choose a chart $(W,\chi)$ of $P$ at $G(F(p))$, then a chart $(V,\psi)$ of $N$ at $F(p)$ with $G(V)\subseteq W$, and finally a chart $(U,\varphi)$ of $M$ at $p$ with $F(U)\subseteq V$; continuity permits these restrictions. [given, F1]
 
-1.3 The representative of the composite with respect to $(U,\varphi)$ and [given, F2, L1] $(W,\chi)$ is $\chi\circ(G\circ F)\circ\varphi^{-1} =\bigl(\chi\circ G\circ\psi^{-1}\bigr)\circ\bigl(\psi\circ F\circ\varphi^{-1} \bigr)$ on $\varphi\bigl(U\cap F^{-1}(V)\cap(G\circ F)^{-1}(W)\bigr)$. The two factors are smooth by the smoothness of $F$ and $G$ through [F2], so [L1] makes their composite smooth. Hence $G\circ F$ is smooth at $p$ by [F2]. [given, F2, L1]
+2.1 On $\varphi(U)$, the representative of the composite with respect to $(U,\varphi)$ and $(W,\chi)$ is $\chi\circ(G\circ F)\circ\varphi^{-1} =\bigl(\chi\circ G\circ\psi^{-1}\bigr)\circ\bigl(\psi\circ F\circ\varphi^{-1}\bigr)$. Both factors are smooth near the relevant points by [F2], so their composite is smooth by [L1]. Since step 1.2 already established continuity, [F2] makes $G\circ F$ smooth at $p$. [F2, L1, step 1.2]
 
-2.1 Applying step 1.3 at every point shows $G\circ F$ is smooth on all of $M$, and step 1.1 gives smoothness of the identity. Hence both claims are proved. [step 1.1, step 1.3] ∎
+3.1 Applying step 2.1 at every point shows $G\circ F$ is smooth on all of $M$, and step 1.1 gives smoothness of the identity. Hence both claims are proved. [step 1.1, step 2.1] ∎

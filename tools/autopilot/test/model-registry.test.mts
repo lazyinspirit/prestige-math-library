@@ -44,6 +44,8 @@ test('Sol is the singleton default judge lineup', () => {
   assert.equal(DEFAULT_LINEUP, 'sol');
   assert.deepEqual(resolveLineup().models, [MODELS.sol.id]);
   assert.deepEqual(JUDGE_LINEUPS.sol, [MODELS.sol.id]);
+  assert.deepEqual(resolveLineup('luna').models, [MODELS.luna.id]);
+  assert.equal(MODELS.luna.id, 'gpt-6-luna');
   assert.throws(() => resolveLineup('nonesuch'), /must be one of/);
 });
 
@@ -61,9 +63,9 @@ test('known judges exactly cover configured lineups', () => {
   assert.deepEqual([...KNOWN_JUDGES], [...new Set(Object.values(JUDGE_LINEUPS).flat())]);
 });
 
-test('judge requests xhigh reasoning and the configured context window', () => {
+test('judge defaults to Luna max or Sol xhigh and accepts a stage effort override', () => {
   const source = readFileSync(join(REPO, 'tools/judge.mts'), 'utf8');
-  assert.match(source, /model_reasoning_effort="xhigh"/);
+  assert.match(source, /effortOverride \?\? \(model === MODELS\.luna\.id \? 'max' : 'xhigh'\)/);
   assert.match(source, /model_context_window=\$\{JUDGE_CONTEXT_WINDOW\}/);
 });
 

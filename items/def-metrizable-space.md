@@ -18,21 +18,6 @@ justified_by: []
 aliases: [def-metrizable, def-usual-topology-of-r]
 landmark: true
 short: "metrizable space; the usual topology of $\\mathbb{R}$"
-verification:
-  precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-03
-    scope: published-audit-targeted
-    context_sha256: 481fc46dfb5166d1c7254e753d62020d03b9c022b265f7afd686ea1f9dd7ff0a
-    item_sha256: 36f4a57f6ea43198decefdca5ecb7883fa754f6a0fa1ef34d13dc55d3704c788
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-03
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,6 +28,13 @@ sources:
     - title: "J. Munkres, Topology, 2nd ed., §20"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-maintenance-receipts.jsonl (def-metrizable-space). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Definition
@@ -61,14 +53,12 @@ arbitrary unions, which is (T2), and under intersections of $n \ge 1$ members,
 which contains (T3). So every metric space is a topological space, and the
 metric-space development of this library is a special case of the present one.
 
-**The standard local notions in the two developments agree after translating
-their neighbourhood conventions.** Let $d$ be a metric on $X$ and give $X$ the
+**The standard local notions in the two developments agree.** Let $d$ be a metric on $X$ and give $X$ the
 topology $\mathcal{T}_d$.
 
-- *Neighbourhoods and balls.* [[def-metric-topology]] uses "neighbourhood" for
-  an open set containing $x$, whereas [[def-neighbourhood-top]] also allows a
-  non-open superset of such a set. Thus the two collections are not literally
-  equal, but the open metric neighbourhoods are cofinal in the broader
+- *Neighbourhoods and balls.* [[def-metric-topology]] and
+  [[def-neighbourhood-top]] use the same convention: a neighbourhood of $x$
+  contains an open set containing $x$. Open neighbourhoods are cofinal in this
   neighbourhood filter. The balls $B(x,r)$, $r > 0$ ([[def-metric-ball]]), are
   open ([[thm-metric-open-set-algebra]]) and form a neighbourhood base at $x$:
   any neighbourhood $N$ contains an open $U \ni x$, hence a ball around $x$ by
@@ -103,10 +93,8 @@ topology $\mathcal{T}_d$.
 
 Consequently the metric-space notions of interior, closure, boundary, density,
 convergence, continuity and subspace agree with the topological notions here,
-and statements about them transfer once a metric is named. For neighbourhoods
-the transfer uses the explicit convention change above: a metric-page
-neighbourhood is an open topological neighbourhood, while every topological
-neighbourhood contains one.
+and statements about them transfer once a metric is named. The metric and
+topological neighbourhood collections also agree.
 
 **Metrizability is a topological property; the metric is not part of it.** If
 $h : X \to Y$ is a homeomorphism ([[def-homeomorphism-and-open-maps]]) and $d$

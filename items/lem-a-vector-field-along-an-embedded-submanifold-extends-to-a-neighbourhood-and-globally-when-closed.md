@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-smooth-vector-field-as-a-tangent-bundle-section, def-embedded-submanifold-and-slice-chart, thm-smooth-partitions-of-unity-exist-on-manifolds, thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]
+deps: [def-countable-choice, def-smooth-vector-field-as-a-tangent-bundle-section, def-embedded-submanifold-and-slice-chart, thm-smooth-partitions-of-unity-exist-on-manifolds, thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set, thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,7 +31,7 @@ sources:
 
 ## Statement
 
-Let $S\hookrightarrow M$ be a smooth embedded submanifold, and let $Y$ be a
+Assume countable choice $\mathrm{AC}_\omega$. Let $S\hookrightarrow M$ be a smooth embedded submanifold, and let $Y$ be a
 smooth vector field along $S$, meaning that $Y(p)\in T_pM$ for each $p\in S$
 and $Y$ depends smoothly on $p$ in slice charts. Then:
 
@@ -41,7 +42,9 @@ and $Y$ depends smoothly on $p$ in slice charts. Then:
 
 ## Facts & Assumptions
 
-**Given:** An embedded submanifold $S\hookrightarrow M$ and a smooth vector field $Y$ along $S$.
+**Given:** Countable choice, an embedded submanifold $S\hookrightarrow M$, and a smooth vector field $Y$ along $S$.
+
+[A1] Countable choice permits the countable selections in the partition-of-unity and smooth-cutoff constructions ([[def-countable-choice]]).
 
 [L1] Embedded submanifolds admit slice charts ([[def-embedded-submanifold-and-slice-chart]]).
 
@@ -55,12 +58,12 @@ and $Y$ depends smoothly on $p$ in slice charts. Then:
 
 **Proof technique:** direct.
 
-1.1 By [L1], every point of $S$ has a slice chart $(U_\alpha,x_\alpha)$ in which $S\cap U_\alpha$ is given by $x_\alpha^{k+1}=\cdots=x_\alpha^n=0$. On that slice, $Y$ has smooth coordinate components, so extending those coefficient functions constantly in the normal coordinates defines a smooth vector field $\widetilde Y_\alpha$ on $U_\alpha$. [L1, given]
+1.1 By [L1], every point of $S$ has a slice chart $(U_\alpha,x_\alpha)$ in which $S\cap U_\alpha$ is given by $x_\alpha^{k+1}=\cdots=x_\alpha^n=0$. Shrink the chart around the point to a product coordinate box, whose tangential projection remains in the slice. On that slice, $Y$ has smooth coordinate components, so extending those coefficient functions constantly in the normal coordinates defines a smooth vector field $\widetilde Y_\alpha$ on the smaller chart. [L1, given]
 
-2.1 The open sets $U_\alpha$ cover $S$. Choose a smaller open neighbourhood $U\subseteq \bigcup_\alpha U_\alpha$ of $S$, and by [L2] choose a partition of unity $(\rho_\alpha)$ on $U$ subordinate to $(U_\alpha\cap U)$. Then $\widetilde Y:=\sum_\alpha \rho_\alpha \widetilde Y_\alpha$ is a smooth vector field on $U$, and on $S$ the coefficients sum to those of $Y$, so $\widetilde Y|_S=Y$. [L2, step 1.1]
+2.1 The open sets $U_\alpha$ cover $S$. Choose a smaller open neighbourhood $U\subseteq \bigcup_\alpha U_\alpha$ of $S$, and by [L2] choose a partition of unity $(\rho_\alpha)$ on $U$ subordinate to $(U_\alpha\cap U)$. Then $\widetilde Y:=\sum_\alpha \rho_\alpha \widetilde Y_\alpha$ is a smooth vector field on $U$, and on $S$ the local fields all equal $Y$, so $\widetilde Y|_S=Y$. Countable choice is used by the construction of [L2], including selection of the countable bump family. [A1, L2, step 1.1]
 
-3.1 Assume now that $S$ is closed. By [L4], $S$ has an open tubular neighbourhood $V$, and step 2.1 gives a smooth extension $\widetilde Y$ on some neighbourhood $U$ of $S$. Replace $U$ by $U\cap V$, which is still an open neighbourhood of $S$. [L4, step 2.1]
+3.1 Assume now that $S$ is closed. Step 2.1 supplies a smooth extension $\widetilde Y$ on an open neighbourhood $U$ of $S$. [step 2.1]
 
-4.1 Because $S$ is closed in the open set $U$, [L3] gives a smooth function $\chi:M\to\mathbb R$ with $\chi=1$ on $S$ and $\operatorname{supp}\chi\subseteq U$. Define $\widehat Y:=\chi\,\widetilde Y$ on $U$ and $\widehat Y:=0$ on $M\setminus \operatorname{supp}\chi$. This is a smooth global vector field and restricts to $Y$ on $S$. [L3, step 3.1, construct]
+4.1 Because $S$ is closed in $M$ and lies in the open set $U$, [L3] gives a smooth function $\chi:M\to\mathbb R$ with $\chi=1$ on $S$ and $\operatorname{supp}\chi\subseteq U$. Define $\widehat Y:=\chi\,\widetilde Y$ on $U$ and $\widehat Y:=0$ on $M\setminus \operatorname{supp}\chi$. This is a smooth global vector field and restricts to $Y$ on $S$. [A1, L3, step 3.1, construct]
 
 5.1 Therefore every smooth vector field along an embedded submanifold extends to a neighbourhood, and to all of $M$ when the submanifold is closed. [step 2.1, step 4.1] ∎

@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: []
 justified_by: []
-forward_refs: [def-countable-choice]
+forward_refs: [def-countable-choice, def-lebesgue-outer-measure, thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-lebesgue-measure-is-a-complete-measure, def-nonnegative-lebesgue-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]
 aliases: [rem-lebesgue-integral]
 landmark: true
 short: "Lebesgue outer measure, Caratheodory measurability, and the integral built from them"
@@ -64,34 +64,34 @@ the two integrals agree, so the Lebesgue integral extends the Riemann integral.
 
 ## Remarks
 
-**This library does not prove any of it.** Everything above is recorded here with
-citations and used nowhere in a proof. The whole measure track is deferred.
+**This remark supplies no proof.** The library now has separate published
+definitions and results for the construction: [[def-lebesgue-outer-measure]],
+[[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]],
+[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]],
+[[thm-lebesgue-measure-is-a-complete-measure]], and
+[[def-nonnegative-lebesgue-integral]]. Later items should cite the exact result
+they use rather than treating this overview as a theorem.
 
-**What would prove it.** The construction is standard and long: countable
-subadditivity of $\lambda^{*}$; Caratheodory's theorem that the sets satisfying
-the criterion form a $\sigma$-algebra on which an outer measure is countably
-additive; the fact that intervals satisfy the criterion, which is what gives
-$\lambda([a,b]) = b-a$ and forces the Borel sets into $\mathcal{M}$;
-approximation of a nonnegative measurable function from below by simple
-functions; and additivity of the integral, which is where the monotone
-convergence theorem enters. That is the opening chapter of any measure theory
-course and it is exactly the material this library has not built.
+**How the construction is established.** The published measure track proves
+countable subadditivity of outer measure under Countable Choice, applies
+Carathéodory's criterion to obtain a complete measure, and establishes volume
+agreement on elementary sets. The integral track then defines the nonnegative
+integral through simple minorants and proves its additivity separately
+([[cor-additivity-of-the-nonnegative-lebesgue-integral]]). The comparison with
+the Riemann integral is stated and proved in
+[[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]].
 
-**Which page it serves.** It is the natural endpoint of the Riemann integral page
-and of the Cantor set, Baire and measure zero page: those pages prove Lebesgue's
-criterion for Riemann integrability using only the elementary covering notion of
-a null set, and the theorem above is what explains why that notion is the right
-one. It is also the base of everything else in this category.
+**Which page it serves.** It connects the earlier Riemann integral and elementary
+null-set pages to the later published measure and integral pages. The preceding
+pages prove Lebesgue's criterion for Riemann integrability using the elementary
+covering notion of a null set; the later items construct the measure and
+integral. This remark is orientation, not a proof dependency.
 
-**What is available here without it.** A great deal, and it should not be
-confused with what is deferred. The elementary notion "$E$ is null if for every
+**The earlier elementary scope.** The notion "$E$ is null if for every
 $\varepsilon > 0$ it is covered by countably many intervals of total length below
-$\varepsilon$", that is $\lambda^{*}(E) = 0$ with no measurability theory
-attached, is in scope, and so is "almost everywhere" in that sense. Lebesgue's
-criterion for Riemann integrability, the vanishing of the Cantor function's
-derivative almost everywhere, Volterra's function, Jordan content and Jordan
-measurability all live inside the elementary theory. What is missing is the
-$\sigma$-algebra, the measure defined on it, and the integral.
+$\varepsilon$" predates the measure construction, as do the Riemann-integrability
+criterion, the Cantor-function and Volterra examples, and Jordan content. The
+later measure and integral items add the $\sigma$-algebra and integration theory.
 
 **Choice.** The construction above is not free of choice, and the statement
 displayed above is not a theorem of ZF. What is choice-free is the definition of

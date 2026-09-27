@@ -1,36 +1,37 @@
 ---
 id: lem-smooth-sphere-data-have-a-harmonic-replacement
 kind: lemma
-title: "Smooth sphere data have a harmonic replacement"
+title: "Smooth sphere data have a harmonic replacement under Countable Choice"
 status: published
 origin: pipeline
-deps: [def-laplacian-of-a-c2-function, lem-sphere-and-ball-measures-scale, thm-spherical-mean-value-property-for-harmonic-functions, cor-uniqueness-for-the-classical-dirichlet-problem, thm-dominated-convergence]
+deps: [def-countable-choice, def-laplacian-of-a-c2-function, lem-sphere-and-ball-measures-scale, thm-spherical-mean-value-property-for-harmonic-functions, cor-uniqueness-for-the-classical-dirichlet-problem, thm-dominated-convergence]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Gantumur, Harmonic functions"
       url: https://www.math.mcgill.ca/gantumur/math580f12/harmonic.pdf
       locator: "§8 equations (77)–(88), Theorem 15, pp.13–14"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-09-receipts.jsonl (lem-smooth-sphere-data-have-a-harmonic-replacement). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $n\ge2$, $a\in\mathbb R^n$, $R>0$, and $g\in C^\infty(\partial B_R(a))$ be real. Write $\omega_{n-1}=|S^{n-1}|$. There is a unique $h\in C^\infty(B_R(a))\cap C(\overline B_R(a))$ harmonic inside and equal to $g$ on the sphere. It is
+Assume the Axiom of Countable Choice. Let $n\ge2$, $a\in\mathbb R^n$, $R>0$, and $g\in C^\infty(\partial B_R(a))$ be real. Write $\omega_{n-1}=|S^{n-1}|$. There is a unique $h\in C^\infty(B_R(a))\cap C(\overline B_R(a))$ harmonic inside and equal to $g$ on the sphere. It is
 $$h(x)=\int_{\partial B_R(a)}\frac{R^2-|x-a|^2}{R\omega_{n-1}|x-y|^n}\,g(y)\,dS(y),\qquad |x-a|<R.$$
 The kernel is positive and has integral one at each interior point.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
 [F1] A $C^2$ real function is harmonic when the sum of its pure second derivatives, its Laplacian, vanishes. ([[def-laplacian-of-a-c2-function]]).
 
@@ -46,7 +47,7 @@ The kernel is positive and has integral one at each interior point.
 
 **Proof technique:** direct.
 
-1.1 Translate $a$ to zero. Put $q=|x-y|$, $A=R^2-|x|^2$, and $P(x,y)=Aq^{-n}/(R\omega_{n-1})$, where $|y|=R$. The sphere has finite positive measure $\omega_{n-1}R^{n-1}$. On compact interior sets $q$ is bounded away from zero; all $x$-derivatives of the kernel times bounded $g$ have a constant integrable majorant. The mean value theorem bounds their difference quotients likewise. Dominated convergence therefore permits differentiation of every order under the sphere integral and proves continuity of those derivatives. [F2, F5, given]
+1.1 Translate $a$ to zero. Put $q=|x-y|$, $A=R^2-|x|^2$, and $P(x,y)=Aq^{-n}/(R\omega_{n-1})$, where $|y|=R$. Under Countable Choice, the sphere has finite positive measure $\omega_{n-1}R^{n-1}$. On compact interior sets $q$ is bounded away from zero; all $x$-derivatives of the kernel times bounded $g$ have a constant integrable majorant. The mean value theorem bounds their difference quotients likewise. Dominated convergence therefore permits differentiation of every order under the sphere integral and proves continuity of those derivatives. [F2, F5, given]
 
 2.1 Cartesian differentiation gives $\nabla q^{-n}=-n(x-y)q^{-n-2}$, $\Delta q^{-n}=2nq^{-n-2}$ and $\Delta A=-2n$. The product rule gives $\Delta(Aq^{-n})=2nq^{-n-2}(A-q^2+2x\cdot(x-y))=2nq^{-n-2}(R^2-|y|^2)=0$. Thus both $h$ and $I(x)=\int P(x,y)\,dS(y)$ are smooth harmonic functions. [F1, step 1.1, algebra]
 

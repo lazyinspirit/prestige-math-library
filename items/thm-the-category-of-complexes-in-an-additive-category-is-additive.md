@@ -26,7 +26,7 @@ pipeline_run: frontier-24
 ## Statement
 
 Let $\operatorname{Ch}(\mathcal A)$ denote the category whose objects are
-\mathbb Z-graded objects of $\mathcal A$ equipped with differentials
+$\mathbb Z$-graded objects of $\mathcal A$ equipped with differentials
 $d_n:C_n\to C_{n-1}$ satisfying $d_{n-1}d_n=0$, and whose morphisms are chain
 maps. If $\mathcal A$ is an additive category, then
 $\operatorname{Ch}(\mathcal A)$ is an additive category.

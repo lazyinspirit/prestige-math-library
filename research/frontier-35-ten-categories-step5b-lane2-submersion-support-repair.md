@@ -1,0 +1,9 @@
+# Lane-2 submersion proof support repair
+
+Item: `thm-ag-submersion-criterion-standard-smooth` (draft). Pre-edit guard from the lane-2 worklist: `3edf004c7762b570a2f066469a6744d407de19c97f110101dd471c5ef1e6a841`; post-edit guard: `8254de6aaeaca3bc3c66c873a55120d8d5a56e767710c1182280e387d39338d0`. Its exported Statement and dependency list are unchanged.
+
+Step 3.2 formerly inferred that the fibre local ring `F=S/m_y S` was a standard smooth `k`-algebra at its closed point and invoked `lem-ag-standard-smooth-regular-geometric-fibres` on `F⊗_k K`. The standard-smooth definition requires a finitely presented algebra. A local ring such as `k[t]_(t)` is not generally finitely presented as a `k`-algebra, so that invocation did not establish geometric regularity. The argument now shrinks the Noetherian base chart until the lifted regular parameters generate its maximal ideal, forms the **finite-type fibre chart** `B=C⊗_D k`, and localizes `B` at the Jacobian minor shown nonzero at `x`. The cited standard-smooth regular-fibres lemma applies to this chart after every `K/k`; every prime over `x` remains inside it. Step 4.1 cites geometric regularity of `C⊗_D k`, as required by the pointwise smoothness criterion.
+
+No direct item consumers appear in `node tools/consumers.mjs thm-ag-submersion-criterion-standard-smooth`; the algebraic-geometry page lists the theorem as a home item. The batch-3 and merged proof-contract derivation claims for 3.2 and 4.1 were synced. The batch-3 page manifest needs no change because the exported claim and dependencies stayed the same. Focused precheck, rendercheck, and strict batch-3 and merged proof contracts pass. No gate retry was made.
+
+Central reconciliation proposal: record one `confirmed_nonfatal` proof-support defect, repaired at the post guard above. No central plan Statement/dependency delta is needed.

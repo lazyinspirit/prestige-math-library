@@ -4,16 +4,17 @@ title: "A density integral on the Mobius band"
 kind: example
 status: published
 origin: pipeline
-deps: ["thm-density-integration-is-defined-without-an-orientation", "prop-density-pullback-under-local-diffeomorphisms"]
+deps: ["def-countable-choice", "thm-density-integration-is-defined-without-an-orientation", "prop-density-pullback-under-local-diffeomorphisms"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Lee Proposition 16.37 and Exercise 16.44; Nicolaescu Definition 3.4.1"
@@ -22,7 +23,7 @@ proof_strategy: "Direct calculation and localization"
 ---
 ## Example
 
-On the compact Möbius band
+Assume countable choice $\mathrm{AC}_\omega$. On the compact Möbius band
 $$B=(\mathbb R\times[-1,1])/\langle T\rangle,\qquad T(s,t)=(s+1,-t),$$
 the density $|ds\,dt|$ descends to a smooth positive density $\delta$, and $\int_B\delta=2$.
 
@@ -30,11 +31,13 @@ the density $|ds\,dt|$ descends to a smooth positive density $\delta$, and $\int
 
 [F1] [[thm-density-integration-is-defined-without-an-orientation]]: Compactly supported smooth density integration is independent of charts and partition, linear, local, nonnegative on nonnegative densities and strictly positive for a nonzero nonnegative density. It is invariant under every diffeomorphism, without choosing an orientation. The finite-parametrization formula holds under the hypotheses of prop-integration-of-top-forms-by-finite-parametrizations, with orientation preservation omitted and absolute Jacobians used.
 
+[A1] Countable choice is [[def-countable-choice]] and is assumed to apply [F1].
+
 [F2] [[prop-density-pullback-under-local-diffeomorphisms]]: For a local diffeomorphism $F:M^n\to N^n$, pullback of smooth densities is smooth and in coordinates satisfies $$F^*(f|dy|)=(f\circ F)|\det DF|\,|dx|.$$ It is real-linear, obeys $F^*(a\delta)=(a\circ F)F^*\delta$ for smooth functions $a$ on $N$, and $(F\circ G)^*=G^*F^*$ for composable local diffeomorphisms.
 
 ## Verification
 
-**Given:** The objects and hypotheses in the statement above.
+**Given:** Countable choice and the objects and hypotheses in the statement above.
 
 1.1 The quotient map is open because the inverse image of an image-open set is the union of its translates. A rectangle with s-width less than one is disjoint from all its nontrivial translates, so maps homeomorphically onto its image; at t=1 or t=-1 use a half-rectangle. For two inequivalent points only finitely many translates of a bounded neighborhood of one can approach a bounded neighborhood of the other; shrink to separate these finitely many translates. Their saturated neighborhoods are disjoint, proving Hausdorffness. Images of rational rectangles form a countable base. The transition maps are restrictions of $T^k$, hence smooth, so these charts define a smooth manifold with boundary. It is compact as the image of $[0,1]\times[-1,1]$. [construct]
 

@@ -108,7 +108,7 @@ a Phase-3 consumer repair, not a prerequisite for Phase 2.
 | SET-28 | `normal-moore-spaces-pmea-and-consistency-strength` | SET-27, SET-25, SET-22; published product measure |
 | SET-29 | `minimal-walks-oscillation-and-l-and-s-spaces` | SET-27, SET-12 (SET-27 already reaches the needed topology pages) |
 | SET-30 | `pcf-scales-and-zfc-dowker-spaces` | SET-8; published paracompactness, deduction/elementary-submodel, and cumulative-hierarchy pages |
-| SET-31 | `eastons-theorem-and-cardinal-invariants-of-the-continuum` | SET-16 |
+| SET-31 | `eastons-theorem-and-cardinal-invariants-of-the-continuum` | SET-16; published `borel-analytic-sets-perfect-sets-and-determinacy` for Cantor/Baire coding in the Cichoń reductions |
 
 No B page is a dependency target. `SET-1`, `SET-4`, `SET-6` and `SET-8` are
 genuinely independent roots over published Foundations. SET-7 waits for the
@@ -667,9 +667,13 @@ products and iterations; preservation and continuum calculation; Easton's
 theorem for regular cardinals; singular-cardinal caveat; `P(omega)/fin`;
 almost-inclusion and towers; `p`, `t`, `b`, `d`, `s`, `r`, add/cov/non/cof of
 null and meagre ideals; Cichoń diagram inequalities; forcing computations;
-`p=t` proof architecture; `fs-zfc-determines-the-continuum-function`.
+`fs-zfc-determines-the-continuum-function`. The established Malliaris–Shelah
+equality `p=t` is deferred from this build: its cofinality-spectrum,
+peculiar-cut and generic-ultrapower proof chain has no complete local supplier.
 
-This page completes the standard continuum-combinatorics branch; it is not a
+This page is scoped to prove the listed Easton results, elementary bounds for
+`p` and `t`, and stated cardinal-invariant inequalities. It does not claim a local proof of
+`p=t` or completion of every continuum-combinatorics theorem; it is not a
 prerequisite for the older deferred catalogue.
 
 ---

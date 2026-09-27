@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-associated-prime-of-a-module, thm-existence-of-associated-primes]
+deps: [def-dependent-choice, def-associated-prime-of-a-module, thm-existence-of-associated-primes]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (lem-zero-divisor-annihilator-contained-in-associated-prime). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,17 +28,19 @@ sources:
 
 ## Statement
 
+Assume Dependent Choice.
+
 Let $R$ be a Noetherian commutative ring, let $M$ be a left $R$-module, and let
 $x \in R$ be a zero divisor on $M$. Then $x$ belongs to some prime ideal of
 $\operatorname{Ass}_R(M)$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, a left $R$-module $M$, and an element $x \in R$ that is a zero divisor on $M$.
+**Given:** Dependent Choice, a Noetherian commutative ring $R$, a left $R$-module $M$, and an element $x \in R$ that is a zero divisor on $M$ ([[def-dependent-choice]]).
 
 [L1] A prime ideal is associated to a module exactly when it is the annihilator of one of the module's elements ([[def-associated-prime-of-a-module]]).
 
-[L2] Every nonzero module over a Noetherian ring has an associated prime ([[thm-existence-of-associated-primes]]).
+[L2] Under Dependent Choice, every nonzero module over a Noetherian ring has an associated prime ([[thm-existence-of-associated-primes]]).
 
 ## Proof
 

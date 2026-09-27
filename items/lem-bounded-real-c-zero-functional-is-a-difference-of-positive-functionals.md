@@ -7,14 +7,15 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-positive-c-zero-functionals-have-finite-regular-representing-measures]
+deps: [def-compact-support-c-c-and-c-zero-on-an-lch-space]
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Donald L. Cohn, Measure Theory, 2nd ed., Chapter 7"
@@ -37,4 +38,4 @@ Every bounded real linear functional $L$ on $C_0(X;\mathbb R)$ can be written $L
 
 2.1 If $f,h\ge0$, decompositions $0\le g\le f+h$ satisfy $g=g_1+g_2$ with $g_1=\min(g,f)$ and $g_2=g-g_1$, where $0\le g_1\le f$ and $0\le g_2\le h$. This gives $L^+(f+h)\le L^+(f)+L^+(h)$; the reverse inequality follows by adding independent approximants. Thus $L^+$ is additive on the positive cone. [step 1.1]
 
-3.1 Extend $L^+$ linearly by $L^+(u)=L^+(u^+)-L^+(u^-)$. Cone additivity makes this well defined and positive. Put $L^-=L^+-L$; for $f\ge0$, the competitor $g=f$ in step 1.1 gives $L^+(f)\ge L(f)$, so $L^-$ is positive. The bounds in step 1.1 give $\|L^\pm\|\le\|L\|$, and $L=L^+-L^-$. [step 1.1, step 2.1] ∎
+3.1 Extend $L^+$ linearly by $L^+(u)=L^+(u^+)-L^+(u^-)$. Cone additivity makes this well defined and positive. Put $L^-=L^+-L$; for $f\ge0$, the competitor $g=f$ in step 1.1 gives $L^+(f)\ge L(f)$, so $L^-$ is positive. For $0\le f\le1$ pointwise, step 1.1 gives $0\le L^+(f)\le\|L\|$ and $L^-(f)=\sup_{0\le g\le f}[-L(f-g)]\le\|L\|$. For either positive functional $P$, $|P(u)|\le P(|u|)$ and $0\le |u|\le\|u\|_\infty$, so these positive-unit-ball bounds imply $\|L^\pm\|\le\|L\|$. Finally $L=L^+-L^-$. [step 1.1, step 2.1] ∎

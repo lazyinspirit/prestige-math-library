@@ -2,13 +2,7 @@
 id: "thm-auslander-buchsbaum-formula"
 kind: "theorem"
 title: "auslander buchsbaum formula"
-deps: ["lem-auslander-buchsbaum-base-case-free-module", "lem-auslander-buchsbaum-projective-dimension-one", "lem-auslander-buchsbaum-syzygy-projective-dimension", "lem-auslander-buchsbaum-first-syzygy-depth"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-auslander-buchsbaum-base-case-free-module", "lem-auslander-buchsbaum-projective-dimension-one", "lem-auslander-buchsbaum-syzygy-projective-dimension", "lem-auslander-buchsbaum-first-syzygy-depth"]
 sources:
   references:
     - title: "Theorem 1.53, pp.24–25; Mustata 12.31"
@@ -19,15 +13,22 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (thm-auslander-buchsbaum-formula). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-For a nonzero finite module $M$ of finite projective dimension over a nonzero Noetherian local ring $R$, $\operatorname{pd}_RM+\operatorname{depth}_RM=\operatorname{depth}R$. Consequently such an $M$ with $\operatorname{depth}M=\operatorname{depth}R$ is free.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For a nonzero finite module $M$ of finite projective dimension over a nonzero Noetherian local ring $R$, $\operatorname{pd}_RM+\operatorname{depth}_RM=\operatorname{depth}R$. Consequently such an $M$ with $\operatorname{depth}M=\operatorname{depth}R$ is free.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement. The Axiom of Choice is assumed; cited dependent-choice and resolution-existence hypotheses are retained.
 
 [F1] [[lem-auslander-buchsbaum-base-case-free-module]]: If a nonzero finite module $M$ over a nonzero Noetherian local ring $R$ has projective dimension zero, then it is finite free of positive rank and $\operatorname{depth}_RM=\operatorname{depth}R$.
 

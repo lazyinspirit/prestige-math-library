@@ -7,16 +7,22 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-a-finitely-generated-group-with-a-word-metric-is-a-quasi-geodesic-space, def-hyperbolic-group, thm-morse-stability-of-quasi-geodesics]
+deps: [def-hyperbolic-group, thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics, lem-infinite-order-elements-have-positive-stable-translation-length]
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Clara Löh, Geometric Group Theory, Section 6.5.1"
       url: "https://loeh.app.uni-regensburg.de/teaching/ggt_ss22/lecture_notes.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-06-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
@@ -34,14 +40,14 @@ finite generating set $S$ of $G$.
 
 **Given:** A hyperbolic group $G$, a finite generating set $S$, and an infinite-order element $g \in G$.
 
-[A1] In a hyperbolic group, the orbit map $n \mapsto g^n$ is a quasi-isometric embedding of $\mathbb Z$ into the Cayley graph whenever $g$ has infinite order.
+[L1] For an infinite-order element of a finitely generated hyperbolic group, there is a positive integer $C$ such that $|g^n|_S\ge |n|/C$ for all integers $n$ ([[lem-infinite-order-elements-have-positive-stable-translation-length]]).
 
-[L1] Morse stability controls quasi-geodesics in hyperbolic spaces ([[thm-morse-stability-of-quasi-geodesics]]).
+[L2] Word metrics from two finite generating sets are bilipschitz equivalent ([[thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The source fact [A1] says that the orbit map $n \mapsto g^n$ is a quasi-isometric embedding into the Cayley graph of $G$. [given, A1]
+1.1 By the definition of a hyperbolic group, some finite generating set $T$ has a hyperbolic geometric Cayley graph. Apply [L1] with $T$: for some $C_T>0$, $|n|\le C_T|g^n|_T$ for every integer $n$. The proof of [L1] is choice-free. [given, L1]
 
-2.1 A quasi-isometric embedding gives the displayed linear lower bound on $|g^n|_S$ in terms of $|n|$, while [L1] explains geometrically that the powers of $g$ stay near a quasi-axis. Therefore $\langle g \rangle$ is undistorted. [L1, step 1.1] ∎
+2.1 By [L2] there is a finite $K>0$ with $|h|_T\le K|h|_S$ for all $h\in G$. Thus $|n|\le C_TK|g^n|_S$. Take $A=C_TK$ and any $B>0$. This proves undistortion for the stated arbitrary finite $S$ without importing a choice-dependent hyperbolicity transfer theorem. [L2, step 1.1] ∎

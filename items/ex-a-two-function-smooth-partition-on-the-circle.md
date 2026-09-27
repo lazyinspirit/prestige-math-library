@@ -9,18 +9,11 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-smooth-partitions-of-unity-exist-on-manifolds]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -30,6 +23,13 @@ sources:
       url: "https://www2.math.ethz.ch/will-merry/files/Merry%20-%20Differential%20Geometry%20(2021).pdf"
     - title: "Nigel Hitchin, Differentiable Manifolds"
       url: "https://web.archive.org/web/20201111215108id_/https://people.maths.ox.ac.uk/hitchin/files/LectureNotes/Differentiable_manifolds/manifolds2014.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (ex-a-two-function-smooth-partition-on-the-circle). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Example
@@ -40,14 +40,14 @@ Let $U_1:=S^1\setminus\{(-1,0)\}$ and $U_2:=S^1\setminus\{(1,0)\}$. Then there e
 
 **Given:** The two-set open cover $U_1,U_2$ of the circle.
 
-[L1] Every open cover of a smooth manifold admits a subordinate smooth partition of unity ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
+[F1] The function $h(u)=e^{-1/u}$ for $u>0$ and $h(u)=0$ for $u\le0$ is smooth: every derivative on $u>0$ is a polynomial in $u^{-1}$ times $e^{-1/u}$ and tends to zero as $u\downarrow0$.
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The sets $U_1$ and $U_2$ are open and cover $S^1$. [given]
+1.1 Write a point of $S^1$ as $(x,y)$ and set $b(t)=h(t+1/2)$ using [F1]. Then $b$ is nonnegative and smooth, is zero for $t\le-1/2$, and is positive for $t>-1/2$. [F1]
 
-2.1 Apply [L1] to this cover to obtain the required functions $\phi_1,\phi_2$. [L1, step 1.1]
+2.1 Put $g_1(x,y)=b(x)$ and $g_2(x,y)=b(-x)$. At least one of $x,-x$ is nonnegative, so $g_1+g_2>0$ everywhere. Define $\phi_i=g_i/(g_1+g_2)$. These functions are smooth, take values in $[0,1]$, and sum to one. [step 1.1]
 
-3.1 Thus the circle carries a two-function smooth partition subordinate to the chosen arcs. [step 2.1] ∎
+3.1 The support of $\phi_1$ is contained in the closed arc $\{x\ge-1/2\}$, which misses $(-1,0)$, and the support of $\phi_2$ is contained in $\{x\le1/2\}$, which misses $(1,0)$. Thus $\operatorname{supp}(\phi_i)\subseteq U_i$ as required, with no use of the general partition theorem. [step 1.1, step 2.1] ∎

@@ -7,12 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-distribution-function-of-a-borel-measure-on-r, thm-continuity-from-above-for-measures, thm-continuity-from-below-for-measures, thm-existence-of-the-lebesgue-stieltjes-measure, thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]
+deps: [def-countable-choice, def-distribution-function-of-a-borel-measure-on-r, thm-continuity-from-above-for-measures, thm-continuity-from-below-for-measures, thm-existence-of-the-lebesgue-stieltjes-measure, thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-lebesgue-stieltjes-correspondence-with-distribution-functions). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 1.16"
@@ -45,7 +50,7 @@ $\mathbb{R}$.
 
 [L1] Measures are continuous from above when one set in the decreasing chain has finite measure. ([[thm-continuity-from-above-for-measures]])
 
-[L3] Assuming countable choice, every nondecreasing right-continuous function defines a Borel measure on $\mathbb{R}$ with the prescribed values on half-open intervals. ([[thm-existence-of-the-lebesgue-stieltjes-measure]])
+[L3] Assuming countable choice ([[def-countable-choice]]), every nondecreasing right-continuous function defines a Borel measure on $\mathbb{R}$ with the prescribed values on half-open intervals ([[thm-existence-of-the-lebesgue-stieltjes-measure]]). This is where the stated choice assumption is used.
 
 [L4] A Borel measure finite on compact sets is uniquely determined by its values on half-open intervals $(a,b]$. ([[thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]])
 

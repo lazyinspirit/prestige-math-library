@@ -2,13 +2,14 @@
 id: "ex-auslander-buchsbaum-first-syzygy"
 kind: "example"
 title: "auslander buchsbaum first syzygy"
-deps: ["lem-auslander-buchsbaum-syzygy-projective-dimension", "thm-auslander-buchsbaum-formula", "cor-regular-local-residue-field-projective-dimension-dimension", "thm-localisation-and-polynomial-extension-of-regular-rings"]
+deps: ["def-axiom-of-choice", "lem-auslander-buchsbaum-syzygy-projective-dimension", "thm-auslander-buchsbaum-formula", "cor-regular-local-residue-field-projective-dimension-dimension", "thm-localisation-and-polynomial-extension-of-regular-rings"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-astra"
+    verdict: "locally-reviewed"
+    date: 2026-09-23
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 12.31 and Theorem 12.33, pp.121–123"
@@ -24,6 +25,8 @@ proof_strategy: "Explicit algebraic derivation"
 ---
 
 ## Example
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 For $R=k[x,y]_{(x,y)}$ with maximal ideal $\mathfrak m$, $\operatorname{pd}_Rk=2$, $\operatorname{depth}_Rk=0$, and its first syzygy satisfies $\operatorname{pd}_R\mathfrak m=1$ and $\operatorname{depth}_R\mathfrak m=1$.
 

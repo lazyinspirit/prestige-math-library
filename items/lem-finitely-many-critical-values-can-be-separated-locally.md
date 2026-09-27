@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -52,7 +56,7 @@ $g$ such that:
 
 1.1 By [L1], the critical points of $f$ are $p_1,\dots,p_r$. Choose pairwise disjoint open neighbourhoods $V_i\Subset U_i$ of the $p_i$ such that each $U_i$ contains no critical point other than $p_i$, and by [L2] choose smooth functions $\rho_i$ with $\rho_i=1$ on $V_i$ and $\operatorname{supp}(\rho_i)\subseteq U_i$. [L1, L2, given, choose]
 
-2.1 Let $K:=M\setminus\bigcup_{i=1}^rV_i$. This compact set contains no critical point of $f$, so [A1] gives a constant $m>0$ with $\|df_x\|\ge m$ for every $x\in K$. Using [A2], choose real numbers $\lambda_i$ such that the shifted numbers $f(p_i)+\lambda_i$ are pairwise distinct, the finite sum $$u:=\sum_{i=1}^r\lambda_i\rho_i$$ satisfies $f+u\in\mathcal U$, and $$ \sum_i|\lambda_i|\,\|d\rho_i\|_{C^0(K)}<m/2. $$ Define $g:=f+u$. [A1, A2, step 1.1, given, choose, construct]
+2.1 Let $K:=M\setminus\bigcup_{i=1}^rV_i$. This compact set contains no critical point of $f$. If $K\ne\varnothing$, [A1] gives $m>0$ with $\|df_x\|\ge m$ for every $x\in K$; if $K=\varnothing$, choose any $m>0$ and read the differential bound below as vacuous. Using [A2], choose real numbers $\lambda_i$ such that the shifted numbers $f(p_i)+\lambda_i$ are pairwise distinct, the finite sum $$u:=\sum_{i=1}^r\lambda_i\rho_i$$ satisfies $f+u\in\mathcal U$, and, when $K\ne\varnothing$, $$ \sum_i|\lambda_i|\,\|d\rho_i\|_{C^0(K)}<m/2. $$ Define $g:=f+u$. [A1, A2, step 1.1, given, choose, construct]
 
 3.1 On each neighbourhood $V_i$ one has $g=f+\lambda_i$, because $\rho_i=1$ there and every $\rho_j$ with $j\ne i$ vanishes there. Therefore $p_i$ is still a critical point of $g$, and the Hessian of $g$ at $p_i$ equals the Hessian of $f$ there. [step 1.1, step 2.1, algebra]
 

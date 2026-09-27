@@ -7,14 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-smooth-vector-field-as-a-tangent-bundle-section, def-action-of-a-vector-field-on-smooth-functions, prop-a-vector-field-acts-as-a-derivation-of-smooth-functions, def-derivation-at-a-point-and-tangent-space, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components, lem-manifold-bump-for-a-compact-set-inside-an-open-set]
+deps: [def-smooth-vector-field-as-a-tangent-bundle-section, def-action-of-a-vector-field-on-smooth-functions, prop-a-vector-field-acts-as-a-derivation-of-smooth-functions, def-derivation-at-a-point-and-tangent-space, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components, lem-manifold-bump-for-a-compact-set-inside-an-open-set, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (thm-derivations-of-smooth-functions-are-smooth-vector-fields). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -28,13 +33,13 @@ sources:
 
 ## Statement
 
-The assignment sending a smooth vector field $X$ to the operator
+Assume the Axiom of Countable Choice. The assignment sending a smooth vector field $X$ to the operator
 $f\mapsto Xf$ defines a bijection between smooth vector fields on $M$ and
 $\mathbb R$-linear derivations $D:C^\infty(M)\to C^\infty(M)$.
 
 ## Facts & Assumptions
 
-**Given:** An $\mathbb R$-linear derivation $D:C^\infty(M)\to C^\infty(M)$.
+**Given:** The Axiom of Countable Choice and an $\mathbb R$-linear derivation $D:C^\infty(M)\to C^\infty(M)$.
 
 [L1] Every smooth vector field acts as a derivation of $C^\infty(M)$ ([[prop-a-vector-field-acts-as-a-derivation-of-smooth-functions]]).
 
@@ -46,6 +51,8 @@ $\mathbb R$-linear derivations $D:C^\infty(M)\to C^\infty(M)$.
 
 [L5] For a point inside an open set there is a smooth bump function equal to $1$ on a neighbourhood of that point and supported in the open set ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]]).
 
+[A1] The Axiom of Countable Choice is the assumption under which the tangent-bundle smooth structure and smooth vector field in [L1] and [L4] are defined ([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -56,7 +63,7 @@ $\mathbb R$-linear derivations $D:C^\infty(M)\to C^\infty(M)$.
 
 2.1 Let $p\in M$, choose a chart $(U,x^1,\dots,x^n)$ around $p$, and use [L5] again to choose $\chi:M\to [0,1]$ that is $1$ on a neighbourhood $V$ of $p$ and has support contained in $U$. For each $i$, let $\widetilde x^i$ be the global smooth function that equals $\chi x^i$ on $U$ and $0$ outside $U$. Then for every $q\in V$, the germs of $\widetilde x^i$ and $x^i$ agree at $q$, so [L3] writes $$X_q=\sum_i D(\widetilde x^i)(q)\,\frac{\partial}{\partial x^i}\Big|_q.$$ Each coefficient function $D(\widetilde x^i)|_V$ is smooth, because $D(\widetilde x^i)$ is a global smooth function. Hence [L4] makes $X$ smooth on $V$. [L3, L4, L5, step 1.2, given]
 
-3.1 Since every point has a neighbourhood $V$ on which step 2.1 makes $X$ smooth, the pointwise-defined tangent vectors $X_p$ form a global smooth vector field $X$ on $M$. [step 1.2, step 2.1]
+3.1 Since every point has a neighbourhood $V$ on which step 2.1 makes $X$ smooth, the pointwise-defined tangent vectors $X_p$ form a global smooth vector field $X$ on $M$ under [A1]. [A1, step 1.2, step 2.1]
 
 4.1 By construction, $Xf=D(f)$ for every smooth function $f$, so the map from smooth vector fields to derivations is surjective. If two smooth vector fields induce the same derivation, then their values at each point agree on every smooth function, hence are equal by [L2]; thus the map is injective. [L2, step 1.2, step 3.1]
 

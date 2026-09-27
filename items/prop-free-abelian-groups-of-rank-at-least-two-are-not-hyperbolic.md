@@ -6,12 +6,16 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-hyperbolic-group, def-rank-of-a-finite-rank-free-group, lem-thin-quadrilaterals-in-a-hyperbolic-space, thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]
+  proof: ai-altered
+deps: [def-hyperbolic-group, def-free-abelian-group, def-cayley-graph, lem-thin-quadrilaterals-in-a-hyperbolic-space]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -26,18 +30,22 @@ hyperbolic.
 
 ## Facts & Assumptions
 
-**Given:** A free abelian group $A$ of rank $n \ge 2$.
+**Given:** A free abelian group $A$ with a basis of cardinality at least two, possibly infinite ([[def-free-abelian-group]]).
 
-[L1] Hyperbolicity of a finitely generated group is independent of the chosen finite generating set ([[thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]]).
+[L0] A hyperbolic group is finitely generated and has a hyperbolic unit-edge Cayley graph for some finite generating set ([[def-hyperbolic-group]]).
 
-[L2] Hyperbolic spaces have uniformly thin geodesic quadrilaterals ([[lem-thin-quadrilaterals-in-a-hyperbolic-space]]).
+[L1] Cayley edges correspond to the nonzero elements of the symmetric generating set ([[def-cayley-graph]]).
 
-[A1] With the standard basis of $\mathbb Z^n$, the Cayley graph contains geodesic rectangles of arbitrarily large width inside the first two coordinate directions.
+[L2] In a geodesic $\delta$-hyperbolic space every geodesic quadrilateral is $2\delta$-thin ([[lem-thin-quadrilaterals-in-a-hyperbolic-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By the rank hypothesis, $A \cong \mathbb Z^n$ with $n \ge 2$. In the standard Cayley graph, the points $(0,0)$, $(m,0)$, $(m,m)$, and $(0,m)$ in the first two coordinates form a geodesic square of side length $m$ for every $m \ge 1$. [given, A1, algebra]
+1.1 If the basis is infinite, every finite set of group elements uses only finitely many basis coordinates and cannot generate $A$. Thus [L0] excludes hyperbolicity. Otherwise identify $A$ with $\mathbb Z^n$, $n\ge2$, and fix any finite generating set. Replace it by its nonzero symmetric closure $S$, which leaves the geometric Cayley graph unchanged by [L1]. It spans $\mathbb R^n$. [given, L0, L1, algebra]
 
-2.1 If the standard Cayley graph were hyperbolic, [L2] would give a uniform thinness constant for all geodesic quadrilaterals. But the midpoint of one side of the square from step 1.1 has distance $m/2$ from the union of the opposite sides, and $m$ is arbitrary. So the standard Cayley graph is not hyperbolic, and [L1] shows that $A$ itself is not hyperbolic. [A1, L1, L2, step 1.1] ∎
+2.1 Choose $s\in S$ of maximal Euclidean norm. The linear functional $f(x)=\langle s,x\rangle/\|s\|^2$ satisfies $f(s)=1$ and $|f(a)|\le1$ for every $a\in S$, by Cauchy–Schwarz and maximality. Since $S$ spans a space of dimension at least two, choose $v\in S$ independent of $s$ and put $w=v-\langle v,s\rangle s/\|s\|^2$. Then $w\ne0$, $\langle w,s\rangle=0$ and $\langle w,v\rangle>0$. Choose $t\in S$ maximizing $\langle w,t\rangle$. Symmetry gives a positive maximum and $|\langle w,a\rangle|\le\langle w,t\rangle$ on $S$. Hence $g(x)=\langle w,x\rangle/\langle w,t\rangle$ has $g(t)=1$, $g(s)=0$ and $|g(a)|\le1$ on $S$. In particular $s,t$ are independent. [step 1.1, choose, algebra]
+
+3.1 Extend these linear functions from graph vertices affinely over each edge. Their slopes have absolute value at most one, so they are 1-Lipschitz for the graph path metric. Thus a path of $m$ successive $s$-edges, or $m$ successive $t$-edges, has endpoints at distance exactly $m$: the path supplies the upper bound and $f$, respectively $g$, supplies the lower bound. Translates and reversals are likewise geodesics. Therefore the four such paths through $0,ms,ms+mt,mt$ form a geodesic quadrilateral. [L1, step 2.1, algebra]
+
+4.1 Choose linear functionals $\alpha,\beta$ on $\mathbb R^n$ with $\alpha(s)=1$, $\alpha(t)=0$, $\beta(s)=0$ and $\beta(t)=1$; solving the nonsingular two-vector Gram system constructs them. Let $C=\max_{a\in S}\max\{|\alpha(a)|,|\beta(a)|\}\ge1$. Their affine extensions to graph edges are $C$-Lipschitz. At the midpoint of the side $0$ to $ms$, their values are $(m/2,0)$. On each of the other three sides, either $\alpha=0$, $\alpha=m$, or $\beta=m$. Consequently every point on those sides is at distance at least $m/(2C)$ from that midpoint. Taking arbitrarily large $m$ contradicts [L2] for every proposed hyperbolicity constant. Since the finite generating set was arbitrary, [L0] excludes hyperbolicity of $A$. [L0, L2, step 3.1, choose, algebra] ∎

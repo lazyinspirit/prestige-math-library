@@ -2,13 +2,14 @@
 id: "lem-regular-local-residue-field-koszul-resolution"
 kind: "lemma"
 title: "regular local residue field koszul resolution"
-deps: ["thm-regular-local-rings-are-domains-and-cohen-macaulay", "cor-koszul-complex-resolves-a-regular-quotient", "lem-minimal-free-resolution-differentials-land-in-maximal-ideal"]
+deps: ["thm-regular-local-rings-are-domains-and-cohen-macaulay", "cor-koszul-complex-resolves-a-regular-quotient", "lem-minimal-free-resolution-differentials-land-in-maximal-ideal", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 12.33 forward proof, p.123"
@@ -23,11 +24,11 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, the Koszul complex on any regular system of parameters is a minimal free resolution of $k$ of length $d$.
+Assume the Axiom of Choice. For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, the Koszul complex on any regular system of parameters is a minimal free resolution of $k$ of length $d$.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The objects and hypotheses in the statement, including the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [F1] [[thm-regular-local-rings-are-domains-and-cohen-macaulay]]: A regular local ring $R$ of dimension $d$ is a domain and Cohen–Macaulay. For every regular system $(x_1,\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\le c\le d$.
 

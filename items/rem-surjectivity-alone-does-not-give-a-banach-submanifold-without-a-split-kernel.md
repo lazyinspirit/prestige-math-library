@@ -10,16 +10,19 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-22
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-22
 sources:
   references:
     - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §2.11 (regular values as onto with complemented kernel)"
       url: "https://people.dm.unipi.it/abbondandolo/preprints/montreal.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Remarks
@@ -53,14 +56,14 @@ not a consequence of the first, and it cannot be dropped:
   It shows why complementability is a genuine extra linear hypothesis; it does
   not by itself exhibit a regular level set in the manifold category.
 
-- **Automatic cases, and the ones that matter below.** A closed subspace that is
-  finite dimensional or of finite codimension is automatically complemented
+- **Automatic cases, and the ones that matter below.** Under the Axiom of Choice, a closed subspace that is
+  finite dimensional or of finite codimension is complemented
   ([[cor-finite-dimensional-subspaces-are-complemented]],
   [[cor-finite-codimensional-subspaces-are-complemented]]). In particular, if
   $L$ is a Fredholm operator ([[def-fredholm-operator-cokernel-and-index]]) or
   if its target is finite dimensional, then surjectivity of $L$ implies that
   $\ker L$ is complemented, so the extra clause of the theorem is automatic in
-  those cases. This is why the Fredholm-and-transversality results of this page
+  those cases under that choice premise. This is why the Fredholm-and-transversality results of this page
   can print the complemented-kernel hypothesis once and use it everywhere
   without further case distinctions, while the abstract theorem states it
   outright.

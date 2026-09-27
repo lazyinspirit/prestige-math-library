@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -45,8 +49,8 @@ If $X$ is any space and $F$ is a nonempty discrete space, the projection $X\time
 
 **Proof technique:** direct.
 
-1.1 For any space $X$ and discrete set $F$, verify that the projection $X\times F\to X$ is a covering, with every open subset of the base evenly covered. [given, F1, F2, F3]
+1.1 The projection $p:X\times F\to X$ is continuous by the product topology. When $F$ is nonempty, it is surjective. For every open $U\subseteq X$, $$p^{-1}(U)=U\times F=\bigsqcup_{f\in F}(U\times\{f\}).$$ Each $U\times\{f\}$ is open because $F$ is discrete, and $p$ restricts to a homeomorphism from that sheet onto $U$, with inverse $x\mapsto(x,f)$. Hence every open $U$ is evenly covered, as required by [F1]. [given, F1, F2, F3]
 
-2.1 Identify its sheets and fibre, including $F=\varnothing$: the projection then fails surjectivity unless $X=\varnothing$, so state the nonempty-fibre convention explicitly. [step 1.1, F1, F2]
+2.1 The fibre over $x\in X$ is $\{x\}\times F$, canonically identified with $F$. The identity map over $X$ identifies this covering with the product projection, so it is trivial. If $X=\varnothing$, the map $\varnothing\times F\to\varnothing$ is a covering even when $F=\varnothing$, since surjectivity and the evenly covered condition are vacuous. If $X\ne\varnothing$ and $F=\varnothing$, the projection is not surjective. [step 1.1, F1, F2]
 
 3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎

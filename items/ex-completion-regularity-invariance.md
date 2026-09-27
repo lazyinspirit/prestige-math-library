@@ -2,13 +2,8 @@
 id: "ex-completion-regularity-invariance"
 kind: "example"
 title: "completion regularity invariance"
-deps: ["lem-completion-preserves-embedding-dimension", "thm-completion-preserves-regular-local-rings", "thm-completion-of-a-noetherian-local-ring", "thm-completion-preserves-dimension-and-hilbert-samuel-data", "thm-dimension-at-most-embedding-dimension"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "lem-completion-preserves-embedding-dimension", "thm-completion-preserves-regular-local-rings", "thm-completion-of-a-noetherian-local-ring", "thm-completion-preserves-dimension-and-hilbert-samuel-data", "thm-dimension-at-most-embedding-dimension"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "Lecture 25, Example 25.1 and property (6), pp.68–69"
@@ -20,12 +15,20 @@ status: published
 origin: "pipeline"
 generation:
   role: example
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
 
-The ring $R=k[x,y]_{(x,y)}$ and its completion $k[\![x,y]\!]$ both have dimension and embedding dimension two. For every $q\ge1$, their quotients by the $q$th powers of the maximal ideals agree and have basis the monomials of total degree less than $q$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). The ring $R=k[x,y]_{(x,y)}$ and its completion $k[\![x,y]\!]$ both have dimension and embedding dimension two. For every $q\ge1$, their quotients by the $q$th powers of the maximal ideals agree and have basis the monomials of total degree less than $q$.
 
 ## Facts & Assumptions
 

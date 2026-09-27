@@ -98,6 +98,27 @@ function buildEvidence() {
     const { frontmatter } = splitFrontmatter(readFileSync(join(root, item.file), 'utf8'));
     return { ...item, kind: frontmatter.match(/^kind:\s*(\S+)\s*$/m)?.[1] ?? 'unknown' };
   });
+  const deferralPaths = {
+    pairs: join(research, `${run}-deferred-pairs.json`),
+    items: join(research, `${run}-deferred-items.json`),
+  };
+  const deferrals = { pairs: [], items: [] };
+  for (const [kind, path] of Object.entries(deferralPaths)) {
+    if (!existsSync(path)) continue;
+    const record = readJson(path);
+    if (record.run !== run || !Array.isArray(record.deferred)) die(`${relative(root, path)}: invalid deferral record`);
+    deferrals[kind] = record.deferred;
+  }
+  const activePages = new Set(scope.pages.map((page) => page.id));
+  const activeItems = new Set(items.map((item) => item.id));
+  for (const row of deferrals.pairs) {
+    if (!row.page || !row.companion || !row.reason || activePages.has(row.page) || activePages.has(row.companion))
+      die('deferred pair missing a reason or still active in the run scope');
+  }
+  for (const row of deferrals.items) {
+    if (!row.item || !row.reason || activeItems.has(row.item))
+      die('deferred item missing a reason or still active in the run scope');
+  }
 
   const defects = jsonLines(paths.defects).filter((row) => row.run === run);
   const fatal = defects.filter((row) => row.severity === 'fatal').map((row) => ({
@@ -162,7 +183,8 @@ function buildEvidence() {
     else configuredSetStats.mixed++;
   }
   const adjudications = jsonLines(paths.adjudications);
-  const inputs = Object.fromEntries(Object.values(paths).map((path) => [relative(root, path), sha256(readFileSync(path))]));
+  const inputs = Object.fromEntries([...Object.values(paths), ...Object.values(deferralPaths).filter(existsSync)]
+    .map((path) => [relative(root, path), sha256(readFileSync(path))]));
   const result = {
     version: 2,
     run,
@@ -179,6 +201,7 @@ function buildEvidence() {
       pages_by_category: countBy(scope.pages, 'category'),
       items_by_kind: countBy(items, 'kind'),
     },
+    deferrals,
     verification: {
       judge_lineup: closure.judge_lineup ?? 'unknown',
       scope: closure.scope ?? items.length,
@@ -301,6 +324,11 @@ const lines = [`# ${run} — Step 9 owner report`, '', response.executive_summar
   `- ${evidence.build.pages} pages and ${evidence.build.items} items across ${evidence.build.categories.length} categories.`,
   `- Categories: ${evidence.build.categories.join(', ') || 'none'}.`,
   `- Item kinds: ${Object.entries(evidence.build.items_by_kind).map(([kind, count]) => `${kind} ${count}`).join('; ')}.`, '',
+  '## Deferred from this run', ''];
+if (!evidence.deferrals.pairs.length && !evidence.deferrals.items.length) lines.push('No documented deferrals.');
+for (const row of evidence.deferrals.pairs) lines.push(`- A/B pair \`${row.page}\` / \`${row.companion}\`: ${row.reason}`);
+for (const row of evidence.deferrals.items) lines.push(`- Item \`${row.item}\` on \`${row.page}\`: ${row.reason}`);
+lines.push('',
   '## Verification closure', '',
   `- Judge lineup: ${evidence.verification.judge_lineup}.`,
   `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
@@ -310,7 +338,7 @@ const lines = [`# ${run} — Step 9 owner report`, '', response.executive_summar
   '## Fatal mathematical defects — exhaustive ledger table', '',
   `The run recorded ${evidence.defects.fatal_count} fatal defect row(s). Every row is reproduced below from the defect ledger.`, '',
   '| Defect | Item / subject | Class | Subclass | Location | Disposition | Caught at |',
-  '|---|---|---|---|---|---|---|'];
+  '|---|---|---|---|---|---|---|');
 for (const row of evidence.defects.fatal) lines.push(`| ${cell(row.defect_id)} | ${cell(row.subject)} | ${cell(row.class)} | ${cell(row.subclass)} | ${cell(row.location)} | ${cell(row.disposition)} | ${cell(row.caught_at_stage)} |`);
 if (!evidence.defects.fatal.length) lines.push('| — | — | — | — | — | none | — |');
 lines.push('', `Grouped by class: ${Object.entries(evidence.defects.by_class).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`,

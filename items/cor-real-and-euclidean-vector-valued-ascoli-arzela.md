@@ -7,17 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-compact-subsets-of-cx-for-a-proper-metric-target, cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets, thm-heine-borel-rn, thm-compact-subset-is-closed-and-bounded, thm-arzela-ascoli-for-real-ck, cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence, lem-equicontinuity-on-a-compact-domain-is-uniform, lem-equicontinuity-and-pointwise-boundedness-give-uniform-boundedness, thm-c-k-complete-in-the-sup-metric, def-topology-of-uniform-convergence]
+deps: [cor-compact-subsets-of-cx-for-a-proper-metric-target, cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets, thm-heine-borel-rn, thm-compact-subset-is-closed-and-bounded, thm-arzela-ascoli-for-real-ck, cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence, lem-equicontinuity-on-a-compact-domain-is-uniform, lem-equicontinuity-and-pointwise-boundedness-give-uniform-boundedness, thm-c-k-complete-in-the-sup-metric, def-topology-of-uniform-convergence, def-axiom-of-choice]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-16
-  audited: 2026-08-16
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:

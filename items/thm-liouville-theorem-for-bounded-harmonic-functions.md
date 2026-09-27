@@ -4,17 +4,19 @@ kind: theorem
 title: "Liouville theorem for bounded harmonic functions"
 status: published
 origin: pipeline
-deps: [thm-harnack-inequality-on-a-ball]
+deps: [thm-harnack-inequality-on-a-ball, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (thm-liouville-theorem-for-bounded-harmonic-functions). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Gantumur, Harmonic functions"
@@ -24,13 +26,13 @@ sources:
 
 ## Statement
 
-Let $n\ge2$ and $u:\mathbb R^n\to\mathbb R$ be harmonic. If $u$ is bounded above or bounded below on all of $\mathbb R^n$, then $u$ is constant.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $n\ge2$ and $u:\mathbb R^n\to\mathbb R$ be harmonic. If $u$ is bounded above or bounded below on all of $\mathbb R^n$, then $u$ is constant.
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement.
+**Given:** Countable Choice and the objects and hypotheses in the statement ([[def-countable-choice]]).
 
-[F1] Nonnegative harmonic functions on $B_R(y)$ satisfy $v(x)\le(R/(R-|x-y|))^n v(y)$. ([[thm-harnack-inequality-on-a-ball]]).
+[F1] Under Countable Choice, nonnegative harmonic functions on $B_R(y)$ satisfy $v(x)\le(R/(R-|x-y|))^n v(y)$ ([[thm-harnack-inequality-on-a-ball]]).
 
 ## Proof
 

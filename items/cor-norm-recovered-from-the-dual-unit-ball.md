@@ -7,16 +7,9 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-dual-space-of-a-normed-space, thm-dual-norms-every-vector]
+deps: [def-axiom-of-choice, def-dual-space-of-a-normed-space, thm-dual-norms-every-vector]
 justified_by: []
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -24,18 +17,30 @@ sources:
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
     - title: "Daniel Daners, Introduction to Functional Analysis, Corollary 26.5"
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Let $X$ be a normed space over $\mathbb{R}$ or $\mathbb{C}$. Then for every
+Assume the Axiom of Choice. Let $X$ be a normed space over $\mathbb{R}$ or $\mathbb{C}$. Then for every
 $x \in X$,
 
 $$\|x\|=\sup\{|f(x)|:f \in X^*,\ \|f\| \le 1\}.$$
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector $x \in X$.
+**Given:** The Axiom of Choice, A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector $x \in X$.
+
+[A1] AC is used through the norming functional [L2] in step 2.1.
 
 [L1] The dual norm on $X^*$ is the operator norm, so $|f(x)| \le \|f\|\,\|x\|$ for every $f \in X^*$ ([[def-dual-space-of-a-normed-space]]).
 

@@ -9,14 +9,18 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
-  precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -36,8 +40,6 @@ On the open unit ball $B_1(0)\subseteq \mathbb R^n$, the function $h(x):=1/(1-\|
 
 **Given:** The open unit ball $B_1(0)$ and the displayed function $h$.
 
-[L1] Smooth manifolds admit smooth proper functions ([[thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]]).
-
 [A1] For each $c\ge 1$, one has $h(x)\le c$ exactly when $\|x\|^2\le 1-1/c$.
 
 ## Verification
@@ -46,6 +48,6 @@ On the open unit ball $B_1(0)\subseteq \mathbb R^n$, the function $h(x):=1/(1-\|
 
 1.1 The denominator is positive on $B_1(0)$, so $h$ is smooth there. [given]
 
-1.2 By [A1], every sublevel set is a closed ball of radius strictly less than $1$, hence compact in $B_1(0)$. [A1]
+2.1 For $c<1$ the sublevel set $\{h\le c\}$ is empty. For $c\ge1$, [A1] makes it a closed ball of radius $\sqrt{1-1/c}<1$, hence compact in $B_1(0)$. [A1, step 1.1]
 
-2.1 Therefore $h$ is a proper smooth function on the open ball, as predicted by [L1]. [L1, step 1.1, step 1.2] ∎
+3.1 If $C\subseteq\mathbb R$ is compact, it is closed and bounded above by some $c$. Continuity of $h$ makes $h^{-1}(C)$ closed in $B_1(0)$, and it lies in the compact set $\{h\le c\}$ from step 2.1. Thus $h^{-1}(C)$ is compact, so $h$ is proper and smooth. [step 1.1, step 2.1, algebra] ∎

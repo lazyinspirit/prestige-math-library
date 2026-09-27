@@ -4,7 +4,7 @@ title: Unequal-depth equalities in a short exact sequence
 kind: corollary
 status: published
 origin: pipeline
-deps: [thm-depth-lemma]
+deps: [def-axiom-of-choice, thm-depth-lemma]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -14,23 +14,23 @@ sources:
     - title: Depth and Cohen--Macaulay modules source treatment
       url: https://websites.umich.edu/~mmustata/CAnotes.pdf
 verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (cor-depth-lemma-unequal-depth-equalities). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 ## Statement
 
-In the setting of `thm-depth-lemma`, the following implications hold:
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the setting of `thm-depth-lemma`, the following implications hold:
 $$\begin{array}{lll} a<c\Rightarrow b=a, & a>c+1\Rightarrow b=c,\\ a<b\Rightarrow c=a-1, & a>b\Rightarrow c=b,\\ b<c\Rightarrow a=b, & b>c\Rightarrow a=c+1. \end{array}$$
 Only implications whose strict inequality is meaningful for the depth
 conventions are asserted.
 
 ## Facts & Assumptions
 
-**Given:** write $a,b,c$ for the depths of $A,B,C$ in the short exact sequence.
+**Given:** The Axiom of Choice; write $a,b,c$ for the depths of $A,B,C$ in the short exact sequence.
 
 ## Proof
 

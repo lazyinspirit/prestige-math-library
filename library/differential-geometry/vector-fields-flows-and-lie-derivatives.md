@@ -55,8 +55,9 @@ items: [def-smooth-vector-field-as-a-tangent-bundle-section,
 examples: []
 ---
 
-This page develops vector fields from two equivalent viewpoints: smooth sections
-of the tangent bundle and derivations of $C^\infty(M)$. It then builds
+Under Countable Choice ($\mathrm{AC}_\omega$), this page develops vector fields
+from two equivalent viewpoints: smooth sections of the tangent bundle and
+derivations of $C^\infty(M)$. It then builds
 $F$-relatedness, diffeomorphic pushforwards, the Lie bracket, manifold integral
 curves, maximal flows, completeness criteria, flow boxes, flowouts, and the
 vector-field Lie derivative with the sign convention $\mathcal L_XY=[X,Y]$. The

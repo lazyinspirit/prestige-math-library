@@ -7,13 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-nakayama-generators-modulo-an-ideal, def-local-ring, def-product-of-an-ideal-and-a-module]
+deps: [def-axiom-of-choice, cor-nakayama-generators-modulo-an-ideal, def-local-ring, def-product-of-an-ideal-and-a-module]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (cor-minimal-generators-over-a-local-ring). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,9 +37,9 @@ Let $(R,\mathfrak m)$ be a local ring with residue field $k=R/\mathfrak m$, and 
 
 ## Facts & Assumptions
 
-**Given:** A local ring $(R,\mathfrak m)$, its residue field $k=R/\mathfrak m$, a finitely generated left $R$-module $M$, and elements $x_1,\dots,x_r \in M$.
+**Given:** AC ([[def-axiom-of-choice]]), a local ring $(R,\mathfrak m)$, its residue field $k=R/\mathfrak m$, a finitely generated left $R$-module $M$, and elements $x_1,\dots,x_r \in M$.
 
-[L1] If elements generate $M/\mathfrak mM$, then they generate $M$ ([[cor-nakayama-generators-modulo-an-ideal]]).
+[L1] Under the stated AC premise, if elements generate $M/\mathfrak mM$, then they generate $M$ ([[cor-nakayama-generators-modulo-an-ideal]]). This is the inherited use of AC in steps 1.1 and 1.2.
 
 [L2] A local ring is a nonzero commutative ring with a unique maximal ideal, and its residue field is the quotient by that maximal ideal ([[def-local-ring]]).
 

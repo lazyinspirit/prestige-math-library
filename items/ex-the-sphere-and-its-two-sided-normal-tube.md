@@ -7,18 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-euclidean-tubular-neighbourhood-theorem]
+deps: []
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -44,4 +44,4 @@ $$ \{x\in\mathbb R^{n+1}:1/2<\|x\|<3/2\}. $$
 
 1.1 Since $T_pS^n=\{v\in\mathbb R^{n+1}:\langle v,p\rangle=0\}$, the orthogonal complement is the one-dimensional span of $p$. Thus $N^\perp S^n\cong S^n\times\mathbb R$. [given, algebra]
 
-2.1 Under that identification, normal addition is $E(p,t)=p+tp=(1+t)p$. The same computation as for the circle shows that the image for $|t|<1/2$ is exactly the shell $1/2<\|x\|<3/2$. This is the Euclidean tubular neighbourhood in the sense of [[thm-euclidean-tubular-neighbourhood-theorem]]. [step 1.1] ∎
+2.1 Under that identification, normal addition is $E(p,t)=p+tp=(1+t)p$. Since $1+t>0$ for $|t|<1/2$, its image is exactly the shell $1/2<\|x\|<3/2$: the inverse is $x\mapsto(x/\|x\|,\|x\|-1)$, which is smooth there. Thus this is an explicit two-sided tubular neighbourhood. [step 1.1, algebra] ∎

@@ -7,15 +7,15 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-weight-density-and-character, def-lindelof-degree-and-cellularity, thm-basic-cardinal-function-inequalities, lem-lower-limit-line-is-regular-and-lindelof, def-interval, thm-basis-criterion, thm-rationals-countable, lem-rat-embeds-dense, thm-r-uncountable, ex-the-cardinality-of-the-continuum, cor-cardinal-absorption, def-axiom-of-choice]
+deps: [def-weight-density-and-character, def-lindelof-degree-and-cellularity, thm-basic-cardinal-function-inequalities, lem-lower-limit-line-is-regular-and-lindelof, def-interval, thm-basis-criterion, thm-rationals-countable, lem-rat-embeds-dense, thm-r-uncountable, thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero, cor-cardinal-absorption, def-axiom-of-choice]
 aliases: []
 verification:
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -45,4 +45,5 @@ All half-open intervals form a basis of cardinality at most
 $|\mathbb R|^2=|\mathbb R|$. Conversely, well order any basis and assign to
 each $x$ its first member $B_x$ with $x\in B_x\subseteq[x,x+1)$; if $x<y$,
 then $B_y$ cannot contain $x$, so $B_x\ne B_y$. Thus
-$w(S)=|\mathbb R|=2^{\aleph_0}$.
+$w(S)=|\mathbb R|=2^{\aleph_0}$ by
+[[thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero]].

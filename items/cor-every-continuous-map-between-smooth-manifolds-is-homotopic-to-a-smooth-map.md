@@ -7,18 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-whitney-approximation-for-manifold-valued-maps]
+deps: [def-countable-choice, thm-whitney-approximation-for-manifold-valued-maps]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -28,17 +28,20 @@ sources:
 
 ## Statement
 
-Every continuous map between smooth manifolds is homotopic to a smooth map.
+Assume countable choice $\mathrm{AC}_\omega$. Every continuous map between
+smooth manifolds is homotopic to a smooth map.
 
 ## Facts & Assumptions
 
-**Given:** A continuous map between smooth manifolds.
+**Given:** Countable choice and a continuous map between smooth manifolds.
 
-[L1] Every continuous manifold-valued map admits a smooth approximation that is homotopic to it ([[thm-whitney-approximation-for-manifold-valued-maps]]).
+[A1] Countable choice is [[def-countable-choice]].
+
+[L1] Under [A1], every continuous manifold-valued map admits a smooth approximation that is homotopic to it ([[thm-whitney-approximation-for-manifold-valued-maps]]).
 
 ## Proof
 **Proof technique:** direct.
 
-1.1 Apply [L1] to the given continuous map and obtain a smooth map $\widetilde F$ homotopic to it. [L1, given]
+1.1 Under [A1], apply [L1] to the given continuous map and obtain a smooth map $\widetilde F$ homotopic to it. [A1, L1, given]
 
 2.1 The map $\widetilde F$ is smooth and lies in the homotopy class of the original map, so the claim follows. [step 1.1] ∎

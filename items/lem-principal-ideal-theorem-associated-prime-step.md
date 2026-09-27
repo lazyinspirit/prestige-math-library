@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-prime-and-maximal-ideals, def-zero-divisor-and-integral-domain,
+deps: [def-axiom-of-choice, def-prime-and-maximal-ideals, def-zero-divisor-and-integral-domain,
        thm-noetherian-ring-quotients-and-localisations,
        thm-noetherian-ring-ideal-characterisations,
        thm-nilradical-of-a-noetherian-ring-is-nilpotent,
@@ -18,9 +18,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -29,16 +26,25 @@ sources:
     - title: "Melvin Hochster, Dimension theory and systems of parameters"
       url: "https://sites.lsa.umich.edu/hochster/wp-content/uploads/sites/1337/2026/04/Dim.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
 ## Statement
 
-Let $(R,\mathfrak m)$ be a Noetherian local domain, and let $x\in\mathfrak m$ be nonzero. If $\mathfrak m$ is minimal over $(x)$, then every prime ideal strictly contained in $\mathfrak m$ is zero. In particular $\operatorname{ht}(\mathfrak m)\le 1$.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\mathfrak m)$ be a Noetherian local domain, and let $x\in\mathfrak m$ be nonzero. If $\mathfrak m$ is minimal over $(x)$, then every prime ideal strictly contained in $\mathfrak m$ is zero. In particular $\operatorname{ht}(\mathfrak m)\le 1$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian local domain $(R,\mathfrak m)$ and a nonzero element $x\in\mathfrak m$ such that $\mathfrak m$ is minimal over $(x)$.
+**Given:** The Axiom of Choice, a Noetherian local domain $(R,\mathfrak m)$ and a nonzero element $x\in\mathfrak m$ such that $\mathfrak m$ is minimal over $(x)$.
 
 [L1] In a domain, the zero ideal is prime ([[def-zero-divisor-and-integral-domain]], [[def-prime-and-maximal-ideals]]).
 
@@ -50,7 +56,7 @@ Let $(R,\mathfrak m)$ be a Noetherian local domain, and let $x\in\mathfrak m$ be
 
 [L5] If $IM=M$ for a finitely generated module, then $(1-a)M=0$ for some $a\in I$ ([[lem-determinant-trick-for-nakayama]]).
 
-[L6] In a local ring, every element outside the unique maximal ideal is a unit; in particular $1-a$ is a unit for $a$ in the maximal ideal ([[thm-local-ring-unit-characterisations]]).
+[L6] Under the assumed AC, in a local ring every element outside the unique maximal ideal is a unit; in particular $1-a$ is a unit for $a$ in the maximal ideal ([[thm-local-ring-unit-characterisations]]). Steps 3.1 and 4.1 use this exact Choice boundary.
 
 ## Proof
 

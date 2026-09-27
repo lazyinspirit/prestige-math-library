@@ -2,7 +2,7 @@
 id: thm-erdos-hajnal-pach-pure-pair-theorem
 kind: theorem
 title: "Every $H$-free graph has a polynomial-size pure pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,10 +14,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
+  review_pending:
+    date: '2026-09-26'
+    reason: 'The current local proof invokes the full Erdős–Hajnal–Pach theorem in Fact F1 and only derives the floor form. A candidate-set proof or exact proved supplier remains open; see research/frontier-35-ten-categories-eh-pach-step3-deferral-20260926.md and the canonical A-P ledger row.'
+  audited: 2026-09-26
 sources:
   scraped: []
   references:

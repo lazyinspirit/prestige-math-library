@@ -2,13 +2,15 @@
 id: "cor-regular-local-residue-field-projective-dimension-dimension"
 kind: "corollary"
 title: "regular local residue field projective dimension dimension"
-deps: ["lem-regular-local-residue-field-koszul-resolution", "lem-projective-dimension-from-last-nonzero-betti-number", "cor-betti-number-is-rank-in-minimal-resolution", "cor-complete-intersection-betti-numbers-binomial"]
+deps: ["def-axiom-of-choice", "lem-regular-local-residue-field-koszul-resolution", "lem-projective-dimension-from-last-nonzero-betti-number", "cor-betti-number-is-rank-in-minimal-resolution", "cor-complete-intersection-betti-numbers-binomial"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (cor-regular-local-residue-field-projective-dimension-dimension). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "12.27 and 12.33, pp.121–123"
@@ -23,7 +25,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, $\operatorname{pd}_Rk=d$ and $\beta_i^R(k)=\binom di$ for $0\le i\le d$, with $\beta_i^R(k)=0$ for $i>d$.
+Assume the Axiom of Choice. For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, $\operatorname{pd}_Rk=d$ and $\beta_i^R(k)=\binom di$ for $0\le i\le d$, with $\beta_i^R(k)=0$ for $i>d$.
 
 ## Facts & Assumptions
 
@@ -41,4 +43,4 @@ For a regular local ring $(R,\mathfrak m,k)$ of dimension $d$, $\operatorname{pd
 
 1.1 The minimal Koszul resolution has degree-$i$ rank $\binom di$, and is zero above $d$. The Koszul rank formula and the general minimal-resolution rank formula identify these with the stated Betti numbers. [F1, F4, F3]
 
-2.1 The top rank $\binom dd=1$ is nonzero, so the projective-dimension criterion gives exactly $d$, not merely an upper bound. For $d=0$ the sole rank is $\beta_0(k)=1$. [F2, step 1.1, algebra] ∎
+2.1 Under the stated AC premise, [F2] applies to the top rank $\binom dd=1$ and gives projective dimension exactly $d$, not merely an upper bound. For $d=0$ the sole rank is $\beta_0(k)=1$. [given, F2, step 1.1, algebra] ∎

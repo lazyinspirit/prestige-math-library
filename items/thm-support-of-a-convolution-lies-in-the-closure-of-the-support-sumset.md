@@ -7,16 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound, def-support-and-compactly-supported-riemann-integral-in-rn, def-convolution-of-two-functions-on-rn]
+deps: [def-support-and-compactly-supported-riemann-integral-in-rn, def-convolution-of-two-functions-on-rn]
 landmark: false
 proof_strategy: "If $x$ lies outside the closure of $\\operatorname{supp} f + \\operatorname{supp} g$, then nearby pairs $(x-y,y)$ never meet both supports at once, so the convolution integral is identically $0$ on an open neighborhood of $x$. Extending by $0$ on the exceptional set gives the stated support inclusion for an actual representative."
 verification:
-  audited: 2026-09-01
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,7 +43,7 @@ $$ \operatorname{supp}(h) \subseteq \overline{\operatorname{supp}(f) + \operator
 
 **Given:** Borel representatives $f,g \in L^1(\mathbb{R}^n)$ and the function $h$ defined above.
 
-[L1] $L^1$ convolution exists almost everywhere ([[thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]], [[def-convolution-of-two-functions-on-rn]]).
+[L1] The displayed integral defines convolution wherever it converges absolutely ([[def-convolution-of-two-functions-on-rn]]).
 
 [L2] Support is defined by the closure of the nonzero set ([[def-support-and-compactly-supported-riemann-integral-in-rn]]).
 

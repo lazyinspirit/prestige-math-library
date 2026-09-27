@@ -2,13 +2,14 @@
 id: "lem-auslander-buchsbaum-syzygy-projective-dimension"
 kind: "lemma"
 title: "auslander buchsbaum syzygy projective dimension"
-deps: ["lem-projective-dimension-from-last-nonzero-betti-number"]
+deps: ["def-projective-dimension-of-an-object", "thm-schanuel-lemma-in-an-abelian-category", "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian", "def-noetherian-module"]
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Theorem 12.31 proof, Case 3, p.122"
@@ -27,12 +28,18 @@ Let $0\to K\to F_0\to M\to0$ be the initial minimal presentation of a nonzero fi
 
 ## Facts & Assumptions
 
-**Given:** The objects and hypotheses in the statement. We work with the Axiom of Choice; cited dependent-choice and resolution-existence hypotheses are retained.
+**Given:** The initial minimal presentation in the Statement, with $F_0$ finite free and $0<n=\operatorname{pd}_R M<\infty$.
 
-[F1] [[lem-projective-dimension-from-last-nonzero-betti-number]]: For a nonzero finite module $M$ over a nonzero Noetherian local ring, $\operatorname{pd}_RM=\sup\{i\ge0:\beta_i^R(M)\ne0\}$, allowing infinity. For each integer $q\ge0$, $\operatorname{pd}_RM\le q$ if and only if $\operatorname{Tor}_{q+1}^R(k,M)=0$.
+[F1] Finite projective dimension $n$ supplies a projective resolution of length $n$ ([[def-projective-dimension-of-an-object]]).
+
+[F2] For two projective presentations of the same module, their kernels satisfy $K\oplus P'\cong K'\oplus P$ ([[thm-schanuel-lemma-in-an-abelian-category]]).
+
+[F3] Finite modules over a Noetherian ring are Noetherian, so their submodules are finitely generated ([[thm-finitely-generated-modules-over-noetherian-rings-are-noetherian]], [[def-noetherian-module]]).
 
 ## Proof
 
-1.1 The minimal resolution of $M$ has last nonzero term $F_n$ by the Betti criterion. Truncating it gives a minimal resolution $\cdots\to F_2\to F_1\to K\to0$. If $K=0$, the initial presentation would make $M$ free, contrary to $n>0$. [F1]
+1.1 If $K=0$, the given presentation identifies $M$ with the free module $F_0$, contradicting $n>0$. Thus $K\ne0$. Fix a length-$n$ projective resolution of $M$ supplied by [F1]. Starting with the given $F_0\to M$, form its first $n$ projective presentations by taking finite free surjections onto the successive kernels. Each kernel is finite by [F3]. Only finitely many choices are made, so no axiom of choice is needed. Write $K_n$ for the final kernel; when $n=1$ it is $K$. [F1, F3, given, choose, algebra]
 
-2.1 The truncated resolution has last nonzero term $F_n$ in degree $n-1$, so the same criterion gives $\operatorname{pd}K=n-1$. For $n=1$ this says that $K$ is a nonzero finite free module. [F1, step 1.1] ∎
+2.1 Compare these $n$ presentations with the fixed length-$n$ resolution using [F2]. At the first stage the two kernels become isomorphic after adding the other presentation's projective term. Present these stabilized kernels at the next stage by adding identity presentations on those projective summands, and apply [F2] again. Induction through the finite $n$ stages gives $K_n\oplus A\cong P_n\oplus B$, where $P_n$ is the terminal projective of the length-$n$ resolution and $A,B$ are finite direct sums of its projective terms and the constructed finite free terms. Hence $K_n$ is a direct summand of a projective module and is projective. Truncating the constructed sequence therefore gives a length-$(n-1)$ projective resolution of $K$. Thus $\operatorname{pd}_R K\le n-1$. [F2, step 1.1, algebra]
+
+3.1 If $n\ge2$ and $\operatorname{pd}_R K\le n-2$, splicing such a shorter resolution with $0\to K\to F_0\to M\to0$ gives a resolution of $M$ of length at most $n-1$, contradicting [F1] and $\operatorname{pd}_R M=n$. For $n=1$, step 2.1 already makes $K$ projective, so its projective dimension is zero. In every case $K\ne0$ and $\operatorname{pd}_R K=n-1$. [F1, step 1.1, step 2.1, algebra] ∎

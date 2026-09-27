@@ -12,13 +12,6 @@ justified_by: []
 aliases: [def-riemann-integrable, def-lower-and-upper-integral]
 landmark: true
 short: "Darboux integral $\\int_a^b f$"
-verification:
-  audited: 2026-07-28
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -33,6 +26,16 @@ sources:
     - title: "J. Hunter, Chapter 11: The Riemann Integral"
       url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
+verification:
+  precheck: n/a
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Definition
@@ -118,8 +121,8 @@ used interchangeably, as they are throughout the literature.
 - **The supremum is over all partitions, and nothing is selected.** Both
   $\mathcal{L}$ and $\mathcal{U}$ are sets determined by $f$ and $[a,b]$ alone,
   and $\sup$ and $\inf$ are canonical, so no choice principle is involved in
-  forming either integral. Where a choice does enter on this page is recorded in
-  [[rem-riemann-integral-choice-ledger]].
+  forming either integral. The remaining integrability results on this page
+  also have choice-free proofs, as recorded in [[rem-riemann-integral-choice-ledger]].
 
 - **Why the lower integral is a supremum and not an infimum.** Refining a
   partition can only increase a lower sum and decrease an upper sum

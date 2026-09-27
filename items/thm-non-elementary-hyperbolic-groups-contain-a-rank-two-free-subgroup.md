@@ -7,11 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-elementary-and-non-elementary-hyperbolic-groups, def-rank-of-a-finite-rank-free-group, thm-free-groups-are-torsion-free, thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted, thm-morse-stability-of-quasi-geodesics]
+deps: [def-elementary-and-non-elementary-hyperbolic-groups, def-rank-of-a-finite-rank-free-group, thm-free-groups-are-torsion-free, thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted]
 proof_strategy: direct
-verification:
-  audited: 2026-08-27
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -19,6 +16,16 @@ sources:
       url: "https://www.math.ucdavis.edu/~kapovich/280-2009/bhb-ggtcourse.pdf"
     - title: "Ilya Kapovich and Nadia Benakli, Boundaries of hyperbolic groups, Theorem 2.28, Proposition 4.2, and Theorem 4.3"
       url: "https://arxiv.org/abs/math/0202286"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-06-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement

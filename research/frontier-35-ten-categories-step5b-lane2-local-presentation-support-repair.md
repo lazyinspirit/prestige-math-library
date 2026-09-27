@@ -1,0 +1,11 @@
+# Lane-2 local-presentation support repair
+
+Item: `lem-ag-geometrically-regular-fibres-local-presentation` (draft). Pre-edit guard: `50813ee5b670cfb85e74f2f663fbe1aef6cac05cde745a8bbdd08556d053e6dd`; post-edit guard: `647faac0ec5c9ed7dec22f7f7a614e35a03388af3075902cbac11c62e4a35130`. The exported Statement is unchanged. The dependency `thm-localisation-and-polynomial-extension-of-regular-rings` was added.
+
+At proof step 2.1 the lemma uses the regular-quotient ideal theorem on `A'=κ[x]_{q'}`. Its former citation [F12] establishes that this localization is local and identifies its dimension, but does not establish **regularity**. New [F14] cites the published regular-polynomial/localization theorem (current guard `0eba9769d13db0855d2d993d41de71c0610b7813db94efef5ee61af05508001c`). Its Choice premise is met by the lemma's Statement, `κ` is a regular Noetherian field, and there are finitely many polynomial variables. Step 2.1 now uses [F14] for regularity and [F12] for dimension before invoking [F5].
+
+The sole direct item consumer is `thm-ag-standard-smooth-geometric-regularity` (current guard `8b470f39197be4a319aa58d23756a842a8d42aaaf70cb954836e053f51b1e012`). Its Fact [F4] and proof steps 3.1 and 4.1 consume only the lemma's conclusion: finite presentation plus local flatness and geometrically regular fibre imply a standard-smooth chart. These are exactly the lemma's unchanged hypotheses and conclusion, and the consumer also assumes Choice. No direct consumer Statement/Definition change is needed. The algebraic-geometry home page lists the lemma as an item.
+
+The batch-3 page manifest now mirrors the carrier's dependencies and current proof route. The batch-3 and merged proof contracts include [F14] and the revised step-2.1 derivation. Focused precheck, rendercheck, content-policy, and strict batch-3 and merged proof contracts pass; no gate retry was made.
+
+Central reconciliation proposal: add `thm-localisation-and-polynomial-extension-of-regular-rings` to this item's plan dependencies and record one `confirmed_nonfatal` proof-support defect, repaired. The new direct changed-source edge requires exact-use impact review; the use and hypothesis check are recorded above.

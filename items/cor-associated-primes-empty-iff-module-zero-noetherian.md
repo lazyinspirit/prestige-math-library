@@ -7,15 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-existence-of-associated-primes]
+deps: [def-dependent-choice, thm-existence-of-associated-primes]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (cor-associated-primes-empty-iff-module-zero-noetherian). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,14 +28,16 @@ sources:
 
 ## Statement
 
+Assume Dependent Choice.
+
 Let $R$ be a Noetherian commutative ring and let $M$ be a left $R$-module. Then
 $$ \operatorname{Ass}_R(M)=\varnothing \quad\Longleftrightarrow\quad M=0. $$
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ and a left $R$-module $M$.
+**Given:** Dependent Choice, a Noetherian commutative ring $R$ and a left $R$-module $M$ ([[def-dependent-choice]]).
 
-[L1] Every nonzero $R$-module has an associated prime ([[thm-existence-of-associated-primes]]).
+[L1] Under Dependent Choice, every nonzero $R$-module has an associated prime ([[thm-existence-of-associated-primes]]).
 
 ## Proof
 

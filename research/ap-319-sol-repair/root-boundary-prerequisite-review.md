@@ -1,0 +1,10 @@
+# Bounded boundary-prerequisite review — 2026-09-23
+
+These three session-authored items fill the exact missing contracts in the existing boundary partition theorem. Root read the complete new definitions/proofs and the repaired theorem, the half-space conventions including H^0, and the used Euclidean compactness/bump interfaces. This is local mathematical review and format/render checking, not an independent judge verdict or exhaustive prerequisite-closure certification. No external-source retrieval by root is claimed.
+
+- The boundary partition definition specifies precisely the indexed local-finiteness, support and sum-one contract with half-space smoothness.
+- The half-ball basis proof shrinks a relative Euclidean ball into the prescribed chart neighborhood; its closed relative ball is compact, its image is closed by Hausdorffness, and the desired closure is a closed compact subspace. The singleton dimension-zero case is covered.
+- The shrinking proof builds a canonical nested compact exhaustion by least eligible indices. Each compact annulus admits a finite list of nested chart neighborhoods from the whole eligible family, without pointwise choice. AC_omega chooses one finite list per annulus. Pair indices give countability; annular bands give local finiteness. No dependent-choice step is concealed in the least-index recursion.
+- The repaired theorem selects an at-most-countable half-ball subcover, uses the new shrinking, selects countably many compactly supported boundary bumps, normalizes a locally finite positive sum, and groups back to the original cover. The Euclidean bump proof's finite-ball support gives the compactness needed for smooth zero extension. Empty, finite and dimension-zero cases are explicit.
+
+Focused precheck passed on both new lemmas and the boundary theorem. Rendercheck passed on all three new items and the theorem. Root integrated the new IDs before the theorem in its existing A page and the authoritative plan, with actual item dependencies and honest delegated local verification. The original 319-item frozen scope is unchanged; these are necessary additional prerequisites.

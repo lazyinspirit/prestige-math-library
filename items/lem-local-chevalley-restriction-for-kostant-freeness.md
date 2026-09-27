@@ -2,16 +2,10 @@
 id: "lem-local-chevalley-restriction-for-kostant-freeness"
 kind: "lemma"
 title: "Local Chevalley restriction for Kostant freeness"
-deps: ["def-kostant-harmonic-subspace-of-the-symmetric-algebra", "lem-finite-semisimple-cartan-root-and-string-structure", "lem-finite-semisimple-pbw-and-highest-weight-construction", "lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums", "def-finite-linear-invariant-and-coinvariant-polynomial-algebras"]
+deps: ["def-axiom-of-choice", "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras", "def-kostant-harmonic-subspace-of-the-symmetric-algebra", "lem-finite-semisimple-cartan-root-and-string-structure", "lem-finite-semisimple-pbw-and-highest-weight-construction", "lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums", "def-finite-linear-invariant-and-coinvariant-polynomial-algebras"]
 provenance:
   statement: "ai-altered"
   proof: "ai-generated"
-verification:
-  audited: 2026-09-12
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-11
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, Theorem10.1 pp54\u201355; local polynomial-density and finite character proof"
@@ -19,21 +13,30 @@ sources:
 status: "published"
 origin: "pipeline"
 proof_strategy: "direct"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-08-receipts.jsonl (lem-local-chevalley-restriction-for-kostant-freeness). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-For a finite-dimensional complex semisimple Lie algebra $\mathfrak g$ and any Cartan subalgebra $\mathfrak h$, restriction of polynomial functions gives a graded algebra isomorphism
+Assume the Axiom of Choice. For a finite-dimensional complex semisimple Lie algebra $\mathfrak g$ and any Cartan subalgebra $\mathfrak h$, restriction of polynomial functions gives a graded algebra isomorphism
 $$\mathbb C[\mathfrak g]^{\mathfrak g}\longrightarrow\mathbb C[\mathfrak h]^W.$$
-Equivalently, under the Killing identifications it is the graded isomorphism $S(\mathfrak g)^{\mathfrak g}\cong S(\mathfrak h)^W$, where restriction on symmetric algebras is the algebra map induced by the Killing-orthogonal projection $\mathfrak g\to\mathfrak h$. This holds also in rank zero and uses no AC.
+Equivalently, under the Killing identifications it is the graded isomorphism $S(\mathfrak g)^{\mathfrak g}\cong S(\mathfrak h)^W$, where restriction on symmetric algebras is the algebra map induced by the Killing-orthogonal projection $\mathfrak g\to\mathfrak h$. This holds also in rank zero.
 
 ## Facts & Assumptions
 
-**Given:** The indicated Cartan and the corresponding finite Weyl group.
+**Given:** The Axiom of Choice, the indicated Cartan subalgebra in the nilpotent self-normalizing sense, and the corresponding finite Weyl group.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. Under it, the given Cartan subalgebra is maximal toral by [[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]].
 
 [F1] The Killing identification with polynomial functions and the symmetric adjoint action are [[def-kostant-harmonic-subspace-of-the-symmetric-algebra]].
 
-[F2] Cartan/root decomposition, the nondegenerate Cartan restriction, simple triples, root-vector adjoint nilpotence and the finite Weyl/weight lattice structure are [[lem-finite-semisimple-cartan-root-and-string-structure]].
+[F2] For the maximal toral subalgebra supplied by [A1], Cartan/root decomposition, the nondegenerate Cartan restriction, simple triples, root-vector adjoint nilpotence and the finite Weyl/weight lattice structure are [[lem-finite-semisimple-cartan-root-and-string-structure]].
 
 [F3] The finite-dimensional modules $L(\lambda)$ of every dominant integral weight exist and have the proved weight decompositions by [[lem-finite-semisimple-pbw-and-highest-weight-construction]].
 
@@ -53,4 +56,4 @@ Equivalently, under the Killing identifications it is the graded isomorphism $S(
 
 2.3 To prove injectivity, choose a regular $h_0\in\mathfrak h$, so $\alpha(h_0)\ne0$ for each root. Such a point exists by avoiding the finitely many nonzero linear root equations, using the finite polynomial-curve argument. Enumerate all roots and choose one nonzero vector $e_\alpha$ from each root space. Define the polynomial map from $\mathbb C^{|\Phi|}\times\mathfrak h$ to $\mathfrak g$ by $F((t_\alpha),h)=\prod_\alpha\exp(t_\alpha\operatorname{ad}_{e_\alpha})h$ in that fixed order. At $(0,h_0)$ its linear part sends the Cartan variation $u$ to $u$ and the $\alpha$-coordinate to $[e_\alpha,h_0]=-\alpha(h_0)e_\alpha$. F2's direct root decomposition makes this linear map invertible. If a nonzero polynomial $p$ vanished on the image, translate the input by $(0,h_0)$ and the output by $h_0$. Write the lowest nonzero homogeneous part of $p(h_0+y)$ as $q(y)$. The lowest part of its composition with $F-h_0$ is $q(Ly)$, where $L$ is the invertible linear part. This is nonzero, a contradiction. Polynomial-function faithfulness from F5 justifies passing from pointwise vanishing to the polynomial identity. Now if an invariant $p$ restricts to zero on $\mathfrak h$, step 1.1 makes it zero on the image of $F$, so it is zero. [step 1.1, F2, F5, algebra]
 
-3.1 Average the spanning family in step 1.2 over $W$. F5 makes averaging surjective onto the invariant homogeneous polynomials. Each average of $\lambda^d$ is $M_{\lambda,d}/|W\lambda|$, since each distinct orbit point has the same stabilizer multiplicity in the group sum. Thus the orbit moments span $S^d(\mathfrak h^*)^W$. Step 2.2 places each of them in the image of restriction, proving surjectivity in every degree. Step 2.3 proves injectivity, and step 2.1 proves the algebra and grading assertions. Finally F2's orthogonal root decomposition implies that restricting the linear function $B(x,\cdot)$ to $\mathfrak h$ is $B(\operatorname{pr}_{\mathfrak h}x,\cdot)$; extending on generators proves the symmetric-algebra formulation. In rank zero both invariant algebras are $\mathbb C$ and restriction is the identity. All modules used are individually finite-dimensional and every orbit average, coordinate choice and expansion is finite; no AC occurs. [step 2.1, step 2.2, step 2.3, step 1.2, F1, F2, F5, given, algebra] ∎
+3.1 Average the spanning family in step 1.2 over $W$. F5 makes averaging surjective onto the invariant homogeneous polynomials. Each average of $\lambda^d$ is $M_{\lambda,d}/|W\lambda|$, since each distinct orbit point has the same stabilizer multiplicity in the group sum. Thus the orbit moments span $S^d(\mathfrak h^*)^W$. Step 2.2 places each of them in the image of restriction, proving surjectivity in every degree. Step 2.3 proves injectivity, and step 2.1 proves the algebra and grading assertions. Finally F2's orthogonal root decomposition implies that restricting the linear function $B(x,\cdot)$ to $\mathfrak h$ is $B(\operatorname{pr}_{\mathfrak h}x,\cdot)$; extending on generators proves the symmetric-algebra formulation. In rank zero both invariant algebras are $\mathbb C$ and restriction is the identity. All modules used are individually finite-dimensional and every orbit average, coordinate choice and expansion is finite; [A1] is needed only to identify an arbitrary Cartan with a maximal toral subalgebra before applying [F2]. [A1, step 2.1, step 2.2, step 2.3, step 1.2, F1, F2, F5, given, algebra] ∎

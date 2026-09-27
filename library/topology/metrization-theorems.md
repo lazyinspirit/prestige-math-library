@@ -8,4 +8,9 @@ examples: []
 
 Metrizability is controlled here by families of open sets: locally finite and discrete decompositions of a basis, and normal sequences whose stars shrink around points. The development uses the library’s convention that regularity does not include $T_1$, so the separation axiom is always stated separately. Choice is a sufficient hypothesis for the cover and well-ordering constructions used in the proofs.
 
-The compatible-normal-sequence construction produces a metric, while metric spaces supply the two sigma-base forms. These implications yield the Nagata–Smirnov and Bing criteria, with the second-countable Urysohn theorem as a corollary. A locally finite merger of local bases then gives the paracompact Hausdorff local-metrization criterion of Smirnov.
+The Nagata–Smirnov proof constructs cozero functions and an $\ell^2$ metric
+from a sigma-locally-finite base. Metric spaces supply the sigma-base forms,
+and the second-countable Urysohn theorem follows as a corollary. The
+normal-sequence construction supplies a separate metrization tool. Smirnov’s
+local criterion merges local bases along a closure-controlled locally finite
+shrinking $\overline{W_s}\subseteq U_s$.

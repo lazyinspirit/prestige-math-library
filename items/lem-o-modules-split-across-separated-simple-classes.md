@@ -2,13 +2,7 @@
 id: "lem-o-modules-split-across-separated-simple-classes"
 kind: "lemma"
 title: "Splitting finite-length modules across separated simple classes"
-deps: ["thm-every-category-o-object-has-finite-length", "thm-jordan-holder-theorem-in-an-abelian-category", "thm-category-o-is-abelian-and-extension-closed"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "thm-every-category-o-object-has-finite-length", "thm-jordan-holder-theorem-in-an-abelian-category", "thm-category-o-is-abelian-and-extension-closed"]
 sources:
   references:
     - title: "§1.13 p.31, formal decomposition paragraph"
@@ -19,9 +13,18 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Induct on kernel length via quotient pushouts, then quotient length via pullbacks and retractions; construct part summands by retractions and prove uniqueness by Hom vanishing"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (lem-o-modules-split-across-separated-simple-classes). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -29,9 +32,9 @@ Partition the isomorphism classes of simple objects of $\mathcal O$ into parts $
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
-[F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Every object of $\mathcal O$ has a finite composition series and is both Noetherian and Artinian. The length of zero is zero. ([[thm-every-category-o-object-has-finite-length]])
+[F1] Under the Axiom of Choice, fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Every object of $\mathcal O$ has a finite composition series and is both Noetherian and Artinian. The length of zero is zero. ([[thm-every-category-o-object-has-finite-length]])
 
 [F2] If an object $A$ in an abelian category has two composition series, then the two series have the same length and the same composition factors up to permutation and isomorphism. ([[thm-jordan-holder-theorem-in-an-abelian-category]])
 

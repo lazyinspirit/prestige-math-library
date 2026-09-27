@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [prop-f-relatedness-is-equivalent-to-the-derivation-intertwining-law, lem-the-commutator-of-vector-field-derivations-is-a-derivation, thm-derivations-of-smooth-functions-are-smooth-vector-fields]
+deps: [prop-f-relatedness-is-equivalent-to-the-derivation-intertwining-law, thm-vector-fields-form-a-lie-algebra]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (prop-related-vector-fields-have-related-lie-brackets). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -39,9 +40,8 @@ vector fields $Y_1,Y_2$ on $N$, then $[X_1,X_2]$ is $F$-related to $[Y_1,Y_2]$.
 
 [L1] $F$-relatedness is equivalent to the intertwining identity on smooth functions ([[prop-f-relatedness-is-equivalent-to-the-derivation-intertwining-law]]).
 
-[L2] The commutator of vector-field derivations is again a derivation ([[lem-the-commutator-of-vector-field-derivations-is-a-derivation]]).
+[L2] The commutator of smooth vector fields is again a smooth vector field ([[thm-vector-fields-form-a-lie-algebra]]).
 
-[L3] Every derivation comes from a unique smooth vector field ([[thm-derivations-of-smooth-functions-are-smooth-vector-fields]]).
 
 ## Proof
 
@@ -51,6 +51,6 @@ vector fields $Y_1,Y_2$ on $N$, then $[X_1,X_2]$ is $F$-related to $[Y_1,Y_2]$.
 
 2.1 Apply $X_1$ to the first identity and $X_2$ to the second. Using [L1] again on the resulting target functions yields $$ X_1X_2(f\circ F)=(Y_1Y_2f)\circ F, \qquad X_2X_1(f\circ F)=(Y_2Y_1f)\circ F. $$ [L1, step 1.1]
 
-3.1 Subtracting the identities in step 2.1 gives $$ [X_1,X_2](f\circ F)=([Y_1,Y_2]f)\circ F $$ for every smooth $f$ on $N$. By [L2], [L3], and [L1], this is exactly the statement that $[X_1,X_2]$ and $[Y_1,Y_2]$ are $F$-related. [L1, L2, L3, step 2.1]
+3.1 Subtracting the identities in step 2.1 gives $$ [X_1,X_2](f\circ F)=([Y_1,Y_2]f)\circ F $$ for every smooth $f$ on $N$. By [L2] both brackets are smooth vector fields, and [L1] identifies this identity as their $F$-relatedness. [L1, L2, step 2.1]
 
 4.1 Therefore related vector fields have related Lie brackets. [step 3.1] ∎

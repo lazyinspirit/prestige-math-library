@@ -40,6 +40,7 @@ parts:
       - finite-support-iterations-and-martins-axiom
       - preservation-cohen-forcing-and-the-continuum
       - permutation-models-and-transfer-to-zf
+      - eastons-theorem-and-cardinal-invariants-of-the-continuum
       - shelahs-baire-property-model-and-inner-model-lower-bounds
       - normal-moore-spaces-pmea-and-consistency-strength
       - choice-strength-in-baire-urysohn-stone-and-tychonoff
@@ -74,16 +75,17 @@ first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Ordinals: well-ordering, recursion, rank, arithmetic, cofinality, alephs, weak
-choice, clubs, stationarity, trees, Diamond, determinacy, PCF, Dowker spaces,
-completeness, incompleteness, reflection, elementary submodels, BPI, Stone
-duality, Halpern--Läuchli. Large cardinals: ultrafilters, ultrapowers,
-supercompactness yielding PFA, Prikry forcing, Gitik's all-singular model;
-Suslin trees, $L$, HOD, GCH; forcing: generics, names, truth lemma, chain
-conditions, Cohen and Lévy collapse, finite-support MA+$\neg$CH, symmetric
-extensions, permutation models. Choice strength is calibrated: complete-metric
-Baire exactly DC, compact-Hausdorff Baire exactly DMC, Urysohn's lemma from DMC
-but not CC or BPI, Stone's metrization failing under DC and BPI; PMEA proves the
-normal Moore space conjecture, refuted by $V=L$ and sandwiched between an
-inner-model measurable and a strongly compact cardinal; Shelah's Baire-property
-model equiconsistent with ZFC, measurability costing an inaccessible.
+Ordinals: recursion, rank, arithmetic, cofinality, alephs, clubs, Diamond,
+determinacy, PCF, completeness, incompleteness, reflection, BPI, Stone duality,
+Halpern--Läuchli. Large cardinals: ultrafilters, ultrapowers, supercompactness
+yielding PFA, Prikry forcing, Gitik's all-singular model; Suslin trees, $L$, HOD,
+GCH. Forcing: generics, names, truth lemma, chain conditions, Cohen and Lévy
+collapse, finite-support MA+$\neg$CH, symmetric extensions, permutation models,
+Easton class forcing realizing monotone continuum values at infinite regular
+cardinals under the cofinality constraint, singular cardinals excluded.
+Invariants: $\mathfrak{p},\mathfrak{t},\mathfrak{b},\mathfrak{d},\mathfrak{s},\mathfrak{r}$
+with the null and meagre cardinals, the Cichoń diagram. Choice strength:
+complete-metric Baire $=$ DC, compact-Hausdorff Baire $=$ DMC, Urysohn from DMC
+but not CC or BPI, Stone metrization failing under DC and BPI, the normal Moore
+space conjecture proved under PMEA and refuted by $V=L$, Shelah's equiconsistent
+model.

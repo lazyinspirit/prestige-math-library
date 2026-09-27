@@ -7,4 +7,5 @@ examples: [ex-perron-kernel-at-and-away-from-the-jump, ex-perron-formula-for-a-f
 ---
 
 These calculations isolate the half-jump, the four residue families, and the
-ordering convention that a sharp zero sum requires.
+ordering convention that a sharp zero sum requires. The global sharp and smoothed
+formula examples inherit countable choice from their supplying theorems.

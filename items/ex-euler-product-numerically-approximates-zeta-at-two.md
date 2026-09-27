@@ -9,15 +9,22 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-euler-product-for-riemann-zeta, thm-special-values-of-riemann-zeta-at-integers]
+deps: [thm-euler-product-for-riemann-zeta, def-riemann-zeta-function, cor-basel-sum-by-residues]
 proof_strategy: direct
-verification:
-  audited: 2026-09-04
-  precheck: pass
 sources:
   references:
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis, Ch. 6 §2"
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-02-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Example
@@ -32,11 +39,11 @@ $$\zeta(2)=\frac{\pi^2}{6}\approx1.64493.$$
 
 ## Facts & Assumptions
 
-**Given:** The Euler product and the special-value formula for zeta.
+**Given:** The Euler product and the independent Basel sum.
 
 [L1] For $\operatorname{Re}s>1$, $$\zeta(s)=\prod_p(1-p^{-s})^{-1}$$ ([[thm-euler-product-for-riemann-zeta]]).
 
-[L2] One has $\zeta(2)=\pi^2/6$ ([[thm-special-values-of-riemann-zeta-at-integers]]).
+[L2] The Basel sum is $\sum_{n\ge1}n^{-2}=\pi^2/6$ ([[cor-basel-sum-by-residues]]), and this convergent Dirichlet series is $\zeta(2)$ ([[def-riemann-zeta-function]]).
 
 ## Verification
 

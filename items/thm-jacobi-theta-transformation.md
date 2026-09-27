@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-jacobi-theta-function, thm-gaussian-integral]
+deps: [def-jacobi-theta-function, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-poisson-summation-for-schwartz-functions, def-countable-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: "Elias M. Stein and Rami Shakarchi, Complex Analysis, Ch. 6 §2.1"
@@ -22,24 +27,24 @@ sources:
 
 ## Statement
 
-For every $t>0$,
+Assume countable choice. For every $t>0$,
 
 $$\theta(t)=t^{-1/2}\theta(1/t).$$
 
 ## Facts & Assumptions
 
-**Given:** A real number $t>0$.
+**Given:** Countable choice and a real number $t>0$.
 
 [L1] The Jacobi theta function is $$\theta(t)=\sum_{n\in\mathbb Z}e^{-\pi n^2 t}$$ ([[def-jacobi-theta-function]]).
 
-[L2] The Gaussian integral is $$\int_{-\infty}^{\infty} e^{-x^2}\,dx=\sqrt{\pi}$$ ([[thm-gaussian-integral]]).
+[L2] Assuming countable choice, for $g_t(x)=e^{-\pi t x^2}$ the Fourier transform with $e^{-2\pi i x\xi}$ normalization is $\widehat g_t(\xi)=t^{-1/2}e^{-\pi\xi^2/t}$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
 
-[L3] The cited zeta sources record the local Fourier/Poisson seam used here: for $g_t(x):=e^{-\pi t x^2}$, the fixed Fourier normalization gives a Gaussian transform of the form $$\widehat g_t(\xi)=C_t e^{-\pi \xi^2/t},$$ and Poisson summation for this Gaussian periodization gives $$\sum_{n\in\mathbb Z}g_t(n)=\sum_{m\in\mathbb Z}\widehat g_t(m).$$ This is the same seam recorded in the batch notes.
+[L3] Assuming countable choice, Poisson summation gives $\sum_{n\in\mathbb Z}f(n)=\sum_{m\in\mathbb Z}\widehat f(m)$ for every Schwartz function $f$ on $\mathbb R$ ([[thm-poisson-summation-for-schwartz-functions]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Evaluating the transform in [L3] at $\xi=0$ gives $$C_t=\widehat g_t(0)=\int_{-\infty}^{\infty} e^{-\pi t x^2}\,dx.$$ With the change of variables $u=\sqrt{\pi t}\,x$ and [L2], this integral equals $t^{-1/2}$. Therefore $$\widehat g_t(\xi)=t^{-1/2}e^{-\pi \xi^2/t}.$$ [given, L2, L3, algebra]
+1.1 Repeated differentiation of $g_t(x)=e^{-\pi t x^2}$ gives a polynomial times the same Gaussian. For every polynomial $P$, $P(x)e^{-\pi t x^2}\to0$ faster than any reciprocal power as $|x|\to\infty$, since $t>0$. Thus $g_t$ is Schwartz and [L3] applies. [given, L3, algebra]
 
-2.1 By [L1], $\theta(t)=\sum_{n\in\mathbb Z}g_t(n)$. Poisson summation from [L3] and step 1.1 therefore give $$\theta(t)=\sum_{m\in\mathbb Z}\widehat g_t(m)=t^{-1/2}\sum_{m\in\mathbb Z}e^{-\pi m^2/t}=t^{-1/2}\theta(1/t).$$ [L1, L3, step 1.1, algebra] ∎
+2.1 By [L1], $\theta(t)=\sum_{n\in\mathbb Z}g_t(n)$. Poisson summation from [L3], step 1.1 and the exact Gaussian transform [L2] therefore give $$\theta(t)=\sum_{m\in\mathbb Z}\widehat g_t(m)=t^{-1/2}\sum_{m\in\mathbb Z}e^{-\pi m^2/t}=t^{-1/2}\theta(1/t).$$ [L1, L2, L3, step 1.1, algebra] ∎

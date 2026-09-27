@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, prop-orthogonal-complements-of-subbundles-are-smooth-subbundles]
+deps: [thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric, prop-orthogonal-complements-of-subbundles-are-smooth-subbundles, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (cor-every-vector-subbundle-has-a-smooth-complement). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,13 +30,13 @@ sources:
 ---
 ## Statement
 
-Every smooth vector subbundle $S\subseteq E$ has a smooth complement in $E$.
+Assume the Axiom of Countable Choice. Every smooth vector subbundle $S\subseteq E$ has a smooth complement in $E$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth vector subbundle $S\subseteq E$.
+**Given:** The Axiom of Countable Choice and a smooth vector subbundle $S\subseteq E$.
 
-[L1] The bundle $E$ admits a smooth bundle metric ([[thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]]).
+[L1] Under Countable Choice, the bundle $E$ admits a smooth bundle metric ([[thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]], [[def-countable-choice]]).
 
 [L2] Orthogonal complements of subbundles are smooth subbundles ([[prop-orthogonal-complements-of-subbundles-are-smooth-subbundles]]).
 

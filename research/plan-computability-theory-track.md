@@ -2022,7 +2022,9 @@ on A items.
 
 The old mixture of graph powering, assignment testing, and undeveloped code
 claims is not a proof of the reduction.  Replace it with this proof-ordered
-inventory:
+inventory. The 2026-09-26 Step 3 owner correction defers the five-item
+tester-composition and iteration chain described below; the current pair
+proves the graph, code and base-tester claims that do not use it:
 
 1. `def-gap-preserving-csp-reduction` — strengthen the existing proposed
    definition to record completeness, gap, linear blowup, and uniformity.
@@ -2056,8 +2058,8 @@ inventory:
 26. `def-quadratic-consistency-test`
 27. `lem-quadratic-test-soundness`
 28. `lem-circuit-satisfaction-is-linear-quadratic-consistency`
-29. `thm-constant-query-assignment-tester`
-30. `lem-tester-size-and-construction-time-are-polynomial`
+29. `lem-exponential-base-assignment-tester-from-quadratic-oracles`
+30. `lem-trivial-circuit-constraint-system-is-a-weak-assignment-tester`
 31. `fs-repeating-constraints-amplifies-the-gap`
 
 The proof contract for items 8--15 is the full powering analysis: state the
@@ -2072,11 +2074,27 @@ time are all proved locally; the theorem must not import an unspecified
 `gap-amplification-and-assignment-testing-examples` requires only its A page
 and contains the preserved leaf items
 `ex-degree-reduction-preserves-unsatisfaction`,
-`ex-tester-size-and-construction-time-are-polynomial`, and
 `cex-repeating-constraints-amplifies-the-gap`, plus the new
-`ex-plurality-decoding-of-powered-local-views`.  They give respectively the
-cloud calculation, tester-size calculation, repetition counterexample, and a
-numerical local-view/plurality calculation.
+`ex-plurality-decoding-of-powered-local-views`. They give respectively the
+cloud calculation, repetition counterexample, and a numerical
+local-view/plurality calculation.
+
+The following five proposed results are deferred to an owner decision and
+are absent from the current batch manifest and A/B pages:
+`lem-constant-alphabet-assignment-tester-composition`,
+`lem-proximity-gap-amplification-preserves-input-coordinates`,
+`thm-constant-query-assignment-tester`,
+`lem-tester-size-and-construction-time-are-polynomial`, and
+`ex-tester-size-and-construction-time-are-polynomial`. Dinur's §9 argument
+requires an input-preserving tester composition theorem with constant
+rejection loss independent of the powered alphabet size. The local unit-vector
+construction has loss proportional to the reciprocal alphabet size and does
+not prove its raw-input bit interface. The five drafts and original carriers
+are preserved under
+`research/frontier-35-ten-categories-batch-12-deferred-20260926/`; see the
+durable `research/frontier-35-ten-categories-deferred-items.json` ledger.
+The later PCP page in §48 still needs this missing interface before it can
+cite a polynomial-size constant-query tester from the present pair.
 
 ## 48. Binding replacement for `TC-35`: alphabet reduction and PCP
 

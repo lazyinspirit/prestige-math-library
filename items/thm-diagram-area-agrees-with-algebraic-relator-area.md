@@ -7,11 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-van-kampen-lemma, def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation, lem-minimal-algebraic-relator-area-exists]
+deps: [thm-van-kampen-lemma, def-van-kampen-diagram-boundary-label-and-area, lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group, def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation, lem-minimal-algebraic-relator-area-exists]
 proof_strategy: "direct"
 verification:
-  audited: 2026-09-01
-  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (thm-diagram-area-agrees-with-algebraic-relator-area). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,7 +38,9 @@ diagram equals its minimal algebraic relator area.
 
 **Given:** A finite presentation and a word $w$ representing the identity.
 
-[L1] Van Kampen diagrams exist exactly for null words in the presented group ([[thm-van-kampen-lemma]]).
+[L1] Van Kampen diagrams exist exactly for null words in the presented group ([[thm-van-kampen-lemma]]). Its converse constructs a diagram from an $m$-factor expression with at most $m$ faces and the specified literal boundary word.
+
+[L2] A diagram is a finite connected simply connected planar complex whose literal outer walk counts bridges twice ([[def-van-kampen-diagram-boundary-label-and-area]]); the free-edge face collapse in [[lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group]] removes one face and its unique boundary edge while preserving connectedness and simple connectedness.
 
 [F1] Algebraic relator area is the minimum number of conjugates of defining relators needed to express the word, when such a minimum exists ([[def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation]], [[lem-minimal-algebraic-relator-area-exists]]).
 
@@ -42,8 +48,10 @@ diagram equals its minimal algebraic relator area.
 
 **Proof technique:** direct.
 
-1.1 Let $D$ be any van Kampen diagram for $w$ with $m$ faces. Reading the faces one by one as in the proof of [[lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group]] expresses $w$ as a product of $m$ conjugates of relators and their inverses. Hence the algebraic relator area of $w$ is at most $m$. [L1, F1, given]
+1.1 Let $D$ be any van Kampen diagram for $w$ with $m$ faces. We show by induction on $m$ that $[w]$ is a product of at most $m$ conjugates of defining relators or their inverses in the free group. For $m=0$, $D$ is a tree by the graph argument in [L2]'s cited proof; its outer walk freely reduces to the empty word, including the one-vertex case. [L2, F1, given]
 
-1.2 Conversely, let $$w=\prod_{k=1}^m u_k r_k^{\varepsilon_k} u_k^{-1}$$ be an algebraic expression with $m$ minimal as in [F1]. The converse construction in [[thm-van-kampen-lemma]] produces a van Kampen diagram with exactly $m$ faces and boundary word $w$. Therefore the minimal diagram area is at most the algebraic relator area. [F1, L1, construct]
+1.2 Conversely, let $$[w]=\prod_{k=1}^m [u_k r_k^{\varepsilon_k} u_k^{-1}]$$ be an algebraic expression with $m$ minimal as in [F1]. The converse construction in [L1] produces a diagram whose **literal** boundary word is $w$ and whose face count is at most $m$. Therefore the minimal diagram area is at most the algebraic relator area. [F1, L1, construct]
 
-2.1 Step 1.1 gives one inequality between the two minima and step 1.2 gives the reverse inequality. Therefore the two minimal areas are equal. [step 1.1, step 1.2] ∎
+2.1 Suppose $m>0$. A generic ray from an interior point of the finite union of face closures to infinity crosses edge interiors and avoids vertices. At its last exit from that union it crosses an edge $e$ with one face on its inner side and the unbounded complementary region on its other side, so $e$ occurs once in the outer walk. Collapse that face across $e$ as in [L2], obtaining a planar simply connected diagram $D'$ with $m-1$ faces. Write the old outer word from the fixed basepoint as $aeb$, with $e$ denoting its oriented label, and let $p$ be the complementary face-boundary walk joining the same edge endpoints. The new outer walk reads $apb$ (including any bridge traversals). Consequently $[aeb][apb]^{-1}=[aep^{-1}a^{-1}]$, a conjugate of the cyclic face label, hence of a defining relator or its inverse. By induction $[apb]$ needs at most $m-1$ factors, so $[w]$ needs at most $m$. Thus the algebraic area is at most every diagram area. [L2, F1, step 1.1, construct]
+
+3.1 Steps 1.1 and 2.1 give one inequality between the two minima and step 1.2 gives the reverse inequality. Therefore the two minimal areas are equal. [step 1.1, step 2.1, step 1.2] ∎

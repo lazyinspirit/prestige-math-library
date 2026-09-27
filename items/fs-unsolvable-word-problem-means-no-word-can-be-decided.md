@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [rem-novikov-boone-undecidability-of-the-word-problem]
+deps: [thm-novikov-boone-undecidability-of-the-word-problem, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-29
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (fs-unsolvable-word-problem-means-no-word-can-be-decided). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,14 +30,14 @@ pipeline_run: null
 
 ## Statement
 
-If a finitely presented group has unsolvable word problem, then no individual
+Assume AC. If a finitely presented group has unsolvable word problem, then no individual
 word in that group can ever be proved trivial or nontrivial.
 
 ## Facts & Assumptions
 
-**Given:** A finitely presented group with unsolvable word problem.
+**Given:** AC and a finitely presented group with unsolvable word problem.
 
-[L1] Some finitely presented group has unsolvable word problem. ([[rem-novikov-boone-undecidability-of-the-word-problem]])
+[L1] Assuming AC, some finitely presented group has unsolvable word problem ([[thm-novikov-boone-undecidability-of-the-word-problem]], [[def-axiom-of-choice]]).
 
 ## Refutation
 
@@ -44,6 +45,6 @@ word in that group can ever be proved trivial or nontrivial.
 
 1.1 An unsolvable word problem means that no single algorithm decides triviality for all input words in that fixed group. [L1, given]
 
-2.1 That does not prevent a particular word from being settled by an ad hoc calculation, a special normal form, or a direct proof. So failure of one uniform algorithm is not the claim that every individual instance is forever inaccessible. [step 1.1, algebra]
+1.2 The empty word represents the identity in every group, and its triviality has a direct proof from the group axioms. In particular this individual word is decidable even in the group supplied by [L1]. [L1, given]
 
-3.1 Therefore the statement is false. [step 2.1] ∎
+2.1 This explicit word refutes the assertion that no individual word can be proved trivial or nontrivial. [step 1.1, step 1.2] ∎

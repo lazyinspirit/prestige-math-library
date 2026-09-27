@@ -2,13 +2,8 @@
 id: "lem-regular-local-domain-induction"
 kind: "lemma"
 title: "regular local domain induction"
-deps: ["thm-associated-graded-ring-of-a-regular-local-ring", "thm-krull-intersection-theorem"]
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+deps: ["def-axiom-of-choice", "thm-associated-graded-ring-of-a-regular-local-ring", "thm-krull-intersection-theorem"]
+proof_strategy: "Explicit algebraic derivation"
 sources:
   references:
     - title: "10.106.2"
@@ -18,12 +13,20 @@ provenance:
   proof: ai-altered
 status: published
 origin: "pipeline"
-proof_strategy: "Explicit algebraic derivation"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
 
-Every regular local ring is an integral domain.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every regular local ring is an integral domain.
 
 ## Facts & Assumptions
 
@@ -35,6 +38,6 @@ Every regular local ring is an integral domain.
 
 ## Proof
 
-1.1 The maximal-adic filtration is separated by Krull intersection. For each nonzero $a\in R$ there is therefore a largest integer $r\ge0$ with $a\in\mathfrak m^r$; its class $\operatorname{in}(a)$ in degree $r$ is nonzero. [F2]
+1.1 Under the assumed AC, the Jacobson-radical clause of Krull intersection [F2] makes the maximal-adic filtration separated. For each nonzero $a\in R$ there is therefore a largest integer $r\ge0$ with $a\in\mathfrak m^r$; its class $\operatorname{in}(a)$ in degree $r$ is nonzero. [F2, given]
 
 2.1 For nonzero $a,b$ of orders $r,s$, their initial classes have nonzero product in the graded polynomial ring, which is a domain: multiplying leading monomials proves this over the field $k$. This product is the class of $ab$ in $\mathfrak m^{r+s}/\mathfrak m^{r+s+1}$, so $ab\ne0$. The same argument includes $r=0$, $s=0$, and dimension zero. [F1, step 1.1, algebra] ∎

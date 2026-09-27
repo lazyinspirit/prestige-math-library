@@ -1,0 +1,2677 @@
+[
+  {
+    "order": 366.081,
+    "id": "sheaf-cohomology-cech-cohomology-and-comparison",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Sheaf Cohomology Cech Cohomology and Comparison",
+    "companion": "sheaf-cohomology-cech-cohomology-and-comparison-examples",
+    "requires": [
+      "presheaves-sheaves-stalks-and-sheafification",
+      "sheaf-operations-exactness-ringed-spaces-and-module-pullback",
+      "projective-and-injective-resolutions",
+      "derived-functors",
+      "dimension-constructible-images-and-dimensions-of-fibres",
+      "derived-categories",
+      "double-complexes-exact-couples-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "def-global-sections-functor-sheaves",
+        "kind": "definition",
+        "title": "Global sections of an abelian sheaf",
+        "statement": "For a fixed topological space X, Γ(X,F)=F(X) is the additive global-sections functor Ab(X)→Ab; it is left exact.",
+        "deps": [
+          "def-section-restriction-and-global-section",
+          "lem-global-sections-left-exact",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-morphism-of-presheaves"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-abelian-sheaves-form-a-grothendieck-category",
+        "kind": "lemma",
+        "title": "Abelian sheaves form a Grothendieck category",
+        "statement": "For a topological space X whose opens form a set, Ab(X) is locally small, AB5, and has a generator.",
+        "strategy": "Sheafify presheaf direct sums to obtain coproducts. Filtered colimits are exact stalkwise because filtered colimits of abelian groups are exact and stalks commute with them. For each open U, the sheaf j_{U!} Z_U represents F↦F(U), using the published extension-by-zero adjunction and the free constant abelian sheaf on U. The coproduct over the set of opens is a generator: a nonzero sheaf map is nonzero on some section over some open.",
+        "deps": [
+          "def-grothendieck-category",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-morphism-of-presheaves",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sheafification-universal-property",
+          "thm-sheafification-preserves-stalks",
+          "thm-extension-by-zero-adjunction-exactness",
+          "def-extension-by-zero-abelian-sheaf",
+          "def-sheafification",
+          "thm-ab5-is-equivalent-to-exactness-of-filtered-colimits",
+          "prop-abelian-groups-are-z-modules",
+          "thm-module-categories-are-grothendieck-categories",
+          "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "def-stalk-of-presheaf",
+          "def-separating-set-and-coseparating-set",
+          "def-generator-and-cogenerator-of-a-category"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-abelian-sheaves-have-enough-injectives",
+        "kind": "theorem",
+        "title": "Enough injective abelian sheaves",
+        "statement": "Assuming AC, Ab(X) has enough injectives and every abelian sheaf has a supplied functorial injective resolution.",
+        "strategy": "Apply the published Grothendieck-category injective embedding and resolution corollary to the preceding local AB5/generator lemma. Use AC exactly in the transfinite injective-embedding theorem; iterate its functorial embeddings on successive cokernels to supply one resolution datum without making an untracked global choice.",
+        "deps": [
+          "def-global-sections-functor-sheaves",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings",
+          "cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution",
+          "def-injective-resolution-in-an-abelian-category",
+          "def-supplied-injective-resolution-datum",
+          "lem-one-step-extension-of-a-partial-injective-resolution",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sheaf-cohomology-derived-global-sections",
+        "kind": "definition",
+        "title": "Sheaf cohomology as right derived global sections",
+        "statement": "Assuming AC and the functorial injective resolution datum I just supplied, define H^q(X,F)=R_I^q Γ(X,F)=H^q(Γ(X,I^•F)) for q≥0; comparison of supplied resolution data makes the answer canonical up to natural isomorphism.",
+        "deps": [
+          "def-global-sections-functor-sheaves",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "def-deleted-resolution",
+          "def-cohomology-object-of-a-cochain-complex",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-zero-sheaf-cohomology-global-sections",
+        "kind": "theorem",
+        "title": "Degree-zero sheaf cohomology is global sections",
+        "statement": "Assuming AC, H^0(X,F) is naturally isomorphic to Γ(X,F) for every abelian sheaf F.",
+        "strategy": "Apply the published zeroth-right-derived recovery theorem to the left-exact functor Γ; its kernel description identifies Γ(F) with ker(Γ(I^0)→Γ(I^1)), and comparison maps give naturality.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-global-sections-functor-sheaves",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-long-exact-sequence-sheaf-cohomology",
+        "kind": "theorem",
+        "title": "Long exact sequence of sheaf cohomology",
+        "statement": "Assuming AC, every short exact sequence 0→F′→F→F″→0 of abelian sheaves induces a natural long exact sequence H^q(X,F′)→H^q(X,F)→H^q(X,F″)→H^{q+1}(X,F′).",
+        "strategy": "Use the injective horseshoe lemma to choose a degreewise split short exact sequence of injective resolutions. Additivity of Γ preserves each split degree, and the published long exact cohomology sequence of complexes gives connecting maps. Comparison uniqueness makes the maps independent of resolution choices and natural in short exact sequences.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-global-sections-functor-sheaves",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-horseshoe-lemma-for-injective-resolutions",
+          "thm-long-exact-sequence-in-cohomology",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-comparison-map-from-an-exact-complex-into-an-injective-resolution",
+        "kind": "lemma",
+        "title": "Lifting a morphism from an exact complex into an injective resolution",
+        "statement": "Assume DC. Let 0 -> A -> J^0 -> J^1 -> ... be a coaugmented cochain complex that is exact at every displayed term, and let 0 -> B -> I^0 -> I^1 -> ... be a coaugmented cochain complex whose terms are injective. Then every morphism A -> B extends to a coaugmentation-preserving cochain map J^bullet -> I^bullet, and any two such cochain maps are cochain-homotopic.",
+        "deps": [
+          "def-injective-object",
+          "def-chain-map",
+          "def-graded-morphism-of-chain-complexes",
+          "def-chain-homotopy",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-abelian-category",
+          "thm-the-image-is-the-least-subobject-through-which-a-morphism-factors",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Derived Categories, Section 13.18: Injective resolutions (tags 013P, 013R)",
+              "url": "https://stacks.math.columbia.edu/tag/013G"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cohomology-functoriality-sheaf-and-space",
+        "kind": "lemma",
+        "title": "Variance of sheaf cohomology",
+        "statement": "Assuming AC, F↦H^q(X,F) is covariant in sheaf maps. For f:X→Y and a map f^{-1}G→F, there is a natural contravariant-in-space map H^q(Y,G)→H^q(X,F), compatible with compositions.",
+        "strategy": "Sheaf covariance is the published right-derived map. For the space map, take injective resolutions G→J^• and F→I^•. Exactness of f^{-1} follows from its stalk formula and stalkwise exactness, so f^{-1}J^• resolves f^{-1}G. Extend f^{-1}G→F to a cochain map f^{-1}J^•→I^• using injectivity of the target terms. Compose the adjunction-unit cochain map Γ(Y,J^•)→Γ(X,f^{-1}J^•) with Γ of that extension. Standard comparison homotopy, proved by the same inductive extension argument, gives independence and composition; in degree zero this is section pullback followed by the given map.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-global-sections-functor-sheaves",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-inverse-direct-image-adjunction",
+          "def-direct-image-sheaf",
+          "lem-stalk-inverse-image-sheaf",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "thm-right-derived-functors-relative-to-supplied-data-are-additive-functors",
+          "prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "lem-comparison-map-from-an-exact-complex-into-an-injective-resolution",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-acyclic-sheaf-global-sections",
+        "kind": "definition",
+        "title": "Γ-acyclic abelian sheaf",
+        "statement": "Assuming AC, an abelian sheaf F is Γ-acyclic when H^q(X,F)=0 for every q>0; the adjective may also be applied on an open U after restriction.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-global-sections-functor-sheaves",
+          "def-acyclic-object-for-a-left-exact-functor",
+          "def-restriction-sheaf-open-subspace",
+          "def-subspace-topology-top",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-flasque-sheaf",
+        "kind": "definition",
+        "title": "Flasque sheaf",
+        "statement": "An abelian sheaf F is flasque if every restriction F(V)→F(U) for open U⊆V is surjective.",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-section-restriction-and-global-section",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-injective-sheaves-flasque",
+        "kind": "lemma",
+        "title": "Injective abelian sheaves are flasque",
+        "statement": "Every injective object of Ab(X) has surjective restriction maps, without an additional choice principle once the injective object is given.",
+        "strategy": "For U⊆V, the canonical map j_{U!}Z_U→j_{V!}Z_V is monic by its stalks. The extension-by-zero adjunction and the free property of the constant integer sheaf identify Hom(j_{V!}Z_V,I)→Hom(j_{U!}Z_U,I) with I(V)→I(U). Injectivity of I makes this surjective.",
+        "deps": [
+          "def-flasque-sheaf",
+          "def-injective-object",
+          "thm-extension-by-zero-adjunction-exactness",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-abelian-sheaves-form-abelian-category",
+          "thm-sheafification-universal-property",
+          "def-sheafification",
+          "def-extension-by-zero-abelian-sheaf",
+          "def-kernel-cokernel-image-sheaves",
+          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-flasque-kernel-lifts-quotient-sections",
+        "kind": "lemma",
+        "title": "Flasque kernel lifts quotient sections",
+        "statement": "Assuming AC, if 0→F→G→H→0 is exact and F is flasque, then G(U)→H(U) is surjective for every open U; if G is flasque, H is flasque.",
+        "strategy": "For s∈H(U), order pairs (V,t) with V⊆U open and t∈G(V) lifting s|V by extension. Chains have upper bounds by sheaf gluing. Zorn gives a maximal pair. If x∈U\\V, find a local lift near x; its difference from t on the overlap lies in F and extends across that overlap by flasqueness. Correct the local lift and glue, contradicting maximality. Then lift a section of H on a smaller open to G and extend via flasqueness of G to prove the final assertion. AC is used exactly for Zorn.",
+        "deps": [
+          "def-flasque-sheaf",
+          "def-exact-sequence-sheaves",
+          "def-sheaf-on-topological-space",
+          "def-axiom-of-choice",
+          "thm-zorn",
+          "cor-ac-iff-zorn",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-stalk-of-presheaf",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-flasque-sheaves-acyclic",
+        "kind": "theorem",
+        "title": "Flasque abelian sheaves are Γ-acyclic",
+        "statement": "Assuming AC, a flasque abelian sheaf F has H^q(U,F|U)=0 for every open U and q>0.",
+        "strategy": "Restrict a flasque sheaf to U. Embed it in an injective sheaf I, which is flasque; the previous lifting lemma shows 0→F(V)→I(V)→Q(V)→0 for every V⊆U and Q flasque. The long exact derived-cohomology sequence gives H^1(V,F)=0 and dimension-shifting isomorphisms H^{q+1}(V,F)≅H^q(V,Q). Iterate on Q to vanish in all positive degrees. AC supplies injectives and Zorn in the lifting lemma.",
+        "deps": [
+          "def-acyclic-sheaf-global-sections",
+          "def-flasque-sheaf",
+          "lem-injective-sheaves-flasque",
+          "lem-flasque-kernel-lifts-quotient-sections",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-axiom-of-choice",
+          "prop-positive-right-derived-functors-vanish-on-injective-objects",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-injective-object",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-abelian-sheaves-form-abelian-category",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-exact-sequence-sheaves",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-godement-resolution",
+        "kind": "definition",
+        "title": "Godement resolution of an abelian sheaf",
+        "statement": "For a sheaf F on X let C^0(F)=∏_{x∈X}i_{x*}F_x, embed F by all germs, let Q^0 be the cokernel, and recursively set C^{n+1}(F)=C^0(Q^n) with Q^{n+1}=coker(Q^n→C^0(Q^n)). The resulting coaugmented complex is the Godement resolution.",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "def-stalk-of-presheaf",
+          "def-germ-of-section",
+          "def-skyscraper-sheaf-abelian-group",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-abelian-sheaves-form-abelian-category",
+          "lem-section-zero-if-all-germs-zero"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-godement-resolution-flasque",
+        "kind": "theorem",
+        "title": "Godement terms are flasque and compute cohomology",
+        "statement": "Assuming AC, the Godement complex is an exact resolution by flasque sheaves, and H^q(X,F) is the qth cohomology of its global-section complex.",
+        "strategy": "The germ map is monic because a section with all zero germs vanishes; each C^0(Q) is a product of skyscrapers whose restriction maps are coordinatewise identity or zero, hence surjective. The cokernel recursion makes the coaugmented complex exact. Apply flasque acyclicity and the published acyclic-resolution theorem, checking all successive cokernels lie in Ab(X). AC enters through flasque acyclicity and the derived-functor setup.",
+        "deps": [
+          "def-godement-resolution",
+          "thm-flasque-sheaves-acyclic",
+          "def-flasque-sheaf",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "def-acyclic-sheaf-global-sections",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-global-sections-functor-sheaves",
+          "lem-section-zero-if-all-germs-zero",
+          "def-germ-of-section",
+          "def-skyscraper-sheaf-abelian-group",
+          "def-kernel-cokernel-image-sheaves",
+          "def-sheaf-on-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cech-cochain-complex-open-cover",
+        "kind": "definition",
+        "title": "Ordered Čech cochain complex of a cover",
+        "statement": "For a given set-indexed cover U=(U_i) with a supplied linear order on I, set C^p(U,F)=∏_{i_0<⋯<i_p}F(U_{i_0}∩⋯∩U_{i_p}), and δs on an increasing (p+2)-tuple is Σ_{j=0}^{p+1}(-1)^j s with i_j deleted and restricted. Empty products are zero groups, so C^p=0 if no such nonempty intersections exist.",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "def-section-restriction-and-global-section",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cech-differential-squares-zero",
+        "kind": "lemma",
+        "title": "The Čech differential squares to zero",
+        "statement": "For the ordered Čech cochain groups, δ^{p+1}δ^p=0 in every degree.",
+        "strategy": "For each ordered (p+3)-tuple, pair the term omitting i_a then i_b with the term omitting i_b then i_a. Their restrictions have the same target and coefficients (-1)^{a+b-1} and (-1)^{a+b}; they cancel. Empty intersections contribute zero.",
+        "deps": [
+          "def-cech-cochain-complex-open-cover",
+          "def-section-restriction-and-global-section",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cech-cohomology-open-cover",
+        "kind": "definition",
+        "title": "Fixed-cover Čech cohomology",
+        "statement": "Define check H^p(U,F)=ker(δ:C^p→C^{p+1})/im(δ:C^{p-1}→C^p), with C^{-1}=0, for the specified ordered cover U.",
+        "deps": [
+          "def-cech-cochain-complex-open-cover",
+          "lem-cech-differential-squares-zero",
+          "def-cohomology-object-of-a-cochain-complex"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cech-h0-global-sections",
+        "kind": "lemma",
+        "title": "Čech H0 equals global sections",
+        "statement": "For every cover U of X and every abelian sheaf F, check H^0(U,F)≅Γ(X,F) naturally.",
+        "strategy": "A 0-cocycle is precisely a family of local sections agreeing on each pairwise intersection, because δ(s)_{ij}=s_j|−s_i|. The sheaf gluing and uniqueness axioms give one global section and the inverse restriction map.",
+        "deps": [
+          "def-cech-cohomology-open-cover",
+          "def-cech-cochain-complex-open-cover",
+          "def-sheaf-on-topological-space",
+          "def-global-sections-functor-sheaves",
+          "def-section-restriction-and-global-section",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-increasing-cech-complex-extends-to-alternating-tuples",
+        "kind": "lemma",
+        "title": "Ordered and alternating Čech complexes agree",
+        "statement": "For a linearly ordered cover, restriction from alternating all-tuple cochains (zero on repeated indices) to increasing tuples is an isomorphism of cochain complexes.",
+        "strategy": "Extend an increasing cochain to any tuple with distinct indices by sorting and multiplying by the permutation sign; assign zero on repeated indices. Alternating restrictions preserve the differential because the deletion signs transform equivariantly, and restriction to increasing tuples is inverse. This permits refinement maps with index functions that are not order preserving.",
+        "deps": [
+          "def-cech-cochain-complex-open-cover",
+          "lem-cech-differential-squares-zero",
+          "def-section-restriction-and-global-section",
+          "def-inversions-inversion-number-and-sign",
+          "thm-sign-is-a-homomorphism",
+          "cor-sign-from-disjoint-cycle-structure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-refinement-open-cover",
+        "kind": "definition",
+        "title": "Refinement map of ordered open covers",
+        "statement": "A specified refinement function c:J→I satisfies V_j⊆U_{c(j)}. Its Čech cochain map sends a source cochain to the restriction along c, interpreted in the all-tuple alternating model and returned to increasing tuples.",
+        "deps": [
+          "def-cech-cochain-complex-open-cover",
+          "lem-increasing-cech-complex-extends-to-alternating-tuples",
+          "def-section-restriction-and-global-section",
+          "def-sheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-refinement-map-independent-on-cohomology",
+        "kind": "theorem",
+        "title": "Refinement choices induce the same Čech map",
+        "statement": "Two specified refinement functions c,c′:J→I from V to U induce chain-homotopic cochain maps and thus the same map check H^p(U,F)→check H^p(V,F) in every degree.",
+        "strategy": "Work first on all-tuple cochains. Use the prism h(s)_{j_0…j_{p-1}}=Σ_{a=0}^{p-1}(-1)^a s_{c(j_0)…c(j_a),c′(j_a)…c′(j_{p-1})} restricted to V-intersections, with the standard degree shift adjusted at p=0. Expand δh+hδ: internal deletions cancel pairwise; the two end faces give c^*−c′^*. Transfer the homotopy through the ordered/alternating isomorphism and apply homotopy invariance of cohomology.",
+        "deps": [
+          "def-refinement-open-cover",
+          "lem-increasing-cech-complex-extends-to-alternating-tuples",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "def-chain-homotopy",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cohomology-object-of-a-cochain-complex",
+          "def-cech-cohomology-open-cover",
+          "def-section-restriction-and-global-section"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-global-cech-cohomology-directed-limit",
+        "kind": "definition",
+        "title": "Refinement-colimit Čech cohomology",
+        "statement": "Assuming AC, check H^p(X,F) is the filtered colimit of fixed-cover groups over the set of open covers of X ordered by refinement, using choice-independent maps on cohomology.",
+        "deps": [
+          "def-cech-cohomology-open-cover",
+          "thm-refinement-map-independent-on-cohomology",
+          "def-refinement-open-cover",
+          "def-axiom-of-choice",
+          "def-filtered-category-and-filtered-colimit"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-acyclic-cover-for-sheaf",
+        "kind": "definition",
+        "title": "Acyclic open cover for a sheaf",
+        "statement": "Assuming AC for derived cohomology, an ordered cover U is F-acyclic if H^q(U_{i_0}∩⋯∩U_{i_p},F|_{intersection})=0 for all q>0 and every nonempty finite intersection (including single members).",
+        "deps": [
+          "def-acyclic-sheaf-global-sections",
+          "def-cech-cochain-complex-open-cover",
+          "def-axiom-of-choice",
+          "def-restriction-sheaf-open-subspace",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "prop-an-exact-functor-has-vanishing-positive-derived-functors"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-acyclic-rows-and-columns-of-cech-double-complex",
+        "kind": "lemma",
+        "title": "Acyclic directions of the Čech–Godement double complex",
+        "statement": "Assuming AC, for D^{p,q}=∏_{i_0<⋯<i_p}G^q(U_{i_0…i_p}) from the functorial Godement resolution F→G^•, the augmented horizontal rows are exact after degree zero. If U is F-acyclic, the vertical columns have positive cohomology zero and degree-zero cohomology C^p(U,F). Both augmentations into Tot(D) are quasi-isomorphisms in the respective situations.",
+        "strategy": "Each Godement term G^q is a product of skyscraper sheaves. Its Čech row is the product, over x∈X, of the augmented cochain complex of the simplex on the indices i with x∈U_i. Under AC choose one such index for each x; prefixing it gives an explicit contracting homotopy on that simplex. Products of exact abelian-group complexes remain exact under AC. On every intersection W, G^•|W is an exact flasque resolution, so the published acyclic-resolution theorem identifies the vertical cohomology with H^q(W,F|W). Products again preserve this calculation. In total degree n only n+1 bidegrees occur; filter the total complex by one axis, truncate at n+1, and use successive short exact sequences and long exact cohomology to eliminate acyclic rows or columns. Passing through each n proves the augmentation quasi-isomorphisms without a general spectral-sequence theorem.",
+        "deps": [
+          "def-cech-cochain-complex-open-cover",
+          "def-godement-resolution",
+          "thm-godement-resolution-flasque",
+          "thm-flasque-sheaves-acyclic",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "thm-long-exact-sequence-in-cohomology",
+          "def-axiom-of-choice",
+          "def-direct-sum-total-complex-on-finite-diagonals",
+          "prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes",
+          "def-mapping-cone-of-a-chain-map",
+          "cor-the-cone-criterion-from-the-general-long-exact-sequence",
+          "def-quasi-isomorphism",
+          "def-global-sections-functor-sheaves",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-acyclic-cover-for-sheaf",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-sheaf-cohomology-derived-global-sections"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cech-to-sheaf-cohomology-comparison",
+        "kind": "theorem",
+        "title": "Canonical map from fixed-cover Čech to sheaf cohomology",
+        "statement": "Assuming AC, every ordered cover U of X and abelian sheaf F has natural maps check H^p(U,F)→H^p(X,F), compatible with sheaf maps and refinement.",
+        "strategy": "Use the functorial Godement resolution and form the preceding first-quadrant double complex. The map Γ(X,G^•)→Tot(D) is a quasi-isomorphism by the explicit skyscraper-row contraction. The map C^•(U,F)→Tot(D) comes from F→G^0. Compose its cohomology map with the inverse of the first quasi-isomorphism. Godement functoriality and the prism homotopy for refinements prove naturality and refinement compatibility.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-cech-cohomology-open-cover",
+          "lem-acyclic-rows-and-columns-of-cech-double-complex",
+          "thm-refinement-map-independent-on-cohomology",
+          "def-axiom-of-choice",
+          "def-godement-resolution",
+          "thm-godement-resolution-flasque",
+          "def-refinement-open-cover",
+          "lem-cech-h0-global-sections",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "def-global-sections-functor-sheaves",
+          "def-quasi-isomorphism"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-leray-acyclic-cover-theorem",
+        "kind": "theorem",
+        "title": "Leray acyclic-cover comparison",
+        "statement": "Assuming AC, if every nonempty finite intersection of U is F-acyclic, then the canonical map check H^p(U,F)→H^p(X,F) is an isomorphism for every p≥0.",
+        "strategy": "In the same double complex, the F-acyclicity hypothesis makes every vertical column have only q=0 cohomology, equal to the corresponding Čech cochain group. The finite-diagonal staircase identifies H^p(Tot D) with check H^p(U,F). The horizontal-row identification of Tot D with derived sheaf cohomology is exactly the comparison map, so it is invertible.",
+        "deps": [
+          "def-acyclic-cover-for-sheaf",
+          "thm-cech-to-sheaf-cohomology-comparison",
+          "lem-acyclic-rows-and-columns-of-cech-double-complex",
+          "def-axiom-of-choice",
+          "def-cech-cohomology-open-cover",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-quasi-isomorphism",
+          "def-godement-resolution"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-two-open-cover-cech-complex",
+        "kind": "lemma",
+        "title": "Čech complex for a two-open cover",
+        "statement": "For X=U∪V with the index U<V, C^0=F(U)⊕F(V), C^1=F(U∩V), C^p=0 for p≥2, and δ(s_U,s_V)=s_V|−s_U|.",
+        "strategy": "List increasing tuples of lengths 1, 2, and at least 3. There are precisely two singleton tuples and one pair, so the alternating deletion formula gives the displayed sign; no higher tuple exists.",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "def-cech-cochain-complex-open-cover",
+          "def-cech-cohomology-open-cover"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-mayer-vietoris-sheaf-cohomology",
+        "kind": "theorem",
+        "title": "Mayer–Vietoris sequence for sheaf cohomology",
+        "statement": "Assuming AC, X=U∪V gives a natural long exact sequence 0→H^0(X,F)→H^0(U,F)⊕H^0(V,F)→H^0(U∩V,F)→H^1(X,F)→⋯.",
+        "strategy": "For each term I^q of an injective resolution of F, sheaf gluing and flasqueness give a short exact sequence 0→I^q(X)→I^q(U)⊕I^q(V)→I^q(U∩V)→0, with difference of restrictions. Restriction of I^• to each open is a flasque acyclic resolution of F there. The published long exact sequence of cochain complexes gives the displayed sequence and its naturality via comparison maps.",
+        "deps": [
+          "lem-two-open-cover-cech-complex",
+          "lem-injective-sheaves-flasque",
+          "thm-flasque-sheaves-acyclic",
+          "thm-long-exact-sequence-in-cohomology",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-axiom-of-choice",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "def-global-sections-functor-sheaves",
+          "lem-global-sections-left-exact",
+          "def-sheaf-on-topological-space",
+          "def-injective-object",
+          "lem-cohomology-functoriality-sheaf-and-space",
+          "def-restriction-sheaf-open-subspace",
+          "thm-extension-by-zero-adjunction-exactness"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cohomology-disjoint-union",
+        "kind": "theorem",
+        "title": "Cohomology of a finite disjoint union",
+        "statement": "Assuming AC, for X the disjoint union of finitely many open-and-closed X_a and any abelian sheaf F, H^q(X,F)≅∏_a H^q(X_a,F|_{X_a}), equal to the finite direct sum.",
+        "strategy": "Restriction identifies Ab(X) with the finite product of the Ab(X_a); extension by zero supplies the inverse. Injectives and injective resolutions are componentwise, while Γ(X,F)=∏Γ(X_a,F_a). Finite products are exact, so cohomology commutes with them. The empty disjoint union gives zero groups.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-extension-by-zero-adjunction-exactness",
+          "prop-derived-functors-commute-with-finite-biproducts",
+          "def-axiom-of-choice",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-global-sections-functor-sheaves",
+          "def-godement-resolution",
+          "def-restriction-sheaf-open-subspace",
+          "def-injective-object",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "def-sheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cohomology-one-point-space",
+        "kind": "theorem",
+        "title": "A point has no higher sheaf cohomology",
+        "statement": "Assuming AC, for the one-point space and every abelian sheaf F, H^0=F(X) and H^q=0 for q>0.",
+        "strategy": "Evaluation on the unique nonempty open is an exact equivalence Ab(X)≅Ab, so Γ is exact. Apply the published vanishing of positive derived functors of an exact functor and degree-zero recovery.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "prop-an-exact-functor-has-vanishing-positive-derived-functors",
+          "def-axiom-of-choice",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-global-sections-functor-sheaves",
+          "def-sheaf-on-topological-space",
+          "lem-sheaf-section-over-empty-set-terminal"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cohomological-dimension-space",
+        "kind": "definition",
+        "title": "Cohomological dimension relative to a sheaf class",
+        "statement": "Assuming AC, cd_C(X) is the least d≥0 with H^q(X,F)=0 for all F in the named class C and q>d, or infinity if no such d exists; cd_C(∅) may be recorded as -∞.",
+        "deps": [
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-axiom-of-choice",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "prop-an-exact-functor-has-vanishing-positive-derived-functors"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cech-vanishing-on-a-cofinal-basis-implies-acyclicity",
+        "kind": "lemma",
+        "title": "Cofinal Čech vanishing implies derived acyclicity",
+        "statement": "Assuming AC, let B be a basis of opens and Cov a cofinal family of finite covers of every U∈B, with all finite intersections again in B. If an abelian sheaf F has positive Čech cohomology zero for every cover in Cov, then H^q(U,F)=0 for all U∈B and q>0.",
+        "strategy": "Stacks Lemma 11.9: embed F in an injective sheaf I and set Q=I/F. The Čech H1=0 and cofinality allow locally chosen lifts of every section of Q to be adjusted by an F-valued Čech coboundary, yielding surjectivity I(U)→Q(U) on B. Thus each cover in Cov gives a short exact sequence of Čech complexes 0→C(F)→C(I)→C(Q)→0. An injective is flasque, hence acyclic on every finite intersection; the proved Leray acyclic-cover theorem makes its Čech cohomology vanish for these finite covers. Thus Q inherits positive Čech vanishing. In the derived long exact sequence, I is acyclic; surjectivity gives H1(U,F)=0, then repeat for Q to dimension-shift and obtain all positive degrees. AC is used for the injective embedding and choosing local lifts.",
+        "deps": [
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-long-exact-sequence-in-cohomology",
+          "def-cech-cohomology-open-cover",
+          "def-axiom-of-choice",
+          "lem-injective-sheaves-flasque",
+          "thm-flasque-sheaves-acyclic",
+          "thm-leray-acyclic-cover-theorem",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-kernel-cokernel-image-sheaves",
+          "def-cech-cochain-complex-open-cover",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "lem-cech-h0-global-sections",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-flasque-sheaf",
+          "def-injective-object",
+          "lem-cech-differential-squares-zero"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, Lemma 11.9",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-noetherian-subspaces-and-compact-opens",
+        "kind": "lemma",
+        "title": "Subspaces of a Noetherian space and its compact open subsets",
+        "statement": "Assuming AC, every subspace of a Noetherian space is Noetherian and compact, so every open subset is compact, and intersections of compact open subsets are compact open.",
+        "deps": [
+          "def-noetherian-topological-space",
+          "def-compact-space",
+          "def-subspace-topology-top",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Topology (Section 5.9, Noetherian topological spaces)",
+              "url": "https://stacks.math.columbia.edu/tag/0050"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sections-on-compact-opens-commute-with-filtered-colimits",
+        "kind": "lemma",
+        "title": "Filtered colimits of sheaves and sections over compact opens",
+        "statement": "Assuming AC, for a filtered diagram of sheaves of sets on a space X with sheafification colimit F, the canonical map colim_i F_i(U) -> F(U) is injective for compact U, bijective when U and all its opens are compact, and bijective for every open U when X is Noetherian; for sheaves of abelian groups it is an isomorphism of groups in these cases.",
+        "deps": [
+          "def-presheaf-plus-construction",
+          "def-sheafification",
+          "def-separated-presheaf",
+          "def-stalk-of-presheaf",
+          "lem-first-plus-construction-is-separated",
+          "thm-sheafification-preserves-stalks",
+          "thm-sheafification-universal-property",
+          "cor-left-adjoints-preserve-colimits",
+          "def-presheaf-on-topological-space",
+          "def-presheaf-of-groups-rings-modules",
+          "def-compact-space",
+          "def-axiom-of-choice",
+          "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "def-filtered-category-and-filtered-colimit",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "thm-ab5-is-equivalent-to-exactness-of-filtered-colimits",
+          "def-noetherian-topological-space",
+          "lem-noetherian-subspaces-and-compact-opens",
+          "def-sheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves on Spaces, Lemma 29.1 (tag 009F)",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-filtered-colimits-of-abelian-groups-are-exact",
+        "kind": "lemma",
+        "title": "Filtered colimits of abelian groups are exact",
+        "statement": "For every small filtered category the filtered colimit functor on abelian groups is exact: it preserves short exact sequences, and the homology of a filtered colimit of complexes of abelian groups is the filtered colimit of the homologies.",
+        "deps": [
+          "prop-abelian-groups-are-z-modules",
+          "thm-module-categories-are-grothendieck-categories",
+          "def-grothendieck-category",
+          "def-the-axioms-ab3-and-ab3-star",
+          "thm-ab5-is-equivalent-to-exactness-of-filtered-colimits",
+          "def-exact-functor-between-abelian-categories",
+          "def-filtered-category-and-filtered-colimit"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Algebra (filtered colimits of modules)",
+              "url": "https://stacks.math.columbia.edu/tag/00HA"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces",
+        "kind": "lemma",
+        "title": "Filtered colimits and cohomology on Noetherian spaces",
+        "statement": "Assuming AC, for a directed system of abelian sheaves F_i on a Noetherian space X, the natural map colim_i H^q(X,F_i) to H^q(X,colim_i F_i) is an isomorphism for every q≥0.",
+        "strategy": "Stacks Lemma 19.1: every open and every finite intersection of opens is quasi-compact. In degree zero, sections commute with the filtered colimit by finite local witnesses and finite equalizer conditions. Embed the filtered diagram functorially in a diagram of injective sheaves, using products over arrows if necessary; filtered colimits remain exact stalkwise. A filtered colimit of these injectives is acyclic on each quasi-compact open: finite Čech covers commute with filtered colimits and each injective Čech complex is acyclic; apply the local cofinal-basis Čech-vanishing criterion. Resolve degree by degree and pass the exact filtered colimit through the resolution. AC is used for injective embeddings and product choices.",
+        "deps": [
+          "lem-sections-on-compact-opens-commute-with-filtered-colimits",
+          "lem-noetherian-subspaces-and-compact-opens",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-axiom-of-choice",
+          "thm-set-has-all-small-colimits",
+          "def-flasque-sheaf",
+          "lem-injective-sheaves-flasque",
+          "thm-flasque-sheaves-acyclic",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "thm-ab5-is-equivalent-to-exactness-of-filtered-colimits",
+          "lem-filtered-colimits-of-abelian-groups-are-exact",
+          "def-kernel-cokernel-image-sheaves",
+          "def-filtered-category-and-filtered-colimit",
+          "def-noetherian-topological-space",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "def-presheaf-plus-construction",
+          "def-sheafification",
+          "def-exact-functor-between-abelian-categories",
+          "thm-abelian-sheaves-form-abelian-category",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-subsheaf-generated-by-sections",
+        "kind": "lemma",
+        "title": "The subsheaf generated by a family of sections",
+        "statement": "Let $X$ be a topological space, let $\\mathcal F$ be a sheaf of\nabelian groups on $X$ ([[def-sheaf-on-topological-space]]), and let\n$(s_\\alpha\\in\\mathcal F(U_\\alpha))_{\\alpha\\in A}$ be a family of sections indexed\nby a set $A$, each $U_\\alpha\\subseteq X$ open. For $x\\in X$ let\n$$G_x:=\\langle\\,(s_\\alpha)_x:\\alpha\\in A\\text{ with }x\\in U_\\alpha\\,\\rangle\\ \\le\\ \\mathcal F_x$$\nbe the subgroup of the stalk generated by the germs of the generators that are\ndefined at $x$ ([[def-generated-subgroup]], [[def-germ-of-section]]). Then:\n\n1. the prescription\n$$\\langle s_\\alpha\\rangle(W):=\\{\\,s\\in\\mathcal F(W):s_x\\in G_x\\text{ for every }x\\in W\\,\\},\\qquad W\\subseteq X\\text{ open},$$\ndefines a subsheaf $\\langle s_\\alpha\\rangle\\subseteq\\mathcal F$, called the\nsubsheaf generated by the family $(s_\\alpha)$;\n2. $s_\\alpha\\in\\langle s_\\alpha\\rangle(U_\\alpha)$ for every $\\alpha\\in A$;\n3. $\\langle s_\\alpha\\rangle_x=G_x$ for every $x\\in X$;\n4. if $\\mathcal H\\subseteq\\mathcal F$ is a subsheaf with\n$s_\\alpha\\in\\mathcal H(U_\\alpha)$ for every $\\alpha$, then\n$\\langle s_\\alpha\\rangle\\subseteq\\mathcal H$; conversely, if\n$\\mathcal H\\subseteq\\mathcal F$ is a subsheaf with $\\mathcal H_x=G_x$ for every\n$x\\in X$, then $\\mathcal H=\\langle s_\\alpha\\rangle$;\n5. if $(t_\\beta\\in\\mathcal F(V_\\beta))_{\\beta\\in B}$ is a further family of\nsections with $t_\\beta\\in\\langle s_\\alpha\\rangle(V_\\beta)$ for every\n$\\beta\\in B$, then the subsheaf generated by the combined family equals\n$\\langle s_\\alpha\\rangle$.\n\nThe construction is functorial in the family in the evident way and uses no\nchoice principle. In particular, when $A$ is finite and each $U_\\alpha$ is a\ncompact open set, the subsheaf generated by the $s_\\alpha$ is generated by\nfinitely many sections over compact opens.",
+        "deps": [
+          "def-subsheaf",
+          "def-sheaf-on-topological-space",
+          "def-stalk-of-presheaf",
+          "def-germ-of-section",
+          "def-generated-subgroup"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf"
+            },
+            {
+              "title": "The Stacks Project, Modules on Sites (and Sheaves on Spaces, Section 29)",
+              "url": "https://stacks.math.columbia.edu/download/modules.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-locally-constant-functions-form-a-sheaf",
+        "kind": "lemma",
+        "title": "Locally constant functions form a sheaf with constant stalks",
+        "statement": "Let $X$ be a topological space ([[def-topological-space]]) and let $A$ be a\nset. A function $f:U\\to A$ on an open subset $U\\subseteq X$ is **locally\nconstant** when every $x\\in U$ has an open neighbourhood $V\\subseteq U$ with\n$x\\in V$ on which $f$ is constant. Then:\n\n1. the assignment\n   $$\\underline A_{\\mathrm{loc}}(U):=\\{f:U\\to A \\text{ locally constant}\\},$$\n   with the usual restriction maps, is a sheaf of sets on $X$;\n2. for every $x\\in X$, evaluation at $x$ induces a canonical bijection\n   $$\\underline A_{\\mathrm{loc},x}\\xrightarrow{\\ \\sim\\ }A,\\qquad [f]_x\\longmapsto f(x);$$\n3. if $A$ is an abelian group, then with pointwise addition\n   $\\underline A_{\\mathrm{loc}}$ is a sheaf of abelian groups, the restriction\n   maps are group homomorphisms, and for every open $U\\subseteq X$ the\n   assignment $a\\mapsto(x\\mapsto a)$ is a group homomorphism\n   $A\\to\\underline A_{\\mathrm{loc}}(U)$ (the zero homomorphism when\n   $U=\\varnothing$).",
+        "deps": [
+          "def-topological-space",
+          "def-presheaf-on-topological-space",
+          "def-sheaf-on-topological-space",
+          "def-stalk-of-presheaf",
+          "def-presheaf-of-groups-rings-modules",
+          "thm-abelian-sheaves-form-abelian-category"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf",
+              "locator": "Example 7.3 (tag 006V) and Definition 7.4 (tag 006W) in Section 7, and Example 11.3 (tag 007B) in Section 11, pp. 7 and 11"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf",
+        "kind": "lemma",
+        "title": "Finite filtration of a generated subsheaf of the constant integer sheaf",
+        "statement": "If X has quasi-compact intersections of quasi-compact opens and K⊂Z_X is generated by finitely many sections over quasi-compact opens, K has a finite filtration whose quotients Q each fit into 0→j_{V!}Z_V→j_{U!}Z_U→Q→0 for quasi-compact opens V⊂U.",
+        "strategy": "Stacks Lemma 20.3: split each generator into finitely many clopen pieces where its locally constant integer value is constant; discard zeros and flip signs. Close the finite list under intersections, inserting the gcd of generator values so that at every point the stalk generator is attained by one listed value. Filter by increasing positive values. For each positive n, put E_n equal to the union of the intersection opens whose positive gcd is n, W_{<n} equal to the union of those whose positive gcd is smaller than n, and V_n=E_n∩W_{<n}. The constant section n on E_n induces j_{E_n!}Z→F_n/F_{n-1}; its stalkwise kernel is j_{V_n!}Z. These finite unions and intersections are quasi-compact, giving the claimed exact sequence without assuming compact-open membership is locally constant. The gcd closure is needed; a mere filtration by the original generators is insufficient.",
+        "deps": [
+          "def-sheafification",
+          "thm-sheafification-preserves-stalks",
+          "thm-sheafification-universal-property",
+          "lem-locally-constant-functions-form-a-sheaf",
+          "thm-extension-by-zero-adjunction-exactness",
+          "def-extension-by-zero-abelian-sheaf",
+          "lem-subsheaf-generated-by-sections",
+          "lem-subgroups-of-z-are-cyclic",
+          "def-generated-subgroup",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-subspace-topology-top",
+          "def-stalk-of-presheaf",
+          "def-germ-of-section",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "def-exact-sequence-sheaves"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-extension-by-zero-vanishing-reduces-to-all-sheaves",
+        "kind": "lemma",
+        "title": "Extension-by-zero generators detect sheaf-cohomology vanishing",
+        "statement": "Assuming AC, let X be a Noetherian space of dimension at most d. If H^q(X,j_{U!}Z_U)=0 for every open U and q>d, then H^q(X,F)=0 for every abelian sheaf F and q>d.",
+        "strategy": "Stacks Lemma 20.4: write F as the filtered colimit of subsheaves generated by finite sets of local sections on opens; use filtered-colimit cohomology. Induct on the number of generators to reduce to a quotient of j_{U!}Z_U. For its kernel K, take the filtered colimit of finitely generated subsheaves K′⊂j_{U!}Z_U⊂Z_X. Apply the finite-filtration lemma to K′. Each quotient Q fits into 0→j_{V!}Z_V→j_{W!}Z_W→Q→0, so its cohomology vanishes above d; finite filtration yields the same for K′, then the filtered colimit yields it for K. In 0→K→j_{U!}Z_U→F→0 the needed H^{q+1}(K) and H^q(j_{U!}Z_U) vanish for q>d. AC is inherited from derived cohomology and filtered-colimit resolution.",
+        "deps": [
+          "lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces",
+          "lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf",
+          "lem-subsheaf-generated-by-sections",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-noetherian-topological-space",
+          "def-dimension-noetherian-topological-space",
+          "lem-noetherian-subspaces-and-compact-opens",
+          "def-compact-space",
+          "def-extension-by-zero-abelian-sheaf",
+          "thm-extension-by-zero-adjunction-exactness",
+          "thm-sheafification-universal-property",
+          "def-sheafification",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-exact-sequence-sheaves",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-filtered-category-and-filtered-colimit",
+          "def-subsheaf",
+          "def-morphism-of-presheaves"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-closed-immersion-preserves-sheaf-cohomology",
+        "kind": "lemma",
+        "title": "Closed-immersion pushforward preserves sheaf cohomology",
+        "statement": "Assuming AC, for a closed inclusion i:Z→X and an abelian sheaf F on Z, H^q(Z,F)≅H^q(X,i_*F) for every q≥0.",
+        "strategy": "Stacks Lemma 20.1: the stalk of i_*F is F_z on Z and zero away from Z, so i_* is exact; i^{-1} is exact and left adjoint to i_*, so i_* sends injectives to injectives. Push an injective resolution of F forward, then global sections on X equal global sections on Z termwise. AC supplies injective resolutions.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-topological-space",
+          "def-subspace-topology-top",
+          "def-direct-image-sheaf",
+          "lem-direct-image-is-sheaf",
+          "def-stalk-of-presheaf",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-inverse-direct-image-adjunction",
+          "lem-stalk-inverse-image-sheaf",
+          "def-injective-object",
+          "def-injective-resolution-in-an-abelian-category",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "def-global-sections-functor-sheaves",
+          "def-cohomology-object-of-a-cochain-complex",
+          "lem-comparison-map-from-an-exact-complex-into-an-injective-resolution",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology",
+          "prop-homology-respects-identities-and-composition",
+          "def-chain-homotopy",
+          "def-additive-functor",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-sheaf-on-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-morphism-of-presheaves"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-irreducibility-criteria-and-open-subspaces",
+        "kind": "lemma",
+        "title": "Irreducibility via nonempty open subsets, connectedness and open subspaces",
+        "statement": "Let $X$ be a topological space ([[def-topological-space]]), irreducibility and\nirreducible subsets being as in\n[[def-irreducible-topological-space-and-subset]]. Then:\n\n1. $X$ is irreducible if and only if $X\\ne\\varnothing$ and every two nonempty\n   open subsets of $X$ have nonempty intersection;\n2. $X$ is irreducible if and only if $X\\ne\\varnothing$ and every nonempty open\n   subset of $X$ is dense in $X$ ([[def-dense-top]]);\n3. if $X$ is irreducible then $X$ is connected ([[def-connected-space]]);\n4. if $X$ is irreducible and $U\\subseteq X$ is a nonempty open subspace, then\n   $U$ is irreducible, hence connected\n   ([[def-subspace-topology-top]]);\n5. the empty space is not irreducible, and the one-point space is\n   irreducible.",
+        "deps": [
+          "def-topological-space",
+          "def-subspace-topology-top",
+          "def-connected-space",
+          "def-dense-top",
+          "def-irreducible-topological-space-and-subset"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Topology",
+              "url": "https://stacks.math.columbia.edu/download/topology.pdf",
+              "locator": "Definition 8.1 (tag 004V) and the remark following it"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+        "kind": "lemma",
+        "title": "The constant sheaf is the sheaf of locally constant functions",
+        "statement": "Let $X$ be a topological space ([[def-topological-space]]) and let $A$ be a\nset. A function $f:U\\to A$ on an open subset $U\\subseteq X$ is **locally\nconstant** when every $x\\in U$ has an open neighbourhood $V\\subseteq U$ with\n$x\\in V$ on which $f$ is constant. Let $A_{\\mathrm{pt}}$ be the **constant\npresheaf** with value $A$, $A_{\\mathrm{pt}}(U)=A$ for every open $U$ with all\nrestriction maps the identity ([[def-presheaf-on-topological-space]]), and let\n$$A_X:=aA_{\\mathrm{pt}}$$\nbe its sheafification ([[def-sheafification]]), the **constant sheaf** with\nvalue $A$ on $X$. Then:\n\n1. the assignment $\\underline A_{\\mathrm{loc}}(U):=\\{f:U\\to A\\text{ locally\n   constant}\\}$, with the usual restriction maps, is a sheaf of sets on $X$, and\n   for every $x\\in X$ evaluation at $x$ is a canonical bijection\n   $\\underline A_{\\mathrm{loc},x}\\cong A$\n   ([[lem-locally-constant-functions-form-a-sheaf]]);\n2. there is a canonical isomorphism of sheaves of sets\n   $$\\theta:A_X\\longrightarrow\\underline A_{\\mathrm{loc}}$$\n   such that for every open $U\\subseteq X$ and every $a\\in A$ the section\n   $\\theta_U(\\eta_{U}(a))$ is the constant function with value $a$, where\n   $\\eta:A_{\\mathrm{pt}}\\to A_X$ is the sheafification map;\n3. if $A$ is an abelian group, then $A_{\\mathrm{pt}}$ with its group operation is\n   a presheaf of abelian groups ([[def-presheaf-of-groups-rings-modules]]) and\n   $\\underline A_{\\mathrm{loc}}$ with pointwise addition is a sheaf of abelian\n   groups ([[thm-abelian-sheaves-form-abelian-category]]); the maps\n   $a\\mapsto\\text{the constant function with value }a$ are group homomorphisms,\n   and the group structures transported along the bijections $\\theta_U$ make\n   $A_X$ a sheaf of abelian groups for which every $\\eta_U$ and every $\\theta_U$\n   is a group homomorphism.",
+        "deps": [
+          "def-topological-space",
+          "def-presheaf-on-topological-space",
+          "def-morphism-of-presheaves",
+          "def-sheaf-on-topological-space",
+          "def-presheaf-of-groups-rings-modules",
+          "def-sheafification",
+          "def-presheaf-plus-construction",
+          "thm-sheafification-universal-property",
+          "thm-sheafification-preserves-stalks",
+          "def-stalk-of-presheaf",
+          "lem-locally-constant-functions-form-a-sheaf",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-filtered-category-and-filtered-colimit",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-germ-of-section"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-constant-sheaf-on-irreducible-space-is-flasque",
+        "kind": "lemma",
+        "title": "Constant sheaves on irreducible spaces are flasque",
+        "statement": "Assuming AC, for an irreducible space X and abelian group A, the constant sheaf A_X is flasque, hence H^q(X,A_X)=0 for q>0.",
+        "strategy": "Stacks Lemma 20.2: every nonempty open subset of an irreducible space is irreducible and connected. A section of the constant sheaf over it is a single element of A; restriction between nonempty opens is the identity, while restriction to the empty open is surjective. Invoke the proved flasque-acyclic theorem. AC is used through the flasque-to-derived-acyclic theorem.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-topological-space",
+          "def-subspace-topology-top",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "def-irreducible-topological-space-and-subset",
+          "def-connected-space",
+          "def-presheaf-on-topological-space",
+          "def-sheafification",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-flasque-sheaf",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "thm-flasque-sheaves-acyclic",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-section-restriction-and-global-section",
+          "def-sheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-irreducible-component-of-a-topological-space",
+        "kind": "definition",
+        "title": "Irreducible components of a topological space",
+        "statement": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]),\nand let irreducible subsets be as in\n[[def-irreducible-topological-space-and-subset]].\n\nAn **irreducible component** of $X$ is an irreducible subset $C\\subseteq X$\nwhich is **maximal** among the irreducible subsets of $X$ under inclusion\n([[def-maximal-element]]): if $D\\subseteq X$ is irreducible and\n$C\\subseteq D$, then $D=C$.\n\nThe empty space has no irreducible components, because an irreducible space is\nrequired to be nonempty; a one-point space has exactly one irreducible\ncomponent, namely the point itself, because the only nonempty subset of a\none-point space is the space itself. Assuming the Axiom of Choice\n([[def-axiom-of-choice]]), for a nonempty space the irreducible components\nexist, they are closed subsets whose union is $X$, every\nirreducible subset of $X$ is contained in an irreducible component, and $X$ is\nirreducible exactly when $X$ is its own unique irreducible component. A\nNoetherian space has only finitely many irreducible components. These statements\nare proved under that hypothesis in [[lem-irreducible-components-of-a-topological-space]] and\n[[lem-noetherian-space-has-finitely-many-irreducible-components]].",
+        "deps": [
+          "def-topological-space",
+          "def-irreducible-topological-space-and-subset",
+          "def-maximal-element",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Topology",
+              "url": "https://stacks.math.columbia.edu/download/topology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-irreducible-components-of-a-topological-space",
+        "kind": "lemma",
+        "title": "Existence and basic properties of irreducible components",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a\ntopological space ([[def-topological-space]]), irreducible subsets being those of\n[[def-irreducible-topological-space-and-subset]] and irreducible components those\nof [[def-irreducible-component-of-a-topological-space]]. Then:\n\n1. if $T\\subseteq X$ is irreducible, then the closure $\\overline{T}$ of $T$ in\n   $X$ ([[def-interior-closure-boundary-top]]) is irreducible;\n2. every irreducible component of $X$ is a closed subset of $X$;\n3. every irreducible subset of $X$ is contained in an irreducible component of\n   $X$; in particular every point of $X$ lies in an irreducible component, so\n   $X$ is the union of its irreducible components;\n4. if $X$ is nonempty and irreducible, then $X$ is the unique irreducible\n   component of $X$;\n5. if $X=X_1\\cup\\cdots\\cup X_n$ with each $X_i$ an irreducible closed subset of\n   $X$, and no $X_i$ is contained in $\\bigcup_{j\\ne i}X_j$, then the irreducible\n   components of $X$ are exactly $X_1,\\ldots,X_n$;\n6. if $C\\subseteq X$ is irreducible and $W\\subseteq X$ is closed with\n   $X=C\\cup W$ and $C\\not\\subseteq W$, then $X\\setminus W$ is a nonempty subset\n   of $C$ whose closure in $X$ is irreducible.",
+        "deps": [
+          "def-topological-space",
+          "def-irreducible-topological-space-and-subset",
+          "def-irreducible-component-of-a-topological-space",
+          "def-interior-closure-boundary-top",
+          "thm-closure-characterisation-top",
+          "thm-subspace-closure-and-interior",
+          "def-subspace-topology-top",
+          "def-maximal-element",
+          "thm-zorn",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Topology",
+              "url": "https://stacks.math.columbia.edu/download/topology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-noetherian-space-has-finitely-many-irreducible-components",
+        "kind": "lemma",
+        "title": "A Noetherian space is a finite union of irreducible closed subsets",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a Noetherian\ntopological space ([[def-noetherian-topological-space]]) and let irreducible\ncomponents be those of [[def-irreducible-component-of-a-topological-space]]. Then\n$X$ is a finite union of irreducible closed subsets of $X$, and consequently $X$\nhas only finitely many irreducible components.",
+        "deps": [
+          "def-noetherian-topological-space",
+          "def-irreducible-topological-space-and-subset",
+          "def-irreducible-component-of-a-topological-space",
+          "lem-irreducible-components-of-a-topological-space",
+          "def-subspace-topology-top",
+          "def-topological-space",
+          "def-maximal-element",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Topology",
+              "url": "https://stacks.math.columbia.edu/download/topology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-extension-by-zero-short-exact-sequence",
+        "kind": "lemma",
+        "title": "Extension by zero and the closed complement: a short exact sequence",
+        "statement": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace\n([[def-topological-space]]) with closed complement $Z=X\\setminus U$, let\n$i:Z\\hookrightarrow X$ be the inclusion of the subspace\n([[def-subspace-topology-top]]), and let $\\mathcal F$ be a sheaf of abelian groups\non $X$ ([[def-sheaf-on-topological-space]], [[thm-abelian-sheaves-form-abelian-category]]).\nWrite $\\mathcal F|_U:=j^{-1}\\mathcal F$ and $\\mathcal F|_Z:=i^{-1}\\mathcal F$ for\nthe restrictions ([[def-restriction-sheaf-open-subspace]]). Then:\n\n1. the adjoint transpose of the identity of $\\mathcal F|_U$ under the adjunction\n   of [[thm-extension-by-zero-adjunction-exactness]] and the unit of the\n   adjunction ([[thm-inverse-direct-image-adjunction]]) fit into a short exact\n   sequence of sheaves of abelian groups on $X$\n   $$0\\to j_!(\\mathcal F|_U)\\to\\mathcal F\\to i_*(\\mathcal F|_Z)\\to0,$$\n   where $j_!$ is extension by zero ([[def-extension-by-zero-abelian-sheaf]]) and\n   $i_*$ is the direct image ([[def-direct-image-sheaf]],\n   [[lem-direct-image-is-sheaf]]); exactness is that of\n   [[def-exact-sequence-sheaves]];\n2. if $\\mathcal F=\\mathbb Z_X$ is the constant sheaf with value $\\mathbb Z$ on\n   $X$, then $\\mathcal F|_U$ is canonically isomorphic to the constant sheaf\n   $\\mathbb Z_U$ on $U$, so the sequence of clause 1 reads\n   $0\\to j_!(\\mathbb Z_U)\\to\\mathbb Z_X\\to i_*(\\mathcal F|_Z)\\to0$ up to that\n   canonical isomorphism.",
+        "deps": [
+          "def-extension-by-zero-abelian-sheaf",
+          "thm-extension-by-zero-adjunction-exactness",
+          "def-restriction-sheaf-open-subspace",
+          "def-direct-image-sheaf",
+          "lem-direct-image-is-sheaf",
+          "def-sheaf-on-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-exact-sequence-sheaves",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-stalk-of-presheaf",
+          "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "def-subspace-topology-top",
+          "thm-inverse-direct-image-adjunction",
+          "lem-stalk-inverse-image-sheaf",
+          "def-sheafification",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-topological-space",
+          "def-presheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sheaf-supported-on-a-closed-subset-is-a-pushforward",
+        "kind": "lemma",
+        "title": "A sheaf with no stalks off a closed subset is a pushforward",
+        "statement": "Let $i:Z\\hookrightarrow X$ be the inclusion of a closed subset\n$Z\\subseteq X$ carrying the subspace topology ([[def-subspace-topology-top]]), and\nlet $\\mathcal G$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]], [[thm-abelian-sheaves-form-abelian-category]])\nwhose stalks vanish off $Z$, that is $\\mathcal G_x=0$ for every $x\\in X\\setminus Z$\n([[def-stalk-of-presheaf]]). Then the unit\n$$\\eta:\\mathcal G\\longrightarrow i_*i^{-1}\\mathcal G$$\nof the adjunction ([[thm-inverse-direct-image-adjunction]]) between inverse image\nand direct image ([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]) is an\nisomorphism of sheaves of abelian groups; equivalently\n$\\mathcal G\\cong i_*(\\mathcal G|_Z)$ under the identification\n$\\mathcal G|_Z=i^{-1}\\mathcal G$ ([[def-restriction-sheaf-open-subspace]]).",
+        "deps": [
+          "def-direct-image-sheaf",
+          "lem-direct-image-is-sheaf",
+          "def-stalk-of-presheaf",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "def-subspace-topology-top",
+          "thm-inverse-direct-image-adjunction",
+          "lem-stalk-inverse-image-sheaf",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "def-sheaf-on-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-topological-space",
+          "def-restriction-sheaf-open-subspace"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-noetherian-topological-space-dimension-vanishing",
+        "kind": "theorem",
+        "title": "Grothendieck vanishing on a Noetherian space",
+        "statement": "Assuming AC, if X is Noetherian with topological dimension at most d, every abelian sheaf F satisfies H^q(X,F)=0 for q>d.",
+        "strategy": "Follow Stacks Proposition 20.7 with the local Lemmas 19.1, 20.1–20.4 supplied above. A Noetherian space has finitely many irreducible components. Split a sheaf by 0→j_!j*F→F→i_*i*F→0 for the complement of one component; the closed component and the closure of the open each have fewer components, so reduce to irreducible X. For irreducible dimension zero X, only ∅ and X are open. For d>0, reduce by the extension-by-zero lemma to j_{U!}Z_U. If U=∅ this sheaf is zero, so handle it directly; for nonempty U its closed complement Z=X\\U is proper and has dimension <d. The constant Z_X is flasque, and 0→j_{U!}Z_U→Z_X→i_*Z_Z→0 gives H^q(X,j_{U!}Z_U)=0 for q>d because dim Z<d and H^{q-1}(Z,Z_Z)=0. Closed-immersion cohomology and the long exact sequence complete the induction. AC enters the derived-cohomology and filtered-colimit resolutions.",
+        "deps": [
+          "def-noetherian-topological-space",
+          "def-dimension-noetherian-topological-space",
+          "def-cohomological-dimension-space",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-irreducible-topological-space-and-subset",
+          "def-irreducible-component-of-a-topological-space",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-noetherian-space-has-finitely-many-irreducible-components",
+          "lem-extension-by-zero-vanishing-reduces-to-all-sheaves",
+          "lem-closed-immersion-preserves-sheaf-cohomology",
+          "lem-constant-sheaf-on-irreducible-space-is-flasque",
+          "lem-extension-by-zero-short-exact-sequence",
+          "lem-sheaf-supported-on-a-closed-subset-is-a-pushforward",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-cohomology-functoriality-sheaf-and-space",
+          "lem-noetherian-subspaces-and-compact-opens",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "prop-an-exact-functor-has-vanishing-positive-derived-functors",
+          "def-extension-by-zero-abelian-sheaf",
+          "def-restriction-sheaf-open-subspace",
+          "def-direct-image-sheaf",
+          "lem-direct-image-is-sheaf",
+          "def-subspace-topology-top",
+          "def-topological-space",
+          "thm-closure-characterisation-top",
+          "def-stalk-of-presheaf",
+          "def-sheafification",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-exact-sequence-sheaves",
+          "def-global-sections-functor-sheaves",
+          "thm-extension-by-zero-adjunction-exactness",
+          "thm-inverse-direct-image-adjunction"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-tensor-product-of-abelian-sheaves",
+        "kind": "definition",
+        "title": "Tensor product of abelian sheaves and its total complex",
+        "statement": "Let $X$ be a topological space ([[def-topological-space]]), and let\n$\\mathrm{Ab}(X)$ be the abelian category of sheaves of abelian groups on $X$\n([[thm-abelian-sheaves-form-abelian-category]]). Write $A\\otimes_{\\mathbb Z}B$\nfor the tensor product of the abelian groups $A$ and $B$, that is, for\n[[def-tensor-product-of-modules-by-generators-and-relations]] with\n$R=\\mathbb Z$.\n\nFor sheaves $\\mathcal F,\\mathcal G$ of abelian groups on $X$ the\n**tensor-product presheaf** $\\mathcal F\\otimes_{p,\\mathbb Z}\\mathcal G$ is the\npresheaf of abelian groups ([[def-presheaf-of-groups-rings-modules]]) with\n$$(\\mathcal F\\otimes_{p,\\mathbb Z}\\mathcal G)(U):=\\mathcal F(U)\\otimes_{\\mathbb Z}\\mathcal G(U)$$\nfor every open $U\\subseteq X$, whose restriction maps are induced by the\nrestriction maps of $\\mathcal F$ and $\\mathcal G$; they are homomorphisms\nbecause the tensor product of abelian groups is functorial in each variable.\n\nThe **tensor product of abelian sheaves** is its sheafification\n([[def-sheafification]])\n$$\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G:=a\\bigl(\\mathcal F\\otimes_{p,\\mathbb Z}\\mathcal G\\bigr),$$\na sheaf of abelian groups on $X$, and it is contravariantly natural in\n$\\mathcal F$ and $\\mathcal G$ in the evident way. If abelian sheaves are\nregarded as modules over the constant sheaf of rings $\\mathbb Z_X$\n([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]), the two\nconstructions $\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G$ and the tensor product\nover $\\mathbb Z_X$ of [[def-sheaf-tensor-product]] agree up to canonical\nisomorphism, because they have the same stalks by\n[[lem-stalk-tensor-product]].\n\nFor bounded-above cochain complexes $\\mathcal F^\\bullet,\\mathcal G^\\bullet$ of\nabelian sheaves ([[def-cochain-complex-in-an-abelian-category]],\n[[def-bounded-bounded-below-and-bounded-above-complex]]) the **tensor-product\ntotal complex**\n$\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathcal G^\\bullet)$\nis the cochain complex with degree-$n$ term the direct sum\n([[def-direct-sum-of-a-family-of-modules]], $R=\\mathbb Z$)\n$$\\operatorname{Tot}^n(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathcal G^\\bullet):=\\bigoplus_{i+j=n}\\mathcal F^i\\otimes_{\\mathbb Z}\\mathcal G^j$$\nover the degree-$n$ diagonal, whose differential is the unique morphism that on\nthe summand $\\mathcal F^i\\otimes_{\\mathbb Z}\\mathcal G^j$ equals\n$$d_{\\mathcal F}^i\\otimes\\operatorname{id}_{\\mathcal G^j}+(-1)^i\\operatorname{id}_{\\mathcal F^i}\\otimes d_{\\mathcal G}^j.$$\nIf $\\mathcal F^i=0$ for $i>a$ and $\\mathcal G^j=0$ for $j>b$, then for each\n$n\\le a+b$ only the finitely many pairs with $n-b\\le i\\le a$ contribute, so\nevery diagonal is a finite direct sum and no infinite sum in a morphism group\nis required; consequently the total complex is again bounded above. For sheaves\n$\\mathcal F,\\mathcal G$ concentrated in degree zero the total complex is\n$\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G$ in degree zero with zero terms\nelsewhere. The differential satisfies $d^2=0$, and the relation of this complex\nto the module-level tensor total complex and to the K-flat complexes of\n[[def-k-flat-complex-of-abelian-sheaves]] is established in\n[[lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product]] and\n[[lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms]].",
+        "deps": [
+          "def-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-sheafification",
+          "def-presheaf-of-groups-rings-modules",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-sheaf-tensor-product",
+          "lem-stalk-tensor-product",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-presheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Definitions 26.2 and 26.14 and Lemma 26.9; tensor conventions of Section 26"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+        "kind": "lemma",
+        "title": "Stalks, coproducts and right exactness of the abelian sheaf tensor product",
+        "statement": "Let $X$ be a topological space and let\n$\\otimes_{\\mathbb Z}$ be the tensor product of abelian sheaves over $X$ of\n[[def-tensor-product-of-abelian-sheaves]].\n\n1. For every $x\\in X$ and all abelian sheaves\n   $\\mathcal F,\\mathcal G$ there is a canonical isomorphism\n   $$(\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G)_x\\cong\\mathcal F_x\\otimes_{\\mathbb Z}\\mathcal G_x,$$\n   natural in $\\mathcal F$ and $\\mathcal G$.\n2. For every family $(\\mathcal G_i)_{i\\in I}$ of abelian sheaves with coproduct\n   $\\bigoplus_{i\\in I}\\mathcal G_i$ in $\\mathrm{Ab}(X)$ and every $x\\in X$\n   there is a canonical isomorphism\n   $$\\Bigl(\\bigoplus_{i\\in I}\\mathcal G_i\\Bigr)_x\\cong\\bigoplus_{i\\in I}(\\mathcal G_i)_x;$$\n   the coproduct is the sheafification of the presheaf direct sum.\n3. For bounded-above complexes $\\mathcal F^\\bullet,\\mathcal G^\\bullet$ of\n   abelian sheaves the tensor-product total complex of\n   [[def-tensor-product-of-abelian-sheaves]] is a cochain complex with\n   $d^2=0$, and for every $x$ there is a canonical isomorphism of complexes\n   $$(\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathcal G^\\bullet))_x\\cong\\operatorname{Tot}(\\mathcal F_x^\\bullet\\otimes_{\\mathbb Z}\\mathcal G_x^\\bullet),$$\n   the right-hand total complex being the module-level Koszul total complex of\n   [[def-tensor-product-total-complex-of-chain-complexes]] reindexed to\n   cochains.\n4. The tensor product is right exact in each variable: for every short exact\n   sequence $0\\to\\mathcal G'\\to\\mathcal G\\to\\mathcal G''\\to0$ of abelian sheaves\n   the sequence\n   $$\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G'\\to\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G\\to\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G''\\to0$$\n   is exact, and symmetrically in the first variable. It also commutes with\n   coproducts: the canonical map\n   $\\bigoplus_i(\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G_i)\\to\\mathcal F\\otimes_{\\mathbb Z}(\\bigoplus_i\\mathcal G_i)$\n   is an isomorphism, and symmetrically.\n5. There are canonical isomorphisms\n   $\\sigma:\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G\\to\\mathcal G\\otimes_{\\mathbb Z}\\mathcal F$,\n   $\\lambda:\\mathbb Z_X\\otimes_{\\mathbb Z}\\mathcal G\\to\\mathcal G$ and\n   $\\mathbb Z_X\\otimes_{\\mathbb Z}\\mathbb Z_X\\cong\\mathbb Z_X$, where\n   $\\mathbb Z_X$ is the constant sheaf and $\\lambda(f\\otimes s)=f\\cdot s$ is\n   the section with germs $(f\\cdot s)_x=f(x)s_x$; these are natural and, for\n   sheaves concentrated in degree zero, they are the degree-zero\n   identifications of the tensor-product total complex of clause 3.",
+        "deps": [
+          "def-tensor-product-of-abelian-sheaves",
+          "thm-sheafification-preserves-stalks",
+          "def-stalk-of-presheaf",
+          "thm-sheafification-universal-property",
+          "thm-limits-and-colimits-in-functor-categories-are-computed-pointwise",
+          "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "def-topological-space",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "thm-right-exactness-of-tensor-products",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-universal-property-of-module-tensor-products",
+          "def-tensor-product-total-complex-of-chain-complexes",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-sheaf-on-topological-space",
+          "thm-abelian-sheaves-form-abelian-category"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Section 26: Lemmas 26.1, 26.4 and 26.9 with the tensor conventions of Section 26; Stacks Project Modules, Lemma 17.2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-flat-abelian-sheaf",
+        "kind": "definition",
+        "title": "Flat abelian sheaves",
+        "statement": "Let $X$ be a topological space ([[def-topological-space]]). A sheaf\n$\\mathcal F$ of abelian groups on $X$ is **flat** when its stalk\n$\\mathcal F_x$ is a flat $\\mathbb Z$-module for every $x\\in X$\n([[def-left-and-right-flat-modules-over-an-arbitrary-ring]] with $R=\\mathbb Z$\nand additive notation, so that $-\\otimes_{\\mathbb Z}\\mathcal F_x$ is exact).\n\nEquivalently, by [[lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product]]\nand [[def-tensor-product-of-abelian-sheaves]], flatness of $\\mathcal F$ means\nthat the functor $-\\otimes_{\\mathbb Z}\\mathcal F$ on abelian sheaves is exact;\nthe equivalence with exactness of $\\mathcal F\\otimes_{\\mathbb Z}-$ is proved in\n[[lem-flatness-criteria-and-flat-covers-for-abelian-sheaves]].\n\nA bounded-above complex $\\mathcal F^\\bullet$ of abelian sheaves\n([[def-bounded-bounded-below-and-bounded-above-complex]]) is a **complex of\nflat sheaves** when each term $\\mathcal F^n$ is flat. Such a complex is the\ninput to the K-flat notion of\n[[def-k-flat-complex-of-abelian-sheaves]]: the bounded-above complexes of flat\nsheaves are exactly the source of the flat resolutions constructed on this\npage. Since a stalk is a filtered colimit\n([[def-stalk-of-presheaf]]), flatness is a stalk-local condition, and the zero\nsheaf is flat because its stalks are the zero modules.",
+        "deps": [
+          "def-topological-space",
+          "def-left-and-right-flat-modules-over-an-arbitrary-ring",
+          "def-tensor-product-of-abelian-sheaves",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "def-stalk-of-presheaf",
+          "def-bounded-bounded-below-and-bounded-above-complex"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Section 26: Definition 26.2 and Lemmas 26.4, 26.9 and 26.12; Stacks Project Modules, Lemma 17.2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-flatness-criteria-and-flat-covers-for-abelian-sheaves",
+        "kind": "lemma",
+        "title": "Flatness criteria and canonical flat covers of abelian sheaves",
+        "statement": "Let $X$ be a topological space and let flatness of abelian sheaves\nbe as in [[def-flat-abelian-sheaf]].\n\n1. An abelian sheaf $\\mathcal F$ on $X$ is flat if and only if the functor\n   $\\mathcal F\\otimes_{\\mathbb Z}-$ on abelian sheaves is exact, equivalently\n   if and only if $-\\otimes_{\\mathbb Z}\\mathcal F$ is exact.\n2. The constant sheaf $\\mathbb Z_X$ is flat; for every open subspace\n   $j:U\\hookrightarrow X$ the extension by zero $j_{U!}\\mathbb Z_U$ is flat;\n   and any coproduct of flat abelian sheaves on $X$ is flat.\n3. For every abelian sheaf $\\mathcal F$ the canonical morphism\n   $$\\Phi:\\bigoplus_{(U,s)}j_{U!}\\mathbb Z_U\\longrightarrow\\mathcal F,$$\n   the coproduct being indexed by the set of pairs $(U,s)$ with $U\\subseteq X$\n   open and $s\\in\\mathcal F(U)$, and the $(U,s)$-component sending a section\n   $g\\in(j_{U!}\\mathbb Z_U)(V)$ over an open $V$, viewed as the locally constant\n   function $g:V\\cap U\\to\\mathbb Z$ with closed support in $V$, to the section of $\\mathcal F(V)$ obtained by gluing $g\\cdot s$ on\n   $V\\cap U$ with zero on the open $V\\setminus\\operatorname{Supp}(g)$, is\n   an epimorphism whose source is flat. Consequently every\n   abelian sheaf on $X$ is a quotient of a flat abelian sheaf, and the covering\n   flat sheaf and the morphism $\\Phi$ are canonically determined by\n   $\\mathcal F$.",
+        "deps": [
+          "def-flat-abelian-sheaf",
+          "def-left-and-right-flat-modules-over-an-arbitrary-ring",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "cor-free-modules-are-projective-and-flat",
+          "def-extension-by-zero-abelian-sheaf",
+          "lem-stalk-inverse-image-sheaf",
+          "def-restriction-sheaf-open-subspace",
+          "thm-direct-sums-and-direct-summands-preserve-flatness",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "def-tensor-product-of-abelian-sheaves",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "def-sheaf-on-topological-space",
+          "def-stalk-of-presheaf",
+          "def-topological-space",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-abelian-category"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Section 26: Lemmas 26.4, 26.9 and 26.12; Stacks Project Modules, Lemma 17.2 and Modules, Lemma 17.7"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-k-flat-complex-of-abelian-sheaves",
+        "kind": "definition",
+        "title": "K-flat complexes of abelian sheaves in the bounded-above setting",
+        "statement": "Let $X$ be a topological space. A bounded-above cochain complex\n$\\mathcal K^\\bullet$ of abelian sheaves on $X$\n([[def-cochain-complex-in-an-abelian-category]],\n[[def-bounded-bounded-below-and-bounded-above-complex]]) is **K-flat** in the\nbounded-above sense used on this page when for every acyclic bounded-above\ncomplex $\\mathcal F^\\bullet$ of abelian sheaves, acyclicity being exactness in\nevery degree ([[def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]],\n[[def-cohomology-object-of-a-cochain-complex]]), the tensor-product total\ncomplex\n$$\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathcal K^\\bullet)$$\nof [[def-tensor-product-of-abelian-sheaves]] is acyclic.\n\nThis is the bounded-above variant of the K-flat complexes of the Stacks\nProject (Definition 26.2), restricted to the complexes between which the\ntensor-product total complex of [[def-tensor-product-of-abelian-sheaves]] is\ndefined; no unbounded total complex is used on this page. The two facts that\nmake the notion useful are proved on this page: a bounded-above complex of flat\nsheaves ([[def-flat-abelian-sheaf]]) is K-flat\n([[lem-abelian-sheaves-admit-bounded-above-flat-resolutions]]), and tensoring\nwith a K-flat complex preserves quasi-isomorphisms\n([[def-quasi-isomorphism]], [[lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms]]).",
+        "deps": [
+          "def-topological-space",
+          "def-tensor-product-of-abelian-sheaves",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-quasi-isomorphism",
+          "def-flat-abelian-sheaf",
+          "def-cohomology-object-of-a-cochain-complex"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Definition 26.2 and Lemma 26.4; the bounded-above variant of K-flatness"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms",
+        "kind": "lemma",
+        "title": "K-flat sheaf complexes preserve quasi-isomorphisms",
+        "statement": "Let $X$ be a topological space, let $\\mathcal K^\\bullet$ be a\nK-flat bounded-above complex of abelian sheaves on $X$\n([[def-k-flat-complex-of-abelian-sheaves]]), and let\n$s:\\mathcal A^\\bullet\\to\\mathcal B^\\bullet$ be a quasi-isomorphism of\nbounded-above complexes of abelian sheaves ([[def-quasi-isomorphism]]).\n\n1. The induced morphism of tensor-product total complexes\n   $$\\operatorname{Tot}(s\\otimes\\operatorname{id}_{\\mathcal K}):\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathbb Z}\\mathcal K^\\bullet)\\longrightarrow\\operatorname{Tot}(\\mathcal B^\\bullet\\otimes_{\\mathbb Z}\\mathcal K^\\bullet)$$\n   of [[def-tensor-product-of-abelian-sheaves]] is a quasi-isomorphism.\n2. The same holds with the K-flat factor on the left: if $\\mathcal K^\\bullet$ is\n   K-flat and $s$ is a quasi-isomorphism, then\n   $\\operatorname{Tot}(\\operatorname{id}_{\\mathcal K}\\otimes s)$ is a\n   quasi-isomorphism, through the canonical isomorphism\n   $\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathbb Z}\\mathcal A^\\bullet)\\cong\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathbb Z}\\mathcal K^\\bullet)$\n   which on $\\mathcal K^j\\otimes_{\\mathbb Z}\\mathcal A^i$ is\n   $y\\otimes x\\mapsto(-1)^{ij}x\\otimes y$.",
+        "deps": [
+          "def-k-flat-complex-of-abelian-sheaves",
+          "def-tensor-product-of-abelian-sheaves",
+          "def-derived-category-of-an-abelian-category",
+          "cor-the-cone-criterion-from-the-general-long-exact-sequence",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-quasi-isomorphism",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex",
+          "def-cochain-map",
+          "def-cochain-complex-in-an-abelian-category",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Lemmas 26.1 and 26.3; sign conventions of Section 26"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-abelian-sheaves-admit-bounded-above-flat-resolutions",
+        "kind": "lemma",
+        "title": "Flat resolutions of abelian sheaves",
+        "statement": "Every bounded-above complex C^• of abelian sheaves on X admits a bounded-above quasi-isomorphism P^•→C^• with each P^n flat. Every bounded-above complex of flat sheaves is K-flat.",
+        "strategy": "Use Stacks Derived Categories Lemma 15.4 (tag 05T7), not termwise functorialization: the free-flat map G(F)=⊕_{(U,s∈F(U))}j_{U!}Z_U→F is a flat epimorphism for each sheaf F, since each summand is flat stalkwise and the sections generate stalks. Let C^n=0 for n>a. Descend on n, maintaining flat P^j and surjections α^j:P^j→C^j for j≥n, d_P^2=0, cohomology isomorphisms in degrees >n, and surjectivity ker(d_P^n)→ker(d_C^n). At the next degree apply the canonical flat cover G(Q)→Q to the fibre product Q=C^{n-1}×_{ker(d_C^n)}ker(d_P^n); its two projections supply α^{n-1} and d_P^{n-1}. The fibre-product condition makes d_P^2=0 and the standard diagram chase preserves the induction hypothesis. Starting above a and descending yields a bounded-above termwise-surjective quasi-isomorphism P^•→C^• with flat terms. For K-flatness, check stalks and use the bounded-above flat-complex tensor filtration (Stacks Cohomology of Sheaves Lemmas 26.4 and 26.9). The same canonical cover G(Q)→Q is used at every descending step, so the replacement and augmentation are functorial and no choice of flat covers is made.",
+        "deps": [
+          "def-topological-space",
+          "def-flat-abelian-sheaf",
+          "def-k-flat-complex-of-abelian-sheaves",
+          "lem-flatness-criteria-and-flat-covers-for-abelian-sheaves",
+          "def-tensor-product-of-abelian-sheaves",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "def-tensor-product-total-complex-of-chain-complexes",
+          "lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms",
+          "def-derived-tensor-product-in-the-bounded-above-setting",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cochain-map",
+          "def-quasi-isomorphism",
+          "def-cohomology-object-of-a-cochain-complex",
+          "def-kernel-cokernel-image-sheaves",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology",
+          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "def-stalk-of-presheaf",
+          "lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "The Stacks Project, Derived Categories, Lemma 15.4 (tag 05T7)",
+              "url": "https://stacks.math.columbia.edu/download/derived.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-derived-tensor-product-of-abelian-sheaves",
+        "kind": "lemma",
+        "title": "Derived tensor product of abelian sheaves",
+        "statement": "For bounded-above complexes of abelian sheaves, bounded-above flat replacements define a bifunctorial derived tensor product F^•⊗^L_Z G^•, independent of replacements, with a natural comparison F⊗^L G→F⊗G for sheaves in degree zero.",
+        "strategy": "Stacks §§26.3–26.14: sheaf tensor and totalization are computed stalkwise. A bounded-above flat replacement is K-flat by the preceding lemma, so tensoring a quasi-isomorphism with it remains a quasi-isomorphism. Compare any two replacements through a common replacement or a roof in the localized derived category; the K-flat property makes the comparison independent. The augmentation P_F→F and P_G→G gives the canonical map to the ordinary tensor sheaf. On stalks this is the published module-level derived tensor construction.",
+        "deps": [
+          "def-topological-space",
+          "lem-abelian-sheaves-admit-bounded-above-flat-resolutions",
+          "lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms",
+          "lem-flatness-criteria-and-flat-covers-for-abelian-sheaves",
+          "def-tensor-product-of-abelian-sheaves",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "def-flat-abelian-sheaf",
+          "def-k-flat-complex-of-abelian-sheaves",
+          "def-derived-tensor-product-in-the-bounded-above-setting",
+          "def-derived-category-of-an-abelian-category",
+          "lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category",
+          "thm-the-calculus-of-fractions-constructs-the-localization",
+          "def-localization-of-a-category-at-a-class-of-morphisms",
+          "prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms",
+          "def-multiplicative-system-in-a-category",
+          "def-left-roof-representing-a-localized-morphism",
+          "def-common-refinement-equivalence-of-roofs",
+          "lem-composition-of-roofs-is-well-defined",
+          "lem-addition-of-roofs-makes-an-additive-localization",
+          "prop-a-complex-is-zero-in-the-derived-category-exactly-when-it-is-acyclic",
+          "def-quasi-isomorphism",
+          "def-cohomology-object-of-a-cochain-complex",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology",
+          "thm-long-exact-sequence-in-homology",
+          "def-short-exact-sequence-of-complexes",
+          "def-cochain-map",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "def-stalk-of-presheaf",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "def-direct-sum-of-a-family-of-modules"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-morphisms-from-the-constant-sheaf-are-global-sections",
+        "kind": "lemma",
+        "title": "Morphisms from the constant sheaf are global sections",
+        "statement": "Let $X$ be a topological space ([[def-topological-space]]). Let\n$\\mathbb Z_{\\mathrm{pt}}$ be the constant presheaf with value $\\mathbb Z$,\nlet\n$$\\mathbb Z_X:=a\\,\\mathbb Z_{\\mathrm{pt}}$$\nbe its sheafification with sheafification map\n$\\eta:\\mathbb Z_{\\mathrm{pt}}\\to\\mathbb Z_X$, and put\n$$1_X:=\\eta_X(1)\\in\\Gamma(X,\\mathbb Z_X),$$\nwhere $1\\in\\mathbb Z_{\\mathrm{pt}}(X)=\\mathbb Z$\n([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]],\n[[def-sheafification]]). For an abelian sheaf $\\mathcal F$ on $X$ let\n$\\operatorname{Hom}_{\\mathrm{Ab}(X)}(\\mathbb Z_X,\\mathcal F)$ be the abelian\ngroup of morphisms of sheaves of abelian groups, with addition computed\ncomponentwise ([[def-global-sections-functor-sheaves]],\n[[thm-abelian-sheaves-form-abelian-category]]). Then:\n\n1. **(Sections as morphisms.)** For every abelian sheaf $\\mathcal F$ the map\n   $$\\Phi_{\\mathcal F}:\\operatorname{Hom}_{\\mathrm{Ab}(X)}(\\mathbb Z_X,\\mathcal F)\\longrightarrow\\Gamma(X,\\mathcal F),\\qquad\n   \\varphi\\mapsto\\varphi_X(1_X),$$\n   is a bijection. Its inverse sends $s\\in\\Gamma(X,\\mathcal F)$ to the unique\n   morphism of sheaves $\\varphi:\\mathbb Z_X\\to\\mathcal F$ with\n   $\\varphi_X(1_X)=s$, and that morphism is described as follows: for every open\n   $U\\subseteq X$, every locally constant $f:U\\to\\mathbb Z$ and every\n   $n\\in\\mathbb Z$ one has\n   $$\\varphi_U(f)|_{f^{-1}(n)}=n\\cdot s|_{f^{-1}(n)},$$\n   the pair $\\mathbb Z_X(U)\\cong\\{f:U\\to\\mathbb Z\\text{ locally constant}\\}$\n   being the identification of clause 2 of\n   [[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]].\n\n2. **(Additivity and naturality.)** $\\Phi_{\\mathcal F}$ is a homomorphism of\n   abelian groups for every $\\mathcal F$, hence an isomorphism, and for every\n   morphism $\\psi:\\mathcal F\\to\\mathcal G$ of abelian sheaves one has\n   $$\\Phi_{\\mathcal G}(\\psi\\circ\\varphi)=\\Gamma(X,\\psi)\\bigl(\\Phi_{\\mathcal F}(\\varphi)\\bigr)$$\n   for all $\\varphi:\\mathbb Z_X\\to\\mathcal F$; thus the bijections\n   $\\Phi_{\\mathcal F}$ are natural in $\\mathcal F$.\n\n3. **(Complexes.)** If $J^\\bullet$ is a cochain complex of abelian sheaves\n   ([[def-cochain-complex-in-an-abelian-category]]) and $\\mathbb Z_X$ is read\n   as the stalk complex concentrated in degree $0$\n   ([[def-zero-and-stalk-complex]]), then the levelwise maps\n   $\\Phi_{J^n}$ define an isomorphism of cochain complexes\n   ([[def-cochain-map]])\n   $$\\underline{\\operatorname{Hom}}^\\bullet(\\mathbb Z_X,J^\\bullet)\\xrightarrow{\\ \\cong\\ }\\Gamma(X,J^\\bullet),$$\n   where the left-hand complex is the cochain Hom complex\n   ([[def-homotopically-projective-bounded-above-complex]]), the right-hand\n   complex has the differentials $\\Gamma(X,d^n)$ and entries\n   $\\Gamma(X,J^n)$, and the isomorphism is natural in the complex\n   $J^\\bullet$.",
+        "deps": [
+          "def-topological-space",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-sheafification",
+          "def-presheaf-on-topological-space",
+          "def-morphism-of-presheaves",
+          "def-presheaf-of-groups-rings-modules",
+          "def-sheaf-on-topological-space",
+          "def-section-restriction-and-global-section",
+          "def-global-sections-functor-sheaves",
+          "thm-abelian-sheaves-form-abelian-category",
+          "thm-sheafification-universal-property",
+          "def-zero-and-stalk-complex",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cochain-map",
+          "def-homotopically-projective-bounded-above-complex"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf",
+              "locator": "Sections 3, 10 and 17: presheaves, the sheaf condition, sheafification and its universal property"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Definition 26.2 and the tensor unit computation of Section 26"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sheaf-cohomology-classes-as-derived-morphisms",
+        "kind": "lemma",
+        "title": "Sheaf cohomology classes as derived morphisms",
+        "statement": "Assuming AC, for an abelian sheaf F and p≥0 there is a natural isomorphism H^p(X,F)≅Hom_{D(AbSh(X))}(Z_X[-p],F).",
+        "strategy": "Choose an injective resolution F→I^•. The free constant integer sheaf represents global sections: Hom(Z_X,I^q)=Γ(X,I^q). Since a bounded-below injective complex represents derived Hom, H^p of this Hom complex is both derived global sections and the derived-category morphism group from Z_X[-p] to F. Check the shift sign and naturality under a map F→F′. Stacks §31, Lemma 31.1 gives this representation. AC is used to choose the injective resolution.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-injective-resolution-in-an-abelian-category",
+          "def-deleted-resolution",
+          "def-quasi-isomorphism",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cohomology-object-of-a-cochain-complex",
+          "def-cochain-map",
+          "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective",
+          "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof",
+          "thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex",
+          "def-derived-category-of-an-abelian-category",
+          "def-homotopically-projective-bounded-above-complex",
+          "def-zero-and-stalk-complex",
+          "lem-morphisms-from-the-constant-sheaf-are-global-sections",
+          "prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms",
+          "lem-addition-of-roofs-makes-an-additive-localization",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-global-sections-functor-sheaves"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-koszul-structure-of-the-abelian-sheaf-tensor-product",
+        "kind": "lemma",
+        "title": "Associator, symmetry and unitors of the abelian sheaf tensor product",
+        "statement": "Let $X$ be a topological space and let $\\otimes_{\\mathbb Z}$ be the\ntensor product of abelian sheaves with presheaf tensor\n$\\otimes_{p,\\mathbb Z}$ and total complex\n$\\operatorname{Tot}$ of [[def-tensor-product-of-abelian-sheaves]]; let\n$\\mathbb Z_X$ be the constant sheaf with value $\\mathbb Z$\n([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]).\n\n1. **(Sheafification comparison.)** For presheaves of abelian groups\n   $\\mathcal P,\\mathcal Q$ on $X$ the canonical morphism of sheaves induced by\n   the sheafification maps,\n   $$\\varphi_{\\mathcal P,\\mathcal Q}:a(\\mathcal P\\otimes_{p,\\mathbb Z}\\mathcal Q)\\longrightarrow a\\mathcal P\\otimes_{\\mathbb Z}a\\mathcal Q,$$\n   is an isomorphism of sheaves of abelian groups, natural in $\\mathcal P$ and\n   $\\mathcal Q$.\n\n2. **(Sheaf-level structure.)** For abelian sheaves\n   $\\mathcal F,\\mathcal G,\\mathcal H$ there is a canonical isomorphism, natural\n   in each variable,\n   $$\\alpha_{\\mathcal F,\\mathcal G,\\mathcal H}:(\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G)\\otimes_{\\mathbb Z}\\mathcal H\\longrightarrow\\mathcal F\\otimes_{\\mathbb Z}(\\mathcal G\\otimes_{\\mathbb Z}\\mathcal H),$$\n   determined by $(f\\otimes g)\\otimes h\\mapsto f\\otimes(g\\otimes h)$ on pure\n   sections, and together with the symmetry\n   $\\sigma_{\\mathcal F,\\mathcal G}:\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G\\to\\mathcal G\\otimes_{\\mathbb Z}\\mathcal F$\n   and the unitors\n   $\\lambda_{\\mathcal F}:\\mathbb Z_X\\otimes_{\\mathbb Z}\\mathcal F\\to\\mathcal F$,\n   $\\rho_{\\mathcal F}:\\mathcal F\\otimes_{\\mathbb Z}\\mathbb Z_X\\to\\mathcal F$\n   of [[lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product]]\n   ($\\lambda(f\\otimes s)=f\\cdot s=\\rho(s\\otimes f)$) it satisfies, as\n   identities between morphisms of sheaves, the **pentagon** for\n   $\\alpha$ on a fourfold product, the **triangle**\n   $(\\operatorname{id}\\otimes\\lambda)\\circ\\alpha=\\rho\\otimes\\operatorname{id}$\n   and the **hexagon** identities expressing\n   $\\sigma_{\\mathcal F,\\mathcal G\\otimes\\mathcal H}$ and\n   $\\sigma_{\\mathcal F\\otimes\\mathcal G,\\mathcal H}$ through $\\alpha$ and the\n   symmetries of the factors; $\\sigma$ is involutive,\n   $\\sigma_{\\mathcal G,\\mathcal F}\\circ\\sigma_{\\mathcal F,\\mathcal G}=\\operatorname{id}$.\n\n3. **(Koszul structure on total complexes.)** For bounded-above cochain\n   complexes $\\mathcal F^\\bullet,\\mathcal G^\\bullet,\\mathcal H^\\bullet$ of\n   abelian sheaves ([[def-bounded-bounded-below-and-bounded-above-complex]])\n   there are isomorphisms of cochain complexes ([[def-cochain-map]]), natural in\n   the arguments,\n   $$A:\\operatorname{Tot}(\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathcal G^\\bullet)\\otimes_{\\mathbb Z}\\mathcal H^\\bullet)\\longrightarrow\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\operatorname{Tot}(\\mathcal G^\\bullet\\otimes_{\\mathbb Z}\\mathcal H^\\bullet)),$$\n   equal on the summand\n   $\\mathcal F^i\\otimes_{\\mathbb Z}\\mathcal G^j\\otimes_{\\mathbb Z}\\mathcal H^k$\n   to the sheaf-level associator of clause 2,\n   $$S:\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathcal G^\\bullet)\\longrightarrow\\operatorname{Tot}(\\mathcal G^\\bullet\\otimes_{\\mathbb Z}\\mathcal F^\\bullet),\\qquad x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$$\n   for $x\\in\\mathcal F^i$, $y\\in\\mathcal G^j$, and\n   $$\\Lambda:\\operatorname{Tot}(\\mathbb Z_X[0]\\otimes_{\\mathbb Z}\\mathcal F^\\bullet)\\longrightarrow\\mathcal F^\\bullet,\\qquad \\mathrm P:\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathbb Z}\\mathbb Z_X[0])\\longrightarrow\\mathcal F^\\bullet,$$\n   the unitors, where $\\mathbb Z_X[0]$ is the stalk complex concentrated in\n   degree $0$ in the cochain reading ([[def-zero-and-stalk-complex]]). These\n   isomorphisms satisfy the same pentagon, triangle and hexagon identities, $S$\n   is involutive, and for $p,q\\ge0$ the symmetry $S$ on\n   $\\operatorname{Tot}(\\mathbb Z_X[-p]\\otimes_{\\mathbb Z}\\mathbb Z_X[-q])$,\n   whose only nonzero term is\n   $\\mathbb Z_X\\otimes_{\\mathbb Z}\\mathbb Z_X$ in degree $p+q$, is $(-1)^{pq}$\n   times the exchange of the factors, so that under the unit identification\n   with $\\mathbb Z_X[-p-q]$ it is multiplication by $(-1)^{pq}$.",
+        "deps": [
+          "def-topological-space",
+          "def-tensor-product-of-abelian-sheaves",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "def-sheafification",
+          "def-presheaf-on-topological-space",
+          "def-presheaf-of-groups-rings-modules",
+          "thm-associativity-of-balanced-tensor-products",
+          "thm-hom-tensor-adjunction-for-modules",
+          "cor-left-adjoints-preserve-colimits",
+          "def-stalk-of-presheaf",
+          "thm-sheafification-preserves-stalks",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "lem-morphisms-of-sheaves-determined-by-stalks",
+          "thm-sheafification-universal-property",
+          "def-products-and-coproducts",
+          "lem-abelian-sheaves-form-a-grothendieck-category",
+          "prop-products-and-coproducts-of-complexes-are-degreewise-when-they-exist-and-preserve-differentials",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cochain-map",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-zero-and-stalk-complex",
+          "def-direct-sum-of-a-family-of-modules",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Algebra",
+              "url": "https://stacks.math.columbia.edu/download/algebra.pdf",
+              "locator": "Section 12 (tensor products of modules) and Section 13 (tensor products and colimits)"
+            },
+            {
+              "title": "The Stacks Project, Sheaves on Spaces",
+              "url": "https://stacks.math.columbia.edu/download/sheaves.pdf",
+              "locator": "Section 17: sheafification, stalks and the universal property"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-koszul-coherence-for-derived-sheaf-tensor",
+        "kind": "lemma",
+        "title": "Koszul coherence of derived sheaf tensor",
+        "statement": "On bounded-above complexes of abelian sheaves, derived tensor is associative and unital with unit Z_X, and its symmetry sends a homogeneous tensor a⊗b of cochain degrees i,j to (-1)^{ij}b⊗a; the associator, unitors, and symmetry are natural and satisfy the coherence relations in the derived category.",
+        "strategy": "Build on K-flat replacements from the sheaf-level derived tensor lemma. At the level of tensor total complexes, define d(a⊗b)=da⊗b+(-1)^i a⊗db, associator by reassociation, and braiding by (-1)^{ij}. Verify the chain-map property, involution, hexagon and associativity on pure tensors; exponents on both sides agree modulo 2. K-flatness makes these maps invariant under replacement and hence descends them to the derived category. Stacks §§26 and 31 and the explicit More on Algebra sign convention are the source.",
+        "deps": [
+          "def-topological-space",
+          "def-tensor-product-of-abelian-sheaves",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "lem-derived-tensor-product-of-abelian-sheaves",
+          "lem-koszul-structure-of-the-abelian-sheaf-tensor-product",
+          "lem-abelian-sheaves-admit-bounded-above-flat-resolutions",
+          "def-derived-category-of-an-abelian-category",
+          "prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-zero-and-stalk-complex",
+          "def-cochain-map",
+          "def-quasi-isomorphism",
+          "def-left-roof-representing-a-localized-morphism",
+          "lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category",
+          "lem-composition-of-roofs-is-well-defined",
+          "def-k-flat-complex-of-abelian-sheaves",
+          "def-flat-abelian-sheaf",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves, §§19–20 and 26–31",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cup-product-sheaf-cohomology",
+        "kind": "definition",
+        "title": "Cup product in sheaf cohomology",
+        "statement": "Assuming AC, for sheaves with a tensor pairing F⊗G→H, define H^p(X,F)⊗H^q(X,G)→H^{p+q}(X,H) from the derived global-section cup map followed by the pairing.",
+        "deps": [
+          "def-topological-space",
+          "def-axiom-of-choice",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-sheaf-cohomology-classes-as-derived-morphisms",
+          "lem-koszul-coherence-for-derived-sheaf-tensor",
+          "lem-derived-tensor-product-of-abelian-sheaves",
+          "def-tensor-product-of-abelian-sheaves",
+          "def-derived-category-of-an-abelian-category",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "lem-morphisms-from-the-constant-sheaf-are-global-sections"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        },
+        "strategy": "Represent α∈H^p(X,F) and β∈H^q(X,G) by morphisms Z_X[-p]→F and Z_X[-q]→G. Their derived tensor is a morphism Z_X[-p-q]→F⊗^L_Z G; compose the canonical comparison to F⊗G and the given pairing F⊗G→H. This defines an element of H^{p+q}(X,H). The sheaf K-flat resolution lemma makes the construction independent of flat choices, and injective-resolution representation makes it independent of cocycle choices. Bilinearity follows from additive derived Hom. Stacks §§26, 28.7 and 31.1 give the derived construction and comparison."
+      },
+      {
+        "id": "thm-cup-product-graded-associative-natural",
+        "kind": "theorem",
+        "title": "Cup-product laws",
+        "statement": "Assuming AC, the tensor-valued sheaf-cohomology cup product is natural and associative under the canonical tensor associator, with unit from Z_X. For a unital associative sheaf of rings R, multiplication gives an associative unital product on H*(X,R); if R is commutative, that product is graded commutative with sign (-1)^{pq} on degrees p and q.",
+        "strategy": "Use the local derived-tensor associator and unitors on three class-representing maps Z[-p], Z[-q], Z[-r]; both parenthesizations are the same tensor morphism after canonical reassociation, then compose an associative coefficient multiplication when one is supplied. The global class 1∈H^0(X,Z_X) is the tensor unit; a coefficient product has a unit only when the sheaf of rings is unital. Naturality is functoriality of derived Hom, tensor and coefficient pairings. For a commutative sheaf of rings, interchanging class maps applies the chain-level symmetry (-1)^{ij}; on degree-p and degree-q shifts this is (-1)^{pq}, while target multiplication is symmetric. Check the same Koszul sign in the total-complex differential and show the canonical comparison to ordinary tensor respects associator and symmetry.",
+        "deps": [
+          "def-topological-space",
+          "def-axiom-of-choice",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-sheaf-cohomology-classes-as-derived-morphisms",
+          "def-cup-product-sheaf-cohomology",
+          "lem-derived-tensor-product-of-abelian-sheaves",
+          "lem-koszul-coherence-for-derived-sheaf-tensor",
+          "lem-koszul-structure-of-the-abelian-sheaf-tensor-product",
+          "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product",
+          "lem-abelian-sheaves-admit-bounded-above-flat-resolutions",
+          "lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms",
+          "lem-addition-of-roofs-makes-an-additive-localization",
+          "def-tensor-product-of-abelian-sheaves",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-balanced-and-bilinear-maps",
+          "thm-universal-property-of-module-tensor-products",
+          "def-derived-category-of-an-abelian-category",
+          "def-cochain-map",
+          "lem-morphisms-from-the-constant-sheaf-are-global-sections",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-cech-cohomology-cover-dependent-without-acyclicity",
+        "kind": "remark",
+        "title": "Fixed-cover Čech can miss derived cohomology",
+        "statement": "A fixed cover’s Čech groups are cover-dependent and need not equal derived sheaf cohomology; the equality theorem requires acyclic finite intersections. The one-member cover has no positive Čech cochains even when a sheaf has nonzero H^1.",
+        "deps": [
+          "def-cech-cohomology-open-cover",
+          "def-cech-cochain-complex-open-cover",
+          "thm-cech-to-sheaf-cohomology-comparison",
+          "thm-leray-acyclic-cover-theorem",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "lem-global-sections-left-exact",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-spectral-sequence-belongs-homological-algebra",
+        "kind": "remark",
+        "title": "Spectral-sequence algebra is external to this pair",
+        "statement": "Stacks §20.11.5 also packages Čech-to-derived comparison as a spectral sequence. This page gives the needed acyclic-cover result by an elementary finite-diagonal double-complex argument; it does not assert a locally proved spectral-sequence theorem.",
+        "deps": [
+          "thm-cech-to-sheaf-cohomology-comparison",
+          "thm-leray-acyclic-cover-theorem",
+          "lem-acyclic-rows-and-columns-of-cech-double-complex"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.082,
+    "id": "sheaf-cohomology-cech-cohomology-and-comparison-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Sheaf Cohomology Cech Cohomology and Comparison — Examples",
+    "companion": "sheaf-cohomology-cech-cohomology-and-comparison",
+    "requires": [
+      "sheaf-cohomology-cech-cohomology-and-comparison",
+      "schemes-subschemes-and-morphisms-locally-of-finite-type",
+      "the-fundamental-group-of-the-circle"
+    ],
+    "items": [
+      {
+        "id": "cex-global-sections-epimorphism-fails-lift",
+        "kind": "counterexample",
+        "title": "An epimorphism of sheaves need not lift global sections",
+        "statement": "Assuming AC, on S^1 the epimorphism C_R→Q=C_R/Z_const from the published global-sections example has a global quotient section with no global real lift; its connecting H^1(S^1,Z_const) class is nonzero.",
+        "strategy": "Use the two angle branches in the published proof. Exactness of the sheaf-cohomology LES identifies the obstruction to a global lift with the connecting homomorphism; because there is no lift, its H1 class is nonzero.",
+        "deps": [
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-sheafification",
+          "thm-sheafification-preserves-stalks",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-exact-sequence-sheaves",
+          "lem-filtered-colimits-of-abelian-groups-are-exact",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-circle-as-real-line-mod-integers",
+          "def-quotient-topology",
+          "def-connected-space",
+          "cor-connected-subsets-of-the-line",
+          "def-sheaf-on-topological-space",
+          "def-continuous-map-top",
+          "def-stalk-of-presheaf",
+          "def-subspace-topology-top",
+          "def-germ-of-section",
+          "thm-abelian-sheaves-form-abelian-category",
+          "def-kernel-cokernel-image-sheaves",
+          "thm-continuous-image-of-a-connected-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cech-cohomology-two-arc-cover-circle",
+        "kind": "example",
+        "title": "Čech H1 of a two-arc circle cover",
+        "statement": "For two connected proper arcs U,V covering S^1 whose intersection has two connected components, check H^0(U,Z_const)=Z and check H^1(U,Z_const)=Z.",
+        "strategy": "Locally constant integer sections on each arc are Z and on the two-component overlap are Z². The two-open differential sends (a,b) to (b-a,b-a), so its kernel is the diagonal Z and its cokernel is Z²/diagonal Z≅Z.",
+        "deps": [
+          "lem-two-open-cover-cech-complex",
+          "def-cech-cohomology-open-cover",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "lem-cech-h0-global-sections",
+          "def-circle-as-real-line-mod-integers",
+          "def-quotient-topology",
+          "cor-connected-subsets-of-the-line",
+          "def-interval",
+          "thm-continuous-image-of-a-connected-space",
+          "def-connected-space",
+          "thm-first-isomorphism-theorem-groups",
+          "def-sheaf-on-topological-space",
+          "def-continuous-map-top",
+          "def-subspace-topology-top"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-bad-cover-circle-cech-misses-h1",
+        "kind": "counterexample",
+        "title": "A one-open cover misses circle H1",
+        "statement": "Assuming AC, for the constant integer sheaf on S^1 and the cover {S^1}, fixed-cover check H^1=0 whereas derived H^1(S^1,Z_const) is nonzero.",
+        "strategy": "The one-open ordered Čech complex has C^p=0 for p>0. The preceding quotient-sheaf nonlift gives a nonzero connecting H1 class for the same constant integer sheaf. Thus the comparison map from this fixed cover cannot be an isomorphism.",
+        "deps": [
+          "cex-global-sections-epimorphism-fails-lift",
+          "def-cech-cohomology-open-cover",
+          "def-cech-cochain-complex-open-cover",
+          "thm-cech-to-sheaf-cohomology-comparison",
+          "def-axiom-of-choice",
+          "def-acyclic-cover-for-sheaf",
+          "thm-leray-acyclic-cover-theorem",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-circle-as-real-line-mod-integers",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-sheaf-on-topological-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            },
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-skyscraper-sheaf-acyclic",
+        "kind": "example",
+        "title": "A skyscraper sheaf is acyclic",
+        "statement": "Assuming AC, the skyscraper abelian sheaf i_{x*}A is flasque and H^q(X,i_{x*}A)=0 for q>0.",
+        "strategy": "Each restriction is identity A→A or the zero map A→0, hence surjective. Apply flasque acyclicity; for an empty space no point is chosen and the example is inapplicable.",
+        "deps": [
+          "def-skyscraper-sheaf-abelian-group",
+          "def-flasque-sheaf",
+          "thm-flasque-sheaves-acyclic",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-sheaf-on-topological-space",
+          "def-section-restriction-and-global-section"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-flasque-sheaf-all-functions",
+        "kind": "example",
+        "title": "All functions form a flasque sheaf",
+        "statement": "For an abelian group A, the sheaf U↦Map(U,A) on X is flasque.",
+        "strategy": "Every function on U⊆V extends canonically by the zero element of A on V\\U. Restriction and gluing are pointwise, so this is a sheaf and all restrictions are surjective.",
+        "deps": [
+          "def-flasque-sheaf",
+          "def-sheaf-on-topological-space",
+          "def-presheaf-on-topological-space",
+          "def-topological-space",
+          "def-function",
+          "def-continuous-map-top"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-constant-sheaf-not-flasque",
+        "kind": "counterexample",
+        "title": "A constant sheaf need not be flasque",
+        "statement": "On X=R, the locally constant integer sheaf is not flasque.",
+        "strategy": "Take U=(-2,-1)∪(1,2)⊂R and assign values 0 and 1 on its two components. Every global locally constant integer function on connected R is constant, so this section on U is not the restriction of a global one.",
+        "deps": [
+          "def-flasque-sheaf",
+          "def-sheaf-on-topological-space",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-open-and-closed-in-r",
+          "def-topological-space",
+          "def-interval",
+          "cor-connected-subsets-of-the-line",
+          "def-connected-space",
+          "ex-flasque-sheaf-all-functions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-projective-line-two-affine-cover-and-twisting-sheaf",
+        "kind": "definition",
+        "title": "Two-affine projective line and its twists",
+        "statement": "For a field k, glue U_0=Spec k[t] and U_∞=Spec k[u] along Spec k[t,t^{-1}] with u=t^{-1}; call the resulting scheme P^1_k. For n∈Z, glue rank-one free sheaves with frames e_0 on U_0 and e_∞ on U_∞ by e_∞=t^n e_0 on the overlap; call the invertible sheaf O(n).",
+        "strategy": "The published affine-scheme gluing theorem gives the scheme from the two charts and inversion isomorphism; the published sheaf-gluing theorem glues the rank-one module sheaves through the transition isomorphism. Since t^n is a unit on the overlap for every integer n, the free rank-one modules glue to an invertible sheaf. This convention agrees with the standard Proj twist: on D_+(x_i), x_i^n is a frame and x_1^n=(x_1/x_0)^n x_0^n. This constructs the needed local supplier without consuming the later unbuilt Proj page.",
+        "deps": [
+          "thm-gluing-affine-schemes",
+          "thm-gluing-sheaves",
+          "def-gluing-datum-sheaves",
+          "def-affine-scheme",
+          "def-affine-scheme-spectrum",
+          "def-affine-open-subscheme",
+          "thm-structure-sheaf-affine-scheme",
+          "thm-sections-basic-open-affine-scheme",
+          "cor-principal-localisation-spectrum-is-distinguished-open",
+          "thm-universal-property-of-localisation",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-morphism-affine-schemes-from-ring-map",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 5 §5.2 Proposition 5.2.5 and Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-mayer-vietoris-projective-line-cover-preview",
+        "kind": "example",
+        "title": "Two-affine Mayer–Vietoris on the projective line",
+        "statement": "For the standard two-affine cover of P^1 and the twisting sheaf O(n), write the induced Mayer–Vietoris long exact sequence in terms of its two chart modules and their Laurent overlap.",
+        "strategy": "For the locally glued P^1_k and O(n), Γ(U_0,O(n))=k[t]e_0, Γ(U_∞,O(n))=k[u]e_∞, and Γ(U_0∩U_∞,O(n))=k[t,t^{-1}]e_0. With u=t^{-1} and e_∞=t^n e_0, the two-open Mayer–Vietoris difference is (a(t),b(u))↦t^n b(t^{-1})-a(t). Substitute these three modules into the proved long exact sequence, retaining H^i of the two charts rather than asserting affine acyclicity from an unpublished supplier. Check n=0 and n=1 for transition orientation; the construction is valid for negative n because t is invertible on the overlap.",
+        "deps": [
+          "thm-mayer-vietoris-sheaf-cohomology",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "thm-sections-basic-open-affine-scheme",
+          "def-sheaf-on-topological-space",
+          "def-axiom-of-choice",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-restriction-sheaf-open-subspace"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cech-sign-degree-two-three-opens",
+        "kind": "example",
+        "title": "Three-open Čech sign cancellation",
+        "statement": "For three ordered opens U_0<U_1<U_2, the two contributions to (δ²s)_{012} cancel term by term for every zero-cochain s.",
+        "strategy": "Expand δs_{ij}=s_j-s_i on overlaps, then δ(δs)_{012}=(s_2-s_1)-(s_2-s_0)+(s_1-s_0)=0 after restriction to U_0∩U_1∩U_2.",
+        "deps": [
+          "def-cech-cochain-complex-open-cover",
+          "lem-cech-differential-squares-zero",
+          "def-cech-cohomology-open-cover",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "def-sheaf-on-topological-space",
+          "def-topological-space",
+          "def-section-restriction-and-global-section"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "not-applicable"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gao and Zhang, Lectures on Algebraic Geometry, Chapter 6",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-empty-cover-empty-space-cohomology",
+        "kind": "example",
+        "title": "Cohomology of the empty space and empty cover",
+        "statement": "Assuming AC, for the empty topological space the empty open cover has zero Čech cochain groups, and every abelian sheaf has H^q(∅,F)=0 for all q≥0.",
+        "strategy": "The empty-cover product in Ab is the zero group in every degree. The sheaf axiom forces F(∅)=0, so Ab(∅) is the zero abelian category and Γ is exact with zero values; its derived groups vanish.",
+        "deps": [
+          "lem-sheaf-section-over-empty-set-terminal",
+          "def-cech-cochain-complex-open-cover",
+          "def-cech-cohomology-open-cover",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-global-sections-functor-sheaves",
+          "def-cohomology-object-of-a-cochain-complex",
+          "def-compact-space",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "not-applicable"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-cech-refinement-map-not-canonical-on-cochains",
+        "kind": "counterexample",
+        "title": "Refinement choices differ on cochains",
+        "statement": "Even when two refinement functions induce the same map on Čech cohomology, their maps on cochains can differ.",
+        "strategy": "Let the coarse cover have two identical opens U_0=U_1=X and the fine cover one open V_0=X. Both c(0)=0 and c′(0)=1 are valid. For a zero-cochain (s_0,s_1) with s_0≠s_1, the two pullbacks in fine degree zero are s_0 and s_1. The refinement-homotopy theorem still makes their induced cohomology maps equal.",
+        "deps": [
+          "def-refinement-open-cover",
+          "thm-refinement-map-independent-on-cohomology",
+          "def-cech-cohomology-open-cover",
+          "def-cech-cochain-complex-open-cover",
+          "def-compact-space",
+          "def-topological-space",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-section-restriction-and-global-section",
+          "lem-increasing-cech-complex-extends-to-alternating-tuples"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "not-applicable"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

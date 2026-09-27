@@ -42,10 +42,10 @@ $$W_{a,b}(x) = \sum_{n=0}^{\infty} a^{n} \cos(2\pi b^{n} x).$$
 
 It is continuous on $\mathbb{R}$ and, by Hardy's 1916 sharpening of Weierstrass's
 1872 example, nowhere differentiable whenever $0 < a < 1$ and $ab \ge 1$. Its
-graph is a compact subset of $\mathbb{R}^2$, and the claim at issue is that its
+graph over $[0,1]$ is a compact subset of $\mathbb{R}^2$, and the claim at issue is that this restricted graph's
 Hausdorff dimension is
 
-$$\dim_{H} \operatorname{graph}(W_{a,b}) = 2 + \log_{b} a = 2 + \frac{\log a}{\log b},$$
+$$\dim_{H} \operatorname{graph}(W_{a,b}|_{[0,1]}) = 2 + \log_{b} a = 2 + \frac{\log a}{\log b},$$
 
 a number strictly between $1$ and $2$, since $0 < a < 1$ gives $\log_b a < 0$ and
 $ab > 1$ gives $\log_b a > -1$.

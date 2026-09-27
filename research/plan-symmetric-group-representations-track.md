@@ -66,9 +66,11 @@ is binding.
   the hook-length formula, row insertion, RSK, and the ordinary
   sum-of-squares consequences.
 - RG-13, `principal-series-representations-of-gl-n-over-a-finite-field`, owns
-  the generic type-A Hecke algebra, its standard basis, specializations, and
-  Tits deformation. SYMR-7 starts with Specht/cellular representation theory,
-  not a second Hecke presentation.
+  the finite-field Hecke convolution interpretation, generic deformation,
+  specializations, and Tits deformation. BG-16 separately proves the minimal
+  type-A presentation and standard basis in its own Soergel normalization;
+  RG-13 does not depend on BG-16. SYMR-7 starts with Specht/cellular
+  representation theory, not a second Hecke presentation.
 - RL-8, `tensor-product-multiplicities-and-littlewood-richardson`, owns the
   stable `def-littlewood-richardson-tableau-and-coefficient` and the
   polynomial-GL tensor-product LR theorem. SYMR-3 consumes that exact

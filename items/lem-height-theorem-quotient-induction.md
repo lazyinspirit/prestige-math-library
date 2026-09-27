@@ -7,14 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-height-in-quotient-is-relative-chain-length, lem-height-theorem-first-generator-reduction, thm-prime-spectrum-of-a-quotient-bijection]
+deps: [def-axiom-of-choice, lem-height-in-quotient-is-relative-chain-length, lem-height-theorem-first-generator-reduction, thm-prime-spectrum-of-a-quotient-bijection]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-01
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -23,12 +20,21 @@ sources:
     - title: "The Stacks Project, Section 10.60: Dimension"
       url: "https://stacks.math.columbia.edu/tag/00KD"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-01-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 
 ## Statement
 
-In the situation of [[lem-height-theorem-first-generator-reduction]], choose
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). In the situation of [[lem-height-theorem-first-generator-reduction]], with a chain of length $d\ge1$, choose
 $b$ so that $\mathfrak p$ is minimal over $(b,x_2,\ldots,x_n)$, and let
 $$ \mathfrak p=\mathfrak p_d\supsetneq\mathfrak p_{d-1}\supsetneq\cdots\supsetneq\mathfrak p_0 $$
 be a strict prime chain with $b\in\mathfrak p_1$. Then in $R/(b)$ the
@@ -39,9 +45,9 @@ is strict of length $d-1$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, an ideal $(x_1,\ldots,x_n)$ with $n\ge2$, a prime $\mathfrak p$ minimal over it, an element $b$ as in [[lem-height-theorem-first-generator-reduction]], and a strict chain $$ \mathfrak p=\mathfrak p_d\supsetneq\mathfrak p_{d-1}\supsetneq\cdots\supsetneq\mathfrak p_0 $$ with $b\in\mathfrak p_1$.
+**Given:** The Axiom of Choice, a Noetherian commutative ring $R$, an ideal $(x_1,\ldots,x_n)$ with $n\ge2$, a prime $\mathfrak p$ minimal over it, an element $b$ as in [[lem-height-theorem-first-generator-reduction]], and a strict chain $$ \mathfrak p=\mathfrak p_d\supsetneq\mathfrak p_{d-1}\supsetneq\cdots\supsetneq\mathfrak p_0 $$ of length $d\ge1$ with $b\in\mathfrak p_1$.
 
-[L1] The chosen element $b$ makes $\mathfrak p$ minimal over $(b,x_2,\ldots,x_n)$ ([[lem-height-theorem-first-generator-reduction]]).
+[L1] Under the assumed Axiom of Choice, the chosen element $b$ makes $\mathfrak p$ minimal over $(b,x_2,\ldots,x_n)$ ([[lem-height-theorem-first-generator-reduction]]).
 
 [L2] Prime ideals of a quotient correspond to prime ideals upstairs containing the quotient ideal, with strict inclusions preserved ([[thm-prime-spectrum-of-a-quotient-bijection]]).
 

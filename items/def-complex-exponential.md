@@ -7,8 +7,8 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-complex-series-power-series-and-absolute-convergence, def-complex-integer-powers, def-complex-numbers-and-arithmetic, thm-complex-numbers-form-a-field, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive]
-justified_by: [lem-complex-exponential-series-converges-everywhere]
+deps: [def-complex-series-power-series-and-absolute-convergence, def-complex-integer-powers, def-complex-numbers-and-arithmetic, thm-complex-numbers-form-a-field, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive, lem-complex-exponential-series-converges-everywhere]
+justified_by: []
 aliases: []
 landmark: true
 verification:

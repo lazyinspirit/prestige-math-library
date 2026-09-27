@@ -13,8 +13,12 @@ landmark: true
 short: "Existence and basis formula for $\\star$"
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-receipts.jsonl (thm-hodge-star-exists-uniquely-and-has-the-orthonormal-basis-formula). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -57,6 +61,6 @@ $$\star e_I=\varepsilon_I\,e_{I^c}.$$
 
 4.1 Both sides of the relation of [L1] are bilinear in $(\alpha,\beta)$, so step 3.1 extends from basis wedges to the identity $\alpha\wedge\star\beta=\langle\alpha,\beta\rangle\omega$ for all $\alpha,\beta\in\Lambda^kV$. [step 3.1, algebra]
 
-5.1 Uniqueness: if $\star'$ also satisfies [L1], then $\alpha\wedge(\star\beta-\star'\beta)=0$ for all $\alpha$; pairing with $\omega$ through the Gram inner product of [L2] gives $\langle\alpha,\star(\star\beta-\star'\beta)\rangle=0$ for all $\alpha$, so nondegeneracy forces $\star(\star\beta-\star'\beta)=0$; the map $\star$ of step 2.1 permutes a basis up to sign, hence is bijective, so $\star\beta=\star'\beta$. [L1, L2, step 2.1, step 4.1]
+5.1 Uniqueness: if $\star'$ also satisfies [L1], fix $\beta$ and write $\delta:=\star\beta-\star'\beta=\sum_{|J|=n-k}c_J e_J$ in the basis of [L4]. Then $e_{J^c}\wedge\delta=0$ for every $J$ by subtracting the two defining identities. All terms except $c_Je_{J^c}\wedge e_J$ vanish because they repeat a basis vector, while $e_{J^c}\wedge e_J=\pm\omega\ne0$. Hence every $c_J=0$ and $\delta=0$. This argument also covers $k=0,n$ and $n=0$, where the relevant bases each have one empty or full wedge. [L3, L4, step 3.1, step 4.1]
 
 6.1 Steps 2.1 and 4.1 prove existence with the complementary-basis formula, and step 5.1 proves uniqueness. [step 2.1, step 4.1, step 5.1] ∎

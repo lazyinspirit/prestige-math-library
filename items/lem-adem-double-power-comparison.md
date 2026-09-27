@@ -10,11 +10,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   references:
     - title: N. E. Steenrod and D. B. A. Epstein, Cohomology Operations
@@ -62,7 +63,7 @@ asserted here.
 
 **Proof technique:** expand one iterated total square in the two cyclic bases, use row--column symmetry, and perform the binary-digit calculation after a high-degree substitution.
 
-1.1 Expand the iterated class in both cyclic coordinates. First justify the truncation of the inner expansion. For $r>q$, the class $D_r(x)$ has degree $2q-r<q$. Restriction to the cellular $q$-skeleton is an isomorphism in that degree, and naturality in [F5] identifies the restriction with $D_r$ of the restricted class. Collapse the $(q-1)$-skeleton of the $q$-skeleton. The restricted $x$ is the pullback of a class on the resulting wedge of $q$-spheres, so additivity and naturality in [F5] reduce the calculation to one sphere. For $q<r<2q$ the target $H^{2q-r}(S^q;\mathbb F_2)$ is zero. For $r=2q$ and $q>0$, restriction to a point is an isomorphism in degree zero, while the positive-degree input restricts to zero and additivity gives $D_{2q}(0)=0$. When $q=0$, every $r>q$ is already outside the range $0\leq r\leq2q$; for $q>0$, every $r>2q$ is outside the same range. Hence $D_r(x)=0$ for all $r>q$. [given, F1, F4, F5]
+1.1 Expand the iterated class in both cyclic coordinates. First justify the truncation of the inner expansion. For $r>q$, the class $D_r(x)$ has degree $2q-r<q$. Restriction to the cellular $q$-skeleton is an isomorphism in that degree, and naturality in [F5] identifies the restriction with $D_r$ of the restricted class. Collapse the $(q-1)$-skeleton of the $q$-skeleton. The restricted $x$ is the pullback of a class on the resulting wedge of $q$-spheres, so additivity and naturality in [F5] reduce the calculation to one sphere. For $q<r<2q$ the target $H^{2q-r}(S^q;\mathbb F_2)$ is zero. For $r=2q$ and $q>0$, restrict to one point in each path component of the finite complex. Restriction to these points is injective in degree zero, while the positive-degree input restricts to zero and additivity gives $D_{2q}(0)=0$ on every component. When $q=0$, every $r>q$ is already outside the range $0\leq r\leq2q$; for $q>0$, every $r>2q$ is outside the same range. Hence $D_r(x)=0$ for all $r>q$. [given, F1, F4, F5]
 
 The first cyclic diagonal of a degree-$q$ class is
 

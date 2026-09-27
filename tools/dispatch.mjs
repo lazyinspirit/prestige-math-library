@@ -70,10 +70,9 @@ const ROLES = Object.freeze({
   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pair authoring and pathway prose; full run width with stage ownership guards' },
   // Final reporting is read-only; source uncertainty still requires research.
   'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
-  // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The active
-  // adjudication lane is Sol; the registry keeps the model choice centralized
-  // so an exhausted provider lane can be changed once without stranding every
-  // later repair and adjudication stage.
+  // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The Step-7 stage
+  // selects the Astra-medium profile; the role fallback remains Sol for
+  // historical dispatch receipts.
   //
   // Step 7 is partitioned by the same group assignment, so this cap tracks the
   // nine group-Alpha lanes. A lower value would silently serialize disjoint
@@ -89,7 +88,7 @@ const ROLES = Object.freeze({
   // Step 7 is the sharpest role in the build: a `false_positive` adjudication
   // silently discards a real defect and no later gate re-examines it. It keeps
   // the highest effort supported by the active adjudication lane.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: MAX_GROUPS, web: true, why: 'Step-7 logical adjudication and repair, one Sol xhigh worker per batch' },
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: MAX_GROUPS, web: true, why: 'Step-7 logical adjudication and repair; stage profile selects Astra medium' },
   'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, requiresTask: true, why: 'Three Step-7 Sol xhigh owner agents repair all assigned downstream consumers, including published items, before centralized recertification' },
   // `final-adjudicator` — the independent Step-7 close after the owning group
   // Alpha's initial repair receives a rejecting Sol rejudge. It is

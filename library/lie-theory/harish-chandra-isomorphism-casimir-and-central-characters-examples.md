@@ -11,4 +11,4 @@ examples: [ex-sl2-casimir-and-its-highest-weight-eigenvalue,
            cex-a-noninvariant-quadratic-pbw-element-is-not-central]
 ---
 
-These examples make the page's conventions concrete: the $\mathfrak{sl}_2$ Casimir normalization and eigenvalue, the independent quadratic and cubic center generators in $\mathfrak{sl}_3$, a direct $A_2$ dot-orbit check, the standard $\mathfrak{sl}_2$ warning that ordinary Weyl orbits miss the $\rho$ shift, the singular central character at $-\rho$, and a quadratic PBW monomial that fails centrality.
+These examples make the page's conventions concrete: the $\mathfrak{sl}_2$ Casimir normalization and eigenvalue, the independent quadratic and cubic center generators in $\mathfrak{sl}_3$ under AC, a direct $A_2$ dot-orbit check, the standard $\mathfrak{sl}_2$ warning that ordinary Weyl orbits miss the $\rho$ shift, the singular central character at $-\rho$, and a quadratic PBW monomial that fails centrality.

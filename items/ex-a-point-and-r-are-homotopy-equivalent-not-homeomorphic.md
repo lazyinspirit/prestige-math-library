@@ -7,13 +7,17 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [fs-homotopy-equivalent-spaces-are-homeomorphic, ex-intervals-and-euclidean-spaces-are-contractible, thm-r-uncountable, def-homotopy-equivalence, def-homeomorphism-and-open-maps]
+deps: [fs-homotopy-equivalent-spaces-are-homeomorphic, thm-r-uncountable, def-homotopy-equivalence, def-homeomorphism-and-open-maps]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-07-31
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -30,7 +34,7 @@ Let $P=\{p\}$ be a one-point space. The maps $i:P\to\mathbb R$, $i(p)=0$, and $q
 
 **Given:** The one-point space $P$ and the real line.
 
-[L1] The real line contracts to $0$ by $H(x,t)=(1-t)x$ ([[ex-intervals-and-euclidean-spaces-are-contractible]]).
+[L1] The map $H:\mathbb R\times[0,1]\to\mathbb R$, $H(x,t)=(1-t)x$, is continuous, with $H(x,0)=x$ and $H(x,1)=0$.
 
 [L2] A homotopy equivalence has a homotopy inverse whose composites are homotopic to the identity maps ([[def-homotopy-equivalence]]).
 

@@ -10,12 +10,12 @@ provenance:
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl (lem-step-functions-have-vanishing-torus-fourier-coefficients). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,7 +38,7 @@ In particular, $\widehat s(k) \to 0$ as $|k| \to \infty$.
 
 **Given:** A one-period step function $s$ on $[0,1)$.
 
-[L1] Fourier coefficients on $\mathbb T$ are defined by $\widehat f(k)=\int_0^1 f(t)e^{-2\pi ikt}\,dt$ ([[def-period-one-fourier-coefficients-partial-sums-and-convolution]]).
+[L1] For a step function, the displayed coefficient formula of [[def-period-one-fourier-coefficients-partial-sums-and-convolution]] is the ordinary Riemann integral of a finite piecewise-continuous function. This calculation needs no choice premise and agrees with the torus Lebesgue coefficient whenever Countable Choice is assumed.
 
 ## Proof
 

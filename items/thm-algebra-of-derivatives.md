@@ -9,17 +9,18 @@ provenance:
   proof: ai-altered
 deps: [def-derivative, thm-caratheodory-characterisation, cor-differentiable-implies-continuous, thm-algebra-of-continuous-functions, def-continuity-real, def-function-limit, def-limit-point-r, lem-sign-preservation-near-a-limit, def-integer-power, lem-of-no-zero-divisors]
 justified_by: []
-aliases: [thm-differentiation-rules, thm-product-rule, thm-quotient-rule]
+aliases: [thm-differentiation-rules, thm-quotient-rule]
 landmark: true
 short: "algebra of derivatives"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-algebra-of-derivatives). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:

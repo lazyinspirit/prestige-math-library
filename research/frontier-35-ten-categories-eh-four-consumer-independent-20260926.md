@@ -1,0 +1,17 @@
+# Independent Erdős–Hajnal consumer follow-up — 2026-09-26
+
+Read-only bounded check of the four repaired published consumers. The proved supplier interfaces are `cor-fox-sudakov-quantitative-induced-density-bound` (nonempty finite $H,G$, $0<x<1/2$, $H$-dependent $C_H$) and `thm-loglog-quantitative-induced-density-bound` (the same domain, with a positive $\log_2\log_2(1/x)$ denominator). Both are on plan page order 408.1, before the two theorems on 408.3 and the examples on 408.4. Their common quantitative theorem and divisibility suppliers support the stated nonempty-$H$ specialization; null $H$ is handled vacuously in the consumer theorems. The density-to-degree trimming, greedy-colouring, and complement interfaces match both theorem proofs.
+
+| Current SHA-256 / item | Verdict and checked calculation | Direct item consumers |
+|---|---|---|
+| `f56189efd9a4c2da7d164693e9739f5d1f787da2ffefaf7b6882cbf1d643f394` `thm-classical-erdos-hajnal-bound` | Pass. $x=2^{-\sqrt{L/(2C_H)}}$ gives $\delta n=\sqrt n$; $x\sqrt n\to\infty$, so the trimming/colouring bound becomes $1/(8x)$; the proof explicitly uses $\operatorname{hom}(G)\ge2$ for its finite small-$n$ range. | `rem-fox-sudakov-quantitative-density-theorem`; `cor-the-loglog-bound-eventually-dominates-the-classical-bound` has this as a declared dependency but does not use its proof value. |
+| `196fd880c6d6b6302bbb44c91d50551d742663a4e9ff4f95e907a10bc85150a1` `thm-loglog-erdos-hajnal-bound` | **Small proof gap.** $\beta=1/(4\sqrt{C_H})$ gives exponent at most $L/8$ and $|S|\ge 2^{7L/8}$ for large $L$; the subsequent $1/(8x)$ algebra is sound. Step 1's $\operatorname{hom}(G)\ge1$ does not justify shrinking a positive constant for the finite $n>2$ range in step 6. Replace with the elementary $\operatorname{hom}(G)\ge2$ pair argument; at $n=2$ the target exponent is zero. | `cor-the-loglog-bound-eventually-dominates-the-classical-bound`, `rem-loglog-quantitative-density-theorem`. |
+| `9136277d6948333f5a901751ce093a459044fcef5d5bb8c84a6ce60ea88734ea` `ex-choosing-x-for-the-classical-erdos-hajnal-bound` | Pass. Its explicit $L>2C_H$ gives $n>1$ and $0<x<1/2$; the exponent equals $L/2$ exactly. | None. |
+| `506458032d086de9ad47300d5dba52c36952acf3e2397fce16e4e65bab092cf8` `ex-choosing-x-for-the-loglog-erdos-hajnal-bound` | **Domain gap.** For sufficiently large $n$, $\beta\sqrt{L\log_2 L}\ge\sqrt L>1$ and the displayed $L/8$ exponent bound is correct. The Example/Given does not restrict $n$, so its formula is undefined at $n=0,1$. Make the large-$n$ hypothesis explicit in the Example/Given. | None. |
+
+This note records mathematical and interface evidence only. It does not update verification metadata or certify the published items.
+
+## Independent post-repair check
+
+- `thm-loglog-erdos-hajnal-bound`, SHA-256 `8e43818c06b0b2b8b3d8aad1e8253dcf5bba170b5d0478d4858a11dd058d3ee9`: pass. Steps 1.1 and 6.1 now use the adjacent-or-nonadjacent pair to show $\operatorname{hom}(G)\ge2$ for every $n\ge3$, and explicitly treat $n=2$ where the target is one. Shrinking the positive constant over the finite remaining range is valid; the unchanged large-$n$ calculation remains sound.
+- `ex-choosing-x-for-the-loglog-erdos-hajnal-bound`, SHA-256 `e436ce7efb597586e2310c80d2fdb553ab83693b934998b0fe3dea97369fa901`: pass. The Example now requires $n\ge3$, so $L>1$ and $L\log_2 L$ is defined; its conclusion remains expressly for sufficiently large $n$, when the quantitative supplier's $0<x<1/2$ domain holds.

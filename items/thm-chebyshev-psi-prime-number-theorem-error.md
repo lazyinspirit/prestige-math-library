@@ -4,31 +4,37 @@ title: "Chebyshev psi prime number theorem error"
 kind: theorem
 status: published
 origin: pipeline
-deps: [lem-zeta-explicit-formula-zero-free-error-balance, thm-zeta-bounds-in-classical-zero-free-region]
+deps: [lem-zeta-explicit-formula-zero-free-error-balance, thm-zeta-bounds-in-classical-zero-free-region, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "Theorem 6.9, pp.179\u2013181; independently Kedlaya Theorem 7.7"
       url: https://personal.science.psu.edu/rcv4/personal/Publications/MNTI/10.0_pp_168_198_The_Prime_Number_Theorem.pdf
 proof_strategy: direct argument
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-03-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume countable choice.
 
 There is an absolute $c>0$ such that for $x\ge2$,
 $$\psi(x)=x+O\left(xe^{-c\sqrt{\log x}}\right).$$
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses of the statement.
+**Given:** Countable choice and the data and hypotheses of the statement.
 
 [F1] [[lem-zeta-explicit-formula-zero-free-error-balance]]: For $x\ge2$ and finite $T\ge3$, the classical region and truncated explicit formula give $\psi(x)-x=O\left(xe^{-c_0\log x/\log(T+2)}\log^2T+\frac{x\log^2(xT)}{T}+\log x\right).$ Constants may be enlarged and the positive region constant decreased. The zero sum used in the proof is finite.
 
@@ -36,7 +42,7 @@ $$\psi(x)=x+O\left(xe^{-c\sqrt{\log x}}\right).$$
 
 ## Proof
 
-1.1 Put $u=\sqrt{\log x}$ and choose a fixed $A>0$. For sufficiently large x take $T=e^{Au}\ge3$. Then $\log(T+2)=Au+O(e^{-Au})$, so the finite-zero term is $O(xu^2e^{-(c_0/A)u+o(1)})$, the truncation term is $O(xu^4e^{-Au})$, and the remaining error is $O(u^2)$. [F1]
+1.1 Under countable choice, the supplied finite explicit-formula bound applies. Put $u=\sqrt{\log x}$ and choose a fixed $A>0$. For sufficiently large x take $T=e^{Au}\ge3$. Then $\log(T+2)=Au+O(e^{-Au})$, so the finite-zero term is $O(xu^2e^{-(c_0/A)u+o(1)})$, the truncation term is $O(xu^4e^{-Au})$, and the remaining error is $O(u^2)$. [F1]
 
 2.1 Choose $0<c<\min(A,c_0/A)$. For any fixed k and positive epsilon, $u^ke^{-\epsilon u}$ is bounded; thus each error above is $O(xe^{-cu})$. Enlarging the constant over the initial compact x-range proves the assertion for all $x\ge2$. [step 1.1, algebra]
 

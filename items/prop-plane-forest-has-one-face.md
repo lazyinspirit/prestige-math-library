@@ -13,8 +13,12 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
-  precheck: pass
-  audited: 2026-08-11
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -41,7 +45,7 @@ Every polygonally embedded finite forest has exactly one face. Forests and leave
 
 **Proof technique:** induction.
 
-1.1 The null forest and a forest of isolated vertices have connected complement and one face. In a nonempty forest with an edge, a low-degree vertex lemma supplies a leaf and its incident edge. [base, L1]
+1.1 The null forest and a forest of isolated vertices have connected complement and one face. If a forest has an edge, apply [[lem-nonempty-forest-has-low-degree-vertex]] to a component containing that edge. This component has no isolated vertex, so its low-degree vertex is a leaf with one incident edge. [base, L1]
 
 1.2 Delete a leaf and its edge. The remaining drawing is a smaller plane forest. By the induction hypothesis it has one face, and reinserting the pendant edge does not split that face because the edge is a bridge and both its local sides are incident with the same face by [L2]. [ih, L2]
 

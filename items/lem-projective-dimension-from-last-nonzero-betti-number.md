@@ -2,9 +2,15 @@
 id: "lem-projective-dimension-from-last-nonzero-betti-number"
 kind: "lemma"
 title: "projective dimension from last nonzero betti number"
-deps: ["cor-betti-number-is-rank-in-minimal-resolution", "lem-minimal-free-resolution-reduces-to-zero-differential", "def-projective-dimension-of-an-object", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "thm-finite-flat-modules-over-local-rings-are-free", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "thm-nakayama-lemma", "def-balanced-tor-bifunctor", "lem-finite-local-modules-admit-minimal-free-resolutions"]
+deps: ["def-axiom-of-choice", "cor-betti-number-is-rank-in-minimal-resolution", "lem-minimal-free-resolution-reduces-to-zero-differential", "def-projective-dimension-of-an-object", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "thm-finite-flat-modules-over-local-rings-are-free", "lem-projective-modules-are-flat-over-an-arbitrary-ring", "thm-nakayama-lemma", "def-balanced-tor-bifunctor", "lem-finite-local-modules-admit-minimal-free-resolutions"]
 verification:
-  audited: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (lem-projective-dimension-from-last-nonzero-betti-number). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Corollary 12.29, p.121"
@@ -19,7 +25,7 @@ proof_strategy: "Explicit algebraic derivation"
 
 ## Statement
 
-For a nonzero finite module $M$ over a nonzero Noetherian local ring, $\operatorname{pd}_RM=\sup\{i\ge0:\beta_i^R(M)\ne0\}$, allowing infinity. For each integer $q\ge0$, $\operatorname{pd}_RM\le q$ if and only if $\operatorname{Tor}_{q+1}^R(k,M)=0$.
+Assume the Axiom of Choice. For a nonzero finite module $M$ over a nonzero Noetherian local ring, $\operatorname{pd}_RM=\sup\{i\ge0:\beta_i^R(M)\ne0\}$, allowing infinity. For each integer $q\ge0$, $\operatorname{pd}_RM\le q$ if and only if $\operatorname{Tor}_{q+1}^R(k,M)=0$.
 
 ## Facts & Assumptions
 
@@ -45,7 +51,7 @@ For a nonzero finite module $M$ over a nonzero Noetherian local ring, $\operator
 
 ## Proof
 
-1.1 Choose a minimal degreewise finite free resolution $F_\bullet\to M$ by [F9]. By [F7], the zero differential in [F8] identifies $\operatorname{Tor}_{q+1}^R(k,M)$ with $F_{q+1}/\mathfrak mF_{q+1}$. Its vanishing and Nakayama give $F_{q+1}=0$. Exactness then gives $\ker(F_q\to F_{q-1})=0$ (using the augmentation when $q=0$), so the truncated complex is a length-$q$ free resolution. Also $F_{q+2}=\ker d_{q+2}=\operatorname{im}d_{q+3}\subseteq\mathfrak mF_{q+2}$, so Nakayama prevents a restart, and the same argument applies successively in every subsequent degree. [F2, F6, F7, F8, F9, algebra]
+1.1 Under AC, [F9] supplies a minimal degreewise finite free resolution $F_\bullet\to M$; AC also meets the premise of Nakayama in [F6]. By [F7], the zero differential in [F8] identifies $\operatorname{Tor}_{q+1}^R(k,M)$ with $F_{q+1}/\mathfrak mF_{q+1}$. Its vanishing and Nakayama give $F_{q+1}=0$. Exactness then gives $\ker(F_q\to F_{q-1})=0$ (using the augmentation when $q=0$), so the truncated complex is a length-$q$ free resolution. Also $F_{q+2}=\ker d_{q+2}=\operatorname{im}d_{q+3}\subseteq\mathfrak mF_{q+2}$, so Nakayama prevents a restart, and the same argument applies successively in every subsequent degree. [given, F2, F6, F7, F8, F9, algebra]
 
 1.2 Conversely, if $\operatorname{pd}M\le q$, a projective resolution of length at most $q$ computes Tor and gives zero in every degree above $q$. The syzygy criterion also gives a finite free terminating resolution: for $q\ge1$ its finite projective syzygy is flat and hence free; for $q=0$ apply the same freeness result directly to $M$. [F3, F5, F4, F2, F7]
 

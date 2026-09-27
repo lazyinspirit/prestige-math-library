@@ -7,17 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-universal-enveloping-algebra-as-a-tensor-quotient, def-killing-form-of-a-semisimple-lie-algebra, prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra]
-justified_by: [lem-the-casimir-element-is-independent-of-dual-bases]
+deps: [def-universal-enveloping-algebra-as-a-tensor-quotient, def-killing-form-of-a-semisimple-lie-algebra, prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra, lem-the-casimir-element-is-independent-of-dual-bases]
+justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-05
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (def-quadratic-casimir-element). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   scraped: []
   references:

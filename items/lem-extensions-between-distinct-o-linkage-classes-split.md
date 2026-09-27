@@ -2,9 +2,7 @@
 id: "lem-extensions-between-distinct-o-linkage-classes-split"
 kind: "lemma"
 title: "Simple extensions cannot cross linkage classes"
-deps: ["prop-restricted-duality-is-an-exact-involution-on-category-o", "thm-universal-property-of-verma-modules", "thm-strong-linkage-principle-for-verma-modules", "lem-integral-reflection-orbits-are-linkage-equivalence-classes", "thm-verma-module-has-a-unique-simple-quotient"]
-verification:
-  audited: 2026-09-07
+deps: ["def-axiom-of-choice", "prop-restricted-duality-is-an-exact-involution-on-category-o", "thm-universal-property-of-verma-modules", "thm-strong-linkage-principle-for-verma-modules", "lem-integral-reflection-orbits-are-linkage-equivalence-classes", "thm-verma-module-has-a-unique-simple-quotient"]
 sources:
   references:
     - title: "§1.13 pp.30–32 and §4.9 p.83, decomposed proof route"
@@ -15,9 +13,20 @@ provenance:
 status: published
 origin: "pipeline"
 proof_strategy: "Orient the extension by duality so quotient highest weight lambda is not strictly below submodule highest weight mu. Lift its highest vector as a weight vector; higher weights are absent, so it is singular. The generated highest-weight submodule either splits off or equals the nonsplit length-two extension. The latter makes L(mu) a Verma factor, forcing linkage"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-04-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$.
 
@@ -25,13 +34,13 @@ A short exact sequence $0\to L(\mu)\to E\to L(\lambda)\to0$ in $\mathcal O$ spli
 
 ## Facts & Assumptions
 
-**Given:** The setting above and the hypotheses in the statement.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), the setting above and the hypotheses in the statement.
 
-[F1] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Restricted Chevalley duality is an exact contravariant equivalence $D:\mathcal O\to\mathcal O^{\mathrm{op}}$, with a natural isomorphism $D^2\cong\operatorname{id}$. It preserves each weight-space dimension, the formal character, and every simple composition multiplicity. ([[prop-restricted-duality-is-an-exact-involution-on-category-o]])
+[F1] Under the Axiom of Choice, fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. Restricted Chevalley duality is an exact contravariant equivalence $D:\mathcal O\to\mathcal O^{\mathrm{op}}$, with a natural isomorphism $D^2\cong\operatorname{id}$. It preserves each weight-space dimension, the formal character, and every simple composition multiplicity. ([[prop-restricted-duality-is-an-exact-involution-on-category-o]])
 
 [F2] For a $\mathfrak g$-module $V$, sending a homomorphism $T:M(\lambda)\to V$ to $T(v_\lambda)$ is a bijection onto the vectors $v\in V$ of weight $\lambda$ annihilated by $\mathfrak n^+$. Here $M(\lambda)$ is def-verma-module. The nonzero vectors in this target are precisely the highest-weight vectors of weight $\lambda$ from def-highest-weight-vector-and-cyclic-highest-weight-module; the zero vector corresponds to the zero homomorphism. ([[thm-universal-property-of-verma-modules]])
 
-[F3] If $[M(\lambda):L(\mu)]\ne0$, then $\mu\uparrow\lambda$. ([[thm-strong-linkage-principle-for-verma-modules]])
+[F3] Under the Axiom of Choice, if $[M(\lambda):L(\mu)]\ne0$, then $\mu\uparrow\lambda$. ([[thm-strong-linkage-principle-for-verma-modules]])
 
 [F4] Fix a finite-dimensional complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and a positive Borel $\mathfrak b=\mathfrak h\oplus\mathfrak n^+$. Write $Q^+=\sum_i\mathbb Z_{\geq0}\alpha_i$, $\mu\leq\lambda$ when $\lambda-\mu\in Q^+$, and $w\cdot\lambda=w(\lambda+\rho)-\rho$. The set $\Phi_\lambda$ is preserved by its root reflections. If $\mu\in W_\lambda\cdot\lambda$, then $\Phi_\mu=\Phi_\lambda$ and $W_\mu=W_\lambda$. The equivalence classes generated by moves $\eta\mapsto s_\alpha\cdot\eta$ with $\alpha\in\Phi_\eta$ are exactly $W_\lambda\cdot\lambda$. Every strong-linkage chain stays in one such class. ([[lem-integral-reflection-orbits-are-linkage-equivalence-classes]])
 

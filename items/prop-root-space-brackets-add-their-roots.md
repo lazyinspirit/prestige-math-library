@@ -7,25 +7,29 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-root-space-decomposition-relative-to-a-cartan-subalgebra]
+deps: [def-axiom-of-choice, thm-root-space-decomposition-relative-to-a-cartan-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, lem-finite-semisimple-cartan-root-and-string-structure]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-09-05
-  precheck: pass
 sources:
   scraped: []
   references:
     - title: "Pavel Etingof, Lie Groups and Lie Algebras I"
       url: "https://math.mit.edu/~etingof/lnlg.pdf"
 pipeline_run: null
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-receipts.jsonl (prop-root-space-brackets-add-their-roots). No independent judge or whole-closure certification.
+    delegated_by: owner
 ---
 
 ## Statement
 
-Let $\mathfrak g=\mathfrak h\oplus \bigoplus_{\alpha\in \Phi}\mathfrak g_\alpha$ be the decomposition from [[thm-root-space-decomposition-relative-to-a-cartan-subalgebra]]. If $x\in \mathfrak g_\alpha$ and $y\in \mathfrak g_\beta$, then
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra, let $\mathfrak h\subseteq\mathfrak g$ be a Cartan subalgebra in the nilpotent self-normalizing sense, and let $\mathfrak g=\mathfrak h\oplus \bigoplus_{\alpha\in \Phi}\mathfrak g_\alpha$ be its decomposition from [[thm-root-space-decomposition-relative-to-a-cartan-subalgebra]]. If $x\in \mathfrak g_\alpha$ and $y\in \mathfrak g_\beta$, then
 
 $$[x,y]\in \mathfrak g_{\alpha+\beta},$$
 
@@ -33,7 +37,9 @@ where $\mathfrak g_0:=\mathfrak h$. In particular, if $\alpha+\beta$ is neither 
 
 ## Facts & Assumptions
 
-**Given:** Roots $\alpha,\beta$ of a Cartan subalgebra $\mathfrak h$ and vectors $x\in \mathfrak g_\alpha$, $y\in \mathfrak g_\beta$.
+**Given:** The Axiom of Choice, finite-dimensional semisimple Lie algebra, Cartan subalgebra, root decomposition, roots $\alpha,\beta$, and vectors in the statement.
+
+[F1] Under the stated Choice premise, a Cartan subalgebra in the given sense is maximal toral ([[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]]). The finite root-structure lemma then proves that its weight-zero space is $\mathfrak h$ and that all nonzero weights occur among the finite root set $\Phi$ ([[lem-finite-semisimple-cartan-root-and-string-structure]]).
 
 ## Proof
 
@@ -41,4 +47,4 @@ where $\mathfrak g_0:=\mathfrak h$. In particular, if $\alpha+\beta$ is neither 
 
 1.1 For every $h\in \mathfrak h$, the derivation property of $\operatorname{ad}(h)$ gives $[h,[x,y]]=[\operatorname{ad}(h)x,y]+[x,\operatorname{ad}(h)y]=\alpha(h)[x,y]+\beta(h)[x,y]=(\alpha+\beta)(h)[x,y]$. [given, algebra]
 
-2.1 By [[thm-root-space-decomposition-relative-to-a-cartan-subalgebra]], step 1.1 is exactly the defining condition for $[x,y]$ to lie in the root space with weight $\alpha+\beta$. If that root space is zero, then $[x,y]=0$. [step 1.1] ∎
+2.1 By the simultaneous weight-space definition in the cited decomposition, step 1.1 places $[x,y]$ in the weight space for $\alpha+\beta$. By [F1] this space is $\mathfrak h$ when the weight is zero and is zero when the weight is neither zero nor a root. This gives both claims. [F1, step 1.1] ∎

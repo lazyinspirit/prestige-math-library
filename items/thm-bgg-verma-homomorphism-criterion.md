@@ -7,28 +7,32 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-verma-embedding-for-an-arbitrary-positive-root, def-strong-linkage-order-on-weights, lem-verma-embedding-implies-strong-linkage]
+deps: [def-axiom-of-choice, thm-verma-embedding-for-an-arbitrary-positive-root, def-strong-linkage-order-on-weights, lem-verma-embedding-implies-strong-linkage]
 proof_strategy: direct
-verification:
-  audited: 2026-09-07
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, Theorem 15.11"
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
+verification:
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-24'
+    scope: Bounded mathematical accept review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-04-receipts.jsonl.
+      Local checks and any separate second-reader evidence are recorded in the run
+      report; this is not an independent judge verdict or whole-library certification.
+    delegated_by: user
 ---
 
 ## Statement
+
+Assume the Axiom of Choice.
 
 For weights $\lambda,\mu$, a nonzero homomorphism $M(\mu)\to M(\lambda)$ exists if and only if $\mu\uparrow\lambda$.
 
 ## Facts & Assumptions
 
-**Given:** Positive-root embeddings [[thm-verma-embedding-for-an-arbitrary-positive-root]], the definition [[def-strong-linkage-order-on-weights]], and necessity [[lem-verma-embedding-implies-strong-linkage]].
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]), positive-root embeddings [[thm-verma-embedding-for-an-arbitrary-positive-root]], the definition [[def-strong-linkage-order-on-weights]], and Choice-qualified necessity [[lem-verma-embedding-implies-strong-linkage]].
 
 ## Proof
 

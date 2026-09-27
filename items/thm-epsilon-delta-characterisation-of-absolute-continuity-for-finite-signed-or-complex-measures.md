@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-radon-nikodym-derivative, def-total-variation-of-a-signed-or-complex-measure, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-absolute-continuity-of-the-integral]
+deps: [def-radon-nikodym-derivative, def-total-variation-of-a-signed-or-complex-measure, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-absolute-continuity-of-the-integral, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
+  verified:
+    model: gpt-6-sol
+    verdict: locally-reviewed
+    date: '2026-09-23'
+    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl (thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures). No independent judge or whole-closure certification.
+    delegated_by: owner
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Proposition 13.2"
@@ -24,7 +29,7 @@ sources:
 
 ## Statement
 
-Let $\mu$ be a sigma-finite positive measure and let $\nu$ be a finite signed
+Assume the Axiom of Choice. Let $\mu$ be a sigma-finite positive measure and let $\nu$ be a finite signed
 measure or a finite complex measure on the same measurable space. Then the
 following are equivalent:
 
@@ -34,9 +39,9 @@ following are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** A finite signed or finite complex measure $\nu$ and a sigma-finite positive measure $\mu$.
+**Given:** The Axiom of Choice, a finite signed or finite complex measure $\nu$ and a sigma-finite positive measure $\mu$.
 
-[L1] If $\nu\ll\mu$, then $|\nu|(E)=\int_E|d\nu/d\mu|\,d\mu$ for every measurable $E$. ([[def-radon-nikodym-derivative]], [[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]])
+[L1] Under the stated Axiom of Choice, if $\nu\ll\mu$, then $|\nu|(E)=\int_E|d\nu/d\mu|\,d\mu$ for every measurable $E$ ([[def-radon-nikodym-derivative]], [[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]], [[def-axiom-of-choice]]).
 
 [L2] Absolute continuity of the integral gives the $\varepsilon$-$\delta$ estimate for integrable absolute values. ([[thm-absolute-continuity-of-the-integral]])
 

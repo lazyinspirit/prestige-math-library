@@ -14,6 +14,8 @@ items: [def-null-subset-of-a-smooth-manifold,
         cor-positive-codimension-immersed-submanifolds-are-null,
         def-critical-locus-and-critical-value-set,
         lem-sard-slicing-for-compact-null-sections,
+        thm-whitney-extension-for-finite-order-euclidean-jets,
+        lem-kneser-glaeser-rough-composition-on-flat-sets,
         lem-sard-on-the-nonflat-critical-strata,
         lem-sard-on-the-infinitely-flat-critical-stratum,
         thm-morse-sard-for-euclidean-maps,
@@ -49,7 +51,8 @@ items: [def-null-subset-of-a-smooth-manifold,
 examples: []
 ---
 
-This page makes measure-zero subsets intrinsic on smooth manifolds, proves
+Under Countable Choice ($\mathrm{AC}_\omega$), this page makes measure-zero
+subsets intrinsic on smooth manifolds, proves
 Morse-Sard in Euclidean and manifold form, and then packages transversality
 through preimage, intersection, fibre-product, parametric, and stability
 statements. It keeps the whole route inside manifolds without boundary and

@@ -11,12 +11,12 @@ deps: [def-conjugate-gradient-recurrence,
        def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
 sources:
   scraped: []
   references:
@@ -43,6 +43,6 @@ $$p_k^*Ap_k=\|p_k\|_A^2>0.$$
 ## Proof
 **Proof technique:** direct.
 
-1.1 We first show by induction on $j\le k$ that $\langle p_j,r_j\rangle=\langle r_j,r_j\rangle$. For $j=0$ this is immediate from $p_0=r_0$ in [F1]. If it holds at $j$, then [F1] gives $\langle p_j,r_{j+1}\rangle=\langle p_j,r_j\rangle-\alpha_j\langle p_j,Ap_j\rangle=\langle r_j,r_j\rangle-\alpha_j\langle p_j,Ap_j\rangle=0$, so $$\langle p_{j+1},r_{j+1}\rangle=\langle r_{j+1},r_{j+1}\rangle+\beta_j\langle p_j,r_{j+1}\rangle=\langle r_{j+1},r_{j+1}\rangle.$$ Thus the identity holds for every $j\le k$. [F1, induction, algebra]
+1.1 We first show by induction on $j\le k$ that $\langle p_j,r_j\rangle=\langle r_j,r_j\rangle$. For $j=0$ this is immediate from $p_0=r_0$ in [F1]. If it holds at $j<k$, conjugate symmetry gives $\langle r_j,p_j\rangle=\langle r_j,r_j\rangle$, since the latter is real. The inner product is linear in its first argument, so [F1] gives $\langle r_{j+1},p_j\rangle=\langle r_j,p_j\rangle-\alpha_j\langle Ap_j,p_j\rangle=0$. Conjugate symmetry then gives $\langle p_j,r_{j+1}\rangle=0$, whence $$\langle p_{j+1},r_{j+1}\rangle=\langle r_{j+1},r_{j+1}\rangle+\beta_j\langle p_j,r_{j+1}\rangle=\langle r_{j+1},r_{j+1}\rangle.$$ Thus the identity holds for every $j\le k$. [F1, induction, algebra]
 
 2.1 At $j=k$, step 1.1 gives $\langle p_k,r_k\rangle=\langle r_k,r_k\rangle>0$ because $r_k\ne0$. Hence $p_k\ne0$. By [L1], $$p_k^*Ap_k=\langle Ap_k,p_k\rangle=\|p_k\|_A^2>0,$$ which is the desired positivity of the denominator. [L1, step 1.1, algebra] ∎
