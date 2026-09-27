@@ -487,6 +487,11 @@ Workers record evidence and repairs; they do not certify their own dispatches
 or manufacture judgments. Round identity and current hashes bind every verdict,
 decision and certificate. Missing evidence, stale certification and incomplete
 frontier coverage block closure. Reports copy the frozen assignment identity.
+For each changed Statement or Definition, a Step-7 worker lists every direct
+dependency/reference consumer in `downstream`, including sound unchanged uses
+and consumers already reviewed in the assignment. The array records examination
+coverage; the disposition and exact affected use determine whether an edit is
+needed. Proof-only changes create no new downstream event.
 `repaired` requires a guarded item change; a contract/page-only correction
 uses an `unaffected` item review, an exact reason and
 `metadata_repair_only:true`. Unfamiliar mathematics needs sources actually read.
