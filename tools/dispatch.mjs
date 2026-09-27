@@ -21,6 +21,7 @@ import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from
 import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
+import { resolveDispatchProfile } from './model-profile-overrides.mjs';
 
 // tools/models.mjs owns model IDs and semantic lane assignments.
 import { lane, modelProfile } from './models.mjs';
@@ -211,7 +212,7 @@ const taskPath = option('--task');
 const imagePaths = options('--image').flatMap((value) => value.split(',')).map((s) => s.trim()).filter(Boolean);
 const outputSchemaPath = option('--output-schema');
 const resultArtifactPath = option('--result-artifact');
-const profileName = option('--profile');
+const requestedProfileName = option('--profile');
 // A CODEX_HOME that OUTLIVES the dispatch, so the conversation can be resumed.
 // Every other lane gets a throwaway home deleted on exit — deliberately, because
 // a long-lived shared home was once corrupted and bricked every codex call. A
@@ -267,8 +268,12 @@ if (resultArtifactPath) {
 }
 
 let profileSpec = null;
+let profileName = requestedProfileName;
 if (profileName) {
-  try { profileSpec = modelProfile(profileName); }
+  try {
+    profileName = resolveDispatchProfile(REPO, run, requestedProfileName).effective;
+    profileSpec = modelProfile(profileName);
+  }
   catch (error) { usage(error?.message ?? String(error)); }
 }
 const spec = Object.freeze({
@@ -844,7 +849,8 @@ const record = {
   covers,
   stage: option('--stage') ?? null,
   runner: spec.runner, provider: spec.provider, model: spec.model,
-  profile: spec.profile, requested_effort: spec.requestedEffort,
+  profile: spec.profile, requested_profile: requestedProfileName,
+  requested_effort: spec.requestedEffort,
   provider_effort: spec.effort ?? 'xhigh', context_window: spec.contextWindow,
   context_attestation: contextAttestation,
   auto_compact_token_limit: spec.autoCompactTokenLimit,

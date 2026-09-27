@@ -93,6 +93,12 @@ before fresh cross-group closure and judgment.
 
 The active model boundary is stage-owned; see WORKFLOW.md and tools/models.mjs.
 Step7 adjudicators, owner repair agents and item rejudgments use Sol xhigh.
+If a provider becomes unavailable during a run, the operator may place
+`.autopilot/<run>.profile-overrides.json` with version 1 and a `profiles` map
+from requested registered profile names to effective registered profile names.
+The dispatcher applies it only to that run's new processes; result receipts
+record both `requested_profile` and the effective `profile`. Existing agents
+finish on their original profile. Remove the run-local override after the run.
 DeepSeek dispatches in Steps 2, 3, 6 and 9 require the
 repository's single-tool live web bridge. It prefers Tavily and falls back to
 Firecrawl when Tavily is not configured. Deterministic tool plans remain

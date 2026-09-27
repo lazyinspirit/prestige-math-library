@@ -74,7 +74,7 @@ except Step 7 owner waves, which run parallel item assignments and lock only
 short shared-metadata edit sections.
 Writing agents checkpoint after each item and
 reread current proofs, dependencies and sources after compaction. Read-only
-roles write no extra files. Compaction starts at 200,000 total context tokens;
+roles write no extra files. Compaction starts at 250,000 total context tokens;
 usage telemetry is not a billing estimate.
 
 Each OpenAI dispatch starts with a private copy of the current Codex login.
@@ -90,6 +90,11 @@ prefers Tavily when `TAVILY_API_KEY` is configured and otherwise uses Firecrawl.
 Dispatch fails before launching if the DeepSeek key or both supported web-search
 credentials are missing. Mechanical tool plans in these stages do not invoke an
 LLM.
+For a live provider outage, `.autopilot/<run>.profile-overrides.json` may map a
+requested profile to another registered profile for new dispatches in that run.
+The result receipt records the requested and effective profile; existing
+dispatches keep their original provider and model. The override does not
+change stage ownership or bypass the owner-held retry gate.
 
 ## Scaffold, audit and author
 
