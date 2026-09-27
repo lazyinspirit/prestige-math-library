@@ -77,6 +77,13 @@ reread current proofs, dependencies and sources after compaction. Read-only
 roles write no extra files. Compaction starts at 200,000 total context tokens;
 usage telemetry is not a billing estimate.
 
+Each OpenAI dispatch starts with a private copy of the current Codex login.
+A successful dispatch may persist a locally refreshed token only if the shared
+login still matches its launch copy. This serialized check prevents an older
+reader from overwriting a newer device sign-in or another reader's refresh.
+After an authentication failure, drain readers started under the old login,
+sign in again, then retry the failed engine units.
+
 DeepSeek stages in Steps 2, 3a and 9 use the stable `deepseek-flash` API alias and maximum reasoning
 through an isolated Codex home. Their required read-only `web_search` MCP tool
 prefers Tavily when `TAVILY_API_KEY` is configured and otherwise uses Firecrawl.

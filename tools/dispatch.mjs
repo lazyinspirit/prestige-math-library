@@ -20,6 +20,7 @@ import { createSlotPool } from './slots.mjs';
 import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
+import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
 
 // tools/models.mjs owns model IDs and semantic lane assignments.
 import { lane, modelProfile } from './models.mjs';
@@ -679,22 +680,11 @@ const codexSessionId = (result) => {
   return found[0].id;
 };
 
-const persistRotatedCodexAuth = () => {
-  if (!codexAuthPaths) return;
-  const { source, temporary } = codexAuthPaths;
-  try {
-    if (!existsSync(temporary)) return;
-    const after = readFileSync(temporary);
-    if (existsSync(source) && readFileSync(source).equals(after)) return;
-    writeFileSync(source, after);
-    chmodSync(source, 0o600);
-  } catch { /* best-effort: never fail a completed run over bookkeeping */ }
-};
 const result = await new Promise((resolve) => {
   let bin, args, extraEnv;
   // Give each agent an isolated home containing only its auth record so
-  // concurrent processes cannot race on local state. Persist a rotated OAuth
-  // token before removing a temporary home.
+  // concurrent processes cannot race on local state. A changed OAuth token
+  // returns to the shared home only when its launch snapshot is still current.
   if (sessionHomeArg) {
     persistentHome = pathResolve(REPO, sessionHomeArg);
     mkdirSync(persistentHome, { recursive: true, mode: 0o700 });
@@ -707,10 +697,11 @@ const result = await new Promise((resolve) => {
       configureDeepSeekCodexHome({ home: activeHome, repo: REPO });
     } else {
       const sourceAuth = join(codexHome, 'auth.json');
-      codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
       if (existsSync(sourceAuth)) {
-        copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
-        chmodSync(join(activeHome, 'auth.json'), 0o600);
+        const initial = readFileSync(sourceAuth);
+        const temporary = join(activeHome, 'auth.json');
+        writeFileSync(temporary, initial, { mode: 0o600 });
+        codexAuthPaths = { source: sourceAuth, temporary, initial };
       }
     }
   } catch (error) {
@@ -752,7 +743,12 @@ const result = await new Promise((resolve) => {
 });
 
 release();
-persistRotatedCodexAuth();
+try {
+  if (codexAuthPaths) persistRotatedCodexAuth({
+    ...codexAuthPaths,
+    succeeded: result.code === 0 && !result.timedOut,
+  });
+} catch { /* best-effort: never fail a completed run over auth bookkeeping */ }
 const completedSessionId = resumeSession ?? codexSessionId(result);
 const rolloutPath = findRollout(persistentHome ?? temporaryHome, completedSessionId);
 const tokenUsage = await readDispatchUsage(rolloutPath, started.toISOString());
