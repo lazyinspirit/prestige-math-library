@@ -2,7 +2,7 @@
 id: cor-frobenius-automizer-criterion-for-p-nilpotence
 kind: corollary
 title: "Frobenius automizer criterion for p nilpotence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-p-automizer-condition-implies-fusion-control, thm-frobenius-normal-p-complement-theorem, def-normal-p-complement-and-p-nilpotent-group, def-p-local-normalizer-for-normal-complement-theory, def-control-of-fusion-in-a-sylow-p-subgroup, def-sylow-p-subgroup, def-normalizer-of-a-subgroup, def-centralizer-of-a-subgroup, def-subgroup, def-normal-subgroup, def-quotient-group, def-commutator-and-commutator-subgroup, lem-centralizer-of-a-normal-subgroup-is-normal, lem-centralizers-and-normalizers-are-subgroups, thm-second-isomorphism-theorem-groups, thm-third-isomorphism-theorem-groups, thm-first-isomorphism-theorem-groups, thm-image-subgroup-and-kernel-normal, thm-lagrange, cor-order-of-a-quotient-group, lem-subgroups-of-finite-p-groups-are-p-groups, def-finite-p-group, def-group-homomorphism, lem-group-homomorphism-basic-properties, thm-sylow-first-theorem, thm-sylow-second-theorem, def-subgroup-commutator-and-lower-central-series, lem-group-inverse-laws, def-generated-subgroup]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

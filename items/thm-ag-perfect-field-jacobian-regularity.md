@@ -2,7 +2,7 @@
 id: "thm-ag-perfect-field-jacobian-regularity"
 kind: "theorem"
 title: "Jacobian criterion and openness of the regular locus over a perfect field"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "lem-ag-polynomial-quotient-differentials", "lem-ag-separable-residue-cotangent-sequence", "thm-ag-separating-transcendence-basis-perfect-field", "lem-ag-standard-smooth-regular-geometric-fibres", "lem-regular-local-regular-quotient-ideal-is-parameter-generated", "lem-regular-system-of-parameters-equivalent-basis", "thm-localisation-and-polynomial-extension-of-regular-rings", "def-embedding-dimension-and-regular-local-ring", "def-height-of-a-prime-ideal", "thm-right-exactness-of-tensor-products", "thm-prime-spectrum-of-a-localisation-bijection", "cor-minimal-prime-has-height-zero", "thm-artinian-ring-characterisation-by-primes", "thm-artinian-local-ring-has-nilpotent-maximal-ideal", "def-irreducible-topological-space-and-subset", "def-perfect-field", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

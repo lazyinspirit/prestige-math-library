@@ -2,7 +2,7 @@
 id: lem-multilinearization-preserves-boolean-values
 kind: lemma
 title: "Multilinearization preserves Boolean values and bounds individual degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-multilinearization-operator, lem-quantifier-polynomials-agree-on-booleans, def-qbf-arithmetization-operators, def-arithmetization-of-a-boolean-formula, lem-formula-arithmetization-degree-and-evaluation-cost, lem-degree-under-arithmetized-quantifiers]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

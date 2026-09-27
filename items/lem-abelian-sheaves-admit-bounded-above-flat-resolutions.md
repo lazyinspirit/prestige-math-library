@@ -2,7 +2,7 @@
 id: "lem-abelian-sheaves-admit-bounded-above-flat-resolutions"
 kind: "lemma"
 title: "Flat resolutions of abelian sheaves and K-flatness of bounded-above flat complexes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-flat-abelian-sheaf, def-k-flat-complex-of-abelian-sheaves, lem-flatness-criteria-and-flat-covers-for-abelian-sheaves, def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, def-tensor-product-total-complex-of-chain-complexes, lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms, def-derived-tensor-product-in-the-bounded-above-setting, def-cochain-complex-in-an-abelian-category, def-cochain-map, def-quasi-isomorphism, def-cohomology-object-of-a-cochain-complex, def-kernel-cokernel-image-sheaves, def-bounded-bounded-below-and-bounded-above-complex, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, thm-exactness-of-sheaves-stalkwise, thm-sheaf-morphism-isomorphism-stalkwise, thm-a-chain-map-induces-a-well-defined-map-on-homology, cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero, lem-abelian-sheaves-form-a-grothendieck-category, def-stalk-of-presheaf, lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms]
 provenance:
@@ -17,6 +17,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Definition 26.2, Lemmas 26.4 and 26.9"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

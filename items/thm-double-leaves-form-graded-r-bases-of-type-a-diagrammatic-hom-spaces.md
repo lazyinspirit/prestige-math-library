@@ -2,7 +2,7 @@
 id: thm-double-leaves-form-graded-r-bases-of-type-a-diagrammatic-hom-spaces
 kind: theorem
 title: "Double leaves form graded $R$-bases of type-A diagrammatic Hom spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-the-type-a-diagrammatic-relations-hold-for-soergel-bimodules, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, def-bott-samelson-bimodule-of-a-word, lem-type-a-reduced-words-are-connected-by-braid-moves]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Sur la catégorie des bimodules de Soergel, §§3–5"
       url: "https://arxiv.org/pdf/0707.3603"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

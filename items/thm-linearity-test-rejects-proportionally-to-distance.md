@@ -2,7 +2,7 @@
 id: thm-linearity-test-rejects-proportionally-to-distance
 kind: theorem
 title: "BLR rejection is proportional to distance from linearity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-hadamard-linearity-constraint-system, def-linearity-test, lem-blr-acceptance-fourier-identity, lem-boolean-cube-fourier-inversion-and-parseval]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

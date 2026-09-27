@@ -1,7 +1,7 @@
 ---
 page: bruhat-decomposition-and-flags-over-finite-fields-examples
 title: "Bruhat Decomposition and Flags over Finite Fields — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-gl-one-and-the-trivial-parabolic-boundary, ex-complete-flags-and-bruhat-cells-for-gl2-fq, ex-relative-position-of-flags-in-gl3-fq, ex-grassmannians-as-maximal-parabolic-quotients, ex-parabolic-induction-as-functions-on-partial-flags]
 ---

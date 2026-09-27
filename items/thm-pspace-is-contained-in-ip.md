@@ -2,7 +2,7 @@
 id: thm-pspace-is-contained-in-ip
 kind: theorem
 title: "PSPACE is contained in IP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-tqbf-has-a-polynomial-round-interactive-proof, thm-tqbf-is-pspace-complete, def-ip]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

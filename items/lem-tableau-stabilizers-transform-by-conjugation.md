@@ -2,7 +2,7 @@
 id: lem-tableau-stabilizers-transform-by-conjugation
 kind: lemma
 title: Tableau stabilizers transform by conjugation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-row-and-column-stabilizers-of-a-tableau]
@@ -20,6 +20,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Section 1.6, printed pp. 13-14"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

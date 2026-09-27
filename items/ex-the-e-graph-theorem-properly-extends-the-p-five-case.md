@@ -2,7 +2,7 @@
 id: ex-the-e-graph-theorem-properly-extends-the-p-five-case
 kind: example
 title: "The $E$ theorem reaches an induced $P_5$ witness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-e-graph-has-the-erdos-hajnal-property, def-e-graph-and-co-e-graph, def-standard-complete-bipartite-path-and-cycle-graphs, def-h-free-and-family-free-graph, def-induced-embedding-and-induced-copy, def-erdos-hajnal-property-and-constant, def-homogeneous-set-and-homogeneous-number, cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property]
@@ -16,6 +16,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

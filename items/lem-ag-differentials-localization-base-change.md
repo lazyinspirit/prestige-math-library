@@ -2,7 +2,7 @@
 id: "lem-ag-differentials-localization-base-change"
 kind: "lemma"
 title: "Localization, base change and functoriality of differentials"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-differentials-universal-property", "thm-localisation-of-modules-is-tensor-product", "thm-coproduct-property-of-tensor-products-of-commutative-algebras"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §§22.2.K–L, pp.583–584"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

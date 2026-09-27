@@ -2,7 +2,7 @@
 id: def-involution-on-l1-of-a-group
 kind: definition
 title: "Involution on L1 of a locally compact group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism, lem-haar-change-of-variables-under-inversion, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-complex-haar-lp-spaces-and-compactly-supported-functions, lem-topological-group-translations-and-inversion, cor-continuous-functions-are-borel-measurable, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix A §§A.3–A.4, printed pp. 316–323"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

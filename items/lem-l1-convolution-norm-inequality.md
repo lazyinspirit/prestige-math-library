@@ -2,7 +2,7 @@
 id: lem-l1-convolution-norm-inequality
 kind: lemma
 title: "Submultiplicativity of convolution in the L1 norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-convolution-preserves-cc-and-is-associative, def-compactly-supported-convolution-on-a-group, lem-compactly-supported-kernels-admit-commuting-radon-integrals, def-left-haar-integral-and-left-haar-measure, def-complex-haar-lp-spaces-and-compactly-supported-functions, thm-integral-triangle-inequality, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§5.3, printed pp. 225–230"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

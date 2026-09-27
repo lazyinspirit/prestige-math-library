@@ -2,7 +2,7 @@
 id: def-compactly-supported-convolution-on-a-group
 kind: definition
 title: "Compactly supported convolution on a group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-left-haar-integral-and-left-haar-measure, def-complex-haar-lp-spaces-and-compactly-supported-functions]
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§5.3, printed pp. 225–230"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: "thm-cech-to-sheaf-cohomology-comparison"
 kind: "theorem"
 title: "Canonical map from fixed-cover Čech to sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, def-cech-cohomology-open-cover, lem-acyclic-rows-and-columns-of-cech-double-complex, thm-refinement-map-independent-on-cohomology, def-axiom-of-choice, def-godement-resolution, thm-godement-resolution-flasque, def-refinement-open-cover, lem-cech-h0-global-sections, thm-zero-sheaf-cohomology-global-sections, def-global-sections-functor-sheaves, def-quasi-isomorphism]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

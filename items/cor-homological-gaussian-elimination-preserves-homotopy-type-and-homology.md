@@ -2,7 +2,7 @@
 id: cor-homological-gaussian-elimination-preserves-homotopy-type-and-homology
 kind: corollary
 title: Gaussian cancellation preserves homotopy type and abelian-category homology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-homological-gaussian-elimination-gives-a-strong-deformation-retract, thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex, def-complex-homotopy-and-contractibility-in-an-additive-category, def-homotopy-category-of-chain-complexes, def-homotopy-classes-of-chain-maps, def-chain-complex-in-an-abelian-category, def-cycle-and-boundary-subobjects-of-a-complex, lem-the-boundary-subobject-factors-through-the-cycle-subobject, def-homology-object-of-a-chain-complex, lem-a-chain-map-carries-cycles-to-cycles-and-boundaries-to-boundaries, thm-a-chain-map-induces-a-well-defined-map-on-homology, thm-homology-is-an-additive-functor, def-kernels-and-cokernels-as-equalizers-and-coequalizers, cor-equalizers-are-monic-and-coequalizers-are-epic]
@@ -20,6 +20,7 @@ sources:
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, ch. 1, printed pp. 2-5 and 17-18"
       url: "https://math.mit.edu/~hrm/palestine/weibel/01-chain_complexes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

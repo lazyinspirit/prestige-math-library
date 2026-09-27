@@ -2,7 +2,7 @@
 id: "lem-differentials-polynomial-algebra-free"
 kind: "lemma"
 title: "Polynomial differentials are free"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["cor-derivations-represented-by-differentials", "def-derivation-algebra", "thm-universal-property-of-a-polynomial-ring-on-a-family"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-totalizing-a-two-term-bimodule-action
 kind: example
 title: "Totalizing a two-term twist action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-khovanov-seidel-positive-and-negative-twist-complexes, def-signed-totalization-of-graded-a-m-bimodule-actions, lem-graded-balanced-tensor-and-shift-isomorphisms, def-khovanov-seidel-beta-and-gamma-bimodule-maps]
@@ -20,6 +20,7 @@ sources:
     - title: "Charles Weibel, An Introduction to Homological Algebra, ch. 10 §10.4, pp. 387-390"
       url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

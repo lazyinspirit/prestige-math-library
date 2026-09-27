@@ -2,7 +2,7 @@
 id: lem-frobenius-character-extension-is-irreducible
 kind: lemma
 title: "Frobenius character extension is irreducible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-induced-class-function-on-a-finite-group, thm-character-inner-product-computes-intertwiner-dimension, thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions, lem-frobenius-character-extension-construction, cor-frobenius-reciprocity-for-complex-characters, thm-first-orthogonality-relation-for-irreducible-complex-characters, def-virtual-character-and-character-ring-of-a-finite-group, lem-induction-restriction-reciprocity-for-class-functions, def-standard-inner-product-on-complex-class-functions, def-irreducible-complex-character, def-trivial-regular-and-permutation-representations]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

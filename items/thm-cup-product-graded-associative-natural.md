@@ -2,7 +2,7 @@
 id: "thm-cup-product-graded-associative-natural"
 kind: "theorem"
 title: "Cup-product laws"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-axiom-of-choice, def-sheaf-cohomology-derived-global-sections, lem-sheaf-cohomology-classes-as-derived-morphisms, def-cup-product-sheaf-cohomology, lem-derived-tensor-product-of-abelian-sheaves, lem-koszul-coherence-for-derived-sheaf-tensor, lem-koszul-structure-of-the-abelian-sheaf-tensor-product, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, lem-abelian-sheaves-admit-bounded-above-flat-resolutions, lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms, lem-addition-of-roofs-makes-an-additive-localization, def-tensor-product-of-abelian-sheaves, def-tensor-product-of-modules-by-generators-and-relations, def-balanced-and-bilinear-maps, thm-universal-property-of-module-tensor-products, def-derived-category-of-an-abelian-category, def-cochain-map, lem-morphisms-from-the-constant-sheaf-are-global-sections, thm-choice-implies-dependent-implies-countable-choice, thm-abelian-sheaves-have-enough-injectives, thm-a-bounded-below-complex-of-injectives-is-homotopically-injective, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]
 provenance:
@@ -17,6 +17,8 @@ sources:
     - title: "The Stacks Project, More on Algebra"
       url: https://stacks.math.columbia.edu/download/more-algebra.pdf
       locator: "Section 74: signs in the tensor product of complexes, items (6), (8) and (9)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

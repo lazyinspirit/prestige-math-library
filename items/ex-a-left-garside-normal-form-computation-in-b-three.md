@@ -2,7 +2,7 @@
 id: ex-a-left-garside-normal-form-computation-in-b-three
 kind: example
 title: "A left garside normal form computation in b three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-left-garside-normal-form-is-unique,
@@ -31,6 +31,7 @@ sources:
     - title: "J. Birman and T. Brendle, Braids: A Survey, Section 5.1"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

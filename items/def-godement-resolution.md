@@ -2,7 +2,7 @@
 id: "def-godement-resolution"
 kind: "definition"
 title: "Godement resolution of an abelian sheaf"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-on-topological-space, def-stalk-of-presheaf, def-germ-of-section, def-skyscraper-sheaf-abelian-group, def-kernel-cokernel-image-sheaves, thm-abelian-sheaves-form-abelian-category, lem-section-zero-if-all-germs-zero]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

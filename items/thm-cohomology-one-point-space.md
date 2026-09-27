@@ -2,7 +2,7 @@
 id: "thm-cohomology-one-point-space"
 kind: "theorem"
 title: "A point has no higher sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, thm-zero-sheaf-cohomology-global-sections, prop-an-exact-functor-has-vanishing-positive-derived-functors, def-axiom-of-choice, thm-abelian-sheaves-have-enough-injectives, def-global-sections-functor-sheaves, def-sheaf-on-topological-space, lem-sheaf-section-over-empty-set-terminal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

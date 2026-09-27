@@ -2,7 +2,7 @@
 id: thm-algebraic-zariski-main-localization
 kind: theorem
 title: Algebraic Zariski Main localization at a quasi-finite prime
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-integral-subalgebra-of-an-arbitrary-ring-map, def-strongly-transcendental-element, def-axiom-of-choice, def-principal-localisation, def-multiplicative-subset-and-localisation, def-localisation-at-a-prime-ideal, def-radical-of-an-ideal, lem-radical-is-an-ideal, def-nilradical-and-reduced-ring, def-prime-and-maximal-ideals, lem-zmt-quasi-finite-transfer-through-intermediate-rings, lem-zmt-conductor-radical-coefficients, lem-zmt-one-generator-local-integrality, lem-strongly-transcendental-finite-one-variable-algebra-is-nowhere-quasi-finite, thm-transitivity-of-integrality, thm-integrality-and-finite-module-equivalences, lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite, lem-localisation-preserves-injectivity, prop-iterated-localisation, thm-prime-spectrum-of-a-quotient-bijection]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17 (Zariski's main theorem, Theorem 17.10)"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Theorem 17.10 and Proposition 17.13"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

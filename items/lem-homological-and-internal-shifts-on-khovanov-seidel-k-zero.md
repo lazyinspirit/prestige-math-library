@@ -2,7 +2,7 @@
 id: lem-homological-and-internal-shifts-on-khovanov-seidel-k-zero
 kind: lemma
 title: "Homological and internal shifts on K_0(C_m)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-triangulated-k-zero-of-khovanov-seidel-projectives, def-bounded-projective-homotopy-category-for-a-m, def-graded-khovanov-seidel-module-category-and-projectives, def-graded-ring-module-bimodule-and-internal-shift, def-mapping-cone-of-a-chain-map, prop-zero-and-split-triangles-are-distinguished, thm-the-homotopy-category-of-an-abelian-category-is-triangulated, def-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g]
@@ -20,6 +20,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c, printed pp. 10-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

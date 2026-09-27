@@ -2,7 +2,7 @@
 id: "thm-long-exact-sequence-sheaf-cohomology"
 kind: "theorem"
 title: "Long exact sequence of sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, def-global-sections-functor-sheaves, thm-abelian-sheaves-have-enough-injectives, def-derived-category-of-an-abelian-category, def-cochain-complex-in-an-abelian-category, def-quasi-isomorphism, def-mapping-cone-of-a-chain-map, thm-the-derived-category-inherits-a-triangulated-structure, thm-existence-of-the-bounded-below-right-total-derived-functor, prop-total-derived-functors-send-distinguished-triangles-to-distinguished-triangles, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, prop-morphisms-into-a-homotopically-injective-complex-need-no-roof, def-axiom-of-choice]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

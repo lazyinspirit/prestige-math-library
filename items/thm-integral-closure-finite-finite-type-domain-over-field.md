@@ -2,7 +2,7 @@
 id: thm-integral-closure-finite-finite-type-domain-over-field
 kind: theorem
 title: "A finite-type domain over a field has finite normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-noether-normalisation-module-finiteness, def-finite-type-and-module-finite-algebras, thm-integrality-and-finite-module-equivalences, def-integral-element-and-algebraic-integer, def-integral-ring-extension, thm-polynomial-algebras-over-fields-have-finite-integral-closures, lem-integral-closure-unchanged-across-an-integral-intermediate-domain, thm-transitivity-of-integrality, def-integral-closure-and-integrally-closed-domain, cor-integral-elements-form-a-subring, def-field-of-fractions, def-zero-divisor-and-integral-domain, def-field, thm-finitely-generated-algebraic-extensions-are-finite, def-finitely-generated-field-extension, def-extension-degree-and-finite-extension, def-algebraic-and-transcendental-elements, def-multivariate-polynomial-ring-by-iteration]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

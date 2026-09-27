@@ -2,7 +2,7 @@
 id: thm-supersolvable-groups-are-m-groups
 kind: theorem
 title: "Finite supersolvable groups are M-groups"
-status: draft
+status: published
 origin: pipeline
 deps: [def-monomial-representation-and-m-group, def-supersolvable-groups-and-monomial-characters, lem-nonabelian-supersolvable-group-has-the-required-abelian-normal-subgroup, lem-faithful-irrep-with-a-noncentral-abelian-normal-subgroup-is-properly-induced, lem-induction-commutes-with-inflation, thm-transitivity-of-induction-for-finite-groups, thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional, cor-cyclotomic-field-splits-a-finite-group, prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient, def-induced-r-linear-g-module-by-h-covariant-functions, def-intertwiner-equivalent-and-faithful-representations, thm-first-isomorphism-theorem-groups]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

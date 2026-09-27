@@ -2,7 +2,7 @@
 id: thm-finite-iterated-homological-gaussian-elimination
 kind: theorem
 title: Finite iteration of current invertible-block cancellations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-homological-gaussian-elimination-gives-a-strong-deformation-retract, def-invertible-differential-block-and-schur-complement-reduction, lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, def-complex-homotopy-and-contractibility-in-an-additive-category, thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]
@@ -20,6 +20,7 @@ sources:
     - title: "David Clark, Scott Morrison and Kevin Walker, Fixing the Functoriality of Khovanov Homology, Appendix A.1, printed pp. 1562-1563"
       url: "https://msp.org/gt/2009/13-3/gt-v13-n3-p08-p.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: cor-the-e-graph-is-generalized-nice
 kind: corollary
 title: "The singleton $E$-graph family is generalized nice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-the-singleton-family-containing-e-has-property-star, lem-the-e-graph-and-the-bird-are-leaf-reducible, thm-property-star-and-leaf-reducibility-imply-generalized-niceness, def-generalized-nice-finite-family, def-property-star-for-a-finite-family, lem-h-five-and-co-e-free-family-has-the-erdos-hajnal-property, thm-co-e-free-comb-blocks-admit-an-h-five-co-e-structural-partition, thm-special-vertex-local-structural-partition-criterion-implies-property-star, cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property, lem-erdos-hajnal-constants-are-downward-closed, def-e-graph-and-co-e-graph, def-coleaf-of-a-graph]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

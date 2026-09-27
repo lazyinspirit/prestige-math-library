@@ -2,7 +2,7 @@
 id: def-hadamard-linearity-constraint-system
 kind: definition
 title: "Hadamard linearity constraint system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-assignment-tester-and-rejection-ratio, def-linearity-test]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

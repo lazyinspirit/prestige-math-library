@@ -2,7 +2,7 @@
 id: "lem-sections-on-compact-opens-commute-with-filtered-colimits"
 kind: "lemma"
 title: "Filtered colimits of sheaves and sections over compact opens"
-status: draft
+status: published
 origin: pipeline
 deps: [def-presheaf-plus-construction, def-sheafification, def-separated-presheaf, def-stalk-of-presheaf, lem-first-plus-construction-is-separated, thm-sheafification-preserves-stalks, thm-sheafification-universal-property, cor-left-adjoints-preserve-colimits, def-presheaf-on-topological-space, def-presheaf-of-groups-rings-modules, def-compact-space, def-axiom-of-choice, lem-equality-in-a-filtered-colimit-of-sets-is-eventual, def-filtered-category-and-filtered-colimit, def-noetherian-topological-space, lem-noetherian-subspaces-and-compact-opens, def-sheaf-on-topological-space]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Sheaves on Spaces"
       url: https://stacks.math.columbia.edu/download/sheaves.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

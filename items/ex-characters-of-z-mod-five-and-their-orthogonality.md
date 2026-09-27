@@ -2,7 +2,7 @@
 id: ex-characters-of-z-mod-five-and-their-orthogonality
 kind: example
 title: "The five characters of Z/5Z and their orthogonality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-additive-character-of-a-finite-abelian-group, lem-additive-characters-are-one-dimensional-complex-representations, lem-additive-character-orthogonality-from-representation-orthogonality, def-integers-modulo-n, thm-standard-representatives-modulo-n, def-addition-and-multiplication-modulo-n, thm-integers-modulo-n-basic-algebra, thm-kernel-and-fibres-of-complex-exponential, thm-complex-exponential-addition-and-real-extension, def-complex-exponential, thm-complex-nth-roots-and-roots-of-unity, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-sum-of-roots-of-unity, lem-complex-conjugation-and-modulus-laws]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

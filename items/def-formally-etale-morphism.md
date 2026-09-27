@@ -2,13 +2,14 @@
 id: "def-formally-etale-morphism"
 kind: "definition"
 title: "Formally etale morphism"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-formally-unramified-morphism", "def-formally-smooth-morphism", "lem-morphism-schemes-local-on-source-target", "def-scheme-over-base"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

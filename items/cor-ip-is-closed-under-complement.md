@@ -2,7 +2,7 @@
 id: cor-ip-is-closed-under-complement
 kind: corollary
 title: "IP is closed under complement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-ip-equals-pspace, cor-pspace-equals-npspace-and-is-closed-under-complement]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

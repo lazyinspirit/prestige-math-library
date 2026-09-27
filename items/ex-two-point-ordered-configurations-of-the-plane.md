@@ -2,7 +2,7 @@
 id: ex-two-point-ordered-configurations-of-the-plane
 kind: example
 title: "Two ordered points in the plane: centre and difference coordinates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space, def-product-topology,
@@ -26,6 +26,7 @@ sources:
     - title: "Juan González-Meneses, Basic results on braid groups, §§1.1–1.3 and 2.1, printed pp. 3–6, 11–13"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

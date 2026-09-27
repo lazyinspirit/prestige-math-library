@@ -2,7 +2,7 @@
 id: def-p-residual-of-a-finite-group
 kind: definition
 title: "P residual of a finite group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-subgroup, def-quotient-group, def-finite-p-group, thm-first-isomorphism-theorem-groups, thm-image-subgroup-and-kernel-normal, prop-order-of-finite-direct-product, cor-order-of-a-quotient-group, thm-lagrange, def-finite-cardinality, cor-cardinality-of-the-power-set, lem-subgroups-of-finite-p-groups-are-p-groups, def-group-homomorphism, lem-intersection-of-subgroups, def-generated-subgroup, lem-every-integer-above-one-has-a-prime-divisor]
@@ -18,6 +18,7 @@ sources:
       url: "https://web.mat.bham.ac.uk/P.J.Flavell/fusion.pdf"
       locator: "§§2–5, PDF pp. 1–15"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

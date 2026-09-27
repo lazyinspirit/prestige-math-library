@@ -2,7 +2,7 @@
 id: lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct
 kind: lemma
 title: "Finite-variable polynomial algebras over fields are Noetherian by finite generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-noetherian-ring, def-noetherian-module, def-generated-cyclic-finitely-generated-and-free-modules, def-left-and-right-modules, def-submodule, def-left-right-and-two-sided-ideal, def-generated-and-principal-ideals, thm-generated-ideal-description-in-a-commutative-ring, def-polynomial-ring-over-a-commutative-ring, def-polynomial-degree-leading-coefficient-and-monic, prop-polynomial-degree-laws-over-a-commutative-ring, def-multivariate-polynomial-ring-by-iteration, def-field, lem-field-is-a-commutative-ring, thm-well-ordering-principle]
@@ -18,6 +18,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, §3"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "§3, Theorem 3.7 (Hilbert basis theorem) and its one-variable induction"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: "thm-ag-geometric-regularity-perfect-base"
 kind: "theorem"
 title: "Regular algebras over a perfect field are geometrically regular"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-geometric-regularity-field-tests", "thm-perfect-field-characterizations", "def-perfect-field", "thm-purely-inseparable-extension-characterizations", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "def-regular-noetherian-ring", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-semistandard-tableaux-and-small-kostka-numbers
 kind: example
 title: Small Kostka numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-semistandard-tableau-and-kostka-number]
@@ -18,6 +18,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Section 2.4, printed pp. 28-29 (PDF pp. 30-31)"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct
 kind: lemma
 title: "Submodules of finite modules over a Noetherian ring are finite by induction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-noetherian-ring, def-noetherian-module, def-submodule, def-generated-cyclic-finitely-generated-and-free-modules, def-free-module-on-a-set-and-standard-basis, thm-universal-property-of-free-modules, def-module-homomorphism-kernel-image-and-cokernel, thm-module-kernel-image-and-injectivity, def-left-right-and-two-sided-ideal, def-generated-and-principal-ideals, def-direct-sum-of-a-family-of-modules, def-left-and-right-modules]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

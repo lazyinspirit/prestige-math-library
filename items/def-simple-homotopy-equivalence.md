@@ -2,7 +2,7 @@
 id: def-simple-homotopy-equivalence
 kind: definition
 title: "Simple homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-elementary-expansion-and-collapse-of-finite-cw-complexes, def-homotopy-equivalence]
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: "ex-flasque-sheaf-all-functions"
 kind: "example"
 title: "The sheaf of all functions to an abelian group is flasque"
-status: draft
+status: published
 origin: pipeline
 deps: [def-flasque-sheaf, def-sheaf-on-topological-space, def-presheaf-on-topological-space, def-topological-space, def-function, def-continuous-map-top]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

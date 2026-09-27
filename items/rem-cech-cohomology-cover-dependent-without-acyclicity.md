@@ -2,7 +2,7 @@
 id: "rem-cech-cohomology-cover-dependent-without-acyclicity"
 kind: "remark"
 title: "Fixed-cover Čech can miss derived cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cohomology-open-cover, def-cech-cochain-complex-open-cover, thm-cech-to-sheaf-cohomology-comparison, thm-leray-acyclic-cover-theorem, thm-long-exact-sequence-sheaf-cohomology, thm-zero-sheaf-cohomology-global-sections, lem-global-sections-left-exact, def-axiom-of-choice]
 provenance:
@@ -13,6 +13,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Definition 20.9.1 and Lemma 20.9.3 (tag 0G6S, a member equal to the whole cover), Lemma 20.11.6 (tag 01ET, degeneration under acyclicity on finite intersections)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Remark

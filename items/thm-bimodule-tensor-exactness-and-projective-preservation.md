@@ -2,7 +2,7 @@
 id: thm-bimodule-tensor-exactness-and-projective-preservation
 kind: theorem
 title: Bimodule tensor exactness and preservation of finite projectives have separate hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-balanced-tensor-product-and-homogeneous-hom, lem-graded-balanced-tensor-and-shift-isomorphisms, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-left-and-right-flat-modules-over-an-arbitrary-ring, thm-universal-property-of-module-tensor-products]
@@ -22,6 +22,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.12, tag 00CV"
       url: "https://stacks.math.columbia.edu/tag/00CV"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

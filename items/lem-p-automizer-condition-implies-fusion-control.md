@@ -2,7 +2,7 @@
 id: lem-p-automizer-condition-implies-fusion-control
 kind: lemma
 title: "P automizer condition implies fusion control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-control-of-fusion-in-a-sylow-p-subgroup, def-sylow-p-subgroup, def-normalizer-of-a-subgroup, def-centralizer-of-a-subgroup, lem-centralizer-of-a-normal-subgroup-is-normal, lem-centralizers-and-normalizers-are-subgroups, lem-fusion-control-and-centralizer-transitivity, lem-local-sylow-conjugacy-ascent-for-fusion, lem-automizer-condition-gives-centralizer-transitivity, lem-sylow-times-normal-subgroup-covers-when-index-is-a-p-power, thm-first-isomorphism-theorem-groups, thm-image-subgroup-and-kernel-normal, thm-sylow-first-theorem, thm-sylow-second-theorem, thm-lagrange, cor-order-of-a-quotient-group, def-quotient-group, def-normal-subgroup, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, def-subgroup, def-generated-subgroup, thm-conjugation-is-an-automorphism, lem-group-inverse-laws, def-conjugacy-class-and-centralizer, def-group-homomorphism, def-group-isomorphism-and-automorphism]
@@ -25,6 +25,7 @@ sources:
       url: "https://web.mat.bham.ac.uk/P.J.Flavell/fusion.pdf"
       locator: "§§2.1–2.5, 3.1–3.8, 4.1–4.3, 5.5–5.10, PDF pp. 1–15"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

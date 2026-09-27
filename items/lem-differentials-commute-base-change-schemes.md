@@ -2,7 +2,7 @@
 id: "lem-differentials-commute-base-change-schemes"
 kind: "lemma"
 title: "Relative differentials commute with scheme base change"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-differentials-base-change", "def-sheaf-relative-differentials", "lem-sheaf-differentials-affine-compatibility", "thm-affine-fibre-product-tensor-ring", "def-pullback-module-ringed-spaces", "thm-sheaf-differentials-universal-property", "thm-pullback-pushforward-module-adjunction", "def-stalk-of-presheaf", "def-scheme-over-base"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UY"
     - title: "Vakil 22.2.K, p.583"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

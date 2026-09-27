@@ -2,7 +2,7 @@
 id: lem-two-relative-cell-layers-have-free-group-ring-homotopy-bases
 kind: lemma
 title: "Two high relative cell layers have free homotopy bases and their cellular boundary matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [lem-cell-trading-reduces-a-finite-relative-equivalence-to-two-high-cell-degrees, def-based-cellular-chain-complex-of-a-universal-cover, lem-relative-single-cell-layer-has-compatible-homotopy-and-homology-bases, lem-relative-homotopy-exact-sequence-of-a-triple-in-group-degrees, thm-covering-space-lifting-criterion, lem-high-relative-cells-do-not-change-lower-homotopy, thm-long-exact-sequence-of-relative-homotopy-groups, lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees, thm-five-lemma-for-a-morphism-of-long-exact-sequences, def-hurewicz-homomorphism, lem-any-homology-theory-has-a-cellular-chain-complex-on-a-cw-pair, thm-deck-group-of-a-universal-cover-is-the-fundamental-group, thm-path-lifting-for-covering-maps, prop-monodromy-acts-by-bijections-and-detects-components, thm-homotopy-lifting-for-covering-maps, thm-higher-dimensional-spheres-are-simply-connected, def-covering-map-and-evenly-covered-neighbourhoods, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant, lem-relative-cubical-disk-model-and-compression, lem-group-rings-have-invariant-basis-number-via-augmentation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

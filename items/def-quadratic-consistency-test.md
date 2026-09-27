@@ -2,7 +2,7 @@
 id: def-quadratic-consistency-test
 kind: definition
 title: "Quadratic tensor consistency test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-hadamard-linearity-constraint-system, thm-linearity-test-rejects-proportionally-to-distance, def-self-correction-of-a-noisy-linear-function, def-linearity-test]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

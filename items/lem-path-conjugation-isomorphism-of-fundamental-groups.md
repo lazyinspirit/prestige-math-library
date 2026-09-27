@@ -2,7 +2,7 @@
 id: lem-path-conjugation-isomorphism-of-fundamental-groups
 kind: lemma
 title: "Conjugating loop classes by a path is an isomorphism of fundamental groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-based-loops-and-fundamental-group, thm-fundamental-group-laws,
@@ -22,6 +22,7 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, section 1.1, printed p. 28, Proposition 1.5"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

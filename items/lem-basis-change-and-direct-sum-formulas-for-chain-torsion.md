@@ -2,7 +2,7 @@
 id: lem-basis-change-and-direct-sum-formulas-for-chain-torsion
 kind: lemma
 title: "Basis-change, direct-sum and based exact-sequence formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible, lem-contraction-torsion-is-independent-of-the-contracting-homotopy, def-finite-based-free-chain-complex-and-its-contraction-torsion, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, def-mapping-cone-of-a-chain-map, def-chain-homotopy-equivalence, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, lem-parity-map-of-a-finite-contracted-complex-is-invertible, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

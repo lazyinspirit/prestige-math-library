@@ -2,7 +2,7 @@
 id: lem-young-permutation-module-is-induced-from-the-trivial-character
 kind: lemma
 title: Young permutation modules are induced trivial modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-young-tableau-standard-tableau-and-shape, def-young-subgroup-tabloid-and-permutation-module, thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets]
@@ -20,6 +20,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Lemma 1.17 and Section 1.6, printed pp. 13-14"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: lem-the-closed-disk-is-a-manifold-with-boundary
 kind: lemma
 title: "The closed disk $D^2$ is a connected Hausdorff topological $2$-manifold with boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-topological-manifold-with-boundary,
@@ -37,6 +37,7 @@ sources:
     - title: "Nigel Hitchin, Differentiable Manifolds, section 2.2"
       url: "https://web.archive.org/web/20201111215108id_/https://people.maths.ox.ac.uk/hitchin/files/LectureNotes/Differentiable_manifolds/manifolds2014.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

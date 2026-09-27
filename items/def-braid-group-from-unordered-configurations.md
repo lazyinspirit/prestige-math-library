@@ -2,7 +2,7 @@
 id: def-braid-group-from-unordered-configurations
 kind: definition
 title: "The configuration braid group $B_n^{\\mathrm{conf}}$ as the fundamental group of an unordered configuration space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-unordered-configuration-space,
@@ -26,6 +26,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 1.1-1.3, printed pp. 3-6"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

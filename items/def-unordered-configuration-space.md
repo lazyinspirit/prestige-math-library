@@ -2,7 +2,7 @@
 id: def-unordered-configuration-space
 kind: definition
 title: "Unordered configuration spaces $C_n(X)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space,
@@ -24,6 +24,7 @@ sources:
     - title: "Fadell-Neuwirth, Configuration Spaces, section II Theorem 1, printed pp. 111-114"
       url: "https://tidsskrift.dk/math/article/download/10517/8538"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

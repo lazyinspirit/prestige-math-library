@@ -2,7 +2,7 @@
 id: lem-zmt-quasi-finite-transfer-through-intermediate-rings
 kind: lemma
 title: Quasi-finite local fibres transfer through quotients and intermediate rings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-multiplicative-subset-and-localisation, def-field-of-fractions, thm-universal-property-of-localisation, thm-localisation-commutes-with-quotients, thm-prime-spectrum-of-a-quotient-bijection, cor-tensor-product-with-a-quotient-ring, lem-tensor-ring-presentations-for-base-change]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

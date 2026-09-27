@@ -2,7 +2,7 @@
 id: cex-bott-samelson-words-related-by-a-braid-need-not-be-isomorphic-bimodules
 kind: counterexample
 title: "Bott–Samelson words related by a braid need not be isomorphic bimodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-rank-two-type-a-soergel-bimodule-decompositions, lem-type-a-support-filtration-multiplicities-are-intrinsic, def-type-a-standard-graph-bimodules-support-filtrations-and-character, def-the-rank-two-longest-type-a-soergel-bimodule, lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §4, PDF pp. 21–26"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

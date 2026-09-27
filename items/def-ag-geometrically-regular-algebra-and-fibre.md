@@ -2,7 +2,7 @@
 id: "def-ag-geometrically-regular-algebra-and-fibre"
 kind: "definition"
 title: "Geometrically regular algebras and geometrically regular fibres"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-regular-noetherian-ring", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "def-finitely-generated-field-extension", "def-finitely-presented-module-and-algebra"]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Stacks Algebra 10.166.1–2"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

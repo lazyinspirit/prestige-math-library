@@ -1,7 +1,7 @@
 ---
 page: sheaf-cohomology-cech-cohomology-and-comparison
 title: "Sheaf Cohomology Cech Cohomology and Comparison"
-status: draft
+status: published
 requires: [presheaves-sheaves-stalks-and-sheafification, sheaf-operations-exactness-ringed-spaces-and-module-pullback, projective-and-injective-resolutions, derived-functors, dimension-constructible-images-and-dimensions-of-fibres, derived-categories, double-complexes-exact-couples-and-convergence]
 items: [def-global-sections-functor-sheaves, lem-abelian-sheaves-form-a-grothendieck-category,
         thm-abelian-sheaves-have-enough-injectives, def-sheaf-cohomology-derived-global-sections,

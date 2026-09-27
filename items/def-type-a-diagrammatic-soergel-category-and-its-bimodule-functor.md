@@ -2,7 +2,7 @@
 id: def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor
 kind: definition
 title: "The type-A diagrammatic Soergel category and its candidate bimodule functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-the-type-a-soergel-category, thm-rank-two-type-a-soergel-bimodule-decompositions, lem-distant-soergel-generators-commute, lem-the-rank-one-soergel-bimodule-square-splits, def-type-a-soergel-bimodule-for-a-simple-reflection, def-type-a-reflection-realization-and-polynomial-ring, def-bott-samelson-bimodule-of-a-word]
@@ -24,6 +24,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §§4–5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

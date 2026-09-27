@@ -2,7 +2,7 @@
 id: thm-separatedness-gluing-overlap-criterion
 kind: theorem
 title: Affine-overlap criterion for separatedness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, def-diagonal-morphism-scheme, def-scheme, thm-affine-fibre-product-tensor-ring, thm-affine-closed-immersions-quotient-rings, lem-fibre-product-open-restriction, lem-closed-immersion-local-on-target]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Sections 11.3.11-12, printed pp.311-312"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

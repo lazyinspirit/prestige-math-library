@@ -2,7 +2,7 @@
 id: "thm-ag-field-differentials-separable-rank"
 kind: "theorem"
 title: "Differentials of a separably generated field extension"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-separating-transcendence-basis", "thm-primitive-element-theorem-for-finite-separable-extensions", "thm-evaluation-kernel-and-minimal-polynomial", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "lem-ag-polynomial-quotient-differentials", "lem-ag-differentials-localization-base-change", "lem-ag-differentials-transitivity", "lem-ag-differentials-universal-property", "thm-perfect-field-characterizations", "cor-algebraic-extensions-of-perfect-fields-are-separable", "lem-maximal-algebraically-independent-subset-is-a-transcendence-basis", "thm-finitely-generated-algebraic-extensions-are-finite", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §22.2.M, p.584"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-simple-khovanov-seidel-modules-have-explicit-finite-projective-resolutions
 kind: lemma
 title: "The Khovanov-Seidel grid resolutions of the vertex modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-vertex-khovanov-seidel-modules, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis, def-khovanov-seidel-type-a-quiver-algebra, def-path-ring-of-a-finite-quiver-over-the-integers, def-graded-khovanov-seidel-module-category-and-projectives, def-projective-resolution-in-an-abelian-category, def-homological-double-complex, def-direct-sum-total-complex-of-a-double-complex, lem-the-total-differential-squares-to-zero, thm-acyclic-assembly-lemma-for-a-first-quadrant-double-complex, def-mapping-cone-of-a-chain-map, thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact, thm-long-exact-sequence-in-homology, def-projective-object, def-quasi-isomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "Charles Weibel, An Introduction to Homological Algebra, ch. 2 §2.2, pp. 36-38"
       url: "https://math.mit.edu/~hrm/palestine/weibel/02-derived_functors.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

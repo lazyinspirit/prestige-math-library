@@ -2,7 +2,7 @@
 id: def-type-a-hecke-algebra-in-soergel-normalization
 kind: definition
 title: "The type-A Hecke algebra in Soergel normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-type-a-reduced-words-are-connected-by-braid-moves]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §3.1, PDF pp.12–13"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

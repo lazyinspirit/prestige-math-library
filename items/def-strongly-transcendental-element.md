@@ -2,7 +2,7 @@
 id: def-strongly-transcendental-element
 kind: definition
 title: Strong transcendence over a subring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-polynomial-ring-over-a-commutative-ring, def-subring, def-zero-divisor-and-integral-domain, def-field-of-fractions, def-integral-element-and-algebraic-integer]
@@ -20,6 +20,7 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

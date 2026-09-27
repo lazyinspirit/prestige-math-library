@@ -2,7 +2,7 @@
 id: "cex-cech-refinement-map-not-canonical-on-cochains"
 kind: "counterexample"
 title: "Refinement choices differ on cochains but not on cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-refinement-open-cover, thm-refinement-map-independent-on-cohomology, def-cech-cohomology-open-cover, def-cech-cochain-complex-open-cover, def-compact-space, def-topological-space, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-section-restriction-and-global-section, lem-increasing-cech-complex-extends-to-alternating-tuples]
 generation:
@@ -17,6 +17,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "J. Munkres, Topology, 2nd ed., §26 (open covers)"
       url: https://en.wikipedia.org/wiki/James_Munkres
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement refuted

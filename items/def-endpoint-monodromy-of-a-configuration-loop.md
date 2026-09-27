@@ -2,7 +2,7 @@
 id: def-endpoint-monodromy-of-a-configuration-loop
 kind: definition
 title: "Endpoint monodromy of an unordered configuration loop as a permutation of the labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-braid-group-from-unordered-configurations,
@@ -30,6 +30,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 1.1-1.3 and 2.1, printed pp. 3-6, 11-13"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: "lem-ag-differentials-transitivity"
 kind: "lemma"
 title: "Transitivity sequence for differentials"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-differentials-universal-property", "thm-right-exactness-of-tensor-products", "lem-ag-polynomial-quotient-differentials"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

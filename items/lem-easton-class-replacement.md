@@ -2,7 +2,7 @@
 id: lem-easton-class-replacement
 kind: lemma
 title: Replacement in the Easton class extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gbc-global-choice-ground-for-easton, lem-easton-class-forcing-truth-and-set-names, lem-easton-class-tail-head-decision, lem-easton-class-separation-and-power-set, lem-lc-boolean-generic-zfc-and-ordinals, thm-forcing-preorders-have-regular-open-completions, def-axiom-of-choice]
@@ -18,7 +18,8 @@ sources:
     - title: "Thomas Jech, Set Theory, Chapter 15, Replacement in the class extension, (15.16)-(15.17), printed pp.236-237"
       url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/15_applications_of_forcing.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

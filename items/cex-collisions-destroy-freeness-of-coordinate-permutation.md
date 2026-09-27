@@ -2,7 +2,7 @@
 id: cex-collisions-destroy-freeness-of-coordinate-permutation
 kind: counterexample
 title: "Collisions destroy freeness of the coordinate permutation action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-the-symmetric-group-acts-freely-on-ordered-configurations,
@@ -22,6 +22,7 @@ sources:
     - title: "Juan González-Meneses, Basic results on braid groups, §§1.1–1.3 and 2.1, printed pp. 3–6, 11–13"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

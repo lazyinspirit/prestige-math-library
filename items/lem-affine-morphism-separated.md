@@ -2,7 +2,7 @@
 id: lem-affine-morphism-separated
 kind: lemma
 title: Affine morphisms are separated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-affine-morphism-schemes, def-separated-morphism-schemes, def-diagonal-morphism-scheme, thm-affine-fibre-product-tensor-ring, thm-affine-closed-immersions-quotient-rings, lem-fibre-product-open-restriction, lem-closed-immersion-local-on-target]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.3.4, printed p.308"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

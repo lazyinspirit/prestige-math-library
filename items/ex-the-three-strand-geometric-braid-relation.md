@@ -2,7 +2,7 @@
 id: ex-the-three-strand-geometric-braid-relation
 kind: example
 title: "The three strand geometric braid relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-geometric-three-strand-braid-relation,
@@ -34,6 +34,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.2, author manuscript pp. 5-6"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

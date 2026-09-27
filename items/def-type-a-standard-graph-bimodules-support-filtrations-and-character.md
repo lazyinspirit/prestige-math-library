@@ -2,7 +2,7 @@
 id: def-type-a-standard-graph-bimodules-support-filtrations-and-character
 kind: definition
 title: "Standard graph bimodules, support filtrations and characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-reflection-realization-and-polynomial-ring, def-the-type-a-soergel-category, def-bruhat-order-on-the-symmetric-group, def-graded-ring-module-bimodule-and-internal-shift, lem-type-a-reduced-words-are-connected-by-braid-moves, def-type-a-soergel-bimodule-for-a-simple-reflection, lem-type-a-hecke-standard-basis-for-soergel-comparison]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §§3.4–3.6"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

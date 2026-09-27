@@ -2,7 +2,7 @@
 id: "thm-tangent-vectors-dual-numbers"
 kind: "theorem"
 title: "Tangent vectors as dual-number points"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-relative-cotangent-space", "thm-sheaf-differentials-universal-property", "def-dual-numbers-scheme", "lem-morphism-schemes-local-on-source-target", "def-residue-field-scheme-point", "cor-derivations-represented-by-differentials", "lem-differentials-localization", "lem-sheaf-differentials-affine-compatibility", "thm-cotangent-space-maximal-ideal-quotient", "def-scheme-over-base"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

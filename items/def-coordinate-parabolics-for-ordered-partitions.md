@@ -2,7 +2,7 @@
 id: def-coordinate-parabolics-for-ordered-partitions
 kind: definition
 title: Ordered partitions and coordinate parabolics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compositions-partial-flags-and-standard-parabolics, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, def-subgroup, def-normal-subgroup, def-group-action, def-symmetric-group, lem-symmetric-group-is-a-group, def-linear-basis, thm-complete-flags-form-gl-n-over-b, def-linear-subspace, thm-dimension-of-a-linear-subspace, thm-invertible-matrix-theorem, cor-general-linear-group-is-a-group, def-harish-chandra-induction-and-restriction-for-finite-gl-n]
@@ -19,6 +19,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Sections 3.5, 4.7 and 5.2, printed pp. 37-39 and 41-43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m
 kind: lemma
 title: "Bounded two-sided projective bimodule complexes act on C_m"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-signed-totalization-of-graded-a-m-bimodule-actions, lem-bounded-finite-projective-model-for-khovanov-seidel-modules, def-bounded-projective-homotopy-category-for-a-m, def-two-sided-projective-khovanov-seidel-bimodule-functors, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, thm-bimodule-tensor-exactness-and-projective-preservation, lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms, lem-projective-modules-are-flat-over-an-arbitrary-ring, def-mapping-cone-of-a-chain-map, thm-the-homotopy-category-of-an-abelian-category-is-triangulated, def-triangulated-category-axiom-tr-one, def-exact-functor-between-triangulated-categories, def-derived-tensor-product-in-the-bounded-above-setting, def-shift-of-a-chain-complex, thm-a-direct-summand-of-a-projective-is-projective, def-finitely-generated-graded-projective-module]
@@ -21,6 +21,7 @@ sources:
     - title: "Charles Weibel, An Introduction to Homological Algebra, ch. 10 §10.4, pp. 387-390"
       url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

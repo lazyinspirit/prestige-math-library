@@ -2,7 +2,7 @@
 id: "thm-transitivity-exact-sequence-differentials"
 kind: "theorem"
 title: "Transitivity sequence for differential modules"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-kahler-differentials-existence-presentation", "cor-derivations-represented-by-differentials", "def-derivation-algebra"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil 22.2.9–11, pp.578–579"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

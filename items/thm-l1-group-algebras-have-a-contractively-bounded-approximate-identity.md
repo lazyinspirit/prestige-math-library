@@ -2,7 +2,7 @@
 id: thm-l1-group-algebras-have-a-contractively-bounded-approximate-identity
 kind: theorem
 title: "L1 group algebras have a contractively bounded approximate identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-convolution-preserves-cc-and-is-associative, lem-haar-translations-are-strongly-continuous-on-lp-one-and-two, lem-l1-convolution-norm-inequality, def-convolution-on-cc-and-l1-of-a-group, lem-the-l1-involution-is-isometric-and-reverses-convolution, def-involution-on-l1-of-a-group, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, lem-compactly-supported-kernels-admit-commuting-radon-integrals, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-translations-preserve-compactly-supported-continuous-functions, thm-recursion, def-dependent-choice, def-axiom-of-choice, def-left-haar-integral-and-left-haar-measure, lem-topological-group-translations-and-inversion, def-compactly-supported-convolution-on-a-group]
@@ -22,6 +22,7 @@ sources:
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix A §§A.3–A.4, printed pp. 316–323"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

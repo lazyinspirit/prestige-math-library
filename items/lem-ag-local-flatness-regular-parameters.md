@@ -2,7 +2,7 @@
 id: "lem-ag-local-flatness-regular-parameters"
 kind: "lemma"
 title: "Local flatness criterion by regular parameters"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-long-exact-tor-sequence-in-the-right-module-variable", "thm-flatness-criteria-by-injections-and-ideals", "thm-right-exactness-of-tensor-products", "thm-artin-rees-lemma", "thm-krull-intersection-theorem", "def-composition-series-and-length-of-a-module", "cor-length-is-additive-in-short-exact-sequences", "def-simple-module", "def-local-ring", "def-noetherian-ring", "def-tor-by-resolving-the-right-module", "def-balanced-tor-bifunctor", "thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic", "thm-recursion", "def-dependent-choice", "def-axiom-of-choice", "lem-regular-local-residue-field-koszul-resolution", "thm-regular-sequences-give-acyclic-koszul-complexes", "def-koszul-complex-of-a-sequence-with-coefficients", "thm-regular-local-rings-are-domains-and-cohen-macaulay"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §25.6.2–3, pp.678–679"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

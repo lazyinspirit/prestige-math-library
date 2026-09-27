@@ -2,7 +2,7 @@
 id: def-separated-morphism-schemes
 kind: definition
 title: Separated morphism of schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-diagonal-morphism-scheme, def-closed-immersion-schemes, def-quasi-compact-and-quasi-separated-morphism, lem-diagonal-quasi-compact-iff-quasi-separated]
@@ -17,6 +17,7 @@ sources:
     - title: "The Stacks Project, Schemes, Definition 26.21.3 (tag 01KK), printed p.40"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

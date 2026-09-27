@@ -1,7 +1,7 @@
 ---
 page: type-a-soergel-bimodules-and-hecke-categorification
 title: "Type-A Soergel Bimodules and Hecke Categorification"
-status: draft
+status: published
 items: [def-type-a-reflection-realization-and-polynomial-ring,
         lem-type-a-reduced-words-are-connected-by-braid-moves,
         def-type-a-hecke-algebra-in-soergel-normalization,

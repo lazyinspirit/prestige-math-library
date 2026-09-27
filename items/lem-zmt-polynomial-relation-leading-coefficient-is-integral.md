@@ -2,7 +2,7 @@
 id: lem-zmt-polynomial-relation-leading-coefficient-is-integral
 kind: lemma
 title: The leading coefficient times a root is integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-integral-element-and-algebraic-integer, def-integral-ring-extension]
@@ -20,6 +20,7 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/xnotes/CA.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

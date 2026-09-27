@@ -2,7 +2,7 @@
 id: lem-artin-positive-word-reversing-is-complete
 kind: lemma
 title: "Artin positive word reversing is complete"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-artin-right-complements-and-word-reversing, def-positive-braid-monoid,
@@ -24,6 +24,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Appendix, Lemmas II.4.60-II.4.63, printed pp. 657-662, and Chapter II, Corollaries 4.45 and 4.47, printed pp. 79-80"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

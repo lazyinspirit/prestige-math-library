@@ -2,7 +2,7 @@
 id: "def-cech-cohomology-open-cover"
 kind: "definition"
 title: "Fixed-cover Čech cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cochain-complex-open-cover, lem-cech-differential-squares-zero, def-cohomology-object-of-a-cochain-complex]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

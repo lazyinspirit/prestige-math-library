@@ -2,7 +2,7 @@
 id: cex-internal-and-homological-shifts-are-not-interchangeable
 kind: counterexample
 title: "The internal and homological shifts are not interchangeable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-bounded-projective-homotopy-category-for-a-m, def-triangulated-k-zero-of-khovanov-seidel-projectives, lem-homological-and-internal-shifts-on-khovanov-seidel-k-zero, def-graded-khovanov-seidel-module-category-and-projectives, def-graded-ring-module-bimodule-and-internal-shift, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis]
@@ -20,6 +20,7 @@ sources:
     - title: "The Stacks Project, Derived Categories, section 28, K-groups (tag 0FCM), Definition 13.28.1"
       url: "https://stacks.math.columbia.edu/tag/0FCM"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-type-a-reduced-words-are-connected-by-braid-moves
 kind: lemma
 title: "Type-A reduced words and the Coxeter presentation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-reduced-adjacent-transposition-words-have-well-defined-positive-lifts,
@@ -21,6 +21,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §3, PDF pp.11–13"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

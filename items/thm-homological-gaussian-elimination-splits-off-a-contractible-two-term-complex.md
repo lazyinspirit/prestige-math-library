@@ -2,7 +2,7 @@
 id: thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex
 kind: theorem
 title: Gaussian elimination splits a contractible two-term complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, def-invertible-differential-block-and-schur-complement-reduction, def-complex-homotopy-and-contractibility-in-an-additive-category]
@@ -20,6 +20,7 @@ sources:
     - title: "David Clark, Scott Morrison and Kevin Walker, Fixing the Functoriality of Khovanov Homology, Appendix A.1, printed pp. 1562-1563"
       url: "https://msp.org/gt/2009/13-3/gt-v13-n3-p08-p.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

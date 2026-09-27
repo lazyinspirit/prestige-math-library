@@ -2,7 +2,7 @@
 id: lem-powering-amplifies-small-gaps
 kind: lemma
 title: "Powering amplifies a small unsatisfaction gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-powering, def-constraint-graph-and-labeling-value, def-plurality-decoding-of-powered-local-views, lem-plurality-consistency-along-middle-walk-positions, lem-expander-walk-violated-edge-collision-bound, lem-overlap-controlled-union-lower-bound]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

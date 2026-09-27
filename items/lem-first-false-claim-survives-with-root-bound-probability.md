@@ -2,7 +2,7 @@
 id: lem-first-false-claim-survives-with-root-bound-probability
 kind: lemma
 title: "A false field claim becomes true in one round with bounded probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-shamir-protocol-for-tqbf, lem-multilinearization-preserves-boolean-values, lem-efficient-prime-field-for-a-polynomial-soundness-budget, def-qbf-arithmetization-operators, def-multilinearization-operator, thm-root-bound-for-polynomials-over-a-domain]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

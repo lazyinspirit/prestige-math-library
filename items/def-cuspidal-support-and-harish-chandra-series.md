@@ -2,7 +2,7 @@
 id: def-cuspidal-support-and-harish-chandra-series
 kind: definition
 title: Cuspidal representations and Harish-Chandra series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-harish-chandra-induction-and-restriction-for-finite-gl-n, def-coordinate-parabolics-for-ordered-partitions, def-compositions-partial-flags-and-standard-parabolics, def-standard-subgroups-of-gl-n-over-a-finite-field, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, thm-transitivity-and-parabolic-independence-of-harish-chandra-induction, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, def-g-module-over-a-commutative-ring, def-subgroup, def-normal-subgroup, def-group-action, lem-symmetric-group-is-a-group, def-symmetric-group, def-weyl-group-and-length-for-finite-gl-n, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, cor-general-linear-group-is-a-group]
@@ -19,6 +19,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Definition 5.7, printed p. 43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: "lem-differentials-diagonal-ideal-square"
 kind: "lemma"
 title: "The diagonal ideal modulo its square is Omega"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-kahler-differentials-existence-presentation", "cor-derivations-represented-by-differentials", "thm-universal-property-of-module-tensor-products", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "def-derivation-algebra", "def-kahler-differentials-algebra"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/00RV"
     - title: "Vakil 22.2.20, p.584"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

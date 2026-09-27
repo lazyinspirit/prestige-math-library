@@ -2,7 +2,7 @@
 id: thm-explicit-code-construction-and-distance
 kind: theorem
 title: "A polynomial-time explicit constant-rate constant-distance code"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-explicit-constant-rate-constant-distance-code, def-reed-solomon-outer-code-and-binary-linear-inner-code, lem-reed-solomon-outer-code-has-constant-rate-and-distance, lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time, lem-concatenated-code-multiplies-rate-and-distance]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

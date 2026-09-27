@@ -2,7 +2,7 @@
 id: lem-reduced-adjacent-transposition-words-have-well-defined-positive-lifts
 kind: lemma
 title: "Reduced adjacent-transposition words have well-defined positive lifts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-positive-braid-monoid,
@@ -26,6 +26,7 @@ sources:
     - title: "M. Macauley, Math 4120 lecture notes: Generating sets for S_n"
       url: "https://www.math.clemson.edu/~macaule/classes/m20_math4120/slides/math4120_lecture-2-03_h.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: prop-additive-functors-preserve-chosen-homological-gaussian-cancellations
 kind: proposition
 title: Additive functors preserve chosen Gaussian cancellations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-homological-gaussian-elimination-preserves-homotopy-type-and-homology, prop-homological-gaussian-elimination-gives-a-strong-deformation-retract, thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex, def-invertible-differential-block-and-schur-complement-reduction, def-complex-homotopy-and-contractibility-in-an-additive-category, def-additive-functor, thm-an-additive-functor-preserves-finite-biproducts, prop-an-additive-functor-preserves-zero-morphisms, thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]
@@ -20,6 +20,7 @@ sources:
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, ch. 1, printed pp. 2-5 and 17-18"
       url: "https://math.mit.edu/~hrm/palestine/weibel/01-chain_complexes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

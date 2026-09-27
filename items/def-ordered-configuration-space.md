@@ -2,7 +2,7 @@
 id: def-ordered-configuration-space
 kind: definition
 title: "Ordered configuration spaces $F_n(X)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-product-topology, def-subspace-topology-top, def-natural-numbers,
@@ -22,6 +22,7 @@ sources:
     - title: "Fadell-Neuwirth, Configuration Spaces, section II Theorem 1, printed pp. 111-114"
       url: "https://tidsskrift.dk/math/article/download/10517/8538"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: "ex-differentials-polynomial-ring"
 kind: "example"
 title: "Differentials of k[x,y]"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["lem-differentials-polynomial-algebra-free", "def-derivation-algebra"]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

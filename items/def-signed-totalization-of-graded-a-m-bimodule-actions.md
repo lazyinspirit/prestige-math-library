@@ -2,7 +2,7 @@
 id: def-signed-totalization-of-graded-a-m-bimodule-actions
 kind: definition
 title: "Signed totalization of graded A_m-bimodule actions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-balanced-tensor-product-and-homogeneous-hom, def-tensor-product-total-complex-of-chain-complexes, lem-graded-balanced-tensor-and-shift-isomorphisms, def-graded-khovanov-seidel-module-category-and-projectives, def-khovanov-seidel-type-a-quiver-algebra, def-cochain-complex-in-an-abelian-category, def-chain-homotopy, def-graded-ring-module-bimodule-and-internal-shift, def-shift-of-a-chain-complex, def-mapping-cone-of-a-chain-map]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c, printed pp. 10-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

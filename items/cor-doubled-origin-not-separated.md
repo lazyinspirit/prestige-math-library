@@ -2,7 +2,7 @@
 id: cor-doubled-origin-not-separated
 kind: corollary
 title: The affine line with doubled origin is not separated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-separatedness-gluing-overlap-criterion, def-quasi-compact-and-quasi-separated-morphism, def-discrete-valuation-ring, lem-diagonal-quasi-compact-iff-quasi-separated, thm-gluing-affine-schemes]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Sections 11.3.I and 13.7.C, printed pp.309, 382"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

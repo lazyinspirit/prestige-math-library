@@ -2,7 +2,7 @@
 id: ex-the-simple-braids-and-divisibility-lattice-for-b-three
 kind: example
 title: "The simple braids and divisibility lattice for b three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-simple-positive-braids-are-indexed-by-permutations,
@@ -30,6 +30,7 @@ sources:
     - title: "J. Birman and T. Brendle, Braids: A Survey, Section 5.1"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

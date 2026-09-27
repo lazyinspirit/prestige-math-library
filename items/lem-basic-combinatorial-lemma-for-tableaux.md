@@ -2,7 +2,7 @@
 id: lem-basic-combinatorial-lemma-for-tableaux
 kind: lemma
 title: Basic row-column incidence lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-partition-young-diagram-and-conjugate-partition, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-dominance-order-on-partitions]
@@ -20,6 +20,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Lemma 1.21 (Dominance lemma), printed p. 16"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

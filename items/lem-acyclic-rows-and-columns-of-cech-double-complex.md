@@ -2,7 +2,7 @@
 id: "lem-acyclic-rows-and-columns-of-cech-double-complex"
 kind: "lemma"
 title: "Acyclic directions of the Čech–Godement double complex"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cochain-complex-open-cover, def-godement-resolution, thm-godement-resolution-flasque, thm-flasque-sheaves-acyclic, thm-acyclic-resolution-theorem-for-right-derived-functors, thm-long-exact-sequence-in-cohomology, def-axiom-of-choice, def-direct-sum-total-complex-on-finite-diagonals, prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes, def-mapping-cone-of-a-chain-map, cor-the-cone-criterion-from-the-general-long-exact-sequence, def-quasi-isomorphism, def-global-sections-functor-sheaves, thm-choice-implies-dependent-implies-countable-choice, def-acyclic-cover-for-sheaf, thm-zero-sheaf-cohomology-global-sections, thm-abelian-sheaves-have-enough-injectives, def-sheaf-cohomology-derived-global-sections]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

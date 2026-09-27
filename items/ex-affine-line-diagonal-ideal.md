@@ -2,7 +2,7 @@
 id: ex-affine-line-diagonal-ideal
 kind: example
 title: The diagonal of the affine line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-diagonal-morphism-scheme, thm-affine-fibre-product-tensor-ring, thm-affine-closed-immersions-quotient-rings, lem-closed-immersion-local-on-target, lem-diagonal-base-change-identification, thm-fibre-products-of-schemes-exist]
@@ -20,6 +20,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, Proposition 11.3.1, printed pp.306-307"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

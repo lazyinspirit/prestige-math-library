@@ -2,7 +2,7 @@
 id: "def-smooth-relative-dimension-via-differentials"
 kind: "definition"
 title: "Relative differential-rank condition"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["def-sheaf-relative-differentials", "def-ag-standard-smooth-algebra", "cor-jacobian-presentation-differentials", "lem-differentials-localization"]
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Morphisms 29.35.12-13 and the 29.35.14 warning"
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

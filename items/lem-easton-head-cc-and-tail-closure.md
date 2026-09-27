@@ -2,7 +2,7 @@
 id: lem-easton-head-cc-and-tail-closure
 kind: lemma
 title: Easton head chain condition and tail closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-easton-support-product, def-kappa-closure-distributivity-and-chain-condition, lem-generalized-delta-system-for-small-supports, def-finite-delta-system, thm-cofinality-basics, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption, def-aleph-and-beth-hierarchies, def-axiom-of-choice]
@@ -20,6 +20,7 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Lemma 54, PDF p.11"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

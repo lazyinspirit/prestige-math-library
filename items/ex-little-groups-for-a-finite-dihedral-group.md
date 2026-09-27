@@ -2,13 +2,14 @@
 id: ex-little-groups-for-a-finite-dihedral-group
 kind: example
 title: "Little groups compute the irreducible characters of a dihedral group"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-little-group-method-for-a-split-abelian-normal-subgroup", "cor-dihedral-groups-as-semidirect-products", "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional", "thm-complex-nth-roots-and-roots-of-unity", "cor-cyclotomic-field-splits-a-finite-group", "def-conjugate-representation-and-inertia-group"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

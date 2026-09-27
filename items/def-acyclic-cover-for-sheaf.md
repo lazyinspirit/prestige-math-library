@@ -2,13 +2,14 @@
 id: "def-acyclic-cover-for-sheaf"
 kind: "definition"
 title: "Acyclic open cover for a sheaf"
-status: draft
+status: published
 origin: pipeline
 deps: [def-acyclic-sheaf-global-sections, def-cech-cochain-complex-open-cover, def-axiom-of-choice, def-restriction-sheaf-open-subspace, def-sheaf-cohomology-derived-global-sections, lem-sheaf-section-over-empty-set-terminal, prop-an-exact-functor-has-vanishing-positive-derived-functors]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

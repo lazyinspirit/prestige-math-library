@@ -2,7 +2,7 @@
 id: lem-counting-measure-on-a-discrete-group
 kind: lemma
 title: "Counting measure on a discrete group is Haar, Haar measures there are its multiples, and integrals against them are sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-counting-measure, prop-counting-measure-is-a-measure, def-measure, def-standard-topologies, def-borel-sigma-algebra, def-extended-real-valued-measurable-function, def-compact-space, def-left-haar-integral-and-left-haar-measure, def-radon-measure-on-an-lch-space, def-nonnegative-simple-measurable-function, def-integral-of-a-nonnegative-simple-function, lem-well-definedness-of-the-simple-integral, def-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-square-summable-family-on-an-arbitrary-index-set, lem-finite-sum-reindexing-and-fubini, def-integrable-real-and-complex-functions-and-their-integrals, def-complex-conjugate-real-imaginary-part-and-modulus]
@@ -22,6 +22,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~aknapp/download/a2-1-realanal-clickable.pdf"
       locator: "VI §2, printed pp. 225–230, Lemmas 6.9–6.13"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

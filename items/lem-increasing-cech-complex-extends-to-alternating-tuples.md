@@ -2,7 +2,7 @@
 id: "lem-increasing-cech-complex-extends-to-alternating-tuples"
 kind: "lemma"
 title: "Ordered and alternating Čech complexes agree"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cochain-complex-open-cover, lem-cech-differential-squares-zero, def-section-restriction-and-global-section, def-inversions-inversion-number-and-sign, thm-sign-is-a-homomorphism, cor-sign-from-disjoint-cycle-structure]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

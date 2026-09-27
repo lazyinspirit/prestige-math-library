@@ -2,7 +2,7 @@
 id: def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence
 kind: definition
 title: "Whitehead torsion of a finite CW homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, def-finite-based-free-chain-complex-and-its-contraction-torsion, lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group, lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone, def-mapping-cone-of-a-chain-map, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear, lem-group-rings-have-invariant-basis-number-via-augmentation, lem-contraction-torsion-is-independent-of-the-contracting-homotopy, def-chain-homotopy-equivalence, def-based-cellular-chain-complex-of-a-universal-cover, def-homotopy-equivalence, thm-cellular-approximation-for-maps-of-cw-pairs]
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

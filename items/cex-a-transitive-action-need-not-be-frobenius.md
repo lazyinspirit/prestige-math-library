@@ -2,7 +2,7 @@
 id: cex-a-transitive-action-need-not-be-frobenius
 kind: counterexample
 title: "A transitive action need not be Frobenius"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-frobenius-permutation-action-characterization, def-frobenius-complement-and-frobenius-group, def-finite-symmetric-group-and-permutation-notation, def-group-action, def-orbit-and-stabilizer, thm-orbit-stabilizer, def-coset, lem-coset-membership-and-equality, def-subgroup, lem-subgroup-criterion, def-conjugacy-class-and-centralizer, thm-conjugation-is-an-automorphism, lem-group-inverse-laws, thm-lagrange]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

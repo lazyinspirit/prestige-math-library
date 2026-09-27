@@ -2,7 +2,7 @@
 id: prop-transfer-of-chain-maps-across-gaussian-reductions-and-naturality-limits
 kind: proposition
 title: Transferred maps are functorial up to homotopy, with strict naturality limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-homological-gaussian-elimination-gives-a-strong-deformation-retract, thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex, def-complex-homotopy-and-contractibility-in-an-additive-category, def-homotopy-classes-of-chain-maps, def-homotopy-category-of-chain-complexes]
@@ -20,6 +20,7 @@ sources:
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, ch. 1, printed pp. 2-5 and 17-18"
       url: "https://math.mit.edu/~hrm/palestine/weibel/01-chain_complexes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-cloud-consistency-forces-near-constant-labels
 kind: lemma
 title: "Cloud violations control distance to plurality labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-degree-reduction-by-expander-clouds, lem-cloud-plurality-rounding]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: "lem-ag-differentials-universal-property"
 kind: "lemma"
 title: "Universal property of algebraic differentials"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-universal-algebraic-differentials"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

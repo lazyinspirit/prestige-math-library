@@ -2,7 +2,7 @@
 id: lem-separated-implies-valuative-uniqueness
 kind: lemma
 title: Separatedness implies valuative uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, def-valuative-diagram-separatedness, thm-morphisms-agree-closed-equalizer-separated-target, def-valuation-ring, thm-affine-closed-immersions-quotient-rings]
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.22.1 (tag 01KZ), printed p.44"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

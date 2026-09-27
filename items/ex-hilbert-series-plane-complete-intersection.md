@@ -2,7 +2,7 @@
 id: ex-hilbert-series-plane-complete-intersection
 kind: example
 title: "A quadratic-cubic plane complete intersection has eventual Hilbert value six"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 short: "Hilbert function 1,3,5,6,6,..."
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-fusion-control-gives-a-nontrivial-p-quotient-of-the-p-residual
 kind: lemma
 title: "Fusion control forces trivial Sylow intersection with the p residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-p-residual-of-a-finite-group, lem-p-residual-is-generated-by-p-prime-elements-and-idempotent, def-control-of-fusion-in-a-sylow-p-subgroup, def-sylow-p-subgroup, lem-sylow-subgroups-of-a-normal-subgroup-are-intersections, def-subgroup-commutator-and-lower-central-series, def-commutator-and-commutator-subgroup, lem-normal-p-subgroup-has-proper-commutator-in-a-p-group, thm-quotient-abelian-iff-contains-commutator-subgroup, def-transfer-homomorphism-for-a-finite-index-subgroup, lem-transfer-is-a-homomorphism, lem-transfer-cycle-decomposition-formula, def-quotient-group, def-normal-subgroup, def-group-homomorphism, lem-group-homomorphism-basic-properties, thm-lagrange, cor-order-of-a-quotient-group, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, lem-order-characterisation, cor-order-of-element-divides-group-order, lem-divisibility-basic, def-index, def-coset, def-generated-subgroup, def-subgroup, thm-conjugation-is-an-automorphism, def-conjugacy-class-and-centralizer, thm-orbits-partition-the-set, def-orbit-and-stabilizer, def-group-action, lem-group-inverse-laws, lem-transfer-is-independent-of-the-transversal]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

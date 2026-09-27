@@ -2,7 +2,7 @@
 id: thm-the-e-graph-has-the-erdos-hajnal-property
 kind: theorem
 title: "The $E$-graph has the Erdős-Hajnal property"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-the-e-graph-is-generalized-nice, lem-the-e-graph-and-the-bird-are-leaf-reducible, lem-the-e-graph-and-the-bird-graph-are-wonderful, thm-leaf-reducible-wonderful-generalized-nice-finite-families-have-the-erdos-hajnal-property, def-erdos-hajnal-property-and-constant, def-homogeneous-set-and-homogeneous-number, def-e-graph-and-co-e-graph, def-h-free-and-family-free-graph, lem-forbidden-induced-subgraph-classes-are-hereditary]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

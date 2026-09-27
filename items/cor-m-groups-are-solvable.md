@@ -2,7 +2,7 @@
 id: cor-m-groups-are-solvable
 kind: corollary
 title: M-groups are solvable (Taketa)
-status: draft
+status: published
 origin: pipeline
 deps: [def-monomial-representation-and-m-group, def-derived-series-solvable-group-and-derived-length, def-kernel-of-a-complex-character, thm-derived-subgroup-is-characteristic-and-abelianization-is-universal, lem-characteristic-subgroups-are-normal-and-characteristic-is-transitive, cor-frobenius-reciprocity-for-complex-characters, thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions, thm-character-inner-product-computes-intertwiner-dimension, cor-dimension-of-an-induced-finite-dimensional-representation, def-induced-character-of-a-complex-representation, lem-kernel-of-an-induced-character-lies-in-the-inducing-subgroup, thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters, def-irreducible-complex-character, def-subrepresentation-and-irreducible-representation, def-induced-r-linear-g-module-by-h-covariant-functions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

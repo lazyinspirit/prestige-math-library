@@ -1,7 +1,7 @@
 ---
 name: real-analysis
 title: Real Analysis
-status: draft
+status: published
 ---
 
 A proof-based real analysis collection, built from a construction of the real

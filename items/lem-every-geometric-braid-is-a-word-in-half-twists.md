@@ -2,7 +2,7 @@
 id: lem-every-geometric-braid-is-a-word-in-half-twists
 kind: lemma
 title: "Every geometric braid is isotopic to a stacking of signed elementary half twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-geometric-braid-with-setwise-endpoints,
@@ -33,6 +33,7 @@ sources:
     - title: "Maurice Chiodo, An Introduction to Braid Theory, section 2 (crossing decomposition), pp. 8-12"
       url: "https://www.mauricechiodo.com/research/An_Introduction_to_Braid_Theory.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

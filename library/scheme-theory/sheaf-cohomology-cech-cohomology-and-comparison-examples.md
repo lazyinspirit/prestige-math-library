@@ -1,7 +1,7 @@
 ---
 page: sheaf-cohomology-cech-cohomology-and-comparison-examples
 title: "Sheaf Cohomology Cech Cohomology and Comparison — Examples"
-status: draft
+status: published
 requires: [sheaf-cohomology-cech-cohomology-and-comparison, schemes-subschemes-and-morphisms-locally-of-finite-type, the-fundamental-group-of-the-circle]
 items: []
 examples: [cex-global-sections-epimorphism-fails-lift, ex-cech-cohomology-two-arc-cover-circle,

@@ -2,7 +2,7 @@
 id: def-modular-function-of-a-locally-compact-group
 kind: definition
 title: "Modular function of a locally compact group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-right-translation-scales-left-haar-measure, def-left-haar-integral-and-left-haar-measure, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

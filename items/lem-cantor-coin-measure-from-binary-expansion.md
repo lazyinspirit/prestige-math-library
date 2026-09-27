@@ -2,7 +2,7 @@
 id: lem-cantor-coin-measure-from-binary-expansion
 kind: lemma
 title: The fair-coin measure on Cantor space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-cantor-sequence-space-for-descriptive-set-theory, lem-cantor-and-baire-sequence-coding, def-product-topology, def-topological-space, def-borel-sigma-algebra, def-generated-sigma-algebra, def-algebra-of-subsets, def-premeasure-on-an-algebra, def-outer-measure-induced-by-a-premeasure, thm-caratheodory-extension-theorem, def-measure, def-countable-choice, def-axiom-of-choice, lem-closed-subset-of-a-compact-space-is-compact, lem-compactness-is-intrinsic, def-metric-compactness, def-compact-space, thm-sum-rule, thm-cardinality-of-a-set-of-functions, def-integer-power, def-nat-power, lem-power-laws, def-finite-cardinality, def-countable]
@@ -18,7 +18,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 3 (the fair-coin measure on Cantor space), printed pp.5-6"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

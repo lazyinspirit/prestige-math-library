@@ -2,7 +2,7 @@
 id: "ex-tangent-vectors-affine-space-dual-numbers"
 kind: "example"
 title: "Dual-number vectors in affine space"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["thm-tangent-vectors-dual-numbers", "lem-differentials-polynomial-algebra-free", "thm-universal-property-of-a-polynomial-ring-on-a-family", "lem-sheaf-differentials-affine-compatibility"]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-homological-gaussian-elimination-gives-a-strong-deformation-retract
 kind: proposition
 title: Explicit strong deformation retract from Gaussian cancellation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex, lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, def-complex-homotopy-and-contractibility-in-an-additive-category]
@@ -20,6 +20,7 @@ sources:
     - title: "Dror Bar-Natan, Fast Khovanov Homology Computations, section 4 Lemma 4.2 and section 5, printed p. 5"
       url: "https://www.math.utoronto.ca/~drorbn/papers/FastKh/FastKh.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: "cex-ag-differentials-arbitrary-map-is-not-base-change"
 kind: "counterexample"
 title: "An arbitrary algebra map does not make differentials a base change"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-differentials-localization-base-change", "lem-ag-polynomial-quotient-differentials", "def-ag-universal-algebraic-differentials", "thm-right-exactness-of-tensor-products"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

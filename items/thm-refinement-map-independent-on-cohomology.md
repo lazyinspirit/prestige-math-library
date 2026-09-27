@@ -2,7 +2,7 @@
 id: "thm-refinement-map-independent-on-cohomology"
 kind: "theorem"
 title: "Refinement choices induce the same Čech map"
-status: draft
+status: published
 origin: pipeline
 deps: [def-refinement-open-cover, lem-increasing-cech-complex-extends-to-alternating-tuples, thm-chain-homotopic-maps-induce-the-same-map-on-homology, def-chain-homotopy, def-cochain-complex-in-an-abelian-category, def-cohomology-object-of-a-cochain-complex, def-cech-cohomology-open-cover, def-section-restriction-and-global-section]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

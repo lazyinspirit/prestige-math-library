@@ -2,7 +2,7 @@
 id: "thm-leray-acyclic-cover-theorem"
 kind: "theorem"
 title: "Leray acyclic-cover comparison"
-status: draft
+status: published
 origin: pipeline
 deps: [def-acyclic-cover-for-sheaf, thm-cech-to-sheaf-cohomology-comparison, lem-acyclic-rows-and-columns-of-cech-double-complex, def-axiom-of-choice, def-cech-cohomology-open-cover, def-sheaf-cohomology-derived-global-sections, def-quasi-isomorphism, def-godement-resolution]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

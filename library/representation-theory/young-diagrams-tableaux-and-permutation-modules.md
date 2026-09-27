@@ -1,7 +1,7 @@
 ---
 page: young-diagrams-tableaux-and-permutation-modules
 title: "Young Diagrams Tableaux and Permutation Modules"
-status: draft
+status: published
 items: [def-partition-young-diagram-and-conjugate-partition, def-young-tableau-standard-tableau-and-shape, def-removable-and-addable-nodes-of-a-partition, lem-largest-entry-of-a-standard-tableau-is-removable, def-dominance-order-on-partitions, lem-conjugation-reverses-dominance, def-row-and-column-stabilizers-of-a-tableau, lem-basic-combinatorial-lemma-for-tableaux, def-young-subgroup-tabloid-and-permutation-module, lem-young-permutation-module-is-induced-from-the-trivial-character, lem-tableau-stabilizers-transform-by-conjugation, def-semistandard-tableau-and-kostka-number]
 examples: []
 ---

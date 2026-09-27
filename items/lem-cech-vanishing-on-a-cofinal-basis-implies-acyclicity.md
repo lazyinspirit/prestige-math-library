@@ -2,7 +2,7 @@
 id: "lem-cech-vanishing-on-a-cofinal-basis-implies-acyclicity"
 kind: "lemma"
 title: "Cofinal Čech vanishing implies derived acyclicity"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-abelian-sheaves-have-enough-injectives, thm-long-exact-sequence-sheaf-cohomology, thm-long-exact-sequence-in-cohomology, def-cech-cohomology-open-cover, def-axiom-of-choice, lem-injective-sheaves-flasque, thm-flasque-sheaves-acyclic, thm-leray-acyclic-cover-theorem, def-sheaf-cohomology-derived-global-sections, thm-exactness-of-sheaves-stalkwise, def-kernel-cokernel-image-sheaves, def-cech-cochain-complex-open-cover, thm-zero-sheaf-cohomology-global-sections, lem-cech-h0-global-sections, thm-choice-implies-dependent-implies-countable-choice, def-flasque-sheaf, def-injective-object, lem-cech-differential-squares-zero]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

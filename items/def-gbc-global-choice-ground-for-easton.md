@@ -2,7 +2,7 @@
 id: def-gbc-global-choice-ground-for-easton
 kind: definition
 title: Class-theoretic ground assumptions for Easton forcing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-axiom-of-choice, def-aleph-and-beth-hierarchies, def-easton-function, def-easton-support-product, thm-generalized-continuum-hypothesis-in-l, thm-ordinals-and-omega-are-absolute-in-transitive-models]
@@ -21,6 +21,7 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Theorem 77 (global Easton, proof sketch), PDF p.16"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

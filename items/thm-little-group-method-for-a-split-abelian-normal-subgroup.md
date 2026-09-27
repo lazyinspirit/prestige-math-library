@@ -2,7 +2,7 @@
 id: thm-little-group-method-for-a-split-abelian-normal-subgroup
 kind: theorem
 title: "The little group method for a semidirect product with abelian kernel"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-projective-clifford-correspondence", "thm-extension-exists-iff-the-clifford-obstruction-vanishes", "thm-clifford-correspondence", "thm-gallagher-correspondence-for-an-extendible-character", "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional", "def-internal-semidirect-product", "def-conjugate-representation-and-inertia-group", "cor-cyclotomic-field-splits-a-finite-group", "thm-the-complex-numbers-are-algebraically-closed", "prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient", "thm-characters-of-direct-sums-tensor-products-and-duals", "cor-dimension-of-an-induced-finite-dimensional-representation"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Britta Späth, Reduction theorems for some global-local conjectures — Theorem 1.3 (Gallagher) and Theorem 1.2 (Clifford), printed pp. 2–3"
       url: "https://darstellungstheorie.uni-wuppertal.de/fileadmin/mathe/darstellungstheorie/LausanneBS_final.pdf"
 proof_strategy: direct
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

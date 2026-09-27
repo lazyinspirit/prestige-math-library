@@ -2,7 +2,7 @@
 id: "lem-constant-sheaf-on-irreducible-space-is-flasque"
 kind: "lemma"
 title: "Constant sheaves on irreducible spaces are flasque and acyclic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-topological-space, def-subspace-topology-top, lem-irreducibility-criteria-and-open-subspaces, def-irreducible-topological-space-and-subset, def-connected-space, def-presheaf-on-topological-space, def-sheafification, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-flasque-sheaf, lem-sheaf-section-over-empty-set-terminal, thm-flasque-sheaves-acyclic, def-sheaf-cohomology-derived-global-sections, thm-abelian-sheaves-form-abelian-category, def-section-restriction-and-global-section, def-sheaf-on-topological-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

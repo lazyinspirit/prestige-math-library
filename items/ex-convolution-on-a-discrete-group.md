@@ -2,7 +2,7 @@
 id: ex-convolution-on-a-discrete-group
 kind: example
 title: "Convolution on a discrete group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-convolution-on-cc-and-l1-of-a-group, def-compactly-supported-convolution-on-a-group, lem-counting-measure-on-a-discrete-group, prop-compact-discrete-and-abelian-groups-are-unimodular, cor-cauchy-schwarz-inequality-for-l-two, def-square-summable-family-on-an-arbitrary-index-set, def-unimodular-locally-compact-group, def-involution-on-l1-of-a-group, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-complex-haar-lp-spaces-and-compactly-supported-functions, lem-l1-convolution-norm-inequality, def-compact-support-c-c-and-c-zero-on-an-lch-space, def-left-haar-integral-and-left-haar-measure, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3, printed pp. 212–230"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

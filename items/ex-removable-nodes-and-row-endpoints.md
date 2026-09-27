@@ -2,7 +2,7 @@
 id: ex-removable-nodes-and-row-endpoints
 kind: example
 title: Removable nodes versus row endpoints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-removable-and-addable-nodes-of-a-partition]
@@ -20,6 +20,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups - Chapter 2, printed pp. 7-8 (PDF pp. 8-9)"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

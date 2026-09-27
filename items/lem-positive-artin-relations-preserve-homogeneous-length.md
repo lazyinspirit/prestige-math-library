@@ -2,7 +2,7 @@
 id: lem-positive-artin-relations-preserve-homogeneous-length
 kind: lemma
 title: "Positive artin relations preserve homogeneous length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-positive-braid-monoid, def-alphabet-words-and-reduction,
@@ -23,6 +23,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Propositions 2.32-2.33, printed pp. 47-48"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

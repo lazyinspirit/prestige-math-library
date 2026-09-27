@@ -2,7 +2,7 @@
 id: lem-easton-head-tail-no-new-short-sequences
 kind: lemma
 title: A closed Easton tail adds no short sequences across its chain-condition head
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-kappa-closure-distributivity-and-chain-condition, def-dense-open-sets-and-model-generic-filters, lem-forcing-monotonicity-density-and-decision, thm-transfinite-recursion, thm-forcing-theorem, def-forcing-name-valuation-and-generic-extension, def-axiom-of-choice, def-forcing-preorder-compatibility-and-filter, def-forcing-relation-for-atomic-formulas, def-forcing-relation-for-formulas, def-check-names-and-the-canonical-generic-name, thm-generic-extension-transitivity-and-rank-bound, thm-generic-extensions-satisfy-zf-and-zfc]
@@ -18,7 +18,8 @@ sources:
     - title: "Thomas Jech, Set Theory, Chapter 15, Lemma 15.19, printed p.234"
       url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/15-applications_of_forcing.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

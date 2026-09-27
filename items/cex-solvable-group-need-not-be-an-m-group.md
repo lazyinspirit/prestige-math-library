@@ -2,7 +2,7 @@
 id: cex-solvable-group-need-not-be-an-m-group
 kind: counterexample
 title: "A solvable group that is not an M-group"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-monomial-representation-and-m-group", "def-subrepresentation-and-irreducible-representation", "def-irreducible-complex-character", "def-finite-dimensional-representation-of-a-group-over-a-field", "def-character-of-a-complex-representation", "def-induced-r-linear-g-module-by-h-covariant-functions", "cor-dimension-of-an-induced-finite-dimensional-representation", "def-quaternions", "thm-quaternions-form-a-division-ring", "def-quaternion-group-of-order-eight", "prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two", "def-generated-subgroup", "lem-subgroup-criterion", "def-subgroup", "def-internal-semidirect-product", "def-normal-subgroup", "def-commutator-and-commutator-subgroup", "def-derived-series-solvable-group-and-derived-length", "thm-quotient-abelian-iff-contains-commutator-subgroup", "thm-derived-subgroup-is-characteristic-and-abelianization-is-universal", "thm-index-two-subgroup-is-normal", "thm-lagrange", "cor-groups-of-order-p-squared-are-abelian"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

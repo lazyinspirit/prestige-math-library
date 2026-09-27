@@ -2,7 +2,7 @@
 id: lem-diagonal-is-immersion
 kind: lemma
 title: Every scheme diagonal is an immersion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-diagonal-morphism-scheme, def-locally-closed-immersion, lem-closed-immersion-local-on-target, thm-affine-fibre-product-tensor-ring, thm-affine-closed-immersions-quotient-rings, lem-fibre-product-open-restriction, lem-points-of-scheme-fibre-product-residue-tensors]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Sections 11.3.1-2, printed pp.306-307"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

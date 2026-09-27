@@ -2,7 +2,7 @@
 id: def-convolution-on-cc-and-l1-of-a-group
 kind: definition
 title: "Convolution on L1 of a locally compact group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compactly-supported-convolution-on-a-group, lem-l1-convolution-norm-inequality, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-axiom-of-choice]
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§5.3, printed pp. 225–230"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

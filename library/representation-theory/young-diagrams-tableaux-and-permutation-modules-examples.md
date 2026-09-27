@@ -1,7 +1,7 @@
 ---
 page: young-diagrams-tableaux-and-permutation-modules-examples
 title: "Young Diagrams Tableaux and Permutation Modules — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-partitions-and-dominance-through-size-five, ex-removable-nodes-and-row-endpoints, ex-young-permutation-modules-for-row-and-column-partitions, ex-semistandard-tableaux-and-small-kostka-numbers]
 ---

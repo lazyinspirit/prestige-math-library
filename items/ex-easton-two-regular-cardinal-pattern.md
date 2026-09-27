@@ -2,7 +2,7 @@
 id: ex-easton-two-regular-cardinal-pattern
 kind: example
 title: A two-coordinate Easton pattern
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-set-easton-product-realizes-regular-pattern, def-easton-function, def-easton-support-product, def-aleph-and-beth-hierarchies, thm-regularity-of-the-alephs, thm-cofinality-basics, def-cofinality, def-axiom-of-choice, def-ordered-field]
@@ -18,7 +18,8 @@ sources:
     - title: "T. Jech, Set Theory, Chapter 15 (the set-sized Easton product and its realization computation), printed pp.233-235"
       url: "https://doi.org/10.1007/978-3-662-22400-7"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

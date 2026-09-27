@@ -2,7 +2,7 @@
 id: def-qbf-arithmetization-operators
 kind: definition
 title: "Field arithmetization of QBF quantifiers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-arithmetization-of-a-boolean-formula, def-quantified-boolean-formula-and-tqbf, def-field]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
 sources:
   scraped: []

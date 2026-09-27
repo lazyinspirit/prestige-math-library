@@ -2,7 +2,7 @@
 id: def-weyl-group-and-length-for-finite-gl-n
 kind: definition
 title: Permutation Weyl group and inversion length
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-standard-subgroups-of-gl-n-over-a-finite-field, def-compositions-partial-flags-and-standard-parabolics, def-symmetric-group, def-subgroup, def-normal-subgroup, def-quotient-group, lem-symmetric-group-is-a-group, thm-matrix-multiplication-laws, cor-general-linear-group-is-a-group, thm-adjacent-transpositions-generate-the-symmetric-group]
@@ -19,6 +19,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Sections 4.7 and 5.3, printed pp. 38-39 and 46"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

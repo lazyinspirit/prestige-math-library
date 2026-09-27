@@ -2,7 +2,7 @@
 id: def-positive-braid-monoid
 kind: definition
 title: "Positive braid monoid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-braid-group-by-the-artin-presentation, def-semigroup-and-monoid,
@@ -23,6 +23,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 5.1, author manuscript pp. 61-62"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

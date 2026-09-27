@@ -2,7 +2,7 @@
 id: thm-split-grothendieck-group-of-the-soergel-category-is-the-type-a-hecke-algebra
 kind: theorem
 title: "The split Grothendieck group of the Soergel category is the type-A Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-diagrammatic-character-is-the-split-k-zero-hecke-isomorphism, thm-type-a-diagrammatic-and-bimodule-soergel-categories-are-equivalent, lem-the-rank-one-soergel-bimodule-square-splits, def-type-a-hecke-algebra-in-soergel-normalization, lem-type-a-hecke-standard-basis-for-soergel-comparison, def-split-grothendieck-rings-of-type-a-soergel-categories, def-the-type-a-soergel-category, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor]
@@ -21,6 +21,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §§2–5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

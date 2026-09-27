@@ -2,7 +2,7 @@
 id: "thm-flasque-sheaves-acyclic"
 kind: "theorem"
 title: "Flasque abelian sheaves are Γ-acyclic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-acyclic-sheaf-global-sections, def-flasque-sheaf, lem-injective-sheaves-flasque, lem-flasque-kernel-lifts-quotient-sections, thm-long-exact-sequence-sheaf-cohomology, thm-abelian-sheaves-have-enough-injectives, def-axiom-of-choice, prop-positive-right-derived-functors-vanish-on-injective-objects, thm-zero-sheaf-cohomology-global-sections, def-sheaf-cohomology-derived-global-sections, def-injective-object, thm-choice-implies-dependent-implies-countable-choice, thm-abelian-sheaves-form-abelian-category, thm-exactness-of-sheaves-stalkwise, def-exact-sequence-sheaves, lem-sheaf-section-over-empty-set-terminal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

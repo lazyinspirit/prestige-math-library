@@ -2,7 +2,7 @@
 id: ex-unitriangular-group-of-order-p-cubed-is-an-m-group
 kind: example
 title: "The order-$p^{3}$ unitriangular group is an M-group"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-monomial-representation-and-m-group", "thm-clifford-correspondence", "cor-the-regular-character-gives-the-sum-of-squares-formula", "def-heisenberg-group-of-order-p-cubed", "prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed", "def-conjugate-representation-and-inertia-group", "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional", "cor-cyclotomic-field-splits-a-finite-group", "thm-complex-nth-roots-and-roots-of-unity", "thm-z-mod-p-is-a-field"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Tammo tom Dieck, Representation Theory — (4.2.4)–(4.2.7), printed pp. 55–57; §4.3, printed pp. 57–59"
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
 proof_strategy: direct
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

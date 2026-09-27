@@ -2,7 +2,7 @@
 id: lem-largest-entry-of-a-standard-tableau-is-removable
 kind: lemma
 title: The largest standard entry lies in a removable box
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-young-tableau-standard-tableau-and-shape, def-removable-and-addable-nodes-of-a-partition]
@@ -20,6 +20,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups - Chapter 2, printed pp. 7-8"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

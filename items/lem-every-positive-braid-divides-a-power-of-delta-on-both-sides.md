@@ -2,7 +2,7 @@
 id: lem-every-positive-braid-divides-a-power-of-delta-on-both-sides
 kind: lemma
 title: "Every positive braid divides a power of the half twist on both sides"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-each-artin-atom-divides-delta-on-both-sides,
@@ -29,6 +29,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, Section 1.3, printed pp. 439-440"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

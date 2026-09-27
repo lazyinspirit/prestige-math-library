@@ -2,7 +2,7 @@
 id: lem-right-translation-scales-left-haar-measure
 kind: lemma
 title: "Right translation scales left Haar measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-existence-of-left-and-right-haar-measures, thm-uniqueness-of-left-haar-measure-up-to-scale, lem-translations-preserve-compactly-supported-continuous-functions, def-left-haar-integral-and-left-haar-measure, def-borel-sigma-algebra, thm-compactness-under-continuous-maps, thm-monotone-convergence-for-the-integral, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

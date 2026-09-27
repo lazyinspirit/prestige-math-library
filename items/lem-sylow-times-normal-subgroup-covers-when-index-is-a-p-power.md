@@ -2,7 +2,7 @@
 id: lem-sylow-times-normal-subgroup-covers-when-index-is-a-p-power
 kind: lemma
 title: "Sylow times normal subgroup covers when the index is a p-power"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-subgroup, def-sylow-p-subgroup, def-quotient-group, cor-order-of-a-quotient-group, thm-lagrange, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, lem-product-with-normal-subgroup, thm-second-isomorphism-theorem-groups, def-p-adic-valuation]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

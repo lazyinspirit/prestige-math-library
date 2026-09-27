@@ -1,7 +1,7 @@
 ---
 name: combinatorics
 title: Combinatorics
-status: draft
+status: published
 ---
 
 Combinatorics here is finite mathematics done to the standard of the infinite

@@ -2,7 +2,7 @@
 id: def-locally-closed-immersion
 kind: definition
 title: Immersion of schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-open-immersion-schemes, def-closed-immersion-schemes]
@@ -17,6 +17,7 @@ sources:
     - title: "The Stacks Project, Schemes, Definition 26.10.2(5) and Section 26.21.2, printed pp.18, 39-40"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

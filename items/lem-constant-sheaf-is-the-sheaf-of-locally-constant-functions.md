@@ -2,7 +2,7 @@
 id: "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions"
 kind: "lemma"
 title: "The constant sheaf is the sheaf of locally constant functions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-presheaf-on-topological-space, def-morphism-of-presheaves, def-sheaf-on-topological-space, def-presheaf-of-groups-rings-modules, def-sheafification, def-presheaf-plus-construction, thm-sheafification-universal-property, thm-sheafification-preserves-stalks, def-stalk-of-presheaf, lem-locally-constant-functions-form-a-sheaf, thm-sheaf-morphism-isomorphism-stalkwise, def-limit-and-colimit-of-a-diagram, def-filtered-category-and-filtered-colimit, thm-abelian-sheaves-form-abelian-category, def-germ-of-section]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

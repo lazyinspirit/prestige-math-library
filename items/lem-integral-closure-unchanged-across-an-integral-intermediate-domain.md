@@ -2,7 +2,7 @@
 id: lem-integral-closure-unchanged-across-an-integral-intermediate-domain
 kind: lemma
 title: "Integral closure is unchanged across an integral intermediate domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-integral-closure-and-integrally-closed-domain, thm-transitivity-of-integrality, def-integral-element-and-algebraic-integer, def-integral-ring-extension, cor-integral-elements-form-a-subring, def-zero-divisor-and-integral-domain]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-binary-resultant-zero-iff-common-geometric-projective-root
 kind: theorem
 title: "The binary Sylvester resultant detects a common geometric projective root"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,6 +19,8 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, Proposition 7.28, p. 167"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

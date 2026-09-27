@@ -2,7 +2,7 @@
 id: lem-the-type-a-diagrammatic-relations-hold-for-soergel-bimodules
 kind: lemma
 title: "The type-A diagrammatic relations hold for Soergel bimodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, thm-rank-two-type-a-soergel-bimodule-decompositions, lem-type-a-soergel-frobenius-biadjunction, lem-distant-soergel-generators-commute, def-type-a-soergel-bimodule-for-a-simple-reflection, def-type-a-reflection-realization-and-polynomial-ring, def-the-type-a-soergel-category]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §5.1, PDF pp. 37–40"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

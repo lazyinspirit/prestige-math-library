@@ -2,7 +2,7 @@
 id: lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise
 kind: lemma
 title: Graded modules with degree-zero maps form an abelian category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-abelian-category, def-additive-category, thm-first-isomorphism-theorem-modules, thm-module-kernel-image-and-injectivity, def-module-homomorphism-kernel-image-and-cokernel, thm-quotient-module-universal-property, thm-universal-property-of-module-direct-sums, def-direct-sum-of-a-family-of-modules]
@@ -20,6 +20,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.56, tag 00JL"
       url: "https://stacks.math.columbia.edu/tag/00JL"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: "thm-conormal-sequence-closed-immersion"
 kind: "theorem"
 title: "Conormal sequence for a closed immersion"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-conormal-exact-sequence-algebra", "lem-sheaf-differentials-affine-compatibility", "def-pullback-module-ringed-spaces", "thm-exactness-of-sheaves-stalkwise", "def-closed-immersion-schemes", "def-ideal-sheaf", "thm-quasi-coherent-ideal-closed-subscheme-correspondence", "def-sheaf-tensor-product", "def-kernel-cokernel-image-sheaves", "thm-sheaf-differentials-universal-property", "thm-pullback-pushforward-module-adjunction", "thm-localisation-of-modules-is-exact", "lem-differentials-polynomial-algebra-free", "def-scheme-over-base", "def-stalk-of-presheaf", "def-inverse-image-presheaf-and-sheaf"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UT"
     - title: "Vakil 22.2.12 and 22.2.15, pp.579-581"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

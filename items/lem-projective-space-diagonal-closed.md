@@ -2,7 +2,7 @@
 id: lem-projective-space-diagonal-closed
 kind: lemma
 title: The relative projective-space diagonal is closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-relative-projective-space-standard-charts, thm-separatedness-gluing-overlap-criterion, lem-separated-local-on-base, thm-affine-fibre-product-tensor-ring, def-separated-morphism-schemes, def-diagonal-morphism-scheme]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.3.8, printed pp.309-310"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

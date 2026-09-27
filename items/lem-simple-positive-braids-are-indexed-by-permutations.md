@@ -2,7 +2,7 @@
 id: lem-simple-positive-braids-are-indexed-by-permutations
 kind: lemma
 title: "Simple positive braids are indexed by permutations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-garside-half-twist-and-simple-positive-braid,
@@ -32,6 +32,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, printed pp. 433-438"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

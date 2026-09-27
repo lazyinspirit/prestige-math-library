@@ -2,7 +2,7 @@
 id: cor-no-common-component-projective-plane-intersection-is-zero-dimensional
 kind: corollary
 title: "A plane intersection with no common component is nonempty and zero-dimensional"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,6 +21,8 @@ sources:
     - title: "Andreas Gathmann, Algebraic Geometry class notes (2002), Section 6.1 (Bezout and complete intersections), pp. 92-95"
       url: "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

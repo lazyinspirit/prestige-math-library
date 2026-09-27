@@ -2,7 +2,7 @@
 id: cex-ordinary-acyclicity-forgets-basis-and-group-ring-torsion
 kind: counterexample
 title: "Ordinary acyclicity forgets nonzero group-ring torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [ex-torsion-of-a-two-term-based-contractible-complex, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, lem-every-whitehead-class-is-realized-by-a-finite-cw-homotopy-equivalence, thm-a-finite-cw-homotopy-equivalence-is-simple-if-and-only-if-its-whitehead-torsion-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

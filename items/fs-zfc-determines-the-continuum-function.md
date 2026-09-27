@@ -2,7 +2,7 @@
 id: fs-zfc-determines-the-continuum-function
 kind: false-statement
 title: "FALSE: ZFC fixes the value of $2^{\\kappa}$ for every infinite regular $\\kappa$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-higher-cohen-forcing-violates-gch, thm-formal-consistency-of-zfc-plus-gch-from-zf, cor-positive-relative-consistency-of-ch-and-gch, cor-formal-negative-consistency-of-ch-and-gch, def-axiom-of-choice, def-aleph-and-beth-hierarchies, def-cardinal, def-cardinal-arithmetic]
@@ -18,7 +18,8 @@ sources:
     - title: "T. Jech, Set Theory, Chapter 15 (Easton's theorem and the independence of the continuum function), printed pp.232-237"
       url: "https://doi.org/10.1007/978-3-662-22400-7"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

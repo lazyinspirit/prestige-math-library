@@ -2,7 +2,7 @@
 id: "lem-sheaf-supported-on-a-closed-subset-is-a-pushforward"
 kind: "lemma"
 title: "A sheaf with no stalks off a closed subset is a pushforward"
-status: draft
+status: published
 origin: pipeline
 deps: [def-direct-image-sheaf, lem-direct-image-is-sheaf, def-stalk-of-presheaf, lem-sheaf-section-over-empty-set-terminal, def-subspace-topology-top, thm-inverse-direct-image-adjunction, lem-stalk-inverse-image-sheaf, thm-sheaf-morphism-isomorphism-stalkwise, def-sheaf-on-topological-space, thm-abelian-sheaves-form-abelian-category, def-topological-space, def-restriction-sheaf-open-subspace]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

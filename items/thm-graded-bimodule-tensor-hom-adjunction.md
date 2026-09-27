@@ -2,7 +2,7 @@
 id: thm-graded-bimodule-tensor-hom-adjunction
 kind: theorem
 title: Associative and graded bimodule tensor–Hom adjunction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-balanced-tensor-product-and-homogeneous-hom, thm-universal-property-of-module-tensor-products, thm-bimodule-actions-induced-on-tensor-products]
@@ -20,6 +20,7 @@ sources:
     - title: "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras (2009), §2.2, printed pp. 6-7"
       url: "https://arxiv.org/pdf/0909.4844"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

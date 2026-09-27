@@ -2,7 +2,7 @@
 id: "lem-differentials-localization"
 kind: "lemma"
 title: "Kähler differentials commute with localization"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["cor-derivations-represented-by-differentials", "def-localisation-of-a-module", "thm-universal-property-localisation-of-a-module", "thm-universal-property-of-localisation", "def-derivation-algebra", "def-multiplicative-subset-and-localisation"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §22.2.L, pp.583–584"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-a-nonunit-differential-entry-cannot-be-gaussian-cancelled
 kind: counterexample
 title: The isolated differential 2 on the integers cannot be cancelled
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex, def-invertible-differential-block-and-schur-complement-reduction, def-complex-homotopy-and-contractibility-in-an-additive-category, def-cycle-and-boundary-subobjects-of-a-complex, lem-the-boundary-subobject-factors-through-the-cycle-subobject, def-homology-object-of-a-chain-complex]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

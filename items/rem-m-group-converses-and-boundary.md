@@ -2,7 +2,7 @@
 id: rem-m-group-converses-and-boundary
 kind: remark
 title: Implications and limits for M-groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-monomial-representation-and-m-group, thm-supersolvable-groups-are-m-groups, cor-m-groups-are-solvable, thm-monomial-induction-for-virtual-characters, def-quaternion-group-of-order-eight, def-derived-series-solvable-group-and-derived-length, cor-dimension-of-an-induced-finite-dimensional-representation]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

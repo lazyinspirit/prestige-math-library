@@ -2,7 +2,7 @@
 id: lem-normal-p-complements-pass-to-subgroups-and-p-local-normalizers
 kind: lemma
 title: "Normal p complements pass to subgroups and p local normalizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-p-complement-and-p-nilpotent-group, prop-equivalent-forms-of-having-a-normal-p-complement, def-p-local-normalizer-for-normal-complement-theory, thm-second-isomorphism-theorem-groups, thm-third-isomorphism-theorem-groups, thm-first-isomorphism-theorem-groups, lem-product-with-normal-subgroup, thm-lagrange, cor-order-of-a-quotient-group, thm-image-subgroup-and-kernel-normal, def-normal-subgroup, def-quotient-group, def-subgroup, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, def-normalizer-of-a-subgroup]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: def-reed-solomon-outer-code-and-binary-linear-inner-code
 kind: definition
 title: "Reed-Solomon outer code and binary linear inner code"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-explicit-constant-rate-constant-distance-code, thm-existence-of-finite-fields, cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree, thm-simple-algebraic-extension-quotient-power-basis-and-degree]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

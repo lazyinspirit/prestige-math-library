@@ -2,7 +2,7 @@
 id: "thm-mayer-vietoris-sheaf-cohomology"
 kind: "theorem"
 title: "Mayer–Vietoris sequence for sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-two-open-cover-cech-complex, lem-injective-sheaves-flasque, thm-flasque-sheaves-acyclic, thm-long-exact-sequence-in-cohomology, def-sheaf-cohomology-derived-global-sections, def-axiom-of-choice, thm-abelian-sheaves-have-enough-injectives, thm-acyclic-resolution-theorem-for-right-derived-functors, thm-choice-implies-dependent-implies-countable-choice, thm-zero-sheaf-cohomology-global-sections, def-global-sections-functor-sheaves, lem-global-sections-left-exact, def-sheaf-on-topological-space, def-injective-object, lem-cohomology-functoriality-sheaf-and-space, def-restriction-sheaf-open-subspace, thm-extension-by-zero-adjunction-exactness]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "The Stacks Project, Section 6.31 (Tag 009Z), extension by zero adjunction"
       url: https://stacks.math.columbia.edu/tag/009Z
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

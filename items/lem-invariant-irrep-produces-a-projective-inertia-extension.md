@@ -2,13 +2,14 @@
 id: lem-invariant-irrep-produces-a-projective-inertia-extension
 kind: lemma
 title: "An invariant irreducible normal representation yields projective inertia operators"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-projective-representation-and-factor-set", "lem-factor-set-is-a-normalized-two-cocycle", "def-conjugate-representation-and-inertia-group", "def-conjugate-representation-and-conjugate-character", "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars", "thm-complex-representations-are-determined-by-their-characters", "def-normalized-two-cocycle-and-two-coboundary"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

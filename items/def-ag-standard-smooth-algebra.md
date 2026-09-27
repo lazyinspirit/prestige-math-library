@@ -2,13 +2,14 @@
 id: "def-ag-standard-smooth-algebra"
 kind: "definition"
 title: "Standard smooth presentations and locally standard smooth maps"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-polynomial-quotient-differentials", "def-polynomial-ring-on-a-family-of-indeterminates", "def-finitely-presented-module-and-algebra"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

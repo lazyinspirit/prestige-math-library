@@ -2,13 +2,14 @@
 id: def-monomial-representation-and-m-group
 kind: definition
 title: "Monomial representations, monomial characters, and M-groups"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subgroup, def-finite-dimensional-representation-of-a-group-over-a-field, def-induced-r-linear-g-module-by-h-covariant-functions, def-induced-character-of-a-complex-representation, def-irreducible-complex-character, def-character-of-a-complex-representation, thm-complex-representations-are-determined-by-their-characters, cor-dimension-of-an-induced-finite-dimensional-representation]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

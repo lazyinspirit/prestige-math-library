@@ -2,13 +2,14 @@
 id: def-twisted-group-algebra-for-a-factor-set
 kind: definition
 title: "Twisted group algebra of a factor set"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-factor-set-is-a-normalized-two-cocycle"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

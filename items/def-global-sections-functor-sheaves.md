@@ -2,13 +2,14 @@
 id: "def-global-sections-functor-sheaves"
 kind: "definition"
 title: "Global sections of an abelian sheaf"
-status: draft
+status: published
 origin: pipeline
 deps: [def-section-restriction-and-global-section, lem-global-sections-left-exact, thm-abelian-sheaves-form-abelian-category, def-morphism-of-presheaves]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

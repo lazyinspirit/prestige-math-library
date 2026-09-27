@@ -2,7 +2,7 @@
 id: "lem-ag-standard-smooth-regular-geometric-fibres"
 kind: "lemma"
 title: "Fibres of standard smooth algebras are regular of relative dimension"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "lem-ag-base-change-of-standard-smooth-presentations", "lem-ag-standard-smooth-fibre-regular-parameters", "cor-minimal-prime-has-height-zero", "prop-localisation-zero-equality-and-kernel-criteria", "thm-prime-spectrum-of-a-localisation-bijection", "prop-iterated-localisation", "thm-localisation-commutes-with-quotients", "cor-height-plus-quotient-dimension-affine-domain", "cor-dimension-of-a-finite-polynomial-ring-over-a-field", "thm-irreducible-components-and-minimal-primes", "lem-quotient-spectrum-map-is-closed", "def-height-of-a-prime-ideal", "thm-affine-domain-dimension-transcendence-degree", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §25.6.2–3, pp.678–679"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

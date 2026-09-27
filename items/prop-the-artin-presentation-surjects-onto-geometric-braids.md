@@ -2,7 +2,7 @@
 id: prop-the-artin-presentation-surjects-onto-geometric-braids
 kind: proposition
 title: "The Artin presentation surjects onto the geometric braid group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-braid-group-by-the-artin-presentation, def-group-presentation,
@@ -27,6 +27,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, sections 1.2-1.3, author manuscript pp. 5-7"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

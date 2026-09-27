@@ -2,7 +2,7 @@
 id: "ex-skyscraper-sheaf-acyclic"
 kind: "example"
 title: "A skyscraper sheaf is flasque and acyclic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-skyscraper-sheaf-abelian-group, def-flasque-sheaf, thm-flasque-sheaves-acyclic, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-sheaf-cohomology-derived-global-sections, def-sheaf-on-topological-space, def-section-restriction-and-global-section]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: "cex-constant-sheaf-not-flasque"
 kind: "counterexample"
 title: "The constant sheaf of integers on the line is not flasque"
-status: draft
+status: published
 origin: pipeline
 deps: [def-flasque-sheaf, def-sheaf-on-topological-space, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-open-and-closed-in-r, def-topological-space, def-interval, cor-connected-subsets-of-the-line, def-connected-space, ex-flasque-sheaf-all-functions]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement refuted

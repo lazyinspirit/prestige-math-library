@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-characters-for-combinatorics-examples
 title: "Finite Abelian Characters for Combinatorics — Examples"
-status: draft
+status: published
 requires: [finite-abelian-characters-for-combinatorics]
 items: []
 examples: [ex-characters-of-z-mod-five-and-their-orthogonality]

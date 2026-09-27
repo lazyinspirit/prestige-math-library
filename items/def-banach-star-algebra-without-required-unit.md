@@ -2,7 +2,7 @@
 id: def-banach-star-algebra-without-required-unit
 kind: definition
 title: "Banach star-algebra without a required unit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-c-star-algebra, def-banach-space, def-norm-and-normed-space]
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§5.3, printed pp. 225–230"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

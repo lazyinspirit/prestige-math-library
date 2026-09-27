@@ -2,7 +2,7 @@
 id: cex-zariski-space-nonhausdorff-yet-separated-scheme
 kind: counterexample
 title: A separated scheme whose point space is not Hausdorff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-affine-schemes-separated, rem-hausdorff-analogy-limited]
@@ -20,6 +20,7 @@ sources:
     - title: "The Stacks Project, Schemes, Section 26.21 introduction, printed pp.39-40"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

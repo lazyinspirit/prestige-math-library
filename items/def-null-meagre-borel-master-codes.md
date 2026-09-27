@@ -2,7 +2,7 @@
 id: def-null-meagre-borel-master-codes
 kind: definition
 title: Borel master codes for null and meagre sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-null-and-meagre-cardinal-invariants, def-product-topology, lem-cantor-coin-measure-from-binary-expansion, def-nowhere-dense-meagre-and-residual-subsets, def-borel-sigma-algebra, thm-continuity-from-above-for-measures, thm-finite-and-countable-subadditivity-of-measures, thm-geometric-series, def-series, def-measure, def-countable-choice, def-axiom-of-choice, def-countable, def-finite-cardinality, def-integer-power, def-generated-sigma-algebra, def-algebra-of-subsets]
@@ -17,6 +17,7 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 3 (coding of null and meagre sets, the slalom order), printed pp.5-7"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

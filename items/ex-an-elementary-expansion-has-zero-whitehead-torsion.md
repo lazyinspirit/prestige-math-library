@@ -2,7 +2,7 @@
 id: ex-an-elementary-expansion-has-zero-whitehead-torsion
 kind: example
 title: "A free-face interval expansion has zero torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [lem-an-elementary-expansion-has-zero-whitehead-torsion, def-elementary-expansion-and-collapse-of-finite-cw-complexes, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, def-cell-attachment-by-a-characteristic-map, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, cor-convex-subsets-of-rn-are-contractible, lem-contractibility-implies-trivial-fundamental-group, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant, def-based-cellular-chain-complex-of-a-universal-cover]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

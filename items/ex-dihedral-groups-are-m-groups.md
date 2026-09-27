@@ -2,13 +2,14 @@
 id: ex-dihedral-groups-are-m-groups
 kind: example
 title: "All finite dihedral groups are M-groups"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-monomial-representation-and-m-group", "thm-supersolvable-groups-are-m-groups", "thm-clifford-correspondence", "cor-dihedral-groups-as-semidirect-products", "thm-clifford-homogeneous-restriction-formula", "def-conjugate-representation-and-inertia-group", "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional", "cor-cyclotomic-field-splits-a-finite-group", "prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient", "thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel", "cor-index-tower-finite", "def-induced-r-linear-g-module-by-h-covariant-functions", "cor-dimension-of-an-induced-finite-dimensional-representation", "thm-complex-nth-roots-and-roots-of-unity", "thm-linear-congruence-solvability-and-solution-count"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: finite-abelian-characters-for-combinatorics
 title: "Finite Abelian Characters for Combinatorics"
-status: draft
+status: published
 requires: [characters-and-the-orthogonality-relations, cyclic-groups-and-direct-products, the-complex-exponential-and-eulers-formula, finite-counting-and-binomial-coefficients]
 items: [def-additive-character-of-a-finite-abelian-group, lem-additive-characters-are-one-dimensional-complex-representations, lem-additive-character-orthogonality-from-representation-orthogonality]
 examples: []

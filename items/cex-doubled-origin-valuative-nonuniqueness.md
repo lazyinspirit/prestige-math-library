@@ -2,7 +2,7 @@
 id: cex-doubled-origin-valuative-nonuniqueness
 kind: counterexample
 title: Two DVR lifts of one diagram over the doubled-origin line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-doubled-origin-not-separated, def-valuative-diagram-separatedness, def-discrete-valuation-ring, def-discrete-valuation, def-valuation-on-a-field]
@@ -20,6 +20,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.22.2 and Example 26.22.2, printed p.44"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-ordered-arithmetization-evaluates-to-the-truth-value
 kind: lemma
 title: "The ordered arithmetization evaluates to the quantified Boolean truth value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-multilinearization-operator, def-qbf-arithmetization-operators, lem-multilinearization-preserves-boolean-values, def-quantified-boolean-formula-and-tqbf, def-arithmetization-of-a-boolean-formula, lem-arithmetization-agrees-on-boolean-inputs]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

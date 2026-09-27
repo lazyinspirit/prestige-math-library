@@ -1,7 +1,7 @@
 ---
 name: category-theory
 title: Category Theory
-status: draft
+status: published
 ---
 
 A category is objects, arrows and composition, and the point of the definition

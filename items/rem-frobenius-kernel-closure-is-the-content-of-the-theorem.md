@@ -2,7 +2,7 @@
 id: rem-frobenius-kernel-closure-is-the-content-of-the-theorem
 kind: remark
 title: "Frobenius kernel closure is the content of the theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-frobenius-kernel-set, thm-frobenius-kernel-theorem, lem-frobenius-kernel-cardinality, def-frobenius-complement-and-frobenius-group]
@@ -18,6 +18,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

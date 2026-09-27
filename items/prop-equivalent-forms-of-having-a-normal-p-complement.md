@@ -2,7 +2,7 @@
 id: prop-equivalent-forms-of-having-a-normal-p-complement
 kind: proposition
 title: "Equivalent forms of having a normal p complement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-p-complement-and-p-nilpotent-group, def-p-prime-core-of-a-finite-group, thm-sylow-first-theorem, def-sylow-p-subgroup, thm-lagrange, def-quotient-group, cor-order-of-a-quotient-group, thm-first-isomorphism-theorem-groups, thm-image-subgroup-and-kernel-normal, thm-second-isomorphism-theorem-groups, lem-product-with-normal-subgroup, lem-order-characterisation, cor-order-of-element-divides-group-order, lem-group-homomorphism-basic-properties, thm-cauchys-theorem-for-finite-groups, lem-every-integer-above-one-has-a-prime-divisor, lem-divisibility-basic, def-generated-subgroup, thm-conjugation-is-an-automorphism, def-internal-semidirect-product, def-order-in-a-group, def-normal-subgroup, lem-group-power-laws, def-finite-p-group]
@@ -19,6 +19,7 @@ sources:
       url: "https://web.mat.bham.ac.uk/P.J.Flavell/fusion.pdf"
       locator: "§§2–5, PDF pp. 1–15"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-artin-atoms-have-explicit-left-and-right-lcms-and-complements
 kind: lemma
 title: "Artin atoms have explicit left and right lcms and complements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-artin-right-complements-and-word-reversing,
@@ -26,6 +26,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Example 4.20, printed pp. 66-67"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

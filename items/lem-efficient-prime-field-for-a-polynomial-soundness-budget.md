@@ -2,7 +2,7 @@
 id: lem-efficient-prime-field-for-a-polynomial-soundness-budget
 kind: lemma
 title: "A polynomial-size prime field meets the soundness budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-prime, thm-standard-representatives-modulo-n, thm-z-mod-p-is-a-field, thm-bertrands-postulate]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

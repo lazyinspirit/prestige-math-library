@@ -2,7 +2,7 @@
 id: thm-ip-can-be-given-perfect-completeness
 kind: theorem
 title: "IP admits perfect completeness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-ip-equals-pspace, thm-ip-is-contained-in-pspace, thm-pspace-is-contained-in-ip]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

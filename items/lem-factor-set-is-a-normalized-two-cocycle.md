@@ -2,13 +2,14 @@
 id: lem-factor-set-is-a-normalized-two-cocycle
 kind: lemma
 title: "The factor set satisfies the two-cocycle equation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-projective-representation-and-factor-set", "def-normalized-two-cocycle-and-two-coboundary"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: homological-gaussian-elimination-examples
 title: "Homological Gaussian Elimination — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-two-by-two-unit-pivot-fixes-the-minus-schur-sign, ex-neighbouring-differentials-after-a-gaussian-basis-change, ex-two-finite-cancellation-orders-and-their-composite-retracts, cex-a-nonunit-differential-entry-cannot-be-gaussian-cancelled, cex-gaussian-reduction-is-not-strictly-natural-for-arbitrary-chain-maps]
 ---

@@ -2,7 +2,7 @@
 id: "ex-ag-projection-submersion-parameters"
 kind: "example"
 title: "Geometric parameters of a projection of affine spaces"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "lem-ag-polynomial-quotient-differentials", "lem-ag-separable-residue-cotangent-sequence", "cor-dimension-of-a-finite-polynomial-ring-over-a-field", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "thm-right-exactness-of-tensor-products"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

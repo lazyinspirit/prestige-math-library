@@ -2,7 +2,7 @@
 id: lem-complete-intersection-hilbert-series-two-plane-forms
 kind: lemma
 title: "Hilbert series and eventual Hilbert value of a two-form plane complete intersection"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "Hilbert series of two plane forms"
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

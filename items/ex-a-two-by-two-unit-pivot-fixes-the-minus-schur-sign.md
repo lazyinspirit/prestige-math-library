@@ -2,7 +2,7 @@
 id: ex-a-two-by-two-unit-pivot-fixes-the-minus-schur-sign
 kind: example
 title: A unit pivot forces the minus Schur sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, def-invertible-differential-block-and-schur-complement-reduction, cor-homological-gaussian-elimination-preserves-homotopy-type-and-homology, def-homology-object-of-a-chain-complex]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-the-whitehead-group-of-the-trivial-group-is-zero
 kind: example
 title: "The Whitehead group of the trivial group is zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, thm-bezout-identity, thm-division-algorithm-in-z, thm-a-finite-cw-homotopy-equivalence-is-simple-if-and-only-if-its-whitehead-torsion-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -1,7 +1,7 @@
 ---
 page: "algebraic-differentials-separability-and-smooth-local-presentations-examples"
 title: "Algebraic Differentials Separability and Smooth Local Presentations — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-ag-differentials-polynomial-and-hypersurface", "cex-ag-differentials-arbitrary-map-is-not-base-change", "ex-ag-separable-and-inseparable-field-differentials", "ex-ag-standard-smooth-hypersurface-chart", "ex-ag-field-change-inseparable-thickening", "cex-ag-regular-factors-product-not-regular", "ex-ag-projection-submersion-parameters"]
 ---

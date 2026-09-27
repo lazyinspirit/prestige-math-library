@@ -2,7 +2,7 @@
 id: lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone
 kind: lemma
 title: "A lifted finite CW equivalence has a contractible group-ring mapping cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-based-cellular-chain-complex-of-a-universal-cover, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear, thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible, thm-cellular-approximation-for-maps-of-cw-pairs, lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, prop-relative-cw-inclusions-are-cofibrations, def-homotopy-equivalence, def-mapping-cone-of-a-chain-map, def-chain-homotopy-equivalence, def-chain-homotopy, prop-chain-homotopy-is-an-equivalence-relation, lem-chain-homotopy-is-compatible-with-addition-and-composition, def-contractible-complex, def-direct-sum-of-a-family-of-modules, def-chain-complex-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

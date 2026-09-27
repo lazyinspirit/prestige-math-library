@@ -2,7 +2,7 @@
 id: def-geometric-braid-with-setwise-endpoints
 kind: definition
 title: "Geometric braids in the disc with setwise endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-product-topology, def-subspace-topology-top, def-continuous-map-top,
@@ -23,6 +23,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.1, author manuscript pp. 3-5"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

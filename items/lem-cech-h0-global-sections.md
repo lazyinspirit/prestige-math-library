@@ -2,7 +2,7 @@
 id: "lem-cech-h0-global-sections"
 kind: "lemma"
 title: "Čech H0 equals global sections"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cohomology-open-cover, def-cech-cochain-complex-open-cover, def-sheaf-on-topological-space, def-global-sections-functor-sheaves, def-section-restriction-and-global-section, lem-sheaf-section-over-empty-set-terminal]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

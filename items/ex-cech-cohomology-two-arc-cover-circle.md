@@ -2,7 +2,7 @@
 id: "ex-cech-cohomology-two-arc-cover-circle"
 kind: "example"
 title: "Čech cohomology of the two-arc cover of the circle"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-two-open-cover-cech-complex, def-cech-cohomology-open-cover, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, lem-cech-h0-global-sections, def-circle-as-real-line-mod-integers, def-quotient-topology, cor-connected-subsets-of-the-line, def-interval, thm-continuous-image-of-a-connected-space, def-connected-space, thm-first-isomorphism-theorem-groups, def-sheaf-on-topological-space, def-continuous-map-top, def-subspace-topology-top]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

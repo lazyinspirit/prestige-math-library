@@ -2,7 +2,7 @@
 id: "thm-ag-field-extension-of-schemes"
 kind: "theorem"
 title: "Extension of scalars of a scheme along a field extension"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-gluing-affine-schemes", "thm-affine-scheme-ring-anti-equivalence", "thm-sections-basic-open-affine-scheme", "lem-intersection-affine-opens-covered-principal-opens", "thm-localisation-of-modules-is-tensor-product", "thm-universal-property-of-localisation", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "thm-associativity-of-balanced-tensor-products", "def-residue-field-scheme-point", "def-scheme", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01IW"
     - title: "Stacks Algebra 10.131.12 and standard affine tensor base change"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

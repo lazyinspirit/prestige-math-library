@@ -2,7 +2,7 @@
 id: ex-ma-model-null-meagre-additivity-equals-continuum
 kind: example
 title: In the MA model the additivity of null and meagre equals the continuum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-omega-two-iteration-forces-ma-and-not-ch, thm-ma-small-unions-of-null-sets, thm-ma-small-unions-of-meagre-sets, def-null-and-meagre-cardinal-invariants, lem-basic-ideal-cardinal-inequalities, def-aleph-and-beth-hierarchies, def-cardinal-arithmetic, def-axiom-of-choice]
@@ -18,7 +18,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 4 (MA and the additivity of the ideals), printed pp.8-9"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

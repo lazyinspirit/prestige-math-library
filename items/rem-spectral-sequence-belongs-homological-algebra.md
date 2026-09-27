@@ -2,13 +2,14 @@
 id: "rem-spectral-sequence-belongs-homological-algebra"
 kind: "remark"
 title: "Spectral-sequence algebra is external to this pair"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-cech-to-sheaf-cohomology-comparison, thm-leray-acyclic-cover-theorem, lem-acyclic-rows-and-columns-of-cech-double-complex]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-powering-preserves-perfect-satisfiability
 kind: lemma
 title: "Powering preserves perfect satisfiability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-canonical-local-view-lift-preserves-perfect-satisfiability, def-constraint-graph-powering, def-constraint-graph-and-labeling-value]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

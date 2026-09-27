@@ -1,7 +1,7 @@
 ---
 page: geometric-braids-and-artin-generators-examples
 title: "Geometric Braids and Artin Generators — Examples"
-status: draft
+status: published
 requires: [geometric-braids-and-artin-generators, the-fundamental-group-of-the-circle]
 items: []
 examples: [ex-geometric-two-strand-braids-are-integer-twists,

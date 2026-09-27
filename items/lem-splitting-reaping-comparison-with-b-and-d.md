@@ -2,7 +2,7 @@
 id: lem-splitting-reaping-comparison-with-b-and-d
 kind: lemma
 title: Splitting and reaping comparisons with b and d
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-splitting-and-reaping-numbers, def-eventual-domination-bounding-and-dominating-numbers, lem-basic-bounding-and-dominating-relations, def-almost-inclusion-pseudointersection-and-tower, def-axiom-of-choice, def-cardinal-arithmetic, def-aleph-and-beth-hierarchies, thm-nat-linear-order, def-nat-order, thm-recursion, thm-well-ordering-principle, def-natural-numbers, def-countable]
@@ -20,7 +20,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 3, printed pp.2-12"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

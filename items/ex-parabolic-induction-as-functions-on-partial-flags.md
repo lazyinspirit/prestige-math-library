@@ -2,7 +2,7 @@
 id: ex-parabolic-induction-as-functions-on-partial-flags
 kind: example
 title: Parabolic induction of the trivial module as flag functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-harish-chandra-induction-and-restriction-for-finite-gl-n, def-compositions-partial-flags-and-standard-parabolics, thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets, def-trivial-regular-and-permutation-representations, thm-complete-flags-form-gl-n-over-b, def-group-action, def-standard-subgroups-of-gl-n-over-a-finite-field]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Definition 5.2, printed p. 42"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

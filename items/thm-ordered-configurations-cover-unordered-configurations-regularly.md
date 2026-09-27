@@ -2,7 +2,7 @@
 id: thm-ordered-configurations-cover-unordered-configurations-regularly
 kind: theorem
 title: "Ordered configuration spaces cover the unordered ones regularly with deck group $S_n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space, def-unordered-configuration-space,
@@ -37,6 +37,7 @@ sources:
     - title: "Fadell-Neuwirth, Configuration Spaces, section II Theorems 1 and 3, printed pp. 111-114"
       url: "https://tidsskrift.dk/math/article/download/10517/8538"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

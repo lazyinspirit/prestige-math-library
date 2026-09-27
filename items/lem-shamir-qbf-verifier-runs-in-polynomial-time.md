@@ -2,7 +2,7 @@
 id: lem-shamir-qbf-verifier-runs-in-polynomial-time
 kind: lemma
 title: "Shamir verifier runs in polynomial time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-shamir-protocol-for-tqbf, lem-each-round-has-polynomial-communication, lem-efficient-prime-field-for-a-polynomial-soundness-budget, def-interactive-proof-transcript-round-and-strategy]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

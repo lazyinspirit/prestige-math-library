@@ -2,7 +2,7 @@
 id: thm-set-easton-product-preserves-cardinals-and-cofinalities
 kind: theorem
 title: Set-sized Easton forcing preserves cardinals and cofinalities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-easton-function, def-easton-support-product, lem-easton-head-cc-and-tail-closure, lem-easton-head-tail-no-new-short-sequences, thm-chain-condition-preserves-cofinalities-and-cardinals, thm-cofinality-basics, def-cofinality, thm-forcing-preserves-ordinals, lem-lc-boolean-generic-zfc-and-ordinals, thm-forcing-preorders-have-regular-open-completions, def-aleph-and-beth-hierarchies, def-axiom-of-choice, def-dense-open-sets-and-model-generic-filters]
@@ -20,7 +20,8 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Corollary 56, PDF p.12"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

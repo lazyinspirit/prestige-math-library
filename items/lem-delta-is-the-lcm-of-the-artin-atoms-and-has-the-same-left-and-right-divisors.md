@@ -2,7 +2,7 @@
 id: lem-delta-is-the-lcm-of-the-artin-atoms-and-has-the-same-left-and-right-divisors
 kind: lemma
 title: "Delta is the lcm of the artin atoms and has the same left and right divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-simple-positive-braids-are-indexed-by-permutations,
@@ -28,6 +28,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, printed pp. 433-438"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

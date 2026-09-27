@@ -2,7 +2,7 @@
 id: "cex-ag-regular-factors-product-not-regular"
 kind: "counterexample"
 title: "Regular field factors can have a nonregular tensor product"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-purely-inseparable-extension", "def-regular-noetherian-ring", "def-embedding-dimension-and-regular-local-ring", "lem-regular-local-domain-induction", "def-axiom-of-choice", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "thm-coproduct-property-of-tensor-products-of-commutative-algebras"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra 10.166.1–2 (tags 0381, 0382)"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement refuted

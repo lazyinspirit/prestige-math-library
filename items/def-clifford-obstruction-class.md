@@ -2,13 +2,14 @@
 id: def-clifford-obstruction-class
 kind: definition
 title: "The Clifford obstruction class of an invariant irreducible representation"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-invariant-irrep-produces-a-projective-inertia-extension", "lem-rephasing-changes-the-factor-set-by-a-coboundary", "def-second-cohomology-by-factor-sets", "def-conjugate-representation-and-inertia-group"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

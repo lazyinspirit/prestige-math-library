@@ -2,7 +2,7 @@
 id: def-the-rank-two-longest-type-a-soergel-bimodule
 kind: definition
 title: "The rank-two longest type-A Soergel bimodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-reflection-realization-and-polynomial-ring, def-type-a-soergel-bimodule-for-a-simple-reflection, def-bott-samelson-bimodule-of-a-word, lem-type-a-reduced-words-are-connected-by-braid-moves]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §4.2, PDF pp. 21–24"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: lem-finite-purely-inseparable-rational-extension-envelope
 kind: lemma
 title: "Finite purely inseparable rational extensions admit a finite Frobenius envelope"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-purely-inseparable-extension, thm-finitely-generated-algebraic-extensions-are-finite, def-extension-degree-and-finite-extension, def-dimension, def-finitely-generated-field-extension, def-field-of-fractions, def-field-extension-generated-subfields-and-simple-extension, def-multivariate-polynomial-ring-by-iteration, cor-multivariate-polynomial-ring-over-a-domain-is-a-domain, thm-frobenius-endomorphism-and-finite-field-automorphism, lem-polynomial-factorisation-into-irreducibles, thm-polynomial-quotient-is-a-field-iff-irreducible, def-quotient-ring, thm-well-ordering-principle, lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power, lem-an-isomorphism-extends-across-a-simple-root-adjunction, thm-simple-algebraic-extension-quotient-power-basis-and-degree, def-ring-characteristic, thm-finite-field-extensions-are-algebraic, thm-tower-law-for-finite-field-extensions, def-algebraic-and-transcendental-elements, def-polynomial-evaluation-and-root]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

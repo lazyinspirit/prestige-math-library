@@ -2,7 +2,7 @@
 id: lem-the-l1-involution-is-isometric-and-reverses-convolution
 kind: lemma
 title: "The L1 involution is isometric, involutive and reverses convolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-involution-on-l1-of-a-group, def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism, lem-haar-change-of-variables-under-inversion, def-left-haar-integral-and-left-haar-measure, def-compactly-supported-convolution-on-a-group, def-convolution-on-cc-and-l1-of-a-group, lem-l1-convolution-norm-inequality, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, lem-topological-group-translations-and-inversion, def-axiom-of-choice, lem-convolution-preserves-cc-and-is-associative]
@@ -23,6 +23,7 @@ sources:
       url: "https://perso.univ-rennes1.fr/bachir.bekka/KazhdanTotal.pdf"
       locator: "Appendix A §§A.3–A.4, printed pp. 316–323"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

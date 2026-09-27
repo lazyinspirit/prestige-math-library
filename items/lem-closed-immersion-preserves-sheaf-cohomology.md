@@ -2,7 +2,7 @@
 id: "lem-closed-immersion-preserves-sheaf-cohomology"
 kind: "lemma"
 title: "Pushforward along a closed immersion preserves sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-topological-space, def-subspace-topology-top, def-direct-image-sheaf, lem-direct-image-is-sheaf, def-stalk-of-presheaf, lem-sheaf-section-over-empty-set-terminal, thm-exactness-of-sheaves-stalkwise, thm-inverse-direct-image-adjunction, lem-stalk-inverse-image-sheaf, def-injective-object, def-injective-resolution-in-an-abelian-category, thm-abelian-sheaves-have-enough-injectives, def-sheaf-cohomology-derived-global-sections, def-right-derived-object-relative-to-injective-resolution-data, def-global-sections-functor-sheaves, def-cohomology-object-of-a-cochain-complex, lem-comparison-map-from-an-exact-complex-into-an-injective-resolution, thm-chain-homotopic-maps-induce-the-same-map-on-homology, prop-homology-respects-identities-and-composition, def-chain-homotopy, def-additive-functor, def-cochain-complex-in-an-abelian-category, def-sheaf-on-topological-space, thm-abelian-sheaves-form-abelian-category, def-morphism-of-presheaves]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

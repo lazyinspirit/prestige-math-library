@@ -2,7 +2,7 @@
 id: "lem-sheaf-differentials-affine-compatibility"
 kind: "lemma"
 title: "Affine charts recover the algebraic module of differentials"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-affine-module-sheaf-universal-property", "thm-sheaf-differentials-universal-property", "cor-derivations-represented-by-differentials", "lem-differentials-localization", "thm-global-sections-affine-scheme", "thm-sections-basic-open-affine-scheme", "def-sheaf-relative-differentials", "def-affine-scheme-spectrum", "def-localisation-of-a-module"]
 proof_strategy: "direct"
@@ -17,6 +17,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01US"
     - title: "Vakil 22.2.20, pp.584–585"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

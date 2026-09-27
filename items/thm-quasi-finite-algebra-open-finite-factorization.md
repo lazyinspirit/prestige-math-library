@@ -2,7 +2,7 @@
 id: thm-quasi-finite-algebra-open-finite-factorization
 kind: theorem
 title: A quasi-finite algebra factors openly through a finite algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-integral-subalgebra-of-an-arbitrary-ring-map, thm-algebraic-zariski-main-localization, lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite, prop-iterated-localisation, thm-prime-spectrum-is-compact, lem-spectrum-compactness-open-cover-to-unit-ideal, lem-localisation-spectrum-map-homeomorphism-onto-image, def-principal-distinguished-subset-of-spectrum, lem-zariski-closed-set-axioms, cor-spectrum-is-a-contravariant-topological-functor, thm-prime-spectrum-of-a-localisation-bijection, def-principal-localisation, lem-localisation-preserves-injectivity, def-axiom-of-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Corollary 17.12"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Corollary 17.12 (a) and (b)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

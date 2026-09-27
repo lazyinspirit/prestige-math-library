@@ -2,7 +2,7 @@
 id: lem-basic-ideal-cardinal-inequalities
 kind: lemma
 title: Elementary bounds on ideal cardinal invariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-null-and-meagre-cardinal-invariants, prop-meagre-subsets-form-a-sigma-ideal, prop-null-sets-form-a-sigma-ideal-in-a-complete-space, thm-lebesgue-measure-is-a-complete-measure, def-measure-null-set-and-almost-everywhere, cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls, thm-cardinality-of-the-borel-sigma-algebra-on-rn, thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero, def-borel-sigma-algebra, def-sigma-algebra, def-aleph-and-beth-hierarchies, def-axiom-of-choice, def-countable-choice, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-cardinal-arithmetic, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-nowhere-dense-meagre-and-residual-subsets, def-g-delta-and-f-sigma-in-a-topological-space, def-countable]
@@ -18,7 +18,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 2 (elementary properties of add, cov, non, cof), printed p.2"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

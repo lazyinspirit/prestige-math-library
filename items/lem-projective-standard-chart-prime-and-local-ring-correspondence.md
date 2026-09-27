@@ -2,7 +2,7 @@
 id: lem-projective-standard-chart-prime-and-local-ring-correspondence
 kind: lemma
 title: "Prime and local-ring correspondence on standard projective charts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,6 +21,8 @@ sources:
     - title: "The Stacks Project, Section 27.8: Projective schemes (tag 01M3)"
       url: "https://stacks.math.columbia.edu/tag/01M3"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

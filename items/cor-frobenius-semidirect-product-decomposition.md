@@ -2,7 +2,7 @@
 id: cor-frobenius-semidirect-product-decomposition
 kind: corollary
 title: "Frobenius semidirect product decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-frobenius-kernel-theorem, lem-frobenius-kernel-cardinality, def-frobenius-kernel-set, def-internal-semidirect-product, def-normal-subgroup, thm-lagrange, lem-product-with-normal-subgroup, thm-second-isomorphism-theorem-groups, def-subgroup]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: "thm-unramified-diagonal-open-immersion"
 kind: "theorem"
 title: "An unramified morphism has an open diagonal"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-unramified-morphism-finite-type", "lem-differentials-diagonal-ideal-square", "def-diagonal-morphism-scheme", "thm-affine-fibre-product-tensor-ring", "def-open-immersion-schemes", "lem-determinant-trick-for-nakayama", "thm-affine-closed-immersions-quotient-rings", "lem-sheaf-differentials-affine-compatibility", "def-locally-finite-type-and-finite-type-morphism", "thm-formally-unramified-differentials-zero", "lem-morphism-schemes-local-on-source-target", "lem-idempotent-gives-clopen-spectrum-partition"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

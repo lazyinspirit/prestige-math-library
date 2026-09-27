@@ -2,13 +2,14 @@
 id: thm-extension-exists-iff-the-clifford-obstruction-vanishes
 kind: theorem
 title: "An invariant irreducible representation extends to its inertia group exactly when the Clifford obstruction vanishes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-clifford-obstruction-class", "lem-rephasing-changes-the-factor-set-by-a-coboundary", "lem-invariant-irrep-produces-a-projective-inertia-extension", "def-extension-of-an-irreducible-normal-subgroup-representation", "def-normalized-two-cocycle-and-two-coboundary", "def-second-cohomology-by-factor-sets"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

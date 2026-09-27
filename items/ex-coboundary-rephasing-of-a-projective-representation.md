@@ -2,7 +2,7 @@
 id: ex-coboundary-rephasing-of-a-projective-representation
 kind: example
 title: "Rephasing the trivial projective representation of C2 by a coboundary"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-rephasing-changes-the-factor-set-by-a-coboundary", "def-clifford-obstruction-class", "def-projective-representation-and-factor-set"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Tammo tom Dieck, Representation Theory — §4.2, printed pp. 54–57"
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
 proof_strategy: direct
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: def-normal-p-complement-and-p-nilpotent-group
 kind: definition
 title: "Normal p complement and p nilpotent group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-p-prime-core-of-a-finite-group, def-normal-subgroup, def-sylow-p-subgroup, thm-sylow-first-theorem, thm-lagrange, def-internal-semidirect-product, def-order-in-a-group]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

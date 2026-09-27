@@ -2,7 +2,7 @@
 id: lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup
 kind: lemma
 title: "Stable elementary matrices equal the commutator subgroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-stable-general-linear-group-and-elementary-subgroup-of-a-ring, def-normal-subgroup, def-generated-subgroup]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

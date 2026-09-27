@@ -1,7 +1,7 @@
 ---
 page: frobenius-groups-and-the-normal-complement-theorem-examples
 title: "Frobenius Groups and the Normal Complement Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-s3-as-a-frobenius-group, ex-affine-linear-frobenius-groups-over-finite-fields, cex-a-transitive-action-need-not-be-frobenius, rem-frobenius-kernel-closure-is-the-content-of-the-theorem, ex-frobenius-normal-two-complement-for-s3, cex-cyclic-sylow-does-not-alone-imply-a-normal-p-complement]
 ---

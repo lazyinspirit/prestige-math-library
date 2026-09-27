@@ -2,7 +2,7 @@
 id: def-left-and-right-regular-unitary-representations
 kind: definition
 title: "Left and right regular unitary representations of an LCH group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-haar-translations-are-strongly-continuous-on-lp-one-and-two, def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-complex-l-two-inner-product, def-continuous-and-unitary-representation-of-a-compact-lie-group, def-hilbert-space, def-left-haar-integral-and-left-haar-measure, lem-right-translation-scales-left-haar-measure, def-linear-isometry-and-orthogonal-or-unitary-operator, def-axiom-of-choice]
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

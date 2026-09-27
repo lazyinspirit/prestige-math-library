@@ -2,7 +2,7 @@
 id: def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group
 kind: definition
 title: "K₁ of a ring and the Whitehead group of a discrete group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, def-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g, def-normal-subgroup, def-generated-subgroup, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring]
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

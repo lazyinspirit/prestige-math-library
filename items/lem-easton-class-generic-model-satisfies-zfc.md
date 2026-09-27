@@ -2,7 +2,7 @@
 id: lem-easton-class-generic-model-satisfies-zfc
 kind: lemma
 title: The Easton class-generic union satisfies ZFC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gbc-global-choice-ground-for-easton, lem-easton-class-forcing-truth-and-set-names, lem-easton-class-tail-head-decision, lem-easton-class-separation-and-power-set, lem-easton-class-replacement, lem-lc-boolean-generic-zfc-and-ordinals, thm-forcing-preorders-have-regular-open-completions, thm-forcing-preserves-ordinals, def-axiom-of-choice]
@@ -18,7 +18,8 @@ sources:
     - title: "Thomas Jech, Set Theory, Chapter 15, M[G] is a model of ZFC, printed p.237"
       url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/15_applications_of_forcing.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

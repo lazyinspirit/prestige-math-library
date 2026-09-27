@@ -2,7 +2,7 @@
 id: lem-small-tower-exists
 kind: lemma
 title: A tower of size at most the continuum exists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-almost-inclusion-pseudointersection-and-tower, thm-transfinite-recursion, def-axiom-of-choice, thm-well-ordering-theorem, thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero, def-cardinal-arithmetic, thm-recursion, def-natural-numbers, def-countable]
@@ -18,7 +18,8 @@ sources:
     - title: "J. D. Monk, Continuum cardinals, tower discussion immediately before Proposition 34, printed p.14"
       url: "https://euclid.colorado.edu/~monkd/cont_card.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

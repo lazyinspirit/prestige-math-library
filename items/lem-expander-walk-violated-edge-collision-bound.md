@@ -2,7 +2,7 @@
 id: lem-expander-walk-violated-edge-collision-bound
 kind: lemma
 title: "Violated-edge positions have controlled collisions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-powering, def-constraint-graph-and-labeling-value, def-regular-multigraph-and-normalized-adjacency, lem-expander-walk-contraction, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

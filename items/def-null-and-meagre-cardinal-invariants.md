@@ -2,7 +2,7 @@
 id: def-null-and-meagre-cardinal-invariants
 kind: definition
 title: Add, cov, non and cof for null and meagre ideals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-nowhere-dense-meagre-and-residual-subsets, def-nowhere-dense-meager, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-measure-null-set-and-almost-everywhere, thm-lebesgue-measure-is-a-complete-measure, prop-countable-subsets-of-rn-are-lebesgue-null, thm-baire-category-r, def-open-and-closed-in-r, def-neighbourhood-r, def-interior-closure-boundary-r, def-ordered-field, def-countable-choice, def-axiom-of-choice, def-cardinal, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic]
@@ -17,6 +17,7 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 2 (the list of cardinal invariants of an ideal), printed p.2"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

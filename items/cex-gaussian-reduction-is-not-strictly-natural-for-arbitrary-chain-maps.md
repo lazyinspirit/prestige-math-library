@@ -2,7 +2,7 @@
 id: cex-gaussian-reduction-is-not-strictly-natural-for-arbitrary-chain-maps
 kind: counterexample
 title: Gaussian transfer is not strictly functorial on arbitrary cochain maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-transfer-of-chain-maps-across-gaussian-reductions-and-naturality-limits, def-complex-homotopy-and-contractibility-in-an-additive-category]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

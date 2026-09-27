@@ -2,7 +2,7 @@
 id: "thm-zero-sheaf-cohomology-global-sections"
 kind: "theorem"
 title: "Degree-zero sheaf cohomology is global sections"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, def-global-sections-functor-sheaves, thm-abelian-sheaves-have-enough-injectives, thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

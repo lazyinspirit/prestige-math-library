@@ -2,7 +2,7 @@
 id: fs-the-verifier-trusts-the-final-field-value
 kind: false-statement
 title: "False: the verifier can trust the final field value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-shamir-protocol-for-tqbf, lem-total-soundness-follows-by-union-bound, def-quantified-boolean-formula-and-tqbf, def-arithmetization-of-a-boolean-formula, def-completeness-and-soundness]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

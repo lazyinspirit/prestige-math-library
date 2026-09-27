@@ -2,7 +2,7 @@
 id: "lem-injective-sheaves-flasque"
 kind: "lemma"
 title: "Injective abelian sheaves are flasque"
-status: draft
+status: published
 origin: pipeline
 deps: [def-flasque-sheaf, def-injective-object, thm-extension-by-zero-adjunction-exactness, thm-exactness-of-sheaves-stalkwise, thm-abelian-sheaves-form-abelian-category, thm-sheafification-universal-property, def-sheafification, def-extension-by-zero-abelian-sheaf, def-kernel-cokernel-image-sheaves, cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

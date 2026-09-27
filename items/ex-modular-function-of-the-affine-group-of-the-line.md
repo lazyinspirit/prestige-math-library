@@ -2,7 +2,7 @@
 id: ex-modular-function-of-the-affine-group-of-the-line
 kind: example
 title: "The modular function of the affine group of the line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-modular-function-of-a-locally-compact-group, def-unimodular-locally-compact-group, def-left-haar-integral-and-left-haar-measure, def-radon-measure-on-an-lch-space, lem-right-translation-scales-left-haar-measure, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-group, def-locally-compact-space, def-axiom-of-choice, def-countable-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

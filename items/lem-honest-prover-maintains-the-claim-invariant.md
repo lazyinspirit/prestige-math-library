@@ -2,7 +2,7 @@
 id: lem-honest-prover-maintains-the-claim-invariant
 kind: lemma
 title: "Honest prover maintains the field-value claim"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-shamir-protocol-for-tqbf, lem-multilinearization-preserves-boolean-values, def-multilinearization-operator, def-qbf-arithmetization-operators, lem-ordered-arithmetization-evaluates-to-the-truth-value, lem-quantifier-polynomials-agree-on-booleans]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

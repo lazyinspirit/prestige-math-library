@@ -2,7 +2,7 @@
 id: "lem-irreducible-components-of-a-topological-space"
 kind: "lemma"
 title: "Existence and basic properties of irreducible components"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-irreducible-topological-space-and-subset, def-irreducible-component-of-a-topological-space, def-interior-closure-boundary-top, thm-closure-characterisation-top, thm-subspace-closure-and-interior, def-subspace-topology-top, def-maximal-element, thm-zorn, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

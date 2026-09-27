@@ -2,7 +2,7 @@
 id: ex-zariski-main-finite-morphism-factorization
 kind: example
 title: A finite algebra is its own Zariski Main factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-finite-type-and-module-finite-algebras, def-integral-element-and-algebraic-integer, def-integral-subalgebra-of-an-arbitrary-ring-map, thm-integrality-and-finite-module-equivalences, def-prime-and-maximal-ideals, def-principal-localisation, cor-spectrum-is-a-contravariant-topological-functor, lem-zariski-closed-set-axioms, lem-distinguished-subset-identities, thm-algebraic-zariski-main-localization, thm-quasi-finite-algebra-open-finite-factorization, def-axiom-of-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Corollary 17.12"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Corollary 17.12"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

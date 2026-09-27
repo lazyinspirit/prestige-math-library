@@ -2,7 +2,7 @@
 id: cex-ip-equals-pspace-needs-no-degree-reduction
 kind: counterexample
 title: "Exponential degree without multilinearization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [fs-ip-equals-pspace-needs-no-degree-reduction, def-qbf-arithmetization-operators, def-arithmetization-of-a-boolean-formula, def-quantified-boolean-formula-and-tqbf]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

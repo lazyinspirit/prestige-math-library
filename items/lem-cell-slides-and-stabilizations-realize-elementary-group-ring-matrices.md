@@ -2,7 +2,7 @@
 id: lem-cell-slides-and-stabilizations-realize-elementary-group-ring-matrices
 kind: lemma
 title: "Cell slides and stabilizations realize elementary group-ring matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-long-exact-sequence-of-relative-homotopy-groups, lem-two-relative-cell-layers-have-free-group-ring-homotopy-bases, def-elementary-expansion-and-collapse-of-finite-cw-complexes, lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group, prop-relative-cw-inclusions-are-cofibrations, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

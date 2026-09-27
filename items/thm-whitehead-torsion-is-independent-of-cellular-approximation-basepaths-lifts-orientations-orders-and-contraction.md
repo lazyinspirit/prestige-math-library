@@ -2,7 +2,7 @@
 id: thm-whitehead-torsion-is-independent-of-cellular-approximation-basepaths-lifts-orientations-orders-and-contraction
 kind: theorem
 title: "Whitehead torsion is independent of all auxiliary choices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, lem-contraction-torsion-is-independent-of-the-contracting-homotopy, lem-basis-change-and-direct-sum-formulas-for-chain-torsion, lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear, lem-homotopic-maps-have-chain-isomorphic-mapping-cones, thm-cellular-approximation-for-maps-of-cw-pairs, lem-chain-homotopy-is-compatible-with-addition-and-composition, def-finite-based-free-chain-complex-and-its-contraction-torsion, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, def-mapping-cone-of-a-chain-map]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

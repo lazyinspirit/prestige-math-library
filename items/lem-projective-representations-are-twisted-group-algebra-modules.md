@@ -2,7 +2,7 @@
 id: lem-projective-representations-are-twisted-group-algebra-modules
 kind: lemma
 title: "Projective representations and twisted algebra modules"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-twisted-group-algebra-for-a-factor-set", "def-projective-representation-and-factor-set", "lem-factor-set-is-a-normalized-two-cocycle", "def-algebra-over-a-commutative-ring", "def-left-and-right-modules", "def-composition-series-and-length-of-a-module", "def-semisimple-module", "def-semisimple-ring", "thm-finite-length-semisimple-module-characterizations"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Peter Webb, A Course in Finite Group Representation Theory — semisimplicity of finite group algebras"
       url: "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
 proof_strategy: direct
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

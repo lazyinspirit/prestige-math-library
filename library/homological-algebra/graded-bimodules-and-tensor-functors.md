@@ -1,7 +1,7 @@
 ---
 page: graded-bimodules-and-tensor-functors
 title: "Graded Bimodules and Tensor Functors"
-status: draft
+status: published
 items: [def-graded-ring-module-bimodule-and-internal-shift, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-graded-balanced-tensor-product-and-homogeneous-hom, lem-graded-balanced-tensor-and-shift-isomorphisms, def-finitely-generated-graded-projective-module, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, thm-bimodule-tensor-exactness-and-projective-preservation, thm-graded-bimodule-tensor-hom-adjunction, prop-restriction-and-extension-of-scalars-on-graded-module-categories]
 examples: []
 ---

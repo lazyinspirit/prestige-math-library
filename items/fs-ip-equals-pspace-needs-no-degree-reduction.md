@@ -2,7 +2,7 @@
 id: fs-ip-equals-pspace-needs-no-degree-reduction
 kind: false-statement
 title: "False: IP = PSPACE needs no degree reduction in this arithmetization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-qbf-arithmetization-operators, def-multilinearization-operator, def-quantified-boolean-formula-and-tqbf, def-arithmetization-of-a-boolean-formula]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

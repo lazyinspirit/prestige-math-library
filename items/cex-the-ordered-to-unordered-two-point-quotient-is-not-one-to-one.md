@@ -2,7 +2,7 @@
 id: cex-the-ordered-to-unordered-two-point-quotient-is-not-one-to-one
 kind: counterexample
 title: "The ordered-to-unordered two-point quotient is not one-to-one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-unordered-configuration-space, def-ordered-configuration-space,
@@ -23,6 +23,7 @@ sources:
     - title: "Juan González-Meneses, Basic results on braid groups, §§1.1–1.3 and 2.1, printed pp. 3–6, 11–13"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

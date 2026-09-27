@@ -2,7 +2,7 @@
 id: thm-valuative-criterion-separatedness
 kind: theorem
 title: Valuative uniqueness detects separatedness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-valuative-diagram-separatedness, def-separated-morphism-schemes, def-diagonal-morphism-scheme, def-local-ring, def-residue-field-scheme-point, def-axiom-of-choice, lem-diagonal-is-immersion, lem-diagonal-quasi-compact-iff-quasi-separated, lem-separated-implies-valuative-uniqueness, lem-immersion-with-closed-image, lem-quasi-compact-immersion-boundary-specialization, lem-local-domain-dominated-by-valuation-overring, lem-field-valued-points-of-schemes]
@@ -22,6 +22,7 @@ sources:
     - title: "The Stacks Project, Example 29.52.2 (Tag 02NV), finite type need not be quasi-separated"
       url: "https://stacks.math.columbia.edu/tag/02NV"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

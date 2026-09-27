@@ -2,7 +2,7 @@
 id: lem-binary-resultant-scaling-specialization-and-dehomogenization
 kind: lemma
 title: "Scaling, specialization, and the affine and infinite charts of a binary resultant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,6 +19,8 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, Proposition 7.27, p. 166"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: bruhat-decomposition-and-flags-over-finite-fields
 title: "Bruhat Decomposition and Flags over Finite Fields"
-status: draft
+status: published
 items: [def-standard-subgroups-of-gl-n-over-a-finite-field, thm-complete-flags-form-gl-n-over-b, def-compositions-partial-flags-and-standard-parabolics, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-weyl-group-and-length-for-finite-gl-n, lem-gaussian-elimination-produces-a-pivot-permutation, lem-rank-matrices-determine-the-pivot-permutation, thm-bruhat-decomposition-of-gl-n-over-a-finite-field, thm-relative-position-classifies-pairs-of-complete-flags, prop-cardinality-of-a-finite-bruhat-cell, def-harish-chandra-induction-and-restriction-for-finite-gl-n, lem-unipotent-invariants-are-exact-over-c, thm-harish-chandra-adjunction-for-finite-gl-n, lem-standard-parabolic-double-cosets-are-young-double-cosets, lem-parabolic-mackey-biset-splitting-in-gl-n, def-coordinate-parabolics-for-ordered-partitions, thm-parabolic-mackey-formula-for-finite-gl-n, thm-transitivity-and-parabolic-independence-of-harish-chandra-induction, def-cuspidal-support-and-harish-chandra-series, thm-existence-and-uniqueness-of-cuspidal-support-for-finite-gl-n]
 examples: []
 ---

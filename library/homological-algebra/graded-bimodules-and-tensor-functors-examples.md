@@ -1,7 +1,7 @@
 ---
 page: graded-bimodules-and-tensor-functors-examples
 title: "Graded Bimodules and Tensor Functors — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-internal-shift-versus-a-change-of-degree, ex-right-flat-bimodule-with-nonprojective-output, ex-left-projective-bimodule-with-nonexact-tensor]
 ---

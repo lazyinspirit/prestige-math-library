@@ -2,7 +2,7 @@
 id: "lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf"
 kind: "lemma"
 title: "Finite filtration of a generated subsheaf of the constant integer sheaf"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheafification, thm-sheafification-preserves-stalks, thm-sheafification-universal-property, lem-locally-constant-functions-form-a-sheaf, thm-extension-by-zero-adjunction-exactness, def-extension-by-zero-abelian-sheaf, lem-subsheaf-generated-by-sections, lem-subgroups-of-z-are-cyclic, def-generated-subgroup, thm-exactness-of-sheaves-stalkwise, def-kernel-cokernel-image-sheaves, thm-abelian-sheaves-form-abelian-category, def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-subspace-topology-top, def-stalk-of-presheaf, def-germ-of-section, lem-abelian-sheaves-form-a-grothendieck-category, def-exact-sequence-sheaves]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "The Stacks Project, Sheaves on Spaces"
       url: https://stacks.math.columbia.edu/download/sheaves.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

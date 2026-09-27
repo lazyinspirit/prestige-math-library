@@ -2,7 +2,7 @@
 id: "lem-ag-standard-smooth-fibre-regular-parameters"
 kind: "lemma"
 title: "Invertible Jacobian minor gives regular parameters in a polynomial fibre"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-polynomial-quotient-differentials", "thm-localisation-and-polynomial-extension-of-regular-rings", "def-embedding-dimension-and-regular-local-ring", "def-regular-noetherian-ring", "lem-regular-system-of-parameters-equivalent-basis", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "def-regular-system-of-parameters", "thm-every-independent-set-extends-to-a-basis", "thm-localisation-of-modules-is-exact", "thm-quotient-is-domain-iff-ideal-prime", "thm-noetherian-ring-ideal-characterisations", "def-field", "def-krull-dimension-of-a-ring", "def-local-ring", "def-localisation-at-a-prime-ideal", "thm-localisation-at-a-prime-is-local", "cor-residue-field-of-a-localisation-at-a-prime", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

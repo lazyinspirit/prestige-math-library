@@ -2,7 +2,7 @@
 id: lem-artin-right-complements-satisfy-the-cube-condition
 kind: lemma
 title: "Artin right complements satisfy the cube condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-artin-right-complements-and-word-reversing, def-positive-braid-monoid,
@@ -23,6 +23,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Example 4.11 and Lemma 4.55, printed pp. 65, 80-81"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

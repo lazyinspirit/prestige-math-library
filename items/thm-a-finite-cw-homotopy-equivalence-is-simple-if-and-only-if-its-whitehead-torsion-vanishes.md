@@ -2,7 +2,7 @@
 id: thm-a-finite-cw-homotopy-equivalence-is-simple-if-and-only-if-its-whitehead-torsion-vanishes
 kind: theorem
 title: "Whitehead torsion is the complete obstruction to finite CW simple homotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-simple-homotopy-equivalences-have-zero-whitehead-torsion, lem-the-target-inclusion-in-a-cellular-mapping-cylinder-is-simple, lem-zero-torsion-is-realized-by-elementary-expansions-collapses-and-cellular-basis-moves, thm-whitehead-torsion-is-independent-of-cellular-approximation-basepaths-lifts-orientations-orders-and-contraction, thm-composition-and-sum-formulas-for-whitehead-torsion, def-simple-homotopy-equivalence, thm-cellular-approximation-for-maps-of-cw-pairs]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

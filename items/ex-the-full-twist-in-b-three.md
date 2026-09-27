@@ -2,7 +2,7 @@
 id: ex-the-full-twist-in-b-three
 kind: example
 title: "The full twist in b three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-center-of-b-n-is-generated-by-the-full-twist-for-n-greater-than-two,
@@ -29,6 +29,7 @@ sources:
     - title: "J. Birman and T. Brendle, Braids: A Survey, Section 5.2"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

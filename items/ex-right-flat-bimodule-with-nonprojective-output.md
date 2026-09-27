@@ -2,7 +2,7 @@
 id: ex-right-flat-bimodule-with-nonprojective-output
 kind: example
 title: A right-flat tensor bimodule can have nonprojective output
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-bimodule-tensor-exactness-and-projective-preservation, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-graded-ring-module-bimodule-and-internal-shift, def-graded-balanced-tensor-product-and-homogeneous-hom]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

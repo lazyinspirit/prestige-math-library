@@ -2,7 +2,7 @@
 id: ex-one-dimensional-and-trivial-monomial-boundaries
 kind: example
 title: "Trivial and one-dimensional monomial cases"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-monomial-representation-and-m-group", "def-induced-r-linear-g-module-by-h-covariant-functions", "cor-dimension-of-an-induced-finite-dimensional-representation", "def-character-of-a-complex-representation", "def-finite-dimensional-representation-of-a-group-over-a-field", "def-subrepresentation-and-irreducible-representation", "def-irreducible-complex-character", "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional", "cor-cyclotomic-field-splits-a-finite-group", "cor-the-regular-character-gives-the-sum-of-squares-formula", "def-group"]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
     - title: "Wen-Wei Li, Yanqi Lake Lectures on Algebra I — §12.5, printed pp. 146–148"
       url: "https://www.wwli.asia/downloads/YAlg1.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

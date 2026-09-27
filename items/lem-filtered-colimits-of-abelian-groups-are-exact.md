@@ -2,7 +2,7 @@
 id: "lem-filtered-colimits-of-abelian-groups-are-exact"
 kind: "lemma"
 title: "Filtered colimits of abelian groups are exact"
-status: draft
+status: published
 origin: pipeline
 deps: [prop-abelian-groups-are-z-modules, thm-module-categories-are-grothendieck-categories, def-grothendieck-category, def-the-axioms-ab3-and-ab3-star, thm-ab5-is-equivalent-to-exactness-of-filtered-colimits, def-exact-functor-between-abelian-categories, def-filtered-category-and-filtered-colimit]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

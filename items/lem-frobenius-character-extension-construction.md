@@ -2,7 +2,7 @@
 id: lem-frobenius-character-extension-construction
 kind: lemma
 title: "Frobenius character extension construction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-zero-at-identity-induction-restriction-for-a-frobenius-complement, thm-frobenius-formula-for-induced-characters, def-irreducible-complex-character, def-induced-class-function-on-a-finite-group, def-virtual-character-and-character-ring-of-a-finite-group, def-class-function-and-the-space-of-complex-class-functions, def-trivial-regular-and-permutation-representations, prop-basic-value-properties-of-a-complex-character, def-frobenius-complement-and-frobenius-group]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: "lem-two-open-cover-cech-complex"
 kind: "lemma"
 title: "Čech complex for a two-open cover"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-on-topological-space, def-cech-cochain-complex-open-cover, def-cech-cohomology-open-cover]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

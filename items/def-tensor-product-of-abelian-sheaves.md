@@ -2,13 +2,14 @@
 id: "def-tensor-product-of-abelian-sheaves"
 kind: "definition"
 title: "Tensor product of abelian sheaves and its total complex"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, thm-abelian-sheaves-form-abelian-category, def-sheafification, thm-sheafification-universal-property, def-presheaf-of-groups-rings-modules, def-tensor-product-of-modules-by-generators-and-relations, def-cochain-complex-in-an-abelian-category, def-bounded-bounded-below-and-bounded-above-complex, def-direct-sum-of-a-family-of-modules, def-sheaf-tensor-product, lem-stalk-tensor-product, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-presheaf-on-topological-space]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

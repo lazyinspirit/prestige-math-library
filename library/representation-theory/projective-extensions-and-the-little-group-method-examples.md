@@ -1,7 +1,7 @@
 ---
 page: projective-extensions-and-the-little-group-method-examples
 title: "Projective Extensions and the Little Group Method - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-q8-as-a-central-extension-of-c2-times-c2, cex-invariant-character-need-not-extend-linearly, ex-little-groups-for-a-finite-dihedral-group, ex-coboundary-rephasing-of-a-projective-representation]
 ---

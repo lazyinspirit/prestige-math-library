@@ -2,7 +2,7 @@
 id: lem-quasi-compact-immersion-boundary-specialization
 kind: lemma
 title: A quasi-compact immersion with nonclosed image has a boundary specialization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-locally-closed-immersion, def-quasi-compact-and-quasi-separated-morphism, def-quasi-compact-and-quasi-separated-scheme, def-scheme, def-morphism-affine-schemes-from-ring-map, def-principal-distinguished-subset-of-spectrum, cor-specialisation-order-is-prime-inclusion, cor-affine-scheme-quasi-compact, lem-base-change-quasi-compact-morphisms, thm-proper-ideal-contained-in-maximal-ideal, def-axiom-of-choice]
@@ -20,6 +20,7 @@ sources:
     - title: "The Stacks Project, Commutative Algebra, printed p.96"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

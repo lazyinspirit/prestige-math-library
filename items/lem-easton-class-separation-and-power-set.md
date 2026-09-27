@@ -2,7 +2,7 @@
 id: lem-easton-class-separation-and-power-set
 kind: lemma
 title: Separation and Power Set in the Easton class extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gbc-global-choice-ground-for-easton, lem-easton-class-forcing-truth-and-set-names, lem-easton-class-tail-head-decision, lem-easton-head-tail-no-new-short-sequences, lem-easton-head-cc-and-tail-closure, def-easton-support-product, lem-lc-boolean-generic-zfc-and-ordinals, thm-forcing-preorders-have-regular-open-completions, def-axiom-of-choice]
@@ -18,7 +18,8 @@ sources:
     - title: "Thomas Jech, Set Theory, Chapter 15, Power Set and the Separation step left to the reader, printed p.236"
       url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/15-applications_of_forcing.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

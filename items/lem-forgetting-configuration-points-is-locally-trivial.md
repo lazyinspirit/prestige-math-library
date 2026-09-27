@@ -2,7 +2,7 @@
 id: lem-forgetting-configuration-points-is-locally-trivial
 kind: lemma
 title: 'Forgetting the last $n$ points is locally trivial with fibre $F_n$ of the punctured manifold'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space,
@@ -35,6 +35,7 @@ sources:
     - title: "Najib Idrissi, answer to 'Fadell-Neuwirth fibration', MathOverflow question 500383 (point-moving trivialization)"
       url: "https://mathoverflow.net/questions/500383/fadell-neuwirth-fibration-for-simplicial-variant-of-fulton-macpherson-compactifi"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

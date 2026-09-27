@@ -2,7 +2,7 @@
 id: thm-rank-two-type-a-soergel-bimodule-decompositions
 kind: theorem
 title: "Rank-two type-A Soergel bimodule decompositions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-the-type-a-soergel-category, def-the-rank-two-longest-type-a-soergel-bimodule, lem-type-a-soergel-generators-are-finite-free-on-both-sides, def-type-a-soergel-bimodule-for-a-simple-reflection, def-type-a-reflection-realization-and-polynomial-ring, def-bott-samelson-bimodule-of-a-word]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §3.4 and p. 6, PDF pp. 5–6, 24–27"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

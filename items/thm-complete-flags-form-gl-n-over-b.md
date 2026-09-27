@@ -2,7 +2,7 @@
 id: thm-complete-flags-form-gl-n-over-b
 kind: theorem
 title: Complete flags are G/B
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-standard-subgroups-of-gl-n-over-a-finite-field, def-group-action, thm-transitive-actions-are-coset-actions, thm-invertible-matrix-theorem, def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-coordinate-column-and-matrix-of-a-linear-map, def-linear-basis, def-dimension, def-linear-subspace, thm-dimension-formula, thm-dimension-of-a-linear-subspace, thm-rank-nullity]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

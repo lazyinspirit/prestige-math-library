@@ -2,7 +2,7 @@
 id: lem-cocycle-central-extension-is-a-group
 kind: lemma
 title: "The twisted product of a normalized cocycle is a central extension"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-factor-set-is-a-normalized-two-cocycle", "def-normalized-two-cocycle-and-two-coboundary", "def-group", "def-kernel-and-image-of-group-homomorphism", "thm-first-isomorphism-theorem-groups", "def-center-of-a-group"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Tammo tom Dieck, Representation Theory — §4.2, printed pp. 54–57"
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
 proof_strategy: direct
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

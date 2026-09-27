@@ -2,7 +2,7 @@
 id: lem-localisation-of-a-graded-ring-at-a-homogeneous-element
 kind: lemma
 title: "Localisation at a homogeneous element is graded, with graded kernels and dehomogenised degree-zero parts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 short: "graded localisation at a homogeneous element"
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

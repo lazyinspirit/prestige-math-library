@@ -2,7 +2,7 @@
 id: ex-zariski-main-open-immersion-punctured-affine-line
 kind: example
 title: The punctured affine line as an open finite factorization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-principal-localisation, cor-principal-localisation-spectrum-is-distinguished-open, lem-tensor-ring-presentations-for-base-change, prop-iterated-localisation, cor-residue-field-of-a-localisation-at-a-prime, thm-prime-spectrum-of-a-localisation-bijection, thm-quasi-finite-algebra-open-finite-factorization, def-integral-element-and-algebraic-integer, def-integral-subalgebra-of-an-arbitrary-ring-map, def-multiplicative-subset-and-localisation, cor-polynomial-ring-over-a-domain-is-a-domain, def-axiom-of-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Corollary 17.12"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Corollary 17.12"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

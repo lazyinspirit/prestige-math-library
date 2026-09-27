@@ -2,7 +2,7 @@
 id: ex-graph-closed-polynomial-map-scheme
 kind: example
 title: The graph of a polynomial map as a closed subscheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graph-morphism-over-base, lem-graph-closed-separated-target, lem-affine-morphism-separated, thm-affine-fibre-product-tensor-ring, thm-affine-closed-immersions-quotient-rings]
@@ -20,6 +20,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, Proposition 11.3.6, printed p.309"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

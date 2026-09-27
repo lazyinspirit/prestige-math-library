@@ -2,7 +2,7 @@
 id: def-total-length-of-a-zero-dimensional-projective-scheme
 kind: definition
 title: "Total length of a zero-dimensional projective scheme"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,8 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, Remark 6.38, p. 153"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

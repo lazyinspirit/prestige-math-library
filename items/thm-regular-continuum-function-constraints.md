@@ -2,7 +2,7 @@
 id: thm-regular-continuum-function-constraints
 kind: theorem
 title: Necessary constraints on the regular-cardinal continuum function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-cardinal-power-set-and-cantor, cor-cofinality-of-a-cardinal-power, thm-cofinality-basics, def-cofinality, lem-cardinal-arithmetic-basic-laws, def-axiom-of-choice]
@@ -20,6 +20,7 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Definition 52, PDF p.11"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-convolution-preserves-cc-and-is-associative
 kind: lemma
 title: "Convolution preserves compact support and is associative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compactly-supported-convolution-on-a-group, lem-compactly-supported-kernels-admit-commuting-radon-integrals, def-left-haar-integral-and-left-haar-measure, def-compact-support-c-c-and-c-zero-on-an-lch-space, thm-finite-products-of-compact-spaces, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§5.3, printed pp. 225–230"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

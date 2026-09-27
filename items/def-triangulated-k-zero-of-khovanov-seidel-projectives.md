@@ -2,7 +2,7 @@
 id: def-triangulated-k-zero-of-khovanov-seidel-projectives
 kind: definition
 title: "The triangulated K_0 of the Khovanov–Seidel projective category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-bounded-projective-homotopy-category-for-a-m, thm-the-homotopy-category-of-an-abelian-category-is-triangulated, def-free-module-on-a-set-and-standard-basis, def-small-locally-small-and-large-category, prop-zero-and-split-triangles-are-distinguished, def-graded-khovanov-seidel-module-category-and-projectives, def-graded-ring-module-bimodule-and-internal-shift, def-quotient-ring, def-triangulated-category-axiom-tr-one]
@@ -21,6 +21,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c, printed pp. 10-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

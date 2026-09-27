@@ -2,7 +2,7 @@
 id: "ex-ag-differentials-polynomial-and-hypersurface"
 kind: "example"
 title: "Differentials of a polynomial ring and of a cuspidal hypersurface"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-polynomial-quotient-differentials", "cor-dimension-preserved-by-integral-extensions", "cor-dimension-of-a-finite-polynomial-ring-over-a-field", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

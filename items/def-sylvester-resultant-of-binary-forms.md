@@ -2,7 +2,7 @@
 id: def-sylvester-resultant-of-binary-forms
 kind: definition
 title: "Sylvester resultant of two positive-degree binary forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "the binary Sylvester resultant"
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

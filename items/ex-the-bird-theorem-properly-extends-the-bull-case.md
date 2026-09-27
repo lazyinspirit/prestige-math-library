@@ -2,7 +2,7 @@
 id: ex-the-bird-theorem-properly-extends-the-bull-case
 kind: example
 title: "The Bird theorem reaches an induced bull witness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-bird-graph-has-the-erdos-hajnal-property, def-bird-graph-and-co-bird-graph, def-bull-graph, def-h-free-and-family-free-graph, def-induced-embedding-and-induced-copy, def-erdos-hajnal-property-and-constant, def-homogeneous-set-and-homogeneous-number, cor-the-bull-graph-has-the-erdos-hajnal-property]
@@ -16,6 +16,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations
 kind: lemma
 title: "Bott–Samelson bimodules carry delta and nabla support filtrations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-standard-graph-bimodules-support-filtrations-and-character, def-type-a-soergel-bimodule-for-a-simple-reflection, lem-type-a-graph-bimodule-extension-vanishing, lem-type-a-soergel-generators-are-finite-free-on-both-sides]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §§3.4, 5–7"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: "lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms"
 kind: "lemma"
 title: "K-flat sheaf complexes preserve quasi-isomorphisms"
-status: draft
+status: published
 origin: pipeline
 deps: [def-k-flat-complex-of-abelian-sheaves, def-tensor-product-of-abelian-sheaves, def-derived-category-of-an-abelian-category, cor-the-cone-criterion-from-the-general-long-exact-sequence, def-bounded-bounded-below-and-bounded-above-complex, def-quasi-isomorphism, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, def-cochain-map, def-cochain-complex-in-an-abelian-category, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

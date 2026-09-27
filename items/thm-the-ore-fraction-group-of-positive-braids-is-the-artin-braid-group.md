@@ -2,7 +2,7 @@
 id: thm-the-ore-fraction-group-of-positive-braids-is-the-artin-braid-group
 kind: theorem
 title: "The group of fractions of the positive braid monoid is the Artin braid group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-the-positive-braid-monoid-is-left-and-right-cancellative,
@@ -27,6 +27,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, Lemma 1.22, printed p. 438"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

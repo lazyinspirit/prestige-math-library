@@ -2,7 +2,7 @@
 id: lem-finite-graded-projective-resolutions-are-extension-stable
 kind: lemma
 title: "The graded horseshoe lemma for finite graded projective resolutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-khovanov-seidel-module-category-and-projectives, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-projective-resolution-in-an-abelian-category, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-finitely-generated-graded-projective-module, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis, cor-principal-ideal-domains-are-noetherian, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, def-noetherian-ring, def-noetherian-module]
@@ -20,6 +20,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2a, printed pp. 9-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

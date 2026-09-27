@@ -1,7 +1,7 @@
 ---
 page: graded-quiver-algebras-and-derived-tensor-functors
 title: "Graded Quiver Algebras and Derived Tensor Functors"
-status: draft
+status: published
 items: [def-path-ring-of-a-finite-quiver-over-the-integers,
         def-khovanov-seidel-type-a-quiver-algebra,
         lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis,

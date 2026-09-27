@@ -2,7 +2,7 @@
 id: ex-the-type-a-two-rank-two-soergel-decomposition
 kind: example
 title: "The type $A_2$ rank-two Soergel decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-rank-two-type-a-soergel-bimodule-decompositions, def-the-rank-two-longest-type-a-soergel-bimodule, def-type-a-standard-graph-bimodules-support-filtrations-and-character, lem-type-a-soergel-generators-are-finite-free-on-both-sides, def-type-a-reflection-realization-and-polynomial-ring, thm-fundamental-theorem-of-symmetric-polynomials, def-type-a-soergel-bimodule-for-a-simple-reflection, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §1.4 and §§3.4–3.5, PDF pp. 8–9, 24–27"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

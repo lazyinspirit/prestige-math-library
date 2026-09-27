@@ -2,7 +2,7 @@
 id: ex-neighbouring-differentials-after-a-gaussian-basis-change
 kind: example
 title: Neighboring differentials transform with the pivot basis changes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, def-invertible-differential-block-and-schur-complement-reduction]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

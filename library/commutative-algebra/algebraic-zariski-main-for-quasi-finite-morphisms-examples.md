@@ -1,7 +1,7 @@
 ---
 page: algebraic-zariski-main-for-quasi-finite-morphisms-examples
 title: "Algebraic Zariski Main for Quasi-Finite Morphisms: Examples"
-status: draft
+status: published
 requires: [algebraic-zariski-main-for-quasi-finite-morphisms, fibre-products-base-change-and-scheme-theoretic-fibres]
 items: []
 examples: [ex-zariski-main-open-immersion-punctured-affine-line,

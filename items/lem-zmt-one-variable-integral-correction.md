@@ -2,7 +2,7 @@
 id: lem-zmt-one-variable-integral-correction
 kind: lemma
 title: One-variable integral correction after leading-coefficient localization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-integral-element-and-algebraic-integer, def-integral-ring-extension, thm-monic-polynomial-division, thm-transitivity-of-integrality, thm-integrality-commutes-with-localisation, thm-integrality-and-finite-module-equivalences, cor-integral-elements-form-a-subring, def-principal-localisation, prop-localisation-zero-equality-and-kernel-criteria]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

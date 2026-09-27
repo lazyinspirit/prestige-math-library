@@ -2,7 +2,7 @@
 id: lem-each-round-has-polynomial-communication
 kind: lemma
 title: "Explicit communication, round, and evaluation bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-shamir-protocol-for-tqbf, lem-multilinearization-preserves-boolean-values, lem-efficient-prime-field-for-a-polynomial-soundness-budget, lem-formula-arithmetization-degree-and-evaluation-cost]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

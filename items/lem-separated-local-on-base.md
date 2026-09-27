@@ -2,7 +2,7 @@
 id: lem-separated-local-on-base
 kind: lemma
 title: Separatedness is local on the base
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, lem-diagonal-base-change-identification, lem-closed-immersion-local-on-target, lem-base-change-open-closed-immersions]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.3.3, printed p.308"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-l1-of-a-locally-compact-group-is-a-banach-star-algebra
 kind: theorem
 title: "L1 of a locally compact group is a Banach star-algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-banach-star-algebra-without-required-unit, def-convolution-on-cc-and-l1-of-a-group, lem-convolution-preserves-cc-and-is-associative, lem-the-l1-involution-is-isometric-and-reverses-convolution, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-axiom-of-choice, def-involution-on-l1-of-a-group, def-compactly-supported-convolution-on-a-group]
@@ -19,6 +19,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§31A–31E, printed pp. 119–125"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

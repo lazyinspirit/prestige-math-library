@@ -2,7 +2,7 @@
 id: cor-affine-schemes-separated
 kind: corollary
 title: Affine schemes and affine morphisms are separated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-affine-morphism-separated, def-affine-morphism-schemes, def-separated-scheme-over-base, lem-fibre-product-open-restriction, thm-affine-fibre-product-tensor-ring]
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.21.15, printed p.42"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

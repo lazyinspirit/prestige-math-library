@@ -2,7 +2,7 @@
 id: ex-gl-one-and-the-trivial-parabolic-boundary
 kind: example
 title: GL_1 and the trivial parabolic endpoints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, thm-complete-flags-form-gl-n-over-b, thm-bruhat-decomposition-of-gl-n-over-a-finite-field, prop-cardinality-of-a-finite-bruhat-cell, def-compositions-partial-flags-and-standard-parabolics, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-harish-chandra-induction-and-restriction-for-finite-gl-n, def-cuspidal-support-and-harish-chandra-series, def-simple-module, cor-general-linear-group-is-a-group]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Definition 5.7 and Proposition 5.9, printed pp. 43-44"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

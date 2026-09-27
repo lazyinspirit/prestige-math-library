@@ -2,7 +2,7 @@
 id: lem-finite-normalization-compatible-with-principal-opens
 kind: lemma
 title: "Finite normalization commutes with principal localization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-integral-closure-finite-finite-type-domain-over-field, thm-integrality-commutes-with-localisation, def-principal-localisation, def-multiplicative-subset-and-localisation, def-field-of-fractions, def-zero-divisor-and-integral-domain, def-finite-type-and-module-finite-algebras, lem-transitivity-of-module-finiteness, def-generated-cyclic-finitely-generated-and-free-modules, def-integral-closure-and-integrally-closed-domain]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

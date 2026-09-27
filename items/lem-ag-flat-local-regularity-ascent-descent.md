@@ -2,7 +2,7 @@
 id: "lem-ag-flat-local-regularity-ascent-descent"
 kind: "lemma"
 title: "Regularity ascends and descends along a flat local homomorphism"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-embedding-dimension-and-regular-local-ring", "def-regular-system-of-parameters", "thm-quotient-and-lifting-regularity-across-a-regular-element", "thm-faithfully-flat-ring-map-characterisations", "thm-localisation-and-flat-base-change-of-regular-sequences", "cor-regular-local-residue-field-projective-dimension-dimension", "lem-finite-local-modules-admit-minimal-free-resolutions", "def-flat-and-faithfully-flat-modules-and-ring-maps", "thm-right-exactness-of-tensor-products", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "thm-projective-modules-are-flat", "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian", "thm-faithfully-flat-descent-of-flatness", "cor-finite-flat-noetherian-modules-are-projective", "thm-auslander-buchsbaum-serre-regularity-criterion", "cor-faithfully-flat-ring-maps-are-injective", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "cor-noetherian-local-domain-dimension-zero-iff-field", "thm-proper-ideal-contained-in-maximal-ideal", "def-local-ring", "def-field", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §26.2, pp.689–690"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

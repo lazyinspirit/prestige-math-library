@@ -2,7 +2,7 @@
 id: def-eventual-domination-bounding-and-dominating-numbers
 kind: definition
 title: Eventual domination and the numbers b and d
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-axiom-of-choice, def-cardinal, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic, def-natural-numbers, def-countable]
@@ -19,6 +19,7 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 2 conventions, printed pp.2-3"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

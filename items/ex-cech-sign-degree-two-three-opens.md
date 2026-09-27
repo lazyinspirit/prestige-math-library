@@ -2,7 +2,7 @@
 id: "ex-cech-sign-degree-two-three-opens"
 kind: "example"
 title: "Three-open Čech sign cancellation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cochain-complex-open-cover, lem-cech-differential-squares-zero, def-cech-cohomology-open-cover, lem-sheaf-section-over-empty-set-terminal, def-sheaf-on-topological-space, def-topological-space, def-section-restriction-and-global-section]
 generation:
@@ -17,6 +17,8 @@ sources:
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

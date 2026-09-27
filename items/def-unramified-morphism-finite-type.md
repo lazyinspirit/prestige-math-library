@@ -2,7 +2,7 @@
 id: "def-unramified-morphism-finite-type"
 kind: "definition"
 title: "Unramified morphism"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-formally-unramified-morphism", "thm-formally-unramified-differentials-zero", "def-locally-finite-type-and-finite-type-morphism", "def-sheaf-relative-differentials"]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Stacks Morphisms, Definition 29.36.1 (tag 02G4) and Lemma 29.36.2"
       url: "https://stacks.math.columbia.edu/tag/02G4"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

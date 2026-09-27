@@ -2,7 +2,7 @@
 id: lem-type-a-hecke-standard-basis-for-soergel-comparison
 kind: lemma
 title: "The standard basis of the type-A Hecke algebra and its multiplication rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-hecke-algebra-in-soergel-normalization, lem-type-a-reduced-words-are-connected-by-braid-moves, def-type-a-reflection-realization-and-polynomial-ring, lem-finite-weyl-strong-exchange-and-deletion]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, Lemma 3.1, PDF p.13"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

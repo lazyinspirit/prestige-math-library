@@ -2,7 +2,7 @@
 id: ex-degree-reduction-preserves-unsatisfaction
 kind: example
 title: "A cloud rounding calculation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-cloud-consistency-forces-near-constant-labels, thm-degree-reduction-preserves-unsatisfaction, def-degree-reduction-by-expander-clouds]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

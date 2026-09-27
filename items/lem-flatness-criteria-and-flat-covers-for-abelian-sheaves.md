@@ -2,7 +2,7 @@
 id: "lem-flatness-criteria-and-flat-covers-for-abelian-sheaves"
 kind: "lemma"
 title: "Flatness criteria and canonical epimorphisms from flat abelian sheaves"
-status: draft
+status: published
 origin: pipeline
 deps: [def-flat-abelian-sheaf, def-left-and-right-flat-modules-over-an-arbitrary-ring, def-kernel-cokernel-image-sheaves, thm-exactness-of-sheaves-stalkwise, thm-sheaf-morphism-isomorphism-stalkwise, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, cor-free-modules-are-projective-and-flat, def-extension-by-zero-abelian-sheaf, lem-stalk-inverse-image-sheaf, def-restriction-sheaf-open-subspace, thm-direct-sums-and-direct-summands-preserve-flatness, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, def-tensor-product-of-abelian-sheaves, lem-abelian-sheaves-form-a-grothendieck-category, def-sheaf-on-topological-space, def-stalk-of-presheaf, def-topological-space, thm-abelian-sheaves-form-abelian-category, def-abelian-category]
 provenance:
@@ -14,6 +14,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Section 26: Lemmas 26.4, 26.9 and 26.12; Stacks Project Modules, Lemma 17.2 and Modules, Lemma 17.7"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

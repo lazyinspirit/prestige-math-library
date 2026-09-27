@@ -2,7 +2,7 @@
 id: lem-monomorphism-diagonal-isomorphism
 kind: lemma
 title: Monomorphisms and diagonals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-diagonal-morphism-scheme, def-separated-morphism-schemes, def-fibre-product-schemes-universal-property, thm-fibre-products-of-schemes-exist, lem-immersions-and-localizations-monomorphisms]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.2.3, printed p.306"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

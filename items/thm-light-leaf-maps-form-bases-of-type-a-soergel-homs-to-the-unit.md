@@ -2,7 +2,7 @@
 id: thm-light-leaf-maps-form-bases-of-type-a-soergel-homs-to-the-unit
 kind: theorem
 title: "Light leaf maps form bases of type-A Soergel homs to the unit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-the-type-a-diagrammatic-relations-hold-for-soergel-bimodules, thm-the-type-a-soergel-hom-formula, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, def-the-type-a-soergel-category, def-type-a-standard-graph-bimodules-support-filtrations-and-character, thm-double-leaves-form-graded-r-bases-of-type-a-diagrammatic-hom-spaces]
@@ -21,6 +21,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §6.1 Construction 6.1, §6.2 Proposition 6.12, §6.7 Remark 6.29, PDF pp. 57–63, 69"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-the-two-point-unordered-cover-and-its-monodromy
 kind: example
 title: "The two-point unordered cover of the plane and the monodromy of a half turn"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [ex-two-point-ordered-configurations-of-the-plane,
@@ -38,6 +38,7 @@ sources:
     - title: "Juan González-Meneses, Basic results on braid groups, §§1.1–1.3 and 2.1, printed pp. 3–6, 11–13"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

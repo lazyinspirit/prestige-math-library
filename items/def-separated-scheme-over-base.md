@@ -2,7 +2,7 @@
 id: def-separated-scheme-over-base
 kind: definition
 title: Separated S-scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, def-scheme-over-base, lem-base-change-open-closed-immersions]
@@ -17,6 +17,7 @@ sources:
     - title: "The Stacks Project, Schemes, Definition 26.21.3 and Lemmas 26.21.13-15, printed pp.40-42"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

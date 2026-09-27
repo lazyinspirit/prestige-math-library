@@ -2,7 +2,7 @@
 id: def-stable-general-linear-group-and-elementary-subgroup-of-a-ring
 kind: definition
 title: "Stable general linear and elementary groups for right modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-ring, def-left-and-right-modules]
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: thm-left-and-right-divisibility-extend-to-lattice-orders-on-the-braid-group
 kind: theorem
 title: "Left and right divisibility extend to lattice orders on the braid group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-ore-fraction-group-of-positive-braids-is-the-artin-braid-group,
@@ -28,6 +28,7 @@ sources:
     - title: "J. Gonzalez-Meneses, Basic results on braid groups, Section 4.1, printed pp. 29-30"
       url: "https://arxiv.org/abs/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

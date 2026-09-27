@@ -1,7 +1,7 @@
 ---
 page: the-ip-equals-pspace-theorem
 title: "The IP = PSPACE Theorem"
-status: draft
+status: published
 items: [def-qbf-arithmetization-operators, lem-quantifier-polynomials-agree-on-booleans, def-multilinearization-operator, lem-multilinearization-preserves-boolean-values, lem-ordered-arithmetization-evaluates-to-the-truth-value, lem-efficient-prime-field-for-a-polynomial-soundness-budget, def-shamir-protocol-for-tqbf, lem-honest-prover-maintains-the-claim-invariant, lem-each-round-has-polynomial-communication, lem-shamir-protocol-has-perfect-completeness, lem-first-false-claim-survives-with-root-bound-probability, lem-total-soundness-follows-by-union-bound, lem-shamir-qbf-verifier-runs-in-polynomial-time, thm-tqbf-has-a-polynomial-round-interactive-proof, thm-pspace-is-contained-in-ip, thm-ip-equals-pspace, cor-ip-is-closed-under-complement, thm-ip-can-be-given-perfect-completeness, fs-ip-equals-pspace-needs-no-degree-reduction, fs-the-verifier-trusts-the-final-field-value]
 examples: []
 ---

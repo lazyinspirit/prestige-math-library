@@ -2,7 +2,7 @@
 id: lem-plurality-consistency-along-middle-walk-positions
 kind: lemma
 title: "Plurality opinions agree with local views in middle positions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-plurality-decoding-of-powered-local-views, lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws, def-constraint-graph-powering]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

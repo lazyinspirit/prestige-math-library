@@ -2,7 +2,7 @@
 id: def-shamir-protocol-for-tqbf
 kind: definition
 title: "The Shamir interactive protocol for TQBF"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-qbf-arithmetization-operators, def-multilinearization-operator, lem-multilinearization-preserves-boolean-values, lem-efficient-prime-field-for-a-polynomial-soundness-budget, def-interactive-proof-transcript-round-and-strategy, def-quantified-boolean-formula-and-tqbf, lem-formula-arithmetization-degree-and-evaluation-cost, thm-z-mod-p-is-a-field, def-arithmetization-of-a-boolean-formula]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
 sources:
   scraped: []

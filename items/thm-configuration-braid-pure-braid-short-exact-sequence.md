@@ -2,7 +2,7 @@
 id: thm-configuration-braid-pure-braid-short-exact-sequence
 kind: theorem
 title: 'The configuration braid short exact sequence $1\to PB_n\to B_n^{\mathrm{conf}}\to S_n\to 1$'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-pure-braid-group-from-ordered-configurations,
@@ -42,6 +42,7 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, section 1.3, covering spaces and lifting, printed pp. 60-64"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

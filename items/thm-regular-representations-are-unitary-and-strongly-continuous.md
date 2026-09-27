@@ -2,7 +2,7 @@
 id: thm-regular-representations-are-unitary-and-strongly-continuous
 kind: theorem
 title: "The regular representations are unitary, strongly continuous, and the left one is faithful"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-left-and-right-regular-unitary-representations, lem-haar-translations-are-strongly-continuous-on-lp-one-and-two, thm-the-modular-function-is-a-continuous-homomorphism, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-hilbert-space, def-compact-support-c-c-and-c-zero-on-an-lch-space, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-dependent-choice, def-axiom-of-choice, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-continuous-and-unitary-representation-of-a-compact-lie-group]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

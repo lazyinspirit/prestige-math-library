@@ -2,7 +2,7 @@
 id: thm-composition-and-sum-formulas-for-whitehead-torsion
 kind: theorem
 title: "Composition and based-pair sum formulas for Whitehead torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-whitehead-torsion-is-independent-of-cellular-approximation-basepaths-lifts-orientations-orders-and-contraction, lem-basis-change-and-direct-sum-formulas-for-chain-torsion, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear, lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group, def-relative-singular-homology, lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone, def-based-cellular-chain-complex-of-a-universal-cover, def-mapping-cone-of-a-chain-map, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

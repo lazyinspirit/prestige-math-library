@@ -2,7 +2,7 @@
 id: lem-rank-matrices-determine-the-pivot-permutation
 kind: lemma
 title: Southwest rank matrices determine Bruhat cells
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, def-row-space-column-space-nullspace-and-matrix-ranks, def-triangular-and-diagonal-matrices-over-a-commutative-ring, thm-row-rank-equals-column-rank, def-matrix-product-and-identity-matrix, thm-invertible-matrix-theorem, def-linear-basis, def-dimension, lem-gaussian-elimination-produces-a-pivot-permutation]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

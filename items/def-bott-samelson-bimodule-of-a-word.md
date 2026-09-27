@@ -2,7 +2,7 @@
 id: def-bott-samelson-bimodule-of-a-word
 kind: definition
 title: "The Bott–Samelson bimodule of a word"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-soergel-bimodule-for-a-simple-reflection, lem-type-a-soergel-generators-are-finite-free-on-both-sides]
@@ -19,6 +19,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §§2–5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

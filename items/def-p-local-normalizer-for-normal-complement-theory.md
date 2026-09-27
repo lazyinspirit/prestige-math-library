@@ -2,7 +2,7 @@
 id: def-p-local-normalizer-for-normal-complement-theory
 kind: definition
 title: "P local normalizer for normal complement theory"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normalizer-of-a-subgroup, def-centralizer-of-a-subgroup, def-sylow-p-subgroup, def-subgroup, thm-sylow-second-theorem, thm-conjugation-is-an-automorphism, lem-centralizers-and-normalizers-are-subgroups, def-finite-p-group]
@@ -21,6 +21,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

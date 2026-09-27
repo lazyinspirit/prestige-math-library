@@ -2,7 +2,7 @@
 id: lem-a-central-positive-braid-is-a-power-of-delta-squared-for-n-greater-than-two
 kind: lemma
 title: "A central positive braid is a power of delta squared for n greater than two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-delta-is-the-lcm-of-the-artin-atoms-and-has-the-same-left-and-right-divisors,
@@ -28,6 +28,7 @@ sources:
     - title: "J. Gonzalez-Meneses, Basic results on braid groups, Theorem 4.2, printed pp. 30-31"
       url: "https://arxiv.org/abs/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

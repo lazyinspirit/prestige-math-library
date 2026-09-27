@@ -2,7 +2,7 @@
 id: thm-the-type-a-soergel-hom-formula
 kind: theorem
 title: "The type-A Soergel Hom formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-type-a-top-support-layers-are-controlled-by-reflection-localization, lem-type-a-soergel-generators-are-finite-free-on-both-sides, lem-type-a-soergel-special-hom-formula, lem-type-a-soergel-frobenius-biadjunction, def-type-a-hecke-algebra-in-soergel-normalization, def-type-a-standard-graph-bimodules-support-filtrations-and-character, lem-type-a-support-filtration-multiplicities-are-intrinsic, def-the-type-a-soergel-category, lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §3.5"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

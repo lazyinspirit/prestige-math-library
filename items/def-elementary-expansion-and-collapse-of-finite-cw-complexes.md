@@ -2,7 +2,7 @@
 id: def-elementary-expansion-and-collapse-of-finite-cw-complexes
 kind: definition
 title: "Elementary expansions and collapses of finite CW complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-skeleta-cw-subcomplex-and-relative-cw-complex, prop-relative-cw-inclusions-are-cofibrations, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, def-cw-complex-with-closure-finiteness-and-weak-topology, def-cell-attachment-by-a-characteristic-map]
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

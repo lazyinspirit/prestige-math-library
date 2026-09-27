@@ -2,7 +2,7 @@
 id: cor-the-bird-graph-is-generalized-nice
 kind: corollary
 title: "The singleton Bird family is generalized nice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-the-singleton-family-containing-bird-has-property-star, lem-the-e-graph-and-the-bird-are-leaf-reducible, thm-property-star-and-leaf-reducibility-imply-generalized-niceness, def-generalized-nice-finite-family, def-property-star-for-a-finite-family, def-bird-graph-and-co-bird-graph, def-leaf-reducible-finite-family]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

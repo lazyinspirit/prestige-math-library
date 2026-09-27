@@ -2,7 +2,7 @@
 id: rem-easton-singular-cardinal-caveat
 kind: remark
 title: Easton's theorem does not prescribe singular-cardinal powers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-regular-continuum-function-constraints, cor-cofinality-of-a-cardinal-power, def-easton-function, thm-eastons-theorem-for-regular-cardinals, def-aleph-and-beth-hierarchies]
@@ -19,6 +19,7 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Theorem 77 statement, PDF p.16"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

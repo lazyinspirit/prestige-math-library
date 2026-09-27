@@ -2,7 +2,7 @@
 id: lem-additive-characters-are-one-dimensional-complex-representations
 kind: lemma
 title: "Additive characters are exactly one-dimensional complex representation characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-additive-character-of-a-finite-abelian-group, def-finite-dimensional-representation-of-a-group-over-a-field, def-character-of-a-complex-representation, def-subrepresentation-and-irreducible-representation, def-irreducible-complex-character, def-splitting-field-for-a-finite-group, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, def-algebraically-closed-field, thm-fundamental-theorem-of-algebra-minimum-modulus-proof, thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional, thm-degree-one-representations-are-exactly-homomorphisms-to-k-times-and-form-an-abelian-group, lem-standard-basis-of-f-n, thm-dimension-of-a-linear-subspace, def-trace-of-a-square-matrix, def-trace-of-an-endomorphism, def-order-in-a-group, lem-group-homomorphism-basic-properties, thm-complex-nth-roots-and-roots-of-unity, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

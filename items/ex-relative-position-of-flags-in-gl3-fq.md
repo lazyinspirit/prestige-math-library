@@ -2,7 +2,7 @@
 id: ex-relative-position-of-flags-in-gl3-fq
 kind: example
 title: The six relative positions of GL_3 flags
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-relative-position-classifies-pairs-of-complete-flags, lem-rank-matrices-determine-the-pivot-permutation, thm-bruhat-decomposition-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, def-standard-subgroups-of-gl-n-over-a-finite-field]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Section 3.5, printed pp. 37-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

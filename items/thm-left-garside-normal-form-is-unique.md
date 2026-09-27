@@ -2,7 +2,7 @@
 id: thm-left-garside-normal-form-is-unique
 kind: theorem
 title: "Left garside normal form is unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-left-and-right-divisibility-extend-to-lattice-orders-on-the-braid-group,
@@ -32,6 +32,7 @@ sources:
     - title: "J. Birman and T. Brendle, Braids: A Survey, Section 5.1"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

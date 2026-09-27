@@ -2,7 +2,7 @@
 id: def-artin-right-complements-and-word-reversing
 kind: definition
 title: "Artin right complements and word reversing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-positive-braid-monoid, def-alphabet-words-and-reduction,
@@ -22,6 +22,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Definition 4.21 and Lemma 4.32, printed pp. 68, 73-74"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

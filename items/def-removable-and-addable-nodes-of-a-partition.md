@@ -2,7 +2,7 @@
 id: def-removable-and-addable-nodes-of-a-partition
 kind: definition
 title: Removable and addable nodes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-partition-young-diagram-and-conjugate-partition]
@@ -19,6 +19,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups - Chapter 2, printed pp. 7-8"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

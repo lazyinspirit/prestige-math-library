@@ -2,7 +2,7 @@
 id: lem-induction-restriction-reciprocity-for-class-functions
 kind: lemma
 title: "Frobenius reciprocity for class functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-induced-class-function-on-a-finite-group, cor-frobenius-reciprocity-for-complex-characters, thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions, def-standard-inner-product-on-complex-class-functions, def-irreducible-complex-character, def-class-function-and-the-space-of-complex-class-functions]
@@ -22,6 +22,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
       locator: "§4.3, Proposition 4.3.5 and Corollary 4.3.8"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

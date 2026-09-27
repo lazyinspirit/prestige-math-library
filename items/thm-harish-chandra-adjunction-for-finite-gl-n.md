@@ -2,7 +2,7 @@
 id: thm-harish-chandra-adjunction-for-finite-gl-n
 kind: theorem
 title: Harish-Chandra induction is left adjoint to restriction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-harish-chandra-induction-and-restriction-for-finite-gl-n, thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 5.3, printed p. 42"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

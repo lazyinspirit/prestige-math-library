@@ -2,7 +2,7 @@
 id: "thm-transitivity-sequence-schemes"
 kind: "theorem"
 title: "Transitivity sequence for schemes"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-transitivity-exact-sequence-differentials", "lem-sheaf-differentials-affine-compatibility", "def-pullback-module-ringed-spaces", "thm-exactness-of-sheaves-stalkwise", "thm-sheaf-differentials-universal-property", "thm-pullback-pushforward-module-adjunction", "thm-localisation-of-modules-is-exact", "def-sheaf-relative-differentials", "def-scheme-over-base", "lem-differentials-polynomial-algebra-free", "cor-jacobian-presentation-differentials", "def-stalk-of-presheaf"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UX"
     - title: "Vakil 22.2.9-11, pp.578-579"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,13 +2,14 @@
 id: "def-cohomological-dimension-space"
 kind: "definition"
 title: "Cohomological dimension relative to a sheaf class"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, def-axiom-of-choice, thm-zero-sheaf-cohomology-global-sections, lem-sheaf-section-over-empty-set-terminal, prop-an-exact-functor-has-vanishing-positive-derived-functors]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

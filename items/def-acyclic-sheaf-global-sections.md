@@ -2,13 +2,14 @@
 id: "def-acyclic-sheaf-global-sections"
 kind: "definition"
 title: "Gamma-acyclic abelian sheaf"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, def-global-sections-functor-sheaves, def-acyclic-object-for-a-left-exact-functor, def-restriction-sheaf-open-subspace, def-subspace-topology-top, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: "lem-affine-module-sheaf-universal-property"
 kind: "lemma"
 title: "The sheaf attached to a module on an affine scheme"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-sheafification", "def-presheaf-plus-construction", "thm-sheafification-universal-property", "def-module-on-ringed-space", "thm-universal-property-of-module-tensor-products", "thm-global-sections-affine-scheme", "def-affine-scheme-spectrum", "thm-right-exactness-of-tensor-products"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01I7"
     - title: "Stacks Modules, Definition 17.10.1 (tag 01BE), Lemma 17.10.5 (tag 01BH) and Definition 17.10.6 (tag 01BI)"
       url: "https://stacks.math.columbia.edu/tag/01BH"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

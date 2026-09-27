@@ -2,7 +2,7 @@
 id: lem-central-extension-linearizes-a-projective-representation
 kind: lemma
 title: "The cocycle central extension linearizes a projective representation"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-cocycle-central-extension-is-a-group", "def-projective-representation-and-factor-set", "def-finite-dimensional-representation-of-a-group-over-a-field"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Tammo tom Dieck, Representation Theory — §4.2, printed pp. 54–57"
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
 proof_strategy: direct
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,13 +2,14 @@
 id: lem-rephasing-changes-the-factor-set-by-a-coboundary
 kind: lemma
 title: "Rephasing changes factor sets by coboundaries"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-projective-representation-and-factor-set", "lem-factor-set-is-a-normalized-two-cocycle", "def-normalized-two-cocycle-and-two-coboundary", "def-second-cohomology-by-factor-sets"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

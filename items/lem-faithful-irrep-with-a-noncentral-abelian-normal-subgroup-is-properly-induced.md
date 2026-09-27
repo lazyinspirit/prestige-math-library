@@ -2,7 +2,7 @@
 id: lem-faithful-irrep-with-a-noncentral-abelian-normal-subgroup-is-properly-induced
 kind: lemma
 title: "A faithful irreducible with a noncentral abelian normal subgroup is induced from a proper inertia group"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-clifford-correspondence, thm-clifford-homogeneous-restriction-formula, thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional, cor-cyclotomic-field-splits-a-finite-group, def-conjugate-representation-and-inertia-group, def-intertwiner-equivalent-and-faithful-representations, def-center-of-a-group, def-normal-subgroup]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

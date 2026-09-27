@@ -1,7 +1,7 @@
 ---
 page: monomial-characters-and-m-groups-examples
 title: "Monomial Characters and M Groups - Examples"
-status: draft
+status: published
 requires: [monomial-characters-and-m-groups, extraspecial-p-groups-and-central-products]
 items: []
 examples: [ex-dihedral-groups-are-m-groups, ex-unitriangular-group-of-order-p-cubed-is-an-m-group, cex-solvable-group-need-not-be-an-m-group, ex-one-dimensional-and-trivial-monomial-boundaries]

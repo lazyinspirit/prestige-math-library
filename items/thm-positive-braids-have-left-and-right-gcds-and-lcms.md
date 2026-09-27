@@ -2,7 +2,7 @@
 id: thm-positive-braids-have-left-and-right-gcds-and-lcms
 kind: theorem
 title: "Positive braids have left and right gcds and lcms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-artin-positive-word-reversing-is-complete,
@@ -28,6 +28,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Section 4, printed pp. 63-83"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

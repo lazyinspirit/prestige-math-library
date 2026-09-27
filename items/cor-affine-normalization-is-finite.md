@@ -2,7 +2,7 @@
 id: cor-affine-normalization-is-finite
 kind: corollary
 title: "The normalization of an irreducible affine variety is finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-integral-closure-finite-finite-type-domain-over-field, def-finite-type-and-module-finite-algebras, thm-affine-algebraic-sets-coordinate-duality, def-reduced-affine-algebra, def-coordinate-ring-affine-algebraic-set, thm-affine-variety-prime-coordinate-ring, def-affine-variety-classical, def-affine-algebraic-set, thm-affine-nullstellensatz-correspondence, thm-affine-morphisms-coordinate-ring-anti-equivalence, def-morphism-classical-varieties, thm-global-regular-functions-affine-variety-coordinate-ring, def-regular-function-classical-variety, def-function-field-variety, thm-birational-equivalence-function-fields, lem-dominant-map-pullback-function-fields, thm-rational-maps-to-affine-variety-function-field, def-dominant-morphism-and-rational-map, def-birational-equivalence-varieties, def-integral-closure-and-integrally-closed-domain, thm-integral-closure-is-integrally-closed, def-zero-divisor-and-integral-domain, def-field-of-fractions, def-axiom-of-choice]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

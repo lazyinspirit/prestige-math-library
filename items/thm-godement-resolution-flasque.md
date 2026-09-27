@@ -2,7 +2,7 @@
 id: "thm-godement-resolution-flasque"
 kind: "theorem"
 title: "Godement terms are flasque and compute cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-godement-resolution, thm-flasque-sheaves-acyclic, def-flasque-sheaf, thm-acyclic-resolution-theorem-for-right-derived-functors, def-acyclic-sheaf-global-sections, def-sheaf-cohomology-derived-global-sections, thm-abelian-sheaves-have-enough-injectives, def-global-sections-functor-sheaves, lem-section-zero-if-all-germs-zero, def-germ-of-section, def-skyscraper-sheaf-abelian-group, def-kernel-cokernel-image-sheaves, def-sheaf-on-topological-space, thm-abelian-sheaves-form-abelian-category, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

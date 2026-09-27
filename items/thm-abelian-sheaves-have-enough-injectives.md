@@ -2,7 +2,7 @@
 id: "thm-abelian-sheaves-have-enough-injectives"
 kind: "theorem"
 title: "Enough injective abelian sheaves"
-status: draft
+status: published
 origin: pipeline
 deps: [def-global-sections-functor-sheaves, lem-abelian-sheaves-form-a-grothendieck-category, thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings, cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution, def-injective-resolution-in-an-abelian-category, def-supplied-injective-resolution-datum, lem-one-step-extension-of-a-partial-injective-resolution, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

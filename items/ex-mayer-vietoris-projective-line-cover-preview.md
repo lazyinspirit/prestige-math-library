@@ -2,7 +2,7 @@
 id: "ex-mayer-vietoris-projective-line-cover-preview"
 kind: "example"
 title: "Two-affine Mayer–Vietoris on the projective line"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-mayer-vietoris-sheaf-cohomology, def-projective-line-two-affine-cover-and-twisting-sheaf, thm-zero-sheaf-cohomology-global-sections, thm-sections-basic-open-affine-scheme, def-sheaf-on-topological-space, def-axiom-of-choice, def-sheaf-cohomology-derived-global-sections, def-restriction-sheaf-open-subspace]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

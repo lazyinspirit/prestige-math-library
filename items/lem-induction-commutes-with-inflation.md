@@ -2,7 +2,7 @@
 id: lem-induction-commutes-with-inflation
 kind: lemma
 title: "Induction commutes with inflation along a normal subgroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-monomial-representation-and-m-group, def-induced-r-linear-g-module-by-h-covariant-functions, def-extension-of-an-irreducible-normal-subgroup-representation, prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient, def-quotient-group, def-normal-subgroup]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

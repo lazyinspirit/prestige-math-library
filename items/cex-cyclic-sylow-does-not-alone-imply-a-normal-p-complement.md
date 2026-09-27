@@ -2,7 +2,7 @@
 id: cex-cyclic-sylow-does-not-alone-imply-a-normal-p-complement
 kind: counterexample
 title: "Cyclic sylow does not alone imply a normal p complement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-p-complement-and-p-nilpotent-group, cor-frobenius-automizer-criterion-for-p-nilpotence, thm-alternating-group-is-simple-for-n-at-least-five, thm-sylow-third-theorem, thm-sylow-second-theorem, thm-sylow-number-as-normalizer-index, def-sylow-p-subgroup, def-number-of-sylow-p-subgroups, cor-alternating-group-is-normal-and-has-half-the-elements, def-alternating-group, cor-prime-order-group-is-cyclic, thm-automorphisms-of-a-finite-cyclic-group, lem-conjugating-a-cycle-relabels-its-entries, cor-sign-from-disjoint-cycle-structure, thm-sign-is-a-homomorphism, def-finite-symmetric-group-and-permutation-notation, def-normalizer-of-a-subgroup, def-centralizer-of-a-subgroup, lem-centralizers-and-normalizers-are-subgroups, thm-first-isomorphism-theorem-groups, thm-image-subgroup-and-kernel-normal, def-group-homomorphism, def-quotient-group, cor-order-of-a-quotient-group, thm-lagrange, def-normal-subgroup, def-generated-subgroup, def-order-in-a-group, def-subgroup, lem-subgroup-criterion, def-group-isomorphism-and-automorphism, lem-group-inverse-laws, lem-cyclic-subgroup-is-the-set-of-powers, thm-conjugation-is-an-automorphism]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

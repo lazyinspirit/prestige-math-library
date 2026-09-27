@@ -2,7 +2,7 @@
 id: "lem-cohomology-functoriality-sheaf-and-space"
 kind: "lemma"
 title: "Variance of sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, def-global-sections-functor-sheaves, thm-zero-sheaf-cohomology-global-sections, thm-abelian-sheaves-have-enough-injectives, thm-inverse-direct-image-adjunction, def-direct-image-sheaf, lem-stalk-inverse-image-sheaf, thm-exactness-of-sheaves-stalkwise, thm-sheaf-morphism-isomorphism-stalkwise, thm-right-derived-functors-relative-to-supplied-data-are-additive-functors, prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors, thm-chain-homotopic-maps-induce-the-same-map-on-homology, lem-comparison-map-from-an-exact-complex-into-an-injective-resolution, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

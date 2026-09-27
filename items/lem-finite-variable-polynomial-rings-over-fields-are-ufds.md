@@ -2,7 +2,7 @@
 id: lem-finite-variable-polynomial-rings-over-fields-are-ufds
 kind: lemma
 title: "Every finite-variable polynomial ring over a field is a UFD, with prime irreducibles and principal height-one primes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "polynomial rings over fields are UFDs; height-one primes are principal"
 proof_strategy: induction
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-open-immersion-valuative-uniqueness-not-existence
 kind: example
 title: An open immersion has valuative uniqueness but not existence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-separatedness-of-open-and-closed-immersions, lem-separated-implies-valuative-uniqueness, def-valuative-diagram-separatedness, def-discrete-valuation, def-discrete-valuation-ring]
@@ -20,6 +20,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.22.1 and Section 26.23, printed pp.44-45"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

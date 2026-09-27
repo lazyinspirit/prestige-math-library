@@ -2,7 +2,7 @@
 id: lem-each-artin-atom-divides-delta-on-both-sides
 kind: lemma
 title: "Each Artin atom is a left and right divisor of the half twist"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-garside-half-twist-and-simple-positive-braid,
@@ -26,6 +26,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter IX, Lemma 1.22 and Section 1.3, printed pp. 438-440"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

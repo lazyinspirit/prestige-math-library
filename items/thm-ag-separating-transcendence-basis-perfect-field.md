@@ -2,7 +2,7 @@
 id: "thm-ag-separating-transcendence-basis-perfect-field"
 kind: "theorem"
 title: "Finitely generated extensions of a perfect field are separably generated"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-separating-transcendence-basis", "def-finitely-generated-field-extension", "def-algebraic-and-transcendental-elements", "thm-finitely-generated-algebraic-extensions-are-finite", "thm-perfect-field-characterizations", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "cor-algebraic-extensions-of-perfect-fields-are-separable", "def-separable-elements-and-separable-extensions", "def-inseparable-degree", "thm-multiplicativity-of-separable-degree", "thm-finite-extension-is-separable-iff-separable-degree-is-full", "thm-tower-law-for-finite-field-extensions", "thm-evaluation-kernel-and-minimal-polynomial", "lem-gauss-lemma-over-a-ufd", "thm-polynomial-ring-over-a-field-is-a-ufd", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "thm-extension-generated-by-separable-elements-is-separable", "lem-transcendence-basis-exchange", "thm-primitive-element-theorem-for-finite-separable-extensions"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra 10.44.1–2 and 10.45.2"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

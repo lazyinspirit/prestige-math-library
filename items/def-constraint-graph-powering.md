@@ -2,7 +2,7 @@
 id: def-constraint-graph-powering
 kind: definition
 title: "Constraint graph powering with local-view labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graph-power-and-walk-constraint, def-constraint-graph-and-labeling-value, def-regular-multigraph-and-normalized-adjacency]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
 sources:
   scraped: []

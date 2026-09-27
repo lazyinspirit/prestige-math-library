@@ -2,13 +2,14 @@
 id: "def-refinement-open-cover"
 kind: "definition"
 title: "Refinement map of ordered open covers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cochain-complex-open-cover, lem-increasing-cech-complex-extends-to-alternating-tuples, def-section-restriction-and-global-section, def-sheaf-on-topological-space]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

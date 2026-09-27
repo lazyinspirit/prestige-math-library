@@ -1,7 +1,7 @@
 ---
 name: differential-geometry
 title: Differential Geometry
-status: draft
+status: published
 ---
 
 Differential geometry studies spaces that are locally modelled on Euclidean

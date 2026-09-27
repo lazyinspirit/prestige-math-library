@@ -2,7 +2,7 @@
 id: thm-geometric-braids-form-a-group
 kind: theorem
 title: "The isotopy classes of geometric braids based at $Q$ form a group, and the endpoint permutation is a homomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [prop-stacking-of-geometric-braids-is-well-defined,
@@ -26,6 +26,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.1, author manuscript pp. 3-4"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

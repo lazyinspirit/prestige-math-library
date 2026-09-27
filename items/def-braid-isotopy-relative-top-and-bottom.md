@@ -2,7 +2,7 @@
 id: def-braid-isotopy-relative-top-and-bottom
 kind: definition
 title: "Braid isotopy relative to the top and bottom endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-geometric-braid-with-setwise-endpoints, def-homotopy-relative-and-path-homotopy,
@@ -23,6 +23,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.1, author manuscript pp. 3-4"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

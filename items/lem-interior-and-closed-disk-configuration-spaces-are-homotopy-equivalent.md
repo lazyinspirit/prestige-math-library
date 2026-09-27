@@ -2,7 +2,7 @@
 id: lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent
 kind: lemma
 title: "The interior-disc and closed-disc configuration spaces are homotopy equivalent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space, def-unordered-configuration-space,
@@ -35,6 +35,7 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, section 0, printed p. 3"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

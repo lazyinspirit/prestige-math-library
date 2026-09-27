@@ -1,7 +1,7 @@
 ---
 page: projective-extensions-and-the-little-group-method
 title: "Projective Extensions and the Little Group Method"
-status: draft
+status: published
 items: [def-projective-representation-and-factor-set, lem-factor-set-is-a-normalized-two-cocycle, lem-rephasing-changes-the-factor-set-by-a-coboundary, def-twisted-group-algebra-for-a-factor-set, lem-projective-representations-are-twisted-group-algebra-modules, lem-invariant-irrep-produces-a-projective-inertia-extension, def-clifford-obstruction-class, thm-extension-exists-iff-the-clifford-obstruction-vanishes, lem-cocycle-central-extension-is-a-group, lem-central-extension-linearizes-a-projective-representation, thm-projective-clifford-correspondence, thm-little-group-method-for-a-split-abelian-normal-subgroup]
 examples: []
 ---

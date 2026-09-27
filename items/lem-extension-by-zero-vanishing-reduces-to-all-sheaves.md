@@ -2,7 +2,7 @@
 id: "lem-extension-by-zero-vanishing-reduces-to-all-sheaves"
 kind: "lemma"
 title: "Extension-by-zero generators detect sheaf-cohomology vanishing"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces, lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf, lem-subsheaf-generated-by-sections, thm-long-exact-sequence-sheaf-cohomology, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-noetherian-topological-space, def-dimension-noetherian-topological-space, lem-noetherian-subspaces-and-compact-opens, def-compact-space, def-extension-by-zero-abelian-sheaf, thm-extension-by-zero-adjunction-exactness, thm-sheafification-universal-property, def-sheafification, lem-abelian-sheaves-form-a-grothendieck-category, def-kernel-cokernel-image-sheaves, thm-abelian-sheaves-form-abelian-category, def-exact-sequence-sheaves, def-sheaf-cohomology-derived-global-sections, def-filtered-category-and-filtered-colimit, def-subsheaf, def-morphism-of-presheaves]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

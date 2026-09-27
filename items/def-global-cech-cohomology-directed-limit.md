@@ -2,7 +2,7 @@
 id: "def-global-cech-cohomology-directed-limit"
 kind: "definition"
 title: "Refinement-colimit Čech cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cohomology-open-cover, thm-refinement-map-independent-on-cohomology, def-refinement-open-cover, def-axiom-of-choice, def-filtered-category-and-filtered-colimit]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

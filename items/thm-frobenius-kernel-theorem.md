@@ -2,7 +2,7 @@
 id: thm-frobenius-kernel-theorem
 kind: theorem
 title: "Frobenius kernel theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-frobenius-kernel-is-an-intersection-of-character-kernels, thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel, lem-intersection-of-normal-subgroups]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

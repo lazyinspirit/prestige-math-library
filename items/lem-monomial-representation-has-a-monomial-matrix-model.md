@@ -2,7 +2,7 @@
 id: lem-monomial-representation-has-a-monomial-matrix-model
 kind: lemma
 title: "A coset basis makes a monomial representation monomial matrices"
-status: draft
+status: published
 origin: pipeline
 deps: [def-monomial-representation-and-m-group, prop-induced-module-decomposes-over-a-left-transversal, def-induced-r-linear-g-module-by-h-covariant-functions, def-subrepresentation-and-irreducible-representation, def-coset]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
     - title: "Wen-Wei Li, Yanqi Lake Lectures on Algebra I — Definition 12.5.1 and the discussion of monomial matrices, printed p. 146"
       url: "https://www.wwli.asia/downloads/YAlg1.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-cuspidal-support-for-finite-gl-n
 kind: theorem
 title: Existence and uniqueness of cuspidal support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, def-cuspidal-support-and-harish-chandra-series, def-harish-chandra-induction-and-restriction-for-finite-gl-n, def-induced-r-linear-g-module-by-h-covariant-functions, def-coordinate-parabolics-for-ordered-partitions, def-compositions-partial-flags-and-standard-parabolics, def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, thm-harish-chandra-adjunction-for-finite-gl-n, thm-transitivity-and-parabolic-independence-of-harish-chandra-induction, thm-parabolic-mackey-formula-for-finite-gl-n, lem-unipotent-invariants-are-exact-over-c, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique, cor-schurs-lemma-for-irreducible-representations, def-simple-module, def-g-module-over-a-commutative-ring, def-subgroup, def-normal-subgroup, def-group-action, def-symmetric-group, lem-symmetric-group-is-a-group, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, cor-general-linear-group-is-a-group]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Definition 5.7 and Proposition 5.9, printed pp. 43-44"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

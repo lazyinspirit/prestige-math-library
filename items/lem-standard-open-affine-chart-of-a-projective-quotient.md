@@ -2,7 +2,7 @@
 id: lem-standard-open-affine-chart-of-a-projective-quotient
 kind: lemma
 title: "The standard open $D_+(f)$ of a projective quotient is the affine chart $\\operatorname{Spec}((S_f)_0)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, Chapter 6 (Proj and its standard affine charts)"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

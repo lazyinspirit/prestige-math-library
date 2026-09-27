@@ -1,7 +1,7 @@
 ---
 name: topology
 title: Topology
-status: draft
+status: published
 ---
 
 Topology here is developed twice over, once with a distance and once without.

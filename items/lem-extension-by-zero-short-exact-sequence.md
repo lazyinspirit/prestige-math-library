@@ -2,7 +2,7 @@
 id: "lem-extension-by-zero-short-exact-sequence"
 kind: "lemma"
 title: "Extension by zero and the closed complement: a short exact sequence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-extension-by-zero-abelian-sheaf, thm-extension-by-zero-adjunction-exactness, def-restriction-sheaf-open-subspace, def-direct-image-sheaf, lem-direct-image-is-sheaf, def-sheaf-on-topological-space, thm-abelian-sheaves-form-abelian-category, def-exact-sequence-sheaves, thm-exactness-of-sheaves-stalkwise, def-stalk-of-presheaf, lem-equality-in-a-filtered-colimit-of-sets-is-eventual, lem-sheaf-section-over-empty-set-terminal, def-subspace-topology-top, thm-inverse-direct-image-adjunction, lem-stalk-inverse-image-sheaf, def-sheafification, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-topological-space, def-presheaf-on-topological-space]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "The Stacks Project, Sheaves on Spaces"
       url: https://stacks.math.columbia.edu/download/sheaves.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

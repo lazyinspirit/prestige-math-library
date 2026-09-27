@@ -2,7 +2,7 @@
 id: cor-quasi-finite-locus-open-finite-type-algebra
 kind: corollary
 title: The quasi-finite locus of a finite-type algebra is open
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-integral-subalgebra-of-an-arbitrary-ring-map, thm-algebraic-zariski-main-localization, lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite, prop-iterated-localisation, thm-localisation-commutes-with-quotients, def-multiplicative-subset-and-localisation, cor-residue-field-of-a-localisation-at-a-prime, def-principal-localisation, def-principal-distinguished-subset-of-spectrum, lem-zariski-closed-set-axioms, thm-prime-spectrum-of-a-localisation-bijection, def-axiom-of-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Corollary 17.11"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Corollary 17.11"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

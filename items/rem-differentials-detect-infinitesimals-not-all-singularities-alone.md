@@ -2,7 +2,7 @@
 id: "rem-differentials-detect-infinitesimals-not-all-singularities-alone"
 kind: "remark"
 title: "Differential rank alone does not prove smoothness"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["def-smooth-relative-dimension-via-differentials", "lem-differential-of-morphism-via-cotangent-map", "thm-formally-unramified-differentials-zero", "def-unramified-morphism-finite-type"]
@@ -17,6 +17,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/02G3"
     - title: "Stacks Algebra 10.137.1, smoothness of a ring map via finite presentation and the naive cotangent complex"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Remark

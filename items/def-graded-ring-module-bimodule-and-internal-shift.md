@@ -2,7 +2,7 @@
 id: def-graded-ring-module-bimodule-and-internal-shift
 kind: definition
 title: Associative graded algebras, bimodules, and internal shifts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-algebra-over-a-commutative-ring, def-bimodule, def-graded-ring-and-graded-module]
@@ -21,6 +21,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.56, tag 00JL"
       url: "https://stacks.math.columbia.edu/tag/00JL"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

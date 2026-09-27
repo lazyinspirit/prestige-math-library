@@ -2,7 +2,7 @@
 id: thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq
 kind: theorem
 title: Block Levi decomposition of standard parabolics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compositions-partial-flags-and-standard-parabolics, def-standard-subgroups-of-gl-n-over-a-finite-field, thm-matrix-multiplication-laws, thm-invertible-matrix-theorem, cor-general-linear-group-is-a-group, def-subgroup, def-matrix-product-and-identity-matrix]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Section 5.1, printed p. 42"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

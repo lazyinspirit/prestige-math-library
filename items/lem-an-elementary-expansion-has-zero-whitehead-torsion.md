@@ -2,7 +2,7 @@
 id: lem-an-elementary-expansion-has-zero-whitehead-torsion
 kind: lemma
 title: "An elementary CW expansion has zero Whitehead torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-elementary-expansion-and-collapse-of-finite-cw-complexes, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, thm-composition-and-sum-formulas-for-whitehead-torsion, def-based-cellular-chain-complex-of-a-universal-cover, def-mapping-cone-of-a-chain-map, lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone, def-finite-based-free-chain-complex-and-its-contraction-torsion, lem-contraction-torsion-is-independent-of-the-contracting-homotopy, lem-basis-change-and-direct-sum-formulas-for-chain-torsion, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring, def-homotopy-equivalence, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

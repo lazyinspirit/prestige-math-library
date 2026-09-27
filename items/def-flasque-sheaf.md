@@ -2,13 +2,14 @@
 id: "def-flasque-sheaf"
 kind: "definition"
 title: "Flasque sheaf"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-on-topological-space, thm-abelian-sheaves-form-abelian-category, def-section-restriction-and-global-section, lem-sheaf-section-over-empty-set-terminal]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

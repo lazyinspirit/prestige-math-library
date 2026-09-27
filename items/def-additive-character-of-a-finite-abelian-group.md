@@ -2,7 +2,7 @@
 id: def-additive-character-of-a-finite-abelian-group
 kind: definition
 title: "Additive characters of a finite abelian group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-group, def-group-homomorphism, thm-complex-numbers-form-a-field, lem-ring-units-form-a-group, lem-group-homomorphism-basic-properties, def-character-of-a-complex-representation, def-finite-dimensional-representation-of-a-group-over-a-field]
@@ -13,6 +13,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

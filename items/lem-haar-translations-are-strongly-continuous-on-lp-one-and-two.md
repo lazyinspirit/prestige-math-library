@@ -2,7 +2,7 @@
 id: lem-haar-translations-are-strongly-continuous-on-lp-one-and-two
 kind: lemma
 title: "Strong continuity of left and modular right translations on L1 and L2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-complex-haar-lp-spaces-and-compactly-supported-functions, lem-right-translation-scales-left-haar-measure, thm-uniqueness-of-left-haar-measure-up-to-scale, def-left-haar-integral-and-left-haar-measure, def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism, lem-translations-preserve-compactly-supported-continuous-functions, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-axiom-of-choice]
@@ -25,6 +25,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

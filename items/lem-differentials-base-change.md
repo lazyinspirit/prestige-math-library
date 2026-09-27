@@ -2,7 +2,7 @@
 id: "lem-differentials-base-change"
 kind: "lemma"
 title: "Kähler differentials commute with scalar base change"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["cor-derivations-represented-by-differentials", "thm-universal-property-of-module-tensor-products", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "def-derivation-algebra"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

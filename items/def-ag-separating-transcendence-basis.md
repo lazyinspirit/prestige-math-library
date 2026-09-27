@@ -2,7 +2,7 @@
 id: "def-ag-separating-transcendence-basis"
 kind: "definition"
 title: "Separating transcendence basis and separably generated extensions"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-finitely-generated-field-extension", "def-separable-elements-and-separable-extensions", "lem-maximal-algebraically-independent-subset-is-a-transcendence-basis", "def-algebraic-and-transcendental-elements", "thm-finitely-generated-algebraic-extensions-are-finite"]
 provenance:
@@ -12,6 +12,8 @@ sources:
   references:
     - title: "Stacks Algebra 10.42.1, 3"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

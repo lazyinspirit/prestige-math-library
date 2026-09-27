@@ -2,7 +2,7 @@
 id: lem-additive-character-orthogonality-from-representation-orthogonality
 kind: lemma
 title: "Row orthogonality for additive characters of a finite abelian group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-additive-characters-are-one-dimensional-complex-representations, def-additive-character-of-a-finite-abelian-group, def-irreducible-complex-character, thm-first-orthogonality-relation-for-irreducible-complex-characters, def-standard-inner-product-on-complex-class-functions, def-class-function-and-the-space-of-complex-class-functions, def-group, def-finite-sum-in-a-commutative-monoid, lem-complex-conjugation-and-modulus-laws]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

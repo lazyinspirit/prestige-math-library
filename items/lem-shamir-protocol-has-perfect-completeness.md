@@ -2,7 +2,7 @@
 id: lem-shamir-protocol-has-perfect-completeness
 kind: lemma
 title: "Shamir protocol has perfect completeness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-honest-prover-maintains-the-claim-invariant, def-shamir-protocol-for-tqbf, def-ip]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

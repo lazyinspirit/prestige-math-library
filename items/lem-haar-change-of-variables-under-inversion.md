@@ -2,7 +2,7 @@
 id: lem-haar-change-of-variables-under-inversion
 kind: lemma
 title: "Haar change of variables under inversion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-measure-with-density, thm-integration-against-a-density, thm-monotone-convergence-for-the-integral, thm-the-modular-function-is-a-continuous-homomorphism, lem-right-translation-scales-left-haar-measure, thm-uniqueness-of-left-haar-measure-up-to-scale, thm-rmk-uniqueness-among-radon-measures, thm-rmk-positive-functional-is-integration-against-its-representing-measure, def-left-haar-integral-and-left-haar-measure, def-borel-sigma-algebra, thm-compactness-under-continuous-maps, def-axiom-of-choice, def-modular-function-of-a-locally-compact-group]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B, printed pp. 115–118"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-type-a-diagrammatic-and-bimodule-soergel-categories-are-equivalent
 kind: theorem
 title: "The type-A diagrammatic and bimodule Soergel categories are equivalent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-double-leaves-form-graded-r-bases-of-type-a-diagrammatic-hom-spaces, thm-evaluated-double-leaves-form-bases-of-type-a-soergel-bimodule-homs, def-type-a-reflection-realization-and-polynomial-ring, lem-the-type-a-diagrammatic-relations-hold-for-soergel-bimodules, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, def-the-type-a-soergel-category, def-the-idempotent-completion-of-a-preadditive-category]
@@ -21,6 +21,7 @@ sources:
     - title: "Libedinsky, Sur la catégorie des bimodules de Soergel, §§3–5"
       url: "https://arxiv.org/pdf/0707.3603"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-the-rank-one-soergel-category
 kind: example
 title: "The rank-one Soergel category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-the-rank-one-soergel-bimodule-square-splits, def-type-a-reflection-realization-and-polynomial-ring, def-type-a-soergel-bimodule-for-a-simple-reflection, def-type-a-standard-graph-bimodules-support-filtrations-and-character, lem-type-a-soergel-generators-are-finite-free-on-both-sides, thm-fundamental-theorem-of-symmetric-polynomials]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §4, PDF pp. 21–26"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

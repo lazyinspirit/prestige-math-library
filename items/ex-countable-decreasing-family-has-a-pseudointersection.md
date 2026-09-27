@@ -2,7 +2,7 @@
 id: ex-countable-decreasing-family-has-a-pseudointersection
 kind: example
 title: A diagonal pseudointersection of a countable descending family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-almost-inclusion-pseudointersection-and-tower, lem-basic-pseudointersection-and-tower-bounds, thm-well-ordering-principle, thm-recursion, def-natural-numbers, def-finite-cardinality, thm-sum-rule, def-countable]
@@ -18,7 +18,8 @@ sources:
     - title: "J. D. Monk, Continuum cardinals, the diagonal argument preceding Proposition 34, printed p.19"
       url: "https://euclid.colorado.edu/~monkd/cont_card.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: fs-repeating-constraints-amplifies-the-gap
 kind: false-statement
 title: "Repeating constraints amplifies the gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-and-labeling-value, def-gap-preserving-csp-reduction]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

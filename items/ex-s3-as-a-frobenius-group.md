@@ -2,7 +2,7 @@
 id: ex-s3-as-a-frobenius-group
 kind: example
 title: "$S_3$ as a Frobenius group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-frobenius-complement-and-frobenius-group, cor-frobenius-semidirect-product-decomposition, prop-frobenius-groups-and-fixed-point-free-actions, lem-conjugating-a-cycle-relabels-its-entries, def-finite-symmetric-group-and-permutation-notation, def-alternating-group, cor-alternating-group-is-normal-and-has-half-the-elements, cor-prime-order-group-is-cyclic, def-internal-semidirect-product, def-normal-subgroup, def-subgroup, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, def-order-in-a-group, cor-order-of-element-divides-group-order, thm-lagrange, lem-subgroup-criterion, lem-intersection-of-subgroups, def-group-action, def-conjugacy-class-and-centralizer, thm-conjugation-is-an-automorphism, lem-group-inverse-laws]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: def-easton-support-iteration
 kind: definition
 title: Set-length Easton-support forcing iterations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-easton-support-product, def-finite-support-forcing-iteration, thm-transfinite-recursion, def-cofinality]
@@ -19,6 +19,7 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Definitions 51-53, PDF p.11"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

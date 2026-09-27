@@ -2,7 +2,7 @@
 id: "def-relative-cotangent-space"
 kind: "definition"
 title: "Relative cotangent and tangent spaces"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-sheaf-relative-differentials", "def-residue-field-scheme-point", "def-module-on-ringed-space"]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
     - title: "Vakil 22.2.18, pp.582-583"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

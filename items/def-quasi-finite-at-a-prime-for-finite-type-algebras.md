@@ -2,7 +2,7 @@
 id: def-quasi-finite-at-a-prime-for-finite-type-algebras
 kind: definition
 title: Quasi-finiteness at a prime of a finite-type algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-finite-type-and-module-finite-algebras, cor-residue-field-of-a-localisation-at-a-prime, thm-localisation-commutes-with-quotients, cor-tensor-product-with-a-quotient-ring, def-tensor-product-of-modules-by-generators-and-relations, def-dimension, def-quasi-finite-morphism-classical]
@@ -19,6 +19,7 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Definition 17.3"
       url: "https://www.jmilne.org/xnotes/CA.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

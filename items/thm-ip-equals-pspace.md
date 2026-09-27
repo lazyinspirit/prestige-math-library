@@ -2,7 +2,7 @@
 id: thm-ip-equals-pspace
 kind: theorem
 title: "IP equals PSPACE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-pspace-is-contained-in-ip, thm-ip-is-contained-in-pspace, def-ip]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: thm-gap-amplification-step
 kind: theorem
 title: "A complete uniform graph gap-amplification step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-degree-reduction-preserves-unsatisfaction, lem-constraint-expander-overlay, lem-powering-preserves-perfect-satisfiability, lem-powering-amplifies-small-gaps, def-gap-preserving-csp-reduction, def-constraint-graph-powering, def-degree-reduction-by-expander-clouds]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

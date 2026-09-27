@@ -2,7 +2,7 @@
 id: lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time
 kind: lemma
 title: "Conditional expectation constructs the inner code deterministically"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-random-linear-inner-code-has-fewer-than-one-bad-codeword-in-expectation, def-expectation-on-a-finite-probability-space, def-explicit-constant-rate-constant-distance-code]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

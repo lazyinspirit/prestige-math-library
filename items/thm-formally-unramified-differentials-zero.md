@@ -2,7 +2,7 @@
 id: "thm-formally-unramified-differentials-zero"
 kind: "theorem"
 title: "Formal unramifiedness iff Omega vanishes"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-formally-unramified-morphism", "lem-differentials-diagonal-ideal-square", "thm-sheaf-differentials-universal-property", "def-diagonal-morphism-scheme", "def-sheaf-relative-differentials", "lem-sheaf-differentials-affine-compatibility", "def-kernel-cokernel-image-sheaves", "def-scheme-over-base", "def-closed-immersion-schemes"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra, Lemma 10.148.3 (tag 00UO) and Stacks More on Morphisms, Lemma 37.6.7"
       url: "https://stacks.math.columbia.edu/tag/00UO"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

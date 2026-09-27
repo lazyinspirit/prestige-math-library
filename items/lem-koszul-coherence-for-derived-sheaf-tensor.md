@@ -2,7 +2,7 @@
 id: "lem-koszul-coherence-for-derived-sheaf-tensor"
 kind: "lemma"
 title: "Koszul coherence of derived sheaf tensor"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-flatness-criteria-and-flat-covers-for-abelian-sheaves, def-topological-space, def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, lem-derived-tensor-product-of-abelian-sheaves, lem-koszul-structure-of-the-abelian-sheaf-tensor-product, lem-abelian-sheaves-admit-bounded-above-flat-resolutions, def-derived-category-of-an-abelian-category, prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms, def-bounded-bounded-below-and-bounded-above-complex, def-zero-and-stalk-complex, def-cochain-map, def-quasi-isomorphism, def-left-roof-representing-a-localized-morphism, lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category, lem-composition-of-roofs-is-well-defined, def-k-flat-complex-of-abelian-sheaves, def-flat-abelian-sheaf, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms]
 provenance:
@@ -14,6 +14,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Section 26 (K-flat complexes and the derived tensor product), Section 31 (the cup product)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

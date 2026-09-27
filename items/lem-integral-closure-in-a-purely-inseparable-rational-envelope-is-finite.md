@@ -2,7 +2,7 @@
 id: lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite
 kind: lemma
 title: "Integral closure in a purely inseparable rational envelope is finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-finite-purely-inseparable-rational-extension-envelope, lem-polynomial-algebras-over-fields-are-integrally-closed, lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct, lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct, def-integral-closure-and-integrally-closed-domain, def-integral-element-and-algebraic-integer, def-integral-ring-extension, cor-integral-elements-form-a-subring, def-purely-inseparable-extension, def-extension-degree-and-finite-extension, thm-finitely-generated-algebraic-extensions-are-finite, def-dimension, def-field-of-fractions, def-finitely-generated-field-extension, def-field-extension-generated-subfields-and-simple-extension, def-finite-type-and-module-finite-algebras, def-multivariate-polynomial-ring-by-iteration, def-polynomial-evaluation-and-root, def-algebraic-and-transcendental-elements, thm-frobenius-endomorphism-and-finite-field-automorphism, def-zero-divisor-and-integral-domain, def-generated-cyclic-finitely-generated-and-free-modules]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-transitivity-and-parabolic-independence-of-harish-chandra-induction
 kind: theorem
 title: Transitivity and parabolic independence of Harish-Chandra induction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [rem-induced-representation-agrees-with-the-tensor-product-model, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, def-harish-chandra-induction-and-restriction-for-finite-gl-n, def-coordinate-parabolics-for-ordered-partitions, thm-harish-chandra-adjunction-for-finite-gl-n, thm-parabolic-mackey-formula-for-finite-gl-n, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-compositions-partial-flags-and-standard-parabolics, def-weyl-group-and-length-for-finite-gl-n, def-standard-subgroups-of-gl-n-over-a-finite-field, def-induced-r-linear-g-module-by-h-covariant-functions, def-g-module-over-a-commutative-ring, def-subgroup, def-normal-subgroup, def-coset, def-group-action, def-symmetric-group, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, thm-invertible-matrix-theorem, cor-general-linear-group-is-a-group, thm-transitivity-of-induction-for-finite-groups, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, thm-character-inner-product-computes-intertwiner-dimension, thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique, cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product, def-standard-inner-product-on-complex-class-functions]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Lemma 5.5, printed p. 43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

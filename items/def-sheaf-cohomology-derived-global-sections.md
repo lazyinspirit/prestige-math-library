@@ -2,7 +2,7 @@
 id: "def-sheaf-cohomology-derived-global-sections"
 kind: "definition"
 title: "Sheaf cohomology as right derived global sections"
-status: draft
+status: published
 origin: pipeline
 deps: [def-global-sections-functor-sheaves, thm-abelian-sheaves-have-enough-injectives, def-right-derived-object-relative-to-injective-resolution-data, def-deleted-resolution, def-cohomology-object-of-a-cochain-complex, thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

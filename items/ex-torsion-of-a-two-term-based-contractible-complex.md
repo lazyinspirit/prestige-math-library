@@ -2,7 +2,7 @@
 id: ex-torsion-of-a-two-term-based-contractible-complex
 kind: example
 title: "Torsion of a two-term based contractible complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-finite-based-free-chain-complex-and-its-contraction-torsion, lem-contraction-torsion-is-independent-of-the-contracting-homotopy, lem-parity-map-of-a-finite-contracted-complex-is-invertible, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

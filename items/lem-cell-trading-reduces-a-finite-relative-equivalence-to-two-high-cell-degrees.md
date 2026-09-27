@@ -2,7 +2,7 @@
 id: lem-cell-trading-reduces-a-finite-relative-equivalence-to-two-high-cell-degrees
 kind: lemma
 title: "Cell trading puts a finite relative equivalence in two high degrees"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-elementary-expansion-and-collapse-of-finite-cw-complexes, def-simple-homotopy-equivalence, lem-the-target-inclusion-in-a-cellular-mapping-cylinder-is-simple, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, prop-relative-cw-inclusions-are-cofibrations, thm-cellular-approximation-for-maps-of-cw-pairs, thm-long-exact-sequence-of-relative-homotopy-groups, thm-simple-homotopy-equivalences-have-zero-whitehead-torsion, thm-composition-and-sum-formulas-for-whitehead-torsion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

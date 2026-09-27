@@ -2,13 +2,14 @@
 id: thm-projective-clifford-correspondence
 kind: theorem
 title: "The projective Clifford correspondence for an invariant irreducible representation"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-invariant-irrep-produces-a-projective-inertia-extension", "lem-projective-representations-are-twisted-group-algebra-modules", "lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces", "thm-clifford-correspondence", "lem-inducing-an-irreducible-inertia-module-is-irreducible", "lem-induction-from-the-inertia-group-recovers-the-module", "thm-gallagher-correspondence-for-an-extendible-character", "def-projective-representation-and-factor-set", "def-extension-of-an-irreducible-normal-subgroup-representation", "thm-extension-exists-iff-the-clifford-obstruction-vanishes", "def-conjugate-representation-and-inertia-group", "thm-clifford-homogeneous-restriction-formula"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

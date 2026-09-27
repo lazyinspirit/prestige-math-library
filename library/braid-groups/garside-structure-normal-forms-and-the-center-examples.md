@@ -1,7 +1,7 @@
 ---
 page: garside-structure-normal-forms-and-the-center-examples
 title: "Garside Structure, Normal Forms, and the Center — Examples"
-status: draft
+status: published
 requires: [garside-structure-normal-forms-and-the-center]
 items: []
 examples: [ex-the-simple-braids-and-divisibility-lattice-for-b-three,

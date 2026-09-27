@@ -2,7 +2,7 @@
 id: thm-projective-plane-complete-intersection-total-length
 kind: theorem
 title: "Two coprime projective plane forms meet in total length equal to their degree product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, Theorem 6.37 and Remark 6.38, pp. 152-153"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: "algebraic-differentials-separability-and-smooth-local-presentations"
 title: "Algebraic Differentials Separability and Smooth Local Presentations"
-status: draft
+status: published
 items: ["def-ag-universal-algebraic-differentials", "lem-ag-differentials-universal-property", "lem-ag-polynomial-quotient-differentials", "lem-ag-differentials-localization-base-change", "lem-ag-differentials-transitivity", "def-ag-separating-transcendence-basis", "thm-ag-separating-transcendence-basis-perfect-field", "thm-ag-field-differentials-separable-rank", "lem-ag-separable-residue-cotangent-sequence", "thm-ag-field-extension-of-schemes", "def-ag-geometrically-regular-algebra-and-fibre", "def-ag-standard-smooth-algebra", "lem-ag-base-change-of-standard-smooth-presentations", "lem-ag-standard-smooth-fibre-regular-parameters", "lem-ag-local-flatness-regular-parameters", "lem-ag-standard-smooth-flatness", "lem-ag-standard-smooth-regular-geometric-fibres", "lem-ag-flat-local-regularity-ascent-descent", "lem-ag-finite-field-extension-separable-factorization", "lem-ag-geometric-regularity-field-tests", "thm-ag-geometric-regularity-perfect-base", "thm-ag-perfect-field-jacobian-regularity", "lem-ag-geometrically-regular-fibres-local-presentation", "thm-ag-standard-smooth-geometric-regularity", "thm-ag-standard-smooth-base-change-composition", "thm-ag-submersion-criterion-standard-smooth"]
 examples: []
 ---

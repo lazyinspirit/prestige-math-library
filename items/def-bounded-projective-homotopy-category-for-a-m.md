@@ -2,7 +2,7 @@
 id: def-bounded-projective-homotopy-category-for-a-m
 kind: definition
 title: "The bounded projective homotopy category C_m and the two shifts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-khovanov-seidel-module-category-and-projectives, thm-the-khovanov-seidel-algebra-has-finite-homological-dimension, lem-bounded-finite-projective-model-for-khovanov-seidel-modules, def-homotopy-category-of-chain-complexes, def-shift-of-a-chain-complex, def-mapping-cone-of-a-chain-map, thm-the-homotopy-category-of-an-abelian-category-is-triangulated, def-triangulated-category, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-finitely-generated-graded-projective-module, prop-bounded-derived-localizations-embed-fully-faithfully]
@@ -21,6 +21,7 @@ sources:
     - title: "Charles Weibel, An Introduction to Homological Algebra, ch. 10 §10.4, pp. 387-390"
       url: "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

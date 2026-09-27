@@ -2,7 +2,7 @@
 id: "thm-cotangent-space-maximal-ideal-quotient"
 kind: "theorem"
 title: "Cotangent space at a rational point"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-conormal-exact-sequence-algebra", "lem-sheaf-differentials-affine-compatibility", "def-relative-cotangent-space", "cor-derivations-represented-by-differentials", "lem-differentials-localization", "def-residue-field-scheme-point", "def-scheme-over-base"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/00RW"
     - title: "Vakil 22.2.18, pp.582-583"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

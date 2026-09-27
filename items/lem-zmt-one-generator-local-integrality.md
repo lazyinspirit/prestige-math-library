@@ -2,7 +2,7 @@
 id: lem-zmt-one-generator-local-integrality
 kind: lemma
 title: A quasi-finite one-generator quotient is locally its integral closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-multiplicative-subset-and-localisation, def-integral-subalgebra-of-an-arbitrary-ring-map, lem-zmt-polynomial-relation-leading-coefficient-is-integral, thm-transitivity-of-integrality, thm-localisation-commutes-with-quotients, thm-first-isomorphism-theorem-rings, thm-universal-property-of-a-polynomial-ring, cor-polynomial-ring-over-a-domain-is-a-domain, prop-localisation-zero-equality-and-kernel-criteria]
@@ -20,6 +20,8 @@ sources:
       locator: "Section 10.123, Lemma 10.123.11"
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

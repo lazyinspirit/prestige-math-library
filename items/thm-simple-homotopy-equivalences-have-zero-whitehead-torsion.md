@@ -2,7 +2,7 @@
 id: thm-simple-homotopy-equivalences-have-zero-whitehead-torsion
 kind: theorem
 title: "Simple homotopy equivalences have zero torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-finite-based-free-chain-complex-and-its-contraction-torsion, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, def-simple-homotopy-equivalence, lem-an-elementary-expansion-has-zero-whitehead-torsion, thm-composition-and-sum-formulas-for-whitehead-torsion, thm-whitehead-torsion-is-independent-of-cellular-approximation-basepaths-lifts-orientations-orders-and-contraction, lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group, def-homotopy-equivalence, def-based-cellular-chain-complex-of-a-universal-cover, def-elementary-expansion-and-collapse-of-finite-cw-complexes, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

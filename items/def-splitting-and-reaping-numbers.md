@@ -2,7 +2,7 @@
 id: def-splitting-and-reaping-numbers
 kind: definition
 title: The splitting and reaping numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-almost-inclusion-pseudointersection-and-tower, def-axiom-of-choice, def-cardinal, lem-cardinality-of-a-well-orderable-set, def-natural-numbers, def-countable, thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero, def-cardinal-arithmetic]
@@ -19,6 +19,7 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 2, printed pp.2-3"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: lem-group-rings-have-invariant-basis-number-via-augmentation
 kind: lemma
 title: "Integral group rings have invariant basis number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-group-ring, def-augmentation-map-and-augmentation-ideal-of-a-group-ring, thm-nonzero-commutative-rings-have-invariant-basis-number, def-ring-homomorphism, def-natural-numbers, def-integers, def-int-operations, thm-int-comm-ring, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring, thm-group-ring-is-a-unital-algebra-with-basis-g]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

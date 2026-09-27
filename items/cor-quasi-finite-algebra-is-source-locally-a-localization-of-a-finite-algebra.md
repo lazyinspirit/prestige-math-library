@@ -2,7 +2,7 @@
 id: cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra
 kind: corollary
 title: Quasi-finite algebras are source locally localizations of finite algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-integral-subalgebra-of-an-arbitrary-ring-map, thm-quasi-finite-algebra-open-finite-factorization, def-principal-localisation, def-axiom-of-choice]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Corollary 17.12"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Corollary 17.12"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

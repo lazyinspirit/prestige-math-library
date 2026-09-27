@@ -2,7 +2,7 @@
 id: lem-graph-closed-separated-target
 kind: lemma
 title: Closed graphs over separated targets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, def-graph-morphism-over-base, lem-graph-as-pullback-diagonal, lem-base-change-open-closed-immersions, thm-fibre-products-of-schemes-exist]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.3.6, printed p.309"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

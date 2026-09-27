@@ -2,7 +2,7 @@
 id: lem-sylow-subgroups-of-a-normal-subgroup-are-intersections
 kind: lemma
 title: "Sylow subgroups of a normal subgroup are intersections with Sylow subgroups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-sylow-p-subgroup, thm-sylow-first-theorem, thm-sylow-second-theorem, thm-lagrange, lem-subgroups-of-finite-p-groups-are-p-groups, def-normal-subgroup, lem-product-with-normal-subgroup, def-p-adic-valuation, thm-conjugation-is-an-automorphism, def-finite-p-group, cor-order-of-a-quotient-group]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

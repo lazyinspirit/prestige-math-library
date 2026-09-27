@@ -2,7 +2,7 @@
 id: lem-exponential-base-assignment-tester-from-quadratic-oracles
 kind: lemma
 title: "An exponential-size constant-query base assignment tester"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-assignment-tester-and-rejection-ratio, thm-linearity-test-rejects-proportionally-to-distance, lem-quadratic-test-soundness, lem-circuit-satisfaction-is-linear-quadratic-consistency, def-quadratic-consistency-test, def-self-correction-of-a-noisy-linear-function, thm-linear-self-correction, def-linearity-test, lem-boolean-cube-fourier-inversion-and-parseval]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

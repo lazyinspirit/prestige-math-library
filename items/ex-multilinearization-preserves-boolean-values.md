@@ -2,7 +2,7 @@
 id: ex-multilinearization-preserves-boolean-values
 kind: example
 title: "A concrete multilinearization calculation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-multilinearization-operator, lem-multilinearization-preserves-boolean-values, thm-z-mod-p-is-a-field]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

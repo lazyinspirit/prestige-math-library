@@ -1,7 +1,7 @@
 ---
 page: homogeneous-resultants-and-projective-intersection-length
 title: "Homogeneous Resultants and Projective Intersection Length"
-status: draft
+status: published
 requires: [artinian-rings-and-length, rees-modules-artin-rees-and-hilbert-samuel-theory, koszul-complexes-and-regular-sequences, projective-algebraic-sets-projective-morphisms-and-cones, schemes-subschemes-and-morphisms-locally-of-finite-type, dimension-constructible-images-and-dimensions-of-fibres, linear-algebra-methods-in-combinatorics, the-fundamental-theorem-of-algebra]
 items: [def-sylvester-resultant-of-binary-forms,
         lem-binary-resultant-scaling-specialization-and-dehomogenization,

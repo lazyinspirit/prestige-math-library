@@ -2,7 +2,7 @@
 id: cor-morphisms-equal-on-dense-open-reduced-source
 kind: corollary
 title: Agreement on a schematically dense open
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-morphisms-agree-closed-equalizer-separated-target, def-reduction-of-scheme, def-reduced-affine-scheme, def-closed-immersion-schemes, def-axiom-of-choice, thm-proper-ideal-contained-in-maximal-ideal, cor-maximal-ideals-are-prime]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.4.2, printed p.315"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

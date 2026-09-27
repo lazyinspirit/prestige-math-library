@@ -2,7 +2,7 @@
 id: ex-ip-can-be-given-perfect-completeness
 kind: example
 title: "Perfect completeness through a TQBF reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-ip-can-be-given-perfect-completeness, thm-tqbf-has-a-polynomial-round-interactive-proof, def-shamir-protocol-for-tqbf, lem-efficient-prime-field-for-a-polynomial-soundness-budget, lem-total-soundness-follows-by-union-bound, thm-z-mod-p-is-a-field]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

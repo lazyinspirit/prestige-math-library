@@ -2,7 +2,7 @@
 id: "rem-conormal-map-need-not-injective"
 kind: "remark"
 title: "The conormal sequence is only right exact"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["thm-conormal-exact-sequence-algebra", "lem-differentials-polynomial-algebra-free"]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

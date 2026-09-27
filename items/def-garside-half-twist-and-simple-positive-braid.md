@@ -2,7 +2,7 @@
 id: def-garside-half-twist-and-simple-positive-braid
 kind: definition
 title: "The Garside half twist and simple positive braids"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-positive-braid-monoid, def-left-and-right-divisibility-for-positive-braids,
@@ -22,6 +22,7 @@ sources:
     - title: "J. Gonzalez-Meneses, Basic results on braid groups, Section 4, printed pp. 27-28"
       url: "https://arxiv.org/abs/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

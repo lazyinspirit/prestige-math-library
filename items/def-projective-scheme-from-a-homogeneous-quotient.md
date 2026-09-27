@@ -2,7 +2,7 @@
 id: def-projective-scheme-from-a-homogeneous-quotient
 kind: definition
 title: "Projective scheme of a homogeneous quotient and its standard affine charts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,8 @@ sources:
     - title: "The Stacks Project, Sections 26.5 and 27.8: affine schemes and Proj"
       url: "https://stacks.math.columbia.edu/tag/01M3"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

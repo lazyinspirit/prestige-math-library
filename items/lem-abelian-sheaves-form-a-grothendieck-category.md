@@ -2,7 +2,7 @@
 id: "lem-abelian-sheaves-form-a-grothendieck-category"
 kind: "lemma"
 title: "Abelian sheaves form a Grothendieck category"
-status: draft
+status: published
 origin: pipeline
 deps: [def-grothendieck-category, thm-abelian-sheaves-form-abelian-category, def-morphism-of-presheaves, thm-exactness-of-sheaves-stalkwise, thm-sheafification-universal-property, thm-sheafification-preserves-stalks, thm-extension-by-zero-adjunction-exactness, def-extension-by-zero-abelian-sheaf, def-sheafification, thm-ab5-is-equivalent-to-exactness-of-filtered-colimits, prop-abelian-groups-are-z-modules, thm-module-categories-are-grothendieck-categories, lem-equality-in-a-filtered-colimit-of-sets-is-eventual, def-stalk-of-presheaf, def-separating-set-and-coseparating-set, def-generator-and-cogenerator-of-a-category]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "The Stacks Project, Injectives (tag 01DF)"
       url: https://stacks.math.columbia.edu/tag/01DF
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-plurality-decoding-of-powered-local-views
 kind: example
 title: "Numerical local-view plurality decoding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-plurality-decoding-of-powered-local-views]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

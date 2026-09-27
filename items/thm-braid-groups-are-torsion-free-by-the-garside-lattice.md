@@ -2,7 +2,7 @@
 id: thm-braid-groups-are-torsion-free-by-the-garside-lattice
 kind: theorem
 title: "Braid groups are torsion free by the garside lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-left-and-right-divisibility-extend-to-lattice-orders-on-the-braid-group,
@@ -20,6 +20,7 @@ sources:
     - title: "J. Gonzalez-Meneses, Basic results on braid groups, Proposition 4.1, printed p. 30"
       url: "https://arxiv.org/abs/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

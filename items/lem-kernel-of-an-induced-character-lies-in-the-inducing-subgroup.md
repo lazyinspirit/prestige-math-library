@@ -2,7 +2,7 @@
 id: lem-kernel-of-an-induced-character-lies-in-the-inducing-subgroup
 kind: lemma
 title: Kernel of an induced representation is the intersection of the conjugates of the kernel of the inducing representation
-status: draft
+status: published
 origin: pipeline
 deps: [def-induced-r-linear-g-module-by-h-covariant-functions, prop-induced-module-decomposes-over-a-left-transversal, thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel, def-kernel-of-a-complex-character, thm-image-subgroup-and-kernel-normal, thm-left-coset-action-and-its-kernel, def-core-of-a-subgroup, thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets, def-kernel-and-image-of-group-homomorphism]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

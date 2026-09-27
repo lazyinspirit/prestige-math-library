@@ -2,7 +2,7 @@
 id: lem-frobenius-kernel-cardinality
 kind: lemma
 title: "Frobenius kernel cardinality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-frobenius-kernel-set, def-frobenius-complement-and-frobenius-group, def-normalizer-of-a-subgroup, thm-conjugate-subgroups-are-counted-by-the-normalizer, thm-lagrange, def-index, lem-centralizers-and-normalizers-are-subgroups]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

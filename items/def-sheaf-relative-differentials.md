@@ -2,7 +2,7 @@
 id: "def-sheaf-relative-differentials"
 kind: "definition"
 title: "Sheaf of relative Kähler differentials"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-scheme-over-base", "def-morphism-of-schemes", "def-inverse-image-presheaf-and-sheaf", "def-sheafification", "def-module-on-ringed-space", "def-sheaf-on-topological-space", "def-kahler-differentials-algebra", "thm-kahler-differentials-existence-presentation", "def-derivation-algebra"]
 provenance:
@@ -16,6 +16,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UM"
     - title: "Vakil §22.2.20, pp.584–585"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

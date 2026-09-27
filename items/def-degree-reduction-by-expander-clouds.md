@@ -2,7 +2,7 @@
 id: def-degree-reduction-by-expander-clouds
 kind: definition
 title: "Degree reduction by expander incidence clouds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-and-labeling-value, def-constraint-graph-regularization, lem-constraint-expander-overlay]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

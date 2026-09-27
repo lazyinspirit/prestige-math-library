@@ -2,7 +2,7 @@
 id: def-integral-subalgebra-of-an-arbitrary-ring-map
 kind: definition
 title: Integral elements subalgebra of an arbitrary ring map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-integral-element-and-algebraic-integer, def-integral-ring-extension, cor-integral-elements-form-a-subring, def-subring, def-algebra-over-a-commutative-ring, def-integral-closure-and-integrally-closed-domain, thm-integrality-commutes-with-localisation]
@@ -19,6 +19,7 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/xnotes/CA.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

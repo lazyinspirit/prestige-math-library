@@ -2,7 +2,7 @@
 id: lem-bounded-finite-projective-model-for-khovanov-seidel-modules
 kind: lemma
 title: "The bounded projective comparison for the derived category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-khovanov-seidel-algebra-has-finite-homological-dimension, def-graded-khovanov-seidel-module-category-and-projectives, def-finitely-generated-graded-projective-module, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-homotopy-category-of-chain-complexes, def-chain-homotopy, def-derived-category-of-an-abelian-category, def-shift-of-a-chain-complex, prop-bounded-derived-localizations-embed-fully-faithfully, def-homotopically-projective-bounded-above-complex, prop-morphisms-from-a-homotopically-projective-complex-need-no-roof, def-mapping-cone-of-a-chain-map, thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact, def-triangulated-category, def-triangulated-category-axiom-tr-two, def-triangulated-category-axiom-tr-three, thm-the-homotopy-category-of-an-abelian-category-is-triangulated, prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third, def-small-locally-small-and-large-category, thm-projective-complexes-model-the-bounded-above-derived-category]
@@ -21,6 +21,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §§2a-2c, printed pp. 9-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

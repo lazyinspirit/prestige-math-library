@@ -2,7 +2,7 @@
 id: def-plurality-decoding-of-powered-local-views
 kind: definition
 title: "Plurality decoding of powered local views"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-powering, def-constraint-graph-and-labeling-value]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
 sources:
   scraped: []

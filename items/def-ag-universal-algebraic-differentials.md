@@ -2,13 +2,14 @@
 id: "def-ag-universal-algebraic-differentials"
 kind: "definition"
 title: "Universal algebraic differentials and A-derivations"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-commutative-ring", "def-left-and-right-modules"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

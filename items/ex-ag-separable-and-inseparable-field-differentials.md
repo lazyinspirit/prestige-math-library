@@ -2,7 +2,7 @@
 id: "ex-ag-separable-and-inseparable-field-differentials"
 kind: "example"
 title: "A finite separable extension and an inseparable extension with differentials"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-primitive-element-theorem-for-finite-separable-extensions", "lem-ag-polynomial-quotient-differentials", "thm-evaluation-kernel-and-minimal-polynomial", "thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "lem-polynomial-factorisation-into-irreducibles", "def-repeated-root-and-separable-polynomial", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
     - title: "Stacks Algebra 10.131.14 and 10.143.2"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

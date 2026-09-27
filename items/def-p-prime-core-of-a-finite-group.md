@@ -2,7 +2,7 @@
 id: def-p-prime-core-of-a-finite-group
 kind: definition
 title: "The p-prime core of a finite group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-subgroup, def-finite-p-group, def-order-in-a-group, def-prime, def-subgroup, lem-product-with-normal-subgroup, thm-second-isomorphism-theorem-groups, thm-lagrange, def-generated-subgroup, def-finite-cardinality, cor-cardinality-of-the-power-set, thm-euclids-lemma, lem-divisibility-basic, thm-conjugation-is-an-automorphism]
@@ -21,6 +21,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

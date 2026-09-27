@@ -2,7 +2,7 @@
 id: thm-fadell-neuwirth-forgetful-fibration
 kind: theorem
 title: 'The Fadell-Neuwirth forgetful map: local triviality, constant fibre, and numerability for configurations in the disk'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-forgetting-configuration-points-is-locally-trivial,
@@ -34,6 +34,7 @@ sources:
     - title: "Allen Hatcher, Algebraic Topology, section 4.2, the Huebsch-Hurewicz paracompact-base strengthening, printed pp. 379-380"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

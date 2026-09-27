@@ -2,7 +2,7 @@
 id: lem-an-identity-relative-boundary-matrix-allows-cell-cancellation
 kind: lemma
 title: "An identity relative homotopy matrix permits cell cancellation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [lem-two-relative-cell-layers-have-free-group-ring-homotopy-bases, lem-cell-slides-and-stabilizations-realize-elementary-group-ring-matrices, prop-relative-cw-inclusions-are-cofibrations, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, thm-long-exact-sequence-of-relative-homotopy-groups, def-elementary-expansion-and-collapse-of-finite-cw-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

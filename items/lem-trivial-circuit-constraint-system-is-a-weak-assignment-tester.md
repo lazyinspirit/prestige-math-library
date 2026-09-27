@@ -2,7 +2,7 @@
 id: lem-trivial-circuit-constraint-system-is-a-weak-assignment-tester
 kind: lemma
 title: "Gate constraints are a weak assignment tester"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-assignment-tester-and-rejection-ratio, def-circuit-sat, def-boolean-circuit-size-depth-fanin-and-basis, def-constraint-graph-and-labeling-value]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

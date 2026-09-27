@@ -1,7 +1,7 @@
 ---
 name: braid-groups
 title: Braid Groups
-status: draft
+status: published
 ---
 
 Braid groups are developed here from configuration spaces rather than from

@@ -2,7 +2,7 @@
 id: lem-every-whitehead-class-is-realized-by-a-finite-cw-homotopy-equivalence
 kind: lemma
 title: "Every Whitehead class is realized by a finite CW homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, lem-two-relative-cell-layers-have-free-group-ring-homotopy-bases, lem-relative-hurewicz-comparison-through-a-choice-free-weak-model, thm-cellular-homology-computes-singular-homology, thm-whitehead-theorem, thm-covering-space-lifting-criterion, thm-composition-and-sum-formulas-for-whitehead-torsion, lem-high-relative-cells-do-not-change-lower-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

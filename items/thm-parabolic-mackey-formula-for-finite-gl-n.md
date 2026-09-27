@@ -2,7 +2,7 @@
 id: thm-parabolic-mackey-formula-for-finite-gl-n
 kind: theorem
 title: Parabolic Mackey formula for finite GL_n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-harish-chandra-induction-and-restriction-for-finite-gl-n, def-coordinate-parabolics-for-ordered-partitions, lem-parabolic-mackey-biset-splitting-in-gl-n, lem-standard-parabolic-double-cosets-are-young-double-cosets, def-compositions-partial-flags-and-standard-parabolics, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-weyl-group-and-length-for-finite-gl-n, def-symmetric-group, lem-symmetric-group-is-a-group, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, def-subgroup, def-normal-subgroup, def-coset, def-group-action, def-g-module-over-a-commutative-ring, def-induced-r-linear-g-module-by-h-covariant-functions, def-standard-subgroups-of-gl-n-over-a-finite-field]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Harish-Chandra section, printed pp. 41-43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

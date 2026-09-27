@@ -2,7 +2,7 @@
 id: "lem-derived-tensor-product-of-abelian-sheaves"
 kind: "lemma"
 title: "Derived tensor product of abelian sheaves"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, lem-abelian-sheaves-admit-bounded-above-flat-resolutions, lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms, lem-flatness-criteria-and-flat-covers-for-abelian-sheaves, def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, def-flat-abelian-sheaf, def-k-flat-complex-of-abelian-sheaves, def-derived-tensor-product-in-the-bounded-above-setting, def-derived-category-of-an-abelian-category, lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category, thm-the-calculus-of-fractions-constructs-the-localization, def-localization-of-a-category-at-a-class-of-morphisms, prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms, def-multiplicative-system-in-a-category, def-left-roof-representing-a-localized-morphism, def-common-refinement-equivalence-of-roofs, lem-composition-of-roofs-is-well-defined, lem-addition-of-roofs-makes-an-additive-localization, prop-a-complex-is-zero-in-the-derived-category-exactly-when-it-is-acyclic, def-quasi-isomorphism, def-cohomology-object-of-a-cochain-complex, thm-a-chain-map-induces-a-well-defined-map-on-homology, thm-long-exact-sequence-in-homology, def-short-exact-sequence-of-complexes, def-cochain-map, def-cochain-complex-in-an-abelian-category, def-bounded-bounded-below-and-bounded-above-complex, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, def-kernel-cokernel-image-sheaves, thm-exactness-of-sheaves-stalkwise, thm-sheaf-morphism-isomorphism-stalkwise, def-stalk-of-presheaf, lem-abelian-sheaves-form-a-grothendieck-category, def-direct-sum-of-a-family-of-modules]
 provenance:
@@ -17,6 +17,8 @@ sources:
     - title: "The Stacks Project, Derived Categories"
       url: https://stacks.math.columbia.edu/download/derived.pdf
       locator: "Section 13.22 (K-flat complexes) and Section 13.26 (derived tensor product)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

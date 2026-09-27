@@ -2,7 +2,7 @@
 id: prop-the-symmetric-group-acts-freely-on-ordered-configurations
 kind: proposition
 title: "The symmetric group acts continuously and freely on $F_n(X)$ by permuting labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space, def-finite-symmetric-group-and-permutation-notation,
@@ -22,6 +22,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 1.1 and 1.3, printed pp. 3-6"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

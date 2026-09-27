@@ -2,7 +2,7 @@
 id: thm-frobenius-normal-p-complement-theorem
 kind: theorem
 title: "Frobenius normal p complement theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-p-complement-and-p-nilpotent-group, def-p-local-normalizer-for-normal-complement-theory, def-control-of-fusion-in-a-sylow-p-subgroup, def-sylow-p-subgroup, def-p-residual-of-a-finite-group, lem-normal-p-complements-pass-to-subgroups-and-p-local-normalizers, lem-local-normal-p-complements-force-control-of-fusion, lem-fusion-control-gives-a-nontrivial-p-quotient-of-the-p-residual, lem-p-residual-is-generated-by-p-prime-elements-and-idempotent, def-normal-subgroup, def-subgroup, thm-lagrange, cor-order-of-a-quotient-group, thm-second-isomorphism-theorem-groups, lem-product-with-normal-subgroup, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, def-group-homomorphism, thm-first-isomorphism-theorem-groups]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

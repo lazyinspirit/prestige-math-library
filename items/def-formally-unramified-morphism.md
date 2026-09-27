@@ -2,13 +2,14 @@
 id: "def-formally-unramified-morphism"
 kind: "definition"
 title: "Formally unramified morphism"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-scheme-over-base", "def-closed-immersion-schemes", "def-ideal-sheaf", "def-morphism-of-schemes"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-young-permutation-modules-for-row-and-column-partitions
 kind: example
 title: The two extreme Young permutation modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-young-subgroup-tabloid-and-permutation-module, lem-young-permutation-module-is-induced-from-the-trivial-character, def-trivial-regular-and-permutation-representations]
@@ -20,6 +20,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Section 1.6, printed pp. 13-14 (PDF pp. 15-16)"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

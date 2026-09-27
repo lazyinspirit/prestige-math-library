@@ -1,7 +1,7 @@
 ---
 page: eastons-theorem-and-cardinal-invariants-of-the-continuum-examples
 title: "Easton's Theorem and Cardinal Invariants of the Continuum: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-countable-decreasing-family-has-a-pseudointersection, ex-ch-collapses-classical-cardinal-invariants, ex-easton-two-regular-cardinal-pattern, ex-ma-model-null-meagre-additivity-equals-continuum]
 ---

@@ -2,7 +2,7 @@
 id: "def-k-flat-complex-of-abelian-sheaves"
 kind: "definition"
 title: "K-flat complexes of abelian sheaves in the bounded-above setting"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-tensor-product-of-abelian-sheaves, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, def-bounded-bounded-below-and-bounded-above-complex, def-cochain-complex-in-an-abelian-category, def-quasi-isomorphism, def-flat-abelian-sheaf, def-cohomology-object-of-a-cochain-complex]
 provenance:
@@ -13,6 +13,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Definition 26.2 and Lemma 26.4; the bounded-above variant of K-flatness"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

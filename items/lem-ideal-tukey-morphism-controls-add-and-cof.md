@@ -2,7 +2,7 @@
 id: lem-ideal-tukey-morphism-controls-add-and-cof
 kind: lemma
 title: Ideal Tukey morphisms control additivity and cofinality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-null-and-meagre-cardinal-invariants, def-axiom-of-choice, def-cardinal, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic]
@@ -18,7 +18,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Lemma 2.2 and the surrounding Tukey discussion, printed pp.2-3"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

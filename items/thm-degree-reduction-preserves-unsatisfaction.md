@@ -2,7 +2,7 @@
 id: thm-degree-reduction-preserves-unsatisfaction
 kind: theorem
 title: "Degree reduction preserves unsatisfaction quantitatively"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-cloud-consistency-forces-near-constant-labels, lem-regularization-preserves-value-quantitatively, lem-constraint-expander-overlay, def-gap-preserving-csp-reduction, def-degree-reduction-by-expander-clouds]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

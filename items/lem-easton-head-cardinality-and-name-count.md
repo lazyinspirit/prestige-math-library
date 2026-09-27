@@ -2,7 +2,7 @@
 id: lem-easton-head-cardinality-and-name-count
 kind: lemma
 title: GCH counts Easton head conditions and subset names
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-easton-function, def-easton-support-product, lem-easton-head-cc-and-tail-closure, def-nice-name-for-a-subset, def-kappa-closure-distributivity-and-chain-condition, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption, thm-cofinality-basics, def-cofinality, def-aleph-and-beth-hierarchies, def-axiom-of-choice]
@@ -20,7 +20,8 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Theorem 58 proof, PDF p.12"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement
@@ -68,6 +69,7 @@ $\operatorname{cf}(\lambda)>\kappa$; the zero exponent has value $\lambda^0=1$.
 
 
 2.1 $\lvert P^{\le\kappa}\rvert\le F(\kappa)$: by step 1.2 the graph of each $\gamma$-block has size below $\gamma$, so the number of possible blocks is at most $\sum_{\eta<\gamma}(2\cdot F(\gamma))^{|\eta|}\le\gamma\cdot F(\gamma)=F(\gamma)$ by step 1.1 and absorption; the term for $\eta=0$ is $1$. Here the cofinality of $F(\gamma)$ exceeds $\gamma$. Coding a condition by its at most $\kappa$ blocks therefore gives $|P^{\le\kappa}|\le\prod_{\gamma\le\kappa}F(\gamma)\le F(\kappa)^{\kappa}=F(\kappa)$. [F2, F6, step 1.1, step 1.2]
+
 3.1 Steps 2.1 and 1.3 give injections in both directions between $P^{\le\kappa}$ and $F(\kappa)$, so $\lvert P^{\le\kappa}\rvert=F(\kappa)$ by antisymmetry of cardinal comparison. [F6, step 2.1, step 1.3]
 
 4.1 There are at most $F(\kappa)$ nice $P^{\le\kappa}$-names for subsets of $\kappa$: by [F5] such a name is coded by the function $\kappa\to\{A\subseteq P^{\le\kappa}:A$ is an antichain$\}$ sending $a\mapsto A_a$, and two such functions that differ at an $a$ with $A_a\ne A'_a$ give different names, since then either $A_a\setminus A'_a$ or $A'_a\setminus A_a$ contains some $p$ and $\langle\check a,p\rangle$ lies in exactly one of the two names; by step 1.2 every antichain has cardinality at most $\kappa$, so there are at most $\lvert P^{\le\kappa}\rvert^{\kappa}=F(\kappa)^{\kappa}=F(\kappa)$ antichains by steps 3.1 and 1.1, and at most $F(\kappa)^{\kappa}=F(\kappa)$ such coding functions by step 1.1. The exponent laws and products used are those of [F6], which hold under the Axiom of Choice [F8]. [F5, F6, F8, step 1.1, step 1.2, step 3.1]

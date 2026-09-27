@@ -2,7 +2,7 @@
 id: lem-local-domain-dominated-by-valuation-overring
 kind: lemma
 title: A local domain has a dominating valuation overring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-valuation-ring, def-local-ring, def-field-of-fractions, def-integral-element-and-algebraic-integer, def-axiom-of-choice, thm-zorn, cor-integral-elements-form-a-subring, thm-lying-over, thm-proper-ideal-contained-in-maximal-ideal, cor-maximal-ideals-are-prime]
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Commutative Algebra, Definition 10.50.1 and Lemmas 10.50.2-10.50.5 (tags 00I9, 00IA, 00IB, 00IC, 052K), printed p.117"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: "cex-bad-cover-circle-cech-misses-h1"
 kind: "counterexample"
 title: "The one-member cover of the circle has no Čech H1, but the sheaf H1 is nonzero"
-status: draft
+status: published
 origin: pipeline
 deps: [cex-global-sections-epimorphism-fails-lift, def-cech-cohomology-open-cover, def-cech-cochain-complex-open-cover, thm-cech-to-sheaf-cohomology-comparison, def-axiom-of-choice, def-acyclic-cover-for-sheaf, thm-leray-acyclic-cover-theorem, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-circle-as-real-line-mod-integers, def-sheaf-cohomology-derived-global-sections, def-sheaf-on-topological-space]
 provenance:
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "Jiahui Gao and Shuwu Zhang, Lectures on Algebraic Geometry"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement refuted

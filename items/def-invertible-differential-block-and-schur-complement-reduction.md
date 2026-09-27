@@ -2,7 +2,7 @@
 id: def-invertible-differential-block-and-schur-complement-reduction
 kind: definition
 title: An invertible cochain differential block and its candidate reduction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-complex-homotopy-and-contractibility-in-an-additive-category, thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]
@@ -19,6 +19,7 @@ sources:
     - title: "David Clark, Scott Morrison and Kevin Walker, Fixing the Functoriality of Khovanov Homology, Appendix A.1, printed pp. 1562-1563"
       url: "https://msp.org/gt/2009/13-3/gt-v13-n3-p08-p.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

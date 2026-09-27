@@ -2,7 +2,7 @@
 id: "lem-irreducibility-criteria-and-open-subspaces"
 kind: "lemma"
 title: "Irreducibility via nonempty open subsets, connectedness and open subspaces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-subspace-topology-top, def-connected-space, def-dense-top, def-irreducible-topological-space-and-subset]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

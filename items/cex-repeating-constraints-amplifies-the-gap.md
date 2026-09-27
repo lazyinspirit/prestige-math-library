@@ -2,7 +2,7 @@
 id: cex-repeating-constraints-amplifies-the-gap
 kind: counterexample
 title: "Duplicating constraints does not change UNSAT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [fs-repeating-constraints-amplifies-the-gap, def-constraint-graph-and-labeling-value]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

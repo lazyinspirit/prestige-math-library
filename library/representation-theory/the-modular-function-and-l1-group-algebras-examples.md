@@ -1,7 +1,7 @@
 ---
 page: the-modular-function-and-l1-group-algebras-examples
 title: "The Modular Function and L1 Group Algebras — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-modular-function-of-the-affine-group-of-the-line, ex-convolution-on-a-discrete-group, ex-convolution-on-a-compact-group, cex-naive-inversion-is-not-the-l1-involution-for-a-nonunimodular-group]
 ---

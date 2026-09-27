@@ -2,7 +2,7 @@
 id: lem-easton-class-forcing-truth-and-set-names
 kind: lemma
 title: Set-stage names and the forcing truth lemma for the Easton class product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gbc-global-choice-ground-for-easton, def-easton-support-product, lem-easton-head-cc-and-tail-closure, def-forcing-names-and-name-rank, lem-forcing-names-and-name-ranks-are-absolute, def-forcing-name-valuation-and-generic-extension, def-forcing-relation-for-atomic-formulas, lem-atomic-forcing-relation-is-well-founded-and-definable, def-forcing-relation-for-formulas, lem-forcing-monotonicity-density-and-decision, thm-forcing-theorem, def-dense-open-sets-and-model-generic-filters]
@@ -18,7 +18,8 @@ sources:
     - title: "Thomas Jech, Set Theory, Chapter 15, class forcing, Boolean-valued model M^B and the Forcing Theorem (15.15), printed pp.235-236"
       url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/15-applications_of_forcing.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

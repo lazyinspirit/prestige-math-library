@@ -2,7 +2,7 @@
 id: lem-frobenius-kernel-is-an-intersection-of-character-kernels
 kind: lemma
 title: "Frobenius kernel is an intersection of character kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-frobenius-kernel-set, lem-frobenius-character-extension-is-irreducible, lem-frobenius-character-extension-construction, thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel, thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters, lem-intersection-of-normal-subgroups, def-normal-subgroup, def-frobenius-complement-and-frobenius-group]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

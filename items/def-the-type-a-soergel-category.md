@@ -2,7 +2,7 @@
 id: def-the-type-a-soergel-category
 kind: definition
 title: "The type-A Soergel category $\\mathrm{SBim}_n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-bott-samelson-bimodule-of-a-word, def-the-idempotent-completion-of-a-preadditive-category]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §§2–5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

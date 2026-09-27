@@ -1,7 +1,7 @@
 ---
 page: ordered-and-unordered-configuration-spaces-examples
 title: "Ordered and Unordered Configuration Spaces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-two-point-ordered-configurations-of-the-plane,
            ex-the-two-point-unordered-cover-and-its-monodromy,

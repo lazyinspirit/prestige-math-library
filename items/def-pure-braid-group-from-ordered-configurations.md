@@ -2,7 +2,7 @@
 id: def-pure-braid-group-from-ordered-configurations
 kind: definition
 title: "The pure braid group $PB_n$ as the fundamental group of an ordered configuration space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ordered-configuration-space,
@@ -24,6 +24,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 1.1-1.3, printed pp. 3-6"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

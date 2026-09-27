@@ -1,7 +1,7 @@
 ---
 name: complex-analysis
 title: Complex Analysis
-status: draft
+status: published
 ---
 
 Complex analysis begins where a single limit in the plane replaces two limits

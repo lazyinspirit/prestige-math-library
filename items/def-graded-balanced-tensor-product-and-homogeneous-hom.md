@@ -2,7 +2,7 @@
 id: def-graded-balanced-tensor-product-and-homogeneous-hom
 kind: definition
 title: Graded balanced tensor product and homogeneous Hom
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-tensor-product-of-modules-by-generators-and-relations, thm-universal-property-of-module-tensor-products, thm-bimodule-actions-induced-on-tensor-products]
@@ -21,6 +21,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.12, tag 00CV"
       url: "https://stacks.math.columbia.edu/tag/00CV"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

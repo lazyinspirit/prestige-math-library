@@ -2,7 +2,7 @@
 id: "lem-field-is-noetherian"
 kind: "lemma"
 title: "A field has only the zero ideal and itself, hence is Noetherian"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["def-field", "def-left-right-and-two-sided-ideal", "def-generated-and-principal-ideals", "def-noetherian-ring-and-module"]
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

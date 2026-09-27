@@ -2,7 +2,7 @@
 id: lem-diagonal-quasi-compact-iff-quasi-separated
 kind: lemma
 title: Quasi-separatedness and the diagonal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-compact-and-quasi-separated-morphism, def-quasi-compact-and-quasi-separated-scheme, def-scheme, thm-affine-fibre-product-tensor-ring, lem-fibre-product-open-restriction, cor-affine-scheme-quasi-compact, def-diagonal-morphism-scheme]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.2.4, printed p.306"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

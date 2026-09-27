@@ -2,7 +2,7 @@
 id: ex-grassmannians-as-maximal-parabolic-quotients
 kind: example
 title: Grassmannians as maximal parabolic quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compositions-partial-flags-and-standard-parabolics, thm-transitive-actions-are-coset-actions, thm-dimension-of-a-linear-subspace, def-standard-subgroups-of-gl-n-over-a-finite-field, def-group-action, def-finite-field-and-its-order, def-field, def-vector-space, def-linear-combination-and-span, def-linear-basis, def-matrix-product-and-identity-matrix, thm-matrix-multiplication-laws]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Sections 3.5 and 4.7, printed pp. 37-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

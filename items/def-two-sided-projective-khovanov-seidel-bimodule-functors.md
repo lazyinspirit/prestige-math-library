@@ -2,7 +2,7 @@
 id: def-two-sided-projective-khovanov-seidel-bimodule-functors
 kind: definition
 title: "The two-sided projective bimodules U_i and their tensor functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-khovanov-seidel-module-category-and-projectives, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis, def-path-ring-of-a-finite-quiver-over-the-integers, def-graded-balanced-tensor-product-and-homogeneous-hom, def-graded-ring-module-bimodule-and-internal-shift, thm-bimodule-tensor-exactness-and-projective-preservation, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-finitely-generated-graded-projective-module, lem-projective-modules-are-flat-over-an-arbitrary-ring, thm-a-direct-summand-of-a-projective-is-projective]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2b, printed pp. 11-12"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

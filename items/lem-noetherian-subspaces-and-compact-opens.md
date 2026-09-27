@@ -2,7 +2,7 @@
 id: "lem-noetherian-subspaces-and-compact-opens"
 kind: "lemma"
 title: "Subspaces of a Noetherian space and its compact open subsets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-noetherian-topological-space, def-compact-space, def-subspace-topology-top, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

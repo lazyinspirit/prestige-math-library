@@ -2,7 +2,7 @@
 id: def-split-grothendieck-rings-of-type-a-soergel-categories
 kind: definition
 title: "Split Grothendieck rings of the type-A Soergel categories"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-additive-category, def-the-type-a-soergel-category, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, lem-distant-soergel-generators-commute, lem-the-rank-one-soergel-bimodule-square-splits]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §4.1, PDF pp. 20–22"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

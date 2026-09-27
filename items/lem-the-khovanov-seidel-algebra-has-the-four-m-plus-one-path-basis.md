@@ -2,7 +2,7 @@
 id: lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis
 kind: lemma
 title: "The 4m+1 path basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-khovanov-seidel-type-a-quiver-algebra, def-path-ring-of-a-finite-quiver-over-the-integers, def-free-module-on-a-set-and-standard-basis, def-quotient-ring]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §1b, printed pp. 3-4"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

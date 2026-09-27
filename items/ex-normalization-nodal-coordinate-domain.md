@@ -2,7 +2,7 @@
 id: ex-normalization-nodal-coordinate-domain
 kind: example
 title: "Normalization of a nodal affine plane curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-polynomial-algebras-over-fields-are-integrally-closed, def-integral-closure-and-integrally-closed-domain, def-integral-element-and-algebraic-integer, cor-integral-elements-form-a-subring, thm-transitivity-of-integrality, def-field-of-fractions, cor-polynomial-ring-over-a-domain-is-a-domain, def-zero-divisor-and-integral-domain, thm-quotient-ring-universal-property, def-quotient-ring, def-polynomial-evaluation-and-root, thm-monic-polynomial-division, def-polynomial-degree-leading-coefficient-and-monic, prop-polynomial-degree-laws-over-a-commutative-ring, cor-multivariate-polynomial-ring-over-a-domain-is-a-domain]
@@ -21,6 +21,8 @@ sources:
     - title: "Stacks Project, Lemma 10.161.13 (polynomial N-2)"
       url: "https://stacks.math.columbia.edu/tag/032O"
       locator: "Lemma 10.161.13"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 name: linear-algebra
 title: Linear Algebra
-status: draft
+status: published
 ---
 
 Linear algebra here is done over an arbitrary field throughout. Vector spaces,

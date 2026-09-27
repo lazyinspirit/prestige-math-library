@@ -2,7 +2,7 @@
 id: ex-two-finite-cancellation-orders-and-their-composite-retracts
 kind: example
 title: Two adjacent noncomposable Gaussian pivots in either finite order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-finite-iterated-homological-gaussian-elimination, prop-homological-gaussian-elimination-gives-a-strong-deformation-retract, lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, def-invertible-differential-block-and-schur-complement-reduction]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

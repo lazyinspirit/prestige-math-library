@@ -2,7 +2,7 @@
 id: lem-overlap-controlled-union-lower-bound
 kind: lemma
 title: "Overlap control gives a union lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

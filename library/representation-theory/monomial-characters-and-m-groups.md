@@ -1,7 +1,7 @@
 ---
 page: monomial-characters-and-m-groups
 title: "Monomial Characters and M Groups"
-status: draft
+status: published
 items: [def-monomial-representation-and-m-group, lem-monomial-representation-has-a-monomial-matrix-model, lem-faithful-irrep-with-a-noncentral-abelian-normal-subgroup-is-properly-induced, lem-nonabelian-supersolvable-group-has-the-required-abelian-normal-subgroup, lem-induction-commutes-with-inflation, thm-supersolvable-groups-are-m-groups, thm-monomial-induction-for-virtual-characters, lem-kernel-of-an-induced-character-lies-in-the-inducing-subgroup, cor-m-groups-are-solvable, rem-m-group-converses-and-boundary]
 examples: []
 ---

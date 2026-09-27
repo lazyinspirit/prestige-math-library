@@ -2,7 +2,7 @@
 id: cex-arbitrary-link-isotopy-need-not-be-braid-isotopy
 kind: counterexample
 title: "An arbitrary isotopy of arcs need not be a braid isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-braid-isotopy-relative-top-and-bottom,
@@ -26,6 +26,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.1, author manuscript pp. 3-5"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

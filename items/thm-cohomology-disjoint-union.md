@@ -2,7 +2,7 @@
 id: "thm-cohomology-disjoint-union"
 kind: "theorem"
 title: "Cohomology of a finite disjoint union"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sheaf-cohomology-derived-global-sections, thm-extension-by-zero-adjunction-exactness, prop-derived-functors-commute-with-finite-biproducts, def-axiom-of-choice, thm-abelian-sheaves-have-enough-injectives, def-global-sections-functor-sheaves, def-godement-resolution, def-restriction-sheaf-open-subspace, def-injective-object, lem-comparison-map-from-an-exact-complex-into-an-injective-resolution, thm-chain-homotopic-maps-induce-the-same-map-on-homology, thm-choice-implies-dependent-implies-countable-choice, thm-exactness-of-sheaves-stalkwise, thm-zero-sheaf-cohomology-global-sections, def-sheaf-on-topological-space]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

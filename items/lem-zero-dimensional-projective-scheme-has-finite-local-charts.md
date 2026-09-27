@@ -2,7 +2,7 @@
 id: lem-zero-dimensional-projective-scheme-has-finite-local-charts
 kind: lemma
 title: "A zero-dimensional projective scheme has finitely many closed points with finite-dimensional local rings"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,6 +21,8 @@ sources:
     - title: "Andreas Gathmann, Algebraic Geometry class notes (2002), Section 6.1, pp. 92-94"
       url: "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

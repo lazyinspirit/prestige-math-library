@@ -2,7 +2,7 @@
 id: ex-frobenius-normal-two-complement-for-s3
 kind: example
 title: "Frobenius normal two complement for S_3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [ex-s3-as-a-frobenius-group, thm-frobenius-normal-p-complement-theorem, def-normal-p-complement-and-p-nilpotent-group, def-p-local-normalizer-for-normal-complement-theory, def-control-of-fusion-in-a-sylow-p-subgroup, def-sylow-p-subgroup, def-finite-symmetric-group-and-permutation-notation, lem-conjugating-a-cycle-relabels-its-entries, def-alternating-group, cor-alternating-group-is-normal-and-has-half-the-elements, def-normal-subgroup, def-subgroup, thm-lagrange, lem-subgroups-of-finite-p-groups-are-p-groups, def-finite-p-group, def-conjugacy-class-and-centralizer, thm-conjugation-is-an-automorphism]
@@ -22,6 +22,7 @@ sources:
       url: "https://www.maths.ox.ac.uk/system/files/attachments/Lecture%203_0.pdf"
       locator: "Lecture 3, Theorem 3.8 and sheet 3 solutions, pp. 38, 83–84"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

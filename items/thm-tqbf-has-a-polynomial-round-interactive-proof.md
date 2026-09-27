@@ -2,7 +2,7 @@
 id: thm-tqbf-has-a-polynomial-round-interactive-proof
 kind: theorem
 title: "TQBF has a polynomial-round interactive proof"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-shamir-protocol-has-perfect-completeness, lem-total-soundness-follows-by-union-bound, lem-shamir-qbf-verifier-runs-in-polynomial-time, lem-each-round-has-polynomial-communication, def-shamir-protocol-for-tqbf, def-ip]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

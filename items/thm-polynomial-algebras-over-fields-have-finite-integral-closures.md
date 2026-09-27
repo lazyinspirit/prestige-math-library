@@ -2,7 +2,7 @@
 id: thm-polynomial-algebras-over-fields-have-finite-integral-closures
 kind: theorem
 title: "Polynomial algebras over fields have finite integral closures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-integral-closure-unchanged-across-an-integral-intermediate-domain, lem-finite-purely-inseparable-rational-extension-envelope, lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite, lem-polynomial-algebras-over-fields-are-integrally-closed, lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct, lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct, lem-normal-extension-separable-over-maximal-purely-inseparable-subextension, def-field-of-fractions, def-subfield, def-field-extension-generated-subfields-and-simple-extension, def-finitely-generated-field-extension, cor-multivariate-polynomial-ring-over-a-domain-is-a-domain, def-zero-divisor-and-integral-domain, def-field, lem-field-is-a-commutative-ring, def-extension-degree-and-finite-extension, def-dimension, def-linear-basis, thm-finite-field-extensions-are-algebraic, thm-tower-law-for-finite-field-extensions, thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, def-polynomials-that-split-and-splitting-fields, cor-splitting-fields-exist-for-finite-families, prop-algebraic-splitting-extensions-are-normal, def-normal-algebraic-extension, thm-finitely-generated-algebraic-extensions-are-finite, def-relative-field-automorphism-group, def-fixed-field-of-an-automorphism-group, lem-artin-fixed-field-lower-degree-bound, lem-artin-fixed-field-upper-degree-bound, def-finite-galois-extension-and-galois-group, def-separable-elements-and-separable-extensions, def-noetherian-ring, lem-transitivity-of-module-finiteness, def-finite-type-and-module-finite-algebras, thm-transitivity-of-integrality, cor-integral-elements-form-a-subring, thm-integral-closure-is-integrally-closed, def-integral-element-and-algebraic-integer, def-integral-closure-and-integrally-closed-domain, def-integral-ring-extension, thm-primitive-element-theorem-for-finite-separable-extensions, def-matrices-over-a-commutative-ring, def-ring-matrix-product-identity-and-transpose, def-determinant-of-a-square-matrix, thm-cramers-rule-over-a-commutative-ring, thm-invertible-matrix-theorem, cor-square-matrix-invertible-iff-determinant-is-a-unit, def-invertible-matrix-and-general-linear-group, thm-root-bound-for-polynomials-over-a-domain]
@@ -27,6 +27,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, §6, §17"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "§6 and §17 (integral closures and finite integral closures)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

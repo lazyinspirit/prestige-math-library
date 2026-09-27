@@ -2,7 +2,7 @@
 id: "lem-koszul-structure-of-the-abelian-sheaf-tensor-product"
 kind: "lemma"
 title: "Associator, symmetry and unitors of the abelian sheaf tensor product"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, def-sheafification, def-presheaf-on-topological-space, def-presheaf-of-groups-rings-modules, thm-associativity-of-balanced-tensor-products, thm-hom-tensor-adjunction-for-modules, cor-left-adjoints-preserve-colimits, def-stalk-of-presheaf, thm-sheafification-preserves-stalks, thm-sheaf-morphism-isomorphism-stalkwise, lem-morphisms-of-sheaves-determined-by-stalks, thm-sheafification-universal-property, def-products-and-coproducts, lem-abelian-sheaves-form-a-grothendieck-category, prop-products-and-coproducts-of-complexes-are-degreewise-when-they-exist-and-preserve-differentials, def-cochain-complex-in-an-abelian-category, def-cochain-map, def-bounded-bounded-below-and-bounded-above-complex, def-zero-and-stalk-complex, def-direct-sum-of-a-family-of-modules, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]
 provenance:
@@ -17,6 +17,8 @@ sources:
     - title: "The Stacks Project, Sheaves on Spaces"
       url: https://stacks.math.columbia.edu/download/sheaves.pdf
       locator: "Section 17: sheafification, stalks and the universal property"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: "lem-ag-finite-field-extension-separable-factorization"
 kind: "lemma"
 title: "Separable generation after finite purely inseparable extensions"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-separating-transcendence-basis", "def-algebraic-and-transcendental-elements", "lem-maximal-algebraically-independent-subset-is-a-transcendence-basis", "thm-finitely-generated-algebraic-extensions-are-finite", "def-finitely-generated-field-extension", "def-separable-elements-and-separable-extensions", "def-separable-closure-in-an-algebraic-extension", "thm-algebraic-extension-is-purely-inseparable-over-its-separable-closure", "thm-purely-inseparable-extension-characterizations", "cor-degree-factors-into-separable-and-inseparable-degrees", "thm-separable-degree-is-the-degree-of-the-separable-closure", "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power", "def-repeated-root-and-separable-polynomial", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "thm-evaluation-kernel-and-minimal-polynomial", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "thm-pure-inseparability-is-transitive-and-stable-under-composita", "thm-tower-law-for-finite-field-extensions", "def-perfect-field", "thm-perfect-field-characterizations", "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect", "thm-ag-separating-transcendence-basis-perfect-field", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra 10.42.4 (tag 04KM)"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

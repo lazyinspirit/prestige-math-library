@@ -2,7 +2,7 @@
 id: lem-the-e-graph-and-the-bird-are-leaf-reducible
 kind: lemma
 title: "The $E$-graph and Bird singleton families are leaf-reducible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-leaf-reducible-finite-family, def-e-graph-and-co-e-graph, def-bird-graph-and-co-bird-graph, def-bull-graph, def-standard-complete-bipartite-path-and-cycle-graphs, def-subgraph-induced-subgraph-and-spanning-subgraph, def-tree-forest-and-leaf, def-graph-isomorphism-and-complement, def-induced-embedding-and-induced-copy, def-h-free-and-family-free-graph, def-erdos-hajnal-property-and-constant, cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property, cor-the-bull-graph-has-the-erdos-hajnal-property]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

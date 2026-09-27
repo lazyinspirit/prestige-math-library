@@ -2,7 +2,7 @@
 id: thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules
 kind: theorem
 title: Finite graded projectives are finite shifted-free summands
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-finitely-generated-graded-projective-module, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-projective-object, thm-universal-property-of-free-modules, thm-a-direct-summand-of-a-projective-is-projective]
@@ -20,6 +20,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.56, tag 00JL"
       url: "https://stacks.math.columbia.edu/tag/00JL"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: "cor-derivations-represented-by-differentials"
 kind: "corollary"
 title: "Derivations are maps out of Ω"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-kahler-differentials-existence-presentation", "def-kahler-differentials-algebra", "def-derivation-algebra"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §22.2.17, p.582"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

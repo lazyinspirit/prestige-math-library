@@ -2,7 +2,7 @@
 id: ex-projective-line-diagonal-bihomogeneous-equation
 kind: example
 title: The projective-line diagonal from the bihomogeneous equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-projective-space-diagonal-closed, def-relative-projective-space-standard-charts, thm-affine-fibre-product-tensor-ring]
@@ -20,6 +20,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, Proposition 11.3.8, printed pp.309-310"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

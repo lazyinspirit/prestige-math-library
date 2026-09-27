@@ -2,7 +2,7 @@
 id: "cex-differentials-purely-inseparable-field-nonzero"
 kind: "counterexample"
 title: "A purely inseparable field has nonzero Omega"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["cor-polynomial-ring-over-a-field-is-a-pid", "thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "thm-polynomial-division-algorithm-over-a-field", "cor-jacobian-presentation-differentials", "thm-purely-inseparable-extension-characterizations"]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

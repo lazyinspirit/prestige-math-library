@@ -2,7 +2,7 @@
 id: cex-dvr-only-test-unsafe-without-hypotheses
 kind: counterexample
 title: DVR uniqueness need not detect nonseparatedness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 generation:
@@ -24,6 +24,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.21.6 (Tag 01KH)"
       url: "https://stacks.math.columbia.edu/tag/01KH"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

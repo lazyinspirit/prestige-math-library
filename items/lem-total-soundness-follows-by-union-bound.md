@@ -2,7 +2,7 @@
 id: lem-total-soundness-follows-by-union-bound
 kind: lemma
 title: "Total TQBF soundness by the first repaired claim"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-first-false-claim-survives-with-root-bound-probability, lem-efficient-prime-field-for-a-polynomial-soundness-budget, def-shamir-protocol-for-tqbf, lem-ordered-arithmetization-evaluates-to-the-truth-value]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

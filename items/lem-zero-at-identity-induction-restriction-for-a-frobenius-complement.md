@@ -2,7 +2,7 @@
 id: lem-zero-at-identity-induction-restriction-for-a-frobenius-complement
 kind: lemma
 title: "Zero at identity induction restriction for a frobenius complement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-frobenius-complement-and-frobenius-group, thm-frobenius-formula-for-induced-characters, def-virtual-character-and-character-ring-of-a-finite-group, def-induced-class-function-on-a-finite-group, def-class-function-and-the-space-of-complex-class-functions, def-subgroup]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: ex-integral-closure-cusp-semigroup-affine-domain
 kind: example
 title: "Normalization of the cusp semigroup ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-polynomial-algebras-over-fields-are-integrally-closed, def-integral-closure-and-integrally-closed-domain, def-integral-element-and-algebraic-integer, cor-integral-elements-form-a-subring, thm-transitivity-of-integrality, def-field-of-fractions, cor-polynomial-ring-over-a-domain-is-a-domain, def-zero-divisor-and-integral-domain, def-field-extension-generated-subfields-and-simple-extension, def-finite-type-and-module-finite-algebras, def-invertible-element, def-divisibility-and-associates-in-a-domain]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

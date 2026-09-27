@@ -2,7 +2,7 @@
 id: "ex-empty-cover-empty-space-cohomology"
 kind: "example"
 title: "Cohomology of the empty space and the empty cover"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-sheaf-section-over-empty-set-terminal, def-cech-cochain-complex-open-cover, def-cech-cohomology-open-cover, def-sheaf-cohomology-derived-global-sections, def-global-sections-functor-sheaves, def-cohomology-object-of-a-cochain-complex, def-compact-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
 generation:
@@ -17,6 +17,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
     - title: "J. Munkres, Topology, 2nd ed., §26 (open covers)"
       url: https://en.wikipedia.org/wiki/James_Munkres
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

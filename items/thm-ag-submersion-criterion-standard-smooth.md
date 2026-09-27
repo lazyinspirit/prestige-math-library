@@ -2,7 +2,7 @@
 id: "thm-ag-submersion-criterion-standard-smooth"
 kind: "theorem"
 title: "Submersion criterion for locally standard smooth morphisms"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "def-ag-geometrically-regular-algebra-and-fibre", "def-locally-finite-type-and-finite-type-morphism", "def-residue-field-scheme-point", "def-scheme-theoretic-fibre", "def-base-change-morphism-schemes", "def-axiom-of-choice", "lem-ag-standard-smooth-flatness", "lem-ag-standard-smooth-regular-geometric-fibres", "lem-ag-separable-residue-cotangent-sequence", "lem-ag-differentials-transitivity", "lem-ag-differentials-localization-base-change", "lem-ag-polynomial-quotient-differentials", "lem-regular-system-of-parameters-equivalent-basis", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "lem-regular-local-regular-quotient-ideal-is-parameter-generated", "lem-ag-local-flatness-regular-parameters", "thm-ag-standard-smooth-geometric-regularity", "thm-ag-standard-smooth-base-change-composition", "cor-affine-domain-maximal-ideal-height-equals-dimension", "cor-dimension-of-a-finite-polynomial-ring-over-a-field", "cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented", "cor-finite-type-algebra-over-noetherian-ring-is-noetherian", "thm-noetherian-ring-quotients-and-localisations", "prop-transitivity-of-flatness-under-change-of-rings", "thm-localisations-are-flat", "thm-localisation-of-modules-is-tensor-product", "cor-localisation-commutes-with-kernels-images-and-cokernels", "thm-right-exactness-of-tensor-products", "thm-prime-spectrum-of-a-localisation-bijection", "prop-iterated-localisation", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "thm-fibre-products-of-schemes-exist"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
     - title: "Stacks Algebra 10.140.5 (tag 00TV), 10.137.16 (tag 00TF) and 10.137.5–6 (tags 00T6, 00T7)"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

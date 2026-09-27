@@ -2,7 +2,7 @@
 id: "lem-ag-geometric-regularity-field-tests"
 kind: "lemma"
 title: "Field tests for geometric regularity"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-localisation-and-polynomial-extension-of-regular-rings", "def-ag-geometrically-regular-algebra-and-fibre", "def-regular-noetherian-ring", "lem-ag-finite-field-extension-separable-factorization", "def-ag-separating-transcendence-basis", "thm-primitive-element-theorem-for-finite-separable-extensions", "lem-ag-flat-local-regularity-ascent-descent", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "lem-polynomial-factorisation-into-irreducibles", "thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-right-exactness-of-tensor-products", "thm-auslander-buchsbaum-serre-regularity-criterion", "cor-noether-normalisation-module-finiteness", "cor-dimension-preserved-by-integral-extensions", "cor-dimension-of-a-finite-polynomial-ring-over-a-field", "cor-localisation-dimension-does-not-increase", "def-projective-dimension-of-an-object", "def-left-and-right-global-dimension-of-a-ring", "prop-extension-of-scalars-preserves-flat-modules", "thm-localisations-are-flat", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra 10.43.3, 10.45.3 and 10.45.4"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

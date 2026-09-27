@@ -1,7 +1,7 @@
 ---
 page: erdos-hajnal-for-the-e-graph-and-bird
 title: "The Erdős–Hajnal Theorems for the E-Graph and Bird"
-status: draft
+status: published
 requires: [from-generalized-niceness-to-erdos-hajnal, co-bird-free-comb-structure]
 items: [lem-the-e-graph-and-the-bird-are-leaf-reducible, cor-the-e-graph-is-generalized-nice, thm-the-e-graph-has-the-erdos-hajnal-property, cor-the-singleton-family-containing-bird-has-property-star, cor-the-bird-graph-is-generalized-nice, thm-the-bird-graph-has-the-erdos-hajnal-property]
 examples: []

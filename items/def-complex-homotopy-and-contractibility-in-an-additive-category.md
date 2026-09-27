@@ -2,7 +2,7 @@
 id: def-complex-homotopy-and-contractibility-in-an-additive-category
 kind: definition
 title: Complexes, homotopies and contractibility in an additive category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-additive-category, thm-the-category-of-complexes-in-an-additive-category-is-additive, def-chain-homotopy, def-contractible-complex]
@@ -21,6 +21,7 @@ sources:
     - title: "Dror Bar-Natan, Fast Khovanov Homology Computations, section 4 Lemma 4.2 and section 5, printed p. 5"
       url: "https://www.math.utoronto.ca/~drorbn/papers/FastKh/FastKh.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: cex-quasi-finite-morphism-need-not-be-finite
 kind: counterexample
 title: Quasi-finite does not imply finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quasi-finite-at-a-prime-for-finite-type-algebras, cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra, def-axiom-of-choice, def-finite-type-and-module-finite-algebras, def-product-ring, def-principal-localisation, def-multiplicative-subset-and-localisation, def-polynomial-ring-over-a-commutative-ring, cor-polynomial-ring-over-a-domain-is-a-domain, def-field, def-field-of-fractions, def-polynomial-degree-leading-coefficient-and-monic, prop-polynomial-degree-laws-over-a-commutative-ring, def-integral-element-and-algebraic-integer, def-integral-subalgebra-of-an-arbitrary-ring-map, def-integral-closure-and-integrally-closed-domain, lem-zmt-polynomial-rings-over-normal-domains-are-normal, thm-integrality-and-finite-module-equivalences, cor-residue-field-of-a-localisation-at-a-prime, thm-universal-property-of-a-polynomial-ring, thm-monic-polynomial-division, thm-first-isomorphism-theorem-rings, thm-tensor-products-commute-with-arbitrary-direct-sums, thm-unit-isomorphisms-for-module-tensor-products, lem-tensor-ring-presentations-for-base-change, def-principal-distinguished-subset-of-spectrum, lem-localisation-spectrum-map-homeomorphism-onto-image, lem-quotient-spectrum-map-is-closed, cor-spectrum-is-a-contravariant-topological-functor, def-prime-and-maximal-ideals, def-left-right-and-two-sided-ideal, thm-quasi-finite-algebra-open-finite-factorization]
@@ -21,6 +21,8 @@ sources:
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Aside 17.9 and Corollary 17.12"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
       locator: "Section 17, Aside 17.9 (finite versus quasi-finite) and Corollary 17.12"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

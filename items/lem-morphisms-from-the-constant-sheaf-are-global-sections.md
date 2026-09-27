@@ -2,7 +2,7 @@
 id: "lem-morphisms-from-the-constant-sheaf-are-global-sections"
 kind: "lemma"
 title: "Morphisms from the constant sheaf are global sections"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-sheafification, def-presheaf-on-topological-space, def-morphism-of-presheaves, def-presheaf-of-groups-rings-modules, def-sheaf-on-topological-space, def-section-restriction-and-global-section, def-global-sections-functor-sheaves, thm-abelian-sheaves-form-abelian-category, thm-sheafification-universal-property, def-zero-and-stalk-complex, def-cochain-complex-in-an-abelian-category, def-cochain-map, def-homotopically-projective-bounded-above-complex]
 provenance:
@@ -17,6 +17,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Section 31 (0FKU): the identification Hom(O_X,-) = Gamma(X,-) used to represent cohomology classes"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

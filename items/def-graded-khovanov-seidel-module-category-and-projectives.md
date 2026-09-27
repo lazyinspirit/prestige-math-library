@@ -2,7 +2,7 @@
 id: def-graded-khovanov-seidel-module-category-and-projectives
 kind: definition
 title: "Finite graded A_m-modules, internal shifts and the vertex projectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-khovanov-seidel-type-a-quiver-algebra, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis, def-path-ring-of-a-finite-quiver-over-the-integers, def-graded-ring-module-bimodule-and-internal-shift, def-finitely-generated-graded-projective-module, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, cor-principal-ideal-domains-are-noetherian, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, def-noetherian-ring, def-noetherian-module]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §1b and §§2a-2c, printed pp. 3-4 and 9-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

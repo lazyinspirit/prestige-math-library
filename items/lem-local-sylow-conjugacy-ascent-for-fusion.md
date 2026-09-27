@@ -2,7 +2,7 @@
 id: lem-local-sylow-conjugacy-ascent-for-fusion
 kind: lemma
 title: "Local sylow conjugacy ascent for fusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-sylow-first-theorem, thm-sylow-second-theorem, def-sylow-p-subgroup, lem-proper-subgroup-of-a-finite-p-group-is-properly-normalized-local, def-p-local-normalizer-for-normal-complement-theory, def-control-of-fusion-in-a-sylow-p-subgroup, lem-fusion-control-and-centralizer-transitivity, def-centralizer-of-a-subgroup, def-normalizer-of-a-subgroup, lem-centralizers-and-normalizers-are-subgroups, thm-conjugation-is-an-automorphism, thm-strong-induction, thm-lagrange, def-subgroup, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, def-conjugacy-class-and-centralizer, lem-group-inverse-laws]
@@ -19,6 +19,7 @@ sources:
       url: "https://web.mat.bham.ac.uk/P.J.Flavell/fusion.pdf"
       locator: "§§2–5, PDF pp. 1–15"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

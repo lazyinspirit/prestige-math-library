@@ -2,7 +2,7 @@
 id: "thm-sheaf-differentials-universal-property"
 kind: "theorem"
 title: "Universal property of relative differential sheaves"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-sheaf-relative-differentials", "thm-sheafification-universal-property", "cor-derivations-represented-by-differentials", "def-module-on-ringed-space", "def-derivation-algebra"]
 proof_strategy: "direct"
@@ -17,6 +17,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UR"
     - title: "Vakil §22.2.20, pp.584–585"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-harish-chandra-induction-and-restriction-for-finite-gl-n
 kind: definition
 title: Harish-Chandra induction and restriction for finite general linear groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-compositions-partial-flags-and-standard-parabolics, def-induced-r-linear-g-module-by-h-covariant-functions, def-group-action, def-g-module-over-a-commutative-ring, def-standard-subgroups-of-gl-n-over-a-finite-field, def-subgroup, def-normal-subgroup, def-quotient-group, thm-first-isomorphism-theorem-groups]
@@ -19,6 +19,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Definition 5.2, printed p. 42"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

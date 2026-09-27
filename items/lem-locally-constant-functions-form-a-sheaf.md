@@ -2,7 +2,7 @@
 id: "lem-locally-constant-functions-form-a-sheaf"
 kind: "lemma"
 title: "Locally constant functions form a sheaf with constant stalks"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-presheaf-on-topological-space, def-sheaf-on-topological-space, def-stalk-of-presheaf, def-presheaf-of-groups-rings-modules, thm-abelian-sheaves-form-abelian-category]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

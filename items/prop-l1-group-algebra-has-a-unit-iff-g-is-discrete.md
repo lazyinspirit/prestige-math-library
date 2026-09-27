@@ -2,7 +2,7 @@
 id: prop-l1-group-algebra-has-a-unit-iff-g-is-discrete
 kind: proposition
 title: "The L1 group algebra has a unit exactly when the group is discrete"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-convolution-preserves-cc-and-is-associative, thm-fatou-lemma, def-convolution-on-cc-and-l1-of-a-group, def-compactly-supported-convolution-on-a-group, lem-l1-convolution-norm-inequality, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, lem-counting-measure-on-a-discrete-group, def-radon-measure-on-an-lch-space, def-left-haar-integral-and-left-haar-measure, def-t0-and-t1-spaces, def-hausdorff-space, lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-compact-support-c-c-and-c-zero-on-an-lch-space, def-dependent-choice, def-axiom-of-choice]
@@ -19,6 +19,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§31A–31E, printed pp. 119–125"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

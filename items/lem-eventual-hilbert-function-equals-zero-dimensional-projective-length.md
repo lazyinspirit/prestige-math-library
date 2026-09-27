@@ -2,7 +2,7 @@
 id: lem-eventual-hilbert-function-equals-zero-dimensional-projective-length
 kind: lemma
 title: "The eventual Hilbert function of a zero-dimensional projective quotient equals its total length"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,6 +21,8 @@ sources:
     - title: "The Stacks Project, Lemma 33.20.2 (tag 06LH) and Section 27.8 (tag 01M3)"
       url: "https://stacks.math.columbia.edu/tag/06LH"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

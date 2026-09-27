@@ -1,7 +1,7 @@
 ---
 name: abstract-algebra
 title: Abstract Algebra
-status: draft
+status: published
 ---
 
 The number systems built earlier in the library each proved the same handful of

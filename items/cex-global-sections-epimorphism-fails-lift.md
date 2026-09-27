@@ -2,7 +2,7 @@
 id: "cex-global-sections-epimorphism-fails-lift"
 kind: "counterexample"
 title: "A global section of the quotient that does not lift, and its nonzero connecting class"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-long-exact-sequence-sheaf-cohomology, thm-zero-sheaf-cohomology-global-sections, def-sheaf-cohomology-derived-global-sections, thm-abelian-sheaves-have-enough-injectives, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-sheafification, thm-sheafification-preserves-stalks, thm-exactness-of-sheaves-stalkwise, def-exact-sequence-sheaves, lem-filtered-colimits-of-abelian-groups-are-exact, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-circle-as-real-line-mod-integers, def-quotient-topology, def-connected-space, cor-connected-subsets-of-the-line, def-sheaf-on-topological-space, def-continuous-map-top, def-stalk-of-presheaf, def-subspace-topology-top, def-germ-of-section, thm-abelian-sheaves-form-abelian-category, def-kernel-cokernel-image-sheaves, thm-continuous-image-of-a-connected-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

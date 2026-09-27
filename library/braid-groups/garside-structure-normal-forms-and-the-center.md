@@ -1,7 +1,7 @@
 ---
 page: garside-structure-normal-forms-and-the-center
 title: "Garside Structure, Normal Forms, and the Center"
-status: draft
+status: published
 requires: [braided-and-symmetric-monoidal-categories]
 items: [def-positive-braid-monoid,
         lem-positive-artin-relations-preserve-homogeneous-length,

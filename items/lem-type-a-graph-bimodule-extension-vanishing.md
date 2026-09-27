@@ -2,7 +2,7 @@
 id: lem-type-a-graph-bimodule-extension-vanishing
 kind: lemma
 title: "Type-A graph-bimodule extension vanishing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-standard-graph-bimodules-support-filtrations-and-character, def-type-a-reflection-realization-and-polynomial-ring]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §3.4"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

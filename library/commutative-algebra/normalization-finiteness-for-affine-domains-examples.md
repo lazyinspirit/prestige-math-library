@@ -1,7 +1,7 @@
 ---
 page: normalization-finiteness-for-affine-domains-examples
 title: "Normalization Finiteness for Affine Domains: Examples"
-status: draft
+status: published
 requires: [normalization-finiteness-for-affine-domains]
 items: []
 examples: [ex-integral-closure-cusp-semigroup-affine-domain,

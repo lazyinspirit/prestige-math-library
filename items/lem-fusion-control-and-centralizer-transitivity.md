@@ -2,7 +2,7 @@
 id: lem-fusion-control-and-centralizer-transitivity
 kind: lemma
 title: "Fusion control and centralizer transitivity are equivalent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-sylow-p-subgroup, thm-sylow-second-theorem, def-centralizer-of-a-subgroup, def-normalizer-of-a-subgroup, lem-centralizers-and-normalizers-are-subgroups, thm-conjugation-is-an-automorphism, lem-group-inverse-laws, def-subgroup, def-conjugacy-class-and-centralizer]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

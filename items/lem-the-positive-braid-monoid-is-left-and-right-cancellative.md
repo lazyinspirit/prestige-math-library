@@ -2,7 +2,7 @@
 id: lem-the-positive-braid-monoid-is-left-and-right-cancellative
 kind: lemma
 title: "The positive braid monoid is left and right cancellative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-positive-braid-monoid, lem-artin-positive-word-reversing-is-complete,
@@ -23,6 +23,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter II, Proposition 4.44 and Corollary 4.45, printed p. 78"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

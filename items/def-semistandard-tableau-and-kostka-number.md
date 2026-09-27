@@ -2,7 +2,7 @@
 id: def-semistandard-tableau-and-kostka-number
 kind: definition
 title: Semistandard tableaux and Kostka numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-partition-young-diagram-and-conjugate-partition, def-young-tableau-standard-tableau-and-shape]
@@ -19,6 +19,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups - Chapter 4, Remark 4.15, printed p. 17 (PDF p. 19), Kostka numbers as multiplicities"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

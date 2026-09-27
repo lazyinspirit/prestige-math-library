@@ -1,7 +1,7 @@
 ---
 page: algebraic-zariski-main-for-quasi-finite-morphisms
 title: "Algebraic Zariski Main for Quasi-Finite Morphisms"
-status: draft
+status: published
 requires: [zariski-topology-on-prime-spectra, integral-extensions-and-going-up, morphisms-local-rings-and-rational-maps-of-affine-varieties, dimension-constructible-images-and-dimensions-of-fibres]
 items: [def-integral-subalgebra-of-an-arbitrary-ring-map,
         def-quasi-finite-at-a-prime-for-finite-type-algebras,

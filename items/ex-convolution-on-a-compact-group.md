@@ -2,7 +2,7 @@
 id: ex-convolution-on-a-compact-group
 kind: example
 title: "Convolution of matrix coefficients on a compact group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-normalized-haar-probability-on-a-compact-group, prop-compact-discrete-and-abelian-groups-are-unimodular, def-compactly-supported-convolution-on-a-group, def-convolution-on-cc-and-l1-of-a-group, lem-l1-convolution-norm-inequality, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-complex-l-two-inner-product, lem-haar-translations-are-strongly-continuous-on-lp-one-and-two, lem-haar-change-of-variables-under-inversion, def-unimodular-locally-compact-group, def-subrepresentation-and-irreducible-representation, def-intertwiner-equivalent-and-faithful-representations, def-finite-dimensional-representation-of-a-group-over-a-field, cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B and 31A–31E, printed pp. 115–125"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

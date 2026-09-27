@@ -1,7 +1,7 @@
 ---
 page: homogeneous-resultants-and-projective-intersection-length-examples
 title: "Homogeneous Resultants and Projective Intersection Length: Examples"
-status: draft
+status: published
 requires: [homogeneous-resultants-and-projective-intersection-length]
 items: []
 examples: [ex-binary-resultant-two-linear-forms,

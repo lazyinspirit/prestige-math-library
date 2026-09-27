@@ -2,7 +2,7 @@
 id: lem-closed-immersion-local-on-target
 kind: lemma
 title: Closed immersions are local on the target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-closed-immersion-schemes]
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.4.2 (tag 01HL), printed p.5"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

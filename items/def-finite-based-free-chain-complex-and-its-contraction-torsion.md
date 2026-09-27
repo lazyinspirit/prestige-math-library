@@ -2,7 +2,7 @@
 id: def-finite-based-free-chain-complex-and-its-contraction-torsion
 kind: definition
 title: "Finite based free complexes and contraction torsion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-stable-general-linear-group-and-elementary-subgroup-of-a-ring, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, lem-group-rings-have-invariant-basis-number-via-augmentation, lem-parity-map-of-a-finite-contracted-complex-is-invertible, def-chain-complex-in-an-abelian-category, def-left-and-right-modules]
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

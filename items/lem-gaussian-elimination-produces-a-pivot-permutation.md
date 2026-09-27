@@ -2,7 +2,7 @@
 id: lem-gaussian-elimination-produces-a-pivot-permutation
 kind: lemma
 title: Triangular elimination produces a pivot permutation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, thm-gaussian-elimination-produces-row-echelon-form, thm-invertible-matrix-theorem, def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix, thm-matrix-multiplication-laws, def-invertible-matrix-and-general-linear-group]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

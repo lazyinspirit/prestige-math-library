@@ -2,7 +2,7 @@
 id: "lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product"
 kind: "lemma"
 title: "Stalks, coproducts and right exactness of the abelian sheaf tensor product"
-status: draft
+status: published
 origin: pipeline
 deps: [def-tensor-product-of-abelian-sheaves, thm-sheafification-preserves-stalks, def-stalk-of-presheaf, thm-sheafification-universal-property, thm-limits-and-colimits-in-functor-categories-are-computed-pointwise, lem-equality-in-a-filtered-colimit-of-sets-is-eventual, def-topological-space, thm-exactness-of-sheaves-stalkwise, thm-sheaf-morphism-isomorphism-stalkwise, thm-right-exactness-of-tensor-products, thm-tensor-products-commute-with-arbitrary-direct-sums, thm-symmetry-and-associativity-over-a-commutative-ring, thm-unit-isomorphisms-for-module-tensor-products, def-tensor-product-of-modules-by-generators-and-relations, thm-universal-property-of-module-tensor-products, def-tensor-product-total-complex-of-chain-complexes, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-sheaf-on-topological-space, thm-abelian-sheaves-form-abelian-category]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

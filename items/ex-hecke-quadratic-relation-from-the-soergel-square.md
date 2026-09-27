@@ -2,7 +2,7 @@
 id: ex-hecke-quadratic-relation-from-the-soergel-square
 kind: example
 title: "The Hecke quadratic relation from the Soergel square"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-split-grothendieck-group-of-the-soergel-category-is-the-type-a-hecke-algebra, def-type-a-hecke-algebra-in-soergel-normalization, lem-the-rank-one-soergel-bimodule-square-splits, def-split-grothendieck-rings-of-type-a-soergel-categories]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §4, PDF pp. 21–26"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

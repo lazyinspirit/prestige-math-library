@@ -1,7 +1,7 @@
 ---
 page: homological-gaussian-elimination
 title: "Homological Gaussian Elimination"
-status: draft
+status: published
 items: [def-complex-homotopy-and-contractibility-in-an-additive-category, def-invertible-differential-block-and-schur-complement-reduction, lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block, thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex, prop-homological-gaussian-elimination-gives-a-strong-deformation-retract, cor-homological-gaussian-elimination-preserves-homotopy-type-and-homology, thm-finite-iterated-homological-gaussian-elimination, prop-additive-functors-preserve-chosen-homological-gaussian-cancellations, prop-transfer-of-chain-maps-across-gaussian-reductions-and-naturality-limits]
 examples: []
 ---

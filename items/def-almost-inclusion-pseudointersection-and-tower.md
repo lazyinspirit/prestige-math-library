@@ -2,7 +2,7 @@
 id: def-almost-inclusion-pseudointersection-and-tower
 kind: definition
 title: Almost inclusion, pseudointersections and towers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-countable, def-natural-numbers, def-power-set, def-set-difference-and-symmetric-difference, def-finite-cardinality, def-partial-order, def-axiom-of-choice, thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero]
@@ -19,6 +19,7 @@ sources:
     - title: "M. Malliaris and S. Shelah, Cofinality Spectrum Theorems, Definition 14.3, PDF pp.54-55"
       url: "https://math.uchicago.edu/~mem/Malliaris-Shelah-CST-new.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations
 kind: theorem
 title: "Corner computations: the U_i satisfy the Temperley-Lieb relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-two-sided-projective-khovanov-seidel-bimodule-functors, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis, def-khovanov-seidel-type-a-quiver-algebra, def-graded-khovanov-seidel-module-category-and-projectives, def-path-ring-of-a-finite-quiver-over-the-integers, def-graded-balanced-tensor-product-and-homogeneous-hom, lem-graded-balanced-tensor-and-shift-isomorphisms, thm-bimodule-tensor-exactness-and-projective-preservation, lem-projective-modules-are-flat-over-an-arbitrary-ring, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, thm-a-direct-summand-of-a-projective-is-projective]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2b, printed pp. 11-12"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

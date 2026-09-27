@@ -2,7 +2,7 @@
 id: lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear
 kind: lemma
 title: "Universal-cover boundaries, maps and homotopies respect the right group-ring action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-based-cellular-chain-complex-of-a-universal-cover, thm-homotopy-lifting-for-covering-maps, thm-deck-group-of-a-universal-cover-is-the-fundamental-group, thm-cellular-approximation-for-maps-of-cw-pairs, lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes, def-singular-chain-complex-of-a-pair, def-relative-homology-connecting-homomorphism-on-cycles, def-prism-operator-for-a-homotopy, thm-singular-chain-homotopy-formula, thm-uniqueness-of-lifts-from-a-connected-space, def-cellular-boundary-from-three-consecutive-skeleta, def-induced-singular-chain-map, def-singular-boundary-operator, def-relative-singular-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

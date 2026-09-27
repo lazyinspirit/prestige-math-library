@@ -1,7 +1,7 @@
 ---
 page: gap-amplification-and-assignment-testing-examples
 title: "Gap Amplification and Assignment Testing: Examples and Counterexamples"
-status: draft
+status: published
 requires: [gap-amplification-and-assignment-testing]
 items: []
 examples: [ex-degree-reduction-preserves-unsatisfaction, cex-repeating-constraints-amplifies-the-gap, ex-plurality-decoding-of-powered-local-views]

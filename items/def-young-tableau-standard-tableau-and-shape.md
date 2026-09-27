@@ -2,7 +2,7 @@
 id: def-young-tableau-standard-tableau-and-shape
 kind: definition
 title: Tableaux and standard tableaux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-partition-young-diagram-and-conjugate-partition]
@@ -19,6 +19,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Section 1.4, printed p. 7"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

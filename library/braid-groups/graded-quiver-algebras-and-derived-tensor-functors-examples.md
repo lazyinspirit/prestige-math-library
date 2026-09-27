@@ -1,7 +1,7 @@
 ---
 page: graded-quiver-algebras-and-derived-tensor-functors-examples
 title: "Graded Quiver Algebras and Derived Tensor Functors — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-a-two-khovanov-seidel-algebra-and-its-projectives,
            ex-a-simple-module-projective-resolution-for-a-two,

@@ -2,7 +2,7 @@
 id: "lem-cech-differential-squares-zero"
 kind: "lemma"
 title: "The Čech differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 deps: [def-cech-cochain-complex-open-cover, def-section-restriction-and-global-section, lem-sheaf-section-over-empty-set-terminal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: "lem-comparison-map-from-an-exact-complex-into-an-injective-resolution"
 kind: "lemma"
 title: "Lifting a morphism from an exact complex into an injective resolution"
-status: draft
+status: published
 origin: pipeline
 deps: [def-injective-object, def-chain-map, def-graded-morphism-of-chain-complexes, def-chain-homotopy, def-cochain-complex-in-an-abelian-category, def-abelian-category, thm-the-image-is-the-least-subobject-through-which-a-morphism-factors, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Derived Categories, Section 13.18: Injective resolutions (tags 013P, 013R)"
       url: https://stacks.math.columbia.edu/tag/013G
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

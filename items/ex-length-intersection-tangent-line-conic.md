@@ -2,7 +2,7 @@
 id: ex-length-intersection-tangent-line-conic
 kind: example
 title: "A tangent line and conic have one intersection point of local length two"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -19,6 +19,8 @@ sources:
     - title: "A. Gathmann, Algebraic Geometry class notes (2002), Example 6.2.3, pp. 96-97"
       url: "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

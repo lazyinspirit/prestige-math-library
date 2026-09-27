@@ -2,7 +2,7 @@
 id: ex-left-projective-bimodule-with-nonexact-tensor
 kind: example
 title: A left-projective tensor bimodule need not be right-flat
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-bimodule-tensor-exactness-and-projective-preservation, def-graded-balanced-tensor-product-and-homogeneous-hom, def-graded-ring-module-bimodule-and-internal-shift, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

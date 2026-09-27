@@ -1,7 +1,7 @@
 ---
 page: geometric-braids-and-artin-generators
 title: "Geometric Braids and Artin Generators"
-status: draft
+status: published
 requires: [homotopy-and-homotopy-equivalence, subspaces-products-and-quotients, free-groups-and-presentations, braided-and-symmetric-monoidal-categories, the-total-derivative]
 items: [def-geometric-braid-with-setwise-endpoints,
         def-braid-isotopy-relative-top-and-bottom,

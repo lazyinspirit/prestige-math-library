@@ -2,7 +2,7 @@
 id: def-row-and-column-stabilizers-of-a-tableau
 kind: definition
 title: Row and column stabilizers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-young-tableau-standard-tableau-and-shape]
@@ -19,6 +19,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Section 1.6, printed pp. 13-14"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

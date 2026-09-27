@@ -2,7 +2,7 @@
 id: def-path-ring-of-a-finite-quiver-over-the-integers
 kind: definition
 title: "Integral path ring of a finite quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-ring, def-free-module-on-a-set-and-standard-basis]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §1b, printed pp. 3-4"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

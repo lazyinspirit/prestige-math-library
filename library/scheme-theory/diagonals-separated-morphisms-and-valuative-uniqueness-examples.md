@@ -1,7 +1,7 @@
 ---
 page: "diagonals-separated-morphisms-and-valuative-uniqueness-examples"
 title: "Diagonals Separated Morphisms and Valuative Uniqueness — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-affine-line-diagonal-ideal", "ex-projective-line-diagonal-bihomogeneous-equation", "cex-doubled-origin-diagonal-not-closed", "cex-doubled-origin-valuative-nonuniqueness", "ex-graph-closed-polynomial-map-scheme", "cex-zariski-space-nonhausdorff-yet-separated-scheme", "ex-open-immersion-valuative-uniqueness-not-existence", "cex-dvr-only-test-unsafe-without-hypotheses"]
 ---

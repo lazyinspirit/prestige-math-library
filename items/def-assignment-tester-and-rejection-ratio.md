@@ -2,7 +2,7 @@
 id: def-assignment-tester-and-rejection-ratio
 kind: definition
 title: "Assignment tester and rejection ratio"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-and-labeling-value, def-gap-preserving-csp-reduction, def-circuit-sat, def-boolean-circuit-size-depth-fanin-and-basis]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

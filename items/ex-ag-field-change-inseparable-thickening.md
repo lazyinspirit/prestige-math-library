@@ -2,7 +2,7 @@
 id: "ex-ag-field-change-inseparable-thickening"
 kind: "example"
 title: "Base change of an inseparable field extension is a thickening"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-coproduct-property-of-tensor-products-of-commutative-algebras", "thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "lem-polynomial-factorisation-into-irreducibles", "thm-right-exactness-of-tensor-products", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §22.2.10 and §26.2.4, pp.578, 690–693"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

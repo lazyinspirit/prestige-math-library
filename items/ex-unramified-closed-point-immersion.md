@@ -2,7 +2,7 @@
 id: "ex-unramified-closed-point-immersion"
 kind: "example"
 title: "A closed point immersion is unramified"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 generation:
@@ -16,6 +16,8 @@ sources:
   references:
     - title: "Stacks Morphisms 29.36.8"
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

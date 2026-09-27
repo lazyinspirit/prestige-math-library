@@ -2,7 +2,7 @@
 id: def-unimodular-locally-compact-group
 kind: definition
 title: "Unimodular locally compact group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-modular-function-of-a-locally-compact-group]
@@ -21,6 +21,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B, printed pp. 115–118"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

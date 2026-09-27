@@ -2,7 +2,7 @@
 id: ex-resultant-detects-root-at-infinity
 kind: example
 title: "A binary resultant detects a common root at infinity lost by naive dehomogenization"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -19,6 +19,8 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, Proposition 7.27 boundary and Proposition 7.28, pp. 166-167"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 pipeline_run: frontier-35-ten-categories
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

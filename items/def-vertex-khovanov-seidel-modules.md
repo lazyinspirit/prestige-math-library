@@ -2,7 +2,7 @@
 id: def-vertex-khovanov-seidel-modules
 kind: definition
 title: "The vertex modules S_i and their prime quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-khovanov-seidel-type-a-quiver-algebra, def-path-ring-of-a-finite-quiver-over-the-integers, def-graded-khovanov-seidel-module-category-and-projectives, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-ring, def-quotient-ring, lem-int-cancellation]
@@ -18,6 +18,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2a, printed pp. 9-11"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

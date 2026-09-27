@@ -2,7 +2,7 @@
 id: ex-binary-resultant-two-linear-forms
 kind: example
 title: "Resultant of two binary linear forms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 short: "Res of two linear forms is ad-bc"
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-relative-position-classifies-pairs-of-complete-flags
 kind: theorem
 title: Relative position classifies pairs of complete flags
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-complete-flags-form-gl-n-over-b, thm-bruhat-decomposition-of-gl-n-over-a-finite-field, lem-rank-matrices-determine-the-pivot-permutation, def-standard-subgroups-of-gl-n-over-a-finite-field, thm-dimension-formula, thm-dimension-of-a-linear-subspace, lem-quotient-basis-lifts-to-an-adapted-basis, def-coordinate-column-and-matrix-of-a-linear-map, def-row-space-column-space-nullspace-and-matrix-ranks, def-linear-independence, def-linear-basis, def-injection-surjection-bijection, lem-standard-basis-of-f-n, def-linear-isomorphism-and-invertible-linear-map]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

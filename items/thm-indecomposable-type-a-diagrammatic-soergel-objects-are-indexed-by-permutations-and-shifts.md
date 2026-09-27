@@ -2,7 +2,7 @@
 id: thm-indecomposable-type-a-diagrammatic-soergel-objects-are-indexed-by-permutations-and-shifts
 kind: theorem
 title: "Indecomposable type-A diagrammatic Soergel objects are indexed by permutations and shifts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-double-leaves-form-graded-r-bases-of-type-a-diagrammatic-hom-spaces, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, def-type-a-reflection-realization-and-polynomial-ring, def-field, def-local-ring, lem-type-a-reduced-words-are-connected-by-braid-moves]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

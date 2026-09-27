@@ -2,7 +2,7 @@
 id: ex-two-quantifier-qbf-arithmetization-transcript
 kind: example
 title: "A two-quantifier field transcript"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-qbf-arithmetization-operators, def-multilinearization-operator, def-shamir-protocol-for-tqbf, def-arithmetization-of-a-boolean-formula, thm-z-mod-p-is-a-field, def-quantified-boolean-formula-and-tqbf]
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

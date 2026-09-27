@@ -2,7 +2,7 @@
 id: ex-affine-linear-frobenius-groups-over-finite-fields
 kind: example
 title: "Affine linear Frobenius groups over finite fields"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-finite-field-and-its-order, def-field, def-group, def-subgroup, def-normal-subgroup, def-internal-semidirect-product, def-group-isomorphism-and-automorphism, prop-frobenius-groups-and-fixed-point-free-actions, cor-frobenius-semidirect-product-decomposition, def-frobenius-complement-and-frobenius-group, def-group-action, def-conjugacy-class-and-centralizer, thm-conjugation-is-an-automorphism, lem-group-inverse-laws, lem-subgroup-criterion, thm-lagrange, cor-order-of-a-quotient-group, thm-product-rule, def-finite-cardinality, def-symmetric-group]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

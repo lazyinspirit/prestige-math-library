@@ -2,7 +2,7 @@
 id: lem-geometric-far-commutativity
 kind: lemma
 title: "Far commutativity of elementary geometric half twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-elementary-geometric-half-twist, def-geometric-braid-with-setwise-endpoints,
@@ -24,6 +24,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.2, author manuscript pp. 5-6"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

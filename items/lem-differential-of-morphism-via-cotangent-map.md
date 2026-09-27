@@ -2,7 +2,7 @@
 id: "lem-differential-of-morphism-via-cotangent-map"
 kind: "lemma"
 title: "Differential of an S-morphism"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-transitivity-sequence-schemes", "def-relative-cotangent-space", "def-pullback-module-ringed-spaces", "thm-sheaf-differentials-universal-property", "def-sheaf-relative-differentials", "thm-pullback-pushforward-module-adjunction", "def-dual-numbers-scheme"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01UW"
     - title: "Vakil 22.2.K, p.583"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

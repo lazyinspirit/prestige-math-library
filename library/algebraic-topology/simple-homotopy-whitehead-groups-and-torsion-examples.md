@@ -1,7 +1,7 @@
 ---
 page: simple-homotopy-whitehead-groups-and-torsion-examples
 title: "Simple Homotopy, Whitehead Groups, and Torsion: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-an-elementary-expansion-has-zero-whitehead-torsion", "ex-the-whitehead-group-of-the-trivial-group-is-zero", "ex-torsion-of-a-two-term-based-contractible-complex", "cex-ordinary-acyclicity-forgets-basis-and-group-ring-torsion"]
 ---

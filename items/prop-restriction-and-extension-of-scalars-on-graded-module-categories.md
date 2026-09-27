@@ -2,7 +2,7 @@
 id: prop-restriction-and-extension-of-scalars-on-graded-module-categories
 kind: proposition
 title: Restriction and extension along a graded algebra map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-bimodule-tensor-exactness-and-projective-preservation, thm-graded-bimodule-tensor-hom-adjunction, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-graded-ring-module-bimodule-and-internal-shift, def-graded-balanced-tensor-product-and-homogeneous-hom, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise]
@@ -22,6 +22,7 @@ sources:
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, ch. 3, §3.2, printed pp. 68-69"
       url: "https://math.mit.edu/~hrm/palestine/weibel/03-tor_and_ext.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

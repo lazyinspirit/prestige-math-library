@@ -2,7 +2,7 @@
 id: lem-conjugation-reverses-dominance
 kind: lemma
 title: Conjugation reverses dominance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-dominance-order-on-partitions, def-partition-young-diagram-and-conjugate-partition]
@@ -20,6 +20,7 @@ sources:
     - title: "David Craven, Groups, Geometries and Representation Theory - Definitions 1.19 and Lemma 1.20, printed pp. 15-16"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

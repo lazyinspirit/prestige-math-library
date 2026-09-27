@@ -2,7 +2,7 @@
 id: rem-valuative-criterion-quantifies-all-valuation-rings
 kind: remark
 title: The valuative criterion quantifies over all valuation rings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-valuative-criterion-separatedness, def-valuative-diagram-separatedness, def-valuation-ring, def-discrete-valuation-ring, def-axiom-of-choice]
@@ -19,6 +19,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemmas 26.22.1-2, printed p.44"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

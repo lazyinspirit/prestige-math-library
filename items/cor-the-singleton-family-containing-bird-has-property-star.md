@@ -2,7 +2,7 @@
 id: cor-the-singleton-family-containing-bird-has-property-star
 kind: corollary
 title: "The singleton Bird family has property (*)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-the-e-graph-has-the-erdos-hajnal-property, thm-co-bird-free-comb-blocks-admit-an-e-free-structural-partition, thm-special-vertex-local-structural-partition-criterion-implies-property-star, lem-erdos-hajnal-constants-are-downward-closed, def-property-star-for-a-finite-family, def-erdos-hajnal-property-and-constant, def-bird-graph-and-co-bird-graph, def-e-graph-and-co-e-graph, def-h-free-and-family-free-graph, def-structural-comb-partition-hypothesis]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

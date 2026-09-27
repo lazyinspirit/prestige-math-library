@@ -2,7 +2,7 @@
 id: "def-kahler-differentials-algebra"
 kind: "definition"
 title: "Universal Kähler differential module"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-derivation-algebra"]
 provenance:
@@ -14,6 +14,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §22.2.17, p.582"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

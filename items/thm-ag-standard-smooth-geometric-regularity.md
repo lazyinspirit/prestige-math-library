@@ -2,7 +2,7 @@
 id: "thm-ag-standard-smooth-geometric-regularity"
 kind: "theorem"
 title: "Locally standard smooth iff flat with geometrically regular fibres"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "def-ag-geometrically-regular-algebra-and-fibre", "def-finitely-presented-module-and-algebra", "cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented", "def-axiom-of-choice", "def-regular-noetherian-ring", "lem-ag-standard-smooth-flatness", "lem-ag-standard-smooth-regular-geometric-fibres", "lem-ag-geometrically-regular-fibres-local-presentation", "lem-ag-geometric-regularity-field-tests", "prop-modules-over-a-field-are-projective-flat-and-injective", "thm-flatness-criteria-by-injections-and-ideals", "thm-local-criterion-for-zero-modules-and-maps", "thm-localisations-are-flat", "thm-localisation-of-modules-is-tensor-product", "cor-localisation-commutes-with-kernels-images-and-cokernels", "lem-localisation-preserves-injectivity", "prop-iterated-localisation", "cor-affine-scheme-quasi-compact", "cor-dimension-of-a-finite-polynomial-ring-over-a-field", "cor-affine-domain-maximal-ideal-height-equals-dimension"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §26.2.2 and proof of §26.2.4, pp.690–693"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

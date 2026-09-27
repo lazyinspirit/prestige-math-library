@@ -1,7 +1,7 @@
 ---
 name: number-theory
 title: Number Theory
-status: draft
+status: published
 ---
 
 Number theory here starts from the integers as this library constructed them, an

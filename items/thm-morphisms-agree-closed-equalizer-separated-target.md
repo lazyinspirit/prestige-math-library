@@ -2,7 +2,7 @@
 id: thm-morphisms-agree-closed-equalizer-separated-target
 kind: theorem
 title: Equalizers into separated schemes are closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, def-diagonal-morphism-scheme, def-fibre-product-schemes-universal-property, thm-fibre-products-of-schemes-exist, lem-base-change-open-closed-immersions, lem-immersions-and-localizations-monomorphisms]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.4.A, printed pp.314-315"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

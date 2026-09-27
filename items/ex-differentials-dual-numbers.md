@@ -2,7 +2,7 @@
 id: "ex-differentials-dual-numbers"
 kind: "example"
 title: "Differentials of dual numbers in both characteristics"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["cor-jacobian-presentation-differentials", "def-dual-numbers-scheme", "thm-first-isomorphism-theorem-rings"]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

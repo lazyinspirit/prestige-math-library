@@ -2,7 +2,7 @@
 id: thm-the-diagrammatic-character-is-the-split-k-zero-hecke-isomorphism
 kind: theorem
 title: "The diagrammatic character is the split $K_0$ Hecke isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, thm-indecomposable-type-a-diagrammatic-soergel-objects-are-indexed-by-permutations-and-shifts, def-split-grothendieck-rings-of-type-a-soergel-categories, def-type-a-hecke-algebra-in-soergel-normalization, lem-type-a-hecke-standard-basis-for-soergel-comparison, lem-type-a-character-recursion-under-simple-soergel-tensoring, thm-double-leaves-form-graded-r-bases-of-type-a-diagrammatic-hom-spaces]
@@ -21,6 +21,7 @@ sources:
     - title: "Libedinsky, Sur la catégorie des bimodules de Soergel, §§3–5"
       url: "https://arxiv.org/pdf/0707.3603"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

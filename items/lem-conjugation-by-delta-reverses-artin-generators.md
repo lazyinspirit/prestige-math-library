@@ -2,7 +2,7 @@
 id: lem-conjugation-by-delta-reverses-artin-generators
 kind: lemma
 title: "Conjugation by the half twist reverses Artin generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-garside-half-twist-and-simple-positive-braid, def-positive-braid-monoid,
@@ -24,6 +24,7 @@ sources:
     - title: "Patrick Dehornoy et al., Foundations of Garside Theory, Chapter I, Reference Structure 2 and formula (1.6), printed pp. 5-7"
       url: "https://dehornoy.lmno.cnrs.fr/Books/Garside/Text.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

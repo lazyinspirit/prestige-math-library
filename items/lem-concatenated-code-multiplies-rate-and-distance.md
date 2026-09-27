@@ -2,7 +2,7 @@
 id: lem-concatenated-code-multiplies-rate-and-distance
 kind: lemma
 title: "Concatenation multiplies rate and relative distance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-reed-solomon-outer-code-and-binary-linear-inner-code, def-explicit-constant-rate-constant-distance-code, lem-reed-solomon-outer-code-has-constant-rate-and-distance, lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

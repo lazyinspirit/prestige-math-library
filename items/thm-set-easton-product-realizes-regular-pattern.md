@@ -2,7 +2,7 @@
 id: thm-set-easton-product-realizes-regular-pattern
 kind: theorem
 title: Set-sized Easton realization on regular cardinals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-easton-function, def-easton-support-product, lem-easton-head-cc-and-tail-closure, lem-easton-head-tail-no-new-short-sequences, lem-easton-head-cardinality-and-name-count, thm-set-easton-product-preserves-cardinals-and-cofinalities, thm-nice-name-reduction-and-counting, def-nice-name-for-a-subset, def-dense-open-sets-and-model-generic-filters, thm-forcing-theorem, def-forcing-names-and-name-rank, def-check-names-and-the-canonical-generic-name, def-aleph-and-beth-hierarchies, def-axiom-of-choice]
@@ -20,7 +20,8 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Theorem 58, PDF p.12"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

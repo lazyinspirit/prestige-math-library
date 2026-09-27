@@ -1,7 +1,7 @@
 ---
 page: erdos-hajnal-for-the-e-graph-and-bird-examples
 title: "The Erdős–Hajnal Theorems for the E-Graph and Bird — Examples"
-status: draft
+status: published
 requires: [erdos-hajnal-for-the-e-graph-and-bird]
 items: []
 examples: [ex-the-e-graph-theorem-properly-extends-the-p-five-case, ex-the-bird-theorem-properly-extends-the-bull-case]

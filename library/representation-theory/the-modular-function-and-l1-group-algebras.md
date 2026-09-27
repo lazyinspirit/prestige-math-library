@@ -1,7 +1,7 @@
 ---
 page: the-modular-function-and-l1-group-algebras
 title: "The Modular Function and L1 Group Algebras"
-status: draft
+status: published
 items: [lem-right-translation-scales-left-haar-measure, def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism, lem-haar-change-of-variables-under-inversion, def-unimodular-locally-compact-group, prop-compact-discrete-and-abelian-groups-are-unimodular, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-compactly-supported-convolution-on-a-group, lem-convolution-preserves-cc-and-is-associative, lem-l1-convolution-norm-inequality, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, def-convolution-on-cc-and-l1-of-a-group, def-involution-on-l1-of-a-group, lem-the-l1-involution-is-isometric-and-reverses-convolution, def-banach-star-algebra-without-required-unit, thm-l1-of-a-locally-compact-group-is-a-banach-star-algebra, lem-haar-translations-are-strongly-continuous-on-lp-one-and-two, thm-l1-group-algebras-have-a-contractively-bounded-approximate-identity, prop-l1-group-algebra-has-a-unit-iff-g-is-discrete, def-left-and-right-regular-unitary-representations, thm-regular-representations-are-unitary-and-strongly-continuous]
 examples: []
 ---

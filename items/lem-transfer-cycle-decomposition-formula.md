@@ -2,7 +2,7 @@
 id: lem-transfer-cycle-decomposition-formula
 kind: lemma
 title: "Transfer cycle decomposition formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-transfer-homomorphism-for-a-finite-index-subgroup, lem-transfer-is-independent-of-the-transversal, def-coset, lem-coset-membership-and-equality, lem-group-homomorphism-basic-properties, thm-division-algorithm-in-z, thm-well-ordering-principle, thm-orbits-partition-the-set, def-group-action, def-orbit-and-stabilizer, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, lem-group-power-laws]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

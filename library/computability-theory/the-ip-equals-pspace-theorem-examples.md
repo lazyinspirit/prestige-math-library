@@ -1,7 +1,7 @@
 ---
 page: the-ip-equals-pspace-theorem-examples
 title: "The IP = PSPACE Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-two-quantifier-qbf-arithmetization-transcript, ex-multilinearization-preserves-boolean-values, ex-ip-can-be-given-perfect-completeness, cex-ip-equals-pspace-needs-no-degree-reduction]
 ---

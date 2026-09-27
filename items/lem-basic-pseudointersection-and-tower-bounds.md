@@ -2,7 +2,7 @@
 id: lem-basic-pseudointersection-and-tower-bounds
 kind: lemma
 title: Basic bounds for p and t
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-pseudointersection-and-tower-numbers, def-almost-inclusion-pseudointersection-and-tower, lem-small-tower-exists, def-axiom-of-choice, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-aleph-and-beth-hierarchies, thm-well-ordering-principle, thm-recursion, def-natural-numbers]
@@ -20,7 +20,8 @@ sources:
     - title: "M. Malliaris and S. Shelah, Cofinality Spectrum Theorems, Definition 14.3 and the surrounding discussion, PDF pp.54-55"
       url: "https://math.uchicago.edu/~mem/Malliaris-Shelah-CST-new.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

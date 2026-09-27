@@ -2,7 +2,7 @@
 id: "thm-ag-standard-smooth-base-change-composition"
 kind: "theorem"
 title: "Base change and composition of standard smooth presentations"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "lem-ag-base-change-of-standard-smooth-presentations", "lem-ag-polynomial-quotient-differentials", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "thm-localisation-of-modules-is-tensor-product", "cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction", "thm-right-exactness-of-tensor-products", "thm-universal-property-of-localisation", "def-multiplicative-subset-and-localisation", "prop-iterated-localisation"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §26.2.2 and the Jacobian-block argument of §26.2.4, pp.690–693"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

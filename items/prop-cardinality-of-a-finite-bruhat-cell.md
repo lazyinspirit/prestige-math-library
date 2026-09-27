@@ -2,7 +2,7 @@
 id: prop-cardinality-of-a-finite-bruhat-cell
 kind: proposition
 title: Cardinality of a finite Bruhat cell
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-bruhat-decomposition-of-gl-n-over-a-finite-field, def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, thm-lagrange, def-index, def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix, thm-matrix-multiplication-laws, thm-product-rule, def-finite-field-and-its-order]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

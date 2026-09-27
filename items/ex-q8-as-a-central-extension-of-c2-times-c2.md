@@ -2,13 +2,14 @@
 id: ex-q8-as-a-central-extension-of-c2-times-c2
 kind: example
 title: "The quaternion group as a cocycle central extension of C2 x C2"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-cocycle-central-extension-is-a-group", "lem-central-extension-linearizes-a-projective-representation", "def-quaternion-group-of-order-eight", "lem-factor-set-is-a-normalized-two-cocycle", "def-projective-representation-and-factor-set"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

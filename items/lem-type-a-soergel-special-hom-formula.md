@@ -2,7 +2,7 @@
 id: lem-type-a-soergel-special-hom-formula
 kind: lemma
 title: "Special Bott–Samelson Hom formula before reflection localization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-type-a-character-recursion-under-simple-soergel-tensoring, lem-type-a-soergel-frobenius-biadjunction, lem-type-a-support-filtration-multiplicities-are-intrinsic, def-type-a-standard-graph-bimodules-support-filtrations-and-character, lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations, lem-type-a-hecke-standard-basis-for-soergel-comparison]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §3.5"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

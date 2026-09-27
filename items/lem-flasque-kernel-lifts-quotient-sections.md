@@ -2,7 +2,7 @@
 id: "lem-flasque-kernel-lifts-quotient-sections"
 kind: "lemma"
 title: "Flasque kernel lifts quotient sections"
-status: draft
+status: published
 origin: pipeline
 deps: [def-flasque-sheaf, def-exact-sequence-sheaves, def-sheaf-on-topological-space, def-axiom-of-choice, thm-zorn, cor-ac-iff-zorn, def-kernel-cokernel-image-sheaves, thm-exactness-of-sheaves-stalkwise, def-stalk-of-presheaf, lem-sheaf-section-over-empty-set-terminal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

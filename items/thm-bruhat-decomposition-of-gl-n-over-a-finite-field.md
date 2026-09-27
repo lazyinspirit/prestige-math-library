@@ -2,7 +2,7 @@
 id: thm-bruhat-decomposition-of-gl-n-over-a-finite-field
 kind: theorem
 title: Bruhat decomposition of GL_n over a finite field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-gaussian-elimination-produces-a-pivot-permutation, lem-rank-matrices-determine-the-pivot-permutation, def-standard-subgroups-of-gl-n-over-a-finite-field, def-weyl-group-and-length-for-finite-gl-n, def-symmetric-group]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28, printed pp. 38-39"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: def-easton-function
 kind: definition
 title: Easton functions on regular cardinals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-regular-continuum-function-constraints, thm-cofinality-basics, def-cofinality]
@@ -19,6 +19,7 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Definition 52, PDF p.11"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: lem-type-a-top-support-layers-are-controlled-by-reflection-localization
 kind: lemma
 title: "Type-A top support layers are controlled by reflection localization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-type-a-support-filtration-multiplicities-are-intrinsic, lem-type-a-soergel-special-hom-formula, def-type-a-standard-graph-bimodules-support-filtrations-and-character, lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §3.6"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

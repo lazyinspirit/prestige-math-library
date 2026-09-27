@@ -2,7 +2,7 @@
 id: lem-type-a-character-recursion-under-simple-soergel-tensoring
 kind: lemma
 title: "The type-A character recursion under simple Soergel tensoring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations, lem-type-a-support-filtration-multiplicities-are-intrinsic, def-type-a-hecke-algebra-in-soergel-normalization, lem-type-a-hecke-standard-basis-for-soergel-comparison, def-type-a-standard-graph-bimodules-support-filtrations-and-character, def-type-a-soergel-bimodule-for-a-simple-reflection, lem-type-a-soergel-generators-are-finite-free-on-both-sides]
@@ -20,6 +20,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §§2.1, 3.4, PDF pp.13–15, 24–27"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

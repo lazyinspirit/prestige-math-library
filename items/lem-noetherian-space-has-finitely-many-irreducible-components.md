@@ -2,7 +2,7 @@
 id: "lem-noetherian-space-has-finitely-many-irreducible-components"
 kind: "lemma"
 title: "A Noetherian space is a finite union of irreducible closed subsets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-noetherian-topological-space, def-irreducible-topological-space-and-subset, def-irreducible-component-of-a-topological-space, lem-irreducible-components-of-a-topological-space, def-subspace-topology-top, def-topological-space, def-maximal-element, def-axiom-of-choice, def-dependent-choice, thm-choice-implies-dependent-implies-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

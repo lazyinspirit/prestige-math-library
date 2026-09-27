@@ -2,7 +2,7 @@
 id: thm-eastons-theorem-for-regular-cardinals
 kind: theorem
 title: Easton's theorem for regular cardinals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gbc-global-choice-ground-for-easton, lem-easton-class-generic-model-satisfies-zfc, lem-easton-class-forcing-truth-and-set-names, lem-easton-head-cc-and-tail-closure, lem-easton-head-tail-no-new-short-sequences, thm-set-easton-product-realizes-regular-pattern, thm-chain-condition-preserves-cofinalities-and-cardinals, def-easton-function, def-aleph-and-beth-hierarchies, thm-regular-continuum-function-constraints, def-axiom-of-choice, def-cofinality, thm-cofinality-basics]
@@ -20,7 +20,8 @@ sources:
     - title: "Kameryn J. Williams, Math 655 Lecture Notes 2.2, Theorem 77 (global Easton, proof sketch), PDF p.16"
       url: "https://juliakw.net/teaching/2019/math655/part2.2.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

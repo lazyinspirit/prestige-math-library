@@ -2,7 +2,7 @@
 id: "lem-ag-standard-smooth-flatness"
 kind: "lemma"
 title: "Standard smooth algebras are finitely presented and flat"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "lem-ag-base-change-of-standard-smooth-presentations", "lem-ag-standard-smooth-fibre-regular-parameters", "lem-ag-local-flatness-regular-parameters", "def-finitely-presented-module-and-algebra", "def-polynomial-ring-on-a-family-of-indeterminates", "thm-universal-property-of-a-polynomial-ring-on-a-family", "thm-quotient-ring-universal-property", "thm-universal-property-of-localisation", "def-multiplicative-subset-and-localisation", "thm-flatness-is-local", "thm-flatness-criteria-by-injections-and-ideals", "thm-localisations-are-flat", "cor-free-modules-are-projective-and-flat", "thm-localisation-of-modules-is-tensor-product", "thm-right-exactness-of-tensor-products", "thm-symmetry-and-associativity-over-a-commutative-ring", "thm-support-and-annihilator-of-a-finite-module", "thm-proper-ideal-contained-in-maximal-ideal", "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian", "thm-noetherian-ring-quotients-and-localisations", "cor-finite-variable-polynomial-ring-noetherian", "thm-noetherian-ring-ideal-characterisations", "lem-subgroups-of-z-are-cyclic", "cor-finite-type-algebra-over-noetherian-ring-is-noetherian", "thm-krull-intersection-theorem", "thm-long-exact-tor-sequence-in-the-left-module-variable", "cor-localisation-commutes-with-kernels-images-and-cokernels", "prop-extension-of-scalars-preserves-flat-modules", "prop-localisation-zero-equality-and-kernel-criteria", "thm-localisation-commutes-with-quotients", "def-local-ring", "def-dependent-choice", "def-axiom-of-choice"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §25.6.2–3 and §26.2, pp.678–679, 689–690"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

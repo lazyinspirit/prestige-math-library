@@ -2,7 +2,7 @@
 id: lem-standard-parabolic-double-cosets-are-young-double-cosets
 kind: lemma
 title: Parabolic double cosets and block permutations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compositions-partial-flags-and-standard-parabolics, def-weyl-group-and-length-for-finite-gl-n, def-standard-subgroups-of-gl-n-over-a-finite-field, thm-bruhat-decomposition-of-gl-n-over-a-finite-field, thm-relative-position-classifies-pairs-of-complete-flags, lem-rank-matrices-determine-the-pivot-permutation, def-symmetric-group, lem-symmetric-group-is-a-group, def-injection-surjection-bijection, def-linear-map, def-linear-subspace, thm-rank-nullity, thm-invertible-matrix-theorem, cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension, thm-dimension-of-a-linear-subspace]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Bruhat section pp. 37-39; Harish-Chandra section pp. 41-43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

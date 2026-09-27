@@ -1,7 +1,7 @@
 ---
 page: type-a-soergel-bimodules-and-hecke-categorification-examples
 title: "Type-A Soergel Bimodules and Hecke Categorification — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-rank-one-soergel-category,
            ex-the-type-a-two-rank-two-soergel-decomposition,

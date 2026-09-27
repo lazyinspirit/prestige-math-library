@@ -2,7 +2,7 @@
 id: cex-naive-inversion-is-not-the-l1-involution-for-a-nonunimodular-group
 kind: counterexample
 title: "Naive inversion is not the L1 involution on a nonunimodular group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [ex-modular-function-of-the-affine-group-of-the-line, lem-haar-change-of-variables-under-inversion, def-involution-on-l1-of-a-group, lem-the-l1-involution-is-isometric-and-reverses-convolution, def-complex-haar-lp-spaces-and-compactly-supported-functions, def-left-haar-integral-and-left-haar-measure, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-unimodular-locally-compact-group, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B, printed pp. 115–118"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

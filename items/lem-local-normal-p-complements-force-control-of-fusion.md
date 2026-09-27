@@ -2,7 +2,7 @@
 id: lem-local-normal-p-complements-force-control-of-fusion
 kind: lemma
 title: "Local normal p complements force control of fusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-local-sylow-conjugacy-ascent-for-fusion, lem-fusion-control-and-centralizer-transitivity, def-control-of-fusion-in-a-sylow-p-subgroup, def-p-local-normalizer-for-normal-complement-theory, def-normal-p-complement-and-p-nilpotent-group, def-sylow-p-subgroup, def-normalizer-of-a-subgroup, def-subgroup, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, thm-lagrange, def-normal-subgroup, def-commutator-and-commutator-subgroup, thm-conjugation-is-an-automorphism, lem-group-inverse-laws, def-conjugacy-class-and-centralizer, lem-centralizers-and-normalizers-are-subgroups]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

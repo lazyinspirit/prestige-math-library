@@ -1,7 +1,7 @@
 ---
 page: "kahler-differentials-conormal-sequences-and-infinitesimal-lifting-examples"
 title: "Kahler Differentials Conormal Sequences and Infinitesimal Lifting — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-differentials-polynomial-ring", "ex-differentials-hypersurface", "ex-differentials-dual-numbers", "ex-differentials-separable-field-extension-zero", "cex-differentials-purely-inseparable-field-nonzero", "cex-conormal-left-map-not-injective", "ex-tangent-vectors-affine-space-dual-numbers", "ex-unramified-closed-point-immersion", "cex-frobenius-zero-tangent-map-not-formally-etale"]
 ---

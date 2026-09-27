@@ -2,7 +2,7 @@
 id: ex-internal-shift-versus-a-change-of-degree
 kind: example
 title: An internal shift reverses the published commutative twist parameter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-graded-ring-and-graded-module]
@@ -22,6 +22,7 @@ sources:
 generation:
   role: example
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

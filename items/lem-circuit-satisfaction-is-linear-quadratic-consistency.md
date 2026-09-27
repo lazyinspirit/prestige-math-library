@@ -2,7 +2,7 @@
 id: lem-circuit-satisfaction-is-linear-quadratic-consistency
 kind: lemma
 title: "Circuit satisfiability becomes linear-quadratic consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quadratic-consistency-test, lem-quadratic-test-soundness, def-circuit-sat, def-boolean-circuit-size-depth-fanin-and-basis, def-assignment-tester-and-rejection-ratio, lem-boolean-cube-fourier-inversion-and-parseval, def-linearity-test]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

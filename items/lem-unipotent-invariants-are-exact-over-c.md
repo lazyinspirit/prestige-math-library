@@ -2,7 +2,7 @@
 id: lem-unipotent-invariants-are-exact-over-c
 kind: lemma
 title: Finite-group invariants are exact when the group order is invertible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-harish-chandra-induction-and-restriction-for-finite-gl-n, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-compositions-partial-flags-and-standard-parabolics, def-g-module-over-a-commutative-ring, def-exact-and-short-exact-sequences-of-modules, def-module-homomorphism-kernel-image-and-cokernel, rem-standing-hypotheses-for-ordinary-character-theory, def-standard-subgroups-of-gl-n-over-a-finite-field, def-subgroup, def-field]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Definition 5.2, printed p. 42"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

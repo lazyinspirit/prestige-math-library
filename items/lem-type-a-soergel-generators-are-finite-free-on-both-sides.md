@@ -2,7 +2,7 @@
 id: lem-type-a-soergel-generators-are-finite-free-on-both-sides
 kind: lemma
 title: "Soergel generators and Bott–Samelson products are finite free on both sides"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-soergel-bimodule-for-a-simple-reflection, def-type-a-reflection-realization-and-polynomial-ring]
@@ -20,6 +20,7 @@ sources:
     - title: "Soergel, Kazhdan–Lusztig-Polynome und unzerlegbare Bimoduln, §§5–6"
       url: "https://arxiv.org/pdf/math/0403496"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

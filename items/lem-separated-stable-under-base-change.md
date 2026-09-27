@@ -2,7 +2,7 @@
 id: lem-separated-stable-under-base-change
 kind: lemma
 title: Separatedness survives base change
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, def-base-change-morphism-schemes, lem-diagonal-base-change-identification, lem-base-change-open-closed-immersions]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.3.3, printed p.308"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

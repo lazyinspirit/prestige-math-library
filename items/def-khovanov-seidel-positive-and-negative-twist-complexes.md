@@ -2,7 +2,7 @@
 id: def-khovanov-seidel-positive-and-negative-twist-complexes
 kind: definition
 title: "The twist complexes R_i and R_i^{-1}"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-khovanov-seidel-beta-and-gamma-bimodule-maps, def-two-sided-projective-khovanov-seidel-bimodule-functors, def-bounded-projective-homotopy-category-for-a-m, def-signed-totalization-of-graded-a-m-bimodule-actions, lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m, def-mapping-cone-of-a-chain-map, thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules, def-graded-khovanov-seidel-module-category-and-projectives]
@@ -19,6 +19,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2d, printed pp. 11-12"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

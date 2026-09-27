@@ -2,13 +2,14 @@
 id: "def-flat-abelian-sheaf"
 kind: "definition"
 title: "Flat abelian sheaves"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-left-and-right-flat-modules-over-an-arbitrary-ring, def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, def-stalk-of-presheaf, def-bounded-bounded-below-and-bounded-above-complex]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

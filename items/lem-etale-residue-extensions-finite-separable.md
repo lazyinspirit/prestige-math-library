@@ -2,7 +2,7 @@
 id: "lem-etale-residue-extensions-finite-separable"
 kind: "lemma"
 title: "Unramified residue extensions are finite separable"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-axiom-of-choice", "def-locally-finite-type-and-finite-type-morphism", "def-sheaf-relative-differentials", "def-residue-field-scheme-point", "def-localisation-at-a-prime-ideal", "def-finite-type-and-module-finite-algebras", "def-finitely-generated-field-extension", "def-separable-elements-and-separable-extensions", "def-ag-separating-transcendence-basis", "def-local-ring", "def-jacobson-radical-of-a-ring", "def-unramified-morphism-finite-type", "def-formally-etale-morphism", "thm-formally-unramified-differentials-zero", "lem-sheaf-differentials-affine-compatibility", "lem-differentials-localization", "lem-differentials-base-change", "thm-localisation-at-a-prime-is-local", "thm-localisation-of-modules-is-tensor-product", "cor-tensor-product-with-a-quotient-ring", "cor-residue-field-of-a-localisation-at-a-prime", "thm-conormal-exact-sequence-algebra", "thm-transitivity-exact-sequence-differentials", "cor-derivations-represented-by-differentials", "lem-field-is-noetherian", "cor-finite-type-algebra-over-noetherian-ring-is-noetherian", "thm-noetherian-ring-quotients-and-localisations", "thm-nakayama-lemma", "lem-finite-type-field-zero-differentials-finite-separable", "lem-ag-separable-residue-cotangent-sequence", "thm-finitely-generated-algebraic-extensions-are-finite"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra, Lemma 10.151.5 (tag 00UW) and Stacks Morphisms, Lemma 29.36.12 (tag 02G8)"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

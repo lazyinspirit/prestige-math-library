@@ -2,13 +2,14 @@
 id: "def-irreducible-component-of-a-topological-space"
 kind: "definition"
 title: "Irreducible components of a topological space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-irreducible-topological-space-and-subset, def-maximal-element, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

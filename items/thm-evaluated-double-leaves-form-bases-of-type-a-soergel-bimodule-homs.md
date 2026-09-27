@@ -2,7 +2,7 @@
 id: thm-evaluated-double-leaves-form-bases-of-type-a-soergel-bimodule-homs
 kind: theorem
 title: "Evaluated double leaves form bases of type-A Soergel bimodule homs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-double-leaves-form-graded-r-bases-of-type-a-diagrammatic-hom-spaces, thm-light-leaf-maps-form-bases-of-type-a-soergel-homs-to-the-unit, lem-type-a-soergel-frobenius-biadjunction, def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor, lem-the-type-a-diagrammatic-relations-hold-for-soergel-bimodules, def-the-type-a-soergel-category, def-bott-samelson-bimodule-of-a-word]
@@ -23,6 +23,7 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §6.2–6.3, Theorem 6.11 with Proposition 6.9, PDF pp. 61–63"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

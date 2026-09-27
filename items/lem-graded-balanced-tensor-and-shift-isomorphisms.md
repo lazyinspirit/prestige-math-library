@@ -2,7 +2,7 @@
 id: lem-graded-balanced-tensor-and-shift-isomorphisms
 kind: lemma
 title: Graded associativity, units, and internal-shift tensor isomorphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-ring-module-bimodule-and-internal-shift, def-graded-balanced-tensor-product-and-homogeneous-hom, thm-associativity-of-balanced-tensor-products, thm-unit-isomorphisms-for-module-tensor-products, thm-universal-property-of-module-tensor-products, thm-bimodule-actions-induced-on-tensor-products]
@@ -22,6 +22,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.12, tag 00CV"
       url: "https://stacks.math.columbia.edu/tag/00CV"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

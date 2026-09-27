@@ -2,7 +2,7 @@
 id: "lem-finite-type-field-zero-differentials-finite-separable"
 kind: "lemma"
 title: "Finite-type field extensions with zero Ω"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-axiom-of-choice", "def-finitely-generated-field-extension", "def-field-extension-generated-subfields-and-simple-extension", "def-kahler-differentials-algebra", "def-extension-degree-and-finite-extension", "def-separable-elements-and-separable-extensions", "def-finite-type-and-module-finite-algebras", "def-noetherian-ring-and-module", "def-principal-localisation", "def-localisation-at-a-prime-ideal", "def-nilradical-and-reduced-ring", "def-algebraically-closed-field", "def-prime-and-maximal-ideals", "def-jacobson-radical-of-a-ring", "def-local-ring", "def-scheme-over-base", "thm-universal-property-of-a-polynomial-ring", "thm-kahler-differentials-existence-presentation", "cor-jacobian-presentation-differentials", "lem-field-is-noetherian", "cor-finite-variable-polynomial-ring-noetherian", "lem-differentials-localization", "lem-differentials-base-change", "cor-finite-module-locally-zero-near-a-prime", "thm-existence-of-algebraic-closures", "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect", "thm-perfect-field-characterizations", "thm-frobenius-endomorphism-and-finite-field-automorphism", "thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "lem-tensor-ring-presentations-for-base-change", "prop-modules-over-a-field-are-projective-flat-and-injective", "cor-every-vector-space-has-a-basis", "thm-flatness-criteria-by-injections-and-ideals", "thm-unit-isomorphisms-for-module-tensor-products", "thm-tensor-products-commute-with-arbitrary-direct-sums", "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite", "prop-algebraically-closed-splitting-and-finite-extension-criteria", "thm-cotangent-space-maximal-ideal-quotient", "lem-sheaf-differentials-affine-compatibility", "def-relative-cotangent-space", "thm-localisation-at-a-prime-is-local", "thm-localisation-of-modules-is-exact", "lem-zero-in-a-localised-module", "cor-residue-field-of-a-localisation-at-a-prime", "thm-nakayama-lemma", "thm-prime-spectrum-of-a-localisation-bijection", "thm-proper-ideal-contained-in-maximal-ideal", "thm-correspondence-theorem-ideals", "cor-nilradical-as-intersection-of-primes", "thm-noetherian-ring-has-finitely-many-minimal-primes", "cor-finite-type-algebra-over-noetherian-ring-is-noetherian", "thm-chinese-remainder-theorem-for-comaximal-ideals", "thm-rank-nullity", "thm-finite-field-extensions-are-algebraic", "thm-primitive-element-theorem-for-finite-separable-extensions", "thm-evaluation-kernel-and-minimal-polynomial", "thm-polynomial-quotient-is-a-field-iff-irreducible", "cor-irreducible-polynomial-is-separable-iff-derivative-nonzero", "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core", "prop-extension-of-scalars-preserves-flat-modules", "thm-associativity-of-balanced-tensor-products", "thm-tensor-product-of-algebras-over-a-commutative-ring", "cor-independent-set-is-no-larger-than-a-finite-spanning-set"]
 proof_strategy: "direct"
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "Stacks Algebra, Lemma 10.158.1 (tag 090W) and Lemma 10.151.5 (tag 00UW)"
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

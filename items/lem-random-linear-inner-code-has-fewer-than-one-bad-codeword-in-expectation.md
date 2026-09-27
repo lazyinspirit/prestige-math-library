@@ -2,7 +2,7 @@
 id: lem-random-linear-inner-code-has-fewer-than-one-bad-codeword-in-expectation
 kind: lemma
 title: "A random inner linear code has fewer than one bad word in expectation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-explicit-constant-rate-constant-distance-code, lem-chernoff-bound-for-bernoulli-trials, def-expectation-on-a-finite-probability-space, cor-expectation-of-an-indicator-is-probability, def-independent-families-of-event-classes]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: lem-normal-extension-separable-over-maximal-purely-inseparable-subextension
 kind: lemma
 title: "A finite normal extension is separable over its purely inseparable fixed field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-normal-algebraic-extension, def-fixed-field-of-an-automorphism-group, def-relative-field-automorphism-group, lem-artin-fixed-field-lower-degree-bound, lem-artin-fixed-field-upper-degree-bound, prop-finitely-generated-normal-extensions-are-splitting-fields, thm-isomorphisms-extend-to-splitting-fields, thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core, cor-irreducible-polynomial-is-separable-iff-derivative-nonzero, def-purely-inseparable-extension, def-separable-elements-and-separable-extensions, def-repeated-root-and-separable-polynomial, def-finite-galois-extension-and-galois-group, thm-evaluation-kernel-and-minimal-polynomial, thm-root-bound-for-polynomials-over-a-domain, thm-finite-field-extensions-are-algebraic, def-extension-degree-and-finite-extension, def-dimension, def-finitely-generated-field-extension, def-field-extension-generated-subfields-and-simple-extension, def-polynomials-that-split-and-splitting-fields, def-algebraic-and-transcendental-elements, thm-frobenius-endomorphism-and-finite-field-automorphism, thm-simple-algebraic-extension-quotient-power-basis-and-degree, thm-tower-law-for-finite-field-extensions]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

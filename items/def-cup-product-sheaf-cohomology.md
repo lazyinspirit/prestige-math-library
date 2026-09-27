@@ -2,7 +2,7 @@
 id: "def-cup-product-sheaf-cohomology"
 kind: "definition"
 title: "Cup product in sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-space, def-axiom-of-choice, def-sheaf-cohomology-derived-global-sections, lem-sheaf-cohomology-classes-as-derived-morphisms, lem-koszul-coherence-for-derived-sheaf-tensor, lem-derived-tensor-product-of-abelian-sheaves, def-tensor-product-of-abelian-sheaves, def-derived-category-of-an-abelian-category, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, lem-morphisms-from-the-constant-sheaf-are-global-sections]
 provenance:
@@ -13,6 +13,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Section 28.7 (relative cup product), Section 31 (0FKU) with Lemma 31.1 (0FP2) and its footnote 3, and Section 26 (derived tensor product)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: "lem-ag-separable-residue-cotangent-sequence"
 kind: "lemma"
 title: "Separable residue and the cotangent sequence of a local algebra"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["lem-ag-differentials-universal-property", "def-ag-separating-transcendence-basis", "thm-primitive-element-theorem-for-finite-separable-extensions", "thm-evaluation-kernel-and-minimal-polynomial", "thm-polynomial-is-separable-iff-coprime-to-its-derivative", "def-separable-elements-and-separable-extensions"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil §§22.2.18 and 22.3.9, pp.582–583, 590"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

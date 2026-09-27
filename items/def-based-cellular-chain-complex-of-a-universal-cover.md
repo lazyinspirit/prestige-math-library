@@ -2,7 +2,7 @@
 id: def-based-cellular-chain-complex-of-a-universal-cover
 kind: definition
 title: "Based cellular chains of a universal cover as finite free right group-ring modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-skeleta-cw-subcomplex-and-relative-cw-complex, thm-relative-homology-of-consecutive-cw-skeleta, thm-universal-cover-existence, thm-covering-space-lifting-criterion, thm-deck-group-of-a-universal-cover-is-the-fundamental-group, def-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring, def-cw-complex-with-closure-finiteness-and-weak-topology, def-cell-attachment-by-a-characteristic-map, def-relative-singular-homology, def-oriented-cellular-chain-group, def-universal-covering-space]
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

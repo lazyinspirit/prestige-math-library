@@ -2,7 +2,7 @@
 id: def-valuative-diagram-separatedness
 kind: definition
 title: Valuative uniqueness diagram
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-valuation-ring, def-separated-morphism-schemes, def-field-of-fractions]
@@ -19,6 +19,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 13.7.4, printed p.383"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

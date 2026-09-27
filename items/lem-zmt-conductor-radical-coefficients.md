@@ -2,7 +2,7 @@
 id: lem-zmt-conductor-radical-coefficients
 kind: lemma
 title: Conductor radical detects every polynomial coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-integral-subalgebra-of-an-arbitrary-ring-map, def-finite-type-and-module-finite-algebras, def-radical-of-an-ideal, lem-radical-is-an-ideal, thm-integrality-and-finite-module-equivalences, lem-zmt-one-variable-integral-correction, prop-polynomial-degree-laws-over-a-commutative-ring, def-polynomial-ring-over-a-commutative-ring]
@@ -20,6 +20,8 @@ sources:
       locator: "Section 10.123, Situation 10.123.4 and Lemmas 10.123.5-10.123.6"
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

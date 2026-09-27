@@ -2,7 +2,7 @@
 id: thm-the-modular-function-is-a-continuous-homomorphism
 kind: theorem
 title: "The modular function is a continuous homomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-modular-function-of-a-locally-compact-group, lem-right-translation-scales-left-haar-measure, lem-translations-preserve-compactly-supported-continuous-functions, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-left-haar-integral-and-left-haar-measure, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, thm-recursion, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.ethz.ch/~kowalski/representation-theory.pdf"
       locator: "§§5.2–5.3 and Lemma 5.5.2, printed pp. 212–230, 238–239"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

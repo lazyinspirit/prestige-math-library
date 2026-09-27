@@ -2,7 +2,7 @@
 id: def-multilinearization-operator
 kind: definition
 title: "Multilinearization in one variable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-qbf-arithmetization-operators, def-field, def-quantified-boolean-formula-and-tqbf]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

@@ -2,7 +2,7 @@
 id: lem-strong-transcendence-descends-to-minimal-prime-quotients
 kind: lemma
 title: Strong transcendence descends to reduced minimal-prime quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-strongly-transcendental-element, def-nilradical-and-reduced-ring, cor-nilradical-as-intersection-of-primes, lem-radical-commutes-with-localisation, cor-primes-of-a-prime-local-ring, def-localisation-at-a-prime-ideal, prop-localisation-zero-equality-and-kernel-criteria, def-quotient-ring, prop-canonical-quotient-ring-map, def-axiom-of-choice]
@@ -20,6 +20,8 @@ sources:
       locator: "Section 10.123, Lemma 10.123.8 with its complete proof"
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-frobenius-kernel-set
 kind: definition
 title: "Frobenius kernel set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-frobenius-complement-and-frobenius-group, prop-frobenius-permutation-action-characterization]
@@ -19,6 +19,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

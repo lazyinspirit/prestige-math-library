@@ -2,7 +2,7 @@
 id: def-standard-subgroups-of-gl-n-over-a-finite-field
 kind: definition
 title: Standard subgroups of finite general linear groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-finite-field-and-its-order, thm-existence-of-finite-fields, def-invertible-matrix-and-general-linear-group, thm-determinant-of-a-triangular-matrix, def-triangular-and-diagonal-matrices-over-a-commutative-ring, thm-matrix-multiplication-laws, cor-general-linear-group-is-a-group, def-subgroup, lem-standard-basis-of-f-n, def-matrices-over-a-commutative-ring]
@@ -19,6 +19,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Exercise 4.28 and Definition 5.2, printed pp. 38-39 and 42"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

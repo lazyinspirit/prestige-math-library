@@ -2,7 +2,7 @@
 id: cex-invariant-character-need-not-extend-linearly
 kind: counterexample
 title: "An invariant central character of the quaternion group with no linear extension"
-status: draft
+status: published
 origin: pipeline
 deps: ["ex-q8-as-a-central-extension-of-c2-times-c2", "thm-extension-exists-iff-the-clifford-obstruction-vanishes", "def-quaternion-group-of-order-eight", "def-extension-of-an-irreducible-normal-subgroup-representation", "def-conjugate-representation-and-inertia-group"]
 provenance:
@@ -15,6 +15,8 @@ sources:
     - title: "Tammo tom Dieck, Representation Theory — Proposition (4.2.6) and Remark (4.2.7), printed p. 57"
       url: "https://www.uni-math.gwdg.de/tammo/d01.pdf"
 proof_strategy: counterexample
+verification:
+  audited: 2026-09-27
 ---
 
 ## Counterexample

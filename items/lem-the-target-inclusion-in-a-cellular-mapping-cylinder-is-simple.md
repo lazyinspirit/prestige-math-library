@@ -2,7 +2,7 @@
 id: lem-the-target-inclusion-in-a-cellular-mapping-cylinder-is-simple
 kind: lemma
 title: "The target of a finite cellular mapping cylinder is a simple subcomplex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-elementary-expansion-and-collapse-of-finite-cw-complexes, def-simple-homotopy-equivalence, thm-simple-homotopy-equivalences-have-zero-whitehead-torsion, thm-composition-and-sum-formulas-for-whitehead-torsion, lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, def-homotopy-equivalence, cor-a-map-homotopic-to-a-homotopy-equivalence-is-a-homotopy-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: "thm-noetherian-topological-space-dimension-vanishing"
 kind: "theorem"
 title: "Grothendieck vanishing on a Noetherian space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-noetherian-topological-space, def-dimension-noetherian-topological-space, def-cohomological-dimension-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-irreducible-topological-space-and-subset, def-irreducible-component-of-a-topological-space, lem-irreducible-components-of-a-topological-space, lem-noetherian-space-has-finitely-many-irreducible-components, lem-extension-by-zero-vanishing-reduces-to-all-sheaves, lem-closed-immersion-preserves-sheaf-cohomology, lem-constant-sheaf-on-irreducible-space-is-flasque, lem-extension-by-zero-short-exact-sequence, lem-sheaf-supported-on-a-closed-subset-is-a-pushforward, thm-long-exact-sequence-sheaf-cohomology, def-sheaf-cohomology-derived-global-sections, lem-cohomology-functoriality-sheaf-and-space, lem-noetherian-subspaces-and-compact-opens, lem-sheaf-section-over-empty-set-terminal, prop-an-exact-functor-has-vanishing-positive-derived-functors, def-extension-by-zero-abelian-sheaf, def-restriction-sheaf-open-subspace, def-direct-image-sheaf, lem-direct-image-is-sheaf, def-subspace-topology-top, def-topological-space, thm-closure-characterisation-top, def-stalk-of-presheaf, def-sheafification, thm-abelian-sheaves-form-abelian-category, def-exact-sequence-sheaves, def-global-sections-functor-sheaves, thm-extension-by-zero-adjunction-exactness, thm-inverse-direct-image-adjunction]
 provenance:
@@ -14,6 +14,8 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "Proposition 20.7 (tag 02UZ)"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

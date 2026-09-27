@@ -2,7 +2,7 @@
 id: ex-the-a-two-khovanov-seidel-algebra-and-its-projectives
 kind: example
 title: "The algebra A_2 and its vertex projectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-khovanov-seidel-type-a-quiver-algebra, def-graded-khovanov-seidel-module-category-and-projectives, lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis, def-path-ring-of-a-finite-quiver-over-the-integers]
@@ -18,6 +18,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §1b, printed pp. 3-4"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

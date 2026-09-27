@@ -2,7 +2,7 @@
 id: lem-nonabelian-supersolvable-group-has-the-required-abelian-normal-subgroup
 kind: lemma
 title: "A nonabelian supersolvable group has a noncentral abelian normal subgroup, also in its nonabelian quotients"
-status: draft
+status: published
 origin: pipeline
 deps: [def-supersolvable-groups-and-monomial-characters, def-normal-subgroup, def-quotient-group, def-center-of-a-group, thm-first-isomorphism-theorem-groups]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-polynomial-algebras-over-fields-are-integrally-closed
 kind: lemma
 title: "Finite-variable polynomial algebras over fields are integrally closed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-polynomial-ring-over-a-field-is-a-ufd, lem-gauss-lemma-over-a-ufd, def-integral-closure-and-integrally-closed-domain, def-integral-element-and-algebraic-integer, def-unique-factorisation-domain, def-irreducible-and-prime-elements-in-a-domain, def-divisibility-and-associates-in-a-domain, def-invertible-element, def-field-of-fractions, def-multivariate-polynomial-ring-by-iteration, cor-polynomial-ring-over-a-domain-is-a-domain, cor-multivariate-polynomial-ring-over-a-domain-is-a-domain, thm-polynomial-degree-of-a-product-over-a-domain, thm-irreducible-polynomials-over-a-field-are-prime, thm-well-ordering-principle, def-zero-divisor-and-integral-domain, def-field, lem-field-is-a-commutative-ring, lem-domain-cancellation]
@@ -21,6 +21,8 @@ sources:
     - title: "Stacks Project, Lemma 10.161.13 (polynomial N-2)"
       url: "https://stacks.math.columbia.edu/tag/032O"
       locator: "statement and proof of Lemma 10.161.13, which invokes Lemma 10.37.8"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

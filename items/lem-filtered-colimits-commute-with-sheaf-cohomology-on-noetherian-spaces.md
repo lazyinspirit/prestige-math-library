@@ -2,7 +2,7 @@
 id: "lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces"
 kind: "lemma"
 title: "Filtered colimits and sheaf cohomology on Noetherian spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-sections-on-compact-opens-commute-with-filtered-colimits, lem-noetherian-subspaces-and-compact-opens, thm-abelian-sheaves-have-enough-injectives, thm-long-exact-sequence-sheaf-cohomology, def-sheaf-cohomology-derived-global-sections, def-axiom-of-choice, thm-set-has-all-small-colimits, def-flasque-sheaf, lem-injective-sheaves-flasque, thm-flasque-sheaves-acyclic, lem-abelian-sheaves-form-a-grothendieck-category, thm-ab5-is-equivalent-to-exactness-of-filtered-colimits, lem-filtered-colimits-of-abelian-groups-are-exact, def-kernel-cokernel-image-sheaves, def-filtered-category-and-filtered-colimit, def-noetherian-topological-space, thm-zero-sheaf-cohomology-global-sections, def-presheaf-plus-construction, def-sheafification, def-exact-functor-between-abelian-categories, thm-abelian-sheaves-form-abelian-category, thm-choice-implies-dependent-implies-countable-choice]
 provenance:
@@ -13,6 +13,8 @@ sources:
   references:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

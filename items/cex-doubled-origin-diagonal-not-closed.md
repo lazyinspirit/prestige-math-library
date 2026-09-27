@@ -2,7 +2,7 @@
 id: cex-doubled-origin-diagonal-not-closed
 kind: counterexample
 title: The doubled-origin diagonal is not closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [cor-doubled-origin-not-separated, def-diagonal-morphism-scheme, thm-affine-fibre-product-tensor-ring]
@@ -20,6 +20,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, Exercise 11.3.I, printed p.309"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

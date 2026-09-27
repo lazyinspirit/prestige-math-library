@@ -2,7 +2,7 @@
 id: "ex-differentials-separable-field-extension-zero"
 kind: "example"
 title: "Finite separable extensions have zero Omega"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["thm-kahler-differentials-existence-presentation", "thm-primitive-element-theorem-for-finite-separable-extensions", "thm-evaluation-kernel-and-minimal-polynomial", "cor-irreducible-polynomial-is-separable-iff-derivative-nonzero", "def-separable-elements-and-separable-extensions", "thm-simple-algebraic-extension-quotient-power-basis-and-degree"]
@@ -16,6 +16,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil 22.2.F, p.577"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: lem-complete-linear-blowup-reductions-compose
 kind: lemma
 title: "Complete linear-blowup reductions compose"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gap-preserving-csp-reduction]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

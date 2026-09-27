@@ -2,7 +2,7 @@
 id: "lem-sheaf-cohomology-classes-as-derived-morphisms"
 kind: "lemma"
 title: "Sheaf cohomology classes as derived morphisms"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-sheaf-cohomology-derived-global-sections, thm-abelian-sheaves-have-enough-injectives, def-injective-resolution-in-an-abelian-category, def-deleted-resolution, def-quasi-isomorphism, def-cochain-complex-in-an-abelian-category, def-cohomology-object-of-a-cochain-complex, def-cochain-map, thm-a-bounded-below-complex-of-injectives-is-homotopically-injective, prop-morphisms-into-a-homotopically-injective-complex-need-no-roof, thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex, def-derived-category-of-an-abelian-category, def-homotopically-projective-bounded-above-complex, def-zero-and-stalk-complex, lem-morphisms-from-the-constant-sheaf-are-global-sections, prop-the-localization-functor-sends-quasi-isomorphisms-to-isomorphisms, lem-addition-of-roofs-makes-an-additive-localization, thm-zero-sheaf-cohomology-global-sections, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, def-global-sections-functor-sheaves]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

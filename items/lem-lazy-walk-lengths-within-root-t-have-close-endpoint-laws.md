@@ -2,7 +2,7 @@
 id: lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws
 kind: lemma
 title: "Nearby lazy-walk lengths have close endpoint and claim laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-constraint-graph-and-labeling-value, def-plurality-decoding-of-powered-local-views, def-constraint-graph-powering, cor-central-binomial-coefficient-asymptotic-from-wallis]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

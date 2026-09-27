@@ -2,7 +2,7 @@
 id: lem-coprime-plane-forms-form-a-homogeneous-regular-sequence
 kind: lemma
 title: "Coprime positive-degree plane forms form a regular sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "coprime plane forms are a regular sequence"
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

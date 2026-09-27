@@ -2,7 +2,7 @@
 id: ex-a-simple-module-projective-resolution-for-a-two
 kind: example
 title: "An explicit projective resolution of the vertex module S_2 for A_2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-simple-khovanov-seidel-modules-have-explicit-finite-projective-resolutions, ex-the-a-two-khovanov-seidel-algebra-and-its-projectives, def-vertex-khovanov-seidel-modules, def-graded-khovanov-seidel-module-category-and-projectives, def-projective-resolution-in-an-abelian-category]
@@ -18,6 +18,7 @@ sources:
     - title: "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2a, printed pp. 9-10"
       url: "https://arxiv.org/pdf/math/0006056"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

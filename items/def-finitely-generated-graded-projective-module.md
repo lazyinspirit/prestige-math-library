@@ -2,7 +2,7 @@
 id: def-finitely-generated-graded-projective-module
 kind: definition
 title: Finite graded projective modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-graded-ring-module-bimodule-and-internal-shift, lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise, def-projective-object, def-generated-cyclic-finitely-generated-and-free-modules]
@@ -19,6 +19,7 @@ sources:
     - title: "Stacks Project, Algebra, §10.56, tag 00JL"
       url: "https://stacks.math.columbia.edu/tag/00JL"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

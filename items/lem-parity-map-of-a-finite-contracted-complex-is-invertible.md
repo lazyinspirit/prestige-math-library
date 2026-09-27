@@ -2,7 +2,7 @@
 id: lem-parity-map-of-a-finite-contracted-complex-is-invertible
 kind: lemma
 title: "A chain contraction makes the odd-to-even parity map invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-contractible-complex, def-left-and-right-modules, def-chain-homotopy, def-direct-sum-of-a-family-of-modules, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, def-chain-complex-in-an-abelian-category, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

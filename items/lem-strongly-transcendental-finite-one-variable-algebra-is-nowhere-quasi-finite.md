@@ -2,7 +2,7 @@
 id: lem-strongly-transcendental-finite-one-variable-algebra-is-nowhere-quasi-finite
 kind: lemma
 title: Finite algebras over a strongly transcendental variable are nowhere quasi-finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-integral-closure-is-integrally-closed, def-quasi-finite-at-a-prime-for-finite-type-algebras, def-finite-type-and-module-finite-algebras, def-strongly-transcendental-element, def-algebraic-and-transcendental-elements, def-nilradical-and-reduced-ring, def-integral-closure-and-integrally-closed-domain, def-integral-subalgebra-of-an-arbitrary-ring-map, def-axiom-of-choice, cor-residue-field-of-a-localisation-at-a-prime, thm-quotient-is-domain-iff-ideal-prime, thm-universal-property-of-a-polynomial-ring, cor-polynomial-ring-over-a-domain-is-a-domain, thm-universal-property-of-localisation, thm-integrality-and-finite-module-equivalences, thm-going-down-over-normal-domains, thm-lying-over, thm-prime-spectrum-of-a-quotient-bijection, lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite, lem-zmt-polynomial-rings-over-normal-domains-are-normal, lem-zmt-quasi-finite-transfer-through-intermediate-rings, lem-strong-transcendence-descends-to-minimal-prime-quotients, cor-primes-of-a-prime-local-ring, lem-minimal-prime-over-an-ideal-exists, prop-localisation-zero-equality-and-kernel-criteria, def-localisation-at-a-prime-ideal, def-tensor-product-of-modules-by-generators-and-relations]
@@ -23,6 +23,8 @@ sources:
       locator: "Section 10.38, Proposition 10.38.7"
     - title: "J. S. Milne, A Primer of Commutative Algebra, version 4.03, Section 17"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

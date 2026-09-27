@@ -2,7 +2,7 @@
 id: lem-parabolic-mackey-biset-splitting-in-gl-n
 kind: lemma
 title: Unipotent double-coset biset splitting
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-compositions-partial-flags-and-standard-parabolics, thm-levi-decomposition-of-standard-parabolics-in-gl-n-fq, def-weyl-group-and-length-for-finite-gl-n, lem-standard-parabolic-double-cosets-are-young-double-cosets, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, lem-intersection-of-subgroups, def-normal-subgroup, def-coset, def-subgroup, def-group-action, def-standard-subgroups-of-gl-n-over-a-finite-field]
@@ -20,6 +20,7 @@ sources:
     - title: "Jay Taylor, Finite Reductive Groups - Harish-Chandra section, printed pp. 41-43"
       url: "https://pages.uoregon.edu/belias/WARTHOG/DLtheory/TaylorReductiveGroups.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

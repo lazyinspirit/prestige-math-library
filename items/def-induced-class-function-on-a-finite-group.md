@@ -2,7 +2,7 @@
 id: def-induced-class-function-on-a-finite-group
 kind: definition
 title: "Induced class functions and restricted class functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-class-function-and-the-space-of-complex-class-functions, def-induced-character-of-a-complex-representation, thm-frobenius-formula-for-induced-characters, def-subgroup]
@@ -21,6 +21,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
       locator: "§4.3, Proposition 4.3.5 and Corollary 4.3.8"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

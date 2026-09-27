@@ -2,7 +2,7 @@
 id: ex-ch-collapses-classical-cardinal-invariants
 kind: example
 title: Under CH the classical cardinal invariants all equal aleph one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-basic-pseudointersection-and-tower-bounds, def-pseudointersection-and-tower-numbers, lem-basic-bounding-and-dominating-relations, def-eventual-domination-bounding-and-dominating-numbers, def-splitting-and-reaping-numbers, lem-splitting-reaping-comparison-with-b-and-d, lem-basic-ideal-cardinal-inequalities, def-null-and-meagre-cardinal-invariants, def-aleph-and-beth-hierarchies, def-cardinal-arithmetic, lem-ordinal-trichotomy, def-cardinal, def-axiom-of-choice]
@@ -20,7 +20,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Sections 1-2, printed pp.1-3"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-proper-subgroup-of-a-finite-p-group-is-properly-normalized-local
 kind: lemma
 title: "Proper subgroup of a finite p group is properly normalized local"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-nontrivial-center-of-a-finite-p-group, def-normalizer-of-a-subgroup, def-quotient-group, def-center-of-a-group, lem-center-is-normal, lem-subgroups-of-finite-p-groups-are-p-groups, def-finite-p-group, def-subgroup, thm-lagrange, cor-order-of-a-quotient-group, thm-strong-induction, lem-centralizers-and-normalizers-are-subgroups, thm-image-subgroup-and-kernel-normal, cor-order-of-element-divides-group-order, lem-product-with-normal-subgroup, def-normal-subgroup, def-group-homomorphism, thm-conjugation-is-an-automorphism]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

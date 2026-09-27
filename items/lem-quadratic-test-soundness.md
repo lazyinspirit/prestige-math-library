@@ -2,7 +2,7 @@
 id: lem-quadratic-test-soundness
 kind: lemma
 title: "Quadratic tensor test rejects an inconsistent tensor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-quadratic-consistency-test, thm-linearity-test-rejects-proportionally-to-distance, thm-linear-self-correction, def-self-correction-of-a-noisy-linear-function, lem-boolean-cube-fourier-inversion-and-parseval, def-linearity-test]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

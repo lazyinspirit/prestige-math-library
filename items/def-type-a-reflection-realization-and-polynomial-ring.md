@@ -2,7 +2,7 @@
 id: def-type-a-reflection-realization-and-polynomial-ring
 kind: definition
 title: "The standard type-A reflection realization and its polynomial ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [lem-reduced-adjacent-transposition-words-have-well-defined-positive-lifts, def-multivariate-polynomial-ring-by-iteration]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §§2–5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

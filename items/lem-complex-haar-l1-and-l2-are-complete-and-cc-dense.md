@@ -2,7 +2,7 @@
 id: lem-complex-haar-l1-and-l2-are-complete-and-cc-dense
 kind: lemma
 title: "Completeness of the complex Haar L1 and L2 spaces and density of Cc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-complex-haar-lp-spaces-and-compactly-supported-functions, thm-riesz-fischer-completeness-of-l-p, thm-c-c-is-dense-in-l-p-for-radon-measures, def-dependent-choice, def-countable-choice, def-axiom-of-choice, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-compact-support-c-c-and-c-zero-on-an-lch-space, thm-recursion]
@@ -19,6 +19,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B, printed pp. 115–118"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

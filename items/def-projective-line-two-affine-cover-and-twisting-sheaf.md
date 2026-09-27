@@ -2,13 +2,14 @@
 id: "def-projective-line-two-affine-cover-and-twisting-sheaf"
 kind: "definition"
 title: "Two-affine projective line and its twists"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-gluing-affine-schemes, thm-gluing-sheaves, def-gluing-datum-sheaves, def-affine-scheme, def-affine-scheme-spectrum, def-affine-open-subscheme, thm-structure-sheaf-affine-scheme, thm-sections-basic-open-affine-scheme, cor-principal-localisation-spectrum-is-distinguished-open, thm-universal-property-of-localisation, def-polynomial-ring-over-a-commutative-ring, def-morphism-affine-schemes-from-ring-map, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

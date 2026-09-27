@@ -2,7 +2,7 @@
 id: def-left-and-right-divisibility-for-positive-braids
 kind: definition
 title: "Left and right divisibility for positive braids"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-positive-braid-monoid, lem-positive-artin-relations-preserve-homogeneous-length,
@@ -20,6 +20,7 @@ sources:
     - title: "J. Gonzalez-Meneses, Basic results on braid groups, Section 4, printed pp. 26-27 (prefix order and suffix order)"
       url: "https://arxiv.org/abs/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

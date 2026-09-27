@@ -2,7 +2,7 @@
 id: "lem-ag-base-change-of-standard-smooth-presentations"
 kind: "lemma"
 title: "Base change of standard smooth presentations"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-ag-standard-smooth-algebra", "lem-ag-polynomial-quotient-differentials", "def-polynomial-ring-on-a-family-of-indeterminates", "thm-universal-property-of-a-polynomial-ring-on-a-family", "thm-universal-property-of-localisation", "thm-quotient-ring-universal-property", "thm-coproduct-property-of-tensor-products-of-commutative-algebras", "thm-tensor-product-of-algebras-over-a-commutative-ring", "def-multiplicative-subset-and-localisation"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

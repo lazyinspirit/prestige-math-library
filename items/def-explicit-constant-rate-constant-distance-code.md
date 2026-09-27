@@ -2,7 +2,7 @@
 id: def-explicit-constant-rate-constant-distance-code
 kind: definition
 title: "Explicit binary codes of constant rate and distance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gap-preserving-csp-reduction]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   precheck: n/a
 sources:
   scraped: []

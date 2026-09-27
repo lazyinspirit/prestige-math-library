@@ -2,7 +2,7 @@
 id: prop-the-center-of-b-two-is-all-of-b-two
 kind: proposition
 title: "The center of b two is all of b two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-braid-group-by-the-artin-presentation,
@@ -23,6 +23,7 @@ sources:
     - title: "J. Gonzalez-Meneses, Basic results on braid groups, Section 4.3, printed p. 31"
       url: "https://arxiv.org/abs/1010.0321"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

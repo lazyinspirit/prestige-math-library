@@ -2,7 +2,7 @@
 id: rem-hausdorff-analogy-limited
 kind: remark
 title: Separated is not Zariski Hausdorff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-separated-morphism-schemes, cor-affine-schemes-separated]
@@ -19,6 +19,7 @@ sources:
     - title: "The Stacks Project, Schemes, Section 26.21 introduction, printed pp.39-40"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

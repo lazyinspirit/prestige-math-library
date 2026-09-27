@@ -2,7 +2,7 @@
 id: lem-zero-torsion-is-realized-by-elementary-expansions-collapses-and-cellular-basis-moves
 kind: lemma
 title: "Zero relative torsion gives a finite relative elementary deformation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [lem-cell-trading-reduces-a-finite-relative-equivalence-to-two-high-cell-degrees, lem-two-relative-cell-layers-have-free-group-ring-homotopy-bases, lem-cell-slides-and-stabilizations-realize-elementary-group-ring-matrices, lem-an-identity-relative-boundary-matrix-allows-cell-cancellation, def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence, thm-composition-and-sum-formulas-for-whitehead-torsion, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, thm-simple-homotopy-equivalences-have-zero-whitehead-torsion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

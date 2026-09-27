@@ -2,7 +2,7 @@
 id: prop-compact-discrete-and-abelian-groups-are-unimodular
 kind: proposition
 title: "Compact, discrete and abelian groups are unimodular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-unimodular-locally-compact-group, def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism, cor-normalized-haar-probability-on-a-compact-group, def-left-haar-integral-and-left-haar-measure, thm-uniqueness-of-left-haar-measure-up-to-scale, lem-counting-measure-on-a-discrete-group, def-axiom-of-choice]
@@ -22,6 +22,7 @@ sources:
       url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
       locator: "§§30A–30B, printed pp. 115–118"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

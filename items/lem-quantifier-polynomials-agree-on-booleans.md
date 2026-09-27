@@ -2,7 +2,7 @@
 id: lem-quantifier-polynomials-agree-on-booleans
 kind: lemma
 title: "Quantifier polynomials agree with QBF semantics on Boolean assignments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-qbf-arithmetization-operators, def-quantified-boolean-formula-and-tqbf, def-arithmetization-of-a-boolean-formula, lem-arithmetization-agrees-on-boolean-inputs]
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

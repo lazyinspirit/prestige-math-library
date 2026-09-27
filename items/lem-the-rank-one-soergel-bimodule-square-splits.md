@@ -2,7 +2,7 @@
 id: lem-the-rank-one-soergel-bimodule-square-splits
 kind: lemma
 title: "The rank-one Soergel bimodule square splits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-soergel-bimodule-for-a-simple-reflection, lem-type-a-soergel-generators-are-finite-free-on-both-sides, def-type-a-reflection-realization-and-polynomial-ring, def-type-a-standard-graph-bimodules-support-filtrations-and-character, def-bott-samelson-bimodule-of-a-word, lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §4.3, PDF pp.22–26"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

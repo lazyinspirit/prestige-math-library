@@ -2,7 +2,7 @@
 id: "cor-jacobian-presentation-differentials"
 kind: "corollary"
 title: "Jacobian presentation of Ω"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-conormal-exact-sequence-algebra", "lem-differentials-polynomial-algebra-free", "def-derivation-algebra"]
 proof_strategy: "direct"
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

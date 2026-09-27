@@ -2,7 +2,7 @@
 id: lem-easton-class-tail-head-decision
 kind: lemma
 title: Uniform head-antichain decisions below a class tail
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-gbc-global-choice-ground-for-easton, lem-easton-class-forcing-truth-and-set-names, lem-easton-head-cc-and-tail-closure, def-easton-support-product, def-forcing-names-and-name-rank, def-forcing-relation-for-formulas, def-forcing-relation-for-atomic-formulas, lem-forcing-monotonicity-density-and-decision, def-dense-open-sets-and-model-generic-filters, def-axiom-of-choice, thm-generic-extensions-satisfy-zf-and-zfc]
@@ -18,7 +18,8 @@ sources:
     - title: "Thomas Jech, Set Theory, Chapter 15, the classes D_alpha of the Power Set and Replacement proofs (Power Set section and (15.17)), printed pp.236-237"
       url: "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/15-applications_of_forcing.pdf"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement

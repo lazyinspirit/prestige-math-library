@@ -2,7 +2,7 @@
 id: ex-partitions-and-dominance-through-size-five
 kind: example
 title: Small partitions and the first dominance incomparability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-partition-young-diagram-and-conjugate-partition, def-dominance-order-on-partitions, lem-conjugation-reverses-dominance]
@@ -20,6 +20,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups - Definition 2.12 and Remark 2.13, printed p. 9 (PDF p. 10)"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-immersion-with-closed-image
 kind: lemma
 title: An immersion with closed image is a closed immersion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-locally-closed-immersion, def-closed-immersion-schemes]
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Schemes, Lemma 26.10.4, printed p.18"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

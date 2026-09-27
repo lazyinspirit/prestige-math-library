@@ -2,7 +2,7 @@
 id: def-type-a-soergel-bimodule-for-a-simple-reflection
 kind: definition
 title: "The Soergel bimodule $B_i$ of a simple reflection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-type-a-reflection-realization-and-polynomial-ring, def-tensor-product-of-modules-by-generators-and-relations, def-graded-ring-module-bimodule-and-internal-shift]
@@ -20,6 +20,7 @@ sources:
     - title: "Libedinsky, Gentle Introduction to Soergel Bimodules I, §§2–5"
       url: "https://arxiv.org/pdf/1702.00039"
 verification:
+  audited: 2026-09-27
   precheck: n/a
 ---
 

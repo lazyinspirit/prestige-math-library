@@ -2,7 +2,7 @@
 id: "cex-frobenius-zero-tangent-map-not-formally-etale"
 kind: "counterexample"
 title: "Zero Frobenius tangent map does not imply formal etaleness"
-status: draft
+status: published
 origin: "pipeline"
 pipeline_run: frontier-35-ten-categories
 deps: ["lem-differential-of-morphism-via-cotangent-map", "thm-formally-unramified-differentials-zero", "def-formally-etale-morphism", "cor-jacobian-presentation-differentials", "lem-differentials-polynomial-algebra-free"]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-frobenius-complement-and-frobenius-group
 kind: definition
 title: "Frobenius complement and frobenius group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-subgroup, def-normalizer-of-a-subgroup]
@@ -18,6 +18,7 @@ sources:
       url: "https://www.maths.gla.ac.uk/~abartel/docs/reptheory.pdf"
       locator: "§6.1, printed pp. 28–30"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"

@@ -2,13 +2,14 @@
 id: "def-derivation-algebra"
 kind: "definition"
 title: "Derivation of an algebra"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["def-commutative-ring", "def-left-and-right-modules"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

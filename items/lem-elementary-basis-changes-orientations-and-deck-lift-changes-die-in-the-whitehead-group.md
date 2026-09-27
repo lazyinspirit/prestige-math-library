@@ -2,7 +2,7 @@
 id: lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group
 kind: lemma
 title: "Cellular basis ambiguities vanish in the Whitehead group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-based-cellular-chain-complex-of-a-universal-cover, def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group, lem-basis-change-and-direct-sum-formulas-for-chain-torsion, def-stable-general-linear-group-and-elementary-subgroup-of-a-ring, thm-determinant-multiplicative, thm-determinant-under-elementary-row-operations, cor-invertible-matrix-has-unit-determinant, thm-leibniz-determinant-is-alternating-multilinear-and-normalized, thm-determinant-is-the-unique-normalized-alternating-multilinear-function, cor-determinant-is-alternating-multilinear-in-the-rows, def-based-loops-and-fundamental-group, thm-fundamental-group-laws, def-path-connected, def-homotopy-relative-and-path-homotopy, lem-continuity-is-local-and-pastes, def-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g, lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup]
 proof_strategy: direct
 verification:
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []

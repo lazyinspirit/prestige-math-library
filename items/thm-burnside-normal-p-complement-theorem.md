@@ -2,7 +2,7 @@
 id: thm-burnside-normal-p-complement-theorem
 kind: theorem
 title: "Burnside normal p complement theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-transfer-homomorphism-for-a-finite-index-subgroup, lem-transfer-is-a-homomorphism, lem-transfer-cycle-decomposition-formula, lem-transfer-is-independent-of-the-transversal, lem-abelian-sylow-fusion-in-its-normalizer, prop-equivalent-forms-of-having-a-normal-p-complement, def-normal-p-complement-and-p-nilpotent-group, def-sylow-p-subgroup, thm-sylow-first-theorem, thm-lagrange, def-center-of-a-group, def-normalizer-of-a-subgroup, def-internal-semidirect-product, lem-order-characterisation, cor-order-of-element-divides-group-order, cor-extended-euclidean-bezout-coefficients, lem-group-power-laws, def-order-in-a-group, def-group-power, lem-group-homomorphism-basic-properties, def-generated-subgroup, def-group-action, thm-orbits-partition-the-set, thm-conjugation-is-an-automorphism]
@@ -22,6 +22,7 @@ sources:
       url: "https://homes.psd.uchicago.edu/~sethi/Teaching/P342-W2017/Kurzweil-Stellmacher_Theory%20of%20finite%20groups.pdf"
       locator: "§§7.1–7.2, printed pp. 163–171"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

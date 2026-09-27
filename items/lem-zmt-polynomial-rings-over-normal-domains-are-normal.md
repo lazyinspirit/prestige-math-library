@@ -2,7 +2,7 @@
 id: lem-zmt-polynomial-rings-over-normal-domains-are-normal
 kind: lemma
 title: Polynomial rings over normal domains are normal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-integral-closure-and-integrally-closed-domain, def-integral-element-and-algebraic-integer, def-field-of-fractions, thm-universal-property-of-localisation, def-polynomial-ring-over-a-commutative-ring, cor-polynomial-ring-over-a-domain-is-a-domain, def-polynomial-degree-leading-coefficient-and-monic, prop-polynomial-degree-laws-over-a-commutative-ring, def-zero-divisor-and-integral-domain, def-subring, thm-bezout-identity-for-polynomials, cor-polynomial-ring-over-a-field-is-euclidean, thm-integrality-and-finite-module-equivalences, def-noetherian-ring, def-noetherian-module, thm-generated-ideal-description-in-a-commutative-ring, lem-subgroups-of-z-are-cyclic, prop-canonical-quotient-ring-map, thm-correspondence-theorem-ideals]
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-27
   judge:
     model: "gpt-6-sol"
     verdict: pass

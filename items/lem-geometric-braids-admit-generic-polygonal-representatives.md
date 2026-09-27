@@ -2,7 +2,7 @@
 id: lem-geometric-braids-admit-generic-polygonal-representatives
 kind: lemma
 title: "Geometric braids admit generic polygonal representatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-geometric-braid-with-setwise-endpoints,
@@ -32,6 +32,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.2, author manuscript pp. 5-6"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

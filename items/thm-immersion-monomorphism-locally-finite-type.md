@@ -2,7 +2,7 @@
 id: thm-immersion-monomorphism-locally-finite-type
 kind: theorem
 title: Immersions are monomorphisms locally of finite type
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-locally-closed-immersion, def-open-immersion-schemes, def-closed-immersion-schemes, def-locally-finite-type-and-finite-type-morphism, lem-immersions-and-localizations-monomorphisms, lem-monomorphism-diagonal-isomorphism, lem-finite-type-local-on-source-and-target, def-scheme, thm-affine-closed-immersions-quotient-rings]
@@ -18,6 +18,7 @@ sources:
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.15 and Schemes, Section 26.23.8, printed pp.61, 48"
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

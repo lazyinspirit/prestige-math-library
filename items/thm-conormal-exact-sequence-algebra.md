@@ -2,7 +2,7 @@
 id: "thm-conormal-exact-sequence-algebra"
 kind: "theorem"
 title: "Conormal exact sequence for an algebra quotient"
-status: draft
+status: published
 origin: "pipeline"
 deps: ["thm-kahler-differentials-existence-presentation", "cor-derivations-represented-by-differentials", "thm-right-exactness-of-tensor-products", "def-derivation-algebra"]
 proof_strategy: "direct"
@@ -15,6 +15,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/algebra.pdf"
     - title: "Vakil 22.2.12, pp.579–580"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-27
 ---
 
 ## Statement

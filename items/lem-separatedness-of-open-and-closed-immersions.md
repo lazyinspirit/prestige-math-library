@@ -2,7 +2,7 @@
 id: lem-separatedness-of-open-and-closed-immersions
 kind: lemma
 title: Open and closed immersions are separated
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-locally-closed-immersion, def-open-immersion-schemes, def-closed-immersion-schemes, def-separated-morphism-schemes, lem-immersions-and-localizations-monomorphisms, lem-monomorphism-diagonal-isomorphism, thm-immersion-monomorphism-locally-finite-type, lem-separated-stable-under-composition]
@@ -20,6 +20,7 @@ sources:
     - title: "Vakil, The Rising Sea, Section 11.3.C, printed p.308"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
 ---
 

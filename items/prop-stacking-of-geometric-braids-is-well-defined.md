@@ -2,7 +2,7 @@
 id: prop-stacking-of-geometric-braids-is-well-defined
 kind: proposition
 title: "Stacking of geometric braids is a well-defined associative operation on isotopy classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-braid-isotopy-relative-top-and-bottom, def-geometric-braid-with-setwise-endpoints,
@@ -24,6 +24,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.1, author manuscript pp. 3-4"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-09-27
   precheck: pass
   judge:
     model: "gpt-6-sol"

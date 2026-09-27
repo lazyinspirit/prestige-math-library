@@ -2,7 +2,7 @@
 id: lem-basic-bounding-and-dominating-relations
 kind: lemma
 title: Basic bounding and dominating relations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [def-eventual-domination-bounding-and-dominating-numbers, def-cofinality, thm-cofinality-basics, lem-cofinality-is-well-defined, def-axiom-of-choice, def-cardinal, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic, cor-cardinal-absorption, thm-cardinal-power-set-and-cantor, thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero, def-aleph-and-beth-hierarchies, thm-nat-linear-order, def-nat-order, def-natural-numbers, thm-recursion]
@@ -20,7 +20,8 @@ sources:
     - title: "Tomek Bartoszynski, Invariants of Measure and Category, Section 2, printed pp.2-3"
       url: "https://arxiv.org/pdf/math/9910015"
 verification:
-  precheck: pending
+  audited: 2026-09-27
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass

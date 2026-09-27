@@ -2,7 +2,7 @@
 id: def-relative-projective-space-standard-charts
 kind: definition
 title: Relative projective space from standard charts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-35-ten-categories
 deps: [thm-gluing-affine-schemes, thm-fibre-products-of-schemes-exist, def-scheme-over-base, def-affine-scheme, def-open-immersion-schemes, lem-spectrum-localization-open-immersion]
@@ -19,6 +19,7 @@ sources:
     - title: "The Stacks Project, Schemes, Section 26.14.4, printed p.25"
       url: "https://stacks.math.columbia.edu/download/schemes.pdf"
 verification:
+  audited: 2026-09-27
   precheck: n/a
   judge:
     model: "gpt-6-sol"
