@@ -21,6 +21,7 @@ Executable tools and configuration determine current behavior.
 | `tools/autopilot/` | TypeScript workflow engine, stage definitions, and tests |
 | `.autopilot/` | Ignored runtime state; each selected state directory belongs to one run |
 | `explainer/` | Standalone HTML explainers and video helper |
+| `galaxy/` | JavaScript galaxy of published items; [preview and controls](galaxy/README.md) |
 | `Handover-prompts/` | Historical instructions, not live state |
 | `.claude/` | Agent settings; local settings are ignored |
 
@@ -128,6 +129,7 @@ node tools/depcheck.mjs --quiet
 node tools/tsx-run.mjs tools/precheck.mts items/ID.md
 node tools/tsx-run.mjs tools/articlecheck.mts
 node explainer/serve.mjs
+node galaxy/serve.mjs  # http://localhost:8080
 ```
 
 Omitting precheck's item paths checks all proof-bearing items. Batch authors
