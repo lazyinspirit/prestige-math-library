@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, stat, readdir } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import { TRACKS } from './music.mjs';
 import { loadGraph } from './data.mjs';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { katexCandidates } from '../tools/paths.mjs';
 
 const port = Number(process.env.PORT ?? 8080);
 // The live sitemap gates the census; item relationships come from the canonical checkout.
@@ -19,11 +22,23 @@ const graph = await loadGraph(undefined, publishedIds);
 graph.source = publishedIds ? 'Live sitemap census with canonical repository dependencies' : 'Local published content';
 const data = JSON.stringify(graph);
 const assets = new Map([
-  ['/', 'index.html', 'text/html'], ['/music.mjs', 'music.mjs', 'text/javascript'],
+  ['/', 'index.html', 'text/html'], ['/math-title.mjs', 'math-title.mjs', 'text/javascript'], ['/music.mjs', 'music.mjs', 'text/javascript'],
   ['/audio/credits.html', 'audio/credits.html', 'text/html'], ['/galaxy.js', 'galaxy.js', 'text/javascript'],
   ['/renderer.mjs', 'renderer.mjs', 'text/javascript'], ['/galaxy-model.mjs', 'galaxy-model.mjs', 'text/javascript'],
   ['/style.css', 'style.css', 'text/css'], ['/graph-utils.mjs', 'graph-utils.mjs', 'text/javascript'],
 ].map(([route, file, type]) => [route, { file: new URL(file, import.meta.url), type } ]));
+// Reuse the site's installed KaTeX and enumerate its assets; no CDN or arbitrary paths.
+const require = createRequire(import.meta.url);
+let katexDist;
+for (const candidate of katexCandidates()) {
+  try { katexDist = dirname(require.resolve(candidate)); break; } catch { /* Try the next installed package. */ }
+}
+if (!katexDist) throw new Error('Install katex or set PRESTIGE_APP_DIR to the app checkout.');
+for (const [file, type] of [
+  ['katex.mjs', 'text/javascript'], ['contrib/auto-render.mjs', 'text/javascript'], ['katex.min.css', 'text/css'],
+  ...(await readdir(join(katexDist, 'fonts'))).filter(name => /\.(woff2?|ttf)$/.test(name))
+    .map(name => [`fonts/${name}`, name.endsWith('.woff2') ? 'font/woff2' : name.endsWith('.woff') ? 'font/woff' : 'font/ttf']),
+]) assets.set(`/vendor/katex/${file}`, { file: join(katexDist, file), type });
 for (const track of TRACKS) assets.set(track.file, { file: new URL(`.${track.file}`, import.meta.url), type: 'audio/mpeg' });
 assets.set('/graph.json', { body: data, type: 'application/json' });
 const server = createServer(async (req, res) => {

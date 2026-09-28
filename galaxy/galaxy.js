@@ -2,6 +2,7 @@ import { reachable } from './graph-utils.mjs';
 import { COLORS, clamp, layoutItems, createEnvironment, defaultCamera, project } from './galaxy-model.mjs';
 import { GalaxyRenderer } from './renderer.mjs';
 import { initMusic } from './music.mjs';
+import { renderTitle } from './math-title.mjs';
 
 const $ = selector => document.querySelector(selector);
 const canvas = $('#universe');
@@ -75,7 +76,7 @@ function updateTooltip() {
   const node = nodes[hovered], tip = $('#tooltip');
   $('#tip-kind').textContent = node.kind.replaceAll('-', ' ');
   $('#tip-kind').style.color = COLORS[node.color];
-  $('#tip-title').textContent = node.title;
+  renderTitle($('#tip-title'), node.title);
   const visibleCount = [...closure].filter(i => visible[i]).length;
   $('#tip-detail').textContent = `${closure.size.toLocaleString()} ${direction === 'dependencies' ? 'prerequisites' : 'downstream consumers'} · ${visibleCount.toLocaleString()} visible`;
   tip.href = `https://alphabetamath.cc/item/${encodeURIComponent(node.id)}`;
@@ -113,7 +114,7 @@ function updateSearch() {
   if (!query) return;
   const matches = nodes.filter((n, i) => visible[i] && (n.title.toLowerCase().includes(query) || n.id.includes(query))).slice(0, 30);
   for (const node of matches) {
-    const a = document.createElement('a'); a.textContent = node.title;
+    const a = document.createElement('a'); renderTitle(a, node.title);
     a.href = `https://alphabetamath.cc/item/${encodeURIComponent(node.id)}`; a.target = '_blank'; a.rel = 'noopener';
     results.append(a);
   }

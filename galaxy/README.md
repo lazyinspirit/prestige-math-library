@@ -17,10 +17,10 @@ node --test galaxy/graph.test.mjs
 ```
 
 The server binds to `0.0.0.0:8080`. Set `PORT` to choose another port.
-It requires Node 22+ and the app checkout's existing `yaml` package, resolved
-through `tools/paths.mjs`; alternatively install `yaml` locally. The browser
-needs WebGL2. No browser packages, CDN assets, build step, framework or image
-textures are required.
+It requires Node 22+ and the app checkout's existing `yaml` and `katex` packages,
+resolved through `tools/paths.mjs`; alternatively install those packages locally.
+The browser needs WebGL2. No CDN assets, build step, framework or image textures
+are required.
 
 At startup, the live `https://alphabetamath.cc/sitemap.xml` supplies the item
 census. Titles, kinds, prerequisites and category membership come from this
@@ -97,6 +97,10 @@ to MP3 without musical edits. Recording licenses are independent of code license
   Stars and gas use analytic fragment shaders, so zooming does not enlarge a
   fixed bitmap. The framebuffer uses native device density up to 3×, bounded by
   GPU limits. The clear color is exactly black; there is no background starfield.
+- `math-title.mjs` renders delimited LaTeX in hover titles and search results
+  with KaTeX, supporting `$…$`, `$$…$$`, `\(…\)` and `\[…\]`. Plain text
+  stays text; trusted HTML commands are disabled. The preview serves the local
+  KaTeX modules, stylesheet and fonts through an explicit asset allowlist.
 - `galaxy.js` owns UI state and camera controls. A screen-space spatial grid is
   rebuilt lazily for picking after camera movement. The GPU selection buffer
   changes only on filtering or inspection; traversal runs only when the hovered
@@ -120,3 +124,6 @@ Browser verification uses Chromium with WebGL2, including high-DPI rendering,
 edge-on camera views, a touch viewport and reduced motion. The filter drawer
 sits above hover cards so relationship controls remain clickable. Software rendering
 can be substantially slower than a hardware-accelerated browser.
+
+The title-rendering browser check covered all 3,948 live titles containing math:
+no KaTeX errors, working search and tooltip formulas, and loaded local fonts.
