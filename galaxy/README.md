@@ -33,6 +33,9 @@ assets are reread on each request.
 
 ## Interaction
 
+- The initial and reset view match the supplied close, inclined reference, with
+  a core above the viewport center and a galaxy spanning its width. Rotation is
+  reversed and remains a rigid rotation of the whole galaxy.
 - Drag to orbit the camera. Shift-drag or right-drag pans the view.
 - Scroll or pinch to zoom; the +/- controls also zoom. Reset restores the camera.
 - Hover to inspect a star and illuminate its transitive relationships. Rotation
@@ -51,6 +54,26 @@ are muted violet. Decorative gas, dust and faint stellar light give the galaxy
 its distant appearance; only library items are interactive. Decorative light
 recedes during inspection and filtering. The layout illustrates subject groups,
 not mathematical distance or difficulty.
+
+## Piano soundtrack
+
+The local playlist repeats: Elgar’s *Salut d’Amour* (Luis Kolodin), Bach’s
+*Prelude in C Major, BWV 846* (Kimiko Ishizaka), the second movement of
+Beethoven’s *Moonlight Sonata* (a Musopen recording whose pianist is unspecified),
+and Chopin’s *Nocturne, Op. 9 No. 2* (Frank Levy). The music controls at the lower
+right offer play/pause, track selection, next and volume; the default volume is
+24%. Browser autoplay restrictions are respected: if playback is blocked, use
+the music button or touch the galaxy to start. Pausing prevents further automatic
+starts. The playlist wraps from its last recording to its first.
+
+`music.mjs` owns one HTML audio element, uses the Media Session API where
+available, and reports loading failures in the playlist panel. Four bundled MP3s
+work without third-party streaming. The server supports byte ranges and HEAD for
+seeking and efficient metadata loading. `audio/credits.html` lists performers,
+recording sources and licenses and is linked from the player. Elgar is CC BY-SA
+4.0; Bach is CC0; the Beethoven and Chopin source recordings are marked public
+domain. Elgar and Chopin are unchanged files; Bach and Beethoven were transcoded
+to MP3 without musical edits. Recording licenses are independent of code licenses.
 
 ## Architecture
 
@@ -94,5 +117,6 @@ central Set Theory placement, perspective, depth and zoom.
 An independent GPT-6-Sol (high) review checks the 3D view, orbit, zoom, projected
 hover targeting, both highlight modes, filters, links and absence of edges.
 Browser verification uses Chromium with WebGL2, including high-DPI rendering,
-edge-on camera views, a touch viewport and reduced motion. Software rendering
+edge-on camera views, a touch viewport and reduced motion. The filter drawer
+sits above hover cards so relationship controls remain clickable. Software rendering
 can be substantially slower than a hardware-accelerated browser.

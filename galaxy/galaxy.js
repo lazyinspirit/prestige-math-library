@@ -1,10 +1,11 @@
 import { reachable } from './graph-utils.mjs';
-import { COLORS, clamp, layoutItems, createEnvironment, DEFAULT_CAMERA, project } from './galaxy-model.mjs';
+import { COLORS, clamp, layoutItems, createEnvironment, defaultCamera, project } from './galaxy-model.mjs';
 import { GalaxyRenderer } from './renderer.mjs';
+import { initMusic } from './music.mjs';
 
 const $ = selector => document.querySelector(selector);
 const canvas = $('#universe');
-const camera = { ...DEFAULT_CAMERA };
+const camera = defaultCamera(innerWidth, innerHeight);
 const pointers = new Map();
 const pickGrid = new Map();
 let renderer, graph, nodes, prerequisites, consumers, visible, selected, states;
@@ -27,7 +28,7 @@ function render(time) {
   if (!loaded || document.hidden) return;
   const elapsed = Math.min((time - lastTime) / 1000 || 0, .05); lastTime = time;
   const rotating = !paused && hovered < 0 && !pointers.size;
-  if (rotating) { rotation += elapsed * .018; dirty = true; projectionDirty = true; }
+  if (rotating) { rotation -= elapsed * .018; dirty = true; projectionDirty = true; }
   if (dirty) {
     renderer.render(camera, rotation, hovered >= 0, visibleFraction);
     dirty = false;
@@ -163,7 +164,7 @@ function bindControls() {
   }; });
   $('#search').oninput = updateSearch;
   $('#motion').onclick = () => { paused = !paused; syncMotion(); };
-  $('#reset').onclick = () => { Object.assign(camera, DEFAULT_CAMERA); rotation = 0; pinned = false; inspect(-1); invalidate(); };
+  $('#reset').onclick = () => { Object.assign(camera, defaultCamera(width, height)); rotation = 0; pinned = false; inspect(-1); invalidate(); };
   $('#zoom-in').onclick = () => setZoom(camera.zoom * 1.4);
   $('#zoom-out').onclick = () => setZoom(camera.zoom / 1.4);
   canvas.addEventListener('contextmenu', event => event.preventDefault());
@@ -239,7 +240,7 @@ async function init() {
     selected = new Set(graph.categories.map(c => c.id));
     states = new Float32Array(nodes.length);
     renderer.setScene(layoutItems(nodes, graph.categories, consumers), createEnvironment());
-    bindControls(); resize(); loaded = true; refilter(); syncMotion();
+    bindControls(); initMusic(); resize(); loaded = true; refilter(); syncMotion();
     canvas.addEventListener('webglcontextlost', event => {
       event.preventDefault(); loaded = false;
       $('#status').hidden = false; $('#status').textContent = 'Graphics connection lost. Refresh to restore the galaxy.';

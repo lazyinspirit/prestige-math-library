@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
+import { TRACKS } from './music.mjs';
 import { loadGraph } from './data.mjs';
 
 const port = Number(process.env.PORT ?? 8080);
@@ -17,18 +19,43 @@ const graph = await loadGraph(undefined, publishedIds);
 graph.source = publishedIds ? 'Live sitemap census with canonical repository dependencies' : 'Local published content';
 const data = JSON.stringify(graph);
 const assets = new Map([
-  ['/', 'index.html', 'text/html'], ['/galaxy.js', 'galaxy.js', 'text/javascript'],
+  ['/', 'index.html', 'text/html'], ['/music.mjs', 'music.mjs', 'text/javascript'],
+  ['/audio/credits.html', 'audio/credits.html', 'text/html'], ['/galaxy.js', 'galaxy.js', 'text/javascript'],
   ['/renderer.mjs', 'renderer.mjs', 'text/javascript'], ['/galaxy-model.mjs', 'galaxy-model.mjs', 'text/javascript'],
   ['/style.css', 'style.css', 'text/css'], ['/graph-utils.mjs', 'graph-utils.mjs', 'text/javascript'],
 ].map(([route, file, type]) => [route, { file: new URL(file, import.meta.url), type } ]));
+for (const track of TRACKS) assets.set(track.file, { file: new URL(`.${track.file}`, import.meta.url), type: 'audio/mpeg' });
 assets.set('/graph.json', { body: data, type: 'application/json' });
 const server = createServer(async (req, res) => {
+  if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { allow: 'GET, HEAD' }); res.end(); return; }
   const asset = assets.get(new URL(req.url, 'http://localhost').pathname);
   if (!asset) { res.writeHead(404); res.end('Not found'); return; }
   try {
+    if (asset.type === 'audio/mpeg') {
+      const { size } = await stat(asset.file);
+      let start = 0, end = size - 1;
+      if (req.headers.range) {
+        const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
+        if (!range || (!range[1] && !range[2])) { res.writeHead(416, { 'content-range': `bytes */${size}` }); res.end(); return; }
+        start = range[1] ? Number(range[1]) : Math.max(0, size - Number(range[2]));
+        end = range[1] && range[2] ? Math.min(size - 1, Number(range[2])) : size - 1;
+        if (start > end || start >= size || !Number.isSafeInteger(start)) {
+          res.writeHead(416, { 'content-range': `bytes */${size}` }); res.end(); return;
+        }
+      }
+      res.writeHead(req.headers.range ? 206 : 200, {
+        'content-type': 'audio/mpeg', 'accept-ranges': 'bytes', 'content-length': end - start + 1,
+        'cache-control': 'public, max-age=3600',
+        ...(req.headers.range ? { 'content-range': `bytes ${start}-${end}/${size}` } : {}),
+      });
+      if (req.method === 'HEAD') { res.end(); return; }
+      const stream = createReadStream(asset.file, { start, end });
+      stream.on('error', () => res.destroy()); res.on('close', () => stream.destroy()); stream.pipe(res);
+      return;
+    }
     const body = asset.file ? await readFile(asset.file) : asset.body;
     res.writeHead(200, { 'content-type': `${asset.type}; charset=utf-8`, 'cache-control': 'no-cache' });
-    res.end(body);
+    res.end(req.method === 'HEAD' ? undefined : body);
   } catch { res.writeHead(500); res.end('Could not load preview asset'); }
 });
 server.listen(port, '0.0.0.0', () => {

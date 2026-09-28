@@ -83,7 +83,10 @@ export function createEnvironment() {
   return { stars: new Float32Array(stars), gas: new Float32Array(gas), dust: new Float32Array(dust) };
 }
 
-export const DEFAULT_CAMERA = Object.freeze({ yaw: -.25, pitch: .98, zoom: .84, panX: 0, panY: 0 });
+export const DEFAULT_CAMERA = Object.freeze({ yaw: .55, pitch: 1.92, zoom: 1.08, panX: 0, panY: 0 });
+export function defaultCamera(width, height) {
+  return { ...DEFAULT_CAMERA, zoom: DEFAULT_CAMERA.zoom * width / Math.min(width, height), panY: -.16 * height };
+}
 export const CAMERA_DISTANCE = 3.8;
 /** Perspective projection mirrors the vertex shader; depth is also used to pick overlapping stars. */
 export function project(node, camera, rotation, width, height) {
