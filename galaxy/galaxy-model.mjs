@@ -12,19 +12,24 @@ export function random(seed) {
     return ((t ^ t >>> 14) >>> 0) / 4294967296;
   };
 }
+function hashString(value) {
+  let hash = 2166136261;
+  for (const character of value) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+  return hash >>> 0;
+}
 const spiral = radius => 5.8 * Math.pow(radius, .58);
 const gaussian = rng => Math.sqrt(-2 * Math.log(Math.max(1e-8, rng()))) * Math.cos(TAU * rng());
 const rgb = hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16) / 255);
 
 /** Shared coordinates for the GPU and picking. The disc has thickness; the core is a spheroid. */
 export function layoutItems(nodes, categories, consumers) {
-  const rng = random(41721);
-  const categoryIndex = new Map(categories.filter(c => c.id !== 'foundations').map((c, i) => [c.id, i]));
-  const bands = Math.ceil(categoryIndex.size / 4);
+  // Fixed subject slots and per-ID seeds keep existing coordinates stable across refreshes.
+  const bands = 7;
   const vertices = new Float32Array(nodes.length * 8);
   nodes.forEach((node, i) => {
+    const rng = random(hashString(node.id ?? String(i)));
     const core = node.categories.includes('foundations');
-    const category = categoryIndex.get(node.categories[0]) ?? 0;
+    const category = hashString(node.categories[0] ?? 'unassigned') % (bands * 4);
     const radius = core ? .19 * Math.pow(rng(), .65)
       : .13 + 1.12 * Math.pow((Math.floor(category / 4) + rng()) / bands, .86);
     const angle = core ? rng() * TAU

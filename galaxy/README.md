@@ -13,7 +13,7 @@ set of prerequisites or downstream consumers, selected in the filter panel.
 ```bash
 node galaxy/serve.mjs
 # http://localhost:8080
-node --test galaxy/graph.test.mjs
+node --test galaxy/graph.test.mjs galaxy/graph-store.test.mjs
 ```
 
 The server binds to `0.0.0.0:8080`. Set `PORT` to choose another port.
@@ -22,14 +22,40 @@ resolved through `tools/paths.mjs`; alternatively install those packages locally
 The browser needs WebGL2. No CDN assets, build step, framework or image textures
 are required.
 
-At startup, the live `https://alphabetamath.cc/sitemap.xml` supplies the item
-census. Titles, kinds, prerequisites and category membership come from this
-repository's published content. Startup fails if a live item is missing from
-that content, rather than silently rendering an incomplete library. The census
-matches the live site, but dependency metadata reflects the current checkout.
-Use `GALAXY_LOCAL=1 node galaxy/serve.mjs` explicitly for an offline preview of
-all locally published items. Restart to refresh the content snapshot; frontend
-assets are reread on each request.
+## Automatic content updates
+
+The repository's `status: published` flags are authoritative. Both startup and
+refreshes include every currently published item; drafts are excluded. A stale
+live-site sitemap cannot delay an addition or prevent a deletion/unpublication.
+This view follows this checkout, which may be ahead of the deployed website.
+The server must be running and reading the checkout receiving publication edits.
+`GALAXY_CONTENT_DIR` can point it at another content root; by default it uses this
+repository. No content files are modified by the preview.
+
+`graph-store.mjs` watches `items/` and `library/` recursively, batches changes for
+one second, and checks file metadata every 30 seconds as a fallback for missed
+watch events. Added/deleted files and directories, status changes, item titles,
+kinds, dependency lists, category membership and category names are rebuilt.
+Published body-only edits also update the revision; draft-only edits do not
+broadcast an unchanged graph. A metadata cache avoids reparsing unchanged YAML.
+
+Snapshots replace one another atomically after a stable scan. Concurrent edits
+or parse failures retain the last complete graph and trigger another attempt;
+errors are logged on the server. `/graph.json` provides revision-based ETags.
+`/graph-events` pushes revisions to open tabs, and `graph-live.mjs` fetches and
+applies the replacement graph. Conditional polling and visibility checks recover
+missed connections or server restarts. The camera, selected categories, hover
+mode, search and music are preserved. New categories are selected automatically
+when all previous categories were selected; a restricted selection is retained.
+Existing star coordinates are seeded by stable item/category IDs so unrelated
+additions and removals do not rearrange the galaxy. Inspection clears because its
+old item index may no longer exist. Item GPU buffers
+are reused and the decorative scene is retained.
+
+Changes normally appear after the one-second debounce and rebuild. Polling
+recovery can take up to 30 seconds plus rebuild time. No manual refresh, restart,
+or commit is required for subsequent content changes. Frontend source edits are
+served on the next browser reload; server-code changes still require a restart.
 
 ## Interaction
 
@@ -110,15 +136,15 @@ to MP3 without musical edits. Recording licenses are independent of code license
   changes only on filtering or inspection; traversal runs only when the hovered
   item or direction changes. No edge geometry exists.
 - `serve.mjs` serves an explicit frontend asset allowlist and the public graph
-  snapshot. It does not expose repository files or change the live website.
+  snapshot and revision event stream. It does not expose repository files or change
+  the live website.
 
-The verified snapshot has 20,755 live items, 99,466 published dependency links
-and 11 unresolved endpoints. Relationships use the current local metadata;
-items missing from the live publication census are excluded.
+Relationships use the current local metadata. Dependencies whose endpoints are
+not published are listed in `unresolved`; they do not create draft stars.
 
 ## Validation
 
-Unit tests cover publication filtering, aliases, categories, live-census
+Unit tests cover publication filtering, aliases, categories, optional census
 reconciliation, both transitive directions, cycles, finite 3D geometry,
 central Set Theory placement, perspective, depth and zoom.
 
@@ -131,3 +157,8 @@ can be substantially slower than a hardware-accelerated browser.
 
 The title-rendering browser check covered all 3,948 live titles containing math:
 no KaTeX errors, working search and tooltip formulas, and loaded local fonts.
+
+Automatic-update tests use temporary content trees and cover publication additions,
+title and body alterations, unpublication, deletion, malformed-write recovery,
+draft-only no-ops and missed-event polling. Browser integration verifies pushed
+add/edit/delete updates, retained camera and category filters, and reused GPU layers.

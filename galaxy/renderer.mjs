@@ -109,8 +109,15 @@ export class GalaxyRenderer {
     this.gas = this.upload(environment.gas);
     this.dust = this.upload(environment.dust);
     this.faintStars = this.upload(environment.stars);
-    this.items = this.upload(vertices);
     this.state = this.gl.createBuffer();
+    this.setItems(vertices);
+  }
+  setItems(vertices) {
+    if (!this.items) { this.items = this.upload(vertices); return; }
+    const gl = this.gl;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.items.buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    this.items.count = vertices.length / 8;
   }
   setStates(states) {
     const gl = this.gl;

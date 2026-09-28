@@ -3,6 +3,7 @@ import { COLORS, clamp, layoutItems, createEnvironment, defaultCamera, project }
 import { GalaxyRenderer } from './renderer.mjs';
 import { initMusic } from './music.mjs';
 import { renderTitle } from './math-title.mjs';
+import { followGraph } from './graph-live.mjs';
 
 const $ = selector => document.querySelector(selector);
 const canvas = $('#universe');
@@ -38,7 +39,7 @@ function render(time) {
   if (rotating) schedule();
 }
 function updateStates() {
-  visibleFraction = visible.filter(Boolean).length / nodes.length;
+  visibleFraction = nodes.length ? visible.filter(Boolean).length / nodes.length : 0;
   for (let i = 0; i < nodes.length; i++) {
     states[i] = !visible[i] ? 0 : !highlighting || hovered < 0 ? 1 : i === hovered ? 3 : closure.has(i) ? 2 : .008;
   }
@@ -146,18 +147,22 @@ function beginGesture(event) {
       pan: event.shiftKey || event.button === 2 };
   }
 }
+function buildCategoryControls() {
+  $('#categories').replaceChildren();
+  for (const category of graph.categories) {
+    const label = document.createElement('label'), input = document.createElement('input'), count = document.createElement('small');
+    input.type = 'checkbox'; input.checked = selected.has(category.id); input.value = category.id;
+    count.textContent = nodes.filter(n => n.categories.includes(category.id)).length.toLocaleString();
+    label.append(input, document.createTextNode(category.title), count); $('#categories').append(label);
+    input.onchange = () => { input.checked ? selected.add(category.id) : selected.delete(category.id); refilter(); };
+  }
+}
 function bindControls() {
   $('#filters-toggle').onclick = () => {
     const panel = $('#filters'); panel.hidden = !panel.hidden;
     $('#filters-toggle').setAttribute('aria-expanded', String(!panel.hidden));
   };
-  for (const category of graph.categories) {
-    const label = document.createElement('label'), input = document.createElement('input'), count = document.createElement('small');
-    input.type = 'checkbox'; input.checked = true; input.value = category.id;
-    count.textContent = nodes.filter(n => n.categories.includes(category.id)).length.toLocaleString();
-    label.append(input, document.createTextNode(category.title), count); $('#categories').append(label);
-    input.onchange = () => { input.checked ? selected.add(category.id) : selected.delete(category.id); refilter(); };
-  }
+  buildCategoryControls();
   for (const all of [true, false]) $(`#select-${all ? 'all' : 'none'}`).onclick = () => {
     selected = new Set(all ? graph.categories.map(c => c.id) : []);
     document.querySelectorAll('#categories input').forEach(input => { input.checked = all; }); refilter();
@@ -240,6 +245,18 @@ function bindControls() {
   document.addEventListener('visibilitychange', () => { lastTime = performance.now(); schedule(); });
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', event => { paused = event.matches; syncMotion(); });
 }
+function applyGraph(next) {
+  const allSelected = graph.categories.every(category => selected.has(category.id));
+  selected = new Set(next.categories.filter(category => allSelected || selected.has(category.id)).map(category => category.id));
+  hovered = -1; closure = new Set(); pinned = false;
+  $('#tooltip').hidden = true; document.body.classList.remove('inspecting');
+  graph = next; nodes = next.nodes;
+  prerequisites = nodes.map(() => []); consumers = nodes.map(() => []);
+  for (const [from, to] of graph.edges) { prerequisites[from].push(to); consumers[to].push(from); }
+  states = new Float32Array(nodes.length);
+  renderer.setItems(layoutItems(nodes, graph.categories, consumers));
+  buildCategoryControls(); refilter();
+}
 async function init() {
   try {
     renderer = new GalaxyRenderer(canvas);
@@ -252,6 +269,7 @@ async function init() {
     states = new Float32Array(nodes.length);
     renderer.setScene(layoutItems(nodes, graph.categories, consumers), createEnvironment());
     bindControls(); initMusic(); resize(); loaded = true; refilter(); syncMotion();
+    followGraph(() => graph.revision, applyGraph);
     canvas.addEventListener('webglcontextlost', event => {
       event.preventDefault(); loaded = false;
       $('#status').hidden = false; $('#status').textContent = 'Graphics connection lost. Refresh to restore the galaxy.';

@@ -21,7 +21,7 @@ Executable tools and configuration determine current behavior.
 | `tools/autopilot/` | TypeScript workflow engine, stage definitions, and tests |
 | `.autopilot/` | Ignored runtime state; each selected state directory belongs to one run |
 | `explainer/` | Standalone HTML explainers and video helper |
-| `galaxy/` | 3D WebGL galaxy of published items; [preview and controls](galaxy/README.md) |
+| `galaxy/` | Automatically updated 3D WebGL galaxy of published items; [preview and controls](galaxy/README.md) |
 | `Handover-prompts/` | Historical instructions, not live state |
 | `.claude/` | Agent settings; local settings are ignored |
 

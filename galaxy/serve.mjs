@@ -3,26 +3,15 @@ import { createServer } from 'node:http';
 import { readFile, stat, readdir } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import { TRACKS } from './music.mjs';
-import { loadGraph } from './data.mjs';
+import { GraphStore } from './graph-store.mjs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
-import { katexCandidates } from '../tools/paths.mjs';
+import { REPO, katexCandidates } from '../tools/paths.mjs';
 
 const port = Number(process.env.PORT ?? 8080);
-// The live sitemap gates the census; item relationships come from the canonical checkout.
-let publishedIds = null;
-if (process.env.GALAXY_LOCAL !== '1') {
-  const response = await fetch('https://alphabetamath.cc/sitemap.xml', { signal: AbortSignal.timeout(20000) });
-  if (!response.ok) throw new Error(`Live sitemap failed: ${response.status}`);
-  const xml = await response.text();
-  publishedIds = new Set([...xml.matchAll(/<loc>https:\/\/alphabetamath\.cc\/item\/([^<]+)<\/loc>/g)].map(match => decodeURIComponent(match[1])));
-  if (!publishedIds.size) throw new Error('Live sitemap contained no items; use GALAXY_LOCAL=1 only for an explicit local preview.');
-}
-const graph = await loadGraph(undefined, publishedIds);
-graph.source = publishedIds ? 'Live sitemap census with canonical repository dependencies' : 'Local published content';
-const data = JSON.stringify(graph);
+const store = await new GraphStore(process.env.GALAXY_CONTENT_DIR ?? REPO).start();
 const assets = new Map([
-  ['/', 'index.html', 'text/html'], ['/math-title.mjs', 'math-title.mjs', 'text/javascript'], ['/music.mjs', 'music.mjs', 'text/javascript'],
+  ['/', 'index.html', 'text/html'], ['/graph-live.mjs', 'graph-live.mjs', 'text/javascript'], ['/math-title.mjs', 'math-title.mjs', 'text/javascript'], ['/music.mjs', 'music.mjs', 'text/javascript'],
   ['/audio/credits.html', 'audio/credits.html', 'text/html'], ['/galaxy.js', 'galaxy.js', 'text/javascript'],
   ['/renderer.mjs', 'renderer.mjs', 'text/javascript'], ['/galaxy-model.mjs', 'galaxy-model.mjs', 'text/javascript'],
   ['/style.css', 'style.css', 'text/css'], ['/graph-utils.mjs', 'graph-utils.mjs', 'text/javascript'],
@@ -40,10 +29,28 @@ for (const [file, type] of [
     .map(name => [`fonts/${name}`, name.endsWith('.woff2') ? 'font/woff2' : name.endsWith('.woff') ? 'font/woff' : 'font/ttf']),
 ]) assets.set(`/vendor/katex/${file}`, { file: join(katexDist, file), type });
 for (const track of TRACKS) assets.set(track.file, { file: new URL(`.${track.file}`, import.meta.url), type: 'audio/mpeg' });
-assets.set('/graph.json', { body: data, type: 'application/json' });
+
 const server = createServer(async (req, res) => {
   if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { allow: 'GET, HEAD' }); res.end(); return; }
-  const asset = assets.get(new URL(req.url, 'http://localhost').pathname);
+  const path = new URL(req.url, 'http://localhost').pathname;
+  if (path === '/graph.json') {
+    const etag = `"${store.snapshot.revision}"`;
+    if (req.headers['if-none-match'] === etag) { res.writeHead(304, { etag }); res.end(); return; }
+    res.writeHead(200, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-cache', etag });
+    res.end(req.method === 'HEAD' ? undefined : store.body); return;
+  }
+  if (path === '/graph-events') {
+    res.writeHead(200, { 'content-type': 'text/event-stream', 'cache-control': 'no-cache', 'x-accel-buffering': 'no' });
+    if (req.method === 'HEAD') { res.end(); return; }
+    const send = graph => res.write(`event: graph\ndata: ${JSON.stringify({ revision: graph.revision })}\n\n`);
+    send(store.snapshot);
+    const unsubscribe = store.subscribe(send);
+    const heartbeat = setInterval(() => res.write(': keepalive\n\n'), 20000);
+    heartbeat.unref();
+    res.on('close', () => { clearInterval(heartbeat); unsubscribe(); });
+    return;
+  }
+  const asset = assets.get(path);
   if (!asset) { res.writeHead(404); res.end('Not found'); return; }
   try {
     if (asset.type === 'audio/mpeg') {
@@ -74,6 +81,10 @@ const server = createServer(async (req, res) => {
   } catch { res.writeHead(500); res.end('Could not load preview asset'); }
 });
 server.listen(port, '0.0.0.0', () => {
+  const graph = store.snapshot;
   console.log(`Galaxy → http://localhost:${port} — ${graph.nodes.length} published items, ${graph.edges.length} dependencies`);
   if (graph.unresolved.length) console.warn(`${graph.unresolved.length} dependencies have no published endpoint; see graph.json unresolved.`);
 });
+
+server.on('close', () => store.close());
+store.subscribe(graph => console.log(`Galaxy updated — ${graph.nodes.length} items, revision ${graph.revision.slice(0, 12)}`));

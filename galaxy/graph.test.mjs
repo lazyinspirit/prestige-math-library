@@ -69,3 +69,12 @@ test('perspective orbit exposes depth at edge-on and zoom preserves the center',
   const zoomed = project(raised, { ...camera, zoom: 2 }, 0, 1200, 800);
   assert.ok(Math.abs((zoomed[0] - 600) - 2 * (front[0] - 600)) < 1e-8);
 });
+
+test('live additions and unrelated category changes preserve existing star coordinates', async () => {
+  const { layoutItems } = await import('./galaxy-model.mjs');
+  const original = [{ id: 'def-existing', kind: 'definition', categories: ['algebra'] }];
+  layoutItems(original, [{ id: 'algebra' }], [[]]);
+  const expanded = [{ id: 'def-added', kind: 'definition', categories: ['new-category'] }, { ...original[0] }];
+  layoutItems(expanded, [{ id: 'new-category' }, { id: 'algebra' }], [[], []]);
+  for (const axis of ['x', 'y', 'z']) assert.equal(expanded[1][axis], original[0][axis]);
+});

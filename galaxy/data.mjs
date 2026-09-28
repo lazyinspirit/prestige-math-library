@@ -1,6 +1,7 @@
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
+import { createHash } from 'node:crypto';
 import { REPO, yamlCandidates } from '../tools/paths.mjs';
 
 const require = createRequire(import.meta.url);
@@ -10,21 +11,36 @@ for (const candidate of yamlCandidates()) {
 }
 if (!parse) throw new Error('Install yaml or set PRESTIGE_APP_DIR to the app checkout.');
 const list = value => Array.isArray(value) ? value.filter(x => typeof x === 'string') : [];
-async function frontmatter(path) {
-  const raw = await readFile(path, 'utf8');
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return {}; // In-progress draft pages may not have a header yet.
-  return parse(match[1]);
-}
 
 /** Snapshot exactly the published item census; never alter content or infer proof edges. */
-export async function loadGraph(root = REPO, publishedIds = null) {
+export async function loadGraph(root = REPO, publishedIds = null, cache = null) {
   const items = [];
+  const hashes = [], seen = new Set();
+  const read = async path => {
+    seen.add(path);
+    const info = cache ? await stat(path, { bigint: true }) : null;
+    const stamp = info ? `${info.size}:${info.mtimeNs}:${info.ctimeNs}` : null;
+    let record = cache?.get(path);
+    if (!record || record.stamp !== stamp) {
+      const raw = await readFile(path, 'utf8');
+      const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      if (!match && record?.fm.status === 'published') throw new Error(`Incomplete published header: ${path}`);
+      const parsed = match ? parse(match[1]) ?? {} : {};
+      const fm = Object.fromEntries(['id', 'title', 'status', 'kind', 'deps', 'aliases', 'items', 'examples']
+        .filter(key => key in parsed).map(key => [key, parsed[key]]));
+      record = { stamp, fm, hash: createHash('sha256').update(raw).digest('hex') };
+      cache?.set(path, record);
+    }
+    if (record.fm.status === 'published' || path.endsWith('_category.md')) {
+      hashes.push(`${relative(root, path)}:${record.hash}`);
+    }
+    return record.fm;
+  };
   const files = (await readdir(join(root, 'items'))).filter(f => f.endsWith('.md')).sort();
   // Bound filesystem concurrency while loading a large content tree.
   for (let start = 0; start < files.length; start += 128) {
     const batch = await Promise.all(files.slice(start, start + 128).map(async file => {
-      const fm = await frontmatter(join(root, 'items', file));
+      const fm = await read(join(root, 'items', file));
       return { ...fm, id: fm.id ?? file.slice(0, -3) };
     }));
     items.push(...batch.filter(fm => fm.status === 'published' && (!publishedIds || publishedIds.has(fm.id))));
@@ -46,11 +62,11 @@ export async function loadGraph(root = REPO, publishedIds = null) {
       if (entry.isDirectory()) { await walk(path, [...parts, entry.name]); continue; }
       if (!entry.name.endsWith('.md')) continue;
       if (entry.name === '_category.md' && parts.length === 1) {
-        const fm = await frontmatter(path);
+        const fm = await read(path);
         categories.push({ id: parts[0], title: fm.title ?? parts[0] });
       }
       if (entry.name.startsWith('_')) continue;
-      const page = await frontmatter(path);
+      const page = await read(path);
       if (page.status !== 'published') continue;
       for (const id of [...list(page.items), ...list(page.examples)]) {
         const i = resolve(id);
@@ -78,5 +94,7 @@ export async function loadGraph(root = REPO, publishedIds = null) {
     if (!categories.some(c => c.id === id)) categories.push({ id, title: id === 'pde' ? 'Partial Differential Equations' : id.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ') });
   }
   categories.sort((a, b) => a.id === 'foundations' ? -1 : b.id === 'foundations' ? 1 : a.title.localeCompare(b.title));
-  return { nodes, edges, categories: categories.filter(c => used.has(c.id)), unresolved };
+  if (cache) for (const path of cache.keys()) if (!seen.has(path)) cache.delete(path);
+  return { nodes, edges, categories: categories.filter(c => used.has(c.id)), unresolved,
+    contentVersion: createHash('sha256').update(hashes.sort().join('\n')).digest('hex') };
 }
