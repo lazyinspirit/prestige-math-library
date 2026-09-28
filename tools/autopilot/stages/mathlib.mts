@@ -1327,7 +1327,9 @@ function pairBatches(ctx: any, unit: string, snapshot = loadStep3(ctx.repo, ctx.
   return [...new Set<string>(pair.map((p: any) => String(p.batch)))];
 }
 
-/** Direct in-run A/B-pair prerequisites declared by either page of a pair. */
+/** Direct in-run A/B-pair prerequisites to expose in author tasks.
+ * They are review inputs, not Step 3b dispatch barriers: the author writes
+ * every assigned item and flags unfinished suppliers for owner reconciliation. */
 function pairDependencies(snapshot: any, unit: string): string[] {
   const pairForPage = new Map<string, string>();
   for (const [id, pages] of snapshot.pairs) {
@@ -1368,7 +1370,11 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
   const task = `research/${ctx.run}-${label}.task.md`;
   const report = `research/${ctx.run}-${prefix}-pair-${unit}.md`;
   const itemOrder = phase === 'final' ? authorItemOrder(snapshot, [unit]) : '';
-  writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${itemOrder}- Write ${report}.\n`);
+  const directPairs = phase === 'final' ? pairDependencies(snapshot, unit) : [];
+  const prerequisiteNote = phase === 'final'
+    ? `- Direct in-run prerequisite pairs to inspect (they may still be unfinished): ${directPairs.length ? directPairs.join(', ') : 'none'}.\n- If an item supplier is not yet authored, flag its exact ID and consuming step in ${report}; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.\n`
+    : '';
+  writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${prerequisiteNote}${itemOrder}- Write ${report}.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
     profile: DEEPSEEK_FLASH_MAX,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
@@ -1600,8 +1606,9 @@ export const stages = [
     modelProfile: DEEPSEEK_FLASH_MAX,
     role: 'alpha-high',
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
-    unitPrerequisites: (ctx, unit) => legacyStep3(ctx)
-      ? [] : pairDependencies(loadStep3(ctx.repo, ctx.run), unit),
+    // The owner asked to author every pair in this run even when an in-run
+    // supplier is unfinished. Shared-batch exclusivity remains below; final
+    // item decisions and gates still require reconciled, proved suppliers.
     exclusiveCohort: (ctx, u) => legacyStep3(ctx) ? alphaCohort(ctx, u) : pairAuthorCohort(ctx, u),
     artifacts: (ctx, u) => legacyStep3(ctx) ? authorArtifacts(ctx, u) : pairAuthorArtifacts(ctx, u),
     pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)

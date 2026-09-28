@@ -121,7 +121,7 @@ test('Step 3 dispatches each pair and serializes authors sharing a batch', t => 
   assert.match(readFileSync(join(f.root, plan.task), 'utf8'), /Read access: the entire library and all current-frontier A\/B pairs/);
 });
 
-test('Step 3 exposes cross-batch in-run prerequisites to the executor', t => {
+test('Step 3 authors all pairs before cross-batch suppliers finish and flags them in tasks', t => {
   const f = fixture(t);
   const pair = (a: string, b: string, order: number, requires: string[]) => [
     { id: a, kind: 'A', companion: b, order, category: 'topic', requires, items: [] },
@@ -129,8 +129,8 @@ test('Step 3 exposes cross-batch in-run prerequisites to the executor', t => {
   ];
   const middle = pair('middle-a', 'middle-b', 3, ['a']);
   const consumer = pair('consumer-a', 'consumer-b', 5, ['middle-a']);
-  // Put the consumer in the lexically earlier batch to prove manifest-file
-  // order cannot launch it ahead of its supplier chain.
+  // Put the consumer in the lexically earlier batch to prove its task still
+  // names the supplier even though the executor may dispatch both at once.
   f.put('demo-batch-2.pages.json', consumer);
   f.put('demo-batch-3.pages.json', middle);
   f.put('plan-spec.json', { pages: [...f.pages, ...middle, ...consumer] });
@@ -138,16 +138,18 @@ test('Step 3 exposes cross-batch in-run prerequisites to the executor', t => {
   const author: any = stages.find(s => s.id === '3b-author');
   assert.deepEqual(author.units(f.ctx), ['a', 'middle-a', 'consumer-a']);
   assert.equal(scope.unitPrerequisites, undefined, 'scope review remains parallel');
-  assert.deepEqual(author.unitPrerequisites(f.ctx, 'a'), []);
-  assert.deepEqual(author.unitPrerequisites(f.ctx, 'middle-a'), ['a']);
-  assert.deepEqual(author.unitPrerequisites(f.ctx, 'consumer-a'), ['middle-a']);
+  assert.equal(author.unitPrerequisites, undefined, 'authoring waits on no cross-batch supplier');
   assert.deepEqual(scope.plan(f.ctx, scope.units(f.ctx)).map((p: any) => p.covers),
     [['a'], ['middle-a'], ['consumer-a']], 'scope review remains parallel');
   assert.deepEqual(author.exclusiveCohort(f.ctx, 'middle-a'), ['middle-a'],
     'output exclusivity remains a separate same-batch relation');
   assert.deepEqual(author.plan(f.ctx, author.units(f.ctx)).map((p: any) => p.covers),
     [['a'], ['middle-a'], ['consumer-a']],
-    'the executor, which knows completion and active repairs, applies readiness');
+    'all three pairs are eligible for authoring');
+  const consumerTask = author.plan(f.ctx, ['consumer-a'])[0].task;
+  const prompt = readFileSync(join(f.root, consumerTask), 'utf8');
+  assert.match(prompt, /Direct in-run prerequisite pairs.*middle-a/);
+  assert.match(prompt, /supplier is not yet authored.*author the assigned consumer anyway/);
 });
 
 test('Step 1 supplier batches owe populated-scaffold readiness artifacts', t => {

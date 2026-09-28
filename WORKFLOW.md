@@ -127,10 +127,12 @@ a batch run sequentially because manifests and proof contracts are shared.
 New plans place one pair in each batch so an auditor/author can finish all of
 its items in ascending dependency-level order across that batch. The planner
 and drift materializer reject a larger batch cap.
-Across batches, the executor releases a consumer only after every transitive
-in-run prerequisite has successful coverage, all declared artifacts, and no
-live repair writer. This directed rule keeps independent branches parallel and
-prevents a later supplier write from invalidating a consumer receipt.
+Across batches, Step 3b releases every pair for authoring without waiting for
+in-run suppliers. Its task lists direct prerequisite pairs. An author flags the
+exact missing supplier and consuming proof step, authors the item anyway, and
+leaves that item's decision escalated until the supplier and proof use are
+reconciled. Pairs sharing a batch remain serialized to protect shared files;
+the final Step-3 gate still requires sound, current item decisions.
 They audit scaffolds and actual prerequisites, repair locally, then write
 every assigned item, example, counterexample, page and proof contract. They
 follow ascending dependency levels within their assigned work, using the

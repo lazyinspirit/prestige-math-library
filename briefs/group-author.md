@@ -15,7 +15,12 @@ pairs still being constructed. Read sibling manifests, items and pages whenever
 needed to check prerequisites, conventions or cross-pair dependencies. Do not
 edit another pair's files; route a needed change to its owner or escalate it.
 Treat a sibling's in-progress draft as provisional and recheck its completed
-claim before closing a dependent item.
+claim before closing a dependent item. If a supplier item has not yet been
+authored, flag the exact supplier ID, consumer ID and consuming proof step in
+your report, and author the consumer now with the needed proof obligation
+stated plainly. Record an escalation rather than an acceptance for that item
+until the supplier and its actual use are verified. Do not wait for a sibling
+pair to finish before authoring the rest of your assigned batch.
 
 ## Read and decide
 

@@ -102,9 +102,10 @@ results as suppliers or bypassing the Foundations bootstrapping boundary.
 **Step 3.** Each A/B pair has its own scaffold auditor and item author. Authors
 audit scaffolds, repair local gaps, then author every assigned item and A/B page.
 Pairs sharing a batch author sequentially to protect shared files. Across
-batches, a consumer waits until every transitive in-run prerequisite is
-artifact-complete and has no live repair writer; independent branches remain
-parallel. They may add
+batches, all pairs may author in parallel even while an in-run prerequisite
+is unfinished. Authors flag each unfinished supplier and consuming proof step,
+author the consumer item anyway, and leave its decision escalated until the
+supplier and actual proof use are reconciled. They may add
 necessary definitions and lemmas to assigned existing A pages before consumers.
 Escalate substantial unmet
 prerequisites and unresolved mathematics to the owner. Report potentially

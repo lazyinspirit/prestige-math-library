@@ -12,10 +12,12 @@ operating contract and CLAUDE.md for agent instructions.
 - src/doctor.mts: command/task preflight.
 - src/state.mts and src/control.mts: durable state and controls.
 
-Step1 scaffold batches and Step3 pair authors declare their same-stage in-run
-prerequisites to the executor. Consumers wait for artifact-complete, stable
-transitive suppliers; independent branches retain parallelism. Step3 authors
-sharing a batch also serialize because their manifests are shared. The
+Step1 scaffold batches declare their same-stage in-run prerequisites to the
+executor. Their consumers wait for artifact-complete, stable transitive
+suppliers. Step3 pair authors can start across batches while an in-run supplier
+is unfinished; they flag exact missing items, author consumers, and leave
+unresolved item decisions escalated for reconciliation. Step3 authors sharing
+a batch still serialize because their manifests are shared. The
 planner now places one A/B pair in each batch. Step1 scaffolders label every
 manifest item with its in-run dependency level; the Step1 gate recomputes the
 labels from the item DAG. Step3 author tasks list their items from the lowest
