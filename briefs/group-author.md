@@ -34,7 +34,9 @@ locators and unresolved qualifications. Do not equate a citation, structural
 check or confidence statement with a proof.
 
 Check hypotheses, quantifiers, implicit proof uses and well-definedness.
-Prerequisites must be proved earlier or supplied locally. Add and fully author
+Before accepting an item, its prerequisites must be proved earlier or supplied
+locally. A provisional consumer draft may cite an unfinished in-run supplier
+only with the exact flag and escalated decision described above. Add and fully author
 necessary definitions and lemmas on assigned existing A pages, before their
 consumers. Register them in manifests, coverage and contracts. Do not add pairs,
 drop promised results, consume Recorded results or edit published content.
