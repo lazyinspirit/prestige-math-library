@@ -67,15 +67,15 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3 scopes use DeepSeek and authors use Luna while Step 5 adjudication stays Sol', () => {
+test('Step 3 scopes and authors use DeepSeek while Step 5 adjudication stays Sol', () => {
   assert.equal(stage('3a-scope').modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax);
   const authorStage = stage('3b-author');
   const author = { role: 'alpha-high', job: 'authoring' };
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.lunaMax);
+  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.deepseekFlashMax);
   assert.equal(selected(authorStage, {
     role: 'beta', job: 'authoring', label: 'author-recover-1-1',
-  }), MODEL_PROFILE_NAMES.lunaMax, 'Step 3 recovery authors use the same profile');
-  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.lunaMax);
+  }), MODEL_PROFILE_NAMES.deepseekFlashMax, 'Step 3 recovery authors use the same profile');
+  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
   const adjudicate = stage('5a-adjudicate');
   assert.equal(selected(adjudicate, adjudicate.plan({ ...ctx, doctor: true }, ['1'])[0]), MODEL_PROFILE_NAMES.solHigh,
@@ -139,8 +139,8 @@ test('group Alpha resolves to Sol high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step-3 scope uses DeepSeek and authoring uses Luna', () => {
-  for (const [id, model] of [['3a-scope', MODELS.deepseekFlash.id], ['3b-author', MODELS.luna.id]]) {
+test('Step-3 scope and authoring use DeepSeek Flash max', () => {
+  for (const [id, model] of [['3a-scope', MODELS.deepseekFlash.id], ['3b-author', MODELS.deepseekFlash.id]]) {
     const profile = MODEL_PROFILES[stage(id).modelProfile];
     assert.equal(profile.model, model);
     assert.equal(profile.effort, 'max');

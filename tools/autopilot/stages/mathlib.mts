@@ -1284,7 +1284,7 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
   const itemOrder = phase === 'final' ? authorItemOrder(snapshot, pairs.map(([id]: any) => id)) : '';
   writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n${itemOrder}- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : LUNA_MAX,
+    profile: DEEPSEEK_FLASH_MAX,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: group.covers,
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
@@ -1370,7 +1370,7 @@ export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') 
   const itemOrder = phase === 'final' ? authorItemOrder(snapshot, [unit]) : '';
   writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${itemOrder}- Write ${report}.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: phase === 'scope' ? DEEPSEEK_FLASH_MAX : LUNA_MAX,
+    profile: DEEPSEEK_FLASH_MAX,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
@@ -1597,7 +1597,7 @@ export const stages = [
   {
     id: '3b-author',
     label: 'Step 3b — pair scaffold audit, repair and authoring',
-    modelProfile: LUNA_MAX,
+    modelProfile: DEEPSEEK_FLASH_MAX,
     role: 'alpha-high',
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
     unitPrerequisites: (ctx, unit) => legacyStep3(ctx)

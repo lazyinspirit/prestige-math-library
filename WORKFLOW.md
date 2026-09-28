@@ -50,7 +50,7 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 1 scaffolding | Sol / max |
 | Step 1 drift review; group Alpha | Sol / high |
 | Step 3a pair scope | DeepSeek V4.1 Flash / max |
-| Step 3b pair authors | Luna / max |
+| Step 3b pair scaffold auditors and authors | DeepSeek V4.1 Flash / max |
 | Step 5a readers and refuters | Luna / max |
 | Step 5a adjudicators | Sol / high |
 | Step 5b agents | Sol / xhigh |
@@ -84,7 +84,7 @@ reader from overwriting a newer device sign-in or another reader's refresh.
 After an authentication failure, drain readers started under the old login,
 sign in again, then retry the failed engine units.
 
-DeepSeek stages in Steps 2, 3a and 9 use the stable `deepseek-flash` API alias and maximum reasoning
+DeepSeek stages in Steps 2, 3a, 3b and 9 use the stable `deepseek-flash` API alias and maximum reasoning
 through an isolated Codex home. Their required read-only `web_search` MCP tool
 prefers Tavily when `TAVILY_API_KEY` is configured and otherwise uses Firecrawl.
 Dispatch fails before launching if the DeepSeek key or both supported web-search
