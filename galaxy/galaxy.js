@@ -12,6 +12,7 @@ const pickGrid = new Map();
 let renderer, graph, nodes, prerequisites, consumers, visible, selected, states;
 let width = innerWidth, height = innerHeight, rotation = 0;
 let paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let highlighting = true;
 let direction = 'dependencies', hovered = -1, closure = new Set();
 let lastTime = 0, frameId = 0, dirty = true, loaded = false, projectionDirty = true;
 let gesture = null, moved = false, pinned = false, visibleFraction = 1;
@@ -31,7 +32,7 @@ function render(time) {
   const rotating = !paused && hovered < 0 && !pointers.size;
   if (rotating) { rotation -= elapsed * .018; dirty = true; projectionDirty = true; }
   if (dirty) {
-    renderer.render(camera, rotation, hovered >= 0, visibleFraction);
+    renderer.render(camera, rotation, highlighting && hovered >= 0, visibleFraction);
     dirty = false;
   }
   if (rotating) schedule();
@@ -39,7 +40,7 @@ function render(time) {
 function updateStates() {
   visibleFraction = visible.filter(Boolean).length / nodes.length;
   for (let i = 0; i < nodes.length; i++) {
-    states[i] = !visible[i] ? 0 : hovered < 0 ? 1 : i === hovered ? 3 : closure.has(i) ? 2 : .008;
+    states[i] = !visible[i] ? 0 : !highlighting || hovered < 0 ? 1 : i === hovered ? 3 : closure.has(i) ? 2 : .008;
   }
   renderer.setStates(states);
 }
@@ -78,6 +79,7 @@ function updateTooltip() {
   $('#tip-kind').style.color = COLORS[node.color];
   renderTitle($('#tip-title'), node.title);
   const visibleCount = [...closure].filter(i => visible[i]).length;
+  $('#tip-detail').hidden = !highlighting;
   $('#tip-detail').textContent = `${closure.size.toLocaleString()} ${direction === 'dependencies' ? 'prerequisites' : 'downstream consumers'} · ${visibleCount.toLocaleString()} visible`;
   tip.href = `https://alphabetamath.cc/item/${encodeURIComponent(node.id)}`;
   tip.hidden = false;
@@ -91,7 +93,7 @@ function inspect(index) {
   document.body.classList.toggle('inspecting', index >= 0);
   $('#tooltip').hidden = index < 0;
   if (index >= 0) {
-    closure = reachable(index, direction === 'dependencies' ? prerequisites : consumers);
+    closure = highlighting ? reachable(index, direction === 'dependencies' ? prerequisites : consumers) : new Set();
     updateTooltip();
   }
   updateStates();
@@ -163,6 +165,14 @@ function bindControls() {
   document.querySelectorAll('[name=direction]').forEach(input => { input.onchange = () => {
     direction = input.value; const previous = hovered; hovered = -1; inspect(previous);
   }; });
+  $('#highlight-toggle').onclick = () => {
+    highlighting = !highlighting;
+    $('#highlight-toggle').setAttribute('aria-pressed', String(highlighting));
+    $('#highlight-toggle').title = highlighting ? 'Disable hover highlighting' : 'Enable hover highlighting';
+    $('#highlight-off').toggleAttribute('hidden', highlighting);
+    const previous = hovered; hovered = -1; inspect(previous);
+    updateStates(); invalidate();
+  };
   $('#search').oninput = updateSearch;
   $('#motion').onclick = () => { paused = !paused; syncMotion(); };
   $('#reset').onclick = () => { Object.assign(camera, defaultCamera(width, height)); rotation = 0; pinned = false; inspect(-1); invalidate(); };

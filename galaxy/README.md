@@ -38,6 +38,10 @@ assets are reread on each request.
   reversed and remains a rigid rotation of the whole galaxy.
 - Drag to orbit the camera. Shift-drag or right-drag pans the view.
 - Scroll or pinch to zoom; the +/- controls also zoom. Reset restores the camera.
+- The node icon in the top-right toolbar toggles hover highlighting. When off,
+  hovering still shows the item name and link, without tracing relationships or
+  dimming the galaxy. The left corners contain no labels; the color key and count
+  are available inside the filter panel.
 - Hover to inspect a star and illuminate its transitive relationships. Rotation
   pauses during inspection so the target stays under the pointer.
 - Click a star to open its live item page in a new tab. On touchscreens, drag to
