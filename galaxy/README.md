@@ -1,9 +1,12 @@
 # Library galaxy
 
-A JavaScript canvas view of the published Alphabeta Math library. Set Theory
-occupies the center; other subjects form five slowly rotating spiral arms.
-There are no visible edges. Hovering illuminates the complete transitive set of
-prerequisites or downstream consumers, selected in the filter panel.
+A JavaScript/WebGL2 view of the published Alphabeta Math library. Set Theory
+occupies the central bulge of a three-dimensional spiral galaxy. Dragging
+orbits the camera above, below or edge-on to its disc. The galaxy has a warm
+stellar core, blue gas, absorbing dust lanes and a pure black surround.
+
+No dependency lines are drawn. Hovering illuminates the complete transitive
+set of prerequisites or downstream consumers, selected in the filter panel.
 
 ## Preview
 
@@ -15,8 +18,9 @@ node --test galaxy/graph.test.mjs
 
 The server binds to `0.0.0.0:8080`. Set `PORT` to choose another port.
 It requires Node 22+ and the app checkout's existing `yaml` package, resolved
-through `tools/paths.mjs`; alternatively install `yaml` locally. No browser
-packages, CDN assets, build step, or framework are needed.
+through `tools/paths.mjs`; alternatively install `yaml` locally. The browser
+needs WebGL2. No browser packages, CDN assets, build step, framework or image
+textures are required.
 
 At startup, the live `https://alphabetamath.cc/sitemap.xml` supplies the item
 census. Titles, kinds, prerequisites and category membership come from this
@@ -24,59 +28,71 @@ repository's published content. Startup fails if a live item is missing from
 that content, rather than silently rendering an incomplete library. The census
 matches the live site, but dependency metadata reflects the current checkout.
 Use `GALAXY_LOCAL=1 node galaxy/serve.mjs` explicitly for an offline preview of
-all locally published items. Restart to refresh the snapshot or assets.
+all locally published items. Restart to refresh the content snapshot; frontend
+assets are reread on each request.
 
 ## Interaction
 
-- Drag to pan; scroll or pinch to zoom. The +/- controls also zoom.
+- Drag to orbit the camera. Shift-drag or right-drag pans the view.
+- Scroll or pinch to zoom; the +/- controls also zoom. Reset restores the camera.
 - Hover to inspect a star and illuminate its transitive relationships. Rotation
   pauses during inspection so the target stays under the pointer.
-- Click a star to open its live item page in a new tab. On touchscreens, tap to
-  inspect, then tap the tooltip link to open the item.
+- Click a star to open its live item page in a new tab. On touchscreens, drag to
+  orbit, tap a star to inspect, then tap its tooltip link to open the item.
 - The filter icon opens multiple category selection, hover direction and search.
-  Search results are keyboard-accessible links to the matching published items.
-- Pause/resume and reset controls are always available. With the canvas focused,
-  arrow keys pan, +/- zoom, and Space toggles rotation. Escape clears inspection
-  and closes the filter panel.
+  Search results are keyboard-accessible links to matching published items.
+- With the canvas focused, arrow keys orbit, +/- zoom, and Space toggles rotation.
+  Escape clears inspection and closes the filter panel.
 - Reduced-motion preferences pause rotation initially. Hidden tabs stop rendering.
 
 Definitions are bright blue. Theorems, lemmas, propositions and corollaries are
 red-orange. Examples, counterexamples and false statements are brown. Remarks
-are muted violet. The small neutral background dust is decorative; the brighter
-colored stars represent actual items. Layout is illustrative, not a metric of
-mathematical distance or difficulty.
+are muted violet. Decorative gas, dust and faint stellar light give the galaxy
+its distant appearance; only library items are interactive. Decorative light
+recedes during inspection and filtering. The layout illustrates subject groups,
+not mathematical distance or difficulty.
 
-## Data and rendering
+## Architecture
 
-`data.mjs` includes every published kind, resolves dependency aliases, deduplicates
-prerequisites, preserves multiple category memberships and provides an explicit
-category for items without a published home. Categories without `_category.md`
-receive titles derived from their directory. In-progress pages without a
-frontmatter header are skipped. Missing published dependency endpoints are
-reported in `graph.json` under `unresolved`; draft items are never fabricated as
-published stars. Forward references and well-definedness references are not
-relabelled as proof prerequisites. The current snapshot contains 20,755 live
-items, 99,466 published dependency links and 11 unresolved endpoints.
+- `data.mjs` includes every published kind, resolves dependency aliases,
+  deduplicates prerequisites, preserves multiple category memberships and
+  provides a category for items without a published home. Categories without
+  metadata receive titles from their directory. In-progress pages without
+  frontmatter are skipped. Unpublished dependency endpoints are reported under
+  `graph.json` → `unresolved`; draft stars are never fabricated. Forward and
+  well-definedness references are not relabelled as proof prerequisites.
+- `graph-utils.mjs` iteratively traverses the entire published dependency graph,
+  safely handling shared paths and cycles. Category filters affect visibility,
+  not traversal. Tooltips report both total reached items and visible items.
+- `galaxy-model.mjs` creates deterministic XYZ positions, with a thicker Set
+  Theory bulge and a thin, nonzero-thickness disc. It also creates 224,500
+  decorative particles. CPU picking and GPU rendering use the same perspective
+  projection. This is procedural illustration, not an astrophysical simulation.
+- `renderer.mjs` uploads geometry once and renders four GPU point layers. It
+  accumulates light into a half-float framebuffer when supported, then applies
+  exposure and gamma correction; an RGBA8 target is the compatibility fallback.
+  Stars and gas use analytic fragment shaders, so zooming does not enlarge a
+  fixed bitmap. The framebuffer uses native device density up to 3×, bounded by
+  GPU limits. The clear color is exactly black; there is no background starfield.
+- `galaxy.js` owns UI state and camera controls. A screen-space spatial grid is
+  rebuilt lazily for picking after camera movement. The GPU selection buffer
+  changes only on filtering or inspection; traversal runs only when the hovered
+  item or direction changes. No edge geometry exists.
+- `serve.mjs` serves an explicit frontend asset allowlist and the public graph
+  snapshot. It does not expose repository files or change the live website.
 
-`graph-utils.mjs` traverses relationships iteratively and handles cycles safely.
-Traversal uses the entire published graph; filters only affect which reached
-stars are visible. Tooltips report both total reached items and visible items.
-`galaxy.js` computes the layout once, caches stars in offscreen canvases and
-rotates those layers. Close zoom redraws visible stars at screen resolution to
-keep them sharp. A spatial grid handles picking. Closure computation and
-highlight rasterization run only when the selected star or direction changes.
-No dependency lines are drawn in any state. Canvas pixel density is capped at 2.
-
-`serve.mjs` serves only five explicit assets and the public graph snapshot; it
-does not expose repository files. This standalone preview does not install a
-production route or change the live site.
+The verified snapshot has 20,755 live items, 99,466 published dependency links
+and 11 unresolved endpoints. Relationships use the current local metadata;
+items missing from the live publication census are excluded.
 
 ## Validation
 
-The independent GPT-6-Sol (high) review checked the full live census, central
-Set Theory layout, colors, zero visible edges, both transitive hover modes,
-category filtering, title tooltips, item navigation, rotation and port 8080.
-Desktop Chrome and a 390px touch viewport loaded without browser errors;
-None / Set Theory / All filters, search, and reduced-motion behavior passed.
-Unit tests cover transitive traversal in both directions, cycles, publication
-filtering, aliases, category membership and live-census reconciliation.
+Unit tests cover publication filtering, aliases, categories, live-census
+reconciliation, both transitive directions, cycles, finite 3D geometry,
+central Set Theory placement, perspective, depth and zoom.
+
+An independent GPT-6-Sol (high) review checks the 3D view, orbit, zoom, projected
+hover targeting, both highlight modes, filters, links and absence of edges.
+Browser verification uses Chromium with WebGL2, including high-DPI rendering,
+edge-on camera views, a touch viewport and reduced motion. Software rendering
+can be substantially slower than a hardware-accelerated browser.

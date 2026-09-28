@@ -42,3 +42,30 @@ test('published census, aliases, multiple categories, missing metadata, and live
     await assert.rejects(loadGraph(root, new Set(['missing-live-item'])), /Live items missing/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('3D scene has finite geometry, real thickness and a central Set Theory bulge', async () => {
+  const { layoutItems, createEnvironment } = await import('./galaxy-model.mjs');
+  const nodes = Array.from({ length: 300 }, (_, i) => ({ kind: 'definition', categories: [i < 100 ? 'foundations' : 'algebra'] }));
+  const vertices = layoutItems(nodes, [{ id: 'foundations' }, { id: 'algebra' }], nodes.map(() => []));
+  assert.ok(vertices.every(Number.isFinite));
+  assert.ok(nodes.slice(0, 100).every(n => Math.hypot(n.x, n.y) <= .19));
+  assert.ok(nodes.some(n => n.z > .02) && nodes.some(n => n.z < -.02));
+  const environment = createEnvironment();
+  for (const data of Object.values(environment)) {
+    assert.ok(data.length > 0 && data.length % 8 === 0);
+    assert.ok(data.every(Number.isFinite));
+  }
+});
+
+test('perspective orbit exposes depth at edge-on and zoom preserves the center', async () => {
+  const { project, DEFAULT_CAMERA } = await import('./galaxy-model.mjs');
+  const camera = { ...DEFAULT_CAMERA, yaw: 0, pitch: 0, zoom: 1 };
+  assert.deepEqual(project({ x: 0, y: 0, z: 0 }, camera, 0, 1200, 800).slice(0, 2), [600, 400]);
+  const raised = { x: .3, y: .2, z: .1 };
+  const front = project(raised, camera, 0, 1200, 800);
+  const edge = project(raised, { ...camera, pitch: Math.PI / 2 }, 0, 1200, 800);
+  assert.ok(front[1] < 400 && edge[1] > 400);
+  assert.ok(edge[2] < front[2]);
+  const zoomed = project(raised, { ...camera, zoom: 2 }, 0, 1200, 800);
+  assert.ok(Math.abs((zoomed[0] - 600) - 2 * (front[0] - 600)) < 1e-8);
+});
