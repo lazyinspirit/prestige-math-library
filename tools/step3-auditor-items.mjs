@@ -11,6 +11,7 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
 import { authorResultAllowed, loadStep3AuditorProvenance } from './auditor-created-items.mjs';
+import { split, yaml } from './pathway-lib.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
@@ -112,7 +113,19 @@ function certify(root, run, partial) {
   const original = new Set(baseline.items.map(row => row.id));
   const preexistingFiles = new Set(baseline.existing_item_files);
   const s = loadStep3(root, run);
-  const additions = [...s.items].filter(([id]) => !original.has(id));
+  // A previously published item can be placed on a draft frontier page while
+  // its local prerequisites are repaired. It is a preexisting anchor, never an
+  // auditor-created item. Keep the immutable baseline and its filesystem guard:
+  // only a genuinely published item from another run qualifies here.
+  const publishedAnchor = id => {
+    if (!preexistingFiles.has(id)) return false;
+    const path = join(root, 'items', safe(id) + '.md');
+    if (!existsSync(path)) return false;
+    const fm = yaml().parse(split(readFileSync(path, 'utf8')).fm) ?? {};
+    return fm.id === id && fm.status === 'published'
+      && typeof fm.pipeline_run === 'string' && fm.pipeline_run !== run;
+  };
+  const additions = [...s.items].filter(([id]) => !original.has(id) && !publishedAnchor(id));
   const results = successfulAuthorResults(root, run);
   const certificationPath = auditorCertificationsPath(root, run);
   let priorById = new Map(), priorReceipt;

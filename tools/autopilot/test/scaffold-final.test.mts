@@ -328,6 +328,18 @@ test('recovery certification does not wait for a sibling author result', t => {
   assert.equal(readFileSync(path, 'utf8'), before, 'structural refusal preserves eligible receipts too');
 });
 
+test('Step 3 treats a previously published manifest addition as an existing anchor', t => {
+  const f = fixture(t); f.scope();
+  writeFileSync(join(f.root, 'items/lem-old.md'),
+    '---\nid: lem-old\nstatus: published\npipeline_run: prior-run\ndeps: []\n---\nExisting proof.\n');
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-old', kind: 'lemma', statement: 'Existing result', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  const receipt = certifyAuditorItems(f.root, 'demo');
+  assert.deepEqual(receipt.items, []);
+  assert.deepEqual(receipt.scopes, []);
+});
+
 test('unchanged V2 recovery receipts preserve bytes and mtime while pending diagnostics refresh', t => {
   const f = fixture(t); f.scope();
   writeAuditorBaseline(f.root, 'demo');

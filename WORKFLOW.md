@@ -179,6 +179,12 @@ manifest/plan inputs bound by its item hash. Changed supplier content requires
 either a successful covering author dispatch after those writes or the owner
 repair certificate described below. Unchanged certificates survive restart and
 file touches; failed recertification preserves prior receipts.
+An item already published by an earlier run may be placed in a current draft
+page as a repaired prerequisite. When the immutable Step-3 baseline records
+its item file and that file still declares `status: published` with a different
+`pipeline_run`, the certifier treats it as a preexisting anchor. It receives no
+auditor-created certificate; its current Step-3 decision and published-item
+review remain required.
 Provenance receipts use `auditor-authored-step3-bypass-v2`; v1 receipts cannot
 close decisions or reuse the unchanged-hash path. They must be revalidated
 against the original immutable v1 inventory baseline. On the author-dispatch
