@@ -4,7 +4,7 @@
 
 2. **Working standard.** Answer the owner plainly and briefly. Stay within the assigned scope. Replace stale code, prompts, or documentation cleanly; do not layer fixes over them. After a major code change, update relevant documentation and commit both. Handle command prompts from spawned agents without asking the owner for approval.
 
-3. **Default repair team.** At the start of each workflow step, inspect current engine findings and spawn up to ten `gpt-6-luna` agents at `max` effort to address flagged or escalated items. Use fewer when fewer disjoint repairs exist, and none when none exist. Give each agent exact item IDs and write scope. Keep their edits separate from active engine writers; the orchestrator owns integration and gate closure.
+3. **Default repair team.** At the start of Steps 1–5, inspect current engine findings and spawn up to ten `gpt-6-luna` agents at `max` effort for flagged or escalated items. For Steps 6–9, use up to ten `gpt-6-sol` agents at `high` effort. Use fewer when fewer disjoint repairs exist, and none when none exist. Give each agent exact item IDs and write scope. Keep their edits separate from active engine writers; the orchestrator owns integration and gate closure.
 
 4. **Mathematical integrity.** Before a fatal repair, understand the claim, proof, and actual dependencies. Helpers must check arguments independently, consult authoritative full texts when unsure, and report unresolved uncertainty. Never invent source reading, proof completion, confidence, or check results. Logical validity outranks prior acceptance, judges, and citations.
 
