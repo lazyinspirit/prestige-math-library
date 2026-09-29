@@ -2,7 +2,7 @@
 id: lem-cotangent-localization-at-rational-point
 kind: lemma
 title: "Cotangent spaces commute with localization at a rational point"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -15,10 +15,12 @@ deps:
   - thm-ideal-correspondence-for-localisation
   - def-sum-and-product-of-ideals
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

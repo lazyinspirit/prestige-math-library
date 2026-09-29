@@ -2,7 +2,7 @@
 id: lem-smooth-projective-embedding-gysin-trace-compatibility
 kind: lemma
 title: Embedding compatibility of smooth-projective Gysin traces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -32,6 +32,9 @@ sources:
     - title: "Ravi Vakil, Foundations of Algebraic Geometry Classes 53–54"
       url: "https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf"
       locator: "Class 53 §§1–5 and Class 54 §§7, 11"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

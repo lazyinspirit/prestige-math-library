@@ -2,7 +2,7 @@
 id: def-lp-fourier-multiplier-and-multiplier-norm
 kind: definition
 title: Lp Fourier multiplier and its norm
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-schwartz-space-and-its-seminorms
@@ -25,6 +25,8 @@ sources:
     - title: "Mark Williams, Notes on Harmonic Analysis"
       url: https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf
       locator: "§3.9, Definition 3.11, printed p. 12"
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

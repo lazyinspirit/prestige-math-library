@@ -2,7 +2,7 @@
 id: ex-lazy-chain-is-aperiodic
 kind: example
 title: "Laziness makes an irreducible chain aperiodic"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-aperiodic-chain
@@ -13,10 +13,12 @@ deps:
   - def-nonnegative-extended-series
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"

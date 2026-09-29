@@ -1,7 +1,7 @@
 ---
 page: "jacobi-fields-conjugate-points-and-the-cut-locus-examples"
 title: "Jacobi Fields, Conjugate Points, and the Cut Locus — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-jacobi-fields-in-euclidean-space

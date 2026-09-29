@@ -2,7 +2,7 @@
 id: ex-volterra-square-has-zero-trace
 kind: example
 title: The square of the Volterra operator has zero trace
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-additivity-of-the-nonnegative-lebesgue-integral
@@ -72,6 +72,9 @@ sources:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, §6.1, Volterra operator example, equations (6.23)–(6.26), printed pp. 167–168; comparison only (the example acts on C([0,1]) and leaves the power estimate as Problem 6.7)"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

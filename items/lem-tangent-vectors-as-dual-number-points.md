@@ -2,7 +2,7 @@
 id: lem-tangent-vectors-as-dual-number-points
 kind: lemma
 title: "Tangent vectors at rational points are dual-number points"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,10 +22,12 @@ deps:
   - def-quotient-ring
   - thm-quotient-is-field-iff-ideal-maximal
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

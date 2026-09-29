@@ -2,7 +2,7 @@
 id: def-smooth-projective-dualizing-line-bundle-and-trace
 kind: definition
 title: Dualizing line bundle and trace datum of a smooth projective variety
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -22,6 +22,8 @@ sources:
     - title: "Ravi Vakil, Foundations of Algebraic Geometry, Classes 53-54"
       url: https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf
       locator: "Class 53 §§1-5, Class 54 §§7, 11"
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

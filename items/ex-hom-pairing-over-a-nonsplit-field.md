@@ -2,7 +2,7 @@
 id: ex-hom-pairing-over-a-nonsplit-field
 kind: example
 title: "A nonsplit simple has Hom-pairing diagonal two"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -52,6 +52,9 @@ sources:
 generation:
   role: example
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

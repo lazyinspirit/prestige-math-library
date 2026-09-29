@@ -2,7 +2,7 @@
 id: thm-regular-locus-is-open-variety
 kind: theorem
 title: "Openness of the regular locus over a perfect field"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,10 +22,12 @@ deps:
   - thm-ag-perfect-field-jacobian-regularity
   - thm-stalk-structure-sheaf-prime-localization
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

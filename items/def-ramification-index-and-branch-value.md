@@ -2,7 +2,7 @@
 id: def-ramification-index-and-branch-value
 kind: definition
 title: Ramification index, ramification order and branch value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -24,6 +24,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 3, Theorem 3.2 and the following discussion of the multiplicity e_x(f) and of critical points and branch points, printed pp. 16–17."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

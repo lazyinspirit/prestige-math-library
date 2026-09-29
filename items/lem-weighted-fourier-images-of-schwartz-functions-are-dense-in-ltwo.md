@@ -2,7 +2,7 @@
 id: lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo
 kind: lemma
 title: Weighted Fourier transforms of Schwartz functions are dense in L2
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-complex-lp-and-euclidean-test-function-conventions
@@ -31,6 +31,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-graded-dual-numbers-cartan-polynomial
 kind: example
 title: "The graded dual numbers have Cartan polynomial 1+v²"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -28,10 +28,12 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

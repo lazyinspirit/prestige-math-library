@@ -1,7 +1,7 @@
 ---
 page: braids-as-fundamental-groups-of-configuration-spaces
 title: "Braids as Fundamental Groups of Configuration Spaces"
-status: draft
+status: published
 requires: [geometric-braids-and-artin-generators,
            ordered-and-unordered-configuration-spaces,
            the-fundamental-group]

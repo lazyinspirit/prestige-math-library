@@ -2,7 +2,7 @@
 id: def-open-morphism-schemes
 kind: definition
 title: "Open and universally open morphisms of schemes"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-scheme-over-base
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Definition 29.24.1 (tag 01U0) and Section 29.24"

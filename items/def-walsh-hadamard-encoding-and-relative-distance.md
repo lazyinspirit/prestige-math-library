@@ -2,7 +2,7 @@
 id: def-walsh-hadamard-encoding-and-relative-distance
 kind: definition
 title: "Walsh–Hadamard encoding and relative Hamming distance"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-linearity-test
@@ -19,6 +19,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: n/a
+  audited: 2026-09-30
 ---
 
 ## Definition

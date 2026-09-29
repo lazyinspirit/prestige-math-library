@@ -2,7 +2,7 @@
 id: thm-fitting-ideals-control-rank-loci
 kind: theorem
 title: Fitting ideals control fibre generator loci
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -29,10 +29,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

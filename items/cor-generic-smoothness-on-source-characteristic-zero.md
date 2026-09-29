@@ -2,7 +2,7 @@
 id: cor-generic-smoothness-on-source-characteristic-zero
 kind: corollary
 title: "Generic smoothness on the source"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -38,6 +38,9 @@ sources:
   references:
     - title: "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.1, Proposition 3.1 (generic smoothness in the source) with proof"
       url: https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

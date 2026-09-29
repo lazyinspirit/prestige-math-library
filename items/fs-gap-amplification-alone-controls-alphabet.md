@@ -2,7 +2,7 @@
 id: fs-gap-amplification-alone-controls-alphabet
 kind: false-statement
 title: "False: graph powering alone keeps the alphabet fixed"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-constraint-graph-powering
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

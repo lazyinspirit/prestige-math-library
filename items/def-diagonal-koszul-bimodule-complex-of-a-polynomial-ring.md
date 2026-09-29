@@ -2,7 +2,7 @@
 id: def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring
 kind: definition
 title: The polynomial diagonal Koszul bimodule complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-enveloping-algebra-and-bimodule-module-dictionary, def-koszul-complex-of-a-sequence-with-coefficients, def-graded-ring-module-bimodule-and-internal-shift]
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

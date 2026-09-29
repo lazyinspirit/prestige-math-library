@@ -2,7 +2,7 @@
 id: prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus
 kind: proposition
 title: Gradient of the distance is the outward unit radial field off the base point and the cut locus
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-inner-product-induces-a-norm
@@ -44,6 +44,9 @@ sources:
     - title: Ved Datar, Lectures on Riemannian Geometry (2025)
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Section 18.1, printed pp.134-136: polar normal coordinates, the radial field and the gradient of the distance; Section 23.2, printed pp.167-169: the cut locus and the radial domain."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

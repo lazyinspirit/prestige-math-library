@@ -2,7 +2,7 @@
 id: def-complete-variety
 kind: definition
 title: Complete varieties
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-proper-morphism
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: 'Ravi Vakil, Foundations of Algebraic Geometry, 2011 public draft, §11.3.1'

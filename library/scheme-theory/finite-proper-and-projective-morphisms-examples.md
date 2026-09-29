@@ -1,7 +1,7 @@
 ---
 page: finite-proper-and-projective-morphisms-examples
 title: Finite Proper and Projective Morphisms — Examples
-status: draft
+status: published
 items:
   - ex-finite-power-map-affine-line
   - ex-closed-immersion-finite-proper

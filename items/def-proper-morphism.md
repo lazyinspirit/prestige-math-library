@@ -2,7 +2,7 @@
 id: def-proper-morphism
 kind: definition
 title: Proper morphisms
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-separated-morphism-schemes
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, §29.42 Definition 29.42.1"

@@ -2,7 +2,7 @@
 id: cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting
 kind: counterexample
 title: "A bounded harmonic boundary problem without uniqueness"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-dirichlet-problem-for-finite-state-hitting-probabilities
@@ -20,6 +20,9 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-fredholm-determinant-of-a-finite-rank-operator
 kind: example
 title: Fredholm determinant of a finite-rank operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -28,10 +28,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Kostenko, Trace Ideals with Applications, §3.4"

@@ -2,7 +2,7 @@
 id: cex-lp-functions-need-not-have-point-values
 kind: counterexample
 title: Lp and Sobolev classes do not determine point values
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, lem-weak-derivative-is-independent-of-lp-representatives, prop-countable-subsets-of-rn-are-lebesgue-null, def-countable-choice, def-l-p-space-as-a-quotient-by-null-functions, prop-indicator-function-is-measurable-iff-its-set-is-measurable, cor-integral-over-a-null-set-vanishes]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

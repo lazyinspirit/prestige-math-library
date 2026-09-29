@@ -2,7 +2,7 @@
 id: def-hilbert-exterior-power-and-induced-operator
 kind: definition
 title: Hilbert exterior powers and induced operators
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-hilbert-space
@@ -18,10 +18,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

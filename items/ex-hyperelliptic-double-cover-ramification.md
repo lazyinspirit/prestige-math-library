@@ -2,7 +2,7 @@
 id: ex-hyperelliptic-double-cover-ramification
 kind: example
 title: Hyperelliptic double covers and their genus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -32,6 +32,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Chs. 2–3 and 6: hyperelliptic curves y^2=P(x) as branched double covers of the sphere and their genus by Riemann–Hurwitz."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

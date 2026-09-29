@@ -2,7 +2,7 @@
 id: cex-smooth-not-etale-affine-line
 kind: counterexample
 title: "The affine line is smooth but not etale"
-status: draft
+status: published
 origin: pipeline
 deps:
   - ex-polynomial-ring-flat-smooth
@@ -26,6 +26,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapter 26 (the affine line is smooth but not etale)"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

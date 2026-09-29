@@ -2,7 +2,7 @@
 id: def-complex-linear-and-compatible-bundle-connections
 kind: definition
 title: Complex-linear and metric-compatible bundle connections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -31,6 +31,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

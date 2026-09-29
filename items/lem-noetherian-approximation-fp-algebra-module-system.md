@@ -2,7 +2,7 @@
 id: lem-noetherian-approximation-fp-algebra-module-system
 kind: lemma
 title: Finite presentation data descend to Noetherian algebra and module stages
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -17,10 +17,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.127.18 (tag 00R1), finite-presentation approximation"

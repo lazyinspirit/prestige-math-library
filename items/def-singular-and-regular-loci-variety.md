@@ -2,7 +2,7 @@
 id: def-singular-and-regular-loci-variety
 kind: definition
 title: "Regular and singular loci"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -13,10 +13,12 @@ deps:
   - lem-local-dimension-reduced-variety-components
   - def-axiom-of-choice
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-a-pure-full-twist-as-an-ordered-configuration-loop
 kind: example
 title: "A pure two-strand full twist as an ordered loop"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations,
@@ -47,6 +47,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

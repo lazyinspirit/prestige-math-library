@@ -2,7 +2,7 @@
 id: def-strongly-continuous-unitary-representation
 kind: definition
 title: Strongly continuous unitary representations, invariant linear subspaces and intertwiners
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,8 @@ sources:
       url: "https://ncatlab.org/nlab/files/BekkaHarpeValetteOnKashdanPropertyT.pdf"
     - title: "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups, Definition 3.4.1, §3.4, printed p. 106"
       url: "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: cor-smooth-variety-classical-scheme-conventions-agree
 kind: corollary
 title: "Classical and scheme smoothness over a perfect field"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-morphism-to-field-classical
@@ -17,10 +17,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.25-29.37; Varieties, Section 33.12"

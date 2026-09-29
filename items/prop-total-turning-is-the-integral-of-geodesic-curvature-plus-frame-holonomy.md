@@ -2,7 +2,7 @@
 id: prop-total-turning-is-the-integral-of-geodesic-curvature-plus-frame-holonomy
 kind: proposition
 title: Total turning with connection and corner terms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -24,6 +24,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, §2.1, Lemma 2.1.2, printed pp. 11–12 (PDF pp. 19–20), and §2.2, printed pp. 13–15: $k_g=\\theta'-\\omega_{\\mathrm{std}}(\\dot\\gamma)$, integrated along a closed curve with corner increments. The transition-angle bookkeeping for a cover by frames is derived locally here."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

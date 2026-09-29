@@ -2,7 +2,7 @@
 id: ex-cut-locus-of-a-point-on-a-flat-circle
 kind: example
 title: Cut locus of a point on a flat circle
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-vector-valued-ftc-and-lipschitz-bound
@@ -27,10 +27,12 @@ deps:
   - thm-path-lifting-for-covering-maps
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

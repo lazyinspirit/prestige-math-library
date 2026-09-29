@@ -2,7 +2,7 @@
 id: thm-complex-specht-modules-are-irreducible
 kind: theorem
 title: Complex Specht modules are irreducible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: false
@@ -23,11 +23,12 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.4(b) and proof, printed p. 16; Theorem 9.4 and complete proof of the submodule dichotomy, printed pp. 31-32"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

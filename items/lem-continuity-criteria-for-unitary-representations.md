@@ -2,7 +2,7 @@
 id: lem-continuity-criteria-for-unitary-representations
 kind: lemma
 title: Continuity criteria for unitary representations
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -16,6 +16,9 @@ sources:
       url: "https://www.math.fau.de/wp-content/uploads/2024/01/rep14.pdf"
     - title: "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups, corrected 2025 notes, §3.4, Proposition 3.4.3, printed pp. 106–107"
       url: "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

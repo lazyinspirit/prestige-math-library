@@ -2,7 +2,7 @@
 id: lem-depth-zero-exact-free-complex-splits
 kind: lemma
 title: Positive-degree exact free complexes split over a depth-zero local ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -12,10 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.102.3 (tag 00MY), depth-zero splitting"

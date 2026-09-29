@@ -2,7 +2,7 @@
 id: ex-a-half-twist-loop-traces-the-standard-generator
 kind: example
 title: "A half-circle configuration loop traces an elementary half twist"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 provenance:
@@ -37,6 +37,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

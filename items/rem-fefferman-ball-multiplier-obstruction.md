@@ -2,7 +2,7 @@
 id: rem-fefferman-ball-multiplier-obstruction
 kind: remark
 title: Fefferman ball multiplier obstruction
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-lp-fourier-multiplier-and-multiplier-norm
@@ -12,6 +12,10 @@ landmark: false
 proved_here: false
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-09-30
+    scope: "Owner-attested statement, attribution, and cited-source check for publication."
+    by: owner
 provenance:
   statement: literature-derived
   proof: not-applicable

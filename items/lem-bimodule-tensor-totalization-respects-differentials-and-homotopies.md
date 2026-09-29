@@ -2,7 +2,7 @@
 id: lem-bimodule-tensor-totalization-respects-differentials-and-homotopies
 kind: lemma
 title: "Bimodule tensor totalization respects differentials and homotopies"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -29,6 +29,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-upper-semicontinuity-jumping-h0
 kind: example
 title: "An upper jump of h0 in a flat projective family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -45,6 +45,9 @@ sources:
       url: "https://stacks.math.columbia.edu/download/coherent.pdf"
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Sections 19.1, 19.6, 19.9, 28.1-28.2"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

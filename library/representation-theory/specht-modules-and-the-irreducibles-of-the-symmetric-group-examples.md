@@ -1,7 +1,7 @@
 ---
 page: specht-modules-and-the-irreducibles-of-the-symmetric-group-examples
 title: "Specht Modules and the Irreducibles of the Symmetric Group — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-polytabloids-for-shape-two-one

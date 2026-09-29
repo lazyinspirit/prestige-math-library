@@ -2,7 +2,7 @@
 id: cex-frobenius-not-smooth
 kind: counterexample
 title: "Frobenius on the affine line is finite flat but not smooth"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -29,6 +29,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapters 25-26 (relative Frobenius)"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

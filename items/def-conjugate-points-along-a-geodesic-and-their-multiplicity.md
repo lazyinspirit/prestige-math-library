@@ -2,7 +2,7 @@
 id: def-conjugate-points-along-a-geodesic-and-their-multiplicity
 kind: definition
 title: Conjugate points along a geodesic and their multiplicity
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-the-tangent-space-of-an-n-manifold-has-dimension-n
@@ -34,10 +34,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

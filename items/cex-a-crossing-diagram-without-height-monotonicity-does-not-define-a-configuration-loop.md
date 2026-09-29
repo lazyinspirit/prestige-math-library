@@ -2,7 +2,7 @@
 id: cex-a-crossing-diagram-without-height-monotonicity-does-not-define-a-configuration-loop
 kind: counterexample
 title: "An embedded height-folded arc has no configuration-loop slices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [lem-a-geometric-braid-slices-to-a-configuration-loop,
@@ -28,6 +28,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

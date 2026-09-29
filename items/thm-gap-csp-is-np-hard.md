@@ -2,7 +2,7 @@
 id: thm-gap-csp-is-np-hard
 kind: theorem
 title: "Constant-gap binary CSP is NP-hard"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-three-sat-to-binary-constraint-graph
@@ -31,6 +31,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

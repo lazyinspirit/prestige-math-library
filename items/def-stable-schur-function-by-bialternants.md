@@ -2,7 +2,7 @@
 id: def-stable-schur-function-by-bialternants
 kind: definition
 title: Stable Schur functions from bialternants
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -14,6 +14,7 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

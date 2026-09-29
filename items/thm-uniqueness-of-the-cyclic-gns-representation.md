@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-the-cyclic-gns-representation
 kind: theorem
 title: Uniqueness of the pointed cyclic GNS representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -29,10 +29,12 @@ deps:
   - thm-gns-construction-for-topological-groups
 axiom_audit: "Assume AC for the canonical GNS construction and its left-translation action. AC implies DC and Countable Choice; Countable Choice is used by the bounded extension theorem and by the countable approximating sequences that prove the extended isometries have closed, dense range. The finite Gram identity, point-mass formulas, given cyclic-density arguments, and uniqueness on the specified orbit span use no further choice."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

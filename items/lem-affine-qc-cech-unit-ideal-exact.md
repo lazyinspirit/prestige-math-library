@@ -2,7 +2,7 @@
 id: lem-affine-qc-cech-unit-ideal-exact
 kind: lemma
 title: Exact principal-open Cech resolution
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-cech-cochain-complex-open-cover
@@ -21,10 +21,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, \u00a7\u00a730.2\u201330.22"

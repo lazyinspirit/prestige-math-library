@@ -2,7 +2,7 @@
 id: ex-rational-degree-as-logarithmic-characteristic
 kind: example
 title: "Rational degree appears as logarithmic characteristic"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

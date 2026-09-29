@@ -2,7 +2,7 @@
 id: thm-cohomology-and-base-change
 kind: theorem
 title: "Cohomology and base change for proper flat coherent families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -73,6 +73,9 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
     - title: "The Stacks Project, Derived Categories of Schemes, §§36.26–36.32"
       url: "https://stacks.math.columbia.edu/download/perfect.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

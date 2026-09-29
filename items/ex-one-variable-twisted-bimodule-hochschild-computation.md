@@ -2,7 +2,7 @@
 id: ex-one-variable-twisted-bimodule-hochschild-computation
 kind: example
 title: One-variable twisted bimodule Hochschild calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, def-enveloping-algebra-and-bimodule-module-dictionary, def-axiom-of-choice]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

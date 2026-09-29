@@ -2,7 +2,7 @@
 id: def-quasi-projective-morphism
 kind: definition
 title: Quasi-projective morphisms before Proj
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-projective-morphism-pre-proj
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, §29.41 Definition 29.41.1(2)"

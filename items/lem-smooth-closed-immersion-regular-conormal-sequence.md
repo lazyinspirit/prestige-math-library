@@ -2,7 +2,7 @@
 id: lem-smooth-closed-immersion-regular-conormal-sequence
 kind: lemma
 title: Smooth closed immersion is regular with exact conormal sequence
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -28,6 +28,9 @@ sources:
     - title: "Ravi Vakil, Foundations of Algebraic Geometry, Classes 53-54"
       url: https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf
       locator: "Class 53 §§2-4; Class 54 §11"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

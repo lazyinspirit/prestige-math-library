@@ -2,7 +2,7 @@
 id: thm-cauchy-kernel-has-power-complete-and-schur-expansions
 kind: theorem
 title: Power-sum, complete, and Schur expansions of the Cauchy kernel
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bidegree-completed-symmetric-function-tensor-product
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

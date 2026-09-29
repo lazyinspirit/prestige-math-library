@@ -2,7 +2,7 @@
 id: ex-tangent-spaces-general-and-special-linear-groups
 kind: example
 title: "Dual numbers compute the tangent spaces of the general and special linear groups"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -38,6 +38,9 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Exercise 5.1.4 (printed p. 35): show that det(I+Bε)=1+trace(B)ε, and conclude that T_I Sl_n(k)={B∈Mat_{n×n}(k):trace(B)=0}"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

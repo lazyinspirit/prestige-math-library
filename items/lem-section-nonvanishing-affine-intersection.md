@@ -2,7 +2,7 @@
 id: lem-section-nonvanishing-affine-intersection
 kind: lemma
 title: "A line-bundle section cuts an affine open inside an affine scheme"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-invertible-sheaf
@@ -13,10 +13,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Properties of Schemes, Lemma 28.27.4 (Tag 01PV)"

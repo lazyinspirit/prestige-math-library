@@ -2,7 +2,7 @@
 id: cex-recurrence-is-not-a-property-shared-by-different-communicating-classes
 kind: counterexample
 title: "Different classes can have different recurrence types"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-accessibility-communication-and-irreducibility
@@ -12,10 +12,12 @@ deps:
   - lem-matrix-chapman-kolmogorov-equations
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

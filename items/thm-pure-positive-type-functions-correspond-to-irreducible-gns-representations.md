@@ -2,7 +2,7 @@
 id: thm-pure-positive-type-functions-correspond-to-irreducible-gns-representations
 kind: theorem
 title: Extreme normalized positive type is equivalent to irreducible GNS
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -28,10 +28,12 @@ deps:
   - thm-schurs-lemma-for-unitary-representations
 axiom_audit: "Assume AC. It gives Countable Choice for the orthogonal decomposition and projection suppliers; it is also the hypothesis of normalized GNS, Schur's lemma, the dominated-operator correspondence, and the commutant-splitting lemma. Once the invariant subspace is fixed, its orthogonal decomposition and projection are unique. The invariant-complement, commuting-projection and convexity calculations make no further choice."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

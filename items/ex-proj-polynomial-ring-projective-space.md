@@ -2,7 +2,7 @@
 id: ex-proj-polynomial-ring-projective-space
 kind: example
 title: "Polynomial Proj charts"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -15,10 +15,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Sections 27.8-27.21"
@@ -61,8 +63,12 @@ the space is the one-point scheme $\operatorname{Spec}k$.
 **Proof technique:** direct: compute the degree-zero localisations of the polynomial ring at the variables and match them with the published charts and transition formulas.
 
 1.1 Chart coordinates. Fix $i$. A degree-zero element of $S[x_i^{-1}]$ has the form $a/x_i^d$ with $a$ homogeneous of degree $d$, and every monomial $x_0^{a_0}\cdots x_n^{a_n}$ of degree $d$ gives $x_0^{a_0}\cdots x_n^{a_n}/x_i^{d}= \prod_{\ell\ne i}(x_\ell/x_i)^{a_\ell}$; hence $$S_{(x_i)}=k\bigl[x_\ell/x_i:\ell\ne i\bigr],$$ the polynomial ring in the $n$ variables $x^{(i)}_\ell:=x_\ell/x_i$. [algebra]
+
 2.1 The charts. Under the assumed AC [F4], by [F2] the chart $D_+(x_i)$ is $\operatorname{Spec}S_{(x_i)}=\operatorname{Spec}k[x_\ell/x_i:\ell\ne i]$, which is exactly the $i$-th standard chart $U_i=\operatorname{Spec}k[x^{(i)}_\ell:\ell\ne i]$ of $\mathbb P^n_k$ under the identification $x^{(i)}_\ell=x_\ell/x_i$ of [F1]. [F1, F2, F4, step 1.1]
+
 2.2 The overlap. On $D_+(x_ix_j)$ both $x_i$ and $x_j$ are invertible, so the relation $$\frac{x_a}{x_j}=\frac{x_a/x_i}{x_j/x_i}$$ is an identity of regular functions in the localised rings; expressed in the coordinates of step 1.1 it reads $x^{(j)}_a=x^{(i)}_a/x^{(i)}_j$, which is exactly the transition formula of the published charts in [F1], together with $x^{(j)}_i=1/x^{(i)}_j$ for $a=i$. Hence the overlapping charts are glued by the same isomorphisms. [F1, step 1.1, algebra]
+
 2.3 The case $n=0$. For $n=0$ we have $S=k[x_0]$ with $S_{(x_0)}=k$ by step 1.1 with $n=0$ variables, so $\operatorname{Proj}k[x_0]=D_+(x_0)=\operatorname{Spec}k$, which is the one-point scheme of [F3]; equivalently $\mathbb P^0_k=\operatorname{Spec}k$ in the published charts. [F1, F3, step 1.1, cases: n=0]
+
 3.1 Conclusion. Steps 2.1 and 2.2 identify the charts and gluing of $\operatorname{Proj}k[x_0,\dots,x_n]$ with those of $\mathbb P^n_k$, in agreement with the canonical isomorphism of [F1], and step 2.3 settles $n=0$; the displayed coordinate change is the transition formula of the published charts. [F1, step 2.1, step 2.2, step 2.3]
 \qed

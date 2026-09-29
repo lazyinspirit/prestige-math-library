@@ -2,7 +2,7 @@
 id: ex-two-term-tensor-complex-koszul-signs
 kind: example
 title: "The four entries and Koszul signs in a two-term tensor bicomplex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,6 +25,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 generation:
   role: example
 ---

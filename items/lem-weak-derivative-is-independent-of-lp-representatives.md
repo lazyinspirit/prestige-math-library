@@ -2,7 +2,7 @@
 id: lem-weak-derivative-is-independent-of-lp-representatives
 kind: lemma
 title: Weak differentiation ignores null-set changes
-status: draft
+status: published
 origin: pipeline
 deps: [def-weak-derivative-of-a-locally-integrable-function, def-l-p-space-as-a-quotient-by-null-functions, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-holder-inequality-for-integrals, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, def-countable-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

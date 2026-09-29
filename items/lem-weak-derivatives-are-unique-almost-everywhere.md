@@ -2,7 +2,7 @@
 id: lem-weak-derivatives-are-unique-almost-everywhere
 kind: lemma
 title: Uniqueness of a weak derivative as an almost-everywhere class
-status: draft
+status: published
 origin: pipeline
 deps: [def-weak-derivative-of-a-locally-integrable-function, def-locally-integrable-function-as-a-regular-distribution, thm-locally-integrable-functions-embed-in-distributions, def-countable-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: finite-proper-and-projective-morphisms
 title: Finite Proper and Projective Morphisms
-status: draft
+status: published
 items:
   - def-affine-local-quasi-coherent-algebra
   - def-fpqc-morphism-schemes

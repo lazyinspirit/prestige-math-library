@@ -2,7 +2,7 @@
 id: def-proj-graded-ring-points
 kind: definition
 title: "Points of Proj of a graded ring"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-graded-ring-and-graded-module
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Section 27.8 (Tag 01M3)"

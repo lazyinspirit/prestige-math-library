@@ -1,7 +1,7 @@
 ---
 page: riemann-surfaces-branched-maps-and-differentials-examples
 title: "Riemann Surfaces, Branched Maps, and Differentials: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-basic-riemann-surface-atlases

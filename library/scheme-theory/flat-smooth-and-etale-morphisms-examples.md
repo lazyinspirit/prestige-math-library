@@ -1,7 +1,7 @@
 ---
 page: flat-smooth-and-etale-morphisms-examples
 title: Flat Smooth and Etale Morphisms — Examples
-status: draft
+status: published
 items:
 - ex-polynomial-ring-flat-smooth
 - ex-standard-etale-square-root

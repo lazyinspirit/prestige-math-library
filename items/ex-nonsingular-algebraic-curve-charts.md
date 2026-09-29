@@ -2,7 +2,7 @@
 id: ex-nonsingular-algebraic-curve-charts
 kind: example
 title: Nonsingular affine and projective curves as Riemann surfaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -33,6 +33,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 1–2, examples of Riemann surfaces and of algebraic curves, used as a cross-check of the chart and compactness statements."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

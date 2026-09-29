@@ -2,7 +2,7 @@
 id: ex-genus-two-orientable-surface-polygonal-schema
 kind: example
 title: "Genus-two orientable polygon"
-status: draft
+status: published
 origin: pipeline
 deps: [def-polygonal-schema-and-edge-pairing, def-quotient-topology, lem-polygonal-schema-reduction-moves, ex-torus-polygonal-schema, def-connected-sum-of-compact-surfaces, def-euler-characteristic-of-a-finite-cw-complex, def-r-orientation-of-a-topological-manifold, def-orientation-local-system-and-orientation-cover]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 2, printed pp.3–5"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

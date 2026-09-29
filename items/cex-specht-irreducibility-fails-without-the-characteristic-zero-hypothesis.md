@@ -2,7 +2,7 @@
 id: cex-specht-irreducibility-fails-without-the-characteristic-zero-hypothesis
 kind: counterexample
 title: A reducible Specht module in characteristic two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-young-subgroup-tabloid-and-permutation-module, def-row-and-column-stabilizers-of-a-tableau, def-column-antisymmetrizer-polytabloid-and-specht-module, thm-sign-is-a-homomorphism, def-finite-dimensional-representation-of-a-group-over-a-field, def-subrepresentation-and-irreducible-representation]
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: lem-regular-immersion-koszul-ext-sheaf
 kind: lemma
 title: Koszul sheaf Ext of a smooth regular immersion is concentrated in codimension
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -46,6 +46,9 @@ sources:
     - title: "Ravi Vakil, Foundations of Algebraic Geometry, Classes 53-54"
       url: https://math.stanford.edu/~vakil/0506-216/216Cjun2807.pdf
       locator: "Class 53 §§1-5 and Class 54 §§7, 11"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

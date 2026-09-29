@@ -2,7 +2,7 @@
 id: ex-annulus-harmonic-measure-of-boundary-circles
 kind: example
 title: "Harmonic measure of the two annulus boundary circles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -36,6 +36,7 @@ sources:
       locator: "Section 4.2, PDF pp. 37-39: harmonic measure of an annulus by the logarithmic radius"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

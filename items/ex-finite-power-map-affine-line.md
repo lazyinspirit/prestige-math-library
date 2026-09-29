@@ -2,7 +2,7 @@
 id: ex-finite-power-map-affine-line
 kind: example
 title: Finite power map of the affine line
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-polynomial-ring-over-a-field-is-a-pid
@@ -29,10 +29,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stacks Project, Morphisms of Schemes, Definition 29.45.1 (tag 01WH)

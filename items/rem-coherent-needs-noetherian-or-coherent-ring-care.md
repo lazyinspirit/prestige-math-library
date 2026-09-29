@@ -2,7 +2,7 @@
 id: rem-coherent-needs-noetherian-or-coherent-ring-care
 kind: remark
 title: "Finite type need not mean coherent"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-coherent-module-scheme
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

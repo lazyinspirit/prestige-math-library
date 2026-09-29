@@ -2,7 +2,7 @@
 id: lem-hochschild-chains-are-bar-tensor-chains
 kind: lemma
 title: Hochschild chains are bar tensor chains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-enveloping-algebra-and-bimodule-module-dictionary, def-two-sided-bar-resolution-of-an-associative-algebra, def-hochschild-chain-complex-of-a-bimodule, thm-universal-property-of-module-tensor-products, cor-finite-iterated-tensor-products-represent-multilinear-maps, thm-unit-isomorphisms-for-module-tensor-products]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

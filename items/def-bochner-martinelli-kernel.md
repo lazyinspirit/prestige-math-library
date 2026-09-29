@@ -2,7 +2,7 @@
 id: def-bochner-martinelli-kernel
 kind: definition
 title: The normalized Bochner–Martinelli kernel
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bigraded-complex-differential-forms
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

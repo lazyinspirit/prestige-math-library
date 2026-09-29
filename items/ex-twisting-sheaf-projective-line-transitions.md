@@ -2,7 +2,7 @@
 id: ex-twisting-sheaf-projective-line-transitions
 kind: example
 title: "Twist transitions on the projective line"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -21,6 +21,9 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
     - title: "Gao-Zhang, Lectures on Algebraic Geometry, Chapter 5"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example
@@ -54,6 +57,8 @@ local generators of the invertible sheaf $\mathcal O(n)$
 **Proof technique:** direct: compute the degree-zero localisations of the shifted modules and compare the resulting local generators on the overlap.
 
 1.1 The chart modules. The AC premise [F4] licenses the associated-sheaf and Proj charts [F1]–[F3]. For $n\in\mathbb Z$ the module $S(n)_{(x_0)}=(S(n)[x_0^{-1}])_0$ consists of the classes $a/x_0^{k}$ with $a\in S(n)_k=S_{n+k}$ homogeneous of degree $n+k$. Since $x_0$ is a unit in the localisation, every such class equals $(a/x_0^{\,n+k})\cdot x_0^{\,n}$ with $a/x_0^{\,n+k}\in S_{(x_0)}=k[t]$; hence $e_0:=x_0^{\,n}$ generates $S(n)_{(x_0)}$ over $k[t]$, and symmetrically $e_1:=x_1^{\,n}$ generates $S(n)_{(x_1)}$ over $k[t^{-1}]$. [F1, F2, F3, F4, algebra]
+
 2.1 The overlap. On the overlap $D_+(x_0x_1)$ the ring is $k[t,t^{-1}]$ with $t=x_1/x_0$, so $x_1=tx_0$ and therefore $x_1^{\,n}=t^{\,n}x_0^{\,n}$ holds in the localisation of $S$ at $x_0x_1$ for every integer $n$, positive or negative; under the identifications of step 1.1 this is precisely the frame relation $$e_1=t^{\,n}e_0$$ on $U_0\cap U_1$. [F1, F2, step 1.1, algebra]
+
 3.1 Conclusion. The frame section $e_i$ is nowhere vanishing on $U_i$, and the transition relation $e_1=t^ne_0$ is exactly the change of frame of the invertible sheaf $\mathcal O(n)$ from the $0$-chart to the $1$-chart: for $n=0$ both frames are the constant function $1$ and the relation is $e_1=e_0$; for $n=1$ it is $e_1=te_0$; for $n=-1$ it is $e_1=t^{-1}e_0$ with $t^{-1}=x_0/x_1$ the coordinate on $U_1$. [F2, F3, step 1.1, step 2.1, cases: n=0 and negative n]
 \qed

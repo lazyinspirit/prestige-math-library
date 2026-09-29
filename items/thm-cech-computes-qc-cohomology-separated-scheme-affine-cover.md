@@ -2,7 +2,7 @@
 id: thm-cech-computes-qc-cohomology-separated-scheme-affine-cover
 kind: theorem
 title: "Cech cohomology computes quasi-coherent cohomology on a separated scheme"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-separated-morphism-schemes
@@ -26,6 +26,9 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Section 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

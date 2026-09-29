@@ -2,7 +2,7 @@
 id: def-invariant-polynomial-on-a-matrix-lie-algebra
 kind: definition
 title: Invariant symmetric polynomials on a matrix Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -23,6 +23,7 @@ sources:
       locator: Appendix C, printed pp. 289–312, Pfaffian invariant polynomial
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

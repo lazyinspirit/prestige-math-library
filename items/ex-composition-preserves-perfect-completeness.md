@@ -2,7 +2,7 @@
 id: ex-composition-preserves-perfect-completeness
 kind: example
 title: "A single equality edge through robust composition"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-composition-preserves-perfect-completeness
@@ -24,6 +24,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
+  audited: 2026-09-30
 generation:
   role: example
 ---

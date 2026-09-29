@@ -2,7 +2,7 @@
 id: ex-two-variable-diagonal-koszul-signs
 kind: example
 title: Two-variable diagonal Koszul signs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-axiom-of-choice, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, def-enveloping-algebra-and-bimodule-module-dictionary, thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, cor-polynomial-diagonal-bimodule-hochschild-homology]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

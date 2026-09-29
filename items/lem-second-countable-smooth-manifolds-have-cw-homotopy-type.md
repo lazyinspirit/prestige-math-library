@@ -2,7 +2,7 @@
 id: lem-second-countable-smooth-manifolds-have-cw-homotopy-type
 kind: lemma
 title: Smooth manifolds have CW homotopy type
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -39,10 +39,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology

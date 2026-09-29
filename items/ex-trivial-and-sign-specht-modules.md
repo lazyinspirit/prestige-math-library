@@ -2,7 +2,7 @@
 id: ex-trivial-and-sign-specht-modules
 kind: example
 title: The row and column Specht modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-partition-young-diagram-and-conjugate-partition, def-column-antisymmetrizer-polytabloid-and-specht-module, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-young-subgroup-tabloid-and-permutation-module, lem-polytabloid-covariance-and-column-sign, thm-sign-is-a-homomorphism, def-trivial-regular-and-permutation-representations, def-sign-representation-and-restriction-of-a-representation]
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

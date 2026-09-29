@@ -2,7 +2,7 @@
 id: lem-fibre-dimension-upper-semicont-proper
 kind: lemma
 title: "Upper semicontinuity of proper fibre dimension"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-proper-morphism
@@ -28,6 +28,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/more-morphisms.pdf
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.28-29.30"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

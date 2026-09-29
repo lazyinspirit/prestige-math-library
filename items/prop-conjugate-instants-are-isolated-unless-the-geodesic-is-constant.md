@@ -2,7 +2,7 @@
 id: prop-conjugate-instants-are-isolated-unless-the-geodesic-is-constant
 kind: proposition
 title: "Conjugate instants are isolated unless the geodesic is constant"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-double-orthogonal-complement-and-dimension
@@ -27,10 +27,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

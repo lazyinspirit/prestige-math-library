@@ -2,7 +2,7 @@
 id: thm-acl-characterisation-of-w-one-p
 kind: theorem
 title: The ACL characterisation of $W^{1,p}$
-status: draft
+status: published
 origin: pipeline
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, def-absolute-continuity-on-almost-every-coordinate-line, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-integral-over-a-measurable-set, lem-acl-representatives-reconstruct-weak-gradients-by-fubini, lem-weak-derivatives-are-unique-almost-everywhere, lem-complex-translation-and-approximate-identity-interfaces, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-c1-lipschitz-ac-bv-hierarchy, thm-tonelli-and-fubini-for-completed-product-measures, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-holder-inequality-for-integrals, thm-lebesgue-measure-of-a-box-of-every-kind, thm-fatou-lemma, thm-riesz-fischer-completeness-of-l-p, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, thm-extreme-value-metric, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, lem-test-function-cutoffs-and-euclidean-localization, thm-heine-borel-rn]
 landmark: false
@@ -15,6 +15,9 @@ sources:
     - title: Juha Kinnunen, Sobolev Spaces (2026), Chapter 2 §2.6
       url: https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf
       locator: Theorem 2.36 (Nikodym, ACL characterisation), statement printed p. 55, proof pp. 56–59
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

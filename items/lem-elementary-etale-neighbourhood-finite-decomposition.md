@@ -2,7 +2,7 @@
 id: lem-elementary-etale-neighbourhood-finite-decomposition
 kind: lemma
 title: "Finite decomposition around isolated fibre points after an elementary étale change"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -21,10 +21,12 @@ deps:
   - thm-proper-morphism-closed-image
   - lem-separated-stable-under-base-change
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, More on Morphisms, Section 37.41 (étale neighbourhoods)"

@@ -2,7 +2,7 @@
 id: thm-cohomological-dimension-noetherian-scheme
 kind: theorem
 title: Dimension bound for quasi-coherent cohomology on a Noetherian scheme
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-locally-noetherian-and-noetherian-scheme
@@ -20,10 +20,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, \u00a7\u00a730.2\u201330.22"

@@ -2,7 +2,7 @@
 id: lem-birational-morphism-principal-open-isomorphism
 kind: lemma
 title: "Birational morphisms restrict to isomorphisms between principal affine opens"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-birational-morphism-schemes
@@ -27,6 +27,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/0BAC
     - title: "The Stacks Project, Morphisms of Schemes, Definition 29.51.1 (tag 01RO)"
       url: https://stacks.math.columbia.edu/tag/01RO
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-internal-hom-fp-qc
 kind: lemma
 title: Internal Hom from a finitely presented sheaf is quasi-coherent
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-internal-hom-qc-sheaves
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

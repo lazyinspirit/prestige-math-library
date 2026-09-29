@@ -2,7 +2,7 @@
 id: def-invariant-inner-product-on-a-tabloid-module
 kind: definition
 title: Invariant Hermitian product on a tabloid module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-young-subgroup-tabloid-and-permutation-module]
@@ -25,6 +25,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

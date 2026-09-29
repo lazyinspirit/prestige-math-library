@@ -2,7 +2,7 @@
 id: cor-polar-integration-may-discard-the-cut-locus
 kind: corollary
 title: Polar integration may discard the cut locus
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-additivity-of-the-nonnegative-lebesgue-integral
@@ -84,10 +84,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

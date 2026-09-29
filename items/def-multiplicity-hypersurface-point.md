@@ -2,7 +2,7 @@
 id: def-multiplicity-hypersurface-point
 kind: definition
 title: "Multiplicity of a hypersurface equation at a rational point"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -21,10 +21,12 @@ deps:
   - lem-field-is-a-commutative-ring
   - cor-multivariate-polynomial-ring-over-a-domain-is-a-domain
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-proper-holomorphic-map-riemann-surfaces-has-degree
 kind: theorem
 title: Degree of a proper holomorphic map of Riemann surfaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -34,6 +34,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 3, Theorem 3.1 and the discussion of proper branched covers, printed pp. 16–18."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

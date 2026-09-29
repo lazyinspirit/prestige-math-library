@@ -2,7 +2,7 @@
 id: lem-bessel-potentials-shift-sobolev-order-isometrically
 kind: lemma
 title: "Bessel potentials shift Sobolev order"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces
@@ -28,6 +28,7 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

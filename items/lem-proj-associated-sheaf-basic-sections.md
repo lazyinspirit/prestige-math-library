@@ -2,7 +2,7 @@
 id: lem-proj-associated-sheaf-basic-sections
 kind: lemma
 title: "Sections of a graded-module sheaf on a standard open"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-associated-sheaf-graded-module-proj
@@ -22,6 +22,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -80,10 +83,16 @@ and both sides of (1) are zero.
 **Proof technique:** direct: identify each chart with its affine spectrum, read off the section identifications from the affine associated-sheaf theorem, compare restriction maps through the localisations at $\tau_{f,g}$, and verify quasi-coherence chart by chart.
 
 1.1 Sections on a chart. Fix $f\in S_+$ homogeneous of positive degree. By [F1] the chart $D_+(f)$ is isomorphic to $\operatorname{Spec}S_{(f)}$, and by [F2] the restriction of $\widetilde M$ to it is the associated sheaf of $M_{(f)}$. Applying [F2] with the unit section $h=1\in S_{(f)}$, whose distinguished open is all of $\operatorname{Spec}S_{(f)}$, gives $\Gamma(D_+(f),\widetilde M)=(M_{(f)})_1=M_{(f)}$, which is claim (1); the identification is the one specified on the chart, so it is canonical and natural in $M$ through the functoriality of [F2]. [F1, F2]
+
 1.2 Functoriality on charts. A degree-zero homomorphism $\varphi:M\to N$ of graded $S$-modules induces $S_{(f)}$-linear maps $\varphi_{(f)}:M_{(f)}\to N_{(f)}$ commuting with the structure maps, hence morphisms of associated sheaves on each chart by [F2], and these glue because the identifications of [F1], [F2] are compatible on overlaps, as recorded in [F4]; composition and identities are respected because they are on localisations. This proves (3). [F2, F4, construct]
+
 1.3 Restriction to a smaller chart. Let $g$ be homogeneous of positive degree. By [F3] the open $D_+(fg)$ is the distinguished open $D(\tau_{f,g})$ of $\operatorname{Spec}S_{(f)}$, so by [F2] applied to $h=\tau_{f,g}$ the restriction map $\Gamma(D_+(f),\widetilde M)\to\Gamma(D_+(fg),\widetilde M)$ is the localisation $(M_{(f)})\to(M_{(f)})_{\tau_{f,g}}$, and [F4] identifies its target with $M_{(fg)}$. Thus the restriction factors through the localisation at $\tau_{f,g}$ and agrees with the degree-zero localisation $M_{(f)}\to M_{(fg)}$; this is claim (2). [F2, F3, F4, algebra]
+
 1.4 Compatibility on overlaps and the cocycle. For homogeneous positive-degree $f,g,h$ the same computation with $M_{(fg)}$ and the degree-zero element $h^{\deg f+\deg g}/(fg)^{\deg h}$ shows that the composite restriction $D_+(f)\to D_+(fg)\to D_+(fgh)$ equals the localisation $M_{(f)}\to M_{(fgh)}$ directly, and the analogous composites from $M_{(g)}$ and $M_{(h)}$ agree, since all of them are the canonical localisation map into the common localisation $(M[f^{-1},g^{-1},h^{-1}])_0$; the uniqueness of the identification in [F4] therefore gives the cocycle condition on triple overlaps. [F3, F4, algebra]
+
 1.5 Quasi-coherence. The charts $D_+(f)$ with $f\in S_+$ homogeneous of positive degree form a basis of $X$ by [F6] and in particular cover $X$; on each chart $D_+(f)\cong\operatorname{Spec}S_{(f)}$ the sheaf $\widetilde M$ restricts to the associated sheaf of an $S_{(f)}$-module by [F2], and quasi-coherence is local by [F5]. Hence $\widetilde M$ is quasi-coherent, which is claim (4). [F2, F5, F6, construct]
+
 1.6 Empty chart boundary. If $f$ is nilpotent then every prime contains $f$, so $D_+(f)=\varnothing$; then $S_{(f)}=0$ (the localisation of a ring at a nilpotent element is the zero ring) and hence $M_{(f)}=0$, while $\Gamma(\varnothing,\widetilde M)=0$ by the sheaf axiom, so the identification of (1) reads $0=0$ and remains valid; this also covers $S=0$ and the empty $S_+$. [F1, F2, cases: nilpotent or not]
+
 2.1 Conclusion. Steps 1.1 and 1.2 give the natural section identifications of (1) and the functoriality of (3), step 1.3 gives the restriction description of (2), step 1.4 its cocycle compatibility, and step 1.5 gives quasi-coherence (4), empty charts included by step 1.6. The Axiom of Choice [A1] is inherited only through the affine associated-sheaf existence theorem [F2]; no choice is made in this argument. [A1, F2, step 1.1, step 1.3, step 1.5, step 1.6]
 \qed

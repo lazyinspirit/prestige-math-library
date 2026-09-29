@@ -2,7 +2,7 @@
 id: rem-the-morse-index-theorem-for-geodesics
 kind: remark
 title: The Morse index theorem for geodesics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-conjugate-points-along-a-geodesic-and-their-multiplicity
@@ -18,6 +18,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

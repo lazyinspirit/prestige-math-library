@@ -2,7 +2,7 @@
 id: lem-fibrewise-exact-flat-complex-lifts-noetherian-target
 kind: lemma
 title: Fibrewise exact finite flat complexes lift over a Noetherian target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.99.5 (tag 00MI), exact complexes and flat cokernels"

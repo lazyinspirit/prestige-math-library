@@ -2,7 +2,7 @@
 id: def-green-function-plane-domain
 kind: definition
 title: "The canonical Green kernel of a plane domain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -24,6 +24,7 @@ sources:
       locator: "Section 3, printed pp. 183-186: Definition 3.4 and properties (a)-(c) for Green functions with a pole"
 verification:
   precheck: n/a
+  audited: 2026-09-30
 ---
 
 ## Definition

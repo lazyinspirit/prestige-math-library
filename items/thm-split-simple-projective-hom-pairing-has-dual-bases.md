@@ -2,7 +2,7 @@
 id: thm-split-simple-projective-hom-pairing-has-dual-bases
 kind: theorem
 title: "Projective and simple classes are dual bases under splitting"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -35,10 +35,12 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

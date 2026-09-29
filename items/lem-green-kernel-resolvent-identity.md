@@ -2,7 +2,7 @@
 id: lem-green-kernel-resolvent-identity
 kind: lemma
 title: "Green-kernel resolvent identity"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -16,10 +16,12 @@ deps:
   - thm-tonelli-for-nonnegative-double-series
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

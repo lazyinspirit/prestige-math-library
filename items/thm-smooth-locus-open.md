@@ -2,7 +2,7 @@
 id: thm-smooth-locus-open
 kind: theorem
 title: "The smooth locus is open"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-locus-morphism
@@ -17,10 +17,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.34 (smooth morphisms, tags 01V4-01V9)"

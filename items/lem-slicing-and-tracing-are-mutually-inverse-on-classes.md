@@ -2,7 +2,7 @@
 id: lem-slicing-and-tracing-are-mutually-inverse-on-classes
 kind: lemma
 title: "Tracing and slicing are inverse on relative classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [lem-a-configuration-loop-traces-a-geometric-braid,
@@ -36,6 +36,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

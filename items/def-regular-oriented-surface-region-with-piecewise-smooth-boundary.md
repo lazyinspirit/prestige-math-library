@@ -2,7 +2,7 @@
 id: def-regular-oriented-surface-region-with-piecewise-smooth-boundary
 kind: definition
 title: "Regular oriented surface regions with corners"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-induced-boundary-orientation
@@ -14,10 +14,12 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9"

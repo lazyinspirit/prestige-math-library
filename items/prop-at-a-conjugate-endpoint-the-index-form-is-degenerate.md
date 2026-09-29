@@ -2,7 +2,7 @@
 id: prop-at-a-conjugate-endpoint-the-index-form-is-degenerate
 kind: proposition
 title: At a conjugate endpoint the index form is degenerate
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-exponential-map-scales-geodesic-time
@@ -50,6 +50,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "§23.3, printed pp.165–169: degeneracy of the index form at a conjugate endpoint and non-strict minimality in the sphere model."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

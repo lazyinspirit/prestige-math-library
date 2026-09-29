@@ -2,7 +2,7 @@
 id: thm-semisimple-flag-variety-smooth-projective
 kind: theorem
 title: A semisimple flag variety is smooth and projective
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps:
@@ -24,6 +24,9 @@ sources:
     - title: "Michel Brion, Lectures on the Geometry of Flag Varieties"
       url: https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf
       locator: "§§1.1-1.2 (flag varieties as projective quotients)"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

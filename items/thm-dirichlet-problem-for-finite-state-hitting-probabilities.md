@@ -2,7 +2,7 @@
 id: thm-dirichlet-problem-for-finite-state-hitting-probabilities
 kind: theorem
 title: "Bounded Dirichlet problem for hitting probabilities"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -22,10 +22,12 @@ deps:
 landmark: false
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"

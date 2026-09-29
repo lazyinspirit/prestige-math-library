@@ -2,7 +2,7 @@
 id: lem-concatenation-test-enforces-a-shared-prefix
 kind: lemma
 title: "Concatenation testing enforces the same decoded prefix"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-pcp-of-proximity-and-concatenation-test
@@ -20,6 +20,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

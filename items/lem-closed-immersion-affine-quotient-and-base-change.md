@@ -2,7 +2,7 @@
 id: lem-closed-immersion-affine-quotient-and-base-change
 kind: lemma
 title: "Closed immersions are affine quotients and survive base change"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -37,10 +37,12 @@ deps:
   - thm-morphisms-into-affine-scheme-global-sections
   - def-base-change-morphism-schemes
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Schemes, Lemma 26.8.2 (tag 01IH)"

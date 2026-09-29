@@ -2,7 +2,7 @@
 id: ex-poisson-jensen-with-a-repeated-zero
 kind: example
 title: "A repeated zero contributes its Green kernel twice"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

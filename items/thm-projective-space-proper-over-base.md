@@ -2,7 +2,7 @@
 id: thm-projective-space-proper-over-base
 kind: theorem
 title: "Finite-dimensional projective space is proper over every base"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-relative-projective-space-standard-charts
@@ -27,10 +27,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.44.5 (tag 01WC) and Section 29.42 (tag 01W0), properness of projective space"

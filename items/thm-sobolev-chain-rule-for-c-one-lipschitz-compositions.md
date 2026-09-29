@@ -2,7 +2,7 @@
 id: thm-sobolev-chain-rule-for-c-one-lipschitz-compositions
 kind: theorem
 title: Chain rule for a $C^1$ function with bounded derivative
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-l-infinity-on-a-measure-space, def-calligraphic-l-p-on-a-measure-space, def-l-p-space-as-a-quotient-by-null-functions, thm-acl-characterisation-of-w-one-p, def-absolute-continuity-on-almost-every-coordinate-line, def-absolutely-continuous-function, lem-weak-derivative-linearity-locality-and-commutation, thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous, cor-bounded-derivative-implies-lipschitz, thm-chain-rule, thm-lebesgue-measure-of-a-box-of-every-kind, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-generalized-holder-inequality-for-products, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, cor-continuous-functions-are-borel-measurable, thm-composition-with-borel-functions-preserves-measurability, lem-test-function-cutoffs-and-euclidean-localization, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-finite-sigma-finite-and-semifinite-measures, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -22,6 +22,9 @@ sources:
     - title: Joa Weber, Introduction to Sobolev Spaces (UNICAMP lecture notes)
       url: https://www.math.stonybrook.edu/~joa/PUBLICATIONS/SOBOLEV.pdf
       locator: Chapter 4 §4.1.8, Proposition 4.1.21 (chain rule – composition), printed p. 25
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

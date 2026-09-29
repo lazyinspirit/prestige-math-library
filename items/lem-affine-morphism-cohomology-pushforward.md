@@ -2,7 +2,7 @@
 id: lem-affine-morphism-cohomology-pushforward
 kind: lemma
 title: "Affine pushforward is compatible with sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-affine-morphism-schemes
@@ -22,10 +22,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, Sections 30.2-30.22"

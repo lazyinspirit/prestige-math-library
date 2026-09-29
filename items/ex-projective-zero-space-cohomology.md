@@ -2,7 +2,7 @@
 id: ex-projective-zero-space-cohomology
 kind: example
 title: "Projective zero-space over an affine base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -28,10 +28,12 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, Section 30.8 (Tag 01XV)"
@@ -117,7 +119,11 @@ $\mathbb P^n_\varnothing=\varnothing$.
 **Proof technique:** direct: identify the single standard chart with $\operatorname{Spec}A$, compute the degree-zero localisations defining the twists, transport the resulting trivialisations into the affine vanishing theorem, and record the relative case and the degenerate boundaries.
 
 1.1 The single chart covers the space. By [F1] the points of $\operatorname{Proj}A[x_0]$ omit $x_0$, so every point lies in $D_+(x_0)$; hence the single standard chart is the whole space, and $\mathbb P^0_A=D_+(x_0)=\operatorname{Spec}\bigl((A[x_0]_{x_0})_0\bigr)$. [F1]
+
 2.1 The chart ring. The map $A\to(A[x_0]_{x_0})_0$, $a\mapsto a/1$, is an isomorphism: a degree-zero fraction has the form $a x_0^m/x_0^m=a/1$, and $a/1=b/1$ forces $a=b$ by comparing coefficients after clearing the powers of $x_0$; for $A=0$ both rings are zero. Hence $\mathbb P^0_A\cong\operatorname{Spec}A$ for every commutative ring $A$. [F2, step 1.1, algebra]
+
 2.2 The twisting sheaves are trivial. By [F3] and [F2], for every $d\in\mathbb Z$ the sections of $\mathcal O(d)$ on the chart are $A[x_0](d)_{(x_0)}=A\cdot x_0^d$, a free rank-one $A$-module, and the associated sheaf of this module on $\operatorname{Spec}A$ is isomorphic to $\widetilde A=\mathcal O$ through the module isomorphism $c\mapsto cx_0^d$; since the chart is the whole space by [step 1.1], this is a global isomorphism $\mathcal O_{\mathbb P^0_A}(d)\cong\mathcal O_{\operatorname{Spec}A}$, valid for every $d\in\mathbb Z$ including $d=0$ and negative $d$. [F2, F3, step 1.1]
+
 3.1 The cohomology. The isomorphism of [step 2.2] identifies $H^q(\mathbb P^0_A,\mathcal O(d))$ with $H^q(\operatorname{Spec}A,\mathcal O)$; by [F4] the target is $A$ in degree zero, through the canonical isomorphism $A\to\Gamma(\operatorname{Spec}A,\mathcal O)$, and vanishes for $q>0$ because the structure sheaf is quasi-coherent on the affine scheme $\operatorname{Spec}A$. This gives $H^0(\mathbb P^0_A,\mathcal O(d))\cong A$ and $H^q(\mathbb P^0_A,\mathcal O(d))=0$ for $q>0$; the $n=0$ clause of [F5] states the same conclusion directly, independent of the trivialisation. [F4, F5, step 2.2]
+
 4.1 General base, boundaries and choice accounting. For an arbitrary base scheme $S$, [F6] gives $\mathbb P^0_S\cong S$ with one chart and no gluing, and $\mathbb P^0_\varnothing=\varnothing$; only this identification is asserted, because for a nonaffine base the same reasoning would reduce the question to $H^q(S,\mathcal O_S)$, which is not claimed to vanish. The cases $A=0$, where $\operatorname{Spec}A=\varnothing$ and the degree-zero group is the zero ring $A=0$ in agreement with [step 2.1] and [step 3.1], and $d=0$, where $\mathcal O(0)=\mathcal O$ by [F3] and [step 2.2] reduces to the identity, are both included. The Axiom of Choice [A1] is inherited through the affine vanishing and global-sections suppliers of [F4] and the projective cohomology of [F5]; no chart, resolution or trivialisation is chosen here. [A1, F3, F4, F5, F6, step 2.1, step 2.2, step 3.1, cases: zero ring and d=0 and general base] ∎

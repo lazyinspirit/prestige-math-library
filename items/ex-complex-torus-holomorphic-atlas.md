@@ -2,7 +2,7 @@
 id: ex-complex-torus-holomorphic-atlas
 kind: example
 title: The complex torus as a Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -30,6 +30,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 1–2, examples of Riemann surfaces; used as an independent cross-check of the quotient charts."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

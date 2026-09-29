@@ -2,7 +2,7 @@
 id: thm-residue-theorem-compact-riemann-surface
 kind: theorem
 title: Residue theorem on a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -37,6 +37,9 @@ sources:
     - title: "Vladimir Hinich, Riemann Surfaces, lecture 7"
       url: https://math.haifa.ac.il/hinich/RSlec/lec7.pdf
       locator: "§8.4.3, Proposition on p. 7: triangulate so that all poles lie in triangle interiors, then cancel the two appearances of every edge."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

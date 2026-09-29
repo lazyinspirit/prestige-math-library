@@ -2,7 +2,7 @@
 id: ex-absolute-value-has-dirac-second-distributional-derivative
 kind: example
 title: Absolute value has a Dirac second derivative
-status: draft
+status: published
 origin: pipeline
 deps: [ex-absolute-value-has-a-weak-first-derivative, def-locally-integrable-function-as-a-regular-distribution, def-distributional-derivative, def-dirac-delta-and-its-derivatives, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-test-function-space-d-of-an-open-set, lem-classical-derivatives-are-weak-derivatives, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-locally-integrable-functions-embed-in-distributions, lem-euclidean-bump-for-a-compact-set-inside-an-open-set, def-countable-choice]
 landmark: false
@@ -19,6 +19,9 @@ sources:
     - title: John K. Hunter, Notes on Partial Differential Equations (2014)
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Chapter 3 §3.1, printed pp. 47–49
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

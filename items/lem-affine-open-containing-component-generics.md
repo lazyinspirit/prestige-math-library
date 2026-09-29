@@ -2,7 +2,7 @@
 id: lem-affine-open-containing-component-generics
 kind: lemma
 title: Affine neighbourhood containing component generic points
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-quasi-compact-and-quasi-separated-scheme
@@ -20,10 +20,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Properties of Schemes, Lemma 28.30.4 (tag 01ZX) and Lemma 28.30.1 (tag 01ZV)"

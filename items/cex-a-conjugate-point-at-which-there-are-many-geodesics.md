@@ -2,7 +2,7 @@
 id: cex-a-conjugate-point-at-which-there-are-many-geodesics
 kind: counterexample
 title: A conjugate point at which there are many geodesics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -45,6 +45,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lecture 23, section 23.2 (cut locus and regularity of the distance function), and Lecture 24, section 24.1 (the round sphere), printed pp.163-175; the multiplicity n-1 and the cut facts are taken from the pair's own sphere examples."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

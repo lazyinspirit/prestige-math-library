@@ -2,7 +2,7 @@
 id: lem-dirichlet-green-function-is-unique-and-positive
 kind: lemma
 title: A bounded-domain Dirichlet Green function is unique and positive
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -27,10 +27,12 @@ deps:
   - thm-strong-maximum-principle-for-harmonic-functions
   - thm-weak-maximum-principle-for-the-laplacian
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"

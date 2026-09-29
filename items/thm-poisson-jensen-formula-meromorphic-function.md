@@ -2,7 +2,7 @@
 id: thm-poisson-jensen-formula-meromorphic-function
 kind: theorem
 title: "Poisson–Jensen formula for a meromorphic function on a disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

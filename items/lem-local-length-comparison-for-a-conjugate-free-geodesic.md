@@ -2,7 +2,7 @@
 id: lem-local-length-comparison-for-a-conjugate-free-geodesic
 kind: lemma
 title: Local length comparison for a conjugate-free geodesic
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-conjugate-points-along-a-geodesic-and-their-multiplicity
@@ -58,6 +58,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lectures 18 and 22-23, printed pp.134-135 and 163-169: Gauss lemma and the behaviour below the first conjugate point; the equality analysis is carried out locally here and is not quoted."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

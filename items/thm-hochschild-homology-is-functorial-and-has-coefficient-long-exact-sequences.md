@@ -2,7 +2,7 @@
 id: thm-hochschild-homology-is-functorial-and-has-coefficient-long-exact-sequences
 title: Functoriality and coefficient long exact sequences for Hochschild homology
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-hochschild-chain-complex-of-a-bimodule, thm-hochschild-homology-is-tor-over-the-enveloping-algebra, thm-long-exact-sequence-in-homology, cor-every-vector-space-has-a-basis, cor-free-modules-are-projective-and-flat, def-axiom-of-choice, thm-a-chain-map-induces-a-well-defined-map-on-homology, thm-naturality-of-the-homology-connecting-morphism, thm-modules-over-a-ring-form-an-abelian-category, def-short-exact-sequence-of-complexes, def-morphism-of-short-exact-sequences-of-complexes, thm-unit-isomorphisms-for-module-tensor-products]
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

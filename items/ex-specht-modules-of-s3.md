@@ -2,7 +2,7 @@
 id: ex-specht-modules-of-s3
 kind: example
 title: All three Specht modules of $S_3$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: false
@@ -31,11 +31,12 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups, Example 3.14(a-b), printed p. 14; Theorem 4.4 and Corollary 4.5, printed pp. 16-17"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

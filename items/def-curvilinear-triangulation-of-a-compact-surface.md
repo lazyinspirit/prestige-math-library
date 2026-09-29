@@ -2,7 +2,7 @@
 id: def-curvilinear-triangulation-of-a-compact-surface
 kind: definition
 title: Curvilinear face-to-face triangulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -21,6 +21,9 @@ sources:
     - title: "Jürgen Jost, Compact Riemann Surfaces: An Introduction to Contemporary Mathematics"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf"
       locator: "§2.3.A, Definition 2.3.A.1, printed pp. 31–32 (PDF pp. 43–44), lines 1776–1793: finite triangular subsets, a homeomorphism from a planar triangle for each face, and pairwise disjoint/common-vertex/common-full-edge intersections. This is topological and treats closed surfaces; the piecewise-C² and boundary conditions here are separately specified."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

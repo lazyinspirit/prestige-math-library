@@ -2,7 +2,7 @@
 id: lem-a-configuration-loop-traces-a-geometric-braid
 kind: lemma
 title: "An interior configuration loop traces a geometric braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-motion-of-an-unordered-point-configuration,
@@ -34,6 +34,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

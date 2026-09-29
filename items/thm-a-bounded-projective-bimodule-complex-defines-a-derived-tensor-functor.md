@@ -2,7 +2,7 @@
 id: thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor
 kind: theorem
 title: A bounded two-sided projective bimodule complex defines exact derived tensor functors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -40,6 +40,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

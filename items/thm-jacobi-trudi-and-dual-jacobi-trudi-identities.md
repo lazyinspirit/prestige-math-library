@@ -2,7 +2,7 @@
 id: thm-jacobi-trudi-and-dual-jacobi-trudi-identities
 kind: theorem
 title: Jacobi–Trudi and dual Jacobi–Trudi identities
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

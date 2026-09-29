@@ -2,7 +2,7 @@
 id: thm-standard-polytabloid-basis
 kind: theorem
 title: Standard polytabloids form a basis of a complex Specht module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: false
@@ -29,11 +29,12 @@ sources:
     - title: "Mark Wildon, Representation Theory of the Symmetric Group, Theorem 6.2, Proposition 6.5, Theorem 6.8, Definition 6.9 and Lemma 6.10 with proof, printed pp. 26-31"
       url: "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

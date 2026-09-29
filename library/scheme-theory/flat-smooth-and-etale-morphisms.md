@@ -1,7 +1,7 @@
 ---
 page: flat-smooth-and-etale-morphisms
 title: Flat Smooth and Etale Morphisms
-status: draft
+status: published
 items:
 - def-constructible-subset-scheme
 - def-flat-morphism-schemes

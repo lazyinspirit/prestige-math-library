@@ -2,7 +2,7 @@
 id: "thm-embedding-dimension-at-least-local-dimension"
 kind: theorem
 title: "Tangent dimension bounds local dimension"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -27,10 +27,12 @@ deps:
   - def-prime-and-maximal-ideals
   - def-krull-dimension-of-a-ring
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

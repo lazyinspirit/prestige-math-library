@@ -2,7 +2,7 @@
 id: ex-sl2-flag-variety-line-bundles
 kind: example
 title: Flag line bundles for SL(2)
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -35,6 +35,9 @@ sources:
     - title: "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem"
       url: https://people.math.harvard.edu/~lurie/papers/bwb.pdf
       locator: "pp. 1-3"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

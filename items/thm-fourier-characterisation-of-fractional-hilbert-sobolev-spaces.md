@@ -2,7 +2,7 @@
 id: thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces
 kind: theorem
 title: "Real-order H^s as weighted Fourier distributions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

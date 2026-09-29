@@ -2,7 +2,7 @@
 id: lem-curve-closed-subsets-finite
 kind: lemma
 title: "Proper closed subsets of a curve are finite"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-locally-finite-type-and-finite-type-morphism
@@ -26,6 +26,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/0A22
     - title: "Milne, Algebraic Geometry, Section 2m (chain dimension of Noetherian spaces)"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

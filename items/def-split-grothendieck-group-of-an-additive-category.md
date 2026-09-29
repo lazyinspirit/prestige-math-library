@@ -2,7 +2,7 @@
 id: def-split-grothendieck-group-of-an-additive-category
 kind: definition
 title: "Split Grothendieck group of an additive category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

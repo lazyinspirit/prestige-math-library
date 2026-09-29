@@ -2,7 +2,7 @@
 id: lem-relative-normalization-finite-stage
 kind: lemma
 title: "Relative normalization and its finite-stage reduction"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -22,10 +22,12 @@ deps:
   - lem-etale-stable-base-change-composition
   - thm-etale-morphisms-open-and-quasi-finite
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, More on Morphisms, Sections 37.41–37.43 (étale neighbourhoods and Zariski Main)"

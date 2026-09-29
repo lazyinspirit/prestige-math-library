@@ -2,7 +2,7 @@
 id: lem-depth-acyclicity-highest-homology
 kind: lemma
 title: The highest positive homology of a depth-bounded finite complex has positive depth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.102.8 (tag 00N0), acyclicity lemma"

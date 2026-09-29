@@ -2,7 +2,7 @@
 id: thm-gauss-bonnet-for-compact-oriented-surfaces-with-boundary-and-corners
 kind: theorem
 title: Gauss-Bonnet for compact oriented surface regions with boundary and corners
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -32,6 +32,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lectures 1-2, printed pp. 3-15 (PDF pp. 10-22): Theorem 1.3.2, Theorem 2.0.1 with the corner terms, and the global summation of Theorem 2.2.4."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

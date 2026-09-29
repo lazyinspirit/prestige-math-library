@@ -2,7 +2,7 @@
 id: lem-alphabet-reduction-controls-size-and-degree
 kind: lemma
 title: "Alphabet reduction controls explicit size and degree"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-alphabet-reduction-step
@@ -23,6 +23,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

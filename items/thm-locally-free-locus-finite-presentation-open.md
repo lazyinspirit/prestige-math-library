@@ -2,7 +2,7 @@
 id: thm-locally-free-locus-finite-presentation-open
 kind: theorem
 title: Openness of the finite free locus
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -35,6 +35,9 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Chapters 6, 14, 17"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

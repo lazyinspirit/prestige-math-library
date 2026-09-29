@@ -2,7 +2,7 @@
 id: lem-exact-free-complex-reduction-nonzerodivisor
 kind: lemma
 title: Reduction of an exact free complex by a nonzerodivisor stays exact above degree one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -12,10 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.102.7 (tag 00MZ), reduction of exact free complexes"

@@ -2,7 +2,7 @@
 id: lem-classical-derivatives-are-weak-derivatives
 kind: lemma
 title: Classical derivatives agree with weak derivatives
-status: draft
+status: published
 origin: pipeline
 deps: [def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivatives-are-unique-almost-everywhere, thm-distributional-differentiation-is-continuous-and-commutes, def-countable-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

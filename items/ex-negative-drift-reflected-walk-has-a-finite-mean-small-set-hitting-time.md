@@ -2,7 +2,7 @@
 id: ex-negative-drift-reflected-walk-has-a-finite-mean-small-set-hitting-time
 kind: example
 title: "Negative drift gives a finite mean small-set hit"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -31,10 +31,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24"

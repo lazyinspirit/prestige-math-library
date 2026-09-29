@@ -2,7 +2,7 @@
 id: cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero
 kind: corollary
 title: Flat closed oriented surfaces have Euler characteristic zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -26,6 +26,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.2.4, printed pp. 14-15 (PDF pp. 21-22): the global Gauss-Bonnet theorem used in the flat case."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-flag-variety-bruhat-cell-decomposition
 kind: theorem
 title: Bruhat cells of the flag variety
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps:
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups"

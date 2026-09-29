@@ -2,7 +2,7 @@
 id: thm-serre-duality-projective-space-coherent-sheaves
 kind: theorem
 title: Serre duality for coherent sheaves on projective space
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps:
@@ -61,6 +61,9 @@ sources:
     - title: "J. Schreyer, Sheaves on Schemes (WS 2018/19), Week 9"
       url: https://www.math.uni-sb.de/ag/schreyer/images/PDFs/teaching/ws1819_sheaves/LectureNotes/Week9.pdf
       locator: "Theorem 185: (2) five-lemma argument for Hom(F,omega) x H^n; (3) coeffaceable delta-functor comparison for Ext^i(F,omega) = H^{n-i}(X,F)^dual"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

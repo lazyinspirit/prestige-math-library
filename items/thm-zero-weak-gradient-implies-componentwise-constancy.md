@@ -2,7 +2,7 @@
 id: thm-zero-weak-gradient-implies-componentwise-constancy
 kind: theorem
 title: Zero weak gradient gives componentwise constants
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -43,10 +43,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

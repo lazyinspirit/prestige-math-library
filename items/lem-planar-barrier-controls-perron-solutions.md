@@ -2,7 +2,7 @@
 id: lem-planar-barrier-controls-perron-solutions
 kind: lemma
 title: "A planar barrier forces the regularized Perron envelope to have the prescribed boundary limit"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -36,6 +36,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-faithfully-flat-morphism-schemes
 kind: definition
 title: "Faithfully flat scheme morphism"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -16,6 +16,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapters 25-26"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

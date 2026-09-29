@@ -16,7 +16,7 @@ sources:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"
       url: https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf
       locator: "§2.1 fundamental-solution convention and flux normalization, printed pp.11–12; Schmidt uses the opposite sign"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -62,6 +62,9 @@ deps:
   - thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
   - thm-locally-integrable-functions-embed-in-distributions
   - thm-real-gamma-functional-equation
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

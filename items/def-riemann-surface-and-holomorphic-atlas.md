@@ -2,7 +2,7 @@
 id: def-riemann-surface-and-holomorphic-atlas
 kind: definition
 title: Riemann surfaces and holomorphic atlases
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps:
@@ -20,6 +20,8 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 1 and Ch. 2, examples of Riemann surfaces and definition of holomorphic map"
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

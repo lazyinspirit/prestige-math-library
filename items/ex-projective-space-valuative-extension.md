@@ -2,7 +2,7 @@
 id: ex-projective-space-valuative-extension
 kind: example
 title: Valuative extension of projective coordinates
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -18,10 +18,12 @@ deps:
   - def-finite-type-and-module-finite-algebras
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.44.5 (tag 01WC): projective space is proper over the base, proved via the valuative criterion"

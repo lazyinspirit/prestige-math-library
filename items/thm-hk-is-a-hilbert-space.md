@@ -2,7 +2,7 @@
 id: thm-hk-is-a-hilbert-space
 kind: theorem
 title: $H^k$ is a Hilbert space under the derivative-sum inner product
-status: draft
+status: published
 origin: pipeline
 deps: [def-hk-and-hk-zero-notation, def-sobolev-space-wkp-and-its-norm, lem-weak-derivative-linearity-locality-and-commutation, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, thm-sobolev-spaces-are-banach-spaces, def-inner-product-space, def-real-and-complex-inner-product-space, def-hilbert-space, thm-holder-inequality-for-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-calligraphic-l-p-on-a-measure-space, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

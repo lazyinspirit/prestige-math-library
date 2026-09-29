@@ -2,7 +2,7 @@
 id: prop-conjugate-points-and-multiplicity-are-invariant-under-affine-reparametrization
 kind: proposition
 title: Conjugate points and multiplicity are invariant under affine reparametrization
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-jacobi-field
@@ -27,6 +27,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-skyscraper-coherent-closed-point
 kind: example
 title: A coherent closed-point skyscraper
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-coherent-sheaves-abelian-noetherian-scheme
@@ -38,10 +38,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-weak-derivatives-are-polynomial-fourier-multipliers
 kind: lemma
 title: Distributional derivatives are polynomial Fourier multipliers
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

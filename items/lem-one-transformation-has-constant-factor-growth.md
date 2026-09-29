@@ -2,7 +2,7 @@
 id: lem-one-transformation-has-constant-factor-growth
 kind: lemma
 title: "One fixed transformation has constant-factor growth"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-dinur-pcp-transformation
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

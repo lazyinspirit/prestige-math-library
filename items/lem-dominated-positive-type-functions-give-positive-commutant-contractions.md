@@ -2,7 +2,7 @@
 id: lem-dominated-positive-type-functions-give-positive-commutant-contractions
 kind: lemma
 title: Dominated positive type and positive commutant contractions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -28,10 +28,12 @@ deps:
   - thm-riesz-representation-for-hilbert-space
 axiom_audit: "Assume AC to infer DC and Countable Choice. Countable Choice is used by the GNS completion and its bounded translation extensions and by the Hilbert-space Riesz representation that produces T. It also supplies the hypotheses of the repository's adjoint and positive-operator definitions. The finite-form construction, its uniqueness on the dense orbit span, and the converse matrix tests use no further choice."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

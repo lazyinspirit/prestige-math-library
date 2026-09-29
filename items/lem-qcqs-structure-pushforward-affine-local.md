@@ -2,7 +2,7 @@
 id: lem-qcqs-structure-pushforward-affine-local
 kind: lemma
 title: "Structure sheaf of a quasi-compact quasi-separated morphism is affine-local"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-quasi-compact-and-quasi-separated-morphism
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.11 (quasi-coherent sheaves and pushforwards)"

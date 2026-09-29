@@ -2,7 +2,7 @@
 id: def-complex-semisimple-algebraic-group-borel-and-flag-variety
 kind: definition
 title: Complex semisimple algebraic group, Borel, and flag variety
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -21,6 +21,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups (2022)"

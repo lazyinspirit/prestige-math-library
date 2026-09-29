@@ -2,7 +2,7 @@
 id: cex-stalk-versus-fibre-module
 kind: counterexample
 title: Stalk and fibre are different
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-fibre-of-module-at-point
@@ -26,6 +26,9 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Chapters 6, 14, 17"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

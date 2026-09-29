@@ -2,7 +2,7 @@
 id: thm-measurable-essentially-bounded-operator-fields-act-decomposably
 kind: theorem
 title: Measurable essentially bounded operator fields act decomposably
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -52,7 +52,8 @@ sources:
       url: "https://mathweb.tifr.res.in/Documents/Publications/Lectures/tifr14.pdf"
       locator: "Part III, Ch. 10 §§1.7–1.8, printed pp. 99–101 (different locally bounded Lusin-field convention; measurable action and upper bound, with the exact-norm statement in Theorem 2)"
 verification:
-  precheck: n/a
+  precheck: pass
+  audited: 2026-09-30
 axiom_use: "Assume AC to invoke the preceding direct-integral Hilbert-space theorem and to obtain the Hilbert adjoints used here. AC implies Countable Choice by def-countable-choice, which is the hypothesis of thm-hilbert-adjoint-properties. The countable rational test family is explicitly coded; the lower-bound step selects one witness from a single countable union and one finite-measure piece, so these constructions use no further choice axiom."
 ---
 

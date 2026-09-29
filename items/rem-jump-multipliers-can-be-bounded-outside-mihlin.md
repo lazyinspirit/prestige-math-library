@@ -2,7 +2,7 @@
 id: rem-jump-multipliers-can-be-bounded-outside-mihlin
 kind: remark
 title: Jump multipliers may lie outside the Mihlin criterion
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-mihlin-symbol-with-more-than-half-dimension-derivatives
@@ -12,6 +12,10 @@ landmark: false
 proved_here: false
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-09-30
+    scope: "Owner-attested statement, attribution, and cited-source check for publication."
+    by: owner
 provenance:
   statement: literature-derived
   proof: not-applicable

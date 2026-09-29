@@ -2,7 +2,7 @@
 id: def-weak-derivative-of-a-locally-integrable-function
 kind: definition
 title: Weak derivative of a locally integrable function
-status: draft
+status: published
 origin: pipeline
 deps: [def-locally-integrable-function-as-a-regular-distribution, def-distributional-derivative, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice]
 landmark: false
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

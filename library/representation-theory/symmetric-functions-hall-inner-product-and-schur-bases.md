@@ -1,7 +1,7 @@
 ---
 page: symmetric-functions-hall-inner-product-and-schur-bases
 title: "Symmetric Functions, the Hall Inner Product, and Schur Bases"
-status: draft
+status: published
 items:
   - def-stable-graded-ring-of-symmetric-functions
   - def-skew-diagram-and-semistandard-skew-tableau

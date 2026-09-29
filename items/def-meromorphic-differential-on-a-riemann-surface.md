@@ -2,7 +2,7 @@
 id: def-meromorphic-differential-on-a-riemann-surface
 kind: definition
 title: Meromorphic differentials, orders and residues
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -34,6 +34,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 6, meromorphic forms, Laurent orders and contour residues; used as an independent cross-check of the transition law and of the invariance of order and residue."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

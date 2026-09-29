@@ -2,7 +2,7 @@
 id: lem-flag-line-bundle-degree-on-minimal-parabolic-fibre
 kind: lemma
 title: Flag line-bundle degree on a minimal-parabolic fiber
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -25,10 +25,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups"

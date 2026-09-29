@@ -2,7 +2,7 @@
 id: lem-kostka-change-of-basis-is-dominance-unitriangular
 kind: lemma
 title: The Kostka change of basis is dominance-unitriangular
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-partition-young-diagram-and-conjugate-partition
@@ -22,6 +22,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-09-30
 provenance:
   statement: literature-derived
   proof: ai-altered

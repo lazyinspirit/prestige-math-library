@@ -2,7 +2,7 @@
 id: cor-a-positively-curved-closed-oriented-surface-has-positive-euler-characteristic
 kind: corollary
 title: Positive curvature forces positive Euler characteristic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -27,6 +27,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.2.4, printed pp. 14-15 (PDF pp. 21-22), together with the positivity of the integral of a positive top form used in its applications."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

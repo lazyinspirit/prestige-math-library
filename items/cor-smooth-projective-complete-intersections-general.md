@@ -2,7 +2,7 @@
 id: cor-smooth-projective-complete-intersections-general
 kind: corollary
 title: "General hypersurfaces give smooth complete intersections"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -74,6 +74,9 @@ sources:
       url: https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf
     - title: "Robin Hartshorne, Algebraic Geometry, Chapter II, Theorem 8.18 and Chapter III, Corollary 10.9"
       url: https://doi.org/10.1007/978-1-4757-3849-0
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

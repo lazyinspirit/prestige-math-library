@@ -2,7 +2,7 @@
 id: def-hitting-return-and-visit-times
 kind: definition
 title: "Hitting, return, and visit times"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-discrete-stopping-time
@@ -13,6 +13,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

@@ -2,7 +2,7 @@
 id: lem-plane-arc-complements-and-accessible-jordan-points
 kind: lemma
 title: "Arc complements and accessible Jordan boundary points"
-status: draft
+status: published
 origin: pipeline
 deps: [def-homeomorphism-and-open-maps, def-continuous-map-top, def-subspace-topology-top, def-metric-topology, thm-metric-open-set-algebra, lem-real-line-is-a-metric-space, thm-compactness-under-continuous-maps, thm-compactness-agrees-with-metric-compactness, cor-components-of-open-subsets-of-rn-are-polygonally-connected, thm-heine-borel-rn, lem-metrics-on-rn, def-metric-ball, def-metric-compactness, def-metric-space, def-complete-ordered-field, lem-euclidean-polygonal-paths-are-continuous, lem-polygonal-ray-general-position, lem-polygonal-crossing-parity-is-locally-constant, def-plane-region-and-frontier, def-plane-graph-face-and-boundary, def-polygonal-arc-and-polygon, def-polygonal-path-and-polygonal-connectedness]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://www.maths.ed.ac.uk/~v1ranick/papers/hales3.pdf"
       locator: "§3 and Figure 11, printed p.890: a small square-grid cage around a simple arc"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-cm-equidimensional-fibre-dimension-bound-regular-sequence
 kind: lemma
 title: A sharp dimension bound makes equations regular on an equidimensional Cohen-Macaulay fibre
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -18,10 +18,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.129.1 (tag 00R9), dimension bound and regular sequences"

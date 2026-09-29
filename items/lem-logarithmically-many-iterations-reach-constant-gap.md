@@ -2,7 +2,7 @@
 id: lem-logarithmically-many-iterations-reach-constant-gap
 kind: lemma
 title: "Logarithmic iteration reaches a constant unsatisfaction gap"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-one-transformation-preserves-satisfiability
@@ -22,6 +22,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

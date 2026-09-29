@@ -2,7 +2,7 @@
 id: thm-green-function-uniqueness-symmetry-and-monotonicity
 kind: theorem
 title: "Canonical Green kernels are unique, symmetric and domain monotone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -46,6 +46,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-path-homotopy-traces-braid-isotopy
 kind: lemma
 title: "A based configuration-loop homotopy traces a braid isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [lem-a-configuration-loop-traces-a-geometric-braid,
@@ -29,6 +29,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

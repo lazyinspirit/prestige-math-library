@@ -1,7 +1,7 @@
 ---
 page: grothendieck-groups-and-graded-cartan-pairings
 title: "Grothendieck Groups and Graded Cartan Pairings"
-status: draft
+status: published
 items:
   - def-grothendieck-group-of-an-essentially-small-abelian-category
   - def-split-grothendieck-group-of-an-additive-category

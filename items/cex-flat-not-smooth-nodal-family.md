@@ -2,7 +2,7 @@
 id: cex-flat-not-smooth-nodal-family
 kind: counterexample
 title: "A flat family with a nodal special fibre is not smooth at the node"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -34,6 +34,9 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry v6.10, §4b Definition 4.9 and Example 4.10"
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
       locator: "Definition 4.9 and Example 4.10, printed pp. 83–84"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

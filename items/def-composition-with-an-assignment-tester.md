@@ -2,7 +2,7 @@
 id: def-composition-with-an-assignment-tester
 kind: definition
 title: "Composition of an edge system with an assignment tester"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-robust-codeword-blocks-for-constraint-graphs
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

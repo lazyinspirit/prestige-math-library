@@ -1,7 +1,7 @@
 ---
 page: fourier-multipliers-and-sobolev-characterisations
 title: "Fourier Multipliers and Sobolev Characterisations"
-status: draft
+status: published
 items: [def-translation-invariant-fourier-multiplier-on-schwartz-space,
         lem-ltwo-fourier-multiplier-bound,
         def-lp-fourier-multiplier-and-multiplier-norm,

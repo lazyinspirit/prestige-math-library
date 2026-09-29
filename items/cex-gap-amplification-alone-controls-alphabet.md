@@ -2,7 +2,7 @@
 id: cex-gap-amplification-alone-controls-alphabet
 kind: counterexample
 title: "A powered graph whose alphabet grows"
-status: draft
+status: published
 origin: pipeline
 deps:
   - fs-gap-amplification-alone-controls-alphabet
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 proof_strategy: counterexample
 generation:
   role: counterexample

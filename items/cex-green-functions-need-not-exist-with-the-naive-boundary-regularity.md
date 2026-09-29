@@ -2,7 +2,7 @@
 id: cex-green-functions-need-not-exist-with-the-naive-boundary-regularity
 kind: counterexample
 title: An isolated boundary point obstructs pointwise-zero Green data
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -48,10 +48,12 @@ deps:
   - thm-path-connected-implies-connected
   - thm-weak-maximum-principle-for-the-laplacian
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"

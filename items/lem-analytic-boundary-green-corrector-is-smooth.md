@@ -2,7 +2,7 @@
 id: lem-analytic-boundary-green-corrector-is-smooth
 kind: lemma
 title: "Green correctors are smooth at analytic boundaries"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -39,6 +39,7 @@ sources:
       locator: "Section 3, PDF pp. 19-25: boundary regularity of the Green function for smooth domains"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

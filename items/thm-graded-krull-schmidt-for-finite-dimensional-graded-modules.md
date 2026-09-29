@@ -2,7 +2,7 @@
 id: thm-graded-krull-schmidt-for-finite-dimensional-graded-modules
 kind: theorem
 title: "Graded Krull–Schmidt for finite-dimensional graded modules"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

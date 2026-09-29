@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis
 kind: theorem
 title: "Indecomposable projective classes form a basis of split K0"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

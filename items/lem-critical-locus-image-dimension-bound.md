@@ -2,7 +2,7 @@
 id: lem-critical-locus-image-dimension-bound
 kind: lemma
 title: "Critical loci have small images in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -40,10 +40,12 @@ deps:
   - thm-local-ring-affine-variety-localization
   - thm-transpose-kernel-range-and-rank
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

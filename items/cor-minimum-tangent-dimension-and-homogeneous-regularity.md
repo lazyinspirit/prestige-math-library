@@ -2,7 +2,7 @@
 id: cor-minimum-tangent-dimension-and-homogeneous-regularity
 kind: corollary
 title: "Minimal tangent dimension and homogeneous regularity"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -33,6 +33,9 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §5.2, Corollary 5.2.4 (homogeneous regularity)"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

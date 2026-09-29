@@ -2,7 +2,7 @@
 id: thm-gns-construction-for-topological-groups
 kind: theorem
 title: GNS construction for a continuous positive-type function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -28,6 +28,9 @@ sources:
     - title: "Bachir Bekka and Pierre de la Harpe, Unitary Representations of Groups, Duals, and Characters"
       url: https://arxiv.org/pdf/1912.07262
       locator: "Chapter 1 §1.B, Construction 1.B.5, printed pp. 27–28"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

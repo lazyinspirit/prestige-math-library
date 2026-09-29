@@ -2,7 +2,7 @@
 id: lem-eventual-global-generation-coherent-twists
 kind: lemma
 title: "Eventual generation of coherent projective twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -36,6 +36,9 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01WC"
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Sections 17.4, 17.6"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

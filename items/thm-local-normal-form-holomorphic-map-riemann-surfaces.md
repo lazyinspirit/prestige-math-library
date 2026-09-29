@@ -2,7 +2,7 @@
 id: thm-local-normal-form-holomorphic-map-riemann-surfaces
 kind: theorem
 title: Local power-map normal form on Riemann surfaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -28,6 +28,9 @@ sources:
     - title: "Eduard Looijenga, Riemann Surfaces (2007)"
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 4 §2, the multiplicity mult_p(f) and the normal form z ↦ z^{mult_p(f)}, printed pp. 43–44."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

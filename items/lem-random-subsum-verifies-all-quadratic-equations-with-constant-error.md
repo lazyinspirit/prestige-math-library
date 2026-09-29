@@ -2,7 +2,7 @@
 id: lem-random-subsum-verifies-all-quadratic-equations-with-constant-error
 kind: lemma
 title: "A random subsum checks all quadratic equations at once"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-quadratic-equation-instance-and-tensor-code-oracles
@@ -19,6 +19,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-sobolev-spaces-are-banach-spaces
 kind: theorem
 title: Integer-order Sobolev spaces are Banach
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, lem-sobolev-norm-is-well-defined-and-definite, thm-riesz-fischer-completeness-of-l-p, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-holder-inequality-for-integrals, thm-complex-holder-minkowski-and-the-quotient-norm, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

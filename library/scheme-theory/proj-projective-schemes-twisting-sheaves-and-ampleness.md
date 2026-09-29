@@ -1,7 +1,7 @@
 ---
 page: proj-projective-schemes-twisting-sheaves-and-ampleness
 title: Proj Projective Schemes Twisting Sheaves and Ampleness
-status: draft
+status: published
 items:
   - def-proj-graded-ring-points
   - def-shifted-graded-module

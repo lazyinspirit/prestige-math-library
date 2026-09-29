@@ -1,7 +1,7 @@
 ---
 page: quasi-coherent-and-coherent-sheaves-and-vector-bundles-examples
 title: Quasi Coherent and Coherent Sheaves and Vector Bundles — Examples
-status: draft
+status: published
 items:
   - ex-associated-sheaf-quotient-module
   - ex-associated-sheaf-localized-module

@@ -2,7 +2,7 @@
 id: lem-gauss-bonnet-expression-is-independent-of-the-metric
 kind: lemma
 title: The Gauss-Bonnet expression is independent of the metric
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,10 +25,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Chris Wendl, The Gauss-Bonnet Formula, Chapter 6, Section 6.3"

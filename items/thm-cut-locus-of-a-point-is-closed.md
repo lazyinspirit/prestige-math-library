@@ -2,7 +2,7 @@
 id: thm-cut-locus-of-a-point-is-closed
 kind: theorem
 title: The cut locus of a point is closed
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-inner-product-induces-a-norm
@@ -33,6 +33,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lecture 23, sections 23.2-23.3, printed pp.163-172: the cut locus, the cut time, and the continuity of the cut time used here."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

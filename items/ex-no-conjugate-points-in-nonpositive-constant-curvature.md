@@ -2,7 +2,7 @@
 id: ex-no-conjugate-points-in-nonpositive-constant-curvature
 kind: example
 title: No conjugate points in nonpositive constant curvature
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-second-derivative-characterises-convexity
@@ -25,10 +25,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

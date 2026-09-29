@@ -1,7 +1,7 @@
 ---
 page: measurable-hilbert-fields-and-direct-integral-operators
 title: Measurable Hilbert Fields and Direct-Integral Operators
-status: draft
+status: published
 items: [def-von-neumann-algebra-and-commutant, def-measurable-hilbert-field-from-a-countable-fundamental-family, lem-measurable-sections-have-measurable-pointwise-inner-products, lem-separable-abelian-von-neumann-algebras-have-a-self-adjoint-generator, def-direct-integral-of-a-measurable-hilbert-field, thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces, def-measurable-and-decomposable-operator-fields, thm-measurable-essentially-bounded-operator-fields-act-decomposably, thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication, lem-diagonal-multipliers-form-a-von-neumann-algebra, thm-spectral-multiplicity-model-for-separable-abelian-von-neumann-algebras]
 examples: []
 ---

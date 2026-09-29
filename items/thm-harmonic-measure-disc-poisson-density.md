@@ -2,7 +2,7 @@
 id: thm-harmonic-measure-disc-poisson-density
 kind: theorem
 title: "Poisson density of harmonic measure on a disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -35,6 +35,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

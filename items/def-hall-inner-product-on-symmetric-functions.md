@@ -2,7 +2,7 @@
 id: def-hall-inner-product-on-symmetric-functions
 kind: definition
 title: The Hall inner product on symmetric functions
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

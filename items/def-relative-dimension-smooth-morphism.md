@@ -2,7 +2,7 @@
 id: def-relative-dimension-smooth-morphism
 kind: definition
 title: "Relative dimension of a smooth morphism at a point"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-morphism-schemes
@@ -18,6 +18,8 @@ sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.29 (morphisms and dimensions of fibres)"
       url: https://stacks.math.columbia.edu/tag/02FW
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: def-euler-characteristic-of-a-finitely-triangulated-compact-surface
 kind: definition
 title: Euler characteristic of a finitely triangulated compact surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"

@@ -2,7 +2,7 @@
 id: lem-integral-quasicoherent-algebra-finite-subalgebra-filtration
 kind: lemma
 title: "Integral quasi-coherent algebras over qcqs bases are unions of finite subalgebras"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -15,10 +15,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Properties of Schemes, Lemma 28.23.13 (tag 0817) and Section 28.23"

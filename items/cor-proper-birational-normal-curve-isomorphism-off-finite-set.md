@@ -2,7 +2,7 @@
 id: cor-proper-birational-normal-curve-isomorphism-off-finite-set
 kind: corollary
 title: "Proper birational normal curves agree off finitely many points"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-proper-morphism
@@ -24,10 +24,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.51.5 (tag 0BAC) and Definition 29.51.1 (tag 01RO)"

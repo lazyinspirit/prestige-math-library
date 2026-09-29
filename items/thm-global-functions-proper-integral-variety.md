@@ -2,7 +2,7 @@
 id: thm-global-functions-proper-integral-variety
 kind: theorem
 title: "Global functions on proper integral schemes form a finite extension of the base field"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-proper-morphism
@@ -35,10 +35,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Varieties, Lemma 33.9.3 (tag 0BUG)"

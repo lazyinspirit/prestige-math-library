@@ -2,7 +2,7 @@
 id: def-locally-integrable-function-as-a-regular-distribution
 kind: definition
 title: Locally integrable functions as regular distributions
-status: draft
+status: published
 origin: pipeline
 deps: [def-regular-distribution-from-a-locally-integrable-function, thm-locally-integrable-functions-embed-in-distributions, def-countable-choice]
 landmark: false
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

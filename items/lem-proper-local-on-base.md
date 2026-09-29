@@ -2,7 +2,7 @@
 id: lem-proper-local-on-base
 kind: lemma
 title: Properness is local on the target
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-proper-morphism
@@ -22,10 +22,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.42.3 (tag 01W2)"

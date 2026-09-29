@@ -1,7 +1,7 @@
 ---
 page: bessel-potential-completions-and-real-order-sobolev-spaces
 title: "Bessel-Potential Completions and Real-Order Sobolev Spaces"
-status: draft
+status: published
 items: [lem-japanese-bracket-powers-preserve-schwartz-space,
         def-bessel-potential-pre-hilbert-norm-on-schwartz-space,
         lem-bessel-potential-norm-is-positive-definite,

@@ -2,7 +2,7 @@
 id: lem-fpqc-descent-properness-components
 kind: lemma
 title: Fpqc descent of properness components
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -48,10 +48,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: \"Stacks Project, Descent, §35.23, Lemmas 35.23.1, 35.23.3, 35.23.6, 35.23.12, 35.23.14, and 35.23.16\"

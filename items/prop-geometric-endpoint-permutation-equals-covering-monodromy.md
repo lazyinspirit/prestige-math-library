@@ -2,7 +2,7 @@
 id: prop-geometric-endpoint-permutation-equals-covering-monodromy
 kind: proposition
 title: "The geometric endpoint permutation matches covering monodromy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 provenance:
@@ -37,6 +37,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

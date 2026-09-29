@@ -2,7 +2,7 @@
 id: lem-proj-prime-localization-correspondence
 kind: lemma
 title: "Prime correspondence on a Proj chart"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-standard-open-proj
@@ -19,10 +19,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Section 27.8 (Tag 01M3)"

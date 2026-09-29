@@ -2,7 +2,7 @@
 id: lem-local-fibre-dimension-bound-via-polynomial-quasifiniteness
 kind: lemma
 title: "Local fibre-dimension bound from polynomial quasi-finiteness"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -34,6 +34,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.29 (tag 02FW)"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary
 kind: corollary
 title: Gauss-Bonnet with smooth boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,6 +25,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Sections 2.0-2.2, printed pp. 10-15 (PDF pp. 17-22): Theorem 2.0.1 with the corner terms, and the observation that they are absent on smooth boundary."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

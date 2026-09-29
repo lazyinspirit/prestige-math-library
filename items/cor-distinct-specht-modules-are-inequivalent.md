@@ -2,7 +2,7 @@
 id: cor-distinct-specht-modules-are-inequivalent
 kind: corollary
 title: Distinct complex Specht modules are inequivalent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: false
@@ -26,11 +26,12 @@ sources:
     - title: "Mark Wildon, Representation Theory of the Symmetric Group, Corollary 4.4 and proof, printed p. 15"
       url: "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

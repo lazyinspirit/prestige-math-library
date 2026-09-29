@@ -2,7 +2,7 @@
 id: thm-nevanlinna-characteristic-elementary-laws
 kind: theorem
 title: "Elementary characteristic laws and fixed rational composition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

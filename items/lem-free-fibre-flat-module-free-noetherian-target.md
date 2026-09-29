@@ -2,7 +2,7 @@
 id: lem-free-fibre-flat-module-free-noetherian-target
 kind: lemma
 title: A finite module with free fibre and flat base is free over a Noetherian target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -15,10 +15,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.99.4 (tag 00MH), free fibre and flatness"

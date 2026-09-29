@@ -2,7 +2,7 @@
 id: ex-hochschild-homology-of-the-ground-field
 title: Hochschild homology of the ground field
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-hochschild-chain-complex-of-a-bimodule, prop-hochschild-degree-zero-is-bimodule-coinvariants, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, cor-finite-iterated-tensor-products-represent-multilinear-maps, thm-unit-isomorphisms-for-module-tensor-products]
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

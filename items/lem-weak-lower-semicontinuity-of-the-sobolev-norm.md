@@ -2,7 +2,7 @@
 id: lem-weak-lower-semicontinuity-of-the-sobolev-norm
 kind: lemma
 title: Weak lower semicontinuity of the Sobolev norm
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-hahn-banach-extension-principle-relative, thm-hahn-banach-dominated-extension, cor-weak-convergence-implies-lower-semicontinuity-of-the-norm, def-weak-convergence-of-nets-and-sequences, def-sobolev-space-wkp-and-its-norm, lem-sobolev-norm-is-well-defined-and-definite]
 landmark: false
@@ -19,6 +19,9 @@ sources:
     - title: John K. Hunter, Notes on Partial Differential Equations (2014)
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Chapter 3 §§3.1–3.5
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

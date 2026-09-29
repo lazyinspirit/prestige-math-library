@@ -1,7 +1,7 @@
 ---
 page: hochschild-homology-and-diagonal-koszul-resolutions-examples
 title: "Hochschild Homology and Diagonal Koszul Resolutions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hochschild-homology-of-the-ground-field, ex-one-variable-diagonal-koszul-computation, ex-one-variable-twisted-bimodule-hochschild-computation, ex-two-variable-diagonal-koszul-signs]
 ---

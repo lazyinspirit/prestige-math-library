@@ -2,7 +2,7 @@
 id: cor-connected-projective-variety-h0-o
 kind: corollary
 title: "Global functions on geometrically connected and geometrically reduced proper schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -91,6 +91,9 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
     - title: "J. S. Milne, A Primer of Commutative Algebra, v4.03, Theorem 16.7 and Lemma 14.2"
       url: "https://www.jmilne.org/math/xnotes/CA.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

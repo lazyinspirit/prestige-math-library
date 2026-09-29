@@ -1,7 +1,7 @@
 ---
 page: classification-of-compact-connected-surfaces
 title: "Classification of Compact Connected Surfaces"
-status: draft
+status: published
 items: [def-connected-sum-of-compact-surfaces,
         def-klein-bottle,
         def-polygonal-schema-and-edge-pairing,

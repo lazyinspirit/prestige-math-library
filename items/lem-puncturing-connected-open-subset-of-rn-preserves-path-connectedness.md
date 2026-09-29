@@ -2,7 +2,7 @@
 id: lem-puncturing-connected-open-subset-of-rn-preserves-path-connectedness
 kind: lemma
 title: "Puncturing a connected open subset of $\\mathbb{R}^n$ preserves path-connectedness for $n\\ge2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -17,10 +17,12 @@ deps:
   - thm-path-connected-implies-connected
   - thm-open-connected-subsets-of-rn-are-polygonally-connected
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Paul Bankston, Metric Topology: A First Course, Proposition 21.3"

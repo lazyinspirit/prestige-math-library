@@ -2,7 +2,7 @@
 id: thm-pcp-theorem-np-equals-pcp-log-n-o-one
 kind: theorem
 title: "The PCP theorem: NP equals PCP(log n, O(1))"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-gap-csp-is-np-hard
@@ -30,6 +30,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

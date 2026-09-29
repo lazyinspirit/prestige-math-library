@@ -2,7 +2,7 @@
 id: ex-basic-riemann-surface-atlases
 kind: example
 title: Atlases on the sphere, plane, disc and annulus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -31,6 +31,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 2, examples of Riemann surfaces and the standard atlas of the sphere."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 page: "green-functions-harmonic-measure-and-conformal-invariance-examples"
 title: "Green Functions, Harmonic Measure, and Conformal Invariance: Examples and Counterexamples"
-status: draft
+status: published
 examples: ["ex-green-function-disc-with-nonzero-pole","ex-harmonic-measure-of-a-disc-arc","ex-upper-half-plane-harmonic-measure-density","ex-interval-harmonic-measure-in-upper-half-plane","ex-annulus-harmonic-measure-of-boundary-circles","ex-slit-plane-green-function-from-square-root","ex-punctured-disc-irregular-boundary-green-function"]
 items: []
 ---

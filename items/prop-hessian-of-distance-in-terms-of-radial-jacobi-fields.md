@@ -2,7 +2,7 @@
 id: prop-hessian-of-distance-in-terms-of-radial-jacobi-fields
 kind: proposition
 title: Hessian of distance in terms of radial jacobi fields
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-the-differential-of-a-diffeomorphism-is-an-isomorphism
@@ -52,10 +52,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

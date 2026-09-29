@@ -6,10 +6,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
@@ -21,7 +23,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
       url: https://web.archive.org/web/20250601000000id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf
       locator: §5.3 equation (5.21), printed p.117
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: [cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, def-countable-choice, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, lem-borel-representatives-make-the-convolution-integrand-borel-measurable, prop-countable-subsets-of-rn-are-lebesgue-null, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-completion-measurable-functions-have-base-measurable-representatives, thm-tonelli-theorem-for-sigma-finite-product-spaces]

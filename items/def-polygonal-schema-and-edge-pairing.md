@@ -2,7 +2,7 @@
 id: def-polygonal-schema-and-edge-pairing
 kind: definition
 title: "Polygonal schemas and paired boundary edges"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-manifold-without-boundary, def-quotient-topology, thm-heine-borel-rn, thm-compact-subset-of-a-hausdorff-space-is-closed]
 justified_by: []
@@ -20,6 +20,8 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§§2–3, printed pp.2–4"
 pipeline_run: frontier-36-complete
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

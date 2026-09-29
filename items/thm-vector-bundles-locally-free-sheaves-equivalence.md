@@ -2,7 +2,7 @@
 id: thm-vector-bundles-locally-free-sheaves-equivalence
 kind: theorem
 title: Finite locally free sheaves and geometric vector bundles
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-vector-bundle-scheme
@@ -44,6 +44,9 @@ sources:
     - title: "The Stacks Project, Constructions of Schemes §27.6"
       url: "https://stacks.math.columbia.edu/tag/01M1"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

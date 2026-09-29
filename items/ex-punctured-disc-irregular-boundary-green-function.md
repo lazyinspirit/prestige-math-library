@@ -2,7 +2,7 @@
 id: ex-punctured-disc-irregular-boundary-green-function
 kind: example
 title: "An irregular puncture does not force the Green kernel to vanish"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -42,6 +42,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

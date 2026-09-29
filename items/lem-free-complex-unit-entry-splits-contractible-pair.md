@@ -2,7 +2,7 @@
 id: lem-free-complex-unit-entry-splits-contractible-pair
 kind: lemma
 title: A unit differential entry splits a contractible two-term summand
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: []
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.102.2 (tag 00MT), unit-entry splitting"

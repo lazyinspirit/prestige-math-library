@@ -2,7 +2,7 @@
 id: ex-fitting-ideal-two-by-two-presentation
 kind: example
 title: Fitting ideals of a diagonal two-by-two presentation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-fitting-ideal-sheaf
@@ -44,6 +44,9 @@ sources:
 generation:
   role: example
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

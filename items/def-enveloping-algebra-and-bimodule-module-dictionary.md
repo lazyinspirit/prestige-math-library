@@ -2,7 +2,7 @@
 id: def-enveloping-algebra-and-bimodule-module-dictionary
 kind: definition
 title: Enveloping algebra and the bimodule–module dictionary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-algebra-over-a-commutative-ring, def-bimodule, def-graded-ring-module-bimodule-and-internal-shift, def-opposite-ring, thm-tensor-product-of-algebras-over-a-commutative-ring]
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: lem-ample-stable-positive-power
 kind: lemma
 title: "Ampleness is invariant under positive powers"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ample-invertible-sheaf
@@ -17,6 +17,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01PS
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 17.6"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

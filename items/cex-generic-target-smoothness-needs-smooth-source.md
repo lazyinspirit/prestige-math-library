@@ -2,7 +2,7 @@
 id: cex-generic-target-smoothness-needs-smooth-source
 kind: counterexample
 title: "A cusp family defeats the missing source hypothesis"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -37,10 +37,12 @@ deps:
   - thm-quotient-is-domain-iff-ideal-prime
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

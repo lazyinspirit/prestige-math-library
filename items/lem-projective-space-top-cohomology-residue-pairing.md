@@ -2,7 +2,7 @@
 id: lem-projective-space-top-cohomology-residue-pairing
 kind: lemma
 title: Residue pairing between H^0 and top cohomology of projective space
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -27,6 +27,9 @@ sources:
     - title: "R. Hartshorne, Algebraic Geometry"
       url: https://doi.org/10.1007/978-1-4757-3849-0
       locator: "Chapter III, Section 5, the proof of Theorem 5.1 (the pairing is the case q=n)"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-differentials-smooth-locally-free
 kind: theorem
 title: "Differentials of a smooth morphism"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-morphism-schemes
@@ -25,6 +25,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.34-29.36 (smooth morphisms)"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

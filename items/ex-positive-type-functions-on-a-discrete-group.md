@@ -2,7 +2,7 @@
 id: ex-positive-type-functions-on-a-discrete-group
 kind: example
 title: "Positive type on a discrete group: the identity mass, characters, and the regular GNS model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -55,10 +55,12 @@ deps:
   - thm-reals-ordered-field
 axiom_audit: "The positive-type and normalization claims are choice-free. AC is used only through ACω for the Hilbert completion, unique bounded extensions, and the standard ℓ² coordinate realization in the left-regular GNS model; these uniqueness and coordinate constructions use no further choice."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

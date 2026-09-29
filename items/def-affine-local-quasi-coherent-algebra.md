@@ -2,7 +2,7 @@
 id: def-affine-local-quasi-coherent-algebra
 kind: definition
 title: Affine-local quasi-coherent algebras before general sheaf theory
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-scheme-over-base
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stacks Project, Morphisms of Schemes §§29.11, 29.42–45

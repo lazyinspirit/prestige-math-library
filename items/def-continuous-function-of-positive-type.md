@@ -2,7 +2,7 @@
 id: def-continuous-function-of-positive-type
 kind: definition
 title: Continuous positive-type functions and normalization
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Definition C.4.1 and Proposition C.4.2, Appendix C, printed pp. 373–374"

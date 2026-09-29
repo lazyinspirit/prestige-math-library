@@ -1,7 +1,7 @@
 ---
 page: "the-gauss-bonnet-theorem-for-riemannian-surfaces-examples"
 title: "The Gauss Bonnet Theorem for Riemannian Surfaces — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gauss-bonnet-for-a-euclidean-disk

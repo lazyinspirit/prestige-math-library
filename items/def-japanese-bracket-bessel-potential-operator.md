@@ -2,7 +2,7 @@
 id: def-japanese-bracket-bessel-potential-operator
 kind: definition
 title: Japanese-bracket and Laplacian Bessel-potential operators
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-schwartz-space-and-its-seminorms
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

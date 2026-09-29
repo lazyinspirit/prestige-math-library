@@ -2,7 +2,7 @@
 id: ex-pontryagin-forms-from-a-real-connection
 kind: example
 title: Pontryagin forms from a real connection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)

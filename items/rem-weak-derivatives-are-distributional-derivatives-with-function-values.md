@@ -2,7 +2,7 @@
 id: rem-weak-derivatives-are-distributional-derivatives-with-function-values
 kind: remark
 title: Weak derivatives are represented distributional derivatives
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-locally-integrable-function-as-a-regular-distribution
@@ -31,10 +31,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-multiplicity-two-diagonal-representation
 kind: example
 title: Multiplicity-two diagonal representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -63,6 +63,7 @@ sources:
       locator: "Chapter 1 §1.H, Theorems 1.H.1 and 1.H.4, Corollary 1.H.5, printed pp. 65–68; the constant two-dimensional commutant is identified entrywise here"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

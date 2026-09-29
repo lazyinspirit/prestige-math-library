@@ -10,10 +10,13 @@ sources:
     - title: John K. Hunter, Notes on Partial Differential Equations (2014)
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: §2.5, Theorem 2.23 and equations (2.10)–(2.11), printed p. 32
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["cor-first-green-identity-on-a-bounded-c-one-domain", "def-classical-normal-derivative", "def-countable-choice", "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant", "cor-mean-value-theorem", "thm-connected-subsets-of-r-are-intervals", "thm-algebra-of-total-derivatives", "def-laplacian-of-a-c2-function"]
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

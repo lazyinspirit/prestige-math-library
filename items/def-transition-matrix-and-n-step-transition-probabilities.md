@@ -2,7 +2,7 @@
 id: def-transition-matrix-and-n-step-transition-probabilities
 kind: definition
 title: "Transition matrices and n-step probabilities"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-iterated-transition-kernels
@@ -13,6 +13,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

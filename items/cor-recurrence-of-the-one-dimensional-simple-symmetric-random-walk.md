@@ -2,7 +2,7 @@
 id: cor-recurrence-of-the-one-dimensional-simple-symmetric-random-walk
 kind: corollary
 title: "One-dimensional simple symmetric walk is recurrent"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -23,10 +23,12 @@ deps:
   - cor-central-binomial-coefficient-asymptotic-from-wallis
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

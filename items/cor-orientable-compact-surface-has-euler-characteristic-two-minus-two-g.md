@@ -2,7 +2,7 @@
 id: cor-orientable-compact-surface-has-euler-characteristic-two-minus-two-g
 kind: corollary
 title: "Euler characteristic of an orientable compact surface"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-classification-of-compact-connected-surfaces, def-euler-characteristic-of-a-finite-cw-complex, def-axiom-of-choice]
 justified_by: []
@@ -12,10 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

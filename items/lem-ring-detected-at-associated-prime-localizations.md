@@ -2,7 +2,7 @@
 id: lem-ring-detected-at-associated-prime-localizations
 kind: lemma
 title: Associated-prime localizations detect elements and have depth zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -18,6 +18,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/0311
     - title: "The Stacks Project, Algebra, Section 10.102 (tag 00MR), associated-prime step in the acyclicity criterion"
       url: https://stacks.math.columbia.edu/tag/00MR
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

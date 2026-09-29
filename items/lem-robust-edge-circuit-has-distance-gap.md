@@ -2,7 +2,7 @@
 id: lem-robust-edge-circuit-has-distance-gap
 kind: lemma
 title: "A violated decoded edge is far from edge-circuit acceptance"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-robust-codeword-blocks-for-constraint-graphs
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

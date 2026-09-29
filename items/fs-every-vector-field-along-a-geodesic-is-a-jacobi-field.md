@@ -2,7 +2,7 @@
 id: fs-every-vector-field-along-a-geodesic-is-a-jacobi-field
 kind: false-statement
 title: Every vector field along a geodesic is a Jacobi field
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-jacobi-field
@@ -24,6 +24,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Example 15.1.3, printed p.113 (PDF label P121); Definition 21.2.3, printed p.157 (PDF label P164)"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

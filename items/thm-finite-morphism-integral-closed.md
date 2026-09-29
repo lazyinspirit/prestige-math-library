@@ -2,7 +2,7 @@
 id: thm-finite-morphism-integral-closed
 kind: theorem
 title: Finite morphisms are integral and universally closed
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-finite-morphism-schemes
@@ -18,10 +18,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.45.4 (tag 01WG) and Lemma 29.44.4"

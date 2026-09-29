@@ -2,7 +2,7 @@
 id: lem-unitary-matrix-coefficients-are-bounded-and-uniformly-continuous
 kind: lemma
 title: "Bounds and two-sided uniform continuity of unitary coefficients"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [def-matrix-coefficient-of-a-unitary-representation, def-left-and-right-uniformities-of-a-topological-group, def-complex-metric-convergence-and-continuity, def-real-and-complex-inner-product-space, def-strongly-continuous-unitary-representation, def-topological-group, def-uniformly-continuous-map, lem-metric-uniformity-dictionary, thm-cauchy-schwarz-in-an-inner-product-space]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Definition A.1.1, Appendix A printed pp. 305–306, and the left/right uniform-continuity convention in §A.3 printed pp. 318–319"

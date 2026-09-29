@@ -2,7 +2,7 @@
 id: ex-coordinate-change-for-meromorphic-differential
 kind: example
 title: Orders and residues under inversion on the sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -26,6 +26,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 6, meromorphic forms and their residues; the change-of-coordinates computation of dz in the chart at infinity."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

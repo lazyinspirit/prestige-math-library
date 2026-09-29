@@ -2,7 +2,7 @@
 id: def-very-ample-invertible-sheaf-relative
 kind: definition
 title: "Relative very ampleness in the finite projective-space convention"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -20,6 +20,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01VG
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 17.6"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

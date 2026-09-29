@@ -2,7 +2,7 @@
 id: thm-classification-of-compact-connected-surfaces
 kind: theorem
 title: "Classification of compact connected surfaces"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-polygonal-normal-form-for-compact-connected-surfaces, lem-polygonal-schema-reduction-moves, def-connected-sum-of-compact-surfaces, def-polygonal-schema-and-edge-pairing, ex-sphere-polygonal-schema, ex-torus-polygonal-schema, ex-projective-plane-polygonal-schema, def-euler-characteristic-of-a-finite-cw-complex, thm-euler-poincare-formula-for-finite-cw-complexes, def-r-orientation-of-a-topological-manifold, def-orientation-local-system-and-orientation-cover, thm-top-homology-characterizes-compact-orientable-manifolds, prop-singular-chains-and-homology-are-covariantly-functorial, def-axiom-of-choice]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§§3–9, printed pp.3–13; normal forms compared with orientation and Euler characteristic"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-associated-module-sheaf-exists
 kind: theorem
 title: The associated module sheaf exists
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-associated-sheaf-module-affine-scheme
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

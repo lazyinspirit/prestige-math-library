@@ -2,7 +2,7 @@
 id: thm-polygonal-normal-form-for-compact-connected-surfaces
 kind: theorem
 title: "Polygonal normal forms for compact connected surfaces"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-compact-surface-admits-a-finite-triangulation, lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema, lem-polygonal-schema-reduction-moves, def-polygonal-schema-and-edge-pairing, def-euler-characteristic-of-a-finite-cw-complex, thm-euler-poincare-formula-for-finite-cw-complexes, prop-singular-chains-and-homology-are-covariantly-functorial, def-axiom-of-choice]
 justified_by: []
@@ -18,6 +18,9 @@ sources:
       url: "https://www.cis.upenn.edu/~jean/surfclassif-root.pdf"
       locator: "Chapter 6, Lemma 6.1, Steps 1–6, printed pp.92–95 (PDF pp.102–105)"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

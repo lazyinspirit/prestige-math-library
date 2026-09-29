@@ -2,7 +2,7 @@
 id: thm-relative-proj-base-change
 kind: theorem
 title: "Relative Proj commutes with arbitrary base change"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-relative-proj-quasi-coherent-graded-algebra
@@ -20,6 +20,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

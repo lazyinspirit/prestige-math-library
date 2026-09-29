@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data
 kind: theorem
 title: Existence and uniqueness of jacobi fields from initial data
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-the-tangent-space-of-an-n-manifold-has-dimension-n
@@ -21,10 +21,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

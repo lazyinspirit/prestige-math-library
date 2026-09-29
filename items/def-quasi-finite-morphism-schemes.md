@@ -2,7 +2,7 @@
 id: def-quasi-finite-morphism-schemes
 kind: definition
 title: Quasi-finite morphisms of schemes
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-locally-finite-type-and-finite-type-morphism
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, §29.21 Definition 29.21.1 and Lemma 29.21.6"

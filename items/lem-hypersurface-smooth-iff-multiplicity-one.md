@@ -2,7 +2,7 @@
 id: lem-hypersurface-smooth-iff-multiplicity-one
 kind: lemma
 title: "Multiplicity one is the smooth hypersurface test"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -22,10 +22,12 @@ deps:
   - thm-stalk-structure-sheaf-prime-localization
   - def-axiom-of-choice
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

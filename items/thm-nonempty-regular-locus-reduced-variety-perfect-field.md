@@ -2,7 +2,7 @@
 id: thm-nonempty-regular-locus-reduced-variety-perfect-field
 kind: theorem
 title: "Dense regular loci on every component"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -32,10 +32,12 @@ deps:
   - thm-regular-locus-is-open-variety
   - thm-stalk-structure-sheaf-prime-localization
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

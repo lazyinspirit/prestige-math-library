@@ -2,7 +2,7 @@
 id: lem-finite-analytic-chart-triangulation-compact-riemann-surface
 kind: lemma
 title: Finite chartwise triangulation of a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,6 +25,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 2, the complex structure as an orientation, and Ch. 3, local normal forms; used as a cross-check that holomorphic transitions preserve orientation and that triangulations of compact surfaces are finite."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

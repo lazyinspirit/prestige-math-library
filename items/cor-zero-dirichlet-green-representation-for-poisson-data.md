@@ -2,16 +2,18 @@
 id: cor-zero-dirichlet-green-representation-for-poisson-data
 kind: corollary
 title: Zero-Dirichlet Green representation for Poisson data
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"

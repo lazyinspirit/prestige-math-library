@@ -6,16 +6,18 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: §§2.5–2.7, printed pp. 32–42
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-fundamental-solution-of-a-constant-coefficient-operator", "def-distributional-derivative", "def-regular-distribution-from-a-locally-integrable-function", "def-countable-choice", "def-distribution", "def-laplacian-of-a-c2-function", "thm-locally-integrable-functions-embed-in-distributions", "thm-distributional-differentiation-is-continuous-and-commutes", "lem-euclidean-balls-have-positive-finite-lebesgue-measure", "lem-test-function-cutoffs-and-euclidean-localization"]

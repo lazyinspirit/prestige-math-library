@@ -2,7 +2,7 @@
 id: def-standard-open-proj
 kind: definition
 title: "Standard opens of Proj"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-proj-graded-ring-points
@@ -15,6 +15,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01M3
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 4.5"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

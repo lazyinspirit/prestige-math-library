@@ -2,7 +2,7 @@
 id: lem-diagonal-multipliers-form-a-von-neumann-algebra
 kind: lemma
 title: Diagonal multipliers form a von Neumann algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -41,6 +41,7 @@ sources:
 axiom_use: "Assume AC to meet the hypotheses of the direct-integral action theorem, the decomposable-commutant theorem, and the von Neumann algebra/adjoint conventions. The normalized fundamental family, countable exceptional-set union, and least-index scalar partition below are explicit and use no additional choice."
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-wronskian-of-two-jacobi-fields-is-constant
 kind: lemma
 title: Wronskian of two jacobi fields is constant
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-zero-derivative-implies-constant
@@ -19,10 +19,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

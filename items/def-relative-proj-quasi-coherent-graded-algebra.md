@@ -2,7 +2,7 @@
 id: def-relative-proj-quasi-coherent-graded-algebra
 kind: definition
 title: "Relative Proj of a graded quasi-coherent algebra"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-relative-proj-affine-local-gluing
@@ -22,6 +22,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

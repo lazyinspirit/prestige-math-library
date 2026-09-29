@@ -2,7 +2,7 @@
 id: thm-finite-length-grothendieck-groups-have-simple-class-bases
 kind: theorem
 title: "Simple classes freely generate the Grothendieck group of a length category"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -27,10 +27,12 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

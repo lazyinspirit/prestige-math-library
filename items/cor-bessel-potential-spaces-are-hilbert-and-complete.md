@@ -2,7 +2,7 @@
 id: cor-bessel-potential-spaces-are-hilbert-and-complete
 kind: corollary
 title: Every real-order Bessel-potential completion is Hilbert
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bessel-potential-completions-embed-in-tempered-distributions
@@ -21,6 +21,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

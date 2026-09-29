@@ -1,7 +1,7 @@
 ---
 page: chern-weil-theory-and-characteristic-forms
 title: "Chern–Weil Theory and Characteristic Forms"
-status: draft
+status: published
 requires: [riemann-curvature-and-riemannian-submanifolds,
            lie-groups-invariant-fields-and-the-exponential-map,
            chern-and-pontryagin-classes-by-splitting-and-complexification,

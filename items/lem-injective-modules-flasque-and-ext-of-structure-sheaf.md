@@ -2,7 +2,7 @@
 id: lem-injective-modules-flasque-and-ext-of-structure-sheaf
 kind: lemma
 title: Injective modules are flasque and Ext from the structure sheaf is cohomology
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-sheaf-ext-for-coherent-modules
@@ -26,10 +26,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Sheaves of Modules"

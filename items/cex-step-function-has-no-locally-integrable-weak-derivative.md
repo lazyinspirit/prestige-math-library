@@ -2,7 +2,7 @@
 id: cex-step-function-has-no-locally-integrable-weak-derivative
 kind: counterexample
 title: A step has no locally integrable weak derivative
-status: draft
+status: published
 origin: pipeline
 deps: [def-weak-derivative-of-a-locally-integrable-function, def-sobolev-space-wkp-and-its-norm, def-dirac-delta-and-its-derivatives, thm-absolute-continuity-of-the-integral, def-countable-choice, def-locally-integrable-function-as-a-regular-distribution, def-distributional-derivative, def-complex-lp-and-euclidean-test-function-conventions, thm-lebesgue-measure-of-a-box-of-every-kind, prop-indicator-function-is-measurable-iff-its-set-is-measurable, def-integral-of-a-nonnegative-simple-function, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, def-test-function-space-d-of-an-open-set, lem-smooth-bump-between-concentric-euclidean-balls, thm-chain-rule, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-integral-triangle-inequality, cor-integral-over-a-null-set-vanishes]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

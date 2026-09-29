@@ -2,7 +2,7 @@
 id: lem-cohomology-base-change-finite-free-criterion
 kind: lemma
 title: Finite-free local criterion for cohomology and base change
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -21,10 +21,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), §28.2, in particular 28.2.10–28.2.11"

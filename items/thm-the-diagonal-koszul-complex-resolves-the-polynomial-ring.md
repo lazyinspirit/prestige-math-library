@@ -2,7 +2,7 @@
 id: thm-the-diagonal-koszul-complex-resolves-the-polynomial-ring
 kind: theorem
 title: The diagonal Koszul complex is a finite free resolution of R
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, lem-polynomial-diagonal-differences-form-a-regular-sequence, thm-regular-sequences-give-acyclic-koszul-complexes, thm-basic-koszul-homology, lem-exterior-algebra-basis-monomials, thm-free-modules-are-projective-with-choice-boundary, def-enveloping-algebra-and-bimodule-module-dictionary, def-projective-resolution-in-an-abelian-category, thm-modules-over-a-ring-form-an-abelian-category]
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-absolute-continuity-on-almost-every-coordinate-line
 kind: definition
 title: Absolute continuity on almost every coordinate line
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-absolutely-continuous-function, thm-tonelli-and-fubini-for-completed-product-measures, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, def-countable-choice]
 landmark: false
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

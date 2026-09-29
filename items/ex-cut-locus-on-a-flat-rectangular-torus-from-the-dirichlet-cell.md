@@ -2,7 +2,7 @@
 id: ex-cut-locus-on-a-flat-rectangular-torus-from-the-dirichlet-cell
 kind: example
 title: Cut locus on a flat rectangular torus from the Dirichlet cell
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-triangle-inequality-for-inner-product-norm
@@ -42,10 +42,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

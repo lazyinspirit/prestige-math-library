@@ -2,7 +2,7 @@
 id: ex-standard-etale-square-root
 kind: example
 title: "The square-root standard etale chart"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-standard-etale-algebra
@@ -23,6 +23,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapter 26 (the T^2-a square-root chart)"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

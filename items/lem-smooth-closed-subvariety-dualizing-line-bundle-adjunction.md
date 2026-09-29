@@ -2,7 +2,7 @@
 id: lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction
 kind: lemma
 title: Adjunction for a smooth closed subvariety
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-projective-dualizing-line-bundle-and-trace
@@ -19,10 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Duality for Schemes"

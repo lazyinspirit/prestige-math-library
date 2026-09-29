@@ -2,7 +2,7 @@
 id: thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals
 kind: theorem
 title: Characteristic forms represent topological characteristic classes over the reals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -40,6 +40,7 @@ sources:
       locator: "Appendix C, split-sum Chern calculation and Corollary C.10, printed pp. 193–194; Lemma C.12 and Generalized Gauss–Bonnet Theorem, printed pp. 195–196; sign-convention qualification, printed p. 192"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

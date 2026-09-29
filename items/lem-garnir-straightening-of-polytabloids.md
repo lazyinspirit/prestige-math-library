@@ -2,7 +2,7 @@
 id: lem-garnir-straightening-of-polytabloids
 kind: lemma
 title: Garnir straightening spans the complex Specht module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [lem-adjacent-column-garnir-relation, def-tabloid-and-column-orders-for-specht-straightening, lem-polytabloid-covariance-and-column-sign, def-column-antisymmetrizer-polytabloid-and-specht-module, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-partition-young-diagram-and-conjugate-partition]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

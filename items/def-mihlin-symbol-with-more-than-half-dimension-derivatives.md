@@ -2,7 +2,7 @@
 id: def-mihlin-symbol-with-more-than-half-dimension-derivatives
 kind: definition
 title: Mihlin smoothness convention above half the dimension
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-lp-fourier-multiplier-and-multiplier-norm
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."

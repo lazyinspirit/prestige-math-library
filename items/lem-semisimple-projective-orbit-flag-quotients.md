@@ -2,7 +2,7 @@
 id: lem-semisimple-projective-orbit-flag-quotients
 kind: lemma
 title: Projective orbit constructions for G/B and G/P_alpha
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -40,6 +40,9 @@ sources:
     - title: "Michel Brion, Lectures on the Geometry of Flag Varieties"
       url: https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf
       locator: "§§1.2-1.4 and the opening of §2.1"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

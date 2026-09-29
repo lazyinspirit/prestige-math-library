@@ -2,7 +2,7 @@
 id: def-pcp-of-proximity-and-concatenation-test
 kind: definition
 title: "Two-piece PCP of proximity and concatenation check"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-walsh-hadamard-encoding-and-relative-distance
@@ -19,6 +19,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: n/a
+  audited: 2026-09-30
 ---
 
 ## Definition

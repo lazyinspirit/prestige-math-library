@@ -1,7 +1,7 @@
 ---
 page: cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes-examples
 title: "Cohomology of Quasi Coherent Sheaves on Affine and Projective Schemes — Examples"
-status: draft
+status: published
 requires:
   - cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes
 items:

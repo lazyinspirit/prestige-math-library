@@ -2,7 +2,7 @@
 id: thm-schurs-lemma-for-unitary-representations
 kind: theorem
 title: Schur lemma for complex unitary representations
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [def-strongly-continuous-unitary-representation, def-hilbert-space, def-real-and-complex-inner-product-space, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, thm-borel-functional-calculus-for-bounded-normal-operators, thm-support-and-uniqueness-of-the-spectral-measure, thm-continuous-functional-calculus-for-bounded-normal-operators, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, thm-nth-roots-exist, def-axiom-of-choice]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Theorem A.2.2, Appendix A, printed pp. 312–314"

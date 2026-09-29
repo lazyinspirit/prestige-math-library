@@ -2,7 +2,7 @@
 id: thm-regular-equals-smooth-over-perfect-field
 kind: theorem
 title: "Regular equals smooth over a perfect field"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -28,10 +28,12 @@ deps:
   - thm-ag-standard-smooth-geometric-regularity
   - thm-stalk-structure-sheaf-prime-localization
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Varieties Lemma 33.12.3 (tag 038V), affine chart criterion for geometric regularity"

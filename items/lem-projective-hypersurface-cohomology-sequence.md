@@ -2,7 +2,7 @@
 id: lem-projective-hypersurface-cohomology-sequence
 kind: lemma
 title: "Hypersurface cohomology sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -37,10 +37,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, Sections 30.2-30.22"
@@ -200,12 +202,21 @@ agrees with the count of negative exponent tuples summing to $-d$.
 **Proof technique:** direct: build the multiplication-by-$f$ morphism from the degree-zero graded map $B(-d)\to B$, verify the displayed sequence chartwise on the standard affine cover using exactness of localisation and of the associated-sheaf functor, identify the cokernel with the pushforward along the closed immersion of $V_+(f)$, and substitute the computed projective-space groups into the long exact sequence.
 
 1.1 The morphism of sheaves. By [F3] and [F2] the degree-zero graded map $a\mapsto fa$ induces a morphism $\phi=\widetilde{(\cdot f)}:\mathcal O(-d)=\widetilde{B(-d)}\to\widetilde B=\mathcal O$ whose component on the chart $D_+(x_i)$ is the localised map $B(-d)_{(x_i)}\to B_{(x_i)}$, $a/x_i^k\mapsto fa/x_i^k$. [F2, F3]
+
 1.2 Chartwise form and injectivity. Transporting the source of the component along the isomorphism of [F3], multiplication by $x_i^d$, exhibits $\phi|_{D_+(x_i)}$ as multiplication by $f_i:=f/x_i^d$ on $B_{(x_i)}$; hence $\phi|_{D_+(x_i)}$ is injective if and only if $f_i$ is a nonzerodivisor of $B_{(x_i)}$, and by the locality of exactness [F6] $\phi$ is injective if and only if this holds for every $i$, which is the stated hypothesis. In the field case $B_{(x_i)}=k[x_j/x_i:j\ne i]$ is a polynomial ring over a field, hence a domain, and $f_i\ne0$ because $f\ne0$ and localisation of a domain at a nonzero element is injective; so the hypothesis is automatic then. [F1, F2, F3, F6]
+
 2.1 The cokernel on a chart. On the affine chart $D_+(x_i)=\operatorname{Spec}B_{(x_i)}$ the module sequence $0\to B_{(x_i)}\xrightarrow{\cdot f_i}B_{(x_i)}\to B_{(x_i)}/(f_i)\to0$ is exact, so by [F5] the restriction of $0\to\mathcal O(-d)\xrightarrow{\phi}\mathcal O$ to the chart is short exact with cokernel the associated sheaf of $B_{(x_i)}/(f_i)$; its last map is the quotient map. [F5, step 1.2]
+
 3.1 The structure map on a chart. By [F4] the closed immersion restricts over $D_+(x_i)$ to the canonical closed immersion with coordinate ring $B_{(x_i)}/(f_i)$, so the component of $i^{\sharp}$ on the chart is the quotient map $B_{(x_i)}\to B_{(x_i)}/(f_i)$ with kernel the principal ideal $(f_i)$; hence $(i_*\mathcal O_X)|_{D_+(x_i)}$ is the associated sheaf of $B_{(x_i)}/(f_i)$ and $\ker(i^{\sharp}|_{D_+(x_i)})=\operatorname{im}(\phi|_{D_+(x_i)})$ inside $\mathcal O|_{D_+(x_i)}$. [F4, step 2.1, algebra]
+
 4.1 The short exact sequence. On each chart of the cover $D_+(x_i)$ the maps $\phi$ and $i^{\sharp}$ satisfy $\ker i^{\sharp}=\operatorname{im}\phi$ by [step 3.1], and $i^{\sharp}$ is surjective on each chart by [F4]; by the locality of exactness [F6] the sequence $0\to\mathcal O(-d)\xrightarrow{\phi}\mathcal O\xrightarrow{i^{\sharp}}i_*\mathcal O_X\to0$ is short exact. This is the displayed short exact sequence. [F4, F6, step 2.1, step 3.1]
+
 5.1 The long exact sequence. Applying [F7] to the short exact sequence of [step 4.1] gives the long exact sequence with connecting maps $\partial^q:H^q(\mathbb P^n_A,i_*\mathcal O_X)\to H^{q+1}(\mathbb P^n_A,\mathcal O(-d))$, whose other terms are $H^q(\mathbb P^n_A,\mathcal O(-d))$ and $H^q(\mathbb P^n_A,\mathcal O)$. [F7, step 4.1]
+
 6.1 The cohomology of the hypersurface. Since $\mathcal O_X$ is quasi-coherent by [F8], the closed-immersion isomorphism gives $H^q(X,\mathcal O_X)\cong H^q(\mathbb P^n_A,i_*\mathcal O_X)$ for every $q\ge0$; composing with [step 5.1] replaces the third term of the long exact sequence by $H^q(X,\mathcal O_X)$ and identifies $\partial^q$ with a map $H^q(X,\mathcal O_X)\to H^{q+1}(\mathbb P^n_A,\mathcal O(-d))$. [F8, step 5.1]
+
 7.1 Substitution of the explicit groups. By [F9], $H^q(\mathbb P^n_A,\mathcal O)=0$ and $H^{q+1}(\mathbb P^n_A,\mathcal O)=0$ for every $q\ge1$, so exactness of the sequence of [step 6.1] at $H^q(\mathbb P^n_A,i_*\mathcal O_X)$ and $H^{q+1}(\mathbb P^n_A,\mathcal O(-d))$ makes $\partial^q$ an isomorphism for $q\ge1$; in degree zero the same sequence reads $0\to H^0(\mathbb P^n_A,\mathcal O(-d))\to A\to H^0(X,\mathcal O_X)\to H^1(\mathbb P^n_A,\mathcal O(-d))\to0$ because $H^0(\mathbb P^n_A,\mathcal O)\cong A$ and $H^1(\mathbb P^n_A,\mathcal O)=0$ by [F9]. Moreover $H^0(\mathbb P^n_A,\mathcal O(-d))=0$ for $n\ge1$ and $d>0$ by [F9], while for $n=0$ it is $\cong A$, and $H^1(\mathbb P^n_A,\mathcal O(-d))=0$ for $n\ne1$ since then $1$ is neither $0$ nor $n$. [F9, step 6.1]
+
 8.1 Vanishing and the top group. For $q\ge1$, [F9] gives $H^{q+1}(\mathbb P^n_A,\mathcal O(-d))=0$ unless $q+1\in\{0,n\}$, and $q+1\ge2>0$, so $H^q(X,\mathcal O_X)=0$ for every $q\ge1$ with $q\ne n-1$, and for $n\ge2$ the remaining positive-degree group is $H^{n-1}(X,\mathcal O_X)\cong H^n(\mathbb P^n_A,\mathcal O(-d))$, the free $A$-module on the $(n+1)$-tuples of negative integers with sum $-d$ by [F9]. For $A=k$ a field these tuples correspond bijectively to the compositions of $d$ into $n+1$ positive parts via $g_i=-e_i$, and [F10] counts them by $\binom{d-1}{n}$, which is $0$ when $d-1<n$, i.e. for $d\le n$; hence for $n\ge2$ one has $\dim_kH^{n-1}(X,\mathcal O_X)=\binom{d-1}{n}$ and this group vanishes for $d\le n$. When $n=1$, every $q\ge1$ group vanishes by the same connecting-map argument, while degree zero has the exact sequence $0\to A\to H^0(X,\mathcal O_X)\to H^1(\mathbb P^1_A,\mathcal O(-d))\to0$ from step 7.1. For $A=k$ a field, the last group has dimension $d-1$ by [F9, F10] (including $d=1$, when it is zero), so $\dim_kH^0(X,\mathcal O_X)=d$. [F9, F10, step 7.1]
+
 9.1 Boundaries and choice accounting. If $A=0$ then $\mathbb P^n_A=\varnothing$, $X=\varnothing$ and every sheaf and group above is zero, so the sequence and all isomorphisms hold. If $A=k$ is a field and $n=0$, then $f=cx_0^d$ with $c\ne0$ and $X=\operatorname{Spec}\bigl(k/(c)\bigr)=\varnothing$: the chart sequence is $0\to k\xrightarrow{c}k\to0\to0$, the long exact sequence reads $0\to k\xrightarrow{\cong}k\to H^0(X,\mathcal O_X)=0\to H^1(\mathbb P^0,\mathcal O(-d))=0$, and $H^q(X,\mathcal O_X)=0=H^{q+1}(\mathbb P^0,\mathcal O(-d))$ for all $q\ge1$. For general $A$ and $n=0$ the chart ring is $A$ and $X=\operatorname{Spec}(A/(c))$ for the scalar $c$ with $f=cx_0^d$, so $H^0(X,\mathcal O_X)\cong A/(c)$ and the degree-zero sequence is exact by construction of the cokernel; the case $f=x_0^d$ has $c=1$ and $X=\operatorname{Spec}(A/(1))=\varnothing$. Over a field and $n\ge2$, $d\le n$ gives $\binom{d-1}{n}=0$. Nonreduced examples are covered, e.g. $f=x_1^d$ over a field for $n\ge1$; when $n=1$ its degree-zero section space has dimension $d$ by step 8.1, and when $n\ge2$ the top positive-degree group is computed by the stated isomorphism. The Axiom of Choice is consumed exactly through the suppliers [F7] and [F8] and the twist computation [F9]; no resolution, chart or trivialisation is chosen in this proof. [F7, F8, F9, F10, step 7.1, step 8.1, cases: zero ring and n=0 and d<=n and nonreduced f] ∎

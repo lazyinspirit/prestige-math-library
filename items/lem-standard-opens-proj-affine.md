@@ -2,7 +2,7 @@
 id: lem-standard-opens-proj-affine
 kind: lemma
 title: "Standard opens are affine"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-proj-structure-sheaf-scheme
@@ -19,6 +19,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01M3
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 4.5"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

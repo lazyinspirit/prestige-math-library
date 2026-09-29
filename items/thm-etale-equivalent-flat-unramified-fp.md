@@ -2,7 +2,7 @@
 id: thm-etale-equivalent-flat-unramified-fp
 kind: theorem
 title: "Étale equals flat and unramified in finite presentation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-morphism-schemes
@@ -33,6 +33,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapter 26"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

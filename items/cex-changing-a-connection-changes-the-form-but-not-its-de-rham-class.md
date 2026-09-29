@@ -2,7 +2,7 @@
 id: cex-changing-a-connection-changes-the-form-but-not-its-de-rham-class
 kind: counterexample
 title: Connections can change a representative without changing its class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -22,6 +22,7 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   references:
     - title: Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)

@@ -2,7 +2,7 @@
 id: ex-cusp-double-tangent
 kind: example
 title: "The cusp retains a doubled tangent line"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -35,6 +35,9 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
     - title: "J. S. Milne, Algebraic Geometry Chapter 10 supplement, Definitions 10.67 and Example 10.68 (printed p. 18)"
       url: "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

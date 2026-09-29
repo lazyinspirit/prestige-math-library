@@ -2,7 +2,7 @@
 id: ex-node-two-tangent-directions
 kind: example
 title: "A node has two distinct tangent directions"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -28,6 +28,9 @@ sources:
   references:
     - title: "J. S. Milne, Algebraic Geometry, v6.10, Example 4.4 (printed p. 82) and Example 4.10 (printed p. 84)"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

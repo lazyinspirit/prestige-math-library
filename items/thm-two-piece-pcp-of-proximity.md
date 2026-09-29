@@ -2,7 +2,7 @@
 id: thm-two-piece-pcp-of-proximity
 kind: theorem
 title: "A two-piece constant-query PCP of proximity"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-pcp-of-proximity-and-concatenation-test
@@ -28,6 +28,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

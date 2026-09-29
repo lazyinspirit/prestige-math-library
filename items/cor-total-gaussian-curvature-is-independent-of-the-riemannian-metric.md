@@ -2,7 +2,7 @@
 id: cor-total-gaussian-curvature-is-independent-of-the-riemannian-metric
 kind: corollary
 title: Metric independence of total Gaussian curvature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -24,6 +24,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.2.4, printed pp. 14-15 (PDF pp. 21-22): the same curvature/Euler identity, whose right-hand side does not depend on the metric."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

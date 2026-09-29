@@ -2,7 +2,7 @@
 id: lem-principal-open-cover-qc-acyclic-intersections
 kind: lemma
 title: "Acyclicity on intersections of a standard affine cover"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -17,10 +17,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, Sections 30.2-30.22"

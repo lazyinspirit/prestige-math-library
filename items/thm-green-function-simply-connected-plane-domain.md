@@ -2,7 +2,7 @@
 id: thm-green-function-simply-connected-plane-domain
 kind: theorem
 title: "Green kernel of a simply connected plane domain from a Riemann map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -35,6 +35,7 @@ sources:
       locator: "Section 10.9, printed pp. 171-172: the logarithmic Green function of a simply connected domain via the Riemann map"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

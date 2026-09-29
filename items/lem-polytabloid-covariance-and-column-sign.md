@@ -2,7 +2,7 @@
 id: lem-polytabloid-covariance-and-column-sign
 kind: lemma
 title: Polytabloid covariance and the column sign rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-column-antisymmetrizer-polytabloid-and-specht-module, lem-tableau-stabilizers-transform-by-conjugation, def-row-and-column-stabilizers-of-a-tableau, thm-sign-is-a-homomorphism, def-young-tableau-standard-tableau-and-shape, def-young-subgroup-tabloid-and-permutation-module]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

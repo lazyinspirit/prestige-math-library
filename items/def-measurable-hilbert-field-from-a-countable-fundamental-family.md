@@ -2,7 +2,7 @@
 id: def-measurable-hilbert-field-from-a-countable-fundamental-family
 kind: definition
 title: Measurable Hilbert field from a countable fundamental family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,6 +25,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: ex-polynomial-ring-flat-smooth
 kind: example
 title: "Polynomial rings are flat and smooth"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-morphism-schemes
@@ -26,6 +26,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapters 25-26"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

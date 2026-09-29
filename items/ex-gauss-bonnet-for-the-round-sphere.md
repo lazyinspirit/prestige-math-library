@@ -2,7 +2,7 @@
 id: ex-gauss-bonnet-for-the-round-sphere
 kind: example
 title: Total curvature of a round sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -33,6 +33,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.2.4, printed pp. 14-15 (PDF pp. 21-22): the global identity, with the sphere of constant curvature as the standard check."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

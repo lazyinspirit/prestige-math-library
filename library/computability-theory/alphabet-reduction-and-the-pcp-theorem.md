@@ -1,7 +1,7 @@
 ---
 page: alphabet-reduction-and-the-pcp-theorem
 title: "Alphabet Reduction and the PCP Theorem"
-status: draft
+status: published
 requires: [gap-amplification-and-assignment-testing, arithmetization-and-the-sum-check-protocol, the-cook-levin-theorem]
 items:
   - def-pcp-verifier-randomness-query-and-proof-length

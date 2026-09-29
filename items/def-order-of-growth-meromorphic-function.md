@@ -2,7 +2,7 @@
 id: def-order-of-growth-meromorphic-function
 kind: definition
 title: "Order and lower order from the Nevanlinna characteristic"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

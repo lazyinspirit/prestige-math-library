@@ -2,7 +2,7 @@
 id: lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces
 kind: lemma
 title: Bounded restriction and cutoff localisation in Sobolev spaces
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, lem-sobolev-norm-is-well-defined-and-definite, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-leibniz-rule-with-a-smooth-factor, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-complex-holder-minkowski-and-the-quotient-norm, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-essential-supremum-with-respect-to-a-measure, def-complex-lp-and-euclidean-test-function-conventions, def-test-function-space-d-of-an-open-set, thm-extreme-value-metric, lem-complex-conjugation-and-modulus-laws, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Juha Kinnunen, Sobolev Spaces (2026), Chapter 1 §§1.2–1.3

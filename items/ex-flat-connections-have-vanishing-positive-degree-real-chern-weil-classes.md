@@ -2,7 +2,7 @@
 id: ex-flat-connections-have-vanishing-positive-degree-real-chern-weil-classes
 kind: example
 title: Flat connections and real characteristic classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -49,6 +49,9 @@ sources:
     - title: Allen Hatcher, Vector Bundles & K-Theory
       url: https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf
       locator: "Appendix to §1.2, Proposition 1.20, printed pp. 36–37: every CW complex is paracompact"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

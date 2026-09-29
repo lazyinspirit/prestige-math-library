@@ -2,7 +2,7 @@
 id: def-higher-direct-image-sheaf
 kind: definition
 title: Higher direct image of a sheaf
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-module-on-ringed-space
@@ -26,6 +26,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/coherent.pdf"
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), \u00a7\u00a719.1, 19.6, 19.9, 28.1\u201328.2"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

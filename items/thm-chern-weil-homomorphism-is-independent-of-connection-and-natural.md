@@ -2,7 +2,7 @@
 id: thm-chern-weil-homomorphism-is-independent-of-connection-and-natural
 kind: theorem
 title: Connection independence and naturality of Chern–Weil classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -33,6 +33,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)

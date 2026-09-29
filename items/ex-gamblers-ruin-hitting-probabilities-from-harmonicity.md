@@ -2,7 +2,7 @@
 id: ex-gamblers-ruin-hitting-probabilities-from-harmonicity
 kind: example
 title: "Gambler’s ruin from harmonicity"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -23,10 +23,12 @@ deps:
 proof_strategy: direct
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"

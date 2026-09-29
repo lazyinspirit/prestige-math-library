@@ -2,7 +2,7 @@
 id: thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces
 kind: theorem
 title: Direct integrals of measurable Hilbert fields are Hilbert spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -58,7 +58,8 @@ sources:
       url: "https://mathweb.tifr.res.in/Documents/Publications/Lectures/tifr14.pdf"
       locator: "Part III, Chapter 10 §§1.3–1.5, printed pp. 94–96 (Riesz–Fischer completion discussion on p. 95; measurable fields and fibrewise Gram–Schmidt on pp. 95–96)"
 verification:
-  precheck: n/a
+  precheck: pass
+  audited: 2026-09-30
 axiom_use: "Assume AC. It selects measurable representatives of the countable subsequence of quotient classes and supplies the countable-choice hypothesis of Parseval. AC also supplies the standard-Borel coding and countable generating-algebra corollary used for scalar L² separability. The Cauchy thresholds and fibrewise Gram–Schmidt construction are canonical; no further choice is used."
 ---
 

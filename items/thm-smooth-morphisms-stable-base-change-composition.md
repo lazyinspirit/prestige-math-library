@@ -2,7 +2,7 @@
 id: thm-smooth-morphisms-stable-base-change-composition
 kind: theorem
 title: "Smoothness survives base change and composition"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-morphism-schemes
@@ -25,6 +25,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Sections 25.3 and 26.1"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

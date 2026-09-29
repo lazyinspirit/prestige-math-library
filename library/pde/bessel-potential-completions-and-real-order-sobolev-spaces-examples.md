@@ -1,7 +1,7 @@
 ---
 page: bessel-potential-completions-and-real-order-sobolev-spaces-examples
 title: "Bessel-Potential Completions and Real-Order Sobolev Spaces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-schwartz-functions-in-every-bessel-potential-completion,
            ex-zero-order-bessel-completion-is-ltwo]

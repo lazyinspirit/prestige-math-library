@@ -2,7 +2,7 @@
 id: def-associated-sheaf-graded-module-proj
 kind: definition
 title: "Associated sheaf of a graded module on Proj"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-proj-structure-sheaf-scheme
@@ -19,6 +19,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01MJ
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 4.5"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

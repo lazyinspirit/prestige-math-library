@@ -1,7 +1,7 @@
 ---
 page: chern-weil-theory-and-characteristic-forms-examples
 title: "Chern–Weil Theory and Characteristic Forms: Examples"
-status: draft
+status: published
 requires: [chern-weil-theory-and-characteristic-forms]
 items: []
 examples: [ex-curvature-and-first-chern-form-of-a-line-bundle,

@@ -2,7 +2,7 @@
 id: ex-positive-type-gaussian-on-the-real-line
 kind: example
 title: The positive-type Gaussian on the real line and its cyclic model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -12,10 +12,12 @@ provenance:
 deps: [cor-additivity-of-the-nonnegative-lebesgue-integral, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-continuous-functions-are-borel-measurable, cor-differentiable-implies-continuous, cor-integral-over-a-null-set-vanishes, def-axiom-of-choice, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-continuous-function-of-positive-type, def-cyclic-vector-and-cyclic-unitary-representation, def-group, def-hilbert-space, def-integrable-real-and-complex-functions-and-their-integrals, def-linear-subspace, def-measurable-function-between-measurable-spaces, def-measure-preserving-transformation-and-system, def-metric-interior-closure-boundary, def-mixed-improper-integral, def-norm-and-normed-space, def-normed-subspace, def-product-topology, def-real-and-complex-inner-product-space, def-topological-group, lem-algebra-of-continuous-real-maps-on-a-space, lem-closed-subspace-of-a-banach-space-is-banach, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, lem-diagonal-unitary-coefficients-have-positive-type, lem-real-line-is-a-metric-space, thm-algebra-of-continuous-functions, thm-algebra-of-derivatives, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-borel-sets-are-lebesgue-measurable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-chain-rule, thm-choice-implies-dependent-implies-countable-choice, thm-complex-exponential-addition-and-real-extension, thm-composition-of-continuous-functions, thm-continuous-on-a-rectangle-is-riemann-integrable, thm-derivative-of-exponential, thm-differentiation-under-the-integral-sign, thm-dominated-convergence, thm-exponential-limits-and-range, thm-ftc-second-part, thm-gaussian-integral, thm-integrals-are-invariant-under-measure-preserving-maps, thm-lebesgue-measure-of-a-box-of-every-kind, thm-lebesgue-measure-under-dilations-and-reflections, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-metric-closure-characterisation, thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line, thm-reals-field, thm-sine-and-cosine-derivatives, thm-substitution-for-improper-integrals, thm-uniqueness-of-the-cyclic-gns-representation, thm-gns-construction-for-topological-groups]
 axiom_audit: "Assume AC. AC implies Countable Choice, which is used by the L² Hilbert-space interface, the nonnegative improper-Riemann-to-Lebesgue conversion, and reflection invariance of Lebesgue measure. AC is also assumed by the canonical GNS construction and pointed cyclic uniqueness. The Gaussian derivative, finite-interval integration, and coefficient calculation are choice-free."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

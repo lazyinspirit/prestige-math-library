@@ -2,7 +2,7 @@
 id: thm-every-jacobi-field-is-induced-by-a-geodesic-variation
 kind: theorem
 title: Every Jacobi field is induced by a geodesic variation
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-every-tangent-vector-is-the-velocity-of-a-smooth-curve
@@ -26,10 +26,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-affine-finite-type-source-immerses-in-relative-projective-space
 kind: lemma
 title: Affine finite-type source immerses into relative projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -21,10 +21,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.40.3 (Tag 01VS), affine-source case"

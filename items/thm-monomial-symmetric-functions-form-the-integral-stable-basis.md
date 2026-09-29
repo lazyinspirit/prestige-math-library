@@ -2,7 +2,7 @@
 id: thm-monomial-symmetric-functions-form-the-integral-stable-basis
 kind: theorem
 title: The monomial symmetric functions form the integral stable basis
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

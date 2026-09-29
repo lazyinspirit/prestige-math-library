@@ -2,7 +2,7 @@
 id: lem-semisimple-root-exponential-algebraic-subgroups
 kind: lemma
 title: Algebraic root subgroups from root exponentials
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -20,10 +20,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "J. S. Milne, Algebraic Groups (2022)"

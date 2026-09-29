@@ -2,7 +2,7 @@
 id: thm-newtonian-potential-for-holder-data-is-classical
 kind: theorem
 title: Hölder data give a classical Newtonian solution
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -60,6 +60,9 @@ sources:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"
       url: "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf"
       locator: "§2.11 regularity theorem (II) and proof, printed pp.74–77"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

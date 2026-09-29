@@ -2,7 +2,7 @@
 id: def-algebraically-independent-finite-tuples-over-a-field
 kind: definition
 title: "Algebraic independence in a field extension"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Fields, Definition 9.26.1 (tag 030D)"

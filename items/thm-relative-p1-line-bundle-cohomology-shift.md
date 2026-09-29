@@ -2,7 +2,7 @@
 id: thm-relative-p1-line-bundle-cohomology-shift
 kind: theorem
 title: Relative projective-line cohomology shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes"

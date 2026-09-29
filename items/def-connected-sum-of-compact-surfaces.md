@@ -2,7 +2,7 @@
 id: def-connected-sum-of-compact-surfaces
 kind: definition
 title: "Connected sums of compact connected surfaces, with disk and gluing choices retained"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-manifold-without-boundary, def-quotient-topology]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

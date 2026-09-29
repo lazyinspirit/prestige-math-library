@@ -2,7 +2,7 @@
 id: lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix
 kind: lemma
 title: "Boolean circuits become quadratic systems with a fixed input prefix"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-quadratic-equation-instance-and-tensor-code-oracles
@@ -19,6 +19,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

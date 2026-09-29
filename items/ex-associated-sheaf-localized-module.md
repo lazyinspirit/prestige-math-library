@@ -2,7 +2,7 @@
 id: ex-associated-sheaf-localized-module
 kind: example
 title: Restricting an associated sheaf to a localization
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-associated-sheaf-sections-basic-open
@@ -18,10 +18,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

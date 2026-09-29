@@ -2,7 +2,7 @@
 id: ex-empty-morphism-proper-projective
 kind: example
 title: The empty morphism is finite, proper and projective
-status: draft
+status: published
 origin: pipeline
 generation:
   role: example
@@ -25,10 +25,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.45.12 and Example 29.42.7"

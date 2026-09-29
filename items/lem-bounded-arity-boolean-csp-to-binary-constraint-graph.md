@@ -2,7 +2,7 @@
 id: lem-bounded-arity-boolean-csp-to-binary-constraint-graph
 kind: lemma
 title: "Bounded-arity Boolean constraints become binary graph constraints"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-assignment-tester-and-rejection-ratio
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

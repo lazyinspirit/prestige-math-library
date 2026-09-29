@@ -2,7 +2,7 @@
 id: lem-affine-local-dimension-residue-transcendence
 kind: lemma
 title: Local fibre dimension equals local ring dimension plus residue transcendence degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -21,6 +21,9 @@ sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.116.3 (tag 00P1), dimension at an affine point"
       url: https://stacks.math.columbia.edu/tag/00P1
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

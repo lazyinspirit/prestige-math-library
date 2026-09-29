@@ -2,7 +2,7 @@
 id: rem-projective-versus-proper
 kind: remark
 title: Projective and proper are distinct notions
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-projective-morphism-pre-proj
@@ -19,6 +19,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Vakil, The Rising Sea §§8.3, 11.3, 17.4"

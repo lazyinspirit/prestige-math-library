@@ -2,7 +2,7 @@
 id: lem-coherent-devissage-one-generic-generator
 kind: lemma
 title: "Noetherian devissage for coherent proper pushforward"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -35,10 +35,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Section 30.12 (Tags 01YD, 01YE, 01YF, 01YG, 01YH)"

@@ -2,7 +2,7 @@
 id: def-cut-point-and-cut-locus-of-a-point
 kind: definition
 title: Cut point and cut locus of a point
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-cut-time-in-a-unit-tangent-direction
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-projective-map-line-bundle-data-equivalence
 kind: theorem
 title: "Maps to projective space equal generating line-bundle data"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-line-bundle-sections-define-projective-map
@@ -17,10 +17,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Sections 27.8-27.21"
@@ -74,10 +76,16 @@ with its unit section.
 **Proof technique:** direct: pull back the universal data along a morphism, apply the universal property to produce a morphism from data, and verify that the two constructions are inverse by comparing chart ratios and using localness of morphism equality.
 
 1.1 Data attached to a morphism. Let $\varphi:X\to\mathbb P^n_S$ be an $S$-morphism. Then $L_\varphi:=\varphi^*\mathcal O(1)$ is an invertible $\mathcal O_X$-module and the pullbacks $s_i:=\varphi^*x_i\in\Gamma(X,L_\varphi)$, $i=0,\dots,n$, generate $L_\varphi$: on $\varphi^{-1}(U_i)$ the section $s_i$ is the pullback of the frame $x_i|_{U_i}=e_i$, hence a frame there, and the sets $\varphi^{-1}(U_i)$ cover $X$. [F1, F5, algebra]
+
 1.2 The universal property in the reverse direction. Conversely, given an invertible $L$ and generating sections $s_0,\dots,s_n$, [F2] supplies an $S$-morphism $\Phi(L;s):X\to\mathbb P^n_S$ with $\Phi^*x_i$ corresponding to $s_i$ under an isomorphism $\Phi^*\mathcal O(1)\cong L$ and with $\Phi^{-1}(D_+(x_i))=X_{s_i}$. The construction depends only on the isomorphism class of $(L;s_i)$: an isomorphism $\alpha:L\to L'$ with $\alpha(s_i)=s_i'$ transports a trivialisation of $\Phi^*\mathcal O(1)$ by $L$ into one by $L'$. [F2, construct]
+
 1.3 The case $n=0$. Here $\mathbb P^0_S\cong S$ by [F4], so the left side is the singleton $\{$structure morphism $X\to S\}$. On the right side, a pair $(L;s_0)$ with $s_0$ generating $L$ has $s_0$ a global frame: the evaluation map $\mathcal O_X\to L$ is an isomorphism. Mapping $(L;s_0)$ to the isomorphism class of the trivialisation it defines identifies all such pairs with the single class of $(\mathcal O_X;1)$, so both sides are singletons; the unique morphism $X\to\mathbb P^0_S$ corresponds to the unit section of $\mathcal O_X$. [F4, cases: n=0]
+
 2.1 The two constructions are inverse: data-to-morphism-to-data. Start with data $(L;s_0,\dots,s_n)$ and let $\varphi=\Phi(L;s)$. Then the data attached to $\varphi$ in step 1.1 are $(\varphi^*\mathcal O(1);\varphi^*x_0,\dots,\varphi^*x_n)$, which by [F2] is isomorphic to $(L;s_0,\dots,s_n)$ under the very isomorphism used to define $\Phi$; hence the composite data $\mapsto$ morphism $\mapsto$ data is the identity on isomorphism classes. [F2, step 1.1, step 1.2]
+
 2.2 The two constructions are inverse: morphism-to-data-to-morphism. Let $\varphi:X\to\mathbb P^n_S$ be an $S$-morphism and let $(L_\varphi;s_i=\varphi^*x_i)$ be its data as in step 1.1. Let $\psi=\Phi(L_\varphi;s)$ be the morphism supplied by step 1.2. Then $\psi^{-1}(D_+(x_i))=X_{s_i}=\varphi^{-1}(D_+(x_i))$ and on $X_{s_i}$ the chart coordinates agree: $x^{(i)}_j\circ\psi=s_j/s_i=\varphi^*(x_j)/\varphi^*(x_i)=x^{(i)}_j\circ\varphi$ by [F2] and the definitions. Since the open sets $X_{s_i}$ cover $X$, [F3] gives $\psi=\varphi$. [F2, F3, step 1.1, step 1.2]
+
 2.3 Naturality. For a morphism $g:X'\to X$ the data of $\varphi\circ g$ are the pullbacks along $g$ of the data of $\varphi$, and $\Phi$ is compatible with this operation because the universal property [F2] is: the morphism associated to the pulled-back data is $\Phi(L;s)\circ g$, by uniqueness in [F2]. The same uniqueness gives compatibility with base change $S'\to S$. [F2, step 1.1, step 1.2]
+
 3.1 Conclusion. Step 1.1 attaches generating line-bundle data to every morphism, step 1.2 produces a morphism from data, steps 2.1 and 2.2 show the two operations are mutually inverse on isomorphism classes, step 2.3 gives naturality, and step 1.3 covers $n=0$. The Axiom of Choice [A1] is inherited from the projective-space and sheaf constructions; no choice is made here. [A1, step 1.2, step 2.1, step 2.2, step 2.3, step 1.3]
 \qed

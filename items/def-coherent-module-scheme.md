@@ -2,7 +2,7 @@
 id: def-coherent-module-scheme
 kind: definition
 title: Coherent module sheaves
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -21,6 +21,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

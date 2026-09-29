@@ -2,7 +2,7 @@
 id: cex-exponential-local-biholomorphism-is-not-proper
 kind: counterexample
 title: The exponential map has no finite proper-map degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -26,6 +26,9 @@ sources:
     - title: "Eduard Looijenga, Riemann Surfaces (2007)"
       url: https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf
       locator: "Ch. 4 §2, the properness hypothesis in the degree theory of holomorphic maps, printed pp. 43–44."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

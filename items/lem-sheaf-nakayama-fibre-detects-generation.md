@@ -2,7 +2,7 @@
 id: lem-sheaf-nakayama-fibre-detects-generation
 kind: lemma
 title: Geometric Nakayama for finite-type sheaves
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-fibre-of-module-at-point
@@ -23,10 +23,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

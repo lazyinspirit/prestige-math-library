@@ -2,7 +2,7 @@
 id: thm-affine-morphism-relative-spec-characterization
 kind: theorem
 title: Affine morphisms are relative spectra
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,10 +21,12 @@ deps:
   - thm-gluing-sheaves
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, Lemma 29.11.3"

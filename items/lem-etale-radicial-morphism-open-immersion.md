@@ -2,7 +2,7 @@
 id: lem-etale-radicial-morphism-open-immersion
 kind: lemma
 title: An étale universally injective morphism is an open immersion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,6 +25,9 @@ sources:
     - title: "The Stacks Project, Étale Morphisms of Schemes, Section 41.14 (tag 025F), Theorem 41.14.1 (tag 025G)"
       url: https://stacks.math.columbia.edu/tag/025F
       locator: "Theorem 41.14.1 and its proof; the faithfully flat affine descent step is expanded here"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

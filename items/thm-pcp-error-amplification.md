@@ -2,7 +2,7 @@
 id: thm-pcp-error-amplification
 kind: theorem
 title: "PCP soundness amplification by independent repetition"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-pcp-class-with-completeness-and-soundness
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

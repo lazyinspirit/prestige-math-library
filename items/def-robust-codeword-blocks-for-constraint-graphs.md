@@ -2,7 +2,7 @@
 id: def-robust-codeword-blocks-for-constraint-graphs
 kind: definition
 title: "Shared codeword blocks and edge acceptance circuits"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-walsh-hadamard-encoding-and-relative-distance
@@ -19,6 +19,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: n/a
+  audited: 2026-09-30
 ---
 
 ## Definition

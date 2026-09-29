@@ -2,7 +2,7 @@
 id: thm-bessel-potential-completions-embed-in-tempered-distributions
 kind: theorem
 title: The Bessel completion embeds canonically in tempered distributions
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-japanese-bracket-powers-preserve-schwartz-space
@@ -27,6 +27,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"
@@ -102,12 +103,21 @@ transform on regular $L^2$ distributions
 ## Proof
 
 1.1 For $U=[u_j]$, put $g_j=\langle\xi\rangle^s\mathcal F(u_j)$. The completion norm identity gives $\|g_j-g_k\|_2=q_s(u_j-u_k)$, so $(g_j)$ is Cauchy; by [F4] it has an $L^2$ limit $g$. Equivalent Cauchy sequences have difference norm tending to zero, hence the same limit. Define $J_sU=g$. [F3, F4, given]
+
 1.2 Given $g\in L^2$, [F2] makes the weighted Schwartz image dense; for each $j$ choose $u_j\in\mathcal S$ with $\|\langle\xi\rangle^s\mathcal F(u_j)-g\|_2<2^{-j}$. Countable Choice [A1] selects this sequence. [A1, F2, given]
+
 1.3 For $g\in L^2$ define $T_sg(\phi)=\int_{\mathbb R^n}g(\xi)\langle\xi\rangle^{-s}\phi(\xi)\,d\xi$. By [F1], $\langle\xi\rangle^{-s}\phi\in\mathcal S$, and [F6] puts it in $L^2$; the integral is the pairing $(g,\overline{\langle\xi\rangle^{-s}\phi})_2$, so [F5] gives absolute convergence independent of the representative of $g$. The function $\langle\xi\rangle^{-s}g$ is locally integrable because its weight is bounded on compact sets. [F1, F5, F6, F7]
+
 2.1 Termwise addition and scalar multiplication commute with the $L^2$ limit, and $\|J_sU\|_2=\lim_j\|g_j\|_2=\lim_jq_s(u_j)=\|U\|_{H^s}$; thus $J_s$ is a linear isometry. [F3, step 1.1]
+
 2.2 The norm identity $q_s(u_j-u_k)=\|\langle\xi\rangle^s\mathcal F(u_j)-\langle\xi\rangle^s\mathcal F(u_k)\|_2$ makes $(u_j)$ Cauchy in the Schwartz norm $q_s$. Its completion class $U=[u_j]$ satisfies $J_sU=g$, so $J_s$ is onto. [F3, step 1.2]
+
 2.3 Choose an integer $N>|s|+n/2$. Polynomial expansion gives $\langle\xi\rangle^N|\phi(\xi)|\le C\sum_{|\alpha|\le N}p_{\alpha0}(\phi)$, while dyadic shells show $\int\langle\xi\rangle^{-2(N-|s|)}d\xi<\infty$; hence $\|\langle\xi\rangle^{-s}\phi\|_2\le C'\sum_{|\alpha|\le N}p_{\alpha0}(\phi)$. Cauchy–Schwarz [F5] now bounds $|T_sg(\phi)|$ by this finite-seminorm expression times $\|g\|_2$, proving temperateness by [F7]. For bounded $B\subset\mathcal S$, [F8] and [F11] make the same bound uniform over $\phi\in B$, so $g\mapsto T_sg$ is continuous for both dual topologies. [F5, F7, F8, F11, step 1.3]
+
 3.1 Define $E_sU=\mathcal F^{-1}(T_s(J_sU))$. It is linear and continuous for weak and strong dual topologies by the isometry [F3, step 2.1], the uniform estimate in step 2.3, and the continuous inverse Fourier transform [F9]; it depends only on $U$ because $J_s$ is well-defined. [F3, F8, F9, step 2.1, step 2.3]
+
 4.1 For the canonical class $i(u)$ of $u\in\mathcal S$, $J_s(i(u))=\langle\xi\rangle^s\widehat u$, so $T_s(J_s(i(u)))=u_{\widehat u}$. By [F10], $\mathcal F u_u=u_{\widehat u}$; invertibility [F9] gives $E_s(i(u))=u_u$, the functional $\phi\mapsto\int u\phi$. If $U=[u_j]$, then $d(i(u_j),U)=\lim_kq_s(u_j-u_k)\to0$ by the Cauchy condition, so step 3.1 gives $u_{u_j}\to E_sU$ in both topologies and the map is independent of the representing sequence. [F1, F3, F8, F9, F10, step 1.3, step 3.1]
+
 4.2 If $E_sU=0$ and $g=J_sU$, Fourier injectivity [F9] gives $T_sg=0$. Multiplication by $\langle\xi\rangle^s$ is allowed on $\mathcal S'$ by [F1]; for each $\phi\in\mathcal S$, $\langle\langle\xi\rangle^sT_sg,\phi\rangle=T_sg(\langle\xi\rangle^s\phi)=\int g\phi=u_g(\phi)$. Hence $u_g=0$. [F1, F9, step 1.3, step 3.1]
+
 5.1 By [F6] and Countable Choice [A1], choose $\phi_j\in\mathcal S$ with $\phi_j\to\overline g$ in $L^2$. Then $0=u_g(\phi_j)=\int g\phi_j$; Cauchy–Schwarz [F5] yields $\int g\phi_j\to\int|g|^2$, so $g=0$ in $L^2$. The isometry [F3, step 2.1] gives $U=0$, proving that $E_s$ is injective. [A1, F3, F5, F6, step 4.2] ∎

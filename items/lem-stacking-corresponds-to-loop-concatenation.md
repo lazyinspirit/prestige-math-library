@@ -2,7 +2,7 @@
 id: lem-stacking-corresponds-to-loop-concatenation
 kind: lemma
 title: "Raw slicing reverses geometric stacking products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [prop-stacking-of-geometric-braids-is-well-defined,
@@ -28,6 +28,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

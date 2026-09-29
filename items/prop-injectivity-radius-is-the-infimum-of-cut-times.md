@@ -2,7 +2,7 @@
 id: prop-injectivity-radius-is-the-infimum-of-cut-times
 kind: proposition
 title: Injectivity radius is the infimum of cut times
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-the-differential-of-a-diffeomorphism-is-an-isomorphism
@@ -29,10 +29,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

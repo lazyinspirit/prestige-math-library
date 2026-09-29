@@ -2,7 +2,7 @@
 id: thm-conjugate-points-are-critical-values-of-the-exponential-map-along-the-geodesic
 kind: theorem
 title: Conjugate points are critical values of the exponential map along the geodesic
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-the-tangent-space-of-an-n-manifold-has-dimension-n
@@ -38,6 +38,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025), Proposition 22.3.1 and proof"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Proposition 22.3.1 and proof, printed pp.163-164 (PDF labels P170-P171), together with the definition of multiplicity as the dimension of Null_gamma."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

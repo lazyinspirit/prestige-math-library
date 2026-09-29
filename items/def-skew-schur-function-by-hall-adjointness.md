@@ -2,7 +2,7 @@
 id: def-skew-schur-function-by-hall-adjointness
 kind: definition
 title: Skew Schur functions by Hall adjointness
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

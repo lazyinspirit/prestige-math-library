@@ -2,7 +2,7 @@
 id: cex-second-derivatives-of-the-fundamental-solution-are-not-locally-integrable-absolutely
 kind: counterexample
 title: The fundamental Hessian is not absolutely locally integrable
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,10 +10,12 @@ provenance:
 proof_strategy: direct
 deps: [def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, thm-polar-coordinates-formula-for-lebesgue-measure, def-countable-choice, def-polar-surface-measure-on-the-unit-sphere, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, lem-euclidean-balls-have-positive-finite-lebesgue-measure, def-metric-ball, def-borel-sigma-algebra, def-integrable-real-and-complex-functions-and-their-integrals, def-locally-integrable-function-on-r-n, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-lebesgue-measure-of-a-box-of-every-kind, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-integrals-are-invariant-under-measure-preserving-maps, prop-countable-subsets-of-rn-are-lebesgue-null, def-ck-and-multi-index-notation-in-several-variables, def-ck-euclidean-maps-and-diffeomorphisms, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-chain-rule-for-total-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-real-power-continuity-and-derivatives, thm-logarithm-derivative-and-integral]
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"

@@ -2,7 +2,7 @@
 id: thm-leray-spectral-sequence-for-sheaf-cohomology
 kind: theorem
 title: Leray spectral sequence for sheaf cohomology
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -31,6 +31,9 @@ sources:
     - title: "The Stacks Project, Injectives"
       url: https://stacks.math.columbia.edu/download/injectives.pdf
       locator: "§19.5, Lemma 19.5.1"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

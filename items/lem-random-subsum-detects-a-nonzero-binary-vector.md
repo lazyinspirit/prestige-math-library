@@ -2,7 +2,7 @@
 id: lem-random-subsum-detects-a-nonzero-binary-vector
 kind: lemma
 title: "Random binary subsums detect every nonzero discrepancy"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-walsh-hadamard-code-has-distance-one-half
@@ -21,6 +21,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

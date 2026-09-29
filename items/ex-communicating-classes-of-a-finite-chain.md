@@ -2,7 +2,7 @@
 id: ex-communicating-classes-of-a-finite-chain
 kind: example
 title: "Communicating classes in a four-state chain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-accessibility-communication-and-irreducibility
@@ -14,10 +14,12 @@ deps:
 proof_strategy: direct
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

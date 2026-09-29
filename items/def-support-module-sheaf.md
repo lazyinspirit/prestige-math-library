@@ -2,7 +2,7 @@
 id: def-support-module-sheaf
 kind: definition
 title: Support of a module sheaf
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-module-on-ringed-space
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

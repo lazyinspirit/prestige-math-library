@@ -2,7 +2,7 @@
 id: cex-euler-characteristic-alone-does-not-classify-compact-surfaces
 kind: counterexample
 title: "Equal Euler characteristic without homeomorphism"
-status: draft
+status: published
 origin: pipeline
 deps: [def-klein-bottle, def-orientation-local-system-and-orientation-cover, def-polygonal-schema-and-edge-pairing, def-r-orientation-of-a-topological-manifold, ex-klein-bottle-polygonal-schema, ex-torus-polygonal-schema, prop-relative-homology-is-functorial-for-maps-of-pairs]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "Section 3, Theorems 2 and 4, printed pp.3-6"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

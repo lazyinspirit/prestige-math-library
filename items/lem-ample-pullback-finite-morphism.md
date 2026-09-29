@@ -2,7 +2,7 @@
 id: lem-ample-pullback-finite-morphism
 kind: lemma
 title: "Finite pullback preserves absolute ampleness"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ample-invertible-sheaf
@@ -20,6 +20,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01PS
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 17.6"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

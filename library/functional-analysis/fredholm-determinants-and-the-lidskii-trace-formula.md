@@ -1,7 +1,7 @@
 ---
 page: fredholm-determinants-and-the-lidskii-trace-formula
 title: Fredholm Determinants and the Lidskii Trace Formula
-status: draft
+status: published
 items:
   - def-algebraic-multiplicity-for-compact-operators
   - lem-finite-rank-compressions-converge-in-trace-norm

@@ -2,7 +2,7 @@
 id: ex-sobolev-truncations-preserve-zero-regions
 kind: example
 title: A clipped affine function keeps its zero region
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-sobolev-space-wkp-and-its-norm, lem-classical-derivatives-are-weak-derivatives, cor-positive-negative-part-and-truncation-calculus-in-w-one-p, def-ck-and-multi-index-notation-in-several-variables, def-directional-and-partial-derivatives, lem-standard-basis-of-f-n, lem-product-topology-on-rn, thm-product-universal-property, thm-metric-continuity-characterisations, def-vector-valued-functions-limits-and-continuity, def-function-limit, thm-lebesgue-measure-of-a-box-of-every-kind, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-l-infinity-on-a-measure-space, cor-continuous-functions-are-borel-measurable, thm-borel-sets-are-lebesgue-measurable, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-composition-with-borel-functions-preserves-measurability, lem-weak-derivative-is-independent-of-lp-representatives, lem-of-abs-value, def-max-min, def-ordered-field, def-positive-and-negative-parts-of-a-function]
 landmark: false
@@ -22,6 +22,9 @@ sources:
     - title: Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (2011)
       url: https://www.math.utoronto.ca/almut/Brezis.pdf
       locator: Chapter 8 §8.2, Examples (ii) and the following sentence, printed pp. 202–203 (truncation stated as an exercise, without proof)
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

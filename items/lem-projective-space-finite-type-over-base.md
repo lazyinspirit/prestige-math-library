@@ -2,7 +2,7 @@
 id: lem-projective-space-finite-type-over-base
 kind: lemma
 title: "Projective space is of finite type over its base"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-relative-projective-space-standard-charts
@@ -23,6 +23,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01WC
     - title: "The Stacks Project, Constructions, Section 27.8 (tags 01M3, 01MD), the standard charts and quasi-compactness of projective space"
       url: https://stacks.math.columbia.edu/tag/01MD
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

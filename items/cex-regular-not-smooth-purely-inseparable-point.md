@@ -2,7 +2,7 @@
 id: cex-regular-not-smooth-purely-inseparable-point
 kind: counterexample
 title: "A regular point that is not smooth: a purely inseparable thickening"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -23,6 +23,9 @@ sources:
   references:
     - title: "The Stacks Project, Varieties, Example 33.12.7 (tag 038S), first example"
       url: "https://stacks.math.columbia.edu/tag/038S"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

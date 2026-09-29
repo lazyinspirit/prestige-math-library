@@ -2,7 +2,7 @@
 id: lem-uniqueness-of-twists-on-the-projective-line
 kind: lemma
 title: The twist index on the projective line is an isomorphism invariant
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,10 +19,12 @@ deps:
   - thm-polynomial-degree-of-a-product-over-a-domain
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Divisors, Lemma 31.29.4"

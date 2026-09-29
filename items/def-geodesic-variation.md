@@ -2,7 +2,7 @@
 id: def-geodesic-variation
 kind: definition
 title: Geodesic variation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-variation-and-variation-field-of-a-curve
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

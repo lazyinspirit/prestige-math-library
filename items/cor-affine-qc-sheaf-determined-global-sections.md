@@ -2,7 +2,7 @@
 id: cor-affine-qc-sheaf-determined-global-sections
 kind: corollary
 title: Affine quasi-coherent sheaf determined by sections
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-affine-quasi-coherent-equivalence
@@ -16,10 +16,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

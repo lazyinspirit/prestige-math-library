@@ -2,7 +2,7 @@
 id: lem-tangent-cone-linear-span-tangent-space
 kind: lemma
 title: "The scheme-theoretic linear span of the tangent cone"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -24,10 +24,12 @@ deps:
   - def-symmetric-algebra-of-a-vector-space
   - thm-universal-property-of-the-symmetric-algebra
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-higher-direct-image-local-section-formula
 kind: lemma
 title: Local-section formula for derived direct image
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-direct-image-sheaf
@@ -32,10 +32,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, \u00a7\u00a730.2\u201330.22"

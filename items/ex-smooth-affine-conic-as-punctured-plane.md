@@ -2,7 +2,7 @@
 id: ex-smooth-affine-conic-as-punctured-plane
 kind: example
 title: A nonsingular affine conic is a punctured-plane Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -32,6 +32,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.csail.mit.edu/ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 1–2, elementary examples of Riemann surfaces; used as a cross-check of the parametrization."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

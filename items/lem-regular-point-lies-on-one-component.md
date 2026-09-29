@@ -2,7 +2,7 @@
 id: lem-regular-point-lies-on-one-component
 kind: lemma
 title: "A regular point lies on one irreducible component"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -23,10 +23,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: smooth-projective-serre-duality-and-flag-variety-line-bundles
 title: "Smooth-Projective Serre Duality and Flag-Variety Line Bundles"
-status: draft
+status: published
 requires:
   - kahler-differentials-conormal-sequences-and-infinitesimal-lifting
   - quasi-coherent-and-coherent-sheaves-and-vector-bundles

@@ -2,7 +2,7 @@
 id: def-direct-integral-of-a-measurable-hilbert-field
 kind: definition
 title: Direct integral of a measurable Hilbert field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -40,6 +40,7 @@ sources:
       locator: "Part III, Chapter 10 §§1.3–1.4, printed pp. 94–96: L² quotient and Riesz–Fischer completeness discussion on p. 95; measurable-field and square-integrability criteria on p. 96"
 verification:
   precheck: n/a
+  audited: 2026-09-30
 ---
 
 ## Definition

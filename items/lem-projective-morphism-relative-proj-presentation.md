@@ -2,7 +2,7 @@
 id: lem-projective-morphism-relative-proj-presentation
 kind: lemma
 title: "A projective morphism has a relative Proj presentation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-projective-morphism-pre-proj
@@ -27,6 +27,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/0801
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.38, 29.40"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

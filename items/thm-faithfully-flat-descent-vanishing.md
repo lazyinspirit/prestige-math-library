@@ -2,7 +2,7 @@
 id: thm-faithfully-flat-descent-vanishing
 kind: theorem
 title: "Descent of vanishing along a faithfully flat morphism"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-faithfully-flat-morphism-schemes
@@ -28,6 +28,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "The Stacks Project, Commutative Algebra, Section 10.108 (generic flatness)"
       url: https://stacks.math.columbia.edu/download/algebra.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

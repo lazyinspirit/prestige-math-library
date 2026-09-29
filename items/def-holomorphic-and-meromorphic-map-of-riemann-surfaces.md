@@ -2,7 +2,7 @@
 id: def-holomorphic-and-meromorphic-map-of-riemann-surfaces
 kind: definition
 title: Holomorphic maps and meromorphic functions on Riemann surfaces
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps:
@@ -20,6 +20,8 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 3, holomorphic maps and meromorphic functions; Ch. 2, the Riemann sphere as a Riemann surface"
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: lem-cauchy-transform-with-smooth-parameters
 kind: lemma
 title: Local Cauchy transform with smooth parameters
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bigraded-complex-differential-forms
@@ -26,6 +26,7 @@ sources:
       url: https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

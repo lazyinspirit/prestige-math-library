@@ -2,7 +2,7 @@
 id: lem-japanese-bracket-powers-preserve-schwartz-space
 kind: lemma
 title: Real powers of the Japanese bracket act on Schwartz space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-schwartz-space-and-its-seminorms
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: rem-green-identities-come-from-the-euclidean-integration-pair
 kind: remark
 title: The Green identities used here are Euclidean
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"

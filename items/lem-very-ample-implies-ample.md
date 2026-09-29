@@ -2,7 +2,7 @@
 id: lem-very-ample-implies-ample
 kind: lemma
 title: "Relative very ampleness implies relative ampleness"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-very-ample-invertible-sheaf-relative
@@ -28,6 +28,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -68,10 +71,16 @@ $S=\varnothing$, the ampleness conditions are vacuous.
 **Proof technique:** direct: restrict to an affine base open, convert homogeneous forms on the projective space into global sections of powers of $L$ whose affine nonvanishing loci shrink to any prescribed affine neighbourhood, and conclude ampleness point by point.
 
 1.1 Forms give sections with the same nonvanishing locus. Let $U=\operatorname{Spec}A$ be an affine open of $S$ and let $F\in A[x_0,\dots,x_n]$ be homogeneous of degree $d>0$. On the chart $U_j=D_+(x_j)$ put $F^{(j)}=F(x^{(j)}_0,\dots,1,\dots,x^{(j)}_n)=F/x_j^d$, and define $s_F|_{U_j}=F^{(j)}e_j^{d}\in\Gamma(U_j,\mathcal O(d))$. On an overlap the coordinates satisfy $x^{(j)}_\ell=x^{(i)}_\ell/x^{(i)}_j$, so $F^{(j)}=F^{(i)}/(x^{(i)}_j)^d$, and the frame transition $e_j^d=(x^{(i)}_j)^d e_i^d$ gives $F^{(j)}e_j^d=F^{(i)}e_i^d$; hence the local sections glue to a global section $s_F\in\Gamma(\mathbb P^n_U,\mathcal O(d))$. Since each $e_j$ is a frame, the nonvanishing locus is computed on charts as $X_{s_F}\cap U_j=\{F^{(j)}\ne0\}$, so $X_{s_F}=D_+(F)$. [F1, F3, algebra]
+
 1.2 The restricted situation. Put $X_U=f^{-1}(U)$ with structure morphism $f_U:X_U\to U$ and $L_U=L|_{X_U}$. By [F2] the morphism $f$ is quasi-compact, so $X_U$ is quasi-compact, and the base change $i_U:X_U\to\mathbb P^n_U$ of $i$ along $U\hookrightarrow S$ is a quasi-compact immersion with $L_U\cong i_U^*\mathcal O_{\mathbb P^n_U}(1)$; this is the situation of [F1] over the affine base $U$. [F1, F2]
+
 1.3 Shrinking a neighbourhood to a standard open. Let $x\in X_U$ and let $W\subseteq X_U$ be an affine open subscheme containing $x$; write $y=i_U(x)$. Since $i_U$ is an immersion, it is a homeomorphism onto the locally closed subset $i_U(X_U)\subseteq\mathbb P^n_U$, so $i_U(W)$ is open in $i_U(X_U)$ and there is an open $V\subseteq\mathbb P^n_U$ with $i_U^{-1}(V)\subseteq W$ and $y\in V$. By [F3] the standard opens $D_+(F)$ with $F$ homogeneous of positive degree form a basis of the topology, so choose such an $F$ with $y\in D_+(F)\subseteq V$. Then $x\in i_U^{-1}(D_+(F))\subseteq i_U^{-1}(V)\subseteq W$. [F2, F3, construct]
+
 2.1 Pulling back the sections. For $F$ homogeneous of positive degree $d$, the pullback $i_U^*s_F$ is a global section of $i_U^*\mathcal O(d)\cong L_U^{d}$, and its nonvanishing locus is $X_{i_U^*s_F}=i_U^{-1}(X_{s_F})=i_U^{-1}(D_+(F))$: the pullback of a section of an invertible sheaf has nonvanishing locus the preimage of the original nonvanishing locus, because a local trivialisation of $\mathcal O(d)$ pulls back to one of $L_U^{d}$ and the corresponding function is the pullback function. [F1, step 1.1, algebra]
+
 3.1 Ampleness at a point. With $F$ as in step 1.3 and $d=\deg F>0$, let $s=i_U^*s_F\in\Gamma(X_U,L_U^{d})$, a section of a positive power of the invertible sheaf $L_U$. Then $x\in X_s=i_U^{-1}(D_+(F))\subseteq W$ by step 2.1, and since $W$ is an affine open subscheme of $X_U$, [F4] gives that $X_s=W\cap X_s$ is an affine open subscheme of $X_U$. So every point of $X_U$ admits a positive power of $L_U$ with a global section whose nonvanishing locus is affine and contains the point. [F4, step 2.1, step 1.3]
+
 4.1 Ampleness over an affine base open. The scheme $X_U$ is quasi-compact by step 1.2, so the criterion [F5] applies to the invertible sheaf $L_U$ on $X_U$ with the sections produced in step 3.1: $L_U$ is ample on $X_U$. [F5, step 1.2, step 3.1]
+
 5.1 Conclusion. Every affine open $U\subseteq S$ has $L|_{f^{-1}(U)}$ ample on $f^{-1}(U)$, so $L$ is $f$-ample by definition; if $S=\operatorname{Spec}R$ is affine this is absolute ampleness of $L$ on $X$. If in addition the immersion $i$ is a closed immersion, the same argument applies verbatim; the only simplification in that case is that the image is closed, so the shrinking step 1.3 may be replaced by choosing a chart $U_i$ containing $i(x)$, whose preimage $X\cap U_i$ is affine as a closed subscheme of the affine scheme $U_i$. If $X=\varnothing$ or $S=\varnothing$ there is no point to test and the conditions of [F5] and of $f$-ampleness are vacuous, so the conclusion holds. The Axiom of Choice [A1] is inherited from the Proj and associated-sheaf constructions; no choice is made here. [A1, F1, F5, step 4.1, cases: empty and affine base]
 \qed

@@ -2,7 +2,7 @@
 id: cor-expected-exit-time-solves-the-poisson-equation
 kind: corollary
 title: "Expected exit time solves the Poisson equation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -15,10 +15,12 @@ deps:
 proof_strategy: direct
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24"

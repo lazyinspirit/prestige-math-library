@@ -2,7 +2,7 @@
 id: def-column-antisymmetrizer-polytabloid-and-specht-module
 kind: definition
 title: Column antisymmetrizers, polytabloids, and Specht modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-partition-young-diagram-and-conjugate-partition, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-young-subgroup-tabloid-and-permutation-module, def-inversions-inversion-number-and-sign]
@@ -25,6 +25,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

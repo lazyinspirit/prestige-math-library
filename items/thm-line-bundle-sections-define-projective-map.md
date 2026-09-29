@@ -2,7 +2,7 @@
 id: thm-line-bundle-sections-define-projective-map
 kind: theorem
 title: "Generating line-bundle sections define a morphism to projective space"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-globally-generated-sheaf
@@ -24,6 +24,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/constructions.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -71,10 +74,16 @@ immersion is made.
 **Proof technique:** direct: trivialise the line bundle by each nonvanishing section, read the ratios as chart coordinates, check the transition formulas on overlaps, glue, and compare pullbacks of frames with the given sections.
 
 1.1 The charts of the construction. By [F1] the open sets $X_{s_i}$ cover $X$. By [F2] each $s_i$ trivialises $L$ over $X_{s_i}$, so for every $i$ and every $j$ the ratio $s_j/s_i$ is a regular function on $X_{s_i}$: $s_j/s_i=(s_j\otimes s_i^{-1})|_{X_{s_i}}$ under the identification $L\otimes L^{-1}=\mathcal O_X$, restricted to $X_{s_i}$. [F1, F2]
+
 1.2 The local morphisms. Fix $i$ and let $U_i\subseteq\mathbb P^n_S$ be the $i$-th chart, an affine space over $S$ with coordinates $x^{(i)}_j$, $j\ne i$, by [F3]. By [F4] the $n$ regular functions $s_j/s_i$, $j\ne i$, on $X_{s_i}$ define a morphism $\varphi_i:X_{s_i}\to U_i$ over $S$ with $x^{(i)}_j\circ\varphi_i=s_j/s_i$ for every $j\ne i$; this is the unique $S$-morphism with these coordinates. Its image lies in $U_i$, so $\varphi_i^{-1}(D_+(x_i))=X_{s_i}$; moreover on $X_{s_is_j}$ the quotient $s_j/s_i$ is invertible by [F2], so $\varphi_i(X_{s_is_j})\subseteq D(x^{(i)}_j)\subseteq U_i$. [F2, F3, F4]
+
 2.1 Compatibility on overlaps. On $X_{s_i}\cap X_{s_j}=X_{s_is_j}$ both quotients $s_j/s_i$ and $s_i/s_j$ are invertible, and for $\ell\ne i,j$ the transition formula of [F3] reads $x^{(j)}_\ell=x^{(i)}_\ell/x^{(i)}_j$; substituting $x^{(i)}_\ell=s_\ell/s_i$ and $x^{(i)}_j=s_j/s_i$ from step 1.2 gives $s_\ell/s_j$, which is $x^{(j)}_\ell\circ\varphi_j$; likewise $x^{(j)}_i=1/x^{(i)}_j$ corresponds to $s_i/s_j$. Hence $\varphi_i$ and $\varphi_j$ agree on the overlap. [F3, step 1.2, algebra]
+
 3.1 The global morphism. The local morphisms $\varphi_i$ of step 1.2 are compatible on overlaps by step 2.1, and the opens $X_{s_i}$ cover $X$ by step 1.1; hence they glue to a morphism $\varphi:X\to\mathbb P^n_S$ by [F5], which is a morphism over $S$ because each $\varphi_i$ is. Its restrictions satisfy $\varphi^{-1}(D_+(x_i))\cap X_{s_i}=X_{s_i}\cap X_{s_i}=X_{s_i}$ and, on $X_{s_j}$, $\varphi^{-1}(D_+(x_i))=X_{s_is_j}$, so altogether $\varphi^{-1}(D_+(x_i))=X_{s_i}$. [F5, step 1.1, step 2.1]
+
 4.1 The pullback of the twist. On $X_{s_i}$ define an isomorphism $\varphi^*\mathcal O(1)|_{X_{s_i}}\to L|_{X_{s_i}}$ by sending the pullback of the frame $e_i$ to $s_i$; this is an isomorphism of invertible sheaves because both sides are free of rank one there. On the overlap $X_{s_is_j}$ the transition $e_i=x^{(j)}_ie_j$ of [F3] pulls back to the scalar $x^{(j)}_i\circ\varphi=s_i/s_j$: one has $\varphi^*(e_i)=\varphi^*(x^{(j)}_ie_j)=(s_i/s_j)\,\varphi^*(e_j)$ with $\varphi^*(e_j)=s_j$, so $\varphi^*(e_i)$ corresponds to $s_i$ under the trivialisation on $X_{s_j}$ exactly as it does under the trivialisation on $X_{s_i}$; hence the local isomorphisms glue to an isomorphism $\varphi^*\mathcal O(1)\cong L$ under which $\varphi^*(e_i)$ corresponds to $s_i$, that is, the universal coordinate section $x_i$ pulls back to $s_i$. [F3, step 3.1, algebra]
+
 5.1 Uniqueness. Let $\psi:X\to\mathbb P^n_S$ be an $S$-morphism with $\psi^*\mathcal O(1)\cong L$ carrying the coordinate sections to $s_0,\dots,s_n$. Then $\psi^{-1}(D_+(x_i))=X_{s_i}$: a point maps into $D_+(x_i)$ exactly when the pullback of the coordinate $x_i$ does not vanish there, and that pullback is $s_i$. On $X_{s_i}$ the coordinates satisfy $x^{(i)}_j\circ\psi=\psi^*(x_j)/\psi^*(x_i)=s_j/s_i$, which agrees with $\varphi$ by step 2.1; hence $\psi=\varphi$ on each $X_{s_i}$, and since these cover $X$, $\psi=\varphi$ by [F5]. [F1, F5, step 2.1, step 4.1]
+
 6.1 Conclusion. Steps 1.1 to 3.1 construct the $S$-morphism with $\varphi^{-1}(D_+(x_i))=X_{s_i}$, step 4.1 identifies $\varphi^*\mathcal O(1)$ with $L$ compatibly with the given sections, and step 5.1 proves uniqueness. Nothing in the construction asserts injectivity or immersion: two distinct points may have proportional tuples, and $\varphi$ is an immersion only under additional hypotheses. If some $s_i=0$ then $X_{s_i}=\varnothing$ and the corresponding local piece is empty, which the gluing of step 3.1 allows; if all $s_i=0$ the hypothesis that they generate $L$ fails unless $X=\varnothing$, and then the construction is vacuous. The Axiom of Choice [A1] is inherited from the projective-space and associated-sheaf constructions; no choice is made here. [A1, step 3.1, step 4.1, step 5.1, cases: vanishing sections and empty X]
 \qed

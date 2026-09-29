@@ -2,7 +2,7 @@
 id: ex-gauss-bonnet-for-a-spherical-cap
 kind: example
 title: Gauss-Bonnet for a spherical cap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -32,6 +32,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.0.1, printed pp. 10-13 (PDF pp. 17-20): the local formula with boundary applied to constant-curvature disks."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

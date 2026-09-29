@@ -1,7 +1,7 @@
 ---
 page: jensen-theory-and-nevanlinnas-first-main-theorem
 title: "Jensen Theory and Nevanlinna's First Main Theorem"
-status: draft
+status: published
 items: [thm-poisson-jensen-formula-meromorphic-function,
         def-nevanlinna-counting-proximity-and-characteristic,
         thm-nevanlinna-quantities-well-defined,

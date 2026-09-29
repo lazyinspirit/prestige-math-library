@@ -2,7 +2,7 @@
 id: cex-cantor-function-is-not-w-one-one-despite-being-absolutely-continuous-off-a-null-set
 kind: counterexample
 title: Cantor function has singular distributional derivative
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -52,10 +52,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

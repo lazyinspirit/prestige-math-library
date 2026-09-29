@@ -2,7 +2,7 @@
 id: lem-separable-abelian-von-neumann-algebras-have-a-self-adjoint-generator
 kind: lemma
 title: A separably acting abelian von Neumann algebra has a self-adjoint generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -50,11 +50,12 @@ sources:
       url: https://www.idpoisson.fr/anantharaman/publications/IIun.pdf
       locator: Chapter 2 §2.2, Corollary 2.2.2, printed pp. 32 and 33; Chapter 3 §3.1, Proposition 3.1.3, printed pp. 51 and 52
 verification:
-  precheck: pending
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

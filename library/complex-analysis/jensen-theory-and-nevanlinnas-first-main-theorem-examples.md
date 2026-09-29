@@ -1,7 +1,7 @@
 ---
 page: jensen-theory-and-nevanlinnas-first-main-theorem-examples
 title: "Jensen Theory and Nevanlinna's First Main Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-poisson-jensen-with-a-repeated-zero,
            ex-nevanlinna-regularisation-when-f-zero-equals-a,

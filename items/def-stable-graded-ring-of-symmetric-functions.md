@@ -2,7 +2,7 @@
 id: def-stable-graded-ring-of-symmetric-functions
 kind: definition
 title: The stable graded ring of symmetric functions
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-symmetric-polynomial
@@ -18,6 +18,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

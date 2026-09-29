@@ -1,7 +1,7 @@
 ---
 page: "weak-derivatives-and-sobolev-spaces-examples"
 title: "Weak Derivatives and Sobolev Spaces — Examples"
-status: draft
+status: published
 items: []
 examples: ["cex-a-jump-across-a-hypersurface-is-not-in-w-one-p", "cex-cantor-function-is-not-w-one-one-despite-being-absolutely-continuous-off-a-null-set", "cex-lp-functions-need-not-have-point-values", "cex-step-function-has-no-locally-integrable-weak-derivative", "cex-w-one-p-point-evaluation-is-unbounded-in-the-subcritical-and-higher-dimensional-critical-cases", "ex-absolute-value-has-a-weak-first-derivative", "ex-piecewise-c-one-functions-with-matching-traces", "ex-radial-power-membership-in-w-one-p", "cex-w-one-p-is-not-an-algebra-below-the-continuity-threshold", "ex-absolute-value-has-dirac-second-distributional-derivative", "ex-sobolev-truncations-preserve-zero-regions"]
 ---

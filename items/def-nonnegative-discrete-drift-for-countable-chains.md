@@ -2,7 +2,7 @@
 id: def-nonnegative-discrete-drift-for-countable-chains
 kind: definition
 title: "Nonnegative kernel action and finite drift"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-transition-matrix-and-n-step-transition-probabilities
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24"

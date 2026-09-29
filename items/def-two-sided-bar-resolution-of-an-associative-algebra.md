@@ -2,7 +2,7 @@
 id: def-two-sided-bar-resolution-of-an-associative-algebra
 kind: definition
 title: The augmented two-sided bar complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-enveloping-algebra-and-bimodule-module-dictionary, def-augmented-chain-complex-over-an-object, def-tensor-product-of-modules-by-generators-and-relations]
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

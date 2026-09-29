@@ -1,7 +1,7 @@
 ---
 page: recurrence-transience-and-hitting-times-for-markov-chains-examples
 title: "Recurrence Transience and Hitting Times for Markov Chains — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-communicating-classes-of-a-finite-chain

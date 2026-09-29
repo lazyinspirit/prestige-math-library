@@ -2,7 +2,7 @@
 id: lem-finite-planar-graph-disk-cuts-and-euler-count
 kind: lemma
 title: Finite planar graph disk cuts and Euler count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -28,6 +28,9 @@ sources:
     - title: "Jürgen Jost, Compact Riemann Surfaces: An Introduction to Contemporary Mathematics"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf"
       locator: "§2.3.A, printed pp. 31–39 (PDF pp. 43–52): finite triangle decompositions of compact surfaces. Context for the use of the lemma; the closed-surface setting there does not cover the boundary and corner cases used here."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

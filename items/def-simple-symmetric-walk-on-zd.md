@@ -2,7 +2,7 @@
 id: def-simple-symmetric-walk-on-zd
 kind: definition
 title: "Simple symmetric walk on the integer lattice"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-transition-matrix-and-n-step-transition-probabilities
@@ -12,6 +12,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

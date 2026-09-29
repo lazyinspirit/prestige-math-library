@@ -2,7 +2,7 @@
 id: lem-flat-fp-relative-dimension-strata
 kind: lemma
 title: "Dense relative-dimension strata in flat finitely presented fibres"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -54,6 +54,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "The Stacks Project, Commutative Algebra, Sections 10.99 and 10.128 (tags 00MI, 00R4): flatness criteria and miracle flatness"
       url: https://stacks.math.columbia.edu/download/algebra.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

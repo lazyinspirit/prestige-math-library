@@ -2,7 +2,7 @@
 id: cor-positive-negative-part-and-truncation-calculus-in-w-one-p
 kind: corollary
 title: Positive, negative, and truncated Sobolev functions
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-positive-and-negative-parts-of-a-function, lem-weak-derivative-linearity-locality-and-commutation, thm-sobolev-chain-rule-for-c-one-lipschitz-compositions, lem-weak-stability-of-sobolev-derivatives, thm-dominated-convergence, lem-classical-derivatives-are-weak-derivatives, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-integral-over-a-measurable-set, lem-derivative-of-a-power, thm-algebra-of-derivatives, def-derivative, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-calligraphic-l-p-on-a-measure-space, def-l-p-space-as-a-quotient-by-null-functions, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-composition-with-borel-functions-preserves-measurability, lem-weak-derivative-is-independent-of-lp-representatives]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

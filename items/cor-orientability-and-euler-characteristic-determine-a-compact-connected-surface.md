@@ -2,7 +2,7 @@
 id: cor-orientability-and-euler-characteristic-determine-a-compact-connected-surface
 kind: corollary
 title: "Orientability and Euler characteristic determine a nonempty compact connected boundaryless surface"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-classification-of-compact-connected-surfaces, def-r-orientation-of-a-topological-manifold, def-euler-characteristic-of-a-finite-cw-complex, def-axiom-of-choice]
 justified_by: []
@@ -18,6 +18,9 @@ sources:
       url: "https://www.cis.upenn.edu/~jean/surfclassif-root.pdf"
       locator: "Chapter 6, Theorem 6.2, printed pp.94–96"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

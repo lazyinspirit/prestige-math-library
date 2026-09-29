@@ -2,7 +2,7 @@
 id: thm-regular-not-smooth-imperfect-field
 kind: theorem
 title: "Purely inseparable field algebras separate regularity from smoothness"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -35,6 +35,9 @@ sources:
   references:
     - title: "The Stacks Project, Varieties, Example 33.12.7 (tag 038S): $\\operatorname{Spec}(k[x]/(x^p-t))$ is a regular variety that is not geometrically reduced"
       url: "https://stacks.math.columbia.edu/tag/038S"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

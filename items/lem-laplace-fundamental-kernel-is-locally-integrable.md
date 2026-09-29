@@ -6,10 +6,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
@@ -18,7 +20,7 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
       url: https://web.archive.org/web/20250601000000id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf
       locator: §5.3 equations (5.25)–(5.26), printed pp.117–118
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: [def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-regular-distribution-from-a-locally-integrable-function, def-countable-choice, lem-euclidean-balls-have-positive-finite-lebesgue-measure, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, prop-countable-subsets-of-rn-are-lebesgue-null, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-compact-subset-is-closed-and-bounded, thm-borel-sets-are-lebesgue-measurable, thm-locally-integrable-functions-embed-in-distributions, thm-polar-coordinates-formula-for-lebesgue-measure]

@@ -2,7 +2,7 @@
 id: cex-bertini-characteristic-p-failure
 kind: counterexample
 title: "Frobenius linear systems have nonreduced general members"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -27,10 +27,12 @@ deps:
   - thm-characteristic-of-a-field-is-zero-or-prime
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

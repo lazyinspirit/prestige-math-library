@@ -2,7 +2,7 @@
 id: "lem-flat-sheaf-sections-flat-over-base"
 kind: "lemma"
 title: "Sections of a sheaf flat over the base are flat over affine opens"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -28,10 +28,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.26.2"

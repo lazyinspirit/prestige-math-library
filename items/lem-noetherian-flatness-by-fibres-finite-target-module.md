@@ -2,7 +2,7 @@
 id: lem-noetherian-flatness-by-fibres-finite-target-module
 kind: lemma
 title: Noetherian fibrewise flatness for a module finite over the target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.99.15 (tag 00MP), Noetherian fibrewise flatness criterion"

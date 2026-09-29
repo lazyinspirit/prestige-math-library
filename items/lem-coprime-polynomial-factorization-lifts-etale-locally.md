@@ -2,7 +2,7 @@
 id: lem-coprime-polynomial-factorization-lifts-etale-locally
 kind: lemma
 title: "Coprime polynomial factorisations lift after an etale localisation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-morphism-schemes
@@ -32,6 +32,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.36 (standard etale and the Jacobian criterion)"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-aperiodic-chain
 kind: definition
 title: "Aperiodic irreducible chain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-accessibility-communication-and-irreducibility
@@ -20,6 +20,9 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

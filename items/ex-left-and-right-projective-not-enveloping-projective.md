@@ -2,7 +2,7 @@
 id: ex-left-and-right-projective-not-enveloping-projective
 kind: example
 title: The diagonal bimodule $k[x]$ is projective on both sides but not over its enveloping algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -37,6 +37,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

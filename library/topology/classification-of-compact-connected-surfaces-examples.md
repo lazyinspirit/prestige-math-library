@@ -1,7 +1,7 @@
 ---
 page: classification-of-compact-connected-surfaces-examples
 title: "Classification of Compact Connected Surfaces: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-klein-bottle-polygonal-schema,
            ex-genus-two-orientable-surface-polygonal-schema,

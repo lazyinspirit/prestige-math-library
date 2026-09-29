@@ -2,7 +2,7 @@
 id: ex-klein-bottle-polygonal-schema
 kind: example
 title: "Klein bottle as two crosscaps"
-status: draft
+status: published
 origin: pipeline
 deps: [def-polygonal-schema-and-edge-pairing, lem-polygonal-schema-reduction-moves, def-klein-bottle, ex-projective-plane-polygonal-schema, def-euler-characteristic-of-a-finite-cw-complex, def-r-orientation-of-a-topological-manifold, def-orientation-local-system-and-orientation-cover]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 4, printed pp.5–6"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

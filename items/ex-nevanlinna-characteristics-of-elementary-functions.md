@@ -2,7 +2,7 @@
 id: ex-nevanlinna-characteristics-of-elementary-functions
 kind: example
 title: "Characteristics of a monomial, an exponential and a tangent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

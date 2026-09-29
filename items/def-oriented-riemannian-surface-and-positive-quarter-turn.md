@@ -2,7 +2,7 @@
 id: def-oriented-riemannian-surface-and-positive-quarter-turn
 kind: definition
 title: Oriented Riemannian surface and positive quarter-turn
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-oriented-smooth-manifold-and-oriented-chart
@@ -14,10 +14,12 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9"

@@ -2,7 +2,7 @@
 id: def-elementary-etale-neighbourhood
 kind: definition
 title: "Etale neighbourhoods and elementary etale neighbourhoods of a point"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-morphism-schemes
@@ -19,6 +19,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/02LE
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.37 (etale morphisms)"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

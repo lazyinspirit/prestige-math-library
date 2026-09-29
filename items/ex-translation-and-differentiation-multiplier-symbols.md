@@ -2,7 +2,7 @@
 id: ex-translation-and-differentiation-multiplier-symbols
 kind: example
 title: Translation and differentiation symbols
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-translation-invariant-fourier-multiplier-on-schwartz-space
@@ -36,6 +36,7 @@ generation:
   role: example
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."

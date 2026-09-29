@@ -2,7 +2,7 @@
 id: lem-chow-lemma-proper-noetherian
 kind: lemma
 title: "Chow lemma for proper Noetherian schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -47,10 +47,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Coherent Cohomology, Lemma 30.18.1 and Section 29.7"

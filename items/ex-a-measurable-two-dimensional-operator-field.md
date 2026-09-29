@@ -2,7 +2,7 @@
 id: ex-a-measurable-two-dimensional-operator-field
 kind: example
 title: A measurable two-dimensional operator field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -30,6 +30,7 @@ sources:
       locator: "Part III, Chapter 10 §§1.7–1.8, Proposition 6 and Theorem 2, printed pp. 99–101; the field here is continuous and bounded"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

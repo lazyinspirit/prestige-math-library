@@ -2,7 +2,7 @@
 id: lem-polynomial-diagonal-differences-form-a-regular-sequence
 kind: lemma
 title: Polynomial diagonal differences form a regular sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, def-regular-sequence-on-a-module, thm-coproduct-property-of-tensor-products-of-commutative-algebras, thm-universal-property-of-a-polynomial-ring-on-a-family]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

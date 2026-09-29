@@ -2,7 +2,7 @@
 id: thm-properness-descent-fpqc
 kind: theorem
 title: Properness descends through fpqc base change
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -16,10 +16,12 @@ deps:
   - lem-proper-stable-base-change
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Descent, §35.23 (tag 02YJ)"

@@ -2,7 +2,7 @@
 id: lem-smooth-map-tangent-surjectivity-criterion
 kind: lemma
 title: "The submersion criterion between smooth varieties"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -21,10 +21,12 @@ deps:
   - thm-ag-submersion-criterion-standard-smooth
   - thm-fibre-products-of-schemes-exist
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

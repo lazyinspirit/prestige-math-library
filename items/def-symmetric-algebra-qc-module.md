@@ -2,7 +2,7 @@
 id: def-symmetric-algebra-qc-module
 kind: definition
 title: "Symmetric algebra of a quasi-coherent module"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-quasi-coherent-module-scheme
@@ -32,6 +32,8 @@ sources:
     - title: "The Stacks Project, Constructions of Schemes §27.6"
       url: "https://stacks.math.columbia.edu/tag/01M1"
 pipeline_run: frontier-36-complete
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

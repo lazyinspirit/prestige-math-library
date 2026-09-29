@@ -2,7 +2,7 @@
 id: ex-gns-representation-of-a-one-dimensional-character
 kind: example
 title: GNS representation of a continuous unitary character
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [def-axiom-of-choice, def-complex-conjugate-real-imaginary-part-and-modulus, def-complex-metric-convergence-and-continuity, def-complex-numbers-and-arithmetic, def-continuous-function-of-positive-type, def-countable-choice, def-cyclic-vector-and-cyclic-unitary-representation, def-hilbert-space, def-linear-map, def-real-and-complex-inner-product-space, def-strongly-continuous-unitary-representation, def-topological-group, cor-inner-product-induces-a-norm, lem-complex-conjugation-and-modulus-laws, lem-positive-type-functions-define-a-pre-hilbert-form, lem-the-gns-translation-action-is-unitary-and-strongly-continuous, thm-choice-implies-dependent-implies-countable-choice, thm-complex-numbers-form-a-field, thm-complex-plane-is-complete, thm-gns-construction-for-topological-groups, thm-uniqueness-of-the-cyclic-gns-representation]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka and de la Harpe, Unitary Representations of Groups, Duals, and Characters, Example 1.B.7(1) and Construction 1.B.5, Chapter 1 §1.B, printed pp. 27–28"

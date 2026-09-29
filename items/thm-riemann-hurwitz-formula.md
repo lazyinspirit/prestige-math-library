@@ -2,7 +2,7 @@
 id: thm-riemann-hurwitz-formula
 kind: theorem
 title: Riemann–Hurwitz formula for compact Riemann surfaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -33,6 +33,9 @@ sources:
     - title: "Vladimir Hinich, Riemann Surfaces, lecture 7"
       url: https://math.haifa.ac.il/hinich/RSlec/lec7.pdf
       locator: "§8.5.1–8.5.3, printed pp. 8–9: triangulate the target with the branch values as vertices, lift, and count 2−2g = d·2 − Σ(e_x−1) in the sphere case."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

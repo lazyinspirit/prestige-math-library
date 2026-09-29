@@ -2,7 +2,7 @@
 id: thm-etale-locally-standard-etale
 kind: theorem
 title: "Étale morphisms are locally standard étale"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -26,6 +26,9 @@ sources:
   references:
     - title: "The Stacks Project, Algebra, Section 10.144, Proposition 10.144.4 (standard étale local form)"
       url: https://stacks.math.columbia.edu/tag/00UE
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

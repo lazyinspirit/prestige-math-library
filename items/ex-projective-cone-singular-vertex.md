@@ -2,7 +2,7 @@
 id: ex-projective-cone-singular-vertex
 kind: example
 title: "A projective cone with a smooth conic base"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -42,10 +42,12 @@ deps:
   - thm-stalk-structure-sheaf-prime-localization
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

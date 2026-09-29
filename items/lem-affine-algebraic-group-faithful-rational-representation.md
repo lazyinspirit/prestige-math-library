@@ -2,7 +2,7 @@
 id: lem-affine-algebraic-group-faithful-rational-representation
 kind: lemma
 title: A finite-type affine algebraic group has a faithful rational representation
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -18,6 +18,9 @@ sources:
       url: https://www.jmilne.org/math/Books/iAG2022.pdf
       locator: "§4(c) Proposition 4.7, Corollary 4.8, §4(d) Theorem 4.9 and Corollary 4.10; printed pp. 86-87"
 proof_strategy: coefficient space of the regular comodule
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-nonscalar-positive-commutant-elements-split-a-normalized-positive-type-function
 kind: lemma
 title: Nonscalar commutant contractions and convex decompositions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -25,10 +25,12 @@ deps:
   - thm-gns-construction-for-topological-groups
 axiom_audit: "Assume AC through the GNS norm/realization and the dominated-positive-operator theorem. The latter uses AC→DC→Countable Choice for Riesz representation and the adjoint/positive-operator interfaces. The positive-form expansion, endpoint argument, scaling, and finite coefficient comparison are choice-free."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

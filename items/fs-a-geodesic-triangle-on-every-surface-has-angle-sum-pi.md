@@ -2,7 +2,7 @@
 id: fs-a-geodesic-triangle-on-every-surface-has-angle-sum-pi
 kind: false-statement
 title: Geodesic triangles need not have Euclidean angle sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -25,6 +25,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.0.1, printed pp. 10-13 (PDF pp. 17-20): the local Gauss-Bonnet formula with the angle sum on a sphere of positive curvature."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

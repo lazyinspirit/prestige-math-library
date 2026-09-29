@@ -2,7 +2,7 @@
 id: cex-neumann-poisson-problem-needs-the-compatibility-condition
 kind: counterexample
 title: Neumann Poisson data require a flux compatibility equation
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -26,10 +26,12 @@ deps:
   - thm-borel-sets-are-lebesgue-measurable
   - thm-divergence-theorem-for-bounded-c-one-euclidean-domains
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"

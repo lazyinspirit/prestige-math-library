@@ -1,7 +1,7 @@
 ---
 page: grothendieck-groups-and-graded-cartan-pairings-examples
 title: "Grothendieck Groups and Graded Cartan Pairings — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-cartan-map-for-the-dual-numbers

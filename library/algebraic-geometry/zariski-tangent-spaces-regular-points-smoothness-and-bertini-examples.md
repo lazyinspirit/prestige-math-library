@@ -1,7 +1,7 @@
 ---
 page: "zariski-tangent-spaces-regular-points-smoothness-and-bertini-examples"
 title: "Zariski Tangent Spaces, Regular Points, Smoothness, and Bertini — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-tangent-space-parabola

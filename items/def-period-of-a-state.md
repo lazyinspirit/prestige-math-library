@@ -2,7 +2,7 @@
 id: def-period-of-a-state
 kind: definition
 title: "Period of a state"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-transition-matrix-and-n-step-transition-probabilities
@@ -13,6 +13,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"

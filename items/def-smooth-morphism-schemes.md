@@ -2,7 +2,7 @@
 id: def-smooth-morphism-schemes
 kind: definition
 title: "Smooth morphism of schemes"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.25 and 29.34-29.36"

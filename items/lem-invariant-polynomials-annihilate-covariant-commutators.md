@@ -2,7 +2,7 @@
 id: lem-invariant-polynomials-annihilate-covariant-commutators
 kind: lemma
 title: Invariant polynomials cancel connection commutators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -24,6 +24,9 @@ sources:
     - title: Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)
       url: https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf
       locator: §II.4, induced exterior covariant derivative and Bianchi identity, printed pp. 86–87 (PDF pp. 86–87)
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

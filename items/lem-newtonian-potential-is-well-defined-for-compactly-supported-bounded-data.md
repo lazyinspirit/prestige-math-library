@@ -6,10 +6,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"
@@ -18,7 +20,7 @@ sources:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: §2.6.1 local integrability and §2.7 equation (2.24), printed pp.33,36
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: [cor-integral-over-a-null-set-vanishes, def-countable-choice, def-ck-euclidean-maps-and-diffeomorphisms, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-l-infinity-on-a-measure-space, def-locally-integrable-function-on-r-n, def-measure-null-set-and-almost-everywhere, def-metric-ball, def-newtonian-potential, def-p-norms-on-rn, lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets, lem-laplace-fundamental-kernel-is-locally-integrable, lem-p-norms-are-norms-and-induce-the-published-metrics, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-borel-sets-are-lebesgue-measurable, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-compact-subset-is-closed-and-bounded, thm-continuous-preimages-of-borel-sets-are-borel, thm-determinant-of-a-triangular-matrix, thm-linearity-of-the-lebesgue-integral-on-l-one]

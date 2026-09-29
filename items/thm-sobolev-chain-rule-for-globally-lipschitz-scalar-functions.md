@@ -2,7 +2,7 @@
 id: thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions
 kind: theorem
 title: Chain rule for globally Lipschitz scalar maps of Sobolev functions
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-l-infinity-on-a-measure-space, def-calligraphic-l-p-on-a-measure-space, def-l-p-space-as-a-quotient-by-null-functions, thm-acl-characterisation-of-w-one-p, def-absolute-continuity-on-almost-every-coordinate-line, def-absolutely-continuous-function, lem-weak-derivative-linearity-locality-and-commutation, thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous, def-lipschitz-holder-contraction, thm-c1-lipschitz-ac-bv-hierarchy, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, lem-chain-rule-for-an-indefinite-integral-after-an-absolutely-continuous-composition, thm-lebesgue-measure-of-a-box-of-every-kind, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-generalized-holder-inequality-for-products, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, cor-continuous-functions-are-borel-measurable, thm-composition-with-borel-functions-preserves-measurability, lem-test-function-cutoffs-and-euclidean-localization, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-finite-sigma-finite-and-semifinite-measures, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-derivative, def-function-limit, def-limsup-liminf, thm-convergence-iff-limsup-equals-liminf, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-lebesgue-outer-measure, thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume, thm-lebesgue-outer-regularity-for-arbitrary-subsets, thm-tonelli-and-fubini-for-completed-product-measures, thm-of-archimedean]
 landmark: false
@@ -22,6 +22,9 @@ sources:
     - title: Ben Johnsrude and Mateusz Kwaśnicki, answers to "Preimage of a null set by a non-monotonic absolutely continuous function"
       url: https://math.stackexchange.com/questions/4580640
       locator: accepted answer, covering-set argument for $f^{-1}(N)\cap\{f'\ne0\}$
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

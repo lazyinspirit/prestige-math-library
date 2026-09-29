@@ -2,7 +2,7 @@
 id: cor-maxima-and-minima-of-two-w-one-p-functions-are-w-one-p
 kind: corollary
 title: Sobolev maxima and minima form a lattice
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-positive-and-negative-parts-of-a-function, def-max-min, def-ordered-field, lem-weak-derivative-is-independent-of-lp-representatives, lem-weak-derivative-linearity-locality-and-commutation, cor-positive-negative-part-and-truncation-calculus-in-w-one-p, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-composition-with-borel-functions-preserves-measurability, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, def-calligraphic-l-p-on-a-measure-space, def-l-p-space-as-a-quotient-by-null-functions, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

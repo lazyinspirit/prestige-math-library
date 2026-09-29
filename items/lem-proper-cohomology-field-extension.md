@@ -2,7 +2,7 @@
 id: lem-proper-cohomology-field-extension
 kind: lemma
 title: "Flat field extension commutes with coherent cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -61,6 +61,9 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/02KH"
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Theorem 25.2.9 with Exercise 25.2.M, and Exercise 19.8.B(b)"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

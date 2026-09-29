@@ -2,7 +2,7 @@
 id: thm-green-function-exists-on-bounded-plane-domains
 kind: theorem
 title: "Green functions exist on all bounded plane domains"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -47,6 +47,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -6,16 +6,18 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: §§2.5–2.7, printed pp. 32–42
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-distributional-derivative", "def-convolution-of-a-distribution-with-a-test-function", "thm-convolution-with-a-test-function-is-smooth"]

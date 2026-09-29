@@ -1,7 +1,7 @@
 ---
 page: proj-projective-schemes-twisting-sheaves-and-ampleness-examples
 title: Proj Projective Schemes Twisting Sheaves and Ampleness — Examples
-status: draft
+status: published
 items:
   - ex-proj-polynomial-ring-projective-space
   - ex-proj-empty-irrelevant-nilpotent

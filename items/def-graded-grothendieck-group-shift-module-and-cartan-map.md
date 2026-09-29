@@ -2,7 +2,7 @@
 id: def-graded-grothendieck-group-shift-module-and-cartan-map
 kind: definition
 title: "Graded Grothendieck groups, shift action, and Cartan map"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -37,6 +37,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

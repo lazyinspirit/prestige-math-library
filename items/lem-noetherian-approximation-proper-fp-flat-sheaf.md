@@ -2,7 +2,7 @@
 id: lem-noetherian-approximation-proper-fp-flat-sheaf
 kind: lemma
 title: "Noetherian approximation of proper flat finitely presented sheaf data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -26,10 +26,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Limits of Schemes, Sections 32.8-32.13, especially Lemma 32.13.1"

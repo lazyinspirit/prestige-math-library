@@ -2,7 +2,7 @@
 id: ex-irreducible-curve-with-arbitrary-embedding-dimension
 kind: example
 title: "An irreducible curve can have arbitrarily large tangent dimension"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -36,10 +36,12 @@ deps:
   - thm-universal-property-of-a-polynomial-ring-on-a-family
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-line-bundle-projective-line-transition
 kind: example
 title: Twists on the two-affine projective line
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-projective-line-two-affine-cover-and-twisting-sheaf
@@ -23,10 +23,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

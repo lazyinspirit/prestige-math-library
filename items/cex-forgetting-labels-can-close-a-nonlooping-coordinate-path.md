@@ -2,7 +2,7 @@
 id: cex-forgetting-labels-can-close-a-nonlooping-coordinate-path
 kind: counterexample
 title: "An exchange closes only after forgetting labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-unordered-configuration-space,
@@ -30,6 +30,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

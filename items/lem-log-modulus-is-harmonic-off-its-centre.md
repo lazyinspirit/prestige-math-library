@@ -2,7 +2,7 @@
 id: lem-log-modulus-is-harmonic-off-its-centre
 kind: lemma
 title: Logarithmic modulus is harmonic off its centre
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-complex-conjugate-real-imaginary-part-and-modulus
@@ -19,6 +19,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Jeremy Orloff, MIT 18.04 Topic 5: Introduction to Harmonic Functions"

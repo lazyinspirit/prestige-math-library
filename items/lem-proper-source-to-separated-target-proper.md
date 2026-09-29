@@ -2,7 +2,7 @@
 id: lem-proper-source-to-separated-target-proper
 kind: lemma
 title: Morphisms from a proper scheme to a separated one are proper
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,10 +20,12 @@ deps:
   - def-axiom-of-choice
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.44.8 (tag 01WG) and Lemma 29.42.4"

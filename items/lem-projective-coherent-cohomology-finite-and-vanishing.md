@@ -2,7 +2,7 @@
 id: lem-projective-coherent-cohomology-finite-and-vanishing
 kind: lemma
 title: "Projective coherent finiteness and large twist vanishing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -42,6 +42,9 @@ sources:
       url: "https://doi.org/10.1007/978-1-4757-3849-0"
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Section 28.2"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

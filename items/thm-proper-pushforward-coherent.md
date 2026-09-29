@@ -2,7 +2,7 @@
 id: thm-proper-pushforward-coherent
 kind: theorem
 title: "Coherent higher direct images under proper morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -70,6 +70,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/coherent.pdf
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Sections 18.6, 19.2, 28.1-28.2"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

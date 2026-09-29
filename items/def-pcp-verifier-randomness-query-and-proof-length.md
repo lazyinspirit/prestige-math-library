@@ -2,7 +2,7 @@
 id: def-pcp-verifier-randomness-query-and-proof-length
 kind: definition
 title: "PCP verifier resources and deterministic proof strings"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-np-by-verifiers
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

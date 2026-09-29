@@ -2,7 +2,7 @@
 id: thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces
 kind: theorem
 title: "Integer-order W^{k,2} and H^k agree with equivalent norms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-sobolev-space-wkp-and-its-norm
@@ -38,6 +38,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

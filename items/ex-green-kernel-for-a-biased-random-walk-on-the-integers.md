@@ -2,7 +2,7 @@
 id: ex-green-kernel-for-a-biased-random-walk-on-the-integers
 kind: example
 title: "Green kernel of a biased integer walk"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -28,10 +28,12 @@ deps:
   - thm-tonelli-for-nonnegative-double-series
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

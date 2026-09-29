@@ -2,7 +2,7 @@
 id: cor-hypersurface-singular-locus-gradient
 kind: corollary
 title: "The gradient test for a reduced hypersurface"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -19,10 +19,12 @@ deps:
   - cor-strong-nullstellensatz-two-inclusions
   - def-axiom-of-choice
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

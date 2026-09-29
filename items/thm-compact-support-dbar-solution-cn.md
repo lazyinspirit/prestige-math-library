@@ -2,7 +2,7 @@
 id: thm-compact-support-dbar-solution-cn
 kind: theorem
 title: Compactly supported dbar solutions on complex Euclidean space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bigraded-complex-differential-forms
@@ -41,6 +41,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

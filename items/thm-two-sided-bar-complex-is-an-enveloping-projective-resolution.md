@@ -2,7 +2,7 @@
 id: thm-two-sided-bar-complex-is-an-enveloping-projective-resolution
 kind: theorem
 title: The two-sided bar complex is a projective $A^e$-resolution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-two-sided-bar-resolution-of-an-associative-algebra, def-enveloping-algebra-and-bimodule-module-dictionary, lem-bar-differential-and-augmentation-form-a-complex, cor-every-vector-space-has-a-basis, thm-tensor-product-basis-from-bases, thm-tensor-products-commute-with-arbitrary-direct-sums, thm-unit-isomorphisms-for-module-tensor-products, def-free-module-on-a-set-and-standard-basis, thm-free-modules-are-projective-with-choice-boundary, def-axiom-of-choice, def-left-and-right-modules, def-opposite-ring, thm-modules-over-a-ring-form-an-abelian-category, def-projective-resolution-in-an-abelian-category, cor-finite-iterated-tensor-products-represent-multilinear-maps, def-module-homomorphism-kernel-image-and-cokernel]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

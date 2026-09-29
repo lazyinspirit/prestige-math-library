@@ -2,7 +2,7 @@
 id: cex-w-one-p-is-not-an-algebra-below-the-continuity-threshold
 kind: counterexample
 title: Subcritical $W^{1,p}$ is not closed under multiplication
-status: draft
+status: published
 origin: pipeline
 deps: [ex-radial-power-membership-in-w-one-p, def-sobolev-space-wkp-and-its-norm, thm-polar-coordinates-formula-for-lebesgue-measure, lem-weak-leibniz-rule-with-a-smooth-factor, lem-classical-derivatives-are-weak-derivatives, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-derivatives-are-unique-almost-everywhere, lem-smooth-bump-between-concentric-euclidean-balls, def-real-power, thm-real-power-continuity-and-derivatives, thm-monotone-convergence-for-the-integral, def-natural-logarithm, def-countable-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

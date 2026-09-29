@@ -2,7 +2,7 @@
 id: lem-analytic-exhaustion-of-plane-domains
 kind: lemma
 title: "Analytic-boundary exhaustion of a plane domain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -50,6 +50,7 @@ sources:
       locator: "Section 3, printed pp. 183-186: approximation of domains by regular level sets"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

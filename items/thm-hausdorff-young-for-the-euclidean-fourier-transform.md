@@ -2,7 +2,7 @@
 id: thm-hausdorff-young-for-the-euclidean-fourier-transform
 kind: theorem
 title: Hausdorff–Young for the Euclidean Fourier transform
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-l-one-fourier-transform-is-well-defined
@@ -20,10 +20,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."

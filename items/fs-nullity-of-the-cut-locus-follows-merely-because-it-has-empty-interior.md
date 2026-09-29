@@ -2,7 +2,7 @@
 id: fs-nullity-of-the-cut-locus-follows-merely-because-it-has-empty-interior
 kind: false-statement
 title: Nullity of the cut locus follows merely because it has empty interior
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -25,6 +25,9 @@ sources:
     - title: Ved Datar, Lectures on Riemannian Geometry (2025)
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Section 23.3, printed pp.170-171: the measure-theoretic step that confirms the cut locus can be discarded in integration."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

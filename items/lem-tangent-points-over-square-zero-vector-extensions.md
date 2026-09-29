@@ -2,7 +2,7 @@
 id: lem-tangent-points-over-square-zero-vector-extensions
 kind: lemma
 title: "Square-zero vector extensions encode tangent vectors with coefficients"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -25,10 +25,12 @@ deps:
   - thm-hom-from-a-finite-dimensional-space-as-a-tensor-product
   - thm-universal-property-of-module-tensor-products
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

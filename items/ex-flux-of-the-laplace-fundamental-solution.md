@@ -2,16 +2,18 @@
 id: ex-flux-of-the-laplace-fundamental-solution
 kind: example
 title: Flux normalization on every centered sphere
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"

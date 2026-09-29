@@ -2,7 +2,7 @@
 id: lem-regular-immersion-local-to-global-ext-collapse
 kind: lemma
 title: Local-to-global Ext collapse for a regular immersion
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -36,6 +36,9 @@ sources:
     - title: "The Stacks Project, Cohomology of Sheaves"
       url: https://stacks.math.columbia.edu/download/cohomology.pdf
       locator: "§§20.8, 20.12-20.13, 20.27 (flasque acyclicity and the acyclic-resolution comparison)"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

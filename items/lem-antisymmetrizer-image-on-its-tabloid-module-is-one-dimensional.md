@@ -2,7 +2,7 @@
 id: lem-antisymmetrizer-image-on-its-tabloid-module-is-one-dimensional
 kind: lemma
 title: The antisymmetrizer image in its own tabloid module is one-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-column-antisymmetrizer-polytabloid-and-specht-module, lem-column-collision-causes-antisymmetrizer-cancellation, lem-basic-combinatorial-lemma-for-tableaux, def-young-subgroup-tabloid-and-permutation-module, thm-sign-is-a-homomorphism]
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

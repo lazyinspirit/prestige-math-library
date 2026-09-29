@@ -2,7 +2,7 @@
 id: lem-leading-tabloid-coefficient-of-a-standard-polytabloid
 kind: lemma
 title: Leading tabloid of a column-standard polytabloid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-tabloid-and-column-orders-for-specht-straightening, def-column-antisymmetrizer-polytabloid-and-specht-module, def-row-and-column-stabilizers-of-a-tableau, def-young-tableau-standard-tableau-and-shape]
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-connection-one-form-of-an-oriented-orthonormal-frame
 kind: definition
 title: Connection one-form of an oriented orthonormal frame
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -16,10 +16,12 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"

@@ -2,7 +2,7 @@
 id: rem-jacobian-presentation-independence
 kind: remark
 title: "Conventions and hypotheses carried by this pair"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -25,6 +25,8 @@ sources:
       url: https://www.jmilne.org/math/CourseNotes/AG.pdf
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §5.4"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 **Choice conventions.** Every item of this pair that needs the Axiom of Choice

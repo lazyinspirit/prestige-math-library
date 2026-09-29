@@ -2,7 +2,7 @@
 id: lem-constructible-stable-generalisation-open
 kind: lemma
 title: "Constructible subsets stable under generalisation are open in an affine spectrum"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-constructible-subset-scheme
@@ -25,10 +25,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Topology, Lemma 5.23.6 (tag 0903) and Section 5.19 (tags 0062, 0065)"

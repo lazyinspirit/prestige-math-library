@@ -2,7 +2,7 @@
 id: cex-power-sums-do-not-form-an-integral-basis
 kind: counterexample
 title: Power sums fail to span integrally in degree two
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -19,10 +19,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

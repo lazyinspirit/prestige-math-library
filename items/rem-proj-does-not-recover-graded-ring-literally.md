@@ -2,7 +2,7 @@
 id: rem-proj-does-not-recover-graded-ring-literally
 kind: remark
 title: "Proj forgets irrelevant torsion and grading scale"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -22,6 +22,8 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
     - title: "Gao-Zhang, Lectures on Algebraic Geometry, Chapter 5"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Remark

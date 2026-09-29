@@ -2,7 +2,7 @@
 id: thm-cohomology-projective-space-twisting-sheaves
 kind: theorem
 title: "Cohomology of O(d) on projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -33,10 +33,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Lemma 30.8.2 (Tag 01XV) and Section 30.8"

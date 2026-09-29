@@ -2,7 +2,7 @@
 id: ex-newtonian-potential-of-a-radial-density
 kind: example
 title: Newtonian potential of radial compact data
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -68,6 +68,9 @@ deps:
   - thm-real-power-continuity-and-derivatives
   - thm-real-power-laws
   - thm-total-derivative-computes-directional-and-partial-derivatives
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

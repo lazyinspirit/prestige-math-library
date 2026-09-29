@@ -2,7 +2,7 @@
 id: thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields
 kind: theorem
 title: Differential of the exponential map in terms of Jacobi fields
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-affine-connection-on-a-smooth-manifold
@@ -24,10 +24,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

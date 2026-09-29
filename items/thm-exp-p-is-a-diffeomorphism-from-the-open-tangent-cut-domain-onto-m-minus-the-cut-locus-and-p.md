@@ -2,7 +2,7 @@
 id: thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p
 kind: theorem
 title: The exponential map is a diffeomorphism on the open tangent cut domain
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-levi-civita-connection
@@ -49,6 +49,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: "Lecture 23, sections 23.2-23.3, printed pp.163-172: the cut locus, the cut time, and the domain on which exp_p is a diffeomorphism."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

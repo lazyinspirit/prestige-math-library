@@ -1,7 +1,7 @@
 ---
 page: smooth-projective-serre-duality-and-flag-variety-line-bundles-examples
 title: "Smooth-Projective Serre Duality and Flag-Variety Line Bundles — Examples"
-status: draft
+status: published
 requires:
   - smooth-projective-serre-duality-and-flag-variety-line-bundles
 items: []

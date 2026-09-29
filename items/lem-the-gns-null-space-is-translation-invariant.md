@@ -2,7 +2,7 @@
 id: lem-the-gns-null-space-is-translation-invariant
 kind: lemma
 title: The GNS null space is invariant under left translation
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [lem-positive-type-functions-define-a-pre-hilbert-form, def-topological-group]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka and de la Harpe, Unitary Representations of Groups, Duals, and Characters, Construction 1.B.5, Chapter 1 §1.B, printed pp. 27–28"

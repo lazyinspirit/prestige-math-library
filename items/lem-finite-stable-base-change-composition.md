@@ -2,7 +2,7 @@
 id: lem-finite-stable-base-change-composition
 kind: lemma
 title: Finite morphisms survive base change and composition
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-finite-morphism-schemes
@@ -25,6 +25,9 @@ sources:
     - title: "Stacks Project, Algebra, Lemma 10.36.13"
       url: https://stacks.math.columbia.edu/tag/02JK
 proof_strategy: direct
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

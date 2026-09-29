@@ -2,7 +2,7 @@
 id: lem-a-geometric-braid-slices-to-a-configuration-loop
 kind: lemma
 title: "A geometric braid slices to an interior configuration loop"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-geometric-braid-with-setwise-endpoints,
@@ -30,6 +30,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

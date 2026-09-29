@@ -2,7 +2,7 @@
 id: def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization
 kind: definition
 title: "Bounded graded bimodule complexes and signed tensor totalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -29,6 +29,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

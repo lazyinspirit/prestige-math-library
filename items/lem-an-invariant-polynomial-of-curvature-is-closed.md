@@ -2,7 +2,7 @@
 id: lem-an-invariant-polynomial-of-curvature-is-closed
 kind: lemma
 title: Closedness of invariant curvature forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -27,6 +27,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

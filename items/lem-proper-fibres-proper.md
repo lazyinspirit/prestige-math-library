@@ -2,7 +2,7 @@
 id: lem-proper-fibres-proper
 kind: lemma
 title: Fibres of proper morphisms are proper
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-scheme-theoretic-fibre
@@ -13,10 +13,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.42.5 and the fibre definition of Section 29.20"

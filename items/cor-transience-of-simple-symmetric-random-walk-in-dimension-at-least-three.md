@@ -2,7 +2,7 @@
 id: cor-transience-of-simple-symmetric-random-walk-in-dimension-at-least-three
 kind: corollary
 title: "Higher-dimensional simple symmetric walks are transient"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -30,10 +30,12 @@ deps:
 proof_strategy: direct
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

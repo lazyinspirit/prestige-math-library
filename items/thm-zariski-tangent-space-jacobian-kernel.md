@@ -2,7 +2,7 @@
 id: thm-zariski-tangent-space-jacobian-kernel
 kind: theorem
 title: "The Jacobian kernel computes the tangent space"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -22,6 +22,9 @@ sources:
   references:
     - title: "J. S. Milne, Algebraic Geometry, v6.10, §4d Definition 4.22 and §4f Proposition 4.26"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

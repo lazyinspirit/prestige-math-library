@@ -2,7 +2,7 @@
 id: thm-bochner-martinelli-integral-formula
 kind: theorem
 title: The Bochner–Martinelli formula for C1 functions
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bochner-martinelli-kernel
@@ -37,6 +37,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-line-bundles-on-projective-three-space-restrict-by-degree
 kind: lemma
 title: "Line bundles on projective three-space and their restrictions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-relative-projective-space-standard-charts
@@ -19,10 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Divisors, Lemma 31.29.5"

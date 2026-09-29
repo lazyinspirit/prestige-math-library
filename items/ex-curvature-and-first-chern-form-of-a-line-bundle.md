@@ -2,7 +2,7 @@
 id: ex-curvature-and-first-chern-form-of-a-line-bundle
 kind: example
 title: Curvature and first Chern form of a complex line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -34,6 +34,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)

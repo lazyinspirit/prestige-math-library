@@ -2,7 +2,7 @@
 id: lem-determinantal-grade-necessary-exact-free-complex
 kind: lemma
 title: Exact free complexes have the expected ranks and determinantal regular sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -19,6 +19,9 @@ sources:
   references:
     - title: "The Stacks Project, Algebra, Proposition 10.102.9 (tag 00N1), necessity direction"
       url: https://stacks.math.columbia.edu/tag/00N1
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

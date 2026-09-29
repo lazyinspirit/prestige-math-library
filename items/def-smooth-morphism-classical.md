@@ -2,7 +2,7 @@
 id: def-smooth-morphism-classical
 kind: definition
 title: "Smooth morphisms via local standard smooth presentations"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ag-standard-smooth-algebra
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations
 kind: theorem
 title: "Geometric braid classes and the unordered configuration fundamental group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 provenance:
@@ -38,6 +38,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

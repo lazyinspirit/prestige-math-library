@@ -2,7 +2,7 @@
 id: thm-serre-vanishing
 kind: theorem
 title: "Serre vanishing for coherent sheaves and ample twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -39,6 +39,9 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/02Y0"
     - title: "Ravi Vakil, The Rising Sea (29 August 2022), Sections 18.6 and 19.2"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -90,9 +93,15 @@ included. No effectivity of $m_0$ is claimed.
 **Proof technique:** direct: replace the ample line bundle by a high power that is pulled back from a projective embedding, push forward the finitely many residue twists of the coherent sheaf along that embedding, apply the projective-space vanishing lemma to each pushforward, and translate its high twists back along the embedding using the projection identity and the monoidality of pullback.
 
 1.1 The embedding and the power. By [F1] the structure morphism $X\to\operatorname{Spec}A$ is proper of finite type, so [F2] provides $d\ge1$ and a closed immersion $i:X\hookrightarrow\mathbb P^N_A$ over $\operatorname{Spec}A$ with $i^*\mathcal O(1)\cong L^{\otimes d}$. [F1, F2]
+
 1.2 The finitely many coherent pushforwards. For each residue $r\in\{0,\dots,d-1\}$ the module $\mathcal G_r=\mathcal F\otimes_{\mathcal O_X}L^{\otimes r}$ is coherent by [F3]; since the target $\mathbb P^N_A$ is locally Noetherian by [F1], the pushforward $\mathcal H_r=i_*\mathcal G_r$ is coherent on $\mathbb P^N_A$ by [F4]. [F1, F3, F4]
+
 2.1 Projective-space vanishing. Applying [F6] to each $\mathcal H_r$ gives a vanishing threshold; enlarge it to an integer $n_r\ge0$. Then $H^q(\mathbb P^N_A,\mathcal H_r(n))=0$ for every $q>0$ and every $n\ge n_r$. [F6, step 1.2]
+
 2.2 Translation of the twists. Fix $r$ and $n\ge0$. By [F7] applied to the invertible sheaf $\mathcal O(1)$, $i^*\mathcal O(n)\cong(i^*\mathcal O(1))^{\otimes n}\cong L^{\otimes dn}$, so $\mathcal G_r\otimes_{\mathcal O_X}i^*\mathcal O(n)\cong\mathcal F\otimes L^{\otimes r}\otimes L^{\otimes dn}\cong\mathcal F\otimes L^{\otimes dn+r}$; the projection identity of [F5] then gives $H^q(\mathbb P^N_A,\mathcal H_r(n))\cong H^q(X,\mathcal F\otimes L^{\otimes dn+r})$ for every $q\ge0$. [F5, F7, step 1.2, algebra]
+
 3.1 Vanishing along the residue classes. Combining [step 2.1] with [step 2.2]: for every $r\in\{0,\dots,d-1\}$, every $q>0$ and every $n\ge n_r$ one has $H^q(X,\mathcal F\otimes L^{\otimes dn+r})=0$. [step 2.1, step 2.2]
+
 4.1 A single bound for all twists and all degrees. Put $m_0=d\cdot\max_rn_r+(d-1)$ as in [F8]. Given $m\ge m_0$, write $m=dn+r$ with $0\le r<d$; then $n\ge\max_rn_r\ge n_r$ by [F8], so [step 3.1] gives $H^q(X,\mathcal F\otimes L^{\otimes m})=0$ for every $q>0$. Since $m_0$ depends on the finitely many $n_r$ but not on $q$, the vanishing is simultaneous in $q$, as asserted. [F8, step 3.1]
+
 5.1 Boundary and choice accounting. If $\mathcal F=0$ then all groups vanish and any $m_0$ works; if $A=0$ then $\mathbb P^N_A=\varnothing$, $X=\varnothing$ and again all groups vanish, with the Noetherian and coherence hypotheses vacuous or satisfied by the zero ring; if $X=\varnothing$ the same holds. If $L^{\otimes d}\cong i^*\mathcal O(1)$ holds with $d=1$ then $m_0=\max_rn_r$ in the argument, so the bound is the maximum of the projective-space bounds over the single residue class $r=0$; the theorem nevertheless allows any $d\ge1$. The Axiom of Choice is consumed through the ample-powers embedding [F2], the coherence theorem [F4] and the projective-space finiteness and vanishing [F6]; the finitely many residue classes are indexed by $\{0,\dots,d-1\}$, and no further family is chosen. [F2, F4, F6, step 4.1, cases: zero module and zero ring and empty X and d=1] ∎

@@ -1,7 +1,7 @@
 ---
 page: "fundamental-solutions-newtonian-potentials-and-green-functions-examples"
 title: "Fundamental Solutions Newtonian Potentials and Green Functions — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-flux-of-the-laplace-fundamental-solution", "ex-two-dimensional-logarithmic-kernel-has-unit-normalised-flux", "ex-one-dimensional-green-function-on-an-interval", "ex-adding-a-harmonic-function-preserves-a-fundamental-solution", "ex-newtons-shell-theorem-from-the-mean-property", "ex-newtonian-potential-of-a-radial-density", "cex-second-derivatives-of-the-fundamental-solution-are-not-locally-integrable-absolutely", "cex-green-functions-need-not-exist-with-the-naive-boundary-regularity", "cex-neumann-poisson-problem-needs-the-compatibility-condition"]
 ---

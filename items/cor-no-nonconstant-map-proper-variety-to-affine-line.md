@@ -2,7 +2,7 @@
 id: cor-no-nonconstant-map-proper-variety-to-affine-line
 kind: corollary
 title: "Maps from proper integral schemes to the affine line have closed-point image"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -28,10 +28,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Varieties, Section 33.9 (global functions on proper varieties and morphisms to the affine line)"

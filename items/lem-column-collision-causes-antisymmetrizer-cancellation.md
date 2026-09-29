@@ -2,7 +2,7 @@
 id: lem-column-collision-causes-antisymmetrizer-cancellation
 kind: lemma
 title: Column collision cancels antisymmetrization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-column-antisymmetrizer-polytabloid-and-specht-module, def-row-and-column-stabilizers-of-a-tableau, def-young-subgroup-tabloid-and-permutation-module, thm-sign-is-a-homomorphism, def-inversions-inversion-number-and-sign]
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

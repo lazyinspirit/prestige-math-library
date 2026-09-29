@@ -2,7 +2,7 @@
 id: thm-projective-space-as-proj
 kind: theorem
 title: "Projective space is Proj of a polynomial ring"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-standard-opens-proj-affine
@@ -23,6 +23,9 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
     - title: "Gao-Zhang, Lectures on Algebraic Geometry, Chapter 5"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

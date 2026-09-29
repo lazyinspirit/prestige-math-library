@@ -2,7 +2,7 @@
 id: ex-slit-plane-green-function-from-square-root
 kind: example
 title: "Green kernel of a slit plane via the square-root map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -32,6 +32,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

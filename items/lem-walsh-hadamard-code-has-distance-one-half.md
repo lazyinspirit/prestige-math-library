@@ -2,7 +2,7 @@
 id: lem-walsh-hadamard-code-has-distance-one-half
 kind: lemma
 title: "Distinct Walsh–Hadamard words differ on half the cube"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-walsh-hadamard-encoding-and-relative-distance
@@ -17,6 +17,7 @@ sources:
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

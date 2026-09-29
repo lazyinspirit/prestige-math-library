@@ -2,7 +2,7 @@
 id: lem-transgression-between-two-connections-is-exact
 kind: lemma
 title: Explicit Chern–Simons transgression between two connections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -27,6 +27,7 @@ sources:
       locator: "§5, connection-independence proposition following Lemma (5.3), printed pp. 28–29"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

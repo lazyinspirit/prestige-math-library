@@ -2,7 +2,7 @@
 id: lem-fibrewise-exact-free-complex-locus-open-cm-flat-family
 kind: lemma
 title: Fibrewise exactness of a finite free complex is open in a flat Cohen-Macaulay family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -21,6 +21,9 @@ sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.129.3 (tag 00RB), openness of fibrewise exactness"
       url: https://stacks.math.columbia.edu/tag/00RB
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

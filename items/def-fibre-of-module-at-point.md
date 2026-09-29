@@ -2,7 +2,7 @@
 id: def-fibre-of-module-at-point
 kind: definition
 title: Fibre of a module sheaf at a point
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-residue-field-scheme-point
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

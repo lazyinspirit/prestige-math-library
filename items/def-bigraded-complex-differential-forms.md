@@ -2,7 +2,7 @@
 id: def-bigraded-complex-differential-forms
 kind: definition
 title: Bigraded complex forms and the Dolbeault operators
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-differential-k-form
@@ -31,6 +31,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

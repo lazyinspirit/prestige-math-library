@@ -13,10 +13,13 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
       url: https://web.archive.org/web/20250601000000id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf
       locator: §5.3 equations (5.22)–(5.26), printed pp. 117–118
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-fundamental-solution-of-a-constant-coefficient-operator", "def-polar-surface-measure-on-the-unit-sphere", "lem-euclidean-chart-measure-agrees-with-polar-surface-measure", "def-countable-choice", "thm-polar-coordinates-formula-for-lebesgue-measure", "lem-euclidean-balls-have-positive-finite-lebesgue-measure", "cor-volume-of-the-unit-n-ball", "def-regular-distribution-from-a-locally-integrable-function", "def-distributional-derivative", "def-dirac-delta-and-its-derivatives", "def-laplacian-of-a-c2-function", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null"]
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

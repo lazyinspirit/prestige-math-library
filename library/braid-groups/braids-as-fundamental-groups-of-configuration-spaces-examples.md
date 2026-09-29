@@ -1,7 +1,7 @@
 ---
 page: braids-as-fundamental-groups-of-configuration-spaces-examples
 title: "Braids as Fundamental Groups of Configuration Spaces — Examples"
-status: draft
+status: published
 requires: [braids-as-fundamental-groups-of-configuration-spaces]
 items: []
 examples: [ex-a-half-twist-loop-traces-the-standard-generator,

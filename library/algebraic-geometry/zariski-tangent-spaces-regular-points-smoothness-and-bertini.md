@@ -1,7 +1,7 @@
 ---
 page: "zariski-tangent-spaces-regular-points-smoothness-and-bertini"
 title: "Zariski Tangent Spaces, Regular Points, Smoothness, and Bertini"
-status: draft
+status: published
 items:
   - def-zariski-cotangent-space-point
   - def-zariski-tangent-space-point

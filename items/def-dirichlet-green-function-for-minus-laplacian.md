@@ -6,10 +6,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
@@ -18,7 +20,7 @@ sources:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"
       url: https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf
       locator: "§2.8 Green-function definition and remarks (0)–(1), printed pp.44–45; Schmidt uses ΔF=δ₀ and a nonpositive Green function, so translate by Φ=−F and G_here=−G_Schmidt"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:

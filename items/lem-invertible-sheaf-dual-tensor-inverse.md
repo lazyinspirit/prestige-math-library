@@ -2,7 +2,7 @@
 id: lem-invertible-sheaf-dual-tensor-inverse
 kind: lemma
 title: Dual of a line bundle is its tensor inverse
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-invertible-sheaf
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

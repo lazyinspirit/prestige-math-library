@@ -2,7 +2,7 @@
 id: def-the-chern-weil-homomorphism
 kind: definition
 title: Chern–Weil map for a chosen connection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -26,6 +26,7 @@ sources:
       locator: "§5.1 and §§5.3–5.5, printed pp. 27–30 (PDF pp. 30–33); real GL-invariant-polynomial construction, class [φ(κ)], and complex de Rham convention"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

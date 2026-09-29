@@ -2,7 +2,7 @@
 id: lem-index-of-graph-bounded-region-boundary
 kind: lemma
 title: Index of the boundary of a graph-bounded plane region
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -22,10 +22,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Theo Bühler and Dietmar A. Salamon, Functional Analysis, Definition 5.24 and the cycle-existence remark"

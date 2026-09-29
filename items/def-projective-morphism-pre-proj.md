@@ -2,7 +2,7 @@
 id: def-projective-morphism-pre-proj
 kind: definition
 title: "Projective morphisms before Proj"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-relative-projective-space-standard-charts
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, §29.44 Definition 29.44.1(2)"

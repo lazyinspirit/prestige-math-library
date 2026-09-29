@@ -2,7 +2,7 @@
 id: ex-degree-three-stable-symmetric-function-bases
 kind: example
 title: The five standard symmetric-function bases in degree three
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 provenance:
   statement: ai-altered
   proof: ai-altered

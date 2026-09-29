@@ -2,7 +2,7 @@
 id: ex-harmonic-measure-of-a-disc-arc
 kind: example
 title: "Harmonic measure of an arc of the unit circle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -30,6 +30,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

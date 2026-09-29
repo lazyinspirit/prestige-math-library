@@ -2,7 +2,7 @@
 id: thm-generic-smoothness-characteristic-zero
 kind: theorem
 title: "Generic smoothness over a dense target open"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -44,6 +44,9 @@ sources:
       url: https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Theorem 5.4.2 (Bertini-Sard), printed p. 34"
       url: https://www.math.purdue.edu/~arapura/preprints/algeom.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

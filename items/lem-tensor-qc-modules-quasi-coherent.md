@@ -2,7 +2,7 @@
 id: lem-tensor-qc-modules-quasi-coherent
 kind: lemma
 title: Tensor product preserves quasi-coherence
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-sheaf-tensor-product
@@ -40,6 +40,9 @@ sources:
     - title: "The Stacks Project, Properties of Schemes, §§28.20, 28.26"
       url: "https://stacks.math.columbia.edu/download/properties.pdf"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

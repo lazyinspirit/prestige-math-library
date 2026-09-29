@@ -2,7 +2,7 @@
 id: thm-generic-flatness-morphisms
 kind: theorem
 title: "Generic flatness for finite type morphisms over Noetherian integral bases"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -26,6 +26,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "The Stacks Project, Commutative Algebra, Section 10.108 (generic flatness)"
       url: https://stacks.math.columbia.edu/download/algebra.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

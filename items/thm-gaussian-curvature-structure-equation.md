@@ -2,7 +2,7 @@
 id: thm-gaussian-curvature-structure-equation
 kind: theorem
 title: Gaussian curvature structure equation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-connection-one-form-of-an-oriented-orthonormal-frame
@@ -19,10 +19,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)"

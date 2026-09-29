@@ -2,7 +2,7 @@
 id: def-universally-closed-morphism
 kind: definition
 title: Universally closed morphisms
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-base-change-morphism-schemes
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Schemes, §26.20 Definition 26.20.1"

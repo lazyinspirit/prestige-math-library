@@ -2,7 +2,7 @@
 id: ex-newtons-shell-theorem-from-the-mean-property
 kind: example
 title: Newton shell theorem from harmonic mean values
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -67,10 +67,12 @@ deps:
   - thm-total-derivative-computes-directional-and-partial-derivatives
 
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived author manuscript)"
@@ -169,6 +171,7 @@ at the shell $|x|=R$.
 3.1 The function $V$ is radial. Indeed, take $x,x'$ with $|x|=|x'|<R$. If $x=x'$, use the identity map. Otherwise set $v=x-x'$ and $$Qz=z-2\frac{\langle z,v\rangle}{\langle v,v\rangle}v.$$ Bilinearity of the inner product [F12] gives $\langle Qz,Qw\rangle=\langle z,w\rangle$. Since $\langle Qz,v\rangle=-\langle z,v\rangle$, the formula gives $Q^2z=z$; hence $Q$ is an orthogonal involution. Also $2\langle x,v\rangle=\langle v,v\rangle$, hence $Qx=x'$. Thus $Q$ maps $S_R$ onto itself. It is an isometry, hence continuous [F24], and [F13] makes it a Borel-measurable self-map. The unit-sphere invariance and radius-scaling clauses of [F3] imply that $Q$ preserves the surface measure on $S_R$, so it preserves surface integrals by [F22]. Using $y=Qz$ and the radial formula [F1], $$V(x')=\frac1{|S_R|}\int_{S_R}\Phi(Qx-y)\,dS_y =\frac1{|S_R|}\int_{S_R}\Phi(Qx-Qz)\,dS_z =\frac1{|S_R|}\int_{S_R}\Phi(x-z)\,dS_z=V(x).$$ [given, A1, F1, F3, F12, F13, F22, F24, step 1.1, step 2.2, algebra]
 
 4.1 Write $V(x)=v(|x|)$ on $B_R(0)$ and set $v(r)=V(re_1)$ for $0<r<R$. By the chain and product rules [F14, F16], for $|x|=r>0$, $$\partial_iV(x)=v'(r)\frac{x_i}{r},\qquad \partial_{ii}V(x)=v''(r)\frac{x_i^2}{r^2} +v'(r)\left(\frac1r-\frac{x_i^2}{r^3}\right).$$ Summing over $i$ and using [F11] yields $$0=\Delta V(x)=v''(r)+\frac{n-1}{r}v'(r).$$ Consequently $(r^{n-1}v'(r))'=0$, so [F17] makes $r^{n-1}v'(r)=c$ on $(0,R)$ for one constant $c$. By [F16], the derivative of $v(r)-\frac{c}{2-n}r^{2-n}$ is zero; another application of [F17] gives $$v(r)=a+b r^{2-n}\qquad(0<r<R)$$ for constants $a,b$. Since $V$ is continuous at the origin by [F11, step 2.2], there are $\rho>0$ and $C>0$ such that $|v(r)|\le C$ for $0<r<\rho$. Set $m=n-2\ge1$. For any $L>0$ and $0<r<\min\{1,L^{-1}\}$, induction on $k\in\mathbb N$ proves $0<r^{k+1}\le r$: the base $k=0$ is $r^1=r$ by [F25]; if $r^{k+1}\le r$, then multiplying by $r>0$ and using $r<1$ gives $r^{k+2}=r^{k+1}r\le r^2\le r$ by [F27]. Since $m\ge1$, it is a nonzero natural; [F29] gives $k\in\mathbb N$ with $m=\sigma(k)$, whose real exponent is $k+1$ by [F26]. Thus $0<r^m\le r<L^{-1}$. By [F28], $r^{2-n}=r^{-m}=(r^m)^{-1}>L$. This is the quantified limit $r^{2-n}\to+\infty$ as $r\downarrow0$. If $b\ne0$, choose $L>(C+|a|)/|b|$ and take $r$ small enough to satisfy the preceding bound and $r<\min\{R,\rho\}$. Reverse triangle inequality [F15] gives $|v(r)|=|a+b r^{-m}|\ge |b|r^{-m}-|a|>C$, a contradiction. Thus $b=0$, and $V$ is constant throughout $B_R(0)$. [given, F11, F12, F14, F15, F16, F17, F21, F25, F26, F27, F28, F29, step 2.2, step 3.1, algebra]
+
 5.1 At $x=0$, $|y|=R$ on $S_R$, so [F1] gives $$V(0)=\frac1{|S_R|}\int_{S_R}\Phi(-y)\,dS_y=\Phi(R).$$ Step 4.1 makes this the value of $V$ at every interior point. Since $U=MV$, the interior formula follows for every real $M$, including zero. [given, A1, F1, F11, step 1.1, step 4.1, algebra]
 
 6.1 The outside and inside cases are disjoint and cover exactly the points $|x|\ne R$. At $|x|=R$ the pole lies on the shell, and the statement makes no claim there. The $n\ge3$ assumption is used when the radial ODE produces $r^{2-n}$ and continuity at zero removes its singular term; dimensions one and two are outside this statement. Countable Choice is the sole set-theoretic assumption, carried by the cited kernel, surface/polar measure, spherical-mean and ball-measure interfaces [A1, F1, F2, F3, F4, F5, F6, F7]; the explicit differentiation and reflection calculations require no full Axiom of Choice. ∎ [given, A1, F1, F2, F3, F4, F5, F6, F7, cases]

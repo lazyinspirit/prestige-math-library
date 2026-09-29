@@ -2,7 +2,7 @@
 id: lem-column-antisymmetrizer-detects-dominance
 kind: lemma
 title: Nonzero antisymmetrizer image detects dominance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-column-antisymmetrizer-polytabloid-and-specht-module, lem-column-collision-causes-antisymmetrizer-cancellation, lem-basic-combinatorial-lemma-for-tableaux, def-dominance-order-on-partitions, def-young-subgroup-tabloid-and-permutation-module]
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

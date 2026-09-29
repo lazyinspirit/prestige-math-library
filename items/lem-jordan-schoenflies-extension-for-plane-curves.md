@@ -2,7 +2,7 @@
 id: lem-jordan-schoenflies-extension-for-plane-curves
 kind: lemma
 title: "Jordan–Schönflies extension for plane curves"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-jordan-brouwer-separation, lem-finite-plane-graph-ear-and-face-facts, lem-plane-arc-complements-and-accessible-jordan-points, thm-extreme-value-metric, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-heine-borel-rn, cor-bolzano-weierstrass-in-rn, def-continuous-map-top, def-homeomorphism-and-open-maps, def-metric-ball, lem-metrics-on-rn, lem-algebra-of-continuous-real-maps-on-a-space, lem-radial-normalisation-is-continuous, lem-continuity-is-local-and-pastes, def-euclidean-spheres-and-closed-balls, thm-product-universal-property, thm-metric-continuity-characterisations, def-plane-region-and-frontier, cor-components-of-open-subsets-of-rn-are-polygonally-connected, def-polygonal-arc-and-polygon, def-polygonal-path-and-polygonal-connectedness, lem-euclidean-polygonal-paths-are-continuous, lem-q-and-irrationals-dense-r]
 justified_by: []
@@ -12,10 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-polynomial-diagonal-bimodule-hochschild-homology
 kind: corollary
 title: Diagonal Hochschild homology of a polynomial ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex, lem-exterior-algebra-basis-monomials, def-axiom-of-choice, def-hochschild-chain-complex-of-a-bimodule, def-graded-ring-module-bimodule-and-internal-shift]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

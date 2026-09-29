@@ -2,7 +2,7 @@
 id: def-chern-pontryagin-and-euler-characteristic-forms
 kind: definition
 title: Chern, Pontryagin, and Euler characteristic forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -30,6 +30,9 @@ sources:
     - title: John Milnor and James Stasheff, Characteristic Classes
       url: https://xiaoshuo-lin.me/files/Char-Class.pdf
       locator: "Appendix C, Corollary C.10 and Lemma C.12, printed pp. 194–196; real odd-coefficient exactness and Pfaffian covariance and normalization"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

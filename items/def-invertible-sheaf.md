@@ -2,7 +2,7 @@
 id: def-invertible-sheaf
 kind: definition
 title: Invertible sheaves
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-locally-free-sheaf-finite-rank
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

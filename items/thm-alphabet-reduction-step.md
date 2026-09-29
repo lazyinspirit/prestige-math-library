@@ -2,7 +2,7 @@
 id: thm-alphabet-reduction-step
 kind: theorem
 title: "Fixed-alphabet reduction with constant gap retention"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-composition-preserves-perfect-completeness
@@ -27,6 +27,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

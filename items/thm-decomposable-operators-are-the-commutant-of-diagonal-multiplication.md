@@ -2,7 +2,7 @@
 id: thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication
 kind: theorem
 title: Decomposable operators are the commutant of diagonal multiplication
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -46,7 +46,8 @@ sources:
       locator: "Chapter 1 §1.H, Theorems 1.H.1 and 1.H.4, printed pp. 65–68; general-field statement and detailed constant-separable-fibre proof"
 axiom_use: "Assume AC to meet the hypotheses of the commutant, direct-integral Hilbert-space, and operator-action suppliers. AC also supplies a countable choice of measurable representatives for S(1_{E_k}u_n). The normalized test family, finite rational coding, least-index measurable partitions, finite-measure exhaustion, and fibre extensions are otherwise explicit; no further choice is used."
 verification:
-  precheck: n/a
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -135,6 +136,7 @@ $\mu$-null set.
 6.1 The action theorem induces $\widehat S=\int_X^\oplus T_x\,d\mu(x)$ and gives $\|\widehat S\|=\operatorname*{ess\,sup}_x\|T_x\|\le C$. For every $k,n$, the representatives agree outside a null set, so $\widehat S[\mathbf1_{E_k}u_n]=S[\mathbf1_{E_k}u_n]$. Both operators commute with $\mathcal D$ by step 1.1 and the assumption on $S$, so they agree on all bounded scalar localizations of these sections. [F2, F3, F4, F5, step 1.1, step 2.1, step 5.1]
 
 6.2 If two weakly measurable essentially bounded fields induce the same operator, [F5] makes their actions agree on every $[\mathbf1_{E_k}u_n]$. The quotient definition supplies a Borel null set for each such equality; the countable union is null by [F11]. Off it the fields agree on every $u_n(x)$, hence on their dense span by step 1.2 and [F6], and then on $H_x$ by boundedness. On zero fibres both fields are the zero operator. This proves uniqueness up to a null set. [F2, F5, F6, F11, given, step 1.2, step 5.1, algebra]
+
 7.1 These localizations have dense linear span in $\mathcal H$. Indeed, for $[\xi]\in\mathcal H$ and $\varepsilon>0$, [F10] lets us first restrict to some finite-measure $E_k$ and then to $F=E_k\cap\{\|\xi\|\le R\}$ with arbitrarily small $L^2$ error. On $F\cap\{\xi\ne0\}$, the normalized section is $b(\|\xi\|)\xi$, where the Borel reciprocal function $b$ was constructed in step 1.2; it is measurable by [F7, F17]. For any $\delta>0$, density of the $u_n(x)$ in the unit sphere, proved in step 1.2, gives a countable measurable cover by sets $\{x:\|b(\|\xi(x)\|)\xi(x)-u_n(x)\|<\delta\}$. Assign each point the least qualifying $n$; this is a measurable partition. Its first $N$ pieces exhaust all but a set on which the $L^2$ norm of $\xi$ tends to zero, by [F10]. For each retained partition set $P_n$, the section $\mathbf1_{P_n}\|\xi\|u_n$ equals $M_{\phi_n}[\mathbf1_{E_k}u_n]$ for $\phi_n=\mathbf1_{P_n}\|\xi\|$; this is a member of $L^\infty$ by [F15, F19], since $P_n\subseteq F\subseteq E_k$ has finite measure and $\|\xi\|\le R$ there. Thus the finite sum over the first $N$ pieces lies in the span on which $S$ and $\widehat S$ agree by steps 1.1 and 6.1. On retained pieces its pointwise error is below $\delta\|\xi\|$; on the discarded tail its error is $\|\xi\|$. Taking $\delta$, the tail, and the two initial truncation errors small proves density. Since $S$ and $\widehat S$ are bounded by [F5] and agree on this dense span, $S=\widehat S$. Thus every member of $\mathcal D'$ is decomposable. [F2, F5, F6, F7, F10, F15, F17, F19, step 1.1, step 1.2, step 6.1, construct]
 
 

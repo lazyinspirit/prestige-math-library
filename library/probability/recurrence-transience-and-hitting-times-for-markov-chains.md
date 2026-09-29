@@ -1,7 +1,7 @@
 ---
 page: recurrence-transience-and-hitting-times-for-markov-chains
 title: "Recurrence Transience and Hitting Times for Markov Chains"
-status: draft
+status: published
 items:
   - def-transition-matrix-and-n-step-transition-probabilities
   - lem-matrix-chapman-kolmogorov-equations

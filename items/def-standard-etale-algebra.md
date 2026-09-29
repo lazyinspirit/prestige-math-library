@@ -2,7 +2,7 @@
 id: def-standard-etale-algebra
 kind: definition
 title: "Standard étale algebra"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-morphism-schemes
@@ -18,6 +18,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/00UE
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapter 26"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

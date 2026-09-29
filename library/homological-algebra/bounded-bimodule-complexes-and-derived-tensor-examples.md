@@ -1,7 +1,7 @@
 ---
 page: bounded-bimodule-complexes-and-derived-tensor-examples
 title: "Bounded Bimodule Complexes and Derived Tensor — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-term-tensor-complex-koszul-signs

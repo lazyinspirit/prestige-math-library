@@ -2,7 +2,7 @@
 id: lem-compact-surface-admits-a-finite-triangulation
 kind: lemma
 title: "Finite triangulation of a compact connected surface"
-status: draft
+status: published
 origin: pipeline
 deps: [def-abstract-simplicial-complex, def-axiom-of-choice, def-barycentric-subdivision-of-an-abstract-simplicial-complex, def-face-poset-and-order-complex, def-geometric-realization-of-an-abstract-simplicial-complex, def-homeomorphism-and-open-maps, def-polygonal-schema-and-edge-pairing, def-quotient-topology, def-simple-polygonal-region-and-triangulation, lem-grid-cycle-for-runge-approximation, thm-winding-number-chain-laws, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, def-topological-manifold-without-boundary, lem-barycentric-face-chains-triangulate-a-geometric-simplex, lem-continuity-is-local-and-pastes, lem-finite-choice, lem-finite-plane-graph-ear-and-face-facts, lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology, lem-jordan-schoenflies-extension-for-plane-curves, lem-planar-facial-graph-isomorphism-extension, prop-a-finite-simplicial-complex-has-compact-hausdorff-realization, thm-barycentric-subdivision-realizes-homeomorphically, thm-compactness-under-continuous-maps, thm-heine-borel-rn, thm-jordan-brouwer-separation, thm-open-connected-subsets-of-rn-are-polygonally-connected, thm-simple-polygon-admits-a-triangulation]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://people.math.wisc.edu/~dymarz/751/thomass.pdf"
       locator: "Theorem 4.1, printed pp.126-127; the same construction is the one expounded in Appendix E of Gallier-Xu"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

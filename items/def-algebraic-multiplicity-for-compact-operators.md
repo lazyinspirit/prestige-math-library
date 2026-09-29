@@ -2,7 +2,7 @@
 id: def-algebraic-multiplicity-for-compact-operators
 kind: definition
 title: Algebraic multiplicity of a nonzero compact-operator eigenvalue
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -21,10 +21,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

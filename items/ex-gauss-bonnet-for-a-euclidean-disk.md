@@ -2,7 +2,7 @@
 id: ex-gauss-bonnet-for-a-euclidean-disk
 kind: example
 title: Euclidean disk boundary curvature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -30,6 +30,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Theorem 2.0.1, printed pp. 10-13 (PDF pp. 17-20): the boundary formula applied to the flat disk."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

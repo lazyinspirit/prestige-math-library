@@ -2,7 +2,7 @@
 id: thm-complex-irreducibles-of-symmetric-groups-are-specht-modules
 kind: theorem
 title: Specht modules classify the complex irreducibles of $S_n$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: false
@@ -42,11 +42,12 @@ sources:
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Theorem 3.5 and Corollary 3.6 with proof, printed pp. 33-34"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/24d8b3fa2ce48e48ee6c2d8d5e3562f6_MIT18_712F10_replect.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

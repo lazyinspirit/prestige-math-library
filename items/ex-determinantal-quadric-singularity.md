@@ -2,7 +2,7 @@
 id: ex-determinantal-quadric-singularity
 kind: example
 title: "The rank-one 2 by 2 determinantal cone"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -39,10 +39,12 @@ deps:
   - thm-localisation-and-polynomial-extension-of-regular-rings
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

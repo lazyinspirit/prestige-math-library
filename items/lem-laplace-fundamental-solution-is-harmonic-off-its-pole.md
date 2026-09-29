@@ -2,7 +2,7 @@
 id: lem-laplace-fundamental-solution-is-harmonic-off-its-pole
 kind: lemma
 title: The Laplace fundamental solution is harmonic off its pole
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,10 +10,12 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-laplacian-of-a-c2-function, def-ck-and-multi-index-notation-in-several-variables, def-ck-euclidean-maps-and-diffeomorphisms, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-chain-rule-for-total-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-real-power-continuity-and-derivatives, thm-logarithm-derivative-and-integral, thm-induction-principle]
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"

@@ -2,7 +2,7 @@
 id: lem-sobolev-pasting-across-an-overlap
 kind: lemma
 title: Sobolev functions paste across an overlap
-status: draft
+status: published
 origin: pipeline
 deps: [cor-additivity-of-the-nonnegative-lebesgue-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, def-axiom-of-choice, def-countable-choice, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-borel-and-lebesgue-measurable-function-on-rn, def-integral-over-a-measurable-set, def-essential-supremum-with-respect-to-a-measure, def-test-function-space-d-of-an-open-set, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-derivatives-are-unique-almost-everywhere, lem-test-function-cutoffs-and-euclidean-localization, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-holder-inequality-for-integrals, thm-complex-holder-minkowski-and-the-quotient-norm]
 landmark: false
@@ -19,6 +19,9 @@ sources:
     - title: John K. Hunter, Notes on Partial Differential Equations (2014)
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Chapter 3 §§3.1–3.5
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

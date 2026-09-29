@@ -2,7 +2,7 @@
 id: lem-relative-algebraic-constants-fg-field-finite
 kind: lemma
 title: "A finite-type field has finite relative algebraic constants"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -21,10 +21,12 @@ deps:
   - thm-tower-law-for-finite-field-extensions
   - thm-transitivity-of-algebraicity
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Fields, Lemma 9.26.11 (tag 037J)"

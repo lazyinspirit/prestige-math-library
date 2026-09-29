@@ -2,7 +2,7 @@
 id: lem-positive-type-functions-define-a-pre-hilbert-form
 kind: lemma
 title: Positive-type functions define the GNS pre-Hilbert form
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [def-continuous-function-of-positive-type, def-real-and-complex-inner-product-space]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka and de la Harpe, Unitary Representations of Groups, Duals, and Characters, Construction 1.B.5, Chapter 1 §1.B, printed pp. 27–28"

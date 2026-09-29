@@ -2,7 +2,7 @@
 id: lem-tangent-cone-initial-ideal-presentation
 kind: lemma
 title: "All initial forms define the tangent cone"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -32,10 +32,12 @@ deps:
   - lem-field-is-a-commutative-ring
   - cor-multivariate-polynomial-ring-over-a-domain-is-a-domain
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

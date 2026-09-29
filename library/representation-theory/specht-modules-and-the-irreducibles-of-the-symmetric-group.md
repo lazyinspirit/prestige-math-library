@@ -1,7 +1,7 @@
 ---
 page: specht-modules-and-the-irreducibles-of-the-symmetric-group
 title: "Specht Modules and the Irreducibles of the Symmetric Group"
-status: draft
+status: published
 items:
   - def-column-antisymmetrizer-polytabloid-and-specht-module
   - lem-polytabloid-covariance-and-column-sign

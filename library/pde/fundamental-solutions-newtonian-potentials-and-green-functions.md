@@ -1,7 +1,7 @@
 ---
 page: "fundamental-solutions-newtonian-potentials-and-green-functions"
 title: "Fundamental Solutions Newtonian Potentials and Green Functions"
-status: draft
+status: published
 items: ["def-fundamental-solution-of-a-constant-coefficient-operator", "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign", "lem-distributional-derivatives-commute-with-convolution-against-test-functions", "lem-neumann-compatibility-from-the-divergence-theorem", "lem-puncturing-connected-open-subset-of-rn-preserves-path-connectedness", "cor-neumann-solutions-are-unique-modulo-componentwise-constants", "lem-laplace-fundamental-kernel-is-locally-integrable", "lem-laplace-fundamental-solution-is-harmonic-off-its-pole", "def-newtonian-potential", "thm-minus-laplacian-of-the-fundamental-solution-is-dirac", "lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data", "thm-decay-of-the-newtonian-potential-of-compactly-supported-data", "thm-newtonian-potential-solves-poisson-distributionally", "thm-newtonian-potential-for-holder-data-is-classical", "def-dirichlet-green-function-for-minus-laplacian", "lem-dirichlet-green-function-is-unique-and-positive", "thm-green-function-symmetry", "def-poisson-kernel-from-a-green-function", "thm-green-representation-formula", "cor-zero-dirichlet-green-representation-for-poisson-data", "cor-classical-dirichlet-and-poisson-problems-are-unique", "rem-green-identities-come-from-the-euclidean-integration-pair"]
 examples: []
 ---

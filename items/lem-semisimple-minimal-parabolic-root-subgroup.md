@@ -2,7 +2,7 @@
 id: lem-semisimple-minimal-parabolic-root-subgroup
 kind: lemma
 title: Minimal parabolic from one negative simple root
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -35,6 +35,9 @@ sources:
     - title: "Brian Conrad, Reductive Group Schemes"
       url: https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf
       locator: "§§1.2, 1.4, especially Theorems 1.2.7, 1.4.12, Proposition 1.4.7 and Corollary 1.4.13"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

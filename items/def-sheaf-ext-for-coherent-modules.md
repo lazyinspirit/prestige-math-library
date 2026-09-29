@@ -2,7 +2,7 @@
 id: def-sheaf-ext-for-coherent-modules
 kind: definition
 title: Sheaf Ext of coherent modules
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Duality for Schemes"

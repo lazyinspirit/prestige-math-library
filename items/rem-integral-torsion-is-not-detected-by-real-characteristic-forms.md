@@ -2,7 +2,7 @@
 id: rem-integral-torsion-is-not-detected-by-real-characteristic-forms
 kind: remark
 title: Real characteristic forms do not detect integral torsion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -33,10 +33,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Haynes Miller, MIT 18.906 Algebraic Topology II, Lecture 36

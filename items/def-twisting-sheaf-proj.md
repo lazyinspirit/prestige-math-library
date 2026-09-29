@@ -2,7 +2,7 @@
 id: def-twisting-sheaf-proj
 kind: definition
 title: "Twisting sheaf on Proj"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -18,6 +18,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01MM
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 4.5"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

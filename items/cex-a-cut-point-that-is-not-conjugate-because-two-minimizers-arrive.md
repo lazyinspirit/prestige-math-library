@@ -2,7 +2,7 @@
 id: cex-a-cut-point-that-is-not-conjugate-because-two-minimizers-arrive
 kind: counterexample
 title: A cut point that is not conjugate because two minimizers arrive
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-conjugate-points-along-a-geodesic-and-their-multiplicity
@@ -20,10 +20,12 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

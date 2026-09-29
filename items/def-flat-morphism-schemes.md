@@ -2,7 +2,7 @@
 id: def-flat-morphism-schemes
 kind: definition
 title: "Flat morphism of schemes"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-scheme-over-base
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Definition 29.25.1"

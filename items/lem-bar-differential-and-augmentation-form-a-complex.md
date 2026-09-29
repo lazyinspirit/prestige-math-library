@@ -2,7 +2,7 @@
 id: lem-bar-differential-and-augmentation-form-a-complex
 kind: lemma
 title: The bar boundary squares to zero and is augmented
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-two-sided-bar-resolution-of-an-associative-algebra]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

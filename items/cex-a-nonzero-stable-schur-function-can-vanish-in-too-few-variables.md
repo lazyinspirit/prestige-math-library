@@ -2,7 +2,7 @@
 id: cex-a-nonzero-stable-schur-function-can-vanish-in-too-few-variables
 kind: counterexample
 title: A nonzero stable Schur function can vanish in too few variables
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -25,6 +25,9 @@ sources:
       url: https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf
     - title: Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics, §9.13, printed pp. 204–207
       url: https://jeremymartinmath.github.io/CombinatoricsNotes.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

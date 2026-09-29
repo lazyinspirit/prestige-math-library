@@ -2,7 +2,7 @@
 id: thm-proper-quasi-finite-is-finite
 kind: theorem
 title: "A proper quasi-finite morphism is finite"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -20,10 +20,12 @@ deps:
   - lem-scheme-zariski-main-factorization-quasi-finite
   - thm-proper-morphism-closed-image
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.44 (finite morphisms)"

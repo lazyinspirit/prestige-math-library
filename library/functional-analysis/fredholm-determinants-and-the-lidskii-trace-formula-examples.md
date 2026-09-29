@@ -1,7 +1,7 @@
 ---
 page: fredholm-determinants-and-the-lidskii-trace-formula-examples
 title: "Fredholm Determinants and the Lidskii Trace Formula: Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-invariant-subspace-need-not-reduce-an-operator

@@ -2,7 +2,7 @@
 id: lem-filtered-colimit-flat-fp-sheaf-stage
 kind: lemma
 title: "Finite-stage descent of relative flatness for a finitely presented sheaf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Limits of Schemes, Lemma 32.10.4 (Tag 05LY)"

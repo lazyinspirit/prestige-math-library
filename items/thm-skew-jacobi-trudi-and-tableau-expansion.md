@@ -2,7 +2,7 @@
 id: thm-skew-jacobi-trudi-and-tableau-expansion
 kind: theorem
 title: Skew Jacobi–Trudi and tableau expansion
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-skew-schur-function-by-hall-adjointness
@@ -21,6 +21,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-09-30
 provenance:
   statement: literature-derived
   proof: ai-altered

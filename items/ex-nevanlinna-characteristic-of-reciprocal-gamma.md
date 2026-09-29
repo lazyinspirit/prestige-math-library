@@ -2,7 +2,7 @@
 id: ex-nevanlinna-characteristic-of-reciprocal-gamma
 kind: example
 title: "Reciprocal Gamma has order one and characteristic of size $r\\log r$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

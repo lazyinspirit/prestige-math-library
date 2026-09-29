@@ -2,7 +2,7 @@
 id: lem-two-query-pcps-and-constraint-graphs-are-equivalent
 kind: lemma
 title: "Two-query PCPs and binary constraint graphs"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-pcp-class-with-completeness-and-soundness
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

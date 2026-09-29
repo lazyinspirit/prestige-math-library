@@ -1,7 +1,7 @@
 ---
 page: the-dbar-complex-and-integral-solutions-examples
 title: "The Dolbeault Complex and Integral Solutions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-dbar-on-elementary-functions-and-forms,
            ex-cauchy-pompeiu-compact-support,

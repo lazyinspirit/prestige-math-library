@@ -2,7 +2,7 @@
 id: def-hochschild-chain-complex-of-a-bimodule
 kind: definition
 title: Hochschild chains and Hochschild homology with coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-enveloping-algebra-and-bimodule-module-dictionary, cor-finite-iterated-tensor-products-represent-multilinear-maps, thm-unit-isomorphisms-for-module-tensor-products, lem-bar-differential-and-augmentation-form-a-complex, def-homology-object-of-a-chain-complex]
@@ -20,6 +20,7 @@ sources:
       url: https://arxiv.org/pdf/math/0510265
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

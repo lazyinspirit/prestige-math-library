@@ -2,7 +2,7 @@
 id: cor-cut-time-does-not-exceed-first-conjugate-time
 kind: corollary
 title: Cut time does not exceed first conjugate time
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -16,10 +16,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

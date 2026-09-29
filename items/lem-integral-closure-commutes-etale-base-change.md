@@ -2,7 +2,7 @@
 id: lem-integral-closure-commutes-etale-base-change
 kind: lemma
 title: "Integral closure commutes with étale base change"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -18,10 +18,12 @@ deps:
   - thm-flatness-criteria-by-injections-and-ideals
   - lem-ag-standard-smooth-flatness
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Commutative Algebra, Section 10.147 (étale ring maps and integral closure)"

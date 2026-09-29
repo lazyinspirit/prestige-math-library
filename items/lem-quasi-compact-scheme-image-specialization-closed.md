@@ -2,7 +2,7 @@
 id: lem-quasi-compact-scheme-image-specialization-closed
 kind: lemma
 title: A quasi-compact image stable under specialization is closed
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -28,10 +28,12 @@ deps:
   - cor-maximal-ideals-are-prime
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Schemes, Lemma 26.19.7 (tag 05JL)"

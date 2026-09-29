@@ -2,7 +2,7 @@
 id: ex-interval-harmonic-measure-in-upper-half-plane
 kind: example
 title: "Harmonic measure of a real interval from the upper half-plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ sources:
       locator: "Section 4.2, PDF pp. 37-39: upper half-plane Poisson measure of a real interval"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

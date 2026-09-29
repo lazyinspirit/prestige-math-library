@@ -2,7 +2,7 @@
 id: def-tabloid-and-column-orders-for-specht-straightening
 kind: definition
 title: Tabloid and column orders for Specht straightening
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-young-tableau-standard-tableau-and-shape, def-young-subgroup-tabloid-and-permutation-module, def-partition-young-diagram-and-conjugate-partition]
@@ -25,6 +25,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

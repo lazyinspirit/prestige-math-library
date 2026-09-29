@@ -2,7 +2,7 @@
 id: lem-tangent-space-functoriality-classical
 kind: lemma
 title: "Differentials, open restriction, and the chain rule"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -17,10 +17,12 @@ deps:
   - def-affine-open-subscheme
   - lem-tangent-vectors-as-dual-number-points
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

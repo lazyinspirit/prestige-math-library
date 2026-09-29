@@ -2,7 +2,7 @@
 id: ex-killing-jacobi-fields-from-rotations
 kind: example
 title: Killing jacobi fields from rotations
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-trigonometric-parity-and-pythagorean-identity
@@ -24,10 +24,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

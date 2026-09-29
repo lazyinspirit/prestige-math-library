@@ -2,7 +2,7 @@
 id: lem-ltwo-fourier-multiplier-bound
 kind: lemma
 title: Exact L2 Fourier multiplier norm
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-translation-invariant-fourier-multiplier-on-schwartz-space
@@ -31,6 +31,9 @@ sources:
     - title: "Mark Williams, Notes on Harmonic Analysis"
       url: https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf
       locator: "§3.9, paragraph following Definition 3.11, printed p. 12, and Definition 6.5, printed p. 25"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

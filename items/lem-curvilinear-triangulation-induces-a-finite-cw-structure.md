@@ -2,7 +2,7 @@
 id: lem-curvilinear-triangulation-induces-a-finite-cw-structure
 kind: lemma
 title: A curvilinear triangulation gives a finite regular CW complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -17,10 +17,12 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Allen Hatcher, Algebraic Topology

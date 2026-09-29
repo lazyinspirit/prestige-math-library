@@ -2,7 +2,7 @@
 id: cex-proper-finiteness-fails-noncoherent
 kind: counterexample
 title: "Proper cohomology need not be finite for noncoherent sheaves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -35,10 +35,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, Sections 30.2-30.22"

@@ -1,7 +1,7 @@
 ---
 page: riemann-surfaces-branched-maps-and-differentials
 title: "Riemann Surfaces, Branched Maps, and Differentials"
-status: draft
+status: published
 items:
   - lem-planar-piecewise-analytic-region-triangulation
   - lem-index-of-graph-bounded-region-boundary

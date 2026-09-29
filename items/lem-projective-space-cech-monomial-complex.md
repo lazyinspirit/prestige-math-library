@@ -2,7 +2,7 @@
 id: lem-projective-space-cech-monomial-complex
 kind: lemma
 title: "Laurent-monomial decomposition of the projective Cech complex"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-projective-space-as-proj
@@ -23,10 +23,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Section 30.8 (tag 01XS), Lemma 30.8.1 (tag 01XT)"

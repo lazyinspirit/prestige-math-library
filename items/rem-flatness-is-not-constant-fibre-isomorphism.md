@@ -2,7 +2,7 @@
 id: rem-flatness-is-not-constant-fibre-isomorphism
 kind: remark
 title: "Flatness does not force isomorphic or smooth fibres"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.25-29.26"

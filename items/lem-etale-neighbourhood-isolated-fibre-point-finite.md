@@ -2,7 +2,7 @@
 id: lem-etale-neighbourhood-isolated-fibre-point-finite
 kind: lemma
 title: "Finite neighbourhood of an isolated fibre point after elementary etale change"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-morphism-schemes
@@ -42,6 +42,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/00UI
     - title: "The Stacks Project, More on Morphisms, Section 37.41 (etale neighbourhoods) and Morphisms, Section 29.21"
       url: https://stacks.math.columbia.edu/download/more-morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

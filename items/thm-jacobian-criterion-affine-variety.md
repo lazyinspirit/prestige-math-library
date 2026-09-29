@@ -2,7 +2,7 @@
 id: thm-jacobian-criterion-affine-variety
 kind: theorem
 title: "Jacobian rank detects regularity at closed points"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -35,6 +35,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/00TU
     - title: "The Stacks Project, Algebra Lemma 10.140.5 (tag 00TV), regularity and smoothness with separable residue field"
       url: https://stacks.math.columbia.edu/tag/00TV
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

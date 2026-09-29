@@ -2,7 +2,7 @@
 id: lem-weak-stability-of-sobolev-derivatives
 kind: lemma
 title: Weak derivatives persist under local Lp limits
-status: draft
+status: published
 origin: pipeline
 deps: [def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivatives-are-unique-almost-everywhere, lem-weak-derivative-is-independent-of-lp-representatives, thm-holder-inequality-for-integrals, thm-complex-holder-minkowski-and-the-quotient-norm, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, def-sobolev-space-wkp-and-its-norm, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

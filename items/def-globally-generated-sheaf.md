@@ -2,7 +2,7 @@
 id: def-globally-generated-sheaf
 kind: definition
 title: "Global generation by the evaluation map"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -17,6 +17,8 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01PS
     - title: "Ravi Vakil, The Rising Sea, August 2022 draft, Section 17.4"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

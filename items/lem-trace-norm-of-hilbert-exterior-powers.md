@@ -2,7 +2,7 @@
 id: lem-trace-norm-of-hilbert-exterior-powers
 kind: lemma
 title: Trace-norm bound for exterior powers of trace-class operators
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -30,10 +30,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

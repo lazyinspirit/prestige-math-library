@@ -2,7 +2,7 @@
 id: thm-flat-families-fibre-dimension-locally-constant
 kind: theorem
 title: "Fibre dimension of proper flat finitely presented families"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -16,10 +16,12 @@ deps:
   - thm-flat-finite-presentation-is-open
   - thm-proper-morphism-closed-image
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, More on Morphisms, Section 37.30 (dimension of fibres)"

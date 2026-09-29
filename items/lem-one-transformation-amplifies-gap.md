@@ -2,7 +2,7 @@
 id: lem-one-transformation-amplifies-gap
 kind: lemma
 title: "One fixed-alphabet transformation doubles small gaps"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-dinur-pcp-transformation
@@ -22,6 +22,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-harmonic-measure-is-well-defined
 kind: theorem
 title: "Existence and uniqueness of harmonic measure on a bounded regular plane domain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -38,6 +38,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

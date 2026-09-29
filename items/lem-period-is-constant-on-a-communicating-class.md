@@ -2,7 +2,7 @@
 id: lem-period-is-constant-on-a-communicating-class
 kind: lemma
 title: "Period is constant on communicating classes"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -12,10 +12,12 @@ deps:
   - def-transition-matrix-and-n-step-transition-probabilities
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"

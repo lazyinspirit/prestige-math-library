@@ -2,7 +2,7 @@
 id: fs-a-geodesic-stops-minimizing-exactly-at-its-first-conjugate-point
 kind: false-statement
 title: A geodesic stops minimizing exactly at its first conjugate point
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-cut-time-in-a-unit-tangent-direction
@@ -20,10 +20,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

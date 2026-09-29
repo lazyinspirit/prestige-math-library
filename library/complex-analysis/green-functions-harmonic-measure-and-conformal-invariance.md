@@ -1,7 +1,7 @@
 ---
 page: "green-functions-harmonic-measure-and-conformal-invariance"
 title: "Green Functions, Harmonic Measure, and Conformal Invariance"
-status: draft
+status: published
 items: ["def-green-function-plane-domain","lem-log-modulus-is-harmonic-off-its-centre","thm-planar-green-kernel-conformal-covariance","lem-analytic-exhaustion-of-plane-domains","thm-green-function-exists-on-bounded-plane-domains","lem-planar-barrier-controls-perron-solutions","lem-analytic-boundary-green-corrector-is-smooth","thm-green-function-uniqueness-symmetry-and-monotonicity","thm-green-function-simply-connected-plane-domain","def-harmonic-measure-plane-domain","thm-harmonic-measure-is-well-defined","thm-harmonic-measure-disc-poisson-density","thm-harmonic-measure-conformal-invariance","thm-harmonic-measure-maximum-principle-and-domain-comparison","thm-green-function-harmonic-measure-representation"]
 examples: []
 ---

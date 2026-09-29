@@ -2,7 +2,7 @@
 id: lem-composition-transfers-rejection-ratio
 kind: lemma
 title: "Composition transfers a constant fraction of unsatisfaction"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-composition-with-an-assignment-tester
@@ -27,6 +27,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

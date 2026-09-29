@@ -6,10 +6,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
@@ -18,7 +20,7 @@ sources:
     - title: "Sung-Jin Oh, Math 222A: Partial Differential Equations (lecture notes)"
       url: https://mathsite.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
       locator: §4.2, Theorem 4.4 and Corollary 4.7, printed pp.59–60
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:

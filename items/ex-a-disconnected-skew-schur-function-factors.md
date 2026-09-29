@@ -2,7 +2,7 @@
 id: ex-a-disconnected-skew-schur-function-factors
 kind: example
 title: A disconnected skew Schur function factors
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-partition-young-diagram-and-conjugate-partition
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

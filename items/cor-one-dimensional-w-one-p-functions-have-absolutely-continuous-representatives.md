@@ -2,7 +2,7 @@
 id: cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives
 kind: corollary
 title: One-dimensional $W^{1,p}$ functions have unique absolutely continuous representatives
-status: draft
+status: published
 origin: pipeline
 deps: [thm-acl-characterisation-of-w-one-p, def-sobolev-space-wkp-and-its-norm, def-l-infinity-on-a-measure-space, def-absolute-continuity-on-almost-every-coordinate-line, lem-weak-derivative-linearity-locality-and-commutation, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-the-lebesgue-integral-respects-almost-everywhere-equality, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-first-fundamental-theorem-of-calculus-for-l-one, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, thm-lebesgue-measure-of-a-box-of-every-kind, thm-lebesgue-measure-is-a-complete-measure, prop-measure-monotonicity, thm-holder-inequality-for-integrals, thm-integral-triangle-inequality, thm-absolute-continuity-of-the-integral, prop-indefinite-integral-of-an-integrable-function-is-countably-additive, def-complex-lp-and-euclidean-test-function-conventions, def-continuity-real, def-vector-valued-functions-limits-and-continuity, def-complex-metric-convergence-and-continuity, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

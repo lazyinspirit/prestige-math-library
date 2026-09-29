@@ -2,7 +2,7 @@
 id: lem-pullback-order-of-meromorphic-differentials-under-branched-maps
 kind: lemma
 title: Pullback order formula for a branched holomorphic map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -28,6 +28,9 @@ sources:
     - title: "Curtis T. McMullen, Riemann Surfaces, Math 213b course notes (2026)"
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf
       locator: "Ch. 3 and Ch. 6, the local computation of the pullback of a meromorphic form under z ↦ z^e; used as an independent cross-check."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

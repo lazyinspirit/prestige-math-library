@@ -2,7 +2,7 @@
 id: cor-finite-morphism-proper
 kind: corollary
 title: Finite morphisms are proper
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -21,10 +21,12 @@ deps:
   - def-axiom-of-choice
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Lemma 29.44.4 and Lemma 29.45.4 (tag 01WG)"

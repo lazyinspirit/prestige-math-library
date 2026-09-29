@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-graded-algebras-have-graded-projective-covers
 kind: lemma
 title: "Finite-dimensional graded algebras have graded projective covers"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -25,6 +25,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

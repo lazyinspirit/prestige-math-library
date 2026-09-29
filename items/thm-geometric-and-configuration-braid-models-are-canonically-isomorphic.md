@@ -2,7 +2,7 @@
 id: thm-geometric-and-configuration-braid-models-are-canonically-isomorphic
 kind: theorem
 title: "The geometric and configuration braid models agree at the fixed base configuration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 provenance:
@@ -28,6 +28,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

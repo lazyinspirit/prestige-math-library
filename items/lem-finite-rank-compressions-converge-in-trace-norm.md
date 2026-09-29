@@ -2,7 +2,7 @@
 id: lem-finite-rank-compressions-converge-in-trace-norm
 kind: lemma
 title: "Finite-rank orthogonal compressions converge in trace norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,11 +12,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-projective-hom-pairing-is-additive-and-graded-sesquilinear
 kind: theorem
 title: "Projective Hom pairing descends and is graded sesquilinear"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -33,10 +33,12 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

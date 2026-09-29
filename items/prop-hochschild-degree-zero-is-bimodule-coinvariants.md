@@ -2,7 +2,7 @@
 id: prop-hochschild-degree-zero-is-bimodule-coinvariants
 kind: proposition
 title: Degree-zero Hochschild homology is bimodule coinvariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-hochschild-chain-complex-of-a-bimodule, def-enveloping-algebra-and-bimodule-module-dictionary, def-vector-space, thm-modules-over-a-ring-form-an-abelian-category, def-cycle-and-boundary-subobjects-of-a-complex, def-homology-object-of-a-chain-complex, def-module-homomorphism-kernel-image-and-cokernel, thm-module-kernel-image-and-injectivity, def-tensor-product-of-modules-by-generators-and-relations, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-quotient-module, thm-quotient-module-laws, def-algebra-over-a-commutative-ring, cor-square-matrices-form-a-ring, def-matrix-space, thm-matrix-multiplication-laws, def-matrix-product-and-identity-matrix, def-matrix-units, lem-matrix-unit-multiplication, def-trace-of-a-square-matrix, thm-trace-of-ab-equals-trace-of-ba, prop-trace-is-linear]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

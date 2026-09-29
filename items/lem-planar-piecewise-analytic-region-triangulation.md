@@ -2,7 +2,7 @@
 id: lem-planar-piecewise-analytic-region-triangulation
 kind: lemma
 title: Slab triangulation of a compact plane region bounded by finitely many piecewise real-analytic curves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -22,6 +22,9 @@ sources:
     - title: "Guillaume Valette, On subanalytic geometry (2025)"
       url: "https://arxiv.org/pdf/2507.23622"
       locator: "Definition 1.2.1 and Theorem 1.2.3, printed pp. 14–15, describe analytic cylindrical cells; Proposition 1.8.4, printed p. 38, gives convergent Puiseux expansions for one-variable globally subanalytic functions. This corroborates endpoint Puiseux behavior; the finite graph construction and rectifiability are proved locally below."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

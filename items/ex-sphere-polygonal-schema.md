@@ -2,7 +2,7 @@
 id: ex-sphere-polygonal-schema
 kind: example
 title: "Sphere as a polygonal quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [def-polygonal-schema-and-edge-pairing, def-quotient-topology, lem-polygonal-schema-reduction-moves, def-euclidean-spheres-and-closed-balls, thm-heine-borel-rn, thm-metric-hausdorff-separation, lem-t0-t1-and-hausdorff-are-hereditary, thm-compactness-under-continuous-maps, def-euler-characteristic-of-a-finite-cw-complex, def-r-orientation-of-a-topological-manifold, def-orientation-local-system-and-orientation-cover]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 sphere discussion, printed pp.3–4"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

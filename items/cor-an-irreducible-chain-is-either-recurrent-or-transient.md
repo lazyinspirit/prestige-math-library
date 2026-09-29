@@ -2,7 +2,7 @@
 id: cor-an-irreducible-chain-is-either-recurrent-or-transient
 kind: corollary
 title: "Irreducible recurrence/transience dichotomy"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -12,10 +12,12 @@ deps:
   - thm-recurrence-and-transience-are-class-properties
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

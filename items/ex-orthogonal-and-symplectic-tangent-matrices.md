@@ -2,7 +2,7 @@
 id: ex-orthogonal-and-symplectic-tangent-matrices
 kind: example
 title: "Classical bilinear-form equations linearize to matrix spaces"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -21,10 +21,12 @@ deps:
   - def-determinant-of-a-square-matrix
   - cor-dimensions-of-matrix-and-linear-map-spaces
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

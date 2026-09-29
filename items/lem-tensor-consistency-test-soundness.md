@@ -2,7 +2,7 @@
 id: lem-tensor-consistency-test-soundness
 kind: lemma
 title: "Tensor consistency rejects a wrong decoded tensor"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-walsh-hadamard-encoding-and-relative-distance
@@ -20,6 +20,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

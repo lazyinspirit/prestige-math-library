@@ -2,7 +2,7 @@
 id: ex-cut-locus-of-a-point-on-a-round-sphere
 kind: example
 title: Cut locus of a point on a round sphere
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-euclidean-spheres-are-path-connected
@@ -35,10 +35,12 @@ deps:
   - thm-quarter-turn-values-and-shift-formulas
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-section-zero-scheme-invertible-sheaf
 kind: definition
 title: "Zero scheme of a line-bundle section"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-invertible-sheaf
@@ -19,6 +19,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Sections 27.8-27.21"

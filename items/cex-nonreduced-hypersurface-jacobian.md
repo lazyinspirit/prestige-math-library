@@ -2,7 +2,7 @@
 id: cex-nonreduced-hypersurface-jacobian
 kind: counterexample
 title: "The equation must define the intended scheme"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -38,10 +38,12 @@ deps:
   - thm-universal-property-of-a-polynomial-ring
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

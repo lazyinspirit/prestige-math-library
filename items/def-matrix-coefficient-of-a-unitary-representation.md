@@ -2,7 +2,7 @@
 id: def-matrix-coefficient-of-a-unitary-representation
 kind: definition
 title: Matrix coefficient of a unitary representation
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [def-strongly-continuous-unitary-representation, def-real-and-complex-inner-product-space, thm-cauchy-schwarz-in-an-inner-product-space, def-complex-metric-convergence-and-continuity]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Definition A.1.1, Appendix A, printed p. 305"

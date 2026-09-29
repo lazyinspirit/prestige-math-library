@@ -2,7 +2,7 @@
 id: lem-acl-representatives-reconstruct-weak-gradients-by-fubini
 kind: lemma
 title: ACL representatives recover their weak gradients by Fubini
-status: draft
+status: published
 origin: pipeline
 deps: [def-absolute-continuity-on-almost-every-coordinate-line, def-weak-derivative-of-a-locally-integrable-function, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-integration-by-parts-for-absolutely-continuous-functions, thm-tonelli-and-fubini-for-completed-product-measures, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, lem-test-function-cutoffs-and-euclidean-localization, thm-complex-holder-minkowski-and-the-quotient-norm, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Juha Kinnunen, Sobolev Spaces (2026), Chapter 2 §2.6

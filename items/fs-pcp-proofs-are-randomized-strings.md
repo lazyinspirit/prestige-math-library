@@ -2,7 +2,7 @@
 id: fs-pcp-proofs-are-randomized-strings
 kind: false-statement
 title: "False: a PCP proof is itself a random string"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-pcp-verifier-randomness-query-and-proof-length
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

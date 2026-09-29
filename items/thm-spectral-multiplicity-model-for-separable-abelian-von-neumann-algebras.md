@@ -2,7 +2,7 @@
 id: thm-spectral-multiplicity-model-for-separable-abelian-von-neumann-algebras
 kind: theorem
 title: Spectral multiplicity model for separably acting abelian von Neumann algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -74,7 +74,8 @@ sources:
       url: "https://arxiv.org/pdf/1912.07262"
       locator: "Chapter 1 §1.G, Proposition 1.G.2, printed p. 60 (dimension strata; proof referred elsewhere); §1.H, Theorem 1.H.1, printed p. 65 (general-field intertwiner theorem; proof referred to Dixmier–von Neumann)"
 verification:
-  precheck: n/a
+  precheck: pass
+  audited: 2026-09-30
 axiom_use: "Assume AC. It supplies the hypotheses of the self-adjoint-generator and countable cyclic-decomposition lemmas, the direct-integral Hilbert-space theorem, the Radon–Nikodym theorem, and the operator-field and commutant theorems. AC also yields DC and countable choice through thm-choice-implies-dependent-implies-countable-choice; these are the exact hypotheses for the L² density and Borel-measure regularity suppliers. It supplies the standard-Borel presentation for the Borel subset K of R and countably many representatives of a dense sequence. The weights, active-coordinate enumeration, clipping map, and local integral identities are explicit and use no further choice."
 ---
 

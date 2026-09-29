@@ -2,7 +2,7 @@
 id: ex-projective-plane-polygonal-schema
 kind: example
 title: "Projective plane crosscap polygon"
-status: draft
+status: published
 origin: pipeline
 deps: [def-polygonal-schema-and-edge-pairing, def-quotient-topology, thm-initial-and-final-characteristic-properties, def-euclidean-spheres-and-closed-balls, def-subspace-topology-top, thm-heine-borel-rn, thm-compactness-under-continuous-maps, def-euler-characteristic-of-a-finite-cw-complex, def-r-orientation-of-a-topological-manifold, def-orientation-local-system-and-orientation-cover, thm-product-universal-property, lem-algebra-of-continuous-real-maps-on-a-space, thm-of-square-roots, thm-continuous-inverse, lem-continuity-is-local-and-pastes]
 justified_by: []
@@ -21,6 +21,9 @@ sources:
       url: "https://pages.uoregon.edu/koch/math431/Surfaces.pdf"
       locator: "§3 Theorem 3, printed pp.4–5"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

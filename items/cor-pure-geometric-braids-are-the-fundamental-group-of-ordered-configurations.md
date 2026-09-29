@@ -2,7 +2,7 @@
 id: cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations
 kind: corollary
 title: "Pure geometric braids and ordered configuration loops"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 provenance:
@@ -46,6 +46,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

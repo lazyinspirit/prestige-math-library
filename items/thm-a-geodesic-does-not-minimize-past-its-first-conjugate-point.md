@@ -2,7 +2,7 @@
 id: thm-a-geodesic-does-not-minimize-past-its-first-conjugate-point
 kind: theorem
 title: A geodesic does not minimize past its first conjugate point
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -36,10 +36,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997), Theorem 10.15, Corollary 10.13, and Proposition 10.14"

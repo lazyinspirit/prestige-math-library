@@ -2,7 +2,7 @@
 id: lem-fitting-ideals-presentation-independent
 kind: lemma
 title: Fitting ideals do not depend on a presentation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-generated-cyclic-finitely-generated-and-free-modules
@@ -22,6 +22,9 @@ sources:
     - title: "The Stacks Project, Properties of Schemes, §§28.20, 28.26"
       url: "https://stacks.math.columbia.edu/download/properties.pdf"
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

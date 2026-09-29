@@ -1,7 +1,7 @@
 ---
 page: unitary-representations-positive-type-and-gns
 title: "Unitary Representations, Positive Type and GNS"
-status: draft
+status: published
 items:
   - def-strongly-continuous-unitary-representation
   - lem-continuity-criteria-for-unitary-representations

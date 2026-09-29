@@ -1,7 +1,7 @@
 ---
 page: cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes
 title: "Cohomology of Quasi Coherent Sheaves on Affine and Projective Schemes"
-status: draft
+status: published
 requires:
   - quasi-coherent-and-coherent-sheaves-and-vector-bundles
   - proj-projective-schemes-twisting-sheaves-and-ampleness

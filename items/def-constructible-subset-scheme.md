@@ -2,7 +2,7 @@
 id: def-constructible-subset-scheme
 kind: definition
 title: "Constructible subsets of a scheme"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-quasi-compact-and-quasi-separated-scheme
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Topology, Section 5.15 (tags 0059, 04ZC) and Morphisms of Schemes, Section 29.23"

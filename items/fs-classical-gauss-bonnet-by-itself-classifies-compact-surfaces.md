@@ -2,7 +2,7 @@
 id: fs-classical-gauss-bonnet-by-itself-classifies-compact-surfaces
 kind: false-statement
 title: Gauss-Bonnet alone does not classify surfaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -31,6 +31,9 @@ sources:
     - title: "Gallier and Xu, A Guide to the Classification Theorem for Compact Surfaces"
       url: "https://www.cis.upenn.edu/~jean/surfclassif-root.pdf"
       locator: "Chapter 1, Section 1.2, printed pp. 7-13: the torus and Klein bottle one-polygon words and their orientability, the standard witness that Euler characteristic alone does not determine a compact surface."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

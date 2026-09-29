@@ -2,7 +2,7 @@
 id: lem-smooth-curve-realizing-a-tangent-direction
 kind: lemma
 title: "A tangent direction is realized by a local smooth curve"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -42,6 +42,9 @@ sources:
   references:
     - title: "J. S. Milne, Algebraic Geometry, v6.10, Exercise 4-3 (printed p. 98) with its solution (printed p. 222)"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

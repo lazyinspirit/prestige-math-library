@@ -2,7 +2,7 @@
 id: lem-the-gns-translation-action-is-unitary-and-strongly-continuous
 kind: lemma
 title: The GNS translation action is unitary and strongly continuous
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -30,10 +30,12 @@ deps:
   - thm-completion-universal-property-for-bounded-linear-maps
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Theorem C.4.10, Appendix C §C.4, printed pp. 376–377"

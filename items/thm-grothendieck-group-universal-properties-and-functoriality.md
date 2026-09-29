@@ -2,7 +2,7 @@
 id: thm-grothendieck-group-universal-properties-and-functoriality
 kind: theorem
 title: "Universal properties and functoriality of G0 and split K0"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -38,6 +38,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

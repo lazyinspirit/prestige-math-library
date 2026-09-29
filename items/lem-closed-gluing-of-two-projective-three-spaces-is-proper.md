@@ -2,7 +2,7 @@
 id: lem-closed-gluing-of-two-projective-three-spaces-is-proper
 kind: lemma
 title: "Closed gluing of two projective three-spaces is proper"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -50,6 +50,9 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf
     - title: "The Stacks Project, More on Morphisms, Situation 37.67.1 (tag 0ECI), Lemma 37.67.2 (tag 0ECJ) and Proposition 37.67.3 (tag 0E25)"
       url: https://stacks.math.columbia.edu/tag/0E25
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

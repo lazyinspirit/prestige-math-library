@@ -2,7 +2,7 @@
 id: lem-integral-finite-type-scheme-function-field
 kind: lemma
 title: "Function field of an integral finite-type scheme"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -25,10 +25,12 @@ deps:
   - thm-proper-ideal-contained-in-maximal-ideal
   - thm-universal-property-of-localisation
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Varieties, Definition 33.9.1 (tag 020H)"

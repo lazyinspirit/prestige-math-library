@@ -2,7 +2,7 @@
 id: def-evaluation-of-an-invariant-polynomial-on-curvature
 kind: definition
 title: Evaluation of an invariant polynomial on curvature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -28,6 +28,7 @@ sources:
       locator: Appendix C, printed pp. 289–312
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: lem-separable-trace-class-determinant-construction
 kind: lemma
 title: Local separable trace-class determinant construction
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
@@ -38,10 +38,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

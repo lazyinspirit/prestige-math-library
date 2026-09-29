@@ -2,7 +2,7 @@
 id: ex-heat-and-poisson-semigroups-as-fourier-multipliers
 kind: example
 title: Heat and Poisson semigroups as Fourier multipliers
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-translation-invariant-fourier-multiplier-on-schwartz-space
@@ -31,6 +31,7 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   references:
     - title: "Mark Williams, Notes on Harmonic Analysis"

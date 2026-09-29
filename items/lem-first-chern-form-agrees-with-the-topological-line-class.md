@@ -2,7 +2,7 @@
 id: lem-first-chern-form-agrees-with-the-topological-line-class
 kind: lemma
 title: First Chern form agrees with the topological line class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -56,6 +56,7 @@ sources:
       locator: "§3.2, ‘The Euler Class,’ printed p. 91; Thom class restricted to the zero section"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

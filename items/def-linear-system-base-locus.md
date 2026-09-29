@@ -2,7 +2,7 @@
 id: def-linear-system-base-locus
 kind: definition
 title: "Linear systems, base loci, and general members"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-algebraically-closed-field
@@ -20,6 +20,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-a-bounded-continuous-function-need-not-have-positive-type
 kind: counterexample
 title: A bounded continuous normalized function that is not of positive type
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -13,10 +13,12 @@ generation:
 deps: [def-continuous-function-of-positive-type, def-topological-group, def-ordered-field, def-real-exponential-function-and-e, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, lem-exponential-dominates-one-plus-x, lem-of-inverse-positive, cor-of-one-positive, def-integer-power, lem-of-square-positive, thm-algebra-of-continuous-functions, thm-composition-of-continuous-functions]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Definition C.4.1 and Proposition C.4.2, Appendix C, printed pp. 373–374"

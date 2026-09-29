@@ -2,7 +2,7 @@
 id: cex-nonradical-ideal-can-have-the-same-tangent-space
 kind: counterexample
 title: "A nonradical ideal need not enlarge every tangent space"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -30,10 +30,12 @@ deps:
   - thm-universal-property-of-a-polynomial-ring
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

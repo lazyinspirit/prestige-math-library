@@ -1,7 +1,7 @@
 ---
 page: bounded-bimodule-complexes-and-derived-tensor
 title: "Bounded Bimodule Complexes and Derived Tensor"
-status: draft
+status: published
 items:
   - def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization
   - lem-bimodule-tensor-totalization-respects-differentials-and-homotopies

@@ -2,7 +2,7 @@
 id: lem-diagonal-unitary-coefficients-have-positive-type
 kind: lemma
 title: Diagonal unitary coefficients have positive type
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -11,10 +11,12 @@ provenance:
 deps: [def-continuous-function-of-positive-type, def-matrix-coefficient-of-a-unitary-representation, def-strongly-continuous-unitary-representation, def-real-and-complex-inner-product-space]
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Bekka, de la Harpe and Valette, Kazhdan's Property (T), Proposition C.4.3 and Example C.1.3, Appendix C, printed pp. 362 and 374–375"

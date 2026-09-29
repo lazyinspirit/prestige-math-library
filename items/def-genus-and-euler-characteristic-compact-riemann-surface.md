@@ -2,7 +2,7 @@
 id: def-genus-and-euler-characteristic-compact-riemann-surface
 kind: definition
 title: Genus and Euler characteristic of a compact Riemann surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: true
@@ -26,6 +26,8 @@ sources:
     - title: "Jürgen Jost, Compact Riemann Surfaces, Ch. 2 §2.3.A and §2.4.A"
       url: https://www.math.wichita.edu/~ryan/teaching/M829F/syllabus/Jost-book/JJ_ch2.pdf
       locator: "§2.4.A, the oriented polygonal normal forms and the count V−E+F of the handle polygon."
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: lem-c-one-stokes-for-complex-euclidean-domains
 kind: lemma
 title: Stokes for complex forms on a bounded C1 Euclidean domain
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -27,6 +27,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

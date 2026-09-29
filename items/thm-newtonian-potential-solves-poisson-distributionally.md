@@ -2,7 +2,7 @@
 id: thm-newtonian-potential-solves-poisson-distributionally
 kind: theorem
 title: Newtonian potentials solve the distributional Poisson equation
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -67,6 +67,9 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
       url: "https://web.archive.org/web/20250601000000id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "§5.3 equations (5.19)–(5.21) and Lemma 5.17, printed pp.117–119"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -154,15 +157,25 @@ continuous maps have Borel preimages. ([[thm-arithmetic-and-lattice-operations-p
 **Proof technique:** direct.
 
 1.1 Choose a finite-valued representative $f_0$ vanishing outside $K$. By [F2] and [A1], apply the completed-measurable representative theorem separately to the real and imaginary parts of $f_0$, reset any nonfinite exceptional values to zero, and combine them using [F16] to obtain a finite Borel representative equal to $f_0$ almost everywhere. Reset it to zero off $K$ and call it $\widetilde f$. Set $\Phi(0)=0$; its displayed radial formula is continuous away from the singleton pole, so it is Borel. By [F3], $H(x,y)=\Phi(x-y)\widetilde f(y)$ is Borel, hence product-measurable for $\beta_n\otimes\beta_n$. The open balls $B(0,m)$ are Borel and exhaust $\mathbb R^n$; they have finite $\beta_n$-measure by [F4], so $\beta_n$ is sigma-finite. [A1, F1, F2, F3, F4, F16, construct]
+
 1.2 For compactly supported $L^p$ data with $1<p<\infty$, Hölder [F8] on the finite-measure set $K$ gives $\int_K|f|\le\|f\|_p\|\mathbf1_K\|_q=\|f\|_p\lambda_n(K)^{1/q}<\infty,$ where $1/p+1/q=1$. The case $p=1$ is immediate, and the endpoint $p=\infty$ uses the endpoint clause of [F8]; moreover the bounded-data result [F14] gives everywhere absolute convergence there. A continuous compactly supported $g\in C_c$ is bounded on its compact support by [F11], whose measure is finite by [F4], so it too belongs to $L^1$. This verifies the stated $C_c$ and full $1\le p\le\infty$ inclusions. [F4, F8, F11, F14, cases]
+
 2.1 The compact set $K$ is closed and bounded, hence Borel, and has finite $\lambda_n$-measure by [F4]. If $K=\varnothing$ or $\lambda_n(K)=0$, then $\widetilde f$ vanishes off a null set, so [F9] gives $Nf(x)=0$ with absolute convergence for every $x$; the $L^1$ class is zero. Assume henceforth $K\ne\varnothing$ and choose $R>0$ with $K\subset B(0,R)$. [F4, F9, F13, cases, step 1.1]
+
 2.2 If $g$ is any other finite-valued measurable representative of the same $L^1$ class, then for each fixed $x$ the functions $y\mapsto\Phi(x-y)g(y)$ and $y\mapsto\Phi(x-y)\widetilde f(y)$ agree outside a null set; their absolute values are measurable by [F16]. For nonnegative measurable functions agreeing off a null set, split each integral over that set and its complement; [F9] shows the two extended absolute integrals agree. Thus absolute finiteness is equivalent for the two representatives. When finite, their difference is integrable with integral zero by [F9], so linearity gives equal potential values. The pole assignment also changes the integrand only on the null singleton $\{x\}$. Therefore $Nf$ depends only on the $L^1$ class, with equality at every point where the integrals are defined. [F1, F9, F13, F16, algebra, step 1.1]
+
 3.1 Fix an integer $m\ge1$ and $y\in K$. For $x\in B(0,m)$, the Euclidean triangle inequality gives $x-y\in B(0,m+R)$. Translation by $-y$ preserves Lebesgue integrals by [F6], so $\int_{B(0,m)}|\Phi(x-y)|\,dx=\int_{B(0,m)-y}|\Phi(z)|\,dz\le\int_{B(0,m+R)}|\Phi(z)|\,dz=:C_{m,R}<\infty,$ where finiteness follows from [F1] and the last inequality from [F8]. [F1, F4, F6, F8, algebra, step 2.1]
+
 3.2 Let $x_0\notin K$. If $K=\varnothing$, then $Nf=0$ and the claim holds. Otherwise, since $K$ is closed, choose $r>0$ such that $B(x_0,2r)\cap K=\varnothing$. For $x\in\overline B(x_0,r)$ and $y\in K$, the triangle inequality and boundedness of $K$ give $r\le|x-y|\le M$ for some finite $M$. Choose $y_0\in K$. Since $B(x_0,2r)\cap K=\varnothing$, $|x_0-y_0|\ge2r>r$ and the upper bound gives $|x_0-y_0|\le M$, so $x_0-y_0\in A:=\{z:r\le|z|\le M\}$ and $A$ is nonempty. The annulus $A$ is closed because the norm is continuous [F11] and $[r,M]$ is closed; it is bounded by $M$, hence compact. Every continuous derivative $D^\alpha\Phi$ is therefore bounded on $A$ [F11]. Thus for each multi-index $\alpha$ there is $C_\alpha<\infty$ with $|D^\alpha\Phi(x-y)\widetilde f(y)|\le C_\alpha|\widetilde f(y)|\mathbf1_K(y).$ The majorant is integrable since $\widetilde f=f$ almost everywhere and $\int_K|\widetilde f|=\|f\|_1<\infty$ by [F2, F9]. Applying differentiation under the integral sign coordinate by coordinate on a small box about $x_0$, and dominated convergence for continuity of each derivative, proves $Nf\in C^\infty$ near $x_0$. Since $\Delta_x\Phi(x-y)=0$ for $x\ne y$ by [F10], differentiating twice yields $\Delta Nf(x)=0$ there. Therefore $Nf$ is smooth and harmonic on $\mathbb R^n\setminus K$. [F2, F4, F9, F10, F11, F13, step 1.1, step 2.1, algebra]
+
 4.1 Apply Tonelli [F5] to the nonnegative Borel function $|H(x,y)|\mathbf1_{B(0,m)}(x)\mathbf1_K(y)$. Using step 3.1 gives $\int_{B(0,m)}\int_K|\Phi(x-y)\widetilde f(y)|\,dy\,dx\le C_{m,R}\int_K|\widetilde f(y)|\,dy=C_{m,R}\|f\|_{L^1}<\infty,$ where the last equality uses [F2, F9] because $\widetilde f=f$ almost everywhere and $\beta_n$ completes to $\lambda_n$. Thus the complex function $H$ is in $L^1(B(0,m)\times K)$ for every $m$. [step 3.1, F2, F4, F5, F9, F16, algebra, step 1.1]
+
 5.1 Fubini [F5] on each such product shows that for almost every $x\in B(0,m)$ the section $y\mapsto H(x,y)\mathbf1_K(y)$ is absolutely integrable, and its integral is an $L^1(B(0,m))$ function with integral of its absolute value at most the finite bound in step 4.1, by the integral triangle inequality [F8]. These section integrals agree with $Nf(x)$ wherever absolutely finite by [F13]. The balls $B(0,m)$ exhaust $\mathbb R^n$, so, writing $E_m$ for the measurable exceptional set in $B(0,m)$, [F15] gives $\lambda_n(\bigcup_{m\ge1}E_m)\le\sum_{m\ge1}\lambda_n(E_m)=0$. Thus $Nf$ is finite almost everywhere on all of $\mathbb R^n$; assign it value zero on this null set. Each compact set lies in some $B(0,m)$ by [F4], proving $Nf\in L^1_{\rm loc}(\mathbb R^n)$. [step 4.1, F2, F4, F5, F8, F13, F15]
+
 6.1 Let $\varphi\in\mathcal D(\mathbb R^n)$ and choose $m$ with $\operatorname{supp}\varphi\subset B(0,m)$. The function $H(x,y)=\Phi(x-y)\widetilde f(y)$ is Borel by [F3]. The pullback of the Borel function $-\Delta\varphi$ by the first-coordinate projection is Borel: the preimage of a Borel set $E$ is $E\times\mathbb R^n$, which belongs to the product sigma-algebra and hence to the Euclidean Borel sigma-algebra by [F3]. The test function is smooth, so $\Delta\varphi$ is continuous; [F16] gives its Borel measurability. Thus $G(x,y)=H(x,y)(-\Delta\varphi(x))$ is Borel by [F16]. Since $\Delta\varphi$ is bounded and compactly supported, step 4.1 shows $G$ is integrable on the product. Fubini therefore gives $\int_{\mathbb R^n}Nf(x)(-\Delta\varphi(x))\,dx=\int_K\widetilde f(y)\left(\int_{\mathbb R^n}\Phi(x-y)(-\Delta\varphi(x))\,dx\right)dy.$ The inner integral is $\varphi(y)$ by the translated point-source identity [F12]. Hence the right side is $\int_K\widetilde f(y)\varphi(y)\,dy$. [F2, F3, F5, F7, F9, F11, F12, F13, F16, step 4.1, step 1.1, step 5.1]
+
 7.1 By [F7], step 6.1 is exactly $\langle-\Delta T_{Nf},\varphi\rangle=\langle T_f,\varphi\rangle$ for every test $\varphi$. The locally integrable embedding makes both sides distributions, so they are equal in $\mathcal D'$. [F7, step 5.1, step 6.1]
+
 8.1 The logarithmic kernel at $n=2$ and power kernel at $n\ge3$ are both covered by [F1], [F2] and [F12]; the distinct $n=1$ case is excluded by the statement. The zero source and empty or null support were handled in step 2.1; the Hölder endpoint cases $p=1,\infty$ are explicit in step 1.2. Countable Choice is used to obtain a Borel representative, and is inherited by the published kernel identity and distribution embedding [F2, F7, F12]. No full Axiom of Choice or later result is used; the statement is not an iff. [A1, F1, F2, F7, F12, step 2.1, step 1.2, cases] ∎
 ## Source notes
 

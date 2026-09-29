@@ -2,7 +2,7 @@
 id: cex-nonclosed-dbar-form-has-no-potential
 kind: counterexample
 title: A nonclosed dbar form cannot have a potential
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bigraded-complex-differential-forms
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement refuted

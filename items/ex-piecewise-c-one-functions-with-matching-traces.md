@@ -2,7 +2,7 @@
 id: ex-piecewise-c-one-functions-with-matching-traces
 kind: example
 title: "Matching $C^1$ pieces across a hyperplane have no jump derivative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,9 @@ sources:
     - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (2011), Chapter 8"
       url: "https://www.math.utoronto.ca/almut/Brezis.pdf"
       locator: "§8.2, Examples (i) and following sentence, printed pp. 202–203; one-dimensional examples stated as exercises"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

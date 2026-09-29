@@ -2,7 +2,7 @@
 id: ex-serre-duality-projective-space-twist-pairing
 kind: example
 title: The projective-space twist pairing in Serre duality
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "R. Hartshorne, Algebraic Geometry"

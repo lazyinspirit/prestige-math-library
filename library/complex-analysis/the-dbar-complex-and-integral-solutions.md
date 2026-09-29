@@ -1,7 +1,7 @@
 ---
 page: the-dbar-complex-and-integral-solutions
 title: "The Dolbeault Complex and Integral Solutions"
-status: draft
+status: published
 items: [def-bigraded-complex-differential-forms,
         thm-d-dbar-decomposition-and-identities,
         lem-c-one-stokes-for-complex-euclidean-domains,

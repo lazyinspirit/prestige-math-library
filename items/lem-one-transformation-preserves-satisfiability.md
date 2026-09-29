@@ -2,7 +2,7 @@
 id: lem-one-transformation-preserves-satisfiability
 kind: lemma
 title: "One Dinur transformation preserves perfect satisfiability"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-dinur-pcp-transformation
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

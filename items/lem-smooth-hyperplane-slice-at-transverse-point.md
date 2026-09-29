@@ -2,7 +2,7 @@
 id: lem-smooth-hyperplane-slice-at-transverse-point
 kind: lemma
 title: "A transverse hyperplane slice is smooth at the chosen point"
-status: draft
+status: published
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -41,10 +41,12 @@ deps:
   - thm-stalk-structure-sheaf-prime-localization
   - thm-universal-property-of-a-polynomial-ring-on-a-family
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

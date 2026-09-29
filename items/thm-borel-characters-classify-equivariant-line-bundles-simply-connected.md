@@ -2,7 +2,7 @@
 id: thm-borel-characters-classify-equivariant-line-bundles-simply-connected
 kind: theorem
 title: Borel characters classify equivariant flag line bundles
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps:
@@ -29,6 +29,9 @@ sources:
     - title: "Jacob Lurie, A Proof of the Borel-Weil-Bott Theorem"
       url: https://people.math.harvard.edu/~lurie/papers/bwb.pdf
       locator: "Complete three-page note, especially Theorems 1 and 3 and Lemma 4"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

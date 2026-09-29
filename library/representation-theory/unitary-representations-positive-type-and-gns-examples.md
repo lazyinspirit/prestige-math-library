@@ -1,7 +1,7 @@
 ---
 page: unitary-representations-positive-type-and-gns-examples
 title: "Unitary Representations, Positive Type and GNS — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-positive-type-functions-on-a-discrete-group

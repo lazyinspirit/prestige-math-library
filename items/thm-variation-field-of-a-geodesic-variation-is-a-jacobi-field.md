@@ -2,7 +2,7 @@
 id: thm-variation-field-of-a-geodesic-variation-is-a-jacobi-field
 kind: theorem
 title: Variation field of a geodesic variation is a Jacobi field
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-covariant-derivative-along-a-curve
@@ -15,10 +15,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

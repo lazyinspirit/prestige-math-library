@@ -1,7 +1,7 @@
 ---
 page: fourier-multipliers-and-sobolev-characterisations-examples
 title: "Fourier Multipliers and Sobolev Characterisations — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-heat-and-poisson-semigroups-as-fourier-multipliers,
            ex-translation-and-differentiation-multiplier-symbols,

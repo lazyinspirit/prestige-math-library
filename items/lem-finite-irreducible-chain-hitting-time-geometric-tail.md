@@ -2,7 +2,7 @@
 id: lem-finite-irreducible-chain-hitting-time-geometric-tail
 kind: lemma
 title: "Geometric tail for hitting in a finite irreducible chain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -16,10 +16,12 @@ deps:
   - def-recurrent-and-transient-state
 landmark: false
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition"

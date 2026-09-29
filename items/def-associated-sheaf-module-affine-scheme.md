@@ -2,7 +2,7 @@
 id: def-associated-sheaf-module-affine-scheme
 kind: definition
 title: Module sheaf on an affine scheme
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-localisation-of-a-module
@@ -19,6 +19,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

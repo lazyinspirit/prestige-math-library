@@ -2,7 +2,7 @@
 id: lem-specht-module-has-nondegenerate-self-pairing-in-characteristic-zero
 kind: lemma
 title: Complex Specht modules have nondegenerate Hermitian self-pairing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-invariant-inner-product-on-a-tabloid-module, def-column-antisymmetrizer-polytabloid-and-specht-module, def-young-subgroup-tabloid-and-permutation-module, def-orthogonality-and-orthogonal-complement]
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

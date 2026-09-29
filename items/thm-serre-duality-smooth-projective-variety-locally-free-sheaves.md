@@ -2,7 +2,7 @@
 id: thm-serre-duality-smooth-projective-variety-locally-free-sheaves
 kind: theorem
 title: Serre duality for locally free sheaves on a smooth projective variety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -19,10 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Duality for Schemes"

@@ -2,7 +2,7 @@
 id: lem-generic-freeness-finite-type-algebra-module
 kind: lemma
 title: "Generic freeness over a Noetherian domain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-and-faithfully-flat-modules-and-ring-maps
@@ -26,6 +26,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Theorem 25.5.12"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

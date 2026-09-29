@@ -2,7 +2,7 @@
 id: lem-relative-spec-glues-affine-algebras
 kind: lemma
 title: Glue relative spectra of affine-local algebras
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-affine-local-quasi-coherent-algebra
@@ -16,10 +16,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stacks Project, Constructions of Schemes, §27.2 Lemma 27.2.1

@@ -2,7 +2,7 @@
 id: ex-direct-integral-of-a-constant-hilbert-field
 kind: example
 title: Direct integral of a constant Hilbert field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -28,7 +28,8 @@ sources:
       locator: "Part III, Chapter 10 §§1.3–1.5, printed pp. 95–96; continuous-field construction and fibrewise orthogonalization"
 axiom_use: "Assume AC. It supplies the direct-integral completeness result and the Countable Choice hypothesis of the Parseval theorem. The basis is fixed in the example, and the finite-coordinate construction and limit are canonical; no additional choice is used."
 verification:
-  precheck: n/a
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

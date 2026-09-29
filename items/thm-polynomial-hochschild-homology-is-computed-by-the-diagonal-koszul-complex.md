@@ -2,7 +2,7 @@
 id: thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex
 title: Polynomial Hochschild homology from the diagonal Koszul complex
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [thm-hochschild-homology-is-tor-over-the-enveloping-algebra, thm-the-diagonal-koszul-complex-resolves-the-polynomial-ring, thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object, def-hochschild-chain-complex-of-a-bimodule, def-balanced-tor-bifunctor, lem-hochschild-chains-are-bar-tensor-chains, def-two-sided-bar-resolution-of-an-associative-algebra, thm-two-sided-bar-complex-is-an-enveloping-projective-resolution, def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring, def-enveloping-algebra-and-bimodule-module-dictionary, def-graded-ring-module-bimodule-and-internal-shift, def-graded-balanced-tensor-product-and-homogeneous-hom, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-polynomial-dbar-solution
 kind: example
 title: A polynomial closed form and its potential
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bigraded-complex-differential-forms
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

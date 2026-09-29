@@ -1,7 +1,7 @@
 ---
 page: measurable-hilbert-fields-and-direct-integral-operators-examples
 title: Measurable Hilbert Fields and Direct-Integral Operators — Examples
-status: draft
+status: published
 items: []
 examples: [ex-direct-integral-of-a-constant-hilbert-field, ex-multiplicity-two-diagonal-representation, ex-a-measurable-two-dimensional-operator-field]
 ---

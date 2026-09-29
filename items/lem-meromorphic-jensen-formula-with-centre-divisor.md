@@ -2,7 +2,7 @@
 id: lem-meromorphic-jensen-formula-with-centre-divisor
 kind: lemma
 title: "Meromorphic Jensen identity with a zero or pole at the centre"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

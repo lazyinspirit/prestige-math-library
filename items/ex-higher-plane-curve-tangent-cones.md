@@ -2,7 +2,7 @@
 id: ex-higher-plane-curve-tangent-cones
 kind: example
 title: "Different singularities can share a tangent cone"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -30,10 +30,12 @@ deps:
   - thm-quotient-ring-universal-property
   - thm-zariski-tangent-space-jacobian-kernel
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-polytabloids-for-shape-two-one
 kind: example
 title: Polytabloids of shape $(2,1)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 landmark: false
@@ -25,11 +25,12 @@ sources:
     - title: "Mark Wildon, Representation Theory of the Symmetric Group, Definition 2.4 and Example 2.6(B), printed pp. 5-6"
       url: "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

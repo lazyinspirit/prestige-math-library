@@ -2,7 +2,7 @@
 id: cex-w-one-p-point-evaluation-is-unbounded-in-the-subcritical-and-higher-dimensional-critical-cases
 kind: counterexample
 title: Point evaluation is unbounded below the Sobolev continuity threshold
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -66,6 +66,9 @@ sources:
     - title: Juha Kinnunen, Sobolev Spaces (Aalto University, 2026)
       url: https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf
       locator: Chapter 1 §1.2, Examples 1.11–1.12, printed pp. 8–9; these establish unbounded Sobolev functions in the stated exponent regimes but do not prove unboundedness of evaluation on test functions; the explicit sequences and estimates here are derived directly
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

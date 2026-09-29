@@ -2,7 +2,7 @@
 id: lem-diagonal-trace-class-operator-on-ell-two
 kind: lemma
 title: Diagonal trace-class operators on $\ell^2(\mathbb N,\mathbb C)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -46,10 +46,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

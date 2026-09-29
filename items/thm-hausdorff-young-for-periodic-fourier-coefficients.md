@@ -2,7 +2,7 @@
 id: thm-hausdorff-young-for-periodic-fourier-coefficients
 kind: theorem
 title: Hausdorff–Young for periodic Fourier coefficients
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-fourier-coefficients-and-trigonometric-polynomials
@@ -27,6 +27,9 @@ sources:
     - title: "Loukas Grafakos, Classical Fourier Analysis, 3rd ed."
       url: https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf
       locator: "§3.2, Exercise 3.2.2, printed p. 191; the endpoint argument is supplied locally from the published interpolation corollary"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

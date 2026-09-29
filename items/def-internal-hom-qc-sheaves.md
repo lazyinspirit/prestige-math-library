@@ -2,7 +2,7 @@
 id: def-internal-hom-qc-sheaves
 kind: definition
 title: Internal Hom of module sheaves
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-sheaf-hom
@@ -21,6 +21,8 @@ sources:
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Chapters 6, 14, 17"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 pipeline_run: frontier-36-complete
+verification:
+  audited: 2026-09-30
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: lem-bessel-potential-norm-is-positive-definite
 kind: lemma
 title: The weighted Fourier seminorm separates Schwartz functions
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bessel-potential-pre-hilbert-norm-on-schwartz-space
@@ -28,6 +28,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

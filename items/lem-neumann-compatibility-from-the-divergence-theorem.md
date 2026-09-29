@@ -6,16 +6,18 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: §1.12, Theorem 1.46, printed pp. 17–18; §2.5, Theorem 2.23, printed p. 32
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-divergence-theorem-for-bounded-c-one-euclidean-domains", "def-classical-normal-derivative", "def-countable-choice", "def-laplacian-of-a-c2-function", "def-bounded-c-one-domain-boundary-charts-and-outward-normal"]

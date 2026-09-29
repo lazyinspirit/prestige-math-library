@@ -2,7 +2,7 @@
 id: thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface
 kind: theorem
 title: Finite curvilinear triangulation of a compact Riemannian surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -31,6 +31,9 @@ sources:
     - title: "Emil Saucan, A Note on a Theorem of Munkres"
       url: "https://arxiv.org/pdf/math/0403055"
       locator: "Theorem 1.1 on PDF p. 1 gives a relative-boundary fat-triangulation context, and Definition 1.2 and Remark 1.3 on PDF p. 2 discuss angle bounds. Neither is used as a geodesic-edge theorem here."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

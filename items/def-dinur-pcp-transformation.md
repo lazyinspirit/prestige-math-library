@@ -2,7 +2,7 @@
 id: def-dinur-pcp-transformation
 kind: definition
 title: "One fixed-alphabet Dinur transformation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-gap-amplification-step
@@ -20,6 +20,7 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: n/a
+  audited: 2026-09-30
 ---
 
 ## Definition

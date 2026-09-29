@@ -2,7 +2,7 @@
 id: lem-universally-closed-valuative-existence-quasicompact
 kind: lemma
 title: Valuation lifts detect universal closedness
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-affine-scheme-quasi-compact
@@ -47,10 +47,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: Stacks Project, Schemes, Lemma 26.19.8 (tag 01K9)

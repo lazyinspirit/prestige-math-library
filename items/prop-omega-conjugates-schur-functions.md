@@ -2,7 +2,7 @@
 id: prop-omega-conjugates-schur-functions
 kind: proposition
 title: The omega involution conjugates Schur functions
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-stable-graded-ring-of-symmetric-functions
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

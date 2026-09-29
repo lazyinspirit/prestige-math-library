@@ -2,7 +2,7 @@
 id: lem-three-sat-to-binary-constraint-graph
 kind: lemma
 title: "A three-CNF formula as a fixed-alphabet binary constraint graph"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-boolean-formula-cnf-and-sat
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

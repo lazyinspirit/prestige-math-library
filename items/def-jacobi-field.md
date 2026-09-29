@@ -2,7 +2,7 @@
 id: def-jacobi-field
 kind: definition
 title: Jacobi field
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-covariant-derivatives-commute-up-to-curvature-in-a-two-parameter-variation
@@ -16,6 +16,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

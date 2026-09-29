@@ -1,7 +1,7 @@
 ---
 page: quasi-coherent-and-coherent-sheaves-and-vector-bundles
 title: Quasi Coherent and Coherent Sheaves and Vector Bundles
-status: draft
+status: published
 requires:
   - sheaf-operations-exactness-ringed-spaces-and-module-pullback
   - affine-schemes-and-the-structure-sheaf

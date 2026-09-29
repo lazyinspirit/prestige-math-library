@@ -2,7 +2,7 @@
 id: ex-radial-power-membership-in-w-one-p
 kind: example
 title: "Sharp Sobolev threshold for a radial power"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,9 @@ sources:
     - title: "Juha Kinnunen, Sobolev Spaces (Aalto University, 2026)"
       url: "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
       locator: "Chapter 1 §1.2, Example 1.10, printed pp. 6–7; off-origin derivative, punctured-ball boundary estimate, and the 1≤p<n W1p threshold"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

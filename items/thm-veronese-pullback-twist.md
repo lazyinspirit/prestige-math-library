@@ -2,7 +2,7 @@
 id: thm-veronese-pullback-twist
 kind: theorem
 title: "Veronese embedding pulls O(1) back to O(d)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-relative-projective-space-standard-charts
@@ -31,6 +31,9 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
     - title: "Gao-Zhang, Lectures on Algebraic Geometry, Chapter 5"
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement
@@ -84,10 +87,16 @@ Noetherian or field hypothesis is imposed.
 **Proof technique:** direct: prove that the monomial sections generate $\mathcal O(d)$, let the universal property produce $\nu_d$, check on affine base opens that each source chart maps to a target chart by a surjective ring map hence a closed immersion, use locality on the target to exhibit $\nu_d$ as an immersion, and use properness to close the image.
 
 1.1 The monomial sections generate $\mathcal O(d)$. Fix a chart $U_i$ and let $m=i^d$ be the multi-index with $m_i=d$; by [F1] the restriction $s_{i^d}|_{U_i}=e_i^d$ is a frame of $\mathcal O(d)$ on $U_i$, so the component $\mathcal O_X\to\mathcal O(d)$ of the evaluation morphism indexed by $i^d$ is an isomorphism over $U_i$. Hence the evaluation morphism $\mathcal O_X^{|M|}\to\mathcal O(d)$, $(g_m)\mapsto\sum_mg_ms_m$, restricts to a surjection on every $U_i$; the charts cover $\mathbb P^n_S$, so it is surjective, and the $s_m$ generate $\mathcal O(d)$ by [F3]. [F1, F3, algebra]
+
 2.1 The morphism and its pullback identity. By step 1.1 the sections $s_m$ generate the invertible sheaf $\mathcal O(d)$, so [F2] applies with $X=\mathbb P^n_S$, $L=\mathcal O(d)$ and $t_m=s_m$: there is a unique $S$-morphism $\nu_d:\mathbb P^n_S\to\mathbb P^N_S$ with $\nu_d^*\mathcal O(1)\cong\mathcal O(d)$ carrying $y_m$ to $s_m$, and $\nu_d^{-1}(D_+(y_m))=X_{s_m}$. Write $V_m=D_+(y_m)\subseteq\mathbb P^N_S$ for the target chart at $m$; taking $m=i^d$, [F1] gives $X_{s_{i^d}}=X_{x_i^d}=X_{x_i}=U_i$ (here $d\ge1$), so $\nu_d^{-1}(V_{i^d})=U_i$ for every $i$, and this proves the pullback identity asserted. [F1, F2, step 1.1]
+
 3.1 The chartwise ring map is surjective. Let $T=\operatorname{Spec}A$ be an affine open of $S$. By base change [F1] the source chart is $U_i^T=\operatorname{Spec}A[x^{(i)}_\ell:\ell\ne i]$ and the target chart $V_{i^d}^T=V_{i^d}\times_ST$ has coordinate ring $A[u_m:m\in M,\ m\ne i^d]$ with $u_m=y_m/y_{i^d}$. On $U_i=X_{s_{i^d}}$ the chart formula of [F2] gives $u_m\circ\nu_d=s_m/s_{i^d}$, and by [F1] this is $s_m/s_{i^d}=\prod_{\ell\ne i}(x^{(i)}_\ell)^{m_\ell}$ because $s_m|_{U_i}=\bigl(\prod_{\ell\ne i}(x^{(i)}_\ell)^{m_\ell}\bigr)e_i^d$ and $s_{i^d}|_{U_i}=e_i^d$. Consequently the induced $A$-algebra map $A[u_m]\to A[x^{(i)}_\ell]$ sends $u_{i^{d-1}\ell}$ to $x^{(i)}_\ell$ for each $\ell\ne i$, hence is surjective, and by [F4] the base-changed morphism $U_i^T\to V_{i^d}^T$ is a closed immersion. [F1, F2, F4, step 2.1, algebra]
+
 4.1 Each chart gives a closed immersion. Fix $i$. The open subschemes $V_{i^d}^T$, for affine opens $T\subseteq S$, cover $V_{i^d}$, and the restriction of $\nu_d|_{U_i}:U_i\to V_{i^d}$ to $V_{i^d}^T$ is the base-changed morphism $U_i^T\to V_{i^d}^T$ of step 3.1, which is a closed immersion; by [F5] therefore $\nu_d|_{U_i}:U_i\to V_{i^d}$ is a closed immersion. [F5, step 3.1]
+
 5.1 $\nu_d$ is an immersion. Let $W=\bigcup_{i=0}^{n}V_{i^d}\subseteq\mathbb P^N_S$, an open subscheme containing the image of $\nu_d$ because $\nu_d(U_i)\subseteq V_{i^d}$ by step 2.1. Let $j:W\hookrightarrow\mathbb P^N_S$ be the open immersion and $\nu':\mathbb P^n_S\to W$ the morphism with $\nu_d=j\circ\nu'$. The opens $V_{i^d}$ cover $W$ and $(\nu')^{-1}(V_{i^d})=U_i$, so all restrictions of $\nu'$ to this cover are the closed immersions of step 4.1; by [F5] the morphism $\nu'$ is a closed immersion, and then $\nu_d=j\circ\nu'$ is an immersion by [F6]. [F5, F6, step 2.1, step 4.1]
+
 6.1 $\nu_d$ is a closed immersion. Since $\nu_d$ is an immersion by step 5.1 and is an $S$-morphism, and since $\mathbb P^n_S\to S$ is proper while $\mathbb P^N_S\to S$ is proper hence separated, [F7] shows that $\nu_d$ is proper; a proper morphism is closed, so the image $\nu_d(\mathbb P^n_S)$ is closed in $\mathbb P^N_S$, and an immersion with closed image is a closed immersion by [F6]. [F6, F7, step 5.1]
+
 7.1 Conclusion and degenerate cases. Steps 1.1, 2.1 and 6.1 together show that the $s_m$ generate $\mathcal O(d)$ and that $\nu_d$ is a closed immersion with $\nu_d^*\mathcal O(1)\cong\mathcal O(d)$ carrying $y_m$ to $s_m$. If $d=1$ then $M=\{e_0,\dots,e_n\}$ and the identity of $\mathbb P^n_S$ has pullback data $(\mathcal O(1);x_0,\dots,x_n)$, so $\nu_1=\mathrm{id}$ by the uniqueness in [F2]. If $n=0$ then $\mathbb P^0_S\cong S$, $\mathcal O(d)=\mathcal O_S$ and the single monomial section $x_0^d$ is a frame, so $\nu_d:\mathbb P^0_S\to\mathbb P^0_S$ is an $S$-morphism of $S$ to itself and a closed immersion by step 6.1, hence an isomorphism; for $S=\varnothing$ all four projective spaces are empty and $\nu_d$ is the unique isomorphism $\varnothing\to\varnothing$, which is also a closed immersion. The Axiom of Choice [A1] is inherited from the projective-space constructions and the gluing data of [F1]; no further choice is made. [A1, F1, F2, step 6.1, cases: d=1 and n=0 and empty S]
 \qed

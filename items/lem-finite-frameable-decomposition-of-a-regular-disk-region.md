@@ -2,7 +2,7 @@
 id: lem-finite-frameable-decomposition-of-a-regular-disk-region
 kind: lemma
 title: Finite frameable decomposition of a regular disk region
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -24,6 +24,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, §2.1–2.2, printed pp. 11–15 (PDF pp. 18–22): the local Gauss–Bonnet proof is carried out on a chart with an oriented orthonormal frame obtained from the coordinate frame by Gram–Schmidt. The finite chart decomposition of a disk region is constructed here."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-affine-vanishing-fails-non-qc-sheaf
 kind: counterexample
 title: "A non-quasi-coherent module with H1 on an affine scheme"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -22,10 +22,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Cohomology of Schemes, Chapter 30, Sections 30.2-30.22"

@@ -2,7 +2,7 @@
 id: thm-distance-from-p-is-smooth-off-p-and-the-cut-locus
 kind: theorem
 title: Distance from p is smooth off p and the cut locus
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-inner-product-induces-a-norm
@@ -21,10 +21,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

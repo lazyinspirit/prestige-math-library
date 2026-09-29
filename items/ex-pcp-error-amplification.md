@@ -2,7 +2,7 @@
 id: ex-pcp-error-amplification
 kind: example
 title: "Three repetitions of a three-quarters-sound PCP"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-pcp-error-amplification
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

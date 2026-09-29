@@ -6,10 +6,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
@@ -18,7 +20,7 @@ sources:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: §2.6 distributional point-source interpretation, printed pp. 33–34
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-distribution", "def-distributional-derivative", "def-dirac-delta-and-its-derivatives", "thm-test-function-operations-are-continuous"]

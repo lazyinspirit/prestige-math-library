@@ -2,7 +2,7 @@
 id: lem-linear-system-incidence-is-smooth
 kind: lemma
 title: "The universal member away from the base locus"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -26,6 +26,9 @@ sources:
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
     - title: "Ravi Vakil, Foundations of Algebraic Geometry, Classes 51–52, §3.9, printed pp. 9–11"
       url: "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

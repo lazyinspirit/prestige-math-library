@@ -2,7 +2,7 @@
 id: ex-bochner-martinelli-on-a-ball
 kind: example
 title: Bochner–Martinelli on the unit ball
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-bochner-martinelli-kernel
@@ -26,6 +26,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Example

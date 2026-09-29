@@ -2,7 +2,7 @@
 id: lem-flat-fp-fibre-dimension-lower-semicont
 kind: lemma
 title: "Lower semicontinuity of flat finitely presented fibre dimension"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -14,10 +14,12 @@ deps:
   - lem-flat-fp-relative-dimension-strata
   - thm-flat-finite-presentation-is-open
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, More on Morphisms, Section 37.30, Lemma 37.30.5"

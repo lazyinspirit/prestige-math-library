@@ -2,7 +2,7 @@
 id: ex-rank-zero-locally-free-sheaf
 kind: example
 title: The rank-zero bundle
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-locally-free-sheaf-finite-rank
@@ -31,6 +31,9 @@ sources:
 generation:
   role: example
 pipeline_run: frontier-36-complete
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: cor-weak-derivative-operator-is-closed-between-lp-spaces
 kind: corollary
 title: "Weak differentiation has a closed graph on its natural domains"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -19,6 +19,9 @@ sources:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
       locator: "Chapter 3 §3.4, Theorem 3.20, printed p. 56; local L1 weak-derivative limit criterion"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Sources

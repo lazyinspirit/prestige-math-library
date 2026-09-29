@@ -2,7 +2,7 @@
 id: def-klein-bottle
 kind: definition
 title: "The Klein bottle as a square quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topological-manifold-without-boundary, def-quotient-topology, thm-heine-borel-rn, thm-compact-subset-of-a-hausdorff-space-is-closed]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-power-map-riemann-hurwitz
 kind: example
 title: Riemann–Hurwitz for the sphere power map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -34,6 +34,9 @@ sources:
     - title: "Vladimir Hinich, Riemann Surfaces, lecture 7, §8.5"
       url: https://math.haifa.ac.il/hinich/RSlec/lec7.pdf
       locator: "§8.5.1–8.5.3, printed pp. 8–9: the Riemann–Hurwitz bookkeeping for a degree-n map of the sphere."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

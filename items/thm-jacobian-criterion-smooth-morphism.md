@@ -2,7 +2,7 @@
 id: thm-jacobian-criterion-smooth-morphism
 kind: theorem
 title: "Relative Jacobian criterion with its presentation hypothesis"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-morphism-schemes
@@ -24,6 +24,9 @@ sources:
       url: https://stacks.math.columbia.edu/tag/01V4
     - title: "H. Matsumura, Commutative Algebra, Ch. 6 (formal smoothness and the Jacobian criterion)"
       url: https://doi.org/10.1017/CBO9781139171761
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-open-immersion-not-proper
 kind: counterexample
 title: A nonclosed open immersion is not proper
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -28,10 +28,12 @@ deps:
   - thm-universal-property-of-a-polynomial-ring
 proof_strategy: counterexample
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, Definition 29.42.1 (tag 01W0) and §29.42"

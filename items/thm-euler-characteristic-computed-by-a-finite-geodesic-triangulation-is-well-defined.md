@@ -2,7 +2,7 @@
 id: thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined
 kind: theorem
 title: Topological well-definedness of the surface Euler characteristic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -24,6 +24,9 @@ sources:
     - title: "Ved Datar, Lectures on Riemannian Geometry"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "Lecture 2, Section 2.2, printed pp. 13-15 (PDF pp. 20-22), where the count of a finite triangulation is written as the Euler characteristic appearing in the global theorem."
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

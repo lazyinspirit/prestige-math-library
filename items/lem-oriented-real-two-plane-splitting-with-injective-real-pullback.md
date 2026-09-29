@@ -2,7 +2,7 @@
 id: lem-oriented-real-two-plane-splitting-with-injective-real-pullback
 kind: lemma
 title: Oriented real two-plane splitting with real-cohomology injection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -78,6 +78,7 @@ sources:
       locator: "Appendix to §1.2, Proposition 1.20 and proof, printed pp. 36–37: every CW complex is paracompact"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

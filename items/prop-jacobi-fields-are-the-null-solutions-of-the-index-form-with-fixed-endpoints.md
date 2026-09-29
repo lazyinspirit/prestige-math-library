@@ -2,7 +2,7 @@
 id: prop-jacobi-fields-are-the-null-solutions-of-the-index-form-with-fixed-endpoints
 kind: proposition
 title: Jacobi fields are the null solutions of the index form with fixed endpoints
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-integration-by-parts-for-the-index-form
@@ -22,10 +22,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-sobolev-duality-from-the-fourier-pairing
 kind: corollary
 title: "Conjugate duality of H^s and H^{-s}"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-real-order-bessel-potential-sobolev-space
@@ -23,6 +23,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Semyon Dyatlov, Lecture Notes for 18.155, current revision"

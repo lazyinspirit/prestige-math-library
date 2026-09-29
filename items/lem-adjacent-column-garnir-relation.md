@@ -2,7 +2,7 @@
 id: lem-adjacent-column-garnir-relation
 kind: lemma
 title: Adjacent-column Garnir relation over C
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps: [def-column-antisymmetrizer-polytabloid-and-specht-module, lem-polytabloid-covariance-and-column-sign, lem-column-collision-causes-antisymmetrizer-cancellation, def-partition-young-diagram-and-conjugate-partition, def-row-and-column-stabilizers-of-a-tableau, def-young-tableau-standard-tableau-and-shape, thm-sign-is-a-homomorphism]
@@ -24,6 +24,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

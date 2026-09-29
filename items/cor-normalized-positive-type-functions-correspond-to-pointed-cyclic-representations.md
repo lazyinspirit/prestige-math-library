@@ -2,7 +2,7 @@
 id: cor-normalized-positive-type-functions-correspond-to-pointed-cyclic-representations
 kind: corollary
 title: Normalized positive type and pointed cyclic unitary representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 proof_strategy: direct
@@ -23,10 +23,12 @@ deps:
   - thm-uniqueness-of-the-cyclic-gns-representation
 axiom_audit: "Assume AC through the GNS construction and pointed uniqueness theorems to realize each normalized coefficient and identify triples with the same coefficient. The coefficient-to-positive-type calculation and its invariance under an explicitly given pointed unitary intertwiner are choice-free."
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

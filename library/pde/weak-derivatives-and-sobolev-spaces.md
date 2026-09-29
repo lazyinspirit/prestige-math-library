@@ -1,7 +1,7 @@
 ---
 page: "weak-derivatives-and-sobolev-spaces"
 title: "Weak Derivatives and Sobolev Spaces"
-status: draft
+status: published
 items: ["def-locally-integrable-function-as-a-regular-distribution", "def-weak-derivative-of-a-locally-integrable-function", "lem-weak-derivative-is-independent-of-lp-representatives", "lem-weak-derivatives-are-unique-almost-everywhere", "def-sobolev-space-wkp-and-its-norm", "lem-classical-derivatives-are-weak-derivatives", "lem-weak-derivative-linearity-locality-and-commutation", "rem-weak-derivatives-are-distributional-derivatives-with-function-values", "def-absolute-continuity-on-almost-every-coordinate-line", "lem-sobolev-integration-by-parts-for-dual-exponents", "lem-sobolev-norm-is-well-defined-and-definite", "lem-sobolev-pasting-across-an-overlap", "lem-weak-leibniz-rule-with-a-smooth-factor", "lem-weak-stability-of-sobolev-derivatives", "thm-zero-weak-gradient-implies-componentwise-constancy", "cor-weak-derivative-operator-is-closed-between-lp-spaces", "def-hk-and-hk-zero-notation", "lem-acl-representatives-reconstruct-weak-gradients-by-fubini", "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces", "lem-weak-lower-semicontinuity-of-the-sobolev-norm", "thm-sobolev-spaces-are-banach-spaces", "thm-acl-characterisation-of-w-one-p", "thm-hk-is-a-hilbert-space", "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives", "thm-sobolev-chain-rule-for-c-one-lipschitz-compositions", "thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions", "cor-positive-negative-part-and-truncation-calculus-in-w-one-p", "cor-maxima-and-minima-of-two-w-one-p-functions-are-w-one-p"]
 examples: []
 ---

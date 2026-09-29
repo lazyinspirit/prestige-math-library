@@ -2,7 +2,7 @@
 id: cex-a-transient-chain-can-return-with-positive-probability
 kind: counterexample
 title: "A transient chain can return with positive probability"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -17,10 +17,12 @@ provenance:
 generation:
   role: counterexample
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"

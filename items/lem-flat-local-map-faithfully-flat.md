@@ -2,7 +2,7 @@
 id: lem-flat-local-map-faithfully-flat
 kind: lemma
 title: "A flat local map is faithfully flat"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -22,6 +22,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/algebra.pdf
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.25"
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

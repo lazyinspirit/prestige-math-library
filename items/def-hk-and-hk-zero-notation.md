@@ -2,7 +2,7 @@
 id: def-hk-and-hk-zero-notation
 kind: definition
 title: The notation $H^k$ and the reserved zero-boundary symbol
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, lem-sobolev-norm-is-well-defined-and-definite, def-countable-choice]
 landmark: false
@@ -14,6 +14,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: John K. Hunter, Notes on Partial Differential Equations (2014), Chapter 3 §3.5

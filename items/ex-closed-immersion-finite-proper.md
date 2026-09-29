@@ -2,7 +2,7 @@
 id: ex-closed-immersion-finite-proper
 kind: example
 title: Closed immersion from a quotient ring
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -16,10 +16,12 @@ deps:
   - def-axiom-of-choice
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45"

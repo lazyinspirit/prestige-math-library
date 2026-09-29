@@ -2,7 +2,7 @@
 id: def-pcp-class-with-completeness-and-soundness
 kind: definition
 title: "PCP classes with completeness and soundness"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-pcp-verifier-randomness-query-and-proof-length
@@ -22,6 +22,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Definition

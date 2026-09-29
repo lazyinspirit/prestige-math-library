@@ -2,7 +2,7 @@
 id: ex-contractible-bimodule-complex-induces-zero-functor
 kind: example
 title: A contractible two-term bimodule complex induces the zero tensor functor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -31,6 +31,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 ---
 
 ## Statement

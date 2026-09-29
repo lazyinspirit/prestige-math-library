@@ -2,7 +2,7 @@
 id: cor-upper-semicontinuity-cohomology-dimension
 kind: corollary
 title: "Upper semicontinuity of fibre cohomology dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -80,6 +80,9 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/0BDI"
     - title: "The Stacks Project, Derived Categories of Schemes, Sections 36.30-36.32"
       url: "https://stacks.math.columbia.edu/download/perfect.pdf"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

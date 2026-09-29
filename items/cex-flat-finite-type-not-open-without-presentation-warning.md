@@ -2,7 +2,7 @@
 id: cex-flat-finite-type-not-open-without-presentation-warning
 kind: counterexample
 title: "Flat and finite type is not open without finite presentation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -22,10 +22,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Section 29.26 (flat morphisms)"

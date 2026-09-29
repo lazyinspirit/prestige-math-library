@@ -2,7 +2,7 @@
 id: thm-green-function-harmonic-measure-representation
 kind: theorem
 title: "Green and harmonic-measure representation with the $2\\pi$ sign"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -83,6 +83,9 @@ sources:
     - title: "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, Section 3"
       url: https://arxiv.org/pdf/1010.3760
       locator: "Section 3, printed pp. 186-189: Green functions with a finite pole, Green's formula, and the equilibrium measure as the normal derivative of the Green function divided by $2\\pi$"
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

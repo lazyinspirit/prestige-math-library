@@ -2,7 +2,7 @@
 id: lem-finite-presentation-image-constructible
 kind: lemma
 title: "Constructible images for finite-presentation affine maps"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-constructible-subset-scheme
@@ -22,10 +22,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Commutative Algebra, Section 10.29 (Theorem 10.29.10, tags 00F5-00F7)"

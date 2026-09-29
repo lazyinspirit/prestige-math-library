@@ -2,7 +2,7 @@
 id: cex-a-jump-across-a-hypersurface-is-not-in-w-one-p
 kind: counterexample
 title: A hypersurface jump is not $W^{1,p}$
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-test-function-space-d-of-an-open-set, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, lem-smooth-bump-between-concentric-euclidean-balls, prop-indicator-function-is-measurable-iff-its-set-is-measurable, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-absolute-continuity-of-the-integral, thm-algebra-of-derivatives, thm-chain-rule, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-lebesgue-measure-of-a-box-of-every-kind, thm-tonelli-and-fubini-for-completed-product-measures]
 landmark: false
@@ -11,10 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

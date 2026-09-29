@@ -2,7 +2,7 @@
 id: thm-etale-locus-open
 kind: theorem
 title: "The etale locus is open"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-etale-locus-morphism
@@ -23,6 +23,9 @@ sources:
       url: https://stacks.math.columbia.edu/download/morphisms.pdf
     - title: "Ravi Vakil, The Rising Sea, 29 August 2022 public draft, Chapter 26 (the etale locus is open)"
       url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

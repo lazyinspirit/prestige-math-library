@@ -2,7 +2,7 @@
 id: lem-fibre-injective-map-flat-cokernel-noetherian-target
 kind: lemma
 title: Fibrewise injectivity lifts and leaves a flat cokernel over a Noetherian target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -15,10 +15,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Lemma 10.99.1 (tag 00ME), fibre-injective maps"

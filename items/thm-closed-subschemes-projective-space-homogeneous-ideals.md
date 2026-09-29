@@ -2,7 +2,7 @@
 id: thm-closed-subschemes-projective-space-homogeneous-ideals
 kind: theorem
 title: "Closed subschemes of projective space and saturated ideals"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-projective-space-saturation-local-criterion
@@ -16,10 +16,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Constructions of Schemes, Sections 27.8-27.21"
@@ -77,13 +79,17 @@ Then:
 **Proof technique:** direct: glue the chartwise quotients of a homogeneous ideal, compare two ideals through their chart ideals and the saturation criterion, and recover any closed subscheme from its chart ideals.
 
 1.1 Chartwise closed subschemes of an ideal. Let $I\subseteq B$ be homogeneous. For every $i$, [F3] identifies the $i$-th chart of $\operatorname{Proj}(B/I)$ with the closed subscheme $\operatorname{Spec}\bigl(B_{(x_i)}/I_{(x_i)}\bigr)\hookrightarrow\operatorname{Spec}B_{(x_i)}=D_+(x_i)$, a closed immersion by [F4]. [F2, F3, F4]
+
 1.2 Recovering a closed subscheme from its chart ideals. Let $Z\hookrightarrow\mathbb P^n_A$ be a closed subscheme. By [F1] the affine charts $D_+(x_i)$ cover $\mathbb P^n_A$, and by [F4] applied to them, $Z\cap D_+(x_i)=\operatorname{Spec}(B_{(x_i)}/K_i)$ for a unique ideal $K_i\subseteq B_{(x_i)}$. On the overlap $D_+(x_ix_j)$ the two descriptions agree, so $(K_i)_{x_j/x_i}=K_{ij}=(K_j)_{x_i/x_j}$ inside $B_{(x_ix_j)}$. Define the homogeneous ideal degreewise by $$I=\bigoplus_{d\ge0} I_d,\qquad I_d=\{h\in B_d: h/x_i^d\in K_i\text{ for all }i\}.$$ Each $I_d$ is an additive subgroup of $B_d$, and if $h\in I_d$ and $g\in B_e$ are homogeneous, then $(gh)/x_i^{d+e}=(g/x_i^e)(h/x_i^d)\in K_i$ for every $i$; hence $gI_d\subseteq I_{d+e}$, and distributivity extends this to arbitrary elements of $B$. Thus $I$ is a homogeneous ideal. [F1, F4, algebra]
 
 2.1 Compatibility on overlaps. For $i\ne j$ the restrictions of the two chartwise subschemes of step 1.1 to the overlaps $D_+(x_ix_j)$ of [F1] are cut out by the ideals $I_{(x_ix_j)}$ computed from either side: localising $B_{(x_i)}/I_{(x_i)}$ at $x_j/x_i$ gives $B_{(x_ix_j)}/I_{(x_ix_j)}$ by [F2], and symmetrically from $j$; hence the restrictions agree. Therefore by the gluing clause of [F4] the chartwise subschemes of step 1.1 glue to a closed subscheme $V_+(I)\hookrightarrow\mathbb P^n_A$ whose intersection with $D_+(x_i)$ is $\operatorname{Spec}(B_{(x_i)}/I_{(x_i)})$, and which is $\operatorname{Proj}(B/I)$ under the canonical map of [F3]. This proves (1). [F1, F2, F3, F4, step 1.1]
+
 2.2 The recovered ideal has the prescribed charts. Let $I$ be as in step 1.2. Every element of $(I[x_i^{-1}])_0$ has the form $h/x_i^d$ with $h\in I_d$, hence lies in $K_i$, giving $(I[x_i^{-1}])_0\subseteq K_i$. Conversely let $b/x_i^d\in K_i$ with $b\in B_d$. On the overlap with chart $j$, the same element is $(x_i/x_j)^{-d}(b/x_j^d)$ in $B_{(x_ix_j)}$, so the equality of localised ideals in step 1.2 shows that $b/x_j^d$ belongs to $(K_j)_{x_i/x_j}$. By the localisation criterion [F6], there is an exponent $N_j\ge0$ with $(x_i/x_j)^{N_j}(b/x_j^d)=x_i^{N_j}b/x_j^{d+N_j}\in K_j$. Since there are only $n+1$ charts, choose $N\ge N_j$ for every $j$. Then $h=x_i^Nb\in B_{d+N}$ satisfies $h/x_j^{d+N}\in K_j$ for every $j$; in the $i$-th chart the same follows from $b/x_i^d\in K_i$. Hence $h\in I_{d+N}$, and $b/x_i^d=h/x_i^{d+N}\in(I[x_i^{-1}])_0$. Thus $(I[x_i^{-1}])_0=K_i$ for every $i$. [step 1.2, F6, algebra]
 
 3.1 Equality of closed subschemes forces equal saturations. Suppose $V_+(I)=V_+(J)$. On the chart $D_+(x_i)$ the two closed subschemes of the affine scheme $\operatorname{Spec}B_{(x_i)}$ coincide, so their ideals coincide: $I_{(x_i)}=J_{(x_i)}$ for every $i$, by the uniqueness of the quotient ideal in [F4]. Then, for homogeneous $h$ of degree $d$, the criterion [F5] gives $h\in I^{\mathrm{sat}}\iff h/x_i^d\in I_{(x_i)}\ \forall i\iff h/x_i^d\in J_{(x_i)}\ \forall i\iff h\in J^{\mathrm{sat}}$, so $I^{\mathrm{sat}}=J^{\mathrm{sat}}$. [F4, F5, step 2.1]
+
 4.1 Equal saturations give equal subschemes. Conversely, if $I^{\mathrm{sat}}=J^{\mathrm{sat}}$ then the chart ideals agree, $I_{(x_i)}=(I^{\mathrm{sat}})_{(x_i)}=(J^{\mathrm{sat}})_{(x_i)}=J_{(x_i)}$, by the last clause of [F5]; hence the chartwise descriptions of steps 1.1 and 2.1 coincide, and $V_+(I)=V_+(J)$. Together with step 3.1 this proves (2). [F5, step 2.1, step 3.1]
+
 4.2 Uniqueness. The ideal $I$ of steps 1.2 and 2.2 is saturated: for homogeneous $h\in B_d$, [F5] and step 2.2 give $h\in I^{\mathrm{sat}}\iff h/x_i^d\in I_{(x_i)}=K_i$ for every $i$, which is exactly the defining condition $h\in I_d$. Its chart ideals are the $K_i$ by step 2.2, so $V_+(I)=Z$ by the uniqueness of the affine quotient ideals and gluing [F4]. If $I'$ is another saturated homogeneous ideal with $V_+(I')=Z=V_+(I)$, then $I'^{\mathrm{sat}}=I^{\mathrm{sat}}$ by step 3.1, that is $I'=I$ by saturation. This proves (3). [F4, F5, step 1.2, step 2.2, step 3.1, cases: saturated and unsaturated ideals]
 
 5.1 Conclusion. Step 2.1 gives statement (1), steps 3.1 and 4.1 give the saturation criterion (2), and steps 1.2, 2.2 and 4.2 show that every closed subscheme arises from a unique saturated homogeneous ideal. The Axiom of Choice [A1] is inherited through the affine quotient lemma and the gluing theorem [F4]; no further choice is made. [A1, F4, step 1.2, step 2.1, step 2.2, step 3.1, step 4.1, step 4.2]

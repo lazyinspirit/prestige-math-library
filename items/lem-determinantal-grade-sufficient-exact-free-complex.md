@@ -2,7 +2,7 @@
 id: lem-determinantal-grade-sufficient-exact-free-complex
 kind: lemma
 title: Expected ranks and determinantal regular sequences force a free complex to be exact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -21,6 +21,9 @@ sources:
   references:
     - title: "The Stacks Project, Algebra, Proposition 10.102.9 (tag 00N1), sufficiency direction"
       url: https://stacks.math.columbia.edu/tag/00N1
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

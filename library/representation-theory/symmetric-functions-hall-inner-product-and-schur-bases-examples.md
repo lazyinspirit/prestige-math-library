@@ -1,7 +1,7 @@
 ---
 page: symmetric-functions-hall-inner-product-and-schur-bases-examples
 title: "Symmetric Functions, the Hall Inner Product, and Schur Bases — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-power-sums-do-not-form-an-integral-basis

@@ -1,7 +1,7 @@
 ---
 page: alphabet-reduction-and-the-pcp-theorem-examples
 title: "Alphabet Reduction and the PCP Theorem: Examples and Counterexamples"
-status: draft
+status: published
 requires: [alphabet-reduction-and-the-pcp-theorem]
 items: []
 examples:

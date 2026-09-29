@@ -2,7 +2,7 @@
 id: ex-upper-half-plane-harmonic-measure-density
 kind: example
 title: "The upper half-plane Poisson boundary density"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -35,6 +35,7 @@ sources:
       locator: "Section 10.8, printed p. 171: harmonic measure as the representing measure of the Poisson integral"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Example

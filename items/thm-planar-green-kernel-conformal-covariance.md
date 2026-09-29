@@ -2,7 +2,7 @@
 id: thm-planar-green-kernel-conformal-covariance
 kind: theorem
 title: "Conformal covariance of the canonical planar Green kernel"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -30,6 +30,7 @@ sources:
       locator: "Section 10.9, printed pp. 171-172: conformal transport of the logarithmic Green kernel"
 verification:
   precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

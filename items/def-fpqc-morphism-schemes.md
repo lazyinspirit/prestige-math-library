@@ -2,7 +2,7 @@
 id: def-fpqc-morphism-schemes
 kind: definition
 title: "Fpqc covering morphisms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-and-faithfully-flat-modules-and-ring-maps
@@ -15,6 +15,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "Stacks Project, Morphisms of Schemes, §29.26 Definition 29.26.1"

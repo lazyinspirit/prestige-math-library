@@ -2,7 +2,7 @@
 id: def-jacobian-matrix-affine-algebraic-set
 kind: definition
 title: "Equation rows and coordinate columns in an affine Jacobian"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coordinate-ring-affine-algebraic-set]
 provenance:
@@ -13,6 +13,7 @@ verification:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-determinantal-grade-criterion-free-complex-exactness
 kind: theorem
 title: Buchsbaum-Eisenbud rank and grade criterion for exact free complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-36-complete
 deps:
@@ -14,10 +14,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Algebra, Proposition 10.102.9 (tag 00N1), exactness criterion"

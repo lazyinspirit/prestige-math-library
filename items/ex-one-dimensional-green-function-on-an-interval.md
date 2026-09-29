@@ -2,7 +2,7 @@
 id: ex-one-dimensional-green-function-on-an-interval
 kind: example
 title: "One-dimensional Dirichlet Green kernel on an interval"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -36,6 +36,9 @@ deps:
   - def-regular-distribution-from-a-locally-integrable-function
   - thm-locally-integrable-functions-embed-in-distributions
 proof_strategy: direct
+verification:
+  precheck: pass
+  audited: 2026-09-30
 ---
 
 ## Statement

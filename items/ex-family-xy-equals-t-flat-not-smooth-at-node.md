@@ -2,7 +2,7 @@
 id: ex-family-xy-equals-t-flat-not-smooth-at-node
 kind: example
 title: "The family xy=t"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-flat-morphism-schemes
@@ -24,10 +24,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   references:
     - title: "The Stacks Project, Morphisms of Schemes, Sections 29.25 and 29.34-29.36 (flatness, smoothness, Jacobian criterion)"

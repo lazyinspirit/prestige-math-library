@@ -2,7 +2,7 @@
 id: cex-invariant-subspace-need-not-reduce-an-operator
 kind: counterexample
 title: "An invariant subspace need not reduce an operator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,11 +12,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: n/a
+  precheck: pass
   judge:
     model: "gpt-6-sol"
     verdict: pass
     date: 2026-09-29
+  audited: 2026-09-30
 sources:
   scraped: []
   references:
