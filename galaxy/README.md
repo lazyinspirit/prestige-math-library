@@ -114,6 +114,9 @@ transitive reach. Category filters do not alter luminosity. Zoom extends to 180�
 
 ## Piano soundtrack
 
+Music controls sit in the top-right toolbar; the playlist opens beneath it.
+The bottom corners contain no persistent text or controls.
+
 The local playlist repeats: Elgar’s *Salut d’Amour* (Luis Kolodin), Bach’s
 *Prelude in C Major, BWV 846* (Kimiko Ishizaka), the second movement of
 Beethoven’s *Moonlight Sonata* (a Musopen recording whose pianist is unspecified),
