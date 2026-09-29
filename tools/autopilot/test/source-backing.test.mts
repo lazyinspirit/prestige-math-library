@@ -72,6 +72,21 @@ test('the same result ALSO backed by a live source passes', () => {
   rmSync(dir, { recursive: true, force: true });
 });
 
+test('a previously fetched full-text source remains backing after its URL dies', () => {
+  const dir = fixture({ backedBy: [DEAD] });
+  const path = join(dir, 'research', 'demo-batch-4.coverage.json');
+  const coverage = JSON.parse(readFileSync(path, 'utf8'));
+  coverage.pages[0].sources[0].fetch_verified = {
+    at: '2026-09-29T04:12:00.154Z', bytes: 4572986,
+    sha256_16: 'da0881782a35bde6', kind: 'pdf', pages: 489,
+  };
+  writeFileSync(path, JSON.stringify(coverage));
+  const r = run(dir);
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  assert.match(r.stdout, /every one still backed/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
 test('the re-harvest plan names the item, the dead source and the result line', () => {
   const dir = fixture({ backedBy: [DEAD] });
   const plan = join(dir, 'research', 'demo-reharvest-plan.json');

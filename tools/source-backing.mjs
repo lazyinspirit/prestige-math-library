@@ -27,14 +27,15 @@
 // to clear the gate would have taken both off the page, and the run would have
 // reported success.
 //
-// THE RULE. Preserve every result through open source backing or a validated
-// Step 1 source-drop record with its alternate argument. Scouts decide;
+// THE RULE. Preserve every result through an open source, a verified earlier
+// full-text fetch, or a validated Step 1 source-drop record. Scouts decide;
 // Step 3 judges mathematics. This tool checks evidence and names omissions.
 //
 // Exit 1 on any lost backing. `--reharvest-plan` writes the scout's work list.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { sourceDropped, sourceResolutionErrors } from './source-resolution.mjs';
+import { verifiedFullText } from './source-fulltext.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n, d = null) => {
@@ -77,17 +78,18 @@ if (!Array.isArray(livenessRows) || (!livenessRows.length && !onlyDrops)) {
 }
 
 const normUrl = (u) => String(u ?? '').replace(/&amp;/g, '&').trim();
-const okByUrl = new Map(livenessRows.map((r) => [normUrl(r.url), r.ok === true]));
+const okByUrl = new Map(livenessRows.map((r) =>
+  [normUrl(r.url), r.ok === true || Boolean(r.previously_fetched)]));
 
-/** A source a reader can open. Unknown to the sweep is NOT assumed dead — the
+/** A source whose mathematical body was available. Unknown to the sweep is NOT assumed dead — the
  *  sweep collects from these same files, so an absent row means the shapes
  *  disagree, and inventing a death from that would delete real results. */
 const sourceUsable = (s) => {
   if (sourceResolutionErrors(s).length) return false;
   if (sourceDropped(s)) return true; // alternative arguments, never claimed original-source backing
   const known = okByUrl.get(normUrl(s.url));
-  if (known === false) return false;
-  if (requireVerified && !s.fetch_verified) return false;
+  if (known === false && !verifiedFullText(s)) return false;
+  if (requireVerified && !verifiedFullText(s)) return false;
   return true;
 };
 

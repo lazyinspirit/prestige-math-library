@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// url-sweep.mjs — the CITATION LIVENESS gate: every source a page credits must
-// be openable by a reader.
+// url-sweep.mjs — the CITATION LIVENESS gate: record reader availability, and
+// hold the build only when an unavailable source has no prior full-text fetch.
 //
 //   node tools/url-sweep.mjs --manifests a.pages.json,b.pages.json \
 //     --ledgers a.provenance.jsonl,b.provenance.jsonl --out wave-url-liveness.json
@@ -43,9 +43,9 @@
 //    a finding for Alpha, not a reason to abort an audit mid-flight. The build
 //    passes the flag; the audit does not.
 //
-// A dead URL WITH a recovered snapshot is still a failure under --fail-on-dead:
-// the citation on disk is what a reader clicks, and it is still broken. The
-// recovery is printed so the fix is a URL swap rather than a re-harvest.
+// A dead URL whose source has a verified full-text fetch remains visible in
+// the artifact, but cannot block the build. A snapshot is still useful for
+// reader-facing link repair; it is not needed to re-establish source backing.
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -54,6 +54,7 @@ import { REPO } from './paths.mjs';
 import { markSuspect } from './bot-wall.mjs';
 import { citationUrls } from './citation-urls.mjs';
 import { sourceDropped } from './source-resolution.mjs';
+import { verifiedFullText, deadUrlBlocks } from './source-fulltext.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name) => {
@@ -129,6 +130,7 @@ for (const coverage of coverages) {
 // is coverage-schema-scoped: items and ledgers keep the full harvest, and
 // a source whose original_url equals its url (never swapped) is untouched.
 const superseded = new Set();
+const fetchedByUrl = new Map();
 let documentedDrops = 0;
 for (const coverage of coverages) {
   try {
@@ -136,6 +138,18 @@ for (const coverage of coverages) {
     for (const page of parsed.pages ?? []) {
       for (const source of page.sources ?? []) {
         if (sourceDropped(source)) { documentedDrops++; continue; }
+        if (verifiedFullText(source)) {
+          try {
+            fetchedByUrl.set(new URL(source.url).href, {
+              at: source.fetch_verified.at,
+              bytes: source.fetch_verified.bytes,
+              kind: source.fetch_verified.kind,
+              sha256_16: source.fetch_verified.sha256_16
+                ?? source.fetch_verified.sha256.slice(0, 16),
+              page: page.page ?? page.id,
+            });
+          } catch { /* malformed source URLs remain subject to the normal gate */ }
+        }
         if (source?.original_url && source?.url && source.original_url !== source.url) {
           try { superseded.add(new URL(source.original_url).href); } catch { /* not a URL */ }
         }
@@ -368,11 +382,15 @@ await Promise.all(Array.from({ length: Math.min(concurrency, queue.length || 1) 
 // the exit code below is deliberately untouched by this.
 for (const row of rows) markSuspect(row);
 
+for (const row of rows) {
+  if (!row.ok && fetchedByUrl.has(row.url)) row.previously_fetched = fetchedByUrl.get(row.url);
+}
+
 // RECOVER BEFORE YOU REPLACE. Only dead URLs are looked up, so a clean sweep
 // costs nothing and never touches the network beyond the liveness checks.
 if (recover) {
   for (const row of rows) {
-    if (row.ok) continue;
+    if (!deadUrlBlocks(row)) continue;
     row.recovered = await recoverOne(row.url);
   }
 }
@@ -389,6 +407,8 @@ const result = {
     urls: rows.length,
     live: rows.filter((row) => row.ok).length,
     failed: rows.filter((row) => !row.ok).length,
+    previously_fetched: rows.filter((row) => !row.ok && row.previously_fetched).length,
+    blocking: rows.filter(deadUrlBlocks).length,
     recovered: rows.filter((row) => !row.ok && row.recovered).length,
     suspect: rows.filter((row) => row.suspect).length,
     superseded: superseded.size,
@@ -398,6 +418,7 @@ const result = {
 };
 writeFileSync(absolute(out), JSON.stringify(result, null, 2) + '\n');
 console.log(`url-sweep: ${result.summary.live}/${result.summary.urls} live; ${result.summary.failed} failed`
+  + ` (${result.summary.previously_fetched} previously fetched, ${result.summary.blocking} blocking)`
   + (recover ? `; ${result.summary.recovered} recoverable from the archive` : '')
   + `; ${result.summary.suspect} suspect` + ` -> ${out}`);
 console.log(`url-sweep: ${rows.length + documentedDrops} citation decision(s) (${documentedDrops} documented source drops)`);
@@ -413,7 +434,11 @@ if (result.summary.suspect) {
 }
 if (result.summary.failed) {
   for (const row of rows.filter((entry) => !entry.ok)) {
-    console.log(`FAIL ${row.status ?? 'ERR'} ${row.url} — ${row.error ?? `HTTP ${row.status}`}`);
+    console.log(`${row.previously_fetched ? 'UNAVAILABLE' : 'FAIL'} ${row.status ?? 'ERR'} ${row.url} — ${row.error ?? `HTTP ${row.status}`}`);
+    if (row.previously_fetched) {
+      console.log(`  FULL TEXT FETCHED ${row.previously_fetched.kind} ${row.previously_fetched.sha256_16} on ${row.previously_fetched.at}; link maintenance remains visible, but the gate continues.`);
+      continue;
+    }
     if (row.recovered) {
       console.log(`  RECOVERED ${row.recovered.snapshot}`);
       if (row.recovered.note) console.log(`  NOTE      ${row.recovered.note}`);
@@ -426,4 +451,4 @@ if (result.summary.failed) {
   }
 }
 // Default exit 0 preserves `run-wave.mjs`, which halts the audit on nonzero.
-if (failOnDead && result.summary.failed) process.exit(1);
+if (failOnDead && result.summary.blocking) process.exit(1);

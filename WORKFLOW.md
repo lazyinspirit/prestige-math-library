@@ -141,8 +141,10 @@ reconciled. Pairs sharing a batch remain serialized to protect shared files;
 the final Step-3 gate still requires sound, current item decisions, reconciled
 dependencies and every required integrity check to pass. They write
 every assigned item, example, counterexample, page and proof contract. They
-retain full-text fetch stamps, while live URL and source-backing gates run at
-Step 5b; a later transport failure does not hold Step 3 authoring. They
+retain full-text fetch stamps. At Step 5b the URL and source-backing gates
+report a later dead link without holding the run when the source's verified
+full-text fetch is already recorded. An unavailable source with no verified
+full-text fetch still requires recovery or replacement. They
 follow ascending dependency levels within their assigned work, using the
 generated per-pair author task as the exact order; ties use page order and
 item ID. Local additions or dependency repairs require recomputing affected
@@ -297,15 +299,40 @@ mathematical supplier, and `dropped` for a genuinely withdrawn item.
 Step-5/7/8 auditor-created certificates bind the item, manifest entry and owning
 contract. Initial certification requires a successful auditor/adjudicator author
 dispatch. Changed-carrier recertification normally requires a successful covering
-author dispatch. For an owner-held gate repair of an already certified item, the
-owner may instead record an exact-carrier, evidence-hash-bound receipt with
+author dispatch. For an owner-held Step-5 gate repair, a carried Step-3 item may
+receive its first Step-5 certificate by owner attestation when either (a) its
+exact item bytes, judge hash and manifest entry still match the Step-5 baseline
+and its own contract entry is the only changed carrier, (b) an owner-reviewed
+item repair changed its judge hash while the manifest entry remains unchanged,
+or (c) the item and manifest entry changed through a verified metadata-only
+repair. The third case requires the independent owner evidence to carry the full
+baseline and current canonical manifest-entry projections: the baseline must
+hash to the immutable Step-5 snapshot and the current projection must equal the
+live row. It admits only URL and locator edits on existing indexed source
+references, or a deps-only ordered addition of registered repository items.
+Source titles and all other row fields must stay identical; added deps must be
+reviewed and match the current item frontmatter. In every case the original
+Step-3 certificate must still prove the item's origin and a successful
+post-baseline Step-5 dispatch must cover the batch. That dispatch is stage
+context only; it is never represented as authoring bytes it did not write. The
+owner evidence must identify the active run, item and exact current raw
+item-file, manifest-entry and contract-entry hashes, and review the current item
+and contract together. The receipt also binds all normalized carrier hashes. An
+unverified or unrelated manifest change, missing Step-3 origin, or incomplete
+current-hash evidence cannot use this path, and a failed dispatch is never
+promoted to an author result. For an owner-held gate repair of an already
+certified item, the owner
+may also record an exact-carrier, evidence-hash-bound receipt with
 `node tools/auditor-created-items.mjs owner-recertify --run RUN --step 5|7|8
 --id ITEM --evidence research/FILE --reason TEXT`, then run `certify` again.
 This preserves the original successful author result as origin evidence and
 cannot certify a never-authored new item. The receipt is checked again by every
 consumer; editing it or its evidence revokes certification. Unchanged hash-bound
-evidence survives restart and metadata-only file touches; a contract-only edit
-requires either fresh covering author evidence or this explicit owner receipt.
+evidence survives restart and metadata-only file touches; a late contract or
+owner-reviewed item repair requires fresh covering author evidence or this
+explicit owner receipt. A later successful Step-5 dispatch covering the same
+batch does not reassign an unchanged, hash-bound owner receipt to that dispatch;
+its recorded eligible author result remains the provenance anchor.
 These provenance receipts use `auditor-created-stage-bypass-v2`. Legacy v1
 receipts are rejected by consumers and revalidated by the certifier, retaining
 the immutable v1 inventory baseline. Reuse requires the same run and baseline
@@ -395,8 +422,11 @@ same complete alternative-proof and exhausted-retrieval evidence, recorded as
 A source drop waives unavailable backing, never results.
 Temporary outages do not establish permanent unavailability. Preserve genuine
 fetch, URL and source-backing evidence; a PDF page count does not establish reading.
-URL sweeps that fail only with transport errors wait for network recovery;
-they do not retire reviewed sources or dispatch reharvesting workers.
+URL sweeps record link failures even when a previous verified full-text fetch
+keeps the build gate open. Those fetched sources remain valid backing for their
+authored results. A transport failure without a verified full-text fetch still
+requires recovery; it does not justify retiring reviewed sources or dispatching
+reharvesting workers by itself.
 The liveness probe uses bounded backoff for transport failures and spaces
 Wayback requests; an HTTP rejection remains a failed citation.
 Compressed PDFs require mutool. Documents under four pages require the complete
