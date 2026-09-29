@@ -5,7 +5,7 @@ title: Spectral multiplicity function in the separable case
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, def-cyclic-vector-and-cyclic-normal-operator, lem-scalar-and-complex-measures-from-a-pvm, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integration-against-a-radon-nikodym-derivative, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-riesz-fischer-completeness-of-l-p, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-separable-space, def-measurable-function-between-measurable-spaces, def-hilbert-space, def-axiom-of-choice]
+deps: [thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, lem-maximal-orthogonal-family-of-cyclic-reducing-subspaces, def-cyclic-vector-and-cyclic-normal-operator, lem-scalar-and-complex-measures-from-a-pvm, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integration-against-a-density, thm-riesz-fischer-completeness-of-l-p, def-l-p-space-as-a-quotient-by-null-functions, def-separable-space, def-measurable-function-between-measurable-spaces, def-hilbert-space, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -16,7 +16,7 @@ sources:
     - title: "Andreas Kriegl, Funktionalanalysis, §8.61 and §8.64, printed pp.196–199"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
 verification:
-  audited: 2026-09-22
+  audited: 2026-09-29
 ---
 
 ## Definition
@@ -40,7 +40,7 @@ with $x_j=0$ are omitted.
 
 **Step 2: a common dominating measure.** Put
 $$\mu:=\sum_{j\in J}\frac{2^{-j}}{1+\mu_j(\sigma(T))}\,\mu_j .$$
-Then $\mu$ is a finite positive measure with $\mu_j\ll\mu$ for every $j$; let
+Then $\mu$ is a finite positive regular Borel measure with $\mu_j\ll\mu$ for every $j$; let
 $$h_j:=\frac{d\mu_j}{d\mu},\qquad F_j:=\{z\in\sigma(T):h_j(z)>0\}$$
 be the Radon–Nikodym derivative and its positivity set
 ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
@@ -63,7 +63,7 @@ $\langle f,g\rangle=\sum_r\int f_r\overline{g_r}\,d\mu$
 ([[def-measurable-function-between-measurable-spaces]],
 [[def-l-p-space-as-a-quotient-by-null-functions]]), where fields are identified
 when they agree $\mu$-almost everywhere in every component. Its **fiber** at $z$ is
-$\operatorname{span}\{e_1,\dots,e_{m(z)}\}\subseteq\ell^2(\mathbb N)$, so the
+$\overline{\operatorname{span}}\{e_r:1\le r\le m(z)\}\subseteq\ell^2(\mathbb N)$, so the
 fiber dimension is exactly $m(z)$, and the model is the direct sum
 $\bigoplus_{r\ge1}L^2(\mu|_{A_r})$ of the ordinary $L^2$-spaces of the
 restrictions of $\mu$ to the decreasing sets $A_r$ ([[def-hilbert-space]]).
@@ -79,7 +79,15 @@ particular, intertwining $M_z$ with $M_z$.
 
 **Well-definedness.** (1) $\mu$ is finite and nonzero and $\mu_j\ll\mu$ for
 each $j$, since the $j$-th summand of the sum dominates
-$\frac{2^{-j}}{1+\mu_j(\sigma(T))}\mu_j$. (2) $h_j$ exists, is nonnegative
+$\frac{2^{-j}}{1+\mu_j(\sigma(T))}\mu_j$. It is regular: for any Borel
+$A$ and $\varepsilon>0$, choose a finite initial segment of $J$ whose
+weighted measure tail has total mass below $\varepsilon/2$. For each measure
+in that segment, choose a compact subset of $A$ approximating $A$ from
+inside, or an open superset approximating it from outside, with weighted
+error summing to less than $\varepsilon/2$. The finite union of the compact
+subsets lies in $A$ and the finite intersection of the open supersets
+contains $A$; each approximates $\mu(A)$ within $\varepsilon$ because the
+discarded tail has total mass below $\varepsilon/2$. (2) $h_j$ exists, is nonnegative
 $\mu$-almost everywhere and is unique up to $\mu$-null sets (Radon–Nikodym);
 $F_j=\{h_j>0\}$ is Borel and $\mu_j(\sigma(T)\setminus F_j)=\int_{\{h_j=0\}}h_j\,d\mu=0$.
 (3) $\bigcup_jF_j$ is $\mu$-conull: since $h_j=0$ off $F_j$ one has
@@ -90,28 +98,30 @@ $k_r$ is Borel on $A_r$ because
 $\{k_r=k\}=F_k\cap\{\sum_{\ell<k,\ell\in J}\mathbf 1_{F_\ell}=r-1\}$ is a Borel
 set. (5) $L^2(\sigma(T),\mu,m)$ is a Hilbert space: it is the orthogonal direct
 sum $\bigoplus_rL^2(\mu|_{A_r})$, whose components are complete by Riesz–
-Fischer and whose direct sum is complete because a Cauchy sequence in the sum
-has summable component norms, its components converge in the complete spaces
-$L^2(\mu|_{A_r})$, and the componentwise limit has finite norm and is the norm
-limit (dominated convergence for the counting measure)
-([[thm-riesz-fischer-completeness-of-l-p]], [[thm-dominated-convergence]]).
+Fischer. If $(f^{(n)})$ is Cauchy in the direct sum, each component converges
+in $L^2(\mu|_{A_r})$ to some $f_r$. The finite partial sums of $\|f_r\|_2^2$
+are bounded by the squared norms of the Cauchy sequence, so $(f_r)$ has finite
+direct-sum norm. Given $\varepsilon>0$, choose $n_0$ such that
+$\|f^{(n)}-f^{(q)}\|\le\varepsilon$ for $n,q\ge n_0$; for fixed $n\ge n_0$,
+pass $q\to\infty$ in each finite coordinate sum and then take the supremum
+over those sums to get $\|f^{(n)}-f\|\le\varepsilon$.
+Thus the direct sum is complete ([[thm-riesz-fischer-completeness-of-l-p]]).
 (6) $W$ is well defined: $(Wf)_j$ is Borel because on each Borel set
 $\{r(z,j)=r\}$ it equals $f_r/\sqrt{h_j}$ with $h_j>0$ there, it vanishes off
 $F_j$, and it is $\mu_j$-square-integrable because
 $$\sum_{j\in J}\int|(Wf)_j|^2d\mu_j =\sum_{j\in J}\int_{F_j}|f_{r(z,j)}|^2\,d\mu =\sum_{r\ge1}\int_{A_r}|f_r|^2\,d\mu=\|f\|^2<+\infty,$$
-using $d\mu_j=h_j\,d\mu$ on $F_j$
-([[thm-integration-against-a-radon-nikodym-derivative]],
-[[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]]);
+using the positive-measure identity $\mu_j=h_j\,d\mu$ and the
+nonnegative change-of-density integral
+([[thm-integration-against-a-density]]);
 the same display shows $W$ is isometric, and $W$ is onto with inverse
 $(g_j)_j\mapsto f$, $f_r(z):=g_{k_r(z)}(z)\sqrt{h_{k_r(z)}(z)}$ on $A_r$ and
 $f_r:=0$ otherwise, which is Borel by the same rank-measurability and is
 square-integrable by the same computation; multiplicativity is componentwise
 and gives $W M_\varphi=M_\varphi W$ for every bounded Borel $\varphi$, hence
-$WM_z=M_zW$. (7) The data $(\mu,h_j,F_j,m)$ depend on the chosen
-decomposition; the measure class of $\mu$ and the almost-everywhere class of
-$m$ are independent of the choice by the intertwiner lemma and the
-classification theorem proved immediately below on this page. The multiplicity
-function is the **fiber dimension**
+$WM_z=M_zW$. (7) At this stage the data $(\mu,h_j,F_j,m)$ come from the chosen
+decomposition; independence of the measure class and almost-everywhere
+multiplicity is established later, after the intertwiner lemma. For this
+decomposition the multiplicity function is the **fiber dimension**
 $z\mapsto\dim H_z$ of the model, equal to $m(z)$; at a non-atomic point of
 $\sigma(T)$ with respect to $E$ it is *not* the dimension of the eigenspace
 $\ker(T-zI)$, which is the fiber of the atoms carried by $E(\{z\})$.

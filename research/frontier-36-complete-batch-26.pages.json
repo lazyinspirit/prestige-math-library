@@ -1,0 +1,983 @@
+[
+  {
+    "order": 831,
+    "id": "green-functions-harmonic-measure-and-conformal-invariance",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Green Functions, Harmonic Measure, and Conformal Invariance",
+    "companion": "green-functions-harmonic-measure-and-conformal-invariance-examples",
+    "requires": [
+      "harmonic-functions-and-the-poisson-integral",
+      "subharmonic-functions-and-the-dirichlet-problem",
+      "the-riemann-mapping-theorem",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem",
+      "harmonic-functions-and-mean-values-in-rn",
+      "fundamental-solutions-newtonian-potentials-and-green-functions",
+      "analytic-majorants-and-the-cauchy-kovalevskaya-theorem",
+      "compact-operators-and-riesz-schauder-theory",
+      "riemannian-metrics-length-distance-and-volume"
+    ],
+    "items": [
+      {
+        "id": "def-green-function-plane-domain",
+        "kind": "definition",
+        "title": "The canonical Green kernel of a plane domain",
+        "deps": [
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "def-barrier-and-regular-boundary-point",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-domain",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-plane-harmonic-function"
+        ],
+        "statement": "For a proper plane domain Ω and a∈Ω, the canonical Green function g_Ω(·,a), when it exists, is the least nonnegative function harmonic on Ω∖{a} for which g_Ω(z,a)+log|z−a| extends harmonically across a. On bounded Ω it has zero limit at every regular boundary point; no pointwise limit is required at an irregular point. The logarithmic coefficient is fixed to one; the distributional normalization is proved later rather than assumed by this definition.",
+        "proof_strategy": "Define the pointwise least nonnegative logarithmic-pole candidate. The punctured-disc remark locally exhibits a second candidate by adding a positive harmonic logarithmic term, so candidate clauses alone do not designate a unique kernel; leastness supplies uniqueness. Keep the coefficient one and distinguish the PDE normalization, whose distributional assertion is proved later.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-log-modulus-is-harmonic-off-its-centre",
+        "kind": "lemma",
+        "title": "Logarithmic modulus is harmonic off its centre",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-plane-harmonic-function",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "statement": "For every a in C, log|z-a| is smooth and harmonic on C minus {a}; no choice principle is needed.",
+        "proof_strategy": "Write log|z-a| as one half log((x-p)^2+(y-q)^2), differentiate twice, and show the two second derivatives cancel; repeated differentiation also gives smoothness off a.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jeremy Orloff, MIT 18.04 Topic 5: Introduction to Harmonic Functions",
+              "url": "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/2e739bb156efb0bc7103fc43d0897dda_MIT18_04S18_topic5.pdf",
+              "locator": "Topic 5, logarithmic potential example"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-planar-green-kernel-conformal-covariance",
+        "kind": "theorem",
+        "title": "Conformal covariance of the canonical planar Green kernel",
+        "deps": [
+          "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "cor-injective-holomorphic-derivative-nonzero",
+          "def-biholomorphic-map",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-green-function-plane-domain",
+          "def-plane-harmonic-function",
+          "lem-local-holomorphic-logarithm-nonvanishing-function-on-disc",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-zero-order-factorization-holomorphic-function"
+        ],
+        "statement": "Let f:Ω→Ω′ be a biholomorphism of proper Greenian plane domains. For every a∈Ω and z∈Ω∖{a}, the canonical least-positive Green kernels satisfy g_Ω(z,a)=g_Ω′(f(z),f(a)). No extension of f to the Euclidean boundaries is assumed.",
+        "proof_strategy": "Pull back g_Ω′(·,f(a)) through f. It remains positive and harmonic away from a. Near a, f(z)−f(a)=(z−a)q(z), where q is holomorphic and q(a)=f′(a)≠0. On a small disc q admits a holomorphic logarithm, so log|q| is harmonic; thus the pullback has exactly the required logarithmic pole. It is a candidate for the least-positive definition on Ω, giving g_Ω≤g_Ω′∘f. Apply the same argument to f⁻¹ and exchange the domains for the reverse inequality. Boundary extension is unnecessary because the order characterization of the kernel, rather than boundary values, supplies both inequalities.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §10.9 (least Green kernel)",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-analytic-exhaustion-of-plane-domains",
+        "kind": "lemma",
+        "title": "Analytic-boundary exhaustion of a plane domain",
+        "deps": [
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-domain",
+          "def-connected-component-and-quasicomponent",
+          "def-metric-ball",
+          "def-metric-bounded-diameter",
+          "def-metric-compactness",
+          "def-metric-interior-closure-boundary",
+          "def-null-and-content-zero-in-rn",
+          "def-real-analytic-map-on-the-plane",
+          "lem-countable-iff-surjection-from-n",
+          "lem-distance-to-set-is-lipschitz",
+          "lem-euclidean-polygonal-paths-are-continuous",
+          "lem-nondegenerate-interval-is-not-null",
+          "lem-of-q-dense",
+          "lem-subset-of-countable",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-compactness-under-continuous-maps",
+          "thm-continuous-image-of-a-connected-space",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-metric-closure-characterisation",
+          "thm-morse-sard-for-euclidean-maps",
+          "thm-n-cross-n-countable",
+          "thm-open-connected-subsets-of-rn-are-polygonally-connected",
+          "thm-path-connected-implies-connected",
+          "thm-product-of-countable",
+          "thm-rationals-countable",
+          "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "thm-unions-of-connected-sets"
+        ],
+        "statement": "Every plane domain Ω admits an increasing sequence of relatively compact connected subdomains D_j with real-analytic regular boundary such that every compact K⊂Ω lies in D_j for all sufficiently large j. The D_j may be chosen to contain any fixed finite set of poles from the outset.",
+        "proof_strategy": "Enumerate rational closed discs compactly contained in Ω and the prescribed finite pole set. At stage j, use polygonal connectedness to join the first j discs and the preceding closure by finitely many paths within Ω; their union with the discs and preceding closure is a compact connected core K_j. Choose an open neighborhood V_j of K_j with compact closure in Ω and a continuous cutoff f_j on a bounding closed rectangle R_j, equal to 1 on K_j and 0 outside V_j (for example by ratios of distances to K_j and the complement of V_j). The real Stone–Weierstrass theorem uniformly approximates f_j on R_j by a real polynomial P_j with error below 1/4. Sard supplies a regular value t_j between 1/4 and 3/4. The component D_j of {P_j>t_j} containing K_j lies in V_j and contains the preceding closure. Since P_j<t_j on R_j∖V_j and on ∂R_j, its closure is compact in Ω. The real-analytic implicit-function theorem makes its compact regular level boundary real analytic. The nested cores exhaust Ω and place the poles in D_1. This polynomial construction uses no integration or countable choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-green-function-exists-on-bounded-plane-domains",
+        "kind": "theorem",
+        "title": "Green functions exist on all bounded plane domains",
+        "deps": [
+          "cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes",
+          "def-barrier-and-regular-boundary-point",
+          "def-complex-domain",
+          "def-countable-choice",
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "def-green-function-plane-domain",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "def-plane-harmonic-function",
+          "def-plane-subharmonic-function",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-perron-family-is-nonempty-and-bounded",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-heine-borel-rn",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "thm-perron-envelope-is-harmonic"
+        ],
+        "statement": "Assume Countable Choice for the cited PDE normalization. For every bounded plane domain Ω and a∈Ω, put F_a(z)=−log|z−a|, b_a=F_a|∂Ω, and h_a=H_{b_a}. Then g_Ω(z,a)=F_a(z)−h_a(z) is the canonical positive Green kernel. It is harmonic off a, has the logarithmic pole, tends to zero at each regular boundary point, is bounded off each pole neighborhood, and −Δ_z g_Ω=2πδ_a. Irregular boundary values are not prescribed.",
+        "proof_strategy": "The boundary datum b_a is continuous and bounded because a is interior. Published Perron theory gives bounded harmonic h_a. For every Perron lower v, the subharmonic v−F_a has boundary limsup ≤0 and is negative near a (v≤max b_a whereas F_a→∞); the punctured-domain maximum principle gives v≤F_a. Hence h_a≤F_a and g≥0; strong harmonic minimum plus the pole makes g>0 off a. If k is another nonnegative logarithmic-pole candidate, F_a−k extends harmonically across a and has boundary limsup ≤b_a, so it belongs to the lower Perron family; thus F_a−k≤h_a and g≤k, proving minimality. At a regular boundary point the defining Perron limit of h_a is b_a, hence g→0. The PDE n=2 identity −Δ[−log|z−a|/(2π)]=δ_a and harmonicity of h_a fix the 2π sign. This does not use the PDE page’s stronger continuous-trace Green definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-planar-barrier-controls-perron-solutions",
+        "kind": "lemma",
+        "title": "A barrier controls Perron boundary limits",
+        "deps": [
+          "def-barrier-and-regular-boundary-point",
+          "def-complex-domain",
+          "def-metric-bounded-diameter",
+          "def-metric-compactness",
+          "def-metric-interior-closure-boundary",
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "def-plane-harmonic-function",
+          "lem-perron-family-is-nonempty-and-bounded",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn"
+        ],
+        "statement": "If b is a global barrier at ζ∈∂Ω in the published sense, then for every continuous boundary datum φ on a bounded plane domain, H_φ(z)→φ(ζ) as z→ζ within Ω. This gives the barrier-to-regularity direction without presuming boundary limits of H_φ at other points.",
+        "proof_strategy": "Fix ε>0 and a boundary neighborhood V of ζ where |φ−φ(ζ)|<ε. Since b≤c_V<0 at all boundary points outside V, choose A>0 so ℓ=φ(ζ)−ε+Ab has boundary limsup ≤φ everywhere. Thus ℓ is a Perron lower function and ℓ≤H_φ. For every Perron lower v, the subharmonic w=v+Ab has boundary limsup ≤φ(ζ)+ε: this holds near ζ by continuity of φ and b≤0, and away from V by the choice of A. The subharmonic maximum principle gives v≤φ(ζ)+ε−Ab. Taking the supremum gives U_φ≤φ(ζ)+ε−Ab, but b need not be continuous inside Ω, so do not pass this pointwise bound directly through upper-semicontinuous regularization. Instead, for each δ>0 choose a boundary neighborhood N where −δ≤b≤0 throughout N∩Ω. There U_φ≤φ(ζ)+ε+Aδ, hence H_φ has that same constant upper bound on a smaller neighborhood by its limsup definition, while H_φ≥ℓ≥φ(ζ)−ε−Aδ. Let z→ζ and then δ,ε↓0 to squeeze H_φ to φ(ζ). This is the complete Axler–Bourdon–Ramey Theorem 11.7 argument and repairs the missing boundary-comparison step in the published barrier characterization for the uses on this page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Theorem 11.7, printed pp. 227–228",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §10.7, printed pp. 169–170",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-analytic-boundary-green-corrector-is-smooth",
+        "kind": "lemma",
+        "title": "Green correctors are smooth at analytic boundaries",
+        "deps": [
+          "def-countable-choice",
+          "cor-complex-power-series-sums-are-analytic",
+          "cor-power-series-sums-are-smooth-with-coefficient-formula",
+          "def-barrier-and-regular-boundary-point",
+          "def-complex-series-power-series-and-absolute-convergence",
+          "def-real-analytic-function",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-local-subharmonic-peak-function-globalizes",
+          "lem-planar-barrier-controls-perron-solutions",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-green-function-exists-on-bounded-plane-domains",
+          "thm-harmonic-and-holomorphic-schwarz-reflection-principles",
+          "thm-holomorphic-inverse-function-theorem",
+          "thm-plane-harmonic-functions-are-smooth-and-real-analytic",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "thm-c-two-characterization-of-plane-subharmonicity"
+        ],
+        "statement": "Assume Countable Choice. If D is a bounded plane domain with compact real-analytic boundary and a∈D, then its boundary points are regular and its Perron corrector h_a=−log|·−a|−g_D(·,a) belongs to C²(D̄). Consequently g_D(·,a) has a C² zero trace near every boundary point away from a.",
+        "proof_strategy": "At each analytic boundary arc, local graph geometry places D in an inward sector of opening strictly less than 2π: a C¹ boundary excludes an exterior cone, but the inward sector need not have opening less than π. Rotate coordinates so that the sector has half-angle θ<π, choose 0<λ<π/(2θ), and set q(z)=−Re((e^{-iα}(z−ζ))^λ) on it. Then q is harmonic, strictly negative in D, tends to zero at ζ, and is uniformly negative on a small circular seam. The published gluing lemma globalizes it to a barrier; the preceding local Perron-barrier lemma, not the published defective barrier proof, establishes regularity. Analytic parametrizations γ(t) have γ′≠0; complexify their convergent power series to a holomorphic chart Γ and invert locally, mapping a half-disc to the domain side. The Green function from the existence theorem extends continuously as zero on the arc. Pull it back by Γ and apply the published odd harmonic Schwarz reflection across the diameter. The reflected extension is harmonic and smooth across the arc. F_a is harmonic near the boundary, so h_a=F_a−g_D is C² there; interior harmonic smoothness covers the rest of D̄.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-green-function-uniqueness-symmetry-and-monotonicity",
+        "kind": "theorem",
+        "title": "Canonical Green kernels are unique, symmetric and domain monotone",
+        "deps": [
+          "cor-power-series-sums-are-smooth-with-coefficient-formula",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-complex-domain",
+          "def-countable-choice",
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "def-green-function-plane-domain",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-plane-harmonic-function",
+          "def-real-analytic-function",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-analytic-boundary-green-corrector-is-smooth",
+          "lem-analytic-exhaustion-of-plane-domains",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-green-function-exists-on-bounded-plane-domains",
+          "thm-green-function-symmetry",
+          "thm-harnack-convergence-principle-for-plane-harmonic-functions",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-removable-isolated-singularity-for-bounded-plane-harmonic-functions"
+        ],
+        "statement": "Assume Countable Choice for the cited PDE Green identity. A canonical Green kernel is unique. If Ω is Greenian, g_Ω(z,a)=g_Ω(a,z) for distinct a,z. If Ω₁⊂Ω₂ are Greenian and a,z∈Ω₁, then g_{Ω₁}(z,a)≤g_{Ω₂}(z,a). The inequality is in this direction: enlarging the domain increases the Green function.",
+        "proof_strategy": "Minimality in the definition gives uniqueness. Restrict g_{Ω₂}(·,a) to Ω₁; it is a nonnegative logarithmic-pole candidate, so the least-candidate property gives monotonicity. For symmetry choose nested analytic-boundary D_j⊂⊂Ω exhausting Ω and containing both poles. On each D_j, the preceding lemma makes h_a/(2π) and h_z/(2π) C² through the boundary; the in-run PDE symmetry theorem therefore applies to G_j=g_{D_j}/(2π) with precisely its hypotheses. Monotonicity makes g_{D_j} increase, bounded above by g_Ω. Its limit is harmonic off each pole by Harnack convergence, has the fixed logarithmic singularity with locally bounded harmonic remainder, and is nonnegative, hence is a candidate on Ω. Leastness gives g_Ω≤lim g_{D_j}, while monotonicity gave the opposite inequality. Passing to the limit in g_{D_j}(z,a)=g_{D_j}(a,z) proves symmetry. The same exhaustion argument applies to any Greenian unbounded proper domain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-green-function-simply-connected-plane-domain",
+        "kind": "theorem",
+        "title": "Green function from a Riemann map",
+        "deps": [
+          "cor-injective-holomorphic-derivative-nonzero",
+          "def-axiom-of-choice",
+          "def-biholomorphic-map",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-green-function-plane-domain",
+          "def-homologically-simply-connected-complex-domain",
+          "def-plane-harmonic-function",
+          "def-unit-disc-upper-half-plane-and-blaschke-factor",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-local-holomorphic-logarithm-nonvanishing-function-on-disc",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions",
+          "thm-riemann-mapping-theorem",
+          "thm-unit-disc-schwarz-lemma-with-rigidity",
+          "thm-zero-order-factorization-holomorphic-function"
+        ],
+        "statement": "Assume the Axiom of Choice for existence of the Riemann map. If Ω⊊C is homologically simply connected, a∈Ω and φ:Ω→D is biholomorphic with φ(a)=0, then g_Ω(z,a)=−log|φ(z)|. The value is independent of the chosen map sending a to 0. If such φ is supplied, the identity itself uses no choice.",
+        "proof_strategy": "Holomorphic conformal invariance makes −log|φ| positive harmonic off a; φ(z)=φ′(a)(z−a)+O(|z−a|²) gives logarithmic coefficient one and harmonic remainder near a. On the unit disc −log|w| is least among nonnegative logarithmic-pole candidates: compare it with a candidate on circles |w|=r<1 and let r↑1, using bounded removable difference at 0 and the maximum principle. Pull that comparison through φ to prove leastness on Ω, without a Euclidean boundary extension. Schwarz rigidity says two maps sending a to 0 differ by a rotation, so their moduli agree. The published Riemann mapping theorem uses AC at its extremal-attainment step; the conditional transport argument does not.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-harmonic-measure-plane-domain",
+        "kind": "definition",
+        "title": "Harmonic measure on a bounded regular plane domain",
+        "deps": [
+          "def-barrier-and-regular-boundary-point",
+          "def-borel-sigma-algebra",
+          "def-complex-domain",
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "def-radon-measure-on-an-lch-space",
+          "thm-heine-borel-rn"
+        ],
+        "statement": "For a bounded regular plane domain Ω, harmonic measure at z∈Ω is a Radon Borel probability measure ω_Ω^z on the compact metric boundary ∂Ω satisfying H_φ(z)=∫∂Ω φ(ξ)dω_Ω^z(ξ) for every real continuous φ. Existence and uniqueness are proved separately; no Brownian hitting interpretation is part of the definition.",
+        "proof_strategy": "Specify the compact Euclidean boundary, real continuous Dirichlet data and Perron evaluation operator. On a compact metric space a finite regular Borel measure is Radon. Distinguish the measure from the scalar function z↦ω_Ω^z(E) for a Borel boundary set E.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-harmonic-measure-is-well-defined",
+        "kind": "theorem",
+        "title": "The Dirichlet operator defines a unique harmonic measure",
+        "deps": [
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem",
+          "def-barrier-and-regular-boundary-point",
+          "def-borel-sigma-algebra",
+          "def-complex-domain",
+          "def-dependent-choice",
+          "def-harmonic-measure-plane-domain",
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "def-plane-harmonic-function",
+          "def-radon-measure-on-an-lch-space",
+          "lem-perron-family-is-nonempty-and-bounded",
+          "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+          "thm-compactness-under-continuous-maps",
+          "thm-heine-borel-rn",
+          "thm-perron-envelope-is-harmonic"
+        ],
+        "statement": "Assume Dependent Choice as required by the published C₀ Riesz–Markov representation. For each bounded regular plane domain Ω and z∈Ω, there is exactly one Radon Borel probability measure ω_Ω^z representing every continuous boundary datum. For each φ∈C(∂Ω), z↦∫φdω_Ω^z is the unique continuous harmonic extension.",
+        "proof_strategy": "Regularity is the published boundary-limit definition, while Perron harmonicity supplies an extension; avoid relying on the defective converse direction in the published barrier proof. Uniqueness of continuous harmonic extensions implies H_{αφ+βψ}=αH_φ+βH_ψ. The minimum and maximum principles give positivity and ∥φ↦H_φ(z)∥=1 because H_1=1. Since ∂Ω is compact, C(∂Ω)=C₀(∂Ω); apply the published positive C₀ representation theorem under DC to obtain a finite regular measure of total mass one, and its uniqueness. This is the precise use of DC, inherited from the published RMK theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-harmonic-measure-disc-poisson-density",
+        "kind": "theorem",
+        "title": "Harmonic measure of a disc has Poisson density",
+        "deps": [
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem",
+          "def-barrier-and-regular-boundary-point",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-domain",
+          "def-dependent-choice",
+          "def-harmonic-measure-plane-domain",
+          "def-poisson-kernel-on-the-disc",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-planar-barrier-controls-perron-solutions",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-harmonic-measure-is-well-defined",
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem"
+        ],
+        "statement": "Assume Dependent Choice for the general representing-measure interface. For D(c,R), z∈D(c,R) and ξ=c+Re^{it} with t∈[0,2π), dω_{D(c,R)}^z(ξ)=[(R²−|z−c|²)/|ξ−z|²]dt/(2π)=[(R²−|z−c|²)/(2πR|ξ−z|²)]ds(ξ).",
+        "proof_strategy": "Scale the published unit-disc Poisson solution by w=(z−c)/R. Its positive kernel has unit total mass and represents every continuous boundary datum; uniqueness in the harmonic-measure theorem identifies that explicit measure. Check ds=Rdt and keep the density relative to arclength separate from density relative to angle. The explicit Poisson calculation itself is choice-free; DC enters only through the general identification theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-harmonic-measure-conformal-invariance",
+        "kind": "theorem",
+        "title": "Harmonic measure is transported by a closure-homeomorphic conformal map",
+        "deps": [
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem",
+          "def-biholomorphic-map",
+          "def-complex-domain",
+          "def-continuous-map-top",
+          "def-dependent-choice",
+          "def-harmonic-measure-plane-domain",
+          "def-homeomorphism-and-open-maps",
+          "def-radon-measure-on-an-lch-space",
+          "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-harmonic-measure-is-well-defined"
+        ],
+        "statement": "Assume Dependent Choice. Let Ω,Ω′ be bounded regular plane domains and F:Ω→Ω′ a conformal bijection extending to a homeomorphism F̄:Ω̄→Ω̄′. Then F̄_*ω_Ω^z=ω_{Ω′}^{F(z)} on all Borel boundary sets. No Euclidean-boundary pushforward is asserted without the closure homeomorphism.",
+        "proof_strategy": "For φ∈C(∂Ω′), H_{Ω,φ∘F̄} is continuous on Ω̄ and harmonic in Ω by the preceding harmonic-measure existence theorem. Composing H_{Ω′,φ} with F is also continuous on Ω̄ and harmonic by the published conformal invariance of harmonicity, with the same boundary data. Published bounded-domain uniqueness therefore gives H_{Ω′,φ}(F(z))=H_{Ω,φ∘F̄}(z). Rewrite the right side as ∫φd(F̄_*ω_Ω^z); representing-measure uniqueness makes it ω_{Ω′}^{F(z)} on all Borel sets. This direct argument does not use the published conformal-transport theorem’s unnecessary transitive barrier citation. A prime-end formulation needs separate definitions and is not used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-harmonic-measure-maximum-principle-and-domain-comparison",
+        "kind": "theorem",
+        "title": "Borel harmonicity and comparison of harmonic measure",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-complex-domain",
+          "def-dependent-choice",
+          "def-distance-from-a-point-to-a-subset",
+          "def-harmonic-measure-plane-domain",
+          "def-plane-harmonic-function",
+          "def-radon-measure-on-an-lch-space",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "lem-compactness-is-intrinsic",
+          "lem-distance-to-set-is-lipschitz",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap",
+          "thm-harnack-convergence-principle-for-plane-harmonic-functions",
+          "thm-harmonic-measure-is-well-defined",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "statement": "Assume Dependent Choice. For a bounded regular Ω and every Borel E⊂∂Ω, z↦ω_Ω^z(E) is harmonic and takes values in [0,1]; E↦ω_Ω^z(E) is countably additive. If Ω₁⊂Ω₂ are bounded regular domains and E⊂∂Ω₁∩∂Ω₂ is Borel, then ω_{Ω₁}^z(E)≤ω_{Ω₂}^z(E) for z∈Ω₁.",
+        "proof_strategy": "Representing-measure countable additivity is immediate. Harnack comparison of nonnegative harmonic H_φ at poles z and z₀ gives ω^z≤C(z,z₀)ω^{z₀} by positive continuous-function tests. For compact K⊂∂Ω, continuous distance cutoffs φ_m↓1_K yield H_{φ_m}(z)↓ω^z(K); bounded monotone harmonic convergence makes this harmonic. Choose increasing compact K_n⊂E with ω^{z₀}(E∖K_n)→0 by Radon regularity; measure domination makes the same true at every pole, so ω^z(E)=lim_nω^z(K_n), again harmonic by Harnack convergence. For domain comparison fix compact K⊂E. For any continuous φ₂≥1_K with 0≤φ₂≤1 on ∂Ω₂, let u₂=H_{Ω₂,φ₂}. Since Ω₁⊂Ω₂ and u₂ extends continuously to Ω̄₂, its restriction to ∂Ω₁ is continuous: at points in ∂Ω₁∩Ω₂ it uses the interior value, and at common boundary points the regular trace. This nonnegative trace is at least one on K. Uniqueness on Ω₁ gives u₂(z)=∫∂Ω₁u₂dω_{Ω₁}^z≥ω_{Ω₁}^z(K). Infimizing over such φ₂ by regularity of ω_{Ω₂} gives ω_{Ω₁}^z(K)≤ω_{Ω₂}^z(K). Inner regularity of ω_{Ω₁} extends this to Borel E. The comparison uses regular boundary traces and the continuous restriction to ∂Ω₁, not a Brownian argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-green-function-harmonic-measure-representation",
+        "kind": "theorem",
+        "title": "Green and harmonic-measure representation with the 2π sign",
+        "deps": [
+          "cor-complex-power-series-sums-are-analytic",
+          "cor-mean-value-theorem",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem",
+          "def-barrier-and-regular-boundary-point",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-classical-normal-derivative",
+          "def-complex-domain",
+          "def-complex-series-power-series-and-absolute-convergence",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "def-green-function-plane-domain",
+          "def-harmonic-measure-plane-domain",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "def-poisson-kernel-from-a-green-function",
+          "def-radon-measure-on-an-lch-space",
+          "def-real-analytic-function",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-second-countable-space",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-analytic-boundary-green-corrector-is-smooth",
+          "lem-dependent-choice-implies-countable-choice",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "lem-perron-family-is-nonempty-and-bounded",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-dominated-convergence",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-green-function-exists-on-bounded-plane-domains",
+          "thm-green-representation-formula",
+          "thm-green-function-uniqueness-symmetry-and-monotonicity",
+          "thm-harmonic-and-holomorphic-schwarz-reflection-principles",
+          "thm-harmonic-measure-is-well-defined",
+          "thm-heine-borel-rn",
+          "thm-holomorphic-inverse-function-theorem",
+          "thm-integral-triangle-inequality",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-logarithm-derivative-and-integral",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-plane-harmonic-functions-are-smooth-and-real-analytic",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-rational-points-and-boxes-in-rn",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "thm-weyl-lemma-for-the-laplacian",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth"
+        ],
+        "statement": "Assume Dependent Choice (hence Countable Choice). Let Ω be a bounded C¹ regular plane domain and u∈C²(Ω)∩C¹(Ω̄) with Δu bounded on Ω. Then for z∈Ω, u(z)=∫∂Ω u(ξ)dω_Ω^z(ξ)−(1/(2π))∫Ω g_Ω(z,y)Δu(y)dA(y); both integrals are absolutely finite. If in addition ∂Ω is real analytic (or C² harmonic extensions exist for a uniformly dense class of continuous boundary data and the Green correctors satisfy the cited PDE theorem), then dω_Ω^z(ξ)=−(1/(2π))∂_{ν_ξ}g_Ω(z,ξ)ds(ξ), with the outward normal. Neither a pointwise Poisson density nor the weaker C²(Ω)∩C¹(Ω̄) condition alone is asserted without the bounded-Laplacian hypothesis.",
+        "proof_strategy": "Let f=−Δu∈L∞. The Perron corrector is locally continuous in the pole y in the uniform norm: y↦F_y|∂Ω is locally uniformly continuous, and the maximum principle bounds |H_{F_y}−H_{F_{y'}}| by the boundary sup-norm difference. Harmonic continuity in z then makes g(z,y)=F_y(z)−H_{F_y}(z) jointly continuous off the diagonal, hence Borel. By domain monotonicity g≤g_B for a containing disc B. The disc formula gives g_B(z,y)≤C+|log|z−y||, uniformly integrable in y. Thus V(z)=(1/(2π))∫g(z,y)f(y)dA(y) is finite and locally integrable. Fubini with compact test functions, the n=2 PDE identity −Δ_z g(z,y)=2πδ_y, and harmonicity of its Perron corrector give −ΔV=f distributionally. To show V→0 at each regular boundary point ξ, split the y integral into B(ξ,δ), where the uniform logarithmic bound is O(δ²(1+|logδ|)), and its complement, where g(z,y)→0 as z→ξ and dominated convergence applies; then δ↓0. Hence u−V is harmonic by the published Weyl lemma and has continuous boundary data u|∂Ω; uniqueness makes it the harmonic-measure integral. For the optional density clause, analytic boundary charts make polynomial boundary data real analytic; in each chart extend those data locally as a harmonic real part, subtract it from the global harmonic Dirichlet solution, and reflect the zero-trace difference. Thus these harmonic solutions are C² up to the boundary. Real Stone–Weierstrass makes polynomial restrictions uniformly dense on compact ∂Ω. Apply the in-run PDE Green formula to each C² harmonic extension with G=g/(2π), P=−∂νG, then pass uniformly to all continuous data using ∫Pds=1 and positivity. Representing-measure uniqueness gives dω=Pds. In the alternative conditional clause, use its explicitly assumed dense C² class the same way. No C¹-only normal derivative is inferred.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 832,
+    "id": "green-functions-harmonic-measure-and-conformal-invariance-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Green Functions, Harmonic Measure, and Conformal Invariance: Examples and Counterexamples",
+    "companion": "green-functions-harmonic-measure-and-conformal-invariance",
+    "requires": [
+      "green-functions-harmonic-measure-and-conformal-invariance",
+      "further-trigonometric-identities-and-inverses"
+    ],
+    "items": [
+      {
+        "id": "ex-green-function-disc-with-nonzero-pole",
+        "kind": "example",
+        "title": "Green kernel of the disc at a nonzero pole",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-green-function-plane-domain",
+          "def-plane-harmonic-function",
+          "def-unit-disc-upper-half-plane-and-blaschke-factor",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "thm-algebra-of-complex-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions"
+        ],
+        "statement": "For a∈D, a≠0, g_D(z,a)=log|(1−āz)/(z−a)|. It is positive for z∈D∖{a}, symmetric in z,a, and vanishes on |z|=1.",
+        "proof_strategy": "The Möbius map M_a(z)=(z−a)/(1−āz) sends D onto D, since |1−āz|²−|z−a|²=(1−|a|²)(1−|z|²)>0. Therefore −log|M_a(z)| is a nonnegative logarithmic-pole candidate. To prove it is least, pull any competing candidate to the disc and compare on circles r↑1 as in the A-page minimality argument. Direct algebra yields symmetry because |1−āz|=|1−z̄a| and the denominator is symmetric. Boundary modulus one yields zero trace.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-harmonic-measure-of-a-disc-arc",
+        "kind": "example",
+        "title": "Harmonic measure of an arc of the unit circle",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-dependent-choice",
+          "def-unit-disc-upper-half-plane-and-blaschke-factor",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "thm-harmonic-measure-disc-poisson-density"
+        ],
+        "statement": "Assume Dependent Choice for the general harmonic-measure interface. For an arc E={e^{it}:α≤t≤β}⊂∂D and z∈D, ω_D^z(E)=(1/(2π))∫_α^β(1−|z|²)/|e^{it}−z|²dt; at z=0 this is (β−α)/(2π).",
+        "proof_strategy": "Integrate the proved Poisson density over the arc, using the periodic angular convention and ignoring endpoint masses because the density is continuous. At z=0 the kernel equals one. This is the concrete disc-density instance; no boundary-set harmonicity is inferred from indicator continuity. For arbitrary α, reduce the interval modulo 2π and split at a period boundary; periodicity and null endpoints preserve the integral.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-upper-half-plane-harmonic-measure-density",
+        "kind": "example",
+        "title": "Upper half-plane Poisson boundary density",
+        "deps": [
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-poisson-kernel-on-the-disc",
+          "def-principal-inverse-tangent",
+          "def-unit-disc-upper-half-plane-and-blaschke-factor",
+          "lem-tangent-principal-branch-is-bijective",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-continuous-implies-integrable",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem",
+          "thm-principal-inverse-tangent-calculus",
+          "thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic"
+        ],
+        "statement": "Assume Countable Choice for the Lebesgue Borel measure and integral interface and the locally uniform harmonic-limit theorem. For z=x+iy in H={Im z>0}, the measure dω_H^z(t)=[y/(π((t−x)²+y²))]dt on R has total mass one and represents the bounded harmonic Poisson extension of bounded continuous boundary data. The density identity and finite-interval antiderivative are choice-free algebraic calculations. This is an explicit unbounded-domain analogue; the bounded-domain Euclidean-closure transport theorem is not invoked.",
+        "proof_strategy": "Use the Cayley map C(w)=(w−i)/(w+i) from H to D. Change angular variables in the unit-disc Poisson integral with |C′(t)|=2/(t²+1); direct algebra gives P_D(C(z),C(t))|C′(t)|/(2π)=y/[π|t−z|²]. The nonnegative density has improper Riemann integral one by the arctangent antiderivative; under Countable Choice the published improper-Riemann/Lebesgue agreement and indefinite-integral measure theorem make it a Borel probability. For compactly supported continuous f, f∘C⁻¹ extends continuously by zero at the omitted circle point, so the published disc Poisson theorem and conformal invariance make its integral harmonic on H. For arbitrary bounded continuous f, use canonical continuous cutoffs f_N; on each compact K⊂H the kernel tail integral over |t|>N is O_K(1/N), so the Poisson integrals converge locally uniformly and the published harmonic-limit theorem applies under the declared Countable Choice. At every finite boundary point, split the integral into a small interval where continuity controls f(t)−f(t₀) and its complement whose kernel mass tends to zero; this proves the claimed boundary limit. The point at infinity is used only in the compact-support calculation, with no Euclidean closure homeomorphism claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-interval-harmonic-measure-in-upper-half-plane",
+        "kind": "example",
+        "title": "Harmonic measure of a real interval from the upper half-plane",
+        "deps": [
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "def-borel-sigma-algebra",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-principal-inverse-tangent",
+          "ex-upper-half-plane-harmonic-measure-density",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "thm-principal-inverse-tangent-calculus"
+        ],
+        "statement": "Assume Countable Choice for the explicit Borel measure. For a<b and z=x+iy∈H, ω_H^z([a,b])=(1/π)[arctan((b−x)/y)−arctan((a−x)/y)], with arctangent in (−π/2,π/2); the finite-interval integral identity itself is choice-free.",
+        "proof_strategy": "Integrate y/[π((t−x)²+y²)] from a to b, using s=(t−x)/y. Check the difference lies in [0,1], tends to one as z approaches an interior point of [a,b] from above and to zero at an exterior boundary point; endpoint limits are one half for a vertical approach.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-annulus-harmonic-measure-of-boundary-circles",
+        "kind": "example",
+        "title": "Harmonic measure of the two annulus boundary circles",
+        "deps": [
+          "def-barrier-and-regular-boundary-point",
+          "def-complex-annulus",
+          "def-complex-domain",
+          "def-continuous-map-top",
+          "def-dependent-choice",
+          "def-harmonic-measure-plane-domain",
+          "def-metric-interior-closure-boundary",
+          "def-plane-harmonic-function",
+          "def-plane-subharmonic-function",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-planar-barrier-controls-perron-solutions",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-harmonic-measure-is-well-defined"
+        ],
+        "statement": "Assume Dependent Choice. In A={r<|z|<R}, 0<r<R<∞, the harmonic measure of the inner circle is log(R/|z|)/log(R/r), and that of the outer circle is log(|z|/r)/log(R/r). Their sum is one.",
+        "proof_strategy": "At each circular boundary point ζ, local C¹ geometry places the annulus in an inward sector of opening <2π. Rotate this sector to |arg(z−ζ)|<θ with θ<π, choose 0<λ<π/(2θ), and use the strictly negative local harmonic peak −Re((e^{-iα}(z−ζ))^λ). The published gluing lemma globalizes the peak to a barrier; the local barrier lemma gives regularity without the defective published barrier proof. The logarithmic radius s=log|z| is harmonic on the annulus and linearly interpolates the boundary values 1 and 0 on the two circles. Those circles are clopen subsets of ∂A, so their indicator functions are continuous on ∂A. Uniqueness of the regular Dirichlet solution identifies the two functions with harmonic-measure masses. This is the conformal logarithmic-coordinate calculation; a full Fourier-series density on each circle is not asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-slit-plane-green-function-from-square-root",
+        "kind": "example",
+        "title": "Green kernel of a slit plane via the square-root map",
+        "deps": [
+          "def-biholomorphic-map",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-domain",
+          "def-complex-power-from-holomorphic-logarithm-branch",
+          "def-green-function-plane-domain",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions",
+          "thm-slit-plane-root-branch-biholomorphism-to-a-sector"
+        ],
+        "statement": "For Ω=C∖(−∞,0] and a,z∈Ω with z≠a, use the principal square root with Re√z>0. Then g_Ω(z,a)=log|(√z+overline{√a})/(√z−√a)|. The kernel tends to zero on the slit and at infinity, but no general Euclidean boundary map is used.",
+        "proof_strategy": "The principal square root sends Ω biholomorphically to the right half-plane. Reflection of the pole w_a=√a across the imaginary axis is −overline{w_a}; hence log|(w+overline{w_a})/(w−w_a)| is positive harmonic off w_a, has the right log singularity and is least by comparison on half-disc exhaustions. Pull back under √z using the planar Green-kernel covariance theorem. As z approaches either side of the slit, √z approaches the imaginary axis and the numerator and denominator have equal modulus; as |z|→∞ their quotient tends to one. This example is unbounded and is not an application of bounded-domain harmonic-measure transport.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Lyubich, Dynamics of Quadratic Polynomials, Vol. I, Appendix 1 §§10.1–10.9",
+              "url": "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-punctured-disc-irregular-boundary-green-function",
+        "kind": "example",
+        "title": "An irregular puncture does not force the Green kernel to vanish",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-domain",
+          "def-countable-choice",
+          "def-green-function-plane-domain",
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "def-plane-harmonic-function",
+          "def-plane-subharmonic-function",
+          "def-unit-disc-upper-half-plane-and-blaschke-factor",
+          "ex-green-function-disc-with-nonzero-pole",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-perron-family-is-nonempty-and-bounded",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "thm-green-function-exists-on-bounded-plane-domains"
+        ],
+        "statement": "Let Ω=D∖{0} and a∈Ω. The canonical Green function is g_Ω(z,a)=g_D(z,a), so lim_{z→0}g_Ω(z,a)=log(1/|a|)>0 although 0∈∂Ω. Thus assigning zero at every Euclidean boundary point would exclude the correct Green kernel.",
+        "proof_strategy": "Let h_D be the disc harmonic extension of b_a=−log|·−a| from |z|=1. If v is any Perron lower function on D∖{0}, then v−h_D is subharmonic, bounded above near 0, and has boundary limsup ≤0 on |z|=1. For every ε>0, v−h_D+εlog|z| has boundary limsup ≤0 on both |z|=1 and the puncture (where εlog|z|→−∞), so the punctured-domain subharmonic maximum principle gives v≤h_D−εlog|z|. Let ε↓0 to get v≤h_D. Conversely h_D+εlog|z| is a lower Perron function: it has the right circle values and tends to −∞ at 0. Let ε↓0 to obtain H_{Ω,b_a}=h_D. Therefore g_Ω=g_D|Ω and its puncture limit is log(1/|a|)>0. The in-run PDE counterexample uses a stronger continuous-zero-trace definition and is orientation only. On the unit circle the identity |1−conj(a)ξ|=|conj(ξ)−conj(a)|=|ξ−a| gives the correct boundary datum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Axler, Bourdon and Ramey, Harmonic Function Theory, 2nd ed., Chapter 11",
+              "url": "https://www.axler.net/HFT.pdf"
+            },
+            {
+              "title": "Boris Khoruzhenko, LTCC Potential Theory lecture notes, §§4.1–4.2",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §3",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

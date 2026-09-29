@@ -1,0 +1,2867 @@
+{
+  "version": 1,
+  "scope": [
+    "def-nevanlinna-counting-proximity-and-characteristic",
+    "thm-poisson-jensen-formula-meromorphic-function",
+    "thm-nevanlinna-quantities-well-defined",
+    "ex-poisson-jensen-with-a-repeated-zero",
+    "lem-meromorphic-jensen-formula-with-centre-divisor",
+    "thm-ahlfors-shimizu-characteristic-identity",
+    "thm-nevanlinna-first-main-theorem",
+    "def-order-of-growth-meromorphic-function",
+    "thm-nevanlinna-characteristic-elementary-laws",
+    "ex-nevanlinna-regularisation-when-f-zero-equals-a",
+    "prop-nevanlinna-order-agrees-with-entire-maximum-modulus-order",
+    "ex-nevanlinna-characteristic-of-reciprocal-gamma",
+    "ex-nevanlinna-characteristic-under-target-mobius-map",
+    "ex-nevanlinna-characteristics-of-elementary-functions",
+    "thm-rational-functions-characterized-by-logarithmic-characteristic",
+    "ex-rational-degree-as-logarithmic-characteristic"
+  ],
+  "contracts": {
+    "def-nevanlinna-counting-proximity-and-characteristic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The definition starts with a specified meromorphic function on C; it asserts no pointwise count for an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If the selected divisor is empty, n and N are zero; the definition also handles a centre divisor through n(0,a) log r."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and A single a-point is counted with its local multiplicity in the closed disc."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Finite constant maps are permitted, with the attained target excluded; for any other target the divisor count is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and The closed-disc convention includes points with |z|=r; the chordal formula assigns the sphere endpoints by continuity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The definition fixes f, a and r and makes no selection or use of AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines counting and proximity functions and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines counting and proximity functions and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "HIGH (score 6). Current claim/proof focus: Closed-disc divisor counts include centre multiplicity; the regularized count and chordal sphere endpoints make the formulas typed. Boundary review: empty: Statement: The definition starts with a specified meromorphic function on C; it asserts no pointwise count for an empty domain. zero: Statement: If the selected divisor is empty, n and N are zero; the definition also handles a centre divisor through n(0,a) log r. Checked its declared citation evidence, including the locally declared definitions, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "thm-poisson-jensen-formula-meromorphic-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-isolated-zeros-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "A holomorphic function on a complex domain that is not identically zero has only isolated zeros.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-poles-meromorphic-function-are-discrete-and-countable",
+          "source_section": "Statement",
+          "quote": "every $a\\in P$ has a neighbourhood in $\\Omega$ containing no other pole",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pole-characterizations",
+          "source_section": "Statement",
+          "quote": "the pole order is $m$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-poisson-representation-for-disc-harmonic-functions",
+          "source_section": "Statement",
+          "quote": "Let $u$ be harmonic on an open set containing the closed disc",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "source_section": "Statement",
+          "quote": "satisfies the Cauchy–Riemann equations",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "source_section": "Statement",
+          "quote": "is of class $C^k$ for every natural $k$, hence smooth",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-divisor-list",
+          "claim": "The disc has finitely many divisor points with finite multiplicities/orders.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "disc-blaschke-factor",
+          "claim": "The displayed factor is analytic on the closed disc, has unit boundary modulus and logarithm equal to minus the Green kernel.",
+          "step": "1.2",
+          "inputs": [
+            "algebra",
+            "given"
+          ]
+        },
+        {
+          "id": "cancel-divisors",
+          "claim": "Multiplying/dividing by the listed factors leaves a nowhere-zero holomorphic remainder with unchanged boundary modulus.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "harmonic-log-modulus",
+          "claim": "The zero-free remainder has harmonic log modulus on a neighborhood of the closed disc.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "poisson-jensen-signs",
+          "claim": "Poisson representation and the boundary factors yield the zero-negative and pole-positive Green sums.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "boundary-radius-limit",
+          "claim": "Angular logarithmic singularities are L1-continuous at divisor radii and boundary Green terms vanish.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: if the disc has no zeros or poles, both sums are empty and the formula is Poisson representation for log|f|."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Statement: The hypothesis excludes f identically zero; evaluation points on the divisor are excluded, while the centre z=0 is allowed when it is not a divisor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Steps 1.1–3.1: a single simple zero or pole contributes exactly one signed Green kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Statement and For constant nonzero f there are no divisors and both sides equal log|f|."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and Step 4.1 proves the angular L1 limit at a boundary divisor and the boundary Green term tends to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The divisor list on the compact disc is finite by steps 1.1–2.1; listing a finite set uses no AC or choice of an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a Poisson–Jensen identity and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a Poisson–Jensen identity and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 10). Current claim/proof focus: Finite interior divisor factors remove zeros and poles before Poisson representation; boundary divisors use a regular-radius limit. Boundary review: empty: Steps 1.1–3.1: if the disc has no zeros or poles, both sums are empty and the formula is Poisson representation for log|f|. zero: Statement and Statement: The hypothesis excludes f identically zero; evaluation points on the divisor are excluded, while the centre z=0 is allowed when it is not a divisor. Checked its declared citation evidence, including thm-isolated-zeros-holomorphic-function, thm-poles-meromorphic-function-are-discrete-and-countable, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "thm-nevanlinna-quantities-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "For $r>0$, let $n(r,a;f)$ be the sum of the local multiplicities of the $a$-points in the closed disc $|z|\\le r$; when $a=\\infty$, these are the poles with their pole orders",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "$$ \\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}},\\qquad \\delta(\\infty,\\infty)=0. $$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-isolated-zeros-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "A holomorphic function on a complex domain that is not identically zero has only isolated zeros.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-poles-meromorphic-function-are-discrete-and-countable",
+          "source_section": "Statement",
+          "quote": "every $a\\in P$ has a neighbourhood in $\\Omega$ containing no other pole",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pole-characterizations",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on a punctured disc $0<|z-a|<R$. Then the following are\nequivalent:\n\n1. $a$ is a pole of $f$;\n2. the Laurent expansion of $f$ has a finite nonzero principal part;\n3. $|f(z)|\\to\\infty$ as $z\\to a$;\n4. $1/f$ extends holomorphically across $a$ and vanishes there.\n\nIf these conditions hold and the principal part is\n\n$$c_{-m}(z-a)^{-m}+c_{-(m-1)}(z-a)^{-(m-1)}+\\cdots+c_{-1}(z-a)^{-1}$$\n\nwith $c_{-m}\\ne0$, then the pole order is $m$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The function is **integrable** when both integrals are finite, equivalently when $\\int|f|\\,d\\mu<+\\infty$.",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-poles",
+          "claim": "The poles counted for target infinity are finite on each bounded disc and have finite orders.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "finite-target-local-log",
+          "claim": "At a finite target point, chordal proximity has one logarithmic singularity with a continuous remainder.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "finite-target-proximity-at-pole",
+          "claim": "For a finite target the proximity integrand extends continuously across poles.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "logarithm-mean-off-radius",
+          "claim": "Away from |b|=r, the mean of log|re^{it}-b| equals log max(r,|b|).",
+          "step": "1.4",
+          "inputs": [
+            "algebra"
+          ]
+        },
+        {
+          "id": "infinity-local-log",
+          "claim": "At a pole, infinity-proximity has a logarithmic singularity with a continuous remainder.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "finite-target-counts",
+          "claim": "Every finite target has finitely many preimages on each bounded disc, including near poles.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "logarithm-mean-on-radius",
+          "claim": "At r=|b| the logarithm is integrable with mean log|b|.",
+          "step": "2.3",
+          "inputs": [
+            "F7",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrated-count-sum",
+          "claim": "The regularized integrated count is a finite sum continuous at divisor-entry radii.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "annular-continuous-remainder",
+          "claim": "Removing the finitely many singular logarithms leaves a continuous integrand on a compact annulus.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "base-change-identity",
+          "claim": "Changing the lower limit subtracts exactly N(r0,a), including reversed radii.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proximity-continuity",
+          "claim": "The remainder and explicit logarithm means yield finite continuous proximity.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.4",
+            "step 2.3",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonmonotone-proximity",
+          "claim": "For f(z)=z+1/z, infinity proximity at both r=1/4 and r=4 exceeds its value at r=1, ruling out monotonicity in either direction.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2: an empty divisor list leaves no count terms or angular logarithmic singularities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.3: a divisor at |z|=r has an integrable logarithm with finite mean; step 3.1 regularizes a centre divisor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 2.3: one divisor contributes one continuous log(r/|b|) term and one integrable angular logarithm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a constant finite map has no divisor for an unattained target and has finite constant proximity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.3 and 3.1: an entering divisor contributes zero at r=|b| and the circle logarithm has finite mean there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 use only compactness and finite divisor lists; no selection or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves finiteness and continuity properties, with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves finiteness and continuity properties, with no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 10). Current claim/proof focus: Local divisor logarithms have continuous circular means through their radii, and the centre term cancels the apparent divergence of N. Boundary review: empty: Steps 1.1–2.2: an empty divisor list leaves no count terms or angular logarithmic singularities. zero: Steps 1.2 and 2.3: a divisor at |z|=r has an integrable logarithm with finite mean; step 3.1 regularizes a centre divisor. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "ex-poisson-jensen-with-a-repeated-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-poisson-jensen-formula-meromorphic-function",
+          "source_section": "Statement",
+          "quote": "-\\sum_{|b|<R,\\ f(b)=0}m_bG_R(z,b)+\\sum_{|p|<R,\\ p\\text{ a pole}}\\nu_pG_R(z,p).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "repeated-zero-data",
+          "claim": "The polynomial has one interior zero of multiplicity two, no poles, and nonzero centre value.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "green-term-multiplicity",
+          "claim": "The zero divisor supplies the term -2G_R(z,b) in Poisson–Jensen.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "centre-correction",
+          "claim": "The center Green value and boundary logarithmic mean give the correction 2 log(R/|b|).",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the pole divisor is empty, so the formula has no pole Green terms; the zero divisor consists only of b."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: b is the sole zero location and has multiplicity two; the centre value b^2 is nonzero by 0<|b|."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: one distinct zero location contributes twice because its multiplicity is two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example hypothesis excludes b=0 and |b|=R; the centre and boundary divisor degeneracies are absent."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the strict |b|<R hypothesis excludes boundary zeros; evaluation is at the centre and other interior points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example fixes b and R explicitly and lists a one-point divisor; no selection or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example computes a Poisson–Jensen term and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example computes a Poisson–Jensen term and contains no biconditional."
+        }
+      ]
+    },
+    "lem-meromorphic-jensen-formula-with-centre-divisor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-poisson-jensen-formula-meromorphic-function",
+          "source_section": "Statement",
+          "quote": "$$ \\log|f(z)|=\\frac1{2\\pi}\\int_0^{2\\pi}\\frac{R^2-|z|^2}{|Re^{it}-z|^2}\\log|f(Re^{it})|\\,dt-\\sum_{|b|<R,\\ f(b)=0}m_bG_R(z,b)+\\sum_{|p|<R,\\ p\\text{ a pole}}\\nu_pG_R(z,p). $$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "$$ N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt. $$",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-laurent-expansion-annulus",
+          "source_section": "Statement",
+          "quote": "Then there are complex numbers $c_n$ indexed by $n\\in\\mathbb Z$ such that $$f(z)=\\sum_{n\\in\\mathbb Z}c_n(z-a)^n$$ for every $z\\in A(a;r,R)$, and the series converges locally uniformly on the annulus.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nevanlinna-quantities-well-defined",
+          "source_section": "Statement",
+          "quote": "the count $n(r,a;f)$ is finite for each bounded disc, and $N(r,a;f)$ and $m(r,a;f)$ are finite and continuous for $r>0$, including at a divisor radius.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "$$ \\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}},\\qquad \\delta(\\infty,\\infty)=0. $$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on a neighbourhood of $a$. A holomorphic function has finite order $m$ at $a$ if and only if, on some neighbourhood of $a$, it has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0$.\n\nMoreover, $\\operatorname{ord}_a(f)=+\\infty$ if and only if $f$ vanishes on a neighbourhood of $a$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-pole-characterizations",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on a punctured disc $0<|z-a|<R$. Then the following are\nequivalent:\n\n1. $a$ is a pole of $f$;\n2. the Laurent expansion of $f$ has a finite nonzero principal part;\n3. $|f(z)|\\to\\infty$ as $z\\to a$;\n4. $1/f$ extends holomorphically across $a$ and vanishes there.\n\nIf these conditions hold and the principal part is\n\n$$c_{-m}(z-a)^{-m}+c_{-(m-1)}(z-a)^{-(m-1)}+\\cdots+c_{-1}(z-a)^{-1}$$\n\nwith $c_{-m}\\ne0$, then the pole order is $m$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-poles-meromorphic-function-are-discrete-and-countable",
+          "source_section": "Statement",
+          "quote": "Let $f$ be meromorphic on a plane domain $\\Omega$, and let $P\\subseteq\\Omega$ be\nits pole set. Then:\n\n1. every $a\\in P$ has a neighbourhood in $\\Omega$ containing no other pole, so\n   $P$ is discrete in $\\Omega$;\n2. $\\Omega\\setminus P$ is open, so $P$ is closed in $\\Omega$;\n3. $P$ is at most countable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-identity-theorem-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "If two holomorphic functions on a complex domain agree on a set with an accumulation point in the domain, then they agree everywhere on the domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-meromorphic-function-complex-domain",
+          "source_section": "Definition",
+          "quote": "$f$ is holomorphic on $\\Omega\\setminus P$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "regular-radius-poisson-jensen",
+          "claim": "At a regular radius, Poisson–Jensen for f-a separates the central zero and pole Green contributions from all noncentral divisors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "regular-part-connected-domain",
+          "claim": "The complement of the closed discrete pole set is a nonempty connected domain on which f is holomorphic.",
+          "step": "1.2",
+          "inputs": [
+            "F8",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "centre-pole-order",
+          "claim": "At a central pole, the Laurent expansion of f-a starts at exponent minus the pole order.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "ordinary-centre-value",
+          "claim": "If f(0) is finite and differs from a, the leading exponent is zero and m0-nu0=0.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-centre-zero-order",
+          "claim": "If f(0)=a, its zero has finite order: infinite order would make f=a on the connected regular part, contradicting nonconstancy or the pole property.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F9",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "centre-exponent-cases",
+          "claim": "The pole, ordinary-value and zero cases give k_a=m0-nu0 and the Laurent leading-term logarithm.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "centre-limit",
+          "claim": "Taking z to zero in Poisson–Jensen cancels the central logarithmic singularity and yields the boundary mean plus noncentral Green sums.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrated-count-identification",
+          "claim": "Integrating the finite counting steps identifies the noncentral divisor sums with N(r,a)-N(r,infinity), including the central coefficient k_a log r.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "boundary-radius-extension",
+          "claim": "The normalized chordal identity and continuity of the means and counts extend the result to divisor radii by radial limit.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.2: when there are no noncentral divisors, both sums vanish and only the centre terms remain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1 and 4.1: when f(0)=a, the finite central zero order enters k_a and its Green singularity cancels."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3, 1.4 and 3.1: a single central zero or pole contributes its signed order to k_a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.2–2.1: nonconstant f ensures f-a is not identically zero and its centre zero has finite order."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 extends to a divisor radius by the finite continuous radial limits of M_r, N, and m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.2 use only finite divisor lists on a fixed bounded disc; no selection or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma proves an identity and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This lemma proves an identity and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 10). Current claim/proof focus: The local leading Laurent coefficient handles a central zero or pole; finite divisor weights give the Jensen identity at all radii. Boundary review: empty: Steps 1.1 and 4.2: when there are no noncentral divisors, both sums vanish and only the centre terms remain. zero: Steps 2.1, 3.1 and 4.1: when f(0)=a, the finite central zero order enters k_a and its Green singularity cancels. Checked its declared citation evidence, including thm-poisson-jensen-formula-meromorphic-function, def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "thm-ahlfors-shimizu-characteristic-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "$$ N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt. $$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "T(r,f)=m(r,\\infty;f)+N(r,\\infty;f)",
+          "uses": [
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pole-characterizations",
+          "source_section": "Statement",
+          "quote": "If these conditions hold and the principal part is $$c_{-m}(z-a)^{-m}+c_{-(m-1)}(z-a)^{-(m-1)}+\\cdots+c_{-1}(z-a)^{-1}$$ with $c_{-m}\\ne0$, then the pole order is $m$.",
+          "uses": [
+            "1.1",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "source_section": "Statement",
+          "quote": "satisfies the Cauchy–Riemann equations",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "source_section": "Statement",
+          "quote": "is of class $C^k$ for every natural $k$, hence smooth.",
+          "uses": [
+            "1.2",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nevanlinna-quantities-well-defined",
+          "source_section": "Statement",
+          "quote": "the count $n(r,a;f)$ is finite for each bounded disc, and $N(r,a;f)$ and $m(r,a;f)$ are finite and continuous for $r>0$, including at a divisor radius.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "when $\\int|f|\\,d\\mu<+\\infty$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pole-leading-term-reciprocal-zero",
+          "claim": "The pole Laurent term makes the reciprocal a zero of the same order, so it factors as (z-p)^m q with q(p) nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "spherical-potential-laplacian",
+          "claim": "Away from poles the Laplacian of one half log(1+|f|^2) equals twice the squared spherical derivative.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "circular-logarithm-mean",
+          "claim": "For every point p, the circular mean of log|z-p| is log max(r,|p|), including the integrable endpoint.",
+          "step": "1.3",
+          "inputs": [
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrated-pole-count",
+          "claim": "Integrating the finite pole-count step function gives the centre term and the finite sum of log(r/|p|).",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "smooth-corrected-potential",
+          "claim": "Adding each pole order times log|z-p| makes the spherical potential C^2 through the finite set of poles in a regular disc.",
+          "step": "1.5",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "spherical-derivative-continuity-and-area-integrability",
+          "claim": "The reciprocal identity extends the spherical derivative continuously at each pole, leaving a bounded continuous area density with finite integral.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "centre-count-reconciliation",
+          "claim": "The centre circular mean and integrated pole count give T=V(r)-V(0)+C_infinity.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "corrected-potential-laplacian",
+          "claim": "The corrected potential has Laplacian 2(f#)^2 throughout the disc, including at poles by continuity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "radial-laplacian-identity",
+          "claim": "Polar averaging gives (tV')' = A' with the stated normalization of A.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "area-characteristic-integration",
+          "claim": "Integrating the radial identity twice from zero gives V(r)-V(0)=T_AS(r).",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 2.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "regularity-monotonicity-and-endpoints",
+          "claim": "The area integral is finite and continuous, T_AS is nondecreasing and convex in log r, and continuity extends the equality across pole radii.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.2: if the disc has no poles, the finite pole sums vanish; the smooth circular mean difference is exactly the area characteristic."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 5.1: when f(0)=0, the finite-centre constant is 0 and the area integral still converges at the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.2: a single noncentral pole contributes exactly m log(r/|p|) to N and the matching log|p| term to V(0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the theorem assumes f is nonconstant; the spherical derivative remains defined at regular points and is extended at poles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 6.1: a pole on the circle has a finite logarithmic mean, and continuity of T and T_AS extends the identity to its radius."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.1 use only the finite pole set in each compact disc; the proof makes no selections from an infinite family and uses no AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves an identity and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves an identity and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 13). Current claim/proof focus: The spherical derivative extends at poles; Delta log sqrt(1+|f|^2)=2(f#)^2 away from pole corrections and polar integration yields T. Boundary review: empty: Steps 1.4 and 2.2: if the disc has no poles, the finite pole sums vanish; the smooth circular mean difference is exactly the area characteristic. zero: Steps 2.2 and 5.1: when f(0)=0, the finite-centre constant is 0 and the area integral still converges at the origin. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "thm-nevanlinna-first-main-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "\\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "m(r,a;f)=\\frac1{2\\pi}\\int_0^{2\\pi}\\log\\frac1{\\delta(f(re^{it}),a)}\\,dt,\\qquad T(r,f)=m(r,\\infty;f)+N(r,\\infty;f).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-meromorphic-jensen-formula-with-centre-divisor",
+          "source_section": "Statement",
+          "quote": "M_r\\log|f-a|=\\log|c_a|+N(r,a;f)-N(r,\\infty;f)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nevanlinna-quantities-well-defined",
+          "source_section": "Statement",
+          "quote": "the count $n(r,a;f)$ is finite for each bounded disc, and $N(r,a;f)$ and $m(r,a;f)$ are finite and continuous for $r>0$, including at a divisor radius.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pointwise-chordal-identity",
+          "claim": "At a regular boundary point the finite-target logarithmic chordal proximity equals the spherical potential plus the target constant minus log|f-a|.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "averaged-proximity-difference",
+          "claim": "Averaging the pointwise identity subtracts the infinity proximity and leaves the finite-target constant and logarithmic mean.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "finite-target-first-main-identity",
+          "claim": "The centre-divisor Jensen identity turns the averaged difference into C(f,a)-N(r,a)+N(r,infinity), which rearranges to the exact theorem.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "all-radii-and-infinity-target",
+          "claim": "Continuity extends the finite-target identity from dense regular radii; the infinity-target case is the characteristic definition.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "bounded-error-corollary",
+          "claim": "The exact difference is the fixed finite constant C(f,a), hence O_{f,a}(1).",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the centre Jensen formula; if there are no a-points or poles in the disc, both divisor counts vanish and the averaged chordal identity still gives the fixed centre term."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: when f(0)=a, c_a is the first nonzero Taylor coefficient and the centre-divisor Jensen identity already includes its regularized count."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: a single simple noncentral a-point contributes its log(r/|b|) count term; a central one is covered by the regularized n(0,a) log r term in the centre-divisor identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: nonconstant f excludes f identically equal to a for finite a; for a=infinity the identity follows directly from the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses finite continuity of proximity and counting functions at divisor radii, so circles through a-points or poles are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the dense set of regular radii and continuity; the target is fixed and no selection from an infinite family or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This theorem is an identity and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This theorem is an identity and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "HIGH (score 6). Current claim/proof focus: The chordal identity and central-divisor Jensen formula produce an exact radius-independent target constant, including a=infinity. Boundary review: empty: Step 3.1 uses the centre Jensen formula; if there are no a-points or poles in the disc, both divisor counts vanish and the averaged chordal identity still gives the fixed centre term. zero: Statement and step 3.1: when f(0)=a, c_a is the first nonzero Taylor coefficient and the centre-divisor Jensen identity already includes its regularized count. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "def-order-of-growth-meromorphic-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "$$ N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "T(r,f)=m(r,\\infty;f)+N(r,\\infty;f)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "For stereographic projection of the unit sphere, $\\delta$ is half the Euclidean chord length, so the chordal sphere has diameter one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nevanlinna-first-main-theorem",
+          "source_section": "Statement",
+          "quote": "m(r,a;f)+N(r,a;f)=T(r,f)+C(f,a)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ahlfors-shimizu-characteristic-identity",
+          "source_section": "Statement",
+          "quote": "T(r,f)=T_{\\rm AS}(r,f)+C_\\infty(f)",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "central-count-growth-bound",
+          "claim": "The integrated count is at least its centre multiplicity times log r for r>1.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "characteristic-eventual-growth",
+          "claim": "A finite centre target chosen as f(0), or a central pole, gives T(r,f) at least log r minus a fixed constant; hence T>1 eventually.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "order-domain-and-monotonicity",
+          "claim": "The Ahlfors–Shimizu identity makes T nondecreasing; eventual T>1 makes the log ratio defined and nonnegative, so both limits lie in [0,infinity].",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 is vacuous for an empty divisor, while step 2.1 chooses the centre value when finite or infinity at a pole, ensuring the growth bound uses a nonempty central divisor."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: a central a-point has positive multiplicity n(0,a), and its regularized count contributes n(0,a) log r."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: one simple central point contributes log r; a higher multiplicity gives a stronger lower bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant finite maps are assigned upper and lower order zero by convention; the nonconstant hypothesis is used for the growth bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the limits are taken as r tends to infinity, and restricting to sufficiently large r>1 with T>1 leaves the same endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the determined target f(0) when finite, or infinity when 0 is a pole; no selection from a family or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines growth orders and proves well-definedness; it contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines growth orders and proves well-definedness; it contains no biconditional."
+        }
+      ]
+    },
+    "thm-nevanlinna-characteristic-elementary-laws": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "For finite $w,a$, put\n\n$$ \\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}},\\qquad \\delta(\\infty,\\infty)=0. $$\n\nAt a pole or a point where $f=a$, the expressions below are understood as\nlogarithmic singularities in the angular Lebesgue integral. Define the\nproximity and characteristic by\n\n$$ m(r,a;f)=\\frac1{2\\pi}\\int_0^{2\\pi}\\log\\frac1{\\delta(f(re^{it}),a)}\\,dt,\\qquad T(r,f)=m(r,\\infty;f)+N(r,\\infty;f). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt.",
+          "uses": [
+            "2.1",
+            "2.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nevanlinna-first-main-theorem",
+          "source_section": "Statement",
+          "quote": "m(r,a;f)+N(r,a;f)=T(r,f)+C(f,a).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fundamental-theorem-of-algebra-liouville-proof",
+          "source_section": "Statement",
+          "quote": "Every nonconstant complex polynomial has a complex root.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-chordal-classical-comparison",
+          "claim": "The difference between the chordal characteristic and T0=m0+N∞ is uniformly bounded independently of h and r.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "product-and-sum-bounds",
+          "claim": "The pointwise log+ estimates and local pole-order inequalities yield the product and sum upper laws for all r≥1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reciprocal-characteristic-law",
+          "claim": "The chordal proximity to zero is the infinity proximity of 1/f, and its pole count is N(r,0;f); the First Main Theorem gives the reciprocal law.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "polynomial-composition-law",
+          "claim": "A degree-p polynomial has log+ modulus p log+|w| up to a uniform bounded error and multiplies every pole order by p.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rational-normalization",
+          "claim": "Reciprocal and target-translation reductions place the denominator at degree d and numerator below degree d without changing the characteristic beyond O(1).",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rational-proximity-comparison",
+          "claim": "In this normalized case, the nonempty finite zero set of $Q$ is disjoint from that of $P$. If $P$ has zeros, let $\\epsilon$ be one third of the minimum distance between the two finite zero sets; if $P$ has none, take any $\\epsilon>0$. Let $\\Gamma$ be the union of the open $\\epsilon$-discs around the zeros of $Q$ and put $\\Omega=\\widehat{\\mathbb C}\\setminus\\Gamma$. Its closure avoids the zeros of $P$. On $\\overline\\Gamma$, $|P|$ has a positive lower bound and a finite upper bound, so $|R|=|P/Q|$ is bounded above and below by positive constant multiples of $|1/Q|$. On $\\Omega$, both $R$ and $1/Q$ are bounded, including at infinity because $\\deg P<\\deg Q$. Splitting each circle into the sets where $f$ lies in $\\Gamma$ and $\\Omega$, these comparisons and the boundedness of $\\log^+$ on bounded values give $m_0(r,R(f))=m_0(r,1/Q(f))+O_R(1)$. Values at isolated poles are interpreted through their integrable logarithmic singularities. [F4, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "rational-pole-divisor-comparison",
+          "claim": "The poles of R(f) and 1/Q(f) coincide with multiplicity in the normalized case; together with the proximity comparison this gives their T0 comparison.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rational-composition-law",
+          "claim": "The reciprocal and polynomial laws applied to Q(f), followed by the bounded normalization comparison and reductions, prove the degree-d rational composition law.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "degree-zero-rational-map",
+          "claim": "A degree-zero rational map is constant and its chordal characteristic is a finite constant.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The pointwise log+ inequalities remain valid when a pole divisor is empty; its integrated count is zero. In the rational proof, if no Q-preimage occurs, the pole-divisor comparison in step 5.1 still holds with both counts zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes identically zero sums and products as constants with no poles, and step 2.3 includes constant polynomial values. The reciprocal claim explicitly excludes f identically zero; nonzero constants are handled separately in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single pole contributes its local order to N. Step 2.3 multiplies that order by p for a polynomial, and step 5.1 proves equal multiplicities for each pole of R(f) and 1/Q(f)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant meromorphic inputs give finite constant characteristics; nonzero constants satisfy the reciprocal law directly. Step 2.3 covers constant polynomials, and step 7.1 covers degree-zero rational maps. Positive-degree rational composition assumes nonconstant f as stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The inequalities are proved for r≥1, which suffices as r→∞. The closed-disc count gives zero weight to a divisor point on |z|=r, and logarithmic boundary singularities in the proximity means are integrable under the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only neighborhood set in step 4.1 surrounds the finite zero set of Q; coprimality gives positive separation from the finite zero set of P, so one common radius suffices. No infinite family is selected and no AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states inequalities and equalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states inequalities and equalities, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "HIGH (score 5). Current claim/proof focus: Log-plus and pole-order inequalities give sum and product laws; the normalized rational denominator now explicitly uses FTA before local pole comparison. Boundary review: empty: The pointwise log+ inequalities remain valid when a pole divisor is empty; its integrated count is zero. In the rational proof, if no Q-preimage occurs, the pole-divisor comparison in step 5.1 still holds with both counts zero. zero: Step 2.1 includes identically zero sums and products as constants with no poles, and step 2.3 includes constant polynomial values. The reciprocal claim explicitly excludes f identically zero; nonzero constants are handled separately in step 2.2. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "ex-nevanlinna-regularisation-when-f-zero-equals-a": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "For finite $w,a$, put\n\n$$ \\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}},\\qquad \\delta(\\infty,\\infty)=0. $$\n\nAt a pole or a point where $f=a$, the expressions below are understood as\nlogarithmic singularities in the angular Lebesgue integral. Define the\nproximity and characteristic by\n\n$$ m(r,a;f)=\\frac1{2\\pi}\\int_0^{2\\pi}\\log\\frac1{\\delta(f(re^{it}),a)}\\,dt,\\qquad T(r,f)=m(r,\\infty;f)+N(r,\\infty;f). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-meromorphic-jensen-formula-with-centre-divisor",
+          "source_section": "Statement",
+          "quote": "M_r\\log|f-a|=\\log|c_a|+N(r,a;f)-N(r,\\infty;f)",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nevanlinna-first-main-theorem",
+          "source_section": "Statement",
+          "quote": "m(r,a;f)+N(r,a;f)=T(r,f)+C(f,a).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nevanlinna-first-main-theorem",
+          "source_section": "Statement",
+          "quote": "C(f,a)=\\tfrac12\\log(1+|a|^2)-\\log|c_a|",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "central-divisor-data",
+          "claim": "The only finite-a point is the centre, with order m, and the pole divisor is empty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "regularized-count",
+          "claim": "The central term m log r and the vanishing noncentral-count integrand give N(r,a)=m log r.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unregularized-divergence",
+          "claim": "The raw count integral is m log(r/epsilon) from epsilon to r and tends to infinity as epsilon decreases to zero.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "centre-jensen-mean",
+          "claim": "The boundary logarithm is constant at log|c|+m log r, agreeing with the exact centre-divisor Jensen identity.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "direct-first-main-constant",
+          "claim": "Averaging the chordal formula and cancelling the regularized m log r count computes the finite-target constant.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coefficient-and-invalid-naive-term",
+          "claim": "The first nonzero centre coefficient is c and exponent m; the First Main Theorem constant is finite while log|f(0)-a| is not.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The a-divisor cannot be empty because c is nonzero and m≥1; step 1.1 shows the pole divisor is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The unique a-point lies at 0. Step 1.2 gives N=m log r; it equals zero at r=1 and may be negative for 0<r<1 under the central normalization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: there is one distinct a-point, at the centre, and its local multiplicity is exactly m, including m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the hypotheses c≠0 and m≥1 make f nonconstant and the finite target a arbitrary; the identically zero difference f−a is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.3 apply to every r>0; the divisor is at the centre and never lies on a positive-radius boundary, while the raw integral diverges at its lower endpoint 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The parameters a,c,m are fixed in the example; the one-point divisor is determined algebraically and no family is selected or AC used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a regularized count and constants and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a regularized count and constants and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "HIGH (score 5). Current claim/proof focus: For f=a+cz^m the centre multiplicity contributes m log r and the unregularized integral diverges at zero. Boundary review: empty: The a-divisor cannot be empty because c is nonzero and m≥1; step 1.1 shows the pole divisor is empty. zero: The unique a-point lies at 0. Step 1.2 gives N=m log r; it equals zero at r=1 and may be negative for 0<r<1 under the central normalization. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "prop-nevanlinna-order-agrees-with-entire-maximum-modulus-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "For finite $w,a$, put\n\n$$ \\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}},\\qquad \\delta(\\infty,\\infty)=0. $$\n\nAt a pole or a point where $f=a$, the expressions below are understood as\nlogarithmic singularities in the angular Lebesgue integral. Define the\nproximity and characteristic by\n\n$$ m(r,a;f)=\\frac1{2\\pi}\\int_0^{2\\pi}\\log\\frac1{\\delta(f(re^{it}),a)}\\,dt,\\qquad T(r,f)=m(r,\\infty;f)+N(r,\\infty;f). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-poisson-jensen-formula-meromorphic-function",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a meromorphic function on a neighbourhood of the closed disc\n$|z|\\le R$, not identically zero, and suppose first that it has no zero or pole\non $|z|=R$. For $|z|<R$ away from the zeros and poles of $f$,\n\n$$ \\log|f(z)|=\\frac1{2\\pi}\\int_0^{2\\pi}\\frac{R^2-|z|^2}{|Re^{it}-z|^2}\\log|f(Re^{it})|\\,dt-\\sum_{|b|<R,\\ f(b)=0}m_bG_R(z,b)+\\sum_{|p|<R,\\ p\\text{ a pole}}\\nu_pG_R(z,p). $$\n\nwhere each distinct zero $b$ and pole $p$ is included once, $m_b$ is the\nzero multiplicity, $\\nu_p$ is the pole order, and\n\n$$G_R(z,a)=\\log\\left|\\frac{R^2-\\overline a z}{R(z-a)}\\right|.$$\n\nAt a radius meeting a zero or pole on its boundary, the identity means the\nlimit through regular radii increasing to that radius; a boundary divisor has\nGreen contribution zero in that limit.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-order-of-growth-meromorphic-function",
+          "source_section": "Statement",
+          "quote": "Let $f$ be nonconstant meromorphic on $\\mathbb C$. Its characteristic is nondecreasing, and $T(r,f)>1$ for all sufficiently large $r$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-taylor-expansion-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "f(z)=\\sum_{n\\ge0}\\frac{f^{(n)}(a)}{n!}(z-a)^n\\qquad(|z-a|<\\rho_a).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-estimates-taylor-coefficients",
+          "source_section": "Statement",
+          "quote": "If $|f(\\zeta)|\\le M$ on $|\\zeta-a|=r$, then the $n$th Taylor coefficient $c_n$ satisfies $|c_n|\\le M/r^n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "chordal-classical-characteristic-comparison",
+          "claim": "For an entire function the pole count vanishes and the chordal characteristic differs from the log-plus mean by a uniform bounded amount.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "eventual-maximum-modulus-domain",
+          "claim": "By [F4], write $f(z)=\\sum_{n\\ge0}a_nz^n$ on $\\mathbb C$. Since $f$ is nonconstant, let $k\\ge1$ be the least index with $a_k\\ne0$. Applying [F5] on the radius-$r$ circle, with any larger holomorphy radius such as $2r$, gives $|a_k|\\le M(r,f)/r^k$. Thus $M(r,f)\\ge|a_k|r^k$ and $\\log^+M(r,f)\\to\\infty$; in particular $\\log^+M(r,f)>1$ for all sufficiently large $r$. [F4, F5, F6, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "characteristic-lower-bound",
+          "claim": "The circular mean of log+ |f| is at most log+ of its boundary maximum.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "poisson-jensen-maximum-bound",
+          "claim": "Poisson–Jensen, positivity of each zero Green term, and the Poisson-kernel bound give log+ M(r,f) at most (R+r)/(R-r) times the outer log+ mean, including boundary-divisor radii by a limit.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "order-and-lower-order-squeeze",
+          "claim": "Taking R=2r squeezes both logarithmic growth ratios; dilation by 2 and the bounded characteristic comparison preserve limsup and liminf.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For an entire function the pole divisor is empty, so N(r,∞)=0 in the definition of T0; if a Poisson–Jensen zero list is empty its sum is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A nonconstant entire function has at least one nonzero positive Taylor coefficient. If f(z)=0 at a point on |z|=r, step 2.2 handles log+|f(z)|=0 directly; any interior zero contributes a nonnegative Green term with the subtractive sign."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the least k≥1 with a_k≠0, including k=1; the coefficient inequality and resulting |a_k|r^k lower bound are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the hypothesis that f is nonconstant gives a least positive Taylor index, and its Cauchy estimate ensures the maximum modulus eventually exceeds 1; no constant-map case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The inequalities are for every 0<r<R. At an outer boundary zero, step 2.2 passes through regular radii increasing to R; continuity of m0 gives the claimed bound at R, and the order limits use only sufficiently large r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The least index k exists by the well-ordering of the positive integers. Step 2.2 applies pointwise and then takes a supremum, so it selects no maximizer; each compact-disc divisor list is finite. No AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition proves two inequalities and equality of two pairs of growth limits; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition proves two inequalities and equality of two pairs of growth limits; it states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 10). Current claim/proof focus: The first nonzero Taylor coefficient is selected by the declared well-ordering theorem; Poisson–Jensen bounds log M between T0(r) and 3T0(2r). Boundary review: empty: For an entire function the pole divisor is empty, so N(r,∞)=0 in the definition of T0; if a Poisson–Jensen zero list is empty its sum is zero. zero: A nonconstant entire function has at least one nonzero positive Taylor coefficient. If f(z)=0 at a point on |z|=r, step 2.2 handles log+|f(z)|=0 directly; any interior zero contributes a nonnegative Green term with the subtractive sign. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, thm-poisson-jensen-formula-meromorphic-function, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "ex-nevanlinna-characteristic-of-reciprocal-gamma": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "T(r,f)=m(r,\\infty;f)+N(r,\\infty;f).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-order-of-growth-meromorphic-function",
+          "source_section": "Statement",
+          "quote": "\\rho(f)=\\limsup_{r\\to\\infty}\\frac{\\log T(r,f)}{\\log r},\\qquad \\lambda(f)=\\liminf_{r\\to\\infty}\\frac{\\log T(r,f)}{\\log r}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gamma-weierstrass-product",
+          "source_section": "Statement",
+          "quote": "$$\\frac1{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n\\ge1}\\left(1+\\frac{z}{n}\\right)e^{-z/n}.$$\n\nwith locally uniform convergence on $\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stirling-formula-gamma",
+          "source_section": "Statement",
+          "quote": "Fix $\\delta$ with $0<\\delta<\\pi$. On the closed sector\n$|\\arg z|\\le\\pi-\\delta$, using the principal logarithm in\n$z^{z-1/2}:=\\exp((z-1/2)\\operatorname{Log} z)$, one has\n\n$$\\Gamma(z)=\\sqrt{2\\pi}\\,z^{z-1/2}e^{-z}\\left(1+O_\\delta(|z|^{-1})\\right)$$\n\nas $|z|\\to\\infty$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gamma-meromorphic-continuation",
+          "source_section": "Statement",
+          "quote": "Gamma extends to a meromorphic function on $\\mathbb C$ with simple poles at the\nnonpositive integers",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "entire-reciprocal-and-zero-set",
+          "claim": "The Weierstrass product defines the entire reciprocal, has simple zeros exactly at the nonpositive integers, and has no poles.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "product-maximum-upper-bound",
+          "claim": "Splitting the product at n≤2r and using the quadratic tail estimate gives a uniform pointwise log+ bound and hence m0(r,g)=O(r log r).",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sectorial-pointwise-lower-bound",
+          "claim": "On the fixed arc 2π/3≤arg z≤3π/4 the sectorial Stirling asymptotic gives log|g(z)|≥(1/4)r log r for all sufficiently large r.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "angular-mean-lower-bound",
+          "claim": "Integrating the positive pointwise lower bound over an arc of angular length π/12 yields m0(r,g)≥(1/96)r log r.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "characteristic-and-order-estimates",
+          "claim": "The chordal characteristic differs from the entire log-plus mean by a bounded amount, so T=Θ(r log r) and both order limits equal one.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the pole divisor is empty; the product zero set itself is nonempty. For radii whose circle meets no zero, the angular logarithm has no zero singularity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the central and negative-integer simple zeros. At a zero on |z|=r, log+|g| is zero and the product upper bound remains immediate; the lower-bound arc avoids every such zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: each listed zero comes from exactly one simple factor, with a locally nonzero remaining product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives infinitely many zeros, so g is nonconstant; the order definition applies and no constant-function case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the closed sector and includes the endpoint arg z=3π/4 allowed by [F4]. The upper estimate is for r≥2 and both characteristic/order conclusions are asserted only eventually."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.3 use the fixed integer cutoff n≤2r and the fixed closed arc [2π/3,3π/4]; no objects are selected from a family and no AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves growth estimates and identifies zeros; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves growth estimates and identifies zeros; it states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "HIGH (score 6). Current claim/proof focus: The reciprocal Gamma product is entire and sectorial Stirling gives matching r log r upper and lower bounds on a fixed arc. Boundary review: empty: Step 1.1 shows the pole divisor is empty; the product zero set itself is nonempty. For radii whose circle meets no zero, the angular logarithm has no zero singularity. zero: Step 1.1 identifies the central and negative-integer simple zeros. At a zero on |z|=r, log+|g| is zero and the product upper bound remains immediate; the lower-bound arc avoids every such zero. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, def-order-of-growth-meromorphic-function, against the current item and the batch reader/refuter reports; external context: Chandrasekharan, Lectures on the Riemann Zeta-Function, Lecture 7 §6 after equation (6.5), PDF pp. 66–67, gives sectorial Stirling uniformly for |arg z|≤π−ε; the chosen arc lies inside |arg z|≤3π/4. Current cited item statements and contract quotes were also checked. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "ex-nevanlinna-characteristic-under-target-mobius-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "$$ \\delta(w,a)=\\frac{|w-a|}{\\sqrt{1+|w|^2}\\sqrt{1+|a|^2}},\\qquad \\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}},\\qquad \\delta(\\infty,\\infty)=0. $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nevanlinna-first-main-theorem",
+          "source_section": "Statement",
+          "quote": "m(r,a;f)+N(r,a;f)=T(r,f)+C(f,a).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nevanlinna-characteristic-elementary-laws",
+          "source_section": "Statement",
+          "quote": "$$T(r,R(f))=d\\,T(r,f)+O_{R,f}(1).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "A holomorphic function has finite order $m$ at $a$ if and only if, on some neighbourhood of $a$, it has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pole-characterizations",
+          "source_section": "Statement",
+          "quote": "4. $1/f$ extends holomorphically across $a$ and vanishes there.\n\nIf these conditions hold and the principal part is\n\n$$c_{-m}(z-a)^{-m}+c_{-(m-1)}(z-a)^{-(m-1)}+\\cdots+c_{-1}(z-a)^{-1}$$\n\nwith $c_{-m}\\ne0$, then the pole order is $m$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "degree-one-target-map",
+          "claim": "The displayed rational expression extends to a degree-one Möbius map of the sphere, taking a to infinity and infinity to the finite value conjugate(a).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-chordal-identity",
+          "claim": "The numerator/denominator norm identity gives exact equality of chordal distances for finite regular values, and direct endpoint evaluation covers a and infinity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "target-divisor-to-poles",
+          "claim": "Every finite a-point of f becomes a pole of the same order, while every pole of f is sent to a finite holomorphic value; hence the closed-disc pole count and integrated count equal the a-counts.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proximity-means-equal",
+          "claim": "The pointwise chordal identity makes the two proximity integrands identical on every circle, including their logarithmic singularities and the value at source poles.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "characteristic-comparison",
+          "claim": "Degree-one rational composition gives the O(1) bound, while the divisor and proximity identities plus the First Main Theorem give the exact difference C(f,a).",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 shows that if f has no a-point in a closed disc then the composition has no pole there, so both corresponding counts vanish."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows a=0. Step 2.2 includes a centre a-point, and the exact integrated count equality retains the central multiplicity term; step 4.1 uses the finite-centre constant from the First Main Theorem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1: one simple a-point becomes one simple pole, and the proximity identity holds pointwise."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes f nonconstant; step 1.1 has nonzero determinant for every finite a, so composition by M_a remains nonconstant. The value a=0 is covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks w=a and w=infinity separately. Step 2.2 uses closed-disc divisors, so a divisor on |z|=r appears in both counts with the same order; step 3.1 preserves the identical integrable logarithmic singularity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 use pointwise identities and local order calculations at each divisor; no point or family is selected and no AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an identity and an asymptotic estimate; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves an identity and an asymptotic estimate; it states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "HIGH (score 6). Current claim/proof focus: The degree-one target map converts a-point counts to poles and chordal a-proximity to infinity-proximity exactly. Boundary review: empty: Step 2.2 shows that if f has no a-point in a closed disc then the composition has no pole there, so both corresponding counts vanish. zero: Statement allows a=0. Step 2.2 includes a centre a-point, and the exact integrated count equality retains the central multiplicity term; step 4.1 uses the finite-centre constant from the First Main Theorem. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, thm-nevanlinna-first-main-theorem, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "ex-nevanlinna-characteristics-of-elementary-functions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "T(r,f)=m(r,\\infty;f)+N(r,\\infty;f).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nevanlinna-characteristic-elementary-laws",
+          "source_section": "Statement",
+          "quote": "If $R=P/Q$ is a fixed rational map written with coprime polynomials and $d=\\max(\\deg P,\\deg Q)$, then for nonconstant meromorphic $f$ and $d\\ge1$, $$T(r,R(f))=d\\,T(r,f)+O_{R,f}(1).$$",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-order-of-growth-meromorphic-function",
+          "source_section": "Statement",
+          "quote": "Define its order and lower order by $$\\rho(f)=\\limsup_{r\\to\\infty}\\frac{\\log T(r,f)}{\\log r},\\qquad \\lambda(f)=\\liminf_{r\\to\\infty}\\frac{\\log T(r,f)}{\\log r},$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-trigonometric-and-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $z\\in\\mathbb C$, define $$\\sin z=\\frac{\\exp(iz)-\\exp(-iz)}{2i},\\quad \\cos z=\\frac{\\exp(iz)+\\exp(-iz)}2,$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Then $$\\int_a^b f \\;=\\; G(b) - G(a) .$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "If $f$ is differentiable at $c$ ([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Then $f$ is bounded ([[def-bounded-set]]) and Riemann integrable on $[a,b]$ ([[def-darboux-integral]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "same definition may be written $\\exp z=\\sum z^n/n!$",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and $$ \\exp'(z)=\\exp z $$ for every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-chain-rule-for-holomorphic-maps-in-several-variables",
+          "source_section": "Statement",
+          "quote": "Then $G\\circ F$ is holomorphic at $a$ with $$D(G\\circ F)(a)=DG(F(a))\\circ DF(a),",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "Then $P$ is entire",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-isolated-zeros-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "A holomorphic function on a complex domain that is not identically zero has only isolated zeros.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "A holomorphic function has finite order $m$ at $a$ if and only if, on some neighbourhood of $a$, it has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "chordal-entire-mean-comparison",
+          "claim": "For an entire h, the spherical characteristic is its log-plus boundary mean up to a uniform additive constant, and its pole count vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "monomial-characteristic",
+          "claim": "The exact characteristic of z^d is one half log(1+r^(2d)), hence d log r+O(1).",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exponential-angular-integral",
+          "claim": "The angular positive-part integral of cosine is 2, yielding T(r,exp(lambda z))=lambda r/pi+O(1).",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "holomorphic-scaled-exponential",
+          "claim": "The function E(z)=exp(2iz) is entire and has derivative 2i at zero, hence is nonconstant.",
+          "step": "1.3",
+          "inputs": [
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "algebra"
+          ]
+        },
+        {
+          "id": "complex-tangent-rational-representation",
+          "claim": "The complex tangent is the meromorphic degree-one rational composition R(E), where E=exp(2iz), and agrees with sin z/cos z including its poles.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F13",
+            "F17",
+            "F18",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "scaled-exponential-characteristic",
+          "claim": "E is nonconstant and its log-plus mean is 2r/pi, so T(r,E)=2r/pi+O(1).",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tangent-characteristic",
+          "claim": "Degree-one rational composition transfers E’s characteristic to tan z up to O(1).",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.3",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "three-order-limits",
+          "claim": "The logarithmic characteristic ratios converge to 0 for z^d and to 1 for exp z and tan z, so their upper and lower orders have those values.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F14",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2: the monomial has no poles, and the exponential functions used in steps 2.1 and 3.1 are entire; the tangent poles are identified in step 2.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: the positive-part integrands vanish on the nonpositive-sign intervals and at their exact zero endpoints."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes d=1, and step 4.1 computes the characteristic for the degree-one map R."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement restricts d to positive integers; steps 1.3–3.1 show E is nonconstant and step 2.2 treats every zero of cos as a pole of the tangent continuation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 evaluate all quarter-turn and half-turn endpoints explicitly; step 2.2 identifies denominator-zero points as poles, and step 4.1 applies the characteristic law to the resulting meromorphic map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use fixed intervals and explicit integrals; no family of points, radii, or divisors is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives three explicit characteristic and order calculations and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives three explicit characteristic and order calculations and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 10). Current claim/proof focus: Direct angular averaging gives exp growth, while tan is a degree-one rational transform of exp(2iz); z^d has logarithmic characteristic. Boundary review: empty: Steps 1.1–1.2: the monomial has no poles, and the exponential functions used in steps 2.1 and 3.1 are entire; the tangent poles are identified in step 2.2. zero: Steps 2.1 and 3.1: the positive-part integrands vanish on the nonpositive-sign intervals and at their exact zero endpoints. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, thm-nevanlinna-characteristic-elementary-laws, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "thm-rational-functions-characterized-by-logarithmic-characteristic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "T(r,f)=m(r,\\infty;f)+N(r,\\infty;f)",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "\\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}}",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nevanlinna-characteristic-elementary-laws",
+          "source_section": "Statement",
+          "quote": "If $R=P/Q$ is a fixed rational map written with coprime polynomials and $d=\\max(\\deg P,\\deg Q)$, then for nonconstant meromorphic $f$ and $d\\ge1$, $$T(r,R(f))=d\\,T(r,f)+O_{R,f}(1).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nevanlinna-characteristic-elementary-laws",
+          "source_section": "Statement",
+          "quote": "T(r,fg)\\le T(r,f)+T(r,g)+O(1)",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nevanlinna-quantities-well-defined",
+          "source_section": "Statement",
+          "quote": "the count $n(r,a;f)$ is finite for each bounded disc",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pole-characterizations",
+          "source_section": "Statement",
+          "quote": "with $c_{-m}\\ne0$, then the pole order is $m$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-nevanlinna-order-agrees-with-entire-maximum-modulus-order",
+          "source_section": "Statement",
+          "quote": "T_0(r,f)\\le\\log^+M(r,f)\\le\\frac{R+r}{R-r}\\,T_0(R,f)",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-cauchy-estimates-taylor-coefficients",
+          "source_section": "Statement",
+          "quote": "|c_n|\\le\\frac{M}{r^n}",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-taylor-expansion-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "f(z)=\\sum_{n\\ge0}\\frac{f^{(n)}(a)}{n!}(z-a)^n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rational-degree-characteristic",
+          "claim": "The identity map has characteristic one half log(1+r squared), and the fixed rational-composition law gives d log r plus a bounded term.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "characteristic-bounds-count",
+          "claim": "Nonnegative chordal proximity implies the integrated pole count is bounded above by the characteristic.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "log-growth-forces-finitely-many-poles",
+          "claim": "Let $n_0=n(0,\\infty;f)$, finite by [F5], and suppose there are infinitely many poles; since each bounded-disc count is finite by [F5], $n(k,\\infty;f)$ is unbounded over positive integers $k$. Choose an integer $M>\\max\\{A,n_0\\}$ and an integer $s>r_0$, and let $R_M$ be the least integer $k\\ge s$ with $n(k,\\infty;f)\\ge M$; it exists by unboundedness and well-ordering. For $R\\ge R_M$, closed-disc monotonicity gives $n(t,\\infty;f)\\ge M$ on $[R_M,R]$ and $n(t,\\infty;f)\\ge n_0$ everywhere, so [F2] yields $N(R,\\infty;f)\\ge n_0\\log R+(M-n_0)\\log(R/R_M)=M\\log R-(M-n_0)\\log R_M$. This contradicts step 1.2 as $R\\to\\infty$ because $M>A$, proving that $f$ has finitely many poles. [F2, F5, F11, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.2",
+            "algebra",
+            "F11"
+          ]
+        },
+        {
+          "id": "finite-pole-cancellation",
+          "claim": "The polynomial formed from the finite pole divisor cancels every pole and makes qf entire, including the empty-divisor case.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "logarithmic-growth-transfers-to-entire-function",
+          "claim": "Polynomial growth bounds T(q), the product law bounds T(qf), and the log-plus mean T0 is at most the chordal characteristic for the entire product.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "F10",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cauchy-forces-entire-product-to-be-polynomial",
+          "claim": "The entire maximum-modulus inequality gives a polynomial bound; Cauchy estimates kill every Taylor coefficient above that degree, so the entire Taylor expansion is a polynomial.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 defines q=1 for an empty pole set; step 4.1 then has D=0 and C_q=1, and step 5.1 applies to g=f."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the centre multiplicity n0 in the integrated count; step 3.1 includes a pole at p=0 in q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes rational degree d=1, and step 3.1 cancels a single pole by q=(z-p)^m."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes f nonconstant, but g may be constant after pole cancellation; step 5.1 handles that case directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the closed-disc count includes a pole on |z|=R_M, and the integrated lower bound holds for every R>=R_M; r>=1 keeps the centre term nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: R_M is the least integer radius with the required count, and only a finite pole list is enumerated; no AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves rationality implies T=d log r+O(1), hence T=O(log r), for each degree d>=1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2–5.1 prove logarithmic characteristic gives a finite pole set and then expresses f as a quotient of polynomials."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d, Step 5a",
+        "notes": "CRITICAL (score 15). Current claim/proof focus: The first pole-count threshold radius now cites well-ordering; logarithmic growth forces finitely many poles, then Cauchy bounds make the remaining entire numerator polynomial. Boundary review: empty: Step 3.1 defines q=1 for an empty pole set; step 4.1 then has D=0 and C_q=1, and step 5.1 applies to g=f. zero: Step 2.1 retains the centre multiplicity n0 in the integrated count; step 3.1 includes a pole at p=0 in q. Checked its declared citation evidence, including def-nevanlinna-counting-proximity-and-characteristic, against the current item and the batch reader/refuter reports; external context: Eremenko, Lectures on Nevanlinna Theory, §§1–3, especially equations (2), (7), and (11); current cited item statements and contract quotes. Disposition: repaired where noted above; no further concrete defect identified in this review."
+      }
+    },
+    "ex-rational-degree-as-logarithmic-characteristic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "T(r,f)=m(r,\\infty;f)+N(r,\\infty;f)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "\\delta(w,\\infty)=\\delta(\\infty,w)=\\frac{1}{\\sqrt{1+|w|^2}}",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "For $r>0$, let $n(r,a;f)$ be the sum of the local multiplicities of the $a$-points in the closed disc $|z|\\le r$; when $a=\\infty$, these are the poles with their pole orders.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nevanlinna-counting-proximity-and-characteristic",
+          "source_section": "Definition",
+          "quote": "N(r,a;f)=n(0,a;f)\\log r+\\int_0^r\\frac{n(t,a;f)-n(0,a;f)}{t}\\,dt",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nevanlinna-characteristic-elementary-laws",
+          "source_section": "Statement",
+          "quote": "If $R=P/Q$ is a fixed rational map written with coprime polynomials and $d=\\max(\\deg P,\\deg Q)$, then for nonconstant meromorphic $f$ and $d\\ge1$, $$T(r,R(f))=d\\,T(r,f)+O_{R,f}(1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-rational-functions-characterized-by-logarithmic-characteristic",
+          "source_section": "Statement",
+          "quote": "More precisely, if $f$ is rational of degree $d\\ge1$, then $$T(r,f)=d\\log r+O(1)\\qquad(r\\to\\infty),$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rational-function-and-pole-count",
+          "claim": "Polynomial division identifies the unique simple pole and the degree; integrating its closed-disc count gives N=log r for r>1.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-boundary-proximity",
+          "claim": "Uniform upper and lower bounds for |R| on large circles turn the chordal proximity integrand into log r plus a bounded term.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "degree-characteristic",
+          "claim": "The explicit proximity and pole count sum to 2 log r plus O(1), agreeing with both fixed rational composition and the preceding degree theorem.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: for 0<r<1 the pole is outside the closed disc, so the pole count and integrated count are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: R(0)=-1 is finite, hence n(0,infinity;R)=0 and no centre-pole logarithm occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 factors the denominator and checks the numerator at z=1, proving exactly one simple pole."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is the fixed nonconstant degree-two map R; its numerator and denominator are coprime, so no constant or degree-zero branch is hidden."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed disc at r=1 includes the pole but N(1)=0 because its logarithmic weight is log 1; for r>1 the pole is strictly inside, not on the averaging circle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use one explicit division identity and uniform inequalities on every large circle; no object or family is selected and no AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This fixed-function example computes one rational characteristic and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This fixed-function example computes one rational characteristic and states no biconditional."
+        }
+      ]
+    }
+  }
+}

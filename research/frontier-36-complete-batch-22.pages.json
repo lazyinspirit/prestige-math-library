@@ -1,0 +1,333 @@
+[
+  {
+    "order": 721,
+    "id": "bounded-bimodule-complexes-and-derived-tensor",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Bounded Bimodule Complexes and Derived Tensor",
+    "companion": "bounded-bimodule-complexes-and-derived-tensor-examples",
+    "requires": [
+      "graded-bimodules-and-tensor-functors",
+      "derived-categories"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+        "kind": "definition",
+        "title": "Bounded graded bimodule complexes and signed tensor totalization",
+        "dependency_level": 0,
+        "deps": [
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-bounded-bounded-below-and-bounded-above-complex",
+          "def-tensor-product-total-complex-of-chain-complexes"
+        ],
+        "statement": "For unital graded k-algebras B,A,C, a bounded cochain complex F of graded (B,A)-bimodules has degree-zero bimodule-linear differentials. For bounded F and G of graded (A,C)-bimodules, (F⊗_A G)^n=⊕_{p+q=n}F^p⊗_A G^q, with d(f⊗g)=d_Ff⊗g+(-1)^p f⊗d_Gg for f∈F^p. The tensor is graded internally by the sum of internal degrees; the sign depends only on cochain degree. For G a complex of graded left A-modules, the result is a complex of graded left B-modules. This reindexes the published ordinary tensor-total definition and does not redefine complexes.",
+        "strategy": "Specify the two independent integer gradings and the outer bimodule actions on each diagonal. Every diagonal is finite and the bounded total range is the sum of the input ranges. Invoke the published balanced tensor and ordinary totalization constructions; defer the checks that the differential is balanced, squares to zero, and respects outer actions to the next lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, §10.6, printed pp. 395–396",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+        "kind": "lemma",
+        "title": "Bimodule tensor totalization respects differentials and homotopies",
+        "dependency_level": 1,
+        "deps": [
+          "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "lem-the-tensor-total-differential-is-well-defined-and-squares-to-zero",
+          "def-chain-homotopy",
+          "thm-bimodule-actions-induced-on-tensor-products"
+        ],
+        "statement": "The signed tensor differential is balanced, bimodule-linear for the outer actions, degree zero internally, and squares to zero. Degree-zero chain maps in both variables induce a bifunctor on bounded complexes; homotopic bimodule maps induce homotopic tensor maps. For a homotopy h in the second variable, the total homotopy is H(f⊗x)=(-1)^p f⊗h(x) on F^p⊗X^q; for a homotopy k in the first variable it is K(f⊗x)=k(f)⊗x.",
+        "strategy": "For a∈A compare d((fa)⊗g) with d(f⊗ag), using A-linearity of both differentials. Check left B and right C actions termwise, including internal degrees. Expand d²: the two mixed terms have coefficients (-1)^{p+1} and (-1)^p, while the pure terms vanish. For chain maps check the tensor formula against d and composition. For H compute dH+Hd=1⊗(d h+h d), with the d_F terms cancelling; for K compute dK+Kd=(d k+k d)⊗1, with the d_X terms cancelling. This proves descent to homotopy classes without flatness or choice.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+              "url": "https://stacks.math.columbia.edu/tag/09LP"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+        "kind": "theorem",
+        "title": "Bounded bimodule tensor is associative, unital, and compatible with cones",
+        "dependency_level": 2,
+        "deps": [
+          "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "lem-graded-balanced-tensor-and-shift-isomorphisms",
+          "def-mapping-cone-of-a-chain-map",
+          "def-standard-cone-triangle-in-the-homotopy-category",
+          "thm-the-homotopy-category-of-an-abelian-category-is-triangulated"
+        ],
+        "statement": "For composable bounded graded bimodule complexes F,G,H, the degreewise balanced associator gives a natural chain isomorphism (F⊗G)⊗H ≅ F⊗(G⊗H); regular bimodules concentrated in degree zero give natural left and right unit isomorphisms. These satisfy associator/unit coherence on elementary tensors. Tensoring a chain map in either variable carries its standard cone triangle to an isomorphic standard cone triangle. For F^p⊗Cone(u), the map to Cone(F⊗u) is identity on the target part and (-1)^p on the shifted source part; for Cone(v)⊗X the comparison is identity on both parts.",
+        "strategy": "Reindex the finite triple direct sums by p+q+r and send (f⊗g)⊗h to f⊗(g⊗h). Expand the two total differentials; coefficients of d_F,d_G,d_H are 1,(-1)^p,(-1)^{p+q} on both sides. The graded balanced associator and unit maps are degree zero internally and commute with the differentials; coherence diagrams agree on pure tensors. For a map u:X→Y insert Cone(u)^q=Y^q⊕X^{q+1}, compute the cone differential, and check the comparison sign (-1)^p on F^p⊗X^{q+1}; for a map v in the first variable compute the shifted-first-factor differential and check the identity comparison. Verify the last connecting map using the shift comparisons, so the entire triangle, not just its cone object, is identified.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+              "url": "https://stacks.math.columbia.edu/tag/09LP"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+        "kind": "theorem",
+        "title": "A bounded two-sided projective bimodule complex defines exact derived tensor functors",
+        "dependency_level": 3,
+        "landmark": true,
+        "deps": [
+          "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+          "thm-bimodule-tensor-exactness-and-projective-preservation",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "lem-projective-modules-are-flat-over-an-arbitrary-ring",
+          "lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms",
+          "def-derived-tensor-product-in-the-bounded-above-setting",
+          "def-derived-category-of-an-abelian-category",
+          "def-exact-functor-between-triangulated-categories",
+          "thm-the-derived-category-inherits-a-triangulated-structure"
+        ],
+        "statement": "Let F be a bounded complex of graded (B,A)-bimodules, each term finite graded projective as a left B-module and projective as an underlying right A-module. First, F⊗_A− gives an exact triangulated functor K^b(proj^gr A)→K^b(proj^gr B). Separately, forgetting internal grading if desired, its right A-flat terms make the ordinary tensor totalization preserve quasi-isomorphisms between bounded complexes; hence it descends to an exact functor D^b(A-Mod)→D^b(B-Mod), and likewise for graded module categories, computed by F⊗_A^L−=F⊗_A− on those objects. The output is bounded, but no finite-dimensional-output claim is made absent a finite-dimensional bimodule hypothesis.",
+        "strategy": "For each input term P^q, apply the published bimodule tensor projective-preservation clause to F^p⊗_A P^q. A finite diagonal sum of finite graded projectives remains finite graded projective by shifted-free retracts, proving the K^b assertion. The preceding cone theorem gives its shift comparison and exactness. Independently forget grading on each right-projective F^p; the arbitrary-ring projective-implies-flat lemma makes F bounded above flat. Apply the published flat-tensor lemma to an acyclic cone of any bounded quasi-isomorphism; tensor preserves the quasi-isomorphism and so factors through localization. Its cone and shift comparisons give exactness on D^b. Since F itself is flat, the supplied-data derived-tensor definition computes its derived functor by F without choosing a new resolution. All tensor diagonals of bounded F and bounded input are bounded. State the standing derived-category size convention and avoid any arbitrary-resolution or AC claim.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, §10.6, printed pp. 395–396",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
+            },
+            {
+              "title": "Stacks Project, More on Algebra, §15.60, tag 06XY",
+              "url": "https://stacks.math.columbia.edu/tag/06XY"
+            },
+            {
+              "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+              "url": "https://stacks.math.columbia.edu/tag/09LP"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors",
+        "kind": "proposition",
+        "title": "Bimodule homotopy equivalences induce natural tensor-functor isomorphisms",
+        "dependency_level": 4,
+        "deps": [
+          "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor"
+        ],
+        "statement": "For bounded graded (B,A)-bimodule complexes F,Fprime satisfying the two-sided hypotheses of the preceding theorem, supplied bimodule-linear chain maps u:F→Fprime and v:Fprime→F with bimodule-linear homotopies vu≃id_F and uv≃id_Fprime induce mutually inverse natural isomorphisms of the corresponding tensor functors on K^b(proj^gr A) and D^b(A-Mod), with the graded derived version as well.",
+        "strategy": "For each complex X take u⊗1_X and v⊗1_X. Bimodule-linearity makes these well defined over A and B-linear, and their naturality squares commute strictly with maps of X. Tensor each supplied bimodule homotopy with 1_X using the first-variable formula K=k⊗1; hence the two composites are homotopic to identities. Pass first to K^b and then to D^b using quasi-isomorphism preservation from the previous theorem. Explicitly require bimodule homotopies: one-sided homotopies alone need not induce natural balanced tensor maps.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+              "url": "https://stacks.math.columbia.edu/tag/09LP"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-inverse-bimodule-complexes-give-derived-tensor-equivalences",
+        "kind": "theorem",
+        "title": "Supplied inverse bimodule complexes give derived tensor equivalences",
+        "dependency_level": 5,
+        "landmark": true,
+        "deps": [
+          "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+          "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors"
+        ],
+        "statement": "Let F be a bounded graded (B,A)-bimodule complex and G a bounded graded (A,B)-bimodule complex, each with finite graded projective left terms and projective underlying right terms. If supplied bimodule-linear homotopy equivalences F⊗_A G≃B and G⊗_B F≃A exist, where the regular bimodules occupy cochain degree zero, then F⊗_A^L− and G⊗_B^L− are mutually quasi-inverse exact equivalences on bounded derived categories and on bounded homotopy categories of finite graded projectives. These data alone do not choose coherent comparison isomorphisms for a group action.",
+        "strategy": "For X over B, reassociate F⊗_A(G⊗_B X) by the explicit finite-diagonal chain associator to (F⊗_A G)⊗_B X, tensor the supplied bimodule homotopy equivalence to B⊗_B X, and apply the unit isomorphism. For Y over A perform the symmetric construction with G⊗_B F≃A. The tensor-homotopy lemma directly transfers the supplied bimodule homotopies to natural homotopies after tensoring, without assuming the composite bimodule complex is right-projective; the preceding proposition explains the same mechanism for the individual eligible functors. Exactness follows from the derived-functor theorem. This gives inverse equivalences without claiming coherent comparison maps for a family indexed by a group.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, §10.6, printed pp. 395–396",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
+            },
+            {
+              "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+              "url": "https://stacks.math.columbia.edu/tag/09LP"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 722,
+    "id": "bounded-bimodule-complexes-and-derived-tensor-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Bounded Bimodule Complexes and Derived Tensor — Examples",
+    "companion": "bounded-bimodule-complexes-and-derived-tensor",
+    "requires": [
+      "bounded-bimodule-complexes-and-derived-tensor"
+    ],
+    "items": [
+      {
+        "id": "ex-two-term-tensor-complex-koszul-signs",
+        "kind": "example",
+        "title": "The four entries and Koszul signs in a two-term tensor bicomplex",
+        "dependency_level": 2,
+        "deps": [
+          "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies"
+        ],
+        "statement": "For F=(F^0→^u F^1) and X=(X^0→^v X^1), display the four tensor entries in total degrees 0,1,2 and their signed differentials. The two routes from F^0⊗X^0 to F^1⊗X^1 cancel; internal degrees introduce no further sign.",
+        "strategy": "Write T^0=F^0⊗X^0, T^1=(F^1⊗X^0)⊕(F^0⊗X^1), T^2=F^1⊗X^1. Compute d^0=(u⊗1,1⊗v) and d^1=(-1⊗v,u⊗1). Their composite is -(u⊗v)+(u⊗v)=0. Check balancing and outer actions via the defining lemma; note explicitly that an internal shift changes neither matrix entry.",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-left-and-right-projective-not-enveloping-projective",
+        "kind": "example",
+        "title": "The diagonal bimodule k[x] is projective on both sides but not over its enveloping algebra",
+        "dependency_level": 4,
+        "deps": [
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-field",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "def-projective-module",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-zero-divisor-and-integral-domain",
+          "lem-field-is-a-commutative-ring",
+          "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules"
+        ],
+        "statement": "For a field k and A=k[x] with x in internal degree zero, the complex A concentrated in cochain degree zero meets the left and right projectivity hypotheses and gives the tensor identity functor, but the diagonal bimodule A is not projective over A^e=A⊗_k A^op≈k[x,y].",
+        "strategy": "Define the special-case enveloping action (a⊗b)·m=amb within the example and identify A^e with k[x,y] by the two monomial bases. Its action on A factors through μ:k[x,y]→k[x], f(x,y)↦f(x,x), with kernel (x−y), so A≈k[x,y]/(x−y). Both side modules are free rank one and the complex concentrated in degree zero yields the identity tensor functor. If A were A^e-projective, lift id_A through μ; the sequence would split, making (x−y) a direct-summand ideal. In a commutative ring a direct-summand ideal is generated by an idempotent e, since the projection is multiplication by e. The domain k[x,y] has only idempotents 0 and 1, while (x−y) is nonzero proper, contradiction. This special-case calculation does not invoke the later general enveloping-algebra dictionary.",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            },
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, §10.6, printed pp. 395–396",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-contractible-bimodule-complex-induces-zero-functor",
+        "kind": "example",
+        "title": "A contractible two-term bimodule complex induces the zero tensor functor",
+        "dependency_level": 5,
+        "deps": [
+          "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "def-projective-module",
+          "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors",
+          "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules"
+        ],
+        "statement": "For any graded algebra A, let F^{-1}=A, F^0=A and d_F^{-1}=id_A, with all other terms zero. F is contractible as a complex of A-bimodules, and F⊗_A− is naturally isomorphic to the zero functor on K^b(proj^gr A) and D^b(A-Mod), including the graded derived version.",
+        "strategy": "Take the bimodule contracting homotopy k^0=id_A:F^0→F^{-1} and zero elsewhere, so d_F k+k d_F=id_F in each degree. For any X, write H(f⊗x)=k(f)⊗x with no second-variable sign, as proved in the totalization lemma. Compute dH+Hd=id on both diagonal rows; the cross terms involving d_X cancel because k lowers the first cochain degree by one. The maps and homotopy are natural in X. Apply the homotopy-equivalent functor proposition to F≃0; each A term is finite projective on both sides and the derived functor is defined.",
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c and Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

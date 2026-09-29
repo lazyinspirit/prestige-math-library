@@ -3,17 +3,7 @@ page: normalization-finiteness-for-affine-domains
 title: "Normalization Finiteness for Affine Domains"
 status: published
 requires: [dedekind-domains-and-ideal-classes, noether-normalisation-and-nullstellensatz, algebraic-closure-embeddings-and-separability, affine-algebraic-sets-and-coordinate-rings, morphisms-local-rings-and-rational-maps-of-affine-varieties]
-items: [lem-integral-closure-unchanged-across-an-integral-intermediate-domain,
-        lem-finite-purely-inseparable-rational-extension-envelope,
-        lem-polynomial-algebras-over-fields-are-integrally-closed,
-        lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct,
-        lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct,
-        lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite,
-        lem-normal-extension-separable-over-maximal-purely-inseparable-subextension,
-        thm-polynomial-algebras-over-fields-have-finite-integral-closures,
-        thm-integral-closure-finite-finite-type-domain-over-field,
-        cor-affine-normalization-is-finite,
-        lem-finite-normalization-compatible-with-principal-opens]
+items: [lem-integral-closure-unchanged-across-an-integral-intermediate-domain, lem-finite-purely-inseparable-rational-extension-envelope, lem-polynomial-algebras-over-fields-are-integrally-closed, lem-submodules-of-finite-modules-over-noetherian-rings-are-finite-direct, lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite, lem-normal-extension-separable-over-maximal-purely-inseparable-subextension, thm-polynomial-algebras-over-fields-have-finite-integral-closures, thm-integral-closure-finite-finite-type-domain-over-field, cor-affine-normalization-is-finite, lem-finite-normalization-compatible-with-principal-opens]
 examples: []
 ---
 

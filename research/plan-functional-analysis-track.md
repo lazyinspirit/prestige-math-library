@@ -3322,6 +3322,20 @@ now been acquired and is specified below.
     stable identity, algebraic-multiplicity, absolute-summability and
     separable-support conventions.
 
+For the single-frontier build, the scaffold also includes
+`lem-arbitrary-hilbert-fredholm-determinant-from-separable-support` after the
+local spectral-product theorem. It constructs the arbitrary-Hilbert value by
+restricting to a separable reducing nuclear support and proves independence
+from the support through nonzero generalized eigenspaces and the locally
+proved spectral product. The owner-approved rehome now places the three stable
+published IDs `def-fredholm-determinant`,
+`prop-fredholm-determinant-properties-for-trace-class-operators` and
+`thm-lidskii-for-trace-class-operators` immediately after this support
+theorem on the same A page. Their proofs use the local construction and
+analytic lemmas; the old recorded external theorem remains only a historical
+remark on the preceding trace-class page. The rehome avoids a page cycle and
+preserves the published mathematical claims.
+
 **B page:** `fredholm-determinants-and-the-lidskii-trace-formula-examples`
 
 1. `ex-fredholm-determinant-of-a-finite-rank-operator`.

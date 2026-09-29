@@ -5,7 +5,7 @@ title: Fredholm determinant of a trace-class operator
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-axiom-of-choice, def-trace-class-operator, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, thm-orthogonal-decomposition-by-a-closed-subspace, lem-positive-square-root-of-a-compact-positive-operator, def-absolute-value-and-singular-values-of-a-compact-operator, rem-external-separable-trace-class-fredholm-determinant-theorem, thm-sequential-characterization-of-compact-operators]
+deps: [def-axiom-of-choice, def-trace-class-operator, lem-arbitrary-hilbert-fredholm-determinant-from-separable-support, lem-separable-trace-class-determinant-construction, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, thm-orthogonal-decomposition-by-a-closed-subspace, lem-positive-square-root-of-a-compact-positive-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-sequential-characterization-of-compact-operators]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -20,8 +20,6 @@ verification:
 
 ## Definition
 
-**proof uses external results not yet established in this library**
-
 Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $H$ be a complex
 Hilbert space and let $T\in\mathcal S_1(H)$
 ([[def-trace-class-operator]]). Choose a nuclear representation
@@ -31,8 +29,9 @@ $S=T|_M$. The **Fredholm determinant** of $I+zT$ is
 $$
 \det_H(I+zT):=D_S(z),
 $$
-where $D_S$ is the separable determinant recorded in
-[[rem-external-separable-trace-class-fredholm-determinant-theorem]]. If
+where $D_S$ is the locally constructed separable determinant of
+[[lem-separable-trace-class-determinant-construction]], identified across
+supports by [[lem-arbitrary-hilbert-fredholm-determinant-from-separable-support]]. If
 $H=\{0\}$, this definition gives $\det_H(I+zT)=1$.
 
 The well-definedness argument below proves that this restriction preserves the
@@ -75,7 +74,8 @@ $$
 $$
 Consequently all generalized $\lambda$-eigenvectors lie in $M$, and $S$ and
 $T$ have identical nonzero eigenvalues, generalized kernels, stabilization
-indices, and algebraic multiplicities. The external product formula therefore
-makes $D_S$ independent of the chosen nuclear representation and of every
+indices, and algebraic multiplicities. The locally proved product formula and
+support comparison in [[lem-arbitrary-hilbert-fredholm-determinant-from-separable-support]]
+therefore make $D_S$ independent of the chosen nuclear representation and of every
 separable closed reducing support on whose orthogonal complement $T$ is zero.
 No arbitrary invariant subspace is asserted to reduce $T$.

@@ -1,0 +1,2321 @@
+[
+  {
+    "order": 366.069,
+    "id": "finite-proper-and-projective-morphisms",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Finite Proper and Projective Morphisms",
+    "companion": "finite-proper-and-projective-morphisms-examples",
+    "requires": [
+      "diagonals-separated-morphisms-and-valuative-uniqueness",
+      "algebraic-zariski-main-for-quasi-finite-morphisms",
+      "homogeneous-resultants-and-projective-intersection-length",
+      "regular-local-rings-and-homological-dimension"
+    ],
+    "items": [
+      {
+        "id": "def-affine-local-quasi-coherent-algebra",
+        "kind": "definition",
+        "title": "Affine-local quasi-coherent algebras before general sheaf theory",
+        "statement": "For every affine U=Spec R on the base there must be an R-algebra B_U and an O_U-algebra isomorphism A|_U≅~B_U; the associated module sheaf has sections B_U[φ(r)^{-1}] on D(r), with canonical localization restrictions.",
+        "deps": [
+          "def-scheme-over-base",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-affine-scheme-spectrum",
+          "def-multiplicative-subset-and-localisation"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Stacks Project, Schemes, §26.5 Definition 26.5.3 and Lemma 26.5.4",
+              "url": "https://stacks.math.columbia.edu/tag/01HR"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-affine-morphism-structure-sheaf-pushforward-localizes",
+        "kind": "lemma",
+        "title": "Affine pushforward algebra localizes",
+        "statement": "If f:X→S is affine, U=Spec R⊂S, and f^{-1}U=Spec B with induced ring map φ:R→B, then (f_*O_X)|_U≅~B as O_U-algebras. For every r∈R, sections on D(r) are B_{φ(r)}, and restrictions between principal opens are the canonical localization maps; hence f_*O_X is affine-locally module-associated.",
+        "deps": [
+          "def-affine-morphism-schemes",
+          "def-affine-local-quasi-coherent-algebra",
+          "def-affine-scheme-spectrum",
+          "def-direct-image-sheaf",
+          "def-morphism-ringed-spaces",
+          "def-restriction-sheaf-open-subspace",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-morphism-affine-schemes-from-ring-map",
+          "lem-spectrum-localization-open-immersion",
+          "thm-sections-basic-open-affine-scheme",
+          "def-sheaf-on-topological-space",
+          "def-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes, §29.11 Lemma 29.11.3",
+              "url": "https://stacks.math.columbia.edu/tag/01S8"
+            },
+            {
+              "title": "Stacks Project, Schemes, §26.5 Definition 26.5.3 and Lemma 26.5.4",
+              "url": "https://stacks.math.columbia.edu/tag/01HR"
+            }
+          ]
+        },
+        "strategy": "Fix an affine target chart U=Spec R and an affine presentation f^{-1}U=Spec B. The affine-scheme/ring correspondence gives the induced map φ:R→B. For each principal D(r), prime contraction gives f^{-1}D(r)=D(φ(r)); the direct-image section formula and affine structure-sheaf calculation give B_{φ(r)}, with the canonical localization restrictions. These compatible identifications on the principal-open basis are O_U-algebra isomorphisms and extend uniquely to a sheaf isomorphism. Affineness is used directly from its definition; no target-locality theorem or AC is needed.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-relative-spec-glues-affine-algebras",
+        "kind": "lemma",
+        "title": "Glue relative spectra of affine-local algebras",
+        "statement": "For an affine-local module-associated O_S-algebra A, the affine schemes Spec Γ(U,A) over affine U⊂S glue canonically to an S-scheme π:Spec_S A→S with π^{-1}(U)≅Spec Γ(U,A). Restriction to any principal open agrees with algebra localization, and for every open T⊂S the construction over T is canonically Spec_S A×_S T.",
+        "deps": [
+          "def-affine-local-quasi-coherent-algebra",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-gluing-affine-schemes",
+          "thm-gluing-ringed-and-locally-ringed-spaces",
+          "lem-spectrum-localization-open-immersion",
+          "lem-fibre-product-open-restriction"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Constructions of Schemes, §27.2 Lemma 27.2.1",
+              "url": "https://stacks.math.columbia.edu/tag/01LH"
+            },
+            {
+              "title": "Stacks Project, Constructions of Schemes, §27.3 Relative spectrum via glueing",
+              "url": "https://stacks.math.columbia.edu/tag/01LL"
+            },
+            {
+              "title": "Stacks Project, Schemes, §26.5 Definition 26.5.3 and Lemma 26.5.4",
+              "url": "https://stacks.math.columbia.edu/tag/01HR"
+            }
+          ]
+        },
+        "strategy": "Set B_U=Γ(U,A). For affine inclusions U⊂V, induce Spec B_U→Spec B_V by restriction and cover U by distinguished opens D_V(f) contained in U; principal-open localization identifies both inverse-image charts with Spec Γ(D(f),A), proving the map is an open immersion onto the full preimage of U. On arbitrary affine overlaps, use affine opens W contained in the intersection and these inclusion maps to define the canonical transitions; verify their compatibility and triple cocycle on common affine refinements. Glue the affine charts and their structure maps to S. For any open T⊂S, the affine charts contained in T give exactly the restriction of the atlas to the inverse image of T, which represents the base change along T→S.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-affine-morphism-relative-spec-characterization",
+        "kind": "theorem",
+        "title": "Affine morphisms are relative spectra",
+        "statement": "A morphism f:X→S is affine iff there is an affine-locally module-associated sheaf A of commutative unital O_S-algebras and an S-isomorphism X≅Spec_S A. If f is affine, one may take A=f_*O_X. Conversely, for any such A and S-isomorphism, f is affine and the induced O_S-algebra isomorphism is f_*O_X≅A. No choice axiom is assumed.",
+        "deps": [
+          "def-affine-morphism-schemes",
+          "def-affine-local-quasi-coherent-algebra",
+          "def-direct-image-sheaf",
+          "def-morphism-of-schemes",
+          "def-morphism-ringed-spaces",
+          "def-scheme-over-base",
+          "lem-affine-morphism-structure-sheaf-pushforward-localizes",
+          "lem-relative-spec-glues-affine-algebras",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-gluing-affine-schemes",
+          "thm-gluing-sheaves"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "Set A=f_*O_X, with its O_S-algebra structure from the scheme morphism. For each affine U, the affine pushforward-localization lemma shows A|_U is module-associated and records principal-open restrictions. The relative-Spec gluing lemma gives π:Spec_S A→S with π^{-1}(U)=Spec Γ(U,A). The direct-image definition identifies Γ(U,A)=Γ(f^{-1}U,O_X), so the canonical affine scheme/ring equivalence gives chart isomorphisms; their restrictions are induced by the same sheaf restrictions and glue to an S-isomorphism. Conversely π^{-1}(U) is affine for every affine U by the relative-Spec chart lemma, and this property transports across an S-isomorphism. On principal-open bases, the relative-Spec localization formula and global sections identify π_*O with A; sheaf gluing extends this canonically to S. The proof uses all affine opens and canonical global sections, so no choice axiom is needed.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-finite-morphism-schemes",
+        "kind": "definition",
+        "title": "Finite morphisms of schemes",
+        "statement": "A morphism f:X→S is finite if for every affine open U=Spec A⊂S its inverse image is Spec B for an A-algebra B that is finite as an A-module. The all-affine-open condition is the definition; the later local criterion proves when an affine cover suffices.",
+        "deps": [
+          "def-affine-morphism-schemes",
+          "def-finite-type-and-module-finite-algebras"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-morphism-affine",
+        "kind": "lemma",
+        "title": "Finite is affine and local on its target",
+        "statement": "Every finite morphism is affine. Assuming AC, finiteness is equivalent to the existence of an affine open cover S=⋃U_i such that each f^{-1}(U_i) is affine and Γ(f^{-1}(U_i),O_X) is module-finite over Γ(U_i,O_S). The finite-to-affine implication is choice-free; AC is used only in the local converse.",
+        "deps": [
+          "def-finite-morphism-schemes",
+          "def-finite-type-and-module-finite-algebras",
+          "def-affine-morphism-schemes",
+          "lem-affine-morphism-local-on-target",
+          "def-axiom-of-choice",
+          "cor-affine-scheme-quasi-compact",
+          "def-affine-scheme-spectrum",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "lem-spectrum-localization-open-immersion",
+          "thm-sections-basic-open-affine-scheme",
+          "thm-affine-fibre-product-tensor-ring",
+          "lem-fibre-product-open-restriction",
+          "lem-spectrum-compactness-open-cover-to-unit-ideal",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-localisation-of-a-module",
+          "def-principal-localisation",
+          "lem-zero-in-a-localised-module",
+          "thm-localisation-of-modules-is-tensor-product",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "thm-generated-ideal-description-in-a-commutative-ring"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            },
+            {
+              "title": "Stacks Project, Morphisms of Schemes, Lemma 29.45.3",
+              "url": "https://stacks.math.columbia.edu/tag/01WI"
+            },
+            {
+              "title": "Stacks Project, Algebra, Lemma 10.36.14(2)",
+              "url": "https://stacks.math.columbia.edu/tag/02JL"
+            }
+          ]
+        },
+        "strategy": "Assume AC for the converse. Published affine locality makes f affine. For arbitrary affine U=Spec R, refine the given cover by all principal opens D_U(h) contained in a cover member; quasi-compactness gives a finite subcover. Each restricted inverse image is the affine fibre product of the given finite chart with D_U(h), so its coordinate algebra is a tensor product of a finite module and remains finite. Since f is affine, write f^{-1}U=Spec B; tensor localization identifies each local coordinate algebra with the localization of B as an R-module. Choose finite local generators, replace them by numerators, and let N⊂B be their R-span. Each class in B/N is killed by a power of each covering h. The same principal opens defined by those powers cover U; AC gives the unit-ideal relation, so B=N is finite. The finite-to-affine implication is immediate from the definition and choice-free.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-stable-base-change-composition",
+        "kind": "lemma",
+        "title": "Finite morphisms survive base change and composition",
+        "statement": "Assume AC for the base-change assertion: every base change of a finite scheme morphism is finite. Finite scheme morphisms are closed under composition, choice-free.",
+        "deps": [
+          "def-finite-morphism-schemes",
+          "lem-finite-morphism-affine",
+          "thm-fibre-products-of-schemes-exist",
+          "def-axiom-of-choice",
+          "thm-affine-fibre-product-tensor-ring",
+          "lem-fibre-product-open-restriction",
+          "def-scheme",
+          "def-finite-type-and-module-finite-algebras"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Stacks Project, Morphisms of Schemes, Lemmas 29.45.5–29.45.6",
+              "url": "https://stacks.math.columbia.edu/tag/01WG"
+            },
+            {
+              "title": "Stacks Project, Algebra, Lemma 10.7.3",
+              "url": "https://stacks.math.columbia.edu/tag/00GL"
+            },
+            {
+              "title": "Stacks Project, Algebra, Lemma 10.36.13",
+              "url": "https://stacks.math.columbia.edu/tag/02JK"
+            }
+          ]
+        },
+        "strategy": "Assume AC for base change. Cover the new target T by all affine opens W mapping into an affine U=Spec A of S. Write f^{-1}(U)=Spec B with B finite over A. Open restriction and the affine fibre-product formula identify the pullback over W=Spec A′ with Spec(B⊗_A A′); tensors of finite module generators generate it over A′. Apply the AC-dependent finite affine-cover criterion to this cover. For composition, over any affine U=Spec A in the final target, write the successive inverse-image rings A→B→C; products of finite B/A and C/B module generators generate C over A, with no AC.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-morphism-integral-closed",
+        "kind": "theorem",
+        "title": "Finite morphisms are universally closed",
+        "statement": "Every finite morphism f:X→S is integral and universally closed. Its image, and the image of any closed subscheme under any base change, is closed.",
+        "deps": [
+          "def-finite-morphism-schemes",
+          "thm-integrality-and-finite-module-equivalences",
+          "def-integral-element-and-algebraic-integer",
+          "thm-lying-over",
+          "lem-finite-stable-base-change-composition",
+          "def-affine-scheme-spectrum",
+          "lem-zariski-closed-set-axioms",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "On U=Spec A with X_U=Spec B, handle A=0 or B=0 directly. Otherwise replace A by its image A′ in B; B is a faithful finite A′-module, so the published finite-module integrality criterion makes each b∈B integral over A′ and hence over A. For closed Z=V(J), the induced map A→B/J remains integral; lying-over identifies its image with V(ker(A→B/J)), hence it is closed. Apply this after arbitrary base change and glue. AC enters through the published prime-lifting results.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-universally-closed-morphism",
+        "kind": "definition",
+        "title": "Universally closed morphisms",
+        "statement": "A scheme morphism f:X→S is universally closed if every base change f_T:X×_S T→T takes closed subsets to closed subsets, for every scheme T→S.",
+        "deps": [
+          "def-base-change-morphism-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-proper-morphism",
+        "kind": "definition",
+        "title": "Proper morphisms",
+        "statement": "A scheme morphism is proper if it is separated, of finite type, and universally closed. No Noetherian or finite-presentation hypothesis is implicit.",
+        "deps": [
+          "def-separated-morphism-schemes",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-universally-closed-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-closed-immersion-affine-quotient-and-base-change",
+        "kind": "lemma",
+        "title": "Closed immersions are affine quotients and survive base change",
+        "statement": "Assume AC. For a closed immersion i:Z→Y in the published sheaf-surjection convention, each affine target open U=Spec A has i^{-1}U≅Spec(A/I) for a unique ideal I⊂A. Conversely every quotient map A→A/I induces a closed immersion Spec(A/I)→Spec A. Consequently every base change of i is a closed immersion. The empty subscheme is covered by I=A.",
+        "deps": [
+          "def-closed-immersion-schemes",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "lem-affineness-from-unit-generating-global-sections",
+          "cor-nilradical-as-intersection-of-primes",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-affine-fibre-product-tensor-ring",
+          "lem-closed-immersion-local-on-target",
+          "def-axiom-of-choice",
+          "def-scheme",
+          "cor-affine-scheme-quasi-compact",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "lem-zariski-closed-set-axioms",
+          "lem-spectrum-localization-open-immersion",
+          "thm-sections-basic-open-affine-scheme",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-stalk-of-presheaf",
+          "def-localisation-at-a-prime-ideal",
+          "def-localisation-of-a-module",
+          "thm-universal-property-of-localisation",
+          "thm-localisation-of-modules-is-exact",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "cor-tensor-product-with-a-quotient-ring",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "def-direct-image-sheaf",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "def-base-change-morphism-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Schemes §§26.8, 26.10, 26.19–20",
+              "url": "https://stacks.math.columbia.edu/download/schemes.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "strategy": "Reduce to an affine target Y=Spec A. Its closed image E is quasi-compact, so Z has a finite affine-open cover W_j. The principal opens D(f) whose intersection with E is contained in some W_j form a cover of E; compactness gives finitely many (with their W_j labels), and each inverse image is principal affine in its labeled chart. Write E=V(J). Since these D(f_i) cover V(J), V(J+(f_1,...,f_n)) is empty. If A is nonzero and the aggregate ideal were proper, AC and maximal-ideal existence would give a prime containing J and every f_i, a contradiction; for A=0 the aggregate ideal is already A. Thus J+(f_1,...,f_n)=A and a finite relation has the form 1=Σa_i f_i+Σb_l g_l with g_l∈J. On every affine W_j each g_l lies in every prime, hence is nilpotent by the nilradical theorem; finiteness of both lists gives a common exponent, so each g_l is globally nilpotent on Z. Their finite linear combination h=Σb_lg_l is nilpotent, making Σa_i f_i=1-h a unit. The finite principal-cover criterion makes Z affine, say Spec B. Compute the stalk of i_*O_Z at p from its sections B_{φ(f)} on D(f), f∉p: it is the localization of B at the image of A\\p. The sheaf-surjective closed-immersion map therefore gives surjective localized maps A_p→B_p; exact localization and AC prime support show A→B is surjective, with unique kernel I and B≅A/I. Conversely the quotient spectrum is homeomorphic to V(I), and stalk maps of the direct-image sheaf are localizations of A→A/I, hence surjective. For every base change, refine its target by affine opens mapping into affine opens of Y; the affine fibre product is Spec((A/I)⊗_A A′)≅Spec(A′/IA′), a quotient closed immersion, and target-locality glues. This is an independent local proof; it does not use thm-affine-closed-immersions-quotient-rings or later quasi-coherent-sheaf theory.",
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-finite-morphism-proper",
+        "kind": "corollary",
+        "title": "Finite morphisms are proper",
+        "statement": "Every finite morphism of schemes is proper.",
+        "deps": [
+          "thm-finite-morphism-integral-closed",
+          "def-proper-morphism",
+          "def-finite-morphism-schemes",
+          "lem-finite-morphism-affine",
+          "lem-affine-morphism-separated",
+          "def-finite-type-and-module-finite-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "cor-affine-scheme-quasi-compact",
+          "lem-base-change-quasi-compact-morphisms",
+          "def-scheme",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "A finite morphism is finite type. It is affine; over U=Spec A write X_U=Spec B. The diagonal on this chart is induced by the surjective multiplication map B⊗_A B→B, hence is a closed immersion by direct affine quotient construction. Closed immersions are target-local, so f is separated. Universal closedness is the finite-integral theorem. These are the three properness conditions.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-proper-stable-base-change",
+        "kind": "lemma",
+        "title": "Properness survives arbitrary base change",
+        "statement": "Assume AC. Every base change of a proper morphism is proper.",
+        "deps": [
+          "def-proper-morphism",
+          "cor-base-change-finite-type-and-products",
+          "def-universally-closed-morphism",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-diagonal-base-change-identification",
+          "def-separated-morphism-schemes",
+          "def-axiom-of-choice",
+          "lem-base-change-composition"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "The new diagonal is the base change of the old diagonal by the published diagonal-identification lemma. Since f is separated, its diagonal is a closed immersion; the local quotient/base-change lemma makes the new diagonal closed, so separatedness ascends. Finite type ascends by the published base-change theorem. A further base change of f_T is one of f, hence closed; apply the properness definition.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-proper-stable-composition",
+        "kind": "lemma",
+        "title": "Properness survives composition",
+        "statement": "Assume AC. The composition of two proper scheme morphisms is proper.",
+        "deps": [
+          "def-proper-morphism",
+          "lem-finite-type-local-on-source-and-target",
+          "def-universally-closed-morphism",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "def-diagonal-morphism-scheme",
+          "def-separated-morphism-schemes",
+          "def-axiom-of-choice",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-finite-type-and-module-finite-algebras",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "cor-affine-scheme-quasi-compact",
+          "def-scheme",
+          "def-closed-immersion-schemes",
+          "def-direct-image-sheaf",
+          "def-stalk-of-presheaf",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-base-change-morphism-schemes",
+          "thm-fibre-products-of-schemes-exist",
+          "lem-fibre-product-associativity-and-symmetry"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "For X→Y→S, the map X×_Y X→X×_S X is the base change of the closed diagonal of Y/S, hence a closed immersion by the local base-change lemma. Composing it with the closed diagonal of X/Y gives Δ_{X/S}, so the composite is separated; composition of closed immersions follows directly from closed images and surjective sheaf maps. Finite type composes by affine ring-generator composition and quasi-compactness. Under every base change the composite is a composite of closed maps, hence universally closed.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-proper-local-on-base",
+        "kind": "lemma",
+        "title": "Properness is local on the target",
+        "statement": "A morphism f:X→S is proper iff its restrictions over an open cover of S are proper.",
+        "deps": [
+          "def-proper-morphism",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "lem-finite-type-local-on-source-and-target",
+          "lem-base-change-quasi-compact-morphisms",
+          "lem-base-change-composition",
+          "def-universally-closed-morphism",
+          "lem-closed-immersion-local-on-target",
+          "lem-diagonal-base-change-identification",
+          "def-separated-morphism-schemes",
+          "def-scheme",
+          "def-affine-scheme-spectrum",
+          "lem-spectrum-localization-open-immersion"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "The diagonal of f restricted over each open base S_i is the restriction of Δ_{X/S} to the corresponding open of X×_S X. Closed immersions are local on the target, so separatedness glues across this open cover. Finite type is target-local by the published criterion. After arbitrary T→S, a closed C⊂X_T has closed images in each open T_i by the local universal-closedness property; a subset closed on an open cover is closed globally. Reverse implications follow by base change.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-proper-morphism-closed-image",
+        "kind": "theorem",
+        "title": "Proper maps have closed images",
+        "statement": "A proper scheme morphism is closed; in particular its image is closed in the target, and the same holds after arbitrary base change.",
+        "deps": [
+          "def-proper-morphism",
+          "def-universally-closed-morphism",
+          "def-base-change-morphism-schemes",
+          "def-fibre-product-schemes-universal-property"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Use universal closedness with the identity base change, then apply it to the whole source as a closed subset of itself. Repeat after any base change.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-closed-immersion-proper",
+        "kind": "lemma",
+        "title": "Closed immersions are proper",
+        "statement": "Every closed immersion of schemes is finite, hence proper; the empty closed immersion is included.",
+        "deps": [
+          "def-closed-immersion-schemes",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "def-finite-morphism-schemes",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-finite-type-and-module-finite-algebras",
+          "cor-finite-morphism-proper",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "On affine target charts, the local quotient/base-change lemma identifies a closed immersion with Spec(A/I)→Spec A. The A-module A/I is cyclic, including I=A. Hence the morphism is finite by target locality, and finite morphisms are proper.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-proper-source-to-separated-target-proper",
+        "kind": "lemma",
+        "title": "A map from a proper source to a separated target is proper",
+        "statement": "If X→S is proper and Y→S is separated, every S-morphism h:X→Y is proper.",
+        "deps": [
+          "def-proper-morphism",
+          "def-separated-morphism-schemes",
+          "def-graph-morphism-over-base",
+          "lem-graph-as-pullback-diagonal",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-closed-immersion-proper",
+          "def-base-change-morphism-schemes",
+          "lem-proper-stable-base-change",
+          "lem-proper-stable-composition",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "The graph Γ_h:X→X×_S Y is a base change of the closed diagonal of the separated morphism Y→S, by the published graph/pullback identification. The local quotient/base-change lemma makes Γ_h a closed immersion. The projection X×_S Y→Y is the base change of proper X→S and is proper. Compose these proper maps.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-quasi-compact-scheme-image-specialization-closed",
+        "kind": "lemma",
+        "title": "A quasi-compact image stable under specialization is closed",
+        "statement": "Assume AC. For a quasi-compact morphism g:Z→Y, g(Z) is closed iff it is stable under specialization in Y.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-morphism-of-schemes",
+          "def-morphism-ringed-spaces",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-quasi-compact-and-quasi-separated-scheme",
+          "def-scheme",
+          "def-affine-open-subscheme",
+          "cor-affine-scheme-quasi-compact",
+          "def-affine-scheme-spectrum",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-specialisation-and-generic-point",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-morphism-affine-schemes-from-ring-map",
+          "def-localisation-at-a-prime-ideal",
+          "def-multiplicative-subset-and-localisation",
+          "thm-localisation-equivalence-and-ring-laws",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "cor-maximal-ideals-are-prime"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Schemes, Lemma 26.19.7 (tag 05JL)",
+              "url": "https://stacks.math.columbia.edu/tag/05JL"
+            },
+            {
+              "title": "The Stacks Project, Commutative Algebra, Lemma 10.41.5 (tag 00HY)",
+              "url": "https://stacks.math.columbia.edu/tag/00HY"
+            }
+          ]
+        },
+        "strategy": "For the closed-image direction, let y lie in the closure of the image and choose an affine open U=Spec A around y. Quasi-compactness gives a finite affine cover of g^{-1}U. Since y lies in the closure of their finite union of images, it lies in the closure of one chart Spec B→Spec A; write φ:A→B for its ring map and S=φ(A\\p), where p represents y. If S^{-1}B were zero, the localization-zero criterion would give f∉p with φ(f)=0, so D(f) would miss the chart image despite containing y. Thus S^{-1}B is nonzero. Under AC it has a prime, whose contraction q⊂B avoids S; then φ^{-1}(q)⊂p and is a point of the image specializing to y. Stability puts y in the image. The reverse direction follows because closed subsets contain all specializations of their points. Only prime existence uses AC; finite chart extraction uses quasi-compactness.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-universally-closed-valuative-existence-quasicompact",
+        "kind": "lemma",
+        "title": "Valuation lifts detect universal closedness",
+        "statement": "Assume AC. For quasi-compact f:X→S, f is universally closed iff every valuative diagram over every valuation ring R⊂K has a lift Spec R→X. DVRs do not suffice: a quasi-compact principal open immersion is not universally closed although every DVR diagram lifts.",
+        "deps": [
+          "cor-affine-scheme-quasi-compact",
+          "cor-specialisation-order-is-prime-inclusion",
+          "def-affine-open-subscheme",
+          "def-affine-scheme-spectrum",
+          "def-axiom-of-choice",
+          "def-base-change-morphism-schemes",
+          "def-closed-immersion-schemes",
+          "def-discrete-valuation",
+          "def-discrete-valuation-ring",
+          "def-fibre-product-schemes-universal-property",
+          "def-field-of-fractions",
+          "def-local-ring",
+          "def-localisation-at-a-prime-ideal",
+          "def-morphism-of-schemes",
+          "def-open-immersion-schemes",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-residue-field-scheme-point",
+          "def-scheme",
+          "def-specialisation-and-generic-point",
+          "def-universally-closed-morphism",
+          "def-valuation-on-a-field",
+          "def-valuation-ring",
+          "def-valuative-diagram-separatedness",
+          "lem-base-change-quasi-compact-morphisms",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-field-valued-points-of-schemes",
+          "lem-local-domain-dominated-by-valuation-overring",
+          "lem-quasi-compact-scheme-image-specialization-closed",
+          "lem-spectrum-localization-open-immersion",
+          "lem-valuation-ring-is-local",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-gluing-affine-schemes",
+          "thm-radical-as-intersection-of-primes",
+          "thm-sections-basic-open-affine-scheme",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Schemes, Lemma 26.19.8 (tag 01K9)",
+              "url": "https://stacks.math.columbia.edu/tag/01K9"
+            },
+            {
+              "title": "Stacks Project, Schemes, Lemmas 26.20.2, 26.20.4–5 and Proposition 26.20.6 (tags 01KC, 01J8, 01KE, 01KF)",
+              "url": "https://stacks.math.columbia.edu/tag/01KF"
+            }
+          ]
+        },
+        "strategy": "Forward: base change to Spec R, use closedness to obtain a specialization over the closed point, and show the image of its local ring in K is a dominating local overring of R, hence equals R. Reverse: for each closed subset Z after arbitrary base change, construct its reduced closed subscheme on affine quotient charts; verify localization, common principal overlap compatibility, and gluing using AC to identify radical ideals from their vanishing sets. For each specialization in Z→T, dominate the image of the specialization stalk in a residue field by a valuation ring; apply existence and the fibre-product universal property to lift the specialization inside Z. Quasi-compactness of Z→T and the AC image-specialization lemma give closed images. Separately construct a rank-two composite valuation ring R with Spec R minus its maximal point equal to the principal open D(t); prove every DVR diagram lifts by the two possible generic kernels 0 and P.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-valuative-criterion-properness",
+        "kind": "theorem",
+        "title": "Valuative criterion for properness",
+        "statement": "Assume AC. For a finite-type, quasi-separated morphism f:X→S, f is proper iff every valuative diagram for f over an arbitrary valuation ring has exactly one lift. Finite type alone does not replace quasi-separatedness.",
+        "deps": [
+          "def-proper-morphism",
+          "def-valuative-diagram-separatedness",
+          "lem-universally-closed-valuative-existence-quasicompact",
+          "thm-valuative-criterion-separatedness",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Finite type implies quasi-compact. By the local existence lemma, universal closedness is equivalent to existence for all valuation rings. Published valuative uniqueness detects separatedness under quasi-separatedness and AC. For the published uniqueness theorem’s diagonal-immersion proof, the local affine-quotient lemma here supplies the surjective-multiplication closed-immersion step without relying on its published proof-locality debt. Combine with the definition of properness; identify AC in the existence lemma and published uniqueness theorem.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-complete-variety",
+        "kind": "definition",
+        "title": "Complete varieties",
+        "statement": "For a scheme-theoretic k-variety X (integral, separated and finite type over k), call X complete when its structure morphism X→Spec k is proper. This is a scheme property and makes no assertion about compactness of X(k) in an unspecified topology.",
+        "deps": [
+          "def-proper-morphism",
+          "def-variety-scheme-theoretic"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry, 2011 public draft, §11.3.1",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-integral-finite-type-scheme-function-field",
+        "kind": "lemma",
+        "title": "Function field of an integral finite-type scheme",
+        "statement": "Let k be a field, X an integral finite-type k-scheme, and η its generic point. For every nonempty affine open U=Spec A, K=O_{X,η} is canonically Frac Γ(U,O_X); K/k is finitely generated, and Γ(X,O_X) embeds into K. Assume AC for the final clause: if X is geometrically integral for the chosen algebraic closure kbar/k, then K⊗_k kbar is a domain.",
+        "deps": [
+          "def-integral-scheme",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-geometrically-reduced-integral-connected-fibre",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-localisation-at-a-prime-ideal",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "lem-base-extension-field-coordinate-ring",
+          "thm-flatness-criteria-by-injections-and-ideals",
+          "def-finitely-generated-field-extension",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-generic-point-irreducible-closed-subset",
+          "def-axiom-of-choice",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-universal-property-of-localisation"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Varieties, Definition 33.9.1 (tag 020H)",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf"
+            }
+          ]
+        },
+        "strategy": "For any nonempty affine open U=Spec A, integrality makes A a domain and the generic point corresponds to (0), so the generic stalk is A_(0)=Frac A. One finite-type affine neighborhood of η makes K a finitely generated field; injectivity of Γ(X,O_X)→K follows chartwise from A→Frac A. For the geometric clause, the base-changed chart is Spec(A⊗_k kbar). Flatness of the k-module A keeps A→A⊗_k kbar injective, so this ring is nonzero; under AC it has a maximal ideal and is therefore a nonempty affine open of the integral geometric fibre, hence a domain. Localizing at A\\{0} identifies K⊗_k kbar with a localization of that domain.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-algebraically-independent-finite-tuples-over-a-field",
+        "kind": "definition",
+        "title": "Algebraic independence in a field extension",
+        "statement": "For a field extension K/k and a subset S⊆K, S is algebraically independent over k when the evaluation homomorphism k[X_s:s∈S]→K extending k↪K and sending X_s↦s is injective.",
+        "deps": [
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "thm-polynomial-ring-on-a-family-is-a-commutative-ring",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "def-algebraic-and-transcendental-elements"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Fields, Definition 9.26.1 (tag 030D)",
+              "url": "https://stacks.math.columbia.edu/tag/030D"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-relative-algebraic-constants-fg-field-finite",
+        "kind": "lemma",
+        "title": "A finite-type field has finite relative algebraic constants",
+        "statement": "If K/k is a finitely generated field extension, then k_alg := {a ∈ K : a is algebraic over k} is a finite extension of k.",
+        "deps": [
+          "def-algebraic-and-transcendental-elements",
+          "def-algebraically-independent-finite-tuples-over-a-field",
+          "def-extension-degree-and-finite-extension",
+          "def-finitely-generated-field-extension",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-relative-algebraic-closure",
+          "cor-element-algebraic-iff-simple-extension-finite",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "thm-algebraic-elements-form-a-subfield",
+          "thm-finite-field-extensions-are-algebraic",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "thm-tower-law-for-finite-field-extensions",
+          "thm-transitivity-of-algebraicity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Fields, Lemma 9.26.11 (tag 037J)",
+              "url": "https://stacks.math.columbia.edu/tag/037J"
+            },
+            {
+              "title": "Stacks Project, Fields, Lemma 9.26.10 (tag 0G1M)",
+              "url": "https://stacks.math.columbia.edu/tag/0G1M"
+            },
+            {
+              "title": "Stacks Project, Fields, Definition 9.26.9 (tag 037I)",
+              "url": "https://stacks.math.columbia.edu/tag/037I"
+            },
+            {
+              "title": "Stacks Project, Fields, Lemma 9.8.6 (tag 09GH)",
+              "url": "https://stacks.math.columbia.edu/tag/09GH"
+            }
+          ]
+        },
+        "strategy": "Build an independent finite subset T from a finite field-generating list by a scan; then K/k(T) is finite. Prove T remains independent over every algebraic intermediate field. For each finite intermediate L/k, a k-basis stays independent over k(T), so [L:k] is bounded by [K:k(T)]. Scan the finite set of positive attained degrees to obtain a greatest degree d0 and fix one intermediate field L attaining it. For every a algebraic over k, the tower L(a)/L/k and maximality force a∈L; the converse follows because L/k is finite. The argument uses no choice principle.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-global-functions-proper-integral-variety",
+        "kind": "theorem",
+        "title": "Regular functions on proper integral varieties are constants",
+        "statement": "Assume AC. If X is a nonempty proper integral finite-type k-scheme, Γ(X,O_X) is a finite field extension of k inside k(X). If X is geometrically integral over k, then Γ(X,O_X)=k; in particular this holds over algebraically closed k.",
+        "deps": [
+          "def-proper-morphism",
+          "lem-proper-source-to-separated-target-proper",
+          "thm-proper-morphism-closed-image",
+          "lem-relative-algebraic-constants-fg-field-finite",
+          "lem-integral-finite-type-scheme-function-field",
+          "def-geometrically-reduced-integral-connected-fibre",
+          "lem-projective-space-diagonal-closed",
+          "def-relative-projective-space-standard-charts",
+          "def-axiom-of-choice",
+          "def-integral-scheme",
+          "def-generic-point-irreducible-closed-subset",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "lem-distinguished-open-refinement-at-a-point",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-rank-nullity",
+          "def-dimension",
+          "thm-tensor-product-basis-from-bases",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-universal-property-of-module-tensor-products",
+          "cor-a-linear-subspace-has-a-complement",
+          "thm-algebraic-embedding-extension",
+          "def-algebraically-closed-field",
+          "def-algebraic-closure"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Varieties §33.9",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Embed global functions into K=k(X) by restriction to the generic point. Each g defines X→A1_k→P1_k; P1 is separated, so the map from proper X to P1 is proper and has closed irreducible image avoiding infinity. Such an image is a closed point of A1, so g is algebraic over k. Hence Γ is a field within finite k_alg by the preceding lemma. If L⊂Γ is nontrivial finite over k, L⊗_k L has zero divisors (minimal polynomial splits off a factor over L), and injects into K⊗_k kbar after choosing an embedding L→kbar. Geometric integrality makes that target a domain; contradiction. The choice of algebraic closure/embedding and preceding lemmas uses AC.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-no-nonconstant-map-proper-variety-to-affine-line",
+        "kind": "corollary",
+        "title": "Proper integral varieties have constant affine-line maps",
+        "statement": "For a nonempty proper integral finite-type X/k, every k-morphism X→A1_k has one closed point as image, whose residue field is finite over k. If X is geometrically integral, it factors through a k-rational point.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-global-functions-proper-integral-variety",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "def-scheme-over-base",
+          "thm-global-sections-affine-scheme",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "cor-spectrum-is-a-contravariant-topological-functor",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-prime-and-maximal-ideals",
+          "def-closed-point-scheme",
+          "cor-closed-points-of-spectrum-are-maximal-ideals",
+          "def-residue-field-scheme-point",
+          "def-zero-divisor-and-integral-domain",
+          "def-morphism-ringed-spaces",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-rank-nullity",
+          "thm-universal-property-of-a-polynomial-ring",
+          "cor-factor-theorem-over-a-commutative-ring"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Varieties §33.9",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Morphisms to A1_k correspond to global regular functions. Apply the finite-field statement, using the point defined by the minimal polynomial; geometric integrality reduces the field of constants to k.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "def-projective-morphism-pre-proj",
+        "kind": "definition",
+        "title": "Projective morphisms before Proj",
+        "statement": "A morphism f:X→S is projective here if for some finite n≥0 it factors as a closed immersion X→P^n_S followed by P^n_S→S. This finite-dimensional convention is called H-projective in Stacks; no claim is made about the broader projective-bundle convention.",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "def-closed-immersion-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-quasi-projective-morphism",
+        "kind": "definition",
+        "title": "Quasi-projective morphisms before Proj",
+        "statement": "This page adopts the H-quasi-projective convention: f:X→S factors through a quasi-compact immersion X→P^n_S for some finite n. An open subscheme U of a projective S-scheme Y is quasi-projective here when the composite immersion U→Y→P^n_S is quasi-compact.",
+        "deps": [
+          "def-projective-morphism-pre-proj",
+          "def-locally-closed-immersion",
+          "def-quasi-compact-and-quasi-separated-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.41–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-projective-space-proper-over-base",
+        "kind": "theorem",
+        "title": "Finite-dimensional projective space is proper over every base",
+        "statement": "Assume AC. For every scheme S and every n≥0 the structure morphism P^n_S→S is proper; no Noetherian, field or nonemptiness hypothesis is imposed and the empty base is included.",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "lem-projective-space-diagonal-closed",
+          "lem-projective-space-finite-type-over-base",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "lem-universally-closed-valuative-existence-quasicompact",
+          "def-valuative-diagram-separatedness",
+          "def-valuation-ring",
+          "def-scheme",
+          "def-open-immersion-schemes",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-finite-type-and-module-finite-algebras",
+          "def-proper-morphism",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Finite type comes from the standard affine charts over affine opens of the base and separatedness from the closed diagonal lemma. For the valuative criterion, reduce to an affine base and a chart, write the K-point as coordinates a_0,…,a_n with a_i=1, and use the valuation-ring dichotomy to choose m with all a_j/a_m∈R; the ratios a_ℓ/a_m then define an A-algebra map A[x^(m)]→R giving the lift. Existence of lifts plus quasi-compactness gives universal closedness, and separated+finite type+universally closed is proper. AC enters only through the existence half of the valuative criterion.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-projective-morphism-proper",
+        "kind": "theorem",
+        "title": "Projective morphisms are proper",
+        "statement": "Every projective morphism under the finite-dimensional convention is proper.",
+        "deps": [
+          "def-projective-morphism-pre-proj",
+          "thm-projective-space-proper-over-base",
+          "lem-closed-immersion-proper",
+          "lem-proper-stable-composition",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Factor X→P^n_S→S. The first arrow is a proper closed immersion, the second is proper, and proper maps compose.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-quasi-finite-morphism-schemes",
+        "kind": "definition",
+        "title": "Quasi-finite morphisms of schemes",
+        "statement": "A scheme morphism f:X→S is quasi-finite if it is of finite type and for every x∈X there are affine neighbourhoods U=Spec B of x and V=Spec A of f(x), with f(U)⊂V, such that A→B is quasi-finite at the prime q corresponding to x in the sense of the published affine-algebra definition. Empty sources satisfy the pointwise condition vacuously. Separatedness is a separate hypothesis, not part of this definition.",
+        "deps": [
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-scheme-theoretic-fibre",
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes, §29.21 Definition 29.21.1 and Lemma 29.21.6",
+              "url": "https://stacks.math.columbia.edu/tag/01TC"
+            },
+            {
+              "title": "Stacks Project, Commutative Algebra, §10.122 Lemmas 10.122.1–2 and Definition 10.122.3",
+              "url": "https://stacks.math.columbia.edu/tag/00PK"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-quasi-finite-morphism-fibre-characterization",
+        "kind": "lemma",
+        "title": "Finite-fibre and pointwise characterizations of quasi-finiteness",
+        "statement": "Let f:X→S be a finite-type morphism, with quasi-finiteness as defined on this page. The following are equivalent: (1) f is quasi-finite; (2) every x∈X is isolated in the fibre X_{f(x)} and κ(x)/κ(f(x)) is finite; (3) for every s∈S the fibre morphism X_s→Spec κ(s) is finite.",
+        "deps": [
+          "def-quasi-finite-morphism-schemes",
+          "def-quasi-finite-at-a-prime-for-finite-type-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-scheme-theoretic-fibre",
+          "def-finite-morphism-schemes",
+          "cor-base-change-finite-type-and-products"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes, §29.21 Definition 29.21.1 and Lemmas 29.21.3, 29.21.5–7, 29.21.10",
+              "url": "https://stacks.math.columbia.edu/tag/01TC"
+            },
+            {
+              "title": "Stacks Project, Commutative Algebra, Lemma 10.122.1",
+              "url": "https://stacks.math.columbia.edu/tag/00PJ"
+            },
+            {
+              "title": "Stacks Project, Commutative Algebra, Lemma 10.122.2",
+              "url": "https://stacks.math.columbia.edu/tag/00PK"
+            },
+            {
+              "title": "Stacks Project, Commutative Algebra, Definition 10.122.3",
+              "url": "https://stacks.math.columbia.edu/tag/00PL"
+            },
+            {
+              "title": "Stacks Project, Varieties, Lemma 33.20.2",
+              "url": "https://stacks.math.columbia.edu/tag/06LH"
+            }
+          ]
+        },
+        "strategy": "At each point, identify the local fibre ring B_q/pB_q and use the finite-type algebra criterion (Stacks 10.122.2) to prove quasi-finiteness iff isolatedness; finite-dimensionality also gives the finite residue extension. A finite fibre has a finite-dimensional Artinian coordinate ring, so its points are isolated with finite residues. Conversely, a quasi-finite finite-type morphism has zero-dimensional fibres; base-change stability preserves finite type and quasi-compactness, and the complete 33.20.2 argument decomposes each fibre into finitely many finite-dimensional local Artinian spectra, making it finite. Empty fibres and nilpotents are included; no separatedness or AC is used.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-proper-birational-normal-curve-isomorphism-off-finite-set",
+        "kind": "corollary",
+        "title": "Proper birational normal curves agree off finitely many points",
+        "statement": "Let f:X→Y be a proper birational morphism of integral finite-type curves over a field, with Y normal. Then there is a finite set of closed points F⊂Y such that f^{-1}(Y\\F)→Y\\F is an isomorphism.",
+        "deps": [
+          "def-proper-morphism",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "thm-proper-morphism-closed-image",
+          "def-birational-morphism-schemes",
+          "lem-birational-morphism-principal-open-isomorphism",
+          "lem-curve-closed-subsets-finite",
+          "def-dimension-noetherian-topological-space",
+          "def-integral-scheme",
+          "def-generic-point-irreducible-closed-subset",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-open-immersion-schemes",
+          "def-normal-noetherian-ring",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Identify K(X)=K(Y) through f. Choose affine neighborhoods of the generic points and finite generators of their coordinate rings. Clear finitely many denominators in the common field to find a dense principal open of X mapping isomorphically to a dense principal open V of Y. The closed set f(X\\U) misses the generic point: on an integral finite-type curve every nongeneric point is closed and has finite residue degree over k, so it cannot map to the generic point of Y. Properness makes its image closed. Finite-type affine charts over a field are Noetherian, and a proper closed subset of a Noetherian integral curve is finite. Remove that image and Y\\V. Over the remaining dense open every preimage lies in U and f is the displayed isomorphism. Normality is an allowed stronger hypothesis.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-fpqc-morphism-schemes",
+        "kind": "definition",
+        "title": "Fpqc covering morphisms",
+        "statement": "For this page, a scheme morphism p:S′→S is flat if every local-ring map O_{S,p(x)}→O_{S′,x} is flat. It is an fpqc covering morphism if it is flat, surjective and quasi-compact; its singleton family is an fpqc cover in the family convention. General fpqc covers may be families, and this page does not identify every such family with one quasi-compact morphism. Affine-chart flatness and arbitrary base-change stability are proved in the later submersiveness lemma.",
+        "deps": [
+          "def-flat-and-faithfully-flat-modules-and-ring-maps",
+          "def-quasi-compact-and-quasi-separated-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §29.26 Definition 29.26.1",
+              "url": "https://stacks.math.columbia.edu/tag/01U2"
+            },
+            {
+              "title": "Stacks Project, Étale Cohomology §59.15 Definition 59.15.1 and Example 59.15.3(3)",
+              "url": "https://stacks.math.columbia.edu/tag/03NV"
+            },
+            {
+              "title": "Stacks Project, Topologies on Schemes §34.9 Definition 34.9.1",
+              "url": "https://stacks.math.columbia.edu/tag/022A"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-fpqc-cover-submersive",
+        "kind": "lemma",
+        "title": "Fpqc covers are universally submersive",
+        "statement": "Assume AC. For any scheme morphism f:X→S, f is flat iff every affine chart map O_S(V)→O_X(U) is flat for affine U⊂X, V⊂S with f(U)⊂V. If p:S′→S is a page-local fpqc covering morphism, then after every base change T→S the morphism p_T:T×_S S′→T is again flat, surjective and quasi-compact; moreover Z⊂T is closed iff its inverse image in T×_S S′ is closed.",
+        "deps": [
+          "def-fpqc-morphism-schemes",
+          "def-axiom-of-choice",
+          "def-localisation-at-a-prime-ideal",
+          "def-morphism-of-schemes",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-quasi-compact-and-quasi-separated-scheme",
+          "def-scheme",
+          "def-affine-scheme-spectrum",
+          "def-prime-spectrum-and-vanishing-sets",
+          "cor-affine-scheme-quasi-compact",
+          "cor-change-of-rings-for-extension-of-scalars",
+          "lem-base-change-quasi-compact-morphisms",
+          "lem-base-change-surjective-morphisms",
+          "lem-quasi-compact-scheme-image-specialization-closed",
+          "lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union",
+          "lem-zero-in-a-localised-module",
+          "lem-zariski-closed-set-axioms",
+          "prop-extension-of-scalars-preserves-flat-modules",
+          "prop-transitivity-of-flatness-under-change-of-rings",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-direct-sums-and-direct-summands-preserve-flatness",
+          "thm-flat-going-down",
+          "thm-flatness-criteria-by-injections-and-ideals",
+          "thm-localisation-of-modules-is-exact",
+          "thm-localisation-of-modules-is-tensor-product",
+          "thm-localisations-are-flat",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "def-morphism-affine-schemes-from-ring-map"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §29.26, Lemmas 29.26.2, 29.26.3, 29.26.8, and 29.26.12",
+              "url": "https://stacks.math.columbia.edu/tag/01U2"
+            },
+            {
+              "title": "Stacks Project, Commutative Algebra, Lemma 10.41.5",
+              "url": "https://stacks.math.columbia.edu/tag/00HY"
+            }
+          ]
+        },
+        "strategy": "Assume AC. Prove the affine-chart criterion from the finitely generated ideal test: for a finitely generated ideal I⊂A, localize the kernel of I⊗_A B→B at each q∈Spec B; stalk-flatness makes each localization zero, and if the kernel were nonzero a nonzero element's proper annihilator lies in a maximal ideal, a contradiction. Conversely, localize flat chart maps to local rings. For base change of flatness, cover affine source and target charts and use Spec(B)×_{Spec(A)}Spec(C)=Spec(B⊗_A C); extension of scalars preserves flatness. Quasi-compactness and surjectivity of p_T follow from their base-change lemmas. For closed-subset descent, work on affine U=Spec A⊂T, cover p_T^{-1}U by finitely many affine opens, and use their finite disjoint union Spec B→Spec A. The induced flat surjection need not be strengthened to faithful flatness. If the pullback of Z is V(J), then Z∩U is the image of Spec(B/J). For any specialization p⊂p′ from a point of Z∩U to p′, surjectivity gives q′ over p′ and flat going-down lifts p⊂p′ to q⊂q′; since the full inverse image of Z is V(J), J⊂q implies J⊂q′, so p′ is in the image. The image is specialization-stable and quasi-compact, hence closed by the local image lemma. Closedness of inverse images is the continuous-map direction. AC is used for maximal-ideal existence and is also present in the base-change-surjectivity, going-down, and local image suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-fpqc-descent-properness-components",
+        "kind": "lemma",
+        "title": "Fpqc descent of properness components",
+        "statement": "Assume AC. If p:S′→S is fpqc and f_{S′}:X×_S S′→S′ is quasi-compact, finite type, separated, or universally closed, then f has the corresponding property. Each property also ascends by base change.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-affine-open-subscheme",
+          "def-affine-scheme-spectrum",
+          "def-base-change-morphism-schemes",
+          "def-closed-immersion-schemes",
+          "def-diagonal-morphism-scheme",
+          "def-finite-type-and-module-finite-algebras",
+          "def-fpqc-morphism-schemes",
+          "def-locally-closed-immersion",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-morphism-of-schemes",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-quasi-compact-and-quasi-separated-scheme",
+          "def-scheme",
+          "def-separated-morphism-schemes",
+          "def-universally-closed-morphism",
+          "cor-base-change-finite-type-and-products",
+          "cor-affine-scheme-quasi-compact",
+          "lem-base-change-composition",
+          "lem-base-change-quasi-compact-morphisms",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-closed-immersion-local-on-target",
+          "lem-diagonal-base-change-identification",
+          "lem-fibre-product-open-restriction",
+          "lem-finite-type-local-on-source-and-target",
+          "lem-fpqc-cover-submersive",
+          "lem-immersion-with-closed-image",
+          "lem-points-of-scheme-fibre-product-residue-tensors",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-direct-sums-and-direct-summands-preserve-flatness",
+          "thm-faithful-flatness-detected-by-nonzero-modules-and-fibres",
+          "thm-faithfully-flat-ring-map-characterisations",
+          "thm-fibre-products-of-schemes-exist",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-right-exactness-of-tensor-products",
+          "lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Descent §35.23",
+              "url": "https://stacks.math.columbia.edu/download/descent.pdf"
+            }
+          ]
+        },
+        "strategy": "Assume AC. Descend quasi-compactness through the continuous surjective image of the quasi-compact fpqc pullback. Descend finite type on affine charts: cover the pulled-back target by finitely many affine charts, combine their flat coordinate rings into a faithfully flat product algebra, and descend finite algebra generators by collecting coefficients and detecting the quotient C/C0. Descend universal closedness by testing arbitrary base changes and proving the exact image identity after fpqc pullback. For separatedness, descend universal closedness of the diagonal and prove its immersion locally from affine multiplication maps and the local quotient-immersion supplier; a universally closed immersion has closed image, hence is a closed immersion. For separatedness ascent, base-change the diagonal and use the same local closed-immersion supplier. Quasi-compactness and finite-type ascents use their arbitrary base-change lemmas. AC is used through fpqc flat-chart/submersive results, the faithfully-flat criterion, residue-field tensor prime existence, and the AC-qualified closed-immersion supplier.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-properness-descent-fpqc",
+        "kind": "theorem",
+        "title": "Properness descends through fpqc base change",
+        "statement": "Assume AC. For an fpqc cover S′→S, f:X→S is proper iff its base change X×_S S′→S′ is proper.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-base-change-morphism-schemes",
+          "def-fpqc-morphism-schemes",
+          "def-proper-morphism",
+          "lem-fpqc-descent-properness-components",
+          "lem-proper-stable-base-change"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Descent §35.23",
+              "url": "https://stacks.math.columbia.edu/download/descent.pdf"
+            }
+          ]
+        },
+        "strategy": "Ascend by proper base change. Descend finite type, separatedness and universal closedness using the component lemma, then apply the definition. AC is used in the component descent through fpqc submersiveness.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-proper-fibres-proper",
+        "kind": "lemma",
+        "title": "Fibres of proper morphisms are proper",
+        "statement": "For f:X→S proper and s∈S, the scheme-theoretic fibre X_s is proper over Spec κ(s).",
+        "deps": [
+          "def-scheme-theoretic-fibre",
+          "lem-proper-stable-base-change",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "The fibre is exactly the base change along Spec κ(s)→S; apply arbitrary base-change stability.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-closed-gluing-of-two-projective-three-spaces-is-proper",
+        "kind": "lemma",
+        "title": "Closed gluing of two projective three-spaces is proper",
+        "statement": "Assume AC. Let k be algebraically closed. In each of two copies X_i=P³_k choose a disjoint union Z_i of a line and a smooth plane conic, and identify the two Z_i by isomorphisms exchanging line and conic. The closed-subscheme pushout X_1∪_Z X_2 exists as a k-scheme; each X_i is a closed subscheme of it, and the pushout is proper over k.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-relative-projective-space-standard-charts",
+          "thm-projective-space-proper-over-base",
+          "lem-closed-immersion-pushout-schemes",
+          "def-closed-immersion-schemes",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "def-proper-morphism",
+          "def-separated-morphism-schemes",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-quasi-compact-and-quasi-separated-scheme",
+          "lem-finite-type-local-on-source-and-target",
+          "thm-separatedness-gluing-overlap-criterion",
+          "thm-valuative-criterion-properness",
+          "def-valuative-diagram-separatedness",
+          "def-scheme",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-morphism-affine-schemes-from-ring-map",
+          "thm-global-sections-affine-scheme",
+          "def-prime-spectrum-and-vanishing-sets",
+          "lem-zariski-closed-set-axioms",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-affine-scheme-spectrum",
+          "thm-sections-basic-open-affine-scheme",
+          "lem-spectrum-localization-open-immersion",
+          "def-valuation-ring",
+          "lem-valuation-ring-is-local",
+          "def-field-of-fractions",
+          "def-specialisation-and-generic-point",
+          "lem-immersions-and-localizations-monomorphisms",
+          "cor-affine-scheme-quasi-compact",
+          "def-compact-space",
+          "lem-base-change-quasi-compact-morphisms",
+          "def-finite-type-and-module-finite-algebras",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil, The Rising Sea §§17.4.8–12",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Construct the quotient ringed space by identifying the two closed loci and taking pairs of local sections with equal restrictions. Around every point of the common locus choose affine neighborhoods in both P³ whose intersections with Z are the same affine neighborhood: start with affine opens, shrink their intersections in Z to a common principal neighborhood, lift its defining functions to the two affine rings, and take the resulting principal opens. The local ring is A_1×_C A_2, where A_i→C are surjective; verify directly that its spectrum has the claimed topology and sheaf, and that the projection maps to A_i make the two components closed immersions. These local models glue on overlaps. For finite type over k, lift finite generating sets on the two sides with matching images in C and add generators for the kernel, as in Vakil Exercise 17.4.M(c). The map from the disjoint union X_1⊔X_2 is closed, surjective and remains so under every base change: for a closed set in the base-changed pushout, its inverse image in the two proper components is closed, and the union of their closed images is its image. Thus the pushout is universally closed. For separatedness, use the valuation uniqueness criterion. Any two maps Spec R→X agreeing on Spec K have generic image either in one closed component or in their intersection. The closed preimage of that component/intersection contains the generic point and hence all of Spec R; uniqueness reduces to separatedness of P³ or the closed subscheme Z. The same argument gives existence from properness of the component containing the generic point. Finite type, separatedness and universal closedness prove properness. AC is inherited from the all-valuations properness criterion.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-line-bundles-on-projective-three-space-restrict-by-degree",
+        "kind": "lemma",
+        "title": "Line bundles on projective three-space and their restrictions",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "lem-gauss-lemma-over-a-ufd",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "def-closed-immersion-schemes",
+          "def-pullback-module-ringed-spaces",
+          "def-module-on-ringed-space",
+          "thm-gluing-sheaves",
+          "cor-affine-scheme-quasi-compact"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Divisors, Lemma 31.29.5",
+              "url": "https://stacks.math.columbia.edu/tag/0BXJ"
+            },
+            {
+              "title": "Stacks Project, Divisors, Lemma 31.29.4",
+              "url": "https://stacks.math.columbia.edu/tag/0BDA"
+            },
+            {
+              "title": "Stacks Project, More on Algebra, Lemma 15.119.3",
+              "url": "https://stacks.math.columbia.edu/tag/0BCH"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§17.4.8–12",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "statement": "For this item, an invertible sheaf means an O-module locally isomorphic to O. On the standard charts U_i of P³_k, write x_j/x_i for the standard overlap coordinate. Define O_{P³_k}(n) by gluing free rank-one sheaves with frames e_i and transitions e_j=(x_j/x_i)^n e_i on U_i∩U_j. Use the same construction on every P^N_k; its standard homogeneous coordinates are the global sections of O_{P^N_k}(1). For every field k, every invertible sheaf on P³_k is isomorphic to O(n) for a unique n∈Z. Its restriction to any line L≅P¹_k is O_{P¹}(n). If C⊂P²_k⊂P³_k is a nonsingular plane conic equipped with a k-isomorphism φ:P¹_k→C, then its pullback to P¹_k is O_{P¹}(2n). If the sheaf is the pullback of O_{P^N}(1) along a closed immersion h:P³_k→P^N_k, then n>0.",
+        "strategy": "On each affine chart, use Gauss induction to establish the polynomial UFD; a finite principal trivializing cover and the valuation product of a rational section produce a nowhere-zero frame. Classify chart transitions through overlap units and triple cocycles. Restrict to a line by a k-linear coordinate change. For the conic, a plane hyperplane cuts a degree-two divisor whose pullback to P1 is linearly equivalent to twice infinity, so O(n) restricts to O(2n) in every characteristic. Compute sections on a line to prove positivity for closed immersions and show sharpness at n=1.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-uniqueness-of-twists-on-the-projective-line",
+        "kind": "lemma",
+        "title": "The twist index on the projective line is an isomorphism invariant",
+        "statement": "For a field k, with twists O_{P1_k}(n) defined on the standard charts of P1_k by the same gluing prescription as for P3_k, O(n) is isomorphic to O(m) if and only if n = m; consequently the twist index of an invertible sheaf on P1_k that is isomorphic to a twist is well defined, which makes the integers in the line and conic restriction clauses well defined.",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "lem-line-bundles-on-projective-three-space-restrict-by-degree",
+          "def-module-on-ringed-space",
+          "def-sheaf-hom",
+          "def-sheaf-on-topological-space",
+          "thm-gluing-sheaves",
+          "cor-units-in-a-polynomial-ring-over-a-domain",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "thm-polynomial-degree-of-a-product-over-a-domain"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Divisors, Lemma 31.29.4",
+              "url": "https://stacks.math.columbia.edu/tag/0BDA"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§17.4.8–12",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "On the two standard charts a morphism of twists is described by its two components: sections a_0 in k[u] and a_1 in k[v] with the compatibility a_1 u^m = u^n a_0 on the overlap. The morphism is an isomorphism exactly when both components are units, and by the units lemma those are nonzero constants, so u^{m-n} is a constant; writing N = m - n and comparing degrees of polynomials after clearing the localisation shows N > 0 and N < 0 are both impossible, hence n = m. The converse is immediate, and the well-definedness of the twist index follows by composing isomorphisms.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "rem-projective-versus-proper",
+        "kind": "remark",
+        "title": "Projective and proper are distinct notions",
+        "statement": "Assume AC. Every projective morphism is proper under the finite-dimensional convention, but a proper k-scheme need not be projective: the closed gluing of two projective three-spaces along exchanged disjoint line and conic loci is a counterexample.",
+        "deps": [
+          "def-projective-morphism-pre-proj",
+          "thm-projective-morphism-proper",
+          "def-proper-morphism",
+          "lem-closed-gluing-of-two-projective-three-spaces-is-proper",
+          "lem-line-bundles-on-projective-three-space-restrict-by-degree",
+          "lem-uniqueness-of-twists-on-the-projective-line"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "strategy": "The projective-implies-proper direction is the local theorem. For the converse, apply the two local A support lemmas to the glued scheme: any projective embedding would restrict O(1) to O(n_i) on its two P³ components with n_i>0, but the exchanged line/conic identifications force n_1=2n_2 and 2n_1=n_2, a contradiction. The companion B item gives the explicit coordinate construction as a leaf."
+      },
+      {
+        "id": "rem-proper-not-topologically-compact-over-arbitrary-field",
+        "kind": "remark",
+        "title": "Properness is not compactness of rational points",
+        "statement": "Properness is a morphism property defined by finite type, separatedness and universal closedness. It does not specify a topology on X(k) for an arbitrary field k, so no blanket compactness claim for rational points is part of the definition.",
+        "deps": [
+          "def-proper-morphism",
+          "def-complete-variety",
+          "def-universally-closed-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-birational-morphism-schemes",
+        "kind": "definition",
+        "title": "Birational morphisms of integral finite-type schemes",
+        "statement": "For integral finite-type k-schemes X,Y with generic points η_X, η_Y and function fields K(X)=O_{X,η_X}, K(Y)=O_{Y,η_Y}, a k-morphism f:X→Y is birational when f(η_X)=η_Y and the stalk map O_{Y,η_Y}→O_{X,η_X} is an isomorphism.",
+        "deps": [
+          "def-integral-scheme",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-generic-point-irreducible-closed-subset",
+          "lem-integral-finite-type-scheme-function-field",
+          "def-morphism-of-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, Definition 29.51.1 (tag 01RO)",
+              "url": "https://stacks.math.columbia.edu/tag/01RO"
+            },
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, Lemma 29.51.5 (tag 0BAC)",
+              "url": "https://stacks.math.columbia.edu/tag/0BAC"
+            }
+          ]
+        },
+        "strategy": "Unpack the Stacks definition of a birational morphism of schemes for integral schemes, where the generic points are the generic points of the unique irreducible components and the stalks at them are the function fields; record the two conditions on a k-morphism.",
+        "proof_strategy": "not-applicable",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-birational-morphism-principal-open-isomorphism",
+        "kind": "lemma",
+        "title": "Birational morphisms restrict to isomorphisms between principal affine opens",
+        "statement": "For a locally finite-type birational morphism f:X→Y of integral finite-type k-schemes there are nonempty affine charts U=Spec A⊆X, V=Spec B⊆Y with f(U)⊆V, an induced finite-type ring map φ:B→A and σ∈B∖{0} such that the localised map B_σ→A_σ is an isomorphism; consequently f restricts to an isomorphism D(φ(σ))→D(σ) of nonempty principal opens.",
+        "deps": [
+          "def-birational-morphism-schemes",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-integral-scheme",
+          "lem-integral-finite-type-scheme-function-field",
+          "def-finite-type-and-module-finite-algebras",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "lem-spectrum-localization-open-immersion",
+          "def-principal-distinguished-subset-of-spectrum",
+          "thm-universal-property-of-localisation",
+          "def-open-immersion-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, Lemma 29.51.5 (tag 0BAC)",
+              "url": "https://stacks.math.columbia.edu/tag/0BAC"
+            },
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, Definition 29.51.1 (tag 01RO)",
+              "url": "https://stacks.math.columbia.edu/tag/01RO"
+            }
+          ]
+        },
+        "strategy": "Choose an affine chart of finite type at the generic point, identify both coordinate rings with subrings of the common function field via the birational stalk isomorphism, choose finitely many generators of A over B and clear the finitely many denominators to obtain σ∈B∖{0} with B_σ→A_σ surjective and injective, hence an isomorphism of principal opens.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-curve-closed-subsets-finite",
+        "kind": "lemma",
+        "title": "Proper closed subsets of a curve are finite",
+        "statement": "Assume AC. Let X be an integral finite-type k-scheme with generic point η_X and chain dimension 1. Then |X| is Noetherian, every proper closed subset of X is a finite set of closed points, every point other than η_X is closed, and X has a unique generic point.",
+        "deps": [
+          "def-locally-finite-type-and-finite-type-morphism",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "def-noetherian-topological-space",
+          "def-scheme",
+          "cor-specialisation-order-is-prime-inclusion",
+          "def-dimension-noetherian-topological-space",
+          "def-integral-scheme",
+          "def-generic-point-irreducible-closed-subset",
+          "def-irreducible-topological-space-and-subset",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Varieties, Section 33.43 (tag 0A22)",
+              "url": "https://stacks.math.columbia.edu/tag/0A22"
+            },
+            {
+              "title": "Milne, Algebraic Geometry, Section 2m (chain dimension of Noetherian spaces)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Finite type over a field gives a finite affine cover by spectra of Noetherian rings, so the space is Noetherian and T0; a proper closed subset is a finite union of irreducible components, each of chain dimension 0 because a strict chain inside it would extend to one in X, and a nonempty irreducible space of dimension 0 is a single closed point.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-projective-space-finite-type-over-base",
+        "kind": "lemma",
+        "title": "Projective space is of finite type over its base",
+        "statement": "For every scheme S and every n≥0 the structure morphism P^n_S→S is of finite type; no Noetherian, field or nonemptiness hypothesis is used, and the empty base is included.",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "def-finite-type-and-module-finite-algebras",
+          "lem-finite-type-local-on-source-and-target",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "lem-base-change-quasi-compact-morphisms",
+          "cor-affine-scheme-quasi-compact",
+          "def-compact-space",
+          "def-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, Lemma 29.44.5 (tag 01WC), proof step checking local finite type on the standard charts",
+              "url": "https://stacks.math.columbia.edu/tag/01WC"
+            },
+            {
+              "title": "The Stacks Project, Constructions, Section 27.8 (tags 01M3, 01MD), the standard charts and quasi-compactness of projective space",
+              "url": "https://stacks.math.columbia.edu/tag/01MD"
+            }
+          ]
+        },
+        "strategy": "Over an affine open V=Spec A of the base the standard charts U^A_i=Spec A[x_l] are finitely many affine opens covering P^n_A, and each A→A[x_l] is of finite type, so the projection is locally of finite type by the affine-local criterion. Each P^n_A is a finite union of affines hence quasi-compact, so the inverse image of every affine open of the base is quasi-compact and the morphism is quasi-compact by the affine-open criterion; quasi-compact plus locally finite type is finite type. Choice-free.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-closed-immersion-pushout-schemes",
+        "kind": "lemma",
+        "title": "Pushouts of closed immersions exist",
+        "statement": "Assume AC. Let S be a scheme and let i: Z -> X and j: Z -> Y be closed immersions of S-schemes. Then the pushout T = X ⊔_Z Y exists in the category of S-schemes: the structure maps a: X -> T and b: Y -> T are closed immersions with |T| = |X| ∪ |Y| and |X| ∩ |Y| = |Z|, the square is Cartesian (Z ≅ X ×_T Y), the structure sheaf is the fibre product O_T = a_*O_X ×_{c_*O_Z} b_*O_Y with the section and stalk formulas displayed, every point of Z has an affine open neighbourhood of the form Spec(A ×_C B) while the remaining points lie in X∖Z and Y∖Z.",
+        "deps": [
+          "def-closed-immersion-schemes",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "def-scheme",
+          "def-locally-ringed-space",
+          "def-local-ring",
+          "def-ringed-space",
+          "def-sheaf-on-topological-space",
+          "def-quotient-topology",
+          "def-direct-image-sheaf",
+          "def-stalk-of-presheaf",
+          "def-morphism-locally-ringed-spaces",
+          "def-principal-distinguished-subset-of-spectrum",
+          "thm-sections-basic-open-affine-scheme",
+          "lem-closed-immersion-local-on-target",
+          "def-fibre-product-schemes-universal-property",
+          "thm-fibre-products-of-schemes-exist",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, More on Morphisms, Situation 37.67.1 (tag 0ECI), Lemma 37.67.2 (tag 0ECJ) and Proposition 37.67.3 (tag 0E25)",
+              "url": "https://stacks.math.columbia.edu/tag/0E25"
+            },
+            {
+              "title": "The Stacks Project, More on Morphisms, Lemma 37.14.1 (tag 0ET0), the affine case of the pushout",
+              "url": "https://stacks.math.columbia.edu/tag/0ET0"
+            },
+            {
+              "title": "Vakil, The Rising Sea, Sections 17.4.9-17.4.12 (gluing two schemes along isomorphic closed subschemes)",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Build T as the ringed space with underlying quotient space |X| ⊔_|Z| |Y| and structure sheaf the fibre product of a_*O_X, b_*O_Y over c_*O_Z; verify the stalks are local (fibre product of local rings along surjections), produce affine charts Spec(A ×_C B) around each point of Z from compatible affine opens with matching traces, and cover the rest by X∖Z and Y∖Z to conclude that T is a scheme. Closedness of a and b follows from surjectivity of R = A ×_C B → A, B on the charts, Cartesian-ness from A ⊗_R B ≅ C, and the universal property from the quotient topology and fibre-product sheaf.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 366.07,
+    "id": "finite-proper-and-projective-morphisms-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Finite Proper and Projective Morphisms — Examples",
+    "companion": "finite-proper-and-projective-morphisms",
+    "requires": [
+      "finite-proper-and-projective-morphisms"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-power-map-affine-line",
+        "kind": "example",
+        "title": "Finite power map of the affine line",
+        "statement": "For n≥1, t↦t^n defines finite A1_k→A1_k: k[t] is free of rank n over k[s] via s↦t^n with basis 1,t,…,t^{n−1}. If char(k)=p divides n, the generic extension has inseparable part. The n=0 constant map is not finite onto the whole affine line.",
+        "deps": [
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "cor-rational-function-field-as-a-fraction-field",
+          "def-affine-scheme-spectrum",
+          "def-algebraic-and-transcendental-elements",
+          "def-finite-morphism-schemes",
+          "def-finite-type-and-module-finite-algebras",
+          "def-principal-localisation",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-repeated-root-and-separable-polynomial",
+          "def-ring-characteristic",
+          "def-scheme-over-base",
+          "def-separable-elements-and-separable-extensions",
+          "lem-zariski-closed-set-axioms",
+          "lem-spectrum-localization-open-immersion",
+          "lem-zero-in-a-localised-module",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-characteristic-of-a-field-is-zero-or-prime",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes, Definition 29.45.1 (tag 01WH)",
+              "url": "https://stacks.math.columbia.edu/tag/01WH"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry, 2011 public draft, §8.3.6 Example 1: Branched covers",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Group exponents modulo n to prove the free basis and injectivity. For each affine target open, use the vanishing-set description and the PID property to write it as D(g), identify its inverse image as Spec k[t]_{g(t^n)}, and prove the localized basis spans and remains independent, including g=0. If char(k)=p divides n, set r=n/p and prove t^r is outside k(t^n) while its minimal polynomial divides X^p−s=(X−t^r)^p. For n=0, use the action through k[s]/(s−1) and the infinite k-basis of k[t].",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-closed-immersion-finite-proper",
+        "kind": "example",
+        "title": "Closed immersion from a quotient ring",
+        "statement": "For any ring A and ideal I, Spec(A/I)→Spec A is finite and proper; the assertion includes I=A and the empty source.",
+        "deps": [
+          "def-finite-morphism-schemes",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-closed-immersion-proper",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-finite-type-and-module-finite-algebras",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "A/I has the single A-module generator 1 mod I. Its spectrum is a closed immersion, so the preceding closed-immersion lemma gives properness.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-projective-space-valuative-extension",
+        "kind": "example",
+        "title": "Valuative extension of projective coordinates",
+        "statement": "For every valuation ring R⊂K and point [a_0:…:a_n]∈P^n(K), select i so all a_j/a_i lie in R; these ratios give the unique extension Spec R→P^n_R.",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "def-valuation-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-open-immersion-schemes",
+          "lem-projective-space-diagonal-closed",
+          "def-valuative-diagram-separatedness",
+          "lem-separated-implies-valuative-uniqueness",
+          "def-finite-type-and-module-finite-algebras"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose a nonzero coordinate generating the largest principal fractional ideal among finitely many a_jR. In its standard chart, all ratios are in R. Uniqueness follows from separatedness of projective space.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-affine-line-not-proper",
+        "kind": "counterexample",
+        "title": "The affine line has a pole obstruction",
+        "statement": "For any field k, A1_k→Spec k is not proper: over R=k[t]_(t)⊂K=k(t), the K-point x=1/t has no R-extension. Equivalently the closed hyperbola tx=1⊂A1_R maps to D(t)⊂Spec R, which is not closed.",
+        "deps": [
+          "def-proper-morphism",
+          "def-universally-closed-morphism",
+          "def-affine-scheme-spectrum",
+          "lem-zariski-closed-set-axioms",
+          "thm-localisation-at-a-prime-is-local",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-affine-fibre-product-tensor-ring",
+          "def-base-change-morphism-schemes",
+          "def-scheme-over-base",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "The closed subscheme tx−1=0 of A1_R for R=k[t]_(t) has image D(t), which is not closed in Spec R. This directly violates universal closedness and properness. Equivalently x=1/t is a K-point that cannot extend because 1/t∉R; the closed-image proof is independent of the valuative criterion and uses no AC.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-open-immersion-not-proper",
+        "kind": "counterexample",
+        "title": "A nonclosed open immersion is not proper",
+        "statement": "D(t)→A1_k is an open immersion whose image is not closed, so it is not universally closed and hence not proper.",
+        "deps": [
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "def-affine-scheme-spectrum",
+          "def-generated-and-principal-ideals",
+          "def-open-immersion-schemes",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-prime-and-maximal-ideals",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-proper-morphism",
+          "def-scheme-over-base",
+          "def-universally-closed-morphism",
+          "lem-field-is-a-commutative-ring",
+          "lem-fibre-product-associativity-and-symmetry",
+          "lem-vanishing-set-identities",
+          "lem-zariski-closed-set-axioms",
+          "thm-proper-morphism-closed-image",
+          "thm-universal-property-of-a-polynomial-ring"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "The image is A1_k minus the origin. The origin is in its closure, so the map fails closedness already before base change.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-proper-image-projective-variety",
+        "kind": "example",
+        "title": "Incidence projection has closed determinantal image",
+        "statement": "Over k let Z⊂P1_k×A4_k be cut out by as+bt=0 and cs+dt=0 in homogeneous [s:t] and affine coordinates (a,b,c,d). Its projection to A4_k is proper and has image V(ad−bc).",
+        "deps": [
+          "def-relative-projective-space-standard-charts",
+          "def-scheme-over-base",
+          "def-closed-immersion-schemes",
+          "lem-closed-immersion-local-on-target",
+          "def-base-change-morphism-schemes",
+          "thm-projective-space-proper-over-base",
+          "lem-proper-stable-base-change",
+          "lem-closed-immersion-proper",
+          "lem-proper-stable-composition",
+          "thm-proper-morphism-closed-image",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-morphism-affine-schemes-from-ring-map",
+          "def-prime-spectrum-and-vanishing-sets",
+          "lem-zariski-closed-set-axioms",
+          "def-residue-field-scheme-point",
+          "lem-field-valued-points-of-schemes",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Z→P1×A4 is closed, and the projection is a base change of P1→Spec k, so their composite is proper and its image closed. A nonzero vector (s,t) solves the two equations iff the 2×2 determinant ad−bc vanishes.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-proper-not-affine-positive-dimensional",
+        "kind": "counterexample",
+        "title": "Positive-dimensional proper integral schemes are not affine",
+        "statement": "A nonempty proper integral finite-type k-scheme with more than one point cannot be affine; in particular positive dimension implies nonaffineness. For every field k, P1_k is a nonempty proper integral finite-type scheme of positive dimension and is not affine.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-global-functions-proper-integral-variety",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "def-affine-morphism-schemes",
+          "def-scheme-over-base",
+          "def-prime-and-maximal-ideals",
+          "def-zero-divisor-and-integral-domain",
+          "def-dimension-noetherian-topological-space",
+          "def-relative-projective-space-standard-charts",
+          "thm-projective-space-proper-over-base",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "def-noetherian-topological-space",
+          "lem-chain-dimension-open-cover",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-integral-scheme",
+          "def-proper-morphism",
+          "def-sheaf-on-topological-space",
+          "thm-global-sections-affine-scheme",
+          "thm-sections-basic-open-affine-scheme",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "thm-universal-property-of-a-polynomial-ring",
+          "cor-factor-theorem-over-a-commutative-ring",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-first-isomorphism-theorem-rings",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-open-immersion-schemes",
+          "def-irreducible-topological-space-and-subset",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "def-reduction-of-scheme",
+          "def-nilradical-and-reduced-ring",
+          "def-reduced-affine-scheme",
+          "def-generic-point-irreducible-closed-subset",
+          "def-interior-closure-boundary-top"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Varieties §33.9",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf"
+            },
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "If X were affine, X≅Spec Γ(X,O_X). The global-function theorem makes that ring a finite field extension of k, whose spectrum has dimension zero. P1_k is positive dimensional and proper.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-proper-not-necessarily-projective",
+        "kind": "counterexample",
+        "title": "A proper nonprojective scheme from glued projective spaces",
+        "statement": "Assume AC. Over an algebraically closed field, glue two copies of P³ along a disjoint line and smooth plane conic in each, exchanging the line and conic under the identifications. The resulting scheme is proper over the field but is not projective.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-relative-projective-space-standard-charts",
+          "thm-gluing-affine-schemes",
+          "def-closed-immersion-schemes",
+          "lem-closed-immersion-local-on-target",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-morphism-schemes-local-on-source-target",
+          "def-sum-and-product-of-ideals",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "lem-closed-immersion-pushout-schemes",
+          "lem-closed-gluing-of-two-projective-three-spaces-is-proper",
+          "lem-line-bundles-on-projective-three-space-restrict-by-degree",
+          "lem-uniqueness-of-twists-on-the-projective-line",
+          "def-pullback-module-ringed-spaces",
+          "lem-stalk-inverse-image-sheaf",
+          "lem-stalk-tensor-product",
+          "def-projective-morphism-pre-proj",
+          "def-proper-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil, The Rising Sea §§8.3, 11.3, 17.4",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose in each P³ the line L=V(x₂,x₃) and the smooth conic C=V(x₀,x₁²+x₂x₃), which are disjoint in every characteristic. The closed-gluing lemma constructs the proper pushout. Suppose a closed immersion X→P^N existed and set L to the pullback of O(1). On each component X_i=P³, the line-bundle lemma gives L|_{X_i}=O(n_i) with n_i>0. The two identifications make the restrictions agree: on the first line versus the second conic, n_1=2n_2; on the first conic versus the second line, 2n_1=n_2. Both imply n_1=n_2=0, contradicting positivity. The example is a dependency leaf.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-empty-morphism-proper-projective",
+        "kind": "example",
+        "title": "The empty morphism is finite, proper and projective",
+        "statement": "For any base scheme S, ∅→S is finite and proper, and is projective via the closed immersion ∅→P0_S≅S.",
+        "deps": [
+          "def-finite-morphism-schemes",
+          "def-affine-scheme",
+          "def-projective-morphism-pre-proj",
+          "def-relative-projective-space-standard-charts",
+          "def-proper-morphism",
+          "def-separated-morphism-schemes",
+          "def-universally-closed-morphism",
+          "def-closed-immersion-schemes",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-finite-type-and-module-finite-algebras",
+          "def-affine-scheme-spectrum",
+          "def-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Morphisms of Schemes §§29.11, 29.42–45",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "For each affine U=Spec A, the inverse image is Spec 0, and the zero A-module is finite. The empty morphism is separated because its diagonal ∅→∅ is a closed immersion, finite type vacuously, and universally closed because every base change has empty source and image. Finally ∅→P0_S≅S is a closed immersion, giving the projective factorization. No choice is used.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 2
+      }
+    ]
+  }
+]

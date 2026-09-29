@@ -22,10 +22,6 @@ items:
   - def-symmetric-and-exterior-powers-over-an-arbitrary-field
   - prop-symmetric-and-exterior-powers-are-lie-algebra-representations
   - prop-lie-algebra-representations-are-the-same-as-modules-over-the-lie-algebra-ring-action-before-enveloping
-  - def-tensor-algebra-of-a-vector-space
-  - thm-universal-property-of-the-tensor-algebra
-  - def-symmetric-algebra-of-a-vector-space
-  - thm-universal-property-of-the-symmetric-algebra
   - def-universal-enveloping-algebra
   - lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra
   - thm-universal-property-of-the-universal-enveloping-algebra
@@ -63,8 +59,9 @@ dual, Hom, tensor, symmetric, and exterior operations. Alternation is used as
 the bracket axiom, so the basic theory and the power constructions remain
 valid in arbitrary characteristic.
 
-The associative half builds tensor and symmetric algebras from their universal
-properties before defining the enveloping quotient. Representations are then
+The associative half uses the tensor and symmetric algebra constructions from
+the tensor products page before defining the enveloping quotient and proving
+the enveloping algebra's universal property. Representations are then
 identified with unital modules over that quotient without assuming its
 canonical Lie map is injective. The PBW filtration leads to a complete ordered-
 monomial proof: termination is supplemented by the disjoint-pair and Jacobi

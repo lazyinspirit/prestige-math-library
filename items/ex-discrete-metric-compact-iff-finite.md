@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-metric-space, def-metric-compactness, def-totally-bounded, thm-compact-implies-complete-and-totally-bounded, def-complete-metric-space, def-cauchy-in-metric, def-metric-convergence, def-metric-ball, def-metric-topology, def-countable, lem-finite-choice]
 justified_by: []
+forward_refs: [cex-bounded-not-totally-bounded]
 aliases: []
 landmark: false
 short: "the discrete metric"

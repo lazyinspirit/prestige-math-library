@@ -7,10 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-extension-from-subobjects-of-a-generator-detects-injectivity, lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps, lem-the-one-step-generator-map-is-a-functorial-monomorphism]
+deps: [lem-extension-from-subobjects-of-a-generator-detects-injectivity, lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps, lem-the-one-step-generator-map-is-a-functorial-monomorphism, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
+  audited: 2026-09-29
   precheck: pass
 sources:
   scraped: []
@@ -33,6 +33,8 @@ $\operatorname{cf}(\lambda)>\kappa$, then $M_\lambda$ is injective.
 
 **Given:** The Axiom of Choice, the transfinite tower $(M_\alpha)$ in a locally small Grothendieck category with generator $U$, the bound $\kappa$ from [L2], and a limit ordinal $\lambda$ with $\operatorname{cf}(\lambda)>\kappa$.
 
+[A1] AC supplies the choice hypothesis in both the transfinite factorization and the generator-subobject injectivity test ([[def-axiom-of-choice]]).
+
 [L1] Extension from subobjects of the fixed generator detects injectivity ([[lem-extension-from-subobjects-of-a-generator-detects-injectivity]]).
 
 [L2] If $\operatorname{cf}(\lambda)>\kappa$, every map from a subobject of the generator to $M_\lambda$ factors through an earlier stage, and all transition maps are monic ([[lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps]]).
@@ -44,4 +46,4 @@ $\operatorname{cf}(\lambda)>\kappa$, then $M_\lambda$ is injective.
 
 1.1 Let $f:N\to M_\lambda$ with $N\subseteq U$. By [L2], write $f=j_{\alpha,\lambda}g$ for some $\alpha<\lambda$ and $g:N\to M_\alpha$. Since $\lambda$ is a limit ordinal, $\alpha+1<\lambda$. By [L3], there is $h:U\to M_{\alpha+1}$ whose restriction to $N$ is $\eta_{M_\alpha}g$. Compatibility of the transition maps gives $$j_{\alpha+1,\lambda}h|_N=j_{\alpha+1,\lambda}\eta_{M_\alpha}g=j_{\alpha,\lambda}g=f,$$ so $j_{\alpha+1,\lambda}h$ extends $f$ across $N\subseteq U$. [L2, L3, given, construct]
 
-2.1 Thus every map from every subobject of $U$ extends to $U$. By [L1], this makes $M_\lambda$ injective. [L1, step 1.1] ∎
+2.1 Thus every map from every subobject of $U$ extends to $U$. Under [A1], [L1] makes $M_\lambda$ injective. [A1, L1, step 1.1] ∎

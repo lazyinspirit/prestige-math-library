@@ -28,7 +28,7 @@ If $\operatorname{Re}s>1$, then $\zeta(s)\ne0$.
 
 [L1] On $\operatorname{Re}s>1$, $$\zeta(s)=\prod_p (1-p^{-s})^{-1}$$ ([[thm-euler-product-for-riemann-zeta]]).
 
-[L2] An absolutely convergent infinite product has nonzero value ([[thm-absolute-convergence-criterion-for-complex-infinite-products]]).
+[L2] An absolutely convergent infinite product has nonzero value when every factor is nonzero ([[thm-absolute-convergence-criterion-for-complex-infinite-products]]).
 
 ## Proof
 
@@ -36,4 +36,4 @@ If $\operatorname{Re}s>1$, then $\zeta(s)\ne0$.
 
 1.1 By [L1], $\zeta(s)$ is the reciprocal of the absolutely convergent product $\prod_p(1-p^{-s})$. [L1, given]
 
-2.1 By [L2], that product is nonzero, so its reciprocal is also nonzero. Therefore $\zeta(s)\ne0$. [step 1.1, L2, algebra] ∎
+2.1 Each factor $1-p^{-s}$ is nonzero because $|p^{-s}|=p^{-\operatorname{Re}s}<1$. By [L2], the absolutely convergent product is nonzero, so its reciprocal is also nonzero. Therefore $\zeta(s)\ne0$. [given, step 1.1, L2, algebra] ∎

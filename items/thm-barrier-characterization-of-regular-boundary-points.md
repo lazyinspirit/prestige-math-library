@@ -7,10 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-barrier-and-regular-boundary-point, thm-perron-envelope-is-harmonic, thm-maximum-principle-for-plane-subharmonic-functions, thm-c-two-characterization-of-plane-subharmonicity]
+deps: [def-barrier-and-regular-boundary-point, def-perron-family-for-the-plane-dirichlet-problem, def-perron-envelope-for-the-plane-dirichlet-problem, lem-perron-family-is-nonempty-and-bounded, thm-upper-envelope-theorem-for-plane-subharmonic-functions, lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity, thm-maximum-principle-for-plane-subharmonic-functions, thm-c-two-characterization-of-plane-subharmonicity]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
+  audited: 2026-09-27
   precheck: pass
 sources:
   scraped: []
@@ -31,24 +31,26 @@ a barrier at $\zeta$.
 
 **Given:** A bounded complex domain $\Omega$ and a boundary point $\zeta\in\partial\Omega$.
 
-[L1] For every continuous boundary datum, the regularized Perron envelope is harmonic on $\Omega$ ([[thm-perron-envelope-is-harmonic]]).
+[L1] The Perron lower family and its pointwise supremum $U_\varphi$ define $H_\varphi=U_\varphi^*$ ([[def-perron-family-for-the-plane-dirichlet-problem]], [[def-perron-envelope-for-the-plane-dirichlet-problem]]).
 
-[L2] A subharmonic function with a finite interior maximum is constant on the connected domain ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
+[L2] The Perron family is nonempty and bounded above for continuous boundary data; its regularized envelope is subharmonic ([[lem-perron-family-is-nonempty-and-bounded]], [[thm-upper-envelope-theorem-for-plane-subharmonic-functions]]).
 
 [L3] A barrier at $\zeta$ is a negative subharmonic function that tends to $0$ at $\zeta$ and stays uniformly below a negative constant on the rest of the boundary ([[def-barrier-and-regular-boundary-point]]).
 
 [L4] The $C^2$ function $q(z)=|z-\zeta|^2$ is subharmonic because $\Delta q=4\ge0$ ([[thm-c-two-characterization-of-plane-subharmonicity]]).
 
+[L5] Positive sums of subharmonic functions are subharmonic ([[lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity]]). A subharmonic function on a bounded domain whose boundary limsup is everywhere at most $0$ is at most $0$, by the subharmonic maximum principle ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Assume first that $b$ is a barrier at $\zeta$, and let $\varphi\in C(\partial\Omega)$. Put $H=H_\varphi$, which is harmonic by [L1]. Fix $\varepsilon>0$. Choose a boundary neighbourhood $V$ of $\zeta$ with $|\varphi(\eta)-\varphi(\zeta)|<\varepsilon$ on $V\cap\partial\Omega$, and choose $A>0$ so large that the negative boundary bound from [L3] forces both [L3, given, choose] $$\varphi(\eta)-\varphi(\zeta)-\varepsilon+A\,\limsup b(\eta)\le0,\qquad -\varphi(\eta)+\varphi(\zeta)-\varepsilon+A\,\limsup b(\eta)\le0$$ for $\eta\in\partial\Omega\setminus V$. [L3, given, choose]
+1.1 Suppose $b$ is a barrier at $\zeta$, and fix a continuous boundary datum $\varphi$ and $\varepsilon>0$. Choose a neighbourhood $V$ of $\zeta$ such that $|\varphi(\eta)-\varphi(\zeta)|<\varepsilon$ for $\eta\in V\cap\partial\Omega$. By [L3] there is $c_V<0$ bounding the boundary limsup of $b$ on $\partial\Omega\setminus V$. Since $\varphi$ is bounded on the compact boundary, choose $A>0$ large enough that, on this complement, both $\varphi(\zeta)-\varepsilon+A c_V\le\varphi(\eta)$ and $\varphi(\eta)+A c_V\le\varphi(\zeta)+\varepsilon$ hold. If the complement is empty, any $A>0$ suffices. [L3, given]
 
-1.2 Assume conversely that $\zeta$ is regular, and define a continuous boundary datum on $\partial\Omega$ by $\psi(\eta)=-|\eta-\zeta|^2$. Let $B=H_\psi$, which is harmonic on $\Omega$ by [L1]. Regularity gives $B(z)\to\psi(\zeta)=0$ as $z\to\zeta$. Now let $v$ be any member of the Perron family for $\psi$. By [L4], the function $q(z)=|z-\zeta|^2$ is subharmonic on $\Omega$, so $v+q$ is subharmonic there. For every boundary point $\eta\in\partial\Omega$, the defining Perron inequality gives $$\limsup_{\substack{z\to\eta\\ z\in\Omega}}\bigl(v(z)+q(z)\bigr)\le \psi(\eta)+|\eta-\zeta|^2=0.$$ If $v+q$ were positive somewhere in $\Omega$, then upper semicontinuity and boundedness of $\Omega$ would produce a positive interior maximum, contradicting [L2]. Hence $v(z)\le-|z-\zeta|^2$ on $\Omega$ for every lower function $v$. Taking the supremum over the Perron family and then upper-semicontinuous regularizing yields $$B(z)\le-|z-\zeta|^2<0\qquad(z\in\Omega).$$ Now let $V$ be any neighbourhood of $\zeta$. The compact set $\partial\Omega\setminus V$ has $$\delta_V:=\min_{\eta\in\partial\Omega\setminus V}|\eta-\zeta|^2>0,$$ so the displayed inequality gives $$\limsup_{\substack{z\to\eta\\ z\in\Omega}}B(z)\le-\delta_V\qquad(\eta\in\partial\Omega\setminus V).$$ Thus $B$ is negative on $\Omega$, tends to $0$ at $\zeta$, and stays uniformly below a negative constant away from $\zeta$. Hence $B$ is a barrier at $\zeta$. [L1, L2, L4, given]
+1.2 Conversely suppose $\zeta$ is regular. Set $\psi(\eta)=-|\eta-\zeta|^2$ on $\partial\Omega$ and $B=H_\psi$. By [L2], $B$ is subharmonic, and regularity gives $B(z)\to\psi(\zeta)=0$ as $z\to\zeta$. For any $v\in\mathcal P(\psi,\Omega)$, [L4] and [L5] make $v(z)+q(z)$ subharmonic, with boundary limsup at most $\psi(\eta)+q(\eta)=0$ at every $\eta\in\partial\Omega$. The maximum principle in [L5] gives $v\le-q$. Taking the supremum and regularizing preserves this bound because $q$ is continuous: $B\le-q<0$ on $\Omega$. For any neighbourhood $V$ of $\zeta$ with nonempty boundary complement, the compact set $\partial\Omega\setminus V$ has $\delta_V=\min_{\eta\in\partial\Omega\setminus V}|\eta-\zeta|^2>0$, so the boundary limsup of $B$ there is at most $-\delta_V$. The empty-complement case is vacuous. Thus $B$ is a barrier at $\zeta$. [L1, L2, L3, L4, L5, given]
 
-2.1 The functions [L2, step 1.1] $$s_+(z)=H(z)-\varphi(\zeta)-\varepsilon+A\,b(z),\qquad s_-(z)=-H(z)+\varphi(\zeta)-\varepsilon+A\,b(z)$$ are subharmonic on $\Omega$ because $H$ and $-H$ are harmonic and $b$ is subharmonic. Step 1.1 shows that both have boundary limsup at most $0$. If either had a positive value in the interior, upper semicontinuity would produce a positive interior maximum, contradicting [L2]. Hence $s_\pm\le0$ on $\Omega$. [L2, step 1.1]
+2.1 The function $\ell(z)=\varphi(\zeta)-\varepsilon+A b(z)$ is subharmonic by [L5]. Near $\zeta$ its boundary limsup is at most $\varphi(\zeta)-\varepsilon\le\varphi(\eta)$; away from $\zeta$ the first inequality in step 1.1 gives the same bound. Thus $\ell\in\mathcal P(\varphi,\Omega)$ by [L1], and $H_\varphi\ge U_\varphi\ge\ell$. Since $b(z)\to0$ at $\zeta$, this proves $\liminf_{z\to\zeta}H_\varphi(z)\ge\varphi(\zeta)-\varepsilon$. [L1, L3, L5, step 1.1]
 
-3.1 Step 2.1 gives [step 2.1, L3] $$\varphi(\zeta)-\varepsilon+A\,b(z)\le H(z)\le\varphi(\zeta)+\varepsilon-A\,b(z).$$ Letting $z\to\zeta$ inside $\Omega$ and using $b(z)\to0$ gives $$\varphi(\zeta)-\varepsilon\le\liminf_{\Omega\ni z\to\zeta}H(z)\le\limsup_{\Omega\ni z\to\zeta}H(z)\le\varphi(\zeta)+\varepsilon.$$ Since $\varepsilon$ is arbitrary, $H(z)\to\varphi(\zeta)$. Thus $\zeta$ is regular. [step 2.1, L3]
+3.1 Let $v\in\mathcal P(\varphi,\Omega)$ be arbitrary. The subharmonic function $s=v+A b-\varphi(\zeta)-\varepsilon$ has boundary limsup at most $0$: on $V\cap\partial\Omega$ use $\limsup v\le\varphi(\eta)<\varphi(\zeta)+\varepsilon$ and $b<0$; on the complement use the second inequality in step 1.1. By [L5], $s\le0$ throughout $\Omega$. Taking the supremum over all $v$ gives $U_\varphi(z)\le\varphi(\zeta)+\varepsilon-A b(z)$. For any $\delta>0$, the barrier limit gives a neighbourhood $W$ of $\zeta$ on which $b> -\delta$, hence $U_\varphi<\varphi(\zeta)+\varepsilon+A\delta$ on $W\cap\Omega$. Its upper-semicontinuous regularization satisfies the same weak upper bound on a smaller neighbourhood of $\zeta$. Letting $\delta\downarrow0$ yields $\limsup_{z\to\zeta}H_\varphi(z)\le\varphi(\zeta)+\varepsilon$. Together with step 2.1 and arbitrary $\varepsilon$, this proves regularity. [L1, L3, L5, step 1.1, step 2.1]
 
-4.1 Steps 1.1 through 4.1 prove both directions, so $\zeta$ is regular exactly when it admits a barrier. [step 3.1, step 1.2] ∎
+4.1 Steps 1.1–3.1 establish both implications. [step 3.1, step 1.2] ∎

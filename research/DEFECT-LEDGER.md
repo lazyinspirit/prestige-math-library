@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 7ac601de3f13 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 905d44d61d34 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 10438 |
+| defects caught before publication | 10671 |
 | now mechanically prevented | 371 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -623,6 +623,36 @@
 | invalid-witness | 1 |  |  |
 | invalid-refutation | 1 |  |  |
 | false-computation |  | 1 |  |
+
+## frontier-36-complete — 233 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | owner |
+|---|---|---|---|---|
+| missing-hypothesis | 9 | 20 | 13 |  |
+| invalid-inference | 8 |  | 24 |  |
+| missing-choice-scope | 3 | 22 | 3 | 2 |
+| citation-inaccurate | 10 |  | 16 |  |
+| reader-repair | 14 |  |  |  |
+| unlicensed-inference | 12 |  |  |  |
+| ill-typed-construction | 2 |  | 10 |  |
+| false-claim | 9 | 1 |  |  |
+| false-or-overstrong-statement | 3 |  | 5 |  |
+| ill-formed | 5 | 1 |  |  |
+| other | 5 | 1 |  |  |
+| citation-misattributed |  | 6 |  |  |
+| false-computation | 5 |  |  |  |
+| citation-missing | 3 |  | 1 |  |
+| arithmetic-error | 3 |  |  |  |
+| missing-case | 2 |  | 1 |  |
+| unsupported-inference |  | 3 |  |  |
+| invalid-witness | 1 |  | 1 |  |
+| undefined-notation | 1 |  | 1 |  |
+| invalid-refutation | 2 |  |  |  |
+| frontmatter-schema | 1 |  |  |  |
+| ill-typed-claim | 1 |  |  |  |
+| false-boundary-disposition | 1 |  |  |  |
+| risk-review |  | 1 |  |  |
+| citation-truncated |  |  | 1 |  |
 
 ## phase-2-catchup-24 — 14 row(s)
 

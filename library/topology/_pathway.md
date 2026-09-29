@@ -53,6 +53,7 @@ parts:
       - the-seifert-van-kampen-theorem
       - classification-of-covering-spaces
       - applications-of-the-fundamental-group
+      - classification-of-compact-connected-surfaces
 ---
 
 ## metric-spaces
@@ -110,13 +111,13 @@ separates points is uniformly dense.
 
 ## homotopy-and-covering-spaces
 
-Homotopy deforms maps; based loops form the fundamental group. Covering maps lift paths and
-homotopies uniquely; universal-cover quotients classify connected coverings by conjugacy
-classes of subgroups, normal ones the regular coverings and normalizer quotients their deck
-groups; for the circle the cover is the line and the subgroups are those of $\mathbb Z$.
-Seifert-van Kampen makes an open union's group a pushout, giving simply connected higher
-spheres, free groups for wedges of circles, the product formula and $\mathbb Z^2$ for the
-torus. Functoriality makes these obstructions: the circle is no retract of the disk, giving
+Homotopy deforms maps; based loops form the fundamental group. Coverings lift paths and
+homotopies uniquely; subgroups up to conjugacy classify connected coverings, normal ones
+regular with normalizer-quotient deck groups; the circle's cover is the line; its
+subgroups are those of $\mathbb Z$. Seifert-van Kampen makes open unions pushouts: simply
+connected higher spheres, free groups for wedges, product formulae, $\mathbb Z^2$ for the
+torus. Functoriality yields obstructions: the circle is no retract of the disk, giving
 Brouwer's theorem and the fundamental theorem of algebra; Borsuk-Ulam constrains
-sphere-to-plane maps; topological-group loops commute; punctured spaces separate the plane
-from other $\mathbb R^n$.
+sphere-to-plane maps; topological-group loops commute; punctures separate the plane from
+other $\mathbb R^n$. Triangulation and polygon moves give every nonempty compact connected
+surface a normal form: orientability and Euler characteristic, $2-2g$ or $2-k$, classify it.

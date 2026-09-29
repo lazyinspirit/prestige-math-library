@@ -221,12 +221,14 @@ function currentDecisionCarrier(decision, target, live) {
   return undefined;
 }
 
+let auditorCertificationRows = null;
 function currentAuditorCertification(target) {
   if (!target?.direct || target.route !== 'item') return null;
-  let rows = [];
-  try { rows = loadAuditorCreatedCertifications(auditorCertificationsPath, { root: ROOT, run, steps: [5] }); }
-  catch (cause) { fail(`step5-scope: ${cause.message}`, 1); }
-  const row = rows.find(candidate => candidate.id === target.id && String(candidate.batch) === String(target.batch));
+  if (auditorCertificationRows === null) {
+    try { auditorCertificationRows = loadAuditorCreatedCertifications(auditorCertificationsPath, { root: ROOT, run, steps: [5] }); }
+    catch (cause) { fail(`step5-scope: ${cause.message}`, 1); }
+  }
+  const row = auditorCertificationRows.find(candidate => candidate.id === target.id && String(candidate.batch) === String(target.batch));
   // The shared reader already checked the exact current carriers, excluding
   // only the mechanical judge stamp. Do not reintroduce a raw-byte comparison.
   return row ?? null;
@@ -330,6 +332,18 @@ function publishedDependencies(batchIds, allRunIds) {
   const Y = yaml();
   const owners = new Map();
   const claimed = claimedPublishedIds();
+  const itemMetadata = new Map();
+  const metadataFor = (id) => {
+    if (itemMetadata.has(id)) return itemMetadata.get(id);
+    const path = R('items', `${id}.md`);
+    let item = null;
+    if (existsSync(path)) {
+      try { item = Y.parse(split(readFileSync(path, 'utf8')).fm) ?? {}; }
+      catch { /* An unreadable item is excluded from dependency traversal. */ }
+    }
+    itemMetadata.set(id, item);
+    return item;
+  };
   for (const consumer of batchIds) {
     const queue = [consumer];
     const seen = new Set();
@@ -337,19 +351,15 @@ function publishedDependencies(batchIds, allRunIds) {
       const id = queue.shift();
       if (seen.has(id)) continue;
       seen.add(id);
-      const path = R('items', `${id}.md`);
-      if (!existsSync(path)) continue;
-      let item = {};
-      try { item = Y.parse(split(readFileSync(path, 'utf8')).fm) ?? {}; } catch { continue; }
+      const item = metadataFor(id);
+      if (!item) continue;
       const dependencies = [...(Array.isArray(item.deps) ? item.deps : []),
         ...(Array.isArray(item.justified_by) ? item.justified_by : [])]
         .filter((target) => typeof target === 'string');
       for (const target of dependencies) {
         if (allRunIds.has(target)) continue;
-        const targetPath = R('items', `${target}.md`);
-        if (!existsSync(targetPath)) continue;
-        let targetItem = {};
-        try { targetItem = Y.parse(split(readFileSync(targetPath, 'utf8')).fm) ?? {}; } catch { continue; }
+        const targetItem = metadataFor(target);
+        if (!targetItem) continue;
         if (targetItem.status !== 'published' && !claimed.has(target)) continue;
         if (!owners.has(target)) owners.set(target, new Set());
         owners.get(target).add(consumer);
@@ -823,10 +833,25 @@ if (command === 'check') {
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
     const liveByBatch = new Map();
+    const contractsByBatch = new Map();
     const ownableSubjects = new Set();
     const liveFor = (batch) => {
       if (!liveByBatch.has(batch)) liveByBatch.set(batch, liveFingerprints(batch));
       return liveByBatch.get(batch);
+    };
+    const riskReviewOnlyDelta = (target, before, current) => {
+      if (target.route !== 'touched' || !before || !current
+        || before.item_sha256 !== current.item_sha256
+        || before.manifest_sha256 !== current.manifest_sha256) return false;
+      if (!contractsByBatch.has(target.batch)) {
+        contractsByBatch.set(target.batch, readJson(R('research', `${run}-batch-${target.batch}.proof-contracts.json`),
+          `batch ${target.batch} proof contract`).contracts ?? {});
+      }
+      const entry = contractsByBatch.get(target.batch)[target.id];
+      if (!entry || !Object.hasOwn(entry, 'risk_review')) return false;
+      const { risk_review: _riskReview, ...withoutReview } = entry;
+      return hashValue(withoutReview) === before.contract_sha256
+        && hashValue(entry) === current.contract_sha256;
     };
 
     for (const group of assignment.rows) {
@@ -910,6 +935,8 @@ if (command === 'check') {
         for (const defectId of decision.defect_ids) {
           const prior = referenced.get(defectId);
           const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
+          const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')
+            && prior.target.observed_sha256 === target?.observed_sha256;
           const sharedFinding = prior && decision.same_defect_as === prior.obligation
             && typeof decision.same_defect_evidence === 'string' && decision.same_defect_evidence.trim()
             && prior.id === decision.id
@@ -917,8 +944,9 @@ if (command === 'check') {
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
             && prior.target?.defect === target?.defect
-            && prior.target?.severity === target?.severity
-            && sameLocation(prior.target?.location, target?.location);
+            && ((prior.target?.severity === target?.severity
+              && sameLocation(prior.target?.location, target?.location))
+              || sameObservedCarrier);
           const sharedCausalAddition = prior && target?.added
             && decision.same_defect_as === prior.obligation
             && decision.causal_subject === prior.id
@@ -990,7 +1018,8 @@ if (command === 'check') {
               const postRaw = target.route === 'page' ? post.page_hashes?.[target.id] : post.hashes?.[target.id];
               const preValue = target.route === 'page' ? pageCarrier(preRaw, target.order_anchor) : preRaw;
               const postValue = target.route === 'page' ? pageCarrier(postRaw, target.order_anchor) : postRaw;
-              if (decision.verdict === 'accepted_repair' && currentSha !== hashValue(postValue)) {
+              if (decision.verdict === 'accepted_repair' && currentSha !== hashValue(postValue)
+                && !riskReviewOnlyDelta(target, postValue, currentValue)) {
                 error('decision-not-applied', `[${target.id}] accepted_repair no longer matches the reader result`);
               }
               if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {

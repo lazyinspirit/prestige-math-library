@@ -3,39 +3,7 @@ page: sheaf-cohomology-cech-cohomology-and-comparison
 title: "Sheaf Cohomology Cech Cohomology and Comparison"
 status: published
 requires: [presheaves-sheaves-stalks-and-sheafification, sheaf-operations-exactness-ringed-spaces-and-module-pullback, projective-and-injective-resolutions, derived-functors, dimension-constructible-images-and-dimensions-of-fibres, derived-categories, double-complexes-exact-couples-and-convergence]
-items: [def-global-sections-functor-sheaves, lem-abelian-sheaves-form-a-grothendieck-category,
-        thm-abelian-sheaves-have-enough-injectives, def-sheaf-cohomology-derived-global-sections,
-        thm-zero-sheaf-cohomology-global-sections, thm-long-exact-sequence-sheaf-cohomology,
-        lem-comparison-map-from-an-exact-complex-into-an-injective-resolution, lem-cohomology-functoriality-sheaf-and-space,
-        def-acyclic-sheaf-global-sections, def-flasque-sheaf,
-        lem-injective-sheaves-flasque, lem-flasque-kernel-lifts-quotient-sections,
-        thm-flasque-sheaves-acyclic, def-godement-resolution,
-        thm-godement-resolution-flasque, def-cech-cochain-complex-open-cover,
-        lem-cech-differential-squares-zero, def-cech-cohomology-open-cover,
-        lem-cech-h0-global-sections, lem-increasing-cech-complex-extends-to-alternating-tuples,
-        def-refinement-open-cover, thm-refinement-map-independent-on-cohomology,
-        def-global-cech-cohomology-directed-limit, def-acyclic-cover-for-sheaf,
-        lem-acyclic-rows-and-columns-of-cech-double-complex, thm-cech-to-sheaf-cohomology-comparison,
-        thm-leray-acyclic-cover-theorem, lem-two-open-cover-cech-complex,
-        thm-mayer-vietoris-sheaf-cohomology, thm-cohomology-disjoint-union,
-        thm-cohomology-one-point-space, def-cohomological-dimension-space,
-        lem-cech-vanishing-on-a-cofinal-basis-implies-acyclicity, lem-noetherian-subspaces-and-compact-opens,
-        lem-sections-on-compact-opens-commute-with-filtered-colimits, lem-filtered-colimits-of-abelian-groups-are-exact,
-        lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces, lem-subsheaf-generated-by-sections,
-        lem-locally-constant-functions-form-a-sheaf, lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf, lem-extension-by-zero-vanishing-reduces-to-all-sheaves,
-        lem-closed-immersion-preserves-sheaf-cohomology, lem-irreducibility-criteria-and-open-subspaces,
-        lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, lem-constant-sheaf-on-irreducible-space-is-flasque,
-        def-irreducible-component-of-a-topological-space, lem-irreducible-components-of-a-topological-space,
-        lem-noetherian-space-has-finitely-many-irreducible-components, lem-extension-by-zero-short-exact-sequence,
-        lem-sheaf-supported-on-a-closed-subset-is-a-pushforward, thm-noetherian-topological-space-dimension-vanishing,
-        def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product,
-        def-flat-abelian-sheaf, lem-flatness-criteria-and-flat-covers-for-abelian-sheaves,
-        def-k-flat-complex-of-abelian-sheaves, lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms,
-        lem-abelian-sheaves-admit-bounded-above-flat-resolutions, lem-derived-tensor-product-of-abelian-sheaves,
-        lem-morphisms-from-the-constant-sheaf-are-global-sections, lem-sheaf-cohomology-classes-as-derived-morphisms,
-        lem-koszul-structure-of-the-abelian-sheaf-tensor-product, lem-koszul-coherence-for-derived-sheaf-tensor,
-        def-cup-product-sheaf-cohomology, thm-cup-product-graded-associative-natural,
-        rem-cech-cohomology-cover-dependent-without-acyclicity, rem-spectral-sequence-belongs-homological-algebra]
+items: [def-global-sections-functor-sheaves, lem-abelian-sheaves-form-a-grothendieck-category, thm-abelian-sheaves-have-enough-injectives, def-sheaf-cohomology-derived-global-sections, thm-zero-sheaf-cohomology-global-sections, thm-long-exact-sequence-sheaf-cohomology, lem-comparison-map-from-an-exact-complex-into-an-injective-resolution, lem-cohomology-functoriality-sheaf-and-space, def-acyclic-sheaf-global-sections, def-flasque-sheaf, lem-injective-sheaves-flasque, lem-flasque-kernel-lifts-quotient-sections, thm-flasque-sheaves-acyclic, def-godement-resolution, thm-godement-resolution-flasque, def-cech-cochain-complex-open-cover, lem-cech-differential-squares-zero, def-cech-cohomology-open-cover, lem-cech-h0-global-sections, lem-increasing-cech-complex-extends-to-alternating-tuples, def-refinement-open-cover, thm-refinement-map-independent-on-cohomology, def-global-cech-cohomology-directed-limit, def-acyclic-cover-for-sheaf, lem-acyclic-rows-and-columns-of-cech-double-complex, thm-cech-to-sheaf-cohomology-comparison, thm-leray-acyclic-cover-theorem, lem-two-open-cover-cech-complex, thm-mayer-vietoris-sheaf-cohomology, thm-cohomology-disjoint-union, thm-cohomology-one-point-space, def-cohomological-dimension-space, lem-cech-vanishing-on-a-cofinal-basis-implies-acyclicity, lem-noetherian-subspaces-and-compact-opens, lem-sections-on-compact-opens-commute-with-filtered-colimits, lem-filtered-colimits-of-abelian-groups-are-exact, lem-filtered-colimits-commute-with-sheaf-cohomology-on-noetherian-spaces, lem-subsheaf-generated-by-sections, lem-locally-constant-functions-form-a-sheaf, lem-finite-filtration-of-generated-subsheaves-of-the-constant-integer-sheaf, lem-extension-by-zero-vanishing-reduces-to-all-sheaves, lem-closed-immersion-preserves-sheaf-cohomology, lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions, lem-constant-sheaf-on-irreducible-space-is-flasque, lem-extension-by-zero-short-exact-sequence, lem-sheaf-supported-on-a-closed-subset-is-a-pushforward, thm-noetherian-topological-space-dimension-vanishing, def-tensor-product-of-abelian-sheaves, lem-stalks-and-colimits-of-the-abelian-sheaf-tensor-product, def-flat-abelian-sheaf, lem-flatness-criteria-and-flat-covers-for-abelian-sheaves, def-k-flat-complex-of-abelian-sheaves, lem-k-flat-abelian-sheaf-complexes-preserve-quasi-isomorphisms, lem-abelian-sheaves-admit-bounded-above-flat-resolutions, lem-derived-tensor-product-of-abelian-sheaves, lem-morphisms-from-the-constant-sheaf-are-global-sections, lem-sheaf-cohomology-classes-as-derived-morphisms, lem-koszul-structure-of-the-abelian-sheaf-tensor-product, lem-koszul-coherence-for-derived-sheaf-tensor, def-cup-product-sheaf-cohomology, thm-cup-product-graded-associative-natural, rem-cech-cohomology-cover-dependent-without-acyclicity, rem-spectral-sequence-belongs-homological-algebra]
 examples: []
 ---
 

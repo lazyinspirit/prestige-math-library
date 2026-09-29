@@ -24,6 +24,7 @@ parts:
       - banach-alaoglu-goldstine-and-krein-milman
       - schauder-bases-approximation-and-banach-space-pathologies
       - banach-valued-integration-and-the-radon-nikodym-property
+      - fredholm-determinants-and-the-lidskii-trace-formula
       - unbounded-self-adjoint-operators-and-stones-theorem
       - spectral-measures-and-borel-functional-calculus
       - continuous-functional-calculus-for-self-adjoint-and-normal-operators
@@ -35,22 +36,22 @@ parts:
       - banach-algebras-spectrum-and-holomorphic-functional-calculus
       - hilbert-space-geometry-and-riesz-representation
       - compact-operators-and-riesz-schauder-theory
+      - measurable-hilbert-fields-and-direct-integral-operators
 ---
 
 ## foundations
 
-Banach spaces: subspaces, completions, quotients, finite-dimensional
-equivalence, Riesz's lemma and Baire category under DC (open mapping,
-$\mathrm{AC}_\omega$ uniform boundedness); Fourier analysis: convolution,
-Gaussian kernels, inversion, Schwartz Parseval, Plancherel, Poisson summation,
-tempered distributions; Hahn--Banach separation and norming, distributions,
-annihilators, transposes, weak and weak-star topologies, locally convex spaces,
-Banach--Alaoglu, Goldstine, Krein--Milman, reflexivity, Eberlein--Šmulian and
-James; Schauder bases, bounded approximation, Bochner integration and the
-Radon--Nikodym property; then Hilbert-space geometry, projections and Riesz
-representation; orthonormal bases, Parseval and Fourier series; compact
-operators, Riesz--Schauder theory and the Fredholm index; Banach algebras,
-spectra and holomorphic calculus; Gelfand theory for commutative C*-algebras;
-the continuous, Borel, unbounded and spectral-measure calculi; the compact
-self-adjoint spectral theorem with Hilbert--Schmidt kernels, trace-class
-operators; Fréchet calculus on Banach manifolds; Stone's theorem.
+Banach spaces: completions, quotients, finite-dimensional equivalence, Riesz's
+lemma, Baire category, open mapping under DC and uniform boundedness under
+$\mathrm{AC}_\omega$; Fourier analysis: convolution, inversion, Schwartz
+Parseval, Plancherel, Poisson summation, tempered distributions; Hahn--Banach
+separation and norming, duality, weak and weak-star topologies, locally convex
+spaces, Banach--Alaoglu, Krein--Milman, reflexivity and James; Schauder bases,
+Bochner integration and the Radon--Nikodym property; Hilbert geometry,
+projections and Riesz representation; orthonormal bases and Parseval; compact
+operators and Fredholm theory; Banach algebras, spectra and the operator
+calculi; Gelfand theory; the compact self-adjoint spectral theorem with
+Hilbert--Schmidt kernels and trace-class operators; Fréchet calculus; Stone's
+theorem; Fredholm determinants and Lidskii's trace formula for trace-class
+operators; measurable Hilbert fields, direct integrals and the spectral
+multiplicity model for separable abelian von Neumann algebras.

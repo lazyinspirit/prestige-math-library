@@ -35,7 +35,7 @@ uniformly on $\operatorname{Re}s>1$.
 
 [L1] On $\operatorname{Re}s>1$, $\zeta(s)=\sum_{n\ge1}n^{-s}$ and this series converges absolutely and locally uniformly ([[def-riemann-zeta-function]], [[lem-riemann-zeta-dirichlet-series-converges-locally-uniformly]]).
 
-[L2] If $\sum|a_n|$ converges, then $\prod(1+a_n)$ converges and has nonzero value ([[thm-absolute-convergence-criterion-for-complex-infinite-products]]).
+[L2] If $\sum|a_n|$ converges, then $\prod(1+a_n)$ converges; its value is nonzero when every factor is nonzero ([[thm-absolute-convergence-criterion-for-complex-infinite-products]]).
 
 [L3] Every integer $n\ge1$ has a unique prime factorization up to order ([[thm-fundamental-theorem-of-arithmetic]]).
 
@@ -45,7 +45,7 @@ uniformly on $\operatorname{Re}s>1$.
 
 **Proof technique:** direct.
 
-1.1 Write $\sigma:=\operatorname{Re}s$. Since the primes are among the integers at least $2$, $$\sum_p |p^{-s}|=\sum_p p^{-\sigma}\le\sum_{n=2}^\infty n^{-\sigma}<\infty$$ by [L1]. Therefore [L2] applies to $a_p:=-p^{-s}$, so the product $\prod_p(1-p^{-s})$ converges and is nonzero. [given, L1, L2, algebra]
+1.1 Write $\sigma:=\operatorname{Re}s$. Since the primes are among the integers at least $2$, $$\sum_p |p^{-s}|=\sum_p p^{-\sigma}\le\sum_{n=2}^\infty n^{-\sigma}<\infty$$ by [L1]. For every prime $p$, $|p^{-s}|=p^{-\sigma}<1$, so $1-p^{-s}\ne0$. Therefore [L2] applies to $a_p:=-p^{-s}$ and makes the product $\prod_p(1-p^{-s})$ convergent and nonzero. [given, L1, L2, algebra]
 
 1.2 For a finite set $P$ of primes, $$\prod_{p\in P}\frac{1}{1-p^{-s}}=\prod_{p\in P}\sum_{k\ge0}p^{-ks}.$$ Multiplying out this finite product lists exactly the terms $n^{-s}$ for those integers $n\ge1$ whose prime divisors all lie in $P$, and [L3] with [L4] shows that each such integer appears exactly once. Hence $$\prod_{p\in P}\frac{1}{1-p^{-s}}=\sum_{\substack{n\ge1\\ p\mid n\Rightarrow p\in P}} n^{-s}.$$ [L3, L4, algebra]
 

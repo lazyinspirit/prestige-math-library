@@ -34,7 +34,7 @@ equivalent:
 2. the series $\sum_{n\ge0}|a_n|$ converges.
 
 When these conditions hold, the complex product $\prod_{n\ge0}(1+a_n)$ itself
-converges and has nonzero value.
+converges. Its value is nonzero if and only if $1+a_n\ne0$ for every $n\ge0$.
 
 ## Facts & Assumptions
 
@@ -56,4 +56,4 @@ converges and has nonzero value.
 
 2.1 For $m>n\ge N$ one has $\left|\prod_{k=n}^{m}(1+a_k)-1\right|\le\prod_{k=n}^{m}(1+|a_k|)-1$, and the right-hand side tends to $0$ as $n,m\to\infty$ because the real tail products converge by [F2]. Hence the complex tail partial products form a Cauchy sequence, so they converge to some limit $\ell\in\mathbb C$. [F2, step 1.2, algebra]
 
-3.1 For the same tail, $|1+a_n|\ge1-|a_n|>0$, so $\left|\prod_{k=N}^{m}(1+a_k)\right|\ge\prod_{k=N}^{m}(1-|a_k|)$ for every $m\ge N$; by [F2], the real product $\prod_{k\ge N}(1-|a_k|)$ converges to a positive limit because $\sum_{k\ge N}|a_k|$ converges and each term is in $[0,1/2)$. Therefore the complex tail partial products are bounded away from $0$, so the limit $\ell$ of step 2.1 is nonzero. Now [F3] makes $\prod(1+a_n)$ convergent with nonzero value. [F2, F3, step 1.2, step 2.1, algebra] ∎
+3.1 For the same tail, $|1+a_n|\ge1-|a_n|>0$, so $\left|\prod_{k=N}^{m}(1+a_k)\right|\ge\prod_{k=N}^{m}(1-|a_k|)$ for every $m\ge N$; by [F2], the real product $\prod_{k\ge N}(1-|a_k|)$ converges to a positive limit because $\sum_{k\ge N}|a_k|$ converges and each term is in $[0,1/2)$. Therefore the complex tail partial products are bounded away from $0$, so the limit $\ell$ of step 2.1 is nonzero. Now [F3] makes $\prod(1+a_n)$ convergent with value $\bigl(\prod_{k<N}(1+a_k)\bigr)\ell$. Since $\ell\ne0$, this value is nonzero exactly when the finite head has no zero factor; the tail factors are already nonzero by step 1.2. [F2, F3, step 1.2, step 2.1, algebra] ∎

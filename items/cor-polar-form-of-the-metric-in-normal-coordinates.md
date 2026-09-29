@@ -5,7 +5,7 @@ title: "Polar form of the metric in normal coordinates"
 status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
-deps: ["thm-gauss-lemma","def-normal-neighborhood-and-normal-coordinate-chart","def-countable-choice"]
+deps: ["thm-gauss-lemma","def-normal-neighborhood-and-normal-coordinate-chart","def-riemannian-metric-and-riemannian-manifold","thm-real-power-continuity-and-derivatives","thm-chain-rule-for-differentials-of-smooth-maps","def-countable-choice"]
 verification:
   audited: 2026-09-13
   judge:
@@ -42,11 +42,13 @@ where $g_r$ is the restriction of $g$ to the tangent spaces of the radial level 
 
 [F2] Under [A1], [[thm-gauss-lemma]] gives $g(d\exp_v(v),d\exp_v(w))=g_p(v,w)$, radial norm preservation, and radial orthogonality to images of sphere-tangent vectors.
 
+[F3] The Riemannian metric is a positive-definite inner product on each tangent space ([[def-riemannian-metric-and-riemannian-manifold]]). On $(0,\infty)$, real powers have derivative $(s^\alpha)'=\alpha s^{\alpha-1}$ for every real $\alpha$ ([[thm-real-power-continuity-and-derivatives]]); the differential of a composite of smooth maps obeys the chain rule ([[thm-chain-rule-for-differentials-of-smooth-maps]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 On $D\setminus\{0\}$ the norm $v\mapsto|v|_{g_p}$ is smooth, so composing it with the smooth inverse of [F1] proves that $r$ is smooth on $U\setminus\{p\}$. If $q=\exp_p(v)$, $v\ne0$, and $z\in T_vD\cong T_pM$, differentiation gives $$dr_q(d\exp_v(z))=\frac{g_p(v,z)}{|v|_{g_p}}.$$ [F1, algebra]
+1.1 Fix linear coordinates on the finite-dimensional space $T_pM$ and put $Q(v)=g_p(v,v)$. By [F3], $Q$ is a quadratic polynomial and is positive on $T_pM\setminus\{0\}$. The power derivative in [F3], applied successively with exponents $1/2, -1/2, -3/2,\ldots$, shows by induction that $s\mapsto s^{1/2}$ is smooth on $(0,\infty)$. Hence $|v|_{g_p}=Q(v)^{1/2}$ is smooth off zero, and its composite with the smooth inverse of [F1] proves that $r$ is smooth on $U\setminus\{p\}$. Since $dQ_v(z)=2g_p(v,z)$, the chain rule in [F3] gives, for $q=\exp_p(v)$ and $v\ne0$, $$dr_q(d\exp_v(z))=\frac{g_p(v,z)}{|v|_{g_p}}.$$ [F1, F3, algebra]
 
 2.1 Put $e_r=v/|v|_{g_p}$. By [F2], $\partial_r=d\exp_v(e_r)$ has norm one. For every $X=d\exp_v(z)\in T_qU$, [F2] and step 1.1 give $$g_q(\partial_r,X)=g_p(e_r,z)=dr_q(X).$$ By the defining identity for the gradient and nondegeneracy of $g$, this proves $\nabla r=\partial_r$ and $|\nabla r|=1$. [F1, F2, step 1.1]
 

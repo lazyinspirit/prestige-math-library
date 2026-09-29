@@ -5,7 +5,7 @@ title: Unitary equivalence classified by measure class and multiplicity
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectral-multiplicity-function-in-the-separable-case, lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension, thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, thm-cyclic-spectral-representation, thm-integration-against-a-radon-nikodym-derivative, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, def-spectrum-and-resolvent-of-a-bounded-operator, def-separable-space, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice]
+deps: [def-spectral-multiplicity-function-in-the-separable-case, lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension, thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem, thm-cyclic-spectral-representation, thm-integration-against-a-density, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, def-spectrum-and-resolvent-of-a-bounded-operator, def-separable-space, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -17,7 +17,7 @@ sources:
     - title: "Andreas Kriegl, Funktionalanalysis, Theorem 8.64 and Proposition 8.66, printed pp.198–200"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
 verification:
-  audited: 2026-09-22
+  audited: 2026-09-29
 ---
 
 ## Statement
@@ -49,7 +49,7 @@ the empty set is used anywhere above.
 
 [A2] $T$ is unitarily equivalent to multiplication by the coordinate on the orthogonal sum of the cyclic summands, hence, via $[\mathrm{A1}]$, to $M_z$ on $L^2(\mu,m)$ ([[thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem]], [[thm-cyclic-spectral-representation]], [[def-spectral-multiplicity-function-in-the-separable-case]]).
 
-[A3] If $\lambda$ is any finite positive measure equivalent to $\mu$ that dominates all $\mu_j$, the same construction applies with $\lambda$ in place of $\mu$ and produces a model canonically unitarily equivalent to $L^2(\mu,m)$: the Radon–Nikodym ratio $d\mu/d\lambda$ is positive $\lambda$-almost everywhere and multiplication by its square root is a unitary intertwining all multiplications ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[thm-integration-against-a-radon-nikodym-derivative]], [[def-spectral-multiplicity-function-in-the-separable-case]]).
+[A3] If $\lambda$ is any finite positive measure equivalent to $\mu$ that dominates all $\mu_j$, the same construction applies with $\lambda$ in place of $\mu$ and produces a model canonically unitarily equivalent to $L^2(\mu,m)$: the Radon–Nikodym ratio $h=d\mu/d\lambda$ is positive $\lambda$-almost everywhere, $\mu=h\,d\lambda$, and uniqueness of densities gives $d\mu_j/d\lambda=h_jh$, so the active sets and multiplicity are unchanged almost everywhere. The nonnegative change-of-density identity $\int |f|^2\,d\mu=\int |f|^2h\,d\lambda$ makes multiplication by $\sqrt h$ a unitary intertwining all multiplications ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[thm-integration-against-a-density]], [[def-spectral-multiplicity-function-in-the-separable-case]]).
 
 [A4] A unitary intertwiner between two standard models preserves the class of the dominating measure and the multiplicity function almost everywhere ([[lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension]]).
 
@@ -73,4 +73,6 @@ the empty set is used anywhere above.
 
 3.1 Applying the intertwiner lemma to the everywhere-positive representatives in step 2.1 gives $[\mu]=[\nu]$ and $\widetilde m=\widetilde m'$ almost everywhere for that class. Since each representative differs from the original multiplicity only on a null set, $m=m'$ almost everywhere as well; together with step 1.1 this proves the "only if" implication. [step 1.1, step 2.1, A4]
 
-4.1 Therefore $T$ and $T'$ are unitarily equivalent exactly when the spectra agree and, on the common spectrum, the scalar measure classes agree and the multiplicity functions agree almost everywhere; the zero space is the excluded trivial case carrying the zero operator and no PVM. [step 3.1, step 2.2, A6] ∎
+4.1 In particular, take $T'=T$ and let the two countable cyclic decompositions in the Statement be arbitrary choices for this same operator. The identity unitary gives the direct implication just proved, so their scalar measures have the same class and their multiplicity functions agree almost everywhere. This establishes the decomposition independence deferred by the definition. [step 3.1, A1]
+
+5.1 Therefore $T$ and $T'$ are unitarily equivalent exactly when the spectra agree and, on the common spectrum, the scalar measure classes agree and the multiplicity functions agree almost everywhere; the zero space is the excluded trivial case carrying the zero operator and no PVM. [step 3.1, step 4.1, step 2.2, A6] ∎

@@ -41,6 +41,8 @@ items:
   - fs-dominance-is-defined-without-choosing-positive-roots
   - fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition
   - fs-the-weyl-character-formula-is-an-ordinary-quotient-of-functions-before-formal-cancellation-is-justified
+  - ex-exterior-powers-and-fundamental-weights-of-sl-n
+  - ex-standard-and-dual-representations-of-sl-n-by-highest-weights
 ---
 
 This page develops the finite-dimensional representation theory of a complex

@@ -1,0 +1,954 @@
+[
+  {
+    "order": 516.1,
+    "id": "chern-weil-theory-and-characteristic-forms",
+    "kind": "A",
+    "category": "differential-geometry",
+    "title": "Chern–Weil Theory and Characteristic Forms",
+    "companion": "chern-weil-theory-and-characteristic-forms-examples",
+    "requires": [
+      "riemann-curvature-and-riemannian-submanifolds",
+      "lie-groups-invariant-fields-and-the-exponential-map",
+      "chern-and-pontryagin-classes-by-splitting-and-complexification",
+      "the-de-rham-theorem-and-degree"
+    ],
+    "items": [
+      {
+        "id": "def-invariant-polynomial-on-a-matrix-lie-algebra",
+        "kind": "definition",
+        "title": "Invariant symmetric polynomials on a matrix Lie algebra",
+        "statement": "Let G be a real matrix Lie group with real Lie algebra g, or a complex matrix Lie group with complex Lie algebra g, and let K=R or C. A homogeneous G-invariant polynomial of degree k has a symmetric polarization P_k:g^k→K, real-multilinear for a real Lie algebra and complex-multilinear for a complex Lie algebra; a complex group may also be treated as a real group using its underlying real Lie algebra. Include degree-zero constants, finite sums of homogeneous polynomials, and the infinitesimal identity Σ_j P_k(A_1,…,[X,A_j],…,A_k)=0. Restrict complex GL invariants to U(r) when using a unitary reduction; for the Pfaffian use g=so(2m), G=SO(2m), and the fixed oriented-orthonormal convention.",
+        "deps": [
+          "def-conjugation-and-the-adjoint-representation-of-a-lie-group"
+        ],
+        "strategy": "Polarize a homogeneous invariant polynomial over characteristic zero to recover the symmetric multilinear map. Differentiate simultaneous conjugation by exp(tX) to obtain the displayed infinitesimal identity; the converse is not needed. Distinguish GL, U and SO structure groups and never apply the Pfaffian to an arbitrary GL connection.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§§4–5, printed pp. 22–30"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-complex-linear-and-compatible-bundle-connections",
+        "kind": "definition",
+        "title": "Complex-linear and metric-compatible bundle connections",
+        "statement": "A smooth complex rank-r vector bundle is a smooth real rank-2r bundle with a smooth fiberwise endomorphism J satisfying J²=-I, equivalently a bundle with smooth complex-linear transition matrices; its underlying topological bundle is the published AT complex bundle. A complex connection ∇ is C-linear and satisfies ∇_X(fs)=X(f)s+f∇_Xs for smooth complex f. A Hermitian connection satisfies Xh(s,t)=h(∇_Xs,t)+h(s,∇_Xt), with h conjugate-linear in the second variable; a Euclidean connection obeys the analogous real identity. In a unitary or orthonormal frame its connection matrix and curvature matrix are skew-Hermitian or skew-symmetric respectively. Smooth manifolds may have boundary.",
+        "deps": [
+          "def-connection-on-a-smooth-vector-bundle",
+          "def-metric-compatible-connection-on-a-riemannian-vector-bundle",
+          "def-real-and-complex-topological-vector-bundle",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "thm-curvature-two-form-structure-equation"
+        ],
+        "strategy": "Extend the published real Leibniz interface to complex-valued functions by C-linearity. Differentiate the metric matrix in a unitary/orthonormal frame to get ω*+ω=0, then Ω*+Ω=0 from Ω=dω+ω∧ω. The published connection item is real, so this local definition is required before any complex Chern form.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "II.4.1–II.4.5, printed pp. 86–92"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+        "kind": "lemma",
+        "title": "Existence of compatible connections",
+        "statement": "Assume AC. On a finite-rank smooth Hermitian or Euclidean bundle over a Hausdorff second-countable smooth manifold, possibly with boundary, there exists a compatible smooth connection. Every smooth complex bundle admits a Hermitian metric and therefore a complex Hermitian connection; every smooth real bundle admits a Euclidean metric and compatible connection.",
+        "deps": [
+          "def-complex-linear-and-compatible-bundle-connections",
+          "def-connection-on-a-smooth-vector-bundle",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Derive the countable-choice hypothesis of the metric and partition suppliers from full AC. For boundaryless real bundles use the published metric theorem; on boundary bases average chartwise Euclidean metrics with a boundary partition. For complex bundles turn a real metric g into the J-invariant metric q(u,v)=g(u,v)+g(Ju,Jv), then h(u,v)=q(u,v)-i q(Ju,v). From local orthonormal/unitary frames define flat compatible connections and average them using a real locally finite partition; the sum-to-one identity preserves both Leibniz and metric compatibility.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§4, Lemma 4.2, printed p. 23 (PDF p. 26), local connections patched by a partition of unity"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC only to derive the countable-family selection principle required by the metric and partition suppliers, whose hypotheses are ACω. The bundle atlases and chartwise Gram–Schmidt supply local frames without a simultaneous choice; the local formulas and averaging calculation use no further choice.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-evaluation-of-an-invariant-polynomial-on-curvature",
+        "kind": "definition",
+        "title": "Evaluation of an invariant polynomial on curvature",
+        "statement": "Let M be a finite-dimensional Hausdorff second-countable smooth manifold, possibly with boundary, and let G be a real or complex matrix Lie group with Lie algebra g. For a smooth rank-r F-vector bundle E with a supplied G-frame atlas and an F-linear connection compatible with that reduction, let P:g→K be a homogeneous G-invariant polynomial of degree k with symmetric polarization P_k. Define P_k(Ω^k) by multilinearly wedging the scalar 2-form coefficients in argument order; the alternating evaluation has factor 1/(2!)^k. Set P_0(Ω^0)=P_0 and evaluate finite sums degreewise. The G-valued transition law for curvature and Ad-invariance make these local expressions a global K-valued 2k-form, and matrix-product order is retained.",
+        "deps": [
+          "def-invariant-polynomial-on-a-matrix-lie-algebra",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form",
+          "thm-curvature-two-form-structure-equation",
+          "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary"
+        ],
+        "strategy": "Define a G-frame atlas by its G-valued transition matrices and take a connection compatible with that reduction, so its curvature matrices are g-valued. Extend the symmetric polarization to g-valued 2-forms by exterior multiplication, verify the alternating normalization, and use the global End(E)-valued curvature to derive Ωβ=A^{-1}ΩαA. Simultaneous Ad invariance then proves the overlap expressions agree. Treat degree zero, complex-valued forms, and smoothness at boundary charts explicitly; keep matrix multiplication order.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§5.1, invariant curvature evaluation and gluing, printed pp. 27–28 (gluing on p. 28; PDF p. 30)"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            }
+          ]
+        },
+        "axiom_audit": "Choice-free: the G-frame atlas and compatible connection are supplied data; the local multilinear construction and overlap equality make no simultaneous selections.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-invariant-polynomials-annihilate-covariant-commutators",
+        "kind": "lemma",
+        "title": "Invariant polynomials cancel connection commutators",
+        "statement": "Let M be a finite-dimensional Hausdorff second-countable smooth manifold, possibly with boundary. Let G be a real or complex matrix Lie group with Lie algebra g, and let P_k:g^k→K be the symmetric multilinear polarization of a homogeneous G-invariant polynomial, where K=R or C. In a supplied G-frame chart with a compatible connection and local g-valued connection form ω, extend P_k to homogeneous g-valued forms A_j of degrees q_j by wedging scalar coefficients in the displayed argument order, and set D^∇A=dA+ω∧A−(−1)^q A∧ω. Then dP_k(A_1,…,A_k)=Σ_j(−1)^{q_1+⋯+q_{j−1}}P_k(A_1,…,D^∇A_j,…,A_k); equivalently, the signed sum of graded connection-commutator terms vanishes. For k=0, dP_0=0. The identity holds in boundary charts by the same local coefficient calculation.",
+        "deps": [
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "def-invariant-polynomial-on-a-matrix-lie-algebra",
+          "thm-second-bianchi-identity-for-a-bundle-connection",
+          "def-product-connection-on-tensor-and-hom-bundles",
+          "thm-the-exterior-derivative-is-a-graded-derivation",
+          "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary"
+        ],
+        "strategy": "Work in a G-frame chart and require the connection form and all A_j to be g-valued; invariance under a proper subgroup cannot be applied to arbitrary End(E)-valued forms. Expand the wedge extension and apply the ordinary graded Leibniz rule. Replace dA_j by D^∇A_j−[ω,A_j]_gr. Expand ω and each A_j into Lie-algebra coefficients and scalar forms: moving the connection 1-form past earlier scalar factors cancels the prefix-degree sign, and moving it past the current q_j-form cancels the commutator sign. The remaining coefficient is the infinitesimal simultaneous-conjugation sum, zero by invariance. The local coefficient calculation also applies in boundary half-space charts.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, Lemma 4, printed pp. 292–293 (author PDF pp. 287–288)"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4, induced exterior covariant derivative and Bianchi identity, printed pp. 86–87 (PDF pp. 86–87)"
+            }
+          ]
+        },
+        "axiom_audit": "Choice-free: the calculation is local and finite, and uses no simultaneous choice of charts, bases, or frames.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-an-invariant-polynomial-of-curvature-is-closed",
+        "kind": "lemma",
+        "title": "Closedness of invariant curvature forms",
+        "statement": "For every invariant homogeneous polynomial P_k and a smooth connection as above, dP_k(Ω^k)=0, including k=0; the result applies to GL_r(C), GL_r(R), U(r), and SO(2m) within their respective invariant-polynomial scopes.",
+        "deps": [
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "lem-invariant-polynomials-annihilate-covariant-commutators",
+          "thm-second-bianchi-identity-for-a-bundle-connection"
+        ],
+        "strategy": "Use the published second Bianchi identity d^∇Ω=0 in the preceding Leibniz formula; each of the k terms vanishes. For a complex connection repeat the same local matrix identity over C, and for a boundary point use a local smooth extension. No fresh curvature or Bianchi theorem is asserted.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§§4–5, printed pp. 22–30"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-the-chern-weil-homomorphism",
+        "kind": "definition",
+        "title": "Chern–Weil map for a chosen connection",
+        "statement": "For a finite-dimensional Hausdorff second-countable smooth manifold M, possibly with boundary, a rank-r real or complex bundle E with supplied G-frame atlas, and a fixed G-compatible connection ∇, let P=Σ_kP_k be a finite sum of Ad(G)-invariant K-valued homogeneous polynomials and write P_k^pol for the normalized polarization of P_k. Define CW_{E,∇}(P)=Σ_k[P_k^pol(Ω_∇^k)]. Use real de Rham cohomology for K=R and its complexification for K=C, with the boundary-capable form complex. Then CW is a graded unital K-algebra homomorphism to H^{even}_{dR}(M;K), sending polynomial degree k to cohomological degree 2k and 1 to [1]. Connection independence is a subsequent theorem.",
+        "deps": [
+          "def-invariant-polynomial-on-a-matrix-lie-algebra",
+          "lem-an-invariant-polynomial-of-curvature-is-closed",
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "def-de-rham-cohomology-ring",
+          "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary"
+        ],
+        "strategy": "Define the boundary-capable K-coefficient de Rham target, complexifying the real forms for K=C. Closedness makes each curvature evaluation a class. Derive the normalized polarization of PQ by averaging over subsets of k arguments among k+ℓ; on repeated curvature 2-forms all terms equal the wedge product because the scalar 2-form coefficients commute. Extend to finite sums and constants, including the zero ring on the empty base. Assert no connection independence here.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§5.1 and §§5.3–5.5, printed pp. 27–30 (PDF pp. 30–33); real GL-invariant-polynomial construction, class [φ(κ)], and complex de Rham convention"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-transgression-between-two-connections-is-exact",
+        "kind": "lemma",
+        "title": "Explicit Chern–Simons transgression between two connections",
+        "statement": "Let ∇_0,∇_1 be connections of the same G reduction (GL, U, or SO), put A=∇_1−∇_0, ∇_t=∇_0+tA, Ω_t=Ω(∇_t). For invariant homogeneous P_k with k≥1, P_k(Ω_1^k)−P_k(Ω_0^k)=dT_P(∇_0,∇_1), where T_P=k∫_0^1P_k(A,Ω_t^{k−1})dt is a globally defined (2k−1)-form. For k=0 the difference is zero. The same identity holds on a manifold with boundary.",
+        "deps": [
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "def-invariant-polynomial-on-a-matrix-lie-algebra",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "lem-invariant-polynomials-annihilate-covariant-commutators",
+          "thm-second-bianchi-identity-for-a-bundle-connection",
+          "prop-the-difference-of-two-connections-is-an-endomorphism-valued-one-form",
+          "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary"
+        ],
+        "strategy": "In each supplied G-frame write omega_t=omega_0+t a and Omega_t=d omega_t+omega_t wedge omega_t. The difference a is g-valued, so the affine path remains compatible. Differentiate the structure equation to get dot Omega_t=D^{nabla_t}A. For alpha_t=P_k(Omega_t^k) and beta_t=P_k(A,Omega_t^{k-1}), symmetry and the covariant-Leibniz identity, with Bianchi, give dot alpha_t=k d beta_t. Ad-invariance patches beta_t across frames. Integrate its smooth local coefficients over [0,1]; coordinate derivatives commute with this compact-interval integral, giving the stated global transgression, also in boundary charts.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§§4–5, printed pp. 22–30"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "II.4.1–II.4.5, printed pp. 86–92"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-chern-weil-homomorphism-is-independent-of-connection-and-natural",
+        "kind": "theorem",
+        "title": "Connection independence and naturality of Chern–Weil classes",
+        "statement": "Let M and N be finite-dimensional Hausdorff second-countable smooth manifolds, with boundary allowed, and let E→M be a finite-rank real or complex bundle with a fixed GL(r,R), GL(r,C), U(r), or SO(r) frame reduction as applicable. For every finite sum P of invariant polynomials, the Chern–Weil map defined using a compatible connection is independent of that connection, is natural under every smooth map f:N→M (with the pulled-back reduction and connection, including the local-extension convention for boundary maps), and is multiplicative in invariant polynomials. Under full AC, every bundle with one of these GL, U, or SO structures admits a compatible connection. Independence and naturality for supplied compatible connections use no choice axiom.",
+        "deps": [
+          "def-the-chern-weil-homomorphism",
+          "lem-transgression-between-two-connections-is-exact",
+          "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+          "def-axiom-of-choice",
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "thm-curvature-two-form-structure-equation",
+          "def-pullback-connection",
+          "thm-pullback-connection-is-well-defined-and-functorial",
+          "thm-connection-one-form-transformation-law",
+          "thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary"
+        ],
+        "strategy": "For each positive homogeneous degree, the earlier transgression supplier gives an exact difference of curvature forms; the degree-zero terms agree. Multiplicativity is the algebra law in the Chern–Weil map definition. For a smooth map, pull back each G-frame and connection matrix; the structure equation and pullback identities give Ω(f*∇)=f*Ω(∇), and multilinearity of polynomial evaluation gives equality of representative forms. For boundary maps, pull the connection-matrix transition law back using local extensions, verify the local gluing identity directly, and use the boundary de Rham pullback map. The compatible-connection existence clause uses full AC through the earlier metric/connection existence lemma; independence and naturality for given connections are choice-free.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§5, connection-independence proposition following Lemma (5.3), printed pp. 28–29; connection homotopy on M×R"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4.1, Proposition II.4.1(b)–(c), printed pp. 88–89: connection-path exactness and pullback naturality for trace power series"
+            }
+          ]
+        },
+        "axiom_audit": "Full AC is assumed only for the compatible-connection existence assertion and is used through the earlier compatible-connection lemma. Connection independence, multiplicativity, and pullback naturality for supplied compatible connections are choice-free.",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-chern-pontryagin-and-euler-characteristic-forms",
+        "kind": "definition",
+        "title": "Chern, Pontryagin, and Euler characteristic forms",
+        "statement": "For a rank-r complex bundle with complex connection and curvature Ω, c(∇)=det(I−Ω/(2πi))=Σ_{j=0}^r c_j(∇). Each c_j has degree 2j; it is real-valued for a Hermitian connection, while an arbitrary complex connection need not give real forms. For a rank-r real bundle with real connection, set p_j(∇)=(-1)^j c_{2j}(∇_C) in degree 4j and p(∇)=Σ_jp_j(∇), with p_0=1 and p_j=0 for 2j>r; these Pontryagin forms are real for every real connection. For a metric real connection the odd forms c_{2j+1}(∇_C) vanish pointwise. Assume full AC: for every real connection, each c_{2j+1}(∇_C) is exact, with AC used through existence of a metric-compatible connection and the earlier transgression lemma. For an oriented Euclidean bundle of even rank 2m with metric connection, e(∇)=Pf(Ω/(2π)), using Pf([[0,a],[-a,0]])=a and the ordered oriented orthonormal frame. In rank zero c=p=e=1; this definition makes no Euler-form assertion for an arbitrary nonmetric connection.",
+        "deps": [
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "def-invariant-polynomial-on-a-matrix-lie-algebra",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "thm-curvature-two-form-structure-equation",
+          "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+          "lem-an-invariant-polynomial-of-curvature-is-closed",
+          "lem-transgression-between-two-connections-is-exact",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Determinant coefficients are invariant under GL conjugation. Real complexification carries Ω to the same real matrix over C. In an oriented orthonormal frame Ω is skew and Pf is SO invariant by Pf(BAB^T)=det(B)Pf(A); a reversal flips the Euler form. Record that complex Chern forms may be complex for arbitrary complex connections, but a Hermitian connection yields real-valued normalized coefficients. For a metric real connection odd complexified Chern forms vanish pointwise; for an arbitrary real connection they are exact by the earlier transgression lemma after AC supplies a metric-compatible comparison connection. This distinction matters for form-level Pontryagin products. Topological comparisons occur only over R and belong to their later item.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://xiaoshuo-lin.me/files/Char-Class.pdf",
+              "locator": "Appendix C, Corollary C.10 and Lemma C.12, printed pp. 194–196; real odd-coefficient exactness and Pfaffian covariance and normalization"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4.3 Remark (printed p. 90), §II.4.5 (printed p. 92), and §II.4.11; Hermitian reality, total Chern form, and Pontryagin normalization"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC only for the exactness of odd complexified Chern forms of an arbitrary real connection: use the compatible-connection lemma to obtain a Euclidean metric and compatible connection, then apply the earlier transgression lemma. The determinant, reality, vanishing, and Pfaffian calculations for supplied data are choice-free.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+        "kind": "lemma",
+        "title": "Smooth manifolds have CW homotopy type",
+        "statement": "Assume AC. Every finite-dimensional Hausdorff second-countable smooth manifold, including a manifold with boundary and the empty manifold, is paracompact Hausdorff, compactly generated weak Hausdorff, and has the homotopy type of a CW complex. Every smooth finite-rank vector bundle on it is numerable.",
+        "deps": [
+          "thm-weak-whitney-proper-embedding-theorem",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "thm-collar-neighborhood-theorem",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-topological-manifold-with-and-without-boundary",
+          "def-topological-manifold-without-boundary",
+          "def-smooth-manifold",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-real-and-complex-topological-vector-bundle",
+          "thm-locally-compact-hausdorff-basics",
+          "thm-second-countable-implies-lindelof",
+          "lem-regularity-via-closed-neighbourhoods",
+          "lem-regular-lindelof-spaces-are-paracompact",
+          "def-compactly-generated-conventions-for-based-homotopy",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-abstract-simplicial-complex",
+          "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "thm-heine-borel-rn",
+          "def-complex-linear-and-compatible-bundle-connections"
+        ],
+        "strategy": "For boundaryless M, take a proper Whitney embedding M↪R^N; properness makes its image closed. The Euclidean tubular theorem gives an open U⊂R^N retracting onto M. Cover U by all Euclidean balls whose closures lie in U; every nonempty finite intersection is convex. Hatcher §4G Corollary 4G.3 proves U homotopy equivalent to the nerve CW complex, so M has CW type. For boundary, a smooth collar gives an explicit homotopy inverse int(M)→M by pushing collar coordinate slightly inward, then apply the boundaryless case. Standard locally compact Hausdorff second-countable spaces are paracompact and CGWH; smooth partitions numerate a bundle atlas. Empty M is the empty CW complex.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§4G, Propositions 4G.1–4G.2 and Corollary 4G.3, printed pp. 458–460 (PDF pp. 466–468)"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC; the proof derives ACω, the exact strength used by the published embedding, tubular-neighbourhood, collar, Lindelöf/paracompactness, and smooth-partition suppliers. Hatcher §4G uses the subordinate partition supplied locally on the open Euclidean neighbourhood; no stronger choice is used.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-first-chern-form-agrees-with-the-topological-line-class",
+        "kind": "lemma",
+        "title": "First Chern form agrees with the topological line class",
+        "statement": "Assume the Axiom of Choice. Let M be a finite-dimensional Hausdorff second-countable smooth manifold, possibly with boundary or empty, and let L→M be a smooth complex line bundle with a supplied Hermitian metric and Hermitian connection ∇. With Ω_∇ its curvature and c_1(L):=e(L_R) in the complex orientation, J_M[−Ω_∇/(2πi)]=ρ_M(c_1(L)) in H²_sing(M;R). For every complex connection ∇′ on L, the class [−Ω_∇′/(2πi)] in complex de Rham cohomology is the complexification of J_M⁻¹ρ_M(c_1(L)); the comparison is the degree-one transgression from ∇ to ∇′.",
+        "deps": [
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "thm-chern-weil-homomorphism-is-independent-of-connection-and-natural",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "thm-de-rham-theorem",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "thm-general-stokes-theorem",
+          "def-axiom-of-choice",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "def-thom-class-by-fiberwise-normalization",
+          "thm-excision-for-singular-cohomology",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "def-kronecker-evaluation-pairing",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "thm-compactness-under-continuous-maps",
+          "thm-heine-borel-rn",
+          "def-singular-chain-complex-and-singular-homology",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-de-rham-cohomology",
+          "def-the-chern-weil-homomorphism",
+          "def-de-rham-integration-cochain-map",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "def-smooth-singular-simplex",
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "prop-integration-of-top-forms-by-finite-parametrizations",
+          "thm-smooth-singular-chains-compute-singular-homology",
+          "def-schubert-cells-in-real-and-complex-grassmannians",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "thm-cellular-homology-computes-singular-homology",
+          "lem-transgression-between-two-connections-is-exact"
+        ],
+        "strategy": "On tautological γ over CP¹, use the standard two frames s_U=(1,z), s_V=(w,1), with s_U=z s_V. Their connection forms satisfy ω_U−ω_V=dz/z; Stokes on the two oppositely oriented disks gives ∫Ω=2πi, so the normalized Chern form has period −1. A smooth singular cycle obtained by radial projection of an oriented tetrahedral boundary represents the fundamental class; finite parametrization identifies its integration-cochain evaluation with that period. Independently, orthogonal projection of (1,0) onto γ is a section with one zero, whose local fiber coordinate is complex conjugation times a positive factor; fiber-normalized Thom pullback gives Euler evaluation −1. Smooth-chain homology and the field UCT identify the two real classes. The Schubert cells then show H²(CP^m;R) restricts isomorphically to CP¹ (with CP⁰ handled separately). For any smooth real singular 2-cycle in M, its finite image is compact. Apply a smooth partition subordinate to the cover of all local dual frames of L; finitely many positive partition functions cover that image. Multiplying the corresponding local dual frames by these functions and extending by zero gives finitely many global sections of L* spanning on an open neighborhood V. Evaluation embeds L|_V into V×C^N and gives a smooth f:V→CP^{N−1} with L|_V≅f*γ. Euler naturality and Chern–Weil connection independence/naturality prove equality on V. Every real homology class has a smooth representative, so pair with all H₂ classes and use the field UCT evaluation isomorphism to conclude equality on M. For an arbitrary complex connection, the degree-one transgression is the exact difference from a Hermitian connection; its class is the complexification of the real class.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4.5 Example II.4.5, printed p. 90 / PDF p. 90; tautological CP¹ connection-frame and Stokes calculation"
+            },
+            {
+              "title": "Allen Hatcher, Vector Bundles & K-Theory",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "§3.2, ‘The Euler Class,’ printed p. 91; Thom class restricted to the zero section"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC. It supplies compatible-connection existence in steps 1.1 and 1.6, manifold numerability in step 1.4, Thom/Euler naturality and the line-class convention in steps 1.3 and 1.6, the projective cohomology inputs in steps 1.2–1.3, the PID UCT in steps 1.2, 1.3, and 1.7, and the tautological sign example in step 1.2. AC implies ACω for the de Rham comparison in steps 1.2, 1.6, and 1.7, the partition in step 1.4, and smooth-chain comparison in steps 1.2, 1.4, and 1.7. The local finite subcover is justified by compactness; no global classifying map is selected.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-oriented-real-two-plane-splitting-with-injective-real-pullback",
+        "kind": "lemma",
+        "title": "Oriented real two-plane splitting with real-cohomology injection",
+        "statement": "Assume AC. Let E→M be an oriented smooth Euclidean vector bundle of rank r≥0 over a finite-dimensional Hausdorff second-countable smooth manifold M, possibly with boundary or empty. There is a smooth proper flag-bundle projection q:F(E)→M such that q* on real singular cohomology is injective and q*E is an ordered orthogonal sum of oriented real two-plane bundles, with one oriented trivial line appended when r is odd. This includes ranks 0, 1 and 2.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-smooth-manifold",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-smooth-function-on-a-relatively-open-subset-of-a-half-space",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "prop-chain-rule-for-smooth-half-space-maps",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-smooth-bundle-metric",
+          "def-oriented-real-vector-bundle-and-oriented-frame-bundle",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-oriented-grassmannian-and-tautological-oriented-bundle",
+          "def-quotient-topology",
+          "def-locally-trivial-fiber-bundle",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "thm-second-countable-implies-lindelof",
+          "thm-countable-union-of-countable",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "thm-leray-hirsch-module-isomorphism",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "def-hurewicz-and-serre-fibrations",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "thm-fibration-sequence-is-natural",
+          "lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "thm-five-lemma-for-modules",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "lem-integral-cohomology-ring-of-complex-projective-space-by-splitting",
+          "def-schubert-cells-in-real-and-complex-grassmannians",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "thm-cellular-homology-computes-singular-homology",
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-excision-for-singular-cohomology",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish",
+          "def-pontryagin-classes-by-complexification",
+          "thm-top-pontryagin-class-is-the-square-of-the-euler-class",
+          "thm-pontryagin-whitney-product-away-from-two",
+          "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes",
+          "def-singular-chain-complex-and-singular-homology",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cohomology-ring",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "thm-heine-borel-rn",
+          "thm-compactness-under-continuous-maps",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric"
+        ],
+        "strategy": "For n≥3, model the compact fiber Gr₂⁺(Rⁿ) by CPⁿ⁻¹RPⁿ⁻¹ using polar decomposition. Compute its real-cohomology basis from tubular-neighborhood relative cohomology, the pair LES, UCT and Poincare duality; prove the even-n middle basis with Euler and real Pontryagin identities. Build smooth proper numerable oriented Grassmann stages, pull each to a CW model, use Leray–Hirsch there and descend injectivity through the natural fibration LES and UCT. Iterate until the complement has rank 0, 1 or 2; treat empty and low-rank cases by the identity and include boundary charts.",
+        "proof_strategy": "Compute the oriented Grassmannian fiber by polar decomposition, relative cohomology and real Pontryagin identities; build smooth proper numerable Grassmann stages, pull them to CW models, apply Leray–Hirsch and descend injectivity. Use a smooth normal-bundle metric and compactness to obtain cofinal uniform tubular disks, then iterate through ranks 0, 1 or 2, including boundary and empty bases.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kaiwen, Talk 13: Cohomology of Projective Bundles (2025)",
+              "url": "https://www.math.uni-bonn.de/people/cfb/TEACHING/Vortrag-13-Song.pdf",
+              "locator": "§4, Propositions 4.6–4.13 and Theorem 4.14, printed pp. 7–11; geometric model and claimed fiber groups, with source proof sketches re-derived here"
+            },
+            {
+              "title": "Allen Hatcher, Vector Bundles & K-Theory",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "Appendix to §1.2, Proposition 1.20 and proof, printed pp. 36–37: every CW complex is paracompact"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC. Its ACω consequence is used by the tubular-neighbourhood, smooth-partition and countable-cover suppliers; full AC is inherited by the CW-type, characteristic-class, Leray–Hirsch and UCT suppliers and is used in step 4.4 for cohomology of the disjoint union. No arbitrary-index choice is used in the finite tower or fiber calculation.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-complex-flag-splitting-over-smooth-bases-with-injective-real-pullback",
+        "kind": "lemma",
+        "title": "Complex flag splitting with injective real pullback on smooth bases",
+        "statement": "Assume AC. Let E→M be a smooth complex bundle of finite rank r over a finite-dimensional Hausdorff second-countable smooth manifold, possibly with boundary or empty. There is a smooth complete flag-bundle projection q:F(E)→M such that q*E is a direct sum of r smooth complex line bundles, q is proper (inverse images of compact subsets are compact), and q*:H*(M;R)→H*(F(E);R) is injective. In ranks zero and one take q to be the identity; the assertion holds componentwise for disconnected M.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-smooth-manifold",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-smooth-function-on-a-relatively-open-subset-of-a-half-space",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "prop-chain-rule-for-smooth-half-space-maps",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "thm-second-countable-implies-lindelof",
+          "thm-countable-union-of-countable",
+          "def-real-and-complex-topological-vector-bundle",
+          "def-locally-trivial-fiber-bundle",
+          "def-complex-projective-bundle-and-tautological-complex-line",
+          "thm-integral-complex-projective-bundle-theorem",
+          "lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cohomology-ring",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "thm-leray-hirsch-module-isomorphism",
+          "thm-heine-borel-rn",
+          "thm-compactness-under-continuous-maps",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "strategy": "Construct the smooth projective tower from local complex frames. A Hermitian metric splits off each tautological line and leaves a smooth orthogonal complement. On a connected rank-m stage, integral powers of the tautological Euler class form a basis on CP^{m−1}; the Schubert cells, the universal coefficient theorem, and natural coefficient change show that their real images form a fiber basis. Pull the numerable projective fibration to a connected CW homotopy model and apply Leray–Hirsch to prove injectivity, then transfer it back by homotopy invariance. Handle disconnected cohomology componentwise under AC. Prove stage properness with compactly contained ball and half-ball charts and compact projective fibers; finite composition remains proper. Include boundary and rank-zero/rank-one cases.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Vector Bundles & K-Theory",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "§3.1, Proposition 3.3 proof and its complex adaptation, printed pp. 80–81"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC. It supplies the stated connection, CW-type, projective-bundle/Euler, Leray–Hirsch, numerable-fibration, and UCT suppliers; it also implies ACω for the Lindelöf/countability suppliers. The componentwise singular-cohomology argument uses AC to choose componentwise cocycle representatives and primitives. No incompatible axiom is used.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals",
+        "kind": "theorem",
+        "title": "Characteristic forms represent topological characteristic classes over the reals",
+        "statement": "Assume AC. For smooth finite-rank bundles over a finite-dimensional Hausdorff second-countable smooth M, possibly with boundary, the de Rham isomorphism sends the Chern form class of a Hermitian complex connection to the coefficient image c_j(E)⊗1, the Pontryagin form class of a real connection to p_j(E)⊗1, and the Pfaffian Euler form class of an oriented even-rank Euclidean bundle with metric connection to e(E)⊗1. These are the published AT classes with c_1(L)=e(L_R), p_j(E)=(-1)^j c_{2j}(E_C), and the standard Thom orientation. No equality with integral torsion is asserted.",
+        "deps": [
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "thm-chern-weil-homomorphism-is-independent-of-connection-and-natural",
+          "lem-first-chern-form-agrees-with-the-topological-line-class",
+          "lem-oriented-real-two-plane-splitting-with-injective-real-pullback",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "thm-de-rham-theorem",
+          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "def-pontryagin-classes-by-complexification",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "def-axiom-of-choice",
+          "lem-complex-flag-splitting-over-smooth-bases-with-injective-real-pullback",
+          "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+          "def-complex-linear-and-compatible-bundle-connections"
+        ],
+        "strategy": "Work componentwise and use the local smooth flag lemmas, whose pullbacks inject real cohomology. For a Hermitian complex connection, project its pullback to the orthogonal line summands; connection independence and block determinant multiplicativity reduce the Chern statement to the already-proved first-Chern line lemma and the topological Whitney formula. Descend the equality along the flag injection. For an arbitrary real connection, identify each Pontryagin form with the real GL-invariant polynomial coefficient [t^(2j)]det(I+tΩ/(2π)); use full AC to choose a Euclidean-compatible connection, apply connection independence on the real bundle, and apply the Chern assertion to its Hermitian complexification. For Euler, project the pulled-back metric connection to the oriented two-plane summands. In a positive orthonormal frame with Je1=e2, compute the rank-two Pfaffian and associated line Chern form as both −dα/(2π); use the Euler Whitney product and descend along the real flag injection. Check component, empty, rank-zero, rank-cutoff, boundary, and choice cases. All equalities are after real coefficient change.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4.1, Proposition II.4.1(b)–(c), printed pp. 88–89; §II.4.5, Example II.4.5 and total Chern form, printed pp. 91–92"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://xiaoshuo-lin.me/files/Char-Class.pdf",
+              "locator": "Appendix C, split-sum Chern calculation and Corollary C.10, printed pp. 193–194; Lemma C.12 and Generalized Gauss–Bonnet Theorem, printed pp. 195–196; sign-convention qualification, printed p. 192"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC. It is used by the complex and real smooth flag lemmas, the CW-type/numerability and topological Chern/Pontryagin/Euler suppliers, componentwise cohomology assembly, and to obtain a Euclidean metric and compatible connection for the arbitrary-real-connection Pontryagin clause. The supplied-connection projection, curvature algebra, block determinant/Pfaffian calculations, and Chern–Weil comparisons are choice-free.",
+        "dependency_level": 7
+      },
+      {
+        "id": "prop-chern-weil-forms-obey-direct-sum-and-pullback-formulas",
+        "kind": "proposition",
+        "title": "Direct-sum and pullback formulas for characteristic forms",
+        "statement": "Assume full AC on a finite-dimensional Hausdorff second-countable smooth manifold, possibly empty or with boundary. Complex direct-sum connections multiply total Chern forms; metric connections on oriented even-rank Euclidean bundles multiply Euler forms for the ordered-sum orientation; metric real connections multiply total Pontryagin forms. Chern, Pontryagin, and defined Euler forms are natural under every smooth pullback. For arbitrary real connections D_E,D_F and any D on E⊕F, [p(D)] = [p(D_E)]∧[p(D_F)] = [p(D_E⊕D_F)] in real de Rham cohomology, although the form product can fail; these classes map to the real coefficient images of topological Pontryagin classes. No integral Whitney product formula is asserted.",
+        "deps": [
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
+          "thm-curvature-two-form-structure-equation",
+          "def-evaluation-of-an-invariant-polynomial-on-curvature",
+          "def-pullback-connection",
+          "thm-connection-one-form-transformation-law",
+          "thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law",
+          "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary",
+          "lem-transgression-between-two-connections-is-exact",
+          "thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals",
+          "thm-de-rham-theorem",
+          "def-connection-on-a-smooth-vector-bundle",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Compute in common local frames: the direct-sum connection has block-diagonal curvature, so the determinant and ordered Pfaffian factor. Metric real connections have no odd complexified Chern forms, yielding strict Pontryagin form multiplicativity. For arbitrary real connections, odd Chern components are exact under full AC, so the odd-odd cross terms are exact; transgression compares any connection on E⊕F with the direct-sum connection. Pullback naturality is proved from the local connection-form and curvature equations, including boundary charts. Exhibit failure of strict arbitrary-connection form multiplicativity on R^4 using two trivial real lines with curvatures dx1∧dx2 and dx3∧dx4.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§5, Proposition (5.6) and total Pontryagin form, printed pp. 31–33"
+            },
+            {
+              "title": "John W. Milnor and James D. Stasheff, Characteristic Classes",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/milnor-stasheff2.pdf",
+              "locator": "Appendix C, split-sum Chern calculation and Corollary C.10, printed pp. 310–312; Pfaffian Lemma C.12 and curvature application, printed pp. 313–314"
+            },
+            {
+              "title": "Haynes Miller, MIT 18.906 Algebraic Topology II, Lecture 36",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf",
+              "locator": "Odd Chern classes of complexified real bundles and Pontryagin Whitney formula over coefficients with 2 invertible, printed pp. 135–136"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC. It is used through the characteristic-form definition to obtain exactness of odd Chern forms for arbitrary real connections, and through the real characteristic-class comparison theorem to identify arbitrary-connection Pontryagin classes with real coefficient images. The local direct-sum, Pfaffian, pullback and explicit counterexample calculations are choice-free once the bundles and connections are supplied.",
+        "dependency_level": 8
+      },
+      {
+        "id": "rem-integral-torsion-is-not-detected-by-real-characteristic-forms",
+        "kind": "remark",
+        "title": "Real characteristic forms do not detect integral torsion",
+        "statement": "Torsion in integral cohomology maps to zero in real cohomology, so Chern, Pontryagin, and Euler characteristic forms determine only the real coefficient images of the integral classes. The complexification of the tautological real line over RP^2 has a flat Hermitian connection and first Chern class of exact order two, so vanishing of the real form class does not imply integral vanishing.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals",
+          "def-singular-cohomology-with-coefficients",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
+          "cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion",
+          "thm-mod-two-reduction-of-chern-classes",
+          "thm-whitney-sum-formula-for-stiefel-whitney-classes",
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation",
+          "def-tautological-degree-one-class-on-a-real-projective-bundle",
+          "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating",
+          "lem-mod-two-cohomology-ring-of-infinite-real-projective-space",
+          "thm-vector-bundle-construction-from-a-smooth-cocycle",
+          "prop-complexification-is-conjugation-invariant",
+          "thm-connection-one-form-transformation-law",
+          "thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "thm-curvature-two-form-structure-equation",
+          "def-chern-pontryagin-and-euler-characteristic-forms"
+        ],
+        "strategy": "First show that the coefficient map kills torsion. Then restrict the universal real line over RP^infinity to RP^2: mod-two reduction detects a nonzero order-two first Chern class. In normalized local frames its transition functions are locally constant signs, so zero local connection matrices glue to a flat Hermitian connection on the complexification; the normalized Chern form is zero.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            },
+            {
+              "title": "Raoul Bott, Lectures on Characteristic Classes and Foliations",
+              "url": "https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf",
+              "locator": "§§4–5, printed pp. 22–30"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC, inherited through the Chern–Weil comparison theorem, Chern-class naturality, and the projective-space characteristic-class suppliers. The coefficient-map argument and explicit local flat connection introduce no additional choices.",
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 516.2,
+    "id": "chern-weil-theory-and-characteristic-forms-examples",
+    "kind": "B",
+    "category": "differential-geometry",
+    "title": "Chern–Weil Theory and Characteristic Forms: Examples",
+    "companion": "chern-weil-theory-and-characteristic-forms",
+    "requires": [
+      "chern-weil-theory-and-characteristic-forms"
+    ],
+    "items": [
+      {
+        "id": "ex-curvature-and-first-chern-form-of-a-line-bundle",
+        "kind": "example",
+        "title": "Curvature and first Chern form of a complex line",
+        "statement": "Assume full AC. On any finite-dimensional Hausdorff second-countable smooth manifold M, possibly with boundary, a Hermitian line with Hermitian connection has in each local unitary frame ∇s=ωs with ω imaginary-valued, Ω=dω, and c_1(∇)=−dω/(2πi). On the tautological line over CP¹ with its induced Hermitian metric and any Hermitian connection, ∫_{CP¹}c_1(∇)=−1 in the complex orientation; this is the period of the real image of the published topological first Chern class.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "def-complex-projective-bundle-and-tautological-complex-line",
+          "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "lem-first-chern-form-agrees-with-the-topological-line-class",
+          "thm-general-stokes-theorem",
+          "thm-curvature-two-form-structure-equation",
+          "thm-de-rham-theorem",
+          "def-de-rham-integration-cochain-map",
+          "thm-smooth-singular-chains-compute-singular-homology",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-kronecker-evaluation-pairing"
+        ],
+        "strategy": "Derive the unitary-frame curvature and determinant formula from the local metric identity and scalar structure equation. On the tautological line use the two standard CP¹ charts with transition s_U=z s_V to obtain ω_U−ω_V=dz/z; Stokes on complementary disks gives ∫Ω=2πi and first-Chern period −1. The first-Chern comparison identifies this with the topological class. Under a unitary gauge change ω shifts by the closed imaginary form g⁻¹dg, which is locally exact but need not be globally exact; its differential is zero, so curvature is unchanged.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4.5, Example II.4.5, printed pp. 91–92 (PDF pp. 90–91): tautological CP¹ frames, transition, and two-disk Stokes calculation"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC for the projective-line and topological-class suppliers and compatible-connection existence; the local curvature, chart, gauge, and Stokes calculations are choice-free once the connection is supplied.",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-flat-connections-have-vanishing-positive-degree-real-chern-weil-classes",
+        "kind": "example",
+        "title": "Flat connections and real characteristic classes",
+        "statement": "Assume full AC. For a finite-rank complex bundle with a flat complex-linear connection, every positive-degree real Chern class vanishes, even when that connection is not Hermitian. For a finite-rank real bundle with a flat real connection, every positive-degree real Pontryagin class and every positive-degree real Chern class of its complexification vanish. For an oriented even-rank Euclidean bundle, a flat metric-compatible connection makes the real Euler class vanish. This Euler conclusion cannot be extended to flat connections without metric compatibility: on a compact genus-two surface an oriented real plane bundle has a flat connection whose real Euler number is -1, so that connection preserves no Euclidean metric.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "def-complex-projective-bundle-and-tautological-complex-line",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-pontryagin-classes-by-complexification",
+          "lem-compatible-connections-exist-on-smooth-hermitian-and-euclidean-bundles",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "lem-transgression-between-two-connections-is-exact",
+          "prop-complexification-is-conjugation-invariant",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "rem-integral-torsion-is-not-detected-by-real-characteristic-forms",
+          "thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals",
+          "thm-closed-hyperbolic-surface-has-geometric-deck-action",
+          "thm-connection-one-form-transformation-law",
+          "thm-curvature-two-form-structure-equation",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-integral-complex-projective-bundle-theorem",
+          "thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes",
+          "thm-thom-isomorphism-for-oriented-vector-bundles",
+          "thm-vector-bundles-glued-from-transition-cocycles"
+        ],
+        "strategy": "For a flat complex connection, the determinant forms vanish pointwise; use full-AC existence of a Hermitian connection and exact transgression on the same GL(C) reduction to show its real Hermitian forms are exact before applying the comparison theorem. For a flat real connection, every Pontryagin form vanishes; even Chern classes of the complexification follow from p_j=(-1)^j c_{2j}, while odd classes are two-torsion by conjugation on CW models and disappear under the real coefficient map. A flat metric-compatible Euler connection has zero Pfaffian form. For the caveat, construct a genus-two hyperbolic octagon quotient, identify its projective-line bundle with the tangent direction circle bundle of Euler number -2, lift its fibers twofold using the mod-two Thom/pair-sequence obstruction, and obtain an SL(2,R) holonomy representation with plane Euler number -1. Constant quotient transitions give a flat connection; comparison rules out compatibility with any Euclidean metric.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 315–317, flat oriented plane bundle with nonzero real Euler number; §11.5, Corollary 11.12, printed p. 138, tangent Euler number equals Euler characteristic"
+            },
+            {
+              "title": "Allen Hatcher, Vector Bundles & K-Theory",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "Appendix to §1.2, Proposition 1.20, printed pp. 36–37: every CW complex is paracompact"
+            }
+          ]
+        },
+        "axiom_audit": "Assume full AC. It supplies compatible Hermitian connections, CW-type models for the componentwise conjugation argument, and the real characteristic-class comparison; the explicit curvature and quotient-connection calculations are choice-free once the stated data are fixed.",
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-pontryagin-forms-from-a-real-connection",
+        "kind": "example",
+        "title": "Pontryagin forms from a real connection",
+        "statement": "For a real connection with curvature Ω, p_1(∇)=−c_2(∇_C). In an orthonormal frame of a metric connection this equals −tr(Ω∧Ω)/(8π²), and on an oriented real rank-two bundle with Ω=[[0,-F],[F,0]] one has p_1(∇)=F∧F/(4π²)=e(∇)∧e(∇).",
+        "deps": [
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "thm-curvature-two-form-structure-equation"
+        ],
+        "strategy": "Work in a real frame, where the complexified connection has the same curvature matrix Ω over C. The entries of A=−Ω/(2πi) are even-degree forms, so the determinant expands by principal minors with e_2(A)=((trA)^2−tr(A∧A))/2; since (2πi)^2=−4π^2 this gives c_2(∇_C)=[tr(Ω∧Ω)−(trΩ)^2]/(8π^2), and p_1(∇)=−c_2(∇_C). In an orthonormal frame of a metric connection Ω is skew-symmetric, so trΩ=0 and p_1(∇)=−tr(Ω∧Ω)/(8π^2). For rank two, Ω=[[0,−F],[F,0]] gives Ω∧Ω=−(F∧F)I_2 and Pf(Ω/(2π))=−F/(2π), so p_1=F∧F/(4π^2)=e(∇)∧e(∇). The (trΩ)^2 correction is genuine: on the trivial rank-two bundle over R^4 with ω=diag(x_2 dx_1, x_4 dx_3) one has tr(Ω∧Ω)=0 while c_2=−(trΩ)^2/(8π^2)≠0, so the uncorrected trace formula is not valid for arbitrary real connections.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Appendix C, printed pp. 289–312"
+            },
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "II.4.1–II.4.5, printed pp. 86–92"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-changing-a-connection-changes-the-form-but-not-its-de-rham-class",
+        "kind": "counterexample",
+        "title": "Connections can change a representative without changing its class",
+        "statement": "On the trivial complex line E=R²×C with coordinates x,y, use the standard Hermitian metric and compare ∇_0=d with ∇_1=d+i x dy. Their curvatures are Ω_0=0 and Ω_1=i dx∧dy. Since c_1(∇)=−Ω/(2πi) for a line, c_1(∇_0)=0 and c_1(∇_1)=−dx∧dy/(2π), so the forms differ. But c_1(∇_1)−c_1(∇_0)=d(−x dy/(2π)), so the de Rham classes agree. Both connections are Hermitian for the standard metric.",
+        "deps": [
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-complex-linear-and-compatible-bundle-connections",
+          "def-chern-pontryagin-and-euler-characteristic-forms",
+          "def-de-rham-cohomology",
+          "thm-curvature-two-form-structure-equation",
+          "lem-transgression-between-two-connections-is-exact"
+        ],
+        "strategy": "On E=R²×C, verify directly that d and d+i x dy satisfy the connection rule and are Hermitian for the standard metric. Compute Ω_0=0 and Ω_1=d(i x dy)=i dx∧dy from the structure equation. The determinant definition gives c_1=−Ω/(2πi), so the two representatives differ by the nonzero form −dx∧dy/(2π). Differentiate the explicit primitive −x dy/(2π); it gives exactly their difference and, by the degree-one transgression formula, is T_{c_1}(∇_0,∇_1). The de Rham quotient therefore identifies the classes while the forms themselves are unequal.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Haller, The Atiyah–Singer Index Theorem, Vienna lecture notes (2013)",
+              "url": "https://www.mat.univie.ac.at/~stefan/files/ASIT/ASIT.pdf",
+              "locator": "§II.4.5 Example II.4.5, printed p. 90 / PDF p. 90: first-Chern normalization for a line bundle; the particular connection pair and primitive are calculated in the item"
+            }
+          ]
+        },
+        "axiom_audit": "choice-free",
+        "dependency_level": 5
+      }
+    ]
+  }
+]

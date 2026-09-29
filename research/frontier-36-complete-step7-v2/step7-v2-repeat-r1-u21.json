@@ -1,0 +1,67 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "21",
+  "input_sha256": "f821cfd4f12bc410cdd42b717129ca3aebad6279156bf28b3285e82cb40b4754",
+  "decisions": [
+    {
+      "id": "ex-hom-pairing-over-a-nonsplit-field",
+      "model": "gpt-6-sol",
+      "context_sha256": "14977c6a12a9c509419dbb7524e98e96ff0f5acee69f434a9a91dd5ef6ce8664",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The division-ring clause of F3 omits axiom V1 (1 != 0) of def-division-ring and, read as a definition, incorrectly admits the zero ring. This is nonfatal for the example: F1 makes A=C a field, and the preceding field clause of F3 explicitly supplies 0 != 1. Thus step 1.1 already has both division-ring axioms. Repaired the clause by inserting the missing nontriviality axiom.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-hom-pairing-over-a-nonsplit-field",
+      "disposition": "repaired",
+      "post_sha256": "27ba912daf403b164e270304e4ccbf5893f9f82d761b6aed0d969deea3049ab5",
+      "review_context_sha256": "745bfc053046ec39d3faafe0d78fc3131d3efd5a22f540c2dfe3f9f82e33c2b1",
+      "reason": "Checked the full example, all direct dependency statements/definitions, the owning contract and both page interfaces. Invertibility makes the regular module simple and x -> xt identifies every simple with C. Lifting f(1) proves projectivity and the identity cover has superfluous kernel zero. Evaluation at 1 identifies Hom_C(C,C) with C over R; commutativity also identifies their rings under composition. The finite-dimensional projective-cover basis theorem applies to the unique cover. Closure under finite biproducts, kernels and cokernels gives the abelian finite-dimensional category; its set of coordinate models proves essential smallness and induction on real dimension gives finite length. The simple-class theorem then gives G0=Z[S], while K0=Z[P], with pairing entry 2, so duality fails. Single finite choices require no AC. Added only 1 != 0 to F3; the example claim, dependency interfaces, contract and page claims remain sound. This is the repair author check, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-hom-pairing-over-a-nonsplit-field",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "reason": "F3 omitted nontriviality in its division-ring definition. Added 1 != 0, matching def-division-ring V1. The actual C example already satisfies that axiom through F1 and the field clause of F3, so its claims and calculation remain valid."
+    }
+  ],
+  "repair_notes": {
+    "edit": {
+      "path": "items/ex-hom-pairing-over-a-nonsplit-field.md",
+      "before": "a division ring is a ring in which every nonzero element is a unit",
+      "after": "a division ring is a ring with $1\\ne0$ in which every nonzero element is a unit"
+    },
+    "interface": "Only Facts & Assumptions changed. No Statement or Definition section changed; the Example section also remains byte-identical. No downstream event is triggered.",
+    "contract": "research/frontier-36-complete-batch-21.proof-contracts.json: existing F3 citation to def-division-ring and derivation A_is_division_R_algebra remain accurate; no contract edit is necessary.",
+    "sources": "Familiar elementary module and finite-dimensional linear algebra; local dependency sections consulted. No external source reading claimed.",
+    "published_ledger": "No published-item defect discovered; no proposed published-ledger update.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-hom-pairing-over-a-nonsplit-field.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-hom-pairing-over-a-nonsplit-field.md",
+        "exit_code": 0,
+        "result": "OK; one file passes math delimiter, KaTeX and renderer YAML checks."
+      }
+    ],
+    "unresolved_obligations": []
+  }
+}

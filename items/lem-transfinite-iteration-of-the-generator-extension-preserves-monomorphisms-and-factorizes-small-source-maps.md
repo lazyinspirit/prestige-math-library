@@ -7,10 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-functorial-one-step-generator-extension, lem-the-one-step-generator-map-is-a-functorial-monomorphism, def-the-axioms-ab5-and-ab5-star, thm-a-locally-small-abelian-category-with-a-generator-is-well-powered]
+deps: [def-functorial-one-step-generator-extension, lem-the-one-step-generator-map-is-a-functorial-monomorphism, def-the-axioms-ab5-and-ab5-star, thm-a-locally-small-abelian-category-with-a-generator-is-well-powered, def-axiom-of-choice, thm-ab5-is-equivalent-to-exactness-of-filtered-colimits]
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
+  audited: 2026-09-29
   precheck: pass
 sources:
   scraped: []
@@ -38,15 +38,19 @@ $M_\alpha$.
 
 [L1] The successor-stage maps $M_\alpha\to M_{\alpha+1}$ are monic ([[lem-the-one-step-generator-map-is-a-functorial-monomorphism]]).
 
-[L2] In a Grothendieck category, AB5 governs exactness under filtered colimits ([[def-the-axioms-ab5-and-ab5-star]]).
+[L2] AB5 gives the directed-subobject identity ([[def-the-axioms-ab5-and-ab5-star]]).
 
 [L3] In a locally small abelian category with a generator, each object has a set of subobjects ([[thm-a-locally-small-abelian-category-with-a-generator-is-well-powered]]).
+
+[L4] In a cocomplete abelian category, AB5 is equivalent to exactness of filtered colimits ([[thm-ab5-is-equivalent-to-exactness-of-filtered-colimits]]).
+
+[A1] AC makes the set of subobjects of $U$ well-orderable and supplies its cardinality ([[def-axiom-of-choice]]).
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 For every successor ordinal, the transition map $M_\alpha\to M_{\alpha+1}$ is monic by [L1]. By transfinite induction, any transition map whose target is a successor stage is monic. [L1, construct]
 
-2.1 Let $\lambda$ be a limit ordinal and fix $\alpha<\lambda$. For $\alpha\le\beta<\lambda$, the short exact sequences $$0\to M_\alpha\to M_\beta\to\operatorname{coker}(M_\alpha\to M_\beta)\to0$$ form a filtered system. Exactness of filtered colimits under [L2] makes the colimit sequence begin $$0\to M_\alpha\to M_\lambda,$$ so the canonical map $M_\alpha\to M_\lambda$ is monic. Together with step 1.1, transfinite induction now shows that every transition map in the tower is monic. [L2, step 1.1, induction]
+2.1 Let $\lambda$ be a limit ordinal and fix $\alpha<\lambda$. For $\alpha\le\beta<\lambda$, the short exact sequences $$0\to M_\alpha\to M_\beta\to\operatorname{coker}(M_\alpha\to M_\beta)\to0$$ form a filtered system. Exactness of filtered colimits under [L2, L4] makes the colimit sequence begin $$0\to M_\alpha\to M_\lambda,$$ so the canonical map $M_\alpha\to M_\lambda$ is monic. Together with step 1.1, transfinite induction now shows that every transition map in the tower is monic. [L2, L4, step 1.1, induction]
 
-3.1 By [L3], the subobjects $N\subseteq U$ form a set and each such $N$ has a set of subobjects. Using Choice, take a cardinal $\kappa$ bounding all their cardinalities. Fix $f:N\to M_\lambda$ with $N\subseteq U$, and regard each $M_\alpha$ as a subobject of $M_\lambda$ by step 2.1. The preimages $N_\alpha=f^{-1}(M_\alpha)$ form an increasing family of subobjects of $N$, and [L2] gives $$\bigvee_{\alpha<\lambda}N_\alpha=f^{-1}\!\left(\bigvee_{\alpha<\lambda}M_\alpha\right)=N.$$ Choose a set $S\subseteq\lambda$ of at most $\kappa$ indices representing all distinct $N_\alpha$. Since $\operatorname{cf}(\lambda)>\kappa$, the set $S$ is bounded by some $\gamma<\lambda$. Then $N_\gamma$ contains every $N_\alpha$, so the displayed join gives $N_\gamma=N$. Equivalently, $f$ factors through $M_\gamma$. [L2, L3, step 2.1, given, choose] ∎
+3.1 By [L3], the subobjects of $U$ form a set; [A1] gives its cardinality $\kappa$. For each $N\subseteq U$, composition with $N\rightarrowtail U$ injects its subobject classes into those of $U$, so $\kappa$ bounds all their cardinalities. Fix $f:N\to M_\lambda$ with $N\subseteq U$, and regard each $M_\alpha$ as a subobject of $M_\lambda$ by step 2.1. The preimages $N_\alpha=f^{-1}(M_\alpha)$ form an increasing family of subobjects of $N$, and [L2] gives $$\bigvee_{\alpha<\lambda}N_\alpha=f^{-1}\!\left(\bigvee_{\alpha<\lambda}M_\alpha\right)=N.$$ For each distinct $N_\alpha$, take its least occurrence in the ordinal $\lambda$; these indices form a set $S\subseteq\lambda$ of size at most $\kappa$. Since $\operatorname{cf}(\lambda)>\kappa$, $S$ is bounded by some $\gamma<\lambda$. Then $N_\gamma$ contains every $N_\alpha$, so the displayed join gives $N_\gamma=N$. Equivalently, $f$ factors through $M_\gamma$. [L2, L3, A1, step 2.1, given, construct] ∎

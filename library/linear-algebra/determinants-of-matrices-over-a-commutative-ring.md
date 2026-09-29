@@ -2,30 +2,7 @@
 page: determinants-of-matrices-over-a-commutative-ring
 title: "Determinants of Matrices over a Commutative Ring"
 status: published
-items: [def-matrices-over-a-commutative-ring,
-        def-ring-matrix-product-identity-and-transpose,
-        thm-ring-matrix-arithmetic-laws,
-        def-invertible-matrix-and-similarity-over-a-commutative-ring,
-        prop-field-and-ring-matrix-interfaces-agree,
-        def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions,
-        lem-alternating-multilinear-implies-antisymmetric,
-        lem-rigidity-of-alternating-multilinear-matrix-functions,
-        def-determinant-of-a-square-matrix,
-        cor-determinant-is-a-polynomial-in-the-matrix-entries,
-        thm-leibniz-determinant-is-alternating-multilinear-and-normalized,
-        thm-determinant-is-the-unique-normalized-alternating-multilinear-function,
-        cor-determinant-vanishes-with-a-zero-or-repeated-column,
-        thm-determinant-of-transpose,
-        cor-determinant-is-alternating-multilinear-in-the-rows,
-        def-row-transformations-over-a-commutative-ring,
-        thm-determinant-under-elementary-row-operations,
-        def-triangular-and-diagonal-matrices-over-a-commutative-ring,
-        thm-determinant-of-a-triangular-matrix,
-        thm-determinant-multiplicative,
-        cor-invertible-matrix-has-unit-determinant,
-        thm-real-square-matrix-invertible-iff-determinant-nonzero,
-        cor-determinant-of-an-inverse,
-        cor-determinant-is-invariant-under-similarity]
+items: [def-matrices-over-a-commutative-ring, def-ring-matrix-product-identity-and-transpose, thm-ring-matrix-arithmetic-laws, def-invertible-matrix-and-similarity-over-a-commutative-ring, prop-field-and-ring-matrix-interfaces-agree, def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions, lem-alternating-multilinear-implies-antisymmetric, lem-rigidity-of-alternating-multilinear-matrix-functions, def-determinant-of-a-square-matrix, cor-determinant-is-a-polynomial-in-the-matrix-entries, thm-leibniz-determinant-is-alternating-multilinear-and-normalized, thm-determinant-is-the-unique-normalized-alternating-multilinear-function, cor-determinant-vanishes-with-a-zero-or-repeated-column, thm-determinant-of-transpose, cor-determinant-is-alternating-multilinear-in-the-rows, def-row-transformations-over-a-commutative-ring, thm-determinant-under-elementary-row-operations, def-triangular-and-diagonal-matrices-over-a-commutative-ring, thm-determinant-of-a-triangular-matrix, thm-determinant-multiplicative, cor-invertible-matrix-has-unit-determinant, thm-real-square-matrix-invertible-iff-determinant-nonzero, cor-determinant-of-an-inverse, cor-determinant-is-invariant-under-similarity, ex-two-by-two-determinant-formula]
 examples: []
 ---
 

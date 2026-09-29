@@ -1530,7 +1530,6 @@
       ]
     },
     "thm-perron-envelope-is-harmonic": {
-      "finite_smoke": [],
       "citations": [
         {
           "fact": "L1",
@@ -1539,7 +1538,23 @@
           "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a bounded complex domain and let\n$\\varphi:\\partial\\Omega\\to\\mathbb R$ be continuous. Put\n$$m=\\min_{\\partial\\Omega}\\varphi,\\qquad M=\\max_{\\partial\\Omega}\\varphi.$$\nThen:\n\n1. $\\mathcal P(\\varphi,\\Omega)$ is nonempty;\n2. every $v\\in\\mathcal P(\\varphi,\\Omega)$ satisfies $v\\le M$ on $\\Omega$;\n3. the constant function $m$ belongs to $\\mathcal P(\\varphi,\\Omega)$, so the\n   Perron envelope satisfies $m\\le U_\\varphi\\le M$.",
           "uses": [
             "1.1",
-            "3.1"
+            "2.1",
+            "4.1",
+            "5.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a bounded complex domain and let\n$\\varphi:\\partial\\Omega\\to\\mathbb R$ be continuous. The **Perron envelope** is\nthe pointwise supremum\n$$U_\\varphi(z):=\\sup\\{v(z):v\\in\\mathcal P(\\varphi,\\Omega)\\},\\qquad z\\in\\Omega.$$\n\nIts **regularized Perron envelope** is defined directly by\n$$H_\\varphi(z):=\\lim_{\\rho\\downarrow0}\\sup\\{U_\\varphi(w):w\\in\\Omega,\\ |w-z|<\\rho\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.2",
+            "7.1"
           ]
         },
         {
@@ -1548,7 +1563,8 @@
           "source_section": "Statement",
           "quote": "Let $u$ be subharmonic on a complex domain $\\Omega$ and let $D\\Subset\\Omega$ be\nan open disc. Then the Poisson modification $P_Du$ of\n[[def-poisson-modification-of-a-subharmonic-function]] is well defined,\nsubharmonic on $\\Omega$, harmonic on $D$, and satisfies $P_Du\\ge u$ on\n$\\Omega$.",
           "uses": [
-            "3.1"
+            "2.1",
+            "5.2"
           ]
         },
         {
@@ -1557,7 +1573,8 @@
           "source_section": "Definition",
           "quote": "Let $u$ be subharmonic on a complex domain $\\Omega$, and let\n$D=D(a,r)\\Subset\\Omega$ be an open disc. A **boundary approximation** for $u$ on\n$\\partial D$ is a decreasing sequence of continuous functions\n$\\phi_n:\\partial D\\to\\mathbb R$ with $\\phi_n\\downarrow u|_{\\partial D}$; such\nsequences exist because the circle data are upper semicontinuous by\n[[lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined]].\n\nFor each $n$, let $h_n$ be the harmonic function on $D$, continuous on\n$\\overline D$, with boundary values $\\phi_n$, obtained by transporting the\nunit-disc Poisson solution of\n[[thm-poisson-integral-solves-the-disc-dirichlet-problem]] across the affine map\n$z\\mapsto (z-a)/r$ and using\n[[thm-conformal-invariance-of-plane-harmonicity]].\n\nThe **Poisson modification** of $u$ on $D$ is the function $P_Du$ defined by\n$$P_Du(z)=\\begin{cases}\\inf_n h_n(z),& z\\in D,\\\\ u(z),& z\\in\\Omega\\setminus D.\\end{cases}$$",
           "uses": [
-            "3.1"
+            "2.1",
+            "5.2"
           ]
         },
         {
@@ -1566,21 +1583,58 @@
           "source_section": "Statement",
           "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\n\n1. If $u_1,\\dots,u_m$ are subharmonic on $\\Omega$ and\n   $\\alpha_1,\\dots,\\alpha_m\\ge0$, then\n   $$\\alpha_1u_1+\\cdots+\\alpha_mu_m$$\n   is subharmonic on $\\Omega$, where terms with $\\alpha_j=0$ are omitted (so\n   an all-zero combination is the zero function).\n2. If $u_1,\\dots,u_m$ are subharmonic on $\\Omega$, then\n   $$u(z)=\\max\\{u_1(z),\\dots,u_m(z)\\}$$\n   is subharmonic on $\\Omega$.",
           "uses": [
-            "3.1",
-            "5.1"
+            "4.1",
+            "7.1"
           ]
         },
         {
           "fact": "L4",
-          "source": "thm-harnack-convergence-principle-for-plane-harmonic-functions",
-          "source_section": "Statement",
-          "quote": "Let $(u_n)$ be an increasing sequence of harmonic functions on a complex domain\n$\\Omega$. Then exactly one of the following holds:\n\n1. $u_n(z)\\to+\\infty$ for every $z\\in\\Omega$;\n2. there is a harmonic function $u$ on $\\Omega$ such that $u_n\\to u$ locally\n   uniformly on $\\Omega$.",
+          "source": "def-poisson-integral-on-the-disc",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi:\\partial\\mathbb D\\to\\mathbb R$ be continuous. Its **Poisson\nintegral** is the function $P[\\varphi]:\\mathbb D\\to\\mathbb R$ defined by\n\n$$P[\\varphi](z):=\\frac{1}{2\\pi}\\int_0^{2\\pi}P(z,e^{it})\\,\\varphi(e^{it})\\,dt,$$\n\nwhere $P(z,e^{it})$ is the Poisson kernel of [[def-poisson-kernel-on-the-disc]].\n\nIf $z=re^{i\\phi}$, the same formula reads\n\n$$P[\\varphi](re^{i\\phi})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\phi-t)\\,\\varphi(e^{it})\\,dt.$$",
           "uses": [
-            "4.1"
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-poisson-kernel-properties-on-the-disc",
+          "source_section": "Statement",
+          "quote": "For $0\\le r<1$, the Poisson kernel\n\n$$P_r(\\theta)=\\frac{1-r^2}{1-2r\\cos\\theta+r^2}$$\n\nhas the following properties:\n\n1. $P_r(\\theta)>0$ for every $\\theta$;\n2. $\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta)\\,d\\theta=1$;\n3. for every $\\delta\\in(0,\\pi]$,\n   $$\\sup_{\\delta\\le |\\theta|\\le\\pi}P_r(\\theta)\\longrightarrow0\\qquad(r\\to1^-).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-poisson-modification-of-a-subharmonic-function",
+          "source_section": "Definition",
+          "quote": "Let $u$ be subharmonic on a complex domain $\\Omega$, and let\n$D=D(a,r)\\Subset\\Omega$ be an open disc. A **boundary approximation** for $u$ on\n$\\partial D$ is a decreasing sequence of continuous functions\n$\\phi_n:\\partial D\\to\\mathbb R$ with $\\phi_n\\downarrow u|_{\\partial D}$; such\nsequences exist because the circle data are upper semicontinuous by\n[[lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined]].\n\nFor each $n$, let $h_n$ be the harmonic function on $D$, continuous on\n$\\overline D$, with boundary values $\\phi_n$, obtained by transporting the\nunit-disc Poisson solution of\n[[thm-poisson-integral-solves-the-disc-dirichlet-problem]] across the affine map\n$z\\mapsto (z-a)/r$ and using\n[[thm-conformal-invariance-of-plane-harmonicity]].\n\nThe **Poisson modification** of $u$ on $D$ is the function $P_Du$ defined by\n$$P_Du(z)=\\begin{cases}\\inf_n h_n(z),& z\\in D,\\\\ u(z),& z\\in\\Omega\\setminus D.\\end{cases}$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-poisson-modification-preserves-subharmonicity-and-majorizes",
+          "source_section": "Statement",
+          "quote": "Let $u$ be subharmonic on a complex domain $\\Omega$ and let $D\\Subset\\Omega$ be\nan open disc. Then the Poisson modification $P_Du$ of\n[[def-poisson-modification-of-a-subharmonic-function]] is well defined,\nsubharmonic on $\\Omega$, harmonic on $D$, and satisfies $P_Du\\ge u$ on\n$\\Omega$.",
+          "uses": [
+            "3.1"
           ]
         },
         {
           "fact": "L5",
+          "source": "thm-harnack-inequality-on-a-disc",
+          "source_section": "Statement",
+          "quote": "Let $u$ be positive and harmonic on a neighbourhood of $\\overline{D(a,R)}$, and\nlet $z$ satisfy $|z-a|=\\rho<R$. Then\n\n$$\\frac{R-\\rho}{R+\\rho}\\,u(a)\\le u(z)\\le \\frac{R+\\rho}{R-\\rho}\\,u(a).$$\n\nIn particular, for every $r<R$, the values of $u$ on $\\overline{D(a,r)}$ are\nbounded above and below by fixed multiples of $u(a)$.",
+          "uses": [
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L6",
           "source": "thm-upper-envelope-theorem-for-plane-subharmonic-functions",
           "source_section": "Statement",
           "quote": "Let $\\mathcal F$ be a nonempty family of subharmonic functions on a complex domain\n$\\Omega$, and suppose that for every compact set $K\\subseteq\\Omega$ there is a\nreal number $M_K$ with $v\\le M_K$ on $K$ for every $v\\in\\mathcal F$. Define\n$$u(z)=\\sup_{v\\in\\mathcal F}v(z),\\qquad U=u^*.$$\nThen $U$ is subharmonic on $\\Omega$.",
@@ -1589,64 +1643,115 @@
           ]
         },
         {
-          "fact": "L6",
+          "fact": "L7",
+          "source": "thm-mean-value-property-for-plane-harmonic-functions",
+          "source_section": "Statement",
+          "quote": "Every plane harmonic function satisfies both the circle and disc mean-value\nproperties of [[def-mean-value-property-for-plane-functions]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-converse-mean-value-property-for-plane-functions",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, and let $u:\\Omega\\to\\mathbb R$ be\ncontinuous. If $u$ satisfies the local mean-value property of\n[[def-mean-value-property-for-plane-functions]], then $u$ is harmonic on\n$\\Omega$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L8",
           "source": "thm-maximum-principle-for-plane-subharmonic-functions",
           "source_section": "Statement",
           "quote": "Let $u$ be subharmonic on a complex domain $\\Omega$. If $u$ attains a finite\nmaximum at an interior point of $\\Omega$, then $u$ is constant on $\\Omega$.",
           "uses": [
-            "5.1"
+            "7.1"
           ]
         }
       ],
       "derivations": [
         {
-          "id": "step-1-1",
-          "claim": "By [L1], the family $\\mathcal P(\\varphi,\\Omega)$ is locally bounded above. Applying [L5] to that family shows that $H_\\varphi$ is subharmonic on $\\Omega$.",
+          "id": "perron-directed-1-1",
+          "claim": "Establish the finite subharmonic regularized envelope and global bounds.",
           "step": "1.1",
           "inputs": [
             "L1",
+            "L6"
+          ]
+        },
+        {
+          "id": "perron-directed-2-1",
+          "claim": "Form the nonempty family of bounded harmonic Poisson lifts on one interior disc.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "perron-directed-3-1",
+          "claim": "Prove order preservation of Poisson modification using finite boundary-approximation minima and a positive kernel.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "2.1"
+          ]
+        },
+        {
+          "id": "perron-directed-4-1",
+          "claim": "Use finite maxima to make the harmonic lifts upward directed.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "3.1",
+            "2.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "perron-directed-5-1",
+          "claim": "Use Harnack control on common upper lifts to obtain local uniform epsilon approximation of their supremum.",
+          "step": "5.1",
+          "inputs": [
+            "4.1",
             "L5"
           ]
         },
         {
-          "id": "step-2-1",
-          "claim": "Fix $z_0\\in\\Omega$ and choose a closed disc $\\overline D\\Subset\\Omega$ centered at $z_0$. By the definition of upper-semicontinuous regularization, choose points $z_n\\to z_0$ with $U_\\varphi(z_n)>H_\\varphi(z_0)-1/n$. For each $n$, choose $v_n\\in\\mathcal P(\\varphi,\\Omega)$ with $v_n(z_n)>U_\\varphi(z_n)-1/n$.",
-          "step": "2.1",
+          "id": "perron-directed-5-2",
+          "claim": "Use a single near-center lower-function witness and Harnack factor tending to one to identify the lift supremum with the envelope at the center.",
+          "step": "5.2",
           "inputs": [
-            "step 1.1",
-            "given",
-            "choose"
-          ]
-        },
-        {
-          "id": "step-3-1",
-          "claim": "Put $w_n=\\max(v_1,\\dots,v_n)$. By [L3], each $w_n$ lies in the Perron family, and $w_n(z_n)>H_\\varphi(z_0)-1/n$. Let $h_n=P_Dw_n$. By [L2], each $h_n$ is harmonic on $D$, belongs to the Perron family, majorizes $w_n$, and the sequence $(h_n)$ is increasing because the sequence $(w_n)$ is increasing. Step [L1] also gives $h_n\\le M$ on $D$.",
-          "step": "3.1",
-          "inputs": [
+            "4.1",
             "L1",
-            "L2",
-            "L3",
-            "step 2.1"
+            "L5",
+            "2.1",
+            "L2"
           ]
         },
         {
-          "id": "step-4-1",
-          "claim": "The sequence $(h_n)$ is increasing and bounded above at every point by $M$, so [L4] yields a harmonic limit $h$ on $D$. Since each $h_n$ belongs to the Perron family, one has $h_n\\le U_\\varphi\\le H_\\varphi$, hence $h\\le H_\\varphi$ on $D$. On the other hand, [step 3.1, L4]\n$$H_\\varphi(z_0)-\\frac1n<h_n(z_n)\\le h(z_n)\\le H_\\varphi(z_n).$$\nLetting $n\\to\\infty$ and using continuity of $h$ and upper semicontinuity of $H_\\varphi$ gives $h(z_0)=H_\\varphi(z_0)$.",
-          "step": "4.1",
+          "id": "perron-directed-6-1",
+          "claim": "Derive continuity and the circle mean-value property from local uniform epsilon approximation, then harmonicity.",
+          "step": "6.1",
           "inputs": [
-            "step 3.1",
-            "L4"
+            "5.1",
+            "L7"
           ]
         },
         {
-          "id": "step-5-1",
-          "claim": "The function $H_\\varphi-h$ is subharmonic on $D$: both $h$ and $-h$ are harmonic and therefore subharmonic, and [L3] handles sums with positive coefficients. Step 4.1 shows $H_\\varphi-h\\le0$ on $D$ and vanishes at the interior point $z_0$, so [L6] forces $H_\\varphi-h$ to be constant $0$ on $D$. Hence $H_\\varphi=h$ on $D$, and therefore $H_\\varphi$ is harmonic near $z_0$. Since $z_0$ was arbitrary, $H_\\varphi$ is harmonic on $\\Omega$.",
-          "step": "5.1",
+          "id": "perron-directed-7-1",
+          "claim": "Apply the subharmonic maximum principle to identify the harmonic lift supremum with the envelope on the disc.",
+          "step": "7.1",
           "inputs": [
+            "1.1",
+            "6.1",
             "L3",
-            "L6",
-            "step 1.1",
-            "step 4.1"
+            "4.1",
+            "5.2",
+            "L8",
+            "L1"
           ]
         }
       ],
@@ -1654,50 +1759,45 @@
       "boundaries": [
         {
           "case": "empty",
-          "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: the claim introduces no family, sum, product, or aggregate whose empty case changes the argument."
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonempty Perron family, and step 2.1 exhibits the constant lower function m."
         },
         {
           "case": "zero",
-          "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: the argument has no distinguished zero-parameter branch beyond the stated assumptions."
+          "status": "checked",
+          "evidence": "The constant lower function in step 2.1 includes zero boundary datum, where m=M=0."
         },
         {
           "case": "one",
-          "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: there is no separate cardinality-one or parameter-one branch distinct from the general proof."
+          "status": "checked",
+          "evidence": "Step 2.1 covers a single lower function; steps 3.1 and 4.1 use only finite pairs and maxima."
         },
         {
           "case": "degenerate",
-          "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: the proof does not split into a collapsed or identically-singular exceptional case beyond the hypotheses."
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 establish finite lower and upper bounds even for a constant datum or a lower function taking minus infinity."
         },
         {
           "case": "endpoints",
           "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: the claim concerns discs, domains, envelopes, or boundary points rather than an interval variable with left and right endpoint cases."
+          "reason": "There is no interval endpoint; every local disc has positive radius and compact closure in the open domain."
         },
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "The nonempty-choice case is handled at step 2.1: Fix $z_0\\in\\Omega$ and choose a closed disc $\\overline D\\Subset\\Omega$ centered at $z_0$. By the definition of upper-semicontinuous regularization, choose points $z_n\\to…."
+          "evidence": "Steps 3.1, 5.1 and 5.2 use only finite existential witnesses for each fixed comparison or error; no sequence of choices is formed."
         },
         {
           "case": "iff-forward",
           "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: the statement is one-directional and does not assert a biconditional."
+          "reason": "The theorem asserts harmonicity, not a biconditional."
         },
         {
           "case": "iff-reverse",
           "status": "not_applicable",
-          "reason": "The regularized Perron envelope is harmonic: the statement is one-directional and does not assert a converse direction."
+          "reason": "The theorem asserts harmonicity, not a biconditional."
         }
-      ],
-      "risk_review": {
-        "status": "complete",
-        "reviewer": "alpha gate repair 5-b",
-        "notes": "I checked the current Perron-envelope proof step by step. The Perron family is locally bounded above, the upper-envelope theorem gives subharmonicity of H_phi, finite maxima plus Poisson modification produce an increasing harmonic sequence on an interior disc, and the Harnack limit touches H_phi at z_0. The final maximum-principle argument on H_phi-h then forces local equality, so the harmonicity proof now closes."
-      }
+      ]
     },
     "thm-barrier-characterization-of-regular-boundary-points": {
       "finite_smoke": [],

@@ -1,0 +1,101 @@
+---
+id: cex-flat-finite-type-not-open-without-presentation-warning
+kind: counterexample
+title: "Flat and finite type is not open without finite presentation"
+status: draft
+origin: pipeline
+deps:
+  - def-flat-morphism-schemes
+  - def-locally-finite-presentation-morphism
+  - def-axiom-of-choice
+  - thm-flatness-criteria-by-injections-and-ideals
+  - lem-flatness-affine-local-source-target
+  - def-finitely-presented-module-and-algebra
+  - def-finite-type-and-module-finite-algebras
+  - lem-clopen-subset-gives-idempotent-decomposition
+  - lem-every-zariski-closed-set-has-a-radical-defining-ideal
+  - def-morphism-affine-schemes-from-ring-map
+  - def-affine-scheme-spectrum
+  - def-prime-and-maximal-ideals
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-sol"
+    verdict: pass
+    date: 2026-09-29
+sources:
+  references:
+    - title: "The Stacks Project, Morphisms of Schemes, Section 29.26 (flat morphisms)"
+      url: https://stacks.math.columbia.edu/tag/01U2
+    - title: "The Stacks Project, Commutative Algebra, Tag 00R2 (Lemma 10.6.3: finite presentation and kernels of surjections)"
+      url: https://stacks.math.columbia.edu/tag/00R2
+    - title: "The Stacks Project, Commutative Algebra, Section 10.21 (idempotents and connected components)"
+      url: https://stacks.math.columbia.edu/tag/04PP
+---
+
+## Statement refuted
+
+False claim. Every flat morphism of finite type is open, and a quotient
+$R\to R/I$ of finite type is finitely presented.
+
+Counterexample with witness. Assume the Axiom of Choice. Let $k$ be a field,
+$$R=\prod_{n\ge1}k,\qquad I=\bigoplus_{n\ge1}k\subseteq R$$
+the ideal of finite-support sequences. Then the quotient map
+$\operatorname{Spec}(R/I)\to\operatorname{Spec}R$ is flat and of finite type,
+but it is not open, and $R/I$ is not a finitely presented $R$-algebra.
+
+## Facts & Assumptions
+
+
+**Given:** The data and hypotheses displayed in the Statement, with the conventions fixed there.
+
+[F1] A morphism $f:X\to S$ is flat at $x$ when the local ring map makes $\mathcal O_{X,x}$ flat over $\mathcal O_{S,f(x)}$, and flat when this holds at every point ([[def-flat-morphism-schemes]]).
+
+[F2] An $R$-module $M$ is flat if and only if the multiplication map $J\otimes_RM\to M$ is injective for every finitely generated ideal $J\subseteq R$ ([[thm-flatness-criteria-by-injections-and-ideals]], criteria (1) and (4)).
+
+[F3] Let $f:X\to S$ be a morphism, $U=\operatorname{Spec}B\subseteq X$ and $V=\operatorname{Spec}A\subseteq S$ affine opens with $f(U)\subseteq V$. Then $f$ is flat at every point of $U$ if and only if $B$ is flat over $A$; the direction from module flatness to pointwise flatness is choice-free ([[lem-flatness-affine-local-source-target]]).
+
+[F4] $A$ is of finite type over $R$ when $A=R[a_1,\ldots,a_n]$ for some $n$; at $n=0$ this is the image of the structure map $R\to A$, so a quotient $R/I$ with its quotient structure map is of finite type, and a morphism of affine schemes whose ring map is of finite type is (locally) of finite type ([[def-finite-type-and-module-finite-algebras]], [[def-locally-finite-presentation-morphism]]).
+
+[F5] A finitely presented $R$-algebra $R\to A$ has: for every surjection $R[x_1,\ldots,x_n]\to A$ of $R$-algebras, the kernel is a finitely generated ideal (Stacks, Algebra, Lemma 10.6.3). In particular, if the quotient map $R\to R/I$ (zero generators, no relations besides the kernel) presents a finitely presented $R$-algebra, then $I$ is finitely generated ([[def-finitely-presented-module-and-algebra]]).
+
+[F6] Assume the Axiom of Choice. If $C\subseteq\operatorname{Spec}R$ is clopen, then there is an idempotent $e\in R$ with $C=V(e)=D(1-e)$ ([[lem-clopen-subset-gives-idempotent-decomposition]]).
+
+[F7] Assume the Axiom of Choice. If $Z=V(J)\subseteq\operatorname{Spec}R$ is closed, then the unique radical ideal defining $Z$ is $\sqrt J$ ([[lem-every-zariski-closed-set-has-a-radical-defining-ideal]]).
+
+[F8] A ring map $\varphi:R\to S$ induces the contraction map on spectra, $\mathfrak q\mapsto\varphi^{-1}(\mathfrak q)$; for the quotient map $R\to R/I$ the primes of $R/I$ correspond to the primes of $R$ containing $I$, and the image of $\operatorname{Spec}(R/I)$ consists of exactly those primes ([[def-morphism-affine-schemes-from-ring-map]], [[def-affine-scheme-spectrum]]).
+
+[F9] In a field, $x^n=0$ implies $x=0$ ([[def-prime-and-maximal-ideals]]); consequently a sequence $(x_n)\in R$ has the same support as its $k$-th power $(x_n^k)$, and $R$ is reduced.
+
+## Counterexample
+
+**Proof technique:** direct.
+
+1.1 Write elements of $R$ as sequences $x=(x_n)_{n\ge1}$ with $x_n\in k$. For $x\in R$ define $e(x)\in R$ by $e(x)_n=1$ if $x_n\ne0$ and $e(x)_n=0$ if $x_n=0$, and let $y\in R$ have $y_n=x_n^{-1}$ when $x_n\ne0$ and $y_n=0$ otherwise. Then $e(x)^2=e(x)$, $xe(x)=x$ and $xy=e(x)$, so $(x)=(e(x))$ is generated by an idempotent. [algebra]
+
+1.2 The ideal $I=\bigoplus_{n\ge1}k$ is not finitely generated: if $I=(x_1,\dots,x_m)$, each $x_j\in I$ has finite support $S_j$, every $R$-linear combination of the $x_j$ is supported in the finite set $S_1\cup\cdots\cup S_m$, but for any $n\notin S_1\cup\cdots\cup S_m$ the element with $1$ at $n$ and $0$ elsewhere lies in $I$ and is not supported there. [given, algebra]
+
+1.3 The map is of finite type: $R/I$ is generated as an $R$-algebra by the empty set, since its structure map $R\to R/I$ is surjective, so it is of finite type over $R$ by [F4]; on the affine charts this is a finite-type ring map. [F4]
+
+1.4 The underlying map of $\operatorname{Spec}(R/I)\to\operatorname{Spec}R$ is the contraction of primes along the surjection $R\to R/I$, so its image is the set of primes of $R$ containing $I$, which is exactly the closed set $V(I)$ of [F8]; thus the morphism is open only if $V(I)$ is open. [F8]
+
+1.5 $I$ is a radical ideal: if $x\in R$ satisfies $x^k\in I$ then the support $\{n:x_n\ne0\}$ equals the support of $x^k$, which is finite because $x^k\in\bigoplus_{n\ge1}k$, so $x\in I$; hence $R/I$ is reduced and $I=\sqrt I$. [F9, given]
+
+2.1 If $e,f\in R$ are idempotent then $(e+f-ef)^2=e+f-ef$ and $(e,f)=(e+f-ef)$: the generator is a combination of $e,f$, while $e=e(e+f-ef)$ and $f=f(e+f-ef)$. Hence by induction on the number of generators every finitely generated ideal of $R$ is principal, generated by an idempotent. [step 1.1, algebra]
+
+2.2 Suppose $V(I)$ is open. It is closed by definition, hence clopen, so by [F6] there is an idempotent $e\in R$ with $V(I)=V(e)$; applying [F7] to the closed set $Z=V(I)=V(e)$ and to the ideals $I$ and $(e)$ gives $\sqrt I=I(Z)=\sqrt{(e)}$, so $I=\sqrt{(e)}$ because $\sqrt I=I$ by step 1.5. [F6, F7, step 1.5]
+
+2.3 Finally $R/I$ is not a finitely presented $R$-algebra: the quotient map $R\to R/I$ is a surjection from a polynomial ring in $0$ variables, so by [F5] finite presentation of $R/I$ would force its kernel $I$ to be finitely generated, contrary to step 1.2. [F5, step 1.2]
+
+3.1 For every finitely generated ideal $J\subseteq R$ we have $J=(e)$ with $e$ idempotent by step 2.1, and then $eR\cap I=eI=I\cdot eR$: an element of $eR\cap I$ equals $er$ and lies in $I$, hence equals $e(er)=er'$ with $er'\in eI$; conversely $eI\subseteq eR\cap I$. Therefore $J\cap I=JI$, so the kernel $(J\cap I)/JI$ of the multiplication map $J\otimes_RR/I\to R/I$ is zero, i.e. the map is injective. Since this holds for every finitely generated ideal, $R/I$ is a flat $R$-module by [F2]. [F2, step 2.1]
+
+3.2 The ideal $(e)$ is radical: if $z\in R$ satisfies $z^k=er$ then coordinatewise $z_n^k=e_nr_n$, and $e_n\in\{0,1\}$ because $e$ is idempotent; for $e_n=0$ this gives $z_n=0=e_nz_n$ by [F9], and for $e_n=1$ it gives $z_n=e_nz_n$, so $z=ez\in(e)$. Hence $\sqrt{(e)}=(e)$, and step 2.2 yields $I=(e)$, a principal ideal, hence a finitely generated ideal. [F9, step 2.2]
+
+4.1 The morphism $\operatorname{Spec}(R/I)\to\operatorname{Spec}R$ is flat: on the affine charts $U=\operatorname{Spec}(R/I)$, $V=\operatorname{Spec}R$ with $f(U)\subseteq V$ the ring $R/I$ is flat over $R$ by step 3.1, and [F3] converts this into flatness at every point. [F1, F3, step 3.1]
+
+5.1 Step 3.2 contradicts step 1.2, so $V(I)$ is not open; by step 1.4 the morphism $\operatorname{Spec}(R/I)\to\operatorname{Spec}R$ is not open, while by steps 4.1 and 1.3 it is flat and of finite type. [step 1.2, step 4.1, step 1.3, step 1.4, step 3.2]
+
+6.1 The Axiom of Choice is used exactly twice: in step 2.2 through [F6] to convert the clopen set $V(I)$ into an idempotent, and through [F7], which produces prime ideals. Steps 1.1 through 5.1 use no choice principle. [F6, F7, step 2.2] $\square$

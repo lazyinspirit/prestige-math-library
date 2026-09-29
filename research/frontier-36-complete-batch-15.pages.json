@@ -1,0 +1,2141 @@
+[
+  {
+    "order": 489,
+    "id": "the-gauss-bonnet-theorem-for-riemannian-surfaces",
+    "kind": "A",
+    "category": "differential-geometry",
+    "title": "The Gauss Bonnet Theorem for Riemannian Surfaces",
+    "companion": "the-gauss-bonnet-theorem-for-riemannian-surfaces-examples",
+    "requires": [
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "manifolds-with-boundary-collars-and-orientations",
+      "integration-of-forms-and-the-general-stokes-theorem",
+      "riemannian-metrics-length-distance-and-volume",
+      "connections-levi-civita-and-parallel-transport",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+      "riemann-curvature-and-riemannian-submanifolds",
+      "classification-of-compact-connected-surfaces"
+    ],
+    "items": [
+      {
+        "id": "def-oriented-riemannian-surface-and-positive-quarter-turn",
+        "kind": "definition",
+        "title": "Oriented surface and positive quarter-turn",
+        "deps": [
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-riemannian-metric-and-riemannian-manifold"
+        ],
+        "statement": "For an oriented Riemannian 2-manifold define J_p as the unique g-isometry with J_p²=-I and (v,J_pv) positive for each nonzero v; J is smooth and is reversed when the surface orientation is reversed.",
+        "strategy": "Use an oriented orthonormal frame to set J(E₁)=E₂ and J(E₂)=-E₁; check that this formula is invariant under SO(2) changes of frame and is smooth.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-connection-one-form-of-an-oriented-orthonormal-frame",
+        "kind": "definition",
+        "title": "Connection form of an oriented orthonormal frame",
+        "deps": [
+          "def-levi-civita-connection",
+          "def-affine-connection-on-a-smooth-manifold",
+          "def-smooth-differential-k-form",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn"
+        ],
+        "statement": "For any local positively oriented orthonormal frame (E₁,E₂), define the smooth one-form ω by ω(X)=g(∇_X E₁,E₂). Metric compatibility gives ∇_X E₁=ω(X)E₂ and ∇_X E₂=-ω(X)E₁; this convention is the negative of the Lee/Datar connection form.",
+        "strategy": "Use affine-connection linearity and smoothness to check that ω is a one-form, then differentiate g(E_i,E_j)=δ_ij to derive both frame equations. Compare signs explicitly with Lee and Datar, who define ω_std(X)=g(E₁,∇_X E₂)=-ω(X).",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Formula, printed p. 165 (PDF p. 181), lines 6471–6488: Lee defines ω_std(X)=g(E₁,∇_X E₂)=-g(∇_X E₁,E₂), giving ∇_X E₁=-ω_std(X)E₂ and ∇_X E₂=ω_std(X)E₁. The convention in this item is ω=-ω_std."
+            },
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 2, §2.1, printed p. 11 (PDF p. 18), lines 604–615: Datar defines ω_std(X)=g(E₁,∇_X E₂)=-g(∇_X E₁,E₂) and records the resulting frame equations. The convention in this item is ω=-ω_std."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-connection-one-form-rotation-law-on-an-oriented-surface",
+        "kind": "theorem",
+        "title": "Rotation law for the surface connection form",
+        "deps": [
+          "prop-exterior-derivative-of-a-function-is-its-differential",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame"
+        ],
+        "statement": "Let $(M,g)$ be an oriented Riemannian surface and $U\\subseteq M$ open with specified smooth positively oriented $g$-orthonormal frames $(E_1,E_2)$ and $(E'_1,E'_2)$, with connection forms $\\omega$ and $\\omega'$ in the convention $\\omega(X)=g(\\nabla_XE_1,E_2)$. On each open patch $V\\subseteq U$ where a smooth angle lift $\\varphi:V\\to\\mathbb R$ is supplied with $E'_1=\\cos\\varphi E_1+\\sin\\varphi E_2$ and $E'_2=-\\sin\\varphi E_1+\\cos\\varphi E_2$, the forms satisfy $\\omega'|_V=\\omega|_V+d\\varphi$, where $d\\varphi(X)=X(\\varphi)$. Any two such lifts of the same frame rotation differ by a locally constant element of $2\\pi\\mathbb Z$, so their differentials agree on overlaps; no global angle lift is asserted.",
+        "strategy": "Differentiate E'_1 in an arbitrary direction X using the declared frame equations and dφ(X)=Xφ. Collect the E_1 and E_2 coefficients to obtain ∇_X E'_1=(ω(X)+Xφ)E'_2, then take its inner product with the unit vector E'_2. For two lifts of the same rotation, equality of sine and cosine implies their difference lies in 2πZ; continuity makes it locally constant, so the differential identity agrees on connected overlaps even when no global lift exists.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Formula, printed p. 165 (PDF p. 181), equations (9.4), lines 6471–6488: Lee's frame equations use ω_std(X)=g(E₁,∇_X E₂)=−ω(X) relative to this pair. The frame-rotation identity is derived directly in the item, not attributed to this passage."
+            },
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 2, §2.1, printed p. 11 (PDF p. 18), lines 604–615: Datar's frame equations use ω_std(X)=g(E₁,∇_X E₂)=−ω(X) relative to this pair. The frame-rotation identity is derived directly in the item, not attributed to this passage."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-gaussian-curvature-structure-equation",
+        "kind": "theorem",
+        "title": "Gaussian curvature structure equation",
+        "deps": [
+          "def-curvature-of-an-affine-connection",
+          "def-sectional-curvature",
+          "def-riemannian-volume-form-on-an-oriented-manifold",
+          "def-countable-choice",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame"
+        ],
+        "statement": "With R(X,Y)Z=∇_X∇_YZ-∇_Y∇_XZ-∇_[X,Y]Z and K=g(R(E₁,E₂)E₂,E₁), dω=-K dA for the ω defined above.",
+        "strategy": "Compute R(E₁,E₂)E₂=-dω(E₁,E₂)E₁ from the two frame equations and dω(X,Y)=Xω(Y)-Yω(X)-ω([X,Y]). Since dA(E₁,E₂)=1, the sign follows; AC_ω is inherited only through the published sectional-curvature interface.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+        "kind": "definition",
+        "title": "Signed geodesic curvature",
+        "deps": [
+          "def-levi-civita-connection",
+          "def-christoffel-symbols-of-an-affine-connection",
+          "thm-christoffel-symbol-transformation-law",
+          "def-affine-connection-on-a-smooth-manifold",
+          "def-covariant-derivative-along-a-curve",
+          "thm-covariant-derivative-along-a-curve-is-independent-of-frame-and-extension",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "For a regular C2 unit-speed curve in an oriented Riemannian surface, the coordinate expression A^k = d2x^k/dt2 + Gamma^k_ij (dx^i/dt)(dx^j/dt) is a chart-independent covariant acceleration; for smooth curves it is D_t T, and it extends this formula to C2 curves. Metric compatibility gives g(A,T)=0, so define signed geodesic curvature by A=k_g JT and k_g=g(A,JT). For a unit-speed positively oriented boundary arc JT is the inward unit conormal; for any regular-speed tangent T the inward unit conormal is JT/|T|. Curve-parameter or surface-orientation reversal changes the sign.",
+        "strategy": "Use the affine and along-curve connection rules to identify the coordinate acceleration, then apply the Christoffel transformation law and the second chain rule to prove chart independence for C2 curves. Differentiate g(T,T)=1 using metric compatibility to prove A perpendicular to T, then use the positive orthonormal basis (T,JT) to define its scalar component. Derive the outward-normal-first sign and calculate a counterclockwise Euclidean circle of radius R, for which k_g=1/R; check parameter and surface-orientation reversal.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Formula, printed pp. 163–164 (PDF pp. 179–180), lines 6421–6431: the positive tangent-normal frame, inward normal on a positively oriented boundary, signed curvature as the normal component of covariant acceleration, and orthogonality from unit speed."
+            },
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 2 opening, PDF p. 16, lines 480–497, defines signed geodesic curvature of a smooth unit-speed curve on a closed oriented surface from metric compatibility and the positive normal; lines 525–530 specify that the positive boundary normal points inward."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-geodesic-curvature-under-orientation-and-parameter-reversal",
+        "kind": "proposition",
+        "title": "Signs of geodesic curvature under reversals",
+        "deps": [
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "Let $(M,g,J)$ be an oriented Riemannian surface and $\\gamma:I\\to M$ a regular $C^2$ unit-speed curve on an interval $I$ with nonempty interior. Write $k_{J,\\gamma}$ for its signed geodesic curvature. Reversing the surface orientation replaces $J$ by $-J$, and for every $s\\in I$ gives $k_{-J,\\gamma}(s)=-k_{J,\\gamma}(s)$. Define $I^{\\mathrm{rev}}=-I$ and $\\gamma^{\\mathrm{rev}}(t)=\\gamma(-t)$ for $t\\in I^{\\mathrm{rev}}$. For every $t\\in I^{\\mathrm{rev}}$, reversing the curve parameter with $J$ fixed gives $k_{J,\\gamma^{\\mathrm{rev}}}(t)=-k_{J,\\gamma}(-t)$; reversing both the surface orientation and curve parameter gives $k_{-J,\\gamma^{\\mathrm{rev}}}(t)=k_{J,\\gamma}(-t)$. At included endpoints, use one-sided derivatives.",
+        "strategy": "Use the signed-curvature definition $k_{J,\\gamma}=g(A_\\gamma,JT)$. Replacing $J$ by $-J$ changes only the normal factor. For $\\gamma^{\\mathrm{rev}}(t)=\\gamma(-t)$, compute in a chart that the first derivative changes sign, the second derivative does not, and the quadratic Christoffel term is unchanged; hence $A_{\\gamma^{\\mathrm{rev}}}(t)=A_\\gamma(-t)$ while the unit tangent changes sign. Apply these two sign changes independently and together, with the parameter arguments stated explicitly. Check zero curvature and one-sided endpoints; no choice is used.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Formula, printed pp. 163–164 (PDF pp. 179–180), lines 6421–6431: signed curvature is the normal component of covariant acceleration and unit-speed acceleration is perpendicular to the tangent. The orientation and parameter reversal identities are derived directly from this definition."
+            },
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 2 opening, PDF p. 16, lines 480–497: signed geodesic curvature of a smooth unit-speed curve is the normal component of covariant acceleration. The orientation and parameter reversal identities are derived directly from this definition."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-angle-derivative-formula-for-geodesic-curvature",
+        "kind": "proposition",
+        "title": "Tangent-angle formula for geodesic curvature",
+        "deps": [
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "Let $(M,g,J)$ be an oriented Riemannian surface, $U\\subseteq M$ an open set with a specified smooth positively oriented $g$-orthonormal frame $(E_1,E_2)$, and $\\omega(X)=g(\\nabla_XE_1,E_2)$ the connection one-form in this convention. For a regular $C^2$ unit-speed curve $\\gamma:I\\to U$ on an interval $I$ with nonempty interior, and any connected subinterval on which $T=\\dot\\gamma=\\cos\\theta E_1+\\sin\\theta E_2$ for a $C^1$ angle lift $\\theta$, the signed geodesic curvature satisfies $k_g=\\theta'+\\omega(T)$, with one-sided derivatives at included endpoints.",
+        "strategy": "Differentiate the frame expansion of the unit tangent using the adopted frame equations \\nabla_XE_1=\\omega(X)E_2 and \\nabla_XE_2=-\\omega(X)E_1. The derivative is (\\theta'+\\omega(T))JT, by the positive quarter-turn definition, so the signed-curvature definition gives the formula. Verify explicitly that Lee and Datar use \\omega_{std}(X)=g(E_1,\\nabla_XE_2)=-\\omega(X) and write k_g=\\theta'-\\omega_{std}(T), which is the same identity in this page's convention. On connected overlaps, angle lifts differ by a constant in 2\\pi Z; included endpoints use one-sided derivatives.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Formula, Theorem 9.3 proof, equations (9.3)–(9.4), printed pp. 164–165 (PDF pp. 180–181), lines 6466–6494. Lee uses ω_std(X)=g(E₁,∇_X E₂)=−ω(X), derives κ_N=θ′−ω_std(γ˙), and identifies N=JT."
+            },
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 2, §2.1, Lemma 2.1.2, printed p. 12 (PDF p. 19), lines 604–629. Datar uses ω_std(X)=⟨E₁,∇_X E₂⟩=−ω(X), derives k_g=θ′−ω_std(γ˙), and notes the Euclidean case ω_std=0."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+        "kind": "definition",
+        "title": "Signed exterior angle at an ordinary corner",
+        "deps": [
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "At an ordinary corner of an oriented surface region, let T₋ and T₊ be the incoming and outgoing unit tangents. The signed exterior angle α is the unique number in (−π,π) with T₊=cos(α)T₋+sin(α)JT₋; opposite tangents are excluded. For a positively oriented convex or reflex boundary corner of interior angle β∈(0,2π), α=π−β.",
+        "strategy": "Use the positive quarter-turn J to form an oriented orthonormal basis (T₋,JT₋); the nonopposite condition gives a unique principal angle. Derive α=π−β from the interior sector on the left of a positively oriented boundary. Check zero/straight angle, cusp exclusion, orientation reversal and parameter reversal explicitly.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §Some Plane Geometry, printed p. 157 (PDF p. 173), lines 6176–6196, defines the signed principal exterior angle and excludes opposite-tangent cusps; §The Gauss–Bonnet Formula, printed p. 163 (PDF p. 179), lines 6398–6408, transports this to an oriented Riemannian surface."
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 2, §2.0, printed pp. 10–11 (PDF pp. 16–17), lines 498–530, defines signed exterior angles, excludes ±π cusps, and specifies the positive boundary orientation and local formula."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-total-turning-is-the-integral-of-geodesic-curvature-plus-frame-holonomy",
+        "kind": "proposition",
+        "title": "Total turning with connection and corner terms",
+        "deps": [
+          "prop-angle-derivative-formula-for-geodesic-curvature",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "thm-connection-one-form-rotation-law-on-an-oriented-surface",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "For a closed piecewise smooth regular curve carried by one oriented frame, its tangent-angle rotation is ∫k_g ds-∮ω+Σα. For a cover by frames, transition-angle jumps are included and the same total is frame-independent. For possibly self-intersecting curves the ordinary signed corner turn is defined locally as the unique angle in (-pi,pi) from the incoming unit tangent to the outgoing one in the positive tangent-plane orientation.",
+        "strategy": "Integrate θ′=k_g-ω on every smooth arc, add the signed corner jumps, and telescope. On changing frames, θ changes by the negative rotation angle while ω changes by its differential; their contributions cancel.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-rotation-index-of-a-regular-closed-plane-curve",
+        "kind": "definition",
+        "title": "Rotation index of a regular closed plane curve",
+        "deps": [
+          "thm-lebesgue-number-lemma"
+        ],
+        "statement": "For a closed regular plane curve with matching endpoint tangents, define its rotation index as (θ(b)-θ(a))/(2π), where θ is a lift of the unit-tangent angle; include prescribed jumps for ordinary corners.",
+        "strategy": "Construct each smooth-arc angle lift on a finite subdivision into open semicircle charts, using a Lebesgue number; paste the unique principal corner jumps in (-π,π), then prove the total increment is an integer multiple of 2π and independent of the initial lift.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hopf-turning-tangent-theorem",
+        "kind": "theorem",
+        "title": "Hopf turning-tangent theorem with ordinary corners",
+        "deps": [
+          "thm-path-lifting-for-covering-maps",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-rotation-index-of-a-regular-closed-plane-curve",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "A positively oriented simple closed piecewise C² regular plane curve that bounds a supplied disk region and has finitely many ordinary corners has ∫k_plane ds+Σα=2π.",
+        "strategy": "For a smooth curve choose a lowest point, lift the normalized secant direction on the parameter triangle and compare its three boundary sides to show one full positive turn. Round each ordinary corner in a disjoint small disk by a simple regular arc whose tangent rotation equals the chosen jump, then pass to the limit. The supplied region avoids appealing to the unproved general Jordan curve remark.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-turning-angle-sum-for-a-simple-geodesic-polygon-in-the-plane",
+        "kind": "corollary",
+        "title": "Exterior-angle sum of a planar polygon",
+        "deps": [
+          "thm-hopf-turning-tangent-theorem",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "For a positively oriented simple Euclidean polygon with ordinary vertices, its signed exterior angles sum to 2π.",
+        "strategy": "Every straight side has zero signed curvature, so Hopf turning leaves only the corner jumps.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+        "kind": "definition",
+        "title": "Regular oriented surface regions with corners",
+        "deps": [
+          "def-induced-boundary-orientation",
+          "def-oriented-smooth-manifold-and-oriented-chart"
+        ],
+        "statement": "A regular oriented region is a compact embedded surface domain whose boundary is a finite union of pairwise disjoint simple closed piecewise-C² curves, with finite cyclic arc decompositions and half-disk charts on smooth arcs and sector charts at vertices. At a vertex the one-sided boundary tangents are not antipodal, excluding the ±π cusp; smooth arcs receive the outward-normal-first orientation, and an empty boundary is allowed. A disk region carries a supplied homeomorphism of pairs from the closed disk and its circle to the region and its boundary.",
+        "strategy": "Use boundary half-charts away from corners and embedded quadrant or reflex-wedge charts at ordinary corners. Specify that the corner set is finite and that an angle of ±π is excluded.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-stokes-for-piecewise-smooth-surface-regions",
+        "kind": "lemma",
+        "title": "Stokes formula for finite ordinary surface corners",
+        "deps": [
+          "lem-finite-choice",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "def-integral-of-an-oriented-chart-supported-top-form",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "lem-euclidean-stokes-for-a-compactly-supported-form",
+          "thm-fubini-over-a-region-between-continuous-graphs",
+          "thm-newton-leibniz-with-interior-derivative",
+          "def-smooth-differential-k-form",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "def-induced-boundary-orientation",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "lem-line-integrals-are-independent-of-the-piecewise-c1-partition",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "Let M be an oriented smooth surface without boundary, let D⊆M be a compact regular oriented surface region with finitely many ordinary corners, and let η be a smooth 1-form on a neighbourhood of D. Then ∫_D dη=∫_{∂D}η, where the boundary integral is the sum over the finitely many positively oriented C² boundary arcs.",
+        "strategy": "Localize by a finite bump partition in positive interior, smooth-boundary, and corner charts. In interior charts apply compact-support Euclidean Stokes. In boundary charts express the boundary as a C² graph, integrate dη by vertical sections, and use Newton–Leibniz to identify the result with the outward-normal-first line integral. At corners the graph has two C² pieces; split at the vertex and cancel the shared endpoint terms. Compare chart localizations by finite overlap refinement and compactly supported change of variables. Only finite bump choices are used; no choice axiom is needed.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Theorem 9.3 proof, printed pp. 164–166 (PDF pp. 180–182), especially lines 6527–6534; contextual corner-rounding argument only, not imported"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-finite-planar-graph-disk-cuts-and-euler-count",
+        "kind": "lemma",
+        "title": "Finite planar graph disk cuts and Euler count",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "lem-finite-plane-graph-ear-and-face-facts",
+          "lem-jordan-schoenflies-extension-for-plane-curves"
+        ],
+        "statement": "Assume full AC. A finite embedded graph in a closed round disk, with regular edge endpoint germs and pairwise distinct incident tangent rays, can be augmented by polygonal cuts to a connected face-to-face triangular disk decomposition satisfying V-E+F=1.",
+        "strategy": "Use finite polygonal arcs to connect components and reduce the cut-vertex potential. Root an ear decomposition of the resulting 2-connected regular drawing at the disk boundary cycle. Extend the earlier Jordan crosscut region-label proof to its simple nonpolygonal ears using Jordan–Schönflies local sides, thereby proving simple-cycle disk faces and Euler. Insert sequential polygonal face fans, reconcile full-edge intersections, and remove the exterior face from the plane Euler count.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            },
+            {
+              "title": "R. Diestel, Graph Theory, 6th edition, Chapter 4 preview",
+              "url": "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch4.pdf",
+              "locator": "Section 4.2 Proposition 4.2.8, printed p.100: a maximal plane graph of order at least three has triangular faces under the chapter's polygonal-edge convention; adapt only after Jordan–Schönflies supplies arbitrary-arc disk charts"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "constructive"
+      },
+      {
+        "id": "lem-finite-frameable-decomposition-of-a-regular-disk-region",
+        "kind": "lemma",
+        "title": "Finite frameable decomposition of a regular disk region",
+        "deps": [
+          "thm-morse-sard-for-euclidean-maps",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. Every compact regular oriented disk region with ordinary corners admits a finite face-to-face subdivision into frameable regular disk pieces retaining the supplied boundary.",
+        "strategy": "Choose finitely many small oriented coordinate disks whose interiors cover the region, with polygonal boundaries in their charts. On each chart, Gram–Schmidt applied to its positive coordinate frame and the supplied metric gives the required positive orthonormal frame. Perturb the finitely many disk parameters and vertices to make distinct boundary arcs transverse, avoiding coincidence with the supplied boundary; prove the transversality and finiteness from the parameter functions and Morse–Sard rather than assuming general position. Overlay the disk boundaries with the supplied boundary: membership in each covering disk is constant on every complementary component, hence each lies in at least one frameable chart. Apply the local planar graph disk-cut lemma to split holes and non-disk components by finitely many arcs. The finite resulting disk cells are face-to-face, and no general Jordan theorem or plane-graph page is consumed.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-local-gauss-bonnet-for-a-frameable-disk-region",
+        "kind": "theorem",
+        "title": "Local Gauss–Bonnet on a framed disk region",
+        "deps": [
+          "def-countable-choice",
+          "thm-gaussian-curvature-structure-equation",
+          "prop-angle-derivative-formula-for-geodesic-curvature",
+          "thm-hopf-turning-tangent-theorem",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "prop-geodesic-curvature-under-orientation-and-parameter-reversal",
+          "lem-stokes-for-piecewise-smooth-surface-regions",
+          "lem-finite-frameable-decomposition-of-a-regular-disk-region",
+          "def-axiom-of-choice",
+          "thm-covering-space-lifting-criterion",
+          "thm-euler-poincare-formula-for-finite-cw-complexes"
+        ],
+        "statement": "Assume full AC. A compact regular oriented frameable disk region with ordinary corners satisfies integral K dA plus boundary integral kg ds plus signed exterior angles equals 2pi.",
+        "strategy": "Subdivide the disk into finitely many chart-contained triangular disks. In each disk compare a smooth frame with the coordinate frame using a rotation lift on that disk, compute its turning by metric interpolation and the plane turning theorem, then use the angle derivative formula, structure equation and corner Stokes. Cancel internal edge integrals; count corner angles with the finite regular CW Euler identity. Full AC enters through the decomposition and its planar suppliers.",
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-gauss-bonnet-for-a-geodesic-triangle",
+        "kind": "theorem",
+        "title": "Gauss–Bonnet angle formula for a small geodesic triangle",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-local-gauss-bonnet-for-a-frameable-disk-region",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "def-geodesic-of-an-affine-connection",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "Assume full AC. For a positively oriented embedded geodesic triangular disk contained in a frameable region, ∫_T K dA=α+β+γ-π, where α,β,γ are its interior angles.",
+        "strategy": "Each geodesic side has k_g=0, while its exterior jump is π minus its interior angle. Substitute the three jumps into the framed-disk formula.",
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-angle-sum-comparison-for-small-geodesic-triangles",
+        "kind": "corollary",
+        "title": "Angle excess and integrated curvature",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-gauss-bonnet-for-a-geodesic-triangle"
+        ],
+        "statement": "Assume full AC. For such a triangle the angle sum is greater than, equal to, or less than π exactly when its total Gaussian curvature is positive, zero, or negative.",
+        "strategy": "Rearrange the exact triangle identity; the comparison concerns the curvature integral, not merely the sign at a single point.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-local-gauss-bonnet-for-an-arbitrary-disk-region",
+        "kind": "theorem",
+        "title": "Local Gauss–Bonnet for any regular disk region",
+        "deps": [
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "thm-local-gauss-bonnet-for-a-frameable-disk-region",
+          "lem-finite-frameable-decomposition-of-a-regular-disk-region",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "prop-geodesic-curvature-under-orientation-and-parameter-reversal",
+          "def-axiom-of-choice",
+          "thm-euler-poincare-formula-for-finite-cw-complexes"
+        ],
+        "statement": "Assume full AC. Every compact regular oriented disk region with ordinary corners satisfies integral K dA plus boundary integral kg ds plus signed exterior angles equals 2pi.",
+        "strategy": "Apply the framed formula to the finite chart-disk decomposition. Interior edge curvature integrals cancel with opposite inward conormals; interior vertices have total angle 2π and boundary subdivision vertices have angle π. The locally proved finite planar disk count V−E+F=1 reduces the sum of face constants to 2π.",
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-curvilinear-triangulation-of-a-compact-surface",
+        "kind": "definition",
+        "title": "Curvilinear face-to-face triangulation",
+        "deps": [
+          "def-smooth-manifold",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-interior-point-boundary-point-interior-and-boundary-of-a-manifold",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "A curvilinear triangulation of a compact smooth surface (possibly disconnected, nonorientable, or with boundary) is a finite face-to-face decomposition by embedded closed triangular disk regions. Each face has a disk parametrization, three distinct vertices, three distinct piecewise C² regular edges and ordinary corners; faces meet only in a common full edge, common vertex, or not at all. Interior edges have two incident faces, boundary edges lie in ∂M and have one; the face sectors at a vertex form a circle in the interior or an interval at the boundary. The union is M and ∂M is the boundary-edge subcomplex; each vertex, edge and face is counted once.",
+        "strategy": "Define the finite vertex, edge and face incidence data, the homeomorphism from each closed standard triangle, and local regular-region charts along edges and corners. Require the finite links to be circles or boundary intervals and the face incidences to match the manifold boundary. Orient each face only by its reference triangle; do not impose a global orientation. Prescribed boundary edges are arbitrary regular boundary arcs and need not be geodesics.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Jost, Compact Riemann Surfaces: An Introduction to Contemporary Mathematics",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf",
+              "locator": "§2.3.A, Definition 2.3.A.1, printed pp. 31–32 (PDF pp. 43–44), lines 1776–1793: finite triangular subsets, a homeomorphism from a planar triangle for each face, and pairwise disjoint/common-vertex/common-full-edge intersections. This is topological and treats closed surfaces; the piecewise-C² and boundary conditions here are separately specified."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-geodesic-triangulation",
+        "kind": "definition",
+        "title": "Geodesic triangulation with prescribed boundary arcs",
+        "deps": [
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-levi-civita-connection",
+          "def-interior-point-boundary-point-interior-and-boundary-of-a-manifold",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-geodesic-of-an-affine-connection",
+          "def-curvilinear-triangulation-of-a-compact-surface"
+        ],
+        "statement": "A geodesic triangulation of a compact Riemannian surface (M,g) is a supplied curvilinear triangulation such that each edge e not contained in ∂M admits a regular C² embedding γ:[0,1]→M with image e, with γ((0,1))⊂Int M and γ|_(0,1) a geodesic for (Int M,g|Int M) with its Levi–Civita connection. Edges contained in ∂M are prescribed regular C² boundary arcs and need not be geodesics. The condition asks for an affine geodesic parametrization of each nonboundary edge; it imposes no length-minimizing requirement and asserts no existence of such a triangulation.",
+        "strategy": "Audit the distinction between edges contained in the boundary and edges whose relative interiors lie in the interior; include edges that end on the boundary in the latter case. Use the Levi–Civita connection of the restricted metric on the boundaryless open submanifold Int M, and require an affine geodesic parametrization only on (0,1). Keep the supplied regular C² extension at endpoints, allow arbitrary prescribed regular C² boundary arcs, and make no minimization or existence claim.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Theorem, printed p. 167 (PDF p. 183), lines 6577–6584, defines a smooth triangulation as finitely many curved triangles covering a compact surface with pairwise intersections along a whole common vertex or edge. It does not require geodesic edges; this is contextual only."
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 15, §15.1, Definition 15.1.1, printed p. 113 (PDF p. 121), lines 6271–6283: a geodesic is a smooth curve whose intrinsic acceleration D_t γ′ vanishes; constant geodesics are allowed in that definition, while triangulation edges here are regular."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-a-compact-surface-metric-extends-across-its-boundary",
+        "kind": "lemma",
+        "title": "Extending a compact surface metric across its boundary",
+        "deps": [
+          "def-double-of-a-smooth-manifold-with-boundary",
+          "thm-the-double-has-a-well-defined-smooth-structure",
+          "cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "def-smooth-partition-of-unity-subordinate-to-an-open-cover",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-countable-choice"
+        ],
+        "statement": "Assume AC_ω. For a compact smooth surface M with boundary and a smooth Riemannian metric g on M, the metric on either labelled copy extends to a smooth Riemannian metric on an open neighbourhood of that copy in the smooth double DM.",
+        "strategy": "Use the published smooth-double and local tensor-extension results. At each seam point, symmetrize a local extension of g and shrink its neighbourhood until it is positive definite. Compactness of the seam gives finitely many such neighbourhoods. On their union, patch the positive extensions with a smooth partition of unity on the double; every local extension equals g on the original half, so the convex sum does too. Glue this patched metric to g on the open interior of the original copy. AC_ω is used by the published double and partition suppliers; the finite subcover and finite extension selections use only finite choice.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Panagiotis Polymerakis, On the spectrum of differential operators under Riemannian coverings",
+              "url": "https://pure.mpg.de/rest/items/item_3237954_3/component/file_3558141/content?download=true",
+              "locator": "Section 3, Lemma 3.2, printed p. 8 (PDF p. 12): extend metric components locally, shrink until positive definite, and patch extensions with a partition of unity. The paper uses an attached boundary cylinder rather than the labelled double used here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-a-compact-riemannian-surface-has-a-uniform-short-geodesic-radius",
+        "kind": "lemma",
+        "title": "Uniform short-geodesic scale on a compact surface",
+        "deps": [
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-geodesic-of-an-affine-connection",
+          "def-riemannian-speed-and-length",
+          "def-countable-choice",
+          "thm-existence-of-geodesically-convex-neighborhoods",
+          "def-extended-riemannian-distance-on-a-disconnected-manifold",
+          "prop-components-of-a-topological-manifold-are-open-and-at-most-countable",
+          "thm-the-riemannian-distance-topology-is-the-manifold-topology",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "lem-finite-choice",
+          "thm-lebesgue-number-lemma",
+          "thm-collar-neighborhood-theorem",
+          "lem-a-compact-surface-metric-extends-across-its-boundary",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "Assume AC_ω. Let K be either a compact smooth Riemannian surface with smooth boundary, identified with a labelled copy in its smooth double and supplied with the open metric-extension neighbourhood N, or a compact regular oriented surface region with ordinary corners in a supplied boundaryless ambient Riemannian surface N. With d_N the componentwise Riemannian distance, if K is nonempty there are finitely many strongly geodesically convex open sets V_i covering K and r>0 such that every p,q∈K with d_N(p,q)<3r lie together in some V_i and have a unique affinely parametrized ambient length-minimizing geodesic there, of length d_N(p,q). The connector is constant when p=q. For empty K use the empty cover. Smooth boundary points retain one-sided collar neighborhoods in the double; cornered regions use supplied half-disk and wedge charts. Ambient connectors need not remain in K, and any later finite network must retain the supplied smooth boundary arcs as prescribed edges.",
+        "strategy": "In the smooth-boundary case, use the metric-extension lemma to work in a boundaryless open Riemannian neighbourhood in the double; a cornered region already lies in its boundaryless ambient surface. Split compact K across the finitely many ambient components meeting it. In each component the Riemannian distance induces the manifold topology, so the closed component pieces of K are compact metric spaces. Consider the set of all strongly geodesically convex open neighborhoods contained in an ambient component; the relative convex-neighborhood theorem supplies one around each point. Take a finite subcover and apply the Lebesgue-number lemma on each compact component piece. A positive r below one third of the least Lebesgue number ensures every pair at distance below 3r lies in a common V_i; strong convexity gives its unique affine globally minimizing connector. By the definition of componentwise distance as the infimum of piecewise-C¹ competitor lengths, the connector length is d_N(p,q)<3r. Collars and corner charts are domain-side data; retain original boundary arcs as prescribed edges in every later network.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Theorem 18.0.1, printed p. 133 (PDF p. 141), lines 7810–7813, and §18.2, printed pp. 136–138 (PDF pp. 144–146), lines 8013–8050: local short geodesics and minimality; Remark 18.0.3 says convex containment follows by refinement, and the displayed exit case is brief."
+            },
+            {
+              "title": "Jürgen Jost, Compact Riemann Surfaces: An Introduction to Contemporary Mathematics",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf",
+              "locator": "§2.3.A, Corollary 2.3.A.1, printed p. 36 (PDF p. 49), lines 2049–2060, states a uniform short-geodesic scale for compact metric surfaces; contextual precedent only, with boundary and corner cases proved locally here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface",
+        "kind": "theorem",
+        "title": "Finite curvilinear triangulation of a compact Riemannian surface",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "lem-a-compact-surface-metric-extends-across-its-boundary",
+          "lem-finite-planar-graph-disk-cuts-and-euler-count",
+          "thm-existence-of-geodesically-convex-neighborhoods",
+          "thm-morse-sard-for-euclidean-maps",
+          "thm-euler-poincare-formula-for-finite-cw-complexes"
+        ],
+        "statement": "Assume full AC. Every compact smooth Riemannian surface, with smooth boundary allowed, has a finite regular C2 face-to-face curvilinear triangulation preserving its boundary and subordinate to any supplied finite strongly convex ambient cover; a regular cornered region has analogous triangular face/edge/link data with ordinary corners. Its finite regular CW count V-E+F is the homology Euler characteristic.",
+        "strategy": "Choose generic small metric-circle arrangement, assign each face one larger normal-coordinate disk, apply the regular positive-sector planar fan lemma, reconcile edge subdivisions, smooth polygonal bends, and identify the finite CW count.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, Problem 9-5, printed pp. 171–172 (PDF pp. 187–188), outlines a finite convex-polygon cover. The boundary-compatible finite graph refinement here supplies details beyond that outline."
+            },
+            {
+              "title": "Jürgen Jost, Compact Riemann Surfaces: An Introduction to Contemporary Mathematics",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf",
+              "locator": "§2.3.A, Theorem 2.3.A.1, printed pp. 37–39 (PDF pp. 50–52), constructs finite geodesic triangulations for closed surfaces. It does not establish the prescribed-boundary version; this item only claims curvilinear edges."
+            },
+            {
+              "title": "Emil Saucan, A Note on a Theorem of Munkres",
+              "url": "https://arxiv.org/pdf/math/0403055",
+              "locator": "Theorem 1.1 on PDF p. 1 gives a relative-boundary fat-triangulation context, and Definition 1.2 and Remark 1.3 on PDF p. 2 discuss angle bounds. Neither is used as a geodesic-edge theorem here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-a-finite-short-geodesic-network-gives-a-curvilinear-polygon-cellulation",
+        "kind": "lemma",
+        "title": "Finite short-geodesic polygon cellulation from curvilinear triangles",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-a-compact-riemannian-surface-has-a-uniform-short-geodesic-radius",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface"
+        ],
+        "statement": "Assume full AC. Any compact smooth Riemannian surface with boundary, or regular cornered surface region, has a finite face-to-face polygonal disk cellulation in small strongly convex disks subordinate to a supplied cover, each with ∫|K| < π, with short minimizing geodesic interior edges and prescribed boundary arcs retained.",
+        "strategy": "Apply the finite regular C2 curvilinear triangulation subordinate to the supplied convex cover. Finely subdivide every interior edge and replace each subarc by its minimizing geodesic chord. Uniform O(h²) position and O(h) tangent estimates, positive vertex sectors, separation away from vertices, and inward boundary sectors preserve an embedded graph with the same disk faces and shared edges. Keep boundary arcs fixed.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "constructive"
+      },
+      {
+        "id": "thm-finite-geodesic-triangulation-of-a-compact-riemannian-surface",
+        "kind": "theorem",
+        "title": "Finite face-to-face geodesic triangulation",
+        "deps": [
+          "def-countable-choice",
+          "lem-a-finite-short-geodesic-network-gives-a-curvilinear-polygon-cellulation",
+          "lem-a-compact-riemannian-surface-has-a-uniform-short-geodesic-radius",
+          "def-geodesic-triangulation",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. Every compact smooth Riemannian surface, with smooth boundary allowed, has a finite face-to-face geodesic triangulation retaining boundary arcs; a compact regular cornered region has analogous explicit triangular face/edge/link data with geodesic interior edges and retained corners. Each face lies in a frameable convex chart. The relative-boundary polygon subdivision remains an open proof obligation.",
+        "strategy": "Start from the finite short-geodesic polygon cellulation with retained prescribed boundary arcs. The remaining obligation is a finite face-compatible geodesic diagonal subdivision of each convex-chart polygon, including boundary and corner cells; Jost Theorem 2.3.A.1 gives a closed-surface network polygon argument but not this exact relative-boundary interface. This item remains escalated pending that proof.",
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Jost, Compact Riemann Surfaces, §2.3.A",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf",
+              "locator": "§2.3.A, printed pp. 31–39; Theorem 2.3.A.1 and preceding lemmas"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "constructive",
+        "landmark": true
+      },
+      {
+        "id": "def-euler-characteristic-of-a-finitely-triangulated-compact-surface",
+        "kind": "definition",
+        "title": "Euler count of a supplied surface triangulation",
+        "deps": [
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For a supplied finite curvilinear triangulation define chi(M;T)=V-E+F. Under full AC, the new curvilinear supplier gives existence; independence is proved separately.",
+        "strategy": "The definition is initially indexed by T. Existence follows from the preceding triangulation theorem, while independence is deliberately deferred to the later theorem.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-euler-characteristic-is-unchanged-by-edge-and-face-subdivision",
+        "kind": "lemma",
+        "title": "Euler count under elementary subdivision",
+        "deps": [
+          "def-euler-characteristic-of-a-finitely-triangulated-compact-surface",
+          "def-curvilinear-triangulation-of-a-compact-surface"
+        ],
+        "statement": "Inserting a vertex in an edge and splitting every incident face along new arcs, or inserting one vertex inside a face and coning to its three vertices, leaves V-E+F unchanged.",
+        "strategy": "For an interior edge count Δ(V,E,F)=(1,3,2); for a boundary edge count (1,2,1); for a face cone count (1,3,2). In every case Δ(V-E+F)=0, including finite repetitions.",
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-local-gauss-bonnet-sums-over-a-supplied-finite-geodesic-triangulation",
+        "kind": "lemma",
+        "title": "Summing local Gauss–Bonnet over a supplied triangulation",
+        "deps": [
+          "thm-local-gauss-bonnet-for-a-frameable-disk-region",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "prop-geodesic-curvature-under-orientation-and-parameter-reversal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. Local Gauss-Bonnet sums over supplied finite frameable curvilinear triangular data, including cornered oriented regions and closed nonorientable surfaces with arbitrary face orientations, to give 2pi(V-E+F).",
+        "strategy": "Interior edge integrals cancel because inward face conormals oppose each other, even when neighbouring face orientations are chosen independently. Interior vertex angles total 2π; boundary vertex angles total the interior angle of M, leaving its exterior jump. Count face-edge incidences 3F=2E_int+E_boundary and boundary edges/vertices componentwise to reduce the constants to 2π(V-E+F). For the facewise case use the positive curvature density.",
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-curvilinear-triangulation-induces-a-finite-cw-structure",
+        "kind": "lemma",
+        "title": "A curvilinear triangulation gives a finite CW structure",
+        "deps": [
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "def-cell-attachment-by-a-characteristic-map",
+          "def-topological-manifold-with-boundary",
+          "def-curvilinear-triangulation-of-a-compact-surface"
+        ],
+        "statement": "The open vertices, relative interiors of edges, and interiors of faces of a finite face-to-face curvilinear triangulation of a compact surface form a finite regular CW complex. Its characteristic maps are homeomorphisms from closed balls onto the corresponding closed cells, and its 0-, 1-, and 2-cells are indexed respectively by V, E, and F.",
+        "strategy": "Build the 0-, 1-, and 2-skeleta by attaching the supplied vertices, edge intervals, and triangular disks along their stated endpoints and full-edge boundaries. The face-to-face clauses give the attaching maps and disjoint open cells. Prove closure-finiteness from the finite inventory and the weak topology from the finite closed cover; compact interval and face images are closed in the Hausdorff surface. Verify regularity from the supplied embeddings and disk homeomorphisms. Do not invoke Euler–Poincaré or a metric-comparison result: this lemma only identifies the finite cell structure and its counts.",
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Appendix, §Simplicial CW Structures, printed p. 535 (PDF p. 543), lines 39298–39303: defines regular CW by characteristic maps that can be chosen to be embeddings and notes that cell closures are homeomorphic to closed balls. Terminology context only; this proof verifies the supplied maps directly."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-gauss-bonnet-expression-is-independent-of-the-metric",
+        "kind": "lemma",
+        "title": "The Gauss–Bonnet curvature and boundary expression is metric independent",
+        "deps": [
+          "def-countable-choice",
+          "thm-connection-one-form-rotation-law-on-an-oriented-surface",
+          "thm-gaussian-curvature-structure-equation",
+          "prop-angle-derivative-formula-for-geodesic-curvature",
+          "lem-stokes-for-piecewise-smooth-surface-regions",
+          "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "prop-geodesic-curvature-under-orientation-and-parameter-reversal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. The Gauss-Bonnet curvature/boundary/corner expression for a fixed regular oriented region, and the total curvature density for a fixed closed nonorientable surface, are independent of metric.",
+        "strategy": "Interpolate g_t=(1−t)g₀+tg₁. On a finite disk cover, apply the positive g₀-to-g_t square-root bundle map to a fixed oriented g₀-frame; the resulting g_t-frames have the same SO(2) transition functions for all t. Hence β=ω₁−ω₀ glues to a global 1-form in the oriented case, and dω=−K dA gives K₁dA₁−K₀dA₀=−dβ. Stokes makes the curvature-integral change −∫∂Mβ. Along each fixed regular boundary arc, the angle formula gives (k₁ds₁−k₀ds₀)=d(θ₁−θ₀)+β. The angle difference has a single-valued lift through the metric path; its total derivative over closed boundary components plus its finite corner jumps is zero. Each corner jump difference is exactly α₁−α₀, so the boundary and corner change is +∫∂Mβ and cancels. On a closed nonorientable surface use a fixed finite disk triangulation from the first metric, choose each face orientation separately, perform the same β computation on its faces, and pair interior-edge integrals: reversal of face orientation changes both β and its integration orientation, leaving opposite inward conormals and cancellation. No classification, Euler–Poincaré theorem or later characteristic-form theory is used.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Wendl, The Gauss–Bonnet Formula, Chapter 6 §6.3",
+              "url": "https://www.math.hu-berlin.de/~wendl/pub/connections_chapter6_2.pdf",
+              "locator": "Printed pp. 147–152, connection-form proof and Corollary 6.42"
+            },
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Printed pp. 163–169, local and global Gauss–Bonnet formulas"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+        "kind": "theorem",
+        "title": "Topological well-definedness of the surface Euler characteristic",
+        "deps": [
+          "lem-curvilinear-triangulation-induces-a-finite-cw-structure",
+          "def-euler-characteristic-of-a-finitely-triangulated-compact-surface",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-poincare-formula-for-finite-cw-complexes"
+        ],
+        "statement": "Every supplied finite curvilinear triangulation of a compact smooth surface has V-E+F equal to its singular-homology Euler characteristic, independent of metric, orientation, boundary, and triangulation.",
+        "strategy": "For one fixed metric, apply the local disk formula to every face of either piecewise C² curvilinear triangulation; geodesicity of interior edges is unnecessary because their signed geodesic-curvature integrals cancel. The face-edge and angle count of the supplied summation lemma yields V−E+F=G_g(M)/(2π), where G includes the boundary and corner terms, or the curvature density for closed nonorientable M. The direct cell-structure lemma confirms that V,E,F count the same kinds of finite cells. For different metrics, apply the preceding local metric-transgression lemma to identify their G values. Thus the two counts agree without a common subdivision of unrelated smooth arcs or the out-of-closure cellular-homology page.",
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-euler-characteristic-is-additive-under-gluing-along-a-finite-one-dimensional-subcomplex",
+        "kind": "proposition",
+        "title": "Euler characteristic under finite subcomplex gluing",
+        "deps": [
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "lem-curvilinear-triangulation-induces-a-finite-cw-structure",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "def-euler-characteristic-of-a-finitely-triangulated-compact-surface"
+        ],
+        "statement": "If compact triangulated surfaces or surface regions A and B meet in a common finite one-dimensional subcomplex C with compatible cell structures, then χ(A∪B)=χ(A)+χ(B)-χ(C), where χ(C)=V_C-E_C.",
+        "strategy": "Count each vertex and edge in the union once and each face in its unique side; inclusion-exclusion of finite cell counts gives the equation. State the compatible-subcomplex hypothesis rather than assuming arbitrary smooth-arc overlays are finite.",
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-gauss-bonnet-for-compact-oriented-surfaces-with-boundary-and-corners",
+        "kind": "theorem",
+        "title": "Gauss–Bonnet for compact oriented surface regions with boundary and corners",
+        "deps": [
+          "def-countable-choice",
+          "lem-local-gauss-bonnet-sums-over-a-supplied-finite-geodesic-triangulation",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface",
+          "lem-a-compact-surface-metric-extends-across-its-boundary",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. A compact oriented smooth-boundary Riemannian surface or regular cornered region satisfies integral K dA plus boundary integral kg ds plus signed corner angles equals 2pi times its homology Euler characteristic.",
+        "strategy": "Use the finite boundary-compatible curvilinear triangulation, retaining every prescribed boundary arc and corner, then apply the local summation lemma and the homology Euler count. For a smooth-boundary surface, construct in its metric-extended smooth double. The positive boundary orientation fixes JT as the inward conormal. Full AC enters through the triangulation and local-disk suppliers.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "landmark": true
+      },
+      {
+        "id": "cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary",
+        "kind": "corollary",
+        "title": "Gauss–Bonnet with smooth boundary",
+        "deps": [
+          "thm-gauss-bonnet-for-compact-oriented-surfaces-with-boundary-and-corners",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. If the compact oriented surface boundary is smooth, then ∫_M K dA+∫_{∂M}k_g ds=2πχ(M).",
+        "strategy": "Apply the boundary-and-corners theorem with an empty corner set, retaining its full-AC assumption.",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+        "kind": "theorem",
+        "title": "Global Gauss–Bonnet for closed oriented surfaces",
+        "deps": [
+          "thm-gauss-bonnet-for-compact-oriented-surfaces-with-boundary-and-corners",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. Then every closed oriented Riemannian surface satisfies ∫_M K dA=2πχ(M), with the empty surface interpreted as 0=0.",
+        "strategy": "Apply the boundary-and-corners theorem with empty boundary and empty corner set under its full-AC assumption; disjoint components add by finite integration and Euler count.",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct",
+        "landmark": true
+      },
+      {
+        "id": "cor-total-gaussian-curvature-is-independent-of-the-riemannian-metric",
+        "kind": "corollary",
+        "title": "Metric independence of total Gaussian curvature",
+        "deps": [
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. For any two smooth Riemannian metrics g₀,g₁ on the same compact oriented surface M, ∫_M K_{g₀}dA_{g₀}=∫_M K_{g₁}dA_{g₁}=2πχ(M).",
+        "strategy": "Apply global Gauss–Bonnet to each metric. The Euler theorem identifies their χ by the local metric-transgression argument, and directly gives the same curvature integral. Inherit full AC through both global invocations.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero",
+        "kind": "corollary",
+        "title": "Flat closed oriented surfaces have Euler characteristic zero",
+        "deps": [
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. A nonempty closed oriented Riemannian surface with K identically zero has χ(M)=0.",
+        "strategy": "The curvature integral vanishes; divide the global identity by 2π. Retain its full AC premise.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-a-positively-curved-closed-oriented-surface-has-positive-euler-characteristic",
+        "kind": "corollary",
+        "title": "Positive curvature forces positive Euler characteristic",
+        "deps": [
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. A nonempty closed oriented Riemannian surface with K>0 everywhere has χ(M)>0; no genus or classification conclusion follows here.",
+        "strategy": "Compactness and positivity give a strictly positive curvature integral, so the global identity forces χ>0. Inherit its full-AC premise.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-gauss-bonnet-for-closed-nonorientable-riemannian-surfaces",
+        "kind": "theorem",
+        "title": "Gauss–Bonnet for closed nonorientable surfaces",
+        "deps": [
+          "def-riemannian-volume-density",
+          "thm-density-integration-is-defined-without-an-orientation",
+          "def-countable-choice",
+          "lem-local-gauss-bonnet-sums-over-a-supplied-finite-geodesic-triangulation",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. A closed compact nonorientable Riemannian surface satisfies integral K mu_g equals 2pi chi(M), using the orientation-free density and arbitrary face orientations.",
+        "strategy": "Choose an orientation separately on each of finitely many triangular faces and apply the local formula there. K is intrinsic and μ_g positive; adjacent faces have opposite inward conormals along each common edge, so their geodesic-curvature terms cancel regardless of the chosen face orientations. Angles around each vertex sum to 2π and the same finite incidence count gives χ. No orientation double cover or classification theorem is used.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-gauss-bonnet-for-a-geodesic-polygon",
+        "kind": "corollary",
+        "title": "Gauss–Bonnet for a geodesic polygonal disk",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-local-gauss-bonnet-for-an-arbitrary-disk-region",
+          "def-geodesic-of-an-affine-connection",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "Assume full AC. For a positively oriented regular geodesic polygonal disk D with ordinary corners, ∫_D K dA+Σα=2π.",
+        "strategy": "Apply the arbitrary-disk formula and set k_g=0 along each geodesic side; boundary exterior angles keep their signed representatives.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-surface-gauss-bonnet-versus-higher-dimensional-cern-gauss-bonnet",
+        "kind": "remark",
+        "title": "Scope of classical surface Gauss–Bonnet",
+        "deps": [
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces"
+        ],
+        "statement": "The surface formula proves a curvature/Euler identity. Genus formulas additionally use surface classification; higher-dimensional Chern–Gauss–Bonnet uses characteristic forms and is not inferred here.",
+        "strategy": "State the precise scope boundary, including that Poincaré–Hopf and Chern–Weil are independent later theories.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-geodesic-curvature-is-the-ordinary-curvature-of-a-space-curve",
+        "kind": "false-statement",
+        "title": "Geodesic curvature need not equal ambient curve curvature",
+        "deps": [
+          "def-geodesic-of-an-affine-connection",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve"
+        ],
+        "statement": "False: for every oriented surface M embedded in Euclidean three-space with its induced metric and every unit-speed C² curve γ in M, the signed geodesic curvature k_g equals the ordinary space-curve curvature ||γ''||.",
+        "strategy": "Use the unit sphere with its induced round metric and outward orientation, and parametrize its equator by γ(t)=(cos t,sin t,0). Compute ||γ''||=1. In longitude-latitude coordinates X(u,v)=(cos v cos u,cos v sin u,sin v), calculate the metric coefficients and the two Levi–Civita symbols used by γ; the coordinate geodesic equation then gives intrinsic acceleration zero and k_g=0. This explicit local calculation refutes the equality without relying on an examples-page result or the ambient-projection theorem.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, §The Gauss–Bonnet Formula, printed pp. 163–164 (PDF pp. 179–180), lines 6421–6431: signed curvature is the normal component of intrinsic covariant acceleration; unit speed makes that acceleration tangent-orthogonal. Context for the intrinsic quantity, not a proof of the counterexample."
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lecture 15, §15.1, Definition 15.1.1 and Example 15.1.3, lines 6271–6283 and 6309–6319 (PDF pp. 121–122): intrinsic acceleration defines geodesics, and for induced submanifold metrics it is the tangential projection of ambient acceleration. The local Christoffel computation here is supplied directly."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-the-connection-one-form-of-an-orthonormal-frame-is-frame-independent",
+        "kind": "false-statement",
+        "title": "A surface connection form depends on its frame",
+        "deps": [
+          "thm-connection-one-form-rotation-law-on-an-oriented-surface",
+          "thm-gaussian-curvature-structure-equation"
+        ],
+        "statement": "False: rotating the frame by a nonconstant angle φ changes ω to ω+dφ, though dω is unchanged.",
+        "strategy": "Take the Euclidean plane standard frame with ω=0, rotate it by φ=x locally, and compute ω′=dx. Exterior differentiation removes this exact change.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-a-geodesic-triangle-on-every-surface-has-angle-sum-pi",
+        "kind": "false-statement",
+        "title": "Geodesic triangles need not have Euclidean angle sum",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-gauss-bonnet-for-a-geodesic-triangle",
+          "def-geodesic-of-an-affine-connection",
+          "ex-great-circles-as-round-sphere-geodesics",
+          "ex-the-round-metric-on-the-sphere-as-an-induced-metric"
+        ],
+        "statement": "False: a spherical octant bounded by three great-circle arcs has three right angles and total angle 3π/2.",
+        "strategy": "On the unit sphere take the first-octant triangle bounded by the three coordinate great-circle arcs. Each arc is geodesic because its ambient acceleration is normal to the sphere, and the three mutual tangent angles are each π/2; the sum 3π/2 disproves the flat claim. The sphere and geodesic checks are computed here.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-gauss-bonnet-for-a-surface-with-boundary-has-no-boundary-term",
+        "kind": "false-statement",
+        "title": "A boundary term is necessary",
+        "deps": [
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-axiom-of-choice",
+          "cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "thm-gaussian-curvature-structure-equation",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. False: for a Euclidean disk K=0 and χ=1, so omitting ∫_{∂D}k_g ds would assert 0=2π.",
+        "strategy": "Parametrize a radius-R circle counterclockwise; its signed inward geodesic curvature is 1/R and its length is 2πR, supplying the missing 2π.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-euler-characteristic-is-defined-by-choosing-any-triangulation-without-proving-independence",
+        "kind": "false-statement",
+        "title": "The raw cell-count triple is a surface invariant",
+        "deps": [
+          "def-euler-characteristic-of-a-finitely-triangulated-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "lem-euler-characteristic-is-unchanged-by-edge-and-face-subdivision",
+          "def-curvilinear-triangulation-of-a-compact-surface"
+        ],
+        "statement": "False: the raw vertex-edge-face triple (V,E,F) is independent of the chosen finite curvilinear triangulation of a compact surface. Its alternating sum V-E+F is invariant by a separate comparison theorem.",
+        "strategy": "Use a single curvilinear triangle on the disk, then subdivide one boundary edge and split the face. The two valid triangulations have triples (3,3,1) and (4,5,2), disproving triple invariance, while both have Euler sum 1 as required by the comparison theorem.",
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-classical-gauss-bonnet-by-itself-classifies-compact-surfaces",
+        "kind": "false-statement",
+        "title": "Gauss–Bonnet alone does not classify surfaces",
+        "deps": [
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+          "thm-gauss-bonnet-for-closed-nonorientable-riemannian-surfaces",
+          "def-klein-bottle",
+          "def-polygonal-schema-and-edge-pairing",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "thm-euler-poincare-formula-for-finite-cw-complexes",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-r-orientation-of-a-topological-manifold",
+          "def-orientation-local-system-and-orientation-cover",
+          "prop-relative-homology-is-functorial-for-maps-of-pairs",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. False: the curvature identity determines χ but not the homeomorphism type; classification is a separate theorem.",
+        "strategy": "Exhibit the torus and Klein bottle square edge-identification cellulations: both have one vertex, two edges and one face, hence χ=0, but one is orientable and the other is not. Thus the common Euler value alone does not classify.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 490,
+    "id": "the-gauss-bonnet-theorem-for-riemannian-surfaces-examples",
+    "kind": "B",
+    "category": "differential-geometry",
+    "title": "The Gauss Bonnet Theorem for Riemannian Surfaces — Examples",
+    "companion": "the-gauss-bonnet-theorem-for-riemannian-surfaces",
+    "requires": [
+      "the-gauss-bonnet-theorem-for-riemannian-surfaces"
+    ],
+    "items": [
+      {
+        "id": "ex-gauss-bonnet-for-a-euclidean-disk",
+        "kind": "example",
+        "title": "Euclidean disk boundary curvature",
+        "deps": [
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-axiom-of-choice",
+          "cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "thm-gaussian-curvature-structure-equation",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. For a Euclidean disk of radius R>0, K=0, k_g=1/R on its counterclockwise boundary and ∫k_g ds=2π=2πχ(D).",
+        "strategy": "Parametrize (R cos t,R sin t), compute unit tangent and inward quarter-turn, then integrate (1/R)R dt over 0≤t≤2π. Count χ=1 from a disk cell structure.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-gauss-bonnet-for-a-euclidean-annulus",
+        "kind": "example",
+        "title": "Euclidean annulus boundary signs",
+        "deps": [
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-axiom-of-choice",
+          "cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "thm-gaussian-curvature-structure-equation",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. For 0<r<R, a Euclidean annulus has K=0, outer boundary contribution +2π, inner boundary contribution -2π, and χ=0.",
+        "strategy": "Use counterclockwise orientation on the outer circle and clockwise orientation on the inner. Compute k_g=1/R and -1/r respectively; their arclength integrals cancel. A one-cycle cell structure gives χ=0.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-gauss-bonnet-for-the-round-sphere",
+        "kind": "example",
+        "title": "Total curvature of a round sphere",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-gaussian-curvature-structure-equation",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-the-riemannian-volume-form-is-the-unique-positive-unit-top-form",
+          "def-riemannian-volume-form-on-an-oriented-manifold",
+          "def-first-fundamental-form-and-surface-area-density",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. For the round sphere of radius R, K=1/R² and area=4πR², so ∫K dA=4π and χ(S²)=2.",
+        "strategy": "For the radius-R spherical metric dθ²R²+R²sin²θ dφ², compute the connection form on a polar chart and its exterior derivative to obtain K=R⁻². Integrate the area form R²sinθ dθdφ to get 4π. A tetrahedral curvilinear triangulation has V=4,E=6,F=4, hence χ=2 and the formula reads 4π=2π·2. All computations are local to this example.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-gauss-bonnet-for-a-flat-torus",
+        "kind": "example",
+        "title": "Flat torus and zero Euler characteristic",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces",
+          "def-two-dimensional-torus",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "thm-gaussian-curvature-structure-equation",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "thm-finite-products-of-compact-spaces",
+          "prop-real-line-mod-integers-is-compact-and-path-connected",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. For R²/Z² with its descended Euclidean metric, K=0 and χ=0, so Gauss–Bonnet reads 0=0.",
+        "strategy": "The Euclidean metric on R² is invariant under Z² translations and so descends through the square quotient; its connection is locally flat, K=0. Use a periodic 3×3 vertex grid, split each of the nine squares by the same diagonal, and check all quotient triangles embed: V=9, E=27 and F=18, so χ=0. Thus Gauss–Bonnet gives 0=0 without the earlier torus examples page.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-hyperbolic-geodesic-triangle-area-defect",
+        "kind": "example",
+        "title": "Area defect of a hyperbolic geodesic triangle",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-existence-of-geodesically-convex-neighborhoods",
+          "def-countable-choice",
+          "thm-gauss-bonnet-for-a-geodesic-triangle",
+          "thm-gaussian-curvature-structure-equation",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "Assume AC. In the upper-half-plane metric y⁻²(dx²+dy²), a small embedded geodesic triangle of area A has angle sum π-A; every angle sum is therefore below π.",
+        "strategy": "Use the oriented orthonormal frame (y∂x,y∂y), compute its connection form and dω to obtain K=-1. Choose a triangle inside a convex chart, apply the triangle formula, and keep the inherited AC_ω premise at the convex-chart invocation.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-spherical-geodesic-triangle-area-excess",
+        "kind": "example",
+        "title": "Area excess of a spherical geodesic triangle",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-gauss-bonnet-for-a-geodesic-triangle",
+          "thm-gaussian-curvature-structure-equation",
+          "cor-gauss-bonnet-for-a-geodesic-polygon",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary"
+        ],
+        "statement": "Assume AC. On the radius-R round sphere, a simple geodesic triangle of area A has angle sum π+A/R²; a spherical octant has A=πR²/2 and three right angles.",
+        "strategy": "Compute K=R⁻² in the spherical polar metric by the frame structure equation. A great-circle arc is geodesic since its Euclidean acceleration is normal to the sphere; choose a small embedded triangle of such arcs and apply the geodesic-triangle formula to obtain α+β+γ=π+A/R². No earlier examples-page result is presumed.",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-gauss-bonnet-for-a-spherical-cap",
+        "kind": "example",
+        "title": "Spherical cap boundary sign",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary",
+          "thm-gaussian-curvature-structure-equation",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-the-riemannian-volume-form-is-the-unique-positive-unit-top-form",
+          "def-riemannian-volume-form-on-an-oriented-manifold",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-first-fundamental-form-and-surface-area-density",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. For the north polar cap 0≤θ≤θ₀<π on a radius-R sphere, ∫K dA=2π(1-cos θ₀) and its positive boundary has ∫k_g ds=2π cos θ₀, summing to 2π.",
+        "strategy": "In polar coordinates on a radius-R sphere, compute K=R⁻², cap area 2πR²(1−cos θ₀), and boundary length 2πRsin θ₀. The positively oriented latitude has inward conormal toward decreasing θ and k_g=cot θ₀/R, so its integral is 2πcos θ₀. The sum is 2π=2πχ(D), and the sign is fixed by the outward-normal-first convention. These metric computations are made here.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-a-polyhedral-style-geodesic-triangulation-angle-count",
+        "kind": "example",
+        "title": "Finite triangulation angle bookkeeping",
+        "deps": [
+          "lem-local-gauss-bonnet-sums-over-a-supplied-finite-geodesic-triangulation",
+          "def-euler-characteristic-of-a-finitely-triangulated-compact-surface",
+          "def-curvilinear-triangulation-of-a-compact-surface"
+        ],
+        "statement": "In a closed tetrahedral combinatorial pattern V=4,E=6,F=4, the four vertex angle sums contribute 8π and 3F=2E, leaving 2π(V-E+F)=4π in the local-to-global count; this is a finite bookkeeping check only.",
+        "strategy": "Enumerate the four faces, six edges and four vertices, assign three incident face angles to each vertex, and verify both incidence equalities. Do not infer a smooth curvature theorem from a polyhedral drawing.",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-projective-plane-total-curvature-from-a-hemisphere-identification",
+        "kind": "example",
+        "title": "Projective-plane curvature via a hemisphere",
+        "deps": [
+          "thm-gauss-bonnet-for-closed-nonorientable-riemannian-surfaces",
+          "thm-gaussian-curvature-structure-equation",
+          "def-connection-one-form-of-an-oriented-orthonormal-frame",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. The round real projective plane obtained by antipodal identification has K=1/R², area=2πR² and χ=1; hence its total curvature is 2π.",
+        "strategy": "Construct RP² directly as the unit sphere modulo x∼−x; a small spherical disk disjoint from its antipodal image projects isometrically, so the quotient carries the round metric without invoking a covering theorem. A hemisphere meets each antipodal pair once except for the equator, which has area zero; thus its total curvature is half of 4π, namely 2π. The nonorientable theorem then gives χ(RP²)=1. Compute K=1 and the sphere area in polar coordinates within this example.",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-omitting-exterior-corner-angles-from-a-geodesic-polygon",
+        "kind": "counterexample",
+        "title": "Corner terms are required even in the plane",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-gauss-bonnet-for-a-geodesic-polygon",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-signed-exterior-angle-at-a-piecewise-smooth-corner",
+          "thm-gaussian-curvature-structure-equation"
+        ],
+        "statement": "Assume AC. A Euclidean square is a geodesic polygonal disk with K=0 and k_g=0 on every side, but χ=1; its four exterior angles sum to 2π.",
+        "strategy": "Compute each convex right-angle jump as π/2. Dropping the corner sum would give 0=2π, whereas the complete formula gives 2π=2π.",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-using-inward-normal-first-reverses-the-boundary-term",
+        "kind": "counterexample",
+        "title": "Wrong boundary orientation reverses the disk term",
+        "deps": [
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-axiom-of-choice",
+          "def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve",
+          "def-regular-oriented-surface-region-with-piecewise-smooth-boundary",
+          "def-oriented-riemannian-surface-and-positive-quarter-turn",
+          "cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary",
+          "thm-gaussian-curvature-structure-equation",
+          "def-curvilinear-triangulation-of-a-compact-surface",
+          "thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined",
+          "def-countable-choice"
+        ],
+        "statement": "Assume full AC. On a Euclidean disk, replacing outward-normal-first by inward-normal-first makes the boundary clockwise and changes ∫k_g ds from +2π to -2π while χ=1.",
+        "strategy": "Compute JT for the clockwise unit tangent in the fixed surface orientation and find k_g=-1/R. The resulting -2π cannot satisfy the outward-normal-first Gauss–Bonnet identity.",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-metric-independence-of-total-curvature-on-a-deformed-sphere",
+        "kind": "example",
+        "title": "A deformed sphere has the same total curvature",
+        "deps": [
+          "cor-total-gaussian-curvature-is-independent-of-the-riemannian-metric",
+          "ex-gauss-bonnet-for-the-round-sphere",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume full AC. Any smooth positive metric on the underlying oriented sphere, including the induced metric of an ellipsoid, has total Gaussian curvature 4π although its pointwise curvature need not be constant.",
+        "strategy": "The preceding round-sphere example computes χ=2. Apply metric independence to any other smooth metric on the same oriented sphere, giving total curvature 4π. For a nonspherical ellipsoid, unequal principal radii at different axes show its induced K varies, so constancy of the integral is substantive.",
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "Lee, Riemannian Manifolds: An Introduction to Curvature, Chapter 9",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Chapter 9, printed pp. 156–172; Theorems 9.1, 9.3, 9.7 and Problem 9-5"
+            },
+            {
+              "title": "Datar, Lectures on Riemannian Geometry, Lectures 1–2",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Lectures 1–2, printed pp. 3–15; Theorems 1.3.2, 2.0.1 and 2.2.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

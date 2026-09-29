@@ -1,0 +1,80 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "20",
+  "input_sha256": "f821cfd4f12bc410cdd42b717129ca3aebad6279156bf28b3285e82cb40b4754",
+  "decisions": [
+    {
+      "id": "thm-alphabet-reduction-step",
+      "model": "gpt-6-sol",
+      "context_sha256": "f37fc258410a7de7db60c1917463a56523e22d68eb5dfe7aa5815a07ee57f875",
+      "outcome": "false_positive",
+      "reason": "The general assignment-tester interface permits arity zero, but H is built from the specific deterministic tester of thm-two-piece-pcp-of-proximity, not an arbitrary tester. Its proof steps 1.2 and 2.3 explicitly list BLR triples (arity 3), tensor six-tuples (6), equation pairs (2), corrected slice quadruples (4), and raw-bit comparison triples (3). Step 3.2 pads by duplicating rows, without adding empty tuples. The composition definition maps every tuple coordinatewise and retains repetitions, including loops, so each resulting constraint still has arity between 2 and 6. Thus the conversion lemma's 1 <= k_i <= 6 premise holds. For an edgeless input there are no constraints and the premise is vacuous. The claimed zero-arity gap is a false positive against this concrete construction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-alphabet-reduction-step",
+      "disposition": "unaffected",
+      "post_sha256": "2d99596fce6467c70a5fd506bf22bbd4704bd93096c1e84f56b4f4acc81bfe63",
+      "review_context_sha256": "b2cba4c88d33189d514030802777a3aa6e4d81e3df0dd2c616ae28fcd7035bfe",
+      "reason": "The general assignment-tester interface permits arity zero, but H is built from the specific deterministic tester of thm-two-piece-pcp-of-proximity, not an arbitrary tester. Its proof steps 1.2 and 2.3 explicitly list BLR triples (arity 3), tensor six-tuples (6), equation pairs (2), corrected slice quadruples (4), and raw-bit comparison triples (3). Step 3.2 pads by duplicating rows, without adding empty tuples. The composition definition maps every tuple coordinatewise and retains repetitions, including loops, so each resulting constraint still has arity between 2 and 6. Thus the conversion lemma's 1 <= k_i <= 6 premise holds. For an edgeless input there are no constraints and the premise is vacuous. The claimed zero-arity gap is a false positive against this concrete construction. The binary-star proof handles repeated variables and empty relations and loses at most a factor six. Composition gives 1/8000, hence the output retains 1/48000. The edgeless construction has no vertices or edges. For nonempty inputs N_e >= 2 ell >= 4, the local variable count is bounded by 4*2^(N_e^2) <= q_e; the LCM bound depends only on Sigma, proving linear output size and polynomial time for fixed Sigma. The owning contract and page describe this same composition and conversion and need no repair. No AC is needed for these explicit finite constructions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "thm-alphabet-reduction-step",
+      "model": "gpt-6-sol",
+      "context_sha256": "f37fc258410a7de7db60c1917463a56523e22d68eb5dfe7aa5815a07ee57f875",
+      "outcome": "false_positive",
+      "reason": "The general assignment-tester interface permits arity zero, but H is built from the specific deterministic tester of thm-two-piece-pcp-of-proximity, not an arbitrary tester. Its proof steps 1.2 and 2.3 explicitly list BLR triples (arity 3), tensor six-tuples (6), equation pairs (2), corrected slice quadruples (4), and raw-bit comparison triples (3). Step 3.2 pads by duplicating rows, without adding empty tuples. The composition definition maps every tuple coordinatewise and retains repetitions, including loops, so each resulting constraint still has arity between 2 and 6. Thus the conversion lemma's 1 <= k_i <= 6 premise holds. For an edgeless input there are no constraints and the premise is vacuous. The claimed zero-arity gap is a false positive against this concrete construction."
+    }
+  ],
+  "repair_notes": {
+    "content_changes": "None. The guard equals repeat-1.json before[id]; no Statement or Definition changed, so no downstream event is generated.",
+    "local_evidence": [
+      "items/thm-two-piece-pcp-of-proximity.md: Facts F4/F7/F8/F12/F13 and proof steps 1.2, 2.3, 3.2; every emitted tuple has positive length and padding only duplicates rows.",
+      "items/def-composition-with-an-assignment-tester.md: Definition of phi_e and the copied ordered constraint tuples; coordinate identifications retain repeated occurrences.",
+      "items/lem-bounded-arity-boolean-csp-to-binary-constraint-graph.md: Statement and proof 1.1, 2.2, 3.1; positive star size and disjoint edge records yield the factor-six bound.",
+      "items/lem-composition-preserves-perfect-completeness.md and items/lem-composition-transfers-rejection-ratio.md: full arguments for shared-block completeness and the averaged 1/8000 lower bound.",
+      "research/frontier-36-complete-batch-20.proof-contracts.json: thm-alphabet-reduction-step entry; library/computability-theory/alphabet-reduction-and-the-pcp-theorem.md: page interface."
+    ],
+    "sources": "No external source consulted or claimed. The disputed hypothesis follows directly from the fully specified local tester and composition constructions, which were read and checked.",
+    "checks": [
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-36-complete --items thm-alphabet-reduction-step",
+        "exit_code": 0,
+        "result": "Hashes captured immediately after mathematical review."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-alphabet-reduction-step.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-alphabet-reduction-step.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/rendercheck.mjs --help",
+        "exit_code": 130,
+        "result": "This tool did not treat --help as a help request; the unintended broad scan was interrupted without a result, then rerun above with the assigned item path. No broad validation claimed."
+      }
+    ],
+    "published_ledger": "No published defect found in the examined uses; no published-ledger update proposed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection of this false-positive adjudication; no content repair, independent rejudgment, certification or cycle was performed by this worker."
+  }
+}

@@ -8,11 +8,12 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-the-opposite-of-an-abelian-category-is-abelian,
-       def-image-and-coimage-in-a-category-with-kernels-and-cokernels]
+       def-image-and-coimage-in-a-category-with-kernels-and-cokernels,
+       def-subobject-and-quotient-object]
 justified_by: [thm-the-subobject-inequalities-underlying-exactness]
 landmark: true
 verification:
-  audited: 2026-08-29
+  audited: 2026-09-29
   precheck: n/a
 sources:
   scraped: []

@@ -22,6 +22,7 @@ parts:
       - the-argument-principle-and-rouche
       - the-gamma-function
       - mittag-leffler-and-runges-theorem
+      - jensen-theory-and-nevanlinnas-first-main-theorem
       - the-hartogs-phenomena
       - subharmonic-functions-and-the-dirichlet-problem
       - the-residue-theorem
@@ -31,10 +32,13 @@ parts:
       - domains-of-holomorphy-and-pseudoconvexity
       - normal-families-and-montels-theorem
       - conformal-mapping-branches-and-the-schwarz-lemma
+      - the-dbar-complex-and-integral-solutions
       - bloch-schottky-and-picard
       - the-riemann-mapping-theorem
       - simply-connected-plane-domains
+      - green-functions-harmonic-measure-and-conformal-invariance
       - analytic-continuation-and-monodromy
+      - riemann-surfaces-branched-maps-and-differentials
 ---
 
 ## holomorphic-functions
@@ -47,14 +51,15 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-Contour integrals, Goursat, and Cauchy's formula turn local holomorphy into analyticity,
-derivative estimates, residues, and zero-pole counting. Poisson, Dirichlet, Hartogs,
-pseudoconvexity, Runge-Mittag-Leffler, Gamma, and Weierstrass extend that control to
-boundary values, approximation, principal parts, growth, and special functions, while
-Montel, Schwarz-Pick, Bloch, Schottky, Picard, and Riemann mapping complete the conformal
-side. Simply connected domains and analytic continuation globalize local germs through
-periods, primitives, harmonic conjugates, monodromy, and Riemann surfaces. The zeta page
-then applies the same machinery to a central Dirichlet series: Euler products hold on
-$\operatorname{Re}s>1$, eta and theta-Mellin formulas continue it meromorphically, and
-the completed $\Lambda$ and $\xi$ package the functional equation, zero symmetries,
-Hadamard product, and special values.
+Contour integrals, Goursat and Cauchy's formula turn local holomorphy into analyticity,
+derivative estimates, residues and zero-pole counting; Poisson, Dirichlet, Hartogs,
+pseudoconvexity, Runge-Mittag-Leffler, Gamma and Weierstrass extend that control to
+boundary values, approximation, principal parts and special functions; Montel,
+Schwarz-Pick, Bloch-Schottky-Picard and Riemann mapping complete the conformal side, and
+simply connected domains with analytic continuation globalise germs through periods,
+primitives, harmonic conjugates and monodromy. Green kernels and harmonic measure add
+conformal covariance; the Poisson-Jensen formula yields Nevanlinna's first main theorem
+and order of growth; Cauchy-Pompeiu and Bochner-Martinelli solve the $\bar\partial$
+equation, giving Dolbeault vanishing and Hartogs extension; and Riemann surfaces with
+branched maps give genus and Riemann-Hurwitz. The zeta page applies it to Euler products,
+meromorphic continuation and the functional equation.

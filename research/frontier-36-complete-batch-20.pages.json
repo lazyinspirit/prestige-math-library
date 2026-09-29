@@ -1,0 +1,1143 @@
+[
+  {
+    "order": 649,
+    "id": "alphabet-reduction-and-the-pcp-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Alphabet Reduction and the PCP Theorem",
+    "companion": "alphabet-reduction-and-the-pcp-theorem-examples",
+    "requires": [
+      "gap-amplification-and-assignment-testing",
+      "arithmetization-and-the-sum-check-protocol",
+      "the-cook-levin-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-pcp-verifier-randomness-query-and-proof-length",
+        "kind": "definition",
+        "title": "PCP verifier resources and deterministic proof strings",
+        "statement": "A nonadaptive PCP verifier is a uniform polynomial-time randomized oracle algorithm on input x and a fixed deterministic proof string pi. Its worst-case resources are r(n) unbiased random bits, q(n) queried proof symbols, and L(n) addressable proof symbols; completeness and soundness are acceptance probabilities over verifier coins for one fixed proof.",
+        "deps": [
+          "def-np-by-verifiers",
+          "def-uniform-finite-probability-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §5 proof of Lemma 1.8, printed pp. 18–19",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            }
+          ]
+        },
+        "strategy": "Fix the proof before sampling coins, require query addresses in [L(n)] and polynomial-time computation of each coin-string transcript, and count queried symbols rather than their index length. For a fixed finite proof alphabet encode each symbol by constantly many bits; pad short proofs and use a canonical uniform coin space. The prover does not toss the verifier coins.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-pcp-class-with-completeness-and-soundness",
+        "kind": "definition",
+        "title": "PCP classes with completeness and soundness",
+        "statement": "PCP(r,q;c,s) consists of languages with verifiers of the preceding resource type and a polynomially bounded proof length, completeness at least c and soundness at most s for constants 0<=s<c<=1. PCP(log n,O(1)) means O(log n) coins, a constant number of bit queries, perfect completeness and some constant soundness below one.",
+        "deps": [
+          "def-pcp-verifier-randomness-query-and-proof-length"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Quantify the same verifier uniformly over all input lengths: for yes inputs some fixed proof achieves acceptance at least c, and for no inputs every fixed proof has acceptance at most s. State the polynomial proof-length convention and explain that the notation O(1) counts constant queries, not exactly one query.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-two-query-pcps-and-constraint-graphs-are-equivalent",
+        "kind": "lemma",
+        "title": "Two-query PCPs and binary constraint graphs",
+        "statement": "For fixed finite alphabet and polynomial-size explicit binary constraint graphs with at least one edge, uniformly sampling an edge gives a nonadaptive two-symbol-query verifier with O(log m) random bits and rejection at least half the graph unsatisfaction; conversely a nonadaptive two-symbol-query verifier with r coins gives an explicit graph with at most 2^r edges and the same acceptance fraction, counting coin strings with multiplicity.",
+        "deps": [
+          "def-pcp-class-with-completeness-and-soundness",
+          "def-constraint-graph-and-labeling-value",
+          "def-gap-csp"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Forward: use ceil(log2 m) coins, map the first m indices to edges and accept surplus strings; the rejection fraction lies between UNSAT/2 and UNSAT. Reverse: for each coin string create the ordered pair of queried proof locations and its acceptance relation; if a transcript queries fewer than two symbols, pad its tuple with one fixed dummy proof coordinate and make the relation ignore dummy values. Repeated queries become loops and repeated coin outcomes remain parallel edges. Remove unused original proof coordinates while retaining the dummy when needed, and encode fixed alphabet symbols into a constant number of bits. Check polynomial explicit output when r=O(log n).",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-walsh-hadamard-encoding-and-relative-distance",
+        "kind": "definition",
+        "title": "Walsh–Hadamard encoding and relative Hamming distance",
+        "statement": "For n>=0 and u in F_2^n, WH_n(u) is the truth table indexed by r in F_2^n of the linear function r maps to u dot r. The relative distance between two equal-length tables is the fraction of indexed positions where they differ; for n=0 the table has one position.",
+        "deps": [
+          "def-linearity-test",
+          "def-hadamard-linearity-constraint-system"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.4.2 proof of Theorem 18.21 Step 2, printed pp. 366–367",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Fix the canonical lexicographic indexing of the 2^n table and distinguish a proof table from its decoded vector. Define relative Hamming distance using the uniform cube measure, including n=0, and record that the coordinate at unit vector e_i equals u_i. No decoding or linearity claim is folded into the definition.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-walsh-hadamard-code-has-distance-one-half",
+        "kind": "lemma",
+        "title": "Distinct Walsh–Hadamard words differ on half the cube",
+        "statement": "For n>=1 and distinct u,v in F_2^n, the tables WH_n(u), WH_n(v) differ at exactly 2^(n-1) of their 2^n coordinates, so their relative distance is one half; for n=0 no distinct messages exist.",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose j with (u-v)_j=1 and pair every mask r with r+e_j. The value (u-v) dot r flips under this involution, so exactly one mask in each pair contributes a disagreement. Count 2^(n-1) disjoint pairs and divide by 2^n. The n=0 case is vacuous.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-robust-codeword-blocks-for-constraint-graphs",
+        "kind": "definition",
+        "title": "Shared codeword blocks and edge acceptance circuits",
+        "statement": "For a fixed alphabet Sigma of size W>=2, put k=ceil(log2 W), select the first W Walsh–Hadamard words WH_k(u), and let ell=2^k satisfy W<=ell<2W. Their relative distance is delta=1/2. Give every nonisolated graph vertex one shared ell-bit block (isolated vertices are discarded). For each ordered edge relation R, its Boolean edge circuit has two formal ell-bit named input pieces and accepts exactly the pairs of valid blocks coding labels in R; for a loop, composition identifies both formal pieces with the same physical shared block.",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "lem-walsh-hadamard-code-has-distance-one-half",
+          "def-constraint-graph-and-labeling-value",
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose the first W k-bit messages in lexicographic order and compute each length-ell Walsh–Hadamard table by explicit dot products. The local code-distance lemma gives relative distance exactly 1/2; ell=2^k lies between W and 2W, hence is a constant when the input alphabet is fixed. List all allowed encoded pairs in a fixed order, and implement equality to each pair and their OR as a Boolean circuit with two formal named pieces. The relation table has W squared entries, so the circuit has size polynomial in W. Discard isolated vertices, which do not affect value, keep endpoint order, and use the same physical block for both formal input pieces of a loop when composing gadgets.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-robust-edge-circuit-has-distance-gap",
+        "kind": "lemma",
+        "title": "A violated decoded edge is far from edge-circuit acceptance",
+        "statement": "Decode each shared block by the nearest valid Walsh–Hadamard codeword with fixed tie breaking. If an original edge is violated by the decoded labels, its two displayed formal input blocks are at relative Hamming distance at least delta/4=1/8 from the accepting inputs of its edge circuit, where delta=1/2 is the local code distance; the bound also holds when a loop identifies the two formal blocks and when the accepting set is empty.",
+        "deps": [
+          "def-robust-codeword-blocks-for-constraint-graphs",
+          "def-assignment-tester-and-rejection-ratio"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Any accepted two-piece tuple must change at least one decoded endpoint label. If b is closest to WH_k(a), the triangle inequality and nearest-codeword choice give dist(b,WH_k(a-prime))>=dist(WH_k(a),WH_k(a-prime))/2>=ell/4. Divide by the 2ell named input bits to obtain delta/4=1/8. For a loop, substitute the same physical block into both formal pieces; the preceding two-piece distance argument still applies, even if the accepting pair uses distinct labels. If the edge circuit has no accepting input use the published empty-SAT distance convention, which is one.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-random-subsum-detects-a-nonzero-binary-vector",
+        "kind": "lemma",
+        "title": "Random binary subsums detect every nonzero discrepancy",
+        "statement": "For a nonzero d in F_2^m and uniform z in F_2^m, Pr(z dot d=1)=1/2. This remains exact when d is the vector of violated quadratic equations or a difference of two decoded prefixes.",
+        "deps": [
+          "lem-walsh-hadamard-code-has-distance-one-half"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "The function z maps to z dot d is a nonzero linear Boolean function. Apply the paired-mask argument of the preceding code-distance lemma, or pair z with z+e_j at a nonzero coordinate. The events have equal cardinality; no independence among coordinates of d is assumed.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-quadratic-equation-instance-and-tensor-code-oracles",
+        "kind": "definition",
+        "title": "Quadratic equations and tensor-code oracle tables",
+        "statement": "A QUADEQ instance over F_2 has N variables w, M equations A_j dot (w tensor w)=b_j with canonical ordered-pair coordinates. The intended proof oracles are the two truth tables f=WH_N(w) and g=WH_(N^2)(w tensor w); diagonal tensor coordinates encode linear terms because bits square to themselves.",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "def-quadratic-consistency-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Fix the full ordered tensor coordinate set [N] times [N] and put each monomial coefficient only at its upper-triangular coordinate, avoiding characteristic-two double counting. State the equation-list encoding and the two oracle domains and lengths 2^N and 2^(N^2). The published tensor test supplies the precise query convention.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix",
+        "kind": "lemma",
+        "title": "Boolean circuits become quadratic systems with a fixed input prefix",
+        "statement": "A Boolean circuit with s inputs, n named prefix inputs and m gates has N=s+m wire variables and m+1 equations over F_2 such that a named input x extends to a solution exactly when some completion of the remaining inputs makes the circuit accept x. Each equation has at most four monomials and the map is deterministic polynomial time.",
+        "deps": [
+          "def-quadratic-equation-instance-and-tensor-code-oracles",
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "def-circuit-sat"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Order input wires with the n named coordinates first and then gates topologically. For NOT use z+x=1, AND z+xy=0, OR z+x+y+xy=0, constants z=0 or z=1, and append output=1. Put linear terms on diagonal tensor coordinates. Prove both directions by induction along the gate order and count one constant-size equation per gate. Keep existential unnamed inputs explicit, so the accepted prefix set is exactly the projection of the solution set.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-blr-testing-supplies-nearby-linear-decoders",
+        "kind": "lemma",
+        "title": "The BLR test supplies a nearby unique linear decoder",
+        "statement": "For f:F_2^n to F_2, if its BLR rejection probability is epsilon<1/2 then f is within relative distance at most epsilon of a linear Walsh–Hadamard word. If this distance is below 1/4 the decoder is unique, and two-query self-correction recovers any requested decoded value with probability at least 1-2epsilon.",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "lem-walsh-hadamard-code-has-distance-one-half",
+          "lem-boolean-cube-fourier-inversion-and-parseval",
+          "def-self-correction-of-a-noisy-linear-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For h=(-1)^f derive the BLR acceptance identity 2Pr[accept]-1=sum_a hhat(a)^3 by Fourier inversion and orthogonality, then bound the cubic sum by max_a hhat(a) times Parseval. A coefficient at least 1-2epsilon corresponds to a linear word agreeing on at least 1-epsilon of inputs. Distinct codewords are 1/2 apart, making the decoder unique below 1/4. For a fixed query r, sample y uniformly and use f(y)+f(r+y); each of the two sample points is uniform, so a union bound gives error at most 2epsilon.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-tensor-consistency-test-soundness",
+        "kind": "lemma",
+        "title": "Tensor consistency rejects a wrong decoded tensor",
+        "statement": "If linear tables f=WH_N(u), g=WH_(N^2)(v) have v different from u tensor u, the test on independent uniform r,s that checks g(r tensor s)=f(r)f(s) rejects with probability at least 1/4. If the tables are delta_f and delta_g close to their decoders, the six-query self-corrected version rejects with probability at least 1/4-4delta_f-2delta_g.",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "def-quadratic-consistency-test",
+          "lem-random-subsum-detects-a-nonzero-binary-vector",
+          "def-self-correction-of-a-noisy-linear-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.4.2 proof of Theorem 18.21 Step 2, printed pp. 366–367",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Put D=v-u tensor u. Some column of D is nonzero, so a uniform row r gives rD nonzero with probability at least 1/2; conditioned on rD nonzero, the random subsum principle makes rDs=1 with probability 1/2. The ideal rejection is their product. Each of the two f values and one g value is replaced by a two-query self-correction; union-bound the three correction failures to lose at most 4delta_f+2delta_g, without claiming their outcomes independent.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-random-subsum-verifies-all-quadratic-equations-with-constant-error",
+        "kind": "lemma",
+        "title": "A random subsum checks all quadratic equations at once",
+        "statement": "If a decoded vector u fails at least one equation A_j dot (u tensor u)=b_j, then a uniformly random binary coefficient vector z makes the combined equation fail with probability exactly one half. Querying a g table delta-close to WH_(N^2)(u tensor u) by two-query self-correction preserves rejection at least 1/2-2delta.",
+        "deps": [
+          "def-quadratic-equation-instance-and-tensor-code-oracles",
+          "lem-random-subsum-detects-a-nonzero-binary-vector",
+          "def-self-correction-of-a-noisy-linear-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Form the nonzero residual vector d_j=A_j dot (u tensor u)+b_j; the combined residual is z dot d. The preceding random-subsum lemma gives exact half. The verifier computes A(z) and b(z) from the explicit equations and applies Corr_g(A(z);y)=g(y)+g(A(z)+y). If g differs from the intended linear table on a delta fraction, both queried coordinates are uniform, so a union bound gives correction failure at most 2delta uniformly in A(z); no BLR-rejection conversion is needed. Subtract this loss from one half. A single sampled combination replaces M separate equation queries.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-constant-query-exponential-pcp-for-quadratic-equations",
+        "kind": "theorem",
+        "title": "An exponential-length constant-query PCP for quadratic equations",
+        "statement": "For an N-variable M-equation QUADEQ instance, encoded with N in unary and its row-major coefficient matrices listed explicitly, there is a uniform nonadaptive verifier of a deterministic proof of length 2^N+2^(N^2), using O(N^2+M) random bits and at most six bit queries. Satisfiable instances have perfect completeness; unsatisfiable instances reject every proof with an absolute constant probability.",
+        "deps": [
+          "def-quadratic-equation-instance-and-tensor-code-oracles",
+          "def-linearity-test",
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "lem-blr-testing-supplies-nearby-linear-decoders",
+          "lem-tensor-consistency-test-soundness",
+          "lem-random-subsum-verifies-all-quadratic-equations-with-constant-error"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.4.1 and §18.4.2 proof of Theorem 18.21, Steps 1–3, printed pp. 363–367",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the f and g truth tables as the fixed proof. Select uniformly among BLR(f), BLR(g), the six-query self-corrected tensor test, and the two-query self-corrected random-equation test. Honest tables pass every family. For a fixed proof, if either BLR rejection probability is at least 1/100, that branch gives mixture rejection at least 1/400. Otherwise the nearby-decoder lemma gives unique linear decoders at distances δf,δg<1/100. If the decoded tensor is wrong, the tensor family rejects at least 1/4-4δf-2δg>19/100; if it is correct, unsatisfiability gives a failed equation and the equation family rejects at least 1/2-2δg>48/100. Prove the mixture lower bound 1/400, exact random-bit bound 2+max(2N,2N^2,4N+N^2,M+N^2), six-query maximum, nonadaptivity, and polynomial construction under an explicit unary-N, dense-row encoding. Handle N=M=0 separately with a deterministic BLR test; then O(N^2+M) holds also at zero.",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-pcp-of-proximity-and-concatenation-test",
+        "kind": "definition",
+        "title": "Two-piece PCP of proximity and concatenation check",
+        "statement": "For a Boolean circuit C with s inputs, m non-input nodes, and two disjoint ordered lists of named input wires of lengths n1,n2, a two-piece PCP of proximity with parameters (η,δ0) consists of a uniform nonadaptive verifier on fixed tables π1,π2 of lengths 2^n1,2^n2 and private proof data of length at most 2^poly(s+m). It uses poly(s+m) random bits and at most six bit queries, has perfect completeness for every satisfying named pair, and has proximity soundness: rejection below η implies that both tables are within relative distance δ0=1/100 of Walsh–Hadamard encodings of one named pair that extends to a satisfying circuit input. In the local QUADEQ construction the named wires are placed consecutively in the reduced instance, and each piece is checked against its own slice of one shared decoded longer word; the second slice is offset by n1.",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "thm-constant-query-exponential-pcp-for-quadratic-equations",
+          "lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix",
+          "def-self-correction-of-a-noisy-linear-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§5, 7",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.4.1–18.4.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the fixed-prefix circuit-to-QUADEQ reduction with the first n1+n2 wire variables ordered as the two named pieces. A private proof supplies the two tables for the resulting QUADEQ verifier. For each piece i, define its slice injection j_i:F_2^{n_i}->F_2^N by inserting a mask in that consecutive coordinate block and zeros elsewhere. The raw concatenation check compares the two queried values at r and j_i(r); its four-query robust form compares the two self-corrected values Corr_{π_i}(r;y)=π_i(y)+π_i(y+r) and Corr_F(j_i(r);Y)=F(Y)+F(Y+j_i(r)). All tables and private data are fixed before the verifier coins. Proximity uses normalized relative Hamming distance; n_i=0 has a singleton table. One shared longer decoded word is used for both offset slices.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-concatenation-test-enforces-a-shared-prefix",
+        "kind": "lemma",
+        "title": "Concatenation testing enforces the same decoded prefix",
+        "statement": "For 0≤n≤N, a fixed coordinate injection j:[n]→[N], and a∈F_2^n,w∈F_2^N, write J_j(r) for r inserted in coordinates j and zero elsewhere, and w|_j=(w_{j(1)},…,w_{j(n)}). The two-query raw slice check on WH_n(a),WH_N(w) compares their values at r,J_j(r); it accepts every mask iff a=w|_j and otherwise rejects on exactly half the masks. For arbitrary fixed tables at relative distances δ_1,δ_2∈[0,1] from those codewords, the four-query self-corrected check rejects with probability at least 1/2−2δ_1−2δ_2 when a≠w|_j. It is nonadaptive, including n=0.",
+        "deps": [
+          "def-pcp-of-proximity-and-concatenation-test",
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "lem-random-subsum-detects-a-nonzero-binary-vector",
+          "def-self-correction-of-a-noisy-linear-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.4.3, concatenation test and Corollary 18.26, printed pp. 368–369",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For a specified coordinate injection j:[n]->[N], embed each uniform short mask r as J_j(r) with coordinate r_k at j(k) and zero elsewhere. The ideal parity difference is (a+w|_j)·r, so it is always zero when the decoded vectors agree and is one on exactly half the masks when they differ, by the random-subsum lemma. In the four-query version, independently self-correct each fixed table at its requested point. For fixed r the two query locations in each correction are uniform, so the error probabilities are at most 2delta_1 and 2delta_2; a union bound lowers the ideal rejection probability by at most their sum. Handle n=0 explicitly: the slice is the unique zero vector and differing decoded prefixes are impossible. The general injection specializes to the first and offset second named pieces.",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-two-piece-pcp-of-proximity",
+        "kind": "theorem",
+        "title": "A two-piece constant-query PCP of proximity",
+        "statement": "Let $C$ be an explicit topologically ordered Boolean circuit over constants, NOT, AND and OR, with $s$ input wires and $m$ non-input nodes, and let $X_1,X_2$ be disjoint ordered lists of its input wires of lengths $n_1,n_2$. Put $n=n_1+n_2$ and $N=s+m\\ge1$; a named pair is satisfying when it extends to an input on which $C$ outputs one. There is a deterministic uniform construction of a nonadaptive two-piece proximity verifier with external tables of lengths $2^{n_1},2^{n_2}$ and private tables $F,G$ of lengths $2^N,2^{N^2}$. It makes at most six bit queries and uses at most $3+5N^2$ unbiased random bits; its total proof length is $2^{n_1}+2^{n_2}+2^N+2^{N^2}\\le4\\cdot2^{N^2}$. It has perfect completeness, and rejection probability below $\\eta=1/800$ implies that both external tables are within relative distance $\\delta_0=1/100$ of the Walsh–Hadamard encodings of one satisfying named pair. For the combined named list $X_1\\Vert X_2$, adding comparisons with the two-query self-correctors of the corresponding tables at unit vectors gives an explicit Boolean assignment tester of arity at most six and rejection ratio $\\rho_0=1/1000$, including the empty accepted-set and zero-named-input conventions; it can be enumerated with at most $2^{7N^2+4}$ constraints.",
+        "deps": [
+          "def-pcp-of-proximity-and-concatenation-test",
+          "def-boolean-circuit-size-depth-fanin-and-basis",
+          "def-linearity-test",
+          "def-quadratic-equation-instance-and-tensor-code-oracles",
+          "def-self-correction-of-a-noisy-linear-function",
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "def-assignment-tester-and-rejection-ratio",
+          "lem-blr-testing-supplies-nearby-linear-decoders",
+          "lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix",
+          "lem-concatenation-test-enforces-a-shared-prefix",
+          "lem-tensor-consistency-test-soundness",
+          "lem-random-subsum-verifies-all-quadratic-equations-with-constant-error"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, §18.4.3, concatenation test and Corollary 18.26, printed pp. 368–369 (PDF pp. 384–385)",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce C to QUADEQ with the two named lists made consecutive, and use external tables pi_1, pi_2 plus private tables F=WH_N(w), G=WH_{N^2}(w tensor w). Choose uniformly among eight equal-weight families: BLR on all four tables, the six-query tensor test, the random-equation test, and one corrected slice test for each named piece. If core rejection is below 1/800, every family rejection is below 1/100, so the four BLR decoders are unique and within 1/100. The tensor, equation, and slice bounds then force G to decode to w tensor w, force w to solve the QUADEQ instance, and force each external decoded word to equal its designated slice; hence the named pair satisfies C and both tables are within 1/100 of its encodings. For the tester on X_1||X_2, add a ninth equal-weight family that chooses a named coordinate uniformly and compares its raw bit with the two-query correction of the appropriate external table at that unit vector. In the high-core-rejection case the eight core families contribute at least 1/900 to the nine-family rejection; in the low-core-rejection case, if raw x differs from the decoded satisfying pair in fraction d, the comparison family rejects with probability at least (1-2/100)d. For zero named inputs omit comparisons and use the eight-family core bound with the stated distance convention. Equalize finite family domains by duplicating each constraint to a common size; explicit enumeration yields at most 2^(7N^2+4) constraints. Prove every test bound and endpoint case locally from its declared earlier dependency.",
+        "dependency_level": 7
+      },
+      {
+        "id": "def-composition-with-an-assignment-tester",
+        "kind": "definition",
+        "title": "Composition of an edge system with an assignment tester",
+        "statement": "For each finite edge-indexed constraint graph over a finite alphabet, apply the canonical two-piece Boolean assignment tester to the robust circuit of each ordered edge. Identify only each gadget’s named raw input bits with the incident vertex blocks (coordinatewise to the same block for a loop), and rename every auxiliary gadget variable privately by edge. If q_e>0 is the local constraint count, duplicate every row of gadget e exactly M/q_e times for M=lcm_e q_e; the resulting Boolean constraint system has arity at most six and exactly M rows per edge. An edgeless input gives the empty system.",
+        "deps": [
+          "def-robust-codeword-blocks-for-constraint-graphs",
+          "def-assignment-tester-and-rejection-ratio",
+          "thm-two-piece-pcp-of-proximity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §5.1, Definition 5.1 (composition), Lemma 1.8 and its proof",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5.2, Corollary 18.35 and proof of Lemma 18.30",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the explicit ordered edge circuits and deterministic local tester outputs. For a nonempty edge set, each robust circuit has two named pieces of length ell>=2, so n=2ell>0; the local tester construction has nine nonempty families and hence q_e>0. Their finite positive counts have a canonical least common multiple M. Map the first and second formal input pieces to their endpoint blocks; for a loop both pieces map coordinatewise to the same block. Rename every other variable as (e,z), preserving ordered tuples and relations, and emit M/q_e copies of each local constraint. Thus every edge contributes M constraints, local violation fractions are unchanged, and every global labeling has violation fraction equal to the average of its per-edge local fractions. If there are no edges, emit no variables or constraints.",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-composition-preserves-perfect-completeness",
+        "kind": "lemma",
+        "title": "Composition preserves perfect satisfiability",
+        "statement": "For every finite binary constraint graph G over a finite alphabet Σ with |Σ|≥2, if val(G)=1 then its Boolean arity-six tester composition H=G∘P has val(H)=1, including the edgeless case; for H, val denotes the maximum satisfied fraction and is one on an empty constraint list.",
+        "deps": [
+          "def-composition-with-an-assignment-tester",
+          "def-robust-codeword-blocks-for-constraint-graphs",
+          "thm-two-piece-pcp-of-proximity",
+          "def-constraint-graph-and-labeling-value",
+          "def-assignment-tester-and-rejection-ratio"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §5, Lemma 1.8 and proof (perfect-completeness direction)",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5.2, Corollary 18.35 and proof of Lemma 18.30 (completeness direction)",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Handle an edgeless input by the empty-system value convention. Otherwise finiteness and val(G)=1 give a labeling satisfying every edge. Encode each vertex label by its prescribed block codeword; each robust ordered edge circuit accepts those endpoint blocks, including diagonal inputs for loops. The local two-piece assignment tester has perfect completeness, so each edge has a satisfying local extension. Choose the lexicographically least finite Boolean extension per edge; private auxiliary variables are disjoint and every named endpoint bit agrees with the globally fixed blocks. Their union labels H and satisfies every original and duplicated constraint. No axiom of choice is used.",
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-composition-transfers-rejection-ratio",
+        "kind": "lemma",
+        "title": "Composition transfers a constant fraction of unsatisfaction",
+        "statement": "For every finite binary constraint graph G over a finite alphabet Σ with |Σ|≥2 and its Boolean arity-six composition H=G∘P, let δ=1/2 be the relative distance of the shared Walsh–Hadamard block code and ρ₀=1/1000 the local two-piece assignment-tester rejection ratio. Then UNSAT(H)≥(ρ₀δ/4)·UNSAT(G)=UNSAT(G)/8000, including the edgeless case and arbitrary shared blocks and private gadget labels.",
+        "deps": [
+          "def-composition-with-an-assignment-tester",
+          "lem-robust-edge-circuit-has-distance-gap",
+          "thm-two-piece-pcp-of-proximity",
+          "def-assignment-tester-and-rejection-ratio",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §5 Lemma 1.8 proof (soundness/composition direction), printed pp. 17–18",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5.2 Corollary 18.35 and proof of Lemma 18.30, printed pp. 378–379",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "If E(G) is empty, both global unsatisfaction values are zero. Otherwise fix an arbitrary Boolean labeling τ of H and decode each shared vertex block once to its nearest valid codeword, using the alphabet order to break ties; extend to isolated graph vertices by the first alphabet symbol. The shared blocks give one global labeling σ, so at least UNSAT(G) of the original edge records are violated. For each violated edge, including loops, the robust-distance lemma puts its two-piece named input at relative distance at least δ/4 from the circuit-accepting set. The local two-piece theorem supplies an assignment tester of ratio ρ₀; its soundness definition forces every corresponding private labeling to violate at least ρ₀δ/4 of that gadget. The LCM equalization in the composition gives every edge exactly M rows, so its global violation fraction is the edge-average and is at least (ρ₀δ/4)UNSATσ(G)≥(ρ₀δ/4)UNSAT(G). Since τ was arbitrary, minimize over τ. The decoder and tie-break are deterministic; no choice principle is used.",
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-bounded-arity-boolean-csp-to-binary-constraint-graph",
+        "kind": "lemma",
+        "title": "Bounded-arity Boolean constraints become binary graph constraints",
+        "statement": "Every explicit Boolean constraint system with nonempty constraints of arities 1 through q, for fixed q>=2, has a deterministic binary constraint graph over the fixed alphabet {0,1} disjoint union {0,1}^q with at most q edges per original constraint, perfect completeness and UNSAT(output)>=UNSAT(input)/q. Named Boolean variables remain the shared old vertices.",
+        "deps": [
+          "def-assignment-tester-and-rejection-ratio",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For each original constraint introduce a private q-tuple vertex. For each occurrence make one edge to the corresponding old variable; its relation requires a bit label at that endpoint, an accepted tuple at the new endpoint, and equality of the selected tuple coordinate to the bit. Pad shorter tuples by ignored bits. If every edge of one star passes, the original constraint passes under the old bit labels; otherwise charge a failed old constraint to a failed edge in its disjoint star. For a non-bit label choose an arbitrary bit when decoding: every incident edge already fails. A satisfying Boolean labeling extends by accepted tuples.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-alphabet-reduction-step",
+        "kind": "theorem",
+        "title": "Fixed-alphabet reduction with constant gap retention",
+        "statement": "For each fixed input alphabet Sigma with at least two symbols, there is a deterministic binary-constraint reduction A_Sigma to one absolute fixed alphabet of size 2+2^6, preserving value one, with O_Sigma(m) edges and vertices, and UNSAT(A_Sigma(G))>=kappa*UNSAT(G) for the absolute kappa=(1/1000)*(1/2)/(4*6)=1/48000.",
+        "deps": [
+          "lem-composition-preserves-perfect-completeness",
+          "lem-composition-transfers-rejection-ratio",
+          "lem-bounded-arity-boolean-csp-to-binary-constraint-graph",
+          "def-composition-with-an-assignment-tester",
+          "def-robust-codeword-blocks-for-constraint-graphs",
+          "def-constraint-graph-and-labeling-value",
+          "def-assignment-tester-and-rejection-ratio",
+          "thm-two-piece-pcp-of-proximity",
+          "lem-walsh-hadamard-code-has-distance-one-half"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Compose the robust Walsh–Hadamard coded edge gadgets using the local two-piece tester and its rho_0*delta/4 soundness estimate. Convert their arity-at-most-six Boolean constraints to binary stars, losing at most a factor six and changing the alphabet to the fixed tagged 66-symbol set. The local code has delta=1/2 and the local tester rho_0=1/1000, so the final constant is 1/48000 independent of Sigma. For fixed Sigma the code length ell<2W, every edge circuit and gadget, and the equalizing M are constants, so construction and explicit output size are linear in edge count; edgeless input maps to edgeless output.",
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-alphabet-reduction-controls-size-and-degree",
+        "kind": "lemma",
+        "title": "Alphabet reduction controls explicit size and degree",
+        "statement": "For fixed input alphabet Sigma and input maximum degree d, A_Sigma has at most C_Sigma*m edges and O_Sigma(m) vertices, is computable in polynomial time in the explicit graph encoding, and has output maximum degree bounded by a constant depending only on Sigma and d. Its relation tables use the fixed 66-symbol alphabet.",
+        "deps": [
+          "thm-alphabet-reduction-step",
+          "def-composition-with-an-assignment-tester",
+          "lem-bounded-arity-boolean-csp-to-binary-constraint-graph",
+          "def-robust-codeword-blocks-for-constraint-graphs",
+          "thm-two-piece-pcp-of-proximity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "A graph with m nonempty edges has at most 2m nonisolated old vertices, hence at most 2m*ell shared code bits. Each edge contributes M fixed-size tester constraints, each of arity at most six; the binary-star conversion creates at most 6Mm edges and M m private tuple vertices. A shared bit belongs to at most d edge gadgets and at most 6M occurrences in each, yielding degree O(dM); all private degrees are bounded by gadget size. Endpoint names require O(log(m+2)) bits and all tables are constant size.",
+        "dependency_level": 11
+      },
+      {
+        "id": "def-dinur-pcp-transformation",
+        "kind": "definition",
+        "title": "One fixed-alphabet Dinur transformation",
+        "statement": "Let Sigma_star be the fixed 66-symbol alphabet of alphabet reduction. For an integer t above the published powering threshold at Sigma_star, define T_t on Sigma_star binary constraint graphs by first applying the published degree-reduction and graph-powering gap step R_t, then applying A to its resulting fixed-for-t alphabet Sigma_t.",
+        "deps": [
+          "thm-gap-amplification-step",
+          "thm-alphabet-reduction-step",
+          "lem-alphabet-reduction-controls-size-and-degree"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Fix Sigma_star before selecting t. Apply R_t in its actual domain, including the regularizing graph stage, then instantiate the alphabet reduction for the finite output alphabet Sigma_t. Both maps are deterministic; the second alphabet is Sigma_star again. Define the empty-graph branch as empty, and retain the input graph edge multiplicities and relation orientations.",
+        "dependency_level": 12
+      },
+      {
+        "id": "lem-one-transformation-preserves-satisfiability",
+        "kind": "lemma",
+        "title": "One Dinur transformation preserves perfect satisfiability",
+        "statement": "For every fixed t in the transformation domain, val(G)=1 implies val(T_t(G))=1, including edgeless inputs.",
+        "deps": [
+          "def-dinur-pcp-transformation",
+          "thm-gap-amplification-step",
+          "thm-alphabet-reduction-step",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "A satisfying labeling lifts through the published degree reduction and local-view powering, giving value one after R_t. Apply the alphabet reduction perfect-completeness clause to that powered graph. Both components map an empty graph to an empty graph, so the zero-edge convention is preserved.",
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-one-transformation-amplifies-gap",
+        "kind": "lemma",
+        "title": "One fixed-alphabet transformation doubles small gaps",
+        "statement": "There are fixed t, alpha>0 and T=T_t on Sigma_star graphs such that UNSAT(T(G))>=min(2*UNSAT(G),alpha). In particular the output alphabet is again Sigma_star, with no change of t between rounds.",
+        "deps": [
+          "def-dinur-pcp-transformation",
+          "thm-gap-amplification-step",
+          "thm-alphabet-reduction-step",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §1.3 Theorem 1.5 (Main), soundness clause and fixed output alphabet, printed pp. 4–5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5.1 gap amplification (Lemma 18.29) and §18.5.2 alphabet reduction (Lemma 18.30), printed pp. 370–379",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For fixed Sigma_star let R_t have bound beta*sqrt(t)*min(epsilon,c/t), where beta,c>0 are its actual constants. Alphabet reduction retains factor kappa=1/48000 independent of the intermediate alphabet. Choose one integer t>=t0 so kappa*beta*sqrt(t)>=2. Then UNSAT(T_t(G))>=kappa*beta*sqrt(t)*min(epsilon,c/t)>=min(2*epsilon,alpha) with alpha=min(1/2,kappa*beta*c/sqrt(t))>0. This order of fixing parameters avoids circular dependence on the powered alphabet.",
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-one-transformation-has-constant-factor-growth",
+        "kind": "lemma",
+        "title": "One fixed transformation has constant-factor growth",
+        "statement": "For the one t fixed in the doubling lemma, T maps every m-edge input to at most C*m edges and O(m) vertices for an absolute constant C fixed before input size, and is deterministic polynomial time on explicit encodings.",
+        "deps": [
+          "def-dinur-pcp-transformation",
+          "lem-one-transformation-amplifies-gap",
+          "thm-gap-amplification-step",
+          "lem-alphabet-reduction-controls-size-and-degree"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §1.3 Theorem 1.5 (size clause size(G′) ≤ C·size(G)), printed pp. 4–5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5.1 gap amplification (Lemma 18.29) and §18.5.2 alphabet reduction (Lemma 18.30), printed pp. 370–379",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "R_t has C_t*m edges and constant alphabet Sigma_t and degree d_t because Sigma_star and t were fixed. A_Sigma_t has C_A(Sigma_t)*C_t*m edges and O(m) vertices, and its output degree is constant because d_t is constant. Both stages enumerate their constant-size relation tables and have polynomial explicit-encoding time. Fix C=C_t*C_A(Sigma_t); it may be huge but has no dependence on m or iteration number.",
+        "dependency_level": 14
+      },
+      {
+        "id": "lem-logarithmically-many-iterations-reach-constant-gap",
+        "kind": "lemma",
+        "title": "Logarithmic iteration reaches a constant unsatisfaction gap",
+        "statement": "If a Sigma_star graph G_0 has m>=1 edges and UNSAT(G_0)>0, then G_k=T^k(G_0), with k=ceil(log2 m), has UNSAT(G_k)>=alpha and at most C^k*m=m^O(1) edges. If G_0 is satisfiable, all iterates are satisfiable.",
+        "deps": [
+          "lem-one-transformation-preserves-satisfiability",
+          "lem-one-transformation-amplifies-gap",
+          "lem-one-transformation-has-constant-factor-growth",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §1.3 Theorem 1.5 and the logarithmic-iteration paragraph, printed pp. 4–5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5 (iteration of Lemma 18.28 log m times), printed p. 370",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Any unsatisfiable m-edge graph has UNSAT at least 1/m because the minimum is attained among finitely many labelings. Induct the recurrence epsilon_i>=min(2^i/m,alpha), using the same T and alpha at every round. At k=ceil(log2 m), 2^k/m>=1; since alpha<=1/2, the gap is at least alpha. Multiply the fixed edge growth C each round to get C^k*m polynomial in m; composition of O(log m) fixed polynomial-time stages remains polynomial in the final explicit output size.",
+        "dependency_level": 15
+      },
+      {
+        "id": "lem-three-sat-to-binary-constraint-graph",
+        "kind": "lemma",
+        "title": "A three-CNF formula as a fixed-alphabet binary constraint graph",
+        "statement": "For a three-CNF formula with m clauses of exactly three literal occurrences each there is a polynomial-time graph over the fixed alphabet {0,1} disjoint union {0,1}^3 with exactly 3m edges whose value is one exactly when the formula is satisfiable; if unsatisfiable and m>=1 its UNSAT is at least 1/(3m). The zero-clause formula maps to an edgeless graph.",
+        "deps": [
+          "def-boolean-formula-cnf-and-sat",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Create one bit vertex per formula variable and one private 3-tuple vertex per clause. For occurrence j connect the tuple vertex to its variable with a relation requiring the tuple to satisfy that clause and its jth coordinate to equal the bit label. Repeated variables make parallel edges and use the same bit vertex. A satisfying assignment extends by its three clause bits. Conversely, if all three star edges pass the clause is true under the shared bit labels; any non-bit old label violates every incident star edge. Thus an unsatisfiable formula forces at least one failed edge for every graph labeling.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-gap-csp-is-np-hard",
+        "kind": "theorem",
+        "title": "Constant-gap binary CSP is NP-hard",
+        "statement": "For the absolute fixed alphabet Sigma_star and alpha>0 of the Dinur transformation, GapCSP(1,1-alpha) on explicit binary constraint graphs is NP-hard under deterministic polynomial-time many-one promise reductions.",
+        "deps": [
+          "lem-three-sat-to-binary-constraint-graph",
+          "thm-three-sat-is-np-complete",
+          "lem-logarithmically-many-iterations-reach-constant-gap",
+          "def-gap-csp",
+          "def-polynomial-time-many-one-reduction",
+          "def-constraint-graph-and-labeling-value",
+          "def-dinur-pcp-transformation",
+          "lem-one-transformation-has-constant-factor-growth",
+          "lem-one-transformation-amplifies-gap"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §1.3 Theorem 1.2 (inapproximability form, printed p. 3) and Theorem 1.5 (printed pp. 4–5)",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.5 (reduction from qCSP to GAP qCSP), printed pp. 370–371",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce a 3-CNF with m>=1 clauses to the three-edge-per-clause graph. Its alphabet is the same 66-symbol Sigma_star after a fixed injective relabeling of the ten symbols, and a labeling outside the ten-symbol subset cannot satisfy a typed relation, so satisfiability and the 1/(3m) gap persist. Iterate T for ceil(log2(3m)) rounds; the iteration lemma yields value one in YES and UNSAT>=alpha in NO with polynomial output size. Handle m=0 as a fixed yes graph. Cook-Levin/3-SAT NP-completeness gives hardness for every NP language by composition of polynomial reductions.",
+        "dependency_level": 16
+      },
+      {
+        "id": "thm-pcp-theorem-np-equals-pcp-log-n-o-one",
+        "kind": "theorem",
+        "title": "The PCP theorem: NP equals PCP(log n, O(1))",
+        "statement": "NP=PCP(log n,O(1)) with perfect completeness, constant soundness below one and a deterministic polynomial-length proof; the verifier uses O(log n) random bits and a constant number of nonadaptive bit queries.",
+        "deps": [
+          "thm-gap-csp-is-np-hard",
+          "lem-two-query-pcps-and-constraint-graphs-are-equivalent",
+          "def-pcp-class-with-completeness-and-soundness",
+          "def-np-by-verifiers",
+          "def-pcp-verifier-randomness-query-and-proof-length",
+          "def-polynomially-balanced-verifier",
+          "def-constraint-graph-and-labeling-value",
+          "lem-rat-embeds-dense"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For NP containment in PCP, compute the polynomial-size fixed-alphabet gap graph, take the proof to be its vertex labeling encoded in constant bits per symbol, and sample an edge using ceil(log2 M) bits accepting surplus indices. Query the two endpoint labels (constant bit queries), giving perfect completeness and rejection at least alpha/2. Conversely, an NP machine guesses the polynomial-length proof and enumerates at most 2^O(log n)=poly(n) verifier coin strings, runs each deterministic transcript, and compares the exact acceptance fraction with a threshold strictly between completeness and soundness. A fixed proof, not sampled proofs, is quantified in both directions.",
+        "dependency_level": 17
+      },
+      {
+        "id": "thm-pcp-error-amplification",
+        "kind": "theorem",
+        "title": "PCP soundness amplification by independent repetition",
+        "statement": "For a verifier with proof length L, randomness r, query bound q, completeness c and soundness s<1, the k-fold AND repetition on the same fixed proof has proof length L, randomness kr, query bound kq, completeness at least c^k and soundness at most s^k. Perfect completeness remains perfect; any fixed target soundness is reached with fixed k.",
+        "deps": [
+          "def-pcp-class-with-completeness-and-soundness",
+          "def-product-of-finite-probability-spaces",
+          "def-independent-families-of-event-classes",
+          "thm-product-probability-has-independent-coordinate-events"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the published finite-product independence theorem for k independent uniform coin strings but the identical deterministic proof. Conditioned on that proof and input, the k acceptance events depend on disjoint coin blocks and have product probability p^k. YES has some proof with p>=c; NO every proof has p<=s. Concatenate random bits and query lists, retaining the original proof. For a target tau in (0,1), choose fixed k with s^k<=tau; explain that a nonconstant k changes resource bounds.",
+        "dependency_level": 2
+      },
+      {
+        "id": "fs-gap-amplification-alone-controls-alphabet",
+        "kind": "false-statement",
+        "title": "False: graph powering alone keeps the alphabet fixed",
+        "statement": "False claim: the local-view graph-powering step used for gap amplification keeps the input alphabet unchanged for every graph and every positive powering parameter.",
+        "deps": [
+          "def-constraint-graph-powering",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Use a one-vertex binary-alphabet graph carrying two incompatible loop constraints, so its degree is four and UNSAT=1/2. At t=1 the powered view alphabet has (2d)^(t+ceil(sqrt(t)))=8^2=64 independent pattern coordinates, hence cardinality 2^64 rather than two. Even if many coordinates represent the same old vertex, the published construction defines the full tuple alphabet. This is why alphabet reduction must follow powering.",
+        "dependency_level": 0
+      },
+      {
+        "id": "fs-pcp-proofs-are-randomized-strings",
+        "kind": "false-statement",
+        "title": "False: a PCP proof is itself a random string",
+        "statement": "False claim: in the PCP theorem the proof string must be sampled at random separately on each verifier execution.",
+        "deps": [
+          "def-pcp-verifier-randomness-query-and-proof-length",
+          "def-pcp-class-with-completeness-and-soundness"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Exhibit the fixed proof-string quantifier in the PCP class: YES has one deterministic pi used for all coin strings, while NO bounds every fixed pi. The verifier alone samples coins. Taking a one-bit tautology proof and a verifier with one independent unused coin gives a concrete randomized verifier with a fixed proof; resampling the proof would define a different quantifier order.",
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 650,
+    "id": "alphabet-reduction-and-the-pcp-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Alphabet Reduction and the PCP Theorem: Examples and Counterexamples",
+    "requires": [
+      "alphabet-reduction-and-the-pcp-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-composition-preserves-perfect-completeness",
+        "kind": "example",
+        "title": "A single equality edge through robust composition",
+        "statement": "For one binary equality edge and the satisfying labeling (1,1), encode both endpoint blocks by WH_1(1)=(0,1); its edge circuit accepts, every tester gadget constraint can be satisfied, and the binary-star conversion has zero violated edges.",
+        "deps": [
+          "lem-composition-preserves-perfect-completeness",
+          "def-robust-codeword-blocks-for-constraint-graphs",
+          "lem-bounded-arity-boolean-csp-to-binary-constraint-graph",
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "def-composition-with-an-assignment-tester",
+          "def-constraint-graph-and-labeling-value"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Write the original relation {(0,0),(1,1)} and its one-edge value one. Set both shared blocks to WH_1(1)=(0,1) on masks 0,1; the circuit finds the (1,1) allowed pair. Supply the local two-piece tester private witness from perfect completeness, duplicate constraints, and assign each star tuple its accepted local query values; calculate UNSAT=0 at each stage.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-pcp-error-amplification",
+        "kind": "example",
+        "title": "Three repetitions of a three-quarters-sound PCP",
+        "statement": "A verifier of soundness 3/4 with r coins and q queries, repeated independently three times on the same proof and accepted only if all trials accept, has soundness at most 27/64, uses 3r coins and 3q queries, and keeps its proof length.",
+        "deps": [
+          "thm-pcp-error-amplification"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.1 Note 3 to Theorem 18.2, printed p. 354",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "For a fixed NO proof let p<=3/4 be one-run acceptance probability. Three disjoint coin blocks yield p^3<=27/64. If the original verifier has perfect completeness the same fixed YES proof passes every triple of coins. Count 3r bits and at most 3q bit queries explicitly.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-gap-amplification-alone-controls-alphabet",
+        "kind": "counterexample",
+        "title": "A powered graph whose alphabet grows",
+        "statement": "A one-vertex graph with two loop constraints forcing opposite binary labels has UNSAT=1/2, while its t=1 local-view power has alphabet size 2^64.",
+        "deps": [
+          "fs-gap-amplification-alone-controls-alphabet"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Irit Dinur, The PCP Theorem by Gap Amplification, §§1.3, 3, 5",
+              "url": "https://www.cs.umd.edu/users/gasarch/TOPICS/pcp/dinur.pdf"
+            },
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §§18.1, 18.2.4, 18.4.3, 18.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "The two loops require labels 0 and 1 respectively, so either old label violates exactly one of two edges. Each loop contributes two incidence slots, giving d=4. For t=1, R=1+ceil(sqrt(1))=2 and the published view alphabet is {0,1}^{P_R} with |P_R|=(2d)^R=8^2=64. Thus it has 2^64 symbols; calculate both old UNSAT and new alphabet size rather than merely asserting growth.",
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-walsh-hadamard-encoding-and-testing",
+        "kind": "example",
+        "title": "Four coordinates of a Walsh–Hadamard codeword",
+        "statement": "For u=(1,0) in F_2^2, WH_2(u) on masks (00,01,10,11) is (0,0,1,1); for v=(0,1) it is (0,1,0,1), so the two words differ in exactly two of four coordinates, and the BLR equation holds on x=10,y=01 for WH_2(u).",
+        "deps": [
+          "def-walsh-hadamard-encoding-and-relative-distance",
+          "def-linearity-test",
+          "lem-walsh-hadamard-code-has-distance-one-half",
+          "lem-blr-testing-supplies-nearby-linear-decoders"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach, §18.4.1, printed pp. 363–364",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "strategy": "Calculate all four dot products for u and v. Their Hamming distance is two, giving relative distance 1/2. For x=10 and y=01, compute f(x)=1, f(y)=0 and f(x+y)=f(11)=1, so the BLR equality is 1=1+0 in F_2; note that one passing sample alone is not a soundness certificate.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 3
+      }
+    ]
+  }
+]

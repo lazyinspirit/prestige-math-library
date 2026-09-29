@@ -2,7 +2,7 @@
 id: "ex-length-and-distance-on-the-circle"
 kind: "example"
 title: "Length and distance on the circle"
-deps: ["def-riemannian-speed-and-length", "def-riemannian-distance-on-a-connected-manifold", "thm-newton-leibniz-with-interior-derivative"]
+deps: ["def-riemannian-speed-and-length", "def-riemannian-distance-on-a-connected-manifold", "thm-newton-leibniz-with-interior-derivative", "lem-integer-part"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
@@ -35,6 +35,8 @@ On the unit circle with induced metric, $d(e^{ia},e^{ib})=\min_{k\in\mathbb Z}|b
 
 [F3] [[thm-newton-leibniz-with-interior-derivative]]: Let $a<b$. Suppose $G:[a,b]\to\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\to\mathbb R$ is Riemann integrable and $$f(x)=G'(x)\qquad(a<x<b),$$ then $$\int_a^b f=G(b)-G(a).$$ No derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.
 
+[F4] [[lem-integer-part]]: Every real $x$ has a unique integer $m=\lfloor x\rfloor$ with $m\le x<m+1$.
+
 ## Verification
 
 **Proof technique:** direct.
@@ -43,7 +45,7 @@ On the unit circle with induced metric, $d(e^{ia},e^{ib})=\min_{k\in\mathbb Z}|b
 
 2.1 Differentiation of $(\cos\theta,\sin\theta)$ gives squared speed $\theta'^2(\sin^2\theta+\cos^2\theta)=\theta'^2$. Consequently $L=\int|\theta'|\ge|\int\theta'|=|b-a+2\pi k|$, where Newton–Leibniz is applied on each closed smooth piece and the endpoint increments telescope. [F1, F3, step 1.1]
 
-3.1 There is an integer $k_0$ with $\delta=b-a+2\pi k_0\in[-\pi,\pi]$, obtained by rounding $(a-b)/(2\pi)$ to a nearest integer. Every other representative has absolute value at least $|\delta|$. The path $t\mapsto e^{i(a+t\delta)}$ on $[0,1]$ has constant speed $|\delta|$ and attains that lower bound, proving the distance formula. [F2, step 2.1]
+3.1 Put $x=(a-b)/(2\pi)$ and $m=\lfloor x+1/2\rfloor$. By [F4], $-1/2\le x-m<1/2$. Set $k_0=m$ and $\delta=b-a+2\pi k_0=2\pi(m-x)\in(-\pi,\pi]$. For any integer $k$, the two neighboring integers $m-1,m+1$ are at least as far from $x$ as $m$, and every more distant integer is farther still; thus $|b-a+2\pi k|\ge|\delta|$. The path $t\mapsto e^{i(a+t\delta)}$ on $[0,1]$ has constant speed $|\delta|$ and attains that lower bound, proving the distance formula. [F2, F4, step 2.1]
 
 4.1 For $b-a=\pi$, the representatives $\delta=\pi$ and $\delta=-\pi$ both minimize. The paths $e^{i(a+\pi t)}$ and $e^{i(a-\pi t)}$ have length $\pi$ and disjoint interior semicircle images. For equal endpoints $\delta=0$, the same construction is a constant path of length zero. [step 3.1] ∎
 

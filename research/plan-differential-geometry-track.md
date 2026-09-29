@@ -6200,15 +6200,18 @@ Riemannian volume must precede items 19–20/25 and 27–35 respectively.
 
 **A page:** `the-gauss-bonnet-theorem-for-riemannian-surfaces`
 **B page:** `the-gauss-bonnet-theorem-for-riemannian-surfaces-examples`
-**Requires:** DG-7, DG-13, DG-14, and DG-18–DG-21.
+**Requires:** DG-7, DG-13, DG-14, DG-18–DG-21, and the earlier Topology
+compact-surface A page for its Jordan–Schönflies and finite plane-graph
+lemmas.
 
 This is the classical two-dimensional theorem, including smooth boundary and
 piecewise smooth corners. It builds the finite geodesic triangulation it needs
-and does not rely on an unavailable surface-classification or general smooth-
-triangulation page. Higher-dimensional Chern–Gauss–Bonnet remains a separate
-denied theory.
+using the earlier topology page's Jordan–Schönflies and finite plane-graph
+results for disk cellulation; it does not invoke surface classification or a
+general smooth-triangulation theorem. Higher-dimensional Chern–Gauss–Bonnet
+remains a separate denied theory.
 
-### A-page items in dependency order
+### A-page inventory (the run's dependency levels control authoring order)
 
 **Oriented frames, connection form, and geodesic curvature**
 

@@ -1,0 +1,91 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "initial",
+  "round": 1,
+  "unit": "1",
+  "input_sha256": "eb847670bab40a2439e5cdb871b71db529fdcd8349675a0f63eb1fb3e18045de",
+  "decisions": [
+    {
+      "id": "ex-volterra-square-has-zero-trace",
+      "model": "gpt-6-sol",
+      "context_sha256": "420a8ef8acd0841325ce2c6b68185c9953708d703560e01c6d1f4835df8a7f33",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 5.1 omits the positive index range: with zero-based naturals, I_0=(1,2) has zero indicator in L2([0,1]), so the stated family is not linearly independent. This is nonfatal because the dimension aside is not used in the kernel, trace-class, resolvent or trace/determinant argument. Explicitly restricting to integers n>=1 gives disjoint intervals inside [0,1] of measure 2^(-n)>0; restriction to each interval then proves every coefficient vanishes. The omission is repaired without weakening the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-volterra-square-has-zero-trace",
+      "disposition": "repaired",
+      "post_sha256": "36cafff9954ae54c559e400aa0fa4e4f75d7c370edc1632a5f3ed9edac5c4dab",
+      "review_context_sha256": "cfbcff5928624093f2fe2c73909e5bdd99c326d668639967a89da66dc446db42",
+      "reason": "Checked the full example, its declared supplier interfaces, owning contract and examples page. Positive-index dyadic indicators now prove infinite dimensionality. The triangle kernel has squared L2 norm 1/2; the supplied Hilbert-Schmidt product result applies after compactness and basis existence under AC. Fubini on bounded step functions proves the power kernel, density extends it, and the factorial bound makes the nonzero resolvent series converge on both sides. Nonempty spectrum and the separable quasinilpotent trace lemma give spectrum {0}, trace zero and determinant one; V^2(1)=x^2/2 verifies the page claim of nonzeroness. Also corrected the spectral-inclusion reference from step 3.1 to step 4.1. This is the repair author's verification, not independent review of the new text.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-volterra-square-has-zero-trace",
+      "status": "repaired",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 5.1 now explicitly indexes I_n=(2^(-n),2^(-(n-1))) by integers n>=1, excluding the zero indicator I_0; all intervals lie in [0,1] with positive measure. The same step now cites 4.1 for the spectral inclusion. Both edits are confined to Verification. No published-item finding arose.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "edits": [
+      {
+        "path": "items/ex-volterra-square-has-zero-trace.md",
+        "section": "Verification, step 5.1",
+        "before": "Step 3.1 puts its spectrum inside",
+        "after": "Step 4.1 puts its spectrum inside"
+      },
+      {
+        "path": "items/ex-volterra-square-has-zero-trace.md",
+        "section": "Verification, step 5.1",
+        "before": "$I_n=(2^{-n},2^{-(n-1)})$ are pairwise disjoint and have measure $2^{-n}>0$",
+        "after": "$I_n=(2^{-n},2^{-(n-1)})$, indexed by integers $n\\ge1$, lie in $[0,1]$,\nare pairwise disjoint and have measure $2^{-n}>0$"
+      }
+    ],
+    "conventions": "Complex L2([0,1]) with linear-first integral pairing; full AC remains declared and covers Hilbert bases, the kernel theorem, spectrum nonemptiness and the local trace lemma, as well as countable-choice prerequisites.",
+    "contract_paths": [
+      "research/frontier-36-complete-batch-1.proof-contracts.json",
+      "research/frontier-36-complete-proof-contracts.json"
+    ],
+    "page_path": "library/functional-analysis/fredholm-determinants-and-the-lidskii-trace-formula-examples.md",
+    "contract_and_page": "Owning and central contract entries agree. Existing step 5.1 derivation inputs already include step 4.1; dimension and boundary accounting remains valid with the explicit positive index. No contract or page edit is necessary.",
+    "source_evidence": "Used local supplier Statement/Definition sections, especially thm-lebesgue-measure-of-a-box-of-every-kind, thm-l-two-kernels-give-hilbert-schmidt-operators, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, thm-spectrum-is-nonempty-compact-and-norm-bounded and lem-quasinilpotent-trace-class-operator-has-zero-trace. No external source was consulted and no independent source verification is claimed.",
+    "downstream_boundary": "Only Verification changed. No Statement or Definition section changed; the Example claim is also unchanged. No downstream event or new prerequisite.",
+    "published_ledger_updates": [],
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-volterra-square-has-zero-trace.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-volterra-square-has-zero-trace.md",
+        "exit_code": 0,
+        "result": "OK; one file, renderer YAML and KaTeX checks passed."
+      },
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-36-complete --items ex-volterra-square-has-zero-trace",
+        "exit_code": 0,
+        "result": "Captured both review hashes immediately after the completed repair review."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Engine collection and independent rejudgment; no judgments, stamps, central certificates or round state were written."
+  }
+}

@@ -1,0 +1,3553 @@
+{
+  "version": 1,
+  "scope": [
+    "def-motion-of-an-unordered-point-configuration",
+    "lem-a-configuration-loop-traces-a-geometric-braid",
+    "lem-a-geometric-braid-slices-to-a-configuration-loop",
+    "lem-path-homotopy-traces-braid-isotopy",
+    "lem-stacking-corresponds-to-loop-concatenation",
+    "cex-a-crossing-diagram-without-height-monotonicity-does-not-define-a-configuration-loop",
+    "cex-forgetting-labels-can-close-a-nonlooping-coordinate-path",
+    "lem-slicing-and-tracing-are-mutually-inverse-on-classes",
+    "ex-a-half-twist-loop-traces-the-standard-generator",
+    "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+    "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+    "prop-geometric-endpoint-permutation-equals-covering-monodromy",
+    "thm-geometric-and-configuration-braid-models-are-canonically-isomorphic",
+    "ex-a-pure-full-twist-as-an-ordered-configuration-loop"
+  ],
+  "contracts": {
+    "def-motion-of-an-unordered-point-configuration": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n=0 gives one-point ordered and unordered configuration spaces and the unique based motion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item defines paths for arbitrary n; it has no separate zero-valued parameter or zero conclusion. The n=0 empty configuration case is recorded above."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1, C_1(X) is identified with X and q_1=0, so the motion definition is meaningful without collision conditions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: n=0 and n=1 are handled explicitly, including the unique empty motion and the one-point-space identification."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: a based motion has both endpoint values equal to the orbit [Q]; interiority is required at every t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Q is fixed explicitly by the geometric-braid item; no existence or arbitrary-choice assertion is made. No Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: an interior based homotopy remains a homotopy after inclusion into the closed-disc configuration space, so the two closed-disc classes agree."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the cited inclusion induces an isomorphism on π1 at [Q]; equality after inclusion therefore gives equality of interior classes, which is path-homotopy through interior based motions by the definition of π1."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "accepted",
+        "examined_dependencies": [
+          "def-unordered-configuration-space",
+          "def-based-loops-and-fundamental-group",
+          "def-braid-group-from-unordered-configurations",
+          "def-geometric-braid-with-setwise-endpoints",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§§1.1–1.3, printed pp. 3–6",
+            "excerpt": "The braid group on n strands, Bn, is the fundamental group of Nn.",
+            "use": "Configuration-space definitions, based loops, motion/strand interpretation, and the stacking convention."
+          },
+          {
+            "source": "Birman–Brendle, Braids: A Survey",
+            "locator": "§1.1, author manuscript pp. 3–5",
+            "excerpt": "The orbit space of the action is C0,n = C0,n-hat/Σn.",
+            "use": "Configuration quotient and covering framework; the source's sentence asserting every unordered lift ends at its starting tuple is not used."
+          }
+        ],
+        "axiom_of_choice": "Not used; all maps and the base tuple are explicitly specified."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read the full definition and its basepoint/quotient dependencies. A closed-disc based motion has setwise endpoints; the cited basepoint-preserving interior inclusion identifies loop classes, not individual paths. n=0 and n=1 are explicit. González-Meneses §§1.1–1.3, printed pp. 3–6, supports ordered pure and unordered general motions. No AC is invoked."
+      }
+    },
+    "lem-a-configuration-loop-traces-a-geometric-braid": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "The **ordered configuration space** of $n$ points in $X$ is the subspace",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This projection is a quotient map, hence continuous and surjective, and points of $C_n(X)$ are written",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "The **closed unit disc** is $$D:=\\overline B_2(0,1)=\\{w\\in\\mathbb R^2:\\lVert w\\rVert_2\\le 1\\}$$ and its interior is $D^\\circ:=\\{w\\in\\mathbb R^2:\\lVert w\\rVert_2<1\\}$ ([[def-euclidean-spheres-and-closed-balls]]), with the subspace topology inherited from $\\mathbb R^2$ ([[def-subspace-topology-top]])",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "Under the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric $d_2$ induced by the Euclidean norm",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-the-closed-disk-is-a-manifold-with-boundary",
+          "source_section": "Statement",
+          "quote": "Then $D^2$ is nonempty and connected, it is Hausdorff and second countable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-t0-t1-and-hausdorff-are-hereditary",
+          "source_section": "Statement",
+          "quote": "The properties $T_0$, $T_1$, and Hausdorffness are hereditary",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations",
+          "source_section": "Statement",
+          "quote": "Consequently $V$ is evenly covered by $p$ with exactly $n!$ sheets",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-path-lifting-for-covering-maps",
+          "source_section": "Statement",
+          "quote": "There is a unique path $\\widetilde\\alpha:I\\to E$ with $\\widetilde\\alpha(0)=e_0$ and $p\\circ\\widetilde\\alpha=\\alpha$.",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "A **geometric braid on $n$ strands based at $Q$**, or simply a braid, is an $n$-tuple $$\\beta=(z_1,\\dots,z_n)$$ of continuous maps $z_j\\colon I\\to D^\\circ$ ([[def-continuous-map-top]]) such that 1. $z_i(t)\\ne z_j(t)$ whenever $i\\ne j$ and $t\\in I$; 2. $z_j(0)=q_j$ for every $j$; 3. $\\{z_1(1),\\dots,z_n(1)\\}=\\{q_1,\\dots,q_n\\}$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "It is a **based motion at $Q$** if",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "open-quotient-cover",
+          "step": "1.1",
+          "claim": "The quotient map from ordered to unordered configurations on the open disk is a covering, including the n=0 case.",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "unique-lift",
+          "step": "1.2",
+          "claim": "The based interior motion has a unique ordered lift starting at Q, whose coordinates define continuous point paths.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "L7"
+          ]
+        },
+        {
+          "id": "strand-conditions",
+          "step": "1.3",
+          "claim": "The lifted coordinate paths stay interior and collision-free, start at Q, and end with top endpoint set Q.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "trace-identity",
+          "step": "1.4",
+          "claim": "The lifted coordinates form a geometric braid whose unordered slice equals the original path at each height.",
+          "inputs": [
+            "L2",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "conclusion",
+          "step": "2.1",
+          "claim": "The unique lift has all the required braid and slicing properties.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.4 explicitly identify the n=0 quotient as one point, lift its unique path to the empty tuple, and obtain the unique empty braid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 handles n=0 as the empty tuple; the zero-strand coordinate and collision conditions are vacuous."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.4 apply for n=1; there are no pairwise-collision conditions, and the endpoint orbit forces the sole coordinate to return to q_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.4 cover the empty tuple and one-coordinate cases without relying on an n>=2 argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 checks the lift begins at Q and its terminal tuple lies in the orbit of Q, yielding the exact setwise top condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the unique path lift from the prescribed point Q; no family of lifts or arbitrary selections is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a forward construction from a based interior path, not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a forward construction from a based interior path, not an if-and-only-if assertion."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "def-motion-of-an-unordered-point-configuration",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-complex-metric-convergence-and-continuity",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space",
+          "lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations",
+          "lem-the-closed-disk-is-a-manifold-with-boundary",
+          "lem-t0-t1-and-hausdorff-are-hereditary",
+          "thm-path-lifting-for-covering-maps"
+        ],
+        "repair": "Added the quotient definition and explicit Hausdorff suppliers for applying the evenly-covered-neighborhood lemma to the open disk.",
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§§1.1–1.3, printed pp. 3–6",
+            "excerpt": "the k-th strand (that is, the strand starting at (k, 0)) does not necessarily end at (k, 1)",
+            "use": "Confirms setwise top endpoints are permitted for a nonpure braid; the actual endpoint is obtained from the quotient fibre, not this citation."
+          },
+          {
+            "source": "Birman–Brendle, Braids: A Survey",
+            "locator": "§1.1, printed p. 3 (PDF page 4)",
+            "excerpt": "The graph of the n simultaneous functions g1, . . . , gn is a geometric (pure) braid.",
+            "use": "Supports the graph-of-coordinate-motions interpretation. The source's separate assertion that an arbitrary unordered loop lifts to a loop at the original ordered tuple is not used."
+          }
+        ],
+        "axiom_of_choice": "Not used; one unique lift is taken from the explicitly prescribed point Q."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/facts/proof 1.1–2.1. Evenly covered unordered configurations and path lifting give a unique lift at Q; coordinate graphs stay interior and disjoint, and orbit of the top tuple is Q. The empty braid is explicit. González-Meneses §§1.1–1.3 supports this lift/strand model. All 10 citation excerpts match."
+      }
+    },
+    "lem-a-geometric-braid-slices-to-a-configuration-loop": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "with the subspace topology inherited from $X^n$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "of continuous maps $z_j\\colon I\\to D^\\circ$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "z_i(t)\\ne z_j(t)",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "2. $z_j(0)=q_j$ for every $j$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "3. $\\{z_1(1),\\dots,z_n(1)\\}=\\{q_1,\\dots,q_n\\}$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "Identify its real closed unit disk with the complex closed unit disk",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This projection is a quotient map, hence continuous and surjective, and points of $C_n(X)$ are written",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "The $j$-th **strand** of $\\beta$ is the graph",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ordered-tuple-path",
+          "step": "1.1",
+          "claim": "The coordinate functions assemble into a continuous path in the product, and collision-freeness makes it a continuous path in the ordered configuration subspace.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L6",
+            "L8",
+            "L4"
+          ]
+        },
+        {
+          "id": "quotient-based-loop",
+          "step": "1.2",
+          "claim": "Composing with the continuous orbit projection gives a continuous path whose bottom and setwise top both equal [Q].",
+          "inputs": [
+            "L4",
+            "L5",
+            "L7"
+          ]
+        },
+        {
+          "id": "height-slice-identity",
+          "step": "1.3",
+          "claim": "At each height the slice is exactly the orbit of the given labelled tuple, with no change of height parameter.",
+          "inputs": [
+            "L3",
+            "L5",
+            "L7",
+            "L9"
+          ]
+        },
+        {
+          "id": "conclusion",
+          "step": "2.1",
+          "claim": "The stated slicing is a continuous based loop and agrees height by height with the braid slice.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 identify the n=0 ordered configuration and its height slice with the unique empty tuple and empty configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats n=0 as the constant path to the one-point empty tuple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the sole coordinate starts and ends at q_1; with n=1 there are no distinct-coordinate conditions to check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 cover n=0 explicitly and n=1 with no pairwise-distinctness condition between different coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the bottom tuple Q and setwise top tuple Q to show both quotient endpoints equal [Q]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 assembles the labelled coordinate functions of the given braid directly; no lift, enumeration, or arbitrary point selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma constructs a loop from a given braid and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma constructs a loop from a given braid and states no if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-product-topology",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§1.3, printed p. 5",
+            "excerpt": "the k-th strand (that is, the strand starting at (k, 0)) does not necessarily end at (k, 1)",
+            "use": "Confirms that general braids retain strand labels while allowing a setwise, non-pure top endpoint."
+          },
+          {
+            "source": "Birman–Brendle, Braids: A Survey",
+            "locator": "§1.1, author manuscript p. 3",
+            "excerpt": "The graph of the n simultaneous functions g1, . . . , gn is a geometric (pure) braid.",
+            "use": "Confirms the graph interpretation of simultaneous coordinate paths; only the graph convention is used here."
+          }
+        ],
+        "axiom_of_choice": "Not used; the labelled coordinate functions of the given braid determine the ordered path directly."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/facts/proof 1.1–2.1. Product continuity makes the labelled tuple path continuous; quotient continuity gives a loop because the top set equals Q, and each slice is exactly the orbit of its level coordinates. n=0 is explicit. González-Meneses §§1.2–1.3 supports slicing. All 9 citation excerpts match."
+      }
+    },
+    "lem-path-homotopy-traces-braid-isotopy": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-a-configuration-loop-traces-a-geometric-braid",
+          "source_section": "Statement",
+          "quote": "the quotient covering $$p^\\circ:F_n(\\operatorname{int}D^2)\\longrightarrow C_n(\\operatorname{int}D^2)$$ has a unique lift $\\widetilde\\alpha$ starting at $Q$. Writing $\\widetilde\\alpha(t)=(z_1(t),\\ldots,z_n(t))$, the coordinate graphs form a geometric braid based at $Q$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-homotopy-lifting-for-covering-maps",
+          "source_section": "Statement",
+          "quote": "There is a unique lift $\\widetilde H:Y\\times I\\to E$ of $H$ extending $\\widetilde H_0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "with the subspace topology inherited from $X^n$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "the bottom condition $Z_j(s,0)=q_j$ holds for every $s$ and $j$, and $\\{Z_1(s,1),\\dots,Z_n(s,1)\\}=\\{q_1,\\dots,q_n\\}$ for every $s$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "Joint continuity then forces each individual top endpoint to remain constant as $s$ varies",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "initial-lift",
+          "step": "1.1",
+          "claim": "The constant ordered base tuple Q gives a continuous lift of the initial edge H(-,0)=[Q].",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "joint-homotopy-lift",
+          "step": "2.1",
+          "claim": "The covering homotopy lifting theorem extends that specified edge lift to a unique jointly continuous lift of the square.",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "slice-braids",
+          "step": "3.1",
+          "claim": "Each fixed s path is a based loop whose lifted path from Q is the unique lift tracing its geometric braid.",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "boundary-identification",
+          "step": "3.2",
+          "claim": "The two boundary restrictions of the square lift are the unique lifts tracing the two boundary loops.",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "isotopy-conditions",
+          "step": "4.1",
+          "claim": "The lifted coordinates are jointly continuous and form braid slices with fixed bottom and setwise top, with labelled top endpoints constant.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L4",
+            "L5",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "conclusion",
+          "step": "5.1",
+          "claim": "The lifted family is a braid isotopy between the traces of the two boundary loops.",
+          "inputs": [
+            "step 3.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 states that for n=0 both configuration spaces are points and the unique lift is the empty braid isotopy."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly handles the zero-strand family as the unique empty braid isotopy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 notes that n=1 has no collision conditions; the based endpoints and unique lift still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 handle n=1 and n=0 directly, with no argument relying on n≥2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 check the initial lift Q, both endpoint orbits [Q], setwise top conditions, and exact boundary traces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 starts with the specified constant lift s↦Q, and Step 2.1 invokes the uniqueness clause of the covering homotopy theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma sends a given based loop homotopy to a braid isotopy and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma sends a given based loop homotopy to a braid isotopy and states no if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "thm-homotopy-lifting-for-covering-maps"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§1.3, printed p. 5",
+            "excerpt": "two braids are considered to be equal if they are homotopic",
+            "use": "Corroborates the homotopy equivalence of general braid strands; the actual joint family lift is proved here from the published covering homotopy theorem."
+          }
+        ],
+        "axiom_of_choice": "Not used; the initial lift is the explicitly specified constant map at Q, and the covering homotopy theorem gives a unique lift."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/facts/proof 1.1–5.1. Homotopy lifting of the square from the constant lower ordered tuple gives jointly continuous labelled strands; their top endpoint permutation is constant because the endpoint set is discrete. n=0 and n=1 are included. All 7 citation excerpts match."
+      }
+    },
+    "lem-stacking-corresponds-to-loop-concatenation": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-stacking-of-geometric-braids-is-well-defined",
+          "source_section": "Statement",
+          "quote": "$$(\\gamma\\star\\beta)_j(t):=\\begin{cases}z_j(2t),&0\\le t\\le\\tfrac12,\\\\[2pt] w_{\\pi(\\beta)(j)}(2t-1),&\\tfrac12\\le t\\le1.\\end{cases}$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "source_section": "Statement",
+          "quote": "$$S(\\beta)(t):=[(z_1(t),\\ldots,z_n(t))],$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "$$[\\alpha][\\beta]:=[\\alpha*\\beta].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "Its set of orbits $S_n\\cdot x=\\{\\sigma\\cdot x:\\sigma\\in S_n\\}$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "the product $$[\\alpha][\\beta]=[\\alpha*\\beta]$$ is well defined and makes $\\pi_1(X,x_0)$ a group",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lower-half",
+          "step": "1.1",
+          "claim": "On the first height half the stacked tuple is beta’s coordinate path at twice the height, giving S(beta)(2t).",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "upper-half",
+          "step": "1.2",
+          "claim": "On the second height half the tuple is gamma’s coordinate path, reordered by pi(beta), and the orbit quotient removes that permutation, giving S(gamma)(2t−1).",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "pointwise-concatenation",
+          "step": "2.1",
+          "claim": "The two formulas agree at the shared base orbit [Q], proving the pointwise equality with the based concatenation S(beta)*S(gamma).",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "class-product",
+          "step": "3.1",
+          "claim": "Passing the path equality to classes gives the stated order in the fundamental group.",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 states that n=0 gives the unique empty loop and the formula holds."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-valued parameter in the stacking formula; the zero-strand case n=0 is handled in Step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 notes that for n=1 the endpoint permutation is the identity and the two-half calculation remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles n=0 and n=1 explicitly; neither half of the proof assumes n≥2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 check the lower endpoint, upper endpoint, and common seam orbit [Q]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the endpoint permutation determined by the given braid and the orbit quotient to forget that reordering; no lift or enumeration is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a product identity and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a product identity and states no if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "prop-stacking-of-geometric-braids-is-well-defined",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-unordered-configuration-space"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§1.3, printed p. 5",
+            "excerpt": "corresponds to stacking braids (and rescaling the vertical direction)",
+            "use": "Confirms the geometric stacking/loop-concatenation relationship; the exact order is derived from the local coordinate formula and first-then-second loop convention."
+          }
+        ],
+        "axiom_of_choice": "Not used; the endpoint permutation is determined by the given braid, and the orbit quotient directly identifies coordinate reorderings."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/facts/proof 1.1–3.1. The stacked lower half slices to β and upper half to a finite reordering of γ, so the unordered quotient gives exact first-β-then-γ concatenation at the seam. n=0 and n=1 are explicit. All 5 citation excerpts match."
+      }
+    },
+    "cex-a-crossing-diagram-without-height-monotonicity-does-not-define-a-configuration-loop": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "The points $q_1,\\dots,q_n$ lie in $D^\\circ$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This identifies the *elements* of $C_n(X)$ with $n$-element subsets of $X$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "The $j$-th **strand** of $\\beta$ is the graph $\\{(z_j(t),t):t\\in I\\}\\subseteq D^\\circ\\times I$, and the second coordinate $t$ is its **height**.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "source_section": "Statement",
+          "quote": "continuous based loop in $C_n(\\operatorname{int}D^2)",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "folded-witness",
+          "step": "1.1",
+          "claim": "The explicit piecewise-linear arcs have the prescribed endpoint set and the first arc has a strict local height maximum and minimum.",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "embedded-arcs",
+          "step": "2.1",
+          "claim": "The segments forming the first arc intersect only at adjacent vertices, the second arc is disjoint, and both remain in the open disk cylinder.",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "four-point-slice",
+          "step": "3.1",
+          "claim": "At height one half the first arc contributes three explicitly computed distinct points and the vertical arc a fourth distinct point.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "failed-configuration",
+          "step": "4.1",
+          "claim": "The four-point slice is not an element of C_2 and the level-preserving slicing lemma cannot apply to the folded arc.",
+          "inputs": [
+            "step 3.1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes n=2 and makes no claim about a zero-strand picture."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-valued parameter; the witness uses positive h and a for n=2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The promised counterexample is specifically a two-strand picture; it makes no one-strand claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use a=h/4>0, four distinct spatial-height vertices, strict interior bounds, and verify only adjacent segments meet."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that the endpoint sets at heights 0 and 1 are both {q_1,q_2}; Step 3.1 computes the failed intermediate slice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 give every point and intersection parameter explicitly; no selection or enumeration is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a concrete counterexample and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a concrete counterexample and states no if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-unordered-configuration-space"
+        ],
+        "external_sources": [],
+        "axiom_of_choice": "Not used; the arcs, coordinates, and slice parameters are explicit."
+      }
+    },
+    "cex-forgetting-labels-can-close-a-nonlooping-coordinate-path": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "The **ordered configuration space** of $n$ points in $X$ is the subspace $$F_n(X):=\\{\\,(x_1,\\dots,x_n)\\in X^n\\;:\\;x_i\\neq x_j\\ \\text{whenever}\\ i\\neq j\\,\\}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "Its set of orbits $S_n\\cdot x=\\{\\sigma\\cdot x:\\sigma\\in S_n\\}$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This projection is a quotient map, hence continuous and surjective",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "Thus $\\rho(0)=(-h,0)$, $\\rho(\\tfrac12)=(0,-h)$, $\\rho(1)=(h,0)$, and $\\rho$ is continuous, piecewise linear, and satisfies $\\lVert\\rho(t)\\rVert_2\\le h$ for all $t$ with $\\rho(t)\\neq0$ throughout.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "It is a braid based at $Q$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "source_section": "Statement",
+          "quote": "S(\\beta)(t):=[(z_1(t),\\ldots,z_n(t))]",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "A **based loop at $x_0$** is a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ordered-path-and-endpoints",
+          "step": "1.1",
+          "claim": "The explicit half-twist coordinate pair is a continuous path in F_2(D°), beginning at Q and ending at its distinct transposition.",
+          "inputs": [
+            "L1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "not-an-ordered-loop",
+          "step": "2.1",
+          "claim": "The endpoint inequality makes the ordered coordinate path fail the defining endpoint condition for a based loop at Q.",
+          "inputs": [
+            "step 1.1",
+            "L7"
+          ]
+        },
+        {
+          "id": "unordered-loop",
+          "step": "2.2",
+          "claim": "The continuous quotient image has both endpoints [Q] and is exactly the based configuration loop traced by the geometric half twist.",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L5",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "refute-claim",
+          "step": "3.1",
+          "claim": "The two conclusions together refute the assertion that an unordered based loop requires its ordered coordinates to return to Q.",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes n=2 and makes no claim about a zero-strand configuration."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-valued parameter; h is fixed positive at 1/12."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is specifically the two-strand half twist and makes no one-strand claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies rho(t) is nonzero, the two coordinates are distinct, and both stay strictly inside the unit disk."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 compute the ordered endpoints Q and (q_2,q_1), then show both project to [Q]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 use the specified rho and the fixed two-coordinate tuple; no lift, enumeration, or choice is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item gives one counterexample to a universal implication and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item gives one counterexample to a universal implication and states no if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "def-unordered-configuration-space",
+          "def-ordered-configuration-space",
+          "def-elementary-geometric-half-twist",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-based-loops-and-fundamental-group"
+        ],
+        "external_sources": [],
+        "axiom_of_choice": "Not used; the half-twist path and its endpoints are explicitly specified."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/facts/counterexample 1.1–3.1. The explicit half twist goes from (q1,q2) to (q2,q1) with distinct coordinates throughout, so its ordered path does not close but the quotient orbit does. All 7 citation excerpts match."
+      }
+    },
+    "lem-slicing-and-tracing-are-mutually-inverse-on-classes": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-a-configuration-loop-traces-a-geometric-braid",
+          "source_section": "Statement",
+          "quote": "For every interior based motion $\\alpha:I\\to C_n(\\operatorname{int}D^2)$ at $[Q]$, the quotient covering $$p^\\circ:F_n(\\operatorname{int}D^2)\\longrightarrow C_n(\\operatorname{int}D^2)$$ has a unique lift $\\widetilde\\alpha$ starting at $Q$. Writing $\\widetilde\\alpha(t)=(z_1(t),\\ldots,z_n(t))$, the coordinate graphs form a geometric braid based at $Q$, and its unordered slice at every height is exactly $\\alpha(t)$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-path-homotopy-traces-braid-isotopy",
+          "source_section": "Statement",
+          "quote": "The unique ordered lifts of $\\alpha$ and $\\beta$ starting at $Q$ trace geometric braids that are braid-isotopic relative to their top and bottom endpoints.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "source_section": "Statement",
+          "quote": "S(\\beta)(t):=[(z_1(t),\\ldots,z_n(t))]",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "when the map $(s,t)\\mapsto Z_j(s,t)$ is *jointly* continuous",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Two based loops are equivalent when they are path-homotopic relative to the endpoints.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "The **ordered configuration space** of $n$ points in $X$ is the subspace $$F_n(X):=\\{\\,(x_1,\\dots,x_n)\\in X^n\\;:\\;x_i\\neq x_j\\ \\text{whenever}\\ i\\neq j\\,\\}$$",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "Its set of orbits $S_n\\cdot x=\\{\\sigma\\cdot x:\\sigma\\in S_n\\}$ ([[def-orbit-and-stabilizer]]) is the **unordered configuration space** of $n$ points in $X$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "Identify its real closed unit disk with the complex closed unit disk $D^2$ by $(x,y)\\mapsto x+iy",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "A **geometric braid on $n$ strands based at $Q$**, or simply a braid, is an $n$-tuple $$\\beta=(z_1,\\dots,z_n)$$ of continuous maps $z_j\\colon I\\to D^\\circ$ ([[def-continuous-map-top]]) such that 1. $z_i(t)\\ne z_j(t)$ whenever $i\\ne j$ and $t\\in I$; 2. $z_j(0)=q_j$ for every $j$; 3. $\\{z_1(1),\\dots,z_n(1)\\}=\\{q_1,\\dots,q_n\\}$.",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "for every $s\\in I$, the tuple $Z(s,\\cdot):=(Z_1(s,\\cdot),\\dots,Z_n(s,\\cdot))$ is a braid based at $Q$, i.e. $t\\mapsto Z_j(s,t)$ is continuous into $D^\\circ$, the $n$ values $Z_j(s,t)$ are pairwise distinct for every $t$, the bottom condition $Z_j(s,0)=q_j$ holds for every $s$ and $j$, and $\\{Z_1(s,1),\\dots,Z_n(s,1)\\}=\\{q_1,\\dots,q_n\\}$ for every $s$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "$Z_j(0,t)=z_j(t)$ and $Z_j(1,t)=z'_j(t)$ for all $j$ and $t$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L14",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "For $n=0$ the product $X^0$ is a one-point space ([[def-product-topology]]), and the defining condition is vacuous, so $$F_0(X)=\\{\\,\\text{the empty tuple}\\,\\}$$ for every $X$, including $X=\\varnothing$. For $n=1$ there is no pair $i\\neq j$, so single-coordinate evaluation $(x_1)\\mapsto x_1$ is a canonical homeomorphism $F_1(X)\\cong X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L14",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "$C_0(X)$ is the quotient of the one-point space $F_0(X)$ by the trivial group $S_0$, hence is a one-point space. Since $S_1$ is trivial, $p_1:F_1(X)\\to C_1(X)$ is a bijective quotient map and hence a homeomorphism",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L15",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This projection is a quotient map, hence continuous and surjective",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trace-descends",
+          "step": "1.1",
+          "claim": "The trace assignment is independent of the representative of a based path-homotopy class.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "slice-descends",
+          "step": "1.2",
+          "claim": "A braid isotopy induces a jointly continuous homotopy of unordered slices that fixes both configuration endpoints, so slicing is independent of the braid representative.",
+          "inputs": [
+            "L3",
+            "L4",
+            "L6",
+            "L7",
+            "L8",
+            "L9",
+            "L10",
+            "L11",
+            "L12",
+            "L13",
+            "L15"
+          ]
+        },
+        {
+          "id": "slice-trace-identity",
+          "step": "1.3",
+          "claim": "Slicing the braid obtained by tracing a loop recovers that loop pointwise and hence its path-homotopy class.",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "trace-slice-identity",
+          "step": "1.4",
+          "claim": "The coordinate path of a given braid is a lift of its slice starting at Q; uniqueness makes its trace exactly that braid.",
+          "inputs": [
+            "L1",
+            "L3",
+            "L7",
+            "L8",
+            "L10",
+            "L11"
+          ]
+        },
+        {
+          "id": "inverse-bijections",
+          "step": "2.1",
+          "claim": "The two well-defined maps satisfy both inverse identities, so they are mutually inverse bijections, including the empty and one-strand cases.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "L14"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 and L14 identify both configuration spaces with one point when n=0, so there is one loop class and one empty braid-isotopy class."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-valued parameter; the n=0 case is handled explicitly in Step 2.1 and L14."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 and L14 identify F_1 and C_1 with the disk; the proof uses no collision condition and the general inverse constructions still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 remain valid for n=0 and n=1; L14 records the one-point empty case and the one-coordinate identifications."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the fixed bottom tuple and the setwise top endpoint condition to make both homotopy boundary paths constantly [Q]; Steps 1.3 and 1.4 verify the composites."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.4 use the unique lift from the specified Q and the given coordinate tuple; no arbitrary lift, ordering, or product choice is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves that two class assignments are inverse; it states no if-and-only-if predicate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves that two class assignments are inverse; it states no if-and-only-if predicate."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "lem-path-homotopy-traces-braid-isotopy",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "def-based-loops-and-fundamental-group",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-product-topology",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§1.3, printed p. 5",
+            "excerpt": "two braids are considered to be equal if they are homotopic",
+            "use": "Corroborates the braid/homotopy interpretation; the exact class invariance is proved here from the completed local trace/isotopy lemmas and joint quotient map."
+          },
+          {
+            "source": "Birman–Brendle, Braids: A Survey",
+            "locator": "§1.1, author manuscript pp. 3–4",
+            "excerpt": "The appropriate equivalence relation on geometric braids is captured by simultaneous homotopy",
+            "use": "Context for the equivalence relation only. The nearby assertion that an arbitrary unordered loop lift returns to its original ordered tuple is inaccurate outside the pure case and is not used."
+          }
+        ],
+        "axiom_of_choice": "Not used; tracing uses the unique lift from the prescribed Q, slicing uses the supplied coordinates, and all product maps have finitely many explicitly given coordinates."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b",
+        "notes": "Read proof 1.1–2.1. Lifting from Q fixes labels; a braid isotopy projects to a based path homotopy, and unique lift makes trace after slice literally the original braid. n=0 and n=1 are explicit. Sixteen supplier excerpts match."
+      }
+    },
+    "ex-a-half-twist-loop-traces-the-standard-generator": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ and let $Q=(q_1,\\dots,q_n)$ be the base configuration of\n[[def-geometric-braid-with-setwise-endpoints]], with $h=\\frac{1}{4(n+1)}$ and\n$q_j=((2j-n-1)h,0)$. Fix an index $i$ with $1\\le i\\le n-1$. The two adjacent\nbase points are\n\n$$q_i=\\bigl((2i-n-1)h,0\\bigr),\\qquad q_{i+1}=\\bigl((2i+1-n)h,0\\bigr),$$\n\ntheir **midpoint** is $m_i:=(q_i+q_{i+1})/2=((2i-n)h,0)=q_i+(h,0)$, and their\n**support disc** is the open disc\n\n$$U_i:=\\bigl\\{w\\in\\mathbb R^2:\\lVert w-m_i\\rVert_2<\\tfrac32h\\bigr\\}.$$\n\nThe support disc contains the two base points $q_i,q_{i+1}$, whose distance from\n$m_i$ is $h$, and it contains no other base point: for $k<i$ one has\n$\\lVert q_k-m_i\\rVert_2=(2(i-k)+1)h\\ge 3h$ and for $k>i+1$ one has\n$\\lVert q_k-m_i\\rVert_2=(2(k-i)-1)h\\ge3h$, both exceeding $\\tfrac32h$. Moreover\n$U_i\\subseteq D^\\circ$, because every point of $U_i$ has norm at most\n$\\lVert m_i\\rVert_2+\\tfrac32h\\le(n-2)h+\\tfrac32h<(n+1)h<1$. Finally\n$U_i\\cap U_j=\\varnothing$ whenever $|i-j|>1$, since then the midpoints are at\ndistance $2|i-j|h\\ge4h>3h$, twice the radius.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "**The positive half twist.** Define $\\rho\\colon I\\to\\mathbb R^2$, the\n**anticlockwise diamond path**, by\n\n$$\\rho(t):=\\begin{cases}\\bigl(2th-h,\\,-2th\\bigr),&0\\le t\\le \\tfrac12,\\\\[2pt] \\bigl(2th-h,\\,2th-2h\\bigr),&\\tfrac12\\le t\\le1.\\end{cases}$$\n\nThus $\\rho(0)=(-h,0)$, $\\rho(\\tfrac12)=(0,-h)$, $\\rho(1)=(h,0)$, and $\\rho$ is\ncontinuous, piecewise linear, and satisfies $\\lVert\\rho(t)\\rVert_2\\le h$ for all\n$t$ with $\\rho(t)\\neq0$ throughout. The **elementary half twist at $i$**, written\n$\\sigma_i$, is the tuple of motions\n\n$$(\\sigma_i)_i(t):=m_i+\\rho(t),\\qquad (\\sigma_i)_{i+1}(t):=m_i-\\rho(t),\\qquad (\\sigma_i)_k(t):=q_k\\ \\ (k\\notin\\{i,i+1\\}).$$\n\nIt is a braid based at $Q$\n([[def-geometric-braid-with-setwise-endpoints]],\n[[def-continuous-map-top]]): the two moving points stay in $U_i$ and are\nantipodal about $m_i$, so they are distinct; every other point is fixed and lies\noutside $U_i$; and the endpoint permutation is the transposition of $i$ and\n$i+1$, since $(\\sigma_i)_i(1)=m_i+(h,0)=q_{i+1}$ and\n$(\\sigma_i)_{i+1}(1)=m_i-(h,0)=q_i$.\n\nThe words *positive* and *anticlockwise* refer to the fixed orientation of the\nplane of the disc and to the fixed planar projection whose horizontal axis\ncontains $Q$: the moving pair turns through the half turn anticlockwise, the\nlabel $i$ passing below its midpoint and the label $i+1$ above. Together with\nthe first-under-second stacking convention of\n[[prop-stacking-of-geometric-braids-is-well-defined]] this fixes the sign\nconvention for every signed crossing on this page and its companion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-vector-operations-are-continuous-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space over $\\mathbb{R}$ or $\\mathbb{C}$. Then\n\n$$+:V\\times V\\to V,\\qquad (x,y)\\mapsto x+y,$$\n\nand\n\n$$m:\\mathbb{K}\\times V\\to V,\\qquad (\\lambda,x)\\mapsto \\lambda x,$$\n\nare continuous for the product topology on the domain and the norm topology on\nthe target.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "**ordered configuration space** of $n$ points in $X$ is the subspace\n\n$$F_n(X):=\\{\\,(x_1,\\dots,x_n)\\in X^n\\;:\\;x_i\\neq x_j\\ \\text{whenever}\\ i\\neq j\\,\\}$$\n\nwith the subspace topology inherited from $X^n$\n([[def-subspace-topology-top]]).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "**The product topology.** The **product topology** $\\mathcal{T}^{\\Pi}$ on\n$\\prod_i X_i$ is the initial topology of the family of projections\n$(\\pi_i)_{i \\in I}$ ([[def-initial-and-final-topology]]): the topology generated\nby the subbasis\n\n$$\\mathcal{G} \\;:=\\; \\{\\, \\pi_i^{-1}[U] : i \\in I,\\ U \\in \\mathcal{T}_i \\,\\}, \\qquad \\pi_i^{-1}[U] = \\prod_{j \\in I} W_j \\ \\text{ with } W_i = U \\text{ and } W_j = X_j \\text{ for } j \\ne i .$$\n\nBy [[thm-basis-criterion]] the finite intersections of members of $\\mathcal{G}$\nform a basis for $\\mathcal{T}^{\\Pi}$, and those finite intersections are exactly\nthe boxes with all but finitely many factors unrestricted:\n\n$$\\mathcal{R}^{\\Pi} \\;=\\; \\Big\\{\\, \\prod_{i \\in I} U_i \\;:\\; U_i \\in \\mathcal{T}_i \\text{ for every } i, \\text{ and } U_i = X_i \\text{ for all but finitely many } i \\,\\Big\\}.$$\n\nIndeed the intersection of $\\pi_{i_1}^{-1}[U_1], \\dots, \\pi_{i_n}^{-1}[U_n]$ is\nthe box whose factor at $i$ is the intersection of those $U_m$ with $i_m = i$ and\nis $X_i$ when no $i_m$ equals $i$; and the intersection of no members is the\nwhole product, the box with every factor $X_i$. Conversely a box with\n$U_i = X_i$ off a finite set is such an intersection. Members of\n$\\mathcal{R}^{\\Pi}$ are called **basic product-open** sets, and members of\n$\\mathcal{R}$ **boxes**. So $\\mathcal{R}^{\\Pi} \\subseteq \\mathcal{R}$, with\nequality when $I$ is a natural number.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "**Characteristic property of a map into a subspace.** Let $(Z, \\mathcal{T}_Z)$ be\na topological space and let $g : Z \\to S$ be a function. Then\n\n$$g \\text{ is continuous as a map } Z \\to (S,\\mathcal{T}_S) \\iff \\iota \\circ g \\text{ is continuous as a map } Z \\to (X,\\mathcal{T}) .$$\n\n*Proof.* For $U \\in \\mathcal{T}$ one has\n$(\\iota \\circ g)^{-1}[U] = g^{-1}[\\iota^{-1}[U]] = g^{-1}[U \\cap S]$. If $g$ is\ncontinuous then each $g^{-1}[U \\cap S]$ is open, so $\\iota \\circ g$ is continuous;\nconversely if $\\iota \\circ g$ is continuous then for any $W = U \\cap S$ open in\n$S$ the set $g^{-1}[W] = (\\iota \\circ g)^{-1}[U]$ is open, so $g$ is continuous.\nBoth directions use only clause (b) of [[thm-continuity-characterisations-top]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This projection is a quotient\nmap, hence continuous and surjective, and points of $C_n(X)$ are written\n$[x]:=p_n(x)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "An **unordered configuration motion** is a continuous map\n$$\\alpha:I\\longrightarrow C_n(D^2).$$\nIt is a **based motion at $Q$** if\n$$\\alpha(0)=[Q]=\\alpha(1),$$\nand it is an **interior based motion** if, in addition,\n$$\\alpha(t)\\in C_n(\\operatorname{int}D^2)\\qquad\\text{for every }t\\in I.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "A **geometric braid on $n$ strands based at $Q$**, or simply\na braid, is an $n$-tuple\n\n$$\\beta=(z_1,\\dots,z_n)$$\n\nof continuous maps $z_j\\colon I\\to D^\\circ$ ([[def-continuous-map-top]]) such\nthat\n\n1. $z_i(t)\\ne z_j(t)$ whenever $i\\ne j$ and $t\\in I$;\n2. $z_j(0)=q_j$ for every $j$;\n3. $\\{z_1(1),\\dots,z_n(1)\\}=\\{q_1,\\dots,q_n\\}$.\n\nThe $j$-th **strand** of $\\beta$ is the graph\n$\\{(z_j(t),t):t\\in I\\}\\subseteq D^\\circ\\times I$, and the second coordinate $t$\nis its **height**. The defining conditions say that each strand meets every\nhorizontal slice $\\mathbb R^2\\times\\{t\\}$ in exactly one point, that no two\nstrands meet, that the bottom endpoints are the labelled base points\n$q_1,\\dots,q_n$, and that the **top endpoints form the base configuration\nsetwise**. A braid is called **pure** when in addition $z_j(1)=q_j$ for every\n$j$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L14",
+          "source": "lem-a-configuration-loop-traces-a-geometric-braid",
+          "source_section": "Statement",
+          "quote": "For every interior based motion $\\alpha:I\\to C_n(\\operatorname{int}D^2)$ at\n$[Q]$, the quotient covering\n$$p^\\circ:F_n(\\operatorname{int}D^2)\\longrightarrow C_n(\\operatorname{int}D^2)$$\nhas a unique lift $\\widetilde\\alpha$ starting at $Q$. Writing\n$\\widetilde\\alpha(t)=(z_1(t),\\ldots,z_n(t))$, the coordinate graphs form a\ngeometric braid based at $Q$, and its unordered slice at every height is\nexactly $\\alpha(t)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L15",
+          "source": "lem-path-homotopy-traces-braid-isotopy",
+          "source_section": "Statement",
+          "quote": "Let $H:I_s\\times I_t\\to C_n(\\operatorname{int}D^2)$ be a continuous homotopy\nof based loops at $[Q]$, written with the homotopy parameter $s$ first and\nheight $t$ second. Thus\n$$H(s,0)=H(s,1)=[Q]\\quad(s\\in I),$$\nand the boundary loops are $\\alpha(t):=H(0,t)$ and $\\beta(t):=H(1,t)$.\nThe unique ordered lifts of $\\alpha$ and $\\beta$ starting at $Q$ trace\ngeometric braids that are braid-isotopic relative to their top and bottom\nendpoints.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L16",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$. Explicitly,\n\n$$H(s,0)=\\alpha(s),\\quad H(s,1)=\\beta(s),\\quad H(0,t)=\\alpha(0)=\\beta(0),\\quad H(1,t)=\\alpha(1)=\\beta(1).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L17",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "A **braid isotopy from $\\beta$ to $\\beta'$ relative to the top and bottom\nendpoints**, or simply a **braid isotopy**, is an $n$-tuple\n\n$$Z=(Z_1,\\dots,Z_n),\\qquad Z_j\\colon I\\times I\\longrightarrow D^\\circ,$$\n\nof continuous maps ([[def-continuous-map-top]]) such that\n\n1. for every $s\\in I$, the tuple $Z(s,\\cdot):=(Z_1(s,\\cdot),\\dots,Z_n(s,\\cdot))$\n   is a braid based at $Q$, i.e. $t\\mapsto Z_j(s,t)$ is continuous into\n   $D^\\circ$, the $n$ values $Z_j(s,t)$ are pairwise distinct for every $t$, the\n   bottom condition $Z_j(s,0)=q_j$ holds for every $s$ and $j$, and\n   $\\{Z_1(s,1),\\dots,Z_n(s,1)\\}=\\{q_1,\\dots,q_n\\}$ for every $s$;\n2. $Z_j(0,t)=z_j(t)$ and $Z_j(1,t)=z'_j(t)$ for all $j$ and $t$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "round-relative-path",
+          "step": "1.1",
+          "claim": "The round relative path has endpoints -h and +h, modulus h, is continuous, and lies strictly in the open lower half-plane away from its endpoints.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "based-configuration-loop",
+          "step": "1.2",
+          "claim": "The explicit ordered tuple is continuous, collision-free, interior, and ends in the permutation orbit of Q, so its quotient is an interior based loop.",
+          "inputs": [
+            "L1",
+            "L3",
+            "L6",
+            "L7",
+            "L8",
+            "L9",
+            "L10",
+            "L11",
+            "L12"
+          ]
+        },
+        {
+          "id": "lower-half-plane-interpolation",
+          "step": "2.1",
+          "claim": "The convex interpolation between the diamond and round relative paths stays nonzero and within the support disc, giving a jointly continuous braid isotopy from sigma_i to the round tuple.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L6",
+            "L7",
+            "L8",
+            "L9",
+            "L10",
+            "L13",
+            "L17",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "trace-identification",
+          "step": "3.1",
+          "claim": "The quotient of the interpolating ordered family is a homotopy through based loops; the trace and homotopy lemmas identify the boundary traces with sigma_i and the round tuple and make them braid-isotopic.",
+          "inputs": [
+            "L8",
+            "L9",
+            "L10",
+            "L11",
+            "L12",
+            "L14",
+            "L15",
+            "L16",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥2 and an adjacent index, so it has no empty-configuration instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show v(t) and every interpolant w_s(t) are nonzero, which is the collision-avoiding condition for the moving pair."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For n=1 there is no adjacent index i satisfying 1≤i<n, so the example is not asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The n=2 case has no fixed outside strands; the proof still applies with those coordinates vacuous. Steps 1.1 and 2.1 explicitly include both path endpoints and the homotopy endpoints s=0,1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 gives bottom tuple Q and top tuple with q_i,q_{i+1} exchanged, so both quotient endpoints are [Q]. Step 2.1 fixes those bottom and top sets for every s."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement gives Q and all coordinate paths explicitly. Step 3.1 uses the unique ordered lift from the specified Q; no lift, ordering, or point of a nonempty product is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a loop and trace-isotopy claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a loop and trace-isotopy claim, not a biconditional."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "lem-path-homotopy-traces-braid-isotopy",
+          "def-elementary-geometric-half-twist",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space",
+          "def-product-topology",
+          "def-subspace-topology-top",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-complex-differentiability-implies-continuity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-pi-is-the-first-positive-sine-zero"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§1.5, printed p. 7, Figure 2",
+            "excerpt": "called the standard generators, or the Artin generators of the braid group",
+            "use": "Corroborates the conventional name and diagrammatic role of the elementary braid generators; the round-path isotopy and sign match are proved directly here from the local positive-half-twist definition."
+          }
+        ],
+        "axiom_of_choice": "Not used; Q and all finite coordinate paths are specified, and the trace uses the unique ordered lift from Q."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b",
+        "notes": "Read verification 1.1–3.1. The semicircle stays in the lower half plane, so convex interpolation with the published lower diamond avoids zero and stays inside the support disc, while its endpoint set is fixed. n≥2 and adjacent i prevent empty-index cases. Eighteen supplier excerpts match."
+      }
+    },
+    "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "$$B_n^{\\mathrm{conf}}=\\pi_1(C_n(D^2),[Q]).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-geometric-braids-form-a-group",
+          "source_section": "Statement",
+          "quote": "**(a)** $G_n$ is a group ([[def-group]]) with this operation.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-slicing-and-tracing-are-mutually-inverse-on-classes",
+          "source_section": "Statement",
+          "quote": "Tracing based interior configuration loops and slicing geometric braids induce mutually inverse bijections between based path-homotopy classes in $C_n(\\operatorname{int}D^2)$ at $[Q]$ and geometric braid-isotopy classes of braids based at $Q$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-stacking-corresponds-to-loop-concatenation",
+          "source_section": "Statement",
+          "quote": "$$[S(\\gamma\\star\\beta)]=[S(\\beta)][S(\\gamma)].$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "source_section": "Statement",
+          "quote": "For every $q\\in F_n(\\operatorname{int}D^2)$ the induced homomorphisms of fundamental groups ([[def-induced-homomorphism-on-fundamental-groups]]) $$\\iota^F_*:\\pi_1\\big(F_n(\\operatorname{int}D^2),q\\big)\\to\\pi_1\\big(F_n(D^2),q\\big),\\qquad \\iota^{C}_*:\\pi_1\\big(C_n(\\operatorname{int}D^2),[q]\\big)\\to\\pi_1\\big(C_n(D^2),[q]\\big)$$ are isomorphisms.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-braid-group-from-unordered-configurations",
+          "source_section": "Definition",
+          "quote": "$$B_n^{\\mathrm{conf}}:=\\pi_1\\big(C_n(D^2),[q]\\big),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-induced-homomorphism-on-fundamental-groups",
+          "source_section": "Definition",
+          "quote": "$$f_*:\\pi_1(X,x_0)\\longrightarrow\\pi_1(Y,f(x_0)),\\qquad f_*([\\alpha]):=[f\\circ\\alpha].$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "The product $[\\alpha][\\beta]$ traverses $\\alpha$ first and $\\beta$ second.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "the product $$[\\alpha][\\beta]=[\\alpha*\\beta]$$ is well defined and makes $\\pi_1(X,x_0)$ a group",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "$$f(xy) \\;=\\; f(x)\\, f(y) \\qquad \\text{for all } x, y \\in G .$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "$f$ is **bijective** if it is both injective and surjective.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-group-isomorphism-and-automorphism",
+          "source_section": "Definition",
+          "quote": "An **isomorphism** $f:G\\to H$ is a bijective group homomorphism",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "For $n=0$ the tuple is empty, the conditions are vacuous, and there is exactly one braid, the empty tuple",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L14",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "For $n=0$, both configuration spaces are one-point spaces and there is one based motion. For $n=1$, $C_1(X)$ is canonically homeomorphic to $X$ and the geometric basepoint is $q_1=0$, so the same definitions apply without any collision condition.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "common-basepoint",
+          "step": "1.1",
+          "claim": "Instantiating the parameterized configuration-braid group at q=Q makes the open-to-closed inclusion a based group isomorphism at [Q].",
+          "inputs": [
+            "L1",
+            "L5",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "raw-slicing-bijection",
+          "step": "1.2",
+          "claim": "The slicing class map is well defined and has tracing as its inverse, hence is bijective.",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "slicing-reverses-product",
+          "step": "2.1",
+          "claim": "The raw slicing map reverses the geometric stacking product under the first-loop-then-second loop convention.",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L8",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "inverse-corrects-order",
+          "step": "3.1",
+          "claim": "Composing raw slicing with inclusion and group inversion preserves products; the reverse product of inverses is proved by checking both inverse identities.",
+          "inputs": [
+            "L2",
+            "L4",
+            "L7",
+            "L9",
+            "L10",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "group-isomorphism",
+          "step": "4.1",
+          "claim": "The composite of the slicing bijection, inclusion isomorphism, and inversion is bijective; together with multiplicativity it is a group isomorphism.",
+          "inputs": [
+            "L3",
+            "L5",
+            "L9",
+            "L11",
+            "L12",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "degenerate-cases",
+          "step": "5.1",
+          "claim": "The zero-strand case has one empty braid and one configuration class, and the one-strand case uses the same maps without collision conditions.",
+          "inputs": [
+            "L1",
+            "L3",
+            "L5",
+            "L6",
+            "L9",
+            "L13",
+            "L14",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 and L13–L14 identify the empty braid and both zero-point configuration class sets as singletons."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-valued parameter; the n=0 case is the empty configuration handled in Step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 and L14 record that n=1 has no collision conditions and the same slicing, inclusion, and product maps apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 treats n=0 and n=1 explicitly; neither the class bijection nor the algebraic argument assumes n≥2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the shared orbit [Q] on both disc models; Steps 2.1 and 3.1 use setwise braid endpoints and based-loop products at that same orbit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1, L3, and Steps 1.1–1.2 use the specified tuple Q and the unique trace from Q; no arbitrary connecting path is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a group isomorphism and an anti-isomorphism, with no if-and-only-if predicate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a group isomorphism and an anti-isomorphism, with no if-and-only-if predicate."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "lem-slicing-and-tracing-are-mutually-inverse-on-classes",
+          "lem-stacking-corresponds-to-loop-concatenation",
+          "def-braid-group-from-unordered-configurations",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "thm-geometric-braids-form-a-group",
+          "thm-fundamental-group-laws",
+          "def-based-loops-and-fundamental-group",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-group-homomorphism",
+          "def-injection-surjection-bijection",
+          "def-group-isomorphism-and-automorphism"
+        ],
+        "external_sources": [
+          {
+            "source": "Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§§1.1–1.3, printed pp. 3–5",
+            "excerpt": "The braid group on n strands, Bn, is the fundamental group of Nn.",
+            "use": "Corroborates the unordered configuration-space model; the exact fixed-disc class bijection and product order are established from the completed local lemmas, not imported from the plane model."
+          },
+          {
+            "source": "Birman–Brendle, Braids: A Survey",
+            "locator": "§1.1, author manuscript p. 3",
+            "excerpt": "The appropriate equivalence relation on geometric braids is captured by simultaneous homotopy",
+            "use": "Context for simultaneous path homotopy only. The nearby statement that a general unordered-loop lift ends at the original ordered tuple fails outside pure braids; this proof instead uses the exact endpoint-permutation and unique-lift lemmas, and does not rely on that statement."
+          }
+        ],
+        "axiom_of_choice": "Not used: Q and the braid coordinate paths are specified, tracing uses the unique lift from Q, and the proof chooses no connecting path or representative."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/facts/proof 1.1–5.1. Slicing is a bijective anti-homomorphism for the stated stacking convention; composing with the based interior inclusion and group inversion makes Phi a homomorphism and bijection. The n=0 and n=1 cases use the same explicit base tuple. Fourteen supplier excerpts match; Gonzalez-Meneses §§1.1–1.3 supports the geometric/configuration identification."
+      }
+    },
+    "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations": {
+      "kind": "corollary",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-geometric-braids-form-a-group",
+          "source_section": "Statement",
+          "quote": "The endpoint permutation map $$\\pi\\colon G_n\\longrightarrow S_n,\\qquad[\\beta]\\longmapsto\\pi(\\beta),$$ is a well-defined group homomorphism",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "A braid is called **pure** when in addition $z_j(1)=q_j$ for every $j$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "source_section": "Statement",
+          "quote": "Then $S(\\beta)$ is a continuous based loop in $C_n(\\operatorname{int}D^2)$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "there is a unique path",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-braid-group-from-unordered-configurations",
+          "source_section": "Definition",
+          "quote": "$$B_n^{\\mathrm{conf}}:=\\pi_1\\big(C_n(D^2),[q]\\big),$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "source_section": "Statement",
+          "quote": "$$\\Phi:G_n\\longrightarrow B_n^{\\mathrm{conf}},\\qquad [\\beta]\\longmapsto\\bigl(\\iota^C_*[S(\\beta)]\\bigr)^{-1}$$ is a group isomorphism.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "source_section": "Statement",
+          "quote": "are isomorphisms.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-pure-braid-group-from-ordered-configurations",
+          "source_section": "Definition",
+          "quote": "$$PB_n:=\\pi_1\\big(F_n(D^2),q\\big),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-configuration-braid-pure-braid-short-exact-sequence",
+          "source_section": "Statement",
+          "quote": "$$p_*\\text{ is injective},\\qquad \\pi\\text{ is surjective},\\qquad \\operatorname{im}p_*=\\ker\\pi .$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-induced-homomorphism-on-fundamental-groups",
+          "source_section": "Definition",
+          "quote": "$$f_*:\\pi_1(X,x_0)\\longrightarrow\\pi_1(Y,f(x_0)),\\qquad f_*([\\alpha]):=[f\\circ\\alpha].$$",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "The product $[\\alpha][\\beta]$ traverses $\\alpha$ first and $\\beta$ second.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "is well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of the constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "lem-stacking-corresponds-to-loop-concatenation",
+          "source_section": "Statement",
+          "quote": "$$[S(\\gamma\\star\\beta)]=[S(\\beta)][S(\\gamma)].$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-kernel-and-image-of-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "$$\\ker f:=\\{g\\in G:f(g)=e_H\\},\\qquad\\operatorname{im}f:=\\{f(g):g\\in G\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "thm-image-subgroup-and-kernel-normal",
+          "source_section": "Statement",
+          "quote": "The image of a group homomorphism is a subgroup and its kernel is a normal subgroup.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "$f$ is **bijective** if it is both injective and surjective.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-group-isomorphism-and-automorphism",
+          "source_section": "Definition",
+          "quote": "An **isomorphism** $f:G\\to H$ is a bijective group homomorphism",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "For $n=0$ the tuple is empty, the conditions are vacuous, and there is exactly one braid, the empty tuple",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-pure-braid-group-from-ordered-configurations",
+          "source_section": "Definition",
+          "quote": "For $n=0$ the space $F_0(D^2)$ is a point, so $PB_0$ is the one-element group",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "thm-configuration-braid-pure-braid-short-exact-sequence",
+          "source_section": "Statement",
+          "quote": "including $n=0$ and $n=1$ where $S_n$ is the trivial group.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L14",
+          "source": "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "source_section": "Statement",
+          "quote": "\\iota^{C}\\circ p_{\\operatorname{int}D^2}=p_{D^2}\\circ\\iota^F .",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L15",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "The map $\\pi$ is the homomorphism",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L16",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "$$e_\\alpha=\\sigma_\\alpha^{-1},\\qquad\\text{equivalently}\\qquad \\pi([\\alpha])=e_\\alpha^{-1}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L17",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "of continuous maps $z_j\\colon I\\to D^\\circ$ ([[def-continuous-map-top]]) such that 1. $z_i(t)\\ne z_j(t)$ whenever $i\\ne j$ and $t\\in I$;",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L17",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections $(\\pi_i)_{i \\in I}$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L17",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "since a tuple lies in $F_n(X)$ exactly when its entries are pairwise distinct",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L18",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "$$z_j(1)=q_{\\pi(\\beta)(j)}\\qquad(1\\le j\\le n).$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L19",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "the endpoint permutation being the identity of $S_1$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L19",
+          "source": "def-pure-braid-group-from-ordered-configurations",
+          "source_section": "Definition",
+          "quote": "for $n=1$ single-coordinate evaluation gives $F_1(D^2)\\cong D^2$ and $PB_1$ is trivial.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L19",
+          "source": "thm-configuration-braid-pure-braid-short-exact-sequence",
+          "source_section": "Statement",
+          "quote": "including $n=0$ and $n=1$ where $S_n$ is the trivial group.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L20",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "$$\\widetilde\\alpha(1)=\\sigma_\\alpha\\cdot q .$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "common-basepoint-and-pure-subgroup",
+          "step": "1.1",
+          "claim": "At the common basepoint Q, the geometric endpoint identity fibre is the subgroup of pure geometric classes, and the configuration groups and quotient map use that same basepoint.",
+          "inputs": [
+            "L1",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L11"
+          ]
+        },
+        {
+          "id": "coordinate-path-and-inverse-monodromy",
+          "step": "1.2",
+          "claim": "The prescribed coordinate tuple is a continuous ordered path lifting the sliced loop from Q; its endpoint labels give the inverse of covering monodromy.",
+          "inputs": [
+            "L2",
+            "L3",
+            "L8",
+            "L14",
+            "L15",
+            "L16",
+            "L17",
+            "L18",
+            "L20"
+          ]
+        },
+        {
+          "id": "pure-classes-equal-kernel",
+          "step": "2.1",
+          "claim": "The inverse-loop isomorphism carries each endpoint permutation to the same covering-monodromy permutation, so pure classes are exactly the preimage of the monodromy kernel and the restriction is an isomorphism.",
+          "inputs": [
+            "L4",
+            "L9",
+            "L11",
+            "L12",
+            "L15",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "ordered-group-identifies-kernel",
+          "step": "3.1",
+          "claim": "The quotient-induced map is an isomorphism from PB_n onto the monodromy kernel, so it can be inverted and composed with the pure restriction.",
+          "inputs": [
+            "L7",
+            "L11",
+            "L12",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "explicit-ordered-loop-formula",
+          "step": "4.1",
+          "claim": "For a pure braid its coordinate tuple is an ordered based loop, and the quotient square sends its class to the sliced configuration class; injectivity makes the displayed inverse formula unique and representative-independent.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "L5",
+            "L7",
+            "L8",
+            "L9",
+            "L14",
+            "L17",
+            "L18",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "stacking-and-inverse-order",
+          "step": "5.1",
+          "claim": "The reversed loop product under slicing and the two-sided inverse identities show the inverse-slicing map preserves the geometric stacking product.",
+          "inputs": [
+            "L1",
+            "L4",
+            "L7",
+            "L8",
+            "L9",
+            "L10",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "zero-and-one-strand-cases",
+          "step": "6.1",
+          "claim": "The zero-strand and one-strand groups and maps are singleton, so the assertion and formula include both degenerate strand counts.",
+          "inputs": [
+            "L4",
+            "L7",
+            "L13",
+            "L19",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 6.1 identifies the empty braid and both zero-strand configuration spaces as singletons."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 6.1 treats n=0 and verifies the kernel and ordered group are the one-element groups."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 handles n=1 using PB_1 trivial and S_1 trivial, then the exact sequence and Phi."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 explicitly verifies n=0 and n=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 4.1 fix Q and [Q], use setwise top endpoints, and check the terminal coordinate labels."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 use the specified coordinate path and its unique lift from Q; no arbitrary lift, ordering, or connecting path is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves a pure braid maps into ker(pi_conf) by the equality of endpoint and monodromy permutations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that membership of Phi(beta) in ker(pi_conf) forces the endpoint permutation to be identity, hence beta is pure."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "def-pure-braid-group-from-ordered-configurations",
+          "def-braid-group-from-unordered-configurations",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-endpoint-monodromy-of-a-configuration-loop",
+          "thm-configuration-braid-pure-braid-short-exact-sequence",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "lem-stacking-corresponds-to-loop-concatenation",
+          "thm-geometric-braids-form-a-group",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-kernel-and-image-of-group-homomorphism",
+          "thm-image-subgroup-and-kernel-normal",
+          "def-injection-surjection-bijection",
+          "def-group-isomorphism-and-automorphism"
+        ],
+        "external_sources": [
+          {
+            "source": "Juan Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§§1.1–1.3, printed pp. 3–5",
+            "excerpt": "The braid group on n strands, Bn, is the fundamental group of Nn.",
+            "use": "Corroborates the unordered configuration space model. The local proof derives the fixed closed-disc, exact-Q isomorphism from the completed slicing theorem."
+          },
+          {
+            "source": "Juan Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§2.1, equation (2.1), printed p. 11",
+            "excerpt": "The kernel of η is precisely the subgroup of Bn formed by the braids inducing the trivial permutation.",
+            "use": "Corroborates the pure subgroup as permutation kernel; the proof uses the exact local monodromy convention and short exact sequence."
+          },
+          {
+            "source": "Joan S. Birman and Tara E. Brendle, Braids: A Survey",
+            "locator": "§1.1, printed p. 3 (PDF page 4)",
+            "excerpt": "also g(0) = g(1) = p, the base point.",
+            "use": "The surrounding paragraph describes the pure-loop case; read without that restriction this endpoint claim fails for a general unordered loop. This proof does not rely on the generalization."
+          }
+        ],
+        "axiom_of_choice": "Not used: Q and every coordinate path are specified, the lift from Q is unique, and p_* is injective; no arbitrary ordering, representative, or change-of-basepoint path is chosen."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/proof 1.1–6.1. Ordered coordinate lift computes inverse covering monodromy for raw slicing; inversion in Phi restores geometric endpoint permutation. The ordered-to-unordered exact sequence identifies PB_n with the kernel, and the displayed inverse-loop representative follows by injectivity. n=0 and n=1 are explicit. Thirty-one supplier excerpts match."
+      }
+    },
+    "prop-geometric-endpoint-permutation-equals-covering-monodromy": {
+      "kind": "proposition",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-geometric-braids-form-a-group",
+          "source_section": "Statement",
+          "quote": "The endpoint permutation map $$\\pi\\colon G_n\\longrightarrow S_n,\\qquad[\\beta]\\longmapsto\\pi(\\beta),$$ is a well-defined group homomorphism",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "$$z_j(1)=q_{\\pi(\\beta)(j)}\\qquad(1\\le j\\le n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "source_section": "Statement",
+          "quote": "Then $S(\\beta)$ is a continuous based loop in $C_n(\\operatorname{int}D^2)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "there is a unique path",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "source_section": "Statement",
+          "quote": "\\iota^{C}\\circ p_{\\operatorname{int}D^2}=p_{D^2}\\circ\\iota^F .",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-induced-homomorphism-on-fundamental-groups",
+          "source_section": "Definition",
+          "quote": "$$f_*:\\pi_1(X,x_0)\\longrightarrow\\pi_1(Y,f(x_0)),\\qquad f_*([\\alpha]):=[f\\circ\\alpha].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "The product $[\\alpha][\\beta]$ traverses $\\alpha$ first and $\\beta$ second.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "is well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of the constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "of continuous maps $z_j\\colon I\\to D^\\circ$ ([[def-continuous-map-top]]) such that 1. $z_i(t)\\ne z_j(t)$ whenever $i\\ne j$ and $t\\in I$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "Identify its real closed unit disk with the complex closed unit disk $D^2$ by $(x,y)\\mapsto x+iy",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections $(\\pi_i)_{i \\in I}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "since a tuple lies in $F_n(X)$ exactly when its entries are pairwise distinct",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "For $n=0$ the tuple is empty, the conditions are vacuous, and there is exactly one braid, the empty tuple",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "For $n\\le1$ the group $S_n$ is trivial",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "source_section": "Statement",
+          "quote": "$$\\Phi:G_n\\longrightarrow B_n^{\\mathrm{conf}},\\qquad [\\beta]\\longmapsto\\bigl(\\iota^C_*[S(\\beta)]\\bigr)^{-1}$$ is a group isomorphism.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "The map $\\pi$ is the homomorphism",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "$$e_\\alpha=\\sigma_\\alpha^{-1},\\qquad\\text{equivalently}\\qquad \\pi([\\alpha])=e_\\alpha^{-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "the endpoint permutation being the identity of $S_1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "For $n\\le1$ the group $S_n$ is trivial",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-endpoint-monodromy-of-a-configuration-loop",
+          "source_section": "Definition",
+          "quote": "$$\\widetilde\\alpha(1)=\\sigma_\\alpha\\cdot q .$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lift-the-sliced-loop",
+          "step": "1.1",
+          "claim": "The coordinate path is the ordered lift from Q of the closed-disc image of the raw slice; its endpoint coordinate labels equal the geometric endpoint permutation, so the monodromy label is its inverse.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L7",
+            "L11",
+            "L13"
+          ]
+        },
+        {
+          "id": "inverse-loop-corrects-monodromy",
+          "step": "2.1",
+          "claim": "The homomorphism pi_conf sends the inverse loop class to the inverse monodromy, so the inverse-loop isomorphism has geometric endpoint permutation.",
+          "inputs": [
+            "L6",
+            "L9",
+            "L10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "zero-and-one-strands",
+          "step": "3.1",
+          "claim": "For zero strands there is only the empty braid and the isomorphism identifies singleton groups; for one strand both permutation targets are trivial.",
+          "inputs": [
+            "L8",
+            "L9",
+            "L12"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the empty braid and singleton configuration braid group for n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 and L8 verify the zero-strand case directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 and L12 show both endpoint and covering monodromy lie in trivial S_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks n=0 and n=1 separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 starts the ordered lift at Q and reads its terminal coordinates using the geometric endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the prescribed coordinate path and unique lift from Q; no arbitrary lift or basepoint path is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts two permutation equalities and contains no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts two permutation equalities and contains no if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "def-endpoint-monodromy-of-a-configuration-loop",
+          "def-geometric-braid-with-setwise-endpoints",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "thm-geometric-braids-form-a-group",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-motion-of-an-unordered-point-configuration"
+        ],
+        "external_sources": [
+          {
+            "source": "Juan Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§§1.1–1.3, printed pp. 3–6",
+            "excerpt": "The braid group on n strands, Bn, is the fundamental group of Nn.",
+            "use": "Corroborates the unordered configuration-space model. The proof derives the exact fixed-disc endpoint formula from the local coordinate convention and covering definition."
+          },
+          {
+            "source": "Joan S. Birman and Tara E. Brendle, Braids: A Survey",
+            "locator": "§1.1, printed p. 3 (PDF page 4)",
+            "excerpt": "also g(0) = g(1) = p, the base point.",
+            "use": "The surrounding discussion treats pure loops; its lift-return claim is false for arbitrary unordered loops. The unique lift and endpoint monodromy are derived from the local covering definition instead."
+          }
+        ],
+        "axiom_of_choice": "Not used: Q and all component paths are given, the ordered lift from Q is unique, and no basepoint path or arbitrary representative is selected."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/proof 1.1–3.1. The coordinate path is the unique lift of the raw slice; its endpoint label record is inverse to covering monodromy under the stated action, and inversion in Phi yields the geometric permutation. n=0 and n=1 are explicit. Twenty supplier excerpts match."
+      }
+    },
+    "thm-geometric-and-configuration-braid-models-are-canonically-isomorphic": {
+      "kind": "theorem",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "source_section": "Statement",
+          "quote": "$$\\Phi:G_n\\longrightarrow B_n^{\\mathrm{conf}},\\qquad [\\beta]\\longmapsto\\bigl(\\iota^C_*[S(\\beta)]\\bigr)^{-1}$$ is a group isomorphism.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "source_section": "Statement",
+          "quote": "$$\\Phi(G_n^{\\mathrm{pure}})=\\ker\\pi_{\\mathrm{conf}}=\\operatorname{im}p_*,$$ and $\\Phi$ restricts to an isomorphism from $G_n^{\\mathrm{pure}}$ onto this kernel.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "source_section": "Statement",
+          "quote": "The short exact sequence identifies $p_*$ as an isomorphism from $PB_n$ onto the same kernel, so the resulting isomorphism to the ordered configuration group is $$\\Psi:G_n^{\\mathrm{pure}}\\longrightarrow PB_n,\\qquad \\Psi([\\beta])=\\bigl(\\iota^F_*[z_\\beta]\\bigr)^{-1},$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-geometric-endpoint-permutation-equals-covering-monodromy",
+          "source_section": "Statement",
+          "quote": "\\pi_{\\mathrm{conf}}\\bigl(\\Phi([\\beta])\\bigr)=\\pi_{\\mathrm{geo}}([\\beta]).",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "configuration-braid-group-isomorphism",
+          "step": "1.1",
+          "claim": "The inverse-loop slicing formula defines the group isomorphism from geometric braid classes to the unordered configuration braid group at the same Q.",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "pure-ordered-group-isomorphism",
+          "step": "1.2",
+          "claim": "The pure restriction identifies the monodromy kernel, and the inverse quotient map identifies that kernel with PB_n, giving the stated coordinate formula.",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "permutation-square",
+          "step": "1.3",
+          "claim": "The endpoint and covering-monodromy homomorphisms commute with the inverse-loop group isomorphism.",
+          "inputs": [
+            "L4"
+          ]
+        },
+        {
+          "id": "degenerate-strand-counts",
+          "step": "2.1",
+          "claim": "The component results include n=0 and n=1, so the packaged isomorphism, pure restriction, and permutation relation hold in both degenerate cases.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 inherits the n=0 case from the component results; the unique empty braid and singleton groups are handled in the pure corollary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=0 explicitly through L1-L4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=1; the component corollary and proposition use the trivial permutation group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers n=0 and n=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 use the common explicit tuple Q and identify the two endpoint maps at that basepoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the prescribed Q and coordinate paths from the component results; no change-of-basepoint path is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 and L2 identify every pure geometric class with a class in ker(pi_conf)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 and the equality Phi(Gpure)=ker(pi_conf) in L2 ensure each kernel class has a unique pure geometric preimage."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "accepted",
+        "examined_dependencies": [
+          "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "prop-geometric-endpoint-permutation-equals-covering-monodromy"
+        ],
+        "external_sources": [
+          {
+            "source": "Juan Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§§1.1–1.3, printed pp. 3–6",
+            "excerpt": "The braid group on n strands, Bn, is the fundamental group of Nn.",
+            "use": "Contextual confirmation of the configuration-space model; this packaging proof relies on the exact local fixed-Q theorem, pure corollary, and endpoint proposition."
+          },
+          {
+            "source": "Joan S. Birman and Tara E. Brendle, Braids: A Survey",
+            "locator": "§1.1, printed p. 3 (PDF page 4)",
+            "excerpt": "also g(0) = g(1) = p, the base point.",
+            "use": "The surrounding paragraph is about pure loops; its lift-return claim is false for general unordered loops. The component proposition uses the verified endpoint permutation instead."
+          }
+        ],
+        "axiom_of_choice": "Not used: Q and the coordinate paths are fixed, and the component maps use no arbitrary basepoint path or representative."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read statement/proof 1.1–2.1. The theorem packages the proven inverse-loop isomorphism, pure subgroup identification and endpoint-permutation square at the same explicit Q. The n=0 and n=1 cases are inherited from suppliers. Four supplier excerpts match."
+      }
+    },
+    "ex-a-pure-full-twist-as-an-ordered-configuration-loop": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "**The positive half twist.** Define $\\rho\\colon I\\to\\mathbb R^2$, the",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "h:=\\frac{1}{4(n+1)}",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "|z+w|\\le |z|+|w|",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-vector-operations-are-continuous-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "are continuous for the product topology on the domain and the norm topology on the target.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin x>0$ for every $x$ with $0<x<\\pi$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "since a tuple lies in $F_n(X)$ exactly when its entries are pairwise distinct",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "$$g \\text{ is continuous as a map } Z \\to (S,\\mathcal{T}_S) \\iff \\iota \\circ g \\text{ is continuous as a map } Z \\to (X,\\mathcal{T}) .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "This projection is a quotient map, hence continuous and surjective",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-motion-of-an-unordered-point-configuration",
+          "source_section": "Definition",
+          "quote": "$$\\alpha(0)=[Q]=\\alpha(1),$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-a-configuration-loop-traces-a-geometric-braid",
+          "source_section": "Statement",
+          "quote": "has a unique lift $\\widetilde\\alpha$ starting at $Q$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "A braid is called **pure** when in addition $z_j(1)=q_j$ for every $j$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "prop-stacking-of-geometric-braids-is-well-defined",
+          "source_section": "Statement",
+          "quote": "$[\\gamma]\\,[\\beta]:=[\\gamma\\star\\beta]$",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-geometric-braids-form-a-group",
+          "source_section": "Statement",
+          "quote": "$G_n$ is a group ([[def-group]]) with this operation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-braid-isotopy-relative-top-and-bottom",
+          "source_section": "Definition",
+          "quote": "for every $s\\in I$, the tuple $Z(s,\\cdot):=(Z_1(s,\\cdot),\\dots,Z_n(s,\\cdot))$ is a braid based at $Q$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "If $f|_{F_k} : F_k \\to Y$ is continuous for every $k$, then $f$ is continuous.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "source_section": "Statement",
+          "quote": "$$\\Psi:G_n^{\\mathrm{pure}}\\longrightarrow PB_n,\\qquad \\Psi([\\beta])=\\bigl(\\iota^F_*[z_\\beta]\\bigr)^{-1},$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ordered-loop-witness",
+          "step": "1.1",
+          "claim": "The displayed coordinate path is a continuous based loop in the ordered two-point configuration space: it stays in the open disk and its coordinate difference never vanishes.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "trace-and-purity",
+          "step": "1.2",
+          "claim": "The unordered orbit is an interior based loop whose unique lift is the given coordinate path; hence its trace is pure and has identity endpoint permutation.",
+          "inputs": [
+            "L6",
+            "L7",
+            "L8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "stacked-difference",
+          "step": "1.3",
+          "claim": "The stacked positive half twists have the stated diamond difference path, which stays nonzero in each successive quadrant and has modulus at most 2h.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "L9"
+          ]
+        },
+        {
+          "id": "diamond-to-round-isotopy",
+          "step": "2.1",
+          "claim": "Straight interpolation between the diamond and round difference paths stays nonzero, stays within the open disk, fixes Q at both height endpoints, and gives a braid isotopy to the centred round pair.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L9",
+            "L11",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "centre-shift-isotopy",
+          "step": "2.2",
+          "claim": "The explicit centre interpolation preserves the nonzero difference and keeps both coordinates in the open disk while fixing both endpoints at Q.",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L11",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "full-twist-identification",
+          "step": "3.1",
+          "claim": "Pasting the two isotopies identifies the traced braid with the stack of two positive half twists, whose class is the group square [sigma_1]^2.",
+          "inputs": [
+            "L9",
+            "L10",
+            "L11",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "ordered-class-formula",
+          "step": "4.1",
+          "claim": "The pure-braid isomorphism sends the geometric class to the inverse of the displayed ordered loop class under the fixed basepoint convention.",
+          "inputs": [
+            "L12",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes n=2 and constructs a two-point configuration; it makes no claim about the empty configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 has h=1/12>0; steps 1.3 and 2.1 keep the relative coordinate nonzero, and step 2.2 keeps the difference 2h omega(t) nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement fixes n=2, so there is no one-strand instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 2.2 verify the smallest nontrivial strand count directly, with no spectator coordinates, and include s=0,1 and t=0,1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 gives eta(0)=eta(1)=Q; steps 2.1 and 2.2 fix Q at both height endpoints for every isotopy parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.3, 2.1, and 2.2 specify all coordinates and interpolations by formulas; no lift or point is selected from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts an explicit loop and braid identification, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts an explicit loop and braid identification, not an if-and-only-if claim."
+        }
+      ],
+      "audit": {
+        "scaffold_disposition": "repaired",
+        "examined_dependencies": [
+          "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "def-elementary-geometric-half-twist",
+          "prop-stacking-of-geometric-braids-is-well-defined",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "def-subspace-topology-top",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "def-unordered-configuration-space",
+          "def-motion-of-an-unordered-point-configuration",
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "thm-geometric-braids-form-a-group",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-complex-differentiability-implies-continuity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "lem-continuity-is-local-and-pastes"
+        ],
+        "external_sources": [
+          {
+            "source": "Juan Gonzalez-Meneses, Basic results on braid groups",
+            "locator": "§1.2, printed pp. 4–5",
+            "excerpt": "multiplication is given by concatenating loops in M_n",
+            "use": "Background confirms the coordinate-loop and stacking interpretation; the round path, positive sign, isotopies, and exact fixed-Q class are proved directly from the local definitions."
+          }
+        ],
+        "axiom_of_choice": "Not used: Q, the coordinate loop, the unique lift, and both braid isotopies are explicitly specified; no arbitrary ordering, representative, or change-of-basepoint path is selected."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-5a",
+        "notes": "Read Example and proof 1.1–4.1. The explicit loop stays in the open disk and collision-free; two jointly continuous isotopies deform the stacked positive half twists to its trace without moving endpoints. Quadrant convexity prevents collisions, and the inverse-loop convention in Ψ is retained. Twenty-three supplier excerpts match."
+      }
+    }
+  }
+}

@@ -7,10 +7,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings, lem-one-step-extension-of-a-partial-injective-resolution, def-a-category-with-enough-projectives-and-with-enough-injectives, def-injective-resolution-in-an-abelian-category]
+deps: [thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings, lem-one-step-extension-of-a-partial-injective-resolution, def-a-category-with-enough-projectives-and-with-enough-injectives, def-injective-resolution-in-an-abelian-category, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
+  audited: 2026-09-29
   precheck: pass
 sources:
   scraped: []
@@ -28,7 +28,9 @@ Assume the Axiom of Choice.
 Every locally small Grothendieck category has enough injectives, and every object in it admits an injective resolution.
 ## Facts & Assumptions
 
-**Given:** A locally small Grothendieck category $\mathcal A$ and an object $A$ of $\mathcal A$.
+**Given:** The Axiom of Choice, a locally small Grothendieck category $\mathcal A$, and an object $A$ of $\mathcal A$.
+
+[A1] AC is the stated hypothesis under which the functorial embedding [L1] is obtained ([[def-axiom-of-choice]]).
 
 [L1] Grothendieck categories admit functorial injective embeddings ([[thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings]]).
 
@@ -41,7 +43,7 @@ Every locally small Grothendieck category has enough injectives, and every objec
 
 **Proof technique:** direct.
 
-1.1 By [L1], every object $A$ admits a monomorphism into an injective object. Therefore $\mathcal A$ has enough injectives in the sense of [L3]. [L1, L3]
+1.1 Under [A1], [L1] gives every object $A$ a monomorphism into an injective object. Therefore $\mathcal A$ has enough injectives in the sense of [L3]. [A1, L1, L3]
 
 1.2 Starting from the functorial embedding $\eta_A:A\rightarrowtail E(A)$ from [L1], let $C^0$ be its cokernel and iterate the same functorial construction on successive cokernels. Applying [L2] at each stage yields an exact coaugmented complex $$0\to A\to E(A)\to E(C^0)\to E(C^1)\to\cdots$$ of injectives. [L1, L2, construct]
 

@@ -1,0 +1,740 @@
+[
+  {
+    "order": 458.02601,
+    "id": "fourier-multipliers-and-sobolev-characterisations",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Fourier Multipliers and Sobolev Characterisations",
+    "companion": "fourier-multipliers-and-sobolev-characterisations-examples",
+    "requires": [
+      "weak-derivatives-and-sobolev-spaces",
+      "bessel-potential-completions-and-real-order-sobolev-spaces",
+      "complex-riesz-thorin-endpoint-interpolation",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "smooth-partitions-of-unity-and-exhaustions"
+    ],
+    "items": [
+      {
+        "id": "def-translation-invariant-fourier-multiplier-on-schwartz-space",
+        "kind": "definition",
+        "title": "Fourier multiplier on the Schwartz core",
+        "statement": "Assume Countable Choice and n>=1. For a measurable symbol m on R^n define D_m={f in S(R^n): m fhat is locally integrable and its regular distribution is tempered}. For f in D_m put T_m f=F^{-1}(m fhat) in S prime. Frequency products and the inverse are distributional; no Lp boundedness is asserted. D_m is translation stable and T_m commutes with translations tau_a f(x)=f(x-a).",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "def-fourier-transform-of-a-tempered-distribution",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "def-tempered-distribution",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "def-countable-choice",
+          "lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space"
+        ],
+        "strategy": "Use the published Schwartz Fourier automorphism and S-prime inverse to define the partial-domain operator. If f is in D_m, multiply m fhat by the smooth bounded exponential exp(-2 pi i a dot xi): it remains a regular tempered distribution. The Schwartz translation identity shows tau_a f is in D_m and F(T_m tau_a f)=exp(-2 pi i a dot xi)m fhat=F(tau_a T_m f). Injectivity gives commutation. The domain qualification prevents an arbitrary measurable symbol from being assumed to act on all Schwartz functions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.5.5, Definition 2.5.11, printed pp. 155-156"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.9, Definition 3.11, printed p. 12"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ltwo-fourier-multiplier-bound",
+        "kind": "lemma",
+        "title": "Exact L2 Fourier multiplier norm",
+        "statement": "Assume Countable Choice. If m is a measurable essentially bounded symbol on R^n, n>=1, then T_m has a unique bounded L2 extension with ||T_m f||_2<=||m||_infinity ||f||_2, and its operator norm equals ess sup |m|. Values on frequency null sets, including {0}, do not affect the operator.",
+        "deps": [
+          "def-translation-invariant-fourier-multiplier-on-schwartz-space",
+          "thm-plancherel",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "thm-polynomial-growth-functions-define-tempered-distributions",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "thm-continuity-from-below-for-measures",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-operator-norm",
+          "def-countable-choice"
+        ],
+        "strategy": "Every Schwartz f is in D_m: m fhat belongs to L2 and the published regular-Lp-to-tempered theorem makes its distribution tempered. Unitary Plancherel conjugates the extension to multiplication M_m on frequency L2, giving the upper bound and uniqueness by Schwartz density. For epsilon>0 below the essential supremum, select a positive finite-measure part E of {|m|>||m||_infinity-epsilon} inside a sufficiently large ball. Its indicator is in L2 and ||m 1_E||_2>(||m||_infinity-epsilon)||1_E||_2. Inverse Plancherel and epsilon to zero give the lower bound. This is an L2 result only.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.5.4, Theorem 2.5.10 and proof, printed pp. 154-155"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.9, paragraph after Definition 3.11, printed p. 12"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-lp-fourier-multiplier-and-multiplier-norm",
+        "kind": "definition",
+        "title": "Lp Fourier multiplier and its norm",
+        "statement": "Assume Countable Choice. For 1<=p<infinity, a measurable m is an Lp Fourier multiplier if T_m is defined on all Schwartz functions, takes them into Lp(R^n), and ||T_m f||_p<=C||f||_p on that core. Then density gives one unique bounded extension to Lp and ||m||_{M_p}:=||T_m||_{Lp to Lp}. At p=infinity a bounded extension, if chosen, need not be unique from the Schwartz-core action; no intrinsic norm is defined here from that core alone.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "def-translation-invariant-fourier-multiplier-on-schwartz-space",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice"
+        ],
+        "strategy": "C_c-infinity is contained in Schwartz and is dense in complex Lp for finite p under the published density theorem. Thus a core estimate gives a unique bounded extension into complete complex Lp, and the infimum admissible C is its operator norm. For infinity, every Schwartz function vanishes at infinity, so it cannot approximate the constant one in supremum norm; uniqueness of an extension cannot be inferred. The definition makes no Mihlin or endpoint claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.5.5, Definition 2.5.11 and discussion of p=infinity, printed pp. 154-156"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.9, Definition 3.11, printed p. 12"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-hausdorff-young-for-periodic-fourier-coefficients",
+        "kind": "theorem",
+        "title": "Hausdorff–Young for periodic Fourier coefficients",
+        "statement": "Assume Countable Choice and normalized Haar measure on T. If 1<=p<=2 and 1/p+1/p_prime=1, every complex f in Lp(T) has Fourier coefficient sequence in ell^{p_prime}(Z) and ||(fhat(k))||_{ell^{p_prime}}<=||f||_{Lp(T)}. At p=1 read ell infinity; at p=2 this is Parseval equality.",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-parseval-identity-for-fourier-series",
+          "cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime",
+          "cor-complex-interpolation-extensions-agree-on-intersections",
+          "thm-integral-triangle-inequality",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "strategy": "On normalized T, |e_k|=1 gives |fhat(k)|<=||f||_1, so the coefficient map is L1 to ell infinity of norm at most one. Published Parseval gives the complex-linear L2 to ell2 isometry, with first-variable-linear coefficient convention. Apply the published sigma-finite finite-simple-core endpoint interpolation corollary to the map on the common core; counting measure on Z and normalized Haar on T are sigma-finite. Countable Choice supplies full-space extension and core density. Check endpoints separately; uniqueness identifies the interpolated map with actual coefficients because each coordinate is an L1-continuous functional on the finite-measure torus.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 13, Fourier analysis application and proof, printed pp. 71-72"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§3.2, Exercise 3.2.2, printed p. 191; endpoint argument supplied locally from the published interpolation corollary"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-hausdorff-young-for-the-euclidean-fourier-transform",
+        "kind": "theorem",
+        "title": "Hausdorff–Young for the Euclidean Fourier transform",
+        "statement": "Assume Countable Choice and Ff(xi)=integral_Rn f(x) exp(-2 pi i x dot xi) dx on L1. For 1<=p<=2, with p_prime conjugate to p, F extends compatibly to a complex-linear bounded map Lp(R^n) to L^{p_prime}(R^n) with ||Ff||_{p_prime}<=||f||_p. At p=1 this is the integral transform, at p=2 the unitary Plancherel transform, and on intersections the interpretations agree.",
+        "deps": [
+          "lem-l-one-fourier-transform-is-well-defined",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-plancherel",
+          "thm-l-one-l-two-agreement-of-fourier-transform",
+          "cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime",
+          "cor-complex-interpolation-extensions-agree-on-intersections",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "strategy": "The published L1 transform estimate is norm at most one to L infinity; published unitary Plancherel is norm one on L2. Their agreement on L1 intersect L2 makes a single complex-linear Schwartz/finite-simple core operator. Apply the endpoint interpolation corollary on sigma-finite Euclidean Lebesgue spaces, obtaining norm <=1 for interior exponents. Extend by complex smooth density and Countable Choice. At endpoints retain the original operators; show compatibility on intersections by simultaneous smooth approximation or the published L1/L2 agreement, and identify the Lp-prime limit independently of approximants.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.2, Proposition 2.2.16 and its proof, printed pp. 113-114"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 17, Theorem 17.4 and proof, printed p. 99; source Fourier normalization converted to the repository 2 pi convention"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-mihlin-symbol-with-more-than-half-dimension-derivatives",
+        "kind": "definition",
+        "title": "Mihlin smoothness convention above half the dimension",
+        "statement": "For n>=1 put q=floor(n/2)+1. A Mihlin symbol here is a measurable m with a C^q representative on R^n minus {0} such that for each multi-index alpha with |alpha|<=q, |partial^alpha m(xi)|<=C_alpha |xi|^{-|alpha|} for xi!=0. The alpha=0 bound includes essential boundedness; m(0) is irrelevant. This is a sufficient symbol condition, with Lp boundedness to be proved on the later singular-integral page for 1<p<infinity.",
+        "deps": [
+          "def-lp-fourier-multiplier-and-multiplier-norm",
+          "lem-ltwo-fourier-multiplier-bound",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "def-countable-choice"
+        ],
+        "strategy": "Define the derivative count and the pointwise punctured-space bounds. Compare Grafakos Theorem 6.2.7: these bounds imply its annular L2 estimates by integrating |xi|^{-2|alpha|} over R<|xi|<2R. Do not invoke that later theorem here or assert endpoint Lp boundedness. W uses the stronger d+2 derivative assumption, so its theorem does not reduce the adopted q.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§6.2.3, equations (6.2.10)-(6.2.14) and Theorem 6.2.7, printed pp. 445-446"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.9, Theorem 3.13 and proof, printed pp. 13-14; stronger d+2 convention distinguished"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+        "kind": "lemma",
+        "title": "Distributional derivatives are polynomial Fourier multipliers",
+        "statement": "Assume Countable Choice. For u in S prime(R^n) and every multi-index alpha, F(D^alpha u)=(2 pi i xi)^alpha F(u) in S prime. If u and its distribution derivative have L2 representatives, this identity also holds for their Plancherel L2 transforms almost everywhere.",
+        "deps": [
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-plancherel",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "thm-polynomial-growth-functions-define-tempered-distributions",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice"
+        ],
+        "strategy": "The published tempered Fourier differentiation theorem supplies the distributional identity directly with the exact 2 pi factor and bilinear transposition. For regular L2 u and derivative, invoke published L2-to-S-prime Fourier agreement; equality of regular tempered distributions represented by L2 functions implies equality almost everywhere, using injectivity of the regular-distribution map or Schwartz L2 density. The latter clause needs no as-yet-unpublished PDE W^{k,2} definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.1, Proposition 12.1 proof, printed pp. 139-140, with 2 pi normalization inserted"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§5.3 and §6.2, Fourier multiplier and Sobolev conventions, printed pp. 19-25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+        "kind": "theorem",
+        "title": "Integer-order W^{k,2} and H^k agree with equivalent norms",
+        "statement": "Assume Countable Choice. For integer k>=0 on R^n, the PDE weak-derivative space W^{k,2} equals the real-order Bessel space H^k as a subset of S prime. The square root of the sum of ||D^alpha u||_2^2 over |alpha|<=k is equivalent to ||<xi>^k uhat||_2; the latter is also equivalent to ||(1+4 pi^2 |xi|^2)^{k/2} uhat||_2, but is generally not identical to either derivative norm.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-weak-derivative-is-independent-of-lp-representatives",
+          "lem-weak-derivatives-are-unique-almost-everywhere",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation",
+          "thm-plancherel",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "thm-polynomial-growth-functions-define-tempered-distributions",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-exponential-beats-every-polynomial",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "strategy": "Using PDE-11’s scaffolded def-sobolev-space-wkp-and-its-norm, lem-weak-derivative-is-independent-of-lp-representatives, lem-weak-derivatives-are-unique-almost-everywhere, and lem-sobolev-norm-is-well-defined-and-definite, identify its weak derivatives with regular L2 distributions. Plancherel and the local polynomial-multiplier lemma turn each derivative norm into ||(2 pi xi)^alpha uhat||_2. For fixed integer k, the finite polynomial P_k(xi)=sum_{|alpha|<=k}(2 pi)^{2|alpha|}|xi^alpha|^2 is bounded above and below by constants times <xi>^{2k}; the lower bound follows from the multinomial expansion of |xi|^{2k} and the alpha=0 term. Compare <xi>^{2k} to (1+4 pi^2|xi|^2)^k by fixed positive constants. Use the batch-12 weighted-distribution theorem for both directions. The four PDE-11 supplier items are declared directly and currently ready at Step 1; Step 3 must independently audit and author them before this consumer is authored.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.1, Proposition 12.1 and proof; §12.1.2 property (3), printed pp. 139-141"
+            },
+            {
+              "title": "Richard B. Melrose, Differential Analysis, Chapter 3: Distributions",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "§4, Lemma 4.4 and proof, printed p. 67; source uses e^{-ix·xi} and has a minus-sign typo in the sentence preceding Lemma 4.4, corrected locally"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+        "kind": "theorem",
+        "title": "Real-order H^s as weighted Fourier distributions",
+        "statement": "Assume Countable Choice. For every real s and n>=1, PDE-14F H^s(R^n) is canonically exactly {u in S prime: <xi>^s F(u) is a regular L2 distribution}, with norm ||u||_{H^s}=||<xi>^s F(u)||_2. The product on S prime is distributional multiplication by the smooth bracket weight; H^s elements are not initially assumed to be functions.",
+        "deps": [
+          "thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-countable-choice"
+        ],
+        "strategy": "Invoke batch-12 weighted-distribution characterization with its canonical embedding E_s and its unique L2 class g. Its two directions identify every completion class and every qualifying tempered distribution, and its isometry gives the exact defining norm. Retain the batch-12 distributional multiplication convention; neither replace the bracket by the 2 pi Laplacian weight nor infer pointwise Fourier values before obtaining g.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.2, Definition 12.3, equations (12.4)-(12.5), printed p. 140"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§6.2, Definition 6.5, printed p. 25; p=2 specialization, with source general Lp machinery not imported"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-japanese-bracket-bessel-potential-operator",
+        "kind": "definition",
+        "title": "Japanese-bracket and Laplacian Bessel-potential operators",
+        "statement": "Assume Countable Choice. On S prime define <D>^t u=F^{-1}(<xi>^t F(u)) for real t, where <xi>=(1+|xi|^2)^{1/2}. Separately define (I-Delta)^{t/2}u by the symbol (1+4 pi^2|xi|^2)^{t/2}. Both are continuous, invertible Fourier multipliers on S prime. Their symbols differ for t!=0 under the negative-sign 2 pi transform.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "def-countable-choice"
+        ],
+        "strategy": "The batch-12 bracket lemma proves smooth polynomially bounded derivatives for <xi>^{plus/minus t} and their inverse actions on S prime. The same chain-rule calculation with 4 pi^2|xi|^2 gives the corresponding bounds for the Laplacian symbol and its reciprocal; the published smooth multiplier lemma supplies continuous transposed actions. Published Fourier differentiation gives F(I-Delta)u=(1+4 pi^2|xi|^2)F(u) for integer powers, fixing the functional-calculus notation. Inverse Fourier exists on S prime; compare the two weights at any nonzero frequency to distinguish them.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.2, Japanese bracket (12.3) and Sobolev weights, printed p. 140"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§6.2, Definition 6.5, printed p. 25; source transform normalization converted"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bessel-potentials-shift-sobolev-order-isometrically",
+        "kind": "lemma",
+        "title": "Bessel potentials shift Sobolev order",
+        "statement": "Assume Countable Choice. For every real s,t, <D>^t:H^s(R^n) to H^{s-t}(R^n) is a surjective linear isometry with inverse <D>^{-t}. The operator (I-Delta)^{t/2} is a bounded isomorphism between the same spaces with equivalent norms; under the fixed H^s bracket norm it is not generally an isometry when t!=0. Moreover H^s embeds contractively in H^r whenever s>=r, and each distributional partial_j maps H^{s+1} boundedly into H^s with operator norm at most 2 pi.",
+        "deps": [
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "def-japanese-bracket-bessel-potential-operator",
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-test-function-inclusion-in-schwartz-space-is-continuous",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "def-real-power",
+          "thm-exponential-is-strictly-increasing",
+          "thm-logarithm-derivative-and-integral",
+          "def-countable-choice",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable"
+        ],
+        "strategy": "For u in H^s, multiply its Fourier distribution by <xi>^t; the target weighted L2 representative is <xi>^{s-t}<xi>^t F(u)=<xi>^s F(u), proving exact norm equality and membership. Reciprocal multiplier <xi>^{-t} gives surjectivity. For the Laplacian operator, the ratio r_t(xi)=((1+4 pi^2|xi|^2)/(1+|xi|^2))^{t/2} has positive finite lower and upper bounds; hence the target norm is equivalent. At xi=0 the ratio is 1 and its high-frequency limit is (2 pi)^t, so for t!=0 a frequency-localized L2 test disproves a universal isometry. For s>=r the pointwise weight ratio <xi>^{r-s}<=1 gives the contractive inclusion. The derivative multiplier has |2 pi xi_j|<=2 pi<xi>, giving ||partial_j u||_{H^s}<=2 pi||u||_{H^{s+1}}; use the local tempered derivative identity to identify the target distribution.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.2, properties (1)-(3) and bracket definition, printed pp. 140-141"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§6.2, Definition 6.5 and multiplier discussion, printed p. 25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-sobolev-duality-from-the-fourier-pairing",
+        "kind": "corollary",
+        "title": "Conjugate duality of H^s and H^{-s}",
+        "statement": "Assume Countable Choice and use the first-variable-linear complex L2 inner product. Let the conjugate dual of H^s mean bounded conjugate-linear functionals on H^s. For v in H^{-s} define A_v(u)=integral_Rn overline(F(u)(xi)) F(v)(xi) dxi, interpreted as the L2 pairing of <xi>^s F(u) with <xi>^{-s}F(v). Then v to A_v is a complex-linear isometric bijection H^{-s} onto that conjugate dual. The ordinary linear dual is obtained by conjugating this pairing and is conjugate-linear in v.",
+        "deps": [
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "cor-bessel-potential-spaces-are-hilbert-and-complete",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "thm-riesz-representation-for-hilbert-space",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "def-countable-choice"
+        ],
+        "strategy": "Write g=J_su and h=J_{-s}v in complex L2. Since the Fourier weights cancel, A_v(u)=integral overline(g)h, an absolutely convergent sesquilinear pairing. Cauchy-Schwarz gives ||A_v||<=||h||_2. For h!=0, surjectivity of J_s allows g=h/||h||_2, giving the reverse bound. For any bounded conjugate-linear A on H^s, B(u)=overline(A(u)) is a bounded linear functional; the published first-variable-linear Hilbert Riesz theorem gives a representing vector w in H^s. Transport its weighted Fourier representative through J_s, conjugate as needed, and use surjectivity of J_{-s} to obtain a unique v with A=A_v. The zero case is direct. This pairing extends the L2 conjugate pairing on Schwartz tests, not a bilinear distribution action on arbitrary H^s pairs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.2, Hilbert identification and weighted norm, printed p. 140"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.2 and §2.5, Plancherel/dual Fourier conventions, printed pp. 113-114 and 154-155; duality argument completed locally"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 458.02602,
+    "id": "fourier-multipliers-and-sobolev-characterisations-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Fourier Multipliers and Sobolev Characterisations — Examples",
+    "companion": "fourier-multipliers-and-sobolev-characterisations",
+    "requires": [
+      "fourier-multipliers-and-sobolev-characterisations"
+    ],
+    "items": [
+      {
+        "id": "ex-heat-and-poisson-semigroups-as-fourier-multipliers",
+        "kind": "example",
+        "title": "Heat and Poisson semigroups as Fourier multipliers",
+        "statement": "Assume Countable Choice. For t>=0 define the heat operator H_t on L2(R^n) by the Fourier symbol exp(-4 pi^2 t|xi|^2), and the Poisson operator P_t by exp(-2 pi t|xi|). These Fourier-defined operators, customarily denoted e^{t Delta} and e^{-t sqrt{-Delta}}, are L2 contractions, equal identity at t=0, and obey T_tT_r=T_{t+r} in each family; for t>0 their solutions satisfy the heat and upper-half-space Laplace equations respectively.",
+        "deps": [
+          "def-translation-invariant-fourier-multiplier-on-schwartz-space",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-plancherel",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-dominated-convergence",
+          "thm-exponential-addition-formula",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-dominates-one-plus-x",
+          "cor-mean-value-theorem",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure"
+        ],
+        "strategy": "Use F(Delta f)=-4 pi^2|xi|^2 Ff from the published derivative identity. For the heat equation, the scalar frequency ODE gives e^{-4 pi^2 t|xi|^2}; for U_tt+Delta_x U=0 choose the decaying frequency branch e^{-2 pi t|xi|}. At t>0 frequency differentiation is justified in L2 by boundedness of |xi|^j times the decaying exponent for the required orders. Multiplication of symbols proves composition, their absolute values are <=1, and dominated convergence plus Plancherel gives strong L2 continuity at zero. Avoid claiming the nonsmooth Poisson symbol preserves Schwartz at xi=0.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§2.3, Corollary 2.11 and Poisson-kernel discussion, printed pp. 5-6"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.1 Poisson transform and §2.2 Fourier/heat conventions, printed pp. 92-95 and 113-114"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-translation-and-differentiation-multiplier-symbols",
+        "kind": "example",
+        "title": "Translation and differentiation symbols",
+        "statement": "Assume Countable Choice. For tau_a f(x)=f(x-a) on Schwartz space, its multiplier symbol is exp(-2 pi i a dot xi) and tau_a is an L2 isometry. The distributional derivative partial_j has symbol 2 pi i xi_j; for n>=1 this unbounded symbol gives no bounded L2 extension of partial_j from Schwartz space.",
+        "deps": [
+          "def-translation-invariant-fourier-multiplier-on-schwartz-space",
+          "lem-ltwo-fourier-multiplier-bound",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space",
+          "def-countable-choice",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "thm-plancherel",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "def-translation-of-a-function-on-rn",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-test-function-inclusion-in-schwartz-space-is-continuous",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Substitute y=x-a in the Schwartz Fourier integral to obtain F(tau_a f)=e^{-2 pi i a dot xi}Ff. Its modulus is one, so the exact L2 multiplier bound makes tau_a an isometry. The published distribution derivative identity gives F(partial_j f)=2 pi i xi_j Ff. For each N choose a nonzero smooth compactly supported frequency bump in {|xi_j|>N}; inverse Schwartz Fourier transforms it to f_N. Plancherel yields ||partial_j f_N||_2>=2 pi N||f_N||_2, disproving a bounded L2 extension. No Mihlin conclusion is invoked.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.5.5, Example 2.5.12 and translation symbol, printed p. 156"
+            },
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.1, Fourier derivative multiplier in Proposition 12.1 proof, printed p. 139"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-fefferman-ball-multiplier-obstruction",
+        "kind": "remark",
+        "title": "Fefferman ball multiplier obstruction",
+        "statement": "Assume Countable Choice for the library Fourier and Lp conventions. Recorded boundary result (not proved here): for n>=2, the characteristic function of a Euclidean ball is an Lp(R^n) Fourier multiplier only at p=2 in the usual 1<=p<infinity range. This deep theorem is a bibliographic leaf and does not supply any proof on this page.",
+        "deps": [
+          "def-lp-fourier-multiplier-and-multiplier-norm",
+          "lem-ltwo-fourier-multiplier-bound",
+          "def-countable-choice"
+        ],
+        "strategy": "Fefferman Theorem 1 on printed p. 330 states that the ball multiplier is bounded only on L2 when n>1. The local L2 case follows from the exact multiplier lemma; the p!=2 obstruction needs Fefferman Kakeya geometry and is recorded, not used as a dependency or claimed proved here. The source PDF is a scanned eight-page article; its statement page was inspected visually.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Fefferman, The multiplier problem for the ball, Annals of Mathematics 94 (1971), 330-336",
+              "url": "https://annals.math.princeton.edu/1971/94-2/p05",
+              "locator": "Theorem 1, printed p. 330; publisher record for Annals 94 (1971), pp. 330-336"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.9, Remark 3.12, printed p. 12"
+            }
+          ]
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://annals.math.princeton.edu/1971/94-2/p05",
+          "exact_statement": "The indicator of a Euclidean ball in R^n, n>1, gives a bounded Fourier multiplier on L^p only for p=2.",
+          "local_proof_attempt": "The L2 direction follows from Plancherel; the p not equal to 2 obstruction requires Fefferman Kakeya geometry and is not reproduced on this page.",
+          "necessity": "Records the exact limitation of the L2 multiplier criterion as a non-load-bearing B-page leaf."
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-jump-multipliers-can-be-bounded-outside-mihlin",
+        "kind": "remark",
+        "title": "Jump multipliers may lie outside the Mihlin criterion",
+        "statement": "Assume Countable Choice for the library Fourier and Lp conventions. Recorded orientation result (not proved here): in one dimension the shifted signum symbol m(xi)=sgn(xi-1) has a jump at the nonzero frequency 1, so it fails the punctured-domain Mihlin condition, yet it is bounded on Lp(R) for 1<p<infinity as a modulation conjugate of the Hilbert-transform multiplier. In contrast, unshifted sgn(xi) satisfies the stated one-dimensional Mihlin condition because its only jump is at the excluded origin. The Lp bound is proved later in FR-8, not used here.",
+        "deps": [
+          "def-mihlin-symbol-with-more-than-half-dimension-derivatives",
+          "def-lp-fourier-multiplier-and-multiplier-norm",
+          "def-countable-choice"
+        ],
+        "strategy": "On R minus {0}, unshifted signum is locally constant and has zero derivatives, so it meets q=1 Mihlin bounds. The translated symbol sgn(xi-1) is discontinuous at xi=1 and therefore fails C^1 away from zero. Frequency translation of a multiplier corresponds to conjugating its operator by physical modulation, preserving Lp norm; combine this elementary identity with the later Hilbert-transform Lp theorem to establish the recorded positive boundedness claim. Neither later theorem is a proof supplier for this page. This corrects the design’s false assertion about unshifted signum while retaining its intended outside-Mihlin example.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.1 Hilbert signum symbol, printed p. 6; §3.9 Lp-multiplier comparison, printed p. 12"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, 3rd ed.",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§2.5.5, Proposition 2.5.14 frequency-translation invariance, printed pp. 156-157; §6.2.3 Mihlin condition, printed pp. 445-446"
+            }
+          ]
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+          "exact_statement": "The shifted signum symbol sgn(xi-1) is an Lp multiplier on R for 1<p<infinity by modulation of the Hilbert transform, and it fails the punctured-domain Mihlin C1 condition at xi=1.",
+          "local_proof_attempt": "The smoothness failure and modulation identity are direct. The Hilbert-transform Lp theorem is assigned to later FR-8 and is not proved on this page.",
+          "necessity": "Records a genuine bounded jump multiplier outside the adopted Mihlin class and corrects the design’s false claim about unshifted signum."
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-negative-sobolev-order-containing-a-dirac-mass",
+        "kind": "example",
+        "title": "A Dirac mass has precisely sufficiently negative Sobolev order",
+        "statement": "Assume Countable Choice. In R^n, n>=1, the Dirac mass delta_0 belongs to H^s if and only if s<-n/2. The endpoint s=-n/2 fails by logarithmic divergence.",
+        "deps": [
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-nonnegative-improper-integral-bounded-primitive-criterion",
+          "lem-improper-integral-splitting-and-tail-invariance",
+          "thm-continuous-implies-integrable",
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-p-series-real-exponents",
+          "thm-logarithm-derivative-and-integral",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-exponential-is-strictly-increasing",
+          "thm-of-archimedean",
+          "def-countable-choice",
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "strategy": "The published tempered Fourier calculation gives F(delta_0)=1. The batch-12 weighted criterion reduces membership to integral_Rn(1+|xi|^2)^s dxi<infinity. Near zero the integrand is bounded above and below, so only infinity matters. The published polar-coordinate integration formula gives convergence exactly when integral_1^infinity r^{n-1+2s}dr converges, i.e. 2s+n<0. At equality it is the harmonic integral of dr/r and diverges logarithmically. No pointwise-function assumption on delta_0 is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture Notes for 18.155, current revision",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§12.1.2, weighted Hs definition, printed p. 140; Dirac criterion calculated locally"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§6.2, weighted Sobolev convention, printed p. 25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      }
+    ]
+  }
+]

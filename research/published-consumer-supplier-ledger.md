@@ -4,9 +4,678 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 0, U-C 0, A-R 1203, A-P 13. The
+Current classifications: U-P 0, U-C 0, A-R 1248, A-P 7. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Choice premises in two published suppliers — 2026-09-29
+
+`def-quasi-coherent-ideal-sheaf` used the AC-qualified associated-sheaf
+existence theorem to define its affine local form without declaring AC. The
+bounded owner repair added `def-axiom-of-choice` to its dependencies and
+declared AC at that exact Definition use. Its four direct item consumers are
+`thm-qc-ideal-closed-subscheme-correspondence-complete`,
+`thm-quasi-coherent-ideal-closed-subscheme-correspondence`,
+`thm-scheme-theoretic-image-quasi-compact-morphism`, and
+`def-fitting-ideal-sheaf`; each already declares AC at the relevant use.
+The earlier A-R classification remains. Evidence: current item, these four
+consumers, and defect row
+`frontier-36-complete-5b-published-qc-ideal-choice`.
+
+`cor-every-module-admits-an-injective-resolution` already stated AC but did
+not record its direct dependency or use at the AC-qualified functorial
+embedding theorem. The bounded owner repair added `def-axiom-of-choice`,
+an [A1] fact, and the exact step 1.1 citation. Its two direct item consumers,
+`lem-residue-field-splits-off-reduced-maximal-ideal` and
+`ex-an-injective-resolution-of-an-abelian-group-beginning-with-a-divisible-envelope`,
+already assume AC. Its mathematical conclusion is unchanged. Classification:
+A-R; this local dependency repair does not certify the whole proof. Evidence:
+current item, the two consumers, and defect row
+`frontier-36-complete-5b-published-injective-resolution-choice`.
+
+## Yoneda-to-derived projective sign interface — 2026-09-29
+
+Bounded read of published `prop-yoneda-product-is-composition-in-the-derived-category`
+(SHA-256 `ee1ca2258e1dea10e9eefab79d4f27bb7f2b833177f4322bcc257525e2367732`)
+finds an exact proof-interface mismatch in its projective-resolution lane.
+For a short extension $0\to N\xrightarrow{i}E\to M\to0$ and a lift
+$v:P_0\to E$ with $v d_1=i c$, published
+`thm-higher-yoneda-ext-agrees-with-derived-ext` steps 1.1–1.2 send the
+extension to the **positive** classical projective Ext cocycle $c$; the
+published projective Ext definition uses $+\,$precomposition. Published
+`thm-ext-is-hom-in-the-derived-category` step 2.1 then sends that degree-one
+class to the **negative** derived-Hom cochain $-c$, through its factor
+$\sigma_1=(-1)^{1(1+1)/2}=-1$. But the proposition's step 1.2 constructs
+a cone lift with components $(c,v)$ and says its projection is the connecting
+arrow represented by **positive** $c$; step 2.1 calls this exactly the
+classical comparison. These claimed comparisons differ by sign already for a
+nonzero short extension. The cone-defined Yoneda-to-derived bijection may be
+sound as a separately normalized map; its asserted agreement with the named
+classical projective comparison is unproved and, with the written signs, false.
+The bounded proof repair now separates these normalizations explicitly:
+step 2.1 proves bijectivity through the connecting-arrow dimension shifts and
+records the degree-one comparison $+c$ versus $-c$ without asserting they are
+equal. Step 1.1 supplies product compatibility directly through composition of
+the chosen cone connecting arrows. The proposition's Statement and dependency
+list are unchanged. Current SHA-256 is
+`03ce28cd599d7d385a3001dba01de96fec3ba1cbe611b1efb9cbe6ec31eb37c6`;
+focused precheck, rendercheck, and diff check pass. This is an **A-R** owner
+proof repair, not independent certification.
+
+Direct-use inventory: published
+`prop-bounded-derived-complexes-split-when-higher-ext-between-cohomologies-vanishes`
+[F3]/step 3.1 uses only the unchanged Yoneda-class surjectivity and splice as
+composition. Draft `thm-serre-duality-projective-space-coherent-sheaves`
+[F4]/step 3.2 uses the injective-resolution lane in
+$\mathrm{Mod}(\mathcal O)$ and the unchanged cone-product Statement. Draft
+`lem-smooth-projective-rational-point-koszul-residue-normalization` [F3]/step
+3.1 keeps the projective sign $\sigma_d$ explicit on affine finite-free
+Koszul resolutions and uses raw ordered Yoneda concatenation; it does not
+identify the positive classical cocycle with the cone arrow. Draft
+`lem-smooth-projective-embedding-gysin-trace-compatibility` [F8]/step 7.1
+uses cone composition in its global injective lane and limits the projective
+sign comparison to affine or stalk Koszul resolutions. These exact uses do
+not require a changed exported Statement; no transitive consumer edit follows.
+
+## Abelian-category arrow-proof repairs — 2026-09-29
+
+The following published proofs were reviewed at their stated claims and
+repaired without changing any `## Statement` or `## Definition` section.
+An exact before/after section comparison found no changed exported interface,
+so these repairs create no direct-consumer event or indirect cascade. The
+existing cited source metadata remains in the items; no new source retrieval
+or formal judge is claimed.
+
+| Published target | Finding and minimal repair | Exact published suppliers |
+|---|---|---|
+| `thm-snake-lemma-in-an-abelian-category` | Replaced member lifts and a wrong top-row-exactness attribution with pullbacks of epimorphisms, image factorization, and kernel/cokernel universal properties. The connecting map and exact sequence are unchanged. | `thm-the-connecting-morphism-exists-and-is-unique`, `def-exactness-at-a-node`, `thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism`, `thm-the-pullback-of-an-epimorphism-is-an-epimorphism`, `thm-every-monomorphism-is-the-kernel-of-its-cokernel`. |
+| `thm-snake-lemma-under-the-weaker-stacks-hypotheses` | Replaced member lifts and the invalid appeal to the cokernel universal property for lifting through $\alpha$ with the abelian image identity and epic pullbacks. | `def-exactness-at-a-node`, `thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism`, `thm-the-pullback-of-an-epimorphism-is-an-epimorphism`, `thm-every-monomorphism-is-the-kernel-of-its-cokernel`. |
+| `thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic` | Replaced ordinary element/chosen-boundary reasoning in an arbitrary abelian category with arrow lifts along epic boundary maps. The local proof uses earlier categorical suppliers and preserves the page prerequisite order. | `def-homology-object-of-a-chain-complex`, `def-mapping-cone-of-a-chain-map`, `thm-the-pullback-of-an-epimorphism-is-an-epimorphism`, `thm-every-monomorphism-is-the-kernel-of-its-cokernel`, `thm-an-abelian-category-is-balanced`. |
+| `lem-cartan-eilenberg-comparisons-preserve-both-filtrations` | Replaced “an element of $X^p$” with a snake-lemma argument. The quotient map is monic because the induced cokernel map is the boundary inclusion $B^pZ\to Z^p$ under the stated admissibility condition. | `thm-snake-lemma-in-an-abelian-category` and the item's stated Cartan–Eilenberg resolution definition. |
+| `prop-homological-gaussian-elimination-gives-a-strong-deformation-retract` | Replaced an “element” of an abstract biproduct with the displayed block-matrix identity; no map or side condition changed. | `lem-block-triangular-basis-changes-diagonalize-an-invertible-differential-block`. |
+| `prop-the-target-is-a-strong-deformation-retract-of-the-mapping-cylinder` | Replaced $y\in D_n$ with the biproduct-matrix identity $H_nj_n=0$. | `thm-the-mapping-cylinder-factors-a-chain-map`. |
+| `thm-short-five-lemma-by-pullback-without-members` | Supplied the missing implication $\alpha=\operatorname{coker}(\ker\alpha)$ before factoring $t$ through $\alpha$. | `thm-the-pullback-of-an-epimorphism-is-an-epimorphism`, `thm-every-monomorphism-is-the-kernel-of-its-cokernel`. |
+
+The separate `def-exactness-at-a-node` edit declares its already used
+subobject/quotient definition directly; this dependency hygiene change is not
+counted as a proof defect. No new Phase-2 supplier was required. Focused
+precheck passed all seven proof carriers and rendercheck passed all eight
+edited carriers. Independent read-only mathematical and rendering reviews of
+the final arguments found no remaining issue; this is bounded review, not
+whole-closure certification.
+
+## Quasi-finite algebra zero-ring proof repair — 2026-09-29
+
+Published `thm-quasi-finite-algebra-open-finite-factorization` step 3.1
+extracts a finite subcover of `Spec S`, which may be the empty family when
+`S=0`. Step 6.1 then uses the assertion that each monomial in
+`(Σ_i a_i g_i)^M` has an index `i` with exponent `ν_i≥m_i`; this argument
+has no index when the family is empty. The published `def-ring` explicitly
+permits `1=0`. After the batch-6 author dispatch exited, the owner added
+proof step 1.2: the empty distinguished-open cover implies `S=0`, and
+choosing `T=S'=0`, `n=1`, and `g_1=1_T=0` proves both conclusions for empty
+spectra and zero localizations. The remaining proof now assumes a nonempty
+spectrum, so the finite subcover has `n≥1`. The Statement and dependencies
+are unchanged. Focused precheck and rendercheck pass; this is a bounded
+**A-R** owner repair without an independent judge or whole-closure
+certification. Exact published
+direct consumers by declared item deps are
+`ex-zariski-main-open-immersion-punctured-affine-line`,
+`cex-quasi-finite-morphism-need-not-be-finite`,
+`ex-zariski-main-finite-morphism-factorization`, and
+`cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra`;
+the draft `lem-local-fibre-dimension-bound-via-polynomial-quasifiniteness`
+also declares it. The four published proofs were read at the exact use:
+the punctured-line and nonfinite examples construct nonzero algebras and
+their own finite factors; the finite-morphism example explicitly chooses
+`T=S`, `n=1`, `g_1=1` even when `S=0`; the local-factor corollary first fixes
+a prime, so its source is nonzero. All four retain the same licensed use of
+the unchanged Statement. The draft consumer is still under batch-6 repair.
+
+## Polar metric tangent-norm smoothness repaired — 2026-09-28
+
+Published `cor-polar-form-of-the-metric-in-normal-coordinates` step 1.1
+asserted that $v\mapsto |v|_{g_p}$ is smooth off zero without identifying a
+supplier or deriving the claim. Its repaired proof puts
+$Q(v)=g_p(v,v)>0$ for $v\ne0$, uses the published arbitrary-real-exponent
+derivative formula inductively to prove that $s^{1/2}$ is smooth for $s>0$,
+and applies the smooth chain rule to $Q^{1/2}$ and $\exp_p^{-1}$. The
+published Riemannian-metric definition, real-power derivative theorem and
+smooth differential chain rule are now direct dependencies in both the item
+and plan. The radial differential formula follows from $dQ_v(z)=2g_p(v,z)$.
+The Statement and its Countable Choice premise are unchanged. The two direct
+published consumers, `thm-radial-geodesics-minimize-length-in-a-normal-neighborhood`
+and `cor-local-formula-for-distance-from-the-center-of-a-normal-neighborhood`,
+use the unchanged polar metric formula and need no edits. Classification
+**A-R** records a bounded owner proof/dependency repair, not independent
+review or whole-closure certification. Focused checks are recorded in the
+active run record.
+
+## Circle-distance nearest-integer prerequisite — 2026-09-28
+
+Published `ex-length-and-distance-on-the-circle` proof step 3.1 used the
+existence of a nearest integer without a direct supplier. The published
+`lem-integer-part` proves the exact floor existence and uniqueness needed.
+A bounded owner repair added that dependency and Facts entry, and derived the
+nearest-integer comparison from $m=\lfloor(a-b)/(2\pi)+1/2\rfloor$, including
+the tied antipodal case. The Example claim is unchanged, so no direct-consumer
+interface propagation is needed; there are no direct item consumers. Focused
+precheck and rendercheck pass. The `research/plan-spec.json` dependency and
+proof strategy now match the repaired item, and plan validation passes, so
+classification is **A-R**. This is a local dependency/proof audit, not
+an independent judge or whole-proof certification.
+
+## Constraint-graph powering source convention clarified — 2026-09-28
+
+The Step-3b alphabet-reduction author identified a source-attribution
+overstatement in published `def-constraint-graph-powering`. Its local
+definition labels each radius-$R$ lazy-walk **pattern**, while Arora–Barak
+§18.5.1 labels the distinct vertices of the radius-$R$ ball (with padding).
+The owner retained the explicit pattern-indexed Definition and its numerical
+claims, changed the provenance to `ai-altered`, and corrected the Remark to
+say that only the radius/walk/window parameters follow Arora–Barak. No
+unproved alphabet equivalence is asserted or used. No Definition/Statement
+section changed, so no consumer-interface propagation is required. Focused
+rendercheck passes; precheck finds no proof-bearing body. Classification
+**A-R** for this bounded published attribution repair; no independent
+mathematical judge or whole-closure claim. Evidence: current item and
+`research/frontier-36-complete-step3b-pair-alphabet-reduction-and-the-pcp-theorem.md`.
+
+## Fredholm recorded-supplier relink repaired — 2026-09-28
+
+The three stable published IDs `def-fredholm-determinant`,
+`prop-fredholm-determinant-properties-for-trace-class-operators`, and
+`thm-lidskii-for-trace-class-operators` are rehomed from the old trace-class
+page to `fredholm-determinants-and-the-lidskii-trace-formula` under the
+owner-approved `research/frontier-36-complete-rehomed.json` receipt. The old
+page still records `rem-external-separable-trace-class-fredholm-determinant-theorem`
+as a historical external remark; no repaired item depends on that unproved
+record. Both page inventories, the plan, the batch manifest, coverage and the
+strict proof contract agree with the relocation. Plan validation with the
+rehome receipt finds no page or item cycle.
+
+The local arbitrary-Hilbert support lemma now supplies definition and spectral
+product independence. The proposition explicitly identifies traces, trace
+norms, singular values and generalized eigenspaces under $T=S\oplus0$; it
+transfers derivative at zero, Weyl's eigenvalue bound, singular-value growth,
+minimal exponential type, the exact continuity constant and multiplicativity
+through one or common separable reducing supports. It transfers finite-rank
+limits through a countable common support, and zero order and logarithmic
+derivative through the block inverse. Lidskii follows by differentiating the
+locally uniform product at zero with the proved absolute eigenvalue bound.
+The selected claims, zero-space convention and algebraic multiplicities are
+unchanged. Focused precheck, rendercheck, strict proof contract, manifest
+dependencies, content policy and run-wide dependency levels pass; `depcheck`
+has no Fredholm finding. These three are **A-R** after bounded owner proof
+repair, pending independent publication certification.
+
+## Projective-cover direct-sum proof repaired — 2026-09-28
+
+The completed Step-3b Grothendieck-pair author identified a proof gap in the
+published `thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules`:
+step 2.1 asserted that the direct sum of projective covers of the simple
+head constituents is again a projective cover, without showing its kernel
+is superfluous. The owner repaired that step. Each cover kernel is contained
+in the radical of its finite-dimensional source, because a superfluous
+submodule lies in every maximal submodule. The direct-sum kernel therefore
+lies in $J(A)(\bigoplus_iQ_i)=\operatorname{rad}(\bigoplus_iQ_i)$, which is
+superfluous by the existing finite-length radical lemma. The proof also now
+derives the head's finite semisimple decomposition from the published
+$A/J(A)$ theorem by finite generation and a finite simple-image argument.
+Those two source interfaces are declared as direct dependencies. No AC is
+used; the sums and selections are finite.
+
+The theorem's exported bijection and assumptions are unchanged. Its three
+direct item consumers use the same cover-of-simple indecomposability or
+simple-head correspondence and need no change: the full-defect-vertex
+corollary, the regular-module decomposition corollary and the definition of
+projective indecomposable characters/Cartan invariants. Focused precheck
+and rendercheck pass. Classification **A-R**, bounded item-local proof
+repair, without an independent judge or whole-closure claim. Evidence:
+current theorem and
+`research/frontier-36-complete-step3b-pair-grothendieck-groups-and-graded-cartan-pairings.md`.
+
+## Infinite-product finite-head and disconnected-domain repairs — 2026-09-28
+
+The Step-3b Fredholm author found a false nonvanishing clause in the published
+`thm-absolute-convergence-criterion-for-complex-infinite-products`: the
+summable sequence $a_0=-1$, $a_n=0$ for $n\ge1$ gives a convergent product
+with value zero. The owner retained the valid absolute-convergence equivalence
+and tail proof, then corrected the exported clause to say that the value is
+nonzero exactly when **every** factor $1+a_n$ is nonzero. The underlying
+`def-infinite-product` explicitly permits finitely many zero factors and
+defines the value using the finite head, so this is a substantive statement
+repair, not a change of convention.
+
+All three direct item consumers were examined. In
+`thm-normal-convergence-of-holomorphic-products`, the proof's tail has
+$|f_n(z)-1|\le M_n<1/2$ on each compact set, making every needed factor
+nonzero; its cited criterion and lower-bound step now state that premise.
+In `thm-euler-product-for-riemann-zeta`, each prime factor is nonzero because
+$|p^{-s}|=p^{-\operatorname{Re}s}<1$; the proof now checks that before using
+the criterion. In
+`cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one`, the same
+factor check now appears before its nonvanishing inference. Their exported
+conclusions did not change.
+
+The direct-consumer review exposed a separate gap in the normal-convergence
+theorem: on a disconnected open $\Omega$, a factor can vanish identically
+on one connected component without vanishing identically on all of
+$\Omega$. Its old hypothesis did not justify the assertion that prefix
+zeros are isolated there. The owner made local-uniform convergence and the
+zero-free tail unconditional, and conditioned the zero-multiplicity conclusion
+on no factor vanishing identically on any connected component. Its five
+direct item consumers were checked: the logarithmic-derivative corollary
+uses the unconditional holomorphic/tail clauses on its arbitrary open set;
+the canonical-product, Weierstrass-product, zero-divisor and concrete entire
+product consumers work on connected domains with factors that are not
+identically zero. None needs an exported claim change, so propagation stops.
+
+All four edited published items passed focused precheck and rendercheck,
+with no new dependency. This is a bounded defect-focused **A-R** repair of
+four items. It is not an independent judge decision or whole-closure audit.
+Evidence: the four current item files and
+`research/frontier-36-complete-step3b-pair-fredholm-determinants-and-the-lidskii-trace-formula.md`.
+
+## Hartogs finite-shell propagation gap — 2026-09-28
+
+The published `thm-hartogs-extension-across-compact-holes` on
+`the-hartogs-phenomena` had a confirmed proof gap in step 1.1. Its shell
+hypothesis gives a holomorphic extension from one coordinate shell inside
+each $P_j\cap(\Omega\setminus K)$ to $P_j$, but the proof then asserts that
+this extension agrees with the original function on **every** component of
+$P_j\cap(\Omega\setminus K)$. The finite-cover condition only says the later
+overlap components meet the complement; it does not connect each such
+component to the selected shell. The invoked published
+`lem-propagation-and-gluing-of-hartogs-extensions` requires full agreement on
+the overlap, so its premise is not established. A complete AC-free repair
+must strengthen the shell/component hypothesis or prove the missing
+componentwise agreement. The current run's draft
+`cor-hartogs-extension-dbar-proof` supplies a more general compact-hole
+extension argument, but explicitly assumes full AC; substituting it into the
+published theorem would require that premise and direct dependency to be
+propagated when the draft supplier is published. The new corollary does not
+use this theorem as a supplier, and no other direct item consumer was found.
+The 2026-09-29 bounded repair strengthened the theorem's finite-shell
+condition to require each punctured polydisc overlap
+$P_j\cap(\Omega\setminus K)$ to be connected. For any holomorphic function
+on that overlap, the published local-shell lemma extends its restriction to
+the shell; the identity theorem then forces agreement on the entire connected
+overlap. The existing componentwise condition and published gluing lemma
+finish the extension. The local-shell lemma's proof now explicitly passes
+from its central core to the whole shell by connectedness and identity. Its
+Statement did not change. The global theorem's strengthened Statement has no
+direct item consumers, so propagation stops. This route uses only published
+shell, gluing and identity suppliers and adds no AC premise; the draft
+full-AC $\bar\partial$ corollary remains separate. Exact repaired item SHA-256
+values: local shell `be4f6fab5ba08e8f053affab35ff2912d4fb01fd26f41b4539f7ddde944003b6`;
+global theorem `34562c5cb49dee7514be24b75577a61a89dc7b2e184e9efe0c8a04f01234e17b`.
+Focused precheck/rendercheck, plan validation and diff check passed. This is a
+bounded defect-focused **A-R** repair, not a new judge or whole-closure audit.
+Historical evidence: the prior published item and
+`research/frontier-36-complete-step3b-pair-the-dbar-complex-and-integral-solutions.md`.
+
+## Direct-integral and finite-choice proof concerns — 2026-09-28
+
+The Step-3b measurable-Hilbert-fields report raised four published-item
+concerns. Defect-focused review and bounded maintenance settled them as
+follows. On `spectral-measures-and-borel-functional-calculus`,
+`lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension` had a
+genuine proof gap in step 4.1: infinite matrix identities lacked convergence,
+a common conull set, and the unequal finite-rank case. Its **A-R** repair at
+SHA-256 `fc40495e4fe41b8310e25948e8317fbf0d1fe06e7c97bae5c48f6b936eae0070`
+uses localized coordinate identities, monotone convergence, Cauchy–Schwarz
+for off-diagonal products, one countable conull intersection, and the row and
+column isometries to obtain a pointwise unitary. Step 5.1 now covers all
+finite and infinite dimension comparisons. The item cites the published
+nonnegative change-of-density theorem where its former Radon–Nikodym
+simple-function citation did not license the squared norms. Its Statement is
+unchanged, its plan deps are synchronized, and focused precheck/rendercheck,
+plan validation and an independent bounded proof read pass.
+
+The `def-spectral-multiplicity-function-in-the-separable-case` had a circular
+Well-definedness (7) citation to that lemma and the later theorem, plus an
+open infinite fiber, an unsupported direct-sum completeness shortcut and the
+same broad-integrand citation in its unitary-model calculation. Its **A-R**
+repair at SHA-256 `7b1bc4c5287e08b553a428c84d84996525aa8e507dee47df5b515ccff01225fc`
+uses a closed fiber span, a finite-coordinate Cauchy completeness argument,
+the published nonnegative density theorem for the unitary map, and a
+finite-tail proof that the dominating measure is regular. It defines the
+model for the chosen cyclic decomposition and defers independence until
+after the intertwiner lemma. This changes only the exposed Definition clause
+that formerly claimed independence early; direct consumers are the repaired
+intertwiner lemma, repaired classification theorem and
+`rem-direct-integrals-and-general-multiplicity-theory`, whose three exact
+uses remain licensed by the model and the later theorem. The Definition
+rendercheck, plan validation and independent bounded read pass.
+
+`thm-unitary-equivalence-classified-by-measure-class-and-multiplicity` is a
+newly confirmed direct-consumer citation defect: [A3] used the
+simple-function Radon–Nikodym theorem for arbitrary nonnegative squared
+norms. Its **A-R** repair at SHA-256
+`d08855044b6efa6041a50e74a05fa6bdb223552bf1e067bdab54554efb0dd285`
+cites `thm-integration-against-a-density` and identifies
+$d\mu_j/d\lambda=(d\mu_j/d\mu)(d\mu/d\lambda)$, so active sets persist under
+equivalent measures. New proof step 4.1 applies the proved necessity
+direction to two decompositions of the same operator and closes the
+Definition's deferred independence without a cycle. The theorem Statement
+is unchanged. Focused precheck/rendercheck, plan validation and independent
+bounded proof read pass.
+
+The earlier **U-P** concern on
+`thm-integration-against-a-radon-nikodym-derivative` misread its current
+Statement: its $g$ is bound to a canonical simple function with
+finite-variation level sets, and its proof establishes exactly that claim.
+Its prior bounded **A-R** proof repair remains valid; no new item edit is
+needed. The broad nonnegative identity needed by the three consumers is
+already published as `thm-integration-against-a-density`. The **U-P**
+`lem-finite-choice` concern is also closed with no repair: its induction
+uses only a single witness at each finite successor stage, and its
+`def-axiom-of-choice` link explains the ZF boundary rather than assuming
+AC. No consumer Statement changes. Initial report:
+`research/frontier-36-complete-step3b-pair-measurable-hilbert-fields-and-direct-integral-operators.md`.
+These are bounded audits and maintenance checks, not independent judges or
+whole-closure certification.
+
+## Plane-graph and covering-lift proof concerns — 2026-09-28
+
+The Step-3b topology and Gauss–Bonnet reports identified three proof gaps on
+the published `plane-graphs-euler-and-the-five-colour-theorem` page.
+`thm-polygonal-jordan-curve` step 2.1 formerly invoked unspecified offset
+detours. Its **A-R** bounded owner repair at SHA-256
+`92c5e9b97950ec4e8a54d3686fe675bd93fd703464050f6111d4f1f3bf487a82`
+builds finite polygonal left/right side networks from edge half-strips and
+vertex sectors. A generic two-segment path between equal-parity points has
+an even number of transverse crossings; each consecutive crossing pair is
+replaced by a path in the connected network of its common endpoint parity.
+All constructions are finite and choice-free. The item and plan now declare
+the published polygon definition as a direct supplier and remove unused ray
+and open-component dependencies. The theorem's two-region/frontier conclusion
+and assumptions remain identical; 13 direct reference consumers use that
+unchanged conclusion, including the plane-edge incidence lemma and draft
+batch-10 ear facts. An independent bounded proof read found two small
+network-wording gaps, both corrected before the current SHA. Focused
+precheck/rendercheck, plan validation and diff check pass.
+`prop-face-boundaries-in-two-connected-plane-graphs` formerly asserted a
+local-sector crossing obstruction without proving it. Its **A-R** bounded
+owner repair at SHA-256
+`4cee5ea116c65ec5bc5757cb44fb531d4ddddf254f129414ab96e8a92e828549`
+constructs a finite ear sequence from any cycle. A polygonal crosscut proof
+uses the two Jordan polygons made by an ear and the two old boundary arcs
+to show that exactly the ear's face splits, even if it is unbounded; all
+other faces remain components. The induction gives each face exactly one
+cycle frontier and hence a cyclic facial boundary walk. The published
+polygonal plane-graph definition, repaired polygonal Jordan theorem and
+graph definitions are direct suppliers; unused incidence/Whitney edges
+were removed from the item and plan. Its conclusion and assumptions remain
+unchanged. Five direct published consumers use exactly that conclusion.
+Focused precheck/rendercheck, plan validation, diff check and an
+independent bounded proof read pass.
+`thm-euler-formula-for-connected-plane-graphs` formerly inferred an exact
+one-face split merely from two-sided edge incidence. Its **A-R** bounded
+owner repair at SHA-256
+`7cabdcdb779ca8934ff1d4dfb084a9c494b9e4a89954ffb7b898c84532e844e4`
+proves the deletion correspondence. For a cycle edge $e$, the two incident
+old faces and $e^\circ$ form one connected open-and-closed component of the
+deleted drawing's complement; all other old faces stay separate because
+their frontiers avoid $e^\circ$, while the edge endpoints remain in the
+drawing. Deleting all non-tree edges preserves $V-E+F$, and the tree base
+has one face and $E=V-1$. The additional published forest-count supplier
+is declared, the unused tree-deletion edge removed, and the plan aligned.
+Its equation and assumptions are unchanged; four direct published
+consumers use exactly that conclusion. Focused precheck/rendercheck, plan
+validation, diff check and an independent bounded proof read pass.
+Diestel, *Graph Theory*, Theorem 4.2.9 supports the correspondence; no
+new Phase-2 pair was needed. Initial evidence:
+`research/frontier-36-complete-step3b-pair-classification-of-compact-connected-surfaces.md`
+and `research/frontier-36-complete-step3b-pair-the-gauss-bonnet-theorem-for-riemannian-surfaces.md`.
+
+The published `thm-path-lifting-for-covering-maps` on
+`covering-spaces-and-lifting` had a separate proof gap: old step 1.1 said
+“lift successively sheet by sheet” without a finite subdivision, sheet
+selection or gluing construction, and old step 2.1 merely asserted
+uniqueness. The **A-R** owner repair now pulls back evenly covered opens,
+uses a Lebesgue number and Archimedean finite mesh, fixes one evenly covered
+sheet decomposition on each selected subinterval, applies its unique sheet
+inverse recursively from the prescribed endpoint, and pastes the finite
+continuous pieces. A competing lift stays in one sheet on each connected
+closed subinterval, so induction proves uniqueness. All selected
+neighbourhoods and decompositions require only finite choice. The added
+direct published suppliers are
+`def-covering-map-and-evenly-covered-neighbourhoods`,
+`thm-heine-borel-rn`, `thm-of-archimedean`, and
+`thm-connected-subsets-of-r-are-intervals`; the existing Lebesgue-number
+and pasting suppliers remain. The plan row is synchronized. Current item
+SHA-256 is
+`43f0b30fbc5ae0d873640dcaa1b37a4b6cea0edd5ccb44c14f13c9cefec8d6c3`.
+Focused precheck and rendercheck pass, and plan validation reports no
+cycles or unresolved IDs. An independent bounded proof read identified
+the decomposition wording and confirmed the corrected argument; this is
+not an independent judge or whole-closure certification. The Statement
+is unchanged. Direct published covering and braid consumers retain their
+licensed uses, as does draft Batch-24
+`lem-a-configuration-loop-traces-a-geometric-braid` step 1.2. The
+Gauss–Bonnet Hopf item still needs its own two-dimensional angle-lift
+argument; path lifting alone does not supply it. Initial evidence:
+`research/frontier-36-complete-step3b-pair-the-gauss-bonnet-theorem-for-riemannian-surfaces.md`.
+
+## Gamma Stirling limit repaired — 2026-09-28
+
+The Step-3b Jensen author identified a concrete proof gap in the published
+`thm-stirling-formula-gamma` on `the-gamma-function`. Step 3.1 had used only
+`Log(N+z)=log N+o(1)` inside a factor of size $N$, which discards the finite
+$z$ contribution required by its displayed Binet formula. The owner repaired
+that step with `Log(N+z)=log N+z/N+O_z(N^{-2})` and displayed the resulting
+`+z+o(1)` before cancellation. The theorem and its three existing published
+prerequisites are unchanged; the repair needs no new Phase-2 supplier. Focused
+precheck and rendercheck pass. Seven direct item consumers were inspected for
+the use interface: `ex-stirling-approximation-to-ten-factorial`,
+`ex-nevanlinna-characteristic-of-reciprocal-gamma`,
+`thm-riemann-xi-is-entire-of-order-one`,
+`lem-local-logarithmic-derivative-zeta`,
+`lem-zeta-logarithmic-derivative-zero-bound`,
+`lem-logarithmic-derivative-zeta-left-half-plane`, and
+`thm-riemann-von-mangoldt-zero-counting`. They use the unchanged sectorial
+formula, so this bounded repair requires no consumer claim edit. This is
+**A-R** by owner local repair, without an independent judgment or full
+closure certification. Evidence: current item step 3.1 and
+`research/frontier-36-complete-step3b-pair-jensen-theory-and-nevanlinnas-first-main-theorem.md`.
+
+## Affine-chart and quasi-coherent ideal proof findings — 2026-09-27
+
+Batch 7's Step-1 source and dependency audit reported four published-item
+findings in `research/frontier-36-complete-batch-7.notes.md`. The owner read
+the current published files and resolved the first one. The original proof of
+`lem-intersection-affine-opens-covered-principal-opens` refined an open in the
+$V$ chart but never showed that the refinement stayed principal in $U$.
+For $x\in U\cap V$, choose $D_U(f)\subseteq V$ and $D_V(g)\subseteq U$
+through $x$. On $D_U(f)$ write $g=a/f^n$, obtaining their intersection as
+$D_U(fa)$; on $D_V(g)$ write $f=b/g^m$, obtaining the same open as $D_V(gb)$.
+This proves the required common-principal basis. The published sections-on-
+basic-opens theorem is an exact additional dependency. The Statement is
+unchanged; item, plan, focused precheck and rendercheck agree. This is an
+**A-R** bounded owner repair, not an independent judgment; it needs no
+Phase-2 supplier or new pair.
+
+Four findings remain **A-P**, with exact repair routes identified.
+`thm-affine-closed-immersions-quotient-rings` proof step 1.1
+imports Stacks Tag `01IN` as a complete proof even though that tag's route
+uses the later quasi-coherent affine equivalence. The in-run batch-5
+`lem-closed-immersion-affine-quotient-and-base-change` gives a direct finite
+principal-cover route for a published proof repair, subject to its own final
+verification and published cutover.
+Batch-9's read-only closure in
+`research/frontier-36-complete-batch-9.notes.md` also identifies the published
+direct users `lem-base-change-open-closed-immersions` and
+`lem-diagonal-is-immersion`, and the draft batch-5
+`thm-projective-space-proper-over-base` path through the diagonal. Examine
+their actual use after the quotient theorem is repaired; these are impact
+candidates, not separately confirmed published defects.
+The batch-8 draft `thm-ample-powers-very-ample-proper-base` originally cited
+the published quotient theorem in fact [F9]. Its direct use at proof steps
+1.3, 9.1, 10.1, 11.1 and 12.1 now cites only the in-run batch-5
+`lem-closed-immersion-affine-quotient-and-base-change`, whose statement gives
+the same affine quotient and base-change facts. The published item is no
+longer a direct supplier for this draft consumer; its own A-P proof repair
+and published-consumer audit remain open.
+`thm-quasi-coherent-ideal-closed-subscheme-correspondence` proof steps 1.1
+and 1.2 use that defective published quotient proof in both directions.
+The in-run batch-7 `thm-affine-quasi-coherent-equivalence` and
+`thm-qc-ideal-closed-subscheme-correspondence-complete`, together with the
+batch-5 quotient lemma, form its proposed repair route; the correspondence
+supplier is now current. The published proof has been cut over to those
+suppliers and gives the affine-stalk and inverse-kernel checks explicitly.
+Its Statement changed only by adding `Assume the Axiom of Choice`; this is
+necessary because the verified batch-5 and batch-7 suppliers assume AC and
+the local finite-cover route also uses the AC-dependent quasi-compactness of
+affine spectra. Before: `For a scheme X, the assignments ...`; after:
+`Assume the Axiom of Choice. For a scheme X, the assignments ...`.
+The direct published consumers at the time of the interface change were
+`thm-scheme-theoretic-image-quasi-compact-morphism` (its [F2] and steps
+4.1–5.1 use the ideal/closed-subscheme correspondence) and
+`thm-conormal-sequence-closed-immersion` (its former [F3] and step 2.2 used
+the closed-immersion-to-affine-quotient direction). No draft item directly
+cited this published theorem. The image theorem now adds AC to its Statement,
+Given, and direct dependencies; its quotient and minimality uses therefore
+match the repaired supplier. The conormal theorem instead removes the
+correspondence use and keeps its Statement choice-free: at each $x\in X$,
+the closed-immersion sheaf surjection gives
+$\mathcal O_{X,x}=\mathcal O_{Y,i(x)}/\mathcal I_{i(x)}$; simultaneous
+source/base localization identifies both relative differential stalks with
+the differential modules of these local rings, and the algebraic conormal
+sequence plus stalkwise exactness finishes the proof. Its two published direct
+consumers, `ex-unramified-closed-point-immersion` and
+`lem-smooth-closed-immersion-regular-conormal-sequence`, use the unchanged
+conormal Statement and inherit no new AC premise. These are bounded local
+repairs with focused precheck/render passes, not independent certification.
+`def-quasi-coherent-ideal-sheaf` defines its local form through the sheaf
+associated to an $A$-module. Its declared dependencies now include the
+current batch-7 `def-associated-sheaf-module-affine-scheme` and
+`thm-associated-module-sheaf-exists`, which supply exactly that construction.
+The Definition text is unchanged; this is a bounded dependency repair, not an
+independent certification of the definition or its consumers.
+
+`thm-scheme-theoretic-image-quasi-compact-morphism` proof step 2.1 had asserted
+without proof that $I_V=\ker(A\to\prod_{i=1}^n B_i)$ localizes to the
+kernel on each principal open $D(g)\subseteq V=\operatorname{Spec}A$.
+A bounded owner repair now proves this local claim: the finite
+affine cover of $f^{-1}(V)$ restricts to the principal opens
+$D_{U_i}(f_i^*g)$, so the sheaf injection and exactness of localization give
+$\ker(A_g\to\Gamma(f^{-1}(D(g)),\mathcal O_X))
+=\ker(A_g\to\prod_i(B_i)_g)=(I_V)_g$; the empty cover has the same
+interpretation. The proof and plan now declare the published exact-localization
+and basic-open-section suppliers. The associated-sheaf definition and
+closed-subscheme correspondence have now received bounded local repairs, so
+the image theorem is **A-R** at this local proof scope. Its Statement changed
+from `Let f:X→Y be a quasi-compact morphism ...` to
+`Assume the Axiom of Choice. Let f:X→Y be a quasi-compact morphism ...`, since
+steps 4.1–5.1 consume the correspondence under AC. Its only direct item
+consumer is the in-run batch-9 `lem-chow-lemma-proper-noetherian`: [F3] and
+steps 1.6–1.7 use the image and open-restriction clauses, and its own
+Statement already assumes AC. No published item directly consumes this
+theorem. The batch-9 carrier needs its strict citation contract and owner
+decision refreshed against these current bytes; that is owned by the batch-9
+reconciler. Focused precheck, rendercheck, plan validation, dependency-level
+check, and whitespace check support only a bounded repair, not independent
+certification of the whole theorem.
+Stacks Tag `01R5`, Lemma 29.6.3, confirms the quasi-compact hypothesis and
+the finite-cover argument. The in-run batch-9
+`lem-schematic-closure-and-dense-agreement` treats a narrower open-immersion
+case and is not a supplier for this general theorem. The batch-9 author report
+`research/frontier-36-complete-step3b-pair-cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes.md`
+records the original proof gap; the current direct-use audit found no other
+item consumer of this published theorem.
+
+## Plane Perron barrier and harmonic-envelope proofs repaired — 2026-09-27
+
+The published `thm-barrier-characterization-of-regular-boundary-points` had a
+fatal inference in proof steps 1.1–2.1: the maximum principle was applied to
+expressions involving $H_\varphi$ as if its boundary limits were already
+controlled by $\varphi$ at every point, including irregular points. The
+batch-26 scaffold audit identified the exact gap in
+`research/frontier-36-complete-batch-26.notes.md`. The owner repaired this
+published proof without changing its Statement. A barrier supplies the lower
+function $\varphi(\zeta)-\varepsilon+A b$; maximum comparison is applied to
+each actual Perron lower function $v+A b-\varphi(\zeta)-\varepsilon$, and the
+resulting uniform local upper bound passes to the regularized supremum. In the
+converse, the envelope for $\psi(\eta)=-|\eta-\zeta|^2$ is subharmonic by the
+published upper-envelope theorem and lies below $-|z-\zeta|^2$ by maximum
+comparison, hence is a barrier at a regular point. The exact published
+suppliers are `def-perron-family-for-the-plane-dirichlet-problem`,
+`def-perron-envelope-for-the-plane-dirichlet-problem`,
+`lem-perron-family-is-nonempty-and-bounded`,
+`thm-upper-envelope-theorem-for-plane-subharmonic-functions`,
+`lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity`,
+`thm-maximum-principle-for-plane-subharmonic-functions`, and
+`thm-c-two-characterization-of-plane-subharmonicity`; no Phase-2 supplier or
+new pair is needed. The item and plan dependencies/strategy now match. Focused
+precheck and full plan validation pass. This is an **A-R** bounded owner repair,
+not an independent judgment. Its three direct item consumers were read:
+`thm-exterior-disc-and-exterior-cone-points-are-regular` and
+`lem-weak-local-subharmonic-peak-function-implies-regularity` invoke the
+unchanged barrier implication after constructing a barrier, while
+`thm-perron-solves-dirichlet-on-regular-plane-domains` uses only the unchanged
+definition of regularity. Their used claims remain licensed; no consumer edit
+or further interface event is needed.
+
+The same batch-26 audit found a separate published defect in
+`thm-perron-envelope-is-harmonic`: its old proof chose a countable sequence
+of near-envelope points and lower functions without a choice premise. The
+owner replaced that step with a choice-free directed family of Poisson lifts.
+Finite maxima of lower functions give common upper lifts; positivity of the
+Poisson kernel makes modification order preserving. Harnack's inequality
+makes the pointwise supremum locally uniformly approximable by one lift for
+each requested error, so the mean-value criterion makes it harmonic. A
+single near-center lower-function witness and a Harnack factor tending to
+one identify that supremum with the regularized envelope at the center;
+the subharmonic maximum principle gives equality on the disc. No witnesses
+are assembled into a sequence. The Statement and its choice strength are
+unchanged. The historical frontier-20 proof contracts and manifest and the
+current plan dependency/strategy are synchronized. Both strict contract
+files, focused precheck and rendercheck pass.
+
+The published direct consumer `thm-perron-solves-dirichlet-on-regular-plane-domains`
+uses only the unchanged harmonicity claim and needs no premise change.
+The current-run direct consumers `thm-harmonic-measure-is-well-defined` and
+`thm-green-function-exists-on-bounded-plane-domains` likewise use only
+harmonicity. The Green theorem's former sentence attributing Countable Choice
+to this Perron proof was corrected; its Countable Choice premise remains
+necessary for the distributional normalization supplier. Its proof contract
+and affected downstream quotes were refreshed. This bounded proof and
+attribution repair is **A-R**, pending independent publication certification;
+no new pair or stronger choice premise is needed.
+
+## Punctured-disc irregularity and Perron counterexample repaired — 2026-09-27
+
+The published
+`cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum`
+proved that its datum has no continuous harmonic solution, then inferred that
+the puncture in particular is irregular from a theorem that only implies
+*some* boundary point is irregular. The owner repaired this invalid inference
+without changing the Statement. For the datum $\varphi(0)=1$ and
+$\varphi=0$ on the outer circle, any Perron lower function $v$ is bounded by
+$1+\varepsilon$ near the puncture and by $\varepsilon$ on a collar of the
+circle. Comparison on $\delta<|z|<R$ with
+$\varepsilon+\log(R/|z|)/\log(R/\delta)$, followed by $\delta\downarrow0$,
+proves $v\le0$. Since the zero function is a lower function,
+$U_\varphi=H_\varphi=0$; the puncture is therefore irregular by the published
+definition. The original removable-harmonic-singularity argument still proves
+nonexistence of a continuous harmonic solution. Exact suppliers are the
+published Perron family/envelope and regularity definitions, subharmonic
+positive-sum and maximum principles, harmonic removable-singularity theorem,
+and Dirichlet uniqueness. No Phase-2 supplier or new pair is needed. This is
+an **A-R** bounded owner repair, with focused precheck and rendercheck passing.
+
+Its direct consumer `fs-every-bounded-plane-domain-has-a-dirichlet-solution`
+still uses only the unchanged nonsolvability claim and needs no edit. The
+other direct consumer,
+`fs-the-perron-envelope-always-attains-the-boundary-data`, previously used
+`thm-perron-envelope-is-harmonic` to turn hypothetical boundary attainment
+into a contradiction. The owner gave this false-statement item a shorter
+proof using the explicit $H_\varphi=0$ computation, removed the harmonicity
+dependency, and kept its Statement refuted unchanged. It is a second **A-R**
+bounded repair; precheck and rendercheck pass. The two plan rows now match the
+proofs. The separate harmonic-envelope choice gap is now closed by the directed Poisson-lift proof above; its regular-domain consumer keeps the unchanged harmonicity premise.
 
 ## Configuration-space page prerequisite header repaired — 2026-09-27
 
@@ -362,36 +1031,32 @@ frontier-35 selected batch page or coverage manifests. The six items already
 had A-R index rows; this is a further bounded structural repair, not a
 renewed independent judge or proof certification.
 
-## Symmetric-group Coxeter presentation proof — 2026-09-24
+## Symmetric-group Coxeter presentation proof — 2026-09-29
 
-Published `thm-the-symmetric-group-has-the-coxeter-presentation` has a true
-statement but an unsupported completeness proof. Its Facts [F1] quotes the
-identical presentation from Müger, and proof step 1.1 merely restates [F1].
-The declared adjacent-transposition generation and von Dyck dependencies give
-the presented group a surjection onto $S_n$ after checking relations; they do
-not prove the kernel is trivial. This is a confirmed proof gap, classified
-**A-P** after bounded item review, not a counterexample to the theorem. Repair
-the published item by proving a type-A coset normal form under
-the displayed Coxeter relations. In the presented group $G_n$, put
-$H=\langle s_1,\ldots,s_{n-2}\rangle$ and
-$r_j=s_{n-1}s_{n-2}\cdots s_j$ for $1\le j<n$, with $r_n=1$ and
-$R=\{r_1,\ldots,r_n\}$.
-The relations give $r_js_i=s_ir_j$ for $i\le j-2$,
-$r_js_{j-1}=r_{j-1}$, $r_js_j=r_{j+1}$, and
-$r_js_i=s_{i-1}r_j$ for $i>j$ (with the empty-index cases omitted).
-Thus $HR$ is stable under right multiplication by every generator, so
-$G_n=\bigcup_{j=1}^nHr_j$ and $|G_n|\le n|H|\le n!$ by induction.
-The obvious adjacent-transposition map is onto $S_n$, which has $n!$
-permutations by choosing the images of $1,\ldots,n$ successively, so it is
-an isomorphism. The final published proof should check these rewrite cases
-explicitly, including $r_n$ and $n=2$, rather than merely quote the target
-presentation;
-then recheck its direct consumers and verification. No Phase-2 supplier is
-required for that direct repair. The active batch-15 Garside pair instead
-declares the published adjacent-transposition generation theorem and proposes
-its own local reduced-word lift lemma; that draft lemma is not a repair or
-dependency of this published item. The old BG-15 prose named this defective
-supplier, but the current manifest and Step-3a review have removed the edge.
+The published `thm-the-symmetric-group-has-the-coxeter-presentation` had a
+circular proof: its former [F1] quoted the exact presentation and step 1.1
+repeated that source assertion. The claim itself was unaffected. The bounded
+owner proof repair now checks the relators in $S_n$, uses von Dyck and adjacent
+generation for a surjection $G_n\twoheadrightarrow S_n$, and proves its
+injectivity directly. With $H=\langle s_1,\ldots,s_{n-2}\rangle$ and
+$r_j=s_{n-1}\cdots s_j$ for $1\le j<n$, $r_n=1$, step 1.2 checks all
+four right-multiplication cases, including $r_n$ and $n=2$. Hence
+$G_n=\bigcup_{j=1}^nHr_j$ and induction gives $|G_n|\le n!$; since
+$|S_n|=n!$, the surjection is an isomorphism. This uses only the theorem's
+existing published dependencies. The Statement and dependency list are
+unchanged. The old judge and audit stamps were removed because they covered
+the former proof; the current owner audit is dated 2026-09-29.
+
+Current item SHA-256 is
+`2f86b76f1eb0e5a48b461983709ec6a9421955095bf6f772f4e8444a6379bb59`.
+Focused precheck, rendercheck and diff check pass. A fresh independent
+GPT-6-Sol high read found no algebraic or boundary-case gap; this is a
+bounded proof audit, not a new judge or whole-closure certification. The
+direct published `thm-the-braid-group-surjects-onto-the-symmetric-group`
+uses only the verified braid and distant relations, while
+`thm-symmetric-coherence` uses completeness now established by the coset
+argument. Three Garside items mention this theorem in Remarks only; none
+requires a changed claim or premise. This defect is **A-R**.
 
 ## Chain-homotopy invariance in an abelian category — 2026-09-24
 
@@ -10624,13 +11289,15 @@ are `lem-base-change-affine-morphisms`,
 `fibre-products-base-change-and-scheme-theoretic-fibres`;
 `ex-graph-polynomial-map-closed-subscheme` on its examples page;
 `thm-quasi-coherent-ideal-closed-subscheme-correspondence` on
-`schemes-subschemes-and-morphisms-locally-of-finite-type`; and
+`quasi-coherent-and-coherent-sheaves-and-vector-bundles` (re-homed from the
+schemes page); and
 `cex-closed-subset-does-not-determine-closed-subscheme` plus
 `ex-closed-subscheme-double-origin-point` on that pair's examples page.
 The **transitively blocked** consumers are
 `def-scheme-theoretic-inverse-image-subscheme` and
 `lem-subscheme-intersection-fibre-product` on the fibre-products A page, and
-`thm-scheme-theoretic-image-quasi-compact-morphism` on the schemes A page.
+`thm-scheme-theoretic-image-quasi-compact-morphism` on the quasi-coherent A
+page (re-homed from the schemes page).
 That last theorem is also the sole current direct consumer of
 `thm-quasi-coherent-ideal-closed-subscheme-correspondence`.
 
@@ -30701,7 +31368,7 @@ A bounded statement/frontmatter review of five **published** items on `projectiv
 - `thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings` (consumes the AC-qualified transfinite construction);
 - `cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution` (consumes the functorial embedding).
 
-All five have published home pages and a published AC supplier. Recommended minimal repair: add `def-axiom-of-choice` to each direct `deps` and matching plan row, verify the existing proof's exact choice use, and refresh affected proof/readiness evidence; no statement change or new pair is needed. They remain A-P pending that bounded repair. This review inspected the explicit assumption and dependency interfaces, not the entire transfinite proof or its consumers.
+All five have published home pages and a published AC supplier. The 2026-09-29 bounded repair added `def-axiom-of-choice` to each direct `deps` and matching plan row. A deeper read also found that the first Zorn argument ordered partial maps without requiring agreement and omitted an empty-chain upper bound; both are fixed. The first and transfinite lemmas now directly cite `thm-ab5-is-equivalent-to-exactness-of-filtered-colimits` at their exact filtered-colimit uses. The embedding theorem chooses one regular successor aleph above the uniform subobject bound before varying the object, with direct cardinality suppliers, so its construction is functorial. Each item's Statement remains unchanged. All five pass focused precheck and rendercheck, the plan validates, and an independent bounded read found no remaining local gap. This is A-R for the five exact defects, without new independent publication judgments or whole-closure certification.
 
 ## Arbitrary-category horseshoe lift proof — 2026-09-24
 
@@ -30713,10 +31380,10 @@ The supplier objects are already published: `def-projective-object`, `def-projec
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. Its current literal rows contain **3,480 unique
-published items**. The current depcheck publication census contains **20,083
-published items**; **16,603 published items
-remain outside this index**. These counts are a status census, not a claim
+subsequently reconciled IDs. Its current literal rows contain **3,516 unique
+item IDs**, all **3,516 currently published**.
+The current item-file census contains **20,731 `status: published` items**;
+**17,215 published items remain outside this index**. These counts are a status census, not a claim
 that outside-index items or entire dependency closures have been audited.
 The initial extraction also contained
 787 planned, draft, absent or noncanonical IDs, not published targets.
@@ -30724,13 +31391,13 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 0 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 2 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 1197 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 13 | Recorded direct review and an unresolved item-specific repair. |
+| U-P | Unaudited and potentially defective items | 8 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| A-R | Audited and repaired items | 1247 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 7 | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,212 distinct items.
+defect classes. The four queues currently contain 1,254 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -31968,7 +32635,6 @@ owner's scan policy.
 | `ex-cesaro-means-of-alternating` | U-P300 Sol 3: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `ex-cauchy-complete-not-complete-field` | U-P300 Sol 3: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `cex-a-complex-linear-map-can-fail-to-preserve-a-chosen-real-form` | U-P300 Sol 2: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
-| `lem-finite-choice` | U-P300 Sol 1: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `ex-rational-function-field-order` | U-P300 Sol 3: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `ex-quarter-turn-diagonalises-after-complexification` | U-P300 Sol 2: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `rem-where-the-archimedean-hypothesis-is-needed` | U-P300 Sol 3: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
@@ -32606,7 +33272,6 @@ owner's scan policy.
 | `thm-multihomogeneous-map-to-projective-space` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-multihomogeneous-map-to-projective-space`). No independent judge. |
 | `thm-norm-inequality-for-the-vector-valued-integral` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-norm-inequality-for-the-vector-valued-integral`). No independent judge. |
 | `thm-posts-theorem` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-posts-theorem`). No independent judge. |
-| `thm-quasi-coherent-ideal-closed-subscheme-correspondence` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-quasi-coherent-ideal-closed-subscheme-correspondence`). No independent judge. |
 | `thm-segre-image-rank-one-minors` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-segre-image-rank-one-minors`). No independent judge. |
 | `thm-sokal-gliding-hump-uniform-boundedness` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-sokal-gliding-hump-uniform-boundedness`). No independent judge. |
 | `thm-subsequence-characterization-of-convergence-in-probability` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-10-receipts.jsonl` (`thm-subsequence-characterization-of-convergence-in-probability`). No independent judge. |
@@ -32675,7 +33340,7 @@ owner's scan policy.
 | `lem-p-primary-character-value-congruence` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`lem-p-primary-character-value-congruence`). No independent judge. |
 | `lem-projective-hypersurface-dimension-drop` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-01-receipts.jsonl` (`lem-projective-hypersurface-dimension-drop`). No independent judge. |
 | `lem-three-series-necessity-for-truncated-means-and-variances` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-01-receipts.jsonl` (`lem-three-series-necessity-for-truncated-means-and-variances`). No independent judge. |
-| `thm-affine-closed-immersions-quotient-rings` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-affine-closed-immersions-quotient-rings`). No independent judge. |
+| `thm-affine-closed-immersions-quotient-rings` | A-P: published proof step 1.1 imports Stacks Tag `01IN`, whose `01IH` route uses later affine quasi-coherent equivalence. The in-run batch-5 `lem-closed-immersion-affine-quotient-and-base-change` offers a direct finite principal-cover proof route; verify it and repair this published proof before reviewing direct consumers. The batch-8 draft `thm-ample-powers-very-ample-proper-base` now uses the in-run lemma alone at [F9], so it is no longer a direct consumer of this published item. Earlier U-P impact review did not repair the published proof. Evidence: `research/frontier-36-complete-batch-7.notes.md`, current published proof, current batch-8 draft, and `research/up-1630-review/agent-04-receipts.jsonl`. |
 | `thm-arithmetical-hierarchy-is-strict` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-arithmetical-hierarchy-is-strict`). No independent judge. |
 | `thm-banach-series-criterion` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-banach-series-criterion`). No independent judge. |
 | `thm-mean-value-inequality` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-08-receipts.jsonl` (`thm-mean-value-inequality`). No independent judge. |
@@ -32758,7 +33423,6 @@ owner's scan policy.
 | `lem-regularization-preserves-value-quantitatively` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`lem-regularization-preserves-value-quantitatively`). No independent judge. |
 | `prop-class-sums-act-by-central-character-scalars` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`prop-class-sums-act-by-central-character-scalars`). No independent judge. |
 | `prop-decomposition-matrix-is-block-diagonal-after-block-ordering` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`prop-decomposition-matrix-is-block-diagonal-after-block-ordering`). No independent judge. |
-| `prop-face-boundaries-in-two-connected-plane-graphs` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`prop-face-boundaries-in-two-connected-plane-graphs`). No independent judge. |
 | `prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings`). No independent judge. |
 | `prop-np-is-contained-in-pspace-and-pspace-in-exp` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`prop-np-is-contained-in-pspace-and-pspace-in-exp`). No independent judge. |
 | `prop-simultaneous-attachment-at-a-morse-critical-value` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`prop-simultaneous-attachment-at-a-morse-critical-value`). No independent judge. |
@@ -32791,7 +33455,6 @@ owner's scan policy.
 | `rem-duality-as-a-dual-space-statement` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-05-receipts.jsonl` (`rem-duality-as-a-dual-space-statement`). No independent judge. |
 | `rem-feferman-no-free-ultrafilter-in-zf` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`rem-feferman-no-free-ultrafilter-in-zf`). No independent judge. |
 | `rem-grigorchuk-groups-of-intermediate-growth` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`rem-grigorchuk-groups-of-intermediate-growth`). No independent judge. |
-| `rem-hahn-banach-open-choice-questions` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`rem-hahn-banach-open-choice-questions`). No independent judge. |
 | `rem-omega-one-and-the-cost-of-choice` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-05-receipts.jsonl` (`rem-omega-one-and-the-cost-of-choice`). No independent judge. |
 | `thm-mackeys-irreducibility-criterion-for-finite-groups` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-mackeys-irreducibility-criterion-for-finite-groups`). No independent judge. |
 | `thm-monotone-implies-integrable` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-monotone-implies-integrable`). No independent judge. |
@@ -32929,7 +33592,6 @@ owner's scan policy.
 | `thm-dirichlet-l-nonzero-at-one` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`thm-dirichlet-l-nonzero-at-one`). No independent judge. |
 | `thm-dirichlet-primes-arithmetic-progressions` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`thm-dirichlet-primes-arithmetic-progressions`). No independent judge. |
 | `thm-entourage-uniformities-are-generated-by-gauges` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`thm-entourage-uniformities-are-generated-by-gauges`). No independent judge. |
-| `thm-euler-formula-for-connected-plane-graphs` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`thm-euler-formula-for-connected-plane-graphs`). No independent judge. |
 | `thm-expander-mixing-lemma` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`thm-expander-mixing-lemma`). No independent judge. |
 | `thm-first-orthogonality-relation-for-irreducible-complex-characters` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`thm-first-orthogonality-relation-for-irreducible-complex-characters`). No independent judge. |
 | `thm-five-colour-theorem` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`thm-five-colour-theorem`). No independent judge. |
@@ -33014,7 +33676,6 @@ owner's scan policy.
 | `thm-projective-comparison-map-exists` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`thm-projective-comparison-map-exists`). No independent judge. |
 | `thm-quantifier-and-oracle-characterizations-of-ph` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-09-receipts.jsonl` (`thm-quantifier-and-oracle-characterizations-of-ph`). No independent judge. |
 | `thm-real-gamma-euler-integral-convergence` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-06-receipts.jsonl` (`thm-real-gamma-euler-integral-convergence`). No independent judge. |
-| `thm-scheme-theoretic-image-quasi-compact-morphism` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-06-receipts.jsonl` (`thm-scheme-theoretic-image-quasi-compact-morphism`). No independent judge. |
 | `thm-standard-maclaurin-expansions` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-03-receipts.jsonl` (`thm-standard-maclaurin-expansions`). No independent judge. |
 | `thm-sum-check-soundness` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`thm-sum-check-soundness`). No independent judge. |
 | `ex-a-nonreduced-bc-root-system-from-a-real-form` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-05-receipts.jsonl` (`ex-a-nonreduced-bc-root-system-from-a-real-form`). No independent judge. |
@@ -33175,12 +33836,6 @@ owner's scan policy.
 | Published item | Repair evidence and remaining obligation |
 |---|---|
 | `thm-erdos-hajnal-pach-pure-pair-theorem` | A-P, 2026-09-26 bounded owner source and item read: current [F1] repeats the entire external Erdős–Hajnal–Pach theorem; the two-step proof only transfers it to a floor bound. Chudnovsky survey Theorem 3.1 (PDF p. 5) verifies the claim but offers only a sketch of the required candidate-set induction. Defer local proof until a complete quantitative argument or exact proved supplier exists; no selected-run or direct published item consumer. Exact hash and scope: `research/frontier-35-ten-categories-eh-pach-step3-deferral-20260926.md`. No proof-completion verdict or new judge. |
-| `thm-the-symmetric-group-has-the-coxeter-presentation` | A-P, bounded proof audit 2026-09-24: [F1] imports exactly the theorem being proved and step 1.1 repeats it. Adjacent generation and von Dyck give only surjectivity of the presented group onto $S_n$. Supply the explicit $n$-coset normal form and rewrite rules recorded above to bound the presented group by $n!$, then refresh verification and direct-consumer checks. No Phase-2 supplier is needed; the pending Garside local lift is independent and not a published repair. Evidence: exact item proof/Facts and batch-15 Step-3a review. |
-| `lem-extension-from-subobjects-of-a-generator-detects-injectivity` | A-P, bounded AC-contract audit 2026-09-24: statement assumes AC, proof uses Zorn, direct deps omit published `def-axiom-of-choice`; add edge and mirror plan. |
-| `lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps` | A-P, bounded AC-contract audit 2026-09-24: statement assumes AC and step 3.1 chooses a cardinal bound, but direct deps omit published `def-axiom-of-choice`; add edge and mirror plan. |
-| `lem-a-sufficiently-long-generator-extension-iteration-is-injective` | A-P, bounded AC-contract audit 2026-09-24: statement assumes AC and consumes the AC-qualified transfinite iteration, but direct deps omit published `def-axiom-of-choice`; add edge and mirror plan. |
-| `thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings` | A-P, bounded AC-contract audit 2026-09-24: statement assumes AC and consumes the transfinite construction, but direct deps omit published `def-axiom-of-choice`; add edge and mirror plan. |
-| `cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution` | A-P, bounded AC-contract audit 2026-09-24: statement assumes AC and consumes functorial embeddings, but direct deps omit published `def-axiom-of-choice`; add edge and mirror plan. |
 
 
 | `thm-bull-free-graphs-are-two-narrow` | Supplier mapping updated 2026-09-24: planned thm-bull-free-berge-graphs-are-perfect and cor-basic-bull-free-berge-induced-subgraphs-are-perfect on future bull-free-berge-perfection A, preceded by bull-hole-and-perfection-interfaces; full SPGT is an alternative seven-pair route. The exact source/proof gates and prior-supplier rehomes are in research/plan-combinatorics-and-categories.md §III.4.4. These are prose plans, not authored/published suppliers; this row remains A-P. Bounded owner-delegated mathematical review 2026-09-23–24: Unchanged carrier in the exact 1/4 dependency chain; local proof closure depends transitively on the unproved restricted/full perfect-graph criterion. Evidence: `research/ap-131-sol-repair/agent-07-receipts.jsonl`. Remaining obligations: Open load-bearing chain: rem-strong-perfect-graph-theorem-for-the-bull-route -> thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect -> thm-basic-bull-free-graphs-are-two-narrow -> thm-bull-free-graphs-are-two-narrow -> cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter. Chvátal–Sbihi 1987 restricted bull-free Berge perfection would suffice; original Springer PDF requires login. Chudnovsky–Safra Theorem 4.3 uses full SPGT. Open Numdam 2005 bull-reducible paper cites Chvátal–Sbihi as external Theorem 1; open Chudnovsky–Penev 2012 structure paper uses SPGT. A complete structural proof of this restricted criterion is still required.. Earlier finding retained as historical evidence: U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-bull-free-graphs-are-two-narrow`). No independent judge. |
@@ -33342,6 +33997,60 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 
 ### A-R — Audited and repaired items
 
+| `lem-extension-from-subobjects-of-a-generator-detects-injectivity` | A-R, 2026-09-29 bounded Zorn/AC/AB5 repair at SHA `886200d3…`: compatible extension order, empty-chain bound, exact filtered-colimit supplier and direct AC dependency. Statement unchanged. Focused checks and independent bounded read passed; no new judge. |
+| `lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps` | A-R, 2026-09-29 bounded AC/AB5 repair at SHA `255168f6…`: exact filtered-colimit supplier and uniform subobject bound `κ=|Sub(U)|`. Statement unchanged; focused checks and independent bounded read passed. No new judge. |
+| `lem-a-sufficiently-long-generator-extension-iteration-is-injective` | A-R, 2026-09-29 direct AC-contract repair at SHA `b9403ed3…`; choice hypothesis is declared at the generator-injectivity use. Statement unchanged; focused checks and independent bounded read passed. No new judge. |
+| `thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings` | A-R, 2026-09-29 bounded AC/cofinality repair at SHA `c231b7f9…`: one regular successor aleph and fixed subobject representatives are chosen before varying `M`. Statement unchanged; focused checks and independent bounded read passed. No new judge. |
+| `cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution` | A-R, 2026-09-29 direct AC-contract repair at SHA `81d4c9cc…`, propagating the embedding theorem's explicit hypothesis. Statement unchanged; focused checks and independent bounded read passed. No new judge. |
+| `thm-hartogs-extension-across-compact-holes` | A-R, 2026-09-29 bounded repair at SHA `34562c5c…`: connected punctured overlaps let the identity theorem extend shell agreement to the full overlap required by the gluing lemma. Local-shell supplier proof completed at SHA `be4f6fab…`; existing supplier Statements and AC-free contract suffice. Strengthened theorem Statement has no direct item consumer. Focused checks and plan validation passed. No new judge. |
+| `thm-euler-formula-for-connected-plane-graphs` | A-R, 2026-09-29 bounded owner proof/dependency repair at SHA `7cabdcdb…`: exact deletion correspondence shows only the two cycle-edge incident faces merge. Forest-count supplier added; four direct published uses unchanged. Focused checks and independent bounded read above. No new judge. |
+| `prop-face-boundaries-in-two-connected-plane-graphs` | A-R, 2026-09-29 bounded owner proof/dependency repair at SHA `4cee5ea1…`: finite ear induction with a symmetric polygonal crosscut proves every facial walk is a cycle, including the unbounded face. Five direct consumers retain their exact conclusion. Focused checks and independent bounded read above. No new judge. |
+| `thm-polygonal-jordan-curve` | A-R, 2026-09-29 bounded owner proof/dependency repair at SHA `92c5e9b9…`: finite side networks replace unspecified crossing detours. Choice-free two-region/frontier conclusion unchanged; 13 direct consumers keep that use. Focused checks and independent bounded read above. No new judge. |
+| `lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension` | A-R, 2026-09-29 bounded owner proof/dependency repair at SHA `fc40495e…`: localized infinite-matrix identities now converge on one conull set and Step 5.1 covers unequal finite dimensions. Focused checks and independent bounded proof read above; unchanged Statement. No new judge. |
+| `def-spectral-multiplicity-function-in-the-separable-case` | A-R, 2026-09-29 bounded owner Definition/dependency repair at SHA `7b1bc4c5…`: closed infinite fibers, direct-sum completeness, nonnegative density integration, dominating-measure regularity and deferred independence. Three direct published uses reviewed above; focused checks and independent bounded read. No new judge. |
+| `thm-unitary-equivalence-classified-by-measure-class-and-multiplicity` | A-R, 2026-09-29 bounded owner proof/dependency repair at SHA `d0885504…`: [A3] uses the nonnegative density supplier; Step 4.1 proves decomposition independence after the lemma. Statement unchanged; focused checks and independent bounded read above. No new judge. |
+| `thm-integration-against-a-radon-nikodym-derivative` | A-R, restored after 2026-09-29 bounded reread: current Statement and proof both cover the same finite-variation simple-function scope. Earlier owner proof repair evidence remains `research/up-1630-review/agent-07-receipts.jsonl`; three broader consumer uses were repaired separately above. No new item edit or judge. |
+| `thm-path-lifting-for-covering-maps` | A-R, 2026-09-29 bounded owner proof and dependency repair: finite Lebesgue subdivision, fixed sheet decompositions, recursive inverse-sheet lifts, finite pasting and connected-interval uniqueness. Statement unchanged; focused checks, synchronized plan and independent bounded read recorded above. No new judge or whole-closure certification. |
+| `thm-quasi-finite-algebra-open-finite-factorization` | A-R, 2026-09-29 bounded owner proof repair: step 1.2 handles `S=0` with `S'=T=0`, `n=1`, `g_1=1_T=0`, `U=∅`; step 3.1 now explicitly has `n≥1`. Statement/dependencies unchanged. Focused precheck/rendercheck pass. Four published direct consumers retain their licensed uses after exact-use read above; the draft declared consumer remains in active batch-6 repair. No independent judge. |
+| `def-fredholm-determinant` | A-R, 2026-09-28: rehomed to the Fredholm A page; local arbitrary-Hilbert support lemma now proves the definition and independence. The external remark is no longer a dependency. Bounded owner repair; independent judge pending. |
+| `prop-fredholm-determinant-properties-for-trace-class-operators` | A-R, 2026-09-28: rehomed with the definition; local separable construction, Weyl, growth/continuity, zeros and logarithmic-derivative lemmas transfer through explicit support and block arguments. Bounded owner repair; independent judge pending. |
+| `thm-lidskii-for-trace-class-operators` | A-R, 2026-09-28: rehomed and derived by differentiating the locally uniform spectral product with the repaired derivative and absolute bound. Bounded owner repair; independent judge pending. |
+| `thm-barrier-characterization-of-regular-boundary-points` | A-R: 2026-09-27 bounded owner repair of the invalid envelope-boundary comparison. The unchanged Statement now follows by comparison of each Perron lower function with a barrier; the converse uses the subharmonic regularized envelope. Three direct item consumers have unchanged licensed uses. Evidence: `research/frontier-36-complete-batch-26.notes.md` and current item/plan. |
+| `thm-perron-envelope-is-harmonic` | A-R: 2026-09-28 owner proof repair replaces the countably selected sequence with an upward-directed family of Poisson lifts, finite witnesses, Harnack control and the mean-value criterion. The Statement remains choice-free; published and Green consumers retain harmonicity. Historical contracts, manifest and plan are synchronized; independent judge pending. |
+| `cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum` | A-R: 2026-09-27 bounded owner repair of the unsupported claim that the puncture is the irregular point. Shrinking-annulus comparison computes the Perron envelope as zero and proves puncture irregularity directly; the original nonsolvability argument remains. The unchanged direct consumer of nonsolvability needs no edit. Evidence: current item and plan. |
+| `fs-the-perron-envelope-always-attains-the-boundary-data` | A-R: 2026-09-27 bounded owner repair replacing an unnecessary use of harmonic-envelope theorem with the punctured-disc counterexample's direct envelope computation. Statement refuted unchanged. Evidence: current item and plan. |
+| `lem-intersection-affine-opens-covered-principal-opens` | A-R: 2026-09-27 bounded owner repair of the one-chart refinement gap. The proof now writes the restricted functions as fractions and identifies a neighbourhood as principal in both affine charts. Statement unchanged; focused precheck/rendercheck pass. Evidence: `research/frontier-36-complete-batch-7.notes.md` and current item/plan. |
+| `thm-the-symmetric-group-has-the-coxeter-presentation` | A-R, 2026-09-29 bounded proof-only repair: the explicit $n$-coset normal form establishes $|G_n|\le n!$ and closes the former circular completeness claim. Statement/dependencies unchanged; current audit and focused checks recorded above. No new judge or whole-closure certification. |
+| `prop-yoneda-product-is-composition-in-the-derived-category` | A-R, 2026-09-29 bounded proof-only repair: step 2.1 distinguishes the cone connecting arrow +c from the signed classical-projective comparison −c in degree one, proves bijectivity by dimension shift, and uses step 1.1 for splice composition. Statement/deps unchanged. Focused precheck/rendercheck pass; direct published and B16 draft uses audited above. No independent judge or whole-closure certification. |
+| `def-quasi-coherent-ideal-sheaf` | A-R: 2026-09-29 bounded dependency repair added current batch-7 `def-associated-sheaf-module-affine-scheme` and `thm-associated-module-sheaf-exists` to the item and plan for the associated-module-sheaf phrase. The later owner repair declared AC in the Definition and added its direct dependency; all four direct consumers already assume AC. The earlier re-home from the schemes A page to the quasi-coherent A page placed it after its suppliers. No independent certification claimed. Evidence: current item and plan, `research/frontier-36-complete-batch-7.notes.md`, and the choice-premise section above. |
+| `cor-every-module-admits-an-injective-resolution` | A-R: 2026-09-29 bounded owner repair records its already stated AC premise as a direct dependency and exact step 1.1 use of the AC-qualified embedding theorem. Its two direct item consumers already assume AC; conclusion unchanged. Evidence: current item and the choice-premise section above. |
+| `thm-quasi-coherent-ideal-closed-subscheme-correspondence` | A-R: 2026-09-29 bounded published proof cutover replaces the gapped old affine-quotient citation with current batch-5 `lem-closed-immersion-affine-quotient-and-base-change`, batch-7 `thm-affine-quasi-coherent-equivalence` and `thm-qc-ideal-closed-subscheme-correspondence-complete`, and explicit chart/stalk/inverse checks. Its Statement now assumes AC because those verified suppliers do. Owner re-homed this published item from the schemes A page to the quasi-coherent A page after its current suppliers; item bytes and status are unchanged. Focused precheck/render pass; plan synchronized. The image consumer gained AC and the conormal consumer now proves its unchanged Statement locally, as recorded above. This is a local repair, not independent certification. Evidence: current item/plan and `research/frontier-36-complete-batch-7.notes.md`. |
+| `thm-conormal-sequence-closed-immersion` | A-R: 2026-09-29 direct published consumer repair removes the newly AC-dependent correspondence edge. The unchanged choice-free Statement follows at each stalk from the closed-immersion local-ring surjection, simultaneous base/source localization for differentials, the algebraic conormal sequence and stalkwise exactness. Its two direct published consumers retain their exact old interface. Focused precheck/render and plan validation pass; no independent certification. Evidence: current item/plan and the direct-consumer event above. |
+| `thm-scheme-theoretic-image-quasi-compact-morphism` | A-R: 2026-09-29 batch-9 audit found the finite-cover localization gap in Step 2.1; bounded proof repair supplies the restricted principal-open calculation. Subsequent published associated-sheaf and correspondence repairs close its direct supplier debt. Its Statement and Given now explicitly assume AC because [F2]/steps 4.1–5.1 use the repaired AC-dependent correspondence. Owner re-homed this published item from the schemes A page to the quasi-coherent A page after its current suppliers; item bytes and status are unchanged. Focused precheck/render and plan validation pass. No published item directly consumes it; batch-9 Chow [F3]/steps 1.6–1.7 already assume AC and need current contract/decision refresh. Local repair, not independent certification. Evidence: current item/plan, Stacks Tag `01R5`, and batch-9 closure record. |
+
+| `thm-snake-lemma-in-an-abelian-category` | A-R, 2026-09-29: arrow-only proof of both central exactness nodes; unchanged statement. Exact published suppliers and bounded evidence in the abelian-category section above. |
+| `thm-snake-lemma-under-the-weaker-stacks-hypotheses` | A-R, 2026-09-29: arrow-only weak snake proof with the image identity supplying the lift; unchanged statement. Exact published suppliers and bounded evidence above. |
+| `thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic` | A-R, 2026-09-29: categorical epic-pullback proof; no cone-LES page cycle and no changed statement. Exact published suppliers and bounded evidence above. |
+| `lem-cartan-eilenberg-comparisons-preserve-both-filtrations` | A-R, 2026-09-29: quotient monicity proved by the snake lemma and the monic boundary inclusion; unchanged statement. Exact published suppliers and bounded evidence above. |
+| `prop-homological-gaussian-elimination-gives-a-strong-deformation-retract` | A-R, 2026-09-29: abstract biproduct element phrase replaced by matrix composition; unchanged statement. Exact published supplier and bounded evidence above. |
+| `prop-the-target-is-a-strong-deformation-retract-of-the-mapping-cylinder` | A-R, 2026-09-29: vanishing on the target summand proved as $H_nj_n=0$; unchanged statement. Exact published supplier and bounded evidence above. |
+| `thm-short-five-lemma-by-pullback-without-members` | A-R, 2026-09-29: inserted the epimorphism-as-cokernel-of-kernel premise; unchanged statement. Exact published suppliers and bounded evidence above. |
+
+| `cor-polar-form-of-the-metric-in-normal-coordinates` | A-R, 2026-09-28 bounded proof repair: derived tangent-norm smoothness and the radial differential from the positive quadratic metric, real-power derivatives and smooth chain rule. Item and plan now declare those exact published suppliers. Statement unchanged; the two direct published consumers retain their valid uses of the polar formula. No independent judge. Evidence in the polar metric section above. |
+
+| `ex-length-and-distance-on-the-circle` | A-R, 2026-09-28: supplied `lem-integer-part` directly and derived the nearest translate including the antipodal tie; matching plan dependency/strategy updated. Example claim unchanged, no direct item consumers. Focused precheck/rendercheck and plan validation pass. Evidence in the circle-distance section above; no independent judge. |
+
+| `def-constraint-graph-powering` | A-R, 2026-09-28: clarified that the local powering alphabet indexes lazy-walk patterns, whereas Arora–Barak §18.5.1 indexes distinct ball vertices with padding; changed statement provenance to `ai-altered`. Definition and numerical claims unchanged, so no consumer-interface change. Focused rendercheck passes; no independent judge. |
+
+| `thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules` | A-R, 2026-09-28: proved the direct sum of finite-dimensional projective covers is a cover by containing its kernel in the superfluous radical; derived the finite semisimple head using $A/J(A)$. The bijection is unchanged. Three direct consumers checked. Focused precheck/rendercheck pass; no independent judge. |
+
+| `thm-absolute-convergence-criterion-for-complex-infinite-products` | A-R, 2026-09-28: retained convergence under $\sum|a_n|<\infty$ and corrected nonvanishing to require every finite-head factor nonzero. The witness $a_0=-1$, $a_n=0$ for $n\ge1$ refutes the old clause. Three direct consumers checked and repaired below. Focused precheck/rendercheck pass; no independent judge. |
+| `thm-normal-convergence-of-holomorphic-products` | A-R, 2026-09-28: corrected its use of the finite-head nonvanishing criterion and separately conditioned zero multiplicity on no factor vanishing identically on any connected component of the open domain. Holomorphic convergence and zero-free tails remain unconditional. Five direct consumers checked; no further exported claim changed. Focused precheck/rendercheck pass; no independent judge. |
+| `thm-euler-product-for-riemann-zeta` | A-R, 2026-09-28: checked $|p^{-s}|<1$ for every prime before using the corrected product criterion. Exported Euler-product claim unchanged. Focused precheck/rendercheck pass; no independent judge. |
+| `cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one` | A-R, 2026-09-28: checked each $1-p^{-s}\ne0$ before using the corrected product criterion. Exported zero-free claim unchanged. Focused precheck/rendercheck pass; no independent judge. |
+
+| `thm-stirling-formula-gamma` | A-R, 2026-09-28 bounded owner repair of proof step 3.1: retained the $z/N$ term in `Log(N+z)`, which contributes the missing $z$ to the Binet limit. Statement and prerequisites unchanged; seven direct item consumers use the unchanged sectorial conclusion. Focused precheck and rendercheck pass. Evidence and limits in the Gamma Stirling section above; no independent judge or whole-closure certification. |
+
 | `thm-the-category-of-complexes-in-an-additive-category-is-additive` | A-R, bounded published markup repair 2026-09-26: enclosed the existing integer grading in math delimiters, retained the prior proof audit for the unchanged proof, and recorded the Step-5 claim/receipt. Statement meaning unchanged; direct draft consumer still uses the same additive-category claim. Targeted precheck and rendercheck pass; no renewed independent judge. |
 
 | Published item | Repair evidence and scope |
@@ -33351,7 +34060,7 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 | `thm-integration-by-parts-for-brownian-ito-processes` | A-R, 2026-09-27: Fact F3 now cites the compact boundedness theorem for pathwise suprema, replacing a Heine–Cantor misattribution. Product Statement unchanged; exact evidence and pending-audit handoff: `research/frontier-35-ten-categories-step5b-three-support-repairs.md`. |
 | `def-bernoulli-numbers-by-their-generating-function` | A-R, 2026-09-27: defined the generating quotient's removable value at zero via the local reciprocal series, preserving the standard coefficients. Both direct consumers checked; the special-values proof received a necessary bridge repair. Evidence: `research/frontier-35-ten-categories-step5b-three-support-repairs.md`. Independent publication certification remains pending. |
 | `def-jacobi-theta-function` | A-R, 2026-09-27: declared real exponential positivity/order, positive pi and geometric-series suppliers for the unchanged theta series. Three direct consumers checked; evidence: `research/frontier-35-ten-categories-step5b-three-support-repairs.md`. Independent publication certification remains pending. |
-| `rem-hahn-banach-open-choice-questions` | A-R, 2026-09-27: narrowed a current-open-status assertion to two recorded questions, consistent with its suppliers' explicit verification boundary. Both questions remain; home page and zero direct item consumers checked. Evidence: `research/frontier-35-ten-categories-step5b-lane1-hahn-banach-repair.md`. Independent publication certification remains pending. |
+| `rem-hahn-banach-open-choice-questions` | A-R, 2026-09-27: narrowed a current-open-status assertion to two recorded questions, consistent with its suppliers' explicit verification boundary. Both questions remain; home page and zero direct item consumers checked. Earlier U-P impact/finding was resolved by bounded item and used-interface review, without an independent judge. Evidence: `research/frontier-35-ten-categories-step5b-lane1-hahn-banach-repair.md` and `research/up-1630-review/agent-07-receipts.jsonl`. Independent publication certification remains pending. |
 | `cex-the-universal-coefficient-splitting-cannot-in-general-be-chosen-naturally` | A-R, 2026-09-26: removed AC-qualified general UCT-splitting edge; proved finite exact sequence and shear obstruction directly; item/plan aligned, stale stamps removed. Independent current-hash proof/supplier/consumer reread: `research/frontier-35-ten-categories-published-audit-outside-shard12-independent-20260926.md`. Earlier bounded evidence: U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`cex-the-universal-coefficient-splitting-cannot-in-general-be-chosen-naturally`). No independent judge. No new judge. |
 | `ex-uct-homology-with-z-mod-m-coefficients` | A-R, 2026-09-26: removed AC-qualified general UCT edge; computed multiplication-by-m kernel and cokernel directly; item/plan aligned, stale stamps removed. Independent current-hash proof/supplier/consumer reread: `research/frontier-35-ten-categories-published-audit-outside-shard12-independent-20260926.md`. Earlier bounded evidence: U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`ex-uct-homology-with-z-mod-m-coefficients`). No independent judge. No new judge. |
 | `thm-svarc-milnor-lemma` | A-R, 2026-09-26: used least positive integer in finite-generation supplier, covering zero-distance stabilizer elements; item/plan aligned, stale stamps removed. Independent current-hash proof/supplier/consumer reread: `research/frontier-35-ten-categories-published-audit-outside-shard12-independent-20260926.md`. No new judge. |
@@ -34495,7 +35204,6 @@ mathematical repairs. Evidence:
 | `prop-np-is-contained-in-p-sharpp` | Authorized local repair 2026-09-23; exact before/after, scope, checks and downstream dispositions in 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-06-receipts.jsonl` (`prop-np-is-contained-in-p-sharpp`). Original U-P reason retained in frozen index. No independent judge. |
 | `lem-adem-double-power-comparison` | Authorized local repair 2026-09-23; exact before/after, scope, checks and downstream dispositions in 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-08-receipts.jsonl` (`lem-adem-double-power-comparison`). Original U-P reason retained in frozen index. No independent judge. |
 | `thm-singular-homology-satisfies-homotopy-exactness-and-excision` | Authorized local repair 2026-09-23; exact before/after, scope, checks and downstream dispositions in 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`thm-singular-homology-satisfies-homotopy-exactness-and-excision`). Original U-P reason retained in frozen index. No independent judge. |
-| `thm-integration-against-a-radon-nikodym-derivative` | Authorized local repair 2026-09-23; exact before/after, scope, checks and downstream dispositions in 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`thm-integration-against-a-radon-nikodym-derivative`). Original U-P reason retained in frozen index. No independent judge. |
 
 | `ex-cohen-macaulay-associated-primes-unmixed` | Authorized local repair 2026-09-23; exact before/after, scope, checks and downstream dispositions in 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-02-receipts.jsonl` (`ex-cohen-macaulay-associated-primes-unmixed`). Original U-P reason retained in frozen index. No independent judge. |
 
@@ -34601,6 +35309,9 @@ mathematical repairs. Evidence:
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
+
+
+
 
 
 
@@ -34862,3 +35573,37 @@ published proof.
 Local adjudication scope and verdicts: `research/phase-2-next-18-alpha-d-5a.md`
 and `research/phase-2-next-18-alpha-d-5a-decisions.json` (100 obligations:
 92 items and 8 pages, all accepted, no escalations).
+
+## Frontier 36 structural placement reconciliation (2026-09-29)
+
+The owner re-homed 29 unchanged published item files to earlier or more suitable A
+pages, with their plan rows and published page inventories synchronized. These
+are the three quasi-coherent ideal/correspondence/image items, the projective
+line cover and twisting-sheaf definition, and 25 published examples. The
+individual old and new homes and reasons are recorded in
+`research/frontier-36-complete-rehomed.json`; none of their Statement or proof
+bytes changed as part of this placement work. The classical affine-line
+coordinate dictionary example is additionally listed on its companion A page
+while retaining its B listing, so its published B page remains populated.
+
+Earlier tables in this ledger headed “B supplier” record the home at the time
+of that audit. The direct consumer relationships there remain valid; current
+home and reading order are given by the published page inventories and the
+owner re-home receipt. After these placements, plan validation with the receipt
+passes, and depcheck reports no B-leaf or page-cycle errors. The placement
+change itself makes no new claim of independent proof certification.
+
+Seven further published suppliers were re-homed to eliminate direct
+forward-use defects: the irreducibility/open-subspace, irreducible-component,
+and finite-component lemmas and definition now precede their algebraic-geometry
+consumers on the Zariski-topology A page; the finite-variable polynomial
+Noetherian lemma and field-Noetherian lemma now precede them on the
+Noetherian-rings A page; and the finite-variable polynomial UFD lemma now
+follows its three direct prerequisites on the prime-spectra A page. The
+Kähler-differentials and diagonals pages were placed before the Zariski-tangent
+page in dependency order. The field-Noetherian lemma's Statement and Facts
+now cite the earlier Noetherian ring and module definitions in place of the
+later combined definition. Its proved claim, that a field is Noetherian,
+is unchanged; examination of its direct consumers found only uses of that
+claim. This was a supplier-order and citation repair, not a new proof claim.
+The owner re-home receipt records each old and new page.

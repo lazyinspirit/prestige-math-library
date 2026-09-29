@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 import {
   writeAuditorCreatedBaseline,
@@ -20,6 +21,56 @@ const REPO = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
 const item = (id: string) => `---\nid: ${id}\nkind: lemma\ntitle: "${id}"\nstatus: draft\ndeps: []\njustified_by: []\nforward_refs: []\n---\n\n## Statement\n\n${id}.\n\n## Proof\n\nImmediate.\n`;
+const sha = (value: string) => createHash('sha256').update(value).digest('hex');
+const canonical = (value: any): any => Array.isArray(value) ? value.map(canonical)
+  : value && typeof value === 'object'
+    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])]))
+    : value;
+const hashValue = (value: any) => sha(JSON.stringify(canonical(value)) ?? 'undefined');
+
+function writeStep5Evidence(root: string, id: string, evidencePath: string) {
+  const text = readFileSync(join(root, 'items', `${id}.md`), 'utf8');
+  const pages = JSON.parse(readFileSync(join(root, 'research/r-batch-1.pages.json'), 'utf8'));
+  const page = pages.find((entry: any) => entry.items?.some((value: any) => value.id === id));
+  const manifestItem = page.items.find((value: any) => value.id === id);
+  const contract = JSON.parse(readFileSync(join(root, 'research/r-batch-1.proof-contracts.json'), 'utf8'))
+    .contracts[id];
+  writeFileSync(evidencePath, [
+    'Run: r', `Item: ${id}`,
+    `item_file_sha256: ${sha(text)}`,
+    `manifest_sha256: ${hashValue({ ...manifestItem, __step6_page_id: String(page.id) })}`,
+    `contract_sha256: ${hashValue(contract)}`,
+    'Independent review: no unresolved defect found.',
+  ].join('\n'));
+}
+
+function writeStep5ManifestRepairEvidence(root: string, id: string, evidencePath: string,
+  baselineManifestEntry: any, repairKind: string, review: any) {
+  writeStep5Evidence(root, id, evidencePath);
+  const text = readFileSync(evidencePath, 'utf8');
+  const pages = JSON.parse(readFileSync(join(root, 'research/r-batch-1.pages.json'), 'utf8'));
+  const page = pages.find((entry: any) => entry.items?.some((value: any) => value.id === id));
+  const manifestItem = page.items.find((value: any) => value.id === id);
+  const currentManifestEntry = { ...manifestItem, __step6_page_id: String(page.id) };
+  const itemText = readFileSync(join(root, 'items', `${id}.md`), 'utf8');
+  const contract = JSON.parse(readFileSync(join(root, 'research/r-batch-1.proof-contracts.json'), 'utf8'))
+    .contracts[id];
+  const evidence = {
+    version: 1, policy: 'step5-manifest-repair-evidence-v1', run: 'r', step: 5,
+    id, page: String(page.id), batch: '1', repair_kind: repairKind,
+    baseline_manifest_sha256: hashValue(baselineManifestEntry),
+    current_manifest_sha256: hashValue(currentManifestEntry),
+    baseline_manifest_entry: baselineManifestEntry,
+    current_manifest_entry: currentManifestEntry,
+    current_carriers: {
+      item_file_sha256: sha(itemText),
+      manifest_sha256: hashValue(currentManifestEntry),
+      contract_sha256: hashValue(contract),
+    },
+    review,
+  };
+  writeFileSync(evidencePath, `${text}\n\n\`\`\`step5-manifest-repair\n${JSON.stringify(evidence, null, 2)}\n\`\`\`\n`);
+}
 
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'auditor-created-'));
@@ -96,6 +147,54 @@ function carriedStep7Fixture(t: any, { itemChanged = true, itemAt = '2025-01-01T
   const evidence = join(root, 'research/owner-lem-created.md');
   writeFileSync(evidence, 'lem-created: owner checked the repaired proof, manifest and late contract against current sources.');
   return { root, id, itemPath, manifestPath, contractPath, evidence };
+}
+
+function carriedStep5Fixture(t: any, { step5Result = {}, seedItem = null,
+  seedManifestItem = null, removeBaseFromRun = false }: any = {}) {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const id = 'lem-created';
+  const itemPath = join(root, 'items', `${id}.md`);
+  const manifestPath = join(root, 'research/r-batch-1.pages.json');
+  const contractPath = join(root, 'research/r-batch-1.proof-contracts.json');
+  const pages = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  Object.assign(pages[0], { kind: 'A', companion: 'page-b' });
+  pages.push({ id: 'page-b', kind: 'B', companion: 'page-a', items: [] });
+  if (removeBaseFromRun) pages[0].items = pages[0].items.filter((entry: any) => entry.id !== 'lem-base');
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  writeAuditorBaseline(root, 'r');
+  const step3Baseline = JSON.parse(readFileSync(join(root, 'research/r-step3-auditor-baseline.json'), 'utf8'));
+  const step3At = Date.parse(step3Baseline.at);
+  const authoredAt = new Date(step3At + 5_000);
+  writeFileSync(itemPath, seedItem ?? item(id));
+  pages[0].items.push(seedManifestItem ?? { id, deps: [] });
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  const contracts = JSON.parse(readFileSync(contractPath, 'utf8'));
+  contracts.contracts[id] = { risk: 'low' };
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, authoredAt, authoredAt);
+  const step3Author = join(root, 'research/r-dispatch/alpha-high-author.result.json');
+  writeFileSync(step3Author, JSON.stringify({ run: 'r', role: 'alpha-high',
+    label: 'step3b-a-0123456789abcdef', covers: ['1'], ok: true,
+    started_at: new Date(step3At).toISOString(), ended_at: new Date(step3At + 10_000).toISOString() }));
+  certifyAuditorItems(root, 'r');
+
+  writeAuditorCreatedBaseline(root, 'r', 5);
+  const step5Baseline = JSON.parse(readFileSync(join(root, 'research/r-step5-auditor-baseline.json'), 'utf8'));
+  const step5At = Date.parse(step5Baseline.at);
+  const contractChangedAt = new Date(step5At + 5_000);
+  contracts.contracts[id] = { risk: 'reviewed-low' };
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  utimesSync(contractPath, contractChangedAt, contractChangedAt);
+  const step5Author = join(root, 'research/r-dispatch/alpha-5a-a.result.json');
+  writeFileSync(step5Author, JSON.stringify({ run: 'r', role: 'alpha', label: '5a-a',
+    covers: ['1'], ok: true, started_at: new Date(step5At + 10_000).toISOString(),
+    ended_at: new Date(step5At + 20_000).toISOString(), ...step5Result }));
+  const evidence = join(root, 'research/owner-lem-created.md');
+  writeStep5Evidence(root, id, evidence);
+  const baselineItem = pages[0].items.find((entry: any) => entry.id === id);
+  const baselineManifestEntry = { ...baselineItem, __step6_page_id: String(pages[0].id) };
+  return { root, id, itemPath, manifestPath, contractPath, evidence, step5At, baselineManifestEntry };
 }
 
 for (const label of ['repair-8-a-round-1', 'cross-group-z-round-12',
@@ -218,6 +317,241 @@ test('Step 7 first certifies a carried contract-only delta with owner-authored e
   assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
     'research/r-step7-auditor-certifications.json')), /invalid owner recertification/);
 });
+
+test('Step 5 owner bootstrap certifies only a carried contract-only delta with exact review evidence', t => {
+  const f = carriedStep5Fixture(t);
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 5), /no successful Step 5/);
+  const recorded = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Owner review: checked the Step-3-authored item and current Step-5 contract entry together.');
+  const owner = JSON.parse(readFileSync(recorded.path, 'utf8'));
+  assert.equal(owner.owner, true);
+  assert.equal(owner.basis, 'initial-step5-contract-only');
+  assert.equal(owner.author_result, 'alpha-5a-a.result.json');
+  const receipt = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(receipt.items.length, 1);
+  assert.equal(receipt.items[0].author_result, 'alpha-5a-a.result.json');
+  assert.equal(receipt.items[0].origin_step, 3);
+  assert.ok(receipt.items[0].owner_recertification?.sha256);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step5-auditor-certifications.json')).length, 1);
+  writeFileSync(f.evidence, `${f.id}: tampered after certification.`);
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step5-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+test('Step 5 owner receipt stays bound to its original dispatch after a later batch dispatch', t => {
+  const f = carriedStep5Fixture(t);
+  recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Owner reviewed the exact current Step-5 contract entry.');
+  certifyAuditorCreatedItems(f.root, 'r', 5);
+  writeFileSync(join(f.root, 'research/r-dispatch/alpha-5b-lead.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha', label: '5b-lead', covers: ['all'], ok: true,
+    started_at: new Date(f.step5At + 30_000).toISOString(),
+    ended_at: new Date(f.step5At + 40_000).toISOString(),
+  }));
+  const moduleUrl = new URL('../../auditor-created-items.mjs', import.meta.url).href;
+  const child = spawnSync(process.execPath, ['--input-type=module', '-e',
+    `import { loadAuditorCreatedCertifications } from ${JSON.stringify(moduleUrl)};`
+      + `const rows = loadAuditorCreatedCertifications(process.argv[1]);`
+      + `process.stdout.write(rows[0].author_result);`,
+    join(f.root, 'research/r-step5-auditor-certifications.json')], { encoding: 'utf8' });
+  assert.equal(child.status, 0, child.stderr);
+  assert.equal(child.stdout, 'alpha-5a-a.result.json');
+});
+
+test('Step 5 owner bootstrap certifies a late owner item repair without claiming dispatch authorship', t => {
+  const f = carriedStep5Fixture(t);
+  writeFileSync(f.itemPath, item(f.id).replace('Immediate.', 'Owner-reviewed repair.'));
+  utimesSync(f.itemPath, new Date(f.step5At + 25_000), new Date(f.step5At + 25_000));
+  writeStep5Evidence(f.root, f.id, f.evidence);
+  const recorded = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Independent owner reviewed the repaired item and current contract against the exact Step-5 carriers.');
+  const owner = JSON.parse(readFileSync(recorded.path, 'utf8'));
+  assert.equal(owner.basis, 'initial-step5-item-repair');
+  assert.equal(owner.author_result, 'alpha-5a-a.result.json');
+  const receipt = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(receipt.items[0].author_result, 'alpha-5a-a.result.json');
+  assert.equal(receipt.items[0].origin_step, 3);
+  assert.equal(receipt.items[0].judge_sha256, itemHashJudge(readFileSync(f.itemPath, 'utf8')));
+  assert.equal(receipt.items[0].owner_recertification?.basis, 'initial-step5-item-repair');
+  assert.ok(receipt.items[0].owner_recertification?.sha256);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step5-auditor-certifications.json')).length, 1);
+});
+
+test('Step 5 owner bootstrap accepts a hash-proven source URL and locator repair only', t => {
+  const oldSources = { references: [{ title: 'Source A', url: 'https://example.test/old', locator: 'Old locator' }] };
+  const seedItem = item('lem-created').replace('deps: []',
+    'deps: []\nsources:\n  references:\n    - title: "Source A"\n      url: "https://example.test/old"\n      locator: "Old locator"');
+  const f = carriedStep5Fixture(t, { seedItem,
+    seedManifestItem: { id: 'lem-created', deps: [], sources: oldSources } });
+  const newSources = { references: [{ title: 'Source A', url: 'https://example.test/current', locator: 'Current locator' }] };
+  writeFileSync(f.itemPath, seedItem.replace('https://example.test/old', 'https://example.test/current')
+    .replace('Old locator', 'Current locator'));
+  const pages = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
+  pages[0].items.find((entry: any) => entry.id === f.id).sources = newSources;
+  writeFileSync(f.manifestPath, JSON.stringify(pages));
+  writeStep5ManifestRepairEvidence(f.root, f.id, f.evidence, f.baselineManifestEntry,
+    'source-reference-fields', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'sources.references[*].url,locator' });
+
+  const recorded = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Independent owner reviewed the current item and source locators against the verified Step-5 manifest projection.');
+  const owner = JSON.parse(readFileSync(recorded.path, 'utf8'));
+  assert.equal(owner.basis, 'initial-step5-source-metadata-repair');
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items[0].owner_recertification?.basis,
+    'initial-step5-source-metadata-repair');
+});
+
+test('Step 5 source-metadata repair rejects an unverified baseline row or non-source field delta', t => {
+  const oldSources = { references: [{ title: 'Source A', url: 'https://example.test/old', locator: 'Old locator' }] };
+  const seedItem = item('lem-created').replace('deps: []',
+    'deps: []\nsources:\n  references:\n    - title: "Source A"\n      url: "https://example.test/old"\n      locator: "Old locator"');
+  const wrongBaseline = carriedStep5Fixture(t, { seedItem,
+    seedManifestItem: { id: 'lem-created', deps: [], sources: oldSources } });
+  const newSources = { references: [{ title: 'Source A', url: 'https://example.test/current', locator: 'Current locator' }] };
+  writeFileSync(wrongBaseline.itemPath, seedItem.replace('https://example.test/old', 'https://example.test/current')
+    .replace('Old locator', 'Current locator'));
+  let pages = JSON.parse(readFileSync(wrongBaseline.manifestPath, 'utf8'));
+  pages[0].items.find((entry: any) => entry.id === wrongBaseline.id).sources = newSources;
+  writeFileSync(wrongBaseline.manifestPath, JSON.stringify(pages));
+  const forgedBaseline = { ...wrongBaseline.baselineManifestEntry, title: 'Unverified baseline title' };
+  writeStep5ManifestRepairEvidence(wrongBaseline.root, wrongBaseline.id, wrongBaseline.evidence,
+    forgedBaseline, 'source-reference-fields', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'sources.references[*].url,locator' });
+  assert.throws(() => recordOwnerRecertification(wrongBaseline.root, 'r', 5, wrongBaseline.id,
+    wrongBaseline.evidence, 'A reconstructed baseline row must hash to the immutable Step-5 carrier.'),
+  /eligible Step 5 owner bootstrap/);
+
+  const extraField = carriedStep5Fixture(t, { seedItem,
+    seedManifestItem: { id: 'lem-created', deps: [], sources: oldSources } });
+  writeFileSync(extraField.itemPath, seedItem.replace('https://example.test/old', 'https://example.test/current')
+    .replace('Old locator', 'Current locator'));
+  pages = JSON.parse(readFileSync(extraField.manifestPath, 'utf8'));
+  const currentEntry = pages[0].items.find((entry: any) => entry.id === extraField.id);
+  currentEntry.sources = newSources;
+  currentEntry.title = 'Unreviewed manifest title';
+  writeFileSync(extraField.manifestPath, JSON.stringify(pages));
+  writeStep5ManifestRepairEvidence(extraField.root, extraField.id, extraField.evidence,
+    extraField.baselineManifestEntry, 'source-reference-fields', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'sources.references[*].url,locator' });
+  assert.throws(() => recordOwnerRecertification(extraField.root, 'r', 5, extraField.id,
+    extraField.evidence, 'Only source reference URL and locator values are allowed.'),
+  /eligible Step 5 owner bootstrap/);
+
+  const unsyncedItem = carriedStep5Fixture(t, { seedItem,
+    seedManifestItem: { id: 'lem-created', deps: [], sources: oldSources } });
+  const unsyncedSources = { references: [{ title: 'Source A', url: 'https://example.test/current', locator: 'Current locator' }] };
+  writeFileSync(unsyncedItem.itemPath, seedItem.replace('Old locator', 'Current locator'));
+  pages = JSON.parse(readFileSync(unsyncedItem.manifestPath, 'utf8'));
+  pages[0].items.find((entry: any) => entry.id === unsyncedItem.id).sources = unsyncedSources;
+  writeFileSync(unsyncedItem.manifestPath, JSON.stringify(pages));
+  writeStep5ManifestRepairEvidence(unsyncedItem.root, unsyncedItem.id, unsyncedItem.evidence,
+    unsyncedItem.baselineManifestEntry, 'source-reference-fields', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'sources.references[*].url,locator' });
+  assert.throws(() => recordOwnerRecertification(unsyncedItem.root, 'r', 5, unsyncedItem.id,
+    unsyncedItem.evidence, 'The source rows must mirror current item frontmatter.'),
+  /eligible Step 5 owner bootstrap/);
+});
+
+test('Step 5 owner bootstrap accepts only reviewed additive dependency metadata repairs', t => {
+  const f = carriedStep5Fixture(t, { removeBaseFromRun: true });
+  writeFileSync(f.itemPath, item(f.id).replace('deps: []', 'deps:\n  - lem-base'));
+  const pages = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
+  pages[0].items.find((entry: any) => entry.id === f.id).deps = ['lem-base'];
+  writeFileSync(f.manifestPath, JSON.stringify(pages));
+  writeStep5ManifestRepairEvidence(f.root, f.id, f.evidence, f.baselineManifestEntry,
+    'dependency-addition', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'deps', reviewed_new_dependencies: ['lem-base'] });
+
+  const recorded = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Independent owner reviewed the added dependency and current proof against the verified Step-5 manifest projection.');
+  const owner = JSON.parse(readFileSync(recorded.path, 'utf8'));
+  assert.equal(owner.basis, 'initial-step5-dependency-repair');
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items[0].owner_recertification?.basis,
+    'initial-step5-dependency-repair');
+});
+
+test('Step 5 dependency-metadata repair rejects unrelated manifest edits and unreviewed suppliers', t => {
+  const unrelated = carriedStep5Fixture(t);
+  writeFileSync(unrelated.itemPath, item(unrelated.id).replace('deps: []', 'deps:\n  - lem-base'));
+  const pages = JSON.parse(readFileSync(unrelated.manifestPath, 'utf8'));
+  const row = pages[0].items.find((entry: any) => entry.id === unrelated.id);
+  row.deps = ['lem-base'];
+  row.title = 'Unreviewed title';
+  writeFileSync(unrelated.manifestPath, JSON.stringify(pages));
+  writeStep5ManifestRepairEvidence(unrelated.root, unrelated.id, unrelated.evidence,
+    unrelated.baselineManifestEntry, 'dependency-addition', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'deps', reviewed_new_dependencies: ['lem-base'] });
+  assert.throws(() => recordOwnerRecertification(unrelated.root, 'r', 5, unrelated.id,
+    unrelated.evidence, 'A dependency repair cannot include a title change.'),
+  /eligible Step 5 owner bootstrap/);
+
+  const unreviewed = carriedStep5Fixture(t);
+  writeFileSync(unreviewed.itemPath, item(unreviewed.id).replace('deps: []', 'deps:\n  - lem-base'));
+  const secondPages = JSON.parse(readFileSync(unreviewed.manifestPath, 'utf8'));
+  secondPages[0].items.find((entry: any) => entry.id === unreviewed.id).deps = ['lem-base'];
+  writeFileSync(unreviewed.manifestPath, JSON.stringify(secondPages));
+  writeStep5ManifestRepairEvidence(unreviewed.root, unreviewed.id, unreviewed.evidence,
+    unreviewed.baselineManifestEntry, 'dependency-addition', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      changed_fields: 'deps', reviewed_new_dependencies: [] });
+  assert.throws(() => recordOwnerRecertification(unreviewed.root, 'r', 5, unreviewed.id,
+    unreviewed.evidence, 'The new dependency must be included in the independent review.'),
+  /eligible Step 5 owner bootstrap/);
+});
+
+test('Step 5 owner evidence must name the active run and exact current raw carriers', t => {
+  const f = carriedStep5Fixture(t);
+  writeFileSync(f.evidence, `${f.id}: item_file_sha256 ${'0'.repeat(64)}; run r.`);
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Evidence intentionally carries a stale hash.'), /active run and every exact current carrier hash/);
+});
+
+test('Step 5 first owner certification rejects a changed manifest and missing Step-3 origin', t => {
+  const itemChanged = carriedStep5Fixture(t);
+  writeFileSync(itemChanged.itemPath, `${item('lem-created')}\nAn unreviewed proof change.\n`);
+  assert.throws(() => recordOwnerRecertification(itemChanged.root, 'r', 5, itemChanged.id,
+    itemChanged.evidence, 'A stale review cannot attest the changed item carrier.'),
+  /Step-5 owner evidence must name the active run and every exact current carrier hash/);
+
+  const manifestChanged = carriedStep5Fixture(t);
+  const pages = JSON.parse(readFileSync(manifestChanged.manifestPath, 'utf8'));
+  pages[0].items.find((entry: any) => entry.id === manifestChanged.id).title = 'Changed title';
+  writeFileSync(manifestChanged.manifestPath, JSON.stringify(pages));
+  writeStep5Evidence(manifestChanged.root, manifestChanged.id, manifestChanged.evidence);
+  assert.throws(() => recordOwnerRecertification(manifestChanged.root, 'r', 5, manifestChanged.id,
+    manifestChanged.evidence, 'A contract-only owner receipt cannot cover a changed manifest.'),
+  /eligible Step 5 owner bootstrap/);
+
+  const noOrigin = carriedStep5Fixture(t);
+  rmSync(join(noOrigin.root, 'research/r-step3-auditor-certifications.json'));
+  assert.throws(() => recordOwnerRecertification(noOrigin.root, 'r', 5, noOrigin.id,
+    noOrigin.evidence, 'An owner review cannot invent missing Step-3 origin provenance.'),
+  /eligible Step 5 owner bootstrap/);
+});
+
+for (const [label, step5Result] of [
+  ['wrong role', { role: 'tool' }],
+  ['wrong label', { label: 'unrecognized-step5' }],
+  ['wrong batch', { covers: ['2'] }],
+  ['failed dispatch', { ok: false }],
+  ['dispatch before baseline', { started_at: '2020-01-01T00:00:00.000Z',
+    ended_at: '2020-01-01T00:00:10.000Z' }],
+] as const) {
+  test(`Step-5 contract-only owner bootstrap rejects ${label}`, t => {
+    const f = carriedStep5Fixture(t, { step5Result });
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+      'A contract-only bootstrap requires a successful post-baseline Step-5 dispatch.'),
+    /eligible Step 5 owner bootstrap/);
+  });
+}
 
 for (const [label, options] of [
   ['wrong adjudicator role', { step7Result: { role: 'tool' } }],

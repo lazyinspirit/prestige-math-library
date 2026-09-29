@@ -3,24 +3,7 @@ page: homogeneous-resultants-and-projective-intersection-length
 title: "Homogeneous Resultants and Projective Intersection Length"
 status: published
 requires: [artinian-rings-and-length, rees-modules-artin-rees-and-hilbert-samuel-theory, koszul-complexes-and-regular-sequences, projective-algebraic-sets-projective-morphisms-and-cones, schemes-subschemes-and-morphisms-locally-of-finite-type, dimension-constructible-images-and-dimensions-of-fibres, linear-algebra-methods-in-combinatorics, the-fundamental-theorem-of-algebra]
-items: [def-sylvester-resultant-of-binary-forms,
-        lem-binary-resultant-scaling-specialization-and-dehomogenization,
-        thm-binary-resultant-zero-iff-common-geometric-projective-root,
-        lem-finite-variable-polynomial-rings-over-fields-are-ufds,
-        lem-coprime-plane-forms-form-a-homogeneous-regular-sequence,
-        lem-complete-intersection-hilbert-series-two-plane-forms,
-        def-projective-scheme-from-a-homogeneous-quotient,
-        lem-projective-standard-chart-prime-and-local-ring-correspondence,
-        lem-standard-open-affine-chart-of-a-projective-quotient,
-        cor-no-common-component-projective-plane-intersection-is-zero-dimensional,
-        lem-zero-dimensional-projective-scheme-has-finite-local-charts,
-        def-total-length-of-a-zero-dimensional-projective-scheme,
-        lem-localisation-of-a-graded-ring-at-a-homogeneous-element,
-        lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union,
-        lem-base-change-of-a-zero-dimensional-projective-quotient,
-        lem-eventual-hilbert-function-equals-zero-dimensional-projective-length,
-        thm-projective-plane-complete-intersection-total-length,
-        cor-projective-plane-bezout-length-form]
+items: [def-sylvester-resultant-of-binary-forms, lem-binary-resultant-scaling-specialization-and-dehomogenization, thm-binary-resultant-zero-iff-common-geometric-projective-root, lem-coprime-plane-forms-form-a-homogeneous-regular-sequence, lem-complete-intersection-hilbert-series-two-plane-forms, def-projective-scheme-from-a-homogeneous-quotient, lem-projective-standard-chart-prime-and-local-ring-correspondence, lem-standard-open-affine-chart-of-a-projective-quotient, cor-no-common-component-projective-plane-intersection-is-zero-dimensional, lem-zero-dimensional-projective-scheme-has-finite-local-charts, def-total-length-of-a-zero-dimensional-projective-scheme, lem-localisation-of-a-graded-ring-at-a-homogeneous-element, lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union, lem-base-change-of-a-zero-dimensional-projective-quotient, lem-eventual-hilbert-function-equals-zero-dimensional-projective-length, thm-projective-plane-complete-intersection-total-length, cor-projective-plane-bezout-length-form]
 examples: []
 ---
 

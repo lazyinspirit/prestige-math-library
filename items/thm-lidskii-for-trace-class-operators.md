@@ -22,8 +22,6 @@ sources:
 
 ## Statement
 
-**proof uses external results not yet established in this library**
-
 Assume the Axiom of Choice. Let $H$ be any complex Hilbert space, including
 $H=\{0\}$, and let $T\in\mathcal S_1(H)$. List all nonzero eigenvalues
 $(\lambda_j(T))$ with their finite algebraic multiplicities, where the

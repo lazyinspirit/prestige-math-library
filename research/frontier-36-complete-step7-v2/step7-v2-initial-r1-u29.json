@@ -1,0 +1,82 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "initial",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "eb847670bab40a2439e5cdb871b71db529fdcd8349675a0f63eb1fb3e18045de",
+  "decisions": [
+    {
+      "id": "lem-cauchy-transform-with-smooth-parameters",
+      "model": "gpt-6-sol",
+      "context_sha256": "e7977ab2fc84d143420cbea074f321c077fdcac827fa44645fd6294e64af8654",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.2 incorrectly inserts a second cutoff: transverse differentiation gives the integral of chi times partial_bar_z_l g, whereas the written T_k(chi partial_bar_z_l g) integrates chi squared times that derivative. This is a local formula error, not a fatal gap in the claimed preservation of zero transverse derivatives: both integrands vanish under that hypothesis, and the correct identity follows immediately from the already proved differentiation estimate in 1.2. Removed the extra chi and explained the single cutoff convention; no claim or hypothesis changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-cauchy-transform-with-smooth-parameters",
+      "disposition": "repaired",
+      "post_sha256": "d9758aeb2d1a7cb542467cabda2db82e594d3bdf12ae5c5197a9ef9f0181c0d2",
+      "review_context_sha256": "178d208b9195639ef75547960cef1dd0a255750c0f0f3aaf8c0e306e64b3fa7c",
+      "reason": "Reviewed the full lemma, its four direct prerequisite interfaces, owning contract and page. The bump has closed support inside the bounded coordinate disc, hence compact support; zero extension is smooth. Translation fixes the kernel singularity and every derivative is bounded on a common compact support over compact parameter neighborhoods; the integral of 1/|eta| on a radius R disc is 2 pi R, validating the uniform-continuity differentiation argument. Cauchy-Pompeiu on a larger disc has zero boundary term and the stated positive wedge-integral sign, giving h=g where chi=1. Corrected 2.2 now commutes transverse derivatives with the single-cutoff operator. Compact support gives the same estimates globally without a cutoff. AC remains explicitly assumed for Cauchy-Pompeiu. Contract derivations and page prose already express these correct claims and require no edit. This is local verification of my repair, not independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-cauchy-transform-with-smooth-parameters",
+      "outcome": "confirmed_nonfatal",
+      "resolved": true,
+      "reason": "Corrected the duplicated cutoff in proof step 2.2. The existing translated-kernel differentiation proof directly yields T_k(partial_bar_z_l g), and the stated zero-derivative preservation and global compact-support equations remain valid. No Statement or Definition change."
+    }
+  ],
+  "repair_notes": {
+    "changed_files": [
+      "items/lem-cauchy-transform-with-smooth-parameters.md"
+    ],
+    "exact_repair": "Only proof step 2.2 changed: T_k(chi partial_bar_z_l g) became T_k(partial_bar_z_l g), with the cutoff independence explained.",
+    "interfaces": "Statement is byte-for-byte unchanged; no downstream event is triggered. No definitions, dependencies, contracts, manifests or page carriers changed.",
+    "examined_paths": [
+      "items/lem-cauchy-transform-with-smooth-parameters.md",
+      "items/def-bigraded-complex-differential-forms.md",
+      "items/thm-cauchy-pompeiu-formula.md",
+      "items/def-axiom-of-choice.md",
+      "items/lem-manifold-bump-for-a-compact-set-inside-an-open-set.md",
+      "library/complex-analysis/the-dbar-complex-and-integral-solutions.md",
+      "research/frontier-36-complete-batch-29.proof-contracts.json",
+      "research/frontier-36-complete-proof-contracts.json"
+    ],
+    "source_reading": "Familiar argument checked directly from the local proof and prerequisite text; no external sources consulted or claimed.",
+    "published_ledger": "No published-item defect discovered; no proposed published-ledger update.",
+    "unresolved_obligations": [],
+    "next_action": "Assigned adjudication and local checks complete; controller collects this report and owns independent rejudgment and certification.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-cauchy-transform-with-smooth-parameters.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-cauchy-transform-with-smooth-parameters.md",
+        "exit_code": 0,
+        "result": "OK; 1 file; real KaTeX and renderer YAML parser checks passed"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-36-complete-batch-29.proof-contracts.json --items lem-cauchy-transform-with-smooth-parameters --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      }
+    ],
+    "edit_accounting": "Reversing only the recorded step-2.2 replacement reproduces frozen itemHashJudge a84ef840b3785ffa2bb46ea300879f530ebd6827a4a5941a10bfc8f26a6a1614 and frozen itemHashGuard 465d3be62feea90ebdc6824c2e35d24fa7f080d3ef7533a64a3267e4ae3da32a. Direct comparison confirms byte-identical Statement sections."
+  }
+}

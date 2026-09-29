@@ -1,0 +1,88 @@
+# Step 7 adjudicate: initial, round 1, unit 5
+
+Read briefs/step7-adjudicator.md.
+
+Frozen inputs: /home/lazyinspirit/Projects/prestige-math-library/research/frontier-36-complete-step7-v2/initial-1.json.
+
+Write only your assigned frontier item files, their necessary owning contracts/metadata, and /home/lazyinspirit/Projects/prestige-math-library/research/frontier-36-complete-step7-v2/step7-v2-initial-r1-u5.json.
+
+Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.
+
+SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.
+
+You may fully author and register a genuinely missing prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.
+
+Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.
+
+Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.
+
+Repair confirmed defects fully. Only an actual ## Statement or ## Definition change triggers direct-consumer examination, whether the supplier is published or not. Compare sections directly. Proof-only, citation, dependency and metadata changes with unchanged statements do not propagate. Identify direct consumers and exact affected uses; never pre-expand through unchanged consumer statements.
+
+Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.
+
+Return JSON {run:"frontier-36-complete",phase:"initial",round:1,unit:"5",input_sha256:"eb847670bab40a2439e5cdb871b71db529fdcd8349675a0f63eb1fb3e18045de",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.
+
+Immediately after completing each mathematical review, before editing another supplier, run node tools/step7-workflow.mjs review-contexts --run frontier-36-complete --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.
+
+The assigned tuples below are ordered by increasing in-run dependency level. Adjudicate and repair lower-level items before higher-level items within this batch; keep multiple tuples for the same item together.
+
+Assigned item order: 0:lem-projective-space-finite-type-over-base, 1:lem-curve-closed-subsets-finite, 2:lem-birational-morphism-principal-open-isomorphism, 2:lem-finite-stable-base-change-composition, 3:lem-closed-gluing-of-two-projective-three-spaces-is-proper.
+
+Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.
+
+
+
+For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.
+
+Empty assignments return empty arrays. For every changed Statement/Definition, put every direct dependency/reference consumer in downstream, including consumers whose examined uses remain sound and consumers already covered by an assigned review. The array is an examination inventory, not a list of items to edit. Record each exact affected use and disposition in the report; proof-only intermediate repairs do not restart propagation. For a consumer absent from the dependency/reference graph, include downstream_uses:{ID:"exact affected mathematical use, at least 40 characters"}. Outside consumers go to separate maintenance.
+
+Assigned input:
+[
+  {
+    "id": "lem-projective-space-finite-type-over-base",
+    "model": "gpt-6-sol",
+    "keep": false,
+    "reason": "[F2] misstates its dependency: with zero generators, a finite-type R-algebra A need only equal the image of R in A, not R itself. For example, Z/2 is generated by the empty list as a Z-algebra.",
+    "context_sha256": "58abf6980de8ea2d8cd8343ff4e67119226a6b61828c8d40c373879f60190d50",
+    "item_sha256": "528199e69dd3e75dbba4b5fc08fe6e4232414255df756e1e2bfde36f2fca14e8",
+    "at": "2026-09-29T11:25:09.502Z"
+  },
+  {
+    "id": "lem-curve-closed-subsets-finite",
+    "model": "gpt-6-sol",
+    "keep": false,
+    "reason": "[F11] inaccurately restates its dependency: the supplied lemma assumes a generic point η; it does not assert one exists. Step 2.1 also cites [F11] for existence, though η_X is already a hypothesis.",
+    "context_sha256": "8f3abfebf14352f5bec0a2915f2ff218fe6912b48c535d967edae35a81d0b985",
+    "item_sha256": "90c7991a187b20df81a65b5deca1b7bb324c2d7a62b94770fbd8681a8e31ab68",
+    "at": "2026-09-29T11:25:23.757Z"
+  },
+  {
+    "id": "lem-birational-morphism-principal-open-isomorphism",
+    "model": "gpt-6-sol",
+    "keep": false,
+    "reason": "The title overclaims: being an isomorphism over D(σ) requires all of f⁻¹(D(σ))→D(σ) to be an isomorphism. The proof establishes this only on f⁻¹(D(σ))∩U. For the doubled-origin line→A¹, its n=0 chart yields σ=1, but the full preimage map is not an isomorphism.",
+    "context_sha256": "5e8cf2f173e833d124b322f174947a84723d70c6e26296d701932c930ed5ab8d",
+    "item_sha256": "cad136eefd8ac21c402cb88623b75e750c4894a2119876b16524d6fcfab0d415",
+    "at": "2026-09-29T11:25:57.190Z"
+  },
+  {
+    "id": "lem-finite-stable-base-change-composition",
+    "model": "gpt-6-sol",
+    "keep": false,
+    "reason": "Step 2.1 uses 1⊗b_i as generators of B⊗_A A', but those tensors are ill-typed: b_i lies in B, not A'. The generators needed for the base-change argument are b_i⊗1.",
+    "context_sha256": "03138e33065bfb30ce91f8d3c231876caafff174e826ee45da389e9d88b4b77e",
+    "item_sha256": "72099d0e510bc8c64d3ebb21047da2473679cc02300de83731aa4caf8cfe3565",
+    "at": "2026-09-29T11:24:54.205Z"
+  },
+  {
+    "id": "lem-closed-gluing-of-two-projective-three-spaces-is-proper",
+    "model": "gpt-6-sol",
+    "keep": false,
+    "reason": "Step 2.2’s claimed generators need not generate the fiber product. Take A=k[x,x⁻¹], B=C=k, with x↦1. Its listed generators can be just (x−1,0), which cannot produce (x⁻¹,1). The finite-type argument, and thus the proof of properness, fails.",
+    "context_sha256": "58f4cbd69de45c23a981bba7482096dff35a3b8ab073feb7e025ea5852fe8583",
+    "item_sha256": "eae2749a5b2c3628a05da1f41b49f2f9bc0df412c9a7cff50dc40f30623c51cd",
+    "at": "2026-09-29T11:26:23.367Z"
+  }
+]
+
+

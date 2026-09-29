@@ -1,0 +1,101 @@
+---
+id: def-relative-proj-quasi-coherent-graded-algebra
+kind: definition
+title: "Relative Proj of a graded quasi-coherent algebra"
+status: draft
+origin: pipeline
+deps:
+  - lem-relative-proj-affine-local-gluing
+  - def-quasi-coherent-module-scheme
+  - thm-proj-structure-sheaf-scheme
+  - def-twisting-sheaf-proj
+  - lem-associated-sheaf-restriction-affine-open
+  - thm-projective-space-as-proj
+  - def-scheme-over-base
+  - def-axiom-of-choice
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "The Stacks Project, Constructions of Schemes, Sections 27.8-27.21"
+      url: https://stacks.math.columbia.edu/download/constructions.pdf
+    - title: "Ravi Vakil, The Rising Sea, 29 August 2022, Sections 4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2"
+      url: https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf
+---
+
+## Definition
+
+Assume the Axiom of Choice as inherited from the affine-local Proj
+construction ([[def-axiom-of-choice]]). Let $S$ be a scheme and let
+$$\mathcal A=\bigoplus_{d\ge0}\mathcal A_d$$
+be a quasi-coherent graded $\mathcal O_S$-algebra
+([[def-quasi-coherent-module-scheme]]): each $\mathcal A_d$ is a
+quasi-coherent $\mathcal O_S$-module and the multiplication maps
+$\mathcal A_d\otimes_{\mathcal O_S}\mathcal A_e\to\mathcal A_{d+e}$ are
+$\mathcal O_S$-linear. No finite generation of $\mathcal A$ over
+$\mathcal A_0$ is assumed.
+
+**Construction.** For an affine open $U=\operatorname{Spec}R\subseteq S$ put
+$B_U=\bigoplus_{d\ge0}\Gamma(U,\mathcal A_d)$, a graded $R$-algebra, and let
+$P_U=\operatorname{Proj}B_U$ be its Proj with its scheme structure
+([[thm-proj-structure-sheaf-scheme]]). For affine opens $V\subseteq U$ the
+canonical isomorphisms $P_U|_V\cong P_V$ of
+[[lem-relative-proj-affine-local-gluing]] are compatible with inclusions and
+satisfy the triple-overlap cocycle, so the schemes $P_U$ glue along the affine
+opens of $S$ to a scheme
+$$\operatorname{Proj}_S\mathcal A,$$
+equipped with the open immersions $P_U\hookrightarrow\operatorname{Proj}_S
+\mathcal A$ identifying $P_U$ with the restriction to $U$. The **relative
+twists** are the $\mathcal O_{\operatorname{Proj}_S\mathcal A}$-modules
+$\mathcal O(n)$, $n\in\mathbb Z$, obtained by gluing, over each affine open
+$U$ with its coordinates $B_U$, the sheaves $\widetilde{B_U(n)}$ on
+$P_U=\operatorname{Proj}B_U$ of [[def-twisting-sheaf-proj]]; the gluing is
+compatible for the following reason. Write $V=\operatorname{Spec}C\subseteq U$.
+The degreewise restriction calculation in [[lem-relative-proj-affine-local-gluing]]
+gives $B_V=B_U\otimes_R C$, not an identification with $B_U$ itself.
+For a homogeneous $f\in(B_U)_+$, localisation and scalar extension give
+$$B_U(n)_{(f)}\otimes_R C\;\cong\;B_V(n)_{(f_C)},\qquad (b/f^k)\otimes c\longmapsto(b\otimes c)/f_C^k.$$
+To check this formula, first localise the graded ring: the universal
+properties identify $(B_U)_f\otimes_R C$ with $(B_V)_{f_C}$ by the displayed
+fractions. Taking degree $n$ gives the stated shifted degree-zero module
+isomorphism, because tensor product distributes over homogeneous direct sums.
+The restriction of the associated module sheaf to the affine open
+$D_+(f)\times_U V$ is associated to this scalar-extended module by
+[[lem-associated-sheaf-restriction-affine-open]]: tensoring over
+$(B_U)_{(f)}$ with $(B_U)_{(f)}\otimes_R C$ is tensoring over $R$ with $C$.
+These identifications commute with further localisation and successive
+restriction, since each sends a fraction to the same fraction with its
+coefficients restricted. They therefore agree on overlaps and satisfy the
+triple cocycle, so the twists glue. No invertibility of the twists is needed.
+
+**Structural morphism.** On $P_U=\operatorname{Proj}B_U$ the ring
+$R=\Gamma(U,\mathcal O_S)$ acts on each $B_U(n)$ through the structure map
+$R\to(B_U)_0$, so $P_U$ carries a canonical morphism
+$P_U\to\operatorname{Spec}R=U$ induced on each chart by the structure map
+$R\to(B_U)_0\to(B_U)_{(f)}$. These morphisms are compatible with the identifications
+$P_U|_V\cong P_V$ and glue to a morphism
+$$\pi:\operatorname{Proj}_S\mathcal A\longrightarrow S,$$
+called the **structural morphism**, through which
+$\operatorname{Proj}_S\mathcal A$ is a scheme over $S$
+([[def-scheme-over-base]]).
+
+**Absolute case.** If $S=\operatorname{Spec}R$ is affine and
+$\mathcal A=\widetilde B$ for a graded $R$-algebra $B$, then
+$\operatorname{Proj}_S\mathcal A=\operatorname{Proj}B$ and $\pi$ is the
+structural morphism of the absolute Proj; in particular
+$\operatorname{Proj}_{\operatorname{Spec}R}\widetilde{R[x_0,\dots,x_n]}
+\cong\mathbb P^n_R$ by [[thm-projective-space-as-proj]].
+
+## Remarks
+
+- **No finiteness.** Existence of $\operatorname{Proj}_S\mathcal A$ uses only
+  quasi-coherence of the graded pieces and the affine-local Proj construction;
+  no finite generation is required. If, on each affine open $U$ of the base,
+  $B_U$ is generated by $(B_U)_1$ over $(B_U)_0$, all relative twists are
+  invertible by [[thm-twisting-sheaf-invertible-standard-graded]] applied on
+  those affine-base restrictions. This degree-one generation hypothesis
+  does not require finitely many generators and is not part of this definition.
+- **Choice.** The Axiom of Choice is inherited from the affine Proj
+  construction and the affine-local gluing; the definition itself selects no
+  data beyond that interface.

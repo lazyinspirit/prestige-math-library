@@ -5,7 +5,7 @@ title: Unitary intertwiners preserve direct-integral fiber dimension
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectral-multiplicity-function-in-the-separable-case, thm-borel-functional-calculus-for-bounded-normal-operators, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integration-against-a-radon-nikodym-derivative, def-axiom-of-choice, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-c-c-is-dense-in-l-p-for-radon-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-riesz-fischer-completeness-of-l-p, def-regular-complex-borel-measure-on-an-lch-space, def-total-variation-of-a-signed-or-complex-measure, thm-hilbert-adjoint-properties, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions]
+deps: [def-spectral-multiplicity-function-in-the-separable-case, thm-borel-functional-calculus-for-bounded-normal-operators, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integration-against-a-density, def-axiom-of-choice, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-c-c-is-dense-in-l-p-for-radon-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-riesz-fischer-completeness-of-l-p, def-regular-complex-borel-measure-on-an-lch-space, def-total-variation-of-a-signed-or-complex-measure, thm-hilbert-adjoint-properties, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, thm-monotone-convergence-for-the-integral, thm-cauchy-schwarz-in-an-inner-product-space]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -17,7 +17,7 @@ sources:
     - title: "Andreas Kriegl, Funktionalanalysis, §8.62–8.66, printed pp.197–200"
       url: "https://www.mat.univie.ac.at/~kriegl/Skripten/2019SSe.pdf"
 verification:
-  audited: 2026-09-22
+  audited: 2026-09-29
 ---
 
 ## Statement
@@ -52,6 +52,8 @@ coordinate function on $\Lambda$, then:
 
 [A6] AC is the declared choice hypothesis of this page from the construction item onward ([[def-axiom-of-choice]]).
 
+[A7] For a nonnegative density $h$, integration against the positive measure $h\,d\mu$ agrees with integration of the product for every nonnegative measurable function, including nonnegative squared norms ([[thm-integration-against-a-density]]). Monotone convergence passes finite coordinate sums through these integrals ([[thm-monotone-convergence-for-the-integral]]), and Cauchy–Schwarz bounds products of two square-summable coordinate columns ([[thm-cauchy-schwarz-in-an-inner-product-space]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -66,10 +68,10 @@ coordinate function on $\Lambda$, then:
 
 3.1 The same argument applied to the unitary $U^*$, which also intertwines the multiplications, shows $\nu\ll\mu$; hence $\mu$ and $\nu$ are mutually absolutely continuous. [step 1.1, step 2.1, A5]
 
-3.2 Transferring $Y_B$ to the measure $\mu|_B$ by the Radon–Nikodym factor: because $\nu|_B\sim\mu|_B$, A2 supplies a positive almost-everywhere density $h=d\nu/d\mu$. The map $(g_s)_s\mapsto(g_s\sqrt h)_s$ is an isometry $\bigoplus_{s\le k'}L^2(\nu|_B)\to\bigoplus_{s\le k'}L^2(\mu|_B)$ by the defining integral identity, and it is onto because $h>0$ almost everywhere and its inverse is multiplication by $h^{-1/2}$. It commutes with all multiplications, so composing it with $U_B$ gives a unitary $V:\bigoplus_{r\le k}L^2(\mu|_B)\to\bigoplus_{s\le k'}L^2(\mu|_B)$ commuting with all multiplications. [step 2.2, A2, A5]
+3.2 Transferring $Y_B$ to the measure $\mu|_B$ by the Radon–Nikodym factor: because $\nu|_B\sim\mu|_B$, [A2] supplies a positive almost-everywhere density $h=d\nu/d\mu$. The measure identity $\nu|_B=h\,d(\mu|_B)$ and [A7], applied to each $|g_s|^2\ge0$ and then to the increasing coordinate sums, show that $(g_s)_s\mapsto(g_s\sqrt h)_s$ is an isometry $\bigoplus_{s\le k'}L^2(\nu|_B)\to\bigoplus_{s\le k'}L^2(\mu|_B)$. It is onto because $h>0$ almost everywhere and its inverse is multiplication by $h^{-1/2}$; the same nonnegative integral identity proves the inverse isometric. It commutes with all multiplications, so composing it with $U_B$ gives a unitary $V:\bigoplus_{r\le k}L^2(\mu|_B)\to\bigoplus_{s\le k'}L^2(\mu|_B)$ commuting with all multiplications. [step 2.2, A2, A5, A7]
 
-4.1 Constant-fibre rigidity: writing $P_r,Q_s$ for the coordinate projections and $V_{sr}:=Q_sVP_r$, each $V_{sr}$ commutes with all multiplications, so $V_{sr}=M_{g_{sr}}$ for a bounded Borel function $g_{sr}$; hence $V$ is given fibrewise by the measurable matrix field $\varphi(z):=(g_{sr}(z))$, and $V^*V=I$, $VV^*=I$ force $\varphi(z)^*\varphi(z)=I_k$ and $\varphi(z)\varphi(z)^*=I_{k'}$ for $\mu$-almost every $z$. [step 3.2, A4]
+4.1 Constant-fibre rigidity: write $P_r,Q_s$ for the coordinate projections and $V_{sr}:=Q_sVP_r$. Each $V_{sr}$ commutes with all multiplications, so [A4] gives $V_{sr}=M_{g_{sr}}$ for a bounded Borel representative $g_{sr}$; choose these representatives simultaneously, since the coordinate pairs form a countable set. Because $0<\mu(B)<\infty$, the constant coordinate vectors $e_r$ and $e'_s$ belong to the localized Hilbert spaces. For every Borel $D\subseteq B$, the identities $V^*V=I$ and $VV^*=I$, localized by $M_{\mathbf1_D}$, give $\int_D\sum_s g_{sr}\overline{g_{st}}\,d\mu=\delta_{rt}\mu(D)$ and $\int_D\sum_r g_{sr}\overline{g_{ur}}\,d\mu=\delta_{su}\mu(D)$. For equal indices, the sums are nonnegative. Monotone convergence and equality for every $D$ imply $\sum_s|g_{sr}|^2=1$ and $\sum_r|g_{sr}|^2=1$ almost everywhere, for each fixed column $r$ and row $s$. Cauchy–Schwarz then makes each off-diagonal sum absolutely convergent almost everywhere and bounded by $1$; passing finite partial sums through the integrals gives the off-diagonal identities pointwise almost everywhere. Intersect the countably many resulting conull sets. At every point of that common set the columns define an isometry $\varphi(z):\ell^2(k)\to\ell^2(k')$ first on finite-support vectors and then by completion. The row identities likewise make its adjoint an isometry, so $\varphi(z)$ is onto. Thus $\varphi(z)^*\varphi(z)=I_k$ and $\varphi(z)\varphi(z)^*=I_{k'}$ there, with convergent matrix products. [step 3.2, A4, A5, A7]
 
-5.1 A measurable field of linear maps satisfying both identities exists only if $k=k'$: if $k<\infty$ then $\varphi(z)^*\varphi(z)=I_k$ shows the range of $\varphi(z)^*$ spans a $k$-dimensional space, so $\varphi(z)\varphi(z)^*$, whose rank is at most $k$, cannot equal $I_{k'}$ when $k'=\infty$; symmetrically $k'<\infty<k$ is impossible; and $k=k'\in\{1,2,\dots\}\cup\{\infty\}$ is consistent. Hence $k=k'$. [step 4.1]
+5.1 A fibrewise unitary $\varphi(z):\ell^2(k)\to\ell^2(k')$ forces $k=k'$. If both are finite, its injectivity gives $k\le k'$ and its surjectivity gives $k'\le k$. If $k<\infty$ and $k'=\infty$, its range has dimension at most $k$ and cannot be all of $\ell^2$; the reverse case is excluded by injectivity. The only remaining case has $k=k'=\infty$. Hence every positive-measure constant-multiplicity region has equal fibre dimensions. [step 4.1]
 
 6.1 The Borel sets $\{m=k\}\cap\{m'=k'\}$ over $k,k'$ cover a conull set, and by the rigidity steps above every one of them with positive measure satisfies $k=k'$; therefore $m=m'$ $\mu$-almost everywhere, and by the class equality also $\nu$-almost everywhere. [step 3.1, step 5.1, A6] ∎

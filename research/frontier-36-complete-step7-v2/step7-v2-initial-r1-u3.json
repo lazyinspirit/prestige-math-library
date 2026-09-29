@@ -1,0 +1,82 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "initial",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "eb847670bab40a2439e5cdb871b71db529fdcd8349675a0f63eb1fb3e18045de",
+  "decisions": [
+    {
+      "id": "def-aperiodic-chain",
+      "model": "gpt-6-sol",
+      "context_sha256": "956ecbb17b0109804d4ae832827fe4eab23a004a3277cc80a153da31604cd158",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 3.1 uses sigma without defining a cyclic permutation; interpreting it as the von Neumann successor would not produce a finite cycle. The core common-positive-period proof in steps 1.1 and 2.1 is sound independently. Replaced the ambiguous cycle notation by explicit transitions x_j to x_((j+1) mod k) and computed diagonal powers, giving exactly the positive multiples of k. This is a local illustrative notation defect, not a failure of the definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting",
+      "model": "gpt-6-sol",
+      "context_sha256": "9c17d36d15cc8db0115f935240a84536b162010a60779c362f31fa440e2520a3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The whole-sample-space assertion in step 2.2 is false: the path at omega=a hits A at time zero, whereas the path at omega=b never hits A. The preceding deterministic-start construction already assigns probability one to {b} under P_b, so the asserted hitting probability and nonuniqueness conclusion are correct. Replaced the erroneous universal phrase with the exact path omega=b and P_b({b})=1; this is a local quantifier slip with no change to the witness or conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-aperiodic-chain",
+      "disposition": "repaired",
+      "post_sha256": "81e3bd94e1d26f7a01f83d6322055f27c2350d6a9a8c540910c52eeaa05ac0ab",
+      "review_context_sha256": "fe2df914ee4c8c72f144f9827503fe1afd76e2cdd149a5ab82438cef093be6d5",
+      "reason": "Checked all five direct suppliers, the owning contract and A/B pages. For a singleton, stochasticity gives a one-step return; for distinct communicating states, positive route lengths and Chapman-Kolmogorov give a positive return. Period invariance then supplies a common positive integer. The explicit k-cycle has n-step diagonal probability one exactly when k divides n, including k=1. Definition and dependencies are unchanged, and the existing contract describes this same calculation. This is author verification of the local repair, not independent review of that repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting",
+      "disposition": "repaired",
+      "post_sha256": "4440eef9b5c0b1b225cf851df6bf941ac0d0dd768ea70ba96d8b4c0d685306a5",
+      "review_context_sha256": "5158a6921de514eddfda6008ee6542f7fa78e22dd57946fbfa8114285b46ae02",
+      "reason": "Checked the hitting-time definition, the comparison Dirichlet theorem, the owning contract and both page interfaces. The identity chain is explicit on two atoms; T_A(a)=0 and T_A(b)=infinity, so P_b(T_A<infinity)=0. For every c in [0,1], Pv_c(b)=c and v_c(a)=1; c=0 and c=1 give distinct bounded solutions. The theorem requires all-start almost-sure hitting, which fails here. This finite witness uses no AC even though the comparison theorem assumes it. Statement and contract remain correct. This is author verification of the repair, not independent review of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-aperiodic-chain",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "reason": "Step 3.1 uses sigma without defining a cyclic permutation; interpreting it as the von Neumann successor would not produce a finite cycle. The core common-positive-period proof in steps 1.1 and 2.1 is sound independently. Replaced the ambiguous cycle notation by explicit transitions x_j to x_((j+1) mod k) and computed diagonal powers, giving exactly the positive multiples of k. This is a local illustrative notation defect, not a failure of the definition."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "reason": "The whole-sample-space assertion in step 2.2 is false: the path at omega=a hits A at time zero, whereas the path at omega=b never hits A. The preceding deterministic-start construction already assigns probability one to {b} under P_b, so the asserted hitting probability and nonuniqueness conclusion are correct. Replaced the erroneous universal phrase with the exact path omega=b and P_b({b})=1; this is a local quantifier slip with no change to the witness or conclusion."
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "proposed_updates": [],
+      "reason": "No published defect was discovered in this assigned local review; no published item was edited."
+    }
+  ],
+  "repair_notes": [
+    "Reviewed assigned items in dependency order 3 then 4. Both are draft members of the frozen frontier. Only Verification 3.1 of def-aperiodic-chain and Proof 2.2 of the counterexample were edited.",
+    "Read local direct suppliers, research/frontier-36-complete-batch-3.proof-contracts.json assigned entries, and library/probability/recurrence-transience-and-hitting-times-for-markov-chains{,-examples}.md. Contracts and page interfaces still describe the same valid claims and need no edits.",
+    "No external source consultation was needed or claimed: these local finite calculations and period arguments are familiar. Source metadata was retained; historical source-reading claims are not attributed to this review.",
+    "Both review-context commands exited 0; hashes were recorded immediately after each review. No additions, unresolved mathematical obligations, published findings or assigned gate diagnostics. Assigned work is complete; central collection and independent rejudgment remain engine-owned.",
+    "Focused precheck: 2 checked, 0 failing, exit 0. Focused rendercheck: 2 files clean, exit 0. git diff --check on both assigned item paths: exit 0. Direct Statement/Definition hashes equal both frozen before_statements; each item guard changed from the frozen before guard. Exact tuple coverage and report JSON assertions passed. An initial rendercheck --help invocation unexpectedly ran the default repository-wide read-only scan: 23101 files clean, exit 0; this is a formatting result, not mathematical review of outside items."
+  ]
+}

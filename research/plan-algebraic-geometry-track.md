@@ -1063,12 +1063,23 @@ establish that input rather than cite the later AV-18 page.
 | `thm-projective-space-proper-over-base` | thm | Prove $\mathbf P^n_S\to S$ is proper using the valuative criterion or homogeneous-coordinate patching. | literature-derived | ai-altered |
 | `thm-projective-morphism-proper` | thm | Deduce projective morphisms are proper from closed immersions and projective space. | literature-derived | ai-altered |
 | `lem-closed-immersion-proper` | lem | Prove closed immersions are proper, including finite type. | literature-derived | ai-altered |
-| `thm-proper-quasi-finite-is-finite` | thm | Show a proper quasi-finite morphism is finite; isolates a major use of Zariski's Main Theorem. | literature-derived | ai-altered |
 | `cor-proper-birational-normal-curve-isomorphism-off-finite-set` | cor | For normal curves, control a proper birational morphism away from finitely many points. | literature-derived | ai-altered |
 | `thm-properness-descent-fpqc` | thm | State descent of properness under fpqc base change, using flat descent as an application rather than rebuilding it. | literature-derived | not-supplied |
 | `lem-proper-fibres-proper` | lem | Every scheme-theoretic fibre of a proper morphism is proper over its residue field. | literature-derived | ai-altered |
 | `rem-projective-versus-proper` | rem | State that projective implies proper, while the converse needs extra hypotheses and is false in general. | literature-derived | not-applicable |
 | `rem-proper-not-topologically-compact-over-arbitrary-field` | rem | Separate scheme properness from compactness of a chosen set of rational points. | literature-derived | not-applicable |
+
+**Frontier-36 owner placement:** The full scheme-level Zariski Main
+factorization and its proper quasi-finite corollary are authored in AV-17,
+after the elementary étale decomposition they require. AV-15 retains the
+affine and properness interfaces. Its proper nonprojective B example is proved
+locally using closed gluing of two projective three-spaces and the degree of
+line bundles on their line and conic centres; these two support lemmas remain
+on the existing AV-15 A page, below the 100-item cap.
+The quasi-finite scheme definition uses the published affine-algebra
+quasi-finite-at-a-prime definition, so AV-15 directly declares the published
+algebraic Zariski Main page. This algebraic input does not prove the later
+scheme-level factorization.
 
 ### Proposed B-page inventory (9 dependency leaves)
 
@@ -1081,7 +1092,7 @@ establish that input rather than cite the later AV-18 page.
 | `cex-open-immersion-not-proper` | cex | Show a nonclosed open immersion fails universal closedness/existence. | literature-derived | not-applicable |
 | `ex-proper-image-projective-variety` | ex | Project a closed incidence variety and use properness to prove its image closed. | literature-derived | not-applicable |
 | `cex-proper-not-affine-positive-dimensional` | cex | A positive-dimensional proper integral variety cannot be affine over $k$ because global functions are too small. | literature-derived | not-applicable |
-| `cex-proper-not-necessarily-projective` | cex | Record a standard complete nonprojective variety from the literature without making it load-bearing. | literature-derived | not-applicable |
+| `cex-proper-not-necessarily-projective` | cex | Construct a proper nonprojective scheme by gluing two projective three-spaces along exchanged line/conic centres; it is reducible and is a dependency leaf. | literature-derived | ai-altered |
 | `ex-empty-morphism-proper-projective` | ex | Verify $\varnothing\to S$ is finite, proper, and projective under the adopted conventions. | ai-generated | not-applicable |
 
 ---
@@ -1159,7 +1170,7 @@ proper, flat, finite-presentation route of Stacks Project Lemma 37.30.6
 (tag `0D4J`). AV-15 is an earlier declared supplier for properness. This
 theorem does not assert local constancy for arbitrary flat families.
 
-### Proposed A-page inventory (31 items)
+### Proposed A-page inventory (31 base items, plus scheme Zariski Main support)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1187,6 +1198,9 @@ theorem does not assert local constancy for arbitrary flat families.
 | `thm-etale-morphisms-open-and-quasi-finite` | thm | Prove étale morphisms are open and locally quasi-finite. | literature-derived | ai-altered |
 | `def-standard-etale-algebra` | def | Define $B=(A[x]/(f))_g$ with $f'$ invertible as a standard étale algebra. | literature-derived | not-applicable |
 | `thm-etale-locally-standard-etale` | thm | Show every étale morphism is locally standard étale. | literature-derived | ai-altered |
+| `lem-elementary-etale-neighbourhood-finite-decomposition` | lem | Prove the étale-local finite-component decomposition near isolated points of a separated finite-type morphism, with the exact Stacks §37.41 hypotheses. | literature-derived | ai-altered |
+| `lem-scheme-zariski-main-factorization-quasi-finite` | lem | For a quasi-finite separated morphism over a quasi-compact quasi-separated base, prove the open-immersion/finite factorization using relative normalization, elementary étale localization and finite-stage descent; obtain the general result locally on the base when needed. | literature-derived | ai-altered |
+| `thm-proper-quasi-finite-is-finite` | thm | Show a proper quasi-finite morphism is finite using the preceding factorization or the étale-local finite-component decomposition and fpqc descent, with no affine-algebra theorem substituted for scheme-level gluing. | literature-derived | ai-altered |
 | `thm-etale-over-algebraically-closed-field-discrete-smooth-points` | thm | Describe finite étale $k$-schemes as finite disjoint unions of points when $k$ is algebraically closed. | literature-derived | ai-altered |
 | `def-smooth-locus-morphism` | def | Define the smooth locus of a finite-presentation morphism. | literature-derived | not-applicable |
 | `thm-smooth-locus-open` | thm | Prove the smooth locus is open. | literature-derived | ai-altered |
@@ -1237,7 +1251,7 @@ and *Properties of Schemes* §§28.20--28.26.
 | `thm-affine-quasi-coherent-equivalence` | thm | Prove $M\mapsto\widetilde M$ and $\mathcal F\mapsto\Gamma(X,\mathcal F)$ are quasi-inverse equivalences on affine schemes. | literature-derived | ai-altered |
 | `cor-affine-qc-sheaf-determined-global-sections` | cor | A quasi-coherent sheaf on an affine scheme is determined by its global module. | literature-derived | ai-altered |
 | `thm-quasi-coherence-check-affine-cover` | thm | Show quasi-coherence can be checked on any affine open cover, including overlap compatibility. | literature-derived | ai-altered |
-| `thm-kernels-cokernels-qc-modules` | thm | Under the stated quasi-separated hypotheses, show kernels and cokernels of maps of quasi-coherent modules remain quasi-coherent. | literature-derived | ai-altered |
+| `thm-kernels-cokernels-qc-modules` | thm | On any scheme, check on affine opens that kernels and cokernels of maps of quasi-coherent modules remain quasi-coherent; quasi-separatedness belongs to the separate pushforward theorem. | literature-derived | ai-altered |
 | `lem-tensor-qc-modules-quasi-coherent` | lem | Prove tensor products of quasi-coherent modules are quasi-coherent. | literature-derived | ai-altered |
 | `lem-pullback-qc-module-quasi-coherent` | lem | Prove arbitrary scheme pullback preserves quasi-coherence. | literature-derived | ai-altered |
 | `thm-pushforward-qc-under-qcqs-morphism` | thm | If $f$ is quasi-compact and quasi-separated, prove $f_*\mathcal F$ is quasi-coherent for quasi-coherent $\mathcal F$. | literature-derived | ai-altered |
@@ -1245,8 +1259,8 @@ and *Properties of Schemes* §§28.20--28.26.
 | `def-coherent-module-scheme` | def | Define coherent as finite type with finitely generated relation kernels; on locally Noetherian schemes use the finite-type equivalence. | literature-derived | not-applicable |
 | `thm-coherent-sheaves-abelian-noetherian-scheme` | thm | On a locally Noetherian scheme, kernels, cokernels, and extensions of coherent sheaves are coherent. | literature-derived | ai-altered |
 | `def-locally-free-sheaf-finite-rank` | def | Define locally free rank $r$, including rank zero. | literature-derived | not-applicable |
-| `def-vector-bundle-scheme` | def | Define a vector bundle geometrically as $\underline{\operatorname{Spec}}_X\operatorname{Sym}(\mathcal E^\vee)$ and relate it to locally free sheaves. | literature-derived | not-applicable |
-| `thm-vector-bundles-locally-free-sheaves-equivalence` | thm | Establish the contravariant convention and equivalence between finite locally free sheaves and vector bundles. | literature-derived | ai-altered |
+| `def-vector-bundle-scheme` | def | Define $V(\mathcal E)=\underline{\operatorname{Spec}}_X\operatorname{Sym}(\mathcal E^\vee)$ for a finite locally free section sheaf $\mathcal E$; this convention is covariant in $\mathcal E$, while relative Spec is contravariant in its coordinate algebra. | literature-derived | not-applicable |
+| `thm-vector-bundles-locally-free-sheaves-equivalence` | thm | Establish the equivalence with finite locally free section sheaves and track the covariant bundle maps separately from contravariant coordinate-algebra maps. | literature-derived | ai-altered |
 | `def-invertible-sheaf` | def | Define an invertible sheaf as locally free of rank one. | literature-derived | not-applicable |
 | `lem-invertible-sheaf-dual-tensor-inverse` | lem | Prove $\mathcal L^\vee\otimes\mathcal L\cong\mathcal O_X$. | literature-derived | ai-altered |
 | `def-support-module-sheaf` | def | Define $\operatorname{Supp}\mathcal F=\{x:\mathcal F_x\ne0\}$. | literature-derived | not-applicable |
@@ -1254,7 +1268,7 @@ and *Properties of Schemes* §§28.20--28.26.
 | `def-fibre-of-module-at-point` | def | Define $\mathcal F(x)=\mathcal F_x\otimes\kappa(x)$ and distinguish it from the stalk. | literature-derived | not-applicable |
 | `lem-sheaf-nakayama-fibre-detects-generation` | lem | Use Nakayama to detect vanishing and local generation from fibres of finite-type sheaves. | literature-derived | ai-altered |
 | `thm-locally-free-locus-finite-presentation-open` | thm | Prove the rank-$r$ locally free locus of a finitely presented sheaf is open. | literature-derived | ai-altered |
-| `def-fitting-ideal-sheaf` | def | Define Fitting ideals locally from presentation minors and prove independence by citation to commutative algebra. | literature-derived | not-applicable |
+| `def-fitting-ideal-sheaf` | def | Define Fitting ideals locally from presentation minors, after a local support lemma proves presentation independence by explicit matrix moves. | literature-derived | not-applicable |
 | `thm-fitting-ideals-control-rank-loci` | thm | Express generator/rank loci through Fitting ideals; powers degeneracy loci. | literature-derived | ai-altered |
 | `thm-qc-ideal-closed-subscheme-correspondence-complete` | thm | Complete the `AV-12` correspondence between quasi-coherent ideals and closed subschemes. | literature-derived | ai-altered |
 | `def-internal-hom-qc-sheaves` | def | Define $\mathcal Hom(\mathcal F,\mathcal G)$ and state the finite-presentation hypotheses for quasi-coherence. | literature-derived | not-applicable |
@@ -1265,16 +1279,16 @@ and *Properties of Schemes* §§28.20--28.26.
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `ex-associated-sheaf-quotient-module` | ex | Compute $\widetilde{A/I}$ and its support $V(I)$. | literature-derived | not-applicable |
-| `ex-associated-sheaf-localized-module` | ex | Compare $\widetilde{M_f}$ on $D(f)$ with $\widetilde M\!\restriction_{D(f)}$. | literature-derived | not-applicable |
-| `ex-skyscraper-coherent-closed-point` | ex | Realize a closed-point skyscraper as the coherent sheaf $\widetilde{A/\mathfrak m}$. | literature-derived | not-applicable |
-| `ex-line-bundle-projective-line-transition` | ex | Glue $\mathcal O_{\mathbf P^1}(n)$ from transition $t^n$. | literature-derived | not-applicable |
-| `cex-qc-sheaf-global-sections-not-determine-nonaffine` | cex | Distinguish $\mathcal O_{\mathbf P^1}(-1)$ from zero despite no nonzero global sections. | literature-derived | not-applicable |
-| `cex-pushforward-qc-needs-quasi-separated` | cex | Record a standard non-quasi-separated counterexample. | literature-derived | not-applicable |
-| `cex-finite-type-module-not-locally-free` | cex | Use $A/(x)$ on $\operatorname{Spec}A$ and compute its varying fibres. | literature-derived | not-applicable |
-| `ex-fitting-ideal-two-by-two-presentation` | ex | Compute rank loci from minors of an explicit matrix. | ai-generated | not-applicable |
-| `ex-rank-zero-locally-free-sheaf` | ex | Verify the zero sheaf is locally free of rank zero and its vector bundle is the zero section. | ai-generated | not-applicable |
-| `cex-stalk-versus-fibre-module` | cex | For $\widetilde A$, compare $A_{\mathfrak p}$ with $\kappa(\mathfrak p)$. | literature-derived | not-applicable |
+| `ex-associated-sheaf-quotient-module` | ex | Compute $\widetilde{A/I}$ and its support $V(I)$. | literature-derived | ai-altered |
+| `ex-associated-sheaf-localized-module` | ex | Compare $\widetilde{M_f}$ on $D(f)$ with $\widetilde M\!\restriction_{D(f)}$. | literature-derived | ai-altered |
+| `ex-skyscraper-coherent-closed-point` | ex | Realize a closed-point skyscraper as the coherent sheaf $\widetilde{A/\mathfrak m}$. | literature-derived | ai-altered |
+| `ex-line-bundle-projective-line-transition` | ex | Glue $\mathcal O_{\mathbf P^1}(n)$ from transition $t^n$. | literature-derived | ai-altered |
+| `cex-qc-sheaf-global-sections-not-determine-nonaffine` | cex | Distinguish $\mathcal O_{\mathbf P^1}(-1)$ from zero despite no nonzero global sections. | literature-derived | ai-altered |
+| `cex-pushforward-qc-needs-quasi-separated` | cex | Record a standard non-quasi-separated counterexample. | literature-derived | ai-altered |
+| `cex-finite-type-module-not-locally-free` | cex | Use $A/(x)$ on $\operatorname{Spec}A$ and compute its varying fibres. | literature-derived | ai-altered |
+| `ex-fitting-ideal-two-by-two-presentation` | ex | Compute rank loci from minors of an explicit matrix. | ai-generated | ai-altered |
+| `ex-rank-zero-locally-free-sheaf` | ex | Verify the zero sheaf is locally free of rank zero and its vector bundle is the zero section. | ai-generated | ai-altered |
+| `cex-stalk-versus-fibre-module` | cex | For $\widetilde A$, compare $A_{\mathfrak p}$ with $\kappa(\mathfrak p)$. | literature-derived | ai-altered |
 
 ---
 
@@ -1292,8 +1306,8 @@ Schemes* §§29.38--29.44; Milne AG10 §i, pp. 23--25.
 |---|---|---|---|---|
 | `def-proj-graded-ring-points` | def | Define $\operatorname{Proj}S$ as homogeneous primes not containing the irrelevant ideal, for a nonnegatively graded ring. | literature-derived | not-applicable |
 | `def-standard-open-proj` | def | Define $D_+(f)$ for homogeneous $f$ of positive degree. | literature-derived | not-applicable |
-| `lem-standard-opens-proj-affine` | lem | Prove $D_+(f)\cong\operatorname{Spec}(S_{(f)})$, the degree-zero localization. | literature-derived | ai-altered |
 | `thm-proj-structure-sheaf-scheme` | thm | Glue standard affine opens and their degree-zero localizations to construct $\operatorname{Proj}S$. | literature-derived | ai-altered |
+| `lem-standard-opens-proj-affine` | lem | After constructing the Proj sheaf, prove $D_+(f)\cong\operatorname{Spec}(S_{(f)})$, the degree-zero localization. | literature-derived | ai-altered |
 | `lem-proj-irrelevant-and-nilpotent-boundaries` | lem | Account for $S_+$ nilpotent, empty Proj, and irrelevant torsion. | literature-derived | ai-altered |
 | `def-shifted-graded-module` | def | Define $M(n)$ with the adopted sign convention $M(n)_d=M_{n+d}$. | literature-derived | not-applicable |
 | `def-associated-sheaf-graded-module-proj` | def | Define $\widetilde M$ by degree-zero localizations on $D_+(f)$. | literature-derived | not-applicable |
@@ -1302,15 +1316,15 @@ Schemes* §§29.38--29.44; Milne AG10 §i, pp. 23--25.
 | `thm-twisting-sheaf-invertible-standard-graded` | thm | When $S$ is generated by $S_1$, prove $\mathcal O_X(n)$ is invertible and tensor twists add. | literature-derived | ai-altered |
 | `lem-proj-veronese-invariance` | lem | Prove $\operatorname{Proj}S\cong\operatorname{Proj}S^{(d)}$ and track $\mathcal O(d)$. | literature-derived | ai-altered |
 | `thm-projective-space-as-proj` | thm | Identify $\mathbf P^n_A=\operatorname{Proj}A[x_0,\ldots,x_n]$, including $n=0$. | literature-derived | ai-altered |
-| `thm-closed-subschemes-projective-space-homogeneous-ideals` | thm | Relate saturated homogeneous ideals to closed subschemes of projective space. | literature-derived | ai-altered |
+| `thm-closed-subschemes-projective-space-homogeneous-ideals` | thm | Relate ideals saturated by the full irrelevant ideal $(x_0,\ldots,x_n)$ to closed subschemes of projective space; distinguish single-coordinate saturation. | literature-derived | ai-altered |
 | `def-relative-proj-quasi-coherent-graded-algebra` | def | Define $\underline{\operatorname{Proj}}_S\mathcal A$ by affine-local gluing. | literature-derived | not-applicable |
-| `thm-relative-proj-base-change` | thm | Prove relative Proj commutes with base change under the standard finite-generation hypotheses. | literature-derived | ai-altered |
-| `def-projective-bundle-scheme` | def | Define $\mathbf P(\mathcal E)=\underline{\operatorname{Proj}}\operatorname{Sym}\mathcal E$ using the one-dimensional quotient convention. | literature-derived | not-applicable |
+| `thm-relative-proj-base-change` | thm | Prove arbitrary base change for relative Proj by affine degree-zero localization and tensor calculation; finite generation is unnecessary for this comparison. | literature-derived | ai-altered |
+| `def-projective-bundle-scheme` | def | Define $\mathbf P(\mathcal E)=\underline{\operatorname{Proj}}\operatorname{Sym}\mathcal E$ using the one-dimensional quotient convention, with rank zero giving the empty bundle. | literature-derived | not-applicable |
 | `thm-projective-bundle-represents-line-quotients` | thm | Prove $\mathbf P(\mathcal E)$ represents invertible quotients of pullbacks of $\mathcal E$. | literature-derived | ai-altered |
-| `def-very-ample-invertible-sheaf-relative` | def | Define relative very ampleness by pullback of $\mathcal O(1)$ along an immersion into projective space. | literature-derived | not-applicable |
-| `def-ample-invertible-sheaf` | def | Define ampleness via affine opens cut out by sections of positive tensor powers. | literature-derived | not-applicable |
-| `lem-very-ample-implies-ample` | lem | Prove the standard affine-chart cover gives ampleness. | literature-derived | ai-altered |
-| `thm-ample-powers-very-ample-proper-base` | thm | Under proper finite-type hypotheses over a Noetherian base, show sufficiently high powers are relatively very ample. | literature-derived | ai-altered |
+| `def-very-ample-invertible-sheaf-relative` | def | Define relative very ampleness through a quasi-compact immersion into finite projective space over the base and pullback of $\mathcal O(1)$. | literature-derived | not-applicable |
+| `def-ample-invertible-sheaf` | def | Define absolute ampleness on quasi-compact $X$ via affine section-nonvanishing opens of positive powers; distinguish relative ampleness over a base. | literature-derived | not-applicable |
+| `lem-very-ample-implies-ample` | lem | Prove relative very ampleness implies relative ampleness, and infer absolute ampleness when the base is affine. | literature-derived | ai-altered |
+| `thm-ample-powers-very-ample-proper-base` | thm | For an absolutely ample line bundle on a scheme proper and of finite type over a Noetherian base, show every sufficiently high power is relatively very ample. | literature-derived | ai-altered |
 | `def-globally-generated-sheaf` | def | Define global generation by surjectivity of the evaluation map. | literature-derived | not-applicable |
 | `thm-line-bundle-sections-define-projective-map` | thm | A globally generated invertible sheaf plus generating sections defines a morphism to projective space and pulls back $\mathcal O(1)$. | literature-derived | ai-altered |
 | `thm-projective-map-line-bundle-data-equivalence` | thm | Identify morphisms $X\to\mathbf P^n$ with an invertible sheaf, $n+1$ generating sections, modulo isomorphism. | literature-derived | ai-altered |
@@ -1327,16 +1341,16 @@ Schemes* §§29.38--29.44; Milne AG10 §i, pp. 23--25.
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `ex-proj-polynomial-ring-projective-space` | ex | Compute standard charts and overlaps of $\operatorname{Proj}k[x_0,\ldots,x_n]$. | literature-derived | not-applicable |
-| `ex-proj-empty-irrelevant-nilpotent` | ex | Give a graded ring with empty Proj and verify the criterion. | literature-derived | not-applicable |
-| `ex-proj-quotient-projective-hypersurface` | ex | Recover a projective hypersurface from a homogeneous quotient. | literature-derived | not-applicable |
-| `ex-twisting-sheaf-projective-line-transitions` | ex | Compute transitions for $\mathcal O(n)$ and verify the sign convention. | literature-derived | not-applicable |
-| `cex-o-minus-one-no-global-generators` | cex | Show $\mathcal O_{\mathbf P^1}(-1)$ is not globally generated. | literature-derived | not-applicable |
-| `ex-projective-bundle-trivial-rank-r` | ex | Identify $\mathbf P(\mathcal O_S^r)$ with $\mathbf P^{r-1}_S$, including $r=1$. | literature-derived | not-applicable |
-| `cex-proj-graded-ring-not-faithful` | cex | Compare a graded ring with a Veronese subring or irrelevant-torsion quotient having the same Proj. | literature-derived | not-applicable |
-| `ex-line-bundle-map-conic-veronese` | ex | Use the basis of $H^0(\mathbf P^1,\mathcal O(2))$ to produce the conic embedding. | literature-derived | not-applicable |
-| `cex-globally-generated-not-very-ample` | cex | Use a line bundle defining a non-embedding morphism. | literature-derived | not-applicable |
-| `ex-zero-section-empty-effective-divisor` | ex | A nowhere-vanishing section has empty zero divisor; confirms the degenerate case. | ai-generated | not-applicable |
+| `ex-proj-polynomial-ring-projective-space` | ex | Compute standard charts and overlaps of $\operatorname{Proj}k[x_0,\ldots,x_n]$. | literature-derived | ai-altered |
+| `ex-proj-empty-irrelevant-nilpotent` | ex | Give a graded ring with empty Proj and verify the criterion. | literature-derived | ai-altered |
+| `ex-proj-quotient-projective-hypersurface` | ex | Recover a projective hypersurface from a homogeneous quotient. | literature-derived | ai-altered |
+| `ex-twisting-sheaf-projective-line-transitions` | ex | Compute transitions for $\mathcal O(n)$ and verify the sign convention. | literature-derived | ai-altered |
+| `cex-o-minus-one-no-global-generators` | cex | Show $\mathcal O_{\mathbf P^1}(-1)$ is not globally generated. | literature-derived | ai-altered |
+| `ex-projective-bundle-trivial-rank-r` | ex | Identify $\mathbf P(\mathcal O_S^r)$ with $\mathbf P^{r-1}_S$, including $r=1$. | literature-derived | ai-altered |
+| `cex-proj-graded-ring-not-faithful` | cex | Compare a graded ring with a Veronese subring or irrelevant-torsion quotient having the same Proj. | literature-derived | ai-altered |
+| `ex-line-bundle-map-conic-veronese` | ex | Use the basis of $H^0(\mathbf P^1,\mathcal O(2))$ to produce the conic embedding. | literature-derived | ai-altered |
+| `cex-globally-generated-not-very-ample` | cex | Use a line bundle defining a non-embedding morphism. | literature-derived | ai-altered |
+| `ex-zero-section-empty-effective-divisor` | ex | A nowhere-vanishing section has empty zero divisor; confirms the degenerate case. | ai-generated | ai-altered |
 
 ---
 
@@ -1515,14 +1529,14 @@ pp. 514--518; Gao--Zhang Ch. 6 §§6.3--6.6, pp. 70--81; Artin Ch. 7
 | `def-higher-direct-image-sheaf` | def | Define $R^if_*\mathcal F$ as derived direct image, citing homological algebra. | literature-derived | not-applicable |
 | `thm-proper-pushforward-coherent` | thm | For proper finite-type morphisms of Noetherian schemes, prove $R^if_*\mathcal F$ is coherent. | literature-derived | ai-altered |
 | `def-base-change-map-cohomology` | def | Construct $(R^if_*\mathcal F)\otimes\kappa(s)\to H^i(X_s,\mathcal F_s)$. | literature-derived | not-applicable |
-| `thm-cohomology-and-base-change` | thm | Under properness, finite presentation, and flatness hypotheses, give the local criterion for the base-change map to be an isomorphism and for $R^if_*\mathcal F$ to be locally free. | literature-derived | ai-altered |
-| `cor-upper-semicontinuity-cohomology-dimension` | cor | Show $s\mapsto\dim_{kappa(s)}H^i(X_s,\mathcal F_s)$ is upper semicontinuous under proper flat finite-presentation hypotheses. | literature-derived | ai-altered |
+| `thm-cohomology-and-base-change` | thm | For a proper finite-presentation morphism and a coherent sheaf flat over the base, give the local criterion for the base-change map to be an isomorphism and for $R^if_*\mathcal F$ to be locally free. | literature-derived | ai-altered |
+| `cor-upper-semicontinuity-cohomology-dimension` | cor | Show $s\mapsto\dim_{\kappa(s)}H^i(X_s,\mathcal F_s)$ is upper semicontinuous for a proper finite-presentation morphism with coherent $\mathcal F$ flat over the base. | literature-derived | ai-altered |
 | `cor-euler-characteristic-locally-constant-flat-proper-family` | cor | Deduce Euler characteristic is locally constant in a proper flat family with coherent flat sheaf. | literature-derived | ai-altered |
 | `thm-cohomological-dimension-projective-n-space` | thm | Show quasi-coherent cohomology on $\mathbf P^n_A$ vanishes above degree $n$. | literature-derived | ai-altered |
 | `thm-cohomological-dimension-noetherian-scheme` | thm | Bound quasi-coherent cohomology by dimension for separated Noetherian schemes in the stated finite-dimensional setting. | literature-derived | ai-altered |
 | `lem-closed-immersion-cohomology-pushforward` | lem | For a closed immersion $i$, identify $H^q(Z,\mathcal F)\cong H^q(X,i_*\mathcal F)$. | literature-derived | ai-altered |
 | `lem-projective-hypersurface-cohomology-sequence` | lem | Use $0\to\mathcal O(-d)\to\mathcal O\to\mathcal O_X\to0$ to compute hypersurface cohomology. | literature-derived | ai-altered |
-| `cor-connected-projective-variety-h0-o` | cor | For geometrically connected reduced proper $X/k$, identify $H^0(X,\mathcal O_X)=k$ under the stated hypotheses. | literature-derived | ai-altered |
+| `cor-connected-projective-variety-h0-o` | cor | For geometrically connected and geometrically reduced proper $X/k$, prove $H^0(X,\mathcal O_X)=k$; reducedness over $k$ alone fails for a purely inseparable field spectrum. | literature-derived | ai-altered |
 | `rem-proper-cohomology-finiteness-needs-coherence` | rem | Warn that arbitrary quasi-coherent sheaves need not have finite-dimensional cohomology. | literature-derived | not-applicable |
 | `rem-base-change-is-not-automatic` | rem | Require the actual base-change map and flatness/local-freeness hypotheses rather than asserting fibrewise commutation. | literature-derived | not-applicable |
 
@@ -3103,7 +3117,7 @@ does not discharge these proof prerequisites.
 
 **Single-frontier owner direction (2026-09-27):** Build AV-18, AV-19 and
 AV-22, together with the two scheme-theory pairs that feed them, in the same
-29-pair run as this A/B pair. The algebraic-group bridge belongs inside this A
+30-pair run as this A/B pair. The algebraic-group bridge belongs inside this A
 page; the 100-item ceiling leaves room for necessary supporting definitions
 and lemmas before the seventeen binding targets below. The already published
 highest-weight page is now a declared supplier for the finite-dimensional

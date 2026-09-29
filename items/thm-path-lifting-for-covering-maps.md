@@ -7,14 +7,14 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-lift-of-a-map-path-and-homotopy, thm-lebesgue-number-lemma, lem-continuity-is-local-and-pastes, def-compact-space]
+deps: [def-lift-of-a-map-path-and-homotopy, def-covering-map-and-evenly-covered-neighbourhoods, thm-lebesgue-number-lemma, thm-heine-borel-rn, thm-of-archimedean, thm-connected-subsets-of-r-are-intervals, lem-continuity-is-local-and-pastes, def-compact-space]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-16
+  audited: 2026-09-29
 sources:
   scraped: []
   references:
@@ -43,12 +43,18 @@ Let $p:E\to B$ be a covering, let $\alpha:I\to B$ be a path, and let $e_0\in E$ 
 
 [F4] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). An **open cover** of $(X,\mathcal T)$ is a family $\mathcal U\subseteq\mathcal T$ of open sets with $X=\bigcup\mathcal U$; a **subcover** of $\mathcal U$ is a subfamily that is itself an open cover; and $(X,\mathcal T)$ is **compact** when every open cover of it has a finite subcover. ([[def-compact-space]]).
 
+[F5] Every point of $B$ has an evenly covered open neighbourhood $U$: $p^{-1}(U)$ is a disjoint union of open sheets $V$, and $p|_V:V\to U$ is a homeomorphism. ([[def-covering-map-and-evenly-covered-neighbourhoods]]).
+
+[F6] The closed interval $I=[0,1]$ is compact in the usual metric, and every closed subinterval of $I$ is connected. ([[thm-heine-borel-rn]], [[thm-connected-subsets-of-r-are-intervals]]).
+
+[F7] For every real $x$ there is an integer $m\ge1$ with $x<m$. ([[thm-of-archimedean]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Pull back evenly covered neighbourhoods along the path to obtain an open cover of the compact interval, choose a Lebesgue subdivision, and lift successively sheet by sheet from the prescribed initial point. [given, F1, F2, F3, F4]
+1.1 For every evenly covered open $U\subseteq B$, the inverse image $\alpha^{-1}(U)$ is open in $I$. These inverse images cover $I$ by [F5]. Since $I$ is compact by [F6], [F2] gives a Lebesgue number $\delta>0$ for this cover. Apply [F7] to $1/\delta$ and choose an integer $m\ge1$ with $m>1/\delta$, hence $1/m<\delta$; put $t_j=j/m$ for $0\le j\le m$. Each $J_j=[t_j,t_{j+1}]$ has diameter $1/m<\delta$; thus its image under $\alpha$ lies in some evenly covered open $U_j$. For each selected $U_j$, also fix one of its disjoint-sheet decompositions supplied by [F5]. There are only finitely many $J_j$, so all these selections are finite successive choices and need no axiom of choice. [given, F2, F4, F5, F6, F7]
 
-2.1 Agreement at subdivision endpoints gives a continuous pasted path; sheet uniqueness proves uniqueness, including constant paths. [step 1.1, F3, F1]
+2.1 Set $e_0$ as in the Statement. Suppose $e_j\in E$ has already been defined with $p(e_j)=\alpha(t_j)$. Because $\alpha(t_j)\in U_j$, exactly one sheet $V_j$ over $U_j$ contains $e_j$. Define $\beta_j=(p|_{V_j})^{-1}\circ\alpha|_{J_j}$ and $e_{j+1}=\beta_j(t_{j+1})$. The inverse sheet map and $\alpha|_{J_j}$ are continuous, so $\beta_j$ is continuous; moreover $\beta_j(t_j)=e_j$ and $p\circ\beta_j=\alpha|_{J_j}$. Finite induction constructs all $m$ pieces. Consecutive pieces agree at their common endpoint, so they define a function $\widetilde\alpha:I\to E$. The $J_j$ form a finite closed cover; [F3] makes this function continuous. It starts at $e_0$ and satisfies $p\circ\widetilde\alpha=\alpha$, hence is a lift. [step 1.1, F1, F3, F5]
 
-3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎
+3.1 Let $\gamma:I\to E$ be another lift starting at $e_0$. Inductively assume $\gamma(t_j)=e_j$. On connected $J_j$ from [F6], the image of $\gamma$ lies in $p^{-1}(U_j)$, the disjoint union of its open sheets. The inverse image under $\gamma|_{J_j}$ of any one sheet is open in $J_j$, and its complement is the union of the inverse images of all the other sheets, also open. Thus each sheet inverse image is both open and closed in connected $J_j$. Since $\gamma(t_j)=e_j\in V_j$, the entire $\gamma(J_j)$ lies in $V_j$. On that sheet $p|_{V_j}$ is one-to-one, so $\gamma|_{J_j}=(p|_{V_j})^{-1}\circ\alpha|_{J_j}=\beta_j$. This also gives $\gamma(t_{j+1})=e_{j+1}$ and completes the induction. Hence $\gamma=\widetilde\alpha$ on $I$. The argument also applies when $\alpha$ is constant. [step 2.1, F1, F5, F6] ∎

@@ -10,12 +10,8 @@ provenance:
 deps: [thm-the-mapping-cylinder-factors-a-chain-map, def-chain-homotopy]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
+  audited: 2026-09-29
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -48,4 +44,4 @@ that vanishes on $j(D)$.
 
 1.1 By [L1], $pj=1_D$ and $H_n(x,y,z)=(0,0,x)$ is a chain homotopy from $1_{\operatorname{Cyl}(f)}$ to $jp$. [L1, given, algebra]
 
-2.1 For every $y\in D_n$, one has $j_n(y)=(0,y,0)$, hence $$H_nj_n(y)=H_n(0,y,0)=0.$$ Therefore the homotopy vanishes on the target summand, so [L2] gives the stated strong deformation retract. [L2, step 1.1, algebra] ∎
+2.1 The section $j_n:D_n\to\operatorname{Cyl}(f)_n$ is the inclusion of the middle biproduct summand, with column matrix $(0,1,0)^T$. The homotopy $H_n$ projects onto the first summand and includes it as the third summand in degree $n+1$, so its matrix is $\begin{pmatrix}0&0&0\\0&0&0\\1&0&0\end{pmatrix}$. Biproduct matrix multiplication gives $H_nj_n=0$. Thus the homotopy vanishes on the target summand, and [L2] gives the stated strong deformation retract. [L1, L2, step 1.1, algebra] ∎

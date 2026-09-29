@@ -5,7 +5,7 @@ title: Fredholm determinant properties for trace-class operators
 status: published
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-axiom-of-choice, def-fredholm-determinant, rem-external-separable-trace-class-fredholm-determinant-theorem, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, def-absolute-value-and-singular-values-of-a-compact-operator]
+deps: [def-axiom-of-choice, def-fredholm-determinant, lem-arbitrary-hilbert-fredholm-determinant-from-separable-support, lem-fredholm-determinant-trace-norm-continuity-and-growth, lem-fredholm-determinant-zeros-and-algebraic-multiplicities, lem-fredholm-determinant-logarithmic-derivative, lem-separable-trace-class-determinant-construction, lem-weyl-eigenvalue-singular-value-inequalities, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, def-absolute-value-and-singular-values-of-a-compact-operator]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -21,8 +21,6 @@ sources:
 ---
 
 ## Statement
-
-**proof uses external results not yet established in this library**
 
 Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and
 $T\in\mathcal S_1(H)$. The function $D_T(z)=\det_H(I+zT)$ is entire and,
@@ -61,30 +59,56 @@ All assertions include $H=\{0\}$, finite eigenvalue lists and the empty list.
 **Given:** The Axiom of Choice, a complex Hilbert space $H$, and the displayed
 trace-class operators.
 
-[F1] The arbitrary-space determinant is well defined through a separable
-reducing support and preserves trace, trace norm, nonzero singular values, and
-nonzero generalized-eigenvalue data ([[def-fredholm-determinant]]).
+[F1] The determinant is defined through a separable reducing support; its
+value is independent of the support, entire and normalized, and equals the
+locally uniform product over the nonzero eigenvalues with algebraic
+multiplicity. Finite-rank values are ordinary finite-dimensional determinants
+([[def-fredholm-determinant]],
+[[lem-arbitrary-hilbert-fredholm-determinant-from-separable-support]]).
 
-[F2] The separable determinant has the absolute eigenvalue bound
-$\sum_j|\lambda_j|\leq\|T\|_1$, spectral product, growth, continuity,
-multiplicativity, derivative-at-zero and zero-multiplicity properties recorded
-externally
-([[rem-external-separable-trace-class-fredholm-determinant-theorem]]).
+[F2] On a separable complex Hilbert space the local determinant satisfies
+$D_S'(0)=\operatorname{tr}(S)$
+([[lem-separable-trace-class-determinant-construction]]).
 
-[F3] Trace-class operators form a two-sided ideal
-([[thm-trace-class-is-a-two-sided-banach-operator-ideal]]).
+[F3] On a separable complex Hilbert space the eigenvalue absolute sum is at
+most the trace norm, with algebraic multiplicities
+([[lem-weyl-eigenvalue-singular-value-inequalities]]).
 
-[F4] The trace is basis-independent and agrees with every nuclear trace sum
+[F4] On a separable complex Hilbert space the local determinant satisfies
+the singular-value product and exponential bounds, minimal exponential type,
+the displayed trace-norm continuity estimate, multiplicativity at $z=1$,
+and locally uniform convergence of finite-rank determinants in trace norm
+([[lem-fredholm-determinant-trace-norm-continuity-and-growth]]).
+
+[F5] On a separable complex Hilbert space, the local determinant vanishes
+exactly when $I+zS$ is not boundedly invertible, and its zero at
+$-1/\lambda$ has order $m_{\rm alg}(\lambda;S)$
+([[lem-fredholm-determinant-zeros-and-algebraic-multiplicities]]).
+
+[F6] On a separable complex Hilbert space, at every invertibility point,
+$D_S'(z)=D_S(z)\operatorname{tr}(S(I+zS)^{-1})$
+([[lem-fredholm-determinant-logarithmic-derivative]]).
+
+[F7] Trace-class operators form a linear two-sided ideal, their trace norm
+is a norm, and singular values are the positive eigenvalues of $|T|$
+([[thm-trace-class-is-a-two-sided-banach-operator-ideal]],
+[[def-absolute-value-and-singular-values-of-a-compact-operator]]).
+
+[F8] The trace is basis-independent and agrees with every nuclear trace sum
 ([[thm-trace-is-absolutely-convergent-and-basis-independent]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose the separable reducing support from [F1]. Its restriction has the same trace, trace norm, nonzero singular values and algebraic eigenvalue data as $T$. Every single-operator assertion in the first paragraph, including the zero criterion and zero order, therefore transfers term by term from [F2]. The block identity $I+zT=(I_M+zS)\oplus I_{M^\perp}$ also proves the equivalence of bounded invertibility. [F1, F2, F4, given]
+1.1 Choose a nuclear support $M$ from [F1] and write $H=M\oplus M^\perp$ and $T=S\oplus0$. The nuclear trace formula gives $\operatorname{tr}_H(T)=\operatorname{tr}_M(S)$: the same nuclear vectors lie in $M$, so their scalar inner products are unchanged. The block identity $T^*T=S^*S\oplus0$ and uniqueness of the compact positive square root, as established in [[def-fredholm-determinant]], give $|T|=|S|\oplus0$. Thus $T$ and $S$ have the same nonzero singular values, including multiplicity, and $\|T\|_1=\|S\|_1$. For each $\lambda\ne0$, $(T-\lambda I)^r=(S-\lambda I_M)^r\oplus(-\lambda)^rI_{M^\perp}$; hence their nonzero eigenvalues and algebraic multiplicities agree. [F1, F7, F8, given]
 
-1.2 For trace-class $A,B$, take one separable closed span of nuclear vectors for both. It reduces $A$, $B$, $A+B+AB$ and all three operators vanish on its orthogonal complement; [F3] supplies the trace-class hypotheses. Apply the external multiplicativity and continuity formulas on this common support and then [F1] to obtain the displayed arbitrary-space formulas. [F1, F2, F3, given, algebra]
+2.1 By [F1], $D_T=D_S$ is entire, normalized, and has the stated locally uniform spectral product. Applying [F3] to $S$ and step 1.1 gives $\sum_j|\lambda_j(T)|\le\|T\|_1$. Applying [F2] gives $D_T'(0)=D_S'(0)=\operatorname{tr}_M(S)=\operatorname{tr}_H(T)$. The singular-value product, exponential bound and minimal exponential type in [F4] transfer from $S$ using the same singular-value list and trace norm. This also covers finite and empty lists. [F1, F2, F3, F4, step 1.1]
 
-1.3 If finite-rank $T_n\to T$ in trace norm, full AC chooses nuclear representations for the countable family. The closed span of all their input and output vectors and those for $T$ is a common separable reducing support. The block argument in [F1] preserves the trace norm of every difference $T_n-T$, so the locally uniform finite-rank limit in [F2] applies. For a finite-rank $F$, any finite-dimensional $E\supseteq\operatorname{ran}F$ is invariant under $I+zF$, and enlargement adds an identity diagonal block; hence the ordinary determinant is independent of $E$. [F1, F2, F3, given, algebra]
+2.2 For each $z$, $I+zT=(I_M+zS)\oplus I_{M^\perp}$. It has a bounded inverse exactly when $I_M+zS$ does, because the inverse of a block diagonal operator is the block inverse and restriction of a bounded inverse to the reducing summand is bounded. The generalized kernels in step 1.1 preserve algebraic multiplicity. Hence [F5] gives both directions of the stated zero criterion and the exact zero order at $-1/\lambda$. If $I+zT$ is invertible, its inverse is $(I_M+zS)^{-1}\oplus I_{M^\perp}$; consequently $T(I+zT)^{-1}=S(I_M+zS)^{-1}\oplus0$. The same nuclear trace formula as step 1.1 equates these traces, so [F6] gives the displayed logarithmic derivative. [F1, F5, F6, F8, step 1.1]
 
-2.1 Fix $z_0$ with $I+z_0T$ invertible and put $B=(I+z_0T)^{-1}T$, which is trace class by [F3]. Since $I+(z_0+h)T=(I+z_0T)(I+hB)$, step 1.2 gives $D_T(z_0+h)=D_T(z_0)D_B(h)$. Steps 1.1 and [F2] give $D_B(h)=1+h\operatorname{tr}_H(B)+o(h)$. Dividing by $h$ and taking the limit gives $D_T'(z_0)=D_T(z_0)\operatorname{tr}_H(B)$. The operator $T$ commutes with $I+z_0T$ and its inverse, so $B=T(I+z_0T)^{-1}$. The zero-space and empty-list conventions follow from [F1] and [F2]. [F1, F2, F3, F4, step 1.1, step 1.2, algebra] ∎
+2.3 For trace-class $A,B$ on $H$, take nuclear representations for both and let $N$ be the closed span of all their input and output vectors. The finite union of the two countable vector lists has a countable dense set of finite Gaussian-rational combinations; the support proof in [F1] shows $N$ is separable and reduces both operators, with $A=A_N\oplus0$ and $B=B_N\oplus0$. By [F7], $C:=A+B+AB$ is trace class and $C=(A_N+B_N+A_NB_N)\oplus0$; the same $N$ supports $A-B$. The block singular-value argument of step 1.1 gives $\|A-B\|_1=\|A_N-B_N\|_1$ and $\|A\|_1=\|A_N\|_1$, $\|B\|_1=\|B_N\|_1$. Apply the separable continuity estimate and multiplicativity in [F4] on $N$, and use support independence in [F1] for all three determinants. These are exactly the displayed arbitrary-space formulas, including the same numerical exponential constant. [F1, F4, F7, step 1.1]
+
+2.4 Suppose finite-rank $T_n\to T$ in trace norm. AC chooses nuclear representations for $T$ and the countable family $(T_n)$; taking the closed span of every input and output vector gives one separable reducing support $N$ for all of them. Their restrictions $S_n,S$ obey $\|S_n-S\|_1=\|T_n-T\|_1\to0$ by the block singular-value argument of step 1.1. Apply the locally uniform finite-rank approximation in [F4] on $N$. By [F1], $D_{S_n}=D_{T_n}$ and each is the ordinary determinant on any finite-dimensional subspace containing $\operatorname{ran}T_n$; the same support lemma shows independence of that subspace. Therefore those ordinary determinants converge locally uniformly to $D_S=D_T$. [F1, F4, step 1.1]
+
+3.1 If $H=\{0\}$ or $T=0$, [F1] gives $D_T\equiv1$, its derivative and trace are zero, and the product and singular-value lists are empty. For $z=0$, normalization holds, and the logarithmic-derivative formula follows from step 2.1. A finite-rank operator is covered by [F1] and step 2.4. Full AC supplies the separable-support and AC-qualified spectral suppliers and permits the countable family of nuclear representations in step 2.4; its Countable Choice consequence supplies [F2], [F4] and [F6]. Both directions of the zero criterion were established in step 2.2. [F1, F2, F4, F5, F6, step 2.1, step 2.2, step 2.4] ∎

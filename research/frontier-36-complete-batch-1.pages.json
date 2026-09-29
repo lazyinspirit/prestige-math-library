@@ -1,0 +1,1062 @@
+[
+  {
+    "order": 288.0801,
+    "id": "fredholm-determinants-and-the-lidskii-trace-formula",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Fredholm Determinants and the Lidskii Trace Formula",
+    "companion": "fredholm-determinants-and-the-lidskii-trace-formula-examples",
+    "requires": [
+      "banach-algebras-spectrum-and-holomorphic-functional-calculus",
+      "compact-self-adjoint-hilbert-schmidt-and-trace-class-operators",
+      "the-determinant-of-a-linear-operator",
+      "triangularisation-and-jordan-canonical-form",
+      "exterior-powers-orientation-and-hodge-duality"
+    ],
+    "items": [
+      {
+        "id": "def-algebraic-multiplicity-for-compact-operators",
+        "kind": "definition",
+        "title": "Algebraic multiplicity of a nonzero compact-operator eigenvalue",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "lem-riesz-schauder-ascent-and-descent-stabilize",
+          "def-invariant-subspace-and-induced-quotient-operator",
+          "def-riesz-spectral-projection",
+          "thm-riesz-spectral-projection-properties",
+          "thm-jordan-form-exists-iff-the-characteristic-polynomial-splits",
+          "thm-fundamental-theorem-of-algebra-liouville-proof"
+        ],
+        "statement": "Assume AC. For compact T on a complex Hilbert space and λ≠0 in its spectrum, define G_λ=ker(T−λI)^m for any sufficiently large stabilization index m and m_alg(λ)=dim G_λ. This is finite, independent of m, and agrees with the rank of the Riesz spectral projection when that projection is used.",
+        "strategy": "Apply Riesz–Schauder stabilization to I−T/λ for the finite-dimensional generalized kernel, independent of the large exponent. AC supplies DC through thm-choice-implies-dependent-implies-countable-choice for the stabilization lemma. For the Riesz projection P at λ, spectral splitting gives spectrum {λ} on ran P and excludes λ on ker P. The restriction to ran P is compact; Riesz–Schauder forces it to be finite-dimensional. The complex finite-dimensional Jordan form makes T−λ nilpotent on ran P, while invertibility on ker P gives the reverse inclusion, so ran P=G_λ. AC is also used by the Riesz–Schauder and spectral-projection results.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4.2, Theorem 3.4.2 and proof, printed pp. 36–37 (PDF pp. 44–45)",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, Appendix B §B.5.1, Proposition B.23, Lemma B.24, and Proposition B.25, PDF pp. 506–508",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-rank-compressions-converge-in-trace-norm",
+        "kind": "lemma",
+        "title": "Finite-rank orthogonal compressions converge in trace norm",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-separable-space",
+          "def-real-and-complex-inner-product-space",
+          "def-strong-and-weak-operator-topologies",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-hilbert-orthogonal-projection",
+          "def-trace-class-operator",
+          "thm-singular-value-decomposition-for-compact-operators",
+          "thm-hilbert-space-fourier-expansion",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "statement": "Assume Countable Choice. If H is a separable complex Hilbert space, T∈S_1(H), and P_n are finite-rank orthogonal projections converging strongly to I (for example the initial projections of a supplied countable orthonormal basis), then ||P_nTP_n−T||_1→0.",
+        "strategy": "Use the AC_ω-qualified SVD and trace-class/nuclear suppliers to take finite partial sums F_N of T; the nuclear-series characterization bounds ||T−F_N||_1 by the singular-value tail. For each finite SVD sum F_N, self-adjointness rewrites P_nF_NP_n as a finite sum with vectors P_nu_j and P_nv_j. Expand P_nF_NP_n−F_N into rank-one terms and use the nuclear-series bound plus strong convergence on those finitely many vectors to prove its trace norm tends to zero. The AC_ω-qualified ideal estimate and ||P_n||≤1 bound the compression of T−F_N on both sides; then let N increase and apply the epsilon argument. Countable Choice is required by the trace-class, SVD, nuclear-series, ideal, projection, and Fourier suppliers; the explicit countable singular-space basis selection occurs in the SVD, and no ambient Hilbert basis is selected.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-hilbert-exterior-power-and-induced-operator",
+        "kind": "definition",
+        "title": "Hilbert exterior powers and induced operators",
+        "deps": [
+          "def-hilbert-space",
+          "def-determinant-of-a-square-matrix",
+          "def-real-and-complex-inner-product-space",
+          "def-bounded-linear-operator",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis"
+        ],
+        "statement": "For a complex Hilbert space H and n≥0, define Λ^0H=C and Λ^nH as the Hilbert completion of alternating algebraic n-tensors with Gram inner product ⟨x_1∧⋯∧x_n,y_1∧⋯∧y_n⟩=det[⟨x_i,y_j⟩]. A bounded T induces Λ^nT by wedges of images; Λ^0T=I_C.",
+        "strategy": "Define the algebraic n-fold tensor product as the quotient imposing slotwise complex multilinearity, verify the product sesquilinear form descends and is positive using a finite orthonormal basis on the finite coordinate span, then complete. Obtain the alternating subspace as the range of the signed permutation average and prove it is a bounded orthogonal projection; compute the wedge Gram determinant. Prove the C^n bound for Λ^nT by one-slot tensor estimates and prove functoriality on wedges. For a supplied complete orthonormal basis, approximate each tensor factor by finite basis sums and prove increasing-index wedges form a basis of the exterior power. The construction and finite antisymmetrization are choice-free.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-trace-norm-of-hilbert-exterior-powers",
+        "kind": "lemma",
+        "title": "Trace-norm bound for exterior powers of trace-class operators",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-trace-class-operator",
+          "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "def-operator-norm",
+          "thm-singular-value-decomposition-for-compact-operators",
+          "def-hilbert-space-adjoint",
+          "thm-hilbert-adjoint-properties",
+          "def-self-adjoint-positive-unitary-and-normal-operator",
+          "lem-positive-square-root-of-a-compact-positive-operator",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-finite-powers-of-countable-sets-are-countable",
+          "lem-subset-of-countable",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family"
+        ],
+        "statement": "Assume Countable Choice. For trace-class T on a separable complex Hilbert space, Λ^nT is trace class, its singular values are products s_{j_1}(T)⋯s_{j_n}(T) over j_1<⋯<j_n, and ||Λ^nT||_1≤||T||_1^n/n!; the n=0 term has trace one.",
+        "strategy": "Use the SVD basis only on (ker T)^perp. The induced exterior power of the kernel projection is an orthogonal projection onto the span of its increasing-index wedges; Λ^nT vanishes on the complement and maps each support wedge to the corresponding output wedge multiplied by the product singular value. Parseval on that closed span gives the operator norm estimate for finite tuple truncations and proves compactness. Compute |Λ^nT| by its positive diagonal square root, then bound every finite subsum of tuple products by expanding (Σ_{j≤N}s_j)^n and counting the n! permutations. At n=0, first verify that I_C has singular-value list (1,0,0,…) and trace norm 1 before applying the trace theorem. Handle zero and finite-rank cases explicitly. ACω enters through the SVD, Parseval, and norm-limit compactness suppliers; no ambient arbitrary Hilbert basis is selected.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-weyl-eigenvalue-singular-value-inequalities",
+        "kind": "lemma",
+        "title": "Weyl product and sum inequalities for compact operators",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "def-compact-linear-operator",
+          "def-determinant-of-a-square-matrix",
+          "def-derivative",
+          "def-hilbert-space",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-limits-at-infinity",
+          "def-max-min",
+          "def-natural-logarithm",
+          "def-operator-norm",
+          "def-real-exponential-function-and-e",
+          "def-trace-class-operator",
+          "def-series",
+          "def-jordan-block-and-jordan-string",
+          "lem-finite-set-has-max",
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-archimedean-reciprocal",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-integral-elementary-bounds",
+          "lem-of-abs-value",
+          "thm-a-decomposable-wedge-is-nonzero-exactly-for-independent-vectors",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-continuous-functions",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-implies-integrable",
+          "thm-countable-union-of-countable",
+          "thm-derivative-of-exponential",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-exponential-addition-formula",
+          "thm-exponential-beats-every-polynomial",
+          "thm-exponential-is-strictly-increasing",
+          "thm-ftc-second-part",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-natural-logarithm-laws",
+          "thm-nilpotent-jordan-string-basis",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-singular-value-decomposition-for-compact-operators"
+        ],
+        "statement": "Assume AC. Let T be compact on a complex Hilbert space. List its nonzero eigenvalues in nonincreasing modulus, repeated according to algebraic multiplicity, and pad the finite list by zeros; let s_j(T) be the nonincreasing zero-padded singular-value sequence. For every integer N≥0, with empty product 1 at N=0, ∏_{j=1}^N|λ_j(T)|≤∏_{j=1}^Ns_j(T). If T is trace class, then Σ_j|λ_j(T)|≤Σ_js_j(T)=||T||_1.",
+        "strategy": "Build an invariant N-dimensional subspace for each positive eigenvalue prefix from finite Jordan-string segments. The top exterior eigenvector and the singular-value decomposition give the product inequality; Parseval on the closed SVD support gives the exterior norm estimate, with the rank-deficient case handled by vanishing decomposable wedges. For the sum inequality, logarithmic prefix majorization implies positive-part majorization. Integrate on common finite intervals against exp(t), evaluate by the fundamental theorem, and send the left endpoint to minus infinity using the exponential tail estimate. AC supplies DC, Countable Choice for countable spectral enumeration and Parseval, and the SVD selections; Jordan choices are finite and local.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4.2, Theorem 3.4.2 and proof, printed pp. 36–37 (PDF pp. 45–46)",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, Appendix B §B.5.1, Proposition B.23, Lemma B.24, and Proposition B.25, PDF pp. 506–508",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-diagonal-trace-class-operator-on-ell-two",
+        "kind": "lemma",
+        "title": "Diagonal trace-class operators on $\\ell^2(\\mathbb N,\\mathbb C)$",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-axiom-of-choice",
+          "def-banach-space",
+          "def-bounded-linear-operator",
+          "def-cauchy-in-metric",
+          "def-complete-metric-space",
+          "def-complex-metric-convergence-and-continuity",
+          "def-dimension",
+          "def-hilbert-space",
+          "def-linear-basis",
+          "def-linear-independence",
+          "def-metric-convergence",
+          "def-operator-norm",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-real-and-complex-inner-product-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "lem-finite-rank-operators-are-compact",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "lem-of-square-monotone",
+          "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+          "lem-weyl-eigenvalue-singular-value-inequalities",
+          "thm-algebra-of-limits",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-complex-plane-is-complete",
+          "thm-hausdorff-iff-net-limits-are-unique",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "thm-trace-is-absolutely-convergent-and-basis-independent"
+        ],
+        "statement": "Assume AC. For $H=\\ell^2(\\mathbb N,\\mathbb C)$ with coordinate vectors $u_n$: (1) $H$ is a complex Hilbert space and $(u_n)$ is a complete orthonormal family; (2) for bounded $c$ the series $D_cx=\\sum_nc_n\\langle x,u_n\\rangle u_n$ converges, $D_c$ is bounded with $D_cu_n=c_nu_n$ and $\\|D_c\\|\\le\\sup_n|c_n|$, one has $D_c+D_{c'}=D_{c+c'}$, $\\lambda D_c=D_{\\lambda c}$, $D_cD_{c'}=D_{cc'}$, $D_0=0$, $D_{(1)}=I_H$, and $D_c$ is boundedly invertible iff $\\inf_n|c_n|>0$, in which case $D_c^{-1}=D_{c^{-1}}$; (3) if $\\sum_n|c_n|<\\infty$ then $D_c$ is trace class with $\\|D_c\\|_1=\\sum_n|c_n|$ and $\\operatorname{tr}(D_c)=\\sum_nc_n$, and its nonzero eigenvalues repeated according to algebraic multiplicity are exactly the nonzero $c_n$, the value $\\lambda\\ne0$ occurring $\\#\\{n:c_n=\\lambda\\}$ times.",
+        "strategy": "Prove completeness of $\\ell^2$ by coordinate Cauchy arguments and density of the coordinate span. Apply the summation theorem to the coefficient family to construct $D_c$ and its norm bound. Derive additivity and multiplicativity from coefficient uniqueness, and prove both directions of the invertibility criterion. Approximate $D_c$ in operator norm by finite-rank truncations for compactness and use the nuclear characterization for the trace-norm bound. Identify the nonzero eigenvalues and their algebraic multiplicities through the stabilized generalized kernel, then combine Weyl's inequality with the basis trace theorem for the exact trace norm and trace. Countable Choice is supplied by AC.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.5–§3.6, diagonal operators and Schatten classes",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-separable-trace-class-determinant-construction",
+        "kind": "lemma",
+        "title": "Local separable trace-class determinant construction",
+        "deps": [
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "def-bounded-linear-operator",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-series-power-series-and-absolute-convergence",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-countable-choice",
+          "def-determinant-of-a-linear-operator",
+          "def-determinant-of-a-square-matrix",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-invariant-subspace-and-induced-quotient-operator",
+          "def-real-and-complex-inner-product-space",
+          "def-separable-space",
+          "def-trace-class-operator",
+          "def-trace-of-a-square-matrix",
+          "def-trace-of-an-endomorphism",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-finite-rank-operators-are-compact",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "lem-trace-norm-of-hilbert-exterior-powers",
+          "thm-complex-power-series-converge-locally-uniformly",
+          "thm-cyclicity-of-the-trace",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "thm-trace-is-absolutely-convergent-and-basis-independent"
+        ],
+        "statement": "Assume Countable Choice. For trace-class T on a separable complex Hilbert space K, the series D_T(z)=Σ_{n≥0} z^n tr(Λ^nT) converges locally uniformly and defines an entire function with D_T(0)=1 and D_T′(0)=tr(T). For every bounded finite-rank F:K→K and every finite-dimensional F-invariant subspace E with ran F⊆E, D_F(z)=det_E(I_E+z(F|E)); the zero-dimensional determinant is 1.",
+        "strategy": "The exterior-power trace-norm factorial bound and |tr S|≤||S||_1 bound the coefficient by ||T||_1^n/n!. Comparison at every radius with the convergent exponential factorial series gives infinite radius; the complex power-series results yield local uniform convergence, entire holomorphy, and the derivative coefficient at zero. For finite-rank F, first note F is trace class. For any finite-dimensional invariant E containing ran F, E is closed; its orthogonal projection P_E is self-adjoint and idempotent by its defining decomposition. Functoriality and the wedge Gram formula show Q_n=Λ^nP_E is the orthogonal projection onto Λ^nE. Since Λ^nF has range there, trace cyclicity and a finite nuclear representation reduce its trace to the finite-dimensional trace of Λ^n(F|E). In an orthonormal basis of E, increasing wedges give principal-minor coefficients; grouping the Leibniz expansion of det(I_E+z(F|E)) by chosen columns gives the same polynomial, including degree zero and dim E=0. Countable Choice is inherited through the trace-class, trace, cyclicity, and orthogonal-projection suppliers; no full AC or DC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4.3, Proposition 3.4.3 and Corollary 3.4.1, printed pp. 38–39 (PDF pp. 47–48)",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a, Definition 14.34 and Lemma 14.38, printed pp. 584–587 (PDF pp. 596–599)",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, Appendix B §B.5.2, finite-rank determinant, PDF p. 508",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-fredholm-determinant-trace-norm-continuity-and-growth",
+        "kind": "lemma",
+        "title": "Trace-norm continuity, growth and multiplicativity of the local determinant",
+        "deps": [
+          "cor-finite-dimensional-subspaces-are-closed",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "cor-locally-uniformly-convergent-holomorphic-series",
+          "def-countable",
+          "def-countable-choice",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-hilbert-orthogonal-projection",
+          "def-infinite-product",
+          "def-separable-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-trace-class-operator",
+          "lem-cauchy-estimates-on-concentric-subdiscs",
+          "lem-exponential-dominates-one-plus-x",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-finite-rank-compressions-converge-in-trace-norm",
+          "lem-limit-preserves-order",
+          "lem-separable-trace-class-determinant-construction",
+          "lem-trace-norm-of-hilbert-exterior-powers",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-infinite-product-criterion",
+          "thm-mean-value-inequality",
+          "thm-operator-determinant-is-multiplicative",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "thm-weierstrass-m-test-for-complex-function-series"
+        ],
+        "statement": "Assume Countable Choice. For trace-class A,B on a separable complex Hilbert space, |D_A(z)|≤∏_j(1+|z|s_j(A))≤e^{|z|||A||_1}, D_A has minimal exponential type, |D_A(z)−D_B(z)|≤|z|||A−B||_1 e^{1+|z|||A||_1+|z|||B||_1}, and D_{A+B+AB}(1)=D_A(1)D_B(1). If finite-rank A_n→A in trace norm, their ordinary determinants converge to D_A locally uniformly, independently of the approximation.",
+        "strategy": "The exterior coefficient bounds and finite-subset expansion give the singular-value product bound; splitting the product into a finite head and an exponential tail proves minimal type. For trace-norm continuity, expand each exterior power along the affine trace-class line as an operator polynomial, use interpolation to show its coefficients are trace class, and apply the locally uniform exterior-trace series to get an entire scalar function. Cauchy’s estimate on a circle of radius (|z| ||A-B||_1)^(-1), followed by the real mean-value inequality, gives the stated bound, with z=0 and A=B treated separately. The bound is uniform on compact z-sets; the local finite-rank determinant identity then gives the approximation-independent locally uniform limit. For multiplicativity, construct a finite or countable orthonormal basis from one dense sequence, compress A and B by the same initial projections, use trace-norm compression convergence and the trace ideal estimate, apply finite-dimensional determinant multiplicativity, and pass to the limit. Countable Choice enters through the AC_omega-qualified singular-value, exterior trace, trace, ideal, compression, and projection/Fourier suppliers; the supplied enumeration and Gram–Schmidt construction add no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "lem-fredholm-determinant-logarithmic-derivative",
+        "kind": "lemma",
+        "title": "Logarithmic derivative of the local Fredholm determinant",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-trace-class-operator",
+          "lem-fredholm-determinant-trace-norm-continuity-and-growth",
+          "lem-separable-trace-class-determinant-construction",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "statement": "Assume Countable Choice. At every z where I+zT is invertible, D_T′(z)=D_T(z) tr(T(I+zT)^{-1}) for a separable trace-class T.",
+        "strategy": "For a bounded two-sided inverse R=(I+zT)^{-1}, set S=TR; prove T commutes with R and S is trace class by the two-sided ideal property. Exterior homogeneity gives D_{cU}(1)=D_U(c), including c=0 by separating degree zero. Factor I+(z+h)T=(I+zT)(I+hS), then apply the locally proved multiplicativity to zT and hS to get D_T(z+h)=D_T(z)D_S(h). The entire determinant series and D_S'(0)=tr(S) yield the derivative by a difference quotient; h=-z also proves D_T(z)≠0. Countable Choice is inherited from the determinant, trace-class, ideal, and multiplicativity suppliers; no new choices are made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "lem-fredholm-determinant-zeros-and-algebraic-multiplicities",
+        "kind": "lemma",
+        "title": "Zeros of the local Fredholm determinant",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-determinant-of-a-linear-operator",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-hilbert-space",
+          "def-riesz-spectral-projection",
+          "def-trace-class-operator",
+          "lem-fredholm-determinant-trace-norm-continuity-and-growth",
+          "lem-separable-trace-class-determinant-construction",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-nilpotent-jordan-string-basis",
+          "thm-operator-determinant-is-basis-independent",
+          "thm-riesz-spectral-projection-properties",
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-zero-order-factorization-holomorphic-function"
+        ],
+        "statement": "Assume AC. For separable trace-class T, D_T(z)=0 exactly when I+zT is not boundedly invertible. For every nonzero eigenvalue λ of T (equivalently, every nonzero λ∈σ(T)), the zero at z=−1/λ has order m_alg(λ;T).",
+        "strategy": "First prove a local general criterion: if U is trace class and I+wU has bounded inverse R, then V=−wUR is trace class and (I+wU)(I+V)=I; local multiplicativity and D_{cU}(1)=D_U(c), derived from the exterior series, force D_U(w)≠0. For a nonzero eigenvalue λ, Riesz–Schauder isolation defines the bounded Riesz projection Pλ, and the algebraic-multiplicity supplier gives ran Pλ=Gλ with finite dimension d=m_alg(λ;T). Use the bounded topological sum ran Pλ⊕ker Pλ, not an orthogonal projection: T=TPλ+T(I−Pλ), the cross-product vanishes, and local multiplicativity factors D_T(z)=D_{TPλ}(z)D_{T(I−Pλ)}(z). The finite-rank identity and a Jordan-string basis make the first factor (1+zλ)^d. At z0=−1/λ, spectral splitting makes I+z0T(I−Pλ) boundedly invertible, so the local nonvanishing criterion makes the complementary factor nonzero there. The zero-order factorization theorem gives order d. AC is used through Riesz–Schauder, Riesz projection, and algebraic multiplicity; AC implies the ACω needed by the local trace-class determinant suppliers.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "lem-quasinilpotent-trace-class-operator-has-zero-trace",
+        "kind": "lemma",
+        "title": "A quasinilpotent trace-class operator has zero trace",
+        "deps": [
+          "cor-cauchy-theorem-convex-domain",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-complex-power-series-sums-are-analytic",
+          "cor-complex-power-series-sums-have-derivatives-of-all-orders",
+          "def-axiom-of-choice",
+          "def-hilbert-space",
+          "def-natural-logarithm",
+          "def-spectrum-and-resolvent-of-a-bounded-operator",
+          "def-trace-class-operator",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-fredholm-determinant-trace-norm-continuity-and-growth",
+          "lem-fredholm-determinant-zeros-and-algebraic-multiplicities",
+          "lem-separable-trace-class-determinant-construction",
+          "thm-algebra-of-complex-derivatives",
+          "thm-boundary-maximum-modulus-principle",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-holomorphic-if-and-only-if-analytic",
+          "thm-liouville-bounded-entire-function",
+          "thm-natural-logarithm-laws",
+          "thm-path-independence-and-complex-primitive-criterion",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant"
+        ],
+        "statement": "Assume AC. If Q is trace class on a separable complex Hilbert space and σ(Q)⊆{0}, then tr(Q)=0 and D_Q(z)=1 for every z.",
+        "strategy": "The zero criterion and the spectral hypothesis make the locally constructed determinant entire and zero-free. A local logarithm, a disk estimate, and Liouville’s theorem show it is an ordinary exponential. Its slope is the trace; the minimal-type bound forces that slope to vanish, giving D_Q(z)=1 and tr(Q)=0. Scalar and degenerate cases are checked explicitly. AC supplies AC_ω to the trace-class and determinant inputs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4.4, Theorem 3.4.5 and proof of Theorem 3.4.7, printed pp. 40–42 (PDF pp. 49–51); comparison only",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "lem-generalized-eigenspace-trace-decomposition",
+        "kind": "lemma",
+        "title": "Trace decomposition through generalized eigenspaces and the invariant quotient",
+        "deps": [
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-invariant-subspace-and-induced-quotient-operator",
+          "def-jordan-block-and-jordan-string",
+          "def-quotient-seminorm",
+          "def-quotient-vector-space-and-canonical-projection",
+          "def-real-and-complex-inner-product-space",
+          "def-riesz-spectral-projection",
+          "def-separable-space",
+          "def-spectrum-and-resolvent-of-a-bounded-operator",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "lem-quasinilpotent-trace-class-operator-has-zero-trace",
+          "lem-weyl-eigenvalue-singular-value-inequalities",
+          "prop-induced-quotient-operator-is-well-defined",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-fredholm-alternative-for-identity-minus-compact",
+          "thm-nilpotent-jordan-string-basis",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed",
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-riesz-spectral-projection-properties",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent"
+        ],
+        "statement": "Assume AC. For separable trace-class T let M be the closed span of all nonzero generalized eigenspaces and let Q be the orthogonal projection onto M⊥. Then QTQ on M⊥ is trace class and quasinilpotent, tr T=tr(T|M)+tr(QTQ), and tr(T|M) is the absolutely convergent sum of all nonzero eigenvalues with algebraic multiplicity.",
+        "strategy": "The closed span M of the nonzero generalized eigenspaces is invariant. The ideal property makes T|M and QTQ trace class. An adapted orthonormal basis of M obtained by Gram-Schmidt from ordered Jordan strings has diagonal entries equal to the eigenvalue list; the trace basis theorem and Weyl absolute summability give tr(T|M)=sum λ with algebraic multiplicity. Bases of M and M⊥ split the trace into tr(T|M)+tr(QTQ). To prove the compression is quasinilpotent, identify M⊥ isometrically with H/M. For λ≠0 outside σ(T), the restriction of λI−T to M is injective and compact Fredholm makes it invertible, so it descends to the quotient. For λ∈σ(T), the Riesz splitting H=Gλ⊕Yλ, the fact that its projection preserves M, and Fredholm invertibility on M∩Yλ yield a bounded quotient inverse. Thus every nonzero λ is resolvent for QTQ, and the local quasinilpotent trace-zero lemma gives the final trace decomposition. AC supplies the required DC/ACω assumptions and countable Jordan-basis selections.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "lem-fredholm-determinant-spectral-product-from-power-traces",
+        "kind": "lemma",
+        "title": "Spectral product from traces of powers",
+        "deps": [
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-complex-domain",
+          "def-hilbert-exterior-power-and-induced-operator",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "def-spectrum-and-resolvent-of-a-bounded-operator",
+          "def-spectrum-and-resolvent-set-in-a-banach-algebra",
+          "def-trace-class-operator",
+          "def-unital-banach-algebra",
+          "lem-composition-operator-norm-inequality",
+          "lem-coprime-kernel-decomposition",
+          "lem-fredholm-determinant-logarithmic-derivative",
+          "lem-fredholm-determinant-zeros-and-algebraic-multiplicities",
+          "lem-generalized-eigenspace-trace-decomposition",
+          "lem-neumann-series",
+          "lem-separable-trace-class-determinant-construction",
+          "lem-weyl-eigenvalue-singular-value-inequalities",
+          "thm-algebra-of-complex-derivatives",
+          "thm-bounded-operator-space-is-banach",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-polynomial-spectral-mapping",
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant"
+        ],
+        "statement": "Assume AC. For separable trace-class T, D_T(z)=∏_j(1+zλ_j(T)) locally uniformly on C, with nonzero eigenvalues repeated by algebraic multiplicity; the empty product is one.",
+        "strategy": "For zero T (including the zero Hilbert space), D_T and the empty product are one. Otherwise AC supplies the Riesz–Schauder and countable-choice hypotheses; use B(H) as a unital Banach algebra to apply the Neumann and polynomial spectral-mapping theorems. Weyl gives an absolutely summable eigenvalue list, so finite products converge locally uniformly by the uniform tail estimate |∏(1+zλ_j)-1|≤exp(RΣ|λ_j|)-1 on |z|≤R; the Weierstrass theorem makes the limit entire. For each n≥1, T^n is trace class. Polynomial spectral mapping and the coprime-kernel decomposition applied to (x^n−μ)^k show that G_μ(T^n)=⊕_{λ^n=μ}G_λ(T), so collision multiplicities add and generalized-eigenspace trace decomposition gives tr(T^n)=Σ_j λ_j(T)^n. On a sufficiently small disk, the Neumann and logarithmic-derivative formulas expand D_T' /D_T, while the locally uniform finite-product approximants give the product derivative; the double series interchanges absolutely and both logarithmic derivatives equal Σ_{n≥1}(−1)^{n−1}z^{n−1}tr(T^n). The finite-product lower bound makes the product nonzero there, and the earlier determinant zero criterion makes D_T nonzero because I+zT is Neumann-invertible. The quotient D_T/∏(1+zλ_j) has zero derivative and value one at zero, hence equals one on the disk; the identity theorem extends the equality to C. AC is propagated through dependent/countable choice; no Hadamard factorization or extra choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-arbitrary-hilbert-fredholm-determinant-from-separable-support",
+        "kind": "lemma",
+        "title": "Arbitrary-Hilbert Fredholm determinant from a separable reducing support",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $H$ be any complex Hilbert space and let $T:H\\to H$ be trace class ([[def-hilbert-space]], [[def-trace-class-operator]]). For a nuclear representation $$Tx=\\sum_{j\\ge1}\\langle x,u_j\\rangle v_j,\\qquad \\sum_{j\\ge1}\\|u_j\\|\\,\\|v_j\\|<\\infty,$$ put $$M=\\overline{\\operatorname{span}_{\\mathbb C}\\{u_j,v_j:j\\ge1\\}}.$$ Then $M$ is separable and reducing for $T$, and under $H=M\\oplus M^\\perp$ one has $T=S\\oplus0$, where $S=T|_M$ is trace class. Let $D_S$ be the locally constructed separable determinant of [[lem-separable-trace-class-determinant-construction]] and define $$D_H(I+zT):=D_S(z).$$ This definition is independent of the nuclear representation and, more generally, of any closed separable support $N$ satisfying $T(H)\\subseteq N$ and $T|_{N^\\perp}=0$; such an $N$ reduces $T$. The result is entire, has value $1$ at $z=0$, and satisfies the locally uniform product $$D_H(I+zT)=\\prod_j(1+z\\lambda_j(T)),$$ where the nonzero eigenvalues are repeated according to algebraic multiplicity ([[def-algebraic-multiplicity-for-compact-operators]]). If $T$ has finite rank, then for every finite-dimensional $E\\subseteq H$ containing $\\operatorname{ran}T$, $$D_H(I+zT)=\\det_E\\bigl(I_E+z(T|_E)\\bigr),$$ with determinant on the zero-dimensional space equal to $1$ ([[def-determinant-of-a-linear-operator]]).",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable",
+          "def-determinant-of-a-linear-operator",
+          "def-determinant-of-a-square-matrix",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-metric-interior-closure-boundary",
+          "def-operator-norm",
+          "def-real-and-complex-inner-product-space",
+          "def-separable-space",
+          "def-trace-class-operator",
+          "lem-countable-iff-surjection-from-n",
+          "lem-fredholm-determinant-spectral-product-from-power-traces",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "lem-rat-embeds-dense",
+          "lem-separable-trace-class-determinant-construction",
+          "lem-span-is-the-set-of-linear-combinations",
+          "thm-banach-series-criterion",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-n-cross-n-countable",
+          "thm-operator-determinant-is-basis-independent",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-rationals-countable",
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "dependency_level": 8,
+        "strategy": "Fix any nuclear representation and let M be the closed span of its countable vector list. Code all finite Gaussian-rational combinations to show M separable. Operator-norm convergence puts ran T in M; the nuclear adjoint series puts ran T* in M, and orthogonality to the supplied vectors makes T and T* vanish on M⊥, so M reduces T and T=S⊕0. The orthogonal projection and trace-class ideal theorem make each support restriction trace class. For two closed separable reducing supports M and N with T(H)⊂M,N and T|M⊥=T|N⊥=0, their closed sum L is separable; T_L, T_M and T_N have identical nonzero generalized eigenspaces because T=S⊕0 and (T−λI)^k=(S−λI)^k⊕(−λ)^kI. The local spectral-product theorem then gives equal determinants, proving support and representation independence. The same theorem gives the locally uniform product and the local constructor gives entire normalization. For finite rank, apply the local finite-rank determinant formula on ran T and prove independence of any larger finite-dimensional support by the block Leibniz determinant formula. AC supplies the nuclear representation, Hilbert projections, and AC-qualified spectral multiplicities; the coding and support comparisons make no additional selections.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-fredholm-determinant",
+        "kind": "definition",
+        "title": "Fredholm determinant of a trace-class operator",
+        "statement": "Assume AC. For trace-class T on an arbitrary complex Hilbert space, define det_H(I+zT) by restricting T to any separable reducing support obtained from a nuclear representation; the definition is independent of that support and equals 1 on the zero space.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-trace-class-operator",
+          "lem-arbitrary-hilbert-fredholm-determinant-from-separable-support",
+          "lem-separable-trace-class-determinant-construction",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "lem-positive-square-root-of-a-compact-positive-operator",
+          "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "thm-sequential-characterization-of-compact-operators"
+        ],
+        "strategy": "Use the local arbitrary-Hilbert support theorem for the definition and support independence; identify trace and trace norm by the nuclear trace formula and |T|=|S|⊕0, and generalized eigenspaces by the block powers.",
+        "axiom_audit": "Full AC is explicit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aleksey Kostenko, Trace Ideals with Applications — Section 3.4, printed pp. 34–41",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "justified_by": []
+      },
+      {
+        "id": "prop-fredholm-determinant-properties-for-trace-class-operators",
+        "kind": "proposition",
+        "title": "Fredholm determinant properties for trace-class operators",
+        "statement": "Assume AC. The arbitrary-space trace-class determinant has the spectral product, growth, continuity, multiplicativity, finite-rank approximation, zero-multiplicity and logarithmic derivative properties stated in the item.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-fredholm-determinant",
+          "lem-arbitrary-hilbert-fredholm-determinant-from-separable-support",
+          "lem-fredholm-determinant-trace-norm-continuity-and-growth",
+          "lem-fredholm-determinant-zeros-and-algebraic-multiplicities",
+          "lem-fredholm-determinant-logarithmic-derivative",
+          "lem-separable-trace-class-determinant-construction",
+          "lem-weyl-eigenvalue-singular-value-inequalities",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "def-absolute-value-and-singular-values-of-a-compact-operator"
+        ],
+        "strategy": "Transfer the local separable construction, Weyl eigenvalue bound, growth, continuity, multiplicativity, zero-order and logarithmic-derivative lemmas to arbitrary H via one support for each operator or a common support for pairs and countable finite-rank sequences; explicitly preserve traces, trace norms, singular values and algebraic multiplicities.",
+        "axiom_audit": "Full AC is explicit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aleksey Kostenko, Trace Ideals with Applications — Sections 3.4–3.5, printed pp. 34–45",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "justified_by": []
+      },
+      {
+        "id": "thm-lidskii-for-trace-class-operators",
+        "kind": "theorem",
+        "title": "Lidskii trace formula for trace-class operators",
+        "statement": "Assume AC. For trace-class T on any complex Hilbert space, the nonzero eigenvalues counted with algebraic multiplicity are absolutely summable and tr(T) equals their sum, including empty and zero-space cases.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-fredholm-determinant",
+          "prop-fredholm-determinant-properties-for-trace-class-operators",
+          "def-trace-class-operator"
+        ],
+        "strategy": "Differentiate the repaired locally uniform spectral product at zero, using the proved absolute eigenvalue bound and derivative-at-zero identity to obtain the trace sum.",
+        "axiom_audit": "Full AC is explicit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aleksey Kostenko, Trace Ideals with Applications — Theorem 3.4.7, printed p. 41",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 288.0802,
+    "id": "fredholm-determinants-and-the-lidskii-trace-formula-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Fredholm Determinants and the Lidskii Trace Formula: Examples",
+    "companion": "fredholm-determinants-and-the-lidskii-trace-formula",
+    "requires": [
+      "fredholm-determinants-and-the-lidskii-trace-formula"
+    ],
+    "items": [
+      {
+        "id": "cex-invariant-subspace-need-not-reduce-an-operator",
+        "kind": "counterexample",
+        "title": "An invariant subspace need not reduce an operator",
+        "deps": [
+          "def-invariant-subspace-and-induced-quotient-operator",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-orthogonal-projection"
+        ],
+        "statement": "On C² with its standard inner product, T has matrix [[1,1],[0,0]] and M=span(e₁). With ‘M reduces T’ meaning that both M and M⊥ are T-invariant, M is invariant but does not reduce T: M⊥=span(e₂) is not invariant. The compression of T to M⊥ is zero even though T e₂=e₁.",
+        "strategy": "Calculate Te₁=e₁ and Te₂=e₁, so T(ae₁)=ae₁ and M is invariant, while Te₂=e₁ lies in M rather than M⊥; under the stated reducing-subspace convention, M therefore does not reduce T. For Q=P_{M⊥}, compute Q(ae₁+be₂)=be₂ from the standard orthogonal decomposition; then QTQ(ae₁+be₂)=0 although Te₂=e₁. This explicitly exhibits the off-diagonal block lost by orthogonal compression. The finite-dimensional calculation uses no Choice.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-volterra-square-has-zero-trace",
+        "kind": "example",
+        "title": "The square of the Volterra operator has zero trace",
+        "deps": [
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra",
+          "def-bounded-linear-operator",
+          "def-canonical-natural",
+          "def-compact-linear-operator",
+          "def-completed-product-measure",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable",
+          "def-derivative",
+          "def-factorial-and-falling-factorial",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-hilbert-schmidt-operator",
+          "def-hilbert-space",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "def-l-one-of-a-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-nonnegative-lebesgue-integral",
+          "def-operator-norm",
+          "def-separable-space",
+          "def-space-of-bounded-linear-operators",
+          "def-spectrum-and-resolvent-of-a-bounded-operator",
+          "def-spectrum-and-resolvent-set-in-a-banach-algebra",
+          "def-trace-class-operator",
+          "def-unital-banach-algebra",
+          "lem-composition-operator-norm-inequality",
+          "lem-compositions-with-a-compact-operator-are-compact",
+          "lem-countable-iff-surjection-from-n",
+          "lem-derivative-of-a-power",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-quasinilpotent-trace-class-operator-has-zero-trace",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-algebra-of-derivatives",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-banach-series-criterion",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-bounded-operator-space-is-banach",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-chain-rule",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-continuous-implies-integrable",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-ftc-second-part",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-hilbert-schmidt-operators-are-compact",
+          "thm-l-two-kernels-give-hilbert-schmidt-operators",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-product-of-countable",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-spectrum-is-nonempty-compact-and-norm-bounded",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-trace-class-iff-product-of-two-hilbert-schmidt-operators"
+        ],
+        "statement": "Assume AC. For Vf(x)=∫_0^x f(t)dt on complex L²[0,1], V is Hilbert–Schmidt, V² is trace class and quasinilpotent, tr(V²)=0 and its local determinant D_{V²}(z)=1.",
+        "strategy": "Assume AC; it supplies ACω for the local suppliers. Derive a countable dense subset of complex L²[0,1] from the countable dense rational-box step family in real L²(R): extend real and imaginary parts by zero, restrict the family to [0,1], and pair its elements. The triangle Δ={(x,t):0≤t≤x≤1} is product-measurable and has measure 1/2 by Tonelli and the integral of x; the kernel theorem therefore gives V Hilbert–Schmidt with exact norm 1/√2. Use its AC basis, Hilbert–Schmidt compactness, compact composition, and the product theorem to show V² is trace class with trace norm at most 1/2. For each n≥1, define k_n(x,t)=(x−t)^(n−1)1_Δ/(n−1)!. Induct on n on the bounded rational-box dense family; Fubini changes the integration order and the power rule plus Newton–Leibniz evaluates the inner polynomial integral. The kernel theorem bounds T_{k_n}, so equality extends by density to Vⁿ on all of H and ||Vⁿ||≤1/(n−1)!. For λ≠0, the even-power series Σ_{m≥0}λ^(−m−1)V^(2m) converges absolutely in B(H), by comparison with the exponential factorial series, and finite telescoping gives a two-sided inverse of λI−V². Thus σ(V²)⊆{0}. Apply the earlier quasinilpotent trace/determinant lemma. The vector 1 gives V²1(x)=x²/2, so the example is nonzero despite its zero trace. To justify the word quasinilpotent, also prove the operator spectrum is nonempty: AC gives Countable Choice, H is nonzero, the bounded operators form a nonzero unital complex Banach algebra, and the algebra spectrum agrees with the operator spectrum; apply the nonempty-spectrum theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, §6.1, Volterra operator example, equations (6.23)–(6.26), printed pp. 167–168; comparison only (the example acts on C([0,1]) and leaves the power estimate as Problem 6.7)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-diagonal-trace-class-fredholm-determinant",
+        "kind": "example",
+        "title": "Diagonal trace-class Fredholm determinant",
+        "deps": [
+          "def-algebraic-multiplicity-for-compact-operators",
+          "def-axiom-of-choice",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-separable-space",
+          "def-trace-class-operator",
+          "lem-arbitrary-hilbert-fredholm-determinant-from-separable-support",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-diagonal-trace-class-operator-on-ell-two",
+          "lem-finite-set-has-max",
+          "lem-fredholm-determinant-zeros-and-algebraic-multiplicities",
+          "lem-geometric-sequence-null",
+          "lem-power-monotone",
+          "thm-geometric-series"
+        ],
+        "statement": "Assume AC. On $H=\\ell^2(\\mathbb N,\\mathbb C)$ with coordinate vectors $u_n$, set $d_0=0$, $d_n=2^{-n}$ ($n\\ge1$) and $T=D_d$ ([[lem-diagonal-trace-class-operator-on-ell-two]]), so $Tu_0=0$ and $Tu_n=2^{-n}u_n$ for $n\\ge1$. Then $T$ is trace class with $\\|T\\|_1=\\operatorname{tr}(T)=1$. Its arbitrary-Hilbert local determinant is $D_T(z)=\\prod_{n\\ge1}(1+z2^{-n})$, locally uniformly on $\\mathbb C$, and its zeros are exactly $-2^n$ ($n\\ge1$), each simple.",
+        "strategy": "Cite the local diagonal trace-class lemma for boundedness, the trace-class property, trace norm, trace and the nonzero eigenvalues with algebraic multiplicity. Use the geometric series for $\\sum_{n\\ge1}2^{-n}=1$, the null geometric sequence and a finite-head minimum for the bounded-reciprocal invertibility test, the arbitrary-Hilbert support theorem for the locally uniform product, and the zero-multiplicity theorem for the simple zeros. AC is inherited from the local suppliers; the coordinate family is explicit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-fredholm-determinant-of-a-finite-rank-operator",
+        "kind": "example",
+        "title": "Fredholm determinant of a finite-rank operator",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-determinant-of-a-linear-operator",
+          "def-determinant-of-a-square-matrix",
+          "def-dimension",
+          "def-hilbert-space",
+          "def-linear-independence",
+          "def-linear-basis",
+          "def-real-and-complex-inner-product-space",
+          "def-trace-class-operator",
+          "lem-arbitrary-hilbert-fredholm-determinant-from-separable-support",
+          "lem-span-of-a-single-vector",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-operator-determinant-is-basis-independent"
+        ],
+        "statement": "Assume AC and the library's linear-first inner-product convention. For every bounded finite-rank linear operator F on any complex Hilbert space H, the arbitrary-Hilbert determinant D_H(I+zF) constructed from a separable reducing support equals the ordinary determinant of (I+zF)|E on any finite-dimensional invariant E containing ran F; for rank at most one F(x)=⟨x,v⟩u it is 1+z⟨u,v⟩.",
+        "strategy": "Apply the preceding arbitrary-Hilbert support theorem, whose finite-rank clause identifies D_H with the ordinary determinant on every finite-dimensional subspace containing ran F. Such a subspace is automatically invariant. For F(x)=⟨x,v⟩u, verify linearity and boundedness from the library's linear-first convention and Cauchy–Schwarz. If u is nonzero, the restriction to span{u} has matrix [⟨u,v⟩], so its determinant is 1+z⟨u,v⟩; handle u=0 and the nilpotent case ⟨u,v⟩=0 explicitly. AC enters the arbitrary-Hilbert support construction. Do not use the older published definition based on a recorded external result; the local route may support its later owner relink.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kostenko, Trace Ideals with Applications, §3.4",
+              "url": "https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf"
+            },
+            {
+              "title": "van Neerven, Functional Analysis, §14.5.a",
+              "url": "https://fa.ewi.tudelft.nl/~neerven/FA/JvN-Functional_Analysis.pdf"
+            },
+            {
+              "title": "Dyatlov–Zworski, Mathematical Theory of Scattering Resonances, App. B §§B.5–B.6",
+              "url": "https://math.mit.edu/~dyatlov/res/res_final.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  }
+]

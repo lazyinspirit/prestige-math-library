@@ -10,7 +10,7 @@ justified_by: []
 aliases: []
 landmark: false
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 verification:
   audited: 2026-09-27
@@ -44,7 +44,7 @@ Every vertex has exactly $2(2d)^L$ incident slots, so $G_t$ is $d_t$-regular wit
 
 ## Remarks
 
-- **Convention bridge.** This is the Arora-Barak §18.5.1 convention: views cover the ball of radius $t+\lceil\sqrt t\rceil$, powered slots are length-$(2t+1)$ walks, and the central window has $2\lceil\sqrt t\rceil+1$ positions. Dinur's §6 uses walks of length $t$ with views of radius $\lceil t/2\rceil$ and a window of $\sqrt t$ positions. The two parameterizations are translations of one another, but their numerical constants are not interchangeable; every later item on this page states its bounds in the present convention, and the lazy walk introduced here is the one used throughout.
+- **Convention bridge.** The radius $t+\lceil\sqrt t\rceil$, walk length $2t+1$, and central-window size $2\lceil\sqrt t\rceil+1$ follow the parameters of Arora–Barak §18.5.1. The local-view alphabet here is a redundant pattern-indexed variant: it has one coordinate for each lazy length-$R$ pattern, while Arora–Barak indexes a view by the distinct vertices in the radius-$R$ ball (with padding). The displayed coordinate rule defines this variant directly; no equivalence of the two label alphabets is asserted or used. Dinur's §6 uses walks of length $t$ with views of radius $\lceil t/2\rceil$ and a window of $\sqrt t$ positions. The numerical constants across these parameterizations are not interchangeable; every later item on this page states its bounds in the present pattern-indexed convention, and the lazy walk introduced here is the one used throughout.
 - The reversal pairing is consistent with the published endpoint convention: position $j$ reverses to $L+1-j\in J$, the endpoint views swap, and each tested base relation is transposed. Thus the reverse-pattern table is the transpose of the original table, exactly as [[def-constraint-graph-and-labeling-value]] requires. If a walk pattern is fixed by reversal, its central option is a hold and the mirrored move tests pair in transposed pairs; its table is therefore symmetric, so the two copy-bit incidences define one well-formed loop edge.
 - Each view records one canonical coordinate for each vertex of the radius-$R$ ball; a middle-position constraint reads those coordinates for the two endpoints of its tested base edge. The canonical coordinate removes any dependence on the placement of holds, while plurality decoding still counts distinct walk patterns with multiplicity.
 - The role of this construction in the page is the powering step of [[thm-gap-amplification-step]]; the companion item [[def-graph-power-and-walk-constraint]] records the underlying one-step power convention, in which a walk predicate is a conjunction of the original edge relations along the walk.

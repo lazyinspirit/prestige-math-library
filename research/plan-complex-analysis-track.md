@@ -2076,7 +2076,7 @@ Proposed A-page inventory (dependency order; 31 items):
 | `def-barrier-and-regular-boundary-point` | def | Define a barrier and regularity by attainment for every continuous boundary datum. |
 | `thm-barrier-characterization-of-regular-boundary-points` | thm | A boundary point is regular exactly when it admits a barrier. |
 | `thm-perron-solves-dirichlet-on-regular-plane-domains` | thm | If every boundary point is regular, Perron's function is the unique continuous solution. |
-| `thm-exterior-disc-and-exterior-cone-points-are-regular` | thm | Explicit logarithmic barriers prove these geometric regularity criteria. |
+| `thm-exterior-disc-and-exterior-cone-points-are-regular` | thm | A reciprocal-disc barrier and a sector power-map barrier prove the two geometric regularity criteria. |
 | `thm-nonsingleton-boundary-component-is-regular` | thm | A point lying in a nonsingleton connected component of $\partial\Omega$ is regular. |
 | `cor-simply-connected-proper-plane-domains-are-regular` | cor | Every bounded simply connected proper plane domain is regular. |
 | `thm-conformal-transport-of-plane-dirichlet-solutions` | thm | Between bounded regular domains, a conformal bijection extending homeomorphically to closures transports continuous boundary data and their solutions. |
@@ -3269,9 +3269,9 @@ Proposed A-page inventory (dependency order; 15 items):
 | `thm-riemann-extension-across-a-coordinate-hyperplane` | thm | A locally bounded function holomorphic off a coordinate hyperplane extends uniquely across it. |
 | `lem-local-boundedness-of-separately-holomorphic-functions` | lem | Separate holomorphy implies boundedness on every smaller polydisc by the ZF Euclidean Baire step and plane Hartogs lemma/Fatou. |
 | `thm-hartogs-separate-holomorphy` | thm | Separate holomorphy alone implies joint Fréchet holomorphy in every finite dimension. |
-| `lem-local-hartogs-extension-across-polydisc-shells` | lem | Hartogs-figure extension supplies compatible local extensions across coordinate-polydisc shells. |
+| `lem-local-hartogs-extension-across-polydisc-shells` | lem | A slice Cauchy integral extends each coordinate shell to its polydisc; connected-shell identity gives agreement everywhere on the shell. |
 | `lem-propagation-and-gluing-of-hartogs-extensions` | lem | Local extensions propagate and glue independently of a finite chain through connected $\Omega\setminus K$. |
-| `thm-hartogs-extension-across-compact-holes` | thm | If $m\ge2$, $K\Subset\Omega$ and $\Omega\setminus K$ is connected, every holomorphic function there extends uniquely to $\Omega$. |
+| `thm-hartogs-extension-across-compact-holes` | thm | If $m\ge2$, $K\Subset\Omega$, $\Omega\setminus K$ is connected, and a finite shell cover has connected punctured overlaps and componentwise gluing, every holomorphic function on $\Omega\setminus K$ extends uniquely to $\Omega$. |
 
 DEFS: a **Hartogs figure** $H(r,s) = \{\lvert z_1\rvert<1, \lvert z_2\rvert<s\}
 \cup \{r<\lvert z_1\rvert<1, \lvert z_2\rvert<1\}$ and its polydisc hull;
@@ -3296,16 +3296,18 @@ function holomorphic off $\{z_m=0\}$ extends by slicewise removability and
 holomorphic parameter dependence. Extension across the full zero set of an
 arbitrary holomorphic function is not dependency-closed here; SC-3 proves it
 after Weierstrass preparation;
-**the full Hartogs extension theorem**: if $K\Subset\Omega\subset\mathbb C^m$,
-$m\ge2$, $\Omega\setminus K$ is connected, and $f$ is holomorphic there, then
-$f$ extends uniquely to $\Omega$; **Hartogs's separate-holomorphicity theorem**
+**the finite-shell-cover Hartogs extension theorem**: if $K\Subset\Omega\subset\mathbb C^m$,
+$m\ge2$, $\Omega\setminus K$ is connected, and the compact hole has the connected
+punctured-overlap and componentwise-gluing shell cover stated above, then every
+holomorphic $f$ on $\Omega\setminus K$ extends uniquely to $\Omega$;
+**Hartogs's separate-holomorphicity theorem**
 in every finite dimension, with no continuity or local-boundedness hypothesis.
 Use the full proof now licensed by the measure and CA-14 interfaces: its Baire
 stage remains, but it occurs in separable finite-dimensional Euclidean space
 where the cited theorem is ZF; Hartogs's lemma/Fatou propagates the local bound.
-The compact-hole
-theorem is also supplied by the compact-support $\bar\partial$ construction on
-SC-5, with an agreement remark rather than a second unconnected theorem.
+The general compact-hole theorem, without a finite shell-cover hypothesis, is
+supplied by the compact-support $\bar\partial$ construction on SC-5 under its
+explicit AC assumption.
 
 FS: every function holomorphic on a domain in $\mathbb{C}^2$ minus a point is
 unbounded near that point (FALSE — it extends, which is the whole phenomenon;
@@ -3593,15 +3595,18 @@ conformal and boundary refinements.
 
 Conceptual placement: after CA-16 (it consumes the Riemann map while extending
 the CA-14 plane-boundary seam). Proposed id
-`green-functions-harmonic-measure-and-conformal-invariance`. `requires`:
-CA-13, CA-14, CA-16, MT-8 and MT-20 (Radon/Riesz--Markov).
+`green-functions-harmonic-measure-and-conformal-invariance`. Its exact direct
+page requirements are listed in §E below: CA-13, CA-14, CA-16, MT-8,
+MT-20 (Radon/Riesz--Markov), and the PDE harmonic and fundamental-solution
+pages.
 
 | id | kind | one-line statement |
 |---|---|---|
-| `def-green-function-plane-domain` | def | $g_\Omega(z,a)$ is positive and harmonic in $z\ne a$, has $g_\Omega(z,a)+\log\lvert z-a\rvert$ harmonic near $a$, and tends to $0$ at every regular boundary point (equivalently has zero Perron boundary data). |
+| `def-green-function-plane-domain` | def | The canonical $g_\Omega(z,a)$ is the least nonnegative logarithmic-pole candidate: it is harmonic in $z\ne a$ and $g_\Omega(z,a)+\log\lvert z-a\rvert$ extends harmonically across $a$. On bounded domains it tends to $0$ at every regular boundary point; no irregular-boundary value is prescribed. |
 | `thm-green-function-exists-on-bounded-plane-domains` | thm | Every bounded plane domain has a Green function, constructed by exhaustion/Perron; irregular or polar boundary points are not silently assigned pointwise limits. |
 | `thm-green-function-uniqueness-symmetry-and-monotonicity` | thm | When it exists, $g_\Omega$ is unique, symmetric in $z,a$, and increases under enlargement of the domain with the direction stated explicitly. |
 | `thm-green-function-simply-connected-plane-domain` | thm | If $\Omega\subsetneq\mathbb C$ is simply connected and $\phi:\Omega\to\mathbb D$ sends $a$ to $0$, then $g_\Omega(z,a)=-\log\lvert\phi(z)\rvert$, independently of the normalised Riemann map. |
+| `thm-planar-green-kernel-conformal-covariance` | thm | For a biholomorphism $f:\Omega\to\Omega'$ between Greenian plane domains, $g_\Omega(z,a)=g_{\Omega'}(f(z),f(a))$ without any boundary extension assumption; compare least-positive candidates in both directions. |
 | `def-harmonic-measure-plane-domain` | def | For a bounded regular plane domain, $\omega_\Omega^z$ is the unique boundary probability measure representing the Perron solution: $H_\varphi(z)=\int_{\partial\Omega}\varphi\,d\omega_\Omega^z$. |
 | `thm-harmonic-measure-is-well-defined` | thm | Riesz--Markov gives a unique Radon probability measure because evaluation of the positive Dirichlet solution operator is a positive norm-one functional. |
 | `thm-harmonic-measure-disc-poisson-density` | thm | On a disc, harmonic measure is absolutely continuous with Poisson-kernel density relative to arclength. |
@@ -3775,6 +3780,9 @@ CA-13, the measure integration interface.
 Companion: $z^d$, $e^z$, $\tan z$ and $1/\Gamma$; regularisation when
 $f(0)=a$; a repeated zero in Jensen's formula; characteristic under a Möbius
 change of target; rational degree as the finite analogue of $T$.
+The companion page directly requires the published `the-gamma-function` page
+for the reciprocal-Gamma example's product, continuation and sectorial
+Stirling estimates.
 
 Sources and proof strategy: Eremenko, *Lectures on Nevanlinna Theory*, §§1--3
 (“Jensen's formula,” “First main theorem,” “Ahlfors--Shimizu form of the first
@@ -3920,6 +3928,7 @@ does not silently require the later de Rham theorem.
 | id | kind | one-line statement |
 |---|---|---|
 | `def-riemann-surface-and-holomorphic-atlas` | def | A Riemann surface is connected, Hausdorff and second countable with a compatible complex one-dimensional atlas. |
+| `lem-nonsingular-complex-algebraic-curve-holomorphic-charts` | lem | The holomorphic implicit-function theorem gives local one-dimensional graph charts on a nonsingular affine or projective complex algebraic curve. |
 | `def-holomorphic-and-meromorphic-map-of-riemann-surfaces` | def | Chart expressions define holomorphic maps and meromorphic functions, independently of the chosen charts. |
 | `thm-topological-classification-compact-riemann-surfaces` | thm | Complex charts canonically orient a compact Riemann surface; a finite triangulation and polygonal reduction identify it with a sphere with a unique number $g$ of handles. |
 | `def-genus-and-euler-characteristic-compact-riemann-surface` | def | Define the genus by that classification and prove $\chi(X)=2-2g$, independent of atlas, triangulation and polygonal schema. |

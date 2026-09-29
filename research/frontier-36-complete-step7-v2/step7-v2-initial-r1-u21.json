@@ -1,0 +1,77 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "initial",
+  "round": 1,
+  "unit": "21",
+  "input_sha256": "eb847670bab40a2439e5cdb871b71db529fdcd8349675a0f63eb1fb3e18045de",
+  "decisions": [
+    {
+      "id": "ex-hom-pairing-over-a-nonsplit-field",
+      "model": "gpt-6-sol",
+      "context_sha256": "f425b8b49591165134087385a5c06d1c7d616aa981f26b09bc8a523a33614155",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 2.2 applies maximality among proper submodules to N<N'<=M. Taking N'=M satisfies that inequality but is not a proper submodule, so its larger dimension supplies no contradiction. This is a false load-bearing inference in the finite-length argument needed for the G_0 basis, classified as a logical proof defect. The repair restricts the comparison to N<N'<M and proves that any proper nonzero submodule of M/N has such an inverse image.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-hom-pairing-over-a-nonsplit-field",
+      "disposition": "repaired",
+      "post_sha256": "feced26efc355c79f3dd034f5afb1c421f17bc9b0b8ced90852f4dfaa3b11ee8",
+      "review_context_sha256": "5f4fba32aa5964b65281dfdc28246f884a2e7067add7c52c23beabeca7b76bdc",
+      "reason": "Reviewed the example, all declared prerequisite Statement/Definition sections, the owning proof contract and the examples page. The regular complex module is simple since every nonzero scalar is invertible; every simple is its cyclic image, and the regular module lifts through surjections by a preimage of 1. Its identity is a projective cover. Evaluation at 1 identifies Hom_C(C,C) with C over R, giving dimension two. The finite-dimensional module category is abelian and essentially small; after the repaired proper-submodule comparison, inverse images exclude proper nonzero submodules of M/N, and strict dimension decrease licenses induction to a composition series. The cited projective and simple class basis results therefore apply. No arbitrary-index choice is needed. This is the repair author's verification, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-hom-pairing-over-a-nonsplit-field",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "repaired",
+      "reason": "Step 2.2 applies maximality among proper submodules to N<N'<=M. Taking N'=M satisfies that inequality but is not a proper submodule, so its larger dimension supplies no contradiction. This is a false load-bearing inference in the finite-length argument needed for the G_0 basis, classified as a logical proof defect. The repair restricts the comparison to N<N'<M and proves that any proper nonzero submodule of M/N has such an inverse image.",
+      "repair": "Verification 2.2 now compares only proper intermediate submodules, supplies the quotient-preimage argument, and explicitly invokes F25 for the strict dimension decrease.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "changed_file": "items/ex-hom-pairing-over-a-nonsplit-field.md",
+    "changed_clause": "Verification 2.2: N<N\u2032<=M replaced by N<N\u2032<M; added the inverse-image proof of quotient simplicity and strict dimension decrease for induction.",
+    "interface_comparison": "The replacement is wholly inside Verification step 2.2. All other bytes, including the complete Example, remain unchanged; no Statement or Definition section was changed. Therefore no downstream event is triggered.",
+    "contract": "research/frontier-36-complete-batch-21.proof-contracts.json: citations F6-F9, F17, F25 and derivation g0_simple_basis continue to support the repaired argument; no contract edit needed.",
+    "page": "library/homological-algebra/grothendieck-groups-and-graded-cartan-pairings-examples.md: the unique simple/projective and pairing-entry-two descriptions remain correct; no page edit needed.",
+    "sources": "Familiar finite-dimensional module and linear algebra; relied on repository prerequisite sections read in this review. No external source was consulted, and no claim of reading the cited Kleshchev paper is made.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-hom-pairing-over-a-nonsplit-field.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-hom-pairing-over-a-nonsplit-field.md",
+        "exit_code": 0,
+        "result": "OK; 1 file, math and YAML parse"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-36-complete-batch-21.proof-contracts.json --items ex-hom-pairing-over-a-nonsplit-field --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked"
+      }
+    ],
+    "published_ledger": "No published-item defect discovered in the examined uses; no proposed published-ledger update.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and subsequent independent rejudgment under the Step-7 protocol; no judgment or certification written by this worker."
+  }
+}

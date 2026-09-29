@@ -1,0 +1,343 @@
+[
+  {
+    "order": 725,
+    "id": "hochschild-homology-and-diagonal-koszul-resolutions",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Hochschild Homology and Diagonal Koszul Resolutions",
+    "companion": "hochschild-homology-and-diagonal-koszul-resolutions-examples",
+    "requires": [
+      "graded-bimodules-and-tensor-functors",
+      "tor-flatness-and-global-dimension",
+      "koszul-complexes-and-regular-sequences"
+    ],
+    "items": [
+      {
+        "id": "def-enveloping-algebra-and-bimodule-module-dictionary",
+        "kind": "definition",
+        "title": "Enveloping algebra and the bimodule–module dictionary",
+        "statement": "For a unital associative algebra A over a field k, A^e=A tensor_k A^op. A k-central A-bimodule M is equivalently a left A^e-module via (a tensor b^op)m=amb, or a right A^e-module via m(a tensor b^op)=bma.",
+        "strategy": "Check (a tensor b^op)(c tensor d^op)=ac tensor (db)^op. The left action sends two successive factors to a(c m d)b=(ac)m(db); the right action is checked in the reverse order. Conversely recover left and right A-actions by restricting along a↦a tensor 1 and b^op↦1 tensor b^op. The restrictions commute because the two subalgebras commute, and k-centrality makes the tensor action balanced. Record the regular bimodule A on both sides.",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-bimodule",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-opposite-ring",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-two-sided-bar-resolution-of-an-associative-algebra",
+        "kind": "definition",
+        "title": "The augmented two-sided bar complex",
+        "statement": "For n≥0 put Bar_n(A)=A tensor_k A^{tensor_k n} tensor_k A with alternating adjacent-multiplication differential d_n=Σ_{r=0}^n(-1)^r μ_{r,r+1}, and augment Bar_0(A)→A by multiplication.",
+        "strategy": "State the left and right A^e-actions on the two outer factors: (c tensor d^op)·(a_0 tensor … tensor a_{n+1})=ca_0 tensor … tensor a_{n+1}d and (a_0 tensor … tensor a_{n+1})·(c tensor d^op)=da_0 tensor … tensor a_{n+1}c. Verify the actions commute with each adjacent-multiplication face. Make the n=0 augmentation and empty middle tensor explicit. This item specifies the maps; the following lemma proves d² and augmentation.",
+        "deps": [
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-augmented-chain-complex-over-an-object",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bar-differential-and-augmentation-form-a-complex",
+        "kind": "lemma",
+        "title": "The bar boundary squares to zero and is augmented",
+        "statement": "The bar differential of the preceding item satisfies d_{n-1}d_n=0 for n≥2 and μd_1=0.",
+        "strategy": "For faces d_i, prove d_i d_j=d_{j-1}d_i when i<j, including overlapping triples by associativity. The two orders occur with opposite alternating signs, so all terms cancel. In degree one, μ(a_0a_1 tensor a_2)-μ(a_0 tensor a_1a_2)=0. The n=0 boundary is the augmentation rather than another unaugmented differential; the formulas are A^e-linear by the outer-action check.",
+        "deps": [
+          "def-two-sided-bar-resolution-of-an-associative-algebra"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-two-sided-bar-complex-is-an-enveloping-projective-resolution",
+        "kind": "theorem",
+        "title": "The two-sided bar complex is a projective A^e-resolution",
+        "statement": "Assume AC. For every unital associative k-algebra A, Bar(A)→A is an exact projective resolution of A as both a right and a left A^e-module. The displayed contraction is k-linear, with no assertion of A^e-linearity.",
+        "strategy": "On the augmented underlying k-complex insert 1 on the left: h_{-1}(a)=1 tensor a and h_n(a_0 tensor … tensor a_{n+1})=1 tensor a_0 tensor … tensor a_{n+1}; check dh+hd=1 in every degree using the extra first face and pairwise cancellation. For the right side exhibit A^{tensor n} tensor_k A^e→Bar_n, (a_1 tensor … tensor a_n) tensor (a tensor b^op)↦b tensor a_1 tensor … tensor a_n tensor a, and verify right linearity against z(c tensor d^op)=dzc. Give the analogous left A^e tensor_k A^{tensor n} model. AC chooses a k-basis of A (hence of each tensor power), turning these into free A^e-modules; AC also supplies arbitrary-basis projectivity. The contraction proves exactness without requiring an equivariant splitting.",
+        "deps": [
+          "def-two-sided-bar-resolution-of-an-associative-algebra",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "lem-bar-differential-and-augmentation-form-a-complex",
+          "cor-every-vector-space-has-a-basis",
+          "thm-tensor-product-basis-from-bases",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-left-and-right-modules",
+          "def-opposite-ring",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-projective-resolution-in-an-abelian-category",
+          "def-axiom-of-choice",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-hochschild-chain-complex-of-a-bimodule",
+        "kind": "definition",
+        "title": "Hochschild chains and Hochschild homology with coefficients",
+        "statement": "For a k-central A-bimodule M, C_n(A,M)=M tensor_k A^{tensor_k n} for n≥0, with b(m;a_1,…,a_n)=(ma_1;a_2,…,a_n)+Σ_{i=1}^{n-1}(-1)^i(m;a_1,…,a_i a_{i+1},…,a_n)+(-1)^n(a_n m;a_1,…,a_{n-1}); define HH_n(A,M)=H_n(C(A,M)).",
+        "strategy": "Check k-balancedness of every face and the endpoints n=0 and n=1 (b_1(m;a)=ma-am). Establish b²=0 here, before using HH_n: label the n+1 face maps, pair d_i d_j with d_{j-1}d_i for i<j; associativity handles adjacent internal products, and commuting bimodule actions handle the pair involving the two cyclic end faces. This direct face proof is the well-definedness justification, so the later bar comparison is not a forward prerequisite.",
+        "deps": [
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "lem-bar-differential-and-augmentation-form-a-complex",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-hochschild-chains-are-bar-tensor-chains",
+        "kind": "lemma",
+        "title": "Hochschild chains are bar tensor chains",
+        "statement": "For every k-central A-bimodule M, the maps (a_0 tensor … tensor a_{n+1}) tensor m ↦ (a_{n+1} m a_0) tensor a_1 tensor … tensor a_n give a chain isomorphism Bar_n(A) tensor_{A^e} M ≅ C_n(A,M), natural in M, with no projectivity assumption on M.",
+        "strategy": "Map (a_0 tensor … tensor a_{n+1}) tensor m to (a_{n+1} m a_0) tensor a_1 tensor … tensor a_n. Verify balancing under the right action: z(c tensor d^op) gives a_{n+1}c m d a_0, equal to z tensor ((c tensor d^op)m). The inverse sends m tensor a_1 tensor … tensor a_n to (1 tensor a_1 tensor … tensor a_n tensor 1) tensor m; balancing proves both composites are identities. Compute the first and last bar faces explicitly: they become ma_1 and a_n m, and internal faces retain their alternating signs. Hence the transported differential is exactly b.",
+        "deps": [
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-two-sided-bar-resolution-of-an-associative-algebra",
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "thm-universal-property-of-module-tensor-products",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-hochschild-homology-is-tor-over-the-enveloping-algebra",
+        "kind": "theorem",
+        "title": "Hochschild homology is Tor over the enveloping algebra",
+        "statement": "Assume AC. For a unital associative k-algebra A and every k-central A-bimodule M, HH_n(A,M)≅Tor_n^{A^e}(A,M), with A on the right and M on the left over A^e; the isomorphism is natural in M.",
+        "strategy": "Use the explicit right-A^e projective bar resolution of A and the right-resolution construction of Tor. The chain isomorphism of the previous lemma identifies its tensor complex with Hochschild chains, so homology gives the displayed isomorphism. To suppress a chosen-resolution superscript and prove naturality under other resolutions, invoke the published balanced Tor comparison; under AC, the projective-resolution existence corollary supplies a left A^e-projective resolution of M, and AC implies the DC required by balanced Tor. State the precise AC uses: bar-term projectivity, existence of an M-resolution, and DC for balanced comparison. No A^e-projectivity of M is assumed. Do not identify this with relative Tor for a general ground ring.",
+        "deps": [
+          "thm-two-sided-bar-complex-is-an-enveloping-projective-resolution",
+          "lem-hochschild-chains-are-bar-tensor-chains",
+          "def-tor-by-resolving-the-right-module",
+          "def-balanced-tor-bifunctor",
+          "cor-every-module-admits-a-projective-resolution",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-two-sided-bar-resolution-of-an-associative-algebra",
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-hochschild-homology-is-functorial-and-has-coefficient-long-exact-sequences",
+        "kind": "theorem",
+        "title": "Functoriality and coefficient long exact sequences for Hochschild homology",
+        "statement": "Assume AC. A-bimodule maps induce natural maps on HH_n(A,-). Each short exact sequence 0→M′→M→M″→0 of k-central A-bimodules yields the natural long exact HH sequence with connecting maps HH_n(A,M″)→HH_{n-1}(A,M′).",
+        "strategy": "A bimodule map acts on the M factor of every C_n and commutes with all faces, proving covariance and composition. For a coefficient short exact sequence, choose a k-basis of A^{tensor n} using AC; its tensor functor is a direct sum of copies of the sequence and is exact (equivalently use its flatness). Thus the three Hochschild complexes form a degreewise short exact sequence. The category of k-modules is abelian, so apply the published long exact homology theorem and its natural connecting-map construction. State that the AC use is the arbitrary vector-space basis for exact tensoring and that Tor naturality is compatible via the previous theorem.",
+        "deps": [
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "thm-hochschild-homology-is-tor-over-the-enveloping-algebra",
+          "thm-long-exact-sequence-in-homology",
+          "cor-every-vector-space-has-a-basis",
+          "cor-free-modules-are-projective-and-flat",
+          "def-axiom-of-choice",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology",
+          "thm-naturality-of-the-homology-connecting-morphism",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-short-exact-sequence-of-complexes",
+          "def-morphism-of-short-exact-sequences-of-complexes",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "prop-hochschild-degree-zero-is-bimodule-coinvariants",
+        "kind": "proposition",
+        "title": "Degree-zero Hochschild homology is bimodule coinvariants",
+        "statement": "For every unital associative k-algebra A and k-central A-bimodule M, there is a canonical k-module isomorphism HH_0(A,M) ≅ M/span_k{am−ma : a∈A,m∈M}. The denominator is a k-subspace and need not be a two-sided ideal or a sub-bimodule.",
+        "strategy": "Identify HH_0 with ker(b_0)/im(b_1): C_0=M and b_0=0, so this is M/im(b_1). On pure tensors b_1(m tensor a)=ma−am; because tensors are finite sums of pure tensors, its image is exactly the k-span of commutators (the displayed span uses the opposite sign, which has the same span). Verify the span is a k-subspace. To substantiate “need not,” use the unital k-algebra A=M=M_2(k) with its regular bimodule. Every commutator has trace zero, so its k-span does too. With the library's zero-based matrix units, E_01=E_01E_11−E_11E_01 lies in the span, while E_01E_10=E_00 has trace 1≠0. Thus the span is not stable under right multiplication and is neither a two-sided ideal nor a sub-bimodule. No basis, projectivity or choice is used.",
+        "deps": [
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-vector-space",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-cycle-and-boundary-subobjects-of-a-complex",
+          "def-homology-object-of-a-chain-complex",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "thm-module-kernel-image-and-injectivity",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-quotient-module",
+          "thm-quotient-module-laws",
+          "def-algebra-over-a-commutative-ring",
+          "cor-square-matrices-form-a-ring",
+          "def-matrix-space",
+          "thm-matrix-multiplication-laws",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-units",
+          "lem-matrix-unit-multiplication",
+          "def-trace-of-a-square-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "prop-trace-is-linear"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+        "kind": "definition",
+        "title": "The polynomial diagonal Koszul bimodule complex",
+        "statement": "For R=k[x_1,…,x_n], identify R^e with R tensor_k R and set u_i=x_i tensor 1−1 tensor x_i. The diagonal complex is K(u_1,…,u_n;R^e), augmented by multiplication R^e→R. If deg x_i=2, its ith exterior generator has homological degree 1 and internal degree 2, so its differential has internal degree 0.",
+        "strategy": "Name the ordered exterior generators θ_i and use the existing Koszul differential Σ(-1)^{r-1}u_{i_r} contraction on θ_{i_1}∧…∧θ_{i_p}. Check the augmentation kills every u_i, give the empty-sequence n=0 case, and explain that internal shifts are R^e{2p} in homological degree p when all variable degrees are 2. Keep homological and internal degrees distinct, with no super sign from the internal grading.",
+        "deps": [
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-koszul-complex-of-a-sequence-with-coefficients",
+          "def-graded-ring-module-bimodule-and-internal-shift"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-polynomial-diagonal-differences-form-a-regular-sequence",
+        "kind": "lemma",
+        "title": "Polynomial diagonal differences form a regular sequence",
+        "statement": "In R^e≅k[x_1,…,x_n,y_1,…,y_n], the ordered elements u_i=x_i−y_i form an R^e-regular sequence and R^e/(u_1,…,u_n)≅R, including n=0.",
+        "strategy": "Construct the polynomial-algebra isomorphism using the two canonical copies of R and the tensor coproduct property. After imposing the first i−1 differences, substitute y_r=x_r for r<i; the quotient is still a polynomial ring in the remaining independent variables. In that quotient x_i−y_i is monic of degree one in x_i, so multiplication by it is injective by leading-coefficient comparison. Every intermediate quotient is nonzero, meeting the published regular-sequence definition. The final simultaneous substitution is the multiplication map to R; for n=0 the empty sequence and identity quotient apply.",
+        "deps": [
+          "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+          "def-regular-sequence-on-a-module",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-the-diagonal-koszul-complex-resolves-the-polynomial-ring",
+        "kind": "theorem",
+        "title": "The diagonal Koszul complex is a finite free resolution of R",
+        "statement": "For every n≥0, K(u_1,…,u_n;R^e)→R is a finite free (hence projective) resolution over R^e, with rank binomial(n,j) in degree j.",
+        "strategy": "Apply the published regular-sequence Koszul acyclicity theorem to the preceding explicit regular sequence; the degree-zero quotient is R by multiplication. The exterior-basis lemma makes degree j free on the increasing j-subsets of {1,…,n}, proving the binomial rank and vanishing above n. A finite free module is projective by the finite-basis clause of the published free-projective theorem, which needs only finite choice; no arbitrary-index AC is used in this polynomial resolution. Include the n=0 augmentation k→k.",
+        "deps": [
+          "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+          "lem-polynomial-diagonal-differences-form-a-regular-sequence",
+          "thm-regular-sequences-give-acyclic-koszul-complexes",
+          "thm-basic-koszul-homology",
+          "lem-exterior-algebra-basis-monomials",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-projective-resolution-in-an-abelian-category",
+          "thm-modules-over-a-ring-form-an-abelian-category"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex",
+        "kind": "theorem",
+        "title": "Polynomial Hochschild homology from the diagonal Koszul complex",
+        "statement": "Assume AC. Let k be a field, R=k[x_1,…,x_n] for n≥0, and M a k-central R-bimodule. For every j≥0, HH_j(R,M) is naturally isomorphic to the homology in degree j of the complex with term ⊕_{|I|=j} M θ_I for 0≤j≤n and zero terms for j>n, where I={i_1<…<i_j} and d(m θ_I)=Σ_{r=1}^j(-1)^{r-1}(x_{i_r}m−m x_{i_r}) θ_{I\\{i_r}}. In top degree, HH_n(R,M) is the centralizer {m∈M: rm=mr for every r∈R} times the top wedge, with the condition vacuous when n=0. For graded data with deg_int x_i=2 and M a graded k-central R-bimodule, assign deg_int θ_i=2; the comparison is internal-degree preserving.",
+        "strategy": "For every k-central R-bimodule M, use the finite free diagonal Koszul resolution of R as a right R^e-resolution, compare it with the right bar projective resolution, and tensor the comparison and homotopies with M. The k-central hypothesis is required by the assigned Hochschild-chain and enveloping-algebra definitions. The action of u_i becomes x_i m−m x_i, yielding the signed differential; include n=0 and read top homology as the centralizer of R in M. AC implies the DC needed for resolution comparison. For the graded clause, use the homogeneous monomial bar basis and θ-wedge basis and recursively lift homogeneous cycles in the exact graded targets to produce degree-zero comparison maps and homotopies.",
+        "deps": [
+          "thm-hochschild-homology-is-tor-over-the-enveloping-algebra",
+          "thm-the-diagonal-koszul-complex-resolves-the-polynomial-ring",
+          "thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object",
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "def-balanced-tor-bifunctor",
+          "lem-hochschild-chains-are-bar-tensor-chains",
+          "def-two-sided-bar-resolution-of-an-associative-algebra",
+          "thm-two-sided-bar-complex-is-an-enveloping-projective-resolution",
+          "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-chain-homotopic-maps-induce-the-same-map-on-homology"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-polynomial-diagonal-bimodule-hochschild-homology",
+        "kind": "corollary",
+        "title": "Diagonal Hochschild homology of a polynomial ring",
+        "statement": "Assume AC. For R=k[x_1,…,x_n] as its own bimodule, HH_j(R,R)≅R tensor_k Λ^j(k^n) for 0≤j≤n and HH_j(R,R)=0 for j>n. If deg x_i=2, each exterior generator contributes internal degree 2, so degree j has shift {2j}.",
+        "strategy": "In the coefficient Koszul complex each u_i acts on R by x_i m−m x_i=0 because R is commutative. Every differential is therefore zero; read homology directly from the jth free exterior term and its basis. State the R-module and internal grading explicitly, including n=0. The AC assumption is inherited from the preceding identification with ordinary Hochschild chains; the zero-differential Koszul calculation itself is choice-free. No general smooth HKR theorem is inferred.",
+        "deps": [
+          "thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex",
+          "lem-exterior-algebra-basis-monomials",
+          "def-axiom-of-choice",
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "def-graded-ring-module-bimodule-and-internal-shift"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 726,
+    "id": "hochschild-homology-and-diagonal-koszul-resolutions-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Hochschild Homology and Diagonal Koszul Resolutions — Examples",
+    "companion": "hochschild-homology-and-diagonal-koszul-resolutions",
+    "requires": [
+      "hochschild-homology-and-diagonal-koszul-resolutions"
+    ],
+    "items": [
+      {
+        "id": "ex-hochschild-homology-of-the-ground-field",
+        "kind": "example",
+        "title": "Hochschild homology of the ground field",
+        "statement": "For A=k with its regular bimodule, HH_0(k,k)=k and HH_j(k,k)=0 for j>0.",
+        "strategy": "Use repeated tensor-unit isomorphisms to identify C_n(k,k)≅k by scalar multiplication in every degree, and check that each face preserves the product of scalar entries. Then b_n is the alternating sum of n+1 identity maps: zero for odd n and identity for even n≥2; b_0=0, so the direct degree-zero calculation gives HH_0=k, also agreeing with the coinvariant proposition. For the zero-variable polynomial ring R=k, identify the empty diagonal Koszul complex directly from its definition as k in degree zero with identity augmentation; do not use the AC-bearing general comparison theorem.",
+        "deps": [
+          "def-hochschild-chain-complex-of-a-bimodule",
+          "prop-hochschild-degree-zero-is-bimodule-coinvariants",
+          "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-one-variable-diagonal-koszul-computation",
+        "kind": "example",
+        "title": "One-variable diagonal Hochschild calculation",
+        "statement": "Assume AC. For R=k[x] with deg x=2, HH_0(R,R)=R, HH_1(R,R)=R{2}, and HH_j=0 for j≥2.",
+        "strategy": "Print the diagonal resolution 0→R^e{2} --(x⊗1−1⊗x)→ R^e→R→0. After tensoring with regular R the differential is zero, because left and right x-actions agree. Its two nonzero homology terms have the displayed homological and internal degrees; the general HH identification is the cited polynomial theorem.",
+        "deps": [
+          "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+          "thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-one-variable-twisted-bimodule-hochschild-computation",
+        "kind": "example",
+        "title": "One-variable twisted bimodule Hochschild calculation",
+        "statement": "Assume AC. Let R=Q[x] and M=R as a left module with right x-action m·x=−xm. Then HH_0(R,M)≅Q, HH_1(R,M)=0, and HH_j(R,M)=0 for j≥2.",
+        "strategy": "The right action extends from x↦−x to a ring automorphism of Q[x] and commutes with the usual left action, so M is a valid bimodule. Tensor the one-variable diagonal resolution with M; its differential is x m−m·x=2xm. Multiplication by 2x on Q[x] is injective and has cokernel Q[x]/(x)≅Q, giving the groups. If x has internal degree 2 the twist is homogeneous and the degree-one term carries {2}.",
+        "deps": [
+          "thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-two-variable-diagonal-koszul-signs",
+        "kind": "example",
+        "title": "Two-variable diagonal Koszul signs",
+        "statement": "Assume AC. Let k be a field, R=k[x,y], and M a k-central R-bimodule. Its coefficient Koszul complex is 0→M θ_x∧θ_y→M θ_x⊕M θ_y→M→0 with d_2(m)=−(y m−m y)θ_x+(x m−m x)θ_y and d_1(a θ_x+b θ_y)=(x a−a x)+(y b−b y).",
+        "strategy": "Set u_x(m)=xm−mx and u_y(m)=ym−my. Their actions commute since the left x,y actions commute, the right x,y actions commute, and left/right actions commute. Hence d_1d_2(m)=−u_xu_y(m)+u_yu_x(m)=0, displaying the mixed-product cancellation and the required wedge orientation. For M=R both u maps vanish, so HH_0=R, HH_1=R{2}² and HH_2=R{4} if deg x=deg y=2.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring",
+          "def-enveloping-algebra-and-bimodule-module-dictionary",
+          "thm-polynomial-hochschild-homology-is-computed-by-the-diagonal-koszul-complex",
+          "cor-polynomial-diagonal-bimodule-hochschild-homology"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  }
+]

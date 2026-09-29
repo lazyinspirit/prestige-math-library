@@ -7,7 +7,7 @@ items: []
 examples: [cex-global-sections-epimorphism-fails-lift, ex-cech-cohomology-two-arc-cover-circle,
            cex-bad-cover-circle-cech-misses-h1, ex-skyscraper-sheaf-acyclic,
            ex-flasque-sheaf-all-functions, cex-constant-sheaf-not-flasque,
-           def-projective-line-two-affine-cover-and-twisting-sheaf, ex-mayer-vietoris-projective-line-cover-preview,
+           ex-mayer-vietoris-projective-line-cover-preview,
            ex-cech-sign-degree-two-three-opens, ex-empty-cover-empty-space-cohomology,
            cex-cech-refinement-map-not-canonical-on-cochains]
 ---

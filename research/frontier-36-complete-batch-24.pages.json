@@ -1,0 +1,509 @@
+[
+  {
+    "order": 733,
+    "id": "braids-as-fundamental-groups-of-configuration-spaces",
+    "kind": "A",
+    "category": "braid-groups",
+    "title": "Braids as Fundamental Groups of Configuration Spaces",
+    "companion": "braids-as-fundamental-groups-of-configuration-spaces-examples",
+    "requires": [
+      "geometric-braids-and-artin-generators",
+      "ordered-and-unordered-configuration-spaces",
+      "the-fundamental-group"
+    ],
+    "items": [
+      {
+        "id": "def-motion-of-an-unordered-point-configuration",
+        "kind": "definition",
+        "title": "Based motions of an unordered point configuration",
+        "deps": [
+          "def-unordered-configuration-space",
+          "def-ordered-configuration-space",
+          "def-based-loops-and-fundamental-group",
+          "def-braid-group-from-unordered-configurations",
+          "def-geometric-braid-with-setwise-endpoints",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent"
+        ],
+        "dependency_level": 0,
+        "statement": "Fix the geometric base tuple Q in the open unit disk and its orbit [Q]. An unordered configuration motion is a continuous path alpha:I→C_n(D²); it is based when both endpoints are [Q], and it is interior when every slice lies in C_n(int D²). Collision-free and continuous refer to the quotient topology. The open-disk inclusion gives a based group isomorphism to the closed-disk configuration braid group.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the published quotient topology and fixed geometric Q. State both the closed model defining B_n^conf and its open subspace; preserve the actual open/closed distinction, including n=0 and n=1. This is a definition, with the already proved inclusion isomorphism used only as an identified interface.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-a-configuration-loop-traces-a-geometric-braid",
+        "kind": "lemma",
+        "title": "An interior configuration loop traces a geometric braid",
+        "deps": [
+          "def-motion-of-an-unordered-point-configuration",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-complex-metric-convergence-and-continuity",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space",
+          "lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations",
+          "lem-the-closed-disk-is-a-manifold-with-boundary",
+          "lem-t0-t1-and-hausdorff-are-hereditary",
+          "thm-path-lifting-for-covering-maps"
+        ],
+        "dependency_level": 1,
+        "statement": "For every based loop alpha in C_n(int D²) at [Q], its unique ordered lift starting at Q has coordinate motions z_j; their graphs form a geometric braid based at Q, and the unordered slice of that braid is alpha at every height.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "First verify int D² is Hausdorff: identify it as a subspace of the published Hausdorff closed disk, then use hereditary Hausdorffness. Apply the evenly covered coordinate-neighborhood lemma to p:F_n(int D²)→C_n(int D²), then path lifting from Q. The lift is continuous into F_n(int D²), so its coordinates are continuous, collision-free, and start at q_j. Its terminal tuple lies in the orbit of Q, giving exactly the setwise top condition. The graph map t↦(z_j(t),t) is a level-preserving strand. For n=0 the unique empty lift and braid give the same conclusion. Do not trace an arbitrary boundary-touching closed-disk loop as an interior geometric braid; transfer its class through the published open/closed inclusion later.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-path-homotopy-traces-braid-isotopy",
+        "kind": "lemma",
+        "title": "A based configuration-loop homotopy traces a braid isotopy",
+        "deps": [
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "thm-homotopy-lifting-for-covering-maps"
+        ],
+        "dependency_level": 2,
+        "statement": "A homotopy H(s,t) of based loops in C_n(int D²), fixing their orbit endpoints [Q], lifts from the constant ordered bottom tuple Q to a jointly continuous family of ordered point motions. Its strand graphs are a geometric braid isotopy between the traces of the boundary loops.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "Write the homotopy with s as isotopy parameter and t as height: H(s,0)=H(s,1)=[Q], while H(0,t) and H(1,t) are the two based loops. (This is the path-homotopy square with the factors interchanged.) The previously proved tracing lemma supplies the quotient covering p°:F_n(int D²)→C_n(int D²). Apply the published homotopy-lifting theorem with Y=I_s, height t, and the continuous initial lift s↦Q along t=0. The resulting lift is jointly continuous into F_n; product projections give jointly continuous coordinates, and every slice is the unique lift from Q, hence a geometric braid. Its terminal tuple lies in the orbit of Q for each s. Thus the coordinate family satisfies the braid-isotopy conditions, with its s=0,1 slices equal by uniqueness to the traces of H(0,·), H(1,·). For n=0 both spaces are points and this is the constant empty family. No Choice is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-a-geometric-braid-slices-to-a-configuration-loop",
+        "kind": "lemma",
+        "title": "A geometric braid slices to an interior configuration loop",
+        "deps": [
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-product-topology",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space"
+        ],
+        "dependency_level": 1,
+        "statement": "For a geometric braid beta=(z_1,...,z_n) based at Q, the map S(beta)(t)=[(z_1(t),...,z_n(t))] is a continuous based loop in C_n(int D²). It depends only on the level-preserving braid, including its labelled point motions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "The coordinate tuple is a continuous map I→F_n(int D²) by the product/subspace topology and the no-collision condition. Compose with the quotient p. Bottom and setwise top conditions both give [Q]. Slicing the graphs at height t recovers precisely that orbit, with no arbitrary reparametrization.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-slicing-and-tracing-are-mutually-inverse-on-classes",
+        "kind": "lemma",
+        "title": "Tracing and slicing are inverse on relative classes",
+        "deps": [
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "lem-path-homotopy-traces-braid-isotopy",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "def-based-loops-and-fundamental-group",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-product-topology",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space"
+        ],
+        "dependency_level": 3,
+        "statement": "Tracing based interior configuration loops and slicing geometric braids induce mutually inverse bijections between based path-homotopy classes in C_n(int D²) and geometric braid-isotopy classes based at Q.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "Define trace by the unique ordered lift from Q and slice by the quotient of the coordinate tuple. Path-homotopy traces braid isotopy, so trace is well defined on path classes. For a braid isotopy Z(s,t), the coordinate functions give a continuous map I²→(int D²)^n by product topology; collision-freeness factors it through the ordered configuration subspace, and the continuous quotient map gives a joint map to C_n(int D²). Its t=0 and t=1 edges are constantly [Q], so after swapping the square coordinates it is a path homotopy between the slices. Thus slicing is well defined on braid-isotopy classes. Slicing the trace returns the original loop pointwise; tracing the slice returns the original braid by uniqueness of the ordered lift from Q. Check n=0, n=1, and relative boundary conventions. No reparametrization is needed in the tuple model.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-stacking-corresponds-to-loop-concatenation",
+        "kind": "lemma",
+        "title": "Raw slicing reverses geometric stacking products",
+        "deps": [
+          "prop-stacking-of-geometric-braids-is-well-defined",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-unordered-configuration-space"
+        ],
+        "dependency_level": 2,
+        "statement": "For geometric braids beta and gamma, with gamma★beta meaning beta below gamma, [S(gamma★beta)]=[S(beta)][S(gamma)] in π_1(C_n(int D²),[Q]), whose multiplication traverses the left loop first. Thus raw slicing is an antihomomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "For gamma★beta, the published stack runs beta first. At t≤1/2 its unordered slice is S(beta)(2t). At t≥1/2 its ordered tuple is (w_{pi(beta)(j)}(2t−1))_j, a coordinate permutation of gamma’s tuple, so its orbit is S(gamma)(2t−1). At t=1/2 both branches equal [Q]. The based-loop product is defined to run its left factor first with these same half-interval rescalings, so S(gamma★beta)=S(beta)*S(gamma) pointwise. Passing to path classes gives the stated equality in pi_1 and reverses the stacking order. Treat n=0 as the unique empty path and n=1 by the same formula with the identity permutation. The finite coordinate permutation is forgotten by the unordered quotient; no Choice is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+        "kind": "theorem",
+        "title": "Geometric braid classes and the unordered configuration fundamental group",
+        "deps": [
+          "lem-slicing-and-tracing-are-mutually-inverse-on-classes",
+          "lem-stacking-corresponds-to-loop-concatenation",
+          "def-braid-group-from-unordered-configurations",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "thm-geometric-braids-form-a-group",
+          "thm-fundamental-group-laws",
+          "def-based-loops-and-fundamental-group",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-group-homomorphism",
+          "def-injection-surjection-bijection",
+          "def-group-isomorphism-and-automorphism"
+        ],
+        "dependency_level": 4,
+        "statement": "For the exact shared base tuple Q, the map Phi:G_n→B_n^conf=π_1(C_n(D²),[Q]), [beta]↦(i_*[S(beta)])^{-1}, is a group isomorphism. Raw slicing to the open-disk π_1 is an anti-isomorphism. Changing the configuration basepoint requires a chosen connecting path; no Artin-presentation completeness is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "The slicing/tracing lemma gives a bijection of classes with π_1(C_n(int D²),[Q]). The stacking lemma says S(gamma★beta)=S(beta)*S(gamma) in loop classes. Therefore inversion makes Phi([gamma★beta])=(i_*[S(beta)] i_*[S(gamma)])^{-1}=Phi([gamma])Phi([beta]); the two published group laws and the open-to-closed inclusion isomorphism provide the group structure and bijectivity. Identify Q with the explicit geometric tuple rather than an arbitrary q. n=0 and n=1 use the same constructions; any new basepoint is related only after choosing a path. No presentation theorem or mapping-class theorem enters.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+        "kind": "corollary",
+        "title": "Pure geometric braids and ordered configuration loops",
+        "deps": [
+          "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "def-pure-braid-group-from-ordered-configurations",
+          "def-braid-group-from-unordered-configurations",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-endpoint-monodromy-of-a-configuration-loop",
+          "thm-configuration-braid-pure-braid-short-exact-sequence",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "lem-stacking-corresponds-to-loop-concatenation",
+          "thm-geometric-braids-form-a-group",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-kernel-and-image-of-group-homomorphism",
+          "thm-image-subgroup-and-kernel-normal",
+          "def-injection-surjection-bijection",
+          "def-group-isomorphism-and-automorphism"
+        ],
+        "dependency_level": 5,
+        "statement": "Under Phi, the subgroup of geometric classes whose endpoint permutation is the identity maps isomorphically to PB_n=π_1(F_n(D²),Q), viewed as the kernel of configuration covering monodromy. On a pure braid beta the corresponding ordered loop class is the inverse of its coordinate-loop class; this inversion respects the opposite stacking/loop products.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "A pure beta has z(1)=Q, so z is an ordered based loop. Conversely, an ordered loop gives a pure traced braid. The published short exact sequence identifies precisely the image of p_* with the kernel of monodromy. For beta, i_*[S(beta)]=p_*i_*[z], hence Phi(beta)=p_*(i_*[z]^{-1}); injectivity of p_* makes the ordered inverse class unique. For a nonpure beta the lifted endpoint differs from Q and its monodromy is nonidentity, so its Phi-image cannot lie in p_*(PB_n). Check the n=0,1 trivial cases.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-geometric-endpoint-permutation-equals-covering-monodromy",
+        "kind": "proposition",
+        "title": "The geometric endpoint permutation matches covering monodromy",
+        "deps": [
+          "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "def-endpoint-monodromy-of-a-configuration-loop",
+          "def-geometric-braid-with-setwise-endpoints",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "thm-geometric-braids-form-a-group",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-motion-of-an-unordered-point-configuration"
+        ],
+        "dependency_level": 5,
+        "statement": "At the fixed geometric base tuple Q, write iotaC_* for the inclusion-induced map from the open-disc loop group to B_n^conf. For every geometric braid class [beta], pi_conf(iotaC_*[S(beta)])=pi_geo([beta])^{-1}, and pi_conf(Phi([beta]))=pi_geo([beta]).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "The coordinate path of beta is the unique ordered lift of its raw slice after the open-to-closed quotient square. Its terminal coordinate convention gives the label record e=pi_geo(beta), while endpoint monodromy is sigma=e^{-1}. Thus pi_conf(iotaC_*[S(beta)])=pi_geo(beta)^{-1}; since Phi uses the inverse loop class and pi_conf is a homomorphism, pi_conf(Phi(beta))=pi_geo(beta). State the open-to-closed inclusion explicitly so the monodromy map is applied to a class in its actual domain.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-geometric-and-configuration-braid-models-are-canonically-isomorphic",
+        "kind": "theorem",
+        "title": "The geometric and configuration braid models agree at the fixed base configuration",
+        "deps": [
+          "thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations",
+          "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "prop-geometric-endpoint-permutation-equals-covering-monodromy"
+        ],
+        "dependency_level": 6,
+        "statement": "At the explicit geometric base tuple Q, the inverse-loop slicing map is the canonical group isomorphism between geometric braid classes and B_n^conf. It carries pure geometric braids onto PB_n and intertwines geometric endpoint permutation with the covering-monodromy homomorphism. No claim of canonical identification at an unrelated basepoint or of the Artin presentation is included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juan Gonzalez-Meneses, Basic results on braid groups, §§1.1–1.3, printed pp. 3–6",
+              "url": "https://arxiv.org/pdf/1010.0321"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, §1.1, author manuscript pp. 3–5",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+            }
+          ]
+        },
+        "strategy": "Combine the group isomorphism already proved with its restriction to the pure subgroup and the commutative permutation square already proved. Spell out each of the four maps in that square and the role of the shared Q. For another basepoint use a specified path-conjugation isomorphism; the resulting map depends on that path. Record that Artin presentation injectivity belongs to the later planned completeness pair after the pure-braid tower.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 734,
+    "id": "braids-as-fundamental-groups-of-configuration-spaces-examples",
+    "kind": "B",
+    "category": "braid-groups",
+    "title": "Braids as Fundamental Groups of Configuration Spaces — Examples",
+    "companion": "braids-as-fundamental-groups-of-configuration-spaces",
+    "requires": [
+      "braids-as-fundamental-groups-of-configuration-spaces",
+      "complex-differentiability-and-cauchy-riemann"
+    ],
+    "items": [
+      {
+        "id": "ex-a-half-twist-loop-traces-the-standard-generator",
+        "kind": "example",
+        "title": "A half-circle configuration loop traces an elementary half twist",
+        "deps": [
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "lem-path-homotopy-traces-braid-isotopy",
+          "def-elementary-geometric-half-twist",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-motion-of-an-unordered-point-configuration",
+          "def-ordered-configuration-space",
+          "def-unordered-configuration-space",
+          "def-product-topology",
+          "def-subspace-topology-top",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-complex-differentiability-implies-continuity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-pi-is-the-first-positive-sine-zero"
+        ],
+        "dependency_level": 3,
+        "statement": "For n≥2 and adjacent index i, let h and m_i be the published spacing and midpoint. Move the two points by m_i±h exp(iπ(1+t)) and hold the others fixed. Their unordered orbit is a based interior loop; its trace is braid-isotopic to the published positive elementary geometric half twist σ_i.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "strategy": "Use the fixed real-complex identification and put v(t)=h exp(iπ(1+t)). It has endpoints −h,+h, is nonzero, has modulus h, and has negative imaginary part for 0<t<1. The ordered tuple with coordinates m_i±v(t) and the fixed q_k is continuous, collision-free, and stays in the published support disk U_i; its unordered orbit is therefore an interior configuration path with both endpoints [Q]. Let ρ be the published lower diamond relative path for σ_i and set w_s(t)=(1−s)ρ(t)+s v(t). Both paths have the same nonzero endpoints, and for 0<t<1 both imaginary parts are negative, so w_s(t)≠0; also |w_s(t)|≤h<3h/2. Thus m_i±w_s(t), with all other coordinates fixed, is a jointly continuous braid isotopy from σ_i to the round tuple. Applying the continuous orbit quotient to the ordered family gives a path homotopy through based interior configuration loops. The trace lemma identifies the round tuple as the trace of its orbit loop, and the path-homotopy lemma gives the asserted braid isotopy. The ordered coordinate path exchanges endpoints, but its unordered orbit is based.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-a-pure-full-twist-as-an-ordered-configuration-loop",
+        "kind": "example",
+        "title": "A pure two-strand full twist as an ordered loop",
+        "deps": [
+          "cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations",
+          "def-elementary-geometric-half-twist",
+          "prop-stacking-of-geometric-braids-is-well-defined",
+          "def-ordered-configuration-space",
+          "def-product-topology",
+          "def-subspace-topology-top",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-braid-isotopy-relative-top-and-bottom",
+          "def-unordered-configuration-space",
+          "def-motion-of-an-unordered-point-configuration",
+          "lem-a-configuration-loop-traces-a-geometric-braid",
+          "thm-geometric-braids-form-a-group",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-complex-differentiability-implies-continuity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "lem-continuity-is-local-and-pastes"
+        ],
+        "dependency_level": 6,
+        "statement": "For n=2 with Q=(-h,h), the ordered path t↦(−h,−h+2h exp(2πit)) stays collision-free in the open disk and closes at Q. Its traced geometric braid is the positive full twist [σ_1]^2 and has identity endpoint permutation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "strategy": "Set ω(t)=exp(2πit). For n=2 the published spacing is h=1/12 and Q=(-h,h). Verify |ω|=1 and ω(0)=ω(1)=1, so η(t)=(-h,-h+2hω(t)) is a based path in F₂(int D²), with coordinate difference 2hω(t) and each point of norm at most 3h<1. Let D₀(t) be the second-minus-first coordinate of σ₁★σ₁: it equals −2ρ(2t) on the lower half and 2ρ(2t−1) on the upper half. On each quarter interval D₀ and 2hω lie in the same closed quadrant and both are nonzero. Their straight interpolation D_s=(1−s)D₀+s·2hω is therefore nonzero; |D_s|≤2h. Thus (−D_s/2,D_s/2) is a based collision-free isotopy from the stacked diamond braid to the round centered pair (−hω,hω). Next let C_s(t)=s(−h+hω(t)); the pair (C_s−hω,C_s+hω) has difference 2hω≠0, endpoints Q for every s, and each coordinate has norm at most 3h<1. This isotopy ends at η. The trace lemma identifies η with the lift of its unordered orbit loop, and the pure-braid corollary gives its ordered class. The stacking proposition identifies [σ₁★σ₁]=[σ₁]², and the geometric braid has identity endpoint permutation because η(0)=η(1)=Q.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-forgetting-labels-can-close-a-nonlooping-coordinate-path",
+        "kind": "counterexample",
+        "title": "An exchange closes only after forgetting labels",
+        "deps": [
+          "def-unordered-configuration-space",
+          "def-ordered-configuration-space",
+          "def-elementary-geometric-half-twist",
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-based-loops-and-fundamental-group"
+        ],
+        "dependency_level": 2,
+        "statement": "For n=2, the ordered coordinate path of the elementary half twist starts at Q=(q_1,q_2) and ends at (q_2,q_1)≠Q, so it is not a based loop in F_2(int D²); its projection is a based loop in C_2(int D²).",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "strategy": "Use the explicit positive half-twist pair from the published definition. It is continuous and collision-free, but its endpoint is the transposed tuple, which differs from Q since q_1≠q_2. The quotient identifies the two tuples because they have the same underlying set, so the projected path closes. This witnesses why labels cannot be omitted from the pure-braid test.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-a-crossing-diagram-without-height-monotonicity-does-not-define-a-configuration-loop",
+        "kind": "counterexample",
+        "title": "An embedded height-folded arc has no configuration-loop slices",
+        "deps": [
+          "lem-a-geometric-braid-slices-to-a-configuration-loop",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-unordered-configuration-space"
+        ],
+        "dependency_level": 2,
+        "statement": "An embedded two-strand arc picture with a local height maximum and minimum, with the same endpoint set Q at heights 0 and 1, need not define a two-point configuration at each intermediate height. A concrete piecewise-linear first strand meets height 1/2 three times, while the second strand is vertical, giving four slice points.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "strategy": "Set h=1/12, a=h/4, q1=(-h,0), q2=(h,0). Let P0=(q1,0), P1=(q1+(a,0),3/4), P2=(q1+(2a,a),1/4), P3=(q1,1), and take the first arc A=P0P1∪P1P2∪P2P3, with B={(q2,t):0≤t≤1}. Verify A is embedded: P0P1 lies in y=0; P1P2 and P2P3 have y>0 except at endpoints; P1P2 satisfies x+h−y=a and P2P3 satisfies x+h=2y, so those two meet only at P2; P0P1 and P2P3 cannot meet since their only possible y=0 endpoint P3 has height 1 while P0P1 has height at most 3/4. Every point of A is within √5a<3a=3h/4 of q1, so A stays in D° and misses B, whose position is 2h from q1. The endpoint sets at heights 0 and 1 are Q; A has a local height maximum at P1 and minimum at P2. At height 1/2, P0P1, P1P2, and P2P3 contribute respectively (−h+2a/3,0), (−h+3a/2,a/2), and (−h+4a/3,2a/3); these are distinct and all differ from q2, so the slice has four points. Since each element of C2(D°) is a two-point configuration, this is not a value in C2 and no slicing path exists. The failure is precisely the missing one-point-per-height condition for a strand; no Choice is used.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

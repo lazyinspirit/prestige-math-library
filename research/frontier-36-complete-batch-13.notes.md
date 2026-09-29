@@ -1,0 +1,75 @@
+# Frontier 36 complete — batch 13 Step-1 scaffold
+
+## Scope, current authority and inventory
+
+This batch owns only the A/B pair `fourier-multipliers-and-sobolev-characterisations` at order 458.02601 and `fourier-multipliers-and-sobolev-characterisations-examples` at 458.02602. I read `CLAUDE.md`, `README.md`, `SCHEMA.md`, `WORKFLOW.md`, the assigned dispatch, the complete FR-6 design in `research/plan-fourier-analysis-track.md` at lines 607–654, current `research/plan-spec.json`, the batch evidence and the owner authoring direction before constructing. The seven A-page `requires` edges and the B-to-A edge agree between the current plan and FR-6 design; no plan/design page-scope conflict was found. The current plan retains empty canonical item arrays until Step 4.
+
+The owner direction and current plan changed during this dispatch. The direction now selects **30** pairs, including PDE-11 `weak-derivatives-and-sobolev-spaces` in batch 30 at order 458.019, and adds PDE-11 to the batch-12 Bessel A-page prerequisites. Its previous 29-pair wording is superseded on disk. I did not edit either shared file. The binding direction says batch 30 supplies the weak-derivative, $W^{k,p}$ and $H^k=W^{k,2}$ interfaces and forbids reliance on unbuilt wave-energy results. At this note's check, batch 30 has empty A and B inventories, no authored page and no published item; batch 12 remains scaffold-only, and its prior ready hashes are stale after the new page edge. A later item-level dependency and readiness reconciliation is therefore necessary.
+
+The FR-6 design's B remark `rem-jump-multipliers-can-be-bounded-outside-mihlin` says the unshifted signum symbol fails Mihlin smoothness. That is **false under the design's own definition**, which only differentiates away from the origin: signum is constant on each component of $\mathbb R\setminus\{0\}$ and satisfies its one-dimensional $q=1$ bound. The scaffold preserves the intended bounded-jump-outside-Mihlin lesson with $m(\xi)=\operatorname{sgn}(\xi-1)$, whose jump is at a nonzero frequency. Its strict-range $L^p$ bound is recorded as a later Hilbert-transform consequence and is not used here. Grafakos §2.5.5 gives frequency-translation invariance; Williams §§3.1 and 3.9 give the signum and Mihlin context. This is a mathematical correction to stale design text, not a current-plan conflict. Grafakos §6.1.4 in the design is not used as the Fefferman locator; the primary Fefferman Theorem 1 is cited directly.
+
+The owned manifest has the FR-6 inventory: 12 A items and 5 B leaves, each with explicit `deps`, a computed `dependency_level`, source references, provenance and a specific strategy. Levels range from 0 to 7; 17/17 owned labels match an independent whole-run recomputation. The two recorded B remarks are `proved_here:false` with external-dependency records. No B item is a dependency target. No item asserts an $L^p$ Mihlin theorem, a $p>2$ Hausdorff–Young inequality, or an isometry for $(I-\Delta)^{t/2}$ under the bracket-weighted norm.
+
+## Mathematical route and prerequisite states
+
+The local convention is complex $L^p$ and $\mathcal S'(\mathbb R^n)$, $n\ge1$, with $\widehat{\partial_j u}=2\pi i\xi_j\widehat u$, unitary Plancherel, first-variable-linear Hilbert inner product, and bilinear distribution/test pairing. Fourier multipliers first have an explicit Schwartz domain on which the measurable product is a regular tempered distribution. $L^2$ multiplication has operator norm the **essential** supremum by frequency superlevel tests; the $L^p$ definition uses the dense Schwartz core only for finite $p$, with the $p=\infty$ uniqueness caveat. Periodic and Euclidean Hausdorff–Young each use the published complex endpoint interpolation corollary between $L^1\to L^\infty$ and $L^2\to L^2$ (or $\ell^2$), with normalized Haar on $\mathbb T$ and exact unitary constants on $\mathbb R^n$.
+
+The batch-12 weighted completion and distribution theorem identifies real-order $H^s$ without assuming its elements are functions. The bracket symbol is $\langle\xi\rangle^t$; $(I-\Delta)^{t/2}$ has $(1+4\pi^2|\xi|^2)^{t/2}$. The former shifts order isometrically, while the latter gives only equivalent norms. The shift item also absorbs Dyatlov's order inclusion and derivative mapping, with the $2\pi$ derivative constant. The duality item uses the surjective weighted $L^2$ maps and the published Riesz theorem with an explicit conjugate-linear functional convention. The Dirac example reduces to $\int(1+|\xi|^2)^s<\infty$ and applies the published polar-coordinate theorem, yielding the strict endpoint $s<-n/2$. The heat/Poisson example defines the operators by bounded $L^2$ symbols, so no undeclared spectral-calculus construction is assumed.
+
+I examined the load-bearing published statements and proofs for Plancherel, torus Parseval, $L^1$ Fourier bounds and $L^1/L^2$ agreement, complex endpoint interpolation and smooth density, tempered Fourier inversion and differentiation, regular $L^p$ distributions, smooth polynomial-growth multipliers, polar integration and Hilbert Riesz representation. Their conventions and Countable Choice hypotheses match these uses. The batch-12 scaffold strategies for bracket multiplication, surjective weighted $L^2$ embedding, completeness and weighted-distribution characterization were inspected. Their original Step-1 records said ready, but the newly added PDE-11 page edge has made those records stale; they are **not currently authored or published**. The currently declared direct out-of-run item suppliers are all on disk with `status: published`; no defective used published clause was confirmed, so there is no published-consumer defect to report from this batch. This examination is not a whole published-closure audit.
+
+No full Axiom of Choice use is introduced locally. Countable Choice is declared on items consuming the published Plancherel, distributional Fourier, $L^p$ density/completeness, Riesz or polar-coordinate interfaces, and `def-countable-choice` is a dependency. The purely punctured-space Mihlin symbol definition needs no choice. The two external recorded results do not assert optimal choice strength. No Recorded result supplies a proof, and this non-Foundations page creates no path to `deferred-set-theory-beyond-choice`.
+
+## Exact PDE-11 hold and dependency chain
+
+`thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces` was recorded **escalated before batch 30 appeared**. Its analytic comparison is complete as a strategy: Plancherel converts weak derivatives to $(2\pi i\xi)^\alpha\widehat u$, a finite multinomial comparison gives the two-sided weight bounds, and batch 12 supplies the weighted $H^k$ distribution characterization. But the named $W^{k,2}$ interface, representative independence, uniqueness and definite derivative-sum norm are not yet built. Their planned PDE-11 IDs are `def-sobolev-space-wkp-and-its-norm`, `lem-weak-derivative-is-independent-of-lp-representatives`, `lem-weak-derivatives-are-unique-almost-everywhere`, and `lem-sobolev-norm-is-well-defined-and-definite`; `def-weak-derivative-of-a-locally-integrable-function` and `def-hk-and-hk-zero-notation` fix the surrounding conventions. The proof chain is FR-6 integer theorem $\to$ those PDE-11 items and batch-12 weighted-distribution theorem $\to$ published Fourier differentiation and Plancherel. The missing PDE-11 IDs are named in the escalation reason, not falsely declared as extant manifest dependencies. The owner must reconcile the escalation and exact item edges after the batch-30 scaffold and proof exist; the explicit instruction forbids this scaffolder from overwriting an escalation.
+
+The added prerequisite pair is now selected by the owner, **not added by this batch**: PDE-11 A at 458.019, B at 458.02, both before PDE-14F at 458.026001 and FR-6 at 458.02601. The current PDE-11 base design in `research/plan-pde-track.md` §PDE-11 gives the A inventory, in order: `def-locally-integrable-function-as-a-regular-distribution`, `def-weak-derivative-of-a-locally-integrable-function`, `lem-weak-derivative-is-independent-of-lp-representatives`, `lem-weak-derivatives-are-unique-almost-everywhere`, `lem-classical-derivatives-are-weak-derivatives`, `lem-weak-derivative-linearity-locality-and-commutation`, `lem-weak-leibniz-rule-with-a-smooth-factor`, `def-sobolev-space-wkp-and-its-norm`, `lem-sobolev-norm-is-well-defined-and-definite`, `thm-sobolev-spaces-are-banach-spaces`, `def-hk-and-hk-zero-notation`, `thm-hk-is-a-hilbert-space`, `lem-weak-stability-of-sobolev-derivatives`, `def-absolute-continuity-on-almost-every-coordinate-line`, `thm-acl-characterisation-of-w-one-p`, `cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives`, `thm-sobolev-chain-rule-for-c-one-lipschitz-compositions`, `cor-positive-negative-part-and-truncation-calculus-in-w-one-p`, and `rem-weak-derivatives-are-distributional-derivatives-with-function-values`. Its B inventory is `ex-absolute-value-has-a-weak-first-derivative`, `cex-step-function-has-no-locally-integrable-weak-derivative`, `ex-radial-power-membership-in-w-one-p`, `ex-piecewise-c-one-functions-with-matching-traces`, `cex-a-jump-across-a-hypersurface-is-not-in-w-one-p`, `cex-lp-functions-need-not-have-point-values`, and `ex-sobolev-truncations-preserve-zero-regions`. The design cites [Kinnunen, *Sobolev Spaces*, Chapters 1–2](https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf) plus two other treatments; that PDE-11 source is a **design citation, not a source I claim to have read in this batch**. For the FR-6 integer comparison itself I read Dyatlov Proposition 12.1 and Melrose Lemma 4.4. The latter chapter has a weight-sign typo in nearby prose, but its lemma proof and the local multinomial argument use the correct positive exponent.
+
+The owned cross-batch input currently has 9 reviewed/open rows: the direct A-page edges to batches 12 and 30, plus seven declared item edges to batch 12. They remain `open` because the in-run suppliers are only scaffolded or empty, and the batch-12 prior ready receipts are stale after the owner amendment. There is no direct item edge to batch 30 yet because its item inventory is still empty; adding the actual supplier IDs and revising the integer theorem's escalation is owner reconciliation work after batch 30 materializes. A read-only `frontier-dependency-ledger.collect` found 9/9 batch-13 edges represented and no orphaned review. The unified derived ledger was not edited by this worker; the dispatch allows only owned consumer-batch inputs.
+
+## Sources, checks and current result
+
+Full PDFs were retrieved and relevant passages inspected for [Grafakos, *Classical Fourier Analysis*](https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf), [Williams, *Notes on Harmonic Analysis*](https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf), [Laugesen, *Harmonic Analysis Lecture Notes*](https://arxiv.org/pdf/0903.3845), [Dyatlov, 18.155 notes](https://math.mit.edu/~dyatlov/18.155/155-notes.pdf), and [Melrose, *Differential Analysis*, Chapter 3](https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf). I also downloaded the complete scanned [Fefferman paper](https://www.dm.uba.ar/materias/optativas/analisis_armonico/2006/2/fefferman.pdf) and visually inspected Theorem 1; its deep proof is recorded rather than represented as locally reconstructed. Exact locators, 33 named harvested-result dispositions, source-specific reading limits and six fetch stamps are in the owned coverage file. No source failed retrieval, so no source-drop or owner source-resolution record applies.
+
+| Check on current disk | Actual result |
+|---|---|
+| Batch-13 coverage checklist with required destinations | Exit 0; 1 A page, 33 harvested results, 0 errors/warnings. |
+| Whole-run manifest dependencies | Exit 0; 572 items, 0 missing arrays/errors on the latest rerun (other batches are writing concurrently). |
+| Whole-run manifest-only content policy | Exit 0; 572 scoped items, 0 errors/warnings on the latest rerun (other batches are writing concurrently). |
+| Whole-run plan validator | Exit 0; 1624 pages, declared order acyclic; 379 planned pages still have no canonical item lists. Its redundant-edge notices are diagnostic. |
+| External-reference check | Exit 0; 43 warnings on published items outside the used FR-6 proof clauses. |
+| Batch-13 source fetch, URL sweep and backing | Exit 0; 6/6 full PDFs fetch-verified, 6/6 links live, 9 distinct included-result IDs have openable verified backing. |
+| Whole-run item-dependency-levels | Exit 1 on 18 empty inventories in other batches, including both batch-30 pages; 17/17 batch-13 labels are exact, with no owned cycle or mismatch. |
+| Batch-13 Step-1 records | 17 records exist: 11 currently ready, 5 formerly ready but stale because batch-12's page prerequisite changed, and 1 owner-held escalation for the integer theorem. No escalation was overwritten. |
+
+The batch is **not Step-1 closed**. Once batch 30 and the revised batch-12 supplier path are stable, the owner/operator must reconcile the integer item and its cross-batch dependencies, then refresh the five stale readiness records and run the same gates again. A readiness record is not independent mathematical approval; Step 3 must author and review the complete arguments.
+
+## Owner correction after the Beta dispatch
+
+The worker's observations above were accurate at their timestamps. The owner
+then removed the unnecessary PDE-11 edge from batch 12's Bessel page: its
+inventory contains no integer-order $W^{k,2}$ comparison. Batch 13 already
+directly requires PDE-11, and its integer-order theorem is the actual
+consumer. Batch 12's ten readiness records are current again. A later
+read-only check found three open batch-13 records: the integer comparison
+escalation and two downstream stale receipts. Reconcile these after batch 30
+has a stable scaffold; do not infer that an empty batch-30 shell supplies the
+missing mathematical statements.
+
+## Owner reconciliation after batch 30 exited
+
+Batch 30 finished at 2026-09-27 11:39 UTC with 19 A and seven B items and
+26 current Step-1 ready records. The integer-order Fourier/Sobolev theorem
+now directly declares the four PDE-11 item dependencies it previously named
+only in prose: `def-sobolev-space-wkp-and-its-norm`,
+`lem-weak-derivative-is-independent-of-lp-representatives`,
+`lem-weak-derivatives-are-unique-almost-everywhere`, and
+`lem-sobolev-norm-is-well-defined-and-definite`. Its strategy uses their
+equivalence-class interface and the already declared batch-12 weighted
+distribution characterization. The consumer-batch dependency input now has
+four matching open item rows and an updated PDE-11 page row; the unified
+ledger was refreshed. All item dependency levels remain correct. The owner
+recorded the repaired theorem and two stale downstream receipts as ready
+against the stable manifests; all 17 batch-13 records are current. Step 3 will still independently audit the
+source proofs before authoring this theorem.

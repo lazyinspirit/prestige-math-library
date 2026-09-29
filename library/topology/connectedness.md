@@ -2,19 +2,7 @@
 page: connectedness
 title: "Connectedness"
 status: published
-items: [def-order-topology-on-a-linearly-ordered-set, def-connected-space,
-        thm-connectedness-characterisations, lem-connected-subsets-and-separated-sets,
-        cor-connected-subsets-of-the-line, thm-continuous-image-of-a-connected-space,
-        cor-intermediate-value-theorem-topological, thm-unions-of-connected-sets,
-        thm-closure-of-a-connected-set, thm-product-of-connected-spaces,
-        def-connected-component-and-quasicomponent, thm-components-partition-and-are-closed,
-        thm-quasicomponents-contain-components, def-path-connected, def-locally-connected,
-        thm-locally-connected-iff-components-of-open-sets-are-open,
-        thm-path-connected-implies-connected,
-        thm-connected-and-locally-path-connected-implies-path-connected,
-        thm-a-linear-continuum-is-connected, def-the-long-line,
-        thm-the-long-line-is-a-connected-linear-continuum, lem-the-oscillating-zigzag-curve,
-        rem-connectedness-conventions]
+items: [def-order-topology-on-a-linearly-ordered-set, def-connected-space, thm-connectedness-characterisations, lem-connected-subsets-and-separated-sets, cor-connected-subsets-of-the-line, thm-continuous-image-of-a-connected-space, cor-intermediate-value-theorem-topological, thm-unions-of-connected-sets, thm-closure-of-a-connected-set, thm-product-of-connected-spaces, def-connected-component-and-quasicomponent, thm-components-partition-and-are-closed, thm-quasicomponents-contain-components, def-path-connected, def-locally-connected, thm-locally-connected-iff-components-of-open-sets-are-open, thm-path-connected-implies-connected, thm-connected-and-locally-path-connected-implies-path-connected, thm-a-linear-continuum-is-connected, def-the-long-line, thm-the-long-line-is-a-connected-linear-continuum, lem-the-oscillating-zigzag-curve, rem-connectedness-conventions, ex-convex-subsets-of-rn-are-path-connected]
 examples: [fs-a-connected-space-is-path-connected,
            fs-the-closure-of-a-path-connected-set-is-path-connected,
            fs-a-connected-space-is-locally-connected,

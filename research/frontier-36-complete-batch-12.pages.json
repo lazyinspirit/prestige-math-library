@@ -1,0 +1,371 @@
+[
+  {
+    "order": 458.026001,
+    "id": "bessel-potential-completions-and-real-order-sobolev-spaces",
+    "kind": "A",
+    "category": "pde",
+    "title": "Bessel-Potential Completions and Real-Order Sobolev Spaces",
+    "companion": "bessel-potential-completions-and-real-order-sobolev-spaces-examples",
+    "requires": [
+      "normed-and-banach-spaces",
+      "schwartz-space-and-the-plancherel-theorem",
+      "tempered-distributions-and-the-fourier-transform",
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "lem-japanese-bracket-powers-preserve-schwartz-space",
+        "kind": "lemma",
+        "title": "Real powers of the Japanese bracket act on Schwartz space",
+        "statement": "For n>=1 and every real s, w_s(xi)=(1+|xi|^2)^(s/2) and w_{-s} are smooth multipliers that act continuously on S(R^n). Their multiplication maps are mutually inverse; by transposition they also act continuously and invertibly on tempered distributions.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space"
+        ],
+        "dependency_level": 0,
+        "strategy": "For each multi-index alpha, induct on |alpha| using the chain and product rules to express partial^alpha w_s as a finite sum P_{alpha,j}(xi)(1+|xi|^2)^{s/2-j}, where every P has degree at most |alpha|. Since |P(xi)| is bounded by C<xi>^{|alpha|}, every derivative is bounded by C<xi>^{max(0,s+|alpha|)}; repeat with -s. The published smooth-polynomial-multiplier lemma, whose proof gives finite Schwartz seminorm bounds, applies to each weight and its reciprocal. Their pointwise product is one, so the two continuous Schwartz maps and their transposes on S' are inverse. No choice axiom is used in this local calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Exercise 11.3, printed p. 135; multiplier conclusion is an exercise, while bracket derivative bounds are proved locally"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Proposition 4.8 proof, printed p. 69, uses <xi>^{-m}S=S"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+        "kind": "definition",
+        "title": "Weighted Fourier candidate norm on Schwartz space",
+        "statement": "Assume Countable Choice. For n>=1, s real and u,v in S(R^n), put (u,v)_{H^s}=integral_Rn <xi>^{2s} uhat(xi) conjugate(vhat(xi)) dxi and ||u||_{H^s}=||<xi>^s uhat||_2. The integral is finite and first-variable-linear. This is initially a candidate pre-Hilbert norm; its positive definiteness is the next lemma. With the repository transform F(partial_j u)=2pi i xi_j F(u), no equality with a derivative-sum or (I-Delta)^{k/2} norm at integer k is asserted here.",
+        "deps": [
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "The published Schwartz Fourier automorphism sends each u to a Schwartz function. The bracket lemma sends its transform to another Schwartz function, and the published Schwartz-L2 lemma makes it an L2 class. Use the published complex L2 inner product, linear in the first variable, to define the displayed form and apply Cauchy-Schwarz to prove finiteness. The square root is nonnegative; defer definiteness to the following lemma. Countable Choice is stated because the Fourier, Schwartz-L2 and complex L2 interfaces require it; no arbitrary-index choice is introduced.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2, Definition 12.3 and formula (12.5), printed p. 140"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Section 4, formulas (4.14) and (4.17), printed pp. 68-69; Fourier normalization converted"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bessel-potential-norm-is-positive-definite",
+        "kind": "lemma",
+        "title": "The weighted Fourier seminorm separates Schwartz functions",
+        "statement": "Assume Countable Choice. For every n>=1, real s and u in S(R^n), ||u||_{H^s}=0 implies u=0 as an actual smooth function. Consequently the preceding weighted Fourier form is a pre-Hilbert inner product and its induced norm is the displayed H^s norm.",
+        "deps": [
+          "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "thm-plancherel",
+          "def-schwartz-space-and-its-seminorms",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "The weight <xi>^s is strictly positive at every frequency. A zero weighted L2 norm therefore makes uhat zero almost everywhere. The published unitary Plancherel theorem sends u to zero in L2. Since a continuous Schwartz function that vanishes almost everywhere is pointwise zero (any nonzero value persists on a positive-measure ball), u is zero as a Schwartz function. The pre-Hilbert axioms then follow from the transported complex L2 form in the definition; Countable Choice is only that of the published Fourier and L2 interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2, Hilbert norm formula (12.5), printed p. 140"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Proposition 4.8 norm and inner product, printed p. 69"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo",
+        "kind": "lemma",
+        "title": "Weighted Fourier transforms of Schwartz functions are dense in L2",
+        "statement": "Assume Countable Choice. For every n>=1 and real s, the set {<xi>^s F(u)(xi): u in S(R^n)} is dense in complex L2(R^n). In fact it contains every C_c^∞ frequency function.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Given h in complex C_c-infinity of the frequency variable, first regard it as Schwartz. The reciprocal bracket multiplier makes q=<xi>^{-s}h Schwartz. The inverse Schwartz Fourier automorphism gives u=F^{-1}q in Schwartz, and then <xi>^s F(u)=h pointwise. The published complex smooth-density theorem says C_c-infinity is dense in L2 under Countable Choice, so the weighted images are dense. This proves density, not merely a formal weighted map; no later Fourier-multiplier page is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2 property (4), printed pp. 140-141"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Proposition 4.8 density proof, printed p. 69"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-real-order-bessel-potential-sobolev-space",
+        "kind": "definition",
+        "title": "Real-order Bessel-potential completion H^s",
+        "statement": "Assume Countable Choice. For n>=1 and s real, H^s(R^n) is the normed-space completion of S(R^n) equipped with the positive-definite weighted Fourier norm ||u||_{H^s}=||<xi>^s uhat||_2. A point is a class of norm-Cauchy Schwartz sequences under the zero-distance relation, with the canonical dense linear isometry from Schwartz space. No identification with a subset of tempered distributions is implicit in this definition.",
+        "deps": [
+          "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "lem-bessel-potential-norm-is-positive-definite",
+          "def-completion-of-a-normed-space",
+          "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "The positivity lemma makes Schwartz space a normed space. Apply the published Cauchy-class metric completion and compatible Banach-structure theorem, which gives the canonical dense linear isometry and independence of Cauchy representatives. State Countable Choice because the published completion theorem uses it to select approximants when proving completeness; there is no appeal to full AC. Keep H^s abstract until the later embedding theorem constructs and proves the map into S'.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2, Definition 12.3 and property (4), printed pp. 140-141; completion presentation is the local construction"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Section 4, equation (4.14) and Proposition 4.8, printed pp. 68-69; completion presentation is the local construction"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bessel-potential-completions-embed-in-tempered-distributions",
+        "kind": "theorem",
+        "title": "The Bessel completion embeds canonically in tempered distributions",
+        "statement": "Assume Countable Choice. For every n>=1 and real s, weighted Fourier transformation extends from Schwartz space to a surjective linear isometry J_s:H^s(R^n)->L2(R^n), J_s([u_j])=lim_j <xi>^s F(u_j) in L2. If g=J_s([u_j]), then E_s([u_j])=F^{-1}(u_{<xi>^{-s}g}) is a well-defined continuous linear injection H^s(R^n)->S'(R^n), for both weak and strong dual topologies. It sends the canonical Schwartz class to its usual regular distribution and is independent of the representing Cauchy sequence.",
+        "deps": [
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo",
+          "def-real-order-bessel-potential-sobolev-space",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "def-schwartz-space-and-its-seminorms",
+          "def-tempered-distribution",
+          "def-weak-and-strong-topologies-on-tempered-distributions",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "For a norm-Cauchy sequence u_j, the weighted transforms g_j=<xi>^s F(u_j) are Cauchy in complex L2 and converge to a unique g. Equivalent Cauchy sequences have the same g; the completion distance equals the L2 distance, so J_s is an isometry. For each g in L2, weighted-density plus Countable Choice selects Schwartz u_j with ||g_j-g||_2<1/j, proving J_s is onto. For any Schwartz test phi, define u_{<xi>^{-s}g}(phi)=integral g(xi)<xi>^{-s}phi(xi) dxi. Cauchy-Schwarz and the bracket multiplier give |pairing|<=||g||_2||<xi>^{-s}phi||_2; the latter is bounded by finitely many Schwartz seminorms, uniformly on bounded test sets. This proves temperateness and weak and strong continuity after inverse Fourier transformation. For Schwartz u, distributional Fourier compatibility identifies E_s(u) with its usual regular distribution; the same estimate proves testwise convergence E_s(u_j)->E_s([u_j]). If E_s([u_j])=0, Fourier injectivity gives u_{<xi>^{-s}g}=0; multiplication by <xi>^s gives u_g=0. Approximate conjugate(g) in L2 by Schwartz tests and pass to the pairing to obtain ||g||_2^2=0; hence g=0 and the completion class is zero. This proves independence, well-definedness and injectivity without an unproved L2-to-S' assertion.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2, Definition 12.3 and properties (1),(4), printed pp. 140-141; completion-class bridge is proved locally"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Section 4, equation (4.14) and Proposition 4.8 proof, printed pp. 68-69; completion-class bridge is proved locally"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-bessel-potential-spaces-are-hilbert-and-complete",
+        "kind": "corollary",
+        "title": "Every real-order Bessel-potential completion is Hilbert",
+        "statement": "Assume Countable Choice. For every n>=1 and s real, H^s(R^n) is a complex Hilbert space with first-variable-linear inner product (U,V)_{H^s}=integral_Rn (J_sU)(xi) conjugate((J_sV)(xi)) dxi. Its induced norm is exactly the defining completion norm, and it is complete.",
+        "deps": [
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "def-real-order-bessel-potential-sobolev-space",
+          "def-hilbert-space",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the preceding surjective linear isometry J_s onto complex L2. Pull back the published first-variable-linear L2 inner product. Positivity and sesquilinearity follow there, and ||J_sU||_2 is the completion norm by the isometry. Every Cauchy sequence in H^s has a J_s image converging in complete L2; surjectivity supplies a preimage for the limit, and isometry gives convergence in H^s. The Countable Choice assumption is inherited from the completion and complex L2 supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2 property (1), printed p. 140"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Proposition 4.8 and proof, printed p. 69"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation",
+        "kind": "theorem",
+        "title": "Weighted tempered-distribution characterization of H^s",
+        "statement": "Assume Countable Choice. Under the canonical embedding E_s, H^s(R^n) is exactly {u in S'(R^n): <xi>^s F(u) is the regular tempered distribution of some g in L2(R^n)}. The L2 class g is unique and ||u||_{H^s}=||g||_2. The product <xi>^s F(u) means multiplication of a tempered distribution by the smooth Japanese-bracket multiplier, not an a priori pointwise product.",
+        "deps": [
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "thm-polynomial-growth-functions-define-tempered-distributions",
+          "def-tempered-distribution",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "For U in the completion let g=J_sU. The embedding theorem gives F(E_sU)=u_{<xi>^{-s}g}; the bracket lemma licenses multiplication by <xi>^s on S', and the reciprocal identity gives <xi>^s F(E_sU)=u_g. Conversely, given u in S' and an L2 class g representing <xi>^s F(u), multiply the equality by <xi>^{-s} on S' to obtain F(u)=u_{<xi>^{-s}g}. Surjectivity of J_s provides U with J_sU=g; Fourier injectivity then gives E_sU=u. The embedding theorem also proves that g is unique as an L2 class and that its L2 norm equals the completion norm. The published regular-L2-to-tempered interface confirms that the stated criterion is well-defined; no forward Sobolev characterization is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2, Definition 12.3 and formulas (12.4)-(12.5), printed p. 140"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Section 4, equation (4.14) and Proposition 4.8, printed pp. 68-69"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 458.026002,
+    "id": "bessel-potential-completions-and-real-order-sobolev-spaces-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Bessel-Potential Completions and Real-Order Sobolev Spaces — Examples",
+    "companion": "bessel-potential-completions-and-real-order-sobolev-spaces",
+    "requires": [
+      "bessel-potential-completions-and-real-order-sobolev-spaces"
+    ],
+    "items": [
+      {
+        "id": "ex-zero-order-bessel-completion-is-ltwo",
+        "kind": "example",
+        "title": "The zero-order Bessel completion is exactly L2",
+        "statement": "Assume Countable Choice and the negative-sign 2pi Fourier convention. At s=0, I0=F_2^{-1} composed with the canonical weighted Fourier isometry J0 is a surjective isometry H^0(R^n)->complex L2(R^n), agrees with the identity on canonical Schwartz classes, and the canonical distribution embedding satisfies E0(U)=u_{I0U}. Thus E0(H^0) is exactly the regular distributions of complex L2 classes, ||U||_{H^0}=||I0U||_2, and q0(u)=||u||_2 on Schwartz functions, with normalization factor one.",
+        "deps": [
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-plancherel",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "At s=0 the multiplier is one, so on Schwartz functions the defining norm is ||F(u)||_2=||u||_2 by the published unitary 2pi Plancherel theorem. Schwartz is dense in L2, hence both completions identify with L2. More explicitly, given f in L2 set g=F_2f; surjectivity of J_0 gives U with J_0U=g, and published distributional Fourier agreement gives E_0U=F^{-1}u_g=u_f. Injectivity is the previous theorem. Thus the identification is canonical on original Schwartz functions, surjective on L2 classes and norm-preserving with factor exactly one. The nonunitary source normalizations are not copied.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2 property (3), printed p. 140; Fourier normalization converted"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Section 4, H^0=L2 after (4.8) and Proposition 4.8, printed pp. 66,69; Fourier normalization converted"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-schwartz-functions-in-every-bessel-potential-completion",
+        "kind": "example",
+        "title": "Every Schwartz function belongs to every real-order H^s",
+        "statement": "Assume Countable Choice. For n>=1, each actual Schwartz function u represents, through the canonical embedding, an element of H^s(R^n) for every real s, with finite norm ||u||_{H^s}=||<xi>^s uhat||_2. This asserts the inclusion S(R^n) subset H^s(R^n) for each s, without claiming the intersection over all s equals S.",
+        "deps": [
+          "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Fix an arbitrary u in Schwartz and a real s. The published Fourier automorphism makes uhat Schwartz; the bracket lemma makes <xi>^s uhat Schwartz; the published Schwartz-L2 inclusion gives the displayed norm finite. The constant Cauchy sequence of u is therefore a class in the completion, and the embedding theorem proves that this class maps back to the regular distribution of the same u. Equivalently, choose an integer N>s+n/2 and use Schwartz decay |uhat(xi)|<=C_N(1+|xi|)^{-N} to check integrability directly. The argument works separately for every s and does not use an integer-order derivative theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dyatlov, Lecture Notes for 18.155 (current revision)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Section 12.1.2 property (4), printed pp. 140-141"
+            },
+            {
+              "title": "Melrose, Differential Analysis, Chapter 3",
+              "url": "https://math.mit.edu/~rbm/18-155-F17/Chapter3.pdf",
+              "locator": "Proposition 4.8, Schwartz inclusion and density, printed p. 69"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -7,15 +7,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum, thm-perron-envelope-is-harmonic]
+deps: [cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
+  audited: 2026-09-27
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:
@@ -33,14 +29,12 @@ every boundary point.
 
 **Given:** The universal claim in the Statement refuted.
 
-[L1] On any bounded domain, the regularized Perron envelope is harmonic in the interior ([[thm-perron-envelope-is-harmonic]]).
-
-[L2] On the punctured disc, the boundary datum $0$ on $|z|=1$ and $1$ at the puncture has no harmonic solution ([[cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum]]).
+[L1] For the punctured-disc datum $0$ on $|z|=1$ and $1$ at the puncture, the annulus comparison in the published counterexample proves directly that every Perron lower function is at most $0$ and the constant $0$ belongs to the lower family ([[cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 Let $H$ be the regularized Perron envelope for the punctured-disc datum from [L2]. By [L1], $H$ is harmonic on the punctured disc. [L1, L2]
+1.1 By [L1], the Perron envelope and its upper-semicontinuous regularization for this datum are identically $0$. [L1]
 
-2.1 If the universal claim were true, then $H$ would also attain the prescribed boundary values at the puncture and on the outer circle, so it would be a harmonic solution of exactly the boundary-value problem ruled out in [L2]. Therefore the claim is false. [L2, step 1.1] ∎
+2.1 Their limit at the puncture is therefore $0$, while the prescribed value there is $1$. This single bounded-domain datum refutes the universal boundary-attainment claim. [step 1.1, given] ∎

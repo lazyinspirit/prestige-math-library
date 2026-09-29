@@ -1,0 +1,105 @@
+---
+id: thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis
+kind: theorem
+title: "Indecomposable projective classes form a basis of split K0"
+status: draft
+origin: pipeline
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps:
+  - def-split-grothendieck-group-of-an-additive-category
+  - def-simple-module
+  - def-projective-module
+  - def-essential-epimorphism-and-projective-cover
+  - thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras
+  - lem-graded-fitting-decomposition-preserves-homogeneous-summands
+  - thm-krull-schmidt-for-finite-dimensional-kg-modules
+justified_by: []
+forward_refs: []
+aliases: []
+landmark: false
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-sol"
+    verdict: pass
+    date: 2026-09-29
+sources:
+  scraped: []
+  references:
+    - title: "Charles Weibel, The K-book, Chapter II, §§1–2 and 5–6"
+      url: "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+pipeline_run: frontier-36-complete
+---
+
+## Statement
+
+Let $A$ be a finite-dimensional unital algebra over a field $k$. Write
+$S_1,\ldots,S_t$ for representatives of the isomorphism classes of simple
+left $A$-modules, and choose a finite-dimensional projective cover
+$q_i\colon P_i\twoheadrightarrow S_i$ for each $i$. Then the split
+Grothendieck group of finite-dimensional projective left $A$-modules
+([[def-split-grothendieck-group-of-an-additive-category]]) is the free abelian
+group with basis $[P_1],\ldots,[P_t]$. In particular, each selected cover is
+indecomposable, the $P_i$ are pairwise nonisomorphic, and every finite
+dimensional projective is a finite direct sum of them. This result makes no
+claim that the Cartan map to the short-exact-sequence group $G_0(A)$ is
+invertible.
+
+## Facts & Assumptions
+
+**Given:** A finite-dimensional unital $k$-algebra $A$ over a field $k$; all
+modules considered are unital left modules. A projective cover is an ordinary
+module cover, so its kernel is superfluous among all submodules. The local
+Fitting input below is applied only after giving $A$ and the relevant module
+the trivial grading. Only finitely many simple classes and finitely many
+covers are selected; no axiom of choice is used.
+
+[F1] The split Grothendieck group is defined using direct-sum relations only;
+for finite-dimensional algebras, $K_0(A)$ denotes this group on
+finite-dimensional projective left modules
+([[def-split-grothendieck-group-of-an-additive-category]]).
+
+[F2] Every finite-dimensional left $A$-module has a projective cover, and any
+two projective covers of the same target are isomorphic over that target
+([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
+
+[F3] A projective cover is a surjection with superfluous kernel; thus
+$N+\ker q=P$ implies $N=P$ ([[def-essential-epimorphism-and-projective-cover]]).
+
+[F4] A projective module lifts maps through surjective module homomorphisms
+([[def-projective-module]]).
+
+[F5] A simple module is nonzero and has no proper nonzero submodule
+([[def-simple-module]]).
+
+[F6] Every finite-dimensional module decomposes as a finite direct sum of
+indecomposables, uniquely up to isomorphism and permutation
+([[thm-krull-schmidt-for-finite-dimensional-kg-modules]]).
+
+[F7] For a nonzero finite-dimensional graded-indecomposable module over a
+finite-dimensional graded algebra, every degree-zero endomorphism is
+invertible or nilpotent ([[lem-graded-fitting-decomposition-preserves-homogeneous-summands]]).
+
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 By induction on dimension, the regular left module $A$ has a finite composition series $0=A_0\subsetneq A_1\subsetneq\cdots\subsetneq A_n=A$: for a nonzero finite-dimensional module, choose a proper submodule of maximal dimension and continue with it. For any simple left module $S$, choose $0\ne s\in S$; the map $A\to S$, $a\mapsto as$, is nonzero and hence surjective. If $j$ is the least index with the image of $A_j$ nonzero, then $A_{j-1}$ maps to zero and $A_j$ maps onto $S$. Thus the induced map $A_j/A_{j-1}\to S$ is an isomorphism of simple modules. Consequently every simple is finite-dimensional and every simple isomorphism class occurs among the finitely many factors of this fixed series. [F5, given, choose, construct, algebra]
+
+1.2 Let $P\ne0$ be a finite-dimensional indecomposable projective. Among its proper submodules choose one, $K$, of maximal $k$-dimension; such a submodule exists because $0<P$ and the possible dimensions are finite. Then $P/K$ is nonzero and has no proper nonzero submodule, so it is simple by [F5]. Let $p\colon P\twoheadrightarrow P/K$ be the quotient map. [F5, given, choose, algebra]
+
+2.1 Let $S_1,\ldots,S_t$ represent those finitely many isomorphism classes. For each $S_i$, choose a projective cover $q_i\colon Q_i\twoheadrightarrow S_i$ using [F2]. These sources are finite-dimensional: choose a finite $k$-basis of $S_i$ and lift its vectors to $Q_i$. The submodule $Q_i^0$ generated by those lifts is finite-dimensional, since it is an image of a finite direct sum of copies of $A$, and $q_i(Q_i^0)=S_i$. Hence $Q_i=Q_i^0+\ker q_i$; [F3] gives $Q_i=Q_i^0$. [F2, F3, step 1.1, choose, construct, algebra]
+
+3.1 Fix $i$ and write $K_i=\ker q_i$. If $Q_i=U\oplus V$ with both summands nonzero, at least one of $q_i(U)$ or $q_i(V)$ is nonzero; by simplicity of $S_i$, that image is all of $S_i$. Say it is $q_i(U)$. Then $U+K_i=Q_i$, so superfluity of $K_i$ forces $U=Q_i$, contradicting $V\ne0$. Thus each $Q_i$ is indecomposable. [F3, F5, step 2.1, algebra, cases]
+
+4.1 Suppose $p\colon Q\twoheadrightarrow S$ and $r\colon Q\twoheadrightarrow T$ are surjections to simple modules, with superfluous kernels $K$ and $L$. If $r(K)\ne0$, simplicity gives $r(K)=T$; then for each $x\in Q$ some $y\in K$ has $r(y)=r(x)$, whence $x-y\in L$ and $K+L=Q$. Superfluity of $L$ would give $K=Q$, impossible since $p$ is surjective onto the nonzero module $S$. Therefore $K\subseteq L$; interchanging $p$ and $r$ gives $L\subseteq K$. The equal kernels identify $S\cong Q/K\cong T$. In particular, the $Q_i$ are pairwise nonisomorphic: transporting a cover map across any proposed isomorphism would give two such simple quotients of one source. [F3, F5, step 3.1, algebra]
+
+5.1 Suppose $N\le P$ and $N+K=P$. Then $p|_N\colon N\twoheadrightarrow P/K$ is surjective. By projectivity [F4], it lifts $p$ to a map $h\colon P\to N$; after inclusion into $P$, this gives $f\in\operatorname{End}_A(P)$ with $pf=p$, hence $pf^m=p$ for every $m\ge1$. Regard $A$ and $P$ as concentrated in degree zero. Every submodule of $P$ is then graded, so its ordinary indecomposability makes it graded-indecomposable, and $f$ is degree-zero. By [F7], $f$ is invertible or nilpotent. Nilpotence is impossible because $p\ne0$ and $pf^m=p$ for every $m$; therefore $f$ is invertible. Since $f(P)\subseteq N$, this forces $N=P$. Thus $K$ is superfluous and $p$ is a projective cover by [F3]. If $P/K\cong S_i$, compose $p$ with such an isomorphism; uniqueness in [F2] identifies $P$ with $Q_i$ over $S_i$. Therefore every nonzero indecomposable finite-dimensional projective is isomorphic to exactly one $Q_i$. [F2, F3, F4, F7, step 1.2, step 4.1, construct, algebra]
+
+6.1 By [F6], any finite-dimensional projective $Q$ is a finite direct sum of indecomposable modules. Each summand remains projective: precompose a map from the summand with the projection from $Q$, lift through the given surjection using projectivity of $Q$, and restrict the lift to the summand. Each summand is finite-dimensional, so step 5.1 identifies it with one of the $Q_i$. Step 4.1 makes those types distinct, and uniqueness in [F6] makes the multiplicities $m_i(Q)$ uniquely determined. The zero projective has the empty sum. [F4, F6, step 4.1, step 5.1, algebra]
+
+7.1 Let $\mathbb Z^{(t)}$ be the free abelian group with basis $e_1,\ldots,e_t$, and define $\Phi(e_i)=[Q_i]$. Step 6.1 makes $\Phi$ surjective. Send the free generator of the split group for each isomorphism class $[Q]$ to $\sum_i m_i(Q)e_i$; uniqueness and additivity of the multiplicities under direct sum, from [F6], make this assignment respect each relation $[Q\oplus R]=[Q]+[R]$ from [F1]. It therefore descends to a map $\Psi\colon K_0^{\mathrm{split}}(\operatorname{proj}A)\to\mathbb Z^{(t)}$. The two maps are inverse: $\Psi\Phi(e_i)=e_i$, and the decomposition in step 6.1 plus [F1] gives $\Phi\Psi([Q])=[Q]$ for every generator. Hence the classes $[Q_i]$ form a free abelian basis. No step asserts that the Cartan map to $G_0(A)$ is invertible. [F1, F6, step 6.1, construct, algebra] ∎

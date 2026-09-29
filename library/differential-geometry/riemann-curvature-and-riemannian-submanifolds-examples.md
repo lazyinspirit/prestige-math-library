@@ -3,7 +3,7 @@ page: riemann-curvature-and-riemannian-submanifolds-examples
 title: Riemann Curvature and Riemannian Submanifolds — Examples
 status: published
 items: []
-examples: ["ex-euclidean-space-has-zero-curvature","ex-the-round-sphere-has-positive-constant-sectional-curvature","ex-hyperbolic-space-has-negative-constant-sectional-curvature","ex-curvature-of-a-riemannian-product","ex-gaussian-curvature-of-a-surface-of-revolution","ex-principal-curvatures-of-a-round-sphere","ex-the-cylinder-has-zero-gaussian-curvature-but-nonzero-second-fundamental-form","ex-the-catenoid-has-zero-mean-curvature-but-is-not-totally-geodesic","ex-a-great-sphere-is-totally-geodesic","cex-same-intrinsic-plane-with-different-extrinsic-curvature-after-bending","cex-zero-scalar-curvature-does-not-imply-flatness","ex-curvature-two-form-of-a-connection-on-a-trivial-plane-bundle"]
+examples: [ex-hyperbolic-space-has-negative-constant-sectional-curvature, ex-curvature-of-a-riemannian-product, ex-gaussian-curvature-of-a-surface-of-revolution, ex-principal-curvatures-of-a-round-sphere, ex-the-cylinder-has-zero-gaussian-curvature-but-nonzero-second-fundamental-form, ex-the-catenoid-has-zero-mean-curvature-but-is-not-totally-geodesic, ex-a-great-sphere-is-totally-geodesic, cex-same-intrinsic-plane-with-different-extrinsic-curvature-after-bending, cex-zero-scalar-curvature-does-not-imply-flatness, ex-curvature-two-form-of-a-connection-on-a-trivial-plane-bundle]
 ---
 
 The first examples calibrate the curvature convention. Euclidean space is

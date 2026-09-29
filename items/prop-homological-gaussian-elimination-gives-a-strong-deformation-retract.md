@@ -20,7 +20,7 @@ sources:
     - title: "Dror Bar-Natan, Fast Khovanov Homology Computations, section 4 Lemma 4.2 and section 5, printed p. 5"
       url: "https://www.math.utoronto.ca/~drorbn/papers/FastKh/FastKh.pdf"
 verification:
-  audited: 2026-09-27
+  audited: 2026-09-29
   precheck: pass
 ---
 
@@ -67,7 +67,7 @@ homotopy $h$.
 
 1.2 The components of $\imath$ are those of $T^{-1}\tilde\imath$: in degree $n$, $\imath^n=R\begin{pmatrix}1\\ 0\end{pmatrix}=\begin{pmatrix}1\\ -\varphi^{-1}c\end{pmatrix}$; in degree $n+1$, $\imath^{n+1}=L^{-1}\begin{pmatrix}1\\ 0\end{pmatrix}=\begin{pmatrix}1\\ 0\end{pmatrix}$; and in the remaining degrees both factors are identities. So $\imath$ is a cochain map. [L1, algebra]
 
-1.3 The components of $h$ are those of $\tilde h$ transported by the identities in degrees other than $n+1$: $(T^{-1}\tilde hT)^{n+1}=R\tilde h^{n+1}L=\begin{pmatrix}0&0\\ 0&\varphi^{-1}\end{pmatrix}$, because $L$ preserves the $V$-coordinate, $\tilde h^{n+1}$ records only it with $\varphi^{-1}$, and $R$ leaves the element $(0;\varphi^{-1}v)$ unchanged; in degree $j\ne n+1$ one has $\tilde h^j=0$ and hence $h^j=0$. [L1, algebra]
+1.3 The components of $h$ are those of $\tilde h$ transported by the identities in degrees other than $n+1$: $(T^{-1}\tilde hT)^{n+1}=R\tilde h^{n+1}L=\begin{pmatrix}0&0\\ 0&\varphi^{-1}\end{pmatrix}$. Indeed, the lower row of $L$ is $(0,1)$ and the right column of $R$ is $(0,1)^T$, so the displayed identity follows by biproduct matrix multiplication. In degree $j\ne n+1$ one has $\tilde h^j=0$ and hence $h^j=0$. [L1, algebra]
 
 2.1 $p\imath=1_{\bar X^\bullet}$: in degree $n$ one has $p^n\imath^n=\begin{pmatrix}1&0\end{pmatrix}\begin{pmatrix}1\\ -\varphi^{-1}c\end{pmatrix}=1_A$; in degree $n+1$ one has $p^{n+1}\imath^{n+1}=\begin{pmatrix}1&-b\varphi^{-1}\end{pmatrix}\begin{pmatrix}1\\ 0\end{pmatrix}=1_B$; in every other degree $p^j\imath^j=1\cdot1=1$. [step 1.1, step 1.2, algebra]
 

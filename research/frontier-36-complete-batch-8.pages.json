@@ -1,0 +1,1627 @@
+[
+  {
+    "order": 366.077,
+    "id": "proj-projective-schemes-twisting-sheaves-and-ampleness",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Proj Projective Schemes Twisting Sheaves and Ampleness",
+    "companion": "proj-projective-schemes-twisting-sheaves-and-ampleness-examples",
+    "requires": [
+      "fibre-products-base-change-and-scheme-theoretic-fibres",
+      "finite-proper-and-projective-morphisms",
+      "quasi-coherent-and-coherent-sheaves-and-vector-bundles",
+      "rees-modules-artin-rees-and-hilbert-samuel-theory"
+    ],
+    "items": [
+      {
+        "id": "def-proj-graded-ring-points",
+        "kind": "definition",
+        "title": "Points of Proj of a graded ring",
+        "statement": "For a commutative nonnegatively graded ring S=⊕_{d≥0}S_d, write S_+=⊕_{d>0}S_d. Proj S is the set of homogeneous prime ideals p with S_+ not contained in p, with closed sets V_+(I)={p:I⊂p} for homogeneous ideals I. The zero ring and empty Proj are allowed.",
+        "deps": [
+          "def-graded-ring-and-graded-module",
+          "def-affine-scheme-spectrum"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-shifted-graded-module",
+        "kind": "definition",
+        "title": "Graded shift convention for Proj",
+        "statement": "For a Z-graded S-module M, define M(n)_d=M_{n+d}; multiplication retains its original grading. This agrees with the published graded-module twist and fixes the sign used for O(n).",
+        "deps": [
+          "def-graded-ring-and-graded-module"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-standard-open-proj",
+        "kind": "definition",
+        "title": "Standard opens of Proj",
+        "statement": "For a homogeneous f∈S of positive degree define D_+(f)={p∈Proj S:f∉p}; these opens form a basis, and D_+(f)∩D_+(g)=D_+(fg).",
+        "deps": [
+          "def-proj-graded-ring-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-proj-prime-localization-correspondence",
+        "kind": "lemma",
+        "title": "Prime correspondence on a Proj chart",
+        "statement": "Assume AC for the ambient affine-spectrum construction. For homogeneous f of positive degree, homogeneous primes p of S avoiding f correspond bijectively to primes of S_(f)=(S[f^{-1}])_0; D_+(fg) corresponds to the ordinary distinguished open of the degree-zero element g^{deg f}/f^{deg g} when g is homogeneous positive-degree.",
+        "deps": [
+          "def-standard-open-proj",
+          "def-localisation-at-a-prime-ideal",
+          "def-axiom-of-choice",
+          "def-proj-graded-ring-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Let d=deg f and q⊂S_(f) be prime. In the graded localization S_f, put a homogeneous element a of degree e in P_q exactly when a^d/f^e lies in q. This is stable under multiplication; homogeneous primality follows because the degree-zero test of ab is the product of the tests of a and b. For additivity at a fixed degree, if a,b pass the test, expand (a+b)^{2d}: every monomial has at least d copies of a or d copies of b, so after division by f^{2e} every term belongs to q. Thus ((a+b)^d/f^e)^2∈q, and primality/radicality of q gives (a+b)^d/f^e∈q. The direct sum of these homogeneous parts is an ideal. The homogeneous-product test makes it an ordinary prime: in the graded quotient, the highest nonzero homogeneous components of two nonzero finite sums have nonzero product, so their full product is nonzero. Contraction to degree zero and homogeneous localization are inverse; the same calculation identifies D_+(fg) with the distinguished open of g^d/f^{deg g}. AC is inherited solely from the ambient Spec/prime-existence interface, not used in this algebraic bijection. This supplies the omitted exercise step in Vakil §4.5.H.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-proj-structure-sheaf-scheme",
+        "kind": "theorem",
+        "title": "Proj carries a scheme structure",
+        "statement": "Assume AC as inherited from the affine-scheme construction. The rings S_(f) and the canonical localizations on overlaps glue uniquely to a scheme with underlying topological space Proj S and structure sheaf satisfying O(D_+(f))=S_(f) for every homogeneous f of positive degree.",
+        "deps": [
+          "lem-proj-prime-localization-correspondence",
+          "thm-gluing-affine-schemes",
+          "def-axiom-of-choice",
+          "def-proj-graded-ring-points",
+          "def-standard-open-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the prime/topology correspondence to identify each D_+(f) with Spec S_(f). On the overlap D_+(fg), identify both restrictions with the same degree-zero localization of S_{fg}; verify cocycle using ordinary localization associativity. Glue the affine schemes and their sheaves; AC enters through the published affine-scheme gluing interface.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-standard-opens-proj-affine",
+        "kind": "lemma",
+        "title": "Standard opens are affine",
+        "statement": "Assume AC as inherited. For homogeneous f of positive degree, the canonical chart map D_+(f)→Spec S_(f) is an isomorphism of schemes, including empty charts.",
+        "deps": [
+          "thm-proj-structure-sheaf-scheme",
+          "def-axiom-of-choice",
+          "def-standard-open-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "The glued structure sheaf restricts to the affine chart already built from S_(f); match prime maps and degree-zero localization sections. The empty chart is Spec of the zero ring.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-associated-sheaf-graded-module-proj",
+        "kind": "definition",
+        "title": "Associated sheaf of a graded module on Proj",
+        "statement": "For a Z-graded S-module M, define tilde M on D_+(f)=Spec S_(f) as the associated module sheaf of M_(f)=(M[f^{-1}])_0, with restriction maps induced by homogeneous localization. Assume AC only through the previously constructed affine-module sheaves.",
+        "deps": [
+          "thm-proj-structure-sheaf-scheme",
+          "def-shifted-graded-module",
+          "def-associated-sheaf-module-affine-scheme",
+          "thm-associated-module-sheaf-exists",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-very-ample-invertible-sheaf-relative",
+        "kind": "definition",
+        "title": "Relative very ampleness in the finite projective-space convention",
+        "statement": "For a quasi-compact S-morphism f:X→S, an invertible sheaf L on X is H-very ample relative to S if there are n≥0 and a quasi-compact S-immersion i:X→P^n_S with L≅i*O(1). If i is closed, say closed H-very ample. On a proper source over S an immersion into separated P^n_S is closed.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invertible-sheaf",
+          "def-relative-projective-space-standard-charts",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "def-proper-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, §§29.38, 29.40",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-ample-invertible-sheaf",
+        "kind": "definition",
+        "title": "Absolute ampleness by affine section opens",
+        "statement": "An invertible sheaf L on a scheme X is ample if X is quasi-compact and, for every x∈X, some n>0 and global section s∈Γ(X,L^n) have x∈X_s={s nonvanishing} with X_s affine. The empty quasi-compact scheme is allowed.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invertible-sheaf",
+          "def-quasi-compact-and-quasi-separated-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-globally-generated-sheaf",
+        "kind": "definition",
+        "title": "Global generation by the evaluation map",
+        "statement": "An O_X-module F is globally generated if the canonical evaluation map Γ(X,F)⊗_Z O_X→F is surjective, equivalently for every x the germs of global sections span F_x. For an invertible L, finitely many chosen global sections generate L when O_X^{n+1}→L is surjective.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-quasi-coherent-module-scheme",
+          "def-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-section-nonvanishing-affine-intersection",
+        "kind": "lemma",
+        "title": "A line-bundle section cuts an affine open inside an affine scheme",
+        "statement": "If L is invertible on a scheme X, s∈Γ(X,L), and U⊂X is affine open, then U∩X_s is affine; also X_s∩X_t=X_{s⊗t} for sections of invertible sheaves. This includes a nowhere-vanishing or zero section.",
+        "deps": [
+          "def-invertible-sheaf",
+          "def-affine-open-subscheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "For U=Spec R let N=Γ(U,L), a rank-one projective R-module. The algebra Sym_R(N)/(s−1) has spectrum equal to the locus where s generates N: after every localization where s is a basis, the algebra is R localized; at a point where s vanishes, its fibre is zero. This proves affineness, and the intersection identity is a stalkwise nonvanishing test.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-proj-associated-sheaf-basic-sections",
+        "kind": "lemma",
+        "title": "Sections of a graded-module sheaf on a standard open",
+        "statement": "Assume AC as inherited from associated-sheaf existence. For any graded M and homogeneous positive-degree f, Γ(D_+(f),tilde M)=M_(f), naturally; restriction to D_+(fg) is the indicated degree-zero localization. This construction is functorial and yields a quasi-coherent sheaf.",
+        "deps": [
+          "def-associated-sheaf-graded-module-proj",
+          "lem-associated-sheaf-sections-basic-open",
+          "lem-standard-opens-proj-affine",
+          "def-quasi-coherent-module-scheme",
+          "def-axiom-of-choice",
+          "lem-proj-prime-localization-correspondence",
+          "def-standard-open-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the affine associated-module section theorem to Spec S_(f). Check that two homogeneous localizations agree on D_+(fg), including unequal degrees, and apply the affine local definition of quasi-coherence. AC is inherited from the affine associated-sheaf theorem.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-twisting-sheaf-proj",
+        "kind": "definition",
+        "title": "Twisting sheaf on Proj",
+        "statement": "Assume AC. For X=Proj S, set O_X(n)=tilde(S(n)) for every integer n, so O_X(0)=O_X and positive n uses the shift S(n)_d=S_{n+d}. In general these twists need not be invertible.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-associated-sheaf-graded-module-proj",
+          "def-shifted-graded-module"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "forward_refs": [
+          "ex-twisting-sheaf-projective-line-transitions"
+        ]
+      },
+      {
+        "id": "thm-projective-space-as-proj",
+        "kind": "theorem",
+        "title": "Projective space is Proj of a polynomial ring",
+        "statement": "Assume AC as inherited from the schemes. For every ring A and n≥0, Proj A[x_0,…,x_n] with degree-one variables is canonically isomorphic over Spec A to the chart-glued relative projective space P^n_A; for n=0 it is Spec A. The construction is compatible with A→B.",
+        "deps": [],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "On D_+(x_i), the degree-zero ring is A[x_0/x_i,…,x_n/x_i] with x_i/x_i omitted. Its overlap transition maps are exactly those used in the published P^n_A charts. Polynomial base change sends each coordinate ring and transition to the B-version. AC is inherited from the chart constructions.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-relative-proj-affine-local-gluing",
+        "kind": "lemma",
+        "title": "Affine-local graded algebras glue their Proj charts",
+        "statement": "Assume AC as inherited. Let S be a scheme and A=⊕_{d≥0}A_d a quasi-coherent graded O_S-algebra. For an affine open U=Spec R, write A|U=tilde B with B graded. For V⊂U affine, Proj(B)|V is canonically Proj Γ(V,A), compatibly on triple overlaps; hence these local schemes glue over S.",
+        "deps": [],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "On a principal V=D(g)⊂U, the graded algebra is B_g and every Proj chart has coordinate ring (B_f)_0⊗_R R_g=(B_g)_f,0. Extend from principal covers to arbitrary affine V using the batch-7 affine-open restriction theorem and glue compatibility. Triple cocycles are localization identities. AC is inherited from the Proj and QC suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-relatively-ample-invertible-sheaf",
+        "kind": "definition",
+        "title": "Relative ampleness over an arbitrary base",
+        "statement": "For a quasi-compact morphism f:X→S, an invertible sheaf L is f-ample if for every affine open U⊂S, L|f^{-1}(U) is ample in the preceding absolute sense. This agrees with absolute ampleness when S is affine, and remains meaningful for nonaffine S.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ample-invertible-sheaf",
+          "def-quasi-compact-and-quasi-separated-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, §§29.38, 29.40",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-extend-sections-from-nonvanishing-open",
+        "kind": "lemma",
+        "title": "Extend a quasi-coherent section after multiplying by a power",
+        "statement": "Assume AC as inherited from associated-sheaf existence. Let X be quasi-compact and quasi-separated, F quasi-coherent, L invertible, and s∈Γ(X,L^d) with d>0. Every section of F over X_s extends, after multiplication by some s^r, to a global section of F⊗L^{dr}; equivalently Γ_*(X,F,L)_(s) has degree-zero part Γ(X_s,F).",
+        "deps": [
+          "lem-section-nonvanishing-affine-intersection",
+          "thm-affine-quasi-coherent-equivalence",
+          "def-quasi-compact-and-quasi-separated-scheme",
+          "def-axiom-of-choice",
+          "def-invertible-sheaf",
+          "def-quasi-coherent-module-scheme",
+          "lem-associated-sheaf-sections-basic-open"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Take a finite affine cover of X and finite affine refinements of pairwise intersections (quasi-separatedness). On each affine piece, the claim is the ordinary module-localization identity; clear finitely many powers of s to extend local representatives and then further powers to annihilate their finitely many overlap differences. The glued representative is global. AC enters through the affine QC sheaf and finite-cover suppliers. This follows the full Stacks Properties Lemma 28.18.2 argument.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-ample-stable-positive-power",
+        "kind": "lemma",
+        "title": "Ampleness is invariant under positive powers",
+        "statement": "For every invertible L on X and m≥1, L is ample iff L^m is ample; quasi-compactness is included on both sides.",
+        "deps": [
+          "def-ample-invertible-sheaf",
+          "def-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "If s of L^n gives an affine nonvanishing open, s^m of L^{mn} gives the same open. Conversely every section of (L^m)^r is a section of L^{mr}, with the same open. The argument includes empty X.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-ample-pullback-finite-morphism",
+        "kind": "lemma",
+        "title": "Finite pullback preserves absolute ampleness",
+        "statement": "Assume AC as inherited from finite-morphism affineness. If g:Y→X is finite and L is ample on X, then g*L is ample on Y, including empty schemes.",
+        "deps": [
+          "def-ample-invertible-sheaf",
+          "lem-finite-morphism-affine",
+          "def-finite-morphism-schemes",
+          "def-axiom-of-choice",
+          "def-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "A finite map is quasi-compact, so Y is quasi-compact when X is. For an affine section open X_s of L^n, its inverse image is Y_{g*s}; finite morphisms over an affine base are affine, so this inverse image is affine. These opens cover Y. AC is inherited only from the finite-morphism affineness supplier.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-proj-irrelevant-and-nilpotent-boundaries",
+        "kind": "lemma",
+        "title": "Empty Proj and irrelevant torsion",
+        "statement": "Assume AC for the prime-ideal criterion. Proj S is empty iff every homogeneous positive-degree element is nilpotent. If S_+ is finitely generated this is equivalent to S_+ being nilpotent. Every graded module element annihilated by some power of S_+ maps to zero in each associated Proj sheaf; no converse is asserted without degree-one generation.",
+        "deps": [
+          "def-proj-graded-ring-points",
+          "def-axiom-of-choice",
+          "lem-proj-associated-sheaf-basic-sections",
+          "lem-proj-prime-localization-correspondence"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "If a nonnilpotent homogeneous f exists, prime ideal existence in S_f gives a point of D_+(f); conversely every point avoids a nonnilpotent homogeneous f. Finite generation turns a nil ideal generated by finitely many nilpotents into a nilpotent ideal. A power of S_+ kills a module element after localizing at each f∈S_+. AC is used only for the prime existence implication.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-twisting-sheaf-invertible-standard-graded",
+        "kind": "theorem",
+        "title": "Invertible twists for degree-one generated rings",
+        "statement": "Assume AC as inherited from the Proj sheaf construction. If S is generated as an S_0-algebra by S_1, every O_X(n) is invertible and the multiplication map O_X(m)⊗O_X(n)→O_X(m+n) is an isomorphism for all integers m,n.",
+        "deps": [
+          "def-twisting-sheaf-proj",
+          "lem-proj-associated-sheaf-basic-sections",
+          "def-invertible-sheaf",
+          "def-axiom-of-choice",
+          "thm-proj-structure-sheaf-scheme",
+          "def-proj-graded-ring-points",
+          "def-locally-free-sheaf-finite-rank"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "Cover X by D_+(x) with x∈S_1. On each chart x^n is a unit-homogeneous generator of S(n)_(x), for negative n as well. Multiplication sends the tensor of local generators to x^{m+n}; these local isomorphisms agree on overlaps. AC is inherited only from the sheaf/chart suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-proj-veronese-invariance",
+        "kind": "lemma",
+        "title": "Proj is invariant under Veronese regrading",
+        "statement": "Assume AC as inherited. For d≥1 and S^(d)=⊕_{n≥0}S_{dn}, there is a canonical scheme isomorphism Proj S≅Proj S^(d); under it, O_{Proj S^(d)}(1) corresponds to O_{Proj S}(d), without claiming either twist invertible in arbitrary grading.",
+        "deps": [
+          "thm-proj-structure-sheaf-scheme",
+          "def-twisting-sheaf-proj",
+          "lem-proj-associated-sheaf-basic-sections",
+          "def-axiom-of-choice",
+          "def-standard-open-proj",
+          "def-proj-graded-ring-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "For each homogeneous f in S, D_+(f)=D_+(f^d); compare (S_f)_0 with (S^(d)_{f^d})_0. These isomorphisms glue, and the same degree computation with shifted modules identifies twist 1 on the Veronese with twist d on S. AC is inherited from Proj sheaf construction.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-projective-space-saturation-local-criterion",
+        "kind": "lemma",
+        "title": "Saturation detected on projective charts",
+        "statement": "Assume AC as inherited from Proj. For B=A[x_0,…,x_n] and b=(x_0,…,x_n), n≥0, let I be homogeneous and I^sat=⋃_{r≥0}(I:b^r). For homogeneous h of degree d, h∈I^sat iff h/x_i^d belongs to (I[x_i^{-1}])_0 inside (B[x_i^{-1}])_0 on every standard chart. Therefore I and I^sat define the same chart ideals, and two saturated homogeneous ideals with identical chart ideals are equal.",
+        "deps": [
+          "thm-projective-space-as-proj",
+          "lem-proj-associated-sheaf-basic-sections",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Local membership means x_i^{r_i}h∈I for each i. Choose r=∑r_i: every monomial of total degree r contains some x_i^{r_i}, so b^r h⊂I. Conversely b^r h⊂I implies x_i^r h∈I. Apply this to all homogeneous h; the n=0 case reduces to ordinary x_0 saturation. AC is inherited solely from the Proj chart interface.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-relative-proj-quasi-coherent-graded-algebra",
+        "kind": "definition",
+        "title": "Relative Proj of a graded quasi-coherent algebra",
+        "statement": "For a scheme S and a quasi-coherent nonnegatively graded O_S-algebra A, define Proj_S A by gluing Proj Γ(U,A) over affine opens U⊂S through the preceding restriction isomorphisms. It has a structural S-morphism and relative twists O(n); no finite-generation assumption is needed for existence. Assume AC as inherited from affine-local Proj.",
+        "deps": [],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-section-zero-scheme-invertible-sheaf",
+        "kind": "definition",
+        "title": "Zero scheme of a line-bundle section",
+        "statement": "For a section s of an invertible sheaf L on X, the image of contraction L^{-1}→O_X is a quasi-coherent ideal I_s; define its zero closed subscheme Z(s)=V(I_s). It is an effective Cartier divisor exactly when each local equation of s is a nonzerodivisor (a unit is allowed), and a nowhere-vanishing section gives the empty divisor. Assume AC as inherited from affine quotient and gluing suppliers.",
+        "deps": [
+          "def-invertible-sheaf",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "def-axiom-of-choice",
+          "thm-kernels-cokernels-qc-modules",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "thm-gluing-affine-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-very-ample-implies-ample",
+        "kind": "lemma",
+        "title": "Relative very ampleness implies relative ampleness",
+        "statement": "Assume AC as inherited. Let f:X→S be quasi-compact and L H-very ample via a quasi-compact immersion X→P^n_S. Then L is f-ample. If S is affine, L is ample absolutely. If the immersion is closed, the conclusion follows directly from affine projective charts; the general quasi-compact immersion case uses affine section refinements.",
+        "deps": [
+          "def-very-ample-invertible-sheaf-relative",
+          "def-relatively-ample-invertible-sheaf",
+          "thm-projective-space-as-proj",
+          "lem-section-nonvanishing-affine-intersection",
+          "def-axiom-of-choice",
+          "def-ample-invertible-sheaf",
+          "def-standard-open-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, §§29.38, 29.40",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Restrict to an affine U⊂S, so P^n_U is quasi-compact. Its standard opens D_+(F), with F any positive-degree homogeneous polynomial, form a basis for its topology and are nonvanishing opens of sections of O(d). A quasi-compact immersion i is a homeomorphism onto its locally closed image, so the pullbacks X_{i*F} form a basis on X_U and X_U is quasi-compact. Given x and any affine neighbourhood W⊂X_U, choose such a pulled-back section open containing x and contained in W. The affine-intersection lemma gives X_{i*F}=W∩X_{i*F} affine, proving ampleness by definition. For S affine this is absolute ampleness; for arbitrary S apply this on every affine base open. AC is inherited only from the Proj construction.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-closed-subschemes-projective-space-homogeneous-ideals",
+        "kind": "theorem",
+        "title": "Closed subschemes of projective space and saturated ideals",
+        "statement": "Assume AC as inherited from the scheme correspondence. For every ring A and n≥0, homogeneous ideals I⊂A[x_0,…,x_n] determine closed subschemes Proj(B/I)⊂P^n_A. Two ideals determine the same closed subscheme iff their b-saturations agree, and every closed subscheme arises uniquely from a b-saturated homogeneous ideal, where b=(x_0,…,x_n).",
+        "deps": [
+          "lem-projective-space-saturation-local-criterion",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "def-axiom-of-choice",
+          "thm-gluing-affine-schemes",
+          "thm-projective-space-as-proj",
+          "def-associated-sheaf-graded-module-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "A homogeneous quotient gives compatible quotient ideals on each D_+(x_i), hence a closed subscheme by the batch-5 affine quotient lemma and affine gluing. Conversely take the chart ideals J_i of any closed immersion from that same batch-5 lemma, form the homogeneous kernel of B→⊕_{d≥0}Γ(Y,O_Y(d)), and use the finite coordinate cover plus denominator clearing as in the complete Stacks Constructions Lemma 27.13.7 proof to recover each J_i. The local saturation criterion proves uniqueness. AC enters only through the affine quotient and scheme-gluing suppliers; no published quasi-coherent ideal correspondence is used.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-relative-proj-base-change",
+        "kind": "theorem",
+        "title": "Relative Proj commutes with arbitrary base change",
+        "statement": "Assume AC as inherited. For any S′→S and quasi-coherent nonnegatively graded O_S-algebra A, there is a natural S′-isomorphism Proj_S A×_S S′≅Proj_{S′}(A⊗_{O_S}O_{S′}), compatible with relative twists and with graded algebra quotients. No flatness or finite-generation hypothesis is required for this isomorphism.",
+        "deps": [
+          "def-relative-proj-quasi-coherent-graded-algebra",
+          "thm-affine-fibre-product-tensor-ring",
+          "lem-pullback-qc-module-quasi-coherent",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce to affine U=Spec R and V=Spec R′. On D_+(f), compare (B_f)_0⊗_R R′ with ((B⊗_R R′)_{f⊗1})_0; grading, localization and tensor commute. These chart isomorphisms agree on overlaps and glue. Apply the same ring calculation to B/I for a homogeneous quotient. AC is inherited from Proj/sheaf and fibre-product suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-line-bundle-sections-define-projective-map",
+        "kind": "theorem",
+        "title": "Generating line-bundle sections define a morphism to projective space",
+        "statement": "Assume AC as inherited from projective-space and sheaf constructions. For an S-scheme X, an invertible L and n+1 global sections s_0,…,s_n generating L, there is a unique S-morphism φ:X→P^n_S with φ*O(1)≅L carrying universal coordinate sections to s_i; the inverse image of D_+(x_i) is X_{s_i}. No immersion claim is made without further hypotheses.",
+        "deps": [],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Trivialize L where s_i is nonzero and set chart coordinates x_j/x_i=s_j/s_i. These functions define maps to the standard P^n_S charts; on overlaps the ratios satisfy the prescribed coordinate transformations. Their pullback trivializations and generators identify O(1) with L. Uniqueness follows from chart coordinates. AC is inherited through Proj and sheaves.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "rem-proj-does-not-recover-graded-ring-literally",
+        "kind": "remark",
+        "title": "Proj forgets irrelevant torsion and grading scale",
+        "statement": "Proj alone does not determine the original graded ring: irrelevant-ideal-power torsion sheafifies to zero, and every positive Veronese regrading has canonically the same Proj. Twist data must be tracked separately, and for arbitrary grading O(1) need not be invertible.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-proj-irrelevant-and-nilpotent-boundaries",
+          "lem-projective-space-saturation-local-criterion",
+          "lem-proj-veronese-invariance",
+          "def-twisting-sheaf-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "forward_refs": [
+          "cex-proj-graded-ring-not-faithful"
+        ]
+      },
+      {
+        "id": "thm-projective-map-line-bundle-data-equivalence",
+        "kind": "theorem",
+        "title": "Maps to projective space equal generating line-bundle data",
+        "statement": "Assume AC as inherited. For any S-scheme X, morphisms X→P^n_S are naturally in bijection with isomorphism classes of pairs (L;s_0,…,s_n) where L is invertible and its n+1 global sections generate it; pullback of O(1) with the standard coordinates gives one direction. This includes n=0.",
+        "deps": [
+          "thm-line-bundle-sections-define-projective-map",
+          "thm-projective-space-as-proj",
+          "def-axiom-of-choice",
+          "def-very-ample-invertible-sheaf-relative",
+          "def-globally-generated-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Pull back the tautological quotient O_{P^n}^{n+1}→O(1) to obtain the sections. The prior chart construction gives the reverse map. Check that the two operations are inverse on D_+(x_i), with isomorphic data yielding the same chart ratios; when n=0 the unique section is a global frame. AC is inherited from the earlier constructions.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-projective-morphism-relative-proj-presentation",
+        "kind": "lemma",
+        "title": "A projective morphism has a relative Proj presentation",
+        "statement": "Assume AC. An H-projective X over any scheme S is a closed subscheme of Proj_S Sym(O_S^{n+1})=P^n_S for some n≥0. Every chosen closed immersion has X=Proj_S(O_S[x_0,…,x_n]/I) for a canonical quasi-coherent homogeneous ideal sheaf I whose ideals on affine base opens are saturated. No extra hypothesis on S or global generation of I is required.",
+        "deps": [],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, §§29.38, 29.40",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            }
+          ]
+        },
+        "strategy": "Identify symmetric-algebra Proj with projective space on affine base opens. Define the degree-d ideal sheaf by vanishing of polynomial sections on the fixed closed subscheme. Its affine sections are the saturated ideal by the chart criterion. Clear powers of a base element on finitely many projective charts to show principal-open localization and quasi-coherence. Glue the quotient presentations.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-serre-criterion-ampleness",
+        "kind": "theorem",
+        "title": "Serre global-generation criterion for ampleness",
+        "statement": "Assume AC as inherited from the sheaf/Proj suppliers. Let X be a Noetherian scheme and L invertible. Then L is ample iff, for every coherent (equivalently finite-type quasi-coherent) F, F⊗L^n is globally generated for all sufficiently large integers n. The bound may depend on F.",
+        "deps": [
+          "def-ample-invertible-sheaf",
+          "def-globally-generated-sheaf",
+          "lem-extend-sections-from-nonvanishing-open",
+          "lem-section-nonvanishing-affine-intersection",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-axiom-of-choice",
+          "lem-radical-commutes-with-localisation",
+          "thm-quasi-coherence-check-affine-cover",
+          "def-invertible-sheaf",
+          "def-coherent-module-scheme",
+          "def-finite-type-finite-presentation-module-sheaf",
+          "lem-ample-stable-positive-power",
+          "thm-associated-module-sheaf-exists"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Forward: choose a finite cover by affine nonvanishing opens of positive-power sections; finite local generators of F extend after powers by the extension lemma. Equalize degrees, then use residue classes modulo a common power whose sections globally generate to obtain every large n. Reverse: for x∈affine U, construct the coherent ideal I of the reduced complement X\\U by gluing radical affine ideals, using radical-localization compatibility and the affine-cover QC criterion (Noetherian); a global generator of I⊗L^n nonzero at x yields s∈Γ(X,L^n) with X_s⊂U. The affine-intersection lemma makes X_s affine. AC is inherited from the sheaf/closed-subscheme interfaces.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-segre-line-bundle-external-tensor",
+        "kind": "theorem",
+        "title": "Segre embedding and its line bundle",
+        "statement": "Assume AC as inherited from projective-space schemes. For any base S and m,n≥0, the coordinate products z_ij=x_i y_j define a closed immersion σ:P^m_S×_S P^n_S→P^{(m+1)(n+1)-1}_S, and σ*O(1)≅pr_1*O(1)⊗pr_2*O(1). The rank-one 2×2 minors give its scheme-theoretic image.",
+        "deps": [
+          "thm-line-bundle-sections-define-projective-map",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "def-axiom-of-choice",
+          "def-very-ample-invertible-sheaf-relative"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "The products x_i⊠y_j jointly generate the external tensor line bundle, hence define the map. On chart z_ij≠0, the 2×2 minors give z_ab/z_ij=(z_aj/z_ij)(z_ib/z_ij), reconstructing both affine projective charts and their tensor-product coordinate ring. These local quotient presentations prove a closed immersion and scheme-theoretic minor ideal, with no field hypothesis. The pullback twist follows from the defining generating sections. AC is inherited from the scheme suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-veronese-pullback-twist",
+        "kind": "theorem",
+        "title": "Veronese embedding pulls O(1) back to O(d)",
+        "statement": "Assume AC as inherited. For any base S, n≥0 and d≥1, all degree-d monomials define a closed immersion ν_d:P^n_S→P^{N}_S, N=binom(n+d,d)−1, and ν_d*O(1)≅O_{P^n_S}(d).",
+        "deps": [
+          "thm-line-bundle-sections-define-projective-map",
+          "def-axiom-of-choice",
+          "def-very-ample-invertible-sheaf-relative",
+          "def-globally-generated-sheaf",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-proper-source-to-separated-target-proper",
+          "thm-projective-space-proper-over-base",
+          "thm-proper-morphism-closed-image"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "Degree-d monomials generate O(d), so the projective-map theorem yields ν_d and the pullback identity. On chart x_i^d≠0, the target ratios for x_i^{d−1}x_j recover x_j/x_i; homogeneous binomial relations among monomials give the affine coordinate ring of the source chart, proving a closed immersion over arbitrary S. AC is inherited from schemes.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "def-projective-bundle-scheme",
+        "kind": "definition",
+        "title": "Projective bundle in the quotient convention",
+        "statement": "For a finite locally free O_S-module E of locally constant rank, define P_S(E)=Proj_S Sym(E). It parametrizes invertible quotients of E, so its tautological line bundle is a quotient of π*E. If E=0, the total space is empty; this is distinct from the affine vector bundle V(E). Assume AC as inherited from relative Proj.",
+        "deps": [
+          "def-relative-proj-quasi-coherent-graded-algebra",
+          "thm-relative-proj-base-change",
+          "def-symmetric-algebra-qc-module",
+          "lem-symmetric-algebra-qc-and-base-change",
+          "def-locally-free-sheaf-finite-rank",
+          "def-axiom-of-choice",
+          "def-quasi-coherent-module-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-ample-powers-very-ample-proper-base",
+        "kind": "theorem",
+        "title": "High powers of an ample line bundle embed a proper scheme",
+        "statement": "Assume AC as inherited. Let S be Noetherian, f:X→S proper of finite type, and L ample absolutely on X. For all sufficiently large d, L^d is closed H-very ample relative to S: some finite set of sections of L^d gives a closed S-immersion X→P^{N_d}_S and pulls O(1) back to L^d. The assertion uses absolute ampleness; f-ampleness over a nonaffine base alone is not substituted.",
+        "deps": [
+          "thm-serre-criterion-ampleness",
+          "thm-line-bundle-sections-define-projective-map",
+          "def-very-ample-invertible-sheaf-relative",
+          "lem-proper-source-to-separated-target-proper",
+          "thm-proper-morphism-closed-image",
+          "lem-immersion-with-closed-image",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-axiom-of-choice",
+          "lem-extend-sections-from-nonvanishing-open",
+          "thm-segre-line-bundle-external-tensor",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "def-ample-invertible-sheaf",
+          "def-quasi-coherent-module-scheme",
+          "def-finite-type-finite-presentation-module-sheaf",
+          "def-invertible-sheaf",
+          "def-globally-generated-sheaf",
+          "lem-section-nonvanishing-affine-intersection",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "thm-projective-space-proper-over-base",
+          "def-proper-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, §§29.38, 29.40",
+              "url": "https://stacks.math.columbia.edu/download/morphisms.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Follow the complete Stacks Morphisms Lemma 29.40.3 proof. Choose finitely many affine positive-power section opens X_ai mapping into affine base opens; on each, choose finite algebra generators of the finite-type map and extend them, after powers of ai, to global twisted sections by the denominator-clearing lemma. Equalize degrees N and include the ai^power sections; on each X_ai the resulting projective chart ring surjects onto Γ(X_ai,O_X), so the map j:X→P^m_S is an immersion with j*O(1)=L^N. Serre global generation makes L^{d-N} generated by finitely many sections for every d≫0. Products of these with the coordinates of j give a map through (j,j′):X→P^m_S×_S P^{t-1}_S followed by the Segre closed immersion; hence each large d yields an immersion with pullback O(1)=L^d. The proper source and separated projective target make it proper, with closed image, hence a closed immersion by the published proper-image and immersion lemmas. AC is inherited through these suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-projective-bundle-represents-line-quotients",
+        "kind": "theorem",
+        "title": "Projective bundle represents line quotients",
+        "statement": "Assume AC as inherited. For every S-scheme g:T→S, S-morphisms T→P_S(E) correspond naturally to isomorphism classes of surjections g*E→L with L invertible on T; the universal quotient is π*E→O_{P(E)}(1). This includes the rank-zero empty case.",
+        "deps": [
+          "def-projective-bundle-scheme",
+          "thm-twisting-sheaf-invertible-standard-graded",
+          "thm-line-bundle-sections-define-projective-map",
+          "def-axiom-of-choice",
+          "thm-projective-map-line-bundle-data-equivalence",
+          "def-relative-proj-quasi-coherent-graded-algebra",
+          "def-globally-generated-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "On a frame-open where E≅O^r, a line quotient is locally represented by r sections generating L, hence by a map to P^{r-1}; the transition under frame change matches the graded Sym(E) transitions. Conversely the degree-one generators of Sym(E) give the universal quotient, and pulling it back recovers the original. Rank zero has no invertible quotient and Proj O_S is empty. AC is inherited from relative Proj and pullback.",
+        "proof_strategy": "direct",
+        "dependency_level": 10
+      }
+    ]
+  },
+  {
+    "order": 366.078,
+    "id": "proj-projective-schemes-twisting-sheaves-and-ampleness-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Proj Projective Schemes Twisting Sheaves and Ampleness — Examples",
+    "companion": "proj-projective-schemes-twisting-sheaves-and-ampleness",
+    "requires": [
+      "proj-projective-schemes-twisting-sheaves-and-ampleness"
+    ],
+    "items": [
+      {
+        "id": "ex-proj-polynomial-ring-projective-space",
+        "kind": "example",
+        "title": "Polynomial Proj charts",
+        "statement": "Assume AC. For a field k and n≥0, Proj k[x_0,…,x_n]=P^n_k; D_+(x_i)=Spec k[x_0/x_i,…,x_n/x_i] and on D_+(x_i x_j) the coordinate change sends x_a/x_j=(x_a/x_i)/(x_j/x_i). For n=0 the space is one point.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-projective-space-as-proj",
+          "lem-standard-opens-proj-affine"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute degree-zero fractions on each chart and localize at x_j/x_i for the overlap. In n=0 the chart ring is k.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-proj-empty-irrelevant-nilpotent",
+        "kind": "example",
+        "title": "A nilpotent irrelevant ideal gives empty Proj",
+        "statement": "Let k be a field and S=k[ε]/(ε²) with deg ε=1. Then S_+=(ε) is nilpotent and Proj S is empty, even though Spec S is nonempty.",
+        "deps": [
+          "lem-proj-irrelevant-and-nilpotent-boundaries",
+          "def-proj-graded-ring-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "The only prime contains nilpotent ε, hence contains S_+ and is excluded from Proj; equivalently D_+(ε)=Spec (S_ε)_0 is empty because S_ε=0.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-twisting-sheaf-projective-line-transitions",
+        "kind": "example",
+        "title": "Twist transitions on the projective line",
+        "statement": "Assume AC. On P^1_k with U_0=D_+(x_0), U_1=D_+(x_1), and t=x_1/x_0 on U_0, O(n) has frames e_0=x_0^n and e_1=x_1^n; on the overlap e_1=t^n e_0 for every n∈Z.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-twisting-sheaf-invertible-standard-graded",
+          "thm-projective-space-as-proj",
+          "def-twisting-sheaf-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the degree-zero module localizations S(n)_(x_i). The homogeneous unit x_i^n gives a frame even when n<0; their ratio is (x_1/x_0)^n.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-zero-section-empty-effective-divisor",
+        "kind": "example",
+        "title": "A nowhere-vanishing section has empty zero divisor",
+        "statement": "For any scheme X, the unit section 1∈Γ(X,O_X) has zero ideal I_1=O_X and zero scheme Z(1)=empty; the empty closed subscheme is the effective Cartier divisor with unit local equation, including X=empty.",
+        "deps": [
+          "def-section-zero-scheme-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Contraction by 1 is the identity O_X→O_X, so its image ideal is the unit ideal. A unit is a nonzerodivisor in every nonzero stalk and its vanishing scheme is empty.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-proj-quotient-projective-hypersurface",
+        "kind": "example",
+        "title": "A projective hypersurface as a homogeneous quotient",
+        "statement": "For a field k and a nonzero homogeneous F∈k[x_0,…,x_n] of positive degree, Proj(k[x_0,…,x_n]/(F)) is the closed subscheme V_+(F)⊂P^n_k, with chart ring k[x_a/x_i]/(F/x_i^{deg F}) on D_+(x_i).",
+        "deps": [
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "thm-projective-space-as-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Localize the homogeneous quotient at x_i and take degree zero. The equation F/x_i^{deg F} cuts out the chart; glue these quotient charts. The formula also covers an empty hypersurface such as n=0 and F=x_0.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-o-minus-one-no-global-generators",
+        "kind": "counterexample",
+        "title": "O(-1) has no global generator",
+        "statement": "Assume AC. For any field k, Γ(P^1_k,O(-1))=0, so O(-1) is not globally generated, although it is invertible.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-globally-generated-sheaf",
+          "thm-twisting-sheaf-invertible-standard-graded",
+          "thm-projective-space-as-proj",
+          "def-twisting-sheaf-proj"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "A section has expressions a(t)e_0 on U_0 and b(t^{-1})e_1 on U_1. With e_1=t^{-1}e_0, equality gives a(t)=t^{-1}b(t^{-1}); no nonzero polynomial in t equals such a sum of strictly negative powers. Thus both vanish and evaluation is zero.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-proj-graded-ring-not-faithful",
+        "kind": "counterexample",
+        "title": "Two graded rings with the same Proj",
+        "statement": "Assume AC. For a field k, S=k[x,y] with deg x=deg y=1 and its regraded second Veronese T=S^(2)=k[x²,xy,y²] have canonically isomorphic Proj, but are not isomorphic as graded k-algebras: dim_k S_1=2 whereas dim_k T_1=3.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-proj-veronese-invariance",
+          "thm-projective-space-as-proj",
+          "ex-twisting-sheaf-projective-line-transitions"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply Veronese invariance with d=2; compare degree-one vector-space dimensions to rule out a graded k-algebra isomorphism. Under the Proj isomorphism O_T(1) corresponds to O_S(2).",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-line-bundle-map-conic-veronese",
+        "kind": "example",
+        "title": "The conic map from O(2)",
+        "statement": "Over a field k, the global sections x_0²,x_0x_1,x_1² generate O_{P^1}(2) and define the degree-two Veronese closed immersion [x_0:x_1]↦[x_0²:x_0x_1:x_1²] into P²_k, whose scheme-theoretic image has equation Z_0Z_2−Z_1²=0.",
+        "deps": [
+          "thm-veronese-pullback-twist",
+          "thm-line-bundle-sections-define-projective-map",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "def-very-ample-invertible-sheaf-relative",
+          "def-globally-generated-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            },
+            {
+              "title": "Gao–Zhang, Lectures on Algebraic Geometry, Chapter 5",
+              "url": "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+            }
+          ]
+        },
+        "strategy": "The three monomials generate on the two standard charts. The target relation vanishes identically; on Z_0≠0 and Z_2≠0 the target equation gives coordinate rings k[Z_1/Z_0] and k[Z_1/Z_2], matching the source charts, including characteristic two.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-globally-generated-not-very-ample",
+        "kind": "counterexample",
+        "title": "Global generation does not imply very ampleness",
+        "statement": "For a field k, O_{P^1_k} is globally generated by its unit section but is not H-very ample over Spec k: the associated P^0_k map is constant, and no immersion P^1_k→P^n_k can pull O(1) back to O_{P^1_k}.",
+        "deps": [
+          "def-globally-generated-sheaf",
+          "def-very-ample-invertible-sheaf-relative",
+          "thm-projective-map-line-bundle-data-equivalence",
+          "thm-line-bundle-sections-define-projective-map",
+          "thm-projective-space-as-proj",
+          "def-twisting-sheaf-proj",
+          "lem-proj-associated-sheaf-basic-sections",
+          "def-standard-open-proj",
+          "thm-proj-structure-sheaf-scheme",
+          "def-invertible-sheaf",
+          "def-ample-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Properties of Schemes, §§28.18, 28.27",
+              "url": "https://stacks.math.columbia.edu/download/properties.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "The unit section makes evaluation surjective. Every global section of O_{P^1} is constant (glue polynomials on the two standard charts); hence any finite list of generating sections defines a constant map by the map/data equivalence. Since P^1 has at least two points after a field extension, this cannot be an immersion; H-very ampleness would yield such a map.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-projective-bundle-trivial-rank-r",
+        "kind": "example",
+        "title": "Projective bundle of a trivial module",
+        "statement": "For a scheme S and r≥1, P_S(O_S^r)≅P^{r−1}_S in the quotient convention. In particular P_S(O_S)=S and its universal quotient is the identity O_S→O_S; P_S(0)=empty.",
+        "deps": [
+          "def-projective-bundle-scheme",
+          "thm-projective-bundle-represents-line-quotients",
+          "def-symmetric-algebra-qc-module",
+          "def-relative-proj-quasi-coherent-graded-algebra",
+          "def-very-ample-invertible-sheaf-relative",
+          "thm-projective-space-as-proj",
+          "def-locally-free-sheaf-finite-rank",
+          "def-invertible-sheaf"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Constructions of Schemes, §§27.8–27.21",
+              "url": "https://stacks.math.columbia.edu/download/constructions.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea, 29 August 2022, §§4.5, 7.4, 9.3, 10.6, 17.4, 17.6, 18.2",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
+            }
+          ]
+        },
+        "strategy": "Sym(O_S^r) is the polynomial graded O_S-algebra on r degree-one generators. Apply the relative Proj chart identification; r=1 gives one degree-one generator and rank zero gives only degree zero.",
+        "proof_strategy": "direct",
+        "dependency_level": 11
+      }
+    ]
+  }
+]

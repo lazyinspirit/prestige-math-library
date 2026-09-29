@@ -1,0 +1,42 @@
+# Batch 25 — symmetric functions, Hall pairing, and Schur bases
+
+## Scope and design reconciliation
+
+Owned pages: A `symmetric-functions-hall-inner-product-and-schur-bases` (order 799), B `symmetric-functions-hall-inner-product-and-schur-bases-examples` (order 800). I read `CLAUDE.md`, `README.md`, `SCHEMA.md`, `WORKFLOW.md`, the generated batch task, the owner direction, the SYMR track and complete SYMR-1 section of `research/symmetric-group-planning/proposed-inventory.md`, the current plan entries, the planning/drift evidence, and the published supplier statements and proofs used below. The owner direction adds no SYMR-1-specific change. `research/plan-spec.json` agrees with the design on page IDs, order, category, companions, and `requires`. Its empty item arrays are the planned pre-splice state, not a conflicting inventory. There is **no design–plan conflict for this pair**. The older track's “fewer than 60 A items” validation note is stale against the current 100-item limit in `WORKFLOW.md`; the 16-item A inventory is below both limits.
+
+The scaffold has 16 A items and five B items. It retains all 14 A and five B proposed claims and adds two required local definitions: `def-bidegree-completed-symmetric-function-tensor-product` before Cauchy, and `def-skew-diagram-and-semistandard-skew-tableau` before the skew theorem. No A/B pair or useful claim was dropped. The B page requires only its A page and its items depend only on this pair's A items. The B Cauchy example interprets “through total degree three” as bidegrees $(d,d)$ for $0\le d\le3$, avoiding an ambiguous combined $x+y$ degree.
+
+## Dependency and proof audit
+
+Both external A-page prerequisites are currently published: `symmetric-polynomials` and `young-diagrams-tableaux-and-permutation-modules`. I read the finite symmetric-polynomial definitions and proofs of the monomial basis, finite $E(-t)H(t)=1$, free elementary and complete generators, plus the published partition, dominance, standard-tableau and semistandard/Kostka definitions. The finite orbit-sum proof uses disjoint supports and works over $\mathbb Z$; the published generating-series proof is coefficientwise over an arbitrary commutative ring; the tableaux use English rows, row-weak and column-strict entries. Those exact clauses license the stable transitions used here. No defect was found in an actual published prerequisite clause, so there is no published-defect ledger entry from this batch.
+
+The planned Cauchy dependency on `def-hall-inner-product-on-symmetric-functions` was removed because the Schur Cauchy identity is established by finite alternants before Schur orthonormality; using self-duality to prove it would be circular. `thm-jacobi-trudi-and-dual-jacobi-trudi-identities` is the needed preceding factorization, and the bidegree completion is defined separately. The Schur-basis proof uses Jacobi–Trudi dominance-unitriangularity over $\mathbb Z$ and then the Cauchy dual-kernel criterion; it does not assume that the Schur basis is already orthonormal. Skew adjointness is defined without the later containment conclusion. The skew theorem derives the skew determinant from Cauchy, derives its dual $e$ determinant by complementary minors, gets containment vanishing from a zero block, and proves the tableau expansion by one-variable horizontal strips and alphabet splitting. The labelled Kostka identity is then obtained from the tableau coefficients and Hall duality, with dominance and the diagonal $1$ checked directly. These are proof-strategy corrections and explicit prerequisites, not changes to the plan's selected pair.
+
+The transitive item paths on this pair contain no in-run supplier from another batch, no B-page supplier, no forward proof dependency, no Recorded-result supplier, and no AC use. Published out-of-run items have `dependency_level` zero effect. Every item has an explicit `deps` array and a current Step-1 `ready` record with examined dependency IDs and item-specific proof evidence. Two A definitions have level 0, and the maximum A/B level is 8. The pair-only recomputation reports 21 items and zero label errors. `research/frontier-36-complete-batch-25.cross-batch-dependencies.json` is `[]`; the unified ledger refresh succeeded and marks batch 25 reviewed with zero cross-batch edges. Later consumers must still be reviewed against these actual interfaces when their own batches are built.
+
+## Sources and reading
+
+The coverage file records 40 harvested rows, each disposed to an item or with a specific deferral/out-of-scope reason. Both active treatments are full documents fetched with `source-fetch-check --stamp` and independently inspected as actual PDF text:
+
+1. I. G. Macdonald, *Symmetric Functions and Hall Polynomials*, second edition, [full PDF](https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf), SHA-256 `64e242b84d1f3b7864ed28f89a9b331269a28c1ce2a32ce03b4ee692f5974ea7`, 486 PDF pages. Read Chapter I §2 printed pp. 17–25 (degreewise stabilization, bases, Newton), §3 pp. 40–43 (bialternants and Jacobi–Trudi), §4 pp. 62–64 (three Cauchy expansions and Hall duality), §5 pp. 69–73 (skew determinant, zero block, alphabet split, tableaux), and §6 pp. 101–102 (Kostka transition). The prior source-manifest full-body check also records terminal bibliography/index; this batch inspected the relevant proof ranges, not all 486 pages.
+2. Jeremy L. Martin, *Lecture Notes on Algebraic Combinatorics*, [author-hosted full PDF](https://jeremymartinmath.github.io/CombinatoricsNotes.pdf), SHA-256 `ef5b5b016593775302747a332132cf18b82342ca39ad22f9f64032ec007c3bec`, 263 PDF pages. Read §§9.3–9.6 printed pp. 176–183 (stable bases and power sums), §9.8 pp. 187–190 (lattice-path Jacobi–Trudi and Schur basis), §9.9 pp. 191–195 (formal kernel and Hall form), §9.10 pp. 195–200 (generalized RSK Schur Cauchy argument), and §9.13 pp. 204–207 (bialternants). The PDF has substantive text through its final page. Martin explicitly **does not provide a proof** of the skew Jacobi–Trudi formula at §9.8 p. 190; that item uses Macdonald I §5 for its complete proof route. Martin §9.9 also has a proof-line normalization slip calling $p_\lambda/z_\lambda$ orthonormal after correctly stating $p_\lambda/\sqrt{z_\lambda}$; the local proof uses Macdonald's matrix criterion and the exact $z_\lambda$ diagonal instead.
+
+The initial search-result URL `https://jlmartin.ku.edu/LectureNotes.pdf` returned HTTP 404 in a real `curl` retrieval. A search of Martin's author course page found the live author-hosted `CombinatoricsNotes.pdf`; the first recovery fetch succeeded, so no further retry was made. Both coverage URLs now carry successful full-text stamps (486 and 263 pages); no source was dropped or escalated. Source titles, exact locators, supported items, and all dispositions are in the owned coverage file.
+
+## Checks at scaffold completion
+
+| Check | Actual result |
+|---|---|
+| Batch-25 coverage checklist with required deferral destinations | pass: one A page, 40 harvested rows, 0 errors, 0 warnings |
+| Batch-25 source-fetch check | pass: 2/2 full-text stamps, 0 drops |
+| Whole-run manifest `deps` check | pass: 298 items, 0 errors |
+| Whole-run manifest-only content policy | pass: 298 items, 0 errors, 0 warnings |
+| Pair-only dependency-level recomputation | pass: 21 items, 0 errors |
+| `item-dependency-levels.mjs check --run frontier-36-complete` | exit 1: 34 other-run pages still have empty scaffold inventories; none is in batch 25 |
+| `validate-plan.mjs research/plan-spec.json` | exit 0: declared page order and listed-item graph acyclic; tool notes 379 planned pages without item lists and emits global redundant-prerequisite warnings |
+| `extcheck.mjs --quiet` | exit 0 with 43 published-item unproved-dependency warnings outside this batch; no batch-25 path uses a Recorded item |
+| Batch-25 Step-1 decision currency | pass: all 21 owned items `ready`, no stale owned records |
+| Whole-run Step-1 decision check | exit 1: other batches have empty pages, escalations, or stale records; this is not a batch-25 mathematical approval |
+| Frontier dependency ledger refresh | pass: batch 25 reviewed, zero owned cross-batch edges |
+
+Readiness records and these mechanical checks establish a complete scaffold route, not an authored proof or independent mathematical approval. Step 3 must author and audit every item and recheck these arguments against the final consumer uses.

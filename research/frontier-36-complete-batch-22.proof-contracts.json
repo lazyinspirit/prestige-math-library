@@ -1,0 +1,1969 @@
+{
+  "version": 1,
+  "level": "frontier-36-complete",
+  "scope": [
+    "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+    "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+    "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+    "ex-two-term-tensor-complex-koszul-signs",
+    "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+    "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors",
+    "ex-left-and-right-projective-not-enveloping-projective",
+    "thm-inverse-bimodule-complexes-give-derived-tensor-equivalences",
+    "ex-contractible-bimodule-complex-induces-zero-functor"
+  ],
+  "contracts": {
+    "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A complex with empty support is the zero complex; the Definition's zero-complex case makes every tensor summand on every diagonal zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition states that a zero input has zero totalization, so no differential or outer action has a nonzero value to check."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition gives the one-term formulas in both variables: if F is concentrated in degree r, the remaining differential is (-1)^r(1 tensor d_G); if G is concentrated in degree s, it is d_F tensor 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition states that when both input differentials vanish, the total differential is zero, which covers the zero-differential specialization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states that support in [a,b] and [c,d] gives total support in [a+c,b+d]; the finite diagonal formula therefore has no terms beyond either endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition constructs the tensor totalization from supplied complexes and canonical direct sums; it does not assert existence by choosing an element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a complex and its totalization and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a complex and its totalization and states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "dependency_evidence": [
+        {
+          "item": "def-cochain-complex-in-an-abelian-category",
+          "section": "Definition",
+          "excerpt": "d^{n+1}\\circ d^n=0",
+          "use": "Supplies the cochain indexing and square-zero differential convention inherited by each bimodule complex."
+        },
+        {
+          "item": "def-bounded-bounded-below-and-bounded-above-complex",
+          "section": "Definition",
+          "excerpt": "**bounded** if $C^n=0$ outside a finite interval.",
+          "use": "Supplies bounded support and the finite total range."
+        },
+        {
+          "item": "def-graded-ring-module-bimodule-and-internal-shift",
+          "section": "Definition",
+          "excerpt": "No sign is inserted into the multiplication, the scalar action or a degree-zero map merely because elements have nonzero degree",
+          "use": "Keeps internal degree separate from cochain parity and shows the internal degree-zero differential contributes no Koszul sign."
+        },
+        {
+          "item": "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "section": "Definition",
+          "excerpt": "For homogeneous $m\\in M_i$ and $n\\in N_j$ the element $m\\otimes n$ has **total internal degree** $i+j$",
+          "use": "Supplies the internal grading on each balanced tensor summand; its outer-action clauses supply the B and C actions."
+        },
+        {
+          "item": "def-tensor-product-total-complex-of-chain-complexes",
+          "section": "Definition",
+          "excerpt": "$d(p\\otimes q)=d_Pp\\otimes q+(-1)^pp\\otimes d_Qq$.",
+          "use": "Supplies the signed total differential. Reindexing cochain degree p by chain degree -p leaves the sign unchanged because (-1)^(-p)=(-1)^p."
+        }
+      ],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF pp. 10-11 / printed pp. 10-11",
+          "excerpt": "two shift-like functors",
+          "use": "Context for keeping cochain and internal grading degrees distinct; their A_m-specific functor arguments are not used as a general proof."
+        },
+        {
+          "title": "Weibel, An Introduction to Homological Algebra, Chapter 10",
+          "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf",
+          "locator": "§10.6, printed pp. 395-396; Definition 10.6.1 and Exercise 10.6.2",
+          "excerpt": "Reindexing the chain complexes as cochain complexes",
+          "use": "Confirms the chain-to-cochain reindexing of total tensor complexes; Exercise 10.6.2 records the outer bimodule refinement as context, while the local definition depends on the proved library bimodule and graded-tensor interfaces."
+        }
+      ]
+    },
+    "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "source_section": "Definition",
+          "quote": "d(f\\otimes g):=d_F(f)\\otimes g+(-1)^p f\\otimes d_G(g).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "1.7"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-tensor-total-differential-is-well-defined-and-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "the formula $d(p\\otimes q)=d_Pp\\otimes q+(-1)^pp\\otimes d_Qq$ is balanced and satisfies $d^2=0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-chain-homotopy",
+          "source_section": "Definition",
+          "quote": "f_n-g_n=d^D_{n+1}s_n+s_{n-1}d^C_n.",
+          "uses": [
+            "1.6",
+            "1.7"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bimodule-actions-induced-on-tensor-products",
+          "source_section": "Statement",
+          "quote": "s(m\\otimes n)=(sm)\\otimes n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "balanced-differential",
+          "claim": "Right A-linearity of d_F and left A-linearity of d_G make D((fa) tensor g)=D(f tensor ag), so the total differential descends to the balanced quotient.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "outer-actions-and-internal-degree",
+          "claim": "B- and C-linearity of the input differentials makes D commute with the outer actions; degree-zero internal differentials preserve the sum internal degree.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "differential-square",
+          "claim": "The pure terms in D^2 vanish and the mixed terms have coefficients (-1)^(p+1) and (-1)^p and cancel.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-endpoints",
+          "claim": "The sum of the two finite support intervals bounds the total complex and its differential has no terms beyond either endpoint.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tensor-chain-maps",
+          "claim": "The tensor of chain maps commutes with D; identities and compositions hold on elementary tensors and hence on the totalization.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-variable-homotopy",
+          "claim": "For H(f tensor g)=(-1)^p f tensor h(g), the mixed F-differential terms cancel and dH+Hd=1 tensor (d h+h d).",
+          "step": "1.6",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-variable-homotopy",
+          "claim": "For K(f tensor g)=k(f) tensor g, the mixed G-differential terms cancel and dK+Kd=(d k+k d) tensor 1.",
+          "step": "1.7",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-variable-homotopy",
+          "claim": "Decomposing the difference of two tensor maps into first- and second-variable differences and composing the homotopies proves independence in both variables.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.6",
+            "step 1.7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 works on every elementary tensor and extends by additivity; an empty totalization has no elementary tensors, so all displayed maps are the unique zero maps."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly includes zero summands, and step 1.3 remains valid when either differential or an input term is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 states that with an input concentrated in one cochain degree the homotopy formulas reduce to that single summand; steps 1.6 and 1.7 retain their stated signs there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 displays D^2 term by term; when both input differentials vanish every term in that expansion is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.4 places support in [a+c,b+d] and checks that the outgoing differential at the upper endpoint and incoming terms below the lower endpoint vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a universal calculation on supplied complexes, maps, and homotopies. It selects no representative or element from a nonempty family and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts differential compatibility and homotopy invariance as implications; it contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts differential compatibility and homotopy invariance as implications; it contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF p. 10 / printed p. 10; §2c continuation, PDF pp. 10-11",
+          "excerpt": "two shift-like functors",
+          "use": "Context for distinguishing cochain shift and internal grading shift; the local homotopy sign identities are calculated in this proof."
+        },
+        {
+          "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+          "url": "https://stacks.math.columbia.edu/tag/09LP",
+          "locator": "Lemma 22.33.1, opening and proof, lines 27-29",
+          "excerpt": "defines an exact functor of triangulated categories",
+          "use": "Context for tensoring a differential graded bimodule on homotopy categories; its proof cites other DG lemmas, so it is not used in place of the local ordinary graded sign calculation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked balance of signed differential, outer actions, d squared zero by cancellation of (-1)^p and (-1)^(p+1), and the two homotopy formulas. The right-variable homotopy needs (-1)^p and the left-variable homotopy uses no added sign; bounded finite diagonals and zero terms are covered."
+      }
+    },
+    "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "source_section": "Definition",
+          "quote": "d(f\\otimes g):=d_F(f)\\otimes g+(-1)^p f\\otimes d_G(g).",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.6",
+            "1.7",
+            "1.8",
+            "1.9",
+            "1.10",
+            "1.11"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "These assignments preserve identities and composition, so tensoring is a bifunctor on the categories of bounded complexes and chain maps.",
+          "uses": [
+            "1.7",
+            "1.10"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-graded-balanced-tensor-and-shift-isomorphisms",
+          "source_section": "Statement",
+          "quote": "The balanced associator $$\\alpha_{M,N,P}:(M\\otimes_RN)\\otimes_SP\\longrightarrow M\\otimes_R(N\\otimes_SP),\\qquad \\alpha_{M,N,P}((m\\otimes n)\\otimes p)=m\\otimes(n\\otimes p),$$ is an isomorphism of graded abelian groups, natural in $M,N,P$ and compatible with the outer actions that make both sides graded $(B,C)$-bimodules. 2. For every graded left $R$-module $N$ and graded right $R$-module $M$ the tensor-unit maps $\\lambda_N:R\\otimes_RN\\to N$, $r\\otimes n\\mapsto rn$, and $\\rho_M:M\\otimes_RR\\to M$, $m\\otimes r\\mapsto mr$, are degree-zero isomorphisms, compatible with outer actions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-mapping-cone-of-a-chain-map",
+          "source_section": "Definition",
+          "quote": "d_n^{\\operatorname{Cone}(f)}(y,x):=(d_n^D(y)+f_{n-1}(x),-d_{n-1}^C(x)).",
+          "uses": [
+            "1.5",
+            "1.6",
+            "1.7",
+            "1.9",
+            "1.10"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-standard-cone-triangle-in-the-homotopy-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be an additive category. For a chain map $f:C_\\bullet\\to D_\\bullet$ in $\\mathcal A$, its **standard cone triangle** in $K(\\mathcal A)$ is the image of $$C_\\bullet\\xrightarrow fD_\\bullet\\xrightarrow j\\operatorname{Cone}(f)_\\bullet\\xrightarrow qC_\\bullet[1]$$ under the quotient to the homotopy category.",
+          "uses": [
+            "1.5",
+            "1.8",
+            "1.11",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-the-homotopy-category-of-an-abelian-category-is-triangulated",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal A$ is an abelian category, then $K(\\mathcal A)$, with its shift and distinguished cone triangles, is a triangulated category.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "triple-associator",
+          "claim": "The degreewise balanced associator is a degree-zero graded bimodule isomorphism on every finite total diagonal.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "associator-chain-naturality",
+          "claim": "Both parenthesizations have differential coefficients 1, (-1)^p, and (-1)^(p+q), so the associator is a natural chain isomorphism.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unit-chain-isomorphisms",
+          "claim": "The regular bimodule unit maps are natural degree-zero chain isomorphisms.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "associator-unit-coherence",
+          "claim": "The pentagon and unit triangle commute because every path has the same value on each pure tensor.",
+          "step": "1.4",
+          "inputs": [
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cochain-cone-reindexing",
+          "claim": "The homological mapping cone reindexes to Y^q plus X^(q+1), with differential (dY y + u x, -dX x) and the canonical shifted-source projection.",
+          "step": "1.5",
+          "inputs": [
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-variable-cone-isomorphism",
+          "claim": "F tensor Cone(u) maps isomorphically to Cone(1_F tensor u), with identity on the target and (-1)^p on the shifted source.",
+          "step": "1.6",
+          "inputs": [
+            "L1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-variable-cone-chain-map",
+          "claim": "The shifted-source sign makes the right-variable comparison commute with the total and cone differentials.",
+          "step": "1.7",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-variable-triangle",
+          "claim": "The signed comparison F tensor X[1] to (F tensor X)[1] makes the projection square commute, so the entire standard cone triangle is identified.",
+          "step": "1.8",
+          "inputs": [
+            "L1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-variable-cone-isomorphism",
+          "claim": "Distributivity identifies Cone(v) tensor X with the target and shifted-source parts of Cone(v tensor 1_X).",
+          "step": "1.9",
+          "inputs": [
+            "L1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-variable-cone-chain-map",
+          "claim": "The identity comparison commutes with target and shifted-source differentials, including the cone map v.",
+          "step": "1.10",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-variable-triangle",
+          "claim": "The identity shift comparison F[1] tensor X to (F tensor X)[1] makes the projection square commute, identifying the whole cone triangle.",
+          "step": "1.11",
+          "inputs": [
+            "L1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "distinguished-cone-triangles",
+          "claim": "Graded bimodule categories are abelian, and the verified triangle isomorphisms identify the tensor images with standard distinguished cone triangles.",
+          "step": "2.1",
+          "inputs": [
+            "L5",
+            "L6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 extends by pure tensors; if a tensor factor is the zero complex, both reassociated totalizations are zero, and steps 1.6 and 1.9 still identify the zero summands in the cone comparisons."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.6, 1.7, 1.9, and 1.10 use direct-sum formulas that remain valid when a component or differential is zero; maps between zero tensor totals are the unique zero maps."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 retains coefficients 1, (-1)^p, and (-1)^(p+q) for a one-term factor, while step 1.8 explicitly retains the (-1)^p shift comparison in its single degree."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 reduce to differential compatibility when input differentials vanish; steps 1.7 and 1.10 still compare the off-diagonal maps u and v in the cone differentials."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses finite triple diagonals and step 1.5 reindexes a bounded cone; the shifted-source intervals in steps 1.6 and 1.9 remain finite at both ends."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The associator, units, cone maps, and inverse comparisons are canonical formulas on supplied tensors; the proof chooses no element or representative from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts explicit isomorphisms and coherence identities and contains no biconditional implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts explicit isomorphisms and coherence identities and contains no biconditional implication."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF pp. 10-11 / printed pp. 10-11",
+          "excerpt": "Given a map of complexes f : M → N, the cone of f is the complex C(f) = M[1] ⊕ N with the differential ∂C(f)(x, y) = (−∂M x, f(x)+∂N y).",
+          "use": "This is the source's homological cone convention and bounded-complex context; the item reindexes that definition and performs its own graded bimodule sign checks."
+        },
+        {
+          "title": "Stacks Project, Differential Graded Algebra, §22.33, tag 09LP",
+          "url": "https://stacks.math.columbia.edu/tag/09LP",
+          "locator": "Lemma 22.33.1 and proof, lines 27-29",
+          "excerpt": "The functor (22.33.0.1) defines an exact functor of triangulated categories K(Mod_(A,d)) → K(Mod_(B,d)).",
+          "use": "Context for tensor exactness in the DG setting; the item proves the ordinary bounded bimodule cone comparisons directly."
+        },
+        {
+          "title": "Stacks Project, More on Algebra, §15.60, tag 06XY",
+          "url": "https://stacks.math.columbia.edu/tag/06XY",
+          "locator": "Lemma 15.60.4 and proof, lines 31-37",
+          "excerpt": "Follows from the isomorphism Tot(M ⊗_R Tot(K ⊗_R L)) = Tot(Tot(M ⊗_R K) ⊗_R L) and the definition.",
+          "use": "Context for reindexing total tensor products; its K-flat conclusion is not used, and this item directly checks the graded balanced associator and cone signs."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked balanced associator and unit maps, triple differential coefficients 1, (-1)^p, (-1)^(p+q), and the two cone comparisons. Right-variable shifted source needs (-1)^p; left-variable shifted source uses identity. Inclusion and projection maps match the standard triangles; bounded diagonals are finite."
+      }
+    },
+    "ex-two-term-tensor-complex-koszul-signs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "source_section": "Definition",
+          "quote": "d(f\\otimes g):=d_F(f)\\otimes g+(-1)^p f\\otimes d_G(g).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "The signed tensor differential on $F\\otimes_A G$ descends to the balanced tensor, preserves internal degree, commutes with the outer $B$- and $C$-actions, and squares to zero. If $\\phi:F\\to F'$ and $\\psi:G\\to G'$ are internal-degree zero chain maps that are bimodule-linear, then $\\phi\\otimes_A\\psi$ is a chain map.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "four-total-summands-and-initial-differential",
+          "claim": "The four degree pairs give T^0, T^1, T^2 as displayed, and the first total differential has components u tensor 1 and 1 tensor v.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "signed-next-differential",
+          "claim": "The p=1 second-factor term contributes a minus sign and the p=0 first-factor term a plus sign; balancing, outer actions, and internal degree are preserved.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "square-zero-composite",
+          "claim": "The two paths from T^0 to T^2 apply u and v on separate factors and cancel as -u tensor v plus u tensor v.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integer-instance-and-internal-grading",
+          "claim": "The specialization to multiplication by 2 and 3 has matrices (2,3)^T and (-3,2), whose composite is zero; internal degrees introduce no sign, and one-term specializations retain the cochain-degree sign.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 lists every degree pair; if one input is the zero complex, all four corresponding summands vanish, so the displayed maps are the unique maps between zero totals."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If either u or v is zero, one matrix row or column vanishes and step 1.3 still gives a zero composite; step 2.1 covers the concentrated-factor specialization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes both one-term placements: degree 0 gives 1 tensor v and degree 1 gives -1 tensor v, exactly as the totalization convention states."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When u=v=0 both matrices in steps 1.1-1.2 are zero; step 1.3 then has two zero paths."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 places the four terms only in degrees 0, 1, and 2 and explicitly sets every other total degree to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All maps and matrices are calculated from the supplied complexes and differentials; no representative or element is selected from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a total complex and its differential and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a total complex and its differential and states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF p. 10 / printed p. 10, bounded-complex convention",
+          "excerpt": "An object M of P(Q) is a bounded complex of projective objects.",
+          "use": "Context for the cochain-indexed differential convention; the example uses the local bounded bimodule totalization definition for its tensor signs."
+        }
+      ]
+    },
+    "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "source_section": "Definition",
+          "quote": "d(f\\otimes g):=d_F(f)\\otimes g+(-1)^p f\\otimes d_G(g).",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "The signed tensor differential on $F\\otimes_A G$ descends to the balanced tensor, preserves internal degree, commutes with the outer $B$- and $C$-actions, and squares to zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-bimodule-tensor-exactness-and-projective-preservation",
+          "source_section": "Statement",
+          "quote": "If $M$ is finite graded projective as a left $B$-module, then $\\Phi_M$ carries every finite graded projective left $A$-module to a finite graded projective left $B$-module.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "source_section": "Statement",
+          "quote": "degree-zero direct summand of a finite direct sum of internal shifts $A\\{r_1\\}\\oplus\\cdots\\oplus A\\{r_n\\}$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-projective-modules-are-flat-over-an-arbitrary-ring",
+          "source_section": "Statement",
+          "quote": "Every projective left or right module over an arbitrary unital ring is flat on its appropriate side.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms",
+          "source_section": "Statement",
+          "quote": "Thus a bounded-above flat complex preserves quasi-isomorphisms between bounded-above complexes in the other variable.",
+          "uses": [
+            "2.3",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-derived-tensor-product-in-the-bounded-above-setting",
+          "source_section": "Definition",
+          "quote": "is the object represented by $\\operatorname{Tot}(P_N\\otimes_RM)$, equivalently $\\operatorname{Tot}(N\\otimes_RP_M)$.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "$D(\\mathcal A)=K(\\mathcal A)[\\mathrm{qis}^{-1}],\\qquad Q:K(\\mathcal A)\\longrightarrow D(\\mathcal A).",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-exact-functor-between-triangulated-categories",
+          "source_section": "Definition",
+          "quote": "is an additive functor with a specified natural isomorphism",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-the-derived-category-inherits-a-triangulated-structure",
+          "source_section": "Statement",
+          "quote": "The derived category, with shift $[1]$ and distinguished triangles the isomorphic images of cone triangles, is triangulated. The localization functor $Q$ is exact.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+          "source_section": "Statement",
+          "quote": "these identify the image of either standard cone triangle with the standard cone triangle of the tensored chain map in the homotopy category.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "Consequently the tensor bifunctor descends to homotopy classes in both variables.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "then $\\phi\\otimes_A\\psi$ is a chain map. These assignments preserve identities and composition",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bounded-totalization-and-boundary-formulas",
+          "claim": "The total complex has finite diagonals, bounded support, the stated signs in one-term cases, and zero terms on empty diagonals.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "right-projectives-are-flat",
+          "claim": "Every term of F is right A-flat, and F is bounded above.",
+          "step": "1.2",
+          "inputs": [
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tensor-descends-to-homotopy-categories",
+          "claim": "Tensor sends chain maps to maps, respects identities and composition, and sends homotopies to homotopies; it is additive after forgetting or retaining grading.",
+          "step": "2.1",
+          "inputs": [
+            "L12",
+            "L13",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-projective-output-terms",
+          "claim": "Every output term on a finite diagonal is finite graded projective, including the zero module on empty diagonals.",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tensor-preserves-bounded-quasi-isomorphisms",
+          "claim": "The right-flat bounded complex F preserves quasi-isomorphisms of bounded ordinary or graded left A-complexes.",
+          "step": "2.3",
+          "inputs": [
+            "L1",
+            "L6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-on-bounded-projective-homotopy-categories",
+          "claim": "The projective subcategories are cone-closed and the tensor functor preserves their shift comparisons and cone triangles, hence is exact.",
+          "step": "3.1",
+          "inputs": [
+            "L9",
+            "L11",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "factor-through-bounded-localization",
+          "claim": "Quasi-isomorphism preservation induces the ordinary and graded functors on bounded derived localizations under the stated size convention.",
+          "step": "3.2",
+          "inputs": [
+            "L8",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derived-tensor-model",
+          "claim": "The identity projective replacement F to F computes the ungraded derived tensor; finite truncation of any acyclic graded input proves F is K-flat in the graded setting.",
+          "step": "3.3",
+          "inputs": [
+            "L1",
+            "L6",
+            "L7",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-on-derived-categories",
+          "claim": "The descended functors have the induced shift comparisons and preserve localized cone triangles, so they are exact.",
+          "step": "4.1",
+          "inputs": [
+            "L9",
+            "L10",
+            "L11",
+            "step 2.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "bounded-output-and-no-finiteness-overclaim",
+          "claim": "The output is bounded; finite graded projectivity is concluded only for finite graded projective inputs, with boundary specializations covered.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 2.3",
+            "step 4.1",
+            "step 3.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 makes empty diagonals zero and the total complex zero if either input is zero; Step 2.2 treats an empty diagonal as a finite graded projective zero module."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the zero totalization for a zero factor; Step 2.1 is additive on maps, and Step 2.3 uses quasi-isomorphism preservation without requiring nonzero components."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives both one-term placements: a first factor in degree r contributes the sign (-1)^r on the second differential, while a second factor in degree s leaves d_F tensor 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 treats both complexes concentrated in degree zero, where totalization is ordinary module tensor; Steps 2.2 and 2.3 still apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves support is contained in [a+c,b+d] and each diagonal is finite; all degrees outside this interval are zero, including any zero endpoint tensor summands."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The functor is induced from fixed tensor formulas and the derived-tensor model uses the fixed identity replacement F to F; no representative or witness is selected from a nonempty family (Steps 3.2 and 3.3)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states implications and functorial conclusions, not a biconditional; there is no forward iff direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states implications and functorial conclusions, not a biconditional; there is no reverse iff direction."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF p. 10–11 / printed pp. 10–11; paragraph at p. 11, lines 486–488",
+          "excerpt": "each R_j is a projective left A_m-module and a projective right A_m-module",
+          "use": "A_m-specific context for bounded two-sided projective bimodules acting by tensor on a bounded projective homotopy category; the general graded B-A theorem is proved locally."
+        },
+        {
+          "title": "Charles A. Weibel, An Introduction to Homological Algebra",
+          "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf",
+          "locator": "§10.6.1–10.6.3, PDF pp. 26–27 / printed pp. 395–396; Exercise 10.6.2",
+          "excerpt": "The total tensor product is a functor",
+          "use": "Context for quasi-isomorphism invariance and localization of bounded-above total tensor; the general existence proof invokes enough projectives, whereas this proof uses the supplied identity replacement F to F and the local flat-tensor lemma."
+        },
+        {
+          "title": "Stacks Project, More on Algebra",
+          "url": "https://stacks.math.columbia.edu/tag/06XY",
+          "locator": "§15.60, Lemma 15.60.7, complete proof, tag 06XY",
+          "excerpt": "Then P^bullet is K-flat.",
+          "use": "Context for the bounded-above flat-complex criterion; the graded K-flat claim here is proved directly by truncating an arbitrary acyclic input and applying the published sided bounded-above lemma."
+        },
+        {
+          "title": "Stacks Project, Differential Graded Algebra",
+          "url": "https://stacks.math.columbia.edu/tag/09LP",
+          "locator": "§22.33, Lemma 22.33.1, tag 09LP",
+          "excerpt": "defines an exact functor of triangulated categories",
+          "use": "DG-category context for tensor exactness; the ordinary graded totalization, shift comparison, and cone triangle use are checked in the local dependency and this proof."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked finite diagonals, left finite projectivity under tensor, right projectivity implies flatness, and quasi-isomorphism invariance. The bounded-above flat/K-flat truncation argument matches Stacks tag 06XY Lemmas 15.60.2 and 15.60.7; cone comparison gives exactness after localization. No finite-dimensional output claim or AC use."
+      }
+    },
+    "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "If $\\phi:F\\to F'$ and $\\psi:G\\to G'$ are internal-degree zero chain maps that are bimodule-linear, then $\\phi\\otimes_A\\psi$ is a chain map.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "On a summand $F^p\\otimes_A G^q$, the total homotopies are $$ H(f\\otimes g)=(-1)^p f\\otimes h(g),\\qquad K(f\\otimes g)=k(f)\\otimes g. $$ Consequently the tensor bifunctor descends to homotopy classes in both variables.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "It gives an exact triangulated functor $$F\\otimes_A-:K^b(\\operatorname{proj}^{gr} A)\\longrightarrow K^b(\\operatorname{proj}^{gr} B),$$ where the terms in $\\operatorname{proj}^{gr}$ are finite graded projective modules and morphisms in $K^b$ are chain maps modulo chain homotopy.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "After forgetting internal grading, it preserves quasi-isomorphisms between bounded complexes of left modules. It therefore descends to an exact functor $$F\\otimes_A-:D^b(A\\text{-}\\mathrm{Mod})\\longrightarrow D^b(B\\text{-}\\mathrm{Mod}).$$ The same descent and exactness hold for bounded complexes in the graded module categories.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "In both module settings the descended functor is the derived tensor functor $F\\otimes_A^{\\mathbf L}-$, computed by the ordinary signed totalization $F\\otimes_A-$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tensor-the-supplied-bimodule-maps",
+          "claim": "The supplied chain maps induce balanced degree-zero B-linear chain maps on each total complex.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "transfer-supplied-homotopies",
+          "claim": "The first-variable tensor homotopies identify the two composites with the identity in the homotopy category and are natural in the input.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "naturality-in-the-module-argument",
+          "claim": "The tensor maps form natural transformations on bounded homotopy categories because both naturality squares commute on pure tensors.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "isomorphism-on-projective-homotopy-categories",
+          "claim": "The two tensor functors land in bounded finite graded projectives and the transferred homotopies make the natural transformations inverse there.",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "isomorphism-on-derived-categories",
+          "claim": "Quasi-isomorphism preservation and localization identify the descended transformations as inverse derived tensor functors in ordinary and graded settings.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "boundary-and-choice-audit",
+          "claim": "The formulas cover empty, zero, one-term, degenerate, and endpoint cases without selecting maps; no reverse implication is asserted.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 covers empty total diagonals: the component maps and homotopies restrict to the zero summands, where both composite identities hold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 covers a zero input complex: both tensor functors and the induced maps are zero, so the composite identity equations hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 records that for a one-term input the same first-variable map and homotopy formulas apply, with the homotopy acting only in the F factor."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 covers vanishing supplied homotopies: the displayed homotopy equivalence equations then say the supplied maps are strict inverses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses bounded support; components beyond either endpoint are zero and the degree-minus-one homotopy formula creates no outside term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 states that every map and homotopy is supplied by the hypotheses and no map or representative is selected; no form of AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition proves that a supplied bimodule homotopy equivalence induces natural tensor-functor isomorphisms and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition makes no converse claim that an isomorphism of tensor functors must arise from a bimodule homotopy equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF p.11 / printed p.11, lines 486–488; §2d, Proposition 2.4 and complete proof, PDF pp.11–13 / printed pp.11–13",
+          "excerpt": "One associates to R the functor R : C_m → C_m of tensoring with R.",
+          "use": "Specific A_m context for tensor functors of two-sided projective bimodule complexes and an example of inverse tensor functors; this proposition proves the general homotopy-transfer claim directly."
+        },
+        {
+          "title": "Stacks Project, Differential Graded Algebra",
+          "url": "https://stacks.math.columbia.edu/tag/09LP",
+          "locator": "§22.33, Lemma 22.33.3 and complete proof, tag 09LP, lines 36–46",
+          "excerpt": "If f is a quasi-isomorphism, then 1 ⊗ f is an isomorphism of functors.",
+          "use": "DG derived-tensor context for functorial invariance; the proof here uses the stronger supplied bimodule homotopy equivalence and the explicit local homotopy formula."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked transfer of supplied first-variable homotopies by h(f) tensor x, naturality on elementary tensors, and descent of inverse transformations through quasi-isomorphism localization. Zero and one-term inputs are covered; proposition is one-way."
+      }
+    },
+    "ex-left-and-right-projective-not-enveloping-projective": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "Multiplication is associative and commutative **on all of $F$**, and $x \\cdot 1 = x$ for every $x \\in F",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-field-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "$(F, +, \\cdot, 0, 1)$ is a ring ([[def-ring]]), and it is commutative ([[def-commutative-ring]]), with $1 \\ne 0$; 2. $F$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);",
+          "uses": [
+            "1.2",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-zero-divisor-and-integral-domain",
+          "source_section": "Definition",
+          "quote": "An **integral domain**, or simply a **domain**, is a commutative ring ([[def-commutative-ring]]) $R$ such that - **(D1)** $1 \\ne 0$ in $R$; - **(D2)** $R$ has no zero divisors.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-polynomial-ring-on-a-family-of-indeterminates",
+          "source_section": "Definition",
+          "quote": "The set $R[x_i:i\\in I]$ consists of the functions $$c:\\mathcal M(I)\\longrightarrow R$$ with finite support",
+          "uses": [
+            "1.2",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain, then $R[x_1,\\ldots,x_n]$ is an integral domain for every $n\\in\\mathbb N$, including $n=0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-tensor-product-of-modules-by-generators-and-relations",
+          "source_section": "Definition",
+          "quote": "Every tensor is a finite sum of elementary tensors, because every element of $F$ is a finite $\\mathbb Z$-linear combination of basis elements and integer coefficients may be absorbed into either additive variable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-tensor-product-of-modules-by-generators-and-relations",
+          "source_section": "Definition",
+          "quote": "$$(mr)\\otimes n=m\\otimes(rn).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-projective-module",
+          "source_section": "Definition",
+          "quote": "it has the lifting property for epimorphisms",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "source_section": "Statement",
+          "quote": "if and only if $P$ is a degree-zero direct summand of a finite direct sum of internal shifts $A\\{r_1\\}\\oplus\\cdots\\oplus A\\{r_n\\}$. In particular every finite direct sum of shifts $A\\{r_j\\}$ is a projective object of $\\operatorname{GrMod}_0(A)",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "In both module settings the descended functor is the derived tensor functor $F\\otimes_A^{\\mathbf L}-$, computed by the ordinary signed totalization $F\\otimes_A-$. The output is bounded.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "regular-left-module-is-finite-graded-projective",
+          "claim": "The only nonzero term of F is the degree-zero shifted regular module and is finite graded projective as a left A-module.",
+          "step": "1.1",
+          "inputs": [
+            "L10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "enveloping-algebra-is-polynomial-ring-in-two-variables",
+          "claim": "The special enveloping action makes A^e isomorphic to the commutative domain k[x,y], while A=k[x] is commutative.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "right-projective-and-derived-tensor-is-identity",
+          "claim": "The right regular module is projective by an explicit lift, and the unit map identifies ordinary tensor with the identity, hence identifies its derived tensor under the stated size convention.",
+          "step": "2.1",
+          "inputs": [
+            "L9",
+            "L11",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "diagonal-action-kernel-is-x-minus-y",
+          "claim": "The diagonal action is the surjection mu:k[x,y]→k[x], with kernel generated by x-y, a nonzero proper ideal.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "projectivity-would-split-the-diagonal-quotient",
+          "claim": "Projectivity would lift id_A through mu and make ker(mu) a direct summand ideal Re generated by an idempotent e.",
+          "step": "3.1",
+          "inputs": [
+            "L9",
+            "step 2.2",
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "domain-has-no-nontrivial-idempotent-ideal",
+          "claim": "In the domain k[x,y], e^2=e forces e=0 or e=1, contradicting that ker(mu) is nonzero and proper; A is not projective over A^e.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L6",
+            "step 2.2",
+            "step 3.1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "boundary-and-choice-audit",
+          "claim": "The example covers zero and empty polynomial cases, the one-term endpoint complex, characteristic two, and a single projectivity lift, and states no iff claim.",
+          "step": "5.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "L9",
+            "L10",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 notes that the zero polynomial has empty support and the kernel calculation uses finite support, including the empty sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 handles the zero polynomial in the kernel and uses the field-to-domain fact to exclude the zero algebra."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 treats F as the actual one-term complex in cochain degree zero; Step 2.1 gives the unit tensor isomorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 checks characteristic two: x-y=x+y still has distinct monomials, so the kernel ideal remains nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 identifies the two endpoints of F as its single nonzero degree-zero term with zero differential; Step 2.1 computes tensor there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses one lift of id_A across mu by projectivity. Step 5.1 records that no family of choices or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts that this specified bimodule is not enveloping-projective and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no converse claim about arbitrary left and right projective bimodules."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF p.11 / printed p.11, lines 486–488; §2d, Proposition 2.4 and complete proof, PDF pp.11–13 / printed pp.11–13",
+          "excerpt": "each R_j is a projective left A_m-module and a projective right A_m-module",
+          "use": "Context only: the paper uses particular A_m bimodule complexes and proves their inverse tensor functors by a separate decomposition. It does not establish the k[x] enveloping-algebra calculation here."
+        },
+        {
+          "title": "Weibel, An Introduction to Homological Algebra, §10.6",
+          "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf",
+          "locator": "§10.6.1–10.6.3 and Exercise 10.6.2, PDF pp.26–27 / printed pp.395–396",
+          "excerpt": "the total tensor product may be refined to a functor",
+          "use": "Context only: the exercise asks for the bimodule refinement of total derived tensor. This example proves its concrete identity tensor calculation directly and uses the local theorem for the derived model."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked A=k[x] is regular projective on both sides and tensor-unit identity; A^e=k[x,y] acts through quotient by (x-y). If A were projective over A^e, this nonzero proper ideal would be generated by an idempotent, impossible in a domain; characteristic two remains valid."
+      }
+    },
+    "thm-inverse-bimodule-complexes-give-derived-tensor-equivalences": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+          "source_section": "Statement",
+          "quote": "The degreewise balanced associator is a natural chain isomorphism",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility",
+          "source_section": "Statement",
+          "quote": "The regular bimodule complexes $B$ and $A$, concentrated in cochain degree zero, give natural chain isomorphisms",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "then $\\phi\\otimes_A\\psi$ is a chain map.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "On a summand $F^p\\otimes_A G^q$, the total homotopies are $$ H(f\\otimes g)=(-1)^p f\\otimes h(g),\\qquad K(f\\otimes g)=k(f)\\otimes g. $$ Consequently the tensor bifunctor descends to homotopy classes in both variables.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "It gives an exact triangulated functor $$F\\otimes_A-:K^b(\\operatorname{proj}^{gr} A)\\longrightarrow K^b(\\operatorname{proj}^{gr} B),$$ where the terms in $\\operatorname{proj}^{gr}$ are finite graded projective modules and morphisms in $K^b$ are chain maps modulo chain homotopy.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "After forgetting internal grading, it preserves quasi-isomorphisms between bounded complexes of left modules. It therefore descends to an exact functor $$F\\otimes_A-:D^b(A\\text{-}\\mathrm{Mod})\\longrightarrow D^b(B\\text{-}\\mathrm{Mod}).$$ The same descent and exactness hold for bounded complexes in the graded module categories. 3. In both module settings the descended functor is the derived tensor functor $F\\otimes_A^{\\mathbf L}-$, computed by the ordinary signed totalization $F\\otimes_A-$.\n",
+          "uses": [
+            "1.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors",
+          "source_section": "Statement",
+          "quote": "each term of each complex finite graded projective on the left over $B$ and projective as an underlying right $A$-module",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "individual-derived-tensor-functors-are-defined",
+          "claim": "The hypotheses apply to F and G separately, so both tensor operations give exact functors on the stated projective homotopy and derived categories.",
+          "step": "1.1",
+          "inputs": [
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "first-composite-comparison-maps",
+          "claim": "Reassociating F tensor (G tensor X), applying the supplied map F tensor G to B, and using the regular unit constructs chain maps in both directions.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "second-composite-comparison-maps",
+          "claim": "The corresponding associator, supplied map G tensor F to A, and regular unit construct chain maps in both directions for the other composite.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "first-composite-maps-are-homotopy-inverse",
+          "claim": "Tensoring the supplied homotopies between vu and the identity, and between uv and the identity, proves the first comparison maps mutually inverse in the homotopy category.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-composite-comparison-is-natural",
+          "claim": "The first comparison maps and transferred homotopies commute with every chain map of the input, giving a natural isomorphism in the bounded homotopy category.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-composite-maps-are-homotopy-inverse",
+          "claim": "Tensoring the supplied homotopies for G tensor F and A proves the second comparison maps mutually inverse, naturally in the input.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "given",
+            "step 1.3",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "equivalence-on-bounded-projective-homotopy-categories",
+          "claim": "The individual functors restrict to finite graded projectives and the two composite natural isomorphisms make them exact inverse equivalences there.",
+          "step": "5.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra",
+            "L7"
+          ]
+        },
+        {
+          "id": "equivalence-on-derived-categories",
+          "claim": "Quasi-isomorphism preservation and ordinary signed derived models allow the natural transformations to descend through localization as exact inverse derived tensor functors.",
+          "step": "5.2",
+          "inputs": [
+            "L6",
+            "step 3.1",
+            "step 4.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "boundary-choice-and-coherence-audit",
+          "claim": "The same formulas cover empty, zero, one-term, zero-differential, and endpoint cases; all maps are supplied, no AC is used, no iff is claimed, and group-action coherence is not proved.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 6.1 records that empty inputs and empty total diagonals give zero totalizations, with the identity equations restricting to zero objects."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 6.1 states that zero complexes give zero totalizations and the supplied maps and homotopies retain the identity equations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 covers one-term complexes; Steps 1.2 and 1.3 give the unit and reassociation formulas without requiring nonzero differentials."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 covers zero differentials; if a supplied homotopy is zero, its equation says the associated maps are strict inverses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 records that bounded endpoints contribute only zero summands to the finite total complexes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 notes that both inverse maps and homotopies are supplied in the hypotheses and the derived models use F and G themselves; no family of choices or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication from specified inverse bimodule homotopy equivalences and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not assert that an equivalence of tensor functors must arise from inverse bimodule homotopy equivalences."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§1a footnote 1, PDF p.1; §2c, PDF/printed pp.10–11; §2d, Proposition 2.4 and complete proof, PDF pp.11–13 / printed pp.11–13",
+          "excerpt": "a full-fledged action comes with preferred isomorphisms",
+          "use": "Context only: the footnote distinguishes a weak action from specified coherence. Proposition 2.4 proves inverse tensor functors for the particular A_m complexes; this theorem assumes general inverse bimodule homotopy equivalences and proves the induced equivalence directly."
+        },
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2d, Proposition 2.4 and complete decomposition proof, PDF pp.11–13 / printed pp.11–13",
+          "excerpt": "The functors R_i and R_i' are mutually inverse equivalences of categories",
+          "use": "The special A_m calculation is contextual evidence for the pattern only. Its proof uses a decomposition of a specific composite bimodule complex and is not treated as a proof of this general theorem."
+        },
+        {
+          "title": "Weibel, An Introduction to Homological Algebra, §10.6",
+          "url": "https://math.mit.edu/~hrm/palestine/weibel/10-derived_category.pdf",
+          "locator": "§10.6.1–10.6.3 and Exercise 10.6.2, PDF pp.26–27 / printed pp.395–396",
+          "excerpt": "the total tensor product may be refined to a functor",
+          "use": "Context only: Exercise 10.6.2 asks for the bimodule refinement of total derived tensor. The proof here constructs the concrete natural isomorphisms from the supplied homotopies."
+        },
+        {
+          "title": "Stacks Project, Differential Graded Algebra, Section 22.33",
+          "url": "https://stacks.math.columbia.edu/tag/09LP",
+          "locator": "Lemma 22.33.3 and its complete proof, tag 09LP, lines 36–46",
+          "excerpt": "If f is a quasi-isomorphism, then 1 ⊗ f is an isomorphism of functors.",
+          "use": "Context only: the result is in the DG property-(P) setting and concerns quasi-isomorphisms. This theorem uses the stronger supplied bimodule homotopy equivalences and transfers their homotopies directly in ordinary graded total complexes."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked associator and regular-unit maps turn supplied homotopy inverses for F tensor G and G tensor F into natural inverse transformations. Direct transfer of homotopies avoids projectivity assumptions on the composite complexes; K-flat descent and bounded projective preservation provide both equivalences. No coherence for group action is claimed."
+      }
+    },
+    "ex-contractible-bimodule-complex-induces-zero-functor": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-complex-of-graded-bimodules-and-signed-tensor-totalization",
+          "source_section": "Definition",
+          "quote": "d(f\\otimes g):=d_F(f)\\otimes g+(-1)^p f\\otimes d_G(g).",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-bimodule-tensor-totalization-respects-differentials-and-homotopies",
+          "source_section": "Statement",
+          "quote": "K(f\\otimes g)=k(f)\\otimes g.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "source_section": "Statement",
+          "quote": "if and only if $P$ is a degree-zero direct summand of a finite direct sum of internal shifts $A\\{r_1\\}\\oplus\\cdots\\oplus A\\{r_n\\}$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-projective-module",
+          "source_section": "Definition",
+          "quote": "it has the lifting property for epimorphisms",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "It gives an exact triangulated functor $$F\\otimes_A-:K^b(\\operatorname{proj}^{gr} A)\\longrightarrow K^b(\\operatorname{proj}^{gr} B),$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "After forgetting internal grading, it preserves quasi-isomorphisms between bounded complexes of left modules. It therefore descends to an exact functor $$F\\otimes_A-:D^b(A\\text{-}\\mathrm{Mod})\\longrightarrow D^b(B\\text{-}\\mathrm{Mod}).$$ The same descent and exactness hold for bounded complexes in the graded module categories.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor",
+          "source_section": "Statement",
+          "quote": "In both module settings the descended functor is the derived tensor functor $F\\otimes_A^{\\mathbf L}-$, computed by the ordinary signed totalization $F\\otimes_A-$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors",
+          "source_section": "Statement",
+          "quote": "each term of each complex finite graded projective on the left over $B$ and projective as an underlying right $A$-module.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "prop-homotopy-equivalent-bimodule-complexes-induce-isomorphic-tensor-functors",
+          "source_section": "Statement",
+          "quote": "Then $u\\otimes_A1_X$ and $v\\otimes_A1_X$ induce mutually inverse natural isomorphisms",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-term-complex",
+          "claim": "The identity differential gives a bounded two-term bimodule complex supported in degrees -1 and 0.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bimodule-contraction",
+          "claim": "The map k^0=id contracts F by d_F k+k d_F=id_F in both nonzero degrees.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "signed-totalization-matrix",
+          "claim": "The p=-1 and p=0 summands give the displayed total differential, including the minus sign on the second-factor differential in first-factor degree -1.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lifted-contraction",
+          "claim": "The first-variable homotopy transfers with no second-variable sign; the two explicit composites add to the identity on every total degree.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "regular-bimodule-satisfies-projectivity-hypotheses",
+          "claim": "A=A{0} is finite graded projective on the left, and the right regular module is projective by lifting f(1) across a fixed surjection; zero terms are projective.",
+          "step": "1.4",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "L8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "naturality-of-lifted-contraction",
+          "claim": "For every chain map g, both orders in the naturality square send each elementary tensor pair to (b tensor g(y),0).",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-derived-tensor-functor",
+          "claim": "The maps F to 0 and 0 to F with homotopy -k witness the homotopy-equivalence hypotheses; their tensor functors are naturally isomorphic and tensoring with 0 is zero.",
+          "step": "2.2",
+          "inputs": [
+            "L6",
+            "L7",
+            "L9",
+            "step 1.2",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "boundary-and-choice-audit",
+          "claim": "The same contraction handles zero, empty, one-term, zero-differential, characteristic-two, and endpoint cases; the one projectivity witness requires no family choice and the statement is not an iff.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.3",
+            "step 2.1",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 treats an empty-support input X: every total term and H component is zero, and the identity on the zero object is the zero map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the zero input; the displayed contraction has zero domain and codomain, and the zero bimodule comparison in step 2.2 remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 treats X concentrated in one cochain degree; missing rows are zero and step 2.1 still verifies dH+Hd=id on every remaining total term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 treats d_X=0; the X-differential terms vanish while step 2.1 still has the identity contributions from d_F and H, including in characteristic two."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 combines the support of F=[-1,0] with X=[c,d] to give T support [c-1,d]; the same formula sets every term and homotopy map outside those endpoints to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The contraction k is explicitly the identity map. Step 4.1 uses one preimage supplied by surjectivity for a fixed lifting square, not a family of choices; no Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item exhibits one specified contractible bimodule complex and asserts its tensor functor is zero; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim that every bimodule complex inducing the zero functor must be contractible."
+        }
+      ],
+      "finite_smoke": [],
+      "source_basis": [
+        {
+          "title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions",
+          "url": "https://arxiv.org/pdf/math/0006056",
+          "locator": "§2c, PDF pp.10–11 / printed pp.10–11; bounded projective homotopy category and side-projective bimodule functor setup",
+          "excerpt": "each R_j is a projective left A_m-module and a projective right A_m-module",
+          "use": "Context only for the bounded projective homotopy category and the two-sided projectivity setting. The paper does not calculate this contractible complex or its zero tensor functor; those claims are proved by the local contraction and the declared library suppliers."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step-5a Alpha group j",
+        "notes": "Checked two-term identity complex contraction, signed total differential at degrees -1 and 0, and explicit H(f tensor x)=k(f) tensor x with dH+Hd=1. Regular A is projective on both sides; zero complex comparison yields zero functor on homotopy and derived categories."
+      }
+    }
+  }
+}

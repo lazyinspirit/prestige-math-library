@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-module-categories-are-grothendieck-categories, thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings, lem-one-step-extension-of-a-partial-injective-resolution, def-injective-resolution-in-an-abelian-category]
+deps: [def-axiom-of-choice, thm-module-categories-are-grothendieck-categories, thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings, lem-one-step-extension-of-a-partial-injective-resolution, def-injective-resolution-in-an-abelian-category]
 proof_strategy: direct
 verification:
   audited: 2026-09-01
@@ -28,7 +28,9 @@ Assume the Axiom of Choice.
 Every left module over a unital ring admits an injective resolution.
 ## Facts & Assumptions
 
-**Given:** A unital ring $R$ and a left $R$-module $M$.
+**Given:** The Axiom of Choice, a unital ring $R$ and a left $R$-module $M$.
+
+[A1] The Axiom of Choice is the choice-function principle ([[def-axiom-of-choice]]). It licenses the embedding supplier [L2] at step 1.1.
 
 [L1] Module categories are Grothendieck categories ([[thm-module-categories-are-grothendieck-categories]]).
 
@@ -41,7 +43,7 @@ Every left module over a unital ring admits an injective resolution.
 
 **Proof technique:** direct.
 
-1.1 By [L1] and [L2], every left $R$-module $X$ admits a functorial monomorphism $\eta_X:X\rightarrowtail E(X)$ into an injective module. Starting from $M$, set $I^0:=E(M)$ and let $C^0$ be the cokernel of $\eta_M$; recursively set $I^{n+1}:=E(C^n)$ and let $C^{n+1}$ be the cokernel of $C^n\rightarrowtail I^{n+1}$. [L1, L2, construct]
+1.1 Under the assumed AC [A1], by [L1] and [L2], every left $R$-module $X$ admits a functorial monomorphism $\eta_X:X\rightarrowtail E(X)$ into an injective module. Starting from $M$, set $I^0:=E(M)$ and let $C^0$ be the cokernel of $\eta_M$; recursively set $I^{n+1}:=E(C^n)$ and let $C^{n+1}$ be the cokernel of $C^n\rightarrowtail I^{n+1}$. [A1, L1, L2, construct]
 
 2.1 Applying [L3] at each stage of the recursion in step 1.1 yields an exact coaugmented complex $$0\to M\to I^0\to I^1\to I^2\to\cdots$$ whose terms are injective. [L2, L3, step 1.1, construct]
 

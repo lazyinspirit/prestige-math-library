@@ -1,0 +1,73 @@
+# step3b: A/B pair the-gauss-bonnet-theorem-for-riemannian-surfaces
+
+- Run: frontier-36-complete
+- A page: the-gauss-bonnet-theorem-for-riemannian-surfaces
+- B page: the-gauss-bonnet-theorem-for-riemannian-surfaces-examples
+- Batches: 15
+- Own only this pair; preserve other pairs in shared batch files.
+- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.
+- Read current manifests, coverage, prose, plan and dependency records.
+- Direct in-run prerequisite pairs to inspect (they may still be unfinished): classification-of-compact-connected-surfaces.
+- If an item supplier is not yet authored, flag its exact ID and consuming step in research/frontier-36-complete-step3b-pair-the-gauss-bonnet-theorem-for-riemannian-surfaces.md; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.
+- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):
+  0. def-oriented-riemannian-surface-and-positive-quarter-turn (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  0. def-regular-oriented-surface-region-with-piecewise-smooth-boundary (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  0. def-rotation-index-of-a-regular-closed-plane-curve (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  0. lem-a-compact-surface-metric-extends-across-its-boundary (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  1. def-connection-one-form-of-an-oriented-orthonormal-frame (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  1. def-curvilinear-triangulation-of-a-compact-surface (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  1. def-signed-exterior-angle-at-a-piecewise-smooth-corner (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  1. def-signed-geodesic-curvature-of-an-oriented-unit-speed-curve (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  1. lem-a-compact-riemannian-surface-has-a-uniform-short-geodesic-radius (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  1. lem-stokes-for-piecewise-smooth-surface-regions (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. def-geodesic-triangulation (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. fs-geodesic-curvature-is-the-ordinary-curvature-of-a-space-curve (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. lem-curvilinear-triangulation-induces-a-finite-cw-structure (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. prop-angle-derivative-formula-for-geodesic-curvature (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. prop-geodesic-curvature-under-orientation-and-parameter-reversal (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. thm-connection-one-form-rotation-law-on-an-oriented-surface (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. thm-gaussian-curvature-structure-equation (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  2. thm-hopf-turning-tangent-theorem (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  3. cor-turning-angle-sum-for-a-simple-geodesic-polygon-in-the-plane (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  3. fs-the-connection-one-form-of-an-orthonormal-frame-is-frame-independent (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  3. prop-total-turning-is-the-integral-of-geodesic-curvature-plus-frame-holonomy (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  4. lem-finite-planar-graph-disk-cuts-and-euler-count (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  5. lem-a-finite-short-geodesic-network-gives-a-curvilinear-polygon-cellulation (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  5. lem-finite-frameable-decomposition-of-a-regular-disk-region (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  6. thm-finite-geodesic-triangulation-of-a-compact-riemannian-surface (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  6. thm-local-gauss-bonnet-for-a-frameable-disk-region (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  7. def-euler-characteristic-of-a-finitely-triangulated-compact-surface (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  7. lem-gauss-bonnet-expression-is-independent-of-the-metric (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  7. thm-gauss-bonnet-for-a-geodesic-triangle (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  7. thm-local-gauss-bonnet-for-an-arbitrary-disk-region (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  8. cor-angle-sum-comparison-for-small-geodesic-triangles (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  8. cor-gauss-bonnet-for-a-geodesic-polygon (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  8. fs-a-geodesic-triangle-on-every-surface-has-angle-sum-pi (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  8. lem-euler-characteristic-is-unchanged-by-edge-and-face-subdivision (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  8. lem-local-gauss-bonnet-sums-over-a-supplied-finite-geodesic-triangulation (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  8. ex-hyperbolic-geodesic-triangle-area-defect (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  8. ex-spherical-geodesic-triangle-area-excess (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  9. thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  9. cex-omitting-exterior-corner-angles-from-a-geodesic-polygon (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  9. ex-a-polyhedral-style-geodesic-triangulation-angle-count (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  10. fs-euler-characteristic-is-defined-by-choosing-any-triangulation-without-proving-independence (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  10. prop-euler-characteristic-is-additive-under-gluing-along-a-finite-one-dimensional-subcomplex (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  10. thm-gauss-bonnet-for-closed-nonorientable-riemannian-surfaces (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  10. thm-gauss-bonnet-for-compact-oriented-surfaces-with-boundary-and-corners (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  11. cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  11. thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  11. ex-gauss-bonnet-for-a-spherical-cap (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  11. ex-projective-plane-total-curvature-from-a-hemisphere-identification (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  12. cor-a-flat-closed-oriented-surface-has-euler-characteristic-zero (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  12. cor-a-positively-curved-closed-oriented-surface-has-positive-euler-characteristic (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  12. cor-total-gaussian-curvature-is-independent-of-the-riemannian-metric (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  12. fs-classical-gauss-bonnet-by-itself-classifies-compact-surfaces (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  12. fs-gauss-bonnet-for-a-surface-with-boundary-has-no-boundary-term (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  12. rem-surface-gauss-bonnet-versus-higher-dimensional-cern-gauss-bonnet (the-gauss-bonnet-theorem-for-riemannian-surfaces)
+  12. cex-using-inward-normal-first-reverses-the-boundary-term (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  12. ex-gauss-bonnet-for-a-euclidean-annulus (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  12. ex-gauss-bonnet-for-a-euclidean-disk (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  12. ex-gauss-bonnet-for-a-flat-torus (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  12. ex-gauss-bonnet-for-the-round-sphere (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+  13. ex-metric-independence-of-total-curvature-on-a-deformed-sphere (the-gauss-bonnet-theorem-for-riemannian-surfaces-examples)
+- Write research/frontier-36-complete-step3b-pair-the-gauss-bonnet-theorem-for-riemannian-surfaces.md.

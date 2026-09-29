@@ -1,0 +1,73 @@
+# step3b: A/B pair flat-smooth-and-etale-morphisms
+
+- Run: frontier-36-complete
+- A page: flat-smooth-and-etale-morphisms
+- B page: flat-smooth-and-etale-morphisms-examples
+- Batches: 6
+- Own only this pair; preserve other pairs in shared batch files.
+- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.
+- Read current manifests, coverage, prose, plan and dependency records.
+- Direct in-run prerequisite pairs to inspect (they may still be unfinished): finite-proper-and-projective-morphisms, zariski-tangent-spaces-regular-points-smoothness-and-bertini.
+- If an item supplier is not yet authored, flag its exact ID and consuming step in research/frontier-36-complete-step3b-pair-flat-smooth-and-etale-morphisms.md; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.
+- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):
+  0. def-constructible-subset-scheme (flat-smooth-and-etale-morphisms)
+  0. def-flat-morphism-schemes (flat-smooth-and-etale-morphisms)
+  0. lem-finite-presentation-image-constructible (flat-smooth-and-etale-morphisms)
+  0. lem-generic-freeness-finite-type-algebra-module (flat-smooth-and-etale-morphisms)
+  0. lem-local-fibre-dimension-bound-via-polynomial-quasifiniteness (flat-smooth-and-etale-morphisms)
+  1. def-faithfully-flat-morphism-schemes (flat-smooth-and-etale-morphisms)
+  1. def-smooth-morphism-schemes (flat-smooth-and-etale-morphisms)
+  1. lem-flat-local-map-faithfully-flat (flat-smooth-and-etale-morphisms)
+  1. lem-flat-locus-open-finitely-presented-algebra (flat-smooth-and-etale-morphisms)
+  1. lem-flatness-affine-local-source-target (flat-smooth-and-etale-morphisms)
+  1. lem-qcqs-structure-pushforward-affine-local (flat-smooth-and-etale-morphisms)
+  1. rem-flatness-is-not-constant-fibre-isomorphism (flat-smooth-and-etale-morphisms)
+  1. cex-flat-finite-type-not-open-without-presentation-warning (flat-smooth-and-etale-morphisms-examples)
+  2. def-relative-dimension-smooth-morphism (flat-smooth-and-etale-morphisms)
+  2. def-smooth-locus-morphism (flat-smooth-and-etale-morphisms)
+  2. lem-flat-morphisms-stable-base-change (flat-smooth-and-etale-morphisms)
+  2. lem-flat-morphisms-stable-composition (flat-smooth-and-etale-morphisms)
+  2. lem-flatness-by-fibres-for-polynomial-chart (flat-smooth-and-etale-morphisms)
+  2. lem-integral-quasicoherent-algebra-finite-subalgebra-filtration (flat-smooth-and-etale-morphisms)
+  2. thm-faithfully-flat-descent-vanishing (flat-smooth-and-etale-morphisms)
+  2. thm-generic-flatness-morphisms (flat-smooth-and-etale-morphisms)
+  2. thm-jacobian-criterion-smooth-morphism (flat-smooth-and-etale-morphisms)
+  2. thm-smooth-morphism-formally-smooth-finite-presentation (flat-smooth-and-etale-morphisms)
+  3. def-etale-morphism-schemes (flat-smooth-and-etale-morphisms)
+  3. lem-fibre-dimension-upper-semicont-proper (flat-smooth-and-etale-morphisms)
+  3. thm-differentials-smooth-locally-free (flat-smooth-and-etale-morphisms)
+  3. thm-flat-finite-presentation-is-open (flat-smooth-and-etale-morphisms)
+  3. thm-smooth-locus-open (flat-smooth-and-etale-morphisms)
+  3. thm-smooth-morphisms-stable-base-change-composition (flat-smooth-and-etale-morphisms)
+  3. cex-flat-not-smooth-nodal-family (flat-smooth-and-etale-morphisms-examples)
+  3. cex-frobenius-not-smooth (flat-smooth-and-etale-morphisms-examples)
+  3. ex-family-xy-equals-t-flat-not-smooth-at-node (flat-smooth-and-etale-morphisms-examples)
+  4. cor-smooth-variety-classical-scheme-conventions-agree (flat-smooth-and-etale-morphisms)
+  4. def-etale-locus-morphism (flat-smooth-and-etale-morphisms)
+  4. def-standard-etale-algebra (flat-smooth-and-etale-morphisms)
+  4. lem-etale-stable-base-change-composition (flat-smooth-and-etale-morphisms)
+  4. lem-flat-fp-relative-dimension-strata (flat-smooth-and-etale-morphisms)
+  4. lem-smooth-fibres-smooth (flat-smooth-and-etale-morphisms)
+  4. thm-etale-equivalent-flat-unramified-fp (flat-smooth-and-etale-morphisms)
+  4. thm-etale-over-algebraically-closed-field-discrete-smooth-points (flat-smooth-and-etale-morphisms)
+  4. thm-smooth-local-standard-form (flat-smooth-and-etale-morphisms)
+  4. ex-polynomial-ring-flat-smooth (flat-smooth-and-etale-morphisms-examples)
+  5. lem-coprime-polynomial-factorization-lifts-etale-locally (flat-smooth-and-etale-morphisms)
+  5. lem-flat-fp-fibre-dimension-lower-semicont (flat-smooth-and-etale-morphisms)
+  5. thm-etale-formally-etale-finite-presentation (flat-smooth-and-etale-morphisms)
+  5. thm-etale-locus-open (flat-smooth-and-etale-morphisms)
+  5. thm-etale-morphisms-open-and-quasi-finite (flat-smooth-and-etale-morphisms)
+  5. cex-smooth-not-etale-affine-line (flat-smooth-and-etale-morphisms-examples)
+  5. cex-unramified-not-flat-closed-immersion (flat-smooth-and-etale-morphisms-examples)
+  5. ex-finite-etale-separable-extension (flat-smooth-and-etale-morphisms-examples)
+  5. ex-localization-etale-open-immersion (flat-smooth-and-etale-morphisms-examples)
+  5. ex-standard-etale-square-root (flat-smooth-and-etale-morphisms-examples)
+  6. lem-etale-neighbourhood-isolated-fibre-point-finite (flat-smooth-and-etale-morphisms)
+  6. thm-etale-locally-standard-etale (flat-smooth-and-etale-morphisms)
+  6. thm-flat-families-fibre-dimension-locally-constant (flat-smooth-and-etale-morphisms)
+  7. lem-elementary-etale-neighbourhood-finite-decomposition (flat-smooth-and-etale-morphisms)
+  7. lem-integral-closure-commutes-etale-base-change (flat-smooth-and-etale-morphisms)
+  8. lem-relative-normalization-finite-stage (flat-smooth-and-etale-morphisms)
+  9. lem-scheme-zariski-main-factorization-quasi-finite (flat-smooth-and-etale-morphisms)
+  10. thm-proper-quasi-finite-is-finite (flat-smooth-and-etale-morphisms)
+- Write research/frontier-36-complete-step3b-pair-flat-smooth-and-etale-morphisms.md.

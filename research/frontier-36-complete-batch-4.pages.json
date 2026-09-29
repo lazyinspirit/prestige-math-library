@@ -1,0 +1,2562 @@
+[
+  {
+    "order": 366.059,
+    "id": "zariski-tangent-spaces-regular-points-smoothness-and-bertini",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Zariski Tangent Spaces Regular Points Smoothness and Bertini",
+    "companion": "zariski-tangent-spaces-regular-points-smoothness-and-bertini-examples",
+    "requires": [
+      "algebraic-differentials-separability-and-smooth-local-presentations",
+      "fibre-products-base-change-and-scheme-theoretic-fibres",
+      "diagonals-separated-morphisms-and-valuative-uniqueness",
+      "kahler-differentials-conormal-sequences-and-infinitesimal-lifting",
+      "linear-algebra-methods-in-combinatorics"
+    ],
+    "items": [
+      {
+        "id": "def-zariski-cotangent-space-point",
+        "kind": "definition",
+        "title": "The intrinsic cotangent space",
+        "statement": "For any scheme X and point x, put C_xX=m_x/m_x^2, a vector space over kappa(x)=O_{X,x}/m_x. For a classical variety the points under discussion are closed k-points over algebraically closed k; the intrinsic definition also applies to nonclosed scheme points.",
+        "deps": [
+          "def-residue-field-scheme-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4f, Proposition 4.29; AG10 10.58–10.60",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-zariski-tangent-space-point",
+        "kind": "definition",
+        "title": "The intrinsic Zariski tangent space",
+        "statement": "Define the intrinsic Zariski tangent space at a scheme point by T_xX=Hom_{kappa(x)}(m_x/m_x^2,kappa(x)). If X is locally of finite type over a field, it is finite-dimensional. This definition is separate from the relative tangent space: they agree at rational points, but at the generic point of Spec(k[t]) the intrinsic tangent space is zero while the relative tangent over k is one-dimensional over k(t).",
+        "deps": [
+          "def-zariski-cotangent-space-point",
+          "def-relative-cotangent-space",
+          "def-scheme-over-base",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-finite-type-and-module-finite-algebras",
+          "lem-field-is-noetherian",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-localisation-at-a-prime-ideal",
+          "def-noetherian-ring-and-module",
+          "lem-sheaf-differentials-affine-compatibility",
+          "lem-differentials-polynomial-algebra-free",
+          "lem-differentials-localization",
+          "def-dual-numbers-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, §4f, Proposition 4.29 and item 4.30",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "The Stacks Project, Varieties, Section 33.16, tangent spaces (tag 0B28)",
+              "url": "https://stacks.math.columbia.edu/tag/0B28"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-cotangent-localization-at-rational-point",
+        "kind": "lemma",
+        "title": "Cotangent spaces commute with localization at a rational point",
+        "statement": "For a k-algebra A, a maximal ideal m with A/m=k, and every r>=0, the natural map m^r/m^(r+1) -> m^r A_m/m^(r+1)A_m is an isomorphism. At r=1 this is cotangent-space localization.",
+        "deps": [
+          "def-zariski-cotangent-space-point",
+          "thm-localisation-at-a-prime-is-local",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "def-localisation-at-a-prime-ideal",
+          "thm-ideal-correspondence-for-localisation",
+          "def-sum-and-product-of-ideals"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Ch. 1 §b Lemma 1.15; Ch. 4 §f item 4.30(d) and §g",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Set S=A\\m and n=mA_m. Prove n^r=S^-1(m^r) by induction on r, then prove injectivity and surjectivity by clearing denominators and lifting the inverse of each nonzero residue class in A/m. Explicitly check r=0 and r=1.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-tangent-vectors-as-dual-number-points",
+        "kind": "lemma",
+        "title": "Tangent vectors at rational points are dual-number points",
+        "statement": "For any k-scheme X and rational point x in X(k), T_xX is naturally the fibre over x of Hom_k(Spec(k[epsilon]/(epsilon^2)),X) -> X(k). Equivalently its vectors are k-derivations O_{X,x}->k, with module action by evaluation at x. This statement does not identify the intrinsic tangent space at an arbitrary nonrational point with relative dual-number points.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "def-dual-numbers-scheme",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "lem-cotangent-localization-at-rational-point",
+          "def-scheme",
+          "def-scheme-over-base",
+          "def-affine-open-subscheme",
+          "def-open-immersion-schemes",
+          "def-affine-scheme-spectrum",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-prime-and-maximal-ideals",
+          "def-quotient-ring",
+          "thm-quotient-is-field-iff-ideal-maximal"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4f, 4.25–4.30",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Prove Spec(k[epsilon]/(epsilon^2)) has one point, so a based map factors through an affine neighborhood. Translate the affine k-algebra map into an epsilon-coefficient derivation by multiplication, identify derivations with the dual of m/m^2 using the rational residue splitting, then pass through localization to the intrinsic cotangent space and local-ring derivations.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-tangent-points-over-square-zero-vector-extensions",
+        "kind": "lemma",
+        "title": "Square-zero vector extensions encode tangent vectors with coefficients",
+        "statement": "Let k be algebraically closed, let X be a classical affine variety over k, and put A=k[X]. Regard X with its associated affine scheme Spec(A) when forming T_xX. For each finite-dimensional k-vector space W, give R_W=k direct-sum W the square-zero k-algebra structure (a,w)(b,v)=(ab,av+bw). Unital k-algebra maps A->R_W correspond naturally to pairs (x,t) with x in X(k) and t in W tensor_k T_xX.",
+        "deps": [
+          "lem-tangent-vectors-as-dual-number-points",
+          "def-classical-affine-variety-interface",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-vanishing-ideal",
+          "thm-universal-property-of-a-polynomial-ring",
+          "def-affine-scheme-spectrum",
+          "def-affine-scheme",
+          "def-prime-and-maximal-ideals",
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "lem-cotangent-localization-at-rational-point",
+          "def-zariski-cotangent-space-point",
+          "def-zariski-tangent-space-point",
+          "thm-hom-from-a-finite-dimensional-space-as-a-tensor-product",
+          "thm-universal-property-of-module-tensor-products"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-10, p.99",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce a map A=k[X]->R_W modulo W to obtain x in X(k), checking the point correspondence from the coordinate ring presentation. At fixed x, subtract evaluation to obtain a derivation A->W for the residue action; prove directly that derivations are Hom_k(m/m^2,W). Use the choice-free cotangent localization comparison at the rational point to identify m/m^2 with the intrinsic scheme cotangent space, then use the canonical finite-dimensional tensor-Hom isomorphism and tensor symmetry to obtain W tensor T_xX. Check W=0, W=k (the earlier dual-number result), and the empty algebraic-set boundary. Avoid the AC-dependent classical local-ring/global-function theorem.",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-jacobian-matrix-affine-algebraic-set",
+        "kind": "definition",
+        "title": "Equation rows and coordinate columns in a Jacobian",
+        "statement": "For a field k, ideal I=(f_1,...,f_r) in k[t_1,...,t_n], and a rational point a, J(a) is the r by n matrix (partial f_i/partial t_j)(a). Derivatives are formal monomial derivatives. Use the actual scheme ideal, including nilpotents; for a reduced algebraic set over algebraically closed k this is I(X).",
+        "deps": [
+          "def-coordinate-ring-affine-algebraic-set"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4d, 4.22; Arapura 5.1.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-zariski-tangent-space-jacobian-kernel",
+        "kind": "theorem",
+        "title": "The Jacobian kernel computes the tangent space",
+        "statement": "For any finite-type affine k-scheme Spec(k[t_1,...,t_n]/I) and a k-rational point a, T_aX is canonically ker J(a) in k^n. The kernel is independent of the chosen generators of I. No reducedness or perfectness is needed at a rational point.",
+        "deps": [
+          "def-jacobian-matrix-affine-algebraic-set",
+          "lem-tangent-vectors-as-dual-number-points",
+          "def-dual-numbers-scheme",
+          "def-scheme-over-base",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-quotient-ring-universal-property",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4d, 4.22 and §4f, Proposition 4.26",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Expand f(a+epsilon v)=f(a)+epsilon sum_j partial_j f(a)v_j. A polynomial combination of ideal generators has differential sum_i h_i(a)df_i(a), proving generator independence in both directions.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-tangent-space-functoriality-classical",
+        "kind": "lemma",
+        "title": "Differentials, open restriction, and the chain rule",
+        "statement": "Let k be a field, X,Y k-schemes, and f:X->Y a k-morphism. For x in X and y=f(x) in Y whose structure maps k->kappa(x), k->kappa(y) are isomorphisms, the local map f_x^#:O_{Y,y}->O_{X,x} induces a k-linear cotangent map C_yY=m_y/m_y^2 -> C_xX=m_x/m_x^2, whose dual is d_xf:T_xX->T_yY. This agrees with post-composition on based dual-number points; identity and composition satisfy the identity and chain rules. Every k-open immersion induces a tangent-space isomorphism at such rational points. No finite-type, reducedness, or smoothness hypothesis is needed.",
+        "deps": [
+          "def-morphism-of-schemes",
+          "def-morphism-locally-ringed-spaces",
+          "def-scheme-over-base",
+          "def-zariski-cotangent-space-point",
+          "def-zariski-tangent-space-point",
+          "def-open-immersion-schemes",
+          "def-affine-open-subscheme",
+          "lem-tangent-vectors-as-dual-number-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, §4e Lemma 4.24 and §4f item 4.31",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Donu Arapura, Algebraic Geometry, Lemma 5.1.5",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the local stalk homomorphism to carry the target maximal ideal and its square into the source maximal ideal and its square; k-linearity follows because f is over k and the points are rational. Dualize, then compute identity and composition by contravariance of stalk maps. Compare with composition on based dual-number points. For a k-open immersion, the restricted structure sheaf identifies the stalks, so the cotangent and tangent maps are isomorphisms.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-tangent-space-product",
+        "kind": "lemma",
+        "title": "Tangent spaces of products over a field",
+        "statement": "For a field k, k-schemes X,Y, and k-rational points x,y, the canonical map T_(x,y)(X×_kY) -> T_xX ⊕ T_yY, sending a based dual-number map to its composites with the two projections, is a k-linear isomorphism. No finite-type, reducedness, or smoothness hypothesis is needed.",
+        "deps": [
+          "def-scheme",
+          "def-scheme-over-base",
+          "def-dual-numbers-scheme",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras",
+          "thm-fibre-products-of-schemes-exist",
+          "lem-tangent-vectors-as-dual-number-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Exercise 4-4 and its solution",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose affine neighborhoods U=Spec A and V=Spec B of the fixed points; their product chart has ring A⊗_kB. Based dual-number maps of the chart are pairs of based maps from A and B by the tensor coproduct property. Expanding α(a)β(b) modulo ε² gives the coefficient derivation e_y(b)D_x(a)+e_x(a)D_y(b), which proves that the canonical projection map and its inverse are linear.",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-regular-local-ring-geometric-point",
+        "kind": "definition",
+        "title": "Regular points use the existing regular-local-ring definition",
+        "statement": "For a point x of a locally Noetherian scheme X, regular means O_{X,x} is a regular local ring. Its intrinsic tangent space is finite-dimensional, and x is regular iff dim_{kappa(x)} T_xX=dim O_{X,x}. This is absolute regularity, not smoothness over a base field.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-affine-open-subscheme",
+          "def-stalk-of-presheaf",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-at-a-prime-is-local",
+          "def-noetherian-ring",
+          "def-noetherian-module"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4i, 4.44–4.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Ch. 10 supplement, §f 10.58–10.59",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+            }
+          ]
+        },
+        "strategy": "For x, take an affine Noetherian neighborhood Spec(B) and identify O_{X,x} with B_p. Prove B_p Noetherian directly: contract any ideal to B, take a finite generating list there, and show its images generate the localized ideal. This avoids relying on a separate localization theorem. For the equivalence, the intrinsic tangent space is the dual of m/m^2; Noetherianity makes this finite-dimensional, so its dimension is edim(O_{X,x}). The regular-local definition then gives the iff. The cited Milne tangent-dimension criteria are classical or rational-point statements; the arbitrary-point formula here follows directly from intrinsic tangent duality.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-local-dimension-reduced-variety-components",
+        "kind": "lemma",
+        "title": "Local dimension for a reducible classical algebraic set",
+        "statement": "Assume the Axiom of Choice. For a reduced classical finite-type space X over algebraically closed k and closed point x, dim O_{X,x} equals the maximum of dim X_i over irreducible components X_i containing x.",
+        "deps": [
+          "lem-dimension-local-ring-codimension-closure",
+          "lem-classical-variety-noetherian-components",
+          "def-axiom-of-choice",
+          "def-coordinate-ring-affine-algebraic-set",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-local-ring-affine-variety-localization",
+          "thm-prime-spectrum-of-a-localisation-bijection"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Geometry, §3c notes 3.13–3.14 and §4i, proof of Corollary 4.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Geometry Chapter 10 supplement, §§10.54–10.56",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+            }
+          ]
+        },
+        "strategy": "Prime chains in the local ring lie over a minimal prime, and localization retains precisely the components through x. Reduce each quotient to the irreducible closed-point dimension theorem. Choice is used through lem-dimension-local-ring-codimension-closure, lem-classical-variety-noetherian-components, at the cited geometric or dimension step; the assumption is not inferred from finite choice.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-embedding-dimension-at-least-local-dimension",
+        "kind": "theorem",
+        "title": "Tangent dimension bounds local dimension",
+        "statement": "Assume the Axiom of Choice. For every point x of a locally Noetherian scheme X, dim_{kappa(x)} T_xX >= dim O_{X,x}. For a reduced classical finite-type variety X over an algebraically closed field and a closed point x, this gives dim T_xX >= dim_x X, where dim_x X is the maximum of dim X_i over irreducible components X_i containing x.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "thm-dimension-at-most-embedding-dimension",
+          "lem-local-dimension-reduced-variety-components",
+          "def-axiom-of-choice",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-scheme",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-affine-open-subscheme",
+          "def-affine-scheme-spectrum",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-at-a-prime-is-local",
+          "def-noetherian-ring-and-module",
+          "def-zariski-cotangent-space-point",
+          "def-residue-field-scheme-point",
+          "def-dual-numbers-scheme",
+          "def-prime-and-maximal-ideals",
+          "def-krull-dimension-of-a-ring"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4i, Theorem 4.44",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "For an arbitrary point x, choose one affine open Spec A=U around it with A Noetherian and x corresponding to a prime p. Identify O_{X,x} with A_p, prove directly by contraction that every ideal of A_p is finitely generated, and use the localization-at-a-prime theorem for nonzero localness. Its maximal ideal is finitely generated, so m/m^2 and its dual T_xX are finite-dimensional; by the tangent and embedding-dimension definitions, dim T_xX=edim(O_{X,x}). Apply the earlier AC-dependent Noetherian local bound dim R<=edim R. In the reduced classical finite-type algebraically closed case, apply the earlier local-dimension/components result to replace dim O_{X,x} by dim_x X. AC is used through the two named suppliers, not inferred from finite choice. Calculate the nonreduced dual-number example explicitly to show strict inequality can occur.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-singular-and-regular-loci-variety",
+        "kind": "definition",
+        "title": "Regular and singular loci",
+        "statement": "For a locally Noetherian scheme X, define X_reg={x∈|X|: O_{X,x} is regular local} and X_sing=|X|\\X_reg. Assume AC for the classical criterion: if X is reduced classical finite type over an algebraically closed field and x is closed, then x∈X_reg iff dim_{kappa(x)}T_xX=dim_x X, where dim_x X is the maximum of dim X_i over irreducible components through x. The loci are defined as sets; no openness or smoothness claim is made.",
+        "deps": [
+          "def-regular-local-ring-geometric-point",
+          "lem-local-dimension-reduced-variety-components",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4h–i, 4.35 and 4.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-jacobian-criterion-affine-variety",
+        "kind": "theorem",
+        "title": "Jacobian rank detects regularity at closed points",
+        "statement": "Assume AC for the final classical component-dimension assertion. Let k be a field, n a finite nonnegative integer, P=k[t_1,...,t_n], A=P/I, and I=(f_1,...,f_r) a specified finite generating list for the actual scheme ideal. For a maximal ideal m of A, write L=A/m and let J(m) be the r by n matrix over L obtained by mapping the formal partial derivatives ∂f_i/∂t_j through P→A→L. If k is perfect, then L/k is finite separable and A_m is regular if and only if rank_L J(m)=n-dim A_m. For any field k, the same equivalence holds when m is k-rational (L=k), without assuming k perfect. If I=I(X) for a reduced classical affine algebraic set X over algebraically closed k and m corresponds to a closed point x, then dim A_m=dim_x X=max dim X_i over irreducible components through x.",
+        "deps": [
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-dimension-classical-variety",
+          "def-regular-local-ring-geometric-point",
+          "def-zariski-tangent-space-point",
+          "lem-ag-differentials-localization-base-change",
+          "lem-ag-polynomial-quotient-differentials",
+          "lem-ag-separable-residue-cotangent-sequence",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "thm-localisation-of-modules-is-tensor-product",
+          "thm-right-exactness-of-tensor-products",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry v6.10, §4d, Definition 4.23 and Jacobian-rank discussion (printed pp. 87–88; PDF pp. 86–87), and §4i, Corollary 4.45 (printed p. 97)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry Chapter 10 supplement, §f, items 10.58 and 10.60–10.64",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebra Lemma 10.140.4 (tag 00TU), separable-residue cotangent injection",
+              "url": "https://stacks.math.columbia.edu/tag/00TU"
+            },
+            {
+              "title": "The Stacks Project, Algebra Lemma 10.140.5 (tag 00TV), regularity and smoothness with separable residue field",
+              "url": "https://stacks.math.columbia.edu/tag/00TV"
+            }
+          ]
+        },
+        "strategy": "For a maximal ideal over a perfect field, prove the residue field finite by the affine Zariski lemma and separable by perfectness. The published cotangent-sequence, differential-localization, polynomial-quotient, and right-exactness inputs identify mA_m/(mA_m)^2 with the cokernel of J(m), of dimension n-rank J(m). The regular-point definition gives both directions of the criterion. At rational points over any field, use the earlier tangent-kernel theorem and the same regular-point definition. Convert the reduced classical local-ring dimension to the maximum component dimension with the local-dimension lemma. AC is needed only for that classical component-dimension clause; do not use the rational tangent identification at nonrational points.",
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-hypersurface-singular-locus-gradient",
+        "kind": "corollary",
+        "title": "The gradient test for a reduced hypersurface",
+        "statement": "Assume AC. Let k be algebraically closed, n≥1, and f∈k[t_1,...,t_n] nonconstant and squarefree. Let X=V(f) with its reduced classical variety structure. For each a∈X(k), a is singular exactly when every formal first partial derivative of f vanishes at a; equivalently X_sing=V(f,∂_1f,...,∂_nf) as subsets of k^n. The scheme Spec(k[t_1,...,t_n]/(f)) uses the actual ideal (f), which is already radical for squarefree f. For a non-squarefree equation, radicalizing can change the scheme and its tangent space (for example t^2 versus t).",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "def-singular-and-regular-loci-variety",
+          "lem-local-dimension-reduced-variety-components",
+          "thm-principal-subvariety-codimension-one",
+          "thm-affine-variety-dimension-coordinate-ring",
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "cor-strong-nullstellensatz-two-inclusions",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4a, 4.1–4.7; §4h, 4.37",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the actual one-generator ideal (f) for the Jacobian tangent computation. The finite-variable polynomial-ring UFD result turns squarefreeness into radicality of (f). The principal-subvariety theorem gives every component of V(f) dimension n−1; under AC, the local-dimension lemma gives that same local dimension at each closed point. The one-row Jacobian has rank one exactly when the gradient is nonzero, so regularity is equivalent to nonvanishing of some partial. Clarify that radicalization is redundant for squarefree f and can change a non-squarefree scheme.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-regular-point-lies-on-one-component",
+        "kind": "lemma",
+        "title": "A regular point lies on one irreducible component",
+        "statement": "Assume the Axiom of Choice. A regular point of a reduced Noetherian scheme lies on exactly one irreducible component.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-affine-open-subscheme",
+          "def-irreducible-component-scheme",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-localisation-at-a-prime-ideal",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-regular-local-ring-geometric-point",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-irreducible-components-of-a-topological-space",
+          "thm-irreducible-components-and-minimal-primes",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4i, proof of 4.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "On an affine neighbourhood U=Spec A of x corresponding to p, the regular local ring O_X,x=A_p is a domain. Show each global component C through x cuts out an irreducible component V(q_C) in U, with q_C a minimal prime contained in p. Localization identifies q_C A_p as a minimal prime of the domain A_p, hence zero; injectivity of the prime correspondence forces all q_C, and then all C, to agree. AC is used through the regular-local-domain theorem, existence of components, and the spectrum/minimal-prime correspondence; the pointwise proof chooses only one chart.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-regular-locus-is-open-variety",
+        "kind": "theorem",
+        "title": "Openness of the regular locus over a perfect field",
+        "statement": "Assume the Axiom of Choice. For every perfect field k and every finite-type k-scheme X, the regular locus X_reg={x in |X| : O_{X,x} is a regular local ring} is open in X. No reducedness, irreducibility, equidimensionality or separatedness hypothesis is imposed, and X may be empty.",
+        "deps": [
+          "def-affine-open-subscheme",
+          "def-axiom-of-choice",
+          "def-finite-type-and-module-finite-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-perfect-field",
+          "def-regular-local-ring-geometric-point",
+          "def-singular-and-regular-loci-variety",
+          "def-stalk-of-presheaf",
+          "def-topological-space",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "thm-ag-perfect-field-jacobian-regularity",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4h, Theorem 4.37",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Pass to an affine chart B=k[x_1,...,x_n]/a at a fixed point and compare stalks so that X_reg cap U equals the regular locus of Spec B; local Noetherianity comes from the field polynomial ring, and clause 3 of thm-ag-perfect-field-jacobian-regularity identifies that locus with the nonvanishing set of the Jacobian minors, which is open. Choice is used only through the single supplier thm-ag-perfect-field-jacobian-regularity (declared as [F1] and cited at the step that invokes it); no choice is made in the chartwise comparison.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-separating-hypersurface-chart-variety",
+        "kind": "lemma",
+        "title": "A dense hypersurface chart with a nonzero partial derivative",
+        "statement": "Assume AC. Let k be algebraically closed and X an irreducible classical variety of dimension d. There is an irreducible hypersurface H=V(P) in A^{d+1}, with P in k[T_1,...,T_d,Z] and partial P/partial Z nonzero, such that X and H contain isomorphic nonempty open subvarieties.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-algebraically-closed-field",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-classical-integral-affine-atlas-and-chartwise-morphism",
+          "def-coordinate-ring-affine-algebraic-set",
+          "def-classical-variety-function-field",
+          "def-classical-birational-equivalence",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "thm-ag-separating-transcendence-basis-perfect-field",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "def-separable-elements-and-separable-extensions",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible",
+          "cor-irreducible-polynomial-is-separable-iff-derivative-nonzero",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-gauss-lemma-over-a-ufd",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "lem-general-variety-function-field-charts",
+          "thm-dimension-equals-transcendence-degree",
+          "thm-classical-birational-equivalence-iff-function-fields-isomorphic"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§3k Propositions 3.36–3.38; §4h proof of Theorem 4.37",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use a separating transcendence basis and a primitive generator of the finite separable residual extension. Clear denominators and remove content from its minimal polynomial; its last-coordinate derivative remains nonzero. Use the affine prime correspondence to obtain an irreducible hypersurface, identify its function field with k(X), and use birational equivalence to obtain isomorphic nonempty opens. AC is inherited through the dimension, Nullstellensatz, and birational interfaces.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+        "kind": "theorem",
+        "title": "Dense regular loci on every component",
+        "statement": "Assume the Axiom of Choice. Let k be a perfect field and X a reduced finite-type k-scheme. Then the regular locus X_reg is open in X; for every irreducible component Z of X the intersection X_reg cap Z is a dense open subset of Z containing a nonempty dense open set of regular points; and if X is nonempty then X_reg is nonempty. No separatedness, irreducibility or equidimensionality is imposed, and X may be empty.",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "def-affine-open-subscheme",
+          "def-axiom-of-choice",
+          "def-finite-type-and-module-finite-algebras",
+          "def-interior-closure-boundary-top",
+          "def-irreducible-component-of-a-topological-space",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-perfect-field",
+          "def-reduced-affine-scheme",
+          "def-reduction-of-scheme",
+          "def-scheme",
+          "def-singular-and-regular-loci-variety",
+          "def-stalk-of-presheaf",
+          "def-subspace-topology-top",
+          "ex-dual-numbers-one-point-nonreduced",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-irreducible-components-of-a-topological-space",
+          "thm-ag-perfect-field-jacobian-regularity",
+          "thm-irreducible-components-and-minimal-primes",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-regular-locus-is-open-variety",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, §4h, Theorem 4.37 (printed p. 95, PDF p. 94)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Chartwise and componentwise: openness is thm-regular-locus-is-open-variety; on a reduced affine chart A=k[x_1,...,x_n]/a clause 3 of thm-ag-perfect-field-jacobian-regularity gives a dense open subset of the regular locus inside every component of the chart, and the closure comparison identifies each component of X with a chart component of an affine open meeting it; nonemptiness then follows because components are nonempty. Choice is used through the suppliers thm-regular-locus-is-open-variety, thm-ag-perfect-field-jacobian-regularity, thm-irreducible-components-and-minimal-primes, lem-irreducible-components-of-a-topological-space and thm-regular-local-rings-are-domains-and-cohen-macaulay at the cited geometric steps; the nonreduced dual-numbers scheme witnesses that reducedness cannot be dropped; the assumption is not inferred from finite choice.",
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-minimum-tangent-dimension-and-homogeneous-regularity",
+        "kind": "corollary",
+        "title": "Minimal tangent dimension and homogeneous regularity",
+        "statement": "Assume the Axiom of Choice. For an irreducible classical variety X over an algebraically closed field of dimension dim X: dim X = min over closed points x of dim_k T_x X, and X is regular exactly when x -> dim_k T_x X is constant. More generally a nonempty reduced classical finite-type space whose automorphism group acts transitively on its points is regular.",
+        "deps": [
+          "cor-closed-points-dense-in-affine-spectra",
+          "cor-localisations-of-regular-local-rings-are-regular",
+          "lem-classical-points-inside-affine-scheme",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-dimension-classical-variety",
+          "def-morphism-locally-ringed-spaces",
+          "def-regular-local-ring-geometric-point",
+          "def-singular-and-regular-loci-variety",
+          "def-zariski-tangent-space-point",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-tangent-space-functoriality-classical",
+          "thm-embedding-dimension-at-least-local-dimension",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, §4h, Corollaries 4.38-4.40 (printed p. 95)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, §5.2, Corollary 5.2.4 (printed p. 35)",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the embedding-dimension bound dim_k T_x X >= dim_x X and the openness/density/nonemptiness of the regular locus over the perfect field k; at a regular point dim_k T_x X = dim O_{X,x} = dim X, so the minimum over closed points is dim X and is attained exactly at the regular points; this also gives the equivalence regular <=> constant tangent dimension. For the transitive claim, an automorphism induces inverse isomorphisms of local rings and of tangent spaces, so it preserves the regular locus; transitivity then spreads any one regular point to every point. AC only through the AC-assuming suppliers.",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-smooth-morphism-to-field-classical",
+        "kind": "definition",
+        "title": "Smoothness over a field by geometric regularity",
+        "statement": "Assume the Axiom of Choice. For a finite-type k-scheme X, smoothness of X→Spec k is defined by local standard smooth presentations in def-smooth-morphism-classical. It is equivalent to requiring that for every field extension K/k all local rings of the scheme-theoretic base change X_K are regular. X_K is formed by tensoring affine coordinate rings with K and gluing as in the prerequisite supplier. This criterion retains nilpotents in every field change.",
+        "deps": [
+          "def-regular-local-ring-geometric-point",
+          "def-axiom-of-choice",
+          "def-ag-geometrically-regular-algebra-and-fibre",
+          "def-ag-standard-smooth-algebra",
+          "def-dual-numbers-scheme",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-finite-type-and-module-finite-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-regular-noetherian-ring",
+          "def-smooth-morphism-classical",
+          "lem-ag-geometric-regularity-field-tests",
+          "thm-ag-field-extension-of-schemes",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "33.12.1, 33.12.3, 33.12.6",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "Reconcile the field-extension regularity criterion with the pair's prior local-standard-smooth definition: shrink a standard-smooth chart and use geometric regularity plus its all-field test for the forward implication; for the reverse, inspect finitely generated field changes chartwise, infer geometric regularity, and apply the same equivalence. Keep scheme-theoretic base change so nilpotents persist, and calculate the dual-numbers boundary. AC is inherited through the cited standard-smooth equivalence, field tests, and field-change construction.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-regular-equals-smooth-over-perfect-field",
+        "kind": "theorem",
+        "title": "Regular equals smooth over a perfect field",
+        "statement": "Assume AC. Let k be a perfect field and X a finite-type k-scheme. With regular meaning locally Noetherian with every local ring regular local, X is regular if and only if X is smooth over k under the local-standard-smooth convention. No reducedness, irreducibility, or closed-point restriction is imposed.",
+        "deps": [
+          "def-affine-open-subscheme",
+          "def-ag-geometrically-regular-algebra-and-fibre",
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-finite-type-and-module-finite-algebras",
+          "def-left-right-and-two-sided-ideal",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-noetherian-module",
+          "def-noetherian-ring",
+          "def-regular-local-ring-geometric-point",
+          "def-regular-noetherian-ring",
+          "def-smooth-morphism-classical",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "thm-ag-geometric-regularity-perfect-base",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "33.12.2–33.12.3; perfect fields have no nontrivial finite purely inseparable extensions",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "For every finite-type affine chart Spec A, express A as a quotient of a finite-variable polynomial ring and prove Noetherianity by lifting each ideal. Regularity of X then makes A a regular ring by the stalk-localization theorem. The perfect-field scalar-extension theorem makes each A geometrically regular under the finite-generation definition; the standard-smooth/geometric-regularity theorem gives local standard smoothness, hence X smooth. Conversely smoothness gives local standard smoothness on each affine chart; the same theorem gives geometric regularity, and the K=k case of its definition makes A regular, hence its stalks regular. Explicitly compute the empty, one-point, and nonreduced dual-number cases. AC is inherited through the perfect-base, standard-smooth, and smooth-morphism suppliers; no simultaneous chart or generator choices or DC are used.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-regular-not-smooth-imperfect-field",
+        "kind": "theorem",
+        "title": "Purely inseparable field algebras separate regularity from smoothness",
+        "statement": "Assume the Axiom of Choice. For a field k of characteristic p>0 and a not in k^p={x^p:x in k}, L=k[t]/(t^p-a) is a field with class alpha of t satisfying alpha^p=a and k injects into L; the affine k-scheme X=Spec L is of finite type over k and regular. For every field extension K/k and every beta in K with beta^p=a there is a K-algebra isomorphism L tensor_k K = K[u]/(u^p), and K[u]/(u^p) is a Noetherian local ring with unique prime (u), dimension 0, embedding dimension 1, not regular. Consequently X -> Spec k is not smooth, although X is regular; the witness is K=L, beta=alpha. No reduction or radicalization of the tensor product is taken.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-field",
+          "def-field-homomorphism",
+          "def-finite-type-and-module-finite-algebras",
+          "def-krull-dimension-of-a-ring",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-regular-local-ring-geometric-point",
+          "def-smooth-morphism-to-field-classical",
+          "ex-finite-dimensional-algebra-over-a-field-is-noetherian",
+          "ex-noetherian-integers-and-fields",
+          "lem-base-extension-field-coordinate-ring",
+          "lem-finite-type-local-on-source-and-target",
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "lem-prime-divides-intermediate-binomial-coefficients",
+          "lem-tensor-ring-presentations-for-base-change",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-binomial-theorem-over-a-commutative-ring",
+          "thm-perfect-field-characterizations",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Varieties, Example 33.12.7 (tag 038S): Spec(k[x]/(x^p-t)) is a regular variety that is not geometrically reduced",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "Reduction to the field itself, then to a nonreduced base change. L is a field because t^p-a is irreducible (p-th-power lemma with n=1) and k[t]/(f) is a field for irreducible nonconstant f; L is a finite-type k-algebra, its spectrum is locally Noetherian and regular because a field is a regular local ring. Base change gives L tensor_k K = K[z]/(z^p-a) by the tensor-presentation lemma; when beta^p=a the binomial theorem plus p | C(p,k) gives z^p-a=(z-beta)^p, so the base change is K[u]/(u^p). Division by the monic u^p gives an F-basis 1,u,...,u^{p-1}, whence K[u]/(u^p) is a finite-dimensional, hence Noetherian, local ring whose unique prime (u) has dimension 0 and cotangent dimension 1, so it is not regular. Taking K=L exhibits a nonregular local ring on a base change, so the geometric-regularity criterion for smoothness over k fails. AC is used exactly through def-smooth-morphism-to-field-classical; the proof exhibits one extension and one point, so no simultaneous choice enters.",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-tangent-cone-point",
+        "kind": "definition",
+        "title": "The scheme-theoretic tangent cone at a point",
+        "statement": "For x in a locally Noetherian scheme X, the scheme-theoretic tangent cone is the affine kappa(x)-scheme Cone_x(X)=Spec(gr_{m_x} O_{X,x}), with its graded kappa(x)-algebra structure. Its reduction may differ: at the closed point of Spec(k[epsilon]/(epsilon^2)), the cone is Spec(k[epsilon]/(epsilon^2)) and its reduction is Spec(k).",
+        "deps": [
+          "def-associated-graded-ring-and-module",
+          "def-affine-scheme-spectrum",
+          "def-affine-scheme",
+          "def-scheme-over-base",
+          "def-zariski-cotangent-space-point",
+          "def-dual-numbers-scheme",
+          "def-reduction-of-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, §4g, tangent cones and Proposition 4.34",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry Chapter 10 supplement, Definitions 10.69–10.71",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+            },
+            {
+              "title": "The Stacks Project, Section 27.7, Cones, Definitions 27.7.1–27.7.2 (tag 062P)",
+              "url": "https://stacks.math.columbia.edu/tag/062P"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-tangent-cone-initial-ideal-presentation",
+        "kind": "lemma",
+        "title": "All initial forms define the tangent cone",
+        "statement": "Let k be any field, n∈N, P=k[t_1,...,t_n], q=(t_1,...,t_n), I⊆q, X=Spec(P/I), and x the rational origin. The canonical graded k-algebra map P/in_q(I)→gr_{m_x} O_{X,x}, sending each variable to its degree-one initial class, is an isomorphism; hence Cone_x(X)≅Spec(P/in_q(I)). Here in_q(I) is generated by the lowest nonzero homogeneous terms of all nonzero f∈I. If I=(f) with f≠0, then in_q(I)=(f_min), where f_min is the lowest homogeneous part. Initial forms of an arbitrary generating set need not generate in_q(I).",
+        "deps": [
+          "def-tangent-cone-point",
+          "lem-cotangent-localization-at-rational-point",
+          "def-associated-graded-ring-and-module",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "def-noetherian-ring",
+          "def-noetherian-module",
+          "def-left-and-right-modules",
+          "def-left-right-and-two-sided-ideal",
+          "def-submodule",
+          "def-sum-and-product-of-ideals",
+          "def-quotient-ring",
+          "prop-canonical-quotient-ring-map",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "cor-maximal-ideals-are-prime",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-localisation-at-a-prime-is-local",
+          "def-monomials-multidegree-and-total-degree",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-generated-and-principal-ideals",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "lem-field-is-a-commutative-ring",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4g, Proposition 4.34 and preceding warning",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Ch. 10 supplement, §f, Definitions 10.69–10.70",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+            }
+          ]
+        },
+        "strategy": "Write P as the direct sum of its total-degree pieces and identify gr_(t)(P) with P. The quotient P→P/I gives a surjective graded map; compute each degree-r kernel as the degree-r initial forms of elements of I, hence its kernel is the ideal generated by all initial forms. Apply the rational-point cotangent-localization isomorphism degreewise to pass from A=P/I to O_(X,x)=A_m. For I=(f), use that lowest homogeneous parts multiply without vanishing in the polynomial domain. Verify failure for a finite generating set using an explicit three-variable ideal and a degree-four witness.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-tangent-cone-linear-span-tangent-space",
+        "kind": "lemma",
+        "title": "The scheme-theoretic linear span of the tangent cone",
+        "statement": "Let X be a locally Noetherian k-scheme and x a k-rational point. With C_xX=m_x/m_x^2 and T_xX=Hom_k(C_xX,k), multiplication induces a graded surjection S_k(C_xX) -> gr_{m_x} O_{X,x} whose degree-one map is the identity. Thus Cone_x(X) embeds scheme-theoretically in the affine space associated to T_xX, and no proper linear closed subscheme contains it.",
+        "deps": [
+          "def-tangent-cone-point",
+          "def-zariski-tangent-space-point",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-prime-and-maximal-ideals",
+          "def-noetherian-ring",
+          "def-noetherian-module",
+          "def-left-right-and-two-sided-ideal",
+          "def-submodule",
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-dual-numbers-scheme",
+          "def-symmetric-algebra-of-a-vector-space",
+          "thm-universal-property-of-the-symmetric-algebra"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4g, Proposition 4.34 and AG10 10.71",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Prove the maximal ideal of the local ring is finitely generated from a Noetherian affine chart. Use the canonical multiplication map from the symmetric algebra on m/m^2 to the associated graded ring; it is surjective and an isomorphism in degree one. A linear subscheme containing the cone would give degree-one equations in the kernel.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-multiplicity-hypersurface-point",
+        "kind": "definition",
+        "title": "Hypersurface multiplicity at a rational point",
+        "statement": "For any field k, finite n, rational point a∈k^n, and nonzero f∈k[X_1,...,X_n] with f(a)=0, the multiplicity of the hypersurface equation is the least total degree of a nonzero homogeneous term of f(a+t). This is its m-adic order in O_{A^n_k,a}, is invariant under multiplication by a local unit, and satisfies mult_a(f^r)=r mult_a(f) for r≥1.",
+        "deps": [
+          "lem-tangent-cone-initial-ideal-presentation",
+          "def-associated-graded-ring-and-module",
+          "def-monomials-multidegree-and-total-degree",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-localisation-at-a-prime-ideal",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "cor-maximal-ideals-are-prime",
+          "thm-localisation-at-a-prime-is-local",
+          "lem-field-is-a-commutative-ring",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4b, Definition 4.9 and following multiplicity paragraph",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-hypersurface-smooth-iff-multiplicity-one",
+        "kind": "lemma",
+        "title": "Multiplicity one is the smooth hypersurface test",
+        "statement": "Assume AC. Let k be any field, n>=1 finite, 0!=f in k[X_1,...,X_n] nonconstant, and a in k^n with f(a)=0. For X=Spec(k[X_1,...,X_n]/(f)) and the k-rational point x defined by a, the structure morphism is smooth at x (standard smooth at its prime after shrinking) iff mult_a(f)=1. No reducedness, perfectness, or characteristic hypothesis is imposed.",
+        "deps": [
+          "def-multiplicity-hypersurface-point",
+          "def-smooth-morphism-classical",
+          "def-ag-standard-smooth-algebra",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "def-ag-geometrically-regular-algebra-and-fibre",
+          "prop-modules-over-a-field-are-projective-flat-and-injective",
+          "lem-regular-local-regular-quotient-ideal-is-parameter-generated",
+          "lem-regular-system-of-parameters-equivalent-basis",
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "thm-localisation-commutes-with-quotients",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry v6.10, §4b, Definition 4.9 and following multiplicity paragraph",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Chapter 10 supplement (AG10), §f, items 10.58 and 10.64",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG10.pdf"
+            }
+          ]
+        },
+        "strategy": "Translate f at a. The degree-one part is nonzero exactly when a formal partial derivative is nonzero, giving a one-equation standard smooth chart. Conversely, a local standard smooth chart is flat over k under AC; the pointwise standard-smooth/geometrically-regular criterion makes its local ring regular. Identify that stalk with R/(f) for the regular local ambient ring R=P_m. The regular-local quotient criterion says the principal nonzero ideal (f) is generated by c parameters, where c is the dimension of its image in m/m^2. Principality gives c<=1 and nonzeroness rules out c=0, so f has nonzero cotangent class and multiplicity one. AC is used through the cited flatness, geometric regularity, regular quotient, and polynomial-localization results.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-smoothness-stable-under-product-classical",
+        "kind": "lemma",
+        "title": "Products preserve smoothness",
+        "statement": "Assume AC. Let k be an algebraically closed field, and let X,Y be smooth classical varieties over k under the local-standard-smooth convention. Their classical product is smooth. If (X_i),(Y_j) are irreducible-component decompositions, the irreducible components of X×_kY are exactly the nonempty products X_i×_kY_j, and dim(X_i×_kY_j)=dim X_i+dim Y_j. If either factor is empty, the product has no components. More generally, for any field k and finite-type k-schemes X,Y smooth over k, the scheme-theoretic product X×_kY is smooth over k. In both clauses, smoothness is measured by the local-standard-smooth convention. The dimension assertion concerns only the classical-variety components; no dimension claim is made for arbitrary finite-type schemes.",
+        "deps": [
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-product-varieties-universal-property",
+          "def-smooth-morphism-classical",
+          "lem-classical-variety-noetherian-components",
+          "thm-ag-standard-smooth-base-change-composition",
+          "thm-affine-variety-product-coordinate-ring",
+          "thm-dimension-product-varieties",
+          "thm-fibre-products-of-schemes-exist"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry, Classes 51–52, §2.8 (exercise; not a proof)",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "The Stacks Project, Morphisms of Schemes, Lemmas 29.35.4–5 and 29.35.11 (tag 01V4)",
+              "url": "https://stacks.math.columbia.edu/tag/01V4"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Geometry v6.10, §5j, Proposition 5.35",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "For finite-type schemes, prove local standard-smoothness of the product from affine tensor charts by base change and composition; separately prove the product is finite type. Identify the classical product scheme by gluing the same affine tensor charts, then prove the component list using the finite closed component-product cover, surjective pair projections, irreducibility, and Milne’s dimension theorem on each irreducible pair. AC is inherited from the stated smooth-morphism convention and classical component/dimension suppliers; the pointwise chart argument itself makes no simultaneous choices.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-smooth-morphism-classical",
+        "kind": "definition",
+        "title": "Smooth morphisms via local standard smooth presentations",
+        "statement": "Assume the Axiom of Choice. A morphism of finite-type k-schemes is smooth if locally on source and target it has a standard smooth algebra presentation. Use the prerequisite pair’s definition and equivalence with finite presentation, flatness and geometrically regular fibres.",
+        "deps": [
+          "def-ag-standard-smooth-algebra",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§1.2, §1.9, §2.12; exact presentation dictionary is a supplier obligation",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-smooth-map-tangent-surjectivity-criterion",
+        "kind": "lemma",
+        "title": "The submersion criterion between smooth varieties",
+        "statement": "Assume AC. Let k be algebraically closed, let X,Y be smooth classical varieties with locally standard-smooth finite-type k-scheme structures, and let f:X->Y be finite type. At every closed point x with y=f(x), f is smooth at x iff d_xf is surjective. If so, the scheme-theoretic fibre has a regular local ring at x of dimension dim_x X-dim_y Y. At every such x, T_x(X_y)=ker d_xf.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-base-change-morphism-schemes",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-dimension-classical-variety",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-scheme-theoretic-fibre",
+          "def-smooth-morphism-classical",
+          "def-zariski-tangent-space-point",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-tangent-space-functoriality-classical",
+          "thm-ag-submersion-criterion-standard-smooth",
+          "thm-fibre-products-of-schemes-exist"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Classes 51–52, §2.2, Trickier Exercise",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "Stacks Project Algebra Lemma 10.128.2 (tag 07DY): regular parameters mapping to a regular sequence imply flatness",
+              "url": "https://stacks.math.columbia.edu/tag/07DY"
+            }
+          ]
+        },
+        "strategy": "Restrict to a classical closed point over algebraically closed k, so x and y are k-rational. The published submersion criterion identifies pointwise smoothness with injectivity of the cotangent map and gives regularity and dimension of the local scheme-theoretic fibre. In finite-dimensional tangent/cotangent spaces, dualization turns this injectivity into surjectivity of d_xf. Prove the fibre tangent identity separately from the fibre-product universal property and dual-number description. Convert local-ring dimensions to classical local dimensions with the local-dimension supplier. State AC and inherit its use through the cited suppliers; no separate fibre-flatness argument or closed-fibre criterion is needed.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-smooth-hyperplane-slice-at-transverse-point",
+        "kind": "lemma",
+        "title": "A transverse hyperplane slice is smooth at the chosen point",
+        "statement": "Assume the Axiom of Choice. Let k be an algebraically closed field, let X be a classical variety in A^n_k, embedded as a closed subvariety with its reduced finite-type k-scheme structure, smooth at a classical closed point x, and put d=dim_x X>=1. Let h=l-c be an affine-linear polynomial whose linear part l is nonzero and which satisfies h(x)=0, let H=V(h) be the hyperplane it cuts out, and assume that the composite T_x X -> T_x A^n_k=k^n -> k induced by l is not the zero map. Then h|_X is smooth at x; the scheme-theoretic intersection Z=X x_{A^n_k} H is canonically the scheme-theoretic fibre of h|_X over 0, is smooth over k at x, and has O_{Z,x} a regular local ring of dimension d-1; and T_x Z=ker d_x(h|_X), the kernel of the displayed composite inside T_x X. Reducible X and every characteristic are allowed, and nothing is asserted in the nontransverse case.",
+        "deps": [
+          "cor-dimension-affine-and-projective-space",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-tensor-product-with-a-quotient-ring",
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-dimension-classical-variety",
+          "def-dual-numbers-scheme",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-fibre-product-schemes-universal-property",
+          "def-finite-type-and-module-finite-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-regular-local-ring-geometric-point",
+          "def-scheme-theoretic-fibre",
+          "def-smooth-morphism-classical",
+          "thm-classical-affine-local-ring-is-localization",
+          "lem-ag-standard-smooth-regular-geometric-fibres",
+          "lem-classical-variety-noetherian-components",
+          "lem-finite-type-local-on-source-and-target",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-subscheme-intersection-fibre-product",
+          "lem-tangent-space-functoriality-classical",
+          "lem-tangent-vectors-as-dual-number-points",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-ag-standard-smooth-base-change-composition",
+          "thm-ag-submersion-criterion-standard-smooth",
+          "thm-fibre-products-of-schemes-exist",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-2, pp.98–99; solution p.222",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The transversality hypothesis is identified with d_x(h|_X) being nonzero, hence surjective onto the one-dimensional T_0 A^1_k with injective dual cotangent map, and the pointwise locally standard smooth submersion criterion (the same theorem that supplies the regular local fibre ring of dimension dim O_{X,x} - dim O_{A^1,0}) makes h|_X smooth at x. The hyperplane H is identified with the fibre product of h and the origin by the affine tensor-ring theorem and the tensor-product-quotient formula, and a direct universal-property pasting argument shows that the scheme-theoretic intersection of X and H is canonically the fibre X_0 of h|_X over 0, carrying x to x. Based dual-number points of X_0 at x are exactly the based dual-number points of X whose composite with h|_X is constant, so T_x Z=ker d_x(h|_X). Base change of the smooth morphism along the origin makes the slice smooth, and the local dimension d-1 comes from the submersion criterion with dim O_{X,x}=d and dim O_{A^1,0}=1, checked against rank-nullity. AC is traced to the suppliers that assume it; every other step is choice-free.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-smooth-curve-realizing-a-tangent-direction",
+        "kind": "lemma",
+        "title": "A tangent direction is realized by a local smooth curve",
+        "statement": "Assume the Axiom of Choice. For a classical variety X in A^n over an algebraically closed field, smooth at a closed point x with d=dim_x X >= 1, and every v in T_xX there is a reduced closed (hence locally closed) subvariety C of X through x, smooth at x with dim_x C = 1, such that the differential of C -> X maps T_xC isomorphically onto kv when v is nonzero, and onto a line through the origin when v = 0; in particular v lies in the image in both cases. Characteristic-free; reducible X allowed; the dimension-zero case admits no such curve.",
+        "deps": [
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-dimension",
+          "def-dimension-classical-variety",
+          "def-dual-numbers-scheme",
+          "def-fibre-product-schemes-universal-property",
+          "def-linear-subspace",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-reduction-of-scheme",
+          "def-regular-local-ring-geometric-point",
+          "def-smooth-morphism-classical",
+          "def-zariski-cotangent-space-point",
+          "def-zariski-tangent-space-point",
+          "lem-ag-standard-smooth-regular-geometric-fibres",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-smooth-hyperplane-slice-at-transverse-point",
+          "lem-standard-basis-of-f-n",
+          "lem-tangent-space-functoriality-classical",
+          "lem-tangent-vectors-as-dual-number-points",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-ag-perfect-field-jacobian-regularity",
+          "thm-fibre-products-of-schemes-exist",
+          "thm-rank-nullity",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-3, p.98",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Write v in coordinates via the dual-number identification of T_xX with a subspace T of k^n; for the least nonzero coordinate s of v form the explicit affine-linear polynomials h_j = x_j - (v_j/v_s)x_s - (a_j - (v_j/v_s)a_s); the active subset of the index set is the finite recursion that keeps exactly the functionals nonzero on the current tangent subspace, it has d-1 elements, and their common kernel on T is kv. Apply lem-smooth-hyperplane-slice-at-transverse-point successively to the reductions of the scheme-theoretic intersections (reduction does not change the tangent subspace at x), obtaining a reduced closed curve smooth at x with tangent line kv. Choice enters only through the suppliers that assume it; the linear forms and the recursion are explicit.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-dominant-map-generic-differential-surjectivity-char-zero",
+        "kind": "lemma",
+        "title": "A dominant map has a surjective differential on a dense source open",
+        "statement": "Assume the Axiom of Choice. Let k be an algebraically closed field of characteristic 0, X and Y irreducible classical varieties over k, and f:X->Y a dominant morphism. Then U = X_reg ∩ f^{-1}(Y_reg) ∩ D(H) (for a nonempty affine chart Spec S of X over an affine chart Spec R of Y and a nonzero H in S) is a nonempty dense open subset of X contained in X_reg, V = Y_reg is a nonempty dense open subset of Y with f(U) ⊆ V, and for every closed point x in U the differential d_xf: T_xX -> T_{f(x)}Y is surjective. No smoothness of X or Y is assumed.",
+        "deps": [
+          "cor-change-of-rings-for-extension-of-scalars",
+          "cor-every-spanning-set-contains-a-basis",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-principal-localisation-spectrum-is-distinguished-open",
+          "cor-transcendence-degree-tower-additivity",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-dominant-morphism-and-rational-map",
+          "def-dimension",
+          "def-dimension-classical-variety",
+          "def-field-of-fractions",
+          "def-finitely-generated-field-extension",
+          "def-localisation-of-a-module",
+          "def-morphism-affine-schemes-from-ring-map",
+          "def-singular-and-regular-loci-variety",
+          "def-zariski-tangent-space-point",
+          "lem-ag-differentials-localization-base-change",
+          "lem-ag-differentials-transitivity",
+          "lem-ag-polynomial-quotient-differentials",
+          "lem-classical-variety-noetherian-components",
+          "lem-general-variety-function-field-charts",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-sheaf-differentials-affine-compatibility",
+          "lem-spectrum-map-stalk-homomorphisms-local",
+          "lem-tangent-space-functoriality-classical",
+          "thm-ag-field-differentials-separable-rank",
+          "thm-ag-separating-transcendence-basis-perfect-field",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "thm-classical-affine-variety-prime-coordinate-ring",
+          "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "thm-dimension-equals-transcendence-degree",
+          "thm-localisation-of-modules-is-tensor-product",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-rank-nullity",
+          "thm-right-exactness-of-tensor-products",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-transpose-kernel-range-and-rank",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.1, Proposition 3.1 (generic smoothness in the source) and its proof",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce to affine charts Spec S -> Spec R of X and Y with K=Frac R=k(Y) and L=Frac S=k(X). By tower additivity r=dim X-dim Y; char 0 makes K perfect, so L/K has a separating transcendence basis t_1..t_r, and Omega_{L/K} has the basis dt_i. Localizing Omega_{S/R} at S\\{0} recovers Omega_{L/K}, so r lifted elements omega_i in Omega_{S/R} span the generic fibre; clearing finitely many denominators spreads this out to Omega_{S/R}[1/H] generated by the omega_i over S_H. Base changing to residue fields bounds dim Omega_{S/R} tensor kappa(p) <= r on D(H). On U = D(H) ∩ X_reg ∩ f^{-1}(Y_reg) the cotangent map is identified with the base change of S tensor_R Omega_{R/k} -> Omega_{S/k}, whose rank equals rank d_xf by transpose and rank-nullity; regularity of the endpoints gives dim T_xX=dim X, dim T_yY=dim Y, so rank d_xf >= dim X-r = dim Y and d_xf is surjective. AC is declared and used only through the named AC-assuming suppliers.",
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-generic-smoothness-on-source-characteristic-zero",
+        "kind": "corollary",
+        "title": "Generic smoothness on the source",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed of characteristic 0, X and Y irreducible classical varieties over k, and f:X->Y a dominant morphism. Let U = X_reg ∩ f^{-1}(Y_reg) ∩ D(H) be the nonempty open subset of the differential-surjectivity lemma. Then there are a nonempty affine open subvariety V ⊆ U (a principal open of an affine chart of X) and a nonempty affine open W ⊆ Y_reg with f(V) ⊆ W such that V -> Spec k and W -> Spec k are smooth, the restriction f|_V: V -> W is a finite-type morphism and is smooth (locally standard smooth at every point of V), and consequently f|_V: V -> Y is smooth too. In particular f is smooth at every point of the nonempty open subset V of its source. Neither X nor Y is assumed smooth outside the regular loci, and no target-side generic smoothness is asserted.",
+        "deps": [
+          "cor-closed-points-dense-in-affine-spectra",
+          "cor-closed-points-of-spectrum-are-maximal-ideals",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "def-affine-open-subscheme",
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-finite-type-and-module-finite-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-regular-local-ring-geometric-point",
+          "def-singular-and-regular-loci-variety",
+          "def-smooth-morphism-classical",
+          "def-stalk-of-presheaf",
+          "def-zariski-tangent-space-point",
+          "lem-classical-variety-noetherian-components",
+          "lem-dominant-map-generic-differential-surjectivity-char-zero",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-smooth-map-tangent-surjectivity-criterion",
+          "lem-tangent-space-functoriality-classical",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-classical-principal-open-is-affine-variety",
+          "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "thm-regular-equals-smooth-over-perfect-field"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.1, Proposition 3.1 (generic smoothness in the source) with proof",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Shrink the open set U of the preceding lemma to a nonempty principal open V of an affine chart of X and a nonempty principal open W of an affine chart of Y inside Y_reg with f(V) ⊆ W. Since V ⊆ X_reg and W ⊆ Y_reg are finite-type regular k-schemes over the perfect field k, they are smooth over k (regularity-equals-smoothness). The restriction f|_V: V -> W is finite type because its affine coordinate ring is generated over the target ring by finitely many k-generators. At every point x of V the open immersions V ⊆ X and W ⊆ Y transport the differential, so rank d_x(f|_V) = rank d_x f = dim T_{f(x)} Y = dim T_{f(x)} W and the differential is surjective; the submersion criterion then makes f|_V smooth at every point of the classical variety V. The smooth locus is open, and the closed points of the affine finite-type k-scheme V are exactly its classical points, so density of closed points forces the smooth locus to be all of V. Smoothness is local on the target, so f|_V: V -> Y is smooth.",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-critical-locus-image-dimension-bound",
+        "kind": "lemma",
+        "title": "Critical loci have small images in characteristic zero",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed of characteristic 0, let X and Y be smooth classical varieties over k, and let f:X->Y be a morphism of classical varieties. For r >= 0 let C_r = {x in X : rank d_x f <= r} be the set of classical points at which the differential d_x f: T_x X -> T_{f(x)} Y has rank at most r. Then (1) C_r is closed in X (explicitly, C_r is the set of classical points of a closed subvariety of the smooth classical variety X), and (2) dim closure(f(C_r)) <= r, the closure taken in the classical variety Y. Neither irreducibility, connectedness, equidimensionality nor nonemptiness of X or Y is assumed, and the empty case is permitted; characteristic 0 is used only in claim 2 through lem-dominant-map-generic-differential-surjectivity-char-zero, and claim 1 holds over any algebraically closed field.",
+        "deps": [
+          "cor-change-of-rings-for-extension-of-scalars",
+          "cor-jacobian-presentation-differentials",
+          "cor-localisation-commutes-with-kernels-images-and-cokernels",
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-classical-dominant-morphism-and-rational-map",
+          "def-dimension-classical-variety",
+          "def-dimension-noetherian-topological-space",
+          "def-interior-closure-boundary-top",
+          "def-singular-and-regular-loci-variety",
+          "def-smooth-morphism-classical",
+          "def-smooth-relative-dimension-via-differentials",
+          "def-zariski-tangent-space-point",
+          "lem-ag-differentials-localization-base-change",
+          "lem-classical-variety-noetherian-components",
+          "lem-dimension-finite-union-components",
+          "lem-dominant-map-generic-differential-surjectivity-char-zero",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-tangent-space-functoriality-classical",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-classical-principal-open-is-affine-variety",
+          "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "thm-local-ring-affine-variety-localization",
+          "thm-transpose-kernel-range-and-rank"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.4 (Lemma on the dimension of the critical image) with proof",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Actual completed route. Choose affine charts V = Spec C in Y and U = Spec B in X around a prescribed point with f(U) contained in V and B standard smooth over k; the presentation Jacobian makes Omega_{B/k} free with basis du_{c+1},...,du_n. The pullback psi: C -> B induces a B-linear map gamma: B (x)_C Omega_{C/k} -> Omega_{B/k}, and writing the images of the generators dy_j in the free basis gives a matrix A = (a_ij) over B with rank d_x f = rank A(x) at every closed point x in U (functoriality of the differential and base change of the cotangent map). The (r+1)x(r+1) minors of A cut C_r out on U, so C_r is closed. Decompose C_r into finitely many irreducible components Z_i and put W_i = closure f(Z_i). Generic differential surjectivity for the dominant morphism f|_{Z_i}: Z_i -> W_i gives a point where d(f|_{Z_i}) is surjective, and injectivity of the differentials of the closed inclusions Z_i -> X and W_i -> Y (a local-ring quotient computation) gives rank d(f|_{Z_i}) <= rank d_x f <= r, so dim W_i <= r. Hence dim closure(f(C_r)) = max_i dim W_i <= r, the empty list giving -infinity. Boundary and scope dispositions in the final proof step.",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-generic-smoothness-characteristic-zero",
+        "kind": "theorem",
+        "title": "Generic smoothness over a dense target open",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed of characteristic 0, let X and Y be irreducible classical varieties over k, and let f: X -> Y be a morphism of classical varieties. Assume X is smooth over k (its structure morphism to Spec k is smooth in the locally-standard-smooth sense; equivalently, k being perfect, X is regular). Then: (1) there is a dense open subvariety U of Y such that the restriction f^{-1}(U) -> U is a smooth morphism of finite-type k-schemes; when f is not dominant one may take U with f^{-1}(U) empty, the empty morphism being smooth; (2) if in addition f is dominant, there is a nonempty open (hence dense) V inside U such that for every closed point y of V the scheme-theoretic fibre X_y = X x_Y Spec k(y) is nonempty, smooth over k, and of pure dimension r = dim X - dim Y. Neither Y nor f is required to be smooth or flat, the fibres are not required to be irreducible or connected, and no statement is made about the size of U or V; characteristic 0 enters through the critical-locus bound of lem-critical-locus-image-dimension-bound and through perfectness of k.",
+        "deps": [
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "def-affine-open-subscheme",
+          "def-axiom-of-choice",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-dimension-classical-variety",
+          "def-dimension-noetherian-topological-space",
+          "def-finite-type-and-module-finite-algebras",
+          "def-interior-closure-boundary-top",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-scheme-theoretic-fibre",
+          "def-singular-and-regular-loci-variety",
+          "def-smooth-morphism-classical",
+          "def-stalk-of-presheaf",
+          "lem-classical-variety-noetherian-components",
+          "lem-critical-locus-image-dimension-bound",
+          "lem-dimension-nonempty-open-subset",
+          "lem-fibre-product-open-restriction",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-points-of-fibre-primes-over-point",
+          "lem-smooth-map-tangent-surjectivity-criterion",
+          "thm-ag-standard-smooth-base-change-composition",
+          "thm-classical-principal-open-is-affine-variety",
+          "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "thm-fibre-products-of-schemes-exist",
+          "thm-generic-fibre-dimension",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "cor-closed-points-dense-in-affine-spectra"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.3, Theorem 3.3 (generic smoothness in the target) with proof",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, Theorem 5.4.2 (Bertini-Sard), printed p. 34",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Actual completed route. Y_reg is a nonempty dense open of the irreducible Y (regular locus of a reduced finite-type scheme over the perfect field k) and is smooth over k via regularity-equals-smoothness; with X_0 = f^{-1}(Y_reg) nonempty open smooth in X, the restricted morphism f_0: X_0 -> Y_reg is a finite-type morphism of smooth classical varieties. The rank <= n-1 locus C of f_0 is closed and its image closure Z in Y_reg has dimension <= n-1 by the critical-locus dimension bound (for n=0, C=Z=empty), so U := Y_reg minus Z is a dense open of Y, and at every point of X' = f^{-1}(U) the differential of f_0 has rank exactly n = dim T Y_reg (lower bound because the point is outside C, upper bound because the target is n-dimensional), hence is surjective; the submersion criterion makes f_0 smooth at each such point, and locality on source and target makes the restriction X' -> U smooth. For the fibres, over the further open V = U intersect the generic-fibre-dimension open, the scheme-theoretic fibre X_y is the base change of the smooth morphism X' -> U along Spec k(y) -> U, hence smooth over k, and is nonempty of pure dimension dim X - dim Y by generic fibre dimension.",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-zero-scheme-of-line-bundle-section",
+        "kind": "lemma",
+        "title": "A section of an invertible sheaf has a canonical zero subscheme",
+        "statement": "Let X be a scheme, let L be an invertible (locally free of rank one) O_X-module, and let s in Gamma(X,L). On an affine trivializing cover U_i=Spec A_i with s=f_i e_i, the quotient spectra Spec(A_i/(f_i)) glue with their quotient maps to a closed subscheme Z(s), canonical up to unique isomorphism over X and independent of the trivializations. No nonzerodivisor or reducedness hypothesis is required; the construction retains nilpotents and allows the empty and whole zero schemes.",
+        "deps": [
+          "def-module-on-ringed-space",
+          "def-section-restriction-and-global-section",
+          "thm-localisation-commutes-with-quotients",
+          "thm-gluing-affine-schemes",
+          "lem-morphism-schemes-local-on-source-target",
+          "lem-quotient-spectrum-map-is-closed",
+          "def-closed-immersion-schemes",
+          "lem-closed-immersion-local-on-target"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil, Foundations of Algebraic Geometry Classes 51–52, §3.9 Corollary 3.9, printed p. 10",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose an affine trivializing cover U_i and write s=f_i e_i. On overlaps, e_i=u_ij e_j for a unit, hence f_j=u_ij f_i and the principal ideals coincide. Refine overlaps by affine opens; localization commutes with quotient, giving canonical identity-on-functions quotient isomorphisms satisfying the cocycle. Glue the affine zero schemes, then glue their compatible maps to X. Each local quotient is a closed immersion; target locality makes the glued morphism a closed immersion. Common affine refinements show independence of trivialization and uniqueness over X. If f_i is a unit the chart is empty, and if f_i=0 it is the whole chart; no radical is taken.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-linear-system-base-locus",
+        "kind": "definition",
+        "title": "Linear systems, base loci, and general members",
+        "statement": "Fix an algebraically closed field k. For a k-scheme X and invertible O_X-module L, a linear system is a nonzero finite-dimensional k-subspace W of Gamma(X,L). Its parameters are one-dimensional subspaces P(W), with the projective Zariski topology. The base locus is the common underlying zero set of the sections, and W is base-point-free when it is empty. A property holds for a general member when it holds for every parameter in some nonempty Zariski-open subset of P(W). For a projective embedding X subset P_k^N, hyperplanes and degree-e hypersurfaces are cut out by restrictions of degree-one and degree-e homogeneous forms, respectively.",
+        "deps": [
+          "def-algebraically-closed-field",
+          "def-module-on-ringed-space",
+          "def-section-restriction-and-global-section",
+          "def-projective-space-points",
+          "def-projective-algebraic-set",
+          "thm-projective-zariski-topology",
+          "lem-zero-scheme-of-line-bundle-section"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vakil, Foundations of Algebraic Geometry Classes 51–52, §3.9 Corollary 3.9, printed p. 10",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "Arapura, Notes on Basic Algebraic Geometry, §5.4 hyperplane parameterization and Theorem 5.4.5, printed pp. 38–39",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "Define P(W) as the lines in W and transport the projective Zariski topology through any finite basis; basis changes preserve homogeneous zero sets. The zero-scheme supplier makes the base-locus intersection closed and proves that scalar representatives define the same zero subscheme. Define base-point-free and general-member conventions, then record degree-one and degree-e restricted forms for projective embeddings."
+      },
+      {
+        "id": "lem-linear-system-incidence-is-smooth",
+        "kind": "lemma",
+        "title": "The universal member away from the base locus",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed, X a smooth finite-type k-scheme, L an invertible O_X-module and W a linear system of dimension r+1 with base locus Bs(W) and X°=X\\Bs(W). The incidence I -> X° is a finite-type smooth k-scheme with a morphism to P(W)=P^r: over X° minus the zero locus of a basis member s_j it is a product with P^{r-1} (r>=1), its fibre over [s] is the zero subscheme Z(s) intersected with X°, and it is empty when r=0.",
+        "deps": [
+          "def-linear-system-base-locus",
+          "lem-zero-scheme-of-line-bundle-section",
+          "def-relative-projective-space-standard-charts",
+          "thm-gluing-affine-schemes",
+          "thm-fibre-products-of-schemes-exist",
+          "def-closed-immersion-schemes",
+          "def-smooth-morphism-classical",
+          "def-ag-standard-smooth-algebra",
+          "lem-smoothness-stable-under-product-classical",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, proof of Theorem 5.4.5, printed p. 39",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            },
+            {
+              "title": "Ravi Vakil, Foundations of Algebraic Geometry, Classes 51–52, §3.9, printed pp. 9–11",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Construct I by gluing the affine charts Spec(A[x]/（g_j+sum g_l x_l)) of X x P^r cut out by the equation sum xi_i g_i = 0, verify independence of trivialization by units and of charts by the standard projective transitions, obtain the local product with P^{r-1} by solving for xi_j where s_j is invertible, identify the fibres with the zero schemes Z(s) by their local equations, and get smoothness from the smooth factors X°_j and P^{r-1} via the product theorem. Choice is inherited through lem-smoothness-stable-under-product-classical at the product step; no further choice is used.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-bertini-smooth-hyperplane-section",
+        "kind": "theorem",
+        "title": "Bertini smoothness away from the base locus",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed of characteristic 0, let X be a smooth finite-type quasi-projective k-scheme (locally closed immersion into a projective space), let L be an invertible O_X-module and let W be a nonzero finite-dimensional linear system with dim_k W = r+1, base locus Bs(W) and X° = X minus Bs(W), so P(W) = P^r_k. Then there is a nonempty Zariski-open U in P(W) such that for every closed point [s] in U the zero scheme Z(s) cap X° is smooth over k; equivalently the general member of W is smooth on X minus its base locus. In particular, for a fixed locally closed immersion X in P^N_k with X nonempty, the hyperplane system has empty base locus, and general scheme-theoretic hyperplane sections of X are smooth over k. U contains classical parameters. No irreducibility, connectedness, nonemptiness or dimension of X or of the members is asserted.",
+        "deps": [
+          "cor-closed-points-dense-in-affine-spectra",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-affine-overlap-separation-condition",
+          "def-axiom-of-choice",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-classical-dominant-morphism-and-rational-map",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-integral-scheme",
+          "def-linear-system-base-locus",
+          "def-locally-closed-immersion",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-projective-algebraic-set",
+          "def-projective-space-points",
+          "def-projective-variety-classical",
+          "def-reduction-of-scheme",
+          "def-scheme-theoretic-fibre",
+          "def-smooth-morphism-classical",
+          "ex-noetherian-integers-and-fields",
+          "lem-a-nonzero-polynomial-in-several-variables-does-not-vanish-on-an-infinite-subring",
+          "lem-classical-affine-closed-points-are-maximal-ideals",
+          "lem-fibre-product-open-restriction",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-linear-system-incidence-is-smooth",
+          "lem-noetherian-space-has-finitely-many-irreducible-components",
+          "lem-projective-irreducibility-homogeneous-prime",
+          "lem-projective-space-diagonal-closed",
+          "lem-regular-point-lies-on-one-component",
+          "lem-separated-stable-under-base-change",
+          "lem-separated-stable-under-composition",
+          "lem-separatedness-of-open-and-closed-immersions",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "lem-subscheme-intersection-fibre-product",
+          "lem-zero-scheme-of-line-bundle-section",
+          "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "thm-generic-smoothness-characteristic-zero",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-separatedness-gluing-overlap-criterion"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.9 Corollary and §3.11 (Bertini), printed pp. 10-11",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, §5.4 Theorem 5.4.5 and its proof, printed pp. 38-39",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Take the incidence I of lem-linear-system-incidence-is-smooth (finite type and smooth over the perfect field k) and decompose it into its finitely many irreducible components Z_i; since regular local rings are domains, the components are pairwise disjoint open integral subschemes. Each Z_i, with its projection p_i to P(W), is an irreducible classical variety under the classical-scheme dictionary, and P(W)=P^r_k is shown to be a nonempty irreducible classical projective variety through its vanishing ideal (0). Apply target generic smoothness (thm-generic-smoothness-characteristic-zero) to each p_i: dominant components give a nonempty open of the parameter space with smooth nonempty fibres of pure dimension dim Z_i - r, non-dominant ones contribute the complement of their image closure. The finite intersection U of these nonempty opens is nonempty because P(W) is irreducible, and for [s] in U the fibre p^{-1}([s]) is covered by the open pieces p_i^{-1}([s]), each smooth or empty, hence is smooth over k by locality of smoothness. Incidence clause (2) identifies that fibre with Z(s) cap X°, which proves the whole base-locus-free part of every member with parameter in U is smooth. The hyperplane clause follows because the hyperplane system of an embedding has empty base locus and Z(s) agrees with the scheme-theoretic hyperplane section locally. AC is declared and used exactly through the cited AC-carrying suppliers; the finite choices of charts, bases and components add no choice principle.",
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-smooth-projective-complete-intersections-general",
+        "kind": "corollary",
+        "title": "General hypersurfaces give smooth complete intersections",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed of characteristic 0 and let X be a nonempty smooth projective classical variety over k inside P^N_k of pure dimension d. Fix r >= 0 and positive degrees e_1,...,e_r; let S_{e_i} be the space of degree-e_i forms, P(S_{e_i}) its projective space of lines, Pi_r = P(S_{e_1}) x_k ... x_k P(S_{e_r}) the product of hypersurface parameter spaces, and Pi_0 = Spec k for the empty tuple. For a tuple of nonzero forms put Z(F_1,...,F_r) = X cap V_+(F_1) cap ... cap V_+(F_r), the scheme-theoretic intersection. Then (1) if 0 <= r <= d there is a nonempty Zariski-open U in Pi_r such that for every closed point of U (equivalently every classical parameter) the closed subscheme Z(F_1,...,F_r) is nonempty, smooth over k and of pure dimension d-r (r=0: Z=X); (2) if r > d there is a nonempty Zariski-open U in Pi_r such that Z(F_1,...,F_r) is empty for every closed point of U. No claim is made about tuples outside U, about the size or density of U, about irreducibility or connectedness of members, or about singular X.",
+        "deps": [
+          "cor-closed-points-dense-in-affine-spectra",
+          "cor-closed-points-of-spectrum-are-maximal-ideals",
+          "cor-dimension-affine-and-projective-space",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-homogeneous-polynomial-becomes-hyperplane-section",
+          "cor-projective-variety-product-exists",
+          "def-ag-standard-smooth-algebra",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-dimension-classical-variety",
+          "def-finite-type-and-module-finite-algebras",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-linear-system-base-locus",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-projective-algebraic-set",
+          "def-projective-space-points",
+          "def-projective-variety-classical",
+          "def-regular-local-ring-geometric-point",
+          "def-smooth-morphism-classical",
+          "def-smooth-relative-dimension-via-differentials",
+          "def-veronese-map",
+          "def-zariski-tangent-space-point",
+          "lem-ag-polynomial-quotient-differentials",
+          "lem-ag-standard-smooth-regular-geometric-fibres",
+          "lem-classical-affine-closed-points-are-maximal-ideals",
+          "lem-dimension-nonempty-open-subset",
+          "lem-fibre-product-open-restriction",
+          "lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "lem-noetherian-space-has-finitely-many-irreducible-components",
+          "lem-a-nonzero-polynomial-in-several-variables-does-not-vanish-on-an-infinite-subring",
+          "lem-projective-hypersurface-dimension-drop",
+          "lem-projective-irreducibility-homogeneous-prime",
+          "lem-smooth-map-tangent-surjectivity-criterion",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "lem-subscheme-intersection-fibre-product",
+          "lem-tangent-space-functoriality-classical",
+          "lem-veronese-map-well-defined-closed-immersion",
+          "lem-zero-dimensional-classical-variety-finite",
+          "lem-zero-scheme-of-line-bundle-section",
+          "thm-bertini-smooth-hyperplane-section",
+          "thm-classical-projective-projection-closed",
+          "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "thm-jacobian-criterion-affine-variety",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "thm-regular-locus-is-open-variety",
+          "thm-right-exactness-of-tensor-products",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, §5.4, Theorem 5.4.5 and the discussion preceding it, printed pp. 38-39; general hypersurface statement on p. 39",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            },
+            {
+              "title": "Ravi Vakil, MATH 216 (2005-06), Classes 51-52, §3.9 Corollary and §3.10-3.11, printed pp. 10-11",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "Robin Hartshorne, Algebraic Geometry, Chapter II, Theorem 8.18 and Chapter III, Corollary 10.9",
+              "url": "https://doi.org/10.1007/978-1-4757-3849-0"
+            }
+          ]
+        },
+        "strategy": "Completed proof route (steps 1.1-8.1). Fix the classical-scheme dictionary; show Pi_r is a nonempty classical projective variety with classical points the tuples of lines, construct the V_+(F) by gluing dehomogenizations, and identify Z(F_1,...,F_r) with Spec(A_j/(f_1,...,f_r)) on each standard chart (1.1-1.4). r=0 is trivial (2.1). Transfer Bertini through the degree-e Veronese embedding: the forms restricting to zero on Y' form a proper subspace, so the induced morphism P(S_e) minus P(K) -> P(W_h) is surjective and carries rational points to rational points, making every closed point of its preimage of the Bertini open good (2.2). Form the universal intersection and prove the nonemptiness locus is closed by closedness of the projective projection (2.3). For a form avoiding every component of the current intersection, cut down dimension one componentwise (3.1). Cut the rank-defect locus out by minors of the combined Jacobian of chart generators and dehomogenized forms; the fibre dimension of Omega_{Z(t)/k} equals N - rank J_comb, so the full-rank locus U'_r is open (3.2). Build a good tuple by induction (4.1) and prove that closed points of full-rank tuples are regular of dimension d-r: rank J_comb = N-d+r, the Jacobian-kernel theorem gives dim T_x Z(t) = d-r, and the submersion criterion applied to the chart map g: X_j -> A^r gives regularity of Z(t) at x (4.2). The good tuple lies in U'_r by standard smoothness (5.1). Full-rank plus nonempty is smooth over k, since closed points are regular, the regular locus is open and its nonempty complement would contain a point closed in Z(t) (5.2). For r > d: after d forms the intersection is finite, one further form avoids the finite set, and the remaining forms are arbitrary (5.3). Pure dimension (6.1) and claim 1 with U_r = U'_r, since N_r = Pi_r for r<=d (7.1), then boundary, choice and iff dispositions (8.1). AC is used exactly through the cited AC-carrying suppliers; finite choices of charts, generating lists, components and forms add no choice principle.",
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-jacobian-presentation-independence",
+        "kind": "remark",
+        "title": "Conventions and hypotheses carried by this pair",
+        "statement": "Assume the Axiom of Choice. Convention note for the pair: the Jacobian has equation rows and its kernel statement is independent of the finite generating list of the actual defining ideal; the dual-number comparison is used only at rational points; tangent cones retain all initial forms and a reduced cone may span less than the tangent space; regularity is absolute while smoothness is relative, and over imperfect fields these differ; target generic smoothness needs a smooth source; the Frobenius phenomenon defeats the arbitrary base-point-free form of Bertini in positive characteristic, while the pair's counterexample makes no embedded-hyperplane claim.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-regular-local-ring-geometric-point",
+          "def-smooth-morphism-classical",
+          "def-tangent-cone-point",
+          "def-zariski-tangent-space-point",
+          "lem-tangent-cone-linear-span-tangent-space",
+          "lem-tangent-vectors-as-dual-number-points",
+          "thm-generic-smoothness-characteristic-zero",
+          "thm-regular-not-smooth-imperfect-field",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, Ch. 4 §§d–i (Jacobians, tangent cones, regularity)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, §5.4",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "strategy": "Actual completed remark. Fixes the pair's conventions and hypotheses and anchors each one to the item that carries it: def-jacobian-matrix-affine-algebraic-set and thm-zariski-tangent-space-jacobian-kernel (equation rows, all generators, presentation independence), lem-tangent-vectors-as-dual-number-points and def-zariski-tangent-space-point (rational points only), def-tangent-cone-point and lem-tangent-cone-linear-span-tangent-space (full initial-form scheme structure; reduced cone can span less), def-regular-local-ring-geometric-point, def-smooth-morphism-classical and thm-regular-not-smooth-imperfect-field (absolute versus relative; imperfect-field divergence), thm-generic-smoothness-characteristic-zero (smooth source required), def-axiom-of-choice. The examples-page counterexamples are mentioned in prose only and load no claim. No proof obligation; contract entry with eight item-specific not-applicable boundary dispositions."
+      }
+    ]
+  },
+  {
+    "order": 366.06,
+    "id": "zariski-tangent-spaces-regular-points-smoothness-and-bertini-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Zariski Tangent Spaces Regular Points Smoothness and Bertini — Examples",
+    "companion": "zariski-tangent-spaces-regular-points-smoothness-and-bertini",
+    "requires": [
+      "zariski-tangent-spaces-regular-points-smoothness-and-bertini",
+      "linear-recurrences-and-rational-generating-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-tangent-space-parabola",
+        "kind": "example",
+        "title": "The parabola at a general point",
+        "statement": "Let k be any field and let a be in k. The parabola C=Spec(k[x,y]/(y-x^2)) inside A^2_k, defined by y=x^2, has at the k-rational point P=(a,a^2) the maximal ideal m=(xbar-a), a principal ideal generated by the local parameter xbar-a, and the Jacobian matrix of the single equation y-x^2 at P is the one-row matrix (-2a,1). The Jacobian-kernel isomorphism identifies the tangent space T_P C with ker(-2a,1)={(u,2au):u in k}=k*(1,2a), a one-dimensional k-vector space, equivalently the tangent line Y-a^2=2a(X-a) through P in the translated coordinates (X-a,Y-a^2)=(u,v). The class of the local parameter xbar-a is a k-basis of the cotangent space m/m^2, which is isomorphic to m/m^2 of the local ring A_m, so T_P C is also the one-dimensional dual Hom_k(C_P C,k) with C_P C=m/m^2=k. Everything holds in every characteristic, including characteristic 2, where (-2a,1)=(0,1), T_P C=k*(1,0)={(u,0)} and the tangent line is Y=a^2.",
+        "deps": [
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-generated-and-principal-ideals",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-monomials-multidegree-and-total-degree",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-ring-characteristic",
+          "def-sum-and-product-of-ideals",
+          "def-zariski-cotangent-space-point",
+          "def-zariski-tangent-space-point",
+          "lem-cotangent-localization-at-rational-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-monic-polynomial-division",
+          "thm-quotient-ring-universal-property",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "§4a; Arapura 5.1.1–5.1.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Substitute y=x^2: the substitution homomorphism sigma:k[x,y]->k[x] with sigma(y)=x^2 has kernel (y-x^2) by monic division, so A=k[x,y]/(y-x^2) is a domain isomorphic to k[x] and the local parameter t=xbar-a is a nonzero nonzerodivisor. Evaluation at P factors through A with maximal kernel the image of (x-a,y-a^2), which equals (xbar-a) because ybar-a^2=(xbar-a)(xbar+a), so P is a k-rational point with A/m=k. Multiplication by t identifies A/(t) with m/m^2 and A/(t)=k, so m/m^2=k with basis the class of t; the cotangent-localization lemma transfers this to the intrinsic cotangent space, whose dual is T_P C. The Jacobian of f=y-x^2 at P is (-2a,1) with kernel k*(1,2a), so the Jacobian-kernel theorem gives T_P C=ker J and the tangent line reads v=2au, i.e. Y-a^2=2a(X-a); in characteristic 2 the row is (0,1) and the kernel is k*(1,0). No characteristic hypothesis is used, the class [t] is exhibited explicitly, and no choice principle is invoked.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-node-two-tangent-directions",
+        "kind": "example",
+        "title": "A node has two distinct tangent directions",
+        "statement": "For char k not 2, the nodal plane cubic C=Spec(k[x,y]/(y^2-x^3-x^2)) inside A^2_k, defined by y^2=x^2+x^3, has at the origin tangent space T_0C=k^2 (the Jacobian row (-3x^2-2x,2y) vanishes there), multiplicity two with lowest nonzero homogeneous part y^2-x^2, and scheme-theoretic tangent cone Spec(k[x,y]/(y^2-x^2)). The leading form factors as y^2-x^2=(y-x)(y+x), and the two linear factors are non-proportional precisely because char k is not 2, so the cone presents the two distinct lines y=x and y=-x through the origin: the node has two distinct tangent directions, each factor occurring with multiplicity one in the leading form.",
+        "deps": [
+          "def-generated-and-principal-ideals",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multiplicity-hypersurface-point",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-ring-characteristic",
+          "def-tangent-cone-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "lem-tangent-cone-initial-ideal-presentation",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-quotient-ring-universal-property",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Example 4.4 (printed p. 82) and Example 4.10 (printed p. 84)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the homogeneous decomposition of f=y^2-x^3-x^2, read off the multiplicity as the least nonzero degree, apply the principal case of the initial-ideal presentation of the tangent cone, evaluate the Jacobian at the origin, and factor y^2-x^2=(y-x)(y+x); non-proportionality of the two linear factors is proved by comparing the coefficients of y and of x in a hypothetical proportionality, which would force 1=-1 in k and hence 1+1=0, contradicting char k not 2. The characteristic hypothesis is used exactly once, for the distinctness of the two tangent lines; multiplicity and tangent space hold in every characteristic. No reduction is performed in computing the cone, and no choice principle is used.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-cusp-double-tangent",
+        "kind": "example",
+        "title": "The cusp retains a doubled tangent line",
+        "statement": "For char k not 2 or 3, the plane cubic C=Spec(k[x,y]/(y^2-x^3)) has at the origin tangent space T_0C=k^2 (the Jacobian (-3x^2,2y) vanishes there), multiplicity two (the lowest nonzero homogeneous part is y^2), and scheme-theoretic tangent cone Spec(k[x,y]/(y^2)), the x-axis doubled. Its reduction is the line y=0, whose k-linear span inside k^2 is the one-dimensional subspace {(c,0)}, so the reduced cone does not span the tangent space. The degree-one part of the cone ideal (y^2) is zero while its radical is (y); the nilpotent class of y is retained and no reduction is performed in computing the cone.",
+        "deps": [
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-generated-and-principal-ideals",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multiplicity-hypersurface-point",
+          "def-nilradical-and-reduced-ring",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-radical-of-an-ideal",
+          "def-reduction-of-scheme",
+          "def-tangent-cone-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "lem-tangent-cone-initial-ideal-presentation",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-binomial-theorem-over-a-commutative-ring",
+          "thm-monic-polynomial-division",
+          "thm-quotient-ring-universal-property",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "4.3, 4.12; AG10 10.68",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The gradient vanishes and the lowest term is y^2. Its degree-one relation space is zero, while its radical contains y.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-smooth-quadric-hypersurface",
+        "kind": "example",
+        "title": "A nondegenerate projective quadric",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed with char k not 2 and let n>=2. For F=X_0^2+...+X_n^2 and Q=V_+(F) in P^n_k with its reduced classical variety structure: Q is nonempty of pure dimension n-1 with dim O_{Q,x}=n-1 at every closed point; Q -> Spec k is smooth; and at every closed point x one has dim_k T_xQ=n-1, so x is not singular. In characteristic two F is the square (X_0+...+X_n)^2 and V_+(F) is a nonreduced hyperplane.",
+        "deps": [
+          "cor-dimension-affine-and-projective-space",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-hypersurface-singular-locus-gradient",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "cor-units-in-a-polynomial-ring-over-a-domain",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-classical-affine-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-coordinate-ring-affine-algebraic-set",
+          "def-dimension-classical-variety",
+          "def-field",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-projective-algebraic-set",
+          "def-projective-space-points",
+          "def-regular-local-ring-geometric-point",
+          "def-regular-noetherian-ring",
+          "def-ring-characteristic",
+          "def-singular-and-regular-loci-variety",
+          "lem-classical-variety-noetherian-components",
+          "lem-dimension-nonempty-open-subset",
+          "lem-field-is-noetherian",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-irreducible-components-of-a-topological-space",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-jacobian-criterion-affine-variety",
+          "thm-local-ring-affine-variety-localization",
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-principal-subvariety-codimension-one",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-gluing-affine-schemes",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, §4a (printed pp. 81-84) and Exercise 6-1 (printed p. 159)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, §5.2 (printed p. 35)",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Identify the charts Q cap D_+(X_i)=V(g_i) with g_i=1+sum_{j!=i} x_j^2; prove all g_i nonconstant squarefree by degree counting in each variable over the domain of the remaining variables (char k != 2 enters via 2 != 0); get (g_i) radical and the affine charts of dimension n-1 from the principal-subvariety codimension-one theorem; prove pure dimension n-1 and nonemptiness by pulling components through the charts; compute the Jacobian (2x_j), show some entry is nonzero at every maximal ideal, so rank = 1 = n - (n-1) and the chart local rings are regular by the k-rational Jacobian criterion; conclude regularity of all local rings, finite type, and smoothness over the perfect field k; finally dim_k T_xQ = n-1 at closed points via the regular point criterion. AC is used only through the cited AC-assuming suppliers.",
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-nonreduced-hypersurface-jacobian",
+        "kind": "counterexample",
+        "title": "The equation must define the intended scheme",
+        "statement": "Over any field k of characteristic p>0 the ideals (x^p) and (x) of k[x] have the same reduced zero set, the origin, but the closed subscheme X_p=Spec(k[x]/(x^p)) and the reduced point X_1=Spec(k[x]/(x))=Spec k have different tangent spaces there: the Jacobian of x^p is the zero polynomial in characteristic p and correctly computes the tangent space k of the thickened point, whose local ring k[tau]/(tau^p) has dimension 0 and embedding dimension 1 and is not regular, while the reduced point is a regular point with zero tangent space. So the reduced zero set does not determine the tangent space or the singular locus: the equation must define the intended scheme, and the nilpotent tau with tau^p=0 is retained. Under AC the reduced point is smooth over k and the thickened scheme is not.",
+        "deps": [
+          "cor-maximal-ideals-are-prime",
+          "def-axiom-of-choice",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-finite-type-and-module-finite-algebras",
+          "def-generated-and-principal-ideals",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-krull-dimension-of-a-ring",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-localisation-at-a-prime-ideal",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-prime-and-maximal-ideals",
+          "def-radical-of-an-ideal",
+          "def-regular-local-ring-geometric-point",
+          "def-ring-characteristic",
+          "def-smooth-morphism-to-field-classical",
+          "ex-finite-dimensional-algebra-over-a-field-is-noetherian",
+          "lem-base-extension-field-coordinate-ring",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-finite-type-local-on-source-and-target",
+          "lem-tensor-ring-presentations-for-base-change",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-characteristic-of-a-field-is-zero-or-prime",
+          "thm-monic-polynomial-division",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "thm-quotient-ring-universal-property",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-universal-property-of-a-polynomial-ring",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "4.2 and Exercise 4-9",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compare the two quotient rings explicitly. This refutes applying the thickened equation to the reduced set, not the scheme Jacobian formula.",
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-regular-not-smooth-purely-inseparable-point",
+        "kind": "counterexample",
+        "title": "A regular inseparable point becomes nonregular",
+        "statement": "Assume the Axiom of Choice. Let p be prime and k = F_p(s) the rational function field over F_p = Z/p. With L = k[t]/(t^p-s) and alpha = t+(t^p-s): s is not a pth power in k, L is a field of characteristic p with alpha^p = s and L = k[alpha], and k subset L is purely inseparable. The affine k-scheme X = Spec L is of finite type and regular but not smooth over k; the base change along Spec L -> Spec k is L tensor_k L = L[u]/(u^p), a Noetherian local ring of Krull dimension 0, embedding dimension 1, not regular, so after adjoining the pth root alpha of s the regular point becomes nonregular.",
+        "deps": [
+          "cor-rational-function-field-as-a-fraction-field",
+          "def-algebraic-and-transcendental-elements",
+          "def-axiom-of-choice",
+          "def-purely-inseparable-extension",
+          "def-ring-characteristic",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "thm-regular-not-smooth-imperfect-field",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Varieties, Example 33.12.7 (tag 038S), first example",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "Verify s notin k^p by comparing s-adic orders in the UFD F_p[s] (evaluation at 0 exhibits F_p[s]/(s) = F_p, so s is prime): from s=(f/g)^p one gets 1 + p ord_s(g) = p ord_s(f), impossible since p does not divide 1. Then instantiate thm-regular-not-smooth-imperfect-field with F = k and a = s, which supplies the field L, the finite-type regular X, the base-change isomorphism L tensor_k K = K[u]/(u^p) and the non-smoothness; the witness K = L, beta = alpha gives the displayed ring and the nonregular local ring at its unique point. Purely inseparability is checked from the definition: z in L is a k-combination of 1, alpha, ..., alpha^{p-1}, and the Frobenius endomorphism gives z^p in k. Choice is used only through thm-regular-not-smooth-imperfect-field; the example is a single field, element, root and base change.",
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-bertini-characteristic-p-failure",
+        "kind": "counterexample",
+        "title": "Frobenius linear systems have nonreduced general members",
+        "statement": "Over an algebraically closed field k of characteristic p>0, the base-point-free 2-dimensional linear system W=span{X^p,Y^p} inside H^0(P^1_k, O(p)) has every member equal as a closed subscheme to a single point with local ring k[tau]/(tau^p), so every member is a fat point of multiplicity p (p-dimension p, tangent dimension 1, local dimension 0) and no member is smooth over k. Hence 'general member of a base-point-free linear system is smooth' fails in characteristic p; the system uses L=O(p) with p>=2, so embedded hyperplane Bertini is untouched.",
+        "deps": [
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-finite-type-and-module-finite-algebras",
+          "def-krull-dimension-of-a-ring",
+          "def-linear-system-base-locus",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "def-regular-local-ring-geometric-point",
+          "def-smooth-morphism-to-field-classical",
+          "def-zariski-tangent-space-point",
+          "ex-finite-dimensional-algebra-over-a-field-is-noetherian",
+          "lem-finite-type-local-on-source-and-target",
+          "lem-prime-divides-intermediate-binomial-coefficients",
+          "lem-zero-scheme-of-line-bundle-section",
+          "thm-binomial-theorem-over-a-commutative-ring",
+          "thm-characteristic-of-a-field-is-zero-or-prime",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Vakil, Foundations of Algebraic Geometry, Classes 51-52, Sec 3.11 final warning (printed p. 11)",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "D. Arapura, Notes on Basic Algebraic Geometry, Sec 5.4.3 (printed p. 39)",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Compatibility on the overlap shows (1,u^p),(t^p,1) are global sections of O(p) on P^1_k. In characteristic p, (z1+z2)^p=z1^p+z2^p, so aX^p+bY^p=(alpha X+beta Y)^p with alpha^p=a,beta^p=b; hence every member is the p-fold zero scheme of a nonzero linear form. By lem-zero-scheme-of-line-bundle-section the member is computed chart by chart as Spec k[t]/((t-gamma)^p) or Spec k[u]/((alpha u)^p), i.e. k[tau]/(tau^p): dimension 0, Noetherian, tangent dimension 1 via the vanishing Jacobian (thm-zariski-tangent-space-jacobian-kernel), so nonregular by def-regular-local-ring-geometric-point and not smooth over k by the geometric-regularity criterion def-smooth-morphism-to-field-classical (AC). Base-point-freeness: Z(X^p) and Z(Y^p) are supported at the distinct points [0:1] and [1:0], so Bs(W) is empty.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-tangent-space-product-origin",
+        "kind": "example",
+        "title": "The product of two parabolas: a block Jacobian and the direct-sum formula",
+        "statement": "Let k be any field, let C_1=Spec(k[x,y]/(y-x^2)) and C_2=Spec(k[u,v]/(v-u^2)) be the two parabolas, and let X=Spec(k[x,y,u,v]/(y-x^2,v-u^2)) inside A^4_k, with origin 0=(0,0,0,0) and factor origins 0_1, 0_2. Then X is isomorphic to the product C_1 x_k C_2 compatibly with the coordinate projections, and 0 corresponds to the pair (0_1,0_2); the Jacobian matrix of the generating list (y-x^2, v-u^2) at 0 is the block matrix with rows (0,1,0,0) and (0,0,0,1), whose kernel is {(a,0,b,0): a,b in k} of dimension two, so T_0X is two-dimensional; the factor tangent spaces are T_{0_1}C_1=k and T_{0_2}C_2=k, and the direct-sum formula T_{(0_1,0_2)}(C_1 x_k C_2)=T_{0_1}C_1 + T_{0_2}C_2=k+k=k^2 agrees with the kernel under the coordinate splitting k^4=k^2_(x,y)+k^2_(u,v). No characteristic, perfectness, reducedness or algebraic-closedness hypothesis is used.",
+        "deps": [
+          "def-generated-and-principal-ideals",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-zariski-tangent-space-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "lem-tangent-space-product",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras",
+          "thm-quotient-ring-universal-property",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-4",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Both factor maps A_1->B and A_2->B are built from the polynomial universal property and the quotient universal property; the coproduct property of the tensor product gives a k-algebra map A_1 (x)_k A_2->B, and the reverse map B->A_1 (x)_k A_2 sending x,y,u,v to xbar(x)1, ybar(x)1, 1(x)ubar, 1(x)vbar is shown to be a two-sided inverse by the uniqueness clauses of the coproduct and quotient universal properties; the affine fibre-product tensor-ring theorem then identifies X with C_1 x_k C_2 compatibly with the projections, and the origin with (0_1,0_2). Evaluation at the origin factors through B with kernel generated by (x,y,u,v), so the origin is a k-rational point; the Jacobian of the explicit generating list (y-x^2,v-u^2) at 0 is the block matrix [[0,1,0,0],[0,0,0,1]] with kernel {(a,0,b,0)}, and the Jacobian-kernel theorem gives T_0X=ker J(0). Each factor has the single generator y-x^2 resp. v-u^2 with one-row Jacobian (0,1) at its origin, so each factor tangent space is k, and the direct-sum formula for the product reproduces the same two dimensions under the block splitting; no characteristic hypothesis enters and no choice principle is invoked.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-projective-cone-singular-vertex",
+        "kind": "example",
+        "title": "A projective cone with a smooth conic base",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed with char k not 2, put F=X_0^2+X_1^2-X_2^2 and X=V_+(F) in P^3_k, and let v=[0:0:0:1]. The hyperplane V_+(X_3) is identified with P^2_k with conic base C=X cap V_+(X_3)=V_+(X_0^2+X_1^2-X_2^2). Then X is the union of v with the lines joining v to the points of C. In the vertex chart X_3 != 0 the cone is V(x_0^2+x_1^2-x_2^2) in A^3_k with v at the origin, where T_vX is all of k^3 and dim O_{X,v}=2, so the vertex is singular, with dim_k T_vX > dim O_{X,v}. The base conic has no singular point, and the cone is smooth away from the vertex, so v is the only singular point of X.",
+        "deps": [
+          "cor-dimension-affine-and-projective-space",
+          "cor-hypersurface-singular-locus-gradient",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "cor-units-in-a-polynomial-ring-over-a-domain",
+          "def-axiom-of-choice",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-coordinate-ring-affine-algebraic-set",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-field",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-projective-algebraic-set",
+          "def-projective-space-points",
+          "def-ring-characteristic",
+          "def-singular-and-regular-loci-variety",
+          "def-stalk-of-presheaf",
+          "def-zariski-tangent-space-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-local-ring-affine-variety-localization",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-principal-subvariety-codimension-one",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Exercise 4-8 (printed p. 99; solution printed p. 223) and Exercise 6-1 (printed p. 159)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Set X_i=1 in F to get the four cone charts V(g_3),V(g_0),V(g_1),V(g_2) and the three conic charts V(h_0),V(h_1),V(h_2), with v at the origin of the X_3 chart; prove each of the seven displayed quadratics nonconstant squarefree by degree counting over the domain of the remaining variables; compute the partials and show that only g_3 has a common zero of its partials, at the origin; identify T_vX with the kernel of the one-row zero Jacobian, which is k^3; get dim A^3=3, irreducibility of A^3 and all irreducible components of V(g_3) of dimension 2 from the principal-section codimension-one theorem, hence dim O_{X,v}=2, and transfer tangent space, local dimension and regularity across the open chart via the stalk comparison; verify the conic and the cone off the vertex with the affine gradient test, concluding X_sing={v}.",
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-generic-target-smoothness-needs-smooth-source",
+        "kind": "counterexample",
+        "title": "A cusp family defeats the missing source hypothesis",
+        "statement": "Assume AC. False claim: for k algebraically closed of characteristic 0 and f: X -> Y dominant morphism of irreducible finite-type k-schemes with Y smooth over k, some nonempty Zariski-open U in Y has f^{-1}(U) -> U smooth. Refutation by the constant cusp family X = Spec k[x,y,z]/(y^2-x^3), Y = A^1_k, f induced by z -> z: X is integral and X = C x_k A^1, f is dominant (the prime (x,y) contracts to the generic point), Y is standard smooth over k, and every scheme-theoretic fibre of f is the cusp over the residue field. Any nonempty open U contains the generic point, so shrink to a principal chart A = R_{g0} -> B = S_{phi(g0)}, which is of finite presentation and standard smooth at q_B; clause 1 of the standard-smooth/geometric-regularity criterion forces the fibre B (x)_A k(z) = k(z)[x,y]/(y^2-x^3) to be geometrically regular at the maximal ideal (x,y), i.e. (cusp)_{(x,y)} regular, contradicting dim 1 versus tangent dimension 2. The source X is itself not smooth at the origin (dim 2, tangent dimension 3). Target-open generic smoothness therefore genuinely needs a smooth source; char 0 is retained, and no Bertini or hyperplane-section statement is touched.",
+        "deps": [
+          "cor-affine-domain-maximal-ideal-height-equals-dimension",
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "cor-units-in-a-polynomial-ring-over-a-domain",
+          "def-ag-geometrically-regular-algebra-and-fibre",
+          "def-ag-standard-smooth-algebra",
+          "def-axiom-of-choice",
+          "def-field-of-fractions",
+          "def-finite-type-and-module-finite-algebras",
+          "def-finitely-presented-module-and-algebra",
+          "def-height-of-a-prime-ideal",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-noetherian-ring-and-module",
+          "def-regular-local-ring-geometric-point",
+          "def-smooth-morphism-classical",
+          "lem-distinguished-open-refinement-at-a-point",
+          "lem-field-is-noetherian",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-tensor-ring-presentations-for-base-change",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "thm-correspondence-theorem-ideals",
+          "thm-irreducible-closed-subsets-and-prime-ideals",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Vakil, Foundations of Algebraic Geometry (Math 216, 2005-06), Classes 51-52, Sec 3.1 (source-open generic smoothness) contrasted with Sec 3.3 (target-open statement carrying a smooth-source hypothesis)",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "D. Arapura, Notes on Basic Algebraic Geometry, Sec 5.4 around Theorem 5.4.2 (target-open generic smoothness with a smooth source)",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the constant cusp family directly: k[x,y,z]/(y^2-x^3) is a domain by the Eisenstein/degree argument and F16/F18, so X is integral; the contraction of q=(x,y) to k[z] is (0), giving dominance and fibre identification S (x)_R kappa(p) = kappa(p)[x,y]/(y^2-x^3) for every p (lem-tensor-ring-presentations-for-base-change). Suppose a nonempty open U with smooth restriction: the generic point lies in U (generic point of an irreducible spectrum), so a principal chart D(g0) subset U exists; smoothness is local on source and target, so A = R_{g0} -> B = S_{phi(g0)} is of finite presentation (F5) and standard smooth at q_B. Clause 1 of thm-ag-standard-smooth-geometric-regularity then makes the fibre B (x)_A k(z) = k(z)[x,y]/(y^2-x^3) geometrically regular at q_B; testing the trivial field extension via def-ag-geometrically-regular-algebra-and-fibre gives that (cusp)_{(x,y)} is a regular local ring, contradicting its dimension 1 (cor-height-plus-quotient-dimension + F12/F13/F14) and tangent dimension 2 (thm-zariski-tangent-space-jacobian-kernel + def-regular-local-ring-geometric-point). The scaffold deps lem-tangent-space-product and a product-based route were dropped: the proof computes the nonregular fibre directly. AC is declared and used only through the criterion of clause 1 and the dimension suppliers, as recorded in F6.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-determinantal-quadric-singularity",
+        "kind": "example",
+        "title": "The rank-one 2 by 2 determinantal cone",
+        "statement": "Assume the Axiom of Choice. Let k be algebraically closed and let f=xt-yz in k[x,y,z,t], with X=V(f) in A^4_k carrying the reduced classical variety structure. Then f is nonconstant and squarefree, (f) is radical with I(X)=(f), every irreducible component of X has dimension three, and dim O_{X,a}=3 at every closed point. For a=(a_x,a_y,a_z,a_t) the Jacobian of the single generator f is the row (a_t,-a_z,-a_y,a_x), so T_aX is isomorphic to its kernel: the origin has tangent dimension four while every other point of X has tangent dimension three. Thus the origin is the unique singular point of X, and the computations are characteristic-free.",
+        "deps": [
+          "cor-dimension-affine-and-projective-space",
+          "cor-hypersurface-singular-locus-gradient",
+          "cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "cor-strong-nullstellensatz-two-inclusions",
+          "cor-units-in-a-polynomial-ring-over-a-domain",
+          "def-axiom-of-choice",
+          "def-coordinate-ring-affine-algebraic-set",
+          "def-dimension",
+          "def-field",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-radical-of-an-ideal",
+          "def-singular-and-regular-loci-variety",
+          "def-unique-factorisation-domain",
+          "def-zariski-tangent-space-point",
+          "ex-two-by-two-determinant-formula",
+          "lem-field-is-a-commutative-ring",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-local-dimension-reduced-variety-components",
+          "lem-standard-basis-of-f-n",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-principal-subvariety-codimension-one",
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donu Arapura, Notes on Basic Algebraic Geometry, Example 5.1.3 and §5.2 (printed p. 35)",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "The Jacobian row is (t,-z,-y,x); its kernel is computed explicitly (all of k^4 at the origin, a 3-dimensional subspace elsewhere via an exhibited basis). Squarefreeness is proved by degree counting in each variable: a repeated irreducible factor would have all four variable-degrees zero and be a unit. Dimension 4 of A^4 and its irreducibility come from the Nullstellensatz correspondence and dim A^n=n; the components of V(f) have dimension 3 by the principal-section codimension-one theorem, and local dimension 3 follows from the reduced finite-type local-dimension formula. Choice is used through the AC suppliers (Nullstellensatz, dimension, principal-section, local-dimension, gradient test); the degree, Jacobian and basis arguments are choice-free. The full scheme-theoretic singular locus is checked at nonclosed points by the four principal charts outside the origin; each chart is a localization of a polynomial ring in three variables, hence regular.",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-tangent-spaces-general-and-special-linear-groups",
+        "kind": "example",
+        "title": "Dual numbers compute the tangent spaces of the general and special linear groups",
+        "statement": "Let k be any field and n>=1. Let R=k[x_ij : (i,j) in n x n], X=(x_ij) the generic n x n matrix, d=det(X) its Leibniz determinant. Put S=R/(d-1) and T=R_d, and let SL_n=Spec(S) and GL_n=Spec(T) be the affine k-schemes presented by the determinant condition and the invertibility of the determinant. Then at the identity point e (induced by the evaluation x_ij -> (I_n)_ij) one has T_e GL_n = M_n(k) and T_e SL_n = {B in M_n(k) : trace(B)=0}. These are tangent-space computations only: no Lie bracket is asserted, and no characteristic, perfectness or reducedness hypothesis is used. The proof uses (I_n+epsilon B)(I_n-epsilon B)=I_n and det(I_n+epsilon B)=1+epsilon trace(B), with the based dual-number points described through the universal properties of the polynomial ring, the quotient and the localisation.",
+        "deps": [
+          "cor-invertible-matrix-has-unit-determinant",
+          "def-determinant-of-a-square-matrix",
+          "def-dual-numbers-scheme",
+          "def-generated-and-principal-ideals",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "def-matrices-over-a-commutative-ring",
+          "def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions",
+          "def-principal-localisation",
+          "def-quotient-ring",
+          "def-ring-homomorphism",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-scheme-over-base",
+          "def-trace-of-a-square-matrix-over-a-commutative-ring",
+          "lem-field-is-a-commutative-ring",
+          "lem-ring-units-form-a-group",
+          "lem-tangent-vectors-as-dual-number-points",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-quotient-ring-universal-property",
+          "thm-ring-matrix-arithmetic-laws",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-universal-property-of-localisation"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Examples 4.46–4.47; Arapura Exercise 5.1.4",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The identity matrix gives a k-point of both schemes through the universal properties: evaluation ev at the identity matrix kills d-1 (since ev(d)=det(I_n)=1 by normalization) and sends d to a unit, so it factors through S and through the principal localisation T. By the dual-number lemma, based tangent vectors are the k-algebra maps out of the coordinate ring to D=k[epsilon]/(epsilon^2) reducing to the identity point. Maps out of S correspond to maps out of R killing d-1, and maps out of T to maps out of R sending d to a unit; in both cases the map is determined by the matrix Y=(y_ij), and the reduction condition forces Y=I_n+epsilon B with B unique. The multilinear expansion of det(I_n+epsilon B), using column-additivity, alternation, det(I_n)=1 and epsilon^2=0, gives det(I_n+epsilon B)=1+epsilon trace(B); also (I_n+epsilon B)(I_n-epsilon B)=I_n, so I_n+epsilon B is invertible over D and 1+epsilon trace(B) is a unit with inverse 1-epsilon trace(B) by the invertible-matrix corollary. Hence det(Y)=1 iff trace(B)=0, giving T_e SL_n = {trace zero}, while for GL_n the unit condition is automatic for every B, giving T_e GL_n = M_n(k). No characteristic hypothesis, no Lie bracket, and no choice principle is used.",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-tangent-dimension-distinguishes-three-line-configurations",
+        "kind": "example",
+        "title": "Three axes are not three coplanar lines",
+        "statement": "Let k be a field. The affine k-scheme V=Spec(k[x,y,z]/(xy,yz,zx)), whose k-rational points are the points of the three coordinate axes of A^3_k, has at its k-rational origin o a tangent space T_oV=k^3 of dimension three (the Jacobian of (xy,yz,zx) is the zero 3x3 matrix at o). For every finite list g_1,...,g_r in k[u,v], at every k-rational point q of W=Spec(k[u,v]/(g_1,...,g_r)) the tangent space is isomorphic to a linear subspace of k^2, so dim_k T_qW<=2. Consequently V is not isomorphic over k to any such W: an isomorphism would carry T_oV isomorphically onto a tangent space of W, forcing 3<=2. In particular V is not isomorphic over k to Milne's configuration W=Spec(k[u,v]/(uv(u-v))), the union of the three distinct lines u=0, v=0 and u=v through the origin of A^2_k.",
+        "deps": [
+          "def-dimension",
+          "def-generated-and-principal-ideals",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-linear-subspace",
+          "def-morphism-of-schemes",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-scheme-over-base",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "lem-standard-basis-of-f-n",
+          "lem-tangent-space-functoriality-classical",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-quotient-ring-universal-property",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Example 4.43 (printed pp. 96-97)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Evaluate the Jacobian of the three equations (xy,yz,zx) at the origin to get T_oV=k^3 of dimension three; on the other side, for any affine equation list in two variables, use the Jacobian kernel theorem to identify every tangent space at a k-rational point with the kernel of an r x 2 matrix, a linear subspace of k^2 of dimension at most two; an isomorphism would give a k-linear isomorphism of tangent spaces and hence equality of dimensions, so 3<=2 is a contradiction. The k-rational points are computed explicitly from the evaluation criterion, giving the three coordinate axes for V and the three lines u=0, v=0, u=v for the single equation uv(u-v), whose pairwise distinctness is witnessed by (0,1), (1,0) and (1,1). The proof avoids the singular-locus classification used in the source and uses no choice principle.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-higher-plane-curve-tangent-cones",
+        "kind": "example",
+        "title": "Different singularities can share a tangent cone",
+        "statement": "Let k be algebraically closed of characteristic 0 and set X_i=Spec(k[x,y]/(f_i)) for f_1=2x^4-3x^2y+y^2-2y^3+y^4, f_2=x^4+x^2y^2-2x^2y-xy^2-y^2, f_3=(x^2+y^2)^2+3x^2y-y^3, f_4=(x^2+y^2)^3-4x^2y^2 and f_5=x^6-x^2y^3-y^5. At the origin the multiplicities are 2,2,3,4,5 with lowest nonzero homogeneous parts y^2, -y^2, y(3x^2-y^2), -4x^2y^2 and -y^3(x^2+y^2); the scheme-theoretic tangent cones are Spec(k[x,y]/(y^2)) for both X_1 and X_2, Spec(k[x,y]/(y(3x^2-y^2))), Spec(k[x,y]/(x^2y^2)) and Spec(k[x,y]/(y^3(x^2+y^2))); every tangent space is k^2 of dimension two; and the cone equations factor over k as y*y, y(sqrt3 x-y)(sqrt3 x+y), x*x*y*y and y*y*y(x+iy)(x-iy) whose distinct factors are pairwise non-proportional, so these cones are a doubled line, three distinct lines, the two coordinate axes each doubled, and a tripled line together with two distinct further lines. The first two equations define different closed subschemes of A^2_k although their multiplicity, tangent cone and tangent space all agree.",
+        "deps": [
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "cor-units-in-a-polynomial-ring-over-a-domain",
+          "def-algebraically-closed-field",
+          "def-generated-and-principal-ideals",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multiplicity-hypersurface-point",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-ring-characteristic",
+          "def-tangent-cone-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "lem-tangent-cone-initial-ideal-presentation",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-binomial-theorem-over-a-commutative-ring",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "thm-monic-polynomial-division",
+          "thm-quotient-ring-universal-property",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Examples 4.13–4.17, pp.84–85",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Expand each equation, read off the lowest nonzero homogeneous part and its degree, apply the initial-ideal presentation of the tangent cone, factor the cone generator over the algebraically closed field of characteristic 0 into linear forms, test pairwise non-proportionality of the distinct factors by coefficients, and evaluate the Jacobian at the origin. The computation verifies the shared data only and does not classify analytic branches as tacnodes or ramphoid cusps.",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-orthogonal-and-symplectic-tangent-matrices",
+        "kind": "example",
+        "title": "Classical bilinear-form equations linearize to matrix spaces",
+        "statement": "Let k be a field and n≥1. If char(k)≠2, define O_n and SO_n as the affine k-schemes cut out in M_n by A^tA=I_n and by A^tA=I_n, det(A)=1, respectively; at I_n their tangent spaces are the skew-symmetric matrices. In every characteristic, for J=[[0,I_n],[-I_n,0]], define Sp_n in M_{2n} by A^tJA=J and det(A)=1. At I_{2n}, its tangent matrices are [[P,Q],[R,-P^t]] with Q,R symmetric, and this tangent vector space has dimension n(2n+1). These computations make no claim about global group-scheme dimension or smoothness.",
+        "deps": [
+          "lem-tangent-vectors-as-dual-number-points",
+          "def-dual-numbers-scheme",
+          "def-scheme-over-base",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-quotient-ring-universal-property",
+          "def-matrices-over-a-commutative-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-trace-of-a-square-matrix-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix",
+          "cor-dimensions-of-matrix-and-linear-map-spaces"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Example 4.48, Exercise 4-6, and official solution 4-6, printed pp.97–99 and p.222",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use based dual-number maps into the equation-defined affine schemes, writing A=I+epsilon B. For the orthogonal equation obtain B^t+B=0; in characteristic not two this also forces trace B=0, so the SO determinant equation adds no linear condition. For the standard alternating block J solve B^t J+JB=0; this gives B=[[P,Q],[R,-P^t]] with Q,R symmetric and forces trace B=0 in every characteristic, so det A=1 adds no linear condition. Count the independent entries. State tangent-vector dimensions only; do not infer global group-scheme dimension or smoothness.",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-irreducible-curve-with-arbitrary-embedding-dimension",
+        "kind": "example",
+        "title": "An irreducible curve can have arbitrarily large tangent dimension",
+        "statement": "Assume the Axiom of Choice. Let k be a field, let n>=1, and let C=Spec(k[t^n,t^{n+1},...,t^{2n-1}]) be the monomial curve carried by the subring R=k[t^n,...,t^{2n-1}] of k[t]. Its maximal ideal m=(t^n,...,t^{2n-1})R has residue field R/m=k, so the origin m is a k-rational point; the classes of t^n,...,t^{2n-1} form a k-basis of m/m^2, so dim_k T_0C=n; and R is a domain with dim R=1, so C is an irreducible curve. There is no closed immersion C -> A^{n-1}_k of k-schemes. Hence for every n>=1 there is an irreducible curve whose tangent space at a point has dimension n, and it cannot be embedded in A^{n-1}_k.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-dimension-preserved-by-integral-extensions",
+          "cor-integral-elements-form-a-subring",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-dimension",
+          "def-dual-family-associated-to-a-basis",
+          "def-integral-element-and-algebraic-integer",
+          "def-linear-basis",
+          "def-monomials-multidegree-and-total-degree",
+          "def-morphism-of-schemes",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-scheme-over-base",
+          "def-vector-space-of-linear-maps",
+          "def-zariski-cotangent-space-point",
+          "def-zariski-tangent-space-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "lem-standard-basis-of-f-n",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-irreducible-closed-subsets-and-prime-ideals",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Exercise 4-5 (printed p. 99) with its solution (printed p. 223)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Construct R as the image of k[x_n,...,x_{2n-1}] in k[t]; it is a domain. The element t is integral over R, so the AC-carrying integral-extension dimension theorem gives dim R=1. At the rational origin m=(t^n,...,t^{2n-1}), the n monomials of degrees n through 2n-1 form a basis of m/m^2, hence dim T_0C=n. A hypothetical closed immersion into A^{n-1}_k has a surjective map on local rings at 0 by the published definition; it therefore surjects on cotangent spaces and injects T_0C into T_p A^{n-1}_k=k^{n-1}, contradicting dimensions. AC is used through the integral-extension dimension and irreducibility suppliers; the tangent obstruction is direct and requires no affine quotient classification.",
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-nonradical-ideal-can-have-the-same-tangent-space",
+        "kind": "counterexample",
+        "title": "A nonradical ideal need not enlarge every tangent space",
+        "statement": "In k[x,y], I=(x^2,xy) is strictly smaller than its radical (x). At the k-rational point (0,1) the closed subscheme Spec(k[x,y]/I) and the reduced line Spec(k[x,y]/(x)) have the same one-dimensional tangent space inside k^2, because y is a unit in the local ring there and I agrees with (x) after localisation. At the origin the tangent space of Spec(k[x,y]/I) is all of k^2 (dimension two), while the reduced line has tangent space of dimension one. A nonradical ideal therefore need not enlarge the tangent space at every point; the witness works over any field and in every characteristic.",
+        "deps": [
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-generated-and-principal-ideals",
+          "def-jacobian-matrix-affine-algebraic-set",
+          "def-left-right-and-two-sided-ideal",
+          "def-localisation-at-a-prime-ideal",
+          "def-multiplicative-subset-and-localisation",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-radical-of-an-ideal",
+          "def-zariski-cotangent-space-point",
+          "def-zariski-tangent-space-point",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-field-is-a-commutative-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-localisation-commutes-with-quotients",
+          "thm-monic-polynomial-division",
+          "thm-quotient-ring-universal-property",
+          "thm-stalk-structure-sheaf-prime-localization",
+          "thm-universal-property-of-a-polynomial-ring",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry, v6.10, Exercise 4-9 (printed p.99) and its official solution (printed p.223)",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Recompute the radical choice-free: ker(ev) = (x) for the map ev: k[x][y] -> k[y] with x -> 0, y -> y, obtained from the coefficient expression in the iterated ring and division by the monic polynomial x; k[y] a domain gives sqrt(I) = (x). Then compute the Jacobian rows (2x,0) and (y,x) at (0,1) and at the origin, compare with the row (1,0) for (x), and explain the equality at (0,1) by y being a unit in the local ring R_(x,y-1), where I and (x) agree after localisation. This answers Exercise 4-9 in every characteristic without AC.",
+        "dependency_level": 4
+      }
+    ]
+  }
+]

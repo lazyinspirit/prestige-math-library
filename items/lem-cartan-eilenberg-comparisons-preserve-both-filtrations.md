@@ -11,7 +11,7 @@ sources:
     - title: "Weibel, Exercises 5.7.2–3 and cohomology variant 5.7.9; completed comparison argument"
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
 verification:
-  audited: 2026-09-13
+  audited: 2026-09-29
 status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
@@ -40,7 +40,7 @@ More generally, the existence and uniqueness of a lift into $J$ hold when the au
 
 ## Proof
 
-1.1 Call a short exact sequence $0\to X\to Y\to Z\to0$ of horizontal complexes admissible if the induced sequences on boundaries, cycles and cohomology are also short exact. For such a monomorphism $X\to Y$, the maps $X^p\to Y^p$ and $X^p/B^pX\to Y^p/B^pY$ are monic. For the latter assertion, apply the snake lemma to the exact boundary sequences inside the term sequences: an element of $X^p$ mapping into $B^pY$ comes from $B^pX$, as a subobject identity. This argument uses kernels and images and holds in an arbitrary abelian category. [F3]
+1.1 Call a short exact sequence $0\to X\to Y\to Z\to0$ of horizontal complexes admissible if the induced sequences on boundaries, cycles and cohomology are also short exact. For such a monomorphism $X\to Y$, the maps $X^p\to Y^p$ and $X^p/B^pX\to Y^p/B^pY$ are monic. For the latter assertion, apply the snake lemma to the diagram of short exact boundary inclusions $0\to B^pX\to X^p\to X^p/B^pX\to0$ and $0\to B^pY\to Y^p\to Y^p/B^pY\to0$. Its kernel sequence embeds the kernel of the right quotient map into the kernel of the induced arrow $B^pZ\to Z^p$: admissibility identifies the cokernel of $B^pX\to B^pY$ with $B^pZ$, while term exactness identifies the cokernel of $X^p\to Y^p$ with $Z^p$. The arrow $B^pZ\to Z^p$ is the boundary inclusion and is monic. Thus the right quotient map has zero kernel and is monic. [F3]
 
 1.2 Regard $0\to K\to I^{\bullet,0}\to I^{\bullet,1}\to\cdots$ as a resolution in horizontal complexes. Its successive image complexes $C_I^q$ fit into admissible sequences $0\to C_I^q\to I^{\bullet,q}\to C_I^{q+1}\to0$, with $C_I^0=K$. To check this assertion, use vertical exactness separately on terms, boundaries, cycles and cohomology in F1, or the explicit exactness assumption for the more general source. No source injectivity or splitting is used in this step. In the diagrams for $0\to B\to Z\to H\to0$ and $0\to Z\to I\to B[1]\to0$, the snake lemma identifies the induced cokernels with the next cycle, boundary and cohomology objects. This proves the same assertions for every successive image by induction. The analogous statement holds for $J$. [F1, F3]
 

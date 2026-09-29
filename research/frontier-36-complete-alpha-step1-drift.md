@@ -1,6 +1,6 @@
 # Step 1a prerequisite drift review — frontier-36-complete
 
-The independent reviewer checked all 29 A-page manifest entries against their transitive closures in `research/frontier-36-complete-drift-evidence.json`, the cited prose designs, `research/plan-spec.json`, and the owner authoring direction. The original review held two decisions; its exact report is preserved in `research/frontier-36-complete-step1-drift-review-original.md`. The owner-authorized operator then amended the two sections below after changing the design and plan. These prerequisite decisions do not certify future item proofs. The mechanical drift-apply stage will refresh manifests and tasks after this gate passes.
+The independent reviewer checked the original 29 A-page manifest entries against their transitive closures in `research/frontier-36-complete-drift-evidence.json`, the cited prose designs, `research/plan-spec.json`, and the owner authoring direction. The original review held two decisions; its exact report is preserved in `research/frontier-36-complete-step1-drift-review-original.md`. The owner-authorized operator resolved those findings and later added the planned PDE-11 prerequisite pair as batch 30 after a scaffold escalation. The PDE-11 and Bessel decisions below are owner review, not claims made by the original reviewer. These prerequisite decisions do not certify future item proofs.
 
 ### fredholm-determinants-and-the-lidskii-trace-formula
 A-page order: 288.0801.
@@ -30,13 +30,18 @@ The AV-2/AV-5 local-ring and dimension inputs stated in `plan-algebraic-geometry
 A-page order: 366.069.
 VERDICT: no-drift
 
-**Owner resolution after the independent review:** The AV-15 design now places the necessary affine-local quasi-coherent-algebra definition, principal-open localization of $f_*\mathcal O_X$, and relative-Spec gluing lemmas immediately before `thm-affine-morphism-relative-spec-characterization`. Its A inventory is 31 items, below the 100-item cap. The complete [Stacks Project Lemma 29.11.3](https://stacks.math.columbia.edu/tag/01S8) proof identifies exactly this local interface. AV-15 must prove these support lemmas; it may not cite the later AV-18 page as an established supplier. No forward page edge or scope change is needed. The original blocked finding is preserved in `research/frontier-36-complete-step1-drift-review-original.md`; this owner amendment does not certify the future mathematical proofs.
+**Owner resolution after the independent review:** The AV-15 scaffold places the affine-local quasi-coherent-algebra definition, principal-open localization of $f_*\mathcal O_X$, and relative-Spec gluing lemmas before `thm-affine-morphism-relative-spec-characterization`. The complete [Stacks Project Lemma 29.11.3](https://stacks.math.columbia.edu/tag/01S8) proof identifies this local interface. Its present A inventory is 41 items and B inventory nine, both below the 100-item cap. The proper nonprojective B example adds local closed-pushout and line-bundle degree support; the published polynomial, localization and sheaf pages now appear as declared prerequisites for those proofs. Scheme-level Zariski Main factorization and proper quasi-finite finiteness move to the next in-run étale page, which owns their missing étale-local and limit support. No new A/B pair is needed. The original blocked finding is preserved in `research/frontier-36-complete-step1-drift-review-original.md`; this owner amendment does not certify the future mathematical proofs.
+
+The AV-15 quasi-finite definition directly uses the published affine-algebra
+quasi-finite-at-a-prime definition, so the published algebraic Zariski Main
+page is now declared; its integral-extension prerequisites are reached
+transitively. This edge does not replace the AV-17 scheme proof.
 
 ### flat-smooth-and-etale-morphisms
 A-page order: 366.073.
 VERDICT: drift-applied — finite-proper-and-projective-morphisms (order 366.069)
 
-**Owner resolution after the independent review:** The AV-17 inventory now states `thm-flat-families-fibre-dimension-locally-constant` for a **proper, flat morphism of finite presentation**, matching the exact hypothesis in [Stacks Project Lemma 37.30.6](https://stacks.math.columbia.edu/tag/0D4J). `research/plan-spec.json` now includes the earlier finite/proper/projective page as a direct prerequisite. This repairs the overbroad plan claim and the missing page edge; the author must still prove the result under those hypotheses. The original blocked finding is preserved in `research/frontier-36-complete-step1-drift-review-original.md`.
+**Owner resolution after the independent review:** The AV-17 inventory states `thm-flat-families-fibre-dimension-locally-constant` for a **proper, flat morphism of finite presentation**, matching the exact hypothesis in [Stacks Project Lemma 37.30.6](https://stacks.math.columbia.edu/tag/0D4J). `research/plan-spec.json` includes the earlier finite/proper/projective page as a direct prerequisite. The page also now owns the full scheme Zariski Main factorization and proper quasi-finite theorem after its étale-local support. The author must prove those claims with normalization and finite-stage descent rather than treating the affine-algebra result as the scheme theorem. The original blocked finding is preserved in `research/frontier-36-complete-step1-drift-review-original.md`.
 
 ### quasi-coherent-and-coherent-sheaves-and-vector-bundles
 A-page order: 366.075.
@@ -72,13 +77,19 @@ The PDE-5 design's Euclidean surface integration/Green-identity page `euclidean-
 A-page order: 458.026001.
 VERDICT: no-drift
 
-PDE-14F specifies exactly the three declared suppliers and expressly excludes the later Fourier-multiplier page. The completion and weighted Plancherel arguments are local.
+**Owner correction after scaffold escalation:** The original three suppliers suffice for the Bessel completion and weighted Plancherel arguments, which are local. Its earlier proposed edge to PDE-11 was removed after inspecting the actual item inventory: the integer-order $W^{k,2}$ comparison belongs to the separate Fourier-multiplier A page, which already directly requires PDE-11.
+
+### weak-derivatives-and-sobolev-spaces
+A-page order: 458.019.
+VERDICT: no-drift
+
+**Owner review of pair added after the original reviewer completed:** The PDE-11 design's weak-derivative, $W^{k,p}$, completeness and ACL contracts have published distribution, integration, $L^p$, Fubini, Banach and mixed-partials suppliers declared directly in the plan. The old plan edge from wave-energy PDE-10 was only a track-order edge and supplied no theorem used in these contracts; PDE-10 is unpublished and is no longer required. The batch must prove representative independence, uniqueness, completeness, ACL and chain-rule obligations locally. Its 19 designed A items are below the 100-item cap. The published suppliers were checked on disk; this review does not certify the future proofs.
 
 ### fourier-multipliers-and-sobolev-characterisations
 A-page order: 458.02601.
 VERDICT: no-drift
 
-FR-6's seven A-page suppliers, including the earlier Bessel-potential page and interpolation inputs, match the manifest and current closure. No B-page input is required.
+FR-6's seven A-page suppliers include both the earlier Bessel-potential page and PDE-11. The integer-order Fourier/Sobolev comparison uses PDE-11's $W^{k,2}$ definition and uniqueness. Interpolation inputs also match the manifest and current closure. No B-page input is required.
 
 ### jacobi-fields-conjugate-points-and-the-cut-locus
 A-page order: 485.

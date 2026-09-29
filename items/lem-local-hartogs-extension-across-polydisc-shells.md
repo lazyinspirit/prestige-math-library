@@ -18,7 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
+  audited: 2026-09-29
   precheck: pass
 sources:
   scraped: []
@@ -69,4 +69,4 @@ function on the whole polydisc $\Delta_\rho(a)$.
 
 5.1 If $r<\rho_1<\rho_2<1$, then both $F_{\rho_1}$ and $F_{\rho_2}$ are holomorphic on $D_{\rho_1}$ by step 4.1, and step 3.2 shows that they agree on the nonempty open subset of $D_{\rho_1}$ where $|z_m|<s$. Therefore [L3] gives $F_{\rho_1}=F_{\rho_2}$ on all of $D_{\rho_1}$. [L3, step 4.1, step 3.2]
 
-6.1 For each point $z$ of the full polydisc from step 1.1, choose any $\rho$ with $\max\{r,|z_1|\}<\rho<1$ and set $F(z):=F_\rho(z)$. Step 5.1 makes this definition independent of $\rho$, and step 4.1 shows that $F$ is holomorphic near each point. Step 3.2 shows that $F$ extends the original $f$ on the shell. If $G$ is another holomorphic extension to the full polydisc, then $F$ and $G$ agree with $f$ on the same nonempty open subset where $|z_m|<s$, so [L3] forces $F=G$. Thus the extension is unique. [L3, step 3.2, step 4.1, step 5.1] ∎
+6.1 For each point $z$ of the full polydisc from step 1.1, choose any $\rho$ with $\max\{r,|z_1|\}<\rho<1$ and set $F(z):=F_\rho(z)$. Step 5.1 makes this definition independent of $\rho$, and step 4.1 shows that $F$ is holomorphic near each point. For fixed $\rho$, the open set $S(0,1;r,s)\cap D_\rho$ is connected: its central part $|z_m|<s$ meets its annular part $r<|z_1|<\rho$, and each part is connected. On this set $F_\rho$ and $f$ are holomorphic and agree on the nonempty central part by step 3.2, so [L3] gives $F_\rho=f$ throughout it. Every shell point lies in one such $D_\rho$, hence $F$ extends $f$ on the entire shell. If $G$ is another holomorphic extension to the full polydisc, then $F$ and $G$ agree with $f$ on the same nonempty open subset where $|z_m|<s$, so [L3] forces $F=G$. Thus the extension is unique. [L3, step 3.2, step 4.1, step 5.1] ∎

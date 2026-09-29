@@ -977,7 +977,7 @@ positivity first.
 10. `lem-dirichlet-green-function-is-unique-and-positive` (lemma; **L/A**) — The maximum principle proves uniqueness and $G_\Omega>0$ off the pole when a Green function exists.
 11. `thm-green-function-symmetry` (theorem; **L/A**) — Apply the second Green identity on a twice-punctured domain and control both small-sphere limits to show $G(x,y)=G(y,x)$.
 12. `def-poisson-kernel-from-a-green-function` (definition; **L/NA**) — Define $P_\Omega(x,y)=-\partial_{\nu_y}G_\Omega(x,y)$ when the boundary regularity makes the derivative meaningful.
-13. `thm-green-representation-formula` (theorem; **L/A**) — For $u\in C^2(\Omega)\cap C^1(\overline\Omega)$, represent $u(x)$ by $G_\Omega(-\Delta u)$ and $P_\Omega u|_{\partial\Omega}$, with every sign checked.
+13. `thm-green-representation-formula` (theorem; **L/A**) — For $u\in C^2(\overline\Omega)$ under the stated smooth-domain and Green-kernel hypotheses, represent $u(x)$ by $G_\Omega(-\Delta u)$ and $P_\Omega u|_{\partial\Omega}$, with every sign checked. A weaker $C^2(\Omega)\cap C^1(\overline\Omega)$ class requires an additional boundary-exhaustion and absolute-convergence argument before use.
 14. `cor-classical-dirichlet-and-poisson-problems-are-unique` (corollary; **L/A**) — Maximum/Green identities give uniqueness for Dirichlet data and uniqueness up to constants for compatible Neumann data.
 15. `rem-green-identities-come-from-the-euclidean-integration-pair` (remark; **L/NA**) — Record that every boundary integration here cites PDE-2D and that later manifold Stokes is orientation only.
 
@@ -1292,6 +1292,14 @@ applies piecewise and shared faces cancel. “Depends on” is formalised by ite
 **Requires:** MT-8, MT-11 and MT-14--MT-16; FA-1, FA-7, FA-10 and FA-24;
 `mixed-partials-taylor-and-extrema`. FA-24's test-function/distribution
 framework is cited and not redefined.
+
+For the single-frontier prerequisite build, the A page directly requires the
+published distribution, integration, $L^p$, Banach-space, Fubini, and
+mixed-partials pages named in `plan-spec.json`. The old plan edge to PDE-10
+was only a track-order edge: weak derivatives and Sobolev spaces use no wave
+energy theorem, and PDE-10 is not a proof prerequisite. PDE-11 supplies the
+$W^{k,2}$ definition and uniqueness needed by the later Fourier-multiplier
+comparison; the Bessel-potential completion page remains independent.
 
 ### A-page items, in dependency order
 
@@ -3241,8 +3249,11 @@ theorems.
 
 The provenance columns are literal component provenance:
 
-- **statement** is `provenance.statement`; every value is
-  `literature-derived` (**L**).
+- **statement** is `provenance.statement`; **L** is
+  `literature-derived`. The far-field row below is **A** (`ai-altered`): its
+  qualitative source asymptotic is retained, while the displayed uniform
+  remainder constants and zero-mass estimates are derived locally from the
+  kernel gradient bound.
 - **proof** is `provenance.proof`; **A** means `ai-altered` only to split the
   cited proof at a dependency-safe boundary, and **NA** is used only for a
   definition or non-proved convention remark.
@@ -3435,7 +3446,7 @@ page and the existing conceptual anchor after which the row belongs.
 |---|---|---|---|---|
 | A / fundamental kernel | `lem-laplace-fundamental-kernel-is-locally-integrable` (lemma) — The logarithmic kernel in $n=2$ and $\vert{}x\vert{}^{2-n}$ kernel in $n\ge3$ lie in $L^1_{\mathrm{loc}}$. | **L**, S:[SO] §4.1; [H] §2.5 | **A**, P:polar-coordinate calculation | Establishes that the displayed formula defines a distribution before differentiating it. |
 | A / convolution | `lem-distributional-derivatives-commute-with-convolution-against-test-functions` (lemma) — For a distribution convolved with a test function, derivatives may be placed on either factor with the adopted sign. | **L**, S:[SO] §4.2; [H] §3.4 | **A**, P:translation and distribution-definition calculation | Isolates the legal operation used in the Poisson proof. |
-| A / Newtonian potential | `thm-decay-of-the-newtonian-potential-of-compactly-supported-data` (theorem) — Give the $\vert{}x\vert{}^{2-n}$ decay for $n\ge3$ and the logarithmic leading term in $n=2$, including the zero-mass improvement. | **L**, S:[H] §2.7; [SO] §4.2 | **A**, P:far-field kernel expansion | States the dimension-dependent behaviour needed for uniqueness classes. |
+| A / Newtonian potential | `thm-decay-of-the-newtonian-potential-of-compactly-supported-data` (theorem) — Give the $\vert{}x\vert{}^{2-n}$ decay for $n\ge3$ and the logarithmic leading term in $n=2$, including the zero-mass improvement. | **A**, S:[H] §2.7; [SO] §4.2, with local quantitative remainders | **A**, P:far-field kernel expansion | States the dimension-dependent behaviour needed for uniqueness classes. |
 | A / Green representation | `cor-zero-dirichlet-green-representation-for-poisson-data` (corollary) — When the boundary trace vanishes, the boundary term drops and $u(x)=\int_\Omega G(x,y)f(y)\,dy$ in the adopted sign convention. | **L**, S:[E] §2.2.4; [SO] §4.2 | **A**, P:specialise the base representation | Records the actual operator formula used by elliptic pages. |
 | A / Neumann problem | `lem-neumann-compatibility-from-the-divergence-theorem` (lemma) — Integrating $-\Delta u=f$ with $\partial_\nu u=g$ yields $\int_\Omega f=-\int_{\partial\Omega}g$. | **L**, S:[H] §§1.12, 2.5 | **A**, P:direct divergence theorem | Splits necessity from the base uniqueness sentence. |
 | A / Neumann problem | `cor-neumann-solutions-are-unique-modulo-componentwise-constants` (corollary) — On a connected domain, two classical Neumann solutions differ by a constant. | **L**, S:[H] §2.5; [E] §2.2.4 | **A**, P:Green energy identity | Makes the connectedness qualification and kernel explicit. |
@@ -3515,7 +3526,7 @@ page and the existing conceptual anchor after which the row belongs.
 |---|---|---|---|---|
 | A / weak derivative | `lem-sobolev-integration-by-parts-for-dual-exponents` (lemma) — If $u\in W^{1,p}$ and $v\in W^{1,p'}$ and one factor has compact support, then $\int uD_iv=-\int vD_iu$. | **L**, S:[K] Ch. 1 §1.2; [H] §3.3 | **A**, P:smooth density plus Hölder passage | Extends the defining identity from test functions to the class later used in energy arguments. |
 | A / locality | `thm-zero-weak-gradient-implies-componentwise-constancy` (theorem) — A $W^{1,p}_{\rm loc}$ function with $Du=0$ is a.e. constant on each connected component. | **L**, S:[K] Ch. 1 §1.4; [Si] Lecture 5 | **A**, P:mollification on balls and overlap propagation | Isolates the kernel statement behind Poincaré and uniqueness. |
-| A / completeness | `cor-weak-derivative-operator-is-closed-between-lp-spaces` (corollary) — The graph of $D_i:L^p\supset W^{1,p}\to L^p$ is closed. | **L**, S:[K] Ch. 1 §1.2; [H] §3.2 | **A**, P:weak-stability lemma | Exposes the operator fact otherwise buried in Banach completeness. |
+| A / completeness | `cor-weak-derivative-operator-is-closed-between-lp-spaces` (corollary) — The full weak gradient $D:L^p\supset W^{1,p}\to(L^p)^n$ is closed; each $D_i$ is closed on its own maximal domain $\{u\in L^p:D_i u\in L^p\}$. Restricting one coordinate to $W^{1,p}$ alone need not give a closed graph when $n>1$. | **L**, S:[K] Ch. 1 §1.2; [H] §3.2 | **A**, P:weak-stability lemma | Exposes the correct operator fact otherwise buried in Banach completeness. |
 | A / Sobolev norm | `lem-weak-lower-semicontinuity-of-the-sobolev-norm` (lemma) — For $1<p<\infty$, weak $W^{k,p}$ convergence gives the usual norm liminf inequality. | **L**, S:[K] Ch. 2 §2.3; [Si] Lecture 5 | **A**, P:componentwise weak lower semicontinuity from FA | Records the direct-method input at its PDE home without reproving convex analysis. |
 | A / chain rule | `thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions` (theorem) — For Lipschitz $F$, $F\circ u$ is Sobolev and $D(F\circ u)=F'(u)Du$ at a.e. differentiability point, with the level-set convention stated. | **L**, S:[K] Ch. 1 §1.5; [H] §3.5 | **A**, P:smooth approximation of $F$ plus level-set lemma | Covers truncations without pretending the nonsmooth map is $C^1$. |
 | A / truncation | `cor-maxima-and-minima-of-two-w-one-p-functions-are-w-one-p` (corollary) — Give the a.e. gradient formulas for $u\vee v$ and $u\wedge v$. | **L**, S:[K] Ch. 1 §1.5; [H] §3.5 | **A**, P:write max/min using absolute value | Supplies the lattice operation used by weak comparison. |

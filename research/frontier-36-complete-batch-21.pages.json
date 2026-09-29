@@ -1,0 +1,627 @@
+[
+  {
+    "order": 719,
+    "id": "grothendieck-groups-and-graded-cartan-pairings",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Grothendieck Groups and Graded Cartan Pairings",
+    "companion": "grothendieck-groups-and-graded-cartan-pairings-examples",
+    "requires": [
+      "graded-bimodules-and-tensor-functors",
+      "subobject-lattices-generators-and-the-grothendieck-axioms",
+      "exactness-and-the-member-calculus",
+      "modular-representations-and-projective-covers",
+      "tensor-and-fusion-categories"
+    ],
+    "items": [
+      {
+        "id": "def-grothendieck-group-of-an-essentially-small-abelian-category",
+        "kind": "definition",
+        "title": "Grothendieck group of an essentially small abelian category",
+        "deps": [
+          "def-abelian-category",
+          "def-free-abelian-group",
+          "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category"
+        ],
+        "statement": "For an essentially small abelian category C, let Iso(C) be its set of isomorphism classes. Define G0(C) as the free abelian group on symbols [X], X in Iso(C), modulo [Y]-[X]-[Z] for every short exact sequence 0→X→Y→Z→0. This is the short-exact-sequence group, distinguished from split projective K0; no class-sized free group is formed.",
+        "strategy": "Use the actual set Iso(C), or an equivalent small presentation, to form the free group and its subgroup of exact-sequence relations. The zero and split sequences give [0]=0 and [X⊕Z]=[X]+[Z]. No choice of representatives for a proper class is made.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            },
+            {
+              "title": "Stacks Project, Homological Algebra §12.11, tag 02MT",
+              "url": "https://stacks.math.columbia.edu/tag/02MT"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-split-grothendieck-group-of-an-additive-category",
+        "kind": "definition",
+        "title": "Split Grothendieck group of an additive category",
+        "deps": [
+          "def-additive-category",
+          "def-free-abelian-group"
+        ],
+        "statement": "For an essentially small additive category D, define K0^split(D) from the free abelian group on Iso(D) by only the relations [X⊕Y]=[X]+[Y]. For finite projective A-modules this is the projective K0(A); it is not the short-exact-sequence group of all A-modules.",
+        "strategy": "Take group completion of the direct-sum monoid of isomorphism classes. The empty biproduct gives [0]=0. Identify the free-generator quotient with Weibel II §1 group completion and §2 projective K0; no tensor product or ring structure is presumed.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-grothendieck-group-universal-properties-and-functoriality",
+        "kind": "theorem",
+        "title": "Universal properties and functoriality of G0 and split K0",
+        "deps": [
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "def-additive-category",
+          "def-additive-functor",
+          "def-exact-functor-between-abelian-categories",
+          "def-free-abelian-group",
+          "thm-quotient-group-universal-property",
+          "def-functor-and-contravariant-functor",
+          "def-natural-isomorphism",
+          "def-abelian-category",
+          "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair"
+        ],
+        "statement": "For essentially small abelian C and additive D, every class function from Iso(C) or Iso(D) to an abelian group that is additive on short exact sequences or finite biproducts, respectively, factors uniquely through G0(C) or K0^split(D). Exact functors between such abelian categories induce G0 homomorphisms; additive functors between essentially small additive categories induce split-K0 homomorphisms. These assignments preserve identities and composition, and naturally isomorphic functors induce equal homomorphisms.",
+        "strategy": "Extend each class function from the set of isomorphism classes to the free abelian group, then use the quotient universal property after its additivity kills the defining relations. An exact functor preserves the kernels/cokernels that characterize short exact sequences; an additive functor preserves finite biproducts by applying it to the coordinate equations. These image-class functions therefore factor. Check identity and composition on generators. A natural isomorphism has inverse components, so the induced functors agree on every isomorphism class.",
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            },
+            {
+              "title": "Stacks Project, Homological Algebra §12.11, tag 02MT",
+              "url": "https://stacks.math.columbia.edu/tag/02MT"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-length-grothendieck-groups-have-simple-class-bases",
+        "kind": "theorem",
+        "title": "Simple classes freely generate the Grothendieck group of a length category",
+        "deps": [
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "thm-grothendieck-group-universal-properties-and-functoriality",
+          "def-object-of-finite-length",
+          "thm-jordan-holder-theorem-in-an-abelian-category",
+          "def-abelian-category",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "def-pullbacks-and-pushouts",
+          "def-simple-object",
+          "def-the-quotient-of-an-object-by-a-subobject",
+          "thm-every-monomorphism-is-the-kernel-of-its-cokernel",
+          "thm-the-pullback-of-an-epimorphism-is-an-epimorphism",
+          "def-free-abelian-group",
+          "cor-equalizers-are-monic-and-coequalizers-are-epic"
+        ],
+        "statement": "If C is an essentially small abelian category in which every object has finite length, then G0(C) is the free abelian group on the isomorphism classes of simple objects. The coordinate of [M] at a simple S is its Jordan–Hölder multiplicity [M:S].",
+        "strategy": "For each object, define its finite-support simple-multiplicity vector from a composition series; Jordan–Hölder makes it independent of the series. In a short exact sequence, lift a composition series of the quotient by pullbacks along the epimorphism and concatenate it with a series of the subobject; pullback stability of epimorphisms and the cokernel-of-kernel property identify each lifted factor with the corresponding quotient factor. Thus multiplicities are additive and the Grothendieck universal property gives an inverse to the simple-class map; telescoping a composition series proves the other composite is the identity.",
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis",
+        "kind": "theorem",
+        "title": "Indecomposable projective classes form a basis of split K0",
+        "deps": [
+          "def-split-grothendieck-group-of-an-additive-category",
+          "def-simple-module",
+          "def-projective-module",
+          "def-essential-epimorphism-and-projective-cover",
+          "thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras",
+          "lem-graded-fitting-decomposition-preserves-homogeneous-summands",
+          "thm-krull-schmidt-for-finite-dimensional-kg-modules"
+        ],
+        "statement": "Let A be a finite-dimensional unital k-algebra over a field. Choose representatives S_1,...,S_t of the isomorphism classes of simple left A-modules and a finite-dimensional projective cover P_i→S_i for each. Then K0^split(proj A) is free abelian on [P_1],...,[P_t]; this does not assert that the Cartan map to G0 is invertible.",
+        "strategy": "First show the regular module A has a finite composition series and every simple is a quotient of A, so there are only finitely many simple isomorphism classes. Each chosen cover of a simple is indecomposable: a summand mapping onto the simple, together with the superfluous kernel, is the whole source. Two superfluous epimorphisms from one source onto simples have the same kernel, so the covers are pairwise nonisomorphic. Conversely, a nonzero indecomposable finite projective P has a maximal submodule and a simple quotient p:P→S. If N+ker p=P, projectivity lifts p through N; regard P as trivially graded and apply the assigned graded Fitting lemma to the resulting endomorphism f. Since pf=p≠0, f is not nilpotent, hence is invertible, and p is a cover. Cover uniqueness identifies P with the selected cover for S. Krull–Schmidt gives finite decompositions of projectives with unique multiplicities; split-K0 is therefore the free abelian group on these indecomposable classes.",
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-graded-grothendieck-group-shift-module-and-cartan-map",
+        "kind": "definition",
+        "title": "Graded Grothendieck groups, shift action, and Cartan map",
+        "deps": [
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "thm-grothendieck-group-universal-properties-and-functoriality",
+          "def-additive-category",
+          "def-abelian-category",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "def-finitely-generated-graded-projective-module",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "thm-rank-nullity"
+        ],
+        "statement": "Let k be a field and A a finite-dimensional unital Z-graded k-algebra. For the essentially small abelian category of finite-dimensional graded left A-modules and the additive category of finite graded projectives, define G0^gr(A) by short-exact-sequence relations and K0^gr(A) by direct-sum relations. The internal shift M{r}_d=M_{d-r} gives v[M]=[M{1}] on both groups and makes each a Z[v,v^-1]-module. The graded Cartan homomorphism c_gr:K0^gr(A)→G0^gr(A), [P]↦[P], is Z[v,v^-1]-linear. For the finite-dimensional ungraded module category define G0(A); the ungraded projective inclusion similarly gives c_A:K0(A)→G0(A), [P]↦[P]. Neither map is asserted injective or surjective.",
+        "strategy": "Verify that the finite-dimensional graded module category is essentially small and abelian and that its finite graded projectives form an essentially small additive category; define the ungraded finite-module category and G0(A) likewise. Degreewise kernels/cokernels show M↦M{r} is exact with inverse {-r}; the finite shifted-free summand theorem shows shifts preserve finite graded projectives. Use the universal properties to induce the shift automorphisms and the additive Cartan maps from [P]↦[P]. Check the Laurent action by shift composition and check Cartan linearity on generators. Fix v[M]=[M{1}], matching Kleshchev's q convention.",
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            },
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-graded-fitting-decomposition-preserves-homogeneous-summands",
+        "kind": "lemma",
+        "title": "Graded Fitting decomposition for degree-zero endomorphisms",
+        "deps": [
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "thm-rank-nullity",
+          "def-endomorphism-ring-of-a-module",
+          "prop-endomorphisms-form-a-ring",
+          "def-left-right-and-two-sided-ideal"
+        ],
+        "statement": "For any finite-dimensional graded A-module M and degree-zero endomorphism f, some n≥1 has graded submodules ker(f^n), im(f^n) with M=ker(f^n)⊕im(f^n). If M is nonzero and graded indecomposable, every f in End_{A,0}(M) is invertible or nilpotent, and the nonunits form a proper two-sided ideal; it is local in the noncommutative sense that this is the unique maximal left and right ideal.",
+        "strategy": "Choose n after both kernel and image chains stabilize, so ker(f^n)=ker(f^{2n}) and im(f^n)=im(f^{n+1}); gradedness follows from degree-zero kernels and images. Prove the intersection is zero, then use rank-nullity. On a nonzero indecomposable the split forces f invertible or nilpotent. For nonunits N, use the finite geometric inverse for 1-f, finite-dimensionality to show two-sided absorption, and the unit-sum contradiction to prove addition closure; N is then the proper two-sided ideal and the unique maximal one-sided ideal. This adapts the inspected published Krull–Schmidt Fitting proof to degree-zero maps.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-graded-krull-schmidt-for-finite-dimensional-graded-modules",
+        "kind": "theorem",
+        "title": "Graded Krull–Schmidt for finite-dimensional graded modules",
+        "deps": [
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "lem-graded-fitting-decomposition-preserves-homogeneous-summands",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "thm-dimension-of-a-linear-subspace"
+        ],
+        "statement": "Let A be any unital associative Z-graded algebra over a field k. Every finite-dimensional graded left A-module is a finite direct sum of nonzero graded-indecomposables, with the zero module represented by the empty sum. If a module has two such decompositions, their summands have the same finite multiset of isomorphism classes in GrMod_0(A), that is, up to degree-zero graded isomorphism. Ungraded isomorphism classes are not substituted.",
+        "strategy": "For each nonzero finite-dimensional graded indecomposable X over A, use the finite-dimensional image B of the action A→End_k(X). The finite support grading on X grades End_k(X); the action image is a finite-dimensional graded algebra, and its degree-zero endomorphisms of X are exactly the A-linear ones. Apply the assigned Fitting lemma to B to get localness of End_{A,0}(X). Existence of decompositions follows by induction on k-dimension, splitting along nonzero graded direct summands. For two decompositions, write id of one indecomposable as the sum of its composites through the other decomposition. Localness makes one composite invertible, so there is a degree-zero split injection into an indecomposable target; the graded image and kernel split that target, forcing an isomorphism. Identify the complements by coordinate projections and induct on their smaller dimensions.",
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-dimensional-graded-algebras-have-graded-projective-covers",
+        "kind": "lemma",
+        "title": "Finite-dimensional graded algebras have graded projective covers",
+        "deps": [
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-finitely-generated-graded-projective-module",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "lem-graded-fitting-decomposition-preserves-homogeneous-summands",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "def-essential-epimorphism-and-projective-cover"
+        ],
+        "statement": "Let A be a finite-dimensional Z-graded k-algebra over a field and X a finite-dimensional graded left A-module. There is a degree-zero epimorphism p:P→X in GrMod_0(A) with P finite graded projective and kernel K=ker(p) satisfying N+K=P⇒N=P for every graded submodule N≤P. Such a map is a finite graded projective cover; any two are isomorphic over X by a degree-zero isomorphism.",
+        "strategy": "Choose a finite homogeneous generating set of X and map a finite sum E of internal shifts of A onto X. Among degree-zero graded direct summands of E still surjecting onto X, take one P of minimum k-dimension. For any graded N≤P with N+ker p=P, restriction p|N is a degree-zero epimorphism; graded projectivity lifts p through it to f:P→P with pf=p. Apply the earlier degree-zero Fitting lemma: im(f^n) is a graded direct summand of P and still surjects onto X. It is also a graded summand of E, so minimality forces im(f^n)=P and N=P. For two covers, finite projective sources are finite-dimensional because A is finite-dimensional. Lift maps in both directions; superfluity makes both composites surjective, and finite dimension makes them invertible.",
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-graded-projective-and-simple-classes-have-shift-orbit-bases",
+        "kind": "theorem",
+        "title": "Shift-orbit bases for graded simple and projective classes",
+        "deps": [
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "thm-finite-length-grothendieck-groups-have-simple-class-bases",
+          "thm-graded-krull-schmidt-for-finite-dimensional-graded-modules",
+          "lem-finite-dimensional-graded-algebras-have-graded-projective-covers",
+          "lem-graded-fitting-decomposition-preserves-homogeneous-summands",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-simple-object",
+          "def-object-of-finite-length",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "def-free-abelian-group",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "def-finitely-generated-graded-projective-module"
+        ],
+        "statement": "Let k be a field and A a finite-dimensional unital associative Z-graded k-algebra. A graded-simple module means a nonzero finite-dimensional graded left A-module with no proper nonzero graded submodule. Shift acts by S↦S{r}. There are finitely many shift orbits of graded-simple modules. For one representative S_i from each orbit and its finite graded projective cover P_i→S_i, the classes [S_i] form a basis of G0^gr(A) over Z[v,v^-1], and the classes [P_i] form a basis of K0^gr(A) over Z[v,v^-1]. No positivity assumption on the grading of A is required.",
+        "strategy": "Prove finite-dimensional graded modules have finite length by induction on k-dimension, using a maximal proper graded submodule; the simple-class basis theorem then gives a Z-basis of G0^gr. Decompose the regular graded module A into finitely many graded-indecomposables by graded Krull–Schmidt; the finite shifted-free characterization makes these summands projective. A nonzero indecomposable projective has a simple quotient, and graded projectivity plus Fitting shows every epimorphism from it to a graded-simple module has superfluous kernel, hence is a projective cover. Conversely any projective cover of a simple is indecomposable; its superfluous kernel is contained in the kernel of every other simple quotient, so the simple quotient is unique. A homogeneous generator makes every graded-simple module a quotient of a shift of A; decomposition of A and uniqueness of simple quotients show that the finitely many indecomposable summands supply all simple shift orbits. Shifting covers gives a bijection between simple and indecomposable-projective shift orbits. A nonzero finite-support graded module has no nontrivial shift period. Use the simple-class basis theorem and graded Krull–Schmidt multiplicities with the defining split-K0 relations to prove both Laurent bases, including rank zero; use only finite selections and no AC.",
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-projective-simple-hom-pairing-on-grothendieck-groups",
+        "kind": "definition",
+        "title": "Projective–module Hom pairing on class generators",
+        "deps": [
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-vector-space-of-linear-maps",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "prop-linear-maps-form-a-vector-space"
+        ],
+        "statement": "Let A be a finite-dimensional algebra over a field k. For finite-dimensional projective P and finite-dimensional left A-module M, define h(P,M)=dim_k Hom_A(P,M). For a finite-dimensional Z-graded A and finite-dimensional graded projective P and module M, define h_gr(P,M)=Σ_d v^d dim_k Hom_{A,d}(P,M), where Hom_{A,d} consists of A-linear maps P_i→M_{i+d}. These are candidate values on object isomorphism classes; this definition does not claim descent to pairings on K0×G0.",
+        "strategy": "Show that the ungraded Hom space and every homogeneous graded Hom_d are k-vector subspaces of Hom_k(P,M), using the published result that linear-map spaces are vector spaces; finite-dimensionality of P,M then makes these subspaces finite-dimensional. For graded P,M, their supports are finite, and a nonzero degree-d map requires d in supp(M)−supp(P), so the Laurent sum has finite support. Check that object isomorphisms induce vector-space isomorphisms preserving d. Define only object-level candidate values; do not assert additivity or descent through either Grothendieck quotient.",
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-projective-hom-pairing-is-additive-and-graded-sesquilinear",
+        "kind": "theorem",
+        "title": "Projective Hom pairing descends and is graded sesquilinear",
+        "deps": [
+          "def-projective-simple-hom-pairing-on-grothendieck-groups",
+          "thm-an-object-is-projective-exactly-when-hom-out-of-it-is-exact",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "thm-grothendieck-group-universal-properties-and-functoriality",
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "def-finitely-generated-graded-projective-module",
+          "def-projective-module",
+          "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-rank-nullity",
+          "thm-universal-property-of-module-direct-sums",
+          "def-algebra-over-a-commutative-ring",
+          "prop-linear-maps-form-a-vector-space",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "def-abelian-category",
+          "def-additive-category"
+        ],
+        "statement": "For a finite-dimensional unital k-algebra A, the generator formula h(P,M)=dim_k Hom_A(P,M) descends to a Z-bilinear pairing K0(A)×G0(A)→Z. If A is Z-graded, the graded generator formula h_gr(P,M)=Σ_d v^d dim_k Hom_{A,d}(P,M) descends to a Z-bilinear pairing K0^gr(A)×G0^gr(A)→Z[v,v^-1]. With v[M]=[M{1}] and v[P]=[P{1}], it satisfies <v^r[P],v^s[M]>=v^{s-r}< [P],[M] >, so the graded pairing is sesquilinear for the involution v↦v^-1.",
+        "strategy": "First verify that finite-dimensional module categories are essentially small abelian by closure under kernels, cokernels and biproducts and finite coordinate models. For ungraded exact sequences, projectivity makes Hom(P,-) exact; centrality makes Hom k-linear, finite-dimensionality and rank-nullity give dimension additivity. In GrMod_0(A), shifts preserve projectivity and Hom_{A,d}(P,-)=Hom_{A,0}(P{d},-); derive finite support from the grading and apply exactness degree by degree. Finite biproducts make Hom additive in the projective variable. Apply the G0 and split-K0 universal properties in each variable. Finally reindex Hom_{A,d}(P{r},M{s})=Hom_{A,d+r-s}(P,M) and extend the shift formula to Laurent sesquilinearity.",
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-split-simple-projective-hom-pairing-has-dual-bases",
+        "kind": "theorem",
+        "title": "Projective and simple classes are dual bases under splitting",
+        "deps": [
+          "thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis",
+          "thm-finite-length-grothendieck-groups-have-simple-class-bases",
+          "thm-graded-projective-and-simple-classes-have-shift-orbit-bases",
+          "lem-finite-dimensional-graded-algebras-have-graded-projective-covers",
+          "thm-projective-hom-pairing-is-additive-and-graded-sesquilinear",
+          "thm-schurs-lemma-for-modules",
+          "def-simple-module",
+          "def-essential-epimorphism-and-projective-cover",
+          "def-finitely-generated-graded-projective-module",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "def-algebra-over-a-commutative-ring",
+          "prop-linear-maps-form-a-vector-space",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-abelian-category",
+          "def-additive-category",
+          "def-object-of-finite-length",
+          "def-composition-series-and-composition-factors-of-an-object"
+        ],
+        "statement": "Let A be a finite-dimensional unital associative algebra over a field k. Let S_1,...,S_t represent all simple left A-modules and let q_i:P_i→S_i be finite-dimensional projective covers. The classes [P_i] and [S_i] are bases of K_0(A) and G_0(A). For all i,j, <[P_i],[S_j]>=0 when i≠j and <[P_i],[S_i]>=dim_k End_A(S_i); if End_A(S_i)=k for every i, the bases are dual. For a finite-dimensional Z-graded k-algebra, let S_i represent the graded-simple shift orbits and p_i:P_i→S_i be finite graded projective covers; their classes are Laurent bases. The graded pairing is zero between distinct orbit representatives and has diagonal value dim_k End_{A,0}(S_i); if End_{A,0}(S_i)=k for every i, these Laurent bases are dual. This makes no claim that the projective-to-module Cartan map or the projective/projective Cartan matrix is unimodular.",
+        "strategy": "First verify that the finite-dimensional ungraded module category is essentially small and abelian and that every object has finite length: use all finite coordinate action models as a small equivalent full subcategory, closure under kernels, cokernels and biproducts, and induction on vector-space dimension. Apply the finite-length G0 basis theorem. For a map from a projective cover to a simple, prove it is zero or epic, then use superfluity of the cover kernel to factor uniquely through the simple head; Schur’s lemma computes the Hom matrix. In the graded case identify degree-d maps with degree-zero maps from a shifted projective, shift the cover and use graded superfluity, then use finite support to rule out nonzero shift periods. Compute both pairing matrices, combine with the projective and simple basis results, and state the nonsplit diagonal dimensions without claiming Cartan unimodularity. Only the finite representative families are selected, so no axiom of choice is used.",
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-adjoint-exact-functors-induce-adjoint-grothendieck-operators",
+        "kind": "theorem",
+        "title": "Exact adjoints induce adjoint operators on Grothendieck groups",
+        "deps": [
+          "thm-grothendieck-group-universal-properties-and-functoriality",
+          "thm-projective-hom-pairing-is-additive-and-graded-sesquilinear",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-small-locally-small-and-large-category",
+          "def-abelian-category",
+          "def-exact-functor-between-abelian-categories",
+          "def-additive-category",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise",
+          "def-projective-module",
+          "def-finitely-generated-graded-projective-module",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-graded-balanced-tensor-product-and-homogeneous-hom",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "thm-graded-bimodule-tensor-hom-adjunction"
+        ],
+        "statement": "Let $k$ be a field and let $A,B$ be finite-dimensional unital associative $k$-algebras. Write $A\\text{-}\\mathrm{mod}_{\\mathrm{fd}}$ and $B\\text{-}\\mathrm{mod}_{\\mathrm{fd}}$ for the categories of finite-dimensional left modules. Let $F:A\\text{-}\\mathrm{mod}_{\\mathrm{fd}}\\to B\\text{-}\\mathrm{mod}_{\\mathrm{fd}}$ and $G:B\\text{-}\\mathrm{mod}_{\\mathrm{fd}}\\to A\\text{-}\\mathrm{mod}_{\\mathrm{fd}}$ be exact $k$-linear adjoint functors $F\\dashv G$, and suppose $F$ sends finite-dimensional projective modules to finite-dimensional projective modules. The induced maps $F_*:K_0(A)\\to K_0(B)$ and $G_*:G_0(B)\\to G_0(A)$ then satisfy\n\n$$\\langle F_*[P],[N]\\rangle_B=\\langle[P],G_*[N]\\rangle_A$$\n\nfor every finite-dimensional projective left $A$-module $P$ and finite-dimensional left $B$-module $N$.\n\nFor the graded analogue, let $A,B$ be finite-dimensional unital associative $\\mathbb Z$-graded $k$-algebras, and let $F,G$ be exact $k$-linear adjoints between their finite-dimensional graded-module categories with degree-zero maps. Assume $F$ preserves finite graded projectives, both functors commute naturally with every internal shift, and these shift isomorphisms are compatible with the adjunction transposition in every homogeneous degree: for every $d\\in\\mathbb Z$, transposition gives a $k$-linear bijection\n\n$$\\operatorname{Hom}_{B,d}(F(P),N)\\cong\\operatorname{Hom}_{A,d}(P,G(N)).$$\n\nThen the induced maps $F_*:K_0^{\\mathrm{gr}}(A)\\to K_0^{\\mathrm{gr}}(B)$ and $G_*:G_0^{\\mathrm{gr}}(B)\\to G_0^{\\mathrm{gr}}(A)$ are $\\mathbb Z[v,v^{-1}]$-linear and satisfy $\\langle F_*x,y\\rangle_{B,\\mathrm{gr}}=\\langle x,G_*y\\rangle_{A,\\mathrm{gr}}$ for all $x\\in K_0^{\\mathrm{gr}}(A)$ and $y\\in G_0^{\\mathrm{gr}}(B)$.",
+        "strategy": "First verify that the finite-dimensional module categories are essentially small abelian and their finite projective subcategories are essentially small additive, so the Grothendieck-group functoriality result applies. Exactness gives the G0 maps, and the projective-preservation hypothesis makes F restrict to an additive functor on projectives. The adjunction transpose u ↦ G(u)∘η is a bijection; because G is k-linear and composition is k-bilinear, it is a k-linear isomorphism, so finite-dimensional Hom spaces have equal dimensions. The pairing equality follows on generators and then by bilinearity. In the graded case, identify degree-d maps with degree-zero maps from the shift P{d}; the natural shift isomorphism F(P{d})≅F(P){d} lets the degree-zero adjunction transpose each homogeneous degree. Taking dimensions gives coefficientwise equality. The natural shift isomorphism for G and the matching one for F make both induced operators Laurent-linear. The graded bimodule tensor–Hom adjunction is a concrete source of degree-compatible transposition, but its exactness, finite-dimensionality and projective-preservation hypotheses must still be checked in any application.",
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 720,
+    "id": "grothendieck-groups-and-graded-cartan-pairings-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Grothendieck Groups and Graded Cartan Pairings — Examples",
+    "companion": "grothendieck-groups-and-graded-cartan-pairings",
+    "requires": [
+      "grothendieck-groups-and-graded-cartan-pairings"
+    ],
+    "items": [
+      {
+        "id": "ex-cartan-map-for-the-dual-numbers",
+        "kind": "example",
+        "title": "The dual numbers have Cartan map multiplication by two",
+        "deps": [
+          "thm-finite-length-grothendieck-groups-have-simple-class-bases",
+          "thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis",
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-simple-module",
+          "def-projective-module",
+          "def-essential-epimorphism-and-projective-cover",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-polynomial-ring-is-a-commutative-ring",
+          "thm-quotient-ring-multiplication-well-defined-iff-ideal",
+          "thm-quotient-ring-laws",
+          "def-left-right-and-two-sided-ideal",
+          "def-algebra-over-a-commutative-ring",
+          "def-grothendieck-group-of-an-essentially-small-abelian-category"
+        ],
+        "statement": "Let k be any field and A=k[ε]/(ε²), viewed as an ungraded k-algebra. Then K0(A)=Z[A], G0(A)=Z[k], and the Cartan map sends [A] to 2[k], so it is not an isomorphism.",
+        "strategy": "Write every quotient class uniquely as a+bε to prove {1,ε} is a k-basis and A is finite-dimensional. Model finite-dimensional A-modules by square-zero matrices to verify that their category is essentially small abelian; dimension induction gives finite length. An arbitrary simple is cyclic, hence finite-dimensional, and the unique maximal ideal (ε) identifies it with k. The augmentation A→k has projective source A and superfluous kernel (ε), so it is the projective cover. The simple-class theorem gives G0(A)=Z[k], the projective-cover basis theorem gives K0(A)=Z[A], and the filtration 0⊂kε⊂A computes the Cartan image as 2[k].",
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Weibel, The K-book, Chapter II, §§1–2, 5–6",
+              "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-graded-dual-numbers-cartan-polynomial",
+        "kind": "example",
+        "title": "The graded dual numbers have Cartan polynomial 1+v²",
+        "deps": [
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "thm-graded-projective-and-simple-classes-have-shift-orbit-bases",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "thm-polynomial-ring-is-a-commutative-ring",
+          "def-left-right-and-two-sided-ideal",
+          "thm-quotient-ring-multiplication-well-defined-iff-ideal",
+          "thm-quotient-ring-laws",
+          "thm-polynomial-division-algorithm-over-a-field",
+          "def-algebra-over-a-commutative-ring",
+          "def-graded-ring-module-bimodule-and-internal-shift",
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "lem-finite-dimensional-graded-algebras-have-graded-projective-covers"
+        ],
+        "statement": "For A=k[ε]/(ε²) with deg(ε)=2 and S=A/(ε) in degree zero, K0^gr(A)=Z[v,v^-1][A], G0^gr(A)=Z[v,v^-1][S], and the graded Cartan map sends [A] to (1+v²)[S].",
+        "strategy": "Use the polynomial division algorithm by x² to prove every class has a unique normal form a+bε, and compute the quotient multiplication and explicit grading. Show every graded-simple is a shift of S=A/(ε), and verify the augmentation A→S has finite graded projective source and graded-superfluous kernel; apply the shift-orbit basis theorem to identify [S] and [A] as Laurent bases. The exact sequence 0→S{2}→A→S→0 then gives c_A^gr([A])=(1+v²)[S].",
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-hom-pairing-over-a-nonsplit-field",
+        "kind": "example",
+        "title": "A nonsplit simple has Hom-pairing diagonal two",
+        "deps": [
+          "thm-split-simple-projective-hom-pairing-has-dual-bases",
+          "thm-projective-hom-pairing-is-additive-and-graded-sesquilinear",
+          "def-projective-simple-hom-pairing-on-grothendieck-groups",
+          "thm-finite-length-grothendieck-groups-have-simple-class-bases",
+          "thm-finite-dimensional-algebra-projective-classes-form-a-split-k-zero-basis",
+          "def-graded-grothendieck-group-shift-module-and-cartan-map",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "thm-complex-numbers-form-a-field",
+          "cor-complex-numbers-are-a-quadratic-real-extension",
+          "def-field",
+          "def-division-ring",
+          "def-algebra-over-a-commutative-ring",
+          "def-left-and-right-modules",
+          "def-simple-module",
+          "def-submodule",
+          "def-quotient-module",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-abelian-category",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-object-of-finite-length",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-dimension-of-a-direct-sum",
+          "def-projective-module",
+          "def-essential-epimorphism-and-projective-cover",
+          "def-vector-space-of-linear-maps",
+          "prop-linear-maps-form-a-vector-space",
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension"
+        ],
+        "statement": "For k=R and A=C viewed as a real algebra, its unique simple S=C is also its unique indecomposable projective P=C, but <[P],[S]>=dim_R Hom_C(C,C)=2. Thus the splitting hypothesis End_A(S)=k in the dual-bases theorem is necessary.",
+        "strategy": "Identify $\\mathbb C$ as a finite-dimensional $\\mathbb R$-algebra and a division ring; the regular module $\\mathbb C$ is simple and, by the division-ring argument, represents the only simple class. The identity $\\mathbb C\\to\\mathbb C$ is a projective cover with finite-dimensional projective source, so the projective-cover basis theorem gives $K_0(A)=\\mathbb Z[\\mathbb C]$ and shows that $\\mathbb C$ is the only indecomposable finite-dimensional projective up to isomorphism. Verify the hypotheses of the finite-length simple-class basis theorem for the finite-dimensional module category (essentially small abelian category: finite biproducts stay finite-dimensional by the direct-sum dimension formula, kernels and images are finite-dimensional as subspaces of finite-dimensional spaces, cokernels are finite-dimensional by rank-nullity, and finite length follows by induction on the $\\mathbb R$-dimension using a maximal proper submodule, whose quotient is simple) to get $G_0(A)=\\mathbb Z[\\mathbb C]$. Evaluation at $1$ identifies $\\operatorname{Hom}_{\\mathbb C}(\\mathbb C,\\mathbb C)$ with $\\mathbb C$ as real vector spaces of dimension two, so the pairing entry is $2$, not $1$: the hypothesis $\\operatorname{End}_A(S)=k$ fails here and the two bases are not dual.",
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, §2.2",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

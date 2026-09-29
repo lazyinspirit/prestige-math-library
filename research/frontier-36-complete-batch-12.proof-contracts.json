@@ -1,0 +1,1403 @@
+{
+  "version": 1,
+  "run": "frontier-36-complete",
+  "batch": 12,
+  "scope": [
+    "lem-japanese-bracket-powers-preserve-schwartz-space",
+    "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+    "lem-bessel-potential-norm-is-positive-definite",
+    "lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo",
+    "def-real-order-bessel-potential-sobolev-space",
+    "thm-bessel-potential-completions-embed-in-tempered-distributions",
+    "cor-bessel-potential-spaces-are-hilbert-and-complete",
+    "thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation",
+    "ex-zero-order-bessel-completion-is-ltwo",
+    "ex-schwartz-functions-in-every-bessel-potential-completion"
+  ],
+  "contracts": {
+    "lem-japanese-bracket-powers-preserve-schwartz-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-polynomially-bounded-multipliers-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Then $M_a:\\varphi\\mapsto a\\varphi$ is a continuous complex-linear endomorphism of $\\mathcal S(\\mathbb R^n)$. Its transpose $$\\langle au,\\varphi\\rangle=\\langle u,a\\varphi\\rangle$$ is a tempered distribution and depends continuously on $u$ for both the weak and strong dual topologies.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivative-expansion",
+          "claim": "Induction with the chain and product rules writes each derivative of $w_s$ as a finite polynomial-weighted sum whose polynomial degree is at most the derivative order; the bracket lower bound then gives polynomial growth.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "reciprocal-bounds",
+          "claim": "Replacing $s$ by $-s$ in the same finite derivative calculation gives polynomial growth for every derivative of the reciprocal weight.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "schwartz-inverses",
+          "claim": "The published multiplier theorem applies to both sets of derivative bounds, and their pointwise product one makes both Schwartz-space compositions the identity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "tempered-inverses",
+          "claim": "Transposition gives continuous weak- and strong-dual maps; testing the compositions on a Schwartz function reduces them to multiplication by $w_sw_{-s}=1$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero multi-index, where the derivative is $w_s$ itself and the same bound applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives $w_s(0)=w_{-s}(0)=1$, so the zero-frequency value is finite and the inverse product is one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for $s=0$ both multipliers are the constant one and both compositions remain the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 applies for $n=1$ and $|\\alpha|=0$ as well as higher dimensions and orders."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 treat each real $s$ and $-s$ in one estimate, including negative and positive orders."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is selected from a family; steps 1.1–4.1 use finite differentiation, multiplication, and transposition only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves multiplication by $w_s$ after $w_{-s}$ is the identity on $\\mathcal S$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the opposite composition is the identity on $\\mathcal S'$, and step 3.1 proves the corresponding Schwartz composition."
+        }
+      ]
+    },
+    "def-bessel-potential-pre-hilbert-norm-on-schwartz-space": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition is over the nonempty space $\\mathcal S(\\mathbb R^n)$ and the whole domain $\\mathbb R^n$; no empty-family or empty-domain case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: setting $u=0$ gives $q_s(0)=0$ and $Q_s(0,v)=0$; definiteness is explicitly deferred to the next lemma."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at $s=0$ the multiplier is one and $Q_0$ is exactly the Fourier-side $L^2$ pairing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: for $n=1,s=0$ the same formula is the ordinary complex $L^2(\\mathbb R)$ pairing on Schwartz transforms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition covers every real $s$ and every integer $n\\ge1$; there is no finite-order endpoint, and the formula remains defined at $s=0$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition states Countable Choice, inherited from the cited Fourier and complex $L^2$ interfaces; the integral itself selects no objects and uses no full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition introduces a sesquilinear form and candidate seminorm; it asserts no equivalence, and positive definiteness is deferred."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition introduces a sesquilinear form and candidate seminorm; it asserts no equivalence, and positive definiteness is deferred."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked weighted Fourier images remain Schwartz and L2 for real s; the integral is finite by Cauchy-Schwarz, first-variable linear, and positivity is left as a candidate until the next item. The 2pi convention is explicit."
+      }
+    },
+    "lem-bessel-potential-norm-is-positive-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "source_section": "Definition",
+          "quote": "Since the weight is real and positive, $Q_s(u,v)$ is the corresponding $L^2$ pairing of $\\langle\\xi\\rangle^s\\widehat u$ and $\\langle\\xi\\rangle^s\\widehat v$. At this stage $q_s$ is only the candidate seminorm; the next item proves that its kernel is zero.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$. It preserves the first-variable-linear inner product, and hence is unitary.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "These are actual smooth functions, not equivalence classes.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-weighted-transform",
+          "claim": "The candidate seminorm being zero means its weighted Fourier transform is the zero L2 class, hence zero almost everywhere.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "plancherel-zero",
+          "claim": "Strict positivity of the weight removes it pointwise from the almost-everywhere equality, and Plancherel transfers the zero Fourier L2 norm to a zero L2 norm for $u$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "continuous-representative",
+          "claim": "A nonzero value of a continuous function persists on a positive-measure ball, contradicting zero L2 norm; thus the actual Schwartz function is identically zero.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "inner-product-axioms",
+          "claim": "The weighted L2 pairing supplies sesquilinearity and nonnegativity, while the separation argument supplies strict definiteness and the induced norm identity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "zero-converse",
+          "claim": "The zero function has zero candidate seminorm by its defining formula, completing both directions of the kernel equality.",
+          "step": "5.1",
+          "inputs": [
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns an individual Schwartz function; its ambient domain is nonempty because it contains zero, and no empty-family assertion occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove that zero candidate norm forces the actual function to be zero; step 5.1 proves the converse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At $s=0$, step 2.1 is the ordinary Plancherel norm equality, so every nonzero Schwartz function has positive candidate norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply unchanged for $n=1$ and for $u=0$; no higher-dimensional argument is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only $w_s(\\xi)>0$, valid for every real $s$, including $s=0$ and both signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is inherited exactly through the cited Plancherel theorem [F2]; the local positivity and continuity argument selects no additional objects."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove $q_s(u)=0\\Rightarrow u=0$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 proves $u=0\\Rightarrow q_s(u)=0$."
+        }
+      ]
+    },
+    "lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "source_section": "Statement",
+          "quote": "are smooth multipliers acting continuously on $\\mathcal S(\\mathbb R^n)$. The multiplication maps are mutual inverses.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "source_section": "Statement",
+          "quote": "Assuming countable choice, $C_c^\\infty(\\mathbb R^n;\\mathbb C)$, and consequently $C_c(\\mathbb R^n;\\mathbb C)$, is dense in Euclidean Lebesgue $L^p$ for $n\\ge1$ and the same finite exponents.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "source_section": "Definition",
+          "quote": "For $u,v\\in\\mathcal S(\\mathbb R^n)$ define $$Q_s(u,v)=\\int_{\\mathbb R^n}\\langle\\xi\\rangle^{2s}\\widehat u(\\xi)\\overline{\\widehat v(\\xi)}\\,d\\xi,\\qquad q_s(u)=\\bigl\\|\\langle\\xi\\rangle^s\\widehat u\\bigr\\|_{L^2}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weight-frequency-test",
+          "claim": "Each compactly supported smooth frequency function is Schwartz, and multiplying it by the reciprocal bracket weight keeps it Schwartz.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "exact-preimage",
+          "claim": "The inverse Schwartz Fourier automorphism gives a Schwartz input whose weighted transform is exactly the chosen test function.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "dense-range",
+          "claim": "Smooth compactly supported frequency functions approximate an arbitrary L2 class, and each approximant is already in the weighted Fourier image.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes $h=0$, whose exact preimage in step 2.1 is $u=0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 send the zero test function to the zero weighted Fourier image."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 work for any amplitude of $h$; when $s=0$ the reciprocal weight is one and the inverse Fourier transform still gives the preimage."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply for $n=1,s=0$ without a higher-dimensional or nonzero-order assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the reciprocal multiplier for every real $s$; step 3.1 uses the finite exponent $p=2$, within the density theorem's stated range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 use Countable Choice exactly through the published smooth-density theorem; the preimage in steps 1.1–2.1 is explicitly constructed and unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts containment of every compactly supported smooth test in the range and density, not an iff characterization of the full range."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts containment of every compactly supported smooth test in the range and density, not an iff characterization of the full range."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "For every smooth compact frequency function h, reciprocal bracket multiplication keeps h Schwartz and inverse Fourier yields an exact preimage; complex Cc-infinity density gives all L2, including real orders and zero."
+      }
+    },
+    "def-real-order-bessel-potential-sobolev-space": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition completes the nonempty Schwartz normed space, which contains zero; no empty metric space or empty family is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the constant zero sequence represents the zero completion class, since its Cauchy distance to itself is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: $s=0$ is included among all real orders, and the same metric completion construction applies without a separate exceptional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers $n=1$ and the Schwartz zero vector; no finite-dimensional nontriviality assumption enters the construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition covers every real $s$, including zero and both signs; the positive norm from the previous lemma is the only input."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition states Countable Choice and identifies its exact use in the metric-completion theorem's countable sequence construction and completeness argument; no full AC or DC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a completion by Cauchy-sequence equivalence and asserts no biconditional characterization of its elements.",
+          "reviewed": {
+            "upheld": true,
+            "by": "frontier-36-complete boundary-gate review",
+            "reason": "The phrase “exactly when” defines the quotient relation on Cauchy sequences by vanishing difference norm; it is not a biconditional characterization theorem about H^s elements."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a completion by Cauchy-sequence equivalence and asserts no biconditional characterization of its elements.",
+          "reviewed": {
+            "upheld": true,
+            "by": "frontier-36-complete boundary-gate review",
+            "reason": "The reverse wording is part of the definition of the sequence-equivalence relation used to form the completion, not a separate converse theorem about the completed space."
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked completion of the positive definite Schwartz norm, Cauchy-sequence equivalence and limiting norm, dense constant-sequence embedding, real orders and Countable Choice in the cited completion theorem."
+      }
+    },
+    "thm-bessel-potential-completions-embed-in-tempered-distributions": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "source_section": "Statement",
+          "quote": "are smooth multipliers acting continuously on $\\mathcal S(\\mathbb R^n)$. The multiplication maps are mutual inverses. By transposition they also act continuously and invertibly on $\\mathcal S'(\\mathbb R^n)$, for both its weak and strong dual topologies.",
+          "uses": [
+            "1.3",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $n\\ge1$ and $s\\in\\mathbb R$, the set\n$$\\{\\langle\\xi\\rangle^s\\mathcal F(u)(\\xi):u\\in\\mathcal S(\\mathbb R^n)\\}$$\nis dense in complex $L^2(\\mathbb R^n)$. In fact it contains every frequency\nfunction in $C_c^\\infty(\\mathbb R^n)$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-order-bessel-potential-sobolev-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). For $n\\ge1$ and\n$s\\in\\mathbb R$, define $H^s(\\mathbb R^n)$ to be the normed-space completion\nof $\\mathcal S(\\mathbb R^n)$ with the positive-definite norm\n$q_s(u)=\\|\\langle\\xi\\rangle^s\\widehat u\\|_2$ from\n[[def-bessel-potential-pre-hilbert-norm-on-schwartz-space]] and\n[[lem-bessel-potential-norm-is-positive-definite]].\n\nConcretely, its elements are equivalence classes $[u_j]$ of norm-Cauchy\nsequences $(u_j)_{j\\in\\mathbb N}$ in Schwartz space, where\n$(u_j)\\sim(v_j)$ exactly when\n$\\lim_{j\\to\\infty}q_s(u_j-v_j)=0$. The metric completion carries the unique\ncompatible Banach-space structure supplied by\n[[def-completion-of-a-normed-space]] and\n[[thm-metric-completion-carries-a-unique-banach-space-structure]]; its norm\nis $\\|[u_j]\\|_{H^s}=\\lim_j q_s(u_j)$. The constant-sequence map\n$u\\mapsto[(u,u,\\ldots)]$ is the canonical dense linear isometry from Schwartz\nspace. At this definition stage $H^s$ is an abstract completion; no\nidentification with a subset of $\\mathcal S'(\\mathbb R^n)$ is implicit.\n\nThe only choice assumption is Countable Choice, used by the cited metric\ncompletion theorem in its countable-sequence construction and completeness\nargument. No full Axiom of Choice or dependent choice is assumed.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-lp-completeness-density-and-inner-product",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. On every measure space, complex $L^p$ is complete for $1\\le p\\le\\infty$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-lp-completeness-density-and-inner-product",
+          "source_section": "Statement",
+          "quote": "Complex $L^2$ has the first-variable-linear inner product $\\int f\\overline g$, its norm is $\\|\\cdot\\|_2$, and Cauchy–Schwarz has the following equality criterion: if $g\\ne0$, equality iff $f=cg$ a.e.; if $g=0$, equality for all $f$.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-schwartz-space-is-dense-in-l-two",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Every Schwartz function belongs to complex $L^2(\\mathbb R^n)$, and the classes represented by $\\mathcal S(\\mathbb R^n)$ are dense there.",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$.  A **tempered distribution** on $\\mathbb R^n$ is a\ncontinuous complex-linear functional\n\n$$u:\\mathcal S(\\mathbb R^n)\\longrightarrow\\mathbb C,$$\n\nwhere Schwartz space and its locally convex topology are those of\n[[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]].  The space of all such functionals\nis denoted $\\mathcal S'(\\mathbb R^n)$.\n\nWe write $\\langle u,\\varphi\\rangle=u(\\varphi)$.  This pairing is bilinear:\nthe test variable is not conjugated.  Thus $u(a\\varphi+b\\psi)=\na\\langle u,\\varphi\\rangle+b\\langle u,\\psi\\rangle$ for $a,b\\in\\mathbb C$.\nThe zero functional is tempered.  Continuity is topological continuity, and,\nbecause the Schwartz topology is generated by a countable cofinal family of\nseminorms, it is equivalently continuity on every convergent sequence.  No\nchoice principle is used in this definition.\n",
+          "uses": [
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-and-strong-topologies-on-tempered-distributions",
+          "source_section": "Definition",
+          "quote": "The **weak topology** $\\sigma(\\mathcal S',\\mathcal S)$ on [[def-tempered-distribution|tempered distributions]] is generated by $$p_\\varphi(u)=|\\langle u,\\varphi\\rangle|\\qquad(\\varphi\\in\\mathcal S).$$ The **strong topology** $\\beta(\\mathcal S',\\mathcal S)$ is generated by $$p_B(u)=\\sup_{\\varphi\\in B}|\\langle u,\\varphi\\rangle|$$ as $B$ ranges over bounded subsets of $\\mathcal S$.",
+          "uses": [
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fourier transformation is a topological automorphism of $\\mathcal S'(\\mathbb R^n)$ for both the weak and strong dual topologies.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^2(\\mathbb R^n;\\mathbb C)$, then $$\\mathcal F u_f=u_{\\mathcal F_2f},$$ where $\\mathcal F_2$ is the Plancherel extension.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "extend-weighted-map",
+          "claim": "The weighted transforms of a representative Cauchy sequence are Cauchy in L2; equivalent representatives have the same limit, defining a single map J_s.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "isometry",
+          "claim": "Linearity passes through termwise completion operations and L2 limits, and the completion norm is the limit of the L2 norms, so J_s is isometric.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "dense-image-lift",
+          "claim": "For an arbitrary L2 target, density supplies an approximating Schwartz preimage at each reciprocal-integer tolerance, and Countable Choice selects the sequence.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "onto",
+          "claim": "The approximating sequence is Cauchy in the completion norm and its completion class maps to the prescribed L2 limit, proving surjectivity.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "distribution-functional",
+          "claim": "The weighted test function lies in L2, so the bilinear integral against g is absolutely convergent; the locally integrable weighted representative defines T_sg on Schwartz tests.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "strong-weak-estimate",
+          "claim": "A finite sum of Schwartz seminorms controls the weighted test-function L2 norm; Cauchy–Schwarz yields continuity and the same estimate uniformly on bounded test sets.",
+          "step": "2.3",
+          "inputs": [
+            "F5",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "embedding-continuity",
+          "claim": "The composition of the isometry J_s, the continuous map T_s and inverse Fourier is linear and continuous for both dual topologies.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F8",
+            "F9",
+            "step 2.1",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "schwartz-agreement",
+          "claim": "For a canonical Schwartz class the weights cancel, the Plancherel-distribution agreement and inverse Fourier automorphism identify the usual regular distribution, and completion convergence plus continuity gives the representative-independent extension.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "injectivity-to-regular-g",
+          "claim": "If E_s(U)=0, Fourier injectivity and invertible bracket multiplication imply the regular distribution u_g is zero.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 1.3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "separate-l2-class",
+          "claim": "Schwartz approximants to conjugate(g) make the zero functional pair to the L2 norm square; Cauchy–Schwarz passes to the limit, so g and then U vanish.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "step 4.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The map is defined on the nonempty completion of Schwartz space, which contains zero; no empty domain or family is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 send the zero completion/L2 class to the zero distribution; steps 4.2–5.1 prove no nonzero completion class maps to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 give an isometry onto all of L2, including unit-norm targets; the proof has no exception for norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3–2.3 apply for $n=1,s=0$ with $N>1/2$; zero and nonzero L2 classes are both handled."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.3 chooses a finite integer $N>|s|+n/2$ for every real $s$; the argument includes $s=0$ and both signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2, and 5.1 state Countable Choice exactly for L2 completeness and two countable approximant selections; no full AC or DC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an injective embedding and a surjective weighted L2 map, not a biconditional characterization of a subset of S-prime; that characterization is a later item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an injective embedding and a surjective weighted L2 map, not a biconditional characterization of a subset of S-prime; that characterization is a later item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked weighted L2 limit and countable-choice dense approximants, surjective isometry, finite Schwartz seminorm bound for weighted regular distribution, weak/strong continuity, Schwartz agreement, sequence independence and injectivity by L2 density."
+      }
+    },
+    "cor-bessel-potential-spaces-are-hilbert-and-complete": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "surjective linear isometry",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-lp-completeness-density-and-inner-product",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. On every measure space, complex $L^p$ is complete for $1\\le p\\le\\infty$, and every norm-convergent sequence has a subsequence of measurable representatives converging a.e. to its limit. For finite $p$, finite simple functions with finite-measure support are dense, and on $\\mathbb R^n$ with Lebesgue measure, $n\\ge1$, complex $C_c^\\infty$ is dense. Complex $L^2$ has the first-variable-linear inner product $\\int f\\overline g$, its norm is $\\|\\cdot\\|_2$, and Cauchy–Schwarz has the following equality criterion: if $g\\ne0$, equality iff $f=cg$ a.e.; if $g=0$, equality for all $f$. The finite-tuple version uses a common scalar across components.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-order-bessel-potential-sobolev-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). For $n\\ge1$ and\n$s\\in\\mathbb R$, define $H^s(\\mathbb R^n)$ to be the normed-space completion\nof $\\mathcal S(\\mathbb R^n)$ with the positive-definite norm\n$q_s(u)=\\|\\langle\\xi\\rangle^s\\widehat u\\|_2$ from\n[[def-bessel-potential-pre-hilbert-norm-on-schwartz-space]] and\n[[lem-bessel-potential-norm-is-positive-definite]].\n\nConcretely, its elements are equivalence classes $[u_j]$ of norm-Cauchy\nsequences $(u_j)_{j\\in\\mathbb N}$ in Schwartz space, where\n$(u_j)\\sim(v_j)$ exactly when\n$\\lim_{j\\to\\infty}q_s(u_j-v_j)=0$. The metric completion carries the unique\ncompatible Banach-space structure supplied by\n[[def-completion-of-a-normed-space]] and\n[[thm-metric-completion-carries-a-unique-banach-space-structure]]; its norm\nis $\\|[u_j]\\|_{H^s}=\\lim_j q_s(u_j)$. The constant-sequence map\n$u\\mapsto[(u,u,\\ldots)]$ is the canonical dense linear isometry from Schwartz\nspace. At this definition stage $H^s$ is an abstract completion; no\nidentification with a subset of $\\mathcal S'(\\mathbb R^n)$ is implicit.\n\nThe only choice assumption is Countable Choice, used by the cited metric\ncompletion theorem in its countable-sequence construction and completeness\nargument. No full Axiom of Choice or dependent choice is assumed.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pullback-form",
+          "claim": "The formula pulled back along the well-defined linear J_s is a well-defined first-variable-linear sesquilinear form, inheriting conjugate symmetry from complex L2.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "norm-and-definiteness",
+          "claim": "The form is nonnegative, has zero kernel, and its square-root norm is exactly the completion norm by the L2 and completion isometries.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "completeness",
+          "claim": "A Cauchy sequence maps isometrically to a Cauchy sequence in complete L2; surjectivity supplies its unique preimage limit in Hs.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "hilbert-conclusion",
+          "claim": "The pulled-back inner product has the complete induced norm, so Hs is a complex Hilbert space with the stated norm.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The assertion concerns the nonempty vector space Hs, which contains zero, and no empty indexing family or domain is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves nonnegativity and that a zero value of the pulled-back quadratic form forces U=0; the zero vector has value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For every unit vector U, step 2.1 gives (U,U)Hs=||U||Hs^2=1; the pullback and norm formula include this case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The argument applies at n=1 and s=0 without a dimension or order exception; zero and nonzero vectors are handled by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use the embedding isometry and completion norm for arbitrary real s, including s=0 and both signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is assumed and used for L2 completeness at step 3.1; the image limit preimage is unique and no stronger choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This corollary defines a pullback inner product and proves Hilbert completeness; it asserts no if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This corollary defines a pullback inner product and proves Hilbert completeness; it asserts no if-and-only-if characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked first-variable-linear L2 pairing pulled back through surjective isometry, positive definiteness and completeness including real order and Countable Choice."
+      }
+    },
+    "thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "source_section": "Statement",
+          "quote": "For every integer $n\\ge1$ and real $s$, the functions\n$$w_s(\\xi)=\\langle\\xi\\rangle^s=(1+|\\xi|^2)^{s/2},\\qquad\nw_{-s}(\\xi)=\\langle\\xi\\rangle^{-s}$$\nare smooth multipliers acting continuously on $\\mathcal S(\\mathbb R^n)$.\nThe multiplication maps are mutual inverses. By transposition they also act\ncontinuously and invertibly on $\\mathcal S'(\\mathbb R^n)$, for both its weak\nand strong dual topologies.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $n\\ge1$ and $s\\in\\mathbb R$, weighted\nFourier transformation extends from Schwartz space to a surjective linear\nisometry\n$$J_s:H^s(\\mathbb R^n)\\longrightarrow L^2(\\mathbb R^n),\\qquad J_s([u_j])=\\lim_{j\\to\\infty}\\langle\\xi\\rangle^s\\mathcal F(u_j)$$\nin $L^2$. If $g=J_s([u_j])$, then\n$$E_s([u_j])=\\mathcal F^{-1}(u_{\\langle\\xi\\rangle^{-s}g})$$\nwhere $u_h$ denotes the functional $\\phi\\mapsto\\int h(\\xi)\\phi(\\xi)\\,d\\xi$\nwhenever this integral defines a tempered distribution. This is a well-defined\ncontinuous linear injection\n$H^s(\\mathbb R^n)\\to\\mathcal S'(\\mathbb R^n)$ for both weak and strong dual\ntopologies. It sends the canonical Schwartz class to its usual regular\ndistribution and is independent of the representing Cauchy sequence.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  Fourier transformation is a topological\nautomorphism of $\\mathcal S'(\\mathbb R^n)$ for both the weak and strong dual\ntopologies.  If\n\n$$\\langle Ru,\\varphi\\rangle=\\langle u,\\varphi(-\\,\\cdot)\\rangle,$$\n\nthen $\\mathcal F^2u=Ru$ and $\\mathcal F^{-1}=R\\mathcal F=\\mathcal FR$.\n\n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-polynomial-growth-functions-define-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb C$ be locally integrable.  If, for some integer\n$N\\geq0$,\n\n$$\\int_{\\mathbb R^n}|f(x)|(1+|x|)^{-N}\\,dx<\\infty,$$\n\nthen the regular functional $u_f(\\varphi)=\\int f\\varphi$ is a tempered\ndistribution.  Consequently this holds if $f$ has pointwise polynomial growth\noutside a compact set, and every class in complex $L^p(\\mathbb R^n)$,\n$1\\leq p\\leq\\infty$, has a representative defining a tempered distribution.\nThese are sufficient conditions; pointwise polynomial growth is not asserted\nto characterize all regular tempered distributions.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$.  A **tempered distribution** on $\\mathbb R^n$ is a\ncontinuous complex-linear functional\n\n$$u:\\mathcal S(\\mathbb R^n)\\longrightarrow\\mathbb C,$$\n\nwhere Schwartz space and its locally convex topology are those of\n[[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]].  The space of all such functionals\nis denoted $\\mathcal S'(\\mathbb R^n)$.\n\nWe write $\\langle u,\\varphi\\rangle=u(\\varphi)$.  This pairing is bilinear:\nthe test variable is not conjugated.  Thus $u(a\\varphi+b\\psi)=\na\\langle u,\\varphi\\rangle+b\\langle u,\\psi\\rangle$ for $a,b\\in\\mathbb C$.\nThe zero functional is tempered.  Continuity is topological continuity, and,\nbecause the Schwartz topology is generated by a countable cofinal family of\nseminorms, it is equivalently continuity on every convergent sequence.  No\nchoice principle is used in this definition.\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fourier-of-embedding",
+          "claim": "The embedding formula and the inverse Fourier automorphism identify the Fourier transform of E_sU with the weighted regular functional.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "forward-characterization",
+          "claim": "Multiplication by the bracket cancels the inverse weight in the test pairing, producing the regular L2 distribution and the norm identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "reverse-characterization",
+          "claim": "Multiplying a weighted-distribution equality by the inverse bracket identifies the Fourier transform with that of E_s(J_s^{-1}g), and Fourier injectivity gives u in the image.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "unique-l2-class",
+          "claim": "Two candidate L2 classes lift to Hs elements with the same embedding; injectivity of E_s forces the lifts and then the L2 classes to agree.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The weighted-distribution set contains zero, obtained from U=0, and no empty domain or family is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 handle g=0: the zero completion class maps to zero, and a distribution with weighted transform zero has U=J_s^{-1}0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives ||U||Hs=||g||2 for all classes, including the unit-norm case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 use the bracket and Fourier inverse for n=1,s=0 with no exceptional dimension or order case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 hold for every real s; the multiplier pair includes s=0 and both signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is inherited in the assumptions of the embedding and Fourier automorphism suppliers applied at step 2.2; all preimages under J_s are unique and no new family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 prove every embedded Hs class satisfies the weighted regular-L2 criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 constructs an Hs preimage for each criterion witness, and step 3.1 proves the L2 witness unique."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked both directions by reciprocal Schwartz multipliers, Fourier injectivity, unique L2 witness and exact norm identity."
+      }
+    },
+    "ex-schwartz-functions-in-every-bessel-potential-completion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-japanese-bracket-powers-preserve-schwartz-space",
+          "source_section": "Statement",
+          "quote": "For every integer $n\\ge1$ and real $s$, the functions\n$$w_s(\\xi)=\\langle\\xi\\rangle^s=(1+|\\xi|^2)^{s/2},\\qquad\nw_{-s}(\\xi)=\\langle\\xi\\rangle^{-s}$$\nare smooth multipliers acting continuously on $\\mathcal S(\\mathbb R^n)$.\nThe multiplication maps are mutual inverses. By transposition they also act\ncontinuously and invertibly on $\\mathcal S'(\\mathbb R^n)$, for both its weak\nand strong dual topologies.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-schwartz-space-is-dense-in-l-two",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Every Schwartz function belongs to complex $L^2(\\mathbb R^n)$, and the classes represented by $\\mathcal S(\\mathbb R^n)$ are dense there.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Fix $n\\ge1$ and $s\\in\\mathbb R$, and let\n$\\widehat u=\\mathcal F u$ use the repository's negative-sign $2\\pi$ Fourier\ntransform. For $u,v\\in\\mathcal S(\\mathbb R^n)$ define\n$$Q_s(u,v)=\\int_{\\mathbb R^n}\\langle\\xi\\rangle^{2s}\\widehat u(\\xi)\\overline{\\widehat v(\\xi)}\\,d\\xi,\\qquad q_s(u)=\\bigl\\|\\langle\\xi\\rangle^s\\widehat u\\bigr\\|_{L^2}.$$\n\nThe integral is finite and $Q_s$ is linear in its first variable. Indeed,\nFourier transformation preserves Schwartz space\n([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]),\nthe bracket multiplier preserves it\n([[lem-japanese-bracket-powers-preserve-schwartz-space]]), and Schwartz\nfunctions define $L^2$ classes\n([[lem-schwartz-space-is-dense-in-l-two]]); the complex $L^2$ pairing and\nCauchy–Schwarz are those of\n[[lem-complex-lp-completeness-density-and-inner-product]]. Since the weight\nis real and positive, $Q_s(u,v)$ is the corresponding $L^2$ pairing of\n$\\langle\\xi\\rangle^s\\widehat u$ and $\\langle\\xi\\rangle^s\\widehat v$.\nAt this stage $q_s$ is only the candidate seminorm; the next item proves that\nits kernel is zero.\n\nThe Countable Choice assumption ([[def-countable-choice]]) is inherited from the cited Fourier and\ncomplex $L^2$ interfaces. The integral definition itself makes no selection,\nand no full Axiom of Choice is used. With the repository convention\n$\\mathcal F(\\partial_j u)=2\\pi i\\xi_j\\mathcal F u$, this definition asserts\nno equality at integer order with a derivative-sum norm or the norm defined\nby the symbol $(1+4\\pi^2|\\xi|^2)^{k/2}$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-order-bessel-potential-sobolev-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). For $n\\ge1$ and\n$s\\in\\mathbb R$, define $H^s(\\mathbb R^n)$ to be the normed-space completion\nof $\\mathcal S(\\mathbb R^n)$ with the positive-definite norm\n$q_s(u)=\\|\\langle\\xi\\rangle^s\\widehat u\\|_2$ from\n[[def-bessel-potential-pre-hilbert-norm-on-schwartz-space]] and\n[[lem-bessel-potential-norm-is-positive-definite]].\n\nConcretely, its elements are equivalence classes $[u_j]$ of norm-Cauchy\nsequences $(u_j)_{j\\in\\mathbb N}$ in Schwartz space, where\n$(u_j)\\sim(v_j)$ exactly when\n$\\lim_{j\\to\\infty}q_s(u_j-v_j)=0$. The metric completion carries the unique\ncompatible Banach-space structure supplied by\n[[def-completion-of-a-normed-space]] and\n[[thm-metric-completion-carries-a-unique-banach-space-structure]]; its norm\nis $\\|[u_j]\\|_{H^s}=\\lim_j q_s(u_j)$. The constant-sequence map\n$u\\mapsto[(u,u,\\ldots)]$ is the canonical dense linear isometry from Schwartz\nspace. At this definition stage $H^s$ is an abstract completion; no\nidentification with a subset of $\\mathcal S'(\\mathbb R^n)$ is implicit.\n\nThe only choice assumption is Countable Choice, used by the cited metric\ncompletion theorem in its countable-sequence construction and completeness\nargument. No full Axiom of Choice or dependent choice is assumed.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $n\\ge1$ and $s\\in\\mathbb R$, weighted\nFourier transformation extends from Schwartz space to a surjective linear\nisometry\n$$J_s:H^s(\\mathbb R^n)\\longrightarrow L^2(\\mathbb R^n),\\qquad J_s([u_j])=\\lim_{j\\to\\infty}\\langle\\xi\\rangle^s\\mathcal F(u_j)$$\nin $L^2$. If $g=J_s([u_j])$, then\n$$E_s([u_j])=\\mathcal F^{-1}(u_{\\langle\\xi\\rangle^{-s}g})$$\nwhere $u_h$ denotes the functional $\\phi\\mapsto\\int h(\\xi)\\phi(\\xi)\\,d\\xi$\nwhenever this integral defines a tempered distribution. This is a well-defined\ncontinuous linear injection\n$H^s(\\mathbb R^n)\\to\\mathcal S'(\\mathbb R^n)$ for both weak and strong dual\ntopologies. It sends the canonical Schwartz class to its usual regular\ndistribution and is independent of the representing Cauchy sequence.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weighted-schwartz-norm",
+          "claim": "Fourier transformation and multiplication by the bracket put the weighted transform back in Schwartz space and therefore in L2, so the defining integral norm is finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "canonical-completion-class",
+          "claim": "The constant sequence defines the canonical Hs class with the computed norm and its canonical distribution embedding is the regular distribution of the same Schwartz function.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Schwartz and completion spaces both contain zero; no empty domain or family is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives q_s(0)=0, and step 2.1 maps the canonical zero class to its zero regular distribution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If a Schwartz function has q_s(u)=1, step 2.1 gives its canonical completion class norm one; the inclusion has no unit-norm exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply at n=1 for every real s, including the zero function."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 hold for every real s, including zero and both signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is inherited from the metric completion in step 2.1; for fixed u and s the proof makes no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example proves the inclusion of Schwartz functions in each Hs and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example proves the inclusion of Schwartz functions in each Hs and asserts no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked weighted transform of an actual Schwartz function remains Schwartz and L2, constant completion sequence, regular-distribution agreement, every real order."
+      }
+    },
+    "ex-zero-order-bessel-completion-is-ltwo": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-bessel-potential-pre-hilbert-norm-on-schwartz-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Fix $n\\ge1$ and $s\\in\\mathbb R$, and let\n$\\widehat u=\\mathcal F u$ use the repository's negative-sign $2\\pi$ Fourier\ntransform. For $u,v\\in\\mathcal S(\\mathbb R^n)$ define\n$$Q_s(u,v)=\\int_{\\mathbb R^n}\\langle\\xi\\rangle^{2s}\\widehat u(\\xi)\\overline{\\widehat v(\\xi)}\\,d\\xi,\\qquad q_s(u)=\\bigl\\|\\langle\\xi\\rangle^s\\widehat u\\bigr\\|_{L^2}.$$\n\nThe integral is finite and $Q_s$ is linear in its first variable. Indeed,\nFourier transformation preserves Schwartz space\n([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]),\nthe bracket multiplier preserves it\n([[lem-japanese-bracket-powers-preserve-schwartz-space]]), and Schwartz\nfunctions define $L^2$ classes\n([[lem-schwartz-space-is-dense-in-l-two]]); the complex $L^2$ pairing and\nCauchy–Schwarz are those of\n[[lem-complex-lp-completeness-density-and-inner-product]]. Since the weight\nis real and positive, $Q_s(u,v)$ is the corresponding $L^2$ pairing of\n$\\langle\\xi\\rangle^s\\widehat u$ and $\\langle\\xi\\rangle^s\\widehat v$.\nAt this stage $q_s$ is only the candidate seminorm; the next item proves that\nits kernel is zero.\n\nThe Countable Choice assumption ([[def-countable-choice]]) is inherited from the cited Fourier and\ncomplex $L^2$ interfaces. The integral definition itself makes no selection,\nand no full Axiom of Choice is used. With the repository convention\n$\\mathcal F(\\partial_j u)=2\\pi i\\xi_j\\mathcal F u$, this definition asserts\nno equality at integer order with a derivative-sum norm or the norm defined\nby the symbol $(1+4\\pi^2|\\xi|^2)^{k/2}$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-order-bessel-potential-sobolev-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). For $n\\ge1$ and\n$s\\in\\mathbb R$, define $H^s(\\mathbb R^n)$ to be the normed-space completion\nof $\\mathcal S(\\mathbb R^n)$ with the positive-definite norm\n$q_s(u)=\\|\\langle\\xi\\rangle^s\\widehat u\\|_2$ from\n[[def-bessel-potential-pre-hilbert-norm-on-schwartz-space]] and\n[[lem-bessel-potential-norm-is-positive-definite]].\n\nConcretely, its elements are equivalence classes $[u_j]$ of norm-Cauchy\nsequences $(u_j)_{j\\in\\mathbb N}$ in Schwartz space, where\n$(u_j)\\sim(v_j)$ exactly when\n$\\lim_{j\\to\\infty}q_s(u_j-v_j)=0$. The metric completion carries the unique\ncompatible Banach-space structure supplied by\n[[def-completion-of-a-normed-space]] and\n[[thm-metric-completion-carries-a-unique-banach-space-structure]]; its norm\nis $\\|[u_j]\\|_{H^s}=\\lim_j q_s(u_j)$. The constant-sequence map\n$u\\mapsto[(u,u,\\ldots)]$ is the canonical dense linear isometry from Schwartz\nspace. At this definition stage $H^s$ is an abstract completion; no\nidentification with a subset of $\\mathcal S'(\\mathbb R^n)$ is implicit.\n\nThe only choice assumption is Countable Choice, used by the cited metric\ncompletion theorem in its countable-sequence construction and completeness\nargument. No full Axiom of Choice or dependent choice is assumed.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $n\\ge1$ and $s\\in\\mathbb R$, weighted\nFourier transformation extends from Schwartz space to a surjective linear\nisometry\n$$J_s:H^s(\\mathbb R^n)\\longrightarrow L^2(\\mathbb R^n),\\qquad J_s([u_j])=\\lim_{j\\to\\infty}\\langle\\xi\\rangle^s\\mathcal F(u_j)$$\nin $L^2$. If $g=J_s([u_j])$, then\n$$E_s([u_j])=\\mathcal F^{-1}(u_{\\langle\\xi\\rangle^{-s}g})$$\nwhere $u_h$ denotes the functional $\\phi\\mapsto\\int h(\\xi)\\phi(\\xi)\\,d\\xi$\nwhenever this integral defines a tempered distribution. This is a well-defined\ncontinuous linear injection\n$H^s(\\mathbb R^n)\\to\\mathcal S'(\\mathbb R^n)$ for both weak and strong dual\ntopologies. It sends the canonical Schwartz class to its usual regular\ndistribution and is independent of the representing Cauchy sequence.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$. It preserves the first-variable-linear inner product, and hence is unitary.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and use the negative-sign $2\\pi$ normalization.  If\n$f\\in L^1(\\mathbb R^n;\\mathbb C)$, then\n\n$$\\mathcal F u_f=u_{\\widehat f},$$\n\nwhere $\\widehat f$ is the integral Fourier transform.  If\n$f\\in L^2(\\mathbb R^n;\\mathbb C)$, then\n\n$$\\mathcal F u_f=u_{\\mathcal F_2f},$$\n\nwhere $\\mathcal F_2$ is the Plancherel extension.  These equalities are in\n$\\mathcal S'(\\mathbb R^n)$ and therefore depend only on the corresponding\nalmost-everywhere classes.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-schwartz-space-is-dense-in-l-two",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Every Schwartz function belongs to complex $L^2(\\mathbb R^n)$, and the classes represented by $\\mathcal S(\\mathbb R^n)$ are dense there.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  Fourier transformation is a topological\nautomorphism of $\\mathcal S'(\\mathbb R^n)$ for both the weak and strong dual\ntopologies.  If\n\n$$\\langle Ru,\\varphi\\rangle=\\langle u,\\varphi(-\\,\\cdot)\\rangle,$$\n\nthen $\\mathcal F^2u=Ru$ and $\\mathcal F^{-1}=R\\mathcal F=\\mathcal FR$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "factor-one-schwartz-norm",
+          "claim": "At zero order the Japanese-bracket weight is one, so the candidate norm on Schwartz space is exactly its L2 norm by unitary Plancherel.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "canonical-l2-isometry",
+          "claim": "Composing the surjective completion Fourier isometry with inverse Plancherel gives a surjective L2 isometry that is the identity on canonical Schwartz classes.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "distributional-identification",
+          "claim": "The canonical distribution embedding sends each completion class to the regular distribution of its inverse-Plancherel image; surjectivity and norm preservation give the exact zero-order L2 identification.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is a global identification of two vector spaces and contains no empty-domain, empty-family, or empty-indexed-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply to the zero Schwartz function and zero completion class, giving zero norm and the zero regular distribution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 preserve the norm for every class, including a class whose L2 image has norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 allow n=1 and include the zero class without a nondegeneracy restriction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This example fixes the order at s=0 and makes no limiting or endpoint claim for a varying order parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Under the stated Countable Choice assumption, step 1.2 composes the cited completion and Plancherel interfaces; it makes no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that every U in H^0 is embedded as the regular distribution of f=I0U."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 uses surjectivity of I0 from step 1.2 to show every regular L2 distribution is in the image of E0."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g",
+        "notes": "Checked weight one, Plancherel unitary inverse and factor-one norm, Schwartz identity and regular-distribution agreement for all L2 classes."
+      }
+    }
+  }
+}

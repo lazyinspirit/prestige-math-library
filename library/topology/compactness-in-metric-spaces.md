@@ -2,23 +2,7 @@
 page: compactness-in-metric-spaces
 title: "Compactness in Metric Spaces"
 status: published
-items: [def-metric-compactness, lem-compactness-is-intrinsic,
-        def-metric-compactness-variants, def-totally-bounded,
-        lem-totally-bounded-basic, thm-compact-iff-finite-intersection-property,
-        lem-closed-subset-of-a-compact-space-is-compact,
-        thm-compact-subset-is-closed-and-bounded,
-        thm-compact-implies-complete-and-totally-bounded,
-        thm-compact-implies-the-other-compactness-forms,
-        lem-sequentially-compact-implies-complete,
-        thm-sequentially-compact-implies-totally-bounded,
-        thm-complete-and-totally-bounded-implies-compact,
-        thm-metric-compactness-equivalences, thm-heine-borel-rn,
-        thm-continuous-image-of-a-compact-space-is-compact,
-        thm-extreme-value-metric, thm-lebesgue-number-lemma,
-        thm-heine-cantor-metric,
-        thm-continuous-bijection-from-a-compact-space-has-continuous-inverse,
-        lem-compact-metric-space-has-a-countable-dense-subset,
-        rem-compactness-choice-ledger-metric]
+items: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-compactness-variants, def-totally-bounded, lem-totally-bounded-basic, thm-compact-iff-finite-intersection-property, lem-closed-subset-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, thm-compact-implies-complete-and-totally-bounded, thm-compact-implies-the-other-compactness-forms, lem-sequentially-compact-implies-complete, thm-sequentially-compact-implies-totally-bounded, thm-complete-and-totally-bounded-implies-compact, thm-metric-compactness-equivalences, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, thm-extreme-value-metric, thm-lebesgue-number-lemma, thm-heine-cantor-metric, thm-continuous-bijection-from-a-compact-space-has-continuous-inverse, lem-compact-metric-space-has-a-countable-dense-subset, rem-compactness-choice-ledger-metric, ex-discrete-metric-compact-iff-finite]
 examples: [fs-closed-and-bounded-implies-compact-in-every-metric-space,
            fs-totally-bounded-implies-compact, fs-bounded-implies-totally-bounded]
 ---

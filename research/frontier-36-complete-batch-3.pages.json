@@ -1,0 +1,1341 @@
+[
+  {
+    "order": 288.127,
+    "id": "recurrence-transience-and-hitting-times-for-markov-chains",
+    "kind": "A",
+    "category": "probability",
+    "title": "Recurrence Transience and Hitting Times for Markov Chains",
+    "companion": "recurrence-transience-and-hitting-times-for-markov-chains-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "stopping-times-and-optional-stopping",
+      "markov-kernels-and-markov-chains"
+    ],
+    "items": [
+      {
+        "id": "def-transition-matrix-and-n-step-transition-probabilities",
+        "kind": "definition",
+        "title": "Transition matrices and n-step probabilities",
+        "statement": "For countable E with sigma-algebra 2^E and a probability kernel K, set p(x,y)=K(x,{y}) and p^(n)(x,y)=K^n(x,{y}), including p^(0)(x,y)=1_{x=y}. Each row of p^(n) sums to one.",
+        "strategy": "Use the identity and iterated kernels. Countable additivity on 2^E gives the row sums; no conditional probability version or Choice is needed.",
+        "deps": [
+          "def-iterated-transition-kernels",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-matrix-chapman-kolmogorov-equations",
+        "kind": "lemma",
+        "title": "Matrix Chapman–Kolmogorov equations",
+        "statement": "For m,n≥0 and x,y in countable E, p^(m+n)(x,y)=sum_z p^(m)(x,z)p^(n)(z,y).",
+        "strategy": "Apply the associative kernel identity K^(m+n)=K^m K^n. For fixed x, integrate the nonnegative function z↦K^n(z,{y}) against K^m(x,·): its finite-support truncations increase to it, so monotone convergence and countable measure weights give sum_z p^(m)(x,z)p^(n)(z,y). Check m=0 and n=0. No conditional-probability versions or Choice enter.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
+          "thm-monotone-convergence-for-the-integral",
+          "def-iterated-transition-kernels",
+          "def-composition-of-probability-kernels"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-accessibility-communication-and-irreducibility",
+        "kind": "definition",
+        "title": "Accessibility, communication, and irreducibility",
+        "statement": "Write x→y when p^(n)(x,y)>0 for some n≥0. States x and y communicate when x→y and y→x. A chain is irreducible when all pairs communicate. The n=0 convention makes x→x automatic.",
+        "strategy": "Define these relations from matrix powers, not from a first-hit probability. For x≠y, accessibility agrees with positive probability of a finite hitting path by countable union.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-communication-is-an-equivalence-relation",
+        "kind": "lemma",
+        "title": "Communication is an equivalence relation",
+        "statement": "Communication is reflexive, symmetric, and transitive; its classes partition E.",
+        "strategy": "Reflexivity uses p^(0)(x,x)=1; symmetry is built into the definition. If x→y in m steps and y→z in n steps, Chapman–Kolmogorov gives p^(m+n)(x,z)≥p^(m)(x,y)p^(n)(y,z)>0.",
+        "deps": [
+          "def-accessibility-communication-and-irreducibility",
+          "lem-matrix-chapman-kolmogorov-equations"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-hitting-return-and-visit-times",
+        "kind": "definition",
+        "title": "Hitting, return, and visit times",
+        "statement": "For an adapted process X with values in countable E, and A⊆E, set T_A=inf{n≥0:X_n∈A}; write T_x=T_{ {x} }, T_x^+=inf{n≥1:X_n=x}, and N_x=sum_{n≥0}1_{X_n=x} in N_0∪{∞}. Every infimum of the empty set is ∞. Recursive positive return times are defined only while the previous one is finite.",
+        "strategy": "For any adapted process on countable E with full power-set sigma-algebra, {T_A≤n}=union_{k≤n}{X_k∈A} is in F_n by adaptedness; for T_x^+ start that finite union at k=1. Define kth return on {R_(k−1)<∞} by inf{n>R_(k−1):X_n=x}, assigning ∞ elsewhere, and never evaluate X_∞. The published real-valued first-hitting lemma is not used because it does not cover an arbitrary countable state set.",
+        "deps": [
+          "def-discrete-stopping-time",
+          "def-stochastic-process-and-finite-dimensional-distributions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-recurrent-and-transient-state",
+        "kind": "definition",
+        "title": "Recurrent and transient states",
+        "statement": "For a specified chain law with transition matrix p and deterministic initial state x, write P_x for that law. State x is recurrent when P_x(T_x^+<∞)=1 and transient when P_x(T_x^+<∞)<1. These alternatives exhaust [0,1]. The definition makes no assertion that such laws can be selected simultaneously.",
+        "strategy": "The return is the strictly positive time, so a visit at time zero does not make recurrence automatic. The convention applies to absorbing and no-positive-return states.",
+        "deps": [
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-renewal-decomposition-at-successive-return-times",
+        "kind": "theorem",
+        "title": "Renewal decomposition at successive returns",
+        "statement": "Assume AC. Put f_x(k)=P_x(T_x^+=k), k≥1, and u_x(n)=p^(n)(x,x). Then u_x(0)=1 and u_x(n)=sum_{k=1}^n f_x(k)u_x(n−k) for n≥1. For every k≥0 and bounded measurable future-path functional H, the conditional law of the path after R_k, on {R_k<∞}, is P_x and is independent of F_{R_k}. If x is recurrent, the complete successive excursion words from R_{k−1} through R_k (k≥1) are iid. For a general state, the next excursion law is asserted only on the event that the previous return is finite.",
+        "strategy": "Prove inductively that the recursively defined R_k are stopping times, using the event characterization of discrete stopping times. For n≥1, partition {X_n=x} by the first positive return k≤n and apply the conditional Chapman–Kolmogorov identity on {T_x^+=k}; summing gives the convolution. Apply the eventwise strong Markov theorem to every bounded measurable future-path functional at each finite R_k; on {R_k<∞}, X_{R_k}=x. Encode a first-return excursion by its finite word in the countable set of paths that start and end at x with no interior x, and prove the event is measurable. Under recurrence, induction via strong Markov gives every R_k finite almost surely. The event of any fixed list of previous excursion words is measurable at the next return time; repeated conditional factorization proves iid. For a transient state do not assert an infinite sequence of completed excursions. AC is used only through the cited conditional-expectation and Markov results.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-stopping-time",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-sigma-algebra-at-a-stopping-time",
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-hitting-return-and-visit-times",
+          "def-recurrent-and-transient-state",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "thm-discrete-strong-markov-property",
+          "thm-chapman-kolmogorov-equations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-recurrence-transience-equivalent-criteria",
+        "kind": "theorem",
+        "title": "Equivalent criteria for recurrence and transience",
+        "statement": "Assume AC. For x∈E, x is recurrent iff P_x(N_x=∞)=1 iff sum_{n≥0}p^(n)(x,x)=∞. If x is transient and r_x=P_x(T_x^+<∞)<1, then P_x(N_x=k)=(1−r_x)r_x^(k−1) for k≥1 and E_xN_x=1/(1−r_x)<∞.",
+        "strategy": "First derive the renewal equation in the preceding theorem. Repeated strong Markov at finite returns gives P_x(N_x≥k)=r_x^(k−1); hence P_x(N_x=∞)=lim_k r_x^k. Nonnegative Tonelli/MCT yields E_xN_x=sum_n p^(n)(x,x)=sum_{k≥1}r_x^(k−1), with ∞ allowed, proving all equivalences without subtracting infinities. AC is inherited from strong Markov.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-recurrent-and-transient-state",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "thm-renewal-decomposition-at-successive-return-times",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-continuity-from-above-for-measures",
+          "thm-geometric-series",
+          "lem-geometric-sequence-null"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-green-kernel-of-a-transient-chain",
+        "kind": "definition",
+        "title": "Green kernel of a transient chain",
+        "statement": "For any countable transition matrix define G(x,y)=sum_{n≥0}p^(n)(x,y) in [0,∞], without using Choice. Assuming AC, for any specified corresponding chain law with deterministic initial state x, G(x,y)=E[N_y]. The definition is valid even if some states are recurrent.",
+        "strategy": "The series definition is choice-free. Under AC, the multistep Markov identity gives P_x(X_n=y)=p^(n)(x,y); monotone convergence for the sum of visit indicators gives E_xN_y=sum_n p^(n)(x,y). No finiteness is presumed: a chain may start in a transient state and later enter a recurrent class, giving infinite G(x,y) for a recurrent y. AC is used exactly for the conditional-expectation-based multistep chain law, not for the matrix series.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-hitting-return-and-visit-times",
+          "thm-monotone-convergence-for-the-integral",
+          "def-axiom-of-choice",
+          "thm-chapman-kolmogorov-equations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-green-kernel-resolvent-identity",
+        "kind": "lemma",
+        "title": "Green-kernel resolvent identity",
+        "statement": "For every countable transition matrix p, let G(x,y)=∑_{n≥0}p^(n)(x,y). Define (PG)(x,y)=∑_{z:p(x,z)>0}p(x,z)G(z,y) and (GP)(x,y)=∑_{z:p(z,y)>0}G(x,z)p(z,y), omitting zero coefficients so 0·∞ is never formed. Then G=I+PG=I+GP entrywise in [0,∞].",
+        "strategy": "Define both extended matrix products by support-restricted nonnegative sums, omitting zero transition coefficients because 0·∞ is undefined in the library. For positive coefficients, pass the scalar through the Green series; Tonelli interchanges the state and time sums, and matrix Chapman–Kolmogorov identifies the inner sums with p^(n+1). Split off p^(0) to get the identity. No subtraction or Choice is used.",
+        "deps": [
+          "def-green-kernel-of-a-transient-chain",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "def-nonnegative-extended-series",
+          "def-countable",
+          "def-extended-reals",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Theorem 5.3.1 and equation (5.3.1), printed pp. 281–282: expected visits and recurrence criterion; source context only, resolvent identity derived here."
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§9.5, Lemma 9.6, printed p. 120: expected visits before a stopping time; source context only, general countable-state resolvent identity derived here."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-recurrence-and-transience-are-class-properties",
+        "kind": "theorem",
+        "title": "Recurrence and transience are class properties",
+        "statement": "Assume AC. Let X be a time-homogeneous Markov chain on an at most countable state space E with transition kernel K and transition matrix p(x,y)=K(x,{y}); for each fixed z use the canonical law P_z with initial measure δ_z. Set T_z=inf{n≥0:X_n=z} and define recurrence by the positive-time return probability. If x and y communicate, x is recurrent iff y is recurrent. More strongly, if x is recurrent and x→y, then P_x(T_y<∞)=P_y(T_x<∞)=1. The communication class [x]={z:x↔z} is closed: z∈[x] and p(z,w)>0 imply w∈[x].",
+        "strategy": "Fix x and a distinct accessible y. Choose the least n≥1 with p^(n)(x,y)>0; repeated Chapman–Kolmogorov decomposition yields a positive-probability finite state route, and minimality removes every intermediate visit to x. Its cylinder has probability α>0. If x is recurrent, the completed return excursions from x are iid by the earlier renewal theorem, and each has probability α of beginning with this route; the chance that the first m excursions all miss it is (1−α)^m, so P_x(T_y<∞)=1. If P_y(T_x=∞)>0, the route followed by this event has probability αP_y(T_x=∞)>0 and prevents every positive return to x, a contradiction. Starting at y, the a.s. hit of x followed by the strong Markov property and P_x(T_y<∞)=1 gives a positive return to y, so y is recurrent. Reverse the roles for recurrence equivalence; the same implication applied to every state accessible from a recurrent class proves closure. AC supplies each fixed-start canonical law and is assumed by the return-excursion and strong-Markov results; no simultaneous sample-path choice is made.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-accessibility-communication-and-irreducibility",
+          "def-countable",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-measure-kernel-and-probability-kernel",
+          "def-recurrent-and-transient-state",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "prop-dirac-measure-is-a-probability-measure",
+          "cor-canonical-markov-chain-on-path-space",
+          "lem-communication-is-an-equivalence-relation",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "lem-geometric-sequence-null",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-renewal-decomposition-at-successive-return-times",
+          "thm-discrete-strong-markov-property"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Theorem 5.3.2 and its complete proof, printed p. 282/PDF p. 289 (official PDF parser lines 19113–19149). For countable chains Durrett proves that a recurrent x and any accessible y imply y recurrent and ρ_yx=1; the proof extracts a shortest positive route and contradicts recurrence if y can avoid x, then uses the Green-series criterion for recurrence of y. The present proof uses the pair’s proved iid return-excursion theorem and strong Markov at T_x in place of that final Green-series comparison. LPW §1.7, printed pp. 15–17/PDF pp. 30–32, supplies communicating-class terminology only in its finite-state setting and is not used to prove this countable-state result."
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§21.1, Proposition 21.3 and its complete proof, printed pp. 291–292/PDF pp. 307–308 (official PDF parser lines 22015–22090). The source explicitly assumes irreducibility and proves the equivalent all-state recurrence/hitting statements; it is relevant after restricting to a closed communicating class, but is not used for this local proof. §1.7, printed pp. 15–17/PDF pp. 30–32, supplies finite-state communicating-class terminology only."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-an-irreducible-chain-is-either-recurrent-or-transient",
+        "kind": "corollary",
+        "title": "Irreducible recurrence/transience dichotomy",
+        "statement": "Assume AC. Let E, K, p, the canonical fixed-start laws, and the positive-return recurrence convention be as in thm-recurrence-and-transience-are-class-properties. Irreducibility means every pair of states communicates. If E is empty the universal alternatives are vacuous; otherwise either every state is recurrent or every state is transient.",
+        "strategy": "If E is empty, both universal conclusions hold vacuously. Otherwise fix one state x. Irreducibility makes x communicate with every y. If x is recurrent, the class-property theorem gives recurrence of every y. If x is transient, no y can be recurrent, since the class-property theorem would then make x recurrent; the recurrence definition says every nonrecurrent state is transient. The one-state kernel row has mass one on its unique state. This proves both alternatives. AC is assumed by the inherited class-property theorem; only one base state is fixed, with no family of choices.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-accessibility-communication-and-irreducibility",
+          "def-measure-kernel-and-probability-kernel",
+          "def-recurrent-and-transient-state",
+          "thm-recurrence-and-transience-are-class-properties"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Theorem 5.3.2 and its complete proof, printed p. 282/PDF p. 289 (official PDF parser lines 19113–19149), proves the stronger statement that recurrence is contagious along positive-probability accessibility and gives certain return hitting. Example 5.3.6 explicitly states the irreducible countable-state dichotomy, printed p. 284/PDF p. 291 (official parser lines 19241–19243). This item proves the corollary locally from the pair’s class-property theorem and the exhaustive recurrence/transience definition."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-hitting-probability-is-the-minimal-nonnegative-harmonic-extension",
+        "kind": "theorem",
+        "title": "Hitting probability as minimal harmonic extension",
+        "statement": "Assume AC. For A⊆E let h(x)=P_x(T_A<∞). Then h=1 on A, h=Ph on A^c, and h is pointwise minimal among finite-valued nonnegative g with g=1 on A and g=Pg on A^c.",
+        "strategy": "For the countable kernel, prove the nonnegative row-integral identity by finite-support truncations and atomic weights. Use the bounded future-path identity for the hit event to prove harmonicity. Extend the bounded one-step Markov identity to the finite-valued candidate with finite-support truncations and conditional monotone convergence; the stopped candidate then has constant expectation at every finite time, and Fatou proves minimality. Handle empty and full A directly. AC is used by canonical laws and conditional expectations.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
+          "lem-bounded-function-form-of-the-markov-property",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "thm-conditional-monotone-convergence",
+          "def-nonnegative-extended-series",
+          "def-nonnegative-simple-measurable-function",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-fatou-lemma",
+          "def-initial-distribution-of-a-markov-chain"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-finite-irreducible-chain-hitting-time-geometric-tail",
+        "kind": "lemma",
+        "title": "Geometric tail for hitting in a finite irreducible chain",
+        "statement": "Assume AC. If E is finite, p irreducible, and A⊆E is nonempty, there exist m≥1 and ε∈(0,1) such that sup_x P_x(T_A>km)≤(1−ε)^k for k≥0; thus E_xT_A<∞ for all x. Moreover, in any countable-state chain with transition matrix p, every finite nonempty C⊆E satisfying ∑_{y∈C}p(x,y)=1 for x∈C and having irreducible restricted matrix consists of recurrent states.",
+        "strategy": "For each state fix one positive-probability path to A. Finiteness gives a common maximum path length m and minimum path probability ε>0. Conditional on survival at each block boundary, the Markov property bounds survival for the next m steps by 1−ε. Iterate and sum the geometric tail. AC is used only by the conditional Markov theorem. Applied to the restriction of p to any finite closed irreducible class, the same block estimate after the first step shows finite first-return expectation and hence recurrence of each class state.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-accessibility-communication-and-irreducibility",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "cor-layer-cake-formulas-for-random-variables",
+          "def-initial-distribution-of-a-markov-chain",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "def-recurrent-and-transient-state"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-dirichlet-problem-for-finite-state-hitting-probabilities",
+        "kind": "theorem",
+        "title": "Bounded Dirichlet problem for hitting probabilities",
+        "statement": "Assume AC and let E be at most countable with transition matrix p and associated Markov chain X; if E=∅ the assertion is vacuous. Let A⊆E and suppose P_x(T_A<∞)=1 for every x∈E. For bounded real f:A→R, define F_A=f(X_(T_A)) on {T_A<∞} and F_A=0 otherwise, and put u(x)=E_x F_A. Then u is the unique bounded v:E→R with v=f on A and v=Pv on A^c, where Pv(x)=sum_y p(x,y)v(y). In particular the a.s.-hitting hypothesis holds for nonempty A in a finite irreducible chain, and for f≡1 on A, u is the hitting probability.",
+        "strategy": "Under a.s. finite T_A, define the bounded path payoff as f at the first hit and zero if there is no hit. On A^c it is unchanged by deleting the first coordinate, so the bounded-future Markov identity and one-step kernel identity give u=Pu. For any other bounded solution v, the one-step Markov identity and v=Pv on A^c make v(X_(n∧T_A)) a bounded martingale; dominated convergence gives v(x)=E_x f(X_(T_A)). The preceding geometric-tail lemma supplies the finite irreducible case. Boundedness is essential for this limit on infinite domains. AC is used in the canonical chain laws and conditional Markov identities.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-discrete-generator-of-a-countable-state-transition-matrix",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "lem-bounded-function-form-of-the-markov-property",
+          "lem-finite-irreducible-chain-hitting-time-geometric-tail",
+          "thm-dominated-convergence",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-markov-property-for-bounded-future-path-functionals"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§9.2, Proposition 9.1 and complete proof, printed pp.117–118/PDF pp.132–133; its first-step representation is context only. The global-maximum uniqueness argument is not used for the countable bounded claim here."
+            },
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf",
+              "locator": "§2, Example 24.3 and Theorem 24.4, printed/PDF pp.3–4, for the hitting-probability special case and nonnegative first-step equations on proper D. The signed bounded case and bounded uniqueness under almost-sure hitting are proved locally."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-period-of-a-state",
+        "kind": "definition",
+        "title": "Period of a state",
+        "statement": "Let R_x={n≥1:p^(n)(x,x)>0}. Define d(x)=gcd R_x if R_x is nonempty, and d(x)=0 if R_x is empty.",
+        "strategy": "Positive times only enter the gcd; p^(0)(x,x)=1 must not force period one. For a nonempty R_x, fix t∈R_x: its common positive divisors form a nonempty finite subset of the positive divisors of t, so the greatest exists and is the gcd. The no-positive-return convention is explicitly zero.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-common-divisor-and-gcd"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-period-is-constant-on-a-communicating-class",
+        "kind": "lemma",
+        "title": "Period is constant on communicating classes",
+        "statement": "If x and y communicate, then d(x)=d(y), including the x=y case and the zero convention.",
+        "strategy": "For distinct communicating x,y choose positive route lengths r from x to y and s from y to x. Both r+s and r+t+s are positive return lengths at y for every positive return length t at x, so d(y) divides t. Reverse the roles for the opposite divisibility. Communication guarantees nonempty return sets for distinct states.",
+        "deps": [
+          "def-period-of-a-state",
+          "def-accessibility-communication-and-irreducibility",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§1.3, Lemma 1.6, printed p. 7 (PDF p. 22): period invariance for a finite-state irreducible chain; the countable communicating-state claim is proved locally here using matrix Chapman–Kolmogorov."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-aperiodic-chain",
+        "kind": "definition",
+        "title": "Aperiodic irreducible chain",
+        "statement": "An irreducible chain is aperiodic when its common communicating-class period is one.",
+        "strategy": "The period lemma makes the definition independent of the chosen state. An irreducible singleton with no positive return cannot occur for a stochastic matrix.",
+        "deps": [
+          "def-accessibility-communication-and-irreducibility",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-period-of-a-state",
+          "lem-period-is-constant-on-a-communicating-class"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§1.3, Irreducibility and Aperiodicity, printed pp. 7–8/PDF pp. 23–24: after Lemma 1.6 the source defines the chain period as the common state period and calls it aperiodic when that period is 1. The section is in the finite-state chapter; this item applies the same convention to countable E after locally verifying positive returns and using the countable-state period lemma."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-simple-symmetric-walk-on-zd",
+        "kind": "definition",
+        "title": "Simple symmetric walk on the integer lattice",
+        "statement": "For an integer d≥1, the simple symmetric nearest-neighbor transition matrix on Z^d has p(z,z+e_j)=p(z,z−e_j)=1/(2d), j=1,…,d, and all other entries zero.",
+        "strategy": "The 2d neighbors are distinct, so each row sums to one. The definition is on this A page because the published transition-kernel example is homed only on a different B page and cannot supply an A-page theorem.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-recurrence-of-the-one-dimensional-simple-symmetric-random-walk",
+        "kind": "corollary",
+        "title": "One-dimensional simple symmetric walk is recurrent",
+        "statement": "Assume AC. For the simple symmetric nearest-neighbor walk on Z, under the canonical fixed-start law at each z, every state z is recurrent in the positive-time return sense. The empty- or singleton-space cases do not arise because the state space is Z.",
+        "strategy": "Construct the one-step kernel as the equal mixture of the two neighboring Dirac measures and take the canonical fixed-start chain law under AC. For any fixed start z, exactly binom(2n,n) length-2n increment words return to z, each of probability 4^{-n}; odd-time returns have probability zero. The central-binomial asymptotic makes the even Green terms eventually bounded below by a positive constant times n^{-1/2}; prove divergence by grouping into square blocks. Apply the statewise recurrence/Green-series criterion for each z. This gives every state directly from identical return probabilities, so no class-property theorem is needed.",
+        "deps": [
+          "cor-canonical-markov-chain-on-path-space",
+          "cor-central-binomial-coefficient-asymptotic-from-wallis",
+          "def-axiom-of-choice",
+          "def-binomial-coefficient",
+          "def-countable",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-kernel-and-probability-kernel",
+          "def-recurrent-and-transient-state",
+          "def-simple-symmetric-walk-on-zd",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-recurrence-transience-equivalent-criteria"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.4, Theorem 5.4.3 and its complete proof, printed pp. 288–289/PDF pp. 295–296 (official PDF parser lines 19430–19460), gives the return-series recurrence criterion for a random walk. The d=1 part of Theorem 5.4.4, printed p. 289/PDF p. 296 (lines 19461–19469), states odd-time parity and derives recurrence from ρ1(2n)∼(πn)^(-1/2). Durrett cites its earlier Theorem 3.1.3 for that asymptotic; this item instead uses the library central-binomial asymptotic and proves Green-series divergence locally."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-recurrence-of-the-two-dimensional-simple-symmetric-random-walk",
+        "kind": "corollary",
+        "title": "Two-dimensional simple symmetric walk is recurrent",
+        "statement": "Assume AC. For z=(z_1,z_2) in Z^2 and A⊆Z^2, set K(z,A)=1/4·(δ_(z+e_1)(A)+δ_(z−e_1)(A)+δ_(z+e_2)(A)+δ_(z−e_2)(A)), and let P_z be the canonical path-space Markov-chain law with initial measure δ_z and kernel K. Then every z∈Z^2 is recurrent: P_z(T_z^+<∞)=1, where T_z^+=inf{n≥1:X_n=z}.",
+        "strategy": "First prove Z^2 at most countable, verify the four-Dirac finite-mixture kernel, and use AC to obtain the deterministic-start canonical chain laws. An induction using matrix Chapman–Kolmogorov expands p^(2n)(z,z) over finite move words, each with weight 4^(−2n). Return words have m up, m down, n−m left, and n−m right moves; count these with binomial coefficients, rewrite the sum using the closed formula, and apply Vandermonde to get p^(2n)(z,z)=4^(−2n)binom(2n,n)^2. The Wallis asymptotic makes this asymptotic to 1/(πn); limit comparison with the harmonic series gives a divergent Green series. The statewise recurrence criterion proves every z recurrent because the return formula is independent of z. AC is used for canonical laws and the recurrence criterion; matrix path counting and series comparison are choice-free.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable",
+          "def-dirac-measure",
+          "def-equinumerous",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-integers",
+          "def-injection-surjection-bijection",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-kernel-and-probability-kernel",
+          "def-nonnegative-extended-series",
+          "def-pi-via-first-positive-cosine-zero",
+          "def-recurrent-and-transient-state",
+          "def-simple-symmetric-walk-on-zd",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-binomial-coefficient",
+          "thm-p-series-rational",
+          "lem-countable-iff-surjection-from-n",
+          "prop-dirac-measure-is-a-probability-measure",
+          "cor-canonical-markov-chain-on-path-space",
+          "cor-central-binomial-coefficient-asymptotic-from-wallis",
+          "thm-binomial-closed-formula",
+          "thm-limit-comparison-test",
+          "thm-n-cross-n-countable",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-product-of-countable",
+          "thm-recurrence-transience-equivalent-criteria",
+          "thm-vandermonde-identity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.4 Example 5.4.2, Theorem 5.4.3 and complete proof, and the d=2 calculation in Theorem 5.4.4, printed pp. 288–289/PDF pp. 295–296 (official PDF parser lines 19421–19505). Durrett defines the lattice walk by iid uniform coordinate increments, proves the return-series criterion, counts the four move types, applies Vandermonde and the one-dimensional central-binomial asymptotic. The local item separately constructs the countable-state kernel and canonical laws under AC, uses the library Wallis corollary, and proves the all-start statewise conclusion."
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§21.1 Proposition 21.3 and complete proof, printed p. 292/PDF p. 308; §21.1 Example 21.5, printed p. 292/PDF p. 308. Proposition 21.3 assumes irreducibility and proves the Green-series recurrence criterion by geometric return counts and positive-probability paths; Example 21.5 uses the corner walk, its independent one-dimensional coordinates, the order-1/n return estimate, and a rotation/dilation to the nearest-neighbor walk. These are corroborating context only: the local item proves the all-start return series directly and does not use Proposition 21.3's irreducibility hypothesis."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-transience-of-simple-symmetric-random-walk-in-dimension-at-least-three",
+        "kind": "corollary",
+        "title": "Higher-dimensional simple symmetric walks are transient",
+        "statement": "Assume AC. For every integer d≥3, define K_d on (Z^d,2^(Z^d)) by K_d(z,A)=(1/(2d))∑_{j<d}(δ_{z+e_j}(A)+δ_{z−e_j}(A)), and let P_x be the canonical path-space chain law with initial measure δ_x and kernel K_d. Then every x∈Z^d is transient for this simple symmetric nearest-neighbor walk.",
+        "strategy": "For fixed d≥3, verify the finite-mixture kernel and use AC for each canonical deterministic-start law. Expand matrix powers over finite move words and derive the return probability factorization into a central-binomial term and a squared multinomial mass. Normalize the equal-coordinate multinomial probabilities, prove a balanced tuple maximizes them, then use Stirling bounds and weighted AM–GM to obtain max q_n≤C_d n^{−(d−1)/2}. The central-binomial bound gives p^(2n)(0,0)≤D_d n^{−d/2}; odd returns vanish. A rational p-series comparison makes the Green series finite, so the statewise criterion and translation invariance prove every state transient. AC is used for the canonical laws and the recurrence criterion; no local CLT or later pair item is used.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-simple-symmetric-walk-on-zd",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-measure-kernel-and-probability-kernel",
+          "def-measurable-function-between-measurable-spaces",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "cor-canonical-markov-chain-on-path-space",
+          "def-initial-distribution-of-a-markov-chain",
+          "thm-rationals-countable",
+          "lem-finite-powers-of-countable-sets-are-countable",
+          "lem-finite-subsets-listable",
+          "def-recurrent-and-transient-state",
+          "thm-recurrence-transience-equivalent-criteria",
+          "thm-real-stirling-formula",
+          "cor-central-binomial-coefficient-asymptotic-from-wallis",
+          "def-multinomial-coefficient",
+          "thm-multinomial-theorem",
+          "thm-weighted-am-gm-real",
+          "thm-p-series-rational",
+          "thm-direct-comparison-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.4, Example 5.4.2 and the complete d=3 proof of Theorem 5.4.4, printed pp. 288–290. The source counts balanced direction words, factors the return probability into a central-binomial term and a squared multinomial probability, bounds the square sum by the largest mass, and uses Stirling at balanced counts; it handles d>3 by the three-coordinate skeleton. The item generalizes the coefficient estimate directly to every fixed d≥3 and uses the library's statewise Green-series criterion; no local CLT is used."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-nonnegative-discrete-drift-for-countable-chains",
+        "kind": "definition",
+        "title": "Nonnegative kernel action and finite drift",
+        "statement": "For countable transition matrix p and φ:E→[0,∞], define Pφ(x)=∑_{y:p(x,y)>0}p(x,y)φ(y)∈[0,∞], omitting zero coefficients so 0·∞ is never formed. If φ(x) and Pφ(x) are finite, define Lφ(x)=Pφ(x)−φ(x). For extended-valued u use u=Pu+c rather than subtracting ∞−∞.",
+        "strategy": "Nonnegative summation defines Pφ without a boundedness condition. This extends the published discrete generator, which was defined only on bounded functions, to precisely the finite-valued functions with finite one-step expectation used by the drift theorems.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-discrete-generator-of-a-countable-state-transition-matrix",
+          "def-nonnegative-extended-series",
+          "def-extended-reals"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-first-step-equations-for-nonnegative-exit-costs",
+        "kind": "theorem",
+        "title": "First-step equations for nonnegative exit costs",
+        "statement": "Assume AC. Let D⊆E, T=T_(D^c), bounded f:D^c→[0,∞), and bounded c:D→[0,∞). Define the boundary payoff as f(X_T) on {T<∞} and zero on {T=∞}; put u(x)=E_x[boundary payoff+sum_{0≤m<T}c(X_m)] in [0,∞]. Then u=f on D^c and u(x)=c(x)+Pu(x) on D, with extended nonnegative arithmetic.",
+        "strategy": "Define the boundary payoff piecewise before random-time evaluation and split the reward pathwise at the first step. Apply the future-path and one-step Markov identities to bounded truncations; locally identify each countable kernel integral with its support-restricted matrix row sum using simple integrals, atomic weights, MCT and Tonelli. Then pass the reward and state-function truncations to the limit. AC is used by the canonical-law and conditional-expectation/Markov inputs.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "lem-bounded-function-form-of-the-markov-property",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
+          "def-nonnegative-extended-series",
+          "def-nonnegative-simple-measurable-function",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-for-nonnegative-double-series",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-initial-distribution-of-a-markov-chain"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-superharmonic-majorants-bound-exit-costs",
+        "kind": "theorem",
+        "title": "Superharmonic majorants bound exit costs",
+        "statement": "Assume AC. In the preceding exit-cost setting, let ψ:E→[0,∞) be finite-valued with Pψ(x)<∞ for all x, ψ≥f on D^c, and Lψ≤−c on D. Then u(x)≤ψ(x) for every x.",
+        "strategy": "First derive Kφ=Pφ for finite-valued nonnegative φ from finite-support simple truncations, then apply the bounded one-step Markov identity to ψ∧N and conditional monotone convergence to obtain E[ψ(X_{n+1})|F_n]=Pψ(X_n). For T=T_(D^c), define M_n=ψ(X_(n∧T))+sum_{m<n∧T}c(X_m). On {T>n}, Pψ+c≤ψ; event-integral conditioning gives E_x M_(n+1)≤E_x M_n, and induction from ψ(x) proves finite stopped expectations. Pointwise, the exit reward is at most liminf M_n both on finite-exit and nonexit paths; Fatou gives u≤ψ. AC is used by canonical laws and conditional expectation suppliers. No optional-stopping limit or X_∞ is used.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "thm-first-step-equations-for-nonnegative-exit-costs",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "def-nonnegative-extended-series",
+          "def-nonnegative-simple-measurable-function",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-bounded-function-form-of-the-markov-property",
+          "thm-conditional-monotone-convergence",
+          "thm-fatou-lemma",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf",
+              "locator": "§2, equation (4), printed/PDF p. 3, defines the nonnegative exit payoff and pre-exit running cost. §3, Lemma 24.6, printed/PDF p. 5, and Theorem 24.7 with proof, printed/PDF p. 6, state the superharmonic-majorant principle. The source proof's displayed stopped-limit equality on nonexit paths is not used; this item proves the bound from finite-time stopped expectations and Fatou and adds pointwise finite Pψ to justify the unbounded one-step conditional identity."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-expected-exit-time-solves-the-poisson-equation",
+        "kind": "corollary",
+        "title": "Expected exit time solves the Poisson equation",
+        "statement": "Assume AC. If E_xT_(D^c)<∞ for every x, then v(x)=E_xT_(D^c) is finite, v=0 on D^c, and Lv=−1 on D. This hypothesis holds when E is finite and irreducible and D is proper.",
+        "strategy": "Set f=0 and c=1 in the first-step theorem; the path cost equals T even on nonexit as an extended sum. Under the stated global finiteness, v(x)=1+Pv(x) on D implies Pv(x)<∞, so finite drift is defined and equals −1. In the finite irreducible proper-domain case apply the earlier geometric-tail lemma to A=D^c. AC is inherited from first-step conditioning.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-initial-distribution-of-a-markov-chain",
+          "thm-first-step-equations-for-nonnegative-exit-costs",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "lem-finite-irreducible-chain-hitting-time-geometric-tail"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf",
+              "locator": "§2 equation (4) and Example 24.3, printed p. 3/PDF p. 3; Theorem 24.4 and its proof, printed p. 4/PDF p. 4, state the first-step equation and its finite-valued generator form. Lemma 24.5 and its proof, printed p. 4/PDF p. 5, motivate the finite-mean bound, but its statement omits A nonempty although its proof requires a path to A; the library lemma explicitly assumes a nonempty target."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-lyapunov-drift-bound-for-markov-chain-hitting-times",
+        "kind": "theorem",
+        "title": "Lyapunov drift bound for hitting times",
+        "statement": "Assume AC. Let E be at most countable with sigma-algebra 2^E, let K be a probability kernel, and set p(x,y)=K(x,{y}). For each x∈E, let P_x be the canonical path-space chain law with initial measure δ_x and transition kernel K, and let E_x be its expectation. For A⊆E, define T_A=inf{n≥0:X_n∈A}. If ψ:E→[0,∞) is finite-valued with Pψ(x)<∞ for every x and Lψ(x)≤−1 on E\\A, using the support-restricted kernel action and finite drift, then E_x[T_A]≤ψ(x) for every x. Consequently P_x(T_A<∞)=1.",
+        "strategy": "Fix x under its canonical law, whose existence follows from AC. Set D=A^c, use boundary payoff f=0 on A and unit running cost c=1 on D. The pathwise identity sum_{n≥0}1_{n<T_A}=T_A holds in the extended nonnegative integers, including T_A=0 and T_A=∞, so the first-step exit cost is E_x[T_A]. The hypotheses then match the superharmonic-majorant theorem: ψ≥f on A, Lψ≤−c on D, and Pψ is finite everywhere. Its bound gives E_x[T_A]≤ψ(x); monotonicity of the nonnegative integral then implies P_x(T_A=∞)=0. If A=E, T_A=0. If A=∅ and E is nonempty, the hypotheses are inconsistent because they would imply ∞≤ψ(x). AC is used for the pointwise canonical path laws and the prior exit-cost/majorant results.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-measure-kernel-and-probability-kernel",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "prop-dirac-measure-is-a-probability-measure",
+          "cor-canonical-markov-chain-on-path-space",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-first-step-equations-for-nonnegative-exit-costs",
+          "thm-superharmonic-majorants-bound-exit-costs"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf",
+              "locator": "§2 equation (4), printed/PDF p. 3, defines the exit payoff and pre-exit cost; §2 Theorem 24.4, printed/PDF p. 4, gives the first-step equation; §3 Theorem 24.8 and its complete proof, printed/PDF p. 7 (PDF parser lines 312–336), states the Lyapunov hitting-time bound by specializing Theorem 24.7 to D=A^c, f=0 and c=1. The source takes A proper and does not separately state Pψ<∞, while §1 initially defines the generator for bounded functions. This item uses the earlier library majorant theorem with explicit finite Pψ hypotheses and treats A=E directly."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 288.128,
+    "id": "recurrence-transience-and-hitting-times-for-markov-chains-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Recurrence Transience and Hitting Times for Markov Chains — Examples",
+    "companion": "recurrence-transience-and-hitting-times-for-markov-chains",
+    "requires": [
+      "recurrence-transience-and-hitting-times-for-markov-chains"
+    ],
+    "items": [
+      {
+        "id": "ex-communicating-classes-of-a-finite-chain",
+        "kind": "example",
+        "title": "Communicating classes in a four-state chain",
+        "statement": "On {0,1,2,3} take p(0,0)=1, p(1,2)=p(2,1)=1, and p(3,3)=p(3,0)=1/2. The classes are {0}, {1,2}, {3}; the first two are recurrent and {3} is transient.",
+        "strategy": "The positive-edge graph yields exactly the three mutual-accessibility classes. States 0 and the deterministic 1↔2 cycle return with probability one. From 3 the first positive return occurs exactly on the self-loop, with probability 1/2; otherwise the chain is absorbed at 0. The direct finite-path calculation is choice-free.",
+        "deps": [
+          "def-accessibility-communication-and-irreducibility",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-hitting-return-and-visit-times",
+          "lem-communication-is-an-equivalence-relation",
+          "def-recurrent-and-transient-state"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Example 5.3.4, printed pp. 283–284 (PDF pp. 291–292): a different seven-state chain illustrates graph-based recurrence classification."
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§1.7, accessibility and communicating classes, printed pp. 15–16 (PDF pp. 31–32); finite-state setting."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-gamblers-ruin-hitting-probabilities-from-harmonicity",
+        "kind": "example",
+        "title": "Gambler’s ruin from harmonicity",
+        "statement": "Assume AC. For each integer N≥1, let E_N={0,…,N} and give 0 and N absorbing rows and each interior state equal probability 1/2 of moving to either neighbor. With T_j=inf{n≥0:X_n=j}, the deterministic-start canonical chain satisfies P_i(T_N<T_0)=i/N for every i∈E_N.",
+        "strategy": "Build the finite kernel as rows of Dirac measures and take its canonical deterministic-start laws. For an interior state i, the next i left moves followed by absorption at 0 have probability 2^(−i)≥2^(−N); bounded-future conditioning gives the same lower bound on every N-step survival block, so the boundary-hitting time is finite almost surely. The function h(i)=i/N has boundary values 0 and 1 and is harmonic in the interior. Apply the bounded Dirichlet theorem and identify its boundary payoff with 1_{T_N<T_0}. AC enters through canonical chain laws, conditional Markov identities, and Dirichlet uniqueness.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-kernel-and-probability-kernel",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "prop-dirac-measure-is-a-probability-measure",
+          "cor-canonical-markov-chain-on-path-space",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-dirichlet-problem-for-finite-state-hitting-probabilities",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "thm-nonnegative-weighted-sums-of-measures"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "§2.1, Proposition 2.1 and the complete proof of (2.1), printed p. 21 (PDF p. 36): the source derives the first-step recursion and solves it; the local geometric tail below makes finite absorption explicit before using the boundary-value theorem."
+            },
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf",
+              "locator": "§2, Example 24.3 and complete Theorem 24.4 proof, printed/PDF pp. 3–4 (PDF parser lines 79–91, 117–187): the two-target probability is a nonnegative zero-running-cost exit payoff and obeys first-step equations; this is context only, and the source does not provide the finite absorption proof or the harmonic solution used here."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-birth-and-death-chain-recurrence-criterion",
+        "kind": "example",
+        "title": "Birth–death recurrence through scale products",
+        "statement": "Assume AC. Let X be a Markov chain on N_0 whose only possible transitions from i are to i+1, i, and (when i≥1) i−1. Write p_i=P(i,i+1)>0 for i≥0, q_i=P(i,i−1)>0 for i≥1, q_0=0, and r_i=P(i,i)≥0, with p_i+q_i+r_i=1 for i≥1 and p_0+r_0=1. Put s_0=1, s_m=∏_{j=1}^m(q_j/p_j), S=∑_{m≥0}s_m, and H(i)=∑_{m=0}^{i−1}s_m. Then state 0 is recurrent iff S=∞. For every i≥1, P_i(T_0=∞)=H(i)/S if S<∞, and P_i(T_0=∞)=0 if S=∞.",
+        "strategy": "First verify irreducibility from the positive nearest-neighbor routes. For M>i, stop the original chain at its first hit of {0,M}; the stopped process has the finite kernel with endpoints absorbing and the original birth–death rows in the interior. Verify this kernel and Markov property. A common positive-probability downward path gives a geometric tail for the boundary hitting time, so the finite-state Dirichlet theorem applies. Show H(i)=sum_{m=0}^{i−1}s_m solves the finite difference equation and obtain P_i(T_M<T_0)=H(i)/H(M); the stopped and original paths agree up to the boundary. The events decrease with M; for each M boundary absorption is almost sure, while a path hitting 0 at finite time has a finite maximum before that hit. Thus their intersection agrees with {T_0=∞} up to a null set. Continuity from above yields the escape probability in both S cases. Finally use the bounded future-path Markov property to derive P_0(T_0^+<∞)=r_0+p_0P_1(T_0<∞); p_0>0 gives both recurrence iff directions. AC is used for canonical chain laws, bounded future-path conditioning, finite-dimensional laws, and the Dirichlet theorem.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-accessibility-communication-and-irreducibility",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-hitting-return-and-visit-times",
+          "def-recurrent-and-transient-state",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "thm-dirichlet-problem-for-finite-state-hitting-probabilities",
+          "thm-continuity-from-above-for-measures",
+          "cor-canonical-markov-chain-on-path-space",
+          "def-measure-kernel-and-probability-kernel",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Example 5.3.9 and its scale-product derivation, Theorem 5.3.10 and its complete stopped-martingale argument, and Theorem 5.3.11 plus the escape-probability formula, printed pp. 285–286/PDF pp. 292–293 (official PDF parser lines 19286–19338). The text uses finite-interval exit almost surely in Theorem 5.3.10 without deriving it; the local proof supplies a common-path geometric bound and derives the limiting events explicitly."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-green-kernel-for-a-biased-random-walk-on-the-integers",
+        "kind": "example",
+        "title": "Green kernel of a biased integer walk",
+        "statement": "Assume AC. Let p>q>0 with p+q=1, r=q/p, and K(z,·)=pδ_(z+1)+qδ_(z−1) on Z with its full power-set sigma-algebra. Use the canonical deterministic-start laws P_x and write P^(n) for the n-step transition matrix of K, so G(x,y)=Σ_{n≥0}P^(n)(x,y). Then G(x,y)=1/(p−q) for y≥x and G(x,y)=r^(x−y)/(p−q) for y<x.",
+        "strategy": "For a finite interval [a,b] of integers, the absorbed nearest-neighbor kernel has a uniform all-right path of probability at least p^(b−a) from every interior state, so a bounded-future Markov bound proves almost-sure exit (the cited birth–death proof omits this step). The harmonic differences d_(i+1)=r d_i solve the bounded Dirichlet problem and give the two finite-interval exit formulas. Increasing the opposite boundary to infinity and continuity from below give P_x(T_y<∞)=1 for x<y and r^(x−y) for x>y. From y, the positive return probability is q·1+p·r=2q<1; the earlier recurrence/Green criterion gives G(y,y)=1/(p−q). A bounded-functional strong-Markov decomposition at T_y, followed by nonnegative Tonelli, gives G(x,y)=P_x(T_y<∞)G(y,y). AC is used for the canonical chain laws and the conditional Markov/strong-Markov and recurrence criteria interfaces.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable",
+          "def-green-kernel-of-a-transient-chain",
+          "def-hitting-return-and-visit-times",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-recurrent-and-transient-state",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "prop-dirac-measure-is-a-probability-measure",
+          "cor-canonical-markov-chain-on-path-space",
+          "lem-geometric-sequence-null",
+          "thm-continuity-from-below-for-measures",
+          "thm-recurrence-transience-equivalent-criteria",
+          "thm-dirichlet-problem-for-finite-state-hitting-probabilities",
+          "thm-discrete-strong-markov-property",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Example 5.3.9 and Theorems 5.3.10–5.3.11 with their complete scale-difference and stopped-martingale arguments, printed pp.285–286/PDF pp.292–293 (official PDF parser lines 19286–19338). The chain assumptions are birth–death probabilities p_i,q_i>0 on the half-line; translation and constant ratio specialize the scale formula to the integer walk. Theorem 5.3.10 uses finite-interval exit almost surely without proving it, so the item supplies a uniform path-block bound."
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§9.4, Example 9.9 and equation (9.20), printed pp.121–122/PDF pp.136–137 (official PDF parser lines 8649–8703), gives the finite-path biased gambler’s-ruin formula by effective resistance. §21.1, Example 21.2 and Proposition 21.3 with the complete diagonal-return proof, printed pp.291–293/PDF pp.306–308 (lines 21976–22088), is context for escape and geometric visit counts; it assumes finite-interval exit in Example 21.2 and irreducibility in Proposition 21.3, while the item proves the needed claims locally. Example 21.2’s displayed identification of the return-escape probability from 0 with the no-hit probability from 1 appears to omit the first-step factor; the proof here computes the exact return probability independently. §9.6, Lemma 9.6 and complete geometric-count argument, printed p.120/PDF p.135 (lines 8584–8596), concerns finite-network Green functions and is used only as context."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-period-two-of-simple-random-walk-on-a-bipartite-graph",
+        "kind": "example",
+        "title": "Period two on a bipartite graph",
+        "statement": "Let G=(V,F) be an at most countable simple undirected graph that is connected, locally finite, bipartite with partition V=V_0⊔V_1, and has no isolated vertices. Write N(x)={y:{x,y}∈F}. For simple random walk p(x,y)=1/|N(x)| if y∈N(x), and p(x,y)=0 otherwise. Every vertex has period d(x)=2.",
+        "strategy": "The bipartition forces n-step support to alternate sides, so each positive return time is even. A neighbor and the immediate backtrack show p^(2)(x,x)>0, making the period exactly two at a fixed vertex. Connectedness gives positive-probability paths both ways between vertices, and the period-invariance lemma transfers this value to the whole class.",
+        "deps": [
+          "def-period-of-a-state",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-accessibility-communication-and-irreducibility",
+          "lem-period-is-constant-on-a-communicating-class"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§1.3 Lemma 1.6 and period-two partition/even-cycle discussion, printed pp. 7–8 (PDF pp. 23–24); §1.4 simple random walk on graphs, printed p. 8 (PDF p. 24). The general locally finite bipartite claim is derived locally."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-lazy-chain-is-aperiodic",
+        "kind": "example",
+        "title": "Laziness removes periodicity",
+        "statement": "Let E be a nonempty at most countable state space and p an irreducible transition matrix on E. Define I(x,y)=1_{x=y} and q=(I+p)/2. Then q is an irreducible aperiodic transition matrix on E.",
+        "strategy": "Entrywise q(x,y)=1/2 1_{x=y}+1/2 p(x,y), so q is stochastic. Chapman–Kolmogorov and nonnegative-series order give q^(n)(x,y)≥2^(−n)p^(n)(x,y); every p-positive accessibility witness is therefore q-positive. For every x, q(x,x)≥1/2, so 1 is a positive return time and d_q(x)=1. The proof is choice-free.",
+        "deps": [
+          "def-aperiodic-chain",
+          "def-period-of-a-state",
+          "def-accessibility-communication-and-irreducibility",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-nonnegative-extended-series"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§1.3, Irreducibility and Aperiodicity: irreducibility and period definitions, Lemma 1.6, the lazification paragraph and Example 1.8, printed pp. 7–8/PDF pp. 22–23 (official PDF parser lines 782–888). The source section is in the finite-state introduction: it defines Q=(I+P)/2, notes Q(x,x)>0 for all x, and calls the irreducible lazy chain aperiodic; Example 1.8 checks the lazy cycle. This item locally proves stochasticity, accessibility preservation, and the all-state period-one claim for nonempty at most countable E."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-recurrence-is-not-a-property-shared-by-different-communicating-classes",
+        "kind": "counterexample",
+        "title": "Different classes can have different recurrence types",
+        "statement": "On E={0,1}, let p=[[1,0],[1/2,1/2]] with rows and columns ordered 0,1. The communication classes are {0} and {1}; state 0 is recurrent and state 1 is transient.",
+        "strategy": "Compute the two-state transition powers directly: from 0 the chain remains at 0, so p^(n)(0,1)=0 for every n, while p(1,0)=1/2. Hence the only communicating classes are the singletons. Starting at 0 gives T_0^+=1 almost surely. Starting at 1 gives T_1^+=1 on the first self-loop, probability 1/2, and T_1^+=infinity after the jump to 0, which is absorbing; therefore the return probability is 1/2. This explicit finite witness is choice-free and uses no later class-property result.",
+        "deps": [
+          "def-accessibility-communication-and-irreducibility",
+          "def-recurrent-and-transient-state",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "§5.3, Theorem 5.3.2 and complete proof, printed pp. 282–283/PDF pp. 289–290, gives the recurrence-propagation result along positive accessibility; Example 5.3.6, printed p. 283/PDF p. 290, gives an analogous absorbing-zero/transient-positive-state example. The exact two-state matrix here is a local finite witness, verified directly."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting",
+        "kind": "counterexample",
+        "title": "A bounded harmonic boundary problem without uniqueness",
+        "statement": "For E={a,b}, take the identity transition matrix and A={a} with boundary value f(a)=1. Every v_c(a)=1,v_c(b)=c, c∈[0,1], is a bounded solution of v=f on A and v=Pv on A^c, where Pq(x)=Σ_{y∈E}p(x,y)q(y), but under the deterministic start at b, P_b(T_A<∞)=0. Thus without almost-sure boundary hitting the bounded harmonic extension need not be unique; the explicit witness uses no choice.",
+        "strategy": "Specify the identity transition matrix and its deterministic fixed-start laws. Define P by its finite row sum. Compute Pv_c(b)=p(b,a)v_c(a)+p(b,b)v_c(b)=c, verify v_c(a)=f(a), and compare c=0 with c=1. From b the path is constantly b, so T_A=∞ and the hitting probability is zero. This gives an explicit counterexample to dropping the almost-sure-hitting premise in the bounded Dirichlet uniqueness theorem; the finite calculation is choice-free.",
+        "deps": [
+          "thm-dirichlet-problem-for-finite-state-hitting-probabilities",
+          "def-hitting-return-and-visit-times"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf",
+              "locator": "§9.2, Proposition 9.1 and complete proof, printed pp. 117–118 (PDF pp. 132–133): its uniqueness result assumes irreducibility; this two-absorbing-state example violates that premise and is derived locally."
+            },
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf",
+              "locator": "§2, Example 24.3 and complete Theorem 24.4 first-step proof, printed/PDF pp. 3–4: hitting-probability and nonnegative exit-equation context only; no uniqueness counterexample is stated there."
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-a-transient-chain-can-return-with-positive-probability",
+        "kind": "counterexample",
+        "title": "A transient chain can return with positive probability",
+        "statement": "Assume AC. In the biased random walk on Z with p>q>0, the first return probability to any state is 2q, strictly between zero and one.",
+        "strategy": "From x+1 the probability to hit x is q/p and from x−1 it is one; condition on the first step to obtain p(q/p)+q=2q∈(0,1). Thus the chain is transient while return remains possible, and the diagonal Green value is finite. AC is inherited from the Green-kernel calculation.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hitting-return-and-visit-times",
+          "def-recurrent-and-transient-state",
+          "thm-recurrence-transience-equivalent-criteria",
+          "ex-green-kernel-for-a-biased-random-walk-on-the-integers"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin, Peres and Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-negative-drift-reflected-walk-has-a-finite-mean-small-set-hitting-time",
+        "kind": "example",
+        "title": "Negative drift gives a finite mean small-set hit",
+        "statement": "Assume AC. Let Z_n be iid integrable integer-valued increments with E Z_1<0 and X_(n+1)=(X_n+Z_(n+1))^+ on N_0. There are M<∞ and ε>0 such that for A={0,…,M}, E_xT_A≤x/ε for all x.",
+        "strategy": "For ψ(x)=x/ε, E_x(X_1−x)≤E[Z_1 1_{Z_1>−x}], which converges to E Z_1<0 by dominated convergence. Choose ε>0 and M so the drift is ≤−ε for x>M; integrability of Z ensures Pψ(x)<∞. Then Lψ≤−1 on A^c, and the Lyapunov theorem gives the bound; for x∈A both sides cover T_A=0. AC is inherited from the Lyapunov theorem.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable",
+          "def-hitting-return-and-visit-times",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-nonnegative-discrete-drift-for-countable-chains",
+          "def-nonnegative-extended-series",
+          "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-simple-measurable-function",
+          "def-probability-measure",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-dominated-convergence",
+          "thm-lyapunov-drift-bound-for-markov-chain-hitting-times",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Lecture Notes on Measure-Theoretic Probability Theory, Note 24",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        },
+        "status": "draft",
+        "dependency_level": 5
+      }
+    ]
+  }
+]

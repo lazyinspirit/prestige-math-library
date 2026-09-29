@@ -1,0 +1,63 @@
+# step3b: A/B pair finite-proper-and-projective-morphisms
+
+- Run: frontier-36-complete
+- A page: finite-proper-and-projective-morphisms
+- B page: finite-proper-and-projective-morphisms-examples
+- Batches: 5
+- Own only this pair; preserve other pairs in shared batch files.
+- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.
+- Read current manifests, coverage, prose, plan and dependency records.
+- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):
+  0. def-affine-local-quasi-coherent-algebra (finite-proper-and-projective-morphisms)
+  0. def-algebraically-independent-finite-tuples-over-a-field (finite-proper-and-projective-morphisms)
+  0. def-finite-morphism-schemes (finite-proper-and-projective-morphisms)
+  0. def-fpqc-morphism-schemes (finite-proper-and-projective-morphisms)
+  0. def-projective-morphism-pre-proj (finite-proper-and-projective-morphisms)
+  0. def-quasi-finite-morphism-schemes (finite-proper-and-projective-morphisms)
+  0. def-universally-closed-morphism (finite-proper-and-projective-morphisms)
+  0. lem-closed-immersion-affine-quotient-and-base-change (finite-proper-and-projective-morphisms)
+  0. lem-integral-finite-type-scheme-function-field (finite-proper-and-projective-morphisms)
+  0. lem-line-bundles-on-projective-three-space-restrict-by-degree (finite-proper-and-projective-morphisms)
+  0. lem-quasi-compact-scheme-image-specialization-closed (finite-proper-and-projective-morphisms)
+  1. def-proper-morphism (finite-proper-and-projective-morphisms)
+  1. def-quasi-projective-morphism (finite-proper-and-projective-morphisms)
+  1. lem-affine-morphism-structure-sheaf-pushforward-localizes (finite-proper-and-projective-morphisms)
+  1. lem-finite-morphism-affine (finite-proper-and-projective-morphisms)
+  1. lem-fpqc-cover-submersive (finite-proper-and-projective-morphisms)
+  1. lem-quasi-finite-morphism-fibre-characterization (finite-proper-and-projective-morphisms)
+  1. lem-relative-algebraic-constants-fg-field-finite (finite-proper-and-projective-morphisms)
+  1. lem-relative-spec-glues-affine-algebras (finite-proper-and-projective-morphisms)
+  1. lem-universally-closed-valuative-existence-quasicompact (finite-proper-and-projective-morphisms)
+  1. ex-finite-power-map-affine-line (finite-proper-and-projective-morphisms-examples)
+  2. def-complete-variety (finite-proper-and-projective-morphisms)
+  2. lem-finite-stable-base-change-composition (finite-proper-and-projective-morphisms)
+  2. lem-fpqc-descent-properness-components (finite-proper-and-projective-morphisms)
+  2. lem-proper-local-on-base (finite-proper-and-projective-morphisms)
+  2. lem-proper-stable-base-change (finite-proper-and-projective-morphisms)
+  2. lem-proper-stable-composition (finite-proper-and-projective-morphisms)
+  2. thm-affine-morphism-relative-spec-characterization (finite-proper-and-projective-morphisms)
+  2. thm-proper-morphism-closed-image (finite-proper-and-projective-morphisms)
+  2. thm-valuative-criterion-properness (finite-proper-and-projective-morphisms)
+  2. cex-affine-line-not-proper (finite-proper-and-projective-morphisms-examples)
+  2. ex-empty-morphism-proper-projective (finite-proper-and-projective-morphisms-examples)
+  3. cor-proper-birational-normal-curve-isomorphism-off-finite-set (finite-proper-and-projective-morphisms)
+  3. lem-proper-fibres-proper (finite-proper-and-projective-morphisms)
+  3. rem-proper-not-topologically-compact-over-arbitrary-field (finite-proper-and-projective-morphisms)
+  3. thm-finite-morphism-integral-closed (finite-proper-and-projective-morphisms)
+  3. thm-projective-space-proper-over-base (finite-proper-and-projective-morphisms)
+  3. thm-properness-descent-fpqc (finite-proper-and-projective-morphisms)
+  3. cex-open-immersion-not-proper (finite-proper-and-projective-morphisms-examples)
+  4. cor-finite-morphism-proper (finite-proper-and-projective-morphisms)
+  4. lem-closed-gluing-of-two-projective-three-spaces-is-proper (finite-proper-and-projective-morphisms)
+  4. ex-projective-space-valuative-extension (finite-proper-and-projective-morphisms-examples)
+  5. lem-closed-immersion-proper (finite-proper-and-projective-morphisms)
+  6. lem-proper-source-to-separated-target-proper (finite-proper-and-projective-morphisms)
+  6. thm-projective-morphism-proper (finite-proper-and-projective-morphisms)
+  6. ex-closed-immersion-finite-proper (finite-proper-and-projective-morphisms-examples)
+  6. ex-proper-image-projective-variety (finite-proper-and-projective-morphisms-examples)
+  7. rem-projective-versus-proper (finite-proper-and-projective-morphisms)
+  7. thm-global-functions-proper-integral-variety (finite-proper-and-projective-morphisms)
+  7. cex-proper-not-necessarily-projective (finite-proper-and-projective-morphisms-examples)
+  8. cor-no-nonconstant-map-proper-variety-to-affine-line (finite-proper-and-projective-morphisms)
+  8. cex-proper-not-affine-positive-dimensional (finite-proper-and-projective-morphisms-examples)
+- Write research/frontier-36-complete-step3b-pair-finite-proper-and-projective-morphisms.md.

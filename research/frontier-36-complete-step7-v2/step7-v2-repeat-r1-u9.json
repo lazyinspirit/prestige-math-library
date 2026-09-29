@@ -1,0 +1,90 @@
+{
+  "run": "frontier-36-complete",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "f821cfd4f12bc410cdd42b717129ca3aebad6279156bf28b3285e82cb40b4754",
+  "decisions": [
+    {
+      "id": "ex-cohomology-o-d-projective-line-all-d",
+      "model": "gpt-6-sol",
+      "context_sha256": "3f3ff9a0de7c6e83dd9f7ed59480fa48cecd033ad7419913232aa1f59e6824f1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F5 used invertibility to establish coherence and hence the defined Euler characteristic in 1.1, but cited only definitions. Repaired the missing justification locally: multiplication by x_i^d is an invertible degree-shifting map on each standard chart, compatible with restriction, for all integer d.",
+      "uncertain": false,
+      "source_urls": [
+        "https://stacks.math.columbia.edu/tag/01MM"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "rem-base-change-is-not-automatic",
+      "model": "gpt-6-sol",
+      "context_sha256": "73fc64863a972f49bd58e7e159ef94d28da0797651e6ed75b210c5098be27a46",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The only-when direction is false. For A=k[a,b]/(ab), the same gluing equations give H^0(E)=ann(a)=(b), including after localisation. At m=(a,b), (b)/m(b)=(b)/(b^2) has dimension one; E_m splits and H^0(E_m)=k. The comparison sends a section beta*v_i with beta in (b) to zero modulo m. Thus equal dimensions coexist with the zero comparison map. Changed only-when to whenever, and qualified the final rank warning as a failure of a general inference.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-cohomology-o-d-projective-line-all-d",
+      "disposition": "repaired",
+      "post_sha256": "33e77287aadfbe1fbcc7a1accda85fc5f3717d2768b88de595b8b93fdeef3c20",
+      "review_context_sha256": "f54908bb7178ed12ad2e95358a2a0244e1db6a00dfe8928f0ecfd203a2d490ef",
+      "reason": "Author repair check: the two standard charts trivialize every twist by x_i^d, including negative d. Local Noetherianity then gives coherence; properness licenses chi. The supplied monomial bases have d+1 elements for d>=0 and -d-1 for d<=-2; at d=-1 both vanish. No claim or choice assumption changed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://stacks.math.columbia.edu/tag/01MM"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "rem-base-change-is-not-automatic",
+      "disposition": "repaired",
+      "post_sha256": "ef85d284467a7e92925cf3005c3a7189db3e4540c47e6856a8c7a3e816d7e7b4",
+      "review_context_sha256": "9a7a9b340f6962a8474d5825bff908a4b8557527905b6a83425146af8727045d",
+      "reason": "Author repair check: clauses (i) and (ii) match the supplier theorem under proper finite presentation and coherent base-flat hypotheses with AC/DC retained. Surjectivity implies an isomorphism and hence equality of dimensions; its converse is not asserted. The existing k[a] bundle has h0=1 only at (a), while every neighbourhood contains the generic point with h0=0, contradicting local constant rank if phi0 were surjective.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical defect ledger",
+      "id": "ex-cohomology-o-d-projective-line-all-d",
+      "status": "repaired",
+      "defect_type": "dependency_citation",
+      "reason": "F5 used invertibility to establish coherence and hence the defined Euler characteristic in 1.1, but cited only definitions. Repaired the missing justification locally: multiplication by x_i^d is an invertible degree-shifting map on each standard chart, compatible with restriction, for all integer d."
+    },
+    {
+      "ledger": "canonical defect ledger",
+      "id": "rem-base-change-is-not-automatic",
+      "status": "repaired",
+      "defect_type": "logic",
+      "reason": "The only-when direction is false. For A=k[a,b]/(ab), the same gluing equations give H^0(E)=ann(a)=(b), including after localisation. At m=(a,b), (b)/m(b)=(b)/(b^2) has dimension one; E_m splits and H^0(E_m)=k. The comparison sends a section beta*v_i with beta in (b) to zero modulo m. Thus equal dimensions coexist with the zero comparison map. Changed only-when to whenever, and qualified the final rank warning as a failure of a general inference."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "status": "no_update",
+      "reason": "No published-item mathematical defect was found in the assigned repair review; both repaired targets are draft frontier items."
+    }
+  ],
+  "repair_notes": [
+    "Work completed in assigned order: ex-cohomology-o-d-projective-line-all-d, then rem-base-change-is-not-automatic. Review hashes were captured immediately after each item review before another item edit; these are author repair checks, not independent reviews of the repairs.",
+    "For the first item, read the twisting-sheaf definition, the complete standard-graded invertibility theorem and its chart proof, Euler-characteristic definition, projective cohomology theorem, relevant coherence/properness statements, owning contract and page. Stacks 27.10.2 and 27.10.3 were actually consulted including their complete proofs at https://stacks.math.columbia.edu/tag/01MM. They establish chart triviality by invertible homogeneous powers and global invertibility on a degree-one cover. F5 now supplies that local proof using its existing definitions, so no new item or dependency is needed. The mathematical Example and all numerical formulas are unchanged.",
+    "For the second item, checked the base-change theorem Statement, fibre-map and fibre definitions, companion gluing construction and section calculation, owning contract and page. Directly checked the rejected tuple witness: Laurent coefficient comparison over A=k[a,b]/(ab) forces sections beta*v_i with a*beta=0, so H0(E)=(b). The same calculation after localisation identifies f_*E with the sheaf of (b). At m=(a,b), its fibre is (b)/(b^2)=k, while the split fibre bundle has H0=k; reduction sends beta to zero, proving that equal dimensions do not imply surjectivity. This evidence is a direct calculation, not a claim that an external source contains the witness.",
+    "The remark retains the actual cohomology-and-base-change hypotheses and both adjacent-degree criteria. Replaced the false necessary-condition wording by the sufficient-condition implication and qualified the final rank warning. The k[a] jumping example still proves nonautomatic base change. AC/DC assumptions are retained.",
+    "Necessary local metadata correction: under acquire/reread/edit/JSON-parse/release with tools/step7-shared-write-lock.mjs, corrected the rem-base-change-is-not-automatic degenerate-boundary evidence in both owning batch-9 and aggregate proof contracts. Before: the base is the one-dimensional affine line rather than a Noetherian or projective base. After: the base is the Noetherian one-dimensional affine line and need not be projective. No other contract entries were altered.",
+    "Exact section comparison: first edit is confined to F5 in Facts & Assumptions; the Example is unchanged. Second edits are confined to Remark; that item has no Statement or Definition section. Thus no Statement/Definition changed, no new interface was created, and downstream is empty under the prescribed section rule. No published defect was discovered in this review; no shared defect or published ledger was edited.",
+    "Validation: node tools/tsx-run.mjs tools/precheck.mts with both assigned paths exited 0, reporting one proof-bearing item checked and zero failing (the remark has no proof). node tools/rendercheck.mjs with both paths exited 0: both parse/render cleanly. node tools/depcheck.mjs --quiet exited 0 with 278 repository-wide warnings and no cycles, unresolved references or draft items on published pages. Both modified contract files and this result parse as JSON. No judges, item gates, stamps or central certificates were written. No unresolved mathematical obligation remains in this batch."
+  ]
+}

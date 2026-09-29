@@ -6,9 +6,7 @@ items: []
 examples:
   - ex-all-finite-dimensional-irreducible-sl-two-modules
   - ex-verma-modules-for-sl-two
-  - ex-standard-and-dual-representations-of-sl-n-by-highest-weights
   - ex-symmetric-powers-as-highest-weight-modules
-  - ex-exterior-powers-and-fundamental-weights-of-sl-n
   - ex-the-adjoint-representation-and-the-highest-root
   - ex-weyl-character-and-dimension-formulas-for-sl-two
   - ex-the-eight-dimensional-adjoint-representation-of-sl-three

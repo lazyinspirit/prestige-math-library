@@ -208,13 +208,13 @@ categorical braid-action results is used in the geometry.
 | `lem-geometric-three-strand-braid-relation` (lemma) | `[def-elementary-geometric-half-twist, def-braid-isotopy-relative-top-and-bottom]` | In a disk containing three adjacent points, isotope $\sigma_i\sigma_{i+1}\sigma_i$ to $\sigma_{i+1}\sigma_i\sigma_{i+1}$, holding the outside cylinder fixed. | GM §1.5 and §3, relation (3.1). |
 | `lem-geometric-braids-admit-generic-polygonal-representatives` (lemma) | `[def-geometric-braid-with-setwise-endpoints, def-braid-isotopy-relative-top-and-bottom]` | Approximate within uniform collision and boundary margins, then perturb interior vertices to avoid finitely many proper polynomial conditions: projected equality at a breakpoint and simultaneous crossings of distinct pairs on the same affine piece. The strands share breakpoint heights; each projected crossing lies alone in a piece interior and is transverse. | GM §1.5, printed pp. 7--8; local finite-avoidance proof. |
 | `lem-every-geometric-braid-is-a-word-in-half-twists` (lemma) | `[def-elementary-geometric-half-twist, def-braid-isotopy-relative-top-and-bottom]` | Put a generic planar projection in normal position, order its finitely many crossings by height, and strip off the corresponding signed half twists. | GM §1.5; BB §1.2. |
-| `prop-the-artin-presentation-surjects-onto-geometric-braids` (proposition) | `[def-braid-group-by-the-artin-presentation, thm-geometric-braids-form-a-group, lem-geometric-far-commutativity, lem-geometric-three-strand-braid-relation, lem-every-geometric-braid-is-a-word-in-half-twists, thm-von-dyck]` | Relations give a homomorphism and geometric generation gives surjectivity. Injectivity is explicitly not inferred from pictures; BG-3 proves it by the independent Fox--Neuwirth configuration-cell argument. | GM §1.5 and §3 through Proposition 3.1 setup; BB §1.2. |
+| `prop-the-artin-presentation-surjects-onto-geometric-braids` (proposition) | `[def-braid-group-by-the-artin-presentation, thm-geometric-braids-form-a-group, lem-geometric-far-commutativity, lem-geometric-three-strand-braid-relation, lem-every-geometric-braid-is-a-word-in-half-twists, thm-von-dyck]` | Relations give a homomorphism and geometric generation gives surjectivity. Injectivity is not inferred here; BG-6 proves it by an independent braid-combing kernel argument. | GM §1.5 and §3 through Proposition 3.1 setup; BB §1.2. |
 
 **Proof seam.** This page intentionally proves only surjectivity of the Artin
-map. BG-3 proves injectivity after independently identifying geometric braids
-with configuration loops and computing the latter fundamental group from the
-Fox--Neuwirth stratification. Thus neither presentation completeness nor a
-later mapping-class theorem is smuggled into the geometric definition.
+map. BG-3 identifies geometric braids with configuration loops. BG-6 proves
+injectivity by braid combing, independently of the geometric generation
+argument. Thus presentation completeness is not assumed by the geometric
+definition.
 
 ### BG-1 — Geometric Braids and Artin Generators — Examples
 
