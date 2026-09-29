@@ -61,7 +61,7 @@ the design never admitted needing. Pages without item lists are marked `*` in th
 output and counted separately, so a green run never overclaims.
 
 Two further conventions the validator enforces: `requires` must be a **transitive
-reduction** (matching the birds-eye flowchart rule in CLAUDE.md), and a B page's
+reduction**, and a B page's
 forward citations — the D-TRIG exception, legitimate because B pages are leaves —
 must be **whitelisted** per page in `forwardRefs` and are then reported rather
 than hidden.

@@ -1,292 +1,35 @@
 # Orchestrator instructions
 
-Read [README.md](README.md) fully before acting in this repository.
+1. **Scope and references.** These instructions govern orchestrators and agents they spawn directly. Engine-dispatched agents follow their assigned prompts in `briefs/` and `briefs/tasks/`; `tools/autopilot/` owns dispatch and stage transitions. Read [README.md](README.md) fully. Use [SCHEMA.md](SCHEMA.md) for content rules, [WORKFLOW.md](WORKFLOW.md) for build controls, `tools/` for checks, and `research/` for plans and run evidence.
 
-## Rules
+2. **Working standard.** Answer the owner plainly and briefly. Stay within the assigned scope. Replace stale code, prompts, or documentation cleanly; do not layer fixes over them. After a major code change, update relevant documentation and commit both. Handle command prompts from spawned agents without asking the owner for approval.
 
-**1. Communication.** Answer the owner's questions fully and concisely in plain
-English. Avoid filler and unnecessary jargon. Get straight to the point whenever
-possible.
+3. **Default repair team.** At the start of each workflow step, inspect current engine findings and spawn up to ten `gpt-6-luna` agents at `max` effort to address flagged or escalated items. Use fewer when fewer disjoint repairs exist, and none when none exist. Give each agent exact item IDs and write scope. Keep their edits separate from active engine writers; the orchestrator owns integration and gate closure.
 
-**2. Clean implementation.** When building, rebuilding, or repairing a
-mechanism, do not patch over stale or broken code. Rewrite it cleanly so stale
-and broken code does not accumulate. Apply the same rule to prompts.
+4. **Mathematical integrity.** Before a fatal repair, understand the claim, proof, and actual dependencies. Helpers must check arguments independently, consult authoritative full texts when unsure, and report unresolved uncertainty. Never invent source reading, proof completion, confidence, or check results. Logical validity outranks prior acceptance, judges, and citations.
 
-**3. Conservative scope.** Stay within the owner's stated goals. Prefer
-high-impact, low-risk changes and avoid unnecessary expansion.
+5. **Supervision and gates.** Check a live run every ten minutes; intervene for blockers or stages that fail to close. Outside the authorized Step-7 loop, every failed gate is owner-held. Repair every rejected item, finish related writing, wait for writers to drain, refresh invalidated evidence on stable content, then retry that same gate. Do not use `retry` to start an automatic repair wave.
 
-**4. Fatal mathematical defects.** Before repairing an escalated fatal defect,
-fully understand the item and its dependencies. Never claim understanding you
-do not have. If any mathematics is uncertain, search the web and consult primary
-sources when possible. Repair the item only after resolving that uncertainty.
+6. **Published defects.** Keep mathematical findings, exact supplier mappings, repair strategy, and audit status in `research/published-consumer-supplier-ledger.md`; keep operational history in the run record. Confident early repairs needing no Phase-2 supplier are authorized one item at a time, including necessary dependency, home, and verification changes. Record local checks honestly; they are not independent audits. Published repairs have no item gate, rejudgment, or adjudication duty.
 
-Every workflow agent must be honest about its mathematical understanding.
-Whenever unsure, search the web and read authoritative sources before deciding.
-Report unresolved uncertainty; never invent proof completion or source reading.
-Logical validity is the ground truth. Independently check arguments: even an
-authoritative source, a judge, or an earlier acceptance can be mistaken.
+7. **Continuity.** Before handoff or compaction, record the objective, verified state, blockers, and next action in the appropriate durable artifact. Recheck that record against disk on return. Do not store credentials or transcripts.
 
-**5. Context continuity.** Before compaction or handoff, record the objective,
-verified state, open blockers, and next action in the appropriate durable
-artifact. After resuming, verify that record against disk. Never store
-credentials or transcripts.
+8. **Step 0 — plan.** Verify selected pairs and prerequisite availability, then run planning and preflight. Preserve the approved scope; resolve planning blockers before dispatch.
 
-**6. Workflow supervision.** While orchestrating the TypeScript workflow, check
-it every ten minutes for stalled work. Do not intervene unless a blocker exists
-or a stage fails to close. Every gate failure in Steps 1–9 is owner-held: the
-engine must not launch a gate-triggered repair, review, authoring, adjudication
-or judge round, except for the explicitly authorized Step-7 protocol below.
-Normal first-pass stage dispatches still run. The owner/operator
-must repair every rejected item and refresh every certification invalidated by
-that repair. Only then may `retry` rerun the rejecting gate; the stage cannot
-transition until it passes. This certify → gate → repair → recertify → same-gate
-sequence applies to every gate in Steps 1–9. `retry` must not convert the same
-gate failure into an automatic repair wave. When intervention is required,
-resolve the blocker
-autonomously while prioritizing mathematical accuracy, richness, token
-efficiency, and time efficiency.
+9. **Step 1 — scaffold.** Resolve drift, source, dependency, and item-readiness escalations. Reconcile affected plans, manifests, prose, and published-defect records before retrying the final gate. Preserve any run-local owner authoring direction.
 
-For each certification boundary, finish all authorized authoring and repairs
-that can change its covered content before refreshing scope, item, provenance,
-or gate receipts. Wait for the relevant writers to drain, then certify the
-stable final carriers together. Use targeted diagnostic checks during editing
-when useful, but do not repeatedly recertify intermediate versions. This rule
-also applies when continuing the work in a later session.
+10. **Step 2 — assign.** Verify group and batch coverage. Repair assignment or task-generation blockers without changing the selected build scope.
 
-**7. Major code changes.** After every major code change, update all relevant
-documentation and create a Git commit containing both the code and documentation.
-Rewrite or delete stale documentation instead of appending corrective text over
-it.
+11. **Step 3 — author.** Resolve owner-held scope decisions, unmet prerequisites, and incomplete item or contract evidence. Keep every promised claim; require complete arguments and exact supplier uses before clearing escalations. Refresh affected certifications after authors finish.
 
-**8. Command approvals.** Never ask the owner for command-prompt approval.
-Approve all command-prompt requests from other agents.
+12. **Step 4 — splice.** Resolve plan, page, manifest, and snapshot discrepancies. Check that authorized local additions precede their consumers before advancing.
 
-**9. Step 1.** Review prerequisite drift, materialize authorized changes, then
-construct scaffolds along the in-run page-prerequisite DAG. A consumer batch
-waits for artifact-complete, stable transitive supplier batches; independent
-branches run in parallel. A cyclic condensed batch graph is a planning error.
-If `research/<run>-owner-authoring-direction.md` exists, every Beta scaffolder
-must read it before constructing items; it overrides stale task or design text.
-Record each item as ready or escalated.
-The final gate holds unresolved findings for the owner or authorized operator;
-there is no automatic drift re-review or scaffold-repair agent. Reconcile
-dependencies, prose, the plan, Phase-2 files and the published-consumer ledger
-before clearing affected blockers. Preserve the selected build scope.
+13. **Step 5 — review.** Resolve reader, refuter, adjudicator, source, and cross-group findings. Repair actual failing subjects; examine direct consumers when a Statement or Definition changes. Track published defects in the canonical ledger and recertify affected evidence before gate retry.
 
-For failed full-text retrieval, make the initial attempt and at most five
-recovery retries, searching alternative locations. Stop on success and reuse
-recorded attempts across handoffs. After exhaustion, construct a complete
-alternative proof and its necessary local dependencies with full mathematical
-confidence, or escalate the source and exact uncertainty. Follow the evidence
-format in `briefs/beta-scaffold.md`; never fabricate retrieval or confidence
-records. A valid source drop preserves results and waives only the unavailable
-backing. Step 3 independently judges the mathematics.
+14. **Step 6 — judge.** Resolve owner-held scope, coverage, and evidence blockers. Preserve mathematical rejections for the assigned Step-7 adjudication unless an actual Step-6 gate requires owner repair.
 
-**10. Set Theory bootstrapping boundary.** No page in the `foundations`
-category may directly or transitively use an item from *Set Theory Beyond
-Choice: Recorded, Not Proved Here* as a dependency, well-definedness
-justification, or load-bearing forward reference. No Foundations plan page may
-directly or transitively require that catalogue page. The track exists to prove
-and retire those recorded results; it cannot assume them. Non-load-bearing
-orientation may use `external_refs`, but it must never enter a proof or a
-prerequisite closure. Treat either violation as fatal and unpublishable.
+15. **Step 7 — repair.** Supervise the frozen-frontier loop in [WORKFLOW.md](WORKFLOW.md). Assign helpers only disjoint owner-held work; do not expand frontier authority. Finish frontier repairs and separate published or outside-consumer maintenance before stable central certification. Escalate repeated unchanged pending work rather than inventing completion.
 
-**11. Axiom of Choice.** The owner authorizes assuming AC wherever a proof
-needs it. State the assumption in the item contract and identify the exact
-use inside the proof, declaring `def-axiom-of-choice` as a dependency.
-Propagate the assumption to consumers that use the affected result. Do not
-infer arbitrary-index choice from finite choice or DC. Keep choice-free
-arguments choice-free. This authorization does not permit using recorded
-results as suppliers or bypassing the Foundations bootstrapping boundary.
+16. **Step 8 — close changes.** Resolve changed-item judgments and direct-consumer impacts after the Step-7 freeze. Use guarded recovery only with the required owner authorization; preserve Step-7 history and recertify the reopened suffix.
 
-**Step 3.** Each A/B pair has its own scaffold auditor and item author. The
-Step-3b audit checks whether each scaffold supplies enough hypotheses, sources,
-dependencies and a viable proof route to author its claim. Authors repair local
-scaffold gaps, then author every assigned item and A/B page. This author-level
-check is not the independent, thorough mathematical audit assigned to Steps
-5–8. Authors still write complete arguments and report uncertainty honestly.
-Pairs sharing a batch author sequentially to protect shared files. Across
-batches, all pairs may author in parallel even while an in-run prerequisite
-is unfinished. Authors flag each unfinished supplier and consuming proof step,
-author the consumer item anyway, and leave its decision escalated until the
-supplier and actual proof use are reconciled. Reconcile dependencies and clear
-all required Step-3 gates before Step 4. They may add
-necessary definitions and lemmas to assigned existing A pages before consumers.
-Step 3 requires recorded full-text fetch evidence for its sources; a URL that
-later stops responding does not hold completed authoring. Live URL and source
-backing checks run at Step 5b, where reviewers repair citation access.
-Escalate substantial unmet
-prerequisites and unresolved mathematics to the owner. Report potentially
-defective published items with exact evidence for the canonical ledger.
-Do not drop claims, add pairs, override owner decisions or edit published items.
-Record complete authored arguments/contracts before closing item decisions.
-Steps 5–8 perform the thorough mathematical audits and repair defects those
-audits find; Step 3 does not preempt that independent review.
-Step 4 retains mechanical plan splicing and its post-author snapshot; take the
-pre-author baseline before Step 3 authors start.
-
-**Step 5.** Step 5a runs one independent reader per batch on another batch's
-files, then a read-only refuter pass over every untouched carrier, every
-HIGH/CRITICAL item and every page carrier, then group adjudication of the
-routed obligations (touched, page, reader, refuter); Step 5b reconciles
-cross-group dependencies and closes. Do not repeat Step 3's scaffold audit. Be
-guided by the generated group queue at 5a: finish lower dependency level items
-before higher ones across all assigned batches, with all findings and risk
-reviews for an item together. Page-only obligations remain in scope. Be
-impartial, state uncertainty honestly, and read authoritative sources for
-unfamiliar mathematics. Accept sound content or repair locally, fully authoring
-necessary definitions and lemmas in assigned existing A pages. Escalate
-substantial unmet prerequisites that cannot be supplied locally; never accept
-unresolved mathematics. Record every published defect in the canonical ledger.
-Preserve cross-group dependency, impact and exact-hash closure checks. Every 5a
-and 5b gate failure is an owner hold: the owner repairs the rejected items and
-recertifies what the repair invalidates, then retries the same gate.
-Repairs to items already marked `status: published` are exempt from item repair
-gates and from rejudgment and adjudication at every stage. Record the defect and
-correction honestly, and trace a changed Statement or Definition to each direct
-consumer; draft consumers retain their own normal obligations.
-For both Step-5b impact windows, examine every direct dependency
-and reference use of a changed source. A consumer with a changed exported
-interface is another source event; later repairs enter the post-5a to current
-window. Stop at a consumer whose own claim and assumptions remain licensed,
-while still checking its actual proof use and any new AC or domain premise.
-
-**Step 7.** The engine's repair, adjudication, rejudgment and item gates are
-limited to draft IDs in the immutable `research/<run>-step7-v2/frontier.json`.
-Published repairs remain outside those mechanisms even when their IDs occur in
-the frozen frontier. Every outside consumer stays outside those mechanisms.
-Preserve historical repairs, assignments, reports and certifications without
-turning their former scope into new repair authority.
-
-7.1 one Astra medium adjudicator per batch resolves Step-6 rejections and repairs
-confirmed frontier defects. The 7.1 and 7.5 adjudicators follow each batch's
-generated rejected-item order from lowest dependency level to highest, keeping
-all tuples for one item together. 7.2 three Sol xhigh owner agents run concurrently
-on disjoint frontier impact assignments. 7.3 the central tool verifies complete
-frontier repair and review coverage, waits for every writer, then certifies the
-stable state once. 7.4 Sol high rejudges repaired frontier items; 7.5 Astra medium
-adjudicators resolve renewed frontier rejections; 7.6 three parallel owner
-lanes close frontier impacts; 7.7 centrally recertifies after all work closes.
-Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original frontier
-items divided by the immutable original frontier count is strictly below 5%.
-The threshold permits the final gate; it never accepts unresolved defects or
-uncertainty. Confirmed nonfatal defects also require repair.
-
-7.8 runs the complete battery with item findings scoped to that frontier.
-7.9 three parallel owner lanes repair actual frontier gate subjects; no new
-items may be authored in 7.9 or its continuations. After repair closure and
-central recertification, 7.10 reruns the same scoped battery. Repeat until green,
-then freeze for Step 8. Gate ownership comes from actual failing subjects,
-never inventories, passing rows or merely cited suppliers. Preserve complete
-raw diagnostics and identify outside findings as excluded, never mathematical
-passes or frontier blockers. Global integrity, runtime, ambiguous and unknown
-diagnostics remain blocking obligations.
-
-Downstream examination begins only when a repair changes its original
-`## Statement` or `## Definition` section, including lemmas and corollaries.
-Compare the sections directly; do not use a semantic classifier. Proof,
-citation, dependency and metadata edits with unchanged interfaces trigger no
-downstream work and do not invalidate consumer reviews. Examine direct
-dependency/reference consumers, and propagate another hop only if a necessary
-repair changes that consumer's own Statement/Definition. A reference alone
-does not require an edit. Never pre-expand a transitive closure through
-unchanged statements. Record explicit discoveries and their exact mathematical
-use, and reconcile missing load-bearing dependencies.
-
-Frontier consumers follow the Step-7 repair protocol. Outside consumers use
-separate maintenance with three disjoint parallel lanes, after frontier writers
-drain and before central certification. Every supplier Statement/Definition
-change, published or draft, produces a direct-consumer event. Handle each
-supplier-interface event and consumer once; gates and unrelated context changes
-do not reopen it. A necessary maintenance statement change produces the next
-event. A cascade returning to a frontier item routes to ordinary frontier owner
-work, never an outside maintenance assignment.
-
-Maintenance edits must be strictly necessary and the smallest logically
-sufficient repair. Record the exact `affected_use`, `invalidated_claim`,
-`minimality` explanation and exact before/after snippets; unchanged consumers
-need an evidenced unaffected disposition. Reconstruct edits from the reported
-snippets and reject unreported changes. This checks edit accounting, not
-mathematical truth: agents must independently justify necessity and minimality.
-Outside maintenance has its own ownership and evidence; it never enters
-Step-7 repair, rejudgment, adjudication or item gates. Finish all required
-frontier work and separate maintenance before stable certification.
-
-All three frontier owner lanes run concurrently in 7.2, 7.6, 7.9 and each
-continuation. Keep item ownership disjoint and use
-`tools/step7-shared-write-lock.mjs` only for short shared-metadata
-read/edit/check sections. Every continuation waits for the preceding writers.
-Finish all required frontier repairs and reviews before certification. Bind
-decisions, verdicts and certificates to the current round and content; agents
-never manufacture verdicts or certify their own dispatches. Missing or stale
-evidence and incomplete frontier coverage block progress. A repeated pending
-set at a previously assigned content state holds for operator resolution of
-stale evidence or oscillation; it never launches another identical wave.
-Historical inputs lacking section snapshots remain immutable. Preserve their
-evidence, never invent old statements, and apply current scope when preparing
-replacement assignments.
-
-Before 7.9, batch adjudicators and frontier owner agents may author a new item
-only for a genuine unmet prerequisite of an assigned frontier repair. Record
-the missing claim and consuming proof step, fully author it with honest source
-and uncertainty evidence, use a unique ID, and reconcile its registry/index,
-page, manifest and contract. Preserve author-origin integrity and required
-certification evidence. Such additions do not enlarge the frozen frontier or
-enter its Step-7 rejudgment and gate loops; this grants no unrelated expansion.
-
-An explicitly owner-authorized fatal finding after the freeze uses the guarded
-`recover-step8` command. Preserve Step-7 history, repair only its hash-bound
-allowlist, and reopen only changed-item judgment, impact closure, stamps and
-receipts before Step 9. This does not reopen the completed Step-7 loop.
-
-**12. Phase-3 repair ledger.** Throughout Phase 2, maintain
-`research/published-consumer-supplier-ledger.md` as the existing canonical
-record of published items needing Phase-3 proof, definition, dependency or
-page-header repairs. Record each finding promptly with exact item/page IDs,
-evidence, required repair, supplying prerequisites and status.
-Keep this ledger limited to published-item defects and their audit evidence.
-Do not add engine status, dispatches, queues, retries, pause/resume history,
-recording conflicts, workflow hashes, handovers, or draft-only implementation
-notes. Put those in the run record. Link supporting audit evidence instead of
-copying operational transcripts. Update an existing defect entry only when its
-mathematical finding, supplier mapping, repair strategy or audit status changes.
-For each target, identify the exact Phase-2 supplier items and their current
-build/publication states, and record a recommended proof strategy with source
-evidence. During monitoring intervals, audit additional published items and
-improve these strategies. Before Phase 2 concludes, reconcile the ledger with
-all published-item audit findings; never claim exhaustive discovery while
-published items or dependency interfaces remain unaudited. Distinguish
-confirmed defects from downstream impact-review candidates and incomplete
-audits. Update existing entries rather than create duplicate ledgers. A new
-scaffold or published supplier does not close a published-proof defect;
-published content remains read-only except for authorized repairs, which are
-recorded as maintenance and carry no item gate, rejudge or adjudication duty.
-The current early-repair authorization permits confident repairs needing no Phase-2
-dependencies, one item at a time, without judges. It covers necessary
-dependency, home and verification updates. Record local checks honestly;
-do not represent them as independent review or an owner audit.
-Continue discovering defects after each repair. Record blocked repairs with
-exact pending suppliers and proof strategies in the same ledger. Try local
-closure first; if a necessary prerequisite is absent from Phase 2 and cannot
-be supplied locally, reconcile the relevant prose scaffolds and authoritative
-Phase-2 scope to include it.
-During Phase 2, distinguish actual item-level proof prerequisites from other
-items on prerequisite pages. Published consumer debt does not block its new
-supplier unless the supplier's proof actually depends on the defective result
-or affected clause. Require exact paths and mathematical uses for such blockers;
-retain unrelated debt in the ledger. Structural checks and the Foundations
-bootstrapping boundary remain unchanged.
-
-Maintain the ledger's deduplicated item classification index alongside each
-finding: U-P (unaudited/potential), U-C (unaudited/confirmed), A-R
-(defect-focused audit and repair), or A-P (audited/pending Phase 3).
-Audit scope must be explicit; local review is not an independent judge or
-whole-closure certification. Old publication stamps do not establish a current
-repair audit. Keep supplier-only mentions and incomplete reconciliation out of
-confirmed repair totals. A new defect reopens a repaired item. Move its one
-index row and update counts whenever its disposition changes, retaining the
-evidence and exact supplier mappings. Before Phase 2 concludes, reconcile the
-entire published census and all category/engine findings, resolve the U-P/U-C
-queues, and freeze the complete A-P list with publication-ready prerequisite
-IDs and repair strategies. Keep reviewed/no-repair-needed receipts outside
-the active defect classes; never label a sound item as repaired.
+17. **Step 9 — handoff.** Resolve contract, pathway, readiness, and report blockers; verify the engine's closeout commit. New content remains draft. Publication and pushing remain owner actions.

@@ -7,7 +7,7 @@ Historical receipts constrain `defect_type` to exactly one of
 as current round coverage.
 
 Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
-and `briefs/step7-owner-repair.md`. Follow WORKFLOW.md's 7.1–7.10 protocol
+and `briefs/step7-owner-repair.md`. Follow those briefs
 and the generated round-bound task. Repair all confirmed defects, including
 nonfatal defects, and continue downstream repair until complete before the
 single central certification pass.

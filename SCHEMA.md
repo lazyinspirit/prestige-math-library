@@ -1,295 +1,148 @@
-# Content data contract
+# Content schema
 
-Applies to `items/` and `library/`. Files are Markdown with YAML frontmatter
-between `---` delimiters. The renderer tolerates some missing fields but skips
-malformed YAML. Authoring requirements below are stricter than those fallbacks.
+- `items/` holds shared mathematical content; `library/` places it on pages and
+  groups pages into categories. Files use Markdown with YAML frontmatter between
+  `---` lines. The renderer skips malformed YAML; `tools/rendercheck.mjs`
+  catches it. See [WORKFLOW.md](WORKFLOW.md) for builds and publication.
 
-## 1. Files and identity
+## Items
 
-```text
-items/<id>.md
-library/<category>/<page>.md
-library/<category>/_category.md
-library/<category>/_pathway.md
-```
-
-Items are global. Pages list shared item IDs; categories come from page paths.
-The renderer supports nested category directories, but planned pages go directly
-under their plan's category. Files beginning with `_` are metadata.
-
-Items require `id` equal to the filename stem and a matching `kind`:
-
-| Kind | Prefix |
-|---|---|
-| definition | `def-` |
-| theorem | `thm-` |
-| lemma | `lem-` |
-| proposition | `prop-` |
-| corollary | `cor-` |
-| example | `ex-` |
-| counterexample | `cex-` |
-| false-statement | `fs-` |
-| remark | `rem-` |
-
-Keep IDs stable. `aliases: [old-id]` preserves links, but check uniqueness:
-alias collisions are not rejected consistently. Planning rejects new IDs
-that collide with existing IDs or aliases.
-
-## 2. Item frontmatter
-
-| Field | Meaning |
-|---|---|
-| `title` | Display title; renderer fallback is the filename |
-| `status` | `draft` or `published`; new run content stays draft |
-| `origin` | `pipeline` or `session` |
-| `deps` | Logical prerequisites, as item IDs; must resolve and form an acyclic graph |
-| `justified_by` | Well-definedness results; each must depend on this item through `deps`, and cannot also be in its `deps` |
-| `landmark` | Boolean selecting an item for the flowchart |
-| `short` | Optional short display label |
-| `proof_strategy` | Required when the body contains a proof-like section; see §3 |
-
-Use explicit `deps: []` in scaffold manifests when no prerequisites exist.
-Each scaffold manifest item also has a nonnegative integer `dependency_level`:
-0 if it has no `deps` on another item in the current run, otherwise one plus
-the maximum level of those in-run dependencies. The level orders Step-3
-authoring; it is not item frontmatter or a claim of proof validity. The
-`item-dependency-levels` gate recomputes it from the complete run DAG and
-rejects missing, stale or cyclic labels.
-Step-1 readiness is stored separately in `research/RUN-step1-ITEM_ID.json` by
-`tools/step1-decisions.mjs`: `ready` or `escalated`, evidence, examined dependency
-IDs and a current content hash. It is not an item verification or publication
-stamp. See WORKFLOW.md for owner resolution and the final gate.
-The renderer defaults missing lists to empty, missing ID to the filename stem,
-missing kind to remark, non-published status to draft, non-pipeline origin to
-session, and landmark to false. These fallbacks do not excuse invalid authoring.
+- File: `items/<id>.md`. The frontmatter `id` must equal the filename stem.
+  Keep IDs and aliases unique; `aliases: [old-id]` preserves old links.
+- `kind` determines the ID prefix: `definition` → `def-`, `theorem` → `thm-`,
+  `lemma` → `lem-`, `proposition` → `prop-`, `corollary` → `cor-`, `example` →
+  `ex-`, `counterexample` → `cex-`, `false-statement` → `fs-`, `remark` → `rem-`.
+- `title` is the display name. `status` is `draft` or `published`; a missing or
+  other status renders as draft. `origin` is `pipeline` or `session`; the renderer
+  defaults to session. `short` is an optional display label and `landmark: true`
+  selects an item for the flowchart.
+- `deps: [id, ...]` lists items needed by the claim or argument. Targets must
+  resolve, and item and page dependency graphs must be acyclic. `depcheck`
+  warns about linked citations in the Statement, Facts, or argument absent
+  from `deps`, `justified_by`, and `external_refs`; unlinked uses still need review.
+- The owner permits the Axiom of Choice where needed. State it in the item
+  contract, identify its exact proof use, add `def-axiom-of-choice` to `deps`,
+  and carry the assumption to consumers that use the result. Finite choice
+  and DC do not imply arbitrary-index choice; keep choice-free proofs choice-free.
+- `justified_by: [id, ...]` names results that establish this item's
+  well-definedness. Each target must depend on this item through `deps`; do not
+  also put it in this item's `deps`.
+- Use `[[id]]` or `[[id|label]]` for item links. Page prose may also link page
+  IDs. An item link must resolve unless `forward_refs` declares a planned
+  later-page target.
 
 ### Sources and provenance
 
-```yaml
-sources:
-  scraped:
-    - url: https://...
-      title: Optional title
-      license: Optional license
-  references:
-    - title: Source title
-      url: https://...
-provenance:
-  statement: literature-derived
-  proof: ai-altered
-```
+- `sources.references` contains cited sources as `{title, url}` objects (URL
+  optional for legacy references); `sources.scraped` may contain
+  `{url, title, license}` objects. The renderer also reads legacy reference
+  title strings.
+- Authored build batch items checked by `tools/content-policy.mjs` without
+  `--audit` or `--manifest-only` require `provenance.statement` (`ai-generated`,
+  `ai-altered`, or `literature-derived`) and `provenance.proof` (those values,
+  `not-supplied`, or `not-applicable`). Only definitions and remarks may use
+  `not-applicable`. Either component marked `literature-derived` or `ai-altered`
+  requires a `sources.references` URL. Legacy `authorship` is still readable;
+  audited retagging removes it.
+- In `--audit` mode, a ledger row with `evidence: established-knowledge` and
+  `alpha_concurred: true` permits an `ai-altered` statement without a URL, with
+  a warning.
+- In a build batch, an `ai-generated` statement is allowed only for a
+  corollary, example, or counterexample. Set `generation.role` to
+  `direct-corollary`, `example`, or `counterexample`, respectively. Such a
+  statement cannot be a `deps` target.
+  Omit `generation` for other statement provenance.
 
-Reference objects need a title to render. Legacy title strings also render;
-new source-backed statements or proofs need a reference URL.
-Sources default to empty lists.
+### Later and unproved material
 
-Both provenance components are required for in-flight mathematical items:
+- `forward_refs: [id, ...]` declares linked targets on strictly later planned
+  pages. Do not repeat them in `deps` or `justified_by`. Only corollaries,
+  examples, counterexamples, false statements, and remarks may use one outside
+  Remarks. Same-page links are ordinary links.
+- `proved_here: false` records a result without proving it. It must be a
+  `remark` with a `sources.references` entry, `verification.precheck: n/a`,
+  no Proof or Refutation section, and no `verification.judge`.
+- `external_refs: [id, ...]` declares linked mentions of `proved_here: false`
+  items. Do not also put the target in `deps`. A mention does not create a
+  logical prerequisite.
+- For those build batch items, `proved_here: false` also requires
+  `external_dependency` with `source_url`, `exact_statement`,
+  `local_proof_attempt`, and `necessity`.
+  `source_url` must be HTTP(S) and match a `sources.references` URL exactly.
+- Items in the `foundations` category, including planned prerequisites, may
+  not reach *Set Theory Beyond Choice: Recorded, Not Proved Here* through
+  `deps`, `justified_by`, or `forward_refs`.
 
-- Statement: `ai-generated`, `ai-altered`, or `literature-derived`.
-- Proof: those values, `not-supplied`, or `not-applicable`.
-  Only definitions and remarks may use `not-applicable`.
+### Verification fields
 
-Statement provenance describes the claim or construction; proof provenance
-describes its local argument. Legacy `authorship` uses the three statement
-values; audited retagging replaces it with component provenance.
+- `verification.precheck: pass` records a successful format check;
+  `n/a` applies to recorded unproved results. A format pass is not a proof of
+  mathematical validity.
+- A published proved-here item needs `verification.audited` (owner audit) or
+  `verification.verified` (delegated audit with `model`, `verdict`, `date`,
+  `scope`, and `delegated_by`). A published unproved item instead needs
+  `verification.sources_checked` (`date`, `scope`, `by`). A judge stamp
+  alone does not satisfy publication checks.
 
-An AI-generated statement is allowed only as a corollary, example, or
-counterexample, with the corresponding `generation.role`:
-`direct-corollary`, `example`, or `counterexample`.
-It cannot be a dependency target. Other statements must omit `generation`.
+## Item bodies
 
-### Forward and unproved references
+- Use `## Definition` for a definition; `## Statement` and `## Proof` for a
+  theorem, lemma, proposition, or corollary; `## Example` and optional
+  `## Verification` for an example; `## Statement refuted` and
+  `## Counterexample` for a counterexample; `## Statement` and
+  `## Refutation` for a false statement. Remarks may use prose headings.
+  The renderer splits at level-two headings; this mapping is an authoring
+  convention rather than a renderer type check.
+- `## Facts & Assumptions` holds blank-line-separated `[F1]`, `[A1]`, or
+  `[L1]` entries. Cite source items with wikilinks. Labelled facts before the
+  first numbered step of an example's Verification are also read as facts.
+- Proof-like sections need `proof_strategy` in frontmatter and `**Given:**` in
+  the checkable text. Write at least two `phase.step` numbered steps, with
+  comma-separated justification tags at the end of steps and QED on the final
+  step. At least 70% of steps need valid trailing tags. Cite only earlier step
+  numbers. `**Proof technique:**` is an optional displayed paragraph.
+- Common tags include `given`, `F/A/L/C<n>`, `step p.q`, `algebra`, `choose`,
+  `construct`, and strategy opener/discharge tags. The accepted vocabulary and
+  strategy checks are in the app's `worker/src/precheck.ts`, called by
+  `tools/precheck.mts`. Adopt any repair it proposes before recording a pass.
+- Use `$...$` for inline math and `$$...$$` for display math. A display formula
+  must occupy one source line between delimiters; put delimiters on separate
+  lines when display-only KaTeX features such as `\tag` or `CD` are needed.
+  Avoid wikilinks or nested dollars inside math, dollars inside `\tag{}`,
+  blank lines in inline math, and `\(...\)` or `\[...\]` delimiters. KaTeX must
+  parse each expression. Keep fenced `tikz` and `tikzcd` outside Facts and
+  proof-like sections.
 
-Reference fields contain item IDs, not Markdown wikilinks.
+## Pages and categories
 
-- `forward_refs: [id]`: each target must appear as a body wikilink and belong
-  to a strictly later planned page. It cannot also be in `deps` or
-  `justified_by`. References outside Remarks are load-bearing and allowed
-  only for examples, counterexamples, false statements, corollaries, and
-  remarks. Such edges join `deps` for cycle checking; same-page targets
-  are ordinary references.
-- `proved_here: false`: a recorded result must be a remark with a reference,
-  `verification.precheck: n/a`, no Proof or Refutation section, and no judge
-  stamp. The default is true.
-- `external_refs: [id]`: each target must be recorded with
-  `proved_here: false`, appear as a body wikilink, and be absent from `deps`.
-  This records an external reference, not a locally proved prerequisite.
+- Page file: `library/<category>/<page>.md`. Frontmatter uses `page`, `title`,
+  `status`, `items: [id, ...]`, and `examples: [id, ...]`; the body is the page
+  summary. The two lists control placement, not item kind. Entries must resolve
+  and cannot repeat. A published page may list only published items.
+- An item on more than one page draws a warning; dependency tools use its first
+  home. A published item without a page also draws a warning. An item homed
+  only on a B/examples page cannot be another page's dependency; earlier items
+  on that same page are allowed. The plan identifies B pages, with the
+  `-examples` suffix as a fallback.
+- `library/<category>/_category.md` supplies the category title and a prose
+  overview. Missing or short overviews warn; the short threshold is 120 words.
+- `library/<category>/_pathway.md` uses `status` and `parts`, each with `part`,
+  `title`, and `pages`; `category` is descriptive because the directory selects
+  the category. Its body has one `## <part>` brief per part. List each published
+  A page once, omit examples companions, keep pages in their category, and put
+  each prerequisite in the same or an earlier part. Empty parts, missing pages
+  or briefs, duplicate placements, orphan briefs, and out-of-order prerequisites
+  are errors. Missing pathways, unplaced draft pages, singleton parts, and briefs
+  over 120 words warn; `not-proved-here` is exempt from the missing-pathway warning.
 
-In-flight recorded results also require:
+## Checks
 
-```yaml
-external_dependency:
-  source_url: https://...
-  exact_statement: ...
-  local_proof_attempt: ...
-  necessity: ...
-```
-
-The HTTP(S) source URL must exactly match a `sources.references` URL.
-
-### Verification
-
-| Field under `verification` | Contract |
-|---|---|
-| `precheck` | `pass` after a successful format check; `n/a` for `proved_here: false` |
-| `judge` | Tool-generated `model`, `verdict: pass`, `date`; forbidden on unproved results |
-| `audited` | Scalar owner audit record |
-| `verified` | Delegated record: `model`, `verdict`, `date`, `scope`, `delegated_by` |
-| `sources_checked` | Unproved-result record: `date`, `scope`, `by` |
-
-Published proved-here items require `audited` or `verified`; published unproved
-results require `sources_checked`. A judge stamp alone is insufficient.
-Only `tools/apply-judge-stamps.mjs` writes judge pass records.
-
-## 3. Item body and proof structure
-
-Use `[[id]]` or `[[id|label]]` links. Targets must resolve, except declared
-forward references to planned items. Declare every logical prerequisite.
-`depcheck` warns about undeclared linked citations in statements, facts, and
-proof-like sections; `fwdcheck` separately checks forward references.
-Unlinked appeals still need mathematical review.
-
-The renderer splits sections at level-two headings:
-
-| Kind | Claim heading | Argument heading |
-|---|---|---|
-| definition | Definition | none |
-| theorem, lemma, proposition, corollary | Statement | Proof |
-| example | Example | Verification, when supplied |
-| counterexample | Statement refuted | Counterexample |
-| false-statement | Statement | Refutation |
-| remark | free prose | none |
-
-`Facts & Assumptions` renders fact rows; `Scratch` renders collapsed prose.
-Other sections render ordinary Markdown. The kind/heading table is the
-authoring convention, not a renderer-enforced mapping.
-
-Separate facts and proof rows with blank lines. Facts use `[F1]`, `[A1]`,
-or `[L1]` labels and source wikilinks. Proof rows start `phase.step` and end
-with one comma-separated justification group; the final row ends with QED.
-For existing examples without a separate Facts section, labelled facts in the
-`Verification` preamble are also checked. Only facts before its first numbered
-step count; later proof citations are not fact declarations.
-An optional `**Proof technique:**` paragraph displays separately.
-
-Precheck requires `**Given:**`, at least two numbered steps, final QED with
-no later step, and valid trailing tags on at least 70% of steps.
-Use existing earlier steps as references; adopt any canonical phase repair
-before claiming a pass.
-
-Supported tags are `given`, `F/A/L/C<n>`, `step p.q` or `p.q`, `algebra`,
-`assume-contra`, `assume-hyp`, `ih`, `assume-case[ word]`, `base`,
-`construct`, `choose`, `suffices[: ...]`, `contrapositive-reduce`,
-`discharge-{contradiction|contrapositive|induction|construct}[: ...]`, and
-`{contradiction|contrapositive|induction|cases|cases-exhaustive}[: ...]`.
-Legacy `def.` tags are accepted. Named contradiction, contrapositive,
-induction, cases, and constructive strategies require their opener/closing
-tags. Other strategy names still receive common checks and checks for
-unclosed contradiction, contrapositive, induction, or cases tags.
-The implementation is the app's `worker/src/precheck.ts`, loaded through
-[tools/precheck.mts](tools/precheck.mts).
-
-Use `$...$` for inline math. For display-only KaTeX constructs such as
-`\tag` and the `CD` environment, put `$$` on its own line before and after
-the formula; remark-math treats one-line `$$...$$` in prose as inline math.
-Avoid wikilinks inside math, nested
-dollar delimiters, dollars in `\tag{}`, blank lines inside inline math, and
-unbalanced delimiters. `\(...\)` and `\[...\]` are not rendered as math.
-KaTeX must parse each expression. Fenced `tikz`/`tikzcd` diagrams belong
-outside facts and proof-like sections.
-
-Proofs must establish their claims; examples need calculations and
-counterexamples need witnesses. Format checks, matching quotations, contracts,
-and finite tests do not establish mathematical validity.
-[The authoring brief](briefs/content-repair.md) gives compact examples.
-
-## 4. Page composition
-
-```yaml
-page: page-slug
-title: Page title
-status: draft
-items: [def-example, thm-example]
-examples: [ex-example, cex-example]
-```
-
-The body is the page summary. Lists control display placement, not item kind.
-Every listed item must resolve; repeated entries are errors.
-Multiple homes generate warnings, and dependency tools use the first home.
-A published item with no page also generates a warning.
-
-The renderer defaults page slug to filename stem, title to filename, and lists
-to empty. Page-slug/filename equality is not currently validated.
-Public rendering of a published page requires every listed item to be published.
-
-A page ending `-examples`, or marked B in the plan, is an examples page.
-An item homed only there cannot be another page's dependency; an earlier item
-on the same examples page is allowed.
-
-## 5. Categories and pathways
-
-`_category.md` supplies the title and overview; title falls back to the
-directory name. `pathcheck` warns on missing overviews or fewer than 120 words.
-
-`_pathway.md` uses this structure:
-
-```markdown
----
-category: category-slug
-status: draft
-parts:
-  - part: foundations
-    title: Foundations
-    pages: [first-a-page, second-a-page]
----
-
-## foundations
-
-Reading guidance.
-```
-
-The directory selects the category. Published pathways supply the public
-reading order; otherwise the renderer derives dependency levels.
-
-Each part needs pages and a matching brief heading. Listed pages must exist,
-belong to that category, exclude B companions, and appear once. Every published
-A page must be placed, with prerequisites in the same or an earlier part.
-Orphan brief headings are errors. Unplaced draft pages, singleton parts, and
-briefs over 120 words produce warnings. Missing pathways warn for categories
-with published A pages, except `not-proved-here`.
-
-## 6. Validation
-
-| Tool | Checks |
-|---|---|
-| `precheck.mts` | Proof format and strategy tags |
-| `rendercheck.mjs` | YAML, math, diagrams, renderer compatibility |
-| `depcheck.mjs` | Identity, dependencies, cycles, page lists, publication evidence |
-| `fwdcheck.mjs`, `extcheck.mjs` | Forward and recorded-not-proved references |
-| `pathcheck.mjs` | Category overviews and pathways |
-| `content-policy.mjs`, `level-coverage.mjs` | In-flight scope, provenance, sources, generated claims, external fallbacks |
-
-The renderer and rendercheck share the YAML parser. Relations and source lists
-are derived from the declared fields; do not maintain duplicate graph data.
-
-For the `foundations` category, `extcheck.mjs` also enforces the Set Theory
-bootstrapping boundary transitively: no authored dependency,
-`justified_by`, or load-bearing `forward_refs` path may reach an item on *Set
-Theory Beyond Choice: Recorded, Not Proved Here*. It checks items on each
-Foundations page and on every page in that page's planned `requires` closure,
-including planned items whose page file has not yet been written.
-`validate-plan.mjs` independently rejects both inherited page requirements and
-planned-item paths to the catalogue. These are hard publication failures. A
-proved replacement may share the mathematical conclusion, but it must be
-established entirely from earlier local machinery rather than cite the recorded
-item it replaces.
-
-## 7. Schema changes
-
-Update the loader, validators, renderer consumers, tests, and affected content
-together when changing fields or their meanings. Preserve link resolution.
-Unknown fields may be ignored by the renderer but are not a supported extension
-mechanism. `tools/step8-changes.mjs` compares `itemHashGuard` hashes with the
-post-Step-7 snapshot: the whole `verification` block is excluded, but other
-frontmatter and body changes count. Judge attestations use their own hash rules
-in `tools/item-hash.mjs`. Do not treat metadata edits as automatically harmless.
+- `tools/depcheck.mjs` checks IDs, dependencies, page lists, cycles, and
+  publication evidence; `tools/fwdcheck.mjs` and `tools/extcheck.mjs` check
+  later and unproved references.
+- `tools/precheck.mts` checks proof format; `tools/rendercheck.mjs` checks YAML,
+  math, and diagram rendering; `tools/pathcheck.mjs` checks category overviews
+  and pathways.
+- `tools/content-policy.mjs` applies provenance, source, and generated-claim
+  rules to an explicit run or audit scope. Other run gates and their commands
+  are described in [WORKFLOW.md](WORKFLOW.md).
