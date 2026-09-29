@@ -1,5 +1,5 @@
 export const TAU = Math.PI * 2;
-export const COLORS = ['#5abdff', '#ff490d', '#aa7951', '#b7a7cd'];
+export const COLORS = ['#5abdff', '#aa7951', '#ff490d', '#b7a7cd'];
 export const colorIndex = kind => kind === 'definition' ? 0
   : ['theorem', 'lemma', 'proposition', 'corollary'].includes(kind) ? 1
   : ['example', 'counterexample', 'false-statement'].includes(kind) ? 2 : 3;

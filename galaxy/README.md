@@ -79,7 +79,7 @@ served on the next browser reload; server-code changes still require a restart.
 - Reduced-motion preferences pause rotation initially. Hidden tabs stop rendering.
 
 Definitions are bright blue. Theorems, lemmas, propositions and corollaries are
-red-orange. Examples, counterexamples and false statements are brown. Remarks
+brown. Examples, counterexamples and false statements are red-orange. Remarks
 are muted violet. Decorative gas, dust and faint stellar light give the galaxy
 its distant appearance; only library items are interactive. Decorative light
 recedes during inspection and filtering. The layout illustrates subject groups,
@@ -103,7 +103,7 @@ and editorial proxies for importance. They affect light, never body size.
 
 Glow radius is `min(7, 2.2 + L)` reference pixels. Its exponential inner
 atmosphere and broad outer halo fade smoothly to zero, with subtle radial rays.
-Theorem halos remain red-orange; their compact hot centers approach warm white.
+Example halos are red-orange and theorem halos are brown; their compact hot centers approach warm white.
 Decorative gas fades with zoom so close views retain a dark background.
 Picking targets the compact cores, with a nine-pixel accessibility tolerance,
 rather than selecting stars from the edge of their large overlapping halos.
