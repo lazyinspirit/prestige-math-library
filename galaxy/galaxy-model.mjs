@@ -21,6 +21,18 @@ const spiral = radius => 5.8 * Math.pow(radius, .58);
 const gaussian = rng => Math.sqrt(-2 * Math.log(Math.max(1e-8, rng()))) * Math.cos(TAU * rng());
 const rgb = hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16) / 255);
 
+// Body radius at the reference distance, in CSS pixels before perspective/zoom scaling.
+export const MAX_STAR_RADIUS = 1.6;
+export const GLOW_RADIUS_RATIO = .25;
+export function starRadius(node) {
+  const reach = Math.max(0, node.downstreamCount ?? 0);
+  const theorem = ['theorem', 'lemma', 'proposition', 'corollary'].includes(node.kind);
+  // Cross-subject use is structural evidence; landmark is the existing editorial designation.
+  const importance = theorem ? (node.landmark ? .28 : 0)
+    + Math.min(.15, .065 * Math.log1p(node.crossCategoryConsumers ?? 0)) : 0;
+  return Math.min(MAX_STAR_RADIUS, (.3 + .11 * Math.log1p(reach)) * (1 + importance));
+}
+
 /** Shared coordinates for the GPU and picking. The disc has thickness; the core is a spheroid. */
 export function layoutItems(nodes, categories, consumers) {
   // Fixed subject slots and per-ID seeds keep existing coordinates stable across refreshes.
@@ -38,7 +50,8 @@ export function layoutItems(nodes, categories, consumers) {
     node.y = radius * Math.sin(angle);
     node.z = gaussian(rng) * (core ? .065 : .012 + .013 * radius);
     node.color = colorIndex(node.kind);
-    node.size = 3.5 + rng() * 2.2 + Math.min(3, Math.log1p(consumers[i].length) * .45);
+    node.radius = starRadius(node);
+    node.size = 2 * node.radius * (1 + GLOW_RADIUS_RATIO);
     vertices.set([node.x, node.y, node.z, ...rgb(COLORS[node.color]), node.size, .8], i * 8);
   });
   return vertices;
@@ -93,6 +106,9 @@ export function defaultCamera(width, height) {
   return { ...DEFAULT_CAMERA, zoom: DEFAULT_CAMERA.zoom * width / Math.min(width, height), panY: -.16 * height };
 }
 export const CAMERA_DISTANCE = 3.8;
+export function projectedStarRadius(node, camera, depth) {
+  return Math.min(8, node.radius * Math.sqrt(CAMERA_DISTANCE / depth) * Math.pow(camera.zoom, .45));
+}
 /** Perspective projection mirrors the vertex shader; depth is also used to pick overlapping stars. */
 export function project(node, camera, rotation, width, height) {
   const angle = camera.yaw + rotation, c = Math.cos(angle), s = Math.sin(angle);

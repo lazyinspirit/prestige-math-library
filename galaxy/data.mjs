@@ -2,6 +2,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
+import { downstreamCounts } from './dependency-counts.mjs';
 import { REPO, yamlCandidates } from '../tools/paths.mjs';
 
 const require = createRequire(import.meta.url);
@@ -26,7 +27,7 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
       const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
       if (!match && record?.fm.status === 'published') throw new Error(`Incomplete published header: ${path}`);
       const parsed = match ? parse(match[1]) ?? {} : {};
-      const fm = Object.fromEntries(['id', 'title', 'status', 'kind', 'deps', 'aliases', 'items', 'examples']
+      const fm = Object.fromEntries(['id', 'title', 'status', 'kind', 'deps', 'aliases', 'items', 'examples', 'landmark']
         .filter(key => key in parsed).map(key => [key, parsed[key]]));
       record = { stamp, fm, hash: createHash('sha256').update(raw).digest('hex') };
       cache?.set(path, record);
@@ -77,7 +78,7 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
   await walk(join(root, 'library'));
   if (memberships.some(set => !set.size)) categories.push({ id: 'unassigned', title: 'Other published items' });
   const nodes = items.map((item, i) => ({
-    id: item.id, title: item.title ?? item.id, kind: item.kind ?? 'remark',
+    id: item.id, title: item.title ?? item.id, kind: item.kind ?? 'remark', landmark: item.landmark === true,
     categories: memberships[i].size ? [...memberships[i]] : ['unassigned'],
   }));
   const edges = [];
@@ -89,6 +90,17 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
       else edges.push([i, target]); // consumer → prerequisite
     }
   }
+  const counts = downstreamCounts(nodes.length, edges);
+  const consumerCategories = nodes.map(() => new Set());
+  for (const [consumer, supplier] of edges) {
+    for (const category of nodes[consumer].categories) {
+      if (!nodes[supplier].categories.includes(category)) consumerCategories[supplier].add(category);
+    }
+  }
+  nodes.forEach((node, i) => {
+    node.downstreamCount = counts[i];
+    node.crossCategoryConsumers = consumerCategories[i].size;
+  });
   const used = new Set(nodes.flatMap(n => n.categories));
   for (const id of used) {
     if (!categories.some(c => c.id === id)) categories.push({ id, title: id === 'pde' ? 'Partial Differential Equations' : id.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ') });

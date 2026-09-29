@@ -78,3 +78,32 @@ test('live additions and unrelated category changes preserve existing star coord
   layoutItems(expanded, [{ id: 'new-category' }, { id: 'algebra' }], [[], []]);
   for (const axis of ['x', 'y', 'z']) assert.equal(expanded[1][axis], original[0][axis]);
 });
+
+test('downstream counts deduplicate diamonds and correctly collapse cycles', async () => {
+  const { downstreamCounts } = await import('./dependency-counts.mjs');
+  assert.deepEqual([...downstreamCounts(4, [[1, 0], [2, 0], [3, 1], [3, 2]])], [3, 1, 1, 0]);
+  assert.deepEqual([...downstreamCounts(4, [[1, 0], [0, 1], [2, 1], [3, 2], [3, 0]])], [3, 3, 1, 0]);
+  // A seeded random cyclic graph exercises many shared paths and component sizes.
+  const { random } = await import('./galaxy-model.mjs'); const rng = random(25), edges = [];
+  const consumers = Array.from({ length: 75 }, () => []);
+  for (let i = 0; i < 150; i++) { const from = Math.floor(rng() * 75), to = Math.floor(rng() * 75); edges.push([to, from]); consumers[from].push(to); }
+  const counts = downstreamCounts(75, edges);
+  counts.forEach((count, i) => assert.equal(count, reachable(i, consumers).size));
+});
+
+test('radii follow log reach, theorem importance boosts and hard limits', async () => {
+  const { starRadius, MAX_STAR_RADIUS, projectedStarRadius, GLOW_RADIUS_RATIO } = await import('./galaxy-model.mjs');
+  const definition = { kind: 'definition', downstreamCount: 0 };
+  assert.ok(starRadius(definition) > 0);
+  const low = starRadius({ ...definition, downstreamCount: 10 });
+  const medium = starRadius({ ...definition, downstreamCount: 100 });
+  const high = starRadius({ ...definition, downstreamCount: 1000 });
+  assert.ok(low < medium && medium < high);
+  assert.ok((high - medium) < (medium - low) * 1.1, 'log growth avoids linear growth');
+  const theorem = { kind: 'theorem', downstreamCount: 30 };
+  assert.ok(starRadius({ ...theorem, landmark: true }) > starRadius(theorem));
+  assert.ok(starRadius({ ...theorem, crossCategoryConsumers: 4 }) > starRadius(theorem));
+  assert.equal(starRadius({ ...theorem, downstreamCount: 1e12, landmark: true }), MAX_STAR_RADIUS);
+  assert.equal(projectedStarRadius({ radius: MAX_STAR_RADIUS }, { zoom: 18 }, 1), 8);
+  assert.equal(GLOW_RADIUS_RATIO, .25);
+});

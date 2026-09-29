@@ -85,6 +85,32 @@ its distant appearance; only library items are interactive. Decorative light
 recedes during inspection and filtering. The layout illustrates subject groups,
 not mathematical distance or difficulty.
 
+## Star size and appearance
+
+Each item is an analytic shaded sphere rendered by the GPU, with a soft halo
+outside its surface. The halo reaches zero at `1.25 × body radius`: it extends
+one-quarter of a radius beyond the surface. Background dust retains its diffuse
+appearance. Hover emphasis changes brightness, not size.
+
+Let `N` be the number of distinct transitive downstream consumers among published
+items. The base radius is `0.3 + 0.11 × ln(1 + N)`; the small floor keeps unused
+items visible. Shared dependency paths count once. `dependency-counts.mjs`
+collapses cycles into strongly connected components and uses bitsets to compute
+exact reach, excluding the item itself. Counts are rebuilt with content updates
+and are independent of the visible category filters.
+
+Theorem-family items receive an importance multiplier of
+`1 + 0.28 × landmark + min(0.15, 0.065 × ln(1 + C))`, where `C` is the number
+of distinct other subject categories containing direct consumers. Theorem family
+includes theorems, lemmas, propositions and corollaries. Cross-subject use is a
+structural importance signal; `landmark` is the existing editorial designation.
+These are transparent proxies, not a universal ranking of mathematical importance.
+
+After this multiplier, the reference body radius is capped at **1.6 CSS pixels**.
+Perspective and zoom scale it, with an additional **8 CSS pixel** body-radius cap
+at close range (10 pixels including the halo). The same projected size is used
+for hover picking. Radii have no random variation.
+
 ## Piano soundtrack
 
 The local playlist repeats: Elgar’s *Salut d’Amour* (Luis Kolodin), Bach’s
@@ -162,3 +188,7 @@ Automatic-update tests use temporary content trees and cover publication additio
 title and body alterations, unpublication, deletion, malformed-write recovery,
 draft-only no-ops and missed-event polling. Browser integration verifies pushed
 add/edit/delete updates, retained camera and category filters, and reused GPU layers.
+
+Star tests cover exact transitive counts through diamonds and cycles, comparison
+with direct graph traversal, logarithmic growth, theorem boosts and radius caps.
+Browser checks verify sphere shading and a black pixel beyond the halo boundary.

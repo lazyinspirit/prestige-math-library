@@ -1,5 +1,5 @@
 import { reachable } from './graph-utils.mjs';
-import { COLORS, clamp, layoutItems, createEnvironment, defaultCamera, project } from './galaxy-model.mjs';
+import { COLORS, clamp, layoutItems, createEnvironment, defaultCamera, project, projectedStarRadius, GLOW_RADIUS_RATIO } from './galaxy-model.mjs';
 import { GalaxyRenderer } from './renderer.mjs';
 import { initMusic } from './music.mjs';
 import { renderTitle } from './math-title.mjs';
@@ -50,21 +50,22 @@ function rebuildPickGrid() {
   for (let i = 0; i < nodes.length; i++) {
     if (!visible[i]) continue;
     const [x, y, depth] = project(nodes[i], camera, rotation, width, height);
-    if (depth <= 0 || x < -10 || x > width + 10 || y < -10 || y > height + 10) continue;
+    if (depth <= 0 || x < -20 || x > width + 20 || y < -20 || y > height + 20) continue;
     const key = `${Math.floor(x / 16)},${Math.floor(y / 16)}`;
     if (!pickGrid.has(key)) pickGrid.set(key, []);
-    pickGrid.get(key).push({ i, x, y, depth });
+    pickGrid.get(key).push({ i, x, y, depth, radius: projectedStarRadius(nodes[i], camera, depth) * (1 + GLOW_RADIUS_RATIO) });
   }
   projectionDirty = false;
 }
 function hitTest(x, y) {
   if (projectionDirty) rebuildPickGrid();
-  let best = -1, distance = 81, bestDepth = Infinity;
+  let best = -1, distance = Infinity, bestDepth = Infinity;
   const cx = Math.floor(x / 16), cy = Math.floor(y / 16);
   for (let xx = cx - 1; xx <= cx + 1; xx++) {
     for (let yy = cy - 1; yy <= cy + 1; yy++) {
       for (const point of pickGrid.get(`${xx},${yy}`) ?? []) {
         const d = (point.x - x) ** 2 + (point.y - y) ** 2;
+        if (d > Math.max(9, point.radius) ** 2) continue;
         if (d < distance - .25 || (Math.abs(d - distance) < .25 && point.depth < bestDepth)) {
           best = point.i; distance = d; bestDepth = point.depth;
         }

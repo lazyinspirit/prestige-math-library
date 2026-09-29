@@ -11,6 +11,7 @@ uniform vec4 uView;
 uniform vec2 uPan;
 uniform float uDpr;
 uniform float uWorld;
+uniform float uItems;
 uniform float uFade;
 uniform float uZoom;
 uniform float uMaxPoint;
@@ -26,7 +27,10 @@ void main() {
     up * uView.y + uPan.y * depth, .999 * depth - .02, depth);
   float size = uWorld > .5 ? aSize * uView.z / depth
     : aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .18);
-  gl_PointSize = clamp(size * uDpr * (aState > 1.5 ? 1.45 : 1.), 1., uMaxPoint);
+  if (uItems > .5) {
+    size = min(20., aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .45));
+  }
+  gl_PointSize = clamp(size * uDpr, 1., uMaxPoint);
   vColor = aColor;
   vAlpha = aAlpha * uFade * (aState < .01 ? 0. : min(aState, 1.));
   vState = aState;
@@ -38,14 +42,30 @@ in float vAlpha;
 in float vState;
 out vec4 fragColor;
 uniform float uWorld;
+uniform float uItems;
 void main() {
   vec2 p = gl_PointCoord * 2. - 1.;
   float r2 = dot(p, p);
-  if (r2 > 1. || vAlpha < .00001) discard;
+  if (r2 >= 1. || vAlpha < .00001) discard;
+  if (uItems > .5) {
+    // Analytic sphere, with body radius .8 and a halo ending at 1.0 (a quarter-radius beyond it).
+    float r = sqrt(r2);
+    vec2 surface = p / .8;
+    float z = sqrt(max(0., 1. - dot(surface, surface)));
+    vec3 normal = normalize(vec3(surface, z));
+    float limb = .26 + .62 * z + .12 * max(0., dot(normal, normalize(vec3(-.4, -.5, .8))));
+    float edge = max(fwidth(r), .002);
+    float body = 1. - smoothstep(.8 - edge, .8 + edge, r);
+    float halo = .18 * pow(1. - smoothstep(.8, 1., r), 3.);
+    vec3 surfaceColor = mix(vColor, vec3(1.), .22 * pow(z, 6.)) * limb;
+    float emphasis = vState > 1.5 ? 1.6 : 1.;
+    vec3 color = mix(vColor * .7, surfaceColor, body) * emphasis;
+    fragColor = vec4(color, (body + halo * (1. - body)) * vAlpha);
+    return;
+  }
   float profile = uWorld > .5 ? exp(-r2 * 5.) * (1. - smoothstep(.7, 1., r2))
     : exp(-r2 * 42.) + .14 * exp(-r2 * 5.);
   vec3 color = uWorld > .5 ? vColor : mix(vColor, vec3(1.), .35 * exp(-r2 * 85.));
-  if (vState > 2.5) profile += .45 * exp(-pow((sqrt(r2) - .72) * 30., 2.));
   fragColor = vec4(color, min(1., profile * vAlpha));
 }`;
 
@@ -94,7 +114,7 @@ export class GalaxyRenderer {
     compositeShaders.forEach(shader => gl.deleteShader(shader));
     gl.useProgram(this.program);
     this.attributes = Object.fromEntries(['aPosition', 'aColor', 'aSize', 'aAlpha', 'aState'].map(name => [name, gl.getAttribLocation(this.program, name)]));
-    this.uniforms = Object.fromEntries(['uOrbit', 'uView', 'uPan', 'uDpr', 'uWorld', 'uFade', 'uZoom', 'uMaxPoint'].map(name => [name, gl.getUniformLocation(this.program, name)]));
+    this.uniforms = Object.fromEntries(['uOrbit', 'uView', 'uPan', 'uDpr', 'uWorld', 'uItems', 'uFade', 'uZoom', 'uMaxPoint'].map(name => [name, gl.getUniformLocation(this.program, name)]));
     gl.uniform1f(this.uniforms.uMaxPoint, gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)[1]);
     gl.clearColor(0, 0, 0, 1);
     gl.enable(gl.BLEND);
@@ -154,6 +174,7 @@ export class GalaxyRenderer {
       gl.vertexAttribPointer(a.aState, 1, gl.FLOAT, false, 4, 0);
     } else { gl.disableVertexAttribArray(a.aState); gl.vertexAttrib1f(a.aState, 1); }
     gl.uniform1f(this.uniforms.uWorld, world ? 1 : 0);
+    gl.uniform1f(this.uniforms.uItems, itemStates ? 1 : 0);
     gl.uniform1f(this.uniforms.uFade, fade);
     gl.blendFunc(gl.SRC_ALPHA, absorbing ? gl.ONE_MINUS_SRC_ALPHA : gl.ONE);
     gl.drawArrays(gl.POINTS, 0, layer.count);
