@@ -112,6 +112,9 @@ author the consumer item anyway, and leave its decision escalated until the
 supplier and actual proof use are reconciled. Reconcile dependencies and clear
 all required Step-3 gates before Step 4. They may add
 necessary definitions and lemmas to assigned existing A pages before consumers.
+Step 3 requires recorded full-text fetch evidence for its sources; a URL that
+later stops responding does not hold completed authoring. Live URL and source
+backing checks run at Step 5b, where reviewers repair citation access.
 Escalate substantial unmet
 prerequisites and unresolved mathematics to the owner. Report potentially
 defective published items with exact evidence for the canonical ledger.

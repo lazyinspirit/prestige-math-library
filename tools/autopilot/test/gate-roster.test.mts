@@ -14,6 +14,20 @@ import assert from 'node:assert/strict';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
+test('live URL and backing checks wait for Step 5b after fetched Step 3 sources', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  const ids = (stage: string) => mod.stages.find((s: any) => s.id === stage)
+    .gates(ctx).map((g: any) => g.id);
+  const author = ids('3b-author');
+  assert.ok(author.includes('source-fetch-check'));
+  assert.ok(!author.includes('url-liveness'));
+  assert.ok(!author.includes('source-backing'));
+  const later = ids('5b-cross');
+  assert.ok(later.indexOf('url-liveness') >= 0);
+  assert.ok(later.indexOf('url-liveness') < later.indexOf('source-backing'));
+});
+
 test('the step-7 window validates round evidence and repeats the complete battery', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };

@@ -16,7 +16,7 @@ const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
 export function step5Stages(d: any) {
   const {
-    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
+    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
   } = d;
 
@@ -221,7 +221,8 @@ export function step5Stages(d: any) {
         // audit record, but may need to remain published for unchanged
         // published consumers. `routingGate(final)` above validates that exact
         // hash-bound Step-7 handoff before this bounded pending-audit window.
-        ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx), urlGate(ctx), policyItemGate(ctx),
+        ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx),
+        urlGate(ctx), backingGate(ctx), policyItemGate(ctx),
         ...contractGates(ctx, { reviewed: true }), impactGate(ctx),
         gate('impact-audit-5b', ['node', 'tools/impact-audit.mjs',
           '--touches', touchesPath(ctx), '--from', 'post-5a', '--current',

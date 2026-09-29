@@ -1641,7 +1641,10 @@ export const stages = [
       // mint checks would reject those IDs; item mode below checks their content.
       ...coverageGates(ctx, { requireDestination: true }),
       extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
-      urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+      // A source already fetched and stamped can be cited while its live URL
+      // is temporarily unavailable. Step 5b checks URL liveness and backing
+      // after independent review; a dead link does not hold Step 3 authoring.
+      fetchGate(ctx),
       ...repoWide(ctx).filter(g => g.id !== 'splice-verify'),
       policyItemGate(ctx), ...contractGates(ctx, { reviewed: false })],
     maxFixRounds: Infinity,
@@ -1781,7 +1784,7 @@ export const stages = [
 
   // Direct review follows Step 3 authoring and the mechanical Step 4 barrier.
   ...step5Stages({
-    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
+    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
   }),
 

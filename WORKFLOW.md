@@ -141,6 +141,8 @@ reconciled. Pairs sharing a batch remain serialized to protect shared files;
 the final Step-3 gate still requires sound, current item decisions, reconciled
 dependencies and every required integrity check to pass. They write
 every assigned item, example, counterexample, page and proof contract. They
+retain full-text fetch stamps, while live URL and source-backing gates run at
+Step 5b; a later transport failure does not hold Step 3 authoring. They
 follow ascending dependency levels within their assigned work, using the
 generated per-pair author task as the exact order; ties use page order and
 item ID. Local additions or dependency repairs require recomputing affected
