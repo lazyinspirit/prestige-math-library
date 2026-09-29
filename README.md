@@ -18,7 +18,6 @@
 - `research/`: plans, source notes, generated tasks, and review evidence.
 - `tools/`: validators and planning tools; `tools/autopilot/` runs the build.
 - `.autopilot/`: ignored runtime state for individual runs.
-- `explainer/`: HTML explainers, a preview server, and a video capture tool.
 - `galaxy/`: [interactive view](galaxy/README.md) of published items.
 - `prestige-intelligence` checkout: the website; [tools/paths.mjs](tools/paths.mjs)
   finds it, or `PRESTIGE_APP_DIR` points to it.

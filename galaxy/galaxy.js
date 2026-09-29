@@ -261,7 +261,7 @@ function applyGraph(next) {
 async function init() {
   try {
     renderer = new GalaxyRenderer(canvas);
-    const response = await fetch('/graph.json');
+    const response = await fetch('/universe/graph.json');
     if (!response.ok) throw new Error(`Graph request failed (${response.status})`);
     graph = await response.json(); nodes = graph.nodes;
     prerequisites = nodes.map(() => []); consumers = nodes.map(() => []);

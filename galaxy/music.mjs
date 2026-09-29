@@ -1,8 +1,8 @@
 export const TRACKS = Object.freeze([
-  { title: 'Salut d’Amour, Op. 12', composer: 'Edward Elgar', performer: 'Luis Kolodin', file: '/audio/elgar-salut.mp3' },
-  { title: 'Prelude in C Major, BWV 846', composer: 'J. S. Bach', performer: 'Kimiko Ishizaka', file: '/audio/bach-prelude.mp3' },
-  { title: 'Moonlight Sonata · II. Allegretto', composer: 'Ludwig van Beethoven', performer: 'Musopen recording', file: '/audio/beethoven-allegretto.mp3' },
-  { title: 'Nocturne, Op. 9 No. 2', composer: 'Frédéric Chopin', performer: 'Frank Levy', file: '/audio/chopin-nocturne.mp3' },
+  { title: 'Salut d’Amour, Op. 12', composer: 'Edward Elgar', performer: 'Luis Kolodin', file: '/universe/audio/elgar-salut.mp3' },
+  { title: 'Prelude in C Major, BWV 846', composer: 'J. S. Bach', performer: 'Kimiko Ishizaka', file: '/universe/audio/bach-prelude.mp3' },
+  { title: 'Moonlight Sonata · II. Allegretto', composer: 'Ludwig van Beethoven', performer: 'Musopen recording', file: '/universe/audio/beethoven-allegretto.mp3' },
+  { title: 'Nocturne, Op. 9 No. 2', composer: 'Frédéric Chopin', performer: 'Frank Levy', file: '/universe/audio/chopin-nocturne.mp3' },
 ]);
 
 export function initMusic() {

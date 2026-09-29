@@ -15,6 +15,7 @@ const assets = new Map([
   ['/audio/credits.html', 'audio/credits.html', 'text/html'], ['/galaxy.js', 'galaxy.js', 'text/javascript'],
   ['/renderer.mjs', 'renderer.mjs', 'text/javascript'], ['/galaxy-model.mjs', 'galaxy-model.mjs', 'text/javascript'],
   ['/style.css', 'style.css', 'text/css'], ['/graph-utils.mjs', 'graph-utils.mjs', 'text/javascript'],
+  ['/preview.png', 'preview.png', 'image/png'],
 ].map(([route, file, type]) => [route, { file: new URL(file, import.meta.url), type } ]));
 // Reuse the site's installed KaTeX and enumerate its assets; no CDN or arbitrary paths.
 const require = createRequire(import.meta.url);
@@ -28,11 +29,15 @@ for (const [file, type] of [
   ...(await readdir(join(katexDist, 'fonts'))).filter(name => /\.(woff2?|ttf)$/.test(name))
     .map(name => [`fonts/${name}`, name.endsWith('.woff2') ? 'font/woff2' : name.endsWith('.woff') ? 'font/woff' : 'font/ttf']),
 ]) assets.set(`/vendor/katex/${file}`, { file: join(katexDist, file), type });
-for (const track of TRACKS) assets.set(track.file, { file: new URL(`.${track.file}`, import.meta.url), type: 'audio/mpeg' });
+for (const track of TRACKS) {
+  const assetPath = track.file.replace(/^\/universe/, '');
+  assets.set(assetPath, { file: new URL(`.${assetPath}`, import.meta.url), type: 'audio/mpeg' });
+}
 
 const server = createServer(async (req, res) => {
   if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405, { allow: 'GET, HEAD' }); res.end(); return; }
-  const path = new URL(req.url, 'http://localhost').pathname;
+  const pathname = new URL(req.url, 'http://localhost').pathname;
+  const path = pathname === '/universe' ? '/' : pathname.startsWith('/universe/') ? pathname.slice('/universe'.length) : pathname;
   if (path === '/graph.json') {
     const etag = `"${store.snapshot.revision}"`;
     if (req.headers['if-none-match'] === etag) { res.writeHead(304, { etag }); res.end(); return; }
@@ -76,7 +81,7 @@ const server = createServer(async (req, res) => {
       return;
     }
     const body = asset.file ? await readFile(asset.file) : asset.body;
-    res.writeHead(200, { 'content-type': `${asset.type}; charset=utf-8`, 'cache-control': 'no-cache' });
+    res.writeHead(200, { 'content-type': asset.type === 'image/png' ? asset.type : `${asset.type}; charset=utf-8`, 'cache-control': asset.type === 'image/png' ? 'public, max-age=86400' : 'no-cache' });
     res.end(req.method === 'HEAD' ? undefined : body);
   } catch { res.writeHead(500); res.end('Could not load preview asset'); }
 });

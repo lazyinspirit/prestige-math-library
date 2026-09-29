@@ -1,4 +1,4 @@
-import renderMathInElement from '/vendor/katex/contrib/auto-render.mjs';
+import renderMathInElement from '/universe/vendor/katex/contrib/auto-render.mjs';
 
 /** Preserve plain text as text; render only explicitly delimited mathematical notation. */
 export function renderTitle(element, title) {

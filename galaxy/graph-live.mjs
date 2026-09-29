@@ -6,7 +6,7 @@ export function followGraph(getRevision, applyGraph) {
     if (running) { pending = true; return; }
     running = true;
     try {
-      const response = await fetch('/graph.json', {
+      const response = await fetch('/universe/graph.json', {
         headers: { 'If-None-Match': `"${getRevision()}"` }, cache: 'no-store',
         signal: AbortSignal.timeout(20000),
       });
@@ -21,7 +21,7 @@ export function followGraph(getRevision, applyGraph) {
       if (pending && !closed) { pending = false; void refresh(); }
     }
   };
-  const events = new EventSource('/graph-events');
+  const events = new EventSource('/universe/graph-events');
   events.addEventListener('graph', event => {
     if (JSON.parse(event.data).revision !== getRevision()) void refresh();
   });

@@ -5,6 +5,10 @@ occupies the central bulge of a three-dimensional spiral galaxy. Dragging
 orbits the camera above, below or edge-on to its disc. The galaxy has a warm
 stellar core, blue gas, absorbing dust lanes and a pure black surround.
 
+The public page is `https://alphabetamath.cc/universe`. The app proxies that
+path to the private galaxy service. All browser assets and the live graph use
+the `/universe/` prefix; the preview server accepts the same prefix.
+
 No dependency lines are drawn. Hovering illuminates the complete transitive
 set of prerequisites or downstream consumers, selected in the filter panel.
 
