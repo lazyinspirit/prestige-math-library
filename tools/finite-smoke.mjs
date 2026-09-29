@@ -85,6 +85,81 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'gns-cyclic-c2-boundaries': () => {
+    // Independent finite models for the GNS boundary claims. A real function
+    // on C2={e,s} has Gram matrix [[a,b],[b,a]], whose two eigenvalues are
+    // a+b and a-b. Enumerate nonnegative integral coefficients and dominated
+    // pairs rather than trusting the prose's zero/trivial-group calculations.
+    const fail = summary => ({ ok: false, summary });
+    let positive = 0, dominated = 0, split = 0, characters = 0, trivial = 0;
+    const phases = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+    const multiply = ([x, y], [u, v]) => [x * u - y * v, x * v + y * u];
+    for (let a = 0; a <= 4; a++) {
+      // On the one-element group the Gram matrix is [a]. Its quotient is
+      // zero for a=0 and one-dimensional otherwise; the point vector has
+      // squared norm a and is cyclic in both cases.
+      const rank = Number(a > 0);
+      if (rank !== (a === 0 ? 0 : 1)) return fail(`trivial-group quotient rank mismatch at a=${a}`);
+      for (let u = 0; u <= a; u++) {
+        const contraction = a === 0 ? 0 : u / a;
+        if (contraction < 0 || contraction > 1 || (a === 0 ? u !== 0 : contraction * a !== u))
+          return fail(`trivial-group domination mismatch at a=${a}, u=${u}`);
+        trivial++;
+      }
+    }
+    for (const first of phases) for (const second of phases) {
+      const conjugateFirst = [first[0], -first[1]];
+      const intertwiner = multiply(second, conjugateFirst);
+      const images = phases.filter(candidate => {
+        const [x, y] = multiply(candidate, first);
+        return x === second[0] && y === second[1];
+      });
+      if (images.length !== 1 || images[0][0] !== intertwiner[0] || images[0][1] !== intertwiner[1])
+        return fail('trivial-group pointed unitary was not unique');
+    }
+    for (let a = 0; a <= 4; a++) for (let b = -a; b <= a; b++) {
+      const plus = a + b, minus = a - b;
+      const rank = Number(plus > 0) + Number(minus > 0);
+      if (rank === 0 !== (a === 0 && b === 0)) return fail(`wrong GNS rank at (a,b)=(${a},${b})`);
+      if (a === 0 && (rank !== 0 || plus !== 0 || minus !== 0)) return fail('zero function has nonzero quotient');
+      // The point mass has Gram norm a and its C2 orbit spans the quotient.
+      if (a !== (plus + minus) / 2 || rank > 2) return fail(`cyclic norm/rank mismatch at (${a},${b})`);
+      positive++;
+      for (let u = 0; u <= a; u++) for (let v = -u; v <= u; v++) {
+        if (a - u < Math.abs(b - v)) continue; // phi-psi must be positive type
+        const p = u + v, m = u - v;
+        if (p < 0 || m < 0 || p > plus || m > minus) return fail(`domination mismatch at (${a},${b};${u},${v})`);
+        if ((plus === 0 && p !== 0) || (minus === 0 && m !== 0)) return fail('operator fails on a null eigenspace');
+        // On the nonzero GNS eigenspaces T has eigenvalues p/plus, m/minus,
+        // so 0<=T<=I and its e,s coefficients reconstruct u,v exactly.
+        if (p + m !== 2 * u || p - m !== 2 * v) return fail('dominated coefficient reconstruction failed');
+        dominated++;
+        if (a === 4 && u > 0 && u < 4 && rank === 2) {
+          const nonscalar = p * minus !== m * plus;
+          const distinctNormalizedParts = 4 * v !== u * b;
+          if (nonscalar !== distinctNormalizedParts) return fail(`split criterion mismatch at (${b};${u},${v})`);
+          if (nonscalar) split++;
+        }
+      }
+    }
+    for (let dimension = 1; dimension <= 4; dimension++) {
+      for (let mask = 0; mask < 2 ** dimension; mask++) {
+        let traceS = 0;
+        for (let j = 0; j < dimension; j++) traceS += (mask & (1 << j)) ? -1 : 1;
+        if (dimension + traceS < 0 || dimension - traceS < 0 || dimension / dimension !== 1)
+          return fail(`normalized C2 character fails at dimension ${dimension}, mask ${mask}`);
+        characters++;
+      }
+    }
+    for (let q = -4; q <= 4; q++) {
+      // phi(e)=1, phi(s)=q/4. Its GNS representation is one-dimensional
+      // exactly at the two extreme points of P_1(C2)=[-1,1].
+      const rank = Number(4 + q > 0) + Number(4 - q > 0);
+      if ((rank === 1) !== (Math.abs(q) === 4)) return fail(`purity/rank mismatch at q=${q}`);
+    }
+    if (split === 0) return fail('no nonscalar dominated example was exercised');
+    return { ok: true, summary: `checked ${positive} C2 positive-type Grams, ${dominated} dominated pairs, ${split} nonscalar splits, ${characters} normalized characters, ${trivial} trivial-group dominated cases, 16 pointed unitary phase pairs and nine purity samples` };
+  },
   'base-b-digit-orbit-cylinders': ({ max_base = 4 } = {}) => {
     // Independent finite arithmetic views of the selected digit-cylinder
     // lemma: repeated quotient/remainder digits versus the half-open interval

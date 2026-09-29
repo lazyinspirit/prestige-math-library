@@ -235,6 +235,15 @@ For the fair-coin shift, a separate finite check enumerates short binary words
 and disjoint cylinder prescriptions, including empty ones, to challenge the
 exact product-mass identity used in the mixing proof. It does not certify Borel
 mixing or the completed-measure argument.
+For the cyclic GNS results, the finite-smoke registry enumerates real positive
+type Gram matrices on the two-element group, dominated positive type pairs,
+normalized characters, and the zero and one-dimensional cases of the trivial
+group. It checks quotient ranks, the scalar contraction bounds, pointed
+unitary uniqueness in finite phase samples, and the finite pure/extreme
+endpoints. Each contract entry names an exact assertion in its item with
+`check` and `asserts`; a narrative calculation alone does not run a check.
+These finite models can expose normalization or zero-case errors but do not
+prove the general GNS, commutant, or irreducibility theorems.
 
 ## Review, sources and impact
 
