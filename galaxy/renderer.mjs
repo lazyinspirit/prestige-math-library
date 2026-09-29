@@ -1,4 +1,4 @@
-import { CAMERA_DISTANCE } from './galaxy-model.mjs';
+import { CAMERA_DISTANCE, STAR_RADIUS, MAX_GLOW_RADIUS } from './galaxy-model.mjs';
 
 const VERTEX = `#version 300 es
 in vec3 aPosition;
@@ -15,11 +15,13 @@ uniform float uItems;
 uniform float uFade;
 uniform float uZoom;
 uniform float uMaxPoint;
+uniform float uScaleLimit;
 out vec3 vColor;
 out float vAlpha;
 out float vState;
 out float vDiameter;
 out vec3 vSeed;
+out float vBodyRadius;
 void main() {
   float x = uOrbit.x * aPosition.x - uOrbit.y * aPosition.y;
   float y = uOrbit.y * aPosition.x + uOrbit.x * aPosition.y;
@@ -30,10 +32,11 @@ void main() {
   float size = uWorld > .5 ? aSize * uView.z / depth
     : aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .18);
   if (uItems > .5) {
-    size = min(120., aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .75));
+    size = aSize * min(uScaleLimit, sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .48));
   }
   gl_PointSize = clamp(size * uDpr, 1., uMaxPoint);
   vDiameter = gl_PointSize;
+  vBodyRadius = ${(2 * STAR_RADIUS).toFixed(2)} / max(aSize, .001);
   vSeed = aPosition * 137.;
   vColor = aColor;
   vAlpha = aAlpha * uFade * (aState < .01 ? 0. : min(aState, 1.));
@@ -46,66 +49,37 @@ in float vAlpha;
 in float vState;
 in float vDiameter;
 in vec3 vSeed;
+in float vBodyRadius;
 out vec4 fragColor;
 uniform float uWorld;
 uniform float uItems;
-// Smooth 3D noise follows the spherical surface, with a stable seed per star.
-float hash(vec3 p) {
-  p = fract(p * .1031);
-  p += dot(p, p.yzx + 33.33);
-  return fract((p.x + p.y) * p.z);
-}
-float noise(vec3 p) {
-  vec3 i = floor(p), f = fract(p);
-  f = f * f * (3. - 2. * f);
-  return mix(mix(mix(hash(i), hash(i + vec3(1,0,0)), f.x),
-                 mix(hash(i + vec3(0,1,0)), hash(i + vec3(1,1,0)), f.x), f.y),
-             mix(mix(hash(i + vec3(0,0,1)), hash(i + vec3(1,0,1)), f.x),
-                 mix(hash(i + vec3(0,1,1)), hash(i + vec3(1,1,1)), f.x), f.y), f.z);
-}
-float surfaceNoise(vec3 p, float footprint) {
-  float value = 0., weight = .55;
-  for (int i = 0; i < 4; i++) {
-    // Fade frequencies that cannot be resolved by a pixel.
-    value += weight * mix(noise(p), .5, smoothstep(.3, .9, footprint));
-    p = p * 2.03 + 7.1; footprint *= 2.03; weight *= .5;
-  }
-  return value;
-}
 void main() {
   vec2 p = gl_PointCoord * 2. - 1.;
   float r2 = dot(p, p);
   if (r2 >= 1. || vAlpha < .00001) discard;
   if (uItems > .5) {
-    // Emissive photosphere and a corona ending one-quarter body radius beyond the limb.
+    // A tiny spherical photosphere sits inside a much larger, continuously fading atmosphere.
     float r = sqrt(r2);
-    vec2 surface = p / .8;
-    float z = sqrt(max(0., 1. - dot(surface, surface)));
-    vec3 normal = normalize(vec3(surface, z));
-    float edge = max(fwidth(r), .001);
-    float body = 1. - smoothstep(.8 - edge, .8 + edge, r);
-    float grain = .5, activity = .5, spots = 0.;
-    if (vDiameter > 6.) {
-      vec3 q = normal * 24. + vSeed;
-      float footprint = max(length(dFdx(q)), length(dFdy(q)));
-      activity = noise(q * .14);
-      grain = surfaceNoise(q + .55 * vec3(noise(q), noise(q + 13.), noise(q + 29.)), footprint);
-      spots = smoothstep(.69, .86, activity) * (1. - smoothstep(.28, .48, grain));
-    }
-    float filaments = smoothstep(.38, .65, grain);
-    float brightness = (.56 + .44 * z) * (.48 + .85 * grain + .36 * filaments) * (1. - .72 * spots);
-    // Convert display colors to linear light before the final exposure/gamma pass.
+    float bodyR = vBodyRadius;
+    float z = sqrt(max(0., 1. - r2 / (bodyR * bodyR)));
+    float edge = max(fwidth(r) * .7, bodyR * .16);
+    float body = 1. - smoothstep(bodyR - edge, bodyR + edge, r);
+    float grain = 1. + .06 * sin(p.x * vDiameter * .9 + vSeed.x)
+      * sin(p.y * vDiameter * .8 + vSeed.y);
     vec3 base = pow(vColor, vec3(2.2));
-    vec3 hot = min(vec3(1.), base * vec3(1.1, 1.65, 1.3) + vec3(.025, .012, .002));
-    vec3 surfaceColor = mix(base * .65, hot, filaments) * brightness;
-    float altitude = clamp((r - .8) / .2, 0., 1.);
+    vec3 coreColor = mix(base, vec3(1., .93, .8), .62 * pow(z, 2.));
+    float surface = body * (.3 + 1.7 * pow(z, .6)) * grain;
+    float distanceFromSurface = max(0., r - bodyR);
+    float cutoff = 1. - smoothstep(.6, 1., r);
+    float atmosphere = (.34 * exp(-distanceFromSurface / (bodyR * 1.5))
+      + .045 * exp(-r2 * 5.)) * cutoff;
+    // Fine radial rays remain subordinate to the circular halo.
     float angle = atan(p.y, p.x);
-    float streamers = .78 + .22 * sin(angle * 19. + vSeed.x + 3. * sin(angle * 7.));
-    float halo = .85 * exp(-2.6 * altitude) * (1. - smoothstep(.35, 1., altitude)) * streamers;
-    vec3 coronaColor = base * vec3(1., .55, .45);
-    float emphasis = vState > 1.5 ? 1.45 : 1.;
-    fragColor = vec4(mix(coronaColor, surfaceColor, body) * emphasis,
-      (body + halo * (1. - body)) * vAlpha);
+    float rays = pow(.5 + .5 * sin(angle * 23. + vSeed.x), 18.);
+    atmosphere *= 1. + .14 * rays;
+    float emphasis = vState > 1.5 ? 1.5 : 1.;
+    vec3 light = (coreColor * surface + base * atmosphere) * vAlpha * emphasis;
+    fragColor = vec4(light, 1.);
     return;
   }
   float profile = uWorld > .5 ? exp(-r2 * 5.) * (1. - smoothstep(.7, 1., r2))
@@ -159,7 +133,7 @@ export class GalaxyRenderer {
     compositeShaders.forEach(shader => gl.deleteShader(shader));
     gl.useProgram(this.program);
     this.attributes = Object.fromEntries(['aPosition', 'aColor', 'aSize', 'aAlpha', 'aState'].map(name => [name, gl.getAttribLocation(this.program, name)]));
-    this.uniforms = Object.fromEntries(['uOrbit', 'uView', 'uPan', 'uDpr', 'uWorld', 'uItems', 'uFade', 'uZoom', 'uMaxPoint'].map(name => [name, gl.getUniformLocation(this.program, name)]));
+    this.uniforms = Object.fromEntries(['uOrbit', 'uView', 'uPan', 'uDpr', 'uWorld', 'uItems', 'uFade', 'uZoom', 'uMaxPoint', 'uScaleLimit'].map(name => [name, gl.getUniformLocation(this.program, name)]));
     gl.uniform1f(this.uniforms.uMaxPoint, gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)[1]);
     gl.clearColor(0, 0, 0, 1);
     gl.enable(gl.BLEND);
@@ -193,6 +167,7 @@ export class GalaxyRenderer {
     // Native high-DPI detail, bounded only to keep very large windows within GPU limits.
     const max = this.gl.getParameter(this.gl.MAX_RENDERBUFFER_SIZE);
     this.dpr = Math.min(devicePixelRatio || 1, 3, max / width, max / height);
+    this.pointScaleLimit = Math.min(12, this.gl.getParameter(this.gl.ALIASED_POINT_SIZE_RANGE)[1] / (2 * MAX_GLOW_RADIUS * this.dpr));
     this.canvas.width = Math.round(width * this.dpr); this.canvas.height = Math.round(height * this.dpr);
     const gl = this.gl;
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
@@ -236,9 +211,12 @@ export class GalaxyRenderer {
     gl.uniform4f(u.uOrbit, Math.cos(angle), Math.sin(angle), Math.cos(camera.pitch), Math.sin(camera.pitch));
     gl.uniform4f(u.uView, 2 * focal / this.width, 2 * focal / this.height, focal, 0);
     gl.uniform2f(u.uPan, 2 * camera.panX / this.width, -2 * camera.panY / this.height);
+    gl.uniform1f(u.uScaleLimit, this.pointScaleLimit);
     gl.uniform1f(u.uDpr, this.dpr); gl.uniform1f(u.uZoom, camera.zoom);
     // Decorative matter recedes during inspection/filtering so the actual items remain legible.
-    const atmosphere = (inspecting ? .075 : 1) * visibleFraction;
+    const overviewZoom = 1.08 * this.width / Math.min(this.width, this.height);
+    const zoomFade = 1 / (1 + Math.pow(Math.max(0, camera.zoom / overviewZoom - 1) / 1.5, 2));
+    const atmosphere = (inspecting ? .075 : 1) * visibleFraction * zoomFade;
     this.drawLayer(this.gas, true, atmosphere);
     this.drawLayer(this.faintStars, false, atmosphere);
     this.drawLayer(this.dust, true, atmosphere, false, true);

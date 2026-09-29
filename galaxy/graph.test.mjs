@@ -91,19 +91,21 @@ test('downstream counts deduplicate diamonds and correctly collapse cycles', asy
   counts.forEach((count, i) => assert.equal(count, reachable(i, consumers).size));
 });
 
-test('radii follow log reach, theorem importance boosts and hard limits', async () => {
-  const { starRadius, MAX_STAR_RADIUS, projectedStarRadius, GLOW_RADIUS_RATIO } = await import('./galaxy-model.mjs');
+test('consumer reach and theorem importance scale light, never the stellar body', async () => {
+  const { starAppearance, STAR_RADIUS, MAX_GLOW_RADIUS, projectedStarRadius } = await import('./galaxy-model.mjs');
   const definition = { kind: 'definition', downstreamCount: 0 };
-  assert.ok(starRadius(definition) > 0);
-  const low = starRadius({ ...definition, downstreamCount: 10 });
-  const medium = starRadius({ ...definition, downstreamCount: 100 });
-  const high = starRadius({ ...definition, downstreamCount: 1000 });
-  assert.ok(low < medium && medium < high);
-  assert.ok((high - medium) < (medium - low) * 1.1, 'log growth avoids linear growth');
+  const low = starAppearance(definition);
+  const medium = starAppearance({ ...definition, downstreamCount: 100 });
+  const high = starAppearance({ ...definition, downstreamCount: 10000 });
+  assert.equal(low.radius, STAR_RADIUS);
+  assert.equal(high.radius, low.radius);
+  assert.ok(low.luminosity < medium.luminosity && medium.luminosity < high.luminosity);
+  assert.ok(low.glowRadius < medium.glowRadius && medium.glowRadius < high.glowRadius);
   const theorem = { kind: 'theorem', downstreamCount: 30 };
-  assert.ok(starRadius({ ...theorem, landmark: true }) > starRadius(theorem));
-  assert.ok(starRadius({ ...theorem, crossCategoryConsumers: 4 }) > starRadius(theorem));
-  assert.equal(starRadius({ ...theorem, downstreamCount: 1e12, landmark: true }), MAX_STAR_RADIUS);
-  assert.equal(projectedStarRadius({ radius: MAX_STAR_RADIUS }, { zoom: 180 }, 1), 48);
-  assert.equal(GLOW_RADIUS_RATIO, .25);
+  assert.ok(starAppearance({ ...theorem, landmark: true }).luminosity > starAppearance(theorem).luminosity);
+  assert.ok(starAppearance({ ...theorem, crossCategoryConsumers: 4 }).luminosity > starAppearance(theorem).luminosity);
+  const capped = starAppearance({ ...theorem, downstreamCount: 1e12, landmark: true });
+  assert.equal(capped.glowRadius, MAX_GLOW_RADIUS);
+  assert.equal(capped.radius, STAR_RADIUS);
+  assert.ok(projectedStarRadius(capped, { zoom: 180 }, 1) <= STAR_RADIUS * 12);
 });

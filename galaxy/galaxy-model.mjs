@@ -21,16 +21,16 @@ const spiral = radius => 5.8 * Math.pow(radius, .58);
 const gaussian = rng => Math.sqrt(-2 * Math.log(Math.max(1e-8, rng()))) * Math.cos(TAU * rng());
 const rgb = hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16) / 255);
 
-// Body radius at the reference distance, in CSS pixels before perspective/zoom scaling.
-export const MAX_STAR_RADIUS = 1.6;
-export const GLOW_RADIUS_RATIO = .25;
-export function starRadius(node) {
+// Small bodies share a radius; only luminosity and atmospheric extent encode importance.
+export const STAR_RADIUS = .38;
+export const MAX_GLOW_RADIUS = 7;
+export function starAppearance(node) {
   const reach = Math.max(0, node.downstreamCount ?? 0);
   const theorem = ['theorem', 'lemma', 'proposition', 'corollary'].includes(node.kind);
-  // Cross-subject use is structural evidence; landmark is the existing editorial designation.
   const importance = theorem ? (node.landmark ? .28 : 0)
     + Math.min(.15, .065 * Math.log1p(node.crossCategoryConsumers ?? 0)) : 0;
-  return Math.min(MAX_STAR_RADIUS, (.3 + .11 * Math.log1p(reach)) * (1 + importance));
+  const luminosity = Math.min(5, (.65 + .34 * Math.log1p(reach)) * (1 + importance));
+  return { radius: STAR_RADIUS, luminosity, glowRadius: Math.min(MAX_GLOW_RADIUS, 2.2 + luminosity) };
 }
 
 /** Shared coordinates for the GPU and picking. The disc has thickness; the core is a spheroid. */
@@ -50,9 +50,9 @@ export function layoutItems(nodes, categories, consumers) {
     node.y = radius * Math.sin(angle);
     node.z = gaussian(rng) * (core ? .065 : .012 + .013 * radius);
     node.color = colorIndex(node.kind);
-    node.radius = starRadius(node);
-    node.size = 2 * node.radius * (1 + GLOW_RADIUS_RATIO);
-    vertices.set([node.x, node.y, node.z, ...rgb(COLORS[node.color]), node.size, .8], i * 8);
+    Object.assign(node, starAppearance(node));
+    node.size = 2 * node.glowRadius;
+    vertices.set([node.x, node.y, node.z, ...rgb(COLORS[node.color]), node.size, node.luminosity], i * 8);
   });
   return vertices;
 }
@@ -106,8 +106,13 @@ export function defaultCamera(width, height) {
   return { ...DEFAULT_CAMERA, zoom: DEFAULT_CAMERA.zoom * width / Math.min(width, height), panY: -.16 * height };
 }
 export const CAMERA_DISTANCE = 3.8;
-export function projectedStarRadius(node, camera, depth) {
-  return Math.min(48, node.radius * Math.sqrt(CAMERA_DISTANCE / depth) * Math.pow(camera.zoom, .75));
+export function projectedStarRadius(node, camera, depth, scaleLimit = 12) {
+  const scale = Math.min(scaleLimit, Math.sqrt(CAMERA_DISTANCE / depth) * Math.pow(camera.zoom, .48));
+  return node.radius * scale;
+}
+export function projectedGlowRadius(node, camera, depth, scaleLimit = 12) {
+  const scale = Math.min(scaleLimit, Math.sqrt(CAMERA_DISTANCE / depth) * Math.pow(camera.zoom, .48));
+  return node.glowRadius * scale;
 }
 /** Perspective projection mirrors the vertex shader; depth is also used to pick overlapping stars. */
 export function project(node, camera, rotation, width, height) {

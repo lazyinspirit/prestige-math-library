@@ -87,34 +87,30 @@ not mathematical distance or difficulty.
 
 ## Star size and appearance
 
-Each item is an emissive sphere rendered by the GPU, with procedural surface
-granulation, bright filaments, dark active regions, limb darkening and a visible
-corona. Surface detail uses spherical 3D noise with per-star seeds; unresolved
-frequencies fade out to prevent shimmering. Theorem colors are saturated red-orange
-and converted to linear light before compositing. The corona fades exponentially
-with a smooth outer cutoff and subtle radial streamers. The halo reaches zero at `1.25 × body radius`: it extends
-one-quarter of a radius beyond the surface. Background dust retains its diffuse
-appearance. Hover emphasis changes brightness, not size.
+Items have small spherical luminous cores with fuzzy boundaries and broad,
+smoothly fading colored atmospheres. Core radius is fixed at **0.38 CSS pixels**
+at the reference distance, independent of consumer count or importance.
+Perspective and zoom scale all cores equally, capped at **4.56 CSS pixels**.
+On GPUs with smaller point limits, a shared scale cap keeps all bodies equal.
+A bright center and darker limb preserve the spherical appearance.
 
-Let `N` be the number of distinct transitive downstream consumers among published
-items. The base radius is `0.3 + 0.11 × ln(1 + N)`; the small floor keeps unused
-items visible. Shared dependency paths count once. `dependency-counts.mjs`
-collapses cycles into strongly connected components and uses bitsets to compute
-exact reach, excluding the item itself. Counts are rebuilt with content updates
-and are independent of the visible category filters.
+Distinct transitive downstream consumers control luminosity:
+`L = min(5, (0.65 + 0.34 × ln(1 + N)) × importance)`.
+The theorem-family importance multiplier is
+`1 + 0.28 × landmark + min(0.15, 0.065 × ln(1 + C))`, where C counts distinct
+other subject categories among direct consumers. These are explicit structural
+and editorial proxies for importance. They affect light, never body size.
 
-Theorem-family items receive an importance multiplier of
-`1 + 0.28 × landmark + min(0.15, 0.065 × ln(1 + C))`, where `C` is the number
-of distinct other subject categories containing direct consumers. Theorem family
-includes theorems, lemmas, propositions and corollaries. Cross-subject use is a
-structural importance signal; `landmark` is the existing editorial designation.
-These are transparent proxies, not a universal ranking of mathematical importance.
+Glow radius is `min(7, 2.2 + L)` reference pixels. Its exponential inner
+atmosphere and broad outer halo fade smoothly to zero, with subtle radial rays.
+Theorem halos remain red-orange; their compact hot centers approach warm white.
+Decorative gas fades with zoom so close views retain a dark background.
+Picking targets the compact cores, with a nine-pixel accessibility tolerance,
+rather than selecting stars from the edge of their large overlapping halos.
 
-After this multiplier, the reference body radius is capped at **1.6 CSS pixels**.
-Perspective and zoom scale it, with an additional **48 CSS pixel** body-radius cap
-at close range (60 pixels including the corona). The same projected size is used
-for hover picking. Zoom extends to 180× so surface features can be inspected;
-the compact reference radii preserve the default galaxy view. Radii have no random variation.
+Consumer counts are exact, deduplicated, and rebuilt automatically when published
+content changes. `dependency-counts.mjs` condenses cycles and uses bitsets to count
+transitive reach. Category filters do not alter luminosity. Zoom extends to 180×.
 
 ## Piano soundtrack
 
@@ -195,5 +191,5 @@ draft-only no-ops and missed-event polling. Browser integration verifies pushed
 add/edit/delete updates, retained camera and category filters, and reused GPU layers.
 
 Star tests cover exact transitive counts through diamonds and cycles, comparison
-with direct graph traversal, logarithmic growth, theorem boosts and radius caps.
+with direct graph traversal, logarithmic growth, theorem luminosity boosts, glow caps and invariant core radii.
 Browser checks verify sphere shading and a black pixel beyond the halo boundary.
