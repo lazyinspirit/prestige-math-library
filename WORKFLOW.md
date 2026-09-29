@@ -190,10 +190,13 @@ repair certificate described below. Unchanged certificates survive restart and
 file touches; failed recertification preserves prior receipts.
 An item already published by an earlier run may be placed in a current draft
 page as a repaired prerequisite. When the immutable Step-3 baseline records
-its item file and that file still declares `status: published` with a different
-`pipeline_run`, the certifier treats it as a preexisting anchor. It receives no
-auditor-created certificate; its current Step-3 decision and published-item
-review remain required.
+its item file and that file still declares `status: published`, the certifier
+treats it as a preexisting anchor if its `pipeline_run` names another run, or
+if it is a legacy file without `pipeline_run` and the exact ID and destination
+page appear in the current run's owner-approved `*-rehomed.json` receipt. It
+receives no auditor-created certificate; its current Step-3 decision and
+published-item review remain required. A receipt cannot authorize a preexisting
+draft or an item moved to a different destination.
 Provenance receipts use `auditor-authored-step3-bypass-v2`; v1 receipts cannot
 close decisions or reuse the unchanged-hash path. They must be revalidated
 against the original immutable v1 inventory baseline. On the author-dispatch

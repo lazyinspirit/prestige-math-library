@@ -115,17 +115,35 @@ function certify(root, run, partial) {
   const s = loadStep3(root, run);
   // A previously published item can be placed on a draft frontier page while
   // its local prerequisites are repaired. It is a preexisting anchor, never an
-  // auditor-created item. Keep the immutable baseline and its filesystem guard:
-  // only a genuinely published item from another run qualifies here.
-  const publishedAnchor = id => {
+  // auditor-created item. Older library items may have no pipeline_run, so
+  // require the exact current-run owner re-home receipt for those legacy files.
+  const rehomedPath = join(root, 'research', `${safe(run)}-rehomed.json`);
+  const rehomed = new Map();
+  if (existsSync(rehomedPath)) {
+    const receipt = json(rehomedPath);
+    if (receipt.version !== 1 || receipt.run !== run || receipt.approved_by !== 'owner'
+      || !Array.isArray(receipt.items)) throw Error(`Invalid owner re-home receipt: ${rehomedPath}`);
+    for (const row of receipt.items) {
+      if (!row?.id || !row.from_page || !row.to_page || !String(row.reason ?? '').trim())
+        throw Error(`Invalid owner re-home entry: ${rehomedPath}`);
+      safe(row.id); safe(row.from_page); safe(row.to_page);
+      if (row.from_page === row.to_page || rehomed.has(row.id))
+        throw Error(`Invalid or duplicate owner re-home entry for ${row.id}`);
+      rehomed.set(row.id, row);
+    }
+  }
+  const publishedAnchor = (id, pageId) => {
     if (!preexistingFiles.has(id)) return false;
     const path = join(root, 'items', safe(id) + '.md');
     if (!existsSync(path)) return false;
     const fm = yaml().parse(split(readFileSync(path, 'utf8')).fm) ?? {};
-    return fm.id === id && fm.status === 'published'
-      && typeof fm.pipeline_run === 'string' && fm.pipeline_run !== run;
+    if (fm.id !== id || fm.status !== 'published') return false;
+    if (typeof fm.pipeline_run === 'string' && fm.pipeline_run !== run) return true;
+    if (fm.pipeline_run !== undefined) return false;
+    return rehomed.get(id)?.to_page === pageId;
   };
-  const additions = [...s.items].filter(([id]) => !original.has(id) && !publishedAnchor(id));
+  const additions = [...s.items].filter(([id, value]) =>
+    !original.has(id) && !publishedAnchor(id, value.page.id));
   const results = successfulAuthorResults(root, run);
   const certificationPath = auditorCertificationsPath(root, run);
   let priorById = new Map(), priorReceipt;

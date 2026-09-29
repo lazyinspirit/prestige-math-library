@@ -416,6 +416,43 @@ test('Step-3 certification tolerates later shared-manifest rewrites but rejects 
   assert.throws(() => certifyAuditorItems(root, 'r'), /changed after its latest successful Step 3/);
 });
 
+test('Step-3 recognizes only owner-rehomed legacy published anchors, never preexisting drafts or fake moves', t => {
+  const setup = (t: any, { status = 'published', receipt = true, approvedBy = 'owner', toPage = 'page-a' } = {}) => {
+    const root = fixture(); t.after(() => rmSync(root, { recursive: true, force: true }));
+    const manifestPath = join(root, 'research/r-batch-1.pages.json');
+    const pages = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    Object.assign(pages[0], { kind: 'A', companion: 'page-b' });
+    pages.push({ id: 'page-b', kind: 'B', companion: 'page-a', items: [] });
+    writeFileSync(manifestPath, JSON.stringify(pages));
+
+    const id = 'def-legacy-published';
+    writeFileSync(join(root, 'items', `${id}.md`),
+      `---\nid: ${id}\nkind: definition\ntitle: "Legacy published item"\nstatus: ${status}\ndeps: []\n---\n\n## Statement\n\nLegacy item.\n`);
+    writeAuditorBaseline(root, 'r');
+    pages[0].items.push({ id, deps: [] });
+    writeFileSync(manifestPath, JSON.stringify(pages));
+    if (receipt) writeFileSync(join(root, 'research/r-rehomed.json'), JSON.stringify({
+      version: 1, run: 'r', approved_by: approvedBy, approved_on: '2026-09-29',
+      items: [{ id, from_page: 'old-page', to_page: toPage, reason: 'Owner-approved item re-home.' }],
+    }));
+    return { root, id };
+  };
+
+  const accepted = setup(t, {});
+  assert.deepEqual(certifyAuditorItems(accepted.root, 'r').items, [],
+    'the immutable baseline plus an exact owner re-home receipt recognizes the legacy published anchor');
+
+  for (const [label, options] of [
+    ['no owner receipt', { receipt: false }],
+    ['unapproved receipt', { approvedBy: 'reviewer' }],
+    ['wrong destination page', { toPage: 'another-page' }],
+    ['preexisting draft despite a matching receipt', { status: 'draft' }],
+  ] as const) {
+    const f = setup(t, options);
+    assert.throws(() => certifyAuditorItems(f.root, 'r'), /existed on disk before Step 3|Invalid owner re-home receipt/, label);
+  }
+});
+
 test('Step-3 first certification pairs original author provenance with a current owner repair', t => {
   const root = fixture(); t.after(() => rmSync(root, { recursive: true, force: true }));
   const manifestPath = join(root, 'research/r-batch-1.pages.json');
