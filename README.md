@@ -41,8 +41,11 @@ Its scope-decision check also covers declined source rows in batches outside
 the alpha-group assignment, using a fallback `all` receipt.
 Authors sharing a batch run sequentially. Across batches, consumers wait for
 artifact-complete transitive in-run prerequisites while independent branches run in parallel.
-They may supply local definitions/lemmas; substantial prerequisites and potential
-published defects go to the owner. Step 4 splices the plan and snapshots content.
+They may supply local definitions/lemmas; Step 4 accepts a new A-page definition
+or lemma when an item on that page or its declared B companion directly uses it.
+An unrelated page's use does not license the addition. Substantial prerequisites
+and potential published defects go to the owner. Step 4 splices the plan and
+snapshots content.
 Step 5a runs independent reviewers, read-only refuters and routed group
 adjudication in ascending item dependency level across each group; Step 5b
 reconciles dependencies and closes it.

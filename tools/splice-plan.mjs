@@ -42,15 +42,22 @@ import { loadStep3, checkStep3 } from './step3-decisions.mjs';
 // Step 3 group authors may insert local A-page definitions/lemmas. Existing
 // inventory must survive in order; current complete author decisions license
 // only these additions, never deletion, rehoming or a new pair.
-function authoredLocalAdditions(page, have, want) {
+function authoredLocalAdditions(page, manifest, have, want) {
   if (page.kind !== 'A') return false;
   const old = new Set(have.map(idOf));
   const retained = want.filter(i => old.has(idOf(i))).map(idOf);
   if (JSON.stringify(retained) !== JSON.stringify(have.map(idOf))) return false;
   const added = want.filter(i => !old.has(idOf(i)));
   if (!added.length || added.some(i => !['definition', 'lemma'].includes(i.kind))) return false;
-  // Every new supplier must actually feed another item on this owned page.
-  if (added.some(i => !want.some(c => c.id !== i.id && (c.deps ?? []).includes(i.id)))) return false;
+  // A Step-3 author may add a local prerequisite to an existing A/B pair.
+  // Its real consumer can be on the A page or the A page's declared B
+  // companion; no other page in the batch licenses this scope change.
+  const companion = manifest.find(candidate => candidate.id === page.companion && candidate.kind === 'B');
+  if (!companion) return false;
+  if (added.some(i => {
+    const id = idOf(i);
+    return ![...want, ...(companion.items ?? [])].some(c => c.id !== id && (c.deps ?? []).includes(id));
+  })) return false;
   try { return checkStep3(loadStep3(process.cwd(), run), 'final').closed; }
   catch { return false; }
 }
@@ -282,7 +289,7 @@ for (const b of batchList) {
         const changed = want.filter((w, k) => stable(w) !== stable(have[k])).map(idOf);
         console.log(`splice-plan: REFRESHING ${page.id} — same ids, ${changed.length} item object(s) changed: ${changed.join(', ')}`);
         itemsChanged = true;
-      } else if (!sameItems && (update || authoredLocalAdditions(page, have, want))) {
+      } else if (!sameItems && (update || authoredLocalAdditions(page, manifest, have, want))) {
         // A licensed in-flight change: the manifest is the batch-level truth and
         // the plan follows it — loudly, with the delta on the record.
         const wantIds = want.map(idOf);

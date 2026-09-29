@@ -217,9 +217,11 @@ preserves the receipt bytes and timestamp; recovery still refreshes pending diag
 
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained
-existing inventory/order and actual owned consumers. Other scope changes require
-explicit authorization. Pre-splice author checks do not demand a completed splice;
-Step 4 and later gates enforce exact canonical-plan agreement.
+existing inventory/order and a direct consumer on that A page or its declared B
+companion. A consumer on any other page does not license the addition. Other
+scope changes require explicit authorization. Pre-splice author checks do not
+demand a completed splice; Step 4 and later gates enforce exact canonical-plan
+agreement.
 Scaffold ID-minting policy runs only before authoring. Step 3 checks actual item
 content and whole-run manifest dependencies; authored files are expected to exist
 before Step 4 places their IDs in the canonical plan.

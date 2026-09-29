@@ -102,6 +102,57 @@ test('group authors can add proved local prerequisites before the unchanged Step
     ['lem-local', 'thm-consumer']);
 });
 
+test('Step 4 licenses an A-page lemma used on its B companion, but not an unrelated B page', t => {
+  const make = (consumer: 'companion' | 'other') => {
+    const root = mkdtempSync(join(tmpdir(), 'paired-local-addition-'));
+    t.after(() => rmSync(root, { recursive: true, force: true }));
+    mkdirSync(join(root, 'research')); mkdirSync(join(root, 'items'));
+    const put = (name: string, data: any) => writeFileSync(join(root, 'research', name), JSON.stringify(data));
+    const original: any[] = [
+      { id: 'a', kind: 'A', companion: 'b', order: 1, requires: [],
+        items: [{ id: 'thm-consumer', kind: 'theorem', statement: 'C', deps: [] }] },
+      { id: 'b', kind: 'B', companion: 'a', order: 2, requires: ['a'],
+        items: [{ id: 'ex-leaf', kind: 'example', statement: 'E', deps: ['thm-consumer'] }] },
+      { id: 'other-a', kind: 'A', companion: 'other-b', order: 3, requires: [],
+        items: [{ id: 'thm-other', kind: 'theorem', statement: 'Other', deps: [] }] },
+      { id: 'other-b', kind: 'B', companion: 'other-a', order: 4, requires: ['other-a'],
+        items: [{ id: 'ex-other', kind: 'example', statement: 'Other example', deps: [] }] },
+    ];
+    put('plan-spec.json', { pages: original });
+    const current = structuredClone(original);
+    current[0].items.unshift({ id: 'lem-local', kind: 'lemma', statement: 'L', deps: [] });
+    const consumerPage = current[consumer === 'companion' ? 1 : 3];
+    consumerPage.items[0].deps.push('lem-local');
+    put('r-batch-1.pages.json', current);
+
+    for (const page of current.filter(page => page.kind === 'A')) recordStep3(root, {
+      run: 'r', phase: 'scope', page: page.id, decision: 'sufficient',
+      reason: 'The existing pair scope supports the local prerequisite.',
+    } as any);
+    const itemIds = current.flatMap(page => page.items.map((item: any) => item.id));
+    for (const id of itemIds) writeFileSync(join(root, 'items', `${id}.md`),
+      `---\nid: ${id}\nstatus: draft\ndeps: []\n---\nComplete fixture argument.\n`);
+    for (const id of itemIds) recordStep3(root, {
+      run: 'r', phase: 'item', item: id, decision: 'accept', confidence: 1,
+      dependencies: [], reason: 'Fixture item and all current inputs were examined.',
+    } as any);
+    return { root, original, result: spawnSync(process.execPath,
+      [join(repo, 'tools/splice-plan.mjs'), '--run', 'r', '--batch', '1', '--dry-run'],
+      { cwd: root, encoding: 'utf8' }) };
+  };
+
+  const paired = make('companion');
+  assert.equal(paired.result.status, 0, paired.result.stderr + paired.result.stdout);
+  assert.match(paired.result.stdout, /UPDATING a/);
+
+  const unrelated = make('other');
+  assert.equal(unrelated.result.status, 1, 'an unrelated B-page consumer does not license an A-page addition');
+  assert.match(unrelated.result.stderr, /Refusing to overwrite/);
+  assert.doesNotMatch(unrelated.result.stdout, /UPDATING a/);
+  assert.deepEqual(JSON.parse(readFileSync(join(unrelated.root, 'research/plan-spec.json'), 'utf8')).pages,
+    unrelated.original, 'the refused dry-run must not alter the plan');
+});
+
 test('all dispatches and standalone item judges require honest source verification', () => {
   const dispatch = readFileSync(join(repo, 'tools/dispatch.mjs'), 'utf8');
   const judge = readFileSync(join(repo, 'tools/judge.mts'), 'utf8');
