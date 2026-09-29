@@ -11,7 +11,7 @@ orchestrator.
 |---|---|---|
 | 1 — scaffold | 1-drift, 1-drift-apply, 1-scaffold | Reviewed prerequisites, reconciled scope, source-backed scaffolds and readiness records |
 | 2 — assign | 2-assign | Disjoint, item-load-balanced groups, each owning at most three existing batches |
-| 3 — audit and author | 3a-scope, 3-baseline, 3b-author | Scope decisions, pre-author snapshot, complete authored items/pages/contracts and current item decisions |
+| 3 — scaffold audit and author | 3a-scope, 3-baseline, 3b-author | Scope decisions, pre-author snapshot, complete authored items/pages/contracts and current item decisions |
 | 4 — materialize | 4-splice, 4-baseline | Mechanical plan splice and post-author snapshot |
 | 5a — review | 5a-prepare, 5a-read, 5a-split, 5a-refute, 5a-collect, 5a-adjudicate, 5a-baseline | Independent reader/refuter pass, routed group adjudication and frozen post-review evidence |
 | 5b — reconcile and close | 5b-edges, 5b-cross, 5b-close | Cross-group dependency audit, impact accounting and closure receipt |
@@ -124,6 +124,12 @@ ledger before clearing affected prerequisites.
 Step 3a assigns one scope reviewer per A/B pair; insufficient scope remains owner-held.
 Step 3b assigns one scaffold auditor/item author per A/B pair. Authors sharing
 a batch run sequentially because manifests and proof contracts are shared.
+Its scaffold audit is scoped to what authoring needs: verify the claim's
+hypotheses, source support, direct prerequisites and viable proof route, then
+repair local scaffold gaps. It is an author-level readiness check, not the
+independent, thorough audit of completed mathematics in Steps 5–8. Authors
+must still derive complete arguments, state uncertainty honestly and fix any
+concrete defect encountered while authoring.
 New plans place one pair in each batch so an auditor/author can finish all of
 its items in ascending dependency-level order across that batch. The planner
 and drift materializer reject a larger batch cap.
@@ -132,8 +138,8 @@ in-run suppliers. Its task lists direct prerequisite pairs. An author flags the
 exact missing supplier and consuming proof step, authors the item anyway, and
 leaves that item's decision escalated until the supplier and proof use are
 reconciled. Pairs sharing a batch remain serialized to protect shared files;
-the final Step-3 gate still requires sound, current item decisions.
-They audit scaffolds and actual prerequisites, repair locally, then write
+the final Step-3 gate still requires sound, current item decisions, reconciled
+dependencies and every required integrity check to pass. They write
 every assigned item, example, counterexample, page and proof contract. They
 follow ascending dependency levels within their assigned work, using the
 generated per-pair author task as the exact order; ties use page order and
@@ -144,6 +150,9 @@ Escalate substantial prerequisites, broader scope changes and unresolved
 mathematics. Do not drop claims, add pairs or edit published content. Report
 potential published defects to the owner with exact IDs/evidence; the serial
 reconciler updates published-consumer-supplier-ledger.md.
+Step 5 independently reads the completed arguments and repairs confirmed
+defects; Steps 6–8 continue mathematical judgment, repair and certification.
+Step 3 does not substitute for those later audits.
 
 Use tools/step1-decisions.mjs and tools/step3-decisions.mjs for current evidence.
 `node tools/scope-decisions.mjs check --run <run>` checks each deferred or

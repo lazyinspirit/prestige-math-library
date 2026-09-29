@@ -30,8 +30,10 @@ final gate. A scaffold batch waits for artifact-complete in-run supplier batches
 independent branches remain parallel. Scaffolders record item readiness and
 label each manifest item with its in-run dependency level. The Step-1 gate
 checks those levels against the item DAG. Unresolved findings do not trigger
-repair agents. Step-3 authors audit and author their assigned items from the
-lowest level upward, following the generated item order. A run-local
+repair agents. Step-3 authors audit scaffolds for authoring readiness and
+author every assigned item from the lowest level upward, following the
+generated item order. Independent mathematical audit and defect repair occur
+in Steps 5–8. A run-local
 `owner-authoring-direction.md`, when present, is a mandatory Step-1 Beta input
 and overrides stale generated task or design text.
 Step 3 assigns one scope reviewer and one scaffold auditor/item author per A/B pair.
@@ -39,8 +41,9 @@ New plans place one pair in each batch so its author can follow the complete
 batch's dependency-level order.
 Its scope-decision check also covers declined source rows in batches outside
 the alpha-group assignment, using a fallback `all` receipt.
-Authors sharing a batch run sequentially. Across batches, consumers wait for
-artifact-complete transitive in-run prerequisites while independent branches run in parallel.
+Authors sharing a batch run sequentially. Across batches, Step-3 authors may
+write consumers while in-run suppliers are unfinished, flagging the exact uses
+for reconciliation before the final Step-3 gate.
 They may supply local definitions/lemmas; Step 4 accepts a new A-page definition
 or lemma when an item on that page or its declared B companion directly uses it.
 An unrelated page's use does not license the addition. Substantial prerequisites

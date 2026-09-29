@@ -99,19 +99,26 @@ infer arbitrary-index choice from finite choice or DC. Keep choice-free
 arguments choice-free. This authorization does not permit using recorded
 results as suppliers or bypassing the Foundations bootstrapping boundary.
 
-**Step 3.** Each A/B pair has its own scaffold auditor and item author. Authors
-audit scaffolds, repair local gaps, then author every assigned item and A/B page.
+**Step 3.** Each A/B pair has its own scaffold auditor and item author. The
+Step-3b audit checks whether each scaffold supplies enough hypotheses, sources,
+dependencies and a viable proof route to author its claim. Authors repair local
+scaffold gaps, then author every assigned item and A/B page. This author-level
+check is not the independent, thorough mathematical audit assigned to Steps
+5–8. Authors still write complete arguments and report uncertainty honestly.
 Pairs sharing a batch author sequentially to protect shared files. Across
 batches, all pairs may author in parallel even while an in-run prerequisite
 is unfinished. Authors flag each unfinished supplier and consuming proof step,
 author the consumer item anyway, and leave its decision escalated until the
-supplier and actual proof use are reconciled. They may add
+supplier and actual proof use are reconciled. Reconcile dependencies and clear
+all required Step-3 gates before Step 4. They may add
 necessary definitions and lemmas to assigned existing A pages before consumers.
 Escalate substantial unmet
 prerequisites and unresolved mathematics to the owner. Report potentially
 defective published items with exact evidence for the canonical ledger.
 Do not drop claims, add pairs, override owner decisions or edit published items.
 Record complete authored arguments/contracts before closing item decisions.
+Steps 5–8 perform the thorough mathematical audits and repair defects those
+audits find; Step 3 does not preempt that independent review.
 Step 4 retains mechanical plan splicing and its post-author snapshot; take the
 pre-author baseline before Step 3 authors start.
 

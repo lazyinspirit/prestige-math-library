@@ -1,8 +1,12 @@
 # Step 3b — scaffold auditor and item author
 
-Own the A/B pair(s) listed in this dispatch. Audit their scaffolds, repair them
-where necessary, then author every assigned item and A/B page. Preserve other
-pairs in any shared batch files. Work one item
+Own the A/B pair(s) listed in this dispatch. Audit each scaffold for the
+hypotheses, sources, direct prerequisites and proof route needed to author its
+claim; repair local scaffold gaps, then author every assigned item and A/B page.
+The Step-3b audit is an author-level readiness check. Thorough independent
+mathematical auditing and defect repair belong to Steps 5–8. Write complete
+arguments now and repair a concrete defect if you find one while authoring.
+Preserve other pairs in any shared batch files. Work one item
 at a time in ascending scaffold `dependency_level` order, breaking ties by
 page order and item ID; checkpoint before moving on. The generated dispatch
 task lists the exact order for your assigned items. Audit an item's scaffold
@@ -25,7 +29,8 @@ pair to finish before authoring the rest of your assigned batch.
 ## Read and decide
 
 Read CLAUDE.md, SCHEMA.md, the assigned design sections, current manifests,
-coverage, Step 3a decisions and relevant dependency statements and proofs.
+coverage, Step 3a decisions and the supplier statements and proof passages
+needed for each authored claim.
 If `research/<run>-owner-authoring-direction.md` exists, read that explicit
 owner direction and retain its unresolved obligations in your repair workload.
 Be impartial and honest about what you understand. If unsure, search the web
@@ -33,7 +38,10 @@ and read complete relevant arguments from authoritative sources. Record exact
 locators and unresolved qualifications. Do not equate a citation, structural
 check or confidence statement with a proof.
 
-Check hypotheses, quantifiers, implicit proof uses and well-definedness.
+Check the scaffold's hypotheses, quantifiers, implicit proof uses and
+well-definedness far enough to write the promised argument. Do not treat this
+as a second independent audit of completed items; later stages perform that
+review.
 Before accepting an item, its prerequisites must be proved earlier or supplied
 locally. A provisional consumer draft may cite an unfinished in-run supplier
 only with the exact flag and escalated decision described above. Add and fully author
@@ -76,6 +84,8 @@ Record item decisions after authoring, not merely after accepting a strategy.
 An accepted scaffold or owner repair still needs authored content and contracts.
 Refresh decisions invalidated by actual dependency changes; do not re-author
 unchanged completed items. Never use --owner or add judge/audit stamps.
+Reconcile all flagged suppliers and their actual proof uses, then clear the
+required Step-3 dependency, source, content and contract gates before Step 4.
 
 Items you create and fully author during this dispatch are a separate class:
 do not send them through a Step 3 self-review or review-repair-author loop.

@@ -118,7 +118,12 @@ test('Step 3 dispatches each pair and serializes authors sharing a batch', t => 
   assert.ok(!artifacts.includes('items/lem-other.md'));
   const plan = author.plan(f.ctx, ['a'])[0];
   assert.equal(plan.brief, 'briefs/group-author.md');
-  assert.match(readFileSync(join(f.root, plan.task), 'utf8'), /Read access: the entire library and all current-frontier A\/B pairs/);
+  const task = readFileSync(join(f.root, plan.task), 'utf8');
+  assert.match(task, /Read access: the entire library and all current-frontier A\/B pairs/);
+  assert.match(task, /Audit scaffolds for authoring readiness/);
+  assert.match(task, /Author every assigned item, including consumers with flagged unfinished suppliers/);
+  assert.match(task, /clear all required Step-3 gates/);
+  assert.match(task, /Thorough independent mathematical audit and systematic defect repair follow in Steps 5–8/);
 });
 
 test('Step 3 authors all pairs before cross-batch suppliers finish and flags them in tasks', t => {

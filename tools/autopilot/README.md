@@ -16,10 +16,13 @@ Step1 scaffold batches declare their same-stage in-run prerequisites to the
 executor. Their consumers wait for artifact-complete, stable transitive
 suppliers. Step3 pair authors can start across batches while an in-run supplier
 is unfinished; they flag exact missing items, author consumers, and leave
-unresolved item decisions escalated for reconciliation. Step3 authors sharing
-a batch still serialize because their manifests are shared. The
-planner now places one A/B pair in each batch. Step1 scaffolders label every
-manifest item with its in-run dependency level; the Step1 gate recomputes the
+unresolved item decisions escalated for reconciliation. Step3b audits each
+scaffold for authoring readiness, writes complete arguments and clears the
+required integrity gates. Thorough independent mathematical audit and defect
+repair follow in Steps 5–8. Step3 authors sharing a batch still serialize
+because their manifests are shared. The planner now places one A/B pair in
+each batch. Step1 scaffolders label every manifest item with its in-run
+dependency level; the Step1 gate recomputes the
 labels from the item DAG. Step3 author tasks list their items from the lowest
 level upward, and the Step3 gate checks labels again after local additions.
 The pre-author snapshot precedes them. A dependency read sampled while a stage
