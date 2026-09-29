@@ -87,8 +87,12 @@ not mathematical distance or difficulty.
 
 ## Star size and appearance
 
-Each item is an analytic shaded sphere rendered by the GPU, with a soft halo
-outside its surface. The halo reaches zero at `1.25 × body radius`: it extends
+Each item is an emissive sphere rendered by the GPU, with procedural surface
+granulation, bright filaments, dark active regions, limb darkening and a visible
+corona. Surface detail uses spherical 3D noise with per-star seeds; unresolved
+frequencies fade out to prevent shimmering. Theorem colors are saturated red-orange
+and converted to linear light before compositing. The corona fades exponentially
+with a smooth outer cutoff and subtle radial streamers. The halo reaches zero at `1.25 × body radius`: it extends
 one-quarter of a radius beyond the surface. Background dust retains its diffuse
 appearance. Hover emphasis changes brightness, not size.
 
@@ -107,9 +111,10 @@ structural importance signal; `landmark` is the existing editorial designation.
 These are transparent proxies, not a universal ranking of mathematical importance.
 
 After this multiplier, the reference body radius is capped at **1.6 CSS pixels**.
-Perspective and zoom scale it, with an additional **8 CSS pixel** body-radius cap
-at close range (10 pixels including the halo). The same projected size is used
-for hover picking. Radii have no random variation.
+Perspective and zoom scale it, with an additional **48 CSS pixel** body-radius cap
+at close range (60 pixels including the corona). The same projected size is used
+for hover picking. Zoom extends to 180× so surface features can be inspected;
+the compact reference radii preserve the default galaxy view. Radii have no random variation.
 
 ## Piano soundtrack
 

@@ -50,7 +50,7 @@ function rebuildPickGrid() {
   for (let i = 0; i < nodes.length; i++) {
     if (!visible[i]) continue;
     const [x, y, depth] = project(nodes[i], camera, rotation, width, height);
-    if (depth <= 0 || x < -20 || x > width + 20 || y < -20 || y > height + 20) continue;
+    if (depth <= 0 || x < -60 || x > width + 60 || y < -60 || y > height + 60) continue;
     const key = `${Math.floor(x / 16)},${Math.floor(y / 16)}`;
     if (!pickGrid.has(key)) pickGrid.set(key, []);
     pickGrid.get(key).push({ i, x, y, depth, radius: projectedStarRadius(nodes[i], camera, depth) * (1 + GLOW_RADIUS_RATIO) });
@@ -61,8 +61,8 @@ function hitTest(x, y) {
   if (projectionDirty) rebuildPickGrid();
   let best = -1, distance = Infinity, bestDepth = Infinity;
   const cx = Math.floor(x / 16), cy = Math.floor(y / 16);
-  for (let xx = cx - 1; xx <= cx + 1; xx++) {
-    for (let yy = cy - 1; yy <= cy + 1; yy++) {
+  for (let xx = cx - 4; xx <= cx + 4; xx++) {
+    for (let yy = cy - 4; yy <= cy + 4; yy++) {
       for (const point of pickGrid.get(`${xx},${yy}`) ?? []) {
         const d = (point.x - x) ** 2 + (point.y - y) ** 2;
         if (d > Math.max(9, point.radius) ** 2) continue;
@@ -125,7 +125,7 @@ function updateSearch() {
   if (!matches.length) { const p = document.createElement('p'); p.textContent = 'No matching stars in the selected categories.'; results.append(p); }
 }
 function setZoom(value, x = width / 2, y = height / 2) {
-  const next = clamp(value, .35, 18), ratio = next / camera.zoom;
+  const next = clamp(value, .35, 180), ratio = next / camera.zoom;
   camera.panX = x - width / 2 - (x - width / 2 - camera.panX) * ratio;
   camera.panY = y - height / 2 - (y - height / 2 - camera.panY) * ratio;
   camera.zoom = next; inspect(-1); pinned = false; invalidate();

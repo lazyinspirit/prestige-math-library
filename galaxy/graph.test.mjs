@@ -104,6 +104,6 @@ test('radii follow log reach, theorem importance boosts and hard limits', async 
   assert.ok(starRadius({ ...theorem, landmark: true }) > starRadius(theorem));
   assert.ok(starRadius({ ...theorem, crossCategoryConsumers: 4 }) > starRadius(theorem));
   assert.equal(starRadius({ ...theorem, downstreamCount: 1e12, landmark: true }), MAX_STAR_RADIUS);
-  assert.equal(projectedStarRadius({ radius: MAX_STAR_RADIUS }, { zoom: 18 }, 1), 8);
+  assert.equal(projectedStarRadius({ radius: MAX_STAR_RADIUS }, { zoom: 180 }, 1), 48);
   assert.equal(GLOW_RADIUS_RATIO, .25);
 });

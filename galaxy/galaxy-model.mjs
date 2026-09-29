@@ -1,5 +1,5 @@
 export const TAU = Math.PI * 2;
-export const COLORS = ['#5abdff', '#ff7956', '#aa7951', '#b7a7cd'];
+export const COLORS = ['#5abdff', '#ff490d', '#aa7951', '#b7a7cd'];
 export const colorIndex = kind => kind === 'definition' ? 0
   : ['theorem', 'lemma', 'proposition', 'corollary'].includes(kind) ? 1
   : ['example', 'counterexample', 'false-statement'].includes(kind) ? 2 : 3;
@@ -107,7 +107,7 @@ export function defaultCamera(width, height) {
 }
 export const CAMERA_DISTANCE = 3.8;
 export function projectedStarRadius(node, camera, depth) {
-  return Math.min(8, node.radius * Math.sqrt(CAMERA_DISTANCE / depth) * Math.pow(camera.zoom, .45));
+  return Math.min(48, node.radius * Math.sqrt(CAMERA_DISTANCE / depth) * Math.pow(camera.zoom, .75));
 }
 /** Perspective projection mirrors the vertex shader; depth is also used to pick overlapping stars. */
 export function project(node, camera, rotation, width, height) {

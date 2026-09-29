@@ -18,6 +18,8 @@ uniform float uMaxPoint;
 out vec3 vColor;
 out float vAlpha;
 out float vState;
+out float vDiameter;
+out vec3 vSeed;
 void main() {
   float x = uOrbit.x * aPosition.x - uOrbit.y * aPosition.y;
   float y = uOrbit.y * aPosition.x + uOrbit.x * aPosition.y;
@@ -28,9 +30,11 @@ void main() {
   float size = uWorld > .5 ? aSize * uView.z / depth
     : aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .18);
   if (uItems > .5) {
-    size = min(20., aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .45));
+    size = min(120., aSize * sqrt(${CAMERA_DISTANCE.toFixed(1)} / depth) * pow(uZoom, .75));
   }
   gl_PointSize = clamp(size * uDpr, 1., uMaxPoint);
+  vDiameter = gl_PointSize;
+  vSeed = aPosition * 137.;
   vColor = aColor;
   vAlpha = aAlpha * uFade * (aState < .01 ? 0. : min(aState, 1.));
   vState = aState;
@@ -40,27 +44,68 @@ precision highp float;
 in vec3 vColor;
 in float vAlpha;
 in float vState;
+in float vDiameter;
+in vec3 vSeed;
 out vec4 fragColor;
 uniform float uWorld;
 uniform float uItems;
+// Smooth 3D noise follows the spherical surface, with a stable seed per star.
+float hash(vec3 p) {
+  p = fract(p * .1031);
+  p += dot(p, p.yzx + 33.33);
+  return fract((p.x + p.y) * p.z);
+}
+float noise(vec3 p) {
+  vec3 i = floor(p), f = fract(p);
+  f = f * f * (3. - 2. * f);
+  return mix(mix(mix(hash(i), hash(i + vec3(1,0,0)), f.x),
+                 mix(hash(i + vec3(0,1,0)), hash(i + vec3(1,1,0)), f.x), f.y),
+             mix(mix(hash(i + vec3(0,0,1)), hash(i + vec3(1,0,1)), f.x),
+                 mix(hash(i + vec3(0,1,1)), hash(i + vec3(1,1,1)), f.x), f.y), f.z);
+}
+float surfaceNoise(vec3 p, float footprint) {
+  float value = 0., weight = .55;
+  for (int i = 0; i < 4; i++) {
+    // Fade frequencies that cannot be resolved by a pixel.
+    value += weight * mix(noise(p), .5, smoothstep(.3, .9, footprint));
+    p = p * 2.03 + 7.1; footprint *= 2.03; weight *= .5;
+  }
+  return value;
+}
 void main() {
   vec2 p = gl_PointCoord * 2. - 1.;
   float r2 = dot(p, p);
   if (r2 >= 1. || vAlpha < .00001) discard;
   if (uItems > .5) {
-    // Analytic sphere, with body radius .8 and a halo ending at 1.0 (a quarter-radius beyond it).
+    // Emissive photosphere and a corona ending one-quarter body radius beyond the limb.
     float r = sqrt(r2);
     vec2 surface = p / .8;
     float z = sqrt(max(0., 1. - dot(surface, surface)));
     vec3 normal = normalize(vec3(surface, z));
-    float limb = .26 + .62 * z + .12 * max(0., dot(normal, normalize(vec3(-.4, -.5, .8))));
-    float edge = max(fwidth(r), .002);
+    float edge = max(fwidth(r), .001);
     float body = 1. - smoothstep(.8 - edge, .8 + edge, r);
-    float halo = .18 * pow(1. - smoothstep(.8, 1., r), 3.);
-    vec3 surfaceColor = mix(vColor, vec3(1.), .22 * pow(z, 6.)) * limb;
-    float emphasis = vState > 1.5 ? 1.6 : 1.;
-    vec3 color = mix(vColor * .7, surfaceColor, body) * emphasis;
-    fragColor = vec4(color, (body + halo * (1. - body)) * vAlpha);
+    float grain = .5, activity = .5, spots = 0.;
+    if (vDiameter > 6.) {
+      vec3 q = normal * 24. + vSeed;
+      float footprint = max(length(dFdx(q)), length(dFdy(q)));
+      activity = noise(q * .14);
+      grain = surfaceNoise(q + .55 * vec3(noise(q), noise(q + 13.), noise(q + 29.)), footprint);
+      spots = smoothstep(.69, .86, activity) * (1. - smoothstep(.28, .48, grain));
+    }
+    float filaments = smoothstep(.38, .65, grain);
+    float brightness = (.56 + .44 * z) * (.48 + .85 * grain + .36 * filaments) * (1. - .72 * spots);
+    // Convert display colors to linear light before the final exposure/gamma pass.
+    vec3 base = pow(vColor, vec3(2.2));
+    vec3 hot = min(vec3(1.), base * vec3(1.1, 1.65, 1.3) + vec3(.025, .012, .002));
+    vec3 surfaceColor = mix(base * .65, hot, filaments) * brightness;
+    float altitude = clamp((r - .8) / .2, 0., 1.);
+    float angle = atan(p.y, p.x);
+    float streamers = .78 + .22 * sin(angle * 19. + vSeed.x + 3. * sin(angle * 7.));
+    float halo = .85 * exp(-2.6 * altitude) * (1. - smoothstep(.35, 1., altitude)) * streamers;
+    vec3 coronaColor = base * vec3(1., .55, .45);
+    float emphasis = vState > 1.5 ? 1.45 : 1.;
+    fragColor = vec4(mix(coronaColor, surfaceColor, body) * emphasis,
+      (body + halo * (1. - body)) * vAlpha);
     return;
   }
   float profile = uWorld > .5 ? exp(-r2 * 5.) * (1. - smoothstep(.7, 1., r2))
