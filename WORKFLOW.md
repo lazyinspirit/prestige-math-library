@@ -68,6 +68,7 @@
   opens a direct-consumer review; continue another hop only if that consumer's own
   Statement or Definition changes. Proof, citation, dependency and metadata edits with
   unchanged interfaces do not propagate. A reference alone does not require an edit.
+
 - Step 7 freezes `research/RUN-step7-v2/frontier.json`. Its adjudication, repair,
   rejudgment and item gates cover draft IDs in that frontier. Batch adjudicators resolve
   rejections; three owner lanes close disjoint frontier impacts; central certification
@@ -90,6 +91,23 @@
   local proof and prerequisites with justified confidence, or escalate the exact
   uncertainty. A later dead URL does not undo a verified full-text fetch; live URL and
   backing checks run at Step 5b.
+
+### Owner-selected authoring of ready pairs
+
+An owner may explicitly request Step 3b for approved pairs while other pairs remain
+scope-held. Select `tools/autopilot/stages/mathlib.ready-pairs.mts` in the run's
+`config.json`. Before starting, seal every pair's final item inventory and claim
+interfaces in `research/RUN-ready-pair-authoring.json`: version 1, matching `run`,
+`authorized_by: "owner"`, the owner's `authorization`, and `scopes` containing every
+A page's `page` and current `scopeHash` as `sha256`. Held-pair strategy and source
+repairs may continue after sealing; alert the supervisor before changing an interface.
+
+This table preserves stage IDs, receipts and workflow revision. It overlaps the
+three Step-3 stages, takes the immutable pre-author snapshot after scope dispatches
+drain, and dispatches only pairs with a current sufficient review or owner proceed.
+Authors wait for the snapshot process to finish. Every existing gate still checks
+the full frontier after writers drain; Step 4 waits for complete Step-3 closure.
+Restart the controller when selecting the run-local stage table.
 
 ## Controls
 
