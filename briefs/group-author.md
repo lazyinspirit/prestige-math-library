@@ -36,7 +36,17 @@ pair to finish before authoring the rest of your assigned batch.
 
 Read CLAUDE.md, SCHEMA.md, the assigned design sections, current manifests,
 coverage, Step 3a decisions and the supplier statements and proof passages
-needed for each authored claim.
+needed for each authored claim. Read
+`research/<run>-step3a-pair-<A-page-id>.md` for the scope review's authoring
+observations, and every repair report named by the owner's scope decision.
+Carry those specific proof and source obligations into authoring and resolve
+them before accepting the affected items.
+If `research/<run>-pre-splice-plan-findings.json` exists, recheck the findings
+for your pair against current inputs. Resolve applicable item kind, ordering,
+dependency and prerequisite defects in your assigned files. Preserve every
+promised claim: replace a load-bearing examples-page dependency with an exact
+A-page supplier or a complete local argument. Report required shared plan
+changes to the owner. This diagnostic snapshot is not a current gate verdict.
 If `research/<run>-owner-authoring-direction.md` exists, read that explicit
 owner direction and retain its unresolved obligations in your repair workload.
 Be impartial and honest about what you understand. If unsure, search the web
@@ -93,8 +103,11 @@ unchanged completed items. Never use --owner or add judge/audit stamps.
 Reconcile all flagged suppliers and their actual proof uses, then clear the
 required Step-3 dependency, source, content and contract gates before Step 4.
 
-Items you create and fully author during this dispatch are a separate class:
-do not send them through a Step 3 self-review or review-repair-author loop.
+Genuinely new item IDs absent from both the pre-author scaffold inventory and
+its existing-item-file list are a separate class when fully authored during
+this dispatch: do not send those additions through a Step 3 self-review or
+review-repair-author loop. Original scaffold IDs still require ordinary current
+item decisions, even when their files are first written during this dispatch.
 Register each in the manifest, coverage, contracts, and authored item/page as
 usual. The engine compares the post-author inventory with its immutable
 pre-author baseline and, after your successful dispatch, gives those additions

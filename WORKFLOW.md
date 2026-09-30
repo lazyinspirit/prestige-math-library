@@ -69,6 +69,9 @@
   `author_artifacts` names the missing carriers; `terminal_summary` retains only
   terminal-event flags before the temporary session home is removed. File presence
   is not mathematical acceptance; the normal artifact and content gates still apply.
+  Auditor-addition certification covers IDs absent from the immutable pre-author
+  inventory and its existing-item-file list. Original scaffold IDs require ordinary
+  current Step-3 item decisions even when their files are newly written.
 - Step-5 readers, refuters and adjudicators examine the authored mathematics. Resolve
   actual failing subjects and cross-group impacts. A changed Statement or Definition
   opens a direct-consumer review; continue another hop only if that consumer's own
