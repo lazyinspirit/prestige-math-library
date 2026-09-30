@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readyPairUnits, sealedInventory, stages } from '../stages/mathlib.ready-pairs.mts';
+import { authorContinuationPattern, readyPairUnits, sealedInventory, stages } from '../stages/mathlib.ready-pairs.mts';
 import { loadStep3, recordStep3, scopeHash } from '../../step3-decisions.mjs';
 
 test('ready-pair scheduling excludes insufficient and stale pairs, and freezes before authors', t => {
@@ -49,4 +49,42 @@ test('ready-pair scheduling excludes insufficient and stale pairs, and freezes b
   put('r-step3-auditor-baseline.json', { immutable: 'fixture' });
   assert.equal(baseline.plan(ctx, ['all'])[0].label, 'snap-pre-author',
     'doctor can inspect a completed boundary without resealing authored additions');
+});
+
+test('owner continuation preserves history and excludes only the named successful pair', t => {
+  const repo = mkdtempSync(join(tmpdir(), 'author-continuation-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  mkdirSync(join(repo, 'research', 'r-dispatch'), { recursive: true });
+  const put = (name: string, value: any) => writeFileSync(join(repo, 'research', name), JSON.stringify(value));
+  put('r-batch-1.pages.json', [
+    { id: 'a', kind: 'A', companion: 'a-examples', items: [] },
+    { id: 'a-examples', kind: 'B', items: [] },
+  ]);
+  const original = /^alpha-high-step3b-pair-[a-z0-9-]+-[a-f0-9]+\.result\.json$/;
+  const old = 'alpha-high-step3b-pair-a-1111.result.json';
+  const next = 'alpha-high-step3b-pair-a-2222.result.json';
+  const sibling = 'alpha-high-step3b-pair-b-3333.result.json';
+  const receipt = { run: 'r', ok: true, covers: ['a'] };
+  put(`r-dispatch/${old}`, receipt);
+  const ctx = { repo, run: 'r' };
+  assert.equal(authorContinuationPattern(ctx, original), original);
+  const entry = { page: 'a', previous_result: old, reason: 'missing item files after author exit',
+    writers_drained_at: '2026-09-30T13:00:00Z' };
+  const authorization = { version: 1, run: 'r', authorized_by: 'owner',
+    authorization: 'finish the incomplete pair', continuations: [entry] };
+  put('r-author-continuations.json', authorization);
+  const pattern = authorContinuationPattern(ctx, original);
+  assert.equal(pattern.test(old), false);
+  assert.equal(pattern.test(next), true);
+  assert.equal(pattern.test(sibling), true);
+  assert.deepEqual(JSON.parse(readFileSync(join(repo, 'research', 'r-dispatch', old), 'utf8')), receipt);
+  put(`r-dispatch/${old}`, { ...receipt, covers: ['b'] });
+  assert.throws(() => authorContinuationPattern(ctx, original), /successful single-pair receipt/);
+  put(`r-dispatch/${old}`, { ...receipt, ok: false });
+  assert.throws(() => authorContinuationPattern(ctx, original), /successful single-pair receipt/);
+  put(`r-dispatch/${old}`, receipt);
+  put('r-author-continuations.json', { ...authorization, continuations: [entry, entry] });
+  assert.throws(() => authorContinuationPattern(ctx, original), /Duplicate/);
+  put('r-author-continuations.json', { ...authorization, continuations: [{ ...entry, previous_result: '../outside.result.json' }] });
+  assert.throws(() => authorContinuationPattern(ctx, original), /Invalid.*entry/);
 });

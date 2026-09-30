@@ -42,6 +42,37 @@ export function readyPairUnits(ctx: any, pending: string[]) {
   return pending.filter(id => scopeDecision(snapshot, id).closed);
 }
 
+/** Explicit owner continuation of an artifact-incomplete successful author.
+ * Preserve the original receipt; exclude only its exact coverage filename.
+ * See ../AUTHOR-CONTINUATIONS.md for the writer-drain contract. */
+export function authorContinuationPattern(ctx: any, original: RegExp): RegExp {
+  const path = join(ctx.repo, 'research', `${ctx.run}-author-continuations.json`);
+  if (!existsSync(path)) return original;
+  const row = JSON.parse(readFileSync(path, 'utf8'));
+  if (row.version !== 1 || row.run !== ctx.run || row.authorized_by !== 'owner'
+    || !String(row.authorization ?? '').trim() || !Array.isArray(row.continuations))
+    throw Error('Invalid owner author continuation authorization');
+  const snapshot = loadStep3(ctx.repo, ctx.run), excluded: string[] = [];
+  for (const entry of row.continuations) {
+    if (!snapshot.pairs.has(entry.page) || !String(entry.reason ?? '').trim()
+      || !Number.isFinite(Date.parse(entry.writers_drained_at))
+      || typeof entry.previous_result !== 'string'
+      || !/^[a-zA-Z0-9_-]+\.result\.json$/.test(entry.previous_result)
+      || !original.test(entry.previous_result))
+      throw Error('Invalid owner author continuation entry');
+    const previous = JSON.parse(readFileSync(join(ctx.repo, 'research',
+      `${ctx.run}-dispatch`, entry.previous_result), 'utf8'));
+    if (previous.run !== ctx.run || previous.ok !== true
+      || !Array.isArray(previous.covers) || previous.covers.length !== 1
+      || previous.covers[0] !== entry.page)
+      throw Error('Author continuation must name its successful single-pair receipt');
+    excluded.push(entry.previous_result.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  }
+  if (new Set(excluded).size !== excluded.length)
+    throw Error('Duplicate author continuation receipt');
+  return excluded.length ? new RegExp(`^(?!(?:${excluded.join('|')})$)(?:${original.source})`, original.flags) : original;
+}
+
 export const stages = ordinaryStages.map((original: any) => {
   if (!['3a-scope', '3-baseline', '3b-author'].includes(original.id)) return original;
   const stage = { ...original, pipeline: 'step3-ready-pairs' };
@@ -65,6 +96,8 @@ export const stages = ordinaryStages.map((original: any) => {
     stage.cohort = () => ['all'];
     stage.plan = (ctx: any, pending: string[]) =>
       original.plan(ctx, readyPairUnits(ctx, pending));
+    stage.pattern = (ctx: any) => authorContinuationPattern(ctx,
+      typeof original.pattern === 'function' ? original.pattern(ctx) : original.pattern);
   }
   return stage;
 });
