@@ -85,6 +85,42 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'max-cut-triangle-conditional-expectation': ({ expected_cut = 2 } = {}) => {
+    // Count the eight placements and all fifteen prefixes independently of
+    // the edge-contribution formula used by the worked example.
+    const edges = [[0, 1], [0, 2], [1, 2]];
+    const placements = Array.from({ length: 8 }, (_, mask) =>
+      [0, 1, 2].map(vertex => (mask >> vertex) & 1));
+    const cut = bits => edges.filter(([a, b]) => bits[a] !== bits[b]).length;
+    const average = prefix => {
+      const completions = placements.filter(bits => prefix.every((bit, i) => bits[i] === bit));
+      return completions.reduce((sum, bits) => sum + cut(bits), 0) / completions.length;
+    };
+    let prefixes = 0;
+    for (let length = 0; length <= 3; length++) {
+      for (let mask = 0; mask < 2 ** length; mask++) {
+        const prefix = Array.from({ length }, (_, i) => (mask >> i) & 1);
+        const edgeFormula = edges.reduce((sum, [a, b]) => sum +
+          (a < length && b < length ? Number(prefix[a] !== prefix[b]) : 0.5), 0);
+        if (average(prefix) !== edgeFormula) return { ok: false,
+          summary: `conditional edge formula differs from enumeration at prefix ${prefix}` };
+        prefixes++;
+      }
+    }
+    if (average([]) !== 1.5 || average([0, 0]) !== 1 || average([0, 1]) !== 2)
+      return { ok: false, summary: 'triangle initial or second-bit expectation is incorrect' };
+    const bits = [];
+    while (bits.length < 3) bits.push(average([...bits, 1]) > average([...bits, 0]) ? 1 : 0);
+    const zeroSide = bits.flatMap((bit, i) => bit === 0 ? [i] : []);
+    const crossings = edges.filter(([a, b]) => zeroSide.includes(a) !== zeroSide.includes(b));
+    if (bits.join(',') !== '0,1,0' || zeroSide.join(',') !== '0,2'
+        || crossings.map(edge => edge.join('-')).join(',') !== '0-1,1-2')
+      return { ok: false, summary: 'triangle tie rule, returned partition or crossing edges disagree' };
+    const maximum = Math.max(...placements.map(cut));
+    if (cut(bits) !== expected_cut || maximum !== expected_cut || cut(bits) < 1.5)
+      return { ok: false, summary: `enumeration returns cut ${cut(bits)} and optimum ${maximum}, not ${expected_cut}` };
+    return { ok: true, summary: `checked ${placements.length} triangle placements, ${prefixes} conditional prefixes, tie decisions, returned partition and optimum ${maximum}` };
+  },
   'gns-cyclic-c2-boundaries': () => {
     // Independent finite models for the GNS boundary claims. A real function
     // on C2={e,s} has Gram matrix [[a,b],[b,a]], whose two eigenvalues are

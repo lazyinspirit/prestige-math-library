@@ -72,6 +72,11 @@
   Auditor-addition certification covers IDs absent from the immutable pre-author
   inventory and its existing-item-file list. Original scaffold IDs require ordinary
   current Step-3 item decisions even when their files are newly written.
+- Finite smoke obligations must quote an actual assertion in the selected item
+  and use a relevant registered model. The triangle conditional-expectation
+  check enumerates placements and prefixes, including its tie rule, partition
+  and crossing edges. Its bounded verification does not prove the general
+  approximation theorem. A zero-check contract cannot satisfy gate liveness.
 - Step-5 readers, refuters and adjudicators examine the authored mathematics. Resolve
   actual failing subjects and cross-group impacts. A changed Statement or Definition
   opens a direct-consumer review; continue another hop only if that consumer's own
