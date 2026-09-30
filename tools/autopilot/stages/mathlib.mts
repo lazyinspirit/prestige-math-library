@@ -195,7 +195,7 @@ export function authorArtifacts(ctx: any, unit: string): string[] {
 export function pairAuthorArtifacts(ctx: any, unit: string): string[] {
   const pair = loadStep3(ctx.repo, ctx.run).pairs.get(unit);
   if (!pair) return [];
-  const out: string[] = [];
+  const out: string[] = [`research/${ctx.run}-step3b-pair-${unit}.md`];
   for (const page of pair) {
     out.push(`research/${ctx.run}-batch-${page.batch}.pages.json`);
     out.push(`research/${ctx.run}-batch-${page.batch}.proof-contracts.json`);

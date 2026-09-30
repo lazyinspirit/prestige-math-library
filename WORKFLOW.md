@@ -63,6 +63,12 @@
   write consumers before in-run suppliers finish, but must name the missing supplier and
   proof use, then reconcile escalated decisions before the Step-3 gate. The pre-author
   snapshot is taken before authors start; Step 4 splices the plan afterward.
+- Pair-author dispatch receipts distinguish the runner's `process_exit_code`
+  from the dispatch `exit_code`. Missing or empty item/page files, proof contracts
+  or the assigned report make an otherwise zero-exit pair dispatch fail.
+  `author_artifacts` names the missing carriers; `terminal_summary` retains only
+  terminal-event flags before the temporary session home is removed. File presence
+  is not mathematical acceptance; the normal artifact and content gates still apply.
 - Step-5 readers, refuters and adjudicators examine the authored mathematics. Resolve
   actual failing subjects and cross-group impacts. A changed Statement or Definition
   opens a direct-consumer review; continue another hop only if that consumer's own

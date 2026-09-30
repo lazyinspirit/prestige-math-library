@@ -14,6 +14,12 @@ and author that item before advancing to the next level. Recompute the order
 and labels when a local repair or new supplier changes dependencies. A later
 item must never be used to justify an earlier one.
 
+Create the assigned report at entry with the owned IDs and open obligations.
+After reading the exact suppliers for the first item, write and check that
+item before surveying later items or reading tool implementation files.
+Continue with a completed item and its checkpoint at each dependency level.
+An exit with missing items, pages, contracts or report is a failed handoff.
+
 Read access covers the entire library and every pair in this frontier, including
 pairs still being constructed. Read sibling manifests, items and pages whenever
 needed to check prerequisites, conventions or cross-pair dependencies. Do not

@@ -18,7 +18,8 @@ import { homedir } from 'node:os';
 import { REPO } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
-import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
+import { findRollout, readDispatchUsage, readDispatchTerminal } from './dispatch-usage.mjs';
+import { checkPairAuthorArtifacts } from './dispatch-author-artifacts.mjs';
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
 import { resolveDispatchProfile } from './model-profile-overrides.mjs';
@@ -756,6 +757,8 @@ try {
 const completedSessionId = resumeSession ?? codexSessionId(result);
 const rolloutPath = findRollout(persistentHome ?? temporaryHome, completedSessionId);
 const tokenUsage = await readDispatchUsage(rolloutPath, started.toISOString());
+const terminalSummary = await readDispatchTerminal(rolloutPath, started.toISOString());
+const processExitCode = result.code;
 
 const attestContext = () => {
   if (!spec.attestContext) return null;
@@ -826,6 +829,20 @@ if (resultArtifactPath && result.code === 0 && !result.timedOut) {
   }
 }
 
+let authorArtifacts = null;
+if (resolvedBrief === join(REPO, 'briefs/group-author.md') && /^step3b-pair-/.test(label)) {
+  try {
+    authorArtifacts = checkPairAuthorArtifacts(REPO, run, covers);
+  } catch (error) {
+    authorArtifacts = { required: true, ok: false, error: error.message };
+  }
+  if (!authorArtifacts.ok && result.code === 0 && !result.timedOut) {
+    result.code = 1;
+    result.stderr += `\nPair author left required artifacts incomplete: ${authorArtifacts.error
+      ?? authorArtifacts.missing.join(', ')}`;
+  }
+}
+
 const ended = new Date();
 const record = {
   role, label, run, attempt, evidence_tag: attemptTag || null,
@@ -855,8 +872,11 @@ const record = {
   context_attestation: contextAttestation,
   auto_compact_token_limit: spec.autoCompactTokenLimit,
   token_usage: tokenUsage,
+  terminal_summary: terminalSummary,
+  ...(authorArtifacts ? { author_artifacts: authorArtifacts } : {}),
   sandbox: spec.sandbox,
   started_at: started.toISOString(), ended_at: ended.toISOString(), ms: ended - started,
+  process_exit_code: processExitCode,
   exit_code: result.code, timed_out: result.timedOut,
   ok: result.code === 0 && !result.timedOut,
   // THE THREAD THIS DISPATCH IS PART OF, so a later stage can re-enter it.

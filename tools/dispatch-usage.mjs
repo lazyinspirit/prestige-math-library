@@ -64,3 +64,37 @@ export async function readDispatchUsage(path, startedAt) {
   }
   return seen ? usage : { ...unavailable, compactions: usage.compactions };
 }
+
+// Keep the terminal event's shape before an isolated home is deleted. Never
+// retain transcript text, provider secrets, or mathematical completion claims.
+export async function readDispatchTerminal(path, startedAt) {
+  if (!path) return { available: false, reason: 'session rollout unavailable' };
+  const summary = { available: true, last_event: null, task_completed: false,
+    task_aborted: false, final_response_present: false, error_events: 0 };
+  let seen = false;
+  try {
+    const lines = createInterface({ input: createReadStream(path), crlfDelay: Infinity });
+    for await (const line of lines) {
+      let row;
+      try { row = JSON.parse(line); } catch { continue; }
+      if (!(Date.parse(row.timestamp) >= Date.parse(startedAt))) continue;
+      if (row.type !== 'event_msg') continue;
+      const event = row.payload?.type;
+      if (typeof event !== 'string') continue;
+      seen = true;
+      summary.last_event = event;
+      if (event === 'task_started') {
+        summary.task_completed = false;
+        summary.task_aborted = false;
+        summary.final_response_present = false;
+      }
+      if (event === 'task_complete' || event === 'task_completed') {
+        summary.task_completed = true;
+        summary.final_response_present = Boolean(String(row.payload.last_agent_message ?? '').trim());
+      }
+      if (event === 'turn_aborted') summary.task_aborted = true;
+      if (event === 'error') summary.error_events++;
+    }
+  } catch { return { available: false, reason: 'session rollout unreadable' }; }
+  return seen ? summary : { available: false, reason: 'no terminal events retained' };
+}
