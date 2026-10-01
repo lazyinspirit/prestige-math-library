@@ -1,4 +1,4 @@
-// Generate the exact item order for one Step-5 group from the collected scopes.
+// Generate one Step-5 batch's exact item order, retaining legacy group support.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
@@ -12,7 +12,7 @@ export function prepareStep5AdjudicationOrder(root, run, group) {
   for (const batch of batches) {
     const path = join(root, 'research', `${run}-step5-scope-${batch}.json`);
     const scope = JSON.parse(readFileSync(path, 'utf8'));
-    if (scope.run !== run || String(scope.batch) !== batch || scope.group !== group.label)
+    if (scope.run !== run || String(scope.batch) !== batch || scope.group !== (group.scopeGroup ?? group.label))
       throw Error(`Step 5 scope identity mismatch: ${path}`);
     const add = (id, route) => {
       if (!byId.has(id)) return otherWork.push(`${batch}:${id} (${route})`);
@@ -31,9 +31,9 @@ export function prepareStep5AdjudicationOrder(root, run, group) {
   const itemRows = owned.filter(row => routed.has(`${row.batch}:${row.id}`));
   const path = `research/${run}-alpha-${group.label}-5a-order.task.md`;
   const body = [
-    `# Step 5a item order: group ${group.label}, run ${run}`,
+    `# Step 5a item order: adjudicator ${group.label}, run ${run}`,
     `Assigned batches: ${batches.join(', ')}. Read briefs/tasks/alpha-5a-adjudicate.md first.`,
-    'Adjudicate and complete each routed item from lowest dependency level to highest across the entire assigned group. Finish all obligations and the risk review for an item before moving to a higher level. The scope files remain authoritative for exact decisions; this list does not add obligations.',
+    'Adjudicate and complete each routed item from lowest dependency level to highest within the dispatched batches. Finish all obligations and the risk review for an item before moving to a higher level. The scope files remain authoritative for exact decisions; this list does not add obligations.',
     'Items in order:',
     ...(itemRows.length ? itemRows.map(row => `- level ${row.level}: batch ${row.batch}, ${row.id} — ${[...routed.get(`${row.batch}:${row.id}`)].join(', ')}`) : ['- none']),
     'Other routed obligations (pages and published dependencies; review them as required by the scope):',

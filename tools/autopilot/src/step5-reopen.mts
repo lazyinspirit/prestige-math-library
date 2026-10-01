@@ -55,7 +55,7 @@ const ARTIFACT_PATTERNS = [
   /-step5-owner-recertification-.*\.json$/,
   /-reader-.*\.md$/,
   /-refute-.*\.json$/,
-  /-alpha-[a-z]+-5a.*\.(?:md|json)$/,
+  /-alpha-(?:[a-z]+|batch-[1-9]\d*)-5a.*\.(?:md|json)$/,
   /-alpha-5b\.md$/,
   /-5b-verdicts\.jsonl$/,
   /-cross-group-edges\.json$/,

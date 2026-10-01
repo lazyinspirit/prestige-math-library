@@ -988,7 +988,7 @@ test('judge closure requires full current carriers without fabricating a verdict
 
 const emittedRoutes: [number, string, string[]][] = [
   [3, 'alpha-high', ['step3b-a-0123456789abcdef']],
-  [5, 'alpha', ['5a-a', '5b-lead', 'gate-batch-1-a', 'gate-batch-2-all',
+  [5, 'alpha', ['5a-a', '5a-batch-1', '5a-batch-30', '5b-lead', 'gate-batch-1-a', 'gate-batch-2-all',
     '5a-gate-risk-report-1-a', '5a-gate-risk-report-2-unowned',
     '5a-gate-stage-stalemate-1', '5a-edge-step5-routing-1',
     '5b-gate-risk-report-1', '5b-edge-step5-cross-group-2']],
@@ -1012,7 +1012,7 @@ test('every emitted author-capable family is accepted only at its own stage and 
 });
 
 test('generic, cross-step substrings and malformed author labels never establish provenance', () => {
-  for (const label of ['5a-', '5b-anything', 'not-step7-malformed', 'rejudge', 'final-adjudication',
+  for (const label of ['5a-', '5a-batch-0', '5a-batch-01', '5a-batch-x', '5b-anything', 'not-step7-malformed', 'rejudge', 'final-adjudication',
     'not-step8-malformed', 'step8-fix-step7-guard-1', 'impact-close', 'step7-aa',
     'step7-fa-a-round-0', 'step7-fa-a-round-01', 'step7-fa-a-round-1-extra',
     'step3b-a', 'step3b-aa-0123456789abcdef', 'step3b-a-0123456789abcdeg'])

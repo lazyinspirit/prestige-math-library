@@ -78,10 +78,13 @@
   and crossing edges. Its bounded verification does not prove the general
   approximation theorem. A zero-check contract cannot satisfy gate liveness.
 - Step-5 readers, refuters and adjudicators examine the authored mathematics.
-  Adjudication shares the reader/refuter pipeline: each assigned group starts as soon
-  as all of its own batches have successful collection receipts and their workers
+  Adjudication shares the reader/refuter pipeline: each batch receives its own
+  adjudicator as soon as its collection receipt succeeds and its workers
   have drained, while unrelated batches continue reviewing. The complete Step-5a
-  gate battery runs once at the pipeline join after all groups and writers finish.
+  gate battery runs once at the pipeline join after all batches and writers finish.
+  Each new adjudicator uses `5a-batch-N` and writes separate `alpha-batch-N-5a`
+  reports and decisions. Existing group dispatches and their decisions remain valid
+  while older runs drain; they are not replaced or duplicated.
   Resolve actual failing subjects and cross-group impacts. A changed Statement or Definition
   opens a direct-consumer review; continue another hop only if that consumer's own
   Statement or Definition changes. Proof, citation, dependency and metadata edits with

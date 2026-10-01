@@ -1,5 +1,6 @@
 # Step 5a refuter — batch `<i>`, run `<run>`
 
+- This dispatch owns exactly one batch: `<i>`, as listed in `covers:`.
 - Read `research/<run>-step5-scope-<i>.json`; its `refuter_scope` is the exact list of item and page carriers you owe.
 - Read `research/<run>-reader-<i>.md` and `research/<run>-reader-findings-<i>.json` for context, then verify every result from the current files.
 - Open every scoped carrier exactly once and any dependency needed to test an assigned claim.

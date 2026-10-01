@@ -22,6 +22,7 @@ const deps = {
   coverageGates: () => [gate('coverage', ['node', 'c'])],
   policyItemGate: () => gate('content-policy', ['node', 'p']),
   urlGate: () => gate('url-liveness', ['node', 'u']),
+  backingGate: () => gate('citation-backing', ['node', 'b']),
   impactGate: () => gate('impact-audit', ['node', 'i']),
   batches: () => ['1', '2', '3'],
   alphaGroups: () => [{ label: 'a', covers: ['1', '2'] }, { label: 'b', covers: ['3'] }],
@@ -76,11 +77,11 @@ test('Step 5a is prepare, the reader pipeline and adjudication; 5b closure is un
   assert.equal(ids.some((id: string) => id.startsWith('review-')), false);
   assert.equal(active.stages.find((s: any) => s.id === '3b-author').pipeline, undefined);
   assert.deepEqual(stages.filter((s: any) => s.pipeline).map((s: any) => [s.id, s.pipeline]),
-    [['5a-read', 'read'], ['5a-split', 'read'], ['5a-refute', 'read'], ['5a-collect', 'read']]);
+    [['5a-read', 'read'], ['5a-split', 'read'], ['5a-refute', 'read'], ['5a-collect', 'read'], ['5a-adjudicate', 'read']]);
   for (const stage of stages.filter((s: any) => s.pipeline))
     assert.equal(typeof stage.role, 'string', `${stage.id} declares the lane it pipes to`);
-  assert.equal(byId('5a-adjudicate').pipeline, undefined);
-  assert.deepEqual(byId('5a-adjudicate').cohort({}, '1'), ['1', '2']);
+  assert.equal(byId('5a-adjudicate').pipeline, 'read');
+  assert.deepEqual(byId('5a-adjudicate').cohort({}, '1'), ['1']);
   const ctx = { ...ordinaryCtx, run: 'r', doctor: true };
   assert.equal(byId('5a-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-5a-adjudicate.md');
   assert.equal(byId('5b-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-5b-edges.md');
@@ -180,6 +181,54 @@ function prepareSplit(fx: ReturnType<typeof fixture>) {
   // typed subcommands must retain the old hash-then-split, fail-fast order.
   fx.run('post-reader', '--run', 'r', '--batch', '1');
 }
+
+test('batch decisions stamp and close independently without accepting sibling obligations', () => {
+  const fx = fixture();
+  try {
+    const research = join(fx.root, 'research');
+    writeFileSync(join(research, 'r-alpha-groups.json'), JSON.stringify([{ label: 'a', covers: ['1', '2'] }]));
+    writeFileSync(join(fx.root, 'items/lem-sibling.md'), '---\ndeps: []\n---\n## Statement\nA sibling.\n\n## Proof\n1.1 Done.\n');
+    writeFileSync(join(research, 'r-batch-2.pages.json'), JSON.stringify([{ id: 'p2', category: 'test', items: ['lem-sibling'] }]));
+    writeFileSync(join(fx.root, 'library/test/p2.md'), '---\npage: p2\n---\nSibling page.\n');
+    writeFileSync(join(research, 'r-batch-2.proof-contracts.json'), JSON.stringify({ version: 1, scope: ['lem-sibling'], contracts: { 'lem-sibling': {} } }));
+    writeFileSync(join(research, 'r-reader-findings-2.json'), JSON.stringify({ batch: '2', findings: [], coverage_note: 'read' }));
+    for (const batch of ['1', '2']) {
+      fx.run('hash', '--run', 'r', '--batch', batch, '--label', 'pre');
+      fx.run('post-reader', '--run', 'r', '--batch', batch);
+      writeFileSync(join(research, `r-refute-${batch}.json`), JSON.stringify({
+        batch, opened: batch === '1' ? [...fx.ids, 'p'] : ['lem-sibling', 'p2'],
+        not_opened: [], coverage_note: 'read', flagged: batch === '1' ? [{
+          id: 'lem-ordinary-item', location: 'Statement', defect: 'false-claim', evidence: 'test finding', severity: 'nonfatal',
+        }] : [],
+      }));
+      fx.run('collect', '--run', 'r', '--batch', batch);
+    }
+    writeFileSync(join(research, 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'r-batch1-false-positive', run: 'r', subject: 'lem-ordinary-item',
+      caught_at_stage: '5a-adjudicate', severity: 'nonfatal', disposition: 'false-positive',
+    }) + '\n');
+    const decision = { obligation: 'refuter:1:1', id: 'lem-ordinary-item', route: 'flagged',
+      verdict: 'false_positive', evidence: 'The current statement is sound.', defect_ids: ['r-batch1-false-positive'] };
+    const first = { version: 1, run: 'r', group: 'batch-1', decisions: [decision] };
+    const second = { version: 1, run: 'r', group: 'batch-2', decisions: [] as any[] };
+    const firstPath = join(research, 'r-alpha-batch-1-5a-decisions.json');
+    const secondPath = join(research, 'r-alpha-batch-2-5a-decisions.json');
+    writeFileSync(firstPath, JSON.stringify(first));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decisions-missing.*batch-2/);
+    writeFileSync(secondPath, JSON.stringify(second));
+    fx.run('stamp', '--run', 'r');
+    assert.match(JSON.parse(readFileSync(firstPath, 'utf8')).decisions[0].subject_sha256, /^[a-f0-9]{64}$/);
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'final'), /0 error/);
+    const firstBytes = readFileSync(firstPath, 'utf8');
+    fx.run('stamp', '--run', 'r', '--group', 'batch-2');
+    assert.equal(readFileSync(firstPath, 'utf8'), firstBytes, 'stamping a batch never rewrites its sibling');
+    writeFileSync(secondPath, JSON.stringify({ ...second, decisions: [decision] }));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-extra.*not owed to group batch-2/);
+    writeFileSync(secondPath, JSON.stringify({ ...second, group: 'a' }));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decisions-shape.*batch-2/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
 
 test('5a-prepare freezes every batch pre-hash and the auditor baseline once', () => {
   const fx = fixture();

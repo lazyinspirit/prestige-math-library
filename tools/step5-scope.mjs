@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Compute and close Step 5 routing from disk.
 // Version 2 is the active route: the reader/refuter pass, its exact coverage
-// and the obligations group Alpha adjudicates. Version 3 is read-only support
+// and the obligations batch Alpha adjudicates. Version 3 is read-only support
 // for imported or historical direct-review evidence; nothing writes it.
 //
-//   changed by reader                 -> group Alpha
-//   untouched, flagged by refuter     -> group Alpha
+//   changed by reader                 -> batch Alpha
+//   untouched, flagged by refuter     -> batch Alpha
 //   untouched, no refuter finding     -> final gates
 //
 // Each batch owns a separate scope file. Concurrent pipeline lanes must never
@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { step5Escalations } from './step5-escalations.mjs';
+import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 
 const argv = process.argv.slice(2);
@@ -658,7 +659,8 @@ if (command === 'stamp') {
   const manifests = manifestItems();
   const pages = manifestPages();
   const onlyGroup = option('group');
-  for (const group of assignment.rows.filter((row) => !onlyGroup || row.label === onlyGroup)) {
+  for (const group of step5Adjudicators(ROOT, run, assignment.rows)
+    .filter((row) => !onlyGroup || row.label === onlyGroup || row.scopeGroup === onlyGroup)) {
     const expected = new Map();
     for (const batch of group.covers) {
       const scope = readJson(scopePath(batch), `batch ${batch} scope`);
@@ -854,7 +856,7 @@ if (command === 'check') {
         && hashValue(entry) === current.contract_sha256;
     };
 
-    for (const group of assignment.rows) {
+    for (const group of step5Adjudicators(ROOT, run, assignment.rows)) {
       if (only && !group.covers.includes(only)) continue;
       const groupSubjects = new Set(group.covers.flatMap((batch) => [
         ...(manifests[batch] ?? []), ...(pages[batch] ?? []).map((page) => page.id),

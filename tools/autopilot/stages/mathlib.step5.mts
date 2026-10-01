@@ -1,13 +1,14 @@
-// Step 5: independent readers, read-only refuters, routed group adjudication,
+// Step 5: independent readers, read-only refuters, routed batch adjudication,
 // cross-group audit and closure.
 
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
+import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep5 } from './step5-hold.mts';
 import { prepareStep5AdjudicationOrder } from '../../step5-adjudication-order.mjs';
+import { batchAdjudicator, step5Adjudicators } from '../../step5-adjudicators.mjs';
 
 // Step-5 lanes: readers and refuters Luna/max,
-// group adjudicators Sol/high, and every 5b agent Sol/xhigh.
+// batch adjudicators Sol/high, and every 5b agent Sol/xhigh.
 // The live engine can reload this module while retaining an older models.mjs import.
 const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax ?? 'gpt-6-luna-max';
 const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
@@ -17,10 +18,10 @@ const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 export function step5Stages(d: any) {
   const {
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
-    impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
+    impactGate, batches, alphaGroups, resultPattern, touchesPath,
   } = d;
 
-  /** One batch per lane: a reader or refuter never shares a lane with a sibling. */
+  /** One batch per lane: readers, refuters and adjudicators never share a lane. */
   const solo = (_ctx: any, unit: string) => [String(unit)];
 
   const routingGate = (ctx: any, phase: 'adjudicate' | 'final') =>
@@ -140,23 +141,27 @@ export function step5Stages(d: any) {
     },
     {
       id: '5a-adjudicate',
-      label: 'group Alpha adjudication of reader repairs, refuter findings and pages',
+      label: 'batch Alpha adjudication of reader repairs, refuter findings and pages',
       modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_HIGH : undefined,
       pipeline: 'read',
       role: 'alpha',
       units: batches,
-      pattern: resultPattern('alpha', '5a-[a-z]+'),
+      pattern: resultPattern('alpha', '5a-(?:[a-z]+|batch-[1-9]\\d*)'),
+      labelFor: (unit: string) => `5a-batch-${unit}`,
       artifacts: (ctx: any, unit: string) => {
-        const group = alphaGroups(ctx).find((entry: any) => entry.covers.map(String).includes(String(unit)));
+        const group = step5Adjudicators(ctx.repo, ctx.run, alphaGroups(ctx), ctx.dispatchDir)
+          .find((entry: any) => entry.covers.map(String).includes(String(unit)));
         if (!group) return null;
         const report = `research/${ctx.run}-alpha-${group.label}-5a.md`;
         return [report, `research/${ctx.run}-alpha-${group.label}-5a-decisions.json`];
       },
-      concurrency: MAX_GROUPS,
-      cohort: alphaCohort,
-      plan: (ctx: any, pending: string[]) => alphaGroups(ctx)
-        .filter((group: any) => group.covers.some((unit: any) => pending.includes(String(unit))))
-        .map((group: any) => ({
+      concurrency: MAX_RUN_BATCHES,
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => pending.map((unit) => {
+        const assignment = alphaGroups(ctx).find((group: any) => group.covers.map(String).includes(String(unit)));
+        if (!assignment) throw Error(`Step 5a batch ${unit} has no Alpha assignment`);
+        const group = batchAdjudicator(assignment, unit);
+        return {
           role: 'alpha', label: `5a-${group.label}`, job: 'adjudication', covers: group.covers,
           brief: 'briefs/alpha-step5.md',
           task: ctx.doctor ? 'briefs/tasks/alpha-5a-adjudicate.md' : [
@@ -164,7 +169,8 @@ export function step5Stages(d: any) {
             prepareStep5AdjudicationOrder(ctx.repo, ctx.run, group),
           ],
           timeout: 14400,
-        })),
+        };
+      }),
       gates: (ctx: any) => [
         gate('step5-owner-escalations', ['node', 'tools/step5-scope.mjs', 'check-escalations', '--run', ctx.run]),
         auditorCreatedGate(ctx),

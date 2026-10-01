@@ -20,6 +20,7 @@ function fixture({ step7Landed = true, paused = true } = {}) {
     ['5a-read', 'reader', 'reader-1'],
     ['5a-refute', 'refuter', 'refute-1'],
     ['5a-adjudicate', 'alpha', '5a-a'],
+    ['5a-adjudicate', 'alpha', '5a-batch-1'],
     ['5b-cross', 'alpha', '5b-lead'],
     ['5b-close', 'tool', 'step5-close'],
   ] as const;
@@ -41,7 +42,9 @@ function fixture({ step7Landed = true, paused = true } = {}) {
     gateAttempts: { '5a-read\u0000x': { stage: '5a-read' }, '7-freeze\u0000y': { stage: '7-freeze' } } }));
 
   for (const name of ['demo-step5-hash-1-pre.json', 'demo-reader-1.md', 'demo-5b-verdicts.jsonl',
-    'demo-step5-closure.json', 'demo-alpha-a-5a-decisions.json']) {
+    'demo-step5-closure.json', 'demo-alpha-a-5a-decisions.json',
+    'demo-alpha-batch-1-5a-decisions.json', 'demo-alpha-batch-1-5a.md',
+    'demo-alpha-batch-1-5a-order.task.md']) {
     writeFileSync(join(repo, 'research', name), '{}\n');
   }
   for (const name of ['demo-step7-published-repairs.jsonl', 'demo-judge.jsonl', 'demo-step5-reopen.json']) {
@@ -65,7 +68,9 @@ test('archives the Step-5 receipts and artifacts, clears only Step-5 state', () 
   // Receipts, logs and Step-5 artifacts are archived; the reopen receipt and the
   // Step-6/Step-7 evidence stay in place.
   for (const name of ['tool-prepare-5a.result.json', 'reader-reader-1.log', 'demo-reader-1.md',
-    'demo-5b-verdicts.jsonl']) {
+    'demo-5b-verdicts.jsonl', 'alpha-5a-batch-1.result.json',
+    'demo-alpha-batch-1-5a-decisions.json', 'demo-alpha-batch-1-5a.md',
+    'demo-alpha-batch-1-5a-order.task.md']) {
     assert.ok(result.archived.includes(name), `${name} archived`);
     assert.equal(existsSync(join(name.startsWith('demo-') ? join(fx.repo, 'research') : fx.dispatchDir, name)), false,
       `${name} removed from its live location`);

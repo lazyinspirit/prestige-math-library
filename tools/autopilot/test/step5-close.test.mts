@@ -42,6 +42,8 @@ test('Step-5 closure freezes exact reports and ledger rows without blocking late
       'r-step5-hash-1-post-5a.json': '{"snapshot":true}\n',
       'r-reader-1.md': '# reader\n',
       'r-alpha-a-5a.md': '# group Alpha\n',
+      'r-alpha-batch-1-5a.md': '# batch Alpha\n',
+      'r-alpha-batch-1-5a-decisions.json': '{"decisions":[]}\n',
       'r-alpha-a-5a-decisions.json': '{"decisions":[]}\n',
       'r-alpha-5b.md': '# lead Alpha\n',
       'r-5b-verdicts.jsonl': '',
@@ -68,6 +70,10 @@ test('Step-5 closure freezes exact reports and ledger rows without blocking late
 
     writeFileSync(join(root, 'items', 'thm-x.md'), 'later Step-7 repair\n');
     assert.equal(verify().status, 0, 'later stages may change items without rewriting Step-5 history');
+
+    writeFileSync(join(root, 'research', 'r-alpha-batch-1-5a.md'), '# changed batch report\n');
+    assert.match(verify().stderr, /alpha-batch-1-5a\.md changed/);
+    writeFileSync(join(root, 'research', 'r-alpha-batch-1-5a.md'), artifacts['r-alpha-batch-1-5a.md']);
 
     writeFileSync(join(root, 'research', 'defect-ledger.jsonl'), `${JSON.stringify({
       ...ledgerRows[0], subject: 'retargeted-subject',

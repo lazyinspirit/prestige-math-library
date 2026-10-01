@@ -76,4 +76,10 @@ test('Step 5 group adjudication task orders routed items across batches', t => {
   assert.deepEqual(ids.map(id => task.indexOf(`, ${id} —`)).sort((a, b) => a - b),
     ids.map(id => task.indexOf(`, ${id} —`)));
   assert.match(task, /level 2: batch 2, thm-cross/);
+  const batchPath = prepareStep5AdjudicationOrder(root, 'demo', { label: 'batch-2', scopeGroup: 'a', covers: ['2'] });
+  assert.equal(batchPath, 'research/demo-alpha-batch-2-5a-order.task.md');
+  const batchTask = readFileSync(join(root, batchPath), 'utf8');
+  assert.match(batchTask, /level 2: batch 2, thm-cross/);
+  assert.doesNotMatch(batchTask, /level \d+: batch 1,/);
+  assert.throws(() => prepareStep5AdjudicationOrder(root, 'demo', { label: 'batch-2', scopeGroup: 'b', covers: ['2'] }), /scope identity mismatch/);
 });

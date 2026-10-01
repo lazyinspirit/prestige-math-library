@@ -33,7 +33,7 @@ const artifactNames = () => researchNames().filter((name) =>
   || name.startsWith(`${run}-reader-findings-`)
   || new RegExp(`^${run}-reader-\\d+\\.md$`).test(name)
   || name.startsWith(`${run}-refute-`)
-  || new RegExp(`^${run}-alpha-[a-z]+-5a\\.md$`).test(name)
+  || new RegExp(`^${run}-alpha-(?:[a-z]+|batch-[1-9]\\d*)-5a\\.md$`).test(name)
   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-5a-decisions.json'))
   || name === `${run}-alpha-5b.md`
   || name === `${run}-cross-group-edges.json`

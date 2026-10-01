@@ -413,7 +413,7 @@ export function authorResultAllowed(step, row) {
   if (Number(step) === 3) return row.role === 'alpha-high'
     && /^(?:step3b-[a-z]|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
   if (Number(step) === 5) return row.role === 'alpha'
-    && /^(?:5a-[a-z]|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
+    && /^(?:5a-[a-z]|5a-batch-[1-9]\d*|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
   if (Number(step) === 7) return (row.role === 'final-adjudicator'
     && /^step7-fa-[a-z]-round-[1-9]\d*$/.test(label))
     || (row.role === 'alpha-adjudicate'

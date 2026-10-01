@@ -16,7 +16,7 @@ export function repairFingerprint(ctx: any): string {
   if (existsSync(join(ctx.repo, 'research'))) files.push(...readdirSync(join(ctx.repo, 'research'))
     .filter((name) => name.startsWith(`${ctx.run}-`) && (
       /-batch-\d+\.(pages|proof-contracts|coverage)\.json$/.test(name)
-      || /-alpha-[a-z]+-5a-decisions\.json$/.test(name)))
+      || /-alpha-(?:[a-z]+|batch-[1-9]\d*)-5a-decisions\.json$/.test(name)))
     .map((name) => `research/${name}`));
   for (const file of files.sort()) {
     const path = file.startsWith('/') ? file : join(ctx.repo, file);

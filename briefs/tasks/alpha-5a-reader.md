@@ -1,5 +1,6 @@
 # Step 5a reader — batch `<i>`, run `<run>`
 
+- This dispatch owns exactly one batch: `<i>`, as listed in `covers:`.
 - Read `research/<run>-batch-<i>.pages.json`; open every listed page at `library/<category>/<page>.md` and every listed item at `items/<id>.md`, plus dependencies needed to verify claims. Read items in dependency order, suppliers before consumers.
 - Follow `briefs/reader.md`. The assigned batch is your full scope, and its authors' decisions do not govern your independent review.
 - Repair only confirmed defects in an in-flight item of this batch or its assigned A-page prose. Keep proposed withdrawals present for the 5b lead. Do not edit another batch, `research/plan-spec.json`, B-page prose, or published content.
