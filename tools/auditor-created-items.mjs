@@ -157,13 +157,15 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
     || (receipt.basis !== undefined && !(step === 5
       ? ['initial-step5-contract-only', 'initial-step5-item-repair',
         'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
-        'initial-step5-current-definition-manifest-review'].includes(receipt.basis)
+        'initial-step5-current-definition-manifest-review',
+        'initial-step5-current-ball-lemma-manifest-review'].includes(receipt.basis)
       : step === 7 && ['initial-step7-item-repair',
         'initial-step7-contract-only'].includes(receipt.basis)))
     || (step === 5 && receipt.basis !== undefined
       && (!step5Bootstrap || step5Bootstrap.basis !== receipt.basis
         || step5Bootstrap.result_file !== receipt.author_result))
-    || (receipt.basis === 'initial-step5-current-definition-manifest-review'
+    || (['initial-step5-current-definition-manifest-review',
+      'initial-step5-current-ball-lemma-manifest-review'].includes(receipt.basis)
       && receipt.historical_delta_unknown !== true)
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
@@ -350,7 +352,10 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     || evidence.current_carriers?.manifest_sha256 !== hashes.manifest_sha256
     || evidence.current_carriers?.contract_sha256 !== hashes.contract_sha256)
     return null;
-  if (evidence.repair_kind === 'current-definition-manifest-review') {
+  const definitionReview = evidence.repair_kind === 'current-definition-manifest-review';
+  const ballLemmaReview = evidence.repair_kind === 'current-ball-lemma-manifest-review'
+    && id === 'lem-euclidean-balls-are-bounded-c-one-domains';
+  if (definitionReview || ballLemmaReview) {
     // Explicit owner resolution of a missing historical projection. Never call
     // this metadata-only or infer the unknown delta from a hash or mtime.
     const currentEntry = evidence.current_manifest_entry;
@@ -370,10 +375,12 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         return (consumer.deps ?? []).includes(id) || links.includes(id);
       }).map(file => file.slice(0, -3)).sort();
     if (evidence.historical_delta_unknown !== true || evidence.baseline_manifest_entry !== undefined
-      || fm.kind !== 'definition' || currentEntry?.kind !== 'definition'
+      || fm.kind !== (definitionReview ? 'definition' : 'lemma')
+      || currentEntry?.kind !== fm.kind
       || evidence.owner_authorization?.owner !== true
       || !String(evidence.owner_authorization?.reason ?? '').trim()
-      || evidence.review.current_definition_and_direct_consumers_checked !== true
+      || (definitionReview ? evidence.review.current_definition_and_direct_consumers_checked !== true
+        : evidence.review.current_proof_suppliers_and_direct_consumers_checked !== true)
       || !sameCanonical(evidence.review.direct_consumers, directConsumers)
       || !currentEntry || hashValue(currentEntry) !== hashes.manifest_sha256
       || !sameCanonical(currentEntry, row.manifest_entry)
@@ -389,7 +396,31 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       } catch { return null; }
     }
     if (![run, id, evidence.owner_authorization.reason].every(value => texts.join('\n').includes(value))) return null;
-    return 'initial-step5-current-definition-manifest-review';
+    if (ballLemmaReview) {
+      for (const kind of ['precheck', 'rendercheck', 'strict-contract']) {
+        const link = evidence.proof_checks?.[kind];
+        try {
+          const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
+          const check = JSON.parse(bytes);
+          if (sha(bytes) !== link?.sha256 || check.version !== 1 || check.run !== run
+            || check.step !== 5 || check.id !== id || check.kind !== kind
+            || check.exit_code !== 0 || !Number.isFinite(Date.parse(check.observed_at))
+            || !Array.isArray(check.argv)
+            || ['item_file_sha256', 'manifest_sha256', 'contract_sha256']
+              .some(key => check.current_carriers?.[key] !== hashes[key])
+            || (kind === 'precheck' ? !check.argv.includes('tools/precheck.mts')
+                || !check.argv.includes(`items/${id}.md`)
+              : kind === 'rendercheck' ? !check.argv.includes('tools/rendercheck.mjs')
+                || !check.argv.includes(`items/${id}.md`)
+              : !check.argv.includes('tools/proof-contract.mjs')
+                || !check.argv.includes('--strict') || !check.argv.includes('--items')
+                || !check.argv.includes(id)
+                || !check.argv.includes(`research/${run}-batch-${row.batch}.proof-contracts.json`))) return null;
+        } catch { return null; }
+      }
+    }
+    return definitionReview ? 'initial-step5-current-definition-manifest-review'
+      : 'initial-step5-current-ball-lemma-manifest-review';
   }
   const oldEntry = evidence.baseline_manifest_entry, currentEntry = evidence.current_manifest_entry;
   if (!oldEntry || !currentEntry || oldEntry.id !== id || currentEntry.id !== id
@@ -485,7 +516,8 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
     ...(bootstrap ? { basis: bootstrap.basis,
-      ...(bootstrap.basis === 'initial-step5-current-definition-manifest-review'
+      ...(['initial-step5-current-definition-manifest-review',
+        'initial-step5-current-ball-lemma-manifest-review'].includes(bootstrap.basis)
         ? { historical_delta_unknown: true } : {}) } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);

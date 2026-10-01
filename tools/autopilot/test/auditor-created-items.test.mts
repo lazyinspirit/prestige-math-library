@@ -151,10 +151,9 @@ function carriedStep7Fixture(t: any, { itemChanged = true, itemAt = '2025-01-01T
 }
 
 function carriedStep5Fixture(t: any, { step5Result = {}, seedItem = null,
-  seedManifestItem = null, removeBaseFromRun = false }: any = {}) {
+  seedManifestItem = null, removeBaseFromRun = false, id = 'lem-created' }: any = {}) {
   const root = fixture();
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  const id = 'lem-created';
   const itemPath = join(root, 'items', `${id}.md`);
   const manifestPath = join(root, 'research/r-batch-1.pages.json');
   const contractPath = join(root, 'research/r-batch-1.proof-contracts.json');
@@ -1328,10 +1327,12 @@ test('later native promotion validates and preserves the owner-created Step-5 or
     'research/r-step7-auditor-certifications.json')), /owner creation/);
 });
 
-function currentDefinitionReviewFixture(t: any) {
-  const seedItem = item('lem-created').replace('kind: lemma', 'kind: definition');
-  const f = carriedStep5Fixture(t, { seedItem, seedManifestItem: {
-    id: 'lem-created', kind: 'definition', deps: [], statement: 'Old description' } });
+function currentDefinitionReviewFixture(t: any, { ballLemma = false } = {}) {
+  const id = ballLemma ? 'lem-euclidean-balls-are-bounded-c-one-domains' : 'lem-created';
+  const kind = ballLemma ? 'lemma' : 'definition';
+  const seedItem = item(id).replace('kind: lemma', `kind: ${kind}`);
+  const f = carriedStep5Fixture(t, { id, seedItem, seedManifestItem: {
+    id, kind, deps: [], statement: 'Old description' } });
   writeFileSync(f.itemPath, seedItem.replace('Immediate.', 'Current definition explanation.'));
   const pages = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
   pages[0].items.find((x: any) => x.id === f.id).statement = 'Current description';
@@ -1398,4 +1399,54 @@ test('current-definition review cannot omit inline YAML dependencies or labelled
     assert.ok(recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
       'Owner explicitly reviewed the complete actual consumer inventory').path);
   }
+});
+
+
+function currentBallLemmaReviewFixture(t: any) {
+  const f = currentDefinitionReviewFixture(t, { ballLemma: true });
+  f.payload.repair_kind = 'current-ball-lemma-manifest-review';
+  delete f.payload.review.current_definition_and_direct_consumers_checked;
+  f.payload.review.current_proof_suppliers_and_direct_consumers_checked = true;
+  f.payload.proof_checks = {};
+  for (const kind of ['precheck', 'rendercheck', 'strict-contract']) {
+    const argv = kind === 'precheck' ? ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts', `items/${f.id}.md`]
+      : kind === 'rendercheck' ? ['node', 'tools/rendercheck.mjs', `items/${f.id}.md`]
+      : ['node', 'tools/proof-contract.mjs', 'research/r-batch-1.proof-contracts.json', '--strict', '--items', f.id];
+    const check = { version: 1, run: 'r', step: 5, id: f.id, kind, observed_at: new Date().toISOString(),
+      exit_code: 0, argv, current_carriers: f.payload.current_carriers };
+    const path = `research/current-${kind}-check.json`, bytes = JSON.stringify(check);
+    writeFileSync(join(f.root, path), bytes);
+    f.payload.proof_checks[kind] = { path, sha256: sha(bytes) };
+  }
+  f.write();
+  return f;
+}
+
+test('exact ball-lemma owner review binds current proof checks and preserves historical uncertainty separately', t => {
+  const f = currentBallLemmaReviewFixture(t);
+  const result = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Owner reviewed the exact ball proof and consumers');
+  const receipt = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.equal(receipt.basis, 'initial-step5-current-ball-lemma-manifest-review');
+  assert.equal(receipt.historical_delta_unknown, true);
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items[0].origin_step, 3);
+});
+
+test('ball-lemma review rejects unsupported kinds, missing proof checks, unreviewed consumers and stale current hashes', t => {
+  for (const mutate of [
+    (f: any) => { f.payload.current_manifest_entry.kind = 'theorem'; },
+    (f: any) => { delete f.payload.proof_checks.precheck; },
+    (f: any) => { f.payload.proof_checks.rendercheck.sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.current_carriers.contract_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.review.current_proof_suppliers_and_direct_consumers_checked = false; },
+    (f: any) => { writeFileSync(join(f.root, 'items/lem-unreviewed.md'),
+      item('lem-unreviewed').replace('deps: []', `deps: [${f.id}]`)); },
+  ]) {
+    const f = currentBallLemmaReviewFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+      'No proof or consumer evidence may be omitted'), /eligible Step 5 owner bootstrap/);
+  }
+  const other = currentDefinitionReviewFixture(t);
+  other.payload.repair_kind = 'current-ball-lemma-manifest-review'; other.write();
+  assert.throws(() => recordOwnerRecertification(other.root, 'r', 5, other.id, other.evidence,
+    'Ball-lemma authorization cannot cover another subject'), /eligible Step 5 owner bootstrap/);
 });

@@ -129,3 +129,28 @@ never infer it from successful local tools. The resulting owner receipt has
 basis `initial-step5-current-definition-manifest-review` and retains
 `historical_delta_unknown: true`. Its native result supplies review context,
 not attribution of the unknown late changes.
+
+## Exact ball-lemma current review
+
+The separate `current-ball-lemma-manifest-review` branch is authorized only for
+`lem-euclidean-balls-are-bounded-c-one-domains`, with item and manifest kind
+`lemma`. It preserves every definition-branch requirement on origin, immutable
+baseline/home, current metadata, explicit owner authority, source hashes and
+complete direct-consumer inventory. Set
+`review.current_proof_suppliers_and_direct_consumers_checked: true` after
+actually reviewing the full proof, exact suppliers and all consumer uses.
+Other lemma/theorem subjects are not eligible under this authorization.
+
+It additionally requires `proof_checks` links for `precheck`, `rendercheck`,
+and `strict-contract`, each `{ "path": "research/ACTUAL_CHECK.json",
+"sha256": "RAW_FILE_HASH" }`. Each hashed check record must contain
+`version: 1`, the same run, `step: 5`, exact id and kind, actual `observed_at`,
+`exit_code: 0`, actual argv naming the corresponding tool and exact subject,
+and `current_carriers` binding the raw item, canonical manifest and contract
+hashes. Strict contract argv must include `--strict`, `--items`, the exact id
+and its owning batch contract. Record actual stdout/stderr and preserve failed
+attempts separately; these are local checks, never independent audits.
+The owner receipt uses basis
+`initial-step5-current-ball-lemma-manifest-review` and retains
+`historical_delta_unknown: true`, without inventing native authorship or an
+old manifest projection. Existing definition receipts keep their distinct basis.
