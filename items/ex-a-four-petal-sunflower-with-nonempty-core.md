@@ -52,7 +52,7 @@ $\{9,10\}$.
 \draw[blue!65!black,line width=1.3pt] (c)--node[right] {$F_3$} (p3);
 \draw[blue!65!black,line width=1.3pt] (c)--node[above] {$F_4$} (p4);
 
-\node[font=\scriptsize,anchor=south] at (0,.65) {common core};
+\node[font=\scriptsize,anchor=south,fill=white,inner sep=1pt] at (0,.65) {common core};
 \node[font=\scriptsize,anchor=north] at (0,-2.8)
   {$F_i=\{1,2\}\cup P_i$, with the $P_i$ pairwise disjoint};
 \end{tikzpicture}

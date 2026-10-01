@@ -74,8 +74,8 @@ example $a_0, a_1$.
   \node at (4.5,-0.75) {$P_2$};
   \draw[very thick] (0,-1.55) -- (0.7,-1.55);
   \node[anchor=west] at (0.85,-1.55) {decreasing blocks of length $2$};
-  \draw[thick,dashed] (3.45,-1.55) -- (4.15,-1.55);
-  \node[anchor=west] at (4.3,-1.55) {the increasing sublist $2,4,6$};
+  \draw[thick,dashed] (0,-2.15) -- (0.7,-2.15);
+  \node[anchor=west] at (0.85,-2.15) {the increasing sublist $2,4,6$};
 \end{tikzpicture}
 ```
 
