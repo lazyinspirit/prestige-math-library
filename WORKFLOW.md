@@ -86,6 +86,10 @@
   opens a direct-consumer review; continue another hop only if that consumer's own
   Statement or Definition changes. Proof, citation, dependency and metadata edits with
   unchanged interfaces do not propagate. A reference alone does not require an edit.
+  When prior bytes are unavailable, explicit owner resolution may accept a fully
+  reviewed current touched/page carrier with `change_kind: current_content_review`.
+  Record the unknown historical delta honestly; mathematical findings, risk reviews,
+  ledger ownership and current content hashes still require normal closure.
 
 - Step 7 freezes `research/RUN-step7-v2/frontier.json`. Its adjudication, repair,
   rejudgment and item gates cover draft IDs in that frontier. Batch adjudicators resolve

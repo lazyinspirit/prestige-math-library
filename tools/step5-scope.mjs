@@ -916,11 +916,15 @@ if (command === 'check') {
         if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) error('decision-evidence', `${decision.obligation} has no evidence`);
         const accepted = target?.direct && decision.verdict === 'accepted';
         const cleanChange = decision.verdict === 'reviewed_no_defect';
+        const currentContentReview = decision.change_kind === 'current_content_review'
+          && decision.historical_delta_unknown === true
+          && typeof decision.owner_resolution === 'string'
+          && decision.owner_resolution.trim().length >= 40;
         if (accepted && decision.defect_ids?.length !== 0) error('decision-ledger-refs', `${decision.obligation} accepted content must have empty defect_ids`);
         if (target?.direct && decision.verdict === 'repaired' && decision.repair_confidence !== 1) error('repair-confidence', `${decision.obligation} needs an honest complete repair`);
-        if (cleanChange && (!['metadata', 'audit_enrichment'].includes(decision.change_kind)
+        if (cleanChange && ((!['metadata', 'audit_enrichment'].includes(decision.change_kind) && !currentContentReview)
           || decision.defect_ids?.length !== 0)) {
-          error('decision-clean-change', `${decision.obligation} needs metadata/audit_enrichment change_kind and empty defect_ids`);
+          error('decision-clean-change', `${decision.obligation} needs metadata/audit_enrichment or an explicit owner-resolved current_content_review with historical_delta_unknown, and empty defect_ids`);
         }
         if (!Array.isArray(decision.defect_ids) || (!cleanChange && !accepted && !decision.defect_ids.length) || !unique(decision.defect_ids)) {
           error('decision-ledger-refs', `${decision.obligation} needs one or more unique defect_ids`);

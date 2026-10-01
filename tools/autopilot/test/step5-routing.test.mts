@@ -551,6 +551,45 @@ test('sound audit enrichment needs no invented defect but retains hash and route
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
+test('owner-resolved current review preserves unknown history and cannot close defects or stale content', () => {
+  const fx = fixture();
+  try {
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    prepareSplit(fx);
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    const path = join(fx.root, 'research', 'r-alpha-a-5a-decisions.json');
+    const decision: any = {
+      obligation: 'touched:1:thm-touched-high-risk', id: 'thm-touched-high-risk', route: 'touched',
+      verdict: 'reviewed_no_defect', change_kind: 'current_content_review', historical_delta_unknown: true,
+      defect_ids: [], evidence: 'Current proof and prerequisites reviewed; historical edit remains unclassified.',
+    };
+    const save = () => writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [decision] }));
+    save();
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-clean-change/);
+    decision.owner_resolution = 'Owner authorized acceptance of the fully reviewed current proof; earlier bytes are unavailable.';
+    save();
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    decision.historical_delta_unknown = false;
+    save();
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-clean-change/);
+    decision.historical_delta_unknown = true;
+    save();
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'r-open', run: 'r', subject: decision.id,
+      caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'open',
+    }) + '\n');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /ledger-unowned/);
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    writeFileSync(join(fx.root, 'items', `${decision.id}.md`), 'changed after review');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
 test('global contract-audit summary rows do not invent 5a ownership gaps', () => {
   const fx = fixture();
   try {
