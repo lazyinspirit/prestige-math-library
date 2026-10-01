@@ -108,3 +108,15 @@ DeepSeek dispatches in Steps 2, 3, 6 and 9 require the
 repository's single-tool live web bridge. It prefers Tavily and falls back to
 Firecrawl when Tavily is not configured. Deterministic tool plans remain
 model-free.
+
+### Doctor on restart
+
+Doctor reads `config.stateDir/state.json` without changing it. On a matching
+run and workflow revision, only a contiguous leading prefix with valid durable
+`enteredAt <= gatesPassedAt <= doneAt` stamps omits dynamic `units()` and
+`plan()` materialization. Later repairs can legitimately change these completed
+stages' historical inputs. Static stage structure, gate commands and their flags
+remain checked for every stage; current and future plans, units, schemas and
+runner probes retain normal checks. Missing, unreadable, mismatched or invalid
+state provides no completion exemption. Skipped or routed stages do not qualify
+as gate-passed completion for this preflight optimization.

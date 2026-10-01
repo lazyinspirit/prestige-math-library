@@ -18,7 +18,7 @@
 // each costs hours if discovered during one.
 
 import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 import { validateStages } from './spec.mts';
@@ -36,6 +36,34 @@ export function identityPlaceholders(text: string): string[] {
   return found.filter((name) => name === 'n' || name === 'k').map((name) => `<${name}>`);
 }
 
+/** Only a matching durable, gate-passed prefix can omit historical plans.
+ * Later mathematical repairs may legitimately invalidate their old inputs.
+ * Invalid/missing state grants no exemption; doctor then checks every plan. */
+function completedPrefix(repo: string, run: string, stages: any[], config: any, workflowRevision?: string): Set<string> {
+  const completed = new Set<string>();
+  if (typeof config.stateDir !== 'string' || !config.stateDir
+    || (config.run !== undefined && config.run !== run)) return completed;
+  try {
+    const state = JSON.parse(readFileSync(join(resolve(repo, config.stateDir), 'state.json'), 'utf8'));
+    if (state.version !== 1 || state.run !== run
+      || (workflowRevision !== undefined && state.workflowRevision !== workflowRevision)
+      || !state.stages
+      || typeof state.stages !== 'object' || Array.isArray(state.stages)
+      || !Number.isFinite(Date.parse(state.startedAt))
+      || (state.stage !== null && !stages.some(st => st.id === state.stage))) return completed;
+    for (const st of stages) {
+      const stamp = state.stages[st.id];
+      const entered = Date.parse(stamp?.enteredAt), gates = Date.parse(stamp?.gatesPassedAt),
+        done = Date.parse(stamp?.doneAt);
+      if (!stamp || stamp.skipped || stamp.routedTo
+        || !Number.isFinite(entered) || !Number.isFinite(gates) || !Number.isFinite(done)
+        || entered < Date.parse(state.startedAt) || gates < entered || done < gates) break;
+      completed.add(st.id);
+    }
+  } catch { /* unreadable state cannot authorize omitting any dynamic check */ }
+  return completed;
+}
+
 export async function doctor({ repo, run, stagesPath, config = {} as any }: { repo: string; run: string; stagesPath: string; config?: any }) {
   const problems: any[] = [];
   const notes: any[] = [];
@@ -46,6 +74,8 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   // them only for command descriptors, before those artifacts exist.
   const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`), config, doctor: true };
   const syntheticUnits = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  const completed = completedPrefix(repo, run, mod.stages, config, mod.workflowRevision);
+  if (completed.size) notes.push(`durably completed prefix: omitted historical units/plans for ${[...completed].join(', ')}`);
 
   // Probe each plan with the identities that its own unit function declares.
   // Batch numbers are not universal identities: Step 3's current dispatches
@@ -56,6 +86,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   // their preflight flag/schema coverage.
   const planUnits = new Map<any, string[]>();
   for (const st of mod.stages) {
+    if (completed.has(st.id)) continue;
     try {
       const declared = st.units?.(ctx) ?? [];
       planUnits.set(st, Array.isArray(declared) && declared.length
@@ -70,7 +101,11 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   // 0. the spec must be able to fail. A stage with no gate reports success
   //    unconditionally, and the terminal one doing that is how frontier-14
   //    finished with open fatal defects and a red receipt gate.
-  const specProblems = validateStages(mod.stages, ctx as any);
+  // Preserve all static descriptors and gates; only the completed stages'
+  // prerequisite graph enumeration would re-materialize historical units.
+  const specStages = mod.stages.map((st: any) => completed.has(st.id) && typeof st.units === 'function'
+    ? { ...st, units: () => [] } : st);
+  const specProblems = validateStages(specStages, ctx as any);
   for (const p of specProblems) problems.push(`stage spec — ${p.stage}: ${p.message}`);
   if (!specProblems.length) ok.push(`stage spec: ${mod.stages.length} stage(s), every one able to fail`);
 
@@ -94,7 +129,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
       collect(`${st.id}/${g.id}`, typeof g.argv === 'function' ? g.argv() : g.argv);
     }
     let plans = [];
-    try { plans = st.plan?.(ctx, planUnits.get(st)!) ?? []; } catch (err: any) { problems.push(`${st.id}: plan() threw — ${err?.message ?? err}`); }
+    try { plans = completed.has(st.id) ? [] : st.plan?.(ctx, planUnits.get(st)!) ?? []; } catch (err: any) { problems.push(`${st.id}: plan() threw — ${err?.message ?? err}`); }
     for (const p of plans) if (p.argv) collect(`${st.id}/${p.label}`, p.argv);
     for (const [where, tools, line] of cmds) {
       toolCommands += 1;
@@ -170,6 +205,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   // failure. Validate the endpoint's known strict subset before a run starts.
   const outputSchemas = new Set<string>();
   for (const st of mod.stages) {
+    if (completed.has(st.id)) continue;
     try {
       for (const plan of (st.plan?.(ctx, planUnits.get(st)!) ?? [])) if (plan.outputSchema) outputSchemas.add(plan.outputSchema);
     } catch { /* plan errors were already reported by the command check */ }
@@ -270,6 +306,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
 
   // 6. configured judge runner — checked only if a stage mentions it.
   const usesJudge = mod.stages.some((s: any) => {
+    if (completed.has(s.id)) return false;
     try { return (s.plan?.(ctx, planUnits.get(s)!) ?? []).some((p: any) => (p.argv ?? []).join(' ').includes('judge')); }
     catch { return false; }
   });
