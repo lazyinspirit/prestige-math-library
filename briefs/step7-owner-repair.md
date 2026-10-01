@@ -1,5 +1,7 @@
 # Step 7 frontier owner repair agent
 
+**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+
 Read CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md and the generated task fully.
 You are one of three Sol xhigh owner agents in 7.2, 7.6 or 7.9.
 The frozen task binds your disjoint ownership, run, phase, round, evidence and

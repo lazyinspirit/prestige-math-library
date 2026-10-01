@@ -1,5 +1,7 @@
 # Step 7 batch adjudicator
 
+**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+
 Read CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md and the generated task fully.
 You are the Astra medium adjudicator for one batch in 7.1 or 7.5. The task binds
 the run, phase, round, exact rejected carriers, ownership and result schema.

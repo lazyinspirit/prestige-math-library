@@ -1,5 +1,7 @@
 # Step 5 Alpha
 
+**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+
 - Read the dispatched task first; it names your batches or cross-group obligations, your outputs, and your focused checks. The engine owns scheduling and transitions.
 - Work only the routed work of your dispatch: the named batches or the computed cross-group findings. Open a dependency outside that scope only to test an assigned claim.
 - At 5a, use the generated group item order across all assigned batches, lowest dependency level first. Finish each item's routed decisions and required risk review before moving higher; page-only obligations still need review.

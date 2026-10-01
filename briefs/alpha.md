@@ -1,5 +1,7 @@
 # Alpha
 
+**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+
 For Step 3 onward, follow `briefs/tasks/frontier-dependency-ledger.md` within
 your write scope. Step 8's lead must refresh and read the unified frontier ledger.
 

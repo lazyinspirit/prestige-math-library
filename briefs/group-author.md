@@ -1,5 +1,7 @@
 # Step 3b — scaffold auditor and item author
 
+**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+
 Own the A/B pair(s) listed in this dispatch. Audit each scaffold for the
 hypotheses, sources, direct prerequisites and proof route needed to author its
 claim; repair local scaffold gaps, then author every assigned item and A/B page.
