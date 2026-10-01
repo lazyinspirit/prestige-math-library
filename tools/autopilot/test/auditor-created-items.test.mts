@@ -1327,3 +1327,75 @@ test('later native promotion validates and preserves the owner-created Step-5 or
   assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
     'research/r-step7-auditor-certifications.json')), /owner creation/);
 });
+
+function currentDefinitionReviewFixture(t: any) {
+  const seedItem = item('lem-created').replace('kind: lemma', 'kind: definition');
+  const f = carriedStep5Fixture(t, { seedItem, seedManifestItem: {
+    id: 'lem-created', kind: 'definition', deps: [], statement: 'Old description' } });
+  writeFileSync(f.itemPath, seedItem.replace('Immediate.', 'Current definition explanation.'));
+  const pages = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
+  pages[0].items.find((x: any) => x.id === f.id).statement = 'Current description';
+  writeFileSync(f.manifestPath, JSON.stringify(pages));
+  writeStep5ManifestRepairEvidence(f.root, f.id, f.evidence, f.baselineManifestEntry,
+    'current-definition-manifest-review', { current_item_and_contract_checked: true,
+      current_manifest_matches_item: true, no_unresolved_defect: true,
+      current_definition_and_direct_consumers_checked: true, direct_consumers: [] });
+  const raw = readFileSync(f.evidence, 'utf8');
+  const payload: any = JSON.parse(raw.match(/```step5-manifest-repair\n([\s\S]*?)\n```/)![1]);
+  delete payload.baseline_manifest_entry;
+  payload.historical_delta_unknown = true;
+  payload.owner_authorization = { owner: true, reason: 'Owner explicitly authorized current definition review with historical uncertainty preserved' };
+  const report = 'research/current-definition-review.md';
+  const text = `r ${f.id}: ${payload.owner_authorization.reason}. Current definition and all direct consumers checked.`;
+  writeFileSync(join(f.root, report), text);
+  payload.sources = [{ path: report, sha256: sha(text) }];
+  const write = () => writeFileSync(f.evidence, `${raw.split('```')[0]}\n\`\`\`step5-manifest-repair\n${JSON.stringify(payload)}\n\`\`\`\n`);
+  write();
+  return { ...f, payload, write };
+}
+
+test('explicit current-definition manifest review preserves unknown historical delta and genuine Step3 origin', t => {
+  const f = currentDefinitionReviewFixture(t);
+  const owner = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Actual current-content owner resolution');
+  const receipt = JSON.parse(readFileSync(owner.path, 'utf8'));
+  assert.equal(receipt.historical_delta_unknown, true);
+  assert.equal(receipt.basis, 'initial-step5-current-definition-manifest-review');
+  assert.equal(receipt.author_result, 'alpha-5a-a.result.json');
+  const certificate = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(certificate.items[0].origin_step, 3);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+});
+
+test('current-definition review rejects missing authority, origin, uncertainty, current hashes, sources and consumer coverage', t => {
+  for (const mutate of [
+    (f: any) => { f.payload.owner_authorization.owner = false; },
+    (f: any) => { delete f.payload.historical_delta_unknown; },
+    (f: any) => { f.payload.repair_kind = 'ordinary-unclassified-manifest-change'; },
+    (f: any) => { f.payload.current_carriers.item_file_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.sources[0].sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.review.direct_consumers = ['fictional-consumer']; },
+    (f: any) => { f.payload.baseline_manifest_entry = f.baselineManifestEntry; },
+    (f: any) => { rmSync(join(f.root, 'research/r-step3-auditor-certifications.json')); },
+  ]) {
+    const f = currentDefinitionReviewFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+      'Unverified review must not pass'), /eligible Step 5 owner bootstrap/);
+  }
+});
+
+
+test('current-definition review cannot omit inline YAML dependencies or labelled wikilink consumers', t => {
+  for (const consumer of [
+    item('lem-inline-consumer').replace('deps: []', 'deps: [lem-created]'),
+    item('lem-inline-consumer').replace('Immediate.', 'Uses [[ lem-created |the current definition]].'),
+  ]) {
+    const f = currentDefinitionReviewFixture(t);
+    writeFileSync(join(f.root, 'items/lem-inline-consumer.md'), consumer);
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+      'Unreviewed consumer must prevent recertification'), /eligible Step 5 owner bootstrap/);
+    f.payload.review.direct_consumers = ['lem-inline-consumer'];
+    f.write();
+    assert.ok(recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+      'Owner explicitly reviewed the complete actual consumer inventory').path);
+  }
+});

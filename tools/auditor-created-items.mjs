@@ -156,12 +156,15 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
     || (basis && receipt.basis !== basis)
     || (receipt.basis !== undefined && !(step === 5
       ? ['initial-step5-contract-only', 'initial-step5-item-repair',
-        'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair'].includes(receipt.basis)
+        'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
+        'initial-step5-current-definition-manifest-review'].includes(receipt.basis)
       : step === 7 && ['initial-step7-item-repair',
         'initial-step7-contract-only'].includes(receipt.basis)))
     || (step === 5 && receipt.basis !== undefined
       && (!step5Bootstrap || step5Bootstrap.basis !== receipt.basis
         || step5Bootstrap.result_file !== receipt.author_result))
+    || (receipt.basis === 'initial-step5-current-definition-manifest-review'
+      && receipt.historical_delta_unknown !== true)
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
     || sha(evidenceText) !== receipt.evidence_sha256
@@ -329,11 +332,10 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
   return sameCanonical(frontmatter.deps ?? [], currentEntry.deps ?? []);
 }
 
-// A manifest hash delta is eligible only when the reviewer supplies both full
-// canonical projections. The baseline projection must hash to the immutable
-// Step-5 carrier snapshot, and the current projection must equal the live row.
-// The only admitted row deltas are source-reference URL/locator corrections or
-// strictly additive dependency declarations; both must mirror item frontmatter.
+// Classified metadata deltas require both full hash-proven projections. An
+// explicitly owner-authorized current-definition review is a separate branch:
+// it preserves the unknown historical delta and binds the current projection,
+// actual source evidence and direct consumers without inventing a preimage.
 function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) {
   const evidence = step5ManifestRepairEvidence(evidenceText);
   if (!evidence || evidence.version !== 1 || evidence.policy !== 'step5-manifest-repair-evidence-v1'
@@ -348,6 +350,47 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     || evidence.current_carriers?.manifest_sha256 !== hashes.manifest_sha256
     || evidence.current_carriers?.contract_sha256 !== hashes.contract_sha256)
     return null;
+  if (evidence.repair_kind === 'current-definition-manifest-review') {
+    // Explicit owner resolution of a missing historical projection. Never call
+    // this metadata-only or infer the unknown delta from a hash or mtime.
+    const currentEntry = evidence.current_manifest_entry;
+    const itemText = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+    const fm = yaml().parse(split(itemText).fm) ?? {};
+    const directConsumers = readdirSync(join(root, 'items')).filter(file => file.endsWith('.md')
+      && file !== `${id}.md`).filter(file => {
+        const text = readFileSync(join(root, 'items', file), 'utf8');
+        if (!text.includes(id)) return false;
+        const { fm: consumerFm, body } = split(text);
+        const consumer = yaml().parse(consumerFm) ?? {};
+        if (consumer.deps !== undefined && !Array.isArray(consumer.deps))
+          throw Error(`${file}: invalid dependency list during direct-consumer review`);
+        // Same target/display-label grammar as depcheck and fwdcheck.
+        const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)]
+          .map(match => match[1].trim());
+        return (consumer.deps ?? []).includes(id) || links.includes(id);
+      }).map(file => file.slice(0, -3)).sort();
+    if (evidence.historical_delta_unknown !== true || evidence.baseline_manifest_entry !== undefined
+      || fm.kind !== 'definition' || currentEntry?.kind !== 'definition'
+      || evidence.owner_authorization?.owner !== true
+      || !String(evidence.owner_authorization?.reason ?? '').trim()
+      || evidence.review.current_definition_and_direct_consumers_checked !== true
+      || !sameCanonical(evidence.review.direct_consumers, directConsumers)
+      || !currentEntry || hashValue(currentEntry) !== hashes.manifest_sha256
+      || !sameCanonical(currentEntry, row.manifest_entry)
+      || !sameCanonical(currentEntry.deps ?? [], fm.deps ?? [])
+      || !sameCanonical(currentEntry.sources, fm.sources)
+      || !Array.isArray(evidence.sources) || !evidence.sources.length) return null;
+    const texts = [];
+    for (const source of evidence.sources) {
+      try {
+        const text = readFileSync(researchFile(root, source.path), 'utf8');
+        if (sha(text) !== source.sha256) return null;
+        texts.push(text);
+      } catch { return null; }
+    }
+    if (![run, id, evidence.owner_authorization.reason].every(value => texts.join('\n').includes(value))) return null;
+    return 'initial-step5-current-definition-manifest-review';
+  }
   const oldEntry = evidence.baseline_manifest_entry, currentEntry = evidence.current_manifest_entry;
   if (!oldEntry || !currentEntry || oldEntry.id !== id || currentEntry.id !== id
     || oldEntry.__step6_page_id !== row.page || currentEntry.__step6_page_id !== row.page
@@ -441,7 +484,9 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     evidence: `research/${evidencePath.split('/').at(-1)}`,
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
-    ...(bootstrap ? { basis: bootstrap.basis } : {}),
+    ...(bootstrap ? { basis: bootstrap.basis,
+      ...(bootstrap.basis === 'initial-step5-current-definition-manifest-review'
+        ? { historical_delta_unknown: true } : {}) } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
   return { path, reused: false };

@@ -97,3 +97,35 @@ delta; its `origin_step: 5` recursively validates this original owner evidence.
 Every downstream scope, coverage, guard and judge-stamp consumer uses the
 shared validating loader. Original source artifacts must remain byte-stable;
 changed source evidence is an error, never implicit reauthorization.
+
+## Missing historical definition manifest projection
+
+For a genuinely Step-3-created definition whose Step-5 item and manifest both
+changed, an owner can explicitly authorize a current-content review when the
+old manifest projection cannot be recovered. This grants no general manifest
+exemption and never labels the unknown change metadata-only. The existing
+Step-3 origin, immutable Step-5 home/batch and before hash, successful native
+Step-5 review context, and current owner receipt all remain mandatory.
+
+The research evidence uses the existing fenced `step5-manifest-repair` JSON
+with policy `step5-manifest-repair-evidence-v1` and
+`repair_kind: "current-definition-manifest-review"`. Supply the run, step 5,
+id, page, batch, immutable `baseline_manifest_sha256`, current
+`current_manifest_sha256`, full `current_manifest_entry`, and
+`current_carriers` with exact raw item/manifest/contract hashes. Omit
+`baseline_manifest_entry` and set `historical_delta_unknown: true`. Supply
+`owner_authorization: { "owner": true, "reason": "Actual explicit authority" }`
+and `sources: [{ "path": "research/ACTUAL_REPORT", "sha256": "RAW_HASH" }]`.
+Source files must be hash-bound and collectively name run, id and exact
+authority reason.
+
+`review` must affirm `current_item_and_contract_checked`,
+`current_manifest_matches_item`, `no_unresolved_defect`, and
+`current_definition_and_direct_consumers_checked`; its `direct_consumers` must
+be the sorted complete current list of item dependencies or exact wikilinks to
+the definition. Item frontmatter and manifest sources/deps must agree. Record
+the actual review of the definition, suppliers, metadata and consumer uses;
+never infer it from successful local tools. The resulting owner receipt has
+basis `initial-step5-current-definition-manifest-review` and retains
+`historical_delta_unknown: true`. Its native result supplies review context,
+not attribution of the unknown late changes.
