@@ -329,28 +329,35 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
   for (const r of mine) (byItem.get(r.id) ?? byItem.set(r.id, []).get(r.id)).push(r);
 
   const L = [];
-  L.push(`# ${reading ? 'Step 6 whole-group reading' : 'Step 7 adjudication'} — group **${g.label}**, run \`${run}\``);
+  L.push(`# ${reading ? 'Step 6 Alpha group reader — read-only digest' : 'Step 7 adjudication'} — group **${g.label}**, run \`${run}\``);
   L.push('');
-  L.push(`You are the group Alpha for batches ${g.covers.map((b) => `**${b}**`).join(', ')}: `
+  L.push(`${reading ? '- You are the read-only Step 6 Alpha group reader' : 'You are the group Alpha'} for batches ${g.covers.map((b) => `**${b}**`).join(', ')}: `
     + `${aPages.length} A/B pair(s), ${pages.length} page(s), ${nItems} item(s)`
     + `${reading ? '.' : `, ${mine.length} open rejection(s) over ${byItem.size} item(s).`}`);
   L.push('');
   if (reading) {
-    L.push('Read every owned item and every listed seam before returning the compact');
-    L.push('schema-constrained digest. That file, not this conversation, is the handoff');
-    L.push('to a fresh Step-7 adjudicator. No judge verdict is supplied here.');
-    L.push('In the digest, `pages_read` is exactly the ids under **Your pages** and');
-    L.push('`items_read` exactly the ids under **Your content**. External items you');
-    L.push('open belong only in `published_dependencies`; never add them to those inventories.');
+    L.push('- Read every owned item and every listed seam before returning the compact');
+    L.push('  schema-constrained digest. That file, not this conversation, is the handoff');
+    L.push('  to a fresh Step-7 adjudicator. No judge verdict is supplied here.');
+    L.push('- Read items in dependency order across the group: suppliers before their');
+    L.push('  direct and indirect consumers, including prerequisites outside the group.');
+    L.push('- In the digest, `pages_read` is exactly the ids under **Your pages** and');
+    L.push('  `items_read` exactly the ids under **Your content**. External items you');
+    L.push('  open belong only in `published_dependencies`; never add them to those inventories.');
   } else {
     L.push('This is a fresh adjudication context. The durable digest below carries the');
     L.push('findings from the rejection-blind whole-group reading at step 6 without');
     L.push('replaying that reader\'s transcript. Nothing from step 3, step 5, or another');
     L.push('group is assumed.');
   }
-  L.push('Everything below is');
-  L.push('derived from disk by `tools/step7-scope.mjs`; no line of it is a judgement');
-  L.push('about mathematics.');
+  if (reading) {
+    L.push('- Everything below is derived from disk by `tools/step7-scope.mjs`; no line');
+    L.push('  of it is a judgement about mathematics.');
+  } else {
+    L.push('Everything below is');
+    L.push('derived from disk by `tools/step7-scope.mjs`; no line of it is a judgement');
+    L.push('about mathematics.');
+  }
   L.push('');
 
   // The step-6 digest, when the reading half has produced one. Named first
@@ -387,7 +394,7 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
   L.push(reading ? '## Read scope' : '## Read scope, write scope');
   L.push('');
   L.push(reading
-    ? '**Read the entire assigned group and anything it cites.** `items/` holds every published item and'
+    ? '- **Read the entire assigned group and anything it cites.** `items/` holds every published item and'
     : '**Audit and repair one item at a time. Inspect related items first only when necessary.** `items/` holds every published item and');
   L.push('every item this run has built, and your sandbox is the repository root. Open');
   L.push(`anything ${reading ? 'an owned item' : 'a rejection'} touches — a published dependency, another group's page,`);
@@ -395,8 +402,8 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
   L.push('opening the cited item is exactly what the refuter rule forbids.');
   L.push('');
   if (reading) {
-    L.push('**This dispatch is read-only.** Record concerns about owned items and alerts');
-    L.push('about other groups in the returned digest; do not repair anything.');
+    L.push('- **This dispatch is read-only.** Record concerns about owned items and alerts');
+    L.push('  about other groups in the returned digest; do not repair anything.');
     L.push('');
   } else {
     L.push('**You may write only inside your own group.** A `confirmed_fatal` licenses a');

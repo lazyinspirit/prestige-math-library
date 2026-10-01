@@ -212,15 +212,18 @@ function writeTasks(root,pack,mode) {
     if(pack.gateRoutingVersion===1)frozen(gateInput,(pack.gateAssignments??{})[unit]??[]);
     if(existsSync(task)) continue;
     const assigned=pack.assignments[unit];
-    const body=[`# Step 7 ${mode}: ${pack.phase}, round ${pack.round}, unit ${unit}`,
+    const entries=[`# Step 7 ${mode}: ${pack.phase}, round ${pack.round}, unit ${unit}`,
       `Read briefs/step7-${mode==='adjudicate'?'adjudicator':'owner-repair'}.md.`,
       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
-      pack.phase==='gate'||pack.basePhase==='gate'?'Step 7.9 permits no new items.':'You may fully author and register a genuinely missing prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.',
+      pack.phase==='gate'||pack.basePhase==='gate'?'Step 7.9 permits no new items.':'You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.',
       'Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.',
-      'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
+      mode==='adjudicate'
+        ? 'Use logical validity as ground truth. Never pretend to understand something you do not; escalate any uncertainty and potentially defective published consumers to the owner. Consult authoritative sources when uncertain, check their hypotheses and reasoning, and check for errors in sources.'
+        : 'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
+      'Make repairs mathematically sound and cite dependencies accurately. State important caveats when appropriate; write concisely without compromising correctness or completeness; do not repeat arguments or add unnecessary filler.',
       'Repair confirmed defects fully. Only an actual ## Statement or ## Definition change triggers direct-consumer examination, whether the supplier is published or not. Compare sections directly. Proof-only, citation, dependency and metadata changes with unchanged statements do not propagate. Identify direct consumers and exact affected uses; never pre-expand through unchanged consumer statements.',
       mode==='adjudicate' ? 'Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.' :
         'Examine assigned frontier consumers, not the whole library. Assignment requires examination, not an edit. Leave a sound consumer byte-for-byte unchanged with an item-specific explanation. Repair only an actual logical defect using the smallest sufficient edit; no stylistic or unrelated rewriting. Work supplier-before-consumer and reconcile only metadata actually invalidated. A reference is not automatic repair authority. Report direct downstream effects of statement changes, including outside consumers for separate maintenance.',
@@ -239,7 +242,12 @@ function writeTasks(root,pack,mode) {
       pack.gateRoutingVersion===1
         ? `Gate diagnostics: read ${gateInput}. This file contains your diagnostic indices, scoped subject IDs and complete raw failure outputs. Examine every assigned diagnostic in bounded chunks, filtering item diagnostics to its subjects list; passing inventories and cited supplier names are not repair authority. Each item has exactly one owner. For a shared diagnostic, resolve only your listed subjects, not another lane's items. Global/owner-held diagnostic components belong only to the designated owner; reconcile shared metadata under the lock and report operator-only work honestly. Record gate_resolutions for every assigned index, stating the actual scope resolved. A resolution does not certify or waive the gate. Full diagnostics remain preserved on disk; never ignore a failure because its output is large. Further downstream work is scheduled only after Statement/Definition changes, not proof-only repairs or merely named suppliers.`
         : pack.failures ? `Your gate diagnostics:\n${JSON.stringify((pack.gateAssignments??{})[unit]??[],null,2)}\nAll failures:\n${JSON.stringify(pack.failures,null,2)}` : '',
-    ].join('\n\n');
+    ];
+    const nonempty=entries.filter(entry=>String(entry).trim());
+    const body=mode==='adjudicate'
+      ? [nonempty[0],...nonempty.slice(1).map(entry=>String(entry).split('\n')
+        .map((line,index)=>index===0?`- ${line}`:`  ${line}`).join('\n'))].join('\n\n')
+      : entries.join('\n\n');
     requireValue(pack.gateRoutingVersion!==1||body.length<64000,'gate launch task exceeds bounded prompt budget');
     writeFileSync(task,body+'\n',{flag:'wx'});
   }
