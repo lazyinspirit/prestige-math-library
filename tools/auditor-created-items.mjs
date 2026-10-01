@@ -7,7 +7,7 @@
 // that boundary, and remains current only while its hash-bound carriers match.
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
@@ -38,6 +38,92 @@ export const auditorCreatedCertificationsPath = (root, run, step) =>
 const ownerRecertificationPath = (root, run, step, id, hashes) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-owner-recertification-${safe(id, 'item ID')}-${hashValue({ id, carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) }).slice(0, 16)}.json`);
 
+// Owner-spawned creation is a separate attestation class, never a native result.
+const OWNER_CREATION_POLICY = 'owner-spawned-step5-creation-v1';
+const ownerCreationPath = (root, run, id) => join(root, 'research',
+  `${safe(run, 'run')}-step5-owner-creation-${safe(id, 'item ID')}.json`);
+const researchFile = (root, path) => {
+  const file = resolve(root, String(path ?? ''));
+  const boundary = realpathSync(join(root, 'research'));
+  if (!existsSync(file) || !realpathSync(file).startsWith(`${boundary}/`))
+    throw Error('Owner creation evidence must resolve inside research');
+  return file;
+};
+
+function validateOwnerCreation(root, run, id, receipt) {
+  const baseline = stageBaseline(root, run, 5);
+  const timeline = receipt?.author?.timeline;
+  const at = Date.parse(receipt?.attested_at), baselineAt = Date.parse(baseline.at);
+  const known = timeline?.mode === 'known' && Number.isFinite(Date.parse(timeline.started_at))
+    && Date.parse(timeline.started_at) >= baselineAt
+    && Date.parse(timeline.ended_at) >= Date.parse(timeline.started_at)
+    && Date.parse(timeline.ended_at) <= at;
+  const unknown = timeline?.mode === 'unknown' && timeline.after_baseline === true
+    && timeline.started_at === undefined && timeline.ended_at === undefined
+    && typeof timeline.reason === 'string' && !!timeline.reason.trim();
+  if (!receipt || Object.keys(receipt).some(key => !['version', 'policy', 'evidence_class',
+      'run', 'step', 'id', 'owner', 'owner_identity', 'author', 'attested_at', 'reason',
+      'owner_held_escalation', 'baseline_sha256', 'page', 'batch', 'carriers', 'sources'].includes(key))
+    || receipt.version !== 1 || receipt.policy !== OWNER_CREATION_POLICY
+    || receipt.run !== run || receipt.step !== 5 || receipt.id !== id
+    || receipt.owner !== true || receipt.evidence_class !== 'owner-spawned-creation'
+    || receipt.author_result !== undefined || receipt.owner_recertification !== undefined
+    || typeof receipt.owner_identity !== 'string' || !receipt.owner_identity.trim()
+    || !/^\/root\/[a-zA-Z0-9_/-]+$/.test(receipt.author?.identity ?? '')
+    || receipt.author.identity === receipt.owner_identity
+    || !Number.isFinite(at) || !Number.isFinite(baselineAt) || at < baselineAt
+    || (!known && !unknown) || !String(receipt.reason ?? '').trim()
+    || !String(receipt.owner_held_escalation ?? '').trim()
+    || receipt.baseline_sha256 !== sha(JSON.stringify(baseline))
+    || baseline.items.some(row => row.id === id) || baseline.existing_item_files.includes(id)
+    || !receipt.page || !receipt.batch
+    || CARRIER_KEYS.some(key => !/^[a-f0-9]{64}$/.test(receipt.carriers?.[key] ?? ''))
+    || !Array.isArray(receipt.sources)) throw Error(`${id}: invalid owner creation attestation`);
+  const texts = [];
+  for (const source of receipt.sources) {
+    if (!['assignment', 'escalation', 'authorship'].includes(source.role)
+      || !/^[a-f0-9]{64}$/.test(source.sha256 ?? '')) throw Error(`${id}: invalid owner creation source`);
+    const bytes = readFileSync(researchFile(root, source.path), 'utf8');
+    if (sha(bytes) !== source.sha256) throw Error(`${id}: stale owner creation source`);
+    texts.push(bytes);
+  }
+  if (!['assignment', 'escalation', 'authorship'].every(role => receipt.sources.some(s => s.role === role))
+    || ![run, id, receipt.author.identity, receipt.owner_held_escalation]
+      .every(value => texts.join('\n').includes(value))) throw Error(`${id}: incomplete owner creation source evidence`);
+  return receipt;
+}
+
+function ownerCreation(root, run, id, marker = null) {
+  const path = ownerCreationPath(root, run, id);
+  if (!existsSync(path)) return null;
+  const bytes = readFileSync(path, 'utf8');
+  const receipt = validateOwnerCreation(root, run, id, JSON.parse(bytes));
+  const link = { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) };
+  if (marker && (marker.path !== link.path || marker.sha256 !== link.sha256))
+    throw Error(`${id}: invalid owner creation provenance link`);
+  return { receipt, marker: link };
+}
+
+export function recordOwnerCreation(root, run, step, id, evidence) {
+  if (Number(step) !== 5) throw Error('Owner creation supports Step 5 only');
+  safe(run, 'run'); safe(id, 'item ID');
+  const receipt = read(researchFile(root, evidence));
+  validateOwnerCreation(root, run, id, receipt);
+  const row = inventory(root, run).find(row => row.id === id);
+  const hashes = row ? carrierHashes(root, run, row) : null;
+  if (!row || row.page !== receipt.page || row.batch !== String(receipt.batch)
+    || CARRIER_KEYS.some(key => receipt.carriers[key] !== hashes[key]))
+    throw Error(`${id}: owner creation must bind every current carrier`);
+  const path = ownerCreationPath(root, run, id);
+  if (existsSync(path)) {
+    const prior = ownerCreation(root, run, id);
+    if (!sameCanonical(prior.receipt, receipt)) throw Error(`${id}: refusing to replace owner creation origin`);
+    return { path, reused: true };
+  }
+  writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
+  return { path, reused: false };
+}
+
 function ownerEvidenceTextForCurrentCarriers(root, run, step, id, hashes) {
   const path = ownerRecertificationPath(root, run, step, id, hashes);
   if (!existsSync(path)) return '';
@@ -64,7 +150,9 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
     ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText) : null;
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
     || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
-    || receipt.owner !== true || receipt.author_result !== authorResult
+    || receipt.owner !== true || (authorResult ? receipt.author_result !== authorResult
+      : receipt.author_result !== undefined || !receipt.owner_creation
+        || !ownerCreation(root, run, id, receipt.owner_creation))
     || (basis && receipt.basis !== basis)
     || (receipt.basis !== undefined && !(step === 5
       ? ['initial-step5-contract-only', 'initial-step5-item-repair',
@@ -336,8 +424,9 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, evidenceText)
       : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
     : null;
+  const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation) : null;
   const authorResult = prior?.author_result ?? bootstrap?.result_file;
-  if (!authorResult) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);
+  if (!authorResult && !creation) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);
   if (!evidenceText.includes(id))
     throw Error(`${id}: owner evidence must be a research file naming the item`);
   if (step === 5 && !step5EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
@@ -351,7 +440,7 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     owner: true, at: new Date().toISOString(), reason: String(reason).trim(),
     evidence: `research/${evidencePath.split('/').at(-1)}`,
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
-    author_result: authorResult,
+    ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
     ...(bootstrap ? { basis: bootstrap.basis } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
@@ -494,7 +583,17 @@ function provenanceRows(root, run, step, cache = new Map()) {
   const origins = new Map([[step, baseline]]);
   const authors = successfulAuthorResults(root, run, step);
   for (const row of rows) {
-    if (ids.has(row.id) || !row.author_result || !row.page || !row.batch
+    const creation = row.owner_creation ? ownerCreation(root, run, row.id, row.owner_creation) : null;
+    if (creation && (step !== 5 || row.author_result !== undefined || row.origin_step !== undefined
+      || row.evidence_class !== 'owner-spawned-creation'
+      || row.page !== creation.receipt.page || String(row.batch) !== String(creation.receipt.batch)
+      || (!row.owner_recertification && CARRIER_KEYS.some(key => row[key] !== creation.receipt.carriers[key]))))
+      throw Error(`${row.id}: invalid owner creation certification`);
+    if (row.evidence_class !== undefined && row.evidence_class !== 'owner-spawned-creation')
+      throw Error(`${row.id}: unknown creation evidence class`);
+    if (row.evidence_class === 'owner-spawned-creation' && !creation)
+      throw Error(`${row.id}: missing owner creation provenance`);
+    if (ids.has(row.id) || (!row.author_result && !creation) || !row.page || !row.batch
       || (step === 3 && (!/^[a-f0-9]{64}$/.test(row.sha256 ?? '') || !Array.isArray(row.dependencies))))
       throw Error(`Invalid auditor-created item provenance: ${row.id}`);
     ids.add(row.id);
@@ -502,7 +601,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
     // their author link must still resolve to genuine dispatch evidence. Do not
     // compare current mtimes here: an unchanged V2 receipt survives file touches.
     const v2Author = step === 7 ? step7V2Creation(root, run, row.id, row) : null;
-    if (!authors.some(author => {
+    if (!creation && !authors.some(author => {
       const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
       const covers = author.covers.map(String);
       const page = step === 3 ? read(join(root, 'research', `${run}-batch-${safe(String(row.batch))}.pages.json`))
@@ -699,6 +798,24 @@ export function certifyAuditorCreatedItems(root, run, step) {
       const before = baseline.item_carriers?.[id];
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
+    const creation = step === 5 && !carried ? ownerCreation(root, run, id) : null;
+    if (creation) {
+      if (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch))
+        throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
+      const currentCreation = row.page === creation.receipt.page
+        && row.batch === String(creation.receipt.batch)
+        && CARRIER_KEYS.every(key => hashes[key] === creation.receipt.carriers[key]);
+      const owner = !currentCreation && !priorCurrent
+        ? ownerRecertification(root, run, step, id, hashes, undefined) : null;
+      if (!currentCreation && !priorCurrent && !owner)
+        throw Error(`${id}: stale owner creation carriers; explicit owner recertification required`);
+      if (priorCurrent) for (const key of Object.keys(hashes)) hashes[key] = prior[key];
+      certified.push({ id, page: row.page, batch, ...hashes,
+        evidence_class: 'owner-spawned-creation', owner_creation: creation.marker,
+        ...((priorCurrent && prior.owner_recertification) || owner
+          ? { owner_recertification: priorCurrent ? prior.owner_recertification : owner } : {}) });
+      continue;
+    }
     const v2Author = step === 7 ? step7V2Creation(root, run, id, row, { requireCurrent: true }) : null;
     const covering = priorCurrent || v2Author ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
     const bootstrap = !priorCurrent && !covering && !prior && carried
@@ -737,16 +854,18 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
     if (!run || ![5, 7, 8].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
       : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)
+        : command === 'owner-create'
+          ? recordOwnerCreation(process.cwd(), run, step, value('--id'), value('--evidence'))
         : command === 'owner-recertify'
           ? recordOwnerRecertification(process.cwd(), run, step, value('--id'), value('--evidence'), value('--reason'))
           : null;
     if (!result) throw Error(usage);
-    if (command === 'owner-recertify') console.log(`step${step}-owner-recertification: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
   } catch (error) {
     console.error(error.message);

@@ -12,10 +12,11 @@ import {
   loadAuditorCreatedCertifications,
   authorResultAllowed,
   recordOwnerRecertification,
+  recordOwnerCreation,
 } from '../../auditor-created-items.mjs';
 import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
 import { recordStep3 } from '../../step3-decisions.mjs';
-import { itemHashJudge } from '../../item-hash.mjs';
+import { itemHashGuard, itemHashJudge } from '../../item-hash.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -1223,4 +1224,106 @@ test('a legacy later boundary cannot promote even a changed Step-5 item without 
   const receipt = JSON.parse(readFileSync(join(f.root, 'research/r-step5-auditor-certifications.json'), 'utf8'));
   assert.deepEqual(receipt.items, first.items);
   assert.equal(JSON.parse(readFileSync(path, 'utf8')).item_carriers, undefined);
+});
+
+function ownerCreationFixture(t: any) {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  writeAuditorCreatedBaseline(root, 'r', 5);
+  const id = 'lem-owner-created', path = join(root, `items/${id}.md`);
+  writeFileSync(path, item(id));
+  const pagesPath = join(root, 'research/r-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(pagesPath, 'utf8'));
+  pages[0].items.push({ id, deps: [] });
+  writeFileSync(pagesPath, JSON.stringify(pages));
+  const text = readFileSync(path, 'utf8');
+  const manifest_sha256 = hashValue({ id, deps: [], __step6_page_id: 'page-a' });
+  const contract_sha256 = hashValue(null), item_file_sha256 = sha(text);
+  writeFileSync(join(root, 'research/r-batch-1.proof-contracts.json'), JSON.stringify({ contracts: { [id]: null } }));
+  const source = 'research/owner-source.md';
+  const sourceText = `r ${id} /root/actual_repair escalation-a: authored after the stage baseline, on owner assignment to resolve this owner-held escalation. Exact interval unavailable.`;
+  writeFileSync(join(root, source), sourceText);
+  const receipt: any = {
+    version: 1, policy: 'owner-spawned-step5-creation-v1', evidence_class: 'owner-spawned-creation',
+    run: 'r', step: 5, id, page: 'page-a', batch: '1', owner: true, owner_identity: '/root',
+    attested_at: new Date().toISOString(), reason: 'Necessary prerequisite repair',
+    owner_held_escalation: 'escalation-a', author: { identity: '/root/actual_repair',
+      timeline: { mode: 'unknown', after_baseline: true, reason: 'Exact author interval was not retained' } },
+    baseline_sha256: sha(JSON.stringify(JSON.parse(readFileSync(join(root, 'research/r-step5-auditor-baseline.json'), 'utf8')))),
+    carriers: { guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text),
+      item_file_sha256, manifest_sha256, contract_sha256,
+      step5_subject_sha256: hashValue({ item_sha256: item_file_sha256, manifest_sha256, contract_sha256 }) },
+    sources: ['assignment', 'escalation', 'authorship'].map(role => ({ role, path: source, sha256: sha(sourceText) })),
+  };
+  const evidence = 'research/owner-attestation.json';
+  const write = () => writeFileSync(join(root, evidence), JSON.stringify(receipt));
+  write();
+  return { root, id, path, receipt, evidence, write };
+}
+
+test('explicit owner-spawned creation remains distinct, source-bound and recertifiable', t => {
+  const f = ownerCreationFixture(t);
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 5), /no successful/);
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  const certified = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(certified.items[0].author_result, undefined);
+  assert.equal(certified.items[0].evidence_class, 'owner-spawned-creation');
+  const certification = join(f.root, 'research/r-step5-auditor-certifications.json');
+  assert.equal(loadAuditorCreatedCertifications(certification).length, 1);
+  writeFileSync(f.path, item(f.id).replace('Immediate.', 'Owner repaired the argument.'));
+  assert.throws(() => loadAuditorCreatedCertifications(certification), /stale Step 5/);
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 5), /explicit owner recertification/);
+  const review = 'research/current-owner-evidence.md';
+  writeStep5Evidence(f.root, f.id, join(f.root, review));
+  recordOwnerRecertification(f.root, 'r', 5, f.id, review, 'Owner checked changed carriers');
+  certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(loadAuditorCreatedCertifications(certification).length, 1);
+  writeFileSync(join(f.root, 'research/owner-source.md'), 'Altered historical evidence');
+  assert.throws(() => loadAuditorCreatedCertifications(certification), /stale owner creation source/);
+});
+
+test('owner creation rejects invented native identity, missing sources, stale hashes and preexistence', t => {
+  for (const mutate of [
+    (f: any) => { f.receipt.author_result = 'fictional.result.json'; },
+    (f: any) => { f.receipt.independent_audit = { ok: true }; },
+    (f: any) => { f.receipt.author.identity = '/root'; },
+    (f: any) => { f.receipt.author.timeline.after_baseline = false; },
+    (f: any) => { f.receipt.sources.pop(); },
+    (f: any) => { f.receipt.sources[0].sha256 = '0'.repeat(64); },
+    (f: any) => { f.receipt.carriers.item_file_sha256 = '0'.repeat(64); },
+    (f: any) => { f.receipt.baseline_sha256 = '0'.repeat(64); },
+    (f: any) => { f.receipt.sources[0].path = '../outside.md'; },
+    (f: any) => { const p = join(f.root, 'research/r-step5-auditor-baseline.json');
+      const b = JSON.parse(readFileSync(p, 'utf8')); b.existing_item_files.push(f.id);
+      writeFileSync(p, JSON.stringify(b)); f.receipt.baseline_sha256 = sha(JSON.stringify(b)); },
+  ]) {
+    const f = ownerCreationFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence));
+  }
+});
+
+test('later native promotion validates and preserves the owner-created Step-5 origin', t => {
+  const f = ownerCreationFixture(t);
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  certifyAuditorCreatedItems(f.root, 'r', 5);
+  writeAuditorCreatedBaseline(f.root, 'r', 7);
+  writeFileSync(f.path, item(f.id).replace('Immediate.', 'Native Step-7 repair.'));
+  const now = Date.now();
+  writeFileSync(join(f.root, 'research/r-dispatch/step7.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-adjudicate', ok: true, label: 'step7-a', covers: ['1'],
+    started_at: new Date(now - 10000).toISOString(), ended_at: new Date(now + 10000).toISOString(),
+  }));
+  const later = certifyAuditorCreatedItems(f.root, 'r', 7);
+  assert.equal(later.items[0].origin_step, 5);
+  assert.equal(later.items[0].author_result, 'step7.result.json');
+  assert.equal(loadAuditorCreatedCertifications([
+    join(f.root, 'research/r-step5-auditor-certifications.json'),
+    join(f.root, 'research/r-step7-auditor-certifications.json'),
+  ]).length, 1);
+  const originPath = join(f.root, 'research/r-step5-owner-creation-lem-owner-created.json');
+  const origin = JSON.parse(readFileSync(originPath, 'utf8'));
+  origin.author.identity = '/root/invented';
+  writeFileSync(originPath, JSON.stringify(origin));
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step7-auditor-certifications.json')), /owner creation/);
 });
