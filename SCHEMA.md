@@ -83,6 +83,25 @@
   `scope`, and `delegated_by`). A published unproved item instead needs
   `verification.sources_checked` (`date`, `scope`, `by`). A judge stamp
   alone does not satisfy publication checks.
+- An authorized correction to an **already published** proved-here item may
+  replace stale audit stamps with `verification.repair: research/<receipt>.json`
+  under CLAUDE §8. This records a local repair, not a whole-item audit or new
+  mathematical acceptance. Initial publication still requires the audit above.
+  `tools/published-repair-policy.mjs` requires a version-1
+  `recorded-local-published-repair` receipt with `id`, `run`, `group`, a concrete
+  `correction`, current canonical `content_sha256` (verification excluded), a
+  durable `before_file`, its raw `before_raw_sha256` and canonical `pre_sha256`,
+  and `recorded_at`. The pre-edit carrier must already be published with a
+  prior `verification.audited` or `verification.verified` marker, and its
+  hash and owner must match the actual run's Step-5 published ownership claim.
+  `ledger_marker` and `ledger_sha256` bind the exact text between unique
+  `<!-- local-published-repair:MARKER:begin -->` and corresponding `:end`
+  markers in the canonical published ledger; that text identifies the item and
+  current hash. `local_checks.precheck` and `.rendercheck` each record the
+  actual command, successful output, exit code, check date and current content
+  hash. Depcheck reports this state as `published-local-repair`; stale,
+  missing or mismatched evidence remains an error. There is no item gate,
+  rejudgment or adjudication duty for this recorded repair state.
 
 ## Item bodies
 

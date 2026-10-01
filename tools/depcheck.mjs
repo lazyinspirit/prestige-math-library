@@ -42,18 +42,14 @@ import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sectionText } from './facts-block.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { recordedPublishedRepair } from './published-repair-policy.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const asJson = process.argv.includes('--json');
 const quiet = process.argv.includes('--quiet');
-// --pending-audit-ok: demote `published-unaudited` to a warning. This is allowed
-// only in bounded pre-certification windows: audit A4 (tools/gates.mjs), or
-// autopilot Step 5b after its final routing gate has validated the exact,
-// hash-bound published-repair handoff to Step 7. A material repair loses its
-// obsolete `audited` stamp, and the no-self-certification rule means only the
-// later independent reading may replace it. Everywhere else — including the
-// certification closure, where an EMPTY published-unaudited class is the
-// load-bearing check — the class stays a hard error.
+// Legacy bounded pre-certification mode. It cannot excuse an invalid recorded
+// repair. Current published repairs use hash-bound local evidence under
+// CLAUDE §8; this does not certify an initial publication or a whole proof.
 const pendingAuditOk = process.argv.includes('--pending-audit-ok');
 
 const PREFIX_OF_KIND = {
@@ -156,6 +152,8 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     id, kind, file,
     status: scalar(fm, 'status'),
     audited: nested(fm, 'verification', 'audited'),
+    repair: nested(fm, 'verification', 'repair'),
+    source: src,
     provedHere: scalar(fm, 'proved_here') !== 'false',
     verified: /^\s+verified:/m.test(fm),
     sourcesChecked: nested(fm, 'verification', 'sources_checked') !== undefined
@@ -276,8 +274,13 @@ for (const it of items.values()) {
   // `audited` is the OWNER's own read; `verified` is a delegated subagent's, on the
   // owner's instruction (SCHEMA §3, amended 2026-07-26). Either gates publication;
   // they are kept distinct so the corpus never loses track of which is which.
-  if (it.status === 'published' && it.provedHere && !it.audited && !it.verified)
-    (pendingAuditOk ? warn : err)('published-unaudited', `${it.file}: status published but neither verification.audited nor verification.verified is set`);
+  if (it.status === 'published' && it.provedHere && !it.audited && !it.verified) {
+    const repair = recordedPublishedRepair(REPO, it.id, it.source, it.repair);
+    if (repair.ok)
+      warn('published-local-repair', `${it.file}: recorded local repair (${repair.receipt}); no whole-item audit is claimed`);
+    else
+      (pendingAuditOk && !it.repair ? warn : err)('published-unaudited', `${it.file}: status published but neither verification.audited nor verification.verified is set; ${repair.reason}`);
+  }
   if (it.provedHere && it.sourcesChecked)
     err('sources-checked-on-proved', `${it.file}: verification.sources_checked is only for proved_here: false items`);
   if (it.status === 'published' && !homeOf.has(it.id))
