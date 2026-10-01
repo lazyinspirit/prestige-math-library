@@ -700,14 +700,14 @@ test('a cohort that is not a function is refused', () => {
 // The shipped table: which stages overlap is an owner decision, so assert it
 // ---------------------------------------------------------------------------
 
-test('only the Step-5a reader pipeline overlaps; every other stage is a barrier', async () => {
+test('Step-5a readers through group adjudication overlap; every other stage is a barrier', async () => {
   const mod = await import('../stages/mathlib.mts');
   const byPipeline = new Map<string, string[]>();
   for (const s of mod.stages as any[]) {
     if (!s.pipeline) continue;
     byPipeline.set(s.pipeline, [...(byPipeline.get(s.pipeline) ?? []), s.id]);
   }
-  assert.deepEqual([...byPipeline], [['read', ['5a-read', '5a-split', '5a-refute', '5a-collect']]]);
+  assert.deepEqual([...byPipeline], [['read', ['5a-read', '5a-split', '5a-refute', '5a-collect', '5a-adjudicate']]]);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
@@ -718,7 +718,7 @@ test('the do-not-relax stages are still barriers', async () => {
   // once. `1-scaffold` and `2-assign` are here for a different reason: see the
   // cohort test below.
   const mod = await import('../stages/mathlib.mts');
-  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-prepare', '5a-adjudicate', '5a-baseline',
+  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-prepare', '5a-baseline',
     '5b-cross', '5b-close', '6-judge', '7-baseline', '7-scope',
     '7.1-adjudicate', '7.2-impact', '7.3-certify', '7.4-rejudge', '7.5-adjudicate',
     '7.6-impact', '7.7-certify', '7.8-gate', '7.9-repair', '7.10-gate', '7-freeze',

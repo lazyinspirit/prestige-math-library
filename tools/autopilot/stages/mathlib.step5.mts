@@ -142,6 +142,8 @@ export function step5Stages(d: any) {
       id: '5a-adjudicate',
       label: 'group Alpha adjudication of reader repairs, refuter findings and pages',
       modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_HIGH : undefined,
+      pipeline: 'read',
+      role: 'alpha',
       units: batches,
       pattern: resultPattern('alpha', '5a-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {

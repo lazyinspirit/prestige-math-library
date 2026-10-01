@@ -77,8 +77,12 @@
   check enumerates placements and prefixes, including its tie rule, partition
   and crossing edges. Its bounded verification does not prove the general
   approximation theorem. A zero-check contract cannot satisfy gate liveness.
-- Step-5 readers, refuters and adjudicators examine the authored mathematics. Resolve
-  actual failing subjects and cross-group impacts. A changed Statement or Definition
+- Step-5 readers, refuters and adjudicators examine the authored mathematics.
+  Adjudication shares the reader/refuter pipeline: each assigned group starts as soon
+  as all of its own batches have successful collection receipts and their workers
+  have drained, while unrelated batches continue reviewing. The complete Step-5a
+  gate battery runs once at the pipeline join after all groups and writers finish.
+  Resolve actual failing subjects and cross-group impacts. A changed Statement or Definition
   opens a direct-consumer review; continue another hop only if that consumer's own
   Statement or Definition changes. Proof, citation, dependency and metadata edits with
   unchanged interfaces do not propagate. A reference alone does not require an edit.
