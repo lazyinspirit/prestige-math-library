@@ -2,7 +2,7 @@
 id: ex-zero-extension-of-a-compactly-supported-sobolev-function
 kind: example
 title: Compactly supported Sobolev functions extend by zero without a jump
-status: draft
+status: published
 origin: pipeline
 deps: [lem-compact-support-zero-extension-in-wkp, def-sobolev-space-wkp-and-its-norm, def-wkp-zero-as-a-sobolev-closure, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

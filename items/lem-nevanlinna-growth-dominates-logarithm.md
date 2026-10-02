@@ -2,7 +2,7 @@
 id: lem-nevanlinna-growth-dominates-logarithm
 kind: lemma
 title: "Transcendental characteristic dominates logarithmic growth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,8 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 1 §5–§6 and Ch. 3 §1–§2, printed pp. 23–28 and 87–98: the convex Ahlfors–Shimizu characteristic and the rational growth characterization"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

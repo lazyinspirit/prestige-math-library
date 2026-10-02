@@ -2,7 +2,7 @@
 id: thm-the-artin-presentation-is-complete-for-geometric-braids
 kind: theorem
 title: "The Artin presentation is complete for geometric braids"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-every-trivial-braid-word-combs-as-w-one-w-two,
@@ -29,6 +29,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-22"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

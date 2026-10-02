@@ -2,7 +2,7 @@
 id: ex-sigma-simple-lattice-zero
 kind: example
 title: "A simple zero of the Weierstrass sigma function on the square lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: https://people.math.harvard.edu/~ctm/home/text/class/harvard/213a/10/html/home/course/course.pdf
       locator: "Ch. 5 §5.1, the zeta and sigma functions and their transformation laws, printed pp. 84-88."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -1,7 +1,7 @@
 ---
 page: harmonic-hardy-classes-and-fatou-boundary-limits
 title: "Harmonic Hardy Classes and Fatou Boundary Limits"
-status: draft
+status: published
 requires: [harmonic-functions-and-the-poisson-integral, complex-lp-spaces-and-test-function-conventions, the-duality-of-lp-and-lq, density-separability-and-convolution-in-lp, the-maximal-function-and-lebesgue-differentiation, radon-measures-and-the-riesz-markov-kakutani-theorem, banach-alaoglu-goldstine-and-krein-milman, reflexivity-and-eberlein-smulian, green-functions-harmonic-measure-and-conformal-invariance, measure-preserving-transformations-and-poincare-recurrence, trigonometric-and-oscillatory-examples-in-one-variable]
 items:
   - def-poisson-integral-of-finite-boundary-measure

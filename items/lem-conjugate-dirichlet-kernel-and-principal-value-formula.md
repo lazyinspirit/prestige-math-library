@@ -2,7 +2,7 @@
 id: lem-conjugate-dirichlet-kernel-and-principal-value-formula
 kind: lemma
 title: "The conjugate Dirichlet kernel, and the periodic principal-value formula"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conjugate-function-on-the-circle, def-period-one-fourier-coefficients-partial-sums-and-convolution, def-dirichlet-and-fejer-kernels, lem-fourier-partial-sums-are-dirichlet-convolutions, lem-finite-sine-harmonic-sums, thm-parseval-identity-for-fourier-series, thm-riesz-fischer-for-fourier-coefficients, thm-riemann-lebesgue-lemma-for-fourier-coefficients, thm-complex-lp-completeness-and-almost-everywhere-subsequences, cor-mean-value-theorem, thm-dominated-convergence, thm-sine-and-cosine-addition-formulas, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

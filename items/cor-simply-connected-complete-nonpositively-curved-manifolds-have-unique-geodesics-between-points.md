@@ -2,7 +2,7 @@
 id: cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points
 kind: corollary
 title: Simply connected complete nonpositively curved manifolds have unique geodesics between points
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-cartan-hadamard
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

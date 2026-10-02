@@ -2,7 +2,7 @@
 id: ex-explicit-dbar-solution-with-l2-estimate
 kind: example
 title: "An explicit $\\bar\\partial$ solution with an $L^2$ estimate"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weighted-l2-spaces-dbar-forms
@@ -33,6 +33,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VIII §6, Theorem 6.5, printed pp. 377-379: the weighted $L^2$ solvability estimate that the example instantiates; the moment computations are the standard polar-coordinate Gamma integrals."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

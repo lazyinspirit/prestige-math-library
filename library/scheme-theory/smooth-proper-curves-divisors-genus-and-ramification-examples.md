@@ -1,7 +1,7 @@
 ---
 page: smooth-proper-curves-divisors-genus-and-ramification-examples
 title: "Smooth Proper Curves Divisors Genus and Ramification — Examples"
-status: draft
+status: published
 requires: [smooth-proper-curves-divisors-genus-and-ramification]
 items: []
 examples:

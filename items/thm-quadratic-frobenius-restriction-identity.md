@@ -2,7 +2,7 @@
 id: thm-quadratic-frobenius-restriction-identity
 kind: theorem
 title: Quadratic reciprocity as a Frobenius restriction identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 12, pp. 63-65: Frobenius restrictions in abelian Galois extensions and the identification of the quadratic sign with a Legendre symbol."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-weierstrass-p-differential-equation
 kind: theorem
 title: "Weierstrass cubic differential equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -38,6 +38,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii), equations 23.2.4-23.2.8: the wp series, the invariants g2 = 60G4, g3 = 140G6, and the differential equation."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

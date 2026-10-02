@@ -2,7 +2,7 @@
 id: thm-cartier-to-weil-divisor-normal-scheme
 kind: theorem
 title: "Cartier divisors on a normal Noetherian scheme give Weil divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -49,6 +49,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
     - title: "The Stacks Project, Exercises, Definition 111.49.1(6)–(8)"
       url: "https://stacks.math.columbia.edu/tag/02AR"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement
@@ -206,14 +208,16 @@ point $x\in X$ for the local-finiteness argument.
 
 1.1 **Germs of the local equations at prime divisors are units.** Let $Z\subseteq X$ be a prime divisor with generic point $\xi$ and let $i$ with $\xi\in U_i$. By [F3] the stalk $\mathcal K_{X,\xi}$ is the fraction field of the discrete valuation ring $\mathcal O_{X,\xi}$. The germ map carries the unit $f_i$ to a unit $f_{i,\xi}$ by [F4], so $f_{i,\xi}\neq0$ and its normalized valuation $v_\xi(f_{i,\xi})$ is defined. [F3, F4]
 
-1.2 **The value is independent of the equation and of the datum.** If $\xi\in U_i\cap U_j$, then $u=f_i/f_j$ lies in $\mathcal O_X^{\times}(U_i\cap U_j)$ by [F1], so its germ $u_\xi$ is a unit of $\mathcal O_{X,\xi}$ and $v_\xi(f_{i,\xi})=v_\xi(u_\xi)+v_\xi(f_{j,\xi})=v_\xi(f_{j,\xi})$. If $\{(V_j,g_j)\}_{j\in J}$ is any second local-equation datum for $D$, then $f_i/g_j\in\mathcal O_X^{\times}(U_i\cap V_j)$ for all $i,j$ by [F1]; every generic point $\xi$ lies in some overlap $U_i\cap V_j$, and the same computation gives $v_\xi(f_{i,\xi})=v_\xi(g_{j,\xi})$. Hence the value $\operatorname{ord}_Z(D):=v_\xi(f_{i,\xi})$ depends only on $D$ and $Z$, not on the indices or the datum. [F1, F4, F5, 1.1]
+1.2 **The value is independent of the equation and of the datum.** If $\xi\in U_i\cap U_j$, then $u=f_i/f_j$ lies in $\mathcal O_X^{\times}(U_i\cap U_j)$ by [F1], so its germ $u_\xi$ is a unit of $\mathcal O_{X,\xi}$ and $v_\xi(f_{i,\xi})=v_\xi(u_\xi)+v_\xi(f_{j,\xi})=v_\xi(f_{j,\xi})$. If $\{(V_j,g_j)\}_{j\in J}$ is any second local-equation datum for $D$, then $f_i/g_j\in\mathcal O_X^{\times}(U_i\cap V_j)$ for all $i,j$ by [F1]; every generic point $\xi$ lies in some overlap $U_i\cap V_j$, and the same computation gives $v_\xi(f_{i,\xi})=v_\xi(g_{j,\xi})$. Hence the value $\operatorname{ord}_Z(D):=v_\xi(f_{i,\xi})$ depends only on $D$ and $Z$, not on the indices or the datum.
 The additivity of $v_\xi$ used in the computation is [F5], and the germ of a unit is again a unit by [F4].
+[F1, F4, F5, 1.1]
 
 1.3 **A basic affine neighbourhood carrying a fraction.** There are an index $i$, an affine chart $\operatorname{Spec}A$ from the finite cover of [F6], and a basic open $W=D(c)=\operatorname{Spec}B$ with $B=A_c$ such that $x\in W\subseteq U_i\cap\operatorname{Spec}A$, the ring $B$ is Noetherian, and the restriction $f_i|_W$ is the image of a fraction $a/s\in S_X(W)^{-1}\mathcal O_X(W)$. [F2, F6, F7, F8]
 Choose a chart $\operatorname{Spec}A$ from the finite cover [F6] and an index $i$ with $x\in U_i$, so that $U_i\cap\operatorname{Spec}A$ is an open neighbourhood of $x$. By [F7], choose $c\in A$ with $x\in D(c)\subseteq U_i\cap\operatorname{Spec}A$; then $B=A_c$ is Noetherian by [F8]. The restriction $f_i|_{D(c)}$ is a section of the sheafification $\mathcal K_X=a\mathcal P_X$, so by [F2] there is a smaller open neighbourhood of $x$ on which it is the image of a presheaf section. Refine that neighbourhood to a basic open $D(d)\subseteq D(c)$ containing $x$, and put $W=D(d)=\operatorname{Spec}A_d$. The presheaf section on $W$ is a fraction $a/s\in\mathcal P_X(W)=S_X(W)^{-1}\mathcal O_X(W)$. The ring $A_d$ is Noetherian by [F8]. [F2, F6, F7, F8]
 
-2.1 **Finitely many supporting prime divisors meet the neighbourhood.** In the notation of step 1.3, only finitely many prime divisors $Z$ with $Z\cap W\neq\varnothing$ satisfy $\operatorname{ord}_Z(D)\neq0$. [F2, F3, F5, F8, F9, F10, F12, 1.2, 1.3]
+2.1 **Finitely many supporting prime divisors meet the neighbourhood.** In the notation of step 1.3, only finitely many prime divisors $Z$ with $Z\cap W\neq\varnothing$ satisfy $\operatorname{ord}_Z(D)\neq0$.
 Let $Z$ be such a prime divisor and let $\xi$ be its generic point. The scheme $Z$ is integral, so by [F12] its generic point $\xi$ lies in the nonempty open subset $Z\cap W$ of $Z$; let $\mathfrak p\subseteq B$ be the prime corresponding to $\xi$, so that $\mathcal O_{X,\xi}=B_{\mathfrak p}$ by [F9]. By [F3] the ring $B_{\mathfrak p}$ is a one-dimensional local domain. Write $a_\xi,s_\xi\in B_{\mathfrak p}$ for the images of $a$ and $s$. Since $s\in S_X(W)$, its germ at $\xi$ is a nonzerodivisor of the domain $B_{\mathfrak p}$, so $s_\xi\neq0$; the germ of the class $a/s$ at $\xi$ is the fraction $a_\xi/s_\xi$ and equals $f_{i,\xi}$, which is nonzero by step 1.1, so $a_\xi\neq0$. By step 1.2 and [F3] we have $\operatorname{ord}_Z(D)=v_\xi(a_\xi)-v_\xi(s_\xi)$, and $v_\xi(a_\xi)\ge0$ because $a_\xi\in B_{\mathfrak p}$ [F5]. Suppose first that $v_\xi(a_\xi)>0$. Then $a_\xi\in\mathfrak p B_{\mathfrak p}$, so $a\in\mathfrak p$ by [F9]. If a prime $\mathfrak q$ satisfies $(a)\subseteq\mathfrak q\subseteq\mathfrak p$, then $0\neq a_\xi\in\mathfrak q B_{\mathfrak p}\subseteq\mathfrak p B_{\mathfrak p}$, and every nonzero prime ideal of the one-dimensional local domain $B_{\mathfrak p}$ equals its maximal ideal, so $\mathfrak q B_{\mathfrak p}=\mathfrak p B_{\mathfrak p}$ and hence $\mathfrak q=\mathfrak p$ by [F9]; thus $\mathfrak p$ is a minimal prime of $B/(a)$. Otherwise $v_\xi(a_\xi)=0$, and $\operatorname{ord}_Z(D)\neq0$ forces $v_\xi(s_\xi)\neq0$ [F5], so $s\in\mathfrak p$ by [F9] and the same argument shows that $\mathfrak p$ is a minimal prime of $B/(s)$. The rings $B/(a)$ and $B/(s)$ are Noetherian by [F8] and have finitely many minimal primes by [F10]; distinct prime divisors have distinct generic points and hence distinct primes $\mathfrak p$, so the prime divisors meeting $W$ with nonzero coefficient are among the finitely many whose generic point corresponds to a minimal prime of $B/(a)$ or of $B/(s)$.
+[F2, F3, F5, F8, F9, F10, F12, 1.2, 1.3]
 
 2.2 **The associated Weil divisor.** By steps 1.1 and 1.2 the coefficient $\operatorname{ord}_Z(D)=v_\xi(f_{i,\xi})$ is a well-defined integer depending only on $D$ and $Z$, and by steps 1.3 and 2.1 the family of prime divisors with nonzero coefficient is locally finite, since every point has a basic affine neighbourhood meeting only finitely many of them; hence the formal sum $\operatorname{cyc}(D):=\sum_Z\operatorname{ord}_Z(D)\,[Z]$ is a Weil divisor on $X$ by [F11], independent of the charts and local equations used because any two local-equation data give the same coefficients by step 1.2. [F11, F6, 1.1, 1.2, 1.3, 2.1]
 

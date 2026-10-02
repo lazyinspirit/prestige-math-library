@@ -2,7 +2,7 @@
 id: cex-negative-degree-rr-right-side-negative
 kind: counterexample
 title: "A negative right-hand side does not contradict Riemann-Roch"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-h0-projective-space-o-d-homogeneous-polynomials
@@ -36,6 +36,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

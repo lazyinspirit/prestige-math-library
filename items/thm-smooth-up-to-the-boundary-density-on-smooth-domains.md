@@ -2,7 +2,7 @@
 id: thm-smooth-up-to-the-boundary-density-on-smooth-domains
 kind: theorem
 title: Ambient smooth restrictions are dense on bounded C^k domains
-status: draft
+status: published
 origin: pipeline
 deps: [def-bounded-c-k-domain-and-boundary-charts, thm-extension-theorem-for-bounded-smooth-domains, lem-mollification-commutes-with-weak-derivatives-in-the-interior, prop-mollifier-families-are-l-one-approximate-identities, thm-l-one-approximate-identities-converge-in-l-p, lem-complex-translation-and-approximate-identity-interfaces, lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, lem-smooth-bump-between-concentric-euclidean-balls, def-axiom-of-choice]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

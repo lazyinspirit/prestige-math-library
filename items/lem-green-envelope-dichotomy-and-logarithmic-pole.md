@@ -2,7 +2,7 @@
 id: lem-green-envelope-dichotomy-and-logarithmic-pole
 kind: lemma
 title: "Green envelope dichotomy, logarithmic pole and leastness on a Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -36,6 +36,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-rigidity-in-rauch-comparison
 kind: proposition
 title: Rigidity in rauch comparison
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-algebraic-symmetries-of-the-riemann-tensor
@@ -33,6 +33,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -138,8 +139,12 @@ parallel initial-value suppliers require no choice; no further selection is made
 1.1 First form: the equality hypothesis meets the Rauch comparison. [A1, F1, F5, F8, F9, F4, given]
 By [F5] the radial sectional hypothesis is $R_\gamma(t)\ge k\operatorname{id}$ on $N_t$ for $0\le t\le T$. The model field $J_k(t)=\operatorname{sn}_k(t)\Phi_tw_k$ is a normal Jacobi field along $\gamma_k$: it is normal because $\Phi_t$ is isometric and $w_k=\mathcal I w_0\perp\dot\gamma_k(0)$ and $|w_k|=|w_0|=a$ [F4], and by [F9] and [F8] $$D_t^2J_k+R(J_k,\dot\gamma_k)\dot\gamma_k =\operatorname{sn}_k''\Phi_tw_k+k\bigl(g(\dot\gamma_k,\dot\gamma_k)J_k-g(J_k,\dot\gamma_k)\dot\gamma_k\bigr) =(\operatorname{sn}_k''+k\operatorname{sn}_k)\Phi_tw_k=0,$$ since $g(J_k,\dot\gamma_k)=0$. Its initial data are $J_k(0)=0$ and $D_tJ_k(0)=w_k=\mathcal I(D_tJ(0))$, so the initial derivatives correspond under the chosen isometry and both have norm $a>0$. All hypotheses of [F1] are met, and [F1] gives $|J(t)|\le|J_k(t)|$ on $[0,T]$ together with $J_k(t)\ne0$ for $0<t\le T$. The equality hypothesis says $$|J(t)|=|J_k(t)|=a\operatorname{sn}_k(t)\ne0\qquad(0<t\le T),$$ so $\operatorname{sn}_k(b)>0$ for every $b\in(0,T]$. For $k>0$ this forces $T<\pi/\sqrt k$: at $t_0=\pi/\sqrt k$ the model sine vanishes, so were $t_0\le T$ the equality $|J(t_0)|=a\operatorname{sn}_k(t_0)=0$ would make $t_0$ a conjugate instant of $\gamma(0)$ along $\gamma$, contrary to the hypothesis that there is none in $(0,T]$; hence $T<\pi/\sqrt k$ and in particular $\operatorname{sn}_k>0$ on all of $(0,T]$, which makes every division below legitimate. [A1, F1, F5, F8, F9, F4, given]
 
-1.2 First form: index forms of the normalized Jacobi fields. [F2, F3, given]
-Fix $b\in(0,T]$. By the equality hypothesis and [F1], $|J(b)|=|J_k(b)|=a\operatorname{sn}_k(b)>0$; normalize $$J^b:=\frac{J}{|J(b)|},\qquad J_k^b:=\frac{J_k}{|J_k(b)|},$$ normal Jacobi fields along $\gamma$ and $\gamma_k$ with $J^b(0)=J_k^b(0)=0$ and $|J^b(b)|=|J_k^b(b)|=1$; a scalar multiple of a Jacobi field is a Jacobi field by [F2] and [F11], and $|J^b|>0$ on $(0,b]$. By [F2], applied on the segment $[0,b]$ to the Jacobi fields $J^b$ and $J_k^b$, $$I_\gamma(J^b,J^b)=\bigl[g(D_tJ^b,J^b)\bigr]_0^b =\frac{g\bigl(D_tJ(b),J(b)\bigr)}{|J(b)|^2} =\frac12\bigl(\log|J|^2\bigr)'(b),$$ and likewise $I_{\gamma_k}(J_k^b,J_k^b) =\frac12(\log|J_k|^2)'(b)$ on $[0,b]$ along $\gamma_k$; the lower boundary terms vanish because $J^b(0)=J_k^b(0)=0$. The equality hypothesis $|J|^2=|J_k|^2$ on $(0,T]$ makes the two logarithmic derivatives equal at every $b\in(0,T]$, so $$I_\gamma(J^b,J^b)=I_{\gamma_k}(J_k^b,J_k^b)\qquad(0<b\le T).\tag{*}$$ [F2, F3, given]
+1.2 First form: index forms of the normalized Jacobi fields.
+Fix $b\in(0,T]$. By the equality hypothesis and [F1], $|J(b)|=|J_k(b)|=a\operatorname{sn}_k(b)>0$; normalize $$J^b:=\frac{J}{|J(b)|},\qquad J_k^b:=\frac{J_k}{|J_k(b)|},$$ normal Jacobi fields along $\gamma$ and $\gamma_k$ with $J^b(0)=J_k^b(0)=0$ and $|J^b(b)|=|J_k^b(b)|=1$; a scalar multiple of a Jacobi field is a Jacobi field by [F2] and [F11], and $|J^b|>0$ on $(0,b]$. By [F2], applied on the segment $[0,b]$ to the Jacobi fields $J^b$ and $J_k^b$, $$I_\gamma(J^b,J^b)=\bigl[g(D_tJ^b,J^b)\bigr]_0^b =\frac{g\bigl(D_tJ(b),J(b)\bigr)}{|J(b)|^2} =\frac12\bigl(\log|J|^2\bigr)'(b),$$ and likewise $I_{\gamma_k}(J_k^b,J_k^b) =\frac12(\log|J_k|^2)'(b)$ on $[0,b]$ along $\gamma_k$; the lower boundary terms vanish because $J^b(0)=J_k^b(0)=0$. The equality hypothesis $|J|^2=|J_k|^2$ on $(0,T]$ makes the two logarithmic derivatives equal at every $b\in(0,T]$, so
+$$
+I_\gamma(J^b,J^b)=I_{\gamma_k}(J_k^b,J_k^b)\qquad(0<b\le T).\tag{*}
+$$
+[F2, F3, given]
 
 1.3 Second form: the Riccati setup and its comparison. [F5, F6, F7, F8, given]
 Transport the given field to $N_0$: $y(t):=P_t^{-1}J(t)$ satisfies $y''+R_\gamma y=0$ with $y(0)=u\ne0$ and $y'(0)=D_tJ(0)=\lambda u$; the operator family $R_\gamma$ is continuous and self-adjoint by
@@ -161,15 +166,15 @@ On $0<t\le T$ with $t<t_f$, $g_k'=-k-g_k^2$ and the Riccati equation gives $$\ti
 
 4.1 First form: conclusion. [step 1.1, step 3.1, step 3.2, F8, F11, given] By step 3.1 and step 3.2, for every $b\in(0,T]$ and every $t\in(0,b]$ $$J^b(t)=\frac{\operatorname{sn}_k(t)}{\operatorname{sn}_k(b)}\, P_tw_b,\qquad |w_b|=1,$$ for a unit vector $w_b\in N_0$: indeed $J_k^b$ is the normal Jacobi field along $\gamma_k$ with $J_k^b(0)=0$ and $\Phi_b^{-1}J_k^b(b)=w_b$, hence equals $\operatorname{sn}_k(t)\Phi_tw_b/\operatorname{sn}_k(b)$ by [F11] and [F8], and the transfer of this field is $\operatorname{sn}_k(t)P_tw_b/\operatorname{sn}_k(b)$. Multiplying by $|J(b)|=a\operatorname{sn}_k(b)$ from step 1.1, $$J(t)=a\operatorname{sn}_k(t)P_tw_b\qquad(0<t\le b\le T).$$ The left side is independent of $b$, so for fixed $t$ and two parameters $b,b'\ge t$ the unit vectors $w_b,w_{b'}$ satisfy $P_tw_b=P_tw_{b'}$, hence $w_b=w_{b'}$. Writing $w\in N_0$ for this common unit vector, $J(t)=a\operatorname{sn}_k(t)P_tw$ for every $t\in(0,T]$, and passing to the derivative at $t=0$ (the expansion $\operatorname{sn}_k(t)=t+O(t^2)$ and $P_tw\to w$ as $t\downarrow0$) gives $D_tJ(0)=aw$, so $w=D_tJ(0)/a$ and therefore $$J(t)=\operatorname{sn}_k(t)P_t\bigl(D_tJ(0)\bigr)\qquad(0\le t\le T),$$ the formula also holding at $t=0$ where both sides vanish. Finally the conclusion of step 3.2, applied to the span of $X(t)=J^b(t)\propto J(t)$, gives $$\sec_M\bigl(\operatorname{span}\{J(t),\dot\gamma(t)\}\bigr)=k \qquad(0<t\le T),$$ which is the asserted radial curvature equality wherever $J$ is nonzero. [step 1.1, step 3.1, step 3.2, F8, F11, given]
 
-4.2 Second form: conclusion. [F5, F6, F8, F11, step 2.2, step 3.3, given]
+4.2 Second form: conclusion.
 For $0<t\le T$ with $t<t_f$, step 3.3 gives $R_\gamma y=ky$, where $y=P_t^{-1}J$. By [F5], this is the actual curvature equation $$R(J(t),\dot\gamma(t))\dot\gamma(t)=kJ(t).$$ Also $y=Y(t)u\ne0$, since $Y(t)$ is invertible and $u\ne0$; hence the radial sectional curvature of $\operatorname{span}\{J(t),\dot\gamma(t)\}$ is $k$.
-
 In a fixed basis of $N_0$, each coordinate $y_i$ satisfies $y_i''+ky_i=0$, with $y_i(0)=u_i$ and $y_i'(0)=\lambda u_i$. Set $z_i:=y_i-u_i\operatorname{cs}_k-\lambda u_i\operatorname{sn}_k$. Then $z_i''+kz_i=0$ and $z_i(0)=z_i'(0)=0$. The Wronskian $z_i'\operatorname{sn}_k-z_i\operatorname{sn}_k'$ has derivative $(z_i''+kz_i)\operatorname{sn}_k=0$, so it is identically zero. The comparison sine is positive at every $t\in(0,T]$ with $t<t_f$: for $k\le0$ this follows from its formula; for $k>0$, $f_k>0$ on the compared interval and $f_k(\pi/\sqrt{k})=-1$, so that interval lies before the first positive zero of $\operatorname{sn}_k$. Thus $(z_i/\operatorname{sn}_k)'=0$, and its limit at zero is $z_i'(0)=0$, so $z_i=0$. Therefore $$y(t)=f_k(t)u,\qquad J(t)=f_k(t)P_tu\qquad(0\le t\le T,\ t<t_f).$$ If $t_f\le T$, these equalities and the curvature-vector equation extend
 to $t_f$ by continuity. Before $t_f$, division by $f_k>0$ gives
 $R(P_tu,T)T=kP_tu$, so this equation also extends to $t_f$. Thus the plane
 spanned by the nonzero vector $P_{t_f}u$ and $T(t_f)$ has curvature $k$.
 The plane spanned by $J(t_f)$ and $T(t_f)$ has the same conclusion only
-when $J(t_f)\ne0$. [F5, F6, F8, F11, step 2.2, step 3.3, given] ∎
+when $J(t_f)\ne0$.
+[F5, F6, F8, F11, step 2.2, step 3.3, given] ∎
 ## Source locator
 
 The equality case of the Rauch comparison is treated in Eschenburg §3 (pp.12–14): equality of the compared norms at all times forces equality in the Riccati comparison $S_1\le S_2$, hence radial curvature equality and a parallel-transported model field; the same discussion for the scalar initial shape (the tensor $Y$ with $Y(0)=\operatorname{id}$, $Y'(0)=\lambda \operatorname{id}$) is the equality case of the matrix Riccati comparison of that section. Datar §§24.2, 25.3 and 26.2 (pp.176–177, 188–189, 194–197) contains the index-form comparison and the logarithmic-derivative step used for the first form. The proof above is carried out from the in-run Rauch theorems, the index lemma and the Riccati comparison of this page.

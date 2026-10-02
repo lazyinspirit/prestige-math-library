@@ -2,7 +2,7 @@
 id: lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds
 kind: lemma
 title: "Riesz kernel size, difference and spherical-cancellation bounds"
-status: draft
+status: published
 origin: pipeline
 deps: [def-riesz-transforms-on-euclidean-space, lem-riesz-transform-principal-value-kernel-formula, thm-polar-coordinates-formula-for-lebesgue-measure, cor-mean-value-theorem, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-derivative-of-a-power, thm-linear-change-of-variables-for-lebesgue-measure, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

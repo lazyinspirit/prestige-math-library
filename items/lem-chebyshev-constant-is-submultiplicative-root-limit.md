@@ -2,7 +2,7 @@
 id: lem-chebyshev-constant-is-submultiplicative-root-limit
 kind: lemma
 title: "The Chebyshev constant is the root limit of monic extremal norms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -28,6 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.3760"
       locator: "§1, the polynomial extremal problem, printed pp. 175–176"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

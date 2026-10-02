@@ -2,7 +2,7 @@
 id: lem-interior-oscillation-controls-harmonic-gradient
 kind: lemma
 title: Interior oscillation controls the harmonic gradient
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, cor-harmonic-cauchy-estimates-in-supremum-norm]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

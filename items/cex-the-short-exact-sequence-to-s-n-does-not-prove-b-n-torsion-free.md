@@ -2,7 +2,7 @@
 id: cex-the-short-exact-sequence-to-s-n-does-not-prove-b-n-torsion-free
 kind: counterexample
 title: "The short exact sequence to $S_n$ does not prove $B_n$ torsion-free"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-configuration-braid-pure-braid-short-exact-sequence, thm-pure-braid-groups-are-torsion-free, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, cor-symmetric-group-has-factorial-cardinality-again, thm-int-comm-ring, thm-int-ordered-ring, def-integers-modulo-n, thm-integers-modulo-n-basic-algebra, thm-standard-representatives-modulo-n, def-external-direct-product-of-groups, thm-external-direct-product-is-a-group, def-group-power, def-order-in-a-group]
@@ -16,6 +16,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

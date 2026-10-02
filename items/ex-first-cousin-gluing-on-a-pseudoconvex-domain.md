@@ -2,7 +2,7 @@
 id: ex-first-cousin-gluing-on-a-pseudoconvex-domain
 kind: example
 title: "First Cousin gluing on the pseudoconvex domain $\\mathbb C$"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -27,6 +27,7 @@ sources:
       url: https://haroldpboas.gitlab.io/courses/650-2019c/notes.pdf
       locator: "§3.3.2, printed pp. 79-80, where the first Cousin problem on a pseudoconvex domain is solved from the Levi problem; the two-chart data here are the classical explicit instance."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

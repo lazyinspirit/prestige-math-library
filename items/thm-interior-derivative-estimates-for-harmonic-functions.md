@@ -2,7 +2,7 @@
 id: thm-interior-derivative-estimates-for-harmonic-functions
 kind: theorem
 title: Interior derivative estimates for harmonic functions
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -20,6 +20,8 @@ sources:
     - title: "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)"
       url: "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf"
       locator: "§4.4, printed pp. 71–72, Theorem 4.24 and its corollaries"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

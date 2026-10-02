@@ -2,7 +2,7 @@
 id: lem-nonzero-maps-between-specht-quotients-force-dominance
 kind: lemma
 title: Nonzero maps into tabloid quotients force dominance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -33,6 +33,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3, Proposition 2.10, printed pp. 25-26"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

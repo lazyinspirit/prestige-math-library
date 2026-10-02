@@ -2,7 +2,7 @@
 id: lem-poisson-kernel-boundary-cap-and-complement-estimate
 kind: lemma
 title: Cap and complement estimate for the ball Poisson integral
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-surface-integral-on-a-compact-c-one-hypersurface, lem-ball-poisson-kernel-is-positive-and-normalised, lem-euclidean-balls-are-bounded-c-one-domains, lem-sphere-and-ball-measures-scale, cor-euclidean-closed-balls-and-spheres-are-compact, thm-extreme-value-metric, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-poisson-kernel-for-a-ball-in-rn]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

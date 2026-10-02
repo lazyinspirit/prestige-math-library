@@ -2,7 +2,7 @@
 id: lem-semistandard-homomorphisms-are-independent-and-dominance-triangular
 kind: lemma
 title: Semistandard maps are independent and respect dominance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-semistandard-tableau-homomorphisms-to-young-permutation-modules, def-semistandard-tableau-and-kostka-number, def-dominance-order-on-partitions, def-column-antisymmetrizer-polytabloid-and-specht-module, def-row-and-column-stabilizers-of-a-tableau, lem-polytabloid-covariance-and-column-sign, def-young-subgroup-tabloid-and-permutation-module, def-young-tableau-standard-tableau-and-shape, def-partition-young-diagram-and-conjugate-partition, thm-sign-is-a-homomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Remark 3.25 and Lemma 3.26, PDF pp. 36-37"
       url: "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

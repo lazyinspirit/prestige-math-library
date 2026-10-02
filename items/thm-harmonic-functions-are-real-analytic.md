@@ -2,7 +2,7 @@
 id: thm-harmonic-functions-are-real-analytic
 kind: theorem
 title: Harmonic functions are real analytic
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [cor-ball-mean-value-property-for-harmonic-functions, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice, def-multivariable-power-series, def-real-analytic-germ-in-several-variables, def-surface-integral-on-a-compact-c-one-hypersurface, lem-ball-poisson-kernel-is-positive-and-normalised, lem-smooth-sphere-data-have-a-harmonic-replacement, lem-sphere-and-ball-measures-scale, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-continuous-mean-value-functions-are-harmonic, thm-differentiation-under-the-integral-sign, thm-dirichlet-problem-on-a-ball-by-the-poisson-integral, thm-dominated-convergence, thm-multinomial-theorem, thm-multivariable-taylor-formula-with-lagrange-remainder, thm-euclidean-heine-borel-pseudocompactness-and-extreme-values, cor-euclidean-closed-balls-and-spheres-are-compact, thm-extreme-value-metric, thm-poisson-kernel-for-a-ball-in-rn, thm-real-power-continuity-and-derivatives]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

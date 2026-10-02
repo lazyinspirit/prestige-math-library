@@ -2,7 +2,7 @@
 id: ex-ramification-power-map-projective-line
 kind: example
 title: Ramification indices of the power map on the projective line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -40,6 +40,8 @@ sources:
       url: https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf
     - title: The Stacks Project, Algebraic Curves (tag 0BRV)
       url: https://stacks.math.columbia.edu/download/curves.pdf
+verification:
+  audited: 2026-10-02
 ---
 
 

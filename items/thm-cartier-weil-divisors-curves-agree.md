@@ -2,7 +2,7 @@
 id: thm-cartier-weil-divisors-curves-agree
 kind: theorem
 title: "Cartier and Weil divisors agree on a smooth curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
     - title: "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 6-8"
       url: "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

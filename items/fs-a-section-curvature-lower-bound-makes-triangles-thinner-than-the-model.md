@@ -2,7 +2,7 @@
 id: fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model
 kind: false-statement
 title: A section curvature lower bound makes triangles thinner than the model
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-toponogov-triangle-comparison
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

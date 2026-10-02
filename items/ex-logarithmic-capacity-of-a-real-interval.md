@@ -2,7 +2,7 @@
 id: ex-logarithmic-capacity-of-a-real-interval
 kind: example
 title: "Arcsine equilibrium measure and capacity of a segment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -40,6 +40,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, equilibrium measure of an interval; §5, capacity of a segment"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

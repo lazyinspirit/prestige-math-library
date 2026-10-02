@@ -2,7 +2,7 @@
 id: thm-doubled-spanning-tree-is-a-two-approximation-for-metric-tsp
 kind: theorem
 title: "Double-tree shortcutting is a 2-approximation for metric TSP"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-metric-tsp
@@ -22,6 +22,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §2.4 Theorem 2.12 with proof, printed pp. 45–46"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

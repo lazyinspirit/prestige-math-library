@@ -2,7 +2,7 @@
 id: cex-hilbert-transform-is-not-strong-type-one-one
 kind: counterexample
 title: "Hilbert transform is not strong type (1,1)"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-hilbert-transform-of-an-interval-indicator, cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, prop-mollifier-families-are-l-one-approximate-identities, thm-l-one-approximate-identities-converge-in-l-p, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset, lem-schwartz-cutoffs-from-the-standard-smooth-step, def-schwartz-space-and-its-seminorms, thm-complex-holder-minkowski-and-the-quotient-norm, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-logarithm-derivative-and-integral, thm-natural-logarithm-laws, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-lebesgue-measure-of-a-box-of-every-kind, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cor-interior-laplacian-gradient-estimate
 kind: corollary
 title: Interior gradient bound for Poisson solutions
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [cor-mean-value-theorem, def-countable-choice, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-newtonian-potential, cor-harmonic-cauchy-estimates-in-supremum-norm, lem-laplace-fundamental-kernel-is-locally-integrable, lem-smooth-bump-between-concentric-euclidean-balls, lem-sphere-and-ball-measures-scale, thm-chain-rule-for-total-derivatives, thm-dominated-convergence, thm-newtonian-potential-for-holder-data-is-classical, thm-polar-coordinates-formula-for-lebesgue-measure, thm-real-power-continuity-and-derivatives]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

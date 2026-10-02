@@ -2,7 +2,7 @@
 id: thm-nevanlinna-defect-relation
 kind: theorem
 title: "Nevanlinna deficiency and ramification defect relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,8 @@ sources:
     - title: "I. Laine, Complex Analysis III lecture notes"
       url: "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf"
       locator: "§§5-6.1, printed pp. 35-43: deficiency and ramification defect relations"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

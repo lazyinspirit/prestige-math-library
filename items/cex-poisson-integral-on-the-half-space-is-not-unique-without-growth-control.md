@@ -2,7 +2,7 @@
 id: cex-poisson-integral-on-the-half-space-is-not-unique-without-growth-control
 kind: counterexample
 title: Zero half-space trace does not ensure uniqueness without growth control
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-laplacian-of-a-c2-function]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

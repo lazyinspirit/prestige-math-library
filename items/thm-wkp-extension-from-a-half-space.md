@@ -2,7 +2,7 @@
 id: thm-wkp-extension-from-a-half-space
 kind: theorem
 title: Integer-order Sobolev extension from a half-space
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-extension-domain-and-extension-operator, def-sobolev-space-wkp-and-its-norm, thm-acl-characterisation-of-w-one-p, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, thm-tonelli-and-fubini-for-completed-product-measures, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-lebesgue-measure-of-a-box-of-every-kind, thm-holder-inequality-for-integrals, thm-linear-change-of-variables-for-lebesgue-measure, lem-weak-derivative-linearity-locality-and-commutation, def-axiom-of-choice]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

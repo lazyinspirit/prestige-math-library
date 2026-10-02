@@ -2,7 +2,7 @@
 id: cor-stationary-irreducible-markov-shift-is-ergodic
 kind: corollary
 title: "Stationary irreducible Markov shift is ergodic"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -25,6 +25,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

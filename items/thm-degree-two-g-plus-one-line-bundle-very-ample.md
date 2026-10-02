@@ -2,7 +2,7 @@
 id: thm-degree-two-g-plus-one-line-bundle-very-ample
 kind: theorem
 title: "Line bundles of degree at least 2g+1 are very ample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -67,6 +67,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -282,7 +283,7 @@ at $p$, and in the projective chart defined by $s_0$ the ratio satisfies
 $s_1/s_0\equiv t\pmod{t^2}$. Its differential at $p$ is nonzero, so the
 tangent map of $f_K$ is injective there. [F1, F2, F5, step 2.1]
 
-3.3 (Finiteness after base change; arbitrary-field route.) [F4, F6, F8, F9, step 2.1]
+3.3 (Finiteness after base change; arbitrary-field route.)
 We prove the needed
 finiteness route for a map $g:X\to\mathbf P^r_F$ over any field $F$, where
 $X$ is a smooth proper integral curve and $M=g^*\mathcal O(1)$ has positive
@@ -300,7 +301,6 @@ it is an integral finite-type open of $X$, and its global functions embed in
 $F(X)$ by [F9]. Hence $I$ is prime. Thus $Y$ is reduced; its underlying
 space is the closure of the image of the irreducible space $X$, so $Y$ is
 irreducible and therefore integral.
-
 The image $Y$ cannot be a single point: in that case $g$ factors through
 $Y=\operatorname{Spec}E$ for a field $E$, the invertible sheaf
 $\mathcal O(1)|_Y$ is free of rank one over $E$, and its pullback $M$ is
@@ -317,7 +317,6 @@ neighborhood $\operatorname{Spec}B$ of $x$, its local DVR gives
 $\dim B\ge1$; any chain in this affine open remains strict after closure in
 $X$, so $\dim B\le1$. Dominance gives an injection $F(Y)\hookrightarrow
 F(X)$ on generic stalks, whence $\operatorname{trdeg}_F F(Y)=1$ as well.
-
 Take a standard projective affine chart containing the generic point of $Y$.
 Its coordinate ratios generate $F(Y)$, so at least one, say $h$, is
 transcendental over $F$. By [F9], $F(X)/F$ is finitely generated. Since
@@ -325,7 +324,6 @@ $\operatorname{trdeg}_F F(X)=\operatorname{trdeg}_F F(h)=1$, each member of
 a finite generating list for $F(X)/F(h)$ is algebraic over $F(h)$; the
 finite-algebraic-generation theorem in [F9] gives $[F(X):F(h)]<\infty$.
 Thus $F(X)/F(Y)$ is finite, with no separability assumption.
-
 For the fibre criterion, every point of $X$ is generic or closed by [F9].
 If a closed point $x$ mapped to the generic point of $Y$, the field map
 $F(Y)\to\kappa(x)$ would embed a field of transcendence degree one into
@@ -348,8 +346,9 @@ quasi-finite fibre criterion in [F9] makes $g$ quasi-finite, and proper plus
 quasi-finite is finite by [F8]. Applying this argument over $F=K$ proves
 that $f_K$ is finite. The field extensions above may be inseparable; only
 their finiteness is used.
+[F4, F6, F8, F9, step 2.1]
 
-4.1 (Local ring surjectivity over $K$.) [F5, F8, F11, step 3.1, step 3.2, step 3.3]
+4.1 (Local ring surjectivity over $K$.)
 We prove that $f_K$ is a closed immersion. Fix an affine chart
 $U=\operatorname{Spec}R\subseteq\mathbf P^{h^0(C,L)-1}_K$. Since $f_K$ is
 finite, its inverse image is affine, say $\operatorname{Spec}S$, with $S$
@@ -369,7 +368,6 @@ There is only $\mathfrak n$, so $S_y$ is local. It is therefore already its
 localization at that maximal ideal and equals
 $S_{\mathfrak n}=\mathcal O_{C_K,x}$. Localization preserves finite modules,
 so $B:=\mathcal O_{C_K,x}$ is finite over $A_{\mathfrak m_y}$.
-
 The tangent map at $x$ is injective by step 3.2; by [F5] its dual cotangent
 map is surjective. The local map
 $\mathcal O_{\mathbf P^r_K,z}\to A_{\mathfrak m_y}\to B$
@@ -383,7 +381,6 @@ so $B=A_{\mathfrak m_y}+\mathfrak m_{A_{\mathfrak m_y}}B$. The finite
 $A_{\mathfrak m_y}$-module $B/A_{\mathfrak m_y}$ consequently satisfies
 $B/A_{\mathfrak m_y}=\mathfrak m_{A_{\mathfrak m_y}}(B/A_{\mathfrak m_y})$;
 Nakayama's lemma gives $B=A_{\mathfrak m_y}$.
-
 This holds at every closed point $y$. The finite cokernel $S/A$ must vanish:
 if nonzero, choose a nonzero element $s$ and, by [F8], a maximal ideal
 $\mathfrak m$ containing its proper annihilator. The localization $s/1$ is
@@ -391,7 +388,8 @@ nonzero in $(S/A)_{\mathfrak m}$, since otherwise some $u\notin\mathfrak m$
 would annihilate $s$, contradicting $\operatorname{Ann}(s)\subseteq\mathfrak m$.
 This contradicts the local surjectivity just proved. Thus $R\to S$ is surjective
 on every affine chart. The affine quotient description in [F8] proves that
-$f_K$ is a closed immersion. [F5, F8, F11, step 3.1, step 3.2, step 3.3]
+$f_K$ is a closed immersion.
+[F5, F8, F11, step 3.1, step 3.2, step 3.3]
 
 5.1 (Descend the closed immersion.) [F4, F7, F8, F9, step 3.3, step 4.1]
 The arbitrary-field argument of step 3.3 applies to $f$ over $k$, so $f$ is

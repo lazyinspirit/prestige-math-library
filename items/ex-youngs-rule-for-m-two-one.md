@@ -2,7 +2,7 @@
 id: ex-youngs-rule-for-m-two-one
 kind: example
 title: "Young's rule for M^(2,1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-youngs-rule-for-permutation-modules, def-semistandard-tableau-and-kostka-number, thm-standard-polytabloid-basis, def-young-subgroup-tabloid-and-permutation-module, def-column-antisymmetrizer-polytabloid-and-specht-module, def-row-and-column-stabilizers-of-a-tableau, cor-sign-from-disjoint-cycle-structure, thm-complex-specht-modules-are-irreducible, def-young-tableau-standard-tableau-and-shape]
@@ -21,6 +21,7 @@ sources:
     - title: "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39"
       url: "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

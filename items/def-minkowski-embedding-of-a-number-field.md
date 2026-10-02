@@ -2,7 +2,7 @@
 id: def-minkowski-embedding-of-a-number-field
 kind: definition
 title: "Unscaled Minkowski embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 p.80."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

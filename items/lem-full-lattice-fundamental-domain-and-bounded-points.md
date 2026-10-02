@@ -2,7 +2,7 @@
 id: lem-full-lattice-fundamental-domain-and-bounded-points
 kind: lemma
 title: "Fundamental parallelotope and finite bounded intersections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§27 Lemma 27.2, pp.139-140."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -102,10 +103,17 @@ $\|s\|\le\|s-x_0\|+\|x_0\|$ for $s\in B(x_0,r)$.
 ## Proof
 
 1.1 By [F1] the vectors $b_1,\dots,b_n$ form a real basis of $\mathbb R^n$; therefore every $x\in\mathbb R^n$ has a unique coefficient vector $y=(y_1,\dots,y_n)\in\mathbb R^n$ with $x=\sum_i y_ib_i$. [F1, given]
+
 1.2 For every real $y$ there is exactly one pair $(m,t)\in\mathbb Z\times(0,1]$ with $y=m+t$: apply [F5] to $-y$ to get the unique integer $k$ with $k\le-y<k+1$, and put $m:=-k-1$, $t:=y-m$; then $m<y\le m+1$ and hence $t\in(0,1]$. Conversely if $m+t=m'+t'$ with $t,t'\in(0,1]$, then $m-m'=t'-t$ has absolute value $<1$ and is an integer, hence $m=m'$ and $t=t'$. [F5, algebra]
+
 1.3 Let $S\subseteq\mathbb R^n$ be bounded and suppose first $S\ne\varnothing$. By [F7] there are $x_0\in\mathbb R^n$ and $r>0$ with $S\subseteq B(x_0,r)$, so every $s\in S$ satisfies $\|s\|\le\|s-x_0\|+\|x_0\|\le r+\|x_0\|=:M$. [F7, given]
+
 2.1 (Tiling.) Let $x\in\mathbb R^n$ have coefficient vector $y$ as in step 1.1 and write $y_i=m_i+t_i$ as in step 1.2. Put $\lambda=\sum_im_ib_i\in\Lambda$ and $p=\sum_it_ib_i\in P$; then $x=\lambda+p$. For uniqueness, suppose $\lambda+p=\lambda'+p'$ with $\lambda=\sum_im_ib_i$, $\lambda'=\sum_im'_ib_i\in\Lambda$ and $p=\sum_it_ib_i$, $p'=\sum_it'_ib_i\in P$. Then $\sum_i\bigl((m_i-m'_i)+(t_i-t'_i)\bigr)b_i=0$, and linear independence of the $b_i$ forces $(m_i-m'_i)+(t_i-t'_i)=0$ for every $i$. Here $m_i-m'_i$ is an integer and $t'_i-t_i\in(-1,1)$, so $m_i-m'_i=t'_i-t_i\in\mathbb Z\cap(-1,1)=\{0\}$; thus $m_i=m'_i$ and $t_i=t'_i$ for all $i$, that is $\lambda=\lambda'$ and $p=p'$. [F1, step 1.1, step 1.2]
+
 2.2 Let $T:\mathbb R^n\to\mathbb R^n$ be the linear map $T(t)=\sum_it_ib_i$, with matrix $B$. By step 1.1 the map $T$ is a bijection, so the square matrix $B$ is invertible and [F2] gives $\det B\ne0$. Since $T\bigl[(0,1]^n\bigr]=P$ and $(0,1]^n$ is Lebesgue measurable of measure $1$ by [F4], [F3] and [F1] give $\lambda_n(P)=|\det B|\,\lambda_n\bigl((0,1]^n\bigr)=\operatorname{covol}(\Lambda)$, with the Countable Choice hypotheses of [F3] and [F4] supplied by [A1]. [F1, F2, F3, F4, A1, step 1.1]
+
 2.3 For each $i$ the $i$-th coordinate functional $f_i(z):=(B^{-1}z)_i$ is linear, so by [F6] there is $K_i\ge0$ with $|f_i(z)|\le K_i\|z\|_2$ for every $z$. If $\lambda=\sum_im_ib_i\in S$, then $B^{-1}\lambda=(m_1,\dots,m_n)$, so $f_i(\lambda)=m_i$ and step 1.3 gives $|m_i|\le K_iM=:C_i$. [F6, step 1.3]
+
 3.1 Every integer $m_i$ with $|m_i|\le C_i$ satisfies $-\lceil C_i\rceil\le m_i\le\lceil C_i\rceil$; the set $\{m\in\mathbb Z:|m|\le C_i\}$ is therefore a subset of the finite set $\{-\lceil C_i\rceil,\dots,\lceil C_i\rceil\}$ and is finite. Hence $S\cap\Lambda$ is contained in the image under $(m_1,\dots,m_n)\mapsto\sum_im_ib_i$ of the finite set $\prod_{i=1}^n\{m\in\mathbb Z:|m|\le C_i\}$, so $S\cap\Lambda$ is finite; for $S=\varnothing$ it is empty. [F1, step 2.3]
+
 4.1 Step 2.1 proves the unique tiling, step 2.2 the volume $\lambda_n(P)=\operatorname{covol}(\Lambda)$, and step 3.1 the finiteness of $S\cap\Lambda$ for bounded $S$; these are the three claims of the statement. [step 2.1, step 2.2, step 3.1] ∎

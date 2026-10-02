@@ -2,7 +2,7 @@
 id: ex-change-of-fundamental-units-preserves-regulator
 kind: example
 title: "A unimodular change of generators preserves the regulator determinants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

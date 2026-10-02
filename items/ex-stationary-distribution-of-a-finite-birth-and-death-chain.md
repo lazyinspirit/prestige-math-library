@@ -2,7 +2,7 @@
 id: ex-stationary-distribution-of-a-finite-birth-and-death-chain
 kind: example
 title: "Stationary law of a finite birth-and-death chain"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

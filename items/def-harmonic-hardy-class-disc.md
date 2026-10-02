@@ -2,7 +2,7 @@
 id: def-harmonic-hardy-class-disc
 kind: definition
 title: "Harmonic Hardy classes on the unit disc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-essential-supremum-with-respect-to-a-measure, def-plane-harmonic-function, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-complex-holder-minkowski-and-the-quotient-norm, thm-identity-principle-for-plane-harmonic-functions, thm-poisson-representation-for-disc-harmonic-functions]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

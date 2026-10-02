@@ -2,7 +2,7 @@
 id: thm-poisson-extension-lp-contraction-and-norm-limit
 kind: theorem
 title: "Poisson extension is an Lp contraction and converges in finite Lp"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-countable-choice, def-harmonic-hardy-class-disc, def-measure-with-density, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-poisson-integrals-are-harmonic, lem-poisson-kernel-is-a-boundary-approximate-identity, lem-poisson-kernel-properties-on-the-disc, thm-complex-holder-minkowski-and-the-quotient-norm, thm-integration-against-a-density, thm-jensens-integral-inequality, thm-poisson-integral-solves-the-disc-dirichlet-problem, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

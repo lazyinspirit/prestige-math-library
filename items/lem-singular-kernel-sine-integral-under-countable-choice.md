@@ -2,7 +2,7 @@
 id: lem-singular-kernel-sine-integral-under-countable-choice
 kind: lemma
 title: "The sine integral under Countable Choice: uniform bounds and the value pi/2"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, thm-sine-and-cosine-derivatives, cor-sine-and-cosine-are-one-lipschitz, cor-trigonometric-parity-and-pythagorean-identity, thm-derivative-of-exponential, thm-chain-rule, lem-exponential-dominates-one-plus-x, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-ftc-second-part, thm-integration-by-parts, thm-additivity-over-subintervals, thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-dominated-convergence, cor-continuous-functions-are-borel-measurable, thm-principal-inverse-tangent-calculus, def-principal-inverse-tangent, thm-substitution-for-improper-integrals]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

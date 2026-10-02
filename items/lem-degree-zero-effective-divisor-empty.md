@@ -2,7 +2,7 @@
 id: lem-degree-zero-effective-divisor-empty
 kind: lemma
 title: An effective divisor of degree zero is empty
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-algebraic-curve-over-field
@@ -27,6 +27,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

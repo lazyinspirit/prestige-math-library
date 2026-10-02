@@ -2,7 +2,7 @@
 id: lem-residue-exact-differential-zero
 kind: lemma
 title: "Residues of exact differentials vanish"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
     - title: "Joseph Lipman, Residues, duality, and the fundamental class of a scheme-map (2011)"
       url: "https://www.math.purdue.edu/~lipman/papers/Algecom.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

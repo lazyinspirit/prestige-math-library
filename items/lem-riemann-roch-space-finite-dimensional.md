@@ -2,7 +2,7 @@
 id: lem-riemann-roch-space-finite-dimensional
 kind: lemma
 title: Finite-dimensionality of the Riemann-Roch space
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-finite-type-algebra-over-noetherian-ring-is-noetherian
@@ -49,6 +49,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

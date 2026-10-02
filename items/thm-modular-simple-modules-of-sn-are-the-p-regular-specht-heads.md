@@ -2,7 +2,7 @@
 id: thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads
 kind: theorem
 title: Modular simple modules of the symmetric group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -34,6 +34,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3, Theorem 2.5 and Corollary 2.11, printed pp. 24-26"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-symmetric-group-decomposition-matrix-is-dominance-unitriangular
 kind: theorem
 title: Dominance unitriangularity of the symmetric-group decomposition matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -39,6 +39,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3, Proposition 2.10 and Corollary 2.11, printed pp. 25-26"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

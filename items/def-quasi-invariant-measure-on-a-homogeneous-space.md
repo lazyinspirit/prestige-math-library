@@ -2,7 +2,7 @@
 id: def-quasi-invariant-measure-on-a-homogeneous-space
 kind: definition
 title: "Quasi-invariant Radon measure on G/H"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: []
@@ -18,6 +18,7 @@ sources:
     - title: "Bruhat, Lectures on Lie Groups and Representations of Locally Compact Groups, Chapters 1 and 7"
       url: "https://ncatlab.org/nlab/files/Bruhat-LecturesOnLie.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

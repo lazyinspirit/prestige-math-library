@@ -2,7 +2,7 @@
 id: thm-bonnet-myers
 kind: theorem
 title: Bonnet myers
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-index-form-of-a-geodesic-segment
@@ -35,6 +35,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

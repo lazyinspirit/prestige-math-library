@@ -2,7 +2,7 @@
 id: lem-smooth-curve-coherent-torsion-free-locally-free
 kind: lemma
 title: Torsion-free coherent modules on a smooth curve are locally free
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-dvr-is-a-pid
@@ -38,6 +38,7 @@ sources:
       url: "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

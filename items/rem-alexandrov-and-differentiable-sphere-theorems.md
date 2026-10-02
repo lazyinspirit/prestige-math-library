@@ -2,7 +2,7 @@
 id: rem-alexandrov-and-differentiable-sphere-theorems
 kind: remark
 title: Alexandrov and differentiable sphere theorems
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-toponogov-triangle-comparison
@@ -13,6 +13,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  sources_checked:
+    date: 2026-10-02
+    by: owner
+    scope: Owner-confirmed prior audit; publication explicitly authorised.
   precheck: n/a
 sources:
   scraped: []

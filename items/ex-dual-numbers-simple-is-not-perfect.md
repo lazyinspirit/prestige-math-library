@@ -14,11 +14,12 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

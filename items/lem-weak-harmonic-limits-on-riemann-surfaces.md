@@ -2,7 +2,7 @@
 id: lem-weak-harmonic-limits-on-riemann-surfaces
 kind: lemma
 title: "Locally bounded harmonic families have harmonic subsequential limits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -41,6 +41,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

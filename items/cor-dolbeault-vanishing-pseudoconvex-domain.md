@@ -2,7 +2,7 @@
 id: cor-dolbeault-vanishing-pseudoconvex-domain
 kind: corollary
 title: Positive-degree Dolbeault vanishing on pseudoconvex domains
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-hormander-l2-dbar-existence
@@ -61,6 +61,7 @@ sources:
       url: "https://www.jirka.org/scv/scv.pdf"
       locator: "Ch. 4 §4.6, cohomology and the Cousin-I interface"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

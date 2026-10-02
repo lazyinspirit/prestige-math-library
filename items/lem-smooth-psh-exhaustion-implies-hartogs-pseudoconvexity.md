@@ -2,9 +2,20 @@
 id: "lem-smooth-psh-exhaustion-implies-hartogs-pseudoconvexity"
 kind: "lemma"
 title: "A smooth psh exhaustion gives Hartogs pseudoconvexity on bounded domains"
-status: "draft"
+status: published
 origin: "pipeline"
-deps: ["def-axiom-of-choice", "def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity", "def-polydisc-boundary-radius", "def-plurisubharmonic-function", "def-plane-subharmonic-function", "thm-holomorphic-pullback-of-plurisubharmonic-functions", "thm-harmonic-majorant-characterization-of-plane-subharmonicity", "thm-harmonic-conjugate-on-homologically-simply-connected-domains", "thm-maximum-principle-for-plane-subharmonic-functions"]
+deps:
+  [
+    "def-axiom-of-choice",
+    "def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity",
+    "def-polydisc-boundary-radius",
+    "def-plurisubharmonic-function",
+    "def-plane-subharmonic-function",
+    "thm-holomorphic-pullback-of-plurisubharmonic-functions",
+    "thm-harmonic-majorant-characterization-of-plane-subharmonicity",
+    "thm-harmonic-conjugate-on-homologically-simply-connected-domains",
+    "thm-maximum-principle-for-plane-subharmonic-functions"
+  ]
 landmark: false
 proof_strategy: "direct"
 provenance:
@@ -17,7 +28,12 @@ sources:
       locator: "Ch. I §7.A, Theorem 7.2(c)→(d), printed p. 54: two-disc continuation
         using a psh exhaustion. The final norm comparison below uses the library
         equal-radius polydisc convention, not Euclidean distance."
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02}}
+verification:
+  {
+    "precheck": "pass",
+    judge: { model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02 },
+    audited: 2026-10-02
+  }
 ---
 
 ## Statement

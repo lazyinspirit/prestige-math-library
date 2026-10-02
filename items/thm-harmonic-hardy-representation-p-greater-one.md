@@ -2,7 +2,7 @@
 id: thm-harmonic-hardy-representation-p-greater-one
 kind: theorem
 title: "h^p is the Poisson image of Lp for 1<p<=infinity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, def-complex-lp-and-euclidean-test-function-conventions, def-dependent-choice, def-hahn-banach-extension-principle-relative, def-harmonic-hardy-class-disc, def-l-one-of-a-measure, def-poisson-integral-of-finite-boundary-measure, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-complex-lq-norm-from-finite-simple-dual-tests, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm, cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence, cor-second-countable-lch-locally-finite-borel-measures-are-regular, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-choice-implies-dependent-implies-countable-choice, thm-complex-holder-minkowski-and-the-quotient-norm, thm-extension-of-a-bounded-map-from-a-dense-subspace, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-hahn-banach-dominated-extension, thm-harmonic-hardy-one-measure-representation, thm-poisson-extension-lp-contraction-and-norm-limit, thm-poisson-representation-for-disc-harmonic-functions, thm-reflexivity-of-lp-for-one-less-p-less-infinity, thm-sigma-finite-duality-for-bounded-functionals-on-l-p, thm-ultrafilter-lemma]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: ex-nevanlinna-and-normal-family-picard-proofs
 kind: example
 title: "A normal-family proof of Great Picard"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -16,6 +16,8 @@ sources:
     - title: "Aleksander Simonič, The Ahlfors lemma and Picard's theorems"
       url: "https://arxiv.org/pdf/1506.07019v1"
       locator: "§5.3 Theorem 11 and §5.4 Theorems 13–14, printed pp. 13–15: Schottky normality and the punctured-disc extension argument; the direct exterior lemma is proved in the assigned supplier."
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

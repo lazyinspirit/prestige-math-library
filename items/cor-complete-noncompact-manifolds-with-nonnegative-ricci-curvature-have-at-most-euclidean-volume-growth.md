@@ -2,7 +2,7 @@
 id: cor-complete-noncompact-manifolds-with-nonnegative-ricci-curvature-have-at-most-euclidean-volume-growth
 kind: corollary
 title: Complete noncompact manifolds with nonnegative ricci curvature have at most euclidean volume growth
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-bishop-volume-upper-bound
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-cartier-divisors-mod-principal-to-picard
 kind: theorem
 title: "On an integral scheme, Cartier divisors modulo principal divisors compute the Picard group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -93,7 +94,7 @@ choice principle is used.
 
 1.1 **Well-definedness of the map.** Let $D$ be a Cartier divisor with local-equation datum $\{(U_i,f_i)\}$; by [F3] the subsheaf $\mathcal O_X(D)\subseteq\mathcal K_X$ is well defined and independent of the chosen datum, and by [F4] it is invertible, so its isomorphism class $[\mathcal O_X(D)]$ lies in $\operatorname{Pic}(X)$ by [F6]. This assigns to every $D\in\operatorname{CaDiv}(X)$ a well-defined element $\varphi_X(D)$ of $\operatorname{Pic}(X)$. [F3, F4, F6]
 
-1.2 **Homomorphism.** For Cartier divisors $D,E$ the canonical isomorphism $\mathcal O_X(D+E)\cong\mathcal O_X(D)\otimes_{\mathcal O_X}\mathcal O_X(E)$ of [F5] gives $\varphi_X(D+E)=[\mathcal O_X(D+E)]=[\mathcal O_X(D)][\mathcal O_X(E)]=\varphi_X(D)\varphi_X(E)$ by the product rule in [F6], and $\mathcal O_X(0)=\mathcal O_X$ by [F3] gives $\varphi_X(0)=[\mathcal O_X]$, the identity of $\operatorname{Pic}(X)$; hence $\varphi_X$ is a homomorphism of abelian groups [F1, F3, F5, F6].
+1.2 **Homomorphism.** For Cartier divisors $D,E$ the canonical isomorphism $\mathcal O_X(D+E)\cong\mathcal O_X(D)\otimes_{\mathcal O_X}\mathcal O_X(E)$ of [F5] gives $\varphi_X(D+E)=[\mathcal O_X(D+E)]=[\mathcal O_X(D)][\mathcal O_X(E)]=\varphi_X(D)\varphi_X(E)$ by the product rule in [F6], and $\mathcal O_X(0)=\mathcal O_X$ by [F3] gives $\varphi_X(0)=[\mathcal O_X]$, the identity of $\operatorname{Pic}(X)$; hence $\varphi_X$ is a homomorphism of abelian groups. [F1, F3, F5, F6]
 
 1.3 **Principal divisors have trivial class.** Let $f\in\Gamma(X,\mathcal K_X^{\times})$ and put $D=\operatorname{div}_C(f)=q_X(f)$; by [F2] the divisor $D$ is represented by the single global equation $f$ on $X$, so [F3] gives $\mathcal O_X(D)=f^{-1}\mathcal O_X\subseteq\mathcal K_X$. Multiplication by $f^{-1}$ is an isomorphism $\mathcal O_X\to\mathcal O_X(D)$, $a\mapsto af^{-1}$, of $\mathcal O_X$-modules, with inverse given by multiplication by $f$, so $[\mathcal O_X(D)]=[\mathcal O_X]$ and $\varphi_X(D)=0$ by [F6]; thus $\operatorname{Prin}_C(X)\subseteq\ker\varphi_X$ by [F1] and [F2]. [F1, F2, F3, F6]
 

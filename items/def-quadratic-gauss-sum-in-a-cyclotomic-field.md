@@ -2,7 +2,7 @@
 id: def-quadratic-gauss-sum-in-a-cyclotomic-field
 kind: definition
 title: Quadratic Gauss sum in a prime cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -24,6 +24,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.19, p. 144: the Gauss sum, its square, and the quadratic field it generates."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

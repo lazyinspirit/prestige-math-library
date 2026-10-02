@@ -2,7 +2,7 @@
 id: def-fekete-points-and-transfinite-diameter
 kind: definition
 title: "Fekete points and the transfinite diameter of a compact set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, Fekete points and the transfinite diameter"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

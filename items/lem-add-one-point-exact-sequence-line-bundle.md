@@ -2,7 +2,7 @@
 id: lem-add-one-point-exact-sequence-line-bundle
 kind: lemma
 title: "The exact sequence for adding one point to a divisor"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-finite-type-algebra-over-noetherian-ring-is-noetherian
@@ -68,6 +68,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

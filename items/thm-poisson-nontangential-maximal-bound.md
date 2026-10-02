@@ -2,7 +2,7 @@
 id: thm-poisson-nontangential-maximal-bound
 kind: theorem
 title: "Poisson nontangential maximal function is controlled by circle maximal averages"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-countable-choice, def-circle-maximal-function-and-nontangential-region, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-poisson-kernel-properties-on-the-disc, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-total-variation-is-a-measure, thm-sine-cosine-signs-monotonicity-and-ranges, cor-sine-and-cosine-are-one-lipschitz]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

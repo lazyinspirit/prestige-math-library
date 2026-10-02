@@ -14,11 +14,12 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

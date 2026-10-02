@@ -1,7 +1,7 @@
 ---
 page: stationary-markov-chains-and-ergodic-limits-examples
 title: "Stationary Markov Chains and Ergodic Limits — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-stationary-law-of-a-two-state-chain

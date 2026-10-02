@@ -2,7 +2,7 @@
 id: thm-fatou-nontangential-boundary-theorem-harmonic
 kind: theorem
 title: "Fatou limits for Poisson extensions of L1 boundary data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-countable-choice, def-circle-maximal-function-and-nontangential-region, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-circle-maximal-weak-one-one, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-poisson-kernel-is-a-boundary-approximate-identity, lem-poisson-kernel-properties-on-the-disc, thm-chebyshev-markov-inequality-for-the-integral, thm-finite-and-countable-subadditivity-of-measures, thm-poisson-extension-lp-contraction-and-norm-limit, thm-poisson-nontangential-maximal-bound, thm-rational-points-and-boxes-in-rn]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

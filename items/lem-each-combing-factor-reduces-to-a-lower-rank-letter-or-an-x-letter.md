@@ -2,7 +2,7 @@
 id: lem-each-combing-factor-reduces-to-a-lower-rank-letter-or-an-x-letter
 kind: lemma
 title: "Each combing factor reduces to a lower-rank letter or an x-letter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-zariski-braid-combing-words-alpha-and-x,
@@ -23,6 +23,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-20"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

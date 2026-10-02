@@ -2,7 +2,7 @@
 id: thm-elliptic-function-divisor-laws
 kind: theorem
 title: "Divisor and residue laws for elliptic functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -55,6 +55,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(i)-(iii): existence of the fundamental parallelogram and the divisor conventions for doubly periodic functions."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-conditional-expectation-derandomizes-max-cut-half-approximation
 kind: theorem
 title: "Conditional expectation yields a deterministic half-approximation for Max-Cut"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-finite-simple-graph
@@ -21,6 +21,7 @@ sources:
     - title: "Cornell CS 4820, Lecture notes on randomized approximation algorithms, §1.1.2 Algorithms 1–2, PDF pp. 2–3"
       url: "https://www.cs.cornell.edu/courses/cs4820/2011sp/handouts/approx_algs.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: def-regular-singular-point-analytic-hypersurface
 kind: definition
 title: "Regular and singular points of an analytic hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.19)–(4.21) preparation, discriminant and vanishing ideal (pp. 95–96); II (6.6) principal equation of a codimension-one germ (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

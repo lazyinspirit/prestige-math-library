@@ -2,7 +2,7 @@
 id: def-comparison-triangle-in-the-two-dimensional-space-form
 kind: definition
 title: Comparison triangle in the two dimensional space form
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-comparison-sine-cosine-and-cotangent-functions
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

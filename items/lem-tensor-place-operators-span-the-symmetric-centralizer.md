@@ -2,7 +2,7 @@
 id: lem-tensor-place-operators-span-the-symmetric-centralizer
 kind: lemma
 title: Diagonal tensor operators span the symmetric centralizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-commuting-symmetric-and-linear-actions-on-tensor-power, thm-tensor-product-basis-from-bases, cor-finite-iterated-tensor-products-represent-multilinear-maps, cor-dimensions-of-matrix-and-linear-map-spaces, thm-matrix-representation-is-a-vector-space-isomorphism, thm-universal-property-of-a-polynomial-ring-on-a-family, cor-power-sums-generate-when-factorial-is-invertible, def-elementary-symmetric-polynomials, thm-operator-invertible-iff-determinant-nonzero, def-characteristic-polynomial-of-an-operator, thm-root-bound-for-polynomials-over-a-domain, def-linear-basis, def-dimension]
@@ -21,6 +21,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

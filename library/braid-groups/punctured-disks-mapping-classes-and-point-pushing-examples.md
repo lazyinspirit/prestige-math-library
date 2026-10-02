@@ -1,7 +1,7 @@
 ---
 page: punctured-disks-mapping-classes-and-point-pushing-examples
 title: "Punctured Disks, Mapping Classes, and Point Pushing — Examples"
-status: draft
+status: published
 requires: [punctured-disks-mapping-classes-and-point-pushing]
 items: []
 examples: [ex-a-half-twist-as-a-punctured-disk-homeomorphism,

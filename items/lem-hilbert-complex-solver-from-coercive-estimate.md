@@ -2,7 +2,7 @@
 id: lem-hilbert-complex-solver-from-coercive-estimate
 kind: lemma
 title: A coercive Hilbert-complex estimate solves the closed equation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-hilbert-space
@@ -34,6 +34,7 @@ sources:
       url: https://haroldpboas.gitlab.io/courses/650-2019c/notes.pdf
       locator: "§3.3.3, printed pp. 81-82: the basic estimate implies existence of a solution of the dbar equation in L2."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: rem-duality-trace-normalization
 kind: remark
 title: "Normalization of the trace for Serre duality on a curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -42,6 +42,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025)"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 
 ---

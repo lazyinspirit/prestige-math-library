@@ -2,7 +2,7 @@
 id: lem-prefix-position-insertion-rewrites-a-trivial-braid-word-into-combing-factors
 kind: lemma
 title: "Prefix insertion rewrites a trivial braid word into combing factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-zariski-braid-combing-words-alpha-and-x,
@@ -23,6 +23,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-20"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

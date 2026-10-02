@@ -2,7 +2,7 @@
 id: lem-local-residue-annihilator-regular-sections
 kind: lemma
 title: "Annihilators of regular sections under the local residue pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

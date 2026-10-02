@@ -2,7 +2,7 @@
 id: lem-projective-line-curve-and-divisor-basics
 kind: lemma
 title: Projective-line curve and divisor basics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -40,6 +40,8 @@ sources:
     - title: The Stacks Project; elementary local prerequisite for the Step 5b citation
         repair
       url: https://stacks.math.columbia.edu/download/curves.pdf
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-elliptic-function-for-a-lattice
 kind: definition
 title: "Elliptic function for a lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(iii): doubly periodic functions and their period lattices."
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

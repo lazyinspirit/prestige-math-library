@@ -2,7 +2,7 @@
 id: ex-regular-hyperplane-hypersurface-germ
 kind: example
 title: "A regular hyperplane has a one-sheeted projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (2.10) dimension of O_n (p. 82); II (4.19) finite preparation of degree one (p. 95)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

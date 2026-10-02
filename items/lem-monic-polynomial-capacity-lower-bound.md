@@ -2,7 +2,7 @@
 id: lem-monic-polynomial-capacity-lower-bound
 kind: lemma
 title: "Monic polynomial lower bounds for the Chebyshev constant and capacity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -28,6 +28,8 @@ sources:
     - title: "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, §1"
       url: "https://arxiv.org/pdf/1010.3760"
       locator: "§1, Lemma 1.14 and Proposition 1.13, printed pp. 172-176"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-discriminant-and-branch-locus-weierstrass-hypersurface
 kind: definition
 title: "Discriminant and branch set of a fixed Weierstrass projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.19) discriminant of a finite preparation, and the connected unramified part (p. 95)."
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

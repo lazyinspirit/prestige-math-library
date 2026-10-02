@@ -2,7 +2,7 @@
 id: cex-not-every-open-set-is-a-w-one-p-extension-domain
 kind: counterexample
 title: An inward cusp blocks W^{1,3/2} extension
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-extension-domain-and-extension-operator, def-sobolev-space-wkp-and-its-norm, thm-acl-characterisation-of-w-one-p, thm-tonelli-and-fubini-for-completed-product-measures, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-holder-inequality-for-integrals, thm-polar-coordinates-formula-for-lebesgue-measure, lem-classical-derivatives-are-weak-derivatives, thm-chain-rule-for-total-derivatives, def-axiom-of-choice]
 landmark: false
@@ -13,6 +13,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-pcp-verifier-reduces-to-gap-max-three-sat
 kind: lemma
 title: "A constant-query PCP verifier yields constant-gap Max-3SAT"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-gap-problem-and-gap-preserving-reduction
@@ -22,6 +22,7 @@ sources:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach, §18.2.4 Theorem 18.13 and §18.2.5 Lemma 18.15 with proof, printed pp. 358–360"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

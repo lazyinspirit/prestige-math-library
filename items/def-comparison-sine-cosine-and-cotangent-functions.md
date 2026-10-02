@@ -2,13 +2,14 @@
 id: def-comparison-sine-cosine-and-cotangent-functions
 kind: definition
 title: Comparison sine, cosine and cotangent functions
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

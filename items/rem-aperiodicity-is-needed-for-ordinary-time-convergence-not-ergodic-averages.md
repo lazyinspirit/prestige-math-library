@@ -2,7 +2,7 @@
 id: rem-aperiodicity-is-needed-for-ordinary-time-convergence-not-ergodic-averages
 kind: remark
 title: "Aperiodicity separates ordinary convergence from ergodic averages"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
 sources:
   references:

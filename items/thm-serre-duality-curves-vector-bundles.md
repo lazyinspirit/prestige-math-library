@@ -2,7 +2,7 @@
 id: thm-serre-duality-curves-vector-bundles
 kind: theorem
 title: "Serre duality for finite locally free sheaves on a smooth proper curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
     - title: "Joseph Lipman, Residues, duality, and the fundamental class of a scheme-map (2011)"
       url: "https://www.math.purdue.edu/~lipman/papers/Algecom.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -99,9 +100,15 @@ cohomology groups vanish
 ## Proof
 **Proof technique:** direct; specialise the published smooth-projective duality
 theorem to a curve, where $n=1$ and $q=1$.
+
 1.1 By [F2] the curve $C$ is projective over $k$; it is smooth over $k$ and, being a curve, has underlying space of dimension one, so $X=C$ satisfies the hypotheses of the duality theorem [F6] with pure dimension $n=1$, and the canonical bundle $\omega_C=\Omega^1_{C/k}$ of [F3] is exactly the dualizing line bundle $\bigwedge^1\Omega^1_{C/k}$ of [F4]. [F2, F3, F4]
+
 1.2 The module $\mathcal E$ is finite locally free of rank $r$ by hypothesis; its dual $\mathcal E^\vee$ and the tensor product $\mathcal E^\vee\otimes\omega_C$ are the sheaves of [F5], and the latter is the module paired against $H^1(C,\mathcal E)$ in the duality theorem. [F5]
+
 2.1 Apply the duality theorem [F6] to $X=C$, $n=1$, $E=\mathcal E$ and $q=1$: the cup product, contraction and the normalized trace $t_C\colon H^1(C,\omega_C)\to k$ give a functorial perfect $k$-bilinear pairing $H^1(C,\mathcal E)\times H^0(C,\mathcal E^\vee\otimes\omega_C)\to k$, and both $k$-vector spaces are finite-dimensional. [F6, step 1.1, step 1.2]
+
 3.1 Perfectness of the pairing of step 2.1 says that the induced maps $H^1(C,\mathcal E)\to H^0(C,\mathcal E^\vee\otimes\omega_C)^\ast$ and $H^0(C,\mathcal E^\vee\otimes\omega_C)\to H^1(C,\mathcal E)^\ast$ are bijective; dualising the first gives the canonical $k$-linear isomorphism $H^1(C,\mathcal E)^\ast\cong H^0(C,\mathcal E^\vee\otimes\omega_C)$, and applying $\dim_k$ to either isomorphism gives $h^1(C,\mathcal E)=h^0(C,\mathcal E^\vee\otimes\omega_C)$. [step 2.1]
+
 4.1 Specialisation to rank one: if $r=1$ then $\mathcal E$ is finite locally free of rank one, so the displayed pairing is $H^1(C,\mathcal E)\times H^0(C,\mathcal E^\vee\otimes\omega_C)\to k$ given by the cup product followed by the same normalized trace $t_C$, which is the line-bundle form of Serre duality for curves; thus the present theorem generalises the invertible-coefficient case without changing the trace. [F4, F5, step 3.1]
+
 5.1 No perfectness of $k$ was used: the duality theorem [F6] is stated over an arbitrary field, the projective embedding of step 1.1 and the canonical bundle identification exist over every field, and functoriality in $\mathcal E$ together with embedding-independence of $t_C$ are parts of the cited theorem and definition; the only choice-theoretic input is the Axiom of Choice inherited through the duality suppliers [F1]. [F1, F4, F6, step 4.1] ∎

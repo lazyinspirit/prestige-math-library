@@ -1,7 +1,7 @@
 ---
 page: hormander-estimates-and-the-levi-problem-examples
 title: "Hörmander Estimates and the Levi Problem — Examples"
-status: draft
+status: published
 items: []
 examples: [           ex-hormander-estimate-with-gaussian-weight,
            ex-levi-form-of-the-unit-ball,

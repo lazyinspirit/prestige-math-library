@@ -2,7 +2,7 @@
 id: cex-genus-zero-without-rational-point-not-p1
 kind: counterexample
 title: "A genus-zero curve need not be the projective line"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-algebraic-extensions-of-perfect-fields-are-separable
@@ -59,6 +59,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

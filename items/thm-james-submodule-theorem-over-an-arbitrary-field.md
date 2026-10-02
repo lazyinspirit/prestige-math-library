@@ -2,7 +2,7 @@
 id: thm-james-submodule-theorem-over-an-arbitrary-field
 kind: theorem
 title: James submodule theorem over every field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -29,6 +29,7 @@ sources:
     - title: "Stacey Law, notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Theorem 2.5, Corollary 2.6 and Theorem 2.7, printed pp. 12-13"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

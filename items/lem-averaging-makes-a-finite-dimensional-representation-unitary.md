@@ -2,7 +2,7 @@
 id: lem-averaging-makes-a-finite-dimensional-representation-unitary
 kind: lemma
 title: "Averaging a Hermitian form unitarizes a finite-dimensional compact-group representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-averaged-hermitian-form-for-a-compact-group, def-finite-dimensional-representation-of-a-group-over-a-field, def-real-and-complex-inner-product-space, def-inner-product-space, def-measure-space, def-measure-preserving-transformation-and-system, thm-integrals-are-invariant-under-measure-preserving-maps, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function, def-integrable-real-and-complex-functions-and-their-integrals, def-linear-isometry-and-orthogonal-or-unitary-operator, def-continuous-map-top, thm-continuity-characterisations-top, def-topological-group, def-compact-space, def-hausdorff-space, def-standard-topologies]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

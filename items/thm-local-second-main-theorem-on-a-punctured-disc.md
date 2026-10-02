@@ -2,7 +2,7 @@
 id: thm-local-second-main-theorem-on-a-punctured-disc
 kind: theorem
 title: "The local Second Main Theorem on a punctured disc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,8 @@ sources:
     - title: "A. A. Kondratyuk, Meromorphic functions with several essential singularities"
       url: "https://arxiv.org/abs/0807.1247"
       locator: "Theorem 1, p. 10, and the two-parameter Jensen/First-Main-Theorem discussion (annular Jensen context)"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

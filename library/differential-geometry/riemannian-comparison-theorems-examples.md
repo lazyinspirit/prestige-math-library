@@ -1,7 +1,7 @@
 ---
 page: riemannian-comparison-theorems-examples
 title: "Riemannian Comparison Theorems — Examples"
-status: draft
+status: published
 requires: [riemannian-comparison-theorems]
 items: []
 examples:

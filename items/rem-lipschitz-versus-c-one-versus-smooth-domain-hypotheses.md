@@ -2,7 +2,7 @@
 id: rem-lipschitz-versus-c-one-versus-smooth-domain-hypotheses
 kind: remark
 title: Boundary regularity required by the constructed extension
-status: draft
+status: published
 origin: pipeline
 deps: [cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-axiom-of-choice, thm-meyers-serrin-density-on-an-arbitrary-open-set, rem-meyers-serrin-does-not-assert-density-for-p-infinity, lem-zero-extension-from-w-one-p-zero, def-wkp-zero-as-a-sobolev-closure, def-bounded-c-k-domain-and-boundary-charts, lem-mollification-commutes-with-weak-derivatives-in-the-interior, lem-c-k-boundary-flattening-preserves-wkp-locally, thm-extension-theorem-for-bounded-smooth-domains, thm-smooth-up-to-the-boundary-density-on-smooth-domains]
 landmark: false
@@ -18,6 +18,8 @@ sources:
     - title: Sung-Jin Oh, Lecture Notes for Math 222A (2024), Remark 11.14
       url: https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
       locator: §11.3, Proposition 11.13 and Remark 11.14, printed pp. 157–159
+verification:
+  audited: 2026-10-02
 ---
 
 ## Remark

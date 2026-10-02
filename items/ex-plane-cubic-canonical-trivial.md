@@ -2,7 +2,7 @@
 id: ex-plane-cubic-canonical-trivial
 kind: example
 title: "Adjunction on a smooth plane cubic: the canonical bundle is trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

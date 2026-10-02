@@ -2,7 +2,7 @@
 id: def-apx-hardness-and-apx-completeness
 kind: definition
 title: "APX-hardness and APX-completeness under L-reductions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ptas-fptas-and-apx
@@ -16,6 +16,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §16.2 Definition 16.4 and Theorems 16.5–16.6, printed pp. 413–414"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

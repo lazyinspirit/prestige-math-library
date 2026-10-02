@@ -2,7 +2,7 @@
 id: cor-volume-doubling-under-a-nonnegative-ricci-lower-bound
 kind: corollary
 title: Volume doubling under a nonnegative ricci lower bound
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bishop-gromov-volume-comparison
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

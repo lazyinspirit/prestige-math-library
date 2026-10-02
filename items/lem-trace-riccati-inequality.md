@@ -2,7 +2,7 @@
 id: lem-trace-riccati-inequality
 kind: lemma
 title: Trace riccati inequality
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-radial-riccati-equation
@@ -18,6 +18,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

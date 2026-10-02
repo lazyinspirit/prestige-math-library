@@ -2,7 +2,7 @@
 id: cor-all-four-classical-braid-models-realize-the-artin-presentation
 kind: corollary
 title: "All four classical braid models realize the Artin presentation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-the-artin-presentation-is-complete-for-geometric-braids,
@@ -31,6 +31,7 @@ sources:
     - title: "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, section 9.1.3 'Mapping class group of a punctured disk', printed p. 256 (PDF p. 266)"
       url: "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

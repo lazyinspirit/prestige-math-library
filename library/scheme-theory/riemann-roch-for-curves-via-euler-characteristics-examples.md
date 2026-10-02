@@ -1,7 +1,7 @@
 ---
 page: riemann-roch-for-curves-via-euler-characteristics-examples
 title: "Riemann Roch for Curves via Euler Characteristics — Examples"
-status: draft
+status: published
 requires: [riemann-roch-for-curves-via-euler-characteristics]
 items: []
 examples:

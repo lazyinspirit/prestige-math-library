@@ -2,7 +2,7 @@
 id: cor-unramified-prime-decomposition-in-a-cyclotomic-field
 kind: corollary
 title: Decomposition of an unramified prime in a cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Theorem 11.6 and Remark 11.7, pp. 61-62: for a reduced index N the unramified primes are exactly those not dividing N, with residue degrees the orders of the classes modulo N."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

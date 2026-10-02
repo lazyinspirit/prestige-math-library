@@ -2,7 +2,7 @@
 id: lem-a-compact-scalar-identity-forces-finite-dimension
 kind: lemma
 title: "A nonzero compact scalar identity forces finite dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-compact-linear-operator, lem-compositions-with-a-compact-operator-are-compact, thm-closed-unit-ball-compact-iff-finite-dimensional, lem-reverse-triangle-inequality-in-a-normed-space]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

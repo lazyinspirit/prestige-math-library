@@ -2,7 +2,7 @@
 id: thm-line-bundle-rational-section-cartier-divisor
 kind: theorem
 title: "Rational sections of line bundles are Cartier divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 Exercise 15.2.E (rational section and the sheaf O(div s))"
       url: "https://math.stanford.edu/~vakil/216blog/FOAgoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-principal-divisor-degree-zero-p1
 kind: example
 title: "Principal divisors on the projective line have degree zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -48,6 +48,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/02RS"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 §§15.1–15.3"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example
@@ -157,13 +159,12 @@ $k[u]/(u)\cong k$
 **Proof technique:** factor $p$ and $q$, read off the orders at the finitely
 many points they determine and at infinity, and sum the weighted degrees.
 
-1.1 **Charts and points.** By [F1], $\mathbb P^1_k=U_0\cup U_\infty$, the overlap $D(t)\subseteq U_0$ is identified with $D(u)\subseteq U_\infty$, and $tu=1$ on it; every point of $\mathbb P^1_k$ other than $\infty=(u)$ lies in $U_0$ and corresponds to a prime $\mathfrak p\subseteq k[t]$ with $\mathcal O_{\mathbb P^1_k,x}=k[t]_{\mathfrak p}$. [F1, F2]
-
+1.1 **Charts and points.** By [F1], $\mathbb P^1_k=U_0\cup U_\infty$, the overlap $D(t)\subseteq U_0$ is identified with $D(u)\subseteq U_\infty$, and $tu=1$ on it; every point of $\mathbb P^1_k$ other than $\infty=(u)$ lies in $U_0$ and corresponds to a prime $\mathfrak p\subseteq k[t]$ with $\mathcal O_{\mathbb P^1_k,x}=k[t]_{\mathfrak p}$.
 Since $(u)\subseteq k[u]$ is maximal with $k[u]/(u)\cong k$, every prime of
 $k[u]$ containing $u$ equals $(u)$; hence $U_\infty\smallsetminus\{\infty\}=D(u)=U_0\cap U_\infty$.
+[F1, F2]
 
-1.2 **Integrality, normality, function field, dimension.** $\mathbb P^1_k$ is an integral finite-type $k$-scheme of chain dimension one, every local ring of it is an integrally closed domain, and its function field is $k(t)=k(u)$ with $t=u^{-1}$. [F1, F3, F4, F5]
-
+1.2 **Integrality, normality, function field, dimension.** $\mathbb P^1_k$ is an integral finite-type $k$-scheme of chain dimension one, every local ring of it is an integrally closed domain, and its function field is $k(t)=k(u)$ with $t=u^{-1}$.
 $U_0$ and $U_\infty$ are integral and glued along the nonempty open
 $D(t)\cong D(u)$, so $\mathbb P^1_k$ is integral, and finite type over $k$
 because its affine charts are. Localisations of integrally closed domains are
@@ -179,18 +180,18 @@ subsets are finite unions of points; since $U_0$ is dense in $\mathbb P^1_k$,
 the only proper irreducible closed subsets of $\mathbb P^1_k$ are the points,
 so its chain dimension is one
 ([[def-dimension-noetherian-topological-space]]).
+[F1, F3, F4, F5]
 
-1.3 **Factorisations and the degree count.** $p=\prod_i r_i^{a_i}$ and $q=\prod_j s_j^{b_j}$ with pairwise distinct monic irreducibles $r_i$ and $s_j$, no $r_i$ equal to any $s_j$, and $m=\sum_ia_i\deg r_i$, $n=\sum_jb_j\deg s_j$. [F8]
-
+1.3 **Factorisations and the degree count.** $p=\prod_i r_i^{a_i}$ and $q=\prod_j s_j^{b_j}$ with pairwise distinct monic irreducibles $r_i$ and $s_j$, no $r_i$ equal to any $s_j$, and $m=\sum_ia_i\deg r_i$, $n=\sum_jb_j\deg s_j$.
 The monic polynomial $p$ factors as a product of monic irreducibles: a
 factorisation $p=c\prod r_i^{a_i}$ has leading coefficient
 $c\prod(\text{leading coefficients})=c$ if each $r_i$ is monic, so $c=1$; the
 same holds for $q$. Coprimality of $p$ and $q$ says no monic irreducible
 divides both, so the two families are disjoint. Degrees add:
 $m=\deg p=\sum_ia_i\deg r_i$ and $n=\deg q=\sum_jb_j\deg s_j$.
+[F8]
 
-1.4 **Orders at the finite points.** For every monic irreducible $r\in k[t]$, $\operatorname{ord}_{[r]}(f)$ equals $a_i$ if $r=r_i$, equals $-b_j$ if $r=s_j$, and is $0$ otherwise. [F7, F9, 1.1, 1.3]
-
+1.4 **Orders at the finite points.** For every monic irreducible $r\in k[t]$, $\operatorname{ord}_{[r]}(f)$ equals $a_i$ if $r=r_i$, equals $-b_j$ if $r=s_j$, and is $0$ otherwise.
 Let $r$ be monic irreducible and $\mathfrak p=(r)$. The local ring
 $\mathcal O_{\mathbb P^1_k,[r]}=k[t]_{\mathfrak p}$ is a one-dimensional local
 domain [F4] and hence a discrete valuation ring whose maximal ideal is
@@ -199,9 +200,9 @@ $r_i\nmid q$, so $q$ is a unit of $k[t]_{\mathfrak p}$ and additivity gives
 $\operatorname{ord}_{[r]}(f)=a_i\cdot1-0=a_i$; if $r=s_j$ then $p$ is a unit
 and $q=r^{b_j}\cdot(\text{unit})$, giving $\operatorname{ord}_{[r]}(f)=-b_j$;
 and if $r$ divides neither $p$ nor $q$, both are units and the order is $0$.
+[F7, F9, 1.1, 1.3]
 
-1.5 **Order at infinity.** $\operatorname{ord}_\infty(p)=-m$, $\operatorname{ord}_\infty(q)=-n$, and hence $\operatorname{ord}_\infty(f)=n-m$. [F7, 1.2, 1.3]
-
+1.5 **Order at infinity.** $\operatorname{ord}_\infty(p)=-m$, $\operatorname{ord}_\infty(q)=-n$, and hence $\operatorname{ord}_\infty(f)=n-m$.
 On $U_\infty$ one has $t=u^{-1}$, so for a monic polynomial
 $g(t)=t^d+c_{d-1}t^{d-1}+\dots+c_0$ of degree $d$,
 $g=u^{-d}\bigl(1+c_{d-1}u+\dots+c_0u^d\bigr)$ with the second factor equal to
@@ -209,23 +210,24 @@ $1$ at $u=0$, hence a unit of $k[u]_{(u)}=O_{\mathbb P^1_k,\infty}$; with the
 uniformiser $u$ this gives $\operatorname{ord}_\infty(g)=-d$. Applying this to
 $p$ and $q$ and using additivity yields
 $\operatorname{ord}_\infty(f)=(-m)-(-n)=n-m$.
+[F7, 1.2, 1.3]
 
-1.6 **The divisor.** $\operatorname{div}(f)=\sum_ia_i[r_i]-\sum_jb_j[s_j]+(n-m)[\infty]$, a finite Weil sum, and all its terms are closed points, so it is an element of $\operatorname{Div}(\mathbb P^1_k)$. [F6, F7, 1.4, 1.5]
-
+1.6 **The divisor.** $\operatorname{div}(f)=\sum_ia_i[r_i]-\sum_jb_j[s_j]+(n-m)[\infty]$, a finite Weil sum, and all its terms are closed points, so it is an element of $\operatorname{Div}(\mathbb P^1_k)$.
 By steps 1.4 and 1.5 these are exactly the nonzero orders of $f$ at prime
 divisors; the remaining prime divisors have order zero. The support is finite,
 so the locally finite sum of [F7] is this finite sum, and since
 $\mathbb P^1_k$ has chain dimension one its prime divisors are closed points
 [F6].
+[F6, F7, 1.4, 1.5]
 
-1.7 **Degree.** $\deg_k\operatorname{div}(f)=\sum_ia_i\deg r_i-\sum_jb_j\deg s_j+(n-m)=m-n+(n-m)=0$. [F6, F9, 1.3, 1.5, 1.6]
-
+1.7 **Degree.** $\deg_k\operatorname{div}(f)=\sum_ia_i\deg r_i-\sum_jb_j\deg s_j+(n-m)=m-n+(n-m)=0$.
 By step 1.3 the finite terms have total degree
 $\sum_ia_i\deg r_i-\sum_jb_j\deg s_j=m-n$, by [F9] the residue degree of
 $[r]$ is $[\kappa([r]):k]=\deg r$ and $[\kappa(\infty):k]=1$, and by [F6] the
 degree is additive over the coefficients; adding the coefficient
 $\operatorname{ord}_\infty(f)=n-m$ of step 1.5 gives
 $m-n+(n-m)=0$.
+[F6, F9, 1.3, 1.5, 1.6]
 
 2.1 **Conclusion.** On $\mathbb P^1_k$ the principal divisor of $f=p/q$ is $\sum_ia_i[r_i]-\sum_jb_j[s_j]+(n-m)[\infty]$ and has degree zero; the Axiom of Choice is inherited from the two-affine projective-line construction [F1] and the properness theorem [F6]. The finite factorisation and valuation computation make no further choice. [F1, F6, 1.6, 1.7] ∎
 

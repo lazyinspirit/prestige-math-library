@@ -1,7 +1,7 @@
 ---
 page: perfect-complexes-and-triangulated-grothendieck-groups-examples
 title: "Perfect Complexes and Triangulated Grothendieck Groups — Examples"
-status: draft
+status: published
 requires: [perfect-complexes-and-triangulated-grothendieck-groups]
 items: []
 examples:

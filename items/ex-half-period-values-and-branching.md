@@ -2,7 +2,7 @@
 id: ex-half-period-values-and-branching
 kind: example
 title: "Half-period values of the square lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(i)-(iii), equations 23.2.1-23.2.14: lattices, the wp-series and periodicity; §23.3(i), equations 23.3.1-23.3.7: the invariants, the cubic 4z^3-g2z-g3 with roots e1,e2,e3, and g3=4e1e2e3."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

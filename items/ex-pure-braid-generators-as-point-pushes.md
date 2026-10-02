@@ -2,7 +2,7 @@
 id: ex-pure-braid-generators-as-point-pushes
 kind: example
 title: "Standard $A_{ij}$ as point pushes after relabeling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-standard-pure-braid-generators,
@@ -43,6 +43,8 @@ sources:
       url: "https://arxiv.org/pdf/1010.0321"
     - title: "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, sections 4.2.1-4.2.3, printed pp. 101-105 (point pushing)"
       url: "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

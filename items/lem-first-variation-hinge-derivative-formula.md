@@ -2,7 +2,7 @@
 id: lem-first-variation-hinge-derivative-formula
 kind: lemma
 title: First-variation hinge derivative formula
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-first-variation-formula-for-length
@@ -15,6 +15,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -89,5 +90,6 @@ By [F4] applied to $f=r_o$ and the curve $\gamma$ on $[0,\delta]$, $$\frac{d}{dt
 3.1 Identification with the included angle. [step 2.1]
 Both legs are unit speed, so $-\dot\sigma(\rho)$ and $\dot\gamma(0)$ are unit vectors; the angle $\theta\in[0,\pi]$ at the vertex between the direction back along the first leg and the direction along the second leg is defined by $\cos\theta=g_p(-\dot\sigma(\rho),\dot\gamma(0))=-g_p(\dot\sigma(\rho),\dot\gamma(0))$. Step 2.1 therefore reads $\frac{d}{dt}\big|_{0^+}d_g(o,\gamma(t))=-g_p(-\dot\sigma(\rho),\dot\gamma(0))=-\cos\theta$, which is the formula of part (b). Since the metric is positive definite, $|g_p(\dot\sigma(\rho),\dot\gamma(0))|\le1$, so the derivative lies in $[-1,1]$. This proves both parts. [step 2.1]
 
-4.1 Boundary and choice audit. [A1, F1, F2, F3, F4, step 1.1, step 3.1]
-The hypotheses $L>0$ and "velocity never vanishes" are exactly the regularity requirement of [F1]; $a>0$ and $\rho>0$ keep both legs nondegenerate, and $p\neq o$ with $p\notin\operatorname{Cut}(o)$ is exactly what makes $r_o$ smooth at $p$ in step 2.1 and the radial segment $\sigma$ minimizing in step 1.3. For $t=0$ the derivative is one-sided, as stated. In dimension one the hinge angle is $0$ or $\pi$ and the formula reads $\mp1$, consistent with the fact that the opposite-side distance is locally the sum or difference of lengths. No step divides by the hinge angle or by the length of the second leg, and no minimality of $\gamma$ is used. Exactly [A1] is inherited; no family is selected at any step. ∎
+4.1 Boundary and choice audit.
+The hypotheses $L>0$ and "velocity never vanishes" are exactly the regularity requirement of [F1]; $a>0$ and $\rho>0$ keep both legs nondegenerate, and $p\neq o$ with $p\notin\operatorname{Cut}(o)$ is exactly what makes $r_o$ smooth at $p$ in step 2.1 and the radial segment $\sigma$ minimizing in step 1.3. For $t=0$ the derivative is one-sided, as stated. In dimension one the hinge angle is $0$ or $\pi$ and the formula reads $\mp1$, consistent with the fact that the opposite-side distance is locally the sum or difference of lengths. No step divides by the hinge angle or by the length of the second leg, and no minimality of $\gamma$ is used. Exactly [A1] is inherited; no family is selected at any step.
+[A1, F1, F2, F3, F4, step 1.1, step 3.1] ∎

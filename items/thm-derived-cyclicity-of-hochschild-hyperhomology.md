@@ -2,7 +2,7 @@
 id: thm-derived-cyclicity-of-hochschild-hyperhomology
 kind: theorem
 title: "Derived cyclicity of Hochschild hyperhomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -37,6 +37,7 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf"
       locator: "§9.1.3–9.1.5: bar resolutions and the bar-tensor model for Hochschild chains; the projective-complex comparison used below is proved from the cited library suppliers."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

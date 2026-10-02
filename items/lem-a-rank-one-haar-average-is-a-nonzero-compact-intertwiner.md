@@ -2,7 +2,7 @@
 id: lem-a-rank-one-haar-average-is-a-nonzero-compact-intertwiner
 kind: lemma
 title: "A positive rank-one Haar average is a nonzero compact intertwiner"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-strongly-continuous-unitary-representation, def-hilbert-space, def-real-and-complex-inner-product-space, thm-cauchy-schwarz-in-an-inner-product-space, def-topological-group, def-compact-space, def-hausdorff-space, def-bounded-linear-operator, def-operator-norm, def-compact-linear-operator, def-linear-basis, def-linear-combination-and-span, def-continuous-map-top, def-countable-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, lem-conjugation-orbits-of-finite-rank-operators-are-norm-continuous, lem-finite-rank-operators-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, thm-bounded-operator-space-is-banach, def-banach-space, def-bochner-integrable-function, def-strongly-measurable-banach-valued-function, def-banach-valued-simple-function-and-integral, lem-banach-valued-simple-integral-is-well-defined, thm-bochner-integrability-criterion, lem-bochner-integral-norm-inequality, thm-bounded-linear-maps-commute-with-bochner-integration, thm-integrals-are-invariant-under-measure-preserving-maps, thm-compactness-under-continuous-maps, thm-compactness-agrees-with-metric-compactness, thm-compact-implies-complete-and-totally-bounded, def-totally-bounded, def-metric-ball, def-metric-space, def-borel-sigma-algebra, thm-continuous-preimages-of-borel-sets-are-borel, def-measure-space, lem-finite-choice]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

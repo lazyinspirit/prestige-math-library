@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-compact-group-representations-are-completely-reducible
 kind: theorem
 title: "Complete reducibility of finite-dimensional compact-group representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, def-subrepresentation-and-irreducible-representation, def-completely-reducible-representation, def-finite-dimensional-representation-of-a-group-over-a-field, def-linear-basis, def-dimension, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-real-and-complex-inner-product-space, def-hilbert-space, def-banach-space, def-linear-subspace, def-topological-group, def-compact-space, def-hausdorff-space, lem-averaging-makes-a-finite-dimensional-representation-unitary, lem-unitary-invariant-subspaces-have-invariant-orthogonal-complements, thm-finite-dimensional-orthogonal-decomposition, cor-finite-dimensional-subspaces-are-closed, thm-dimension-of-a-linear-subspace, cor-dimension-of-a-direct-sum, cor-finite-dimensional-normed-spaces-are-banach, thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent, def-equivalent-norms, def-operator-norm, def-bounded-linear-operator, thm-strong-induction]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: induction
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

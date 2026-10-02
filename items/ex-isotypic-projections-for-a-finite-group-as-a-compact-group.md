@@ -2,7 +2,7 @@
 id: ex-isotypic-projections-for-a-finite-group-as-a-compact-group
 kind: example
 title: "Isotypic Haar projections specialize to finite character sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, def-group, def-finite-cardinality, def-standard-topologies, def-product-topology, def-continuous-map-top, def-compact-space, def-hausdorff-space, def-topological-group, lem-finite-choice, def-strongly-continuous-unitary-representation, def-hilbert-space, def-real-and-complex-inner-product-space, thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional, def-dimension, def-linear-subspace, def-linear-combination-and-span, cor-finite-dimensional-subspaces-are-closed, cor-normalized-haar-probability-on-a-compact-group, def-left-haar-integral-and-left-haar-measure, def-measure-space, def-measure, def-borel-sigma-algebra, def-compact-group-isotypic-projection, def-banach-valued-simple-function-and-integral, lem-banach-valued-simple-integral-is-well-defined, def-bochner-integrable-function, def-strongly-measurable-banach-valued-function, def-finite-sum-in-a-commutative-monoid, def-trace-of-an-endomorphism, def-linear-isometry-and-orthogonal-or-unitary-operator, thm-isotypic-projections-are-mutually-orthogonal-equivariant-projections]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: cex-visible-artin-relations-alone-do-not-prove-presentation-completeness
 kind: counterexample
 title: "Visible Artin relations alone do not prove presentation completeness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-the-artin-presentation-is-complete-for-geometric-braids,
@@ -27,6 +27,7 @@ sources:
     - title: "Ashot Minasyan, MATH6138 Geometric Group Theory, section 2.2 (von Dyck's theorem and the failure of injectivity for a relator that dies in a larger quotient)"
       url: "https://www.personal.soton.ac.uk/am4x07/rs/MATH6138-notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

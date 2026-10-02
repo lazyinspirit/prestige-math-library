@@ -2,7 +2,7 @@
 id: prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality
 kind: proposition
 title: p-regular and p-restricted labels under transpose and sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -30,6 +30,7 @@ sources:
     - title: "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, Remark 5.5 (q=1 dictionary D^mu = D(mu^t) tensor sgn), PDF p. 25"
       url: "https://arxiv.org/pdf/0909.4844"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

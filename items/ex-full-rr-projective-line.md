@@ -2,7 +2,7 @@
 id: ex-full-rr-projective-line
 kind: example
 title: "The full Riemann-Roch theorem on the projective line, in every degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 
 ---

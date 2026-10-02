@@ -1,7 +1,7 @@
 ---
 page: "poisson-problems-and-interior-harmonic-estimates-examples"
 title: "Poisson Problems and Interior Harmonic Estimates — Examples"
-status: draft
+status: published
 items: []
 examples: ["cex-poisson-integral-need-not-recover-discontinuous-data-at-the-jump", "cex-poisson-integral-on-the-half-space-is-not-unique-without-growth-control", "cex-exterior-dirichlet-uniqueness-needs-growth-or-decay-control", "cex-smooth-does-not-imply-real-analytic-for-general-pde", "ex-poisson-kernel-concentrates-at-a-boundary-point", "ex-poisson-extension-of-a-coordinate-function-on-a-ball", "ex-half-space-poisson-extension-of-a-plane-wave", "cex-interior-estimates-cannot-use-distance-zero-to-the-boundary", "ex-harmonic-taylor-series-on-a-ball"]
 ---

@@ -1,7 +1,7 @@
 ---
 page: riesz-potentials-and-the-hardy-littlewood-sobolev-inequality
 title: "Riesz Potentials and the Hardy–Littlewood–Sobolev Inequality"
-status: draft
+status: published
 items: [def-riesz-potential-of-order-alpha,
         lem-riesz-potential-near-far-splitting,
         lem-hedberg-pointwise-inequality,

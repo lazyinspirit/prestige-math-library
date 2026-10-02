@@ -2,7 +2,7 @@
 id: thm-riesz-decomposition-subharmonic-plane
 kind: theorem
 title: "Local Riesz decomposition of a plane subharmonic function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§5, the Riesz decomposition of a subharmonic function"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -124,6 +125,7 @@ The potential and averaging estimates themselves are choice-free.
 6.1 On each connected component $D_0$ of $D$, the function $g:=h+p$ is subharmonic: $h|_{D_0}$ is harmonic and hence subharmonic by [F8], and $p|_{D_0}$ inherits upper semicontinuity and the circle inequality from step 2.1 and cannot be identically $-\infty$ because it is locally integrable. The sum is subharmonic by [F8]. Likewise $u|_{D_0}$ is subharmonic by [F1] and its local integrability [F9]. Step 5.1 gives $u=g$ almost everywhere on $D$. [step 2.1, step 5.1, F1, F8, F9, F12]
 
 7.1 For fixed $a\in D$ choose $R>0$ with $\overline{D(a,R)}\subseteq D$. By step 2.1 and [F9], $u,g\in L^1_{\rm loc}(D)$. Replace their values $-\infty$ by $0$ to obtain finite Borel representatives $\tilde u,\tilde g$; they agree with $u,g$ almost everywhere and satisfy $\tilde u=\tilde g$ almost everywhere by step 6.1. Thus $q:=|\tilde u-\tilde g|$ is a nonnegative Borel function with $q=0$ almost everywhere. Applying [F10] to $q+|\tilde u|+|\tilde g|$ on $B(a,R)$ shows that for almost every $r\in(0,R)$ the restrictions of $\tilde u,\tilde g$ to the circle are integrable and agree almost everywhere in angle. Since the representatives differ from the subharmonic functions only on planar null sets, [F10] also makes those exceptional sets arclength-null for almost every $r$. Hence $A_r(u)(a)=A_r(g)(a)$ for almost every $r\in(0,R)$, where $A_r(v)(a):=(2\pi)^{-1}\int_0^{2\pi}v(a+re^{it})\,dt$. [step 6.1, F9, F10]
+
 8.1 Let $S\subseteq(0,R)$ be the full-measure set of radii from step 7.1 for which the circle means agree. Each $S\cap(0,\min(R/2,1/(n+1)))$ is nonempty, so Countable Choice [F3] gives $r_n\in S\cap(0,\min(R/2,1/(n+1)))$ for every $n$; then $r_n\to0$. By step 1.2, applied to the subharmonic functions $u$ and $g$ at $a$, $u(a)=\lim_nA_{r_n}(u)(a)=\lim_nA_{r_n}(g)(a)=g(a)$. Since $a\in D$ was arbitrary, $u=h+p$ everywhere on $D$, which is the asserted decomposition. [step 7.1, step 1.2, F3]
 
 9.1 With $M'=M$ from step 3.2 we have $h'+p=h+p$ everywhere on $D$ by the decomposition of step 8.1, and $p$ is finite almost everywhere because $p\in L^1_{\mathrm{loc}}(D)$ by step 2.1; hence $h'=h$ almost everywhere on $D$. The difference $h'-h$ is harmonic, hence continuous, on the open set $D$, and an almost-everywhere-vanishing continuous function on $D$ vanishes everywhere, since a set of full measure in a nonempty open set is dense; therefore $h'=h$, and the decomposition is unique in both entries. [step 2.1, step 8.1, step 3.2, F6, F9] ∎

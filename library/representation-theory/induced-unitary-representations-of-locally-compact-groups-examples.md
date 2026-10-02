@@ -1,7 +1,7 @@
 ---
 page: induced-unitary-representations-of-locally-compact-groups-examples
 title: Induced Unitary Representations of Locally Compact Groups — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-unitary-induction-from-the-trivial-subgroup

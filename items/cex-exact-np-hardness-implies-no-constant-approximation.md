@@ -2,7 +2,7 @@
 id: cex-exact-np-hardness-implies-no-constant-approximation
 kind: counterexample
 title: "Minimum vertex cover refutes the exact-hardness approximation claim"
-status: draft
+status: published
 origin: pipeline
 deps:
   - fs-exact-np-hardness-implies-no-constant-approximation
@@ -23,6 +23,7 @@ sources:
     - title: "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §2.2.2 Theorem 8, PDF pp. 4–5"
       url: "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

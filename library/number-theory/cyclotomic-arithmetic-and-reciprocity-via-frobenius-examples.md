@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-arithmetic-and-reciprocity-via-frobenius-examples
 title: "Cyclotomic Arithmetic and Reciprocity via Frobenius — Examples"
-status: draft
+status: published
 requires:
   - cyclotomic-arithmetic-and-reciprocity-via-frobenius
 items: []

@@ -2,7 +2,7 @@
 id: def-radial-riccati-operator
 kind: definition
 title: Radial riccati operator
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-radial-jacobi-tensor
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

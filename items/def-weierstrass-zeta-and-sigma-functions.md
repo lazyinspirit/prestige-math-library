@@ -2,7 +2,7 @@
 id: def-weierstrass-zeta-and-sigma-functions
 kind: definition
 title: "Weierstrass $\\zeta$ and $\\sigma$ functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -28,6 +28,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii)-(iii): 23.2.9-23.2.13 for sigma, 23.2.14-23.2.17 for zeta and the quasi-periods eta_j."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

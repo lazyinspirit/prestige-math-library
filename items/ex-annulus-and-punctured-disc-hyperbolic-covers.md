@@ -2,7 +2,7 @@
 id: ex-annulus-and-punctured-disc-hyperbolic-covers
 kind: example
 title: "Annulus and punctured disc have hyperbolic universal covers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -47,6 +47,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 16 printed pp. 146-147 for hyperbolic geometry; Ch. 17 printed p. 157 for uniformization statement only"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

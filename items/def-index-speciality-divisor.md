@@ -2,7 +2,7 @@
 id: def-index-speciality-divisor
 kind: definition
 title: "The index of speciality i(D)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -40,6 +40,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

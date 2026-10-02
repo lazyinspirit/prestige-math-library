@@ -2,7 +2,7 @@
 id: rem-general-analytic-sets-need-more-than-hypersurface-arguments
 kind: remark
 title: "The single-equation proof does not cover arbitrary analytic sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -22,6 +22,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (6.6) codimension-one germs are defined by principal ideals (pp. 106–107); Chapter III coherence of the sheaf of holomorphic functions."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

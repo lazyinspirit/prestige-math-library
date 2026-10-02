@@ -2,7 +2,7 @@
 id: lem-weierstrass-p-degree-two-and-half-periods
 kind: lemma
 title: "Degree two of ℘ and its four branch points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -47,6 +47,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(iii), equations 23.2.9-23.2.10: the periods of wp and the half-period zeros of wp'."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

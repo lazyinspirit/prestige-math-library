@@ -2,7 +2,7 @@
 id: cor-total-ramification-in-a-prime-power-cyclotomic-field
 kind: corollary
 title: Total ramification at a prime-power cyclotomic level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 10, Corollary 10.7, p. 58: Z[zeta]/(zeta-1) = Z/pZ, so (zeta-1) is prime and is the unique prime containing p."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-algebraic-integer-is-a-unit-iff-norm-is-plus-or-minus-one
 kind: lemma
 title: A number-field unit is exactly an algebraic integer of norm plus or minus one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§8.1 Proposition 8.1.4 p.89: the same unit criterion."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

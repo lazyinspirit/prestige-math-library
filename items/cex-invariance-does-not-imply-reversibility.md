@@ -2,7 +2,7 @@
 id: cex-invariance-does-not-imply-reversibility
 kind: counterexample
 title: "An invariant law need not be reversible"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -17,6 +17,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

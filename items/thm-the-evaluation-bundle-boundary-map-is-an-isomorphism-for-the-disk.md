@@ -2,7 +2,7 @@
 id: thm-the-evaluation-bundle-boundary-map-is-an-isomorphism-for-the-disk
 kind: theorem
 title: "Evaluation boundary isomorphism for the disk"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-boundary-map-from-point-motions-to-punctured-disk-mapping-classes,
@@ -28,6 +28,7 @@ sources:
     - title: "Brayton Gray, Homotopy Theory: An Introduction to Algebraic Topology, Chapter 8 on fibre spaces and exact sequences"
       url: "https://doi.org/10.1016/B978-0-12-296050-5.50014-0"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -85,10 +86,15 @@ distinguished element
 
 ## Proof
 **Proof technique:** direct.
+
 1.1 *The two low-degree terms of the total space are trivial.* By [L3] the space $E$ is contractible, so by [L4] it is path-connected, that is $\pi_0(E)$ is a one-point set and the induced map $\pi_0(F)\to\pi_0(E)$ is constant; and $\pi_1(E,\operatorname{id})=\{1\}$ is the trivial group. Both statements hold for every $n\ge0$ because neither depends on the number of marked points. [L3, L4]
+
 1.2 *The boundary map is a group homomorphism.* By [L2], $\delta$ is a well-defined map $\pi_1(B,[Q_n])\to\pi_0(F)$ preserving the products of [L6]; that is, $\delta$ is a group homomorphism and the two displayed groups are the ones from the fibration exact sequence. [L2, L6]
+
 2.1 *Injectivity.* The map $\operatorname{ev}$ is a Hurewicz fibration with fibre $F$ over the basepoint by [L1], so the exact sequence [L5] applies to it; exactness at $\pi_1(B)$ says that the kernel of $\delta$ equals the image of $\operatorname{ev}_*:\pi_1(E,\operatorname{id})\to\pi_1(B,[Q_n])$. By step 1.1 the group $\pi_1(E,\operatorname{id})$ is trivial, so its image is the trivial subgroup, and the kernel of $\delta$ is trivial: distinct classes in $\pi_1(B,[Q_n])$ have distinct images in $\pi_0(F)$. [L1, L2, L5, step 1.1]
+
 2.2 *Surjectivity.* The exact sequence [L5] applies to $\operatorname{ev}$ by the fibration statement [L1]; exactness at $\pi_0(F)$ says that the image of $\delta$ equals the kernel of $i_*:\pi_0(F)\to\pi_0(E)$, the kernel of a map of pointed sets being the preimage of the distinguished component. By step 1.1 the set $\pi_0(E)$ is a single point, so every element of $\pi_0(F)$ is sent to the unique component of $E$ and the kernel of $i_*$ is all of $\pi_0(F)$. Hence every element of $\pi_0(F)=\operatorname{Mod}(D^2,Q_n;\partial D^2)$ is the image under $\delta$ of some class in $\pi_1(B,[Q_n])$. [L1, L5, step 1.1]
+
 3.1 *The isomorphism and the elementary cases.* By steps 1.2 and 2.1 the homomorphism $\delta$ is injective, and by step 2.2 it is surjective; a bijective group homomorphism is an isomorphism by [L7], which proves the claim for every $n\ge0$. The case $n=0$ is included in this argument: $B=C_0(\operatorname{int}D^2)$ is a one-point space, $F=E$, the evaluation fibration is the constant projection $E\to\{[Q_0]\}$ of the contractible space $E$, and both $\pi_1(B,[Q_0])$ and $\pi_0(F)$ are trivial, as the steps above give; for $n=1$ only the collision condition disappears from $B$ and the argument is unchanged. [L2, L5, L7, step 1.1, step 1.2, step 2.1, step 2.2] ∎
 
 ## Remarks

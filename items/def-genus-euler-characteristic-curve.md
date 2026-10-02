@@ -2,7 +2,7 @@
 id: def-genus-euler-characteristic-curve
 kind: definition
 title: Genus via the Euler characteristic
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-top-cohomology-projective-space-o-d
@@ -32,6 +32,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

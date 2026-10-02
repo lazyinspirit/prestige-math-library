@@ -2,7 +2,7 @@
 id: def-weierstrass-elliptic-p-function
 kind: definition
 title: "Weierstrass p function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -26,6 +26,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii): the lattice sum for wp and its convergence."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

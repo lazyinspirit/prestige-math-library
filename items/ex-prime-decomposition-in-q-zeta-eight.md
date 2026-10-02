@@ -2,7 +2,7 @@
 id: ex-prime-decomposition-in-q-zeta-eight
 kind: example
 title: Prime decomposition in Q(zeta_8)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Example 8.18, pp. 143-144: for odd p the order of p modulo 8 is the residue degree, namely 1 for p = 1 mod 8 and 2 for p = 3,5,7 mod 8."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: cor-no-nontrivial-number-field-is-unramified-over-q
 kind: corollary
 title: "Every nontrivial number field has a ramified finite prime"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§28 Theorem 28.3, p.147."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -119,12 +120,19 @@ ramifies in $K/\mathbb Q$ if and only if $p\mid d_K$
 ## Proof
 
 1.1 Fix an integral basis $\alpha_1,\dots,\alpha_n$ of $\mathcal O_K$, which exists by [F2]. By [F1] and [F3] the integer $|d_K|$ is greater than $1$, so [F12] gives a rational prime $p$ dividing $d_K$. [F1, F2, F3, F12, choose]
+
 1.2 Put $A:=\mathcal O_K/p\mathcal O_K$. Since $\mathcal O_K$ is free with $\mathbb Z$-basis $\alpha_1,\dots,\alpha_n$ by [F2], the classes $\bar\alpha_1,\dots,\bar\alpha_n$ form an $\mathbb F_p$-basis of $A$; in particular $\dim_{\mathbb F_p}A=n$. [F2, algebra]
+
 1.3 Factorisation: by [F5], write $p\mathcal O_K=\mathfrak P_1^{e_1}\cdots\mathfrak P_r^{e_r}$ with distinct nonzero primes $\mathfrak P_i$ and $e_i\ge1$. Distinct maximal ideals satisfy $\mathfrak P_i+\mathfrak P_j=\mathcal O_K$; choosing $u+v=1$ with $u\in\mathfrak P_i$, $v\in\mathfrak P_j$ and expanding $(u+v)^{e_i+e_j-1}$ exhibits every term as an element of $\mathfrak P_i^{e_i}+\mathfrak P_j^{e_j}$, so $1$ lies in that sum and the powers are pairwise comaximal. Applying [F6] to the ideals $\mathfrak P_i^{e_i}$ gives an isomorphism $A\cong\prod_{i=1}^rA_i$ with $A_i:=\mathcal O_K/\mathfrak P_i^{e_i}$. [F5, F6, algebra]
+
 1.4 Reducedness of the factors: ideals of $R/I$ correspond to ideals of $R$ containing $I$, so the maximal ideals of $A_i$ are the images of maximal ideals of $\mathcal O_K$ containing $\mathfrak P_i^{e_i}$; a maximal ideal containing $\mathfrak P_i^{e_i}$ contains the prime $\mathfrak P_i$, hence equals it, and $\mathfrak m_i:=\mathfrak P_i/\mathfrak P_i^{e_i}$ is the unique maximal ideal of $A_i$, with $A_i/\mathfrak m_i=\mathcal O_K/\mathfrak P_i$ a finite field by [F5]. If $e_i=1$ then $A_i=\mathcal O_K/\mathfrak P_i$ is a field and reduced. If $e_i\ge2$ then $\mathfrak P_i^{e_i}\subsetneq\mathfrak P_i$: otherwise $\mathfrak P_i^{e_i}=\mathfrak P_i$, and multiplying by the inverse ideal $\mathfrak P_i^{-1}$, which exists by [F11], gives $\mathfrak P_i^{e_i-1}=\mathcal O_K\subseteq\mathfrak P_i$, a contradiction; so some $x\in\mathfrak P_i\setminus\mathfrak P_i^{e_i}$ has nonzero image in $A_i$ with $x^{e_i}\in\mathfrak P_i^{e_i}$, a nonzero nilpotent. Therefore $A_i$ is reduced exactly when $e_i=1$, and since a finite product of nonzero rings is reduced exactly when each factor is, $A$ is reduced exactly when all $e_i=1$; by [F5] this is exactly the case that $p$ is unramified. [F5, F11, algebra]
+
 2.1 Trace form and discriminant: for $x\in\mathcal O_K$, multiplication by $x$ on $\mathcal O_K$ has matrix with integer entries in the basis $\alpha_i$ and trace $\operatorname{Tr}_{K/\mathbb Q}(x)$ by [F4]. Reducing modulo $p$ shows that multiplication by $\bar x$ on $A$ has $\mathbb F_p$-trace $\operatorname{Tr}_{K/\mathbb Q}(x)\bmod p$. Hence $T(\bar x,\bar y):=\operatorname{Tr}_{K/\mathbb Q}(xy)\bmod p$ defines an $\mathbb F_p$-bilinear form on $A$ whose matrix in the basis $\bar\alpha_i$ is $(\operatorname{Tr}_{K/\mathbb Q}(\alpha_i\alpha_j)\bmod p)$, with determinant $d_K\bmod p$ by [F3]. By [F8] this form is degenerate exactly when that determinant vanishes, that is, exactly when $p\mid d_K$. [F3, F4, F8, step 1.2, algebra]
+
 2.2 Trace form versus reducedness over the perfect field $\mathbb F_p$: (a) if every $e_i=1$, then $A\cong\prod_iF_i$ with $F_i=\mathcal O_K/\mathfrak P_i$ a finite field; each $F_i/\mathbb F_p$ is finite, hence separable by [F9], so each factor trace pairing is nondegenerate by [F7]. Multiplication by an element of the product acts blockwise on the direct sum $\bigoplus_iF_i$, so the trace form of $A$ is the orthogonal direct sum of the factor pairings; a vector orthogonal to everything has every component orthogonal to its own factor, hence is zero, and by [F8] the form is nondegenerate. (b) if some $e_i>1$, choose $0\ne\bar x$ in the nilpotent maximal ideal of the factor $A_i$ as in step 1.4; for every $\bar y\in A$ the product $\bar x\bar y$ is nilpotent, so multiplication by it is a nilpotent endomorphism and has trace $0$ by [F10]. Thus $\bar x\ne0$ lies in the radical of $T$ and $T$ is degenerate. Consequently $T$ is nondegenerate exactly when $A$ is reduced. [F7, F8, F9, F10, step 1.3, step 1.4, algebra]
+
 3.1 Combining steps 2.1, 1.4 and 2.2, for the rational prime $p$ the following are equivalent: $p\mid d_K$; the trace form $T$ on $A=\mathcal O_K/p\mathcal O_K$ is degenerate; $A$ is not reduced; some ramification index exceeds $1$; and $p$ ramifies in $K$. This verifies the published ramification-discriminant criterion [F13] for this field and prime in full. [F5, F13, step 2.1, step 1.4, step 2.2]
+
 4.1 By step 1.1 the prime $p$ divides $d_K$, so step 3.1, equivalently the criterion [F13], shows that $p$ ramifies in $K$. Therefore every number field of degree $n>1$ has a rational prime that ramifies in it. [F13, step 1.1, step 3.1] ∎
 
 ## Remarks

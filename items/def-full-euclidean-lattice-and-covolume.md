@@ -2,7 +2,7 @@
 id: def-full-euclidean-lattice-and-covolume
 kind: definition
 title: "Full Euclidean lattice and covolume"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -19,6 +19,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§27 Lemma 27.2, pp.139-140."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

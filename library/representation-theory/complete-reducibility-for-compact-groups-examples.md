@@ -1,7 +1,7 @@
 ---
 page: complete-reducibility-for-compact-groups-examples
 title: "Complete Reducibility for Compact Groups — Examples"
-status: draft
+status: published
 requires: [complete-reducibility-for-compact-groups, decomposition-inertia-and-frobenius]
 items: []
 examples:

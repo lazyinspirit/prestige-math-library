@@ -2,7 +2,7 @@
 id: ex-arithmetic-of-q-zeta-five
 kind: example
 title: Arithmetic of Q(zeta_5)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 10, Theorem 10.1 (Z[zeta_p] = O_K and total ramification at p), Ch. 12, pp. 63-65 (Frobenius and residue degrees for unramified primes)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

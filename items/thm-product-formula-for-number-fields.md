@@ -2,7 +2,7 @@
 id: thm-product-formula-for-number-fields
 kind: theorem
 title: Product formula for a number field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -41,6 +41,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "p.4: the product formula, with the normalized factors at complex places equal to |x|_C^2 as recorded in §15.2."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -90,6 +91,9 @@ complex embeddings; only finitely many factors differ from $1$.
 **Proof technique:** split the product into its finite and archimedean parts; the finite part is the reciprocal of $|N_{K/\mathbb Q}(x)|$ by unique factorisation and the ideal-norm formulas, and the archimedean part is $|N_{K/\mathbb Q}(x)|$ by the embedding formula for the norm.
 
 1.1 Write $x=a/b$ with $a,b\in\mathcal O_K\setminus\{0\}$. Indeed, $K/\mathbb Q$ is finite so $x$ is algebraic over $\mathbb Q$ and has a monic minimal polynomial $m(X)=X^{d}+c_{d-1}X^{d-1}+\cdots+c_0\in\mathbb Q[X]$ ([[thm-evaluation-kernel-and-minimal-polynomial]]); choose $M\ge1$ with all $M^{j}c_{d-j}\in\mathbb Z$, and set $a=Mx$. Then $a^{d}+Mc_{d-1}a^{d-1}+\cdots+M^{d}c_0=M^{d}m(x)=0$, a monic integer polynomial relation, so $a\in\mathcal O_K$ by the minimal-polynomial criterion ([[cor-algebraic-integer-minimal-polynomial-criterion]]); with $b=M\in\mathbb Z\setminus\{0\}\subseteq\mathcal O_K$ this gives $x=a/b$. [given, algebra]
+
 1.2 For the archimedean factors, [F3] gives $N_{K/\mathbb Q}(x)=\prod_{\psi}\psi(x)$ over all $[K:\mathbb Q]$ embeddings, and the embeddings consist of the $r_1$ real embeddings together with the $r_2$ conjugate pairs $\{\tau_j,\overline{\tau_j}\}$; taking absolute values and using $|zw|=|z||w|$ and $|\overline z|=|z|$ from [F4], $|N_{K/\mathbb Q}(x)|=\prod_{\psi}|\psi(x)|=\bigl(\prod_{i=1}^{r_1}|\sigma_ix|\bigr)\bigl(\prod_{j=1}^{r_2}|\tau_jx|\,\lvert\overline{\tau_jx}\rvert\bigr)=\bigl(\prod_{i=1}^{r_1}|\sigma_ix|\bigr)\bigl(\prod_{j=1}^{r_2}|\tau_jx|^{2}\bigr)$, which is exactly the product of the archimedean normalized absolute values. [F3, F4, given]
+
 2.1 In the language of fractional ideals ([[def-fractional-ideal]], [[def-field-of-fractions]]) one has $(x)=(a)(b)^{-1}$, hence $v_{\mathfrak p}(x)=v_{\mathfrak p}((a))-v_{\mathfrak p}((b))$ for every prime $\mathfrak p$; by [F1] write $(a)=\prod_{\mathfrak p}\mathfrak p^{e_{\mathfrak p}}$ and $(b)=\prod_{\mathfrak p}\mathfrak p^{f_{\mathfrak p}}$ with finite supports, so $v_{\mathfrak p}(x)=e_{\mathfrak p}-f_{\mathfrak p}$ vanishes outside the finite union of those supports and $\prod_{\mathfrak p}N\mathfrak p^{-v_{\mathfrak p}(x)}=\bigl(\prod_{\mathfrak p}N\mathfrak p^{f_{\mathfrak p}}\bigr)\bigl(\prod_{\mathfrak p}N\mathfrak p^{e_{\mathfrak p}}\bigr)^{-1}=N((b))/N((a))=|N_{K/\mathbb Q}(b)|/|N_{K/\mathbb Q}(a)|=1/|N_{K/\mathbb Q}(x)|$, the third equality by [F2] applied to the two finite factorisations and the last by [F3], since $N_{K/\mathbb Q}(a)=N_{K/\mathbb Q}(x)N_{K/\mathbb Q}(b)$. [A1, F1, F2, F3, step 1.1]
+
 3.1 Multiplying the finite product of step 2.1 and the archimedean product of step 1.2 gives $\prod_v|x|_v=\bigl(\prod_{i=1}^{r_1}|\sigma_ix|\bigr)\bigl(\prod_{j=1}^{r_2}|\tau_jx|^{2}\bigr)\bigl(\prod_{\mathfrak p}N\mathfrak p^{-v_{\mathfrak p}(x)}\bigr)=|N_{K/\mathbb Q}(x)|\cdot|N_{K/\mathbb Q}(x)|^{-1}=1$, and only the finitely many primes in the supports of $(a)$ and $(b)$ contribute a finite factor different from $1$, so the product is over a finite set of places; the only Choice in the argument is [A1], the norms, moduli and logarithms being computed without further selection. [A1, step 2.1, step 1.2] ∎

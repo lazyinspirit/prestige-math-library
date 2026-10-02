@@ -2,7 +2,7 @@
 id: def-point-pushing-homomorphism-for-a-puncture
 kind: definition
 title: "Point pushing the last puncture"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-pure-mapping-class-group-of-a-punctured-disk,
@@ -32,6 +32,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.3, author manuscript pp. 5-7"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

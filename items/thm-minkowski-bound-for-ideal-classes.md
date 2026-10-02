@@ -2,7 +2,7 @@
 id: thm-minkowski-bound-for-ideal-classes
 kind: theorem
 title: "Minkowski bound for ideal classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 Theorem 7.1.2 proof, pp.81-82."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -96,11 +97,17 @@ $\mathfrak a,\mathfrak b$ one has $N(\mathfrak a\mathfrak b)=N\mathfrak a\,N\mat
 ## Proof
 
 1.1 By [F1] the ring $\mathcal O_K$ is Dedekind, so the fractional ideals and the class group of [F2] and [F3] are available, and the class $[I]$ has a nonzero fractional representative $I$. [F1, F2, F3, given]
+
 2.1 By the denominator condition in [F2] applied to the fractional ideal $I^{-1}$, there is $0\ne u\in\mathcal O_K$ with $\mathfrak b:=uI^{-1}\subseteq\mathcal O_K$; $\mathfrak b$ is a nonzero integral ideal, and $[\mathfrak b]=[I]^{-1}$ in $\operatorname{Cl}(\mathcal O_K)$ because $u$ contributes the principal class. [F2, F3, step 1.1]
+
 3.1 Applying [F4] to the nonzero integral ideal $\mathfrak b$ gives $0\ne\beta\in\mathfrak b$ with $|N_{K/\mathbb Q}(\beta)|\le M_K\,N\mathfrak b$. [F4, step 2.1]
+
 4.1 By [F6] the membership $\beta\in\mathfrak b$ says $(\beta)\subseteq\mathfrak b$; multiplying this inclusion by the fractional ideal $\mathfrak b^{-1}$ and using $\mathfrak b\mathfrak b^{-1}=\mathcal O_K$ from [F2] gives $\mathfrak a:=(\beta)\mathfrak b^{-1}\subseteq\mathcal O_K$, a nonzero integral ideal because $(\beta)\ne0$ and $\mathfrak b^{-1}\ne0$. [F2, F6, step 3.1]
+
 5.1 In the class group, $[\mathfrak a]=[(\beta)]\,[\mathfrak b]^{-1}=[\mathfrak b]^{-1}=[I]$, since the principal fractional ideal $(\beta)$ represents the identity class. [F3, step 2.1, step 4.1]
+
 5.2 From $\mathfrak a=(\beta)\mathfrak b^{-1}$ we get the identity of integral ideals $\mathfrak a\mathfrak b=(\beta)$; both factors are nonzero integral ideals, so [F5] gives $N\mathfrak a\,N\mathfrak b=N((\beta))=|N_{K/\mathbb Q}(\beta)|\le M_K\,N\mathfrak b$, and dividing by the positive integer $N\mathfrak b$ yields $N\mathfrak a\le M_K$. [F5, step 3.1, step 4.1, algebra]
+
 6.1 Thus the integral ideal $\mathfrak a$ lies in the class $[I]$ and satisfies $N\mathfrak a\le M_K$; since the class was arbitrary, every class of $\operatorname{Cl}(\mathcal O_K)$ contains such an ideal. [step 5.1, step 5.2] ∎
 
 ## Remarks

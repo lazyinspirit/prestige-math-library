@@ -1,7 +1,7 @@
 ---
 page: elliptic-functions-and-complex-tori-examples
 title: "Elliptic Functions and Complex Tori: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-oriented-lattice-bases-and-sl2z,
            ex-boundary-free-fundamental-parallelogram,

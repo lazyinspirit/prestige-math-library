@@ -2,7 +2,7 @@
 id: ex-canonical-basis-of-complex-lattice
 kind: example
 title: "A canonical reduced basis for a complex lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(i): lattice bases and the modular ratio tau."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

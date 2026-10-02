@@ -2,7 +2,7 @@
 id: ex-complex-torus-parabolic-deck-lattice
 kind: example
 title: "A complex torus has a lattice of parabolic deck translations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -57,6 +57,7 @@ sources:
       url: "https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf"
       locator: "Ch. 2 Theorem 2.6, printed p. 7: plane quotients as C, C* or C/Lambda; Ch. 16 printed pp. 146-147, Ch. 17 printed p. 157"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

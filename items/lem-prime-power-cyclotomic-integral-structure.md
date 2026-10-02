@@ -2,7 +2,7 @@
 id: lem-prime-power-cyclotomic-integral-structure
 kind: lemma
 title: Prime-power cyclotomic ring, discriminant support and p factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 10, pp. 54-58: the discriminant is ±p^{p^{r-1}(r(p-1)-1)} up to sign; the index is a p-power; and the (zeta-1)-adic coefficient descent proves O_K ∩ p^{-1}Z[zeta] = Z[zeta]."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

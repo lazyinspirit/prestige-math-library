@@ -2,7 +2,7 @@
 id: def-stationary-process-and-canonical-shift
 kind: definition
 title: "Stationary process and canonical path shift"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -15,6 +15,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

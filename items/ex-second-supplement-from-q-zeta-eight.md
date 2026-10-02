@@ -2,7 +2,7 @@
 id: ex-second-supplement-from-q-zeta-eight
 kind: example
 title: Second supplement in four residue classes modulo eight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Example 8.18, pp. 143-144: the Frobenius in Q(zeta_8) acts by the power map, giving the four residue-class signs of the second supplement."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

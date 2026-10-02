@@ -1,7 +1,7 @@
 ---
 page: complete-reducibility-for-compact-groups
 title: "Complete Reducibility for Compact Groups"
-status: draft
+status: published
 requires: [haar-measure-existence-and-uniqueness, the-modular-function-and-l1-group-algebras, unitary-representations-positive-type-and-gns, banach-valued-integration-and-the-radon-nikodym-property, compact-operators-and-riesz-schauder-theory, compact-self-adjoint-hilbert-schmidt-and-trace-class-operators, maschkes-theorem-and-complete-reducibility]
 items:
   - def-averaged-hermitian-form-for-a-compact-group

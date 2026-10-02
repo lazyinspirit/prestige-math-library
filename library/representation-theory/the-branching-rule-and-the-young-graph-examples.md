@@ -1,7 +1,7 @@
 ---
 page: the-branching-rule-and-the-young-graph-examples
 title: "The Branching Rule and the Young Graph — Examples"
-status: draft
+status: published
 requires: [the-branching-rule-and-the-young-graph]
 items: []
 examples:

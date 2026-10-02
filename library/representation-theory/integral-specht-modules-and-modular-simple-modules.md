@@ -1,7 +1,7 @@
 ---
 page: integral-specht-modules-and-modular-simple-modules
 title: "Integral Specht Modules and Modular Simple Modules"
-status: draft
+status: published
 requires: [specht-modules-and-the-irreducibles-of-the-symmetric-group,
            modular-representations-and-projective-covers,
            brauer-characters-and-decomposition-matrices]

@@ -2,7 +2,7 @@
 id: rem-fractional-integration-endpoints
 kind: remark
 title: "Endpoint bounds require separate formulations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-riesz-potential-of-order-alpha, thm-hardy-littlewood-sobolev-fractional-integration, def-sublinear-operator-weak-and-strong-type-p-q, def-countable-choice]
@@ -11,6 +11,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  sources_checked:
+    date: 2026-10-02
+    by: owner
+    scope: Owner-confirmed prior audit; publication explicitly authorised.
   precheck: n/a
 sources:
   references:

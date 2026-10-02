@@ -2,7 +2,7 @@
 id: thm-weierstrass-p-addition-formula
 kind: theorem
 title: "Addition formula for $\\wp$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -43,6 +43,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii)-(iii), equations (23.2.4) and (23.2.9)-(23.2.10): the wp series, its parity and the half-period derivative zeros used in the degenerate cases."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

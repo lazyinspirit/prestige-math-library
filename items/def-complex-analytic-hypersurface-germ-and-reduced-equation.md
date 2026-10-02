@@ -2,7 +2,7 @@
 id: def-complex-analytic-hypersurface-germ-and-reduced-equation
 kind: definition
 title: "Complex-analytic hypersurface germ and its reduced equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.21) vanishing ideal of a prime (p. 96); II (6.6) principal ideal of a pure codimension-one germ (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

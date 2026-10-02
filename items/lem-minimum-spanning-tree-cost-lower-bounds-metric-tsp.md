@@ -2,7 +2,7 @@
 id: lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp
 kind: lemma
 title: "A minimum spanning tree lower-bounds metric-TSP optimum"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-metric-tsp
@@ -19,6 +19,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §2.4 Lemma 2.10 and its proof, printed pp. 44–45"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

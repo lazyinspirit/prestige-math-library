@@ -2,7 +2,7 @@
 id: thm-prime-factorisation-in-a-cyclotomic-field
 kind: theorem
 title: Prime factorisation in a cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 10, Theorem 10.1 and Lemmas 10.3/10.5/10.6, pp. 54-58: O_{Q(zeta_{p^a})} = Z[zeta_{p^a}] and the prime-power ramification data. Ch. 11, Theorem 11.6 and Remark 11.7, pp. 61-62: reduced indices N and the discriminant/ramification dictionary."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-abstract-residue-basic-properties
 kind: lemma
 title: "Basic properties of the abstract residue: restriction, commensurability, vanishing, logarithmic residues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
     - title: "John Tate, Residues of differentials on curves, Ann. Sci. E.N.S. (4) 1 (1968) 149-159"
       url: "http://www.numdam.org/article/ASENS_1968_4_1_1_149_0.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -100,11 +101,11 @@ $\operatorname{res}_V(g^{-1}\mathrm dg)=\dim_k(A/gA)$.
 
 2.1 (Standard lifts) For $f\in K$ put $f_\sharp:=\pi\circ f\in\operatorname{End}_k(V)$; then $f_\sharp V=\pi(fV)\subseteq A$, so $f_\sharp\in E_1$ by [F3], and $(f_\sharp-f)(A)=(\pi-\mathrm{id}_V)(fA)\subseteq(\pi-\mathrm{id}_V)(W)$ for a finite-dimensional $W$ with $fA\subseteq A+W$, so $f_\sharp\equiv f\pmod{E_2}$; hence for all $f,g\in K$ the pair $(f_\sharp,g_\sharp)$ is admissible in [F6] and $\operatorname{res}_V(f\,\mathrm dg)=\operatorname{Tr}_V([f_\sharp,g_\sharp])$. [step 1.1, F3, F4, F6, algebra]
 
-2.2 (Claim 4: the lifts and $\theta$) Put $f:=hg^{-1}\in K$ and choose the lifts $f_1:=\pi\circ f$ and $g_1:=g$; then $f_1V=\pi(fV)\subseteq A$, so $f_1\in E_1$ by [F3], and $(f_1-f)A=(\pi-\mathrm{id}_V)(fA)$ is finite-dimensional because the standing hypothesis $fA<A$ gives $fA\subseteq A+W$ for a finite-dimensional $W$, so $f_1\equiv f\pmod{E_2}$ while $g_1=g$ trivially; hence the pair $(f_1,g_1)$ is admissible in [F6] and $\operatorname{res}_V(f\,\mathrm dg)=\operatorname{Tr}_V(\theta)$ for $\theta:=[f_1,g_1]=\pi m_{fg}-g\pi m_f$. Since $fg=h$ and multiplication by $g$ and $h$ commutes, $g\pi m_f=g\pi m_{g^{-1}}m_h=(g\pi g^{-1})m_h=\pi_gm_h$, where $\pi_g:=g\pi g^{-1}$ is a $k$-linear projection of $V$ onto $gA$; thus $\theta=(\pi-\pi_g)m_h$. No commutation of either projection with multiplication is used. [step 1.1, step 1.2, F1, F3, F6, algebra]
-
+2.2 (Claim 4: the lifts and $\theta$) Put $f:=hg^{-1}\in K$ and choose the lifts $f_1:=\pi\circ f$ and $g_1:=g$; then $f_1V=\pi(fV)\subseteq A$, so $f_1\in E_1$ by [F3], and $(f_1-f)A=(\pi-\mathrm{id}_V)(fA)$ is finite-dimensional because the standing hypothesis $fA<A$ gives $fA\subseteq A+W$ for a finite-dimensional $W$, so $f_1\equiv f\pmod{E_2}$ while $g_1=g$ trivially; hence the pair $(f_1,g_1)$ is admissible in [F6] and $\operatorname{res}_V(f\,\mathrm dg)=\operatorname{Tr}_V(\theta)$ for $\theta:=[f_1,g_1]=\pi m_{fg}-g\pi m_f$. Since $fg=h$ and multiplication by $g$ and $h$ commutes, $g\pi m_f=g\pi m_{g^{-1}}m_h=(g\pi g^{-1})m_h=\pi_gm_h$, where $\pi_g:=g\pi g^{-1}$ is a $k$-linear projection of $V$ onto $gA$; thus $\theta=(\pi-\pi_g)m_h$. No commutation of either projection with multiplication is used.
 (ii) if $\theta\in E_0$ satisfies $\theta V\subseteq A$, then $\varphi:=\theta\colon V\to A$ and the inclusion $\psi\colon A\to V$ are $k$-linear with $\psi\varphi=\theta$ finite potent, so (T5) gives $\operatorname{Tr}_V(\theta)=\operatorname{Tr}_A(\theta|_A)$, and if moreover $\theta(A)=0$ then $\operatorname{Tr}_A(\theta|_A)=0$ by [F8]; 
 (iii) if $\theta\in E_0$ and $V\prime\subseteq V$ satisfies $\theta V\subseteq V\prime$ and $\theta V\prime\subseteq V\prime$, then $\theta$ viewed as a map $V\to V\prime$ and the inclusion $V\prime\to V$ are $k$-linear with composite $\theta$, so (T5) gives $\operatorname{Tr}_V(\theta)=\operatorname{Tr}_{V\prime}(\theta|_{V\prime})$; 
-(iv) if $f_1,g_1\in E_1$ satisfy $f_1\equiv f\pmod{E_2}$ and $g_1\equiv g\pmod{E_2}$ for commuting elements $f,g\in K$, then $[f_1,g_1]\in E_1$ because $E_1$ is a two-sided ideal, while $[f_1,g_1]\equiv[f,g]=0\pmod{E_2}$ because $E_2$ is a two-sided ideal, so $[f_1,g_1]\in E_1\cap E_2=E_0$. [step 2.1, F1, F4, F5, algebra]
+(iv) if $f_1,g_1\in E_1$ satisfy $f_1\equiv f\pmod{E_2}$ and $g_1\equiv g\pmod{E_2}$ for commuting elements $f,g\in K$, then $[f_1,g_1]\in E_1$ because $E_1$ is a two-sided ideal, while $[f_1,g_1]\equiv[f,g]=0\pmod{E_2}$ because $E_2$ is a two-sided ideal, so $[f_1,g_1]\in E_1\cap E_2=E_0$.
+[step 1.1, step 1.2, F1, F3, F6, algebra, step 2.1, F4, F5]
 
 3.1 (Framework) From steps 1.1 and 2.1 we record: (i) for every $f\in K$ and $n\ge1$ one has $(f_\sharp)^n\in E_1$ and $(f_\sharp)^n\equiv f^n\pmod{E_2}$, because $E_1$ and $E_2$ are two-sided ideals; for $n=0$, the identity is a lift of $1$ in $E$ and can be paired with an $E_1$ lift; (ii) if $\theta\in E_0$ satisfies $\theta V\subseteq A$, then $\varphi:=\theta\colon V\to A$ and the inclusion $\psi\colon A\to V$ are $k$-linear with $\psi\varphi=\theta$ finite potent, so (T5) gives $\operatorname{Tr}_V(\theta)=\operatorname{Tr}_A(\theta|_A)$, and if moreover $\theta(A)=0$ then $\operatorname{Tr}_A(\theta|_A)=0$ by [F8]; (iii) if $\theta\in E_0$ and $V'\subseteq V$ satisfies $\theta V\subseteq V'$ and $\theta V'\subseteq V'$, then $\theta$ viewed as a map $V\to V'$ and the inclusion $V'\to V$ are $k$-linear with composite $\theta$, so (T5) gives $\operatorname{Tr}_V(\theta)=\operatorname{Tr}_{V'}(\theta|_{V'})$; (iv) if $f_1,g_1\in E_1$ satisfy $f_1\equiv f\pmod{E_2}$ and $g_1\equiv g\pmod{E_2}$ for commuting elements $f,g\in K$, then $[f_1,g_1]\in E_1$ because $E_1$ is a two-sided ideal, while $[f_1,g_1]\equiv[f,g]=0\pmod{E_2}$ because $E_2$ is a two-sided ideal, so $[f_1,g_1]\in E_1\cap E_2=E_0$. [step 2.1, F1, F4, F5, F8, algebra]
 

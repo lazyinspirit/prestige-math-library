@@ -2,7 +2,7 @@
 id: ex-bishop-gromov-ratio-is-constant-in-the-model-space
 kind: example
 title: Bishop gromov ratio is constant in the model space
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bishop-gromov-volume-comparison
@@ -29,6 +29,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-specht-gram-gcd-detects-p-regularity
 kind: lemma
 title: Specht Gram gcd detects p-regularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -29,6 +29,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3, Propositions 2.8-2.9, printed pp. 23-25"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -103,7 +104,6 @@ order is made.
 1.3 Every integral polytabloid is an integral linear combination of the standard polytabloids, by [F1]. Fix an ordering $u_1,\dots,u_d$ of the standard $\lambda$-tableaux and write $e_s=\sum_ia_ie_{u_i}$ and $e_t=\sum_jb_je_{u_j}$ with integers $a_i,b_j$ and $G_\lambda=(G_{ij})=\bigl(\beta(e_{u_i},e_{u_j})\bigr)$. Bilinearity of $\beta$ gives $\beta(e_s,e_t)=\sum_{i,j}a_ib_jG_{ij}$ for every pair of tableaux $s,t$. Hence the greatest common divisor of the entries $G_{ij}$ divides every pairing $\beta(e_s,e_t)$, while each $G_{ij}$ is itself one of the pairings appearing in the definition of $g_\lambda$; the two finite gcds therefore coincide, and $g_\lambda$ is the gcd of the entries of the integral Gram matrix $G_\lambda$. [given, F1, F2, algebra]
 
 1.4 Fix a tableau $t$ and its row reversal $t^*(i,c)=t(i,\lambda_i+1-c)$. Suppose $T=\{\gamma t\}=\{\delta t^*\}$ with $\gamma\in C_t$ and $\delta\in C_{t^*}$. A row of $T$ of length $m$ contains one entry from each of columns $1,\ldots,m$ of $t$ and one from each of columns $1,\ldots,m$ of $t^*$. An entry originally in a row of length $j$ and column $c$ of $t$ lies in column $j+1-c$ of $t^*$. Take $m$ maximal among the row lengths still under consideration. The entry of a length-$m$ row of $T$ in $t$-column $m$ must come from an original length-$m$ row and occupies $t^*$-column $1$. Descending through $t$-columns $c=m-1,\ldots,1$, assume the preceding entries occupy $t^*$-columns $1,\ldots,m-c$. An entry in $t$-column $c$ from a shorter row has $t^*$-column $j+1-c\le m-c$, already occupied; thus it comes from a length-$m$ row and occupies $t^*$-column $m+1-c$. All length-$m$ rows of $T$ therefore use only entries from original length-$m$ rows, exhausting those entries. Remove these rows and repeat at the next largest length. Hence every row $i$ of $T$ contains only entries originally in rows of length $\lambda_i$.
-
 For $x=t(i,c)$, both $\gamma(x)$ and $\delta(x)$ belong to row $i$ of $T$. The former lies in $t$-column $c$; the latter lies in $t^*$-column $\lambda_i+1-c$, which is $t$-column $c$ among entries originally in rows of length $\lambda_i$. Since row $i$ of $T$ contains exactly one entry from that $t$-column, $\gamma(x)=\delta(x)$. Thus $\gamma=\delta$. Conversely, if $\gamma\in C_t\cap C_{t^*}$, the equal row sets of $t$ and $t^*$ give $\{\gamma t\}=\{\gamma t^*\}$. Consequently $$\operatorname{supp}(e_t)\cap\operatorname{supp}(e_{t^*})=\bigl\{\{\gamma t\}:\gamma\in C_t\cap C_{t^*}\bigr\},$$ and [F4] makes the coefficient of each common tabloid $\operatorname{sgn}(\gamma)$ in both polytabloids. [given, F3, F4, F8, algebra]
 
 1.5 We determine the intersection $C_t\cap C_{t^*}$. First let $\gamma\in C_t\cap C_{t^*}$ and let $j\ge1$. For a value $x=t(i,c)$ with $\lambda_i=j$, the value $x$ lies in the $t^*$-column $\lambda_i+1-c$, so $\gamma(x)$, being in $C_{t^*}$, lies in that same $t^*$-column; say $\gamma(x)=t(i'',\lambda_{i''}+1-(\lambda_i+1-c)) =t(i'',c+\lambda_{i''}-\lambda_i)$ for some $i''$ with $\lambda_{i''}\ge\lambda_i+1-c$. On the other hand $\gamma\in C_t$ means $\gamma(x)=t(i',c)$ for some row $i'$ by [F5]. Comparing the two descriptions cell by cell gives $i''=i'$ and $c+\lambda_{i''}-\lambda_i=c$, that is, $\lambda_{i'}=\lambda_i=j$. Therefore $\gamma(x)$ lies in a row of length $j$ for every $x$ in a row of length $j$; since $\gamma$ is bijective, $\gamma(R_j)=R_j$ for every $j$, where $R_j:=\bigcup_{i\in P_j}\text{row}_i(t)$. Second, conversely, suppose $\gamma\in C_t$ satisfies $\gamma(R_j)=R_j$ for every $j$. Let $c\ge1$ and let $x=t(i,\lambda_i+1-c)$ be an entry of the $t^*$-column $c$, so $\lambda_i\ge c$ and $x\in R_{\lambda_i}$. Then $\gamma(x)\in R_{\lambda_i}$ and $\gamma\in C_t$ preserve the $t$-column of $x$, which is $\lambda_i+1-c$; hence $\gamma(x)=t(i',\lambda_i+1-c)$ with $\lambda_{i'}=\lambda_i$, that is, $\gamma(x)=t(i',\lambda_{i'}+1-c)$, an entry of the $t^*$-column $c$. Thus $\gamma\in C_{t^*}$. This proves $$C_t\cap C_{t^*}=\{\gamma\in C_t:\gamma(R_j)=R_j\text{ for every }j\}.$$ [given, F5, F8, algebra]

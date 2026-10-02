@@ -2,7 +2,7 @@
 id: ex-units-of-q-and-imaginary-quadratic-fields
 kind: example
 title: Units of $\mathbb Q$ and the imaginary quadratic fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "Ch. 24 p.147 (rank-zero cases)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

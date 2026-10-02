@@ -2,7 +2,7 @@
 id: thm-green-function-for-a-ball-in-rn
 kind: theorem
 title: Dirichlet Green function of a Euclidean ball
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-dirac-delta-and-its-derivatives, def-dirichlet-green-function-for-minus-laplacian, def-distributional-harmonicity-and-poisson-equation-in-rn, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, lem-euclidean-balls-are-bounded-c-one-domains, lem-kelvin-inversion-and-the-laplace-operator, lem-laplace-fundamental-solution-is-harmonic-off-its-pole, thm-green-function-symmetry, thm-minus-laplacian-of-the-fundamental-solution-is-dirac, cor-second-green-identity-on-a-bounded-c-one-domain]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

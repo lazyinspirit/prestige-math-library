@@ -2,7 +2,7 @@
 id: lem-unit-logarithms-lie-in-the-product-formula-hyperplane
 kind: lemma
 title: Unit logarithms lie in the trace-zero hyperplane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "§15.2 pp.5-6: T(Log x)=log N(x), and units have normalized norm 1."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: cor-quadratic-reciprocity-via-frobenius
 kind: corollary
 title: Quadratic reciprocity via Frobenius
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://people.reed.edu/~jerry/361/lectures/lec09.pdf"
       locator: "Lecture 9, section 4, pp. 7-8: the Frobenius restriction identity Frob_{q,F}: sqrt(p*) -> (p*/q) sqrt(p*) together with Frob_{q,F}: sqrt(p*) -> (q/p) sqrt(p*)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: stationary-markov-chains-and-ergodic-limits
 title: "Stationary Markov Chains and Ergodic Limits"
-status: draft
+status: published
 items:
   - def-invariant-and-stationary-distribution-for-a-markov-kernel
   - thm-invariant-initial-law-makes-the-chain-stationary

@@ -2,7 +2,7 @@
 id: lem-borel-nevanlinna-growth-increment
 kind: lemma
 title: "Finite-measure growth increment lemma"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,8 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §1, Theorem 1.2 and its proof, printed pp. 89–91; use in Theorem 1.3, printed pp. 91–92"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

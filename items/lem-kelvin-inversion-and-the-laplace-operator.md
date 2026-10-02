@@ -2,7 +2,7 @@
 id: lem-kelvin-inversion-and-the-laplace-operator
 kind: lemma
 title: Kelvin inversion transforms harmonic functions
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-real-power-continuity-and-derivatives]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

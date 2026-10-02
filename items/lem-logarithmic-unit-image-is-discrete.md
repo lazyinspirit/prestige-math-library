@@ -2,7 +2,7 @@
 id: lem-logarithmic-unit-image-is-discrete
 kind: lemma
 title: The logarithmic unit image is discrete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -42,6 +42,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "Ch. 29 pp.151-152."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

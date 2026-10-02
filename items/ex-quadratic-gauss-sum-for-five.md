@@ -2,7 +2,7 @@
 id: ex-quadratic-gauss-sum-for-five
 kind: example
 title: Quadratic Gauss sum at p=5
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.19, p. 144: tau_5 = 1 + zeta + zeta^4 - zeta^2 - zeta^3 = sqrt 5."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

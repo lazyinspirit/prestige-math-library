@@ -2,7 +2,7 @@
 id: def-harmonic-number-for-set-cover-analysis
 kind: definition
 title: "Harmonic numbers for set-cover analysis"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -14,6 +14,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

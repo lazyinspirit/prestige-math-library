@@ -1,7 +1,7 @@
 ---
 page: artin-presentation-completeness-and-braid-combing-examples
 title: "Artin Presentation Completeness and Braid Combing — Examples"
-status: draft
+status: published
 requires: [artin-presentation-completeness-and-braid-combing]
 items: []
 examples: [ex-combing-a-four-strand-braid-word,

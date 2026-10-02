@@ -2,7 +2,7 @@
 id: cor-unordered-planar-configuration-spaces-are-aspherical
 kind: corollary
 title: "Unordered planar configuration spaces are aspherical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-ordered-planar-configuration-spaces-are-aspherical, thm-ordered-configurations-cover-unordered-configurations-regularly, thm-covering-space-lifting-criterion, thm-homotopy-lifting-for-covering-maps, thm-higher-dimensional-spheres-are-simply-connected, lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent, def-braid-group-from-unordered-configurations, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, prop-higher-homotopy-basepoint-transport-and-moving-homotopies, prop-cubical-and-spherical-models-of-higher-homotopy-agree, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

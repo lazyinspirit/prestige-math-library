@@ -2,7 +2,7 @@
 id: lem-connected-cover-of-punctured-disc-for-irreducible-plane-curve
 kind: lemma
 title: "An irreducible plane curve gives a connected punctured covering"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.19) finite preparation, discriminant and the unramified part of the covering (p. 95)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

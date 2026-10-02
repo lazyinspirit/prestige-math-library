@@ -2,7 +2,7 @@
 id: def-logarithmic-potential-and-energy
 kind: definition
 title: "Logarithmic potential and energy of a positive compactly supported measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -18,6 +18,7 @@ sources:
     - title: "B. Khoruzhenko, LTCC Potential Theory notes, §§3 and 5"
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-dirichlet-problem-on-a-ball-by-the-poisson-integral
 kind: theorem
 title: Continuous Dirichlet problem on a ball
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -23,6 +23,8 @@ sources:
     - title: "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)"
       url: "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf"
       locator: "§5.6, printed pp. 133–134, Theorem 5.25"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

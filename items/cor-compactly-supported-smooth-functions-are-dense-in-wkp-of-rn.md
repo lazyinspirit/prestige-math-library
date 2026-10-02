@@ -2,7 +2,7 @@
 id: cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn
 kind: corollary
 title: Compactly supported smooth functions are dense in W^{k,p}(R^n)
-status: draft
+status: published
 origin: pipeline
 deps: [thm-meyers-serrin-density-on-an-arbitrary-open-set, lem-weak-leibniz-rule-with-a-smooth-factor, lem-mollification-commutes-with-weak-derivatives-in-the-interior, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, prop-mollifier-families-are-l-one-approximate-identities, thm-l-one-approximate-identities-converge-in-l-p, lem-complex-translation-and-approximate-identity-interfaces, thm-dominated-convergence, lem-smooth-bump-between-concentric-euclidean-balls, def-sobolev-space-wkp-and-its-norm, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

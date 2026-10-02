@@ -2,7 +2,7 @@
 id: ex-half-space-poisson-extension-of-a-plane-wave
 kind: example
 title: Half-space Poisson extension of a plane wave
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, thm-algebra-of-derivatives, thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials, thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space, thm-real-power-continuity-and-derivatives, thm-derivative-of-exponential, thm-complex-exponential-is-entire-with-derivative-itself]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

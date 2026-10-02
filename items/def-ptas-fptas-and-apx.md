@@ -2,7 +2,7 @@
 id: def-ptas-fptas-and-apx
 kind: definition
 title: "PTAS, FPTAS and APX"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-optimization-problem-and-approximation-ratio
@@ -15,6 +15,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §1.1 Definition 1.2 (printed p. 15), §3.1 Definition 3.4 and Theorem 3.5 (printed pp. 68–69)"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

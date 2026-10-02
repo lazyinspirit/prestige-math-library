@@ -2,7 +2,7 @@
 id: lem-nevanlinna-ramification-counting-identity
 kind: lemma
 title: "Ramification count from the derivative divisor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,8 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §1, printed pp. 88–89: the ramification count and its use in truncation"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

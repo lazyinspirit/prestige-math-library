@@ -2,7 +2,7 @@
 id: def-circle-maximal-function-and-nontangential-region
 kind: definition
 title: "The circle maximal function and nontangential approach regions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-countable-choice, def-integral-over-a-measurable-set, def-l-one-of-a-measure, def-regular-complex-borel-measure-on-an-lch-space, def-the-one-dimensional-torus-and-normalized-haar-integral, def-total-variation-of-a-signed-or-complex-measure, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-total-variation-is-a-measure]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: def-poincare-metric-hyperbolic-riemann-surface
 kind: definition
 title: "Poincaré metric on a hyperbolic Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -32,6 +32,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 1 §§2.4 and 5, printed pp. 64-68 and 115-118, Theorems 5.1-5.6"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

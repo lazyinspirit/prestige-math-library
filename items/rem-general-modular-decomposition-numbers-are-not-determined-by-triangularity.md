@@ -2,7 +2,7 @@
 id: rem-general-modular-decomposition-numbers-are-not-determined-by-triangularity
 kind: remark
 title: "Triangularity does not compute every modular decomposition number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -26,6 +26,7 @@ sources:
     - title: "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, §24 opening, printed p. 98 (partial results and the general determination problem)"
       url: "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

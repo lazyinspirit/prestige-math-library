@@ -2,7 +2,7 @@
 id: cor-pure-braids-are-pure-punctured-disk-mapping-classes
 kind: corollary
 title: "Pure braids as pure mapping classes"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk,
@@ -28,6 +28,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.3, author manuscript pp. 5-7"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -102,8 +103,11 @@ $G_n^{\mathrm{pure}}=\ker\pi_{\mathrm{geo}}$
 
 ## Proof
 **Proof technique:** direct.
+
 1.1 *The lift endpoint induces the endpoint permutation.* Fix $[\beta]\in G_n$ and let $g$ be a lift of the raw slice loop $S(\beta)$ with $g(0)=\operatorname{id}$, so that $\Psi([\beta])=[h_\beta]$ with $h_\beta=g(1)$ and $h_\beta(Q_n)=z(1)$ by [L2]; here $z$ is the ordered coordinate lift of $S(\beta)$ from $Q_n$, whose coordinates satisfy $z_j(1)=q_{\pi_{\mathrm{geo}}([\beta])(j)}$ by [L4] and [L5]. First, $h_\beta$ lies in $F$: indeed $\operatorname{ev}(h_\beta)=S(\beta)(1)=[Q_n]$, so $[h_\beta(Q_n)]=[Q_n]$ and [L3] applies. Therefore the unique permutation $\pi(h_\beta)$ of [L6] is defined, and evaluating the identity $h_\beta(Q_n)=z(1)$ in the $j$-th coordinate gives $$h_\beta(q_j)=z_j(1)=q_{\pi_{\mathrm{geo}}([\beta])(j)}\qquad(1\le j\le n),$$ so $\pi(h_\beta)=\pi_{\mathrm{geo}}([\beta])$: the permutation realised by the evaluation endpoint of the lifted slice is exactly the geometric endpoint permutation of the braid class. [L2, L3, L4, L5, L6]
+
 2.1 *Trivial permutation is exactly purity.* By [L7], a class $[f]\in\operatorname{Mod}(D^2,Q_n;\partial D^2)$ lies in $\operatorname{PMod}(D^2,Q_n;\partial D^2)$ exactly when the permutation it induces on $Q_n$ is trivial; by [L6] the permutation induced by a representative $f\in F$ is a class invariant, so the condition is $\pi(h_\beta)=\operatorname{id}$ for the endpoint of any such representative. Combining with step 1.1, for $[\beta]\in G_n$ we have the equivalence $$\Psi([\beta])\in\operatorname{PMod}(D^2,Q_n;\partial D^2)\iff\pi(h_\beta)=\operatorname{id}\iff\pi_{\mathrm{geo}}([\beta])=\operatorname{id}\iff[\beta]\in G_n^{\mathrm{pure}},$$ the last equivalence being the definition [L8] of the pure subgroup as the kernel of $\pi_{\mathrm{geo}}$. [L6, L7, L8, step 1.1]
+
 3.1 *Conclusion.* The equivalence of step 2.1 says that an element $[\beta]\in G_n$ satisfies $\Psi([\beta])\in\operatorname{PMod}(D^2,Q_n;\partial D^2)$ if and only if $[\beta]\in G_n^{\mathrm{pure}}$; since $\Psi$ is a bijection by [L1], it carries $G_n^{\mathrm{pure}}$ onto $\operatorname{PMod}(D^2,Q_n;\partial D^2)$. The restriction $\Psi|_{G_n^{\mathrm{pure}}}$ is a group isomorphism onto its image because $\Psi$ is a group isomorphism by [L1], so the pure geometric braid subgroup equals the pure boundary-fixed mapping class group under this identification. When $n=0$ both groups are trivial and the statement is immediate; when $n=1$ the group $S_1$ is trivial, so every braid class is pure, and by [L7] the setwise and pointwise stabilisers of the one-point marked set coincide, so every mapping class is pure; the equivalence above also holds in these cases because $z_1(1)=q_1$ for every one-strand braid. [L1, L5, L7, step 1.1, step 2.1] ∎
 
 ## Remarks

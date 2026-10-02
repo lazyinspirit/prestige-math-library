@@ -2,7 +2,7 @@
 id: def-complex-lattice-and-complex-torus
 kind: definition
 title: "Complex lattice and quotient torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -23,6 +23,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(i): lattice basis and period-parallelogram conventions."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: cor-smooth-proper-curve-finite-map-projective-line
 kind: corollary
 title: "Finite morphisms from a curve to the projective line"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-curve-closed-subsets-finite
@@ -37,6 +37,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

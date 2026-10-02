@@ -2,7 +2,7 @@
 id: cex-ricci-lower-bound-does-not-control-every-sectional-curvature-in-dimension-at-least-three
 kind: counterexample
 title: Ricci lower bound does not control every sectional curvature in dimension at least three
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ricci-curvature
@@ -28,6 +28,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

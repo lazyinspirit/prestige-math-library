@@ -2,7 +2,7 @@
 id: cor-riesz-transforms-are-ltwo-bounded
 kind: corollary
 title: "Riesz transforms are L2 contractions and square to minus the identity in sum"
-status: draft
+status: published
 origin: pipeline
 deps: [def-riesz-transforms-on-euclidean-space, lem-ltwo-fourier-multiplier-bound, thm-plancherel, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

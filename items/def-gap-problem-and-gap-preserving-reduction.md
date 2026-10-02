@@ -2,7 +2,7 @@
 id: def-gap-problem-and-gap-preserving-reduction
 kind: definition
 title: "Gap promise problems and gap-preserving reductions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-optimization-problem-and-approximation-ratio
@@ -18,6 +18,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §16.2, printed pp. 413–414"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

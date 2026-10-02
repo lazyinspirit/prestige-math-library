@@ -2,7 +2,7 @@
 id: def-order-codimension-one-rational-function
 kind: definition
 title: "Order codimension one rational function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/0BE0"
     - title: "The Stacks Project, Exercises, Definition 111.49.1(6)–(8)"
       url: "https://stacks.math.columbia.edu/tag/02AR"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Definition

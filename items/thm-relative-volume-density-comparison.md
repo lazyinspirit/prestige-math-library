@@ -2,7 +2,7 @@
 id: thm-relative-volume-density-comparison
 kind: theorem
 title: Relative volume density comparison
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-cut-time-does-not-exceed-first-conjugate-time
@@ -24,6 +24,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

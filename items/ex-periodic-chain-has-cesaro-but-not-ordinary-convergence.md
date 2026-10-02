@@ -2,7 +2,7 @@
 id: ex-periodic-chain-has-cesaro-but-not-ordinary-convergence
 kind: example
 title: "A periodic chain has Cesaro but not ordinary convergence"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -21,6 +21,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-finite-potent-trace-linearity-and-conjugation
 kind: lemma
 title: "Linearity and conjugation invariance of the finite potent trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ sources:
     - title: "John Tate, Residues of differentials on curves, Ann. Sci. E.N.S. (4) 1 (1968) 149-159"
       url: "http://www.numdam.org/article/ASENS_1968_4_1_1_149_0.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

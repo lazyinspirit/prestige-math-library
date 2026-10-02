@@ -2,7 +2,7 @@
 id: lem-the-induced-action-is-unitary
 kind: lemma
 title: "Unitary cocycle-corrected left action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-radon-nikodym-cocycle-of-a-homogeneous-measure, def-covariant-function-model-of-unitary-induction, lem-the-induced-inner-product-is-independent-of-coset-representatives, def-axiom-of-choice]
@@ -21,6 +21,7 @@ sources:
     - title: "David Vogan, Unitary Representations of Locally Compact Groups and Induced Representations"
       url: "https://math.mit.edu/~dav/ind.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -49,7 +50,9 @@ Assume AC. For $g\in G$ and $F\in C_c(G,H;V)$, define $(\Pi_\rho(g)F)(x)=D_g(xH)
 **Proof technique:** direct.
 
 1.1 Since $D_g$ is a function on $G/H$, it is right $H$-invariant. Thus $F(g^{-1}xh)=\sigma(h)^{-1}F(g^{-1}x)$ proves covariance of $\Pi_\rho(g)F$. Its quotient support is the translate by $g$ of the compact support of $F$. [F1, F2, A1]
+
 2.1 Applying twice gives $$\Pi_\rho(g_1)\Pi_\rho(g_2)F(x)=\big(D_{g_1}(xH)D_{g_2}(g_1^{-1}xH)\big)^{1/2}F(g_2^{-1}g_1^{-1}x)=\Pi_\rho(g_1g_2)F(x)$$ by the cocycle identity [F1]. Also $\Pi_\rho(e)=I$, so $\Pi_\rho(g^{-1})$ is the inverse. [F1, step 1.1]
+
 3.1 The cocycle identity with $g_1=g^{-1},g_2=g$ gives $D_g(grH)D_{g^{-1}}(rH)=1$. The change-of-measure formula $d((g^{-1})_*\mu_\rho)/d\mu_\rho=D_{g^{-1}}$ then yields $$\|\Pi_\rho(g)F\|_2^2=\int D_g(q)\|F(g^{-1}q)\|^2d\mu_\rho(q)=\int D_g(gr)D_{g^{-1}}(r)\|F(r)\|^2d\mu_\rho(r)=\|F\|_2^2.$$ Thus the operator is an isometry on the dense continuous model, and its inverse from step 2.1 makes its extension unitary on the completion. ∎ [A1, F1, F2, F3, step 1.1, step 2.1]
 ## Sources
 

@@ -2,7 +2,7 @@
 id: cex-exterior-dirichlet-uniqueness-needs-growth-or-decay-control
 kind: counterexample
 title: Exterior Dirichlet uniqueness needs a far-field condition
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,8 @@ sources:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014)"
       url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
       locator: "§2.6.1, printed p. 33, the Newtonian fundamental solution is harmonic away from its pole"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement refuted

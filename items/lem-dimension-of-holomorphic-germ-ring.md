@@ -2,7 +2,7 @@
 id: lem-dimension-of-holomorphic-germ-ring
 kind: lemma
 title: "Krull dimension of the holomorphic germ ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (2.7) Noetherianity and (2.10) factoriality of O_n (pp. 81–82); II §2 dimension of the local ring."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

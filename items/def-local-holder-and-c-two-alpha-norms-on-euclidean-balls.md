@@ -2,7 +2,7 @@
 id: def-local-holder-and-c-two-alpha-norms-on-euclidean-balls
 kind: definition
 title: Local Hölder and scaled C-two-alpha norms on balls
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,8 @@ sources:
     - title: "Armin Schikorra, Partial Differential Equations I & II (2025)"
       url: "https://sites.pitt.edu/~armin/pde2022/pde.pdf"
       locator: "§8.1, printed pp. 139–142, Hölder seminorms and scaled Schauder norms on balls"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Definition

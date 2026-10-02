@@ -2,7 +2,7 @@
 id: thm-point-pushing-is-the-kernel-of-forgetting-a-puncture
 kind: theorem
 title: "Point pushing is the kernel of forgetting the last disk puncture"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-point-pushing-homomorphism-for-a-puncture,
@@ -34,6 +34,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

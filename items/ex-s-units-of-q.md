@@ -2,7 +2,7 @@
 id: ex-s-units-of-q
 kind: example
 title: "S-units of Q"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -36,6 +36,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:
@@ -95,7 +96,9 @@ of rank $r_1+r_2-1+|S_{\mathbb Q}|=1+0-1+m=m$.
 1.1 The localisation $R$ embeds in $\mathbb Q$ by $\varphi(a/b)=a/b$: the map is well defined because if $a/b=a'/b'$ in $R$, then $u(ab'-a'b)=0$ for some $u\in M$ by [F1] and hence $ab'=a'b$ by [F2], so the two rationals agree; it respects the fraction arithmetic of [F1], which is the arithmetic of the field $\mathbb Q$; and it is injective, since $\varphi(a/b)=0$ forces $a=0$, and then $1\cdot(a\cdot1-0\cdot b)=0$ gives $a/b=0/1$ by [F1]. Hence $R$ is identified with the subring $\{a/b\in\mathbb Q:a\in\mathbb Z,\ b\in M\}$ of $\mathbb Q$, in which $1/s$ is the inverse of $s$ for every $s\in M$. [F1, F2, algebra]
 
 1.2 Fix $x\in\mathbb Q^\times$ and write its prime factorisation as $$x=\pm\prod_{q\ \mathrm{prime}}q^{e_q(x)},\qquad e_q(x)\in\mathbb Z,$$ with all but finitely many exponents zero; existence and uniqueness of the triple (sign, exponent vector) is [F3], applied to the numerator and denominator of $x$ in lowest terms. Writing $x=a/b$ in lowest terms with $b>0$ and fixing a prime $q$, one has $e_q(x)=v_q(a)-v_q(b)$; if $q\nmid b$ this is the nonnegative integer $v_q(a)$, while if $q\mid b$ then $v_q(b)>0$ and $v_q(a)=0$ by coprimality, so $e_q(x)<0$. Thus $e_q(x)\ge0$ if and only if $q\nmid b$. [F3, algebra]
+
 1.3 For a prime $q$, the localisation $\mathbb Z_{(q)}$ consists of the fractions $m/n$ with $q\nmid n$ by [F5], so for $x=a/b\in\mathbb Q^\times$ in lowest terms with $b>0$ one has $x\in\mathbb Z_{(q)}$ if and only if $q\nmid b$: if $q\nmid b$ then $x=a/b$ has the required form, while if $x=a/b=m/n$ with $q\nmid n$, then $an=bm$, and $q\mid b$ would give $q\mid an$ and hence $q\mid a$, contradicting coprimality. [F5, algebra]
+
 1.4 For a nonzero prime ideal $\mathfrak p$ of $\mathbb Z$ and $x\in\mathbb Q^\times$, [F5] writes $v_{\mathfrak p}(x)=v_{\mathfrak p}((x))$ as the unique integer $n$ with $x\mathbb Z_{\mathfrak p}=(x)_{\mathfrak p}=\mathfrak p^n\mathbb Z_{\mathfrak p}$. The powers $\mathfrak p^n\mathbb Z_{\mathfrak p}$ with $n\ge0$ are exactly the ideals of the discrete valuation ring $\mathbb Z_{\mathfrak p}$, and for $n<0$ the fractional ideal $\mathfrak p^n\mathbb Z_{\mathfrak p}$ properly contains $\mathbb Z_{\mathfrak p}$; hence $v_{\mathfrak p}(x)\ge0$ if and only if $x\mathbb Z_{\mathfrak p}\subseteq\mathbb Z_{\mathfrak p}$, that is, if and only if $x\in\mathbb Z_{\mathfrak p}$. [F5, algebra]
 
 2.1 An element $x\in\mathbb Q^\times$ lies in $R$ if and only if $e_q(x)\ge0$ for every prime $q\notin S$. If $x=a/b$ with $a\in\mathbb Z$ and $b\in M$, then $b$ has no prime divisor outside $S$, so for $q\notin S$ one has $e_q(x)=v_q(a)-v_q(b)=v_q(a)-0\ge0$, where the exponents are those of the factorisations of $a$ and $b$; conversely, if $e_q(x)\ge0$ for all $q\notin S$ and $x=a/b$ is in lowest terms with $b>0$, then a prime $q\mid b$ satisfies $v_q(a)=0$ and $v_q(x)=-v_q(b)<0$, so $q\in S$; hence every prime divisor of $b$ lies in $S$, that is $b\in M$, and $x=a/b\in R$. [F1, F3, F5, step 1.1, step 1.2, algebra]

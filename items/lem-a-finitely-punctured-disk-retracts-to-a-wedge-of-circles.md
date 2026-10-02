@@ -2,7 +2,7 @@
 id: lem-a-finitely-punctured-disk-retracts-to-a-wedge-of-circles
 kind: lemma
 title: "A finitely punctured open disk has the homotopy type of a finite wedge of circles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-homotopy-equivalence, def-retraction-and-deformation-retract, thm-a-deformation-retract-is-a-homotopy-equivalence, thm-fundamental-group-of-finite-wedge-of-circles, thm-covering-space-lifting-criterion, thm-higher-dimensional-spheres-are-simply-connected, thm-reduced-words-form-the-free-group, prop-cubical-and-spherical-models-of-higher-homotopy-agree, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces, lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent, thm-induced-fundamental-group-map-functoriality]
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

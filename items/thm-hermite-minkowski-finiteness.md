@@ -2,7 +2,7 @@
 id: thm-hermite-minkowski-finiteness
 kind: theorem
 title: "Hermite-Minkowski finiteness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§28 Theorem 28.4, p.147."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -76,12 +77,19 @@ and only if $K=\mathbb Q$
 ## Proof
 
 1.1 If $n=1$ then every degree-one number field $K$ satisfies $[K:\mathbb Q]=1$, hence $K=\mathbb Q$ by [F5]; all such fields form the single $\mathbb Q$-isomorphism class of $\mathbb Q$. [F5, given]
+
 1.2 Now assume $n\ge2$. Since $B$ is a positive integer, $B\ge1$, and $R:=\sqrt{B+2}\ge1$. Let $\mathcal P$ be the set of monic $f\in\mathbb Z[X]$ with $\deg f\le n$ all of whose complex roots have modulus at most $R$. [F2, given]
+
 1.3 Let $K$ be any number field of degree $n$ with $|d_K|\le B$. By [F1] applied under the Axiom of Choice assumed in the statement, there is $\alpha\in\mathcal O_K$ with $K=\mathbb Q(\alpha)$ and every conjugate of $\alpha$ of modulus at most $R$. Let $f:=m_\alpha$ be its minimal polynomial over $\mathbb Q$. [F1, given]
+
 2.1 By [F2] the set $\mathcal P$ is finite. Let $\mathcal Q\subseteq\mathcal P$ be the subset of those $f$ that are irreducible in $\mathbb Q[X]$ and have degree exactly $n$, and define $g(f)$ to be the $\mathbb Q$-isomorphism class of the field $\mathbb Q[X]/(f)$; this is well defined because for irreducible $f$ of degree $n$ the quotient is a field extension of $\mathbb Q$ of degree $n$. [F2, F4, step 1.2]
+
 2.2 By [F3] the polynomial $f$ is monic of degree $[\mathbb Q(\alpha):\mathbb Q]=[K:\mathbb Q]=n$ with integer coefficients; it is irreducible in $\mathbb Q[X]$, and $K\cong\mathbb Q[X]/(f)$ as extensions of $\mathbb Q$. [F3, F4, step 1.3]
+
 3.1 Every complex root $\beta$ of $f$ is a conjugate of $\alpha$: by [F4] there is an embedding $K\to\mathbb C$ fixing $\mathbb Q$ and sending $\alpha$ to $\beta$, so $\beta$ is one of the conjugates of step 1.3 and $|\beta|\le R$. Hence $f\in\mathcal Q$ and the class of $K$ equals $g(f)$, which lies in the image $g(\mathcal Q)$. [F4, step 1.3, step 2.2]
+
 4.1 Every $\mathbb Q$-isomorphism class of a degree-$n$ number field with $|d_K|\le B$ therefore belongs to the image of the finite set $\mathcal Q$ under $g$, and an image of a finite set is finite; so only finitely many such classes exist for $n\ge2$. [step 2.1, step 3.1]
+
 5.1 Combining the case $n=1$ of step 1.1 with the case $n\ge2$ of step 4.1 gives the result for all positive integers $n$ and $B$. [step 1.1, step 4.1] ∎
 
 ## Remarks

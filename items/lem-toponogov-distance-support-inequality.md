@@ -2,7 +2,7 @@
 id: lem-toponogov-distance-support-inequality
 kind: lemma
 title: Toponogov distance support inequality
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-hessian-comparison-for-distance-under-sectional-curvature-bounds
@@ -28,6 +28,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -103,38 +104,46 @@ not at every later conjugate time. Consequently: if a minimizing unit-speed geod
 
 **Proof technique:** direct: put $\sigma=f\circ\rho$ with $\rho=d_g(o,\cdot)$ and $f'=\operatorname{sn}_k$, show the differential inequality $\operatorname{Hess}\sigma\le(-k\sigma+1)g$ with equality in the model, and use the maximum principle with a strict barrier $a$ satisfying $a''+k'a=0$, replacing $\rho$ at a possible cut point by the upper support $d_g(\cdot,o_\varepsilon)+\varepsilon$.
 
-1.1 The relevant distances lie in the domain of $f$. [F1, F2, F9]
+1.1 The relevant distances lie in the domain of $f$.
 For $0\le t\le L$ the triangle inequality gives $$d_g\bigl(o,\gamma(t)\bigr)\le\min\bigl\{a+t,\;b+(L-t)\bigr\},$$ and adding the two estimates yields $2d_g(o,\gamma(t))\le a+b+L$. The same argument in the model gives $2d_k(\bar o,\bar\gamma(t))\le a+b+L$. Hence every occurring distance is at most $(a+b+L)/2$, which is $<\pi/\sqrt k$ when $k>0$ by [F1] and finite in general; and every occurring distance is positive, because $d_g(o,\gamma(t))=0$ would put $o=\gamma(t)$ on the side and force $a+b=t+(L-t)=L$, contradicting the strict triangle inequality, and likewise in the model. By [F2], $f$ is strictly increasing on $[0,\infty)$ for $k\le0$ and on $[0,\pi/\sqrt k)$ for $k>0$; all occurring distance values lie in this interval.
+[F1, F2, F9]
 
-1.2 Endpoint values of $\delta$. [F1, F2]
+1.2 Endpoint values of $\delta$.
 Define $$\rho:=d_g(o,\cdot),\qquad \sigma:=f\circ\rho,\qquad \bar\rho:=d_k(\bar o,\cdot),\qquad \bar\sigma:=f\circ\bar\rho,$$ and $$\delta:=\sigma\circ\gamma-\bar\sigma\circ\bar\gamma\qquad\text{on }[0,L].$$ Since $d_g(o,\gamma(0))=a=d_k(\bar o,\bar x)=\bar\rho(\bar\gamma(0))$ and $d_g(o,\gamma(L))=b=d_k(\bar o,\bar y)=\bar\rho(\bar\gamma(L))$ by [F1], $$f\bigl(\rho(\gamma(0))\bigr)=f(a)=f\bigl(\bar\rho(\bar\gamma(0))\bigr), \qquad f\bigl(\rho(\gamma(L))\bigr)=f(b)=f\bigl(\bar\rho(\bar\gamma(L))\bigr),$$ that is $\delta(0)=\delta(L)=0$.
+[F1, F2]
 
-1.3 The differential inequality for $\sigma$. [F3, F4, F9]
+1.3 The differential inequality for $\sigma$.
 At a point $x\notin\{o\}\cup\operatorname{Cut}(o)$, $\rho$ is smooth and $\operatorname{grad}\rho$ is a unit vector. The chain rule of [F9] applied to $\sigma=f\circ\rho$ gives $$\operatorname{Hess}\sigma =f''(\rho)\,d\rho\otimes d\rho+f'(\rho)\operatorname{Hess}\rho .$$ Write $X=\alpha\operatorname{grad}\rho+X^\perp$ with $\alpha=d\rho(X)$ and $X^\perp\perp\operatorname{grad}\rho$. Since $\operatorname{Hess}\rho(\operatorname{grad}\rho,\cdot)=0$ by [F3] and $K\ge k$ holds on radial planes, [F3] yields $\operatorname{Hess}\rho(X^\perp,X^\perp)\le\operatorname{ct}_k(\rho) |X^\perp|^2$. Because $d\rho\otimes d\rho$ vanishes on $X^\perp$ and $f'=\operatorname{sn}_k$, $f''=\operatorname{cs}_k$: $$\operatorname{Hess}\sigma(X,X) =f''(\rho)\alpha^2+\operatorname{sn}_k(\rho) \operatorname{Hess}\rho(X^\perp,X^\perp) \le\operatorname{cs}_k(\rho)\alpha^2 +\operatorname{sn}_k(\rho)\operatorname{ct}_k(\rho)|X^\perp|^2 .$$ Since $\operatorname{sn}_k\operatorname{ct}_k=\operatorname{cs}_k$ by [F2] and $\operatorname{cs}_k=-kf+1=f''$, the right-hand side equals $$\operatorname{cs}_k(\rho)\bigl(\alpha^2+|X^\perp|^2\bigr) =\bigl(-k\sigma(x)+1\bigr)\,g_x(X,X),$$ where $|X|^2=\alpha^2+|X^\perp|^2$ and $\sigma(x)=f(\rho(x))$. Hence $$\operatorname{Hess}\sigma\le(-k\sigma+1)\,g \qquad\text{on }M\setminus(\{o\}\cup\operatorname{Cut}(o)).$$
+[F3, F4, F9]
 
-1.4 The model identity. [F1, F3, F5, F9]
+1.4 The model identity.
 In the model, $\bar\rho$ is smooth along $\bar\gamma$: by step 1.1 $0<\bar\rho(\bar\gamma(t))<\pi/\sqrt k$ when $k>0$ and $\bar\rho(\bar\gamma(t))>0$ always; for $k>0$ the model is the round sphere and points at distance $<\pi/\sqrt k$ from $\bar o$ are off $\operatorname{Cut}(\bar o)$ by [F5], while for $k\le0$ the model has empty cut loci by [F5]. Since the model has constant curvature $k$, [F3] applies there in both directions and $$\operatorname{Hess}\bar\rho=\operatorname{ct}_k(\bar\rho) \bigl(g-d\bar\rho\otimes d\bar\rho\bigr) \quad\text{on the normal space},\qquad \operatorname{Hess}\bar\rho(\operatorname{grad}\bar\rho,\cdot)=0 .$$ Repeating the computation of step 1.3 with equalities in place of both inequalities gives, at every point of the model side, $$\operatorname{Hess}\bar\sigma=\bigl(-k\bar\sigma+1\bigr)g .$$ Since $\bar\gamma$ is a unit-speed geodesic, the second-derivative identity of [F9] gives $$\bigl(\bar\sigma\circ\bar\gamma\bigr)''(t) =\operatorname{Hess}\bar\sigma\bigl(\dot{\bar\gamma},\dot{\bar\gamma}\bigr) =-k\,\bar\sigma\bigl(\bar\gamma(t)\bigr)+1\qquad(0\le t\le L).$$
+[F1, F3, F5, F9]
 
 1.5 The strict barrier. [F1, F2]
 Suppose $m<0$ is the minimum from step 2.2. Choose $k'>k$ with $k'>0$ and $L<\pi/\sqrt{k'}$: if $k>0$, take $k<k'<(\pi/L)^2$; if $k\le0$, choose a sufficiently small $k'>0$. Then choose $\tau>0$ with $L+\tau<\pi/\sqrt{k'}$, and on $[-\tau,L]$ define $$a_0(t):=m\,\frac{\sin(\sqrt{k'}(t+\tau))}{\min_{0\le s\le L}\sin(\sqrt{k'}(s+\tau))}.$$ The denominator is positive, $a_0(t)\le m<0$ on $[0,L]$, $a_0''+k'a_0=0$, and $a_0(-\tau)=0$. [F1, F2]
 
-2.1 The differential inequality for $\delta$. [F4, F9, step 1.3, step 1.4] At every $t\in(0,L)$ with $\gamma(t)\notin\operatorname{Cut}(o)$ the function $\sigma\circ\gamma$ is $C^2$ near $t$ by [F4], and the second-derivative identity of [F9] with the unit-speed geodesic $\gamma$ gives $$\bigl(\sigma\circ\gamma\bigr)''(t) =\operatorname{Hess}\sigma\bigl(\dot\gamma,\dot\gamma\bigr) \le-k\,\sigma\bigl(\gamma(t)\bigr)+1$$ by step 1.3. Subtracting the identity of step 1.4, $$\delta''(t)\le-k\,\delta(t) \qquad\text{whenever }\gamma(t)\notin\operatorname{Cut}(o).$$ Note that $\gamma(t)\ne o$ for all $t$ by step 1.1, so the excluded set is exactly $\gamma^{-1}(\operatorname{Cut}(o))$.
+2.1 The differential inequality for $\delta$. At every $t\in(0,L)$ with $\gamma(t)\notin\operatorname{Cut}(o)$ the function $\sigma\circ\gamma$ is $C^2$ near $t$ by [F4], and the second-derivative identity of [F9] with the unit-speed geodesic $\gamma$ gives $$\bigl(\sigma\circ\gamma\bigr)''(t) =\operatorname{Hess}\sigma\bigl(\dot\gamma,\dot\gamma\bigr) \le-k\,\sigma\bigl(\gamma(t)\bigr)+1$$ by step 1.3. Subtracting the identity of step 1.4, $$\delta''(t)\le-k\,\delta(t) \qquad\text{whenever }\gamma(t)\notin\operatorname{Cut}(o).$$ Note that $\gamma(t)\ne o$ for all $t$ by step 1.1, so the excluded set is exactly $\gamma^{-1}(\operatorname{Cut}(o))$.
+[F4, F9, step 1.3, step 1.4]
 
-2.2 Assumption of contradiction and an interior minimizer. [step 1.2]
+2.2 Assumption of contradiction and an interior minimizer.
 Assume that $\delta(t_1)<0$ for some $t_1\in[0,L]$. Since $\delta$ is continuous on the compact interval $[0,L]$ and $\delta(0)=\delta(L)=0$ by step 1.2, the minimum $$m:=\min_{[0,L]}\delta<0$$ is attained at some point $t_0\in(0,L)$; fix such a point, so $\delta(t_0)=m<0$.
+[step 1.2]
 
 3.1 The barrier below $\delta$. [step 1.5, step 2.2]
 Take $a_0$ as in step 1.5 and define the continuous ratio $\delta/a_0$ on $[0,L]$. It is zero at the endpoints and positive at the minimum point $t_0$ from step 2.2, so its positive maximum $$\lambda:=\max_{t\in[0,L]}\frac{\delta(t)}{a_0(t)}>0$$ is attained at some $t_*\in(0,L)$. Put $\eta:=\lambda a_0$ and $m_*:=\delta(t_*)=\eta(t_*)<0$. Since $a_0<0$, the definition of $\lambda$ gives $\eta(t)\le\delta(t)$ for all $t$, with equality at $t_*$; moreover $\eta''=-k'\eta$ on $[0,L]$. [step 1.5, step 2.2]
 
 4.1 Case 1: $\gamma(t_*)$ is not a cut point of $o$. [F4, F6, F7, step 2.1, step 3.1] If $\gamma(t_*)\notin\operatorname{Cut}(o)$, then $\delta$ is $C^2$ near $t_*$. The local minimum of $\delta-\eta$ at $t_*$ gives $(\delta-\eta)''(t_*)\ge0$, whereas step 2.1 and $\eta''=-k'\eta$ give $$(\delta-\eta)''(t_*)\le-k\delta(t_*)+k'\eta(t_*)=(k'-k)m_*<0,$$ a contradiction. [step 2.1, step 3.1]
 
-4.2 Case 2: $\gamma(t_*)$ is a cut point of $o$. [F4, F6, F7, F8, step 2.2, step 3.1]
+4.2 Case 2: $\gamma(t_*)$ is a cut point of $o$.
 Let $\beta:[0,L_0]\to M$, $L_0:=d_g(o,\gamma(t_*))$, be a minimizing unit-speed geodesic from $o$ to $\gamma(t_*)$. For $k>0$ put $M_0:=\max_{[0,L]}\rho\circ\gamma<\pi/\sqrt k$ as in step 1.1 and choose $0<\varepsilon<\min\{L_0,\pi/\sqrt k-M_0\}$; for $k\le0$ choose $0<\varepsilon<L_0$. Set $$o_\varepsilon:=\beta(\varepsilon),\qquad \rho_\varepsilon:=d_g(o_\varepsilon,\cdot)+\varepsilon.$$ We claim $\gamma(t_*)\notin\operatorname{Cut}(o_\varepsilon)$. First, no conjugate pair along a minimizing segment $\sigma:[0,\ell]\to M$ can occur at times $0<s_1<s_2\le\ell$: if $s_2<\ell$, the minimizing geodesic from $\sigma(s_1)$ continues past its conjugate point $\sigma(s_2)$; if $s_2=\ell$, reverse $\sigma$ and use the conjugate pair at times $0$ and $\ell-s_1$, past which the reversed segment still minimizes. Both contradict [[thm-a-geodesic-does-not-minimize-past-its-first-conjugate-point]] [F7]. Second, $\beta|_{[\varepsilon,L_0]}$ is the unique minimizing segment from $o_\varepsilon$ to $\gamma(t_*)$: concatenating any such segment with $\beta|_{[0,\varepsilon]}$ gives a minimizing curve from $o$, which is smooth at $o_\varepsilon$ and has the initial data of $\beta$, hence equals $\beta$ by geodesic uniqueness [F8]. If $\gamma(t_*)$ were a cut point of $o_\varepsilon$, the cut-point characterization [F4] would give either a conjugate pair on this minimizing segment or two distinct minimizing segments, contradicting one of these facts.
+[F4, F6, F7, F8, step 2.2, step 3.1]
 
 5.1 Case 2, concluded: the support estimate. [F3, F9, step 2.1, step 3.1, step 4.2]
 The function $\rho_\varepsilon$ is smooth near $\gamma(t_*)$ by step 4.2 and is an upper support of $\rho$: the triangle inequality gives $\rho_\varepsilon\ge\rho$ everywhere, with equality at $\gamma(t_*)$ since $\beta$ is minimizing. As $f$ is increasing on the relevant model interval, $\sigma_\varepsilon:=f\circ\rho_\varepsilon$ satisfies $\sigma_\varepsilon\ge\sigma$ with equality at $\gamma(t_*)$. Thus $$\delta_\varepsilon:=\sigma_\varepsilon\circ\gamma-\bar\sigma\circ\bar\gamma\ge\delta\ge\eta,$$ with equality $\delta_\varepsilon(t_*)=\eta(t_*)=m_*$. Hence $\delta_\varepsilon-\eta$ has a local minimum at $t_*$. Put $u:=d_g(o_\varepsilon,\cdot)$ and $\bar t:=u(\gamma(t_*))=L_0-\varepsilon$. By the chain rule [F9], $$\operatorname{Hess}\sigma_\varepsilon=f''(\bar t+\varepsilon)\,du\otimes du+f'(\bar t+\varepsilon)\operatorname{Hess}u.$$ At the contact point, Hessian comparison [F3] applied from $o_\varepsilon$ gives, for $X=\alpha\operatorname{grad}u+X^\perp$, $$\operatorname{Hess}\sigma_\varepsilon(X,X)\le\operatorname{cs}_k(\bar t+\varepsilon)\alpha^2+\operatorname{sn}_k(\bar t+\varepsilon)\operatorname{ct}_k(\bar t)|X^\perp|^2.$$ The model addition formula gives $$\operatorname{sn}_k(\bar t+\varepsilon)\operatorname{ct}_k(\bar t)=\operatorname{cs}_k(\bar t+\varepsilon)+\beta_\varepsilon,\qquad \beta_\varepsilon:=\frac{\operatorname{sn}_k(\varepsilon)}{\operatorname{sn}_k(\bar t)}>0,$$ and $\beta_\varepsilon\to0$ as $\varepsilon\downarrow0$. Since $f''=-kf+1$, this yields $$\operatorname{Hess}\sigma_\varepsilon\le(-k\sigma_\varepsilon+1+\beta_\varepsilon)g$$ at the contact point. Combining with the model identity of step 1.4 and $\eta''=-k'\eta$ gives $$(\delta_\varepsilon-\eta)''(t_*)\le(k'-k)m_*+\beta_\varepsilon<0$$ for small enough $\varepsilon>0$, because $m_*<0$ and $k'>k$. This contradicts the local minimum. [step 1.4, step 3.1, step 4.2]
 
-6.1 Conclusion. [F2, step 1.1, step 2.2, step 4.1, step 5.1] Both contact cases being impossible, the assumption of step 2.2 is false: $$\delta(t)\ge0\qquad(0\le t\le L).$$ Since $f$ is strictly increasing on the interval that contains both $\rho(\gamma(t))=d_g(o,\gamma(t))$ and $\bar\rho(\bar\gamma(t))=d_k(\bar o,\bar\gamma(t))$ by step 1.1, the inequality $f(\rho(\gamma(t)))\ge f(\bar\rho(\bar\gamma(t)))$ forces $$d_g\bigl(o,\gamma(t)\bigr)\ge d_k\bigl(\bar o,\bar\gamma(t)\bigr) \qquad(0\le t\le L),$$ which is the assertion. The barrier was used at an interior point of $(0,L)$ in both cases, so the endpoints need no separate treatment beyond $\delta(0)=\delta(L)=0$ of step 1.2; the strict triangle inequalities of [F1] were used exactly to make $a,b>0$, to exclude $o\in\gamma([0,L])$, and to give the comparison triangle; and no choice beyond the inherited $\mathrm{AC}_\omega$ of [A1] was used. ∎
+6.1 Conclusion. Both contact cases being impossible, the assumption of step 2.2 is false: $$\delta(t)\ge0\qquad(0\le t\le L).$$ Since $f$ is strictly increasing on the interval that contains both $\rho(\gamma(t))=d_g(o,\gamma(t))$ and $\bar\rho(\bar\gamma(t))=d_k(\bar o,\bar\gamma(t))$ by step 1.1, the inequality $f(\rho(\gamma(t)))\ge f(\bar\rho(\bar\gamma(t)))$ forces $$d_g\bigl(o,\gamma(t)\bigr)\ge d_k\bigl(\bar o,\bar\gamma(t)\bigr) \qquad(0\le t\le L),$$ which is the assertion. The barrier was used at an interior point of $(0,L)$ in both cases, so the endpoints need no separate treatment beyond $\delta(0)=\delta(L)=0$ of step 1.2; the strict triangle inequalities of [F1] were used exactly to make $a,b>0$, to exclude $o\in\gamma([0,L])$, and to give the comparison triangle; and no choice beyond the inherited $\mathrm{AC}_\omega$ of [A1] was used.
+[F2, step 1.1, step 2.2, step 4.1, step 5.1] ∎
 
 ## Source locator
 

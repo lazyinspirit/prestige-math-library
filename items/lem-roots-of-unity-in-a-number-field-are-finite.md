@@ -2,7 +2,7 @@
 id: lem-roots-of-unity-in-a-number-field-are-finite
 kind: lemma
 title: Finitely many roots of unity in a number field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -42,6 +42,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "Cor. 15.8 pp.5-6 (the torsion of K^× is the group of roots of unity in K)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

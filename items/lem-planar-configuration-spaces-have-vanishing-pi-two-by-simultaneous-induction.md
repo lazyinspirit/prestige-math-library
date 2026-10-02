@@ -2,7 +2,7 @@
 id: lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction
 kind: lemma
 title: "Vanishing $\\pi_2$ for every ordered planar configuration space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-fadell-neuwirth-forgetful-fibration, lem-a-finitely-punctured-disk-retracts-to-a-wedge-of-circles, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

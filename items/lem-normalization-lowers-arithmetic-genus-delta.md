@@ -2,7 +2,7 @@
 id: lem-normalization-lowers-arithmetic-genus-delta
 kind: lemma
 title: "Arithmetic genus, geometric genus and delta invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

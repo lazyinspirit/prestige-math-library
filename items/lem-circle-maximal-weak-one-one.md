@@ -2,7 +2,7 @@
 id: lem-circle-maximal-weak-one-one
 kind: lemma
 title: "The circle maximal function is weak type one one for finite measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-compactness-is-intrinsic, def-countable-choice, def-circle-maximal-function-and-nontangential-region, def-l-one-of-a-measure, def-total-variation-of-a-signed-or-complex-measure, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-fatou-lemma, thm-total-variation-is-a-measure, cor-second-countable-lch-locally-finite-borel-measures-are-regular, thm-complex-holder-minkowski-and-the-quotient-norm]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: ex-frobenius-restriction-for-p-five-q-three
 kind: example
 title: Frobenius restriction for p=5 and q=3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -28,6 +28,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Example 8.19, pp. 143-144: the Frobenius in Q(zeta_5) restricts to Q(sqrt 5) with sign (5/q), and (5/3) = (3/5) = -1."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

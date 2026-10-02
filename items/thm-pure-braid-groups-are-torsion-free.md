@@ -2,7 +2,7 @@
 id: thm-pure-braid-groups-are-torsion-free
 kind: theorem
 title: "Pure braid groups are torsion-free"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-pure-braid-forgetting-a-strand-short-exact-sequence, thm-free-groups-are-torsion-free, def-pure-braid-group-from-ordered-configurations, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

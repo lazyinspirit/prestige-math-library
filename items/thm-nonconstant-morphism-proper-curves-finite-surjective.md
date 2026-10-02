@@ -2,7 +2,7 @@
 id: thm-nonconstant-morphism-proper-curves-finite-surjective
 kind: theorem
 title: "Nonconstant morphisms of proper curves are finite and surjective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

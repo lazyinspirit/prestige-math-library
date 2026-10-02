@@ -2,7 +2,7 @@
 id: lem-hilbert-transform-has-signum-fourier-multiplier
 kind: lemma
 title: "The Hilbert transform is the tempered convolution with pv(1/(pi x)) and has signum Fourier multiplier"
-status: draft
+status: published
 origin: pipeline
 deps: [def-truncated-hilbert-transform-and-principal-value, lem-singular-kernel-sine-integral-under-countable-choice, def-fourier-transform-of-a-tempered-distribution, thm-fourier-transform-converts-allowed-tempered-convolutions-to-products, def-convolution-of-a-tempered-distribution-with-a-schwartz-function, def-tempered-distribution, def-schwartz-space-and-its-seminorms, lem-schwartz-functions-and-all-derivatives-are-integrable, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, cor-mean-value-theorem, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-dominated-convergence, thm-substitution-for-improper-integrals, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

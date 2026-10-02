@@ -2,7 +2,7 @@
 id: lem-nevanlinna-poisson-jensen-derivative-bound
 kind: lemma
 title: "Separated-radius Poisson–Jensen derivative bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,8 @@ sources:
     - title: "I. Laine, Complex Analysis III lecture notes"
       url: "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf"
       locator: "§§5–6.1, printed pp. 35–43: the lemma on the logarithmic derivative with separated radii"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

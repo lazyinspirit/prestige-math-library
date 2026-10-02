@@ -2,7 +2,7 @@
 id: cor-entire-harmonic-function-of-sublinear-growth-is-constant
 kind: corollary
 title: Entire harmonic functions of sublinear growth are constant
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, cor-harmonic-cauchy-estimates-in-supremum-norm, cor-zero-derivative-implies-constant, thm-chain-rule-for-total-derivatives]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

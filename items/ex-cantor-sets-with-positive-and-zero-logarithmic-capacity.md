@@ -2,7 +2,7 @@
 id: ex-cantor-sets-with-positive-and-zero-logarithmic-capacity
 kind: example
 title: "Two Cantor sets with different logarithmic capacities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, Cantor sets and the capacity of thin sets"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

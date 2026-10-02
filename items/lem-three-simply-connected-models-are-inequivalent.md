@@ -2,7 +2,7 @@
 id: lem-three-simply-connected-models-are-inequivalent
 kind: lemma
 title: "The sphere, plane and disc are pairwise biholomorphically distinct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -27,6 +27,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

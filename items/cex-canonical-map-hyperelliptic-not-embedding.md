@@ -2,7 +2,7 @@
 id: cex-canonical-map-hyperelliptic-not-embedding
 kind: counterexample
 title: "The canonical map of a hyperelliptic curve is not an embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -107,7 +108,7 @@ would remain one after base extension, so the same conclusion holds over $k$.
 identifies the generic geometric fiber as two distinct points; it is not
 needed for the non-embedding argument.
 
-1.1 (Veronese factorization and nonembedding.) [F1, F2, F4]
+1.1 (Veronese factorization and nonembedding.)
 By [F1] and [F2], $L$ has degree two, $L^{\otimes(g-1)}\cong\omega_{C_{\bar k}}$,
 and the canonical map factors through $v_{g-1}\circ\varphi$. Its generic
 degree onto the rational normal image is two. If this composite were a closed
@@ -116,8 +117,9 @@ immersion into its Veronese image, which is isomorphic to the reduced scheme
 $\mathbf P^1_{\bar k}$. The map $\varphi$ is finite and surjective by [F1];
 [F4] then makes it an isomorphism, contradicting degree two. This proves the
 nonembedding without assuming separability.
+[F1, F2, F4]
 
-1.2 (Generic geometric fiber.) [F1, F2, F5]
+1.2 (Generic geometric fiber.)
 To describe the generic geometric fiber, work over $\Omega=\bar k$.
 In characteristic different from two, a degree-two extension
 $\Omega(C)/\Omega(t)$ is separable. In characteristic two, a degree-two
@@ -139,15 +141,17 @@ therefore separable in characteristic two as well. Its generic geometric
 fiber consists of two distinct points, and the Veronese factorization
 identifies them under the canonical map. Special fibers may be ramified and
 need not have two distinct points.
+[F1, F2, F5]
 
-2.1 (Numerical canonical data.) [F2, F3, step 1.1]
+2.1 (Numerical canonical data.)
 The canonical space has dimension $g$, the canonical bundle has degree
 $2g-2$, and it is globally generated. Since the canonical map is not a closed
 immersion by step 1.1, base-point-freeness and these numerical data alone do
 not imply the embedding conclusion.
+[F2, F3, step 1.1]
 
-2.2 (Genus two.) [F2, step 1.1]
+2.2 (Genus two.)
 For $g=2$, the Veronese map in the factorization is the identity of
 $\mathbf P^1$. Thus after base extension the canonical map is the degree-two
 map $\varphi$ itself, not an embedding.
-∎
+[F2, step 1.1] ∎

@@ -2,7 +2,7 @@
 id: cex-setwise-puncture-preservation-does-not-define-the-pure-mapping-class-group
 kind: counterexample
 title: "Setwise puncture preservation does not imply purity"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-pure-mapping-class-group-of-a-punctured-disk,
@@ -24,6 +24,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 1.4, printed pp. 6-7"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

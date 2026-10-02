@@ -2,7 +2,7 @@
 id: thm-degree-positive-line-bundle-sections-zero-bound
 kind: theorem
 title: "Negative-degree line bundles have no nonzero sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
     - title: "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 6-8"
       url: "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

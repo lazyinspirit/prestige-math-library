@@ -2,7 +2,7 @@
 id: cor-cyclotomic-ramification-criterion
 kind: corollary
 title: Ramification primes of a reduced cyclotomic conductor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Theorem 11.6(2) and Remark 11.7, pp. 61-62: for N not twice an odd integer, p divides the discriminant of Q(zeta_N) if and only if p divides N; the excluded shape N = 2 times odd is exactly the non-reduced one."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

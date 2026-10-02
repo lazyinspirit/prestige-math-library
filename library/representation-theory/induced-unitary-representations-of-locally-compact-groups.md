@@ -1,7 +1,7 @@
 ---
 page: induced-unitary-representations-of-locally-compact-groups
 title: Induced Unitary Representations of Locally Compact Groups
-status: draft
+status: published
 items:
   - lem-closed-subgroup-quotient-averaging-and-compact-lifts
   - def-quasi-invariant-measure-on-a-homogeneous-space

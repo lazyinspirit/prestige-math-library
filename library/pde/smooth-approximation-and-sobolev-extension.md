@@ -1,7 +1,7 @@
 ---
 page: smooth-approximation-and-sobolev-extension
 title: Smooth Approximation and Sobolev Extension
-status: draft
+status: published
 items: ["lem-mollification-commutes-with-weak-derivatives-in-the-interior", "thm-local-smooth-approximation-in-wkp", "thm-meyers-serrin-density-on-an-arbitrary-open-set", "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn", "rem-meyers-serrin-does-not-assert-density-for-p-infinity", "def-wkp-zero-as-a-sobolev-closure", "lem-zero-extension-from-w-one-p-zero", "lem-compact-support-zero-extension-in-wkp", "def-sobolev-extension-domain-and-extension-operator", "thm-wkp-extension-from-a-half-space", "def-bounded-c-k-domain-and-boundary-charts", "lem-c-k-boundary-flattening-preserves-wkp-locally", "thm-extension-theorem-for-bounded-smooth-domains", "thm-smooth-up-to-the-boundary-density-on-smooth-domains", "cor-sobolev-embeddings-transfer-from-rn-to-extension-domains", "rem-lipschitz-versus-c-one-versus-smooth-domain-hypotheses"]
 examples: []
 ---

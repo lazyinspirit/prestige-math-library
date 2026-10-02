@@ -2,7 +2,7 @@
 id: ex-unitary-induction-from-the-trivial-subgroup
 kind: example
 title: "Induction from the trivial subgroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, thm-unitary-induction-from-a-closed-subgroup, thm-weil-quotient-integration-formula-with-rho-function, def-left-and-right-regular-unitary-representations]
@@ -21,6 +21,7 @@ sources:
     - title: "David Vogan, Unitary Representations of Locally Compact Groups and Induced Representations"
       url: "https://math.mit.edu/~dav/ind.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -48,6 +49,7 @@ Assume AC. For $H=\{e\}$ with its standard Haar measure of mass $1$ and the one-
 **Proof technique:** direct.
 
 1.1 When $H=\{e\}$, the rho covariance imposes no restriction, and $\rho=1$ is valid. The averaging map $T_H$ is identity and the Weil formula becomes $\int_G f(x)dx=\int_G f(x)d\mu_\rho(x)$. Radon uniqueness [F2] identifies $\mu_\rho$ with left Haar measure. [F2, given, A1]
+
 2.1 Covariance is empty for the trivial subgroup, so the dense model is $C_c(G)$ and its completion is $L^2(G)$. The density cocycle is $D_g(x)=1$, hence the induced action is $F(x)\mapsto F(g^{-1}x)$, exactly [F3]. The construction theorem [F1] supplies strong continuity and unitarity. ∎ [A1, F1, F2, F3, step 1.1]
 ## Sources
 

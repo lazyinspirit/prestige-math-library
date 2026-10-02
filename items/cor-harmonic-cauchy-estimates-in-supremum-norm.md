@@ -2,7 +2,7 @@
 id: cor-harmonic-cauchy-estimates-in-supremum-norm
 kind: corollary
 title: Harmonic Cauchy estimates in supremum norm
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, lem-sphere-and-ball-measures-scale, thm-interior-derivative-estimates-for-harmonic-functions]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

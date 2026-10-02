@@ -2,7 +2,7 @@
 id: thm-extension-theorem-for-bounded-smooth-domains
 kind: theorem
 title: Bounded C^k domains admit integer-order Sobolev extension
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-extension-domain-and-extension-operator, def-bounded-c-k-domain-and-boundary-charts, thm-wkp-extension-from-a-half-space, lem-c-k-boundary-flattening-preserves-wkp-locally, lem-test-function-cutoffs-and-euclidean-localization, lem-weak-leibniz-rule-with-a-smooth-factor, lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces, lem-compact-support-zero-extension-in-wkp, def-sobolev-space-wkp-and-its-norm, thm-monotone-convergence-for-the-integral, def-axiom-of-choice]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

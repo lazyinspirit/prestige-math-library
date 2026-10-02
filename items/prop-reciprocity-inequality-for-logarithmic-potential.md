@@ -2,7 +2,7 @@
 id: prop-reciprocity-inequality-for-logarithmic-potential
 kind: proposition
 title: "Reciprocity inequality for logarithmic potentials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, reciprocity of the logarithmic kernel"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

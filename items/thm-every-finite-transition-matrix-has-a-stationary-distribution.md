@@ -2,7 +2,7 @@
 id: thm-every-finite-transition-matrix-has-a-stationary-distribution
 kind: theorem
 title: "Every transition matrix on a nonempty finite state space has a stationary distribution"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

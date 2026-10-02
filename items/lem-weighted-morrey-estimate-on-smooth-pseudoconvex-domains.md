@@ -2,7 +2,7 @@
 id: lem-weighted-morrey-estimate-on-smooth-pseudoconvex-domains
 kind: lemma
 title: Weighted Morrey–Kohn estimate with a pseudoconvex boundary term
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weighted-l2-spaces-dbar-forms
@@ -38,6 +38,7 @@ sources:
       url: https://www.mat.univie.ac.at/~has/dbar/dbar1.pdf
       locator: "§4, Proposition 4.12 and its complete proof via Lemmas 4.14-4.16, printed pp. 45-49; boundary criterion (4.31) and its necessity/sufficiency proof, printed p. 48."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

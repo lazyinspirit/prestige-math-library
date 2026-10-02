@@ -2,7 +2,7 @@
 id: cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold
 kind: corollary
 title: Squared distance is strictly convex along geodesics in a hadamard manifold
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-cartan-hadamard
@@ -24,6 +24,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -100,32 +101,41 @@ already contained in the word Hadamard.
 
 **Proof technique:** direct: identify $f$ in exponential coordinates using the uniqueness of minimizing segments, verify the product rule for Hessians of squares of smooth functions, apply the Hessian comparison in the nonpositive direction to obtain $\operatorname{Hess}f\ge g$, and integrate the resulting second-derivative bound along the geodesic.
 
-1.1 The distance formula and the absence of cut points. [F1, F2, F3, F4]
+1.1 The distance formula and the absence of cut points.
 By [F2], for every $w\in T_pM$ the segment $t\mapsto\exp_p(tw)$, $t\in[0,1]$, is the unique affinely parametrized geodesic segment from $p$ to $\exp_p(w)$, and it minimizes; hence $d_g(p,\exp_p(w))=|w|_p$. Suppose now that $v\in S_pM$ has finite cut time $c:=c_p(v)<+\infty$. By [F4] either $\gamma_{p,v}(0)$ and $\gamma_{p,v}(c)$ are conjugate along $\gamma_{p,v}$, which [F3] forbids, or two distinct minimizing unit-speed geodesics join $p$ to $\gamma_{p,v}(c)$, which contradicts the uniqueness in [F2] (a minimizing unit-speed geodesic on $[0,c]$ reparametrized affinely to $[0,1]$ is an affinely parametrized geodesic segment from $p$ to the same point, and there is exactly one). Both alternatives are impossible, so $c_p(v)=+\infty$ for every unit $v$: the cut locus of $p$ is empty, and $r_p(\exp_p w)=|w|_p$ for every $w\in T_pM$.
+[F1, F2, F3, F4]
 
-1.2 The product rule for a squared smooth function. [F7, algebra]
+1.2 The product rule for a squared smooth function.
 Let $u>0$ be smooth near a point $x$ and set $F:=\tfrac12u^2$. Then $\operatorname{grad}F=u\operatorname{grad}u$, so for vector fields $X,Y$, $$\operatorname{Hess}F(X,Y) =g\bigl(\nabla_X(u\operatorname{grad}u),Y\bigr) =X(u)\,g(\operatorname{grad}u,Y)+u\,g(\nabla_X\operatorname{grad}u,Y),$$ i.e. $$\operatorname{Hess}\bigl(\tfrac12u^2\bigr)(X,Y) =du(X)du(Y)+u\operatorname{Hess}u(X,Y),$$ both sides being smooth and symmetric by [F7].
+[F7, algebra]
 
-1.3 The second derivative of a smooth function along a geodesic. [F7, F8]
+1.3 The second derivative of a smooth function along a geodesic.
 Let $h$ be smooth and let $\sigma$ be a geodesic with $\nabla_{\dot\sigma}\dot\sigma=0$. Then $$(h\circ\sigma)'=dh(\dot\sigma)=g(\operatorname{grad}h,\dot\sigma),$$ and differentiating again with metric compatibility and $\nabla_{\dot\sigma}\dot\sigma=0$ gives $$(h\circ\sigma)''=g\bigl(\nabla_{\dot\sigma}\operatorname{grad}h,\dot\sigma\bigr) =\operatorname{Hess}h(\dot\sigma,\dot\sigma).$$ The identity is local in the parameter and holds at every time of $I$.
+[F7, F8]
 
-2.1 Smoothness of $f$ and its Hessian at the base point. [F1, F7, step 1.1, step 1.3]
+2.1 Smoothness of $f$ and its Hessian at the base point.
 By step 1.1, $(f\circ\exp_p)(w)=\tfrac12|w|_p^2$ for every $w\in T_pM$, a smooth quadratic form on the vector space $T_pM$; since $\exp_p$ is a diffeomorphism by [F1], $f$ is smooth on $M$. For $X\in T_pM$ the curve $s\mapsto\exp_p(sX)$ is an affinely parametrized geodesic, so step 1.1 and step 1.3 give $$\operatorname{Hess}f(p)(X,X)=(f\circ\gamma_X)''(0) =\left.\frac{d^2}{ds^2}\right|_{s=0}\tfrac12 s^2|X|_p^2=|X|_p^2=g_p(X,X).$$ As $\operatorname{Hess}f(p)$ is symmetric ([F7]), the polarization identity recovers all mixed values, so $\operatorname{Hess}f(p)=g_p$.
+[F1, F7, step 1.1, step 1.3]
 
-2.2 The lower bound $\operatorname{Hess}f\ge g$ off the base point, in dimension $n\ge2$. [F5, F6, step 1.1, step 1.2]
+2.2 The lower bound $\operatorname{Hess}f\ge g$ off the base point, in dimension $n\ge2$.
 Fix $q\ne p$ and let $t_0:=r_p(q)>0$. By step 1.1 the cut locus of $p$ is empty, so $q\notin\{p\}\cup\operatorname{Cut}(p)$: $r_p$ is smooth near $q$, $|{\operatorname{grad}r_p}|=1$ and $\operatorname{grad}r_p$ is the terminal velocity of the minimizing geodesic from $p$ to $q$ ([F5]). By step 1.2 applied to $u=r_p$, $$\operatorname{Hess}f=\operatorname{Hess}\bigl(\tfrac12r_p^2\bigr) =dr_p\otimes dr_p+r_p\operatorname{Hess}r_p \qquad\text{near }q .$$ Write an arbitrary $X\in T_qM$ as $X=a\operatorname{grad}r_p+X^\perp$ with $a:=dr_p(X)$ and $X^\perp\perp\operatorname{grad}r_p$. By [F6](a) $\operatorname{Hess}r_p(\operatorname{grad}r_p,\cdot)=0$, so $$\operatorname{Hess}r_p(X,X)=\operatorname{Hess}r_p(X^\perp,X^\perp).$$ Since $K\le0$ everywhere, the hypothesis of [F6](b) holds with $k=0$ along the minimizing geodesic from $p$ to $q$, and [F6](b) yields $\operatorname{Hess}r_p(X^\perp,X^\perp)\ge(1/t_0)|X^\perp|^2$. Therefore $$\operatorname{Hess}f(X,X)=a^2+t_0\operatorname{Hess}r_p(X^\perp,X^\perp) \ge a^2+|X^\perp|^2=g_q(X,X),$$ using that $X\mapsto(a,X^\perp)$ is a $g_q$-orthogonal decomposition.
+[F5, F6, step 1.1, step 1.2]
 
-2.3 The lower bound in dimension $n=1$. [F5, F7, step 1.1, step 1.2]
+2.3 The lower bound in dimension $n=1$.
 If $\dim M=1$ then at every $q\ne p$ the tangent space is spanned by the unit vector $\operatorname{grad}r_p$, so $X^\perp=0$ and the bound $\operatorname{Hess}r_p(X^\perp,X^\perp)\ge(1/t_0)|X^\perp|^2$ holds with both sides equal to $0$; the gradient is a unit geodesic field by [F5], so $\nabla_{\operatorname{grad}r_p}\operatorname{grad}r_p=0$ and $\operatorname{Hess}r_p(\operatorname{grad}r_p,\operatorname{grad}r_p) =\tfrac12\operatorname{grad}r_p(|{\operatorname{grad}r_p}|^2)=0$ by [F7]. Hence, by step 1.2, $\operatorname{Hess}f=dr_p\otimes dr_p=g$ off $p$, and the computation of step 2.2 applies verbatim without invoking the dimension-$n\ge2$ comparison bound.
+[F5, F7, step 1.1, step 1.2]
 
-3.1 The bound $\operatorname{Hess}f\ge g$ on all of $M$. [step 2.1, step 2.2, step 2.3]
+3.1 The bound $\operatorname{Hess}f\ge g$ on all of $M$.
 Off $p$ the pointwise inequality was proved in step 2.2 for $n\ge2$ and in step 2.3 for $n=1$, and at $p$ the equality $\operatorname{Hess}f(p)=g_p$ of step 2.1 gives the bound as well. In dimension zero $M$ is a point and the tensor inequality is vacuous. In positive dimension the inequality was checked on a decomposition spanning each tangent space, so $\operatorname{Hess}f\ge g$ holds on $M$.
+[step 2.1, step 2.2, step 2.3]
 
-4.1 The second-derivative bound along a geodesic. [F8, step 1.3, step 3.1]
+4.1 The second-derivative bound along a geodesic.
 For the nonconstant affinely parametrized geodesic $\gamma$, put $\varphi(t):=f(\gamma(t))=\tfrac12d_g(p,\gamma(t))^2$. By step 1.3, $$\varphi''(t)=\operatorname{Hess}f(\dot\gamma(t),\dot\gamma(t)) \ge g(\dot\gamma(t),\dot\gamma(t))=c>0,$$ where $c=|\dot\gamma|^2$ is a positive constant by [F8]. In particular $\varphi$ is twice differentiable on the open interval $I$ with $\varphi''\ge c$ everywhere.
+[F8, step 1.3, step 3.1]
 
-5.1 Strict convexity. [F9, step 4.1]
-Define $\psi(t):=\varphi(t)-\tfrac c2t^2$ on $I$. Then $\psi''=\varphi''-c\ge0$, so $\psi$ is convex by [F9]; and $t\mapsto\tfrac c2t^2$ is strictly convex by [F9], since $c>0$. For distinct $s,t\in I$ and $\lambda\in(0,1)$, put $m:=(1-\lambda)s+\lambda t$ and $q(z):=\tfrac c2z^2$; convexity of $\psi$ and strict convexity of $q$ give, one of the two summed inequalities being strict, $$\varphi(m)=\psi(m)+q(m) <\bigl[(1-\lambda)\psi(s)+\lambda\psi(t)\bigr] +\bigl[(1-\lambda)q(s)+\lambda q(t)\bigr] =(1-\lambda)\varphi(s)+\lambda\varphi(t),$$ the strict inequality because $s\ne t$ in [F9]. Multiplying by $2$, the function $t\mapsto d_g(p,\gamma(t))^2$ is strictly convex on $I$, as claimed. A constant geodesic has $\varphi''=0$ and $\varphi$ constant, so no strict convexity can be asserted there; this is the only case excluded, and the affine parametrization was used only to identify $c=|\dot\gamma|^2$ as a positive constant in step 4.1. The proof selects no object of its own: the geodesics and the minimizing segments it uses are those supplied one pair at a time by the cited consequences of completeness, and the inherited $\mathrm{AC}_\omega$ of [A1] is consumed exactly through them. ∎
+5.1 Strict convexity.
+Define $\psi(t):=\varphi(t)-\tfrac c2t^2$ on $I$. Then $\psi''=\varphi''-c\ge0$, so $\psi$ is convex by [F9]; and $t\mapsto\tfrac c2t^2$ is strictly convex by [F9], since $c>0$. For distinct $s,t\in I$ and $\lambda\in(0,1)$, put $m:=(1-\lambda)s+\lambda t$ and $q(z):=\tfrac c2z^2$; convexity of $\psi$ and strict convexity of $q$ give, one of the two summed inequalities being strict, $$\varphi(m)=\psi(m)+q(m) <\bigl[(1-\lambda)\psi(s)+\lambda\psi(t)\bigr] +\bigl[(1-\lambda)q(s)+\lambda q(t)\bigr] =(1-\lambda)\varphi(s)+\lambda\varphi(t),$$ the strict inequality because $s\ne t$ in [F9]. Multiplying by $2$, the function $t\mapsto d_g(p,\gamma(t))^2$ is strictly convex on $I$, as claimed. A constant geodesic has $\varphi''=0$ and $\varphi$ constant, so no strict convexity can be asserted there; this is the only case excluded, and the affine parametrization was used only to identify $c=|\dot\gamma|^2$ as a positive constant in step 4.1. The proof selects no object of its own: the geodesics and the minimizing segments it uses are those supplied one pair at a time by the cited consequences of completeness, and the inherited $\mathrm{AC}_\omega$ of [A1] is consumed exactly through them.
+[F9, step 4.1] ∎
 
 ## Source locator
 

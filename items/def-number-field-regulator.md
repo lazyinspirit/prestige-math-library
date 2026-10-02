@@ -2,7 +2,7 @@
 id: def-number-field-regulator
 kind: definition
 title: Regulator of a number field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "Def. 15.16 p.9 and Example 15.17 pp.9-10."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

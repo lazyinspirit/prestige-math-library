@@ -2,7 +2,7 @@
 id: lem-dipole-green-function-on-riemann-surface
 kind: lemma
 title: "A dipole Green function exists on a Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -45,6 +45,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

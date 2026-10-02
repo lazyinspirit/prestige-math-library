@@ -2,7 +2,7 @@
 id: lem-nevanlinna-exterior-three-value-extension
 kind: lemma
 title: "Three omitted values force exterior extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,8 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions, Ch. 3 §1"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §1, printed pp. 87–89: comparison estimates for two-value-omitting functions"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one
 kind: corollary
 title: "Nontrivial number fields have discriminant of absolute value greater than one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 Corollary 7.1.9, p.82."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -67,12 +68,19 @@ $R_N=(-1)^{N+1}\int_0^1x^{2N+2}/(1+x^2)\,dx$
 ## Proof
 
 1.1 The principal class of $\operatorname{Cl}(\mathcal O_K)$ exists, so by [F1] it contains an integral ideal $\mathfrak b$ with $N\mathfrak b\le M_K$; by [F2] the norm $N\mathfrak b$ is a positive integer, so $N\mathfrak b\ge1$ and therefore $1\le(4/\pi)^{r_2}(n!/n^n)\sqrt{|d_K|}$. [F1, F2, given]
+
 1.2 Take $N=1$ and $N=2$ in [F4]: $\pi/4=1-1/3+R_1$ with $R_1=\int_0^1x^4/(1+x^2)\,dx>0$ gives $\pi>8/3>2$, and $\pi/4=1-1/3+1/5+R_2$ with $R_2=-\int_0^1x^6/(1+x^2)\,dx<0$ gives $\pi<52/15<4$. Hence $2/\pi<1$ and $4/\pi>1$. [F4, algebra]
+
 2.1 Put $U_m:=(4/\pi)^{m/2}m!/m^m$ for $m\ge2$. Then $U_2=(4/\pi)\cdot2/4=2/\pi<1$ by step 1.2. [step 1.2, algebra]
+
 2.2 For $m\ge2$, Bernoulli's inequality [F3] with $x=1/m$ gives $(1+1/m)^m\ge2$, so $(m/(m+1))^m\le1/2$ and $\frac{U_{m+1}}{U_m}=\frac2{\sqrt\pi}\left(\frac{m}{m+1}\right)^m\le\frac1{\sqrt\pi}<1$. [F3, step 1.2, algebra]
+
 3.1 Consequently $U_m\le U_2(\sqrt\pi)^{-(m-2)}<1$ for every $m\ge2$; in particular $U_n<1$. [step 2.1, step 2.2, algebra]
+
 4.1 Since $r_2\le n/2$ and $4/\pi>1$ by step 1.2, $(4/\pi)^{r_2}\le(4/\pi)^{n/2}$, so $c:=(4/\pi)^{r_2}n!/n^n\le U_n<1$ with $c>0$. [step 3.1, given, algebra]
+
 5.1 Step 1.1 gives $1\le c\sqrt{|d_K|}$ with $0<c<1$, so $\sqrt{|d_K|}\ge1/c>1$ and hence $|d_K|>1$. [step 1.1, step 4.1, algebra]
+
 6.1 Thus every number field of degree $n>1$ has $|d_K|>1$, so its discriminant is neither $1$ nor $-1$; the degree-one case is excluded by the hypothesis. [step 5.1, given] ∎
 ## Remarks
 

@@ -1,7 +1,7 @@
 ---
 page: logarithmic-potential-capacity-and-riesz-decomposition
 title: "Logarithmic Potential, Capacity, and Riesz Decomposition"
-status: draft
+status: published
 requires: [subharmonic-functions-and-the-dirichlet-problem, product-measures-and-the-fubini-tonelli-theorems, radon-measures-and-the-riesz-markov-kakutani-theorem, banach-alaoglu-goldstine-and-krein-milman, distributions-test-functions-and-differentiation, fundamental-solutions-newtonian-potentials-and-green-functions, green-functions-harmonic-measure-and-conformal-invariance, weak-derivatives-and-sobolev-spaces, weak-convergence-tightness-and-representation]
 items:
   - def-support-of-a-borel-measure

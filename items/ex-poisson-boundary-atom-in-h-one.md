@@ -2,7 +2,7 @@
 id: ex-poisson-boundary-atom-in-h-one
 kind: example
 title: "A boundary atom gives an h1 function without an L1 density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [cor-integral-over-a-null-set-vanishes, cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-axiom-of-choice, def-complex-measure, def-countable-choice, def-dirac-measure, def-harmonic-hardy-class-disc, def-integration-against-a-signed-or-complex-measure, def-measure, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-regular-complex-borel-measure-on-an-lch-space, def-signed-measure, def-simple-integral-against-a-signed-or-complex-measure, def-the-one-dimensional-torus-and-normalized-haar-integral, def-total-variation-of-a-signed-or-complex-measure, lem-finite-tori-are-compact-hausdorff-character-spaces, prop-countable-subsets-of-rn-are-lebesgue-null, prop-dirac-measure-is-a-probability-measure, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-harmonic-hardy-one-measure-representation]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

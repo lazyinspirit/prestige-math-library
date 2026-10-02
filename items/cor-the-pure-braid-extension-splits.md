@@ -2,7 +2,7 @@
 id: cor-the-pure-braid-extension-splits
 kind: corollary
 title: "The pure braid extension splits as a semidirect product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-pure-braid-forgetting-a-strand-short-exact-sequence, lem-the-planar-forgetful-map-has-a-continuous-section, thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products, thm-splitting-lemma-for-group-extensions, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-induced-fundamental-group-map-functoriality, lem-path-conjugation-isomorphism-of-fundamental-groups]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

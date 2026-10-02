@@ -2,7 +2,7 @@
 id: ex-genus-zero-conic-with-rational-point
 kind: example
 title: "A smooth conic with a rational point is a projective line"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-h0-projective-space-o-d-homogeneous-polynomials
@@ -35,6 +35,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

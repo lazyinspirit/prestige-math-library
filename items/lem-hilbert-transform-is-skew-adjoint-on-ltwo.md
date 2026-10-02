@@ -2,7 +2,7 @@
 id: lem-hilbert-transform-is-skew-adjoint-on-ltwo
 kind: lemma
 title: "The Hilbert transform is skew-adjoint on L2"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, lem-ltwo-fourier-multiplier-bound, thm-plancherel, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

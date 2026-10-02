@@ -2,7 +2,7 @@
 id: def-arithmetic-genus-proper-curve
 kind: definition
 title: "Genus and arithmetic genus of a curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: nevanlinna-second-main-theorem-and-defects-examples
 title: "Nevanlinna's Second Main Theorem and Defects: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-nevanlinna-omitted-values-of-exponential,
            ex-nevanlinna-deficiencies-of-elementary-functions,

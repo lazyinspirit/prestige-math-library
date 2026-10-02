@@ -2,7 +2,7 @@
 id: lem-compact-support-zero-extension-in-wkp
 kind: lemma
 title: Compactly supported Sobolev functions extend by zero in every integer order
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-derivatives-are-unique-almost-everywhere, lem-weak-derivative-is-independent-of-lp-representatives, lem-test-function-cutoffs-and-euclidean-localization, def-complex-lp-and-euclidean-test-function-conventions, def-integral-over-a-measurable-set, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-boundary-free-fundamental-parallelogram
 kind: example
 title: "Moving the boundary of a fundamental parallelogram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii), equations 23.2.7-23.2.9: lattice poles of wp and the half-period values, used for the explicit Z+iZ computation."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

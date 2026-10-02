@@ -2,7 +2,7 @@
 id: thm-meyers-serrin-density-on-an-arbitrary-open-set
 kind: theorem
 title: Meyers–Serrin density on an arbitrary open set
-status: draft
+status: published
 origin: pipeline
 deps: [thm-local-smooth-approximation-in-wkp, lem-test-function-cutoffs-and-euclidean-localization, lem-weak-leibniz-rule-with-a-smooth-factor, lem-sobolev-norm-is-well-defined-and-definite, def-sobolev-space-wkp-and-its-norm, thm-fatou-lemma, lem-weak-derivative-linearity-locality-and-commutation, lem-classical-derivatives-are-weak-derivatives, def-countable-choice]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

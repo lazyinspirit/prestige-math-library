@@ -2,7 +2,7 @@
 id: def-green-function-with-pole-at-infinity
 kind: definition
 title: "Green function with a pole at infinity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, Green functions of the exterior of a compact set"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

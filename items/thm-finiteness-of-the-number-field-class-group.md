@@ -2,7 +2,7 @@
 id: thm-finiteness-of-the-number-field-class-group
 kind: theorem
 title: "Finiteness of the number-field class group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -24,6 +24,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 Theorem 7.1.2, pp.77-82."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -63,9 +64,13 @@ from nonzero integral ideals to $\operatorname{Cl}(\mathcal O_K)$
 ## Proof
 
 1.1 Put $B:=\max\{M_K,1\}\ge1$; by [F2] the set $\mathcal S$ of nonzero integral ideals $\mathfrak b\subseteq\mathcal O_K$ with $N\mathfrak b\le B$ is finite. [F2, given]
+
 2.1 $\mathcal S$ contains $\mathcal O_K$ itself, of norm $1\le B$, but only its finiteness is used below. [F2, step 1.1]
+
 2.2 By [F3] let $\varphi:\mathcal S\to\operatorname{Cl}(\mathcal O_K)$ be the class map $\varphi(\mathfrak b)=[\mathfrak b]$. [F3, step 1.1]
+
 3.1 The map $\varphi$ is surjective: for any class $[J]\in\operatorname{Cl}(\mathcal O_K)$, [F1] supplies an integral ideal $\mathfrak b$ with $[\mathfrak b]=[J]$ and $N\mathfrak b\le M_K\le B$, so $\mathfrak b\in\mathcal S$ and $\varphi(\mathfrak b)=[J]$. [F1, step 1.1, step 2.2]
+
 4.1 A set admitting a surjection from the finite set $\mathcal S$ is finite, so $\operatorname{Cl}(\mathcal O_K)$ is finite. [step 1.1, step 3.1] ∎
 
 ## Remarks

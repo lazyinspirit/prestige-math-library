@@ -2,7 +2,7 @@
 id: lem-semistandard-homomorphisms-span-in-characteristic-zero
 kind: lemma
 title: Semistandard maps span the Hom space in characteristic zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-semistandard-homomorphisms-are-independent-and-dominance-triangular, lem-semistandard-tableau-homomorphisms-to-young-permutation-modules, lem-integral-specht-garnir-straightening-and-field-basis, lem-polytabloid-covariance-and-column-sign, def-semistandard-tableau-and-kostka-number, def-column-antisymmetrizer-polytabloid-and-specht-module, def-young-subgroup-tabloid-and-permutation-module, def-row-and-column-stabilizers-of-a-tableau, thm-sign-is-a-homomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, Theorem 2.16 proof, printed pp. 28-33"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

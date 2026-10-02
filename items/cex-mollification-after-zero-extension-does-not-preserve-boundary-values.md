@@ -2,7 +2,7 @@
 id: cex-mollification-after-zero-extension-does-not-preserve-boundary-values
 kind: counterexample
 title: Mollifying a zero extension leaks across the boundary
-status: draft
+status: published
 origin: pipeline
 deps: [def-wkp-zero-as-a-sobolev-closure, cex-zero-extension-of-a-nonzero-boundary-function-creates-a-jump, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, thm-holder-inequality-for-integrals, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, def-axiom-of-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

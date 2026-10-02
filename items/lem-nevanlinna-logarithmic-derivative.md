@@ -2,7 +2,7 @@
 id: lem-nevanlinna-logarithmic-derivative
 kind: lemma
 title: "The lemma on the logarithmic derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,8 @@ sources:
     - title: "Alexandre Eremenko, Lectures on Nevanlinna Theory, §6"
       url: "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf"
       locator: "§6, printed pp. 12–13: the lemma on the logarithmic derivative and its use in the Second Main Theorem"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

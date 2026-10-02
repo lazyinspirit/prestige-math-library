@@ -2,7 +2,7 @@
 id: lem-the-combed-geometric-decomposition-is-unique
 kind: lemma
 title: "The combed geometric decomposition is unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-every-trivial-braid-word-combs-as-w-one-w-two,
@@ -36,6 +36,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed p. 22"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

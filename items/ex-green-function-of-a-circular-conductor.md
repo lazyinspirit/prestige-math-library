@@ -2,7 +2,7 @@
 id: ex-green-function-of-a-circular-conductor
 kind: example
 title: "Infinity-pole Green function recovered from a circular conductor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,8 @@ sources:
     - title: "B. Khoruzhenko, LTCC Potential Theory notes, §§3 and 5"
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, Green function of the exterior of a disc"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

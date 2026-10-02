@@ -2,7 +2,7 @@
 id: ex-empirical-state-frequencies-converge-to-stationary-masses
 kind: example
 title: "Empirical state frequencies converge to stationary masses"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -19,6 +19,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

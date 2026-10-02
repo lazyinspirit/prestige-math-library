@@ -2,7 +2,7 @@
 id: ex-plane-quartic-canonical-hyperplane
 kind: example
 title: "Adjunction on a smooth plane quartic: the canonical bundle is the hyperplane bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 
 ---

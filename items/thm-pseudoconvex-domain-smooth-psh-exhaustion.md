@@ -2,7 +2,7 @@
 id: thm-pseudoconvex-domain-smooth-psh-exhaustion
 kind: theorem
 title: Smooth strictly plurisubharmonic exhaustion of a pseudoconvex domain
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity
@@ -27,6 +27,7 @@ sources:
       url: https://www.jirka.org/scv/scv.pdf
       locator: "Ch. 2 §2.5, Theorem 2.5.6 and the exhaustion characterization"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

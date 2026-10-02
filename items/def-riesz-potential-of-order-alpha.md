@@ -2,7 +2,7 @@
 id: def-riesz-potential-of-order-alpha
 kind: definition
 title: "Riesz potential of order alpha"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-countable-choice, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

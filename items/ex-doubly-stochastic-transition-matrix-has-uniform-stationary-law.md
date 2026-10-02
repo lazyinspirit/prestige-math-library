@@ -2,7 +2,7 @@
 id: ex-doubly-stochastic-transition-matrix-has-uniform-stationary-law
 kind: example
 title: "Uniform law for a finite doubly stochastic matrix"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -15,6 +15,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

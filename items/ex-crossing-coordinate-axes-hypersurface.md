@@ -2,7 +2,7 @@
 id: ex-crossing-coordinate-axes-hypersurface
 kind: example
 title: "The coordinate axes form a reduced crossing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (6.6) principal defining equations and irreducible components of a codimension-one germ (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

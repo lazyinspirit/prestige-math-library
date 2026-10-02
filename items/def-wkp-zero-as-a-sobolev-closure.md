@@ -2,7 +2,7 @@
 id: def-wkp-zero-as-a-sobolev-closure
 kind: definition
 title: Zero-boundary Sobolev space as a norm closure
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, lem-classical-derivatives-are-weak-derivatives, lem-sobolev-norm-is-well-defined-and-definite, def-countable-choice]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

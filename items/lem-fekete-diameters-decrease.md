@@ -2,7 +2,7 @@
 id: lem-fekete-diameters-decrease
 kind: lemma
 title: "Monotonicity of the Fekete diameters and the transfinite diameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§5, Lemma 58, decreasing Fekete diameter, PDF p. 40"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

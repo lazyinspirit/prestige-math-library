@@ -2,7 +2,7 @@
 id: ex-poisson-extension-of-a-coordinate-function-on-a-ball
 kind: example
 title: Poisson extension fixes coordinate functions
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -14,6 +14,8 @@ sources:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"
       url: "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf"
       locator: "§2.8, printed pp. 44–49"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

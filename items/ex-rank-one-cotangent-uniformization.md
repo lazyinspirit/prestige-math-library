@@ -2,7 +2,7 @@
 id: ex-rank-one-cotangent-uniformization
 kind: example
 title: "The rank-one cotangent and its conic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213a/course/course.pdf
       locator: "Ch. 5 §5.4 'Aside: conics and singly-periodic functions', Theorems 5.26-5.27: pi cot(pi z) uniformizes C/Z onto a conic minus two points."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

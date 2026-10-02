@@ -2,7 +2,7 @@
 id: lem-oka-weil-on-domain-of-holomorphy
 kind: lemma
 title: "Oka-Weil approximation on a domain of holomorphy (host-domain lemma)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -41,6 +41,7 @@ sources:
       url: https://www.jirka.org/scv/scv.pdf
       locator: "Ch. 2 §2.6, Theorem 2.6.2 statement and the Oka-Weil discussion; its reverse Levi direction is expressly omitted there, so the host-domain argument is taken from Boas."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-specht-restriction-branching-filtration
 kind: theorem
 title: "Specht restriction has a removable-corner filtration over every field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-specht-branching-subspaces-are-invariant, lem-specht-branching-successive-quotients, def-corner-order-and-specht-deletion-map, def-polytabloid-specht-module-over-an-arbitrary-field, def-sign-representation-and-restriction-of-a-representation, def-subrepresentation-and-irreducible-representation, def-removable-and-addable-nodes-of-a-partition]
@@ -23,6 +23,7 @@ sources:
     - title: "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-33"
       url: "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

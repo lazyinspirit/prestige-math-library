@@ -2,13 +2,14 @@
 id: def-conjugate-function-on-the-circle
 kind: definition
 title: Conjugate function on the circle
-status: draft
+status: published
 origin: pipeline
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

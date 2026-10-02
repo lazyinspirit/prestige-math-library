@@ -2,13 +2,14 @@
 id: rem-two-dimensional-poisson-disc-theory-is-cited-not-repeated
 kind: remark
 title: Dimension split and the separate Poisson-disc theory
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-green-function-for-a-ball-in-rn, thm-harmonic-functions-are-real-analytic, thm-interior-derivative-estimates-for-harmonic-functions, thm-interior-estimate-for-poisson-equation-with-holder-data, lem-smooth-sphere-data-have-a-harmonic-replacement, thm-poisson-integral-solves-the-disc-dirichlet-problem, thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space, thm-poisson-kernel-for-a-ball-in-rn]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

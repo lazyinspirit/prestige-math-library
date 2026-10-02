@@ -2,7 +2,7 @@
 id: lem-local-boundary-separator-for-strongly-pseudoconvex-domain
 kind: lemma
 title: A strictly pseudoconvex boundary point has a local holomorphic separator
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-levi-form-and-strict-plurisubharmonicity
@@ -26,6 +26,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VIII §7.C, Levi form of the boundary (7.12)-(7.13) and Exercise 8.12(b),(c), printed pp. 61-62; the local model Re w_n + sum lambda_j |w_j|^2 + o(|w|^2) with lambda_n freely assignable."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

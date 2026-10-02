@@ -2,7 +2,7 @@
 id: lem-schur-weyl-length-cutoff-by-column-antisymmetrization
 kind: lemma
 title: Column antisymmetrization gives the exact Schur–Weyl length cutoff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-commuting-symmetric-and-linear-actions-on-tensor-power, def-column-antisymmetrizer-polytabloid-and-specht-module, lem-polytabloid-covariance-and-column-sign, thm-complex-specht-modules-are-irreducible, def-row-and-column-stabilizers-of-a-tableau, def-young-subgroup-tabloid-and-permutation-module, def-young-tableau-standard-tableau-and-shape, thm-tensor-product-basis-from-bases, def-dimension, def-linear-basis, def-partition-young-diagram-and-conjugate-partition, thm-sign-is-a-homomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

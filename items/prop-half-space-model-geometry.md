@@ -2,7 +2,7 @@
 id: prop-half-space-model-geometry
 kind: proposition
 title: Upper half-space model geometry
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -40,6 +40,7 @@ sources:
       url: https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf
       locator: "§1.1, printed pp.1–4: the space forms, their curvatures and their geodesics"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -101,21 +102,19 @@ Let $x_0\in\mathbb R^{n-1}$ and $y_0>0$, and put $\gamma(t)=(x_0,y_0e^{at})$. Th
 3.3 The semicircles are complete geodesics. [F2, F4, F6, step 2.1]
 By a horizontal translation and rotation it suffices to take $\bar c=0$ and $u=e_1$. Put $$\gamma(t)=\bigl(-\rho\tanh(at),\,0,\dots,0,\,\rho\operatorname{sech}(at)\bigr), \qquad y(t)=\rho\operatorname{sech}(at)>0 .$$ Then $\gamma$ takes values in $U^n$; by [F6] it is smooth and defined on all of $\mathbb R$, with $\dot\gamma^1(t)=-\rho a\operatorname{sech}^2(at)$, $\dot\gamma^n(t)=-\rho a\operatorname{sech}(at)\tanh(at)$ and all other components zero. Its acceleration is $\ddot\gamma^1=2\rho a^2\operatorname{sech}^2(at)\tanh(at)$ and $\ddot\gamma^n=\rho a^2\bigl(\operatorname{sech}(at)\tanh^2(at) -\operatorname{sech}^3(at)\bigr)$. By step 2.1 the only nonvanishing symbols with the present velocity are $\Gamma^1{}_{1n}=\Gamma^1{}_{n1}=-1/y$, $\Gamma^n{}_{11}=1/y$ and $\Gamma^n{}_{nn}=-1/y$; the remaining coordinates are constant with vanishing Christoffel contributions, since $A^k{}_{ij}=0$ whenever $k\ne n$ and both $i,j\ne n$. The $x^1$-component of the geodesic equation is therefore $$\ddot\gamma^1-\frac{2}{y}\dot\gamma^1\dot\gamma^n =2\rho a^2\operatorname{sech}^2\tanh -\frac{2\rho^2a^2\operatorname{sech}^3\tanh}{\rho\operatorname{sech}}=0,$$ and the $y$-component is $$\ddot\gamma^n-\frac{1}{y}\bigl((\dot\gamma^n)^2-(\dot\gamma^1)^2\bigr) =\rho a^2\operatorname{sech}\bigl(\tanh^2-\operatorname{sech}^2\bigr) -\frac{\rho^2a^2\operatorname{sech}^2\bigl(\tanh^2-\operatorname{sech}^2\bigr)}{\rho\operatorname{sech}}=0,$$ where the two displays use $\dot\gamma^1=-\rho a\operatorname{sech}^2$, $\dot\gamma^n=-\rho a\operatorname{sech}\tanh$ and $y=\rho\operatorname{sech}$. Hence $\gamma$ satisfies the geodesic equation and is a geodesic defined on all of $\mathbb R$, of constant $g_a$-speed $1$, because $$g_a(\dot\gamma,\dot\gamma) =\frac{\rho^2a^2\operatorname{sech}^2(\operatorname{sech}^2+\tanh^2)} {a^2\rho^2\operatorname{sech}^2}=1$$ by the identity $\operatorname{sech}^2+\tanh^2=1$ of [F6]. [F2, F4, F6, step 2.1]
 
-4.1 Every maximal geodesic is one of these and is defined for all time. [F4, F6, step 3.2, step 3.3]
+4.1 Every maximal geodesic is one of these and is defined for all time.
 Let $p=(\bar x_0,y_0)\in U^n$ and let $v\in T_pU^n$ be a unit vector with respect to $g_a$, decomposed as $v=(v_H,v_n)$ with $v_H\in\mathbb R^{n-1}$ and $v_n\in\mathbb R$, so that $|v_H|^2+v_n^2=a^2y_0^2$.
-
 If $v_H=0$, then $v=\pm ay_0\partial_n$; the vertical line of step 3.2 passes through $p$ with velocity $ay_0\partial_n$ at $t=0$, and its time reversal $t\mapsto\gamma(-t)$ (an affine reparametrization, [F4]) passes through $p$ with velocity $-ay_0\partial_n$. So in this case the maximal geodesic with initial datum $(p,v)$ is that line, and its domain is $\mathbb R$.
-
 Otherwise $v_H\ne0$. Put $u:=-v_H/|v_H|$, let $s\in\mathbb R$ be the unique solution of $\sinh s=-v_n/|v_H|$ (unique because $\sinh$ is strictly increasing and onto, [F6]), and set $$\rho:=y_0\cosh s>0,\qquad \bar c:=\bar x_0+\rho\tanh(s)\,u .$$ Consider the semicircle of step 3.3 with data $(\bar c,u,\rho)$: $$\gamma(t)=\bigl(\bar c-\rho\tanh(at)\,u,\ \rho\operatorname{sech}(at)\bigr) =:(\gamma_H(t),\gamma^n(t)).$$ At $t_1:=s/a$ its height is $\gamma^n(t_1)=\rho\operatorname{sech}s=y_0\cosh s\operatorname{sech}s=y_0$, so its horizontal part is $\bar c-\rho\tanh(s)u=\bar x_0$, that is, $\gamma(t_1)=p$. Its velocity there is $$\dot\gamma(t_1) =a y_0\bigl(-\operatorname{sech}(s)\,u,\ -\tanh(s)\bigr),$$ because $\rho a\operatorname{sech}^2s=ay_0\operatorname{sech}s$ and $\rho a\operatorname{sech}s\tanh s=ay_0\tanh s$. The identities $\cosh^2s=1+\sinh^2s$ and $\sinh s=-v_n/|v_H|$ give $$|v_H|=ay_0\operatorname{sech}s,\qquad v_n=-|v_H|\sinh s=-ay_0\tanh s,$$ using $\tanh s\cosh s=\sinh s$; together with $u=-v_H/|v_H|$ this shows $\dot\gamma(t_1)=(v_H,v_n)=v$. Hence the parameter-translated curve $t\mapsto\gamma(t+t_1)$ is a geodesic defined on all of $\mathbb R$ with initial datum $(p,v)$, so by uniqueness in [F4] it is the maximal geodesic of that initial datum, and its domain is $\mathbb R$.
-
 For an arbitrary nonzero initial velocity $w$, apply the preceding
 construction to $v=w/|w|_{g_a}$ and reparametrize by $t\mapsto |w|_{g_a}t$;
 this gives a geodesic on $\mathbb R$ with velocity $w$, which is maximal by
 uniqueness. For zero initial velocity the constant curve solves [F2] on
 $\mathbb R$ and is maximal by [F4]. Thus every maximal geodesic of
-$(U^n,g_a)$ has domain $\mathbb R$: the manifold is geodesically complete, and by Hopf–Rinow [F5] it is a complete metric space. [F4, F5, F6, step 3.2, step 3.3]
+$(U^n,g_a)$ has domain $\mathbb R$: the manifold is geodesically complete, and by Hopf–Rinow [F5] it is a complete metric space.
+[F4, F5, F6, step 3.2, step 3.3]
 
-5.1 Simple connectedness and the boundary cases. [F5, F7, step 4.1]
+5.1 Simple connectedness and the boundary cases.
 The half-space $U^n=\{y>0\}$ is convex: for $x,z\in U^n$ and $t\in[0,1]$ the point $(1-t)x+tz$ has last coordinate $(1-t)x^n+tz^n>0$. Hence $U^n$ is contractible by [F7], so its fundamental group is trivial at every basepoint and it is path connected; by [F7] it is simply connected and connected. Together with completeness from step 4.1 and constant curvature $-a^2$ from step 3.1, $(U^n,g_a)$ is a complete, simply connected space form of curvature $k=-a^2$.
-
-Boundary cases: the degenerate scale $a=0$ is excluded by hypothesis, since $g_0$ is not defined; the limiting boundary hyperplane $y=0$ is not part of $U^n$, and every geodesic of steps 3.2 and 3.3 is finite at every finite time but approaches the boundary only as $t\to\pm\infty$; the case $n=2$ exhibits the semicircles as the only nonvertical geodesics, and for $n>2$ each nonvertical geodesic lies in a two-plane spanned by its initial horizontal direction and $\partial_n$ while the remaining horizontal coordinates stay constant. Every geodesic in steps 3.2 and 3.3 is defined for all real times, so no endpoint of a maximal geodesic is finite. The only choice used is the inherited $\mathrm{AC}_\omega$ of [A1], inherited through sectional curvature in step 3.1, geodesic existence and uniqueness in step 4.1, and Hopf–Rinow in step 4.1; the charts, the geodesics and the reparametrizations are explicit. [F5, F7, step 4.1] ∎
+Boundary cases: the degenerate scale $a=0$ is excluded by hypothesis, since $g_0$ is not defined; the limiting boundary hyperplane $y=0$ is not part of $U^n$, and every geodesic of steps 3.2 and 3.3 is finite at every finite time but approaches the boundary only as $t\to\pm\infty$; the case $n=2$ exhibits the semicircles as the only nonvertical geodesics, and for $n>2$ each nonvertical geodesic lies in a two-plane spanned by its initial horizontal direction and $\partial_n$ while the remaining horizontal coordinates stay constant. Every geodesic in steps 3.2 and 3.3 is defined for all real times, so no endpoint of a maximal geodesic is finite. The only choice used is the inherited $\mathrm{AC}_\omega$ of [A1], inherited through sectional curvature in step 3.1, geodesic existence and uniqueness in step 4.1, and Hopf–Rinow in step 4.1; the charts, the geodesics and the reparametrizations are explicit.
+[F5, F7, step 4.1] ∎

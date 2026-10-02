@@ -2,7 +2,7 @@
 id: ex-reduced-conductor-of-q-zeta-six
 kind: example
 title: The reduced conductor of Q(zeta_6)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Remark 11.7, pp. 61-62: for odd n, -zeta_n is a primitive 2n-th root of unity and Q(zeta_{2n}) = Q(zeta_n), so the displayed index 6 is not intrinsic."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

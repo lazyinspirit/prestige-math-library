@@ -2,7 +2,7 @@
 id: lem-archimedean-norm-bound
 kind: lemma
 title: "Archimedean product region, volume and norm bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§27 Lemma 27.8 and the region of Proposition 27.9, pp.142-144."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -94,12 +95,21 @@ $\{0\}$, so $\sigma(S^{m-1})=m\lambda_m(B^m)$
 ## Proof
 
 1.1 The function $N(x,z)=\sum_i|x_i|+2\sum_j|z_j|$ is continuous, convex and even, so $X_t=N^{-1}([0,t])$ is closed, convex and centrally symmetric; it is bounded because every coordinate of a point of $X_t$ has absolute value at most $t$, hence compact, and the origin is interior because a small ball around the origin satisfies $\sum_i|x_i|+2\sum_j|z_j|<t$. [given]
+
 1.2 (Weighted simplex integral.) For integers $p\ge0$ and nonnegative integer weights $c_1,\dots,c_p$, define $J_p(t)=\int_{y_1,\dots,y_p\ge0,\ \sum_k y_k\le t}\prod_k y_k^{c_k}\,dy$; then $J_p(t)=t^{\,p+C}\prod_k c_k!/(p+C)!$ with $C=\sum_k c_k$. [algebra]
+
 1.3 For each complex coordinate the polar surface value is $\sigma(S^1)=2\lambda_2(B^2)=2\pi$, by [F7] with $m=2$ and [F5]. [F5, F7, given]
+
 1.4 (Sign splitting.) The region $\{(x,z):\sum_i|x_i|+2\sum_j|z_j|\le t\}$ is the union over the $2^{r_1}$ sign choices of the pieces with prescribed signs of $x_1,\dots,x_{r_1}$, and coordinate reflections carry each piece to the piece with all signs positive while preserving Lebesgue measure by [F6], whose Countable Choice hypothesis is supplied by [A1]; intersections lie in coordinate hyperplanes, which have measure zero. [F6, A1, given]
+
 1.5 For $(x,z)\in X_t$ apply [F4] with $n$ arguments equal to $|x_1|,\dots,|x_{r_1}|$ and to the two copies each of $|z_1|,\dots,|z_{r_2}|$: their sum is at most $t$, so their product satisfies $\prod_i|x_i|\prod_j|z_j|^2\le(t/n)^n$. [F4, given, algebra]
+
 2.1 (Radial reduction.) Using step 1.3 and the polar formula [F1] with $m=2$, the substitution $u=2\rho$ gives $\int_{\mathbb C}F(2|z|)\,dz=2\pi\int_0^\infty F(2\rho)\rho\,d\rho=(\pi/2)\int_0^\infty F(u)u\,du$ for Borel $F\ge0$, the Countable Choice hypothesis of [F1] being supplied by [A1]. [A1, F1, step 1.3, given]
+
 2.2 (Induction for step 1.2.) The identity of step 1.2 is proved by induction on $p$: for $p=0$ both sides are $1$; for $p\ge1$ Tonelli slices the last variable, $J_p(t)=\int_0^t y^{c_p}J_{p-1}(t-y)\,dy$, and the induction hypothesis reduces the claim to the one-variable identity $\int_0^t y^a(t-y)^b\,dy=a!\,b!\,t^{a+b+1}/(a+b+1)!$, which follows by induction on $b$ from $\int_0^t y^a\,dy=t^{a+1}/(a+1)$ and $y^a(t-y)^{b+1}=t\,y^a(t-y)^b-y^{a+1}(t-y)^b$, both elementary antiderivative computations for polynomials on a compact interval. [F2, step 1.2, algebra]
+
 3.1 Applying step 2.1 in each complex coordinate and [F2] together with [F3] to the resulting iterated integrals, then applying step 1.4 to the real coordinates, gives $\operatorname{vol}(X_t)=2^{\,r_1}(\pi/2)^{r_2}D(t)$ with $D(t)=J_{r_1+r_2}(t)$ for the weight vector with $c_k=0$ on the first $r_1$ indices and $c_k=1$ on the remaining $r_2$ indices, the Countable Choice hypothesis of [F3] being supplied by [A1]. [F2, F3, A1, step 2.1, step 1.4]
+
 4.1 For the weight vector of step 3.1 one has $p+C=(r_1+r_2)+r_2=n$, so $D(t)=t^n/n!$ and $\operatorname{vol}(X_t)=2^{\,r_1}(\pi/2)^{r_2}t^n/n!$. [step 1.2, step 3.1, step 2.2, algebra]
+
 5.1 Step 1.1 proves the compactness, convexity and symmetry clause, step 4.1 the volume formula and step 1.5 the norm bound, so the three assertions of the statement hold. [step 1.1, step 4.1, step 1.5] ∎

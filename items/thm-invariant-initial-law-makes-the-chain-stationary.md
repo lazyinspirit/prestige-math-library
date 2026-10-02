@@ -2,7 +2,7 @@
 id: thm-invariant-initial-law-makes-the-chain-stationary
 kind: theorem
 title: "Invariant initial law makes a Markov chain stationary"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

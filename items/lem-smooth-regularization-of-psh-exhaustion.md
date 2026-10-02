@@ -2,7 +2,7 @@
 id: lem-smooth-regularization-of-psh-exhaustion
 kind: lemma
 title: Smooth strict plurisubharmonic regularization of a psh exhaustion
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity
@@ -25,6 +25,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. I §5.E, Theorem 5.21 (Richberg 1968), printed pp. 43-44: smooth approximation from above of continuous strictly plurisubharmonic functions with a positive Hessian lower bound."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

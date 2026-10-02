@@ -2,7 +2,7 @@
 id: lem-nonzero-map-invertible-to-locally-free-injective
 kind: lemma
 title: Nonzero maps from an invertible sheaf to a locally free sheaf are injective
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-affine-scheme-spectrum
@@ -36,6 +36,7 @@ sources:
       url: "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

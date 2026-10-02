@@ -2,7 +2,7 @@
 id: ex-a-half-twist-as-a-punctured-disk-homeomorphism
 kind: example
 title: "A supported half-twist homeomorphism"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-elementary-geometric-half-twist,
@@ -27,6 +27,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 1.5, printed pp. 7-8, Figure 2"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

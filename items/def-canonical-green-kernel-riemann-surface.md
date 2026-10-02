@@ -2,7 +2,7 @@
 id: def-canonical-green-kernel-riemann-surface
 kind: definition
 title: "Canonical Green kernel on a Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -28,6 +28,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 1 §5, printed pp. 115-118, and Appendix 1 §10.9, printed pp. 171-172, for the logarithmic-pole normalization of Green kernels"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

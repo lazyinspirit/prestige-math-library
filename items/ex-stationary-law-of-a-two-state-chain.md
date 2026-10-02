@@ -2,7 +2,7 @@
 id: ex-stationary-law-of-a-two-state-chain
 kind: example
 title: "Stationary law of a two-state chain"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -18,6 +18,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

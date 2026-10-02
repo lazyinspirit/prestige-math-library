@@ -1,7 +1,7 @@
 ---
 page: hilbert-and-riesz-transforms-examples
 title: "Hilbert and Riesz Transforms — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-hilbert-transform-of-an-interval-indicator

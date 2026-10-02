@@ -2,7 +2,7 @@
 id: def-reduced-holomorphic-germ-for-hypersurface
 kind: definition
 title: "Reduced holomorphic germ for a hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (2.10) factoriality of O_n (p. 82); II (6.6) principal ideal of a pure codimension-one germ (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

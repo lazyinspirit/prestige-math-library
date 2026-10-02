@@ -1,7 +1,7 @@
 ---
 page: cartier-and-weil-divisors-line-bundles-and-picard-groups
 title: Cartier and Weil Divisors Line Bundles and Picard Groups
-status: draft
+status: published
 requires:
 - quasi-coherent-and-coherent-sheaves-and-vector-bundles
 - proj-projective-schemes-twisting-sheaves-and-ampleness

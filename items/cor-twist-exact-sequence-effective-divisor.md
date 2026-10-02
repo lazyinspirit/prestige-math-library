@@ -2,7 +2,7 @@
 id: cor-twist-exact-sequence-effective-divisor
 kind: corollary
 title: "Twisting the exact sequence of an effective Cartier divisor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

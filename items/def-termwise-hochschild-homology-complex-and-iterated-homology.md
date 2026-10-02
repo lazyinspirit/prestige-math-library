@@ -2,7 +2,7 @@
 id: def-termwise-hochschild-homology-complex-and-iterated-homology
 kind: definition
 title: "Termwise Hochschild homology and iterated homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf"
       locator: "§9.1.1–9.1.5: $HH_j$ as a functor of the coefficient bimodule."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-logarithmic-energy-strict-positivity-for-zero-mass-charges
 kind: lemma
 title: "Strict positivity of logarithmic energy for a zero-mass signed charge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.3760"
       locator: "§1, positivity of the energy form on zero-mass charges, printed pp. 168–170"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

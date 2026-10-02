@@ -2,7 +2,7 @@
 id: ex-rauch-comparison-between-euclidean-and-spherical-geodesics
 kind: example
 title: Rauch comparison between euclidean and spherical geodesics
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-rauch-comparison-theorem-first-form
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

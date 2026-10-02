@@ -2,7 +2,7 @@
 id: thm-levi-problem
 kind: theorem
 title: "The Levi problem: pseudoconvexity, domains of holomorphy, and holomorphic convexity"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -25,6 +25,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. I §7.A, Theorem 7.2(c)⇒(e), printed pp. 54-55; Ch. VIII §9, Theorem 9.11(a) and proof, printed pp. 392-393. The latter uses Skoda's Theorem 9.10 to prove pseudoconvexity implies domain of holomorphy."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

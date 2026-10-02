@@ -2,7 +2,7 @@
 id: ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity
 kind: example
 title: A flat torus showing simple connectedness is needed for global exp injectivity
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-cartan-hadamard
@@ -27,6 +27,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

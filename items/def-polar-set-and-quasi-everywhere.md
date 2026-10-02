@@ -2,7 +2,7 @@
 id: def-polar-set-and-quasi-everywhere
 kind: definition
 title: "Capacity-polar sets, quasi-everywhere, and subharmonic polar sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/0804.4689"
       locator: "§2.3, polar sets as −∞ loci of subharmonic functions"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

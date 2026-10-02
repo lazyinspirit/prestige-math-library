@@ -2,7 +2,7 @@
 id: thm-toponogov-triangle-comparison
 kind: theorem
 title: Toponogov triangle comparison
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-toponogov-hinge-comparison
@@ -16,6 +16,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-riemann-surfaces-and-uniformization-examples
 title: "Hyperbolic Riemann Surfaces and Uniformization: Examples and Counterexamples"
-status: draft
+status: published
 examples:
   - ex-hyperbolic-disc-and-half-plane-geodesics
   - ex-annulus-and-punctured-disc-hyperbolic-covers

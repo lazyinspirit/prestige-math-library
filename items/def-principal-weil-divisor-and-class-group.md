@@ -2,7 +2,7 @@
 id: def-principal-weil-divisor-and-class-group
 kind: definition
 title: "Principal weil divisor and class group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,8 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/AG12.pdf"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 §§15.1–15.3"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Definition

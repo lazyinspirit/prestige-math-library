@@ -2,7 +2,7 @@
 id: thm-equilibrium-measure-existence-and-uniqueness
 kind: theorem
 title: "Existence and uniqueness of the equilibrium measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://arxiv.org/pdf/0804.4689"
       locator: "§2.3, the equilibrium measure via the minimum energy problem"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-field-antisymmetrizer-image-and-dominance
 kind: lemma
 title: Field antisymmetrizers have rank-one own-shape image and detect dominance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -29,6 +29,7 @@ sources:
     - title: "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Lemma 4.6 and Corollary 4.7, printed pp. 16-17"
       url: "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

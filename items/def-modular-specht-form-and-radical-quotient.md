@@ -2,7 +2,7 @@
 id: def-modular-specht-form-and-radical-quotient
 kind: definition
 title: Modular Specht form and radical quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -27,6 +27,7 @@ sources:
     - title: "Stacey Law, notes by Leonard Tomczak, Representation Theory of Symmetric Groups, §2.2 James submodule theorem and Gram-rank identity for S^lambda/(S^lambda\\cap(S^lambda)^perp), printed pp. 13-14"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

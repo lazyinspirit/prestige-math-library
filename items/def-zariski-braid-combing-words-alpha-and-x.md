@@ -2,7 +2,7 @@
 id: def-zariski-braid-combing-words-alpha-and-x
 kind: definition
 title: "The Zariski combing words alpha_i and x_i in the Artin presentation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-braid-group-by-the-artin-presentation,
@@ -21,6 +21,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-20"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

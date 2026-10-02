@@ -2,7 +2,7 @@
 id: thm-poisson-kernel-for-a-ball-in-rn
 kind: theorem
 title: Poisson kernel of a Euclidean ball
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-poisson-kernel-from-a-green-function, lem-euclidean-balls-are-bounded-c-one-domains, thm-chain-rule-for-total-derivatives, thm-green-function-for-a-ball-in-rn]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-unitary-invariant-subspaces-have-invariant-orthogonal-complements
 kind: lemma
 title: "Invariant orthogonal complements in unitary representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-strongly-continuous-unitary-representation, def-hilbert-space, def-orthogonality-and-orthogonal-complement, def-real-and-complex-inner-product-space, lem-inner-product-is-jointly-continuous, def-metric-topology, thm-metric-open-set-algebra, def-topological-space]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: def-rho-function-for-a-closed-subgroup
 kind: definition
 title: "Rho-function for a closed subgroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-modular-function-of-a-locally-compact-group, thm-the-modular-function-is-a-continuous-homomorphism]
@@ -18,6 +18,7 @@ sources:
     - title: "Bruhat, Lectures on Lie Groups and Representations of Locally Compact Groups, Chapters 1 and 7"
       url: "https://ncatlab.org/nlab/files/Bruhat-LecturesOnLie.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

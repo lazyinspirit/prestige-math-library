@@ -1,7 +1,7 @@
 ---
 page: dirichlets-unit-theorem-regulators-and-s-units-examples
 title: "Dirichlets Unit Theorem Regulators and S Units — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-units-of-q-and-imaginary-quadratic-fields, ex-real-quadratic-units-and-pell, ex-units-in-a-real-cubic-field, ex-regulator-of-a-real-quadratic-field, ex-change-of-fundamental-units-preserves-regulator, ex-s-units-of-q, cex-z-sqrt-d-units-need-not-equal-ok-units]
 ---

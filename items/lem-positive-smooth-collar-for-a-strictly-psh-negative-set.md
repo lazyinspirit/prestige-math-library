@@ -2,9 +2,20 @@
 id: "lem-positive-smooth-collar-for-a-strictly-psh-negative-set"
 kind: "lemma"
 title: "Positive smooth collars for strictly plurisubharmonic negative sets"
-status: "draft"
+status: published
 origin: "pipeline"
-deps: ["def-axiom-of-choice", "def-levi-form-and-strict-plurisubharmonicity", "thm-c-two-levi-criterion-for-plurisubharmonicity", "lem-schwartz-cutoffs-from-the-standard-smooth-step", "thm-uniform-derivative-limit-on-a-closed-interval", "cor-regular-values-have-null-complement-and-are-dense", "cor-regular-level-set-local-graph-theorem", "thm-stability-operations-for-plurisubharmonic-functions", "def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity"]
+deps:
+  [
+    "def-axiom-of-choice",
+    "def-levi-form-and-strict-plurisubharmonicity",
+    "thm-c-two-levi-criterion-for-plurisubharmonicity",
+    "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+    "thm-uniform-derivative-limit-on-a-closed-interval",
+    "cor-regular-values-have-null-complement-and-are-dense",
+    "cor-regular-level-set-local-graph-theorem",
+    "thm-stability-operations-for-plurisubharmonic-functions",
+    "def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity"
+  ]
 landmark: false
 proof_strategy: "direct"
 provenance:
@@ -18,7 +29,12 @@ sources:
         neighborhoods for the cutoff correction. This item proves the needed
         neighborhood construction explicitly, including extra zeros and critical
         boundary points.
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02}}
+verification:
+  {
+    "precheck": "pass",
+    judge: { model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02 },
+    audited: 2026-10-02
+  }
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-complex-torus-weierstrass-cubic-isomorphism
 kind: theorem
 title: "The torus is biholomorphic to its Weierstrass cubic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -50,6 +50,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii)-(iii): the wp series, its differential equation and the holomorphic parametrization of the cubic by (wp, wp')."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

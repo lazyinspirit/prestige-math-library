@@ -2,7 +2,7 @@
 id: lem-a-smooth-finite-disk-arc-system-isotopy-extends-relative-boundary-and-marked-points
 kind: lemma
 title: "Smooth relative isotopy extension for finite disk arc systems"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-countable-choice,
@@ -24,6 +24,7 @@ sources:
     - title: "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, section 1.2.7 and the discussion of Proposition 1.11, printed pp. 35-38"
       url: "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

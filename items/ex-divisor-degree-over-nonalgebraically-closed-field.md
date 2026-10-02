@@ -2,7 +2,7 @@
 id: ex-divisor-degree-over-nonalgebraically-closed-field
 kind: example
 title: "Divisor degree with residue degrees over a nonclosed field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
     - title: "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 6-8"
       url: "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

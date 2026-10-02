@@ -2,7 +2,7 @@
 id: lem-smooth-finite-point-motions-extend-to-boundary-fixed-disk-isotopies
 kind: lemma
 title: "Smooth finite point motions extend to disk isotopies"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-time-dependent-vector-field-and-evolution-operator,
@@ -22,6 +22,7 @@ sources:
     - title: "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, section 2.2.1 and section 4.2, printed pp. 50-51 and 101-106"
       url: "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

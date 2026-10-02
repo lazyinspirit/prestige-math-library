@@ -1,7 +1,7 @@
 ---
 page: dirichlets-unit-theorem-regulators-and-s-units
 title: "Dirichlets Unit Theorem Regulators and S Units"
-status: draft
+status: published
 items: [lem-roots-of-unity-in-a-number-field-are-finite, thm-kronecker-root-of-unity-criterion, lem-algebraic-integer-is-a-unit-iff-norm-is-plus-or-minus-one, thm-product-formula-for-number-fields, def-logarithmic-unit-embedding, lem-unit-logarithms-lie-in-the-product-formula-hyperplane, lem-kernel-of-the-unit-logarithm-is-the-roots-of-unity, lem-discrete-subgroups-of-real-vector-spaces-are-lattices, lem-logarithmic-unit-image-is-discrete, thm-logarithmic-unit-image-is-a-full-lattice, thm-dirichlet-unit-theorem, def-fundamental-units, def-number-field-regulator, lem-deleted-row-minors-of-a-matrix-with-zero-column-sums, thm-number-field-regulator-is-well-defined, cor-unit-ranks-by-number-field-signature, def-s-integers-and-s-units-of-a-number-field, thm-s-unit-theorem]
 examples: []
 ---

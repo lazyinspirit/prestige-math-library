@@ -2,7 +2,7 @@
 id: cex-hilbert-transform-does-not-map-linfinity-to-linfinity
 kind: counterexample
 title: "Hilbert transform does not map L-infinity to L-infinity"
-status: draft
+status: published
 origin: pipeline
 deps: [ex-hilbert-transform-of-an-interval-indicator, cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, prop-mollifier-families-are-l-one-approximate-identities, thm-l-one-approximate-identities-converge-in-l-p, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset, lem-schwartz-cutoffs-from-the-standard-smooth-step, def-schwartz-space-and-its-seminorms, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-finite-and-countable-subadditivity-of-measures, thm-natural-logarithm-laws, cor-exponential-is-a-bijection-onto-positive-reals, thm-lebesgue-measure-of-a-box-of-every-kind, def-operator-norm, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

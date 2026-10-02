@@ -2,7 +2,7 @@
 id: cor-universal-cover-classification-riemann-surfaces
 kind: corollary
 title: "Every Riemann surface is a quotient of a simply connected model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -46,6 +46,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -106,6 +107,7 @@ group of holomorphic automorphisms acting freely and properly discontinuously
 2.1 **The deck group acts freely and simply transitively on fibres.** By [F3] the deck group of the covering $p$, whose total space $\widetilde X$ is connected, acts freely on $\widetilde X$. By [F4] it acts transitively, hence simply transitively, on every fibre of $p$: this uses that $X$ is path-connected, locally path-connected and semilocally simply connected, which holds because $X$ is a connected locally Euclidean space [F8]. [F3, F4, F8, step 1.1]
 
 2.2 **The deck group acts properly discontinuously on $\widetilde X$.** Let $K\subseteq\widetilde X$ be compact. Consider all pairs consisting of an evenly covered coordinate-disc neighbourhood $U$ and a smaller open neighbourhood $W$ with compact closure $\overline W\subseteq U$; local coordinate discs supply such pairs at every point of $p(K)$. Compactness of $p(K)$ gives finitely many such $W_i$ covering it, with $\overline W_i\subseteq U_i$. For each $i$, the set $K\cap p^{-1}(\overline W_i)$ is compact: it is closed in $K$. The sheets over $U_i$ form an open cover of this set, so only finitely many of those sheets meet it; call their family $\mathcal S_i$. If $hK\cap K\ne\varnothing$, write $h(x)=y$ with $x,y\in K$, choose $i$ with $p(x)=p(y)\in W_i$, and let $V,V'\in\mathcal S_i$ be the sheets containing $x,y$. Since $h$ preserves $p$, it maps the connected sheet $V$ onto the sheet $V'$ over the same $U_i$. Two deck transformations mapping $V$ to $V'$ agree at the point of $V$ above any prescribed point of $U_i$, so they agree everywhere by [F3]. Thus at most $\sum_i|\mathcal S_i|^2$ deck transformations have $hK\cap K\ne\varnothing$, proving proper discontinuity. [F2, F3, F8, step 1.1]
+
 2.3 **Quotients by free proper actions are coverings.** We record the general statement needed here for $M$ and again at the uniqueness stage below. Let $Y$ be a Riemann surface and let $K$ be a group of homeomorphisms of $Y$ acting freely and properly discontinuously (for instance a group of holomorphic automorphisms); let $q:Y\to Y/K$ be the quotient map to the orbit space with the quotient topology. Then $q$ is a covering map. Indeed, by step 1.2 applied to $Y$ and $K$, each $y\in Y$ has an open neighbourhood $V$ with $gV\cap V=\varnothing$ for all $g\ne e$. Then $q^{-1}(q(V))=\bigcup_{g\in K}gV$ is a disjoint union of open sets (if $gV\cap hV\ne\varnothing$ then $V\cap g^{-1}hV\ne\varnothing$, so $g^{-1}h=e$ and $g=h$), and $q$ restricted to each $gV$ is injective: if $q(ga)=q(gb)$ with $a,b\in V$, then $gb\in K\cdot ga$ and hence $b=g^{-1}hga\in g^{-1}hgV$ for some $h\in K$, so $V\cap g^{-1}hgV\ne\varnothing$, which forces $g^{-1}hg=e$, that is $h=e$ and $a=b$. $q$ is open because $q^{-1}(q(O))=\bigcup_{g}gO$ is open for open $O$; hence $q(V)$ is open and each restriction $q|_{gV}:gV\to q(V)$ is a continuous open bijection, thus a homeomorphism, so $q(V)$ is evenly covered and $q$ is a covering map [F2, F7, F8]. [F2, F6, F7, F8, step 1.2]
 
 3.1 **Topology of the general holomorphic quotient.** In step 2.3 assume now that $K$ acts by biholomorphisms, and put $Z:=Y/K$. The continuous image $Z$ of connected $Y$ is connected. Since $q$ is open, the images of a countable open base of $Y$ form a countable open base of $Z$. To prove Hausdorffness, take distinct orbits represented by $y,z$. Choose compact neighbourhoods $C_y,C_z$ and put $C:=C_y\cup C_z$, compact by [F8]. The set $F:=\{g:gC_y\cap C_z\ne\varnothing\}$ is finite by proper discontinuity on $C$. For every $g\in F$, $gy\ne z$; choose disjoint open sets $A_g\ni gy$, $B_g\ni z$. Put $V:=\operatorname{int}C_y\cap\bigcap_{g\in F}g^{-1}A_g$ and $W:=\operatorname{int}C_z\cap\bigcap_{g\in F}B_g$. These are open neighbourhoods of $y,z$, and $gV\cap W=\varnothing$ for $g\in F$ by construction and for $g\notin F$ by the definition of $F$. Thus $q(V)$ and $q(W)$ are disjoint open neighbourhoods of the two orbits. So $Z$ is Hausdorff. [F1, F6, F7, F8, step 2.3, construct]

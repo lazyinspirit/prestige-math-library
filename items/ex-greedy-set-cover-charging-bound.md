@@ -2,7 +2,7 @@
 id: ex-greedy-set-cover-charging-bound
 kind: example
 title: "A four-element greedy set-cover charge calculation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-greedy-set-cover
@@ -21,6 +21,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §1.6 Algorithm 1.2 and Theorem 1.11, printed pp. 25–26"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

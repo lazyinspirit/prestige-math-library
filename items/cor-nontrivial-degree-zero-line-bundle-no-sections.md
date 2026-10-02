@@ -2,7 +2,7 @@
 id: cor-nontrivial-degree-zero-line-bundle-no-sections
 kind: corollary
 title: "Nontrivial degree-zero line bundles have no sections"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-birational-smooth-proper-curves-isomorphic
@@ -59,6 +59,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

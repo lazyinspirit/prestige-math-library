@@ -2,7 +2,7 @@
 id: def-p-regular-and-p-restricted-partitions
 kind: definition
 title: p-regular and p-restricted partitions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -22,6 +22,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3, printed pp. 23-24 (p-regular partitions and the reversed-row construction)"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-reflection-green-function-for-the-half-space
 kind: lemma
 title: Reflection Green kernel for the half-space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-dirac-delta-and-its-derivatives, def-distributional-harmonicity-and-poisson-equation-in-rn, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, lem-laplace-fundamental-kernel-is-locally-integrable, lem-laplace-fundamental-solution-is-harmonic-off-its-pole, thm-minus-laplacian-of-the-fundamental-solution-is-dirac]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

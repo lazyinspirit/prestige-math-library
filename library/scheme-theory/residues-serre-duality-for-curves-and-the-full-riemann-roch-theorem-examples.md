@@ -1,7 +1,7 @@
 ---
 page: residues-serre-duality-for-curves-and-the-full-riemann-roch-theorem-examples
 title: "Residues Serre Duality for Curves and the Full Riemann Roch Theorem — Examples"
-status: draft
+status: published
 requires: [residues-serre-duality-for-curves-and-the-full-riemann-roch-theorem]
 items: []
 examples:

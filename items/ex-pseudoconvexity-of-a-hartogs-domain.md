@@ -2,7 +2,7 @@
 id: ex-pseudoconvexity-of-a-hartogs-domain
 kind: example
 title: "A Hartogs domain with a strictly plurisubharmonic exhaustion"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-levi-form-and-strict-plurisubharmonicity
@@ -30,6 +30,7 @@ sources:
       url: https://haroldpboas.gitlab.io/courses/650-2019c/notes.pdf
       locator: "§3.2.4, exhaustion criterion and strictly pseudoconvex examples."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

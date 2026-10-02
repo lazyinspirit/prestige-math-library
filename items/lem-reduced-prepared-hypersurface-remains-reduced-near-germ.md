@@ -2,7 +2,7 @@
 id: lem-reduced-prepared-hypersurface-remains-reduced-near-germ
 kind: lemma
 title: "A reduced prepared hypersurface stays reduced nearby"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.19) discriminant and the unramified part (p. 95); II (4.23) regular and singular points (p. 98)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

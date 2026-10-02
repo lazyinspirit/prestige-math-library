@@ -2,7 +2,7 @@
 id: lem-irreducible-holomorphic-germ-is-prime
 kind: lemma
 title: "Irreducible holomorphic germs are prime"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://math.ucla.edu/~sharifi/algebra.pdf"
       locator: "UFDs: irreducible elements are prime; uniqueness of factorisation."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

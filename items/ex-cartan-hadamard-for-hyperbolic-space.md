@@ -2,7 +2,7 @@
 id: ex-cartan-hadamard-for-hyperbolic-space
 kind: example
 title: Cartan hadamard for hyperbolic space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-jacobi-field
@@ -35,6 +35,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

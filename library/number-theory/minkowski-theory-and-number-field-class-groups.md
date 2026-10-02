@@ -1,7 +1,7 @@
 ---
 page: minkowski-theory-and-number-field-class-groups
 title: "Minkowski Theory and Number Field Class Groups"
-status: draft
+status: published
 items: [def-minkowski-embedding-of-a-number-field, def-full-euclidean-lattice-and-covolume, lem-full-lattice-fundamental-domain-and-bounded-points, lem-blichfeldt-lattice-point-principle, thm-minkowski-convex-body-theorem, cor-minkowski-convex-body-theorem-at-equality, def-successive-minima-of-a-convex-body-with-respect-to-a-lattice, lem-successive-minima-attainment-and-adapted-flag, lem-triangular-borel-maps-scale-euclidean-volume, lem-minkowski-successive-minima-volume-deformation, thm-minkowski-second-theorem-on-successive-minima, thm-ring-of-integers-and-ideals-are-full-lattices, thm-covolume-of-an-ideal-lattice, lem-archimedean-norm-bound, thm-small-element-in-a-number-field-ideal, thm-minkowski-bound-for-ideal-classes, lem-finitely-many-number-field-ideals-of-bounded-norm, thm-finiteness-of-the-number-field-class-group, cor-class-group-generated-by-small-primes, cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one, cor-no-nontrivial-number-field-is-unramified-over-q, lem-bounded-conjugates-give-finitely-many-integral-polynomials, lem-hermite-minkowski-bounded-primitive-integral-element, thm-hermite-minkowski-finiteness]
 examples: []
 ---

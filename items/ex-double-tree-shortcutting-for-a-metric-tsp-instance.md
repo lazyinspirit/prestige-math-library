@@ -2,7 +2,7 @@
 id: ex-double-tree-shortcutting-for-a-metric-tsp-instance
 kind: example
 title: "Double-tree shortcutting on the four-vertex square metric"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-metric-tsp
@@ -24,6 +24,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §2.4 Theorem 2.12 algorithm and proof, printed pp. 45–46"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

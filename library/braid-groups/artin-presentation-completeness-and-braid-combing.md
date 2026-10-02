@@ -1,7 +1,7 @@
 ---
 page: artin-presentation-completeness-and-braid-combing
 title: "Artin Presentation Completeness and Braid Combing"
-status: draft
+status: published
 requires: [pure-braids-fadell-neuwirth-and-asphericity,
            punctured-disks-mapping-classes-and-point-pushing,
            geometric-braids-and-artin-generators]

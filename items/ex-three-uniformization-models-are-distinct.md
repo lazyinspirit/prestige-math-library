@@ -2,7 +2,7 @@
 id: ex-three-uniformization-models-are-distinct
 kind: example
 title: "Compactness and Liouville distinguish the three models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-hochschild-bicomplex-total-and-separate-degrees
 kind: example
 title: "Total and separate Hochschild degrees for a two-term complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0510265"
       locator: "pp.6–7: the termwise Hochschild complex of a complex of graded bimodules and its three separate homological and internal gradings."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

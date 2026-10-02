@@ -2,7 +2,7 @@
 id: ex-double-bar-rotation-sign-in-two-complex-degrees
 kind: example
 title: "A minus sign when rotating two odd cochain factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf"
       locator: "§9.1.1–9.1.5: Hochschild chains and the alternating boundary for the ground field."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

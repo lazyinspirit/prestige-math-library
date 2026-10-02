@@ -2,7 +2,7 @@
 id: def-integral-specht-lattice-and-base-change
 kind: definition
 title: Integral Specht lattice and base change
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -32,6 +32,7 @@ sources:
     - title: "Stacey Law, notes by Leonard Tomczak, Representation Theory of Symmetric Groups, §2.3 Propositions 2.18-2.20 and Theorem 2.21 (standard basis over any field, with the coefficient-reduction remark), printed pp. 19-22"
       url: "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

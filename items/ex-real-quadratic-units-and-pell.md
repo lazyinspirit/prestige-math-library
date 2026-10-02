@@ -2,7 +2,7 @@
 id: ex-real-quadratic-units-and-pell
 kind: example
 title: Real quadratic units and Pell's equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -43,6 +43,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§8.2.1 pp.93-95 (Q(sqrt 5) units; the cube subgroup gives the units x+y sqrt 5)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

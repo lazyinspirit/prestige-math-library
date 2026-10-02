@@ -2,7 +2,7 @@
 id: thm-maximal-matching-is-a-two-approximation-for-vertex-cover
 kind: theorem
 title: "A maximal matching gives a 2-approximate minimum vertex cover"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-finite-simple-graph
@@ -20,6 +20,7 @@ sources:
     - title: "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5"
       url: "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

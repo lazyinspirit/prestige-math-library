@@ -2,7 +2,7 @@
 id: cex-gauss-sum-sign-without-a-complex-embedding
 kind: counterexample
 title: The sign of a quadratic Gauss sum needs a chosen primitive root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.19, p. 144: for K = Q(zeta_p) the Frobenius acts on zeta_p by a power and on the Gauss sum by the corresponding quadratic sign; no root-independent value of the sum itself is asserted."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

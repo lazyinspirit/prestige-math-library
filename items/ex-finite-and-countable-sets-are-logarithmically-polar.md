@@ -2,7 +2,7 @@
 id: ex-finite-and-countable-sets-are-logarithmically-polar
 kind: example
 title: "Finite and countable planar sets have zero logarithmic capacity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -41,6 +41,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, polar sets; §5, countable sets and the logarithmic capacity"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

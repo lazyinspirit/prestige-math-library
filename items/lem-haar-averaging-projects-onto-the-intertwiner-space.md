@@ -2,7 +2,7 @@
 id: lem-haar-averaging-projects-onto-the-intertwiner-space
 kind: lemma
 title: "Haar averaging projects contractively onto the bounded intertwiners"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, def-haar-averaging-operator-on-hom-spaces, def-strongly-continuous-unitary-representation, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, cor-normalized-haar-probability-on-a-compact-group, def-measure-space, def-measure-preserving-transformation-and-system, thm-integrals-are-invariant-under-measure-preserving-maps, thm-riesz-representation-for-hilbert-space, def-real-and-complex-inner-product-space, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

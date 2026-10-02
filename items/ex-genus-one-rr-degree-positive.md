@@ -2,7 +2,7 @@
 id: ex-genus-one-rr-degree-positive
 kind: example
 title: "A degree-n line bundle on a genus-one curve has an n-dimensional space of sections for n > 0"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 
 ---

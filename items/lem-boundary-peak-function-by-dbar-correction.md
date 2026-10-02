@@ -2,7 +2,7 @@
 id: lem-boundary-peak-function-by-dbar-correction
 kind: lemma
 title: "Peak functions at strongly pseudoconvex boundary points, by a dbar correction"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-axiom-of-choice", "def-countable-choice", "thm-choice-implies-dependent-implies-countable-choice", "def-levi-form-and-strict-plurisubharmonicity", "cor-second-order-taylor-expansion-with-the-hessian", "def-wirtinger-operators-in-several-complex-variables", "lem-positive-smooth-collar-for-a-strictly-psh-negative-set", "lem-global-smooth-strictly-psh-defining-function", "lem-smooth-regularization-of-psh-exhaustion", "lem-smooth-psh-exhaustion-implies-hartogs-pseudoconvexity", "thm-hormander-l2-dbar-existence", "lem-smooth-bump-between-concentric-euclidean-balls", "thm-d-dbar-decomposition-and-identities", "thm-cauchy-riemann-characterization-in-several-complex-variables", "prop-algebra-of-holomorphic-functions-in-several-variables", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "def-levi-pseudoconvex-domain"]
 justified_by: []
@@ -23,6 +23,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. I (6.13)(a), printed p. 50, and Ch. VIII (5.1), printed p. 375 (weak pseudoconvexity means a smooth plurisubharmonic exhaustion exists); Ch. VIII §6, Theorem 6.5 with its proof, printed pp. 377-379 (the $C^\\infty$ solvability branch on a weakly pseudoconvex Kaehler manifold)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

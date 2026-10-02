@@ -2,7 +2,7 @@
 id: thm-termwise-hochschild-homology-respects-bimodule-chain-homotopies
 kind: theorem
 title: "Termwise Hochschild homology respects bimodule chain homotopies"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/01-chain_complexes.pdf"
       locator: "Homotopic chain maps induce the same map on homology."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

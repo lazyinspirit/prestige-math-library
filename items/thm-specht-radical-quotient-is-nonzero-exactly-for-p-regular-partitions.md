@@ -2,7 +2,7 @@
 id: thm-specht-radical-quotient-is-nonzero-exactly-for-p-regular-partitions
 kind: theorem
 title: Nonzero modular Specht quotient criterion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -33,6 +33,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3, Propositions 2.8-2.9 and Theorem 2.5, printed pp. 23-25"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-vector-bundle-p1-maximal-line-quotient-locally-free
 kind: lemma
 title: The quotient by a maximal line subbundle is locally free
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-affine-scheme-quasi-compact
@@ -55,6 +55,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

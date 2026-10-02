@@ -2,7 +2,7 @@
 id: def-commuting-symmetric-and-linear-actions-on-tensor-power
 kind: definition
 title: Commuting symmetric-group and linear actions on a tensor power
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-symmetric-group, cor-finite-iterated-tensor-products-represent-multilinear-maps, thm-tensor-product-basis-from-bases, def-finite-dimensional-representation-of-a-group-over-a-field, def-intertwiner-equivalent-and-faithful-representations]
@@ -20,6 +20,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

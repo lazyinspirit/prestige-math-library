@@ -2,7 +2,7 @@
 id: ex-poisson-extension-of-an-indicator-arc
 kind: example
 title: "Poisson extension of an indicator arc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [cor-c-one-change-of-variables-for-l-one-functions, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-circle-maximal-function-and-nontangential-region, def-harmonic-hardy-class-disc, def-mean-value-property-for-plane-functions, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-poisson-kernel-properties-on-the-disc, lem-sine-positive-and-cosine-decreasing-on-zero-two, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-double-angle-and-power-reduction-identities, thm-mean-value-property-for-plane-harmonic-functions, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-poisson-extension-lp-contraction-and-norm-limit]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

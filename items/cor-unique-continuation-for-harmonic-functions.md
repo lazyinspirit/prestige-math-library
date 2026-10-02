@@ -2,7 +2,7 @@
 id: cor-unique-continuation-for-harmonic-functions
 kind: corollary
 title: Unique continuation for harmonic functions
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-connected-space, def-countable-choice, def-ck-and-multi-index-notation-in-several-variables, thm-harmonic-functions-are-real-analytic]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

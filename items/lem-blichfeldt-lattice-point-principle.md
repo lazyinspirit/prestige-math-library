@@ -2,7 +2,7 @@
 id: lem-blichfeldt-lattice-point-principle
 kind: lemma
 title: "Blichfeldt lattice-point principle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf"
       locator: "Lecture 3 §3.7 Lemma 3.4, pp.26-27."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -90,13 +91,21 @@ $\mathbb Z^n$ under $(m_1,\dots,m_n)\mapsto\sum_im_ib_i$
 ## Proof
 
 1.1 Assume for contradiction that there are no distinct $x,y\in S$ with $x-y\in\Lambda$. [assume-contra]
+
 1.2 $\Lambda$ is at most countable by [F5], and it is infinite because $b_1\ne0$ gives the distinct multiples $kb_1$; being at most countable and infinite, it is countably infinite, so fix a bijection $\lambda:\mathbb N\to\Lambda$, $k\mapsto\lambda_k$ ([[def-countable]]). By [A1] the Axiom of Countable Choice holds; it discharges the choice hypothesis of the complete-measure fact [F2] applied below. [F5, A1]
+
 2.1 For each $k$ put $S_k:=S\cap(P+\lambda_k)$ and $T_k:=S_k-\lambda_k$. Each $S_k$ is measurable: $S$ is measurable by hypothesis, the translate $P+\lambda_k$ is measurable by [F3] applied to the measurable tile $P$ of [F1], and the intersection is measurable because [F2] makes $\mathcal L(\mathbb R^n)$ a sigma-algebra, its Countable Choice hypothesis having been discharged in step 1.2. [F1, F2, F3, step 1.2]
+
 2.2 The $S_k$ are pairwise disjoint with union $S$, since the translates $P+\lambda$ tile $\mathbb R^n$ by [F1]; hence $\lambda_n(S)=\sum_{k}\lambda_n(S_k)$ by countable additivity [F4]. [F1, F4, step 1.2]
+
 3.1 By [F3] applied to the translation by $-\lambda_k$, $T_k$ is measurable with $\lambda_n(T_k)=\lambda_n(S_k)$; and $T_k\subseteq P$, since $P+\lambda_k$ translated by $-\lambda_k$ is $P$. [F1, F3, step 2.1]
+
 4.1 The sets $T_k$ are pairwise disjoint: if $z\in T_j\cap T_k$ with $j\ne k$, then $z=x-\lambda_j=y-\lambda_k$ with $x\in S_j\subseteq S$ and $y\in S_k\subseteq S$, so $x-y=\lambda_j-\lambda_k\in\Lambda$ while $x\ne y$ because $\lambda_j\ne\lambda_k$; this contradicts step 1.1. [step 1.1, step 3.1]
+
 5.1 By countable additivity [F4] applied to the pairwise disjoint measurable sets $T_k$, $\lambda_n\bigl(\bigcup_kT_k\bigr)=\sum_k\lambda_n(T_k)=\sum_k\lambda_n(S_k)=\lambda_n(S)$, using steps 2.2, 3.1 and 4.1. [F4, step 2.2, step 3.1, step 4.1]
+
 6.1 Since $\bigcup_kT_k\subseteq P$, monotonicity of a measure (additivity [F4] applied to $P=(\bigcup_kT_k)\cup(P\setminus\bigcup_kT_k)$) gives $\lambda_n(S)=\lambda_n\bigl(\bigcup_kT_k\bigr)\le\lambda_n(P)=\operatorname{covol}(\Lambda)$. [F1, F4, step 5.1]
+
 7.1 Step 6.1 contradicts the hypothesis $\lambda_n(S)>\operatorname{covol}(\Lambda)$; therefore the assumption of step 1.1 is false, and there exist distinct $x,y\in S$ with $x-y\in\Lambda$. [step 1.1, step 6.1, discharge-contradiction] ∎
 
 ## Remarks

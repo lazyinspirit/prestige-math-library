@@ -2,7 +2,7 @@
 id: def-reversible-measure-and-detailed-balance
 kind: definition
 title: "Reversible measure and detailed balance"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: def-riesz-measure-subharmonic-function
 kind: definition
 title: "Distributional Riesz measure of a plane subharmonic function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3.3, Theorems 41–42: the distributional Riesz measure and Poisson equation"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

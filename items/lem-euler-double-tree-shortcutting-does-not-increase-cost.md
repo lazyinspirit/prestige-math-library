@@ -2,7 +2,7 @@
 id: lem-euler-double-tree-shortcutting-does-not-increase-cost
 kind: lemma
 title: "Euler-tour shortcutting of a doubled tree does not increase metric cost"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-metric-tsp
@@ -21,6 +21,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §2.4 Theorem 2.12 and its proof, printed pp. 45–46"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

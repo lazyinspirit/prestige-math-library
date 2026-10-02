@@ -2,7 +2,7 @@
 id: ex-riesz-transforms-square-to-minus-the-identity-in-sum
 kind: example
 title: "Finite sum of Riesz squares in L2"
-status: draft
+status: published
 origin: pipeline
 deps: [def-riesz-transforms-on-euclidean-space, cor-riesz-transforms-are-ltwo-bounded, cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, lem-ltwo-fourier-multiplier-bound, thm-plancherel, def-countable-choice, def-complex-lp-and-euclidean-test-function-conventions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

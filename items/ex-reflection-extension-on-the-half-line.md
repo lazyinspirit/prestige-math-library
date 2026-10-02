@@ -2,7 +2,7 @@
 id: ex-reflection-extension-on-the-half-line
 kind: example
 title: Even reflection on the half-line
-status: draft
+status: published
 origin: pipeline
 deps: [thm-wkp-extension-from-a-half-space, def-sobolev-space-wkp-and-its-norm, thm-linear-change-of-variables-for-lebesgue-measure, def-axiom-of-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

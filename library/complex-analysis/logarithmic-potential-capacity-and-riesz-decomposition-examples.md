@@ -1,7 +1,7 @@
 ---
 page: logarithmic-potential-capacity-and-riesz-decomposition-examples
 title: "Logarithmic Potential, Capacity, and Riesz Decomposition: Examples and Counterexamples"
-status: draft
+status: published
 requires: [logarithmic-potential-capacity-and-riesz-decomposition, infinite-products-and-weierstrass-factorisation, hausdorff-measure-and-hausdorff-dimension]
 items: []
 examples:

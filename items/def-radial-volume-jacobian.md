@@ -2,7 +2,7 @@
 id: def-radial-volume-jacobian
 kind: definition
 title: Radial volume jacobian
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-radial-jacobi-tensor
@@ -15,6 +15,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

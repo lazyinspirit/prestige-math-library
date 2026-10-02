@@ -2,7 +2,7 @@
 id: cor-upper-sectional-curvature-bounds-delay-conjugate-points
 kind: corollary
 title: Upper sectional curvature bounds delay conjugate points
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-rauch-comparison-theorem-first-form
@@ -25,6 +25,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

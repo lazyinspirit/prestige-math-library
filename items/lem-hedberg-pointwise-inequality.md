@@ -2,7 +2,7 @@
 id: lem-hedberg-pointwise-inequality
 kind: lemma
 title: "Hedberg pointwise inequality for Riesz potentials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-riesz-potential-near-far-splitting, def-riesz-potential-of-order-alpha, def-complex-lp-and-euclidean-test-function-conventions, def-locally-integrable-function-on-r-n, def-centered-and-uncentered-hardy-littlewood-maximal-functions, thm-complex-holder-minkowski-and-the-quotient-norm, thm-integral-triangle-inequality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-finite-and-countable-subadditivity-of-measures, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

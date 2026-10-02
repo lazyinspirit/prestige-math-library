@@ -2,7 +2,7 @@
 id: lem-curve-different-local-support-and-index-bound
 kind: lemma
 title: "Local support and index bound for the different of a curve map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -76,6 +76,8 @@ sources:
     - title: "The Stacks Project, Discriminants, Lemma 49.12.6 (tag 0BWJ)"
       url: "https://stacks.math.columbia.edu/tag/0BWJ"
       locator: "S Noetherian, X and Y smooth of the same relative dimension n over S, and f:Y->X locally quasi-finite; then f is flat and the different is cut out by wedge^n(df). Applied with S=Spec(k), n=1; its proof computes the zeroth Fitting ideal from the cotangent sequence."
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

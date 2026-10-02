@@ -2,7 +2,7 @@
 id: lem-conjugate-specht-sign-duality-over-fields
 kind: lemma
 title: Conjugate Specht modules are sign-twisted duals over every field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -34,6 +34,7 @@ sources:
     - title: "Alexander Kleshchev, Representation Theory of Symmetric Groups and Related Hecke Algebras, Section 5.3 Remark 5.5, PDF p. 25 (q=1 dictionary, cross-check)"
       url: "https://arxiv.org/pdf/0909.4844"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

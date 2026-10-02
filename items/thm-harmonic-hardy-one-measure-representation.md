@@ -2,7 +2,7 @@
 id: thm-harmonic-hardy-one-measure-representation
 kind: theorem
 title: "h1 is isometric to finite regular complex boundary measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-complex-polynomials-and-rational-functions-are-holomorphic, thm-c2-holomorphic-components-are-harmonic, thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic, def-axiom-of-choice, def-countable-choice, def-dirac-measure, def-harmonic-hardy-class-disc, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, def-weak-star-convergence, lem-continuous-functions-on-a-compact-metric-space-have-a-countable-dense-family, lem-poisson-kernel-is-a-boundary-approximate-identity, lem-poisson-kernel-properties-on-the-disc, prop-dirac-measure-is-a-probability-measure, cor-second-countable-lch-locally-finite-borel-measures-are-regular, cor-separable-banach-dual-ball-is-weak-star-sequentially-compact, thm-choice-implies-dependent-implies-countable-choice, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-countable-union-of-countable, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-total-variation-is-a-measure, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-poisson-representation-for-disc-harmonic-functions, thm-ultrafilter-lemma]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

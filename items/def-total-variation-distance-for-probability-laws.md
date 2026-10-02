@@ -2,7 +2,7 @@
 id: def-total-variation-distance-for-probability-laws
 kind: definition
 title: "Total variation distance for probability laws"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

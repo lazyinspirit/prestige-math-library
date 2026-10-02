@@ -2,7 +2,7 @@
 id: ex-logarithmic-capacity-of-disc-and-equilibrium-circle
 kind: example
 title: "Capacity of a disc and its circular equilibrium measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§3, equilibrium measure of the disc; §5, capacity of a disc"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: def-laplace-beltrami-operator-as-trace-of-the-hessian
 kind: definition
 title: Laplace–Beltrami operator as the trace of the Hessian
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-gradient-hessian-and-divergence-connection-formulas
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: fs-positive-ricci-curvature-without-a-uniform-lower-bound-implies-compactness
 kind: false-statement
 title: Positive ricci curvature without a uniform lower bound implies compactness
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bonnet-myers
@@ -31,6 +31,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

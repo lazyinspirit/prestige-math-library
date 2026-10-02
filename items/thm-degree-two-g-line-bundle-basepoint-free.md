@@ -2,7 +2,7 @@
 id: thm-degree-two-g-line-bundle-basepoint-free
 kind: theorem
 title: "Line bundles of degree at least 2g are base-point-free"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -46,6 +46,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

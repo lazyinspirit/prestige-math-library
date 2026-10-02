@@ -2,7 +2,7 @@
 id: ex-sharpness-of-nevanlinna-q-minus-two
 kind: example
 title: "The coefficient q minus two is sharp"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -22,6 +22,8 @@ sources:
     - title: "I. Laine, Complex Analysis III lecture notes"
       url: "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf"
       locator: "§§5-6.1, printed pp. 38-43: truncated Second Main Theorem and elementary examples"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-weierstrass-lattice-discriminant-is-nonzero
 kind: theorem
 title: "Nonvanishing of the lattice discriminant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(iii), equations (23.2.9)-(23.2.10): the half-period derivative zeros and the invariants g₂, g₃ attached to them."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

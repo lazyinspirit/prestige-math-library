@@ -2,7 +2,7 @@
 id: lem-projective-line-divisors-classified-by-degree
 kind: lemma
 title: "Divisors on the projective line are classified by degree"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-closed-points-of-spectrum-are-maximal-ideals
@@ -71,6 +71,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

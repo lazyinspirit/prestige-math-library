@@ -2,7 +2,7 @@
 id: thm-complex-torus-quotient-is-well-defined
 kind: theorem
 title: "The quotient $\\mathbb C/\\Lambda$ is a compact Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -45,6 +45,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(i): a lattice is a discrete subgroup and C/Lambda is a torus."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

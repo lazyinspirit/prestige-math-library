@@ -2,7 +2,7 @@
 id: cor-riemann-theorem-large-degree
 kind: corollary
 title: "Riemann's theorem for sufficiently positive divisors"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-algebraic-curve-over-field
@@ -29,6 +29,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

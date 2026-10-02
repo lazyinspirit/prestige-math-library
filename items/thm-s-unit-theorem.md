@@ -2,7 +2,7 @@
 id: thm-s-unit-theorem
 kind: theorem
 title: S-unit theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -37,6 +37,7 @@ sources:
       url: "https://msp.org/obs/2019/2-1/obs-v2-n1-p07-s.pdf"
       locator: "§2 p.106 (U_{K,S}=mu(K)x<eta_1>x...x<eta_{r+s}>)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

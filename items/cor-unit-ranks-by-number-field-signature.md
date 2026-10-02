@@ -2,7 +2,7 @@
 id: cor-unit-ranks-by-number-field-signature
 kind: corollary
 title: Unit ranks by signature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -40,6 +40,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "p.147 (rank-zero and rank-one signature analysis)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-decomposition-matrices-of-s3-in-characteristics-two-and-three
 kind: example
 title: Decomposition matrices of S3 at p=2 and p=3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -35,6 +35,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, §2.3 and Exercise 2.4, printed pp. 23-25"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

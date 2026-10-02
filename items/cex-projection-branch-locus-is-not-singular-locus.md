@@ -2,7 +2,7 @@
 id: cex-projection-branch-locus-is-not-singular-locus
 kind: counterexample
 title: "A branched projection of a smooth hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.19) discriminant and branch set of a finite preparation (p. 95)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

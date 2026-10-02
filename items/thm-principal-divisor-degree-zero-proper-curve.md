@@ -2,7 +2,7 @@
 id: thm-principal-divisor-degree-zero-proper-curve
 kind: theorem
 title: "Principal divisors on a normal proper curve have degree zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/02RS"
     - title: "The Stacks Project, Divisors, §§31.27–31.28"
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

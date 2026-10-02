@@ -1,7 +1,7 @@
 ---
 page: residues-serre-duality-for-curves-and-the-full-riemann-roch-theorem
 title: "Residues Serre Duality for Curves and the Full Riemann Roch Theorem"
-status: draft
+status: published
 requires: [kahler-differentials-conormal-sequences-and-infinitesimal-lifting, sheaf-cohomology-cech-cohomology-and-comparison, cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes, smooth-proper-curves-divisors-genus-and-ramification, riemann-roch-for-curves-via-euler-characteristics, smooth-projective-serre-duality-and-flag-variety-line-bundles]
 items:
   - lem-uniformizer-differential-is-a-basis

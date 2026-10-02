@@ -2,7 +2,7 @@
 id: thm-interior-estimate-for-poisson-equation-with-holder-data
 kind: theorem
 title: Interior estimate for the Poisson equation with Hölder data
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -17,6 +17,8 @@ sources:
     - title: "Thomas Schmidt, Partial Differential Equations I (2026)"
       url: "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf"
       locator: "§2.8, printed pp. 44–50, Green representation and interior regularity"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

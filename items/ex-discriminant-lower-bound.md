@@ -2,7 +2,7 @@
 id: ex-discriminant-lower-bound
 kind: example
 title: "Signature constant rules out discriminant ±1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 Corollary 7.1.9, p.82."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -77,9 +78,13 @@ $2/\pi<1$ and $4/\pi>1$
 ## Proof
 
 1.1 Degree two: $C_{2,0}=(4/\pi)^0\cdot2!/2^2=1/2<1$, while $C_{2,1}=(4/\pi)\cdot2!/2^2=2/\pi<1$ by [F3]. [F3, algebra]
+
 1.2 Auxiliary sequence: put $U_m:=(4/\pi)^{m/2}m!/m^m$ for $m\ge2$. Then $U_2=2/\pi<1$ by [F3]; for $m\ge2$ Bernoulli's inequality [F4] with $x=1/m$ gives $(1+1/m)^m\ge2$, so $U_{m+1}/U_m=\frac2{\sqrt\pi}\left(\frac m{m+1}\right)^m\le\frac1{\sqrt\pi}<1$ by [F3], and therefore $U_m\le U_2(\sqrt\pi)^{-(m-2)}<1$ for every $m\ge2$. [F3, F4, algebra]
+
 2.1 General signature: $4/\pi>1$ by [F3], so $C_{n,r_2}=(4/\pi)^{r_2}n!/n^n\le(4/\pi)^{n/2}n!/n^n=U_n<1$ by step 1.2 and the hypothesis $r_2\le n/2$; thus $C_{n,r_2}<1$ for every $n>1$. [F3, step 1.2, given, algebra]
+
 3.1 Class bound and conclusion: by [F1] the principal class contains an integral ideal $\mathfrak b$ with $N\mathfrak b\le C_{n,r_2}\sqrt{|d_K|}$; by [F2] $N\mathfrak b$ is a positive integer, so $1\le N\mathfrak b\le C_{n,r_2}\sqrt{|d_K|}$. Since $0<C_{n,r_2}<1$ by steps 1.1 and 2.1, dividing gives $\sqrt{|d_K|}\ge1/C_{n,r_2}>1$, hence $|d_K|>1$. [F1, F2, step 1.1, step 2.1, algebra]
+
 4.1 Summary: for every signature with $n>1$ the numerical constant $C_{n,r_2}$ is less than $1$, so the Minkowski inequality $1\le C_{n,r_2}\sqrt{|d_K|}$ forces $|d_K|>1$; the degree-two constants are $C_{2,0}=1/2$ and $C_{2,1}=2/\pi$. This records exactly where the signature factor $(4/\pi)^{r_2}$ enters and recovers the conclusion of [F5] from the class bound alone. [F5, step 1.1, step 2.1, step 3.1] ∎
 
 ## Remarks

@@ -2,7 +2,7 @@
 id: thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains
 kind: theorem
 title: "Positive recurrence and stationary probability for irreducible countable chains"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

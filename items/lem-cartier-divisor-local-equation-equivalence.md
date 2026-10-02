@@ -2,7 +2,7 @@
 id: lem-cartier-divisor-local-equation-equivalence
 kind: lemma
 title: "Cartier divisor local equation equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -22,6 +22,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -106,15 +107,14 @@ sections over a neighbourhood ([[def-sheafification]],
 
 ## Proof
 
-1.1 The quotient sheaf $Q$ is the cokernel of the map of sheaves $\mathcal O_X^{\times}\to\mathcal K_X^{\times}$. [F1, F2]
-
+1.1 The quotient sheaf $Q$ is the cokernel of the map of sheaves $\mathcal O_X^{\times}\to\mathcal K_X^{\times}$.
 Indeed the cokernel sheaf is the sheafification of
 $U\mapsto\operatorname{coker}(\mathcal O_X^{\times}(U)\to\mathcal K_X^{\times}(U))$,
 which is exactly the quotient presheaf of [F1].
+[F1, F2]
 
 1.2 At every point $x\in X$ one has
-$Q_x\cong\mathcal K_{X,x}^{\times}/\mathcal O_{X,x}^{\times}$. [F1, F3, F4, F5, F6, F8]
-
+$Q_x\cong\mathcal K_{X,x}^{\times}/\mathcal O_{X,x}^{\times}$.
 Let $P(U)=\mathcal K_X^{\times}(U)/\mathcal O_X^{\times}(U)$, so
 $Q=aP$ by [F1]. The map from
 $\mathcal K_{X,x}^{\times}/\mathcal O_{X,x}^{\times}$ to $Q_x$ sends the
@@ -129,34 +129,34 @@ $\mathcal O_X^{\times}(V)$, so $f_x$ belongs to
 $\mathcal O_{X,x}^{\times}$. Conversely every germ from
 $\mathcal O_X^{\times}$ maps to the identity. The subgroup embeds in
 $\mathcal K_{X,x}^{\times}$ by [F6], giving the claimed quotient.
+[F1, F3, F4, F5, F6, F8]
 
-2.1 The quotient map $q\colon\mathcal K_X^{\times}\to Q$ has kernel exactly $\mathcal O_X^{\times}$. [step 1.2, F7]
-
+2.1 The quotient map $q\colon\mathcal K_X^{\times}\to Q$ has kernel exactly $\mathcal O_X^{\times}$.
 For each $x$ the map $q_x$ is the quotient map
 $\mathcal K_{X,x}^{\times}\to\mathcal K_{X,x}^{\times}/\mathcal O_{X,x}^{\times}$
 by step 1.2, so its kernel is $\mathcal O_{X,x}^{\times}$. The kernel subsheaf
 of $q$ therefore has the same stalks as $\mathcal O_X^{\times}$, and the
 inclusion of subsheaves is an isomorphism by the stalkwise criterion.
+[step 1.2, F7]
 
-3.1 Every section of $Q$ is locally a class of a meromorphic unit. [step 2.1, F8, F10]
-
+3.1 Every section of $Q$ is locally a class of a meromorphic unit.
 Let $s\in Q(X)$ and $x\in X$. Because $q$ is a cokernel projection it is
 surjective on stalks, so the germ $s_x$ is the image of some element of
 $\mathcal K_{X,x}^{\times}$; that element is represented by a section $f$ of
 $\mathcal K_X^{\times}$ over an open neighbourhood $V$ of $x$, and
 $q(f)$ and $s$ have equal germs at $x$, hence agree on some neighbourhood of
 $x$ contained in $V$.
+[step 2.1, F8, F10]
 
-3.2 Every local-equation datum determines a global section of $Q$. [F1, F9, step 2.1]
-
+3.2 Every local-equation datum determines a global section of $Q$.
 On $U_i\cap U_j$ the ratio $f_i/f_j$ is a unit, so $q(f_i)$ and $q(f_j)$
 have equal restriction because their difference is the class of a unit, which
 vanishes in the quotient. The sections $q(f_i)\in Q(U_i)$ therefore agree on
 all overlaps and glue by the sheaf axiom to a section $s\in Q(X)$ with
 $s|_{U_i}=q(f_i)$.
+[F1, F9, step 2.1]
 
-4.1 Every section of $Q$ is induced by a local-equation datum. [step 2.1, step 3.1, F5]
-
+4.1 Every section of $Q$ is induced by a local-equation datum.
 Let $s\in Q(X)$ and take the set of all pairs $(V,f)$ with $V\subseteq X$
 open, $f\in\mathcal K_X^{\times}(V)$, and $q(f)=s|_V$. By step 3.1, the
 opens in these pairs cover $X$. For any two such pairs $(V,f)$ and $(W,g)$,
@@ -164,9 +164,9 @@ the equality of their images with the restrictions of $s$ gives
 $q(f/g)=1$ on $V\cap W$. By step 2.1, $f/g$ is a unit there. Thus this
 entire indexed family is a local-equation datum; no lift is selected
 separately for each point.
+[step 2.1, step 3.1, F5]
 
-4.2 Two data inducing the same section differ by local units. [step 3.2, F5, algebra]
-
+4.2 Two data inducing the same section differ by local units.
 Let $\{(U_i,f_i)\}$ and $\{(V_j,g_j)\}$ induce the same $s$. The nonempty
 intersections $W_{ij}=U_i\cap V_j$ form a common refinement. On each such
 $W_{ij}$, the classes of $f_i$ and $g_j$ agree, so
@@ -175,6 +175,7 @@ $\mathcal O_X^{\times}(W_{ij})$. Thus
 $f_i|_{W_{ij}}=u_{ij}\,g_j|_{W_{ij}}$ for the unit
 $u_{ij}=f_i/g_j$, and every unit multiple arises this way from another
 datum.
+[step 3.2, F5, algebra]
 
 5.1 The sections of $Q$ are exactly the local-equation data modulo refinement and local units. [step 3.2, step 4.1, step 4.2] ∎
 

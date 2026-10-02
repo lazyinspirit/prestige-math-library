@@ -2,7 +2,7 @@
 id: lem-locally-finite-smooth-partition-of-unity-on-domain
 kind: lemma
 title: Locally finite smooth partitions of unity on domains
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-smooth-partition-of-unity-subordinate-to-an-open-cover
@@ -26,6 +26,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VIII §3, chartwise partitions and compactly supported localization; standard exhaustion-by-shells construction."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

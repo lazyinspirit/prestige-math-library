@@ -2,7 +2,7 @@
 id: thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space
 kind: theorem
 title: Poisson kernel and bounded Dirichlet problem on a half-space
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-laplacian-of-a-c2-function, def-real-beta-integral, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, lem-laplace-fundamental-solution-is-harmonic-off-its-pole, lem-reflection-green-function-for-the-half-space, lem-sphere-and-ball-measures-scale, cor-real-gamma-one-half-is-root-pi, cor-volume-of-the-unit-n-ball, thm-algebra-of-derivatives, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-chain-rule-for-total-derivatives, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-differentiation-under-the-integral-sign, thm-dirichlet-problem-on-a-ball-by-the-poisson-integral, thm-dominated-convergence, thm-liouville-theorem-for-bounded-harmonic-functions, thm-polar-coordinates-formula-for-lebesgue-measure, thm-real-beta-gamma-identity, thm-real-gamma-functional-equation, thm-real-power-continuity-and-derivatives, thm-weak-maximum-principle-for-the-laplacian]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

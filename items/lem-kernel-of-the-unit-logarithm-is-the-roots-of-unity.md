@@ -2,7 +2,7 @@
 id: lem-kernel-of-the-unit-logarithm-is-the-roots-of-unity
 kind: lemma
 title: Kernel of the unit logarithm is the roots of unity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -36,6 +36,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "proof of Prop. 15.11(1) pp.6-7: ker(Log) = mu(K)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

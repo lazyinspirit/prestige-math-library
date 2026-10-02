@@ -2,7 +2,7 @@
 id: ex-empty-divisor-euler-characteristic
 kind: example
 title: "The empty divisor, its Euler characteristic and the genus boundary cases"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-dimension-complete-linear-system
@@ -36,6 +36,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

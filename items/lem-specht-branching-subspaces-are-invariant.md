@@ -2,7 +2,7 @@
 id: lem-specht-branching-subspaces-are-invariant
 kind: lemma
 title: The corner-filtration subspaces of a Specht module are S_(n-1)-invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-corner-order-and-specht-deletion-map, lem-integral-specht-garnir-straightening-and-field-basis, lem-largest-entry-of-a-standard-tableau-is-removable, def-polytabloid-specht-module-over-an-arbitrary-field, def-tabloid-and-column-orders-for-specht-straightening, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition, lem-polytabloid-covariance-and-column-sign, thm-sign-is-a-homomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-32"
       url: "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

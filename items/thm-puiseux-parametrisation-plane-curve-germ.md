@@ -2,7 +2,7 @@
 id: thm-puiseux-parametrisation-plane-curve-germ
 kind: theorem
 title: "Convergent Puiseux parametrisation of an irreducible plane branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -50,6 +50,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "Exercise 11.8 Puiseux expansions y = g_j(x^{1/q_j}) with q_j the sheet number of the branch (p. 128); II (4.19) finite preparation and the unramified covering over the discriminant complement (p. 95); II (6.6) zero sets of Weierstrass polynomials (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

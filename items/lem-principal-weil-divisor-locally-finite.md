@@ -2,7 +2,7 @@
 id: lem-principal-weil-divisor-locally-finite
 kind: lemma
 title: "A meromorphic unit has locally finite nonzero order support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,8 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/02OV"
     - title: "The Stacks Project, Divisors, §§31.24–31.27"
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement
@@ -113,15 +115,15 @@ $A_{\mathfrak p}=(A\setminus\mathfrak p)^{-1}A$
 
 ## Proof
 
-1.1 **Local fraction representation.** For every point $x\in X$ there are an affine open $U=\operatorname{Spec}A$ containing $x$ and elements $a,s\in A$ such that $f|_U$ is the image of $a/s\in\mathcal P_X(U)$ under the sheafification map. [F1, F2, F3, F5]
-
+1.1 **Local fraction representation.** For every point $x\in X$ there are an affine open $U=\operatorname{Spec}A$ containing $x$ and elements $a,s\in A$ such that $f|_U$ is the image of $a/s\in\mathcal P_X(U)$ under the sheafification map.
 Since $\mathcal K_X=a\mathcal P_X$, [F3] gives, for the section $f$ around $x$, an open neighbourhood $V$ of $x$ and an element $t\in\mathcal P_X(V)$ whose image in $\mathcal K_X(V)$ is $f|_V$. The affine open subschemes form a basis, so there is an affine open $U=\operatorname{Spec}A\subseteq V$ containing $x$; restricting $t$ to $U$ gives an element $a/s$ of $\mathcal P_X(U)=S_X(U)^{-1}A$ whose image in $\mathcal K_X(U)$ is $f|_U$. Only the local representation is used, and no choice is made from an infinite family.
+[F1, F2, F3, F5]
 
-1.2 **Finitely many candidates over the chart.** For $U=\operatorname{Spec}A$ and $a/s$ as in 1.1, only finitely many prime divisors $Z$ with $Z\cap U\neq\varnothing$ satisfy $\operatorname{ord}_Z(f)\neq0$: each such $Z$ corresponds to a prime ideal of $A$ that is minimal over $(a)$ or over $(s)$. [F4, F5, F6, F7, F9, 1.1]
-
+1.2 **Finitely many candidates over the chart.** For $U=\operatorname{Spec}A$ and $a/s$ as in 1.1, only finitely many prime divisors $Z$ with $Z\cap U\neq\varnothing$ satisfy $\operatorname{ord}_Z(f)\neq0$: each such $Z$ corresponds to a prime ideal of $A$ that is minimal over $(a)$ or over $(s)$.
 Let $Z$ be a prime divisor with $Z\cap U\neq\varnothing$. The scheme $Z$ is integral, so by [F8] its generic point $\xi$ lies in the nonempty open subset $Z\cap U$ of $Z$; hence $\xi\in U$, and $\xi$ corresponds to a prime $\mathfrak p\subseteq A$ with $\mathcal O_{X,\xi}=A_{\mathfrak p}$ and, by [F4], $\dim A_{\mathfrak p}=\dim\mathcal O_{X,\xi}=1$. Write $a_\xi$ and $s_\xi$ for the images of $a$ and $s$ in $A_{\mathfrak p}$. Since $s\in S_X(U)$, its germ $s_\xi$ is a nonzerodivisor of the domain $A_{\mathfrak p}$, so $s_\xi\neq0$; the germ of the class of $a/s$ at $\xi$ is the fraction $a_\xi/s_\xi$. By [F4] and [F2] the stalk $\mathcal K_{X,\xi}$ is the fraction field of $\mathcal O_{X,\xi}=A_{\mathfrak p}$, the germ of $f$ there is the image of $a/s$, and $f_\xi\in K(X_i)^{\times}$ is a unit of that field; under the identification with $a_\xi/s_\xi$ this gives $a_\xi/s_\xi\neq0$, hence $a_\xi\neq0$. With $v_\xi$ the normalised valuation we thus have
 $$\operatorname{ord}_Z(f)=v_\xi\!\left(\frac{a_\xi}{s_\xi}\right)=v_\xi(a_\xi)-v_\xi(s_\xi),$$
-and $v_\xi(a_\xi)\ge0$ because $a_\xi\in A_{\mathfrak p}$. Suppose first that $v_\xi(a_\xi)>0$, so that $a\in\mathfrak p$ by [F9]. If $\mathfrak q$ is a prime with $(a)\subseteq\mathfrak q\subseteq\mathfrak p$, then $a_\xi\neq0$ lies in $\mathfrak qA_{\mathfrak p}$, so $0\subsetneq\mathfrak qA_{\mathfrak p}\subseteq\mathfrak pA_{\mathfrak p}$; in the one-dimensional local domain $A_{\mathfrak p}$ every nonzero prime is the maximal ideal, so $\mathfrak qA_{\mathfrak p}=\mathfrak pA_{\mathfrak p}$, and contracting gives $\mathfrak q=\mathfrak p$. Hence $\mathfrak p$ is minimal over $(a)$. Otherwise $v_\xi(a_\xi)=0$, and $\operatorname{ord}_Z(f)\neq0$ forces $v_\xi(s_\xi)\neq0$, so $s\in\mathfrak p$ by [F9]; the same argument, now with $s_\xi\neq0$, shows that $\mathfrak p$ is minimal over $(s)$. Thus every such $\mathfrak p$ is a minimal prime of one of the Noetherian quotient rings $A/(a)$ or $A/(s)$, of which there are finitely many by [F6] and [F7]. Finally the assignment $Z\mapsto\mathfrak p$ is injective, because distinct prime divisors have distinct generic points and the prime of $A$ determines the point of $U$. This gives the finiteness asserted. [F2, F4, F5, F6, F7, F8, F9, 1.1]
+and $v_\xi(a_\xi)\ge0$ because $a_\xi\in A_{\mathfrak p}$. Suppose first that $v_\xi(a_\xi)>0$, so that $a\in\mathfrak p$ by [F9]. If $\mathfrak q$ is a prime with $(a)\subseteq\mathfrak q\subseteq\mathfrak p$, then $a_\xi\neq0$ lies in $\mathfrak qA_{\mathfrak p}$, so $0\subsetneq\mathfrak qA_{\mathfrak p}\subseteq\mathfrak pA_{\mathfrak p}$; in the one-dimensional local domain $A_{\mathfrak p}$ every nonzero prime is the maximal ideal, so $\mathfrak qA_{\mathfrak p}=\mathfrak pA_{\mathfrak p}$, and contracting gives $\mathfrak q=\mathfrak p$. Hence $\mathfrak p$ is minimal over $(a)$. Otherwise $v_\xi(a_\xi)=0$, and $\operatorname{ord}_Z(f)\neq0$ forces $v_\xi(s_\xi)\neq0$, so $s\in\mathfrak p$ by [F9]; the same argument, now with $s_\xi\neq0$, shows that $\mathfrak p$ is minimal over $(s)$. Thus every such $\mathfrak p$ is a minimal prime of one of the Noetherian quotient rings $A/(a)$ or $A/(s)$, of which there are finitely many by [F6] and [F7]. Finally the assignment $Z\mapsto\mathfrak p$ is injective, because distinct prime divisors have distinct generic points and the prime of $A$ determines the point of $U$. This gives the finiteness asserted.
+[F4, F5, F6, F7, F9, 1.1, F2, F8]
 
 2.1 **Local finiteness.** For every point $x$ of $X$, the affine open neighbourhood $U$ produced in 1.1 meets only finitely many prime divisors $Z$ with $\operatorname{ord}_Z(f)\neq0$, by 1.2. Hence the family of such $Z$ is locally finite. [1.1, 1.2] ∎
 

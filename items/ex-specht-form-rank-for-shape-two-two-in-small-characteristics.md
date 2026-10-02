@@ -2,7 +2,7 @@
 id: ex-specht-form-rank-for-shape-two-two-in-small-characteristics
 kind: example
 title: Specht Gram rank for shape (2,2)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -27,6 +27,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, Exercise 2.4 and §2.3, printed pp. 23-25"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

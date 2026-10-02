@@ -2,7 +2,7 @@
 id: thm-max-three-sat-has-no-ptas-unless-p-equals-np
 kind: theorem
 title: "Max-3SAT has no PTAS unless P=NP"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-p
@@ -27,6 +27,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §1.5 and §16.2, printed pp. 21–25 and 413–414"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

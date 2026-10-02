@@ -2,7 +2,7 @@
 id: fs-exact-np-hardness-implies-no-constant-approximation
 kind: false-statement
 title: "False: exact NP-hardness rules out constant-factor approximation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-finite-simple-graph
@@ -22,6 +22,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §1.6 and §2.4, printed pp. 24–26 and 44–46"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

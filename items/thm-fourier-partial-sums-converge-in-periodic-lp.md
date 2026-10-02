@@ -2,7 +2,7 @@
 id: thm-fourier-partial-sums-converge-in-periodic-lp
 kind: theorem
 title: "Periodic Fourier partial sums converge in the strict Lp range"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-fourier-partial-sums-are-uniformly-bounded-on-periodic-lp, thm-fejer-convergence-in-lp, lem-fourier-partial-sums-are-dirichlet-convolutions, lem-fejer-kernel-is-a-positive-approximate-identity, def-dirichlet-and-fejer-kernels, def-cesaro-and-abel-means-of-a-fourier-series, def-period-one-fourier-coefficients-partial-sums-and-convolution, lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant, thm-sequential-uniform-boundedness-under-countable-choice, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-complex-holder-minkowski-and-the-quotient-norm, thm-integral-triangle-inequality, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice, def-complex-lp-and-euclidean-test-function-conventions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

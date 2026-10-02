@@ -2,7 +2,7 @@
 id: lem-conjugation-orbits-of-finite-rank-operators-are-norm-continuous
 kind: lemma
 title: "Finite-rank conjugation orbits are operator-norm continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-strongly-continuous-unitary-representation, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-axiom-of-choice, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-bessel-inequality-and-finite-parseval-identity, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

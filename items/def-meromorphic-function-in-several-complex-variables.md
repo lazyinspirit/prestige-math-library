@@ -2,7 +2,7 @@
 id: def-meromorphic-function-in-several-complex-variables
 kind: definition
 title: Meromorphic functions on an open set in complex Euclidean space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-holomorphic-function-in-several-complex-variables
@@ -24,6 +24,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. I §6.2, the sheaf of germs of meromorphic functions: sections over an open set are meromorphic functions, representable locally as quotients of holomorphic functions, and the pole set is closed with empty interior."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: fs-the-laplace-beltrami-definition-licenses-the-use-of-all-euclidean-harmonic-function-theory-on-manifolds
 kind: false-statement
 title: The laplace beltrami definition licenses the use of all euclidean harmonic function theory on manifolds
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-laplace-beltrami-operator-as-trace-of-the-hessian
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

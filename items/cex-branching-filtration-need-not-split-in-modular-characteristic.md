@@ -2,7 +2,7 @@
 id: cex-branching-filtration-need-not-split-in-modular-characteristic
 kind: counterexample
 title: "The branching filtration need not split in modular characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-polytabloid-specht-module-over-an-arbitrary-field, thm-specht-restriction-branching-filtration, def-young-subgroup-tabloid-and-permutation-module, def-row-and-column-stabilizers-of-a-tableau, def-corner-order-and-specht-deletion-map, thm-sign-is-a-homomorphism, def-subrepresentation-and-irreducible-representation, thm-existence-of-finite-fields, def-finite-field-and-its-order]
@@ -21,6 +21,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

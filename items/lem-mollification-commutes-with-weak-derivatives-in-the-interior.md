@@ -2,7 +2,7 @@
 id: lem-mollification-commutes-with-weak-derivatives-in-the-interior
 kind: lemma
 title: Interior mollification commutes with weak derivatives
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivative-is-independent-of-lp-representatives, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-chain-rule-for-total-derivatives, lem-classical-derivatives-are-weak-derivatives, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

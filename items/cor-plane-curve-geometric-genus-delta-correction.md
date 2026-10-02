@@ -2,7 +2,7 @@
 id: cor-plane-curve-geometric-genus-delta-correction
 kind: corollary
 title: "Geometric genus of a plane curve by delta invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,8 @@ sources:
       url: "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

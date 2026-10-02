@@ -2,7 +2,7 @@
 id: lem-evaluation-on-an-unordered-marked-set-is-a-numerable-bundle-and-fibration
 kind: lemma
 title: "Evaluation is a numerable bundle and Hurewicz fibration"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-axiom-of-choice,
@@ -27,6 +27,7 @@ sources:
     - title: "Dale Husemoller, Fibre Bundles, Chapter 4 discussion of numerable bundles"
       url: "https://doi.org/10.1007/978-1-4757-2261-1"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

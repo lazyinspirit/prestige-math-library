@@ -2,7 +2,7 @@
 id: cor-bishop-volume-upper-bound
 kind: corollary
 title: Bishop volume upper bound
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bishop-gromov-volume-comparison
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-standard-pure-braid-generators
 kind: definition
 title: "Standard geometric pure braid generators A_ij"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-elementary-geometric-half-twist, prop-the-artin-presentation-surjects-onto-geometric-braids, cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations, prop-stacking-of-geometric-braids-is-well-defined]
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

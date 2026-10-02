@@ -2,7 +2,7 @@
 id: ex-combing-a-four-strand-braid-word
 kind: example
 title: "Combing a four-strand braid word"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-zariski-braid-combing-words-alpha-and-x,
@@ -25,6 +25,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 19-22"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

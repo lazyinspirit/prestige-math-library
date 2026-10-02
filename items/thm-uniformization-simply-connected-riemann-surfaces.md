@@ -2,7 +2,7 @@
 id: thm-uniformization-simply-connected-riemann-surfaces
 kind: theorem
 title: "Uniformization of simply connected Riemann surfaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 proof_strategy: cases
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

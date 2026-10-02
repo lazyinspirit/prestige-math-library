@@ -2,7 +2,7 @@
 id: thm-markov-chain-ergodic-theorem
 kind: theorem
 title: "Ergodic theorem for an irreducible positive-recurrent Markov chain"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

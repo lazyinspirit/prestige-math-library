@@ -2,7 +2,7 @@
 id: thm-canonical-bundle-ramification-formula
 kind: theorem
 title: "Canonical bundle formula with the different"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -47,6 +47,8 @@ sources:
       url: "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

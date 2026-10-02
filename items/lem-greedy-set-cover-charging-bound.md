@@ -2,7 +2,7 @@
 id: lem-greedy-set-cover-charging-bound
 kind: lemma
 title: "The greedy charge on each newly covered element is at most OPT divided by the remaining count"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-optimization-problem-and-approximation-ratio
@@ -19,6 +19,7 @@ sources:
     - title: "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §2.1 Theorem 3, PDF pp. 2–3"
       url: "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

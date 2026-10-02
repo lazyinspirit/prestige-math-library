@@ -2,7 +2,7 @@
 id: thm-standard-pure-braids-generate-the-pure-braid-group
 kind: theorem
 title: "All standard $A_{ij}$ generate $PB_n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-standard-pure-braids-generate-each-free-kernel, thm-pure-braid-forgetting-a-strand-short-exact-sequence, def-standard-pure-braid-generators, def-pure-braid-group-from-ordered-configurations, def-elementary-geometric-half-twist, def-geometric-braid-with-setwise-endpoints, cor-pure-geometric-braids-are-the-fundamental-group-of-ordered-configurations, prop-higher-homotopy-basepoint-transport-and-moving-homotopies, def-higher-homotopy-group-by-based-cubes, lem-path-conjugation-isomorphism-of-fundamental-groups, lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

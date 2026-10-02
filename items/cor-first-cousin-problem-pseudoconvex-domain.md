@@ -2,7 +2,7 @@
 id: cor-first-cousin-problem-pseudoconvex-domain
 kind: corollary
 title: "First Cousin problem on a pseudoconvex domain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-locally-finite-smooth-partition-of-unity-on-domain
@@ -34,6 +34,7 @@ sources:
       url: https://haroldpboas.gitlab.io/courses/650-2019c/notes.pdf
       locator: "§§3.3.2-3.3.3, the ∂̄-correction and L² solvability used to supply the smooth solution of the (0,1)-equation."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

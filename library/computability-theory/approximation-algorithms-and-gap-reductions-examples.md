@@ -1,7 +1,7 @@
 ---
 page: approximation-algorithms-and-gap-reductions-examples
 title: "Approximation Algorithms and Gap Reductions: Examples and Counterexamples"
-status: draft
+status: published
 requires: [approximation-algorithms-and-gap-reductions]
 items: []
 examples:

@@ -1,7 +1,7 @@
 ---
 page: smooth-proper-curves-divisors-genus-and-ramification
 title: Smooth Proper Curves Divisors Genus and Ramification
-status: draft
+status: published
 requires:
 - finite-proper-and-projective-morphisms
 - kahler-differentials-conormal-sequences-and-infinitesimal-lifting

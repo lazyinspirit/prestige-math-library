@@ -2,7 +2,7 @@
 id: prop-model-functions-solve-the-constant-curvature-jacobi-equation
 kind: proposition
 title: Model functions solve the constant curvature jacobi equation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-comparison-sine-cosine-and-cotangent-functions
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

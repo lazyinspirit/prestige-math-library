@@ -2,7 +2,7 @@
 id: cex-minkowski-constants-change-under-scaled-embedding
 kind: counterexample
 title: "Mixing scaled and unscaled Minkowski covolumes fails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 Lemma 7.1.7, pp.80-81."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -109,10 +110,15 @@ $\pi/4<13/15<1$ and $\pi<4$
 ## Proof
 
 1.1 By [F1] the field is $K=\mathbb Q(i)$ with $\mathcal O_K=\mathbb Z[i]$ and $d_K=-4$, so $r_2=1$ and [F3] gives $\operatorname{covol}(\sigma(\mathcal O_K))=2^{-1}\sqrt{4}=1$, while [F2] identifies the unscaled lattice itself as $\sigma(\mathcal O_K)=\mathbb Z^2$. [F1, F2, F3]
+
 1.2 The disc $D=\{x\in\mathbb R^2:|x|\le6/5\}$ is compact, convex and centrally symmetric, and by [F5], with the Countable Choice hypothesis supplied by [A1], its area is $\pi(6/5)^2=36\pi/25$. By [F7], $\pi>3>25/9$, so this area exceeds $4=2^2\cdot1$. [F5, F7, A1, given, algebra]
+
 2.1 The scaled lattice is $\Gamma:=\sqrt2\,\mathbb Z^2=\{(\sqrt2a,\sqrt2b):a,b\in\mathbb Z\}$, the image of $\mathcal O_K$ under the coordinatewise $\sqrt2$-scaling of $\sigma$; by [F4] its covolume is $\operatorname{covol}(\Gamma)=|\det(\sqrt2I_2)|=2$. [F4, step 1.1]
+
 3.1 Every nonzero $x=(\sqrt2a,\sqrt2b)\in\Gamma$ has $|x|^2=2(a^2+b^2)\ge2>36/25=(6/5)^2$, so $|x|>6/5$ and $x\notin D$; hence $D\cap\Gamma=\{0\}$. [step 2.1, algebra]
+
 4.1 If the unscaled covolume $1$ were used as the covolume of $\Gamma$, then step 1.2 would verify all hypotheses of the equality-form criterion [F6] for $C=D$ and $\Lambda=\Gamma$, and [F6] would produce a nonzero point of $D\cap\Gamma$, contradicting step 3.1. This refutes the mixed-convention claim. [F6, step 1.2, step 3.1]
+
 5.1 The correct criterion is not violated: by step 2.1 the true covolume of $\Gamma$ is $2$, so the threshold is $2^2\cdot2=8$. By [F7], $36\pi/25<144/25<8$, so the hypothesis of [F6] fails and [F6] yields no lattice point in $D$. [F6, F7, step 2.1, step 1.2] ∎
 
 ## Remarks

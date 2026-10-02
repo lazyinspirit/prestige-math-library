@@ -2,7 +2,7 @@
 id: thm-schur-weyl-decomposition-with-length-cutoff
 kind: theorem
 title: "Schur-Weyl decomposition and highest weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-schur-weyl-double-centralizer, lem-schur-weyl-length-cutoff-by-column-antisymmetrization, lem-schur-weyl-polytabloid-highest-weight, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, def-commuting-symmetric-and-linear-actions-on-tensor-power, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, def-completely-reducible-representation, thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique, def-isotypic-component-of-a-completely-reducible-representation, lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces, cor-schurs-lemma-for-irreducible-representations, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, thm-simple-modules-over-semisimple-rings, thm-tensor-product-basis-from-bases, cor-finite-iterated-tensor-products-represent-multilinear-maps, def-column-antisymmetrizer-polytabloid-and-specht-module, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -21,6 +21,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

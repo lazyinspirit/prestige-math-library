@@ -2,7 +2,7 @@
 id: thm-quadratic-gauss-sum-square
 kind: theorem
 title: Square of the quadratic Gauss sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.19, p. 144: tau_p^2 = (-1)^{(p-1)/2} p."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

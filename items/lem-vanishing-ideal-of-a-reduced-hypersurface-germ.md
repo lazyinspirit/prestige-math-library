@@ -2,7 +2,7 @@
 id: lem-vanishing-ideal-of-a-reduced-hypersurface-germ
 kind: lemma
 title: "The vanishing ideal of a reduced hypersurface germ is principal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.21) vanishing ideal of a prime (p. 96); II (6.6) principal ideal of a pure codimension-one germ (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: ex-units-in-a-real-cubic-field
 kind: example
 title: Two independent units in a real cubic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -53,6 +53,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "Section 15.3 pp.9-10 (rank computations from the signature; same method)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: cex-poisson-integral-need-not-recover-discontinuous-data-at-the-jump
 kind: counterexample
 title: The disc Poisson integral can miss the assigned value at a jump
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

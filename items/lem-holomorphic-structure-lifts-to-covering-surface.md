@@ -2,7 +2,7 @@
 id: lem-holomorphic-structure-lifts-to-covering-surface
 kind: lemma
 title: "A universal covering of a Riemann surface inherits a unique complex structure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-countable-choice, def-riemann-surface-and-holomorphic-atlas, thm-universal-cover-existence, def-covering-map-and-evenly-covered-neighbourhoods, def-holomorphic-and-meromorphic-map-of-riemann-surfaces, def-universal-covering-space, def-simply-connected, def-semilocally-simply-connected-space, def-based-loops-and-fundamental-group, thm-connected-and-locally-path-connected-implies-path-connected, thm-path-connected-implies-connected, thm-locally-connected-iff-components-of-open-sets-are-open, thm-second-countable-implies-lindelof, prop-second-countability-is-hereditary, thm-convex-subsets-have-trivial-fundamental-group, thm-induced-fundamental-group-map-functoriality, prop-local-path-connectedness-lifts-and-descends-along-coverings, prop-covering-spaces-are-stable-under-restriction-finite-products-and-pullback, cor-connected-cover-of-a-simply-connected-space-is-trivial, thm-path-lifting-for-covering-maps, cor-lifted-path-endpoints-depend-only-on-path-homotopy, thm-holomorphic-inverse-function-theorem, def-deck-transformation-and-deck-group]
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

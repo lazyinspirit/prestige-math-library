@@ -2,7 +2,7 @@
 id: lem-arithmetic-frobenius-on-a-cyclotomic-field
 kind: lemma
 title: Arithmetic Frobenius is the power map in an unramified cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,8 @@ sources:
     - title: "Conrad-Landesman, Math 154 Algebraic Number Theory, Chs. 11-12"
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 11, Remark 11.7 and Ch. 12, pp. 60-65: the reduced-index unramified criterion and the identification of Frobenius with the power map on roots of unity."
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-g-mod-h-need-not-have-an-invariant-measure
 kind: counterexample
 title: "A homogeneous quotient without invariant measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [cor-existence-of-left-and-right-haar-measures, def-axiom-of-choice, def-left-haar-integral-and-left-haar-measure, def-measure-with-density, def-modular-function-of-a-locally-compact-group, lem-right-translation-scales-left-haar-measure, prop-compact-discrete-and-abelian-groups-are-unimodular, prop-invariant-measure-on-g-mod-h-iff-modular-functions-agree, thm-integration-against-a-density, thm-lebesgue-measure-is-a-radon-measure-on-rn, thm-uniqueness-of-left-haar-measure-up-to-scale, thm-choice-implies-dependent-implies-countable-choice]
@@ -21,6 +21,7 @@ sources:
     - title: "David Vogan, Unitary Representations of Locally Compact Groups and Induced Representations"
       url: "https://math.mit.edu/~dav/ind.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

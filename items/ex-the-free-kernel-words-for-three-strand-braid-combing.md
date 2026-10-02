@@ -2,7 +2,7 @@
 id: ex-the-free-kernel-words-for-three-strand-braid-combing
 kind: example
 title: "The free-kernel words for three-strand braid combing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-zariski-braid-combing-words-alpha-and-x,
@@ -26,6 +26,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 2.1 and 3.1, printed pp. 11-13 and 19-22"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

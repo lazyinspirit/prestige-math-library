@@ -2,7 +2,7 @@
 id: thm-h1-line-bundle-vanishes-sufficiently-high-degree
 kind: theorem
 title: "Vanishing of H^1 in a fixed ample direction"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-smooth-proper-curve-finite-map-projective-line
@@ -55,6 +55,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

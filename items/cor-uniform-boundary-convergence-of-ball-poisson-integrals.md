@@ -2,7 +2,7 @@
 id: cor-uniform-boundary-convergence-of-ball-poisson-integrals
 kind: corollary
 title: Ball Poisson integrals converge uniformly along radial boundary approaches
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, lem-poisson-kernel-boundary-cap-and-complement-estimate, cor-euclidean-closed-balls-and-spheres-are-compact, thm-extreme-value-metric, thm-heine-cantor-metric]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-singular-cubic-degeneration
 kind: example
 title: "A singular cubic outside the lattice family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(iii), equations (23.2.8)-(23.2.12): the invariants g2, g3 and the discriminant of the associated cubic."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

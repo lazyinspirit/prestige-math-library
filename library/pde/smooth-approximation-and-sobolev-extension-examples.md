@@ -1,7 +1,7 @@
 ---
 page: smooth-approximation-and-sobolev-extension-examples
 title: Smooth Approximation and Sobolev Extension — Examples
-status: draft
+status: published
 items: []
 examples: ["ex-mollification-of-the-absolute-value", "ex-zero-extension-of-a-compactly-supported-sobolev-function", "cex-zero-extension-of-a-nonzero-boundary-function-creates-a-jump", "cex-c-infinity-up-to-boundary-density-is-domain-sensitive", "cex-not-every-open-set-is-a-w-one-p-extension-domain", "ex-reflection-extension-on-the-half-line", "cex-mollification-after-zero-extension-does-not-preserve-boundary-values"]
 ---

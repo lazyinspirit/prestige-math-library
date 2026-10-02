@@ -2,7 +2,7 @@
 id: def-fundamental-units
 kind: definition
 title: System of fundamental units
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§8.1 p.89 (free part of U_K)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-monogenic-prime-factorisation-by-polynomial-reduction
 kind: lemma
 title: Choice-free prime factorisation for a monogenic number ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,8 @@ sources:
     - title: "J. S. Milne, Algebraic Number Theory, Theorem 3.41 and proof, pp. 62-63"
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 3, Theorem 3.41 with proof, pp. 62-63: for a monogenic extension the factorisation of the minimal polynomial mod p gives pO_L = prod (p, g_i(alpha))^{e_i} with residue degrees deg g_i."
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

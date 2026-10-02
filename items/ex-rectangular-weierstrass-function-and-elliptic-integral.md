@@ -2,7 +2,7 @@
 id: ex-rectangular-weierstrass-function-and-elliptic-integral
 kind: example
 title: "Rectangular lattices, real mapping, and inverse elliptic integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -54,6 +54,7 @@ sources:
       url: https://cs.mcgill.ca/~akroit/math/analysis/Stein%20and%20Shakarchi%20Complex%20Analysis.pdf
       locator: "Ch. 8 §4.5, 'Return to elliptic integrals', printed pp. 245-247: the conformal map I(z) of the upper half-plane onto the rectangle with vertices -K, K, K+iK', -K+iK', the identity K'(k) = K(sqrt(1-k^2)), and the Schwarz-reflection extension of sn with periods 4K and 2iK'."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

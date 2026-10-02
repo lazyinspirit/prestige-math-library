@@ -2,7 +2,7 @@
 id: def-averaged-hermitian-form-for-a-compact-group
 kind: definition
 title: Averaged Hermitian form for a compact group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, def-real-and-complex-inner-product-space, lem-inner-product-is-jointly-continuous, thm-coordinate-map-for-a-finite-dimensional-normed-space]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

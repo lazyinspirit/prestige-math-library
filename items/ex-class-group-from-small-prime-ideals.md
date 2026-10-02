@@ -2,7 +2,7 @@
 id: ex-class-group-from-small-prime-ideals
 kind: example
 title: "Higher-degree class group by norm exclusions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.3 class-group norm-exclusion method, pp.84-85."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -101,13 +102,21 @@ $N=7$ is $33976/45045>3/4$ with positive remainder, giving $\pi>3$
 ## Proof
 
 1.1 Reduction modulo 3: $\bar f=X^5+2X+2$ has values $2,2,2$ at $0,1,2$, so it has no linear factor; division by the three monic irreducible quadratics leaves remainders $2$ for $X^2+1$ (where $X^2\equiv-1$), $X+2$ for $X^2+X+2$ (where $X^2\equiv-X-2$), and $X+2$ for $X^2+2X+2$ (where $X^2\equiv-2X-2$); hence $\bar f$ has no factor of degree at most $2$, and a degree-$5$ reducible polynomial would have one, so $\bar f$ is irreducible over $\mathbb F_3$. [algebra]
+
 1.2 Discriminant: in $\mathbb C$ write $f=\prod_{i=1}^5(t-r_i)$; by [F2] and [F3], $\operatorname{Disc}(f)=\operatorname{Res}(f,f')=\prod_i(5r_i^4-1)$ and $\prod_ir_i=-a_5=1$. Since $f(r_i)=0$ and $r_i\ne0$ (as $f(0)=-1$), we have $r_i^4=(r_i+1)/r_i$ and $5r_i^4-1=(4r_i+5)/r_i$; moreover $\prod_i(4r_i+5)=4^5\prod_i(r_i+5/4)=-4^5f(-5/4)=-1024\bigl(-\frac{3125}{1024}+\frac54-1\bigr)=2869$. Hence $\operatorname{Disc}(f)=2869$. [F2, F3, algebra]
+
 2.1 By [F1] with $p=3$ the polynomial $f$ is irreducible over $\mathbb Q$, so it is the minimal polynomial of $\alpha$, $K=\mathbb Q(\alpha)$ has degree $5$, and $\alpha\in\mathcal O_K$ by [F6]. [F1, F6, step 1.1]
+
 2.2 No ideal of norm $2$ or $3$: if $N\mathfrak a=p\in\{2,3\}$, then $\mathcal O_K/\mathfrak a$ is a commutative ring with $p$ elements, hence isomorphic to $\mathbb F_p$; the composite $\mathbb Z[X]\to\mathcal O_K\to\mathbb F_p$ with $X\mapsto\bar\alpha$ kills $f$, so $f$ has a root mod $p$ by [F7]; but $f\bmod3$ has values $2,2,2$ and $f\bmod2$ has values $1,1$ at all elements of their prime fields, a contradiction. [F7, step 1.1, algebra]
+
 3.1 The factorisation $2869=19\cdot151$ consists of distinct primes, so $\operatorname{Disc}(f)$ is squarefree; by [F2] and [F4] the power-basis discriminant of $\alpha$ is $2869$, so [F5] gives $\mathcal O_K=\mathbb Z[\alpha]$ and $d_K=2869$. [F4, F5, step 2.1, step 1.2, algebra]
+
 3.2 Signature: $f'=5X^4-1$ vanishes exactly at $\pm c$ with $c=5^{-1/4}$; since $c^4=1/5$, $f(-c)=-c^5+c-1=\frac45c-1<0$ and $f(c)=c^5-c-1=-\frac45c-1<0$, using $0<c<1$. The derivative is positive on $(-\infty,-c)$, negative on $(-c,c)$, and positive on $(c,\infty)$, so the local maximum and local minimum are both negative. Since $f(x)\to-\infty$ as $x\to-\infty$ and $f(x)\to+\infty$ as $x\to+\infty$, there is exactly one real root and two conjugate pairs of nonreal roots, that is $(r_1,r_2)=(1,2)$. [step 2.1, algebra]
+
 4.1 Minkowski constant: $M_K=(4/\pi)^2\frac{5!}{5^5}\sqrt{2869}=\frac{120}{3125}\bigl(\frac4\pi\bigr)^2\sqrt{2869}<\frac{120}{3125}\cdot\frac{16}{9}\cdot54=\frac{11520}{3125}<4$, using $\pi>3$ of [F9] and $\sqrt{2869}<54$. [F9, step 3.1, step 3.2, algebra]
+
 5.1 Every class of $\operatorname{Cl}(\mathcal O_K)$ has an integral representative $\mathfrak b$ with $N\mathfrak b\le M_K<4$ by [F8] and step 4.1; the norm is a positive integer, so $N\mathfrak b\in\{1,2,3\}$, and step 2.2 rules out $2$ and $3$, leaving $N\mathfrak b=1$, i.e. $\mathfrak b=\mathcal O_K$; hence every class is principal and $\operatorname{Cl}(\mathcal O_K)$ is trivial. [F8, step 3.1, step 4.1, step 2.2]
+
 6.1 Therefore $\mathcal O_K=\mathbb Z[\alpha]$, $d_K=2869=19\cdot151$, $M_K<4$, and $\operatorname{Cl}(\mathcal O_K)$ is trivial. [step 3.1, step 4.1, step 5.1] ∎
 
 ## Remarks

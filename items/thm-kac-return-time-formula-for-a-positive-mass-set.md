@@ -2,7 +2,7 @@
 id: thm-kac-return-time-formula-for-a-positive-mass-set
 kind: theorem
 title: "Kac return-time formula for a positive-mass set"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -20,6 +20,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

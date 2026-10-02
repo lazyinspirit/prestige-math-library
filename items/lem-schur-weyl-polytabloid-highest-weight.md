@@ -2,7 +2,7 @@
 id: lem-schur-weyl-polytabloid-highest-weight
 kind: lemma
 title: "The row-labelled polytabloid map has highest weight lambda"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-schur-weyl-length-cutoff-by-column-antisymmetrization, thm-schur-weyl-double-centralizer, lem-polytabloid-covariance-and-column-sign, def-commuting-symmetric-and-linear-actions-on-tensor-power, def-column-antisymmetrizer-polytabloid-and-specht-module, def-young-subgroup-tabloid-and-permutation-module, def-row-and-column-stabilizers-of-a-tableau, def-young-tableau-standard-tableau-and-shape, def-partition-young-diagram-and-conjugate-partition, thm-tensor-product-basis-from-bases, def-linear-basis, thm-complex-specht-modules-are-irreducible, thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent, thm-sign-is-a-homomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -1,7 +1,7 @@
 ---
 page: riesz-potentials-and-the-hardy-littlewood-sobolev-inequality-examples
 title: "Riesz Potentials and the Hardy–Littlewood–Sobolev Inequality: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-riesz-potential-scaling-determines-the-target-exponent,
            cex-hardy-littlewood-sobolev-strong-p-equals-one-endpoint,

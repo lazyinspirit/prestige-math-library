@@ -2,7 +2,7 @@
 id: thm-hardy-littlewood-sobolev-fractional-integration
 kind: theorem
 title: "Hardy–Littlewood–Sobolev fractional integration inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-riesz-potential-of-order-alpha, lem-riesz-potential-near-far-splitting, lem-hedberg-pointwise-inequality, def-complex-lp-and-euclidean-test-function-conventions, def-integrable-real-and-complex-functions-and-their-integrals, def-locally-integrable-function-on-r-n, def-centered-and-uncentered-hardy-littlewood-maximal-functions, thm-complex-holder-minkowski-and-the-quotient-norm, cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded, thm-centered-hardy-littlewood-maximal-function-is-borel-measurable, cor-finite-nonnegative-integral-implies-finite-almost-everywhere, thm-threshold-characterisations-of-real-and-extended-real-measurability, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-extension-of-a-bounded-map-from-a-dense-subspace, def-banach-space, def-normed-subspace, def-metric-interior-closure-boundary, thm-bounded-linear-operator-equivalences, lem-metric-limits-unique, thm-tonelli-theorem-for-sigma-finite-product-spaces, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-borel-products-of-euclidean-spaces-are-euclidean-borel, thm-borel-sets-are-lebesgue-measurable, cor-continuous-functions-are-borel-measurable, thm-composition-with-borel-functions-preserves-measurability, thm-arithmetic-and-lattice-operations-preserve-measurability, def-borel-and-lebesgue-measurable-function-on-rn, def-measurable-function-between-measurable-spaces, prop-order-and-scalar-rules-for-the-nonnegative-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-the-lebesgue-integral-respects-almost-everywhere-equality, cor-integral-over-a-null-set-vanishes, thm-finite-and-countable-subadditivity-of-measures, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

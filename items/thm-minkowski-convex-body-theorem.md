@@ -2,7 +2,7 @@
 id: thm-minkowski-convex-body-theorem
 kind: theorem
 title: "Minkowski convex-body theorem, strict form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§28 pp.144-147."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -73,9 +74,13 @@ $t\in[0,1]$; central symmetry means $-C=C$, so $-y\in C$ whenever $y\in C$
 ## Proof
 
 1.1 Put $C':=\tfrac12C=\{x/2:x\in C\}$. By [F2] with $c=1/2$, $C'$ is Lebesgue measurable with $\lambda_n(C')=2^{-n}\lambda_n(C)>\operatorname{covol}(\Lambda)$, the Countable Choice hypothesis of [F2] being supplied by [A1]. [F2, A1, given]
+
 1.2 $C'$ is convex and centrally symmetric: for $u,v\in C'$ write $u=x/2$, $v=y/2$ with $x,y\in C$; then $(1-t)u+tv=((1-t)x+ty)/2\in C'$ by convexity of $C$, and $-u=(-x)/2\in C'$ by symmetry of $C$. [F3, algebra]
+
 2.1 By [F1] applied to the measurable set $C'$ of step 1.1 there are distinct $u,v\in C'$ with $u-v\in\Lambda$. [F1, step 1.1]
+
 3.1 The difference $u-v$ is nonzero because $u\ne v$, and it lies in $C$: $2u\in C$ and $2v\in C$ by definition of $C'$, so $-2v\in C$ by central symmetry, and convexity of $C$ gives $u-v=\tfrac12(2u)+\tfrac12(-2v)\in C$. [F3, step 2.1]
+
 4.1 Thus $u-v$ is a nonzero point of $\Lambda$ lying in $C$, as required. [step 2.1, step 3.1] ∎
 
 ## Remarks

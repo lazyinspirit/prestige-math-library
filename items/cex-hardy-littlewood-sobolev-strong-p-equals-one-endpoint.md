@@ -2,7 +2,7 @@
 id: cex-hardy-littlewood-sobolev-strong-p-equals-one-endpoint
 kind: counterexample
 title: "Strong fractional integration fails at p equal to one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-riesz-potential-of-order-alpha, def-complex-lp-and-euclidean-test-function-conventions, lem-euclidean-balls-have-positive-finite-lebesgue-measure, thm-polar-coordinates-formula-for-lebesgue-measure, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function, def-integral-over-a-measurable-set, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-integral-triangle-inequality, thm-linearity-of-the-lebesgue-integral-on-l-one]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

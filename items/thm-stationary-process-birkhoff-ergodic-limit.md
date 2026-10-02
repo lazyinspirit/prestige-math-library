@@ -2,7 +2,7 @@
 id: thm-stationary-process-birkhoff-ergodic-limit
 kind: theorem
 title: "Birkhoff limit for a stationary integrable process"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -20,6 +20,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

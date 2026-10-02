@@ -2,20 +2,27 @@
 id: "def-effective-cartier-divisor"
 kind: "definition"
 title: "Effective cartier divisor"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "frontier-37-owner-30"
-deps: ["def-cartier-divisor", "def-sheaf-total-quotient-rings"]
+deps: [ "def-cartier-divisor", "def-sheaf-total-quotient-rings" ]
 justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification: {"precheck": "n/a", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02}}
+verification:
+  {
+    "precheck": "n/a",
+    judge: { model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02 },
+    audited: 2026-10-02
+  }
 sources:
   references:
-    - title: "The Stacks Project, Definition 111.49.1(6)-(7), meromorphic functions and Cartier divisors"
+    - title: "The Stacks Project, Definition 111.49.1(6)-(7), meromorphic functions
+        and Cartier divisors"
       url: "https://stacks.math.columbia.edu/tag/02AR"
-    - title: "The Stacks Project, Effective Cartier divisors, Definition31.14.1 and Lemma31.14.2"
+    - title: "The Stacks Project, Effective Cartier divisors, Definition31.14.1 and
+        Lemma31.14.2"
       url: "https://stacks.math.columbia.edu/tag/01WQ"
 ---
 

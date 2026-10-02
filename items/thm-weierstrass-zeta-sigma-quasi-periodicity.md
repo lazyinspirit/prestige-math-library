@@ -2,7 +2,7 @@
 id: thm-weierstrass-zeta-sigma-quasi-periodicity
 kind: theorem
 title: "Convergence, zeros and quasi-periods of the Weierstrass zeta and sigma functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -59,6 +59,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii), (23.2.7-8): zeta and sigma parity and lattice zeros; §23.2(iii), (23.2.11-15): the quasi-periods and the Legendre relation; (23.2.16-17): the sigma derivative and the general lattice translation."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

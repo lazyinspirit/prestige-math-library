@@ -2,7 +2,7 @@
 id: thm-logarithmic-capacity-equals-transfinite-diameter
 kind: theorem
 title: "Fekete–Szegő equality of logarithmic capacity, transfinite diameter, and Chebyshev constant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -70,6 +70,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§5, Fekete points, transfinite diameter and the Chebyshev constant, PDF pp. 40–44"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

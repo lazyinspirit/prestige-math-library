@@ -1,7 +1,7 @@
 ---
 page: cartier-and-weil-divisors-line-bundles-and-picard-groups-examples
 title: "Cartier and Weil Divisors Line Bundles and Picard Groups — Examples"
-status: draft
+status: published
 requires: [cartier-and-weil-divisors-line-bundles-and-picard-groups, normalization-finiteness-for-affine-domains]
 items: []
 examples:

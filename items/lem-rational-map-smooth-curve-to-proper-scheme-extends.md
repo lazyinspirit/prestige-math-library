@@ -2,7 +2,7 @@
 id: lem-rational-map-smooth-curve-to-proper-scheme-extends
 kind: lemma
 title: "Rational maps from a smooth curve to a proper scheme are morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -48,6 +48,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

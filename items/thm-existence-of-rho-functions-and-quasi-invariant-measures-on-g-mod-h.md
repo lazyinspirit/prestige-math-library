@@ -2,7 +2,7 @@
 id: thm-existence-of-rho-functions-and-quasi-invariant-measures-on-g-mod-h
 kind: theorem
 title: "Existence of rho-functions and quotient measure classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, def-rho-function-for-a-closed-subgroup, lem-bruhat-cutoff-on-a-closed-subgroup-quotient, thm-weil-quotient-integration-formula-with-rho-function, thm-the-modular-function-is-a-continuous-homomorphism, lem-closed-subgroup-quotient-averaging-and-compact-lifts, lem-compactly-supported-kernels-admit-commuting-radon-integrals, thm-choice-implies-dependent-implies-countable-choice, thm-rmk-uniqueness-among-radon-measures]
@@ -21,6 +21,7 @@ sources:
     - title: "David Vogan, Unitary Representations of Locally Compact Groups and Induced Representations"
       url: "https://math.mit.edu/~dav/ind.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -57,8 +58,11 @@ Assume AC. Every closed $H\leq G$ admits a rho-function $\rho$ and a full-suppor
 **Proof technique:** construction.
 
 1.1 Define $\rho(x)=\int_H\beta(xh)\Delta_G(h)/\Delta_H(h)\,dh$. For each $x$, the integrand is supported on the compact fiber intersection $x^{-1}\operatorname{supp}\beta\cap H$, so its integral is finite. It is positive because $\beta\ge0$, the weight is positive, and $\int_H\beta(xh)dh=1$. [F2, F3, construct]
+
 2.1 Near $x_0$ choose a compact neighborhood $K$. The set $S=\operatorname{supp}\beta\cap p^{-1}(p(K))$ is compact by [F2], and all $h$ for which $xh\in\operatorname{supp}\beta$ with $x\in K$ lie in the compact set $K^{-1}S\cap H$. The integrand is jointly continuous with this common compact support; [F4] gives continuity of its integral. Thus $\rho$ is positive and continuous. [F2, F3, F4, step 1.1]
+
 2.2 For $h_0\in H$, substitute $k=h_0h$; left invariance of $dh$ and the homomorphism laws give $\rho(xh_0)=\Delta_H(h_0)\Delta_G(h_0)^{-1}\rho(x)$. Hence $\rho$ is a rho-function. [F3, step 1.1, algebra]
+
 3.1 Apply [F5] to obtain $\mu_\rho$ and the Weil formula. The ratio $D_g(xH)=\rho(g^{-1}x)/\rho(x)$ is independent of the representative by [F3] and is positive continuous. For $\phi=T_Hf$, Weil and left invariance give $$\int_{G/H}\phi(gq)d\mu_\rho(q)=\int_G f(gx)\rho(x)dx=\int_G f(y)\rho(g^{-1}y)dy=\int_{G/H}\phi(q)D_g(q)d\mu_\rho(q).$$ By [F6] this holds for every $\phi\in C_c(G/H)$, and [F7] identifies $g_*\mu_\rho=D_g\mu_\rho$. Positivity of $D_g$ gives equivalence of measures; the ratio descends continuously jointly in $(g,q)$ through the open quotient map. Thus $\mu_\rho$ is strongly quasi-invariant. Full support is part of [F5]. ∎ [A1, F1, F2, F3, F4, F5, F6, F7, step 1.1, step 2.1, step 2.2]
 ## Sources
 

@@ -2,7 +2,7 @@
 id: def-optimization-problem-and-approximation-ratio
 kind: definition
 title: "Optimization problems and approximation ratios"
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -16,6 +16,7 @@ sources:
     - title: "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5"
       url: "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: ex-model-jacobi-fields-in-positive-zero-and-negative-curvature
 kind: example
 title: Model jacobi fields in positive zero and negative curvature
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-comparison-sine-cosine-and-cotangent-functions
@@ -22,6 +22,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

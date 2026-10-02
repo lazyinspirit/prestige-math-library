@@ -2,7 +2,7 @@
 id: cor-picard-projective-line-integers
 kind: corollary
 title: "The Picard group of the projective line"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-degree-descends-picard-curve
@@ -34,6 +34,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

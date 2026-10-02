@@ -2,7 +2,7 @@
 id: cor-degree-zero-line-bundle-section-trivial
 kind: corollary
 title: "A degree-zero line bundle with a nonzero section is trivial"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-algebraic-curve-over-field
@@ -38,6 +38,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

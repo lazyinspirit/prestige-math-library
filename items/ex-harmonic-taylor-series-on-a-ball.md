@@ -2,7 +2,7 @@
 id: ex-harmonic-taylor-series-on-a-ball
 kind: example
 title: A finite harmonic Taylor series and its Cauchy bound
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, thm-harmonic-functions-are-real-analytic]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

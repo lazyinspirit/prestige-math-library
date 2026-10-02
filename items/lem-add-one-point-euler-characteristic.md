@@ -2,7 +2,7 @@
 id: lem-add-one-point-euler-characteristic
 kind: lemma
 title: "Euler characteristic changes by the residue degree"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-algebraic-curve-over-field
@@ -36,6 +36,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

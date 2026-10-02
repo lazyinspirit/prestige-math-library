@@ -2,7 +2,7 @@
 id: cor-degree-descends-picard-curve
 kind: corollary
 title: "The degree of a divisor descends to the Picard group of a normal proper curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -51,6 +51,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "J. S. Milne, Algebraic Geometry, Ch. 12 §§12.1-12.9 (divisors, the class group and the Picard group)"
       url: "https://www.jmilne.org/math/CourseNotes/AG12.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

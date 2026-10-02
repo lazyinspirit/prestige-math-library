@@ -2,7 +2,7 @@
 id: thm-singular-locus-reduced-hypersurface
 kind: theorem
 title: "Singular locus of a reduced analytic hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -55,6 +55,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "Chapter II §4, within printed pp. 90–99: (4.19) discriminant of a finite preparation and (4.23) regular and singular points; §6.6 pure codimension one (printed pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

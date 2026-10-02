@@ -1,7 +1,7 @@
 ---
 page: perfect-complexes-and-triangulated-grothendieck-groups
 title: "Perfect Complexes and Triangulated Grothendieck Groups"
-status: draft
+status: published
 requires: [grothendieck-groups-and-graded-cartan-pairings, bounded-bimodule-complexes-and-derived-tensor]
 items:
   - def-perfect-complex-over-a-ring

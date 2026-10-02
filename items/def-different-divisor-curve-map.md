@@ -2,7 +2,7 @@
 id: def-different-divisor-curve-map
 kind: definition
 title: "The different divisor of a generically separable morphism of curves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -28,6 +28,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
     - title: "Jiahui Gao and Shouwu Zhang, Lectures on Algebraic Geometry (December 14, 2019), Ch. 7"
       url: "https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Definition

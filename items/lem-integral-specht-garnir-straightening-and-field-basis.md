@@ -2,7 +2,7 @@
 id: lem-integral-specht-garnir-straightening-and-field-basis
 kind: lemma
 title: Integral Garnir straightening and the field-uniform standard basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-polytabloid-specht-module-over-an-arbitrary-field, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-tabloid-and-column-orders-for-specht-straightening, lem-leading-tabloid-coefficient-of-a-standard-polytabloid, def-partition-young-diagram-and-conjugate-partition, thm-sign-is-a-homomorphism]
@@ -21,6 +21,7 @@ sources:
     - title: "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39"
       url: "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

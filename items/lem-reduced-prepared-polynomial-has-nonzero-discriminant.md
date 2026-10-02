@@ -2,7 +2,7 @@
 id: lem-reduced-prepared-polynomial-has-nonzero-discriminant
 kind: lemma
 title: "Reduced preparation has nonzero discriminant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.19) local parametrisation: finite preparation, degree and discriminant (p. 95)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

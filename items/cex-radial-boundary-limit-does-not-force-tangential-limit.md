@@ -2,7 +2,7 @@
 id: cex-radial-boundary-limit-does-not-force-tangential-limit
 kind: counterexample
 title: "A radial Poisson limit does not control a tangential path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-circle-maximal-function-and-nontangential-region, def-complex-lp-and-euclidean-test-function-conventions, def-integral-of-a-nonnegative-simple-function, def-integral-over-a-measurable-set, def-l-one-of-a-measure, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-poisson-kernel-properties-on-the-disc, lem-sine-positive-and-cosine-decreasing-on-zero-two, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-sine-and-cosine-are-one-lipschitz, cor-trigonometric-parity-and-pythagorean-identity, thm-complex-holder-minkowski-and-the-quotient-norm, thm-double-angle-and-power-reduction-identities, thm-fatou-nontangential-boundary-theorem-harmonic, thm-monotone-convergence-for-the-integral, thm-poisson-extension-lp-contraction-and-norm-limit, prop-order-and-scalar-rules-for-the-nonnegative-integral]
@@ -13,6 +13,7 @@ proof_strategy: direct
 generation:
   role: counterexample
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references: []

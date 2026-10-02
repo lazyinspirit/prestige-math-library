@@ -2,7 +2,7 @@
 id: ex-point-pushing-one-puncture-around-another
 kind: example
 title: "Point pushing one puncture around another"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-point-pushing-homomorphism-for-a-puncture,
@@ -41,6 +41,7 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, section 1.3, author manuscript pp. 5-7"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

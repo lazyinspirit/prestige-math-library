@@ -2,7 +2,7 @@
 id: ex-strictly-psh-exhaustion-of-a-convex-domain
 kind: example
 title: "A strictly plurisubharmonic exhaustion of the convex unit ball"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-levi-form-and-strict-plurisubharmonicity
@@ -38,6 +38,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VIII §5, exhaustion functions on the ball"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

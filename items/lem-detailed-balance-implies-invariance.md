@@ -2,7 +2,7 @@
 id: lem-detailed-balance-implies-invariance
 kind: lemma
 title: "Detailed balance implies invariance"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

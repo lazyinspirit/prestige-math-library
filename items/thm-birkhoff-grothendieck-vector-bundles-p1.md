@@ -2,7 +2,7 @@
 id: thm-birkhoff-grothendieck-vector-bundles-p1
 kind: theorem
 title: "Birkhoff-Grothendieck: vector bundles on the projective line split"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-h0-projective-space-o-d-homogeneous-polynomials
@@ -37,6 +37,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

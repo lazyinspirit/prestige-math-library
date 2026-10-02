@@ -2,7 +2,7 @@
 id: thm-rauch-comparison-theorem-first-form
 kind: theorem
 title: Rauch comparison theorem first form
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data
@@ -26,6 +26,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

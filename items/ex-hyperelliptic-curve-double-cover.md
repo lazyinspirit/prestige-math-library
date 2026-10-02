@@ -2,7 +2,7 @@
 id: ex-hyperelliptic-curve-double-cover
 kind: example
 title: Ramification of the double cover y^2=f(x)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -53,6 +53,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/curves.pdf
     - title: Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21
       url: https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf
+verification:
+  audited: 2026-10-02
 ---
 
 

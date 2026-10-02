@@ -2,7 +2,7 @@
 id: ex-hilbert-transform-of-the-poisson-kernel
 kind: example
 title: "Hilbert transform of the line Poisson kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-truncated-hilbert-transform-and-principal-value, lem-hilbert-transform-has-signum-fourier-multiplier, cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, lem-schwartz-cutoffs-from-the-standard-smooth-step, def-countable-choice, def-complex-lp-and-euclidean-test-function-conventions, def-schwartz-space-and-its-seminorms, def-fourier-transform-on-l-one-of-rn, thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions, thm-l-one-fourier-inversion, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-sine-and-cosine-derivatives, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-derivative-of-exponential, thm-algebra-of-derivatives, thm-composition-of-continuous-functions, cor-differentiable-implies-continuous, lem-exponential-dominates-one-plus-x, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line, thm-additivity-over-subintervals, thm-ftc-second-part, thm-chain-rule, thm-principal-inverse-tangent-calculus, def-principal-inverse-tangent, thm-logarithm-derivative-and-integral, thm-natural-logarithm-laws, cor-mean-value-theorem, thm-dominated-convergence, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-algebra-of-continuous-functions, lem-euclidean-balls-have-positive-finite-lebesgue-measure, def-ball-average-operator-on-r-n, def-lebesgue-point-and-lebesgue-set, def-locally-integrable-function-on-r-n, def-integral-over-a-measurable-set, prop-indefinite-integral-of-an-integrable-function-is-countably-additive, cor-continuous-functions-are-borel-measurable, cor-c-one-change-of-variables-for-l-one-functions, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

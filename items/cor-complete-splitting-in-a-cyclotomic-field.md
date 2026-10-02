@@ -2,7 +2,7 @@
 id: cor-complete-splitting-in-a-cyclotomic-field
 kind: corollary
 title: Complete splitting criterion for a cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -28,6 +28,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Theorem 11.6 and Remark 11.7, pp. 61-62: unramified primes have residue degree the order of the class modulo the reduced index N, so complete splitting is the condition N | p - 1."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

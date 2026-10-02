@@ -2,7 +2,7 @@
 id: prop-flat-torus-model-geometry
 kind: proposition
 title: Flat torus model geometry
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -41,6 +41,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: "Proposition 21.4 and Theorem 21.10, printed pp.543–547: quotient manifolds of free proper actions; Example 21.14, the torus"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -130,7 +131,7 @@ connected.
 
 ## Proof
 
-1.1 The quotient charts make $T^n$ a smooth $n$-manifold. [F1, given]
+1.1 The quotient charts make $T^n$ a smooth $n$-manifold.
 For $u\in\mathbb R^n$ put $B_u:=u+(-1/2,1/2)^n$. The map $q$ is open: for open
 $W\subseteq\mathbb R^n$ one has
 $q^{-1}(q(W))=\bigcup_{m\in\mathbb Z^n}(W+m)$, which is open, so $q(W)$ is
@@ -138,7 +139,6 @@ open by [F1]. The restriction $q|_{B_u}$ is injective: if $q(x)=q(y)$ with
 $x,y\in B_u$, then $x-y\in\mathbb Z^n$, while $|x^i-y^i|<1$ for every $i$, so
 $x=y$. An injective continuous open map is a homeomorphism onto its image,
 so $q(B_u)$ is an open set homeomorphic to the box $B_u$.
-
 If $x\in B_u$ and $y\in B_v$ satisfy $q(x)=q(y)$, then $x-y\in\mathbb Z^n$.
 For a fixed point of an overlap, write its two unique chart lifts as
 $x_0\in B_u$ and $y_0\in B_v$, and put $m=y_0-x_0\in\mathbb Z^n$. In the
@@ -154,7 +154,7 @@ compatible. They therefore form a smooth atlas. Their domains are
 homeomorphic to open boxes, so every point has a Euclidean neighbourhood.
 [F1, given]
 
-2.1 $T^n$ is a topological manifold, connected, and $q$ is a surjection. [F1, F6, step 1.1]
+2.1 $T^n$ is a topological manifold, connected, and $q$ is a surjection.
 The map $q$ is surjective by definition of the quotient. It is Hausdorff: if
 $[x]\ne[y]$, only finitely many $m\in\mathbb Z^n$ satisfy
 $|x-y-m|\le|x-y|+1$, and none of them satisfies $x-y-m=0$, so
@@ -169,9 +169,9 @@ countable family of open sets, and for open $W\subseteq T^n$ and $[x]\in W$
 there is such a box $B$ with $x\in B\subseteq q^{-1}(W)$, so
 $[x]\in q(B)\subseteq W$. Together with step 1.1 this makes $T^n$ a
 topological $n$-manifold by [F1].
-
 Finally $\mathbb R^n$ is path connected, hence connected, by [F6], and $q$ is
-continuous and surjective, so $T^n$ is connected by [F6]. [F1, F6, step 1.1]
+continuous and surjective, so $T^n$ is connected by [F6].
+[F1, F6, step 1.1]
 
 2.2 The flat metric descends, and $q$ is a local isometry. [F1, F2, step 1.1]
 Define a symmetric $(0,2)$-tensor field $g$ on $T^n$ chartwise: on the chart

@@ -2,7 +2,7 @@
 id: ex-riesz-potential-scaling-determines-the-target-exponent
 kind: example
 title: "Dilation determines the Riesz-potential target exponent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-riesz-potential-of-order-alpha, def-complex-lp-and-euclidean-test-function-conventions, lem-smooth-bump-between-concentric-euclidean-balls, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, def-countable-choice, thm-polar-coordinates-formula-for-lebesgue-measure, lem-euclidean-balls-have-positive-finite-lebesgue-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-integral-over-a-measurable-set, def-integral-of-a-nonnegative-simple-function, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-real-power, thm-real-power-laws, def-natural-logarithm, def-ck-euclidean-maps-and-diffeomorphisms, thm-determinant-of-a-triangular-matrix, cor-continuous-functions-are-borel-measurable, def-borel-and-lebesgue-measurable-function-on-rn]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

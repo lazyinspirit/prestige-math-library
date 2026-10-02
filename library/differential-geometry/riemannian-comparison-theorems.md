@@ -1,7 +1,7 @@
 ---
 page: riemannian-comparison-theorems
 title: "Riemannian Comparison Theorems"
-status: draft
+status: published
 requires: [riemannian-metrics-length-distance-and-volume, connections-levi-civita-and-parallel-transport, geodesics-the-exponential-map-completeness-and-hopf-rinow, riemann-curvature-and-riemannian-submanifolds, jacobi-fields-conjugate-points-and-the-cut-locus, covering-spaces-and-lifting, product-measures-and-the-fubini-tonelli-theorems, radon-measures-and-the-riesz-markov-kakutani-theorem, simply-connected-plane-domains]
 items:
   - def-comparison-sine-cosine-and-cotangent-functions

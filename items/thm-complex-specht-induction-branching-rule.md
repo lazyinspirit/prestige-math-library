@@ -2,7 +2,7 @@
 id: thm-complex-specht-induction-branching-rule
 kind: theorem
 title: "Multiplicity-free complex Specht induction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [cor-complex-specht-restriction-branching-rule, thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, def-induced-r-linear-g-module-by-h-covariant-functions, def-column-antisymmetrizer-polytabloid-and-specht-module, def-young-subgroup-tabloid-and-permutation-module, def-removable-and-addable-nodes-of-a-partition, def-symmetric-group, cor-schurs-lemma-for-irreducible-representations, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, def-completely-reducible-representation, thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique, def-isotypic-component-of-a-completely-reducible-representation]
@@ -21,6 +21,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

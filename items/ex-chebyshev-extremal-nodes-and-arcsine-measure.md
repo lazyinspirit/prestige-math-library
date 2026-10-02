@@ -2,7 +2,7 @@
 id: ex-chebyshev-extremal-nodes-and-arcsine-measure
 kind: example
 title: "Chebyshev extremal nodes converge to the arcsine equilibrium measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§5, Chebyshev nodes and the arcsine measure"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

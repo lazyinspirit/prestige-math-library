@@ -1,7 +1,7 @@
 ---
 page: pure-braids-fadell-neuwirth-and-asphericity-examples
 title: "Pure Braids, Fadell–Neuwirth, and Asphericity — Examples"
-status: draft
+status: published
 requires: [pure-braids-fadell-neuwirth-and-asphericity, permutation-statistics-inversions-and-eulerian-numbers]
 items: []
 examples: [ex-the-pure-two-strand-braid-group-is-infinite-cyclic,

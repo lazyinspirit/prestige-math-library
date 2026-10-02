@@ -2,7 +2,7 @@
 id: thm-oka-weil-approximation-pseudoconvex-domain
 kind: theorem
 title: "Oka-Weil approximation on a pseudoconvex domain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -25,6 +25,7 @@ sources:
       url: https://www.jirka.org/scv/scv.pdf
       locator: "Ch. 2 §2.6, Theorem 2.6.2 and the Oka-Weil discussion: statement and scope cross-check."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

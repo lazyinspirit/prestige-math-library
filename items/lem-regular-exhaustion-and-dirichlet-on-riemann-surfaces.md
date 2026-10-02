@@ -2,7 +2,7 @@
 id: lem-regular-exhaustion-and-dirichlet-on-riemann-surfaces
 kind: lemma
 title: "Regular exhaustion and Dirichlet solutions on relatively compact surface domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -53,6 +53,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -172,6 +173,7 @@ so the holomorphic charts are smooth charts ([[def-smooth-manifold]]).
 17.1 $h_*$ is harmonic on $B$. Choose a chart subdisc $\theta^{-1}(D(a,\rho))\subseteq B$ centred at the point $a$ of step 16.1, and fix $r<\rho$. For $\varepsilon>0$ choose $v$ as in step 16.1 and let $w\in\mathcal P$ be arbitrary. The nonnegative harmonic function $u:=\tilde t-\tilde v$ on $B$ satisfies $u(a)<\varepsilon$, so Harnack's inequality [F4] applied on the disc $D(a,\rho)$ gives $$0\le\tilde t(z)-\tilde v(z)=u(z)\le\frac{\rho+r}{\rho-r}\,u(a)<C\varepsilon \qquad(z\in\overline{D(a,r)}),$$ with $C:=(\rho+r)/(\rho-r)$ independent of $w$. Hence $\tilde w\le\tilde v+C\varepsilon$ on $\overline{D(a,r)}$ for every $w\in\mathcal P$, and taking the supremum over $w$ gives $h_*-\tilde v\le C\varepsilon$ on $\overline{D(a,r)}$, while $h_*\ge\tilde v$. So for every $\varepsilon>0$ there is a function harmonic on $B$ that approximates $h_*$ uniformly on $\overline{D(a,r)}$ within $C\varepsilon$; in particular $h_*(b)=\lim_{\varepsilon\downarrow0}k_\varepsilon(b)$ where $k_\varepsilon$ is such an approximant, and the circle average of $h_*$ over $\partial D(b,s)$ differs from $h_*(b)$ by at most $2C\varepsilon$ for every $\varepsilon>0$, hence equals it. Thus $h_*$ satisfies the local mean-value property on $B$ and is continuous, so it is harmonic on $B$ by the converse of the mean-value property [F4]. [F4, step 16.1]
 
 17.2 $h_*=H$ on $B$. Fix $a\in B$ and $\varepsilon>0$, and choose $D(a,\rho)\subseteq\theta(B)$ centred at $\theta(a)$, denoting this coordinate again by $a$. Choose $0<r<\rho$ so small that $$\left(\frac{\rho+r}{\rho-r}-1\right)(M-H(a)+2\varepsilon)<\varepsilon.$$ By the definition of the regularization in step 12.1, there is $z\in D(a,r)$ with $U(z)>H(a)-\varepsilon$, and then some $v\in\mathcal P$ has $v(z)>U(z)-\varepsilon>H(a)-2\varepsilon$. Thus $\tilde v(z)\ge v(z)>H(a)-2\varepsilon$. The nonnegative function $k:=M-\tilde v$ is harmonic on $B$ by step 14.1. Harnack's inequality [F4], applied at the actual distance $|z-a|<r$, gives $$k(a)\le\frac{\rho+|z-a|}{\rho-|z-a|}k(z)\le\frac{\rho+r}{\rho-r}(M-H(a)+2\varepsilon)<M-H(a)+3\varepsilon.$$ Hence $h_*(a)\ge\tilde v(a)>H(a)-3\varepsilon$. Letting $\varepsilon\downarrow0$ gives $h_*(a)\ge H(a)$; the reverse inequality is step 16.1. [F4, step 12.1, step 14.1, step 16.1]
+
 18.1 $H$ is harmonic on $D$: every point of the open set $D$ has, by local compactness of the manifold $X$ [F9], a coordinate disc $B$ around it with $\overline B\subseteq D$, and $H=h_*$ is harmonic on $B$ by steps 17.1 and 17.2. [F9, step 17.1, step 17.2]
 
 19.1 **A local peak function.** Fix $\zeta\in\partial D$ and a chart $\theta$ with $\theta(\zeta)=0$ whose domain $U$ is a coordinate disc $\theta(U)=D(0,2\rho_0)$. Since $\partial D$ is a smooth embedded curve, after composing $\theta$ with a rotation we may assume that near $0$ the image $\theta(\partial D\cap U)$ is the graph of a smooth function $\gamma$ with $\gamma(0)=\gamma'(0)=0$, and that $$\theta(D\cap U)\cap D(0,2\rho_0)=\{(x,y):x^2+y^2<(2\rho_0)^2,\ y>\gamma(x)\};$$ shrinking $\rho_0$ we may also assume $|\gamma'(x)|\le\frac14$ for $|x|\le2\rho_0$. Then every point $w=(x,y)$ of $\theta(D\cap U')$, where $U':=\theta^{-1}(D(0,2\rho_0))$, satisfies $y>\gamma(x)\ge-\tfrac14|x|>-\tfrac12|x|$; that is, $\theta(D\cap U')$ is contained in the sector $S:=\{y>-\tfrac12|x|\}$, whose half-angle at the origin, measured from the positive vertical axis, is $\frac\pi2+\arctan\frac12$. Put $\mu:=\pi\big/\bigl(\pi+2\arctan\frac12\bigr)$ and define, for $w\in S$, $$Q(w):=\operatorname{Re}\bigl((-iw)^{\mu}\bigr),$$ where $(-iw)^{\mu}:=\exp(\mu\operatorname{Log}(-iw))$. Since $|\arg(-iw)|<\frac\pi2+\arctan\frac12<\pi$ on $S$, this is holomorphic by [F11]; writing $w=re^{i(\pi/2+\vartheta)}$ gives $Q(w)=r^{\mu}\cos(\mu\vartheta)$. Finally define $$q(z):=-Q(\theta(z))\qquad(z\in D\cap U').$$ [F2, F8, F11, step 18.1, construct]

@@ -2,7 +2,7 @@
 id: thm-logarithmic-unit-image-is-a-full-lattice
 kind: theorem
 title: The logarithmic unit image is a full lattice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -57,6 +57,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "Ch. 29 pp.149-153 (Minkowski step; compactness)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

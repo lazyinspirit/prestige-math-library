@@ -2,7 +2,7 @@
 id: lem-vector-bundle-p1-extension-splits
 kind: lemma
 title: Extensions of line bundles on the projective line split after ordering
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-h0-projective-space-o-d-homogeneous-polynomials
@@ -39,6 +39,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

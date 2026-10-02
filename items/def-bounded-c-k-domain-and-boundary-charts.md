@@ -2,7 +2,7 @@
 id: def-bounded-c-k-domain-and-boundary-charts
 kind: definition
 title: Bounded C^k domains and boundary charts
-status: draft
+status: published
 origin: pipeline
 deps: [def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-ck-and-multi-index-notation-in-several-variables]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

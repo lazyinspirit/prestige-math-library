@@ -1,7 +1,7 @@
 ---
 page: analytic-hypersurfaces-and-local-parametrisation
 title: "Analytic Hypersurfaces and Local Parametrisation"
-status: draft
+status: published
 requires: [holomorphic-inverse-and-weierstrass-preparation, modules-and-module-homomorphisms, noetherian-rings-and-hilbert-basis, localisation-of-modules-and-support, krull-dimension-and-height-theorems, the-dbar-complex-and-integral-solutions, fundamental-solutions-newtonian-potentials-and-green-functions]
 items:
   - def-reduced-holomorphic-germ-for-hypersurface

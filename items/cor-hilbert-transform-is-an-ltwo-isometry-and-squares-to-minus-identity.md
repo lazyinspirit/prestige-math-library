@@ -2,7 +2,7 @@
 id: cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity
 kind: corollary
 title: "The Hilbert transform is an L2 isometry and squares to minus the identity"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-hilbert-transform-has-signum-fourier-multiplier, lem-ltwo-fourier-multiplier-bound, thm-plancherel, thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

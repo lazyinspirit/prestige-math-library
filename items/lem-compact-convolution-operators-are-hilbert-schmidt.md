@@ -2,7 +2,7 @@
 id: lem-compact-convolution-operators-are-hilbert-schmidt
 kind: lemma
 title: "L² convolution on a compact group is Hilbert–Schmidt"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, def-left-haar-integral-and-left-haar-measure, def-complex-haar-lp-spaces-and-compactly-supported-functions, lem-complex-haar-l1-and-l2-are-complete-and-cc-dense, thm-l-two-kernels-give-hilbert-schmidt-operators, thm-hilbert-schmidt-operators-are-compact, def-completed-product-measure, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-cauchy-schwarz-in-an-inner-product-space, thm-integrals-are-invariant-under-measure-preserving-maps, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-countable-choice, def-topological-group, def-product-topology, thm-finite-products-of-compact-spaces, lem-continuity-is-local-and-pastes, def-product-sigma-algebra-and-finite-product-sigma-algebras, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

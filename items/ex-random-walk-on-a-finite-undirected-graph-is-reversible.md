@@ -2,7 +2,7 @@
 id: ex-random-walk-on-a-finite-undirected-graph-is-reversible
 kind: example
 title: "Random walk on a finite undirected graph is reversible"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

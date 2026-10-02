@@ -2,7 +2,7 @@
 id: ex-truncated-versus-full-nevanlinna-counting
 kind: example
 title: "Full and truncated counting differ for a power map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,8 @@ sources:
     - title: "I. Laine, Complex Analysis III lecture notes"
       url: "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf"
       locator: "§§5–6.1, printed pp. 35–43: full versus truncated counting for a power map"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

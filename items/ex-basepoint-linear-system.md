@@ -2,7 +2,7 @@
 id: ex-basepoint-linear-system
 kind: example
 title: "A linear system with and without a base point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -32,6 +32,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 generation:
   role: example
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

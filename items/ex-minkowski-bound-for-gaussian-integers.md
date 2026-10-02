@@ -2,7 +2,7 @@
 id: ex-minkowski-bound-for-gaussian-integers
 kind: example
 title: "Minkowski bound for Gaussian integers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "§7.1 Example 7.1.3, p.78."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -87,9 +88,13 @@ domain if and only if its ideal class group is trivial
 ## Proof
 
 1.1 By [F1], $\mathcal O_K=\mathbb Z[i]$ and $d_K=-4$. Every field embedding $K\to\mathbb C$ fixing $\mathbb Q$ sends $i$ to a root of $X^2+1$, that is, to $\pm i$, and both of these are nonreal; so $(r_1,r_2)=(0,1)$ with $n=2$ by [F2]. [F1, F2, algebra]
+
 2.1 Minkowski constant: by step 1.1 and [F1], $M_K=(4/\pi)^{1}\frac{2!}{2^2}\sqrt{4}=\frac4\pi\cdot\frac12\cdot2=\frac4\pi$; by [F5] $\pi>8/3>2$, so $M_K=4/\pi<2$. [F5, step 1.1, algebra]
+
 3.1 Every class of $\operatorname{Cl}(\mathcal O_K)$ contains an integral ideal $\mathfrak b$ with $N\mathfrak b\le M_K<2$ by [F3] and step 2.1. By [F4] the norm $N\mathfrak b$ is a positive integer, so $N\mathfrak b=1$ and therefore $\mathfrak b=\mathcal O_K$, which is principal; hence every class is the principal class and $\operatorname{Cl}(\mathbb Z[i])$ is trivial. [F3, F4, step 2.1]
+
 4.1 By [F6] the Gaussian integers $\mathbb Z[i]=\mathcal O_K$ form a Dedekind domain, so the criterion [F7] applies and the triviality of the class group from step 3.1 makes $\mathbb Z[i]$ a principal ideal domain. [F6, F7, step 3.1]
+
 5.1 In summary, $K=\mathbb Q(i)$ has $M_K=4/\pi<2$, $\operatorname{Cl}(\mathbb Z[i])$ is trivial, and $\mathbb Z[i]$ is a principal ideal domain. [step 1.1, step 2.1, step 3.1, step 4.1] ∎
 
 ## Remarks

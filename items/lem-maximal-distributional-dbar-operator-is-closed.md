@@ -2,7 +2,7 @@
 id: lem-maximal-distributional-dbar-operator-is-closed
 kind: lemma
 title: "The maximal distributional dbar operator is closed and densely defined"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weighted-l2-spaces-dbar-forms
@@ -36,6 +36,7 @@ sources:
       url: https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf
       locator: "§§4.1.1-4.1.3, PDF pp. 67-84: maximal closed extension and adjoint formula"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

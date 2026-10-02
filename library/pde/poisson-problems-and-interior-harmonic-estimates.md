@@ -1,7 +1,7 @@
 ---
 page: "poisson-problems-and-interior-harmonic-estimates"
 title: "Poisson Problems and Interior Harmonic Estimates"
-status: draft
+status: published
 items: ["def-local-holder-and-c-two-alpha-norms-on-euclidean-balls", "lem-euclidean-balls-are-bounded-c-one-domains", "lem-kelvin-inversion-and-the-laplace-operator", "lem-reflection-green-function-for-the-half-space", "thm-green-function-for-a-ball-in-rn", "thm-poisson-kernel-for-a-ball-in-rn", "lem-ball-poisson-kernel-is-positive-and-normalised", "lem-poisson-kernel-boundary-cap-and-complement-estimate", "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral", "cor-uniform-boundary-convergence-of-ball-poisson-integrals", "thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space", "thm-interior-derivative-estimates-for-harmonic-functions", "cor-harmonic-cauchy-estimates-in-supremum-norm", "thm-interior-estimate-for-poisson-equation-with-holder-data", "lem-interior-oscillation-controls-harmonic-gradient", "cor-entire-harmonic-function-of-sublinear-growth-is-constant", "thm-locally-uniform-harmonic-convergence-is-c-infinity-local", "thm-harmonic-functions-are-real-analytic", "cor-interior-laplacian-gradient-estimate", "rem-two-dimensional-poisson-disc-theory-is-cited-not-repeated", "cor-unique-continuation-for-harmonic-functions"]
 examples: []
 ---

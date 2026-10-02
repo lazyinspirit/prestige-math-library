@@ -2,7 +2,7 @@
 id: thm-small-element-in-a-number-field-ideal
 kind: theorem
 title: "Small nonzero element in a number-field ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -27,6 +27,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§27 Theorems 27.5-27.7."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -78,10 +79,15 @@ so $|N_{K/\mathbb Q}(\alpha)|=\prod_i|\sigma_i(\alpha)|\prod_j|\tau_j(\alpha)|^2
 ## Proof
 
 1.1 Put $t:=\bigl(n!\,(4/\pi)^{r_2}\sqrt{|d_K|}\,N\mathfrak a\bigr)^{1/n}>0$, a positive real number, and let $X_t$ be the region of [F2]. [F2, given]
+
 2.1 By [F2] the set $X_t$ is compact, convex and centrally symmetric. [F2, step 1.1]
+
 2.2 By [F2] and [F3], $\operatorname{vol}(X_t)=2^{r_1}(\pi/2)^{r_2}t^n/n!=2^{r_1}(\pi/2)^{r_2}(4/\pi)^{r_2}\sqrt{|d_K|}N\mathfrak a=2^{r_1}2^{r_2}\sqrt{|d_K|}N\mathfrak a=2^n\,2^{-r_2}\sqrt{|d_K|}N\mathfrak a=2^n\operatorname{covol}(\sigma(\mathfrak a))$, using $n=r_1+2r_2$. [F2, F3, step 1.1, algebra]
+
 3.1 Applying [F1] to the compact convex centrally symmetric set $X_t$ and the full lattice $\Lambda=\sigma(\mathfrak a)$ of positive covolume, whose volume equals $2^n\operatorname{covol}(\Lambda)$ by step 2.2, gives a nonzero $\alpha\in\mathfrak a$ with $\sigma(\alpha)\in X_t$. [F1, F3, step 2.1, step 2.2]
+
 4.1 Since $\sigma(\alpha)\in X_t$, the product bound of [F2] reads $\prod_i|\sigma_i(\alpha)|\prod_j|\tau_j(\alpha)|^2\le(t/n)^n$, and by [F4] the left side is $|N_{K/\mathbb Q}(\alpha)|$. [F2, F4, step 3.1]
+
 5.1 Therefore $|N_{K/\mathbb Q}(\alpha)|\le(t/n)^n=\frac{n!(4/\pi)^{r_2}\sqrt{|d_K|}N\mathfrak a}{n^n}=\bigl(\frac4\pi\bigr)^{r_2}\frac{n!}{n^n}\sqrt{|d_K|}\,N\mathfrak a$, and $0\ne\alpha\in\mathfrak a$. [step 1.1, step 4.1, algebra] ∎
 ## Remarks
 

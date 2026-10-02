@@ -2,7 +2,7 @@
 id: ex-the-pure-three-strand-group-as-a-split-free-by-cyclic-extension
 kind: example
 title: "PB_3 as F_2 by Z, with its section action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-path-conjugation-isomorphism-of-fundamental-groups,
@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

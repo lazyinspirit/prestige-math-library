@@ -1,7 +1,7 @@
 ---
 page: nevanlinna-second-main-theorem-and-defects
 title: "Nevanlinna's Second Main Theorem and Defects"
-status: draft
+status: published
 requires: [measures-and-their-basic-properties, lebesgue-measure-on-euclidean-space, jensen-theory-and-nevanlinnas-first-main-theorem, the-riemann-sphere-and-mobius-transformations, bloch-schottky-and-picard, normal-families-and-montels-theorem, isolated-singularities-and-laurent-series, complex-power-series-and-analytic-functions, complex-differentiability-and-cauchy-riemann, the-complex-exponential-and-eulers-formula, the-inverse-function-theorem-completed, product-measures-and-the-fubini-tonelli-theorems]
 items: [def-nevanlinna-exceptional-radius-notation,
         def-nevanlinna-truncated-and-ramification-counts,

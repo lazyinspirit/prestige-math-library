@@ -2,7 +2,7 @@
 id: lem-logarithmic-derivative-of-the-radial-volume-jacobian-is-the-distance-laplacian
 kind: lemma
 title: Logarithmic derivative of the radial volume jacobian is the distance laplacian
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-radial-volume-jacobian
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

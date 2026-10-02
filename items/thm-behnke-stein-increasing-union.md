@@ -2,7 +2,7 @@
 id: thm-behnke-stein-increasing-union
 kind: theorem
 title: "Behnke-Stein: increasing unions of pseudoconvex domains"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity
@@ -30,6 +30,7 @@ sources:
       url: https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf
       locator: "§4.2, statement of the Behnke-Stein theorem for increasing unions."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

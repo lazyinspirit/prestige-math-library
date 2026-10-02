@@ -2,7 +2,7 @@
 id: thm-local-smooth-approximation-in-wkp
 kind: theorem
 title: Local smooth approximation in integer-order Sobolev spaces
-status: draft
+status: published
 origin: pipeline
 deps: [lem-mollification-commutes-with-weak-derivatives-in-the-interior, def-sobolev-space-wkp-and-its-norm, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, prop-mollifier-families-are-l-one-approximate-identities, thm-l-one-approximate-identities-converge-in-l-p, lem-complex-translation-and-approximate-identity-interfaces, def-integral-over-a-measurable-set, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

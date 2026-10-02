@@ -1,7 +1,7 @@
 ---
 page: minkowski-theory-and-number-field-class-groups-examples
 title: "Minkowski Theory and Number Field Class Groups — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-minkowski-bound-for-gaussian-integers, ex-class-group-of-q-sqrt-minus-five, ex-class-group-of-q-sqrt-ten, ex-class-group-from-small-prime-ideals, ex-discriminant-lower-bound, ex-no-everywhere-unramified-extension-of-q, cex-minkowski-constants-change-under-scaled-embedding]
 ---

@@ -2,7 +2,7 @@
 id: def-logarithmic-unit-embedding
 kind: definition
 title: Logarithmic embedding of a number field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,7 @@ sources:
       url: "https://web.math.ucsb.edu/~agboola/teaching/2021/fall/225A/neukirch.pdf"
       locator: "§III.1 p.358: the log map used for S-units."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

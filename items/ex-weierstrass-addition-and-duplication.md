@@ -2,7 +2,7 @@
 id: ex-weierstrass-addition-and-duplication
 kind: example
 title: "Addition and duplication for $\\wp$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -37,6 +37,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii)-(iii): the differential equation and the derivative relations; the duplication case of the addition theorem."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

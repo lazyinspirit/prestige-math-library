@@ -2,7 +2,7 @@
 id: lem-specht-branching-successive-quotients
 kind: lemma
 title: "Deletion identifies each Specht branching quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-specht-branching-subspaces-are-invariant, def-corner-order-and-specht-deletion-map, lem-integral-specht-garnir-straightening-and-field-basis, def-polytabloid-specht-module-over-an-arbitrary-field, lem-polytabloid-covariance-and-column-sign, def-young-tableau-standard-tableau-and-shape, def-row-and-column-stabilizers-of-a-tableau, def-removable-and-addable-nodes-of-a-partition, def-partition-young-diagram-and-conjugate-partition, lem-largest-entry-of-a-standard-tableau-is-removable, thm-sign-is-a-homomorphism, def-inversions-inversion-number-and-sign, thm-first-isomorphism-theorem-for-vector-spaces]
@@ -23,6 +23,7 @@ sources:
     - title: "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39"
       url: "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

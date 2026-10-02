@@ -2,13 +2,14 @@
 id: def-truncated-hilbert-transform-and-principal-value
 kind: definition
 title: Truncated Hilbert transform and principal value
-status: draft
+status: published
 origin: pipeline
 deps: [def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

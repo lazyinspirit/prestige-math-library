@@ -1,7 +1,7 @@
 ---
 page: the-branching-rule-and-the-young-graph
 title: "The Branching Rule and the Young Graph"
-status: draft
+status: published
 requires: [young-diagrams-tableaux-and-permutation-modules, specht-modules-and-the-irreducibles-of-the-symmetric-group, induced-representations-and-frobenius-reciprocity, tensor-products-of-modules]
 items:
   - def-polytabloid-specht-module-over-an-arbitrary-field

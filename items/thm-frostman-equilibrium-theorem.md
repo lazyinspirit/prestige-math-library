@@ -2,7 +2,7 @@
 id: thm-frostman-equilibrium-theorem
 kind: theorem
 title: "Frostman inequalities and quasi-everywhere equilibrium equality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,7 @@ sources:
       url: "https://arxiv.org/pdf/0804.4689"
       locator: "§2.3, the equilibrium potential and its constancy, PDF pp. 13-16"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

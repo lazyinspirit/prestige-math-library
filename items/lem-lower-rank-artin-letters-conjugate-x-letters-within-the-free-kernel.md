@@ -2,7 +2,7 @@
 id: lem-lower-rank-artin-letters-conjugate-x-letters-within-the-free-kernel
 kind: lemma
 title: "Lower-rank Artin letters conjugate x-letters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-zariski-braid-combing-words-alpha-and-x,
@@ -22,6 +22,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 3.1, printed pp. 20-21"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

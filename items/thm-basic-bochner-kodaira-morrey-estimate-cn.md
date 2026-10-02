@@ -2,7 +2,7 @@
 id: thm-basic-bochner-kodaira-morrey-estimate-cn
 kind: theorem
 title: "Basic Bochner–Kodaira–Morrey estimate on $\\mathbb C^n$"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weighted-l2-spaces-dbar-forms
@@ -36,6 +36,7 @@ sources:
       url: https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf
       locator: "§4.3, Theorem 84 and Lemma 85, PDF pp. 97-98 (weighted L2 estimate for the d-bar problem)"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

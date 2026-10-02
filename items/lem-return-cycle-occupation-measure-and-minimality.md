@@ -2,7 +2,7 @@
 id: lem-return-cycle-occupation-measure-and-minimality
 kind: lemma
 title: "Return-cycle occupation measure and minimality"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -17,6 +17,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,9 +2,15 @@
 id: "lem-global-smooth-strictly-psh-defining-function"
 kind: "lemma"
 title: "Smooth global defining functions for strongly pseudoconvex boundaries"
-status: "draft"
+status: published
 origin: "pipeline"
-deps: ["def-axiom-of-choice", "def-levi-pseudoconvex-domain", "def-levi-form-and-strict-plurisubharmonicity", "lem-test-function-cutoffs-and-euclidean-localization"]
+deps:
+  [
+    "def-axiom-of-choice",
+    "def-levi-pseudoconvex-domain",
+    "def-levi-form-and-strict-plurisubharmonicity",
+    "lem-test-function-cutoffs-and-euclidean-localization"
+  ]
 landmark: false
 proof_strategy: "direct"
 provenance:
@@ -17,7 +23,12 @@ sources:
       locator: "§3.6.4, Theorem 64(1), printed p. 74: exponential improvement of a
         defining function. The smooth globalization from smooth local data is
         proved explicitly here."
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02}}
+verification:
+  {
+    "precheck": "pass",
+    judge: { model: "gpt-6.1-sol", verdict: pass, date: 2026-10-02 },
+    audited: 2026-10-02
+  }
 ---
 
 ## Statement

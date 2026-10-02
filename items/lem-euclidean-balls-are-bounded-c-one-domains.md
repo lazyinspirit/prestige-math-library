@@ -2,7 +2,7 @@
 id: lem-euclidean-balls-are-bounded-c-one-domains
 kind: lemma
 title: "Euclidean balls are bounded C-one domains with radial outward normal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-countable-choice, def-euclidean-spheres-and-closed-balls, cor-double-orthogonal-complement-and-dimension, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-bessel-inequality-and-finite-parseval-identity, thm-real-power-continuity-and-derivatives, thm-chain-rule-for-total-derivatives]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

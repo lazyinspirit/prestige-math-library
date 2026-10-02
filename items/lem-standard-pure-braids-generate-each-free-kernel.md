@@ -2,7 +2,7 @@
 id: lem-standard-pure-braids-generate-each-free-kernel
 kind: lemma
 title: "The $A_{in}$ are meridian generators of the forgetful free kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-standard-pure-braid-generators,
@@ -30,6 +30,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

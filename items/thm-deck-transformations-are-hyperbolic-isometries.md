@@ -2,7 +2,7 @@
 id: thm-deck-transformations-are-hyperbolic-isometries
 kind: theorem
 title: "Deck transformations preserve the hyperbolic metric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -38,6 +38,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 1 §§2.4 and 5, printed pp. 64-68 and 115-118, Theorems 5.1-5.6"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

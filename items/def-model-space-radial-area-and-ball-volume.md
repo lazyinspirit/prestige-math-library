@@ -2,7 +2,7 @@
 id: def-model-space-radial-area-and-ball-volume
 kind: definition
 title: Model space radial area and ball volume
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

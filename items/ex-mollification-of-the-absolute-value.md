@@ -2,7 +2,7 @@
 id: ex-mollification-of-the-absolute-value
 kind: example
 title: Mollifying the absolute-value corner
-status: draft
+status: published
 origin: pipeline
 deps: [thm-local-smooth-approximation-in-wkp, lem-mollification-commutes-with-weak-derivatives-in-the-interior, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, lem-classical-derivatives-are-weak-derivatives, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

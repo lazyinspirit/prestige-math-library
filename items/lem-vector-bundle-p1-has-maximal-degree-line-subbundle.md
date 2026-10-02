@@ -2,7 +2,7 @@
 id: lem-vector-bundle-p1-has-maximal-degree-line-subbundle
 kind: lemma
 title: A vector bundle on the projective line has a line subbundle of maximal degree
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-degree-descends-picard-curve
@@ -51,6 +51,7 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

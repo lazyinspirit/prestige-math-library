@@ -2,7 +2,7 @@
 id: ex-oriented-lattice-bases-and-sl2z
 kind: example
 title: "Oriented bases and $\\mathrm{SL}_2(\\mathbb Z)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,7 @@ sources:
       url: https://people.math.harvard.edu/~ctm/home/text/class/harvard/213a/10/html/home/course/course.pdf
       locator: "Ch. 5 §5.1, examples of lattice bases and their transition matrices, printed p. 80."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

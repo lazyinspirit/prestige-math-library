@@ -2,7 +2,7 @@
 id: def-boundary-map-from-point-motions-to-punctured-disk-mapping-classes
 kind: definition
 title: "Boundary map from point motions"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-axiom-of-choice,
@@ -24,6 +24,7 @@ sources:
     - title: "Brayton Gray, Homotopy Theory: An Introduction to Algebraic Topology, Chapter 8 on fibre spaces and exact sequences"
       url: "https://doi.org/10.1016/B978-0-12-296050-5.50014-0"
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

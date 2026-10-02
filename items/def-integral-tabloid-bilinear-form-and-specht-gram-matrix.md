@@ -2,7 +2,7 @@
 id: def-integral-tabloid-bilinear-form-and-specht-gram-matrix
 kind: definition
 title: Integral tabloid form and Specht Gram matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -26,6 +26,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups, Chapter 9, Definition 9.1 and Remark 9.2, printed pp. 31-32 (the bilinear version of the tabloid form)"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

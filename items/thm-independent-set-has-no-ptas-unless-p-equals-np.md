@@ -2,7 +2,7 @@
 id: thm-independent-set-has-no-ptas-unless-p-equals-np
 kind: theorem
 title: "Maximum independent set has no PTAS unless P=NP"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-p
@@ -25,6 +25,7 @@ sources:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach, §18.2.5 Lemma 18.16 and Remark 18.17, printed pp. 359–361"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

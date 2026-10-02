@@ -2,7 +2,7 @@
 id: thm-ordered-planar-configuration-spaces-are-aspherical
 kind: theorem
 title: "Ordered planar configuration spaces are aspherical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-fadell-neuwirth-forgetful-fibration, lem-a-finitely-punctured-disk-retracts-to-a-wedge-of-circles, lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent, def-pure-braid-group-from-ordered-configurations, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, prop-higher-homotopy-basepoint-transport-and-moving-homotopies]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

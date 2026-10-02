@@ -2,7 +2,7 @@
 id: ex-schur-weyl-for-two-tensor-factors
 kind: example
 title: "Schur-Weyl for two tensor factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-schur-weyl-decomposition-with-length-cutoff, def-commuting-symmetric-and-linear-actions-on-tensor-power, thm-tensor-product-basis-from-bases, def-linear-basis, def-partition-young-diagram-and-conjugate-partition, def-young-subgroup-tabloid-and-permutation-module, def-column-antisymmetrizer-polytabloid-and-specht-module, lem-polytabloid-covariance-and-column-sign, cor-sign-from-disjoint-cycle-structure]
@@ -21,6 +21,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: cex-positive-recurrence-without-aperiodicity-does-not-give-total-variation-convergence
 kind: counterexample
 title: "Positive recurrence without aperiodicity does not imply total-variation convergence"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -24,6 +24,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

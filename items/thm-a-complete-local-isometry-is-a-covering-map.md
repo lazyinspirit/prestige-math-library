@@ -2,7 +2,7 @@
 id: thm-a-complete-local-isometry-is-a-covering-map
 kind: theorem
 title: A complete local isometry is a covering map
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-riemannian-isometry-and-local-isometry
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -149,7 +150,7 @@ $q\in F(N)$, and lift $\gamma$ through $p_0$ by step 2.1; the lift is defined
 on $[0,1]$, so $p=\gamma(0)=F(\widetilde\gamma(0))$ lies in $F(N)$, a
 contradiction. Hence $F(N)=M$. [F5, step 1.1, step 2.1]
 
-3.2 The sheets over a normal ball. [F5, step 1.2, step 2.1]
+3.2 The sheets over a normal ball.
 Fix $q\in M$ and a normal neighbourhood $U=\exp_q(V)$ as in [F5], with $V$
 star-shaped, $\exp_q:V\to U$ a diffeomorphism. For $y\in U$ write
 $v_y:=\exp_q^{-1}(y)\in V$ and let $\gamma_y(t):=\exp_q(tv_y)$ for
@@ -157,7 +158,6 @@ $t\in[0,1]$, a geodesic from $q$ to $y$ by [F5]. For $p\in F^{-1}(q)$ define
 $$\varphi_p:U\longrightarrow N,\qquad \varphi_p(y):=\exp_p\bigl((dF_p)^{-1}v_y\bigr),$$
 the endpoint of the unique geodesic lift of $\gamma_y$ through $p$ furnished by
 step 2.1. Then:
-
 (i) $F\circ\varphi_p=\operatorname{id}_U$: this is step 1.2 applied to
 $x=p$ and $w=(dF_p)^{-1}v_y$ together with the lift identity
 $F(\exp_p(\,\cdot\,))=\exp_q(dF_p(\,\cdot\,))$ of that step;
@@ -166,7 +166,6 @@ diffeomorphism on $V$, $dF_p$ is linear, and $\exp_p$ is smooth on $T_pN$ by
 [F4];
 (iii) $\varphi_p$ is injective, since $F\circ\varphi_p=\operatorname{id}_U$;
 so $V_p:=\varphi_p(U)$ is diffeomorphic to $U$ with inverse $F|_{V_p}$.
-
 Moreover $F^{-1}(U)=\bigsqcup_{p\in F^{-1}(q)}V_p$. The inclusion $\supseteq$
 is (i). Conversely, let $x\in F^{-1}(U)$ and $y:=F(x)$. The reversed radial
 geodesic $t\mapsto\exp_q((1-t)v_y)$, $t\in[0,1]$, is a geodesic from $y$ to
@@ -185,7 +184,8 @@ so the uniqueness half of step 2.1 applied with $t_0=0$ gives
 $\bar c=\bar c_d$. Evaluating at $t=1$ yields
 $p=c(0)=\bar c(1)=\bar c_d(1)=c_d(0)=p'$, so $x\in V_p\cap V_{p'}$ forces
 $p=p'$; equivalently, the sets $V_p$ belonging to distinct points $p\ne p'$
-of $F^{-1}(q)$ are disjoint. [F5, step 1.2, step 2.1]
+of $F^{-1}(q)$ are disjoint.
+[F5, step 1.2, step 2.1]
 
 4.1 $F$ is a covering map. [F6, step 3.1, step 3.2]
 For every $q\in M$ the normal ball $U$ of step 3.2 satisfies: each
@@ -206,7 +206,7 @@ every real time; hence $I=\mathbb R$. Every maximal geodesic of $M$ has domain
 $\mathbb R$, so $M$ is geodesically complete, and [F4] makes $(M,g)$ complete.
 [F4, step 2.1, step 3.1]
 
-5.1 Boundary and choice audit. [A1, F1, F2, F3, F4, F5, step 1.2, step 4.1, step 4.2]
+5.1 Boundary and choice audit.
 Completeness of $N$ is used exactly twice: in step 1.2 to make the source
 exponential globally defined, and in step 2.1 to make the geodesic lift exist
 on the whole interval. The local isometry hypothesis is used for the injective
@@ -217,4 +217,5 @@ bijection of discrete sets, so the claims are immediate from those two steps;
 a constant geodesic or the zero vector is covered by steps 1.2 and 2.1
 (the lifted geodesic is then constant). Exactly the inherited [A1] is used;
 no family of geodesics is selected, since each lift is produced from a
-prescribed initial vector. $\square$
+prescribed initial vector.
+[A1, F1, F2, F3, F4, F5, step 1.2, step 4.1, step 4.2] ∎

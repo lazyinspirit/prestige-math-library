@@ -2,7 +2,7 @@
 id: thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex
 kind: theorem
 title: "Termwise Hochschild spectral sequence of a bounded bimodule complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0510265"
       locator: "pp.6–7: the termwise Hochschild homology of a complex of graded bimodules and its gradings."
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

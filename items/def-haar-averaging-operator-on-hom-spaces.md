@@ -2,7 +2,7 @@
 id: def-haar-averaging-operator-on-hom-spaces
 kind: definition
 title: "Haar averaging of bounded operators as a weak operator integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, def-strongly-continuous-unitary-representation, def-hilbert-space, def-bounded-linear-operator, def-real-and-complex-inner-product-space, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, lem-inner-product-is-jointly-continuous, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, lem-conjugation-orbits-of-finite-rank-operators-are-norm-continuous]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
 sources:
   references:

@@ -1,7 +1,7 @@
 ---
 page: pure-braids-fadell-neuwirth-and-asphericity
 title: "Pure Braids, Fadell–Neuwirth, and Asphericity"
-status: draft
+status: published
 requires: [ordered-and-unordered-configuration-spaces, braids-as-fundamental-groups-of-configuration-spaces, punctured-disks-mapping-classes-and-point-pushing, free-groups-and-presentations, semidirect-products-and-automorphism-groups, fibrations-fiber-bundles-and-homotopy-exact-sequences, group-extensions-complements-and-schur-zassenhaus, asymptotic-cones-and-the-sublinear-triangle-criterion]
 items: [lem-a-finitely-punctured-disk-retracts-to-a-wedge-of-circles,
         lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction,

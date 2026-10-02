@@ -2,7 +2,7 @@
 id: cex-z-sqrt-d-units-need-not-equal-ok-units
 kind: counterexample
 title: "Units of Z[√5] are a proper subgroup of the units of its maximal order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

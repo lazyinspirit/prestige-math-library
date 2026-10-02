@@ -2,7 +2,7 @@
 id: ex-no-everywhere-unramified-extension-of-q
 kind: example
 title: "No nontrivial everywhere unramified number field over Q"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§28 Theorem 28.3, p.147."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -71,10 +72,15 @@ $\mathbb Z$ are the rational primes
 ## Proof
 
 1.1 By [F4] the discriminant $d_K$ is a nonzero integer. [F4, given]
+
 2.1 If $K$ is unramified at every rational prime, then no rational prime divides $d_K$: for if $p\mid d_K$, then [F1] makes $p$ ramified in $K$, and [F6] exhibits a ramification index exceeding $1$ at $p$, contrary to the hypothesis. [F1, F6, step 1.1]
+
 2.2 Conversely, if no rational prime divides $d_K$, then $|d_K|=1$: otherwise $|d_K|>1$ and [F5] would produce a rational prime dividing $|d_K|$, hence dividing $d_K$, and $d_K\ne0$ by step 1.1 leaves $|d_K|=1$. [F4, F5, step 1.1]
+
 3.1 Equivalence: $K$ is unramified at every rational prime if and only if $|d_K|=1$. Indeed, unramified everywhere gives no prime divisor of $d_K$ by step 2.1 and then $|d_K|=1$ by step 2.2; conversely, if $|d_K|=1$ then no rational prime divides $d_K$, so no rational prime ramifies by [F1]. [F1, step 2.1, step 2.2]
+
 4.1 But $n>1$, so [F3] gives $|d_K|>1$, contradicting the equivalence in step 3.1; equivalently, [F2] directly produces a ramified rational prime. [F2, F3, step 3.1]
+
 5.1 Therefore no finite number field $K\ne\mathbb Q$ is unramified at every finite rational prime. The argument uses only finite primes: $d_K$ is the determinant of the trace pairing of an integral basis, the criterion [F1] concerns rational primes, and no archimedean place enters; correspondingly $d_{\mathbb Q}=1$ and $\mathbb Q$ itself has no ramified primes. [F1, F2, step 3.1, step 4.1] ∎
 
 ## Remarks

@@ -2,7 +2,7 @@
 id: lem-total-fractions-split-over-hypersurface-branches
 kind: lemma
 title: "Total fractions split over the branches of a reduced hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (4.21) prime vanishing ideals and products (p. 96); II (6.6) product of irreducible germs (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

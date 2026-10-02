@@ -1,7 +1,7 @@
 ---
 page: punctured-disks-mapping-classes-and-point-pushing
 title: "Punctured Disks, Mapping Classes, and Point Pushing"
-status: draft
+status: published
 requires: [braids-as-fundamental-groups-of-configuration-spaces,
            fibrations-fiber-bundles-and-homotopy-exact-sequences,
            partitions-of-unity-and-paracompactness,

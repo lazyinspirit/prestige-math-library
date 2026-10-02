@@ -2,7 +2,7 @@
 id: cor-uniqueness-of-the-stationary-distribution-for-an-irreducible-positive-recurrent-chain
 kind: corollary
 title: "Uniqueness of the stationary law for an irreducible positive-recurrent chain"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -15,6 +15,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

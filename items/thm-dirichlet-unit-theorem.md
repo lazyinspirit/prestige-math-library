@@ -2,7 +2,7 @@
 id: thm-dirichlet-unit-theorem
 kind: theorem
 title: Dirichlet unit theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ sources:
       url: "https://web.math.ucsb.edu/~agboola/teaching/2021/fall/225A/neukirch.pdf"
       locator: "§I.7 p.42."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

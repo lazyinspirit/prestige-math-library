@@ -2,7 +2,7 @@
 id: ex-hormander-estimate-with-gaussian-weight
 kind: example
 title: "Hörmander estimate with a Gaussian weight"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weighted-l2-spaces-dbar-forms
@@ -35,6 +35,7 @@ sources:
       url: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf
       locator: "Ch. VIII §6, Theorem 6.5, printed pp. 377-379: the weighted $L^2$ estimate with the Gaussian weight $|z|^2$, whose right-hand side the explicit solution attains; the moment computations are the standard polar-coordinate Gamma integrals."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

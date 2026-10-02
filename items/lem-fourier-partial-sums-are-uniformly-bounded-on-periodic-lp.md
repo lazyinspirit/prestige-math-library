@@ -2,7 +2,7 @@
 id: lem-fourier-partial-sums-are-uniformly-bounded-on-periodic-lp
 kind: lemma
 title: "Uniform Lp bounds for periodic Fourier partial sums"
-status: draft
+status: published
 origin: pipeline
 deps: [def-period-one-fourier-coefficients-partial-sums-and-convolution, def-conjugate-function-on-the-circle, thm-marcel-riesz-conjugate-function-theorem, thm-fejer-convergence-in-lp, def-cesaro-and-abel-means-of-a-fourier-series, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, lem-trigonometric-characters-are-orthonormal, thm-complex-holder-minkowski-and-the-quotient-norm, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

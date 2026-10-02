@@ -2,7 +2,7 @@
 id: cor-first-supplement-via-cyclotomic-frobenius
 kind: corollary
 title: First supplement from Frobenius on Q(i)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 12, pp. 63-65: Frobenius on Q(i) and the identification of its sign with (-1/q)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

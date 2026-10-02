@@ -2,7 +2,7 @@
 id: lem-riesz-transform-principal-value-kernel-formula
 kind: lemma
 title: "The Riesz transform is the principal value of its kernel, with the matching constant"
-status: draft
+status: published
 origin: pipeline
 deps: [def-riesz-transforms-on-euclidean-space, lem-singular-kernel-sine-integral-under-countable-choice, thm-polar-coordinates-formula-for-lebesgue-measure, cor-volume-of-the-unit-n-ball, thm-real-gamma-functional-equation, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-dominated-convergence, def-convolution-of-a-tempered-distribution-with-a-schwartz-function, thm-fourier-transform-converts-allowed-tempered-convolutions-to-products, thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions, def-fourier-transform-of-a-tempered-distribution, thm-mean-value-inequality, thm-chain-rule, def-schwartz-space-and-its-seminorms, thm-linear-change-of-variables-for-lebesgue-measure, def-countable-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

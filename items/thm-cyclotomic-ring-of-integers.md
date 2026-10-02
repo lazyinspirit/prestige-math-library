@@ -2,7 +2,7 @@
 id: thm-cyclotomic-ring-of-integers
 kind: theorem
 title: Ring of integers of every cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -34,6 +34,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Ch. 11, pp. 61-63: Z[zeta_N] = O_{Q(zeta_N)} assembled from the prime-power case Q(zeta_a)Q(zeta_b) = Q(zeta_{ab}) for coprime a,b and the coprime-discriminant compositum theorem."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

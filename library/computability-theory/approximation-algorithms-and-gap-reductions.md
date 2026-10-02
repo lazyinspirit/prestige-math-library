@@ -1,7 +1,7 @@
 ---
 page: approximation-algorithms-and-gap-reductions
 title: "Approximation Algorithms and Gap Reductions"
-status: draft
+status: published
 requires: [alphabet-reduction-and-the-pcp-theorem, classical-np-completeness-reductions, finite-counting-and-binomial-coefficients, graphs-walks-and-connectivity, trees-forests-and-spanning-trees, eulerian-and-hamiltonian-graphs]
 items:
   - def-optimization-problem-and-approximation-ratio

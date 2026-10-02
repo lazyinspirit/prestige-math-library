@@ -2,7 +2,7 @@
 id: lem-cartier-to-weil-respects-principal-and-addition
 kind: lemma
 title: "The Cartier-to-Weil map respects addition and principal divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -29,6 +29,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 §15.4 (line bundles and Weil divisors; the diagram (15.4.11.1) and the map Pic to Cl)"
       url: "https://math.stanford.edu/~vakil/216blog/FOAgoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

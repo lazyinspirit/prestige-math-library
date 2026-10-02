@@ -2,7 +2,7 @@
 id: def-delta-invariant-curve-singularity
 kind: definition
 title: "Delta invariant of a curve singularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -48,6 +48,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

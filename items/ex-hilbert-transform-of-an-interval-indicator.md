@@ -2,7 +2,7 @@
 id: ex-hilbert-transform-of-an-interval-indicator
 kind: example
 title: "Hilbert transform of an interval indicator"
-status: draft
+status: published
 origin: pipeline
 deps: [def-truncated-hilbert-transform-and-principal-value, lem-hilbert-transform-has-signum-fourier-multiplier, cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, def-countable-choice, def-complex-lp-and-euclidean-test-function-conventions, lem-schwartz-cutoffs-from-the-standard-smooth-step, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, prop-mollifier-families-are-l-one-approximate-identities, thm-l-one-approximate-identities-converge-in-l-p, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset, thm-lebesgue-measure-of-a-box-of-every-kind, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-logarithm-derivative-and-integral, thm-natural-logarithm-laws, thm-chain-rule, thm-ftc-second-part, thm-additivity-over-subintervals, thm-complex-lp-completeness-and-almost-everywhere-subsequences]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

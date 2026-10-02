@@ -2,7 +2,7 @@
 id: ex-nonreduced-equation-same-hypersurface-germ
 kind: example
 title: "A nonreduced equation can hide a smooth hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (2.10) factoriality of O_n (p. 82); II (6.6) defining equations up to units (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

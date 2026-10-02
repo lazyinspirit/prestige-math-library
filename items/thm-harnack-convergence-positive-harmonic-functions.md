@@ -2,7 +2,7 @@
 id: thm-harnack-convergence-positive-harmonic-functions
 kind: theorem
 title: "Positive harmonic boundary measures and compact normalized families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-compactness-is-intrinsic, cor-c-one-change-of-variables-for-l-one-functions, cor-separable-banach-dual-ball-is-weak-star-sequentially-compact, def-axiom-of-choice, def-complex-measure, def-countable-choice, def-dependent-choice, def-harmonic-hardy-class-disc, def-integration-against-a-signed-or-complex-measure, def-l-one-of-a-measure, def-mean-value-property-for-plane-functions, def-measure, def-metric-compactness, def-nonnegative-lebesgue-integral, def-plane-harmonic-function, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, def-regular-borel-measure-on-an-lch-space, def-regular-complex-borel-measure-on-an-lch-space, def-separable-space, def-signed-measure, def-simple-integral-against-a-signed-or-complex-measure, def-the-one-dimensional-torus-and-normalized-haar-integral, def-total-variation-of-a-signed-or-complex-measure, def-weak-star-convergence, lem-continuous-functions-on-a-compact-metric-space-have-a-countable-dense-family, lem-finite-tori-are-compact-hausdorff-character-spaces, lem-positive-c-zero-functionals-have-finite-regular-representing-measures, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, thm-choice-implies-dependent-implies-countable-choice, thm-countable-union-of-countable, thm-dominated-convergence, thm-harmonic-hardy-one-measure-representation, thm-heine-borel-rn, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-mean-value-property-for-plane-harmonic-functions, thm-ultrafilter-lemma]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

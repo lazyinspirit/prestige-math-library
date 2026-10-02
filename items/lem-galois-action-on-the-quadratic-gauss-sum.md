@@ -2,7 +2,7 @@
 id: lem-galois-action-on-the-quadratic-gauss-sum
 kind: lemma
 title: Galois action on the quadratic Gauss sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.19, p. 144: the Gauss sum and the action of the cyclotomic Galois group."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

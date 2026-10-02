@@ -2,7 +2,7 @@
 id: ex-bonnet-myers-for-the-round-sphere
 kind: example
 title: Bonnet-Myers for the round sphere
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-bonnet-myers
@@ -26,6 +26,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

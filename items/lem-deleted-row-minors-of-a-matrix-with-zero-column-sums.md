@@ -2,7 +2,7 @@
 id: lem-deleted-row-minors-of-a-matrix-with-zero-column-sums
 kind: lemma
 title: Deleted-row minors of a zero-column-sum matrix agree up to sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,7 @@ sources:
       url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes15.pdf"
       locator: "Definition 15.16 p.9: every (r+s-1)x(r+s-1) minor of the log matrix has the same absolute value."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

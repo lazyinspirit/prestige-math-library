@@ -2,7 +2,7 @@
 id: thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group
 kind: theorem
 title: "Alexander contraction of the boundary-fixed disk homeomorphism group"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-homotopy-relative-and-path-homotopy,
@@ -22,6 +22,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, section 1.4, printed pp. 6-7"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

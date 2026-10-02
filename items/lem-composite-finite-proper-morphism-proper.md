@@ -2,7 +2,7 @@
 id: lem-composite-finite-proper-morphism-proper
 kind: lemma
 title: "Composite of a finite morphism and a proper morphism is proper"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -30,6 +30,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

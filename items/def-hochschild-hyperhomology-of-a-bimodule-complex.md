@@ -2,7 +2,7 @@
 id: def-hochschild-hyperhomology-of-a-bimodule-complex
 kind: definition
 title: "Hochschild hyperhomology of a bounded bimodule complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0510265"
       locator: "pp.6–7: the termwise Hochschild homology of a complex of graded bimodules and its three independent gradings."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

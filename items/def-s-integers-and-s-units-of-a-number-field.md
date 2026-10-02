@@ -2,7 +2,7 @@
 id: def-s-integers-and-s-units-of-a-number-field
 kind: definition
 title: S-integers and S-units of a number field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -37,6 +37,7 @@ sources:
       url: "https://msp.org/obs/2019/2-1/obs-v2-n1-p07-s.pdf"
       locator: "§2F p.106: the definitions of S-integers and S-units."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

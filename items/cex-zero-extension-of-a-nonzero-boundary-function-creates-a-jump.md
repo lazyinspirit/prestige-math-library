@@ -2,7 +2,7 @@
 id: cex-zero-extension-of-a-nonzero-boundary-function-creates-a-jump
 kind: counterexample
 title: A nonzero boundary value creates a zero-extension jump
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-dirac-delta-and-its-derivatives, rem-weak-derivatives-are-distributional-derivatives-with-function-values, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-dominated-convergence, lem-smooth-bump-between-concentric-euclidean-balls, thm-lebesgue-measure-of-a-box-of-every-kind, def-complex-lp-and-euclidean-test-function-conventions, def-sobolev-extension-domain-and-extension-operator, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

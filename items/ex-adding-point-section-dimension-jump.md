@@ -2,7 +2,7 @@
 id: ex-adding-point-section-dimension-jump
 kind: example
 title: "The jump l(D+p) - l(D) ranges from zero to the residue degree"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-picard-projective-line-integers
@@ -42,6 +42,7 @@ generation:
   role: example
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

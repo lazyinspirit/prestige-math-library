@@ -2,7 +2,7 @@
 id: def-nevanlinna-exceptional-radius-notation
 kind: definition
 title: "Nevanlinna exceptional-radius error notation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -22,6 +22,8 @@ sources:
     - title: "Goldberg–Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Definition

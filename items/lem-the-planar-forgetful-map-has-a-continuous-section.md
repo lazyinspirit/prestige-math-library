@@ -2,7 +2,7 @@
 id: lem-the-planar-forgetful-map-has-a-continuous-section
 kind: lemma
 title: "A choice-free continuous section of planar coordinate forgetting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-ordered-configuration-space, lem-a-finitely-punctured-disk-retracts-to-a-wedge-of-circles, lem-path-conjugation-isomorphism-of-fundamental-groups, thm-fundamental-group-laws]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: constructive
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

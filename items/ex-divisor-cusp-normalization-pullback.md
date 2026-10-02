@@ -2,7 +2,7 @@
 id: ex-divisor-cusp-normalization-pullback
 kind: example
 title: "Pulling a divisor back along the cusp normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -43,6 +43,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 §§15.1–15.3"
       url: "https://math.stanford.edu/~vakil/216blog/FOAgoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Example

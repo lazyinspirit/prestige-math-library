@@ -2,7 +2,7 @@
 id: def-poisson-integral-of-finite-boundary-measure
 kind: definition
 title: "The Poisson integral of a finite complex boundary measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [cor-second-countable-lch-locally-finite-borel-measures-are-regular, thm-integral-triangle-inequality, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, cor-c-one-change-of-variables-for-l-one-functions, def-countable-choice, def-integration-against-a-signed-or-complex-measure, def-l-one-of-a-measure, def-poisson-integral-on-the-disc, def-poisson-kernel-on-the-disc, def-simple-integral-against-a-signed-or-complex-measure, def-regular-complex-borel-measure-on-an-lch-space, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-the-lebesgue-integral-respects-almost-everywhere-equality]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
 sources:
   references:

@@ -2,7 +2,7 @@
 id: lem-configuration-loops-admit-smooth-separated-point-motion-representatives
 kind: lemma
 title: "Smooth representatives of configuration loops"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-unordered-configuration-space,
@@ -23,6 +23,7 @@ sources:
     - title: "Juan Gonzalez-Meneses, Basic results on braid groups, sections 1.1-1.3, printed pp. 3-5"
       url: "https://arxiv.org/pdf/1010.0321"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: cex-c-infinity-up-to-boundary-density-is-domain-sensitive
 kind: counterexample
 title: Ambient-smooth density fails on a slit disc
-status: draft
+status: published
 origin: pipeline
 deps: [thm-smooth-up-to-the-boundary-density-on-smooth-domains, def-sobolev-space-wkp-and-its-norm, thm-tonelli-and-fubini-for-completed-product-measures, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-holder-inequality-for-integrals, thm-polar-coordinates-formula-for-lebesgue-measure, lem-classical-derivatives-are-weak-derivatives, def-integral-over-a-measurable-set, def-axiom-of-choice]
 landmark: false
@@ -13,6 +13,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-sobolev-embeddings-transfer-from-rn-to-extension-domains
 kind: corollary
 title: Whole-space inequalities transfer through a Sobolev extension
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-extension-domain-and-extension-operator, thm-extension-theorem-for-bounded-smooth-domains, lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, def-axiom-of-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

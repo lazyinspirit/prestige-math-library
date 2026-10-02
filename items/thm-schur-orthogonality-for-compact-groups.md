@@ -2,7 +2,7 @@
 id: thm-schur-orthogonality-for-compact-groups
 kind: theorem
 title: "Schur orthogonality for general compact groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-topological-group, def-compact-space, def-hausdorff-space, def-strongly-continuous-unitary-representation, def-hilbert-space, def-real-and-complex-inner-product-space, def-matrix-coefficient-of-a-unitary-representation, thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional, def-haar-averaging-operator-on-hom-spaces, lem-haar-averaging-projects-onto-the-intertwiner-space, thm-schurs-lemma-for-unitary-representations, def-bounded-linear-operator, def-operator-norm, def-trace-of-an-endomorphism, cor-trace-is-invariant-under-similarity, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-bessel-inequality-and-finite-parseval-identity, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, thm-cauchy-schwarz-in-an-inner-product-space, def-linear-isometry-and-orthogonal-or-unitary-operator, def-linear-map]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

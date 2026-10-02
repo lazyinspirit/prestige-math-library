@@ -2,7 +2,7 @@
 id: cex-weil-divisor-not-cartier-singular-cone
 kind: counterexample
 title: A Weil divisor that is not Cartier at the vertex of the quadric cone
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -44,6 +44,8 @@ sources:
       url: https://math.stanford.edu/~vakil/216blog/FOAgoct2111public.pdf
     - title: The Stacks Project, Divisors, §§31.14–31.30
       url: https://stacks.math.columbia.edu/download/divisors.pdf
+verification:
+  audited: 2026-10-02
 ---
 
 

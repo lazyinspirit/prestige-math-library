@@ -2,7 +2,7 @@
 id: cex-interior-estimates-cannot-use-distance-zero-to-the-boundary
 kind: counterexample
 title: Boundary-scale derivative blowup despite bounded ball data
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 proof_strategy: direct
 deps: [def-countable-choice, thm-dirichlet-problem-on-a-ball-by-the-poisson-integral, cor-interior-laplacian-gradient-estimate, thm-complex-polynomials-and-rational-functions-are-holomorphic, thm-c2-holomorphic-components-are-harmonic, def-laplacian-of-a-c2-function, def-directional-and-partial-derivatives, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus, def-euclidean-inner-product, def-euclidean-spheres-and-closed-balls, lem-of-square-monotone, thm-cauchy-schwarz-and-the-euclidean-norm, lem-power-monotone, thm-real-power-continuity-and-derivatives, thm-real-power-agrees-with-rational-exponent, thm-exponential-product-limit, cor-exponential-reciprocal-and-positivity, def-real-exponential-function-and-e]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

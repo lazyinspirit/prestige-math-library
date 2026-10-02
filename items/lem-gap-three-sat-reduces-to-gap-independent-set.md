@@ -2,7 +2,7 @@
 id: lem-gap-three-sat-reduces-to-gap-independent-set
 kind: lemma
 title: "Clause-literal consistency graph preserves the Max-3SAT optimum"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-finite-simple-graph
@@ -20,6 +20,7 @@ sources:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach, §18.2.5 Lemma 18.16 and Remark 18.17, printed pp. 359–361"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

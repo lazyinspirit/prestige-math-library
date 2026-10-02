@@ -2,7 +2,7 @@
 id: lem-compact-polar-sets-and-subharmonic-minus-infinity-loci
 kind: lemma
 title: "Compact capacity-zero sets and subharmonic minus-infinity loci"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -54,6 +54,7 @@ provenance_note: >-
   truncated-kernel Evans construction recorded in
   research/frontier-37-owner-30-step1-polar-green-repair.md, which was read in full.
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

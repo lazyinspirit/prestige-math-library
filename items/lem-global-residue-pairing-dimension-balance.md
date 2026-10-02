@@ -2,7 +2,7 @@
 id: lem-global-residue-pairing-dimension-balance
 kind: lemma
 title: "The two sides of the residue pairing have the same dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -28,6 +28,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -101,9 +102,15 @@ H-projective convention
 **Proof technique:** direct; apply the published smooth-projective duality
 theorem to the curve and the rank-one module $\mathcal L$ in degree $q=1$, and
 combine injectivity with equal finite dimensions.
+
 1.1 By [F6] the curve $C$ is projective over $k$, and it is smooth over $k$ with underlying space of dimension one, so $X=C$ satisfies the hypotheses of the duality theorem [F5] with pure dimension $n=1$; moreover $\omega_C=\bigwedge^1\Omega^1_{C/k}$ agrees with the canonical bundle of [F2]. [F2, F5, F6]
+
 1.2 The invertible sheaf $\mathcal L$ is locally free of rank one, hence a finite locally free $\mathcal O_C$-module of rank $r=1$ as required for the module $E=\mathcal L$ in [F5]. [F3]
+
 2.1 Apply the duality theorem [F5] to $X=C$, $n=1$, $E=\mathcal L$ and $q=1$: the cup product, contraction and normalized trace $t_C\colon H^1(C,\omega_C)\to k$ give a perfect $k$-bilinear pairing $$H^1(C,\mathcal L)\times H^0(C,\mathcal L^\vee\otimes\omega_C)\longrightarrow H^1(C,\omega_C) \xrightarrow{t_C}k,$$ and both $k$-vector spaces are finite-dimensional; perfectness makes the induced map to the dual an isomorphism, so their $k$-dimensions are equal. [F5, step 1.1, step 1.2]
+
 3.1 The dual $\mathcal L^\vee$ is the inverse $\mathcal L^{-1}$ of $\mathcal L$ in the Picard group of invertible sheaves, so the invertible sheaves $\mathcal L^\vee\otimes\omega_C$ and $\omega_C\otimes\mathcal L^{-1}$ are canonically isomorphic; consequently their spaces of global sections are $k$-linearly isomorphic. [F3, step 2.1]
+
 4.1 Combining steps 2.1 and 3.1, $\dim_kH^1(C,\mathcal L)=\dim_kH^0(C,\omega_C\otimes\mathcal L^{-1})$, both spaces finite-dimensional: this is the numerical form of Serre duality for the invertible sheaf $\mathcal L$ on the curve. [F5, step 2.1, step 3.1]
+
 5.1 The map $\Phi\colon H^0(C,\omega_C\otimes\mathcal L^{-1})\to H^1(C,\mathcal L)^*$ induced by the residue pairing is $k$-linear and injective by [F4], and step 4.1 exhibits its source and target as finite-dimensional $k$-vector spaces of the same dimension; an injective linear map between such spaces is an isomorphism, hence every nonzero class in $H^1(C,\mathcal L)$ is detected by a global section and the residue pairing is perfect. The only choice-theoretic input is the Axiom of Choice inherited through the duality and residue suppliers [F1]. [F1, F4, step 4.1] ∎

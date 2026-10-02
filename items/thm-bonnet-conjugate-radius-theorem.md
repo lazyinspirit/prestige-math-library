@@ -2,7 +2,7 @@
 id: thm-bonnet-conjugate-radius-theorem
 kind: theorem
 title: Bonnet conjugate radius theorem
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-index-lemma
@@ -26,6 +26,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

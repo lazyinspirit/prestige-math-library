@@ -2,7 +2,7 @@
 id: thm-pure-braid-forgetting-a-strand-short-exact-sequence
 kind: theorem
 title: "The Fadell-Neuwirth short exact sequence for pure braids"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-fadell-neuwirth-forgetful-fibration, def-pure-braid-group-from-ordered-configurations, lem-a-finitely-punctured-disk-retracts-to-a-wedge-of-circles, lem-planar-configuration-spaces-have-vanishing-pi-two-by-simultaneous-induction, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-induced-fundamental-group-map-functoriality]
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

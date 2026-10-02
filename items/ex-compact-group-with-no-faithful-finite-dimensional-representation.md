@@ -2,7 +2,7 @@
 id: ex-compact-group-with-no-faithful-finite-dimensional-representation
 kind: example
 title: "A compact group with no faithful continuous finite-dimensional representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-product-topology, thm-coordinate-map-for-a-finite-dimensional-normed-space, def-operator-norm, def-group, def-group-homomorphism, def-standard-topologies, def-continuous-map-top, def-topological-group, def-compact-space, def-hausdorff-space, def-subspace-topology-top, def-topology-basis-subbasis, def-metric-topology, def-bounded-linear-operator, def-linear-map, thm-product-universal-property, lem-continuity-is-local-and-pastes, def-dimension, def-linear-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-norm-and-normed-space, def-normed-vector-space-over-an-absolutely-valued-field, rem-real-and-complex-normed-space-convention, def-finite-sum, lem-complex-conjugation-and-modulus-laws, cor-linear-maps-with-finite-dimensional-domain-are-bounded, lem-operator-norm-is-a-norm, thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent, cor-dimensions-of-matrix-and-linear-map-spaces, thm-rank-nullity, thm-linear-kernel-image-and-injectivity, thm-dimension-of-a-linear-subspace, thm-recursion, thm-induction-principle, lem-subset-of-countable, def-finite-dimensional-representation-of-a-group-over-a-field, def-intertwiner-equivalent-and-faithful-representations, def-linear-isomorphism-and-invertible-linear-map, def-natural-numbers]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

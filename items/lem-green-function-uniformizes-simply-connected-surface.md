@@ -2,7 +2,7 @@
 id: lem-green-function-uniformizes-simply-connected-surface
 kind: lemma
 title: "A simply connected Greenian Riemann surface is a disc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -54,6 +54,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

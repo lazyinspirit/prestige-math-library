@@ -2,7 +2,7 @@
 id: cex-smooth-does-not-imply-real-analytic-for-general-pde
 kind: counterexample
 title: A smooth nonanalytic solution of a first-order PDE
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 proof_strategy: direct
 deps: [def-the-standard-flat-function, thm-the-standard-flat-function-is-smooth-and-flat-at-zero, def-real-analytic-germ-in-several-variables]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

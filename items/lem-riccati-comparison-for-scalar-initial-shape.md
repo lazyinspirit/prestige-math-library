@@ -2,7 +2,7 @@
 id: lem-riccati-comparison-for-scalar-initial-shape
 kind: lemma
 title: Riccati comparison for scalar initial shape
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-determinant-differential-and-jacobis-formula
@@ -19,6 +19,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

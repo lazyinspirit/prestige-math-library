@@ -2,7 +2,7 @@
 id: def-properly-discontinuous-group-action
 kind: definition
 title: "Free and properly discontinuous group actions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-arithmetic-and-reciprocity-via-frobenius
 title: "Cyclotomic Arithmetic and Reciprocity via Frobenius"
-status: draft
+status: published
 requires: [decomposition-inertia-and-frobenius, exterior-powers-orientation-and-hodge-duality]
 items: [def-conductor-of-a-cyclotomic-field, lem-prime-power-cyclotomic-integral-structure, lem-coprime-discriminant-compositum-integral-basis, thm-cyclotomic-ring-of-integers, thm-discriminant-of-a-cyclotomic-field, cor-total-ramification-in-a-prime-power-cyclotomic-field, lem-monogenic-prime-factorisation-by-polynomial-reduction, lem-arithmetic-frobenius-on-a-cyclotomic-field, thm-prime-factorisation-in-a-cyclotomic-field, cor-cyclotomic-ramification-criterion, thm-conductor-of-a-full-cyclotomic-field, cor-unramified-prime-decomposition-in-a-cyclotomic-field, cor-complete-splitting-in-a-cyclotomic-field, def-quadratic-gauss-sum-in-a-cyclotomic-field, lem-galois-action-on-the-quadratic-gauss-sum, thm-quadratic-gauss-sum-square, thm-quadratic-subfield-of-a-prime-cyclotomic-field, thm-quadratic-frobenius-restriction-identity, cor-quadratic-reciprocity-via-frobenius, cor-first-supplement-via-cyclotomic-frobenius, cor-second-supplement-via-cyclotomic-frobenius]
 examples: []

@@ -2,7 +2,7 @@
 id: cex-positive-sectional-curvature-with-no-fixed-lower-bound-on-a-noncompact-manifold
 kind: counterexample
 title: Positive sectional curvature with no fixed lower bound on a noncompact manifold
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-sectional-curvature
@@ -25,6 +25,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

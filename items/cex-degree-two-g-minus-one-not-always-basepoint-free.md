@@ -2,7 +2,7 @@
 id: cex-degree-two-g-minus-one-not-always-basepoint-free
 kind: counterexample
 title: "Degree 2g-1 does not force base-point-freeness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

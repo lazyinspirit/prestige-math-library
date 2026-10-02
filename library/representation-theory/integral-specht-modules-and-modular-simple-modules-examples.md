@@ -1,7 +1,7 @@
 ---
 page: integral-specht-modules-and-modular-simple-modules-examples
 title: "Integral Specht Modules and Modular Simple Modules — Examples"
-status: draft
+status: published
 requires: [integral-specht-modules-and-modular-simple-modules]
 items: []
 examples: [ex-specht-form-rank-for-shape-two-two-in-small-characteristics,

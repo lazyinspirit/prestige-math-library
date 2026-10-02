@@ -2,7 +2,7 @@
 id: thm-marcel-riesz-conjugate-function-theorem
 kind: theorem
 title: "The Marcel Riesz conjugate-function theorem on the circle"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conjugate-function-on-the-circle, def-period-one-fourier-coefficients-partial-sums-and-convolution, lem-periodic-conjugate-square-identity, thm-parseval-identity-for-fourier-series, thm-riesz-thorin-interpolation, lem-complex-lp-duality-from-real-lp-duality, thm-fejer-convergence-in-lp, thm-fejer-uniform-convergence-for-continuous-periodic-functions, lem-fejer-kernel-is-a-positive-approximate-identity, def-cesaro-and-abel-means-of-a-fourier-series, def-dirichlet-and-fejer-kernels, lem-fourier-partial-sums-are-dirichlet-convolutions, lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-complex-holder-minkowski-and-the-quotient-norm, cor-l-p-norm-recovery-by-unit-l-q-pairings, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-countable-choice, def-the-one-dimensional-torus-and-normalized-haar-integral]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

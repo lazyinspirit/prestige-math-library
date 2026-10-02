@@ -2,7 +2,7 @@
 id: def-total-quotient-ring-and-normalisation-of-reduced-plane-curve-germ
 kind: definition
 title: "Total quotient ring and normalisation of a reduced plane curve germ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (6.6) principal equation of a codimension-one germ (pp. 106–107); II (4.19) finite integral extension of the curve ring (p. 95)."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

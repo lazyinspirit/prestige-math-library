@@ -2,7 +2,7 @@
 id: lem-biholomorphic-invariance-of-plane-subharmonicity
 kind: lemma
 title: "Plane subharmonicity is invariant under biholomorphic change of coordinate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-plane-subharmonic-function, def-biholomorphic-map, thm-conformal-invariance-of-plane-harmonicity, thm-harmonic-majorant-characterization-of-plane-subharmonicity, thm-mean-value-property-for-plane-harmonic-functions, thm-plane-subharmonic-functions-are-locally-integrable]
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: lem-l-reductions-transfer-apx-hardness
 kind: lemma
 title: "L-reductions compose and transfer PTAS and APX-hardness"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-l-reduction
@@ -19,6 +19,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §16.2 Theorems 16.5–16.6 with proofs, printed p. 414"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

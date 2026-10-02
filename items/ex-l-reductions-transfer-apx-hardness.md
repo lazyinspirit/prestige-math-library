@@ -2,7 +2,7 @@
 id: ex-l-reductions-transfer-apx-hardness
 kind: example
 title: "The clause graph is an L-reduction with constants one and one"
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -25,6 +25,7 @@ sources:
     - title: "Williamson and Shmoys, The Design of Approximation Algorithms, §16.2 Definition 16.4 and Theorems 16.5–16.6, printed pp. 413–414"
       url: "https://designofapproxalgs.com/book.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

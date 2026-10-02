@@ -2,7 +2,7 @@
 id: def-successive-minima-of-a-convex-body-with-respect-to-a-lattice
 kind: definition
 title: "Successive minima of a convex body"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0204158"
       locator: "§1 pp.1-2."
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -2,7 +2,7 @@
 id: thm-hochschild-hyperhomology-is-resolution-independent
 kind: theorem
 title: "Hochschild hyperhomology is independent of a projective resolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -33,6 +33,7 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf"
       locator: "§9.1.3–9.1.5: the bar resolution and $\\operatorname{Bar}(A)\\otimes_{A^e}M\\cong C_\\bullet(A,M)$. Resolution comparison and homotopy uniqueness are supplied by the cited library theorems [F6] and [F11], respectively."
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

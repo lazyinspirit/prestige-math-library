@@ -1,7 +1,7 @@
 ---
 page: hochschild-hyperhomology-and-cyclic-tensor-invariance
 title: "Hochschild Hyperhomology and Cyclic Tensor Invariance"
-status: draft
+status: published
 order: 727
 category: homological-algebra
 companion: hochschild-hyperhomology-and-cyclic-tensor-invariance-examples

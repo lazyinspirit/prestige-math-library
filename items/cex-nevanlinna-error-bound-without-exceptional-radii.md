@@ -2,7 +2,7 @@
 id: cex-nevanlinna-error-bound-without-exceptional-radii
 kind: counterexample
 title: "Exceptional radii cannot be removed from the logarithmic-derivative estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,8 @@ sources:
     - title: "Alexandre Eremenko, Lectures on Nevanlinna Theory, §6"
       url: "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf"
       locator: "§6, printed pp. 12–13: the logarithmic-derivative lemma and its exceptional set"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: ex-projective-line-divisors-linear-systems
 kind: example
 title: Divisors and complete linear systems on the projective line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,8 @@ sources:
       url: https://stacks.math.columbia.edu/download/curves.pdf
     - title: Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21
       url: https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf
+verification:
+  audited: 2026-10-02
 ---
 
 

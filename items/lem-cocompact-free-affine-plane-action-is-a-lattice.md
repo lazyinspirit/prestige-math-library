@@ -2,7 +2,7 @@
 id: lem-cocompact-free-affine-plane-action-is-a-lattice
 kind: lemma
 title: "A compact free affine plane quotient comes from a rank-two lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -26,6 +26,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

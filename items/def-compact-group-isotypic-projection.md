@@ -2,7 +2,7 @@
 id: def-compact-group-isotypic-projection
 kind: definition
 title: "Compact-group isotypic projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, def-topological-group, def-compact-space, def-hausdorff-space, def-strongly-continuous-unitary-representation, def-hilbert-space, def-real-and-complex-inner-product-space, def-linear-subspace, thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional, def-dimension, def-trace-of-an-endomorphism, cor-trace-is-invariant-under-similarity, def-operator-norm, def-bounded-linear-operator, thm-bessel-inequality-and-finite-parseval-identity, def-countable-choice, def-measure-space, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-strongly-measurable-banach-valued-function, def-banach-valued-simple-function-and-integral, def-bochner-integrable-function, thm-bochner-integrability-criterion, lem-bochner-integral-norm-inequality, def-totally-bounded, def-metric-ball, def-metric-space, thm-compactness-under-continuous-maps, thm-compactness-agrees-with-metric-compactness, thm-compact-implies-complete-and-totally-bounded, def-borel-sigma-algebra, thm-continuous-preimages-of-borel-sets-are-borel, lem-finite-choice, def-continuous-map-top, def-topological-space, def-hilbert-orthogonal-projection]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

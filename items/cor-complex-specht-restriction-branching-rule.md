@@ -2,7 +2,7 @@
 id: cor-complex-specht-restriction-branching-rule
 kind: corollary
 title: "The complex Specht restriction branching rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [thm-specht-restriction-branching-filtration, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, def-corner-order-and-specht-deletion-map, def-sign-representation-and-restriction-of-a-representation, thm-first-isomorphism-theorem-for-vector-spaces]
@@ -21,6 +21,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

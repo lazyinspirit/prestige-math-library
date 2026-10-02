@@ -2,7 +2,7 @@
 id: thm-weierstrass-p-normal-convergence-and-periodicity
 kind: theorem
 title: "Normal convergence, parity and periodicity of the Weierstrass p function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: true
@@ -43,6 +43,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(ii)-(iii), equations 23.2.4, 23.2.7-23.2.10: the wp series, its parity, its poles and its periods."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

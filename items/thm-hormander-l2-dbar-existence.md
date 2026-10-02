@@ -2,7 +2,7 @@
 id: thm-hormander-l2-dbar-existence
 kind: theorem
 title: "Hörmander's weighted L2 existence theorem for the dbar equation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-open-connected-subsets-of-rn-are-polygonally-connected
@@ -50,6 +50,7 @@ sources:
       url: "https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf"
       locator: "§§4.1-4.3, PDF pp. 67-83: weighted L2 spaces, unbounded operators and the energy estimate (4.4) with Theorem 72"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

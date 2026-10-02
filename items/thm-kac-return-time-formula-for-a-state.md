@@ -2,7 +2,7 @@
 id: thm-kac-return-time-formula-for-a-state
 kind: theorem
 title: "Kac return-time formula for a state"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

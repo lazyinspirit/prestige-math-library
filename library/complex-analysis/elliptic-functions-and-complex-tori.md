@@ -1,7 +1,7 @@
 ---
 page: elliptic-functions-and-complex-tori
 title: "Elliptic Functions and Complex Tori"
-status: draft
+status: published
 items: [def-complex-lattice-and-complex-torus,
         thm-complex-torus-quotient-is-well-defined,
         def-weierstrass-elliptic-p-function,

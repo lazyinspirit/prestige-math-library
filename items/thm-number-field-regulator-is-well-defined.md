@@ -2,7 +2,7 @@
 id: thm-number-field-regulator-is-well-defined
 kind: theorem
 title: The regulator is well defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -37,6 +37,7 @@ sources:
       url: "https://wstein.org/books/ant/ant.pdf"
       locator: "Section 8.1 p.89 (regulator as covolume of the log lattice; change of basis)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

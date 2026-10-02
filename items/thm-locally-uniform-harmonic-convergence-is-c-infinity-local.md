@@ -2,7 +2,7 @@
 id: thm-locally-uniform-harmonic-convergence-is-c-infinity-local
 kind: theorem
 title: Locally uniform limits of harmonic functions are smooth, with all derivatives converging
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-ck-and-multi-index-notation-in-several-variables, def-countable-choice, cor-harmonic-cauchy-estimates-in-supremum-norm, lem-relative-compact-closed-sets-have-a-positive-distance-gap, thm-harmonic-functions-are-real-analytic, thm-heine-borel-rn, thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

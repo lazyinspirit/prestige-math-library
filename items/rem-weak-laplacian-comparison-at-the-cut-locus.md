@@ -2,7 +2,7 @@
 id: rem-weak-laplacian-comparison-at-the-cut-locus
 kind: remark
 title: Weak laplacian comparison at the cut locus
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound
@@ -17,6 +17,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  sources_checked:
+    date: 2026-10-02
+    by: owner
+    scope: Owner-confirmed prior audit; publication explicitly authorised.
   precheck: n/a
 sources:
   scraped: []

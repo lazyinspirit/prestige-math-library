@@ -1,7 +1,7 @@
 ---
 page: hormander-estimates-and-the-levi-problem
 title: "Hörmander Estimates and the Levi Problem"
-status: draft
+status: published
 items: [        lem-smooth-regularization-of-psh-exhaustion,
         def-meromorphic-function-in-several-complex-variables,
         def-weighted-l2-spaces-dbar-forms,

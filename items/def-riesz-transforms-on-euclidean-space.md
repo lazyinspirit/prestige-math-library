@@ -2,13 +2,14 @@
 id: def-riesz-transforms-on-euclidean-space
 kind: definition
 title: Riesz transforms on Euclidean space
-status: draft
+status: published
 origin: pipeline
 deps: [lem-ltwo-fourier-multiplier-bound, thm-plancherel, def-real-gamma-function-by-the-euler-integral, thm-real-gamma-euler-integral-convergence, thm-real-gamma-functional-equation, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
 sources:
   references:

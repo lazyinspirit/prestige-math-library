@@ -2,7 +2,7 @@
 id: thm-youngs-rule-for-permutation-modules
 kind: theorem
 title: "Young's rule for complex permutation modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-semistandard-homomorphisms-are-independent-and-dominance-triangular, lem-semistandard-homomorphisms-span-in-characteristic-zero, def-semistandard-tableau-and-kostka-number, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, def-young-subgroup-tabloid-and-permutation-module, def-column-antisymmetrizer-polytabloid-and-specht-module, lem-semistandard-tableau-homomorphisms-to-young-permutation-modules, cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order, def-completely-reducible-representation, cor-schurs-lemma-for-irreducible-representations, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, lem-integral-specht-garnir-straightening-and-field-basis]
@@ -21,6 +21,7 @@ sources:
     - title: "David A. Craven, Groups, Geometries and Representation Theory, Lemma 2.15 and Theorem 2.16 (Young's rule), printed pp. 28-31"
       url: "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

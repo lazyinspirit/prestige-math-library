@@ -2,7 +2,7 @@
 id: lem-cartier-divisor-sheaf-invertible
 kind: lemma
 title: "The sheaf of a Cartier divisor is invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -21,6 +21,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 Exercise 15.2.D"
       url: "https://math.stanford.edu/~vakil/216blog/FOAgoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

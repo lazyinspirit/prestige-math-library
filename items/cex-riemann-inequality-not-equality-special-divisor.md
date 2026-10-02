@@ -2,7 +2,7 @@
 id: cex-riemann-inequality-not-equality-special-divisor
 kind: counterexample
 title: "The Riemann inequality is not an equality for special divisors"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-projective-plane-bezout-length-form
@@ -47,6 +47,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

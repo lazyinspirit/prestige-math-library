@@ -2,7 +2,7 @@
 id: def-conductor-of-a-cyclotomic-field
 kind: definition
 title: Cyclotomic conductor of a full cyclotomic field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf"
       locator: "Remark 11.7, p. 60: only indices n = 2 (mod 4) have a reduced cyclotomic index; no Kronecker-Weber input."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

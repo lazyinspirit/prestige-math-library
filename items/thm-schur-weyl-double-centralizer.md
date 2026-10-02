@@ -2,7 +2,7 @@
 id: thm-schur-weyl-double-centralizer
 kind: theorem
 title: The Schur-Weyl mutual centralizer theorem on tensor powers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [lem-tensor-place-operators-span-the-symmetric-centralizer, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, def-commuting-symmetric-and-linear-actions-on-tensor-power, thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field, thm-simple-modules-over-semisimple-rings, cor-schurs-lemma-for-irreducible-representations, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique, lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces, thm-group-actions-and-group-ring-modules-correspond, cor-subrepresentations-correspond-to-submodules-and-irreducibility-to-simplicity]
@@ -21,6 +21,7 @@ sources:
     - title: "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74"
       url: "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

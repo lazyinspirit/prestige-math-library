@@ -12,11 +12,12 @@ sources:
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 proof_strategy: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
 ---
 

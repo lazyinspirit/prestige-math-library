@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-riemann-surfaces-and-uniformization
 title: "Hyperbolic Riemann Surfaces and Uniformization"
-status: draft
+status: published
 requires: [conformal-mapping-branches-and-the-schwarz-lemma, the-riemann-mapping-theorem, covering-spaces-and-lifting, classification-of-covering-spaces, harmonic-functions-and-mean-values-in-rn, riemann-surfaces-branched-maps-and-differentials, green-functions-harmonic-measure-and-conformal-invariance, sublevel-deformation-and-the-handle-attachment-theorem, weak-derivatives-and-sobolev-spaces, dirichlets-unit-theorem-regulators-and-s-units]
 items:
   - def-properly-discontinuous-group-action

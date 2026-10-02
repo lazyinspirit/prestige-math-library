@@ -2,7 +2,7 @@
 id: lem-semistandard-tableau-homomorphisms-to-young-permutation-modules
 kind: lemma
 title: Semistandard fillings construct Specht-to-permutation homomorphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-semistandard-tableau-and-kostka-number, def-young-subgroup-tabloid-and-permutation-module, def-column-antisymmetrizer-polytabloid-and-specht-module, def-row-and-column-stabilizers-of-a-tableau, def-young-tableau-standard-tableau-and-shape, lem-polytabloid-covariance-and-column-sign]
@@ -21,6 +21,7 @@ sources:
     - title: "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39"
       url: "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

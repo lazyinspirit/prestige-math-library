@@ -2,7 +2,7 @@
 id: thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional
 kind: theorem
 title: "Irreducible unitary representations of compact groups are finite dimensional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, cor-normalized-haar-probability-on-a-compact-group, def-topological-group, def-compact-space, def-hausdorff-space, def-strongly-continuous-unitary-representation, def-hilbert-space, lem-a-rank-one-haar-average-is-a-nonzero-compact-intertwiner, thm-schurs-lemma-for-unitary-representations, lem-a-compact-scalar-identity-forces-finite-dimension, def-compact-linear-operator, def-bounded-linear-operator, def-dimension, def-linear-basis]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

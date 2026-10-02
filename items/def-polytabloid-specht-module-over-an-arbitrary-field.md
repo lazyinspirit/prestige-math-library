@@ -2,7 +2,7 @@
 id: def-polytabloid-specht-module-over-an-arbitrary-field
 kind: definition
 title: Integral and field-valued Specht modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-young-subgroup-tabloid-and-permutation-module, def-column-antisymmetrizer-polytabloid-and-specht-module, def-row-and-column-stabilizers-of-a-tableau, thm-sign-is-a-homomorphism, lem-polytabloid-covariance-and-column-sign]
@@ -20,6 +20,7 @@ sources:
     - title: "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26"
       url: "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

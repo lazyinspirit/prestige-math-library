@@ -1,7 +1,7 @@
 ---
 page: analytic-hypersurfaces-and-local-parametrisation-examples
 title: "Analytic Hypersurfaces and Local Parametrisation: Examples and Counterexamples"
-status: draft
+status: published
 requires: [analytic-hypersurfaces-and-local-parametrisation]
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: lem-h1-stabilizes-downward-point-removal
 kind: lemma
 title: "Adding points never raises h^1, and h^1 stabilizes"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-projective-cohomology-finite-dimensional-field
@@ -40,6 +40,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

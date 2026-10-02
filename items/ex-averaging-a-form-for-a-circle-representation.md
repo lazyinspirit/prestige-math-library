@@ -2,7 +2,7 @@
 id: ex-averaging-a-form-for-a-circle-representation
 kind: example
 title: "A circle representation with an averaged orthogonal weight form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, def-topological-group, def-compact-space, def-hausdorff-space, def-subspace-topology-top, def-continuous-map-top, thm-continuity-characterisations-top, thm-complex-numbers-form-a-field, thm-complex-numbers-are-the-real-coordinate-plane, lem-complex-conjugation-and-modulus-laws, lem-vector-operations-are-continuous-in-a-normed-space, thm-product-universal-property, def-product-topology, lem-continuity-is-local-and-pastes, thm-heine-borel-rn, thm-metric-hausdorff-separation, def-metric-topology, def-standard-topologies, cor-normalized-haar-probability-on-a-compact-group, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-measure-space, def-averaged-hermitian-form-for-a-compact-group, def-real-and-complex-inner-product-space, def-finite-dimensional-representation-of-a-group-over-a-field, def-linear-isometry-and-orthogonal-or-unitary-operator, thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, def-measure-preserving-transformation-and-system, thm-integrals-are-invariant-under-measure-preserving-maps, lem-averaging-makes-a-finite-dimensional-representation-unitary, def-linear-map, def-hilbert-space]
@@ -13,6 +13,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

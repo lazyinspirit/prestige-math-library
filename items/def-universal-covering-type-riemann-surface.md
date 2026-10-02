@@ -2,7 +2,7 @@
 id: def-universal-covering-type-riemann-surface
 kind: definition
 title: "Spherical, parabolic and hyperbolic universal-covering types"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -38,6 +38,7 @@ sources:
       url: "https://www.math.stonybrook.edu/~mlyubich/book.pdf"
       locator: "Ch. 1 section 5, printed pp. 115-118 (the disc, plane and sphere models and the classification of surfaces by their universal cover)"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

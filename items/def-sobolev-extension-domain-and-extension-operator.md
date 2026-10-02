@@ -2,7 +2,7 @@
 id: def-sobolev-extension-domain-and-extension-operator
 kind: definition
 title: Sobolev extension domains and extension operators
-status: draft
+status: published
 origin: pipeline
 deps: [def-sobolev-space-wkp-and-its-norm, lem-weak-derivative-linearity-locality-and-commutation, lem-weak-derivatives-are-unique-almost-everywhere, lem-sobolev-norm-is-well-defined-and-definite, def-countable-choice]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

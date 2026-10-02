@@ -2,7 +2,7 @@
 id: lem-cartier-to-weil-injective-normal
 kind: lemma
 title: "Under AC, the Picard-to-class-group map is injective on normal Noetherian integral schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -36,6 +36,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "J. S. Milne, Algebraic Geometry, Ch. 12 §§12.1-12.9 (divisors, the class group and the Picard group)"
       url: "https://www.jmilne.org/math/CourseNotes/AG12.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

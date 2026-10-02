@@ -2,7 +2,7 @@
 id: lem-global-section-effective-divisor
 kind: lemma
 title: "A regular global section of an invertible sheaf glues to an effective Cartier divisor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -24,6 +24,8 @@ sources:
       url: "https://stacks.math.columbia.edu/download/divisors.pdf"
     - title: "Ravi Vakil, The Rising Sea, Ch. 15 Exercises 15.3.B-15.3.C and Section 15.6 (canonical sections and effective Cartier divisors)"
       url: "https://math.stanford.edu/~vakil/216blog/FOAgoct2111public.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

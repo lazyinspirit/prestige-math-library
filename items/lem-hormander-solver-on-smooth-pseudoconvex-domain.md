@@ -2,7 +2,7 @@
 id: lem-hormander-solver-on-smooth-pseudoconvex-domain
 kind: lemma
 title: Weighted ∂̄ solvability on a smoothly bounded pseudoconvex domain
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-weighted-l2-spaces-dbar-forms
@@ -37,6 +37,7 @@ sources:
       url: "https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf"
       locator: "§4.3, the energy estimate (4.4) and Theorem 72 applied to T=∂̄_{q-1}, S=∂̄_q, PDF pp. 85-87"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

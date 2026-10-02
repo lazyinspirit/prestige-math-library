@@ -2,7 +2,7 @@
 id: ex-poisson-kernel-concentrates-at-a-boundary-point
 kind: example
 title: Quantitative concentration of the ball Poisson kernel
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 proof_strategy: direct
 deps: [def-countable-choice, def-surface-integral-on-a-compact-c-one-hypersurface, lem-ball-poisson-kernel-is-positive-and-normalised, lem-poisson-kernel-boundary-cap-and-complement-estimate, lem-sphere-and-ball-measures-scale, thm-poisson-kernel-for-a-ball-in-rn]
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

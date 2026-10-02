@@ -2,7 +2,7 @@
 id: cor-minkowski-convex-body-theorem-at-equality
 kind: corollary
 title: "Minkowski convex-body theorem at equality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf"
       locator: "§28 pp.145-146."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -73,9 +74,13 @@ gives $c/2\in C$ ([[def-convex-subset-of-euclidean-space]]).
 ## Proof
 
 1.1 For every $m\ge1$ the dilate $S_m:=(1+1/m)C$ is compact, convex and centrally symmetric, and by [F2] $\lambda_n(S_m)=(1+1/m)^n\lambda_n(C)\ge(1+1/m)^n2^n\operatorname{covol}(\Lambda)>2^n\operatorname{covol}(\Lambda)$ because $\operatorname{covol}(\Lambda)>0$ and $(1+1/m)^n>1$. [F2, F4, given]
+
 2.1 By [F1] each $S_m$ contains a nonzero lattice point; using [A1] choose one, say $0\ne v_m\in S_m\cap\Lambda$, for every $m\ge1$. [A1, F1, step 1.1]
+
 3.1 Since $1+1/m\le2$ for $m\ge1$ and $0\in C$, convexity of $C$ gives $S_m\subseteq2C$, so every $v_m$ lies in the bounded set $2C$; by [F3] the set $2C\cap\Lambda$ is finite, so some $v\in2C\cap\Lambda$ equals $v_m$ for infinitely many $m$. [F3, F4, step 2.1]
+
 4.1 Fix such an infinite set of indices $m$. For each of them $v\in(1+1/m)C$, hence $v/(1+1/m)\in C$; as $m\to\infty$ through those indices $v/(1+1/m)\to v$, and $C$ is closed by [F4], so $v\in C$. [F4, step 3.1]
+
 5.1 The point $v$ is nonzero by step 2.1 and lies in $C\cap\Lambda$, so $C$ contains a nonzero lattice point. [step 4.1] ∎
 
 ## Remarks

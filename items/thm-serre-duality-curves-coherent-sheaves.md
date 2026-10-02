@@ -2,7 +2,7 @@
 id: thm-serre-duality-curves-coherent-sheaves
 kind: theorem
 title: "Serre duality for coherent sheaves on a smooth proper curve, Ext form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -52,6 +52,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
@@ -125,12 +126,14 @@ first isomorphism is the vector-bundle duality of
 
 3.1 The evaluation map from all global sections is surjective by [F6]. Every global section is a $k$-linear combination of the $s_i$, with $k$ acting through $\mathcal O_C$; hence at each stalk the values of the $s_i$ generate $\mathcal F(n)$ over $\mathcal O_C$. Thus $\mathcal O_C^{\oplus N}\twoheadrightarrow\mathcal F(n)$, and after twisting by $L^{-n}$ there is a surjection $p:\mathcal E:=(L^{-n})^{\oplus N}\twoheadrightarrow\mathcal F$ with $\mathcal E$ finite locally free. [F6, step 2.1]
 
-4.1 Let $\mathcal E':=\ker p$. It is coherent by [F5], and as a subsheaf of $\mathcal E$ it is torsion-free; [F4] makes it finite locally free. We obtain a two-term finite locally free resolution for every coherent $\mathcal F$, including torsion sheaves: [F4, F5, step 3.1]
+4.1 Let $\mathcal E':=\ker p$. It is coherent by [F5], and as a subsheaf of $\mathcal E$ it is torsion-free; [F4] makes it finite locally free. We obtain a two-term finite locally free resolution for every coherent $\mathcal F$, including torsion sheaves:
 $$0\longrightarrow\mathcal E'\xrightarrow{\jmath}\mathcal E\xrightarrow{p}\mathcal F\longrightarrow0.$$
+[F4, F5, step 3.1]
 
-5.1 By [F9] and [F8], this short exact sequence gives the cohomology sequence below; it is exact at the final term because $H^2(C,\mathcal E')=0$. Every term is finite-dimensional by [F7]: [F7, F8, F9, step 4.1]
+5.1 By [F9] and [F8], this short exact sequence gives the cohomology sequence below; it is exact at the final term because $H^2(C,\mathcal E')=0$. Every term is finite-dimensional by [F7]:
 $$0\to H^0(E')\to H^0(E)\to H^0(F)\xrightarrow{\delta_H}H^1(E')\to H^1(E)\to H^1(F)\to0,$$
 where $H^q(G)$ abbreviates $H^q(C,\mathcal G)$.
+[F7, F8, F9, step 4.1]
 
 5.2 With $\mathcal G=\omega_C$, the exact first-variable Ext sequence supplied by [F10] is $0\to\operatorname{Hom}(F,\omega_C)\to\operatorname{Hom}(E,\omega_C)\to\operatorname{Hom}(E',\omega_C)\xrightarrow{\delta_{\rm Ext}}\operatorname{Ext}^1(F,\omega_C)\to\operatorname{Ext}^1(E,\omega_C)\to\operatorname{Ext}^1(E',\omega_C)$. [F10, step 4.1]
 

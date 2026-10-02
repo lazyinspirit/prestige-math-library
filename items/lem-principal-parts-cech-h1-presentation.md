@@ -2,7 +2,7 @@
 id: lem-principal-parts-cech-h1-presentation
 kind: lemma
 title: "H^1 of a line bundle on a curve as principal parts modulo meromorphic and regular sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -25,6 +25,7 @@ sources:
     - title: "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 19 and 21"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: lem-surface-green-identity-on-smooth-bordered-domain
 kind: lemma
 title: "Green's second identity on a compact bordered domain of a Riemann surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 landmark: false
@@ -38,6 +38,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -126,6 +127,7 @@ connected and its boundary may be empty. All functions below are real.
 2.1 Let $\varphi,\psi$ be holomorphic charts with coordinates $z=x+iy$ and $w=u+iv$ on their overlap and transition $h=\varphi\circ\psi^{-1}$, so that $z=h(w)$; then $h$ is holomorphic with $h'\neq0$ on the overlap by [F1]. For a $C^2$ function $f$ one has $f_\varphi\circ h=f_\psi$, so the chain rule in [F10] applied to the transformation law of [F2] gives $\Delta(f_\varphi)(h(w))=|h'(w)|^{-2}\Delta(f_\psi)(w)$; since $dz=h'(w)\,dw$ and $dx\wedge dy=\tfrac{i}{2}dz\wedge d\bar z$, one has $dx\wedge dy=|h'(w)|^{2}\,du\wedge dv$. Multiplying the two identities, $u_\varphi\Delta(v_\varphi)\,dx\wedge dy=u_\psi\Delta(v_\psi)\,du\wedge dv$ on the overlap, so $(u\Delta v-v\Delta u)\,dA$ is a well-defined continuous $2$-form on the neighbourhood $W$ of $\Omega'$. [F1, F2, F10, step 1.1, algebra]
 
 2.2 For every $x\in\partial\Omega'$ choose a holomorphic coordinate chart centred at $x$. The embedded-boundary condition of step 1.1 makes the boundary image a smooth curve. Rotate the coordinate so its tangent at $x$ is horizontal. By the inverse function theorem [F7], after shrinking, the boundary is a smooth graph $y=\gamma(x)$ and the interior of $\Omega'$ lies on one side, say $y>\gamma(x)$. Choose a small coordinate rectangle $R_x$ with closure inside the holomorphic chart domain and the neighbourhood $W$ whose vertical sides meet that graph transversely and whose horizontal sides avoid it. Then the interior region $R_x\cap\operatorname{int}\Omega'$ is a bounded piecewise $C^1$ planar domain with the graph as one boundary face. Compactness of $\partial\Omega'$ gives finitely many such holomorphic rectangles $R_1,\ldots,R_\ell$ covering it. [F1, F6, F7, F8, step 1.1, choose]
+
 3.1 With $h$ as in step 2.1 write $h'(w)=\lambda e^{i\theta}$, $\lambda>0$; the real derivative of $h$ is multiplication by the complex number $h'(w)$, that is, $Dh(w)=\lambda R_\theta$ for the rotation $R_\theta$ by $\theta$, which is conformal and orientation preserving by [F1] and [F10]. Hence at corresponding boundary points the unit tangent vectors satisfy $\tau_z=R_\theta\tau_w$ and the outward unit conormals satisfy $\nu_z=R_\theta\nu_w$, while arclengths satisfy $ds_z=\lambda\,ds_w$. Transposing the chain rule $Df_\psi(w)=Df_\varphi(h(w))\,Dh(w)$ gives $\nabla_wf_\psi=\lambda R_{-\theta}\nabla_zf_\varphi$, hence $\partial_{\nu_z}v_\varphi=\lambda^{-1}\partial_{\nu_w}v_\psi$ and $\partial_{\nu_z}v_\varphi\,ds_z=\partial_{\nu_w}v_\psi\,ds_w$. With the chart-independent values of $u$, the pairing $u\,\partial_\nu v\,ds$ is therefore chart-independent along $\partial\Omega'$. [F1, F10, step 2.1, algebra]
 
 3.2 The set $L:=\Omega'\setminus(R_1\cup\cdots\cup R_\ell)$ is compact and disjoint from $\partial\Omega'$ by [F8] and step 2.2. Each $y\in L$ lies in the open complement of $\partial\Omega'$, so there is a chart ball $B$ about $y$ with closure in a larger holomorphic chart domain inside $W$ and $\overline B\cap\partial\Omega'=\varnothing$; these balls cover $L$, so by [F8] finitely many of them, say $B_{\ell+1},\dots,B_N$, cover $L$. Then $U_1:=R_1,\dots,U_\ell:=R_\ell,U_{\ell+1}:=B_{\ell+1},\dots,U_N:=B_N$ are holomorphic coordinate domains covering $\Omega'$. [F1, F8, step 2.2, choose]
@@ -133,6 +135,7 @@ connected and its boundary may be empty. All functions below are real.
 4.1 Steps 2.1 and 3.1 show that both integrands of part 1 are intrinsic: the left-hand side is the integral over the compact set $\Omega'$ of the continuous $2$-form $(u\Delta v-v\Delta u)\,dA$, and the right-hand side is the arclength integral of the continuous density $u\,\partial_\nu v-v\,\partial_\nu u$ over the compact boundary, evaluated on any finite chart cover of $\partial\Omega'$, the finitely many corner points contributing zero arclength by [F5]. [F5, F8, step 2.1, step 3.1]
 
 4.2 For each $j$ put $W_j:=U_j\cap\operatorname{int}\Omega'$. For $j\le\ell$, step 2.2 makes its chart image a bounded piecewise $C^1$ domain with graph and rectangle faces. For $j>\ell$, the ball $B_j$ is connected and disjoint from $\partial\Omega'$, and it meets $L\subseteq\operatorname{int}\Omega'$, so it lies wholly in the interior and $W_j=B_j$ is a bounded smooth planar domain. Thus every $W_j$ is an open domain admissible for the planar Green identity. [F3, F4, step 2.2, step 3.2, cases]
+
 4.3 The finite family $\{U_1,\dots,U_N\}$ is an open cover of the compact set $\Omega'$; by local compactness [F8] and compactness there are compact sets $K_j\subseteq U_j$ covering $\Omega'$. By [F9] choose smooth bumps $b_j$ with $b_j=1$ on $K_j$ and $\operatorname{supp}b_j\Subset U_j$; then $\Sigma:=\sum_jb_j$ is positive on a neighbourhood of $\Omega'$, and another application of [F9] gives a smooth $\psi$ equal to $1$ near $\Omega'$ with $\operatorname{supp}\psi\subseteq\{\Sigma>0\}$. The functions $\rho_j:=\psi b_j/\Sigma$, extended by zero, are smooth, satisfy $\operatorname{supp}\rho_j\Subset U_j$, and obey $\sum_j\rho_j=1$ on a neighbourhood of $\Omega'$. [F8, F9, step 3.2, construct]
 
 5.1 Fix $j$ and let $\theta$ be the larger holomorphic chart containing $\overline{U_j}$ chosen in steps 2.2 and 3.2. On a neighbourhood of $\overline{W_j}$ the functions $f_j:=\rho_j u$ and $g:=v$ have $C^2$ chart expressions: $u$ and $v$ do by the hypothesis, $\rho_j$ is smooth, and products and scalar multiples of $C^2$ functions are $C^2$ by [F10]. [F10, given, step 4.2, step 4.3]

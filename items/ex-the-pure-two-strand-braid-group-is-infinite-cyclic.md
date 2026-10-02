@@ -2,7 +2,7 @@
 id: ex-the-pure-two-strand-braid-group-is-infinite-cyclic
 kind: example
 title: "The two-strand pure braid group is infinite cyclic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-geometric-braid-with-setwise-endpoints, def-pure-braid-group-from-ordered-configurations, thm-pure-braid-forgetting-a-strand-short-exact-sequence, def-standard-pure-braid-generators, lem-standard-pure-braids-generate-each-free-kernel, thm-reduced-words-form-the-free-group, thm-pure-braid-groups-are-torsion-free, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-riesz-measure-of-log-modulus-is-zero-divisor
 kind: example
 title: "Riesz measure of a log modulus records the holomorphic zeros"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -43,6 +43,7 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§5, logarithmic potentials of holomorphic functions"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

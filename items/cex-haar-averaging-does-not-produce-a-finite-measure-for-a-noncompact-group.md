@@ -2,7 +2,7 @@
 id: cex-haar-averaging-does-not-produce-a-finite-measure-for-a-noncompact-group
 kind: counterexample
 title: "No normalized translation-invariant Haar probability on the real line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-left-haar-integral-and-left-haar-measure, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, def-measure, thm-heine-borel-rn, def-topological-group, lem-real-line-is-a-metric-space]
@@ -11,6 +11,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

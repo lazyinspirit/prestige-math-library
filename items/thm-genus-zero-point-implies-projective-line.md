@@ -2,7 +2,7 @@
 id: thm-genus-zero-point-implies-projective-line
 kind: theorem
 title: "A genus-zero curve with a degree-one divisor is the projective line"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-birational-smooth-proper-curves-isomorphic
@@ -38,6 +38,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 pipeline_run: frontier-37-owner-30
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

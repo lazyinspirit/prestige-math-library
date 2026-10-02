@@ -2,7 +2,7 @@
 id: ex-chebyshev-extremal-polynomials-and-capacity
 kind: example
 title: "Chebyshev extremals and the exact disk Fekete polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -56,6 +56,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.3760"
       locator: "§1, Examples 1.10 and 1.11, Lemma 1.14 and Theorem 1.18, printed pp. 173–178"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

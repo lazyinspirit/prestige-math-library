@@ -2,7 +2,7 @@
 id: lem-c-k-boundary-flattening-preserves-wkp-locally
 kind: lemma
 title: C^k boundary flattening preserves local W^{k,p}
-status: draft
+status: published
 origin: pipeline
 deps: [def-bounded-c-k-domain-and-boundary-charts, thm-meyers-serrin-density-on-an-arbitrary-open-set, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-lebesgue-measure-of-a-box-of-every-kind, thm-holder-inequality-for-integrals, lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets, lem-weak-stability-of-sobolev-derivatives, thm-chain-rule-for-total-derivatives, lem-classical-derivatives-are-weak-derivatives, def-sobolev-space-wkp-and-its-norm, def-countable-choice]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []

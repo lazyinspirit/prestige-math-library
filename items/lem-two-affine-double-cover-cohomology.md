@@ -2,7 +2,7 @@
 id: lem-two-affine-double-cover-cohomology
 kind: lemma
 title: Cohomology of a two-chart double cover
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -14,6 +14,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

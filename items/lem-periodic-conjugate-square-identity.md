@@ -2,7 +2,7 @@
 id: lem-periodic-conjugate-square-identity
 kind: lemma
 title: "The periodic conjugate square identity for real mean-zero polynomials"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conjugate-function-on-the-circle, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

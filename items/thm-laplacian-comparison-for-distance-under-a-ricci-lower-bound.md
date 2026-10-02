@@ -2,7 +2,7 @@
 id: thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound
 kind: theorem
 title: Laplacian comparison for distance under a ricci lower bound
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-laplace-beltrami-operator-as-trace-of-the-hessian
@@ -23,6 +23,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
@@ -92,10 +93,10 @@ By [F4] fix the unique $v\in S_pM$ and $t_0=r(q)\in(0,c_p(v))$ with $q=\exp_p(t_
 1.2 The scalar Riccati inequality and its asymptotics. [F2, F5, F6, given]
 By [F2] the function $h=\operatorname{tr}S$ is differentiable on $(0,\tau)$ and satisfies $$h'+\frac{h^2}{n-1}+\operatorname{Ric}_{\gamma}(\dot\gamma,\dot\gamma)\le0 .$$ By [F6] the Ricci lower bound gives $\operatorname{Ric}_{\gamma(t)}(\dot\gamma(t),\dot\gamma(t))\ge(n-1)k$ at every $t\in(0,t_0]$, so $$h'(t)+\frac{h(t)^2}{n-1}\le-(n-1)k\qquad(0<t\le t_0).$$ Put $a:=h/(n-1)$, a differentiable function on $(0,\tau)$ with $a'=\frac{h'}{n-1}$ and $a^2=h^2/(n-1)^2$; dividing the inequality by the positive number $n-1>0$ gives the scalar Riccati inequality $$a'(t)+a(t)^2\le-k\qquad(0<t\le t_0).$$ Moreover $h(t)=(n-1)t^{-1}+O(t)$ by [F5], so $$a(t)=\frac1t+O(t)\qquad(t\downarrow0).$$ [F2, F5, F6, given]
 
-1.3 The scalar comparison lemma. [given]
+1.3 The scalar comparison lemma.
 We use the following elementary fact, the integrating-factor comparison for Riccati inequalities with matched asymptotics at the singular endpoint. Let $0<T\le t_0$ and let $a,c:(0,T]\to\mathbb R$ be differentiable with $$a'+a^2\le-k,\qquad c'+c^2=-k\qquad\text{on }(0,T],$$ both $a(t)=1/t+O(t)$ and $c(t)=1/t+O(t)$ as $t\downarrow0$. Then $a\le c$ on $(0,T]$.
-
-*Proof.* Put $\varphi:=a-c$. Subtracting the two equations, $$\varphi'=a'-c'\le(-a^2-k)-(-c^2-k)=-(a+c)\varphi .$$ Fix $0<\varepsilon_0<t\le T$ and define $\Phi(s):=\varphi(s)\exp\bigl(-\int_s^t(a+c)\bigr)$ for $s\in[\varepsilon_0,t]$. Since $(a+c)$ is continuous, $\Phi$ is differentiable with $$\Phi'(s)=\exp\Bigl(-\int_s^t(a+c)\Bigr) \bigl(\varphi'(s)+(a(s)+c(s))\varphi(s)\bigr)\le0 ,$$ so $\Phi$ is nonincreasing and $$\varphi(t)\le\varphi(\varepsilon_0)\exp\Bigl(-\int_{\varepsilon_0}^{t}(a+c)\Bigr).$$ By the two asymptotics, choose $\delta\in(0,T]$ so that $a+c\ge1/t$ on $(0,\delta)$. Put $\delta':=\min(\delta,t)$ and $K:=(t-\delta')\max_{[\delta',t]}|a+c|$; then $$\int_{\varepsilon_0}^{t}(a+c)\ge\int_{\varepsilon_0}^{\delta'}\frac{du}{u}-K =\log\frac{\delta'}{\varepsilon_0}-K \qquad(0<\varepsilon_0<\delta' ),$$ and hence $$\varphi(t)\le e^{K}\delta'^{-1}\varepsilon_0|\varphi(\varepsilon_0)|\longrightarrow0\qquad(\varepsilon_0\downarrow0),$$ using $\varepsilon_0|\varphi(\varepsilon_0)|\to0$; therefore $\varphi(t)\le0$. [given] ∎
+*Proof.* Put $\varphi:=a-c$. Subtracting the two equations, $$\varphi'=a'-c'\le(-a^2-k)-(-c^2-k)=-(a+c)\varphi .$$ Fix $0<\varepsilon_0<t\le T$ and define $\Phi(s):=\varphi(s)\exp\bigl(-\int_s^t(a+c)\bigr)$ for $s\in[\varepsilon_0,t]$. Since $(a+c)$ is continuous, $\Phi$ is differentiable with $$\Phi'(s)=\exp\Bigl(-\int_s^t(a+c)\Bigr) \bigl(\varphi'(s)+(a(s)+c(s))\varphi(s)\bigr)\le0 ,$$ so $\Phi$ is nonincreasing and $$\varphi(t)\le\varphi(\varepsilon_0)\exp\Bigl(-\int_{\varepsilon_0}^{t}(a+c)\Bigr).$$ By the two asymptotics, choose $\delta\in(0,T]$ so that $a+c\ge1/t$ on $(0,\delta)$. Put $\delta':=\min(\delta,t)$ and $K:=(t-\delta')\max_{[\delta',t]}|a+c|$; then $$\int_{\varepsilon_0}^{t}(a+c)\ge\int_{\varepsilon_0}^{\delta'}\frac{du}{u}-K =\log\frac{\delta'}{\varepsilon_0}-K \qquad(0<\varepsilon_0<\delta' ),$$ and hence $$\varphi(t)\le e^{K}\delta'^{-1}\varepsilon_0|\varphi(\varepsilon_0)|\longrightarrow0\qquad(\varepsilon_0\downarrow0),$$ using $\varepsilon_0|\varphi(\varepsilon_0)|\to0$; therefore $\varphi(t)\le0$.
+[given] ∎
 
 2.1 The distance Laplacian is bounded by the model trace. [step 1.1, step 1.2, step 1.3, F7, given]
 On the positive domain of [F7] the comparison cotangent satisfies the model Riccati equation $\operatorname{ct}_k'+\operatorname{ct}_k^2=-k$: indeed $\operatorname{cs}_k'=\operatorname{sn}_k''=-k\operatorname{sn}_k$ and $\operatorname{sn}_k'=\operatorname{cs}_k$, so $$\operatorname{ct}_k' =\frac{\operatorname{cs}_k'\operatorname{sn}_k-\operatorname{cs}_k\operatorname{sn}_k'}{\operatorname{sn}_k^2} =\frac{-k\operatorname{sn}_k^2-\operatorname{cs}_k^2}{\operatorname{sn}_k^2} =-k-\operatorname{ct}_k^2 .$$ Moreover, by [F8] with order $3$ for $\operatorname{sn}_k$ and order $2$ for $\operatorname{cs}_k$, using $\operatorname{sn}_k'''(0)=-k$ and $\operatorname{cs}_k''(0)=-k$ together with the values $\operatorname{sn}_k(0)=0$, $\operatorname{sn}_k'(0)=1$, $\operatorname{sn}_k''(0)=-k\operatorname{sn}_k(0)=0$ and $\operatorname{cs}_k(0)=1$, $\operatorname{cs}_k'(0)=0$, $$\operatorname{sn}_k(t)=t(1+O(t^2)),\qquad \operatorname{cs}_k(t)=1+O(t^2),\qquad \operatorname{ct}_k(t)=\frac1t+O(t),\qquad \operatorname{ct}_k(t)\ge\frac1{2t}$$ for $0<t<\delta_0$ and some $\delta_0>0$. By step 1.2 the function $a=h/(n-1)$ satisfies $a'+a^2\le-k$ on $(0,t_0]$ and $a(t)=t^{-1}+O(t)$; the model $c:=\operatorname{ct}_k$ satisfies $c'+c^2=-k$ on $(0,t_0]$ (the interval $(0,t_0]$ lies in the positive domain of $\operatorname{ct}_k$ by [F7] and the hypothesis on $t_0$), $c\ge1/(2t)$ near $0$, and $|a-c|=O(t)=o(1/t)$. Step 1.3 with $T:=t_0$ therefore gives $$a(t)\le\operatorname{ct}_k(t)\qquad(0<t\le t_0),\qquad\text{hence } h(t_0)\le(n-1)\operatorname{ct}_k(t_0).$$ [step 1.1, step 1.2, step 1.3, F7, given]

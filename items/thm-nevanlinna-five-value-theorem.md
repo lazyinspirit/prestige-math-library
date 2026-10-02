@@ -2,7 +2,7 @@
 id: thm-nevanlinna-five-value-theorem
 kind: theorem
 title: "Nevanlinna five-value uniqueness theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -24,6 +24,8 @@ sources:
     - title: "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions"
       url: "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf"
       locator: "Ch. 3 §§1-2, printed pp. 87-98; Ch. 4 §3, printed pp. 121-122: uniqueness theorems and truncated counting"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

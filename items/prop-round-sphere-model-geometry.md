@@ -2,7 +2,7 @@
 id: prop-round-sphere-model-geometry
 kind: proposition
 title: Round sphere model geometry
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -52,6 +52,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: "Sectional Curvatures of the Model Spaces, printed pp.148–149; Chapter 10 on the cut locus of the round sphere"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 
@@ -181,7 +182,7 @@ $\sin'=\cos$ with $\sin^2+\cos^2=1$.
 
 ## Proof
 
-1.1 The tangential projection of the ambient derivative is the Levi-Civita connection. [F1, F2, F3, given]
+1.1 The tangential projection of the ambient derivative is the Levi-Civita connection.
 Write $p$ for the position field on $\mathbb R^{n+1}$, so that $D_Xp=X$ for
 every smooth ambient field $X$, and extend tangent fields on $S^n_R$ smoothly
 to the ambient space locally. By [F1] the tangent space at $x\in S^n_R$ is
@@ -199,8 +200,9 @@ and it is metric compatible because
 $$\langle\nabla^S_XY,Z\rangle+\langle Y,\nabla^S_XZ\rangle=\langle D_XY,Z\rangle+\langle Y,D_XZ\rangle=X\langle Y,Z\rangle ,$$
 the two correction terms vanishing since $Y,Z\perp p$. By the uniqueness
 clause of [F3], $\nabla^S$ is the Levi-Civita connection of $g$.
+[F1, F2, F3, given]
 
-2.1 The geodesic equation on the sphere. [F2, F4, step 1.1]
+2.1 The geodesic equation on the sphere.
 Let $\gamma$ be a smooth curve in $S^n_R$. Differentiating the identity
 $\langle\gamma,\gamma\rangle=R^2$ twice gives
 $\langle\gamma,\gamma''\rangle=-|\gamma'|^2$. Projecting $\gamma''$ as in step 1.1,
@@ -209,8 +211,9 @@ $$\gamma''-\frac{\langle\gamma'',\gamma\rangle}{R^2}\gamma=0,\qquad\text{that is
 Since $|\gamma'|$ is constant along a geodesic by [F4], a nonconstant geodesic
 of $S^n_R$ satisfies $\gamma''=-c^2\gamma/R^2$ with $c=|\gamma'|>0$, and a
 constant curve is a geodesic by [F4].
+[F2, F4, step 1.1]
 
-3.1 The maximal geodesics. [F4, F10, step 2.1]
+3.1 The maximal geodesics.
 Fix $p\in S^n_R$ and $v\in T_pS^n_R$; by [F1], $\langle p,v\rangle=0$. For
 $v\ne0$ put $\theta(t)=|v|t/R$ and
 $$\gamma(t)=\cos\theta(t)\,p+\frac{R}{|v|}\sin\theta(t)\,v .$$
@@ -223,8 +226,9 @@ $(p,v)$; for $v=0$ the same conclusion holds for the constant curve.
 Evaluating at $t=\pi R/|v|$ gives $\gamma(\pi R/|v|)=-p$, and the image is
 $S^n_R\cap\operatorname{span}\{p,v\}$: the orthonormal pair
 $p/R,v/|v|$ parametrizes that circle, and $|v|t/R$ ranges over all real angles.
+[F4, F10, step 2.1]
 
-4.1 Path connectedness. [F1, F10, step 3.1]
+4.1 Path connectedness.
 Let $x,y\in S^n_R$. If $y=x$, the constant curve joins them. If $y\ne\pm x$,
 put $\theta=\arccos(\langle x,y\rangle/R^2)\in(0,\pi)$ by [F10] and
 $u=(y-\cos\theta\,x)/(R\sin\theta)$; then $\langle x,u\rangle=0$ and
@@ -234,15 +238,17 @@ $\gamma_{x,u}(R\theta)=y$. If $y=-x$, choose any unit $u\in T_xS^n_R$, which is
 possible because $x^\perp\cong\mathbb R^n\ne\{0\}$; step 3.1 gives
 $\gamma_{x,u}(\pi R)=-x=y$. Hence every pair of points is joined by a
 continuous curve, and $S^n_R$ is path connected, hence connected.
+[F1, F10, step 3.1]
 
-5.1 Metric completeness and compactness. [F5, F9, step 3.1, step 4.1]
+5.1 Metric completeness and compactness.
 By step 3.1 every maximal geodesic of $S^n_R$ is defined on all of
 $\mathbb R$, so $(S^n_R,g)$ is geodesically complete. It is nonempty,
 connected by step 4.1 and boundaryless by [F1], so Hopf–Rinow [F5] makes it
 metrically complete. Being a closed and bounded subset of $\mathbb R^{n+1}$,
 it is also compact by [F9].
+[F5, F9, step 3.1, step 4.1]
 
-6.1 The distance formula. [F5, F6, F10, step 3.1, step 5.1]
+6.1 The distance formula.
 Let $x,y\in S^n_R$ and put $\theta=\arccos(\langle x,y\rangle/R^2)\in[0,\pi]$,
 which is well defined by the Cauchy–Schwarz bound in [F10]. Step 4.1
 constructs a curve from $x$ to $y$ of length $R\theta$ — constant in the case
@@ -259,16 +265,18 @@ of $\cos s=\cos\theta$ on $[0,\infty)$ are $s=\theta+2k\pi$ and
 $s=2\pi-\theta+2k\pi$, $k\ge0$, whose smallest element is $\theta$; therefore
 $c\ge R\theta$. Combining both inequalities gives
 $d_g(x,y)=R\theta=R\arccos(\langle x,y\rangle/R^2)$.
+[F5, F6, F10, step 3.1, step 5.1]
 
-7.1 Diameter and the antipodal pair. [F10, step 6.1]
+7.1 Diameter and the antipodal pair.
 By step 6.1, $d_g(x,y)\le\pi R$ for all $x,y$, with equality
 $d_g(x,y)=\pi R$ exactly when $\langle x,y\rangle=-R^2$. By the equality case
 of Cauchy–Schwarz, $|\langle x,y\rangle|=R^2$ holds exactly for linearly
 dependent $x,y$, that is for $y=\pm x$; the negative sign is precisely
 $\langle x,y\rangle=-R^2$. Equal points give distance $0$, so
 $\operatorname{diam}(S^n_R,g)=\pi R$, attained exactly at antipodal pairs.
+[F10, step 6.1]
 
-8.1 Cut times, cut locus, injectivity radius and injectivity of the exponential. [F8, F10, step 6.1, step 7.1]
+8.1 Cut times, cut locus, injectivity radius and injectivity of the exponential.
 Let $v\in T_pS^n_R$ be a unit vector and $\gamma(t)=\exp_p(tv)$, a unit-speed
 geodesic by step 3.1. Step 6.1 applied to the pair $(p,\gamma(t))$ gives
 $$d_g(p,\gamma(t))=R\arccos\frac{\langle p,\gamma(t)\rangle}{R^2}=R\arccos\bigl(\cos(t/R)\bigr),$$
@@ -285,8 +293,9 @@ $\{tv:0<t<c_p(v),\ |v|_g=1\}=B_0(\pi R)\setminus\{0\}$ and $\exp_p$ is a
 diffeomorphism there onto $S^n_R\setminus\{p,-p\}$ by [F8], while
 $\exp_p(0)=p$ is not in that image, $\exp_p$ is injective on the whole open
 ball $B_0(\pi R)$.
+[F8, F10, step 6.1, step 7.1]
 
-9.1 Boundary cases and choice. [A1, F1, step 6.1, step 8.1]
+9.1 Boundary cases and choice.
 The cases $y=x$ and $y=-x$ of the distance formula, that is $\theta=0$ and
 $\theta=\pi$, were treated separately in step 4.1 and are re-derived in
 step 6.1; the endpoint $t=\pi R$ of the minimizing interval is included, and
@@ -296,4 +305,4 @@ curvature statement of [F7] is not vacuous. The only selections are single
 minimizing geodesics supplied by [F5] and, in the antipodal case of step 4.1,
 one unit tangent vector; the inherited $\mathrm{AC}_\omega$ of [A1] is used
 only through the cited suppliers, and no family of choices is made.
-∎
+[A1, F1, step 6.1, step 8.1] ∎

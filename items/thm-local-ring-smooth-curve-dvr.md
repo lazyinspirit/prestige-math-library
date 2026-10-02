@@ -2,7 +2,7 @@
 id: thm-local-ring-smooth-curve-dvr
 kind: theorem
 title: "Local rings at closed points of smooth curves are discrete valuation rings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -31,6 +31,8 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
     - title: "The Stacks Project, Morphisms of Schemes, \u00a7\u00a729, 33-35, 43"
       url: "https://stacks.math.columbia.edu/download/morphisms.pdf"
+verification:
+  audited: 2026-10-02
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-hypersurface-germs-have-pure-codimension-one
 kind: theorem
 title: "Reduced hypersurface germs have pure codimension one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -38,6 +38,7 @@ sources:
       url: "https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
       locator: "II (2.10) factoriality and dimension of O_n (p. 82); II (4.19) finite integral extension of degree d (p. 95); II (6.6) pure codimension one (pp. 106–107)."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -2,13 +2,14 @@
 id: rem-hilbert-and-riesz-transform-endpoint-map
 kind: remark
 title: "Endpoint map for Hilbert and Riesz transforms"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-marcel-riesz-conjugate-function-theorem, cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, cor-riesz-transforms-are-ltwo-bounded]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

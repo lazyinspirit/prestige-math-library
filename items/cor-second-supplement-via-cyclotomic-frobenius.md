@@ -2,7 +2,7 @@
 id: cor-second-supplement-via-cyclotomic-frobenius
 kind: corollary
 title: Second supplement from Frobenius on Q(zeta_8)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -26,6 +26,7 @@ sources:
       url: "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
       locator: "Ch. 8, Example 8.18, p. 144: the quadratic subfield Q(sqrt 2) of Q(zeta_8) and the second supplement."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

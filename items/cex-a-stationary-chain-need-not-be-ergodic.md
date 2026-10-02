@@ -2,7 +2,7 @@
 id: cex-a-stationary-chain-need-not-be-ergodic
 kind: counterexample
 title: "A stationary chain need not be ergodic"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -16,6 +16,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-10-02
   precheck: pass
 proof_strategy: direct
 ---

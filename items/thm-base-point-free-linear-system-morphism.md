@@ -2,7 +2,7 @@
 id: thm-base-point-free-linear-system-morphism
 kind: theorem
 title: "A base-point-free linear system defines a morphism to projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -39,6 +39,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

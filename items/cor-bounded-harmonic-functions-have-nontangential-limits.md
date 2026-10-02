@@ -2,7 +2,7 @@
 id: cor-bounded-harmonic-functions-have-nontangential-limits
 kind: corollary
 title: "Bounded harmonic functions have L-infinity Fatou boundary data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps: [def-axiom-of-choice, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-harmonic-hardy-class-disc, def-poisson-integral-of-finite-boundary-measure, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-choice-implies-dependent-implies-countable-choice, thm-complex-holder-minkowski-and-the-quotient-norm, thm-fatou-nontangential-boundary-theorem-harmonic, thm-harmonic-hardy-representation-p-greater-one]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   references:

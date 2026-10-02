@@ -2,7 +2,7 @@
 id: ex-levi-form-of-the-unit-ball
 kind: example
 title: "Levi form of the unit ball"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-levi-form-and-strict-plurisubharmonicity
@@ -30,6 +30,7 @@ sources:
       url: https://www.jirka.org/scv/scv.pdf
       locator: "Ch. 2 §§2.3–2.5, Levi form of |z|^2 and strong pseudoconvexity."
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

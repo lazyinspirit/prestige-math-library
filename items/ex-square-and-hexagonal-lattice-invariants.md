@@ -2,7 +2,7 @@
 id: ex-square-and-hexagonal-lattice-invariants
 kind: example
 title: "Square and hexagonal lattice invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -35,6 +35,7 @@ sources:
       url: https://dlmf.nist.gov/23.2
       locator: "§23.2(iii), the invariants g2, g3 and the special values for the square and equianharmonic cases (23.2.12)-(23.2.14)."
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

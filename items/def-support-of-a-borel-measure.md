@@ -2,7 +2,7 @@
 id: def-support-of-a-borel-measure
 kind: definition
 title: "Support of a finite Borel measure on the plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-37-owner-30
 deps:
@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.3760"
       locator: "§1, compactly supported measures and their potentials"
 verification:
+  audited: 2026-10-02
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

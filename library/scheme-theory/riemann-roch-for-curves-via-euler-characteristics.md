@@ -1,7 +1,7 @@
 ---
 page: riemann-roch-for-curves-via-euler-characteristics
 title: "Riemann Roch for Curves via Euler Characteristics"
-status: draft
+status: published
 requires: [cartier-and-weil-divisors-line-bundles-and-picard-groups, sheaf-cohomology-cech-cohomology-and-comparison, cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes, smooth-proper-curves-divisors-genus-and-ramification]
 items:
   - def-little-l-divisor

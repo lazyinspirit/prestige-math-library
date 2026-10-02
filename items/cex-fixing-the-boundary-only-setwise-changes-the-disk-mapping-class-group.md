@@ -2,7 +2,7 @@
 id: cex-fixing-the-boundary-only-setwise-changes-the-disk-mapping-class-group
 kind: counterexample
 title: "Setwise boundary preservation kills a nontrivial braid"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-boundary-fixed-mapping-class-group-of-a-punctured-disk,
@@ -37,6 +37,7 @@ sources:
     - title: "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, section 2.2.1, printed pp. 50-51"
       url: "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
 verification:
+  audited: 2026-10-02
   precheck: pass
 ---
 

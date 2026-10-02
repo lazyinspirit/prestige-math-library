@@ -2,7 +2,7 @@
 id: lem-total-variation-half-l1-formula-on-a-countable-space
 kind: lemma
 title: "Half-$\\ell^1$ formula for total variation on a countable space"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps:
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-10-02
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

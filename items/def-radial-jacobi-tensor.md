@@ -2,7 +2,7 @@
 id: def-radial-jacobi-tensor
 kind: definition
 title: Radial Jacobi tensor
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-jacobi-field
@@ -16,6 +16,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-10-02
   precheck: pass
 sources:
   scraped: []
