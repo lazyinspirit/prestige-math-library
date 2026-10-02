@@ -104,6 +104,13 @@
   same battery until green. Outside findings remain recorded and excluded from frontier
   item gates; global, runtime and unknown failures still block. Step 7.9 and its
   continuations cannot add items.
+- Empty Step-7 batch adjudication assignments in the initial or repeat pack
+  close through a tool lane bound to that exact run, phase, round, unit and pack
+  hash. The report records mechanical zero-work closure with no mathematical
+  review, decisions, creations or ledger updates. The collector checks the
+  frozen judge input and empty assignment; nonempty batches, owner repairs,
+  maintenance and gate diagnostics retain their review obligations. Existing
+  Alpha artifacts remain on their original adjudication path.
 - Published repairs use `research/published-consumer-supplier-ledger.md` for
   mathematical defects. They have no item gate, rejudge or adjudication obligation.
   Their changed Statements or Definitions still require direct-consumer review.

@@ -179,6 +179,73 @@ export function readPack(root,run,phase,round) { return read(packPath(root,run,p
 export function workerLabel(phase,round,unit) { return `step7-v2-${phase}-r${round}-u${unit}`; }
 export function workerReport(root,run,phase,round,unit) { return join(workflowDir(root,run),`${workerLabel(phase,round,unit)}.json`); }
 
+const adjudicationPackKeys=new Set(['version','adjudicationSchemaVersion','repair_scope','frontier_ids','run','phase','round','judge_model','units','assignments','dependency_levels','before','before_statements','before_aliases','home_pages','rejected','input_evidence']);
+export const emptyAdjudicationLabel=(phase,round,unit)=>`step7-v2-empty-${phase}-r${round}-u${unit}`;
+// Unknown pack obligations conservatively retain the mathematical worker.
+export function emptyAdjudicationAssignment(pack,unit) {
+  return pack?.version===2&&pack.adjudicationSchemaVersion===1&&pack.repair_scope==='frontier'
+    &&['initial','repeat'].includes(pack.phase)&&Number.isInteger(pack.round)&&pack.round>0
+    &&Object.keys(pack).every(key=>adjudicationPackKeys.has(key))
+    &&Array.isArray(pack.units)&&pack.units.includes(unit)
+    &&Object.hasOwn(pack.assignments??{},unit)&&Array.isArray(pack.assignments[unit])&&pack.assignments[unit].length===0
+    &&Array.isArray(pack.rejected);
+}
+export function hasAdjudicatorArtifacts(root,run,phase,round,unit) {
+  const dir=join(root,'research',`${run}-dispatch`),stem=`alpha-adjudicate-${workerLabel(phase,round,unit)}`;
+  return existsSync(dir)&&readdirSync(dir).some(name=>name.startsWith(`${stem}.`));
+}
+function assertEmptyAdjudicationInput(root,run,phase,round,unit,inputHash) {
+  const pack=readPack(root,run,phase,round);
+  requireValue(pack.run===run&&pack.phase===phase&&pack.round===round&&digest(pack)===inputHash,'empty adjudication input identity or hash mismatch');
+  requireValue(emptyAdjudicationAssignment(pack,unit),`not an empty batch adjudication assignment: ${unit}`);
+  const frontier=read(join(workflowDir(root,run),'frontier.json'));validateFrontier(frontier);
+  requireValue(frontier.run===run&&JSON.stringify(frontier.ids)===JSON.stringify(pack.frontier_ids)
+    &&JSON.stringify(frontier.batches.map(row=>String(row.id)))===JSON.stringify(pack.units),'empty adjudication frontier binding mismatch');
+  const owners=new Map(frontier.batches.flatMap(row=>row.items.map(id=>[id,String(row.id)])));
+  const assigned=[];
+  for(const owner of pack.units){
+    requireValue(Array.isArray(pack.assignments[owner]),'malformed adjudication assignments');
+    for(const row of pack.assignments[owner]){
+      requireValue(row&&owners.get(row.id)===owner,'adjudication tuple assigned to wrong batch');assigned.push(key(row));
+    }
+  }
+  requireValue(Object.keys(pack.assignments).length===pack.units.length
+    &&new Set(assigned).size===assigned.length
+    &&JSON.stringify(assigned.sort())===JSON.stringify(pack.rejected.map(key).sort()),'adjudication rejection coverage mismatch');
+  const judgeInput=join(workflowDir(root,run),phase==='initial'?'step6-verdicts.json':`judge-${round}.json`);
+  requireValue(Object.keys(pack.input_evidence??{}).length===1&&Object.hasOwn(pack.input_evidence,judgeInput),'missing exact frozen judge input');
+  verifyEvidence(pack.input_evidence);
+  const input=read(judgeInput),verdicts=validVerdicts(phase==='initial'?input:input.verdicts),latest=new Map();
+  for(const row of verdicts.filter(row=>row.model===pack.judge_model))latest.set(row.id,row);
+  for(const row of pack.rejected)requireValue(latest.get(row.id)?.keep===false&&key(latest.get(row.id))===key(row),'rejection differs from frozen judge input');
+  for(const id of frontier.batches.find(row=>String(row.id)===unit).items){
+    if(isPublishedItem(root,id))continue;
+    const row=latest.get(id);
+    requireValue((phase!=='initial'||typeof row?.keep==='boolean')&&(!row||row.keep===true),`frozen judge input still owes adjudication: ${id}`);
+  }
+  requireValue(!hasAdjudicatorArtifacts(root,run,phase,round,unit),'preserve existing adjudicator artifacts');
+  return pack;
+}
+function emptyAdjudicationReport(pack,unit) {
+  return {run:pack.run,phase:pack.phase,round:pack.round,unit,input_sha256:digest(pack),
+    completion:'mechanical-zero-work',written_by:'step7-workflow',mathematical_review:false,
+    decisions:[],reviews:[],created_items:[],downstream:[],ledger_updates:[],gate_resolutions:[]};
+}
+function assertEmptyAdjudicationReport(pack,unit,report) {
+  requireValue(emptyAdjudicationAssignment(pack,unit),'mechanical closure requires an empty batch adjudication');
+  const expected=emptyAdjudicationReport(pack,unit);
+  requireValue(Object.keys(report).length===Object.keys(expected).length
+    &&Object.entries(expected).every(([key,value])=>Object.hasOwn(report,key)&&JSON.stringify(report[key])===JSON.stringify(value)),
+    'invalid mechanical zero-work report');
+}
+export function closeEmptyAdjudication(root,run,phase,round,unit,inputHash) {
+  const pack=assertEmptyAdjudicationInput(root,run,phase,round,unit,inputHash),report=emptyAdjudicationReport(pack,unit);
+  const path=workerReport(root,run,phase,round,unit);
+  try{writeFileSync(path,JSON.stringify(report,null,2)+'\n',{flag:'wx'});}
+  catch(error){if(error.code!=='EEXIST')throw error;assertEmptyAdjudicationReport(pack,unit,read(path));}
+  return report;
+}
+
 export function prepareAdjudication(root,run,phase,round) {
   requireValue(['initial','repeat'].includes(phase),'invalid adjudication phase');
   const path=packPath(root,run,phase,round); if(existsSync(path)) return read(path);
@@ -258,6 +325,9 @@ export function validateReports(pack,reports,now,{root=null}={}) {
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
     if(!report||report.run!==pack.run||report.phase!==pack.phase||report.round!==pack.round||report.input_sha256!==digest(pack)) { errors.push(`missing or mismatched report ${unit}`);continue; }
+    if(report.completion==='mechanical-zero-work'){
+      try{assertEmptyAdjudicationReport(pack,unit,report);}catch(error){errors.push(error.message);continue;}
+    }
     if(!Array.isArray(report.reviews)||!Array.isArray(report.decisions)||!Array.isArray(report.created_items)||!Array.isArray(report.downstream)){errors.push(`malformed report arrays ${unit}`);continue;}
     const assigned=new Set(pack.assignments[unit].map(r=>typeof r==='string'?r:r.id)),creations=new Set();
     for(const row of report.created_items){
@@ -366,6 +436,18 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
       requireValue(resolve(path).startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(hash),`invalid supporting evidence path or hash: ${path}`);
     }
     verifyEvidence(supporting);Object.assign(evidence,supporting);
+    const report=reports.find(value=>String(value.unit)===unit);
+    if(report.completion==='mechanical-zero-work'){
+      assertEmptyAdjudicationInput(root,run,phase,round,unit,report.input_sha256);
+      assertEmptyAdjudicationReport(pack,unit,report);
+      const label=emptyAdjudicationLabel(phase,round,unit),dispatch=join(root,'research',`${run}-dispatch`,`tool-${label}.result.json`),receipt=read(dispatch);
+      const keys=['role','label','run','covers','ok','written_by','ended_at'];
+      requireValue(receipt.ok===true&&receipt.run===run&&receipt.role==='tool'&&receipt.label===label
+        &&receipt.written_by==='autopilot'&&JSON.stringify(receipt.covers)===JSON.stringify([unit])
+        &&Object.keys(receipt).every(key=>keys.includes(key))&&typeof receipt.ended_at==='string'&&!Number.isNaN(Date.parse(receipt.ended_at)),
+        `invalid mechanical zero-work dispatch: ${dispatch}`);
+      evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));continue;
+    }
     const role=phase==='initial'||phase==='repeat'?'alpha-adjudicate':'alpha-repair';
     const dispatch=join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(phase,round,unit)}.result.json`);
     const receipt=read(dispatch);
@@ -712,12 +794,16 @@ function main() {
     case 'init':result=initialize(root,run);break;
     case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('--failures')?read(opt('--failures')):null});break;
     case 'collect':result=collect(root,run,phase,round);break;
+    case 'close-empty-adjudication':result=closeEmptyAdjudication(root,run,phase,round,opt('--unit'),opt('--input-sha256'));break;
     case 'advance-impact':result=advanceImpact(root,run,phase,round);break;
     case 'certify':result=certify(root,run,phase,round);break;
     case 'judge':result=judge(root,run,round);break;
     case 'verify-wave':result=verifyWave(root,run);break;
     case 'check':result=checkWorkflow(root,run);break;
-    default:throw Error('expected init|prepare|collect|advance-impact|certify|judge|verify-wave|check');
+    default:throw Error('expected init|prepare|collect|close-empty-adjudication|advance-impact|certify|judge|verify-wave|check');
+  }
+  if(args[0]==='close-empty-adjudication'){
+    console.log(`step7-workflow close-empty-adjudication: mechanical zero-work closure for ${phase}/${round}/${result.unit}; no mathematical review`);return;
   }
   console.log(`step7-workflow ${args[0]}: ${result.items?.length??result.changed?.length??result.ids?.length??0} item(s), complete`);
 }

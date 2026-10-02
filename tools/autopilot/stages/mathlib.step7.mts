@@ -1,10 +1,17 @@
 // Explicit Step 7 repair rounds. Every mathematical writer drains before the
 // one controller certification; only the engine routes or launches judgments.
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir } from '../../step7-workflow.mjs';
 import { frontierGateBattery } from '../../step7-frontier-gate.mjs';
+
+// The live controller has already cached the workflow's original ESM exports.
+// Version this composed dependency as the root stage loader does for Step 7.
+// Collection runs the workflow CLI in a fresh subprocess and sees the same code.
+const WORKFLOW_URL=new URL('../../step7-workflow.mjs',import.meta.url),WORKFLOW_STAT=statSync(WORKFLOW_URL);
+const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
+  `${WORKFLOW_URL.href}?v=${WORKFLOW_STAT.mtimeMs}:${WORKFLOW_STAT.size}`
+);
 
 export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step7GuardGate }: any): any[] {
   const round=(ctx:any,id:string)=>ctx.stageRounds?.[id]??1;
@@ -20,7 +27,7 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     modelProfile:adjudication?MODEL_PROFILE_NAMES.astraMedium:MODEL_PROFILE_NAMES.solXHigh,
     units:(ctx:any)=>adjudication ? (existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
       ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1']) : ownerUnits(ctx,phase,id),
-    pattern:(ctx:any)=>adjudication?pattern(phase,id)(ctx):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$`),concurrency:adjudication?24:3,
+    pattern:(ctx:any)=>adjudication?new RegExp(`(?:${pattern(phase,id)(ctx).source})|^tool-step7-v2-empty-${phase}-r${round(ctx,id)}-u[^.]+\\.result\\.json$`):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$`),concurrency:adjudication?24:3,
     // Sibling owners run concurrently. Shared metadata edits use a short
     // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
@@ -34,7 +41,8 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     artifacts:(ctx:any,u:string)=>{if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
     plan:(ctx:any,pending:string[])=>{
       const n=round(ctx,id);
-      if(adjudication&&!ctx.doctor)prepareAdjudication(ctx.repo,ctx.run,phase,n);
+      let adjudicationPack:any;
+      if(adjudication&&!ctx.doctor)adjudicationPack=prepareAdjudication(ctx.repo,ctx.run,phase,n);
       else {
         const failures=phase==='gate'?(ctx.stageFailures?.['7.10-gate']??ctx.stageFailures?.['7.8-gate']):null;
         if(phase==='gate'&&!failures&&!ctx.doctor)throw Error('7.9 requires actual failed gate diagnostics');
@@ -46,7 +54,14 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
           return {role:'alpha-repair',label:maintenanceLabel(phase,n,pack,lane),job:'authoring',covers:[u],profile:MODEL_PROFILE_NAMES.solXHigh,
             brief:'briefs/consumer-maintenance.md',task:input.task,timeout:21600};
         }
-        const [pass,unit]=decode(phase,u);return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
+        const [pass,unit]=decode(phase,u);
+        if(adjudicationPack&&emptyAdjudicationAssignment(adjudicationPack,unit)
+          &&(!existsSync(report(ctx,pass,n,unit))||JSON.parse(readFileSync(report(ctx,pass,n,unit),'utf8')).completion==='mechanical-zero-work')
+          &&!hasAdjudicatorArtifacts(ctx.repo,ctx.run,pass,n,unit)){
+          return {role:'tool',label:emptyAdjudicationLabel(pass,n,unit),covers:[u],job:'bookkeeping-mechanical',
+            argv:[...tool(ctx,'close-empty-adjudication',pass,n),'--unit',unit,'--input-sha256',digest(adjudicationPack)],timeout:60};
+        }
+        return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
         job:adjudication?'adjudication':'authoring',covers:[u],profile:adjudication?MODEL_PROFILE_NAMES.astraMedium:MODEL_PROFILE_NAMES.solXHigh,
         brief:`briefs/step7-${adjudication?'adjudicator':'owner-repair'}.md`,
         task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};});
