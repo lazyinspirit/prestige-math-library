@@ -1,39 +1,34 @@
-// Pure frontmatter readers shared by content-policy and its regression tests.
+// Semantic frontmatter readers shared by content-policy and its regression tests.
+import { createRequire } from 'node:module';
+import { yamlCandidates } from './paths.mjs';
 
-function urlsIn(value) {
-  return [...value.matchAll(/\burl:\s*("[^"]+"|'[^']+'|[^,\]}\n]+)/g)]
-    .map((match) => match[1].trim().replace(/^['"]|['"]$/g, ''));
+const require_ = createRequire(import.meta.url);
+let YAML;
+const mapping = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+
+export function parseFrontmatter(fm) {
+  if (!YAML) {
+    for (const candidate of yamlCandidates()) {
+      try { YAML = require_(candidate); break; } catch { /* next candidate */ }
+    }
+    if (!YAML) throw new Error('no yaml module found (the app repo supplies it, same as rendercheck)');
+  }
+  const doc = YAML.parse(fm);
+  if (!mapping(doc)) throw new Error('item frontmatter must be a mapping');
+  return doc;
 }
 
-export function referenceUrls(fm) {
-  // A sources mapping may be written in YAML block form or as one flow-form
-  // mapping. Restrict extraction to its references member so unrelated source
-  // metadata cannot satisfy the provenance requirement accidentally.
-  const lines = fm.split(/\r?\n/);
-  const sourcesIndex = lines.findIndex((line) => /^sources:\s*/.test(line));
-  if (sourcesIndex < 0) return [];
+export function nested(doc, parent, child) {
+  return mapping(doc[parent]) ? doc[parent][child] : undefined;
+}
 
-  const sourcesTail = lines[sourcesIndex].replace(/^sources:\s*/, '');
-  if (sourcesTail.trim()) {
-    const flow = [sourcesTail];
-    for (let cursor = sourcesIndex + 1; cursor < lines.length; cursor += 1) {
-      if (lines[cursor].trim() && !/^\s+/.test(lines[cursor])) break;
-      flow.push(lines[cursor]);
-    }
-    const text = flow.join('\n');
-    const references = text.match(/\breferences\s*:\s*([\s\S]*)/);
-    return references ? urlsIn(references[1]) : [];
-  }
-
-  const referencesIndex = lines.slice(sourcesIndex + 1)
-    .findIndex((line) => /^\s{2}references:\s*/.test(line));
-  if (referencesIndex < 0) return [];
-  const index = sourcesIndex + 1 + referencesIndex;
-  const block = [lines[index].replace(/^\s{2}references:\s*/, '')];
-  for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
-    const line = lines[cursor];
-    if (line.trim() && !/^\s{4,}/.test(line)) break;
-    block.push(line);
-  }
-  return urlsIn(block.join('\n'));
+export function referenceUrls(frontmatter) {
+  const doc = typeof frontmatter === 'string' ? parseFrontmatter(frontmatter) : frontmatter;
+  const references = nested(doc, 'sources', 'references');
+  if (!Array.isArray(references)) return [];
+  // Only direct URLs on reference objects count. Legacy title strings remain
+  // readable but cannot satisfy a source-backed provenance claim.
+  return references.filter(mapping)
+    .map((reference) => reference.url)
+    .filter((url) => typeof url === 'string' && url.trim().length > 0);
 }

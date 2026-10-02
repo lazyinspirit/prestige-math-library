@@ -44,6 +44,12 @@
   `not-applicable`. Either component marked `literature-derived` or `ai-altered`
   requires a `sources.references` URL. Legacy `authorship` is still readable;
   audited retagging removes it.
+- The policy checker uses the renderer's YAML parser: block and flow mappings,
+  quoted keys, and indentless reference lists have the same meaning. Only
+  nonempty string `url` fields on objects in `sources.references` count for
+  source-backed provenance; sibling source metadata and legacy title strings
+  do not. Malformed YAML or a non-mapping frontmatter document fails item mode
+  for that scoped item.
 - In `--audit` mode, a ledger row with `evidence: established-knowledge` and
   `alpha_concurred: true` permits an `ai-altered` statement without a URL, with
   a warning.

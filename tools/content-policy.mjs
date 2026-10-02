@@ -15,8 +15,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { referenceUrls } from './content-policy-lib.mjs';
-import { frontmatterList } from './frontmatter-list.mjs';
+import { parseFrontmatter, nested, referenceUrls } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -110,21 +109,10 @@ function split(source) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   return match ? { fm: match[1], body: match[2] } : { fm: '', body: source };
 }
-function scalar(fm, key) {
-  const match = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
-  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
-}
-function nested(fm, parent, child) {
-  const start = fm.search(new RegExp(`^${parent}:[ \\t]*(?:#.*)?$`, 'm'));
-  if (start < 0) return undefined;
-  const rest = fm.slice(start);
-  const match = rest.match(new RegExp(`^[ \\t]+${child}:[ \\t]*(.*)$`, 'm'));
-  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
-}
-function hasSection(fm, key) {
-  return new RegExp(`^${key}:[ \\t]*(?:#.*)?$`, 'm').test(fm);
-}
-function list(fm, key) { return frontmatterList(fm, key); }
+const scalar = (doc, key) => typeof doc[key] === 'string' ? doc[key] : undefined;
+const hasSection = (doc, key) => Object.hasOwn(doc, key);
+const list = (doc, key) => Array.isArray(doc[key])
+  ? doc[key].filter((value) => typeof value === 'string') : [];
 function readBatch(path) {
   try {
     const doc = JSON.parse(readFileSync(resolvePath(path), 'utf8'));
@@ -145,22 +133,28 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
   if (!file.endsWith('.md')) continue;
   const source = readFileSync(join(REPO, 'items', file), 'utf8');
   const { fm, body } = split(source);
-  const id = scalar(fm, 'id') ?? basename(file, '.md');
+  let metadata = {};
+  let frontmatterError;
+  try { metadata = parseFrontmatter(fm); }
+  catch (cause) { frontmatterError = cause.message; }
+  const id = scalar(metadata, 'id') ?? basename(file, '.md');
   const item = {
     id,
     file: `items/${file}`,
     fm,
+    metadata,
+    frontmatterError,
     body,
-    kind: scalar(fm, 'kind'),
+    kind: scalar(metadata, 'kind'),
     provenance: {
-      statement: nested(fm, 'provenance', 'statement'),
-      proof: nested(fm, 'provenance', 'proof'),
+      statement: nested(metadata, 'provenance', 'statement'),
+      proof: nested(metadata, 'provenance', 'proof'),
     },
-    deps: list(fm, 'deps'),
-    provedHere: scalar(fm, 'proved_here') !== 'false',
+    deps: list(metadata, 'deps'),
+    provedHere: metadata.proved_here !== false && metadata.proved_here !== 'false',
   };
   items.set(id, item);
-  for (const alias of list(fm, 'aliases')) aliases.set(alias, id);
+  for (const alias of list(metadata, 'aliases')) aliases.set(alias, id);
 }
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
 
@@ -311,6 +305,10 @@ if (!manifestOnly) for (const id of scope) {
     error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
     continue;
   }
+  if (item.frontmatterError) {
+    error('item-frontmatter-invalid', `${item.file}: ${item.frontmatterError}`, item.id);
+    continue;
+  }
   // Reader-facing notation (owner, 2026-08-11). `\iota(n)` — the canonical
   // embedding of a natural number into Z or R, written explicitly around its
   // argument — is banned in new content: write the number. It reads as an
@@ -353,7 +351,7 @@ if (!manifestOnly) for (const id of scope) {
   // A source-backed component makes a falsifiable claim about where that part
   // of the item came from. Require a reader-visible reference for Alpha and
   // the judges to compare against rather than accepting an untraceable label.
-  if ([statement, proof].some((value) => ['literature-derived', 'ai-altered'].includes(value)) && !referenceUrls(item.fm).length) {
+  if ([statement, proof].some((value) => ['literature-derived', 'ai-altered'].includes(value)) && !referenceUrls(item.metadata).length) {
     // The single owner-decided waiver (D2, AUDIT-WORKFLOW.md §6): a statement
     // the auditing models recognize as established standard knowledge may be
     // ai-altered WITHOUT a URL, but only with the ledger's evidence class
@@ -388,7 +386,7 @@ if (!manifestOnly) for (const id of scope) {
     }
     // Owner decision D5: the legacy one-axis field is deleted in the same edit
     // that writes the audited provenance block.
-    if (scalar(item.fm, 'authorship')) {
+    if (scalar(item.metadata, 'authorship')) {
       error('legacy-authorship-retained', `${item.file}: remove the superseded authorship field in the same edit that writes audited provenance`, item.id);
     }
   }
@@ -418,7 +416,7 @@ if (!manifestOnly) for (const id of scope) {
     }
   }
 
-  const generationPresent = hasSection(item.fm, 'generation');
+  const generationPresent = hasSection(item.metadata, 'generation');
   if (statement !== 'ai-generated' && generationPresent) {
     error('generation-on-non-generated-statement', `${item.file}: generation metadata is reserved for an ai-generated statement or construction`, item.id);
   }
@@ -431,7 +429,7 @@ if (!manifestOnly) for (const id of scope) {
       const report = auditMode ? warn : error;
       report('generated-kind', `${item.file}: an ai-generated ${item.kind ?? 'item'} is ${auditMode ? 'a legacy truth-risk finding: counterexample-search it and disposition its genrisk cone' : 'forbidden; use source-backed material or an allowed non-load-bearing corollary/example/counterexample'}`, item.id);
     } else {
-      const role = nested(item.fm, 'generation', 'role');
+      const role = nested(item.metadata, 'generation', 'role');
       if (role !== expectedRole) {
         // Legacy items predate the generation block; in audit scope its absence
         // is recorded, not fatal.
@@ -445,23 +443,23 @@ if (!manifestOnly) for (const id of scope) {
     }
   }
 
-  const externalPresent = hasSection(item.fm, 'external_dependency');
+  const externalPresent = hasSection(item.metadata, 'external_dependency');
   if (item.provedHere && externalPresent) {
     error('external-on-proved', `${item.file}: external_dependency is valid only on proved_here: false fallback records`, item.id);
   }
   if (!item.provedHere) {
     const values = Object.fromEntries(['source_url', 'exact_statement', 'local_proof_attempt', 'necessity']
-      .map((key) => [key, nested(item.fm, 'external_dependency', key)]));
+      .map((key) => [key, nested(item.metadata, 'external_dependency', key)]));
     for (const [key, value] of Object.entries(values)) {
       // Legacy deferred-catalogue items predate the structured record; in audit
       // scope its absence is visible but the sources_checked refresh, not this
       // record, is their gate.
-      if (!value) (auditMode ? warn : error)('external-record-missing', `${item.file}: external_dependency.${key} is ${auditMode ? 'absent on this legacy proved_here: false item' : 'required for an in-flight external fallback'}`, item.id);
+      if (typeof value !== 'string' || !value.trim()) (auditMode ? warn : error)('external-record-missing', `${item.file}: external_dependency.${key} is ${auditMode ? 'absent on this legacy proved_here: false item' : 'required for an in-flight external fallback'}`, item.id);
     }
-    if (values.source_url && !/^https?:\/\//.test(values.source_url)) {
+    if (values.source_url && (typeof values.source_url !== 'string' || !/^https?:\/\//.test(values.source_url))) {
       error('external-source-url', `${item.file}: external_dependency.source_url must be an http(s) URL`, item.id);
     }
-    if (values.source_url && !referenceUrls(item.fm).includes(values.source_url)) {
+    if (values.source_url && !referenceUrls(item.metadata).includes(values.source_url)) {
       error('external-source-reference', `${item.file}: external_dependency.source_url must exactly match a sources.references URL`, item.id);
     }
   }
