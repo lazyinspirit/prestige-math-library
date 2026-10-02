@@ -9,7 +9,7 @@ provenance:
   proof: ai-altered
 deps: [def-category, def-small-locally-small-and-large-category, def-left-and-right-modules, def-module-homomorphism-kernel-image-and-cokernel, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
-aliases: []
+aliases: [def-category-of-left-modules-over-a-ring]
 landmark: false
 proof_strategy: direct
 verification:
